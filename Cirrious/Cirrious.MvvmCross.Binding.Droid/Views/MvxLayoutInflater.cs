@@ -1,3 +1,4 @@
+using System;
 using Android.Content;
 using Android.OS;
 using Android.Util;
@@ -47,6 +48,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return view;
             }
         }
+
+        public static bool Debug = false;
+
+        private static readonly string Tag = "MvxLayoutInflater";
 
         internal static BuildVersionCodes Sdk = Build.VERSION.SdkInt;
 
@@ -137,12 +142,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected override View OnCreateView(View parent, string name, IAttributeSet attrs)
         {
+            if (Debug)
+                Mvx.TaggedTrace(Tag, "... OnCreateView 3 ... {0}", name);
+
             return this._bindingVisitor.OnViewCreated(
-                base.OnCreateView(parent, name, attrs), this.Context, attrs);
+                base.OnCreateView(parent, name, attrs),
+                this.Context,
+                attrs);
         }
 
         protected override View OnCreateView(string name, IAttributeSet attrs)
         {
+            if (Debug)
+                Mvx.TaggedTrace(Tag, "... OnCreateView 2 ... {0}", name);
+
             View view = this.AndroidViewFactory.CreateView(null, name, this.Context, attrs) ??
                             this.PhoneLayoutInflaterOnCreateView(name, attrs) ??
                             base.OnCreateView(name, attrs);
@@ -153,6 +166,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         // Mimic PhoneLayoutInflater's OnCreateView.
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
         {
+            if (Debug)
+                Mvx.TaggedTrace(Tag, "... PhoneLayoutInflaterOnCreateView ... {0}", name);
+
             foreach (var prefix in ClassPrefixList)
             {
                 try
@@ -254,6 +270,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (view == null && name.IndexOf('.') > -1)
             {
+                if (Debug)
+                    Mvx.TaggedTrace(Tag, "... CreateCustomViewInternal ... {0}", name);
+
                 if (this._constructorArgs == null)
                 {
                     Java.Lang.Class layoutInflaterClass = Java.Lang.Class.FromType(typeof(LayoutInflater));
@@ -303,6 +322,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
+            private static readonly string Tag = "DelegateFactory2";
+
             private readonly IFactory2 _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
 
@@ -314,6 +335,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
+                if (Debug)
+                    Mvx.TaggedTrace(Tag, "... OnCreateView ... {0}", name);
+
                 return this._factoryPlaceholder.OnViewCreated(
                     this._factory.OnCreateView(parent, name, context, attrs),
                     context, attrs);
@@ -322,6 +346,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
+            private static readonly string Tag = "DelegateFactory1";
+
             private readonly IFactory _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
 
@@ -333,6 +359,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
+                if (Debug)
+                    Mvx.TaggedTrace(Tag, "... OnCreateView ... {0}", name);
+
                 return this._factoryPlaceholder.OnViewCreated(
                     this._factory.OnCreateView(name, context, attrs),
                     context, attrs);
@@ -341,6 +370,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private class PrivateFactoryWrapper2 : Java.Lang.Object, IFactory2
         {
+            private static readonly string Tag = "PrivateFactoryWrapper2";
+
             private readonly IFactory2 _factory2;
             private readonly MvxBindingVisitor _bindingVisitor;
             private readonly MvxLayoutInflater _inflater;
@@ -355,16 +386,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {
+                if (Debug)
+                    Mvx.TaggedTrace(Tag, "... OnCreateView 2 ... {0}", name);
+
                 return this._bindingVisitor.OnViewCreated(
+                    // The activity's OnCreateView
                     this._factory2.OnCreateView(name, context, attrs),
                     context, attrs);
             }
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
+                if (Debug)
+                    Mvx.TaggedTrace(Tag, "... OnCreateView 3 ... {0}", name);
+
                 return this._bindingVisitor.OnViewCreated(
                     this._inflater.CreateCustomViewInternal(
                         parent,
+                        // The activity's OnCreateView
                         this._factory2.OnCreateView(parent, name, context, attrs),
                         name, context, attrs),
                     context, attrs);
