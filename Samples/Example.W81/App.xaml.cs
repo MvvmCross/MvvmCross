@@ -14,24 +14,37 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
+using Xamarin.Forms;
+using XamlControls = Windows.UI.Xaml.Controls;
+using UIXaml = Windows.UI.Xaml;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
-namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
+namespace Example.W81
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    sealed partial class App : UIXaml.Application
     {
+        /// <summary>
+        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
+        /// </summary>
+        public static Microsoft.ApplicationInsights.TelemetryClient TelemetryClient;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            TelemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         /// <summary>
@@ -49,22 +62,23 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            XamlControls.Frame rootFrame = Window.Current.Content as XamlControls.Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                rootFrame = new XamlControls.Frame();
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                //rootFrame.Navigated += OnRootFrameNavigated;
 
-
-                Xamarin.Forms.Forms.Init(e);
+                var setup = new Setup(rootFrame, e);
+                setup.Initialize();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -80,12 +94,10 @@ namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-
-                //rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
-
         }
 
         /// <summary>

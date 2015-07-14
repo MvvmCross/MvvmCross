@@ -12,8 +12,7 @@ namespace Example.WindowsPhone
 {
     public class Setup : MvxPhoneSetup
     {
-        public Setup(PhoneApplicationFrame rootFrame)
-            : base(rootFrame)
+        public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
         {
         }
 

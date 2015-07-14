@@ -6,15 +6,19 @@ using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Xamarin.Forms;
-using XamlControls = Windows.UI.Xaml.Controls;
 using Cirrious.MvvmCross.WindowsCommon.Views;
+using XamlControls = Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel.Activation;
 
-namespace Example.WindowStore
+namespace Example.W81
 {
     public class Setup : MvxWindowsSetup
     {
-        public Setup(XamlControls.Frame rootFrame) : base(rootFrame)
+        private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
+
+        public Setup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame)
         {
+            _launchActivatedEventArgs = e;
         }
 
         protected override IMvxApplication CreateApp()
@@ -29,7 +33,7 @@ namespace Example.WindowStore
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            Forms.Init(null);
+            Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApp();
             var presenter = new MvxFormsWindowsStorePagePresenter(  rootFrame, xamarinFormsApp);
