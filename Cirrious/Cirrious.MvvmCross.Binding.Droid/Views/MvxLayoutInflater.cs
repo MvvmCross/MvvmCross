@@ -157,8 +157,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 Mvx.TaggedTrace(Tag, "... OnCreateView 2 ... {0}", name);
 
             View view = this.AndroidViewFactory.CreateView(null, name, this.Context, attrs) ??
-                            this.PhoneLayoutInflaterOnCreateView(name, attrs) ??
-                            base.OnCreateView(name, attrs);
+                        this.PhoneLayoutInflaterOnCreateView(name, attrs) ??
+                        base.OnCreateView(name, attrs);
 
             return this._bindingVisitor.OnViewCreated(view, this.Context, attrs);
         }
@@ -266,37 +266,48 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             this._setPrivateFactory = true;
         }
 
-        protected View CreateCustomViewInternal(View parent, View view, string name, Context viewContext, IAttributeSet attrs)
+        protected View CreateCustomViewInternal(View parent, View view, string name, Context viewContext,
+            IAttributeSet attrs)
         {
+            if (Debug)
+                Mvx.TaggedTrace(Tag, "... CreateCustomViewInternal ... {0}", name);
+
             if (view == null && name.IndexOf('.') > -1)
             {
-                if (Debug)
-                    Mvx.TaggedTrace(Tag, "... CreateCustomViewInternal ... {0}", name);
-
-                if (this._constructorArgs == null)
+                // Attempt to inflate with MvvmCross unless we're trying to inflate an internal views
+                // since we don't resolve those.
+                if (!name.StartsWith("com.android.internal."))
                 {
-                    Java.Lang.Class layoutInflaterClass = Java.Lang.Class.FromType(typeof(LayoutInflater));
-                    this._constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
-                    this._constructorArgs.Accessible = true;
+                    view = this.AndroidViewFactory.CreateView(parent, name, viewContext, attrs);
                 }
 
-                Java.Lang.Object[] constructorArgsArr = (Java.Lang.Object[])this._constructorArgs.Get(this);
-                Java.Lang.Object lastContext = constructorArgsArr[0];
+                if (view == null)
+                {
+                    if (this._constructorArgs == null)
+                    {
+                        Java.Lang.Class layoutInflaterClass = Java.Lang.Class.FromType(typeof(LayoutInflater));
+                        this._constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
+                        this._constructorArgs.Accessible = true;
+                    }
 
-                // The LayoutInflater actually finds out the correct context to use. We just need to set
-                // it on the mConstructor for the internal method.
-                // Set the constructor args up for the createView, not sure why we can't pass these in.
-                constructorArgsArr[0] = viewContext;
-                this._constructorArgs.Set(this, constructorArgsArr);
-                try
-                {
-                    view = CreateView(name, null, attrs);
-                }
-                catch (Java.Lang.ClassNotFoundException ignored) {}
-                finally
-                {
-                    constructorArgsArr[0] = lastContext;
+                    Java.Lang.Object[] constructorArgsArr = (Java.Lang.Object[])this._constructorArgs.Get(this);
+                    Java.Lang.Object lastContext = constructorArgsArr[0];
+
+                    // The LayoutInflater actually finds out the correct context to use. We just need to set
+                    // it on the mConstructor for the internal method.
+                    // Set the constructor args up for the createView, not sure why we can't pass these in.
+                    constructorArgsArr[0] = viewContext;
                     this._constructorArgs.Set(this, constructorArgsArr);
+                    try
+                    {
+                        view = CreateView(name, null, attrs);
+                    }
+                    catch (Java.Lang.ClassNotFoundException ignored) {}
+                    finally
+                    {
+                        constructorArgsArr[0] = lastContext;
+                        this._constructorArgs.Set(this, constructorArgsArr);
+                    }
                 }
             }
             return view;
@@ -314,9 +325,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                if (this._layoutInflaterHolderFactoryFactory == null)
-                    this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>();
-                return this._layoutInflaterHolderFactoryFactory;
+                return this._layoutInflaterHolderFactoryFactory ??
+                       (this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
             }
         }
 
