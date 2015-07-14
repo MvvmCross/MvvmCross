@@ -13,8 +13,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
-        private IList _itemsSource;
-
         public MvxExpandableListAdapter(Context context)
             : base(context) { }
 
@@ -40,29 +38,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        protected override void SetItemsSource(IEnumerable value)
-        {
-            Mvx.Trace("Setting itemssource");
-
-            if (this._itemsSource == value)
-                return;
-
-            var existingObservable = this._itemsSource as INotifyCollectionChanged;
-            if (existingObservable != null)
-                existingObservable.CollectionChanged -= OnItemsSourceCollectionChanged;
-
-            this._itemsSource = value as IList;
-
-            var newObservable = this._itemsSource as INotifyCollectionChanged;
-            if (newObservable != null)
-                newObservable.CollectionChanged += OnItemsSourceCollectionChanged;
-
-            base.SetItemsSource(value);
-        }
-
         public int GroupCount
         {
-            get { return (this._itemsSource != null ? this._itemsSource.Count : 0); }
+            get { return base.Count; }
         }
 
         public void OnGroupExpanded(int groupPosition)
@@ -82,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
-            var item = this._itemsSource[groupPosition];
+            var item = this.GetRawGroup(groupPosition);
             return base.GetBindableView(convertView, item, this.GroupTemplateId);
         }
 
@@ -118,26 +96,25 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public object GetRawItem(int groupPosition, int position)
         {
-            return (this.GetRawGroup(groupPosition) as IEnumerable).Cast<object>().ToList()[position];
+            return ((IEnumerable) this.GetRawGroup(groupPosition)).ElementAt(position);
         }
 
         public object GetRawGroup(int groupPosition)
         {
-            return this._itemsSource[groupPosition];
+            return base.GetRawItem(groupPosition);
         }
 
         public View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView,
             ViewGroup parent)
         {
-            var sublist = (this.GetRawGroup(groupPosition) as IEnumerable).Cast<object>().ToList();
-            var item = sublist[childPosition];
+            var item = this.GetRawItem(groupPosition, childPosition);
 
             return base.GetBindableView(convertView, item, ItemTemplateId);
         }
 
         public int GetChildrenCount(int groupPosition)
         {
-            return (this.GetRawGroup(groupPosition) as IEnumerable).Cast<object>().ToList().Count();
+            return ((IEnumerable) this.GetRawGroup(groupPosition)).Count();
         }
 
         public long GetChildId(int groupPosition, int childPosition)
@@ -152,11 +129,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public Tuple<int, int> GetPositions(object childItem)
         {
-            int groupPosition = 0;
+            int groupCount = this.Count;
 
-            foreach (var item in this._itemsSource)
+            for (int groupPosition = 0; groupPosition < groupCount; groupPosition++)
             {
-                int childPosition = MvxEnumerableExtensions.GetPosition((IEnumerable)item, childItem);
+                int childPosition = ((IEnumerable)this.GetRawGroup(groupPosition)).GetPosition(childItem);
                 if (childPosition != -1)
                     return new Tuple<int, int>(groupPosition, childPosition);
 
