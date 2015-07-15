@@ -12,16 +12,15 @@
 		<description>This package contains the 'Test Helpers'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
+			<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
-	<files>		
-
+	<files>
 		<!-- full -->
-		<file src="..\bin\Release\Mvx\Console\Cirrious.MvvmCross.Test.Core.dll" target="lib\net45\Cirrious.MvvmCross.Test.Core.dll" />
-		<file src="..\bin\Release\Mvx\Console\Cirrious.MvvmCross.Test.Core.pdb" target="lib\net45\Cirrious.MvvmCross.Test.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Console\Cirrious.MvvmCross.Test.Core.*" target="lib\net45" />
 		
+		<file src="..\Cirrious\Test\Cirrious.MvvmCross.Test.Core\**\*.cs" target="src\Test\Cirrious.MvvmCross.Test.Core" />
 	</files>
 </package>
 
