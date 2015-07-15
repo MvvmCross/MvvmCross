@@ -31,3 +31,4 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
 	</files>
 </package>
+
