@@ -16,18 +16,12 @@
 	<files>		
 	
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.dll" target="lib\Xamarin.iOS10\CrossUI.Core.dll" />
-		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.pdb" target="lib\Xamarin.iOS10\CrossUI.Core.pdb" />
-		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="CrossUI.Core" />
-		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.dll" target="lib\Xamarin.iOS10\CrossUI.Touch.dll" />
-		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.pdb" target="lib\Xamarin.iOS10\CrossUI.Touch.pdb" />
-		-->
-		<file src="..\CrossUI\CrossUI.Touch\**\*.cs" target="CrossUI.Touch" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Dialog.Touch.dll" />
-		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Dialog.Touch.pdb" />
-		-->
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.*" target="lib\Xamarin.iOS10 />
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.*" target="lib\Xamarin.iOS10" />
+				
+		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
+		<file src="..\CrossUI\CrossUI.Touch\**\*.cs" target="src\CrossUI.Touch" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Touch" />
 	</files>
 </package>
