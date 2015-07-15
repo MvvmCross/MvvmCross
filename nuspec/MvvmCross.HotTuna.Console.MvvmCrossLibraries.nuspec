@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Console.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha2</version>
+		<version>4.0.0-alpha3</version>
 		<title>MvvmCross - Hot Tuna MvvmCross Libraries for Console</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the Console 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha2" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -27,5 +27,6 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45\Cirrious.MvvmCross.pdb" />
 	</files>
 </package>
+
 
 
