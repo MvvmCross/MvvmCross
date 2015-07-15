@@ -1,4 +1,4 @@
-$newVersion = "4.0.0-alpha1"
+$newVersion = "4.0.0-alpha2"
 
 $versionPattern = "(<version)>((\d\.\d\.\d)-(alpha|beta)(\d))(</version>)"
 $dependencyPattern = "(<dependency\s+id=`"MvvmCross[^`"]+`"\s+version=)`"(\d\.\d\.\d-(alpha|beta)\d)(`"\s*/>)"
