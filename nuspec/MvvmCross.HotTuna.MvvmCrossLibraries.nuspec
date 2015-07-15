@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha2</version>
+		<version>4.0.0-alpha3</version>
 		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<description>This package contains the 'MvvmCross Library' assemblies for MvvmCross</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha2" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -20,8 +20,7 @@
 		<file src="..\Cirrious\Cirrious.MvvmCross\**\*.cs" target="src\Cirrious.MvvmCross" />
 
 		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Wpf.dll" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Wpf.pdb" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.*" target="lib\net45" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Wpf" />
 
 		<!-- wpf - PCL -->
@@ -29,8 +28,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45\Cirrious.MvvmCross.pdb" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.WindowsStore.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.*" target="lib\netcore45" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.WindowsStore" />
 
 		<!-- store - PCL -->
@@ -38,8 +36,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\netcore45\Cirrious.MvvmCross.pdb" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.WindowsPhone.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.WindowsPhone.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.*" target="lib\wp8" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.WindowsPhone" />
 
 		<!-- phone - PCL -->
@@ -47,13 +44,9 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\wp8\Cirrious.MvvmCross.pdb" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.WindowsCommon.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.pdb" target="lib\win81\Cirrious.MvvmCross.WindowsCommon.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.WindowsCommon.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.pdb" target="lib\wpa81\Cirrious.MvvmCross.WindowsCommon.pdb" />
-
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.WindowsCommon.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.pdb" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.WindowsCommon.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\portable-win81+wpa81" />
 		
 		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.WindowsCommon" />
 		
@@ -99,5 +92,3 @@
 		
 	</files>
 </package>
-
-
