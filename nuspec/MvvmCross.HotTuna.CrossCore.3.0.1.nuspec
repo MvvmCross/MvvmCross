@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.CrossCore</id>
-		<version>4.0.0-alpha1</version>
+		<version>4.0.0-alpha2</version>
 		<title>MvvmCross - CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -134,4 +134,5 @@
 		-->
 	</files>
 </package>
+
 
