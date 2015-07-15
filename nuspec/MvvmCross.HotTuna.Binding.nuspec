@@ -29,6 +29,8 @@
 		
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
+		
+		<file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
 	</files>
 </package>
 
