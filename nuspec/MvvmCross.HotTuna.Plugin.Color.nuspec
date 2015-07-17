@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Color</id>
-		<version>4.0.0-alpha4</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Color Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,72 +12,70 @@
 		<description>This package contains the 'Color' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha4" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
-	<files>		
+	<files>
+		<!-- src -->
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Wpf\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.Wpf" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsStore\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.WindowsStore" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsPhone\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.WindowsPhone" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsCommon\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.WindowsCommon" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Droid\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.Droid" />
+		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Touch\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Plugins.Color.Touch" />
+			
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
     	<!-- wpf  -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.Wpf.dll" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.Color.Wpf.pdb" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.Wpf" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.*" target="lib\net45" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ColorPluginBootstrap.cs.pp" />
 				
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.WindowsStore.dll" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.Color.WindowsStore.pdb" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.WindowsStore" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.*" target="lib\netcore45" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
         
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.pdb" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.WindowsPhone" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.*" target="lib\wp8" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ColorPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\win81" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ColorPluginBootstrap.cs.pp" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsCommon\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.WindowsCommon" />
+		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\wpa81" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ColorPluginBootstrap.cs.pp" />
 		
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\portable-win81+wpa81" />
         
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.Color.Droid.pdb" />
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.Droid" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Color.Droid.*" target="lib\MonoAndroid" />
         <file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ColorPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Color.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Color.pdb" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Color.Touch.dll" />
-		<!-- vs doesn't seem to generate symbols for Touch
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.Color.Touch.pdb" />
-		-->
-		<file src="..\Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Plugins.Color.Touch" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Color.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Color.Touch.*" target="lib\Xamarin.iOS10" />
         <file src="TouchBootstrapContent\ColorPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ColorPluginBootstrap.cs.pp" />
-		
 	</files>
 </package>
+
+
 
 
 
