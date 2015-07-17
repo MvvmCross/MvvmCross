@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha8</version>
+		<version>4.0.0-alpha9</version>
 		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'MvvmCross Library' assemblies for MvvmCross</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha9" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -27,39 +27,53 @@
 			target="src\Cirrious.MvvmCross.WindowsCommon" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Droid" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.Touch\**\*.cs" 
+			target="src\Cirrious.MvvmCross.Touch" />
 		
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\portable-win+net45+wp8+win8+wpa81" />		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Wpf.*" target="lib\net45" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\net45" />		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.WindowsStore.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\netcore45" />
         
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.WindowsPhone.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\wp8" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.WindowsCommon.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.*" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.*"
+			exclude="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoAndroid" />
 		
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\Xamarin.iOS10" />
 	</files>
 </package>
+
+
 
 
 
