@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         protected MvxEventSourceFragmentActivity()
         {
         }
-        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) { }
+        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
         protected override void OnCreate(Bundle bundle)
         {
