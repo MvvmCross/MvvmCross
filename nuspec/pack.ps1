@@ -32,7 +32,7 @@ nuget pack MvvmCross.HotTuna.Plugin.ReflectionEx.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.ResourceLoader.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.Share.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.SoundEffects.nuspec -Symbols
-nuget pack MvvmCross.HotTuna.Plugin.SQLite.nuspec -Symbols
+# nuget pack MvvmCross.HotTuna.Plugin.SQLite.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.ThreadUtils.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.Visibility.nuspec -Symbols
 nuget pack MvvmCross.HotTuna.Plugin.WebBrowser.nuspec -Symbols
