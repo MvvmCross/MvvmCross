@@ -51,6 +51,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         }
 
         protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
