@@ -74,16 +74,9 @@ namespace Example.Droid.Activities
             }
             else
             {
-                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle);
+                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle, true);
                 return true;
             }
-        }
-
-        public override void OnFragmentChanging (string tag, Android.Support.V4.App.FragmentTransaction transaction)
-        {
-            if(tag.Equals(typeof(SettingsViewModel).Name))
-                transaction.AddToBackStack(tag);
-            base.OnFragmentChanging (tag, transaction);
         }
 
         public override void OnBackPressed()
