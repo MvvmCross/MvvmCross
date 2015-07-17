@@ -13,13 +13,11 @@
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
-	<files>		
-	
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.*" target="lib\Xamarin.iOS10 />
+	<files>
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Dialog.Touch.*" target="lib\Xamarin.iOS10" />
-				
+
 		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
 		<file src="..\CrossUI\CrossUI.Touch\**\*.cs" target="src\CrossUI.Touch" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Touch" />
