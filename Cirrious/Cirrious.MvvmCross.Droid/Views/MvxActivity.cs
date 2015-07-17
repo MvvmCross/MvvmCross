@@ -22,6 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
