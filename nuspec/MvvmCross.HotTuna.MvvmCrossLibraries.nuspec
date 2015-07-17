@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha3</version>
+		<version>4.0.0-alpha4</version>
 		<title>MvvmCross - Hot Tuna MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'MvvmCross Library' assemblies for MvvmCross</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha4" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -92,4 +92,6 @@
 		
 	</files>
 </package>
+
+
 
