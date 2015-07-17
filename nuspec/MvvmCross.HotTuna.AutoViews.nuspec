@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.AutoViews</id>
-		<version>4.0.0-alpha4</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Hot Tuna AutoViews Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -13,15 +13,15 @@
 	<files>		
 	
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.AutoView.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.AutoView.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.AutoView.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.AutoView.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.AutoView.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.AutoView\**\*.cs" target="src\Cirrious.MvvmCross.AutoView" />
-		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.dll" target="lib\portable-win+net45+wp8+win8+wpa81\CrossUI.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\CrossUI.Core.pdb" />
-		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
 		
+		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
 	</files>
 </package>
+
+
 
 
 

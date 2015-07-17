@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Binding</id>
-		<version>4.0.0-alpha4</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Binding</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -11,9 +11,6 @@
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="Mono.Android.Export" targetFramework="MonoAndroid" />
 		</frameworkAssemblies>
-		<dependencies>
-			<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha4" />
-		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>		
@@ -28,12 +25,22 @@
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Binding.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
 		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" 
+			target="lib\wp8" />
+			
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" 
+			target="lib\netcore45" />
 		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Binding.*" 
+			target="lib\net45" />	
+			
 		<file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Binding.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Binding.Droid" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Binding.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Binding.Touch" />
 	</files>
 </package>
+
+
 
 
 

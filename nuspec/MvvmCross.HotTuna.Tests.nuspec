@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Tests</id>
-		<version>4.0.0-alpha4</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Test Helpers</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
 		<description>This package contains the 'Test Helpers'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-			<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha4" />
+			<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -23,6 +23,8 @@
 		<file src="..\Cirrious\Test\Cirrious.MvvmCross.Test.Core\**\*.cs" target="src\Test\Cirrious.MvvmCross.Test.Core" />
 	</files>
 </package>
+
+
 
 
 

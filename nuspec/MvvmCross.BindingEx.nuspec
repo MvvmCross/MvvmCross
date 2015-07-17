@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.BindingEx</id>
-		<version>4.0.0-alpha4</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Binding Extensions - for Windows only</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,39 +12,33 @@
 		<description>This package contains the 'binding extensions'  for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross wpf windows8 winrt wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha4" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-alpha8" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>		
 	
 	    <!-- common -->
-	    <file src="..\Cirrious\Cirrious.MvvmCross.Binding\**\*.cs" target="src\Cirrious.MvvmCross.Binding" />
-
-		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.dll" target="lib\net45\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Binding.pdb" target="lib\net45\Cirrious.MvvmCross.Binding.pdb" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.dll" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.dll" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.pdb" target="lib\net45\Cirrious.MvvmCross.BindingEx.Wpf.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.Wpf\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.Wpf" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.Wpf\**\*.cs" 
+			target="src\Cirrious.MvvmCross.BindingEx.Wpf" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsStore\**\*.cs" 
+			target="src\Cirrious.MvvmCross.BindingEx.WindowsStore" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsPhone\**\*.cs" 
+			target="src\Cirrious.MvvmCross.BindingEx.WindowsPhone" />
 		
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.BindingEx.Wpf.*" target="lib\net45" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.dll" target="lib\netcore45\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Binding.pdb" target="lib\netcore45\Cirrious.MvvmCross.Binding.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.dll" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.pdb" target="lib\netcore45\Cirrious.MvvmCross.BindingEx.WindowsStore.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsStore\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.WindowsStore" />
+		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.*" target="lib\netcore45" />
 		
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.dll" target="lib\wp8\Cirrious.MvvmCross.Binding.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Binding.pdb" target="lib\wp8\Cirrious.MvvmCross.Binding.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" target="lib\wp8\Cirrious.MvvmCross.BindingEx.WindowsPhone.dll" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.pdb" target="lib\wp8\Cirrious.MvvmCross.BindingEx.WindowsPhone.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.BindingEx.WindowsPhone\**\*.cs" target="src\Cirrious.MvvmCross.BindingEx.WindowsPhone" />
-			
+		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.*" target="lib\wp8" />
 	</files>
 </package>
+
+
 
 
 
