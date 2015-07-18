@@ -11,15 +11,15 @@ using Cirrious.MvvmCross.WindowsCommon.Views;
 using System;
 using Xamarin.Forms;
 
-namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
+namespace Cirrious.MvvmCross.Forms.Presenter.Windows81
 {
-    public class MvxFormsWindowsStorePagePresenter 
+    public class MvxFormsWindows81PagePresenter 
         : MvxFormsPagePresenter
         , IMvxWindowsViewPresenter
     {
         private readonly IMvxWindowsFrame _rootFrame;
 
-        public MvxFormsWindowsStorePagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
+        public MvxFormsWindows81PagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
             : base(mvxFormsApp)
         {
             _rootFrame = rootFrame;

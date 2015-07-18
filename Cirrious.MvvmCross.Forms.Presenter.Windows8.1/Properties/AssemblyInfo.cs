@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cirrious.MvvmCross.Forms.Presenter.WindowsStore")]
+[assembly: AssemblyTitle("Cirrious.MvvmCross.Forms.Presenter.Windows81")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Unattended")]
-[assembly: AssemblyProduct("Cirrious.MvvmCross.Forms.Presenter.WindowsStore")]
+[assembly: AssemblyProduct("Cirrious.MvvmCross.Forms.Presenter.Windows81")]
 [assembly: AssemblyCopyright("Copyright © Unattended 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

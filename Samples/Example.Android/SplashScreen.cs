@@ -20,9 +20,14 @@ namespace Example.Droid
         {
         }
 
+        private bool isInitializationComplete = false;
         public override void InitializationComplete()
         {
-            StartActivity(typeof(MvxFormsApplicationActivity));
+            if (!isInitializationComplete)
+            {
+                isInitializationComplete = true;
+                StartActivity(typeof(MvxFormsApplicationActivity));
+            }
         }
 
         protected override void OnCreate(Android.OS.Bundle bundle)

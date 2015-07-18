@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Xamarin.Forms.Platform.WinRT;
 using Cirrious.MvvmCross.Views;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
+using Cirrious.MvvmCross.Forms.Presenter.Windows81;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,11 +38,24 @@ namespace Example.W81
             start.Start();
 
             // Locate the MvvMCross-Forms Presenter
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsStorePagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindows81PagePresenter;
 
 
             // Xamarin.Forms.Platform.WinRT.dll Loads the Xamarin Form found at presenter.MvxFormsApp
             LoadApplication(presenter.MvxFormsApp);
+
+            LayoutUpdated += MainPage_LayoutUpdated;
+        }
+
+        private void MainPage_LayoutUpdated(object sender, object e)
+        {
+            try
+            {
+                this.BottomAppBar.IsOpen = true;
+                this.BottomAppBar.Visibility = Visibility.Visible;
+                this.BottomAppBar.IsSticky = true;
+            }
+            catch (Exception ex) { }
         }
     }
 }

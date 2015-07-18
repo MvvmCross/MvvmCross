@@ -2,7 +2,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.WindowsCommon.Platform;
 using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
+using Cirrious.MvvmCross.Forms.Presenter.Windows81;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Xamarin.Forms;
@@ -36,7 +36,7 @@ namespace Example.W81
             Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApp();
-            var presenter = new MvxFormsWindowsStorePagePresenter(  rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsWindows81PagePresenter(  rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

@@ -1,4 +1,5 @@
 using Cirrious.MvvmCross.ViewModels;
+using System.Windows.Input;
 
 namespace Example.ViewModels
 {
@@ -15,6 +16,15 @@ namespace Example.ViewModels
         public string Hello
         {
             get { return "Hello " + YourNickname; }
+        }
+
+
+        public ICommand ShowAboutPageCommand
+        {
+            get
+            {
+                return new MvxCommand(() => ShowViewModel<AboutViewModel>());
+            }
         }
     }
 }

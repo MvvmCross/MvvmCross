@@ -7,7 +7,15 @@ namespace Example.Pages
     {
         public FirstPage()
         {
-            Title = "First Page";
+            Padding = new Thickness(10);
+
+            // see https://forums.xamarin.com/discussion/45111/has-anybody-managed-to-get-a-toolbar-working-on-winrt-windows-using-xf
+            if (Device.OS == TargetPlatform.Windows)
+                Padding = new Xamarin.Forms.Thickness(Padding.Left, this.Padding.Top, this.Padding.Right, 95);
+
+            ForceLayout();
+
+            Title = " First Page";
 
             var entryBox = new Entry
             {
@@ -20,11 +28,10 @@ namespace Example.Pages
             {
                 Text = string.Empty,
                 FontSize = 24
-        };
+            };
 
             Content = new StackLayout
             {
-                Padding = new Thickness(10),
                 Spacing = 10,
                 Orientation = StackOrientation.Vertical,
                 Children =
@@ -41,6 +48,18 @@ namespace Example.Pages
 
             entryBox.SetBinding(Entry.TextProperty, new Binding("YourNickname"));
             helloResponse.SetBinding(Label.TextProperty, new Binding("Hello"));
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            // Fixed in next version of Xamarin.Forms. BindingContext is not properly set on ToolbarItem.
+            var aboutItem = new ToolbarItem { Text = "About", ClassId = "About", Order = ToolbarItemOrder.Primary, BindingContext = BindingContext };
+            aboutItem.SetBinding(MenuItem.CommandProperty, new Binding("ShowAboutPageCommand"));
+
+
+            ToolbarItems.Add(aboutItem);
         }
     }
 }

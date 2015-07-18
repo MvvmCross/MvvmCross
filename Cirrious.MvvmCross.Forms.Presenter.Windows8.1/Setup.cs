@@ -3,7 +3,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsCommon.Platform;
 using Windows.UI.Xaml.Controls;
 
-namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
+namespace Cirrious.MvvmCross.Forms.Presenter.Windows81
 {
     public class Setup : MvxWindowsSetup
     {

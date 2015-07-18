@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Forms.Presenter.WindowsStore
+namespace Cirrious.MvvmCross.Forms.Presenter.Windows81
 {
     public class DebugTrace : IMvxTrace
     {

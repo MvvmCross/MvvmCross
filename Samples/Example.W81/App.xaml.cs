@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsStore;
+using Cirrious.MvvmCross.Forms.Presenter.Windows81;
 using Xamarin.Forms;
 using XamlControls = Windows.UI.Xaml.Controls;
 using UIXaml = Windows.UI.Xaml;
