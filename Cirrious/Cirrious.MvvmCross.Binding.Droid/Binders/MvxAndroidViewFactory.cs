@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
             if (viewType == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "View type not found - {0}", name);
+                //MvxBindingTrace.Trace(MvxTraceLevel.Error, "View type not found - {0}", name);
                 return null;
             }
 
