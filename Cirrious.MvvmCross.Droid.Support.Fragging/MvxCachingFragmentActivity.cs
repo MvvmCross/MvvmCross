@@ -268,6 +268,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         {
             if (SupportFragmentManager.BackStackEntryCount > 1)
             {
+                var backStackFrag = SupportFragmentManager.GetBackStackEntryAt (SupportFragmentManager.BackStackEntryCount - 1);
+                _currentFragments.Remove (_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
+
                 SupportFragmentManager.PopBackStackImmediate();
                 return;
             }
