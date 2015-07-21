@@ -86,13 +86,7 @@ namespace Example.Droid.Activities
 
         public override void OnBackPressed()
         {
-            var currentFragment = SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as MvxFragment;
-            if (currentFragment != null && SupportFragmentManager.BackStackEntryCount > 1)
-            {
-                SupportFragmentManager.PopBackStackImmediate();
-                return;
-            }
-            else if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
+            if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
                 DrawerLayout.CloseDrawers();
             else
                 base.OnBackPressed();
