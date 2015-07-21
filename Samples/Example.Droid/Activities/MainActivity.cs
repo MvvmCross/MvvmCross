@@ -78,6 +78,12 @@ namespace Example.Droid.Activities
             }
         }
 
+        public bool Close (IMvxViewModel viewModel)
+        {
+            CloseFragment (viewModel.GetType ().Name, Resource.Id.content_frame);
+            return true;
+        }
+
         public override void OnBackPressed()
         {
             var currentFragment = SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as MvxFragment;
