@@ -280,7 +280,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             var frag = SupportFragmentManager.FindFragmentById(contentId);
             if (frag == null) return;
 
-            SupportFragmentManager.PopBackStackImmediate(tag);
+            SupportFragmentManager.PopBackStackImmediate(tag, 1);
             _currentFragments.Remove(contentId);
         }
 
