@@ -264,6 +264,26 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             _currentFragments.Remove(contentId);
         }
 
+        public override void OnBackPressed ()
+        {
+            if (SupportFragmentManager.BackStackEntryCount > 1)
+            {
+                SupportFragmentManager.PopBackStackImmediate();
+                return;
+            }
+
+            base.OnBackPressed ();
+        }
+
+        protected void CloseFragment(string tag, int contentId)
+        {
+            var frag = SupportFragmentManager.FindFragmentById(contentId);
+            if (frag == null) return;
+
+            SupportFragmentManager.PopBackStackImmediate(tag);
+            _currentFragments.Remove(contentId);
+        }
+
         protected virtual string FragmentJavaName(Type fragmentType)
         {
             var namespaceText = fragmentType.Namespace ?? "";
