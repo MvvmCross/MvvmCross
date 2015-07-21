@@ -275,6 +275,11 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             base.OnBackPressed ();
         }
 
+        /// <summary>
+        ///     Close Fragment with a specific tag at a specific placeholder
+        /// </summary>
+        /// <param name="tag">The tag for the fragment to lookup</param>
+        /// <param name="contentId">Where you want to close the Fragment</param>
         protected void CloseFragment(string tag, int contentId)
         {
             var frag = SupportFragmentManager.FindFragmentById(contentId);
