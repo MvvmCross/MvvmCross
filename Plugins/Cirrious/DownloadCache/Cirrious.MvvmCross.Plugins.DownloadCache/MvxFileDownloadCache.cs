@@ -110,7 +110,22 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache
         private void QueueUnindexedFilesForDelete()
         {
             var store = MvxFileStoreHelper.SafeGetFileStore();
-            var files = store.GetFilesIn(_cacheFolder);
+            var files = new List<string>();
+
+            // Transform absolute file paths into relative ones
+            foreach (var file in store.GetFilesIn(_cacheFolder))
+            {
+                var pos = file.IndexOf(_cacheFolder, StringComparison.Ordinal);
+                if (pos != -1)
+                {
+                    var relativeFile = file.Substring(pos);
+                    files.Add(relativeFile);
+                }
+                else
+                {
+                    files.Add(file);
+                }
+            }
 
             // we don't use Linq because of AOT/JIT problem on MonoTouch :/
             //var cachedFiles = _entriesByHttpUrl.ToDictionary(x => x.Value.DownloadedPath);
