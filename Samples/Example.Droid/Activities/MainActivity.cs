@@ -18,7 +18,6 @@ namespace Example.Droid.Activities
         Label = "Examples",
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
-        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Name = "example.droid.activities.MainActivity"
     )]
     public class MainActivity : MvxCachingFragmentActivityCompat<MainViewModel>, IMvxFragmentHost
