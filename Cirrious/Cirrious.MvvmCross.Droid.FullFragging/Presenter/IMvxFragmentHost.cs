@@ -13,5 +13,6 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
     public interface IMvxFragmentHost
     {
         bool Show(MvxViewModelRequest request, Bundle bundle);
+        bool Close (IMvxViewModel viewModel);
     }
 }
