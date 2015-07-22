@@ -248,6 +248,39 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 			_currentFragments.Remove(contentId);
 		}
 
+        public override void OnBackPressed()
+        {
+            if (FragmentManager.BackStackEntryCount > 1)
+            {
+                var backStackFrag = FragmentManager.GetBackStackEntryAt(FragmentManager.BackStackEntryCount - 1);
+                _currentFragments.Remove(_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
+
+                FragmentManager.PopBackStackImmediate();
+                return;
+            }
+            else if (FragmentManager.BackStackEntryCount == 1)
+            {
+                MoveTaskToBack(true);
+                return;
+            }
+
+            base.OnBackPressed();
+        }
+
+        /// <summary>
+        ///     Close Fragment with a specific tag at a specific placeholder
+        /// </summary>
+        /// <param name="tag">The tag for the fragment to lookup</param>
+        /// <param name="contentId">Where you want to close the Fragment</param>
+        protected void CloseFragment(string tag, int contentId)
+        {
+            var frag = FragmentManager.FindFragmentById(contentId);
+            if (frag == null) return;
+
+            FragmentManager.PopBackStackImmediate(tag, PopBackStackFlags.Inclusive);
+            _currentFragments.Remove(contentId);
+        }
+
 		protected virtual string FragmentJavaName(Type fragmentType)
 		{
 			var namespaceText = fragmentType.Namespace ?? "";
