@@ -274,8 +274,13 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 SupportFragmentManager.PopBackStackImmediate();
                 return;
             }
+            else if (SupportFragmentManager.BackStackEntryCount == 1)
+            {
+                MoveTaskToBack(true);
+                return;
+            }
 
-            base.OnBackPressed ();
+            base.OnBackPressed();
         }
 
         /// <summary>
