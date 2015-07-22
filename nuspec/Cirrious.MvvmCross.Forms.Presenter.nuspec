@@ -2,18 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Cirrious.MvvmCross.Forms.Presenter</id>
-    <version>3.5.2-alpha2</version>
+    <version>4.0.0-alpha9</version>
     <title>MvvmCross FormsPresenters</title>
-    <authors>Tomasz Cielecki, Marcos Cobeña Morián</authors>
+    <authors>Tomasz Cielecki, Marcos Cobeña Morián, Peter Burke</authors>
     <owners>Tomasz Cielecki</owners>
     <licenseUrl>https://github.com/MvvmCross/MvvmCross-Forms/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/MvvmCross/MvvmCross-Forms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>This package contains Presenters for MvvmCross v3.5 to mix in with Xamarin.Forms</description>
+    <description>This package contains Presenters for MvvmCross v4.0 to mix in with Xamarin.Forms</description>
     <tags>mvvm mvvmcross xamarin monodroid monotouch wpf wp wpdev windowsphone xamplugins xamarin.forms xamarin</tags>
     <dependencies>
-      <dependency id="MvvmCross.HotTuna.CrossCore" version="3.5.2-alpha2" />
-      <dependency id="Xamarin.Forms" version="1.4.3.6374" />
+	  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha9" />
+      <dependency id="Xamarin.Forms" version="1.4.3.6376" />
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
   </metadata>
@@ -21,19 +21,14 @@
     <!-- PCL -->
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
-    <file src="CoreContent\FirstViewModel.cs.pp" 
-      target="content\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\ViewModels\FirstViewModel.cs.pp" />
-    <file src="CoreContent\FirstPage.cs.pp" 
-      target="content\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Pages\FirstPage.cs.pp" />
 
     <!-- phone -->
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\wp8" />
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.WindowsPhone.*" 
       target="lib\wp8" />
-    <file src="PhoneBootstrapContent\_FormsSetup.txt" target="content\wp8\ToDo-FormsPresenters\_Setup.txt" />
   
-	<!-- store -->
+	<!-- win81 -->
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\wpa81" />
 	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
@@ -41,24 +36,18 @@
 	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\portable-win81+wpa81" />
 	  
-    <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.WindowsStore.*" 
+    <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\wpa81" />
-	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.WindowsStore.*" 
+	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\win81" />
-	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.WindowsStore.*" 
+	<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\portable-win81+wpa81" />
-	  
-    <file src="PhoneBootstrapContent\_FormsSetup.txt" target="content\wpa81\ToDo-FormsPresenters\_Setup.txt" />
-	<file src="PhoneBootstrapContent\_FormsSetup.txt" target="content\win81\ToDo-FormsPresenters\_Setup.txt" />
-	<file src="PhoneBootstrapContent\_FormsSetup.txt" target="content\portable-win81+wpa81\ToDo-FormsPresenters\_Setup.txt" />
   
     <!-- droid -->
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\MonoAndroid403" />
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Droid.*" 
       target="lib\MonoAndroid403" />
-    <file src="DroidBootstrapContent\_FormsSetup.txt"
-      target="content\MonoAndroid403\ToDo-FormsPresenters\_Setup.txt" />
 
     
     <!-- touch -->
@@ -66,9 +55,5 @@
       target="lib\Xamarin.iOS10" />
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Touch.*" 
       target="lib\Xamarin.iOS10" />
-    <file src="TouchBootstrapContent\_FormsSetup.txt"
-      target="content\Xamarin.iOS10\ToDo-FormsPresenters\_Setup.txt" />
-
-    <file src="..\**\*.cs" target="src" />
   </files>
 </package>

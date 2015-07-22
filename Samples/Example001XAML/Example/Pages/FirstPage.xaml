@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Example.Pages.FirstPage"
+             Title="First Page">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0" />
+    </ContentPage.Padding>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text = "About" ClassId = "About" Order = "Primary" Command="{Binding ShowAboutPageCommand}">
+            
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+
+    <StackLayout Spacing="10" Orientation="Vertical">
+        <Label FontSize = "24" Text = "Enter your nickname in the box below"></Label>
+        <Entry Placeholder="Who are you?" TextColor="Red" Text="{Binding YourNickname}"></Entry>
+        <Label FontSize="24" Text="{Binding Hello}"></Label>
+    </StackLayout>
+	
+</ContentPage>
