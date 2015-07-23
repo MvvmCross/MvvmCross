@@ -13,10 +13,6 @@ namespace Example.Pages
         public FirstPage()
         {
             InitializeComponent();
-
-            // Xamarin OnPlatform does not yet support W81
-            if (Device.OS == TargetPlatform.Windows)
-                Padding = new Thickness(Padding.Left, this.Padding.Top, this.Padding.Right, 95);
         }
     }
 }
