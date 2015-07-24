@@ -318,7 +318,15 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             if (frag == null) return;
 
             SupportFragmentManager.PopBackStackImmediate(tag, 1);
+
             _currentFragments.Remove(contentId);
+
+            if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId)) {
+                var currentFragment = _backStackFragments.Last (x => x.Key == contentId);
+
+                _currentFragments.Add (currentFragment.Key, currentFragment.Value);
+                _backStackFragments.Remove (currentFragment);
+            }
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
