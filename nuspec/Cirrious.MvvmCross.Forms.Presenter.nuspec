@@ -55,5 +55,8 @@
       target="lib\Xamarin.iOS10" />
     <file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Touch.*" 
       target="lib\Xamarin.iOS10" />
+	  
+	<!-- Source Code For Debugging -->
+	<file src="..\Cirrious.MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
   </files>
 </package>
