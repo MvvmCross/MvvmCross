@@ -2,9 +2,9 @@
 
 namespace Example.Pages
 {
-    public partial class FirstPage : ContentPage
+    public partial class AboutPage : ContentPage
     {
-        public FirstPage()
+        public AboutPage()
         {
             InitializeComponent();
         }
