@@ -166,15 +166,19 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             foreach (var item in _lookup)
             {
-                var fragment = item.Value.CachedFragment as IMvxFragmentView;
-                if (fragment == null) continue;
+                if (_currentFragments.Any(x => x.Value == item.Key))
+                {
+                    var fragment = item.Value.CachedFragment as IMvxFragmentView;
+                    if (fragment == null)
+                        continue;
 
-                var mvxBundle = fragment.CreateSaveStateBundle();
-                var bundle = new Bundle();
-                savedStateConverter.Write(bundle, mvxBundle);
-                outState.PutBundle(item.Key, bundle);
+                    var mvxBundle = fragment.CreateSaveStateBundle();
+                    var bundle = new Bundle();
+                    savedStateConverter.Write(bundle, mvxBundle);
+                    outState.PutBundle(item.Key, bundle);
 
-                typesForKeys.Add(item.Key, item.Value.ViewModelType);
+                    typesForKeys.Add(item.Key, item.Value.ViewModelType);
+                }
             }
 
             return typesForKeys;
@@ -308,7 +312,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         }
 
         /// <summary>
-        ///     Close Fragment with a specific tag at a specific placeholder
+        /// Close Fragment with a specific tag at a specific placeholder
         /// </summary>
         /// <param name="tag">The tag for the fragment to lookup</param>
         /// <param name="contentId">Where you want to close the Fragment</param>
