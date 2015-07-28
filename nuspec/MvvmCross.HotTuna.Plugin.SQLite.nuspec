@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
     <metadata>
         <id>MvvmCross.HotTuna.Plugin.Sqlite</id>
-        <version>4.0.0-alpha3</version>
+        <version>4.0.0-alpha8</version>
         <title>MvvmCross - Sqlite Plugin</title>
         <authors>MvvmCross</authors>
         <owners>Stuart Lodge</owners>
@@ -12,7 +12,7 @@
         <description>This package contains the 'Sqlite' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
         <tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
         <dependencies>
-            <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
+            <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
         </dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
         <references>
@@ -50,4 +50,8 @@
         <file src="tools\Uninstall.ps1" target="tools\Uninstall.ps1" />
     </files>
 </package>
+
+
+
+
 

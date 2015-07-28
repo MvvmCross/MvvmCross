@@ -2,32 +2,36 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.Dialog</id>
-		<version>4.0.0-alpha3</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - Hot Tuna Droid Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Droid Dialog' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha3" />
+		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha8" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>		
 	
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.dll" target="lib\MonoAndroid\CrossUI.Core.dll" />
-		<file src="..\bin\Release\Mvx\Droid\CrossUI.Core.pdb" target="lib\MonoAndroid\CrossUI.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\MonoAndroid" />
 		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
-		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.dll" target="lib\MonoAndroid\CrossUI.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.pdb" target="lib\MonoAndroid\CrossUI.Droid.pdb" />
-		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Dialog.Droid.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
 		
+		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.*" target="lib\MonoAndroid" />
+		
+		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
+		
+		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.*" target="lib\MonoAndroid" />
+		
+		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
 	</files>
 </package>
+
+
+
+
 
 
 

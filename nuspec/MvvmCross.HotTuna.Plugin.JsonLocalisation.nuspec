@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.JsonLocalisation</id>
-		<version>4.0.0-alpha3</version>
+		<version>4.0.0-alpha9</version>
 		<title>MvvmCross - JsonLocalisation Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,45 +12,50 @@
 		<description>This package contains the 'JsonLocalisation' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha9" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
-	<files>		
+	<files>
+		<!-- src -->
+		<file src="..\Plugins\Cirrious\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\**.*"
+			target="src\Cirrious.MvvmCross.Plugins.JsonLocalisation" />
+	
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\netcore45" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 			
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\wp8" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 	
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\win81" />		
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\win81\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\wpa81" />		
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />		
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\portable-win81+wpa81" />		
 		
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\MonoAndroid" />
         <file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.JsonLocalisation.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.JsonLocalisation.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.JsonLocalisation.*" target="lib\Xamarin.iOS10" />
         <file src="TouchBootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
 		
 	</files>
 </package>
+
+
+
+
+
+
 
 
 
