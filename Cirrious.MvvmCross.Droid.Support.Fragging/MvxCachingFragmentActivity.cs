@@ -28,8 +28,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
+        private const string SavedBackStackFragmentsKey = "__mvxSavedBackStackFragments";
         private readonly Dictionary<string, FragmentInfo> _lookup = new Dictionary<string, FragmentInfo>();
         private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
+        private IList<KeyValuePair<int, string>> _backStackFragments = new List<KeyValuePair<int, string>>();
 
         /// <summary>
         ///     Register a Fragment to be shown, this should usually be done in OnCreate
@@ -74,6 +76,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             }
 
             RestoreCurrentFragmentsFromBundle(serializer, savedInstanceState);
+            RestoreBackStackFragmentsFromBundle(serializer, savedInstanceState);
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
 
@@ -127,18 +130,26 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             _currentFragments = currentFragments;
         }
 
+        private void RestoreBackStackFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
+        {
+            var jsonBackStack = savedInstanceState.GetString(SavedBackStackFragmentsKey);
+            var backStackFragments = serializer.DeserializeObject<List<KeyValuePair<int, string>>>(jsonBackStack);
+            _backStackFragments = backStackFragments;
+        }
+
         private void RestoreLookupFromSleep()
         {
             // See if Fragments were just sleeping, and repopulate the _lookup
             // with references to them.
             foreach (var fragment in SupportFragmentManager.Fragments)
             {
-                var fragmentType = fragment.GetType();
-                var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
-                foreach (var item in lookup.Where(item => item.Value != null))
-                {
-                    // reattach fragment to lookup
-                    item.Value.CachedFragment = fragment;
+                if (fragment != null) {
+                    var fragmentType = fragment.GetType ();
+                    var lookup = _lookup.Where (x => x.Value.FragmentType == fragmentType);
+                    foreach (var item in lookup.Where(item => item.Value != null)) {
+                        // reattach fragment to lookup
+                        item.Value.CachedFragment = fragment;
+                    }
                 }
             }
         }
@@ -155,15 +166,19 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             foreach (var item in _lookup)
             {
-                var fragment = item.Value.CachedFragment as IMvxFragmentView;
-                if (fragment == null) continue;
+                if (_currentFragments.Any(x => x.Value == item.Key))
+                {
+                    var fragment = item.Value.CachedFragment as IMvxFragmentView;
+                    if (fragment == null)
+                        continue;
 
-                var mvxBundle = fragment.CreateSaveStateBundle();
-                var bundle = new Bundle();
-                savedStateConverter.Write(bundle, mvxBundle);
-                outState.PutBundle(item.Key, bundle);
+                    var mvxBundle = fragment.CreateSaveStateBundle();
+                    var bundle = new Bundle();
+                    savedStateConverter.Write(bundle, mvxBundle);
+                    outState.PutBundle(item.Key, bundle);
 
-                typesForKeys.Add(item.Key, item.Value.ViewModelType);
+                    typesForKeys.Add(item.Key, item.Value.ViewModelType);
+                }
             }
 
             return typesForKeys;
@@ -188,6 +203,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
                 json = ser.SerializeObject(_currentFragments);
                 outState.PutString(SavedCurrentFragmentsKey, json);
+
+                json = ser.SerializeObject(_backStackFragments);
+                outState.PutString(SavedBackStackFragmentsKey, json);
             }
             base.OnSaveInstanceState(outState);
         }
@@ -261,7 +279,58 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             if (frag == null) return;
 
             ft.Detach(frag);
+
+            var currentFragment = _currentFragments.First (x => x.Key == contentId);           
+            _backStackFragments.Add (currentFragment);
+
             _currentFragments.Remove(contentId);
+        }
+
+        public override void OnBackPressed ()
+        {
+            if (SupportFragmentManager.BackStackEntryCount > 1)
+            {
+                var backStackFrag = SupportFragmentManager.GetBackStackEntryAt (SupportFragmentManager.BackStackEntryCount - 1);
+                _currentFragments.Remove (_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
+
+                var newFrag = SupportFragmentManager.GetBackStackEntryAt (SupportFragmentManager.BackStackEntryCount - 2);
+                var currentFragment = _backStackFragments.Last (x => x.Value == newFrag.Name);
+
+                _currentFragments.Add (currentFragment.Key, currentFragment.Value);
+                _backStackFragments.Remove (currentFragment);
+
+                SupportFragmentManager.PopBackStackImmediate();
+                return;
+            }
+            else if (SupportFragmentManager.BackStackEntryCount == 1)
+            {
+                MoveTaskToBack(true);
+                return;
+            }
+
+            base.OnBackPressed();
+        }
+
+        /// <summary>
+        /// Close Fragment with a specific tag at a specific placeholder
+        /// </summary>
+        /// <param name="tag">The tag for the fragment to lookup</param>
+        /// <param name="contentId">Where you want to close the Fragment</param>
+        protected void CloseFragment(string tag, int contentId)
+        {
+            var frag = SupportFragmentManager.FindFragmentById(contentId);
+            if (frag == null) return;
+
+            SupportFragmentManager.PopBackStackImmediate(tag, 1);
+
+            _currentFragments.Remove(contentId);
+
+            if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId)) {
+                var currentFragment = _backStackFragments.Last (x => x.Key == contentId);
+
+                _currentFragments.Add (currentFragment.Key, currentFragment.Value);
+                _backStackFragments.Remove (currentFragment);
+            }
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)

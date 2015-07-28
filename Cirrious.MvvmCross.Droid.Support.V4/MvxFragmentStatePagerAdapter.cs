@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
@@ -55,6 +56,12 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
         public override ICharSequence GetPageTitleFormatted(int position)
         {
             return new Java.Lang.String(Fragments.ElementAt(position).Title);
+        }
+
+        public override void RestoreState (IParcelable state, ClassLoader loader)
+        {
+            //Don't call restore to prevent crash on rotation
+            //base.RestoreState (state, loader);
         }
 
         public class FragmentInfo

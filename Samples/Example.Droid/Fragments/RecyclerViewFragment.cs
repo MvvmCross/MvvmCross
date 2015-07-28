@@ -44,7 +44,7 @@ namespace Example.Droid.Fragments
             var swipeToRefresh = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);
             var appBar = Activity.FindViewById<AppBarLayout>(Resource.Id.appbar);
             if (appBar != null)
-                appBar.OffsetChanged += (sender, args) => swipeToRefresh.Enabled = args.P1 == 0;
+                appBar.OffsetChanged += (sender, args) => swipeToRefresh.Enabled = args.VerticalOffset == 0;
 
             return view;
         }

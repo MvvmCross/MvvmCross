@@ -18,7 +18,6 @@ namespace Example.Droid.Activities
         Label = "Examples",
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
-        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Name = "example.droid.activities.MainActivity"
     )]
     public class MainActivity : MvxCachingFragmentActivityCompat<MainViewModel>, IMvxFragmentHost
@@ -35,7 +34,8 @@ namespace Example.Droid.Activities
 
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
-            ViewModel.ShowMenu();
+            if(bundle == null)
+                ViewModel.ShowMenu();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -74,27 +74,20 @@ namespace Example.Droid.Activities
             }
             else
             {
-                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle);
+                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle, true);
                 return true;
             }
         }
 
-        public override void OnFragmentChanging (string tag, Android.Support.V4.App.FragmentTransaction transaction)
+        public bool Close (IMvxViewModel viewModel)
         {
-            if(tag.Equals(typeof(SettingsViewModel).Name))
-                transaction.AddToBackStack(tag);
-            base.OnFragmentChanging (tag, transaction);
+            CloseFragment (viewModel.GetType ().Name, Resource.Id.content_frame);
+            return true;
         }
 
         public override void OnBackPressed()
         {
-            var currentFragment = SupportFragmentManager.FindFragmentById(Resource.Id.content_frame) as MvxFragment;
-            if (currentFragment != null && SupportFragmentManager.BackStackEntryCount > 1)
-            {
-                SupportFragmentManager.PopBackStackImmediate();
-                return;
-            }
-            else if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
+            if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
                 DrawerLayout.CloseDrawers();
             else
                 base.OnBackPressed();
