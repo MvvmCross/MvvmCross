@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.All</id>
-		<version>4.0.0-alpha3</version>
+		<version>4.0.0-alpha8</version>
 		<title>MvvmCross - All Plugins</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -12,28 +12,28 @@
 		<description>This package contains the 'All' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Accelerometer" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Bookmarks" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Color" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.DownloadCache" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Email" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.JsonLocalisation" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Location" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Messenger" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Network" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.PhoneCall" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.PictureChooser" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.ReflectionEx" version="4.0.0-alpha3" />		  
-		  <dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-alpha3" />		  
-		  <dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-alpha3" />
-		  <dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-alpha3" />
+		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Accelerometer" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Bookmarks" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Color" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.DownloadCache" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Email" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.File" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.JsonLocalisation" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Location" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Messenger" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Network" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PhoneCall" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.PictureChooser" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ReflectionEx" version="4.0.0-alpha8" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-alpha8" />		  
+		  <dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-alpha8" />
+		  <dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-alpha8" />
 		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
@@ -70,6 +70,10 @@
 		
 	</files>
 </package>
+
+
+
+
 
 
 
