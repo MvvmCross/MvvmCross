@@ -217,7 +217,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         /// <param name="contentId">Where you want to show the Fragment</param>
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="addToBackStack">If you want to add the fragment to the backstack so on backbutton it will go back to it</param>
-        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false)
+        /// <param name="forceReplaceFragment">Force replace a fragment with the same viewmodel at the same contentid</param>
+        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false, bool forceReplaceFragment = false)
         {
             FragmentInfo fragInfo;
             _lookup.TryGetValue(tag, out fragInfo);
@@ -228,7 +229,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            var shouldReplaceCurrentFragment = ShouldReplaceCurrentFragment(contentId, tag);
+            var shouldReplaceCurrentFragment = forceReplaceFragment || ShouldReplaceCurrentFragment(contentId, tag);
             if (!shouldReplaceCurrentFragment)
                 return;
 
