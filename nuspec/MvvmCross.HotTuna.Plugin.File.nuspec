@@ -2,19 +2,48 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.File</id>
-		<version>4.0.0-alpha8</version>
+		<version>4.0.0-beta1</version>
 		<title>MvvmCross - File Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/slodge/MvvmCross</projectUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'File' plugin for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
+		<description>This package contains the 'File' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
-		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
-		</dependencies>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wp">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wpa">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoTouch">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>		
 		<!-- src -->
@@ -32,46 +61,46 @@
 			target="src\Cirrious.MvvmCross.Plugins.File.Droid" />
 		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.Touch" />
-		
+
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
-    	<!-- wpf  -->
+		<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.File.Wpf.*" target="lib\net45" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\net45\Bootstrap\FilePluginBootstrap.cs.pp" />
-		
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\net45\Bootstrap\FilePluginBootstrap.cs.pp" />
+
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.File.WindowsStore.*" target="lib\netcore45" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FilePluginBootstrap.cs.pp" />
-        
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FilePluginBootstrap.cs.pp" />
+
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\wp8" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.*" target="lib\wp8" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FilePluginBootstrap.cs.pp" />
-	
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FilePluginBootstrap.cs.pp" />
+
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.File.WindowsCommon.*" target="lib\win81" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\win81\Bootstrap\FilePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\win81\Bootstrap\FilePluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.File.WindowsCommon.*" target="lib\wpa81" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\FilePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\FilePluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.File.WindowsCommon.*" target="lib\portable-win81+wpa81" />
-		
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.File.Droid.*" target="lib\MonoAndroid" />
-        <file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FilePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FilePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.File.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.File.Touch.*" target="lib\Xamarin.iOS10" />
-        <file src="TouchBootstrapContent\FilePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\FilePluginBootstrap.cs.pp" />
+		<file src="TouchBootstrapContent\FilePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\FilePluginBootstrap.cs.pp" />
 	</files>
 </package>
 

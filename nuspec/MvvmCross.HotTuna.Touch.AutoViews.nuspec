@@ -2,20 +2,33 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Touch.AutoViews</id>
-		<version>4.0.0-alpha8</version>
-		<title>MvvmCross - Hot Tuna AutoViews iOS Support</title>
+		<version>4.0.0-beta1</version>
+		<title>MvvmCross - iOS AutoViews Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'AutoViews' iOS assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-alpha8" />
-		  <dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-alpha8" />
-		</dependencies>
+		<description>This package contains the 'AutoViews' iOS libraries for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="MonoTouch">
+				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>		
-	
+
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.AutoView.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.*" target="lib\Xamarin.iOS10" />
@@ -24,10 +37,3 @@
 			target="src\Cirrious.MvvmCross.AutoView.Touch" />		
 	</files>
 </package>
-
-
-
-
-
-
-
