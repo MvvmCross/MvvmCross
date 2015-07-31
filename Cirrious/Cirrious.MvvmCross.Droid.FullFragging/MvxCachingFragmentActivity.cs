@@ -213,15 +213,16 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 			base.OnSaveInstanceState(outState);
 		}
 
-		/// <summary>
-		///     Show Fragment with a specific tag at a specific placeholder
-		/// </summary>
-		/// <param name="tag">The tag for the fragment to lookup</param>
-		/// <param name="contentId">Where you want to show the Fragment</param>
-		/// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
+        /// <summary>
+        ///     Show Fragment with a specific tag at a specific placeholder
+        /// </summary>
+        /// <param name="tag">The tag for the fragment to lookup</param>
+        /// <param name="contentId">Where you want to show the Fragment</param>
+        /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="addToBackStack">If you want to add the fragment to the backstack so on backbutton it will go back to it</param>
-        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false)
-		{
+        /// <param name="forceReplaceFragment">Force replace a fragment with the same viewmodel at the same contentid</param>
+        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false, bool forceReplaceFragment = false)
+        {
 			FragmentInfo fragInfo;
 			_lookup.TryGetValue(tag, out fragInfo);
 
@@ -232,7 +233,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 			_currentFragments.TryGetValue(contentId, out currentFragment);
 
 			// Only do something if we are not currently showing the tag at the contentId
-            if (IsFragmentCurrentlyShowing(contentId, tag)) return;
+            if (!forceReplaceFragment || IsFragmentCurrentlyShowing(contentId, tag)) return;
 
 			var ft = FragmentManager.BeginTransaction();
 			OnBeforeFragmentChanging(tag, ft);
