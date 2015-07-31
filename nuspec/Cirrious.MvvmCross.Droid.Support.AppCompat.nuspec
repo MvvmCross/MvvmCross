@@ -13,63 +13,7 @@
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="win">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="wp">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="wpa">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="MonoTouch">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="22.2.1.0" />
-			</group>
-			<group targetFramework ="uap">
 				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
@@ -90,5 +34,3 @@
 		<file src="..\Cirrious.MvvmCross.Droid.Support.AppCompat\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.AppCompat" />
 	</files>
 </package>
-
-
