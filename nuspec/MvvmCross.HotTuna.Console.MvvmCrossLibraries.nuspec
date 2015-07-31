@@ -2,16 +2,33 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Console.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha8</version>
-		<title>MvvmCross - Hot Tuna MvvmCross Libraries for Console</title>
+		<version>4.0.0-beta1</version>
+		<title>MvvmCross - MvvmCross Libraries for Console</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the Console 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha8" />
-		</dependencies>
+		<description>This package contains the Console 'MvvmCross Library' assemblies for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>		
 		<!-- PCL -->
