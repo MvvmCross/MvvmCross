@@ -113,7 +113,7 @@ namespace CrossUI.Droid.Dialog
 
         protected void Init(IAttributeSet attrs, int defStyleRes)
         {
-            var @params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
+            var @params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             _list = new DividerAwareLinearLayout(this.Context, null);
             _list.LayoutParameters = @params;
             _list.Orientation = Orientation.Vertical;
