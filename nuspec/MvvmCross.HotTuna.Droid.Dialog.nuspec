@@ -2,29 +2,61 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.Dialog</id>
-		<version>4.0.0-alpha8</version>
-		<title>MvvmCross - Hot Tuna Droid Dialog Support</title>
+		<version>4.0.0-beta1</version>
+		<title>MvvmCross - Android Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'Droid Dialog' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha8" />
-		</dependencies>
+		<description>This package contains the 'Android Dialog' libraries for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wp">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wpa">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoTouch">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>		
-	
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\MonoAndroid" />
 		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
-		
+
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.*" target="lib\MonoAndroid" />
-		
+
 		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
-		
+
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.*" target="lib\MonoAndroid" />
-		
+
 		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
 	</files>
 </package>

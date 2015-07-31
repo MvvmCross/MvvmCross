@@ -2,21 +2,53 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Mac.MvvmCrossLibraries</id>
-		<version>4.0.0-alpha8</version>
-		<title>MvvmCross - Hot Tuna Mac MvvmCross Libraries</title>
+		<version>4.0.0-beta1</version>
+		<title>MvvmCross - Mac MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross v3 - Hot Tuna. For convenience, PCL, MonoAndroid and Xamarin.iOS10 are included. This and other packages are currently under development...</description>
-		<dependencies>
-		  <dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-alpha8" />
-		</dependencies>
+		<description>This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For convenience, PCL, MonoAndroid and Xamarin.iOS10 are included</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wp">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wpa">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoTouch">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>
 		<!-- Common -->
 		<file src="..\Cirrious\Cirrious.MvvmCross\**\*.cs" target="src\Cirrious.MvvmCross" />
-		
+
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.pdb" />
@@ -29,7 +61,7 @@
 		<!-- droid - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.pdb" />
-		
+
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.pdb" />
@@ -48,7 +80,6 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45\Cirrious.MvvmCross.pdb" />
 
-		
 	</files>
 </package>
 
