@@ -66,8 +66,8 @@ namespace CrossUI.Droid.Dialog
                 var linearLayout = new LinearLayout(this);
                 list = new LinearDialogScrollView(this);
                 list.Id = Android.Resource.Id.List;
-                linearLayout.AddView(list, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
-                this.AddContentView(linearLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent));
+                linearLayout.AddView(list, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
+                this.AddContentView(linearLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent));
             }
 
             return list;

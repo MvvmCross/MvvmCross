@@ -395,7 +395,7 @@ namespace CrossUI.Droid.Dialog.Elements
             // invisible/empty section header, could be re-shown by setting the caption and refreshing the list
             return new View(context, null)
             {
-                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.MatchParent, 0),
                 Visibility = ViewStates.Gone,
             };
         }
@@ -427,7 +427,7 @@ namespace CrossUI.Droid.Dialog.Elements
             // invisible/empty section footer, could be re-shown by setting the footer and refreshing the list
             return new View(context, null)
             {
-                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.FillParent, 0),
+                LayoutParameters = new ListView.LayoutParams(ViewGroup.LayoutParams.MatchParent, 0),
                 Visibility = ViewStates.Gone,
             };
         }
