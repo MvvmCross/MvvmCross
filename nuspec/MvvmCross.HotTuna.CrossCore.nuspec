@@ -2,16 +2,48 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.CrossCore</id>
-		<version>4.0.0-alpha8</version>
+		<version>4.0.0-beta1</version>
 		<title>MvvmCross - CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'Core' assemblies for MvvmCross v3 - Hot Tuna. This and other packages are currently under development...</description>
-		<dependencies>
-			<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-alpha8" />
-		</dependencies>
+		<description>This package contains the 'Core' libraries for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wp">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="wpa">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="MonoTouch">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>
 		<!-- src -->
@@ -29,17 +61,16 @@
 			target="src\Cirrious.CrossCore.Droid" />
 		<file src="..\CrossCore\Cirrious.CrossCore.Touch\**\*.cs" 
 			target="src\Cirrious.CrossCore.Touch" />
-			
+
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
-		
-		
+
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Localization\**\*.cs" target="src\Cirrious.MvvmCross.Localization" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\Cirrious.CrossCore.Wpf.*" target="lib\net45" />
-		
+
 		<!-- wpf - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\net45" />
@@ -50,7 +81,7 @@
 		<!-- store - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\netcore45" />
-        
+
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.CrossCore.WindowsPhone.*" target="lib\wp8" />
 
@@ -62,14 +93,14 @@
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.CrossCore.WindowsCommon.*" target="lib\portable-win81+wpa81" />
-		
+
 		<!-- windows common - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\win81" />
-		
+
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\wpa81" />
-		
+
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
 
@@ -79,10 +110,10 @@
 		<!-- droid - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\MonoAndroid" />
-		
+
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Touch\Cirrious.CrossCore.Touch.*" target="lib\Xamarin.iOS10" />
-		
+
 		<!-- touch - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.*" target="lib\Xamarin.iOS10" />
