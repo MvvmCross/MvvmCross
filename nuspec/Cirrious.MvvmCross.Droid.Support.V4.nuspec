@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.V4</id>
-		<version>4.0.0-alpha9</version>
+		<version>4.0.0-beta1</version>
 		<title>MvvmCross Android Support - V4</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -10,16 +10,22 @@
 		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains Support V4 support for MvvmCross</description>
-		<tags>mvvm mvvmcross xamarin monodroid mvx</tags>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
+		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
-          <dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-alpha9" />
-		  <dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-alpha9" />
-		  <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-alpha9" />
-		  <dependency id="Xamarin.Android.Support.v4" version="22.2.0.0" />
+			<group targetFramework ="MonoAndroid">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta1" />
+				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
+			</group>
 		</dependencies>
-		<releaseNotes>
-		</releaseNotes>
-        <iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 	</metadata>
 	<files>
 		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid403" />
