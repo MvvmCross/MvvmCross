@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
             if (RawImage == null)
                 return 0;
 
-            return RawImage.RowBytes*RawImage.Height;
+            return RawImage.AllocationByteCount;
         }
     }
 }
