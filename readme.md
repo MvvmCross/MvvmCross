@@ -1,207 +1,116 @@
-MvvmCross v3
-============
+## MvvmCross
 
-This project provides a cross-platform mvvm mobile development framework built on top of:
+MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for [Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms) and the [Android support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport).
 
-- Silverlight for WP7, WP8
-- Mono for Android  (or Xamarin.Android)
-- MonoTouch for iOS  (or Xamarin.iOS)
-- the WinRT XAML framework for Windows 8 Store apps.
-- Windows Universal projects (WPA8.1 and Windows 8.1 Store apps)
-- WPF
-- Mono for Mac (or Xamarin.Mac)
+See the official [MvvmCross blog](http://mvvmcross.com/) for the latest news!
 
-This project makes extensive use of Portable Class Libraries to provide maintainable cross platform C# native applications. 
+### Get started
 
-**Additional support available for:**
-- [MvvmCross for Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms)
-- [MvvmCross for Android Support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport)
-- [MvvmCross with SQLite](https://github.com/MvvmCross/MvvmCross-SQLite)
+A quick way to get started is to use the Visual Studio MvvmCross [Ninja Coder](https://github.com/asudbury/NinjaCoderForMvvmCross) Extension - download it from [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767)
+
+For mannual project creation install the necessary packages from [Nuget](https://www.nuget.org/packages?q=mvvmcross)
 
 
-Getting started
----------------
+### Questions & support
 
-A really quick way to get started is to use the Visual Studio 2012 MvvmCross Ninja Coder Extension - download it from [Visual Studio Gallery][ninjavsgallery]
-
-![Ninja Plugin][ninja]
-
-I have started a tutorial series entitled [N+1 Days of MvvmCross][n1] starting with the basics of your first MvvmCross application and covering lists, commands, binding, and more with samples for each device. The code for N+1 Days of MvvmCross is available on [GitHub][n1github]
-
-For more documents and articles, see the [Wiki][mvxwiki]
-
-For more samples, see the [MvvmCross Tutorials Repository][mvxtuts]
-
-# Documentation and Examples
-
-Binaries:
-
-* [nuget][mvxnuget]
-* [Github: MvvmCross-Binaries][mvxbin]
-
-Samples and Videos:
-
-*   **[N Plus 1 Videos Of MvvmCross][n1videos]**
-*  [MvvmCross Tutorials][mvxtuts]
-*   Evolve 2013 talk - http://xamarin.com/evolve/2013#session-dnoeeoarfj
-*   NDC 2013 talk - http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html
-*   Xaminar - 2012 - http://slodge.blogspot.com/2012/12/mvvmcross-video-presentation-xaminar.html
-*   MvvmCross and Azure - 2012 - http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html
+* [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
+* [Xamarin forums](http://forums.xamarin.com)
+* [Jabbr](http://jabbr.net/#/rooms/mvvmcross)
 
 
-The Tip Calc tutorial:
+### Documentation and Examples
 
-*   **[A first app](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-first-app)**
-*   **[The Core Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc---The-Core-Project)**
-*   **[A Xamarin.Android UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.Android-UI-project)**
-*   **[A Xamarin.iOS UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.iOS-UI-project)**
-*   **[A Universal Windows App UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Universal-Windows-App-UI-Project)**
-*   **[A Windows Phone UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Windows-Phone-UI-Project)**
-*   **[A Windows Store UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)**
-*   **[A Wpf UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator-A-Wpf-UI-Project)**
-*   **[Tip Calculator -  A recap](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator---A-recap)**
+**See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for addition articles and information.**
 
-General articles:
+**Samples and Videos:**
 
-*   **[The MvvmCross Manifesto](https://github.com/MvvmCross/MvvmCross/wiki/The-MvvmCross-Manifesto)**
-*   **[High Level MvvmCross Objects](https://github.com/MvvmCross/MvvmCross/wiki/High-Level-MvvmCross-Objects)**
-*   **[Databinding](https://github.com/MvvmCross/MvvmCross/wiki/Databinding)**
-*   **[Value Converters](https://github.com/MvvmCross/MvvmCross/wiki/Value-Converters)**
-*   **[View Model Lifecycle](https://github.com/MvvmCross/MvvmCross/wiki/View-Model-Lifecycle)**
-*   **[ViewModel  to ViewModel navigation](https://github.com/MvvmCross/MvvmCross/wiki/ViewModel--to-ViewModel-navigation)**
-*   **[Customising App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customising-using-App-and-Setup)**
-*   **[Service Location and Inversion of Control](https://github.com/MvvmCross/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)**
-*   **[Assemblies](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Assemblies)**
-*   **[Plugins](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-plugins)**
-*   **[Testing](https://github.com/MvvmCross/MvvmCross/wiki/Testing)**
-*   **[Dialog - very draft](https://github.com/MvvmCross/MvvmCross/wiki/CrossUI---MonoTouch.Dialog-and-MonoDroid.Dialog-with-MvvmCross)**
-
-iOS Articles:
-
-*   **[Tables and Cells in iOS](https://github.com/MvvmCross/MvvmCross/wiki/Tables-and-Cells-in-iOS)**
-*   [Map Annotation Data-Binding](https://github.com/MvvmCross/MvvmCross/wiki/Map-Annotation-Data-Binding)
-
-For more information please also see:
-
-- an introduction article on CodeProject - http://www.codeproject.com/KB/cross-platform/566191.aspx
-- the N+1 video series under production - [N Plus 1 Videos Of MvvmCross][n1videos]
-- blogs
-  - [Stuart's blog][slogdeblog]
-  - [Cheesebaron's blog][cheesebaron]
-  - [DeapSquatter's blog][deapsquatter]
-  - [Odenaxos's blog][odenaxos]
-  - [Greg's blog][gshackles] 
-  - others? Get in touch if you think your blog should be here......
-
-Questions and support:
-
-  * on [StackOverflow][so] 
-  * on [Xamarin forums][xfmvx]
-
-Contact - but **no** open-source technical questions via these channels please:
-
-  * on Twitter - [@MvvmCross][mvxtwitter]
-  * by chat - [Jabbr/mvvmcross][jabbr]
-  * by email - [mvvmcross email][mvxmail]
+* **[N Plus 1 Videos Of MvvmCross][n1videos]**
+* [MvvmCross Tutorials][mvxtuts]
+* [Evolve 2013 talk](http://xamarin.com/evolve/2013#session-dnoeeoarfj)
+* [NDC 2013 talk](http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html)
+* [Xaminar - 2012](http://slodge.blogspot.com/2012/12/mvvmcross-video-presentation-xaminar.html)
+* [MvvmCross and Azure - 2012](http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html)
 
 
-If you would like to help with the project - including the documentation - then please get in touch :)
+**The Tip Calc tutorial:**
 
-About MvvmCross...
-------------------
+* [A first app](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-first-app)
+* [The Core Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc---The-Core-Project)
+* [A Xamarin.Android UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.Android-UI-project)
+* [A Xamarin.iOS UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.iOS-UI-project)
+* [A Universal Windows App UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Universal-Windows-App-UI-Project)
+* [A Windows Phone UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Windows-Phone-UI-Project)
+* [A Windows Store UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)
+* [A Wpf UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator-A-Wpf-UI-Project)
+* [Tip Calculator -  A recap](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator---A-recap)
 
-This project was born from:
+**General articles:**
 
-- a fork once long ago of the MonoCross project, moving away from MVC and towards MVVM
-- an extension project from [www.cirrious.com][cirrious]
-- some ideas from MvvmLight
-- some ideas from ASP.NET MVC
-- some ideas from OpenNetCF (Phone7.Fx)
-- lots of my own ideas - [www.cirrious.com][cirrious] and [my blog][slogdeblog]
+* [The MvvmCross Manifesto](https://github.com/MvvmCross/MvvmCross/wiki/The-MvvmCross-Manifesto)
+* [High Level MvvmCross Objects](https://github.com/MvvmCross/MvvmCross/wiki/High-Level-MvvmCross-Objects)
+* [Databinding](https://github.com/MvvmCross/MvvmCross/wiki/Databinding)
+* [Value Converters](https://github.com/MvvmCross/MvvmCross/wiki/Value-Converters)
+* [View Model Lifecycle](https://github.com/MvvmCross/MvvmCross/wiki/View-Model-Lifecycle)
+* [ViewModel  to ViewModel navigation](https://github.com/MvvmCross/MvvmCross/wiki/ViewModel--to-ViewModel-navigation)
+* [Customising App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customising-using-App-and-Setup)
+* [Service Location and Inversion of Control](https://github.com/MvvmCross/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
+* [Assemblies](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Assemblies)
+* [Plugins](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-plugins)
+* [Testing](https://github.com/MvvmCross/MvvmCross/wiki/Testing)
+* [Dialog - very draft](https://github.com/MvvmCross/MvvmCross/wiki/CrossUI---MonoTouch.Dialog-and-MonoDroid.Dialog-with-MvvmCross)
 
-Here is the framework in action for the sqlbits conference app:
+**iOS Articles:**
 
-![sql bits](http://i.imgur.com/lVPv1.png)
-<!-- http://i.imgur.com/vfWen.png -->
+* [Tables and Cells in iOS](https://github.com/MvvmCross/MvvmCross/wiki/Tables-and-Cells-in-iOS)
+* [Map Annotation Data-Binding](https://github.com/MvvmCross/MvvmCross/wiki/Map-Annotation-Data-Binding)
 
-Public projects that have used this framework include:
+**For more information please also see:**
 
-- Kinect Star Wars - http://www.youtube.com/watch?v=MXPE2iTvlWg
-- Aviva Drive - http://www.aviva.co.uk/drive
-- Origo Foci-Eb 2012 - http://slodge.blogspot.co.uk/2012/10/origo-foci-eb-2012-example-mvvmcross.html
-- Various Conference apps - SQLBitsX, DDDSW, LondonAzure, .... e.g. https://github.com/MvvmCross/MvvmCross/tree/vnext/Sample%20-%20CirriousConference
-- The CrossBox DropBox client - https://github.com/runegri/CrossBox
-- The Blooor shopping list app - https://github.com/Zoldeper/Blooor
-- 1,500+ apps and counting with the XPlatformCloudKit framework - https://github.com/winappkits/XPlatformCloudKit/
-- Have you used the app? Please send me your links and I'll add them here
-- many more!
+* the N+1 video series - [N Plus 1 Videos Of MvvmCross][n1videos]
+* [Stuart's blog][slogdeblog]
+* [Cheesebaron's blog][cheesebaron]
+* [DeapSquatter's blog][deapsquatter]
+* [Odenaxos's blog][odenaxos]
+* [Greg's blog][gshackles] 
+* others? Get in touch if you think your blog should be here......
 
-v3
---
 
-This is the third version of the MvvmCross platform - v3.
+### Contribute!
 
-For more info on what this version specifically aims to provide, see:
+Some of the best ways to contribute are to try things out, file bugs, and join conversations.
 
-- [MvvmCross v3 blog post][mvxv3]
-
-If you are looking for the "older" version of MvvmCross, then it's still available and still receiving updates on the master branch at
-
-- https://github.com/MvvmCross/MvvmCross/tree/master
-- https://github.com/MvvmCross/MvvmCross/tree/vNext
-
-How to get involved
--------------------
-
-If you have questions, then please ask them on [StackOverflow][so] with tag MvvmCross
-
-Alternatively, people on [Xamarin Forums][xf] can be very helpful
-
-There is a Jabbr room - on [#mvvmcross][jabbr] - but please ask questions on StackOverflow if you can - this helps make the questions and the answers better!
-
-If I haven't seen your question and no-one else has helped, then you can also contact me - me at slodge dot com - but please be patient with me if I'm busy with work.
-
-If you need professional support, then please do contact me - I work freelance and can assist. Please do consider hiring me - everyone likes 'free', but I'm worth paying for :)
-
-If you find bugs or have feature requests, then please report them through GitHub - https://github.com/MvvmCross/MvvmCross/issues
+* [Pull requests](https://github.com/MvvmCross/MvvmCross/pulls): [Open](https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Aopen+is%3Apr)/[Closed](https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Apr+is%3Aclosed)
+* [Issues](https://github.com/MvvmCross/MvvmCross/issues): [Open](https://github.com/MvvmCross/MvvmCross/issues?q=is%3Aopen+is%3Aissue)/[Closed](https://github.com/MvvmCross/MvvmCross/issues?q=is%3Aissue+is%3Aclosed)
 
 If you would like to help make MvvmCross even better, then please do:
 
-- new code - including pull requests via GitHub - or you can fork the project and build your own extensions
-- new plugins - can be hosted in your own repositories
-- please do blog about your adventures with MvvmCross - we're currently very light on documentation!
-- if you use the framework, then please let me know - we love to see what people are doing with it.
+* new code - including pull requests via GitHub - or you can fork the project and build your own extensions
+* new plugins - can be hosted in your own repositories
+* please do blog about your adventures with MvvmCross - we're currently light on documentation!
+* if you use the framework, then please let me know - we love to see what people are doing with it
 
-Licensing
----------
 
-This project is developed and distributed under Ms-Pl - see http://opensource.org/licenses/ms-pl.html
+### Licensing
 
-- MonoCross was the original starting point for this project, and was used as a reference under MIT - please see http://code.google.com/p/monocross/ for original details.
-- Phone7.Fx is redistributed and modified here under Ms-PL - please see http://phone7.codeplex.com for original details.
-- Tiny bits of MvvmLight are redistributed and modified here under MIT - please see http://mvvmlight.codeplex.com/ for original details.
-- NewtonSoft.Json is redistributed and modified here under MIT - please see http://json.codeplex.com for original details. 
-- The original work on the JSON.Net port to MonoTouch and MonoDroid was done by @ChrisNTR - https://github.com/chrisntr/Newtonsoft.Json
-- Sqlite-net - custom license - see https://github.com/praeclarum/sqlite-net/blob/master/license.md
-- MonoTouch.Dialog - MIT X11 from https://github.com/migueldeicaza/MonoTouch.Dialog
-- MonoDroid.Dialog - MIT X11 from https://github.com/kevinmcmahon/MonoDroid.Dialog
-- OpenNetCF IoC (used from within Phone7.Fx?) - no longer used within the code
-- Messenger ideas from JonathanPeppers/XPlatUtils under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
-- Color codes adapted from https://github.com/mono/sysdrawing-coregraphics under MIT License
+MvvmCross is licensed under the [MS-Pl License](http://opensource.org/licenses/ms-pl.html)
 
-Thanks
-------
+* [MonoCross](http://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
+* [Phone7.Fx](http://phone7.codeplex.com) is redistributed and modified under MS-PL
+* Tiny bits of [MvvmLight](http://mvvmlight.codeplex.com/) are redistributed and modified under MIT
+* [NewtonSoft.Json](https://github.com/JamesNK/Newtonsoft.Json) is redistributed and modified here under MIT
+* The original work on the [JSON.Net port](https://github.com/chrisntr/Newtonsoft.Json) to MonoTouch and MonoDroid was done by @ChrisNTR
+* [Sqlite-net](https://github.com/praeclarum/sqlite-net/blob/master/license.md) - custom license
+* [MonoTouch.Dialog](https://github.com/migueldeicaza/MonoTouch.Dialog) - MIT X11 
+* [MonoDroid.Dialog](https://github.com/kevinmcmahon/MonoDroid.Dialog) - MIT X11
+* Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
+* [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
 
-Thanks to McCannLondon for sponsoring the initial part of this work - http://blogs.mccannlondon.co.uk/
 
-Thanks to lots of people for their input over time - will add to this list...
+### Acknowledgements
 
-Thanks to JetBrains for a community Resharper license to use on this project - http://jetbrains.com
-
-Thanks to Infragistics for a control license for Nuclios and .Net.
-
-If you want to support this project, please do get in touch!
-
+* Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
+* Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
+* Thanks to [Infragistics](http://www.infragistics.com/) for a control license for Nuclios and .Net
 
 
 [ninja]: http://i.imgur.com/eJ3ewEq.png "Ninja Plugin"
