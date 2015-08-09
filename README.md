@@ -20,7 +20,7 @@ For mannual project creation install the necessary packages from [Nuget](https:/
 
 ### Documentation and Examples
 
-**See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for addition articles and information.**
+**See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for additional articles and information.**
 
 **Samples and Videos:**
 
