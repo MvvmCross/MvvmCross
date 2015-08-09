@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Mac.CrossCore</id>
-		<version>4.0.0-beta1</version>
+		<version>4.0.0-beta2</version>
 		<title>MvvmCross - Mac CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,34 +14,34 @@
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -56,6 +56,12 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.CrossCore.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.Localization.dll" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.Localization.pdb" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.dll" target="lib\dotnet\Cirrious.CrossCore.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.CrossCore.pdb" target="lib\dotnet\Cirrious.CrossCore.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.dll" target="lib\dotnet\Cirrious.MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Localization.pdb" target="lib\dotnet\Cirrious.MvvmCross.Localization.pdb" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.CrossCore.Droid.dll" target="lib\MonoAndroid\Cirrious.CrossCore.Droid.dll" />
