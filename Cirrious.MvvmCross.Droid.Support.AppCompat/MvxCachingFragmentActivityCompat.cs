@@ -22,9 +22,18 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    [Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentActivityCompat")]
-    public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
-    {
+	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentActivityCompat")]
+	public class MvxCachingFragmentActivityCompat : MvxCachingFragmentActivity
+	{
+		protected MvxCachingFragmentActivityCompat()
+        {
+        }
+
+        protected MvxCachingFragmentActivityCompat(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+			
         private AppCompatDelegate _compatDelegate;
         public AppCompatDelegate CompatDelegate
         {
