@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Email</id>
-		<version>4.0.0-beta1</version>
+		<version>4.0.0-beta2</version>
 		<title>MvvmCross - Email Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,34 +14,34 @@
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta1" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -64,6 +64,9 @@
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\dotnet" />
 
 		<!-- wpf  -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\net45" />
