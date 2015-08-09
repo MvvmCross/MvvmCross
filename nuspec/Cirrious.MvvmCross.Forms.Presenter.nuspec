@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Forms.Presenter</id>
-		<version>4.0.0-beta1</version>
+		<version>4.0.0-beta2</version>
 		<title>MvvmCross FormsPresenters</title>
 		<authors>Tomasz Cielecki, Marcos Cobeña Morián, Peter Burke</authors>
 		<owners>Tomasz Cielecki</owners>
@@ -59,6 +59,10 @@
 		<!-- PCL -->
 		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
       target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+      target="lib\dotnet" />
 
 		<!-- phone -->
 		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
