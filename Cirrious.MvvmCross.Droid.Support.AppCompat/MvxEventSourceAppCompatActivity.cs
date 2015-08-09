@@ -5,13 +5,19 @@ using Android.OS;
 using Android.Support.V7.App;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
+using Android.Runtime;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    public abstract class MvxEventSourceAppCompatActivity 
+	public abstract class MvxEventSourceAppCompatActivity
         : AppCompatActivity
         , IMvxEventSourceActivity
-    {
+	{
+		protected MvxEventSourceAppCompatActivity()
+        {
+        }
+        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+			
         protected override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);
