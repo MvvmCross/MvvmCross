@@ -92,7 +92,7 @@ If you would like to help make MvvmCross even better, then please do:
 
 ### Licensing
 
-MvvmCross is licensed under the [MS-Pl License](http://opensource.org/licenses/ms-pl.html)
+MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/ms-pl.html)
 
 * [MonoCross](http://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
 * [Phone7.Fx](http://phone7.codeplex.com) is redistributed and modified under MS-PL
