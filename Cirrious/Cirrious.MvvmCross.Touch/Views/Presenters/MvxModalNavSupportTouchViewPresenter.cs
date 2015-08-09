@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
     {
         private UIViewController _currentModalViewController;
 
-        public MvxModalNavSupportTouchViewPresenter(UIApplicationDelegate applicationDelegate, UIWindow window)
+        public MvxModalNavSupportTouchViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
