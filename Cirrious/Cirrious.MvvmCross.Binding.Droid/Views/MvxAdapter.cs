@@ -142,7 +142,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             
             if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
+                                      "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
             
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
