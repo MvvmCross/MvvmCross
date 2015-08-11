@@ -10,10 +10,10 @@ using Android.Support.V4.Graphics;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
-    public class TmpMvxAndroidImage
+    public class MvxAndroidImage
         : MvxImage<Bitmap>
     {
-        public TmpMvxAndroidImage(Bitmap rawImage)
+        public MvxAndroidImage(Bitmap rawImage)
             : base(rawImage)
         {
         }
