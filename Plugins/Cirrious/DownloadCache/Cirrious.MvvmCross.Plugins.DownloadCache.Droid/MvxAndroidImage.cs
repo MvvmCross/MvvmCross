@@ -6,13 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Graphics;
+using Android.Support.V4.Graphics;
 
 namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
 {
-    public class MvxAndroidImage
+    public class TmpMvxAndroidImage
         : MvxImage<Bitmap>
     {
-        public MvxAndroidImage(Bitmap rawImage)
+        public TmpMvxAndroidImage(Bitmap rawImage)
             : base(rawImage)
         {
         }
@@ -21,8 +22,7 @@ namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
         {
             if (RawImage == null)
                 return 0;
-
-            return RawImage.AllocationByteCount;
+            return BitmapCompat.GetAllocationByteCount(RawImage);
         }
     }
 }
