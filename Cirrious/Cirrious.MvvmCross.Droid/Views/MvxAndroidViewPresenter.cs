@@ -16,14 +16,14 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewPresenter
-        : IMvxAndroidViewPresenter
+        : MvxViewPresenter, IMvxAndroidViewPresenter
     {
         protected Activity Activity
         {
             get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
         }
 
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
             Show(intent);
@@ -47,13 +47,15 @@ namespace Cirrious.MvvmCross.Droid.Views
             return intent;
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
+
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

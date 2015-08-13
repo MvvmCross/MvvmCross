@@ -11,13 +11,14 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
     public abstract class MvxWpfViewPresenter
-        : IMvxWpfViewPresenter
+        : MvxViewPresenter, IMvxWpfViewPresenter
     {
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             try
             {
@@ -34,8 +35,10 @@ namespace Cirrious.MvvmCross.Wpf.Views
 
         public abstract void Present(FrameworkElement frameworkElement);
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
+			if (HandlePresentationChange(hint)) return;
+			
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
     }

@@ -17,7 +17,7 @@ using Microsoft.Phone.Controls;
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
     public class MvxPhoneViewPresenter
-        : IMvxPhoneViewPresenter
+        : MvxViewPresenter, IMvxPhoneViewPresenter
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             _rootFrame = rootFrame;
         }
 
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             try
             {
@@ -50,13 +50,15 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             }
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
+
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
