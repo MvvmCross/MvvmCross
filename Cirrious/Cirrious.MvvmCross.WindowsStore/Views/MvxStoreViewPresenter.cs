@@ -45,14 +45,14 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
-        {
+        {			
+            if (HandlePresentationChange(hint)) return;
+			
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
-			
-            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

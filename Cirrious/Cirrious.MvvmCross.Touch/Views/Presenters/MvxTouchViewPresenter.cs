@@ -53,13 +53,13 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
+            base.ChangePresentation(hint);
+
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
-
-            base.ChangePresentation(hint);
         }
 
         public virtual void Show(IMvxTouchView view)
