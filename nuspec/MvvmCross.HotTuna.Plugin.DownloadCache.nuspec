@@ -27,6 +27,7 @@
 			</group>
 			<group targetFramework ="MonoAndroid">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
 			</group>
 			<group targetFramework ="MonoTouch">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
