@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
@@ -13,5 +14,7 @@ namespace Cirrious.MvvmCross.Views
     {
         void Show(MvxViewModelRequest request);
         void ChangePresentation(MvxPresentationHint hint);
+
+        void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint;
     }
 }

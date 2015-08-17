@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Controls;
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
     public class MvxStoreViewPresenter
-        : IMvxStoreViewPresenter
+        : MvxViewPresenter, IMvxStoreViewPresenter
     {
         private readonly Frame _rootFrame;
 
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             _rootFrame = rootFrame;
         }
 
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             try
             {
@@ -44,8 +44,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             }
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
-        {
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {			
+            if (HandlePresentationChange(hint)) return;
+			
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);

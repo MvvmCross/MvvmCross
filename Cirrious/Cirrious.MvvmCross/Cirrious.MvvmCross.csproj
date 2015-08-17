@@ -117,6 +117,7 @@
     <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="ViewModels\MvxViewModelRequest.cs" />
+    <Compile Include="Views\MvxViewPresenter.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
   </ItemGroup>
   <ItemGroup />
