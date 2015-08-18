@@ -16,7 +16,7 @@ using Xamarin.Forms;
 namespace Cirrious.MvvmCross.Forms.Presenter.Core
 {
     public class MvxFormsPagePresenter
-        : IMvxViewPresenter
+        : MvxViewPresenter, IMvxViewPresenter
     {
         protected Application _mvxFormsApp;
 
@@ -42,8 +42,10 @@ namespace Cirrious.MvvmCross.Forms.Presenter.Core
             _mvxFormsApp = mvxFormsApp;
         }
 
-        public virtual async void ChangePresentation(MvxPresentationHint hint)
+        public override async void ChangePresentation(MvxPresentationHint hint)
         {
+            if (HandlePresentationChange(hint)) return;
+
             if (hint is MvxClosePresentationHint)
             {
                 var mainPage = _mvxFormsApp.MainPage as NavigationPage;
@@ -60,7 +62,13 @@ namespace Cirrious.MvvmCross.Forms.Presenter.Core
             }
         }
 
-        public virtual async void Show(MvxViewModelRequest request)
+        public void AddPresentationHintHandler<THint>(Func<THint, bool> action)
+            where THint : MvxPresentationHint
+        {
+            
+        }
+
+        public override async void Show(MvxViewModelRequest request)
         {
             if (await TryShowPage(request))
                 return;
