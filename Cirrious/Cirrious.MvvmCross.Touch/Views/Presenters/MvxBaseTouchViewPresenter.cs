@@ -7,19 +7,22 @@
 
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views.Presenters
 {
     public class MvxBaseTouchViewPresenter
-        : IMvxTouchViewPresenter
+        : MvxViewPresenter, IMvxTouchViewPresenter
     {
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
+            if (HandlePresentationChange(hint)) return;
+
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
