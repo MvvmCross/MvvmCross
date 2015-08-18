@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Views {
             _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
-        public virtual bool HandlePresentationChange(MvxPresentationHint hint)
+        protected bool HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, bool> handler;
 
