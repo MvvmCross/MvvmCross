@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Views;
 namespace Cirrious.MvvmCross.WindowsUWP.Views
 {
     public class MvxWindowsViewPresenter
-        : IMvxWindowsViewPresenter
+        : MvxViewPresenter, IMvxWindowsViewPresenter
     {
         private readonly IMvxWindowsFrame _rootFrame;
 
@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
             _rootFrame = rootFrame;
         }
 
-        public virtual void Show(MvxViewModelRequest request)
+        public override void Show(MvxViewModelRequest request)
         {
             try
             {
@@ -43,12 +43,13 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
             }
         }
 
-        public virtual void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
-            var presentationHint = hint as MvxClosePresentationHint;
-            if (presentationHint != null)
+            if (base.HandlePresentationChange(hint)) return;
+
+            if (hint is MvxClosePresentationHint)
             {
-                Close(presentationHint.ViewModelToClose);
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
