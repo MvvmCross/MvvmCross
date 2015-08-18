@@ -82,22 +82,21 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
             try
             {
-                var constExpr = memberExpr.Expression as ConstantExpression;
-                if (constExpr != null)
-                {
-                    var property = memberExpr.Member as PropertyInfo;
-                    if (property != null)
-                    {
-                        var constant = property.GetValue(constExpr.Value);
-                        return Expression.Constant(constant);
-                    }
+                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression) as ConstantExpression;
+                object value = constExpr != null ? constExpr.Value : null;
 
-                    var field = memberExpr.Member as FieldInfo;
-                    if (field != null)
-                    {
-                        var constant = field.GetValue(constExpr.Value);
-                        return Expression.Constant(constant);
-                    }
+                var property = memberExpr.Member as PropertyInfo;
+                if (property != null)
+                {
+                    var constant = property.GetValue(value);
+                    return Expression.Constant(constant);
+                }
+
+                var field = memberExpr.Member as FieldInfo;
+                if (field != null)
+                {
+                    var constant = field.GetValue(value);
+                    return Expression.Constant(constant);
                 }
             }
             catch
