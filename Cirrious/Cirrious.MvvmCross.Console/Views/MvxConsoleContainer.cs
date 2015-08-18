@@ -40,6 +40,8 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
+            if (HandlePresentationChange(hint)) return;
+
             if (hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
