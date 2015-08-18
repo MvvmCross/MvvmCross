@@ -56,6 +56,8 @@
 			target="src\Cirrious.MvvmCross.WindowsPhone" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.WindowsCommon" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsUWP\**\*.cs" 
+			target="src\Cirrious.MvvmCross.WindowsUWP" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Droid" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Touch\**\*.cs" 
@@ -95,6 +97,11 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win81+wpa81" />
 
+		<!-- uap -->
+		<file src="..\bin\Release\Mvx\WindowsUWP\Cirrious.MvvmCross.WindowsUWP.*" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\uap" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.*"
 			exclude="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
