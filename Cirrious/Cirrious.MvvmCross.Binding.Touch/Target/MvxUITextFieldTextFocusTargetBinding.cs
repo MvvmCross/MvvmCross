@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        public FocusTextBinding(object target)
+        public MvxUITextFieldTextFocusTargetBinding(object target)
             : base(target)
         {
         }
