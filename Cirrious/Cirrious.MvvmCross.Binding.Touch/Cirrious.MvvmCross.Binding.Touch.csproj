@@ -33,7 +33,7 @@
     <ConsolePause>False</ConsolePause>
     <DefineConstants>MONOTOUCH</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -52,6 +52,7 @@
     <Compile Include="Target\MvxUILabelTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISearchBarTextTargetBinding.cs" />
     <Compile Include="Target\MvxUITextFieldShouldReturnTargetBinding.cs" />
+    <Compile Include="Target\MvxUITextFieldTextFocusTargetBinding.cs" />
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxUISwitchOnTargetBinding.cs" />

@@ -13,7 +13,7 @@ using Cirrious.MvvmCross.Binding.Droid.Target;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxTextFocusTargetBinding
+    public class MvxTextViewFocusTargetBinding
         : MvxAndroidTargetBinding
     {
         private bool _subscribed;
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        public FocusTextBinding(object target)
+        public MvxTextViewFocusTargetBinding(object target)
             : base(target)
         {
         }
