@@ -99,6 +99,7 @@
 
 		<!-- uap -->
 		<file src="..\bin\Release\Mvx\WindowsUWP\Cirrious.MvvmCross.WindowsUWP.*" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\Cirrious.MvvmCross.WindowsUWP\Properties\Cirrious.MvvmCross.WindowsUWP.rd.xml" target="lib\uap\Cirrious.MvvmCross.WindowsUWP\Properties" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\uap" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\uap" />
 		
