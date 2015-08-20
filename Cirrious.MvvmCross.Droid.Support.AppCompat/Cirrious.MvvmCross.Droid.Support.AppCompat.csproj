@@ -85,6 +85,7 @@
     <Compile Include="MvxCachingFragmentActivityCompat.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
+    <Compile Include="MvxSplashScreenCompatActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
