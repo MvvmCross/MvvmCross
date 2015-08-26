@@ -404,7 +404,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.WindowsU
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{ADECD310-4AD0-4EAF-9C97-23A7095229E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossCodeAnalysis", "CodeAnalysis\MvvmCrossCodeAnalysis.csproj", "{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossCodeAnalysis", "CodeAnalysis\MvvmCross.CodeAnalysis\MvvmCrossCodeAnalysis.csproj", "{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
