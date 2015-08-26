@@ -46,6 +46,8 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
                 var baseType = syntax?.BaseList.Types.First();
 
+                if (baseType?.Type is GenericNameSyntax) return;
+
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         Rule
