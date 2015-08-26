@@ -406,6 +406,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossCodeAnalysis", "CodeAnalysis\MvvmCross.CodeAnalysis\MvvmCrossCodeAnalysis.csproj", "{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.CodeAnalysis.Vsix", "CodeAnalysis\MvvmCross.CodeAnalysis.Vsix\MvvmCross.CodeAnalysis.Vsix.csproj", "{D891C51D-4E60-41C6-8F0D-57284CED94F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3548,6 +3550,34 @@ Global
 		{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}.Release|x64.Build.0 = Release|Any CPU
 		{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}.Release|x86.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|x64.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|ARM.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|iPhone.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|x64.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|x64.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3747,6 +3777,7 @@ Global
 		{7ED7FE11-0B29-42EF-9D7E-1828282881FD} = {91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}
 		{C7E12CDD-6370-426A-8907-0ED6AF353F79} = {7ED7FE11-0B29-42EF-9D7E-1828282881FD}
 		{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6} = {ADECD310-4AD0-4EAF-9C97-23A7095229E6}
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4} = {ADECD310-4AD0-4EAF-9C97-23A7095229E6}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Cirrious\Cirrious.MvvmCross.Droid.Maps\Cirrious.MvvmCross.Droid.Maps.csproj
