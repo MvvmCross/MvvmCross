@@ -59,6 +59,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat.Widget
                 {
                     value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
+                    value.DropDownItemTemplateId = existing.DropDownItemTemplateId;
                 }
 
                 base.Adapter = value;
