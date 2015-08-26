@@ -47,13 +47,14 @@
     <StartArguments>/rootsuffix Roslyn</StartArguments>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.CodeAnalysis\MvvmCrossCodeAnalysis.csproj">
-      <Project>{c8f9f6a5-4083-4c51-b84c-8ac1f27a8aa6}</Project>
+      <Project>{C8F9F6A5-4083-4C51-B84C-8AC1F27A8AA6}</Project>
       <Name>MvvmCrossCodeAnalysis</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
