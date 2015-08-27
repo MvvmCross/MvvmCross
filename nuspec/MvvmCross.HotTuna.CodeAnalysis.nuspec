@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross</description>
-		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone roslyn</tags>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone roslyn analyzers</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
 		</dependencies>
