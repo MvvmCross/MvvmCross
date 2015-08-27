@@ -229,7 +229,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            var shouldReplaceCurrentFragment = forceReplaceFragment || ShouldReplaceCurrentFragment(contentId, tag);
+            var shouldReplaceCurrentFragment = forceReplaceFragment || ShouldReplaceCurrentFragment(contentId, fragInfo, currentFragment, bundle);
             if (!shouldReplaceCurrentFragment)
                 return;
 
@@ -244,6 +244,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             // if we haven't already created a Fragment, do it now
             if (fragInfo.CachedFragment == null || shouldReplaceCurrentFragment)
             {
+                if (shouldReplaceCurrentFragment)
+                {
+                    var viewModelCache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
+                    viewModelCache.GetAndClear(fragInfo.ViewModelType);
+                }
+
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
 
@@ -262,16 +268,34 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             SupportFragmentManager.ExecutePendingTransactions();
         }
 
-        private bool ShouldReplaceCurrentFragment(int contentId, string tag)
+        private bool ShouldReplaceCurrentFragment(int contentId, FragmentInfo fragment, string currentTag, Bundle replacementBundle)
         {
-            string currentFragment;
-            _currentFragments.TryGetValue(contentId, out currentFragment);
+            if (fragment == null || fragment.CachedFragment == null) return true;
+            if (currentTag == fragment.Tag)
+            {
+                var oldBundle = fragment.CachedFragment.Arguments;
+                if (oldBundle == null) return true;
 
-            return ShouldReplaceFragment(contentId, currentFragment, tag);
-        }
+                var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
 
-        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)  {
-            return currentTag != replacementTag;
+                var json = oldBundle.GetString("__mvxViewModelRequest");
+                var oldRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
+                if (oldRequest == null) return true;
+
+                json = replacementBundle.GetString("__mvxViewModelRequest");
+                var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
+                if (replacementRequest == null) return true;
+
+                var areParametersEqual = ((oldRequest.ParameterValues == replacementRequest.ParameterValues) ||
+             (oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
+             !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
+
+                return !areParametersEqual;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
