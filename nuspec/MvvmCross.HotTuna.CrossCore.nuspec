@@ -31,9 +31,15 @@
 			<group targetFramework ="MonoTouch">
 				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta2" />
 			</group>
+			<group targetFramework ="Xamarin.iOS">		
+-				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />		
+ 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta2" />
 			</group>
+			<group targetFramework ="uap">		
+-				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta1" />		
+ 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta2" />
 			</group>
