@@ -20,26 +20,16 @@ namespace Cirrious.MvvmCross.Plugins.Network.Droid
     {
         private const int ReachableTimeoutInMilliseconds = 5000;
 
-        private ConnectivityManager _connectivityManager;
-
-        protected ConnectivityManager ConnectivityManager
-        {
-            get
-            {
-                _connectivityManager = _connectivityManager ?? (ConnectivityManager)(Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService));
-                return _connectivityManager;
-            }
-        }
-
         protected bool IsConnected
         {
             get
             {
                 try
                 {
-                    var activeConnection = ConnectivityManager.ActiveNetworkInfo;
-
-                    return ((activeConnection != null) && activeConnection.IsConnected);
+                    using (var connectivityManager = (ConnectivityManager)(Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService)))
+                    using (var activeConnection = connectivityManager.ActiveNetworkInfo) {
+                        return activeConnection != null && activeConnection.IsConnected;
+                    }
                 }
                 catch (Exception e)
                 {
