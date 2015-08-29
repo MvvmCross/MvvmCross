@@ -50,6 +50,7 @@
     <Compile Include="Views\MvxEventSourceTableViewController.cs" />
     <Compile Include="Views\MvxEventSourceViewController.cs" />
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
+    <Compile Include="Views\MvxEventSourcePageViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
