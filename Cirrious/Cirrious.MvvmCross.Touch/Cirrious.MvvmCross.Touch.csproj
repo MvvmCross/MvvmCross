@@ -77,6 +77,7 @@
     <Compile Include="Views\MvxCollectionViewController.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
+    <Compile Include="Views\MvxPageViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
