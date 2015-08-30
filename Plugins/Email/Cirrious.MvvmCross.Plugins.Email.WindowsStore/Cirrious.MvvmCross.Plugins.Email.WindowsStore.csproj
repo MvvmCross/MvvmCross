@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
       <Project>{e299a991-1d9f-47c0-9b65-5e7632372fa5}</Project>
       <Name>Cirrious.CrossCore.WindowsStore</Name>
     </ProjectReference>
