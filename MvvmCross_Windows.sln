@@ -43,179 +43,177 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Test", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{2D831317-874B-433B-895C-F2D3B41553EB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cirrious", "Cirrious", "{3D5C0131-E5A9-4BE9-AF81-9A64587A3837}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json", "Json", "{B244E83C-45F8-49B7-8251-BEAE55313D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Json", "Plugins\Cirrious\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj", "{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Json", "Plugins\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj", "{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{1048EFD2-EE2E-4791-B3BC-C309CA95BABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj", "{157A8846-529E-4549-84EA-7FC8BAFBC25A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email", "Plugins\Email\Cirrious.MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj", "{157A8846-529E-4549-84EA-7FC8BAFBC25A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsPhone", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsPhone\Cirrious.MvvmCross.Plugins.Email.WindowsPhone.csproj", "{9F3BF260-B186-4F60-8C53-D2166A61E617}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsPhone", "Plugins\Email\Cirrious.MvvmCross.Plugins.Email.WindowsPhone\Cirrious.MvvmCross.Plugins.Email.WindowsPhone.csproj", "{9F3BF260-B186-4F60-8C53-D2166A61E617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsStore", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsStore\Cirrious.MvvmCross.Plugins.Email.WindowsStore.csproj", "{834698FB-7AD3-4E65-BF16-0C0C2E932FC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsStore", "Plugins\Email\Cirrious.MvvmCross.Plugins.Email.WindowsStore\Cirrious.MvvmCross.Plugins.Email.WindowsStore.csproj", "{834698FB-7AD3-4E65-BF16-0C0C2E932FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.Wpf", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\Cirrious.MvvmCross.Plugins.Email.Wpf.csproj", "{46322A44-23E0-4969-8D08-D59AC92C9A24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.Wpf", "Plugins\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\Cirrious.MvvmCross.Plugins.Email.Wpf.csproj", "{46322A44-23E0-4969-8D08-D59AC92C9A24}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JsonLocalisation", "JsonLocalisation", "{25C0C3FF-9F55-4460-AC59-1188986412B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.JsonLocalisation", "Plugins\Cirrious\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj", "{71D719FA-95B0-4A05-B064-AB8D0B7085DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.JsonLocalisation", "Plugins\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation.csproj", "{71D719FA-95B0-4A05-B064-AB8D0B7085DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Color", "Color", "{344AE54B-8825-4783-8DDC-87CCF3F8FC3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj", "{5C48D946-D083-4271-819E-DBFA2016853B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color\Cirrious.MvvmCross.Plugins.Color.csproj", "{5C48D946-D083-4271-819E-DBFA2016853B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsPhone", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.csproj", "{A1818EF2-200D-4445-935C-A8C530FF5F32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsPhone", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color.WindowsPhone\Cirrious.MvvmCross.Plugins.Color.WindowsPhone.csproj", "{A1818EF2-200D-4445-935C-A8C530FF5F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsStore", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.csproj", "{35438CAD-AF22-43A7-9825-C39756FF1D5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsStore", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color.WindowsStore\Cirrious.MvvmCross.Plugins.Color.WindowsStore.csproj", "{35438CAD-AF22-43A7-9825-C39756FF1D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.Wpf", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.csproj", "{0A812ABB-B431-4734-BE99-0FC359C8CA69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.Wpf", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color.Wpf\Cirrious.MvvmCross.Plugins.Color.Wpf.csproj", "{0A812ABB-B431-4734-BE99-0FC359C8CA69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Location", "Location", "{40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location", "Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location\Cirrious.MvvmCross.Plugins.Location.csproj", "{8B0A9E43-E90F-455C-AE56-45BC70429167}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location", "Plugins\Location\Cirrious.MvvmCross.Plugins.Location\Cirrious.MvvmCross.Plugins.Location.csproj", "{8B0A9E43-E90F-455C-AE56-45BC70429167}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsPhone", "Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.csproj", "{E81C5439-C233-48CC-B501-DD7BC7519011}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsPhone", "Plugins\Location\Cirrious.MvvmCross.Plugins.Location.WindowsPhone\Cirrious.MvvmCross.Plugins.Location.WindowsPhone.csproj", "{E81C5439-C233-48CC-B501-DD7BC7519011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsStore", "Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.csproj", "{E3A9B9D5-843D-49E3-8FC6-726DC1D66D6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsStore", "Plugins\Location\Cirrious.MvvmCross.Plugins.Location.WindowsStore\Cirrious.MvvmCross.Plugins.Location.WindowsStore.csproj", "{E3A9B9D5-843D-49E3-8FC6-726DC1D66D6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PictureChooser", "PictureChooser", "{52224BD2-EE60-4C56-A5EF-B3DB493A4CB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.csproj", "{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser", "Plugins\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.csproj", "{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.csproj", "{EEACC2E0-2C9B-47D5-98ED-72D060FAD608}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone", "Plugins\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.csproj", "{EEACC2E0-2C9B-47D5-98ED-72D060FAD608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.csproj", "{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore", "Plugins\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore.csproj", "{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File", "File", "{6A71ABE8-2F48-467E-A331-CF64C2EAC534}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File", "Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj", "{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File", "Plugins\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj", "{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsStore", "Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.csproj", "{C85A5D4F-2B79-45FF-BB92-9C8D96B47FDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsStore", "Plugins\File\Cirrious.MvvmCross.Plugins.File.WindowsStore\Cirrious.MvvmCross.Plugins.File.WindowsStore.csproj", "{C85A5D4F-2B79-45FF-BB92-9C8D96B47FDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsPhone", "Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.csproj", "{E4D36938-4134-40F2-BE9C-F7D350BA5244}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsPhone", "Plugins\File\Cirrious.MvvmCross.Plugins.File.WindowsPhone\Cirrious.MvvmCross.Plugins.File.WindowsPhone.csproj", "{E4D36938-4134-40F2-BE9C-F7D350BA5244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.Wpf", "Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Wpf\Cirrious.MvvmCross.Plugins.File.Wpf.csproj", "{D45AF3AE-EF2E-4424-B5AB-698F1B8092AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.Wpf", "Plugins\File\Cirrious.MvvmCross.Plugins.File.Wpf\Cirrious.MvvmCross.Plugins.File.Wpf.csproj", "{D45AF3AE-EF2E-4424-B5AB-698F1B8092AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebBrowser", "WebBrowser", "{82E80963-C12D-4366-98B9-5A60CF1FD0C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser", "Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj", "{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser", "Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.csproj", "{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone", "Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.csproj", "{CDF639C8-7259-4034-A94F-10E0C99A42AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone", "Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone.csproj", "{CDF639C8-7259-4034-A94F-10E0C99A42AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore", "Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.csproj", "{63FE32E5-A833-4A7B-971E-A2C901C03B69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore", "Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore.csproj", "{63FE32E5-A833-4A7B-971E-A2C901C03B69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{8643DCDB-4915-4901-88FD-FE8625293617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Bookmarks", "Plugins\Cirrious\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.csproj", "{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Bookmarks", "Plugins\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.csproj", "{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone", "Plugins\Cirrious\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.csproj", "{6FF7C975-3E8C-4503-BF44-E4EB5A32E165}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone", "Plugins\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.csproj", "{6FF7C975-3E8C-4503-BF44-E4EB5A32E165}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResourceLoader", "ResourceLoader", "{9752DF77-3BE6-4739-BFE0-32C67800E3B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore", "Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.csproj", "{7002C876-9CC0-49A0-8258-BAEC96E9DA38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore", "Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.csproj", "{7002C876-9CC0-49A0-8258-BAEC96E9DA38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader", "Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj", "{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader", "Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj", "{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone", "Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.csproj", "{9532972F-9B61-4191-918D-4370576D0C4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone", "Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.csproj", "{9532972F-9B61-4191-918D-4370576D0C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf", "Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.csproj", "{DD2571F4-5610-4F27-B6C3-39D4C32AD6CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf", "Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.csproj", "{DD2571F4-5610-4F27-B6C3-39D4C32AD6CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneCall", "PhoneCall", "{B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.csproj", "{04724CDA-A7C7-4F07-98C7-B0D8C7EB084B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone", "Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone.csproj", "{04724CDA-A7C7-4F07-98C7-B0D8C7EB084B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj", "{97C01AFB-C43A-4B75-A456-079706A2F888}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall", "Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.csproj", "{97C01AFB-C43A-4B75-A456-079706A2F888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.csproj", "{693ABE25-5CF0-405B-84FD-0A7CEC7ED2EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore", "Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore.csproj", "{693ABE25-5CF0-405B-84FD-0A7CEC7ED2EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThreadUtils", "ThreadUtils", "{C1FEF24B-A259-4DF0-B0D7-48C088FD7292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone", "Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.csproj", "{1D94D285-2DA7-4307-A0FB-F32ABC3EE509}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone", "Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone.csproj", "{1D94D285-2DA7-4307-A0FB-F32ABC3EE509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils", "Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj", "{9EA4F024-4966-42B8-82C0-A2023AD52F64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils", "Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj", "{9EA4F024-4966-42B8-82C0-A2023AD52F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore", "Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.csproj", "{5CDF69FB-C5B8-4809-B952-D9716386B266}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore", "Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.csproj", "{5CDF69FB-C5B8-4809-B952-D9716386B266}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SoundEffects", "SoundEffects", "{C535D80B-BACF-4937-B877-C044F87C2585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.SoundEffects", "Plugins\Cirrious\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.csproj", "{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.SoundEffects", "Plugins\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.csproj", "{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone", "Plugins\Cirrious\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.csproj", "{FE827DDB-53E1-41B1-AC0F-E3FF51DBF743}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone", "Plugins\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.csproj", "{FE827DDB-53E1-41B1-AC0F-E3FF51DBF743}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DownloadCache", "DownloadCache", "{CCB39BA0-77EE-4364-AB7A-203597A17C29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.DownloadCache", "Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj", "{60A80EB8-2056-4771-8600-03A8DA417CFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.DownloadCache", "Plugins\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.csproj", "{60A80EB8-2056-4771-8600-03A8DA417CFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visibility", "Visibility", "{E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj", "{0D471B62-CB8E-4814-81A6-4C0B774A8825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility\Cirrious.MvvmCross.Plugins.Visibility.csproj", "{0D471B62-CB8E-4814-81A6-4C0B774A8825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.Console", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\Cirrious.MvvmCross.Plugins.Visibility.Console.csproj", "{5A51547F-3B68-4CC8-AD5A-39E1AD1EF93C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.Console", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\Cirrious.MvvmCross.Plugins.Visibility.Console.csproj", "{5A51547F-3B68-4CC8-AD5A-39E1AD1EF93C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.csproj", "{64C85398-A083-4132-96F2-C703948262EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone.csproj", "{64C85398-A083-4132-96F2-C703948262EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsStore", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj", "{4413E9E5-7A45-41CD-BEF8-0DFB3FB11C6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsStore", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore.csproj", "{4413E9E5-7A45-41CD-BEF8-0DFB3FB11C6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.Wpf", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Wpf\Cirrious.MvvmCross.Plugins.Visibility.Wpf.csproj", "{0B7F2A10-627B-4F94-A87C-631FD9AC337C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.Wpf", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Wpf\Cirrious.MvvmCross.Plugins.Visibility.Wpf.csproj", "{0B7F2A10-627B-4F94-A87C-631FD9AC337C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Share", "Share", "{F23F3A52-A39D-4B05-9183-09C053306DC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share", "Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj", "{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share", "Plugins\Share\Cirrious.MvvmCross.Plugins.Share\Cirrious.MvvmCross.Plugins.Share.csproj", "{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsPhone", "Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.csproj", "{A458DACC-F1E2-4644-A6AB-5D30BA1E3224}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsPhone", "Plugins\Share\Cirrious.MvvmCross.Plugins.Share.WindowsPhone\Cirrious.MvvmCross.Plugins.Share.WindowsPhone.csproj", "{A458DACC-F1E2-4644-A6AB-5D30BA1E3224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsStore", "Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.csproj", "{05A605C5-2AE3-4569-AAD8-6AEDBE5C7014}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsStore", "Plugins\Share\Cirrious.MvvmCross.Plugins.Share.WindowsStore\Cirrious.MvvmCross.Plugins.Share.WindowsStore.csproj", "{05A605C5-2AE3-4569-AAD8-6AEDBE5C7014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.Wpf", "Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.csproj", "{EEF85683-7D06-4E12-AB05-03A3A89C0287}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.Wpf", "Plugins\Share\Cirrious.MvvmCross.Plugins.Share.Wpf\Cirrious.MvvmCross.Plugins.Share.Wpf.csproj", "{EEF85683-7D06-4E12-AB05-03A3A89C0287}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqlite", "Sqlite", "{AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.csproj", "{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.csproj", "{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.csproj", "{654E3C62-163F-430C-AE77-75E5B569722A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.csproj", "{654E3C62-163F-430C-AE77-75E5B569722A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community.csproj", "{E043D17C-221A-41CB-BC75-1D48D5AD0B11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community\Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone.Community.csproj", "{E043D17C-221A-41CB-BC75-1D48D5AD0B11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.Console", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Console\Cirrious.MvvmCross.Plugins.Sqlite.Console.csproj", "{BC3B3B7F-F2A9-4310-B310-A80948F4BF72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.Console", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Console\Cirrious.MvvmCross.Plugins.Sqlite.Console.csproj", "{BC3B3B7F-F2A9-4310-B310-A80948F4BF72}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messenger", "Messenger", "{E8E0AFCB-F5C6-4CBF-9640-FB96E1023169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger", "Plugins\Cirrious\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj", "{299C250C-50E4-4522-AADC-C31B9AAC62D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger", "Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger\Cirrious.MvvmCross.Plugins.Messenger.csproj", "{299C250C-50E4-4522-AADC-C31B9AAC62D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger.Test", "Plugins\Cirrious\Messenger\Cirrious.MvvmCross.Plugins.Messenger.Test\Cirrious.MvvmCross.Plugins.Messenger.Test.csproj", "{4889EE89-CF57-4AC3-AB9D-3049ED34803C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Messenger.Test", "Plugins\Messenger\Cirrious.MvvmCross.Plugins.Messenger.Test\Cirrious.MvvmCross.Plugins.Messenger.Test.csproj", "{4889EE89-CF57-4AC3-AB9D-3049ED34803C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accelerometer", "Accelerometer", "{AF5472BE-1DD9-48D7-8518-69E6A07CB317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer", "Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.csproj", "{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer", "Plugins\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.csproj", "{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone", "Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.csproj", "{DA0D299A-C35B-4CF7-8DC7-C0D9E6CCED4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone", "Plugins\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone.csproj", "{DA0D299A-C35B-4CF7-8DC7-C0D9E6CCED4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore", "Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.csproj", "{87C31E67-3DED-43A7-982D-B108C45CA0AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore", "Plugins\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore.csproj", "{87C31E67-3DED-43A7-982D-B108C45CA0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.Wpf", "Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.csproj", "{BFD90EC2-CBDA-4198-81DA-1A13AD2803E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.Wpf", "Plugins\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf.csproj", "{BFD90EC2-CBDA-4198-81DA-1A13AD2803E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Network", "Network", "{79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network", "plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj", "{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj", "{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reflection", "Reflection", "{4AB69B77-BA47-433D-A729-9A1D2D059F0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.csproj", "{22648A57-3D94-4604-A238-B0B92BDDC3A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.csproj", "{22648A57-3D94-4604-A238-B0B92BDDC3A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Console", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\Cirrious.MvvmCross.Plugins.ReflectionEx.Console.csproj", "{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Console", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\Cirrious.MvvmCross.Plugins.ReflectionEx.Console.csproj", "{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.csproj", "{A1212B48-4142-4B49-9FBC-DC68CB6931E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.csproj", "{A1212B48-4142-4B49-9FBC-DC68CB6931E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.csproj", "{70423584-026A-4F66-82D2-943D7E903007}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.csproj", "{70423584-026A-4F66-82D2-943D7E903007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.csproj", "{73E38ABA-14A4-4A83-BAA0-D7139D459A5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.csproj", "{73E38ABA-14A4-4A83-BAA0-D7139D459A5A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "All", "All", "{072236A7-C789-423A-8277-95AFA7A940B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.All", "Plugins\Cirrious\All\Cirrious.MvvmCross.Plugins.All\Cirrious.MvvmCross.Plugins.All.csproj", "{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.All", "Plugins\All\Cirrious.MvvmCross.Plugins.All\Cirrious.MvvmCross.Plugins.All.csproj", "{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossUI", "CrossUI", "{E9054CC5-D21D-4DD2-968A-37A20F486BC2}"
 EndProject
@@ -237,41 +235,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2C0F302B-4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.Test", "CrossCore\Test\Cirrious.CrossCore.Test\Cirrious.CrossCore.Test.csproj", "{666EB95D-7CD8-48B6-A2F8-395DECC84140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsStore", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.Store\Cirrious.MvvmCross.Plugins.Network.WindowsStore.csproj", "{2775EDBB-090E-43DC-8D16-2B8288169ACA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsStore", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network.Store\Cirrious.MvvmCross.Plugins.Network.WindowsStore.csproj", "{2775EDBB-090E-43DC-8D16-2B8288169ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsPhone", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.Phone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.csproj", "{B98681D2-2FB9-4F57-AD57-8B2962BB9A54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsPhone", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network.Phone\Cirrious.MvvmCross.Plugins.Network.WindowsPhone.csproj", "{B98681D2-2FB9-4F57-AD57-8B2962BB9A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.Test", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.Test\Cirrious.MvvmCross.Plugins.Network.Test.csproj", "{73A0F51C-FCF4-4C1A-92BF-4EF018E18DC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.Test", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network.Test\Cirrious.MvvmCross.Plugins.Network.Test.csproj", "{73A0F51C-FCF4-4C1A-92BF-4EF018E18DC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.BindingEx.WindowsStore", "Cirrious\Cirrious.MvvmCross.BindingEx.WindowsStore\Cirrious.MvvmCross.BindingEx.WindowsStore.csproj", "{907B390D-CD44-4B45-8B78-C790E08E4C72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.BindingEx.WindowsPhone", "Cirrious\Cirrious.MvvmCross.BindingEx.WindowsPhone\Cirrious.MvvmCross.BindingEx.WindowsPhone.csproj", "{7F3E7612-59B6-4E5B-B300-755DA6647F22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.Wpf", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.csproj", "{92D6D14F-725A-45D1-9711-C81F37C8DF16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.Wpf", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network.Wpf\Cirrious.MvvmCross.Plugins.Network.Wpf.csproj", "{92D6D14F-725A-45D1-9711-C81F37C8DF16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MethodBinding", "MethodBinding", "{A57997D5-EB28-4556-88A7-1BE5913B5C5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.MethodBinding", "Plugins\Cirrious\MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding.csproj", "{F681045A-852F-4A2D-953D-4DD9B75A2F93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.MethodBinding", "Plugins\MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding.csproj", "{F681045A-852F-4A2D-953D-4DD9B75A2F93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FieldBinding", "FieldBinding", "{2EC3BA42-0204-48F2-9489-1704A00E141C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.FieldBinding", "Plugins\Cirrious\FieldBinding\Cirrious.MvvmCross.Plugins.FieldBinding\Cirrious.MvvmCross.Plugins.FieldBinding.csproj", "{C1B5F119-966D-4286-8F29-40CFDDB5390A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.FieldBinding", "Plugins\FieldBinding\Cirrious.MvvmCross.Plugins.FieldBinding\Cirrious.MvvmCross.Plugins.FieldBinding.csproj", "{C1B5F119-966D-4286-8F29-40CFDDB5390A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.FieldBinding", "Plugins\Cirrious\FieldBinding\Cirrious.MvvmCross.FieldBinding\Cirrious.MvvmCross.FieldBinding.csproj", "{64FAF565-E6CD-4C86-B965-DF228DEA61EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.FieldBinding", "Plugins\FieldBinding\Cirrious.MvvmCross.FieldBinding\Cirrious.MvvmCross.FieldBinding.csproj", "{64FAF565-E6CD-4C86-B965-DF228DEA61EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.BindingEx.Wpf", "Cirrious\Cirrious.MvvmCross.BindingEx.Wpf\Cirrious.MvvmCross.BindingEx.Wpf.csproj", "{11674474-0123-4D7D-9F01-EBAA8BD039BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.Wpf", "CrossCore\Cirrious.CrossCore.Wpf\Cirrious.CrossCore.Wpf.csproj", "{3688D6FC-E7F4-485F-8B27-96C0A8C7EAED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.Wpf", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Wpf\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.csproj", "{3B83CD5D-F846-41AF-A68D-FC715EAA81FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.Wpf", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.Wpf\Cirrious.MvvmCross.Plugins.Sqlite.Wpf.csproj", "{3B83CD5D-F846-41AF-A68D-FC715EAA81FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.Test", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.Test\Cirrious.MvvmCross.Plugins.Color.Test.csproj", "{B61DC1C8-0641-4FD2-AD8C-8A179CEE136E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.Test", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color.Test\Cirrious.MvvmCross.Plugins.Color.Test.csproj", "{B61DC1C8-0641-4FD2-AD8C-8A179CEE136E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf", "Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf\Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf.csproj", "{DDCB32B1-26FC-4C62-9D2F-2AE0C6BAF4AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf", "Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf\Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf.csproj", "{DDCB32B1-26FC-4C62-9D2F-2AE0C6BAF4AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mac", "Mac", "{E6E81160-7237-455C-906C-1AE047E36FCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.Wpf", "Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.Wpf\Cirrious.MvvmCross.Plugins.Location.Wpf.csproj", "{5A8E521B-4080-4DC1-A577-BAF21AE4AB28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.Wpf", "Plugins\Location\Cirrious.MvvmCross.Plugins.Location.Wpf\Cirrious.MvvmCross.Plugins.Location.Wpf.csproj", "{5A8E521B-4080-4DC1-A577-BAF21AE4AB28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsCommon", "WindowsCommon", "{8FEB7144-5A9C-49DB-807A-6B6F3427757E}"
 EndProject
@@ -279,35 +277,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.WindowsC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.WindowsCommon", "Cirrious\Cirrious.MvvmCross.WindowsCommon\Cirrious.MvvmCross.WindowsCommon.csproj", "{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsCommon", "Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsCommon\Cirrious.MvvmCross.Plugins.File.WindowsCommon.csproj", "{7F791CA6-B6A8-4B10-A5CA-F8CCF1E80C6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.File.WindowsCommon", "Plugins\File\Cirrious.MvvmCross.Plugins.File.WindowsCommon\Cirrious.MvvmCross.Plugins.File.WindowsCommon.csproj", "{7F791CA6-B6A8-4B10-A5CA-F8CCF1E80C6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon", "Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.csproj", "{3EC85E5B-0D47-43C9-8B55-5C1D1031360C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon", "Plugins\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.csproj", "{3EC85E5B-0D47-43C9-8B55-5C1D1031360C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon", "Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon.csproj", "{BA60B7DF-9009-4FBD-B361-F7CFAEB96C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon", "Plugins\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon.csproj", "{BA60B7DF-9009-4FBD-B361-F7CFAEB96C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsCommon", "Plugins\Cirrious\Color\Cirrious.MvvmCross.Plugins.Color.WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.csproj", "{22B51F2E-5E0F-440D-ABF3-9C8F137542E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Color.WindowsCommon", "Plugins\Color\Cirrious.MvvmCross.Plugins.Color.WindowsCommon\Cirrious.MvvmCross.Plugins.Color.WindowsCommon.csproj", "{22B51F2E-5E0F-440D-ABF3-9C8F137542E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsCommon", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsCommon\Cirrious.MvvmCross.Plugins.Email.WindowsCommon.csproj", "{989C0E47-F2FF-4729-A9A4-ADAC6272EF03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.WindowsCommon", "Plugins\Email\Cirrious.MvvmCross.Plugins.Email.WindowsCommon\Cirrious.MvvmCross.Plugins.Email.WindowsCommon.csproj", "{989C0E47-F2FF-4729-A9A4-ADAC6272EF03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsCommon", "Plugins\Cirrious\Location\Cirrious.MvvmCross.Plugins.Location.WindowsCommon\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.csproj", "{6E7591E8-8651-40CE-9A62-4F835A63ABA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Location.WindowsCommon", "Plugins\Location\Cirrious.MvvmCross.Plugins.Location.WindowsCommon\Cirrious.MvvmCross.Plugins.Location.WindowsCommon.csproj", "{6E7591E8-8651-40CE-9A62-4F835A63ABA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsCommon", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.WindowsCommon\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.csproj", "{22797A56-C5C4-4E80-9B8C-E0549E25037D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.WindowsCommon", "Plugins\Network\Cirrious.MvvmCross.Plugins.Network.WindowsCommon\Cirrious.MvvmCross.Plugins.Network.WindowsCommon.csproj", "{22797A56-C5C4-4E80-9B8C-E0549E25037D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore", "Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore", "Plugins\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore", "Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore", "Plugins\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon", "Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.csproj", "{E846ECBD-C585-4F6F-915C-7A6227FC95DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon", "Plugins\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.csproj", "{E846ECBD-C585-4F6F-915C-7A6227FC95DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsCommon", "Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsCommon\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.csproj", "{894CC298-956D-490A-B964-C62D692BC847}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Share.WindowsCommon", "Plugins\Share\Cirrious.MvvmCross.Plugins.Share.WindowsCommon\Cirrious.MvvmCross.Plugins.Share.WindowsCommon.csproj", "{894CC298-956D-490A-B964-C62D692BC847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon", "Plugins\Cirrious\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon.csproj", "{362E1D78-8248-4ED3-840D-102DAD67996E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon", "Plugins\ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon.csproj", "{362E1D78-8248-4ED3-840D-102DAD67996E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon", "Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon.csproj", "{FBC07387-3560-471C-B0DF-E519F3ABFA07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon", "Plugins\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon.csproj", "{FBC07387-3560-471C-B0DF-E519F3ABFA07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon", "Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.csproj", "{81C8EA56-1280-4B79-AF02-FAB36A155359}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon", "Plugins\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon.csproj", "{81C8EA56-1280-4B79-AF02-FAB36A155359}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon", "Plugins\Cirrious\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.csproj", "{E484087C-CB2B-453E-A696-2B4407A100F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon", "Plugins\Sqlite\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon.csproj", "{E484087C-CB2B-453E-A696-2B4407A100F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E2863BF1-A62F-4E44-8322-AC010E8A85C4}"
 	ProjectSection(SolutionItems) = preProject
@@ -2537,92 +2535,91 @@ Global
 		{2F41D56E-B1CE-4273-97E5-8835479C5A89} = {79041957-842C-4BD9-92C8-B380737E76AE}
 		{8E788346-A72B-4939-9D95-A44AC5F46D9D} = {79041957-842C-4BD9-92C8-B380737E76AE}
 		{1C4B1284-5B72-4ADB-AC5B-739F778233BD} = {79041957-842C-4BD9-92C8-B380737E76AE}
-		{3D5C0131-E5A9-4BE9-AF81-9A64587A3837} = {2D831317-874B-433B-895C-F2D3B41553EB}
-		{B244E83C-45F8-49B7-8251-BEAE55313D19} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{B244E83C-45F8-49B7-8251-BEAE55313D19} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC} = {B244E83C-45F8-49B7-8251-BEAE55313D19}
-		{1048EFD2-EE2E-4791-B3BC-C309CA95BABE} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{1048EFD2-EE2E-4791-B3BC-C309CA95BABE} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{157A8846-529E-4549-84EA-7FC8BAFBC25A} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{9F3BF260-B186-4F60-8C53-D2166A61E617} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{834698FB-7AD3-4E65-BF16-0C0C2E932FC4} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{46322A44-23E0-4969-8D08-D59AC92C9A24} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
-		{25C0C3FF-9F55-4460-AC59-1188986412B8} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{25C0C3FF-9F55-4460-AC59-1188986412B8} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{71D719FA-95B0-4A05-B064-AB8D0B7085DF} = {25C0C3FF-9F55-4460-AC59-1188986412B8}
-		{344AE54B-8825-4783-8DDC-87CCF3F8FC3C} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{344AE54B-8825-4783-8DDC-87CCF3F8FC3C} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{5C48D946-D083-4271-819E-DBFA2016853B} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}
 		{A1818EF2-200D-4445-935C-A8C530FF5F32} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}
 		{35438CAD-AF22-43A7-9825-C39756FF1D5F} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}
 		{0A812ABB-B431-4734-BE99-0FC359C8CA69} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}
-		{40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{8B0A9E43-E90F-455C-AE56-45BC70429167} = {40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF}
 		{E81C5439-C233-48CC-B501-DD7BC7519011} = {40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF}
 		{E3A9B9D5-843D-49E3-8FC6-726DC1D66D6C} = {40D96E8D-E3E3-48CE-B222-2F0EE0EEECAF}
-		{52224BD2-EE60-4C56-A5EF-B3DB493A4CB4} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{52224BD2-EE60-4C56-A5EF-B3DB493A4CB4} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2} = {52224BD2-EE60-4C56-A5EF-B3DB493A4CB4}
 		{EEACC2E0-2C9B-47D5-98ED-72D060FAD608} = {52224BD2-EE60-4C56-A5EF-B3DB493A4CB4}
 		{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE} = {52224BD2-EE60-4C56-A5EF-B3DB493A4CB4}
-		{6A71ABE8-2F48-467E-A331-CF64C2EAC534} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{6A71ABE8-2F48-467E-A331-CF64C2EAC534} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{19EE04D6-7EE0-4FE8-AB10-4623D93F165A} = {6A71ABE8-2F48-467E-A331-CF64C2EAC534}
 		{C85A5D4F-2B79-45FF-BB92-9C8D96B47FDD} = {6A71ABE8-2F48-467E-A331-CF64C2EAC534}
 		{E4D36938-4134-40F2-BE9C-F7D350BA5244} = {6A71ABE8-2F48-467E-A331-CF64C2EAC534}
 		{D45AF3AE-EF2E-4424-B5AB-698F1B8092AB} = {6A71ABE8-2F48-467E-A331-CF64C2EAC534}
-		{82E80963-C12D-4366-98B9-5A60CF1FD0C5} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{82E80963-C12D-4366-98B9-5A60CF1FD0C5} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67} = {82E80963-C12D-4366-98B9-5A60CF1FD0C5}
 		{CDF639C8-7259-4034-A94F-10E0C99A42AE} = {82E80963-C12D-4366-98B9-5A60CF1FD0C5}
 		{63FE32E5-A833-4A7B-971E-A2C901C03B69} = {82E80963-C12D-4366-98B9-5A60CF1FD0C5}
-		{8643DCDB-4915-4901-88FD-FE8625293617} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{8643DCDB-4915-4901-88FD-FE8625293617} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4} = {8643DCDB-4915-4901-88FD-FE8625293617}
 		{6FF7C975-3E8C-4503-BF44-E4EB5A32E165} = {8643DCDB-4915-4901-88FD-FE8625293617}
-		{9752DF77-3BE6-4739-BFE0-32C67800E3B2} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{9752DF77-3BE6-4739-BFE0-32C67800E3B2} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{7002C876-9CC0-49A0-8258-BAEC96E9DA38} = {9752DF77-3BE6-4739-BFE0-32C67800E3B2}
 		{75CA1824-C7F3-4827-93ED-E75B2C01CB2C} = {9752DF77-3BE6-4739-BFE0-32C67800E3B2}
 		{9532972F-9B61-4191-918D-4370576D0C4B} = {9752DF77-3BE6-4739-BFE0-32C67800E3B2}
 		{DD2571F4-5610-4F27-B6C3-39D4C32AD6CA} = {9752DF77-3BE6-4739-BFE0-32C67800E3B2}
-		{B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{04724CDA-A7C7-4F07-98C7-B0D8C7EB084B} = {B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713}
 		{97C01AFB-C43A-4B75-A456-079706A2F888} = {B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713}
 		{693ABE25-5CF0-405B-84FD-0A7CEC7ED2EF} = {B51A2C87-E4C3-4D6A-AC0B-BD9BB7C24713}
-		{C1FEF24B-A259-4DF0-B0D7-48C088FD7292} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{C1FEF24B-A259-4DF0-B0D7-48C088FD7292} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{1D94D285-2DA7-4307-A0FB-F32ABC3EE509} = {C1FEF24B-A259-4DF0-B0D7-48C088FD7292}
 		{9EA4F024-4966-42B8-82C0-A2023AD52F64} = {C1FEF24B-A259-4DF0-B0D7-48C088FD7292}
 		{5CDF69FB-C5B8-4809-B952-D9716386B266} = {C1FEF24B-A259-4DF0-B0D7-48C088FD7292}
-		{C535D80B-BACF-4937-B877-C044F87C2585} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{C535D80B-BACF-4937-B877-C044F87C2585} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{9270635A-BFB4-453D-A5D3-DA6FFC6005BE} = {C535D80B-BACF-4937-B877-C044F87C2585}
 		{FE827DDB-53E1-41B1-AC0F-E3FF51DBF743} = {C535D80B-BACF-4937-B877-C044F87C2585}
-		{CCB39BA0-77EE-4364-AB7A-203597A17C29} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{CCB39BA0-77EE-4364-AB7A-203597A17C29} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{60A80EB8-2056-4771-8600-03A8DA417CFB} = {CCB39BA0-77EE-4364-AB7A-203597A17C29}
-		{E02CB35C-E0A9-4DF1-ACA8-8ECE80343225} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{E02CB35C-E0A9-4DF1-ACA8-8ECE80343225} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{0D471B62-CB8E-4814-81A6-4C0B774A8825} = {E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}
 		{5A51547F-3B68-4CC8-AD5A-39E1AD1EF93C} = {E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}
 		{64C85398-A083-4132-96F2-C703948262EF} = {E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}
 		{4413E9E5-7A45-41CD-BEF8-0DFB3FB11C6B} = {E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}
 		{0B7F2A10-627B-4F94-A87C-631FD9AC337C} = {E02CB35C-E0A9-4DF1-ACA8-8ECE80343225}
-		{F23F3A52-A39D-4B05-9183-09C053306DC0} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{F23F3A52-A39D-4B05-9183-09C053306DC0} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{3787C5C0-7A05-44CD-A270-62D6AD03B5E3} = {F23F3A52-A39D-4B05-9183-09C053306DC0}
 		{A458DACC-F1E2-4644-A6AB-5D30BA1E3224} = {F23F3A52-A39D-4B05-9183-09C053306DC0}
 		{05A605C5-2AE3-4569-AAD8-6AEDBE5C7014} = {F23F3A52-A39D-4B05-9183-09C053306DC0}
 		{EEF85683-7D06-4E12-AB05-03A3A89C0287} = {F23F3A52-A39D-4B05-9183-09C053306DC0}
-		{AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{72654B8A-5F78-4BDF-BFBB-057DDDF314F1} = {AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0}
 		{654E3C62-163F-430C-AE77-75E5B569722A} = {AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0}
 		{E043D17C-221A-41CB-BC75-1D48D5AD0B11} = {AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0}
 		{BC3B3B7F-F2A9-4310-B310-A80948F4BF72} = {AEF83F49-67CB-4EF2-8E9D-ABF263BA06C0}
-		{E8E0AFCB-F5C6-4CBF-9640-FB96E1023169} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{E8E0AFCB-F5C6-4CBF-9640-FB96E1023169} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{299C250C-50E4-4522-AADC-C31B9AAC62D3} = {E8E0AFCB-F5C6-4CBF-9640-FB96E1023169}
 		{4889EE89-CF57-4AC3-AB9D-3049ED34803C} = {E8E0AFCB-F5C6-4CBF-9640-FB96E1023169}
-		{AF5472BE-1DD9-48D7-8518-69E6A07CB317} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{AF5472BE-1DD9-48D7-8518-69E6A07CB317} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6} = {AF5472BE-1DD9-48D7-8518-69E6A07CB317}
 		{DA0D299A-C35B-4CF7-8DC7-C0D9E6CCED4B} = {AF5472BE-1DD9-48D7-8518-69E6A07CB317}
 		{87C31E67-3DED-43A7-982D-B108C45CA0AD} = {AF5472BE-1DD9-48D7-8518-69E6A07CB317}
 		{BFD90EC2-CBDA-4198-81DA-1A13AD2803E1} = {AF5472BE-1DD9-48D7-8518-69E6A07CB317}
-		{79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{8507CAFE-6A92-4267-8EBF-6FC8365FB48D} = {79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157}
-		{4AB69B77-BA47-433D-A729-9A1D2D059F0F} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{4AB69B77-BA47-433D-A729-9A1D2D059F0F} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{22648A57-3D94-4604-A238-B0B92BDDC3A5} = {4AB69B77-BA47-433D-A729-9A1D2D059F0F}
 		{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777} = {4AB69B77-BA47-433D-A729-9A1D2D059F0F}
 		{A1212B48-4142-4B49-9FBC-DC68CB6931E4} = {4AB69B77-BA47-433D-A729-9A1D2D059F0F}
 		{70423584-026A-4F66-82D2-943D7E903007} = {4AB69B77-BA47-433D-A729-9A1D2D059F0F}
 		{73E38ABA-14A4-4A83-BAA0-D7139D459A5A} = {4AB69B77-BA47-433D-A729-9A1D2D059F0F}
-		{072236A7-C789-423A-8277-95AFA7A940B4} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{072236A7-C789-423A-8277-95AFA7A940B4} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403} = {072236A7-C789-423A-8277-95AFA7A940B4}
 		{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827} = {E9054CC5-D21D-4DD2-968A-37A20F486BC2}
 		{5D660BE6-3FA6-4D3C-BD65-38A0BCE4F637} = {D10D6D25-819E-44EE-B8DD-2B8AFBC3BD82}
@@ -2637,9 +2634,9 @@ Global
 		{907B390D-CD44-4B45-8B78-C790E08E4C72} = {43C7E65E-17E1-4B19-8DEB-01F432FDDF0E}
 		{7F3E7612-59B6-4E5B-B300-755DA6647F22} = {8804FE14-198C-4CC3-AD20-9614BBAEA350}
 		{92D6D14F-725A-45D1-9711-C81F37C8DF16} = {79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157}
-		{A57997D5-EB28-4556-88A7-1BE5913B5C5D} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{A57997D5-EB28-4556-88A7-1BE5913B5C5D} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{F681045A-852F-4A2D-953D-4DD9B75A2F93} = {A57997D5-EB28-4556-88A7-1BE5913B5C5D}
-		{2EC3BA42-0204-48F2-9489-1704A00E141C} = {3D5C0131-E5A9-4BE9-AF81-9A64587A3837}
+		{2EC3BA42-0204-48F2-9489-1704A00E141C} = {2D831317-874B-433B-895C-F2D3B41553EB}
 		{C1B5F119-966D-4286-8F29-40CFDDB5390A} = {2EC3BA42-0204-48F2-9489-1704A00E141C}
 		{64FAF565-E6CD-4C86-B965-DF228DEA61EB} = {2EC3BA42-0204-48F2-9489-1704A00E141C}
 		{11674474-0123-4D7D-9F01-EBAA8BD039BD} = {8E8F2456-FED8-447B-8BE0-AEB370D9A72D}
