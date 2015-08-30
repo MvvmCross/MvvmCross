@@ -41,7 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WindowsStore\Cirrious.CrossCore.WindowsStore.csproj">
       <Project>{E299A991-1D9F-47C0-9B65-5E7632372FA5}</Project>
       <Name>Cirrious.CrossCore.WindowsStore</Name>
     </ProjectReference>

@@ -54,15 +54,15 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>Cirrious.CrossCore.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
       <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Network</Name>
     </ProjectReference>
