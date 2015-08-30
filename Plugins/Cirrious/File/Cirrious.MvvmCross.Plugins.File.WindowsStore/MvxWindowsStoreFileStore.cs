@@ -151,10 +151,20 @@ namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
         {
           if (FolderExists(folderPath))
             return;
-
           var rootFolder = ToFullPath(string.Empty);
-          var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
-          CreateFolderAsync(storageFolder, folderPath).GetAwaiter().GetResult();
+          var rootStorageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
+          var relativeFolderPath = GetRelativePathToSubFolder(rootStorageFolder.Path, folderPath);
+          CreateFolderAsync(rootStorageFolder, relativeFolderPath).GetAwaiter().GetResult();
+        }
+
+        private string GetRelativePathToSubFolder(string rootPath, string subFolderPath)
+        {
+            string relativePath = subFolderPath;
+            if (subFolderPath.ToLower().Contains(rootPath.ToLower()))
+            {
+                relativePath = subFolderPath.Substring(rootPath.Length+1);
+            }
+            return relativePath;
         }
 
         private static async Task<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
