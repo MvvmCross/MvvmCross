@@ -39,7 +39,7 @@
       <Project>{e299a991-1d9f-47c0-9b65-5e7632372fa5}</Project>
       <Name>Cirrious.CrossCore.WindowsStore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>

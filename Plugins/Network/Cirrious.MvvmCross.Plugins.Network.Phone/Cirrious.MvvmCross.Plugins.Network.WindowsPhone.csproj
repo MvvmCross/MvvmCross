@@ -94,11 +94,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\Cirrious.CrossCore.WindowsPhone.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\Cirrious.CrossCore.WindowsPhone.csproj">
       <Project>{2CA6800E-2CB5-4F76-BBE3-C4F7D445AF17}</Project>
       <Name>Cirrious.CrossCore.WindowsPhone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+    <ProjectReference Include="..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
