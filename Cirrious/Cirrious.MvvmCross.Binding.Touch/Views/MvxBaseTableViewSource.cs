@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             var item = GetItemAt(indexPath);
 
             var command = SelectionChangedCommand;
-            if (command != null)
+            if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
             SelectedItem = item;
