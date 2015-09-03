@@ -16,7 +16,7 @@ using SQLite.Net.Interop;
 using SQLite.Net.Platform.XamarinAndroid;
 using Environment = System.Environment;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.Droid
+namespace MvvmCross.Plugin.Sqlite.Droid
 {
     public class DroidSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {

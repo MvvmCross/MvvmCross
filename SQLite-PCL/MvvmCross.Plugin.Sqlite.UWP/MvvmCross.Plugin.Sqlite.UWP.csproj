@@ -7,8 +7,8 @@
     <ProjectGuid>{F1E793BF-8D79-4108-8738-3D68460D3290}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rimango.MvvmCross.Plugin.Sqlite.UWP</RootNamespace>
-    <AssemblyName>Rimango.MvvmCross.Plugin.Sqlite.WindowsUWP</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin.Sqlite.UWP</RootNamespace>
+    <AssemblyName>MvvmCross.Plugin.Sqlite.WindowsUWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -116,12 +116,12 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsSqliteConnectionFactory.cs" />
-    <Content Include="Properties\Rimango.MvvmCross.Plugin.Sqlite.UWP.rd.xml" />
+    <Content Include="Properties\MvvmCross.Plugin.Sqlite.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rimango.MvvmCross.Plugin.Sqlite\Rimango.MvvmCross.Plugin.Sqlite.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugin.Sqlite\MvvmCross.Plugin.Sqlite.csproj">
       <Project>{4c7378a4-f173-43fd-b24f-9f54d6496dc8}</Project>
-      <Name>Rimango.MvvmCross.Plugin.Sqlite</Name>
+      <Name>MvvmCross.Plugin.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

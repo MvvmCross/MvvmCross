@@ -8,8 +8,8 @@
     <ProjectGuid>{3A68941C-B8FB-4973-9FFC-B228189506F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon</RootNamespace>
-    <AssemblyName>Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin.Sqlite.WindowsCommon</RootNamespace>
+    <AssemblyName>MvvmCross.Plugin.Sqlite.WindowsCommon</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -70,9 +70,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rimango.MvvmCross.Plugin.Sqlite\Rimango.MvvmCross.Plugin.Sqlite.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugin.Sqlite\MvvmCross.Plugin.Sqlite.csproj">
       <Project>{4C7378A4-F173-43FD-B24F-9F54D6496DC8}</Project>
-      <Name>Rimango.MvvmCross.Plugin.Sqlite</Name>
+      <Name>MvvmCross.Plugin.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

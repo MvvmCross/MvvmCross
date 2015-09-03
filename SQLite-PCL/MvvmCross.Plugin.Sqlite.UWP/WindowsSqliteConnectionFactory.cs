@@ -4,7 +4,7 @@ using SQLite.Net.Async;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.WinRT;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.UWP
+namespace MvvmCross.Plugin.Sqlite.UWP
 {
     public class WindowsSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {

@@ -5,7 +5,7 @@ using System.Text;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.XamarinIOS;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.Touch
+namespace MvvmCross.Plugin.Sqlite.Touch
 {
     public class TouchSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {

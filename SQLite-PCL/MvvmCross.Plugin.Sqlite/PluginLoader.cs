@@ -1,7 +1,7 @@
 ﻿using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite
+namespace MvvmCross.Plugin.Sqlite
 {
     public class PluginLoader : IMvxPluginLoader 
     {

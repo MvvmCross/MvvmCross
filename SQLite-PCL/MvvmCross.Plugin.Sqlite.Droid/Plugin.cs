@@ -5,7 +5,7 @@ using System.Text;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.Droid
+namespace MvvmCross.Plugin.Sqlite.Droid
 {
     public class Plugin:IMvxPlugin
     {

@@ -4,7 +4,7 @@ using System.Text;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.Touch
+namespace MvvmCross.Plugin.Sqlite.Touch
 {
     public class Plugin : IMvxPlugin
     {

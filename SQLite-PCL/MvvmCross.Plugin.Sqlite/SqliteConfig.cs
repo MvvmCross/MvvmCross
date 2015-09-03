@@ -1,7 +1,7 @@
 ﻿using SQLite.Net;
 using SQLite.Net.Interop;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite
+namespace MvvmCross.Plugin.Sqlite
 {
     public class SqLiteConfig
     {

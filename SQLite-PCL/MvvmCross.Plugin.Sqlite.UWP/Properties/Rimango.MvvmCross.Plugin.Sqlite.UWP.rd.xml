@@ -25,7 +25,7 @@
     http://go.microsoft.com/fwlink/?LinkId=613100
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="Rimango.MvvmCross.Plugin.Sqlite.UWP">
+  <Library Name="MvvmCross.Plugin.Sqlite.UWP">
 
   	<!-- add directives for your library here -->
 

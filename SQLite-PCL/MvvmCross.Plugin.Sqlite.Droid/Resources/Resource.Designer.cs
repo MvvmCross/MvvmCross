@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Rimango.MvvmCross.Plugin.Sqlite.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Plugin.Sqlite.Droid.Resource", IsApplication=false)]
 
-namespace Rimango.MvvmCross.Plugin.Sqlite.Droid
+namespace MvvmCross.Plugin.Sqlite.Droid
 {
 	
 	

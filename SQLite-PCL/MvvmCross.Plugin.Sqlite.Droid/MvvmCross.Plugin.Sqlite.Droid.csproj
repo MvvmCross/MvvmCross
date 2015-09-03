@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rimango.MvvmCross.Plugin.Sqlite.Droid</RootNamespace>
-    <AssemblyName>Rimango.MvvmCross.Plugin.Sqlite.Droid</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin.Sqlite.Droid</RootNamespace>
+    <AssemblyName>MvvmCross.Plugin.Sqlite.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -91,7 +91,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.Plugin.Sqlite\MvvmCross.Plugin.Sqlite.csproj">
       <Project>{4C7378A4-F173-43FD-B24F-9F54D6496DC8}</Project>
-      <Name>Rimango.MvvmCross.Plugin.Sqlite</Name>
+      <Name>MvvmCross.Plugin.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
