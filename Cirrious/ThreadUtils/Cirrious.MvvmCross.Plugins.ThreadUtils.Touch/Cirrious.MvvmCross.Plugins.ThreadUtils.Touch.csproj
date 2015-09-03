@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3956AB3-B4DA-4144-8C3B-889D99A9DBD7}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cirrious.MvvmCross.Plugins.ThreadUtils.Touch</RootNamespace>
+    <AssemblyName>Cirrious.MvvmCross.Plugins.ThreadUtils.Touch</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <NoStdLib>True</NoStdLib>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <NoStdLib>True</NoStdLib>
+    <DebugType>none</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <DefineConstants>MONOTOUCH</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MvxThreadSleep.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ThreadUtils\Cirrious.MvvmCross.Plugins.ThreadUtils.csproj">
+      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ThreadUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <!-- see http://slodge.blogspot.co.uk/2012/09/the-type-or-namespace-name.html -->
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
