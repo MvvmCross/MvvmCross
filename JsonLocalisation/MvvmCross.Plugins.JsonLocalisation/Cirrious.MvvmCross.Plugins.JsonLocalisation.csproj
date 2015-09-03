@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvvmCross.Plugins.JsonLocalisation</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.JsonLocalisation</AssemblyName>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Debug\Mvx\Portable\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>..\..\bin\Release\Mvx\Portable\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IMvxJsonDictionaryTextLoader.cs" />
+    <Compile Include="IMvxTextProviderBuilder.cs" />
+    <Compile Include="MvxTextProvider.cs" />
+    <Compile Include="MvxDictionaryTextProvider.cs" />
+    <Compile Include="MvxEmbeddedJsonDictionaryTextProvider.cs" />
+    <Compile Include="MvxJsonDictionaryTextProvider.cs" />
+    <Compile Include="MvxTextProviderBuilder.cs" />
+    <Compile Include="MvxContentJsonDictionaryTextProvider.cs" />
+    <Compile Include="PluginLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross\Cirrious.MvvmCross.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>Cirrious.MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
+      <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\CrossCore\Cirrious.CrossCore\Cirrious.CrossCore.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>Cirrious.CrossCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Cirrious\Cirrious.MvvmCross.Localization\Cirrious.MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>Cirrious.MvvmCross.Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

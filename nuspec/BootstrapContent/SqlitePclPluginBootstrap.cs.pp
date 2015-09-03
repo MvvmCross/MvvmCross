@@ -3,6 +3,6 @@
 namespace $rootnamespace$.Bootstrap
 {
     public class SqlitePluginBootstrap
-        : MvxPluginBootstrapAction<Rimango.MvvmCross.Plugin.Sqlite.PluginLoader>
+        : MvxPluginBootstrapAction<MvvmCross.Plugins.Sqlite.PluginLoader>
 		{}
 }

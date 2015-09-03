@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<?xml version="1.0"?>
 <package >
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.SQLitePCL</id>
@@ -48,46 +49,44 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<!--<file src="Rimango.MvvmCross.Plugin.Sqlite\**\*.cs"
-			target="src\Rimango.MvvmCross.Plugin.Sqlite" />
-    <file src="Rimango.MvvmCross.Plugin.Sqlite.Droid\**\*.cs"
+		<!--<file src="MvvmCross.Plugins.Sqlite\**\*.cs"
+			target="src\MvvmCross.Plugins.Sqlite" />
+    <file src="MvvmCross.Plugins.Sqlite.Droid\**\*.cs"
 			target="src\Cirrious.MvvmCross.Plugins.Sqlite.Droid" />
-    <file src="Rimango.MvvmCross.Plugin.Sqlite.Touch\**\*.cs"
+    <file src="MvvmCross.Plugins.Sqlite.Touch\**\*.cs"
 			target="src\Cirrious.MvvmCross.Plugins.Sqlite.Touch" />
-    <file src="Rimango.MvvmCross.Plugin.Sqlite.UWP\**\*.cs"
+    <file src="MvvmCross.Plugins.Sqlite.UWP\**\*.cs"
       target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsUWP" />
-    <file src="Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon\**\*.cs"
+    <file src="MvvmCross.Plugins.Sqlite.WindowsCommon\**\*.cs"
       target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon" />-->
 
-
 		<!-- PCL -->
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\Rimango.MvvmCross.Plugin.Sqlite.pdb" />
-
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.pdb" />
 
 		<!-- UAP -->
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\uap10.0\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.UWP\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.WindowsUWP.dll" target="lib\uap10.0\Rimango.MvvmCross.Plugin.Sqlite.WindowsUWP.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.UWP\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\Rimango.MvvmCross.Plugin.Sqlite.WindowsUWP.pdb" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.UWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.UWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\win81\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon.dll" target="lib\win81\Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon.dll" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.WindowsCommon\bin\Release\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\win81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\wpa81\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon.dll" target="lib\wpa81\Rimango.MvvmCross.Plugin.Sqlite.WindowsCommon.dll" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.WindowsCommon\bin\Release\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- droid -->
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\MonoAndroid\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.Droid\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.Droid.dll" target="lib\MonoAndroid\Rimango.MvvmCross.Plugin.Sqlite.Droid.dll" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.Droid\bin\Release\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="Rimango.MvvmCross.Plugin.Sqlite\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.dll" target="lib\Xamarin.iOS10\Rimango.MvvmCross.Plugin.Sqlite.dll" />
-		<file src="Rimango.MvvmCross.Plugin.Sqlite.Touch\bin\Release\Rimango.MvvmCross.Plugin.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\Rimango.MvvmCross.Plugin.Sqlite.Touch.dll" />
+		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.Touch\bin\Release\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
 		<file src="TouchBootstrap\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 	</files>
