@@ -10,7 +10,7 @@ using System.Device.Location;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WindowsPhone
+namespace MvvmCross.Plugins.Location.WindowsPhone
 {
     public sealed class MvxWindowsPhoneLocationWatcher : MvxLocationWatcher
     {

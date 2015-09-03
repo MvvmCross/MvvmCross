@@ -7,7 +7,7 @@
 
 using System.Net;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public class MvxRestResponse
     {

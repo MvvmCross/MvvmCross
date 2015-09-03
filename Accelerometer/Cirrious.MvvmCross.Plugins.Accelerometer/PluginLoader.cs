@@ -10,7 +10,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer
+namespace MvvmCross.Plugins.Accelerometer
 {
     public class PluginLoader
         : IMvxPluginLoader

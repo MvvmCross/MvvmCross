@@ -8,7 +8,7 @@
 using System.Globalization;
 using NUnit.Framework;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Test
+namespace MvvmCross.Plugins.Color.Test
 {
     [TestFixture]
     public class MvxRgbIntValueConverterTest : MvxColorValueConverterTest

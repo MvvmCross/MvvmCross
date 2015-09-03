@@ -11,7 +11,7 @@ using Cirrious.CrossCore.UI;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Droid
+namespace MvvmCross.Plugins.Color.Droid
 {
     public class Plugin
         : IMvxPlugin          

@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     public enum MvxReference
     {

@@ -16,7 +16,7 @@ using MessageUI;
 using UIKit;
 using Foundation;
 
-namespace Cirrious.MvvmCross.Plugins.Email.Touch
+namespace MvvmCross.Plugins.Email.Touch
 {
     public class MvxComposeEmailTask
         : MvxTouchTask

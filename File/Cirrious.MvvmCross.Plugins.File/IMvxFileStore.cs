@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 
 
-namespace Cirrious.MvvmCross.Plugins.File
+namespace MvvmCross.Plugins.File
 {
     public interface IMvxFileStore
     {

@@ -10,7 +10,7 @@ using Android.Views;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Droid.Target;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding

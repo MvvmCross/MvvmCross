@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Plugins.MethodBinding
+namespace MvvmCross.Plugins.MethodBinding
 {
     public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension

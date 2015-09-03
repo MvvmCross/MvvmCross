@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public static class MvxKnownOptions
     {

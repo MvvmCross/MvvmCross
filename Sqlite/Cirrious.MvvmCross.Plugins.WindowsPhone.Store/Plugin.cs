@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Plugins.Sqlite;
 
-namespace Cirrious.MvvmCross.Plugins.WindowsPhone.Store
+namespace MvvmCross.Plugins.WindowsPhone.Store
 {
     public class Plugin
         : IMvxPlugin          

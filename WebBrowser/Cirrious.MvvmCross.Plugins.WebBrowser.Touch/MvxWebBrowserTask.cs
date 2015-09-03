@@ -13,7 +13,7 @@ using Foundation;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
+namespace MvvmCross.Plugins.WebBrowser.Touch
 {
     public class MvxWebBrowserTask : MvxTouchTask, IMvxWebBrowserTask
     {

@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Devices.Geolocation;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
+namespace MvvmCross.Plugins.Location.WindowsStore
 {
     public sealed class MvxStoreLocationWatcher : MvxLocationWatcher
     {

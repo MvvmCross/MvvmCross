@@ -16,7 +16,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.Touch
 {
     public class MvxImagePickerTask
         : MvxTouchTask

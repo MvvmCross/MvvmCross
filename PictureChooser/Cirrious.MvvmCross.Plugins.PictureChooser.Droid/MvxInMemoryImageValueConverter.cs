@@ -9,7 +9,7 @@ using System;
 using Android.Graphics;
 using Cirrious.CrossCore.Converters;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
     {

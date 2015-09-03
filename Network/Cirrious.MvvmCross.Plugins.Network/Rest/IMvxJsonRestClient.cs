@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public interface IMvxJsonRestClient
     {

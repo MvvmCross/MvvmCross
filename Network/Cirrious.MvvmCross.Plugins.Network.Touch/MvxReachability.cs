@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using CoreFoundation;
 using SystemConfiguration;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Touch
+namespace MvvmCross.Plugins.Network.Touch
 {
     public class MvxReachability
         : IMvxReachability

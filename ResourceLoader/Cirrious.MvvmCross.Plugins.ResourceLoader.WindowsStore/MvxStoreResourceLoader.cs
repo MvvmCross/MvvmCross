@@ -10,7 +10,7 @@ using System.IO;
 using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.ApplicationModel;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore
+namespace MvvmCross.Plugins.ResourceLoader.WindowsStore
 {
     public class MvxStoreResourceLoader : MvxResourceLoader
     {

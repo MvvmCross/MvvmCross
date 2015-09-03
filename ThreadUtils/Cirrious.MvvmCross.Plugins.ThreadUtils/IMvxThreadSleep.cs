@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils
+namespace MvvmCross.Plugins.ThreadUtils
 {
     public interface IMvxThreadSleep
     {

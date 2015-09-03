@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     /// <summary>
     /// Base class for messages that provides weak refrence storage of the sender

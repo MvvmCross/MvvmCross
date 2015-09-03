@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone
+namespace MvvmCross.Plugins.ResourceLoader.WindowsPhone
 {
     public class MvxWindowsPhoneResourceLoader : MvxResourceLoader
     {

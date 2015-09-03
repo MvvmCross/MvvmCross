@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 
-namespace Cirrious.MvvmCross.Plugins.ReflectionEx
+namespace MvvmCross.Plugins.ReflectionEx
 {
     public class MvxReflectionSingleton
         : MvxSingleton

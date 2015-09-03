@@ -8,7 +8,7 @@
 using System.IO;
 using SQLite;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon
+namespace MvvmCross.Plugins.Sqlite.WindowsCommon
 {
     public class MvxStoreSQLiteConnectionFactory : ISQLiteConnectionFactory
     {

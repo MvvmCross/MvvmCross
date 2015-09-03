@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser
+namespace MvvmCross.Plugins.PictureChooser
 {
     public static class MvxPictureDimensionHelper
     {

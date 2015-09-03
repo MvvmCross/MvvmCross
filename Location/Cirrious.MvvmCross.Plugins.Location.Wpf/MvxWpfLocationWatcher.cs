@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Device.Location;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Wpf
+namespace MvvmCross.Plugins.Location.Wpf
 {
     /// <summary>
     /// Location Watcher Plugin for WPF developers.

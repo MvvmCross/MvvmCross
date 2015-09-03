@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cirrious.MvvmCross.Plugins.Location
+namespace MvvmCross.Plugins.Location
 {
 	public enum MvxLocationPermission
 	{

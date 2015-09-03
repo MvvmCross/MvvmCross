@@ -11,7 +11,7 @@ using System;
 
 #endregion
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore
+namespace MvvmCross.Plugins.WebBrowser.WindowsStore
 {
     public class MvxWebBrowserTask : IMvxWebBrowserTask
     {

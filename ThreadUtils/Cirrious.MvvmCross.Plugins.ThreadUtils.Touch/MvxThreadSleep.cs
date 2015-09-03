@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Touch
+namespace MvvmCross.Plugins.ThreadUtils.Touch
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

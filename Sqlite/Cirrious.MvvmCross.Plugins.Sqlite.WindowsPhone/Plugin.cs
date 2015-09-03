@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.WindowsPhone
+namespace MvvmCross.Plugins.Sqlite.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin          

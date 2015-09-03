@@ -9,7 +9,7 @@ using System;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.Share.WindowsPhone
+namespace MvvmCross.Plugins.Share.WindowsPhone
 {
     public class MvxShareTask : MvxWindowsPhoneTask, IMvxShareTask
     {

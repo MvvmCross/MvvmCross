@@ -10,7 +10,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.Droid
+namespace MvvmCross.Plugins.Accelerometer.Droid
 {
     public class Plugin
         : IMvxPlugin

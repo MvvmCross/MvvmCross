@@ -11,7 +11,7 @@ using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Plugins.Email.WindowsPhone
+namespace MvvmCross.Plugins.Email.WindowsPhone
 {
     public class MvxComposeEmailTask
         : MvxWindowsPhoneTask

@@ -12,7 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.File;
 using Cirrious.MvvmCross.Plugins.File.Touch;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Touch
+namespace MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class MvxTouchResourceLoader
         : MvxResourceLoader

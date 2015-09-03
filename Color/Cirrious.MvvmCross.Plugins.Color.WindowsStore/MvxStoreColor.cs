@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.UI;
 using Windows.UI.Xaml.Media;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WindowsStore
+namespace MvvmCross.Plugins.Color.WindowsStore
 {
     public class MvxStoreColor : IMvxNativeColor
     {

@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall
+namespace MvvmCross.Plugins.PhoneCall
 {
     public interface IMvxPhoneCallTask
     {

@@ -7,7 +7,7 @@
 
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.Email
+namespace MvvmCross.Plugins.Email
 {
     public class EmailAttachment
     {

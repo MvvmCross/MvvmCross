@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Plugins.Email
+namespace MvvmCross.Plugins.Email
 {
     public interface IMvxComposeEmailTaskEx
         : IMvxComposeEmailTask

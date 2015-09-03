@@ -8,7 +8,7 @@
 using Android.Content;
 using Cirrious.CrossCore.Droid.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Share.Droid
+namespace MvvmCross.Plugins.Share.Droid
 {
     public class MvxShareTask
         : MvxAndroidTask

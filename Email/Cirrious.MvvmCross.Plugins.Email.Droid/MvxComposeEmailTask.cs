@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Java.IO;
 
-namespace Cirrious.MvvmCross.Plugins.Email.Droid
+namespace MvvmCross.Plugins.Email.Droid
 {
     public class MvxComposeEmailTask
         : MvxAndroidTask

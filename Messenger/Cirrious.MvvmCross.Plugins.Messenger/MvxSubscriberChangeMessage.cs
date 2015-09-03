@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     public class MvxSubscriberChangeMessage : MvxMessage
     {

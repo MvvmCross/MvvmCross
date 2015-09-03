@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Wpf
+namespace MvvmCross.Plugins.Location.Wpf
 {
     public class Plugin
         : IMvxPlugin

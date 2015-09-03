@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.WindowsPhone.Converters;
 
-namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
+namespace MvvmCross.Plugins.File.WindowsPhone
 {
     public class MvxNativeFilePathToImageValueConverter : MvxNativeValueConverter<MvxFilePathToImageValueConverter>
     {

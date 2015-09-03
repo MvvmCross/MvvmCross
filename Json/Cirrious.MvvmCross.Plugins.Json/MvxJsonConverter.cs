@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Newtonsoft.Json;
 
-namespace Cirrious.MvvmCross.Plugins.Json
+namespace MvvmCross.Plugins.Json
 {
     public class MvxJsonConverter : IMvxJsonConverter
     {

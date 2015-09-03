@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.Touch.Platform;
 using Foundation;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.Touch
+namespace MvvmCross.Plugins.PhoneCall.Touch
 {
     public class MvxPhoneCallTask : MvxTouchTask, IMvxPhoneCallTask
     {

@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugins.Messenger.ThreadRunners
 {
     public class MvxMainThreadActionRunner
         : IMvxActionRunner

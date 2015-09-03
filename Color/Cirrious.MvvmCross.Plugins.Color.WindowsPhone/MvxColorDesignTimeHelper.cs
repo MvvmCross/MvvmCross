@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
 using Cirrious.CrossCore.WindowsPhone.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
+namespace MvvmCross.Plugins.Color.WindowsPhone
 {
     public class MvxColorDesignTimeHelper
         : MvxDesignTimeHelper

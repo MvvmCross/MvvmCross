@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.UI;
 using Cirrious.MvvmCross.Test.Core;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Test
+namespace MvvmCross.Plugins.Color.Test
 {
     public class MvxColorValueConverterTest : MvxIoCSupportingTest
     {

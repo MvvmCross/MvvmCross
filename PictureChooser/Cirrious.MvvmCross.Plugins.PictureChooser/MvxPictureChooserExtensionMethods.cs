@@ -8,7 +8,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser
+namespace MvvmCross.Plugins.PictureChooser
 {
     public static class MvxPictureChooserExtensionMethods
     {

@@ -9,7 +9,7 @@ using System;
 using Cirrious.CrossCore.Platform;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf
+namespace MvvmCross.Plugins.ThreadUtils.Wpf
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

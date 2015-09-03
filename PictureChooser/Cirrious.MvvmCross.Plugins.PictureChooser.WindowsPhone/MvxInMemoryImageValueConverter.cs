@@ -10,7 +10,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using Cirrious.CrossCore.Converters;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
+namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {

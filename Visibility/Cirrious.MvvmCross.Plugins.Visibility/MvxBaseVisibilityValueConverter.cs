@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility
+namespace MvvmCross.Plugins.Visibility
 {
 	public abstract class MvxBaseVisibilityValueConverter<T>
 		: MvxBaseVisibilityValueConverter

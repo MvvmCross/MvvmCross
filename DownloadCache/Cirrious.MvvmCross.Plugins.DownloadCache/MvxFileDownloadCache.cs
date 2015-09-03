@@ -15,7 +15,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadCache
         : MvxLockableObject

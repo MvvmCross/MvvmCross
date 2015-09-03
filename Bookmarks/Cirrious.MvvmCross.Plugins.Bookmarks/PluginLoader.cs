@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Bookmarks
+namespace MvvmCross.Plugins.Bookmarks
 {
     public class PluginLoader
         : IMvxPluginLoader          

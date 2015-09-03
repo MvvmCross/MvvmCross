@@ -11,7 +11,7 @@ using Android.Content.Res;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
+namespace MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class MvxAndroidResourceLoader
         : MvxResourceLoader          

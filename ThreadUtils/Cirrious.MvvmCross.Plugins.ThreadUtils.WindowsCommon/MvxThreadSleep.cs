@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsCommon
+namespace MvvmCross.Plugins.ThreadUtils.WindowsCommon
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

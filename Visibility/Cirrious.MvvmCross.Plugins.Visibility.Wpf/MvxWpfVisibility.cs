@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.Wpf
+namespace MvvmCross.Plugins.Visibility.Wpf
 {
     public class MvxWpfVisibility : IMvxNativeVisibility
     {

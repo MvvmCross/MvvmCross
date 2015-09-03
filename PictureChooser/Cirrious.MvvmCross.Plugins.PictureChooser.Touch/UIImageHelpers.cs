@@ -9,7 +9,7 @@ using System;
 using CoreGraphics;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.Touch
 {
     public static class UIImageHelpers
     {

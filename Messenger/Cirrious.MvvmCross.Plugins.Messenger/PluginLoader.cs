@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     public class PluginLoader
         : IMvxPluginLoader

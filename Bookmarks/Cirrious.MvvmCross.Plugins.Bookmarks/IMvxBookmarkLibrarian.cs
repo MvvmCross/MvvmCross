@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Plugins.Bookmarks
+namespace MvvmCross.Plugins.Bookmarks
 {
     public interface IMvxBookmarkLibrarian
     {

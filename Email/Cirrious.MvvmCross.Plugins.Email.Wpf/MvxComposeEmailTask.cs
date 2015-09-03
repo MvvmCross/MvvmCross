@@ -7,7 +7,7 @@
 
 using System.Diagnostics;
 
-namespace Cirrious.MvvmCross.Plugins.Email.Wpf
+namespace MvvmCross.Plugins.Email.Wpf
 {
     public class MvxComposeEmailTask : IMvxComposeEmailTask
     {

@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Wpf
+namespace MvvmCross.Plugins.Color.Wpf
 {
     public static class MvxColorExtensions
     {

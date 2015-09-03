@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
+namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
     public class MvxPictureChooserTask : MvxWindowsPhoneTask, IMvxPictureChooserTask, IMvxCombinedPictureChooserTask
     {

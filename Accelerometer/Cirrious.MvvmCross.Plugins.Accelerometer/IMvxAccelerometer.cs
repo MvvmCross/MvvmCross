@@ -10,7 +10,7 @@
 using System;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer
+namespace MvvmCross.Plugins.Accelerometer
 {
     public interface IMvxAccelerometer
     {

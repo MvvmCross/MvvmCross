@@ -11,7 +11,7 @@ using System.Net;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public class MvxRestClient : IMvxRestClient
     {

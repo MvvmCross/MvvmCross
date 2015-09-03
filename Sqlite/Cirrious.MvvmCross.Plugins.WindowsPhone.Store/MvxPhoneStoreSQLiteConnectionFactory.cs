@@ -9,7 +9,7 @@ using System.IO;
 using Cirrious.MvvmCross.Plugins.Sqlite;
 using SQLite;
 
-namespace Cirrious.MvvmCross.Plugins.WindowsPhone.Store
+namespace MvvmCross.Plugins.WindowsPhone.Store
 {
     public class MvxPhoneStoreSQLiteConnectionFactory : ISQLiteConnectionFactory
     {

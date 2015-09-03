@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public abstract class MvxJsonDictionaryTextProvider
         : MvxDictionaryTextProvider

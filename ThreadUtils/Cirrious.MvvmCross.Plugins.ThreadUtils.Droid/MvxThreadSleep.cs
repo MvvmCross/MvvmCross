@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Droid
+namespace MvvmCross.Plugins.ThreadUtils.Droid
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

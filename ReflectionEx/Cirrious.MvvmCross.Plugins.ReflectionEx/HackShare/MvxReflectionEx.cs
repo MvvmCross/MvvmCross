@@ -8,7 +8,7 @@
 using System.Reflection;
 
 // ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.Plugins.ReflectionEx.HackShare
+namespace MvvmCross.Plugins.ReflectionEx.HackShare
 // ReSharper restore CheckNamespace
 {
     public class MvxReflectionEx

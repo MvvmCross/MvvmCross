@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser
+namespace MvvmCross.Plugins.PictureChooser
 {
     public interface IMvxCombinedPictureChooserTask
     {

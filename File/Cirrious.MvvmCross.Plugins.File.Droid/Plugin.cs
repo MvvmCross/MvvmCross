@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.File.Droid
+namespace MvvmCross.Plugins.File.Droid
 {
     public class Plugin
         : IMvxPlugin          

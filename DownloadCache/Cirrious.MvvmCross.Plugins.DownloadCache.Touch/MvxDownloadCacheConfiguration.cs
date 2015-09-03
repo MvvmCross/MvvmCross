@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.Touch
 {
     public class MvxDownloadCacheConfiguration
         : IMvxPluginConfiguration

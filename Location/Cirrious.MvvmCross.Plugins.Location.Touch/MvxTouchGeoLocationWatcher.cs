@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Touch;
 using CoreLocation;
 using Foundation;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Touch
+namespace MvvmCross.Plugins.Location.Touch
 {
     [Obsolete("Use MvxTouchLocationWatcher instead")]
     public sealed class MvxTouchGeoLocationWatcher

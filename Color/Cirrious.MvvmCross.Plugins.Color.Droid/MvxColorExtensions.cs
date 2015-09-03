@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Droid
+namespace MvvmCross.Plugins.Color.Droid
 {
     public static class MvxColorExtensions
     {

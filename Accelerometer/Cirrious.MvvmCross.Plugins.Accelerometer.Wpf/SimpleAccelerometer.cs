@@ -11,7 +11,7 @@ using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.Wpf
+namespace MvvmCross.Plugins.Accelerometer.Wpf
 {
     public class MvxAccelerometer : IMvxAccelerometer
     {

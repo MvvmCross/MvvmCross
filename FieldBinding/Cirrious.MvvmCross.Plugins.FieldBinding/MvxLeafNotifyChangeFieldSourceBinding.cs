@@ -10,7 +10,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.FieldBinding;
 
-namespace Cirrious.MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public class MvxLeafNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding

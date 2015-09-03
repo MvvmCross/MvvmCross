@@ -15,7 +15,7 @@ using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.Droid
+namespace MvvmCross.Plugins.Accelerometer.Droid
 {
     public class MvxAccelerometer
         : Java.Lang.Object

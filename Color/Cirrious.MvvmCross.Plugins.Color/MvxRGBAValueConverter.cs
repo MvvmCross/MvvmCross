@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Color
+namespace MvvmCross.Plugins.Color
 {
     public class MvxRGBAValueConverter : MvxRGBValueConverter
     {

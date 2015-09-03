@@ -9,7 +9,7 @@ using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
+namespace MvvmCross.Plugins.PictureChooser.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          

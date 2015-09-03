@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugins.Messenger.ThreadRunners
 {
     public class MvxThreadPoolActionRunner
         : IMvxActionRunner

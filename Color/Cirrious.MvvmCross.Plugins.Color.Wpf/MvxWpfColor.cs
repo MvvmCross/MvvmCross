@@ -8,7 +8,7 @@
 using System.Windows.Media;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Wpf
+namespace MvvmCross.Plugins.Color.Wpf
 {
     public class MvxWpfColor : IMvxNativeColor
     {

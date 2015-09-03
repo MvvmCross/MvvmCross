@@ -11,7 +11,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Cirrious.CrossCore.Converters;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
+namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {

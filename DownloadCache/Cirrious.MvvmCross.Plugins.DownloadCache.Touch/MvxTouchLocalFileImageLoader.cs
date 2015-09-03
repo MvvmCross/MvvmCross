@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Plugins.File;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.Touch
 {
 	public class MvxTouchLocalFileImageLoader
         : MvxAllThreadDispatchingObject

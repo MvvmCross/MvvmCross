@@ -8,7 +8,7 @@
 using System;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
+namespace MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public sealed class MvxSoundEffectInstance : IMvxSoundEffectInstance
     {

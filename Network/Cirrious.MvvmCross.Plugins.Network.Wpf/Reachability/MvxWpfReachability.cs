@@ -1,7 +1,7 @@
 ﻿using System.Net.NetworkInformation;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Wpf.Reachability
+namespace MvvmCross.Plugins.Network.Wpf.Reachability
 {
     public class MvxWpfReachability : IMvxReachability
     {

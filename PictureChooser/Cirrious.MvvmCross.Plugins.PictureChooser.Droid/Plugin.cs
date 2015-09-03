@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     public class Plugin
         : IMvxPlugin          

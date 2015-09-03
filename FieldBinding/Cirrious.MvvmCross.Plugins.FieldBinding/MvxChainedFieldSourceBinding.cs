@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
-namespace Cirrious.MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding

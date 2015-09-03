@@ -10,7 +10,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.File
+namespace MvvmCross.Plugins.File
 {
     /// <summary>
     ///     Warning: this interface not implemented on all platforms currently

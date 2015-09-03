@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public abstract class MvxTextBasedRestRequest
         : MvxRestRequest

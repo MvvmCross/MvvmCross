@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
+namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
 {
     public static class BooksService
     {

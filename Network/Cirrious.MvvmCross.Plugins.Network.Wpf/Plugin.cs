@@ -11,7 +11,7 @@ using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Cirrious.MvvmCross.Plugins.Network.Rest;
 using Cirrious.MvvmCross.Plugins.Network.Wpf.Reachability;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Wpf
+namespace MvvmCross.Plugins.Network.Wpf
 {
     public class Plugin
         : IMvxPlugin

@@ -12,7 +12,7 @@ using Windows.Devices.Sensors;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon
+namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
 {
     public class MvxWindowsCommonAccelerometer : IMvxAccelerometer
     {

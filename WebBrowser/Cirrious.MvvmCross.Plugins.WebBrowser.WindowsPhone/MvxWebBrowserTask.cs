@@ -9,7 +9,7 @@ using System;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone
+namespace MvvmCross.Plugins.WebBrowser.WindowsPhone
 {
     public class MvxWebBrowserTask : MvxWindowsPhoneTask, IMvxWebBrowserTask
     {

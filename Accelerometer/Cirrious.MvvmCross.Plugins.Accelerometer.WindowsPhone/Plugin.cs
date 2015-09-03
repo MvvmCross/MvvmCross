@@ -10,7 +10,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone
+namespace MvvmCross.Plugins.Accelerometer.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin

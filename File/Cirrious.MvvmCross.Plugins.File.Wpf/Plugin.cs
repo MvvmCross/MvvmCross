@@ -11,7 +11,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.File.Wpf
+namespace MvvmCross.Plugins.File.Wpf
 {
     public class Plugin
         : IMvxConfigurablePlugin

@@ -8,7 +8,7 @@
 using System.Globalization;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility
+namespace MvvmCross.Plugins.Visibility
 {
     public class MvxInvertedVisibilityValueConverter : MvxVisibilityValueConverter
     {

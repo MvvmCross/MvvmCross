@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cirrious.MvvmCross.Plugins.File
+namespace MvvmCross.Plugins.File
 {
 	public static class TryResult
 	{

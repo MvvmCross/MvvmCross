@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.Console
+namespace MvvmCross.Plugins.Visibility.Console
 {
     public class Plugin
         : IMvxPlugin          

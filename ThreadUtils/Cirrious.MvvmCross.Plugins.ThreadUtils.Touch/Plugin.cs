@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Touch
+namespace MvvmCross.Plugins.ThreadUtils.Touch
 {
     public class Plugin
         : IMvxPlugin          

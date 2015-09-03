@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.Console
+namespace MvvmCross.Plugins.Sqlite.Console
 {
 	public class Plugin
 		: IMvxPlugin

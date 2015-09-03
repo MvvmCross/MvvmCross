@@ -14,7 +14,7 @@ using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Shell;
 
-namespace Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone
+namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
     public class MvxWindowsPhoneLiveTileBookmarkLibrarian
         : IMvxBookmarkLibrarian

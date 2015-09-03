@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Plugins.ReflectionEx.HackShare;
 
-namespace Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon
+namespace MvvmCross.Plugins.ReflectionEx.WindowsCommon
 {
     public class Plugin
         : IMvxPlugin          

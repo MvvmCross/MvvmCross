@@ -15,7 +15,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.File
+namespace MvvmCross.Plugins.File
 {
     public abstract class MvxFileStoreBase
 		: IMvxFileStore, IMvxFileStoreAsync

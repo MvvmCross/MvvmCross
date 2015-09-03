@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
+namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
 {
     public class BookSearchItem
     {

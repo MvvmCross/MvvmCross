@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Cirrious.MvvmCross.Plugins.Network.Rest;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Touch
+namespace MvvmCross.Plugins.Network.Touch
 {
     public class Plugin
         : IMvxPlugin

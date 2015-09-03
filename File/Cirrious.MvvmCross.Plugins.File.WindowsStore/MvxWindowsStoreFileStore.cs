@@ -16,7 +16,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Storage;
 
-namespace Cirrious.MvvmCross.Plugins.File.WindowsStore
+namespace MvvmCross.Plugins.File.WindowsStore
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsStoreFileStore : MvxFileStoreBase

@@ -8,7 +8,7 @@
 using Cirrious.MvvmCross.Localization;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public abstract class MvxTextProvider :
         MvxResourceProvider, IMvxTextProvider

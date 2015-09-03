@@ -8,7 +8,7 @@
 using System;
 using Windows.System;
 
-namespace Cirrious.MvvmCross.Plugins.Email.WindowsStore
+namespace MvvmCross.Plugins.Email.WindowsStore
 {
     // IMvxComposeEmailTaskEx not supported currently in WinStore 
     // to support this we'd need to experiment with multiple addresses (e.g. see http://www.sightspecific.com/~mosh/www_faq/multrec.html)

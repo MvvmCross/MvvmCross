@@ -9,7 +9,7 @@ using System;
 using System.Net;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public class MvxFileDownloadRequest
     {

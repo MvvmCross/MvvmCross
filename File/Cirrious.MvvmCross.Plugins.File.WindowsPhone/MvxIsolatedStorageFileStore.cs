@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.File.WindowsPhone
+namespace MvvmCross.Plugins.File.WindowsPhone
 {
     public class MvxIsolatedStorageFileStore
         : MvxFileStoreBase

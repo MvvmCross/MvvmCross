@@ -20,7 +20,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Uri = Android.Net.Uri;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     public class MvxPictureChooserTask
         : MvxAndroidTask

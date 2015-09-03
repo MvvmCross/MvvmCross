@@ -9,7 +9,7 @@ using System;
 using Cirrious.CrossCore.Exceptions;
 using Windows.Devices.Geolocation;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WindowsStore
+namespace MvvmCross.Plugins.Location.WindowsStore
 {
     [Obsolete("Use MvxStoreLocationWatcher instead")]
     public sealed class MvxStoreGeoLocationWatcher : MvxGeoLocationWatcher

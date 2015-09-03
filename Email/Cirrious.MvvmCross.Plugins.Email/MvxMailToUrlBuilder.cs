@@ -8,7 +8,7 @@
 using System;
 using System.Text;
 
-namespace Cirrious.MvvmCross.Plugins.Email
+namespace MvvmCross.Plugins.Email
 {
     public class MvxMailToUrlBuilder
     {

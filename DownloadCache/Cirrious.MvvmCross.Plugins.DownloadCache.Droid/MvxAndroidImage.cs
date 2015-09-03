@@ -7,7 +7,7 @@
 
 using Android.Graphics;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidImage
         : MvxImage<Bitmap>

@@ -7,7 +7,7 @@
 
 using Cirrious.MvvmCross.Localization;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public interface IMvxTextProviderBuilder
     {

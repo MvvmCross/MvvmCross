@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf
+namespace MvvmCross.Plugins.ResourceLoader.Wpf
 {
     public class MvxWpfResourceLoader : MvxResourceLoader
     {

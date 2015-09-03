@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Converters;
 using Foundation;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.Touch
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>
     {

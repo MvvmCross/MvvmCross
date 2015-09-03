@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public class NC<T> : NotifyChange<T>, INC<T>
     {

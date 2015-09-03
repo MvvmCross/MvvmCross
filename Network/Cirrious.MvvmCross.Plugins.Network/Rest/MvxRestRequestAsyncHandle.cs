@@ -7,7 +7,7 @@
 
 using System.Net;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     // Credit - this class heavily influenced by the wonderful https://github.com/restsharp/RestSharp
     //        - credit here under Apache 2.0 license

@@ -12,7 +12,7 @@ using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.FieldBinding;
 
-namespace Cirrious.MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public abstract class MvxNotifyChangeFieldSourceBinding
         : MvxSourceBinding

@@ -10,7 +10,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Color
+namespace MvvmCross.Plugins.Color
 {
     public class PluginLoader
         : IMvxPluginLoader

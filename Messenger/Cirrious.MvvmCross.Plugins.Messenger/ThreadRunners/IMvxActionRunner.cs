@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugins.Messenger.ThreadRunners
 {
     public interface IMvxActionRunner
     {

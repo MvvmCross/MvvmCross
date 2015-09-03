@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.Touch
 {
 #warning One day I would like to decouple this plugin from the FileStore plugin
     public class Plugin

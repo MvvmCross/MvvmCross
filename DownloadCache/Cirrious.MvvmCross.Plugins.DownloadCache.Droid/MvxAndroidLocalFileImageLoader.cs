@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Plugins.File;
 using System.Collections.Generic;
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>

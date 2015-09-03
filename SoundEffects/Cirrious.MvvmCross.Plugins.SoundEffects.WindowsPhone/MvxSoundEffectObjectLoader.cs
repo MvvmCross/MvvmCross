@@ -9,7 +9,7 @@ using System.IO;
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
+namespace MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
     public class MvxSoundEffectObjectLoader
         : MvxResourceObjectLoader<IMvxSoundEffect>

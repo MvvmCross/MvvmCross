@@ -8,7 +8,7 @@
 using Android.Locations;
 using Android.OS;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugins.Location.Droid
 {
     public class MvxLocationListener
         : Java.Lang.Object

@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 
-namespace Cirrious.MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public abstract class MvxFieldSourceBinding
         : MvxSourceBinding

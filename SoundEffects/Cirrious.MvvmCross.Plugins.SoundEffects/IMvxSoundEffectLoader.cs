@@ -7,7 +7,7 @@
 
 using Cirrious.MvvmCross.Plugins.ResourceLoader;
 
-namespace Cirrious.MvvmCross.Plugins.SoundEffects
+namespace MvvmCross.Plugins.SoundEffects
 {
     public interface IMvxSoundEffectLoader
         : IMvxResourceObjectLoader<IMvxSoundEffect>

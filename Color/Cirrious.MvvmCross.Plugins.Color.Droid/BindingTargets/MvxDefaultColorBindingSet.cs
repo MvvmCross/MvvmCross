@@ -11,7 +11,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     public class MvxDefaultColorBindingSet
     {

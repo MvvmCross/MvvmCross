@@ -12,7 +12,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.Touch
+namespace MvvmCross.Plugins.Accelerometer.Touch
 {
     public class MvxAccelerometer
         :  IMvxAccelerometer

@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.File;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public static class MvxFileStoreHelper
     {

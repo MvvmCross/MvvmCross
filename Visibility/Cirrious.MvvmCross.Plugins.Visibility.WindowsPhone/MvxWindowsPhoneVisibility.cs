@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
+namespace MvvmCross.Plugins.Visibility.WindowsPhone
 {
     public class MvxWindowsPhoneVisibility : IMvxNativeVisibility
     {

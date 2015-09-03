@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite
+namespace MvvmCross.Plugins.Sqlite
 {
     /// <summary>
     /// Please consider using Cirrious.MvvmCross.Community.Plugins.Sqlite instead

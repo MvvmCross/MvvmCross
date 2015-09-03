@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone
+namespace MvvmCross.Plugins.SoundEffects.WindowsPhone
 {
 #warning One day I would like to decouple this implementation from the ResourceLoader plugin
     public class Plugin

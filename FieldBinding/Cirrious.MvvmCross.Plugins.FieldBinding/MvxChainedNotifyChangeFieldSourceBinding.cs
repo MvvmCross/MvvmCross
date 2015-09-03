@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Cirrious.MvvmCross.FieldBinding;
 
-namespace Cirrious.MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding

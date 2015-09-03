@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Network.Reachability
+namespace MvvmCross.Plugins.Network.Reachability
 {
     public interface IMvxReachability
     {

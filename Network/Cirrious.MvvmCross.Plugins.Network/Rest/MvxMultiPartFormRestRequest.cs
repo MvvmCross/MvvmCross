@@ -12,7 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Plugins.File;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public class MvxMultiPartFormRestRequest
         : MvxTextBasedRestRequest

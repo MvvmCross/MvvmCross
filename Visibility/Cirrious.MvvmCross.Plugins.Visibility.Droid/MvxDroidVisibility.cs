@@ -8,7 +8,7 @@
 using Android.Views;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.Droid
+namespace MvvmCross.Plugins.Visibility.Droid
 {
     public class MvxDroidVisibility : IMvxNativeVisibility
     {

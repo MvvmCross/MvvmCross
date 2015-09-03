@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.SoundEffects
+namespace MvvmCross.Plugins.SoundEffects
 {
     public interface IMvxSoundEffectInstance
         : IDisposable

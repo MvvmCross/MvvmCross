@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     public interface IMvxMessenger
     {

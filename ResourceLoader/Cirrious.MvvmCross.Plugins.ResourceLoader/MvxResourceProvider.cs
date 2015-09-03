@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader
+namespace MvvmCross.Plugins.ResourceLoader
 {
     public abstract class MvxResourceProvider
     {

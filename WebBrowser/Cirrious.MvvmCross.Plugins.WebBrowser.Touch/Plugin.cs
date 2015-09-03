@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser.Touch
+namespace MvvmCross.Plugins.WebBrowser.Touch
 {
     public class Plugin
         : IMvxPlugin

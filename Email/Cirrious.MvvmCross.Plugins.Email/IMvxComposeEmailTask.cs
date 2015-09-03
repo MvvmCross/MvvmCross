@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Email
+namespace MvvmCross.Plugins.Email
 {
     public interface IMvxComposeEmailTask
     {

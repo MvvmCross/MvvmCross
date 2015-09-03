@@ -9,7 +9,7 @@ using System;
 using System.Runtime.InteropServices;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     public class MvxDownloadCacheConfiguration
         : IMvxPluginConfiguration

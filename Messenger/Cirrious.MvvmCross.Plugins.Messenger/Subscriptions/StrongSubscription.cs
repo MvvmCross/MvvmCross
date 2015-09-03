@@ -8,7 +8,7 @@
 using System;
 using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.Subscriptions
+namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
     public class StrongSubscription<TMessage> : TypedSubscription<TMessage>
         where TMessage : MvxMessage

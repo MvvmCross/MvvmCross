@@ -10,7 +10,7 @@ using System.IO;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider

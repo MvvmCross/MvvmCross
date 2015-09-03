@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone
+namespace MvvmCross.Plugins.PhoneCall.WindowsPhone
 {
     public class MvxPhoneCallTask : MvxWindowsPhoneTask, IMvxPhoneCallTask
     {

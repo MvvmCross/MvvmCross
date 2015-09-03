@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Cirrious.MvvmCross.Plugins.Network.Rest;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Droid
+namespace MvvmCross.Plugins.Network.Droid
 {
     public class Plugin
         : IMvxPlugin

@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore
+namespace MvvmCross.Plugins.PhoneCall.WindowsStore
 {
     public class Plugin
         : IMvxPlugin          

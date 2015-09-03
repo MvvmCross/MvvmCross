@@ -8,7 +8,7 @@
 using System.Globalization;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color
+namespace MvvmCross.Plugins.Color
 {
     public class MvxNativeColorValueConverter : MvxColorValueConverter<MvxColor>
     {

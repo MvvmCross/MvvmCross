@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.File
+namespace MvvmCross.Plugins.File
 {
     public abstract class MvxIoFileStoreBase
 		: MvxFileStoreBase

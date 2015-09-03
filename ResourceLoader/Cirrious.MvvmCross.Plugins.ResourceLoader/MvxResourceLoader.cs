@@ -10,7 +10,7 @@ using System.IO;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader
+namespace MvvmCross.Plugins.ResourceLoader
 {
     public abstract class MvxResourceLoader : IMvxResourceLoader
     {

@@ -10,7 +10,7 @@ using Windows.Devices.Geolocation;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.WindowsCommon.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Location.WindowsCommon
+namespace MvvmCross.Plugins.Location.WindowsCommon
 {
     public sealed class MvxWCommonLocationWatcher : MvxLocationWatcher
     {

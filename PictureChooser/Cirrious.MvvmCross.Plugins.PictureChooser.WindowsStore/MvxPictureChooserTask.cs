@@ -17,7 +17,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore
+namespace MvvmCross.Plugins.PictureChooser.WindowsStore
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {

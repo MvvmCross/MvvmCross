@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Location
+namespace MvvmCross.Plugins.Location
 {
     public enum MvxLocationErrorCode
     {

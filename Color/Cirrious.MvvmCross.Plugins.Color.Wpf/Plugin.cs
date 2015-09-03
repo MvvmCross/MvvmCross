@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.Wpf
+namespace MvvmCross.Plugins.Color.Wpf
 {
     public class Plugin
         : IMvxPlugin

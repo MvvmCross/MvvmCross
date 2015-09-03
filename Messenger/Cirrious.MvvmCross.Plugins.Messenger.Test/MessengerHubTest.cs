@@ -9,7 +9,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger.Test
+namespace MvvmCross.Plugins.Messenger.Test
 {
     [TestFixture]
     public class MessengerHubTest

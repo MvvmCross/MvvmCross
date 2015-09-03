@@ -10,7 +10,7 @@ using Android.Net;
 using Android.Telephony;
 using Cirrious.CrossCore.Droid.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.Droid
+namespace MvvmCross.Plugins.PhoneCall.Droid
 {
     public class MvxPhoneCallTask
         : MvxAndroidTask

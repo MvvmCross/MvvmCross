@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Localization;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder

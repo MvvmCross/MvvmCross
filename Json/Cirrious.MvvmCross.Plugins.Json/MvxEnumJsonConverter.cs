@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Cirrious.MvvmCross.Plugins.Json
+namespace MvvmCross.Plugins.Json
 {
     public class MvxEnumJsonConverter : JsonConverter
     {

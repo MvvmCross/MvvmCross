@@ -7,7 +7,7 @@
 
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.Plugins.ReflectionEx
+namespace MvvmCross.Plugins.ReflectionEx
 {
     public static class MvxReflectionExtensions
     {

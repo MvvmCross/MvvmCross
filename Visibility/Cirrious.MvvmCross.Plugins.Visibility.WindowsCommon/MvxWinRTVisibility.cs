@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon
+namespace MvvmCross.Plugins.Visibility.WindowsCommon
 {
     public class MvxWinRTVisibility : IMvxNativeVisibility
     {

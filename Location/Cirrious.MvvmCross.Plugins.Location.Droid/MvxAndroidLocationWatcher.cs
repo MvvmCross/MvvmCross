@@ -16,7 +16,7 @@ using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugins.Location.Droid
 {
     public sealed class MvxAndroidLocationWatcher
         : MvxLocationWatcher

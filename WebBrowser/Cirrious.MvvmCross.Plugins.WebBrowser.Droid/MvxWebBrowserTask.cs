@@ -8,7 +8,7 @@
 using Android.Content;
 using Cirrious.CrossCore.Droid.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser.Droid
+namespace MvvmCross.Plugins.WebBrowser.Droid
 {
     public class MvxWebBrowserTask : MvxAndroidTask, IMvxWebBrowserTask
     {

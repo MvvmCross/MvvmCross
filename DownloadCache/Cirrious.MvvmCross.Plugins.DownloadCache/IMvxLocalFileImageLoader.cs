@@ -8,7 +8,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public interface IMvxLocalFileImageLoader<T>
     {

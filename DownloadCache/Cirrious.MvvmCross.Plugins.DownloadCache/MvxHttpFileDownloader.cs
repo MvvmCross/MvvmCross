@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public class MvxHttpFileDownloader
         : MvxLockableObject

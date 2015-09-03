@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WindowsPhone
+namespace MvvmCross.Plugins.Color.WindowsPhone
 {
     public static class MvxColorExtensions
     {

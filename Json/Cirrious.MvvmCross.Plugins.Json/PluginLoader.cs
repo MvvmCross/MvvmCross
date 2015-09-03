@@ -10,7 +10,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Json
+namespace MvvmCross.Plugins.Json
 {
     public class PluginLoader
         : IMvxConfigurablePluginLoader

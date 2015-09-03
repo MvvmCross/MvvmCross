@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 
-namespace Cirrious.MvvmCross.Plugins.MethodBinding
+namespace MvvmCross.Plugins.MethodBinding
 {
     public class MvxMethodSourceBinding 
         : MvxSourceBinding

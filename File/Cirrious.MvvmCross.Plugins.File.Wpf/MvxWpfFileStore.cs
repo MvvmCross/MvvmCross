@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.File.Wpf
+namespace MvvmCross.Plugins.File.Wpf
 {
     public class MvxWpfFileStore : MvxIoFileStoreBase
     {

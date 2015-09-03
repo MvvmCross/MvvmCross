@@ -7,7 +7,7 @@
 //  
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer
+namespace MvvmCross.Plugins.Accelerometer
 {
     public class MvxAccelerometerReading
     {

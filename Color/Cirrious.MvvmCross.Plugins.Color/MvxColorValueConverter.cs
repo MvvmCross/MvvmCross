@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color
+namespace MvvmCross.Plugins.Color
 {
     public abstract class MvxColorValueConverter
         : MvxValueConverter          

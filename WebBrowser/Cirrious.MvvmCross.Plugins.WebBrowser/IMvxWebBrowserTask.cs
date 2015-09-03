@@ -9,7 +9,7 @@
 
 #endregion
 
-namespace Cirrious.MvvmCross.Plugins.WebBrowser
+namespace MvvmCross.Plugins.WebBrowser
 {
     public interface IMvxWebBrowserTask
     {

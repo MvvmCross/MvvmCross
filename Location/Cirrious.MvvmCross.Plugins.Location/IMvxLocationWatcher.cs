@@ -8,7 +8,7 @@
 using System;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.Plugins.Location
+namespace MvvmCross.Plugins.Location
 {
     public interface IMvxLocationWatcher
     {

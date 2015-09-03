@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Sqlite.Droid
+namespace MvvmCross.Plugins.Sqlite.Droid
 {
     public class Plugin
         : IMvxPlugin          

@@ -14,7 +14,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
 using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
 
-namespace Cirrious.MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugins.Messenger
 {
     // Note - the original inspiration for this code was XPlatUtils from JonathonPeppers
     // - https://github.com/jonathanpeppers/XPlatUtils

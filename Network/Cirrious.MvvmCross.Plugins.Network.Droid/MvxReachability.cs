@@ -14,7 +14,7 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Plugins.Network.Reachability;
 using Java.Net;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Droid
+namespace MvvmCross.Plugins.Network.Droid
 {
     public class MvxReachability : IMvxReachability
     {

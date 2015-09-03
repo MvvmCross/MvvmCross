@@ -8,7 +8,7 @@
 using System;
 using Windows.System;
 
-namespace Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhoneStore
+namespace MvvmCross.Plugins.PhoneCall.WindowsPhoneStore
 {
     public class MvxPhoneCallTask : IMvxPhoneCallTask
     {

@@ -7,7 +7,7 @@ using CoreLocation;
 using Foundation;
 using Cirrious.CrossCore.Touch.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Location.Touch
+namespace MvvmCross.Plugins.Location.Touch
 {
     public sealed class MvxTouchLocationWatcher
         : MvxLocationWatcher

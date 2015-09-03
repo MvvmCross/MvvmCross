@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Plugins.Network.Droid.Resource", IsApplication=false)]
 
-namespace Cirrious.MvvmCross.Plugins.Network.Droid
+namespace MvvmCross.Plugins.Network.Droid
 {
 	
 	

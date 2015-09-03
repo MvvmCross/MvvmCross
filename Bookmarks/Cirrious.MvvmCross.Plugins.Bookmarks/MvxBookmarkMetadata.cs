@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Plugins.Bookmarks
+namespace MvvmCross.Plugins.Bookmarks
 {
 #warning this bookmark code may be too wp7 sepcific?
     public class MvxBookmarkMetadata

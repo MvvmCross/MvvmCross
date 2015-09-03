@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.MvvmCross.FieldBinding
+namespace MvvmCross.Plugins.FieldBinding
 {
     public class NotifyChange
         : MvxMainThreadDispatchingObject

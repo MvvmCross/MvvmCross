@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Plugins.Share
+namespace MvvmCross.Plugins.Share
 {
     public interface IMvxShareTask
     {

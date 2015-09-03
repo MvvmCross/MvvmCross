@@ -11,7 +11,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Accelerometer.Wpf
+namespace MvvmCross.Plugins.Accelerometer.Wpf
 {
     public class Plugin
         : IMvxPlugin

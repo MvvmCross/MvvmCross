@@ -12,7 +12,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
         : IMvxConfigurablePlugin          

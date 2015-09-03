@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.Touch
+namespace MvvmCross.Plugins.Visibility.Touch
 {
     public class Plugin
         : IMvxPlugin          

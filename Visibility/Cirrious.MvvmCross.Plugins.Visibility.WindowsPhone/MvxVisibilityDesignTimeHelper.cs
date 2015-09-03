@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
 using Cirrious.CrossCore.WindowsPhone.Platform;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone
+namespace MvvmCross.Plugins.Visibility.WindowsPhone
 {
     public class MvxVisibilityDesignTimeHelper
         : MvxDesignTimeHelper

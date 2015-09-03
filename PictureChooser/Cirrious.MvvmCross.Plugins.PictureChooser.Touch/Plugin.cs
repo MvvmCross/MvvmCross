@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.Touch
 {
     public class Plugin
         : IMvxPlugin          

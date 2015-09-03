@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
+namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
 {
     public class BookSearchResult
     {

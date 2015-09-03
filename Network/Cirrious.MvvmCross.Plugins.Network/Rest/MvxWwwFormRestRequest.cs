@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugins.Network.Rest
 {
     public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest

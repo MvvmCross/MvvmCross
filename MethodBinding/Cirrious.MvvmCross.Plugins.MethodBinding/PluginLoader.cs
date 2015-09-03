@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 
-namespace Cirrious.MvvmCross.Plugins.MethodBinding
+namespace MvvmCross.Plugins.MethodBinding
 {
     public class PluginLoader
         : IMvxPluginLoader

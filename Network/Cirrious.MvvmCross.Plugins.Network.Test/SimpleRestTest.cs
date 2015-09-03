@@ -12,7 +12,7 @@ using Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
 
-namespace Cirrious.MvvmCross.Plugins.Network.Test
+namespace MvvmCross.Plugins.Network.Test
 {
     [TestFixture]
     public class SimpleRestTest

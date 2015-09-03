@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalisation
 {
     public class PluginLoader
         : IMvxPluginLoader          

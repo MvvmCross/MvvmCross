@@ -18,7 +18,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 
-namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
+namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {

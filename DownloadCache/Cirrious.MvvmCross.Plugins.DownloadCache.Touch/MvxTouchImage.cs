@@ -7,7 +7,7 @@
 
 using UIKit;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.Touch
 {
     public class MvxTouchImage
         : MvxImage<UIImage>

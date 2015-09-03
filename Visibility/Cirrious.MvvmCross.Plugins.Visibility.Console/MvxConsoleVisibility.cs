@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Visibility.Console
+namespace MvvmCross.Plugins.Visibility.Console
 {
     public class MvxConsoleVisibility : IMvxNativeVisibility
     {

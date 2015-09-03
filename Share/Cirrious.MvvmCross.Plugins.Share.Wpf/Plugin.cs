@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Share.Wpf
+namespace MvvmCross.Plugins.Share.Wpf
 {
     public class Plugin
         : IMvxPlugin          

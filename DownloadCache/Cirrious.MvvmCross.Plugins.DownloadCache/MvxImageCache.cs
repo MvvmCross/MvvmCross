@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
 
-namespace Cirrious.MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugins.DownloadCache
 {
     public class MvxImageCache<T>
         : MvxAllThreadDispatchingObject

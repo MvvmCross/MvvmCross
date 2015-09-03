@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.Share.WindowsPhone
+namespace MvvmCross.Plugins.Share.WindowsPhone
 {
     public class Plugin
         : IMvxPlugin          

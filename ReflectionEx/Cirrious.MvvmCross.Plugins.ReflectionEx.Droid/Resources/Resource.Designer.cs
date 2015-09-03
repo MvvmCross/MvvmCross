@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.Resource", IsApplication=false)]
 
-namespace Cirrious.MvvmCross.Plugins.ReflectionEx.Droid
+namespace MvvmCross.Plugins.ReflectionEx.Droid
 {
 	
 	

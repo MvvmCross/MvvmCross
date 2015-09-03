@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace Cirrious.MvvmCross.Plugins.File.Touch
+namespace MvvmCross.Plugins.File.Touch
 {
     public class MvxTouchFileStore : MvxIoFileStoreBase
     {

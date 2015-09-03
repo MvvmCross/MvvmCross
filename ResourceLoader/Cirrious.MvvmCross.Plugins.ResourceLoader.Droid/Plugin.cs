@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Plugins.ResourceLoader.Droid
+namespace MvvmCross.Plugins.ResourceLoader.Droid
 {
     public class Plugin
         : IMvxPlugin

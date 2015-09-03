@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace Cirrious.MvvmCross.Plugins.Color.WindowsStore
+namespace MvvmCross.Plugins.Color.WindowsStore
 {
     public static class MvxStoreColorExtensions
     {

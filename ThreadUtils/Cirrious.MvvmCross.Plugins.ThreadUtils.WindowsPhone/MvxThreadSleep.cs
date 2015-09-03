@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsPhone
+namespace MvvmCross.Plugins.ThreadUtils.WindowsPhone
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {
