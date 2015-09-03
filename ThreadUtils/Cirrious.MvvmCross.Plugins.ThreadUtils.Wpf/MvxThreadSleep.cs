@@ -1,21 +1,25 @@
-// Plugin.cs
+// MvxThreadSleep.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
+using System;
+using Cirrious.CrossCore.Platform;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.ThreadUtils.Wpf
 {
-    public class Plugin
-        : IMvxPlugin          
+    public class MvxThreadSleep : IMvxThreadSleep
     {
-        public void Load()
+        #region Implementation of IMvxThreadSleep
+
+        public void Sleep(TimeSpan t)
         {
-            Mvx.RegisterSingleton<IMvxThreadSleep>(new MvxThreadSleep());
+            System.Threading.Thread.Sleep(t);
         }
+
+        #endregion
     }
 }
