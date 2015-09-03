@@ -3,13 +3,13 @@
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Sqlite</id>
 		<version>4.0.0-beta3</version>
-		<title>MvvmCross - Sqlite Plugin</title>
+		<title>MvvmCross - Sqlite Plugin (Old)</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>This package contains the 'Sqlite' plugin for MvvmCross</description>
+		<description>This package contains the old 'Sqlite' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
