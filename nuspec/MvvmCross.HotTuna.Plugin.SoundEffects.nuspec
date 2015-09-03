@@ -47,9 +47,9 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\**\*.cs" 
+		<file src="..\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.SoundEffects" />
-		<file src="..\Plugins\Cirrious\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone\**\*.cs" 
+		<file src="..\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone" />
 
 		<!-- PCL -->

@@ -89,22 +89,22 @@
 			target="content\Xamarin.iOS10\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WindowsCommon" />
 
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WebBrowser" />
 
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsStore" />
 
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WebBrowser.WindowsPhone" />
 
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Droid\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WebBrowser.Droid" />
 
-		<file src="..\Plugins\Cirrious\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\**\*.cs" 
+		<file src="..\WebBrowser\Cirrious.MvvmCross.Plugins.WebBrowser.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.WebBrowser.Touch" />
 	</files>
 </package>

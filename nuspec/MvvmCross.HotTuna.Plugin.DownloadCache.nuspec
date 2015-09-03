@@ -48,11 +48,11 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\**\*.cs" 
+		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.DownloadCache" />
-		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
+		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Droid" />
-		<file src="..\Plugins\Cirrious\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" 
+		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Touch" />	
 
 		<!-- PCL -->

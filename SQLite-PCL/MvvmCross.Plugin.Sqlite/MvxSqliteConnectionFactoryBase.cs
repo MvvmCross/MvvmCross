@@ -7,7 +7,7 @@ using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Interop;
 
-namespace Rimango.MvvmCross.Plugin.Sqlite
+namespace MvvmCross.Plugin.Sqlite
 {
     public abstract class MvxSqliteConnectionFactoryBase : IMvxSqliteConnectionFactory
     {

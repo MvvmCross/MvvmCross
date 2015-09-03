@@ -47,7 +47,7 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding\**\*.cs" 
+		<file src="..\MethodBinding\Cirrious.MvvmCross.Plugins.MethodBinding\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.MethodBinding" />
 
 		<!-- PCL -->

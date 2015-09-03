@@ -47,19 +47,19 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email.Wpf" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsStore\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsStore" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Droid\**\*.cs" 	
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Droid\**\*.cs" 	
 			target="src\Cirrious.MvvmCross.Plugins.Email.Droid" />
-		<file src="..\Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Touch\**\*.cs" 
+		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Email.Touch" />
 
 		<!-- PCL -->

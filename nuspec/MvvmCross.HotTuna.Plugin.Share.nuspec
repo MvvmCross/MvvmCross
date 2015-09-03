@@ -47,19 +47,19 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Wpf\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.Wpf" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsStore\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.WindowsStore" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsPhone\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.WindowsCommon\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Droid\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.Droid" />
-		<file src="..\Plugins\Cirrious\Share\Cirrious.MvvmCross.Plugins.Share.Touch\**\*.cs" 
+		<file src="..\Share\Cirrious.MvvmCross.Plugins.Share.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Share.Touch" />
 
 		<!-- PCL -->

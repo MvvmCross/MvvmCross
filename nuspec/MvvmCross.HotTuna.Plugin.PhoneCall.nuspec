@@ -47,17 +47,17 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\**\*.cs" 
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall" />
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\**\*.cs" 
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsStore" />
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\**\*.cs" 	
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone\**\*.cs" 	
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\**\*.cs" 
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\**\*.cs" 	
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Droid\**\*.cs" 	
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall.Droid" />
-		<file src="..\Plugins\Cirrious\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\**\*.cs" 
+		<file src="..\PhoneCall\Cirrious.MvvmCross.Plugins.PhoneCall.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PhoneCall.Touch" />
 
 		<!-- PCL -->

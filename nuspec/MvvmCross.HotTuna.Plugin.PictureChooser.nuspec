@@ -47,17 +47,17 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser" />
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsStore" />
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.Droid\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser.Droid" />	
-		<file src="..\Plugins\Cirrious\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.Touch\**\*.cs" 
+		<file src="..\PictureChooser\Cirrious.MvvmCross.Plugins.PictureChooser.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.PictureChooser.Touch" />	
 
 		<!-- PCL -->

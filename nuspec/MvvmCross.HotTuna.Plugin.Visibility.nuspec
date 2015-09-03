@@ -47,21 +47,21 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Console\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.Console" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Wpf\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.Wpf" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.WindowsStore" />	
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Droid\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.Droid" />
-		<file src="..\Plugins\Cirrious\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\**\*.cs" 
+		<file src="..\Visibility\Cirrious.MvvmCross.Plugins.Visibility.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Visibility.Touch" />	
 
 		<!-- PCL -->

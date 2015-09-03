@@ -47,7 +47,7 @@
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\**.*"
+		<file src="..\JsonLocalisation\Cirrious.MvvmCross.Plugins.JsonLocalisation\**.*"
 			target="src\Cirrious.MvvmCross.Plugins.JsonLocalisation" />
 
 		<!-- PCL -->

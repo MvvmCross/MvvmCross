@@ -47,19 +47,19 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Wpf\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.Wpf" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsStore\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.WindowsStore" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsPhone\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.WindowsCommon\**\*.cs"	
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.WindowsCommon\**\*.cs"	
 			target="src\Cirrious.MvvmCross.Plugins.File.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Droid\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.Droid" />
-		<file src="..\Plugins\Cirrious\File\Cirrious.MvvmCross.Plugins.File.Touch\**\*.cs" 
+		<file src="..\File\Cirrious.MvvmCross.Plugins.File.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.File.Touch" />
 
 		<!-- PCL -->

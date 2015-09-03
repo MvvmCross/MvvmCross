@@ -53,13 +53,13 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.*" target="lib\dotnet" />
 
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks\**\*.cs" 
+		<file src="..\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Bookmarks" />
 
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Bookmarks.*" target="lib\wp8" />
 		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone.*" target="lib\wp8" />
-		<file src="..\Plugins\Cirrious\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone\**\*.cs" 
+		<file src="..\Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Bookmarks.WindowsPhone" />
 		<file src="BootstrapContent\BookmarksPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\BookmarksPluginBootstrap.cs.pp" />
 

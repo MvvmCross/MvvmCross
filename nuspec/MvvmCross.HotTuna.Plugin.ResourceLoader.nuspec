@@ -47,19 +47,19 @@
 	</metadata>
 	<files>
 		<!-- Src -->
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid" />
-		<file src="..\Plugins\Cirrious\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\**\*.cs" 
+		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch" />
 
 		<!-- PCL -->

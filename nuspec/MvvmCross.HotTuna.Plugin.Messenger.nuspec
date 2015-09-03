@@ -47,7 +47,7 @@
 	</metadata>
 	<files>
 		<!-- Common -->
-		<file src="..\Plugins\Cirrious\Messenger\Cirrious.MvvmCross.Plugins.Messenger\**\*.cs" 
+		<file src="..\Messenger\Cirrious.MvvmCross.Plugins.Messenger\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Messenger" />
 
 		<!-- PCL -->

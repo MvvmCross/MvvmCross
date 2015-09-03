@@ -8,8 +8,8 @@
     <ProjectGuid>{4C7378A4-F173-43FD-B24F-9F54D6496DC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rimango.MvvmCross.Plugin.Sqlite</RootNamespace>
-    <AssemblyName>Rimango.MvvmCross.Plugin.Sqlite</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin.Sqlite</RootNamespace>
+    <AssemblyName>MvvmCross.Plugin.Sqlite</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

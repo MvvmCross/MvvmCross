@@ -47,21 +47,21 @@
 	</metadata>
 	<files>		
 		<!-- Common -->
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx" />
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Console" />
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf" />		
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore" />
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone" />	
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon" />
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid" />
-		<file src="..\Plugins\Cirrious\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch\**\*.cs" 
+		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch" />
 
 		<!-- PCL -->

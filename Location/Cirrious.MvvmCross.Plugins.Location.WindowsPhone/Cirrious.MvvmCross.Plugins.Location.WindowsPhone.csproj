@@ -24,7 +24,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\bin\Debug\Mvx\WindowsPhone\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\WindowsPhone\</OutputPath>
     <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
     <NoStdLib>True</NoStdLib>
     <NoConfig>true</NoConfig>
@@ -35,7 +35,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\bin\Release\Mvx\WindowsPhone\</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\WindowsPhone\</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
     <NoStdLib>True</NoStdLib>
     <NoConfig>true</NoConfig>

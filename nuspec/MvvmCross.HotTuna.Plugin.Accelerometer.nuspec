@@ -48,19 +48,19 @@
 	<files>
 
 		<!-- src -->
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\**\*.cs" 	
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer\**\*.cs" 	
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer" />
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Wpf" />
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsStore" />
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsPhone" />
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.WindowsCommon" />	
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Touch\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Touch\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Touch" />
-		<file src="..\Plugins\Cirrious\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Droid\**\*.cs" 
+		<file src="..\Accelerometer\Cirrious.MvvmCross.Plugins.Accelerometer.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Plugins.Accelerometer.Droid" />
 
 		<!-- PCL -->
