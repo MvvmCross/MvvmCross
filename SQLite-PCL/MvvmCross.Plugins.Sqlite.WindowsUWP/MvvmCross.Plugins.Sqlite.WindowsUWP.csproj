@@ -7,7 +7,7 @@
     <ProjectGuid>{F1E793BF-8D79-4108-8738-3D68460D3290}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Plugins.Sqlite.UWP</RootNamespace>
+    <RootNamespace>MvvmCross.Plugins.Sqlite.WindowsUWP</RootNamespace>
     <AssemblyName>MvvmCross.Plugins.Sqlite.WindowsUWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
