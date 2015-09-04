@@ -3,7 +3,7 @@ using Cirrious.CrossCore.Plugins;
 namespace $rootnamespace$.Bootstrap
 {
     public class WebBrowserPluginBootstrap
-        : MvxLoaderPluginBootstrapAction<Cirrious.MvvmCross.Plugins.WebBrowser.PluginLoader, Cirrious.MvvmCross.Plugins.WebBrowser.Touch.Plugin>
+        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.WebBrowser.PluginLoader, MvvmCross.Plugins.WebBrowser.Touch.Plugin>
     {
     }
 }

@@ -47,69 +47,69 @@
 	</metadata>
 	<files>
 		<!-- Src -->
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid" />
-		<file src="..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.Wpf\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.Wpf" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.WindowsStore" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.WindowsPhone\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.WindowsPhone" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.WindowsCommon" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.Droid" />
+		<file src="..\ResourceLoader\MvvmCross.Plugins.ResourceLoader.Touch\**\*.cs" 
+			target="src\MvvmCross.Plugins.ResourceLoader.Touch" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.ResourceLoader.pdb" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\dotnet\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\dotnet\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\dotnet\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\dotnet\MvvmCross.Plugins.ResourceLoader.pdb" />
 		
 		<!-- wpf  -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\net45\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ResourceLoader.Wpf.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\net45\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\net45\MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.ResourceLoader.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\netcore45\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsStore.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\netcore45\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\netcore45\MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.ResourceLoader.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\wp8\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\wp8\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsPhone.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\wp8\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\wp8\MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.ResourceLoader.WindowsPhone.*" target="lib\wp8" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\win81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\win81\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\win81" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\wpa81\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\wpa81" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win81+wpa81\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\portable-win81+wpa81\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ResourceLoader.WindowsCommon.*" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ResourceLoader.Droid.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\MonoAndroid\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\MonoAndroid\MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.ResourceLoader.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.ResourceLoader.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ResourceLoader.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.ResourceLoader.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.ResourceLoader.pdb" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.ResourceLoader.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 	</files>

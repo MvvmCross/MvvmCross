@@ -47,64 +47,64 @@
 	</metadata>
 	<files>		
 		<!-- Common -->
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx" />
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Console" />
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf" />		
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore" />
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone" />	
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon" />
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid" />
-		<file src="..\ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Console\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.Console" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Wpf\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.Wpf" />		
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.WindowsStore" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsPhone\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.WindowsPhone" />	
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.WindowsCommon" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.Droid" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Touch\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.Touch" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 		
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\dotnet" />
 
 		<!-- wpf  -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\net45" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.ReflectionEx.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.ReflectionEx.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.ReflectionEx.WindowsPhone.*" target="lib\wp8" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\win81" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\wpa81" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.ReflectionEx.WindowsCommon.*" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.ReflectionEx.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.ReflectionEx.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.ReflectionEx.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 
 	</files>

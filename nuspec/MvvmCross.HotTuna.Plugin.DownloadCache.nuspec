@@ -48,27 +48,27 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.DownloadCache" />
-		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Droid" />
-		<file src="..\DownloadCache\Cirrious.MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.DownloadCache.Touch" />	
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache" />
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache.Droid" />
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache.Touch" />	
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\dotnet" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.*" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.DownloadCache.Droid.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.DownloadCache.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.DownloadCache.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.DownloadCache.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.DownloadCache.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 
 	</files>

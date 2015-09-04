@@ -47,20 +47,20 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.SoundEffects" />
-		<file src="..\SoundEffects\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone" />
+		<file src="..\SoundEffects\MvvmCross.Plugins.SoundEffects\**\*.cs" 
+			target="src\MvvmCross.Plugins.SoundEffects" />
+		<file src="..\SoundEffects\MvvmCross.Plugins.SoundEffects.WindowsPhone\**\*.cs" 
+			target="src\MvvmCross.Plugins.SoundEffects.WindowsPhone" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.SoundEffects.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 		
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.SoundEffects.*" target="lib\dotnet" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.SoundEffects.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.SoundEffects.WindowsPhone.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.SoundEffects.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.SoundEffects.WindowsPhone.*" target="lib\wp8" />
 		<file src="BootstrapContent\SoundEffectsPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SoundEffectsPluginBootstrap.cs.pp" />
 	</files>
 </package>

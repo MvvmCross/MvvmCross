@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package >
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.SQLitePCL</id>
@@ -52,41 +51,41 @@
 		<!--<file src="MvvmCross.Plugins.Sqlite\**\*.cs"
 			target="src\MvvmCross.Plugins.Sqlite" />
     <file src="MvvmCross.Plugins.Sqlite.Droid\**\*.cs"
-			target="src\Cirrious.MvvmCross.Plugins.Sqlite.Droid" />
+			target="src\MvvmCross.Plugins.Sqlite.Droid" />
     <file src="MvvmCross.Plugins.Sqlite.Touch\**\*.cs"
-			target="src\Cirrious.MvvmCross.Plugins.Sqlite.Touch" />
+			target="src\MvvmCross.Plugins.Sqlite.Touch" />
     <file src="MvvmCross.Plugins.Sqlite.UWP\**\*.cs"
-      target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsUWP" />
+      target="src\MvvmCross.Plugins.Sqlite.WindowsUWP" />
     <file src="MvvmCross.Plugins.Sqlite.WindowsCommon\**\*.cs"
-      target="src\Cirrious.MvvmCross.Plugins.Sqlite.WindowsCommon" />-->
+      target="src\MvvmCross.Plugins.Sqlite.WindowsCommon" />-->
 
 		<!-- PCL -->
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.pdb" />
 
 		<!-- UAP -->
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.WindowsUWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.WindowsUWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.WindowsCommon\bin\Release\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\win81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.WindowsCommon\bin\Release\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- droid -->
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.Droid\bin\Release\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.Touch\bin\Release\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
 		<file src="TouchBootstrap\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 	</files>

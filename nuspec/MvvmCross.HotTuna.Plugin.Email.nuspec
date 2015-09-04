@@ -47,62 +47,62 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email.Wpf" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsStore\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsStore" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsPhone" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email.WindowsCommon" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Droid\**\*.cs" 	
-			target="src\Cirrious.MvvmCross.Plugins.Email.Droid" />
-		<file src="..\Email\Cirrious.MvvmCross.Plugins.Email.Touch\**\*.cs" 
-			target="src\Cirrious.MvvmCross.Plugins.Email.Touch" />
+		<file src="..\Email\MvvmCross.Plugins.Email\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email" />
+		<file src="..\Email\MvvmCross.Plugins.Email.Wpf\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.Wpf" />
+		<file src="..\Email\MvvmCross.Plugins.Email.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.WindowsStore" />
+		<file src="..\Email\MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.WindowsPhone" />
+		<file src="..\Email\MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.WindowsCommon" />
+		<file src="..\Email\MvvmCross.Plugins.Email.Droid\**\*.cs" 	
+			target="src\MvvmCross.Plugins.Email.Droid" />
+		<file src="..\Email\MvvmCross.Plugins.Email.Touch\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.Touch" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\dotnet" />
 
 		<!-- wpf  -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\net45" />
-		<file src="..\bin\Release\Mvx\Wpf\Cirrious.MvvmCross.Plugins.Email.Wpf.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Email.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\net45\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\WindowsStore\Cirrious.MvvmCross.Plugins.Email.WindowsStore.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Email.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\Cirrious.MvvmCross.Plugins.Email.WindowsPhone.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Email.WindowsPhone.*" target="lib\wp8" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\win81" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\win81\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\wpa81" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\Cirrious.MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Plugins.Email.Droid.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Email.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.Plugins.Email.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Plugins.Email.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Email.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\EmailPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\EmailPluginBootstrap.cs.pp" />
 	</files>
 </package>

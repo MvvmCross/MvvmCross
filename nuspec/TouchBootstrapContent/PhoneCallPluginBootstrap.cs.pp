@@ -3,7 +3,7 @@ using Cirrious.CrossCore.Plugins;
 namespace $rootnamespace$.Bootstrap
 {
     public class PhoneCallPluginBootstrap
-        : MvxLoaderPluginBootstrapAction<Cirrious.MvvmCross.Plugins.PhoneCall.PluginLoader, Cirrious.MvvmCross.Plugins.PhoneCall.Touch.Plugin>
+        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.PhoneCall.PluginLoader, MvvmCross.Plugins.PhoneCall.Touch.Plugin>
     {
     }
 }
