@@ -7,6 +7,58 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accelerometer", "Accelerome
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer", "Accelerometer\MvvmCross.Plugins.Accelerometer\MvvmCross.Plugins.Accelerometer.csproj", "{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "All", "All", "{8D70F063-BB7F-4008-889D-4FA83549EAF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{EE5CCE6D-9177-484B-94A9-0CF60D5A5AFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Color", "Color", "{0930367F-805F-4814-8D62-B50ED145F5F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DownloadCache", "DownloadCache", "{7D383F92-264D-4C4F-9803-E3B8C75F7226}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{83DC5338-32A2-47D1-974E-1F3ACC600A03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FieldBinding", "FieldBinding", "{0DF48B2E-43EA-4181-985B-AA178771BB19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File", "File", "{CC9DD91E-C481-47E7-8BCE-188202898F72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json", "Json", "{C769BDF1-39B9-4826-8CAF-DCF59A87E5F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JsonLocalisation", "JsonLocalisation", "{EEF5D800-1BAB-481D-B0D3-28BE76B96F63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Location", "Location", "{B5BE527E-B554-4A0F-9627-62E0F2DD8889}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messenger", "Messenger", "{D733D69B-36AC-43BE-AF45-C930FFEFDC71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MethodBinding", "MethodBinding", "{472070E8-8458-4646-B6B4-B90D34C3E7A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Network", "Network", "{4C570ADA-C178-43C4-828F-EFEA6A508E15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneCall", "PhoneCall", "{1189B1D1-9938-4F17-8B4A-92B99978D3DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PictureChooser", "PictureChooser", "{EB7A7EA9-995D-44EC-A4C9-7936BD6DF759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReflectionEx", "ReflectionEx", "{465527B1-058F-4533-A92C-8477A93AC1AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResourceLoader", "ResourceLoader", "{B3724F4D-C99C-4C89-88EC-76E823F01FB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Share", "Share", "{69F563DE-F6E1-4E6B-8C27-0F442F0EEFF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SoundEffects", "SoundEffects", "{78B747E6-AA86-412A-ACFB-8FAD853B9B4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqlite", "Sqlite", "{DF15C0A2-27B6-43EA-AB82-E7A7EF3A0244}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite-PCL", "SQLite-PCL", "{9B45C8EC-18B9-4A88-950E-8D8FF8FAA1DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThreadUtils", "ThreadUtils", "{311E1D98-1C14-40B9-BA2E-C9ACAEA4533F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visibility", "Visibility", "{6B6B7F58-F334-4449-9204-A103B3B4812B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebBrowser", "WebBrowser", "{E7C40E91-1D44-4CE7-A137-3C444738E94F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.All", "All\MvvmCross.Plugins.All\MvvmCross.Plugins.All.csproj", "{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Bookmarks", "Bookmarks\MvvmCross.Plugins.Bookmarks\MvvmCross.Plugins.Bookmarks.csproj", "{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +69,21 @@ Global
 		{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6} = {D9F520C0-4C25-465B-9C16-CADDDE3E72B8}
+		{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403} = {8D70F063-BB7F-4008-889D-4FA83549EAF5}
+		{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4} = {EE5CCE6D-9177-484B-94A9-0CF60D5A5AFE}
 	EndGlobalSection
 EndGlobal
