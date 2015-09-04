@@ -66,8 +66,8 @@
 
 		<!-- UAP -->
 		<file src="MvvmCross.Plugins.Sqlite\bin\Release\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.UWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
-		<file src="MvvmCross.Plugins.Sqlite.UWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
+		<file src="MvvmCross.Plugins.Sqlite.WindowsUWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
+		<file src="MvvmCross.Plugins.Sqlite.WindowsUWP\bin\Release\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
 		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- windows common -->

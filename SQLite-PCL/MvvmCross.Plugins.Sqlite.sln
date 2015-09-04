@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.Droid", "MvvmCross.Plugins.Sqlite.Droid\MvvmCross.Plugins.Sqlite.Droid.csproj", "{0DDF029F-1BBA-4B9C-844E-4FF4E255AC5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.UWP", "MvvmCross.Plugins.Sqlite.UWP\MvvmCross.Plugins.Sqlite.UWP.csproj", "{F1E793BF-8D79-4108-8738-3D68460D3290}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.WindowsUWP", "MvvmCross.Plugins.Sqlite.WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.csproj", "{F1E793BF-8D79-4108-8738-3D68460D3290}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.WindowsCommon", "MvvmCross.Plugins.Sqlite.WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.csproj", "{3A68941C-B8FB-4973-9FFC-B228189506F4}"
 EndProject

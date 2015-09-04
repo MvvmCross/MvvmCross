@@ -4,7 +4,7 @@ using SQLite.Net.Async;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.WinRT;
 
-namespace MvvmCross.Plugins.Sqlite.UWP
+namespace MvvmCross.Plugins.Sqlite.WindowsUWP
 {
     public class WindowsSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {

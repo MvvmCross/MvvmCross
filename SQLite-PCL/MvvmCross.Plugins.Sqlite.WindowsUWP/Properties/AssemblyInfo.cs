@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MvvmCross.Plugins.Sqlite.UWP")]
+[assembly: AssemblyTitle("MvvmCross.Plugins.Sqlite.WindowsUWP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MvvmCross.Plugins.Sqlite.UWP")]
+[assembly: AssemblyProduct("MvvmCross.Plugins.Sqlite.WindowsUWP")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
