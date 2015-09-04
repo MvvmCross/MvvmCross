@@ -5,21 +5,21 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
-using Android.Runtime;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
