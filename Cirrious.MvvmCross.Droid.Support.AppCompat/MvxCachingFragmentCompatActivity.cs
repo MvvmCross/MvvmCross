@@ -24,7 +24,7 @@ using System.Linq;
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
 	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentActivityCompat")]
-	public class MvxCachingFragmentActivityCompat : MvxFragmentCompatActivity
+	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
@@ -48,11 +48,11 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             _lookup.Add(tag, fragInfo);
         }
 
-        protected MvxCachingFragmentActivityCompat()
+        protected MvxCachingFragmentCompatActivity()
         {
         }
 
-        protected MvxCachingFragmentActivityCompat(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
@@ -367,8 +367,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         }
     }
 
-    public abstract class MvxCachingFragmentActivityCompat<TViewModel>
-        : MvxCachingFragmentActivityCompat
+    public abstract class MvxCachingFragmentCompatActivity<TViewModel>
+        : MvxCachingFragmentCompatActivity
     , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
