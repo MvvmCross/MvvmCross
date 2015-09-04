@@ -11,7 +11,7 @@ using Android.Net;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Reachability;
 using Java.Net;
 
 namespace MvvmCross.Plugins.Network.Droid

@@ -8,7 +8,7 @@
 using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Plugins.File;
+using MvvmCross.Plugins.File;
 using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.Touch

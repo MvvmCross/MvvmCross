@@ -7,8 +7,8 @@
 
 using System;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Devices.Geolocation;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 
 namespace MvvmCross.Plugins.Location.WindowsStore
 {

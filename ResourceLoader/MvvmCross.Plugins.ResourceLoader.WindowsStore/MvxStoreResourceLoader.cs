@@ -7,7 +7,7 @@
 
 using System;
 using System.IO;
-using Cirrious.CrossCore.WindowsStore.Platform;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Plugins.ResourceLoader.WindowsStore

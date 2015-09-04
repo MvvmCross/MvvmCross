@@ -11,7 +11,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Plugins.File;
+using MvvmCross.Plugins.File;
 using System.Collections.Generic;
 using System;
 

@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.IO;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using MvvmCross.Plugins.Sqlite;
 using SQLite;
 
 namespace MvvmCross.Plugins.WindowsPhone.Store

@@ -9,8 +9,8 @@ using System;
 using System.IO;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Plugins.File;
-using Cirrious.MvvmCross.Plugins.File.Touch;
+using MvvmCross.Plugins.File;
+using MvvmCross.Plugins.File.Touch;
 
 namespace MvvmCross.Plugins.ResourceLoader.Touch
 {

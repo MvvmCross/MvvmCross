@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Plugins.ReflectionEx.HackShare;
+using MvvmCross.Plugins.ReflectionEx.HackShare;
 
 namespace MvvmCross.Plugins.ReflectionEx.Wpf
 {

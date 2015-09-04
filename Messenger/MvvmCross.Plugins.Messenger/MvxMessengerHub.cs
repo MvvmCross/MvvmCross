@@ -11,8 +11,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Plugins.Messenger.Subscriptions;
-using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Plugins.Messenger.Subscriptions;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger
 {

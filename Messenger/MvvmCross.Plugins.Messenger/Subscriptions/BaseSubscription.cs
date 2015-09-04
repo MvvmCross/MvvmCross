@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {

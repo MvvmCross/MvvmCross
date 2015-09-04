@@ -7,8 +7,8 @@
 
 using System;
 using System.Net;
-using Cirrious.MvvmCross.Plugins.Network.Rest;
-using Cirrious.MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
+using MvvmCross.Plugins.Network.Rest;
+using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
 
@@ -31,8 +31,8 @@ namespace MvvmCross.Plugins.Network.Test
             // not a real test yet....
             var url = BooksService.GetSearchUrl("MonoTouch");
 
-            var json = new Cirrious.MvvmCross.Plugins.Json.MvxJsonConverter();
-            var client = new Cirrious.MvvmCross.Plugins.Network.Rest.MvxJsonRestClient
+            var json = new MvvmCross.Plugins.Json.MvxJsonConverter();
+            var client = new MvvmCross.Plugins.Network.Rest.MvxJsonRestClient
                 {
                     JsonConverterProvider = () => json
                 };

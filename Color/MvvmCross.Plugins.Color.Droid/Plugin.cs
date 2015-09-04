@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Plugins.Color.Droid.BindingTargets;
+using MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace MvvmCross.Plugins.Color.Droid
 {

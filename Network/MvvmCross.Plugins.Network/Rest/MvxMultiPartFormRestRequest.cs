@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Plugins.File;
+using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.Network.Rest
 {

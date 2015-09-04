@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.WindowsStore.Platform;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 

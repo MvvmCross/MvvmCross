@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using MvvmCross.Plugins.Sqlite;
 
 namespace MvvmCross.Plugins.WindowsPhone.Store
 {

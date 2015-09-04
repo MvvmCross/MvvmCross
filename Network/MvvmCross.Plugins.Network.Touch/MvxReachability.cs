@@ -7,7 +7,7 @@
 
 using System;
 using System.Net;
-using Cirrious.MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Reachability;
 using CoreFoundation;
 using SystemConfiguration;
 

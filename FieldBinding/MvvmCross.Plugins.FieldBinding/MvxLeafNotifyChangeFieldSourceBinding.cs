@@ -8,7 +8,6 @@
 using System;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

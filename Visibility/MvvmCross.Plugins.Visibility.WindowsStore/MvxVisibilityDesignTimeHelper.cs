@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.UI;
-using Cirrious.CrossCore.WindowsStore.Platform;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 
 namespace MvvmCross.Plugins.Visibility.WindowsStore
 {

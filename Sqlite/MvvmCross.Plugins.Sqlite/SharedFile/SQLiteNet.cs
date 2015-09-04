@@ -43,20 +43,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using MvvmCross.Plugins.Sqlite;
 
 
 #if USE_CSHARP_SQLITE
 using Community.CsharpSqlite;
 using Sqlite3DatabaseHandle = Community.CsharpSqlite.Sqlite3.sqlite3;
 using Sqlite3Statement = Community.CsharpSqlite.Sqlite3.Vdbe;
-/*
-#elif WINDOWS_PHONE
-using Sqlite = SQLite;
-using Sqlite3 = SQLite.SQLite3;
-using Sqlite3DatabaseHandle = System.IntPtr;
-using Sqlite3Statement = System.IntPtr;
-*/
 #else
 using System.Runtime.InteropServices;
 using Sqlite3DatabaseHandle = System.IntPtr;

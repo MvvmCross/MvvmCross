@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WindowsStore.Platform;
 using Windows.Storage;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 
 namespace MvvmCross.Plugins.File.WindowsStore
 {

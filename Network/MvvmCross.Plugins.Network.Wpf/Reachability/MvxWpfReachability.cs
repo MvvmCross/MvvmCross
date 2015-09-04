@@ -1,5 +1,5 @@
 ﻿using System.Net.NetworkInformation;
-using Cirrious.MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Reachability;
 
 namespace MvvmCross.Plugins.Network.Wpf.Reachability
 {

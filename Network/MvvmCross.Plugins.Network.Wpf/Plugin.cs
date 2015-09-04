@@ -7,9 +7,9 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Plugins.Network.Reachability;
-using Cirrious.MvvmCross.Plugins.Network.Rest;
-using Cirrious.MvvmCross.Plugins.Network.Wpf.Reachability;
+using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugins.Network.Rest;
+using MvvmCross.Plugins.Network.Wpf.Reachability;
 
 namespace MvvmCross.Plugins.Network.Wpf
 {

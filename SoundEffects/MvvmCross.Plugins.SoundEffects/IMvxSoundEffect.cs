@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.MvvmCross.Plugins.ResourceLoader;
+using MvvmCross.Plugins.ResourceLoader;
 
 namespace MvvmCross.Plugins.SoundEffects
 {

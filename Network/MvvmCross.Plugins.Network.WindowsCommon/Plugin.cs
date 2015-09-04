@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Plugins.Network.Rest;
+using MvvmCross.Plugins.Network.Rest;
 
 namespace MvvmCross.Plugins.Network.WindowsCommon
 {

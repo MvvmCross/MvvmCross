@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.IO;
-using Cirrious.MvvmCross.Plugins.ResourceLoader;
+using MvvmCross.Plugins.ResourceLoader;
 using Microsoft.Xna.Framework.Audio;
 
 namespace MvvmCross.Plugins.SoundEffects.WindowsPhone
