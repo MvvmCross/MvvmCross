@@ -47,29 +47,6 @@ namespace Example.Droid
 			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView = global::Example.Droid.Resource.Styleable.MvxListView;
 			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
 			global::Cirrious.MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxBind = global::Example.Droid.Resource.Attribute.MvxBind;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxDropDownItemTemplate = global::Example.Droid.Resource.Attribute.MvxDropDownItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxGroupItemTemplate = global::Example.Droid.Resource.Attribute.MvxGroupItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxItemTemplate = global::Example.Droid.Resource.Attribute.MvxItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxLang = global::Example.Droid.Resource.Attribute.MvxLang;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxSource = global::Example.Droid.Resource.Attribute.MvxSource;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Attribute.MvxTemplate = global::Example.Droid.Resource.Attribute.MvxTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Id.MvvmCrossTagId = global::Example.Droid.Resource.Id.MvvmCrossTagId;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Id.MvxBindingTagUnique = global::Example.Droid.Resource.Id.MvxBindingTagUnique;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.String.ApplicationName = global::Example.Droid.Resource.String.ApplicationName;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.String.Hello = global::Example.Droid.Resource.String.Hello;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxBinding = global::Example.Droid.Resource.Styleable.MvxBinding;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxBinding_MvxBind = global::Example.Droid.Resource.Styleable.MvxBinding_MvxBind;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxBinding_MvxLang = global::Example.Droid.Resource.Styleable.MvxBinding_MvxLang;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxControl = global::Example.Droid.Resource.Styleable.MvxControl;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxControl_MvxTemplate = global::Example.Droid.Resource.Styleable.MvxControl_MvxTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxExpandableListView = global::Example.Droid.Resource.Styleable.MvxExpandableListView;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate = global::Example.Droid.Resource.Styleable.MvxExpandableListView_MvxGroupItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxImageView = global::Example.Droid.Resource.Styleable.MvxImageView;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxImageView_MvxSource = global::Example.Droid.Resource.Styleable.MvxImageView_MvxSource;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxListView = global::Example.Droid.Resource.Styleable.MvxListView;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
-			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.Styleable.MvxListView_MvxItemTemplate = global::Example.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
 		}
 		
 		public partial class Animation
@@ -2365,12 +2342,6 @@ namespace Example.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070014
-			public const int ApplicationName = 2131165204;
-			
-			// aapt resource value: 0x7f070013
-			public const int Hello = 2131165203;
-			
 			// aapt resource value: 0x7f070000
 			public const int abc_action_bar_home_description = 2131165184;
 			
@@ -2422,20 +2393,20 @@ namespace Example.Droid
 			// aapt resource value: 0x7f070010
 			public const int abc_toolbar_collapse_description = 2131165200;
 			
-			// aapt resource value: 0x7f070016
-			public const int app_name = 2131165206;
+			// aapt resource value: 0x7f070014
+			public const int app_name = 2131165204;
 			
 			// aapt resource value: 0x7f070012
 			public const int appbar_scrolling_view_behavior = 2131165202;
 			
-			// aapt resource value: 0x7f070018
-			public const int drawer_close = 2131165208;
-			
-			// aapt resource value: 0x7f070017
-			public const int drawer_open = 2131165207;
+			// aapt resource value: 0x7f070016
+			public const int drawer_close = 2131165206;
 			
 			// aapt resource value: 0x7f070015
-			public const int hello = 2131165205;
+			public const int drawer_open = 2131165205;
+			
+			// aapt resource value: 0x7f070013
+			public const int hello = 2131165203;
 			
 			// aapt resource value: 0x7f070011
 			public const int status_bar_notification_info_overflow = 2131165201;

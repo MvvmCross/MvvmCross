@@ -20,7 +20,7 @@ namespace Example.Droid.Activities
         LaunchMode = LaunchMode.SingleTop,
         Name = "example.droid.activities.MainActivity"
     )]
-    public class MainActivity : MvxCachingFragmentActivityCompat<MainViewModel>, IMvxFragmentHost
+    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, IMvxFragmentHost
     {
         public DrawerLayout DrawerLayout;
 
