@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A1AD7BB-03AE-42F4-A2CC-BBD4E2446403}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvvmCross.Plugins.All</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.All</AssemblyName>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\Mvx\Portable\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\Mvx\Portable\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\Accelerometer\MvvmCross.Plugins.Accelerometer\MvvmCross.Plugins.Accelerometer.csproj">
+      <Project>{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}</Project>
+      <Name>MvvmCross.Plugins.Accelerometer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Bookmarks\MvvmCross.Plugins.Bookmarks\MvvmCross.Plugins.Bookmarks.csproj">
+      <Project>{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}</Project>
+      <Name>MvvmCross.Plugins.Bookmarks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Color\MvvmCross.Plugins.Color\MvvmCross.Plugins.Color.csproj">
+      <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
+      <Name>MvvmCross.Plugins.Color</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DownloadCache\MvvmCross.Plugins.DownloadCache\MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60A80EB8-2056-4771-8600-03A8DA417CFB}</Project>
+      <Name>MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Email\MvvmCross.Plugins.Email\MvvmCross.Plugins.Email.csproj">
+      <Project>{157A8846-529E-4549-84EA-7FC8BAFBC25A}</Project>
+      <Name>MvvmCross.Plugins.Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\File\MvvmCross.Plugins.File\MvvmCross.Plugins.File.csproj">
+      <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
+      <Name>MvvmCross.Plugins.File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\JsonLocalisation\MvvmCross.Plugins.JsonLocalisation\MvvmCross.Plugins.JsonLocalisation.csproj">
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
+      <Name>MvvmCross.Plugins.JsonLocalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Json\MvvmCross.Plugins.Json\MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Location\MvvmCross.Plugins.Location\MvvmCross.Plugins.Location.csproj">
+      <Project>{8B0A9E43-E90F-455C-AE56-45BC70429167}</Project>
+      <Name>MvvmCross.Plugins.Location</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Messenger\MvvmCross.Plugins.Messenger\MvvmCross.Plugins.Messenger.csproj">
+      <Project>{299C250C-50E4-4522-AADC-C31B9AAC62D3}</Project>
+      <Name>MvvmCross.Plugins.Messenger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PhoneCall\MvvmCross.Plugins.PhoneCall\MvvmCross.Plugins.PhoneCall.csproj">
+      <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
+      <Name>MvvmCross.Plugins.PhoneCall</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PictureChooser\MvvmCross.Plugins.PictureChooser\MvvmCross.Plugins.PictureChooser.csproj">
+      <Project>{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}</Project>
+      <Name>MvvmCross.Plugins.PictureChooser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ReflectionEx\MvvmCross.Plugins.ReflectionEx\MvvmCross.Plugins.ReflectionEx.csproj">
+      <Project>{22648A57-3D94-4604-A238-B0B92BDDC3A5}</Project>
+      <Name>MvvmCross.Plugins.ReflectionEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
+      <Name>MvvmCross.Plugins.ResourceLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Share\MvvmCross.Plugins.Share\MvvmCross.Plugins.Share.csproj">
+      <Project>{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}</Project>
+      <Name>MvvmCross.Plugins.Share</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SoundEffects\MvvmCross.Plugins.SoundEffects\MvvmCross.Plugins.SoundEffects.csproj">
+      <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
+      <Name>MvvmCross.Plugins.SoundEffects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sqlite\MvvmCross.Plugins.Sqlite\MvvmCross.Plugins.Sqlite.csproj">
+      <Project>{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}</Project>
+      <Name>MvvmCross.Plugins.Sqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThreadUtils\MvvmCross.Plugins.ThreadUtils\MvvmCross.Plugins.ThreadUtils.csproj">
+      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
+      <Name>MvvmCross.Plugins.ThreadUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Visibility\MvvmCross.Plugins.Visibility\MvvmCross.Plugins.Visibility.csproj">
+      <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
+      <Name>MvvmCross.Plugins.Visibility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WebBrowser\MvvmCross.Plugins.WebBrowser\MvvmCross.Plugins.WebBrowser.csproj">
+      <Project>{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}</Project>
+      <Name>MvvmCross.Plugins.WebBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Network\MvvmCross.Plugins.Network\MvvmCross.Plugins.Network.csproj">
+      <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
+      <Name>MvvmCross.Plugins.Network</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PluginLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.CrossCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta2\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.Binding.4.0.0-beta2\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Binding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta2\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
