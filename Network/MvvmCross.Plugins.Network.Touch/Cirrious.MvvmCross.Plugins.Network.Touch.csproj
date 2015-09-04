@@ -46,7 +46,7 @@
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
       <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Network</Name>
     </ProjectReference>

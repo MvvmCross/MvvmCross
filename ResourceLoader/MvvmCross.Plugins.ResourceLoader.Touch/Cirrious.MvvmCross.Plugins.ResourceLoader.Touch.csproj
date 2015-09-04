@@ -46,15 +46,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\File\Cirrious.MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
+    <ProjectReference Include="..\..\File\MvvmCross.Plugins.File.Touch\Cirrious.MvvmCross.Plugins.File.Touch.csproj">
       <Project>{5B8CF261-197A-48AF-BC7C-899CF81AA187}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+    <ProjectReference Include="..\..\File\MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
@@ -72,7 +72,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" />
+      <UserProperties ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

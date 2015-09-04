@@ -68,15 +68,15 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\File\Cirrious.MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
+    <ProjectReference Include="..\..\File\MvvmCross.Plugins.File\Cirrious.MvvmCross.Plugins.File.csproj">
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Json\Cirrious.MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
+    <ProjectReference Include="..\..\Json\MvvmCross.Plugins.Json\Cirrious.MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Json</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj">
       <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Network</Name>
     </ProjectReference>

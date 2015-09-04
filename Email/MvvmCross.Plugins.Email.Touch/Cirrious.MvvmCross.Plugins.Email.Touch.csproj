@@ -50,7 +50,7 @@
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.Email\Cirrious.MvvmCross.Plugins.Email.csproj">
       <Project>{157A8846-529E-4549-84EA-7FC8BAFBC25A}</Project>
       <Name>Cirrious.MvvmCross.Plugins.Email</Name>
     </ProjectReference>
@@ -69,7 +69,7 @@
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="6c3da376-dc4a-4b8c-924d-070c19f72bb7" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

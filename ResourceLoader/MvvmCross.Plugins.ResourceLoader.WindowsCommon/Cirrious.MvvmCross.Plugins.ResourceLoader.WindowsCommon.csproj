@@ -47,7 +47,7 @@
       <Project>{17BDF4A5-B29B-42CF-AAAE-B533D8364296}</Project>
       <Name>Cirrious.CrossCore.WindowsCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>

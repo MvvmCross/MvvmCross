@@ -107,9 +107,9 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.Bookmarks\Cirrious.MvvmCross.Plugins.Bookmarks.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.Bookmarks\MvvmCross.Plugins.Bookmarks.csproj">
       <Project>{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Bookmarks</Name>
+      <Name>MvvmCross.Plugins.Bookmarks</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

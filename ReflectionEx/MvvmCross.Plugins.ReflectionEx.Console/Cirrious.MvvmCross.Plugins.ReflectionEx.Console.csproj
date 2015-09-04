@@ -50,7 +50,7 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>Cirrious.CrossCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Plugins.ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.ReflectionEx\Cirrious.MvvmCross.Plugins.ReflectionEx.csproj">
       <Project>{22648A57-3D94-4604-A238-B0B92BDDC3A5}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ReflectionEx</Name>
     </ProjectReference>

@@ -53,7 +53,7 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>Cirrious.MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
+    <ProjectReference Include="..\..\ResourceLoader\MvvmCross.Plugins.ResourceLoader\Cirrious.MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>Cirrious.MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
