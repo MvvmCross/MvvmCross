@@ -5,14 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V7.App;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Android.Runtime;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {

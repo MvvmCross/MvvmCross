@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivity.cs
+// MvxCachingFragmentActivityCompat.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -21,10 +21,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cirrious.MvvmCross.Droid.Support.Fragging
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-    public class MvxCachingFragmentActivity
-        : MvxFragmentActivity
+	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentActivityCompat")]
+	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
@@ -48,11 +48,11 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             _lookup.Add(tag, fragInfo);
         }
 
-        protected MvxCachingFragmentActivity()
+        protected MvxCachingFragmentCompatActivity()
         {
         }
 
-        protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
@@ -143,10 +143,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             // with references to them.
             foreach (var fragment in SupportFragmentManager.Fragments)
             {
-                if (fragment != null) {
-                    var fragmentType = fragment.GetType ();
-                    var lookup = _lookup.Where (x => x.Value.FragmentType == fragmentType);
-                    foreach (var item in lookup.Where(item => item.Value != null)) {
+                if (fragment != null)
+                {
+                    var fragmentType = fragment.GetType();
+                    var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
+                    foreach (var item in lookup.Where(item => item.Value != null))
+                    {
                         // reattach fragment to lookup
                         item.Value.CachedFragment = fragment;
                     }
@@ -270,7 +272,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             return ShouldReplaceFragment(contentId, currentFragment, tag);
         }
 
-        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)  {
+        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)
+        {
             return currentTag != replacementTag;
         }
 
@@ -281,24 +284,24 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             ft.Detach(frag);
 
-            var currentFragment = _currentFragments.First (x => x.Key == contentId);           
-            _backStackFragments.Add (currentFragment);
+            var currentFragment = _currentFragments.First(x => x.Key == contentId);
+            _backStackFragments.Add(currentFragment);
 
             _currentFragments.Remove(contentId);
         }
 
-        public override void OnBackPressed ()
+        public override void OnBackPressed()
         {
             if (SupportFragmentManager.BackStackEntryCount > 1)
             {
-                var backStackFrag = SupportFragmentManager.GetBackStackEntryAt (SupportFragmentManager.BackStackEntryCount - 1);
-                _currentFragments.Remove (_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
+                var backStackFrag = SupportFragmentManager.GetBackStackEntryAt(SupportFragmentManager.BackStackEntryCount - 1);
+                _currentFragments.Remove(_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
 
-                var newFrag = SupportFragmentManager.GetBackStackEntryAt (SupportFragmentManager.BackStackEntryCount - 2);
-                var currentFragment = _backStackFragments.Last (x => x.Value == newFrag.Name);
+                var newFrag = SupportFragmentManager.GetBackStackEntryAt(SupportFragmentManager.BackStackEntryCount - 2);
+                var currentFragment = _backStackFragments.Last(x => x.Value == newFrag.Name);
 
-                _currentFragments.Add (currentFragment.Key, currentFragment.Value);
-                _backStackFragments.Remove (currentFragment);
+                _currentFragments.Add(currentFragment.Key, currentFragment.Value);
+                _backStackFragments.Remove(currentFragment);
 
                 SupportFragmentManager.PopBackStackImmediate();
                 return;
@@ -326,11 +329,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             _currentFragments.Remove(contentId);
 
-            if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId)) {
-                var currentFragment = _backStackFragments.Last (x => x.Key == contentId);
+            if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId))
+            {
+                var currentFragment = _backStackFragments.Last(x => x.Key == contentId);
 
-                _currentFragments.Add (currentFragment.Key, currentFragment.Value);
-                _backStackFragments.Remove (currentFragment);
+                _currentFragments.Add(currentFragment.Key, currentFragment.Value);
+                _backStackFragments.Remove(currentFragment);
             }
         }
 
@@ -363,8 +367,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         }
     }
 
-    public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity
+    public abstract class MvxCachingFragmentCompatActivity<TViewModel>
+        : MvxCachingFragmentCompatActivity
     , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
