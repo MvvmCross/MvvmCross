@@ -23,7 +23,7 @@ using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
-	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentActivityCompat")]
+	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentCompatActivity")]
 	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
