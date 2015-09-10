@@ -47,7 +47,7 @@
 	</metadata>
 	<files>		
 		<!-- src -->
-		<file src="..\FieldBinding\Cirrious.MvvmCross.FieldBinding\**\*.cs" 
+		<file src="..\FieldBinding\MvvmCross.FieldBinding\**\*.cs" 
 			target="src\Cirrious.MvvmCross.FieldBinding" />
 		<file src="..\FieldBinding\MvvmCross.Plugins.FieldBinding\**\*.cs" 
 			target="src\MvvmCross.Plugins.FieldBinding" />

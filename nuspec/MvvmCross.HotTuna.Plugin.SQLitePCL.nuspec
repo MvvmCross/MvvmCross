@@ -14,35 +14,35 @@
 		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 				<!--<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />-->
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -67,26 +67,26 @@
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
 		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
-		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
-		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\win81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\win81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
-		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
-		<file src="Bootstrap\SqlitePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
-		<file src="TouchBootstrap\SqlitePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
+		<file src="TouchBootstrap\SqlitePclPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
 	</files>
 </package>
