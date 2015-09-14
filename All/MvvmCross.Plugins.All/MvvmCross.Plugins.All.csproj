@@ -98,8 +98,8 @@
       <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
       <Name>MvvmCross.Plugins.SoundEffects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sqlite\MvvmCross.Plugins.Sqlite\MvvmCross.Plugins.Sqlite.csproj">
-      <Project>{72654B8A-5F78-4BDF-BFBB-057DDDF314F1}</Project>
+    <ProjectReference Include="..\..\SQLite-PCL\MvvmCross.Plugins.Sqlite\MvvmCross.Plugins.Sqlite.csproj">
+      <Project>{4c7378a4-f173-43fd-b24f-9f54d6496dc8}</Project>
       <Name>MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ThreadUtils\MvvmCross.Plugins.ThreadUtils\MvvmCross.Plugins.ThreadUtils.csproj">

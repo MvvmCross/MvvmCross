@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.All</id>
-		<version>4.0.0-beta3</version>
+		<version>4.0.0-beta4</version>
 		<title>MvvmCross - All Plugins</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -32,7 +32,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.SQLitePCL" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -56,7 +56,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -80,7 +80,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -104,7 +104,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -128,7 +128,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -152,7 +152,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -176,7 +176,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -200,7 +200,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -224,7 +224,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -248,7 +248,7 @@
 				<dependency id="MvvmCross.HotTuna.Plugin.ResourceLoader" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Share" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.SoundEffects" version="4.0.0-beta3" />		  
-				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Sqlite" version="4.0.0-beta4" />
 				<dependency id="MvvmCross.HotTuna.Plugin.ThreadUtils" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Visibility" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.WebBrowser" version="4.0.0-beta3" />
@@ -293,6 +293,7 @@
 
 	</files>
 </package>
+
 
 
 
