@@ -4,10 +4,12 @@
         AppTheme from BOTH res/values/styles.xml on API 21+ devices.
     -->
     <style name="AppTheme" parent="AppTheme.Base">
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!---<item name="android:windowTranslucentNavigation">true</item>-->
 
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>

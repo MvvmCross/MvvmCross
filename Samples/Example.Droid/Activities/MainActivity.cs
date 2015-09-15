@@ -51,12 +51,12 @@ namespace Example.Droid.Activities
 
         private void RegisterForDetailsRequests(Bundle bundle)
         {
-            RegisterFragment<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name, bundle, new MenuViewModel());
-            RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle, ViewModel.Examples);
-            RegisterFragment<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name, bundle, new SettingsViewModel());
+            RegisterFragment<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name, bundle);
+            RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle);
+            RegisterFragment<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name, bundle);
         }
 
-        public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args, IMvxViewModel viewModel = null)
+        public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
