@@ -2433,14 +2433,14 @@ namespace Example.Droid
 			// aapt resource value: 0x7f080076
 			public const int Animation_AppCompat_DropDownUp = 2131230838;
 			
+			// aapt resource value: 0x7f080134
+			public const int AppTheme = 2131231028;
+			
 			// aapt resource value: 0x7f080135
-			public const int AppTheme = 2131231029;
+			public const int AppTheme_Base = 2131231029;
 			
 			// aapt resource value: 0x7f080136
-			public const int AppTheme_Base = 2131231030;
-			
-			// aapt resource value: 0x7f080137
-			public const int AppTheme_Splash = 2131231031;
+			public const int AppTheme_Splash = 2131231030;
 			
 			// aapt resource value: 0x7f080077
 			public const int Base_AlertDialog_AppCompat = 2131230839;
@@ -3116,9 +3116,6 @@ namespace Example.Droid
 			
 			// aapt resource value: 0x7f0800dd
 			public const int Theme_AppCompat_NoActionBar = 2131230941;
-			
-			// aapt resource value: 0x7f080134
-			public const int Theme_Splash = 2131231028;
 			
 			// aapt resource value: 0x7f0800de
 			public const int ThemeOverlay_AppCompat = 2131230942;

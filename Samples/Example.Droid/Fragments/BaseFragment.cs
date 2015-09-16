@@ -17,10 +17,15 @@ using Example.Droid.Fragments;
 
 namespace Example.Droid
 {
-    public abstract class BaseFragment : MvxFragment
+    public abstract class BaseFragment : MvxFragment, IMvxFragmentView
     {
         private Toolbar _toolbar;
         private MvxActionBarDrawerToggle _drawerToggle;
+
+        protected BaseFragment()
+        {
+            this.RetainInstance = true;
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
