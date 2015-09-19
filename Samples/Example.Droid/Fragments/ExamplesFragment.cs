@@ -23,12 +23,11 @@ namespace Example.Droid.Fragments
             {
                 var fragments = new List<MvxFragmentStatePagerAdapter.FragmentInfo>
                 {
-                    new MvxFragmentStatePagerAdapter.FragmentInfo
-                    {
-                        FragmentType = typeof(RecyclerViewFragment),
-                        Title = "RecyclerView",
-                        ViewModel = ViewModel.Recycler
-                    }
+                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 1", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
+                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 2", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
+                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 3", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
+                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 4", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
+                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 5", typeof(RecyclerViewFragment), typeof(RecyclerViewModel))
                 };
                 viewPager.Adapter = new MvxFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
             }
