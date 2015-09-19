@@ -12,11 +12,10 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4
 {
