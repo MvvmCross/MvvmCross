@@ -1,4 +1,6 @@
-﻿using Android.OS;
+﻿using System;
+using System.Threading.Tasks;
+using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
@@ -6,8 +8,6 @@ using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Example.Core.ViewModels;
-using System.Threading.Tasks;
-using System;
 using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
@@ -39,12 +39,12 @@ namespace Example.Droid.Fragments
             return true;
         }
 
-        private async Task Navigate(int ItemId)
+        private async Task Navigate(int itemId)
         {
             ((MainActivity)Activity).DrawerLayout.CloseDrawers ();
             await Task.Delay (TimeSpan.FromMilliseconds (250));
 
-            switch (ItemId) {
+            switch (itemId) {
             case Resource.Id.nav_home:
                 ViewModel.HomeCommand.Execute ();
                 break;

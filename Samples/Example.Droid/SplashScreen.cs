@@ -8,7 +8,7 @@ namespace Example.Droid
         Label = "Example.Droid"
         , MainLauncher = true
         , Icon = "@drawable/icon"
-        , Theme = "@style/Theme.Splash"
+        , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxSplashScreenActivity
