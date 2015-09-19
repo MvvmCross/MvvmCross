@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Android.Content.Res;
+﻿using Android.Content.Res;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Support.AppCompat;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
-using Cirrious.MvvmCross.Droid.Support.V4;
 using Cirrious.MvvmCross.ViewModels;
 using Example.Droid.Activities;
-using Example.Droid.Fragments;
 
 namespace Example.Droid
 {
-    public abstract class BaseFragment : MvxFragment, IMvxFragmentView
+    public abstract class BaseFragment : MvxFragment
     {
         private Toolbar _toolbar;
         private MvxActionBarDrawerToggle _drawerToggle;
