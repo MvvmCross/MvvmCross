@@ -33,13 +33,6 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
         private IList<KeyValuePair<int, string>> _backStackFragments = new List<KeyValuePair<int, string>>();
 
-        enum FragmentReplaceMode
-        {
-            NoReplace,
-            ReplaceFragment,
-            ReplaceFragmentAndViewModel
-        }
-
         /// <summary>
         ///     Register a Fragment to be shown, this should usually be done in OnCreate
         /// </summary>
@@ -238,12 +231,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             string currentFragment;
             _currentFragments.TryGetValue(contentId, out currentFragment);
 
-            FragmentReplaceMode replaceMode = FragmentReplaceMode.ReplaceFragmentAndViewModel;
-
-            if (!forceReplaceFragment)
-                replaceMode = ShouldReplaceFragment(contentId, fragInfo, currentFragment, bundle);
-
-            if (replaceMode == FragmentReplaceMode.NoReplace)
+            var shouldReplaceCurrentFragment = forceReplaceFragment || ShouldReplaceCurrentFragment(contentId, tag);
+            if (!shouldReplaceCurrentFragment)
                 return;
 
             var ft = SupportFragmentManager.BeginTransaction();
@@ -255,12 +244,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
             fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
-            if (fragInfo.CachedFragment == null || replaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
+            if (fragInfo.CachedFragment == null || shouldReplaceCurrentFragment)
             {
-
-                var viewModelCache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
-                viewModelCache.GetAndClear(fragInfo.ViewModelType);
-
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
 
@@ -279,41 +264,17 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             SupportFragmentManager.ExecutePendingTransactions();
         }
 
-        private FragmentReplaceMode ShouldReplaceFragment(int contentId, FragmentInfo fragment, string currentTag, Bundle replacementBundle)
+        private bool ShouldReplaceCurrentFragment(int contentId, string tag)
         {
-            if (fragment.CachedFragment == null) return FragmentReplaceMode.ReplaceFragment;
-            if (currentTag == fragment.Tag)
-            {
-                var oldBundle = fragment.CachedFragment.Arguments;
-                if (oldBundle == null) return FragmentReplaceMode.ReplaceFragmentAndViewModel;
+            string currentFragment;
+            _currentFragments.TryGetValue(contentId, out currentFragment);
 
-                var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
+            return ShouldReplaceFragment(contentId, currentFragment, tag);
+        }
 
-                var json = oldBundle.GetString("__mvxViewModelRequest");
-                var oldRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
-                if (oldRequest == null) return FragmentReplaceMode.ReplaceFragmentAndViewModel;
-
-                json = replacementBundle.GetString("__mvxViewModelRequest");
-                var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
-                if (replacementRequest == null) return FragmentReplaceMode.ReplaceFragmentAndViewModel;
-
-                var areParametersEqual = ((oldRequest.ParameterValues == replacementRequest.ParameterValues) ||
-             (oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
-             !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
-
-                if (!areParametersEqual)
-                {
-                    return FragmentReplaceMode.ReplaceFragmentAndViewModel;
-                }
-                else
-                {
-                    return FragmentReplaceMode.NoReplace;
-                }
-            }
-            else
-            {
-                return FragmentReplaceMode.ReplaceFragment;
-            }
+        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)
+        {
+            return currentTag != replacementTag;
         }
 
         private void RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
