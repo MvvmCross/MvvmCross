@@ -37,6 +37,20 @@ As for the main complaint - about the referencing of so many assemblies - I do a
 
 Further, because MvvmCross itself is so heavily based on replaceable, extensible plugins, I hope that this will encourage others to author, modify and share additional components and extensions, and that these components will be shareable with other platforms beyond MvvmCross.
 
+### Contribute!
+
+Some of the best ways to contribute are to try things out, file bugs, and join conversations.
+
+* [Pull requests](https://github.com/MvvmCross/MvvmCross-Plugins/pulls): [Open](https://github.com/MvvmCross/MvvmCross-Plugins/pulls?q=is%3Aopen+is%3Apr)/[Closed](https://github.com/MvvmCross/MvvmCross-Plugins/pulls?q=is%3Apr+is%3Aclosed)
+* [Issues](https://github.com/MvvmCross/MvvmCross-Plugins/issues): [Open](https://github.com/MvvmCross/MvvmCross-Plugins/issues?q=is%3Aopen+is%3Aissue)/[Closed](https://github.com/MvvmCross/MvvmCross-Plugins/issues?q=is%3Aissue+is%3Aclosed)
+
+If you would like to help make MvvmCross even better, then please do:
+
+* new code - including pull requests via GitHub - or you can fork the project and build your own extensions
+* new plugins - can be hosted in the [MvvmCross-Plugins](https://github.com/MvvmCross/MvvmCross-Plugins) repository
+* please do blog about your adventures with MvvmCross - we're currently light on documentation!
+* if you use the framework, then please let me know - we love to see what people are doing with it
+
 ### Acknowledgements
 
 * Thanks to [benschi11](https://github.com/benschi11) for the SQLite-PCL plugin
