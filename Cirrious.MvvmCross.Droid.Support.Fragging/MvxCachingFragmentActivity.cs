@@ -361,6 +361,22 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             public Fragment CachedFragment { get; set; }
             public int ContentId { get; set; }
         }
+
+
+        #region My additions
+
+        protected FragmentInfo GetFragmentInfoByTag(string tag)
+        {
+            FragmentInfo fragInfo;
+            _lookup.TryGetValue(tag, out fragInfo);
+
+            if (fragInfo == null)
+                throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
+            return fragInfo;
+        }
+
+        #endregion
+
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
