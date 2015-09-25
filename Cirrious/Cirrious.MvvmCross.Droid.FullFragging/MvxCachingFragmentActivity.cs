@@ -345,7 +345,17 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 
 		public virtual void OnFragmentChanging(string tag, FragmentTransaction transaction) { }
 
-		protected class FragmentInfo
+        protected FragmentInfo GetFragmentInfoByTag(string tag)
+        {
+            FragmentInfo fragInfo;
+            _lookup.TryGetValue(tag, out fragInfo);
+
+            if (fragInfo == null)
+                throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
+            return fragInfo;
+        }
+
+        protected class FragmentInfo
 		{
 			public FragmentInfo(string tag, Type fragmentType, Type viewModelType)
 			{
