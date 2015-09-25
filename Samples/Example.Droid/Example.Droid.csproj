@@ -159,7 +159,4 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash.png" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\transition\slide.xml" />
-  </ItemGroup>
 </Project>
