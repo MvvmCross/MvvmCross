@@ -242,19 +242,24 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             // if there is a Fragment showing on the contentId we want to present at
             // remove it first.   
-            RemoveFragmentIfShowing(ft, contentId);
+            var wasDetached = RemoveFragmentIfShowing(ft, contentId);
 
             fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
-            if (fragInfo.CachedFragment == null || shouldReplaceCurrentFragment)
+            if (fragInfo.CachedFragment == null)
             {
+                //Otherwise, create one and cache it
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
-
                 ft.Add(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
             }
             else
-                ft.Attach(fragInfo.CachedFragment);
+            {
+                if (wasDetached)
+                    ft.Attach(fragInfo.CachedFragment);
+                else
+                    ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+            }
 
             _currentFragments[contentId] = fragInfo.Tag;
 
@@ -278,10 +283,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             return currentTag != replacementTag;
         }
 
-        private void RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
+        private bool RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
         {
             var frag = SupportFragmentManager.FindFragmentById(contentId);
-            if (frag == null) return;
+            if (frag == null) return false;
 
             ft.Detach(frag);
 
@@ -289,6 +294,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             _backStackFragments.Add (currentFragment);
 
             _currentFragments.Remove(contentId);
+            return true;
         }
 
         public override void OnBackPressed ()
