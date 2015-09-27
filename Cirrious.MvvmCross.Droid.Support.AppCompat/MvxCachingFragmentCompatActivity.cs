@@ -242,7 +242,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 return;
 
             var ft = SupportFragmentManager.BeginTransaction();
-            OnBeforeFragmentChanging(tag, ft);
+            OnBeforeFragmentChanging(fragInfo, ft);
 
             // if there is a Fragment showing on the contentId we want to present at
             // remove it first.   
@@ -270,7 +270,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             if (addToBackStack)
                 ft.AddToBackStack(fragInfo.Tag);
 
-            OnFragmentChanging(tag, ft);
+            OnFragmentChanging(fragInfo, ft);
             ft.Commit();
             SupportFragmentManager.ExecutePendingTransactions();
             OnFragmentChanged(fragInfo);
@@ -361,9 +361,9 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             return namespaceText + fragmentType.Name;
         }
 
-        public virtual void OnBeforeFragmentChanging(string tag, FragmentTransaction transaction) { }
+        public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
 
-        public virtual void OnFragmentChanging(string tag, FragmentTransaction transaction) { }
+        public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
         public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
