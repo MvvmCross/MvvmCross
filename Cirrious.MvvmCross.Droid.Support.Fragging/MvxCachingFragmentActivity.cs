@@ -224,7 +224,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         /// <param name="forceReplaceFragment">Force replace a fragment with the same viewmodel at the same contentid</param>
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false, bool forceReplaceFragment = false)
         {
-            MvxCachedFragmentInfo fragInfo;
+            IMvxCachedFragmentInfo fragInfo;
             _lookup.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
@@ -352,7 +352,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
-            MvxCachedFragmentInfo fragInfo;
+            IMvxCachedFragmentInfo fragInfo;
             _lookup.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)

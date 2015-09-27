@@ -81,6 +81,8 @@
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
+    <Compile Include="IMvxCachedFragmentInfo.cs" />
+    <Compile Include="MvxCachedFragmentInfo.cs" />
     <Compile Include="MvxOwnedViewModelFragmentAttribute.cs" />
     <Compile Include="MvxOwnedViewModelFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
