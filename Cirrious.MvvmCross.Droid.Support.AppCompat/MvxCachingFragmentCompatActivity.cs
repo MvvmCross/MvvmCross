@@ -14,6 +14,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
+using Cirrious.MvvmCross.Droid.Support.Fragging;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -29,7 +30,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
         private const string SavedBackStackFragmentsKey = "__mvxSavedBackStackFragments";
-        private readonly Dictionary<string, FragmentInfo> _lookup = new Dictionary<string, FragmentInfo>();
+        private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
         private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
         private IList<KeyValuePair<int, string>> _backStackFragments = new List<KeyValuePair<int, string>>();
 
@@ -43,9 +44,14 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
-            var fragInfo = new FragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
+            var fragInfo = CreateFragmentInfo<TFragment, TViewModel>(tag);
 
             _lookup.Add(tag, fragInfo);
+        }
+
+        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
+        {
+            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
         }
 
         protected MvxCachingFragmentCompatActivity()
@@ -222,7 +228,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         /// <param name="forceReplaceFragment">Force replace a fragment with the same viewmodel at the same contentid</param>
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool addToBackStack = false, bool forceReplaceFragment = false)
         {
-            FragmentInfo fragInfo;
+            IMvxCachedFragmentInfo fragInfo;
             _lookup.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
@@ -355,33 +361,16 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public virtual void OnBeforeFragmentChanging(string tag, FragmentTransaction transaction) { }
 
         public virtual void OnFragmentChanging(string tag, FragmentTransaction transaction) { }
-        
-        protected FragmentInfo GetFragmentInfoByTag(string tag)
+
+        protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
-            FragmentInfo fragInfo;
+            IMvxCachedFragmentInfo fragInfo;
             _lookup.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
             return fragInfo;
         }
-
-        protected class FragmentInfo
-        {
-            public FragmentInfo(string tag, Type fragmentType, Type viewModelType)
-            {
-                Tag = tag;
-                FragmentType = fragmentType;
-                ViewModelType = viewModelType;
-            }
-
-            public string Tag { get; private set; }
-            public Type FragmentType { get; private set; }
-            public Type ViewModelType { get; private set; }
-            public Fragment CachedFragment { get; set; }
-            public int ContentId { get; set; }
-        }
-        
     }
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
