@@ -269,6 +269,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             OnFragmentChanging(tag, ft);
             ft.Commit();
             SupportFragmentManager.ExecutePendingTransactions();
+            OnFragmentChanged(fragInfo);
         }
 
         private bool ShouldReplaceCurrentFragment(int contentId, string tag)
@@ -311,6 +312,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 _backStackFragments.Remove (currentFragment);
 
                 SupportFragmentManager.PopBackStackImmediate();
+                OnFragmentChanged(GetFragmentInfoByTag(currentFragment.Value));
+
                 return;
             }
             else if (SupportFragmentManager.BackStackEntryCount == 1)
@@ -355,6 +358,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         public virtual void OnBeforeFragmentChanging(string tag, FragmentTransaction transaction) { }
 
         public virtual void OnFragmentChanging(string tag, FragmentTransaction transaction) { }
+        public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
