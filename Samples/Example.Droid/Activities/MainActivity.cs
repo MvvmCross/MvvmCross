@@ -135,7 +135,7 @@ namespace Example.Droid.Activities
             }
             else
             {
-                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle, true);
+                ShowFragment(request.ViewModelType.Name, Resource.Id.content_frame, bundle);
                 return true;
             }
         }
@@ -162,9 +162,9 @@ namespace Example.Droid.Activities
 
         private static Dictionary<string, CustomFragmentInfo> myFragmentsInfo = new Dictionary<string, CustomFragmentInfo>()
         {
-            {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel))},
-            {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), isRoot: true)},
-            {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), isRoot: true)}
+            {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel),false)},
+            {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), true, isRoot: true)},
+            {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), true, isRoot: true)}
         };
 
         private static FragmentTransitionInfo fragTransitions = new FragmentTransitionInfo()
@@ -179,10 +179,10 @@ namespace Example.Droid.Activities
         public FragmentTransitionInfo TransitionInfo { get; set; }
         public bool IsRoot { get; set; }
 
-        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, FragmentTransitionInfo transitionInfo = null, bool isRoot = false)
+        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack, FragmentTransitionInfo transitionInfo = null, bool isRoot = false)
             : base(tag, fragmentType, viewModelType)
         {
-
+            AddToBackStack = addToBackstack;
             TransitionInfo = transitionInfo;
             IsRoot = isRoot;
         }

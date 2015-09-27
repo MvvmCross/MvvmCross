@@ -12,10 +12,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             ViewModelType = viewModelType;
         }
 
-        public string Tag { get; private set; }
-        public Type FragmentType { get; private set; }
-        public Type ViewModelType { get; private set; }
+        public string Tag { get; set; }
+        public Type FragmentType { get; set; }
+        public Type ViewModelType { get; set; }
         public Fragment CachedFragment { get; set; }
         public int ContentId { get; set; }
+        public bool AddToBackStack { get; set; }
+
     }
 }

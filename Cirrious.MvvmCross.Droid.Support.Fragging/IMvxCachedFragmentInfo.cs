@@ -5,10 +5,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
     public interface IMvxCachedFragmentInfo
     {
-        string Tag { get; }
-        Type FragmentType { get; }
-        Type ViewModelType { get; }
+        string Tag { get; set;  }
+        Type FragmentType { get; set; }
+        Type ViewModelType { get; set; }
         Fragment CachedFragment { get; set; }
         int ContentId { get; set; }
+        bool AddToBackStack { get; set; }
+
     }
 }
