@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
         private const string SavedBackStackFragmentsKey = "__mvxSavedBackStackFragments";
-        private readonly Dictionary<string, MvxCachedFragmentInfo> _lookup = new Dictionary<string, MvxCachedFragmentInfo>();
+        private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
         private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
         private IList<KeyValuePair<int, string>> _backStackFragments = new List<KeyValuePair<int, string>>();
 
@@ -43,9 +43,13 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
-            var fragInfo = new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
-
+            var fragInfo = CreateFragmentInfo<TFragment, TViewModel>(tag);
             _lookup.Add(tag, fragInfo);
+        }
+
+        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
+        {
+            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
         }
 
         protected MvxCachingFragmentActivity()
