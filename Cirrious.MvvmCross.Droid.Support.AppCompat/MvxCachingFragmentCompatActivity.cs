@@ -256,6 +256,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
                 ft.Add(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+                OnFragmentCreated(fragInfo, ft);
             }
             else
             {
@@ -365,6 +366,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
         public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
+        public virtual void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
