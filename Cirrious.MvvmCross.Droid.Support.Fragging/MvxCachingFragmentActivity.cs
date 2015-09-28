@@ -242,7 +242,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             // if there is a Fragment showing on the contentId we want to present at
             // remove it first.   
-            var wasDetached = RemoveFragmentIfShowing(ft, contentId);
+            RemoveFragmentIfShowing(ft, contentId);
 
             fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
@@ -251,17 +251,11 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 //Otherwise, create one and cache it
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
-                ft.Add(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
                 OnFragmentCreated(fragInfo, ft);
             }
-            else
-            {
-                if (wasDetached)
-                    ft.Attach(fragInfo.CachedFragment);
-                else
-                    ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
-            }
 
+            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+            
             _currentFragments[contentId] = fragInfo.Tag;
 
             if (fragInfo.AddToBackStack || forceAddToBackStack)
@@ -290,9 +284,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             var frag = SupportFragmentManager.FindFragmentById(contentId);
             if (frag == null) return false;
 
-            ft.Detach(frag);
+            //TODO Since all the fragments will be replaced do we really need to track this?
 
-            var currentFragment = _currentFragments.First (x => x.Key == contentId);           
+            var currentFragment = _currentFragments.First(x => x.Key == contentId);           
             _backStackFragments.Add (currentFragment);
 
             _currentFragments.Remove(contentId);

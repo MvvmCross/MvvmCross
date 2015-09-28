@@ -246,7 +246,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
             // if there is a Fragment showing on the contentId we want to present at
             // remove it first.   
-            var wasDetached = RemoveFragmentIfShowing(ft, contentId);
+            RemoveFragmentIfShowing(ft, contentId);
 
             fragInfo.ContentId = contentId;
             // if we haven't already created a Fragment, do it now
@@ -255,16 +255,10 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 //Otherwise, create one and cache it
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
                     bundle);
-                ft.Add(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
                 OnFragmentCreated(fragInfo, ft);
             }
-            else
-            {
-                if (wasDetached)
-                    ft.Attach(fragInfo.CachedFragment);
-                else
-                    ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
-            }
+
+            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
 
             _currentFragments[contentId] = fragInfo.Tag;
 
@@ -295,7 +289,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             var frag = SupportFragmentManager.FindFragmentById(contentId);
             if (frag == null) return false;
 
-            ft.Detach(frag);
+            //TODO Since all the fragments will be replaced do we really need to track this?
 
             var currentFragment = _currentFragments.First(x => x.Key == contentId);
             _backStackFragments.Add(currentFragment);
@@ -342,7 +336,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             if (frag == null) return;
 
             SupportFragmentManager.PopBackStackImmediate(tag, 1);
-
+            
             _currentFragments.Remove(contentId);
 
             if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId))
@@ -363,7 +357,6 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         }
 
         public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
-
         public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
         public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
         public virtual void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
