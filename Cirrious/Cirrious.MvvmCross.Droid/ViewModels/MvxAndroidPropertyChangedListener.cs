@@ -3,7 +3,8 @@ using System.ComponentModel;
 using Android.Runtime;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.ViewModels {
+namespace Cirrious.MvvmCross.Droid.ViewModels
+{
     /// <summary>
     ///     Just like <see cref="MvxPropertyChangedListener"/> but
     ///     won't call handlers if the target (being an activity, fragment,
