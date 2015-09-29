@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\MvxAndroidPropertyChangedListener.cs" />
     <Compile Include="Views\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Views\IMvxAndroidViewsContainer.cs" />
     <Compile Include="Views\IMvxMultipleViewModelCache.cs" />
