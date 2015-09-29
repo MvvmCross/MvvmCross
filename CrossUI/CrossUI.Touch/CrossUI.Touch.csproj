@@ -84,6 +84,7 @@
     <Compile Include="Dialog\Utilities\ImageLoader.cs" />
     <Compile Include="Dialog\Utilities\LocalizationExtensions.cs" />
     <Compile Include="Dialog\Utilities\LRUCache.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dialog\Images\arrow.png" />

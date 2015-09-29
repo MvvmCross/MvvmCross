@@ -53,6 +53,7 @@
     <Compile Include="Builders\MvxTouchBuilderRegistry.cs" />
     <Compile Include="Builders\MvxTouchUserInterfaceBuilder.cs" />
     <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Lists\GeneralTableViewCell.cs" />
     <Compile Include="Views\Lists\GeneralListLayout.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
