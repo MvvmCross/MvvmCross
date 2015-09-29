@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFilePluginManager(new List<string>() { ".WindowsUWP" });
+            return new MvxFilePluginManager(new List<string>() { ".WindowsUWP", ".WindowsCommon" });
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
