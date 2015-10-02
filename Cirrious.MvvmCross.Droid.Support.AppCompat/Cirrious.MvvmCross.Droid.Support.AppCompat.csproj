@@ -40,11 +40,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.0.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Cirrious.CrossCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta3\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
@@ -66,6 +64,10 @@
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta3\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.0.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
