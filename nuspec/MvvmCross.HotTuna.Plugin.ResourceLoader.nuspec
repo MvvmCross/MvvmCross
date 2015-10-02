@@ -30,9 +30,11 @@
 			</group>
 			<group targetFramework ="MonoTouch">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.Plugins.File" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.Plugins.File" version="4.0.0-beta3" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
