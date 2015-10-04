@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.ViewModels
         }
 
         // Note - this is public because we use it in weak referenced situations
-        public void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        public virtual void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
