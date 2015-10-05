@@ -74,7 +74,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
                 return null;
-            var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public);
+           var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             if (canExecute == null)
                 return null;
             if (canExecute.PropertyType != typeof (bool))
