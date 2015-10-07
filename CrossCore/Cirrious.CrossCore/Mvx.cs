@@ -42,12 +42,22 @@ namespace Cirrious.CrossCore
         public static bool TryResolve<TService>(out TService service) where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            if (ioc == null)
+            {
+                service = null;
+                return false;
+            }
             return ioc.TryResolve(out service);
         }
 
         public static bool TryResolve(Type serviceType, out object service)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            if (ioc == null)
+            {
+                service = null;
+                return false;
+            }
             return ioc.TryResolve(serviceType, out service);
         }
 
