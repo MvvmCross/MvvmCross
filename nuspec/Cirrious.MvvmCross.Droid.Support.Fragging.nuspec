@@ -17,13 +17,13 @@
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta3" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.1" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta3" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta3" />
-				<dependency id="Xamarin.Android.Support.v4" version="22.2.1.0" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.1" />
 			</group>
 		</dependencies>
 	</metadata>
