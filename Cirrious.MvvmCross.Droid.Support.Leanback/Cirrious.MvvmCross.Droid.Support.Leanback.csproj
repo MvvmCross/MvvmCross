@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{24C19002-AD02-4B88-9E57-1C254819D30E}</ProjectGuid>
+    <ProjectGuid>{FFC83AE3-D1FB-4A7B-974E-72697235E047}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Cirrious.MvvmCross.Droid.Support.Leanback</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
