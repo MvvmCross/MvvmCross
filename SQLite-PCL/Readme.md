@@ -1,6 +1,6 @@
 ## SQLite-PCL
 
-Using the SQLite-Plugin for MvvmCross is quiet simple. The plugin injects the IMvxSqliteConnectionFactory into the IoC container. First you have to inject the factory in your class through the contructor or through property injection.
+Using the SQLite-Plugin for MvvmCross is quite simple. The plugin injects the IMvxSqliteConnectionFactory into the IoC container. First you have to inject the factory in your class through the contructor or through property injection.
 
 ```c#
 private readonly IMvxSqliteConnectionFactory _sqliteConnectionFactory;
