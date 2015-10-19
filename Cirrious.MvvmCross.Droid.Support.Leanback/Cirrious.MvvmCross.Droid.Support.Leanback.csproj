@@ -85,6 +85,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fragments\EventSource\MvxEventSourceBrowseSupportFragment.cs" />
+    <Compile Include="Fragments\MvxBrowseSupportFragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
