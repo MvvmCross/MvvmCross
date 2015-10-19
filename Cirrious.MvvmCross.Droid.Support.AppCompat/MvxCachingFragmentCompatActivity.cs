@@ -306,12 +306,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 SupportFragmentManager.PopBackStackImmediate();
                 return;
             }
-            else if (SupportFragmentManager.BackStackEntryCount == 1)
-            {
-                MoveTaskToBack(true);
-                return;
-            }
 
+            SupportFragmentManager.PopBackStack();
             base.OnBackPressed();
         }
 
