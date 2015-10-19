@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.AutoViews</id>
-		<version>4.0.0-beta3</version>
+		<version>4.0.0-beta4</version>
 		<title>MvvmCross - Android AutoViews Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -11,15 +11,15 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'AutoViews' Android libraries for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
-		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta3" />
-				<dependency id="MvvmCross.HotTuna.Droid.Dialog" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.Droid.Dialog" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta3" />
-				<dependency id="MvvmCross.HotTuna.Droid.Dialog" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.Droid.Dialog" version="4.0.0-beta4" />
 			</group>
 		</dependencies>
 	</metadata>
