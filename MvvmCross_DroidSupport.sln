@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{2213
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.Leanback", "Cirrious.MvvmCross.Droid.Support.Leanback\Cirrious.MvvmCross.Droid.Support.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.Preference", "Cirrious.MvvmCross.Droid.Support.Preference\Cirrious.MvvmCross.Droid.Support.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.ActiveCfg = Release|Any CPU
