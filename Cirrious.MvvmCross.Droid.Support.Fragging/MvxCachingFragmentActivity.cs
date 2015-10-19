@@ -139,9 +139,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
         private void RestoreLookupFromSleep()
         {
+            // when there are no fragments SupportFragmentmanager.Fragments is null
+            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
             // See if Fragments were just sleeping, and repopulate the _lookup
             // with references to them.
-            foreach (var fragment in SupportFragmentManager.Fragments)
+            foreach (var fragment in fragments)
             {
                 if (fragment != null) {
                     var fragmentType = fragment.GetType ();
