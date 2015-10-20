@@ -5,7 +5,9 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
+using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -21,6 +23,13 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         , IMvxAndroidView
     {
         protected MvxAppCompatActivity()
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
+        }
+
+        protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
