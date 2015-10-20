@@ -53,13 +53,19 @@ namespace Example.Droid.Fragments
 
             switch (itemId) {
             case Resource.Id.nav_home:
-                ViewModel.HomeCommand.Execute ();
+                ViewModel.ShowViewModelAndroid(typeof(HomeViewModel));
+                break;
+            case Resource.Id.nav_viewpager:
+                ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
+                break;
+            case Resource.Id.nav_recyclerview:
+                ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
                 break;
             case Resource.Id.nav_settings:
-                ViewModel.SettingsCommand.Execute ();
+                ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
                 break;
             case Resource.Id.nav_helpfeedback:
-                ViewModel.SettingsCommand.Execute ();
+                ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
                 break;
             }
         }

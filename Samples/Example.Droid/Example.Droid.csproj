@@ -99,12 +99,14 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Fragments\MenuFragment.cs" />
-    <Compile Include="Fragments\ExamplesFragment.cs" />
     <Compile Include="Fragments\RecyclerViewFragment.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
+    <Compile Include="Fragments\HomeFragment.cs" />
+    <Compile Include="Fragments\ExampleViewPagerFragment.cs" />
+    <Compile Include="Fragments\ExampleRecyclerViewFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -116,6 +118,9 @@
     <AndroidResource Include="Resources\layout\splash_screen.axml" />
     <AndroidResource Include="Resources\layout\toolbar_actionbar.axml" />
     <AndroidResource Include="Resources\drawable\MvvmCrossLogo.png" />
+    <AndroidResource Include="Resources\layout\fragment_home.axml" />
+    <AndroidResource Include="Resources\layout\fragment_example_viewpager.axml" />
+    <AndroidResource Include="Resources\layout\fragment_example_recyclerview.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -131,7 +136,6 @@
     <AndroidResource Include="Resources\layout\fragment_navigation.axml" />
     <AndroidResource Include="Resources\layout\fragment_navigation_header.axml" />
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
-    <AndroidResource Include="Resources\layout\fragment_examples.axml" />
     <AndroidResource Include="Resources\layout\fragment_recyclerview.axml" />
     <AndroidResource Include="Resources\layout\listitem_recyclerviewexample.axml" />
   </ItemGroup>
