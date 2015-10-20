@@ -14,7 +14,7 @@ namespace Example.Droid
     public class SplashScreen : MvxSplashScreenActivity
     {
         public SplashScreen()
-            : base(Resource.Layout.SplashScreen)
+            : base(Resource.Layout.splash_screen)
         {
         }
     }
