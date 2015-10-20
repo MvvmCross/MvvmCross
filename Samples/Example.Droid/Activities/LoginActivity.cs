@@ -12,12 +12,12 @@ namespace Example.Droid.Activities
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Name = "example.droid.activities.LoginActivity"
     )]			
-    public class LoginActivity : MvxActivityCompat
+    public class LoginActivity : MvxAppCompatActivity
     {
         protected override void OnCreate (Bundle bundle)
         {
             base.OnCreate (bundle);
-            SetContentView ( Resource.Layout.Login );
+            SetContentView ( Resource.Layout.activity_login );
         }
     }
 }

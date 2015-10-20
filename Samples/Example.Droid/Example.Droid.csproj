@@ -97,6 +97,7 @@
     <Compile Include="Fragments\RecyclerViewFragment.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -104,6 +105,7 @@
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\layout\fragment_settings.axml" />
+    <AndroidResource Include="Resources\layout\activity_login.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
