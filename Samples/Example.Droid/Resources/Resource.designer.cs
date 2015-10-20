@@ -1809,11 +1809,14 @@ namespace Example.Droid
 			// aapt resource value: 0x7f02003f
 			public const int Icon = 2130837567;
 			
-			// aapt resource value: 0x7f020041
-			public const int notification_template_icon_bg = 2130837569;
-			
 			// aapt resource value: 0x7f020040
-			public const int splash = 2130837568;
+			public const int MvvmCrossLogo = 2130837568;
+			
+			// aapt resource value: 0x7f020042
+			public const int notification_template_icon_bg = 2130837570;
+			
+			// aapt resource value: 0x7f020041
+			public const int splash = 2130837569;
 			
 			static Drawable()
 			{
@@ -1843,8 +1846,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090069
 			public const int TbxUsername = 2131296361;
 			
-			// aapt resource value: 0x7f09007c
-			public const int action0 = 2131296380;
+			// aapt resource value: 0x7f090080
+			public const int action0 = 2131296384;
 			
 			// aapt resource value: 0x7f090058
 			public const int action_bar = 2131296344;
@@ -1870,8 +1873,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090059
 			public const int action_context_bar = 2131296345;
 			
-			// aapt resource value: 0x7f090080
-			public const int action_divider = 2131296384;
+			// aapt resource value: 0x7f090084
+			public const int action_divider = 2131296388;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -1909,8 +1912,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f09004e
 			public const int buttonPanel = 2131296334;
 			
-			// aapt resource value: 0x7f09007d
-			public const int cancel_action = 2131296381;
+			// aapt resource value: 0x7f090081
+			public const int cancel_action = 2131296385;
 			
 			// aapt resource value: 0x7f09002c
 			public const int center = 2131296300;
@@ -1924,8 +1927,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090050
 			public const int checkbox = 2131296336;
 			
-			// aapt resource value: 0x7f090083
-			public const int chronometer = 2131296387;
+			// aapt resource value: 0x7f090087
+			public const int chronometer = 2131296391;
 			
 			// aapt resource value: 0x7f090034
 			public const int clip_horizontal = 2131296308;
@@ -1966,8 +1969,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f09001d
 			public const int end = 2131296285;
 			
-			// aapt resource value: 0x7f090088
-			public const int end_padder = 2131296392;
+			// aapt resource value: 0x7f09008c
+			public const int end_padder = 2131296396;
 			
 			// aapt resource value: 0x7f090025
 			public const int enterAlways = 2131296293;
@@ -2014,11 +2017,14 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090067
 			public const int imageView = 2131296359;
 			
-			// aapt resource value: 0x7f090087
-			public const int info = 2131296391;
+			// aapt resource value: 0x7f090079
+			public const int image_view_row_icon = 2131296377;
 			
-			// aapt resource value: 0x7f09007b
-			public const int innerText = 2131296379;
+			// aapt resource value: 0x7f09008b
+			public const int info = 2131296395;
+			
+			// aapt resource value: 0x7f09007f
+			public const int innerText = 2131296383;
 			
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
@@ -2026,11 +2032,11 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090030
 			public const int left = 2131296304;
 			
-			// aapt resource value: 0x7f090081
-			public const int line1 = 2131296385;
-			
 			// aapt resource value: 0x7f090085
-			public const int line3 = 2131296389;
+			public const int line1 = 2131296389;
+			
+			// aapt resource value: 0x7f090089
+			public const int line3 = 2131296393;
 			
 			// aapt resource value: 0x7f09000d
 			public const int listMode = 2131296269;
@@ -2044,8 +2050,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f09006e
 			public const int main_frame = 2131296366;
 			
-			// aapt resource value: 0x7f09007f
-			public const int media_actions = 2131296383;
+			// aapt resource value: 0x7f090083
+			public const int media_actions = 2131296387;
 			
 			// aapt resource value: 0x7f09001e
 			public const int middle = 2131296286;
@@ -2056,23 +2062,23 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090017
 			public const int multiply = 2131296279;
 			
-			// aapt resource value: 0x7f09007a
-			public const int my_recycler_view = 2131296378;
+			// aapt resource value: 0x7f09007e
+			public const int my_recycler_view = 2131296382;
 			
-			// aapt resource value: 0x7f09008b
-			public const int nav_footer = 2131296395;
+			// aapt resource value: 0x7f09008f
+			public const int nav_footer = 2131296399;
+			
+			// aapt resource value: 0x7f090091
+			public const int nav_helpfeedback = 2131296401;
+			
+			// aapt resource value: 0x7f09008e
+			public const int nav_home = 2131296398;
 			
 			// aapt resource value: 0x7f09008d
-			public const int nav_helpfeedback = 2131296397;
+			public const int nav_items = 2131296397;
 			
-			// aapt resource value: 0x7f09008a
-			public const int nav_home = 2131296394;
-			
-			// aapt resource value: 0x7f090089
-			public const int nav_items = 2131296393;
-			
-			// aapt resource value: 0x7f09008c
-			public const int nav_settings = 2131296396;
+			// aapt resource value: 0x7f090090
+			public const int nav_settings = 2131296400;
 			
 			// aapt resource value: 0x7f090070
 			public const int navigation_frame = 2131296368;
@@ -2110,8 +2116,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090052
 			public const int radio = 2131296338;
 			
-			// aapt resource value: 0x7f090079
-			public const int refresher = 2131296377;
+			// aapt resource value: 0x7f09007d
+			public const int refresher = 2131296381;
 			
 			// aapt resource value: 0x7f090031
 			public const int right = 2131296305;
@@ -2194,8 +2200,8 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090032
 			public const int start = 2131296306;
 			
-			// aapt resource value: 0x7f09007e
-			public const int status_bar_latest_event_content = 2131296382;
+			// aapt resource value: 0x7f090082
+			public const int status_bar_latest_event_content = 2131296386;
 			
 			// aapt resource value: 0x7f090063
 			public const int submit_area = 2131296355;
@@ -2206,11 +2212,11 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090076
 			public const int tabs = 2131296374;
 			
-			// aapt resource value: 0x7f090086
-			public const int text = 2131296390;
+			// aapt resource value: 0x7f09008a
+			public const int text = 2131296394;
 			
-			// aapt resource value: 0x7f090084
-			public const int text2 = 2131296388;
+			// aapt resource value: 0x7f090088
+			public const int text2 = 2131296392;
 			
 			// aapt resource value: 0x7f09004b
 			public const int textSpacerNoButtons = 2131296331;
@@ -2218,8 +2224,17 @@ namespace Example.Droid
 			// aapt resource value: 0x7f090068
 			public const int textView1 = 2131296360;
 			
-			// aapt resource value: 0x7f090082
-			public const int time = 2131296386;
+			// aapt resource value: 0x7f09007a
+			public const int text_container = 2131296378;
+			
+			// aapt resource value: 0x7f09007b
+			public const int text_view_fullname = 2131296379;
+			
+			// aapt resource value: 0x7f09007c
+			public const int text_view_username = 2131296380;
+			
+			// aapt resource value: 0x7f090086
+			public const int time = 2131296390;
 			
 			// aapt resource value: 0x7f090044
 			public const int title = 2131296324;

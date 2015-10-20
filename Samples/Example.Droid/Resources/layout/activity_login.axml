@@ -14,9 +14,10 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon"
-            android:layout_gravity="center" />
+            android:layout_height="100dp"
+            android:src="@drawable/mvvmcrosslogo"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter" />
     </FrameLayout>
     <TextView
         android:layout_width="fill_parent"
