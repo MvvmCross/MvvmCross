@@ -2,12 +2,12 @@
 
 namespace Example.Core.ViewModels
 {
-    public class ExamplesViewModel
+    public class ExampleViewPagerViewModel
         : MvxViewModel
     {
         public RecyclerViewModel Recycler { get; private set; }
 
-        public ExamplesViewModel() {
+        public ExampleViewPagerViewModel() {
             Recycler = new RecyclerViewModel();
         }
     }

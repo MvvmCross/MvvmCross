@@ -28,7 +28,7 @@ namespace Example.Droid.Activities
         {
             base.OnCreate(bundle);
 
-            RegisterForDetailsRequests(bundle);
+            RegisterForDetailsRequests();
 
             SetContentView(Resource.Layout.activity_main);
 
@@ -49,14 +49,16 @@ namespace Example.Droid.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        private void RegisterForDetailsRequests(Bundle bundle)
+        private void RegisterForDetailsRequests()
         {
-            RegisterFragment<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name, bundle);
-            RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle);
-            RegisterFragment<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name, bundle);
+            RegisterFragmentAtHost<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name);
+            RegisterFragmentAtHost<HomeFragment, HomeViewModel>(typeof(HomeViewModel).Name);
+            RegisterFragmentAtHost<ExampleViewPagerFragment, ExampleViewPagerViewModel>(typeof(ExampleViewPagerViewModel).Name);
+            RegisterFragmentAtHost<ExampleRecyclerViewFragment, ExampleRecyclerViewModel>(typeof(ExampleRecyclerViewModel).Name);
+            RegisterFragmentAtHost<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name);
         }
 
-        public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args)
+        public void RegisterFragmentAtHost<TFragment, TViewModel>(string tag)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {

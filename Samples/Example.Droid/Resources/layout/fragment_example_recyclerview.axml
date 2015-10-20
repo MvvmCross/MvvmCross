@@ -3,6 +3,8 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include
+        layout="@layout/toolbar_actionbar" />
     <Cirrious.MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
@@ -17,4 +19,11 @@
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
             local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
     </Cirrious.MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click ShowMessage"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_gravity="end|bottom" />
 </android.support.design.widget.CoordinatorLayout>
