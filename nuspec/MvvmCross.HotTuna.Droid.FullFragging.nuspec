@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.FullFragging</id>
-		<version>4.0.0-beta2</version>
+		<version>4.0.0-beta4</version>
 		<title>MvvmCross - Android Full Fragment Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -11,13 +11,13 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'Android Fragment' assemblies for Android Honeycomb or later for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
-		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
 			</group>
 		</dependencies>
 	</metadata>

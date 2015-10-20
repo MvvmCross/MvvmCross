@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.HotTuna.CodeAnalysis</id>
+		<version>4.0.0-beta4</version>
+		<title>MvvmCross - Code Analysis</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone roslyn analyzers</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- The convention for analyzers is to put language agnostic dlls in analyzers\dotnet and language specific analyzers in either analyzers\dotnet\cs or analyzers\dotnet\vb -->
+		<file src="..\CodeAnalysis\MvvmCross.CodeAnalysis\*.dll" target="analyzers\dotnet\cs" exclude="**\Microsoft.CodeAnalysis.*;**\System.Collections.Immutable.*;**\System.Reflection.Metadata.*;**\System.Composition.*" />
+		<file src="..\CodeAnalysis\MvvmCross.CodeAnalysis\tools\*.ps1" target="tools\" />
+	</files>
+</package>
+
+
+
+
+
+
+

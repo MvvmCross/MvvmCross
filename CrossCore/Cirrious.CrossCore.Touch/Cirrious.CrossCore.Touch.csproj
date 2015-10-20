@@ -39,6 +39,7 @@
     <Compile Include="Platform\MvxIosMajorVersionChecker.cs" />
     <Compile Include="Platform\MvxTouchSystem.cs" />
     <Compile Include="Platform\MvxTouchVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMvxTouchModalHost.cs" />
     <Compile Include="MvxTouchColorExtensionMethods.cs" />
     <Compile Include="MvxTouchDateTimeExtensionMethods.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Views\MvxEventSourceTableViewController.cs" />
     <Compile Include="Views\MvxEventSourceViewController.cs" />
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
+    <Compile Include="Views\MvxEventSourcePageViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cirrious.CrossCore\Cirrious.CrossCore.csproj">

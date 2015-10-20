@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Mac.CrossCore</id>
-		<version>4.0.0-beta2</version>
+		<version>4.0.0-beta4</version>
 		<title>MvvmCross - Mac CrossCore</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -11,37 +11,37 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains MonoMac (also PCL, MonoAndroid and Xamarin.iOS10 for convenience) 'Core' assemblies for MvvmCross. Under normal circumstances, use MvvmCross.Mac.PortableSupport for PCL, Xamarin.iOS10 and MonoAndroid as it also includes Windows.</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
-		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta4" />
 			</group>
 		</dependencies>
 	</metadata>

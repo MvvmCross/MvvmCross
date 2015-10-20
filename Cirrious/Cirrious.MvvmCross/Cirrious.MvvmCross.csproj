@@ -12,8 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -117,7 +115,9 @@
     <Compile Include="ViewModels\MvxAppStart.cs" />
     <Compile Include="ViewModels\MvxViewModel.cs" />
     <Compile Include="ViewModels\MvxViewModelRequest.cs" />
+    <Compile Include="Views\MvxViewPresenter.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
+    <Compile Include="ViewModels\IMvxPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

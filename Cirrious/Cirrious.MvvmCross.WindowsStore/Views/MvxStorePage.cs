@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
-    public abstract class MvxStorePage
+    public class MvxStorePage
         : Page
           , IMvxStoreView
     {
@@ -115,7 +115,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         }
     }
 
-    public abstract class MvxStorePage<TViewModel>
+    public class MvxStorePage<TViewModel>
         : MvxStorePage where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

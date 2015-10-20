@@ -97,6 +97,7 @@
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxRadioGroupSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxTextViewFocusTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewTextFormattedTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
     <Compile Include="Target\MvxSeekBarProgressTargetBinding.cs" />
@@ -163,10 +164,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\MvxBindingAttributes.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Ids.xml" />
+    <AndroidResource Include="Resources\values\Ids.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

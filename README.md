@@ -1,6 +1,6 @@
 ## MvvmCross
 
-MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for [Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms) and the [Android support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport).
+MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for [Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms) and the [Android support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport). Lots of [plugins](https://github.com/MvvmCross/MvvmCross-Plugins) are available as well.
 
 See the official [MvvmCross blog](http://mvvmcross.com/) for the latest news!
 
@@ -8,7 +8,7 @@ See the official [MvvmCross blog](http://mvvmcross.com/) for the latest news!
 
 A quick way to get started is to use the Visual Studio MvvmCross [Ninja Coder](https://github.com/asudbury/NinjaCoderForMvvmCross) Extension - download it from [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767)
 
-For mannual project creation install the necessary packages from [Nuget](https://www.nuget.org/packages?q=mvvmcross)
+For manual project creation install the necessary packages from [Nuget](https://www.nuget.org/packages?q=mvvmcross)
 
 
 ### Questions & support
@@ -20,7 +20,7 @@ For mannual project creation install the necessary packages from [Nuget](https:/
 
 ### Documentation and Examples
 
-**See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for additional articles and information.**
+**The [MvvmCross-Samples](https://github.com/MvvmCross/MvvmCross-Samples) repo contains the latest samples. See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for additional articles and information.**
 
 **Samples and Videos:**
 

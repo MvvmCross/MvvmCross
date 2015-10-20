@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.MvvmCrossLibraries</id>
-		<version>4.0.0-beta2</version>
+		<version>4.0.0-beta4</version>
 		<title>MvvmCross - MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -10,37 +10,37 @@
 		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'MvvmCross Library' libraries for MvvmCross</description>
-		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta2" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -56,6 +56,8 @@
 			target="src\Cirrious.MvvmCross.WindowsPhone" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsCommon\**\*.cs" 
 			target="src\Cirrious.MvvmCross.WindowsCommon" />
+		<file src="..\Cirrious\Cirrious.MvvmCross.WindowsUWP\**\*.cs" 
+			target="src\Cirrious.MvvmCross.WindowsUWP" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Droid\**\*.cs" 
 			target="src\Cirrious.MvvmCross.Droid" />
 		<file src="..\Cirrious\Cirrious.MvvmCross.Touch\**\*.cs" 
@@ -95,6 +97,12 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win81+wpa81" />
 
+		<!-- uap -->
+		<file src="..\bin\Release\Mvx\WindowsUWP\Cirrious.MvvmCross.WindowsUWP.*" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\Cirrious.MvvmCross.WindowsUWP\Properties\Cirrious.MvvmCross.WindowsUWP.rd.xml" target="lib\uap\Cirrious.MvvmCross.WindowsUWP\Properties" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\uap" />
+		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.*"
 			exclude="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
