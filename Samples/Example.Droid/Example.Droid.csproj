@@ -110,10 +110,11 @@
     <None Include="app.config" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
-    <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\layout\fragment_settings.axml" />
     <AndroidResource Include="Resources\layout\activity_login.axml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\layout\splash_screen.axml" />
+    <AndroidResource Include="Resources\layout\toolbar_actionbar.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
