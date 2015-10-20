@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Graphics;
+using Android.Support.V4.Graphics;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
@@ -22,7 +23,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             if (RawImage == null)
                 return 0;
 
-            return RawImage.RowBytes*RawImage.Height;
+            return BitmapCompat.GetAllocationByteCount(RawImage);
         }
     }
 }

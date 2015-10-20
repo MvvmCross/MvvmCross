@@ -9,6 +9,9 @@ packages
 *.user
 *.sln.docstates
 
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
 # Build results
 
 [Dd]ebug/
@@ -160,3 +163,6 @@ $RECYCLE.BIN/
 
 *.nupkg
 nuget.exe
+
+## Android Auto-generated files
+Resource.designer.cs
