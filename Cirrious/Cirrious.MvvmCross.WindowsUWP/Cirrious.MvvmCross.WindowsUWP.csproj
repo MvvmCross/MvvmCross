@@ -124,9 +124,11 @@
     <Compile Include="Views\IMvxWindowsFrame.cs" />
     <Compile Include="Views\IMvxWindowsView.cs" />
     <Compile Include="Views\IMvxWindowsViewPresenter.cs" />
+    <Compile Include="Views\MvxRegionAttribute.cs" />
     <Compile Include="Views\MvxWindowsExtensionMethods.cs" />
     <Compile Include="Views\MvxWindowsMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxWindowsPage.cs" />
+    <Compile Include="Views\MvxWindowsMultiRegionViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewDispatcher.cs" />
     <Compile Include="Views\MvxWindowsViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewsContainer.cs" />
