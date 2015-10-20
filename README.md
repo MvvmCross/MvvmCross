@@ -30,6 +30,7 @@ If you would like to help make MvvmCross even better, then please do:
 
 * Thanks to [Cheesebaron](https://github.com/cheesebaron) for the initial start and development of the Forms project
 * Thanks to [PeterBurke](https://github.com/PeterBurke) for fixes, samples, and wiki articles
+* Thanks to [Martijn00](https://github.com/martijn00)
 
 Licensing
 ---------
