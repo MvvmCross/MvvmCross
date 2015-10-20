@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.V4</id>
-		<version>4.0.0-beta4</version>
+		<version>4.0.0-beta5</version>
 		<title>MvvmCross Android Support - V4</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
