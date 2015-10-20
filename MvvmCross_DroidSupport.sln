@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.RecyclerView", "Cirrious.MvvmCross.Droid.Support.RecyclerView\Cirrious.MvvmCross.Droid.Support.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
@@ -18,7 +18,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{2213
 		nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec
 		nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec
 		nuspec\pack.bat = nuspec\pack.bat
+		nuspec\Cirrious.MvvmCross.Droid.Support.Leanback.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Leanback.nuspec
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.Leanback", "Cirrious.MvvmCross.Droid.Support.Leanback\Cirrious.MvvmCross.Droid.Support.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.Preference", "Cirrious.MvvmCross.Droid.Support.Preference\Cirrious.MvvmCross.Droid.Support.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,22 +31,32 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.Build.0 = Release|Any CPU
-		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24C19002-AD02-4B88-9E57-1C254819D30E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24C19002-AD02-4B88-9E57-1C254819D30E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C19002-AD02-4B88-9E57-1C254819D30E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C19002-AD02-4B88-9E57-1C254819D30E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B74F15E-E377-4662-9636-4233049EDDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B74F15E-E377-4662-9636-4233049EDDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B74F15E-E377-4662-9636-4233049EDDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B74F15E-E377-4662-9636-4233049EDDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

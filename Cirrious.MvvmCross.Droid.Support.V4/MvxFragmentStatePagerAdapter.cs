@@ -1,9 +1,18 @@
-﻿using System;
+﻿// MvxFragmentStatePagerAdapter.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
@@ -14,7 +23,6 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
         : FragmentStatePagerAdapter
     {
         private readonly Context _context;
-
         public IEnumerable<FragmentInfo> Fragments { get; private set; }
 
         public override int Count
@@ -37,11 +45,17 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
 
         public override Fragment GetItem(int position)
         {
-            var fragmentInfo = Fragments.ElementAt(position);
-            var fragment = Fragment.Instantiate(_context,
-                FragmentJavaName(fragmentInfo.FragmentType));
-            ((MvxFragment)fragment).ViewModel = fragmentInfo.ViewModel;
-            return fragment;
+            var fragInfo = Fragments.ElementAt(position);
+
+            if (fragInfo.CachedFragment == null)
+            {
+                fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+
+                var request = new MvxViewModelRequest (fragInfo.ViewModelType, null, null, null);
+                ((MvxFragment)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+            }
+
+            return fragInfo.CachedFragment;
         }
 
         protected static string FragmentJavaName(Type fragmentType)
@@ -57,13 +71,25 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
             return new Java.Lang.String(Fragments.ElementAt(position).Title);
         }
 
+        public override void RestoreState (IParcelable state, ClassLoader loader)
+        {
+            //Don't call restore to prevent crash on rotation
+            //base.RestoreState (state, loader);
+        }
+
         public class FragmentInfo
         {
+            public FragmentInfo(string title, Type fragmentType, Type viewModelType)
+            {
+                Title = title;
+                FragmentType = fragmentType;
+                ViewModelType = viewModelType;
+            }
+
             public string Title { get; set; }
-
-            public Type FragmentType { get; set; }
-
-            public IMvxViewModel ViewModel { get; set; }
+            public Type FragmentType { get; private set; }
+            public Type ViewModelType { get; private set; }
+            public Fragment CachedFragment { get; set; }
         }
     }
 }

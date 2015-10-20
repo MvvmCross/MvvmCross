@@ -6,11 +6,9 @@
     android:layout_width="match_parent">
     <FrameLayout
         android:id="@+id/content_frame"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_above="@+id/player_frame" />
+        android:layout_centerInParent="true" />
     <FrameLayout
         android:id="@+id/navigation_frame"
         android:layout_height="match_parent"

@@ -1,3 +1,10 @@
+// MvxAppCompatSpinner.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+// 
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using System;
 using System.Collections;
 using System.Windows.Input;
@@ -52,6 +59,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat.Widget
                 {
                     value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
+                    value.DropDownItemTemplateId = existing.DropDownItemTemplateId;
                 }
 
                 base.Adapter = value;

@@ -75,5 +75,16 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Presenter
             
             base.Show(request);
         }
+
+        public override void Close (IMvxViewModel viewModel)
+        {
+            IMvxFragmentHost host;
+            if (_dictionary.TryGetValue(viewModel.GetType(), out host))
+            {
+                if (host.Close(viewModel))
+                    return;
+            }
+            base.Close (viewModel);
+        }
     }
 }
