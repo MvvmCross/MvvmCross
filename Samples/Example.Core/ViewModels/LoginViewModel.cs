@@ -8,6 +8,7 @@ namespace Example.Core.ViewModels
         public LoginViewModel () {
             this.Username = "TestUser";
             this.Password = "YouCantSeeMe";
+            this.IsLoading = false;
         }
 
         private string _username;
@@ -16,8 +17,7 @@ namespace Example.Core.ViewModels
             get { return _username; }
             set
             {
-                _username = value;
-                RaisePropertyChanged(() => Username);
+                SetProperty (ref _username, value);
             }
         }
 
@@ -27,12 +27,22 @@ namespace Example.Core.ViewModels
             get { return _password; }
             set
             {
-                _password = value;
-                RaisePropertyChanged(() => Password);
+                SetProperty (ref _password, value);
             }
         }
 
-        public virtual ICommand Login
+        private bool _isLoading = false;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                SetProperty(ref _isLoading, value);
+            }
+        }
+
+        public virtual IMvxCommand LoginCommand
         {
             get
             {
