@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -47,6 +48,25 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
         public static void OnViewDestroy(this IMvxWindowsView storeView)
         {
             // nothing to do currently
+        }
+
+        public static bool HasRegionAttribute(this Type view)
+        {
+            var attributes = view
+                .GetCustomAttributes(typeof(MvxRegionAttribute), true);
+
+            return attributes.Any();
+        }
+
+        public static string GetRegionName(this Type view)
+        {
+            var attributes = view
+                .GetCustomAttributes(typeof(MvxRegionAttribute), true);
+
+            if (!attributes.Any())
+                throw new InvalidOperationException("The IMvxWindowsView has no region attribute.");
+
+            return ((MvxRegionAttribute)attributes.First()).Name;
         }
     }
 }
