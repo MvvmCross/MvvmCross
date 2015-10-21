@@ -31,6 +31,12 @@ If you would like to help make MvvmCross even better, then please do:
 * Thanks to [kjeremy](https://github.com/kjeremy)
 * Thanks to [jamie94bc](https://github.com/jamie94bc)
 * Thanks to [andyci](https://github.com/andyci)
+* Thanks to [Cheesebaron](https://github.com/cheesebaron)
+* Thanks to [Martijn00](https://github.com/martijn00)
+* Thanks to [vvolkgang](https://github.com/vvolkgang)
+* Thanks to [Dexyon](https://github.com/Dexyon)
+* Thanks to [thefex](https://github.com/thefex)
+* Thanks to [mattwhetton](https://github.com/mattwhetton)
 
 Licensing
 ---------

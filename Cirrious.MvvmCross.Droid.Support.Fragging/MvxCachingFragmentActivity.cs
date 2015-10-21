@@ -126,6 +126,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         private void RestoreCurrentFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             var json = savedInstanceState.GetString(SavedCurrentFragmentsKey);
+            if (string.IsNullOrEmpty(json)) // no fragments instances were saved.
+                return;
+
             var currentFragments = serializer.DeserializeObject<Dictionary<int, string>>(json);
             _currentFragments = currentFragments;
         }
@@ -133,15 +136,21 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         private void RestoreBackStackFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             var jsonBackStack = savedInstanceState.GetString(SavedBackStackFragmentsKey);
+            if (string.IsNullOrEmpty(jsonBackStack)) // no backstack fragments were saved.
+                return;
+
             var backStackFragments = serializer.DeserializeObject<List<KeyValuePair<int, string>>>(jsonBackStack);
             _backStackFragments = backStackFragments;
         }
 
         private void RestoreLookupFromSleep()
         {
+            // when there are no fragments SupportFragmentmanager.Fragments is null
+            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
             // See if Fragments were just sleeping, and repopulate the _lookup
             // with references to them.
-            foreach (var fragment in SupportFragmentManager.Fragments)
+            foreach (var fragment in fragments)
             {
                 if (fragment != null) {
                     var fragmentType = fragment.GetType ();
@@ -303,12 +312,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 SupportFragmentManager.PopBackStackImmediate();
                 return;
             }
-            else if (SupportFragmentManager.BackStackEntryCount == 1)
-            {
-                MoveTaskToBack(true);
-                return;
-            }
-
+            
+            SupportFragmentManager.PopBackStack();
             base.OnBackPressed();
         }
 

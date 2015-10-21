@@ -17,6 +17,7 @@ namespace Example.Droid.Fragments
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
         private NavigationView navigationView;
+        private IMenuItem previousMenuItem;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -33,7 +34,13 @@ namespace Example.Droid.Fragments
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
+            item.SetCheckable(true);
             item.SetChecked(true);
+            if (previousMenuItem != null) {
+                previousMenuItem.SetChecked(false);
+            }
+            previousMenuItem = item;
+
             Navigate (item.ItemId);
 
             return true;
