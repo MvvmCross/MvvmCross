@@ -199,3 +199,4 @@ FakesAssemblies/
 *.opt
 nuspec/nuget.exe
 **/Resource.designer.cs
+*.orig

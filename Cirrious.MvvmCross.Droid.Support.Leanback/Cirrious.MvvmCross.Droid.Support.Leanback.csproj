@@ -99,8 +99,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackOverlaySupportFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceGuidedStepFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceSearchSupportFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceDetailsSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceBrowseSupportFragment.cs" />
     <Compile Include="Fragments\MvxBrowseSupportFragment.cs" />
+    <Compile Include="Fragments\MvxDetailsSupportFragment.cs" />
+    <Compile Include="Fragments\MvxGuidedStepFragment.cs" />
+    <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
+    <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

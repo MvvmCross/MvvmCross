@@ -8,30 +8,30 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 {
-	public class MvxBrowseSupportFragment
-		: MvxEventSourceBrowseSupportFragment
+	public class MvxSearchSupportFragment
+		: MvxEventSourceSearchSupportFragment
 			, IMvxFragmentView
 	{
 		/// <summary>
-		/// Create new instance of a MvxBrowseSupportFragment
+		/// Create new instance of a MvxSearchSupportFragment
 		/// </summary>
 		/// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
 		/// <returns>Returns an instance of a MvxFragment</returns>
-		public static MvxBrowseSupportFragment NewInstance(Bundle bundle)
+		public static MvxSearchSupportFragment NewInstance(Bundle bundle)
 		{
 			// Setting Arguments needs to happen before Fragment is attached
 			// to Activity. Arguments are persisted when Fragment is recreated!
-			var fragment = new MvxBrowseSupportFragment { Arguments = bundle};
+			var fragment = new MvxSearchSupportFragment { Arguments = bundle};
 
 			return fragment;
 		}
 
-		protected MvxBrowseSupportFragment()
+		protected MvxSearchSupportFragment()
 		{
 			this.AddEventListeners();
 		}
 
-		protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
+		protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
 		{
 			this.AddEventListeners();
@@ -64,28 +64,6 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 
 		public virtual void OnViewModelSet()
 		{
-		}
-	}
-
-	public abstract class MvxBrowseSupportFragment<TViewModel>
-		: MvxBrowseSupportFragment
-			, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
-	{
-
-		protected MvxBrowseSupportFragment()
-		{
-
-		}
-
-		protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-		{
-		}
-
-
-		public new TViewModel ViewModel
-		{
-			get { return (TViewModel) base.ViewModel; }
-			set { base.ViewModel = value; }
 		}
 	}
 }
