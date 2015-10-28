@@ -11,8 +11,8 @@ using Example.Core.ViewModels;
 namespace Example.Droid.Fragments
 {
     [MvxOwnedViewModelFragment]
-    [Register("example.droid.fragments.ExamplesFragment")]
-    public class ExamplesFragment : BaseFragment<ExamplesViewModel>
+    [Register("example.droid.fragments.ExampleViewPagerFragment")]
+    public class ExampleViewPagerFragment : BaseFragment<ExampleViewPagerViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -40,7 +40,7 @@ namespace Example.Droid.Fragments
 
         protected override int FragmentId {
             get {
-                return Resource.Layout.fragment_examples;
+                return Resource.Layout.fragment_example_viewpager;
             }
         }
     }
