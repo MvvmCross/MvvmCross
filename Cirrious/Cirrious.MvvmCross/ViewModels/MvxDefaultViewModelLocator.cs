@@ -15,6 +15,28 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
+
+        public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
+                                   IMvxBundle parameterValues,
+                                   IMvxBundle savedState)
+        {
+            try
+            {
+                CallCustomInitMethods(viewModel, parameterValues);
+                if (savedState != null)
+                {
+                    CallReloadStateMethods(viewModel, savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem initialising viewModel of type {0}", viewModel.GetType().Name);
+            }
+
+            return viewModel;
+        }
+
         public virtual IMvxViewModel Load(Type viewModelType,
                                     IMvxBundle parameterValues,
                                     IMvxBundle savedState)
