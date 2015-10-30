@@ -10,7 +10,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     using Cirrious.CrossCore.Platform;
     using Cirrious.MvvmCross.Binding;
     using Cirrious.MvvmCross.Binding.Bindings.Target;
-    using UIKit;
+
+    using MonoTouch.UIKit;
 
     /// <summary>
     /// Custom Binding for UIActivityIndicator Hidden. 

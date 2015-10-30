@@ -106,6 +106,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
+  </ItemGroup>
   <ItemGroup />
 </Project>
