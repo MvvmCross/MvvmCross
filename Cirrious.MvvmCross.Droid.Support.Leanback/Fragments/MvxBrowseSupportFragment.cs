@@ -8,7 +8,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 {
-	public class MvxBrowseSupportFragment
+    public class MvxBrowseSupportFragment
 		: MvxEventSourceBrowseSupportFragment
 			, IMvxFragmentView
 	{
@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 		{
 			// Setting Arguments needs to happen before Fragment is attached
 			// to Activity. Arguments are persisted when Fragment is recreated!
-			var fragment = new MvxBrowseSupportFragment { Arguments = bundle};
+			var fragment = new MvxBrowseSupportFragment { Arguments = bundle };
 
 			return fragment;
 		}

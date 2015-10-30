@@ -8,30 +8,30 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 {
-	public class MvxPlaybackOverlaySupportFragment
-		: MvxEventSourcePlaybackOverlaySupportFragment
+    public class MvxHeadersSupportFragment
+		: MvxEventSourceHeadersSupportFragment
 			, IMvxFragmentView
 	{
 		/// <summary>
-		/// Create new instance of a MvxSearchSupportFragment
+		/// Create new instance of a MvxHeadersSupportFragment
 		/// </summary>
 		/// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
 		/// <returns>Returns an instance of a MvxFragment</returns>
-		public static MvxPlaybackOverlaySupportFragment NewInstance(Bundle bundle)
+		public static MvxHeadersSupportFragment NewInstance(Bundle bundle)
 		{
 			// Setting Arguments needs to happen before Fragment is attached
 			// to Activity. Arguments are persisted when Fragment is recreated!
-			var fragment = new MvxPlaybackOverlaySupportFragment { Arguments = bundle };
+			var fragment = new MvxHeadersSupportFragment { Arguments = bundle };
 
 			return fragment;
 		}
 
-		protected MvxPlaybackOverlaySupportFragment()
+		protected MvxHeadersSupportFragment()
 		{
 			this.AddEventListeners();
 		}
 
-		protected MvxPlaybackOverlaySupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
+		protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
 		{
 			this.AddEventListeners();
@@ -64,6 +64,28 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 
 		public virtual void OnViewModelSet()
 		{
+		}
+	}
+
+	public abstract class MvxHeadersSupportFragment<TViewModel>
+		: MvxHeadersSupportFragment
+			, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+	{
+
+		protected MvxHeadersSupportFragment()
+		{
+
+		}
+
+		protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
+		}
+
+
+		public new TViewModel ViewModel
+		{
+			get { return (TViewModel) base.ViewModel; }
+			set { base.ViewModel = value; }
 		}
 	}
 }

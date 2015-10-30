@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 		{
 			// Setting Arguments needs to happen before Fragment is attached
 			// to Activity. Arguments are persisted when Fragment is recreated!
-			var fragment = new MvxSearchSupportFragment { Arguments = bundle};
+			var fragment = new MvxSearchSupportFragment { Arguments = bundle };
 
 			return fragment;
 		}
