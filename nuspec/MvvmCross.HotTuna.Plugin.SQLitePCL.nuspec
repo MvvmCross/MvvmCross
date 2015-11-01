@@ -76,6 +76,11 @@
 		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
 		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
+		<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\net45\MvvmCross.Plugins.Sqlite.dll" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Sqlite.Wpf.dll" target="lib\net45\MvvmCross.Plugins.Sqlite.Wpf.dll" />
+		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\net45\Bootstrap\SqlitePclPluginBootstrap.cs.pp" />
+		
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\win81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
