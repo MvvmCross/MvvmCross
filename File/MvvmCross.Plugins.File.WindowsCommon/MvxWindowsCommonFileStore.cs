@@ -168,14 +168,14 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
             var files = folder.GetFilesAsync().Await();
-            return files.Select(x => x.Name);
+            return files.Select(x => x.Path);
         }
 
         public override IEnumerable<string> GetFoldersIn(string folderPath)
         {
             var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
             var files = folder.GetFoldersAsync().Await();
-            return files.Select(x => x.Name);
+            return files.Select(x => x.Path);
         }
 
         public override void DeleteFile(string path)
