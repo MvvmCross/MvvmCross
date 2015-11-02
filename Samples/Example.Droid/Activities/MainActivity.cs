@@ -5,7 +5,6 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
-using Android.Transitions;
 using Android.Views;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Support.AppCompat;
@@ -15,6 +14,7 @@ using Cirrious.MvvmCross.Droid.Support.Fragging.Presenter;
 using Cirrious.MvvmCross.ViewModels;
 using Example.Core.ViewModels;
 using Example.Droid.Fragments;
+using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace Example.Droid.Activities
 {
@@ -70,7 +70,7 @@ namespace Example.Droid.Activities
             RegisterFragment<TFragment, TViewModel>(tag);
         }
 
-        protected override IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
+        protected override IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag, bool addToBackstack = false)
         {
             var fragInfo = MyFragmentsInfo[tag];
 
