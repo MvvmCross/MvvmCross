@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>Cirrious.MvvmCross.Droid.Support.Leanback</id>
+		<version>4.0.0-beta5</version>
+		<title>MvvmCross Android Support - Leanback</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package contains Support V17 Leanback support for MvvmCross</description>
+		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev http://i.imgur.com/BvdAtgT.png Leanback</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.Leanback.*" target="lib\MonoAndroid403" />
+		<file src="..\Cirrious.MvvmCross.Droid.Support.Leanback\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.Leanback" />
+	</files>
+</package>
+
+

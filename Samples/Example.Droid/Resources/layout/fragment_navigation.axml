@@ -6,5 +6,6 @@
     android:layout_width="wrap_content"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
+    android:theme="@style/AppTheme.Menu"
     local:headerLayout="@layout/fragment_navigation_header"
     local:menu="@menu/navigation_drawer" />

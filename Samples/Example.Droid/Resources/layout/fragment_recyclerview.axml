@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <Cirrious.MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
@@ -18,4 +17,4 @@
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
             local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
     </Cirrious.MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
