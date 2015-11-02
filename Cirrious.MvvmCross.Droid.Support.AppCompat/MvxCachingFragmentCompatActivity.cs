@@ -61,19 +61,19 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         }
 
 
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
+        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag, bool addToBackstack = false)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
-            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
+            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel), addToBackstack);
         }
 
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType)
+        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
         {
             Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
             Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
 
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType);
+            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
         }
 
         protected MvxCachingFragmentCompatActivity()
