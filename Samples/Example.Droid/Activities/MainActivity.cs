@@ -150,9 +150,9 @@ namespace Example.Droid.Activities
         // You could move this to another class to reduce code cluster.
         private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary<string, CustomFragmentInfo>()
         {
-            {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel),false)},
-            {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), false, isRoot: true)},
-            {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), false, isRoot: true)}
+            {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel))},
+            {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), isRoot: true)},
+            {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), isRoot: true)}
         };
 
     }
@@ -161,10 +161,9 @@ namespace Example.Droid.Activities
     {
         public bool IsRoot { get; set; }
 
-        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack, bool isRoot = false)
-            : base(tag, fragmentType, viewModelType)
+        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false, bool isRoot = false)
+            : base(tag, fragmentType, viewModelType, addToBackstack)
         {
-            AddToBackStack = addToBackstack;
             IsRoot = isRoot;
         }
 
