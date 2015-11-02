@@ -60,13 +60,18 @@ namespace Example.Droid.Activities
             RegisterFragment<ExamplesFragment, ExamplesViewModel>(typeof(ExamplesViewModel).Name, bundle);
             RegisterFragment<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name, bundle);
         }
+        public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args)
+            where TFragment : IMvxFragmentView
+            where TViewModel : IMvxViewModel
+        {
+            var customPresenter = Mvx.Resolve<IMvxFragmentsPresenter>();
+            customPresenter.RegisterViewModelAtHost<TViewModel>(this);
+            RegisterFragment<TFragment, TViewModel>(tag);
+        }
 
         protected override IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
         {
-            var fragInfo = myFragmentsInfo[tag];
-
-            if(tag != typeof(MenuViewModel).Name)
-                fragInfo.TransitionInfo = fragTransitions;
+            var fragInfo = MyFragmentsInfo[tag];
 
             return fragInfo;
         }
@@ -74,7 +79,9 @@ namespace Example.Droid.Activities
         public override void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
         {
             var myCustomInfo = (CustomFragmentInfo) fragmentInfo;
-            InflateTransitions(myCustomInfo);
+
+            // You can do fragment + transaction based configurations here.
+            // Note that, the cached fragment might be reused in another transaction afterwards.
         }
 
         private void CheckIfMenuIsNeeded(CustomFragmentInfo myCustomInfo)
@@ -104,27 +111,7 @@ namespace Example.Droid.Activities
             DrawerLayout.SetDrawerLockMode(DrawerLayout.LockModeUnlocked);
         }
 
-        private void InflateTransitions(CustomFragmentInfo fragmentInfo)
-        {
-            var frag = fragmentInfo.CachedFragment;
-            var transitionInfo = fragmentInfo.TransitionInfo;
 
-            if (transitionInfo == null)
-                return;
-
-            var transitionInflater = TransitionInflater.From(this);
-            frag.EnterTransition = transitionInflater.InflateTransition(transitionInfo.EnterTransitionId);
-            frag.ExitTransition = transitionInflater.InflateTransition(transitionInfo.ExitTransitionId);
-        }
-
-        public void RegisterFragment<TFragment, TViewModel>(string tag, Bundle args)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            var customPresenter = Mvx.Resolve<IMvxFragmentsPresenter>();
-            customPresenter.RegisterViewModelAtHost<TViewModel>(this);
-            RegisterFragment<TFragment, TViewModel>(tag);
-        }
 
         public bool Show(MvxViewModelRequest request, Bundle bundle)
         {
@@ -160,41 +147,26 @@ namespace Example.Droid.Activities
                 base.OnBackPressed();
         }
 
-        private static Dictionary<string, CustomFragmentInfo> myFragmentsInfo = new Dictionary<string, CustomFragmentInfo>()
+        // You could move this to another class to reduce code cluster.
+        private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary<string, CustomFragmentInfo>()
         {
             {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel),false)},
             {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), true, isRoot: true)},
             {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), true, isRoot: true)}
         };
 
-        private static FragmentTransitionInfo fragTransitions = new FragmentTransitionInfo()
-        {
-            EnterTransitionId = Resource.Transition.slide_left,
-            ExitTransitionId = Resource.Transition.slide_right,
-        };
     }
 
     public class CustomFragmentInfo : MvxCachedFragmentInfo
     {
-        public FragmentTransitionInfo TransitionInfo { get; set; }
         public bool IsRoot { get; set; }
 
-        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack, FragmentTransitionInfo transitionInfo = null, bool isRoot = false)
+        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack, bool isRoot = false)
             : base(tag, fragmentType, viewModelType)
         {
             AddToBackStack = addToBackstack;
-            TransitionInfo = transitionInfo;
             IsRoot = isRoot;
         }
 
     }
-
-    public class FragmentTransitionInfo
-    {
-        public int EnterTransitionId;
-        public int ExitTransitionId;
-        public int ReenterTransitionId;
-        public int ReturnTransitionId;
-    }
-
 }
