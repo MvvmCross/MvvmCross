@@ -152,7 +152,9 @@ namespace Example.Droid.Activities
         private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary<string, CustomFragmentInfo>()
         {
             {typeof(MenuViewModel).Name, new CustomFragmentInfo(typeof(MenuViewModel).Name, typeof(MenuFragment), typeof(MenuViewModel))},
-            {typeof(ExamplesViewModel).Name, new CustomFragmentInfo( typeof(ExamplesViewModel).Name, typeof(ExamplesFragment), typeof(ExamplesViewModel), isRoot: true)},
+            {typeof(HomeViewModel).Name, new CustomFragmentInfo( typeof(HomeViewModel).Name, typeof(HomeFragment), typeof(HomeViewModel), isRoot: true)},
+            {typeof(ExampleViewPagerViewModel).Name, new CustomFragmentInfo( typeof(ExampleViewPagerViewModel).Name, typeof(ExampleViewPagerFragment), typeof(ExampleViewPagerViewModel), isRoot: true)},
+            {typeof(ExampleRecyclerViewModel).Name, new CustomFragmentInfo( typeof(ExampleRecyclerViewModel).Name, typeof(ExampleRecyclerViewFragment), typeof(ExampleRecyclerViewModel), isRoot: true)},
             {typeof(SettingsViewModel).Name, new CustomFragmentInfo( typeof(SettingsViewModel).Name, typeof(SettingsFragment), typeof(SettingsViewModel), isRoot: true)}
         };
 
