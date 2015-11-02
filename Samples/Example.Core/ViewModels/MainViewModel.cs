@@ -11,7 +11,7 @@ namespace Example.Core.ViewModels
             Examples = new ExamplesViewModel();
         }
 
-        public void ShowMenu()
+        public void ShowMenuAndFirstDetail()
         {
             ShowViewModel<MenuViewModel>();
             ShowViewModel<ExamplesViewModel>();

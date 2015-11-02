@@ -40,7 +40,7 @@ namespace Example.Droid.Activities
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             if(bundle == null)
-                ViewModel.ShowMenu();
+                ViewModel.ShowMenuAndFirstDetail();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
