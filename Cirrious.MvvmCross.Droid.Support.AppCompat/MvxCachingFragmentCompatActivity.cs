@@ -20,6 +20,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
@@ -28,11 +29,12 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
-        private const string SavedCurrentFragmentsKey = "__mvxSavedCurrentFragments";
-        private const string SavedBackStackFragmentsKey = "__mvxSavedBackStackFragments";
         private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
-        private Dictionary<int, string> _currentFragments = new Dictionary<int, string>();
-        private IList<KeyValuePair<int, string>> _backStackFragments = new List<KeyValuePair<int, string>>();
+
+        /// <summary>
+        /// Enable OnFragmentPopped callback. This callback might represent a performance hit.
+        /// </summary>
+        protected bool EnableOnFragmentPoppedCallback { get; set; }
 
         /// <summary>
         ///     Register a Fragment to be shown, this should usually be done in OnCreate
@@ -49,13 +51,34 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             _lookup.Add(tag, fragInfo);
         }
 
+	    public void RegisterFragment(string tag, Type fragmentType, Type viewModelType)
+        {
+	        Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
+	        Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
+
+            var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
+            _lookup.Add(tag, fragInfo);
+        }
+
+
         protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag)
+            where TFragment : IMvxFragmentView
+            where TViewModel : IMvxViewModel
         {
             return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
         }
 
+        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType)
+        {
+            Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
+            Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
+
+            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType);
+        }
+
         protected MvxCachingFragmentCompatActivity()
         {
+            EnableOnFragmentPoppedCallback = true; //Default
         }
 
         protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
@@ -71,22 +94,20 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             if (savedInstanceState == null) return;
 
             // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-            RestoreLookupFromSleep();
+            RestoreFragmentsCache();
 
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
                 Mvx.Trace(
-                    "Could not resolve IMvxNavigationSerializer, it is going to be hard to create ViewModel cache");
+                    "Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
                 return;
             }
 
-            RestoreCurrentFragmentsFromBundle(serializer, savedInstanceState);
-            RestoreBackStackFragmentsFromBundle(serializer, savedInstanceState);
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
 
-        private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
+	    private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             IMvxSavedStateConverter savedStateConverter;
             IMvxMultipleViewModelCache viewModelCache;
@@ -129,21 +150,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             }
         }
 
-        private void RestoreCurrentFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
-        {
-            var json = savedInstanceState.GetString(SavedCurrentFragmentsKey);
-            var currentFragments = serializer.DeserializeObject<Dictionary<int, string>>(json);
-            _currentFragments = currentFragments;
-        }
-
-        private void RestoreBackStackFragmentsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
-        {
-            var jsonBackStack = savedInstanceState.GetString(SavedBackStackFragmentsKey);
-            var backStackFragments = serializer.DeserializeObject<List<KeyValuePair<int, string>>>(jsonBackStack);
-            _backStackFragments = backStackFragments;
-        }
-
-        private void RestoreLookupFromSleep()
+        private void RestoreFragmentsCache()
         {
             // See if Fragments were just sleeping, and repopulate the _lookup
             // with references to them.
@@ -153,7 +160,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 {
                     var fragmentType = fragment.GetType();
                     var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
-                    foreach (var item in lookup.Where(item => item.Value != null))
+                    foreach (var item in lookup.Where(item => item.Value != null)) //NOTE(vvolkgang) wut? Value should never be null in here.
                     {
                         // reattach fragment to lookup
                         item.Value.CachedFragment = fragment;
@@ -172,50 +179,37 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
             var typesForKeys = new Dictionary<string, Type>();
 
-            foreach (var item in _lookup)
+            var currentFragsInfo = GetCurrentFragmentsInfo();
+            foreach (var info in currentFragsInfo)
             {
-                if (_currentFragments.Any(x => x.Value == item.Key))
-                {
-                    var fragment = item.Value.CachedFragment as IMvxFragmentView;
-                    if (fragment == null)
-                        continue;
+                var fragment = info.CachedFragment as IMvxFragmentView;
+                if (fragment == null)
+                    continue;
 
-                    var mvxBundle = fragment.CreateSaveStateBundle();
-                    var bundle = new Bundle();
-                    savedStateConverter.Write(bundle, mvxBundle);
-                    outState.PutBundle(item.Key, bundle);
+                var mvxBundle = fragment.CreateSaveStateBundle();
+                var bundle = new Bundle();
+                savedStateConverter.Write(bundle, mvxBundle);
+                outState.PutBundle(info.Tag, bundle);
 
-                    typesForKeys.Add(item.Key, item.Value.ViewModelType);
-                }
+                typesForKeys.Add(info.Tag, info.ViewModelType);
             }
 
             return typesForKeys;
         }
 
-        protected override void OnSaveInstanceState(Bundle outState)
+	    protected override void OnSaveInstanceState(Bundle outState)
         {
-            if (_lookup.Any())
+            base.OnSaveInstanceState(outState);
+            IMvxJsonConverter ser;
+            if (_lookup.Any() && Mvx.TryResolve(out ser))
             {
                 var typesForKeys = CreateFragmentTypesDictionary(outState);
                 if (typesForKeys == null)
                     return;
 
-                IMvxJsonConverter ser;
-                if (!Mvx.TryResolve(out ser))
-                {
-                    return;
-                }
-
                 var json = ser.SerializeObject(typesForKeys);
                 outState.PutString(SavedFragmentTypesKey, json);
-
-                json = ser.SerializeObject(_currentFragments);
-                outState.PutString(SavedCurrentFragmentsKey, json);
-
-                json = ser.SerializeObject(_backStackFragments);
-                outState.PutString(SavedBackStackFragmentsKey, json);
             }
-            base.OnSaveInstanceState(outState);
         }
 
         /// <summary>
@@ -225,7 +219,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         /// <param name="contentId">Where you want to show the Fragment</param>
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="forceAddToBackStack">If you want to force add the fragment to the backstack so on backbutton it will go back to it. Note: This will override IMvxCachedFragmentInfo.AddToBackStack configuration.</param>
-        /// <param name="forceReplaceFragment">Force replace a fragment with the same viewmodel at the same contentid</param>
+        /// <param name="forceReplaceFragment">Force replace a fragment with the same tag at the same contentid</param>
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
@@ -234,9 +228,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
 
-            string currentFragment;
-            _currentFragments.TryGetValue(contentId, out currentFragment);
-
+            // We shouldn't replace the current fragment unless we really need to.
             var shouldReplaceCurrentFragment = forceReplaceFragment || ShouldReplaceCurrentFragment(contentId, tag);
             if (!shouldReplaceCurrentFragment)
                 return;
@@ -244,13 +236,14 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             var ft = SupportFragmentManager.BeginTransaction();
             OnBeforeFragmentChanging(fragInfo, ft);
 
-            // if there is a Fragment showing on the contentId we want to present at
-            // remove it first.   
-            RemoveFragmentIfShowing(ft, contentId);
-
             fragInfo.ContentId = contentId;
-            // if we haven't already created a Fragment, do it now
-            if (fragInfo.CachedFragment == null)
+
+            //If we already have a previously created fragment, we only need to send the new parameters
+            if (fragInfo.CachedFragment != null)
+            {
+                fragInfo.CachedFragment.Arguments = bundle;
+            }
+            else
             {
                 //Otherwise, create one and cache it
                 fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
@@ -260,10 +253,11 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
             ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
 
-            _currentFragments[contentId] = fragInfo.Tag;
 
             if (fragInfo.AddToBackStack || forceAddToBackStack)
+            {
                 ft.AddToBackStack(fragInfo.Tag);
+            }
 
             OnFragmentChanging(fragInfo, ft);
             ft.Commit();
@@ -273,58 +267,43 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         private bool ShouldReplaceCurrentFragment(int contentId, string tag)
         {
-            string currentFragment;
-            _currentFragments.TryGetValue(contentId, out currentFragment);
-
-            return ShouldReplaceFragment(contentId, currentFragment, tag);
-        }
-
-        protected virtual bool ShouldReplaceFragment(int contentId, string currentTag, string replacementTag)
-        {
-            return currentTag != replacementTag;
-        }
-
-        private bool RemoveFragmentIfShowing(FragmentTransaction ft, int contentId)
-        {
-            var frag = SupportFragmentManager.FindFragmentById(contentId);
-            if (frag == null) return false;
-
-            //TODO Since all the fragments will be replaced do we really need to track this?
-
-            var currentFragment = _currentFragments.First(x => x.Key == contentId);
-            _backStackFragments.Add(currentFragment);
-
-            _currentFragments.Remove(contentId);
-            return true;
+            var currentFragment = SupportFragmentManager.FindFragmentById(contentId);
+            return currentFragment == null || currentFragment.Tag != tag;
         }
 
         public override void OnBackPressed()
         {
-            if (SupportFragmentManager.BackStackEntryCount > 1)
+            if (SupportFragmentManager.BackStackEntryCount >= 1)
             {
-                var backStackFrag = SupportFragmentManager.GetBackStackEntryAt(SupportFragmentManager.BackStackEntryCount - 1);
-                _currentFragments.Remove(_currentFragments.Last(x => x.Value == backStackFrag.Name).Key);
-
-                var newFrag = SupportFragmentManager.GetBackStackEntryAt(SupportFragmentManager.BackStackEntryCount - 2);
-                var currentFragment = _backStackFragments.Last(x => x.Value == newFrag.Name);
-
-                _currentFragments.Add(currentFragment.Key, currentFragment.Value);
-                _backStackFragments.Remove(currentFragment);
-
                 SupportFragmentManager.PopBackStackImmediate();
-                OnFragmentChanged(GetFragmentInfoByTag(currentFragment.Value));
 
-                return;
-            }
-            else if (SupportFragmentManager.BackStackEntryCount == 1)
-            {
-                MoveTaskToBack(true);
+                if (EnableOnFragmentPoppedCallback)
+                {
+                    //NOTE(vvolkgang) this is returning ALL the frags. Should we return only the visible ones?
+                    var currentFragsInfo = GetCurrentFragmentsInfo();
+                    OnFragmentPopped(currentFragsInfo);
+                }
+
                 return;
             }
 
             base.OnBackPressed();
         }
 
+	    protected List<IMvxCachedFragmentInfo> GetCurrentFragmentsInfo()
+	    {
+	        return SupportFragmentManager.Fragments
+                        .Where(frag => frag != null)
+                        .Select(frag => GetFragmentInfoByTag(frag.Tag))
+                        .ToList();
+        }
+
+	    protected IMvxCachedFragmentInfo GetLastFragmentInfo()
+	    {
+	        var lastFragment = SupportFragmentManager.Fragments.Last();
+
+            return GetFragmentInfoByTag(lastFragment.Tag);
+	    }
         /// <summary>
         /// Close Fragment with a specific tag at a specific placeholder
         /// </summary>
@@ -336,16 +315,6 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             if (frag == null) return;
 
             SupportFragmentManager.PopBackStackImmediate(tag, 1);
-            
-            _currentFragments.Remove(contentId);
-
-            if (_backStackFragments.Count > 0 && _backStackFragments.Any(x => x.Key == contentId))
-            {
-                var currentFragment = _backStackFragments.Last(x => x.Key == contentId);
-
-                _currentFragments.Add(currentFragment.Key, currentFragment.Value);
-                _backStackFragments.Remove(currentFragment);
-            }
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
@@ -357,8 +326,11 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         }
 
         public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+
+        // Called before the transaction is commited
         public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
         public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
+        public virtual void OnFragmentPopped(IList<IMvxCachedFragmentInfo> currentFragmentsInfo) { }
         public virtual void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
