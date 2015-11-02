@@ -241,7 +241,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             //If we already have a previously created fragment, we only need to send the new parameters
             if (fragInfo.CachedFragment != null)
             {
-                fragInfo.CachedFragment.Arguments = bundle;
+                fragInfo.CachedFragment.Arguments.Clear();
+                fragInfo.CachedFragment.Arguments.PutAll(bundle);
             }
             else
             {
