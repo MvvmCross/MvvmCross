@@ -55,6 +55,8 @@ namespace Example.Droid.Activities
 
         private void RegisterForDetailsRequests()
         {
+            //TODO improve Mvx and MvxAndroidSupport to enable registration based on a config dictionary.
+            //currently, all the register methods expect the Frag + VM types to be added as generics, thus, we need to change it to support parameters
             RegisterFragmentAtHost<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name);
             RegisterFragmentAtHost<HomeFragment, HomeViewModel>(typeof(HomeViewModel).Name);
             RegisterFragmentAtHost<ExampleViewPagerFragment, ExampleViewPagerViewModel>(typeof(ExampleViewPagerViewModel).Name);
