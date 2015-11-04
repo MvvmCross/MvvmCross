@@ -97,7 +97,7 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Dialog\NoteAndLicense.MonoTouch.Dialog.txt" />
+    <None Include="Dialog\NoteAndLicense.MonoTouch.Dialog.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossUI.Core\CrossUI.Core.csproj">
