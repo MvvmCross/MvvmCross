@@ -25,6 +25,36 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
+        // Reload should be used to re-run cached ViewModels lifecycle if required. 
+        public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
+        {
+            var viewModelLocator = FindViewModelLocator(request);
+            return ReloadViewModel(viewModel, request, savedState, viewModelLocator);
+        }
+
+        private IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState,
+                                    IMvxViewModelLocator viewModelLocator)
+        {
+            if (viewModelLocator == null)
+            {
+                throw new MvxException("Received view model is null, view model reload failed. ", request.ViewModelType);
+            }
+
+            var parameterValues = new MvxBundle(request.ParameterValues);
+            try
+            {
+                viewModel = viewModelLocator.Reload(viewModel, parameterValues, savedState);
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap(
+                    "Failed to reload a previously created created ViewModel for type {0} from locator {1} - check InnerException for more information",
+                    request.ViewModelType, viewModelLocator.GetType().Name);
+            }
+            viewModel.RequestedBy = request.RequestedBy;
+            return viewModel;
+        }
+
         public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState)
         {
             if (request.ViewModelType == typeof(MvxNullViewModel))
