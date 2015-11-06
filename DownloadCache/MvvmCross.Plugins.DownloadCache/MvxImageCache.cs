@@ -53,10 +53,12 @@ namespace MvvmCross.Plugins.DownloadCache
                     _fileDownloadCache.RequestLocalFilePath(url, 
                         async s => {
                             var image = await Parse(s).ConfigureAwait(false);
-							if(!_entriesByHttpUrl.ContainsKey(url)) {
-                            	_entriesByHttpUrl.Add(url, new Entry(url, image));
-							}
-
+                            lock(_entriesByHttpUrl)
+                            {
+    							if(!_entriesByHttpUrl.ContainsKey(url)) {
+                                	_entriesByHttpUrl.Add(url, new Entry(url, image));
+    							}
+                            }
                             tcs.TrySetResult(image.RawImage);
                         },
                         exception => {
