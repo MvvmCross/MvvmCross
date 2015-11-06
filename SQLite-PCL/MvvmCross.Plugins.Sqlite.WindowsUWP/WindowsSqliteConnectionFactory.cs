@@ -1,6 +1,4 @@
 using System.IO;
-using SQLite.Net;
-using SQLite.Net.Async;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.WinRT;
 
