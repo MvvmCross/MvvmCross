@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Console.MvvmCrossLibraries</id>
-		<version>4.0.0-beta4</version>
+		<version>4.0.0-beta5</version>
 		<title>MvvmCross - MvvmCross Libraries for Console</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,19 +14,19 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -45,6 +45,7 @@
 		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45\Cirrious.MvvmCross.pdb" />
 	</files>
 </package>
+
 
 
 
