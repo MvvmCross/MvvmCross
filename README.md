@@ -14,7 +14,7 @@ For more background on the MvvmCross IoC and Service Resolution APIs, see [Servi
 
 * [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
 * [Xamarin forums](http://forums.xamarin.com)
-* [Jabbr](http://jabbr.net/#/rooms/mvvmcross)
+* [Slack](https://xamarinchat.herokuapp.com/) join the mvvmcross channel after you are in
 
 
 ### Documentation and Examples
