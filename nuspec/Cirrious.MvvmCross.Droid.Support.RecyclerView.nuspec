@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.RecyclerView</id>
-		<version>4.0.0-beta5</version>
+		<version>4.0.0-beta6</version>
 		<title>MvvmCross Android Support - RecyclerView</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,14 +14,14 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
 				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta4" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
 				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
 			</group>
@@ -34,5 +34,6 @@
 		<file src="..\Cirrious.MvvmCross.Droid.Support.RecyclerView\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.RecyclerView" />
 	</files>
 </package>
+
 
 
