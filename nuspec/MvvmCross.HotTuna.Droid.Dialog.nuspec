@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Droid.Dialog</id>
-		<version>4.0.0-beta4</version>
+		<version>4.0.0-beta5</version>
 		<title>MvvmCross - Android Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,10 +14,10 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -36,6 +36,7 @@
 		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
 	</files>
 </package>
+
 
 
 

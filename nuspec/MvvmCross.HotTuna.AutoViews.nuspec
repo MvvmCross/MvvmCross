@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.AutoViews</id>
-		<version>4.0.0-beta4</version>
+		<version>4.0.0-beta5</version>
 		<title>MvvmCross - AutoViews Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -29,3 +29,4 @@
 		
 	</files>
 </package>
+
