@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
@@ -34,8 +35,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         {
             if (fragmentView.ViewModel != null)
             {
-                Mvx.Trace("Fragment {0} already has a ViewModel, skipping ViewModel rehydration",
-                    fragmentView.GetType().ToString());
+                //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
+                //until then, we're going to re-run the viewmodel lifecycle here.
+                RunViewModelLifecycle(fragmentView.ViewModel, bundle, request); 
+
                 return;
             }
 
@@ -54,6 +57,26 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
             if (activity == null)
                 throw new MvxException("ToFragment called on an IMvxFragmentView which is not an Android Fragment: {0}", fragmentView);
             return activity;
+        }
+
+        private static void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle savedState,
+            MvxViewModelRequest request)
+        {
+            try
+            {
+                var parameterValues = new MvxBundle(request.ParameterValues);
+                viewModel.CallBundleMethods("Init", parameterValues);
+                if (savedState != null)
+                {
+                    viewModel.CallBundleMethods("ReloadState", savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
+            }
+
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
