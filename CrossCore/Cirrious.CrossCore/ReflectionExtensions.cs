@@ -37,11 +37,6 @@ namespace Cirrious.CrossCore
             return type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic);
         }
 
-        public static bool IsInstanceOfType(this Type type, object obj)
-        {
-            return type.IsAssignableFrom(obj.GetType());
-        }
-
         public static MethodInfo GetAddMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
             if (eventInfo.AddMethod == null || (!nonPublic && !eventInfo.AddMethod.IsPublic))
