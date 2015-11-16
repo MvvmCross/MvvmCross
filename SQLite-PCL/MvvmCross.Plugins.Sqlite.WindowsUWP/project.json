@@ -1,8 +1,10 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MvvmCross.HotTuna.CrossCore": "4.0.0-beta3",
-    "SQLite.Net.Async-PCL": "3.0.5"
+    "MvvmCross.HotTuna.CrossCore": "4.0.0-beta5",
+    "SQLite.Net-PCL": "3.1.1",
+    "SQLite.Net.Async-PCL": "3.1.1",
+    "SQLite.Net.Core-PCL": "3.1.1"
   },
   "frameworks": {
     "uap10.0": {}

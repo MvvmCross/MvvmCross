@@ -149,12 +149,22 @@ namespace MvvmCross.Plugins.File.WindowsStore
 
         public override void EnsureFolderExists(string folderPath)
         {
-          if (FolderExists(folderPath))
-            return;
+            if (FolderExists(folderPath))
+                return;
+            var rootFolder = ToFullPath(string.Empty);
+            var rootStorageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
+            var relativeFolderPath = GetRelativePathToSubFolder(rootStorageFolder.Path, folderPath);
+            CreateFolderAsync(rootStorageFolder, relativeFolderPath).GetAwaiter().GetResult();
+        }
 
-          var rootFolder = ToFullPath(string.Empty);
-          var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
-          CreateFolderAsync(storageFolder, folderPath).GetAwaiter().GetResult();
+        private string GetRelativePathToSubFolder(string rootPath, string subFolderPath)
+        {
+            string relativePath = subFolderPath;
+            if (subFolderPath.ToLower().Contains(rootPath.ToLower()))
+            {
+                relativePath = subFolderPath.Substring(rootPath.Length + 1);
+            }
+            return relativePath;
         }
 
         private static async Task<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
@@ -169,7 +179,7 @@ namespace MvvmCross.Plugins.File.WindowsStore
         {
             var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
             var files = folder.GetFilesAsync().Await();
-            return files.Select(x => x.Name);
+            return files.Select(x => x.Path);
         }
 
         public override IEnumerable<string> GetFoldersIn(string folderPath)

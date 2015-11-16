@@ -9,6 +9,9 @@ packages
 *.user
 *.sln.docstates
 
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
 # Build results
 
 [Dd]ebug/
@@ -157,3 +160,9 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+*.nupkg
+nuget.exe
+
+## Android Auto-generated files
+Resource.designer.cs

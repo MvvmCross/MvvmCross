@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.SoundEffects</id>
-		<version>4.0.0-beta3</version>
+		<version>4.0.0-beta5</version>
 		<title>MvvmCross - SoundEffects Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -11,37 +11,37 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package contains the 'SoundEffects' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross xamarin monodroid Xamarin.iOS10 wpf windows8 winrt netcore wp wpdev windowsphone</tags>
-		<iconUrl>http://i.imgur.com/ymzMpLX.png</iconUrl>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta3" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -64,6 +64,7 @@
 		<file src="BootstrapContent\SoundEffectsPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SoundEffectsPluginBootstrap.cs.pp" />
 	</files>
 </package>
+
 
 
 
