@@ -153,7 +153,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         {
             // See if Fragments were just sleeping, and repopulate the _lookup
             // with references to them.
-            foreach (var fragment in SupportFragmentManager.Fragments)
+            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
+            foreach (var fragment in fragments)
             {
                 if (fragment != null)
                 {
@@ -292,7 +294,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
         protected List<IMvxCachedFragmentInfo> GetCurrentFragmentsInfo()
         {
-            return SupportFragmentManager.Fragments
+            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
+            return fragments
                         .Where(frag => frag != null)
                         .Select(frag => GetFragmentInfoByTag(frag.Tag))
                         .ToList();
