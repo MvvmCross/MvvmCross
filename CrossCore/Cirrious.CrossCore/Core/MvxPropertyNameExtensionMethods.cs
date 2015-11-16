@@ -48,7 +48,7 @@ namespace Cirrious.CrossCore.Core
 
             if (target != null)
             {
-                if (!member.DeclaringType.IsAssignableFrom(target.GetType()))
+                if (!member.DeclaringType.IsInstanceOfType(target))
                 {
                     throw new ArgumentException(WrongExpressionMessage, "expression");
                 }
