@@ -12,7 +12,7 @@ namespace Cirrious.CrossCore.Core
         void ApplyTo(object what);
     }
 
-    public interface IMvxApplicableTo<T>
+    public interface IMvxApplicableTo<in T>
     {
         void ApplyTo(T what);
     }
