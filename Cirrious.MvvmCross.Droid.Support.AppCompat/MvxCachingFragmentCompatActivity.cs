@@ -20,7 +20,6 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
@@ -46,32 +45,24 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
-            var fragInfo = CreateFragmentInfo<TFragment, TViewModel>(tag);
+            var fragInfo = CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
 
             _lookup.Add(tag, fragInfo);
         }
 
 	    public void RegisterFragment(string tag, Type fragmentType, Type viewModelType)
         {
-	        Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-	        Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
-
             var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
             _lookup.Add(tag, fragInfo);
         }
 
-
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag, bool addToBackstack = false)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel), addToBackstack);
-        }
-
         protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
         {
-            Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-            Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
+            if ( !typeof(IMvxFragmentView).IsAssignableFrom(fragmentType) )
+                throw new InvalidOperationException(string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
+
+            if ( !typeof(IMvxViewModel).IsAssignableFrom(viewModelType) )
+                throw new InvalidOperationException(string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
 
             return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
         }
