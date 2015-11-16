@@ -180,7 +180,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             var typesForKeys = new Dictionary<string, Type>();
 
-            var currentFragsInfo = GetCurrentFragmentsInfo();
+            var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
             foreach (var info in currentFragsInfo)
             {
                 var fragment = info.CachedFragment as IMvxFragmentView;
@@ -282,7 +282,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 if (EnableOnFragmentPoppedCallback)
                 {
                     //NOTE(vvolkgang) this is returning ALL the frags. Should we return only the visible ones?
-                    var currentFragsInfo = GetCurrentFragmentsInfo();
+                    var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
                     OnFragmentPopped(currentFragsInfo);
                 }
 
@@ -292,11 +292,13 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             base.OnBackPressed();
         }
 
-        protected List<IMvxCachedFragmentInfo> GetCurrentFragmentsInfo()
+        protected List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
         {
             var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
             return fragments
                         .Where(frag => frag != null)
+                        // we are not interested in fragments which are not supposed to cache!
+                        .Where(frag => frag.GetType().IsOwnedViewModelFragment())
                         .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
                         .ToList();
         }
