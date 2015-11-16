@@ -25,7 +25,7 @@ namespace Cirrious.CrossCore.Platform
             }
         }
 
-        public virtual void Run(Type type)
+        protected virtual void Run(Type type)
         {
             try
             {
