@@ -46,13 +46,11 @@ namespace Cirrious.CrossCore.Core
                 throw new ArgumentException(WrongExpressionMessage, "expression");
             }
 
-            if (target != null)
+            if (target != null && !member.DeclaringType.IsInstanceOfType(target))
             {
-                if (!member.DeclaringType.IsInstanceOfType(target))
-                {
-                    throw new ArgumentException(WrongExpressionMessage, "expression");
-                }
+                throw new ArgumentException(WrongExpressionMessage, "expression");
             }
+
 
             if (member.GetGetMethod(true).IsStatic)
             {
