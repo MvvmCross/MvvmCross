@@ -295,19 +295,28 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         protected List<IMvxCachedFragmentInfo> GetCurrentFragmentsInfo()
         {
             var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
-
             return fragments
                         .Where(frag => frag != null)
-                        .Select(frag => GetFragmentInfoByTag(frag.Tag))
+                        .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
                         .ToList();
         }
 
         protected IMvxCachedFragmentInfo GetLastFragmentInfo()
         {
-            var lastFragment = SupportFragmentManager.Fragments.Last();
+            if (SupportFragmentManager.Fragments == null || !SupportFragmentManager.Fragments.Any())
+                throw new InvalidOperationException("Cannot retrieve last fragment as FragmentManager is empty.");
 
-            return GetFragmentInfoByTag(lastFragment.Tag);
+            var lastFragment = SupportFragmentManager.Fragments.Last();
+            var tagFragment = GetTagFromFragment(lastFragment);
+
+            return GetFragmentInfoByTag(tagFragment);
         }
+
+        protected virtual string GetTagFromFragment(Fragment fragment)
+        {
+            return fragment.Tag;
+        }
+
         /// <summary>
         /// Close Fragment with a specific tag at a specific placeholder
         /// </summary>
