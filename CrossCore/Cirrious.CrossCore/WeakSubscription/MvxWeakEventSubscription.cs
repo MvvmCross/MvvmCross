@@ -40,7 +40,7 @@ namespace Cirrious.CrossCore.WeakSubscription
         {
         }
 
-        public MvxWeakEventSubscription(
+        protected MvxWeakEventSubscription(
             TSource source,
             EventInfo sourceEventInfo,
             EventHandler<TEventArgs> targetEventHandler)
