@@ -11,7 +11,7 @@ namespace Cirrious.CrossCore.Droid
 {
     public class MvxJavaContainer : Object
     {
-        public MvxJavaContainer(object theObject)
+        protected MvxJavaContainer(object theObject)
         {
             Object = theObject;
         }
