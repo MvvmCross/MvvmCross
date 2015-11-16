@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Cirrious.CrossCore.Platform
 {
-    public interface IMvxNamedInstanceRegistry<T>
+    public interface IMvxNamedInstanceRegistry<in T>
     {
         void AddOrOverwrite(string name, T instance);
         void AddOrOverwriteFrom(Assembly assembly);
