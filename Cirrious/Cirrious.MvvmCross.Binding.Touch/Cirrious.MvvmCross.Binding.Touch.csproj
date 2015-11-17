@@ -46,6 +46,7 @@
     <Compile Include="MvxTouchBindingBuilder.cs" />
     <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
+    <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
     <Compile Include="Target\MvxUIControlTouchUpInsideTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
