@@ -7,12 +7,14 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxMultipleViewModelCache
         : IMvxMultipleViewModelCache
     {
-        private ConcurrentDictionary<Type, IMvxViewModel> _currentViewModels;
+        private readonly Lazy<ConcurrentDictionary<Type, IMvxViewModel>> _lazyCurrentViewModels;
 
-        private ConcurrentDictionary<Type, IMvxViewModel> CurrentViewModels
+        public MvxMultipleViewModelCache()
         {
-            get { return _currentViewModels ?? (_currentViewModels = new ConcurrentDictionary<Type, IMvxViewModel>()); }
+            _lazyCurrentViewModels = new Lazy<ConcurrentDictionary<Type, IMvxViewModel>>(() => new ConcurrentDictionary<Type, IMvxViewModel>());
         }
+
+        private ConcurrentDictionary<Type, IMvxViewModel> CurrentViewModels => _lazyCurrentViewModels.Value;
 
         public void Cache(IMvxViewModel toCache)
         {
