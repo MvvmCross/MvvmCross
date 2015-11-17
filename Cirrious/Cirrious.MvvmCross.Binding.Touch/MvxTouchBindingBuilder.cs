@@ -55,6 +55,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.RegisterCustomBindingFactory<UIView>("Visible",
                                                           view =>
                                                           new MvxUIViewVisibleTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIActivityIndicatorView>("Hidden",
+                                                                           activityIndicator => new MvxUIActivityIndicatorViewHiddenTargetBinding(activityIndicator));
             registry.RegisterCustomBindingFactory<UIView>("Hidden",
                                                           view =>
                                                           new MvxUIViewHiddenTargetBinding(view));
@@ -101,7 +103,8 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                           view => new MvxUIViewTapTargetBinding(view, 2, 1));
             registry.RegisterCustomBindingFactory<UIView>("TwoFingerTap",
                                                           view => new MvxUIViewTapTargetBinding(view, 1, 2));
-            registry.RegisterCustomBindingFactory<UITextField>("TextFocus", (UITextField textField) => new MvxUITextFieldTextFocusTargetBinding(textField));
+            registry.RegisterCustomBindingFactory<UITextField>("TextFocus",
+                                                               textField => new MvxUITextFieldTextFocusTargetBinding(textField));
 
             /*
             registry.RegisterCustomBindingFactory<UIView>("TwoFingerDoubleTap",
@@ -158,6 +161,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), "ImageUrl");
             registry.AddOrOverwrite(typeof(MvxImageViewLoader), "ImageUrl");
             registry.AddOrOverwrite(typeof(UISegmentedControl), "SelectedSegment");
+            registry.AddOrOverwrite(typeof(UIActivityIndicatorView), "Hidden");
 
             if (_fillBindingNamesAction != null)
                 _fillBindingNamesAction(registry);
