@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
 	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentCompatActivity")]
 	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
-    {
+	{
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
 
@@ -143,21 +143,20 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
         private void RestoreFragmentsCache()
         {
-            // See if Fragments were just sleeping, and repopulate the _lookup
+            // See if Fragments were just sleeping, and repopulate the _lookup (which is accesed in GetFragmentInfoByTag)
             // with references to them.
-            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
-            foreach (var fragment in fragments)
+
+            // we do not want to restore fragments which aren't tracked by our cache
+            foreach (var fragment in GetCurrentCacheableFragments())
             {
-                if (fragment != null)
-                {
-                    var fragmentType = fragment.GetType();
-                    var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
-                    foreach (var item in lookup.Where(item => item.Value != null)) //NOTE(vvolkgang) wut? Value should never be null in here.
-                    {
-                        // reattach fragment to lookup
-                        item.Value.CachedFragment = fragment;
-                    }
-                }
+                // if used tag is proper tag such that:
+                // it is unique and immutable
+                // and fragment is properly registered
+                // then there must be exactly one matching value in _lookup fragment cache container
+                var fragmentTag = GetTagFromFragment(fragment);
+                var fragmentInfo = GetFragmentInfoByTag(fragmentTag);
+
+                fragmentInfo.CachedFragment = fragment;
             }
         }
 
@@ -285,21 +284,28 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
 	    protected List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
 	    {
-	        var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
-	        return fragments
-                        .Where(frag => frag != null)
-                        // we are not interested in fragments which are not supposed to cache!
-                        .Where(frag => frag.GetType().IsOwnedViewModelFragment())
-                        .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
-                        .ToList();
+	        return GetCurrentCacheableFragments()
+                    .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
+                    .ToList();
+	    }
+
+	    protected IEnumerable<Fragment> GetCurrentCacheableFragments()
+	    {
+	        var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
+	        return currentFragments
+	            .Where(fragment => fragment != null)
+                // we are not interested in fragments which are not supposed to cache!
+                .Where(fragment => fragment.GetType().IsOwnedViewModelFragment());
 	    }
 
 	    protected IMvxCachedFragmentInfo GetLastFragmentInfo()
 	    {
-            if (SupportFragmentManager.Fragments == null || !SupportFragmentManager.Fragments.Any())
+	        var currentCacheableFragments = GetCurrentCacheableFragments().ToList();
+            if (!currentCacheableFragments.Any())
                 throw new InvalidOperationException("Cannot retrieve last fragment as FragmentManager is empty.");
 
-	        var lastFragment = SupportFragmentManager.Fragments.Last();
+	        var lastFragment = currentCacheableFragments.Last();
 	        var tagFragment = GetTagFromFragment(lastFragment);
 
             return GetFragmentInfoByTag(tagFragment);
