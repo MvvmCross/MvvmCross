@@ -111,7 +111,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
                 }
             }
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel);
+            cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object sender, EventArgs e)

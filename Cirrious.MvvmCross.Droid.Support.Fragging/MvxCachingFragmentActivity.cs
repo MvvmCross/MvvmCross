@@ -137,7 +137,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
                 // repopulate the ViewModel with the SavedState and cache it.
                 var vm = viewModelLoader.LoadViewModel(request, mvxBundle);
-                viewModelCache.Cache(vm);
+                viewModelCache.Cache(vm, item.Key);
             }
         }
 

@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
-            var cached = cache.GetAndClear(viewModelType);
+            var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
         }

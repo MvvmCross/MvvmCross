@@ -137,7 +137,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
                 // repopulate the ViewModel with the SavedState and cache it.
                 var vm = viewModelLoader.LoadViewModel(request, mvxBundle);
-                viewModelCache.Cache(vm);
+                viewModelCache.Cache(vm, item.Key);
             }
         }
 
@@ -313,7 +313,11 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
 	    protected virtual string GetTagFromFragment(Fragment fragment)
 	    {
-	        return fragment.Tag;
+	        var mvxFragmentView = fragment as IMvxFragmentView;
+
+	        // ReSharper disable once PossibleNullReferenceException
+            // Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
+            return mvxFragmentView.UniqueImmutableCacheTag;
 	    }
 
 	    /// <summary>

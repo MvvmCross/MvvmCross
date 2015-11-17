@@ -71,6 +71,8 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         public virtual void OnViewModelSet()
         {
         }
+
+        public virtual string UniqueImmutableCacheTag => Tag;
     }
 
     public abstract class MvxFragment<TViewModel>
