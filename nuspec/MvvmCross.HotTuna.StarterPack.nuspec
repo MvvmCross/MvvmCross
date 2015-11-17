@@ -57,7 +57,6 @@
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+wp8+win8+wpa81\ToDo-MvvmCross\_ Core.txt" />
 		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\ViewModels\FirstViewModel.cs.pp" />
 		<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\App.cs.pp" />
 
