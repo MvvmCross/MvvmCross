@@ -12,7 +12,7 @@
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-		This package contains MonoMac (also PCL, MonoAndroid and Xamarin.iOS10 for convenience) 'Core' assemblies for MvvmCross. Under normal circumstances, use MvvmCross.Mac.PortableSupport for PCL, Xamarin.iOS10 and MonoAndroid as it also includes Windows.
+This package contains MonoMac (also PCL, MonoAndroid and Xamarin.iOS10 for convenience) 'Core' assemblies for MvvmCross. Under normal circumstances, use MvvmCross.Mac.PortableSupport for PCL, Xamarin.iOS10 and MonoAndroid as it also includes Windows.
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
