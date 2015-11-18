@@ -20,14 +20,13 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
 	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentCompatActivity")]
 	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
-    {
+	{
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
 
@@ -46,32 +45,24 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
-            var fragInfo = CreateFragmentInfo<TFragment, TViewModel>(tag);
+            var fragInfo = CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
 
             _lookup.Add(tag, fragInfo);
         }
 
 	    public void RegisterFragment(string tag, Type fragmentType, Type viewModelType)
         {
-	        Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-	        Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
-
             var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
             _lookup.Add(tag, fragInfo);
         }
 
-
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag, bool addToBackstack = false)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            return new MvxCachedFragmentInfo(tag, typeof(TFragment), typeof(TViewModel), addToBackstack);
-        }
-
         protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
         {
-            Contract.Requires<MvxException>(fragmentType == typeof(IMvxFragmentView), string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-            Contract.Requires<MvxException>(viewModelType == typeof(IMvxViewModel), string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
+            if ( !typeof(IMvxFragmentView).IsAssignableFrom(fragmentType) )
+                throw new InvalidOperationException(string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
+
+            if ( !typeof(IMvxViewModel).IsAssignableFrom(viewModelType) )
+                throw new InvalidOperationException(string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
 
             return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
         }
@@ -146,27 +137,26 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
                 // repopulate the ViewModel with the SavedState and cache it.
                 var vm = viewModelLoader.LoadViewModel(request, mvxBundle);
-                viewModelCache.Cache(vm);
+                viewModelCache.Cache(vm, item.Key);
             }
         }
 
         private void RestoreFragmentsCache()
         {
-            // See if Fragments were just sleeping, and repopulate the _lookup
+            // See if Fragments were just sleeping, and repopulate the _lookup (which is accesed in GetFragmentInfoByTag)
             // with references to them.
-            var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
-            foreach (var fragment in fragments)
+
+            // we do not want to restore fragments which aren't tracked by our cache
+            foreach (var fragment in GetCurrentCacheableFragments())
             {
-                if (fragment != null)
-                {
-                    var fragmentType = fragment.GetType();
-                    var lookup = _lookup.Where(x => x.Value.FragmentType == fragmentType);
-                    foreach (var item in lookup.Where(item => item.Value != null)) //NOTE(vvolkgang) wut? Value should never be null in here.
-                    {
-                        // reattach fragment to lookup
-                        item.Value.CachedFragment = fragment;
-                    }
-                }
+                // if used tag is proper tag such that:
+                // it is unique and immutable
+                // and fragment is properly registered
+                // then there must be exactly one matching value in _lookup fragment cache container
+                var fragmentTag = GetTagFromFragment(fragment);
+                var fragmentInfo = GetFragmentInfoByTag(fragmentTag);
+
+                fragmentInfo.CachedFragment = fragment;
             }
         }
 
@@ -180,7 +170,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 
             var typesForKeys = new Dictionary<string, Type>();
 
-            var currentFragsInfo = GetCurrentFragmentsInfo();
+            var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
             foreach (var info in currentFragsInfo)
             {
                 var fragment = info.CachedFragment as IMvxFragmentView;
@@ -282,7 +272,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 if (EnableOnFragmentPoppedCallback)
                 {
                     //NOTE(vvolkgang) this is returning ALL the frags. Should we return only the visible ones?
-                    var currentFragsInfo = GetCurrentFragmentsInfo();
+                    var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
                     OnFragmentPopped(currentFragsInfo);
                 }
 
@@ -292,22 +282,45 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             base.OnBackPressed();
         }
 
-	    protected List<IMvxCachedFragmentInfo> GetCurrentFragmentsInfo()
+	    protected List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
 	    {
-	        var fragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
-	        return fragments
-                        .Where(frag => frag != null)
-                        .Select(frag => GetFragmentInfoByTag(frag.Tag))
-                        .ToList();
+	        return GetCurrentCacheableFragments()
+                    .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
+                    .ToList();
+	    }
+
+	    protected IEnumerable<Fragment> GetCurrentCacheableFragments()
+	    {
+	        var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+
+	        return currentFragments
+	            .Where(fragment => fragment != null)
+                // we are not interested in fragments which are not supposed to cache!
+                .Where(fragment => fragment.GetType().IsOwnedViewModelFragment());
 	    }
 
 	    protected IMvxCachedFragmentInfo GetLastFragmentInfo()
 	    {
-	        var lastFragment = SupportFragmentManager.Fragments.Last();
+	        var currentCacheableFragments = GetCurrentCacheableFragments().ToList();
+            if (!currentCacheableFragments.Any())
+                throw new InvalidOperationException("Cannot retrieve last fragment as FragmentManager is empty.");
 
-            return GetFragmentInfoByTag(lastFragment.Tag);
+	        var lastFragment = currentCacheableFragments.Last();
+	        var tagFragment = GetTagFromFragment(lastFragment);
+
+            return GetFragmentInfoByTag(tagFragment);
 	    }
-        /// <summary>
+
+	    protected virtual string GetTagFromFragment(Fragment fragment)
+	    {
+	        var mvxFragmentView = fragment as IMvxFragmentView;
+
+	        // ReSharper disable once PossibleNullReferenceException
+            // Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
+            return mvxFragmentView.UniqueImmutableCacheTag;
+	    }
+
+	    /// <summary>
         /// Close Fragment with a specific tag at a specific placeholder
         /// </summary>
         /// <param name="tag">The tag for the fragment to lookup</param>
