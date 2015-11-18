@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.AppCompat</id>
-		<version>4.0.0-beta6</version>
+		<version>4.0.0-beta7</version>
 		<title>MvvmCross Android Support - AppCompat</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -14,18 +14,18 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta6" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
-				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta5" />
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
 				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta6" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta5" />
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
-				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta5" />
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
 				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
 			</group>
