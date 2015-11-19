@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyConfiguration.cs" />
     <Compile Include="Fragments\IMvxFragmentView.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
@@ -82,8 +83,8 @@
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="IMvxCachedFragmentInfo.cs" />
     <Compile Include="MvxCachedFragmentInfo.cs" />
-    <Compile Include="MvxOwnedViewModelFragmentAttribute.cs" />
-    <Compile Include="MvxOwnedViewModelFragmentAttributeExtensionMethods.cs" />
+    <Compile Include="MvxFragmentAttribute.cs" />
+    <Compile Include="MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="Fragments\MvxDialogFragment.cs" />
