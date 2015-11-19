@@ -42,13 +42,34 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
                 return;
             }
 
+            var viewModelType = fragmentView.FindAssociatedViewModelType();
             var view = fragmentView as IMvxView;
-            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
+        }
+
+        public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView)
+        {
+            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+
+            var type = fragmentView.GetType();
+                
+            if (viewModelType == null)
+            {
+                if (!type.IsCacheableFragmentAttribute())
+                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
+
+                var cacheableFragmentAttribute = type.GetCacheableFragmentAttribute();
+                if (cacheableFragmentAttribute.ViewModelType == null)
+                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
+
+                viewModelType = cacheableFragmentAttribute.ViewModelType;
+            }
+
+            return viewModelType;
         }
 
         public static Fragment ToFragment(this IMvxFragmentView fragmentView)

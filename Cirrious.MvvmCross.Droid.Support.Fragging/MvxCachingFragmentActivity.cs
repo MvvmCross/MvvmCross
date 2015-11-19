@@ -296,7 +296,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             return currentFragments
                 .Where(fragment => fragment != null)
                 // we are not interested in fragments which are not supposed to cache!
-                .Where(fragment => fragment.GetType().IsOwnedViewModelFragment());
+                .Where(fragment => fragment.GetType().IsCacheableFragmentAttribute());
         }
 
         protected IMvxCachedFragmentInfo GetLastFragmentInfo()

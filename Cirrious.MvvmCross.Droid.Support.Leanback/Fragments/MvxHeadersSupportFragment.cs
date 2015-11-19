@@ -65,7 +65,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 		public virtual void OnViewModelSet()
 		{
 		}
-	}
+
+        public string UniqueImmutableCacheTag => Tag;
+    }
 
 	public abstract class MvxHeadersSupportFragment<TViewModel>
 		: MvxHeadersSupportFragment
@@ -87,5 +89,6 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 			get { return (TViewModel) base.ViewModel; }
 			set { base.ViewModel = value; }
 		}
-	}
+
+    }
 }
