@@ -2,15 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
+using System;
+using System.Reflection;
 
 namespace Cirrious.CrossCore.WeakSubscription
 {
@@ -25,10 +22,10 @@ namespace Cirrious.CrossCore.WeakSubscription
         private readonly MethodInfo _eventHandlerMethodInfo;
 
         private readonly EventInfo _sourceEventInfo;
-        
-		// we store a copy of our Delegate/EventHandler in order to prevent it being
-		// garbage collected while the `client` still has ownership of this subscription
-		private readonly Delegate _ourEventHandler;
+
+        // we store a copy of our Delegate/EventHandler in order to prevent it being
+        // garbage collected while the `client` still has ownership of this subscription
+        private readonly Delegate _ourEventHandler;
 
         private bool _subscribed;
 
@@ -36,7 +33,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof (TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
         {
         }
 
@@ -74,7 +71,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             var target = _targetReference.Target;
             if (target != null)
             {
-                _eventHandlerMethodInfo.Invoke(target, new[] {sender, e});
+                _eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
             }
             else
             {
@@ -101,7 +98,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             if (!_subscribed)
                 return;
 
-            var source = (TSource) _sourceReference.Target;
+            var source = (TSource)_sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
@@ -114,7 +111,7 @@ namespace Cirrious.CrossCore.WeakSubscription
             if (_subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
-            var source = (TSource) _sourceReference.Target;
+            var source = (TSource)_sourceReference.Target;
             if (source != null)
             {
                 _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { _ourEventHandler });

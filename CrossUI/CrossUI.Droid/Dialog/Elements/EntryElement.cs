@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Android.App;
 using Android.Content;
 using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Enums;
+using System;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -78,8 +77,8 @@ namespace CrossUI.Droid.Dialog.Elements
             if (Numeric)
                 inputType |= AndroidDialogEnumHelper.KeyboardTypeMap[UIKeyboardType.DecimalPad];
 
-			  if (NoAutoCorrect)
-					inputType |= AndroidDialogEnumHelper.KeyboardTypeMap[UIKeyboardType.NoAutoCorrect];
+            if (NoAutoCorrect)
+                inputType |= AndroidDialogEnumHelper.KeyboardTypeMap[UIKeyboardType.NoAutoCorrect];
 
             if (Lines > 1)
             {
@@ -108,8 +107,8 @@ namespace CrossUI.Droid.Dialog.Elements
             _entry.EditorAction += (sender, args) =>
                 {
                     if (args.ActionId == ImeAction.Next ||
-						(Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb
-						&& args.ActionId == ImeAction.Previous))
+                        (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Honeycomb
+                        && args.ActionId == ImeAction.Previous))
                     {
                         ViewGroup group = _entry.Parent as ViewGroup;
                         IViewParent currentLoop = _entry.Parent;
@@ -117,7 +116,7 @@ namespace CrossUI.Droid.Dialog.Elements
                         {
                             currentLoop = currentLoop.Parent;
                             if (currentLoop is ViewGroup)
-                                group = (ViewGroup) currentLoop;
+                                group = (ViewGroup)currentLoop;
                         }
                         var focus = FocusFinder.Instance.FindNextFocus(group, _entry, args.ActionId == ImeAction.Next ? FocusSearchDirection.Down : FocusSearchDirection.Up);
                         if (focus != null)
@@ -127,7 +126,6 @@ namespace CrossUI.Droid.Dialog.Elements
                         }
                     }
                 };
-            
         }
 
         public override string Summary()
@@ -174,24 +172,24 @@ namespace CrossUI.Droid.Dialog.Elements
         // EntryElement is clickable by default
         // see discussion in https://github.com/MvvmCross/MvvmCross/pull/363
         private bool _clickable = true;
+
         public override bool Clickable
         {
             get { return _clickable; }
             set { _clickable = value; }
-        } 
+        }
 
-		  private bool _noAutoCorrect;
+        private bool _noAutoCorrect;
 
-		  public bool NoAutoCorrect
-		  {
-			  get { return _noAutoCorrect; }
-			  set
-			  {
-				  _noAutoCorrect = value;
-				  ActOnCurrentAttachedCell(UpdateDetailDisplay);
-			  }
-		  }
-
+        public bool NoAutoCorrect
+        {
+            get { return _noAutoCorrect; }
+            set
+            {
+                _noAutoCorrect = value;
+                ActOnCurrentAttachedCell(UpdateDetailDisplay);
+            }
+        }
 
         private string _hint;
 
@@ -297,7 +295,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private UITextFieldViewMode clearButtonMode;
 
-        #endregion
+        #endregion MonoTouch Dialog Mimicry
 
         public virtual void OnTextChanged(string newText)
         {

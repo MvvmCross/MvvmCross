@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -107,10 +107,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         public MvxImageView(Context context)
-            : base(context) { }
+            : base(context)
+        { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) { }
+            : base(javaReference, transfer)
+        { }
 
         protected override void Dispose(bool disposing)
         {
@@ -125,7 +127,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
             using (var h = new Handler(Looper.MainLooper))
-                h.Post(() => {
+                h.Post(() =>
+                {
                     SetImageBitmap(mvxValueEventArgs.Value);
                 });
         }

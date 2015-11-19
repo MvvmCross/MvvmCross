@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
@@ -34,10 +34,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // EventHandler<T> event types will need to be handled by custom bindings
             _eventHandler = new EventHandler(HandleEvent);
 
-            addMethod.Invoke(target, new[] {_eventHandler});
+            addMethod.Invoke(target, new[] { _eventHandler });
         }
 
-        public override Type TargetType => typeof (ICommand);
+        public override Type TargetType => typeof(ICommand);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 if (target != null)
                 {
                     var removeMethod = _targetEventInfo.GetRemoveMethod();
-                    removeMethod.Invoke(target, new[] {_eventHandler});
+                    removeMethod.Invoke(target, new[] { _eventHandler });
                 }
             }
         }

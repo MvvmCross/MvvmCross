@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object) null)
+            : this((object)null)
         {
         }
 
@@ -78,7 +78,6 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             if (dataContext != null)
                 DataContext = dataContext;
         }
-
 
         private void AddDelayedAction(KeyValuePair<object, string> kvp)
         {
@@ -190,7 +189,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            var list = new List<TargetAndBinding>() {new TargetAndBinding(target, binding)};
+            var list = new List<TargetAndBinding>() { new TargetAndBinding(target, binding) };
             _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
         }
 

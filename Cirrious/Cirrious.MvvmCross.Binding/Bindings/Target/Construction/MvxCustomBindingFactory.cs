@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] {new MvxTypeAndNamePair(typeof (TTarget), _targetFakePropertyName)};
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair(typeof(TTarget), _targetFakePropertyName) };
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
@@ -41,6 +41,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             return _targetBindingCreator(castTarget);
         }
 
-        #endregion
+        #endregion IMvxPluginTargetBindingFactory Members
     }
 }

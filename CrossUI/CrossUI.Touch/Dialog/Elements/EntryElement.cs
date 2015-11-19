@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -97,11 +97,12 @@ namespace CrossUI.Touch.Dialog.Elements
         private bool _becomeResponder;
 
         private UITextField _entry;
-        protected  UITextField Entry => _entry;
+        protected UITextField Entry => _entry;
 
         protected static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
         public event EventHandler Changed;
+
         public event Func<bool> ShouldReturn;
 
         public EntryElement()
@@ -178,7 +179,7 @@ namespace CrossUI.Touch.Dialog.Elements
             return Value;
         }
 
-        // 
+        //
         // Computes the X position for the entry by aligning all the entries in the Section
         //
         protected virtual CGSize ComputeEntryPosition(UITableView tv, UITableViewCell cell)
@@ -209,13 +210,13 @@ namespace CrossUI.Touch.Dialog.Elements
         protected virtual UITextField CreateTextField(CGRect frame)
         {
             return new UITextField(frame)
-                {
-                    AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
-                    Placeholder = Placeholder ?? "",
-                    SecureTextEntry = isPassword,
-                    Text = Value ?? "",
-                    Tag = 1
-                };
+            {
+                AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
+                Placeholder = Placeholder ?? "",
+                SecureTextEntry = isPassword,
+                Text = Value ?? "",
+                Tag = 1
+            };
         }
 
         private static readonly NSString cellkey = new NSString("EntryElement");
@@ -223,6 +224,7 @@ namespace CrossUI.Touch.Dialog.Elements
         protected override NSString CellKey => cellkey;
 
         private string _placeholder;
+
         /// <summary>
         /// The caption to display for this given element
         /// </summary>
@@ -260,9 +262,8 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             if (_entry == null)
             {
-
                 CGSize size = ComputeEntryPosition(tv, cell);
-                nfloat yOffset = (cell.ContentView.Bounds.Height - size.Height)/2 - 1;
+                nfloat yOffset = (cell.ContentView.Bounds.Height - size.Height) / 2 - 1;
                 nfloat width = cell.ContentView.Bounds.Width - size.Width;
 
                 _entry = CreateTextField(new CGRect(size.Width, yOffset, width, size.Height));

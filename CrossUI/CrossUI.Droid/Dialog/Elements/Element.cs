@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using Android.Content;
 using Android.Views;
-using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 using CrossUI.Droid.Dialog.Enums;
 using Java.Lang;
+using System;
+using System.Windows.Input;
 using Object = System.Object;
 
 namespace CrossUI.Droid.Dialog.Elements
@@ -22,7 +21,7 @@ namespace CrossUI.Droid.Dialog.Elements
         private static int _currentElementID = 1;
 
         /// <summary>
-        /// An app unique identifier for this element. 
+        /// An app unique identifier for this element.
         /// Note that it is expected that Elements will always created on the UI thread - so no locking is used on CurrentElementID
         /// </summary>
         private readonly Java.Lang.Integer _elementID = new Integer(_currentElementID++);
@@ -65,6 +64,7 @@ namespace CrossUI.Droid.Dialog.Elements
         }
 
         private bool _visible = true;
+
         /// <summary>
         ///  Whether or not to display this element
         /// </summary>
@@ -156,7 +156,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public Object Tag { get; set; }
 
         /// <summary>
-        /// Returns a summary of the value represented by this object, suitable 
+        /// Returns a summary of the value represented by this object, suitable
         /// for rendering as the result of a RootElement with child objects.
         /// </summary>
         /// <returns>
@@ -241,7 +241,6 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private UITableViewCellAccessory accessory;
 
-
         public void ActOnCurrentAttachedCell(Action<View> updateAction)
         {
             var cell = CurrentAttachedCell;
@@ -250,6 +249,6 @@ namespace CrossUI.Droid.Dialog.Elements
             updateAction(cell);
         }
 
-        #endregion
+        #endregion MonoTouch Dialog Mimicry
     }
 }

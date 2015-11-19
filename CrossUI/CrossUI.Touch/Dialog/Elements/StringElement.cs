@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -33,11 +33,11 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue) ??
                        new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
                 Skey)
-            {
-                SelectionStyle = IsSelectable
+                       {
+                           SelectionStyle = IsSelectable
                     ? UITableViewCellSelectionStyle.Blue
                     : UITableViewCellSelectionStyle.None
-            };
+                       };
             cell.Accessory = UITableViewCellAccessory.None;
 
             return cell;
@@ -52,7 +52,6 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell.DetailTextLabel.SetNeedsDisplay();
             }
         }
-
 
         public override bool Matches(string text)
         {

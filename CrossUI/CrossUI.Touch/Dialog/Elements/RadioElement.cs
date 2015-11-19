@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -41,7 +41,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 return;
             }
 
-            var root = (RootElement) Parent.Parent;
+            var root = (RootElement)Parent.Parent;
 
             if (!(root.Group is RadioGroup))
                 throw new Exception("The RootElement's Group is null or is not a RadioGroup");
@@ -58,7 +58,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
         {
-            var root = (RootElement) Parent.Parent;
+            var root = (RootElement)Parent.Parent;
             root.RadioSelected = RadioIdx;
 
             base.Selected(dvc, tableView, indexPath);
@@ -75,8 +75,8 @@ namespace CrossUI.Touch.Dialog.Elements
             if (cell == null)
                 return;
 
-            var root = (RootElement) Parent.Parent;
-            var selected = RadioIdx == ((RadioGroup) (root.Group)).Selected;
+            var root = (RootElement)Parent.Parent;
+            var selected = RadioIdx == ((RadioGroup)(root.Group)).Selected;
             cell.Accessory = selected ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
         }
     }

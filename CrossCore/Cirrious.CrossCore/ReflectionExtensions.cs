@@ -89,7 +89,7 @@ namespace Cirrious.CrossCore
 
         private static bool NullSafeIsPublic(this MethodInfo info)
         {
-            if (info == null) 
+            if (info == null)
                 return false;
             return info.IsPublic;
         }

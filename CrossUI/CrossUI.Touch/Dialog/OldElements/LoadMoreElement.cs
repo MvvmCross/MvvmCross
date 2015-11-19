@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using CrossUI.Touch.Dialog.Elements;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.OldElements
@@ -20,7 +20,9 @@ namespace CrossUI.Touch.Dialog.OldElements
         public string LoadingCaption { get; set; }
         public UIColor TextColor { get; set; }
         public UIColor BackgroundColor { get; set; }
+
         public event Action<LoadMoreElement> LoadMoreTapped = null;
+
         public UIFont Font;
         public nfloat? Height;
         private UITextAlignment alignment = UITextAlignment.Center;
@@ -56,15 +58,15 @@ namespace CrossUI.Touch.Dialog.OldElements
                 cell = new UITableViewCell(UITableViewCellStyle.Default, key);
 
                 activityIndicator = new UIActivityIndicatorView
-                    {
-                        ActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray,
-                        Tag = 1
-                    };
+                {
+                    ActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray,
+                    Tag = 1
+                };
                 caption = new UILabel
-                    {
-                        AdjustsFontSizeToFitWidth = false,
-                        Tag = 2
-                    };
+                {
+                    AdjustsFontSizeToFitWidth = false,
+                    Tag = 2
+                };
                 cell.ContentView.AddSubview(caption);
                 cell.ContentView.AddSubview(activityIndicator);
             }
@@ -154,7 +156,7 @@ namespace CrossUI.Touch.Dialog.OldElements
 
         public nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
-            return Height ?? GetTextSize(Animating ? LoadingCaption : NormalCaption).Height + 2*pad;
+            return Height ?? GetTextSize(Animating ? LoadingCaption : NormalCaption).Height + 2 * pad;
         }
 
         private void Layout(UITableViewCell cell, UIActivityIndicatorView activityIndicator, UILabel caption)
@@ -164,7 +166,7 @@ namespace CrossUI.Touch.Dialog.OldElements
             var size = GetTextSize(Animating ? LoadingCaption : NormalCaption);
 
             if (!activityIndicator.Hidden)
-                activityIndicator.Frame = new CGRect((sbounds.Width - size.Width)/2 - isize*2, pad, isize, isize);
+                activityIndicator.Frame = new CGRect((sbounds.Width - size.Width) / 2 - isize * 2, pad, isize, isize);
 
             caption.Frame = new CGRect(10, pad, sbounds.Width - 20, size.Height);
         }

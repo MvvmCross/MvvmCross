@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.CrossCore.Plugins
 {
@@ -23,13 +23,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             lock (this)
             {
-                return _loadedPlugins.ContainsKey(typeof (T));
+                return _loadedPlugins.ContainsKey(typeof(T));
             }
         }
 
         public void EnsurePluginLoaded<TType>()
         {
-            EnsurePluginLoaded(typeof (TType));
+            EnsurePluginLoaded(typeof(TType));
         }
 
         public virtual void EnsurePluginLoaded(Type type)
@@ -37,7 +37,7 @@ namespace Cirrious.CrossCore.Plugins
             var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
             if (field == null)
             {
-				MvxTrace.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
+                MvxTrace.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace Cirrious.CrossCore.Plugins
             var pluginLoader = instance as IMvxPluginLoader;
             if (pluginLoader == null)
             {
-				MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
+                MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace Cirrious.CrossCore.Plugins
             pluginLoader.EnsureLoaded();
         }
 
-        public void EnsurePlatformAdaptionLoaded<T>() 
+        public void EnsurePlatformAdaptionLoaded<T>()
             where T : IMvxPluginLoader
         {
             lock (this)
@@ -82,12 +82,12 @@ namespace Cirrious.CrossCore.Plugins
                     return;
                 }
 
-                var toLoad = typeof (T);
+                var toLoad = typeof(T);
                 _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
             }
         }
 
-        public bool TryEnsurePlatformAdaptionLoaded<T>() 
+        public bool TryEnsurePlatformAdaptionLoaded<T>()
             where T : IMvxPluginLoader
         {
             lock (this)

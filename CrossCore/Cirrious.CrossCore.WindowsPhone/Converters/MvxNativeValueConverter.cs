@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.CrossCore.WindowsPhone.Converters
 {

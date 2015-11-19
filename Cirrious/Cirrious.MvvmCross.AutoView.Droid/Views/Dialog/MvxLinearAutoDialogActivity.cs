@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
@@ -15,10 +15,8 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Droid.Dialog.Elements;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 {
@@ -32,14 +30,14 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
 
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel) base.ViewModel; }
+            get { return (MvxViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-            using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext) BindingContext))
+            using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext)BindingContext))
             {
                 Root = this.LoadDialogRoot<Element, RootElement>();
                 _parentMenu = this.LoadMenu();

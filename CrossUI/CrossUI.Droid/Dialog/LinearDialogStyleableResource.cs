@@ -2,20 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Runtime;
+using CrossUI.Core;
 using System;
 using System.Linq;
 using System.Reflection;
-using Android.Runtime;
-using CrossUI.Core;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
 {
     public class LinearDialogStyleableResource
     {
         private static bool _initialized = false;
+
         public static void Initialise()
         {
             try

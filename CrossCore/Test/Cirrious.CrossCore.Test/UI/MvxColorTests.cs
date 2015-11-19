@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.UI;
@@ -27,7 +27,7 @@ namespace Cirrious.CrossCore.Test.UI
                     { 0xFFFFFFFF, 0xFF, 0xFF, 0xFF, 0xFF },
                 };
 
-            for (var i=0; i<tests.GetUpperBound(0); i++)
+            for (var i = 0; i < tests.GetUpperBound(0); i++)
             {
                 var c = new MvxColor((int)tests[i, 0]);
                 Assert.AreEqual(tests[i, 1], c.A);
@@ -83,7 +83,7 @@ namespace Cirrious.CrossCore.Test.UI
 
             for (var i = 0; i < tests.GetUpperBound(0); i++)
             {
-                var c = new MvxColor((int)tests[i, 1],(int)tests[i, 2],(int)tests[i, 3],(int)tests[i, 0]);
+                var c = new MvxColor((int)tests[i, 1], (int)tests[i, 2], (int)tests[i, 3], (int)tests[i, 0]);
                 Assert.AreEqual(tests[i, 0], c.A);
                 Assert.AreEqual(tests[i, 1], c.R);
                 Assert.AreEqual(tests[i, 2], c.G);

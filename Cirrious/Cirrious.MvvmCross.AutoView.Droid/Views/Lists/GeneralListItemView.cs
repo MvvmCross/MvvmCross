@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -15,9 +12,12 @@ using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Droid;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -43,6 +43,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         }
 
 #warning Need to sort out the HandleClick stuff?
+
         private void HandleClick(object sender, EventArgs e)
         {
             _selectedCommand?.Execute(base.DataContext);

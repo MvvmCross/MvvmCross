@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using CoreGraphics;
@@ -90,11 +90,11 @@ namespace CrossUI.Touch.Dialog.Elements
             if (_slider == null)
             {
                 _slider = new UISlider(GetSliderRectangle())
-                    {
-                        BackgroundColor = UIColor.Clear,
-                        Continuous = true,
-                        Tag = 1
-                    };
+                {
+                    BackgroundColor = UIColor.Clear,
+                    Continuous = true,
+                    Tag = 1
+                };
                 _slider.ValueChanged += delegate { base.OnUserValueChanged(_slider.Value); };
             }
 
@@ -104,7 +104,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private CGRect GetSliderRectangle()
         {
-            var y = UIDevice.CurrentDevice.CheckSystemVersion (7, 0) ? 18f : 12f;
+            var y = UIDevice.CurrentDevice.CheckSystemVersion(7, 0) ? 18f : 12f;
             return new CGRect(10f + _captionSize.Width, y, 280f - _captionSize.Width, 7f);
         }
 

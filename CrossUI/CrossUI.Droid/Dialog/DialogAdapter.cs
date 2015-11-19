@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
+using System.Linq;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -23,7 +23,7 @@ namespace CrossUI.Droid.Dialog
             _context = context;
             _root = root;
 
-            _root.ElementsChanged +=OnElementsChanged;
+            _root.ElementsChanged += OnElementsChanged;
 
             // This is only really required when using a DialogAdapter with a ListView, in a non DialogActivity based activity.
             List = listView;
@@ -148,20 +148,20 @@ namespace CrossUI.Droid.Dialog
                 element = ElementAtIndex(position - 1);
                 while (!(element is Section))
                     element = element.Parent;
-                return ((Section) element).GetFooterView(_context, convertView, parent);
+                return ((Section)element).GetFooterView(_context, convertView, parent);
             }
             return element.GetView(_context, convertView, parent);
         }
 
         public void ReloadData()
         {
-            ((Activity) _context).RunOnUiThread(() =>
-                {
-                    if (Root != null)
-                    {
-                        NotifyDataSetChanged();
-                    }
-                });
+            ((Activity)_context).RunOnUiThread(() =>
+               {
+                   if (Root != null)
+                   {
+                       NotifyDataSetChanged();
+                   }
+               });
         }
 
         /// <summary>

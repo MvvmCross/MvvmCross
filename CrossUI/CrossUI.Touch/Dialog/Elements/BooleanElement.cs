@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Foundation;
@@ -65,11 +65,11 @@ namespace CrossUI.Touch.Dialog.Elements
         protected virtual UISwitch CreateSwitch()
         {
             return new UISwitch
-                {
-                    BackgroundColor = UIColor.Clear,
-                    Tag = 1,
-                    On = Value
-                };
+            {
+                BackgroundColor = UIColor.Clear,
+                Tag = 1,
+                On = Value
+            };
         }
 
         protected override void Dispose(bool disposing)

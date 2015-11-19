@@ -3,12 +3,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    >
+    android:minHeight="?android:attr/listPreferredItemHeight">
   <WebView
 	  android:id="@+id/dialog_HtmlField"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
-    />
+    android:layout_weight="0" />
 </LinearLayout>

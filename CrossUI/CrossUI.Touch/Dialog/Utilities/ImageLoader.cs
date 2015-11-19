@@ -2,9 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Foundation;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Utilities
@@ -33,17 +33,17 @@ namespace CrossUI.Touch.Dialog.Utilities
     /// </summary>
     /// <remarks>
     ///   By default, using the static public methods will use an in-memory cache
-    ///   for 50 images and 4 megs total.   The behavior of the static methods 
+    ///   for 50 images and 4 megs total.   The behavior of the static methods
     ///   can be modified by setting the public DefaultLoader property to a value
     ///   that the user configured.
-    /// 
-    ///   The instance methods can be used to create different imageloader with 
+    ///
+    ///   The instance methods can be used to create different imageloader with
     ///   different properties.
-    ///  
+    ///
     ///   Keep in mind that the phone does not have a lot of memory, and using
     ///   the cache with the unlimited value (0) even with a number of items in
     ///   the cache can consume memory very quickly.
-    /// 
+    ///
     ///   Use the Purge method to release all the memory kept in the caches on
     ///   low memory conditions, or when the application is sent to the background.
     /// </remarks>
@@ -108,7 +108,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         private static nint sizer(UIImage img)
         {
             var cg = img.CGImage;
-            return cg.BytesPerRow*cg.Height;
+            return cg.BytesPerRow * cg.Height;
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         }
 
         /// <summary>
-        ///    Purges the cache of this instance of the ImageLoader, releasing 
+        ///    Purges the cache of this instance of the ImageLoader, releasing
         ///    all the memory used by the images in the caches.
         /// </summary>
         public void PurgeCache()
@@ -141,8 +141,8 @@ namespace CrossUI.Touch.Dialog.Utilities
             var ret = new char[32];
             for (int i = 0; i < 16; i++)
             {
-                ret[i*2] = (char) hex(bytes[i] >> 4);
-                ret[i*2 + 1] = (char) hex(bytes[i] & 0xf);
+                ret[i * 2] = (char)hex(bytes[i] >> 4);
+                ret[i * 2 + 1] = (char)hex(bytes[i] & 0xf);
             }
             return new string(ret);
         }
@@ -162,7 +162,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public static UIImage DefaultRequestImage(Uri uri, IImageUpdated notify)
         {
             if (DefaultLoader == null)
-                DefaultLoader = new ImageLoader(50, 4*1024*1024);
+                DefaultLoader = new ImageLoader(50, 4 * 1024 * 1024);
             return DefaultLoader.RequestImage(uri, notify);
         }
 
@@ -253,7 +253,7 @@ namespace CrossUI.Touch.Dialog.Utilities
 
         private static bool Download(Uri uri, string target)
         {
-            var buffer = new byte[4*1024];
+            var buffer = new byte[4 * 1024];
 
             try
             {

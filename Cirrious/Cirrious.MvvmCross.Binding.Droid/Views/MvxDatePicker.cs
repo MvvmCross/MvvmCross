@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.CrossCore.Droid.Platform;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     [Register("cirrious.mvvmcross.binding.droid.views.MvxDatePicker")]
-    public class MvxDatePicker 
+    public class MvxDatePicker
         : DatePicker
         , DatePicker.IOnDateChangedListener
     {
@@ -31,10 +31,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-		protected MvxDatePicker(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxDatePicker(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public DateTime Value
         {
@@ -50,8 +50,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 {
                     Init(javaYear, javaMonth, javaDay, this);
                     _initialized = true;
-                } 
-                else if (Year!=javaYear || Month!= javaMonth || DayOfMonth!=javaDay)
+                }
+                else if (Year != javaYear || Month != javaMonth || DayOfMonth != javaDay)
                 {
                     UpdateDate(javaYear, javaMonth, javaDay);
                 }

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using CrossUI.Core.Builder;
@@ -14,9 +14,9 @@ namespace CrossUI.Touch.Builder
     {
         public TouchBuilderRegistry(bool registerDefaultElements = true)
         {
-            this.AddBuilder(typeof (Element), new TouchElementBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (Group), new TouchGroupBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (Section), new TouchSectionBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Element), new TouchElementBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Group), new TouchGroupBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Section), new TouchSectionBuilder(registerDefaultElements));
         }
     }
 
@@ -34,7 +34,7 @@ namespace CrossUI.Touch.Builder
     public class TouchElementBuilder : TypedUserInterfaceBuilder
     {
         public TouchElementBuilder(bool registerDefaults)
-            : base(typeof (Element), "Element", "String")
+            : base(typeof(Element), "Element", "String")
         {
             if (registerDefaults)
             {
@@ -46,7 +46,7 @@ namespace CrossUI.Touch.Builder
     public class TouchSectionBuilder : TypedUserInterfaceBuilder
     {
         public TouchSectionBuilder(bool registerDefaults)
-            : base(typeof (Section), "Section", "")
+            : base(typeof(Section), "Section", "")
         {
             if (registerDefaults)
             {
@@ -58,7 +58,7 @@ namespace CrossUI.Touch.Builder
     public class TouchGroupBuilder : TypedUserInterfaceBuilder
     {
         public TouchGroupBuilder(bool registerDefaults)
-            : base(typeof (Group), "Group", "Radio")
+            : base(typeof(Group), "Group", "Radio")
         {
             if (registerDefaults)
             {

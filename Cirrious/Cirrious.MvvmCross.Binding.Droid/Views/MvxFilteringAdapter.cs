@@ -2,11 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -14,6 +12,8 @@ using Android.Widget;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
 using Java.Lang;
+using System;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -38,9 +38,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var count = _owner.SetConstraintAndWaitForDataChange(stringConstraint);
 
                 return new FilterResults
-                    {
-                        Count = count
-                    };
+                {
+                    Count = count
+                };
             }
 
             protected override void PublishResults(ICharSequence constraint, FilterResults results)
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 return new Java.Lang.String(ourContainer.Object.ToString());
             }
 
-            #endregion
+            #endregion Overrides of Filter
         }
 
         private int SetConstraintAndWaitForDataChange(string newConstraint)
@@ -112,10 +112,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Filter = new MyFilter(this);
         }
 
-		protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public bool ReturnSingleObjectFromGetItem { get; set; }
 
@@ -142,6 +142,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public Filter Filter { get; set; }
 
-        #endregion
+        #endregion Implementation of IFilterable
     }
 }

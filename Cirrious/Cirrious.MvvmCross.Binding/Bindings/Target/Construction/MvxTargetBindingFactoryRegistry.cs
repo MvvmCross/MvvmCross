@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -61,7 +61,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             {
                 // we only handle EventHandler's here
                 // other event types will need to be handled by custom bindings
-                if (targetEventInfo.EventHandlerType == typeof (EventHandler))
+                if (targetEventInfo.EventHandlerType == typeof(EventHandler))
                 {
                     binding = new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
                     return true;

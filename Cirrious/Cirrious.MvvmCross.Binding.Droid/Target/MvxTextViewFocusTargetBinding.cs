@@ -2,14 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Droid.Target;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -20,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         protected EditText TextField => Target as EditText;
 
-        public override Type TargetType => typeof (string);
+        public override Type TargetType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -58,7 +56,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (TextField != null && _subscribed) {
+            if (TextField != null && _subscribed)
+            {
                 TextField.FocusChange -= HandleLostFocus;
                 _subscribed = false;
             }

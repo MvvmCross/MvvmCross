@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Linq.Expressions;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.ExpressionParse
 {
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            return Parse((LambdaExpression) propertyPath);
+            return Parse((LambdaExpression)propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MethodCallExpression) current;
+            var me = (MethodCallExpression)current;
             if (me.Method.Name != "get_Item"
                 || me.Arguments.Count != 1)
             {
@@ -79,7 +79,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
             try
             {
-                var boxed = Expression.Convert(argument, typeof (object));
+                var boxed = Expression.Convert(argument, typeof(object));
                 var constant = Expression.Lambda<Func<object>>(boxed)
                     .Compile()
                     ();
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MemberExpression) current;
+            var me = (MemberExpression)current;
             toReturn.PrependProperty(me.Member.Name);
             current = me.Expression;
             return current;
@@ -105,7 +105,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
         private static Expression Unbox(Expression current)
         {
-            var ue = (UnaryExpression) current;
+            var ue = (UnaryExpression)current;
             current = ue.Operand;
             return current;
         }

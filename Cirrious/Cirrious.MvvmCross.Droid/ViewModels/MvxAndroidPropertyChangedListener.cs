@@ -1,7 +1,7 @@
-using System;
-using System.ComponentModel;
 using Android.Runtime;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.ComponentModel;
 
 namespace Cirrious.MvvmCross.Droid.ViewModels
 {

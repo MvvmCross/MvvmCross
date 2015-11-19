@@ -2,19 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
 using Android.Content;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Core.Elements.Lists;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _list.ItemsSource = this.ItemsSource;
             _list.ItemClick = this.ItemClick;
             // for testing some times it helps to see the list!
-            // _list.SetBackgroundColor(Color.CornflowerBlue); 
+            // _list.SetBackgroundColor(Color.CornflowerBlue);
             return _list;
         }
 

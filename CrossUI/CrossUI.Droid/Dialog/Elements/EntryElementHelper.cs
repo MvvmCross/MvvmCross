@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Text;
@@ -14,7 +14,7 @@ namespace CrossUI.Droid.Dialog.Elements
     {
         public static EntryElementHelper EnsureTagged(EditText editText)
         {
-            var tag = (EntryElementHelper) editText.Tag;
+            var tag = (EntryElementHelper)editText.Tag;
             if (tag == null)
             {
                 tag = new EntryElementHelper(editText);
@@ -34,6 +34,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public interface IEntryElementOwner
         {
             void OnTextChanged(string newText);
+
             void OnEditorAction(TextView.EditorActionEventArgs e);
         }
 
@@ -63,6 +64,6 @@ namespace CrossUI.Droid.Dialog.Elements
             // nothing needed
         }
 
-        #endregion
+        #endregion TextWatcher Android
     }
 }

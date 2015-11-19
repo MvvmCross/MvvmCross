@@ -2,16 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.IoC;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
@@ -37,14 +36,14 @@ namespace Cirrious.MvvmCross.Binding.Binders
             var pairs = from field in type.GetFields()
                         where !field.IsStatic
                         where field.IsPublic
-                        where typeof (T).IsAssignableFrom(field.FieldType)
+                        where typeof(T).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(instance) as T
                         where converter != null
                         select new
-                            {
-                                field.Name,
-                                Converter = converter
-                            };
+                        {
+                            field.Name,
+                            Converter = converter
+                        };
 
             foreach (var pair in pairs)
             {
@@ -57,14 +56,14 @@ namespace Cirrious.MvvmCross.Binding.Binders
             var pairs = from field in type.GetFields()
                         where field.IsStatic
                         where field.IsPublic
-                        where typeof (T).IsAssignableFrom(field.FieldType)
+                        where typeof(T).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(null) as T
                         where converter != null
                         select new
-                            {
-                                field.Name,
-                                Converter = converter
-                            };
+                        {
+                            field.Name,
+                            Converter = converter
+                        };
 
             foreach (var pair in pairs)
             {
@@ -77,11 +76,11 @@ namespace Cirrious.MvvmCross.Binding.Binders
             var pairs = from type in assembly.ExceptionSafeGetTypes()
                         where type.GetTypeInfo().IsPublic
                         where !type.GetTypeInfo().IsAbstract
-                        where typeof (T).IsAssignableFrom(type)
+                        where typeof(T).IsAssignableFrom(type)
                         let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
                         where type.IsConventional()
-                        select new {Name = name, Type = type};
+                        select new { Name = name, Type = type };
 
             foreach (var pair in pairs)
             {

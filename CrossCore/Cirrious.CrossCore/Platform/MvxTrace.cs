@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace Cirrious.CrossCore.Platform
 {
@@ -28,8 +28,8 @@ namespace Cirrious.CrossCore.Platform
                 throw new MvxException("MvxTrace already initialized");
 
             DefaultTag = "mvx";
-            // selfRegisteringSingleton 
-			new MvxTrace();
+            // selfRegisteringSingleton
+            new MvxTrace();
         }
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
@@ -112,7 +112,7 @@ namespace Cirrious.CrossCore.Platform
             Trace(MvxTraceLevel.Error, message);
         }
 
-        #endregion Static Interface
+        #endregion public static Interface
 
         private readonly IMvxTrace _realTrace;
 
@@ -140,7 +140,7 @@ namespace Cirrious.CrossCore.Platform
             _realTrace.Trace(level, tag, message, args);
         }
 
-        #endregion
+        #endregion IMvxTrace Members
 
         #region private helpers
 
@@ -159,6 +159,6 @@ namespace Cirrious.CrossCore.Platform
                 };
         }
 
-        #endregion
+        #endregion private helpers
     }
 }

@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.IO;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        public override Type TargetType => typeof (string);
+        public override Type TargetType => typeof(string);
 
         protected override Stream GetStream(object value)
         {

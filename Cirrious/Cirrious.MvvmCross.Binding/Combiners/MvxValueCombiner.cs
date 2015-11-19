@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
     {
         public virtual Type SourceType(IEnumerable<IMvxSourceStep> steps)
         {
-            return typeof (object);
+            return typeof(object);
         }
 
         public virtual void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         public virtual IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps,
                                                             Type overallTargetType)
         {
-            // by default a combiner just demand objects from its sources 
+            // by default a combiner just demand objects from its sources
             return subSteps.Select(x => typeof(object));
         }
     }

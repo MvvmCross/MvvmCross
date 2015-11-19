@@ -2,18 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
@@ -27,6 +24,9 @@ using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         public Context ApplicationContext => _applicationContext;
 
-        #endregion
+        #endregion IMvxAndroidGlobals Members
 
         protected override IMvxPluginManager CreatePluginManager()
         {
@@ -157,7 +157,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-			var bindingBuilder = new MvxAndroidBindingBuilder();
+            var bindingBuilder = new MvxAndroidBindingBuilder();
             return bindingBuilder;
         }
 
@@ -165,14 +165,14 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             foreach (var assembly in AndroidViewAssemblies)
             {
-                cache.AddAssembly(assembly);                
+                cache.AddAssembly(assembly);
             }
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
-		{
-			// this base class does nothing
-		}
+        {
+            // this base class does nothing
+        }
 
         protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
@@ -186,9 +186,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             foreach (var viewNamespace in ViewNamespaces)
             {
-                viewTypeResolver.Add(viewNamespace);                
+                viewTypeResolver.Add(viewNamespace);
             }
-        }        
+        }
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {

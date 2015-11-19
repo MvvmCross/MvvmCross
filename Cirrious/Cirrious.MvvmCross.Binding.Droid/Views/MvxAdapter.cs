@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 using Android.Content;
 using Android.Runtime;
 using Android.Views;
@@ -19,6 +16,9 @@ using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
 using Object = Java.Lang.Object;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         //      - but that was too big a breaking change for this release (7th Oct 2013)
         private int _currentSimpleId;
 
-        // Note2 - _currentParent is similarly a bit of a hack 
+        // Note2 - _currentParent is similarly a bit of a hack
         //       - it is just here to avoid a breaking api change for now
         //       - will seek to remove both the _currentSimpleId and _currentParent private fields in a major release soon
         private ViewGroup _currentParent;
@@ -63,10 +63,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
         }
 
-		protected MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         protected Context Context => _context;
 
@@ -130,11 +130,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
 
             _itemsSource = value;
-            
+
             if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
-            
+
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
             {

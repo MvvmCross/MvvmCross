@@ -32,7 +32,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
             public FactoryWrapper2(IMvxLayoutInflaterFactory delegateFactory)
-                : base(delegateFactory) {}
+                : base(delegateFactory)
+            { }
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
@@ -63,7 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                 layoutInflater.Factory = (factory != null ? new FactoryWrapper(factory) : null);
             }
         }
-        
+
         // Workaround from Support.v4 v22.1.1 library:
         //
         // For APIs >= 11 && < 21, there was a framework bug that prevented a LayoutInflater's

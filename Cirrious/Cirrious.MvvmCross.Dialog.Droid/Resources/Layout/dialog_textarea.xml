@@ -9,4 +9,4 @@
 	android:inputType="text|textMultiLine"
 	android:textSize="21sp"
 	android:textColor="#ff000000"
-/>
+ />

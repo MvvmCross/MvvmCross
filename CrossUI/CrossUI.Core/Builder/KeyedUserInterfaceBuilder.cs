@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Elements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Elements;
 
 namespace CrossUI.Core.Builder
 {
@@ -58,7 +57,7 @@ namespace CrossUI.Core.Builder
 
         private void FillBuildableProperties(KeyedDescription description, object userInterfaceInstance)
         {
-            var reservedPropertyNames = new[] {"Key", "Properties", "NotFor", "OnlyFor"};
+            var reservedPropertyNames = new[] { "Key", "Properties", "NotFor", "OnlyFor" };
 
             var buildableProperties = from p in description.GetType().GetProperties()
                                       where !reservedPropertyNames.Contains(p.Name)
@@ -81,8 +80,8 @@ namespace CrossUI.Core.Builder
             {
                 var props = userInterfaceInstance.GetType().GetProperties().Select(p => p.Name);
                 var available = string.Join("'", props);
-                DialogTrace.WriteLine("No User Interface member for description property {0} on {1}", 
-                    buildablePropertyInfo.Name,  available);
+                DialogTrace.WriteLine("No User Interface member for description property {0} on {1}",
+                    buildablePropertyInfo.Name, available);
                 return;
             }
 
@@ -90,13 +89,13 @@ namespace CrossUI.Core.Builder
             {
                 var genericPropertyType = buildablePropertyInfo.PropertyType.GetGenericTypeDefinition();
 
-                if (genericPropertyType == typeof (Dictionary<int, int>).GetGenericTypeDefinition())
+                if (genericPropertyType == typeof(Dictionary<int, int>).GetGenericTypeDefinition())
                 {
                     DialogTrace.WriteLine("Filling Dictionary {0}", buildablePropertyInfo.Name);
                     FillDictionary(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo,
                                    userInterfaceInstance);
                 }
-                else if (genericPropertyType == typeof (List<int>).GetGenericTypeDefinition())
+                else if (genericPropertyType == typeof(List<int>).GetGenericTypeDefinition())
                 {
                     DialogTrace.WriteLine("Filling List {0}", buildablePropertyInfo.Name);
                     FillList(buildablePropertyInfo, buildablePropertyValue, userInterfacePropertyInfo,
@@ -125,14 +124,14 @@ namespace CrossUI.Core.Builder
             }
 
             var descriptionValueType = descriptionPropertyInfo.PropertyType;
-            if (!typeof (KeyedDescription).IsAssignableFrom(descriptionValueType))
+            if (!typeof(KeyedDescription).IsAssignableFrom(descriptionValueType))
                 throw new Exception("Don't know what to do with description property " + descriptionValueType);
 
             var userInterfaceValueType = userInterfacePropertyInfo.PropertyType;
-            if (!typeof (IBuildable).IsAssignableFrom(userInterfaceValueType))
+            if (!typeof(IBuildable).IsAssignableFrom(userInterfaceValueType))
                 throw new Exception("Don't know what to do with user interface property " + userInterfaceValueType);
 
-            var builtUserInterfaceElement = Build(userInterfaceValueType, (KeyedDescription) descriptionPropertyValue);
+            var builtUserInterfaceElement = Build(userInterfaceValueType, (KeyedDescription)descriptionPropertyValue);
             if (builtUserInterfaceElement == null)
             {
                 throw new Exception("Failed to build user interface instance of type " + userInterfaceValueType.Name +
@@ -150,13 +149,13 @@ namespace CrossUI.Core.Builder
         {
             var descriptionValueType = CheckDictionaryAndGetValueType(
                 descriptionPropertyInfo,
-                typeof (string),
-                typeof (KeyedDescription));
+                typeof(string),
+                typeof(KeyedDescription));
 
             var userInterfaceValueType = CheckDictionaryAndGetValueType(
                 userInterfacePropertyInfo,
-                typeof (string),
-                typeof (IBuildable));
+                typeof(string),
+                typeof(IBuildable));
 
             var descriptionDictionary = descriptionPropertyValue as IDictionary;
             if (descriptionDictionary == null)
@@ -165,7 +164,7 @@ namespace CrossUI.Core.Builder
                 return;
             }
 
-            var instanceDictionary = (IDictionary) userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
+            var instanceDictionary = (IDictionary)userInterfacePropertyInfo.GetValue(userInterfaceInstance, null);
             if (instanceDictionary == null)
             {
                 throw new Exception("The UserInterfaceElement must be constructed with a valid Dictionary for " +
@@ -174,7 +173,7 @@ namespace CrossUI.Core.Builder
 
             foreach (string key in descriptionDictionary.Keys)
             {
-                var value = (KeyedDescription) descriptionDictionary[key];
+                var value = (KeyedDescription)descriptionDictionary[key];
                 if (value == null)
                 {
                     throw new Exception("Missing description for " + key);
@@ -203,11 +202,11 @@ namespace CrossUI.Core.Builder
         {
             var descriptionValueType = CheckListAndGetValueType(
                 descriptionPropertyInfo,
-                typeof (KeyedDescription));
+                typeof(KeyedDescription));
 
             var userInterfaceValueType = CheckListAndGetValueType(
                 userInterfacePropertyInfo,
-                typeof (IBuildable));
+                typeof(IBuildable));
 
             if (descriptionPropertyValue == null)
             {
@@ -276,7 +275,7 @@ namespace CrossUI.Core.Builder
                                                            Type expectedValueBaseType)
         {
             var genericPropertyType = propertyInfo.PropertyType.GetGenericTypeDefinition();
-            if (genericPropertyType != typeof (Dictionary<int, int>).GetGenericTypeDefinition())
+            if (genericPropertyType != typeof(Dictionary<int, int>).GetGenericTypeDefinition())
             {
                 throw new Exception("The property is not a generic Dictionary");
             }

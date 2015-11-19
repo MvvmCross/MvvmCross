@@ -1,5 +1,5 @@
-using System;
 using Android.Widget;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {

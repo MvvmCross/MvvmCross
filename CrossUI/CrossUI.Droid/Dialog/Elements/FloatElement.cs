@@ -2,21 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Globalization;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
+using System.Globalization;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
     public class FloatElement : ValueElement<float>, SeekBar.IOnSeekBarChangeListener
     {
         private int _precision = 10000000;
+
         public int Precision
         {
             get { return _precision; }
@@ -34,14 +34,14 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _maxValue; }
             set
             {
-			    if (value < _minValue)
+                if (value < _minValue)
                 {
                     // this protects the situation where the user sets the MaxValue before the MinValue
                     MinValue = value - 0.0001f;
-                } 
+                }
 
-	            if (Value > value)
-		            Value = value;
+                if (Value > value)
+                    Value = value;
 
                 _maxValue = value;
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
@@ -55,14 +55,14 @@ namespace CrossUI.Droid.Dialog.Elements
             get { return _minValue; }
             set
             {
-				if (value > _maxValue)
+                if (value > _maxValue)
                 {
                     // this protects the situation where the user sets the MaxValue before the MinValue
                     MaxValue = value + 0.0001f;
                 }
-                    
-				if (Value < value)
-					Value = value;
+
+                if (Value < value)
+                    Value = value;
 
                 _minValue = value;
                 ActOnCurrentAttachedCell(UpdateDetailDisplay);
@@ -110,20 +110,20 @@ namespace CrossUI.Droid.Dialog.Elements
             }
             if (slider != null)
             {
-					// Setting the two slider properties should be an atomic operation with no side effects.
-					// However, setting Max may trigger OnProgressChanged, which will modify Value,
-					// which will then be wrong when setting Progress.
-					// Temporarily remove the listener to get over this hump.
-					slider.SetOnSeekBarChangeListener(null);
-	            try
-	            {
-		            slider.Max = (int) ((_maxValue - _minValue)*Precision);
-		            slider.Progress = (int) ((Value - _minValue)*Precision);
-	            }
-	            finally
-	            {
-		            slider.SetOnSeekBarChangeListener(this);
-	            }
+                // Setting the two slider properties should be an atomic operation with no side effects.
+                // However, setting Max may trigger OnProgressChanged, which will modify Value,
+                // which will then be wrong when setting Progress.
+                // Temporarily remove the listener to get over this hump.
+                slider.SetOnSeekBarChangeListener(null);
+                try
+                {
+                    slider.Max = (int)((_maxValue - _minValue) * Precision);
+                    slider.Progress = (int)((Value - _minValue) * Precision);
+                }
+                finally
+                {
+                    slider.SetOnSeekBarChangeListener(this);
+                }
             }
         }
 

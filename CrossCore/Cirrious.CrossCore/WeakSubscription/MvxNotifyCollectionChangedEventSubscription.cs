@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -14,7 +14,7 @@ namespace Cirrious.CrossCore.WeakSubscription
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {
-        private static readonly EventInfo EventInfo = typeof (INotifyCollectionChanged).GetEvent("CollectionChanged");
+        private static readonly EventInfo EventInfo = typeof(INotifyCollectionChanged).GetEvent("CollectionChanged");
 
         // This code ensures the CollectionChanged event is not stripped by Xamarin linker
         // see https://github.com/MvvmCross/MvvmCross/pull/453

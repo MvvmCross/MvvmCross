@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             get
             {
                 if (_currentChildBinding == null)
-                    return typeof (object);
+                    return typeof(object);
 
                 return _currentChildBinding.SourceType;
             }
