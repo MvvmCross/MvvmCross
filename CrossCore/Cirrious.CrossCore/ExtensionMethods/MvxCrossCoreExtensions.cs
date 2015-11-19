@@ -21,8 +21,9 @@ namespace Cirrious.CrossCore.ExtensionMethods
             if (result == null)
                 return false;
 
-            if (result is string)
-                return !string.IsNullOrEmpty((string)result);
+            var s = result as string;
+            if (s != null)
+                return !string.IsNullOrEmpty(s);
 
             if (result is bool)
                 return (bool)result;
@@ -54,10 +55,8 @@ namespace Cirrious.CrossCore.ExtensionMethods
                 }
                 else if (propertyType.GetTypeInfo().IsEnum)
                 {
-                    if (value is string)
-                        safeValue = Enum.Parse(propertyType, (string)value, true);
-                    else
-                        safeValue = Enum.ToObject(propertyType, value);
+                    var s = value as string;
+                    safeValue = s != null ? Enum.Parse(propertyType, s, true) : Enum.ToObject(propertyType, value);
                 }
                 else if (propertyType.GetTypeInfo().IsValueType)
                 {

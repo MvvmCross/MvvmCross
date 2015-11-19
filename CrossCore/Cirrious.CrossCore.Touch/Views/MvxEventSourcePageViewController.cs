@@ -1,9 +1,8 @@
 ﻿using System;
 using UIKit;
-using Cirrious.CrossCore.Touch.Views;
 using Cirrious.CrossCore.Core;
 
-namespace Cirrious.CrossCore.Touch
+namespace Cirrious.CrossCore.Touch.Views
 {
 	public class MvxEventSourcePageViewController : UIPageViewController, IMvxEventSourceViewController
 	{

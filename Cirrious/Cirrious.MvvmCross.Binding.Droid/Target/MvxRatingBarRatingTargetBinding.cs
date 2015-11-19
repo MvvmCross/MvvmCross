@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             RatingBar.RatingBarChange += RatingBar_RatingBarChange;
         }
 
-        void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
+        private void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
         {
             var target = Target as RatingBar;
 

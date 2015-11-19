@@ -235,7 +235,7 @@ namespace Cirrious.CrossCore.Parse
             return toReturn;
         }
 
-        public enum AllowNonQuotedText
+        protected enum AllowNonQuotedText
         {
             Allow,
             DoNotAllow

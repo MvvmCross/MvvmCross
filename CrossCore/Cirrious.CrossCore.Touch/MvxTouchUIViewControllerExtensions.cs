@@ -26,7 +26,7 @@ namespace Cirrious.CrossCore.Touch
             }
             else
             {
-                return uiNavigationParent.VisibleViewController == controller;
+                return Equals(uiNavigationParent.VisibleViewController, controller);
             }
         }
     }

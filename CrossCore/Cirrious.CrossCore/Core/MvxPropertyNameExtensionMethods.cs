@@ -62,9 +62,10 @@ namespace Cirrious.CrossCore.Core
 
         private static MemberExpression FindMemberExpression<T>(Expression<Func<T>> expression)
         {
-            if (expression.Body is UnaryExpression)
+            var body = expression.Body as UnaryExpression;
+            if (body != null)
             {
-                var unary = (UnaryExpression)expression.Body;
+                var unary = body;
                 var member = unary.Operand as MemberExpression;
                 if (member == null)
                     throw new ArgumentException(WrongUnaryExpressionMessage, nameof(expression));

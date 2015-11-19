@@ -29,8 +29,7 @@ namespace CrossUI.Droid.Dialog.Elements
         protected override View GetViewImpl(Context context, ViewGroup parent)
         {
 #warning convertView is junk here?
-            View view;
-            view = _layoutId > 0 ? DroidResources.LoadLayout(context, parent, _layoutId) : DroidResources.LoadLayout(context, parent, LayoutName);
+            View view = _layoutId > 0 ? DroidResources.LoadLayout(context, parent, _layoutId) : DroidResources.LoadLayout(context, parent, LayoutName);
 
             if (view == null)
             {

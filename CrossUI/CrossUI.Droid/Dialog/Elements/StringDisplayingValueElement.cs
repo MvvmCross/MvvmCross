@@ -30,10 +30,12 @@ namespace CrossUI.Droid.Dialog.Elements
             DroidResources.DecodeStringElementLayout(Context, CurrentAttachedCell, out label, out value);
 
             if (value != null)
-                value.Text = Format(Value);
-            if (FontSize > 0)
             {
-                value.TextSize = FontSize;
+                value.Text = Format(Value);
+                if (FontSize > 0)
+                {
+                    value.TextSize = FontSize;
+                }
             }
         }
 

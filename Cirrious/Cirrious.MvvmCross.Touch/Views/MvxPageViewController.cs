@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UIKit;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Touch.Views;
 
 namespace Cirrious.MvvmCross.Touch
 {

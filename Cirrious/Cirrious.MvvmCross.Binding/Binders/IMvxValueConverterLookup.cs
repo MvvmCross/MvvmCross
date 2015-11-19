@@ -9,7 +9,7 @@ using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
-    public interface IMvxNamedInstanceLookup<T>
+    public interface IMvxNamedInstanceLookup<out T>
     {
         T Find(string name);
     }

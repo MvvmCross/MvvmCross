@@ -32,9 +32,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxNotifyPropertyChanged()
         {
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
-                                       ? true
-                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
