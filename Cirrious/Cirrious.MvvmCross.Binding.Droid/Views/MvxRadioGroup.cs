@@ -50,8 +50,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
-        
-        void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
+
+        private void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
         {
             var li = (args.Child as MvxListItemView);
             var radioButton = li?.GetChildAt(0) as RadioButton;

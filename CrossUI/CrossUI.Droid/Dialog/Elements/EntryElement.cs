@@ -117,7 +117,7 @@ namespace CrossUI.Droid.Dialog.Elements
                         {
                             currentLoop = currentLoop.Parent;
                             if (currentLoop is ViewGroup)
-                                group = currentLoop as ViewGroup;
+                                group = (ViewGroup) currentLoop;
                         }
                         var focus = FocusFinder.Instance.FindNextFocus(group, _entry, args.ActionId == ImeAction.Next ? FocusSearchDirection.Down : FocusSearchDirection.Up);
                         if (focus != null)

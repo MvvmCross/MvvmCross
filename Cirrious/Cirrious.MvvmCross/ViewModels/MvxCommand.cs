@@ -113,9 +113,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
-                                       ? true
-                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 

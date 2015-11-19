@@ -386,11 +386,8 @@ namespace CrossUI.Touch.Dialog.Elements
             tableView.DeselectRow(indexPath, true);
         }
 
-        public override bool Matches(string text)
-        {
-            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) ||
+        public override bool Matches(string text) => (Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1) ||
                    base.Matches(text);
-        }
 
         /// <summary>
         /// Makes this cell the first responder (get the focus)

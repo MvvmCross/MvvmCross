@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
 
         public class TestUnderscoreDataContext
         {
-            public CollectionClass My_Collection { get; set; }
+            public CollectionClass MyCollection { get; set; }
         }
 
         public class SampleValueConverter : IMvxValueConverter
@@ -116,7 +116,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             {
                 Source = new MvxPathSourceStepDescription()
                 {
-                    SourcePropertyPath = "My_Collection.GrandParent.MyChild.MyChild.Value",
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
                 },
                 TargetName = "Text"
             };
@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                 mock
                     .CreateBinding(mock.Target)
                     .For(te => te.Text)
-                    .To<TestUnderscoreDataContext>(source => source.My_Collection.GrandParent.MyChild.MyChild.Value)
+                    .To<TestUnderscoreDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
             DoTest(test, expectedDesc);

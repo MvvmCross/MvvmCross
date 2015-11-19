@@ -246,7 +246,7 @@ namespace Cirrious.CrossCore.Test
         public enum MyEnum
         {
             Value1,
-            Value_2,
+            Value2,
             MyEnumValue3Foo
         }
 
