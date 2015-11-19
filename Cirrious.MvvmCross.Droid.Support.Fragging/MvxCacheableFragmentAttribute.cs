@@ -9,7 +9,7 @@ using System;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
-    public class MvxOwnedViewModelFragmentAttribute : Attribute
+    public class MvxCacheableFragmentAttribute : Attribute
     {
     }
 }

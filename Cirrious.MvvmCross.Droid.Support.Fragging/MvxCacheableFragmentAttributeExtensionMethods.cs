@@ -9,11 +9,11 @@ using System;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
-    public static class MvxOwnedViewModelFragmentAttributeExtensionMethods
+    public static class MvxCacheableFragmentAttributeExtensionMethods
     {
         public static bool IsOwnedViewModelFragment(this Type candidateType)
         {
-            var attributes = candidateType.GetCustomAttributes(typeof(MvxOwnedViewModelFragmentAttribute), true);
+            var attributes = candidateType.GetCustomAttributes(typeof(MvxCacheableFragmentAttribute), true);
             return attributes.Length > 0;
         }
     }
