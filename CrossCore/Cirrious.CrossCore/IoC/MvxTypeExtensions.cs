@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -123,10 +122,7 @@ namespace Cirrious.CrossCore.IoC
             return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types)
-        {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
-        }
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {

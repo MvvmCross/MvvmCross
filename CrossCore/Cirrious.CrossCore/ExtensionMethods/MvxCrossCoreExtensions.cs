@@ -8,7 +8,6 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.CrossCore.ExtensionMethods

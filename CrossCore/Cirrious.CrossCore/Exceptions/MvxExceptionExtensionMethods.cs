@@ -22,10 +22,7 @@ namespace Cirrious.CrossCore.Exceptions
                 return
                     $"{exception.GetType().Name}: {exception.Message ?? "-"}\n\t{exception.StackTrace}\nInnerException was {innerExceptionText}";
             }
-            else
-            {
-                return $"{exception.GetType().Name}: {exception.Message ?? "-"}\n\t{exception.StackTrace}";
-            }
+            return $"{exception.GetType().Name}: {exception.Message ?? "-"}\n\t{exception.StackTrace}";
         }
 
         public static Exception MvxWrap(this Exception exception)
