@@ -155,12 +155,9 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             {
                 var ft = this.FragmentManager.BeginTransaction();
                 OnTabFragmentChanging(tag, ft);
-                if (_currentTab != null)
+                if (_currentTab?.CachedFragment != null)
                 {
-                    if (_currentTab.CachedFragment != null)
-                    {
-                        ft.Detach(_currentTab.CachedFragment);
-                    }
+                    ft.Detach(_currentTab.CachedFragment);
                 }
                 if (newTab != null)
                 {

@@ -27,9 +27,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
             public override bool Equals(object obj)
             {
-                if (obj == null)
-                    return false;
-
                 var rhs = obj as Key;
                 if (rhs == null)
                     return false;

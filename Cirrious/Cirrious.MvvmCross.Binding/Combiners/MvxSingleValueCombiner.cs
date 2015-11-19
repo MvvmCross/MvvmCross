@@ -27,10 +27,8 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
             var firstStep = steps.FirstOrDefault();
-            if (firstStep == null)
-                return;
 
-            firstStep.SetValue(value);
+            firstStep?.SetValue(value);
         }
 
         public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)

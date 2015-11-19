@@ -174,8 +174,7 @@ namespace CrossUI.Droid.Dialog
             var elem = ElementAtIndex(e.Position);
             if (elem == null) return;
             elem.Selected();
-            if (elem.Click != null)
-                elem.Click(sender, e);
+            elem.Click?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -186,8 +185,7 @@ namespace CrossUI.Droid.Dialog
         public void ListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
             var elem = ElementAtIndex(e.Position);
-            if (elem != null && elem.LongClick != null)
-                elem.LongClick(sender, e);
+            elem?.LongClick?.Invoke(sender, e);
         }
 
         protected override void Dispose(bool disposing)

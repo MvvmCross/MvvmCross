@@ -42,16 +42,14 @@ namespace CrossUI.Droid.Dialog.Elements
 
         private void EntryOnEditorAction(object sender, TextView.EditorActionEventArgs e)
         {
-            if (Owner != null)
-                Owner.OnEditorAction(e);
+            Owner?.OnEditorAction(e);
         }
 
         #region TextWatcher Android
 
         public void OnTextChanged(Java.Lang.ICharSequence s, int start, int before, int count)
         {
-            if (Owner != null)
-                Owner.OnTextChanged(s.ToString());
+            Owner?.OnTextChanged(s.ToString());
         }
 
         public void AfterTextChanged(IEditable s)

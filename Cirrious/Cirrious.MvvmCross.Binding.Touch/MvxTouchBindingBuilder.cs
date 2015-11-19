@@ -113,16 +113,14 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                           view => new MvxUIViewTapTargetBinding(view, 3, 3));
             */
 
-            if (_fillRegistryAction != null)
-                _fillRegistryAction(registry);
+            _fillRegistryAction?.Invoke(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
+            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
@@ -133,8 +131,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
                 autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
 
-            if (_fillAutoValueConvertersAction != null)
-                _fillAutoValueConvertersAction(autoValueConverters);
+            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -161,8 +158,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(UISegmentedControl), "SelectedSegment");
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), "Hidden");
 
-            if (_fillBindingNamesAction != null)
-                _fillBindingNamesAction(registry);
+            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

@@ -68,8 +68,8 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
             public override int GetHashCode()
             {
-                return (Type1 == null ? 0 : Type1.GetHashCode())
-                       + (Type2 == null ? 0 : Type2.GetHashCode());
+                return (Type1?.GetHashCode() ?? 0)
+                       + (Type2?.GetHashCode() ?? 0);
             }
         }
 

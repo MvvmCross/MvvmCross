@@ -51,8 +51,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public void OnClick(View v)
         {
-            if (Click != null)
-                Click(this, EventArgs.Empty);
+            Click?.Invoke(this, EventArgs.Empty);
 
             if (SelectedCommand != null)
             {

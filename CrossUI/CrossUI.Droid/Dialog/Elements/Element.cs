@@ -40,12 +40,9 @@ namespace CrossUI.Droid.Dialog.Elements
             Caption = caption;
             LayoutName = layoutName;
             Click = (s, e) =>
-                {
-                    if (SelectedCommand != null)
-                    {
-                        SelectedCommand.Execute(null);
-                    }
-                };
+            {
+                SelectedCommand?.Execute(null);
+            };
         }
 
         private string _caption;
