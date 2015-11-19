@@ -104,21 +104,37 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         private string GenerateKey(Type type, string name)
         {
-            return string.Format("{0}:{1}", type.FullName, name);
+            return $"{type.FullName}:{name}";
         }
 
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
         {
-            IMvxPluginTargetBindingFactory factory;
-            var key = GenerateKey(type, name);
-            if (_lookups.TryGetValue(key, out factory))
+            foreach (var interfaceType in GetPossibleTypes(type))
             {
-                return factory;
+                IMvxPluginTargetBindingFactory factory;
+                var key = GenerateKey(interfaceType, name);
+                if (_lookups.TryGetValue(key, out factory))
+                {
+                    return factory;
+                }
             }
-            var baseType = type.GetTypeInfo().BaseType;
-            if (baseType != null)
-                return FindSpecificFactory(baseType, name);
+
             return null;
+        }
+
+        private static IEnumerable<Type> GetPossibleTypes(Type type)
+        {
+            var tmpType = type;
+            while (tmpType != null)
+            {
+                yield return tmpType;
+                tmpType = tmpType.GetTypeInfo().BaseType;
+            }
+
+            foreach (var t in type.GetInterfaces())
+            {
+                yield return t;
+            }
         }
     }
 }
