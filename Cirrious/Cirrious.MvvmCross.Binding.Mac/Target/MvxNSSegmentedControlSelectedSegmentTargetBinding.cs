@@ -1,14 +1,13 @@
 ﻿using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.CrossCore.Platform;
+
 #if __UNIFIED__
 using AppKit;
 using Foundation;
 using ObjCRuntime;
 #else
-using MonoMac.AppKit;
-using MonoMac.Foundation;
-using MonoMac.ObjCRuntime;
 #endif
+
 using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
@@ -45,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             }
 
             _subscribed = true;
-			segmentedControl.Activated += HandleValueChanged;
+            segmentedControl.Activated += HandleValueChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -65,7 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null && _subscribed)
                 {
-					view.Activated -= HandleValueChanged;
+                    view.Activated -= HandleValueChanged;
                     _subscribed = false;
                 }
             }

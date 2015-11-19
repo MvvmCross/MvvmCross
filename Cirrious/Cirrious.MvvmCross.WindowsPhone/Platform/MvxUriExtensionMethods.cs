@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
             var simplePath = uri.ToString();
 
             string parameters;
-            if (!TryGetParameterString(simplePath, out parameters)) 
+            if (!TryGetParameterString(simplePath, out parameters))
                 return toReturn;
 
             foreach (var vp in Regex.Split(parameters, "&"))

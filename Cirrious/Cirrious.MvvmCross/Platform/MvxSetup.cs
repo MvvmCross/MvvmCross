@@ -2,21 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -183,7 +183,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeFirstChance()
         {
-            // always the very first thing to get initialized - after IoC and base platfom 
+            // always the very first thing to get initialized - after IoC and base platfom
             // base class implementation is empty by default
         }
 
@@ -375,17 +375,19 @@ namespace Cirrious.MvvmCross.Platform
                 case MvxSetupState.Uninitialized:
                     Initialize();
                     break;
+
                 case MvxSetupState.InitializingPrimary:
                 case MvxSetupState.InitializedPrimary:
                 case MvxSetupState.InitializingSecondary:
                     throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
                 case MvxSetupState.Initialized:
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        #endregion
+        #endregion Setup state lifecycle
     }
 }

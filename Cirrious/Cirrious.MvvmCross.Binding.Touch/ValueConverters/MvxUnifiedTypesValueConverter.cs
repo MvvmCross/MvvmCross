@@ -2,22 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.IoC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.Binding.Touch.ValueConverters
 {
-    class MvxUnifiedTypesValueConverter
+    internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {
         //dictionary of supported unified type conversions

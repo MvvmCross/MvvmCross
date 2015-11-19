@@ -2,17 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.Touch.Platform;
+using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -23,7 +21,9 @@ using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using Cirrious.CrossCore.Touch.Views;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
@@ -170,7 +170,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             return bindingBuilder;
         }
 
-        protected virtual void FillBindingNames (IMvxBindingNameRegistry obj)
+        protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
         {
             // this base class does nothing
         }

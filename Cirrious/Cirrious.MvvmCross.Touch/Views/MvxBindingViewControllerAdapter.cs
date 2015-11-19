@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using System;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
@@ -29,7 +29,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             if (TouchView == null)
             {
-                MvxTrace.Warning( "TouchView is null for clearup of bindings in type {0}",
+                MvxTrace.Warning("TouchView is null for clearup of bindings in type {0}",
                                TouchView.GetType().Name);
                 return;
             }

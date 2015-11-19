@@ -2,21 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
-        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher) base.Dispatcher;
+        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)base.Dispatcher;
 
         protected bool Close(IMvxViewModel viewModel)
         {
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof (TViewModel),
+                typeof(TViewModel),
                 parameterValuesObject.ToSimplePropertyDictionary(),
                 presentationBundle,
                 requestedBy);
@@ -51,7 +51,7 @@ namespace Cirrious.MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof (TViewModel),
+                typeof(TViewModel),
                 new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
                 presentationBundle,
                 requestedBy);
@@ -63,12 +63,11 @@ namespace Cirrious.MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             return ShowViewModel(
-                typeof (TViewModel),
+                typeof(TViewModel),
                 parameterBundle,
                 presentationBundle,
                 requestedBy);
         }
-
 
         protected bool ShowViewModel(Type viewModelType,
                                      object parameterValuesObject,
@@ -99,7 +98,6 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
         }
-
 
         private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle,
                                        MvxRequestedBy requestedBy)

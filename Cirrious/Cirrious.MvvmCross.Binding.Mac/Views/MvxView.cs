@@ -2,19 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.BindingContext;
 using System;
 using System.Drawing;
-using Cirrious.MvvmCross.Binding.BindingContext;
 
 #if __UNIFIED__
 using AppKit;
 using Foundation;
 #else
-using MonoMac.AppKit;
-using MonoMac.Foundation;
 #endif
 
 namespace Cirrious.MvvmCross.Binding.Mac.Views
@@ -36,11 +34,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
             this.CreateBindingContext();
         }
 
-		public MvxView(NSCoder coder)
-			: base(coder)
-		{
-			this.CreateBindingContext();
-		}
+        public MvxView(NSCoder coder)
+            : base(coder)
+        {
+            this.CreateBindingContext();
+        }
 
         public MvxView(RectangleF frame)
             : base(frame)

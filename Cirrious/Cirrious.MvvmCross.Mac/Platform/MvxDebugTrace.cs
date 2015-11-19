@@ -4,33 +4,29 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using System;
-
 using Cirrious.CrossCore.Platform;
-
-
-
+using System;
 
 namespace Cirrious.MvvmCross.Mac.Platform
 {
     public class MvxDebugTrace : IMvxTrace
     {
-		public void Trace(MvxTraceLevel level, string tag, Func<string> message)
-		{
-			Console.WriteLine(tag + ":" + level + ":" + message());
-		}
+        public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+        {
+            Console.WriteLine(tag + ":" + level + ":" + message());
+        }
 
-		public void Trace(MvxTraceLevel level, string tag, string message)
-		{
-			Console.WriteLine(tag + ": " + level + ": " + message);
-		}
+        public void Trace(MvxTraceLevel level, string tag, string message)
+        {
+            Console.WriteLine(tag + ": " + level + ": " + message);
+        }
 
-		public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
-		{
-			Console.WriteLine(tag + ": " + level + ": " + message, args);
-		}
+        public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
+        {
+            Console.WriteLine(tag + ": " + level + ": " + message, args);
+        }
     }
 }

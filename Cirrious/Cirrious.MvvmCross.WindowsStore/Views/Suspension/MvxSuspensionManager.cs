@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -131,8 +131,10 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
 
         private DependencyProperty MvxFrameSessionStateKeyProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionStateKey", typeof(String), typeof(MvxSuspensionManager), null);
+
         private DependencyProperty MvxFrameSessionStateProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionState", typeof(Dictionary<String, Object>), typeof(MvxSuspensionManager), null);
+
         private List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
 
         /// <summary>

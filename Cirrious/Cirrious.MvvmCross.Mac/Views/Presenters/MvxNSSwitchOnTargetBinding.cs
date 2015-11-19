@@ -2,14 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
-using MonoMac.AppKit;
-using MonoMac.Foundation;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
@@ -24,12 +22,12 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
-            {			
-				checkBox.Action = new MonoMac.ObjCRuntime.Selector ("checkBoxAction:");
+            {
+                checkBox.Action = new MonoMac.ObjCRuntime.Selector("checkBoxAction:");
             }
         }
 
-		[Export("checkBoxAction:")]
+        [Export("checkBoxAction:")]
         private void checkBoxAction()
         {
             var view = View;
@@ -51,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null)
                 {
-//                    view.ValueChanged -= HandleValueChanged;
+                    //                    view.ValueChanged -= HandleValueChanged;
                 }
             }
         }

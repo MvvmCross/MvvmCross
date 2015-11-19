@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 {
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
         public static readonly object LiteralNull = new object();
 
         private List<char> _terminatingCharacters;
- 
+
         protected override IEnumerable<char> TerminatingCharacters()
         {
             return _terminatingCharacters ??
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 
         private char[] OperatorCharacters()
         {
-            return new char[] {'>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%'};
+            return new char[] { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%' };
         }
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -64,16 +64,18 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
                 SkipWhitespace();
                 if (IsComplete)
                     throw new MvxException("Unterminated () while parsing combiner {0}", block);
-                    
+
                 switch (CurrentChar)
                 {
                     case ')':
                         MoveNext();
                         terminationFound = true;
                         break;
+
                     case ',':
                         MoveNext();
                         break;
+
                     default:
                         throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", CurrentChar, block);
                 }
@@ -96,22 +98,27 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
                     combinerName = "NotEqualTo";
                     moveFowards = 2;
                     break;
+
                 case ">=":
                     combinerName = "GreaterThanOrEqualTo";
                     moveFowards = 2;
                     break;
+
                 case "<=":
                     combinerName = "LessThanOrEqualTo";
                     moveFowards = 2;
                     break;
+
                 case "==":
                     combinerName = "EqualTo";
                     moveFowards = 2;
                     break;
+
                 case "&&":
                     combinerName = "And";
                     moveFowards = 2;
                     break;
+
                 case "||":
                     combinerName = "Or";
                     moveFowards = 2;
@@ -127,26 +134,32 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
                         combinerName = "GreaterThan";
                         moveFowards = 1;
                         break;
+
                     case '<':
                         combinerName = "LessThan";
                         moveFowards = 1;
                         break;
+
                     case '+':
                         combinerName = "Add";
                         moveFowards = 1;
                         break;
+
                     case '-':
                         combinerName = "Subtract";
                         moveFowards = 1;
                         break;
+
                     case '*':
                         combinerName = "Multiply";
                         moveFowards = 1;
                         break;
+
                     case '/':
                         combinerName = "Divide";
                         moveFowards = 1;
                         break;
+
                     case '%':
                         combinerName = "Modulus";
                         moveFowards = 1;
@@ -161,16 +174,16 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 
             // now create the operator Combiner
             var child = new MvxSerializableBindingDescription()
-                {
-                    Path = description.Path,
-                    Literal = description.Literal,
-                    Sources = description.Sources,
-                    Function = description.Function,
-                    Converter = description.Converter,
-                    FallbackValue = description.FallbackValue,
-                    ConverterParameter = description.ConverterParameter,
-                    Mode = description.Mode
-                };
+            {
+                Path = description.Path,
+                Literal = description.Literal,
+                Sources = description.Sources,
+                Function = description.Function,
+                Converter = description.Converter,
+                FallbackValue = description.FallbackValue,
+                ConverterParameter = description.ConverterParameter,
+                Mode = description.Mode
+            };
 
             description.Converter = null;
             description.ConverterParameter = null;

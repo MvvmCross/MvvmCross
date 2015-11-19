@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Console.Views
 {
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Console.Views
                 {
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
-                var view = (IMvxConsoleView) Activator.CreateInstance(viewType);
+                var view = (IMvxConsoleView)Activator.CreateInstance(viewType);
                 var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
                 IMvxBundle savedState = null;
                 var viewModel = viewModelLoader.LoadViewModel(request, savedState);

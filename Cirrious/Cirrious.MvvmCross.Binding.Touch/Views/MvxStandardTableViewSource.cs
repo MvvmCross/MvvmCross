@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Foundation;
+using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -54,7 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        public MvxStandardTableViewSource(IntPtr handle) 
+        public MvxStandardTableViewSource(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("MvxStandardTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");

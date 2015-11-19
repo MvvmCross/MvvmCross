@@ -2,12 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
@@ -18,7 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected UITextField TextField => Target as UITextField;
 
-        public override Type TargetType => typeof (string);
+        public override Type TargetType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -55,7 +54,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (TextField != null && _subscribed) {
+            if (TextField != null && _subscribed)
+            {
                 TextField.EditingDidEnd -= HandleLostFocus;
                 _subscribed = false;
             }

@@ -2,24 +2,22 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Test.Core;
-using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Cirrious.MvvmCross.Binding.Test.Binders
 {
@@ -31,9 +29,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             public int SubscriptionCount;
 
             private event PropertyChangedEventHandler _PropertyChanged;
+
             public event PropertyChangedEventHandler PropertyChanged
             {
-                add 
+                add
                 {
                     _PropertyChanged += value;
                     SubscriptionCount++;
@@ -55,6 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         public class MySource : BaseSource
         {
             private string _property1;
+
             public string Property1
             {
                 get { return _property1; }
@@ -62,6 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private string _property2;
+
             public string Property2
             {
                 get { return _property2; }
@@ -69,6 +70,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private int _intProperty1;
+
             public int IntProperty1
             {
                 get { return _intProperty1; }
@@ -76,6 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private int _intProperty2;
+
             public int IntProperty2
             {
                 get { return _intProperty2; }
@@ -83,6 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private double _doubleProperty1;
+
             public double DoubleProperty1
             {
                 get { return _doubleProperty1; }
@@ -90,6 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private double _doubleProperty2;
+
             public double DoubleProperty2
             {
                 get { return _doubleProperty2; }
@@ -97,6 +102,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private ObservableCollection<string> _collection = new ObservableCollection<string>();
+
             public ObservableCollection<string> Collection
             {
                 get { return _collection; }
@@ -104,16 +110,18 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private MySubSource _subSource;
+
             public MySubSource SubSource
             {
                 get { return _subSource; }
                 set { _subSource = value; RaisePropertyChanged(); }
-            }            
+            }
         }
 
         public class MySubSource : BaseSource
         {
             private string _property1;
+
             public string SubProperty1
             {
                 get { return _property1; }
@@ -121,6 +129,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             }
 
             private string _property2;
+
             public string SubProperty2
             {
                 get { return _property2; }
@@ -153,20 +162,20 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
-                {
-                    SourcePropertyPath = "Property1"
-                };
+            {
+                SourcePropertyPath = "Property1"
+            };
 
             var source = new MySource()
-                {
-                    Property1 = "Test 42"
-                };
+            {
+                Property1 = "Test 42"
+            };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
 
             sourceStep.DataContext = source;
 
-            Assert.AreEqual(typeof (string), sourceStep.SourceType);
+            Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
             object value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
@@ -281,7 +290,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             var source = new MySource()
             {
-                SubSource = new MySubSource() {  SubProperty2 = "Hello World" }
+                SubSource = new MySubSource() { SubProperty2 = "Hello World" }
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -474,7 +483,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             Assert.AreEqual("Changed to 17", value);
 
             var oldSubSource = source.SubSource;
-            source.SubSource = new MySubSource() { SubProperty1 = "New Sub object"};
+            source.SubSource = new MySubSource() { SubProperty1 = "New Sub object" };
 
             Assert.AreEqual(2, changes.Count);
             Assert.AreEqual("New Sub object", changes[1]);
@@ -697,7 +706,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             value = sourceStep.GetValue();
             Assert.AreEqual("12.11It was missing", value);
 
-            source.SubSource = new MySubSource() {SubProperty1 = "Hello"};
+            source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
             Assert.AreEqual("12.11Hello", changes[2]);

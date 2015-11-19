@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {
@@ -73,7 +73,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         {
             if (expression == null)
                 throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", nameof(expression));
-            var memberExpression = 
+            var memberExpression =
                 (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ").");
         }

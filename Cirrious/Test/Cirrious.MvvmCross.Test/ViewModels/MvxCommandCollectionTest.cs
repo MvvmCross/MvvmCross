@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.ComponentModel;
-using System.Windows.Input;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Test.ViewModels
 {

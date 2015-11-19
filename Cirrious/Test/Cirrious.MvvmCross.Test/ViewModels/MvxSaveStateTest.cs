@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Test.ViewModels
 {
@@ -44,7 +44,6 @@ namespace Cirrious.MvvmCross.Test.ViewModels
                     TheString2 = null
                 }
             };
-
 
             var bundle = viewModel.SaveStateBundle();
 

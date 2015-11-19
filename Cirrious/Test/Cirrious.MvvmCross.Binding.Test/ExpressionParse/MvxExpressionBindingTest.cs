@@ -2,13 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
@@ -18,6 +14,10 @@ using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
 {
@@ -92,13 +92,13 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestLongExpression()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                        {
-                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
-                        },
-                    TargetName = "Text"
-                };
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                },
+                TargetName = "Text"
+            };
             Action<MockBindingContext> test = mock =>
                 mock
                     .CreateBinding(mock.Target)
@@ -134,17 +134,17 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestExtraParameters()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                        {
-                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
-                            ConverterParameter = "My Converter Parameter",
-                            Converter = new SampleValueConverter(),
-                            FallbackValue = 12.3445,
-                        },
-                    TargetName = "Text",
-                    Mode = MvxBindingMode.TwoWay
-                };
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    ConverterParameter = "My Converter Parameter",
+                    Converter = new SampleValueConverter(),
+                    FallbackValue = 12.3445,
+                },
+                TargetName = "Text",
+                Mode = MvxBindingMode.TwoWay
+            };
 
             Action<MockBindingContext> test = mock =>
                 mock
@@ -163,17 +163,17 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestExtraParametersNamedConverter()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                        {
-                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
-                            ConverterParameter = "My Converter Parameter",
-                            Converter = new SampleValueConverter(),
-                            FallbackValue = 12.3445,
-                        },
-                    TargetName = "Text",
-                    Mode = MvxBindingMode.TwoWay
-                };
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    ConverterParameter = "My Converter Parameter",
+                    Converter = new SampleValueConverter(),
+                    FallbackValue = 12.3445,
+                },
+                TargetName = "Text",
+                Mode = MvxBindingMode.TwoWay
+            };
 
             Action<MockBindingContext> test = mock =>
                 mock
@@ -184,7 +184,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .WithFallback(12.3445)
                     .TwoWay()
                     .Apply();
-                                               
+
             DoTest(test, expectedDesc);
         }
 
@@ -192,17 +192,17 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestExtraParametersUnknownConverter()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                        {
-                            SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
-                            ConverterParameter = "My Converter Parameter",
-                            Converter = null,
-                            FallbackValue = 12.3445,
-                        },
-                    TargetName = "Text",
-                    Mode = MvxBindingMode.TwoWay
-                };
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    ConverterParameter = "My Converter Parameter",
+                    Converter = null,
+                    FallbackValue = 12.3445,
+                },
+                TargetName = "Text",
+                Mode = MvxBindingMode.TwoWay
+            };
 
             Action<MockBindingContext> test = mock =>
                 mock
@@ -221,17 +221,17 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestExtraParametersStringConverter()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                TargetName = "Text",
+                Source = new MvxPathSourceStepDescription()
                 {
-                    TargetName = "Text",
-                    Source = new MvxPathSourceStepDescription()
-                    {
-                        SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
-                        ConverterParameter = "My Converter Parameter",
-                        Converter = new SampleValueConverter(),
-                        FallbackValue = 12.3445,
-                    },
-                    Mode = MvxBindingMode.TwoWay
-                };
+                    SourcePropertyPath = "MyCollection.GrandParent.MyChild.MyChild.Value",
+                    ConverterParameter = "My Converter Parameter",
+                    Converter = new SampleValueConverter(),
+                    FallbackValue = 12.3445,
+                },
+                Mode = MvxBindingMode.TwoWay
+            };
 
             Action<MockBindingContext> test = mock =>
                 mock
@@ -250,13 +250,13 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestNumberIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                    {
-                        SourcePropertyPath = "MyCollection.MyList[0].Value",
-                    },
-                    TargetName = "Text"
-                };
+                    SourcePropertyPath = "MyCollection.MyList[0].Value",
+                },
+                TargetName = "Text"
+            };
             Action<MockBindingContext> test = mock =>
                 mock
                     .CreateBinding(mock.Target)
@@ -271,13 +271,13 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         public void TestStringIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                    {
-                        SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
-                    },
-                    TargetName = "Text"
-                };
+                    SourcePropertyPath = "MyCollection.MyLookup[\"Fred\"].Value",
+                },
+                TargetName = "Text"
+            };
             Action<MockBindingContext> test = mock =>
                 mock
                     .CreateBinding(mock.Target)
@@ -361,7 +361,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
         }
 
         private void DoTest(
-            Action<MockBindingContext> action, 
+            Action<MockBindingContext> action,
             Func<MockBindingContext, object> findTargetObjectFunc,
             MvxBindingDescription expectedDescription)
         {
@@ -385,11 +385,11 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                               throw new Exception("Unexpected description count");
 
                           callbacksSeen.Add(new Callback
-                              {
-                                  Source = source,
-                                  Target = target,
-                                  BindingDescription = descriptions.First()
-                              });
+                          {
+                              Source = source,
+                              Target = target,
+                              BindingDescription = descriptions.First()
+                          });
                       });
             Ioc.RegisterSingleton(binder.Object);
 
@@ -400,10 +400,10 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             Ioc.RegisterSingleton<IMvxValueConverterLookup>(converterLookup);
 
             var testTarget = new MockBindingContext
-                {
-                    Target = new TestTarget(),
-                    BindingContext = bindingContext.Object
-                };
+            {
+                Target = new TestTarget(),
+                BindingContext = bindingContext.Object
+            };
 
             action(testTarget);
 

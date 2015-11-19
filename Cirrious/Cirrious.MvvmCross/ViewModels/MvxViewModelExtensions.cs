@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -32,10 +32,10 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             var parameters = methodInfo.GetParameters().ToArray();
             if (parameters.Count() == 1
-                && parameters[0].ParameterType == typeof (IMvxBundle))
+                && parameters[0].ParameterType == typeof(IMvxBundle))
             {
                 // this method is the 'normal' interface method
-                methodInfo.Invoke(viewModel, new object[] {bundle});
+                methodInfo.Invoke(viewModel, new object[] { bundle });
                 return;
             }
 
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 // call method using typed object
                 var value = bundle.Read(parameters[0].ParameterType);
-                methodInfo.Invoke(viewModel, new[] {value});
+                methodInfo.Invoke(viewModel, new[] { value });
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var methods = viewModel.GetType()
                                    .GetMethods()
                                    .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof (void))
+                                   .Where(m => m.ReturnType != typeof(void))
                                    .Where(m => !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)

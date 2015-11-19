@@ -2,22 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
 
 #if __UNIFIED__
 using AppKit;
 #else
-using MonoMac.AppKit;
 #endif
-
 
 namespace Cirrious.MvvmCross.Binding.Mac.Target
 {
-	public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
+    public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
     {
         protected NSButton Button
         {
@@ -40,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         public override System.Type TargetType
         {
-            get { return typeof (string); }
+            get { return typeof(string); }
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -48,8 +45,8 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             var button = Button;
             if (button == null)
                 return;
-		
-			button.Title = value as string;
+
+            button.Title = value as string;
         }
     }
 }

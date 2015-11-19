@@ -1,10 +1,10 @@
-﻿using System;
-using Cirrious.CrossCore;
+﻿using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
 {
@@ -140,7 +140,6 @@ namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
             Assert.AreEqual(true, typeof(bool?).MakeSafeValue(1.0));
             Assert.AreEqual(true, typeof(bool?).MakeSafeValue("Dos"));
             Assert.AreEqual(true, typeof(bool?).MakeSafeValue("dOs"));
-
         }
 
         public class FooBase

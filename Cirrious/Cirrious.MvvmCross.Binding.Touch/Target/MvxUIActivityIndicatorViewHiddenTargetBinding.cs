@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
@@ -12,7 +12,7 @@ using UIKit;
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     /// <summary>
-    /// Custom binding for UIActivityIndicator hidden. 
+    /// Custom binding for UIActivityIndicator hidden.
     /// This binding will ensure the indicator animates when shown and stops when hidden
     /// </summary>
     public class MvxUIActivityIndicatorViewHiddenTargetBinding : MvxConvertingTargetBinding

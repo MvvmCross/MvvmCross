@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
@@ -45,18 +45,22 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
                     var sourceName = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     description.Path = sourceName;
                     break;
+
                 case "Converter":
                     ParseEquals(block);
                     description.Converter = ReadValidCSharpName();
                     break;
+
                 case "Key":
                     ParseEquals(block);
                     description.ConverterParameter = ReadValue();
                     break;
+
                 case "FallbackValue":
                     ParseEquals(block);
                     description.FallbackValue = ReadValue();
                     break;
+
                 default:
                     if (description.ConverterParameter != null)
                     {
@@ -90,11 +94,11 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
         protected override MvxSerializableBindingDescription ParseBindingDescription()
         {
             var description = new MvxSerializableBindingDescription
-                {
-                    Converter = DefaultConverterName,
-                    Path = DefaultTextSourceName,
-                    Mode = DefaultBindingMode
-                };
+            {
+                Converter = DefaultConverterName,
+                Path = DefaultTextSourceName,
+                Mode = DefaultBindingMode
+            };
 
             SkipWhitespace();
 
@@ -111,8 +115,10 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
                     case ',':
                         MoveNext();
                         break;
+
                     case ';':
                         return description;
+
                     default:
                         throw new MvxException(
                             "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",

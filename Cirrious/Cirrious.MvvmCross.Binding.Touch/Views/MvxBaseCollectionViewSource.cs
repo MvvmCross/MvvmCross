@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Foundation;
+using System;
+using System.Windows.Input;
 using UIKit;
-using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
 {
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
                                                                   object item)
         {
-            return (UICollectionViewCell) collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
+            return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
         }
 
         protected abstract object GetItemAt(NSIndexPath indexPath);
@@ -72,6 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         }
 
         private object _selectedItem;
+
         public object SelectedItem
         {
             get { return _selectedItem; }

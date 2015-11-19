@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -32,9 +32,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         {
             base.FillTargetFactories(registry);
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(
-                                         typeof (MvxEntryElementValueBinding), typeof (EntryElement), "Value"));
+                                         typeof(MvxEntryElementValueBinding), typeof(EntryElement), "Value"));
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(
-                                         typeof (MvxValueElementValueBinding), typeof (ValueElement), "Value"));
+                                         typeof(MvxValueElementValueBinding), typeof(ValueElement), "Value"));
             /*
              * these methods no longer used - https://github.com/slodge/MvvmCross/issues/26
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxValueElementValueBinding<float>), typeof(ValueElement<float>), "Value"));
@@ -42,8 +42,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxValueElementValueBinding<bool>), typeof(ValueElement<bool>), "Value"));
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxValueElementValueBinding<UIImage>), typeof(ValueElement<UIImage>), "Value"));
              */
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof (MvxRadioRootElementBinding),
-                                                                                   typeof (RootElement), "RadioSelected"));
+            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(typeof(MvxRadioRootElementBinding),
+                                                                                   typeof(RootElement), "RadioSelected"));
         }
 
         protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)

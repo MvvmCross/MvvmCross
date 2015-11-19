@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
@@ -47,6 +47,7 @@ namespace Cirrious.MvvmCross
         }
 
         private IMvxStringToTypeParser _parser;
+
         public IMvxStringToTypeParser Parser
         {
             get
@@ -57,6 +58,7 @@ namespace Cirrious.MvvmCross
         }
 
         private IMvxSettings _settings;
+
         public IMvxSettings Settings
         {
             get

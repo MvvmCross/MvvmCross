@@ -2,43 +2,49 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+
 #if WINDOWS_PHONE || WINDOWS_WPF
+
 using System.Windows;
+
 #endif
+
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.BindingEx.WindowsShared;
+
 #if NETFX_CORE
+
 using Windows.UI.Xaml;
+
 #endif
 
 // ReSharper disable CheckNamespace
 namespace mvx
 // ReSharper restore CheckNamespace
 {
-// ReSharper disable InconsistentNaming
+    // ReSharper disable InconsistentNaming
     public static class Bi
-// ReSharper restore InconsistentNaming
+    // ReSharper restore InconsistentNaming
     {
-        static Bi ()
+        static Bi()
         {
             MvxDesignTimeChecker.Check();
         }
 
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         public static readonly DependencyProperty ndProperty =
-// ReSharper restore InconsistentNaming
+            // ReSharper restore InconsistentNaming
             DependencyProperty.RegisterAttached("nd",
-                                                typeof (string),
-                                                typeof (Bi),
+                                                typeof(string),
+                                                typeof(Bi),
                                                 new PropertyMetadata(null, CallBackWhenndIsChanged));
 
         public static string Getnd(DependencyObject obj)
@@ -54,6 +60,7 @@ namespace mvx
         }
 
         private static IMvxBindingCreator _bindingCreator;
+
         private static IMvxBindingCreator BindingCreator
         {
             get
@@ -78,7 +85,7 @@ namespace mvx
             object sender,
             DependencyPropertyChangedEventArgs args)
         {
-            // bindingCreator may be null in the designer currently 
+            // bindingCreator may be null in the designer currently
             var bindingCreator = BindingCreator;
             if (bindingCreator == null)
                 return;

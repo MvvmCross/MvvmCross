@@ -2,13 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+
 #if WINDOWS_PHONE || WINDOWS_WPF
+
 using System.Windows;
+
 #endif
+
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
@@ -19,8 +23,11 @@ using Cirrious.MvvmCross.BindingEx.WindowsPhone;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding;
+
 #if NETFX_CORE
+
 using Windows.UI.Xaml;
+
 #endif
 
 // ReSharper disable CheckNamespace
@@ -56,9 +63,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
                 case BindingType.Windows:
                     // no need for MvvmCross binding factories - so don't create them
                     break;
+
                 case BindingType.MvvmCross:
                     base.RegisterBindingFactories();
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -70,8 +79,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             {
                 case BindingType.Windows:
                     return base.CreateTargetBindingRegistry();
+
                 case BindingType.MvvmCross:
                     return new MvxWindowsTargetBindingFactoryRegistry();
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -89,8 +100,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             {
                 case BindingType.Windows:
                     return new MvxWindowsBindingCreator();
+
                 case BindingType.MvvmCross:
                     return new MvxMvvmCrossBindingCreator();
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

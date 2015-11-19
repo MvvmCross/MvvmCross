@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Windows.Input;
@@ -59,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
         }
     }
 
-    public class MvxPanGestureRecognizerBehaviour 
+    public class MvxPanGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior
     {
         public void Apply(UIView view, uint minTouches = 1, uint maxTouches = 1)
@@ -67,7 +67,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
             var tap = new UIPanGestureRecognizer(FireCommandWithNull)
                 {
                     MaximumNumberOfTouches = maxTouches,
-                    MinimumNumberOfTouches = minTouches                   
+                    MinimumNumberOfTouches = minTouches
                 };
 
             view.AddGestureRecognizer(tap);
