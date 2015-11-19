@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             return GetEnumerator();
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToSectionDescription();
         }

@@ -143,7 +143,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private static long _nextGeneratedViewId = 1;
 
-        static private int GenerateViewId()
+        private static int GenerateViewId()
         {
             for (;;)
             {

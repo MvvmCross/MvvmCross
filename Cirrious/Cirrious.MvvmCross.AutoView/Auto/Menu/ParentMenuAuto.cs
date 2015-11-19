@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Children = new List<MenuAuto>();
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToParentMenuDescription();
         }
