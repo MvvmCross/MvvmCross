@@ -11,15 +11,11 @@ namespace Cirrious.CrossCore.Core
 {
     public abstract class MvxMainThreadDispatchingObject
     {
-        protected IMvxMainThreadDispatcher Dispatcher
-        {
-            get { return MvxMainThreadDispatcher.Instance; }
-        }
+        protected IMvxMainThreadDispatcher Dispatcher => MvxMainThreadDispatcher.Instance;
 
         protected void InvokeOnMainThread(Action action)
         {
-            if (Dispatcher != null)
-                Dispatcher.RequestMainThreadAction(action);
+            Dispatcher?.RequestMainThreadAction(action);
         }
     }
 }
