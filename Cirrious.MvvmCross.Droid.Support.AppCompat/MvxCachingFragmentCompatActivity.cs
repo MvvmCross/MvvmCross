@@ -21,55 +21,18 @@ using Cirrious.MvvmCross.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.MvvmCross.Droid.Support.Fragging.Caching;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
 	[Register("cirrious.mvvmcross.droid.support.appcompat.MvxCachingFragmentCompatActivity")]
-	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
+	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity
 	{
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
-        private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
-
-        /// <summary>
-        /// Enable OnFragmentPopped callback. This callback might represent a performance hit.
-        /// </summary>
-        protected bool EnableOnFragmentPoppedCallback { get; set; }
-
-        /// <summary>
-        ///     Register a Fragment to be shown, this should usually be done in OnCreate
-        /// </summary>
-        /// <typeparam name="TFragment">Fragment Type</typeparam>
-        /// <typeparam name="TViewModel">ViewModel Type</typeparam>
-        /// <param name="tag">The tag of the Fragment, it is used to register it with the FragmentManager</param>
-        public void RegisterFragment<TFragment, TViewModel>(string tag)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            var fragInfo = CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
-
-            _lookup.Add(tag, fragInfo);
-        }
-
-	    public void RegisterFragment(string tag, Type fragmentType, Type viewModelType)
-        {
-            var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
-            _lookup.Add(tag, fragInfo);
-        }
-
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
-        {
-            if ( !typeof(IMvxFragmentView).IsAssignableFrom(fragmentType) )
-                throw new InvalidOperationException(string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-
-            if ( !typeof(IMvxViewModel).IsAssignableFrom(viewModelType) )
-                throw new InvalidOperationException(string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
-
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
-        }
-
+        
         protected MvxCachingFragmentCompatActivity()
         {
-            EnableOnFragmentPoppedCallback = true; //Default
+            FragmentCacheConfiguration = new FragmentCacheConfiguration();
         }
 
         protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
@@ -77,6 +40,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
+            FragmentCacheConfiguration = new FragmentCacheConfiguration();
         }
 
         protected override void OnPostCreate(Bundle savedInstanceState)
@@ -192,7 +156,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         {
             base.OnSaveInstanceState(outState);
             IMvxJsonConverter ser;
-            if (_lookup.Any() && Mvx.TryResolve(out ser))
+            if (FragmentCacheConfiguration.HasAnyFragmentsRegisteredToCache && Mvx.TryResolve(out ser))
             {
                 var typesForKeys = CreateFragmentTypesDictionary(outState);
                 if (typesForKeys == null)
@@ -214,7 +178,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
-            _lookup.TryGetValue(tag, out fragInfo);
+            FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
@@ -269,7 +233,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             {
                 SupportFragmentManager.PopBackStackImmediate();
 
-                if (EnableOnFragmentPoppedCallback)
+                if (FragmentCacheConfiguration.EnableOnFragmentPoppedCallback)
                 {
                     //NOTE(vvolkgang) this is returning ALL the frags. Should we return only the visible ones?
                     var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
@@ -352,13 +316,15 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
             IMvxCachedFragmentInfo fragInfo;
-            _lookup.TryGetValue(tag, out fragInfo);
+            FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
             return fragInfo;
         }
-    }
+
+	    public FragmentCacheConfiguration FragmentCacheConfiguration { get; }
+	}
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
         : MvxCachingFragmentCompatActivity
