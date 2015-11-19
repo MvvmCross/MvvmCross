@@ -40,8 +40,8 @@ namespace Cirrious.CrossCore.IoC
         private readonly IMvxIocOptions _options;
         private readonly IMvxPropertyInjector _propertyInjector;
 
-        protected object LockObject { get { return _lockObject; } }
-        protected IMvxIocOptions Options { get { return _options; } }
+        protected object LockObject => _lockObject;
+        protected IMvxIocOptions Options => _options;
 
         protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
@@ -78,7 +78,7 @@ namespace Cirrious.CrossCore.IoC
                 return _parent.IoCConstruct(_type);
             }
 
-            public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
+            public ResolverType ResolveType => ResolverType.DynamicPerResolve;
         }
 
         public class FuncConstructingResolver : IResolver
@@ -95,7 +95,7 @@ namespace Cirrious.CrossCore.IoC
                 return _constructor();
             }
 
-            public ResolverType ResolveType { get { return ResolverType.DynamicPerResolve; } }
+            public ResolverType ResolveType => ResolverType.DynamicPerResolve;
         }
 
         public class SingletonResolver : IResolver
@@ -112,7 +112,7 @@ namespace Cirrious.CrossCore.IoC
                 return _theObject;
             }
 
-            public ResolverType ResolveType { get { return ResolverType.Singleton;} }
+            public ResolverType ResolveType => ResolverType.Singleton;
         }
 
         public class ConstructingSingletonResolver : IResolver
@@ -140,7 +140,7 @@ namespace Cirrious.CrossCore.IoC
                 return _theObject;
             }
 
-            public ResolverType ResolveType { get { return ResolverType.Singleton; } }
+            public ResolverType ResolveType => ResolverType.Singleton;
         }
 
         public bool CanResolve<T>()
