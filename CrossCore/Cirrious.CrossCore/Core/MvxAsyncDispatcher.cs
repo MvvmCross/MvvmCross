@@ -16,7 +16,7 @@ namespace Cirrious.CrossCore.Core
     {
         public static void BeginAsync(Action action)
         {
-            Task.Run(() => action());
+            Task.Run(action);
         }
 
         public static void BeginAsync(Action<object> action, object state)

@@ -44,8 +44,7 @@ namespace Cirrious.CrossCore.Core
                     Monitor.Exit(lockObject);
                 }
 
-                if (whenComplete != null)
-                    whenComplete();
+                whenComplete?.Invoke();
             }
             else
             {
@@ -56,8 +55,7 @@ namespace Cirrious.CrossCore.Core
                             action();
                         }
 
-                        if (whenComplete != null)
-                            whenComplete();
+                        whenComplete?.Invoke();
                     });
             }
         }
