@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
             {
                 var handler = _PropertyChanged;
-                if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

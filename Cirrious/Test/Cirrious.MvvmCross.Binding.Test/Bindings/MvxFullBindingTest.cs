@@ -44,8 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public void FireSourceChanged()
             {
                 var handler = Changed;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler Changed;
@@ -91,8 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public void FireValueChanged(MvxTargetChangedEventArgs args)
             {
                 var handler = ValueChanged;
-                if (handler != null)
-                    handler(this, args);
+                handler?.Invoke(this, args);
             }
 
             public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;

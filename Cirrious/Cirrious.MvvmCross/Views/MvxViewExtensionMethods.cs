@@ -65,15 +65,9 @@ namespace Cirrious.MvvmCross.Views
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
         {
-            if (view == null)
-                return null;
+            var propertyInfo = view?.GetType().GetProperty("ViewModel");
 
-            var propertyInfo = view.GetType().GetProperty("ViewModel");
-
-            if (propertyInfo == null)
-                return null;
-
-            return (IMvxViewModel)propertyInfo.GetGetMethod().Invoke(view, new object[] { });
+            return (IMvxViewModel) propertyInfo?.GetGetMethod().Invoke(view, new object[] { });
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)

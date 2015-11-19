@@ -364,8 +364,7 @@ namespace CrossUI.Touch.Dialog
                     var section = Root.Sections[indexPath.Section];
                     var element = section.Elements[indexPath.Row];
                     var colorized = element as IColorizeBackground;
-                    if (colorized != null)
-                        colorized.WillDisplay(tableView, cell, indexPath);
+                    colorized?.WillDisplay(tableView, cell, indexPath);
                 }
             }
 

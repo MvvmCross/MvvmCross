@@ -19,9 +19,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             return
-                view.CreateViewControllerFor<TTargetViewModel>(parameterObject == null
-                                                                   ? null
-                                                                   : parameterObject.ToSimplePropertyDictionary());
+                view.CreateViewControllerFor<TTargetViewModel>(parameterObject?.ToSimplePropertyDictionary());
         }
 
 #warning TODO - could this move down to IMvxView level?

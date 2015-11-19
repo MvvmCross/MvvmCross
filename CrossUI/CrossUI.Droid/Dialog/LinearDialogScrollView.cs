@@ -52,7 +52,7 @@ namespace CrossUI.Droid.Dialog
 
         public RootElement Root
         {
-            get { return _dialogAdapter == null ? null : _dialogAdapter.Root; }
+            get { return _dialogAdapter?.Root; }
             set
             {
                 value.ValueChanged -= HandleValueChangedEvent;
@@ -243,8 +243,7 @@ namespace CrossUI.Droid.Dialog
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(sender, args);
+            handler?.Invoke(sender, args);
         }
 
         public void ReloadData()
