@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {
-        protected UIView View => (UIView) Touch.Target;
+        protected UIView View => (UIView) Target;
 
         public MvxUIViewVisibilityTargetBinding(UIView target)
             : base(target)

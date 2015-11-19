@@ -15,7 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxRatingBarRatingTargetBinding : MvxAndroidTargetBinding
     {
-        protected RatingBar RatingBar => (RatingBar)Droid.Target;
+        protected RatingBar RatingBar => (RatingBar)Target;
 
         public MvxRatingBarRatingTargetBinding(RatingBar target)
             : base(target)

@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         private ICommand _command;
 
-        protected UITextField View => Touch.Target as UITextField;
+        protected UITextField View => Target as UITextField;
 
         public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
             : base(target)

@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         private bool _subscribed;
 
-        protected EditText TextField => Droid.Target as EditText;
+        protected EditText TextField => Target as EditText;
 
         public override Type TargetType => typeof (string);
 
