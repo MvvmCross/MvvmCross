@@ -72,7 +72,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public static string GetPropertyText<T>(this Expression<Func<T>> expression)
         {
             if (expression == null)
-                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
+                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", nameof(expression));
             var memberExpression = 
                 (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ").");

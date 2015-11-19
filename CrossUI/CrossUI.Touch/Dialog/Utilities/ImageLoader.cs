@@ -218,7 +218,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         private static void QueueRequest(Uri uri, string target, IImageUpdated notify)
         {
             if (notify == null)
-                throw new ArgumentNullException("notify");
+                throw new ArgumentNullException(nameof(notify));
 
             lock (requestQueue)
             {

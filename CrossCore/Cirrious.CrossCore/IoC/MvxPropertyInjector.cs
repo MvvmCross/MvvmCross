@@ -23,7 +23,7 @@ namespace Cirrious.CrossCore.IoC
                 return;
 
             if (target == null)
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
 
             var injectableProperties = FindInjectableProperties(target.GetType(), options);
 

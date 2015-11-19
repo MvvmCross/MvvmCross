@@ -229,7 +229,7 @@ namespace CrossUI.Touch.Dialog
         public BindingContext(object callbacks, object o, string title)
         {
             if (o == null)
-                throw new ArgumentNullException("o");
+                throw new ArgumentNullException(nameof(o));
 
             mappings = new Dictionary<Element, MemberAndInstance>();
 

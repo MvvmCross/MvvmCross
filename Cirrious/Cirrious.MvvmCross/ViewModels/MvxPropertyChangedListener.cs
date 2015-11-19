@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
         public MvxPropertyChangedListener(INotifyPropertyChanged notificationObject)
         {
             if (notificationObject == null)
-                throw new ArgumentNullException("notificationObject");
+                throw new ArgumentNullException(nameof(notificationObject));
 
             _notificationObject = notificationObject;
             _token = _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);

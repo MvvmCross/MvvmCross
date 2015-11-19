@@ -21,10 +21,10 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
             if (eventSource == null)
-                throw new ArgumentException("eventSource should not be null", "eventSource");
+                throw new ArgumentException("eventSource should not be null", nameof(eventSource));
 
             if (!(eventSource is Fragment))
-                throw new ArgumentException("eventSource should be a Fragment", "eventSource");
+                throw new ArgumentException("eventSource should be a Fragment", nameof(eventSource));
 
             _eventSource = eventSource;
             _eventSource.DisposeCalled += HandleDisposeCalled;
