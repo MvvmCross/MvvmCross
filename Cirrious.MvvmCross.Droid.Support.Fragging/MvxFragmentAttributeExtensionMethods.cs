@@ -31,8 +31,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
         public static bool IsFragmentCacheable(this Type fragmentType)
         {
-            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+            if (!fragmentType.HasMvxFragmentAttribute())
+             return false;
 
+            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
             return mvxFragmentAttribute.IsCacheableFragment;
         }
     }

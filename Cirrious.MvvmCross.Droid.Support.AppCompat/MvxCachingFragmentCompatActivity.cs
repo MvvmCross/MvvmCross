@@ -260,7 +260,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 	        return currentFragments
 	            .Where(fragment => fragment != null)
                 // we are not interested in fragments which are not supposed to cache!
-                .Where(fragment => fragment.GetType().HasMvxFragmentAttribute());
+                .Where(fragment => fragment.GetType().IsFragmentCacheable());
 	    }
 
 	    protected IMvxCachedFragmentInfo GetLastFragmentInfo()
