@@ -129,7 +129,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
                     return BindingMode.TwoWay;
 
                 default:
-                    throw new ArgumentOutOfRangeException("mode");
+                    throw new ArgumentOutOfRangeException(nameof(mode));
             }
         }
     }

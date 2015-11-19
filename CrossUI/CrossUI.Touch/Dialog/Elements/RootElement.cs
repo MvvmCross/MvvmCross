@@ -493,7 +493,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public void Reload(Section section, UITableViewRowAnimation animation)
         {
             if (section == null)
-                throw new ArgumentNullException("section");
+                throw new ArgumentNullException(nameof(section));
             if (section.Parent == null || section.Parent != this)
                 throw new ArgumentException("Section is not attached to this root");
 
@@ -512,7 +512,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public void Reload(Element element, UITableViewRowAnimation animation)
         {
             if (element == null)
-                throw new ArgumentNullException("element");
+                throw new ArgumentNullException(nameof(element));
             var section = element.Parent as Section;
             if (section == null)
                 throw new ArgumentException("Element is not attached to this root");

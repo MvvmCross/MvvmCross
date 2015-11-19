@@ -49,7 +49,7 @@ namespace Cirrious.CrossCore.WeakSubscription
                 throw new ArgumentNullException();
 
             if (sourceEventInfo == null)
-                throw new ArgumentNullException("sourceEventInfo",
+                throw new ArgumentNullException(nameof(sourceEventInfo),
                                                 "missing source event info in MvxWeakEventSubscription");
 
             _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();

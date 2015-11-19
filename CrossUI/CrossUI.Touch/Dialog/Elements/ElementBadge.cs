@@ -46,7 +46,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Accessory = UITableViewCellAccessory.None;
 
             if (badgeImage == null)
-                throw new ArgumentNullException("badgeImage");
+                throw new ArgumentNullException(nameof(badgeImage));
 
             _image = badgeImage;
 

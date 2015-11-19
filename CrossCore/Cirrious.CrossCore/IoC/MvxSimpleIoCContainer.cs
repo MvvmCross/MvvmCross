@@ -415,7 +415,7 @@ namespace Cirrious.CrossCore.IoC
                 case ResolverType.Unknown:
                     throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
                 default:
-                    throw new ArgumentOutOfRangeException("resolver", "unknown resolveType of " + resolver.ResolveType);
+                    throw new ArgumentOutOfRangeException(nameof(resolver), "unknown resolveType of " + resolver.ResolveType);
             }
         }
 

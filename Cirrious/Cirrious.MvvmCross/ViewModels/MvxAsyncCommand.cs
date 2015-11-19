@@ -186,7 +186,7 @@ namespace Cirrious.MvvmCross.ViewModels
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             _execute = (cancellationToken) => execute();
             _canExecute = canExecute;
@@ -196,7 +196,7 @@ namespace Cirrious.MvvmCross.ViewModels
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             _execute = execute;
             _canExecute = canExecute;
@@ -234,7 +234,7 @@ namespace Cirrious.MvvmCross.ViewModels
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             _execute = (p, c) => execute(p);
             _canExecute = canExecute;
@@ -244,7 +244,7 @@ namespace Cirrious.MvvmCross.ViewModels
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
 
             _execute = execute;
             _canExecute = canExecute;

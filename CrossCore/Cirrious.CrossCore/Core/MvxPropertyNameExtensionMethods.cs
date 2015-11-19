@@ -25,36 +25,36 @@ namespace Cirrious.CrossCore.Core
         {
             if (expression == null)
             {
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             }
 
             var memberExpression = FindMemberExpression(expression);
 
             if (memberExpression == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             if (member.DeclaringType == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             if (target != null && !member.DeclaringType.IsInstanceOfType(target))
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
 
             if (member.GetGetMethod(true).IsStatic)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             return member.Name;
@@ -67,7 +67,7 @@ namespace Cirrious.CrossCore.Core
                 var unary = (UnaryExpression)expression.Body;
                 var member = unary.Operand as MemberExpression;
                 if (member == null)
-                    throw new ArgumentException(WrongUnaryExpressionMessage, "expression");
+                    throw new ArgumentException(WrongUnaryExpressionMessage, nameof(expression));
                 return member;
             }
 

@@ -29,7 +29,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public static UIImage FromResource(Assembly assembly, string name)
         {
             if (name == null)
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             assembly = Assembly.GetCallingAssembly();
             var stream = assembly.GetManifestResourceStream(name);
             if (stream == null)
