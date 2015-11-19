@@ -99,15 +99,8 @@ namespace CrossUI.Droid.Dialog
             return Adapter.IgnoreItemViewType;
         }
 
-
-        public override int ViewTypeCount
-        {
-            get
-            {
-                // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
-                return 1;
-            }
-        }
+        // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
+        public override int ViewTypeCount => 1;
 
         /// <summary>
         /// Return the Element for the flattened/dereferenced position value.

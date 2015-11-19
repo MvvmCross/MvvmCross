@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             }
 
             var actualProperty = target.GetType().FindActualProperty(targetName);
-            var actualPropertyType = actualProperty == null ? typeof (object) : actualProperty.PropertyType;
+            var actualPropertyType = actualProperty?.PropertyType ?? typeof (object);
 
             binding = new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
             return true;

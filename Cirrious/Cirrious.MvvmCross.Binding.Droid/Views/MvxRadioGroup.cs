@@ -54,18 +54,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
         {
             var li = (args.Child as MvxListItemView);
-            if (li != null)
+            var radioButton = li?.GetChildAt(0) as RadioButton;
+            if (radioButton != null)
             {
-                var radioButton = (li.GetChildAt(0) as RadioButton);
-                if (radioButton != null)
+                // radio buttons require an id so that they get un-checked correctly
+                if (radioButton.Id == Android.Views.View.NoId)
                 {
-                    // radio buttons require an id so that they get un-checked correctly
-                    if (radioButton.Id == Android.Views.View.NoId)
-                    {
-                        radioButton.Id = GenerateViewId();
-                    }
-                    radioButton.CheckedChange += OnRadioButtonCheckedChange;
+                    radioButton.Id = GenerateViewId();
                 }
+                radioButton.CheckedChange += OnRadioButtonCheckedChange;
             }
         }
 

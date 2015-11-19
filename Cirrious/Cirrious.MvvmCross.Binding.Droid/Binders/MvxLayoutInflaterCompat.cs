@@ -53,18 +53,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
                 LayoutInflater.IFactory f = layoutInflater.Factory;
                 var f2 = f as LayoutInflater.IFactory2;
-                if (f2 != null)
-                {
-                    // The merged factory is now set to Factory, but not Factory2 (pre-v21).
-                    // We will now try and force set the merged factory to mFactory2
-                    ForceSetFactory2(layoutInflater, f2);
-                }
-                else
-                {
-                    // Else, we will force set the original wrapped Factory2
-                    ForceSetFactory2(layoutInflater, factory2);
-                }
 
+                // The merged factory is now set to Factory, but not Factory2 (pre-v21).
+                // We will now try and force set the merged factory to mFactory2
+                ForceSetFactory2(layoutInflater, f2 ?? factory2);
             }
             else
             {
