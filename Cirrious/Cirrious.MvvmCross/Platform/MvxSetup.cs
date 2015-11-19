@@ -263,14 +263,14 @@ namespace Cirrious.MvvmCross.Platform
             return new[] { assembly };
         }
 
-        protected virtual Assembly[] GetViewModelAssemblies()
+        protected virtual IEnumerable<Assembly> GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().GetTypeInfo().Assembly;
             return new[] { assembly };
         }
 
-        protected virtual Assembly[] GetBootstrapOwningAssemblies()
+        protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
         {
             var assemblies = new List<Assembly>();
             assemblies.AddRange(GetViewAssemblies());

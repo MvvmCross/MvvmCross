@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
 {
     public interface IMvxWindowsAssemblyCache
     {

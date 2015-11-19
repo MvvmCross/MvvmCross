@@ -13,6 +13,6 @@ namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxTypeToTypeLookupBuilder
     {
-        IDictionary<Type, Type> Build(Assembly[] sourceAssemblies);
+        IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies);
     }
 }

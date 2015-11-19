@@ -214,7 +214,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
         };
 
-        protected virtual IList<string> ViewNamespaces => new List<string>
+        protected virtual IEnumerable<string> ViewNamespaces => new List<string>
         {
             "Android.Views",
             "Android.Widget",
@@ -222,7 +222,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             "Cirrious.MvvmCross.Binding.Droid.Views",
         };
 
-        protected virtual IList<Assembly> AndroidViewAssemblies => new List<Assembly>()
+        protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()
         {
             typeof (Android.Views.View).Assembly,
             typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,

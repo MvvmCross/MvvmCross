@@ -15,6 +15,7 @@ using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.BindingEx.WindowsPhone;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
 using Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding;

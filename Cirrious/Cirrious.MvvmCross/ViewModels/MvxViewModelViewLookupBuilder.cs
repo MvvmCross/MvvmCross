@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder
     {
-        public virtual IDictionary<Type, Type> Build(Assembly[] sourceAssemblies)
+        public virtual IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies)
         {
             var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 

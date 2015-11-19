@@ -18,7 +18,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UITableViewCellStyle Style { get; set; }
 
-        public OwnerDrawnElement(UITableViewCellStyle style, string cellIdentifier)
+        protected OwnerDrawnElement(UITableViewCellStyle style, string cellIdentifier)
             : base(null)
         {
             this.CellReuseIdentifier = cellIdentifier;

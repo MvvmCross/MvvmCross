@@ -84,8 +84,7 @@ namespace CrossUI.Touch.Dialog.Utilities
             UIColor background = Enabled ? pressed ? HighlightedColor : NormalColor : DisabledColor;
             nfloat alpha = 1;
 
-            CGPath container;
-            container = GraphicsUtil.MakeRoundedRectPath(bounds, 14);
+            CGPath container = GraphicsUtil.MakeRoundedRectPath(bounds, 14);
             context.AddPath(container);
             context.Clip();
 

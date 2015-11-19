@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Droid.Fragging.Fragments
+namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
 #warning ListFragment not yet really worked out...
     /*
