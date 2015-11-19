@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             Bundle bundle = null;
@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();

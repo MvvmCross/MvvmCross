@@ -9,7 +9,23 @@ using System;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class MvxCacheableFragmentAttribute : Attribute
     {
+        public MvxCacheableFragmentAttribute()
+        {
+            
+        }
+
+        /// <summary>
+        /// That shall be used only if you are using non generic fragments.
+        /// </summary>
+        /// <param name="viewModelType"></param>
+        public MvxCacheableFragmentAttribute(Type viewModelType)
+        {
+            ViewModelType = viewModelType;
+        }
+
+        internal Type ViewModelType { get; set; }
     }
 }
