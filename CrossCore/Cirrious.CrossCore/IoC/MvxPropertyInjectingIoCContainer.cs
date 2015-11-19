@@ -6,8 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {

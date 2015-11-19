@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Cirrious.CrossCore.Core

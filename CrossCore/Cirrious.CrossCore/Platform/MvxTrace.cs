@@ -7,7 +7,6 @@
 
 using System;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.Platform

@@ -392,7 +392,7 @@ namespace Cirrious.CrossCore.Parse
                 double doubleResult;
                 if (double.TryParse(numberText,
                                     NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
-                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    CultureInfo.InvariantCulture,
                                     out doubleResult))
                     return doubleResult;
 
@@ -404,7 +404,7 @@ namespace Cirrious.CrossCore.Parse
                 Int64 intResult;
                 if (Int64.TryParse(numberText,
                                    NumberStyles.AllowLeadingSign,
-                                   System.Globalization.CultureInfo.InvariantCulture,
+                                   CultureInfo.InvariantCulture,
                                    out intResult))
                     return intResult;
 
