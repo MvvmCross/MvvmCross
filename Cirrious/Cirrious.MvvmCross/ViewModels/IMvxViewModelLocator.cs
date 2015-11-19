@@ -12,5 +12,6 @@ namespace Cirrious.MvvmCross.ViewModels
     public interface IMvxViewModelLocator
     {
         IMvxViewModel Load(Type viewModelType, IMvxBundle parameterValues, IMvxBundle savedState);
+        IMvxViewModel Reload(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState);
     }
 }

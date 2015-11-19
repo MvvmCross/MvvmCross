@@ -131,6 +131,10 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
 			registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
+            registry.RegisterCustomBindingFactory<SearchView>(
+                "Query",
+                search => new MvxSearchViewQueryTextTargetBinding(search)
+                );
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -139,7 +143,6 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
             registry.AddOrOverwrite(typeof(Button), "Click");
             registry.AddOrOverwrite(typeof(CheckBox), "Checked");
-
             registry.AddOrOverwrite(typeof(TextView), "Text");
             registry.AddOrOverwrite(typeof(MvxListView), "ItemsSource");
             registry.AddOrOverwrite(typeof(MvxLinearLayout), "ItemsSource");
@@ -154,6 +157,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof(CompoundButton), "Checked");
             registry.AddOrOverwrite(typeof(SeekBar), "Progress");
             registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
+            registry.AddOrOverwrite(typeof(SearchView), "Query");
         }
 
         protected override void RegisterPlatformSpecificComponents()

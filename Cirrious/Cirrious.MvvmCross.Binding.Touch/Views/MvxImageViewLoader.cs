@@ -7,6 +7,7 @@
 
 using System;
 using Cirrious.MvvmCross.Binding.Views;
+using Foundation;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -15,11 +16,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         : MvxBaseImageViewLoader<UIImage>
     {
         public MvxImageViewLoader(Func<UIImageView> imageViewAccess, Action afterImageChangeAction = null)
-            : base(image =>
-                {
-                    OnImage(imageViewAccess(), image);
+            : base(image => {
+                OnUiThread(() => OnImage(imageViewAccess(), image));
                     if (afterImageChangeAction != null)
-                        afterImageChangeAction();
+                        OnUiThread(afterImageChangeAction);
                 })
         {
         }
@@ -27,11 +27,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private static void OnImage(UIImageView imageView, UIImage image)
         {
             if (imageView == null) return;
+            imageView.Image = image;
+        }
 
-            imageView.InvokeOnMainThread(() => {
-                imageView.Image = image;    
-            });
-            
+        private static void OnUiThread(Action action)
+        {
+            new NSObject().InvokeOnMainThread(action);
         }
     }
 }

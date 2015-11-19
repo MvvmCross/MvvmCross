@@ -15,6 +15,16 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
+
+        public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
+                                   IMvxBundle parameterValues,
+                                   IMvxBundle savedState)
+        {
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+
+            return viewModel;
+        }
+
         public virtual IMvxViewModel Load(Type viewModelType,
                                     IMvxBundle parameterValues,
                                     IMvxBundle savedState)
@@ -29,19 +39,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            try
-            {
-                CallCustomInitMethods(viewModel, parameterValues);
-                if (savedState != null)
-                {
-                    CallReloadStateMethods(viewModel, savedState);
-                }
-                viewModel.Start();
-            }
-            catch (Exception exception)
-            {
-                throw exception.MvxWrap("Problem initialising viewModel of type {0}", viewModelType.Name);
-            }
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -54,6 +52,23 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
         {
             viewModel.CallBundleMethods("ReloadState", savedState);
+        }
+
+        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)
+        {
+            try
+            {
+                CallCustomInitMethods(viewModel, parameterValues);
+                if (savedState != null)
+                {
+                    CallReloadStateMethods(viewModel, savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
+            }
         }
     }
 }

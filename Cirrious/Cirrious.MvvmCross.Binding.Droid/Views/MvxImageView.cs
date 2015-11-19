@@ -8,6 +8,7 @@
 using System;
 using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
@@ -126,9 +127,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
-            Post(() => { // marshal back on UI Thread
-                SetImageBitmap(mvxValueEventArgs.Value);
-            });
+            using (var h = new Handler(Looper.MainLooper))
+                h.Post(() => {
+                    SetImageBitmap(mvxValueEventArgs.Value);
+                });
         }
     }
 }

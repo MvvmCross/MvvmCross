@@ -13,7 +13,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -97,6 +97,7 @@
     <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxRadioGroupSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxSearchViewQueryTextTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewFocusTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewTextFormattedTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
