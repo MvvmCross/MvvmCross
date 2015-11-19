@@ -1,4 +1,3 @@
-using System;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -6,7 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Object = Java.Lang.Object;
+using System;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -97,7 +96,8 @@ namespace CrossUI.Droid.Dialog
             }
         }
 
-        protected void DrawDividersVertical(Canvas canvas) {
+        protected void DrawDividersVertical(Canvas canvas)
+        {
             int count = ChildCount;
             for (int i = 0; i < count; i++)
             {
@@ -113,12 +113,16 @@ namespace CrossUI.Droid.Dialog
                     }
                 }
             }
-            if (HasDividerBeforeChildAt(count)) {
+            if (HasDividerBeforeChildAt(count))
+            {
                 View child = GetChildAt(count - 1);
                 int bottom = 0;
-                if (child == null) {
+                if (child == null)
+                {
                     bottom = Height - PaddingBottom;
-                } else {
+                }
+                else
+                {
                     var lp = (MarginLayoutParams)child.LayoutParameters;
                     bottom = child.Bottom + lp.BottomMargin;
                 }
@@ -203,7 +207,7 @@ namespace CrossUI.Droid.Dialog
         {
             var index = IndexOfChild(child);
             var orientation = Orientation;
-            var @params = (MarginLayoutParams) child.LayoutParameters;
+            var @params = (MarginLayoutParams)child.LayoutParameters;
             if (HasDividerBeforeChildAt(index))
             {
                 if (orientation == Orientation.Vertical)
@@ -233,7 +237,6 @@ namespace CrossUI.Droid.Dialog
             base.MeasureChildWithMargins(child, parentWidthMeasureSpec, widthUsed, parentHeightMeasureSpec, heightUsed);
         }
 
-        #endregion
-
+        #endregion Divider drawables
     }
 }

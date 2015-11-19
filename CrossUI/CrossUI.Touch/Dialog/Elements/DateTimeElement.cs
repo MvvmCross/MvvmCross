@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using CrossUI.Core;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -33,7 +33,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (date.HasValue && date.Value.Kind != DateTimeKind.Utc)
                 DialogTrace.WriteLine("Warning - it's safest to use Utc time with DateTimeElement");
 
-            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;  
+            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;
             DateTimeFormat = "G";
         }
 
@@ -72,11 +72,11 @@ namespace CrossUI.Touch.Dialog.Elements
         public virtual UIDatePicker CreatePicker()
         {
             var picker = new UIDatePicker(CGRect.Empty)
-                {
-                    //ensure picker will stay centered, regardless current screen orientation
-                    AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
-                    Mode = UIDatePickerMode.DateAndTime,
-                };
+            {
+                //ensure picker will stay centered, regardless current screen orientation
+                AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
+                Mode = UIDatePickerMode.DateAndTime,
+            };
             return picker;
         }
 
@@ -98,6 +98,7 @@ namespace CrossUI.Touch.Dialog.Elements
             public bool Autorotate { get; set; }
 
 #warning Need to update autorotation code after ios6 changes
+
             [Obsolete]
             public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
             {
@@ -127,9 +128,9 @@ namespace CrossUI.Touch.Dialog.Elements
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
             var vc = new DateTimeViewController(this)
-                {
-                    Autorotate = dvc.Autorotate
-                };
+            {
+                Autorotate = dvc.Autorotate
+            };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
             _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value ?? DateTime.UtcNow);

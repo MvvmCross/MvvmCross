@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Android.OS;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
             catch (Exception)
             {
-                MvxTrace.Error( "Problem getting the saved state - will return null - from {0}",
+                MvxTrace.Error("Problem getting the saved state - will return null - from {0}",
                                extras);
                 return null;
             }

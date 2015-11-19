@@ -2,23 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Android.Content.Res;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Widget;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected ImageView ImageView => (ImageView) Target;
+        protected ImageView ImageView => (ImageView)Target;
 
         protected MvxBaseImageViewTargetBinding(ImageView imageView)
             : base(imageView)
@@ -34,7 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             try
             {
                 Bitmap bitmap;
-                if (!GetBitmap(value, out bitmap)) 
+                if (!GetBitmap(value, out bitmap))
                     return;
                 SetImageBitmap(imageView, bitmap);
             }

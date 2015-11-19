@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 namespace Cirrious.CrossCore.Touch.Platform
@@ -10,7 +10,7 @@ namespace Cirrious.CrossCore.Touch.Platform
     public class MvxIosMajorVersionChecker
     {
         public bool IsVersionOrHigher { get; private set; }
-       
+
         public MvxIosMajorVersionChecker(int major, bool defaultValue = true)
         {
             IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);

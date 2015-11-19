@@ -2,19 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.OS;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -45,9 +45,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             var requestCode = MvxValueEventArgs.Value.RequestCode;
             switch (requestCode)
             {
-                case (int) MvxIntentRequestCode.PickFromFile:
+                case (int)MvxIntentRequestCode.PickFromFile:
                     MvxTrace.Warning("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode) requestCode);
+                                   (MvxIntentRequestCode)requestCode);
                     break;
             }
         }

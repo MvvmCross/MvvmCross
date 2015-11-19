@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -22,7 +22,7 @@ namespace Cirrious.CrossCore.IoC
         /// <returns></returns>
         public static bool IsConventional(this Type candidateType)
         {
-            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof (MvxUnconventionalAttribute),
+            var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalAttribute),
                                                                              true);
             if (unconventionalAttributes.Length > 0)
                 return false;
@@ -33,7 +33,7 @@ namespace Cirrious.CrossCore.IoC
         public static bool SatisfiesConditionalConventions(this Type candidateType)
         {
             var conditionalAttributes =
-                candidateType.GetCustomAttributes(typeof (MvxConditionalConventionalAttribute), true);
+                candidateType.GetCustomAttributes(typeof(MvxConditionalConventionalAttribute), true);
 
             foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
             {

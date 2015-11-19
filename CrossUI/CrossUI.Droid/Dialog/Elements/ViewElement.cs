@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using System;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -22,7 +22,7 @@ namespace CrossUI.Droid.Dialog.Elements
             _layoutId = layoutId;
         }
 
-        public ViewElement(string layoutName = null): base(string.Empty, layoutName)
+        public ViewElement(string layoutName = null) : base(string.Empty, layoutName)
         {
         }
 

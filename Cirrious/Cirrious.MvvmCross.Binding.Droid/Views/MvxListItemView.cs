@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Runtime;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -28,10 +28,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             AndroidBindingContext.BindingInflate(templateId, this);
         }
 
-		protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public int TemplateId => _templateId;
     }

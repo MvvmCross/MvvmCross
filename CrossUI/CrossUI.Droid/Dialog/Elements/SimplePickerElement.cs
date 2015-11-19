@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Linq;
 using Android.App;
 using Android.Content;
+using System.Collections;
+using System.Linq;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -13,7 +13,8 @@ namespace CrossUI.Droid.Dialog.Elements
             Click = delegate { ShowDialog(); };
         }
 
-        IList _entries = new object[0];
+        private IList _entries = new object[0];
+
         public IList Entries
         {
             get { return _entries; }
@@ -27,7 +28,7 @@ namespace CrossUI.Droid.Dialog.Elements
             _itemArray = arr.Select(x => Format(x)).ToArray();
         }
 
-        string[] _itemArray = new string[0];
+        private string[] _itemArray = new string[0];
 
         private int FindSelectedIndex()
         {

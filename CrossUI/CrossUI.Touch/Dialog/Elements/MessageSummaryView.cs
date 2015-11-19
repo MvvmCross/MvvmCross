@@ -2,13 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using CrossUI.Touch.Dialog.Utilities;
 using CoreGraphics;
-using Foundation;
+using CrossUI.Touch.Dialog.Utilities;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -98,7 +97,7 @@ namespace CrossUI.Touch.Dialog.Elements
             using (var colorspace = CGColorSpace.CreateDeviceRGB())
             {
                 Gradient = new CGGradient(colorspace,
-                                          new nfloat[] {/* first */ .52f, .69f, .96f, 1, /* second */ .12f, .31f, .67f, 1},
+                                          new nfloat[] {/* first */ .52f, .69f, .96f, 1, /* second */ .12f, .31f, .67f, 1 },
                                           null); //new nfloat [] { 0, 1 });
             }
         }
@@ -179,7 +178,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 ctx.SaveState();
                 ctx.AddEllipseInRect(new CGRect(10, 32, 12, 12));
                 ctx.Clip();
-                ctx.DrawLinearGradient(Gradient, new CGPoint(10, 32), new CGPoint(22, 44), 
+                ctx.DrawLinearGradient(Gradient, new CGPoint(10, 32), new CGPoint(22, 44),
                                        CGGradientDrawingOptions.DrawsAfterEndLocation);
                 ctx.RestoreState();
             }

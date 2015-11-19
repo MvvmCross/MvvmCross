@@ -1,7 +1,7 @@
-using System;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -17,7 +17,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         private bool _subscribed;
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
-            : base(target) { }
+            : base(target)
+        { }
 
         protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
 

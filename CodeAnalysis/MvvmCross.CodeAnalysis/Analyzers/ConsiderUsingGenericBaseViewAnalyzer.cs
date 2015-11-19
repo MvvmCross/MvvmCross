@@ -1,10 +1,10 @@
-﻿using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using System.Linq;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
 using MvvmCross.CodeAnalysis.Extensions;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {
@@ -16,10 +16,10 @@ namespace MvvmCross.CodeAnalysis.Analyzers
         internal static readonly LocalizableString MessageFormat = "Derive from '{0}<T>', which already implements a strongly typed ViewModel property";
         internal const string Category = Categories.Usage;
 
-        internal static DiagnosticDescriptor Rule = 
+        internal static DiagnosticDescriptor Rule =
             new DiagnosticDescriptor(DiagnosticIds.UseGenericBaseClassRuleId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(Rule);
 
         public override void Initialize(AnalysisContext context)

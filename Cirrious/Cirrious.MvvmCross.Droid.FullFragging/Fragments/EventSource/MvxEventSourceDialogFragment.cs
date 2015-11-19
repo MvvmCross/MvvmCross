@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
 using Cirrious.CrossCore.Core;
-using Android.Runtime;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -19,21 +19,34 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
+
         public event EventHandler StartCalled;
+
         public event EventHandler ResumeCalled;
+
         public event EventHandler PauseCalled;
+
         public event EventHandler StopCalled;
+
         public event EventHandler DestroyViewCalled;
+
         public event EventHandler DestroyCalled;
+
         public event EventHandler DetachCalled;
 
         public event EventHandler DisposeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        protected MvxEventSourceDialogFragment() { }
+        protected MvxEventSourceDialogFragment()
+        {
+        }
 
         protected MvxEventSourceDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -108,7 +121,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
             }
             base.Dispose(disposing);
         }
-        
+
         public override void OnSaveInstanceState(Bundle outState)
         {
             SaveInstanceStateCalled.Raise(this, outState);

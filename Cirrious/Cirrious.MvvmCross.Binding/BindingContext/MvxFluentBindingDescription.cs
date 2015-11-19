@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.ValueConverters;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
                 .ToList();
-            
+
             if (newBindingDescription.Count > 1)
             {
                 MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);

@@ -4,15 +4,13 @@
   android:paddingBottom="8dp"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  android:minHeight="?android:attr/listPreferredItemHeight"
-  >
+  android:minHeight="?android:attr/listPreferredItemHeight">
   <CheckBox
     android:id="@+id/dialog_BoolField"
     android:layout_width="50dp"
     android:layout_height="fill_parent"
     android:layout_weight="0"
-		android:focusable="false"
-  />
+		android:focusable="false" />
   <TextView android:id="@+id/dialog_LabelField"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
@@ -21,6 +19,5 @@
     android:singleLine="true"
     android:paddingTop="5dp"
     android:text="TitleText"
-    android:textSize="?android:attr/textAppearanceLarge"
-    />
+    android:textSize="?android:attr/textAppearanceLarge" />
 </LinearLayout>

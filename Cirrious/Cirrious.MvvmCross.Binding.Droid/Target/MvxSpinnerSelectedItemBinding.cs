@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxSpinnerSelectedItemBinding 
+    public class MvxSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding
     {
-        protected MvxSpinner Spinner => (MvxSpinner) Target;
+        protected MvxSpinner Spinner => (MvxSpinner)Target;
 
         private object _currentValue;
         private bool _subscribed;
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             _currentValue = newValue;
-            FireValueChanged(newValue);            
+            FireValueChanged(newValue);
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -87,7 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _subscribed = true;
         }
 
-        public override Type TargetType => typeof (object);
+        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

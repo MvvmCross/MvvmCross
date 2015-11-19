@@ -2,18 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.Dialog.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
 using CrossUI.Droid.Dialog.Elements;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views
@@ -26,7 +23,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views
     {
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel) base.ViewModel; }
+            get { return (MvxViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

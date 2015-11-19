@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         private bool TryDefaultFor(Type type, out string toReturn, bool includeInterfaces = true)
         {
-            if (type == typeof (Object))
+            if (type == typeof(Object))
             {
                 toReturn = null;
                 return false;
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
         {
             var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
-            _lookup[typeof (T)] = path.Print();
+            _lookup[typeof(T)] = path.Print();
         }
     }
 }

@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -26,10 +26,10 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-// ReSharper disable ObjectCreationAsStatement
+            // ReSharper disable ObjectCreationAsStatement
             new MvxSimpleIoCContainer(options);
-// ReSharper restore ObjectCreationAsStatement
-			return Instance;
+            // ReSharper restore ObjectCreationAsStatement
+            return Instance;
         }
 
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
@@ -58,6 +58,7 @@ namespace Cirrious.CrossCore.IoC
         public interface IResolver
         {
             object Resolve();
+
             ResolverType ResolveType { get; }
         }
 
@@ -145,7 +146,7 @@ namespace Cirrious.CrossCore.IoC
         public bool CanResolve<T>()
             where T : class
         {
-            return CanResolve(typeof (T));
+            return CanResolve(typeof(T));
         }
 
         public bool CanResolve(Type t)
@@ -184,7 +185,7 @@ namespace Cirrious.CrossCore.IoC
         public T Resolve<T>()
             where T : class
         {
-            return (T) Resolve(typeof (T));
+            return (T)Resolve(typeof(T));
         }
 
         public object Resolve(Type t)
@@ -203,7 +204,7 @@ namespace Cirrious.CrossCore.IoC
         public T GetSingleton<T>()
             where T : class
         {
-            return (T) GetSingleton(typeof (T));
+            return (T)GetSingleton(typeof(T));
         }
 
         public object GetSingleton(Type t)
@@ -222,7 +223,7 @@ namespace Cirrious.CrossCore.IoC
         public T Create<T>()
             where T : class
         {
-            return (T) Create(typeof (T));
+            return (T)Create(typeof(T));
         }
 
         public object Create(Type t)
@@ -242,7 +243,7 @@ namespace Cirrious.CrossCore.IoC
             where TInterface : class
             where TToConstruct : class, TInterface
         {
-            RegisterType(typeof (TInterface), typeof (TToConstruct));
+            RegisterType(typeof(TInterface), typeof(TToConstruct));
         }
 
         public void RegisterType<TInterface>(Func<TInterface> constructor)
@@ -275,7 +276,7 @@ namespace Cirrious.CrossCore.IoC
         public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
-            RegisterSingleton(typeof (TInterface), theObject);
+            RegisterSingleton(typeof(TInterface), theObject);
         }
 
         public void RegisterSingleton(Type tInterface, object theObject)
@@ -287,7 +288,7 @@ namespace Cirrious.CrossCore.IoC
             where TInterface : class
         {
 #warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            RegisterSingleton(typeof (TInterface), () => (object) theConstructor());
+            RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
         }
 
         public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
@@ -298,7 +299,7 @@ namespace Cirrious.CrossCore.IoC
         public T IoCConstruct<T>()
             where T : class
         {
-            return (T) IoCConstruct(typeof (T));
+            return (T)IoCConstruct(typeof(T));
         }
 
         public virtual object IoCConstruct(Type type)
@@ -337,7 +338,7 @@ namespace Cirrious.CrossCore.IoC
 
         public void CallbackWhenRegistered<T>(Action action)
         {
-            CallbackWhenRegistered(typeof (T), action);
+            CallbackWhenRegistered(typeof(T), action);
         }
 
         public void CallbackWhenRegistered(Type type, Action action)
@@ -353,7 +354,7 @@ namespace Cirrious.CrossCore.IoC
                     }
                     else
                     {
-                        actions = new List<Action> {action};
+                        actions = new List<Action> { action };
                         _waiters[type] = actions;
                     }
                     return;
@@ -409,8 +410,10 @@ namespace Cirrious.CrossCore.IoC
             {
                 case ResolverType.DynamicPerResolve:
                     return Options.TryToDetectDynamicCircularReferences;
+
                 case ResolverType.Singleton:
                     return Options.TryToDetectSingletonCircularReferences;
+
                 case ResolverType.Unknown:
                     throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
                 default:
@@ -450,7 +453,7 @@ namespace Cirrious.CrossCore.IoC
                 resolved = raw;
                 return true;
             }
-            finally 
+            finally
             {
                 if (detectingCircular)
                 {
@@ -508,6 +511,6 @@ namespace Cirrious.CrossCore.IoC
                 parameters.Add(parameterValue);
             }
             return parameters;
-        }       
+        }
     }
 }

@@ -2,15 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.ExtensionMethods;
+using Cirrious.CrossCore.IoC;
 using System;
 using System.Globalization;
-using System.Reflection;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.ExtensionMethods;
 
 namespace Cirrious.MvvmCross.Binding.ExtensionMethods
 {
@@ -61,12 +59,12 @@ namespace Cirrious.MvvmCross.Binding.ExtensionMethods
                 return propertyType.CreateDefault();
             }
 
-			var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find (value.GetType(),
-				                                                                            propertyType);
-			if (autoConverter != null) 
+            var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
+                                                                                            propertyType);
+            if (autoConverter != null)
             {
-				return autoConverter.Convert (value, propertyType, null, CultureInfo.CurrentUICulture);
-			}
+                return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);
+            }
 
             return propertyType.MakeSafeValueCore(value);
         }

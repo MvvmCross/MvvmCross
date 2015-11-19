@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Specialized;
 using Android.Content;
 using Android.Runtime;
+using System;
+using System.Collections.Specialized;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -21,10 +21,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-		protected MvxAdapterWithChangedEvent(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxAdapterWithChangedEvent(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public event EventHandler<NotifyCollectionChangedEventArgs> DataSetChanged;
 

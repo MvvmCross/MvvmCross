@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
@@ -29,10 +29,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = _targetEventInfo.GetAddMethod();
-            addMethod.Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
+            addMethod.Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
         }
 
-        public override Type TargetType => typeof (ICommand);
+        public override Type TargetType => typeof(ICommand);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 var target = Target;
                 if (target != null)
                 {
-                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
+                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
                 }
             }
         }

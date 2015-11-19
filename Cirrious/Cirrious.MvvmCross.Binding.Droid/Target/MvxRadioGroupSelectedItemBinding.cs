@@ -2,13 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using System;
-
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -21,7 +20,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             radioGroup.CheckedChange += RadioGroupCheckedChanged;
         }
-
 
         private bool CheckValueChanged(object newValue)
         {
@@ -36,7 +34,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
             return changed;
         }
-
 
         private void RadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs args)
         {
@@ -99,12 +96,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-
         public override Type TargetType => typeof(object);
-
 
         protected override void Dispose(bool isDisposing)
         {

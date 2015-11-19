@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 {
@@ -26,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] {_indexerPropertyToken.Key};
+            return new[] { _indexerPropertyToken.Key };
         }
     }
 }

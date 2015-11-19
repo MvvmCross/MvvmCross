@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using CrossUI.Touch.Dialog.Utilities;
 using Foundation;
+using System;
+using System.Windows.Input;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
-    ///   A version of the StringElement that can be styled with a number of formatting 
-    ///   options and can render images or background images either from UIImage parameters 
+    ///   A version of the StringElement that can be styled with a number of formatting
+    ///   options and can render images or background images either from UIImage parameters
     ///   or by downloading them from the net.
     /// </summary>
     public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground
@@ -53,6 +53,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         public event Action AccessoryTapped;
+
         public ICommand AccessoryCommand { get; set; }
 
         public UIFont Font { get; set; }
@@ -144,13 +145,12 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var key = GetKey((int) Style);
+            var key = GetKey((int)Style);
             var cell = tv.DequeueReusableCell(key) ??
-                       new UITableViewCell(Style, key) {SelectionStyle = UITableViewCellSelectionStyle.Blue};
+                       new UITableViewCell(Style, key) { SelectionStyle = UITableViewCellSelectionStyle.Blue };
             PrepareCell(cell);
             return cell;
         }
-
 
         protected override void UpdateCellDisplay(UITableViewCell cell)
         {
@@ -259,7 +259,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (uri == null || _extraInfo == null)
                 return;
             var root = GetImmediateRootElement();
-            root?.TableView?.ReloadRows(new[] {IndexPath}, UITableViewRowAnimation.None);
+            root?.TableView?.ReloadRows(new[] { IndexPath }, UITableViewRowAnimation.None);
         }
 
         internal void AccessoryTap()

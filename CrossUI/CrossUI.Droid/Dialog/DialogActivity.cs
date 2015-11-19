@@ -2,17 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using Android;
 using Android.App;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
+using System;
+using System.Linq;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -42,7 +40,6 @@ namespace CrossUI.Droid.Dialog
             ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
             ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
         }
-
 
         private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)
         {
