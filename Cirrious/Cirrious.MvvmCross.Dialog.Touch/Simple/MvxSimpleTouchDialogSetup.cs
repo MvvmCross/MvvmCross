@@ -25,10 +25,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
             _converterTypes = converterTypes.ToList();
         }
 
-        protected override List<Type> ValueConverterHolders
-        {
-            get { return _converterTypes; }
-        }
+        protected override List<Type> ValueConverterHolders => _converterTypes;
 
         protected override IMvxApplication CreateApp()
         {

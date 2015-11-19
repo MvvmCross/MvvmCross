@@ -29,10 +29,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
                 if (childCast != null &&
                     childCast.UniqueId == item.ItemId)
                 {
-                    if (childCast.Command != null)
-                    {
-                        childCast.Command.Execute(null);
-                    }
+                    childCast.Command?.Execute(null);
                     return true;
                 }
             }

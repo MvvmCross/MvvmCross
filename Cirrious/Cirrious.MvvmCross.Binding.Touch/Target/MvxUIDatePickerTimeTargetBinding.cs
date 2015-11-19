@@ -27,10 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
         }
 
-        public override Type TargetType
-        {
-            get { return typeof(TimeSpan); }
-        }
+        public override Type TargetType => typeof(TimeSpan);
 
         protected override object MakeSafeValue(object value)
         {

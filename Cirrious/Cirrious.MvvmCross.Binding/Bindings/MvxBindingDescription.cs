@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
         public override string ToString()
         {
-            return string.Format("binding {0} for {1}", TargetName, Source == null ? "-null" : Source.ToString());
+            return $"binding {TargetName} for {(Source == null ? "-null" : Source.ToString())}";
         }
     }
 }

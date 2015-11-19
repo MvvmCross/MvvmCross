@@ -22,14 +22,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        protected IMvxAndroidGlobals AndroidGlobals
-        {
-            get
-            {
-                if (_androidGlobals == null)
-                    _androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>();
-                return _androidGlobals;
-            }
-        }
+        protected IMvxAndroidGlobals AndroidGlobals => _androidGlobals ?? (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
     }
 }

@@ -91,15 +91,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             var activity = Context as Activity;
 
-            if (activity == null)
-                return;
-
-            activity.RunOnUiThread(() =>
-                {
-                    var handler = PartialTextChanged;
-                    if (handler != null)
-                        handler(this, EventArgs.Empty);
-                });
+            activity?.RunOnUiThread(() =>
+            {
+                var handler = PartialTextChanged;
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
+            });
         }
 
         private readonly ManualResetEvent _dataChangedEvent = new ManualResetEvent(false);

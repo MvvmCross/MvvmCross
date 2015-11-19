@@ -25,15 +25,9 @@ namespace Cirrious.CrossCore.Parse
             CurrentIndex = 0;
         }
 
-        protected bool IsComplete
-        {
-            get { return CurrentIndex >= FullText.Length; }
-        }
+        protected bool IsComplete => CurrentIndex >= FullText.Length;
 
-        protected char CurrentChar
-        {
-            get { return FullText[CurrentIndex]; }
-        }
+        protected char CurrentChar => FullText[CurrentIndex];
 
         protected string ReadQuotedString()
         {

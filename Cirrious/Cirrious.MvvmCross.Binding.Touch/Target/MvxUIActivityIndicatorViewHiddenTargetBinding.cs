@@ -28,20 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType
-        {
-            get { return typeof(bool); }
-        }
+        public override System.Type TargetType => typeof(bool);
 
-        protected UIActivityIndicatorView View
-        {
-            get { return Target as UIActivityIndicatorView; }
-        }
+        protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
 
         protected override void SetValueImpl(object target, object value)
         {

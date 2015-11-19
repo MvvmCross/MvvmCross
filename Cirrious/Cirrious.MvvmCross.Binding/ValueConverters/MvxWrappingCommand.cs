@@ -37,8 +37,7 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
         public void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
         {
             var handler = CanExecuteChanged;
-            if (handler != null)
-                handler(this, eventArgs);
+            handler?.Invoke(this, eventArgs);
         }
 
         public bool CanExecute(object parameter)

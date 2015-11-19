@@ -22,15 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
     {
         private IMvxViewTypeResolver _viewTypeResolver;
 
-        protected IMvxViewTypeResolver ViewTypeResolver
-        {
-            get
-            {
-                if (_viewTypeResolver == null)
-                    _viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>();
-                return _viewTypeResolver;
-            }
-        }
+        protected IMvxViewTypeResolver ViewTypeResolver => _viewTypeResolver ?? (_viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>());
 
         public virtual View CreateView(View parent, string name, Context context, IAttributeSet attrs)
         {

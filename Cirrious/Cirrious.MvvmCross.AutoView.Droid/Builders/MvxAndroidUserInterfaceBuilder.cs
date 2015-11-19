@@ -27,9 +27,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override IPropertyBuilder PropertyBuilder
-        {
-            get { return _propertyBuilder; }
-        }
+        protected override IPropertyBuilder PropertyBuilder => _propertyBuilder;
     }
 }

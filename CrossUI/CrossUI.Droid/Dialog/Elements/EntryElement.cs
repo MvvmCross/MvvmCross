@@ -276,10 +276,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         #region MonoTouch Dialog Mimicry
 
-        public UIKeyboardType KeyboardType
-        {
-            get { return keyboardType; }
-        }
+        public UIKeyboardType KeyboardType => keyboardType;
 
         private UIKeyboardType keyboardType;
 

@@ -18,20 +18,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected ImageView ImageView
-        {
-            get { return (ImageView) Target; }
-        }
+        protected ImageView ImageView => (ImageView) Target;
 
         protected MvxBaseImageViewTargetBinding(ImageView imageView)
             : base(imageView)
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)
         {

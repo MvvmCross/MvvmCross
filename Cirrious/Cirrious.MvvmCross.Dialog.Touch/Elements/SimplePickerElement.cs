@@ -224,12 +224,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-            {
-                return;
-            }
-
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = ConvertToString(Value);
             }

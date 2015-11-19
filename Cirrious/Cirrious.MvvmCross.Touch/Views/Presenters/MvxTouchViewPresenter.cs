@@ -24,15 +24,9 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             get; protected set;
         }
 
-        protected virtual IUIApplicationDelegate ApplicationDelegate
-        {
-            get { return _applicationDelegate; }
-        }
+        protected virtual IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected virtual UIWindow Window
-        {
-            get { return _window; }
-        }
+        protected virtual UIWindow Window => _window;
 
         public MvxTouchViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
@@ -146,9 +140,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             return new UINavigationController(viewController);
         }
 
-        protected virtual UIViewController CurrentTopViewController
-        {
-            get { return MasterNavigationController.TopViewController; }
-        }
+        protected virtual UIViewController CurrentTopViewController => MasterNavigationController.TopViewController;
     }
 }

@@ -17,10 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType
-        {
-            get { return Source == null ? typeof (object) : Source.GetType(); }
-        }
+        public override Type SourceType => Source == null ? typeof (object) : Source.GetType();
 
         public override void SetValue(object value)
         {

@@ -147,15 +147,9 @@ namespace Cirrious.MvvmCross.ViewModels
             private readonly MethodInfo _executeMethodInfo;
             private readonly PropertyInfo _canExecutePropertyInfo;
 
-            protected MethodInfo ExecuteMethodInfo
-            {
-                get { return _executeMethodInfo; }
-            }
+            protected MethodInfo ExecuteMethodInfo => _executeMethodInfo;
 
-            protected PropertyInfo CanExecutePropertyInfo
-            {
-                get { return _canExecutePropertyInfo; }
-            }
+            protected PropertyInfo CanExecutePropertyInfo => _canExecutePropertyInfo;
 
             protected MvxBaseCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
             {
@@ -165,10 +159,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
             public abstract IMvxCommand ToCommand(object owner);
 
-            public string CanExecutePropertyName
-            {
-                get { return _canExecutePropertyInfo == null ? null : _canExecutePropertyInfo.Name; }
-            }
+            public string CanExecutePropertyName => _canExecutePropertyInfo?.Name;
         }
 
         public class MvxCommandBuilder : MvxBaseCommandBuilder

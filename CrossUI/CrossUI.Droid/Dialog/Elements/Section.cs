@@ -150,7 +150,7 @@ namespace CrossUI.Droid.Dialog.Elements
         /// </summary>
         public string Footer
         {
-            get { return footer == null ? null : footer.ToString(); }
+            get { return footer?.ToString(); }
             set { footer = value; }
         }
 
@@ -172,31 +172,23 @@ namespace CrossUI.Droid.Dialog.Elements
             set { footer = value; }
         }
 
-        public int Count
-        {
-            get { return Elements.Count; }
-        }
+        public int Count => Elements.Count;
 
-        public Element this[int idx]
-        {
-            get { return Elements[idx]; }
-        }
+        public Element this[int idx] => Elements[idx];
 
         public event EventHandler ValueChanged;
 
         protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(sender, args);
+            handler?.Invoke(sender, args);
         }
 
         public event EventHandler ElementsChanged;
         protected void HandleElementsChangedEvent()
         {
             var handler = ElementsChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -364,10 +356,7 @@ namespace CrossUI.Droid.Dialog.Elements
             return 0;
         }
 
-        public int ElementViewTypeCount
-        {
-            get { return ElementTypes.Count; }
-        }
+        public int ElementViewTypeCount => ElementTypes.Count;
 
         protected override View GetViewImpl(Context context, ViewGroup parent)
         {

@@ -103,8 +103,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             public void RaisePropertyChanged(string propertyName)
             {
                 var handler = PropertyChanged;
-                if (handler != null)
-                    handler(this, new PropertyChangedEventArgs(propertyName));
+                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -142,8 +141,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             public void RaisePropertyChanged(string propertyName)
             {
                 var handler = PropertyChanged;
-                if (handler != null)
-                    handler(this, new PropertyChangedEventArgs(propertyName));
+                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

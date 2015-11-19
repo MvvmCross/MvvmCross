@@ -48,8 +48,11 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             var toReturn = base.ToElementDescription();
             if (!string.IsNullOrEmpty(GroupName))
             {
-                toReturn.Group = new GroupDescription {Key = "Radio"};
-                toReturn.Group.Properties["Key"] = GroupName;
+                toReturn.Group = new GroupDescription
+                {
+                    Key = "Radio",
+                    Properties = {["Key"] = GroupName}
+                };
             }
             foreach (var sectionAuto in Sections)
             {

@@ -22,10 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
-        public List<int> OwnedSubViewModelIndicies
-        {
-            get { return _ownedSubViewModelIndicies; }
-        }
+        public List<int> OwnedSubViewModelIndicies => _ownedSubViewModelIndicies;
 
         protected MvxTabActivity()
         {

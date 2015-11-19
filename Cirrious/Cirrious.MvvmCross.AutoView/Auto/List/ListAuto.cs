@@ -45,12 +45,12 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
             if (ItemsSource != null)
             {
                 var itemsSource = ItemsSource.GetPropertyText();
-                list.Properties["ItemsSource"] = string.Format("@MvxBind:{0}", itemsSource);
+                list.Properties["ItemsSource"] = $"@MvxBind:{itemsSource}";
             }
             if (SelectedCommand != null)
             {
                 var selectedCommand = SelectedCommand.GetPropertyText();
-                list.Properties["ItemClick"] = string.Format("@MvxBind:{0}", selectedCommand);
+                list.Properties["ItemClick"] = $"@MvxBind:{selectedCommand}";
             }
             if (DefaultLayout != null)
             {

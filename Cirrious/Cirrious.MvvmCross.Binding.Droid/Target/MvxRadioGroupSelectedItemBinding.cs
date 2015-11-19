@@ -45,13 +45,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
             object newValue = null;
             var r = radioGroup.FindViewById<RadioButton>(args.CheckedId);
-            if (r != null)
+            var li = r?.Parent as MvxListItemView;
+            if (li != null)
             {
-                var li = r.Parent as MvxListItemView;
-                if (li != null)
-                {
-                    newValue = li.DataContext;
-                }
+                newValue = li.DataContext;
             }
 
             bool changed = CheckValueChanged(newValue);
@@ -103,16 +100,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         }
 
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
 
-        public override Type TargetType
-        {
-            get { return typeof(object); }
-        }
+        public override Type TargetType => typeof(object);
 
 
         protected override void Dispose(bool isDisposing)

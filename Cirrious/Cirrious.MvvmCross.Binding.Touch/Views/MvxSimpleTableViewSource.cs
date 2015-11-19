@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly NSString _cellIdentifier;
         private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
 
-        protected virtual NSString CellIdentifier
-        {
-            get { return _cellIdentifier; }
-        }
+        protected virtual NSString CellIdentifier => _cellIdentifier;
 
         public MvxSimpleTableViewSource(IntPtr handle)
             : base(handle)

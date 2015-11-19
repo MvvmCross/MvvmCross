@@ -13,9 +13,6 @@ namespace Cirrious.MvvmCross.ViewModels
     public class MvxStringDictionaryNavigationSerializer
         : IMvxNavigationSerializer
     {
-        public IMvxTextSerializer Serializer
-        {
-            get { return new MvxViewModelRequestCustomTextSerializer(); }
-        }
+        public IMvxTextSerializer Serializer => new MvxViewModelRequestCustomTextSerializer();
     }
 }

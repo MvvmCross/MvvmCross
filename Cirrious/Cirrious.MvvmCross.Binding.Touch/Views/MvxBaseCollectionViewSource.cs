@@ -22,10 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly NSString _cellIdentifier;
         private readonly UICollectionView _collectionView;
 
-        protected virtual NSString DefaultCellIdentifier
-        {
-            get { return _cellIdentifier; }
-        }
+        protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView)
             : this(collectionView, UnknownCellIdentifier)
@@ -39,10 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _cellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView
-        {
-            get { return _collectionView; }
-        }
+        protected UICollectionView CollectionView => _collectionView;
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -87,8 +81,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 // we don't have any multi-select or any scroll into view functionality here
                 _selectedItem = value;
                 var handler = SelectedItemChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             }
         }
 

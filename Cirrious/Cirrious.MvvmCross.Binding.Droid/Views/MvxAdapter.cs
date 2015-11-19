@@ -68,15 +68,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 	    {
 	    }
 
-        protected Context Context
-        {
-            get { return _context; }
-        }
+        protected Context Context => _context;
 
-        protected IMvxAndroidBindingContext BindingContext
-        {
-            get { return _bindingContext; }
-        }
+        protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
         public int SimpleViewLayoutId { get; set; }
 
@@ -121,10 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public override int Count
-        {
-            get { return _itemsSource.Count(); }
-        }
+        public override int Count => _itemsSource.Count();
 
         protected virtual void SetItemsSource(IEnumerable value)
         {

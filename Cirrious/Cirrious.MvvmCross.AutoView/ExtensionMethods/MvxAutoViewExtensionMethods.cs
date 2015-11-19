@@ -97,12 +97,8 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             where TResult : class
         {
             var autoViewModel = view.ViewModel as IMvxAutoViewModel;
-            if (autoViewModel == null)
-            {
-                return null;
-            }
 
-            var description = autoViewModel.GetAutoView(key);
+            var description = autoViewModel?.GetAutoView(key);
             if (description == null)
             {
                 return null;

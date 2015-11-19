@@ -190,12 +190,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                     return;
 
                 lastUpdateTime = value;
-                if (value == DateTime.MinValue)
-                {
-                    LastUpdateLabel.Text = "Last Updated: never".GetText();
-                }
-                else
-                    LastUpdateLabel.Text = String.Format("Last Updated: {0:g}".GetText(), value);
+                LastUpdateLabel.Text = value == DateTime.MinValue ? "Last Updated: never".GetText() : String.Format("Last Updated: {0:g}".GetText(), value);
             }
         }
 

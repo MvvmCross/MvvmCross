@@ -99,8 +99,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
             DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption, out _rawToggleButton);
             var _toggleButton = _rawToggleButton as ToggleButton;
-            if (_toggleButton != null)
-                _toggleButton.Toggle();
+            _toggleButton?.Toggle();
         }
     }
 }

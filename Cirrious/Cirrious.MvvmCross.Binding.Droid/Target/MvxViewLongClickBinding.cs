@@ -16,10 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         private ICommand _command;
 
-        protected View View
-        {
-            get { return (View) Target; }
-        }
+        protected View View => (View) Target;
 
         public MvxViewLongClickBinding(View view)
             : base(view)
@@ -43,15 +40,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _command = value as ICommand;
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType
-        {
-            get { return typeof (ICommand); }
-        }
+        public override Type TargetType => typeof (ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

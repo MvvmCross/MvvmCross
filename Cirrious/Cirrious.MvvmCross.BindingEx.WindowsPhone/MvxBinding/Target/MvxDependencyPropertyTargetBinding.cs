@@ -80,16 +80,10 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
-        public override Type TargetType
-        {
-            get { return _actualPropertyType; }
-        }
+        public override Type TargetType => _actualPropertyType;
 
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
-        public override MvxBindingMode DefaultMode
-        {
-            get { return _defaultBindingMode; }
-        }
+        public override MvxBindingMode DefaultMode => _defaultBindingMode;
 
         protected virtual object GetValueByReflection()
         {

@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
-            return _itemsSource == null ? 0 : _itemsSource.Count();
+            return _itemsSource?.Count() ?? 0;
         }
 
         public override string GetTitle(UIPickerView picker, nint row, nint component)
@@ -115,8 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _selectedItem = _itemsSource.ElementAt((int)row);
 
             var handler = SelectedItemChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
 
             var command = SelectedChangedCommand;
             if (command != null)

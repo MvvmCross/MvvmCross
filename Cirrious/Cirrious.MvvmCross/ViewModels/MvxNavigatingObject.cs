@@ -16,10 +16,7 @@ namespace Cirrious.MvvmCross.ViewModels
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
-        protected IMvxViewDispatcher ViewDispatcher
-        {
-            get { return (IMvxViewDispatcher) base.Dispatcher; }
-        }
+        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher) base.Dispatcher;
 
         protected bool Close(IMvxViewModel viewModel)
         {

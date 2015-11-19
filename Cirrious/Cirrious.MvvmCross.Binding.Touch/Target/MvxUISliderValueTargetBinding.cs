@@ -39,10 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             FireValueChanged(view.Value);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

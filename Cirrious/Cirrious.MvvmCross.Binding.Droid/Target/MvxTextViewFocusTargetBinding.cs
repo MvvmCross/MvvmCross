@@ -18,20 +18,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     {
         private bool _subscribed;
 
-        protected EditText TextField
-        {
-            get { return Target as EditText; }
-        }
+        protected EditText TextField => Droid.Target as EditText;
 
-        public override Type TargetType
-        {
-            get { return typeof (string); }
-        }
+        public override Type TargetType => typeof (string);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public MvxTextViewFocusTargetBinding(object target)
             : base(target)

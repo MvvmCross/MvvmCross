@@ -28,17 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
             _bindingCreator = bindingCreator;
         }
 
-        protected Type TargetType
-        {
-            get { return _targetType; }
-        }
+        protected Type TargetType => _targetType;
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes
-        {
-            get { return new[] {new MvxTypeAndNamePair {Name = _targetName, Type = _targetType}}; }
-        }
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] {new MvxTypeAndNamePair {Name = _targetName, Type = _targetType}};
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {

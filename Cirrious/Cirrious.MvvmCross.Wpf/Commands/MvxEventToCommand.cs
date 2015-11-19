@@ -32,12 +32,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -68,12 +64,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -151,9 +143,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         {
             get
             {
-                return this._mustToggleValue == null
-                           ? this.MustToggleIsEnabled
-                           : this._mustToggleValue.Value;
+                return this._mustToggleValue ?? this.MustToggleIsEnabled;
             }
 
             set

@@ -15,10 +15,7 @@ namespace Cirrious.CrossCore.Touch.Views
     {
         private readonly IMvxEventSourceViewController _eventSource;
 
-        protected UIViewController ViewController
-        {
-            get { return _eventSource as UIViewController; }
-        }
+        protected UIViewController ViewController => _eventSource as UIViewController;
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {

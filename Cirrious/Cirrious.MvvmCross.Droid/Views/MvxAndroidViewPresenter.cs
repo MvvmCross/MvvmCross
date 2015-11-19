@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxAndroidViewPresenter
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {
-        protected Activity Activity
-        {
-            get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
-        }
+        protected Activity Activity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
         public override void Show(MvxViewModelRequest request)
         {

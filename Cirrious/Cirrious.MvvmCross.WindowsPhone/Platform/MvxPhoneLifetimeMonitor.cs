@@ -16,12 +16,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
         {
             PhoneApplicationService.Current.Activated += (s, e) =>
                 {
-                    if (e.IsApplicationInstancePreserved)
-                        FireLifetimeChange(
-                            MvxLifetimeEvent.ActivatedFromMemory);
-                    else
-                        FireLifetimeChange(
-                            MvxLifetimeEvent.ActivatedFromDisk);
+                    FireLifetimeChange(
+                        e.IsApplicationInstancePreserved
+                            ? MvxLifetimeEvent.ActivatedFromMemory
+                            : MvxLifetimeEvent.ActivatedFromDisk);
                 };
             PhoneApplicationService.Current.Closing += (s, e) => FireLifetimeChange(MvxLifetimeEvent.Closing);
             PhoneApplicationService.Current.Deactivated += (s, e) => FireLifetimeChange(MvxLifetimeEvent.Deactivated);

@@ -44,10 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 FireValueChanged(e.Progress);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

@@ -44,10 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             base.Dispose(isDisposing);
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         public override Type SourceType
         {

@@ -12,24 +12,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
     public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {
-        protected UIView View
-        {
-            get { return (UIView)Target; }
-        }
+        protected UIView View => (UIView)Touch.Target;
 
         protected MvxBaseUIViewVisibleTargetBinding(UIView target)
             : base(target)
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType
-        {
-            get { return typeof(bool); }
-        }
+        public override System.Type TargetType => typeof(bool);
     }
 }

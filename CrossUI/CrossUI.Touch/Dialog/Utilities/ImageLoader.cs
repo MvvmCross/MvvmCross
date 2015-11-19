@@ -116,8 +116,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         /// </summary>
         public static void Purge()
         {
-            if (DefaultLoader != null)
-                DefaultLoader.PurgeCache();
+            DefaultLoader?.PurgeCache();
         }
 
         /// <summary>

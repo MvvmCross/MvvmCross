@@ -16,10 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         : MvxConvertingTargetBinding
         , IMvxEditableTextView
     {
-        protected UITextField View
-        {
-            get { return Target as UITextField; }
-        }
+        protected UITextField View => Target as UITextField;
 
         private bool _subscribed;
 
@@ -36,10 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             FireValueChanged(view.Text);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -55,10 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _subscribed = true;
         }
 
-        public override System.Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override System.Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -93,9 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             get 
             { 
                 var view = View;
-                if (view == null)
-                    return null;
-                return view.Text;
+                return view?.Text;
             }
         }
     }

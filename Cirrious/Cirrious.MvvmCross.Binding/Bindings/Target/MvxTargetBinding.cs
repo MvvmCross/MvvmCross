@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             _target = new WeakReference(target);
         }
 
-        protected object Target
-        {
-            get { return _target.Target; }
-        }
+        protected object Target => _target.Target;
 
         public virtual void SubscribeToEvents()
         {
@@ -32,8 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             var handler = ValueChanged;
 
-            if (handler != null)
-                handler(this, new MvxTargetChangedEventArgs(newValue));
+            handler?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
         }
 
         public abstract Type TargetType { get; }

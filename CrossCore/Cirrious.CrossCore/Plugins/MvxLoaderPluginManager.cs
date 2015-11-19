@@ -15,10 +15,7 @@ namespace Cirrious.CrossCore.Plugins
     {
         private readonly Dictionary<string, Func<IMvxPlugin>> _finders = new Dictionary<string, Func<IMvxPlugin>>();
 
-        public IDictionary<string, Func<IMvxPlugin>> Finders
-        {
-            get { return _finders; }
-        }
+        public IDictionary<string, Func<IMvxPlugin>> Finders => _finders;
 
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {

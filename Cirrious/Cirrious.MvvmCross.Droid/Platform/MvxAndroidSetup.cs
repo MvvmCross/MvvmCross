@@ -43,20 +43,11 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         #region IMvxAndroidGlobals Members
 
-        public virtual string ExecutableNamespace
-        {
-            get { return GetType().Namespace; }
-        }
+        public virtual string ExecutableNamespace => GetType().Namespace;
 
-        public virtual Assembly ExecutableAssembly
-        {
-            get { return GetType().Assembly; }
-        }
+        public virtual Assembly ExecutableAssembly => GetType().Assembly;
 
-        public Context ApplicationContext
-        {
-            get { return _applicationContext; }
-        }
+        public Context ApplicationContext => _applicationContext;
 
         #endregion
 
@@ -205,10 +196,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual List<Type> ValueConverterHolders
-        {
-            get { return new List<Type>(); }
-        }
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
         protected virtual List<Assembly> ValueConverterAssemblies
         {
@@ -221,43 +209,25 @@ namespace Cirrious.MvvmCross.Droid.Platform
             }
         }
 
-        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations
+        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            get
-            {
-                return new Dictionary<string, string>
-                    {
-                        {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
-                    };
-            }
-        }
+            {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
+        };
 
-        protected virtual IList<string> ViewNamespaces
+        protected virtual IList<string> ViewNamespaces => new List<string>
         {
-            get
-            {
-                return new List<string>
-                    {
-                        "Android.Views",
-                        "Android.Widget",
-                        "Android.Webkit",
-                        "Cirrious.MvvmCross.Binding.Droid.Views",
-                    };
-            }
-        }
+            "Android.Views",
+            "Android.Widget",
+            "Android.Webkit",
+            "Cirrious.MvvmCross.Binding.Droid.Views",
+        };
 
-        protected virtual IList<Assembly> AndroidViewAssemblies
+        protected virtual IList<Assembly> AndroidViewAssemblies => new List<Assembly>()
         {
-            get
-            {
-                return new List<Assembly>()
-                    {
-                        typeof (Android.Views.View).Assembly,
-                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
-                        this.GetType().Assembly,
-                    };
-            }
-        }
+            typeof (Android.Views.View).Assembly,
+            typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
+            this.GetType().Assembly,
+        };
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {

@@ -20,10 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (string); }
-        }
+        public override Type TargetType => typeof (string);
 
         protected override Stream GetStream(object value)
         {

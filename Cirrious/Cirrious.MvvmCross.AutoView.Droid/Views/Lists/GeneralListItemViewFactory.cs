@@ -28,10 +28,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return view;
         }
 
-        public string UniqueName
-        {
-            get { return @"General$" + LayoutName; }
-        }
+        public string UniqueName => @"General$" + LayoutName;
 
         public string LayoutName { get; set; }
 

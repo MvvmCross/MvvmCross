@@ -38,10 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public int GroupCount
-        {
-            get { return base.Count; }
-        }
+        public int GroupCount => base.Count;
 
         public void OnGroupExpanded(int groupPosition)
         {

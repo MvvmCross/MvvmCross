@@ -15,10 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
     public class MvxSpinnerSelectedItemBinding 
         : MvxAndroidTargetBinding
     {
-        protected MvxSpinner Spinner
-        {
-            get { return (MvxSpinner) Target; }
-        }
+        protected MvxSpinner Spinner => (MvxSpinner) Target;
 
         private object _currentValue;
         private bool _subscribed;
@@ -78,10 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -93,10 +87,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _subscribed = true;
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (object); }
-        }
+        public override Type TargetType => typeof (object);
 
         protected override void Dispose(bool isDisposing)
         {

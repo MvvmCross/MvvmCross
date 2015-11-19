@@ -26,9 +26,6 @@ namespace Cirrious.CrossCore.Droid
         {
         }
 
-        public new T Object
-        {
-            get { return (T) base.Object; }
-        }
+        public new T Object => (T) base.Object;
     }
 }

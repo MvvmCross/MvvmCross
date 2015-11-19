@@ -15,10 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
     public abstract class MvxReflectionViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly IMvxTypeCache<View> _typeCache;
-        protected IMvxTypeCache<View> TypeCache
-        {
-            get { return _typeCache; }
-        }
+        protected IMvxTypeCache<View> TypeCache => _typeCache;
 
         protected MvxReflectionViewTypeResolver(IMvxTypeCache<View> typeCache)
         {

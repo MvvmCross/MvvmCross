@@ -28,30 +28,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
             _source = source;
         }
 
-        protected virtual IMvxAndroidViewFactory AndroidViewFactory
-        {
-            get
-            {
-                if (_androidViewFactory == null)
-                    _androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>();
-                return _androidViewFactory;
-            }
-        }
+        protected virtual IMvxAndroidViewFactory AndroidViewFactory => _androidViewFactory ?? (_androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
 
-        protected virtual IMvxAndroidViewBinder Binder
-        {
-            get
-            {
-                if (_binder == null)
-                    _binder = Mvx.Resolve<IMvxAndroidViewBinderFactory>().Create(_source);
-                return _binder;
-            }
-        }
+        protected virtual IMvxAndroidViewBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxAndroidViewBinderFactory>().Create(_source));
 
-        public virtual IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
-        {
-            get { return Binder.CreatedBindings; }
-        }
+        public virtual IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings => Binder.CreatedBindings;
 
         public virtual View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {

@@ -72,18 +72,17 @@ namespace CrossUI.Touch.Dialog.Elements
             _captionSize = new CGSize(0, 0);
         }
 
-        protected override NSString CellKey
-        {
-            get { return Skey; }
-        }
+        protected override NSString CellKey => Skey;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
             var cell = tv.DequeueReusableCell(CellKey);
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey)
+                {
+                    SelectionStyle = UITableViewCellSelectionStyle.None
+                };
             }
             else
                 RemoveTag(cell, 1);

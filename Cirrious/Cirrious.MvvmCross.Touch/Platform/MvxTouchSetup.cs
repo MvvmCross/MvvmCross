@@ -48,15 +48,9 @@ namespace Cirrious.MvvmCross.Touch.Platform
             _applicationDelegate = applicationDelegate;
         }
 
-        protected UIWindow Window
-        {
-            get { return _window; }
-        }
+        protected UIWindow Window => _window;
 
-        protected IMvxApplicationDelegate ApplicationDelegate
-        {
-            get { return _applicationDelegate; }
-        }
+        protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         protected override IMvxTrace CreateDebugTrace()
         {
@@ -187,10 +181,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual List<Type> ValueConverterHolders
-        {
-            get { return new List<Type>(); }
-        }
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
         protected virtual List<Assembly> ValueConverterAssemblies
         {

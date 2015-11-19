@@ -33,12 +33,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -69,12 +65,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -152,9 +144,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         {
             get
             {
-                return this._mustToggleValue == null
-                           ? this.MustToggleIsEnabled
-                           : this._mustToggleValue.Value;
+                return this._mustToggleValue ?? this.MustToggleIsEnabled;
             }
 
             set

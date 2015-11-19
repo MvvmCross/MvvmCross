@@ -133,15 +133,9 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         protected object ClearBindingKey { get; set; }
 
-        protected MvxBindingDescription BindingDescription
-        {
-            get { return _bindingDescription; }
-        }
+        protected MvxBindingDescription BindingDescription => _bindingDescription;
 
-        protected MvxSourceStepDescription SourceStepDescription
-        {
-            get { return _sourceStepDescription; }
-        }
+        protected MvxSourceStepDescription SourceStepDescription => _sourceStepDescription;
 
         protected void SetFreeTextPropertyPath(string sourcePropertyPath)
         {

@@ -19,15 +19,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
             : base(target) { }
 
-        protected MvxExpandableListView ListView
-        {
-            get { return (MvxExpandableListView)Target; }
-        }
+        protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
 
-        public override Type TargetType
-        {
-            get { return typeof(object); }
-        }
+        public override Type TargetType => typeof(object);
 
         protected override void SetValueImpl(object target, object value)
         {
@@ -58,10 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             listView.SetItemChecked(pos, true);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

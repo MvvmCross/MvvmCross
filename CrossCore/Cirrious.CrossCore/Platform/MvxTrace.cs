@@ -35,26 +35,22 @@ namespace Cirrious.CrossCore.Platform
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            if (Instance != null)
-                Instance.Trace(level, tag, PrependWithTime(message), args);
+            Instance?.Trace(level, tag, PrependWithTime(message), args);
         }
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            if (Instance != null)
-                Instance.Trace(level, tag, PrependWithTime(message));
+            Instance?.Trace(level, tag, PrependWithTime(message));
         }
 
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
-            if (Instance != null)
-                Instance.Trace(level, DefaultTag, PrependWithTime(message), args);
+            Instance?.Trace(level, DefaultTag, PrependWithTime(message), args);
         }
 
         public static void Trace(MvxTraceLevel level, Func<string> message)
         {
-            if (Instance != null)
-                Instance.Trace(level, DefaultTag, PrependWithTime(message));
+            Instance?.Trace(level, DefaultTag, PrependWithTime(message));
         }
 
         public static void TaggedTrace(string tag, string message, params object[] args)
@@ -152,7 +148,7 @@ namespace Cirrious.CrossCore.Platform
         private static string PrependWithTime(string input)
         {
             var timeIntoApp = (DateTime.UtcNow - WhenTraceStartedUtc).TotalSeconds;
-            return string.Format("{0,6:0.00} {1}", timeIntoApp, input);
+            return $"{timeIntoApp,6:0.00} {input}";
         }
 
         private static Func<string> PrependWithTime(Func<string> input)

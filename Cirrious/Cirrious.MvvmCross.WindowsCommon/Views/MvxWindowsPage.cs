@@ -23,10 +23,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
     {
         private IMvxViewModel _viewModel;
 
-        public IMvxWindowsFrame WrappedFrame
-        {
-            get { return new MvxWrappedFrame(Frame); }
-        }
+        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
 
         public IMvxViewModel ViewModel
         {

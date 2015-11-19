@@ -20,10 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
-        protected UIControl Control
-        {
-            get { return base.Target as UIControl; }
-        }
+        protected UIControl Control => base.Target as UIControl;
 
         public MvxUIControlTouchUpInsideTargetBinding(UIControl control)
             : base(control)
@@ -51,15 +48,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _command.Execute(null);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType
-        {
-            get { return typeof(ICommand); }
-        }
+        public override System.Type TargetType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {

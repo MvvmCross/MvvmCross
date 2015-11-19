@@ -29,10 +29,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         private static readonly NSString entryKey = new NSString("EntryElement");
 
-        protected virtual NSString EntryKey
-        {
-            get { return entryKey; }
-        }
+        protected virtual NSString EntryKey => entryKey;
 
         private UIKeyboardType keyboardType = UIKeyboardType.Default;
 
@@ -100,10 +97,7 @@ namespace CrossUI.Touch.Dialog.Elements
         private bool _becomeResponder;
 
         private UITextField _entry;
-        protected  UITextField Entry
-        {
-            get { return _entry; }
-        }
+        protected  UITextField Entry => _entry;
 
         protected static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
@@ -200,10 +194,8 @@ namespace CrossUI.Touch.Dialog.Elements
             foreach (var e in s.Elements)
             {
                 var ee = e as EntryElement;
-                if (ee == null)
-                    continue;
 
-                if (ee.Caption != null)
+                if (ee?.Caption != null)
                 {
                     var size = ee.Caption.StringSize(DefaultFont);
                     if (size.Width > max.Width)
@@ -228,10 +220,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private static readonly NSString cellkey = new NSString("EntryElement");
 
-        protected override NSString CellKey
-        {
-            get { return cellkey; }
-        }
+        protected override NSString CellKey => cellkey;
 
         private string _placeholder;
         /// <summary>
@@ -252,8 +241,10 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(CellKey);
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey)
+                {
+                    SelectionStyle = UITableViewCellSelectionStyle.None
+                };
             }
             else
                 RemoveTag(cell, 1);
@@ -374,8 +365,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             OnUserValueChanged(newValue);
 
-            if (Changed != null)
-                Changed(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void Dispose(bool disposing)
@@ -429,8 +419,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (tv == null)
                 return;
             tv.ScrollToRow(IndexPath, UITableViewScrollPosition.Middle, animated);
-            if (_entry != null)
-                _entry.ResignFirstResponder();
+            _entry?.ResignFirstResponder();
         }
     }
 }

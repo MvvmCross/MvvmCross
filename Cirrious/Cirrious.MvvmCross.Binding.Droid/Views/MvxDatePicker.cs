@@ -63,10 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
             var handler = ValueChanged;
-            if (handler != null)
-            {
-                handler(this, null);
-            }
+            handler?.Invoke(this, null);
         }
     }
 }

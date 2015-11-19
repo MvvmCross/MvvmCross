@@ -131,10 +131,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
         private static void DataContext_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var frameworkElement = d as FrameworkElement;
-            if (frameworkElement == null)
-                return;
 
-            var bindings = frameworkElement.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
+            var bindings = frameworkElement?.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
             if (bindings == null)
                 return;
 

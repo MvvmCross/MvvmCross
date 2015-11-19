@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             if (Command != null)
             {
                 var command = Command.GetPropertyText();
-                toReturn.Properties["Command"] = string.Format("@MvxBind:{0}", command);
+                toReturn.Properties["Command"] = $"@MvxBind:{command}";
             }
 
             return toReturn;

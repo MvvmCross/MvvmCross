@@ -256,10 +256,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         protected string CreateText(PerformSimpleTestParams testParams)
         {
             var optionalParameters = BuildOptionalParameters(testParams);
-            var text = string.Format("{0} {1}",
-                                     testParams.Target,
-                                     optionalParameters
-                );
+            var text = $"{testParams.Target} {optionalParameters}";
             return text;
         }
 
@@ -349,45 +346,21 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 _fallbackValue = fallbackValue;
             }
 
-            public string Source
-            {
-                get { return _source; }
-            }
+            public string Source => _source;
 
-            public string Target
-            {
-                get { return _target; }
-            }
+            public string Target => _target;
 
-            public bool UseInlinePath
-            {
-                get { return _useInlinePath; }
-            }
+            public bool UseInlinePath => _useInlinePath;
 
-            public MvxBindingMode BindingMode
-            {
-                get { return _bindingMode; }
-            }
+            public MvxBindingMode BindingMode => _bindingMode;
 
-            public bool TestBindingMode
-            {
-                get { return _testBindingMode; }
-            }
+            public bool TestBindingMode => _testBindingMode;
 
-            public string Converter
-            {
-                get { return _converter; }
-            }
+            public string Converter => _converter;
 
-            public KeyValuePair<string, object> ConverterParameterValue
-            {
-                get { return _converterParameterValue; }
-            }
+            public KeyValuePair<string, object> ConverterParameterValue => _converterParameterValue;
 
-            public KeyValuePair<string, object> FallbackValue
-            {
-                get { return _fallbackValue; }
-            }
+            public KeyValuePair<string, object> FallbackValue => _fallbackValue;
         }
 
         private void PerformParseTest(params PerformSimpleTestParams[] testParamsArray)

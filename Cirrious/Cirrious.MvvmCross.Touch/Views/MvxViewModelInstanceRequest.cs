@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Touch.Views
     {
         private readonly IMvxViewModel _viewModelInstance;
 
-        public IMvxViewModel ViewModelInstance
-        {
-            get { return _viewModelInstance; }
-        }
+        public IMvxViewModel ViewModelInstance => _viewModelInstance;
 
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)

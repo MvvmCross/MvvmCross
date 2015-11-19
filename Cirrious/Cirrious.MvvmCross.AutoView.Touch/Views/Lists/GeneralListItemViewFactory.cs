@@ -52,11 +52,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
         {
-            if (_cachedBindingDescriptions == null)
-            {
-                _cachedBindingDescriptions = CreateBindingDescriptions();
-            }
-            return _cachedBindingDescriptions;
+            return _cachedBindingDescriptions ?? (_cachedBindingDescriptions = CreateBindingDescriptions());
         }
 
         private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()

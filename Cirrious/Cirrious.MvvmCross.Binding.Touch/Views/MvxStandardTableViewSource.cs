@@ -37,10 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly UITableViewCellStyle _cellStyle;
         private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
 
-        protected virtual NSString CellIdentifier
-        {
-            get { return _cellIdentifier; }
-        }
+        protected virtual NSString CellIdentifier => _cellIdentifier;
 
         public MvxStandardTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
@@ -87,10 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _tableViewCellAccessory = tableViewCellAccessory;
         }
 
-        protected IEnumerable<MvxBindingDescription> BindingDescriptions
-        {
-            get { return _bindingDescriptions; }
-        }
+        protected IEnumerable<MvxBindingDescription> BindingDescriptions => _bindingDescriptions;
 
         private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
         {

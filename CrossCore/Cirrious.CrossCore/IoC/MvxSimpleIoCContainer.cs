@@ -481,10 +481,7 @@ namespace Cirrious.CrossCore.IoC
 
         protected virtual void InjectProperties(object toReturn)
         {
-            if (_propertyInjector == null)
-                return;
-
-            _propertyInjector.Inject(toReturn, _options.PropertyInjectorOptions);
+            _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)

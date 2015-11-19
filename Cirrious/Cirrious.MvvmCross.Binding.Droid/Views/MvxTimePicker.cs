@@ -73,10 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
             EventHandler handler = ValueChanged;
-            if (handler != null)
-            {
-                handler(this, null);
-            }
+            handler?.Invoke(this, null);
         }
     }
 }

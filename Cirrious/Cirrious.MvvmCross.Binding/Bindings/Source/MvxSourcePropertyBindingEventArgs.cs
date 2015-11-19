@@ -23,9 +23,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             _value = propertySourceBinding.GetValue();
         }
 
-        public object Value
-        {
-            get { return _value; }
-        }
+        public object Value => _value;
     }
 }

@@ -21,17 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
     {
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        protected IMvxSourcePropertyPathParser SourcePropertyPathParser
-        {
-            get
-            {
-                if (_propertyPathParser == null)
-                {
-                    _propertyPathParser = Mvx.Resolve<IMvxSourcePropertyPathParser>();
-                }
-                return _propertyPathParser;
-            }
-        }
+        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ?? (_propertyPathParser = Mvx.Resolve<IMvxSourcePropertyPathParser>());
 
         private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
 
@@ -84,9 +74,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
         }
 
 
-        public IList<IMvxSourceBindingFactoryExtension> Extensions
-        {
-            get { return _extensions; }
-        }
+        public IList<IMvxSourceBindingFactoryExtension> Extensions => _extensions;
     }
 }

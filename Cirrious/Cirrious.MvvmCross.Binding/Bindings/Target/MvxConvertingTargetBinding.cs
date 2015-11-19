@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected abstract void SetValueImpl(object target, object value);
 

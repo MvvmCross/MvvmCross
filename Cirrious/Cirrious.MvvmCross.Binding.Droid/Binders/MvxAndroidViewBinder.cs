@@ -34,20 +34,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         private IMvxBinder _binder;
 
-        protected IMvxBinder Binder
-        {
-            get
-            {
-                if (_binder == null)
-                    _binder = Mvx.Resolve<IMvxBinder>();
-                return _binder;
-            }
-        }
+        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxBinder>());
 
-        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
-        {
-            get { return _viewBindings; }
-        }
+        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {

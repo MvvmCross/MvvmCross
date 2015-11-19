@@ -20,10 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (Bitmap); }
-        }
+        public override Type TargetType => typeof (Bitmap);
 
         protected override bool GetBitmap(object value, out Bitmap bitmap)
         {

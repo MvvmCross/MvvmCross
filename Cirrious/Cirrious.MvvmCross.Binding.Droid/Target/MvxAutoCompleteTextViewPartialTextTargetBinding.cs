@@ -34,10 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             FireValueChanged(View.PartialText);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWayToSource; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {

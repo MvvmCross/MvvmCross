@@ -15,10 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         private readonly UIControlState _state;
 
-        protected UIButton Button
-        {
-            get { return base.Target as UIButton; }
-        }
+        protected UIButton Button => base.Target as UIButton;
 
         public MvxUIButtonTitleTargetBinding(UIButton button, UIControlState state = UIControlState.Normal)
             : base(button)
@@ -30,15 +27,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType
-        {
-            get { return typeof (string); }
-        }
+        public override System.Type TargetType => typeof (string);
 
         protected override void SetValueImpl(object target, object value)
         {

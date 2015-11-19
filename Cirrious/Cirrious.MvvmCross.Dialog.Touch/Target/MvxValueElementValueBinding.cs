@@ -35,10 +35,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             FireValueChanged(View.ObjectValue);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {

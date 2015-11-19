@@ -24,18 +24,9 @@ namespace Cirrious.MvvmCross.ViewModels
             _allowConcurrentExecutions = allowConcurrentExecutions;
         }
 
-        public bool IsRunning
-        {
-            get { return _concurrentExecutions > 0; }
-        }
+        public bool IsRunning => _concurrentExecutions > 0;
 
-        protected CancellationToken CancelToken
-        {
-            get 
-            {
-                return _cts.Token; 
-            }
-        }
+        protected CancellationToken CancelToken => _cts.Token;
 
         protected abstract bool CanExecuteImpl(object parameter);
         protected abstract Task ExecuteAsyncImpl(object parameter);

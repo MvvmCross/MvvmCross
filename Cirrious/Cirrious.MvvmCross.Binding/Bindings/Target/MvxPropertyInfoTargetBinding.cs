@@ -38,15 +38,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             base.Dispose(isDisposing);
         }
 
-        public override Type TargetType
-        {
-            get { return TargetPropertyInfo.PropertyType; }
-        }
+        public override Type TargetType => TargetPropertyInfo.PropertyType;
 
-        protected PropertyInfo TargetPropertyInfo
-        {
-            get { return _targetPropertyInfo; }
-        }
+        protected PropertyInfo TargetPropertyInfo => _targetPropertyInfo;
 
         protected override void SetValueImpl(object target, object value)
         {
@@ -64,9 +58,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
         }
 
-        protected T View
-        {
-            get { return base.Target as T; }
-        }
+        protected T View => base.Target as T;
     }
 }

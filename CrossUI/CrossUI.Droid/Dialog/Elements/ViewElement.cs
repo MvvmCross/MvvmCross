@@ -30,18 +30,15 @@ namespace CrossUI.Droid.Dialog.Elements
         {
 #warning convertView is junk here?
             View view;
-            if (_layoutId > 0)
-                view = DroidResources.LoadLayout(context, parent, _layoutId);
-            else
-                view = DroidResources.LoadLayout(context, parent, LayoutName);
+            view = _layoutId > 0 ? DroidResources.LoadLayout(context, parent, _layoutId) : DroidResources.LoadLayout(context, parent, LayoutName);
 
             if (view == null)
             {
                 Log.Error("Android.Dialog", "ViewElement: Failed to load resource: " + LayoutName);
             }
-            else if (Populate != null)
+            else
             {
-                Populate(view);
+                Populate?.Invoke(view);
             }
             return view;
         }

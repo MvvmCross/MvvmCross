@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 
             if (selectedCommandName != null)
             {
-                toReturn.Properties["SelectedCommand"] = string.Format("@MvxBind:{0}", selectedCommandName);
+                toReturn.Properties["SelectedCommand"] = $"@MvxBind:{selectedCommandName}";
             }
 
             return toReturn;

@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var overSizedCounts = views.GroupBy(x => x.Key)
                                        .Select(x => new {x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList()})
                                        .Where(x => x.Count > 1)
-                                       .Select(x => string.Format("{0}*{1} ({2})", x.Count, x.Name, string.Join(",", x.ViewNames)))
+                                       .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
                                        .ToArray();
 
             if (overSizedCounts.Length == 0)

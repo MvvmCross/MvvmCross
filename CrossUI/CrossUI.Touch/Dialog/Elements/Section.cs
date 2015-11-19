@@ -247,7 +247,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 count++;
             }
             var root = Parent as RootElement;
-            if (root != null && root.TableView != null)
+            if (root?.TableView != null)
             {
                 if (anim == UITableViewRowAnimation.None)
                     root.TableView.ReloadData();
@@ -261,7 +261,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             var root = Parent as RootElement;
 
-            if (root == null || root.TableView == null)
+            if (root?.TableView == null)
                 return;
 
             int sidx = root.IndexOf(this);
@@ -337,7 +337,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Elements.RemoveRange(start, count);
 
-            if (root == null || root.TableView == null)
+            if (root?.TableView == null)
                 return;
 
             int sidx = root.IndexOf(this);
@@ -359,15 +359,9 @@ namespace CrossUI.Touch.Dialog.Elements
                 yield return e;
         }
 
-        public int Count
-        {
-            get { return Elements.Count; }
-        }
+        public int Count => Elements.Count;
 
-        public Element this[int idx]
-        {
-            get { return Elements[idx]; }
-        }
+        public Element this[int idx] => Elements[idx];
 
         public void Clear()
         {
@@ -379,8 +373,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Elements = new List<Element>();
 
             var root = Parent as RootElement;
-            if (root != null && root.TableView != null)
-                root.TableView.ReloadData();
+            root?.TableView?.ReloadData();
         }
 
         protected override void Dispose(bool disposing)

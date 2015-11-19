@@ -15,8 +15,7 @@ namespace Cirrious.CrossCore.Droid.Platform
         public void OnResult(MvxIntentResultEventArgs result)
         {
             var handler = Result;
-            if (handler != null)
-                handler(this, result);
+            handler?.Invoke(this, result);
         }
 
         public event EventHandler<MvxIntentResultEventArgs> Result;

@@ -17,8 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
         protected void FireCommand(object argument = null)
         {
             var command = Command;
-            if (command != null)
-                command.Execute(null);
+            command?.Execute(null);
         }
 
         protected void AddGestureRecognizer(UIView target, UIGestureRecognizer tap)

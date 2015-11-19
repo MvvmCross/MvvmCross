@@ -38,8 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged(e);
 
             var handler = DataSetChanged;
-            if (handler != null)
-                handler(this, e);
+            handler?.Invoke(this, e);
         }
     }
 }
