@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
         public ListLayoutAuto DefaultLayout { get; set; }
         public Dictionary<string, ListLayoutAuto> ItemLayouts { get; set; }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToListLayoutDescription();
         }

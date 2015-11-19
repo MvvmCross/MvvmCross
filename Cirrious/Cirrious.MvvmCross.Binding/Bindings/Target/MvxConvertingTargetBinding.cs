@@ -77,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             return safeValue;
         }
 
-        protected override sealed void FireValueChanged(object newValue)
+        protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
             if (_isUpdatingTarget

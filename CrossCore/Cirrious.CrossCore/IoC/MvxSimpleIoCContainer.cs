@@ -258,7 +258,7 @@ namespace Cirrious.CrossCore.IoC
             var resolver = new FuncConstructingResolver(() =>
             {
                 var ret = constructor();
-                if ((ret != null) && (!t.IsInstanceOfType(ret)))
+                if ((ret != null) && !t.IsInstanceOfType(ret))
                     throw new MvxIoCResolveException("Constructor failed to return a compatibly object for type {0}", t.FullName);
 
                 return ret;
@@ -442,7 +442,7 @@ namespace Cirrious.CrossCore.IoC
             try
             {
                 var raw = resolver.Resolve();
-                if (!(type.IsInstanceOfType(raw)))
+                if (!type.IsInstanceOfType(raw))
                 {
                     throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
                                            raw.GetType().FullName, type.FullName);

@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Droid.Simple
             }
         }
 
-        protected override sealed void OnViewModelSet()
+        protected sealed override void OnViewModelSet()
         {
             // ignored  here
         }

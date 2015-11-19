@@ -70,7 +70,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             // none added by default
         }
 
-        protected override sealed IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateTouchViewsContainer();
             RegisterTouchViewCreator(container);

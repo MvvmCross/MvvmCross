@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             LayoutName = layoutName;
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToElementDescription();
         }

@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Command = command;
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToMenuDescription();
         }
