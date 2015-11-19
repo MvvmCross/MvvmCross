@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using Cirrious.MvvmCross.BindingEx.WindowsShared;
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
 {
     public class MvxWindowsAssemblyCache 
         : MvxSingleton<IMvxWindowsAssemblyCache>

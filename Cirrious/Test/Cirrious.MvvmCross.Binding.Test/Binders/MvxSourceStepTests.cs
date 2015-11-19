@@ -168,8 +168,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof (string), sourceStep.SourceType);
 
-            object value;
-            value = sourceStep.GetValue();
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
 
             sourceStep.SetValue("Life line");
@@ -198,8 +197,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(int), sourceStep.SourceType);
 
-            object value;
-            value = sourceStep.GetValue();
+            object value = sourceStep.GetValue();
             Assert.AreEqual(42, value);
 
             sourceStep.SetValue(72);
@@ -231,8 +229,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
-            object value;
-            value = sourceStep.GetValue();
+            object value = sourceStep.GetValue();
             Assert.AreEqual(42.21, value);
 
             sourceStep.SetValue(13.72);
@@ -459,8 +456,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
-            object value;
-            value = sourceStep.GetValue();
+            object value = sourceStep.GetValue();
             Assert.AreEqual("Test 42", value);
 
             var changes = new List<object>();

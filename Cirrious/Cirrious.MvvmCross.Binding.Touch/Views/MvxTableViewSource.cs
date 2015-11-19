@@ -140,7 +140,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                 indexPath
                             }, UITableViewRowAnimation.Fade);
                         return true;
-                        ;
                     }
                 default:
                     return false;

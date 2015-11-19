@@ -199,10 +199,10 @@ namespace CrossUI.Touch.Dialog.Elements
             else
             {
                 var imgView = cell.ImageView;
-                UIImage img;
 
                 if (imgView != null)
                 {
+                    UIImage img;
                     if (_extraInfo.Uri != null)
                         img = ImageLoader.DefaultRequestImage(_extraInfo.Uri, this);
                     else if (_extraInfo.Image != null)

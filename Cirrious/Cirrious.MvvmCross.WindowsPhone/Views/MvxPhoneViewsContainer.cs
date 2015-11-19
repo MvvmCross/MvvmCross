@@ -50,12 +50,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         protected virtual string GetBaseXamlUrlForView(Type viewType)
         {
-            string viewUrl;
             var customAttribute =
                 (MvxPhoneViewAttribute)
                 viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
 
-            viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
+            string viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
 
             return viewUrl;
         }

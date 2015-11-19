@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Foobar.Dialog.Core.Elements
+namespace CrossUI.Core.Elements.Dialog
 {
     /*
     public interface IRootElement : IElement

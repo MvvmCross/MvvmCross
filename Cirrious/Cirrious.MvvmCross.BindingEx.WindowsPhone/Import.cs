@@ -11,6 +11,7 @@ using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Binding.Combiners;
+using Cirrious.MvvmCross.BindingEx.WindowsPhone;
 using Cirrious.MvvmCross.BindingEx.WindowsShared;
 
 // ReSharper disable CheckNamespace

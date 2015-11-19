@@ -7,7 +7,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch.Views;
 
-namespace Cirrious.MvvmCross.Touch
+namespace Cirrious.MvvmCross.Touch.Views
 {
 	public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTouchView
 	{

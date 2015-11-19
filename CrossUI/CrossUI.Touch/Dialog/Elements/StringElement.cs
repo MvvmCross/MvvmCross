@@ -56,7 +56,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public override bool Matches(string text)
         {
-            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) ||
+            return (Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1) ||
                    base.Matches(text);
         }
     }
