@@ -10,22 +10,22 @@ using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.Fragging
 {
-    public static class MvxCacheableFragmentAttributeExtensionMethods
+    public static class MvxFragmentAttributeExtensionMethods
     {
         public static bool IsCacheableFragmentAttribute(this Type candidateType)
         {
-            var attributes = candidateType.GetCustomAttributes(typeof(MvxCacheableFragmentAttribute), true);
+            var attributes = candidateType.GetCustomAttributes(typeof(MvxFragmentAttribute), true);
             return attributes.Length > 0;
         }
 
-        public static MvxCacheableFragmentAttribute GetCacheableFragmentAttribute(this Type fromFragmentType)
+        public static MvxFragmentAttribute GetCacheableFragmentAttribute(this Type fromFragmentType)
         {
-            var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxCacheableFragmentAttribute), true);
+            var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxFragmentAttribute), true);
             
             if (!attributes.Any())
-                throw new InvalidOperationException($"Type does not have {nameof(MvxCacheableFragmentAttribute)} attribute!");
+                throw new InvalidOperationException($"Type does not have {nameof(MvxFragmentAttribute)} attribute!");
 
-            var cacheableFragmentAttribute = attributes.First() as MvxCacheableFragmentAttribute;
+            var cacheableFragmentAttribute = attributes.First() as MvxFragmentAttribute;
             return cacheableFragmentAttribute;
         }
     }
