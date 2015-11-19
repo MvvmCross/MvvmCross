@@ -113,7 +113,7 @@ namespace CrossUI.Core.Builder
                     var value = valueProperty.GetValue(item, null);
                     if (key != null)
                     {
-                        toReturn[key.ToString()] = value == null ? null : value.ToString();
+                        toReturn[key.ToString()] = value?.ToString();
                     }
                 }
             }

@@ -262,13 +262,7 @@ namespace CrossUI.Core.Builder
         private static void FixParent(object child, object parent)
         {
             var parentProperty = child.GetType().GetProperty("Parent");
-            if (parentProperty == null)
-            {
-                // nothing to set - so skip this
-                return;
-            }
-
-            parentProperty.SetValue(child, parent, null);
+            parentProperty?.SetValue(child, parent, null);
         }
 
         private static Type CheckDictionaryAndGetValueType(PropertyInfo propertyInfo, Type expectedKeyType,

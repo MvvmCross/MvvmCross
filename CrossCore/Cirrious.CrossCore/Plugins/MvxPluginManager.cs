@@ -136,13 +136,7 @@ namespace Cirrious.CrossCore.Plugins
             }
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad)
-        {
-            if (ConfigurationSource == null)
-                return null;
-
-            return ConfigurationSource(toLoad);
-        }
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
 
         protected abstract IMvxPlugin FindPlugin(Type toLoad);
     }

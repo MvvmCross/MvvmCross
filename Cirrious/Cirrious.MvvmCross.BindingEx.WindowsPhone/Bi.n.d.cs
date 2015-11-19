@@ -86,14 +86,7 @@ namespace mvx
             DependencyPropertyChangedEventArgs args)
         {
             // bindingCreator may be null in the designer currently
-            var bindingCreator = BindingCreator;
-            if (bindingCreator == null)
-                return;
-
-            bindingCreator.CreateBindings(sender, args, ParseBindingDescriptions);
-        }
-
-        private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string bindingText)
+            var bindingCreator = BindingCreator;BindingDescripbindingCreator?.CreateBindings(sender, args, ParseBindingDescriptions)iption> ParseBindingDescriptions(string bindingText)
         {
             if (MvxSingleton<IMvxBindingSingletonCache>.Instance == null)
                 return null;

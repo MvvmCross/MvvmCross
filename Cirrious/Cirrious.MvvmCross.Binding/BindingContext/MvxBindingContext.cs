@@ -182,7 +182,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _directBindings.Add(new TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IList<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
             _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
         }
