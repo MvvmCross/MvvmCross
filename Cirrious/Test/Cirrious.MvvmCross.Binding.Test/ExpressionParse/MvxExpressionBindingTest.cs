@@ -310,6 +310,51 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
+        private static readonly int Zero = 0;
+
+        [Test]
+        public void TestNumberStaticVariableIndexedExpression()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "MyCollection.MyList[0].Value",
+                },
+                TargetName = "Text"
+            };
+            Action<MockBindingContext> test = mock =>
+                mock
+                .CreateBinding(mock.Target)
+                .For(te => te.Text)
+                .To<TestDataContext>(source => source.MyCollection.MyList[Zero].Value)
+                .Apply();
+
+            DoTest(test, expectedDesc);
+        }
+
+        [Test]
+        public void TestNumberPropertyIndexedExpression()
+        {
+            var expectedDesc = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
+                {
+                    SourcePropertyPath = "MyCollection.MyList[0].Value",
+                },
+                TargetName = "Text"
+            };
+            var obj = new { Index = 0 };
+            Action<MockBindingContext> test = mock =>
+                mock
+                .CreateBinding(mock.Target)
+                .For(te => te.Text)
+                .To<TestDataContext>(source => source.MyCollection.MyList[obj.Index].Value)
+                .Apply();
+
+            DoTest(test, expectedDesc);
+        }
+
         [Test]
         public void TestStringVariableIndexedExpression()
         {

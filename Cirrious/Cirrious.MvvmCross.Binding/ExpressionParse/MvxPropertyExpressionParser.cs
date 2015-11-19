@@ -7,6 +7,7 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Reflection;
 using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.ExpressionParse
@@ -75,17 +76,28 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
         private static Expression ConvertMemberAccessToConstant(Expression argument)
         {
-            if (argument.NodeType != ExpressionType.MemberAccess) return argument;
+            var memberExpr = argument as MemberExpression;
+            if (memberExpr == null)
+                return argument;
 
             try
             {
-                var boxed = Expression.Convert(argument, typeof (object));
-                var constant = Expression.Lambda<Func<object>>(boxed)
-                    .Compile()
-                    ();
-                var constExpr = Expression.Constant(constant);
+                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression) as ConstantExpression;
+                object value = constExpr != null ? constExpr.Value : null;
 
-                return constExpr;
+                var property = memberExpr.Member as PropertyInfo;
+                if (property != null)
+                {
+                    var constant = property.GetValue(value);
+                    return Expression.Constant(constant);
+                }
+
+                var field = memberExpr.Member as FieldInfo;
+                if (field != null)
+                {
+                    var constant = field.GetValue(value);
+                    return Expression.Constant(constant);
+                }
             }
             catch
             {
