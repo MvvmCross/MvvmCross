@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Views
 {
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Views
             where TViewModel : IMvxViewModel
             where TView : IMvxView
         {
-            Add(typeof (TViewModel), typeof (TView));
+            Add(typeof(TViewModel), typeof(TView));
         }
 
         public Type GetViewType(Type viewModelType)

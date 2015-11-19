@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.ViewModels
             // If no collection exists, create a new one
             if (!lookup.TryGetValue(name, out commands))
             {
-                commands= new List<IMvxCommand>();
+                commands = new List<IMvxCommand>();
                 lookup[name] = commands;
             }
 

@@ -1,8 +1,8 @@
-﻿using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.CrossCore.Platform;
-using UIKit;
-using System.Reflection;
+﻿using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Bindings.Target;
 using System;
+using System.Reflection;
+using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {

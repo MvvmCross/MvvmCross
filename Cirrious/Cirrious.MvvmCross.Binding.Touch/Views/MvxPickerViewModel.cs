@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Windows.Input;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Windows.Input;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -119,8 +119,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             var command = SelectedChangedCommand;
             if (command != null)
-            if (command.CanExecute(_selectedItem))
-                command.Execute(_selectedItem);
+                if (command.CanExecute(_selectedItem))
+                    command.Execute(_selectedItem);
         }
 
         public object SelectedItem

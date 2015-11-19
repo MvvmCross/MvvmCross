@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
@@ -68,18 +68,18 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 MasterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
-		public virtual void CloseModalViewController()
+        public virtual void CloseModalViewController()
         {
             MasterNavigationController.PopViewController(true);
         }
 
-		public virtual void Close(IMvxViewModel toClose)
+        public virtual void Close(IMvxViewModel toClose)
         {
             var topViewController = MasterNavigationController.TopViewController;
 
             if (topViewController == null)
             {
-                MvxTrace.Warning( "Don't know how to close this viewmodel - no topmost");
+                MvxTrace.Warning("Don't know how to close this viewmodel - no topmost");
                 return;
             }
 
@@ -133,7 +133,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         protected virtual void OnMasterNavigationControllerCreated()
         {
-            }
+        }
 
         protected virtual UINavigationController CreateNavigationController(UIViewController viewController)
         {

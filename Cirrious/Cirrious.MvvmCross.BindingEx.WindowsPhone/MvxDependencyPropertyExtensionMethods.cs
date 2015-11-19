@@ -2,19 +2,24 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+
 #if WINDOWS_PHONE || WINDOWS_WPF
+
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+
 #endif
 #if NETFX_CORE
+
 using System.Reflection;
 using Windows.UI.Xaml;
+
 #endif
 
 // ReSharper disable CheckNamespace
@@ -24,6 +29,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
     public static class MvxDependencyPropertyExtensionMethods
     {
 #if WINDOWS_PHONE || WINDOWS_WPF
+
         public static TypeConverter TypeConverter(this Type type)
         {
             var typeConverter =
@@ -69,9 +75,11 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
             return null;
         }
+
 #endif
 
 #if NETFX_CORE
+
         public static PropertyInfo FindActualProperty(this Type type, string name)
         {
             if (string.IsNullOrEmpty(name))

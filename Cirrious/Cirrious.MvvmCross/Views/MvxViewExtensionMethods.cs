@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using System;
 
 namespace Cirrious.MvvmCross.Views
 {
@@ -35,7 +35,6 @@ namespace Cirrious.MvvmCross.Views
             view.ViewModel = viewModel;
         }
 
-
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
             MvxTrace.Warning(
@@ -58,7 +57,7 @@ namespace Cirrious.MvvmCross.Views
             {
                 MvxTrace.Trace(
                     "No view model type finder available - assuming we are looking for a splash screen - returning null");
-                return typeof (MvxNullViewModel);
+                return typeof(MvxNullViewModel);
             }
 
             return associatedTypeFinder.FindTypeOrNull(view.GetType());
@@ -74,7 +73,7 @@ namespace Cirrious.MvvmCross.Views
             if (propertyInfo == null)
                 return null;
 
-            return (IMvxViewModel) propertyInfo.GetGetMethod().Invoke(view, new object[] {});
+            return (IMvxViewModel)propertyInfo.GetGetMethod().Invoke(view, new object[] { });
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)

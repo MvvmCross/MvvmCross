@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
+using System;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -52,7 +52,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             var customAttribute =
                 (MvxPhoneViewAttribute)
-                viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
+                viewType.GetCustomAttributes(typeof(MvxPhoneViewAttribute), false).FirstOrDefault();
 
             string viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
 

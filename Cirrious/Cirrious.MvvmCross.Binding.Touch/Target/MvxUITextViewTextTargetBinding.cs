@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextViewTextTargetBinding 
+    public class MvxUITextViewTextTargetBinding
         : MvxConvertingTargetBinding
     {
         protected UITextView View => Target as UITextView;
@@ -52,11 +52,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UITextView) target;
+            var view = (UITextView)target;
             if (view == null)
                 return;
 
-            view.Text = (string) value;
+            view.Text = (string)value;
         }
 
         protected override void Dispose(bool isDisposing)

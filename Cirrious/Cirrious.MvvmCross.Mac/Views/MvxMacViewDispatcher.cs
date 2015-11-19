@@ -4,18 +4,18 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using System;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Mac.Views.Presenters;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
-    public class MvxMacViewDispatcher 
+    public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher
         , IMvxViewDispatcher
     {
@@ -26,21 +26,21 @@ namespace Cirrious.MvvmCross.Mac.Views
             _presenter = presenter;
         }
 
-		public bool ShowViewModel(MvxViewModelRequest request)
-		{
-			Action action = () =>
-			{
-				MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
-				_presenter.Show(request);
-			};
-			return RequestMainThreadAction(action);
-		}
+        public bool ShowViewModel(MvxViewModelRequest request)
+        {
+            Action action = () =>
+            {
+                MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
+                _presenter.Show(request);
+            };
+            return RequestMainThreadAction(action);
+        }
 
-		public bool ChangePresentation(MvxPresentationHint hint)
+        public bool ChangePresentation(MvxPresentationHint hint)
         {
             Action action = () =>
                                 {
-									MvxTrace.TaggedTrace("MacNavigation", "Change presentation requested");
+                                    MvxTrace.TaggedTrace("MacNavigation", "Change presentation requested");
                                     _presenter.ChangePresentation(hint);
                                 };
             return RequestMainThreadAction(action);

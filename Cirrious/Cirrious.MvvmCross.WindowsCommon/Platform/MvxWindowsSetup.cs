@@ -2,11 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
@@ -15,6 +13,8 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsCommon.Views;
 using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
+using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Platform
 {

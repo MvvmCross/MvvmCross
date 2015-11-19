@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
 using System;
 using System.Reflection;
-using Foundation;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         protected override object GetValueFrom(UIDatePicker view)
         {
             var components = NSCalendar.CurrentCalendar.Components(
-                NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second, 
+                NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second,
                 view.Date);
             return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
         }
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         {
             if (value == null)
                 value = TimeSpan.FromSeconds(0);
-            var time = (TimeSpan) value;
+            var time = (TimeSpan)value;
             var now = DateTime.Now;
             var date = new DateTime(
                 now.Year,

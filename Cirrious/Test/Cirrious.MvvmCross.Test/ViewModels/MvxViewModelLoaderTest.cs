@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Test.ViewModels
 {
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
-            var parameters = new Dictionary<string, string> {{"foo", "bar"}};
+            var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
                                                                   MvxRequestedBy.UserAction);
             var state = new MvxBundle();
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof (MvxException))]
+        [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModel()
         {
             ClearAll();
@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
-            var parameters = new Dictionary<string, string> {{"foo", "bar"}};
+            var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
                                                                   MvxRequestedBy.UserAction);
             var state = new MvxBundle();
@@ -89,7 +89,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof (MvxException))]
+        [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModelLocatorCollection()
         {
             ClearAll();
@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
-            var parameters = new Dictionary<string, string> {{"foo", "bar"}};
+            var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
                                                                   MvxRequestedBy.UserAction);
             var state = new MvxBundle();

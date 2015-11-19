@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
+using System;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views
 {
@@ -23,11 +23,11 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
                                                    IMvxBundle bundle)
         {
 #warning ClearingBackStack disabled for now
-//            if (viewModelRequest.ClearTop)
-//            {
-//#warning TODO - BackStack not cleared for WinRT
-                //phoneView.ClearBackStack();
-//            }
+            //            if (viewModelRequest.ClearTop)
+            //            {
+            //#warning TODO - BackStack not cleared for WinRT
+            //phoneView.ClearBackStack();
+            //            }
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);

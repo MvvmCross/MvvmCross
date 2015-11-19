@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Test.Core;
@@ -29,12 +29,12 @@ namespace Cirrious.MvvmCross.Test.Platform
             Ioc.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
 
             var builder = new MvxViewModelViewLookupBuilder();
-            var result = builder.Build(new[] {assembly});
+            var result = builder.Build(new[] { assembly });
 
             Assert.AreEqual(4, result.Count);
-            Assert.AreEqual(typeof (Test1View), result[typeof (Test1ViewModel)]);
-            Assert.AreEqual(typeof (NotTest2View), result[typeof (Test2ViewModel)]);
-            Assert.AreEqual(typeof (NotTest3View), result[typeof (Test3ViewModel)]);
+            Assert.AreEqual(typeof(Test1View), result[typeof(Test1ViewModel)]);
+            Assert.AreEqual(typeof(NotTest2View), result[typeof(Test2ViewModel)]);
+            Assert.AreEqual(typeof(NotTest3View), result[typeof(Test3ViewModel)]);
             Assert.AreEqual(typeof(OddNameOddness), result[typeof(OddNameViewModel)]);
         }
     }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Cirrious.CrossCore;
+﻿using Cirrious.CrossCore;
 using Cirrious.CrossCore.ExtensionMethods;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -29,6 +25,7 @@ namespace Cirrious.MvvmCross.ViewModels
         protected CancellationToken CancelToken => _cts.Token;
 
         protected abstract bool CanExecuteImpl(object parameter);
+
         protected abstract Task ExecuteAsyncImpl(object parameter);
 
         public void Cancel()
@@ -151,7 +148,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 }
             }
         }
-        
+
         private void ClearCancellationTokenSource()
         {
             if (_cts == null)

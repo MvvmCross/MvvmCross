@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions.Dialog;
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 {
@@ -38,9 +38,9 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                 toReturn.Properties["Password"] = Password;
             if (Numeric)
                 toReturn.Properties["Numeric"] = Numeric;
-				    if (NoSpellCheck)
-					      toReturn.Properties["NoSpellCheck"] = NoSpellCheck;
-				return toReturn;
+            if (NoSpellCheck)
+                toReturn.Properties["NoSpellCheck"] = NoSpellCheck;
+            return toReturn;
         }
     }
 }
