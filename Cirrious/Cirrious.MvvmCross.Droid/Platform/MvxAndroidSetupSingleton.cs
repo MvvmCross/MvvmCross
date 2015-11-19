@@ -90,8 +90,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 lock (LockObject)
                 {
                     _initialized = true;
-                    if (_currentSplashScreen != null)
-                        _currentSplashScreen.InitializationComplete();
+                    _currentSplashScreen?.InitializationComplete();
                 }
             });
         }

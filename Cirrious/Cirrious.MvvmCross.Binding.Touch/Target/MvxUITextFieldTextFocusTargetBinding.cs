@@ -16,20 +16,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         private bool _subscribed;
 
-        protected UITextField TextField
-        {
-            get { return Target as UITextField; }
-        }
+        protected UITextField TextField => Target as UITextField;
 
-        public override Type TargetType
-        {
-            get { return typeof (string); }
-        }
+        public override Type TargetType => typeof (string);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public MvxUITextFieldTextFocusTargetBinding(object target)
             : base(target)

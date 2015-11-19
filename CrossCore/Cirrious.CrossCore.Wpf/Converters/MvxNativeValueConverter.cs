@@ -23,10 +23,7 @@ namespace Cirrious.CrossCore.Wpf.Converters
             _wrapped = wrapped;
         }
 
-        protected IMvxValueConverter Wrapped
-        {
-            get { return _wrapped; }
-        }
+        protected IMvxValueConverter Wrapped => _wrapped;
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -60,10 +57,7 @@ namespace Cirrious.CrossCore.Wpf.Converters
         : MvxNativeValueConverter
         where T : IMvxValueConverter, new()
     {
-        protected new T Wrapped
-        {
-            get { return (T)base.Wrapped; }
-        }
+        protected new T Wrapped => (T)base.Wrapped;
 
         public MvxNativeValueConverter()
             : base(new T())

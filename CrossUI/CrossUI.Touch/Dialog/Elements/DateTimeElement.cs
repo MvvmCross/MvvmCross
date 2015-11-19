@@ -39,13 +39,11 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(Key);
-
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(Key) ?? new UITableViewCell(UITableViewCellStyle.Value1, Key)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Value1, Key);
-                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-            }
+                Accessory = UITableViewCellAccessory.DisclosureIndicator
+            };
+
             UpdateDetailDisplay(cell);
             return cell;
         }
@@ -134,7 +132,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
-            _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
+            _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value ?? DateTime.UtcNow);
 
             vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_datePicker);
@@ -146,12 +144,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-            {
-                return;
-            }
-
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = Value.HasValue ? FormatDate(Value.Value) : string.Empty;
             }

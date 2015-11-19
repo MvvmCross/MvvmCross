@@ -81,10 +81,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             set { _imageHelper.ImageUrl = value; }
         }
 
-        public IMvxImageHelper<UIImage> Image
-        {
-            get { return _imageHelper; }
-        }
+        public IMvxImageHelper<UIImage> Image => _imageHelper;
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
@@ -101,8 +98,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             base.SetSelected(selected, animated);
 
             if (selected)
-                if (SelectedCommand != null)
-                    SelectedCommand.Execute(null);
+            {
+                SelectedCommand?.Execute(null);
+            }
         }
 
         protected override void Dispose(bool disposing)

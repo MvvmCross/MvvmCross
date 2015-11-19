@@ -57,10 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }
 
-        public MvxImageViewLoader ImageLoader
-        {
-            get { return _imageLoader; }
-        }
+        public MvxImageViewLoader ImageLoader => _imageLoader;
 
         public string TitleText
         {
@@ -93,8 +90,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             _isSelected = selected;
             if (_isSelected)
-                if (SelectedCommand != null)
-                    SelectedCommand.Execute(null);
+            {
+                SelectedCommand?.Execute(null);
+            }
         }
 
         protected override void Dispose(bool disposing)

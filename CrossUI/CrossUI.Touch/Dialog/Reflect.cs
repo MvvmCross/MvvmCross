@@ -341,8 +341,7 @@ namespace CrossUI.Touch.Dialog
                 }
                 else if (mType == typeof (float))
                 {
-                    var floatElement = new FloatElement(null, null, (float) GetValue(mi, o));
-                    floatElement.Caption = caption;
+                    var floatElement = new FloatElement(null, null, (float) GetValue(mi, o)) {Caption = caption};
                     element = floatElement;
 
                     foreach (object attr in attrs)

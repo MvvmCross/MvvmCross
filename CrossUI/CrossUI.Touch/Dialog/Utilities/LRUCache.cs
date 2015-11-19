@@ -103,8 +103,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                     list.AddFirst(node);
 
                     // Remove the old value
-                    if (node.Value != null)
-                        node.Value.Dispose();
+                    node.Value?.Dispose();
                     node.Value = value;
                     while (sizeLimit > 0 && currentSize > sizeLimit && list.Count > 1)
                         Evict();

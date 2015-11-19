@@ -71,13 +71,13 @@ namespace Cirrious.CrossCore.Plugins
                 }
             }
 
-            var error = String.Format("could not load plugin assembly for type {0}", toLoad);
+            var error = $"could not load plugin assembly for type {toLoad}";
             throw new MvxException(error);
         }
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad, string platformDllPostfix)
         {
-            return string.Format("{0}{1}{2}", toLoad.Namespace, platformDllPostfix, _assemblyExtension);
+            return $"{toLoad.Namespace}{platformDllPostfix}{_assemblyExtension}";
         }
     }
 }

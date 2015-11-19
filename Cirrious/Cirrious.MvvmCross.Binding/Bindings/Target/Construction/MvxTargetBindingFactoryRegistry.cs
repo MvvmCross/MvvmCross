@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         private string GenerateKey(Type type, string name)
         {
-            return string.Format("{0}:{1}", type.FullName, name);
+            return $"{type.FullName}:{name}";
         }
 
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)

@@ -116,10 +116,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             base.OnDataContextChanged();
         }
 
-        public override Type SourceType
-        {
-            get { return Description.Combiner.SourceType(_subSteps); }
-        }
+        public override Type SourceType => Description.Combiner.SourceType(_subSteps);
 
         protected override void SetSourceValue(object sourceValue)
         {

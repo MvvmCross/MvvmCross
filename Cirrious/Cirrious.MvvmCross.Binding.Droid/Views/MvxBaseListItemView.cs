@@ -40,10 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
         */
 
-        protected IMvxAndroidBindingContext AndroidBindingContext
-        {
-            get { return _bindingContext; }
-        }
+        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
 
         public IMvxBindingContext BindingContext
         {
@@ -84,10 +81,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-        protected View Content
-        {
-            get { return FirstChild; }
-        }
+        protected View Content => FirstChild;
 
         public object DataContext
         {

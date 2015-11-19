@@ -36,8 +36,6 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             if (converterType == null)
                 return null;
             var converter = Activator.CreateInstance(converterType) as TypeConverter;
-            if (converter == null)
-                return null;
 
             return converter;
         }
@@ -119,12 +117,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
                 return null;
 
             var propertyInfo = FindDependencyPropertyInfo(type, name);
-            if (propertyInfo == null)
-            {
-                return null;
-            }
 
-            return propertyInfo.GetValue(null) as DependencyProperty;
+            return propertyInfo?.GetValue(null) as DependencyProperty;
         }
 
         private static bool EnsureIsDependencyPropertyName(ref string dependencyPropertyName)

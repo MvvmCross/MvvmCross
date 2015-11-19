@@ -387,7 +387,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
             foreach (var kvp in operators)
             {
-                var text = string.Format("Target Foo1 {0} Foo2", kvp.Key);
+                var text = $"Target Foo1 {kvp.Key} Foo2";
                 var expected = new MvxSerializableBindingSpecification()
                     {
                         {

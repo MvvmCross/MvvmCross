@@ -97,19 +97,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected virtual void OnButtonTapped()
         {
-            if (ButtonTapped != null)
-                ButtonTapped();
+            ButtonTapped?.Invoke();
 
-            if (ButtonCommand != null)
-                ButtonCommand.Execute(null);
+            ButtonCommand?.Execute(null);
         }
 
         protected abstract UIImage GetImage();
 
-        protected override NSString CellKey
-        {
-            get { return Key; }
-        }
+        protected override NSString CellKey => Key;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
@@ -124,15 +119,13 @@ namespace CrossUI.Touch.Dialog.Elements
         protected override void UpdateCaptionDisplay(UITableViewCell cell)
         {
             var currentCell = cell as TextWithImageCellView;
-            if (currentCell != null)
-                currentCell.UpdateFrom(this);
+            currentCell?.UpdateFrom(this);
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
             var currentCell = cell as TextWithImageCellView;
-            if (currentCell != null)
-                currentCell.UpdateFrom(this);
+            currentCell?.UpdateFrom(this);
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
 #endif
             {
                     Path = new PropertyPath(sourceStep.SourcePropertyPath),
-                    Mode = ConvertMode(bindingDescription.Mode, property == null ? typeof(object) : property.PropertyType),
+                    Mode = ConvertMode(bindingDescription.Mode, property?.PropertyType ?? typeof(object)),
                     Converter = GetConverter(sourceStep.Converter),
                     ConverterParameter = sourceStep.ConverterParameter,
 #if WINDOWS_PHONE

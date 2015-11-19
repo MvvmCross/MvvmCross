@@ -14,8 +14,7 @@ namespace Cirrious.MvvmCross.Platform
         protected void FireLifetimeChange(MvxLifetimeEvent which)
         {
             var handler = LifetimeChanged;
-            if (handler != null)
-                handler(this, new MvxLifetimeEventArgs(which));
+            handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
         #region Implementation of IMvxLifetime

@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeCommandCollectionBuilder()
         {
-            Mvx.RegisterSingleton(() => CreateCommandCollectionBuilder());
+            Mvx.RegisterSingleton(CreateCommandCollectionBuilder);
         }
 
         protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
@@ -365,10 +365,7 @@ namespace Cirrious.MvvmCross.Platform
         private void FireStateChange(MvxSetupState state)
         {
             var handler = StateChanged;
-            if (handler != null)
-            {
-                handler(this, new MvxSetupStateEventArgs(state));
-            }
+            handler?.Invoke(this, new MvxSetupStateEventArgs(state));
         }
 
         public virtual void EnsureInitialized(Type requiredBy)

@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             var view = androidView as IMvxView;
             var savedState = GetSavedStateFromBundle(bundle);
-            view.OnViewCreate(() => { return cached ?? androidView.LoadViewModel(savedState); });
+            view.OnViewCreate(() => cached ?? androidView.LoadViewModel(savedState));
         }
 
         private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)

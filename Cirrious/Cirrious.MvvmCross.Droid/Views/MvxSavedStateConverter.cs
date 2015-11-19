@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public IMvxBundle Read(Bundle bundle)
         {
-            if (bundle == null)
-                return null;
-
-            var extras = bundle.GetString(ExtrasKey);
+            var extras = bundle?.GetString(ExtrasKey);
             if (string.IsNullOrEmpty(extras))
                 return null;
 

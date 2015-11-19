@@ -29,9 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                if (ImageHelper == null)
-                    return null;
-                return ImageHelper.ImageUrl;
+                return ImageHelper?.ImageUrl;
             }
             set
             {
@@ -118,8 +116,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             if (disposing)
             {
-                if (_imageHelper != null)
-                    _imageHelper.Dispose();
+                _imageHelper?.Dispose();
             }
 
             base.Dispose(disposing);

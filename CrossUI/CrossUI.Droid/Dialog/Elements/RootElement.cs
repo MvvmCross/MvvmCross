@@ -114,15 +114,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public IList<Section> Sections { get; private set; }
 
-        public int Count
-        {
-            get { return Sections.Count; }
-        }
+        public int Count => Sections.Count;
 
-        public Section this[int idx]
-        {
-            get { return Sections[idx]; }
-        }
+        public Section this[int idx] => Sections[idx];
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
@@ -133,10 +127,7 @@ namespace CrossUI.Droid.Dialog.Elements
         protected void HandleElementsChangedEvent(object sender, EventArgs eventArgs)
         {
             var handler = ElementsChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         internal int IndexOf(Section target)
@@ -343,8 +334,7 @@ namespace CrossUI.Droid.Dialog.Elements
                 var radioValue = GetSelectedValue();
 #warning This radio selection is a bit of a mess currently - both radio value and RadioSelected change...
                 var handler = RadioSelectedChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
                 OnUserValueChanged(radioValue);
             }
 

@@ -20,10 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         private readonly bool _isEditTextBinding;
         private bool _subscribed;
 
-        protected TextView TextView
-        {
-            get { return Target as TextView; }
-        }
+        protected TextView TextView => Target as TextView;
 
         public MvxTextViewTextTargetBinding(TextView target)
             : base(target)
@@ -37,10 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _isEditTextBinding = target is EditText;
         }
 
-        public override Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -55,10 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             ((TextView)target).Text = (string)toSet;
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
@@ -97,9 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             get 
             { 
                 var view = TextView;
-                if (view == null)
-                    return null;
-                return view.Text;
+                return view?.Text;
             }
         }
     }

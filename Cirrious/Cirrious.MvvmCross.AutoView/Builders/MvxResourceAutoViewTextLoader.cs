@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.AutoView.Builders
 
         private static string PathForView(string viewType, string key)
         {
-            var path = string.Format("DefaultViews/{0}/{1}.json", viewType, key);
+            var path = $"DefaultViews/{viewType}/{key}.json";
             return path;
         }
     }

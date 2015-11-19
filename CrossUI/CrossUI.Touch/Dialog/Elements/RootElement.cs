@@ -146,15 +146,9 @@ namespace CrossUI.Touch.Dialog.Elements
             return null;
         }
 
-        public int Count
-        {
-            get { return Sections.Count; }
-        }
+        public int Count => Sections.Count;
 
-        public Section this[int idx]
-        {
-            get { return Sections[idx]; }
-        }
+        public Section this[int idx] => Sections[idx];
 
         internal int IndexOf(Section target)
         {
@@ -199,10 +193,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Sections.Add(section);
             section.Parent = this;
-            if (TableView == null)
-                return;
 
-            TableView.InsertSections(MakeIndexSet(Sections.Count - 1, 1), UITableViewRowAnimation.None);
+            TableView?.InsertSections(MakeIndexSet(Sections.Count - 1, 1), UITableViewRowAnimation.None);
         }
 
         //
@@ -249,8 +241,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (newSections == null)
                 return;
 
-            if (TableView != null)
-                TableView.BeginUpdates();
+            TableView?.BeginUpdates();
 
             int pos = idx;
             foreach (var s in newSections)
@@ -308,10 +299,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Sections.RemoveAt(idx);
 
-            if (TableView == null)
-                return;
-
-            TableView.DeleteSections(NSIndexSet.FromIndex(idx), anim);
+            TableView?.DeleteSections(NSIndexSet.FromIndex(idx), anim);
         }
 
         public void Remove(Section s)
@@ -339,8 +327,7 @@ namespace CrossUI.Touch.Dialog.Elements
             foreach (var s in Sections)
                 s.Dispose();
             Sections = new List<Section>();
-            if (TableView != null)
-                TableView.ReloadData();
+            TableView?.ReloadData();
         }
 
         protected override void Dispose(bool disposing)
@@ -409,8 +396,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 var style = _summarySection == -1 && Group == null? 
                     UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
 
-                cell = new UITableViewCell(style, key);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
+                cell = new UITableViewCell(style, key) {SelectionStyle = UITableViewCellSelectionStyle.Blue};
             }
 
             cell.TextLabel.Text = Caption;

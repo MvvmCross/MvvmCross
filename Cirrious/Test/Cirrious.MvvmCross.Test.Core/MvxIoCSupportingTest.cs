@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Test.Core
     {
         private IMvxIoCProvider _ioc;
 
-        protected IMvxIoCProvider Ioc
-        {
-            get { return _ioc; }
-        }
+        protected IMvxIoCProvider Ioc => _ioc;
 
         public void Setup()
         {

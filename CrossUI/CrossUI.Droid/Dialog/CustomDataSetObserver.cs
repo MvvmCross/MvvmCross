@@ -19,15 +19,13 @@ namespace CrossUI.Droid.Dialog
         {
             base.OnChanged();
             var handler = Changed;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
         public override void OnInvalidated()
         {
             base.OnInvalidated();
             var handler = Invalidated;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

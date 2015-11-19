@@ -33,9 +33,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 	    {
 	    }
 
-        public int TemplateId
-        {
-            get { return _templateId; }
-        }
+        public int TemplateId => _templateId;
     }
 }

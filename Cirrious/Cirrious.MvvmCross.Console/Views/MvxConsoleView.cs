@@ -29,10 +29,7 @@ namespace Cirrious.MvvmCross.Console.Views
             set { DataContext = (T) value; }
         }
 
-        public Type ViewModelType
-        {
-            get { return typeof (T); }
-        }
+        public Type ViewModelType => typeof (T);
 
 #warning Need to get the Console implementation level with the mobile implementations again - HackSetViewModel is a Hack
         public void HackSetViewModel(object viewModel)

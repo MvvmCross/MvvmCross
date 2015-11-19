@@ -24,12 +24,12 @@ namespace Cirrious.MvvmCross.Platform
             if (input == null)
                 return new Dictionary<string, string>();
 
-            return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
+            return input.ToDictionary(x => x.Key, x => x.Value?.ToString());
         }
 
         public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
         {
-            return bundle == null ? null : bundle.Data;
+            return bundle?.Data;
         }
 
         public static void Write(this IDictionary<string, string> data, object toStore)
@@ -148,10 +148,8 @@ namespace Cirrious.MvvmCross.Platform
             try
             {
                 var value = propertyInfo.GetValue(input, new object[] {});
-                if (value == null)
-                    return null;
 
-                return value.ToString();
+                return value?.ToString();
             }
             catch (Exception suspectedMethodAccessException)
             {

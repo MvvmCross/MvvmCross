@@ -77,8 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 return reuse;
 
             var cell = CellCreator(tableView, indexPath, item);
-            if (CellModifier != null)
-                CellModifier(cell);
+            CellModifier?.Invoke(cell);
             return cell;
         }
     }

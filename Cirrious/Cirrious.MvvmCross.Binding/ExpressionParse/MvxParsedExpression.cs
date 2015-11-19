@@ -52,10 +52,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
 
         private readonly LinkedList<INode> _nodes = new LinkedList<INode>();
 
-        protected LinkedList<INode> Nodes
-        {
-            get { return _nodes; }
-        }
+        protected LinkedList<INode> Nodes => _nodes;
 
         protected void Prepend(INode node)
         {

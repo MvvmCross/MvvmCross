@@ -88,7 +88,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
             {
-                throw new ArgumentException(String.Format("WrongExpressionMessage (memberExpression.Member is not PropertyInfo but {0})", memberExpression.Member), "expression");
+                throw new ArgumentException(
+                    $"WrongExpressionMessage (memberExpression.Member is not PropertyInfo but {memberExpression.Member})", "expression");
             }
 
             var text = memberExpression.ToString();

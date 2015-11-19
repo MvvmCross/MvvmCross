@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTouchView TouchView
-        {
-            get { return ViewController as IMvxTouchView; }
-        }
+        protected IMvxTouchView TouchView => ViewController as IMvxTouchView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)

@@ -30,8 +30,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected void FireValueChanged()
         {
-            if (ValueChanged != null)
-                ValueChanged(this, EventArgs.Empty);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected ValueElement(string caption)

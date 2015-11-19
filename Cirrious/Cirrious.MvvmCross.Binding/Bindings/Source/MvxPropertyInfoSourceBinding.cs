@@ -41,10 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                 _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
-        protected string PropertyName
-        {
-            get { return _propertyName; }
-        }
+        protected string PropertyName => _propertyName;
 
         protected string PropertyNameForChangedEvent
         {
@@ -57,10 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
         }
 
-        protected PropertyInfo PropertyInfo
-        {
-            get { return _propertyInfo; }
-        }
+        protected PropertyInfo PropertyInfo => _propertyInfo;
 
         protected bool IsIndexedProperty
         {

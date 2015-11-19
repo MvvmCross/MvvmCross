@@ -83,10 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            if (boundChild != null)
-            {
-                boundChild.ClearAllBindings();
-            }
+            boundChild?.ClearAllBindings();
         }
 
 

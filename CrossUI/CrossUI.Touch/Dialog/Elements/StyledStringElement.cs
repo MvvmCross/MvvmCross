@@ -84,15 +84,13 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private ExtraInfo OnImageInfo()
         {
-            if (_extraInfo == null)
-                _extraInfo = new ExtraInfo();
-            return _extraInfo;
+            return _extraInfo ?? (_extraInfo = new ExtraInfo());
         }
 
         // Uses the specified image (use this or ImageUri)
         public UIImage Image
         {
-            get { return _extraInfo == null ? null : _extraInfo.Image; }
+            get { return _extraInfo?.Image; }
             set
             {
                 OnImageInfo().Image = value;
@@ -103,7 +101,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // Loads the image from the specified uri (use this or Image)
         public Uri ImageUri
         {
-            get { return _extraInfo == null ? null : _extraInfo.Uri; }
+            get { return _extraInfo?.Uri; }
             set
             {
                 OnImageInfo().Uri = value;
@@ -114,7 +112,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // Background color for the cell (alternative: BackgroundUri)
         public UIColor BackgroundColor
         {
-            get { return _extraInfo == null ? null : _extraInfo.BackgroundColor; }
+            get { return _extraInfo?.BackgroundColor; }
             set
             {
                 OnImageInfo().BackgroundColor = value;
@@ -124,14 +122,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UIColor DetailColor
         {
-            get { return _extraInfo == null ? null : _extraInfo.DetailColor; }
+            get { return _extraInfo?.DetailColor; }
             set { OnImageInfo().DetailColor = value; }
         }
 
         // Uri for a Background image (alternatiev: BackgroundColor)
         public Uri BackgroundUri
         {
-            get { return _extraInfo == null ? null : _extraInfo.BackgroundUri; }
+            get { return _extraInfo?.BackgroundUri; }
             set
             {
                 OnImageInfo().BackgroundUri = value;
@@ -147,12 +145,8 @@ namespace CrossUI.Touch.Dialog.Elements
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
             var key = GetKey((int) Style);
-            var cell = tv.DequeueReusableCell(key);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(Style, key);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-            }
+            var cell = tv.DequeueReusableCell(key) ??
+                       new UITableViewCell(Style, key) {SelectionStyle = UITableViewCellSelectionStyle.Blue};
             PrepareCell(cell);
             return cell;
         }
@@ -196,7 +190,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             // The check is needed because the cell might have been recycled.
             if (cell.DetailTextLabel != null)
-                cell.DetailTextLabel.Text = Value == null ? "" : Value;
+                cell.DetailTextLabel.Text = Value ?? "";
 
             if (_extraInfo == null)
             {
@@ -227,7 +221,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell.DetailTextLabel.Lines = Lines;
                 cell.DetailTextLabel.LineBreakMode = LineBreakMode;
                 cell.DetailTextLabel.Font = SubtitleFont ?? UIFont.SystemFontOfSize(14);
-                cell.DetailTextLabel.TextColor = (_extraInfo == null || _extraInfo.DetailColor == null)
+                cell.DetailTextLabel.TextColor = (_extraInfo?.DetailColor == null)
                                                      ? UIColor.Gray
                                                      : _extraInfo.DetailColor;
             }
@@ -267,18 +261,14 @@ namespace CrossUI.Touch.Dialog.Elements
             if (uri == null || _extraInfo == null)
                 return;
             var root = GetImmediateRootElement();
-            if (root == null || root.TableView == null)
-                return;
-            root.TableView.ReloadRows(new[] {IndexPath}, UITableViewRowAnimation.None);
+            root?.TableView?.ReloadRows(new[] {IndexPath}, UITableViewRowAnimation.None);
         }
 
         internal void AccessoryTap()
         {
             Action tapped = AccessoryTapped;
-            if (tapped != null)
-                tapped();
-            if (AccessoryCommand != null)
-                AccessoryCommand.Execute(null);
+            tapped?.Invoke();
+            AccessoryCommand?.Execute(null);
         }
     }
 }

@@ -62,8 +62,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         {
             if (pressed && Enabled)
             {
-                if (Tapped != null)
-                    Tapped(this);
+                Tapped?.Invoke(this);
             }
             pressed = false;
             SetNeedsDisplay();
@@ -73,10 +72,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
         {
             var touch = uievent.AllTouches.AnyObject as UITouch;
-            if (Bounds.Contains(touch.LocationInView(this)))
-                pressed = true;
-            else
-                pressed = false;
+            pressed = Bounds.Contains(touch.LocationInView(this));
             return base.ContinueTracking(uitouch, uievent);
         }
 

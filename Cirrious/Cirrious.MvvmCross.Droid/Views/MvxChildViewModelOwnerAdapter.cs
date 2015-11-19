@@ -13,10 +13,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
-        protected IMvxChildViewModelOwner ChildOwner
-        {
-            get { return (IMvxChildViewModelOwner) base.Activity; }
-        }
+        protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner) base.Activity;
 
         public MvxChildViewModelOwnerAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)

@@ -31,15 +31,9 @@ namespace CrossUI.Touch.Dialog
         private bool dirty;
         private bool reloading;
 
-        protected bool Dirty
-        {
-            get { return dirty; }
-        }
+        protected bool Dirty => dirty;
 
-        protected bool Pushing
-        {
-            get { return pushing; }
-        }
+        protected bool Pushing => pushing;
 
         public void ForceDirty(bool newDirty = true)
         {
@@ -56,8 +50,7 @@ namespace CrossUI.Touch.Dialog
             {
                 if (root == value)
                     return;
-                if (root != null)
-                    root.Dispose();
+                root?.Dispose();
 
                 root = value;
                 root.TableView = tableView;
@@ -128,8 +121,7 @@ namespace CrossUI.Touch.Dialog
                 return;
 
             reloading = true;
-            if (refreshView != null)
-                refreshView.SetActivity(true);
+            refreshView?.SetActivity(true);
             refreshRequested(this, EventArgs.Empty);
 
             if (reloading && showStatus && refreshView != null)
@@ -228,8 +220,7 @@ namespace CrossUI.Touch.Dialog
 
         public virtual void OnSearchTextChanged(string text)
         {
-            if (SearchTextChanged != null)
-                SearchTextChanged(this, new SearchChangedEventArgs(text));
+            SearchTextChanged?.Invoke(this, new SearchChangedEventArgs(text));
         }
 
         public void PerformFilter(string text)
@@ -330,8 +321,7 @@ namespace CrossUI.Touch.Dialog
             {
                 var section = Root.Sections[indexPath.Section];
                 var element = (section.Elements[indexPath.Row] as StyledStringElement);
-                if (element != null)
-                    element.AccessoryTap();
+                element?.AccessoryTap();
             }
 
             public override nint RowsInSection(UITableView tableview, nint section)
@@ -385,8 +375,7 @@ namespace CrossUI.Touch.Dialog
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
                 var onSelection = Container.OnSelection;
-                if (onSelection != null)
-                    onSelection(indexPath);
+                onSelection?.Invoke(indexPath);
                 Container.Selected(indexPath);
             }
 
@@ -526,10 +515,7 @@ namespace CrossUI.Touch.Dialog
                 DismissViewController(animated, () => { });
         }
 
-        public virtual UISearchBar SearchBar
-        {
-            get { return this.searchBar; }
-        }
+        public virtual UISearchBar SearchBar => this.searchBar;
 
         protected virtual void SetupSearch()
         {
@@ -583,8 +569,7 @@ namespace CrossUI.Touch.Dialog
                                          UIViewAutoresizing.FlexibleTopMargin;
             tableView.AutosizesSubviews = true;
 
-            if (root != null)
-                root.Prepare();
+            root?.Prepare();
 
             UpdateSource();
             View = tableView;
@@ -694,8 +679,7 @@ namespace CrossUI.Touch.Dialog
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            if (ViewDissapearing != null)
-                ViewDissapearing(this, EventArgs.Empty);
+            ViewDissapearing?.Invoke(this, EventArgs.Empty);
         }
 
         public DialogViewController(IntPtr handle) 

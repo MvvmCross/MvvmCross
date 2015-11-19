@@ -14,10 +14,7 @@ namespace Cirrious.CrossCore.Core
         public static void DisposeIfDisposable(this object thing)
         {
             var disposable = thing as IDisposable;
-            if (disposable != null)
-            {
-                disposable.Dispose();
-            }
+            disposable?.Dispose();
         }
     }
 }

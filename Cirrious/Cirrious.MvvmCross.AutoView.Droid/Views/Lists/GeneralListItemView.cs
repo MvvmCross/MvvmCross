@@ -45,10 +45,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 #warning Need to sort out the HandleClick stuff?
         private void HandleClick(object sender, EventArgs e)
         {
-            if (_selectedCommand == null)
-                return;
-
-            _selectedCommand.Execute(base.DataContext);
+            _selectedCommand?.Execute(base.DataContext);
         }
 
         private int GetTemplateId()
@@ -56,10 +53,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return DroidResources.FindResourceId("listitem_" + _templateName);
         }
 
-        public string UniqueName
-        {
-            get { return @"General$" + _templateName; }
-        }
+        public string UniqueName => @"General$" + _templateName;
 
         private void BindProperties(Dictionary<string, string> textBindings)
         {
@@ -127,11 +121,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         private string GetTextFor(string partName)
         {
             var view = FindSubView<TextView>(partName);
-            if (view == null)
-            {
-                return null;
-            }
-            return view.Text;
+            return view?.Text;
         }
 
         private TView FindSubView<TView>(string partName) where TView : View

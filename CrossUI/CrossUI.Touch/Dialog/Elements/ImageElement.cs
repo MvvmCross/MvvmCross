@@ -82,18 +82,11 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        protected override NSString CellKey
-        {
-            get { return Ikey; }
-        }
+        protected override NSString CellKey => Ikey;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-            }
+            var cell = tv.DequeueReusableCell(CellKey) ?? new UITableViewCell(UITableViewCellStyle.Default, CellKey);
 
             if (_scaled == null)
                 return cell;

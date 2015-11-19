@@ -16,10 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     {
         private ICommand _command;
 
-        protected UITextField View
-        {
-            get { return Target as UITextField; }
-        }
+        protected UITextField View => Touch.Target as UITextField;
 
         public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
             : base(target)
@@ -41,10 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             return true;
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         public override void SetValue(object value)
         {
@@ -52,10 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _command = command;
         }
 
-        public override System.Type TargetType
-        {
-            get { return typeof(ICommand); }
-        }
+        public override System.Type TargetType => typeof(ICommand);
 
 
         protected override void Dispose(bool isDisposing)

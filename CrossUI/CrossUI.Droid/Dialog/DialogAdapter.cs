@@ -135,10 +135,7 @@ namespace CrossUI.Droid.Dialog
             return null;
         }
 
-        public override Section this[int position]
-        {
-            get { return Root.Sections[position]; }
-        }
+        public override Section this[int position] => Root.Sections[position];
 
         public override bool AreAllItemsEnabled()
         {

@@ -17,9 +17,6 @@ namespace CrossUI.Droid.Builder
         }
 
         // default implementation...
-        protected override IPropertyBuilder PropertyBuilder
-        {
-            get { return new PropertyBuilder(); }
-        }
+        protected override IPropertyBuilder PropertyBuilder => new PropertyBuilder();
     }
 }

@@ -20,11 +20,11 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             _frame = frame;
         }
 
-        public Control UnderlyingControl { get { return _frame; } }
+        public Control UnderlyingControl => _frame;
 
-        public object Content { get { return _frame.Content; } }
+        public object Content => _frame.Content;
 
-        public bool CanGoBack { get { return _frame.CanGoBack; } }
+        public bool CanGoBack => _frame.CanGoBack;
 
         public bool Navigate(Type viewType, object parameter)
         {

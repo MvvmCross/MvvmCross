@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         private readonly MvxSourceStepDescription _description;
         private object _dataContext;
 
-        protected MvxSourceStepDescription Description
-        {
-            get { return _description; }
-        }
+        protected MvxSourceStepDescription Description => _description;
 
         protected MvxSourceStep(MvxSourceStepDescription description)
         {
@@ -44,10 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public virtual Type TargetType { get; set; }
 
-        public virtual Type SourceType
-        {
-            get { return typeof (object); }
-        }
+        public virtual Type SourceType => typeof (object);
 
         public object DataContext
         {
@@ -122,10 +116,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         protected virtual void SendSourcePropertyChanged()
         {
             var handler = _changed;
-            if (handler == null)
-                return;
 
-            handler.Invoke(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
@@ -191,10 +183,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     public abstract class MvxSourceStep<T> : MvxSourceStep
         where T : MvxSourceStepDescription
     {
-        protected new T Description
-        {
-            get { return (T) base.Description; }
-        }
+        protected new T Description => (T) base.Description;
 
         protected MvxSourceStep(T description)
             : base(description)

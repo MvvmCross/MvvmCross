@@ -30,10 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected UITableView TableView
-        {
-            get { return _tableView; }
-        }
+        protected UITableView TableView => _tableView;
 
         public bool DeselectAutomatically { get; set; }
 
@@ -94,8 +91,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 // we don't have any multi-select or any scroll into view functionality here
                 _selectedItem = value;
                 var handler = SelectedItemChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             }
         }
 

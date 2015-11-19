@@ -16,10 +16,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Fragment Fragment
-        {
-            get { return _eventSource as Fragment; }
-        }
+        protected Fragment Fragment => _eventSource as Fragment;
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {

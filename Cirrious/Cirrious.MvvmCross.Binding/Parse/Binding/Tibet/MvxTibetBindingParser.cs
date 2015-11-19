@@ -21,13 +21,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
  
         protected override IEnumerable<char> TerminatingCharacters()
         {
-            if (_terminatingCharacters == null)
-            {
-                _terminatingCharacters =
-                    base.TerminatingCharacters().Union(OperatorCharacters()).ToList();
-            }
-
-            return _terminatingCharacters;
+            return _terminatingCharacters ??
+                   (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters()).ToList());
         }
 
         private char[] OperatorCharacters()

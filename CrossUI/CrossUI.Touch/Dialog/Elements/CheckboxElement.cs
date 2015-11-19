@@ -44,11 +44,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(Key);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, Key);
-            }
+            var cell = tv.DequeueReusableCell(Key) ?? new UITableViewCell(UITableViewCellStyle.Default, Key);
             SetCellCheckmark(cell);
 
             return cell;

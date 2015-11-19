@@ -53,10 +53,7 @@ namespace CrossUI.Touch.Dialog.Elements
             key = new NSString("UIViewElement" + _count++);
         }
 
-        protected override NSString CellKey
-        {
-            get { return key; }
-        }
+        protected override NSString CellKey => key;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {

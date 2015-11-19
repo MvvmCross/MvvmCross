@@ -30,10 +30,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         private void EntryElementOnChanged(object sender, EventArgs eventArgs)
         {

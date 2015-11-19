@@ -16,15 +16,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneTime; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneTime;
 
-        public override Type TargetType
-        {
-            get { return typeof (Object); }
-        }
+        public override Type TargetType => typeof (Object);
 
         public override void SetValue(object value)
         {

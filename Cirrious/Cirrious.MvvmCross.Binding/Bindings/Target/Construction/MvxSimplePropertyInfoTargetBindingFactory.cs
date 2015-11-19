@@ -26,10 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes
-        {
-            get { return _innerFactory.SupportedTypes; }
-        }
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
@@ -47,8 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
-                if (disposable != null)
-                    disposable.Dispose();
+                disposable?.Dispose();
             }
             return targetBinding;
         }

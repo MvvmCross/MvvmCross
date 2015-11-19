@@ -75,10 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            if (ItemsSource == null)
-                return null;
-
-            return ItemsSource.ElementAt(indexPath.Row);
+            return ItemsSource?.ElementAt(indexPath.Row);
         }
 
         private void CollectionChangedOnCollectionChanged(object sender,

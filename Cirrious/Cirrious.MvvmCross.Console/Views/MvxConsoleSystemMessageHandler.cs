@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Console.Views
     {
         public bool ExitFlag { get; set; }
 
-        private IMvxConsoleNavigation ConsoleNavigation
-        {
-            get { return Mvx.Resolve<IMvxConsoleNavigation>(); }
-        }
+        private IMvxConsoleNavigation ConsoleNavigation => Mvx.Resolve<IMvxConsoleNavigation>();
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
         {

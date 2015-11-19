@@ -56,30 +56,20 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UIFont Font
         {
-            get
-            {
-                if (_font == null)
-                    _font = UIFont.FromName("Helvetica", 17f);
-                return _font;
-            }
+            get { return _font ?? (_font = UIFont.FromName("Helvetica", 17f)); }
             set
             {
-                if (_font != null)
-                    _font.Dispose();
+                _font?.Dispose();
                 _font = value;
             }
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(ckey);
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(ckey) ?? new UITableViewCell(UITableViewCellStyle.Default, ckey)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, ckey)
-                    {
-                        SelectionStyle = UITableViewCellSelectionStyle.Blue
-                    };
-            }
+                SelectionStyle = UITableViewCellSelectionStyle.Blue
+            };
             cell.Accessory = Accessory;
             var tl = cell.TextLabel;
             tl.Text = Caption;

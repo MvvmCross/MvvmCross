@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             // nothing we can do here - binding is missing
         }
 
-        public override Type SourceType
-        {
-            get { return typeof(object); }
-        }
+        public override Type SourceType => typeof(object);
 
         public override object GetValue()
         {

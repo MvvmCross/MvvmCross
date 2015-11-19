@@ -57,10 +57,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                 .GetCustomAttributes(typeof (MvxViewForAttribute), false)
                                 .FirstOrDefault() as MvxViewForAttribute;
 
-            if (attribute == null)
-                return null;
-
-            return attribute.ViewModel;
+            return attribute?.ViewModel;
         }
 
         protected virtual Type LookupNamedViewModelType(Type candidateType)
@@ -81,10 +78,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                      && !x.PropertyType.GetTypeInfo().IsInterface
                                      && !x.PropertyType.GetTypeInfo().IsAbstract);
 
-            if (viewModelPropertyInfo == null)
-                return null;
-
-            return viewModelPropertyInfo.PropertyType;
+            return viewModelPropertyInfo?.PropertyType;
         }
 
         protected virtual bool CheckCandidateTypeIsAView(Type candidateType)

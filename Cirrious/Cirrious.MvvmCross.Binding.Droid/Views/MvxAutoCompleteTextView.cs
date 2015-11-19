@@ -107,10 +107,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set { Adapter.ItemTemplateId = value; }
         }
 
-        public string PartialText
-        {
-            get { return Adapter.PartialText; }
-        }
+        public string PartialText => Adapter.PartialText;
 
         private object _selectedObject;
 
@@ -134,10 +131,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void FireChanged(EventHandler eventHandler)
         {
             var handler = eventHandler;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -17,10 +17,7 @@ namespace Cirrious.CrossCore.Droid.Views
     {
         private readonly IMvxEventSourceActivity _eventSource;
 
-        protected Activity Activity
-        {
-            get { return _eventSource as Activity; }
-        }
+        protected Activity Activity => _eventSource as Activity;
 
         protected MvxBaseActivityAdapter(IMvxEventSourceActivity eventSource)
         {

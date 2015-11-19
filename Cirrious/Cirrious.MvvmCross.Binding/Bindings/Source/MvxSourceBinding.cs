@@ -20,10 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             _source = source;
         }
 
-        protected object Source
-        {
-            get { return _source; }
-        }
+        protected object Source => _source;
 
         public event EventHandler Changed;
 
@@ -36,8 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         protected void FireChanged()
         {
             var handler = Changed;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected bool EqualsCurrentValue(object testValue)

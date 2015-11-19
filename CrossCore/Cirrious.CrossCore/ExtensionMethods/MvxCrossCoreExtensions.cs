@@ -62,10 +62,7 @@ namespace Cirrious.CrossCore.ExtensionMethods
                 else if (propertyType.GetTypeInfo().IsValueType)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    if (underlyingType == typeof(bool))
-                        safeValue = value.ConvertToBooleanCore();
-                    else
-                        safeValue = ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
+                    safeValue = underlyingType == typeof(bool) ? value.ConvertToBooleanCore() : ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
                 else
                 {

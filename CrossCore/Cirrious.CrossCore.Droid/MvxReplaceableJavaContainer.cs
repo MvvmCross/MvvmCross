@@ -15,7 +15,7 @@ namespace Cirrious.CrossCore.Droid
 
         public override string ToString()
         {
-            return Object == null ? string.Empty : Object.ToString();
+            return Object?.ToString() ?? string.Empty;
         }
     }
 }

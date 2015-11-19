@@ -15,10 +15,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
     public class MvxRatingBarRatingTargetBinding : MvxAndroidTargetBinding
     {
-        protected RatingBar RatingBar
-        {
-            get { return (RatingBar)Target; }
-        }
+        protected RatingBar RatingBar => (RatingBar)Droid.Target;
 
         public MvxRatingBarRatingTargetBinding(RatingBar target)
             : base(target)
@@ -47,15 +44,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             ratingBar.Rating = (float)value;
         }
 
-        public override Type TargetType
-        {
-            get { return typeof(float); }
-        }
+        public override Type TargetType => typeof(float);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {

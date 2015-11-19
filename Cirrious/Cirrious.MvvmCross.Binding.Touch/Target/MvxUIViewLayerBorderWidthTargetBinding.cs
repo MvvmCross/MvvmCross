@@ -19,10 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         {
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (float); }
-        }
+        public override Type TargetType => typeof (float);
 
         protected override void SetValueImpl(object target, object value)
         {

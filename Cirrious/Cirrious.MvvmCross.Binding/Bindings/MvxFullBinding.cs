@@ -20,15 +20,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         : MvxBinding
           , IMvxUpdateableBinding
     {
-        private IMvxSourceStepFactory SourceStepFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceStepFactory; }
-        }
+        private IMvxSourceStepFactory SourceStepFactory => MvxBindingSingletonCache.Instance.SourceStepFactory;
 
-        private IMvxTargetBindingFactory TargetBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.TargetBindingFactory; }
-        }
+        private IMvxTargetBindingFactory TargetBindingFactory => MvxBindingSingletonCache.Instance.TargetBindingFactory;
 
         private readonly MvxBindingDescription _bindingDescription;
         private IMvxSourceStep _sourceStep;

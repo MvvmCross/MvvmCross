@@ -166,7 +166,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCaptionDisplay(UITableViewCell cell)
         {
-            if (cell != null && cell.TextLabel != null)
+            if (cell?.TextLabel != null)
                 cell.TextLabel.Text = _caption;
         }
 
@@ -218,10 +218,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// of keys for different uses, so you need to look at the source code for those
         /// if you are trying to override StringElement or StyledStringElement.
         /// </remarks>
-        protected virtual NSString CellKey
-        {
-            get { return Key; }
-        }
+        protected virtual NSString CellKey => Key;
 
         /// <summary>
         /// Gets a UITableViewCell for this element.   
@@ -283,8 +280,7 @@ namespace CrossUI.Touch.Dialog.Elements
         protected static void RemoveTag(UITableViewCell cell, int tag)
         {
             var viewToRemove = cell.ContentView.ViewWithTag(tag);
-            if (viewToRemove != null)
-                viewToRemove.RemoveFromSuperview();
+            viewToRemove?.RemoveFromSuperview();
         }
 
         /// <summary>
@@ -329,10 +325,8 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </param>
         public virtual void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
-            if (Tapped != null)
-                Tapped();
-            if (SelectedCommand != null)
-                SelectedCommand.Execute(null);
+            Tapped?.Invoke();
+            SelectedCommand?.Execute(null);
             if (ShouldDeselectAfterTouch)
                 tableView.DeselectRow(path, true);
         }
@@ -340,14 +334,8 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <summary>
         /// Is anything registered to the select handler(s) for this Element
         /// </summary>
-        protected bool IsSelectable
-        {
-            get
-            {
-                return Tapped != null
-                       || (SelectedCommand != null && SelectedCommand.CanExecute(null));
-            }
-        }
+        protected bool IsSelectable => Tapped != null
+                                       || (SelectedCommand != null && SelectedCommand.CanExecute(null));
 
         /// <summary>
         /// If the cell is attached will return the immediate RootElement
@@ -355,9 +343,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public RootElement GetImmediateRootElement()
         {
             var section = Parent as Section;
-            if (section == null)
-                return null;
-            return section.Parent as RootElement;
+            return section?.Parent as RootElement;
         }
 
         /// <summary>
@@ -366,9 +352,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public UITableView GetContainerTableView()
         {
             var root = GetImmediateRootElement();
-            if (root == null)
-                return null;
-            return root.TableView;
+            return root?.TableView;
         }
 
         /// <summary>
@@ -395,9 +379,7 @@ namespace CrossUI.Touch.Dialog.Elements
             get
             {
                 var section = Parent as Section;
-                if (section == null)
-                    return null;
-                var root = section.Parent as RootElement;
+                var root = section?.Parent as RootElement;
                 if (root == null)
                     return null;
 

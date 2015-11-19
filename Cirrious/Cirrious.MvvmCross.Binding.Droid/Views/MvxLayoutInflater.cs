@@ -313,22 +313,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory
-        {
-            get
-            {
-                return this._androidViewFactory ?? (this._androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
-            }
-        }
+        protected IMvxAndroidViewFactory AndroidViewFactory => this._androidViewFactory ?? (this._androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
 
-        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory
-        {
-            get
-            {
-                return this._layoutInflaterHolderFactoryFactory ??
-                       (this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
-            }
-        }
+        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory => this._layoutInflaterHolderFactoryFactory ??
+                                                                           (this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {

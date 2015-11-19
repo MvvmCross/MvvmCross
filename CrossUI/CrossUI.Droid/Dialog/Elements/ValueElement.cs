@@ -38,8 +38,7 @@ namespace CrossUI.Droid.Dialog.Elements
         protected virtual void FireValueChanged()
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected abstract void UpdateDetailDisplay(View cell);

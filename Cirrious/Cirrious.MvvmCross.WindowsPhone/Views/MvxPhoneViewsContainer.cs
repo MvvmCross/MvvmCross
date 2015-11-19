@@ -43,8 +43,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
-            var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName,
-                                        Uri.EscapeDataString(requestText));
+            var viewUrl =
+                $"{GetBaseXamlUrlForView(viewType)}?{QueryParameterKeyName}={Uri.EscapeDataString(requestText)}";
             return new Uri(viewUrl, UriKind.Relative);
         }
 
@@ -55,12 +55,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 (MvxPhoneViewAttribute)
                 viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
 
-            if (customAttribute == null)
-            {
-                viewUrl = GetConventionalXamlUrlForView(viewType);
-            }
-            else
-                viewUrl = customAttribute.Url;
+            viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
 
             return viewUrl;
         }
@@ -69,13 +64,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             var splitName = viewType.FullName.Split('.');
             var viewsAndBeyond = splitName.SkipWhile((segment) => segment != ViewsFolderName);
-            var viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
+            var viewUrl = $"/{string.Join("/", viewsAndBeyond)}.xaml";
             return viewUrl;
         }
 
-        protected virtual string ViewsFolderName
-        {
-            get { return "Views"; }
-        }
+        protected virtual string ViewsFolderName => "Views";
     }
 }

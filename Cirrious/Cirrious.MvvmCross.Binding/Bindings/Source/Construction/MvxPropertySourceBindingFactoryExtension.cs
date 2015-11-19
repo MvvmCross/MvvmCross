@@ -26,14 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            if (remainingTokens.Count == 0)
-            {
-                result = CreateLeafBinding(source, currentToken);
-            }
-            else
-            {
-                result = CreateChainedBinding(source, currentToken, remainingTokens);
-            }
+            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, currentToken) : CreateChainedBinding(source, currentToken, remainingTokens);
             return result != null;
         }
 

@@ -36,10 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 	    }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
-        protected MvxExpandableListAdapter ThisAdapter
-        {
-            get { return ExpandableListAdapter as MvxExpandableListAdapter; }
-        }
+        protected MvxExpandableListAdapter ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource

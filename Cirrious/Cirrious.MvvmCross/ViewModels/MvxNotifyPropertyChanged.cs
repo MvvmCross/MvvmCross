@@ -67,8 +67,7 @@ namespace Cirrious.MvvmCross.ViewModels
                     {
                         var handler = PropertyChanged;
 
-                        if (handler != null)
-                            handler(this, changedArgs);
+                        handler?.Invoke(this, changedArgs);
                     });
 
             if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())

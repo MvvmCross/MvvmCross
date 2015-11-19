@@ -30,15 +30,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue);
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue) ??
+                       new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
+                Skey)
             {
-                cell = new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
-                                           Skey);
-                cell.SelectionStyle = IsSelectable
-                                          ? UITableViewCellSelectionStyle.Blue
-                                          : UITableViewCellSelectionStyle.None;
-            }
+                SelectionStyle = IsSelectable
+                    ? UITableViewCellSelectionStyle.Blue
+                    : UITableViewCellSelectionStyle.None
+            };
             cell.Accessory = UITableViewCellAccessory.None;
 
             return cell;
@@ -46,11 +45,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-                return;
-
             // The check is needed because the cell might have been recycled.
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = Value ?? string.Empty;
                 cell.DetailTextLabel.SetNeedsDisplay();

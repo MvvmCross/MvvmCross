@@ -22,10 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType
-        {
-            get { return (PropertyInfo == null) ? null : PropertyInfo.PropertyType; }
-        }
+        public override Type SourceType => PropertyInfo?.PropertyType;
 
         protected override void OnBoundPropertyChanged()
         {

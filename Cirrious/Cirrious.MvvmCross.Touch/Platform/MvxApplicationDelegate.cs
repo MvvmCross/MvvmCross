@@ -37,8 +37,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             var handler = LifetimeChanged;
-            if (handler != null)
-                handler(this, new MvxLifetimeEventArgs(which));
+            handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
         #region IMvxLifetime implementation

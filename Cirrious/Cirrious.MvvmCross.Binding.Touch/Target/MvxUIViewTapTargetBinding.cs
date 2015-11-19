@@ -23,15 +23,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType
-        {
-            get { return typeof (ICommand); }
-        }
+        public override Type TargetType => typeof (ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {

@@ -32,15 +32,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             addMethod.Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (ICommand); }
-        }
+        public override Type TargetType => typeof (ICommand);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -57,8 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         private void HandleEvent(object sender, T args)
         {
-            if (_currentCommand != null)
-                _currentCommand.Execute(null);
+            _currentCommand?.Execute(null);
         }
 
         public override void SetValue(object value)

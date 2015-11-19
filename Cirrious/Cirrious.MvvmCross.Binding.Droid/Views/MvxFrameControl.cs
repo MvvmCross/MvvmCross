@@ -46,7 +46,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 {
                     if (Content == null && _templateId != 0)
                     {
-                        Mvx.Trace("DataContext is {0}", DataContext == null ? "Null" : DataContext.ToString());
+                        Mvx.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
                         Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });
@@ -57,10 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 	    {
 	    }
 
-        protected IMvxAndroidBindingContext AndroidBindingContext
-        {
-            get { return _bindingContext; }
-        }
+        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
 
         public IMvxBindingContext BindingContext
         {

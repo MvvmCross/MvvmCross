@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         protected override void Dispose(bool isDisposing)
         {

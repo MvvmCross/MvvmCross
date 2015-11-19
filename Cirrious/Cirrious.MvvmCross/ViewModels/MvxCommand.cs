@@ -27,8 +27,7 @@ namespace Cirrious.MvvmCross.ViewModels
         public void RaiseCanExecuteChanged(object sender)
         {
             var handler = CanExecuteChanged;
-            if (handler != null)
-                handler(sender, EventArgs.Empty);
+            handler?.Invoke(sender, EventArgs.Empty);
         }
     }
 

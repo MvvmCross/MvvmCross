@@ -62,10 +62,8 @@ namespace CrossUI.Droid.Dialog.Elements
         {
             if (disposing)
             {
-                if (scaled != null)
-                    scaled.Dispose();
-                if (Value != null)
-                    Value.Dispose();
+                scaled?.Dispose();
+                Value?.Dispose();
             }
             base.Dispose(disposing);
         }
