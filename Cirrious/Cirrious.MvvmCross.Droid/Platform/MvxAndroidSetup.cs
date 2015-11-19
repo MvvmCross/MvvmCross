@@ -196,9 +196,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual List<Type> ValueConverterHolders => new List<Type>();
+        protected virtual IEnumerable<Type> ValueConverterHolders => new List<Type>();
 
-        protected virtual List<Assembly> ValueConverterAssemblies
+        protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
             {

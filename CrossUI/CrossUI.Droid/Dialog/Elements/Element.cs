@@ -35,7 +35,7 @@ namespace CrossUI.Droid.Dialog.Elements
         /// <param name="layoutName">
         /// The layout to load.
         /// </param>
-        public Element(string caption = null, string layoutName = null)
+        protected Element(string caption = null, string layoutName = null)
         {
             Caption = caption;
             LayoutName = layoutName;

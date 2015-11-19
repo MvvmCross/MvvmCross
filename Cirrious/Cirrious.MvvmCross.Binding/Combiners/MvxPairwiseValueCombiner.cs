@@ -75,9 +75,9 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         private delegate bool CombinerFunc(out object value);
 
-        private delegate bool CombinerFunc<T1>(T1 input1, out object value);
+        private delegate bool CombinerFunc<in T1>(T1 input1, out object value);
 
-        private delegate bool CombinerFunc<T1, T2>(T1 input1, T2 input2, out object value);
+        private delegate bool CombinerFunc<in T1, in T2>(T1 input1, T2 input2, out object value);
 
         private readonly Dictionary<TypeTuple, CombinerFunc<object, object>> _combinerActions;
 

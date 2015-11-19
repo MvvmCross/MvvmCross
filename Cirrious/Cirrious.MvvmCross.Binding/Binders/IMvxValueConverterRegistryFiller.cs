@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
-    public interface IMvxNamedInstanceRegistryFiller<T>
+    public interface IMvxNamedInstanceRegistryFiller<out T>
     {
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
 

@@ -19,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         void RegisterBinding(object target, IMvxUpdateableBinding binding);
 
-        void RegisterBindingsWithClearKey(object clearKey, IList<KeyValuePair<object, IMvxUpdateableBinding>> bindings);
+        void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings);
 
         void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding);
 

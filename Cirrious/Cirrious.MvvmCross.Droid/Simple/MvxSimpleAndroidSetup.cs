@@ -24,7 +24,7 @@ namespace Cirrious.MvvmCross.Droid.Simple
             _converterTypes = converterTypes;
         }
 
-        protected override List<Type> ValueConverterHolders => _converterTypes.ToList();
+        protected override IEnumerable<Type> ValueConverterHolders => _converterTypes.ToList();
 
         protected override void InitializeViewLookup()
         {

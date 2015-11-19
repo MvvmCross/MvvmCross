@@ -257,7 +257,7 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
-        protected virtual Assembly[] GetViewAssemblies()
+        protected virtual IEnumerable<Assembly> GetViewAssemblies()
         {
             var assembly = GetType().GetTypeInfo().Assembly;
             return new[] { assembly };
