@@ -14,7 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     public class MvxUILabelTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UILabel View => Touch.Target as UILabel;
+        protected UILabel View => Target as UILabel;
 
         public MvxUILabelTextTargetBinding(UILabel target)
             : base(target)
