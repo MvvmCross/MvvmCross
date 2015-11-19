@@ -5,10 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Support.V7.Widget;
+using Android.Widget;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Support.AppCompat.Target;
 using Cirrious.MvvmCross.Droid.Support.AppCompat.Widget;
+using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
@@ -22,6 +26,11 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                 "Query",
                 search => new MvxSearchViewQueryTextTargetBinding(search)
                 );
+        }
+
+        public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
+        {
+            registry.AddOrOverwrite(typeof(SearchView), "Query");
         }
     }
 }
