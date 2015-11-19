@@ -71,10 +71,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
                 return root;
 
             root = LoadUserInterfaceFromAutoViewModel<TBuildable, TResult>(view, key);
-            if (root != null)
-                return root;
-
-            return null;
+            return root;
         }
 
         private static TResult LoadUserInterfaceFromJsonText<TDescription, TBuildable, TResult>(

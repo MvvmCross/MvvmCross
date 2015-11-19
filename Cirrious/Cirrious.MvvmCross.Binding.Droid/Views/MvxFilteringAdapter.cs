@@ -94,8 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             activity?.RunOnUiThread(() =>
             {
                 var handler = PartialTextChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             });
         }
 

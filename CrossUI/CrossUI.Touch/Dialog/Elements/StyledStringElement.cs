@@ -221,9 +221,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell.DetailTextLabel.Lines = Lines;
                 cell.DetailTextLabel.LineBreakMode = LineBreakMode;
                 cell.DetailTextLabel.Font = SubtitleFont ?? UIFont.SystemFontOfSize(14);
-                cell.DetailTextLabel.TextColor = (_extraInfo?.DetailColor == null)
-                                                     ? UIColor.Gray
-                                                     : _extraInfo.DetailColor;
+                cell.DetailTextLabel.TextColor = _extraInfo?.DetailColor ?? UIColor.Gray;
             }
         }
 
