@@ -10,7 +10,7 @@ using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments
 {
-    [MvxOwnedViewModelFragment]
+    [MvxFragment]
     [Register("example.droid.fragments.ExampleViewPagerFragment")]
     public class ExampleViewPagerFragment : BaseFragment<ExampleViewPagerViewModel>
     {

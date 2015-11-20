@@ -4,7 +4,7 @@ using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments
 {
-    [MvxOwnedViewModelFragment]
+    [MvxFragment]
     [Register("example.droid.fragments.SettingsFragment")]
     public class SettingsFragment : BaseFragment<SettingsViewModel>
     {
