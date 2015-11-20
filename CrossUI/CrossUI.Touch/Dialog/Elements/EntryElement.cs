@@ -204,11 +204,9 @@ namespace CrossUI.Touch.Dialog.Elements
                             max = size;
                     }
                 }
-            if (s != null)
-            {
+
                 s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
                 return s.EntryAlignment;
-            }
         }
 
         protected virtual UITextField CreateTextField(CGRect frame)
