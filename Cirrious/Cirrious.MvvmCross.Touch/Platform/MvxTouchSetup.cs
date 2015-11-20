@@ -183,7 +183,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
-        protected virtual List<Assembly> ValueConverterAssemblies
+        protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
             {

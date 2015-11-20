@@ -171,8 +171,8 @@ namespace CrossUI.Touch.Dialog
                 return fi.GetValue(o);
             var pi = mi as PropertyInfo;
 
-            var getMethod = pi.GetGetMethod();
-            return getMethod.Invoke(o, new object[0]);
+            var getMethod = pi?.GetGetMethod();
+            return getMethod?.Invoke(o, new object[0]);
         }
 
         private static void SetValue(MemberInfo mi, object o, object val)
@@ -184,8 +184,8 @@ namespace CrossUI.Touch.Dialog
                 return;
             }
             var pi = mi as PropertyInfo;
-            var setMethod = pi.GetSetMethod();
-            setMethod.Invoke(o, new[] { val });
+            var setMethod = pi?.GetSetMethod();
+            setMethod?.Invoke(o, new[] { val });
         }
 
         private static string MakeCaption(string name)

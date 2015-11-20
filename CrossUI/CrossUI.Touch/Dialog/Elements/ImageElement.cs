@@ -202,8 +202,8 @@ namespace CrossUI.Touch.Dialog.Elements
                 return;
 
             var psection = Parent as Section;
-            bool roundTop = psection.Elements[0] == this;
-            bool roundBottom = psection.Elements[psection.Elements.Count - 1] == this;
+            bool roundTop = psection?.Elements[0] == this;
+            bool roundBottom = psection?.Elements[psection.Elements.Count - 1] == this;
 
             using (var cs = CGColorSpace.CreateDeviceRGB())
             {

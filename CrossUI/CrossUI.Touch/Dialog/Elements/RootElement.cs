@@ -381,7 +381,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     radio.Selected = value;
                 var handler = RadioSelectedChanged;
                 if (handler != null)
-                    RadioSelectedChanged(this, EventArgs.Empty);
+                    RadioSelectedChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

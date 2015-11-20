@@ -77,15 +77,21 @@ namespace CrossUI.Touch.Dialog.OldElements
             }
             if (Animating)
             {
-                caption.Text = LoadingCaption;
-                activityIndicator.Hidden = false;
-                activityIndicator.StartAnimating();
+                if (caption != null) caption.Text = LoadingCaption;
+                if (activityIndicator != null)
+                {
+                    activityIndicator.Hidden = false;
+                    activityIndicator.StartAnimating();
+                }
             }
             else
             {
-                caption.Text = NormalCaption;
-                activityIndicator.Hidden = true;
-                activityIndicator.StopAnimating();
+                if (caption != null) caption.Text = NormalCaption;
+                if (activityIndicator != null)
+                {
+                    activityIndicator.Hidden = true;
+                    activityIndicator.StopAnimating();
+                }
             }
             if (BackgroundColor != null)
             {
@@ -95,11 +101,14 @@ namespace CrossUI.Touch.Dialog.OldElements
             {
                 cell.ContentView.BackgroundColor = null;
             }
-            caption.BackgroundColor = UIColor.Clear;
-            caption.TextColor = TextColor ?? UIColor.Black;
-            caption.Font = Font ?? UIFont.BoldSystemFontOfSize(16);
-            caption.TextAlignment = Alignment;
-            Layout(cell, activityIndicator, caption);
+            if (caption != null)
+            {
+                caption.BackgroundColor = UIColor.Clear;
+                caption.TextColor = TextColor ?? UIColor.Black;
+                caption.Font = Font ?? UIFont.BoldSystemFontOfSize(16);
+                caption.TextAlignment = Alignment;
+                Layout(cell, activityIndicator, caption);
+            }
             return cell;
         }
 
@@ -118,15 +127,21 @@ namespace CrossUI.Touch.Dialog.OldElements
                 var caption = cell.ContentView.ViewWithTag(2) as UILabel;
                 if (value)
                 {
-                    caption.Text = LoadingCaption;
-                    activityIndicator.Hidden = false;
-                    activityIndicator.StartAnimating();
+                    if (caption != null) caption.Text = LoadingCaption;
+                    if (activityIndicator != null)
+                    {
+                        activityIndicator.Hidden = false;
+                        activityIndicator.StartAnimating();
+                    }
                 }
                 else
                 {
-                    activityIndicator.StopAnimating();
-                    activityIndicator.Hidden = true;
-                    caption.Text = NormalCaption;
+                    if (activityIndicator != null)
+                    {
+                        activityIndicator.StopAnimating();
+                        activityIndicator.Hidden = true;
+                    }
+                    if (caption != null) caption.Text = NormalCaption;
                 }
                 Layout(cell, activityIndicator, caption);
             }

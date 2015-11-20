@@ -31,8 +31,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
                 var childCast = child as CaptionAndIconMenu;
 
 #warning More to do here - e.g. check for null!
-                actionSheet.AddButton(childCast.Caption);
-                actions.Add(childCast.Command);
+                actionSheet.AddButton(childCast?.Caption);
+                actions.Add(childCast?.Command);
             }
 
             actionSheet.Clicked += (object sender, UIButtonEventArgs e) =>

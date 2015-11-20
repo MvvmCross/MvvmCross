@@ -34,11 +34,14 @@ namespace CrossUI.Droid.Dialog
             base.OnContentChanged();
 
             _contentHasBeenSet = true;
-            ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
-            ListView.ItemsCanFocus = true;
+            if (ListView != null)
+            {
+                ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
+                ListView.ItemsCanFocus = true;
 
-            ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
-            ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
+                ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
+                ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
+            }
         }
 
         private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)

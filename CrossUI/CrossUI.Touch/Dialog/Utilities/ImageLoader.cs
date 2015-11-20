@@ -262,12 +262,12 @@ namespace CrossUI.Touch.Dialog.Utilities
                 {
                     var req = WebRequest.Create(uri) as HttpWebRequest;
 
-                    using (var resp = req.GetResponse())
+                    using (var resp = req?.GetResponse())
                     {
-                        using (var s = resp.GetResponseStream())
+                        using (var s = resp?.GetResponseStream())
                         {
                             int n;
-                            while ((n = s.Read(buffer, 0, buffer.Length)) > 0)
+                            while (s != null && (n = s.Read(buffer, 0, buffer.Length)) > 0)
                             {
                                 file.Write(buffer, 0, n);
                             }

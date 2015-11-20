@@ -186,25 +186,29 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             var s = Parent as Section;
 
-            if (s.EntryAlignment.Width != 0)
+            if (s != null && s.EntryAlignment.Width != 0)
                 return s.EntryAlignment;
 
             // If all EntryElements have a null Caption, align UITextField with the Caption
             // offset of normal cells (at 10px).
             var max = new CGSize(-15, "M".StringSize(DefaultFont).Height);
-            foreach (var e in s.Elements)
-            {
-                var ee = e as EntryElement;
-
-                if (ee?.Caption != null)
+            if (s?.Elements != null)
+                foreach (var e in s?.Elements)
                 {
-                    var size = ee.Caption.StringSize(DefaultFont);
-                    if (size.Width > max.Width)
-                        max = size;
+                    var ee = e as EntryElement;
+
+                    if (ee?.Caption != null)
+                    {
+                        var size = ee.Caption.StringSize(DefaultFont);
+                        if (size.Width > max.Width)
+                            max = size;
+                    }
                 }
+            if (s != null)
+            {
+                s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
+                return s.EntryAlignment;
             }
-            s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
-            return s.EntryAlignment;
         }
 
         protected virtual UITextField CreateTextField(CGRect frame)
@@ -288,13 +292,15 @@ namespace CrossUI.Touch.Dialog.Elements
                         {
                             var returnType = UIReturnKeyType.Default;
 
-                            foreach (var e in (Parent as Section).Elements)
-                            {
-                                if (e == this)
-                                    self = this;
-                                else if (self != null && e is EntryElement)
-                                    returnType = UIReturnKeyType.Next;
-                            }
+                            var elements = (Parent as Section)?.Elements;
+                            if (elements != null)
+                                foreach (var e in elements)
+                                {
+                                    if (e == this)
+                                        self = this;
+                                    else if (self != null && e is EntryElement)
+                                        returnType = UIReturnKeyType.Next;
+                                }
                             _entry.ReturnKeyType = returnType;
                         }
                         else
