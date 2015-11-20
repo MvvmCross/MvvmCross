@@ -19,7 +19,7 @@ namespace CrossUI.Touch.Dialog.Elements
             var sbounds = UIScreen.MainScreen.Bounds;
             var uia = View as UIActivityIndicatorView;
 
-            uia.StartAnimating();
+            uia?.StartAnimating();
 
             var vbounds = View.Bounds;
             View.Frame = new CGRect((sbounds.Width - vbounds.Width) / 2, 4, vbounds.Width, vbounds.Height + 0);
@@ -33,9 +33,9 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 var activity = View as UIActivityIndicatorView;
                 if (value)
-                    activity.StartAnimating();
+                    activity?.StartAnimating();
                 else
-                    activity.StopAnimating();
+                    activity?.StopAnimating();
             }
         }
 

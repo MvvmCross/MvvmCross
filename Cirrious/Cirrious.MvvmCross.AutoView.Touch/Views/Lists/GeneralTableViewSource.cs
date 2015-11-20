@@ -45,7 +45,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
                 return reuse;
 
             IMvxLayoutListItemViewFactory factory;
-            if (_factories != null || !_factories.TryGetValue(item.GetType().Name, out factory))
+            if (_factories != null && (_factories != null || !_factories.TryGetValue(item.GetType().Name, out factory)))
             {
                 factory = _defaultFactory;
             }

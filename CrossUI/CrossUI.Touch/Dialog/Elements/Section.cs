@@ -225,7 +225,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 e.Parent = this;
             }
             var root = Parent as RootElement;
-            if (Parent != null && root.TableView != null)
+            if (Parent != null && root?.TableView != null)
             {
                 if (anim == UITableViewRowAnimation.None)
                     root.TableView.ReloadData();

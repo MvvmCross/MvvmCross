@@ -72,7 +72,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
         {
             var touch = uievent.AllTouches.AnyObject as UITouch;
-            pressed = Bounds.Contains(touch.LocationInView(this));
+            if (touch != null) pressed = Bounds.Contains(touch.LocationInView(this));
             return base.ContinueTracking(uitouch, uievent);
         }
 
