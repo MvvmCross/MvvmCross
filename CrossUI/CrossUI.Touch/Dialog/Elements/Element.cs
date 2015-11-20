@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using CrossUI.Core;
 using CrossUI.Core.Elements.Dialog;
 using Foundation;
+using System;
+using System.Windows.Input;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -22,7 +22,7 @@ namespace CrossUI.Touch.Dialog.Elements
         private static int _currentElementID = 1;
 
         /// <summary>
-        /// An app unique identifier for this element. 
+        /// An app unique identifier for this element.
         /// Note that it is expected that Elements will always created on the UI thread - so no locking is used on CurrentElementID
         /// </summary>
         private readonly int _elementID = _currentElementID++;
@@ -68,6 +68,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         private bool _visible = true;
+
         /// <summary>
         ///  Whether or not to display this element
         /// </summary>
@@ -109,7 +110,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (indexPath == null)
             {
                 // Indexpath can sometimes be null when replacing content of a list by setting a new RootElement.
-                // It's a really rare situation, only seen when you perform several actions on a listview and it's 
+                // It's a really rare situation, only seen when you perform several actions on a listview and it's
                 // busy animating stuff.
                 // In this case just do the simple update
                 UpdateCellDisplay(cell);
@@ -118,7 +119,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             // we have a table and an indexPath - so let's do an animated update
             tableView.ReloadRows(
-                new[] {indexPath},
+                new[] { indexPath },
                 UITableViewRowAnimation.Fade);
         }
 
@@ -132,7 +133,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (parent != null)
                 return parent;
 
-            // in IOS 7 SDK the superview is a UITableViewWrapper, 
+            // in IOS 7 SDK the superview is a UITableViewWrapper,
             // and the UiTableView is now in superview.superview (http://stackoverflow.com/questions/15711645/how-to-get-uitableview-from-uitableviewcell)
             var grandParent = cell.Superview.Superview as UITableView;
             return grandParent;
@@ -155,7 +156,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (cell == null)
                 return;
 #warning SL _ removed  || !Parent.Visible
-            // NOTE - SL removed  !Parent.Visible - it caused exception 
+            // NOTE - SL removed  !Parent.Visible - it caused exception
             cell.Hidden = !Visible;
             UpdateCaptionDisplay(cell);
         }
@@ -166,7 +167,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         protected virtual void UpdateCaptionDisplay(UITableViewCell cell)
         {
-            if (cell != null && cell.TextLabel != null)
+            if (cell?.TextLabel != null)
                 cell.TextLabel.Text = _caption;
         }
 
@@ -180,7 +181,6 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             this.Caption = caption;
         }
-
 
         public Element(string caption, Action tapped)
         {
@@ -210,21 +210,18 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         /// <remarks>
         /// This method should return the key passed to UITableView.DequeueReusableCell.
-        /// If your code overrides the GetCellImpl method to change the cell, you must also 
+        /// If your code overrides the GetCellImpl method to change the cell, you must also
         /// override this method and return a unique key for it.
-        /// 
+        ///
         /// This works in most subclasses with a couple of exceptions: StringElement and
         /// various derived classes do not use this setting as they need a wider range
         /// of keys for different uses, so you need to look at the source code for those
         /// if you are trying to override StringElement or StyledStringElement.
         /// </remarks>
-        protected virtual NSString CellKey
-        {
-            get { return Key; }
-        }
+        protected virtual NSString CellKey => Key;
 
         /// <summary>
-        /// Gets a UITableViewCell for this element.   
+        /// Gets a UITableViewCell for this element.
         /// Must not be overridden - override GetCellImpl instead
         /// </summary>
         public UITableViewCell GetCell(UITableView tv)
@@ -236,8 +233,8 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         /// <summary>
-        /// Gets a UITableViewCell for this element.   Can be overridden, but if you 
-        /// customize the style or contents of the cell you must also override the CellKey 
+        /// Gets a UITableViewCell for this element.   Can be overridden, but if you
+        /// customize the style or contents of the cell you must also override the CellKey
         /// property in your derived class.
         /// </summary>
         protected virtual UITableViewCell GetCellImpl(UITableView tv)
@@ -268,10 +265,10 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        /// <summary>	
-        /// Act on the current attached cell	
-        /// </summary>	
-        /// <param name="updateAction"></param>	
+        /// <summary>
+        /// Act on the current attached cell
+        /// </summary>
+        /// <param name="updateAction"></param>
         protected void ActOnCurrentAttachedCell(Action<UITableViewCell> updateAction)
         {
             var cell = CurrentAttachedCell;
@@ -283,12 +280,11 @@ namespace CrossUI.Touch.Dialog.Elements
         protected static void RemoveTag(UITableViewCell cell, int tag)
         {
             var viewToRemove = cell.ContentView.ViewWithTag(tag);
-            if (viewToRemove != null)
-                viewToRemove.RemoveFromSuperview();
+            viewToRemove?.RemoveFromSuperview();
         }
 
         /// <summary>
-        /// Returns a summary of the value represented by this object, suitable 
+        /// Returns a summary of the value represented by this object, suitable
         /// for rendering as the result of a RootElement with child objects.
         /// </summary>
         /// <returns>
@@ -329,10 +325,8 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </param>
         public virtual void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
-            if (Tapped != null)
-                Tapped();
-            if (SelectedCommand != null)
-                SelectedCommand.Execute(null);
+            Tapped?.Invoke();
+            SelectedCommand?.Execute(null);
             if (ShouldDeselectAfterTouch)
                 tableView.DeselectRow(path, true);
         }
@@ -340,14 +334,8 @@ namespace CrossUI.Touch.Dialog.Elements
         /// <summary>
         /// Is anything registered to the select handler(s) for this Element
         /// </summary>
-        protected bool IsSelectable
-        {
-            get
-            {
-                return Tapped != null
-                       || (SelectedCommand != null && SelectedCommand.CanExecute(null));
-            }
-        }
+        protected bool IsSelectable => Tapped != null
+                                       || (SelectedCommand != null && SelectedCommand.CanExecute(null));
 
         /// <summary>
         /// If the cell is attached will return the immediate RootElement
@@ -355,9 +343,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public RootElement GetImmediateRootElement()
         {
             var section = Parent as Section;
-            if (section == null)
-                return null;
-            return section.Parent as RootElement;
+            return section?.Parent as RootElement;
         }
 
         /// <summary>
@@ -366,9 +352,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public UITableView GetContainerTableView()
         {
             var root = GetImmediateRootElement();
-            if (root == null)
-                return null;
-            return root.TableView;
+            return root?.TableView;
         }
 
         /// <summary>
@@ -395,9 +379,7 @@ namespace CrossUI.Touch.Dialog.Elements
             get
             {
                 var section = Parent as Section;
-                if (section == null)
-                    return null;
-                var root = section.Parent as RootElement;
+                var root = section?.Parent as RootElement;
                 if (root == null)
                     return null;
 

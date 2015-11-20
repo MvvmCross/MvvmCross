@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Windows.Input;
 using Cirrious.MvvmCross.AutoView.Touch.Views.Menus;
 using CrossUI.Core.Elements.Menu;
+using System.Collections.Generic;
+using System.Windows.Input;
 using UIKit;
-
 
 namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
 {
@@ -32,8 +31,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
                 var childCast = child as CaptionAndIconMenu;
 
 #warning More to do here - e.g. check for null!
-                actionSheet.AddButton(childCast.Caption);
-                actions.Add(childCast.Command);
+                actionSheet.AddButton(childCast?.Caption);
+                actions.Add(childCast?.Command);
             }
 
             actionSheet.Clicked += (object sender, UIButtonEventArgs e) =>

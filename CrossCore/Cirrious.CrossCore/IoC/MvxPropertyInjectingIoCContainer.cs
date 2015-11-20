@@ -2,12 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -15,7 +13,7 @@ namespace Cirrious.CrossCore.IoC
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
+        public new static IMvxIoCProvider Initialize(IMvxIocOptions options)
         {
             if (Instance != null)
             {
@@ -23,9 +21,9 @@ namespace Cirrious.CrossCore.IoC
             }
 
             // create a new ioc container - it will register itself as the singleton
-// ReSharper disable ObjectCreationAsStatement
+            // ReSharper disable ObjectCreationAsStatement
             new MvxPropertyInjectingIoCContainer(options);
-// ReSharper restore ObjectCreationAsStatement
+            // ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
 
@@ -37,17 +35,17 @@ namespace Cirrious.CrossCore.IoC
         private static MvxIocOptions CreatePropertyInjectionOptions()
         {
             return new MvxIocOptions()
+            {
+                TryToDetectDynamicCircularReferences = true,
+                TryToDetectSingletonCircularReferences = true,
+                CheckDisposeIfPropertyInjectionFails = true,
+                PropertyInjectorType = typeof(MvxPropertyInjector),
+                PropertyInjectorOptions = new MvxPropertyInjectorOptions()
                 {
-                    TryToDetectDynamicCircularReferences = true,
-                    TryToDetectSingletonCircularReferences = true,
-                    CheckDisposeIfPropertyInjectionFails = true,
-                    PropertyInjectorType = typeof(MvxPropertyInjector),
-                    PropertyInjectorOptions = new MvxPropertyInjectorOptions()
-                        {
-                            ThrowIfPropertyInjectionFails = false,
-                            InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
-                        }
-                };
+                    ThrowIfPropertyInjectionFails = false,
+                    InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
+                }
+            };
         }
     }
 }

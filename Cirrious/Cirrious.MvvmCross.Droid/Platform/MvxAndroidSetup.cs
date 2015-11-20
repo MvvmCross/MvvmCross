@@ -2,18 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Android.Content;
 using Android.Views;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
@@ -27,6 +24,9 @@ using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
@@ -43,22 +43,13 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         #region IMvxAndroidGlobals Members
 
-        public virtual string ExecutableNamespace
-        {
-            get { return GetType().Namespace; }
-        }
+        public virtual string ExecutableNamespace => GetType().Namespace;
 
-        public virtual Assembly ExecutableAssembly
-        {
-            get { return GetType().Assembly; }
-        }
+        public virtual Assembly ExecutableAssembly => GetType().Assembly;
 
-        public Context ApplicationContext
-        {
-            get { return _applicationContext; }
-        }
+        public Context ApplicationContext => _applicationContext;
 
-        #endregion
+        #endregion IMvxAndroidGlobals Members
 
         protected override IMvxPluginManager CreatePluginManager()
         {
@@ -111,7 +102,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             return new MvxSavedStateConverter();
         }
 
-        protected override sealed IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateViewsContainer(_applicationContext);
             Mvx.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
@@ -166,7 +157,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual MvxAndroidBindingBuilder CreateBindingBuilder()
         {
-			var bindingBuilder = new MvxAndroidBindingBuilder();
+            var bindingBuilder = new MvxAndroidBindingBuilder();
             return bindingBuilder;
         }
 
@@ -174,14 +165,14 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             foreach (var assembly in AndroidViewAssemblies)
             {
-                cache.AddAssembly(assembly);                
+                cache.AddAssembly(assembly);
             }
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
-		{
-			// this base class does nothing
-		}
+        {
+            // this base class does nothing
+        }
 
         protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
@@ -195,9 +186,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             foreach (var viewNamespace in ViewNamespaces)
             {
-                viewTypeResolver.Add(viewNamespace);                
+                viewTypeResolver.Add(viewNamespace);
             }
-        }        
+        }
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
@@ -205,12 +196,9 @@ namespace Cirrious.MvvmCross.Droid.Platform
             registry.Fill(ValueConverterHolders);
         }
 
-        protected virtual List<Type> ValueConverterHolders
-        {
-            get { return new List<Type>(); }
-        }
+        protected virtual IEnumerable<Type> ValueConverterHolders => new List<Type>();
 
-        protected virtual List<Assembly> ValueConverterAssemblies
+        protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
             {
@@ -221,43 +209,25 @@ namespace Cirrious.MvvmCross.Droid.Platform
             }
         }
 
-        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations
+        protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            get
-            {
-                return new Dictionary<string, string>
-                    {
-                        {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
-                    };
-            }
-        }
+            {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
+        };
 
-        protected virtual IList<string> ViewNamespaces
+        protected virtual IEnumerable<string> ViewNamespaces => new List<string>
         {
-            get
-            {
-                return new List<string>
-                    {
-                        "Android.Views",
-                        "Android.Widget",
-                        "Android.Webkit",
-                        "Cirrious.MvvmCross.Binding.Droid.Views",
-                    };
-            }
-        }
+            "Android.Views",
+            "Android.Widget",
+            "Android.Webkit",
+            "Cirrious.MvvmCross.Binding.Droid.Views",
+        };
 
-        protected virtual IList<Assembly> AndroidViewAssemblies
+        protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()
         {
-            get
-            {
-                return new List<Assembly>()
-                    {
-                        typeof (Android.Views.View).Assembly,
-                        typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
-                        this.GetType().Assembly,
-                    };
-            }
-        }
+            typeof (Android.Views.View).Assembly,
+            typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
+            this.GetType().Assembly,
+        };
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {

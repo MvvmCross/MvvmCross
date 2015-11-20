@@ -2,19 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
     public interface IMvxValueCombiner
     {
         Type SourceType(IEnumerable<IMvxSourceStep> steps);
+
         void SetValue(IEnumerable<IMvxSourceStep> steps, object value);
+
         bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value);
 
         IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType);
@@ -25,10 +27,10 @@ namespace Cirrious.MvvmCross.Binding.Combiners
      *    EqualTo/NotEqualTo
      *    GreaterThan/LessThan/GreaterThanOrEqualTo/LessThanOrEqualTo/etc
      *    And/Or
-     * 
+     *
      * I would also like to support Enum's somehow...
-     * 
-     
+     *
+
     public abstract class MvxPairwiseComparisonValueCombiner
         : MvxPairwiseValueCombiner
     {

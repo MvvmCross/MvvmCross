@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -26,29 +26,25 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes
-        {
-            get { return _innerFactory.SupportedTypes; }
-        }
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             return _innerFactory.CreateBinding(target, targetName);
         }
 
-        #endregion
+        #endregion IMvxPluginTargetBindingFactory Members
 
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(_bindingType, new[] {target, targetPropertyInfo});
+            var targetBindingCandidate = Activator.CreateInstance(_bindingType, new[] { target, targetPropertyInfo });
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
-                if (disposable != null)
-                    disposable.Dispose();
+                disposable?.Dispose();
             }
             return targetBinding;
         }

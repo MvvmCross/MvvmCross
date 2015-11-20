@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -123,10 +122,7 @@ namespace Cirrious.CrossCore.IoC
             return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types)
-        {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
-        }
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {

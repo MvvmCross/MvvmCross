@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using CrossUI.Core.Builder;
@@ -15,10 +15,10 @@ namespace CrossUI.Droid.Builder
     {
         public DroidBuilderRegistry(bool registerDefaultElements = true)
         {
-            this.AddBuilder(typeof (Element), new DroidElementBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (Group), new DroidGroupBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (Section), new DroidSectionBuilder(registerDefaultElements));
-            this.AddBuilder(typeof (IMenu), new DroidMenuBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Element), new DroidElementBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Group), new DroidGroupBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(Section), new DroidSectionBuilder(registerDefaultElements));
+            this.AddBuilder(typeof(IMenu), new DroidMenuBuilder(registerDefaultElements));
         }
     }
 }

@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
+using System;
 using UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
@@ -64,10 +64,15 @@ namespace Cirrious.CrossCore.Touch.Views
         }
 
         public event EventHandler ViewDidLoadCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
+
         public event EventHandler DisposeCalled;
     }
 }

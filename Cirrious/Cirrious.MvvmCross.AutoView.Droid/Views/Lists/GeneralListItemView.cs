@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -15,9 +12,12 @@ using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using CrossUI.Droid;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -43,12 +43,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         }
 
 #warning Need to sort out the HandleClick stuff?
+
         private void HandleClick(object sender, EventArgs e)
         {
-            if (_selectedCommand == null)
-                return;
-
-            _selectedCommand.Execute(base.DataContext);
+            _selectedCommand?.Execute(base.DataContext);
         }
 
         private int GetTemplateId()
@@ -56,10 +54,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return DroidResources.FindResourceId("listitem_" + _templateName);
         }
 
-        public string UniqueName
-        {
-            get { return @"General$" + _templateName; }
-        }
+        public string UniqueName => @"General$" + _templateName;
 
         private void BindProperties(Dictionary<string, string> textBindings)
         {
@@ -127,11 +122,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         private string GetTextFor(string partName)
         {
             var view = FindSubView<TextView>(partName);
-            if (view == null)
-            {
-                return null;
-            }
-            return view.Text;
+            return view?.Text;
         }
 
         private TView FindSubView<TView>(string partName) where TView : View

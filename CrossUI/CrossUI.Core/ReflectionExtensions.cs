@@ -1,10 +1,8 @@
+using Cirrious.CrossCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Cirrious.CrossCore;
 
 namespace CrossUI.Core
 {
@@ -189,5 +187,4 @@ namespace CrossUI.Core
             return type.GenericTypeArguments;
         }
     }
-
 }

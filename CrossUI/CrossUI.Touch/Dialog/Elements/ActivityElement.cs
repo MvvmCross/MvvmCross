@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -19,23 +19,23 @@ namespace CrossUI.Touch.Dialog.Elements
             var sbounds = UIScreen.MainScreen.Bounds;
             var uia = View as UIActivityIndicatorView;
 
-            uia.StartAnimating();
+            uia?.StartAnimating();
 
             var vbounds = View.Bounds;
-            View.Frame = new CGRect((sbounds.Width - vbounds.Width)/2, 4, vbounds.Width, vbounds.Height + 0);
+            View.Frame = new CGRect((sbounds.Width - vbounds.Width) / 2, 4, vbounds.Width, vbounds.Height + 0);
             View.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
         }
 
         public bool Animating
         {
-            get { return ((UIActivityIndicatorView) View).IsAnimating; }
+            get { return ((UIActivityIndicatorView)View).IsAnimating; }
             set
             {
                 var activity = View as UIActivityIndicatorView;
                 if (value)
-                    activity.StartAnimating();
+                    activity?.StartAnimating();
                 else
-                    activity.StopAnimating();
+                    activity?.StopAnimating();
             }
         }
 

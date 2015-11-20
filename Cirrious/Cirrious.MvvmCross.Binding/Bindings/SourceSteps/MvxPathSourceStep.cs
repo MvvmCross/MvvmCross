@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -41,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             get
             {
                 if (_sourceBinding == null)
-                    return typeof (object);
+                    return typeof(object);
 
                 return _sourceBinding.SourceType;
             }

@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings;
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
-            view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> {{view, bindingText}});
+            view.BindingContext = new MvxBindingContext(null, new Dictionary<object, string> { { view, bindingText } });
         }
 
         public static void CreateBindingContext(this IMvxBindingContextOwner view,
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         /*
 		 * This overload removed at present - it caused confusion on iOS
-		 * because it could lead to the bindings being described before 
+		 * because it could lead to the bindings being described before
 		 * the table cells were fully available
         public static void DelayBind(this IMvxBindingContextOwner view, params IMvxApplicable[] applicables)
         {
@@ -78,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
                                       MvxBindingDescription bindingDescription, object clearKey = null)
         {
-            var descriptions = new[] {bindingDescription};
+            var descriptions = new[] { bindingDescription };
             view.AddBindings(target, descriptions, clearKey);
         }
 

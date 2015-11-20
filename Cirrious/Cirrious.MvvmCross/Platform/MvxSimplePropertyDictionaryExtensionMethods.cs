@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -24,12 +24,12 @@ namespace Cirrious.MvvmCross.Platform
             if (input == null)
                 return new Dictionary<string, string>();
 
-            return input.ToDictionary(x => x.Key, x => x.Value == null ? null : x.Value.ToString());
+            return input.ToDictionary(x => x.Key, x => x.Value?.ToString());
         }
 
         public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
         {
-            return bundle == null ? null : bundle.Data;
+            return bundle?.Data;
         }
 
         public static void Write(this IDictionary<string, string> data, object toStore)
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Platform
         public static T Read<T>(this IDictionary<string, string> data)
             where T : new()
         {
-            return (T) data.Read(typeof (T));
+            return (T)data.Read(typeof(T));
         }
 
         public static object Read(this IDictionary<string, string> data, Type type)
@@ -112,18 +112,18 @@ namespace Cirrious.MvvmCross.Platform
                 return new Dictionary<string, string>();
 
             if (input is IDictionary<string, string>)
-                return (IDictionary<string, string>) input;
+                return (IDictionary<string, string>)input;
 
             var propertyInfos = from property in input.GetType()
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                                      BindingFlags.FlattenHierarchy)
                                 where property.CanRead
                                 select new
-                                    {
-                                        CanSerialize =
+                                {
+                                    CanSerialize =
                                     MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
-                                        Property = property
-                                    };
+                                    Property = property
+                                };
 
             var dictionary = new Dictionary<string, string>();
             foreach (var propertyInfo in propertyInfos)
@@ -147,11 +147,9 @@ namespace Cirrious.MvvmCross.Platform
         {
             try
             {
-                var value = propertyInfo.GetValue(input, new object[] {});
-                if (value == null)
-                    return null;
+                var value = propertyInfo.GetValue(input, new object[] { });
 
-                return value.ToString();
+                return value?.ToString();
             }
             catch (Exception suspectedMethodAccessException)
             {

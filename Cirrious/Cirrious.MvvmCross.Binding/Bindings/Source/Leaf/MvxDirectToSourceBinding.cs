@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Platform;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
@@ -17,10 +17,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType
-        {
-            get { return Source == null ? typeof (object) : Source.GetType(); }
-        }
+        public override Type SourceType => Source == null ? typeof(object) : Source.GetType();
 
         public override void SetValue(object value)
         {

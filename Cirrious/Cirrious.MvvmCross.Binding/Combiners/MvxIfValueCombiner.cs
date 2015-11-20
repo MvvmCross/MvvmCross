@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {
@@ -22,6 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             {
                 case 2:
                     return TryEvaluateIf(list[0], list[1], null, out value);
+
                 case 3:
                     return TryEvaluateIf(list[0], list[1], list[2], out value);
 

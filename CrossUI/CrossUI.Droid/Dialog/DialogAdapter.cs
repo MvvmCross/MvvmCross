@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
+using System.Linq;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -23,7 +23,7 @@ namespace CrossUI.Droid.Dialog
             _context = context;
             _root = root;
 
-            _root.ElementsChanged +=OnElementsChanged;
+            _root.ElementsChanged += OnElementsChanged;
 
             // This is only really required when using a DialogAdapter with a ListView, in a non DialogActivity based activity.
             List = listView;
@@ -99,15 +99,8 @@ namespace CrossUI.Droid.Dialog
             return Adapter.IgnoreItemViewType;
         }
 
-
-        public override int ViewTypeCount
-        {
-            get
-            {
-                // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
-                return 1;
-            }
-        }
+        // returning 1 here - I couldn't find any docs on what to return with Adapter.IgnoreItemViewType
+        public override int ViewTypeCount => 1;
 
         /// <summary>
         /// Return the Element for the flattened/dereferenced position value.
@@ -135,10 +128,7 @@ namespace CrossUI.Droid.Dialog
             return null;
         }
 
-        public override Section this[int position]
-        {
-            get { return Root.Sections[position]; }
-        }
+        public override Section this[int position] => Root.Sections[position];
 
         public override bool AreAllItemsEnabled()
         {
@@ -158,20 +148,20 @@ namespace CrossUI.Droid.Dialog
                 element = ElementAtIndex(position - 1);
                 while (!(element is Section))
                     element = element.Parent;
-                return ((Section) element).GetFooterView(_context, convertView, parent);
+                return ((Section)element).GetFooterView(_context, convertView, parent);
             }
             return element.GetView(_context, convertView, parent);
         }
 
         public void ReloadData()
         {
-            ((Activity) _context).RunOnUiThread(() =>
-                {
-                    if (Root != null)
-                    {
-                        NotifyDataSetChanged();
-                    }
-                });
+            ((Activity)_context).RunOnUiThread(() =>
+               {
+                   if (Root != null)
+                   {
+                       NotifyDataSetChanged();
+                   }
+               });
         }
 
         /// <summary>
@@ -184,8 +174,7 @@ namespace CrossUI.Droid.Dialog
             var elem = ElementAtIndex(e.Position);
             if (elem == null) return;
             elem.Selected();
-            if (elem.Click != null)
-                elem.Click(sender, e);
+            elem.Click?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -196,8 +185,7 @@ namespace CrossUI.Droid.Dialog
         public void ListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
             var elem = ElementAtIndex(e.Position);
-            if (elem != null && elem.LongClick != null)
-                elem.LongClick(sender, e);
+            elem?.LongClick?.Invoke(sender, e);
         }
 
         protected override void Dispose(bool disposing)

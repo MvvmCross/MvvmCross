@@ -2,11 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.Plugins
 {
@@ -32,10 +31,10 @@ namespace Cirrious.CrossCore.Plugins
                 return;
             }
 
-            var pluginNamespace = typeof (TPlugin).Namespace;
+            var pluginNamespace = typeof(TPlugin).Namespace;
             if (string.IsNullOrEmpty(pluginNamespace))
             {
-                Mvx.Warning("Unable to find namespace for {0} - skipping", typeof (TPlugin).Name);
+                Mvx.Warning("Unable to find namespace for {0} - skipping", typeof(TPlugin).Name);
                 return;
             }
 

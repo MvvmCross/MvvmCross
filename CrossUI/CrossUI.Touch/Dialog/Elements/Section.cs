@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CoreGraphics;
+using Foundation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -21,10 +21,10 @@ namespace CrossUI.Touch.Dialog.Elements
     /// Sections are used to group elements in the screen and they are the
     /// only valid direct child of the RootElement.    Sections can contain
     /// any of the standard elements, including new RootElements.
-    /// 
+    ///
     /// RootElements embedded in a section are used to navigate to a new
     /// deeper level.
-    /// 
+    ///
     /// You can assign a header and a footer either as strings (Header and Footer)
     /// properties, or as UIViews to be shown (HeaderView and FooterView).   Internally
     /// this uses the same storage, so you can only show one or the other.
@@ -33,6 +33,7 @@ namespace CrossUI.Touch.Dialog.Elements
     {
         // , ISection {
         private object _header;
+
         private object _footer;
         private List<Element> _elements = new List<Element>();
 
@@ -112,7 +113,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         /// <summary>
-        /// The section's header view.  
+        /// The section's header view.
         /// </summary>
         public UIView HeaderView
         {
@@ -224,7 +225,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 e.Parent = this;
             }
             var root = Parent as RootElement;
-            if (Parent != null && root.TableView != null)
+            if (Parent != null && root?.TableView != null)
             {
                 if (anim == UITableViewRowAnimation.None)
                     root.TableView.ReloadData();
@@ -247,7 +248,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 count++;
             }
             var root = Parent as RootElement;
-            if (root != null && root.TableView != null)
+            if (root?.TableView != null)
             {
                 if (anim == UITableViewRowAnimation.None)
                     root.TableView.ReloadData();
@@ -261,7 +262,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             var root = Parent as RootElement;
 
-            if (root == null || root.TableView == null)
+            if (root?.TableView == null)
                 return;
 
             int sidx = root.IndexOf(this);
@@ -337,7 +338,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Elements.RemoveRange(start, count);
 
-            if (root == null || root.TableView == null)
+            if (root?.TableView == null)
                 return;
 
             int sidx = root.IndexOf(this);
@@ -359,15 +360,9 @@ namespace CrossUI.Touch.Dialog.Elements
                 yield return e;
         }
 
-        public int Count
-        {
-            get { return Elements.Count; }
-        }
+        public int Count => Elements.Count;
 
-        public Element this[int idx]
-        {
-            get { return Elements[idx]; }
-        }
+        public Element this[int idx] => Elements[idx];
 
         public void Clear()
         {
@@ -379,8 +374,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Elements = new List<Element>();
 
             var root = Parent as RootElement;
-            if (root != null && root.TableView != null)
-                root.TableView.ReloadData();
+            root?.TableView?.ReloadData();
         }
 
         protected override void Dispose(bool disposing)

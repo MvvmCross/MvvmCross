@@ -2,24 +2,22 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
 #warning Can this be expanded to GridView too? Or to others?
-    public class MvxListViewSelectedItemTargetBinding 
+
+    public class MvxListViewSelectedItemTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected MvxListView ListView
-        {
-            get { return (MvxListView) Target; }
-        }
+        protected MvxListView ListView => (MvxListView)Target;
 
         private object _currentValue;
         private bool _subscribed;
@@ -61,10 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             listView.SetSelection(index);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -76,10 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             _subscribed = true;
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (object); }
-        }
+        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Globalization;
 using Cirrious.CrossCore.Converters;
 using CoreGraphics;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;
 using Foundation;
+using System;
+using System.Collections;
+using System.Globalization;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch.Elements
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         public IMvxValueConverter DisplayValueConverter { get; set; }
 
         public UIColor BackgroundColor { get; set; }
-        
+
         private class ToStringDisplayValueConverter : MvxValueConverter
         {
             public override object Convert(object value, System.Type targetType, object parameter,
@@ -45,16 +45,16 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             : base(caption, value)
         {
             DisplayValueConverter = displayValueConverter ?? new ToStringDisplayValueConverter();
-            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;  
+            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
             var cell = tv.DequeueReusableCell(Key) ??
                        new UITableViewCell(UITableViewCellStyle.Value1, Key)
-                           {
-                               Accessory = UITableViewCellAccessory.DisclosureIndicator
-                           };
+                       {
+                           Accessory = UITableViewCellAccessory.DisclosureIndicator
+                       };
 
             UpdateDetailDisplay(cell);
             return cell;
@@ -78,11 +78,11 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         public virtual UIPickerView CreatePicker()
         {
             var picker = new UIPickerView(CGRect.Empty)
-                {
-                    AutoresizingMask = UIViewAutoresizing.FlexibleWidth,
-                    Model = new SimplePickerViewModel(this),
-                    ShowSelectionIndicator = true,
-                };
+            {
+                AutoresizingMask = UIViewAutoresizing.FlexibleWidth,
+                Model = new SimplePickerViewModel(this),
+                ShowSelectionIndicator = true,
+            };
             return picker;
         }
 
@@ -95,14 +95,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             {
                 case UIInterfaceOrientation.LandscapeLeft:
                 case UIInterfaceOrientation.LandscapeRight:
-                    fX = (screenRect.Height - size.Width)/2;
-                    fY = (screenRect.Width - size.Height)/2 - 17;
+                    fX = (screenRect.Height - size.Width) / 2;
+                    fY = (screenRect.Width - size.Height) / 2 - 17;
                     break;
 
                 case UIInterfaceOrientation.Portrait:
                 case UIInterfaceOrientation.PortraitUpsideDown:
-                    fX = (screenRect.Width - size.Width)/2;
-                    fY = (screenRect.Height - size.Height)/2 - 25;
+                    fX = (screenRect.Width - size.Width) / 2;
+                    fY = (screenRect.Height - size.Height) / 2 - 25;
                     break;
             }
 
@@ -124,7 +124,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         private string ConvertToString(object whichObject)
         {
             return
-                DisplayValueConverter.Convert(whichObject, typeof (string), null, CultureInfo.CurrentUICulture)
+                DisplayValueConverter.Convert(whichObject, typeof(string), null, CultureInfo.CurrentUICulture)
                                      .ToString();
         }
 
@@ -192,6 +192,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             public bool Autorotate { get; set; }
 
 #warning Need to update autorotation code after ios6 changes
+
             [Obsolete]
             public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
             {
@@ -202,9 +203,9 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
             var vc = new SimplePickerViewController(this)
-                {
-                    Autorotate = dvc.Autorotate
-                };
+            {
+                Autorotate = dvc.Autorotate
+            };
             _picker = CreatePicker();
             _picker.Frame = PickerFrameWithSize(_picker.SizeThatFits(CGSize.Empty));
 
@@ -224,12 +225,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-            {
-                return;
-            }
-
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = ConvertToString(Value);
             }

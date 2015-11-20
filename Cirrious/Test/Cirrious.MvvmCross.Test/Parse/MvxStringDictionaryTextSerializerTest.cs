@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Parse.StringDictionary;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Test.Parse
 {
@@ -28,9 +28,9 @@ namespace Cirrious.MvvmCross.Test.Parse
             viewModelNameLookup.AddAll(GetType().Assembly);
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
-            var parameterBundle = new MvxBundle(new Dictionary<string, string> {{"On'e", "1'\\"}, {"Two", "2"}});
+            var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =
-                new MvxBundle(new Dictionary<string, string> {{"Thre\"\'\\e", "3\"\'\\"}, {"Four", null}});
+                new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
             var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle,
                                                                   new MvxRequestedBy(
                                                                       MvxRequestedByType.AutomatedService, "HelloWorld"));
@@ -41,7 +41,7 @@ namespace Cirrious.MvvmCross.Test.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.AreEqual(typeof (Test1ViewModel), deserialized.ViewModelType);
+            Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
             Assert.AreEqual(MvxRequestedByType.AutomatedService, deserialized.RequestedBy.Type);
             Assert.AreEqual("HelloWorld", deserialized.RequestedBy.AdditionalInfo);
             Assert.AreEqual(2, deserialized.PresentationValues.Count);
@@ -66,7 +66,7 @@ namespace Cirrious.MvvmCross.Test.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.AreEqual(typeof (Test1ViewModel), deserialized.ViewModelType);
+            Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
             Assert.AreEqual(MvxRequestedByType.Unknown, deserialized.RequestedBy.Type);
             Assert.AreEqual(null, deserialized.RequestedBy.AdditionalInfo);
             Assert.AreEqual(0, deserialized.PresentationValues.Count);

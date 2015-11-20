@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Touch.Dialog.Elements;
+using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
@@ -29,7 +28,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             this.AdaptForBinding();
         }
 
-        public MvxDialogViewController(IntPtr handle) 
+        public MvxDialogViewController(IntPtr handle)
             : base(handle)
         {
             this.AdaptForBinding();
@@ -63,14 +62,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch
             return element.Bind(this, bindingDescription);
         }
 
-        #endregion
+        #endregion Extra Binding helpers just for Elements
     }
 
     public class MvxDialogViewController<TViewModel>
         : MvxDialogViewController
           , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-
         public MvxDialogViewController(UITableViewStyle style = UITableViewStyle.Grouped,
                                        RootElement root = null,
                                        bool pushing = false)

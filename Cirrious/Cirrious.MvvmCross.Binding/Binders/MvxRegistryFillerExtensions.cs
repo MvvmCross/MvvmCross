@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {

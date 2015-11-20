@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Console.Views
     {
         public bool ExitFlag { get; set; }
 
-        private IMvxConsoleNavigation ConsoleNavigation
-        {
-            get { return Mvx.Resolve<IMvxConsoleNavigation>(); }
-        }
+        private IMvxConsoleNavigation ConsoleNavigation => Mvx.Resolve<IMvxConsoleNavigation>();
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
         {
@@ -29,6 +26,7 @@ namespace Cirrious.MvvmCross.Console.Views
                     if (ConsoleNavigation.CanGoBack())
                         ConsoleNavigation.GoBack();
                     return true;
+
                 case "QUIT":
                 case "Q":
                     ExitFlag = true;

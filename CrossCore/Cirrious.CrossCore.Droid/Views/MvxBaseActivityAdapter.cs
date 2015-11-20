@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Cirrious.CrossCore.Core;
+using System;
 
 namespace Cirrious.CrossCore.Droid.Views
 {
@@ -17,12 +17,9 @@ namespace Cirrious.CrossCore.Droid.Views
     {
         private readonly IMvxEventSourceActivity _eventSource;
 
-        protected Activity Activity
-        {
-            get { return _eventSource as Activity; }
-        }
+        protected Activity Activity => _eventSource as Activity;
 
-        public MvxBaseActivityAdapter(IMvxEventSourceActivity eventSource)
+        protected MvxBaseActivityAdapter(IMvxEventSourceActivity eventSource)
         {
             _eventSource = eventSource;
 

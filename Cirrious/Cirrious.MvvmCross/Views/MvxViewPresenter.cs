@@ -2,14 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
-using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Views {
+namespace Cirrious.MvvmCross.Views
+{
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
         private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();

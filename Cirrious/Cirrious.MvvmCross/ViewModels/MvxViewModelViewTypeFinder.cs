@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -54,13 +54,10 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual Type LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
-                                .GetCustomAttributes(typeof (MvxViewForAttribute), false)
+                                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
                                 .FirstOrDefault() as MvxViewForAttribute;
 
-            if (attribute == null)
-                return null;
-
-            return attribute.ViewModel;
+            return attribute?.ViewModel;
         }
 
         protected virtual Type LookupNamedViewModelType(Type candidateType)
@@ -81,10 +78,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                      && !x.PropertyType.GetTypeInfo().IsInterface
                                      && !x.PropertyType.GetTypeInfo().IsAbstract);
 
-            if (viewModelPropertyInfo == null)
-                return null;
-
-            return viewModelPropertyInfo.PropertyType;
+            return viewModelPropertyInfo?.PropertyType;
         }
 
         protected virtual bool CheckCandidateTypeIsAView(Type candidateType)
@@ -95,7 +89,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (candidateType.GetTypeInfo().IsAbstract)
                 return false;
 
-            if (!typeof (IMvxView).IsAssignableFrom(candidateType))
+            if (!typeof(IMvxView).IsAssignableFrom(candidateType))
                 return false;
 
             return true;

@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using Android.Views;
 using Cirrious.CrossCore.WeakSubscription;
+using System;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -19,10 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
-        protected View View
-        {
-            get { return (View)Target; }
-        }
+        protected View View => (View)Target;
 
         public MvxViewClickBinding(View view)
             : base(view)
@@ -76,15 +73,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             RefreshEnabledState();
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType
-        {
-            get { return typeof(ICommand); }
-        }
+        public override Type TargetType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {
@@ -99,7 +90,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 {
                     _canExecuteSubscription.Dispose();
                     _canExecuteSubscription = null;
-                }                
+                }
             }
             base.Dispose(isDisposing);
         }

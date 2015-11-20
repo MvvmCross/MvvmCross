@@ -5,14 +5,12 @@
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
   android:minHeight="?android:attr/listPreferredItemHeight"
-  android:orientation="horizontal"
-  >
+  android:orientation="horizontal">
   <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_weight="1"
-    >
+    android:layout_weight="1">
     <TextView android:id="@+id/dialog_LabelField"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -21,8 +19,7 @@
       android:layout_marginTop="9dp"
       android:layout_marginLeft="12dp"
       android:text="FieldLabel"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      />
+      android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView android:id="@+id/dialog_LabelSubtextField"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -31,8 +28,7 @@
       android:ellipsize="end"
       android:singleLine="true"
       android:text="Subtext"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      />
+      android:textAppearance="?android:attr/textAppearanceSmall" />
   </LinearLayout>
   <LinearLayout>
 	  <ImageView
@@ -42,8 +38,7 @@
 			android:layout_gravity="right|center_vertical"
 			android:src="@drawable/dialog_spinner_default_holo_dark"
 			android:layout_marginLeft="3dp"
-			android:layout_marginRight="3dp"
-			/>
+			android:layout_marginRight="3dp" />
 		<TextView android:id="@+id/dialog_LabelPercentageField"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -53,8 +48,7 @@
 	      android:ellipsize="end"
 	      android:singleLine="true"
 	      android:text="0"
-	      android:textAppearance="?android:attr/textAppearanceSmall"
-	      />
+	      android:textAppearance="?android:attr/textAppearanceSmall" />
   </LinearLayout>
   <CheckBox
     android:id="@+id/dialog_BoolField"
@@ -62,6 +56,5 @@
     android:layout_height="fill_parent"
     android:layout_gravity="right"
     android:layout_marginRight="8dp"
-    android:focusable="false"
-    />
+    android:focusable="false" />
 </LinearLayout>

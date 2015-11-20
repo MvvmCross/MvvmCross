@@ -1,26 +1,26 @@
-﻿using System.Composition;
-using System.Collections.Immutable;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using MvvmCross.CodeAnalysis.Analyzers;
-using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.Editing;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
-using System.Threading;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Editing;
+using MvvmCross.CodeAnalysis.Analyzers;
 using MvvmCross.CodeAnalysis.Core;
+using System.Collections.Immutable;
+using System.Composition;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MvvmCross.CodeAnalysis.CodeFixes
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConsiderUsingGenericBaseViewCodeFix)), Shared]
     public class ConsiderUsingGenericBaseViewCodeFix : CodeFixProvider
     {
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => 
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DiagnosticIds.UseGenericBaseClassRuleId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => 
+        public sealed override FixAllProvider GetFixAllProvider() =>
             WellKnownFixAllProviders.BatchFixer;
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
@@ -46,7 +46,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             context.RegisterCodeFix(
                 CodeAction.Create(
                     $@"To {derivingClass.Type}<{viewModelProperty.Type}>"
-                    , cancelToken => 
+                    , cancelToken =>
                         ApplyFix(
                             context.Document
                             , derivingClass

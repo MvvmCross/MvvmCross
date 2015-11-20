@@ -2,13 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
@@ -18,6 +15,8 @@ using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Binding.Test.Bindings
 {
@@ -27,6 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         public class MockSourceBinding : IMvxSourceBinding
         {
             public int DisposeCalled = 0;
+
             public void Dispose()
             {
                 DisposeCalled++;
@@ -35,6 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public Type SourceType { get; set; }
 
             public List<object> ValuesSet = new List<object>();
+
             public void SetValue(object value)
             {
                 ValuesSet.Add(value);
@@ -43,8 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public void FireSourceChanged()
             {
                 var handler = Changed;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler Changed;
@@ -64,6 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         public class MockTargetBinding : IMvxTargetBinding
         {
             public int DisposeCalled = 0;
+
             public void Dispose()
             {
                 DisposeCalled++;
@@ -73,12 +74,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public MvxBindingMode DefaultMode { get; set; }
 
             public int SubscribeToEventsCalled = 0;
+
             public void SubscribeToEvents()
             {
                 SubscribeToEventsCalled++;
             }
 
             public List<object> Values = new List<object>();
+
             public void SetValue(object value)
             {
                 Values.Add(value);
@@ -87,9 +90,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             public void FireValueChanged(MvxTargetChangedEventArgs args)
             {
                 var handler = ValueChanged;
-                if (handler != null)
-                    handler(this, args);
+                handler?.Invoke(this, args);
             }
+
             public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
         }
 
@@ -361,7 +364,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
             Assert.AreEqual(0, mockSource.ValuesSet.Count);
 
-
             Assert.AreEqual(0, mockSource.DisposeCalled);
             Assert.AreEqual(0, mockTarget.DisposeCalled);
 
@@ -424,12 +426,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             var bindingDescription = new MvxBindingDescription
             {
                 Source = new MvxPathSourceStepDescription()
-                    {
-                        Converter = converter,
-                        ConverterParameter = converterParameter,
-                        FallbackValue = fallbackValue,
-                        SourcePropertyPath = sourceText,
-                    },
+                {
+                    Converter = converter,
+                    ConverterParameter = converterParameter,
+                    FallbackValue = fallbackValue,
+                    SourcePropertyPath = sourceText,
+                },
                 Mode = mvxBindingMode,
                 TargetName = targetName
             };

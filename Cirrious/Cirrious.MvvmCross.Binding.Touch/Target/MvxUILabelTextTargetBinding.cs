@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
@@ -14,10 +14,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
     public class MvxUILabelTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UILabel View
-        {
-            get { return Target as UILabel; }
-        }
+        protected UILabel View => Target as UILabel;
 
         public MvxUILabelTextTargetBinding(UILabel target)
             : base(target)
@@ -29,15 +26,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override System.Type TargetType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {

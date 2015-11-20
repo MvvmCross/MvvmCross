@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -18,7 +18,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UITableViewCellStyle Style { get; set; }
 
-        public OwnerDrawnElement(UITableViewCellStyle style, string cellIdentifier)
+        protected OwnerDrawnElement(UITableViewCellStyle style, string cellIdentifier)
             : base(null)
         {
             this.CellReuseIdentifier = cellIdentifier;

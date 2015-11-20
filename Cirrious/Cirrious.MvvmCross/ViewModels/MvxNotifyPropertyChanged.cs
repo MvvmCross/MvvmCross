@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Core;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using Cirrious.CrossCore.Core;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -20,6 +20,7 @@ namespace Cirrious.MvvmCross.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+
         public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
         {
             return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
@@ -32,9 +33,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxNotifyPropertyChanged()
         {
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
-                                       ? true
-                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
@@ -60,15 +59,14 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             // check for interception before broadcasting change
             if (InterceptRaisePropertyChanged(changedArgs)
-                == MvxInpcInterceptionResult.DoNotRaisePropertyChanged) 
+                == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
 
             var raiseAction = new Action(() =>
                     {
                         var handler = PropertyChanged;
 
-                        if (handler != null)
-                            handler(this, changedArgs);
+                        handler?.Invoke(this, changedArgs);
                     });
 
             if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
@@ -84,6 +82,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 raiseAction();
             }
         }
+
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))

@@ -2,21 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Widget;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
-    public class MvxAdapterViewSelectedItemPositionTargetBinding 
+    public class MvxAdapterViewSelectedItemPositionTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected AdapterView AdapterView
-        {
-            get { return (AdapterView) Target; }
-        }
+        protected AdapterView AdapterView => (AdapterView)Target;
 
         private bool _subscribed;
 
@@ -27,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((AdapterView)target).SetSelection((int) value);
+            ((AdapterView)target).SetSelection((int)value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -35,10 +32,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             FireValueChanged(itemSelectedEventArgs.Position);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -51,10 +45,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (Int32); }
-        }
+        public override Type TargetType => typeof(Int32);
 
         protected override void Dispose(bool isDisposing)
         {

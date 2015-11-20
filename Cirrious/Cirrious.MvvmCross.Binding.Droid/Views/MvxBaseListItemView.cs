@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -28,10 +28,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
         }
 
-		protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         /*
         protected override ViewGroup.LayoutParams GenerateDefaultLayoutParams()
@@ -40,10 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
         */
 
-        protected IMvxAndroidBindingContext AndroidBindingContext
-        {
-            get { return _bindingContext; }
-        }
+        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
 
         public IMvxBindingContext BindingContext
         {
@@ -84,10 +81,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-        protected View Content
-        {
-            get { return FirstChild; }
-        }
+        protected View Content => FirstChild;
 
         public object DataContext
         {
@@ -142,6 +136,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private bool _checked;
+
         public virtual bool Checked
         {
             get

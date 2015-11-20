@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Android.Content;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -22,10 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
-        public List<int> OwnedSubViewModelIndicies
-        {
-            get { return _ownedSubViewModelIndicies; }
-        }
+        public List<int> OwnedSubViewModelIndicies => _ownedSubViewModelIndicies;
 
         protected MvxTabActivity()
         {

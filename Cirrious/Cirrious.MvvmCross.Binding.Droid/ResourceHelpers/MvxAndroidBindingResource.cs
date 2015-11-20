@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
 {
@@ -32,30 +32,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
             try
             {
                 var id = resourceType.GetNestedType("Id");
-                BindingTagUnique = (int) SafeGetFieldValue(id, "MvxBindingTagUnique");
+                BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
 
                 var styleable = resourceType.GetNestedType("Styleable");
 
                 ControlStylableGroupId =
-                    (int[]) SafeGetFieldValue(styleable, "MvxControl", new int[0]);
+                    (int[])SafeGetFieldValue(styleable, "MvxControl", new int[0]);
                 TemplateId =
                     (int)SafeGetFieldValue(styleable, "MvxControl_MvxTemplate");
 
                 BindingStylableGroupId =
-                    (int[]) SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
+                    (int[])SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
                 BindingBindId =
-                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
+                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
                 BindingLangId =
-                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
+                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
 
                 ImageViewStylableGroupId =
-                    (int[]) SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
+                    (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
                 SourceBindId =
                     (int)
                     SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
 
                 ListViewStylableGroupId =
-                    (int[]) SafeGetFieldValue(styleable, "MvxListView");
+                    (int[])SafeGetFieldValue(styleable, "MvxListView");
                 ListItemTemplateId =
                     (int)
                     styleable

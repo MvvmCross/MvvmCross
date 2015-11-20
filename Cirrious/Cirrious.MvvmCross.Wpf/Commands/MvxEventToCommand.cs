@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 #region Credit - MvvmLight
 
 // This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
 
-#endregion
+#endregion Credit - MvvmLight
 
 using System;
 using System.Windows;
@@ -25,19 +25,15 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
             "CommandParameter",
-            typeof (object),
-            typeof (MvxEventToCommand),
+            typeof(object),
+            typeof(MvxEventToCommand),
             new PropertyMetadata(
                 null,
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -50,8 +46,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
             "Command",
-            typeof (ICommand),
-            typeof (MvxEventToCommand),
+            typeof(ICommand),
+            typeof(MvxEventToCommand),
             new PropertyMetadata(
                 null,
                 (s, e) => OnCommandChanged(s as MvxEventToCommand, e)));
@@ -61,19 +57,15 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public static readonly DependencyProperty MustToggleIsEnabledProperty = DependencyProperty.Register(
             "MustToggleIsEnabled",
-            typeof (bool),
-            typeof (MvxEventToCommand),
+            typeof(bool),
+            typeof(MvxEventToCommand),
             new PropertyMetadata(
                 false,
                 (s, e) =>
                     {
                         var sender = s as MvxEventToCommand;
-                        if (sender == null)
-                        {
-                            return;
-                        }
 
-                        if (sender.AssociatedObject == null)
+                        if (sender?.AssociatedObject == null)
                         {
                             return;
                         }
@@ -91,7 +83,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public ICommand Command
         {
-            get { return (ICommand) GetValue(CommandProperty); }
+            get { return (ICommand)GetValue(CommandProperty); }
 
             set { SetValue(CommandProperty, value); }
         }
@@ -127,14 +119,14 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// <summary>
         /// Gets or sets a value indicating whether the attached element must be
         /// disabled when the <see cref="Command" /> property's CanExecuteChanged
-        /// event fires. If this property is true, and the command's CanExecute 
+        /// event fires. If this property is true, and the command's CanExecute
         /// method returns false, the element will be disabled. If this property
         /// is false, the element will not be disabled when the command's
         /// CanExecute method changes. This is a DependencyProperty.
         /// </summary>
         public bool MustToggleIsEnabled
         {
-            get { return (bool) this.GetValue(MustToggleIsEnabledProperty); }
+            get { return (bool)this.GetValue(MustToggleIsEnabledProperty); }
 
             set { SetValue(MustToggleIsEnabledProperty, value); }
         }
@@ -142,7 +134,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// <summary>
         /// Gets or sets a value indicating whether the attached element must be
         /// disabled when the <see cref="Command" /> property's CanExecuteChanged
-        /// event fires. If this property is true, and the command's CanExecute 
+        /// event fires. If this property is true, and the command's CanExecute
         /// method returns false, the element will be disabled. This property is here for
         /// compatibility with the Silverlight version. This is NOT a DependencyProperty.
         /// For databinding, use the <see cref="MustToggleIsEnabled" /> property.
@@ -151,9 +143,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         {
             get
             {
-                return this._mustToggleValue == null
-                           ? this.MustToggleIsEnabled
-                           : this._mustToggleValue.Value;
+                return this._mustToggleValue ?? this.MustToggleIsEnabled;
             }
 
             set
@@ -178,6 +168,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
             return AssociatedObject as Control;
         }
 #else
+
         /// <summary>
         /// This method is here for compatibility
         /// with the Silverlight version.
@@ -188,6 +179,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         {
             return AssociatedObject as FrameworkElement;
         }
+
 #endif
 
         /// <summary>
@@ -263,10 +255,10 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
             if (e.OldValue != null)
             {
-                ((ICommand) e.OldValue).CanExecuteChanged -= element.OnCommandCanExecuteChanged;
+                ((ICommand)e.OldValue).CanExecuteChanged -= element.OnCommandCanExecuteChanged;
             }
 
-            var command = (ICommand) e.NewValue;
+            var command = (ICommand)e.NewValue;
 
             if (command != null)
             {

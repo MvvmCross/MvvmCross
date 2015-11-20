@@ -5,8 +5,7 @@
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
   android:minHeight="?android:attr/listPreferredItemHeight"
-	android:orientation="vertical"
-	>
+	android:orientation="vertical">
   <TextView android:id="@+id/dialog_LabelField"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -16,8 +15,7 @@
 		android:singleLine="true"
 		android:text="Label"
 		android:textAppearance="?android:attr/textAppearanceSmall"
-	  	android:textStyle="bold"
-		/>
+	  	android:textStyle="bold" />
   <EditText
 		android:id="@+id/dialog_ValueField"
 		android:gravity="top"
@@ -25,6 +23,5 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="2dp"
 		android:singleLine="true"
-		android:text="FieldValue"
-		/>
+		android:text="FieldValue" />
 </LinearLayout>

@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using CoreGraphics;
 using Foundation;
+using System;
+using System.Windows.Input;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -38,12 +38,12 @@ namespace CrossUI.Touch.Dialog.Elements
                 this._parent = parent;
 
                 _label = new UILabel
-                    {
-                        TextAlignment = UITextAlignment.Left,
-                        Text = parent.Caption,
-                        Font = Font,
-                        BackgroundColor = UIColor.Clear
-                    };
+                {
+                    TextAlignment = UITextAlignment.Left,
+                    Text = parent.Caption,
+                    Font = Font,
+                    BackgroundColor = UIColor.Clear
+                };
                 _button = UIButton.FromType(UIButtonType.Custom);
                 _button.TouchUpInside += delegate
                     {
@@ -69,7 +69,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 var frame = full;
                 frame.Height = 22;
                 frame.X = Padding;
-                frame.Y = (full.Height - frame.Height)/2;
+                frame.Y = (full.Height - frame.Height) / 2;
                 frame.Width -= ImageSpace + Padding;
                 _label.Frame = frame;
 
@@ -85,7 +85,7 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        #endregion
+        #endregion Cell
 
         protected BaseBooleanImageElement(string caption, bool value)
             : base(caption, value)
@@ -93,23 +93,19 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         public event Action ButtonTapped;
+
         public ICommand ButtonCommand { get; set; }
 
         protected virtual void OnButtonTapped()
         {
-            if (ButtonTapped != null)
-                ButtonTapped();
+            ButtonTapped?.Invoke();
 
-            if (ButtonCommand != null)
-                ButtonCommand.Execute(null);
+            ButtonCommand?.Execute(null);
         }
 
         protected abstract UIImage GetImage();
 
-        protected override NSString CellKey
-        {
-            get { return Key; }
-        }
+        protected override NSString CellKey => Key;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
@@ -124,15 +120,13 @@ namespace CrossUI.Touch.Dialog.Elements
         protected override void UpdateCaptionDisplay(UITableViewCell cell)
         {
             var currentCell = cell as TextWithImageCellView;
-            if (currentCell != null)
-                currentCell.UpdateFrom(this);
+            currentCell?.UpdateFrom(this);
         }
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
             var currentCell = cell as TextWithImageCellView;
-            if (currentCell != null)
-                currentCell.UpdateFrom(this);
+            currentCell?.UpdateFrom(this);
         }
     }
 }

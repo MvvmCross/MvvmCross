@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             var view = androidView as IMvxView;
             var savedState = GetSavedStateFromBundle(bundle);
-            view.OnViewCreate(() => { return cached ?? androidView.LoadViewModel(savedState); });
+            view.OnViewCreate(() => cached ?? androidView.LoadViewModel(savedState));
         }
 
         private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (bundle == null)
                 return null;
 
-            IMvxSavedStateConverter converter; 
+            IMvxSavedStateConverter converter;
             if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
             {
                 MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
@@ -128,7 +128,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 return new MvxNullViewModel();
 
             if (viewModelType == null
-                || viewModelType == typeof (IMvxViewModel))
+                || viewModelType == typeof(IMvxViewModel))
             {
                 MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                androidView.GetType().Name);

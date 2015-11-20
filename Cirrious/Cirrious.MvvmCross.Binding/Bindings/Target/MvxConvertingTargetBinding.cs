@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected abstract void SetValueImpl(object target, object value);
 
@@ -80,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             return safeValue;
         }
 
-        protected override sealed void FireValueChanged(object newValue)
+        protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
             if (_isUpdatingTarget

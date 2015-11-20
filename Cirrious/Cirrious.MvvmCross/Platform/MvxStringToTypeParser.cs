@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Platform
 {
@@ -25,6 +25,7 @@ namespace Cirrious.MvvmCross.Platform
         public interface IExtraParser
         {
             bool Parses(Type t);
+
             object ReadValue(Type t, string input, string fieldOrParameterName);
         }
 
@@ -189,6 +190,7 @@ namespace Cirrious.MvvmCross.Platform
         }
 
 #if !UNITY3D
+
         public class GuidParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
@@ -199,6 +201,7 @@ namespace Cirrious.MvvmCross.Platform
                 return toReturn;
             }
         }
+
 #else
         // UNITY3D does not support Guid.TryParse
         // See https://github.com/slodge/MvvmCross/issues/215

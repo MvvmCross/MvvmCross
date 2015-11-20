@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Linq;
 
 namespace Cirrious.CrossCore.Test
 {
@@ -145,7 +145,7 @@ namespace Cirrious.CrossCore.Test
             Assert.AreEqual(1, fields.Count());
         }
 
-        #endregion
+        #endregion Fields
 
         [Test]
         public void TestGetConstructors()

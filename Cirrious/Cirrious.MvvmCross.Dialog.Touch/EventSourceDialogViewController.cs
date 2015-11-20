@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Touch.Views;
 using CrossUI.Touch.Dialog;
 using CrossUI.Touch.Dialog.Elements;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Dialog.Touch
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         {
         }
 
-        public EventSourceDialogViewController(IntPtr handle) 
+        public EventSourceDialogViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -70,10 +70,15 @@ namespace Cirrious.MvvmCross.Dialog.Touch
         }
 
         public event EventHandler ViewDidLoadCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
+
         public event EventHandler DisposeCalled;
     }
 }

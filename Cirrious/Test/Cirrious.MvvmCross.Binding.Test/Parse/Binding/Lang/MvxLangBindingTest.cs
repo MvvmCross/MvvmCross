@@ -2,16 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
 {
@@ -38,13 +36,13 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
             var keyAndDescription = testPair.Value.First();
             var resultKeyAndDescription = result.First();
             var expectedDescription = new MvxSerializableBindingDescription()
-                {
-                    Path = keyAndDescription.Value.Path ?? "TextSource",
-                    Converter = keyAndDescription.Value.Converter ?? "Language",
-                    ConverterParameter = keyAndDescription.Value.ConverterParameter,
-                    FallbackValue = keyAndDescription.Value.FallbackValue,
-                    Mode = MvxBindingMode.OneTime
-                };
+            {
+                Path = keyAndDescription.Value.Path ?? "TextSource",
+                Converter = keyAndDescription.Value.Converter ?? "Language",
+                ConverterParameter = keyAndDescription.Value.ConverterParameter,
+                FallbackValue = keyAndDescription.Value.FallbackValue,
+                Mode = MvxBindingMode.OneTime
+            };
 
             Assert.AreEqual(keyAndDescription.Key, resultKeyAndDescription.Key);
             AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
@@ -52,12 +50,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
 
         private Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()
             {
-                { 
+                {
                     "Text Fred",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred"
@@ -66,12 +64,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     }
                 },
 
-                { 
-                    "Text Key=Fred", 
+                {
+                    "Text Key=Fred",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred"
@@ -80,11 +78,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     }
                 },
                 {
-                    "Text Key='Fred'", 
+                    "Text Key='Fred'",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred"
@@ -97,8 +95,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     "Text 'Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred.Life Jim"
@@ -111,8 +109,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     "Text Key='Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred.Life Jim"
@@ -122,11 +120,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                 },
 
                 {
-                    "Text Key=Fred.Life", 
+                    "Text Key=Fred.Life",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred.Life"
@@ -135,12 +133,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     }
                 },
 
-                { 
+                {
                     "Text Fred.Life Jim",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 ConverterParameter = "Fred.Life Jim"
@@ -150,11 +148,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                 },
 
                 {
-                    "Text Fred.Life Jim,Converter=MyConv", 
+                    "Text Fred.Life Jim,Converter=MyConv",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 Converter = "MyConv",
@@ -165,11 +163,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                 },
 
                 {
-                    "Text Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World", 
+                    "Text Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "Text", 
+                        {
+                            "Text",
                             new MvxSerializableBindingDescription()
                             {
                                 Converter = "MyConv",
@@ -184,8 +182,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                     "SpecialText Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World,Source=SharedTextSource",
                     new  MvxSerializableBindingSpecification()
                     {
-                        { 
-                            "SpecialText", 
+                        {
+                            "SpecialText",
                             new MvxSerializableBindingDescription()
                             {
                                 Converter = "MyConv",
@@ -196,8 +194,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-            }; 
-
-
+            };
     }
 }

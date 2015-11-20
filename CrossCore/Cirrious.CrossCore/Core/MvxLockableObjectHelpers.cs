@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -44,8 +44,7 @@ namespace Cirrious.CrossCore.Core
                     Monitor.Exit(lockObject);
                 }
 
-                if (whenComplete != null)
-                    whenComplete();
+                whenComplete?.Invoke();
             }
             else
             {
@@ -56,8 +55,7 @@ namespace Cirrious.CrossCore.Core
                             action();
                         }
 
-                        if (whenComplete != null)
-                            whenComplete();
+                        whenComplete?.Invoke();
                     });
             }
         }

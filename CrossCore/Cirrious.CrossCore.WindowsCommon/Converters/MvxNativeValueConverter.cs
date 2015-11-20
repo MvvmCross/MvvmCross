@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
 using System;
 using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.CrossCore.WindowsCommon.Converters
 {
@@ -18,10 +18,7 @@ namespace Cirrious.CrossCore.WindowsCommon.Converters
     {
         private readonly IMvxValueConverter _wrapped;
 
-        protected IMvxValueConverter Wrapped
-        {
-            get { return _wrapped; }
-        }
+        protected IMvxValueConverter Wrapped => _wrapped;
 
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
@@ -63,10 +60,7 @@ namespace Cirrious.CrossCore.WindowsCommon.Converters
         : MvxNativeValueConverter
         where T : IMvxValueConverter, new()
     {
-        protected new T Wrapped
-        {
-            get { return (T)base.Wrapped; }
-        }
+        protected new T Wrapped => (T)base.Wrapped;
 
         public MvxNativeValueConverter()
             : base(new T())

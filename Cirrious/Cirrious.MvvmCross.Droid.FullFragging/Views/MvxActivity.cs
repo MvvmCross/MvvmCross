@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.Runtime;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using Android.Runtime;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Views
 {
@@ -23,7 +23,6 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Views
         : MvxEventSourceActivity
         , IMvxAndroidView
     {
-
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {

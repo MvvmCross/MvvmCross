@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -19,10 +19,10 @@ namespace CrossUI.Touch.Dialog.Elements
     ///    The font can be configured after the element has been created
     ///    by assignign to the Font property;   If you want to render
     ///    multiple lines of text, set the MultiLine property to true.
-    /// 
+    ///
     ///    If no font is specified, it will default to Helvetica 17.
-    /// 
-    ///    A static method MakeCalendarBadge is provided that can 
+    ///
+    ///    A static method MakeCalendarBadge is provided that can
     ///    render a calendar badge like the iPhone OS.   It will compose
     ///    the text on top of the image which is expected to be 57x57
     /// </remarks>
@@ -46,7 +46,7 @@ namespace CrossUI.Touch.Dialog.Elements
             Accessory = UITableViewCellAccessory.None;
 
             if (badgeImage == null)
-                throw new ArgumentNullException("badgeImage");
+                throw new ArgumentNullException(nameof(badgeImage));
 
             _image = badgeImage;
 
@@ -56,30 +56,20 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UIFont Font
         {
-            get
-            {
-                if (_font == null)
-                    _font = UIFont.FromName("Helvetica", 17f);
-                return _font;
-            }
+            get { return _font ?? (_font = UIFont.FromName("Helvetica", 17f)); }
             set
             {
-                if (_font != null)
-                    _font.Dispose();
+                _font?.Dispose();
                 _font = value;
             }
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(ckey);
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(ckey) ?? new UITableViewCell(UITableViewCellStyle.Default, ckey)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, ckey)
-                    {
-                        SelectionStyle = UITableViewCellSelectionStyle.Blue
-                    };
-            }
+                SelectionStyle = UITableViewCellSelectionStyle.Blue
+            };
             cell.Accessory = Accessory;
             var tl = cell.TextLabel;
             tl.Text = Caption;
@@ -107,7 +97,7 @@ namespace CrossUI.Touch.Dialog.Elements
             using (var cs = CGColorSpace.CreateDeviceRGB())
             {
                 using (
-                    var context = new CGBitmapContext(IntPtr.Zero, 57, 57, 8, 57*4, cs,
+                    var context = new CGBitmapContext(IntPtr.Zero, 57, 57, 8, 57 * 4, cs,
                                                       CGImageAlphaInfo.PremultipliedLast))
                 {
                     //context.ScaleCTM (0.5f, -1);
@@ -124,7 +114,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     var width = context.TextPosition.X - start;
 
                     context.SetTextDrawingMode(CGTextDrawingMode.Fill);
-                    context.ShowTextAtPoint((57 - width)/2, 46, smallText);
+                    context.ShowTextAtPoint((57 - width) / 2, 46, smallText);
 
                     // The big string
                     context.SelectFont("Helvetica-Bold", 32, CGTextEncoding.MacRoman);
@@ -135,7 +125,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
                     context.SetFillColor(0, 0, 0, 1);
                     context.SetTextDrawingMode(CGTextDrawingMode.Fill);
-                    context.ShowTextAtPoint((57 - width)/2, 9, bigText);
+                    context.ShowTextAtPoint((57 - width) / 2, 9, bigText);
 
                     context.StrokePath();
 

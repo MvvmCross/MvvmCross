@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
@@ -12,14 +12,11 @@ using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUITextFieldTextTargetBinding 
+    public class MvxUITextFieldTextTargetBinding
         : MvxConvertingTargetBinding
         , IMvxEditableTextView
     {
-        protected UITextField View
-        {
-            get { return Target as UITextField; }
-        }
+        protected UITextField View => Target as UITextField;
 
         private bool _subscribed;
 
@@ -36,10 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             FireValueChanged(view.Text);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -55,10 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             _subscribed = true;
         }
 
-        public override System.Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override System.Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -67,7 +58,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UITextField) target;
+            var view = (UITextField)target;
             if (view == null)
                 return;
 
@@ -88,14 +79,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
         }
 
-        public string CurrentText 
-        { 
-            get 
-            { 
+        public string CurrentText
+        {
+            get
+            {
                 var view = View;
-                if (view == null)
-                    return null;
-                return view.Text;
+                return view?.Text;
             }
         }
     }

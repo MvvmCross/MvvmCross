@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Core;
@@ -15,8 +15,11 @@ namespace Cirrious.CrossCore.Test
     public class MvxIocPropertyInjectionTest
     {
         public interface IA { }
+
         public interface IB { }
+
         public interface IC { }
+
         public class A : IA
         {
             public A()
@@ -25,13 +28,17 @@ namespace Cirrious.CrossCore.Test
 
             [MvxInject]
             public IB B { get; set; }
+
             public IC C { get; set; }
 
             public B BNever { get; set; }
+
             [MvxInject]
             public C CNever { get; set; }
         }
+
         public class B : IB { }
+
         public class C : IC { }
 
         [Test]
@@ -91,12 +98,12 @@ namespace Cirrious.CrossCore.Test
         {
             MvxSingleton.ClearAllSingletons();
             var options = new MvxIocOptions
+            {
+                PropertyInjectorOptions = new MvxPropertyInjectorOptions()
                 {
-                    PropertyInjectorOptions = new MvxPropertyInjectorOptions()
-                        {
-                            InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
-                        }
-                };
+                    InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
+                }
+            };
             var instance = MvxSimpleIoCContainer.Initialize(options);
 
             Mvx.RegisterType<IA, A>();

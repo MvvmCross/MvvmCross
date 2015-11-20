@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 where parameterCount <= 1
                 let commandName = GetCommandNameOrNull(method)
                 where !string.IsNullOrEmpty(commandName)
-                select new {Method = method, CommandName = commandName, HasParameter = parameterCount > 0};
+                select new { Method = method, CommandName = commandName, HasParameter = parameterCount > 0 };
 
             foreach (var item in commandMethods)
             {
@@ -74,10 +74,10 @@ namespace Cirrious.MvvmCross.ViewModels
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
                 return null;
-           var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             if (canExecute == null)
                 return null;
-            if (canExecute.PropertyType != typeof (bool))
+            if (canExecute.PropertyType != typeof(bool))
                 return null;
             if (!canExecute.CanRead)
                 return null;
@@ -122,7 +122,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxCommandAttribute CommandAttribute(MethodInfo method)
         {
-            return (MvxCommandAttribute) method.GetCustomAttributes(typeof (MvxCommandAttribute), true).FirstOrDefault();
+            return (MvxCommandAttribute)method.GetCustomAttributes(typeof(MvxCommandAttribute), true).FirstOrDefault();
         }
 
         protected virtual string CanExecuteProperyName(MethodInfo method)
@@ -139,6 +139,7 @@ namespace Cirrious.MvvmCross.ViewModels
         public interface IMvxCommandBuilder
         {
             IMvxCommand ToCommand(object owner);
+
             string CanExecutePropertyName { get; }
         }
 
@@ -147,15 +148,9 @@ namespace Cirrious.MvvmCross.ViewModels
             private readonly MethodInfo _executeMethodInfo;
             private readonly PropertyInfo _canExecutePropertyInfo;
 
-            protected MethodInfo ExecuteMethodInfo
-            {
-                get { return _executeMethodInfo; }
-            }
+            protected MethodInfo ExecuteMethodInfo => _executeMethodInfo;
 
-            protected PropertyInfo CanExecutePropertyInfo
-            {
-                get { return _canExecutePropertyInfo; }
-            }
+            protected PropertyInfo CanExecutePropertyInfo => _canExecutePropertyInfo;
 
             protected MvxBaseCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
             {
@@ -165,10 +160,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
             public abstract IMvxCommand ToCommand(object owner);
 
-            public string CanExecutePropertyName
-            {
-                get { return _canExecutePropertyInfo == null ? null : _canExecutePropertyInfo.Name; }
-            }
+            public string CanExecutePropertyName => _canExecutePropertyInfo?.Name;
         }
 
         public class MvxCommandBuilder : MvxBaseCommandBuilder
@@ -183,7 +175,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 var executeAction = new Action(() => ExecuteMethodInfo.Invoke(owner, new object[0]));
                 Func<bool> canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = () => (bool) CanExecutePropertyInfo.GetValue(owner, null);
+                    canExecuteFunc = () => (bool)CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand(executeAction, canExecuteFunc);
             }
@@ -198,10 +190,10 @@ namespace Cirrious.MvvmCross.ViewModels
 
             public override IMvxCommand ToCommand(object owner)
             {
-                var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] {obj}));
+                var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] { obj }));
                 Func<object, bool> canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = (ignored) => (bool) CanExecutePropertyInfo.GetValue(owner, null);
+                    canExecuteFunc = (ignored) => (bool)CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand<object>(executeAction, canExecuteFunc);
             }
@@ -228,6 +220,6 @@ namespace Cirrious.MvvmCross.ViewModels
         }
         */
 
-        #endregion
+        #endregion Nested classes for building commands by reflection - 'hidden as nested' currently as they are not used anywhere else
     }
 }

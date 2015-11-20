@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore;
-using CrossUI.Core.Descriptions;
 
 namespace CrossUI.Core.Builder
 {
@@ -34,7 +33,7 @@ namespace CrossUI.Core.Builder
             var elementTypes = assembly.GetTypes()
                                        .Where(t => t.Name.EndsWith(keyNamesEndWith))
                                        .Where(t => !t.GetTypeInfo().IsAbstract)
-                                       .Where(t => typeof (TInterface).IsAssignableFrom(t));
+                                       .Where(t => typeof(TInterface).IsAssignableFrom(t));
 
             foreach (var elementType in elementTypes)
             {

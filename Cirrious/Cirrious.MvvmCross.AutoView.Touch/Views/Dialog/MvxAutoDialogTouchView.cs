@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.AutoView.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
@@ -15,8 +15,8 @@ using Cirrious.MvvmCross.Dialog.Touch;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Elements.Menu;
 using CrossUI.Touch.Dialog.Elements;
+using System;
 using UIKit;
-using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 {
@@ -25,7 +25,6 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
         : MvxDialogViewController
           , IMvxTouchAutoView
     {
-
         private IParentMenu _parentMenu;
 
         public MvxAutoDialogTouchView()
@@ -33,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
         {
         }
 
-        public MvxAutoDialogTouchView(IntPtr handle) 
+        public MvxAutoDialogTouchView(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("MvxAutoDialogTouchView IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
@@ -41,7 +40,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
 
         public new IMvxViewModel ViewModel
         {
-			get { return base.ViewModel as IMvxViewModel; }
+            get { return base.ViewModel as IMvxViewModel; }
             set { base.ViewModel = value; }
         }
 

@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Parse;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.CrossCore.Test
 {
@@ -214,7 +214,7 @@ namespace Cirrious.CrossCore.Test
         [Test]
         public void Test_ReadTextUntilWhitespaceOr_ReadsText()
         {
-            var tests = new string[] {"fred;", "fred life;", "fred@test;", "fred", "fred\tlife;", "fred\n" };
+            var tests = new string[] { "fred;", "fred life;", "fred@test;", "fred", "fred\tlife;", "fred\n" };
             foreach (var test in tests)
             {
                 var parser = new Parser();
@@ -227,9 +227,9 @@ namespace Cirrious.CrossCore.Test
         [Test]
         public void Test_ReadValue_Reads_Integers()
         {
-            var tests = new[] {0, 1, 2, 3, - 123, -1, Int64.MinValue, Int64.MaxValue};
+            var tests = new[] { 0, 1, 2, 3, -123, -1, Int64.MinValue, Int64.MaxValue };
             var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                                          x => (object) x);
+                                          x => (object)x);
             DoReadValueTests(dict);
         }
 
@@ -237,16 +237,16 @@ namespace Cirrious.CrossCore.Test
         public void Test_ReadValue_Reads_Doubles()
         {
             // note - we don't run any tests on things like double.MinValue - those would fail due to rounding errors.
-            var tests = new[] {0.001, 1.123, 2.2343, - 123.1232, -1.2323, -99999.93454, 9999.343455};
+            var tests = new[] { 0.001, 1.123, 2.2343, -123.1232, -1.2323, -99999.93454, 9999.343455 };
             var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                                          x => (object) x);
+                                          x => (object)x);
             DoReadValueTests(dict);
         }
 
         public enum MyEnum
         {
             Value1,
-            Value_2,
+            Value2,
             MyEnumValue3Foo
         }
 
@@ -262,11 +262,11 @@ namespace Cirrious.CrossCore.Test
         [Test]
         public void Test_ReadEnumeration_Reads_Enumerations()
         {
-            foreach (var value in Enum.GetValues(typeof (MyEnum)))
+            foreach (var value in Enum.GetValues(typeof(MyEnum)))
             {
-                DoReadEnumerationTest(typeof (MyEnum), value.ToString(), value);
-                DoReadEnumerationTest(typeof (MyEnum), value.ToString().ToUpper(), value);
-                DoReadEnumerationTest(typeof (MyEnum), value.ToString().ToLower(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
             }
         }
 

@@ -2,11 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics.Drawables;
@@ -16,6 +14,8 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
 using CrossUI.Droid.Dialog.Elements;
+using System;
+using System.Linq;
 using Orientation = Android.Widget.Orientation;
 
 namespace CrossUI.Droid.Dialog
@@ -23,11 +23,10 @@ namespace CrossUI.Droid.Dialog
     [Register("crossui.droid.dialog.LinearDialogScrollView")]
     public class LinearDialogScrollView : ScrollView
     {
-
         private CustomDataSetObserver _observer;
         private const int _TAG_INDEX = 82171829;
         private DividerAwareLinearLayout _list;
-        
+
         private DialogAdapter _dialogAdapter;
 
         protected LinearDialogScrollView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -50,10 +49,10 @@ namespace CrossUI.Droid.Dialog
             : this(context, null, Android.Resource.Style.WidgetListView)
         {
         }
-        
+
         public RootElement Root
         {
-            get { return _dialogAdapter == null ? null : _dialogAdapter.Root; }
+            get { return _dialogAdapter?.Root; }
             set
             {
                 value.ValueChanged -= HandleValueChangedEvent;
@@ -167,7 +166,7 @@ namespace CrossUI.Droid.Dialog
                         currentView.Click -= ListView_ItemClick;
                         currentView.LongClick -= ListView_ItemLongClick;
                         currentView.Dispose();
-                        _list.RemoveViewAt(i+1);
+                        _list.RemoveViewAt(i + 1);
                         _list.AddView(view, i + 1);
                     }
                 }
@@ -178,9 +177,9 @@ namespace CrossUI.Droid.Dialog
             }
 
             //remove remaining
-            for (var i = _list.ChildCount; i > _dialogAdapter.Count + 1;  i--)
+            for (var i = _list.ChildCount; i > _dialogAdapter.Count + 1; i--)
             {
-                _list.RemoveViewAt(i-1);
+                _list.RemoveViewAt(i - 1);
             }
         }
 
@@ -188,7 +187,7 @@ namespace CrossUI.Droid.Dialog
         {
             // to ensure we don't subscribe to the event more than once, we first unsubscribe
             // C# will ignore these unsubscriptions if we haven't previous subscribed
-            // see 
+            // see
             // - http://stackoverflow.com/questions/937181/c-sharp-pattern-to-prevent-an-event-handler-hooked-twice
             // - notes in https://github.com/MvvmCross/MvvmCross/pull/363
             view.Click -= ListView_ItemClick;
@@ -214,12 +213,13 @@ namespace CrossUI.Droid.Dialog
 
         public void ListView_ItemClick(object sender, EventArgs eventArgs)
         {
-            var senderView = ((View) sender);
+            var senderView = ((View)sender);
             var position = (int)senderView.GetTag(_TAG_INDEX);
             _dialogAdapter.ListView_ItemClick(sender, new AdapterView.ItemClickEventArgs(null, senderView, position, senderView.Id));
         }
 
 #warning Just checking this is always wanted - see @csteeg's question on https://github.com/slodge/MvvmCross/issues/281
+
         public void ListView_ItemLongClick(object sender, View.LongClickEventArgs longClickEventArgs)
         {
             var senderView = ((View)sender);
@@ -228,6 +228,7 @@ namespace CrossUI.Droid.Dialog
         }
 
 #warning The naming of this feels wrong ? Also feels like it might not work if any dynamic elements are ever used
+
         public void HandleValueChangedEvents(EventHandler eventHandler)
         {
             foreach (var element in Root.Sections.SelectMany(section => section))
@@ -242,8 +243,7 @@ namespace CrossUI.Droid.Dialog
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(sender, args);
+            handler?.Invoke(sender, args);
         }
 
         public void ReloadData()

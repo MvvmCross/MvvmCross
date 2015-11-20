@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.AutoView.Auto
 {
@@ -72,8 +72,8 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public static string GetPropertyText<T>(this Expression<Func<T>> expression)
         {
             if (expression == null)
-                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
-            var memberExpression = 
+                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", nameof(expression));
+            var memberExpression =
                 (expression.Body is UnaryExpression) ? ((UnaryExpression)expression.Body).Operand as MemberExpression : expression.Body as MemberExpression;
             return GetPropertyText(memberExpression, ").");
         }
@@ -82,13 +82,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         {
             if (memberExpression == null)
             {
-                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", "expression");
+                throw new ArgumentException("WrongExpressionMessage (memberExpression is null)", nameof(memberExpression));
             }
 
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
             {
-                throw new ArgumentException(String.Format("WrongExpressionMessage (memberExpression.Member is not PropertyInfo but {0})", memberExpression.Member), "expression");
+                throw new ArgumentException(
+                    $"WrongExpressionMessage (memberExpression.Member is not PropertyInfo but {memberExpression.Member})", nameof(memberExpression));
             }
 
             var text = memberExpression.ToString();

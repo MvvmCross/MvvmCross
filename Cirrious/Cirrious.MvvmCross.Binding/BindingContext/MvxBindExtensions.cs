@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -89,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
             if (string.IsNullOrEmpty(targetPath))
-                targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (T));
+                targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(T));
 
             var bindingDescription = new MvxBindingDescription(
                 targetPath,

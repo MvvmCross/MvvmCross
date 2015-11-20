@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.ViewModels;
 using NUnit.Framework;
+using System;
 
 namespace Cirrious.MvvmCross.Test.ViewModels
 {
@@ -29,16 +29,16 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton<ITestThing>(testThing);
 
             var testObject = new BundleObject
-                {
-                    TheBool1 = false,
-                    TheBool2 = true,
-                    TheGuid1 = Guid.NewGuid(),
-                    TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
-                    TheInt1 = 123,
-                    TheInt2 = 456,
-                    TheString1 = "Hello World",
-                    TheString2 = null
-                };
+            {
+                TheBool1 = false,
+                TheBool2 = true,
+                TheGuid1 = Guid.NewGuid(),
+                TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
+                TheInt1 = 123,
+                TheInt2 = 456,
+                TheString1 = "Hello World",
+                TheString2 = null
+            };
             var bundle = new MvxBundle();
             bundle.Write(testObject);
 
@@ -73,30 +73,30 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             Ioc.RegisterSingleton<ITestThing>(testThing);
 
             var initBundleObject = new BundleObject
-                {
-                    TheBool1 = false,
-                    TheBool2 = true,
-                    TheGuid1 = Guid.NewGuid(),
-                    TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
-                    TheInt1 = 123,
-                    TheInt2 = 456,
-                    TheString1 = "Hello World",
-                    TheString2 = null
-                };
+            {
+                TheBool1 = false,
+                TheBool2 = true,
+                TheGuid1 = Guid.NewGuid(),
+                TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
+                TheInt1 = 123,
+                TheInt2 = 456,
+                TheString1 = "Hello World",
+                TheString2 = null
+            };
             var initBundle = new MvxBundle();
             initBundle.Write(initBundleObject);
 
             var reloadBundleObject = new BundleObject
-                {
-                    TheBool1 = true,
-                    TheBool2 = true,
-                    TheGuid1 = Guid.NewGuid(),
-                    TheGuid2 = new Guid(1123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
-                    TheInt1 = 1234,
-                    TheInt2 = 4567,
-                    TheString1 = "Foo Bar",
-                    TheString2 = null
-                };
+            {
+                TheBool1 = true,
+                TheBool2 = true,
+                TheGuid1 = Guid.NewGuid(),
+                TheGuid2 = new Guid(1123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
+                TheInt1 = 1234,
+                TheInt2 = 4567,
+                TheString1 = "Foo Bar",
+                TheString2 = null
+            };
             var reloadBundle = new MvxBundle();
             reloadBundle.Write(reloadBundleObject);
 
@@ -137,7 +137,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException), 
+        [ExpectedException(typeof(MvxException),
             ExpectedMessage = "Problem creating viewModel",
             MatchType = MessageMatch.StartsWith)]
         public void Test_FailingDependency()
@@ -156,7 +156,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException), 
+        [ExpectedException(typeof(MvxException),
             ExpectedMessage = "Problem initialising viewModel",
             MatchType = MessageMatch.StartsWith)]
         public void Test_FailingInitialisation()

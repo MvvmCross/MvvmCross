@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.AutoView.Interfaces;
 using System;
 using System.IO;
 using System.Reflection;
-using Cirrious.MvvmCross.AutoView.Interfaces;
 
 namespace Cirrious.MvvmCross.AutoView.Builders
 {
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.AutoView.Builders
 
         private static string PathForView(Type viewModelType, string key)
         {
-            var path = string.Format("{0}.AutoViews.{1}.{2}.json", viewModelType.Namespace, viewModelType.Name, key);
+            var path = $"{viewModelType.Namespace}.AutoViews.{viewModelType.Name}.{key}.json";
             return path;
         }
     }

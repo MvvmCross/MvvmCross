@@ -2,21 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Touch.Views
 {
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTouchView TouchView
-        {
-            get { return base.ViewController as IMvxTouchView; }
-        }
+        protected IMvxTouchView TouchView => base.ViewController as IMvxTouchView;
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)

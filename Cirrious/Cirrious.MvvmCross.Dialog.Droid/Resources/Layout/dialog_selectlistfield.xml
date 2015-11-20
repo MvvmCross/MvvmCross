@@ -5,8 +5,7 @@
   android:minHeight="?android:attr/listPreferredItemHeight"
   android:orientation="horizontal"
   android:padding="8dp"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  >
+  xmlns:android="http://schemas.android.com/apk/res/android">
   <TextView android:id="@+id/dialog_LabelField"
 	  android:layout_width="wrap_content"
 	  android:layout_height="wrap_content"
@@ -14,12 +13,10 @@
 	  android:layout_marginRight="12dp"
 	  android:text="Fieldset Label"
 	  android:textSize="21sp"
-	  android:textColor="#ffffff"
-    />
+	  android:textColor="#ffffff" />
   <Spinner
 	  android:id="@+id/dialog_Spinner"
 	  android:layout_width="fill_parent"
 	  android:layout_height="wrap_content"
-	  android:gravity="left"
-    />
+	  android:gravity="left" />
 </LinearLayout>

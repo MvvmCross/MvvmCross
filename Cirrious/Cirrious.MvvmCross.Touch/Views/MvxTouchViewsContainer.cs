@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Reflection;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 {
                     var storyboard = UIStoryboard.FromName(storyboardName, null);
                     var viewController = storyboard.InstantiateViewController(viewType.Name);
-                    return (IMvxTouchView) viewController;
+                    return (IMvxTouchView)viewController;
                 }
                 catch (Exception ex)
                 {

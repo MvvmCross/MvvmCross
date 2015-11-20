@@ -1,4 +1,3 @@
-using System;
 using Android.Content;
 using Android.OS;
 using Android.Util;
@@ -14,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
     /// Typically this is attached to MvxActivity and co via our MvxContextWrapper.
-    /// 
+    ///
     /// Potential order of view creation is the following (HC+):
     ///   1. IFactory2.OnCreateView
     ///   2. IFactory.OnCreateView
@@ -25,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     ///
     /// We intercept these calls and wrap any IFactory/IFactory2 with our own factory
     /// that binds when the view is returned.
-    /// 
+    ///
     /// Heavily based on Calligraphy's CalligraphyLayoutInflater
     /// See: https://github.com/chrisjenx/Calligraphy/blob/master/calligraphy/src/main/java/uk/co/chrisjenx/calligraphy/CalligraphyLayoutInflater.java" />
     /// </summary>
@@ -67,7 +66,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private IMvxLayoutInflaterHolderFactoryFactory _layoutInflaterHolderFactoryFactory;
         private Field _constructorArgs;
         private bool _setPrivateFactory;
-
 
         public MvxLayoutInflater(Context context)
             : base(context)
@@ -123,7 +121,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 // Inflate the resource
                 var view = base.Inflate(resource, root, attachToRoot);
-
 
                 // Register bindings with clear key
                 if (currentBindingContext != null)
@@ -198,7 +195,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.Factory = factory;
         }
 
-        
         [Export]
         public void setFactory2(IFactory2 factory2)
         {
@@ -257,7 +253,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     setPrivateFactoryMethod.Invoke(this,
                         new PrivateFactoryWrapper2((IFactory2)Context, this, this._bindingVisitor));
                 }
-                catch(Java.Lang.Exception ex)
+                catch (Java.Lang.Exception ex)
                 {
                     Mvx.Warning("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
                 }
@@ -302,7 +298,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     {
                         view = CreateView(name, null, attrs);
                     }
-                    catch (Java.Lang.ClassNotFoundException ignored) {}
+                    catch (Java.Lang.ClassNotFoundException ignored) { }
                     finally
                     {
                         constructorArgsArr[0] = lastContext;
@@ -313,22 +309,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory
-        {
-            get
-            {
-                return this._androidViewFactory ?? (this._androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
-            }
-        }
+        protected IMvxAndroidViewFactory AndroidViewFactory => this._androidViewFactory ?? (this._androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
 
-        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory
-        {
-            get
-            {
-                return this._layoutInflaterHolderFactoryFactory ??
-                       (this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
-            }
-        }
+        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory => this._layoutInflaterHolderFactoryFactory ??
+                                                                           (this._layoutInflaterHolderFactoryFactory = Mvx.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {

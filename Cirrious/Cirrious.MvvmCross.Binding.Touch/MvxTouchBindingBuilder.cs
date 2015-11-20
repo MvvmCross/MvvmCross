@@ -2,11 +2,8 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
-using System;
-using System.Collections.Generic;
 
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
@@ -16,6 +13,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Binding.Touch.Target;
 using Cirrious.MvvmCross.Binding.Touch.ValueConverters;
 using Cirrious.MvvmCross.Binding.Touch.Views;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch
@@ -115,16 +113,14 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                           view => new MvxUIViewTapTargetBinding(view, 3, 3));
             */
 
-            if (_fillRegistryAction != null)
-                _fillRegistryAction(registry);
+            _fillRegistryAction?.Invoke(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
+            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
@@ -135,8 +131,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
                 autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
 
-            if (_fillAutoValueConvertersAction != null)
-                _fillAutoValueConvertersAction(autoValueConverters);
+            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -163,8 +158,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(UISegmentedControl), "SelectedSegment");
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), "Hidden");
 
-            if (_fillBindingNamesAction != null)
-                _fillBindingNamesAction(registry);
+            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

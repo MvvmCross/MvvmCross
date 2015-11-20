@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                  , string sourceKey)
         {
             var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                              Expression<Func<TViewModel, IMvxTextProvider>> textProvider)
         {
             var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
             owner.BindLanguage(target, targetPath, sourceKey, sourcePath);
         }
@@ -96,17 +96,17 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             var converter = ValueConverterLookup.Find(converterName);
 
             var bindingDescription = new MvxBindingDescription
+            {
+                TargetName = targetPropertyName,
+                Source = new MvxPathSourceStepDescription
                 {
-                    TargetName = targetPropertyName,
-                    Source = new MvxPathSourceStepDescription
-                        {
-                            SourcePropertyPath = sourcePropertyName,
-                            Converter = converter,
-                            ConverterParameter = sourceKey,
-                            FallbackValue = fallbackValue,
-                        },
-                    Mode = MvxBindingMode.OneTime
-                };
+                    SourcePropertyPath = sourcePropertyName,
+                    Converter = converter,
+                    ConverterParameter = sourceKey,
+                    FallbackValue = fallbackValue,
+                },
+                Mode = MvxBindingMode.OneTime
+            };
             owner.AddBinding(target, bindingDescription);
         }
 

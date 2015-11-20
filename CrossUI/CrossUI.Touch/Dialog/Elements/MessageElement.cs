@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -19,8 +19,6 @@ namespace CrossUI.Touch.Dialog.Elements
             where TCell : UITableViewCell
         {
             var cell = GetActiveCell();
-            if (cell == null)
-                return;
             var typedCell = cell as TCell;
             if (typedCell == null)
                 return;
@@ -137,9 +135,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(MKey) as MessageCell;
-            if (cell == null)
-                cell = new MessageCell();
+            var cell = tv.DequeueReusableCell(MKey) as MessageCell ?? new MessageCell();
             cell.Update(this);
             return cell;
         }

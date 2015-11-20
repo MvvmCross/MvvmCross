@@ -5,8 +5,7 @@
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
   android:minHeight="?android:attr/listPreferredItemHeight"
-  android:orientation="vertical"
-  >
+  android:orientation="vertical">
   <TextView
 	android:id="@+id/dialog_LabelField"
 	android:layout_width="wrap_content"
@@ -25,8 +24,7 @@
 	  android:paddingLeft="3dp"
 	  android:paddingRight="3dp"
 	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"
-	  >
+	  android:layout_height="wrap_content">
     <ImageView
 		android:id="@+id/dialog_ImageLeft"
 		android:layout_width="wrap_content"
@@ -34,15 +32,13 @@
 		android:layout_gravity="left|center_vertical"
 		android:src="@drawable/dialog_icon"
 		android:layout_marginLeft="3dp"
-		android:layout_marginRight="3dp"
-		/>
+		android:layout_marginRight="3dp" />
     <SeekBar android:id="@+id/dialog_SliderField"
 		android:layout_width="fill_parent"
 		android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		/>
+		android:layout_weight="1" />
     <ImageView
 		android:id="@+id/dialog_ImageRight"
 		android:layout_width="wrap_content"
@@ -50,7 +46,6 @@
 		android:layout_gravity="right|center_vertical"
 		android:src="@drawable/dialog_spinner_default_holo_dark"
 		android:layout_marginLeft="3dp"
-		android:layout_marginRight="3dp"
-		/>
+		android:layout_marginRight="3dp" />
   </LinearLayout>
 </LinearLayout>

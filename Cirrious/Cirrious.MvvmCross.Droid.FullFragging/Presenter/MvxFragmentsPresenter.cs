@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Android.OS;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
 {
@@ -36,13 +36,13 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
         }
 
         /// <summary>
-        /// Register your ViewModel to be presented at a IMvxFragmentHost. Backingstore for this is a 
+        /// Register your ViewModel to be presented at a IMvxFragmentHost. Backingstore for this is a
         /// Dictionary, hence you can only have a ViewModel registered at one IMvxFragmentHost at a time.
         /// Just call this method whenever you need to change the host.
         /// </summary>
         /// <typeparam name="TViewModel">Type of the ViewModel to present</typeparam>
         /// <param name="host">Which IMvxFragmentHost (Activity) to present it at</param>
-        public void RegisterViewModelAtHost<TViewModel>(IMvxFragmentHost host) 
+        public void RegisterViewModelAtHost<TViewModel>(IMvxFragmentHost host)
             where TViewModel : IMvxViewModel
         {
             if (host == null)
@@ -50,14 +50,14 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
                 Mvx.Warning("You passed a null IMvxFragmentHost, removing the registration instead");
                 UnRegisterViewModelAtHost<TViewModel>();
             }
-                
-            _dictionary[typeof (TViewModel)] = host;
+
+            _dictionary[typeof(TViewModel)] = host;
         }
 
         public void UnRegisterViewModelAtHost<TViewModel>()
             where TViewModel : IMvxViewModel
         {
-            _dictionary.Remove(typeof (TViewModel));
+            _dictionary.Remove(typeof(TViewModel));
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -72,11 +72,11 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
                 if (host.Show(request, bundle))
                     return;
             }
-            
+
             base.Show(request);
         }
 
-        public override void Close (IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
             IMvxFragmentHost host;
             if (_dictionary.TryGetValue(viewModel.GetType(), out host))
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
                 if (host.Close(viewModel))
                     return;
             }
-            base.Close (viewModel);
+            base.Close(viewModel);
         }
     }
 }

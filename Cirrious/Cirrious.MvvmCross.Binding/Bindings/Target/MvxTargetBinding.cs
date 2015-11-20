@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             _target = new WeakReference(target);
         }
 
-        protected object Target
-        {
-            get { return _target.Target; }
-        }
+        protected object Target => _target.Target;
 
         public virtual void SubscribeToEvents()
         {
@@ -32,14 +29,15 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         {
             var handler = ValueChanged;
 
-            if (handler != null)
-                handler(this, new MvxTargetChangedEventArgs(newValue));
+            handler?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
         }
 
         public abstract Type TargetType { get; }
+
         public abstract void SetValue(object value);
 
         public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
+
         public abstract MvxBindingMode DefaultMode { get; }
     }
 }

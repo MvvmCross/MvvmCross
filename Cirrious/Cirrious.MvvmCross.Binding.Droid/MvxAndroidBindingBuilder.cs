@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Graphics;
@@ -47,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual IMvxAndroidViewBinderFactory CreateAndroidViewBinderFactory()
         {
-            return new MvxAndroidViewBinderFactory(); 
+            return new MvxAndroidViewBinderFactory();
         }
 
         protected virtual IMvxLayoutInflaterHolderFactoryFactory CreateLayoutInflaterFactoryFactory()
@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                     "SelectedObject");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxCompoundButtonCheckedTargetBinding),
                                                     typeof(CompoundButton), "Checked");
-			registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinding), typeof(SeekBar),
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxSeekBarProgressTargetBinding), typeof(SeekBar),
                                                     "Progress");
             registry.RegisterCustomBindingFactory<View>("Visible",
                                                             view => new MvxViewVisibleBinding(view));
@@ -107,7 +107,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<ImageView>("DrawableName",
                                                             imageView => new MvxImageViewDrawableNameTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
-                                                             imageView => new MvxImageViewImageTargetBinding(imageView)); 
+                                                             imageView => new MvxImageViewImageTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
                                                                              spinner =>
                                                                              new MvxSpinnerSelectedItemBinding(
@@ -130,7 +130,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
                                                             new MvxViewLongClickBinding(view));
             registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
-			registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
+            registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
             registry.RegisterCustomBindingFactory<SearchView>(
                 "Query",
                 search => new MvxSearchViewQueryTextTargetBinding(search)

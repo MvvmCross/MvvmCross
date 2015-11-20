@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
@@ -57,7 +57,7 @@ namespace CrossUI.Droid.Dialog.Elements
             View _rawCheckboxView;
             DroidResources.DecodeBooleanElementLayout(Context, cell, out _caption, out _subCaption, out _rawCheckboxView);
 
-            var _checkbox = (CheckBox) _rawCheckboxView;
+            var _checkbox = (CheckBox)_rawCheckboxView;
             _checkbox.SetOnCheckedChangeListener(null);
             _checkbox.Checked = Value;
             _checkbox.SetOnCheckedChangeListener(this);
@@ -103,7 +103,7 @@ namespace CrossUI.Droid.Dialog.Elements
             DroidResources.DecodeBooleanElementLayout(Context, CurrentAttachedCell, out _caption, out _subCaption,
                                                       out _rawCheckboxView);
 
-            var _checkbox = (CheckBox) _rawCheckboxView;
+            var _checkbox = (CheckBox)_rawCheckboxView;
             _checkbox.Toggle();
         }
 

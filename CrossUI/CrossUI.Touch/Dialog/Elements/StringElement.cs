@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -30,15 +30,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
-                                           Skey);
-                cell.SelectionStyle = IsSelectable
-                                          ? UITableViewCellSelectionStyle.Blue
-                                          : UITableViewCellSelectionStyle.None;
-            }
+            var cell = tv.DequeueReusableCell(Value == null ? Skey : SkeyValue) ??
+                       new UITableViewCell(Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1,
+                Skey)
+                       {
+                           SelectionStyle = IsSelectable
+                    ? UITableViewCellSelectionStyle.Blue
+                    : UITableViewCellSelectionStyle.None
+                       };
             cell.Accessory = UITableViewCellAccessory.None;
 
             return cell;
@@ -46,21 +45,17 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-                return;
-
             // The check is needed because the cell might have been recycled.
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = Value ?? string.Empty;
                 cell.DetailTextLabel.SetNeedsDisplay();
             }
         }
 
-
         public override bool Matches(string text)
         {
-            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) ||
+            return (Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1) ||
                    base.Matches(text);
         }
     }

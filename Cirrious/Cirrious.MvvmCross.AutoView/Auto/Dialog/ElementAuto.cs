@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Dialog;
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Dialog;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 {
-    // TODO 
+    // TODO
     // - Radio, Html, Image, MultilineEntry, StringMultiline, StyledMultiline, View, WebContent
 
     public class ElementAuto : KeyedAuto
@@ -32,7 +32,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             LayoutName = layoutName;
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToElementDescription();
         }
@@ -64,7 +64,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
 
             if (selectedCommandName != null)
             {
-                toReturn.Properties["SelectedCommand"] = string.Format("@MvxBind:{0}", selectedCommandName);
+                toReturn.Properties["SelectedCommand"] = $"@MvxBind:{selectedCommandName}";
             }
 
             return toReturn;

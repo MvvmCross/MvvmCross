@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.IoC
 {
@@ -23,7 +23,7 @@ namespace Cirrious.CrossCore.IoC
                 return;
 
             if (target == null)
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
 
             var injectableProperties = FindInjectableProperties(target.GetType(), options);
 
@@ -70,12 +70,15 @@ namespace Cirrious.CrossCore.IoC
                     injectableProperties = injectableProperties
                         .Where(p => p.GetCustomAttributes(typeof(MvxInjectAttribute), false).Any());
                     break;
+
                 case MvxPropertyInjection.AllInterfaceProperties:
                     break;
+
                 case MvxPropertyInjection.None:
                     Mvx.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
+
                 default:
                     throw new MvxException("unknown option for InjectIntoProperties {0}", options.InjectIntoProperties);
             }

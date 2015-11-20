@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.WeakSubscription;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -41,10 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                 _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
-        protected string PropertyName
-        {
-            get { return _propertyName; }
-        }
+        protected string PropertyName => _propertyName;
 
         protected string PropertyNameForChangedEvent
         {
@@ -57,10 +54,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
         }
 
-        protected PropertyInfo PropertyInfo
-        {
-            get { return _propertyInfo; }
-        }
+        protected PropertyInfo PropertyInfo => _propertyInfo;
 
         protected bool IsIndexedProperty
         {
@@ -87,7 +81,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         public void SourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // we test for null or empty here - this means all properties have changed
-            // - fix for https://github.com/slodge/MvvmCross/issues/280 
+            // - fix for https://github.com/slodge/MvvmCross/issues/280
             if (string.IsNullOrEmpty(e.PropertyName)
                 || e.PropertyName == PropertyNameForChangedEvent)
                 OnBoundPropertyChanged();

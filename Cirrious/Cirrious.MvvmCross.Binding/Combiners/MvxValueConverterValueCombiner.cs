@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Combiners
 {

@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using ObjCRuntime;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Platform
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
                 switch (UIDevice.CurrentDevice.UserInterfaceIdiom)
                 {
                     case UIUserInterfaceIdiom.Phone:
-                        if (UIScreen.MainScreen.Bounds.Height*UIScreen.MainScreen.Scale >= 1136)
+                        if (UIScreen.MainScreen.Bounds.Height * UIScreen.MainScreen.Scale >= 1136)
                             return MvxTouchFormFactor.TallPhone;
 
                         return MvxTouchFormFactor.Phone;
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
             {
                 if (UIScreen.MainScreen.RespondsToSelector(new Selector("scale")))
                 {
-                    var scale = (int) Math.Round(UIScreen.MainScreen.Scale);
+                    var scale = (int)Math.Round(UIScreen.MainScreen.Scale);
                     if (scale == 2)
                     {
                         return MvxTouchDisplayDensity.Retina;
@@ -54,6 +54,6 @@ namespace Cirrious.MvvmCross.Touch.Platform
             }
         }
 
-        #endregion
+        #endregion Implementation of IMvxTouchPlatformProperties
     }
 }

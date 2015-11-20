@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using System;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -22,26 +22,22 @@ namespace CrossUI.Droid.Dialog.Elements
             _layoutId = layoutId;
         }
 
-        public ViewElement(string layoutName = null): base(string.Empty, layoutName)
+        public ViewElement(string layoutName = null) : base(string.Empty, layoutName)
         {
         }
 
         protected override View GetViewImpl(Context context, ViewGroup parent)
         {
 #warning convertView is junk here?
-            View view;
-            if (_layoutId > 0)
-                view = DroidResources.LoadLayout(context, parent, _layoutId);
-            else
-                view = DroidResources.LoadLayout(context, parent, LayoutName);
+            View view = _layoutId > 0 ? DroidResources.LoadLayout(context, parent, _layoutId) : DroidResources.LoadLayout(context, parent, LayoutName);
 
             if (view == null)
             {
                 Log.Error("Android.Dialog", "ViewElement: Failed to load resource: " + LayoutName);
             }
-            else if (Populate != null)
+            else
             {
-                Populate(view);
+                Populate?.Invoke(view);
             }
             return view;
         }

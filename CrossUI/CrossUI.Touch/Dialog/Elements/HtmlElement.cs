@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CrossUI.Touch.Dialog.Utilities;
 using Foundation;
 using UIKit;
@@ -38,10 +37,7 @@ namespace CrossUI.Touch.Dialog.Elements
             _nsUrl = url;
         }
 
-        protected override NSString CellKey
-        {
-            get { return Hkey; }
-        }
+        protected override NSString CellKey => Hkey;
 
         public string Url
         {
@@ -51,12 +47,10 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey);
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(CellKey) ?? new UITableViewCell(UITableViewCellStyle.Default, CellKey)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-            }
+                SelectionStyle = UITableViewCellSelectionStyle.Blue
+            };
             cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
             return cell;
@@ -128,10 +122,8 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 NetworkActivity = false;
                 vc.NavigationItem.RightBarButtonItem = null;
-                if (_web != null)
-                    _web.LoadHtmlString(
-                        String.Format("<html><center><font size=+5 color='red'>{0}:<br>{1}</font></center></html>",
-                                      "An error occurred:".GetText(), args.Error.LocalizedDescription), null);
+                _web?.LoadHtmlString(
+                    $"<html><center><font size=+5 color='red'>{"An error occurred:".GetText()}:<br>{args.Error.LocalizedDescription}</font></center></html>", null);
             };
             vc.NavigationItem.Title = Caption;
 

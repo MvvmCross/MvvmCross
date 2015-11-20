@@ -2,19 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -25,7 +25,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))
         {
         }
-
 
         public MvxRadioGroup(Context context, IAttributeSet attrs, IMvxAdapterWithChangedEvent adapter)
             : base(context, attrs)
@@ -41,34 +40,30 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
-		protected MvxRadioGroup(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxRadioGroup(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
-        
-        void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
+
+        private void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
         {
             var li = (args.Child as MvxListItemView);
-            if (li != null)
+            var radioButton = li?.GetChildAt(0) as RadioButton;
+            if (radioButton != null)
             {
-                var radioButton = (li.GetChildAt(0) as RadioButton);
-                if (radioButton != null)
+                // radio buttons require an id so that they get un-checked correctly
+                if (radioButton.Id == Android.Views.View.NoId)
                 {
-                    // radio buttons require an id so that they get un-checked correctly
-                    if (radioButton.Id == Android.Views.View.NoId)
-                    {
-                        radioButton.Id = GenerateViewId();
-                    }
-                    radioButton.CheckedChange += OnRadioButtonCheckedChange;
+                    radioButton.Id = GenerateViewId();
                 }
+                radioButton.CheckedChange += OnRadioButtonCheckedChange;
             }
         }
-
 
         private void OnRadioButtonCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
         {
@@ -79,16 +74,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            if (boundChild != null)
-            {
-                boundChild.ClearAllBindings();
-            }
+            boundChild?.ClearAllBindings();
         }
-
 
         private IMvxAdapterWithChangedEvent _adapter;
 
@@ -103,7 +93,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     return;
                 }
 
-
                 if (existing != null)
                 {
                     existing.DataSetChanged -= AdapterOnDataSetChanged;
@@ -114,15 +103,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     }
                 }
 
-
                 _adapter = value;
-
 
                 if (_adapter != null)
                 {
                     _adapter.DataSetChanged += AdapterOnDataSetChanged;
                 }
-
 
                 if (_adapter == null)
                 {
@@ -132,14 +118,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
             set { Adapter.ItemsSource = value; }
         }
-
 
         public int ItemTemplateId
         {
@@ -149,7 +133,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private static long _nextGeneratedViewId = 1;
 
-        static private int GenerateViewId()
+        private static int GenerateViewId()
         {
             for (;;)
             {
@@ -171,4 +155,3 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
     }
 }
-

@@ -2,9 +2,8 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 
 namespace Cirrious.CrossCore.UI
 {
@@ -177,6 +176,6 @@ namespace Cirrious.CrossCore.UI
         public static MvxColor White = new MvxColor(0xFFFFFFFF);
         public static MvxColor WhiteSmoke = new MvxColor(0xFFF5F5F5);
         public static MvxColor Yellow = new MvxColor(0xFFFFFF00);
-        public static MvxColor YellowGreen = new MvxColor(0xFF9ACD32);        
+        public static MvxColor YellowGreen = new MvxColor(0xFF9ACD32);
     }
 }

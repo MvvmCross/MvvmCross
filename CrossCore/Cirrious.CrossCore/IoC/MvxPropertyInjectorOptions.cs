@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 namespace Cirrious.CrossCore.IoC
@@ -19,6 +19,7 @@ namespace Cirrious.CrossCore.IoC
         public bool ThrowIfPropertyInjectionFails { get; set; }
 
         private static IMvxPropertyInjectorOptions _mvxInjectProperties;
+
         public static IMvxPropertyInjectorOptions MvxInject
         {
             get
@@ -33,14 +34,16 @@ namespace Cirrious.CrossCore.IoC
         }
 
         private static IMvxPropertyInjectorOptions _allProperties;
+
         public static IMvxPropertyInjectorOptions All
         {
-            get { 
+            get
+            {
                 _allProperties = _allProperties ?? new MvxPropertyInjectorOptions()
-                    {
-                        InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties,
-                        ThrowIfPropertyInjectionFails = false
-                    };
+                {
+                    InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties,
+                    ThrowIfPropertyInjectionFails = false
+                };
                 return _allProperties;
             }
         }

@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
@@ -13,6 +12,7 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Bindings
 {
@@ -20,15 +20,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         : MvxBinding
           , IMvxUpdateableBinding
     {
-        private IMvxSourceStepFactory SourceStepFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceStepFactory; }
-        }
+        private IMvxSourceStepFactory SourceStepFactory => MvxBindingSingletonCache.Instance.SourceStepFactory;
 
-        private IMvxTargetBindingFactory TargetBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.TargetBindingFactory; }
-        }
+        private IMvxTargetBindingFactory TargetBindingFactory => MvxBindingSingletonCache.Instance.TargetBindingFactory;
 
         private readonly MvxBindingDescription _bindingDescription;
         private IMvxSourceStep _sourceStep;
@@ -112,7 +106,6 @@ namespace Cirrious.MvvmCross.Binding.Bindings
                 }
             }
         }
-
 
         protected virtual void ClearTargetBinding()
         {

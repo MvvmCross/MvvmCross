@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Windows.Input;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Windows.Input;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -94,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
-            return _itemsSource == null ? 0 : _itemsSource.Count();
+            return _itemsSource?.Count() ?? 0;
         }
 
         public override string GetTitle(UIPickerView picker, nint row, nint component)
@@ -115,13 +115,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _selectedItem = _itemsSource.ElementAt((int)row);
 
             var handler = SelectedItemChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
 
             var command = SelectedChangedCommand;
             if (command != null)
-            if (command.CanExecute(_selectedItem))
-                command.Execute(_selectedItem);
+                if (command.CanExecute(_selectedItem))
+                    command.Execute(_selectedItem);
         }
 
         public object SelectedItem

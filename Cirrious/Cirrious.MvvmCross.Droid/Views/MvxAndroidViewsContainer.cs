@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         {
             if (intent == null)
             {
-                MvxTrace.Error( "Null Intent seen when creating ViewModel");
+                MvxTrace.Error("Null Intent seen when creating ViewModel");
                 return null;
             }
 
@@ -143,9 +143,9 @@ namespace Cirrious.MvvmCross.Droid.Views
             intent.AddFlags(ActivityFlags.NewTask);
 
 #warning we want to do things here... clear top, remove history item, etc
-//#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
-//            if (request.ClearTop)
-//                intent.AddFlags(ActivityFlags.ClearTop);
+            //#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
+            //            if (request.ClearTop)
+            //                intent.AddFlags(ActivityFlags.ClearTop);
         }
 
         public virtual Tuple<Intent, int> GetIntentWithKeyFor(IMvxViewModel viewModel)
@@ -164,6 +164,6 @@ namespace Cirrious.MvvmCross.Droid.Views
             Mvx.Resolve<IMvxChildViewModelCache>().Remove(key);
         }
 
-        #endregion
+        #endregion Implementation of IMvxAndroidViewModelRequestTranslator
     }
 }

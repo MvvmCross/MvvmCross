@@ -2,13 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Cirrious.CrossCore;
 
 namespace Cirrious.CrossCore.Core
 {
@@ -16,6 +15,7 @@ namespace Cirrious.CrossCore.Core
     {
         private const string WrongExpressionMessage =
             "Wrong expression\nshould be called with expression like\n() => PropertyName";
+
         private const string WrongUnaryExpressionMessage =
             "Wrong unary expression\nshould be called with expression like\n() => PropertyName";
 
@@ -25,38 +25,35 @@ namespace Cirrious.CrossCore.Core
         {
             if (expression == null)
             {
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             }
 
             var memberExpression = FindMemberExpression(expression);
 
             if (memberExpression == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             if (member.DeclaringType == null)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
-            if (target != null)
+            if (target != null && !member.DeclaringType.IsInstanceOfType(target))
             {
-                if (!member.DeclaringType.IsAssignableFrom(target.GetType()))
-                {
-                    throw new ArgumentException(WrongExpressionMessage, "expression");
-                }
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             if (member.GetGetMethod(true).IsStatic)
             {
-                throw new ArgumentException(WrongExpressionMessage, "expression");
+                throw new ArgumentException(WrongExpressionMessage, nameof(expression));
             }
 
             return member.Name;
@@ -64,12 +61,13 @@ namespace Cirrious.CrossCore.Core
 
         private static MemberExpression FindMemberExpression<T>(Expression<Func<T>> expression)
         {
-            if (expression.Body is UnaryExpression)
+            var body = expression.Body as UnaryExpression;
+            if (body != null)
             {
-                var unary = (UnaryExpression)expression.Body;
+                var unary = body;
                 var member = unary.Operand as MemberExpression;
                 if (member == null)
-                    throw new ArgumentException(WrongUnaryExpressionMessage, "expression");
+                    throw new ArgumentException(WrongUnaryExpressionMessage, nameof(expression));
                 return member;
             }
 

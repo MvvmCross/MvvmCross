@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using CrossUI.Touch.Dialog.Elements;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.OldElements
@@ -20,7 +20,9 @@ namespace CrossUI.Touch.Dialog.OldElements
         public string LoadingCaption { get; set; }
         public UIColor TextColor { get; set; }
         public UIColor BackgroundColor { get; set; }
+
         public event Action<LoadMoreElement> LoadMoreTapped = null;
+
         public UIFont Font;
         public nfloat? Height;
         private UITextAlignment alignment = UITextAlignment.Center;
@@ -56,15 +58,15 @@ namespace CrossUI.Touch.Dialog.OldElements
                 cell = new UITableViewCell(UITableViewCellStyle.Default, key);
 
                 activityIndicator = new UIActivityIndicatorView
-                    {
-                        ActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray,
-                        Tag = 1
-                    };
+                {
+                    ActivityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray,
+                    Tag = 1
+                };
                 caption = new UILabel
-                    {
-                        AdjustsFontSizeToFitWidth = false,
-                        Tag = 2
-                    };
+                {
+                    AdjustsFontSizeToFitWidth = false,
+                    Tag = 2
+                };
                 cell.ContentView.AddSubview(caption);
                 cell.ContentView.AddSubview(activityIndicator);
             }
@@ -75,15 +77,21 @@ namespace CrossUI.Touch.Dialog.OldElements
             }
             if (Animating)
             {
-                caption.Text = LoadingCaption;
-                activityIndicator.Hidden = false;
-                activityIndicator.StartAnimating();
+                if (caption != null) caption.Text = LoadingCaption;
+                if (activityIndicator != null)
+                {
+                    activityIndicator.Hidden = false;
+                    activityIndicator.StartAnimating();
+                }
             }
             else
             {
-                caption.Text = NormalCaption;
-                activityIndicator.Hidden = true;
-                activityIndicator.StopAnimating();
+                if (caption != null) caption.Text = NormalCaption;
+                if (activityIndicator != null)
+                {
+                    activityIndicator.Hidden = true;
+                    activityIndicator.StopAnimating();
+                }
             }
             if (BackgroundColor != null)
             {
@@ -93,11 +101,14 @@ namespace CrossUI.Touch.Dialog.OldElements
             {
                 cell.ContentView.BackgroundColor = null;
             }
-            caption.BackgroundColor = UIColor.Clear;
-            caption.TextColor = TextColor ?? UIColor.Black;
-            caption.Font = Font ?? UIFont.BoldSystemFontOfSize(16);
-            caption.TextAlignment = Alignment;
-            Layout(cell, activityIndicator, caption);
+            if (caption != null)
+            {
+                caption.BackgroundColor = UIColor.Clear;
+                caption.TextColor = TextColor ?? UIColor.Black;
+                caption.Font = Font ?? UIFont.BoldSystemFontOfSize(16);
+                caption.TextAlignment = Alignment;
+                Layout(cell, activityIndicator, caption);
+            }
             return cell;
         }
 
@@ -116,15 +127,21 @@ namespace CrossUI.Touch.Dialog.OldElements
                 var caption = cell.ContentView.ViewWithTag(2) as UILabel;
                 if (value)
                 {
-                    caption.Text = LoadingCaption;
-                    activityIndicator.Hidden = false;
-                    activityIndicator.StartAnimating();
+                    if (caption != null) caption.Text = LoadingCaption;
+                    if (activityIndicator != null)
+                    {
+                        activityIndicator.Hidden = false;
+                        activityIndicator.StartAnimating();
+                    }
                 }
                 else
                 {
-                    activityIndicator.StopAnimating();
-                    activityIndicator.Hidden = true;
-                    caption.Text = NormalCaption;
+                    if (activityIndicator != null)
+                    {
+                        activityIndicator.StopAnimating();
+                        activityIndicator.Hidden = true;
+                    }
+                    if (caption != null) caption.Text = NormalCaption;
                 }
                 Layout(cell, activityIndicator, caption);
             }
@@ -154,7 +171,7 @@ namespace CrossUI.Touch.Dialog.OldElements
 
         public nfloat GetHeight(UITableView tableView, NSIndexPath indexPath)
         {
-            return Height ?? GetTextSize(Animating ? LoadingCaption : NormalCaption).Height + 2*pad;
+            return Height ?? GetTextSize(Animating ? LoadingCaption : NormalCaption).Height + 2 * pad;
         }
 
         private void Layout(UITableViewCell cell, UIActivityIndicatorView activityIndicator, UILabel caption)
@@ -164,7 +181,7 @@ namespace CrossUI.Touch.Dialog.OldElements
             var size = GetTextSize(Animating ? LoadingCaption : NormalCaption);
 
             if (!activityIndicator.Hidden)
-                activityIndicator.Frame = new CGRect((sbounds.Width - size.Width)/2 - isize*2, pad, isize, isize);
+                activityIndicator.Frame = new CGRect((sbounds.Width - size.Width) / 2 - isize * 2, pad, isize, isize);
 
             caption.Frame = new CGRect(10, pad, sbounds.Width - 20, size.Height);
         }

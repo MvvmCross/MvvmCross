@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Parse;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Parse;
-using Cirrious.CrossCore.Platform;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding
 {
@@ -93,7 +93,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode) ReadEnumerationValue(typeof (MvxBindingMode));
+            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)

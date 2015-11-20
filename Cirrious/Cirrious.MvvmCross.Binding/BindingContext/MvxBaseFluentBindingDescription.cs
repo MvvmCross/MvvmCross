@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Core;
@@ -16,6 +13,9 @@ using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Combiners;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -48,12 +48,12 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
                 return new MvxPathSourceStepDescription()
-                    {
-                        Converter = inputs.Converter,
-                        ConverterParameter = inputs.ConverterParameter,
-                        FallbackValue = inputs.FallbackValue,
-                        SourcePropertyPath = _knownSourcePath
-                    };
+                {
+                    Converter = inputs.Converter,
+                    ConverterParameter = inputs.ConverterParameter,
+                    FallbackValue = inputs.FallbackValue,
+                    SourcePropertyPath = _knownSourcePath
+                };
             }
         }
 
@@ -96,6 +96,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             : ISourceSpec
         {
             private readonly MvxSourceStepDescription _sourceStepDescription;
+
             public FullySourceSpec(MvxSourceStepDescription sourceStepDescription)
             {
                 _sourceStepDescription = sourceStepDescription;
@@ -118,30 +119,24 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                                         MvxSourceStepDescription sourceStepDescription)
             {
                 return new MvxCombinerSourceStepDescription()
-                    {
-                        Combiner = new MvxSingleValueCombiner(),
-                        Converter = inputs.Converter,
-                        ConverterParameter = inputs.ConverterParameter,
-                        FallbackValue = inputs.FallbackValue,
-                        InnerSteps = new List<MvxSourceStepDescription>()
+                {
+                    Combiner = new MvxSingleValueCombiner(),
+                    Converter = inputs.Converter,
+                    ConverterParameter = inputs.ConverterParameter,
+                    FallbackValue = inputs.FallbackValue,
+                    InnerSteps = new List<MvxSourceStepDescription>()
                             {
                                 sourceStepDescription
                             }
-                    };
+                };
             }
         }
 
         protected object ClearBindingKey { get; set; }
 
-        protected MvxBindingDescription BindingDescription
-        {
-            get { return _bindingDescription; }
-        }
+        protected MvxBindingDescription BindingDescription => _bindingDescription;
 
-        protected MvxSourceStepDescription SourceStepDescription
-        {
-            get { return _sourceStepDescription; }
-        }
+        protected MvxSourceStepDescription SourceStepDescription => _sourceStepDescription;
 
         protected void SetFreeTextPropertyPath(string sourcePropertyPath)
         {
@@ -218,11 +213,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             if (_sourceSpec == null)
             {
                 source = new MvxPathSourceStepDescription()
-                    {
-                        Converter = _sourceStepDescription.Converter,
-                        ConverterParameter = _sourceStepDescription.ConverterParameter,
-                        FallbackValue = _sourceStepDescription.FallbackValue
-                    };
+                {
+                    Converter = _sourceStepDescription.Converter,
+                    ConverterParameter = _sourceStepDescription.ConverterParameter,
+                    FallbackValue = _sourceStepDescription.FallbackValue
+                };
             }
             else
             {
@@ -230,11 +225,11 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             }
 
             var toReturn = new MvxBindingDescription()
-                {
-                    Mode = BindingDescription.Mode,
-                    TargetName = BindingDescription.TargetName,
-                    Source = source
-                };
+            {
+                Mode = BindingDescription.Mode,
+                TargetName = BindingDescription.TargetName,
+                Source = source
+            };
 
             return toReturn;
         }
@@ -259,7 +254,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 return;
 
             BindingDescription.TargetName =
-                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof (TTarget));
+                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
         }
     }
 }

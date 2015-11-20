@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Builders;
 using Cirrious.MvvmCross.AutoView.Droid.Builders;
@@ -14,10 +13,12 @@ using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Views;
 using CrossUI.Core.Builder;
 using CrossUI.Droid;
+using System;
 
 namespace Cirrious.MvvmCross.AutoView.Droid
 {
 #warning Factor out a base class shared across platfroms (can use Generics)
+
     public class MvxAutoViewSetup
     {
         public void Initialize(Type resourceType)

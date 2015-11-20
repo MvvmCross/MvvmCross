@@ -2,19 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Foundation;
-using UIKit;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
+using UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             InitializeImageHelper();
         }
 
-        public GeneralTableViewCell(IntPtr handle) 
+        public GeneralTableViewCell(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("GeneralTableViewCell IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
@@ -81,16 +81,14 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             set { _imageHelper.ImageUrl = value; }
         }
 
-        public IMvxImageHelper<UIImage> Image
-        {
-            get { return _imageHelper; }
-        }
+        public IMvxImageHelper<UIImage> Image => _imageHelper;
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            InvokeOnMainThread(() => {
+            InvokeOnMainThread(() =>
+            {
                 if (ImageView != null)
-                    ImageView.Image = mvxValueEventArgs.Value;    
+                    ImageView.Image = mvxValueEventArgs.Value;
             });
         }
 
@@ -101,8 +99,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
             base.SetSelected(selected, animated);
 
             if (selected)
-                if (SelectedCommand != null)
-                    SelectedCommand.Execute(null);
+            {
+                SelectedCommand?.Execute(null);
+            }
         }
 
         protected override void Dispose(bool disposing)

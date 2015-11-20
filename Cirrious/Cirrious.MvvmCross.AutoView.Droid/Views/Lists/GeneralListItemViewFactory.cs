@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {
@@ -28,10 +28,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             return view;
         }
 
-        public string UniqueName
-        {
-            get { return @"General$" + LayoutName; }
-        }
+        public string UniqueName => @"General$" + LayoutName;
 
         public string LayoutName { get; set; }
 

@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using System.Windows.Navigation;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Microsoft.Phone.Controls;
+using System.Linq;
+using System.Windows.Navigation;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -22,7 +21,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel) DataContext; }
+            get { return (IMvxViewModel)DataContext; }
             set { DataContext = value; }
         }
 
@@ -33,7 +32,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 NavigationService.RemoveBackEntry();
         }
 
-        #endregion
+        #endregion IMvxPhoneView Members
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -76,7 +75,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel) base.ViewModel; }
+            get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
     }

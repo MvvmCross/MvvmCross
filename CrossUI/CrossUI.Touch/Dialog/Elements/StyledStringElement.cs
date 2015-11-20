@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows.Input;
 using CrossUI.Touch.Dialog.Utilities;
 using Foundation;
+using System;
+using System.Windows.Input;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
 {
     /// <summary>
-    ///   A version of the StringElement that can be styled with a number of formatting 
-    ///   options and can render images or background images either from UIImage parameters 
+    ///   A version of the StringElement that can be styled with a number of formatting
+    ///   options and can render images or background images either from UIImage parameters
     ///   or by downloading them from the net.
     /// </summary>
     public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground
@@ -53,6 +53,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         public event Action AccessoryTapped;
+
         public ICommand AccessoryCommand { get; set; }
 
         public UIFont Font { get; set; }
@@ -84,15 +85,13 @@ namespace CrossUI.Touch.Dialog.Elements
 
         private ExtraInfo OnImageInfo()
         {
-            if (_extraInfo == null)
-                _extraInfo = new ExtraInfo();
-            return _extraInfo;
+            return _extraInfo ?? (_extraInfo = new ExtraInfo());
         }
 
         // Uses the specified image (use this or ImageUri)
         public UIImage Image
         {
-            get { return _extraInfo == null ? null : _extraInfo.Image; }
+            get { return _extraInfo?.Image; }
             set
             {
                 OnImageInfo().Image = value;
@@ -103,7 +102,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // Loads the image from the specified uri (use this or Image)
         public Uri ImageUri
         {
-            get { return _extraInfo == null ? null : _extraInfo.Uri; }
+            get { return _extraInfo?.Uri; }
             set
             {
                 OnImageInfo().Uri = value;
@@ -114,7 +113,7 @@ namespace CrossUI.Touch.Dialog.Elements
         // Background color for the cell (alternative: BackgroundUri)
         public UIColor BackgroundColor
         {
-            get { return _extraInfo == null ? null : _extraInfo.BackgroundColor; }
+            get { return _extraInfo?.BackgroundColor; }
             set
             {
                 OnImageInfo().BackgroundColor = value;
@@ -124,14 +123,14 @@ namespace CrossUI.Touch.Dialog.Elements
 
         public UIColor DetailColor
         {
-            get { return _extraInfo == null ? null : _extraInfo.DetailColor; }
+            get { return _extraInfo?.DetailColor; }
             set { OnImageInfo().DetailColor = value; }
         }
 
         // Uri for a Background image (alternatiev: BackgroundColor)
         public Uri BackgroundUri
         {
-            get { return _extraInfo == null ? null : _extraInfo.BackgroundUri; }
+            get { return _extraInfo?.BackgroundUri; }
             set
             {
                 OnImageInfo().BackgroundUri = value;
@@ -146,17 +145,12 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var key = GetKey((int) Style);
-            var cell = tv.DequeueReusableCell(key);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(Style, key);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-            }
+            var key = GetKey((int)Style);
+            var cell = tv.DequeueReusableCell(key) ??
+                       new UITableViewCell(Style, key) { SelectionStyle = UITableViewCellSelectionStyle.Blue };
             PrepareCell(cell);
             return cell;
         }
-
 
         protected override void UpdateCellDisplay(UITableViewCell cell)
         {
@@ -196,7 +190,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             // The check is needed because the cell might have been recycled.
             if (cell.DetailTextLabel != null)
-                cell.DetailTextLabel.Text = Value == null ? "" : Value;
+                cell.DetailTextLabel.Text = Value ?? "";
 
             if (_extraInfo == null)
             {
@@ -205,10 +199,10 @@ namespace CrossUI.Touch.Dialog.Elements
             else
             {
                 var imgView = cell.ImageView;
-                UIImage img;
 
                 if (imgView != null)
                 {
+                    UIImage img;
                     if (_extraInfo.Uri != null)
                         img = ImageLoader.DefaultRequestImage(_extraInfo.Uri, this);
                     else if (_extraInfo.Image != null)
@@ -227,9 +221,7 @@ namespace CrossUI.Touch.Dialog.Elements
                 cell.DetailTextLabel.Lines = Lines;
                 cell.DetailTextLabel.LineBreakMode = LineBreakMode;
                 cell.DetailTextLabel.Font = SubtitleFont ?? UIFont.SystemFontOfSize(14);
-                cell.DetailTextLabel.TextColor = (_extraInfo == null || _extraInfo.DetailColor == null)
-                                                     ? UIColor.Gray
-                                                     : _extraInfo.DetailColor;
+                cell.DetailTextLabel.TextColor = _extraInfo?.DetailColor ?? UIColor.Gray;
             }
         }
 
@@ -267,18 +259,14 @@ namespace CrossUI.Touch.Dialog.Elements
             if (uri == null || _extraInfo == null)
                 return;
             var root = GetImmediateRootElement();
-            if (root == null || root.TableView == null)
-                return;
-            root.TableView.ReloadRows(new[] {IndexPath}, UITableViewRowAnimation.None);
+            root?.TableView?.ReloadRows(new[] { IndexPath }, UITableViewRowAnimation.None);
         }
 
         internal void AccessoryTap()
         {
             Action tapped = AccessoryTapped;
-            if (tapped != null)
-                tapped();
-            if (AccessoryCommand != null)
-                AccessoryCommand.Execute(null);
+            tapped?.Invoke();
+            AccessoryCommand?.Execute(null);
         }
     }
 }

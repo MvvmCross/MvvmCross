@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -39,10 +39,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
-		protected MvxTableLayout(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxTableLayout(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
@@ -52,10 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            if (boundChild != null)
-            {
-                boundChild.ClearAllBindings();
-            }
+            boundChild?.ClearAllBindings();
         }
 
         private IMvxAdapterWithChangedEvent _adapter;

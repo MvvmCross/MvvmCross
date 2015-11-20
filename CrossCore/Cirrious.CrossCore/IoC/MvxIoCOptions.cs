@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -18,7 +18,7 @@ namespace Cirrious.CrossCore.IoC
             TryToDetectSingletonCircularReferences = true;
             TryToDetectDynamicCircularReferences = true;
             CheckDisposeIfPropertyInjectionFails = true;
-            PropertyInjectorType = typeof (MvxPropertyInjector);
+            PropertyInjectorType = typeof(MvxPropertyInjector);
             PropertyInjectorOptions = new MvxPropertyInjectorOptions();
         }
 
