@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
+using System;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -43,24 +43,18 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
-            var viewUrl = string.Format("{0}?{1}={2}", GetBaseXamlUrlForView(viewType), QueryParameterKeyName,
-                                        Uri.EscapeDataString(requestText));
+            var viewUrl =
+                $"{GetBaseXamlUrlForView(viewType)}?{QueryParameterKeyName}={Uri.EscapeDataString(requestText)}";
             return new Uri(viewUrl, UriKind.Relative);
         }
 
         protected virtual string GetBaseXamlUrlForView(Type viewType)
         {
-            string viewUrl;
             var customAttribute =
                 (MvxPhoneViewAttribute)
-                viewType.GetCustomAttributes(typeof (MvxPhoneViewAttribute), false).FirstOrDefault();
+                viewType.GetCustomAttributes(typeof(MvxPhoneViewAttribute), false).FirstOrDefault();
 
-            if (customAttribute == null)
-            {
-                viewUrl = GetConventionalXamlUrlForView(viewType);
-            }
-            else
-                viewUrl = customAttribute.Url;
+            string viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
 
             return viewUrl;
         }
@@ -69,13 +63,10 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             var splitName = viewType.FullName.Split('.');
             var viewsAndBeyond = splitName.SkipWhile((segment) => segment != ViewsFolderName);
-            var viewUrl = string.Format("/{0}.xaml", string.Join("/", viewsAndBeyond));
+            var viewUrl = $"/{string.Join("/", viewsAndBeyond)}.xaml";
             return viewUrl;
         }
 
-        protected virtual string ViewsFolderName
-        {
-            get { return "Views"; }
-        }
+        protected virtual string ViewsFolderName => "Views";
     }
 }

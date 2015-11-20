@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 {
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
     {
         protected virtual IEnumerable<char> TerminatingCharacters()
         {
-            return new[] {'=', ',', ';', '(', ')'};
+            return new[] { '=', ',', ';', '(', ')' };
         }
 
         protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -39,6 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     ThrowExceptionIfPathAlreadyDefined(description);
                     description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     break;
+
                 case "Converter":
                     ParseEquals(block);
                     var converter = ReadTargetPropertyName();
@@ -46,12 +47,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                         MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
                     description.Converter = converter;
                     break;
+
                 case "ConverterParameter":
                     ParseEquals(block);
                     if (description.ConverterParameter != null)
                         MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
                     description.ConverterParameter = ReadValue();
                     break;
+
                 case "CommandParameter":
                     if (!IsComplete &&
                         CurrentChar == '(')
@@ -69,12 +72,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                         description.ConverterParameter = ReadValue();
                     }
                     break;
+
                 case "FallbackValue":
                     ParseEquals(block);
                     if (description.FallbackValue != null)
                         MvxBindingTrace.Warning("Overwriting existing FallbackValue");
                     description.FallbackValue = ReadValue();
                     break;
+
                 case "Mode":
                     ParseEquals(block);
                     //if (description.Mode != MvxBindingMode.Default)
@@ -83,6 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                     //}
                     description.Mode = ReadBindingMode();
                     break;
+
                 default:
                     ParseNonKeywordBlockInto(description, block);
                     break;
@@ -121,10 +127,12 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                 case ')':
                     MoveNext();
                     break;
+
                 case ',':
                     MoveNext();
                     ReadConverterParameterAndClosingBracket(description);
                     break;
+
                 default:
                     throw new MvxException("Unexpected character {0} while parsing () contents", CurrentChar);
             }
@@ -197,9 +205,11 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
                         MoveNext();
                         break;
+
                     case ';':
                     case ')':
                         return description;
+
                     default:
                         if (DetectOperator())
                             ParseOperatorWithLeftHand(description);

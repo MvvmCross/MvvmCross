@@ -2,21 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Droid.Views;
 using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
-        protected IMvxChildViewModelOwner ChildOwner
-        {
-            get { return (IMvxChildViewModelOwner) base.Activity; }
-        }
+        protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner)base.Activity;
 
         public MvxChildViewModelOwnerAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)

@@ -2,13 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace Cirrious.CrossCore.Platform
 {
@@ -29,32 +28,28 @@ namespace Cirrious.CrossCore.Platform
                 throw new MvxException("MvxTrace already initialized");
 
             DefaultTag = "mvx";
-            // selfRegisteringSingleton 
-			new MvxTrace();
+            // selfRegisteringSingleton
+            new MvxTrace();
         }
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            if (Instance != null)
-                Instance.Trace(level, tag, PrependWithTime(message), args);
+            Instance?.Trace(level, tag, PrependWithTime(message), args);
         }
 
         public static void TaggedTrace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            if (Instance != null)
-                Instance.Trace(level, tag, PrependWithTime(message));
+            Instance?.Trace(level, tag, PrependWithTime(message));
         }
 
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
-            if (Instance != null)
-                Instance.Trace(level, DefaultTag, PrependWithTime(message), args);
+            Instance?.Trace(level, DefaultTag, PrependWithTime(message), args);
         }
 
         public static void Trace(MvxTraceLevel level, Func<string> message)
         {
-            if (Instance != null)
-                Instance.Trace(level, DefaultTag, PrependWithTime(message));
+            Instance?.Trace(level, DefaultTag, PrependWithTime(message));
         }
 
         public static void TaggedTrace(string tag, string message, params object[] args)
@@ -117,7 +112,7 @@ namespace Cirrious.CrossCore.Platform
             Trace(MvxTraceLevel.Error, message);
         }
 
-        #endregion Static Interface
+        #endregion public static Interface
 
         private readonly IMvxTrace _realTrace;
 
@@ -145,14 +140,14 @@ namespace Cirrious.CrossCore.Platform
             _realTrace.Trace(level, tag, message, args);
         }
 
-        #endregion
+        #endregion IMvxTrace Members
 
         #region private helpers
 
         private static string PrependWithTime(string input)
         {
             var timeIntoApp = (DateTime.UtcNow - WhenTraceStartedUtc).TotalSeconds;
-            return string.Format("{0,6:0.00} {1}", timeIntoApp, input);
+            return $"{timeIntoApp,6:0.00} {input}";
         }
 
         private static Func<string> PrependWithTime(Func<string> input)
@@ -164,6 +159,6 @@ namespace Cirrious.CrossCore.Platform
                 };
         }
 
-        #endregion
+        #endregion private helpers
     }
 }

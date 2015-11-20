@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Windows;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
+using System.Windows;
 
 namespace Cirrious.MvvmCross.Wpf.Views
 {
@@ -37,8 +37,8 @@ namespace Cirrious.MvvmCross.Wpf.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-			if (HandlePresentationChange(hint)) return;
-			
+            if (HandlePresentationChange(hint)) return;
+
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
     }

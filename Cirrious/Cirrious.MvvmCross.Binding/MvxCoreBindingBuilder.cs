@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore;
@@ -14,7 +14,6 @@ using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.ValueConverters;
@@ -234,7 +233,7 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterPlatformSpecificComponents()
         {
-            // nothing to do here            
+            // nothing to do here
         }
     }
 }

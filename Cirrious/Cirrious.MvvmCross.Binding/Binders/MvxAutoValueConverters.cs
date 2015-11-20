@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Converters;
 
 namespace Cirrious.MvvmCross.Binding.Binders
 {
@@ -27,9 +27,6 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
             public override bool Equals(object obj)
             {
-                if (obj == null)
-                    return false;
-
                 var rhs = obj as Key;
                 if (rhs == null)
                     return false;

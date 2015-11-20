@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using Cirrious.CrossCore;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
@@ -29,18 +29,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = _targetEventInfo.GetAddMethod();
-            addMethod.Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
+            addMethod.Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
         }
 
-        public override Type TargetType
-        {
-            get { return typeof (ICommand); }
-        }
+        public override Type TargetType => typeof(ICommand);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -50,15 +44,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 var target = Target;
                 if (target != null)
                 {
-                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
+                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
                 }
             }
         }
 
         private void HandleEvent(object sender, T args)
         {
-            if (_currentCommand != null)
-                _currentCommand.Execute(null);
+            _currentCommand?.Execute(null);
         }
 
         public override void SetValue(object value)

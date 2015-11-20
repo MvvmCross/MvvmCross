@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
+using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -45,7 +45,6 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
          */
         }
 
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -63,7 +62,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
 
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
-            
+
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
         }
@@ -71,6 +70,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         private String _pageKey;
 
         private IMvxSuspensionManager _suspensionManager;
+
         protected IMvxSuspensionManager SuspensionManager
         {
             get
@@ -85,7 +85,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             _pageKey = "Page-" + this.Frame.BackStackDepth;
-             IMvxBundle bundle = null;
+            IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {

@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 {
@@ -26,14 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            if (remainingTokens.Count == 0)
-            {
-                result = CreateLeafBinding(source, currentToken);
-            }
-            else
-            {
-                result = CreateChainedBinding(source, currentToken, remainingTokens);
-            }
+            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, currentToken) : CreateChainedBinding(source, currentToken, remainingTokens);
             return result != null;
         }
 
@@ -86,7 +79,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                     return null;
                 return new MvxSimpleLeafPropertyInfoSourceBinding(source, propertyInfo);
             }
-            
+
             if (propertyToken is MvxEmptyPropertyToken)
             {
                 return new MvxDirectToSourceBinding(source);

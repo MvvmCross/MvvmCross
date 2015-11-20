@@ -1,7 +1,7 @@
-using System;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -17,17 +17,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         private bool _subscribed;
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
-            : base(target) { }
+            : base(target)
+        { }
 
-        protected MvxExpandableListView ListView
-        {
-            get { return (MvxExpandableListView)Target; }
-        }
+        protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
 
-        public override Type TargetType
-        {
-            get { return typeof(object); }
-        }
+        public override Type TargetType => typeof(object);
 
         protected override void SetValueImpl(object target, object value)
         {
@@ -58,10 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             listView.SetItemChecked(pos, true);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

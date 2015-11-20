@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Views;
+using System;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -38,8 +38,7 @@ namespace CrossUI.Droid.Dialog.Elements
         protected virtual void FireValueChanged()
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected abstract void UpdateDetailDisplay(View cell);
@@ -54,13 +53,13 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public new TValueType Value
         {
-            get { return (TValueType) base.Value; }
+            get { return (TValueType)base.Value; }
             set { base.Value = value; }
         }
 
         protected void OnUserValueChanged(TValueType newValue)
         {
-            if (MatchesExistingValue(newValue)) 
+            if (MatchesExistingValue(newValue))
                 return;
 
             Value = newValue;
@@ -69,7 +68,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected bool MatchesExistingValue(TValueType newValue)
         {
-            if (typeof (TValueType).IsValueType)
+            if (typeof(TValueType).IsValueType)
             {
                 if (Value.Equals(newValue))
                     return true;

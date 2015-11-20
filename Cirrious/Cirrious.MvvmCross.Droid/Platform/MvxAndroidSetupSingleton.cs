@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using System.Threading;
 using Android.Content;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using Cirrious.MvvmCross.Droid.Views;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.Droid.Platform
 {
@@ -90,8 +90,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
                 lock (LockObject)
                 {
                     _initialized = true;
-                    if (_currentSplashScreen != null)
-                        _currentSplashScreen.InitializationComplete();
+                    _currentSplashScreen?.InitializationComplete();
                 }
             });
         }
@@ -139,7 +138,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.ExceptionSafeGetTypes()
                         where type.Name == "Setup"
-                        where typeof (MvxAndroidSetup).IsAssignableFrom(type)
+                        where typeof(MvxAndroidSetup).IsAssignableFrom(type)
                         select type;
 
             return query.FirstOrDefault();

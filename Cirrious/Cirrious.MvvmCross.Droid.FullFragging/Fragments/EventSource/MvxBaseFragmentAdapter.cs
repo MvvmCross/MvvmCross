@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
 using Cirrious.CrossCore.Core;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -16,18 +16,15 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Fragment Fragment
-        {
-            get { return _eventSource as Fragment; }
-        }
+        protected Fragment Fragment => _eventSource as Fragment;
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
             if (eventSource == null)
-                throw new ArgumentException("eventSource should not be null", "eventSource");
+                throw new ArgumentException("eventSource should not be null", nameof(eventSource));
 
             if (!(eventSource is Fragment))
-                throw new ArgumentException("eventSource should be a Fragment", "eventSource");
+                throw new ArgumentException("eventSource should be a Fragment", nameof(eventSource));
 
             _eventSource = eventSource;
             _eventSource.DisposeCalled += HandleDisposeCalled;
@@ -66,7 +63,6 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
         protected virtual void HandleStartCalled(object sender, EventArgs e)
         {
         }
-
 
         protected virtual void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> e)
         {

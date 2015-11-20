@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
 using Cirrious.CrossCore;
@@ -16,16 +15,14 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
-        public IMvxFragmentView FragmentView
-        {
-            get { return Fragment as IMvxFragmentView; }
-        }
+        public IMvxFragmentView FragmentView => Fragment as IMvxFragmentView;
 
         public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
@@ -43,7 +40,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
-            if (bundleArgs != null && bundleArgs.Value != null)
+            if (bundleArgs?.Value != null)
             {
                 // saved state
                 bundle = bundleArgs.Value;
@@ -51,7 +48,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
             else
             {
                 var fragment = FragmentView as Fragment;
-                if (fragment != null && fragment.Arguments != null)
+                if (fragment?.Arguments != null)
                 {
                     bundle = fragment.Arguments;
                     var json = bundle.GetString("__mvxViewModelRequest");
@@ -116,19 +113,13 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
         protected override void HandleDestroyViewCalled(object sender, EventArgs e)
         {
-            if (FragmentView.BindingContext != null)
-            {
-                FragmentView.BindingContext.ClearAllBindings();
-            }
+            FragmentView.BindingContext?.ClearAllBindings();
             base.HandleDestroyViewCalled(sender, e);
         }
 
         protected override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (FragmentView.BindingContext != null)
-            {
-                FragmentView.BindingContext.ClearAllBindings();
-            }
+            FragmentView.BindingContext?.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

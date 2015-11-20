@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using Cirrious.MvvmCross.Touch.Views;
 using CrossUI.Core.Builder;
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
 
             var registry = Mvx.Resolve<IBuilderRegistry>();
             var builder = new MvxTouchUserInterfaceBuilder(bindingViewController, view.ViewModel, registry);
-            var root = (TResult) builder.Build(typeof (TBuildable), description);
+            var root = (TResult)builder.Build(typeof(TBuildable), description);
             return root;
         }
     }

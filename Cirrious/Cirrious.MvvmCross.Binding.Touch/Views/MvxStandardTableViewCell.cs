@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings;
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Foundation;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -19,17 +19,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     {
         private MvxImageViewLoader _imageLoader;
 
-		public MvxStandardTableViewCell(IntPtr handle)
-			: this("TitleText" /* default binding is ToString() on the passed in item */, handle)
-		{
-			InitializeImageLoader();
-		}
+        public MvxStandardTableViewCell(IntPtr handle)
+            : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
+        {
+            InitializeImageLoader();
+        }
 
-		public MvxStandardTableViewCell(string bindingText, IntPtr handle)
-			: base(bindingText, handle)
-		{
-			InitializeImageLoader();
-		}
+        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+            : base(bindingText, handle)
+        {
+            InitializeImageLoader();
+        }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
@@ -57,10 +57,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }
 
-        public MvxImageViewLoader ImageLoader
-        {
-            get { return _imageLoader; }
-        }
+        public MvxImageViewLoader ImageLoader => _imageLoader;
 
         public string TitleText
         {
@@ -93,8 +90,9 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
             _isSelected = selected;
             if (_isSelected)
-                if (SelectedCommand != null)
-                    SelectedCommand.Execute(null);
+            {
+                SelectedCommand?.Execute(null);
+            }
         }
 
         protected override void Dispose(bool disposing)

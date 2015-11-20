@@ -4,41 +4,37 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-// 
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
+using Cirrious.CrossCore.Core;
 using System;
 using System.Threading;
-using System.Reflection;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore;
 
 #if __UNIFIED__
 using AppKit;
 #else
-using MonoMac.AppKit;
 #endif
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
-		: MvxMainThreadDispatcher
-	{
-		private readonly SynchronizationContext _uiSynchronizationContext;
+        : MvxMainThreadDispatcher
+    {
+        private readonly SynchronizationContext _uiSynchronizationContext;
 
-		protected MvxMacUIThreadDispatcher()
-		{
-			_uiSynchronizationContext = SynchronizationContext.Current;
-		}
+        protected MvxMacUIThreadDispatcher()
+        {
+            _uiSynchronizationContext = SynchronizationContext.Current;
+        }
 
-		public bool RequestMainThreadAction(Action action)
-		{
-			if (_uiSynchronizationContext == SynchronizationContext.Current)
-				action();
-			else
-				NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
-			return true;
-		}
-	}	
+        public bool RequestMainThreadAction(Action action)
+        {
+            if (_uiSynchronizationContext == SynchronizationContext.Current)
+                action();
+            else
+                NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
+            return true;
+        }
+    }
 }

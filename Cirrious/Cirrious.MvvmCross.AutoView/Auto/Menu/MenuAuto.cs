@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Menu;
 using System;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Menu;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Menu
 {
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Command = command;
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToMenuDescription();
         }
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             if (Command != null)
             {
                 var command = Command.GetPropertyText();
-                toReturn.Properties["Command"] = string.Format("@MvxBind:{0}", command);
+                toReturn.Properties["Command"] = $"@MvxBind:{command}";
             }
 
             return toReturn;

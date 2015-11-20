@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Mac.Views;
 using Cirrious.MvvmCross.Views;
+using System;
 
 namespace Cirrious.MvvmCross.Mac.Views
 {
@@ -25,10 +25,10 @@ namespace Cirrious.MvvmCross.Mac.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxMacView");
         }
 
-		public override void HandleViewDidLoadCalled(object sender, EventArgs e)
+        public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
             MacView.OnViewCreate();
-			base.HandleViewDidLoadCalled(sender, e);
+            base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         public new MvxViewModel ViewModel
         {
-            get { return (MvxViewModel) base.ViewModel; }
+            get { return (MvxViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 
@@ -42,7 +42,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             _list = this.LoadList<GeneralListLayout>();
 
             using (
-                new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext) BindingContext)
+                new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>((IMvxAndroidBindingContext)BindingContext)
                 )
             {
                 var listView = _list.InitializeListView(this);
@@ -51,6 +51,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
         }
 
 #warning consider making static - and moving to extension method?
+
         public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)
         {
             return this.CreateOptionsMenu(_parentMenu, menu);

@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object) null)
+            : this((object)null)
         {
         }
 
@@ -78,7 +78,6 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             if (dataContext != null)
                 DataContext = dataContext;
         }
-
 
         private void AddDelayedAction(KeyValuePair<object, string> kvp)
         {
@@ -138,8 +137,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 _dataContext = value;
                 OnDataContextChange();
                 var handler = DataContextChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -184,14 +182,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
             _directBindings.Add(new TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IList<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
             _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
         }
 
         public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            var list = new List<TargetAndBinding>() {new TargetAndBinding(target, binding)};
+            var list = new List<TargetAndBinding>() { new TargetAndBinding(target, binding) };
             _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
         }
 

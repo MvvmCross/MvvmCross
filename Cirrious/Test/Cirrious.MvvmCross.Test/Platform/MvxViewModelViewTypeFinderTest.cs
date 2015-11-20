@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Test.Core;
@@ -28,19 +28,19 @@ namespace Cirrious.MvvmCross.Test.Platform
             var test = new MvxViewModelViewTypeFinder(viewModelNameLookup, nameMapping);
 
             // test for positives
-            var result = test.FindTypeOrNull(typeof (Test1View));
-            Assert.AreEqual(typeof (Test1ViewModel), result);
-            result = test.FindTypeOrNull(typeof (NotTest2View));
-            Assert.AreEqual(typeof (Test2ViewModel), result);
-            result = test.FindTypeOrNull(typeof (NotTest3View));
-            Assert.AreEqual(typeof (Test3ViewModel), result);
+            var result = test.FindTypeOrNull(typeof(Test1View));
+            Assert.AreEqual(typeof(Test1ViewModel), result);
+            result = test.FindTypeOrNull(typeof(NotTest2View));
+            Assert.AreEqual(typeof(Test2ViewModel), result);
+            result = test.FindTypeOrNull(typeof(NotTest3View));
+            Assert.AreEqual(typeof(Test3ViewModel), result);
             result = test.FindTypeOrNull(typeof(OddNameOddness));
             Assert.AreEqual(typeof(OddNameViewModel), result);
 
             // test for negatives
-            result = test.FindTypeOrNull(typeof (AbstractTest1View));
+            result = test.FindTypeOrNull(typeof(AbstractTest1View));
             Assert.IsNull(result);
-            result = test.FindTypeOrNull(typeof (NotReallyAView));
+            result = test.FindTypeOrNull(typeof(NotReallyAView));
             Assert.IsNull(result);
         }
     }

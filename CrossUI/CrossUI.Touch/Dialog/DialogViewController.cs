@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using CoreGraphics;
 using CrossUI.Touch.Dialog.Elements;
 using CrossUI.Touch.Dialog.Utilities;
 using Foundation;
+using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog
@@ -22,7 +22,9 @@ namespace CrossUI.Touch.Dialog
     public class DialogViewController : UITableViewController
     {
         public UITableViewStyle Style = UITableViewStyle.Grouped;
+
         public event Action<NSIndexPath> OnSelection;
+
         private UISearchBar searchBar;
         private UITableView tableView;
         private RefreshTableHeaderView refreshView;
@@ -31,15 +33,9 @@ namespace CrossUI.Touch.Dialog
         private bool dirty;
         private bool reloading;
 
-        protected bool Dirty
-        {
-            get { return dirty; }
-        }
+        protected bool Dirty => dirty;
 
-        protected bool Pushing
-        {
-            get { return pushing; }
-        }
+        protected bool Pushing => pushing;
 
         public void ForceDirty(bool newDirty = true)
         {
@@ -56,8 +52,7 @@ namespace CrossUI.Touch.Dialog
             {
                 if (root == value)
                     return;
-                if (root != null)
-                    root.Dispose();
+                root?.Dispose();
 
                 root = value;
                 root.TableView = tableView;
@@ -100,14 +95,14 @@ namespace CrossUI.Touch.Dialog
             }
         }
 
-        // If set, we automatically scroll the content to avoid showing the search bar until 
+        // If set, we automatically scroll the content to avoid showing the search bar until
         // the user manually pulls it down.
         public bool AutoHideSearch { get; set; }
 
         public string SearchPlaceholder { get; set; }
 
         /// <summary>
-        /// Invoke this method to trigger a data refresh.   
+        /// Invoke this method to trigger a data refresh.
         /// </summary>
         /// <remarks>
         /// This will invoke the RerfeshRequested event handler, the code attached to it
@@ -128,8 +123,7 @@ namespace CrossUI.Touch.Dialog
                 return;
 
             reloading = true;
-            if (refreshView != null)
-                refreshView.SetActivity(true);
+            refreshView?.SetActivity(true);
             refreshRequested(this, EventArgs.Empty);
 
             if (reloading && showStatus && refreshView != null)
@@ -188,7 +182,7 @@ namespace CrossUI.Touch.Dialog
 
             ReloadData();
         }
-        
+
         private Section[] originalSections;
         private Element[][] originalElements;
 
@@ -228,8 +222,7 @@ namespace CrossUI.Touch.Dialog
 
         public virtual void OnSearchTextChanged(string text)
         {
-            if (SearchTextChanged != null)
-                SearchTextChanged(this, new SearchChangedEventArgs(text));
+            SearchTextChanged?.Invoke(this, new SearchChangedEventArgs(text));
         }
 
         public void PerformFilter(string text)
@@ -254,10 +247,10 @@ namespace CrossUI.Touch.Dialog
                         if (newSection == null)
                         {
                             newSection = new Section(section.Header, section.Footer)
-                                {
-                                    FooterView = section.FooterView,
-                                    HeaderView = section.HeaderView
-                                };
+                            {
+                                FooterView = section.FooterView,
+                                HeaderView = section.HeaderView
+                            };
                             newSections.Add(newSection);
                         }
                         newSection.Add(elements[eidx]);
@@ -330,8 +323,7 @@ namespace CrossUI.Touch.Dialog
             {
                 var section = Root.Sections[indexPath.Section];
                 var element = (section.Elements[indexPath.Row] as StyledStringElement);
-                if (element != null)
-                    element.AccessoryTap();
+                element?.AccessoryTap();
             }
 
             public override nint RowsInSection(UITableView tableview, nint section)
@@ -372,8 +364,7 @@ namespace CrossUI.Touch.Dialog
                     var section = Root.Sections[indexPath.Section];
                     var element = section.Elements[indexPath.Row];
                     var colorized = element as IColorizeBackground;
-                    if (colorized != null)
-                        colorized.WillDisplay(tableView, cell, indexPath);
+                    colorized?.WillDisplay(tableView, cell, indexPath);
                 }
             }
 
@@ -385,8 +376,7 @@ namespace CrossUI.Touch.Dialog
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
                 var onSelection = Container.OnSelection;
-                if (onSelection != null)
-                    onSelection(indexPath);
+                onSelection?.Invoke(indexPath);
                 Container.Selected(indexPath);
             }
 
@@ -460,7 +450,7 @@ namespace CrossUI.Touch.Dialog
                 Container.TriggerRefresh(true);
             }
 
-            #endregion
+            #endregion Pull to Refresh support
         }
 
         //
@@ -492,7 +482,7 @@ namespace CrossUI.Touch.Dialog
         }
 
         /// <summary>
-        /// Activates a nested view controller from the DialogViewController.   
+        /// Activates a nested view controller from the DialogViewController.
         /// If the view controller is hosted in a UINavigationController it
         /// will push the result.   Otherwise it will show it as a modal
         /// dialog
@@ -526,19 +516,16 @@ namespace CrossUI.Touch.Dialog
                 DismissViewController(animated, () => { });
         }
 
-        public virtual UISearchBar SearchBar
-        {
-            get { return this.searchBar; }
-        }
+        public virtual UISearchBar SearchBar => this.searchBar;
 
         protected virtual void SetupSearch()
         {
             if (enableSearch)
             {
                 searchBar = new UISearchBar(new CGRect(0, 0, tableView.Bounds.Width, 44))
-                    {
-                        Delegate = CreatSearchDelegate()
-                    };
+                {
+                    Delegate = CreatSearchDelegate()
+                };
                 if (SearchPlaceholder != null)
                     searchBar.Placeholder = this.SearchPlaceholder;
                 tableView.TableHeaderView = searchBar;
@@ -583,8 +570,7 @@ namespace CrossUI.Touch.Dialog
                                          UIViewAutoresizing.FlexibleTopMargin;
             tableView.AutosizesSubviews = true;
 
-            if (root != null)
-                root.Prepare();
+            root?.Prepare();
 
             UpdateSource();
             View = tableView;
@@ -694,11 +680,10 @@ namespace CrossUI.Touch.Dialog
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            if (ViewDissapearing != null)
-                ViewDissapearing(this, EventArgs.Empty);
+            ViewDissapearing?.Invoke(this, EventArgs.Empty);
         }
 
-        public DialogViewController(IntPtr handle) 
+        public DialogViewController(IntPtr handle)
             : base(handle)
         {
         }
@@ -721,8 +706,8 @@ namespace CrossUI.Touch.Dialog
         /// The <see cref="RootElement"/> containing the information to render.
         /// </param>
         /// <param name="pushing">
-        /// A <see cref="System.Boolean"/> describing whether this is being pushed 
-        /// (NavigationControllers) or not.   If pushing is true, then the back button 
+        /// A <see cref="System.Boolean"/> describing whether this is being pushed
+        /// (NavigationControllers) or not.   If pushing is true, then the back button
         /// will be shown, allowing the user to go back to the previous controller
         /// </param>
         public DialogViewController(RootElement root, bool pushing) : base(UITableViewStyle.Grouped)

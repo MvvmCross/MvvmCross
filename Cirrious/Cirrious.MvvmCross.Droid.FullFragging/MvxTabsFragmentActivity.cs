@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -15,6 +12,9 @@ using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using MvxActivity = Cirrious.MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace Cirrious.MvvmCross.Droid.FullFragging
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost) FindViewById(Android.Resource.Id.TabHost);
+            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);
@@ -119,7 +119,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
 
         protected void AddTab<TFragment>(Bundle args, IMvxViewModel viewModel, TabHost.TabSpec tabSpec)
         {
-            var tabInfo = new TabInfo(tabSpec.Tag, typeof (TFragment), args, viewModel);
+            var tabInfo = new TabInfo(tabSpec.Tag, typeof(TFragment), args, viewModel);
             AddTab(this, _tabHost, tabSpec, tabInfo);
             _lookup.Add(tabInfo.Tag, tabInfo);
         }
@@ -155,12 +155,9 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             {
                 var ft = this.FragmentManager.BeginTransaction();
                 OnTabFragmentChanging(tag, ft);
-                if (_currentTab != null)
+                if (_currentTab?.CachedFragment != null)
                 {
-                    if (_currentTab.CachedFragment != null)
-                    {
-                        ft.Detach(_currentTab.CachedFragment);
-                    }
+                    ft.Detach(_currentTab.CachedFragment);
                 }
                 if (newTab != null)
                 {

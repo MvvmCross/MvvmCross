@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
-using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.Plugins
 {
@@ -15,10 +15,7 @@ namespace Cirrious.CrossCore.Plugins
     {
         private readonly Dictionary<string, Func<IMvxPlugin>> _finders = new Dictionary<string, Func<IMvxPlugin>>();
 
-        public IDictionary<string, Func<IMvxPlugin>> Finders
-        {
-            get { return _finders; }
-        }
+        public IDictionary<string, Func<IMvxPlugin>> Finders => _finders;
 
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {

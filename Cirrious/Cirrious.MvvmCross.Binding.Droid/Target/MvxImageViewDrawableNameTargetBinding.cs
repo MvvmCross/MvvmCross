@@ -2,14 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
 using Android.Graphics;
 using Android.Widget;
 using Cirrious.CrossCore.Platform;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -20,10 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        public override Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override Type TargetType => typeof(string);
 
         protected override bool GetBitmap(object value, out Bitmap bitmap)
         {

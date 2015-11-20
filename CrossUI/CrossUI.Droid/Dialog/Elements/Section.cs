@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Content;
+using Android.Views;
+using Android.Widget;
+using CrossUI.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Android.Content;
-using Android.Views;
-using Android.Widget;
-using CrossUI.Core;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -30,7 +30,7 @@ namespace CrossUI.Droid.Dialog.Elements
         ///  Constructs a Section without header or footers and an hidden section block
         /// </summary>
         public Section()
-            : this((string) null)
+            : this((string)null)
         {
         }
 
@@ -44,7 +44,7 @@ namespace CrossUI.Droid.Dialog.Elements
             : base(caption)
         {
             Elements = new ObservableCollection<Element>();
-            ((ObservableCollection<Element>)Elements).CollectionChanged +=OnCollectionChanged;
+            ((ObservableCollection<Element>)Elements).CollectionChanged += OnCollectionChanged;
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -54,19 +54,24 @@ namespace CrossUI.Droid.Dialog.Elements
                 case NotifyCollectionChangedAction.Add:
                     ParentAddedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
                     OrphanRemovedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Replace:
                     OrphanRemovedElements(args);
                     ParentAddedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Move:
                     break;
+
                 case NotifyCollectionChangedAction.Reset:
 #warning should we throw an exception here?
                     DialogTrace.WriteLine("Warning - Reset seen - not expecting this - our dialog section may go very wrong now!");
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -150,12 +155,12 @@ namespace CrossUI.Droid.Dialog.Elements
         /// </summary>
         public string Footer
         {
-            get { return footer == null ? null : footer.ToString(); }
+            get { return footer?.ToString(); }
             set { footer = value; }
         }
 
         /// <summary>
-        /// The section's header view.  
+        /// The section's header view.
         /// </summary>
         public Element HeaderView
         {
@@ -172,31 +177,24 @@ namespace CrossUI.Droid.Dialog.Elements
             set { footer = value; }
         }
 
-        public int Count
-        {
-            get { return Elements.Count; }
-        }
+        public int Count => Elements.Count;
 
-        public Element this[int idx]
-        {
-            get { return Elements[idx]; }
-        }
+        public Element this[int idx] => Elements[idx];
 
         public event EventHandler ValueChanged;
 
         protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
             var handler = ValueChanged;
-            if (handler != null)
-                handler(sender, args);
+            handler?.Invoke(sender, args);
         }
 
         public event EventHandler ElementsChanged;
+
         protected void HandleElementsChangedEvent()
         {
             var handler = ElementsChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -309,15 +307,14 @@ namespace CrossUI.Droid.Dialog.Elements
             if (count == 0)
                 return;
 
-
             if (start + count > Elements.Count)
                 count = Elements.Count - start;
 
             for (; count > 0; count--)
             {
                 Elements.RemoveAt(start);
-            } 
-            
+            }
+
             //var root = Parent as RootElement;
             //if (root == null)
             //    return;
@@ -364,10 +361,7 @@ namespace CrossUI.Droid.Dialog.Elements
             return 0;
         }
 
-        public int ElementViewTypeCount
-        {
-            get { return ElementTypes.Count; }
-        }
+        public int ElementViewTypeCount => ElementTypes.Count;
 
         protected override View GetViewImpl(Context context, ViewGroup parent)
         {

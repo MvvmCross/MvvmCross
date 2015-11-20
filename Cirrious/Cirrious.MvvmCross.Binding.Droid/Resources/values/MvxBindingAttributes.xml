@@ -1,22 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="MvxBinding">
-    <attr name="MvxBind" format="string"/>
-    <attr name="MvxLang" format="string"/>
+    <attr name="MvxBind" format="string" />
+    <attr name="MvxLang" format="string" />
   </declare-styleable>
   <declare-styleable name="MvxControl">
-    <attr name="MvxTemplate" format="string"/>
+    <attr name="MvxTemplate" format="string" />
   </declare-styleable>
   <declare-styleable name="MvxListView">
-    <attr name="MvxItemTemplate" format="string"/>
-    <attr name="MvxDropDownItemTemplate" format="string"/>
+    <attr name="MvxItemTemplate" format="string" />
+    <attr name="MvxDropDownItemTemplate" format="string" />
   </declare-styleable>
   <declare-styleable name="MvxExpandableListView">
-    <attr name="MvxGroupItemTemplate" format="string"/>
+    <attr name="MvxGroupItemTemplate" format="string" />
   </declare-styleable>
-  <item type="id" name="MvxBindingTagUnique"/>
+  <item type="id" name="MvxBindingTagUnique" />
   <declare-styleable name="MvxImageView">
-    <attr name="MvxSource" format="string"/>
+    <attr name="MvxSource" format="string" />
   </declare-styleable>
 </resources>
-

@@ -1,6 +1,6 @@
+using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.Concurrent;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Cirrious.MvvmCross.Droid.Views
 {
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public T GetAndClear<T>(string viewModelTag = "singleInstanceCache") where T : IMvxViewModel
         {
-            return (T) GetAndClear(typeof (T), viewModelTag);
+            return (T)GetAndClear(typeof(T), viewModelTag);
         }
 
         private class CachedViewModelType
@@ -59,8 +59,8 @@ namespace Cirrious.MvvmCross.Droid.Views
                 unchecked
                 {
                     int hashCode = 17;
-                    hashCode = hashCode*23 + ViewModelType.GetHashCode();
-                    hashCode = hashCode*23 + ViewModelTag.GetHashCode();
+                    hashCode = hashCode * 23 + ViewModelType.GetHashCode();
+                    hashCode = hashCode * 23 + ViewModelTag.GetHashCode();
                     return hashCode;
                 }
             }
@@ -72,11 +72,10 @@ namespace Cirrious.MvvmCross.Droid.Views
 
                 var other = obj as CachedViewModelType;
 
-                return other != null && 
+                return other != null &&
                        other.ViewModelTag.Equals(this.ViewModelTag) &&
                        other.ViewModelType == this.ViewModelType;
             }
         }
-
     }
 }

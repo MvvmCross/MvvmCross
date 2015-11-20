@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using Cirrious.CrossCore.Platform;
+﻿using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
@@ -35,10 +35,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestCommandParameterStringBinding()
         {
             var text = "Click MyCommand, CommandParameter=Foo";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Click", 
+                {
+                    "Click",
                     new MvxSerializableBindingDescription()
                     {
                             Path = "MyCommand",
@@ -55,10 +55,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestCommandParameterQuotedStringBinding()
         {
             var text = "Click MyCommand, CommandParameter=\"Love Converter=;Fred,It\"";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Click", 
+                {
+                    "Click",
                     new MvxSerializableBindingDescription()
                     {
                             Path = "MyCommand",
@@ -75,10 +75,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestCommandParameterNumberBinding()
         {
             var text = "Tap Bar, CommandParameter=-12.12";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Tap", 
+                {
+                    "Tap",
                     new MvxSerializableBindingDescription()
                     {
                             Path = "Bar",
@@ -95,10 +95,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestCommandParameterBooleanBinding()
         {
             var text = "Life Love, CommandParameter=false";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Life", 
+                {
+                    "Life",
                     new MvxSerializableBindingDescription()
                     {
                             Path = "Love",
@@ -115,10 +115,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestCommandParameterNullBinding()
         {
             var text = "Life Love, CommandParameter=null";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Life", 
+                {
+                    "Life",
                     new MvxSerializableBindingDescription()
                     {
                             Path = "Love",
@@ -213,7 +213,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 {"1.23", 1.23},
             };
 
-
         private IEnumerable<PerformSimpleTestParams> GenerateSampledTestParameters(int everyN, int maxToReturn)
         {
             var count = 0;
@@ -256,10 +255,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         protected string CreateText(PerformSimpleTestParams testParams)
         {
             var optionalParameters = BuildOptionalParameters(testParams);
-            var text = string.Format("{0} {1}",
-                                     testParams.Target,
-                                     optionalParameters
-                );
+            var text = $"{testParams.Target} {optionalParameters}";
             return text;
         }
 
@@ -349,45 +345,21 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 _fallbackValue = fallbackValue;
             }
 
-            public string Source
-            {
-                get { return _source; }
-            }
+            public string Source => _source;
 
-            public string Target
-            {
-                get { return _target; }
-            }
+            public string Target => _target;
 
-            public bool UseInlinePath
-            {
-                get { return _useInlinePath; }
-            }
+            public bool UseInlinePath => _useInlinePath;
 
-            public MvxBindingMode BindingMode
-            {
-                get { return _bindingMode; }
-            }
+            public MvxBindingMode BindingMode => _bindingMode;
 
-            public bool TestBindingMode
-            {
-                get { return _testBindingMode; }
-            }
+            public bool TestBindingMode => _testBindingMode;
 
-            public string Converter
-            {
-                get { return _converter; }
-            }
+            public string Converter => _converter;
 
-            public KeyValuePair<string, object> ConverterParameterValue
-            {
-                get { return _converterParameterValue; }
-            }
+            public KeyValuePair<string, object> ConverterParameterValue => _converterParameterValue;
 
-            public KeyValuePair<string, object> FallbackValue
-            {
-                get { return _fallbackValue; }
-            }
+            public KeyValuePair<string, object> FallbackValue => _fallbackValue;
         }
 
         private void PerformParseTest(params PerformSimpleTestParams[] testParamsArray)
@@ -415,7 +387,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 Path = string.IsNullOrEmpty(testParams.Source) ? null : testParams.Source
             };
         }
-
 
         private string CreateText(IEnumerable<PerformSimpleTestParams> testParams)
         {

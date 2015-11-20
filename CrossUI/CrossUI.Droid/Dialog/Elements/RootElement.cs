@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+using Android.Content;
+using Android.Views;
+using CrossUI.Core;
+using CrossUI.Core.Elements.Dialog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Android.App;
-using Android.Content;
-using Android.Views;
-using CrossUI.Core;
-using CrossUI.Core.Elements.Dialog;
 
 namespace CrossUI.Droid.Dialog.Elements
 {
@@ -33,6 +33,7 @@ namespace CrossUI.Droid.Dialog.Elements
         public bool UnevenRows { get; set; }
 
         public Func<RootElement, View> _createOnSelected;
+
         public event EventHandler RadioSelectedChanged;
 
         public RootElement()
@@ -56,19 +57,24 @@ namespace CrossUI.Droid.Dialog.Elements
                 case NotifyCollectionChangedAction.Add:
                     ParentAddedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
                     OrphanRemovedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Replace:
                     OrphanRemovedElements(args);
                     ParentAddedElements(args);
                     break;
+
                 case NotifyCollectionChangedAction.Move:
                     break;
+
                 case NotifyCollectionChangedAction.Reset:
 #warning should we throw an exception here?
                     DialogTrace.WriteLine("Warning - Reset seen - not expecting this - our dialog may go very wrong now!");
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -114,15 +120,9 @@ namespace CrossUI.Droid.Dialog.Elements
 
         public IList<Section> Sections { get; private set; }
 
-        public int Count
-        {
-            get { return Sections.Count; }
-        }
+        public int Count => Sections.Count;
 
-        public Section this[int idx]
-        {
-            get { return Sections[idx]; }
-        }
+        public Section this[int idx] => Sections[idx];
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
@@ -130,13 +130,11 @@ namespace CrossUI.Droid.Dialog.Elements
         }
 
         public event EventHandler ElementsChanged;
+
         protected void HandleElementsChangedEvent(object sender, EventArgs eventArgs)
         {
             var handler = ElementsChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         internal int IndexOf(Section target)
@@ -224,7 +222,6 @@ namespace CrossUI.Droid.Dialog.Elements
             {
                 Sections.Insert(pos++, s);
             }
-
         }
 
         /// <summary>
@@ -343,8 +340,7 @@ namespace CrossUI.Droid.Dialog.Elements
                 var radioValue = GetSelectedValue();
 #warning This radio selection is a bit of a mess currently - both radio value and RadioSelected change...
                 var handler = RadioSelectedChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                handler?.Invoke(this, EventArgs.Empty);
                 OnUserValueChanged(radioValue);
             }
 

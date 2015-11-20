@@ -2,18 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsCommon.Platform;
-using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views
 {
@@ -23,10 +22,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
     {
         private IMvxViewModel _viewModel;
 
-        public IMvxWindowsFrame WrappedFrame
-        {
-            get { return new MvxWrappedFrame(Frame); }
-        }
+        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
 
         public IMvxViewModel ViewModel
         {
@@ -51,7 +47,6 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
          */
         }
 
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -69,7 +64,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
 
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
-            
+
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
         }
@@ -77,6 +72,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
         private String _pageKey;
 
         private IMvxSuspensionManager _suspensionManager;
+
         protected IMvxSuspensionManager SuspensionManager
         {
             get
@@ -91,7 +87,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Views
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             _pageKey = "Page-" + this.Frame.BackStackDepth;
-             IMvxBundle bundle = null;
+            IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {

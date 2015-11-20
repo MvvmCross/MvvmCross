@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using Foundation;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
         }
 
-        protected MvxTableViewSource(IntPtr handle) 
+        protected MvxTableViewSource(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("TableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
@@ -55,7 +55,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             {
                 if (Object.ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
-                        return;
+                    return;
 
                 if (_subscription != null)
                 {
@@ -77,10 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            if (ItemsSource == null)
-                return null;
-
-            return ItemsSource.ElementAt(indexPath.Row);
+            return ItemsSource?.ElementAt(indexPath.Row);
         }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
@@ -143,7 +140,6 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                 indexPath
                             }, UITableViewRowAnimation.Fade);
                         return true;
-                        ;
                     }
                 default:
                     return false;

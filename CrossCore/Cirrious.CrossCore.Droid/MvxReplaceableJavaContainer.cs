@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Java.Lang;
@@ -15,7 +15,7 @@ namespace Cirrious.CrossCore.Droid
 
         public override string ToString()
         {
-            return Object == null ? string.Empty : Object.ToString();
+            return Object?.ToString() ?? string.Empty;
         }
     }
 }

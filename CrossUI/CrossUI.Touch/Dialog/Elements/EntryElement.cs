@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -29,10 +29,7 @@ namespace CrossUI.Touch.Dialog.Elements
         /// </summary>
         private static readonly NSString entryKey = new NSString("EntryElement");
 
-        protected virtual NSString EntryKey
-        {
-            get { return entryKey; }
-        }
+        protected virtual NSString EntryKey => entryKey;
 
         private UIKeyboardType keyboardType = UIKeyboardType.Default;
 
@@ -100,14 +97,12 @@ namespace CrossUI.Touch.Dialog.Elements
         private bool _becomeResponder;
 
         private UITextField _entry;
-        protected  UITextField Entry
-        {
-            get { return _entry; }
-        }
+        protected UITextField Entry => _entry;
 
         protected static readonly UIFont DefaultFont = UIFont.BoldSystemFontOfSize(17);
 
         public event EventHandler Changed;
+
         public event Func<bool> ShouldReturn;
 
         public EntryElement()
@@ -184,56 +179,54 @@ namespace CrossUI.Touch.Dialog.Elements
             return Value;
         }
 
-        // 
+        //
         // Computes the X position for the entry by aligning all the entries in the Section
         //
         protected virtual CGSize ComputeEntryPosition(UITableView tv, UITableViewCell cell)
         {
             var s = Parent as Section;
 
-            if (s.EntryAlignment.Width != 0)
+            if (s != null && s.EntryAlignment.Width != 0)
                 return s.EntryAlignment;
 
             // If all EntryElements have a null Caption, align UITextField with the Caption
             // offset of normal cells (at 10px).
             var max = new CGSize(-15, "M".StringSize(DefaultFont).Height);
-            foreach (var e in s.Elements)
-            {
-                var ee = e as EntryElement;
-                if (ee == null)
-                    continue;
-
-                if (ee.Caption != null)
+            if (s?.Elements != null)
+                foreach (var e in s?.Elements)
                 {
-                    var size = ee.Caption.StringSize(DefaultFont);
-                    if (size.Width > max.Width)
-                        max = size;
+                    var ee = e as EntryElement;
+
+                    if (ee?.Caption != null)
+                    {
+                        var size = ee.Caption.StringSize(DefaultFont);
+                        if (size.Width > max.Width)
+                            max = size;
+                    }
                 }
-            }
-            s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
-            return s.EntryAlignment;
+
+                s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
+                return s.EntryAlignment;
         }
 
         protected virtual UITextField CreateTextField(CGRect frame)
         {
             return new UITextField(frame)
-                {
-                    AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
-                    Placeholder = Placeholder ?? "",
-                    SecureTextEntry = isPassword,
-                    Text = Value ?? "",
-                    Tag = 1
-                };
+            {
+                AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
+                Placeholder = Placeholder ?? "",
+                SecureTextEntry = isPassword,
+                Text = Value ?? "",
+                Tag = 1
+            };
         }
 
         private static readonly NSString cellkey = new NSString("EntryElement");
 
-        protected override NSString CellKey
-        {
-            get { return cellkey; }
-        }
+        protected override NSString CellKey => cellkey;
 
         private string _placeholder;
+
         /// <summary>
         /// The caption to display for this given element
         /// </summary>
@@ -252,8 +245,10 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(CellKey);
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey)
+                {
+                    SelectionStyle = UITableViewCellSelectionStyle.None
+                };
             }
             else
                 RemoveTag(cell, 1);
@@ -269,9 +264,8 @@ namespace CrossUI.Touch.Dialog.Elements
         {
             if (_entry == null)
             {
-
                 CGSize size = ComputeEntryPosition(tv, cell);
-                nfloat yOffset = (cell.ContentView.Bounds.Height - size.Height)/2 - 1;
+                nfloat yOffset = (cell.ContentView.Bounds.Height - size.Height) / 2 - 1;
                 nfloat width = cell.ContentView.Bounds.Width - size.Width;
 
                 _entry = CreateTextField(new CGRect(size.Width, yOffset, width, size.Height));
@@ -296,13 +290,15 @@ namespace CrossUI.Touch.Dialog.Elements
                         {
                             var returnType = UIReturnKeyType.Default;
 
-                            foreach (var e in (Parent as Section).Elements)
-                            {
-                                if (e == this)
-                                    self = this;
-                                else if (self != null && e is EntryElement)
-                                    returnType = UIReturnKeyType.Next;
-                            }
+                            var elements = (Parent as Section)?.Elements;
+                            if (elements != null)
+                                foreach (var e in elements)
+                                {
+                                    if (e == this)
+                                        self = this;
+                                    else if (self != null && e is EntryElement)
+                                        returnType = UIReturnKeyType.Next;
+                                }
                             _entry.ReturnKeyType = returnType;
                         }
                         else
@@ -374,8 +370,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             OnUserValueChanged(newValue);
 
-            if (Changed != null)
-                Changed(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void Dispose(bool disposing)
@@ -396,11 +391,8 @@ namespace CrossUI.Touch.Dialog.Elements
             tableView.DeselectRow(indexPath, true);
         }
 
-        public override bool Matches(string text)
-        {
-            return (Value != null ? Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1 : false) ||
+        public override bool Matches(string text) => (Value != null && Value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) != -1) ||
                    base.Matches(text);
-        }
 
         /// <summary>
         /// Makes this cell the first responder (get the focus)
@@ -429,8 +421,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (tv == null)
                 return;
             tv.ScrollToRow(IndexPath, UITableViewScrollPosition.Middle, animated);
-            if (_entry != null)
-                _entry.ResignFirstResponder();
+            _entry?.ResignFirstResponder();
         }
     }
 }

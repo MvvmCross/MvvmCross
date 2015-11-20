@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
+using System;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -20,7 +20,7 @@ namespace CrossUI.Droid.Dialog
     {
         public RootElement Root
         {
-            get { return _dialogAdapter == null ? null : _dialogAdapter.Root; }
+            get { return _dialogAdapter?.Root; }
             set
             {
                 value.ValueChanged -= HandleValueChangedEvent;
@@ -35,19 +35,19 @@ namespace CrossUI.Droid.Dialog
 
         private DialogAdapter _dialogAdapter;
 
-        public DialogListView(Context context) :base(context)
+        public DialogListView(Context context) : base(context)
         {
             DescendantFocusability = DescendantFocusability.AfterDescendants;
             ItemsCanFocus = true;
         }
 
-        public DialogListView(Context context, IAttributeSet attrs) :base(context, attrs)
+        public DialogListView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             DescendantFocusability = DescendantFocusability.AfterDescendants;
             ItemsCanFocus = true;
         }
 
-        public DialogListView(Context context, IAttributeSet attrs, int defStyle) :base(context, attrs, defStyle)
+        public DialogListView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
         {
             DescendantFocusability = DescendantFocusability.AfterDescendants;
             ItemsCanFocus = true;
@@ -55,7 +55,7 @@ namespace CrossUI.Droid.Dialog
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
-            var currentFocus = ((Activity) Context).CurrentFocus;
+            var currentFocus = ((Activity)Context).CurrentFocus;
             base.OnSizeChanged(w, h, oldw, oldh);
             //we have to place the focus request on the working-queueu, since by this time someone else has already requested the focus because of listactivity/listview's incompatiblity issues with edittext views
             new Handler().Post(() =>
@@ -72,8 +72,7 @@ namespace CrossUI.Droid.Dialog
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            if (ValueChanged != null)
-                ValueChanged(sender, args);
+            ValueChanged?.Invoke(sender, args);
         }
 
         public void ReloadData()

@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.CrossCore.Parse
 {
@@ -25,15 +25,9 @@ namespace Cirrious.CrossCore.Parse
             CurrentIndex = 0;
         }
 
-        protected bool IsComplete
-        {
-            get { return CurrentIndex >= FullText.Length; }
-        }
+        protected bool IsComplete => CurrentIndex >= FullText.Length;
 
-        protected char CurrentChar
-        {
-            get { return FullText[CurrentIndex]; }
-        }
+        protected char CurrentChar => FullText[CurrentIndex];
 
         protected string ReadQuotedString()
         {
@@ -116,26 +110,37 @@ namespace Cirrious.CrossCore.Parse
             {
                 case 't':
                     return '\t';
+
                 case 'r':
                     return '\r';
+
                 case 'n':
                     return '\n';
+
                 case '\'':
                     return '\'';
+
                 case '\"':
                     return '\"';
+
                 case '\\':
                     return '\\';
+
                 case '0':
                     return '\0';
+
                 case 'a':
                     return '\a';
+
                 case 'b':
                     return '\b';
+
                 case 'f':
                     return '\f';
+
                 case 'v':
                     return '\v';
+
                 case 'x':
                     // Hexa escape (1-4 digits)
                     // SL - decided not to support these as they are too ambiguous in length
@@ -145,12 +150,14 @@ namespace Cirrious.CrossCore.Parse
                 case 'u':
                     // Unicode hexa escape (exactly 4 digits)
                     return ReadFourDigitUnicodeCharacter();
+
                 case 'U':
                     // Unicode hexa escape (exactly 8 digits, first four must be 0000)
                     var firstFourDigits = ReadNDigits(4);
                     if (firstFourDigits != "0000")
                         throw new MvxException("\\U unicode character does not start with 0000 in {1}", FullText);
                     return ReadFourDigitUnicodeCharacter();
+
                 default:
                     throw new MvxException("Sorry we don't currently support escaped characters like \\{0}",
                                            currentChar);
@@ -163,7 +170,7 @@ namespace Cirrious.CrossCore.Parse
             var number = UInt32.Parse(digits, NumberStyles.HexNumber);
             if (number > UInt16.MaxValue)
                 throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
-            return (char) number;
+            return (char)number;
         }
 
         private string ReadNDigits(int count)
@@ -188,12 +195,12 @@ namespace Cirrious.CrossCore.Parse
 
         protected void MoveNext(uint increment = 1)
         {
-            CurrentIndex += (int) increment;
+            CurrentIndex += (int)increment;
         }
 
         protected void SkipWhitespaceAndCharacters(params char[] toSkip)
         {
-            SkipWhitespaceAndCharacters((IEnumerable<char>) toSkip);
+            SkipWhitespaceAndCharacters((IEnumerable<char>)toSkip);
         }
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
@@ -241,7 +248,7 @@ namespace Cirrious.CrossCore.Parse
             return toReturn;
         }
 
-        public enum AllowNonQuotedText
+        protected enum AllowNonQuotedText
         {
             Allow,
             DoNotAllow
@@ -398,7 +405,7 @@ namespace Cirrious.CrossCore.Parse
                 double doubleResult;
                 if (double.TryParse(numberText,
                                     NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
-                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    CultureInfo.InvariantCulture,
                                     out doubleResult))
                     return doubleResult;
 
@@ -410,7 +417,7 @@ namespace Cirrious.CrossCore.Parse
                 Int64 intResult;
                 if (Int64.TryParse(numberText,
                                    NumberStyles.AllowLeadingSign,
-                                   System.Globalization.CultureInfo.InvariantCulture,
+                                   CultureInfo.InvariantCulture,
                                    out intResult))
                     return intResult;
 
@@ -438,7 +445,7 @@ namespace Cirrious.CrossCore.Parse
             while (!IsComplete)
             {
                 var currentChar = CurrentChar;
-                if (terminatingCharacters.Contains(currentChar) 
+                if (terminatingCharacters.Contains(currentChar)
                     || char.IsWhiteSpace(currentChar))
                 {
                     break;

@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
 using Microsoft.Phone.Controls;
+using System;
+using System.Threading;
 
 namespace Cirrious.MvvmCross.WindowsPhone.Views
 {
@@ -21,10 +21,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
-        protected PhoneApplicationFrame RootFrame
-        {
-            get { return _rootFrame; }
-        }
+        protected PhoneApplicationFrame RootFrame => _rootFrame;
 
         public MvxPhoneViewPresenter(PhoneApplicationFrame rootFrame)
         {

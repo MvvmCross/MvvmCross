@@ -2,20 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.ExtensionMethods;
+using System;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
     public interface IMvxCommandHelper
     {
         event EventHandler CanExecuteChanged;
+
         void RaiseCanExecuteChanged(object sender);
     }
 
@@ -27,8 +28,7 @@ namespace Cirrious.MvvmCross.ViewModels
         public void RaiseCanExecuteChanged(object sender)
         {
             var handler = CanExecuteChanged;
-            if (handler != null)
-                handler(sender, EventArgs.Empty);
+            handler?.Invoke(sender, EventArgs.Empty);
         }
     }
 
@@ -114,9 +114,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null)
-                                       ? true
-                                       : MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 

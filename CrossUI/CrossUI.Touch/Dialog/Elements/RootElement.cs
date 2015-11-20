@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Foundation;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -18,23 +18,23 @@ namespace CrossUI.Touch.Dialog.Elements
     /// </summary>
     /// <remarks>
     ///    At least one RootElement is required to start the MonoTouch.Dialogs
-    ///    process.   
-    /// 
+    ///    process.
+    ///
     ///    RootElements can also be used inside Sections to trigger
     ///    loading a new nested configuration page.   When used in this mode
     ///    the caption provided is used while rendered inside a section and
     ///    is also used as the Title for the subpage.
-    /// 
+    ///
     ///    If a RootElement is initialized with a section/element value then
     ///    this value is used to locate a child Element that will provide
     ///    a summary of the configuration which is rendered on the right-side
     ///    of the display.
-    /// 
+    ///
     ///    RootElements are also used to coordinate radio elements.  The
     ///    RadioElement members can span multiple Sections (for example to
     ///    implement something similar to the ring tone selector and separate
     ///    custom ring tones from system ringtones).
-    /// 
+    ///
     ///    Sections are added by calling the Add method which supports the
     ///    C# 4.0 syntax to initialize a RootElement in one pass.
     /// </remarks>
@@ -50,7 +50,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public UITableView TableView;
 
         // This is used to indicate that we need the DVC to dispatch calls to
-        // WillDisplayCell so we can prepare the color of the cell before 
+        // WillDisplayCell so we can prepare the color of the cell before
         // display
         public bool NeedColorUpdate { get; set; }
 
@@ -101,7 +101,7 @@ namespace CrossUI.Touch.Dialog.Elements
         }
 
         /// <summary>
-        /// Initializes a RootElement that renders the summary based on the radio settings of the contained elements. 
+        /// Initializes a RootElement that renders the summary based on the radio settings of the contained elements.
         /// </summary>
         /// <param name="caption">
         /// The caption to ender
@@ -146,15 +146,9 @@ namespace CrossUI.Touch.Dialog.Elements
             return null;
         }
 
-        public int Count
-        {
-            get { return Sections.Count; }
-        }
+        public int Count => Sections.Count;
 
-        public Section this[int idx]
-        {
-            get { return Sections[idx]; }
-        }
+        public Section this[int idx] => Sections[idx];
 
         internal int IndexOf(Section target)
         {
@@ -199,10 +193,8 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Sections.Add(section);
             section.Parent = this;
-            if (TableView == null)
-                return;
 
-            TableView.InsertSections(MakeIndexSet(Sections.Count - 1, 1), UITableViewRowAnimation.None);
+            TableView?.InsertSections(MakeIndexSet(Sections.Count - 1, 1), UITableViewRowAnimation.None);
         }
 
         //
@@ -249,8 +241,7 @@ namespace CrossUI.Touch.Dialog.Elements
             if (newSections == null)
                 return;
 
-            if (TableView != null)
-                TableView.BeginUpdates();
+            TableView?.BeginUpdates();
 
             int pos = idx;
             foreach (var s in newSections)
@@ -308,10 +299,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             Sections.RemoveAt(idx);
 
-            if (TableView == null)
-                return;
-
-            TableView.DeleteSections(NSIndexSet.FromIndex(idx), anim);
+            TableView?.DeleteSections(NSIndexSet.FromIndex(idx), anim);
         }
 
         public void Remove(Section s)
@@ -339,8 +327,7 @@ namespace CrossUI.Touch.Dialog.Elements
             foreach (var s in Sections)
                 s.Dispose();
             Sections = new List<Section>();
-            if (TableView != null)
-                TableView.ReloadData();
+            TableView?.ReloadData();
         }
 
         protected override void Dispose(bool disposing)
@@ -394,7 +381,7 @@ namespace CrossUI.Touch.Dialog.Elements
                     radio.Selected = value;
                 var handler = RadioSelectedChanged;
                 if (handler != null)
-                    RadioSelectedChanged(this, EventArgs.Empty);
+                    RadioSelectedChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -406,11 +393,10 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(key);
             if (cell == null)
             {
-                var style = _summarySection == -1 && Group == null? 
+                var style = _summarySection == -1 && Group == null ?
                     UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
 
-                cell = new UITableViewCell(style, key);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
+                cell = new UITableViewCell(style, key) { SelectionStyle = UITableViewCellSelectionStyle.Blue };
             }
 
             cell.TextLabel.Text = Caption;
@@ -491,9 +477,9 @@ namespace CrossUI.Touch.Dialog.Elements
                 return CreateOnSelected(this);
 
             return new DialogViewController(this, true)
-                {
-                    Autorotate = true
-                };
+            {
+                Autorotate = true
+            };
         }
 
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
@@ -507,7 +493,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public void Reload(Section section, UITableViewRowAnimation animation)
         {
             if (section == null)
-                throw new ArgumentNullException("section");
+                throw new ArgumentNullException(nameof(section));
             if (section.Parent == null || section.Parent != this)
                 throw new ArgumentException("Section is not attached to this root");
 
@@ -516,7 +502,7 @@ namespace CrossUI.Touch.Dialog.Elements
             {
                 if (sect == section)
                 {
-                    TableView.ReloadSections(new NSIndexSet((uint) idx), animation);
+                    TableView.ReloadSections(new NSIndexSet((uint)idx), animation);
                     return;
                 }
                 idx++;
@@ -526,7 +512,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public void Reload(Element element, UITableViewRowAnimation animation)
         {
             if (element == null)
-                throw new ArgumentNullException("element");
+                throw new ArgumentNullException(nameof(element));
             var section = element.Parent as Section;
             if (section == null)
                 throw new ArgumentException("Element is not attached to this root");
@@ -536,7 +522,7 @@ namespace CrossUI.Touch.Dialog.Elements
             var path = element.IndexPath;
             if (path == null)
                 return;
-            TableView.ReloadRows(new[] {path}, animation);
+            TableView.ReloadRows(new[] { path }, animation);
         }
     }
 }

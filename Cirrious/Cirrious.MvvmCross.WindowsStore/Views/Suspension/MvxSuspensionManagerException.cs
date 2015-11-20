@@ -1,5 +1,5 @@
-﻿using System;
-using Cirrious.CrossCore.Exceptions;
+﻿using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
 {
@@ -12,7 +12,6 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         public MvxSuspensionManagerException(Exception e)
             : base(e, "MvxSuspensionManager failed")
         {
-
         }
     }
 }

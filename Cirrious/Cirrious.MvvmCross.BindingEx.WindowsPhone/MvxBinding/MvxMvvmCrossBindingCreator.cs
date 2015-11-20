@@ -2,23 +2,28 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 #if WINDOWS_PHONE || WINDOWS_WPF
+
 using System.Windows;
 using System.Windows.Data;
+
 #endif
+
 using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.BindingEx.WindowsShared;
+
 #if NETFX_CORE
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+
 #endif
 
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
@@ -98,8 +103,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
 
         public static readonly DependencyProperty DataContextWatcherProperty = DependencyProperty.Register(
             "DataContextWatcher",
-            typeof (object),
-            typeof (FrameworkElement),
+            typeof(object),
+            typeof(FrameworkElement),
             new PropertyMetadata(null, DataContext_Changed));
 
         public static object GetDataContextWatcher(DependencyObject d)
@@ -114,8 +119,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
 
         public static readonly DependencyProperty BindingsListProperty = DependencyProperty.Register(
             "BindingsList",
-            typeof (IList<IMvxUpdateableBinding>),
-            typeof (FrameworkElement),
+            typeof(IList<IMvxUpdateableBinding>),
+            typeof(FrameworkElement),
             new PropertyMetadata(null));
 
         public static IList<IMvxUpdateableBinding> GetBindingsList(DependencyObject d)
@@ -131,10 +136,8 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
         private static void DataContext_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var frameworkElement = d as FrameworkElement;
-            if (frameworkElement == null)
-                return;
 
-            var bindings = frameworkElement.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
+            var bindings = frameworkElement?.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
             if (bindings == null)
                 return;
 
@@ -144,4 +147,4 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             }
         }
     }
-}   
+}

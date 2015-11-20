@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
@@ -15,6 +14,7 @@ using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -46,21 +46,18 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 {
                     if (Content == null && _templateId != 0)
                     {
-                        Mvx.Trace("DataContext is {0}", DataContext == null ? "Null" : DataContext.ToString());
+                        Mvx.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
                         Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });
         }
 
-	    protected MvxFrameControl(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
-
-        protected IMvxAndroidBindingContext AndroidBindingContext
+        protected MvxFrameControl(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
-            get { return _bindingContext; }
         }
+
+        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
 
         public IMvxBindingContext BindingContext
         {
@@ -100,7 +97,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.OnDetachedFromWindow();
             _isAttachedToWindow = false;
         }
-
 
         protected View Content { get; set; }
 

@@ -32,7 +32,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
         internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
             public FactoryWrapper2(IMvxLayoutInflaterFactory delegateFactory)
-                : base(delegateFactory) {}
+                : base(delegateFactory)
+            { }
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
@@ -53,25 +54,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
                 LayoutInflater.IFactory f = layoutInflater.Factory;
                 var f2 = f as LayoutInflater.IFactory2;
-                if (f2 != null)
-                {
-                    // The merged factory is now set to Factory, but not Factory2 (pre-v21).
-                    // We will now try and force set the merged factory to mFactory2
-                    ForceSetFactory2(layoutInflater, f2);
-                }
-                else
-                {
-                    // Else, we will force set the original wrapped Factory2
-                    ForceSetFactory2(layoutInflater, factory2);
-                }
 
+                // The merged factory is now set to Factory, but not Factory2 (pre-v21).
+                // We will now try and force set the merged factory to mFactory2
+                ForceSetFactory2(layoutInflater, f2 ?? factory2);
             }
             else
             {
                 layoutInflater.Factory = (factory != null ? new FactoryWrapper(factory) : null);
             }
         }
-        
+
         // Workaround from Support.v4 v22.1.1 library:
         //
         // For APIs >= 11 && < 21, there was a framework bug that prevented a LayoutInflater's

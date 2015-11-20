@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using CrossUI.Core.Elements.Lists;
-using UIKit;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
+using UIKit;
 
 namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 {

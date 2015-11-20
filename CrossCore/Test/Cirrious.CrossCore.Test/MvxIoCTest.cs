@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.IoC;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Cirrious.CrossCore.Test
 {
@@ -17,22 +17,49 @@ namespace Cirrious.CrossCore.Test
     public class MvxIocTest
     {
         public interface IA { IB B { get; } }
+
         public interface IB { }
+
         public interface IC { }
+
         public class A : IA
         {
-            public A(IB b) { B = b; } 
+            public A(IB b)
+            {
+                B = b;
+            }
+
             public IB B { get; set; }
         }
+
         public class B : IB
-        { public B(IC c) { } }
+
+        {
+            public B(IC c)
+            {
+            }
+        }
+
         public class C : IC
-        { public C(IA a) { } }
+
+        {
+            public C(IA a)
+            {
+            }
+        }
+
         public class C2 : IC
-        { public C2() { } }
+
+        {
+            public C2()
+            {
+            }
+        }
+
         public class COdd : IC
         {
-            public static bool FirstTime = true; 
+            public static bool FirstTime = true;
+
             public COdd()
             {
                 if (FirstTime)
@@ -80,7 +107,6 @@ namespace Cirrious.CrossCore.Test
             Assert.IsFalse(result);
             Assert.IsNull(a);
         }
-
 
         [Test]
         public void TryResolve_CircularLazyRegistration_ReturnsFalse()
@@ -172,7 +198,7 @@ namespace Cirrious.CrossCore.Test
             Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
             Mvx.RegisterType<IA, A>();
 
-            var previous = new Dictionary<IA,bool>();
+            var previous = new Dictionary<IA, bool>();
 
             for (int i = 0; i < 100; i++)
             {

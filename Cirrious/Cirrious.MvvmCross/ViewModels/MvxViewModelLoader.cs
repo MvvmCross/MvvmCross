@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
         }
 
-        // Reload should be used to re-run cached ViewModels lifecycle if required. 
+        // Reload should be used to re-run cached ViewModels lifecycle if required.
         public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
         {
             var viewModelLocator = FindViewModelLocator(request);

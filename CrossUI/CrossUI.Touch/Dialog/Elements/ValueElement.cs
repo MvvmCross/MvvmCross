@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -30,8 +30,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected void FireValueChanged()
         {
-            if (ValueChanged != null)
-                ValueChanged(this, EventArgs.Empty);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected ValueElement(string caption)
@@ -86,7 +85,7 @@ namespace CrossUI.Touch.Dialog.Elements
         public override object ObjectValue
         {
             get { return _value; }
-            set { _value = (TValueType) value; }
+            set { _value = (TValueType)value; }
         }
 
         protected void OnUserValueChanged(TValueType newValue)

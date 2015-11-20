@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
+using System;
 
 namespace CrossUI.Touch.Dialog.Utilities
 {
@@ -27,10 +27,10 @@ namespace CrossUI.Touch.Dialog.Utilities
         public static CGPath MakeRoundedRectPath(CGRect rect, float radius)
         {
             nfloat minx = rect.Left;
-            nfloat midx = rect.Left + (rect.Width)/2;
+            nfloat midx = rect.Left + (rect.Width) / 2;
             nfloat maxx = rect.Right;
             nfloat miny = rect.Top;
-            nfloat midy = rect.Y + rect.Size.Height/2;
+            nfloat midy = rect.Y + rect.Size.Height / 2;
             nfloat maxy = rect.Bottom;
 
             var path = new CGPath();
@@ -53,7 +53,7 @@ namespace CrossUI.Touch.Dialog.Utilities
 
         public static CGPath MakeRoundedPath(float size, float radius)
         {
-            float hsize = size/2;
+            float hsize = size / 2;
 
             var path = new CGPath();
             path.MoveToPoint(size, hsize);

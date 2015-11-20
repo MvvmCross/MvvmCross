@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -24,6 +24,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         // Height for rows
         private const int Dimx = 48;
+
         private const int Dimy = 43;
 
         // radius for rounding
@@ -53,9 +54,9 @@ namespace CrossUI.Touch.Dialog.Elements
             var img = source.CGImage;
             ctx.TranslateCTM(0, Dimy);
             if (img.Width > img.Height)
-                ctx.ScaleCTM(1, -img.Width/Dimy);
+                ctx.ScaleCTM(1, -img.Width / Dimy);
             else
-                ctx.ScaleCTM(img.Height/Dimx, -1);
+                ctx.ScaleCTM(img.Height / Dimx, -1);
 
             ctx.DrawImage(_rect, source.CGImage);
 
@@ -82,18 +83,11 @@ namespace CrossUI.Touch.Dialog.Elements
             }
         }
 
-        protected override NSString CellKey
-        {
-            get { return Ikey; }
-        }
+        protected override NSString CellKey => Ikey;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey);
-            if (cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-            }
+            var cell = tv.DequeueReusableCell(CellKey) ?? new UITableViewCell(UITableViewCellStyle.Default, CellKey);
 
             if (_scaled == null)
                 return cell;
@@ -107,7 +101,7 @@ namespace CrossUI.Touch.Dialog.Elements
             // Clipping path for the image, different on top, middle and bottom.
             if (roundBottom)
             {
-                bit.AddArc(Rad, Rad, Rad, (float) Math.PI, (float) (3*Math.PI/2), false);
+                bit.AddArc(Rad, Rad, Rad, (float)Math.PI, (float)(3 * Math.PI / 2), false);
             }
             else
             {
@@ -119,7 +113,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
             if (roundTop)
             {
-                bit.AddArc(Rad, Dimy - Rad, Rad, (float) (Math.PI/2), (float) Math.PI, false);
+                bit.AddArc(Rad, Dimy - Rad, Rad, (float)(Math.PI / 2), (float)Math.PI, false);
                 bit.AddLineToPoint(0, Rad);
             }
             else
@@ -165,7 +159,7 @@ namespace CrossUI.Touch.Dialog.Elements
                                                       NSDictionary editingInfo)
             {
                 _container.Picked(image);
-                _table.ReloadRows(new[] {_path}, UITableViewRowAnimation.None);
+                _table.ReloadRows(new[] { _path }, UITableViewRowAnimation.None);
             }
         }
 
@@ -208,8 +202,8 @@ namespace CrossUI.Touch.Dialog.Elements
                 return;
 
             var psection = Parent as Section;
-            bool roundTop = psection.Elements[0] == this;
-            bool roundBottom = psection.Elements[psection.Elements.Count - 1] == this;
+            bool roundTop = psection?.Elements[0] == this;
+            bool roundBottom = psection?.Elements[psection.Elements.Count - 1] == this;
 
             using (var cs = CGColorSpace.CreateDeviceRGB())
             {

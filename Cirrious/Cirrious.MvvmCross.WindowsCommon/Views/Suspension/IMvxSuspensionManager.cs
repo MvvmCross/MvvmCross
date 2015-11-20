@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-using Cirrious.MvvmCross.WindowsCommon.Platform;
 
 namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
 {

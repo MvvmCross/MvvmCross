@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using CrossUI.Core;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -33,19 +33,17 @@ namespace CrossUI.Touch.Dialog.Elements
             if (date.HasValue && date.Value.Kind != DateTimeKind.Utc)
                 DialogTrace.WriteLine("Warning - it's safest to use Utc time with DateTimeElement");
 
-            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;  
+            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;
             DateTimeFormat = "G";
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(Key);
-
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(Key) ?? new UITableViewCell(UITableViewCellStyle.Value1, Key)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Value1, Key);
-                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-            }
+                Accessory = UITableViewCellAccessory.DisclosureIndicator
+            };
+
             UpdateDetailDisplay(cell);
             return cell;
         }
@@ -74,11 +72,11 @@ namespace CrossUI.Touch.Dialog.Elements
         public virtual UIDatePicker CreatePicker()
         {
             var picker = new UIDatePicker(CGRect.Empty)
-                {
-                    //ensure picker will stay centered, regardless current screen orientation
-                    AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
-                    Mode = UIDatePickerMode.DateAndTime,
-                };
+            {
+                //ensure picker will stay centered, regardless current screen orientation
+                AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin,
+                Mode = UIDatePickerMode.DateAndTime,
+            };
             return picker;
         }
 
@@ -100,6 +98,7 @@ namespace CrossUI.Touch.Dialog.Elements
             public bool Autorotate { get; set; }
 
 #warning Need to update autorotation code after ios6 changes
+
             [Obsolete]
             public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
             {
@@ -129,12 +128,12 @@ namespace CrossUI.Touch.Dialog.Elements
         public override void Selected(DialogViewController dvc, UITableView tableView, NSIndexPath path)
         {
             var vc = new DateTimeViewController(this)
-                {
-                    Autorotate = dvc.Autorotate
-                };
+            {
+                Autorotate = dvc.Autorotate
+            };
             if (_datePicker == null)
                 _datePicker = CreatePicker();
-            _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value.HasValue ? Value.Value : DateTime.UtcNow);
+            _datePicker.Date = (NSDate)DateTimeToPickerDateTime(Value ?? DateTime.UtcNow);
 
             vc.View.BackgroundColor = BackgroundColor;
             vc.View.AddSubview(_datePicker);
@@ -146,12 +145,7 @@ namespace CrossUI.Touch.Dialog.Elements
 
         protected override void UpdateDetailDisplay(UITableViewCell cell)
         {
-            if (cell == null)
-            {
-                return;
-            }
-
-            if (cell.DetailTextLabel != null)
+            if (cell?.DetailTextLabel != null)
             {
                 cell.DetailTextLabel.Text = Value.HasValue ? FormatDate(Value.Value) : string.Empty;
             }

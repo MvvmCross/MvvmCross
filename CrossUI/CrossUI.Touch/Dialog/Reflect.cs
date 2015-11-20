@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Touch.Dialog.Elements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using CrossUI.Touch.Dialog.Elements;
-using Foundation;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog
@@ -172,8 +171,8 @@ namespace CrossUI.Touch.Dialog
                 return fi.GetValue(o);
             var pi = mi as PropertyInfo;
 
-            var getMethod = pi.GetGetMethod();
-            return getMethod.Invoke(o, new object[0]);
+            var getMethod = pi?.GetGetMethod();
+            return getMethod?.Invoke(o, new object[0]);
         }
 
         private static void SetValue(MemberInfo mi, object o, object val)
@@ -185,8 +184,8 @@ namespace CrossUI.Touch.Dialog
                 return;
             }
             var pi = mi as PropertyInfo;
-            var setMethod = pi.GetSetMethod();
-            setMethod.Invoke(o, new[] {val});
+            var setMethod = pi?.GetSetMethod();
+            setMethod?.Invoke(o, new[] { val });
         }
 
         private static string MakeCaption(string name)
@@ -220,16 +219,16 @@ namespace CrossUI.Touch.Dialog
         private static Type GetTypeForMember(MemberInfo mi)
         {
             if (mi is FieldInfo)
-                return ((FieldInfo) mi).FieldType;
+                return ((FieldInfo)mi).FieldType;
             else if (mi is PropertyInfo)
-                return ((PropertyInfo) mi).PropertyType;
+                return ((PropertyInfo)mi).PropertyType;
             return null;
         }
 
         public BindingContext(object callbacks, object o, string title)
         {
             if (o == null)
-                throw new ArgumentNullException("o");
+                throw new ArgumentNullException(nameof(o));
 
             mappings = new Dictionary<Element, MemberAndInstance>();
 
@@ -260,7 +259,7 @@ namespace CrossUI.Touch.Dialog
                     if (attr is SkipAttribute || attr is System.Runtime.CompilerServices.CompilerGeneratedAttribute)
                         skip = true;
                     else if (attr is CaptionAttribute)
-                        caption = ((CaptionAttribute) attr).Caption;
+                        caption = ((CaptionAttribute)attr).Caption;
                     else if (attr is SectionAttribute)
                     {
                         if (section != null)
@@ -279,7 +278,7 @@ namespace CrossUI.Touch.Dialog
                     section = new Section();
 
                 Element element = null;
-                if (mType == typeof (string))
+                if (mType == typeof(string))
                 {
                     PasswordAttribute pa = null;
                     AlignmentAttribute align = null;
@@ -303,7 +302,7 @@ namespace CrossUI.Touch.Dialog
 
                         if (attr is OnTapAttribute)
                         {
-                            string mname = ((OnTapAttribute) attr).Method;
+                            string mname = ((OnTapAttribute)attr).Method;
 
                             if (callbacks == null)
                             {
@@ -318,11 +317,11 @@ namespace CrossUI.Touch.Dialog
                         }
                     }
 
-                    var value = (string) GetValue(mi, o);
+                    var value = (string)GetValue(mi, o);
                     if (pa != null)
                         element = new EntryElement(caption, pa.Placeholder, value, true);
                     else if (ea != null)
-                        element = new EntryElement(caption, ea.Placeholder, value) {KeyboardType = ea.KeyboardType};
+                        element = new EntryElement(caption, ea.Placeholder, value) { KeyboardType = ea.KeyboardType };
                     else if (multi)
                         element = new MultilineElement(caption, value);
                     else if (html != null)
@@ -339,10 +338,9 @@ namespace CrossUI.Touch.Dialog
                     if (invoke != null)
                         (element).Tapped += invoke;
                 }
-                else if (mType == typeof (float))
+                else if (mType == typeof(float))
                 {
-                    var floatElement = new FloatElement(null, null, (float) GetValue(mi, o));
-                    floatElement.Caption = caption;
+                    var floatElement = new FloatElement(null, null, (float)GetValue(mi, o)) { Caption = caption };
                     element = floatElement;
 
                     foreach (object attr in attrs)
@@ -356,7 +354,7 @@ namespace CrossUI.Touch.Dialog
                         }
                     }
                 }
-                else if (mType == typeof (bool))
+                else if (mType == typeof(bool))
                 {
                     bool checkbox = false;
                     foreach (object attr in attrs)
@@ -366,13 +364,13 @@ namespace CrossUI.Touch.Dialog
                     }
 
                     if (checkbox)
-                        element = new CheckboxElement(caption, (bool) GetValue(mi, o));
+                        element = new CheckboxElement(caption, (bool)GetValue(mi, o));
                     else
-                        element = new BooleanElement(caption, (bool) GetValue(mi, o));
+                        element = new BooleanElement(caption, (bool)GetValue(mi, o));
                 }
-                else if (mType == typeof (DateTime))
+                else if (mType == typeof(DateTime))
                 {
-                    var dateTime = (DateTime) GetValue(mi, o);
+                    var dateTime = (DateTime)GetValue(mi, o);
                     bool asDate = false, asTime = false;
 
                     foreach (object attr in attrs)
@@ -404,30 +402,30 @@ namespace CrossUI.Touch.Dialog
                         if (v == evalue)
                             selected = idx;
 
-                        var ca = Attribute.GetCustomAttribute(fi, typeof (CaptionAttribute)) as CaptionAttribute;
+                        var ca = Attribute.GetCustomAttribute(fi, typeof(CaptionAttribute)) as CaptionAttribute;
                         csection.Add(new RadioElement(ca != null ? ca.Caption : MakeCaption(fi.Name)));
                         idx++;
                     }
 
-                    element = new RootElement(caption, new RadioGroup(null, selected)) {csection};
+                    element = new RootElement(caption, new RadioGroup(null, selected)) { csection };
                 }
-                else if (mType == typeof (UIImage))
+                else if (mType == typeof(UIImage))
                 {
-                    element = new ImageElement((UIImage) GetValue(mi, o));
+                    element = new ImageElement((UIImage)GetValue(mi, o));
                 }
-                else if (typeof (System.Collections.IEnumerable).IsAssignableFrom(mType))
+                else if (typeof(System.Collections.IEnumerable).IsAssignableFrom(mType))
                 {
                     var csection = new Section();
                     int count = 0;
 
                     if (last_radio_index == null)
                         throw new Exception("IEnumerable found, but no previous int found");
-                    foreach (var e in (IEnumerable) GetValue(mi, o))
+                    foreach (var e in (IEnumerable)GetValue(mi, o))
                     {
                         csection.Add(new RadioElement(e.ToString()));
                         count++;
                     }
-                    var selected = (int) GetValue(last_radio_index, o);
+                    var selected = (int)GetValue(last_radio_index, o);
                     if (selected >= count || selected < 0)
                         selected = 0;
                     element = new RootElement(caption, new MemberRadioGroup(null, selected, last_radio_index))
@@ -436,7 +434,7 @@ namespace CrossUI.Touch.Dialog
                         };
                     last_radio_index = null;
                 }
-                else if (typeof (int) == mType)
+                else if (typeof(int) == mType)
                 {
                     if (attrs.OfType<RadioSelectionAttribute>().Any())
                     {
@@ -498,21 +496,21 @@ namespace CrossUI.Touch.Dialog
                 object obj = dk.Value.Obj;
 
                 if (element is DateTimeElement)
-                    SetValue(mi, obj, ((DateTimeElement) element).Value);
+                    SetValue(mi, obj, ((DateTimeElement)element).Value);
                 else if (element is FloatElement)
-                    SetValue(mi, obj, ((FloatElement) element).Value);
+                    SetValue(mi, obj, ((FloatElement)element).Value);
                 else if (element is BooleanElement)
-                    SetValue(mi, obj, ((BooleanElement) element).Value);
+                    SetValue(mi, obj, ((BooleanElement)element).Value);
                 else if (element is CheckboxElement)
-                    SetValue(mi, obj, ((CheckboxElement) element).Value);
+                    SetValue(mi, obj, ((CheckboxElement)element).Value);
                 else if (element is EntryElement)
                 {
-                    var entry = (EntryElement) element;
+                    var entry = (EntryElement)element;
                     entry.FetchAndUpdateValue();
                     SetValue(mi, obj, entry.Value);
                 }
                 else if (element is ImageElement)
-                    SetValue(mi, obj, ((ImageElement) element).Value);
+                    SetValue(mi, obj, ((ImageElement)element).Value);
                 else if (element is RootElement)
                 {
                     var re = element as RootElement;

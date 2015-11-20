@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
@@ -27,9 +27,6 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             _propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override IPropertyBuilder PropertyBuilder
-        {
-            get { return _propertyBuilder; }
-        }
+        protected override IPropertyBuilder PropertyBuilder => _propertyBuilder;
     }
 }

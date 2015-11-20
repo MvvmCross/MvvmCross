@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Utilities
@@ -24,7 +24,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public UIColor NormalColor, HighlightedColor, DisabledColor;
 
         /// <summary>
-        /// Invoked when the user touches 
+        /// Invoked when the user touches
         /// </summary>
         public event Action<GlassButton> Tapped;
 
@@ -62,8 +62,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         {
             if (pressed && Enabled)
             {
-                if (Tapped != null)
-                    Tapped(this);
+                Tapped?.Invoke(this);
             }
             pressed = false;
             SetNeedsDisplay();
@@ -73,10 +72,7 @@ namespace CrossUI.Touch.Dialog.Utilities
         public override bool ContinueTracking(UITouch uitouch, UIEvent uievent)
         {
             var touch = uievent.AllTouches.AnyObject as UITouch;
-            if (Bounds.Contains(touch.LocationInView(this)))
-                pressed = true;
-            else
-                pressed = false;
+            if (touch != null) pressed = Bounds.Contains(touch.LocationInView(this));
             return base.ContinueTracking(uitouch, uievent);
         }
 
@@ -88,8 +84,7 @@ namespace CrossUI.Touch.Dialog.Utilities
             UIColor background = Enabled ? pressed ? HighlightedColor : NormalColor : DisabledColor;
             nfloat alpha = 1;
 
-            CGPath container;
-            container = GraphicsUtil.MakeRoundedRectPath(bounds, 14);
+            CGPath container = GraphicsUtil.MakeRoundedRectPath(bounds, 14);
             context.AddPath(container);
             context.Clip();
 
@@ -100,8 +95,8 @@ namespace CrossUI.Touch.Dialog.Utilities
                 var bottomCenter = new CGPoint(bounds.GetMidX(), bounds.GetMaxY());
 
                 using (
-                    var gradient = new CGGradient(cs, new [] {0.23f, 0.23f, 0.23f, alpha, 0.47f, 0.47f, 0.47f, alpha},
-                                                  new nfloat[] {0, 1}))
+                    var gradient = new CGGradient(cs, new[] { 0.23f, 0.23f, 0.23f, alpha, 0.47f, 0.47f, 0.47f, alpha },
+                                                  new nfloat[] { 0, 1 }))
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);
                 }
@@ -110,8 +105,8 @@ namespace CrossUI.Touch.Dialog.Utilities
                 context.AddPath(container);
                 context.Clip();
                 using (
-                    var gradient = new CGGradient(cs, new[] {0.05f, 0.05f, 0.05f, alpha, 0.15f, 0.15f, 0.15f, alpha},
-                                                  new nfloat[] {0, 1}))
+                    var gradient = new CGGradient(cs, new[] { 0.05f, 0.05f, 0.05f, alpha, 0.15f, 0.15f, 0.15f, alpha },
+                                                  new nfloat[] { 0, 1 }))
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);
                 }
@@ -124,7 +119,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                 background.SetFill();
                 context.FillRect(nb);
 
-                using (var gradient = new CGGradient(cs, new nfloat[] {1, 1, 1, .35f, 1, 1, 1, 0.06f}, new nfloat[] {0, 1}))
+                using (var gradient = new CGGradient(cs, new nfloat[] { 1, 1, 1, .35f, 1, 1, 1, 0.06f }, new nfloat[] { 0, 1 }))
                 {
                     context.DrawLinearGradient(gradient, topCenter, midCenter, 0);
                 }
@@ -134,7 +129,7 @@ namespace CrossUI.Touch.Dialog.Utilities
                 context.Clip();
 
                 using (
-                    var gradient = new CGGradient(cs, new nfloat[] {1, 1, 1, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f}, new nfloat[] {0, 1})
+                    var gradient = new CGGradient(cs, new nfloat[] { 1, 1, 1, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f }, new nfloat[] { 0, 1 })
                     )
                 {
                     context.DrawLinearGradient(gradient, topCenter, bottomCenter, 0);

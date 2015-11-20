@@ -2,16 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Globalization;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
+using System;
+using System.Globalization;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
@@ -21,10 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         private readonly MvxSourceStepDescription _description;
         private object _dataContext;
 
-        protected MvxSourceStepDescription Description
-        {
-            get { return _description; }
-        }
+        protected MvxSourceStepDescription Description => _description;
 
         protected MvxSourceStep(MvxSourceStepDescription description)
         {
@@ -44,10 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public virtual Type TargetType { get; set; }
 
-        public virtual Type SourceType
-        {
-            get { return typeof (object); }
-        }
+        public virtual Type SourceType => typeof(object);
 
         public object DataContext
         {
@@ -67,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         public void SetValue(object value)
         {
             var sourceValue = ApplyValueConverterTargetToSource(value);
-            
+
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
 
@@ -97,7 +89,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
             try
             {
-                return 
+                return
                     _description.Converter.Convert(value,
                                                    TargetType,
                                                    _description.ConverterParameter,
@@ -122,10 +114,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         protected virtual void SendSourcePropertyChanged()
         {
             var handler = _changed;
-            if (handler == null)
-                return;
 
-            handler.Invoke(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
@@ -191,10 +181,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     public abstract class MvxSourceStep<T> : MvxSourceStep
         where T : MvxSourceStepDescription
     {
-        protected new T Description
-        {
-            get { return (T) base.Description; }
-        }
+        protected new T Description => (T)base.Description;
 
         protected MvxSourceStep(T description)
             : base(description)

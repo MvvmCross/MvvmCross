@@ -2,16 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CrossUI.Core.Descriptions;
+using CrossUI.Core.Descriptions.Lists;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows.Input;
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Lists;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.List
 {
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
         public ListLayoutAuto DefaultLayout { get; set; }
         public Dictionary<string, ListLayoutAuto> ItemLayouts { get; set; }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToListLayoutDescription();
         }
@@ -45,12 +45,12 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
             if (ItemsSource != null)
             {
                 var itemsSource = ItemsSource.GetPropertyText();
-                list.Properties["ItemsSource"] = string.Format("@MvxBind:{0}", itemsSource);
+                list.Properties["ItemsSource"] = $"@MvxBind:{itemsSource}";
             }
             if (SelectedCommand != null)
             {
                 var selectedCommand = SelectedCommand.GetPropertyText();
-                list.Properties["ItemClick"] = string.Format("@MvxBind:{0}", selectedCommand);
+                list.Properties["ItemClick"] = $"@MvxBind:{selectedCommand}";
             }
             if (DefaultLayout != null)
             {

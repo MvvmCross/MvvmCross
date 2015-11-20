@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
@@ -30,10 +30,12 @@ namespace CrossUI.Droid.Dialog.Elements
             DroidResources.DecodeStringElementLayout(Context, CurrentAttachedCell, out label, out value);
 
             if (value != null)
-                value.Text = Format(Value);
-            if (FontSize > 0)
             {
-                value.TextSize = FontSize;
+                value.Text = Format(Value);
+                if (FontSize > 0)
+                {
+                    value.TextSize = FontSize;
+                }
             }
         }
 

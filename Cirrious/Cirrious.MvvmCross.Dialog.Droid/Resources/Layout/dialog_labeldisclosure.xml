@@ -4,14 +4,12 @@
   android:paddingBottom="8dp"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  android:minHeight="?android:attr/listPreferredItemHeight"
-	>
+  android:minHeight="?android:attr/listPreferredItemHeight">
    <LinearLayout
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical"
-       android:layout_weight="1"
-		>
+       android:layout_weight="1">
       <TextView android:id="@+id/dialog_LabelField"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -21,8 +19,7 @@
            android:singleLine="true"
            android:text="Fieldset Label"
            android:textStyle="bold"
-           android:textAppearance="?android:attr/textAppearanceSmall"
-			/>
+           android:textAppearance="?android:attr/textAppearanceSmall" />
       <TextView
            android:id="@+id/dialog_ValueField"
            android:layout_width="fill_parent"
@@ -31,8 +28,7 @@
            android:layout_marginRight="8dp"
            android:singleLine="true"
            android:text="FieldValue"
-          android:textAppearance="?android:attr/textAppearanceLarge"
-			/>
+          android:textAppearance="?android:attr/textAppearanceLarge" />
    </LinearLayout>
    <ImageView
        android:id="@+id/dialog_DisclosureField"
@@ -41,6 +37,5 @@
        android:layout_marginLeft="8dp"
        android:layout_marginRight="8dp"
        android:layout_gravity="center_vertical"
-       android:src="@drawable/dialog_spinner_default_holo_dark"
-  />
+       android:src="@drawable/dialog_spinner_default_holo_dark" />
 </LinearLayout>

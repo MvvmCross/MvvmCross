@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -41,20 +41,15 @@ namespace CrossUI.Touch.Dialog.Elements
             this.Accessory = UITableViewCellAccessory.None;
         }
 
-        protected override NSString CellKey
-        {
-            get { return Skey; }
-        }
+        protected override NSString CellKey => Skey;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey);
-            if (cell == null)
+            var cell = tv.DequeueReusableCell(CellKey) ?? new UITableViewCell(
+                Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Subtitle, CellKey)
             {
-                cell = new UITableViewCell(
-                    Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Subtitle, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-            }
+                SelectionStyle = UITableViewCellSelectionStyle.Blue
+            };
 
             cell.Accessory = Accessory;
             cell.TextLabel.Text = Caption;

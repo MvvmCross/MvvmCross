@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Foundation;
@@ -14,7 +14,7 @@ namespace CrossUI.Touch.Dialog.Elements
     {
         private static readonly NSString Key = new NSString("BooleanElement");
         private UISwitch _switch;
-        protected UISwitch Switch { get { return _switch; } }
+        protected UISwitch Switch => _switch;
 
         public BooleanElement()
             : this("", false)
@@ -29,10 +29,7 @@ namespace CrossUI.Touch.Dialog.Elements
         {
         }
 
-        protected override NSString CellKey
-        {
-            get { return Key; }
-        }
+        protected override NSString CellKey => Key;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
@@ -47,18 +44,17 @@ namespace CrossUI.Touch.Dialog.Elements
             var cell = tv.DequeueReusableCell(CellKey);
             if (cell == null)
             {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey);
-                cell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                cell = new UITableViewCell(UITableViewCellStyle.Default, CellKey)
+                {
+                    SelectionStyle = UITableViewCellSelectionStyle.None
+                };
             }
             else
                 cell.AccessoryView = null;
 
-            if (_switch.Superview != null)
-            {
-                var oldCell = _switch.Superview as UITableViewCell;
-                if (oldCell != null)
+            var oldCell = _switch.Superview as UITableViewCell;
+            if (oldCell != null)
                 oldCell.AccessoryView = null;
-            }
 
             cell.TextLabel.Text = Caption;
             cell.AccessoryView = _switch;
@@ -69,11 +65,11 @@ namespace CrossUI.Touch.Dialog.Elements
         protected virtual UISwitch CreateSwitch()
         {
             return new UISwitch
-                {
-                    BackgroundColor = UIColor.Clear,
-                    Tag = 1,
-                    On = Value
-                };
+            {
+                BackgroundColor = UIColor.Clear,
+                Tag = 1,
+                On = Value
+            };
         }
 
         protected override void Dispose(bool disposing)

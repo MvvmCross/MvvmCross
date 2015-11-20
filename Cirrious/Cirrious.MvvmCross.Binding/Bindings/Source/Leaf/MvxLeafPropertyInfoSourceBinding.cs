@@ -2,16 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 {
@@ -22,10 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType
-        {
-            get { return (PropertyInfo == null) ? null : PropertyInfo.PropertyType; }
-        }
+        public override Type SourceType => PropertyInfo?.PropertyType;
 
         protected override void OnBoundPropertyChanged()
         {

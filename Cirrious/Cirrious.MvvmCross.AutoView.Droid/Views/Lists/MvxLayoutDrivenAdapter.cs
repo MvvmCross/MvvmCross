@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 {

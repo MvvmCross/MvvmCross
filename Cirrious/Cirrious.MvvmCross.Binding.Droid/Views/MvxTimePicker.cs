@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -33,10 +33,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-		protected MvxTimePicker(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxTimePicker(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public TimeSpan Value
         {
@@ -49,7 +49,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             set
             {
                 var javaHour = new Java.Lang.Integer(value.Hours);
-                var javaMinutes =new Java.Lang.Integer(value.Minutes);
+                var javaMinutes = new Java.Lang.Integer(value.Minutes);
 
                 if (!_initialized)
                 {
@@ -73,10 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
             EventHandler handler = ValueChanged;
-            if (handler != null)
-            {
-                handler(this, null);
-            }
+            handler?.Invoke(this, null);
         }
     }
 }

@@ -2,13 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using System;
-
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -21,7 +20,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             radioGroup.CheckedChange += RadioGroupCheckedChanged;
         }
-
 
         private bool CheckValueChanged(object newValue)
         {
@@ -37,7 +35,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             return changed;
         }
 
-
         private void RadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs args)
         {
             var radioGroup = (MvxRadioGroup)Target;
@@ -45,13 +42,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
             object newValue = null;
             var r = radioGroup.FindViewById<RadioButton>(args.CheckedId);
-            if (r != null)
+            var li = r?.Parent as MvxListItemView;
+            if (li != null)
             {
-                var li = r.Parent as MvxListItemView;
-                if (li != null)
-                {
-                    newValue = li.DataContext;
-                }
+                newValue = li.DataContext;
             }
 
             bool changed = CheckValueChanged(newValue);
@@ -102,18 +96,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
-
-
-        public override Type TargetType
-        {
-            get { return typeof(object); }
-        }
-
+        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

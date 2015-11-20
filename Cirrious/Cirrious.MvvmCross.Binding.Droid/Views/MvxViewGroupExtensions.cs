@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Specialized;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Specialized;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -23,9 +23,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 case NotifyCollectionChangedAction.Add:
                     viewGroup.Add(viewGroup.Adapter, eventArgs.NewStartingIndex, eventArgs.NewItems.Count);
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
                     viewGroup.Remove(viewGroup.Adapter, eventArgs.OldStartingIndex, eventArgs.OldItems.Count);
                     break;
+
                 case NotifyCollectionChangedAction.Replace:
                     if (eventArgs.NewItems.Count != eventArgs.OldItems.Count)
                     {
@@ -36,13 +38,16 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                         viewGroup.Replace(viewGroup.Adapter, eventArgs.NewStartingIndex, eventArgs.NewItems.Count);
                     }
                     break;
+
                 case NotifyCollectionChangedAction.Move:
-                    // move is not implemented - so we call Refill instead 
+                    // move is not implemented - so we call Refill instead
                     viewGroup.Refill(viewGroup.Adapter);
                     break;
+
                 case NotifyCollectionChangedAction.Reset:
                     viewGroup.Refill(viewGroup.Adapter);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

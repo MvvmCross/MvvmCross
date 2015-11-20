@@ -1,5 +1,5 @@
-using System;
 using Android.Widget;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -10,20 +10,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
         }
 
-        public override Type TargetType
-        {
-            get { return typeof(string); }
-        }
+        public override Type TargetType => typeof(string);
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWayToSource; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
-        protected SearchView SearchView
-        {
-            get { return (SearchView)Target; }
-        }
+        protected SearchView SearchView => (SearchView)Target;
 
         public override void SubscribeToEvents()
         {

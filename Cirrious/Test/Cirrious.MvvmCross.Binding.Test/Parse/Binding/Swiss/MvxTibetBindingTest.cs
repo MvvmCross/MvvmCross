@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Parse.Binding;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
@@ -21,10 +21,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterBinding()
         {
             var text = "Target ConvertThis(Foo)";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    { 
-                        "Target", 
+                    {
+                        "Target",
                         new MvxSerializableBindingDescription()
                             {
                                 Function = "ConvertThis",
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Path = "Foo",
-                                            }, 
+                                            },
                                     }
                             }
                     }
@@ -46,10 +46,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterWithParameterBinding()
         {
             var text = "Target ConvertThis(Foo, 12)";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    { 
-                        "Target", 
+                    {
+                        "Target",
                         new MvxSerializableBindingDescription()
                             {
                                 Function = "ConvertThis",
@@ -58,11 +58,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Path = "Foo",
-                                            }, 
+                                            },
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Literal = 12,
-                                            }, 
+                                            },
                                     },
                             }
                     }
@@ -75,10 +75,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterWithParameterBinding2()
         {
             var text = "Target ConvertThis(Foo, 12.45)";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    { 
-                        "Target", 
+                    {
+                        "Target",
                         new MvxSerializableBindingDescription()
                             {
                                 Function = "ConvertThis",
@@ -87,11 +87,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Path = "Foo",
-                                            }, 
+                                            },
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Literal = 12.45,
-                                            }, 
+                                            },
                                     },
                             }
                     }
@@ -104,10 +104,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterWithParameterBinding3()
         {
             var text = "Target ConvertThis(Foo, true)";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    { 
-                        "Target", 
+                    {
+                        "Target",
                         new MvxSerializableBindingDescription()
                             {
                                 Function = "ConvertThis",
@@ -116,11 +116,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Path = "Foo",
-                                            }, 
+                                            },
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Literal = true,
-                                            }, 
+                                            },
                                     },
                             }
                     }
@@ -133,10 +133,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterWithParameterBinding4()
         {
             var text = "Target ConvertThis(Foo, 'Hello World')";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
                 {
-                    { 
-                        "Target", 
+                    {
+                        "Target",
                         new MvxSerializableBindingDescription()
                             {
                                 Function = "ConvertThis",
@@ -145,11 +145,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Path = "Foo",
-                                            }, 
+                                            },
                                         new MvxSerializableBindingDescription()
                                             {
                                                 Literal = "Hello World",
-                                            }, 
+                                            },
                                     },
                             }
                     }
@@ -224,7 +224,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                             {
                                                                 Path = "Foo2",
                                                                 Converter = "Second",
-                                                                FallbackValue = 23,                                                
+                                                                FallbackValue = 23,
                                                             }
                                                     },
                                             },
@@ -286,7 +286,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                                             {
                                                                                 Path = "Foo2",
                                                                                 Converter = "Second",
-                                                                                FallbackValue = 23,                                                
+                                                                                FallbackValue = 23,
                                                                             }
                                                                     }
                                                             },
@@ -346,7 +346,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                                             {
                                                                                 Path = "Foo2",
                                                                                 Converter = "Second",
-                                                                                FallbackValue = 23,                                                
+                                                                                FallbackValue = 23,
                                                                             }
                                                                     }
                                                             },
@@ -363,7 +363,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
             PerformTest(text, expected);
         }
-
 
         [Test]
         public void TestAllOperators()
@@ -387,7 +386,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
             foreach (var kvp in operators)
             {
-                var text = string.Format("Target Foo1 {0} Foo2", kvp.Key);
+                var text = $"Target Foo1 {kvp.Key} Foo2";
                 var expected = new MvxSerializableBindingSpecification()
                     {
                         {
@@ -466,7 +465,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                     new MvxSerializableBindingDescription()
                                         {
                                             Literal = MvxTibetBindingParser.LiteralNull
-                                        }, 
+                                        },
                                 },
                             }
                     }
@@ -502,10 +501,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
         {
             var text = "Target " + keyword + "This(Foo, 'Hello World')";
-            var expected = new MvxSerializableBindingSpecification() 
+            var expected = new MvxSerializableBindingSpecification()
             {
-                { 
-                    "Target", 
+                {
+                    "Target",
                     new MvxSerializableBindingDescription()
                     {
                             Function = keyword + "This",
@@ -514,11 +513,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                     new MvxSerializableBindingDescription()
                                         {
                                             Path = "Foo",
-                                        }, 
+                                        },
                                     new MvxSerializableBindingDescription()
                                         {
                                             Literal = "Hello World",
-                                        }, 
+                                        },
                                 },
                     }
                 }
@@ -543,11 +542,11 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                                     new MvxSerializableBindingDescription()
                                         {
                                             Path = "One"
-                                        }, 
+                                        },
                                     new MvxSerializableBindingDescription()
                                         {
                                             Path = "Two"
-                                        }, 
+                                        },
                                 },
                             }
                     }

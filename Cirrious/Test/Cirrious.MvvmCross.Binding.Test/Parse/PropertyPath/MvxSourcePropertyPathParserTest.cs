@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
 {
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnEmpty()
         {
-            foreach (var test in new[] {null, string.Empty, ".", "\t", " .\r\n"})
+            foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
                 var result = Tokenise(test);
                 Assert.AreEqual(1, result.Count);
@@ -71,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnIntegerPropertyIndexer()
         {
-            var toTest = new[] {0, 1, 123, int.MaxValue};
+            var toTest = new[] { 0, 1, 123, int.MaxValue };
             foreach (var u in toTest)
             {
                 var text = "[" + u + "]";
@@ -89,8 +89,8 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnStringPropertyIndexer()
         {
-            var toTest = new[] {"One", "", "Foo\\Bar", "Hello\r\n"};
-            var quotes = new[] {"\"", "'"};
+            var toTest = new[] { "One", "", "Foo\\Bar", "Hello\r\n" };
+            var quotes = new[] { "\"", "'" };
             foreach (var s in toTest)
             {
                 foreach (var quoteChar in quotes)
@@ -151,7 +151,6 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
             }
         }
 
-
         [Test]
         public void TestTokeniser_SmokeTest()
         {
@@ -180,14 +179,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.PropertyPath
         private static void AssertIsSimplePropertyToken(MvxPropertyToken token, string text)
         {
             Assert.IsInstanceOf<MvxPropertyNamePropertyToken>(token);
-            Assert.AreEqual(text, ((MvxPropertyNamePropertyToken) token).PropertyName);
+            Assert.AreEqual(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
         }
 
         private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxPropertyToken token, T value)
         {
             Assert.IsInstanceOf<MvxIndexerPropertyToken<T>>(token);
             Assert.IsInstanceOf<TSpecific>(token);
-            Assert.AreEqual(value, ((MvxIndexerPropertyToken<T>) token).Key);
+            Assert.AreEqual(value, ((MvxIndexerPropertyToken<T>)token).Key);
         }
 
         private IList<MvxPropertyToken> Tokenise(string text)

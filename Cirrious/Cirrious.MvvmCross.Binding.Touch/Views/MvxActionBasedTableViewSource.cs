@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Foundation;
+using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -77,8 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 return reuse;
 
             var cell = CellCreator(tableView, indexPath, item);
-            if (CellModifier != null)
-                CellModifier(cell);
+            CellModifier?.Invoke(cell);
             return cell;
         }
     }

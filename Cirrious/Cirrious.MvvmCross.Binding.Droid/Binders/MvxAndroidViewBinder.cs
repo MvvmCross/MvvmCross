@@ -2,12 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
@@ -18,13 +15,17 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Binders
 {
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
-        private readonly List<KeyValuePair<object,IMvxUpdateableBinding>> _viewBindings
-            = new List<KeyValuePair<object,IMvxUpdateableBinding>>();
+        private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings
+            = new List<KeyValuePair<object, IMvxUpdateableBinding>>();
+
         private readonly object _source;
 
         public MvxAndroidViewBinder(object source)
@@ -34,20 +35,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
         private IMvxBinder _binder;
 
-        protected IMvxBinder Binder
-        {
-            get
-            {
-                if (_binder == null)
-                    _binder = Mvx.Resolve<IMvxBinder>();
-                return _binder;
-            }
-        }
+        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxBinder>());
 
-        public IList<KeyValuePair<object,IMvxUpdateableBinding>> CreatedBindings
-        {
-            get { return _viewBindings; }
-        }
+        public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
@@ -111,6 +101,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
                                       exception.ToLongString());
                 throw;
             }
-        }        
+        }
     }
 }

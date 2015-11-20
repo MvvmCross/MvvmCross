@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
+using System;
 using UIKit;
 
 namespace Cirrious.CrossCore.Touch.Views
@@ -15,10 +15,7 @@ namespace Cirrious.CrossCore.Touch.Views
     {
         private readonly IMvxEventSourceViewController _eventSource;
 
-        protected UIViewController ViewController
-        {
-            get { return _eventSource as UIViewController; }
-        }
+        protected UIViewController ViewController => _eventSource as UIViewController;
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {

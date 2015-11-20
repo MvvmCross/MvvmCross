@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
+using System;
+using System.Collections;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -38,10 +38,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             Adapter = adapter;
         }
 
-		protected MvxGridView(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxGridView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public new IMvxAdapter Adapter
         {
@@ -76,6 +76,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private ICommand _itemClick;
+
         public new ICommand ItemClick
         {
             get { return _itemClick; }
@@ -83,6 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private bool _itemClickOverloaded = false;
+
         private void EnsureItemClickOverloaded()
         {
             if (_itemClickOverloaded)
@@ -93,6 +95,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private ICommand _itemLongClick;
+
         public new ICommand ItemLongClick
         {
             get { return _itemLongClick; }
@@ -100,6 +103,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         private bool _itemLongClickOverloaded = false;
+
         private void EnsureItemLongClickOverloaded()
         {
             if (_itemLongClickOverloaded)

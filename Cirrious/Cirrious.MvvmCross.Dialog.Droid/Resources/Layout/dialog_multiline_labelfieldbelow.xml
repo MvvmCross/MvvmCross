@@ -4,8 +4,7 @@
   	android:layout_height="wrap_content"
   	android:paddingTop="5dp"
   	android:paddingBottom="8dp"
-	android:orientation="vertical"
-  	>
+	android:orientation="vertical">
   <TextView
 	android:id="@+id/dialog_LabelField"
 	android:layout_width="fill_parent"
@@ -26,6 +25,5 @@
 	  android:layout_marginRight="8dp"
     android:text="Value"
     android:singleLine="false"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    />
+    android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

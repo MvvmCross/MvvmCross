@@ -1,11 +1,11 @@
-using System;
-using System.Collections;
-using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using Cirrious.MvvmCross.Binding.Attributes;
+using System;
+using System.Collections;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
@@ -13,7 +13,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
     public class MvxExpandableListView : ExpandableListView
     {
         public MvxExpandableListView(Context context, IAttributeSet attrs)
-            : this(context, attrs, new MvxExpandableListAdapter(context)) { }
+            : this(context, attrs, new MvxExpandableListAdapter(context))
+        { }
 
         public MvxExpandableListView(Context context, IAttributeSet attrs, MvxExpandableListAdapter adapter)
             : base(context, attrs)
@@ -30,16 +31,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             adapter.ItemTemplateId = itemTemplateId;
         }
 
-		protected MvxExpandableListView(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxExpandableListView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
-        protected MvxExpandableListAdapter ThisAdapter
-        {
-            get { return ExpandableListAdapter as MvxExpandableListAdapter; }
-        }
+        protected MvxExpandableListAdapter ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource

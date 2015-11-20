@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Platform;
@@ -40,7 +40,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             if (string.IsNullOrEmpty(targetName))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry"); 
+                                      "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }
@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             }
 
             var actualProperty = target.GetType().FindActualProperty(targetName);
-            var actualPropertyType = actualProperty == null ? typeof (object) : actualProperty.PropertyType;
+            var actualPropertyType = actualProperty?.PropertyType ?? typeof(object);
 
             binding = new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
             return true;

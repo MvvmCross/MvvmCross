@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Target
 {
@@ -34,10 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             FireValueChanged(View.SelectedObject);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWayToSource; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {

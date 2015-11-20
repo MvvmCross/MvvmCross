@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Bindings.Target;
+using System.Reflection;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Target
 {
-    public class MvxUISliderValueTargetBinding 
+    public class MvxUISliderValueTargetBinding
         : MvxPropertyInfoTargetBinding<UISlider>
     {
         private bool _subscribed;
@@ -39,10 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             FireValueChanged(view.Value);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
@@ -46,11 +46,11 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             if (!(fragment is TFragment))
             {
                 Mvx.Warning("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
-                            typeof (TFragment).FullName);
+                            typeof(TFragment).FullName);
                 return default(TFragment);
             }
 
-            return (TFragment) fragment;
+            return (TFragment)fragment;
         }
 
         public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)

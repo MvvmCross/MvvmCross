@@ -4,8 +4,7 @@
   android:layout_height="wrap_content"
   android:minHeight="?android:attr/listPreferredItemHeight"
   android:orientation="vertical"
-  android:padding="12dp"
-  >
+  android:padding="12dp">
   <TextView android:id="@+id/dialog_LabelField"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -13,6 +12,5 @@
     android:singleLine="true"
     android:text="Fieldset Label"
     android:textSize="21sp"
-    android:textColor="#ffffff"
-    />
+    android:textColor="#ffffff" />
 </LinearLayout>

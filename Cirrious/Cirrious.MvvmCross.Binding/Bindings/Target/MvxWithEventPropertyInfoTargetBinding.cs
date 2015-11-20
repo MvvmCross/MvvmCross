@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WeakSubscription;
+using System;
+using System.Reflection;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Target
 {
-    public class MvxWithEventPropertyInfoTargetBinding 
+    public class MvxWithEventPropertyInfoTargetBinding
         : MvxPropertyInfoTargetBinding
     {
         private IDisposable _subscription;
@@ -43,10 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             FireValueChanged(value);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

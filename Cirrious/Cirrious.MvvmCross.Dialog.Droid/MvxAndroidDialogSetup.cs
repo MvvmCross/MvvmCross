@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using Android.Content;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
@@ -14,6 +13,7 @@ using Cirrious.MvvmCross.Dialog.Droid.Target;
 using Cirrious.MvvmCross.Droid.Platform;
 using CrossUI.Droid;
 using CrossUI.Droid.Dialog.Elements;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Dialog.Droid
 {
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         protected override void FillTargetFactories(
             IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterFactory(new MvxPropertyInfoTargetBindingFactory(typeof (ValueElement), "Value",
+            registry.RegisterFactory(new MvxPropertyInfoTargetBindingFactory(typeof(ValueElement), "Value",
                                                                              (element, propertyInfo) =>
                                                                              new MvxElementValueTargetBinding(element,
                                                                                                               propertyInfo)));

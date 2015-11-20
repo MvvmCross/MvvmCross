@@ -2,17 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using Android;
 using Android.App;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using CrossUI.Droid.Dialog.Elements;
+using System;
+using System.Linq;
 
 namespace CrossUI.Droid.Dialog
 {
@@ -36,13 +34,15 @@ namespace CrossUI.Droid.Dialog
             base.OnContentChanged();
 
             _contentHasBeenSet = true;
-            ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
-            ListView.ItemsCanFocus = true;
+            if (ListView != null)
+            {
+                ListView.DescendantFocusability = DescendantFocusability.AfterDescendants;
+                ListView.ItemsCanFocus = true;
 
-            ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
-            ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
+                ListView.ViewTreeObserver.GlobalFocusChange += OnViewTreeObserverOnGlobalFocusChange;
+                ListView.ViewTreeObserver.GlobalLayout += OnViewTreeObserverOnGlobalLayout;
+            }
         }
-
 
         private void OnViewTreeObserverOnGlobalLayout(object sender, EventArgs args)
         {
@@ -79,16 +79,13 @@ namespace CrossUI.Droid.Dialog
 
         public RootElement Root
         {
-            get { return _dialogAdapter == null ? null : _dialogAdapter.Root; }
+            get { return _dialogAdapter?.Root; }
             set
             {
                 value.ValueChanged -= HandleValueChangedEvent;
                 value.ValueChanged += HandleValueChangedEvent;
 
-                if (_dialogAdapter != null)
-                {
-                    _dialogAdapter.DeregisterListView();
-                }
+                _dialogAdapter?.DeregisterListView();
 
                 ListAdapter = _dialogAdapter = new DialogAdapter(this, value, ListView);
             }
@@ -107,8 +104,7 @@ namespace CrossUI.Droid.Dialog
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            if (ValueChanged != null)
-                ValueChanged(sender, args);
+            ValueChanged?.Invoke(sender, args);
         }
 
         public override Java.Lang.Object OnRetainNonConfigurationInstance()

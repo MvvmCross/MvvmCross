@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Windows.Input;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.AutoView.Auto.Dialog;
 using Cirrious.MvvmCross.ViewModels;
 using CrossUI.Core.Descriptions.Dialog;
+using System.Collections;
+using System.Reflection;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
 {
@@ -31,26 +30,26 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
 
             foreach (var property in viewModelType.GetRuntimeProperties())
             {
-                if (typeof (ICommand).IsAssignableFrom(property.PropertyType))
+                if (typeof(ICommand).IsAssignableFrom(property.PropertyType))
                 {
                     commandSection.Add(new StringAuto(caption: property.Name)
-                        {
-                            SelectedCommandNameOverride = property.Name
-                        });
+                    {
+                        SelectedCommandNameOverride = property.Name
+                    });
                 }
-                else if (typeof (ICollection).IsAssignableFrom(property.PropertyType))
+                else if (typeof(ICollection).IsAssignableFrom(property.PropertyType))
                 {
                     propertySection.Add(new StringAuto(caption: property.Name)
-                        {
-                            BindingExpressionTextOverride = property.Name + ".Count"
-                        });
+                    {
+                        BindingExpressionTextOverride = property.Name + ".Count"
+                    });
                 }
                 else
                 {
                     propertySection.Add(new StringAuto(caption: property.Name)
-                        {
-                            BindingExpressionTextOverride = property.Name
-                        });
+                    {
+                        BindingExpressionTextOverride = property.Name
+                    });
                 }
             }
 

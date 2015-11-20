@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using System.Collections.Generic;
+using System.Reflection;
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
+namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
 {
-    public class MvxWindowsAssemblyCache 
+    public class MvxWindowsAssemblyCache
         : MvxSingleton<IMvxWindowsAssemblyCache>
           , IMvxWindowsAssemblyCache
     {

@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace CrossUI.Touch.Dialog.Elements
@@ -53,10 +53,7 @@ namespace CrossUI.Touch.Dialog.Elements
             key = new NSString("UIViewElement" + _count++);
         }
 
-        protected override NSString CellKey
-        {
-            get { return key; }
-        }
+        protected override NSString CellKey => key;
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
         {
@@ -68,14 +65,14 @@ namespace CrossUI.Touch.Dialog.Elements
                 {
                     cell.BackgroundColor = UIColor.Clear;
 
-                    // 
+                    //
                     // This trick is necessary to keep the background clear, otherwise
                     // it gets painted as black
                     //
                     cell.BackgroundView = new UIView(CGRect.Empty)
-                        {
-                            BackgroundColor = UIColor.Clear
-                        };
+                    {
+                        BackgroundColor = UIColor.Clear
+                    };
                 }
                 if ((Flags & CellFlags.DisableSelection) != 0)
                     cell.SelectionStyle = UITableViewCellSelectionStyle.None;

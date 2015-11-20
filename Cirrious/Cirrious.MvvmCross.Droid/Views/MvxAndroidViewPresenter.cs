@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
 using Android.Content;
-using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
@@ -18,10 +18,7 @@ namespace Cirrious.MvvmCross.Droid.Views
     public class MvxAndroidViewPresenter
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {
-        protected Activity Activity
-        {
-            get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }
-        }
+        protected Activity Activity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
         public override void Show(MvxViewModelRequest request)
         {

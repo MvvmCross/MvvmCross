@@ -2,15 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 {
@@ -116,10 +115,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             base.OnDataContextChanged();
         }
 
-        public override Type SourceType
-        {
-            get { return Description.Combiner.SourceType(_subSteps); }
-        }
+        public override Type SourceType => Description.Combiner.SourceType(_subSteps);
 
         protected override void SetSourceValue(object sourceValue)
         {

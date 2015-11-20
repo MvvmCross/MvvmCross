@@ -2,19 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Content;
 using Android.Util;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using System;
 
 namespace CrossUI.Droid
 {
 #warning Turn into an interface - get rid of the static!
+
     public static class DroidResources
     {
         private static Type _resourceLayoutType;
@@ -104,7 +105,7 @@ namespace CrossUI.Droid
             if (layoutField == null)
                 throw new Exception("Could not find resource field " + layoutName);
 
-            var resourceId = (int) layoutField.GetValue(null);
+            var resourceId = (int)layoutField.GetValue(null);
             return resourceId;
         }
 

@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
 using Foundation;
+using System;
 using UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -44,8 +44,9 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxViewModel ViewModel
         {
-            get {
-				/*
+            get
+            {
+                /*
 				Mvx.Trace ("I am in .ViewModel!");
 				if (BindingContext == null)
 					Mvx.Trace ("BindingContext is null!");
@@ -67,9 +68,9 @@ namespace Cirrious.MvvmCross.Touch.Views
 				if (e == null)
 					Mvx.Trace ("e was null!");
 				*/
-				return DataContext as IMvxViewModel;
-			}
-			set { DataContext = value; }
+                return DataContext as IMvxViewModel;
+            }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

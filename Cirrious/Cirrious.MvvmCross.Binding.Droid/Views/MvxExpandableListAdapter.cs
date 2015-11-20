@@ -1,25 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using System;
+using System.Collections;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Binding.Droid.Views
 {
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
         public MvxExpandableListAdapter(Context context)
-            : base(context) { }
+            : base(context)
+        { }
 
-		protected MvxExpandableListAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-	    {
-	    }
+        protected MvxExpandableListAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         private int _groupTemplateId;
 
@@ -38,10 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        public int GroupCount
-        {
-            get { return base.Count; }
-        }
+        public int GroupCount => base.Count;
 
         public void OnGroupExpanded(int groupPosition)
         {
@@ -96,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public object GetRawItem(int groupPosition, int position)
         {
-            return ((IEnumerable) this.GetRawGroup(groupPosition)).ElementAt(position);
+            return ((IEnumerable)this.GetRawGroup(groupPosition)).ElementAt(position);
         }
 
         public object GetRawGroup(int groupPosition)
@@ -114,7 +110,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public int GetChildrenCount(int groupPosition)
         {
-            return ((IEnumerable) this.GetRawGroup(groupPosition)).Count();
+            return ((IEnumerable)this.GetRawGroup(groupPosition)).Count();
         }
 
         public long GetChildId(int groupPosition, int childPosition)

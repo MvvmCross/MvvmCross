@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections;
-using System.Collections.Generic;
 using CrossUI.Core.Descriptions;
 using CrossUI.Core.Descriptions.Menu;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.AutoView.Auto.Menu
 {
@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
             Children = new List<MenuAuto>();
         }
 
-        public override sealed KeyedDescription ToDescription()
+        public sealed override KeyedDescription ToDescription()
         {
             return ToParentMenuDescription();
         }

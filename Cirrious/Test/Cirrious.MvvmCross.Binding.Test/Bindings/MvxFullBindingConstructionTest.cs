@@ -2,12 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.Bindings;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
@@ -17,6 +15,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
 using Cirrious.MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace Cirrious.MvvmCross.Binding.Test.Bindings
 {
@@ -90,23 +89,23 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             var sourceText = "sourceText";
             var targetName = "targetName";
-            var source = new {Value = 1};
-            var target = new {Value = 2};
-            var converterParameter = new {Value = 3};
-            var fallbackValue = new {Value = 4};
+            var source = new { Value = 1 };
+            var target = new { Value = 2 };
+            var converterParameter = new { Value = 3 };
+            var fallbackValue = new { Value = 4 };
             var converter = new Mock<IMvxValueConverter>();
             var bindingDescription = new MvxBindingDescription
+            {
+                Source = new MvxPathSourceStepDescription()
                 {
-                    Source = new MvxPathSourceStepDescription()
-                        {
-                            Converter = converter.Object,
-                            ConverterParameter = converterParameter,
-                            FallbackValue = fallbackValue,
-                            SourcePropertyPath = sourceText,
-                        },
-                    Mode = bindingMode,
-                    TargetName = targetName
-                };
+                    Converter = converter.Object,
+                    ConverterParameter = converterParameter,
+                    FallbackValue = fallbackValue,
+                    SourcePropertyPath = sourceText,
+                },
+                Mode = bindingMode,
+                TargetName = targetName
+            };
 
             var mockSourceBinding = new Mock<IMvxSourceBinding>();
             var mockTargetBinding = new Mock<IMvxTargetBinding>();

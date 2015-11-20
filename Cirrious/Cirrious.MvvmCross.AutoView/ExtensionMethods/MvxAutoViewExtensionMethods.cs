@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.AutoView.Interfaces;
 using CrossUI.Core.Descriptions;
@@ -71,10 +71,7 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
                 return root;
 
             root = LoadUserInterfaceFromAutoViewModel<TBuildable, TResult>(view, key);
-            if (root != null)
-                return root;
-
-            return null;
+            return root;
         }
 
         private static TResult LoadUserInterfaceFromJsonText<TDescription, TBuildable, TResult>(
@@ -97,12 +94,8 @@ namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
             where TResult : class
         {
             var autoViewModel = view.ViewModel as IMvxAutoViewModel;
-            if (autoViewModel == null)
-            {
-                return null;
-            }
 
-            var description = autoViewModel.GetAutoView(key);
+            var description = autoViewModel?.GetAutoView(key);
             if (description == null)
             {
                 return null;

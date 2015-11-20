@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Cirrious.MvvmCross.Test.Platform
 {
@@ -33,12 +33,12 @@ namespace Cirrious.MvvmCross.Test.Platform
             Assert.AreEqual(value, deserialized.BasePropertyPublicSet);
         }
 
-        class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase
+        private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase
         {
             public string ChildProperty { get; set; }
         }
 
-        abstract class ObjectWithValidPropertiesInBaseClassBase
+        private abstract class ObjectWithValidPropertiesInBaseClassBase
         {
             public string BasePropertyInternalSet { get; internal set; }
             public string BasePropertyPublicSet { get; set; }
