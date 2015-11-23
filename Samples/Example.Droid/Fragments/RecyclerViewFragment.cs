@@ -37,7 +37,7 @@ namespace Example.Droid.Fragments
                 (sender, args) => {
                     if (ViewModel.SelectedItem != null)
                         Toast.MakeText(Activity,
-                            string.Format("Selected: {0}", ViewModel.SelectedItem.Title),
+                            $"Selected: {ViewModel.SelectedItem.Title}",
                             ToastLength.Short).Show();
                 });
 

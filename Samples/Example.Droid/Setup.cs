@@ -22,21 +22,15 @@ namespace Example.Droid
             return new Core.App();
         }
 
-        protected override IList<Assembly> AndroidViewAssemblies
-        {
-            get
-            {
-                var assemblies = base.AndroidViewAssemblies;
-                assemblies.Add(typeof(Android.Support.Design.Widget.NavigationView).Assembly);
-                assemblies.Add(typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly);
-                assemblies.Add(typeof(Android.Support.V7.Widget.Toolbar).Assembly);
-                assemblies.Add(typeof(Android.Support.V4.Widget.DrawerLayout).Assembly);
-                assemblies.Add(typeof(Android.Support.V4.View.ViewPager).Assembly);
-                assemblies.Add(typeof(Cirrious.MvvmCross.Droid.Support.RecyclerView.MvxRecyclerView).Assembly);
-
-                return assemblies;
-            }
-        }
+		protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
+		{
+			typeof(Android.Support.Design.Widget.NavigationView).Assembly,
+			typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly,
+			typeof(Android.Support.V7.Widget.Toolbar).Assembly,
+			typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
+			typeof(Android.Support.V4.View.ViewPager).Assembly,
+			typeof(Cirrious.MvvmCross.Droid.Support.RecyclerView.MvxRecyclerView).Assembly
+		};
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {

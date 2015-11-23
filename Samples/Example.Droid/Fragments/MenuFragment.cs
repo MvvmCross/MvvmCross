@@ -12,7 +12,7 @@ using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
-    [MvxOwnedViewModelFragment]
+    [MvxFragment]
     [Register("example.droid.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -36,9 +36,7 @@ namespace Example.Droid.Fragments
         {
             item.SetCheckable(true);
             item.SetChecked(true);
-            if (previousMenuItem != null) {
-                previousMenuItem.SetChecked(false);
-            }
+            previousMenuItem?.SetChecked(false);
             previousMenuItem = item;
 
             Navigate (item.ItemId);

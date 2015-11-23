@@ -59,10 +59,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
         {
             if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
-                throw new InvalidOperationException(string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
+                throw new InvalidOperationException(
+                    $"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
 
             if (!typeof(IMvxViewModel).IsAssignableFrom(viewModelType))
-                throw new InvalidOperationException(string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
+                throw new InvalidOperationException(
+                    $"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
 
             return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
         }

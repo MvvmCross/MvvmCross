@@ -9,10 +9,10 @@ using Android.OS;
 using Android.Views;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Support.AppCompat;
+using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.Views
+namespace Cirrious.MvvmCross.Droid.Support.AppCompat
 {
     public abstract class MvxSplashScreenCompatActivity
         : MvxAppCompatActivity

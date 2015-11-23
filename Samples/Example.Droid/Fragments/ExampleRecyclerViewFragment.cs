@@ -15,7 +15,7 @@ using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments
 {
-    [MvxOwnedViewModelFragment]
+    [MvxFragment]
     [Register("example.droid.fragments.ExampleRecyclerViewFragment")]
     public class ExampleRecyclerViewFragment : BaseFragment<ExampleRecyclerViewModel>
     {
@@ -37,7 +37,7 @@ namespace Example.Droid.Fragments
                 (sender, args) => {
                     if (ViewModel.SelectedItem != null)
                         Toast.MakeText(Activity,
-                            string.Format("Selected: {0}", ViewModel.SelectedItem.Title),
+                            $"Selected: {ViewModel.SelectedItem.Title}",
                             ToastLength.Short).Show();
                 });
 
@@ -56,10 +56,6 @@ namespace Example.Droid.Fragments
             _itemSelectedToken = null;
         }
 
-        protected override int FragmentId {
-            get {
-                return Resource.Layout.fragment_example_recyclerview;
-            }
-        }
+        protected override int FragmentId => Resource.Layout.fragment_example_recyclerview;
     }
 }

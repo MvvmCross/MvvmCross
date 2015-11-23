@@ -158,13 +158,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
             if (_currentTab != newTab)
             {
                 var ft = this.SupportFragmentManager.BeginTransaction();
-                OnTabFragmentChanging(tag, ft); 
-                if (_currentTab != null)
+                OnTabFragmentChanging(tag, ft);
+                if (_currentTab?.CachedFragment != null)
                 {
-                    if (_currentTab.CachedFragment != null)
-                    {
-                        ft.Detach(_currentTab.CachedFragment);
-                    }
+                    ft.Detach(_currentTab.CachedFragment);
                 }
                 if (newTab != null)
                 {
