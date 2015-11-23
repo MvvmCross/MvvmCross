@@ -8,7 +8,7 @@ using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using Example.Droid.Activities;
 
-namespace Example.Droid
+namespace Example.Droid.Fragments
 {
     public abstract class BaseFragment : MvxFragment
     {
