@@ -1,8 +1,8 @@
+using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Cirrious.MvvmCross.ViewModels;
 
 namespace Example.Core.ViewModels
 {
@@ -48,7 +48,8 @@ namespace Example.Core.ViewModels
         {
             get
             {
-                return new MvxCommand<ListItem>(item => {
+                return new MvxCommand<ListItem>(item =>
+                {
                     SelectedItem = item;
                 });
             }
@@ -94,7 +95,7 @@ namespace Example.Core.ViewModels
             var newItemCount = rand.Next(3);
 
             for (var i = 0; i < newItemCount; i++)
-                Items.Add(new ListItem { Title = "title " + randStr(4)});
+                Items.Add(new ListItem { Title = "title " + randStr(4) });
         }
     }
 }
