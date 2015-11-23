@@ -18,7 +18,7 @@ namespace Example.Core.ViewModels
                 new ListItem { Title = "title two" },
                 new ListItem { Title = "title three" },
                 new ListItem { Title = "title four" },
-                new ListItem { Title = "title five" },
+                new ListItem { Title = "title five" }
             };
         }
 

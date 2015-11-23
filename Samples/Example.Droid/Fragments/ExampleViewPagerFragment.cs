@@ -38,10 +38,6 @@ namespace Example.Droid.Fragments
             return view;
         }
 
-        protected override int FragmentId {
-            get {
-                return Resource.Layout.fragment_example_viewpager;
-            }
-        }
+        protected override int FragmentId => Resource.Layout.fragment_example_viewpager;
     }
 }

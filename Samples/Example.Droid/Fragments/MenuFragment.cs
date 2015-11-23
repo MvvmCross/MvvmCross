@@ -36,9 +36,7 @@ namespace Example.Droid.Fragments
         {
             item.SetCheckable(true);
             item.SetChecked(true);
-            if (previousMenuItem != null) {
-                previousMenuItem.SetChecked(false);
-            }
+            previousMenuItem?.SetChecked(false);
             previousMenuItem = item;
 
             Navigate (item.ItemId);

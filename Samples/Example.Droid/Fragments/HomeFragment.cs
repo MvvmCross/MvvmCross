@@ -14,10 +14,6 @@ namespace Example.Droid.Fragments
     [Register("example.droid.fragments.HomeFragment")]
     public class HomeFragment : BaseFragment<HomeViewModel>
     {
-        protected override int FragmentId {
-            get {
-                return Resource.Layout.fragment_home;
-            }
-        }
+        protected override int FragmentId => Resource.Layout.fragment_home;
     }
 }

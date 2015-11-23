@@ -32,10 +32,7 @@ namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
         private IDisposable _subscription;
         private int _itemTemplateId;
 
-        protected IMvxAndroidBindingContext BindingContext
-        {
-            get { return _bindingContext; }
-        }
+        protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
@@ -146,10 +143,7 @@ namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
             ((IMvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
         }
 
-        public override int ItemCount
-        {
-            get { return _itemsSource.Count(); }
-        }
+        public override int ItemCount => _itemsSource.Count();
 
         public virtual object GetItem(int position)
         {
@@ -233,10 +227,7 @@ namespace Cirrious.MvvmCross.Droid.Support.RecyclerView
         private void RaiseDataSetChanged()
         {
             var handler = DataSetChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            handler?.Invoke(this, EventArgs.Empty);
         }
         
         private void NotifyAndRaiseDataSetChanged()

@@ -8,10 +8,6 @@ namespace Example.Droid.Fragments
     [Register("example.droid.fragments.SettingsFragment")]
     public class SettingsFragment : BaseFragment<SettingsViewModel>
     {
-        protected override int FragmentId {
-            get {
-                return Resource.Layout.fragment_settings;
-            }
-        }
+        protected override int FragmentId => Resource.Layout.fragment_settings;
     }
 }
