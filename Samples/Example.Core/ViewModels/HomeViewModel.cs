@@ -5,7 +5,8 @@ namespace Example.Core.ViewModels
     public class HomeViewModel
         : MvxViewModel
     {
-        public HomeViewModel() {
+        public HomeViewModel()
+        {
         }
     }
 }

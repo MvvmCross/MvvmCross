@@ -7,7 +7,8 @@ namespace Example.Core.ViewModels
     {
         public RecyclerViewModel Recycler { get; private set; }
 
-        public ExampleViewPagerViewModel() {
+        public ExampleViewPagerViewModel()
+        {
             Recycler = new RecyclerViewModel();
         }
     }

@@ -25,10 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
         private readonly Context _context;
         public IEnumerable<FragmentInfo> Fragments { get; private set; }
 
-        public override int Count
-        {
-            get { return Fragments.Count(); }
-        }
+        public override int Count => Fragments.Count();
 
         protected MvxFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)

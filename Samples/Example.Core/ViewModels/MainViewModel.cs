@@ -5,8 +5,8 @@ namespace Example.Core.ViewModels
     public class MainViewModel
         : MvxViewModel
     {
-        public MainViewModel() {
-            
+        public MainViewModel()
+        {
         }
 
         public void ShowMenuAndFirstDetail()

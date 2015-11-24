@@ -60,8 +60,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public override void OnDrawerClosed(View drawerView)
         {
             var handler = DrawerClosed;
-            if (handler != null)
-                handler(this, new ActionBarDrawerEventArgs(drawerView));
+            handler?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
 
             base.OnDrawerClosed(drawerView);
         }
@@ -69,8 +68,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public override void OnDrawerOpened(View drawerView)
         {
             var handler = DrawerOpened;
-            if (handler != null)
-                handler(this, new ActionBarDrawerEventArgs(drawerView));
+            handler?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
 
             base.OnDrawerOpened(drawerView);
         }
@@ -78,8 +76,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public override void OnDrawerSlide(View drawerView, float slideOffset)
         {
             var handler = DrawerSlide;
-            if (handler != null)
-                handler(this, new ActionBarDrawerSlideEventArgs(drawerView, slideOffset));
+            handler?.Invoke(this, new ActionBarDrawerSlideEventArgs(drawerView, slideOffset));
 
             base.OnDrawerSlide(drawerView, slideOffset);
         }
@@ -87,8 +84,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
         public override void OnDrawerStateChanged(int newState)
         {
             var handler = DrawerStateChanged;
-            if (handler != null)
-                handler(this, new ActionBarDrawerStateChangeEventArgs(newState));
+            handler?.Invoke(this, new ActionBarDrawerStateChangeEventArgs(newState));
 
             base.OnDrawerStateChanged(newState);
         }
