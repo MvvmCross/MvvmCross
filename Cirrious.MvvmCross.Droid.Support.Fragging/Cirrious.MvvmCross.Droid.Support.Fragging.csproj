@@ -75,6 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyConfiguration.cs" />
+    <Compile Include="Caching\FragmentCacheConfiguration.cs" />
+    <Compile Include="Caching\IMvxCachedFragmentInfoFactory.cs" />
+    <Compile Include="Caching\MvxCachedFragmentInfoFactory.cs" />
+    <Compile Include="Caching\IFragmentCacheableActivity.cs" />
+    <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
     <Compile Include="Fragments\IMvxFragmentView.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />

@@ -48,9 +48,6 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             base.OnPostCreate(savedInstanceState);
             if (savedInstanceState == null) return;
 
-            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-            RestoreFragmentsCache();
-
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
@@ -58,6 +55,10 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
                     "Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
                 return;
             }
+
+            FragmentCacheConfiguration.RestoreCacheConfiguration(savedInstanceState, serializer);
+            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
+            RestoreFragmentsCache();
 
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
@@ -158,6 +159,8 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             IMvxJsonConverter ser;
             if (FragmentCacheConfiguration.HasAnyFragmentsRegisteredToCache && Mvx.TryResolve(out ser))
             {
+                FragmentCacheConfiguration.SaveFragmentCacheConfigurationState(outState, ser);
+
                 var typesForKeys = CreateFragmentTypesDictionary(outState);
                 if (typesForKeys == null)
                     return;
@@ -275,7 +278,7 @@ namespace Cirrious.MvvmCross.Droid.Support.AppCompat
             return GetFragmentInfoByTag(tagFragment);
 	    }
 
-	    protected virtual string GetTagFromFragment(Fragment fragment)
+	    protected string GetTagFromFragment(Fragment fragment)
 	    {
 	        var mvxFragmentView = fragment as IMvxFragmentView;
 

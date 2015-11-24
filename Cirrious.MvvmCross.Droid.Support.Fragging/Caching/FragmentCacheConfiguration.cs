@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.OS;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 
@@ -8,12 +10,16 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Caching
 {
     public class FragmentCacheConfiguration
     {
-        private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup;
+        private Dictionary<string, IMvxCachedFragmentInfo> _lookup;
+        private const string SavedFragmentCacheConfiguration = "__mvxSavedFragmentCacheConfiguration";
+        private const string SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState =
+            "__mvxSavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState";
 
         public FragmentCacheConfiguration()
         {
-             _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
+            _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
             EnableOnFragmentPoppedCallback = true; //Default
+            MvxCachedFragmentInfoFactory = new MvxCachedFragmentInfoFactory();
         }
 
         /// <summary>
@@ -21,42 +27,36 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Caching
         /// </summary>
         public bool EnableOnFragmentPoppedCallback { get; set; }
 
+        public virtual MvxCachedFragmentInfoFactory MvxCachedFragmentInfoFactory { get; }
+
         /// <summary>
         ///     Register a Fragment to be included in Caching process, this should usually be done in OnCreate
         /// </summary>
         /// <typeparam name="TFragment">Fragment Type</typeparam>
         /// <typeparam name="TViewModel">ViewModel Type</typeparam>
         /// <param name="tag">The tag of the Fragment, it is used to register it with the FragmentManager</param>
-        internal void RegisterFragmentToCache<TFragment, TViewModel>(string tag)
+        /// <returns>True if fragment is registered, false if tag is already registered</returns>
+        internal bool RegisterFragmentToCache<TFragment, TViewModel>(string tag)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
             if (_lookup.ContainsKey(tag))
-                return;
+                return false;
 
-            var fragInfo = CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
+            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
 
             _lookup.Add(tag, fragInfo);
+            return true;
         }
 
-        internal void RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType)
+        internal bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType)
         {
             if (_lookup.ContainsKey(tag))
-                return;
+                return false;
 
-            var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
+            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType);
             _lookup.Add(tag, fragInfo);
-        }
-
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
-        {
-            if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
-                throw new InvalidOperationException(string.Format("Registered fragment isn't an IMvxFragmentView. Received: {0}", fragmentType));
-
-            if (!typeof(IMvxViewModel).IsAssignableFrom(viewModelType))
-                throw new InvalidOperationException(string.Format("Registered view model isn't an IMvxViewModel. Received: {0}", viewModelType));
-
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
+            return true;
         }
 
         public bool HasAnyFragmentsRegisteredToCache => _lookup.Any();
@@ -65,5 +65,46 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Caching
         {
             return _lookup.TryGetValue(registeredFragmentTag, out cachedFragmentInfo);
         }
+
+        public virtual void RestoreCacheConfiguration(Bundle savedInstanceState, IMvxJsonConverter serializer)
+        {
+            if (savedInstanceState == null)
+                return;
+
+            EnableOnFragmentPoppedCallback =
+                savedInstanceState.GetBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState, true);
+
+            // restore what fragments we have registered - and informations about registered fragments.
+            var jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
+
+            // there are no registered fragments at this moment, skip restore
+            if (string.IsNullOrEmpty(jsonSerializedMvxCachedFragmentInfosToRestore))
+                return;
+
+            var serializedMvxCachedFragmentInfos = serializer.DeserializeObject<Dictionary<string, SerializableMvxCachedFragmentInfo>>(jsonSerializedMvxCachedFragmentInfosToRestore);
+            _lookup = serializedMvxCachedFragmentInfos.ToDictionary(x => x.Key,
+                (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value));
+        }
+
+
+
+        public virtual void SaveFragmentCacheConfigurationState(Bundle outState, IMvxJsonConverter serializer)
+        {
+            if (outState == null)
+                return;
+
+            var mvxCachedFragmentInfosToSave = CreateMvxCachedFragmentInfosToSave();
+            string serializedMvxCachedFragmentInfosToSave = serializer.SerializeObject(mvxCachedFragmentInfosToSave);
+
+            outState.PutString(SavedFragmentCacheConfiguration, serializedMvxCachedFragmentInfosToSave);
+            outState.PutBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState, EnableOnFragmentPoppedCallback);
+        }
+
+        private Dictionary<string, SerializableMvxCachedFragmentInfo> CreateMvxCachedFragmentInfosToSave()
+        {
+            return _lookup.ToDictionary(x => x.Key, (keyValuePair) => MvxCachedFragmentInfoFactory.GetSerializableFragmentInfo(keyValuePair.Value));
+        }
+
+      
     }
 }

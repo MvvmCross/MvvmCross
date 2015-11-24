@@ -47,10 +47,6 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         {
             base.OnPostCreate(savedInstanceState);
             if (savedInstanceState == null) return;
-
-            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-            RestoreFragmentsCache();
-
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
@@ -59,6 +55,9 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
                 return;
             }
 
+            FragmentCacheConfiguration.RestoreCacheConfiguration(savedInstanceState, serializer);
+            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
+            RestoreFragmentsCache();
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
 
@@ -156,8 +155,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
         {
             base.OnSaveInstanceState(outState);
             IMvxJsonConverter ser;
+
             if (FragmentCacheConfiguration.HasAnyFragmentsRegisteredToCache && Mvx.TryResolve(out ser))
             {
+                FragmentCacheConfiguration.SaveFragmentCacheConfigurationState(outState, ser);
                 var typesForKeys = CreateFragmentTypesDictionary(outState);
                 if (typesForKeys == null)
                     return;
@@ -271,13 +272,17 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging
 
             var lastFragment = currentCacheableFragments.Last();
             var tagFragment = GetTagFromFragment(lastFragment);
-
+            
             return GetFragmentInfoByTag(tagFragment);
         }
 
-        protected virtual string GetTagFromFragment(Fragment fragment)
+        protected string GetTagFromFragment(Fragment fragment)
         {
-            return fragment.Tag;
+            var mvxFragmentView = fragment as IMvxFragmentView;
+
+            // ReSharper disable once PossibleNullReferenceException
+            // Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
+            return mvxFragmentView.UniqueImmutableCacheTag;
         }
 
         /// <summary>
