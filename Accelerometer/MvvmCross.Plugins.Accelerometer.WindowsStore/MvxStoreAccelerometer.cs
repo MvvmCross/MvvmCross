@@ -70,10 +70,7 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsStore
             return reading;
         }
 
-        public bool Started
-        {
-            get { return _accelerometer != null; }
-        }
+        public bool Started => _accelerometer != null;
 
         public MvxAccelerometerReading LastReading
         {

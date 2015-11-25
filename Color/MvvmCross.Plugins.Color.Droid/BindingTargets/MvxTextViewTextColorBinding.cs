@@ -20,9 +20,7 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
         protected override void SetValueImpl(object target, object value)
         {
             var textView = (TextView)target;
-            if (textView == null)
-                return;
-            textView.SetTextColor((Android.Graphics.Color) value);
+            textView?.SetTextColor((Android.Graphics.Color) value);
         }
     }
 }

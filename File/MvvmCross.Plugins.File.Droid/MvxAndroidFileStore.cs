@@ -21,17 +21,7 @@ namespace MvvmCross.Plugins.File.Droid
     {
         private Context _context;
 
-        private Context Context
-        {
-            get
-            {
-                if (_context == null)
-                {
-                    _context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
-                }
-                return _context;
-            }
-        }
+        private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
         protected override string FullPath(string path)
         {

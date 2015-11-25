@@ -99,8 +99,7 @@ namespace MvvmCross.Plugins.DownloadCache
         private void FireImageChanged(T image)
         {
             var handler = ImageChanged;
-            if (handler != null)
-                handler(this, new MvxValueEventArgs<T>(image));
+            handler?.Invoke(this, new MvxValueEventArgs<T>(image));
         }
 
         private async Task RequestImageAsync(string imageSource)

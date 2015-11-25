@@ -42,10 +42,7 @@ namespace MvvmCross.Plugins.Network.Rest
         public Dictionary<string, object> Options { get; set; }
         public ICredentials Credentials { get; set; }
 
-        public virtual bool NeedsRequestStream
-        {
-            get { return false; }
-        }
+        public virtual bool NeedsRequestStream => false;
 
         public virtual void ProcessRequestStream(Stream stream)
         {

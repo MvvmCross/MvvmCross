@@ -35,10 +35,7 @@ namespace MvvmCross.Plugins.FieldBinding
             NotifyChange.Value = safeValue;
         }
 
-        public override Type SourceType
-        {
-            get { return NotifyChange.ValueType; }
-        }
+        public override Type SourceType => NotifyChange.ValueType;
 
         public override object GetValue()
         {

@@ -31,10 +31,7 @@ namespace MvvmCross.Plugins.FieldBinding
             FieldInfo.SetValue(Source, safeValue);
         }
 
-        public override Type SourceType
-        {
-            get { return FieldInfo.FieldType; }
-        }
+        public override Type SourceType => FieldInfo.FieldType;
 
         public override object GetValue()
         {

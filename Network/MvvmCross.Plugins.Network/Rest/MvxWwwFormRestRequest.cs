@@ -15,10 +15,7 @@ namespace MvvmCross.Plugins.Network.Rest
     public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest
     {
-        public override bool NeedsRequestStream
-        {
-            get { return Parameters != null && Parameters.Count > 0; }
-        }
+        public override bool NeedsRequestStream => Parameters != null && Parameters.Count > 0;
 
         public Dictionary<string, object> Parameters { get; set; }
 

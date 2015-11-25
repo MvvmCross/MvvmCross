@@ -41,10 +41,7 @@ namespace MvvmCross.Plugins.Accelerometer.Touch
 
             var handler = ReadingAvailable;
 
-            if (handler == null)
-                return;
-
-            handler(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
+            handler?.Invoke(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
         }
 
         public void Stop()
@@ -69,10 +66,7 @@ namespace MvvmCross.Plugins.Accelerometer.Touch
             return reading;
         }
 
-        public bool Started
-        {
-            get { return _initialized; }
-        }
+        public bool Started => _initialized;
 
         public MvxAccelerometerReading LastReading { get; private set; }
 

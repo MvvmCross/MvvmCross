@@ -23,8 +23,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         public void Abort()
         {
-            if (_webRequest != null)
-                _webRequest.Abort();
+            _webRequest?.Abort();
         }
     }
 }

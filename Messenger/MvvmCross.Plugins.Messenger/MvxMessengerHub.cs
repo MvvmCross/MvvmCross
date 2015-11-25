@@ -47,7 +47,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             if (deliveryAction == null)
             {
-                throw new ArgumentNullException("deliveryAction");
+                throw new ArgumentNullException(nameof(deliveryAction));
             }
 
             BaseSubscription subscription;
@@ -63,7 +63,7 @@ namespace MvvmCross.Plugins.Messenger
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException("reference", "reference type unexpected " + reference);
+                    throw new ArgumentOutOfRangeException(nameof(reference), "reference type unexpected " + reference);
             }
 
             lock (this)
@@ -123,7 +123,7 @@ namespace MvvmCross.Plugins.Messenger
             Type messageType,
             Dictionary<Guid, BaseSubscription> messageSubscriptions)
         {
-            var newCount = messageSubscriptions == null ? 0 : messageSubscriptions.Count;
+            var newCount = messageSubscriptions?.Count ?? 0;
             Publish(new MvxSubscriberChangeMessage(this, messageType, newCount));
         }
 
@@ -214,7 +214,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             if (message == null)
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             List<BaseSubscription> toNotify = null;

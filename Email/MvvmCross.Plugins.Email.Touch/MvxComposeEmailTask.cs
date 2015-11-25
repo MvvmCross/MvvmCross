@@ -58,7 +58,7 @@ namespace MvvmCross.Plugins.Email.Touch
             if (cc != null)
                 _mail.SetCcRecipients(cc.ToArray());
 
-            _mail.SetToRecipients(to == null ? new[] { string.Empty } : to.ToArray());
+            _mail.SetToRecipients(to?.ToArray() ?? new[] { string.Empty });
             if (attachments != null)
             {
                 foreach (var a in attachments)
@@ -71,22 +71,9 @@ namespace MvvmCross.Plugins.Email.Touch
             _modalHost.PresentModalViewController(_mail, true);
         }
 
-        public bool CanSendEmail
-        {
-            get
-            {
-                return MFMailComposeViewController.CanSendMail;
-            }
-        }
+        public bool CanSendEmail => MFMailComposeViewController.CanSendMail;
 
-        public bool CanSendAttachments
-        {
-            get
-            {
-                // if we can send email, then we can send attachments
-                return CanSendEmail;
-            }
-        }
+        public bool CanSendAttachments => CanSendEmail;
 
         private void HandleMailFinished(object sender, MFComposeResultEventArgs e)
         {

@@ -26,7 +26,7 @@ namespace MvvmCross.Plugins.Messenger
         protected MvxMessage(object sender)
         {
             if (sender == null)
-                throw new ArgumentNullException("sender");
+                throw new ArgumentNullException(nameof(sender));
 
             Sender = sender;
         }

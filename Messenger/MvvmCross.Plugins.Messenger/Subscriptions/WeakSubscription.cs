@@ -15,10 +15,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
     {
         private readonly WeakReference _weakReference;
 
-        public override bool IsAlive
-        {
-            get { return _weakReference.IsAlive; }
-        }
+        public override bool IsAlive => _weakReference.IsAlive;
 
         protected override bool TypedInvoke(TMessage message)
         {

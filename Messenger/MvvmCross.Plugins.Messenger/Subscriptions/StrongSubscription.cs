@@ -15,10 +15,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
     {
         private readonly Action<TMessage> _action;
 
-        public override bool IsAlive
-        {
-            get { return true; }
-        }
+        public override bool IsAlive => true;
 
         protected override bool TypedInvoke(TMessage message)
         {

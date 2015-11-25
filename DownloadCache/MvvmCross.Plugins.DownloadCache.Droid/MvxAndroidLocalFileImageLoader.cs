@@ -53,15 +53,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
         private IMvxAndroidGlobals _androidGlobals;
 
-        protected IMvxAndroidGlobals AndroidGlobals
-        {
-            get
-            {
-                if (_androidGlobals == null)
-                    _androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>();
-                return _androidGlobals;
-            }
-        }
+        protected IMvxAndroidGlobals AndroidGlobals => _androidGlobals ?? (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
 
         private async Task<Bitmap> LoadResourceBitmapAsync(string resourcePath)
         {
@@ -174,7 +166,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
             public CacheKey(string localPath, int maxWidth, int maxHeight)
             {
-                if (localPath == null) throw new ArgumentNullException("localPath");
+                if (localPath == null) throw new ArgumentNullException(nameof(localPath));
                 LocalPath = localPath;
                 MaxWidth = maxWidth;
                 MaxHeight = maxHeight;

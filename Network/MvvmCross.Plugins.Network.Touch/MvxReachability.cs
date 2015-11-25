@@ -67,8 +67,7 @@ namespace MvvmCross.Plugins.Network.Touch
         private static void OnChange(NetworkReachabilityFlags flags)
         {
             var h = ReachabilityChanged;
-            if (h != null)
-                h(null, EventArgs.Empty);
+            h?.Invoke(null, EventArgs.Empty);
         }
 
         //

@@ -30,16 +30,6 @@ namespace MvvmCross.Plugins.ResourceLoader.Droid
 
         #endregion
 
-        private AssetManager Assets
-        {
-            get
-            {
-                if (_assets == null)
-                {
-                    _assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets;
-                }
-                return _assets;
-            }
-        }
+        private AssetManager Assets => _assets ?? (_assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
     }
 }

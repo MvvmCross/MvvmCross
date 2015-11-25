@@ -93,20 +93,8 @@ namespace MvvmCross.Plugins.Email.Droid
             StartActivityForResult(0, Intent.CreateChooser(emailIntent, dialogTitle ?? string.Empty));
         }
 
-        public bool CanSendEmail
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanSendEmail => true;
 
-        public bool CanSendAttachments
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanSendAttachments => true;
     }
 }

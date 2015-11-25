@@ -14,10 +14,7 @@ namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
         public string title { get; set; }
         public List<string> authors { get; set; }
 
-        public string authorSummary
-        {
-            get { return authors == null ? "-" : string.Join(", ", authors); }
-        }
+        public string authorSummary => authors == null ? "-" : string.Join(", ", authors);
 
         public string publisher { get; set; }
         public string publishedDate { get; set; }

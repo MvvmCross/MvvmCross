@@ -15,24 +15,15 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
     public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding
     {
-        protected View TextView
-        {
-            get { return (View) base.Target; }
-        }
+        protected View TextView => (View) base.Target;
 
         protected MvxViewColorBinding(View view)
             : base(view)
         {
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.OneWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType
-        {
-            get { return typeof (Android.Graphics.Color); }
-        }
+        public override Type TargetType => typeof (Android.Graphics.Color);
     }
 }

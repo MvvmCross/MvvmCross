@@ -27,10 +27,7 @@ namespace MvvmCross.Plugins.Network.Rest
             Body = body;
         }
 
-        public override bool NeedsRequestStream
-        {
-            get { return !string.IsNullOrEmpty(Body); }
-        }
+        public override bool NeedsRequestStream => !string.IsNullOrEmpty(Body);
 
         public string Body { get; set; }
 

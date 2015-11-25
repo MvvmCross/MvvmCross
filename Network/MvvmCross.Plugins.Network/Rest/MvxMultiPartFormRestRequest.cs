@@ -139,10 +139,7 @@ namespace MvvmCross.Plugins.Network.Rest
         public List<IStreamForUpload> StreamsToSend { get; set; }
         public Dictionary<string, string> FieldsToSend { get; set; }
 
-        public override bool NeedsRequestStream
-        {
-            get { return StreamsToSend != null && StreamsToSend.Count > 0; }
-        }
+        public override bool NeedsRequestStream => StreamsToSend != null && StreamsToSend.Count > 0;
 
         public override void ProcessRequestStream(Stream stream)
         {

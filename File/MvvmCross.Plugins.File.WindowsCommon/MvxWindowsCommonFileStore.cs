@@ -41,10 +41,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             {
                 StorageFile storageFile;
 
-                if (Exists(path))
-                    storageFile = StorageFileFromRelativePath(path);
-                else
-                    storageFile = CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
+                storageFile = Exists(path) ? StorageFileFromRelativePath(path) : CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
 
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 return streamWithContentType.AsStream();

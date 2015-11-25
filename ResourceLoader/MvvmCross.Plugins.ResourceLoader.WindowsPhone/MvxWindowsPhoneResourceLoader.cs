@@ -17,10 +17,7 @@ namespace MvvmCross.Plugins.ResourceLoader.WindowsPhone
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             var streamInfo = System.Windows.Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
-            if (streamInfo != null)
-                streamAction(streamInfo.Stream);
-            else
-                streamAction(null);
+            streamAction(streamInfo?.Stream);
         }
 
         #endregion Implementation of IMvxResourceLoader

@@ -16,10 +16,7 @@ namespace MvvmCross.Plugins.Network.Rest
         : MvxTextBasedRestRequest
         where T : class
     {
-        public override bool NeedsRequestStream
-        {
-            get { return Body != null; }
-        }
+        public override bool NeedsRequestStream => Body != null;
 
         public override void ProcessRequestStream(Stream stream)
         {

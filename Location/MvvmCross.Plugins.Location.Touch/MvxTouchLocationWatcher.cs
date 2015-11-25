@@ -43,14 +43,7 @@ namespace MvvmCross.Plugins.Location.Touch
                 _locationManager = new CLLocationManager();
                 _locationManager.Delegate = new LocationDelegate(this);
 
-                if (options.MovementThresholdInM > 0)
-                {
-                    _locationManager.DistanceFilter = options.MovementThresholdInM;
-                }
-                else
-                {
-                    _locationManager.DistanceFilter = CLLocationDistance.FilterNone;
-                }
+                _locationManager.DistanceFilter = options.MovementThresholdInM > 0 ? options.MovementThresholdInM : CLLocationDistance.FilterNone;
                 _locationManager.DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
                 if (options.TimeBetweenUpdates > TimeSpan.Zero)
                 {

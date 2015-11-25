@@ -16,18 +16,15 @@ namespace MvvmCross.Plugins.FieldBinding
     {
         private readonly FieldInfo _fieldInfo;
 
-        protected FieldInfo FieldInfo
-        {
-            get { return _fieldInfo; }
-        }
+        protected FieldInfo FieldInfo => _fieldInfo;
 
         protected MvxFieldSourceBinding(object source, FieldInfo fieldInfo)
             : base(source)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             if (fieldInfo == null)
-                throw new ArgumentNullException("fieldInfo");
+                throw new ArgumentNullException(nameof(fieldInfo));
             _fieldInfo = fieldInfo;
         }
     }

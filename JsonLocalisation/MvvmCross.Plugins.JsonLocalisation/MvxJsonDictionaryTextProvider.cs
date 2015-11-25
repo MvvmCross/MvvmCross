@@ -20,10 +20,7 @@ namespace MvvmCross.Plugins.JsonLocalisation
         {
         }
 
-        private IMvxJsonConverter JsonConvert
-        {
-            get { return Mvx.Resolve<IMvxJsonConverter>(); }
-        }
+        private IMvxJsonConverter JsonConvert => Mvx.Resolve<IMvxJsonConverter>();
 
         #region IMvxJsonDictionaryTextLoader Members
 

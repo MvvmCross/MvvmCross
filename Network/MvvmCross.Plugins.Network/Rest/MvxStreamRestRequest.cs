@@ -27,10 +27,7 @@ namespace MvvmCross.Plugins.Network.Rest
             BodyHandler = streamAction;
         }
 
-        public override bool NeedsRequestStream
-        {
-            get { return BodyHandler != null; }
-        }
+        public override bool NeedsRequestStream => BodyHandler != null;
 
         public Action<Stream> BodyHandler { get; set; }
 

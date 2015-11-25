@@ -23,9 +23,9 @@ namespace MvvmCross.Plugins.MethodBinding
             : base(source)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             if (methodInfo == null)
-                throw new ArgumentNullException("methodInfo");
+                throw new ArgumentNullException(nameof(methodInfo));
             _methodInfo = methodInfo;
         }
 
@@ -34,10 +34,7 @@ namespace MvvmCross.Plugins.MethodBinding
             // not possible
         }
 
-        public override Type SourceType
-        {
-            get { return typeof(ICommand); }
-        }
+        public override Type SourceType => typeof(ICommand);
 
         public override object GetValue()
         {

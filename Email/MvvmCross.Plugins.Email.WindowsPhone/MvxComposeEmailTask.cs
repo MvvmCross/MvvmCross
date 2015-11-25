@@ -45,20 +45,8 @@ namespace MvvmCross.Plugins.Email.WindowsPhone
             DoWithInvalidOperationProtection(task.Show);
         }
 
-        public bool CanSendEmail
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanSendEmail => true;
 
-        public bool CanSendAttachments
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool CanSendAttachments => false;
     }
 }

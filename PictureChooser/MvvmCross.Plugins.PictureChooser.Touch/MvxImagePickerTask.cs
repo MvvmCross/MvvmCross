@@ -104,14 +104,12 @@ namespace MvvmCross.Plugins.PictureChooser.Touch
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
 
                     var imageStream = new MemoryStream(byteArray, false);
-                    if (_pictureAvailable != null)
-                        _pictureAvailable(imageStream);
+                    _pictureAvailable?.Invoke(imageStream);
                 }
             }
             else
             {
-                if (_assumeCancelled != null)
-                    _assumeCancelled();
+                _assumeCancelled?.Invoke();
             }
 
             _picker.DismissViewController(true, () => { });
@@ -134,8 +132,7 @@ namespace MvvmCross.Plugins.PictureChooser.Touch
         private void Picker_Canceled(object sender, EventArgs e)
         {
             ClearCurrentlyActive();
-            if (_assumeCancelled != null)
-                _assumeCancelled();
+            _assumeCancelled?.Invoke();
             _picker.DismissViewController(true, () => { });
             _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();

@@ -27,10 +27,7 @@ namespace MvvmCross.Plugins.DownloadCache.Touch
             {
                 UIImage uiImage;
 
-                if (localPath.StartsWith(ResourcePrefix))
-                    uiImage = LoadResourceImage(localPath.Substring(ResourcePrefix.Length));
-                else
-                    uiImage = LoadUiImage(localPath);
+                uiImage = localPath.StartsWith(ResourcePrefix) ? LoadResourceImage(localPath.Substring(ResourcePrefix.Length)) : LoadUiImage(localPath);
 
                 var result = (MvxImage<UIImage>)new MvxTouchImage(uiImage);
 

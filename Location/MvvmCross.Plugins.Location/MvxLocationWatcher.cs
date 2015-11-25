@@ -72,8 +72,7 @@ namespace MvvmCross.Plugins.Location
         {
             LastSeenLocation = location;
             var callback = _locationCallback;
-            if (callback != null)
-                callback(location);
+            callback?.Invoke(location);
         }
 
         protected void SendError(MvxLocationErrorCode code)
@@ -84,8 +83,7 @@ namespace MvvmCross.Plugins.Location
         protected void SendError(MvxLocationError error)
         {
             var errorCallback = _errorCallback;
-            if (errorCallback != null)
-                errorCallback(error);
+            errorCallback?.Invoke(error);
         }
     }
 }

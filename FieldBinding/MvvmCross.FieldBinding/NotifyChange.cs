@@ -51,8 +51,7 @@ namespace MvvmCross.Plugins.FieldBinding
                 {
                     var handler = Changed;
 
-                    if (handler != null)
-                        handler(this, EventArgs.Empty);
+                    handler?.Invoke(this, EventArgs.Empty);
                 });
 
             if (ShouldAlwaysRaiseChangedOnUserInterfaceThread())

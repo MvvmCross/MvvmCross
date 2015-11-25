@@ -58,15 +58,10 @@ namespace MvvmCross.Plugins.ResourceLoader
             string specificRootLocation;
             if (!_rootLocations.TryGetValue(MakeLookupKey(namespaceKey, typeKey), out specificRootLocation))
             {
-                specificRootLocation = string.Format("{0}/{1}/{2}",
-                                                     _generalRootLocation,
-                                                     namespaceKey,
-                                                     typeKey);
+                specificRootLocation = $"{_generalRootLocation}/{namespaceKey}/{typeKey}";
             }
 
-            var streamLocation = string.Format("{0}/{1}",
-                                               specificRootLocation,
-                                               entryKey);
+            var streamLocation = $"{specificRootLocation}/{entryKey}";
             return streamLocation;
         }
 

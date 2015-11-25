@@ -50,10 +50,7 @@ namespace MvvmCross.Plugins.FieldBinding
             }
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
@@ -62,10 +59,7 @@ namespace MvvmCross.Plugins.FieldBinding
 
         public override void SetValue(object value)
         {
-            if (_currentChildBinding == null)
-                return;
-
-            _currentChildBinding.SetValue(value);
+            _currentChildBinding?.SetValue(value);
         }
 
         public override Type SourceType

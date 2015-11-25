@@ -88,15 +88,13 @@ namespace MvvmCross.Plugins.DownloadCache
         private void FireDownloadFailed(Exception exception)
         {
             var handler = DownloadFailed;
-            if (handler != null)
-                handler(this, new MvxValueEventArgs<Exception>(exception));
+            handler?.Invoke(this, new MvxValueEventArgs<Exception>(exception));
         }
 
         private void FireDownloadComplete()
         {
             var handler = DownloadComplete;
-            if (handler != null)
-                handler(this, new MvxFileDownloadedEventArgs(Url, DownloadPath));
+            handler?.Invoke(this, new MvxFileDownloadedEventArgs(Url, DownloadPath));
         }
     }
 }

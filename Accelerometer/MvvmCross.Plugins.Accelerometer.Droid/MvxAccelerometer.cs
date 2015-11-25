@@ -76,10 +76,7 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
 
             var handler = ReadingAvailable;
 
-            if (handler == null)
-                return;
-
-            handler(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
+            handler?.Invoke(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
         }
 
         private static MvxAccelerometerReading ToReading(double x, double y, double z)
@@ -93,10 +90,7 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
             return reading;
         }
 
-        public bool Started
-        {
-            get { return _accelerometer != null; }
-        }
+        public bool Started => _accelerometer != null;
 
         public MvxAccelerometerReading LastReading { get; private set; }
 

@@ -44,11 +44,7 @@ namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
 
             // we sneak in an extra parameter here - our unique name
             var navigationUri2 = new Uri(
-                string.Format("{0}{1}{2}={3}",
-                              navigationUri,
-                              navigationUri.ToString().Contains("?") ? "&" : "?",
-                              UniqueIdParameterName,
-                              uniqueName),
+                $"{navigationUri}{(navigationUri.ToString().Contains("?") ? "&" : "?")}{UniqueIdParameterName}={uniqueName}",
                 UriKind.Relative);
             ShellTile.Create(navigationUri2, liveTileData);
 

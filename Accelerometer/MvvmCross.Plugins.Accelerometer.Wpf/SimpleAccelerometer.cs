@@ -67,10 +67,8 @@ namespace MvvmCross.Plugins.Accelerometer.Wpf
         }
         */
 
-        public bool Started
-        {
-            get { return true; /* _accelerometer != null; */ }
-        }
+        /* _accelerometer != null; */
+        public bool Started => true;
 
         public MvxAccelerometerReading LastReading
         {

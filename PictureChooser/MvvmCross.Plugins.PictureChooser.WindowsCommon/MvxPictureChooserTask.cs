@@ -109,7 +109,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 
         private static async Task<StorageFile> StorageFileFromCamera()
         {
-            var filename = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            var filename = $"{Guid.NewGuid().ToString()}.jpg";
 
             var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                    filename, CreationCollisionOption.ReplaceExisting);

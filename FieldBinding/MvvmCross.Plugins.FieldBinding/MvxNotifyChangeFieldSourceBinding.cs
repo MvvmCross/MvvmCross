@@ -21,18 +21,15 @@ namespace MvvmCross.Plugins.FieldBinding
         private readonly INotifyChange _notifyChange;
         private IDisposable _subscription;
 
-        protected INotifyChange NotifyChange
-        {
-            get { return _notifyChange; }
-        }
+        protected INotifyChange NotifyChange => _notifyChange;
 
         protected MvxNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange)
             : base(source)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             if (notifyChange == null)
-                throw new ArgumentNullException("notifyChange");
+                throw new ArgumentNullException(nameof(notifyChange));
             _notifyChange = notifyChange;
             _subscription = NotifyChangeEventInfo.WeakSubscribe(_notifyChange, NotifyChangeOnChanged);
         }
