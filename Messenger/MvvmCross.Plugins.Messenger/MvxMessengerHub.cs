@@ -2,17 +2,16 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Cirrious.CrossCore.Platform;
 using MvvmCross.Plugins.Messenger.Subscriptions;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Messenger
 {
@@ -48,7 +47,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             if (deliveryAction == null)
             {
-                throw new ArgumentNullException("deliveryAction");
+                throw new ArgumentNullException(nameof(deliveryAction));
             }
 
             BaseSubscription subscription;
@@ -58,11 +57,13 @@ namespace MvvmCross.Plugins.Messenger
                 case MvxReference.Strong:
                     subscription = new StrongSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
+
                 case MvxReference.Weak:
                     subscription = new WeakSubscription<TMessage>(actionRunner, deliveryAction, tag);
                     break;
+
                 default:
-                    throw new ArgumentOutOfRangeException("reference", "reference type unexpected " + reference);
+                    throw new ArgumentOutOfRangeException(nameof(reference), "reference type unexpected " + reference);
             }
 
             lock (this)
@@ -96,7 +97,7 @@ namespace MvvmCross.Plugins.Messenger
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
 
-                if (_subscriptions.TryGetValue(typeof (TMessage), out messageSubscriptions))
+                if (_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
                 {
                     if (messageSubscriptions.ContainsKey(subscriptionGuid))
                     {
@@ -115,14 +116,14 @@ namespace MvvmCross.Plugins.Messenger
             Dictionary<Guid, BaseSubscription> messageSubscriptions)
             where TMessage : MvxMessage
         {
-            PublishSubscriberChangeMessage(typeof (TMessage), messageSubscriptions);
+            PublishSubscriberChangeMessage(typeof(TMessage), messageSubscriptions);
         }
 
         protected virtual void PublishSubscriberChangeMessage(
             Type messageType,
-            Dictionary<Guid, BaseSubscription> messageSubscriptions)        
+            Dictionary<Guid, BaseSubscription> messageSubscriptions)
         {
-            var newCount = messageSubscriptions == null ? 0 : messageSubscriptions.Count;
+            var newCount = messageSubscriptions?.Count ?? 0;
             Publish(new MvxSubscriberChangeMessage(this, messageType, newCount));
         }
 
@@ -194,14 +195,14 @@ namespace MvvmCross.Plugins.Messenger
 
         public void Publish<TMessage>(TMessage message) where TMessage : MvxMessage
         {
-            if (typeof (TMessage) == typeof (MvxMessage))
+            if (typeof(TMessage) == typeof(MvxMessage))
             {
                 MvxTrace.Warning(
                                "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
                 Publish(message, message.GetType());
                 return;
             }
-            Publish(message, typeof (TMessage));
+            Publish(message, typeof(TMessage));
         }
 
         public void Publish(MvxMessage message)
@@ -213,7 +214,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             if (message == null)
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             List<BaseSubscription> toNotify = null;
@@ -262,7 +263,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             lock (this)
             {
-                SchedulePurge(_subscriptions.Keys.ToArray());                
+                SchedulePurge(_subscriptions.Keys.ToArray());
             }
         }
 

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -57,12 +57,12 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
                         var resizedStream =
                             await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
 
-                        _pictureAvailable(resizedStream.AsStreamForRead());
+                        _pictureAvailable?.Invoke(resizedStream.AsStreamForRead());
                     });
             }
             else
             {
-                _assumeCancelled();
+                _assumeCancelled?.Invoke();
             }
         }
 
@@ -75,7 +75,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
                                     await
                                         Process(StorageFileFromCamera, maxPixelDimension, percentQuality, pictureAvailable,
                                                 assumeCancelled);
-                                }); 
+                                });
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -109,7 +109,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 
         private static async Task<StorageFile> StorageFileFromCamera()
         {
-            var filename = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            var filename = $"{Guid.NewGuid().ToString()}.jpg";
 
             var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                    filename, CreationCollisionOption.ReplaceExisting);
@@ -117,7 +117,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             var encoding = ImageEncodingProperties.CreateJpeg();
 
             var capture = new MediaCapture();
-            
+
             await capture.InitializeAsync();
 
             await capture.CapturePhotoToStorageFileAsync(encoding, file);
@@ -159,7 +159,6 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             return ras;
         }
 
-
         private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
         {
             var decoder = await BitmapDecoder.CreateAsync(input);
@@ -187,6 +186,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
         }
 
         /*
+
         #region IMvxCombinedPictureChooserTask Members
 
         public void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
@@ -197,7 +197,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
+        #endregion IMvxCombinedPictureChooserTask Members
 
         #region IMvxPictureChooserTask Members
 
@@ -216,12 +216,11 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
+        #endregion IMvxPictureChooserTask Members
 
         public void ChoosePictureCommon(ChooserBase<PhotoResult> chooser, int maxPixelDimension, int percentQuality,
                                         Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            
             var dialog = new CameraCaptureUI();
             // Define the aspect ratio for the photo
             var aspectRatio = new Size(16, 9);

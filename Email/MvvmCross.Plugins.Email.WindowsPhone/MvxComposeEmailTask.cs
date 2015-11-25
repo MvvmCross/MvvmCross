@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MvvmCross.Plugins.Email.WindowsPhone
 {
@@ -21,8 +21,8 @@ namespace MvvmCross.Plugins.Email.WindowsPhone
             bool isHtml = false, string dialogTitle = null)
         {
             ComposeEmail(
-                new[] {to},
-                new[] {cc},
+                new[] { to },
+                new[] { cc },
                 subject,
                 body,
                 isHtml);
@@ -36,7 +36,7 @@ namespace MvvmCross.Plugins.Email.WindowsPhone
             if (attachments != null && attachments.Any())
                 throw new MvxException("Don't know how to send attachments in WP");
 
-            var task = new EmailComposeTask {Subject = subject, Body = body};
+            var task = new EmailComposeTask { Subject = subject, Body = body };
             if (to != null)
                 task.To = string.Join(";", to);
             if (cc != null)
@@ -45,20 +45,8 @@ namespace MvvmCross.Plugins.Email.WindowsPhone
             DoWithInvalidOperationProtection(task.Show);
         }
 
-        public bool CanSendEmail
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanSendEmail => true;
 
-        public bool CanSendAttachments
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool CanSendAttachments => false;
     }
 }

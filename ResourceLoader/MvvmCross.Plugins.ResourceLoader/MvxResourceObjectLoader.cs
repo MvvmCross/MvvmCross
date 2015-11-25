@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
+using System.Collections.Generic;
+using System.IO;
 
 namespace MvvmCross.Plugins.ResourceLoader
 {
@@ -16,7 +16,7 @@ namespace MvvmCross.Plugins.ResourceLoader
         : MvxResourceProvider
           , IMvxResourceObjectLoaderConfiguration<TResource>
           , IMvxResourceObjectLoader<TResource>
-          
+
         where TResource : IMvxResourceObject
     {
         private readonly Dictionary<string, string> _rootLocations = new Dictionary<string, string>();
@@ -34,7 +34,7 @@ namespace MvvmCross.Plugins.ResourceLoader
             _rootLocations[MakeLookupKey(namespaceKey, typeKey)] = location;
         }
 
-        #endregion
+        #endregion Implementation of IMvxSoundEffectLoaderConfiguration
 
         #region Implementation of IMvxResourceObjectLoader<TResource>
 
@@ -58,18 +58,13 @@ namespace MvvmCross.Plugins.ResourceLoader
             string specificRootLocation;
             if (!_rootLocations.TryGetValue(MakeLookupKey(namespaceKey, typeKey), out specificRootLocation))
             {
-                specificRootLocation = string.Format("{0}/{1}/{2}",
-                                                     _generalRootLocation,
-                                                     namespaceKey,
-                                                     typeKey);
+                specificRootLocation = $"{_generalRootLocation}/{namespaceKey}/{typeKey}";
             }
 
-            var streamLocation = string.Format("{0}/{1}",
-                                               specificRootLocation,
-                                               entryKey);
+            var streamLocation = $"{specificRootLocation}/{entryKey}";
             return streamLocation;
         }
 
-        #endregion
+        #endregion Implementation of IMvxResourceObjectLoader<TResource>
     }
 }

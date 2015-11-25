@@ -124,9 +124,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta4\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta5\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmCross.HotTuna.Binding.4.0.0-beta5\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Binding.dll</HintPath>

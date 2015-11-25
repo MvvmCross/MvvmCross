@@ -2,23 +2,23 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.WindowsPhone.Platform;
 using Cirrious.MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Shell;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
 {
     public class MvxWindowsPhoneLiveTileBookmarkLibrarian
         : IMvxBookmarkLibrarian
-          
+
     {
         private const string UniqueIdParameterName = "_id";
 
@@ -44,11 +44,7 @@ namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
 
             // we sneak in an extra parameter here - our unique name
             var navigationUri2 = new Uri(
-                string.Format("{0}{1}{2}={3}",
-                              navigationUri,
-                              navigationUri.ToString().Contains("?") ? "&" : "?",
-                              UniqueIdParameterName,
-                              uniqueName),
+                $"{navigationUri}{(navigationUri.ToString().Contains("?") ? "&" : "?")}{UniqueIdParameterName}={uniqueName}",
                 UriKind.Relative);
             ShellTile.Create(navigationUri2, liveTileData);
 
@@ -64,7 +60,7 @@ namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
             return true;
         }
 
-        #endregion
+        #endregion IMvxBookmarkLibrarian Members
 
         private static ShellTile FindShellTileFor(string uniqueName)
         {
@@ -81,14 +77,14 @@ namespace MvvmCross.Plugins.Bookmarks.WindowsPhone
         private static StandardTileData ToTileData(MvxBookmarkMetadata metadata)
         {
             var liveTileData = new StandardTileData
-                {
-                    BackgroundImage = metadata.BackgroundImageUri,
-                    Title = metadata.Title,
-                    BackTitle = metadata.BackTitle,
-                    BackContent = metadata.BackContent,
-                    BackBackgroundImage = metadata.BackBackgroundImageUri,
-                    Count = metadata.Count
-                };
+            {
+                BackgroundImage = metadata.BackgroundImageUri,
+                Title = metadata.Title,
+                BackTitle = metadata.BackTitle,
+                BackContent = metadata.BackContent,
+                BackBackgroundImage = metadata.BackBackgroundImageUri,
+                Count = metadata.Count
+            };
             return liveTileData;
         }
     }

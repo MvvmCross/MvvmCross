@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Globalization;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace MvvmCross.Plugins.Color.Test
 {
@@ -25,7 +25,7 @@ namespace MvvmCross.Plugins.Color.Test
                     "000",
                     "123",
                     "A23",
-                    "02A",
+                    "02A"
                 };
             var results = new uint[]
                 {
@@ -34,7 +34,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0xFF000000,
                     0xFF112233,
                     0xFFAA2233,
-                    0xFF0022AA,
+                    0xFF0022AA
                 };
 
             RunTests(tests, results);
@@ -45,19 +45,19 @@ namespace MvvmCross.Plugins.Color.Test
             for (var i = 0; i < tests.Length; i++)
             {
                 var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert(tests[i], typeof (object), null, CultureInfo.CurrentUICulture);
+                var actual = converter.Convert(tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
                 var wrapped = actual as WrappedColor;
                 Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint) wrapped.Color.ARGB);
+                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
             }
 
             for (var i = 0; i < tests.Length; i++)
             {
                 var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert("#" + tests[i], typeof (object), null, CultureInfo.CurrentUICulture);
+                var actual = converter.Convert("#" + tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
                 var wrapped = actual as WrappedColor;
                 Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint) wrapped.Color.ARGB);
+                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
             }
         }
 
@@ -73,7 +73,7 @@ namespace MvvmCross.Plugins.Color.Test
                     "000000",
                     "123456",
                     "A23BCD",
-                    "02A040",
+                    "02A040"
                 };
             var results = new uint[]
                 {
@@ -82,7 +82,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0xFF000000,
                     0xFF123456,
                     0xFFA23BCD,
-                    0xFF02A040,
+                    0xFF02A040
                 };
 
             RunTests(tests, results);
@@ -101,7 +101,7 @@ namespace MvvmCross.Plugins.Color.Test
                     "00000000",
                     "12345678",
                     "A23BCDA9",
-                    "02A04012",
+                    "02A04012"
                 };
             var results = new uint[]
                 {
@@ -110,7 +110,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0x00000000,
                     0x78123456,
                     0xA9A23BCD,
-                    0x1202A040,
+                    0x1202A040
                 };
 
             RunTests(tests, results);

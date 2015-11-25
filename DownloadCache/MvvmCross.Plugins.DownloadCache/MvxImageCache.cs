@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -39,7 +39,8 @@ namespace MvvmCross.Plugins.DownloadCache
         {
             var tcs = new TaskCompletionSource<T>();
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 Entry entry;
                 if (_entriesByHttpUrl.TryGetValue(url, out entry))
                 {
@@ -50,18 +51,21 @@ namespace MvvmCross.Plugins.DownloadCache
 
                 try
                 {
-                    _fileDownloadCache.RequestLocalFilePath(url, 
-                        async s => {
+                    _fileDownloadCache.RequestLocalFilePath(url,
+                        async s =>
+                        {
                             var image = await Parse(s).ConfigureAwait(false);
-                            lock(_entriesByHttpUrl)
+                            lock (_entriesByHttpUrl)
                             {
-    							if(!_entriesByHttpUrl.ContainsKey(url)) {
-                                	_entriesByHttpUrl.Add(url, new Entry(url, image));
-    							}
+                                if (!_entriesByHttpUrl.ContainsKey(url))
+                                {
+                                    _entriesByHttpUrl.Add(url, new Entry(url, image));
+                                }
                             }
                             tcs.TrySetResult(image.RawImage);
                         },
-                        exception => {
+                        exception =>
+                        {
                             tcs.TrySetException(exception);
                         });
                 }
@@ -74,7 +78,7 @@ namespace MvvmCross.Plugins.DownloadCache
             return tcs.Task;
         }
 
-        #endregion
+        #endregion IMvxImageCache<T> Members
 
         private void ReduceSizeIfNecessary()
         {
@@ -100,8 +104,8 @@ namespace MvvmCross.Plugins.DownloadCache
                     currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                     currentCountFiles--;
 
-                    if (_disposeOnRemove) 
-                        toRemove.Image.RawImage.DisposeIfDisposable(); 
+                    if (_disposeOnRemove)
+                        toRemove.Image.RawImage.DisposeIfDisposable();
 
                     _entriesByHttpUrl.Remove(toRemove.Url);
                 }
@@ -138,6 +142,6 @@ namespace MvvmCross.Plugins.DownloadCache
             public DateTime WhenLastAccessedUtc { get; set; }
         }
 
-        #endregion
+        #endregion Nested type: Entry
     }
 }

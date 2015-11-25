@@ -33,17 +33,7 @@ namespace MvvmCross.Plugins.Location.Droid
             _locationListener = new MvxLocationListener(this);
         }
 
-        private Context Context
-        {
-            get
-            {
-                if (_context == null)
-                {
-                    _context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
-                }
-                return _context;
-            }
-        }
+        private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
         protected override void PlatformSpecificStart(MvxLocationOptions options)
         {
@@ -59,7 +49,7 @@ namespace MvvmCross.Plugins.Location.Droid
             }
             var criteria = new Criteria()
                 {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse,
+                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
                 };
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
@@ -192,7 +182,7 @@ namespace MvvmCross.Plugins.Location.Droid
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("status");
+                    throw new ArgumentOutOfRangeException(nameof(status));
             }
         }
 

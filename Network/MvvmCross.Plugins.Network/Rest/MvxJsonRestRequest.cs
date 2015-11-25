@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -16,14 +16,11 @@ namespace MvvmCross.Plugins.Network.Rest
         : MvxTextBasedRestRequest
         where T : class
     {
-        public override bool NeedsRequestStream
-        {
-            get { return Body != null; }
-        }
+        public override bool NeedsRequestStream => Body != null;
 
         public override void ProcessRequestStream(Stream stream)
         {
-            var json = JsonConverterProvider().SerializeObject(Body);
+            var json = JsonConverterProvider?.Invoke().SerializeObject(Body);
             WriteTextToStream(stream, json);
         }
 

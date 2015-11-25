@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading.Tasks;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -27,7 +27,7 @@ namespace MvvmCross.Plugins.DownloadCache
             HttpImageShown
         }
 
-        #endregion
+        #endregion ImageState enum
 
         private ImageState _currentImageState = ImageState.DefaultShown;
 
@@ -84,7 +84,7 @@ namespace MvvmCross.Plugins.DownloadCache
             GC.SuppressFinalize(this);
         }
 
-        #endregion
+        #endregion IDisposable Members
 
         ~MvxDynamicImageHelper()
         {
@@ -92,14 +92,14 @@ namespace MvvmCross.Plugins.DownloadCache
         }
 
         public event EventHandler<MvxValueEventArgs<T>> ImageChanged;
+
         public int MaxWidth { get; set; }
         public int MaxHeight { get; set; }
 
         private void FireImageChanged(T image)
         {
             var handler = ImageChanged;
-            if (handler != null)
-                handler(this, new MvxValueEventArgs<T>(image));
+            handler?.Invoke(this, new MvxValueEventArgs<T>(image));
         }
 
         private async Task RequestImageAsync(string imageSource)
@@ -158,6 +158,7 @@ namespace MvvmCross.Plugins.DownloadCache
             {
                 case ImageState.ErrorShown:
                     return ShowErrorImage();
+
                 default:
                     return ShowDefaultImage();
             }
@@ -191,7 +192,8 @@ namespace MvvmCross.Plugins.DownloadCache
 
                     FireImageChanged(localImage);
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     Mvx.Error(ex.Message);
                 }
             }
@@ -222,6 +224,8 @@ namespace MvvmCross.Plugins.DownloadCache
             FireImageChanged(image);
         }
 
-        protected virtual void Dispose(bool isDisposing) { }
+        protected virtual void Dispose(bool isDisposing)
+        {
+        }
     }
 }

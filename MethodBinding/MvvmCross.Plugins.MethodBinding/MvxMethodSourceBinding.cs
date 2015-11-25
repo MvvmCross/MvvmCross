@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    public class MvxMethodSourceBinding 
+    public class MvxMethodSourceBinding
         : MvxSourceBinding
           , ICommand
     {
@@ -23,9 +23,9 @@ namespace MvvmCross.Plugins.MethodBinding
             : base(source)
         {
             if (source == null)
-                throw  new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             if (methodInfo == null)
-                throw new ArgumentNullException("methodInfo");
+                throw new ArgumentNullException(nameof(methodInfo));
             _methodInfo = methodInfo;
         }
 
@@ -34,10 +34,7 @@ namespace MvvmCross.Plugins.MethodBinding
             // not possible
         }
 
-        public override Type SourceType
-        {
-            get { return typeof(ICommand); }
-        }
+        public override Type SourceType => typeof(ICommand);
 
         public override object GetValue()
         {

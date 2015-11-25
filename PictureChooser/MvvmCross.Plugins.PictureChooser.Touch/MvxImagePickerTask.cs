@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using CoreGraphics;
 using Foundation;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.Touch
@@ -92,11 +92,11 @@ namespace MvvmCross.Plugins.PictureChooser.Touch
             ClearCurrentlyActive();
             if (image != null)
             {
-                if (_maxPixelDimension > 0 &&(image.Size.Height > _maxPixelDimension || image.Size.Width > _maxPixelDimension))
-				{
-					// resize the image
-					image = image.ImageToFitSize(new CGSize(_maxPixelDimension, _maxPixelDimension));
-				}
+                if (_maxPixelDimension > 0 && (image.Size.Height > _maxPixelDimension || image.Size.Width > _maxPixelDimension))
+                {
+                    // resize the image
+                    image = image.ImageToFitSize(new CGSize(_maxPixelDimension, _maxPixelDimension));
+                }
 
                 using (NSData data = image.AsJPEG(_percentQuality / 100f))
                 {
@@ -104,14 +104,12 @@ namespace MvvmCross.Plugins.PictureChooser.Touch
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
 
                     var imageStream = new MemoryStream(byteArray, false);
-                    if (_pictureAvailable != null)
-                        _pictureAvailable(imageStream);
+                    _pictureAvailable?.Invoke(imageStream);
                 }
             }
             else
             {
-                if (_assumeCancelled != null)
-                    _assumeCancelled();
+                _assumeCancelled?.Invoke();
             }
 
             _picker.DismissViewController(true, () => { });
@@ -119,24 +117,22 @@ namespace MvvmCross.Plugins.PictureChooser.Touch
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
-        void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
+        private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
             var image = e.EditedImage ?? e.OriginalImage;
             HandleImagePick(image);
-
         }
 
-        void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
+        private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
             var image = e.Image;
             HandleImagePick(image);
         }
 
-        void Picker_Canceled(object sender, EventArgs e)
+        private void Picker_Canceled(object sender, EventArgs e)
         {
             ClearCurrentlyActive();
-            if (_assumeCancelled != null)
-                _assumeCancelled();
+            _assumeCancelled?.Invoke();
             _picker.DismissViewController(true, () => { });
             _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();

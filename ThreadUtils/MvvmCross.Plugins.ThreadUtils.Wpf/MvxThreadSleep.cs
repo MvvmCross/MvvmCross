@@ -2,12 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Platform;
-using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.ThreadUtils.Wpf
 {
@@ -20,6 +18,6 @@ namespace MvvmCross.Plugins.ThreadUtils.Wpf
             System.Threading.Thread.Sleep(t);
         }
 
-        #endregion
+        #endregion Implementation of IMvxThreadSleep
     }
 }

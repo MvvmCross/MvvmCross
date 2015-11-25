@@ -24,22 +24,12 @@ namespace MvvmCross.Plugins.ResourceLoader.Droid
         {
             using (var input = Assets.Open(resourcePath))
             {
-                streamAction(input);
+                streamAction?.Invoke(input);
             }
         }
 
         #endregion
 
-        private AssetManager Assets
-        {
-            get
-            {
-                if (_assets == null)
-                {
-                    _assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets;
-                }
-                return _assets;
-            }
-        }
+        private AssetManager Assets => _assets ?? (_assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
     }
 }

@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.Devices.Geolocation;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.WindowsCommon.Platform;
+using System;
+using Windows.Devices.Geolocation;
 
 namespace MvvmCross.Plugins.Location.WindowsCommon
 {
@@ -27,11 +27,11 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
             _geolocator = new Geolocator
-                {
-                    DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? PositionAccuracy.High : PositionAccuracy.Default,
-                    MovementThreshold = options.MovementThresholdInM,
-                    ReportInterval = (uint)options.TimeBetweenUpdates.TotalMilliseconds
-                };
+            {
+                DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? PositionAccuracy.High : PositionAccuracy.Default,
+                MovementThreshold = options.MovementThresholdInM,
+                ReportInterval = (uint)options.TimeBetweenUpdates.TotalMilliseconds
+            };
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
@@ -81,20 +81,23 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
             {
                 case PositionStatus.Ready:
                 case PositionStatus.Initializing:
-					Permission = MvxLocationPermission.Granted;
+                    Permission = MvxLocationPermission.Granted;
                     break;
+
                 case PositionStatus.NoData:
-					// TODO Permission = Unknown? Denied?
+                    // TODO Permission = Unknown? Denied?
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
+
                 case PositionStatus.Disabled:
                 case PositionStatus.NotInitialized:
                 case PositionStatus.NotAvailable:
-					Permission = MvxLocationPermission.Denied;
+                    Permission = MvxLocationPermission.Denied;
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

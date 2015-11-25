@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -17,12 +17,9 @@ namespace MvvmCross.Plugins.ResourceLoader.WindowsPhone
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             var streamInfo = System.Windows.Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
-            if (streamInfo != null)
-                streamAction(streamInfo.Stream);
-            else
-                streamAction(null);
+            streamAction?.Invoke(streamInfo?.Stream);
         }
 
-        #endregion
+        #endregion Implementation of IMvxResourceLoader
     }
 }

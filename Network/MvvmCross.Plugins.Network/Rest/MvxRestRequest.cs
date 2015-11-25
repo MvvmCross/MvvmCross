@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -42,10 +42,7 @@ namespace MvvmCross.Plugins.Network.Rest
         public Dictionary<string, object> Options { get; set; }
         public ICredentials Credentials { get; set; }
 
-        public virtual bool NeedsRequestStream
-        {
-            get { return false; }
-        }
+        public virtual bool NeedsRequestStream => false;
 
         public virtual void ProcessRequestStream(Stream stream)
         {

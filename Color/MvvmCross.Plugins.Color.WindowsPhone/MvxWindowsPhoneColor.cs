@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Media;
 using Cirrious.CrossCore.UI;
+using System.Windows.Media;
 
 namespace MvvmCross.Plugins.Color.WindowsPhone
 {
@@ -20,8 +20,8 @@ namespace MvvmCross.Plugins.Color.WindowsPhone
 
         public static System.Windows.Media.Color ToNativeColor(MvxColor mvxColor)
         {
-            return System.Windows.Media.Color.FromArgb((byte) mvxColor.A, (byte) mvxColor.R, (byte) mvxColor.G,
-                                                       (byte) mvxColor.B);
+            return System.Windows.Media.Color.FromArgb((byte)mvxColor.A, (byte)mvxColor.R, (byte)mvxColor.G,
+                                                       (byte)mvxColor.B);
         }
     }
 }

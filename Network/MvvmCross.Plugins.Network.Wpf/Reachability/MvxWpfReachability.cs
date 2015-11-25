@@ -1,5 +1,5 @@
-﻿using System.Net.NetworkInformation;
-using MvvmCross.Plugins.Network.Reachability;
+﻿using MvvmCross.Plugins.Network.Reachability;
+using System.Net.NetworkInformation;
 
 namespace MvvmCross.Plugins.Network.Wpf.Reachability
 {

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -27,16 +27,13 @@ namespace MvvmCross.Plugins.Network.Rest
             BodyHandler = streamAction;
         }
 
-        public override bool NeedsRequestStream
-        {
-            get { return BodyHandler != null; }
-        }
+        public override bool NeedsRequestStream => BodyHandler != null;
 
         public Action<Stream> BodyHandler { get; set; }
 
         public override void ProcessRequestStream(Stream stream)
         {
-            BodyHandler(stream);
+            BodyHandler?.Invoke(stream);
         }
     }
 }

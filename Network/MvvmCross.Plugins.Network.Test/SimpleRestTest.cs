@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Net;
+using Cirrious.MvvmCross.Test.Core;
 using MvvmCross.Plugins.Network.Rest;
 using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
-using Cirrious.MvvmCross.Test.Core;
 using NUnit.Framework;
+using System;
+using System.Net;
 
 namespace MvvmCross.Plugins.Network.Test
 {
@@ -33,9 +33,9 @@ namespace MvvmCross.Plugins.Network.Test
 
             var json = new MvvmCross.Plugins.Json.MvxJsonConverter();
             var client = new MvvmCross.Plugins.Network.Rest.MvxJsonRestClient
-                {
-                    JsonConverterProvider = () => json
-                };
+            {
+                JsonConverterProvider = () => json
+            };
             var request = new MvxRestRequest(url);
             MvxDecodedRestResponse<BookSearchResult> theResponse = null;
             Exception exception = null;

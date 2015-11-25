@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -15,10 +15,7 @@ namespace MvvmCross.Plugins.Network.Rest
     public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest
     {
-        public override bool NeedsRequestStream
-        {
-            get { return Parameters != null && Parameters.Count > 0; }
-        }
+        public override bool NeedsRequestStream => Parameters != null && Parameters.Count > 0;
 
         public Dictionary<string, object> Parameters { get; set; }
 

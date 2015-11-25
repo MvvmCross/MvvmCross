@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Platform;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.Json
 {
@@ -19,14 +19,14 @@ namespace MvvmCross.Plugins.Json
         static MvxJsonConverter()
         {
             Settings = new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                    Converters = new List<JsonConverter>
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                Converters = new List<JsonConverter>
                         {
-                            new MvxEnumJsonConverter(),
+                            new MvxEnumJsonConverter()
                         },
-                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                };
+                DateFormatHandling = DateFormatHandling.IsoDateFormat
+            };
         }
 
         public T DeserializeObject<T>(string inputText)

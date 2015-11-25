@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -36,12 +36,12 @@ namespace MvvmCross.Plugins.DownloadCache
             request.DownloadComplete += (sender, args) =>
             {
                 OnRequestFinished(request);
-                success();
+                success?.Invoke();
             };
             request.DownloadFailed += (sender, args) =>
             {
                 OnRequestFinished(request);
-                error(args.Value);
+                error?.Invoke(args.Value);
             };
 
             RunSyncOrAsyncWithLock(() =>
@@ -54,7 +54,7 @@ namespace MvvmCross.Plugins.DownloadCache
             });
         }
 
-        #endregion
+        #endregion IMvxHttpFileDownloader Members
 
         private void OnRequestFinished(MvxFileDownloadRequest request)
         {

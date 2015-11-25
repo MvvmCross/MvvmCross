@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Newtonsoft.Json;
 using System;
 using System.Globalization;
-using Newtonsoft.Json;
 
 namespace MvvmCross.Plugins.Json
 {
@@ -17,12 +17,12 @@ namespace MvvmCross.Plugins.Json
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof (DateTime);
+            return objectType == typeof(DateTime);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var text = ((DateTime) value).ToString(DateTimeFormat, CultureInfo.InvariantCulture);
+            var text = ((DateTime)value).ToString(DateTimeFormat, CultureInfo.InvariantCulture);
             //MvxTrace.Trace("About to write {0}", text);
             writer.WriteValue(text);
         }

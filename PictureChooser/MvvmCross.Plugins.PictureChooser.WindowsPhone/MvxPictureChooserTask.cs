@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.WindowsPhone.Tasks;
+using Microsoft.Phone.Tasks;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Cirrious.CrossCore.WindowsPhone.Tasks;
-using Microsoft.Phone.Tasks;
 
 namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
 {
@@ -22,11 +22,11 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
                                         Action assumeCancelled)
         {
             // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
-            var chooser = new PhotoChooserTask {ShowCamera = true};
+            var chooser = new PhotoChooserTask { ShowCamera = true };
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
+        #endregion IMvxCombinedPictureChooserTask Members
 
         #region IMvxPictureChooserTask Members
 
@@ -34,17 +34,16 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
                                              Action assumeCancelled)
         {
             // note - do not set PixelHeight = maxPixelDimension, PixelWidth = maxPixelDimension here - as that would create square cropping
-            var chooser = new PhotoChooserTask {ShowCamera = false};
+            var chooser = new PhotoChooserTask { ShowCamera = false };
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                 Action assumeCancelled)
         {
-            var chooser = new CameraCaptureTask {};
+            var chooser = new CameraCaptureTask { };
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
-
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
         {
@@ -64,7 +63,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhone
         {
         }
 
-        #endregion
+        #endregion IMvxPictureChooserTask Members
 
         public void ChoosePictureCommon(ChooserBase<PhotoResult> chooser, int maxPixelDimension, int percentQuality,
                                         Action<Stream> pictureAvailable, Action assumeCancelled)

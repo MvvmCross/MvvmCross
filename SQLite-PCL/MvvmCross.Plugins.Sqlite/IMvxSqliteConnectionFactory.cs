@@ -9,12 +9,15 @@ namespace MvvmCross.Plugins.Sqlite
         ISQLitePlatform CurrentPlattform { get; }
 
         SQLiteConnection GetConnection(string databaseName, bool appendPlatformPath = true);
+
         SQLiteConnection GetConnection(SqLiteConfig config, bool appendPlatformPath = true);
 
         SQLiteConnectionWithLock GetConnectionWithLock(string databaseName, bool appendPlatformPath = true);
+
         SQLiteConnectionWithLock GetConnectionWithLock(SqLiteConfig config, bool appendPlatformPath = true);
 
         SQLiteAsyncConnection GetAsyncConnection(string databaseName, bool appendPlatformPath = true);
+
         SQLiteAsyncConnection GetAsyncConnection(SqLiteConfig config, bool appendPlatformPath = true);
     }
 }

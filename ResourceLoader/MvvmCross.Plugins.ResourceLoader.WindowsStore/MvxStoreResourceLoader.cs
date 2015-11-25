@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.WindowsCommon.Platform;
 using System;
 using System.IO;
-using Cirrious.CrossCore.WindowsCommon.Platform;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Plugins.ResourceLoader.WindowsStore
@@ -21,7 +21,7 @@ namespace MvvmCross.Plugins.ResourceLoader.WindowsStore
             var file = Package.Current.InstalledLocation.GetFileAsync(resourcePath).Await();
             var streamWithContent = file.OpenReadAsync().Await();
             var stream = streamWithContent.AsStreamForRead();
-            streamAction(stream);
+            streamAction?.Invoke(stream);
         }
     }
 }

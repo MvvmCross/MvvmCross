@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
+using System;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -15,10 +15,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
     {
         private readonly WeakReference _weakReference;
 
-        public override bool IsAlive
-        {
-            get { return _weakReference.IsAlive; }
-        }
+        public override bool IsAlive => _weakReference.IsAlive;
 
         protected override bool TypedInvoke(TMessage message)
         {
@@ -29,7 +26,10 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            Call(() => action(message));
+            Call(() =>
+            {
+                action?.Invoke(message);
+            });
             return true;
         }
 

@@ -4,20 +4,23 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-//  
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using System;
 using Cirrious.CrossCore.Core;
+using System;
 
 namespace MvvmCross.Plugins.Accelerometer
 {
     public interface IMvxAccelerometer
     {
         void Start();
+
         void Stop();
+
         bool Started { get; }
         MvxAccelerometerReading LastReading { get; }
+
         event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
     }
 }

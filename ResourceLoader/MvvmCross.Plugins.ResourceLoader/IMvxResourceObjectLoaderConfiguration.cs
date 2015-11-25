@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 namespace MvvmCross.Plugins.ResourceLoader
@@ -11,6 +11,7 @@ namespace MvvmCross.Plugins.ResourceLoader
         where T : IMvxResourceObject
     {
         void SetRootLocation(string location);
+
         void SetRootLocation(string namespaceKey, string typeKey, string location);
     }
 }

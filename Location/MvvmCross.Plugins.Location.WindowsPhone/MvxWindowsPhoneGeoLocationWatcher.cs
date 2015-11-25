@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Device.Location;
-using Cirrious.CrossCore.Exceptions;
 
 namespace MvvmCross.Plugins.Location.WindowsPhone
 {
@@ -70,10 +70,12 @@ namespace MvvmCross.Plugins.Location.WindowsPhone
                                         : MvxLocationErrorCode.PositionUnavailable;
                     SendError(errorCode);
                     break;
+
                 case GeoPositionStatus.Initializing:
                 case GeoPositionStatus.Ready:
                     // not an error - so ignored
                     break;
+
                 default:
                     // other codes ignored
                     break;
@@ -82,7 +84,7 @@ namespace MvvmCross.Plugins.Location.WindowsPhone
 
         private static MvxGeoLocation CreateLocation(GeoCoordinate coordinate, DateTimeOffset timestamp)
         {
-            var position = new MvxGeoLocation {Timestamp = timestamp};
+            var position = new MvxGeoLocation { Timestamp = timestamp };
             var coords = position.Coordinates;
 
             coords.Altitude = coordinate.Altitude;
@@ -91,7 +93,7 @@ namespace MvvmCross.Plugins.Location.WindowsPhone
             coords.Speed = coordinate.Speed;
             coords.Accuracy = coordinate.HorizontalAccuracy;
             coords.AltitudeAccuracy = coordinate.VerticalAccuracy;
-		
+
 #warning Heading needed?
 
             return position;

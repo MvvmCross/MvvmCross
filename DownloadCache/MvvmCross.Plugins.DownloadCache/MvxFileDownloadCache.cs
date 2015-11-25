@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -26,6 +26,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         private IMvxTextSerializer _textConvert;
         private bool _textConvertTried;
+
         protected IMvxTextSerializer TextConvert
         {
             get
@@ -181,7 +182,7 @@ namespace MvvmCross.Plugins.DownloadCache
             return new Dictionary<string, Entry>();
         }
 
-        #endregion
+        #endregion Constructor helper methods
 
         #region Periodic Tasks
 
@@ -243,7 +244,7 @@ namespace MvvmCross.Plugins.DownloadCache
             {
                 List<Entry> toSave = _entriesByHttpUrl.Values.ToList();
                 _indexNeedsSaving = false;
-            
+
                 try
                 {
                     var textConvert = TextConvert;
@@ -262,7 +263,7 @@ namespace MvvmCross.Plugins.DownloadCache
             });
         }
 
-        #endregion
+        #endregion Periodic Tasks
 
         public void RequestLocalFilePath(string httpSource, Action<string> success, Action<Exception> error)
         {
@@ -401,13 +402,15 @@ namespace MvvmCross.Plugins.DownloadCache
                         Task.Run(() => tuple.Item1(tuple.Item2));
                         await Task.Delay(period);
                     }
-
                 }, Tuple.Create(callback, state), CancellationToken.None,
                     TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion,
                     TaskScheduler.Default);
             }
 
-            public new void Dispose() { base.Cancel(); }
+            public new void Dispose()
+            {
+                base.Cancel();
+            }
         }
     }
 }

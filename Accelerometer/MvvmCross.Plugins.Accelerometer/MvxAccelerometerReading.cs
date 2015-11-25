@@ -4,7 +4,7 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-//  
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 namespace MvvmCross.Plugins.Accelerometer
@@ -17,7 +17,7 @@ namespace MvvmCross.Plugins.Accelerometer
 
         public MvxAccelerometerReading Clone()
         {
-            return new MvxAccelerometerReading {X = X, Y = Y, Z = Z};
+            return new MvxAccelerometerReading { X = X, Y = Y, Z = Z };
         }
     }
 }

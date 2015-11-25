@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
+using System;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -15,14 +15,11 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
     {
         private readonly Action<TMessage> _action;
 
-        public override bool IsAlive
-        {
-            get { return true; }
-        }
+        public override bool IsAlive => true;
 
         protected override bool TypedInvoke(TMessage message)
         {
-            Call(() => _action(message));
+            Call(() => _action?.Invoke(message));
             return true;
         }
 

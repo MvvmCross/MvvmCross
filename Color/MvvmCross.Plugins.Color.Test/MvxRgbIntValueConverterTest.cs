@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Globalization;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace MvvmCross.Plugins.Color.Test
 {
@@ -37,7 +37,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0x123456,
                     0xA23BCD,
                     0x02A040,
-                    (int)0x7B02A040,
+                    (int)0x7B02A040
                 };
             var results = new uint[]
                 {
@@ -46,7 +46,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0xFF123456,
                     0xFFA23BCD,
                     0xFF02A040,
-                    0xFF02A040,
+                    0xFF02A040
                 };
 
             RunTests(tests, results);

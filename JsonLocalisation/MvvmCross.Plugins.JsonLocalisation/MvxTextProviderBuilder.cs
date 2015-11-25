@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Localization;
+using System;
+using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.JsonLocalisation
 {
@@ -23,7 +23,7 @@ namespace MvvmCross.Plugins.JsonLocalisation
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
             : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider())
-        {            
+        {
         }
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources, MvxJsonDictionaryTextProvider provider)
@@ -42,7 +42,7 @@ namespace MvvmCross.Plugins.JsonLocalisation
 
         protected abstract IDictionary<string, string> ResourceFiles { get; }
 
-        public IMvxTextProvider TextProvider { get { return _textProvider; } }
+        public IMvxTextProvider TextProvider => _textProvider;
 
         public void LoadResources(string whichLocalisationFolder)
         {
@@ -55,7 +55,7 @@ namespace MvvmCross.Plugins.JsonLocalisation
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Warning( "Language file could not be loaded for {0}.{1} - {2}",
+                    MvxTrace.Warning("Language file could not be loaded for {0}.{1} - {2}",
                                    whichLocalisationFolder, kvp.Key, exception.ToLongString());
                 }
             }
@@ -64,9 +64,9 @@ namespace MvvmCross.Plugins.JsonLocalisation
         protected virtual string GetResourceFilePath(string whichLocalisationFolder, string whichFile)
         {
             if (string.IsNullOrEmpty(whichLocalisationFolder))
-                return string.Format("{0}/{1}.json", _rootFolderForResources, whichFile);
+                return $"{_rootFolderForResources}/{whichFile}.json";
             else
-                return string.Format("{0}/{1}/{2}.json", _rootFolderForResources, whichLocalisationFolder, whichFile);
+                return $"{_rootFolderForResources}/{whichLocalisationFolder}/{whichFile}.json";
         }
     }
 }

@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -23,7 +23,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }
             catch (Exception exception)
             {
-                errorAction(exception);
+                errorAction?.Invoke(exception);
             }
         }
 
@@ -180,7 +180,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         protected virtual HttpWebRequest CreateHttpWebRequest(MvxRestRequest restRequest)
         {
-            return (HttpWebRequest) WebRequest.Create(restRequest.Uri);
+            return (HttpWebRequest)WebRequest.Create(restRequest.Uri);
         }
 
         protected virtual void SetPlatformSpecificProperties(MvxRestRequest restRequest, HttpWebRequest httpRequest)
@@ -197,17 +197,17 @@ namespace MvvmCross.Plugins.Network.Rest
             httpRequest.BeginGetResponse(result =>
                                          TryCatch(() =>
                                              {
-                                                 var response = (HttpWebResponse) httpRequest.EndGetResponse(result);
+                                                 var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
 
                                                  var code = response.StatusCode;
 
                                                  var restResponse = new MvxRestResponse
-                                                     {
-                                                         CookieCollection = response.Cookies,
-                                                         Tag = restRequest.Tag,
-                                                         StatusCode = code
-                                                     };
-                                                 successAction(restResponse);
+                                                 {
+                                                     CookieCollection = response.Cookies,
+                                                     Tag = restRequest.Tag,
+                                                     StatusCode = code
+                                                 };
+                                                 successAction?.Invoke(restResponse);
                                              }, errorAction)
                                          , null);
         }
@@ -232,7 +232,7 @@ namespace MvvmCross.Plugins.Network.Rest
                             Tag = restRequest.Tag,
                             StatusCode = code
                         };
-                        successAction(restResponse);
+                        successAction?.Invoke(restResponse);
                     }, errorAction)
                 , null);
         }
@@ -252,7 +252,7 @@ namespace MvvmCross.Plugins.Network.Rest
                                                           stream.Flush();
                                                       }
 
-                                                      continueAction();
+                                                      continueAction?.Invoke();
                                                   }, errorAction)
                                               , null);
         }

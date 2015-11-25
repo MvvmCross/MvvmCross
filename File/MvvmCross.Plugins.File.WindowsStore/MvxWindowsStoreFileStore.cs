@@ -2,19 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.WindowsCommon.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 using Windows.Storage;
-using Cirrious.CrossCore.WindowsCommon.Platform;
 
 namespace MvvmCross.Plugins.File.WindowsStore
 {
@@ -41,11 +40,8 @@ namespace MvvmCross.Plugins.File.WindowsStore
             try
             {
                 StorageFile storageFile;
-                
-                if (Exists(path))
-                    storageFile = StorageFileFromRelativePath(path);
-                else
-                    storageFile = CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
+
+                storageFile = Exists(path) ? StorageFileFromRelativePath(path) : CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
 
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 return streamWithContentType.AsStream();
@@ -169,10 +165,10 @@ namespace MvvmCross.Plugins.File.WindowsStore
 
         private static async Task<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
         {
-          if (string.IsNullOrEmpty(folderPath))
-            return rootFolder;
-          var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath)).ConfigureAwait(false);
-          return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
+            if (string.IsNullOrEmpty(folderPath))
+                return rootFolder;
+            var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath)).ConfigureAwait(false);
+            return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
         }
 
         public override IEnumerable<string> GetFilesIn(string folderPath)

@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Cirrious.CrossCore.Converters;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
@@ -50,10 +50,7 @@ namespace MvvmCross.Plugins.FieldBinding
             }
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
@@ -62,10 +59,7 @@ namespace MvvmCross.Plugins.FieldBinding
 
         public override void SetValue(object value)
         {
-            if (_currentChildBinding == null)
-                return;
-
-            _currentChildBinding.SetValue(value);
+            _currentChildBinding?.SetValue(value);
         }
 
         public override Type SourceType
@@ -73,7 +67,7 @@ namespace MvvmCross.Plugins.FieldBinding
             get
             {
                 if (_currentChildBinding == null)
-                    return typeof (object);
+                    return typeof(object);
 
                 return _currentChildBinding.SourceType;
             }

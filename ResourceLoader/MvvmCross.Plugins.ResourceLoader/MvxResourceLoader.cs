@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
+using System;
+using System.IO;
 
 namespace MvvmCross.Plugins.ResourceLoader
 {
@@ -33,12 +33,12 @@ namespace MvvmCross.Plugins.ResourceLoader
                     });
                 return text;
             }
-//#if !NETFX_CORE
-//            catch (ThreadAbortException)
-//            {
-//                throw;
-//            }
-//#endif 
+            //#if !NETFX_CORE
+            //            catch (ThreadAbortException)
+            //            {
+            //                throw;
+            //            }
+            //#endif
             catch (Exception ex)
             {
                 throw ex.MvxWrap("Cannot load resource {0}", resourcePath);
@@ -61,6 +61,6 @@ namespace MvvmCross.Plugins.ResourceLoader
             }
         }
 
-        #endregion
+        #endregion Implementation of IMvxResourceLoader
     }
 }

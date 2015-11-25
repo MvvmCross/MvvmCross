@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
+using System;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -15,6 +15,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
         public Guid Id { get; private set; }
         public string Tag { get; private set; }
         public abstract bool IsAlive { get; }
+
         public abstract bool Invoke(object message);
 
         private readonly IMvxActionRunner _actionRunner;

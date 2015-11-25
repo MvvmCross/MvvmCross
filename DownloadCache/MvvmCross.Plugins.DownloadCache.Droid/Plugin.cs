@@ -2,20 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.Graphics;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     public class Plugin
-        : IMvxConfigurablePlugin          
+        : IMvxConfigurablePlugin
     {
         private MvxDownloadCacheConfiguration _configuration;
 
@@ -29,6 +28,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         }
 
 #warning One day I would like to decouple this implementation from the FileStore plugin
+
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());

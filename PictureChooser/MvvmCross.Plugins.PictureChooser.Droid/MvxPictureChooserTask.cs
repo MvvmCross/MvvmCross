@@ -108,7 +108,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             switch ((MvxIntentRequestCode) result.RequestCode)
             {
                 case MvxIntentRequestCode.PickFromFile:
-                    uri = (result.Data == null) ? null : result.Data.Data;
+                    uri = result.Data?.Data;
                     break;
                 case MvxIntentRequestCode.PickFromCamera:
                     uri = _cachedUriLocation;
@@ -142,8 +142,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                     return;
                 }
 
-                if (uri == null
-                    || string.IsNullOrEmpty(uri.Path))
+                if (string.IsNullOrEmpty(uri?.Path))
                 {
                     MvxTrace.Trace("Empty uri or file path received for MvxIntentResult");
                     return;

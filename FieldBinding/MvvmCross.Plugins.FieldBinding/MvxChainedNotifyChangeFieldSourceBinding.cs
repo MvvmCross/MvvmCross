@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
 using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using System;
+using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
@@ -56,17 +56,14 @@ namespace MvvmCross.Plugins.FieldBinding
             FireChanged();
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory
-        {
-            get { return MvxBindingSingletonCache.Instance.SourceBindingFactory; }
-        }
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         public override Type SourceType
         {
             get
             {
                 if (_currentChildBinding == null)
-                    return typeof (object);
+                    return typeof(object);
 
                 return _currentChildBinding.SourceType;
             }
