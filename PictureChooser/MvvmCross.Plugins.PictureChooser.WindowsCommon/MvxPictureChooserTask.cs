@@ -57,12 +57,12 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
                         var resizedStream =
                             await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
 
-                        _pictureAvailable(resizedStream.AsStreamForRead());
+                        _pictureAvailable?.Invoke(resizedStream.AsStreamForRead());
                     });
             }
             else
             {
-                _assumeCancelled();
+                _assumeCancelled?.Invoke();
             }
         }
 

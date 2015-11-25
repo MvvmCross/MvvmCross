@@ -11,7 +11,6 @@ namespace MvvmCross.Plugins.Messenger
     {
         // note that default subscription is Weak in MvvmCross messenger
         Weak = 0,
-
-        Strong = 1,
+        Strong = 1
     }
 }

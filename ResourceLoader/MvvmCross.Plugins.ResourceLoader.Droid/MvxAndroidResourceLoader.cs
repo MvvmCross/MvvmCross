@@ -24,7 +24,7 @@ namespace MvvmCross.Plugins.ResourceLoader.Droid
         {
             using (var input = Assets.Open(resourcePath))
             {
-                streamAction(input);
+                streamAction?.Invoke(input);
             }
         }
 

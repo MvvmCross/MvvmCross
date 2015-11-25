@@ -8,6 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
+using Cirrious.CrossCore.Plugins;
 
 namespace MvvmCross.Plugins.All
 {
@@ -17,8 +21,7 @@ namespace MvvmCross.Plugins.All
         private bool _loaded;
         public static readonly PluginLoader Instance = new PluginLoader();
 
-        private static readonly Type[] AllPluginTypes = new Type[]
-            {
+        private static readonly Type[] AllPluginTypes = {
                 typeof(MvvmCross.Plugins.Accelerometer.PluginLoader),
                 typeof(MvvmCross.Plugins.Bookmarks.PluginLoader),
                 typeof(MvvmCross.Plugins.Color.PluginLoader),
@@ -39,7 +42,7 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.Sqlite.PluginLoader),
                 typeof(MvvmCross.Plugins.ThreadUtils.PluginLoader),
                 typeof(MvvmCross.Plugins.Visibility.PluginLoader),
-                typeof(MvvmCross.Plugins.WebBrowser.PluginLoader),
+                typeof(MvvmCross.Plugins.WebBrowser.PluginLoader)
             };
 
         public void EnsureLoaded()

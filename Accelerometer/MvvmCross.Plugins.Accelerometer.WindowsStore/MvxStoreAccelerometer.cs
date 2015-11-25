@@ -65,7 +65,7 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsStore
             {
                 X = sensorReading.AccelerationX,
                 Y = sensorReading.AccelerationY,
-                Z = sensorReading.AccelerationZ,
+                Z = sensorReading.AccelerationZ
             };
             return reading;
         }

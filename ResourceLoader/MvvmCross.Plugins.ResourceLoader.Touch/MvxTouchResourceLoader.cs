@@ -24,7 +24,7 @@ namespace MvvmCross.Plugins.ResourceLoader.Touch
             var fileService = Mvx.Resolve<IMvxFileStore>();
             if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
                 {
-                    streamAction(stream);
+                    streamAction?.Invoke(stream);
                     return true;
                 }))
                 throw new MvxException("Failed to read file {0}", resourcePath);

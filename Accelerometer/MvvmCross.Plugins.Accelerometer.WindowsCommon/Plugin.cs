@@ -7,6 +7,9 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
+using Cirrious.CrossCore;
+using Cirrious.CrossCore.Plugins;
+
 namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
 {
     public class Plugin

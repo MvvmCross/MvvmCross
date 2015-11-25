@@ -23,9 +23,9 @@ namespace MvvmCross.Plugins.Json
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 Converters = new List<JsonConverter>
                         {
-                            new MvxEnumJsonConverter(),
+                            new MvxEnumJsonConverter()
                         },
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat
             };
         }
 

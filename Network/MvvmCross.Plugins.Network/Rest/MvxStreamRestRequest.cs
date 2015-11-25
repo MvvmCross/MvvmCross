@@ -33,7 +33,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         public override void ProcessRequestStream(Stream stream)
         {
-            BodyHandler(stream);
+            BodyHandler?.Invoke(stream);
         }
     }
 }

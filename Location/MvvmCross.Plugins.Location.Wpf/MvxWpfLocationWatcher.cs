@@ -36,7 +36,7 @@ namespace MvvmCross.Plugins.Location.Wpf
 
             _geolocator = new GeoCoordinateWatcher
             {
-                MovementThreshold = options.MovementThresholdInM,
+                MovementThreshold = options.MovementThresholdInM
             };
 
             _geolocator.TryStart(false, TimeSpan.FromMilliseconds((uint)options.TimeBetweenUpdates.TotalMilliseconds));

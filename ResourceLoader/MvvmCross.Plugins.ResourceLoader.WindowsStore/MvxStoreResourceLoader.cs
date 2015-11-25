@@ -21,7 +21,7 @@ namespace MvvmCross.Plugins.ResourceLoader.WindowsStore
             var file = Package.Current.InstalledLocation.GetFileAsync(resourcePath).Await();
             var streamWithContent = file.OpenReadAsync().Await();
             var stream = streamWithContent.AsStreamForRead();
-            streamAction(stream);
+            streamAction?.Invoke(stream);
         }
     }
 }

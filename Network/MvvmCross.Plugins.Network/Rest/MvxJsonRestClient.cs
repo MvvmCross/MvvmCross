@@ -33,7 +33,7 @@ namespace MvvmCross.Plugins.Network.Rest
                         StatusCode = streamResponse.StatusCode,
                         Tag = streamResponse.Tag
                     };
-                    successAction(decodedResponse);
+                    successAction?.Invoke(decodedResponse);
                 }
             }, errorAction);
         }

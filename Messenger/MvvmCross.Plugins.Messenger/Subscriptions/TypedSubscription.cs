@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
         {
         }
 
-        public override sealed bool Invoke(object message)
+        public sealed override bool Invoke(object message)
         {
             var typedMessage = message as TMessage;
             if (typedMessage == null)

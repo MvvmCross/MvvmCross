@@ -49,7 +49,7 @@ namespace MvvmCross.Plugins.Location.Droid
             }
             var criteria = new Criteria()
                 {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse,
+                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
                 };
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)

@@ -14,7 +14,7 @@ namespace MvvmCross.Plugins.Messenger.ThreadRunners
     {
         public void Run(Action action)
         {
-            action();
+            action?.Invoke();
         }
     }
 }

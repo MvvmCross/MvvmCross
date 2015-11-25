@@ -23,7 +23,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }
             catch (Exception exception)
             {
-                errorAction(exception);
+                errorAction?.Invoke(exception);
             }
         }
 
@@ -207,7 +207,7 @@ namespace MvvmCross.Plugins.Network.Rest
                                                      Tag = restRequest.Tag,
                                                      StatusCode = code
                                                  };
-                                                 successAction(restResponse);
+                                                 successAction?.Invoke(restResponse);
                                              }, errorAction)
                                          , null);
         }
@@ -232,7 +232,7 @@ namespace MvvmCross.Plugins.Network.Rest
                             Tag = restRequest.Tag,
                             StatusCode = code
                         };
-                        successAction(restResponse);
+                        successAction?.Invoke(restResponse);
                     }, errorAction)
                 , null);
         }
@@ -252,7 +252,7 @@ namespace MvvmCross.Plugins.Network.Rest
                                                           stream.Flush();
                                                       }
 
-                                                      continueAction();
+                                                      continueAction?.Invoke();
                                                   }, errorAction)
                                               , null);
         }

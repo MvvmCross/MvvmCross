@@ -33,13 +33,13 @@ namespace MvvmCross.Plugins.Visibility
 
         protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
 
-        public override sealed object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public sealed override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var mvx = Convert(value, parameter, culture);
             return NativeVisibility.ToNative(mvx);
         }
 
-        public override sealed object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public sealed override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return base.ConvertBack(value, targetType, parameter, culture);
         }

@@ -3,7 +3,7 @@
     public static class TryResult
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="Cirrious.MvvmCross.Plugins.File.TryResult`1"/> class.
+        /// Creates a new instance of the <see cref="MvvmCross.Plugins.File.TryResult"/> class.
         /// </summary>
         /// <param name="operationSucceeded">If set to <c>true</c> operation succeeded.</param>
         /// <param name="result">The result of the operation.</param>
@@ -31,7 +31,7 @@
         public TResult Result { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Cirrious.MvvmCross.Plugins.File.TryResult`1"/> class.
+        /// Initializes a new instance of the <see cref="MvvmCross.Plugins.File.TryResult"/> class.
         /// </summary>
         /// <param name="operationSucceeded">If set to <c>true</c> operation succeeded.</param>
         /// <param name="result">The result of the operation.</param>

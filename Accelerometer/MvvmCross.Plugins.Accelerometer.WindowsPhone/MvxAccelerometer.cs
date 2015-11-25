@@ -59,7 +59,7 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsPhone
             {
                 X = sensorReading.Acceleration.X,
                 Y = sensorReading.Acceleration.Y,
-                Z = sensorReading.Acceleration.Z,
+                Z = sensorReading.Acceleration.Z
             };
             return reading;
         }

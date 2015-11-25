@@ -26,7 +26,7 @@ namespace MvvmCross.Plugins.Network.Touch
 
         public static bool StaticIsHostReachable(string host)
         {
-            if (host == null || host.Length == 0)
+            if (string.IsNullOrEmpty(host))
                 return false;
 
             using (var r = new NetworkReachability(host))

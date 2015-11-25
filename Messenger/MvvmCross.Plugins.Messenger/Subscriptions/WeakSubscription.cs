@@ -26,7 +26,10 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            Call(() => action(message));
+            Call(() =>
+            {
+                action?.Invoke(message);
+            });
             return true;
         }
 

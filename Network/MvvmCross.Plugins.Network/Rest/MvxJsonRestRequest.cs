@@ -20,7 +20,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         public override void ProcessRequestStream(Stream stream)
         {
-            var json = JsonConverterProvider().SerializeObject(Body);
+            var json = JsonConverterProvider?.Invoke().SerializeObject(Body);
             WriteTextToStream(stream, json);
         }
 

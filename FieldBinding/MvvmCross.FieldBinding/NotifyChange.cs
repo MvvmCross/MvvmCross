@@ -30,7 +30,7 @@ namespace MvvmCross.Plugins.FieldBinding
         protected NotifyChange(object value, Action<object> valueChanged)
         {
             _value = value;
-            Changed += (s, e) => { valueChanged(Value); };
+            Changed += (s, e) => { valueChanged?.Invoke(Value); };
         }
 
         public bool ShouldAlwaysRaiseChangedOnUserInterfaceThread()
@@ -103,7 +103,7 @@ namespace MvvmCross.Plugins.FieldBinding
         }
 
         public NotifyChange(T value, Action<T> valueChanged)
-            : base(value, obj => valueChanged((T)obj))
+            : base(value, obj => valueChanged?.Invoke((T)obj))
         {
             ValueType = typeof(T);
         }

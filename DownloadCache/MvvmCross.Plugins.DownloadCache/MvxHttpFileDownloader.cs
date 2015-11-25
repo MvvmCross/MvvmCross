@@ -36,12 +36,12 @@ namespace MvvmCross.Plugins.DownloadCache
             request.DownloadComplete += (sender, args) =>
             {
                 OnRequestFinished(request);
-                success();
+                success?.Invoke();
             };
             request.DownloadFailed += (sender, args) =>
             {
                 OnRequestFinished(request);
-                error(args.Value);
+                error?.Invoke(args.Value);
             };
 
             RunSyncOrAsyncWithLock(() =>

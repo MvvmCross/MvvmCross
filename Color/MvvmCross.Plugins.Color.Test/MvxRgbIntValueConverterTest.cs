@@ -37,7 +37,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0x123456,
                     0xA23BCD,
                     0x02A040,
-                    (int)0x7B02A040,
+                    (int)0x7B02A040
                 };
             var results = new uint[]
                 {
@@ -46,7 +46,7 @@ namespace MvvmCross.Plugins.Color.Test
                     0xFF123456,
                     0xFFA23BCD,
                     0xFF02A040,
-                    0xFF02A040,
+                    0xFF02A040
                 };
 
             RunTests(tests, results);

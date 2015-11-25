@@ -19,7 +19,7 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
 
         protected override bool TypedInvoke(TMessage message)
         {
-            Call(() => _action(message));
+            Call(() => _action?.Invoke(message));
             return true;
         }
 

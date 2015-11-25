@@ -85,7 +85,7 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
                 {
                     X = x,
                     Y = y,
-                    Z = z,
+                    Z = z
                 };
             return reading;
         }

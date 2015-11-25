@@ -8,6 +8,8 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 using System;
+using Cirrious.CrossCore.Core;
+using Cirrious.CrossCore.Exceptions;
 using Windows.Devices.Sensors;
 
 namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
@@ -63,7 +65,7 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
             {
                 X = sensorReading.AccelerationX,
                 Y = sensorReading.AccelerationY,
-                Z = sensorReading.AccelerationZ,
+                Z = sensorReading.AccelerationZ
             };
             return reading;
         }

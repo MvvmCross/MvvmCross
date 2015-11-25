@@ -17,7 +17,7 @@ namespace MvvmCross.Plugins.ResourceLoader.Wpf
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             var streamInfo = System.Windows.Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
-            streamAction(streamInfo?.Stream);
+            streamAction?.Invoke(streamInfo?.Stream);
         }
 
         #endregion Implementation of IMvxResourceLoader
