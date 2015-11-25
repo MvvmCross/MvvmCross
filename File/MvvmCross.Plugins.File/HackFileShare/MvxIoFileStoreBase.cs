@@ -2,25 +2,25 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 // ReSharper disable all
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace MvvmCross.Plugins.File
 {
     public abstract class MvxIoFileStoreBase
-		: MvxFileStoreBase
+        : MvxFileStoreBase
     {
         #region IMvxFileStore Members
-        
+
         public override Stream OpenRead(string path)
         {
             var fullPath = FullPath(path);
@@ -29,7 +29,7 @@ namespace MvvmCross.Plugins.File
                 return null;
             }
 
-			return System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            return System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
 
         public override Stream OpenWrite(string path)
@@ -108,10 +108,10 @@ namespace MvvmCross.Plugins.File
                 System.IO.File.Move(fullFrom, fullTo);
                 return true;
             }
-                //catch (ThreadAbortException)
-                //{
-                //    throw;
-                //}
+            //catch (ThreadAbortException)
+            //{
+            //    throw;
+            //}
             catch (Exception exception)
             {
                 MvxTrace.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
@@ -124,7 +124,7 @@ namespace MvvmCross.Plugins.File
             return FullPath(path);
         }
 
-        #endregion
+        #endregion IMvxFileStore Members
 
         protected abstract string FullPath(string path);
 
@@ -150,40 +150,40 @@ namespace MvvmCross.Plugins.File
                 return false;
             }
 
-			using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 return streamAction(fileStream);
             }
         }
 
-		protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
-		{
-			var fullPath = FullPath(path);
-			if (System.IO.File.Exists(fullPath))
-			{
-				System.IO.File.Delete(fullPath);
-			}
+        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
 
-			using (var fileStream = System.IO.File.OpenWrite(fullPath))
-			{
-				await streamAction(fileStream).ConfigureAwait(false);
-				return;
-			}
-		}
+            using (var fileStream = System.IO.File.OpenWrite(fullPath))
+            {
+                await streamAction(fileStream).ConfigureAwait(false);
+                return;
+            }
+        }
 
-		protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
-		{
-			var fullPath = FullPath(path);
-			if (!System.IO.File.Exists(fullPath))
-			{
-				return false;
-			}
+        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (!System.IO.File.Exists(fullPath))
+            {
+                return false;
+            }
 
-			using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-			{
-				return await streamAction(fileStream).ConfigureAwait(false);
-			}
-		}
+            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                return await streamAction(fileStream).ConfigureAwait(false);
+            }
+        }
     }
 }
 

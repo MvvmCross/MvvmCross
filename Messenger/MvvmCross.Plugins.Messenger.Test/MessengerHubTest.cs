@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using NUnit.Framework;
 using System;
 using System.Linq;
-using NUnit.Framework;
 
 namespace MvvmCross.Plugins.Messenger.Test
 {
@@ -32,7 +32,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             }
         }
 
-        #endregion
+        #endregion TestClasses
 
         [SetUp]
         public void SetUp()
@@ -124,13 +124,13 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullSenderCausesException()
         {
             var message = new TestMessage(null);
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
@@ -150,7 +150,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
         }
 
-        [Test, ExpectedException(typeof (ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void NullPublishCausesException()
         {
             var messenger = new MvxMessengerHub();
@@ -261,7 +261,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
-            }, tag:testTag1);
+            }, tag: testTag1);
             Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
             Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
             Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
@@ -270,7 +270,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             var token2 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
-            }, tag:testTag1);
+            }, tag: testTag1);
             Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
             Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
             Assert.AreEqual(2, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));

@@ -1,12 +1,11 @@
 ﻿using SQLite.Net;
-using SQLite.Net.Interop;
 
 namespace MvvmCross.Plugins.Sqlite
 {
     public class SqLiteConfig
     {
         public SqLiteConfig(
-            string databaseName, 
+            string databaseName,
             bool storeDateTimeAsTicks = true,
             IBlobSerializer serializer = null,
             IContractResolver resolver = null)
@@ -16,6 +15,7 @@ namespace MvvmCross.Plugins.Sqlite
 
             BlobSerializer = serializer;
         }
+
         public string DatabaseName { get; set; }
         public bool StoreDateTimeAsTicks { get; set; }
 

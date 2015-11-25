@@ -2,21 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
+using System;
+using System.Reflection;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
     public abstract class MvxNotifyChangeFieldSourceBinding
         : MvxSourceBinding
     {
-        private static readonly EventInfo NotifyChangeEventInfo = typeof (INotifyChange).GetEvent("Changed");
+        private static readonly EventInfo NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
 
         private readonly INotifyChange _notifyChange;
         private IDisposable _subscription;

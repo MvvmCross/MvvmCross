@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Converters;
 using System;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
-using Cirrious.CrossCore.Converters;
 
 namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
 {
@@ -21,13 +21,13 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
                 return null;
 
             var image = new BitmapImage();
-            using(var randomAccessStream = new InMemoryRandomAccessStream())
+            using (var randomAccessStream = new InMemoryRandomAccessStream())
             {
 #warning one day it would be nice to have a proper async value converter here... something like- http://stackoverflow.com/questions/15003827/async-implementation-of-ivalueconverter - but more built in
                 var writeStream = randomAccessStream.AsStreamForWrite();
                 writeStream.Write(value, 0, value.Length);
                 writeStream.Flush();
-                
+
                 randomAccessStream.Seek(0L);
 
                 image.SetSource(randomAccessStream);

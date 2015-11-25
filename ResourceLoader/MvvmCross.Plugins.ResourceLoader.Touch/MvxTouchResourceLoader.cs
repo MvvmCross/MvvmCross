@@ -2,21 +2,21 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.IO;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 using MvvmCross.Plugins.File;
 using MvvmCross.Plugins.File.Touch;
+using System;
+using System.IO;
 
 namespace MvvmCross.Plugins.ResourceLoader.Touch
 {
     public class MvxTouchResourceLoader
         : MvxResourceLoader
-          
+
     {
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {

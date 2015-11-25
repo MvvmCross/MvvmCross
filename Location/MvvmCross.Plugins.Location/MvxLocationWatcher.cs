@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Core;
+using System;
 
 namespace MvvmCross.Plugins.Location
 {
@@ -16,21 +16,22 @@ namespace MvvmCross.Plugins.Location
         private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
 
-		public event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged = delegate {};
+        public event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged = delegate { };
 
-		private MvxLocationPermission _permission = MvxLocationPermission.Unknown;
-		protected MvxLocationPermission Permission 
-		{
-			get { return _permission; }
-			set 
-			{ 
-				if (_permission != value)
-				{
-					_permission = value;
-					OnPermissionChanged (this, new MvxValueEventArgs<MvxLocationPermission> (value));
-				}
-			}
-		}
+        private MvxLocationPermission _permission = MvxLocationPermission.Unknown;
+
+        protected MvxLocationPermission Permission
+        {
+            get { return _permission; }
+            set
+            {
+                if (_permission != value)
+                {
+                    _permission = value;
+                    OnPermissionChanged(this, new MvxValueEventArgs<MvxLocationPermission>(value));
+                }
+            }
+        }
 
         public void Start(MvxLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
         {
@@ -64,6 +65,7 @@ namespace MvvmCross.Plugins.Location
         public MvxGeoLocation LastSeenLocation { get; protected set; }
 
         protected abstract void PlatformSpecificStart(MvxLocationOptions options);
+
         protected abstract void PlatformSpecificStop();
 
         protected virtual void SendLocation(MvxGeoLocation location)

@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.CrossCore.Exceptions;
@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.Location.Wpf
     {
         private GeoCoordinateWatcher _geolocator;
 
-        MvxGeoLocation _lastKnownPosition = null;
+        private MvxGeoLocation _lastKnownPosition = null;
 
         public MvxWpfLocationWatcher()
         {
@@ -44,7 +44,6 @@ namespace MvvmCross.Plugins.Location.Wpf
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
         }
-
 
         public override MvxGeoLocation CurrentLocation
         {
@@ -90,22 +89,24 @@ namespace MvvmCross.Plugins.Location.Wpf
             {
                 case GeoPositionStatus.Ready:
                 case GeoPositionStatus.Initializing:
-					Permission = MvxLocationPermission.Granted;
+                    Permission = MvxLocationPermission.Granted;
                     break;
+
                 case GeoPositionStatus.NoData:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
+
                 case GeoPositionStatus.Disabled:
-					Permission = MvxLocationPermission.Denied;
+                    Permission = MvxLocationPermission.Denied;
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
 
         private MvxGeoLocation CreateLocation(GeoCoordinate coordinate)
         {

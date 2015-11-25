@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Windows.UI.Xaml.Media;
 using Cirrious.CrossCore.UI;
+using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Plugins.Color.WindowsCommon
 {

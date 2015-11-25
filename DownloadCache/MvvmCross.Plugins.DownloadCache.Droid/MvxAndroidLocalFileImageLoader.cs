@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Threading.Tasks;
 using Android.Graphics;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding;
 using MvvmCross.Plugins.File;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
@@ -21,9 +21,9 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         : IMvxLocalFileImageLoader<Bitmap>
     {
         private const string ResourcePrefix = "res:";
+
         private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache =
             new Dictionary<CacheKey, WeakReference<Bitmap>>();
-
 
         public async Task<MvxImage<Bitmap>> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
         {
@@ -52,6 +52,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         }
 
         private IMvxAndroidGlobals _androidGlobals;
+
         protected IMvxAndroidGlobals AndroidGlobals
         {
             get
@@ -75,7 +76,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
             return
                 await BitmapFactory.DecodeResourceAsync(resources, id,
-                    new BitmapFactory.Options {InPurgeable = true}).ConfigureAwait(false);
+                    new BitmapFactory.Options { InPurgeable = true }).ConfigureAwait(false);
         }
 
         private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
@@ -83,7 +84,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             if (maxWidth > 0 || maxHeight > 0)
             {
                 // load thumbnail - see: http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
-                var options = new BitmapFactory.Options {InJustDecodeBounds = true};
+                var options = new BitmapFactory.Options { InJustDecodeBounds = true };
                 await BitmapFactory.DecodeFileAsync(localPath, options).ConfigureAwait(false);
 
                 // Calculate inSampleSize
@@ -97,7 +98,6 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             }
             else
             {
-
                 var fileStore = Mvx.Resolve<IMvxFileStore>();
                 byte[] contents;
                 if (!fileStore.TryReadBinaryFile(localPath, out contents))
@@ -111,7 +111,6 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                         .ConfigureAwait(false);
                 return image;
             }
-
         }
 
         private static int CalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
@@ -123,7 +122,6 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
             if (height > reqHeight || width > reqWidth)
             {
-
                 int halfHeight = height / 2;
                 int halfWidth = width / 2;
 
@@ -143,7 +141,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         {
             var key = new CacheKey(localPath, maxWidth, maxHeight);
             WeakReference<Bitmap> reference;
-           
+
             if (_memCache.TryGetValue(key, out reference))
             {
                 Bitmap target;
@@ -152,8 +150,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                     bitmap = target;
                     return true;
                 }
-                
-                _memCache.Remove(key);    
+
+                _memCache.Remove(key);
             }
 
             bitmap = null;
@@ -163,7 +161,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         private void AddToCache(string localPath, int maxWidth, int maxHeight, Bitmap bitmap)
         {
             if (bitmap == null) return;
-            
+
             var key = new CacheKey(localPath, maxWidth, maxHeight);
             _memCache[key] = new WeakReference<Bitmap>(bitmap);
         }

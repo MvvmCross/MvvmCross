@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
+using System;
 
 namespace MvvmCross.Plugins.WebBrowser.WindowsPhone
 {
@@ -17,10 +17,10 @@ namespace MvvmCross.Plugins.WebBrowser.WindowsPhone
 
         public void ShowWebPage(string url)
         {
-            var webBrowserTask = new WebBrowserTask {Uri = new Uri(url)};
+            var webBrowserTask = new WebBrowserTask { Uri = new Uri(url) };
             DoWithInvalidOperationProtection(webBrowserTask.Show);
         }
 
-        #endregion
+        #endregion IMvxWebBrowserTask Members
     }
 }

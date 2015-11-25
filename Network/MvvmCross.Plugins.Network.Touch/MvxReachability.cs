@@ -2,13 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using CoreFoundation;
+using MvvmCross.Plugins.Network.Reachability;
 using System;
 using System.Net;
-using MvvmCross.Plugins.Network.Reachability;
-using CoreFoundation;
 using SystemConfiguration;
 
 namespace MvvmCross.Plugins.Network.Touch
@@ -57,9 +57,9 @@ namespace MvvmCross.Plugins.Network.Touch
             return isReachable && noConnectionRequired;
         }
 
-        // 
-        // Raised every time there is an interesting reachable event, 
-        // we do not even pass the info as to what changed, and 
+        //
+        // Raised every time there is an interesting reachable event,
+        // we do not even pass the info as to what changed, and
         // we lump all three status we probe into one
         //
         public static event EventHandler ReachabilityChanged;
@@ -82,7 +82,7 @@ namespace MvvmCross.Plugins.Network.Touch
         {
             if (adHocWiFiNetworkReachability == null)
             {
-                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] {169, 254, 0, 0}));
+                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] { 169, 254, 0, 0 }));
 #warning Need to look at SetNotification instead - ios6 change
                 adHocWiFiNetworkReachability.SetNotification(OnChange);
                 adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);

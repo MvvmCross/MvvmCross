@@ -2,11 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Globalization;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace MvvmCross.Plugins.Color.Test
 {
@@ -45,19 +45,19 @@ namespace MvvmCross.Plugins.Color.Test
             for (var i = 0; i < tests.Length; i++)
             {
                 var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert(tests[i], typeof (object), null, CultureInfo.CurrentUICulture);
+                var actual = converter.Convert(tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
                 var wrapped = actual as WrappedColor;
                 Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint) wrapped.Color.ARGB);
+                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
             }
 
             for (var i = 0; i < tests.Length; i++)
             {
                 var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert("#" + tests[i], typeof (object), null, CultureInfo.CurrentUICulture);
+                var actual = converter.Convert("#" + tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
                 var wrapped = actual as WrappedColor;
                 Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint) wrapped.Color.ARGB);
+                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
             }
         }
 

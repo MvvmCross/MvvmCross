@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -15,7 +15,6 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace MvvmCross.Plugins.PictureChooser.WindowsStore
 {
@@ -118,7 +117,6 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
             return ras;
         }
 
-
         private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
         {
             var decoder = await BitmapDecoder.CreateAsync(input);
@@ -137,7 +135,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
 
             var destinationStream = new InMemoryRandomAccessStream();
             var bitmapPropertiesSet = new BitmapPropertySet();
-            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(((double) percentQuality)/100.0, PropertyType.Single));
+            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(((double)percentQuality) / 100.0, PropertyType.Single));
             var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream, bitmapPropertiesSet);
             encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint)targetWidth, (uint)targetHeight, decoder.DpiX, decoder.DpiY, pixelData.DetachPixelData());
             await encoder.FlushAsync();
@@ -146,6 +144,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
         }
 
         /*
+
         #region IMvxCombinedPictureChooserTask Members
 
         public void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
@@ -156,7 +155,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
+        #endregion IMvxCombinedPictureChooserTask Members
 
         #region IMvxPictureChooserTask Members
 
@@ -175,12 +174,11 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
-        #endregion
+        #endregion IMvxPictureChooserTask Members
 
         public void ChoosePictureCommon(ChooserBase<PhotoResult> chooser, int maxPixelDimension, int percentQuality,
                                         Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            
             var dialog = new CameraCaptureUI();
             // Define the aspect ratio for the photo
             var aspectRatio = new Size(16, 9);

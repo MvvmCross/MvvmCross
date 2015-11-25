@@ -7,6 +7,7 @@ namespace MvvmCross.Plugins.Sqlite
     public abstract class MvxSqliteConnectionFactoryBase : IMvxSqliteConnectionFactory
     {
         public abstract ISQLitePlatform CurrentPlattform { get; }
+
         public abstract string GetPlattformDatabasePath(string databaseName);
 
         protected SQLiteConnectionString GetConnectionString(SqLiteConfig config, bool appendPlatformPath)
@@ -14,7 +15,6 @@ namespace MvvmCross.Plugins.Sqlite
             var path = appendPlatformPath ? GetPlattformDatabasePath(config.DatabaseName) : config.DatabaseName;
             return new SQLiteConnectionString(path, config.StoreDateTimeAsTicks, config.BlobSerializer, config.ContractResolver);
         }
-
 
         public SQLiteConnection GetConnection(string databaseName, bool appendPlatformPath = true)
         {

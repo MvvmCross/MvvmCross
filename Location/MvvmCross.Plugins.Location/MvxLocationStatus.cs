@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace MvvmCross.Plugins.Location
+﻿namespace MvvmCross.Plugins.Location
 {
-	public enum MvxLocationPermission
-	{
-		Unknown,
-		Denied,
-		Granted,
-	}
+    public enum MvxLocationPermission
+    {
+        Unknown,
+        Denied,
+        Granted,
+    }
 }
-

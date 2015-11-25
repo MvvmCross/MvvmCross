@@ -1,11 +1,11 @@
-﻿using System;
-using Cirrious.CrossCore;
+﻿using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
+using Cirrious.CrossCore.Touch.Platform;
 using CoreLocation;
 using Foundation;
-using Cirrious.CrossCore.Touch.Platform;
+using System;
 
 namespace MvvmCross.Plugins.Location.Touch
 {
@@ -14,18 +14,19 @@ namespace MvvmCross.Plugins.Location.Touch
     {
         private CLLocationManager _locationManager;
 
-		private MvxIosMajorVersionChecker _ios8VersionChecker;
-		internal bool IsIOS8orHigher
-		{
-			get 
-			{
-				if (_ios8VersionChecker == null) 
-				{
-					_ios8VersionChecker = new MvxIosMajorVersionChecker (8);
-				}
-				return _ios8VersionChecker.IsVersionOrHigher;
-			}
-		}
+        private MvxIosMajorVersionChecker _ios8VersionChecker;
+
+        internal bool IsIOS8orHigher
+        {
+            get
+            {
+                if (_ios8VersionChecker == null)
+                {
+                    _ios8VersionChecker = new MvxIosMajorVersionChecker(8);
+                }
+                return _ios8VersionChecker.IsVersionOrHigher;
+            }
+        }
 
         public MvxTouchLocationWatcher()
         {
@@ -56,25 +57,24 @@ namespace MvvmCross.Plugins.Location.Touch
                     Mvx.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
                 }
 
-
-				if (options.TrackingMode == MvxLocationTrackingMode.Background)
-				{
-					if (IsIOS8orHigher)
-					{
-						_locationManager.RequestAlwaysAuthorization ();
-					}
-					else
-					{
-						Mvx.Warning ("MvxLocationTrackingMode.Background is not supported for iOS before 8");
-					}
-				}
-				else
-				{
-					if (IsIOS8orHigher)
-					{
-						_locationManager.RequestWhenInUseAuthorization ();
-					}
-				}
+                if (options.TrackingMode == MvxLocationTrackingMode.Background)
+                {
+                    if (IsIOS8orHigher)
+                    {
+                        _locationManager.RequestAlwaysAuthorization();
+                    }
+                    else
+                    {
+                        Mvx.Warning("MvxLocationTrackingMode.Background is not supported for iOS before 8");
+                    }
+                }
+                else
+                {
+                    if (IsIOS8orHigher)
+                    {
+                        _locationManager.RequestWhenInUseAuthorization();
+                    }
+                }
 
                 if (CLLocationManager.HeadingAvailable)
                     _locationManager.StartUpdatingHeading();
@@ -163,8 +163,7 @@ namespace MvvmCross.Plugins.Location.Touch
                 _owner = owner;
             }
 
-
-            CLHeading _lastSeenHeading;
+            private CLHeading _lastSeenHeading;
 
             public override void UpdatedHeading(CLLocationManager manager, CLHeading newHeading)
             {
@@ -197,26 +196,30 @@ namespace MvvmCross.Plugins.Location.Touch
                 // ignored for now
             }
 
-			public override void AuthorizationChanged (CLLocationManager manager, CLAuthorizationStatus status)
-			{
-				switch (status) {
-				case CLAuthorizationStatus.NotDetermined:
-					_owner.Permission = MvxLocationPermission.Unknown;
-					break;
-				case CLAuthorizationStatus.Restricted:
-				case CLAuthorizationStatus.Denied:
-					_owner.Permission = MvxLocationPermission.Denied;
-					break;
-				case CLAuthorizationStatus.AuthorizedAlways:
-				case CLAuthorizationStatus.AuthorizedWhenInUse:
-					_owner.Permission = MvxLocationPermission.Granted;
-					break;
-				default:
-					throw new ArgumentOutOfRangeException ();
-				}
-			}
+            public override void AuthorizationChanged(CLLocationManager manager, CLAuthorizationStatus status)
+            {
+                switch (status)
+                {
+                    case CLAuthorizationStatus.NotDetermined:
+                        _owner.Permission = MvxLocationPermission.Unknown;
+                        break;
+
+                    case CLAuthorizationStatus.Restricted:
+                    case CLAuthorizationStatus.Denied:
+                        _owner.Permission = MvxLocationPermission.Denied;
+                        break;
+
+                    case CLAuthorizationStatus.AuthorizedAlways:
+                    case CLAuthorizationStatus.AuthorizedWhenInUse:
+                        _owner.Permission = MvxLocationPermission.Granted;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
-        #endregion
+        #endregion Nested type: LocationDelegate
     }
 }

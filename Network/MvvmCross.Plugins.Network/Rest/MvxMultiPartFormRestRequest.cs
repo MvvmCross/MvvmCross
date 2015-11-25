@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using MvvmCross.Plugins.File;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -65,6 +65,7 @@ namespace MvvmCross.Plugins.Network.Rest
             string FieldName { get; }
             string FileName { get; }
             string ContentType { get; }
+
             void WriteTo(Stream stream);
         }
 
@@ -81,6 +82,7 @@ namespace MvvmCross.Plugins.Network.Rest
             public string FieldName { get; private set; }
             public string FileName { get; private set; }
             public string ContentType { get; private set; }
+
             public abstract void WriteTo(Stream stream);
         }
 

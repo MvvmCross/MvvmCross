@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
 using System;
 using Windows.Devices.Geolocation;
-using Cirrious.CrossCore.Exceptions;
 
 namespace MvvmCross.Plugins.Location.WindowsCommon
 {
@@ -28,11 +28,11 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
 
             // see https://github.com/slodge/MvvmCross/issues/90
             _geolocator = new Geolocator
-                {
-                    // DesiredAccuracy = TODO options.EnableHighAccuracy
-                    // MovementThreshold = TODO
-                    // ReportInterval = TODO
-                };
+            {
+                // DesiredAccuracy = TODO options.EnableHighAccuracy
+                // MovementThreshold = TODO
+                // ReportInterval = TODO
+            };
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
@@ -66,24 +66,30 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
             {
                 case PositionStatus.Ready:
                     break;
+
                 case PositionStatus.Initializing:
                     break;
+
                 case PositionStatus.NoData:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.PositionUnavailable);
                     break;
+
                 case PositionStatus.Disabled:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
+
                 case PositionStatus.NotInitialized:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
+
                 case PositionStatus.NotAvailable:
                     // TODO - trace could be useful here?
                     SendError(MvxLocationErrorCode.ServiceUnavailable);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -91,7 +97,7 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
 
         private MvxGeoLocation CreateLocation(Geocoordinate coordinate)
         {
-            var position = new MvxGeoLocation {Timestamp = coordinate.Timestamp};
+            var position = new MvxGeoLocation { Timestamp = coordinate.Timestamp };
             var coords = position.Coordinates;
 
             // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94

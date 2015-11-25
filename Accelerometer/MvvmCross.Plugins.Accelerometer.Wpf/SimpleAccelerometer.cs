@@ -4,12 +4,12 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-//  
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
+using System;
 
 namespace MvvmCross.Plugins.Accelerometer.Wpf
 {
@@ -41,6 +41,7 @@ namespace MvvmCross.Plugins.Accelerometer.Wpf
             _accelerometer = null;
             */
         }
+
         /*
         private void AccelerometerOnReadingChanged(Windows.Devices.Sensors.Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {

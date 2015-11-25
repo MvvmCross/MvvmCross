@@ -2,12 +2,12 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.UI;
 using System;
 using System.Globalization;
-using Cirrious.CrossCore.UI;
 
 namespace MvvmCross.Plugins.Color
 {
@@ -26,10 +26,13 @@ namespace MvvmCross.Plugins.Color
             {
                 case 3:
                     return Parse3DigitColor(value);
+
                 case 6:
                     return Parse6DigitColor(value);
+
                 case 8:
                     return Parse8DigitColor(value);
+
                 default:
                     return new MvxColor(0);
             }

@@ -2,15 +2,15 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
 using CoreLocation;
 using Foundation;
+using System;
 
 namespace MvvmCross.Plugins.Location.Touch
 {
@@ -18,8 +18,8 @@ namespace MvvmCross.Plugins.Location.Touch
     public sealed class MvxTouchGeoLocationWatcher
         : MvxGeoLocationWatcher
     {
-		private const double AccuracyFine = 10;
-		private const double AccuracyCoarse = 1000;
+        private const double AccuracyFine = 10;
+        private const double AccuracyCoarse = 1000;
 
         private CLLocationManager _locationManager;
 
@@ -38,16 +38,16 @@ namespace MvvmCross.Plugins.Location.Touch
                 _locationManager = new CLLocationManager();
                 _locationManager.Delegate = new LocationDelegate(this);
 
-				// more needed here for more filtering
-				// _locationManager.DistanceFilter = options. CLLocationDistance.FilterNone
+                // more needed here for more filtering
+                // _locationManager.DistanceFilter = options. CLLocationDistance.FilterNone
 
-				_locationManager.DesiredAccuracy = options.EnableHighAccuracy ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
-         		
-				if (CLLocationManager.HeadingAvailable)
-					_locationManager.StartUpdatingHeading();
+                _locationManager.DesiredAccuracy = options.EnableHighAccuracy ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
 
-				_locationManager.StartUpdatingLocation();
-			}
+                if (CLLocationManager.HeadingAvailable)
+                    _locationManager.StartUpdatingHeading();
+
+                _locationManager.StartUpdatingLocation();
+            }
         }
 
         protected override void SendLocation(MvxGeoLocation location)
@@ -72,9 +72,9 @@ namespace MvvmCross.Plugins.Location.Touch
                 {
                     _locationManager.Delegate = null;
                     _locationManager.StopUpdatingLocation();
-					if (CLLocationManager.HeadingAvailable)
-						_locationManager.StopUpdatingHeading();
-					_locationManager.Dispose();
+                    if (CLLocationManager.HeadingAvailable)
+                        _locationManager.StopUpdatingHeading();
+                    _locationManager.Dispose();
                     _locationManager = null;
                 }
             }
@@ -82,7 +82,7 @@ namespace MvvmCross.Plugins.Location.Touch
 
         private static MvxGeoLocation CreateLocation(CLLocation location, CLHeading heading)
         {
-            var position = new MvxGeoLocation {Timestamp = location.Timestamp.ToDateTimeUtc()};
+            var position = new MvxGeoLocation { Timestamp = location.Timestamp.ToDateTimeUtc() };
             var coords = position.Coordinates;
 
             coords.Altitude = location.Altitude;
@@ -91,11 +91,11 @@ namespace MvvmCross.Plugins.Location.Touch
             coords.Speed = location.Speed;
             coords.Accuracy = location.HorizontalAccuracy;
             coords.AltitudeAccuracy = location.VerticalAccuracy;
-			if (heading != null)
-			{
-				coords.Heading = heading.TrueHeading;
-				coords.HeadingAccuracy = heading.HeadingAccuracy;
-			}
+            if (heading != null)
+            {
+                coords.Heading = heading.TrueHeading;
+                coords.HeadingAccuracy = heading.HeadingAccuracy;
+            }
 
             return position;
         }
@@ -111,29 +111,28 @@ namespace MvvmCross.Plugins.Location.Touch
                 _owner = owner;
             }
 
+            private CLHeading _lastSeenHeading;
 
-			CLHeading _lastSeenHeading;
+            public override void UpdatedHeading(CLLocationManager manager, CLHeading newHeading)
+            {
+                // note that we don't immediately send on the heading information.
+                // for user's wanting real-time heading info a different plugin/api will be needed
+                _lastSeenHeading = newHeading;
+            }
 
-			public override void UpdatedHeading (CLLocationManager manager, CLHeading newHeading)
-			{
-				// note that we don't immediately send on the heading information.
-				// for user's wanting real-time heading info a different plugin/api will be needed
-				_lastSeenHeading = newHeading;
-			}
+            public override void LocationsUpdated(CLLocationManager manager, CLLocation[] locations)
+            {
+                // see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
+                if (locations.Length == 0)
+                {
+                    MvxTrace.Error("iOS has passed LocationsUpdated an empty array - this should never happen");
+                    return;
+                }
 
-			public override void LocationsUpdated (CLLocationManager manager, CLLocation[] locations)
-			{
-				// see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
-				if (locations.Length == 0)
-				{
-					MvxTrace.Error("iOS has passed LocationsUpdated an empty array - this should never happen");
-					return;
-				}
-
-				var mostRecent = locations[locations.Length - 1];
-				var converted = CreateLocation(mostRecent, _lastSeenHeading);
-				_owner.SendLocation(converted);
-			}
+                var mostRecent = locations[locations.Length - 1];
+                var converted = CreateLocation(mostRecent, _lastSeenHeading);
+                _owner.SendLocation(converted);
+            }
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
@@ -146,6 +145,6 @@ namespace MvvmCross.Plugins.Location.Touch
             }
         }
 
-        #endregion
+        #endregion Nested type: LocationDelegate
     }
 }

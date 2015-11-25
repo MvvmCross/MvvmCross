@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.Messenger
 #pragma warning restore 414
         private readonly Action _disposeMe;
 
-        public MvxSubscriptionToken(Guid id, Action disposeMe,  params object[] dependentObjects)
+        public MvxSubscriptionToken(Guid id, Action disposeMe, params object[] dependentObjects)
         {
             Id = id;
             _disposeMe = disposeMe;

@@ -4,13 +4,11 @@
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
-//  
+//
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 using System;
 using Windows.Devices.Sensors;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
 
 namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
 {
@@ -62,11 +60,11 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
         private static MvxAccelerometerReading ToReading(AccelerometerReading sensorReading)
         {
             var reading = new MvxAccelerometerReading
-                {
-                    X = sensorReading.AccelerationX,
-                    Y = sensorReading.AccelerationY,
-                    Z = sensorReading.AccelerationZ,
-                };
+            {
+                X = sensorReading.AccelerationX,
+                Y = sensorReading.AccelerationY,
+                Z = sensorReading.AccelerationZ,
+            };
             return reading;
         }
 

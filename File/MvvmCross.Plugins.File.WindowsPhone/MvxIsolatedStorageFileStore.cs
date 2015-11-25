@@ -2,9 +2,11 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +14,6 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
 
 namespace MvvmCross.Plugins.File.WindowsPhone
 {
@@ -93,7 +93,6 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-
         public override IEnumerable<string> GetFoldersIn(string folderPath)
         {
             using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
@@ -172,7 +171,7 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             return path;
         }
 
-        #endregion
+        #endregion IMvxFileStore
 
         private void DeleteFolderRecursive(string folderPath)
         {
@@ -292,7 +291,7 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             {
                 MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
                 throw;
-            } 
+            }
         }
 
         protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)

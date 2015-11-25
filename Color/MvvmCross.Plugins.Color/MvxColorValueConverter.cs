@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.UI;
+using System;
 
 namespace MvvmCross.Plugins.Color
 {
     public abstract class MvxColorValueConverter
-        : MvxValueConverter          
+        : MvxValueConverter
     {
         private IMvxNativeColor _nativeColor;
 
@@ -39,14 +39,14 @@ namespace MvvmCross.Plugins.Color
         }
     }
 
-	public abstract class MvxColorValueConverter<T>
-		: MvxColorValueConverter
-	{
-		protected sealed override MvxColor Convert(object value, object parameter, System.Globalization.CultureInfo culture)
-		{
-			return Convert((T)value, parameter, culture);
-		}
+    public abstract class MvxColorValueConverter<T>
+        : MvxColorValueConverter
+    {
+        protected sealed override MvxColor Convert(object value, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Convert((T)value, parameter, culture);
+        }
 
-		protected abstract MvxColor Convert(T value, object parameter, System.Globalization.CultureInfo culture);
-	}
+        protected abstract MvxColor Convert(T value, object parameter, System.Globalization.CultureInfo culture);
+    }
 }

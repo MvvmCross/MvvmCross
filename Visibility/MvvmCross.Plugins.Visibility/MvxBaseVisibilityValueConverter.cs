@@ -2,31 +2,30 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Globalization;
-using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Converters;
 using Cirrious.CrossCore.UI;
+using System;
+using System.Globalization;
 
 namespace MvvmCross.Plugins.Visibility
 {
-	public abstract class MvxBaseVisibilityValueConverter<T>
-		: MvxBaseVisibilityValueConverter
-	{
-		protected sealed override MvxVisibility Convert(object value, object parameter, CultureInfo culture)
-		{
-			return Convert((T)value, parameter, culture);
-		}
+    public abstract class MvxBaseVisibilityValueConverter<T>
+        : MvxBaseVisibilityValueConverter
+    {
+        protected sealed override MvxVisibility Convert(object value, object parameter, CultureInfo culture)
+        {
+            return Convert((T)value, parameter, culture);
+        }
 
-		protected abstract MvxVisibility Convert(T value, object parameter, CultureInfo culture);
-	}
+        protected abstract MvxVisibility Convert(T value, object parameter, CultureInfo culture);
+    }
 
     public abstract class MvxBaseVisibilityValueConverter
-        : MvxValueConverter          
+        : MvxValueConverter
     {
         private IMvxNativeVisibility _nativeVisiblity;
 
@@ -43,7 +42,7 @@ namespace MvvmCross.Plugins.Visibility
             }
         }
 
-		protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
+        protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
 
         public override sealed object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

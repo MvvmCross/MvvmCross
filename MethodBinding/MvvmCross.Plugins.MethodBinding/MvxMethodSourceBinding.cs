@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    public class MvxMethodSourceBinding 
+    public class MvxMethodSourceBinding
         : MvxSourceBinding
           , ICommand
     {
@@ -23,7 +23,7 @@ namespace MvvmCross.Plugins.MethodBinding
             : base(source)
         {
             if (source == null)
-                throw  new ArgumentNullException("source");
+                throw new ArgumentNullException("source");
             if (methodInfo == null)
                 throw new ArgumentNullException("methodInfo");
             _methodInfo = methodInfo;

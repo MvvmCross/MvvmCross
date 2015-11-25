@@ -2,19 +2,19 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
-using MessageUI;
-using UIKit;
 using Foundation;
+using MessageUI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UIKit;
 
 namespace MvvmCross.Plugins.Email.Touch
 {
@@ -33,8 +33,8 @@ namespace MvvmCross.Plugins.Email.Touch
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
             bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null : new[] {to};
-            var ccArray = cc == null ? null : new[] {cc};
+            var toArray = to == null ? null : new[] { to };
+            var ccArray = cc == null ? null : new[] { cc };
             ComposeEmail(
                 toArray,
                 ccArray,
@@ -55,7 +55,7 @@ namespace MvvmCross.Plugins.Email.Touch
             _mail.SetMessageBody(body ?? string.Empty, isHtml);
             _mail.SetSubject(subject ?? string.Empty);
 
-            if(cc != null)
+            if (cc != null)
                 _mail.SetCcRecipients(cc.ToArray());
 
             _mail.SetToRecipients(to == null ? new[] { string.Empty } : to.ToArray());
