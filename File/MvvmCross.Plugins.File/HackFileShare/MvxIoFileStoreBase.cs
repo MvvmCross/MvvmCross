@@ -166,7 +166,7 @@ namespace MvvmCross.Plugins.File
 
             using (var fileStream = System.IO.File.OpenWrite(fullPath))
             {
-                await streamAction?.Invoke(fileStream).ConfigureAwait(false);
+                await streamAction(fileStream).ConfigureAwait(false);
                 return;
             }
         }
@@ -181,7 +181,7 @@ namespace MvvmCross.Plugins.File
 
             using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                return await streamAction?.Invoke(fileStream).ConfigureAwait(false);
+                return await streamAction(fileStream).ConfigureAwait(false);
             }
         }
     }

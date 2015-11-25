@@ -201,14 +201,14 @@ namespace MvvmCross.Plugins.File
         public async Task<bool> TryReadBinaryFileAsync(string path, Func<Stream, Task<bool>> readMethod)
         {
             return await TryReadFileCommonAsync(path,
-                async stream => await readMethod?.Invoke(stream).ConfigureAwait(false)).ConfigureAwait(false);
+                async stream => await readMethod(stream).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         public async Task<bool> TryReadBinaryFileAsync(string path,
             Func<Stream, CancellationToken, Task<bool>> readMethod, CancellationToken cancellationToken)
         {
             return await TryReadFileCommonAsync(
-                path, async stream => await readMethod?.Invoke(stream, cancellationToken).ConfigureAwait(false))
+                path, async stream => await readMethod(stream, cancellationToken).ConfigureAwait(false))
                 .ConfigureAwait(false);
         }
 
@@ -280,7 +280,7 @@ namespace MvvmCross.Plugins.File
         {
             await WriteFileCommonAsync(path, async stream =>
             {
-                await writeMethod?.Invoke(stream).ConfigureAwait(false);
+                await writeMethod(stream).ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
 
@@ -289,7 +289,7 @@ namespace MvvmCross.Plugins.File
         {
             await WriteFileCommonAsync(path, async stream =>
             {
-                await writeMethod?.Invoke(stream, cancellationToken).ConfigureAwait(false);
+                await writeMethod(stream, cancellationToken).ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
 
