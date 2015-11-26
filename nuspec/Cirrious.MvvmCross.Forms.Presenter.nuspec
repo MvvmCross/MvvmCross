@@ -59,48 +59,48 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 	</metadata>
 	<files>   
 		<!-- PCL -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\dotnet" />
 
 		<!-- phone -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\wp8" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.WindowsPhone.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.WindowsPhone.*" 
       target="lib\wp8" />
 
 		<!-- win81 -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\wpa81" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\win81" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\portable-win81+wpa81" />
 
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\wpa81" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\win81" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Windows81.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" 
       target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\MonoAndroid403" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Droid.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Droid.*" 
       target="lib\MonoAndroid403" />
 
 
 		<!-- touch -->
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Core.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" 
       target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Cirrious.MvvmCross.Forms.Presenter.Touch.*" 
+		<file src="..\bin\MvvmCross.Forms.Presenter.Touch.*" 
       target="lib\Xamarin.iOS10" />
 
 		<!-- Source Code For Debugging -->
-		<file src="..\Cirrious.MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
+		<file src="..\MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
 	</files>
 </package>

@@ -7,8 +7,8 @@
     <ProjectGuid>{B42BC18D-11C7-4012-B98F-11F093623B3F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Forms.Presenter.Windows81</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Forms.Presenter.Windows81</AssemblyName>
+    <RootNamespace>MvvmCross.Forms.Presenter.Windows81</RootNamespace>
+    <AssemblyName>MvvmCross.Forms.Presenter.Windows81</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

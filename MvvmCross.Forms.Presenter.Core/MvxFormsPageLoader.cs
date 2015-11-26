@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace Cirrious.MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenter.Core
 {
     public class MvxFormsPageLoader : IMvxFormsPageLoader
     {

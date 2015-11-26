@@ -1,8 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Forms.Presenter.Droid;
+using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Forms.Presenter.Droid;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;

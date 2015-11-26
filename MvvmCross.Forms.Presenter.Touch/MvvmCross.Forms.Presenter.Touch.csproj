@@ -6,9 +6,9 @@
     <ProjectGuid>{F2270784-C153-4B1C-BB04-15CB29F0F945}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Cirrious.MvvmCross.Forms.Presenter.Touch</RootNamespace>
+    <RootNamespace>MvvmCross.Forms.Presenter.Touch</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Cirrious.MvvmCross.Forms.Presenter.Touch</AssemblyName>
+    <AssemblyName>MvvmCross.Forms.Presenter.Touch</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>

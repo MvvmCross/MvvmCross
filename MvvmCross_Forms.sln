@@ -5,15 +5,15 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenter", "Presenter", "{FEF8FCE2-6BCC-4C44-BA4F-12D5A62C3E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Core", "Cirrious.MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj", "{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Core", "MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj", "{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Droid", "Cirrious.MvvmCross.Forms.Presenter.Droid\MvvmCross.Forms.Presenter.Droid.csproj", "{F823EE03-AC94-4124-AB5B-91B69FE7B85A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Droid", "MvvmCross.Forms.Presenter.Droid\MvvmCross.Forms.Presenter.Droid.csproj", "{F823EE03-AC94-4124-AB5B-91B69FE7B85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Touch", "Cirrious.MvvmCross.Forms.Presenter.Touch\MvvmCross.Forms.Presenter.Touch.csproj", "{F2270784-C153-4B1C-BB04-15CB29F0F945}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Touch", "MvvmCross.Forms.Presenter.Touch\MvvmCross.Forms.Presenter.Touch.csproj", "{F2270784-C153-4B1C-BB04-15CB29F0F945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.WindowsPhone", "Cirrious.MvvmCross.Forms.Presenter.WindowsPhone\MvvmCross.Forms.Presenter.WindowsPhone.csproj", "{80C643D9-C912-41C0-8F9D-9FAF15A79831}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.WindowsPhone", "MvvmCross.Forms.Presenter.WindowsPhone\MvvmCross.Forms.Presenter.WindowsPhone.csproj", "{80C643D9-C912-41C0-8F9D-9FAF15A79831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Windows81", "Cirrious.MvvmCross.Forms.Presenter.Windows8.1\MvvmCross.Forms.Presenter.Windows81.csproj", "{B42BC18D-11C7-4012-B98F-11F093623B3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.Windows81", "MvvmCross.Forms.Presenter.Windows8.1\MvvmCross.Forms.Presenter.Windows81.csproj", "{B42BC18D-11C7-4012-B98F-11F093623B3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

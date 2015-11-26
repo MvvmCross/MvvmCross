@@ -8,8 +8,8 @@
     <ProjectGuid>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cirrious.MvvmCross.Forms.Presenter.Core</RootNamespace>
-    <AssemblyName>Cirrious.MvvmCross.Forms.Presenter.Core</AssemblyName>
+    <RootNamespace>MvvmCross.Forms.Presenter.Core</RootNamespace>
+    <AssemblyName>MvvmCross.Forms.Presenter.Core</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

@@ -1,7 +1,7 @@
 using Cirrious.MvvmCross.ViewModels;
 using Xamarin.Forms;
 
-namespace Cirrious.MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenter.Core
 {
     public interface IMvxFormsPageLoader
     {
