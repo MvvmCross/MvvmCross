@@ -22,22 +22,19 @@ namespace Cirrious.MvvmCross.Forms.Presenter.Core
         protected override void OnStart()
         {
             var handler = Start;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void OnSleep()
         {
             var handler = Sleep;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void OnResume()
         {
             var handler = Resume;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }
