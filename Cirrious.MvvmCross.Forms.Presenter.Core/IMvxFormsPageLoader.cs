@@ -3,8 +3,8 @@ using Xamarin.Forms;
 
 namespace Cirrious.MvvmCross.Forms.Presenter.Core
 {
-	public interface IMvxFormsPageLoader
-	{
-		Page LoadPage(MvxViewModelRequest request);
-	}
+    public interface IMvxFormsPageLoader
+    {
+        Page LoadPage(MvxViewModelRequest request);
+    }
 }
