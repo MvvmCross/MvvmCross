@@ -124,9 +124,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Forms.Presenter.Core\Cirrious.MvvmCross.Forms.Presenter.Core.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
-      <Name>Cirrious.MvvmCross.Forms.Presenter.Core</Name>
+      <Name>MvvmCross.Forms.Presenter.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
