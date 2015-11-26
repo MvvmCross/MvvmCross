@@ -91,7 +91,7 @@
     <None Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
+    <ProjectReference Include="..\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
       <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
       <Name>MvvmCross.Forms.Presenter.Core</Name>
     </ProjectReference>
