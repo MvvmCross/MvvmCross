@@ -104,7 +104,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
             MvxViewModelRequest request = null)
         {
-            var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
+            var viewModelType = fragmentView.FindAssociatedViewModelType();
             if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
 
