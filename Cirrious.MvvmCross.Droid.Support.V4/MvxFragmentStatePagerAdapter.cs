@@ -5,18 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
-using Java.Lang;
 using Cirrious.MvvmCross.Views;
+using Java.Lang;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4
 {
