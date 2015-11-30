@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{523EBEF6-8800-47D7-B907-2D126F751BB0}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Droid", "Samples\Example.Droid\Example.Droid.csproj", "{92D5EBD8-AA03-458F-BE4E-95961B55E4ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Core", "Samples\Example.Core\Example.Core.csproj", "{8B925961-5638-41B7-B5C0-FFD636328208}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.Preference", "MvvmCross.Droid.Support.V7.Preference\MvvmCross.Droid.Support.V7.Preference.csproj", "{C6DA15E8-A377-40BE-970F-E2681C79BB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,14 @@ Global
 		{8B925961-5638-41B7-B5C0-FFD636328208}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B925961-5638-41B7-B5C0-FFD636328208}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B925961-5638-41B7-B5C0-FFD636328208}.Release|x86.Build.0 = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,5 +129,6 @@ Global
 		{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8} = {523EBEF6-8800-47D7-B907-2D126F751BB0}
 		{92D5EBD8-AA03-458F-BE4E-95961B55E4ED} = {4D8BAF4F-4F1E-4C73-91D2-F5FF957CBE0E}
 		{8B925961-5638-41B7-B5C0-FFD636328208} = {4D8BAF4F-4F1E-4C73-91D2-F5FF957CBE0E}
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34} = {523EBEF6-8800-47D7-B907-2D126F751BB0}
 	EndGlobalSection
 EndGlobal
