@@ -71,4 +71,3 @@ namespace Cirrious.MvvmCross.Droid.Support.Preference
         }
     }
 }
-}
