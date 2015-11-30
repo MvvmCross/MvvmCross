@@ -16,6 +16,7 @@ using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
 using Java.Lang;
+using Cirrious.MvvmCross.Views;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4
 {
@@ -49,7 +50,7 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
                 fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
                 var request = new MvxViewModelRequest (fragInfo.ViewModelType, null, null, null);
-                ((MvxFragment)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+                ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
             }
 
             return fragInfo.CachedFragment;
