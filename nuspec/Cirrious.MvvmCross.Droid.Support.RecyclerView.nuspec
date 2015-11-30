@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.Droid.Support.V7.RecyclerView</id>
+		<id>Cirrious.MvvmCross.Droid.Support.RecyclerView</id>
 		<version>4.0.0-beta7</version>
 		<title>MvvmCross Android Support - RecyclerView</title>
 		<authors>MvvmCross</authors>
