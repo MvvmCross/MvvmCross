@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cirrious.MvvmCross.Droid.Support.V4
+namespace MvvmCross.Droid.Support.V4
 {
     public class MvxFragmentStatePagerAdapter
         : FragmentStatePagerAdapter

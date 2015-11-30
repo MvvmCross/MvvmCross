@@ -12,9 +12,9 @@ using Android.Runtime;
 using Android.Support.V4.Widget;
 using Android.Util;
 
-namespace Cirrious.MvvmCross.Droid.Support.V4 
+namespace MvvmCross.Droid.Support.V4 
 {
-    [Register("cirrious.mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
+    [Register("MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout")]
     public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
     {	 
         protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)

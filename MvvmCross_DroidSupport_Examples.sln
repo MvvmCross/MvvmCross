@@ -5,17 +5,17 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{523EBEF6-8800-47D7-B907-2D126F751BB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.AppCompat", "MvvmCross.Droid.Support.AppCompat\MvvmCross.Droid.Support.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Fragging", "MvvmCross.Droid.Support.Fragging\MvvmCross.Droid.Support.Fragging.csproj", "{5B74F15E-E377-4662-9636-4233049EDDC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.Fragging", "MvvmCross.Droid.Support.V7.Fragging\MvvmCross.Droid.Support.V7.Fragging.csproj", "{5B74F15E-E377-4662-9636-4233049EDDC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.RecyclerView", "MvvmCross.Droid.Support.RecyclerView\MvvmCross.Droid.Support.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V4", "MvvmCross.Droid.Support.V4\MvvmCross.Droid.Support.V4.csproj", "{24C19002-AD02-4B88-9E57-1C254819D30E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Leanback", "MvvmCross.Droid.Support.Leanback\MvvmCross.Droid.Support.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Droid.Support.V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Preference", "MvvmCross.Droid.Support.Preference\MvvmCross.Droid.Support.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Droid.Support.V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj", "{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}"
 EndProject
