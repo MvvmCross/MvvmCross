@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.Fragging</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross Android Support - Fragments</title>
+		<title>MvvmCross Android Support V7 - Fragments</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
@@ -30,8 +30,8 @@ This package contains Support v4 Fragments support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.Fragging.*" target="lib\MonoAndroid403" />
-		<file src="..\Cirrious.MvvmCross.Droid.Support.Fragging\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.Fragging" />
+		<file src="..\bin\MvvmCross.Droid.Support.V7.Fragging.*" target="lib\MonoAndroid403" />
+		<file src="..\MvvmCross.Droid.Support.V7.Fragging\**\*.cs" target="src\MvvmCross.Droid.Support.V7.Fragging" />
 	</files>
 </package>
 

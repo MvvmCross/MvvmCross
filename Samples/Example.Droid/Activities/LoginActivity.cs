@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Cirrious.MvvmCross.Droid.Support.AppCompat;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using Example.Core.ViewModels;
 
 namespace Example.Droid.Activities

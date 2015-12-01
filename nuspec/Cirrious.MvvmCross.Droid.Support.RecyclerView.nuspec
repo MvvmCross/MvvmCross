@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.RecyclerView</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross Android Support - RecyclerView</title>
+		<title>MvvmCross Android Support V7 - RecyclerView</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
@@ -32,8 +32,8 @@ This package contains Support v7 RecyclerView support for MvvmCross.</descriptio
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.RecyclerView.*" target="lib\MonoAndroid403" />
-		<file src="..\Cirrious.MvvmCross.Droid.Support.RecyclerView\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.RecyclerView" />
+		<file src="..\bin\MvvmCross.Droid.Support.V7.RecyclerView.*" target="lib\MonoAndroid403" />
+		<file src="..\MvvmCross.Droid.Support.V7.RecyclerView\**\*.cs" target="src\MvvmCross.Droid.Support.V7.RecyclerView" />
 	</files>
 </package>
 
