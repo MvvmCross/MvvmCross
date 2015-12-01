@@ -142,15 +142,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V4\MvvmCross.Droid.Support.V4.csproj">
       <Project>{24C19002-AD02-4B88-9E57-1C254819D30E}</Project>
-      <Name>Cirrious.MvvmCross.Droid.Support.V4</Name>
+      <Name>MvvmCross.Droid.Support.V4</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
       <Project>{31C39E0F-116E-4EAC-921D-A79E6AA28204}</Project>
-      <Name>Cirrious.MvvmCross.Droid.Support.RecyclerView</Name>
+      <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V7.Fragging\MvvmCross.Droid.Support.V7.Fragging.csproj">
       <Project>{5B74F15E-E377-4662-9636-4233049EDDC3}</Project>
-      <Name>Cirrious.MvvmCross.Droid.Support.Fragging</Name>
+      <Name>MvvmCross.Droid.Support.V7.Fragging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example.Core\Example.Core.csproj">
       <Project>{8B925961-5638-41B7-B5C0-FFD636328208}</Project>
@@ -158,7 +158,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
       <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
-      <Name>Cirrious.MvvmCross.Droid.Support.AppCompat</Name>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
