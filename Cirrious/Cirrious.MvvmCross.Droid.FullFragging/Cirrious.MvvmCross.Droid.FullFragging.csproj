@@ -43,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\FragmentCacheConfiguration.cs" />
+    <Compile Include="Caching\IFragmentCacheableActivity.cs" />
+    <Compile Include="Caching\IMvxCachedFragmentFactory.cs" />
+    <Compile Include="Caching\IMvxCachedFragmentInfo.cs" />
+    <Compile Include="Caching\MvxCachedFragmentFactory.cs" />
+    <Compile Include="Caching\MvxCachedFragmentInfo.cs" />
+    <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
@@ -58,8 +65,8 @@
     <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
-    <Compile Include="MvxOwnedViewModelFragmentAttribute.cs" />
-    <Compile Include="MvxOwnedViewModelFragmentAttributeExtensionMethods.cs" />
+    <Compile Include="MvxFragmentAttribute.cs" />
+    <Compile Include="MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Presenter\IMvxFragmentHost.cs" />
     <Compile Include="Presenter\IMvxFragmentsPresenter.cs" />

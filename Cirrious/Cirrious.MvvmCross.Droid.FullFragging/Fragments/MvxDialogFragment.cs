@@ -54,6 +54,8 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         {
             this.EnsureBindingContextIsSet(b0);
         }
+
+        public string UniqueImmutableCacheTag => Tag;
     }
 
     public abstract class MvxDialogFragment<TViewModel>
