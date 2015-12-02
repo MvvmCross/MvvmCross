@@ -31,11 +31,20 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
                 throw new ArgumentException("eventSource must be an IMvxFragmentView");
         }
 
+        protected override void HandlePauseCalled(object sender, EventArgs e)
+        {
+            base.HandlePauseCalled(sender, e);
+            if (!FragmentView.GetType().IsFragmentCacheable())
+                return;
+
+            FragmentView.RegisterFragmentViewToCacheIfNeeded();
+        }
+
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
 
             Bundle bundle = null;
@@ -91,7 +100,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
@@ -108,7 +117,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
                 }
             }
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel);
+            cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object sender, EventArgs e)
