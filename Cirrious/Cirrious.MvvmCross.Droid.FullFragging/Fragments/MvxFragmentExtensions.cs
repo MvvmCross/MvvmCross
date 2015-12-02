@@ -59,10 +59,10 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
             if (viewModelType == null)
             {
-                if (!type.HasMvxFragmentAttribute())
+                if (!type.IsCacheableFragmentAttribute())
                     throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
 
-                var cacheableFragmentAttribute = type.GetMvxFragmentAttribute();
+                var cacheableFragmentAttribute = type.GetCacheableFragmentAttribute();
                 if (cacheableFragmentAttribute.ViewModelType == null)
                     throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
 
