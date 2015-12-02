@@ -31,21 +31,14 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
                 throw new ArgumentException("eventSource must be an IMvxFragmentView");
         }
 
-        protected override void HandlePauseCalled(object sender, EventArgs e)
-        {
-            base.HandlePauseCalled(sender, e);
-            if (!FragmentView.GetType().IsFragmentCacheable())
-                return;
-
-            FragmentView.RegisterFragmentViewToCacheIfNeeded();
-        }
-
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
             FragmentView.EnsureSetupInitialized();
 
             if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
+
+            FragmentView.RegisterFragmentViewToCacheIfNeeded();
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
