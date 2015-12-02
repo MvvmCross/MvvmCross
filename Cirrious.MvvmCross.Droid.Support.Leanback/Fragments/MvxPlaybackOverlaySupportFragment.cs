@@ -66,4 +66,26 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Fragments
 		{
 		}
 	}
+
+	public abstract class MvxPlaybackOverlaySupportFragment<TViewModel>
+: MvxPlaybackOverlaySupportFragment
+	, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+	{
+
+		protected MvxPlaybackOverlaySupportFragment()
+		{
+
+		}
+
+		protected MvxPlaybackOverlaySupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
+		}
+
+
+		public new TViewModel ViewModel
+		{
+			get { return (TViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+	}
 }
