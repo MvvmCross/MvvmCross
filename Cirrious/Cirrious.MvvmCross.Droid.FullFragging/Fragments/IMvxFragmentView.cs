@@ -15,6 +15,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         : IMvxBindingContextOwner
         , IMvxView
     {
+        string UniqueImmutableCacheTag { get; }
     }
 
     public interface IMvxFragmentView<TViewModel>
