@@ -64,6 +64,10 @@
       <HintPath>..\..\..\packages\Cirrious.MvvmCross.Droid.Support.Fragging.4.0.0-beta6\lib\MonoAndroid403\Cirrious.MvvmCross.Droid.Support.Fragging.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Cirrious.MvvmCross.Droid.Support.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Cirrious.MvvmCross.Droid.Support.RecyclerView.4.0.0-beta6\lib\MonoAndroid403\Cirrious.MvvmCross.Droid.Support.RecyclerView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta5\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
@@ -127,6 +131,7 @@
     <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
     <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\MvxHorizontalGridView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
