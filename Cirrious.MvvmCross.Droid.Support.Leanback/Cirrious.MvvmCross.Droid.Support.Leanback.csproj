@@ -60,11 +60,23 @@
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.4.0.0-beta5\lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Cirrious.MvvmCross.Droid.Support.Fragging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Cirrious.MvvmCross.Droid.Support.Fragging.4.0.0-beta6\lib\MonoAndroid403\Cirrious.MvvmCross.Droid.Support.Fragging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.4.0.0-beta5\lib\MonoAndroid\Cirrious.MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Android.Export" />
+    <Reference Include="MvvmCross.Plugins.Json, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.Json.4.0.0-beta5\lib\MonoAndroid\MvvmCross.Plugins.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -99,6 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceHeadersSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceRowsSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackOverlaySupportFragment.cs" />
@@ -121,11 +134,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Droid.Support.Fragging\Cirrious.MvvmCross.Droid.Support.Fragging.csproj">
-      <Project>{5b74f15e-e377-4662-9636-4233049eddc3}</Project>
-      <Name>Cirrious.MvvmCross.Droid.Support.Fragging</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
