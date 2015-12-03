@@ -52,7 +52,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
     }
 
     public abstract class MvxPreferenceFragmentCompat<TViewModel>
-        : MvxPreferenceFragment
+        : MvxPreferenceFragmentCompat
     , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
 
