@@ -55,12 +55,14 @@
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceListFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourcePreferenceFragment.cs" />
     <Compile Include="Fragments\IMvxFragmentView.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxDialogFragment.cs" />
     <Compile Include="Fragments\MvxFragment.cs" />
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Fragments\MvxListFragment.cs" />
+    <Compile Include="Fragments\MvxPreferenceFragment.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
