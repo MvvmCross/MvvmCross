@@ -1,33 +1,35 @@
-﻿using System.Windows.Input;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
 
 namespace Example.Core.ViewModels
 {
     public class LoginViewModel : MvxViewModel
     {
-        public LoginViewModel () {
+        public LoginViewModel()
+        {
             this.Username = "TestUser";
             this.Password = "YouCantSeeMe";
             this.IsLoading = false;
         }
 
         private string _username;
+
         public string Username
         {
             get { return _username; }
             set
             {
-                SetProperty (ref _username, value);
+                SetProperty(ref _username, value);
             }
         }
 
         private string _password;
+
         public string Password
         {
             get { return _password; }
             set
             {
-                SetProperty (ref _password, value);
+                SetProperty(ref _password, value);
             }
         }
 
@@ -46,9 +48,8 @@ namespace Example.Core.ViewModels
         {
             get
             {
-                return new MvxCommand( () => ShowViewModel<MainViewModel>() );
+                return new MvxCommand(() => ShowViewModel<MainViewModel>());
             }
         }
     }
 }
-

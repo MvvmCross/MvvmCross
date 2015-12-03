@@ -5,17 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.Support.Fragging.Fragments;
 using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Views;
 using Java.Lang;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cirrious.MvvmCross.Droid.Support.V4
 {
@@ -25,10 +25,7 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
         private readonly Context _context;
         public IEnumerable<FragmentInfo> Fragments { get; private set; }
 
-        public override int Count
-        {
-            get { return Fragments.Count(); }
-        }
+        public override int Count => Fragments.Count();
 
         protected MvxFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -52,7 +49,7 @@ namespace Cirrious.MvvmCross.Droid.Support.V4
                 fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
                 var request = new MvxViewModelRequest (fragInfo.ViewModelType, null, null, null);
-                ((MvxFragment)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+                ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
             }
 
             return fragInfo.CachedFragment;

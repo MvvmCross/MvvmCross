@@ -72,12 +72,12 @@ namespace Example.Droid.Activities
             RegisterFragment<TFragment, TViewModel>(tag);
         }
 
-        protected override IMvxCachedFragmentInfo CreateFragmentInfo<TFragment, TViewModel>(string tag, bool addToBackstack = false)
-        {
-            var fragInfo = MyFragmentsInfo[tag];
+		protected override IMvxCachedFragmentInfo CreateFragmentInfo (string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
+		{
+			var fragInfo = MyFragmentsInfo[tag];
 
-            return fragInfo;
-        }
+			return fragInfo;
+		}
 
         public override void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
         {

@@ -22,10 +22,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
-        public IMvxFragmentView FragmentView
-        {
-            get { return Fragment as IMvxFragmentView; }
-        }
+        public IMvxFragmentView FragmentView => Fragment as IMvxFragmentView;
 
         public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
@@ -38,12 +35,12 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
-            if (bundleArgs != null && bundleArgs.Value != null)
+            if (bundleArgs?.Value != null)
             {
                 // saved state
                 bundle = bundleArgs.Value;
@@ -51,7 +48,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
             else
             {
                 var fragment = FragmentView as Fragment;
-                if (fragment != null && fragment.Arguments != null)
+                if (fragment?.Arguments != null)
                 {
                     bundle = fragment.Arguments;
                     var json = bundle.GetString("__mvxViewModelRequest");
@@ -94,7 +91,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsOwnedViewModelFragment())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
@@ -111,24 +108,18 @@ namespace Cirrious.MvvmCross.Droid.Support.Fragging.Fragments
                 }
             }
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel);
+            cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object sender, EventArgs e)
         {
-            if (FragmentView.BindingContext != null)
-            {
-                FragmentView.BindingContext.ClearAllBindings();
-            }
+            FragmentView.BindingContext?.ClearAllBindings();
             base.HandleDestroyViewCalled(sender, e);
         }
 
         protected override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (FragmentView.BindingContext != null)
-            {
-                FragmentView.BindingContext.ClearAllBindings();
-            }
+            FragmentView.BindingContext?.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }
