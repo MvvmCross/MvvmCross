@@ -88,9 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxEventSourcePreferenceFragment.cs" />
     <Compile Include="MvxEventSourcePreferenceFragmentCompat.cs" />
-    <Compile Include="MvxPreferenceFragment.cs" />
     <Compile Include="MvxPreferenceFragmentCompat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
