@@ -115,6 +115,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\IMvxObjectAdapter.cs" />
+    <Compile Include="Adapters\MvxBaseObjectAdapter.cs" />
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceHeadersSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceRowsSupportFragment.cs" />
@@ -130,7 +132,9 @@
     <Compile Include="Fragments\MvxGuidedStepFragment.cs" />
     <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
     <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
+    <Compile Include="MvxObjectWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Widgets\MvxHorizontalGridView.cs" />
   </ItemGroup>
   <ItemGroup>
