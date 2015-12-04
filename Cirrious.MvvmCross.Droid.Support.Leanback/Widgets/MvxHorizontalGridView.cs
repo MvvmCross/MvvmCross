@@ -112,9 +112,6 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
             set { this.Adapter.ItemLongClick = value; }
         }
 
-		/// <summary>
-		/// Gets executed with position of currently selected item.
-		/// </summary>
 		public ICommand ItemSelection
 		{
 			get { return OnChildViewHolderSelectedListener?.ItemSelection; }
