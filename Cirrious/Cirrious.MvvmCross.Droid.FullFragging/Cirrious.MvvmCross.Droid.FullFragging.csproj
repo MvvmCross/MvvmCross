@@ -66,9 +66,9 @@
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
+    <Compile Include="MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="MvxFragmentAttribute.cs" />
-    <Compile Include="MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Presenter\IMvxFragmentHost.cs" />
     <Compile Include="Presenter\IMvxFragmentsPresenter.cs" />

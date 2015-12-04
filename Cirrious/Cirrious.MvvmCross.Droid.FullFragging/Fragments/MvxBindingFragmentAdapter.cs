@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         protected override void HandlePauseCalled(object sender, EventArgs e)
         {
             base.HandlePauseCalled(sender, e);
-            if (!FragmentView.GetType().IsFragmentCacheable())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             FragmentView.RegisterFragmentViewToCacheIfNeeded();
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsFragmentCacheable())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             Bundle bundle = null;
@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsFragmentCacheable())
+            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
