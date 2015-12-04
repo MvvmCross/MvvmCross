@@ -11,10 +11,11 @@ using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
-using Android.Support.V7.Widget;
 using Android.Util;
+using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using Cirrious.MvvmCross.Droid.Support.Leanback.Listeners;
 using Cirrious.MvvmCross.Droid.Support.RecyclerView;
 
 namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
@@ -38,13 +39,18 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
                 return;
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+
+			adapter.ItemTemplateId = itemTemplateId;
 	        Adapter = adapter;
+
+			// We need this listener to get information about the currently _selected_ item
+	        OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
+            SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
         }
 
-        #endregion
+		#endregion
 
-        public new IMvxRecyclerAdapter Adapter
+		public new IMvxRecyclerAdapter Adapter
         {
             get { return base.GetAdapter() as IMvxRecyclerAdapter; }
             set
@@ -73,7 +79,15 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
             }
         }
 
-        [MvxSetToNullAfterBinding]
+		protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
+
+		public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
+		{
+			MvxTrace.Warning("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelectedPosition command.");
+			base.SetOnChildViewHolderSelectedListener(listener);
+		}
+
+		[MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
@@ -97,5 +111,14 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
             get { return this.Adapter.ItemLongClick; }
             set { this.Adapter.ItemLongClick = value; }
         }
+
+		/// <summary>
+		/// Gets executed with position of currently selected item.
+		/// </summary>
+		public ICommand ItemSelection
+		{
+			get { return OnChildViewHolderSelectedListener?.ItemSelection; }
+			set { OnChildViewHolderSelectedListener.ItemSelection = value; }
+		}
     }
 }
