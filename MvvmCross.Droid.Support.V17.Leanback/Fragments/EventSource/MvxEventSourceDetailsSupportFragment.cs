@@ -8,7 +8,7 @@ using Cirrious.CrossCore.Core;
 using MvvmCross.Droid.Support.V7.Fragging;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 
-namespace MvvmCross.Droid.Support.Leanback.V17.Fragments.EventSource
+namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {
 	public class MvxEventSourceDetailsSupportFragment
 		: DetailsSupportFragment

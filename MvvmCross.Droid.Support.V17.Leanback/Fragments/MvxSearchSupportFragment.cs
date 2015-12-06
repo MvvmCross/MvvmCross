@@ -3,10 +3,10 @@ using Android.OS;
 using Android.Runtime;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
-using MvvmCross.Droid.Support.Leanback.V17.Fragments.EventSource;
+using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using Cirrious.MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.Leanback.V17.Fragments
+namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
 	public class MvxSearchSupportFragment
 		: MvxEventSourceSearchSupportFragment

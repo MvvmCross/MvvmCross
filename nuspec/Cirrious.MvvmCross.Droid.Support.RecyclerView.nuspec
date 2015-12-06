@@ -32,7 +32,7 @@ This package contains Support v7 RecyclerView support for MvvmCross.</descriptio
 		</releaseNotes>
 	</metadata>
 	<files>
-		<file src="..\bin\MvvmCross.Droid.Support.V7.RecyclerView.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.RecyclerView.*" target="lib\MonoAndroid403" />
 		<file src="..\MvvmCross.Droid.Support.V7.RecyclerView\**\*.cs" target="src\MvvmCross.Droid.Support.V7.RecyclerView" />
 	</files>
 </package>
