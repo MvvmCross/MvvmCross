@@ -68,4 +68,26 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
     }
+
+	public abstract class MvxSearchSupportFragment<TViewModel>
+	: MvxSearchSupportFragment
+		, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+	{
+
+		protected MvxSearchSupportFragment()
+		{
+
+		}
+
+		protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
+		}
+
+
+		public new TViewModel ViewModel
+		{
+			get { return (TViewModel)base.ViewModel; }
+			set { base.ViewModel = value; }
+		}
+	}
 }
