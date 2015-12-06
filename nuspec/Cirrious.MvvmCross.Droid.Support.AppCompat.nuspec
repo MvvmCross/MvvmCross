@@ -34,7 +34,7 @@ This package contains Support v7 AppCompat support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\MvvmCross.Droid.Support.V7.AppCompat.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.AppCompat.*" target="lib\MonoAndroid403" />
 		<file src="..\MvvmCross.Droid.Support.V7.AppCompat\**\*.cs" target="src\MvvmCross.Droid.Support.V7.AppCompat" />
 	</files>
 </package>

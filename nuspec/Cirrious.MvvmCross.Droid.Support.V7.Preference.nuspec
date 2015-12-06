@@ -36,7 +36,7 @@ This package contains Support v7 Preference support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\MvvmCross.Droid.Support.V7.Preference.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.Preference.*" target="lib\MonoAndroid403" />
 		<file src="..\MvvmCross.Droid.Support.V7.Preference\**\*.cs" target="src\MvvmCross.Droid.Support.V7.Preference" />
 	</files>
 </package>

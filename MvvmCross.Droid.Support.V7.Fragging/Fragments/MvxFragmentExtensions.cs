@@ -85,8 +85,11 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
         {
             try
             {
-                var parameterValues = new MvxBundle(request.ParameterValues);
-                viewModel.CallBundleMethods("Init", parameterValues);
+                if (request != null)
+                {
+                    var parameterValues = new MvxBundle(request.ParameterValues);
+                    viewModel.CallBundleMethods("Init", parameterValues);
+                }
                 if (savedState != null)
                 {
                     viewModel.CallBundleMethods("ReloadState", savedState);

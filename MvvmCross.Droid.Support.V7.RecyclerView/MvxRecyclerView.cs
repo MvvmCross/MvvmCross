@@ -41,7 +41,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         #endregion
 
-        public sealed override void SetLayoutManager(LayoutManager layout)
+        public override sealed void SetLayoutManager(LayoutManager layout)
         {
             base.SetLayoutManager(layout);
         }

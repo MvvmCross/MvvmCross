@@ -2,34 +2,41 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V17.Leanback.Widget;
-using Android.Support.V7.Widget;
 using Android.Util;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Droid.Support.RecyclerView;
+using MvvmCross.Droid.Support.V7.RecyclerView;
+using System;
+using System.Collections;
+using System.Windows.Input;
 
 namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
 {
-	/// <remarks>
-	/// This class is actually (almost) the same as MvxReyclerView. Please keep this in mind if fixing bugs or implementing improvements!
-	/// </remarks>
-	[Register("cirrious.mvvmcross.droid.support.leanback.widgets.MvxHorizontalGridView")]
+    /// <remarks>
+    /// This class is actually (almost) the same as MvxReyclerView. Please keep this in mind if fixing bugs or implementing improvements!
+    /// </remarks>
+    [Register("cirrious.mvvmcross.droid.support.leanback.widgets.MvxHorizontalGridView")]
     public class MvxHorizontalGridView : Android.Support.V17.Leanback.Widget.HorizontalGridView
     {
         #region ctor
 
-        protected MvxHorizontalGridView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-        public MvxHorizontalGridView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
-        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
+        protected MvxHorizontalGridView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter())
+        {
+        }
+
         public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
         {
             // Note: Any calling derived class passing a null adapter is responsible for setting
@@ -39,10 +46,10 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-	        Adapter = adapter;
+            Adapter = adapter;
         }
 
-        #endregion
+        #endregion ctor
 
         public new IMvxRecyclerAdapter Adapter
         {
