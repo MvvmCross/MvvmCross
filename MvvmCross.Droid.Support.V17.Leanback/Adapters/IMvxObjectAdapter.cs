@@ -1,7 +1,7 @@
-﻿using Cirrious.MvvmCross.Binding.Attributes;
-using System.Collections;
+﻿using System.Collections;
+using Cirrious.MvvmCross.Binding.Attributes;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Adapters
+namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
     public interface IMvxObjectAdapter
     {
