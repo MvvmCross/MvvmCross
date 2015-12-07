@@ -1,5 +1,5 @@
 ﻿using Android.Runtime;
-using Cirrious.MvvmCross.Droid.Support.Fragging;
+using MvvmCross.Droid.Support.V7.Fragging;
 using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments

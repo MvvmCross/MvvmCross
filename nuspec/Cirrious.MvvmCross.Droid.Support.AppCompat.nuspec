@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.AppCompat</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross Android Support - AppCompat</title>
+		<title>MvvmCross Android Support V7 - AppCompat</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
@@ -34,8 +34,8 @@ This package contains Support v7 AppCompat support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.AppCompat.*" target="lib\MonoAndroid403" />
-		<file src="..\Cirrious.MvvmCross.Droid.Support.AppCompat\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.AppCompat" />
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.AppCompat.*" target="lib\MonoAndroid403" />
+		<file src="..\MvvmCross.Droid.Support.V7.AppCompat\**\*.cs" target="src\MvvmCross.Droid.Support.V7.AppCompat" />
 	</files>
 </package>
 

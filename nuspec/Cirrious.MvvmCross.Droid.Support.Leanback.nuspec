@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.Leanback</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross Android Support - Leanback</title>
+		<title>MvvmCross Android Support V17 - Leanback</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
@@ -43,7 +43,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Cirrious.MvvmCross.Droid.Support.Leanback.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\Cirrious.MvvmCross.Droid.Support.Leanback.*" target="lib\MonoAndroid403" />
 		<file src="..\Cirrious.MvvmCross.Droid.Support.Leanback\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.Leanback" />
 	</files>
 </package>
