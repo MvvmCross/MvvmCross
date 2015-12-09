@@ -5,6 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
@@ -12,11 +15,8 @@ using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V7.RecyclerView;
-using System;
-using System.Collections;
-using System.Windows.Input;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
+namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {
     /// <remarks>
     /// This class is actually (almost) the same as MvxReyclerView. Please keep this in mind if fixing bugs or implementing improvements!

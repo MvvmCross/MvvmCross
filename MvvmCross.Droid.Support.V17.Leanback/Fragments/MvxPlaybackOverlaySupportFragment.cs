@@ -4,6 +4,7 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using System;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {

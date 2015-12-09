@@ -91,7 +91,7 @@
     <Compile Include="Fragments\EventSource\MvxEventSourceHeadersSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceRowsSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackOverlaySupportFragment.cs" />
-    <Compile Include="Fragments\EventSource\MvxEventSourceGuidedStepFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourceGuidedStepSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceSearchSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDetailsSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceBrowseSupportFragment.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Fragments\MvxRowsSupportFragment.cs" />
     <Compile Include="Fragments\MvxBrowseSupportFragment.cs" />
     <Compile Include="Fragments\MvxDetailsSupportFragment.cs" />
-    <Compile Include="Fragments\MvxGuidedStepFragment.cs" />
+    <Compile Include="Fragments\MvxGuidedStepSupportFragment.cs" />
     <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
     <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
     <Compile Include="MvxObjectWrapper.cs" />
@@ -110,9 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.Droid.Support.V7.Fragging\MvvmCross.Droid.Support.V7.Fragging.csproj">

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback
+namespace MvvmCross.Droid.Support.V17.Leanback
 {
     public class MvxObjectWrapper : Java.Lang.Object
     {
