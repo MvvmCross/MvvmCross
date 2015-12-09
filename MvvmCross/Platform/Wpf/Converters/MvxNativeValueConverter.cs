@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace Cirrious.CrossCore.Wpf.Converters
+namespace MvvmCross.Platform.Wpf.Converters
 {
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxNativeValueConverter
         : IValueConverter
     {
@@ -20,20 +21,20 @@ namespace Cirrious.CrossCore.Wpf.Converters
 
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
-            _wrapped = wrapped;
+            this._wrapped = wrapped;
         }
 
-        protected IMvxValueConverter Wrapped => _wrapped;
+        protected IMvxValueConverter Wrapped => this._wrapped;
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var toReturn = _wrapped.Convert(value, targetType, parameter, culture);
+            var toReturn = this._wrapped.Convert(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, culture);
+            var toReturn = this._wrapped.ConvertBack(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
         }
 

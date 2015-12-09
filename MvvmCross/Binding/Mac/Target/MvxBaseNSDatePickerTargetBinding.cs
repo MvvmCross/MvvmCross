@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -14,8 +12,12 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System;
+
+    using global::MvvmCross.Platform.Platform;
+
     public abstract class MvxBaseNSDatePickerTargetBinding : MvxMacTargetBinding
     {
         private bool _subscribed;
@@ -32,7 +34,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         public override void SubscribeToEvents()
         {
-            var datePicker = DatePicker;
+            var datePicker = this.DatePicker;
 
             if (datePicker == null)
             {
@@ -41,15 +43,15 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 return;
             }
             datePicker.Activated += HandleActivated;
-            _subscribed = true;
+            this._subscribed = true;
         }
 
         private void HandleActivated(object sender, EventArgs e)
         {
-            var view = DatePicker;
+            var view = this.DatePicker;
             if (view == null)
                 return;
-            FireValueChanged(GetValueFrom(view));
+            FireValueChanged(this.GetValueFrom(view));
         }
 
         protected abstract object GetValueFrom(NSDatePicker view);
@@ -70,11 +72,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var datePicker = DatePicker;
-                if (datePicker != null && _subscribed)
+                var datePicker = this.DatePicker;
+                if (datePicker != null && this._subscribed)
                 {
                     datePicker.Activated -= HandleActivated;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

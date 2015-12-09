@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     public abstract class MvxTypedSourceStepFactory<T>
         : IMvxSourceStepFactory
@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
     {
         public IMvxSourceStep Create(MvxSourceStepDescription description)
         {
-            return TypedCreate((T)description);
+            return this.TypedCreate((T)description);
         }
 
         protected abstract IMvxSourceStep TypedCreate(T description);

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target
+namespace MvvmCross.Binding.Bindings.Target
 {
+    using System;
+
     public class MvxTargetChangedEventArgs
         : EventArgs
     {
         public MvxTargetChangedEventArgs(object value)
         {
-            Value = value;
+            this.Value = value;
         }
 
         public Object Value { get; private set; }

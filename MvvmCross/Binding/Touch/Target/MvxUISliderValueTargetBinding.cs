@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxUISliderValueTargetBinding
         : MvxPropertyInfoTargetBinding<UISlider>
     {
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 return;
             }
 
-            _subscribed = true;
+            this._subscribed = true;
             slider.ValueChanged += HandleSliderValueChanged;
         }
 
@@ -60,10 +61,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (isDisposing)
             {
                 var slider = View;
-                if (slider != null && _subscribed)
+                if (slider != null && this._subscribed)
                 {
                     slider.ValueChanged -= HandleSliderValueChanged;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

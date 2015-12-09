@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
+namespace MvvmCross.Binding.Touch.Views.Gestures
 {
+    using UIKit;
+
     public static class MvxBehaviourExtensions
     {
         public static MvxTapGestureRecognizerBehaviour Tap(this UIView view, uint numberOfTapsRequired = 1,

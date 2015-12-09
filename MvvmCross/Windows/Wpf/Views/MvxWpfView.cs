@@ -5,22 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System.Windows.Controls;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System.Windows.Controls;
+
+    using MvvmCross.Core.ViewModels;
+
     public class MvxWpfView : UserControl, IMvxWpfView
     {
         private IMvxViewModel _viewModel;
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get { return this._viewModel; }
             set
             {
-                _viewModel = value;
-                DataContext = value;
+                this._viewModel = value;
+                this.DataContext = value;
             }
         }
     }

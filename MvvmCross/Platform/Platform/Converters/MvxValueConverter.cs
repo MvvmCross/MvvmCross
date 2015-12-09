@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Globalization;
-
-namespace Cirrious.CrossCore.Converters
+namespace MvvmCross.Platform.Converters
 {
+    using System;
+    using System.Globalization;
+
     public abstract class MvxValueConverter
         : IMvxValueConverter
     {
@@ -31,7 +31,7 @@ namespace Cirrious.CrossCore.Converters
         {
             try
             {
-                return Convert((TFrom)value, targetType, parameter, culture);
+                return this.Convert((TFrom)value, targetType, parameter, culture);
             }
             catch (Exception)
             {
@@ -48,7 +48,7 @@ namespace Cirrious.CrossCore.Converters
         {
             try
             {
-                return ConvertBack((TTo)value, targetType, parameter, culture);
+                return this.ConvertBack((TTo)value, targetType, parameter, culture);
             }
             catch (Exception)
             {
@@ -69,7 +69,7 @@ namespace Cirrious.CrossCore.Converters
         {
             try
             {
-                return Convert((TFrom)value, targetType, parameter, culture);
+                return this.Convert((TFrom)value, targetType, parameter, culture);
             }
             catch (Exception)
             {
@@ -86,7 +86,7 @@ namespace Cirrious.CrossCore.Converters
         {
             try
             {
-                return TypedConvertBack(value, targetType, parameter, culture);
+                return this.TypedConvertBack(value, targetType, parameter, culture);
             }
             catch (Exception)
             {

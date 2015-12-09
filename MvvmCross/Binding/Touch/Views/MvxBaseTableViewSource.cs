@@ -5,23 +5,26 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Foundation;
-using System;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Windows.Input;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
+    using UIKit;
+
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
         private readonly UITableView _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
-            _tableView = tableView;
+            this._tableView = tableView;
         }
 
         protected MvxBaseTableViewSource(IntPtr handle)
@@ -30,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected UITableView TableView => _tableView;
+        protected UITableView TableView => this._tableView;
 
         public bool DeselectAutomatically { get; set; }
 
@@ -40,11 +43,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
         {
-            var command = AccessoryTappedCommand;
+            var command = this.AccessoryTappedCommand;
             if (command == null)
                 return;
 
-            var item = GetItemAt(indexPath);
+            var item = this.GetItemAt(indexPath);
             if (command.CanExecute(item))
                 command.Execute(item);
         }
@@ -53,7 +56,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             try
             {
-                _tableView.ReloadData();
+                this._tableView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -67,31 +70,31 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            if (DeselectAutomatically)
+            if (this.DeselectAutomatically)
             {
                 tableView.DeselectRow(indexPath, true);
             }
 
-            var item = GetItemAt(indexPath);
+            var item = this.GetItemAt(indexPath);
 
-            var command = SelectionChangedCommand;
+            var command = this.SelectionChangedCommand;
             if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
-            SelectedItem = item;
+            this.SelectedItem = item;
         }
 
         private object _selectedItem;
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get { return this._selectedItem; }
             set
             {
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
-                _selectedItem = value;
-                var handler = SelectedItemChanged;
+                this._selectedItem = value;
+                var handler = this.SelectedItemChanged;
                 handler?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -100,8 +103,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var item = GetItemAt(indexPath);
-            var cell = GetOrCreateCellFor(tableView, indexPath, item);
+            var item = this.GetItemAt(indexPath);
+            var cell = this.GetOrCreateCellFor(tableView, indexPath, item);
 
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)

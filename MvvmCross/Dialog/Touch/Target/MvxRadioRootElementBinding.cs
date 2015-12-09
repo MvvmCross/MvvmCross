@@ -5,28 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Target
+namespace MvvmCross.Dialog.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Platform.Platform;
+
     public class MvxRadioRootElementBinding : MvxPropertyInfoTargetBinding<RootElement>
     {
         public MvxRadioRootElementBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var rootElement = View;
+            var rootElement = this.View;
             if (rootElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - rootElement is null in MvxRadioRootElementBinding");
             }
             else
             {
-                rootElement.RadioSelectedChanged += RootElementOnRadioSelectedChanged;
+                rootElement.RadioSelectedChanged += this.RootElementOnRadioSelectedChanged;
             }
         }
 
@@ -34,7 +36,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
 
         private void RootElementOnRadioSelectedChanged(object sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.RadioSelected);
+            this.FireValueChanged(this.View.RadioSelected);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -42,10 +44,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var rootElement = View;
+                var rootElement = this.View;
                 if (rootElement != null)
                 {
-                    rootElement.RadioSelectedChanged -= RootElementOnRadioSelectedChanged;
+                    rootElement.RadioSelectedChanged -= this.RootElementOnRadioSelectedChanged;
                 }
             }
         }

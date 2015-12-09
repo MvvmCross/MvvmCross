@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
     public interface IMvxApplicableTo
     {

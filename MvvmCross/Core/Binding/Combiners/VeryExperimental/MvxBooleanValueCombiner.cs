@@ -1,10 +1,11 @@
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners.VeryExperimental
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.ExtensionMethods;
+    using MvvmCross.Platform.Converters;
+
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
     {
@@ -68,7 +69,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     return true;
                 }
                 bool booleanValue;
-                if (!TryConvertToBool(objectValue, out booleanValue))
+                if (!this.TryConvertToBool(objectValue, out booleanValue))
                 {
                     value = MvxBindingConstant.UnsetValue;
                     return true;
@@ -76,7 +77,7 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 stepValues.Add(booleanValue);
             }
 
-            return TryCombine(stepValues, out value);
+            return this.TryCombine(stepValues, out value);
         }
 
         protected abstract bool TryCombine(List<bool> stepValues, out object value);

@@ -7,17 +7,19 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.Threading;
 
 #if __UNIFIED__
 using AppKit;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System;
+    using System.Threading;
+
+    using global::MvvmCross.Platform.Core;
+
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadDispatcher
     {
@@ -25,12 +27,12 @@ namespace Cirrious.MvvmCross.Mac.Views
 
         protected MvxMacUIThreadDispatcher()
         {
-            _uiSynchronizationContext = SynchronizationContext.Current;
+            this._uiSynchronizationContext = SynchronizationContext.Current;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (_uiSynchronizationContext == SynchronizationContext.Current)
+            if (this._uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
                 NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));

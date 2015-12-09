@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     public interface IMvxSourceStepFactory
     {

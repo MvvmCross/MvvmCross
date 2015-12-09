@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Test.ViewModels
+namespace MvvmCross.Test.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Mocks.TestViewModels;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxSaveStateTest : MvxIoCSupportingTest
     {

@@ -5,84 +5,86 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Views;
-using CrossUI.Droid.Dialog;
-using System;
-
-namespace Cirrious.MvvmCross.Dialog.Droid.Views
+namespace MvvmCross.Dialog.Droid.Views
 {
+    using System;
+
+    using Android.App;
+    using Android.Content;
+    using Android.OS;
+
+    using CrossUI.Droid.Dialog;
+
+    using MvvmCross.Platform.Core;
+
     public abstract class EventSourceDialogActivity
         : DialogActivity
           , IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
-            CreateWillBeCalled.Raise(this, bundle);
+            this.CreateWillBeCalled.Raise(this, bundle);
             base.OnCreate(bundle);
-            CreateCalled.Raise(this, bundle);
+            this.CreateCalled.Raise(this, bundle);
         }
 
         protected override void OnDestroy()
         {
-            DestroyCalled.Raise(this);
+            this.DestroyCalled.Raise(this);
             base.OnDestroy();
         }
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-            NewIntentCalled.Raise(this, intent);
+            this.NewIntentCalled.Raise(this, intent);
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            ResumeCalled.Raise(this);
+            this.ResumeCalled.Raise(this);
         }
 
         protected override void OnPause()
         {
-            PauseCalled.Raise(this);
+            this.PauseCalled.Raise(this);
             base.OnPause();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            StartCalled.Raise(this);
+            this.StartCalled.Raise(this);
         }
 
         protected override void OnRestart()
         {
             base.OnRestart();
-            RestartCalled.Raise(this);
+            this.RestartCalled.Raise(this);
         }
 
         protected override void OnStop()
         {
-            StopCalled.Raise(this);
+            this.StopCalled.Raise(this);
             base.OnStop();
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
-            SaveInstanceStateCalled.Raise(this, outState);
+            this.SaveInstanceStateCalled.Raise(this, outState);
             base.OnSaveInstanceState(outState);
         }
 
         public override void StartActivityForResult(Intent intent, int requestCode)
         {
-            StartActivityForResultCalled.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
+            this.StartActivityForResultCalled.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
             base.StartActivityForResult(intent, requestCode);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            ActivityResultCalled.Raise(this, new MvxActivityResultParameters(requestCode, resultCode, data));
+            this.ActivityResultCalled.Raise(this, new MvxActivityResultParameters(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
@@ -90,7 +92,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Views
         {
             if (disposing)
             {
-                DisposeCalled.Raise(this);
+                this.DisposeCalled.Raise(this);
             }
             base.Dispose(disposing);
         }

@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System.Linq;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.ExtensionMethods;
+    using MvvmCross.Platform.Converters;
+
     public class MvxIfValueCombiner
         : MvxValueCombiner
     {
@@ -21,10 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Combiners
             switch (list.Count)
             {
                 case 2:
-                    return TryEvaluateIf(list[0], list[1], null, out value);
+                    return this.TryEvaluateIf(list[0], list[1], null, out value);
 
                 case 3:
-                    return TryEvaluateIf(list[0], list[1], list[2], out value);
+                    return this.TryEvaluateIf(list[0], list[1], list[2], out value);
 
                 default:
                     MvxBindingTrace.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
@@ -47,13 +48,13 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 return true;
             }
 
-            if (IsTrue(result))
+            if (this.IsTrue(result))
             {
-                value = ReturnSubStepResult(ifStep);
+                value = this.ReturnSubStepResult(ifStep);
                 return true;
             }
 
-            value = ReturnSubStepResult(elseStep);
+            value = this.ReturnSubStepResult(elseStep);
             return true;
         }
 

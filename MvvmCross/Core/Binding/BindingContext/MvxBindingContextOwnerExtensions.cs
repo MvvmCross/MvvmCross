@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings;
+
     public static partial class MvxBindingContextOwnerExtensions
     {
         public static void CreateBindingContext(this IMvxBindingContextOwner view)

@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Dialog.Touch;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Core.Elements.Menu;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
+namespace MvvmCross.AutoView.Touch.Views.Dialog
 {
+    using System;
+
+    using CrossUI.Core.Elements.Menu;
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+
+    using UIKit;
+
     [MvxUnconventional]
     public class MvxAutoDialogTouchView
         : MvxDialogViewController
@@ -49,20 +48,20 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Dialog
             base.ViewDidLoad();
 
             Root = this.LoadDialogRoot<Element, RootElement>();
-            _parentMenu = this.LoadMenu();
+            this._parentMenu = this.LoadMenu();
 
-            if (_parentMenu != null)
+            if (this._parentMenu != null)
             {
                 NavigationItem.SetRightBarButtonItem(
                     new UIBarButtonItem(UIBarButtonSystemItem.Action,
-                                        (sender, e) => { ShowActionMenu(); }),
+                                        (sender, e) => { this.ShowActionMenu(); }),
                     false);
             }
         }
 
         private void ShowActionMenu()
         {
-            this.ShowOptionsMenu(_parentMenu);
+            this.ShowOptionsMenu(this._parentMenu);
         }
 
         public void RegisterBinding(object target, IMvxUpdateableBinding binding)

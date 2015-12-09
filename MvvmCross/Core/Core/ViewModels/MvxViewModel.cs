@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
     public abstract class MvxViewModel
         : MvxNavigatingObject
@@ -13,19 +13,19 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         protected MvxViewModel()
         {
-            RequestedBy = MvxRequestedBy.Unknown;
+            this.RequestedBy = MvxRequestedBy.Unknown;
         }
 
         public MvxRequestedBy RequestedBy { get; set; }
 
         public void Init(IMvxBundle parameters)
         {
-            InitFromBundle(parameters);
+            this.InitFromBundle(parameters);
         }
 
         public void ReloadState(IMvxBundle state)
         {
-            ReloadFromBundle(state);
+            this.ReloadFromBundle(state);
         }
 
         public virtual void Start()
@@ -34,7 +34,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void SaveState(IMvxBundle state)
         {
-            SaveStateToBundle(state);
+            this.SaveStateToBundle(state);
         }
 
         protected virtual void InitFromBundle(IMvxBundle parameters)

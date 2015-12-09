@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
     public class MvxPostfixAwareViewToViewModelNameMapping
         : MvxViewToViewModelNameMapping
@@ -14,12 +14,12 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxPostfixAwareViewToViewModelNameMapping(params string[] postfixes)
         {
-            _postfixes = postfixes;
+            this._postfixes = postfixes;
         }
 
         public override string Map(string inputName)
         {
-            foreach (var postfix in _postfixes)
+            foreach (var postfix in this._postfixes)
             {
                 if (inputName.EndsWith(postfix) && inputName.Length > postfix.Length)
                 {

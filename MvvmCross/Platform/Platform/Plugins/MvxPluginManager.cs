@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxPluginManager
         : IMvxPluginManager
     {
@@ -23,13 +24,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             lock (this)
             {
-                return _loadedPlugins.ContainsKey(typeof(T));
+                return this._loadedPlugins.ContainsKey(typeof(T));
             }
         }
 
         public void EnsurePluginLoaded<TType>()
         {
-            EnsurePluginLoaded(typeof(TType));
+            this.EnsurePluginLoaded(typeof(TType));
         }
 
         public virtual void EnsurePluginLoaded(Type type)
@@ -55,7 +56,7 @@ namespace Cirrious.CrossCore.Plugins
                 return;
             }
 
-            EnsurePluginLoaded(pluginLoader);
+            this.EnsurePluginLoaded(pluginLoader);
         }
 
         protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
@@ -64,7 +65,7 @@ namespace Cirrious.CrossCore.Plugins
             if (configurable != null)
             {
                 MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
-                var configuration = ConfigurationFor(pluginLoader.GetType());
+                var configuration = this.ConfigurationFor(pluginLoader.GetType());
                 configurable.Configure(configuration);
             }
 
@@ -77,13 +78,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             lock (this)
             {
-                if (IsPluginLoaded<T>())
+                if (this.IsPluginLoaded<T>())
                 {
                     return;
                 }
 
                 var toLoad = typeof(T);
-                _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+                this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
             }
         }
 
@@ -92,7 +93,7 @@ namespace Cirrious.CrossCore.Plugins
         {
             lock (this)
             {
-                if (IsPluginLoaded<T>())
+                if (this.IsPluginLoaded<T>())
                 {
                     return true;
                 }
@@ -100,7 +101,7 @@ namespace Cirrious.CrossCore.Plugins
                 try
                 {
                     var toLoad = typeof(T);
-                    _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
+                    this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
                     return true;
                 }
                 // pokemon 'catch them all' exception handling allowed here in this Try method
@@ -116,11 +117,11 @@ namespace Cirrious.CrossCore.Plugins
         {
             try
             {
-                var plugin = FindPlugin(toLoad);
+                var plugin = this.FindPlugin(toLoad);
                 var configurablePlugin = plugin as IMvxConfigurablePlugin;
                 if (configurablePlugin != null)
                 {
-                    var configuration = ConfigurationSource(configurablePlugin.GetType());
+                    var configuration = this.ConfigurationSource(configurablePlugin.GetType());
                     configurablePlugin.Configure(configuration);
                 }
                 plugin.Load();
@@ -136,7 +137,7 @@ namespace Cirrious.CrossCore.Plugins
             }
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => this.ConfigurationSource?.Invoke(toLoad);
 
         protected abstract IMvxPlugin FindPlugin(Type toLoad);
     }

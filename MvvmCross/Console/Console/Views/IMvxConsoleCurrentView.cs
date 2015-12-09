@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
     public interface IMvxConsoleCurrentView
     {

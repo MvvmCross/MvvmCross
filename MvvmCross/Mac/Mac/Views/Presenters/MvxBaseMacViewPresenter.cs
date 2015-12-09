@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Mac.Views.Presenters
+namespace MvvmCross.Mac.Views.Presenters
 {
+    using global::MvvmCross.Core.ViewModels;
+    using global::MvvmCross.Core.Views;
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxBaseMacViewPresenter
         : MvxViewPresenter, IMvxMacViewPresenter
     {
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Mac.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

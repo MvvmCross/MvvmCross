@@ -5,19 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsCommon.Views;
-using Cirrious.MvvmCross.WindowsCommon.Views.Suspension;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsCommon.Platform
+namespace MvvmCross.WindowsCommon.Platform
 {
+    using System.Collections.Generic;
+
+    using Windows.UI.Xaml.Controls;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.WindowsCommon.Views;
+    using MvvmCross.WindowsCommon.Views.Suspension;
+
     public abstract class MvxWindowsSetup
         : MvxSetup
     {
@@ -27,12 +29,12 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
         protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
             : this(new MvxWrappedFrame(rootFrame))
         {
-            _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
+            this._suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
         }
 
         protected MvxWindowsSetup(IMvxWindowsFrame rootFrame)
         {
-            _rootFrame = rootFrame;
+            this._rootFrame = rootFrame;
         }
 
         protected override IMvxTrace CreateDebugTrace()
@@ -42,17 +44,17 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
 
         protected override void InitializePlatformServices()
         {
-            InitializeSuspensionManager();
+            this.InitializeSuspensionManager();
             base.InitializePlatformServices();
         }
 
         protected virtual void InitializeSuspensionManager()
         {
-            var suspensionManager = CreateSuspensionManager();
+            var suspensionManager = this.CreateSuspensionManager();
             Mvx.RegisterSingleton(suspensionManager);
 
-            if (_suspensionManagerSessionStateKey != null)
-                suspensionManager.RegisterFrame(_rootFrame, _suspensionManagerSessionStateKey);
+            if (this._suspensionManagerSessionStateKey != null)
+                suspensionManager.RegisterFrame(this._rootFrame, this._suspensionManagerSessionStateKey);
         }
 
         protected virtual IMvxSuspensionManager CreateSuspensionManager()
@@ -67,7 +69,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            return CreateStoreViewsContainer();
+            return this.CreateStoreViewsContainer();
         }
 
         protected virtual IMvxStoreViewsContainer CreateStoreViewsContainer()
@@ -77,7 +79,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcher(_rootFrame);
+            return this.CreateViewDispatcher(this._rootFrame);
         }
 
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
@@ -87,7 +89,7 @@ namespace Cirrious.MvvmCross.WindowsCommon.Platform
 
         protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)
         {
-            var presenter = CreateViewPresenter(_rootFrame);
+            var presenter = this.CreateViewPresenter(this._rootFrame);
             return new MvxWindowsViewDispatcher(presenter, rootFrame);
         }
 

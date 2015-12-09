@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+
     public static class MvxObjectExtensions
     {
         public static void DisposeIfDisposable(this object thing)

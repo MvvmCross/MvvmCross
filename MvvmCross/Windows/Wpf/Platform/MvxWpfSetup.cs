@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Wpf.Views;
-using System.Windows.Threading;
-
-namespace Cirrious.MvvmCross.Wpf.Platform
+namespace MvvmCross.Wpf.Platform
 {
+    using System.Windows.Threading;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.Wpf.Views;
+
     public abstract class MvxWpfSetup
         : MvxSetup
     {
@@ -24,8 +25,8 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
-            _uiThreadDispatcher = uiThreadDispatcher;
-            _presenter = presenter;
+            this._uiThreadDispatcher = uiThreadDispatcher;
+            this._presenter = presenter;
         }
 
         protected override IMvxTrace CreateDebugTrace()
@@ -35,7 +36,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var toReturn = CreateWpfViewsContainer();
+            var toReturn = this.CreateWpfViewsContainer();
             Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
             return toReturn;
         }
@@ -47,7 +48,7 @@ namespace Cirrious.MvvmCross.Wpf.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfViewDispatcher(_uiThreadDispatcher, _presenter);
+            return new MvxWpfViewDispatcher(this._uiThreadDispatcher, this._presenter);
         }
 
         protected override IMvxPluginManager CreatePluginManager()

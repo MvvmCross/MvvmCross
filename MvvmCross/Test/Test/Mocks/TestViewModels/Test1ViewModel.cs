@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+
     public class Test1ViewModel : MvxViewModel
     {
         public ITestThing Thing { get; private set; }
@@ -27,54 +28,54 @@ namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
 
         public Test1ViewModel(ITestThing thing)
         {
-            Thing = thing;
+            this.Thing = thing;
         }
 
         public void Init(string TheString1)
         {
-            TheInitString1Set = TheString1;
+            this.TheInitString1Set = TheString1;
         }
 
         public void Init(Guid TheGuid1, Guid TheGuid2)
         {
-            TheInitGuid1Set = TheGuid1;
-            TheInitGuid2Set = TheGuid2;
+            this.TheInitGuid1Set = TheGuid1;
+            this.TheInitGuid2Set = TheGuid2;
         }
 
         public void Init(BundleObject bundle)
         {
-            TheInitBundleSet = bundle;
+            this.TheInitBundleSet = bundle;
         }
 
         protected override void InitFromBundle(IMvxBundle parameters)
         {
-            BundleInit = parameters;
+            this.BundleInit = parameters;
         }
 
         public void ReloadState(string TheString1)
         {
-            TheReloadString1Set = TheString1;
+            this.TheReloadString1Set = TheString1;
         }
 
         public void ReloadState(Guid TheGuid1, Guid TheGuid2)
         {
-            TheReloadGuid1Set = TheGuid1;
-            TheReloadGuid2Set = TheGuid2;
+            this.TheReloadGuid1Set = TheGuid1;
+            this.TheReloadGuid2Set = TheGuid2;
         }
 
         public void ReloadState(BundleObject bundle)
         {
-            TheReloadBundleSet = bundle;
+            this.TheReloadBundleSet = bundle;
         }
 
         protected override void ReloadFromBundle(IMvxBundle state)
         {
-            BundleState = state;
+            this.BundleState = state;
         }
 
         public override void Start()
         {
-            StartCalled = true;
+            this.StartCalled = true;
         }
     }
 }

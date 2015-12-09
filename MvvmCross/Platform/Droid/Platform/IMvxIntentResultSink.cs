@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Droid.Views;
-
-namespace Cirrious.CrossCore.Droid.Platform
+namespace MvvmCross.Platform.Droid.Platform
 {
+    using MvvmCross.Platform.Droid.Views;
+
     public interface IMvxIntentResultSink
     {
         void OnResult(MvxIntentResultEventArgs result);

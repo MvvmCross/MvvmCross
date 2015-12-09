@@ -5,17 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Dialog.Touch
+namespace MvvmCross.Dialog.Touch
 {
+    using System;
+    using System.Collections.Generic;
+
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Core.ViewModels;
+
+    using UIKit;
+
     public class MvxDialogViewController
         : EventSourceDialogViewController
           , IMvxTouchView
@@ -36,14 +38,14 @@ namespace Cirrious.MvvmCross.Dialog.Touch
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get { return this.DataContext as IMvxViewModel; }
+            set { this.DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

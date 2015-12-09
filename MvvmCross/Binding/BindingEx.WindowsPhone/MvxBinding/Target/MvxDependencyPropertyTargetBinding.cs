@@ -5,24 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.ComponentModel;
-
 #endif
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-using System.Windows.Media;
-
 #endif
-
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
 
 #if NETFX_CORE
 
@@ -35,6 +21,13 @@ using Windows.UI.Xaml.Media;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 // ReSharper restore CheckNamespace
 {
+    using System;
+    using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Media;
+
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
         private readonly string _targetName;
@@ -47,19 +40,19 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
         public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
         {
-            _targetDependencyProperty = targetDependencyProperty;
-            _actualPropertyType = actualPropertyType;
-            _targetName = targetName;
+            this._targetDependencyProperty = targetDependencyProperty;
+            this._actualPropertyType = actualPropertyType;
+            this._targetName = targetName;
 #if WINDOWS_PHONE || WINDOWS_WPF
-            _typeConverter = _actualPropertyType.TypeConverter();
+            this._typeConverter = this._actualPropertyType.TypeConverter();
 #endif
             // if we return TwoWay for ImageSource then we end up in
             // problems with WP7 not doing the auto-conversion
             // see some of my angst in http://stackoverflow.com/questions/16752242/how-does-xaml-create-the-string-to-bitmapimage-value-conversion-when-binding-to/16753488#16753488
             // Note: if we discover other issues here, then we should make a more flexible solution
-            if (_actualPropertyType == typeof(ImageSource))
+            if (this._actualPropertyType == typeof(ImageSource))
             {
-                _defaultBindingMode = MvxBindingMode.OneWay;
+                this._defaultBindingMode = MvxBindingMode.OneWay;
             }
         }
 
@@ -70,7 +63,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
                 return;
 
 #if WINDOWS_PHONE || WINDOWS_WPF
-            var listenerBinding = new System.Windows.Data.Binding(_targetName)
+            var listenerBinding = new System.Windows.Data.Binding(this._targetName)
             { Source = frameworkElement };
 #endif
 #if NETFX_CORE
@@ -81,28 +74,28 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             };
 #endif
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N")
+                "ListenAttached" + this._targetName + Guid.NewGuid().ToString("N")
                 , typeof(object)
                 , typeof(FrameworkElement)
                 , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
-        public override Type TargetType => _actualPropertyType;
+        public override Type TargetType => this._actualPropertyType;
 
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
-        public override MvxBindingMode DefaultMode => _defaultBindingMode;
+        public override MvxBindingMode DefaultMode => this._defaultBindingMode;
 
         protected virtual object GetValueByReflection()
         {
             var target = Target as FrameworkElement;
             if (target == null)
             {
-                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping Get", GetType().Name);
+                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping Get", this.GetType().Name);
                 return null;
             }
 
-            return target.GetValue(_targetDependencyProperty);
+            return target.GetValue(this._targetDependencyProperty);
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -111,28 +104,28 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
             var frameworkElement = target as FrameworkElement;
             if (frameworkElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", this.GetType().Name);
                 return;
             }
 
-            frameworkElement.SetValue(_targetDependencyProperty, value);
+            frameworkElement.SetValue(this._targetDependencyProperty, value);
         }
 
         protected override object MakeSafeValue(object value)
         {
 #if WINDOWS_PHONE || WINDOWS_WPF
-            if (_actualPropertyType.IsInstanceOfType(value))
+            if (this._actualPropertyType.IsInstanceOfType(value))
                 return value;
 
-            if (_typeConverter == null
+            if (this._typeConverter == null
                 || value == null)
                 // TODO - is this correct? Do we need to do more here? See #297
-                return _actualPropertyType.MakeSafeValue(value);
+                return this._actualPropertyType.MakeSafeValue(value);
 
-            if (!_typeConverter.CanConvertFrom(value.GetType()))
+            if (!this._typeConverter.CanConvertFrom(value.GetType()))
                 return null; // TODO - is this correct? Do we need to do more here? See #297
 
-            return _typeConverter.ConvertFrom(value);
+            return this._typeConverter.ConvertFrom(value);
 #endif
 #if NETFX_CORE
             return _actualPropertyType.MakeSafeValue(value);

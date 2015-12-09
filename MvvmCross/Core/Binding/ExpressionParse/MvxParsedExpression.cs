@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cirrious.MvvmCross.Binding.ExpressionParse
+namespace MvvmCross.Binding.ExpressionParse
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public class MvxParsedExpression : IMvxParsedExpression
     {
         public interface INode
@@ -21,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
         {
             public PropertyNode(string propertyName)
             {
-                PropertyName = propertyName;
+                this.PropertyName = propertyName;
             }
 
             public string PropertyName { get; private set; }
@@ -31,7 +31,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
                 if (builder.Length > 0)
                     builder.Append(".");
 
-                builder.Append(PropertyName);
+                builder.Append(this.PropertyName);
             }
         }
 
@@ -39,40 +39,40 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
         {
             public IndexedNode(string indexValue)
             {
-                IndexValue = indexValue;
+                this.IndexValue = indexValue;
             }
 
             public string IndexValue { get; private set; }
 
             public void AppendPrintTo(StringBuilder builder)
             {
-                builder.AppendFormat("[{0}]", IndexValue);
+                builder.AppendFormat("[{0}]", this.IndexValue);
             }
         }
 
         private readonly LinkedList<INode> _nodes = new LinkedList<INode>();
 
-        protected LinkedList<INode> Nodes => _nodes;
+        protected LinkedList<INode> Nodes => this._nodes;
 
         protected void Prepend(INode node)
         {
-            _nodes.AddFirst(node);
+            this._nodes.AddFirst(node);
         }
 
         public void PrependProperty(string propertyName)
         {
-            Prepend(new PropertyNode(propertyName));
+            this.Prepend(new PropertyNode(propertyName));
         }
 
         public void PrependIndexed(string indexedValue)
         {
-            Prepend(new IndexedNode(indexedValue));
+            this.Prepend(new IndexedNode(indexedValue));
         }
 
         public string Print()
         {
             var output = new StringBuilder();
-            foreach (var node in Nodes)
+            foreach (var node in this.Nodes)
             {
                 node.AppendPrintTo(output);
             }

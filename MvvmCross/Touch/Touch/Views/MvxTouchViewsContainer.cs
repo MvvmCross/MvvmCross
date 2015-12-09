@@ -5,15 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Exceptions;
+
+    using UIKit;
+
     public class MvxTouchViewsContainer
         : MvxViewsContainer
         , IMvxTouchViewsContainer
@@ -24,18 +26,18 @@ namespace Cirrious.MvvmCross.Touch.Views
         {
             try
             {
-                CurrentRequest = request;
-                var viewType = GetViewType(request.ViewModelType);
+                this.CurrentRequest = request;
+                var viewType = this.GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
-                var view = CreateViewOfType(viewType, request);
+                var view = this.CreateViewOfType(viewType, request);
                 view.Request = request;
                 return view;
             }
             finally
             {
-                CurrentRequest = null;
+                this.CurrentRequest = null;
             }
         }
 
@@ -66,7 +68,7 @@ namespace Cirrious.MvvmCross.Touch.Views
         public virtual IMvxTouchView CreateView(IMvxViewModel viewModel)
         {
             var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = CreateView(request);
+            var view = this.CreateView(request);
             return view;
         }
     }

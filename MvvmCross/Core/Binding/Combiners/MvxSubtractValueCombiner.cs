@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
     public class MvxSubtractValueCombiner
         : MvxNumericOnlyValueCombiner

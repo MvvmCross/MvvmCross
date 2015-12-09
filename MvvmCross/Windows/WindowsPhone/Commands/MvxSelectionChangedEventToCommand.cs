@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Controls;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Commands
+namespace MvvmCross.WindowsPhone.Commands
 {
+    using System.Windows.Controls;
+
     public class MvxSelectionChangedEventToCommand : MvxWithArgsEventToCommand
     {
         protected override object MapCommandParameter(object parameter)

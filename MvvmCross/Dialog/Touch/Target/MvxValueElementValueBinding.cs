@@ -5,34 +5,36 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Target
+namespace MvvmCross.Dialog.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Platform.Platform;
+
     public class MvxValueElementValueBinding : MvxPropertyInfoTargetBinding<ValueElement>
     {
         public MvxValueElementValueBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var valueElement = View;
+            var valueElement = this.View;
             if (valueElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - valueElement is null in MvxValueElementValueBinding");
             }
             else
             {
-                valueElement.ValueChanged += ValueElementOnValueChanged;
+                valueElement.ValueChanged += this.ValueElementOnValueChanged;
             }
         }
 
         private void ValueElementOnValueChanged(object sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.ObjectValue);
+            this.FireValueChanged(this.View.ObjectValue);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
@@ -41,10 +43,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
         {
             if (isDisposing)
             {
-                var valueElement = View;
+                var valueElement = this.View;
                 if (valueElement != null)
                 {
-                    valueElement.ValueChanged -= ValueElementOnValueChanged;
+                    valueElement.ValueChanged -= this.ValueElementOnValueChanged;
                 }
             }
             base.Dispose(isDisposing);

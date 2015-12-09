@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-
-namespace Cirrious.CrossCore.WindowsCommon.Platform
+namespace MvvmCross.Platform.WindowsCommon.Platform
 {
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.IoC;
+
     public abstract class MvxDesignTimeHelper
     {
         protected MvxDesignTimeHelper()

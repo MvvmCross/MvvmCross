@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
+namespace MvvmCross.AutoView.Droid.Interfaces.Lists
 {
+    using MvvmCross.Platform.Core;
+
     public interface IMvxLayoutListItemView
         : IMvxDataConsumer
     {

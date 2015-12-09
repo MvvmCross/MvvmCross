@@ -1,13 +1,15 @@
-using Android.Content;
-using Android.OS;
-using Android.Util;
-using Android.Views;
-using Cirrious.CrossCore;
-using Java.Lang;
-using Java.Lang.Reflect;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Binding.Droid.Binders
 {
+    using Android.Content;
+    using Android.OS;
+    using Android.Util;
+    using Android.Views;
+
+    using Java.Lang;
+    using Java.Lang.Reflect;
+
+    using MvvmCross.Platform;
+
     public static class MvxLayoutInflaterCompat
     {
         private static readonly int SdkInt = (int)Build.VERSION.SdkInt;
@@ -37,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
-                return DelegateFactory.OnCreateView(parent, name, context, attrs);
+                return this.DelegateFactory.OnCreateView(parent, name, context, attrs);
             }
         }
 

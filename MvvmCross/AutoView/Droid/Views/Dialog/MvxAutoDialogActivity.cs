@@ -5,21 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Views;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Dialog.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Core.Elements.Menu;
-using CrossUI.Droid.Dialog.Elements;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
+namespace MvvmCross.AutoView.Droid.Views.Dialog
 {
+    using Android.App;
+    using Android.Views;
+
+    using CrossUI.Core.Elements.Menu;
+    using CrossUI.Droid.Dialog.Elements;
+
+    using MvvmCross.AutoView.Droid.ExtensionMethods;
+    using MvvmCross.AutoView.Droid.Interfaces;
+    using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.Platform.IoC;
+
     [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.dialog.MvxAutoDialogActivity")]
     [MvxUnconventional]
     public class MvxAutoDialogActivity
@@ -42,18 +40,18 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Dialog
                 )
             {
                 Root = this.LoadDialogRoot<Element, RootElement>();
-                _parentMenu = this.LoadMenu();
+                this._parentMenu = this.LoadMenu();
             }
         }
 
         public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)
         {
-            return this.CreateOptionsMenu(_parentMenu, menu);
+            return this.CreateOptionsMenu(this._parentMenu, menu);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            if (_parentMenu.ProcessMenuItemSelected(item))
+            if (this._parentMenu.ProcessMenuItemSelected(item))
             {
                 return true;
             }

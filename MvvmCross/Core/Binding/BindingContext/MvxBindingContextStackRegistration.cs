@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
     {
@@ -18,13 +19,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)
         {
-            Stack.Push(toRegister);
+            this.Stack.Push(toRegister);
         }
 
         ~MvxBindingContextStackRegistration()
         {
             MvxTrace.Error("You should always Dispose of MvxBindingContextStackRegistration");
-            Dispose(false);
+            this.Dispose(false);
         }
 
         public void Dispose()
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         {
             if (disposing)
             {
-                Stack.Pop();
+                this.Stack.Pop();
             }
         }
     }

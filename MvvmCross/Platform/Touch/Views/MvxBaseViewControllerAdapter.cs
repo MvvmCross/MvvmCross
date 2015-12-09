@@ -5,17 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Views
+namespace MvvmCross.Platform.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
+    using UIKit;
+
     public class MvxBaseViewControllerAdapter
     {
         private readonly IMvxEventSourceViewController _eventSource;
 
-        protected UIViewController ViewController => _eventSource as UIViewController;
+        protected UIViewController ViewController => this._eventSource as UIViewController;
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {
@@ -25,13 +27,13 @@ namespace Cirrious.CrossCore.Touch.Views
             if (!(eventSource is UIViewController))
                 throw new ArgumentException("eventSource - eventSource should be a UIViewController");
 
-            _eventSource = eventSource;
-            _eventSource.ViewDidAppearCalled += HandleViewDidAppearCalled;
-            _eventSource.ViewDidDisappearCalled += HandleViewDidDisappearCalled;
-            _eventSource.ViewWillAppearCalled += HandleViewWillAppearCalled;
-            _eventSource.ViewWillDisappearCalled += HandleViewWillDisappearCalled;
-            _eventSource.DisposeCalled += HandleDisposeCalled;
-            _eventSource.ViewDidLoadCalled += HandleViewDidLoadCalled;
+            this._eventSource = eventSource;
+            this._eventSource.ViewDidAppearCalled += this.HandleViewDidAppearCalled;
+            this._eventSource.ViewDidDisappearCalled += this.HandleViewDidDisappearCalled;
+            this._eventSource.ViewWillAppearCalled += this.HandleViewWillAppearCalled;
+            this._eventSource.ViewWillDisappearCalled += this.HandleViewWillDisappearCalled;
+            this._eventSource.DisposeCalled += this.HandleDisposeCalled;
+            this._eventSource.ViewDidLoadCalled += this.HandleViewDidLoadCalled;
         }
 
         public virtual void HandleViewDidLoadCalled(object sender, EventArgs e)

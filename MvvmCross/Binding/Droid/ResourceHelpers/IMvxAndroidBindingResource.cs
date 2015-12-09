@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
     public interface IMvxAndroidBindingResource
     {

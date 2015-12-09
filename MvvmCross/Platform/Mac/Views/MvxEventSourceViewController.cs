@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
 using System;
 
 #if __UNIFIED__
@@ -16,6 +15,8 @@ using Foundation;
 
 namespace Cirrious.CrossCore.Mac.Views
 {
+    using MvvmCross.Platform.Core;
+
     public class MvxEventSourceViewController
         : NSViewController
           , IMvxEventSourceViewController

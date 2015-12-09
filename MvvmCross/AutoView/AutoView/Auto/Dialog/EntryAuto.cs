@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions.Dialog;
-using System;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
+namespace MvvmCross.AutoView.Auto.Dialog
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions.Dialog;
+
     public class EntryAuto : ValueElementAuto
     {
         public bool IsEmail { get; set; }
@@ -32,14 +33,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
         public override ElementDescription ToElementDescription()
         {
             var toReturn = base.ToElementDescription();
-            if (IsEmail)
-                toReturn.Properties["IsEmail"] = IsEmail;
-            if (Password)
-                toReturn.Properties["Password"] = Password;
-            if (Numeric)
-                toReturn.Properties["Numeric"] = Numeric;
-            if (NoSpellCheck)
-                toReturn.Properties["NoSpellCheck"] = NoSpellCheck;
+            if (this.IsEmail)
+                toReturn.Properties["IsEmail"] = this.IsEmail;
+            if (this.Password)
+                toReturn.Properties["Password"] = this.Password;
+            if (this.Numeric)
+                toReturn.Properties["Numeric"] = this.Numeric;
+            if (this.NoSpellCheck)
+                toReturn.Properties["NoSpellCheck"] = this.NoSpellCheck;
             return toReturn;
         }
     }

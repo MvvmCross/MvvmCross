@@ -1,15 +1,17 @@
-using Android.Content;
-using Android.OS;
-using Android.Util;
-using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Java.Interop;
-using Java.Lang.Reflect;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using Android.Content;
+    using Android.OS;
+    using Android.Util;
+    using Android.Views;
+
+    using Java.Interop;
+    using Java.Lang.Reflect;
+
+    using MvvmCross.Binding.Droid.Binders;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Platform;
+
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
     /// Typically this is attached to MvxActivity and co via our MvxContextWrapper.
@@ -112,7 +114,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var currentBindingContext = MvxAndroidBindingContextHelpers.Current();
                 if (currentBindingContext != null)
                 {
-                    factory = FactoryFactory.Create(currentBindingContext.DataContext);
+                    factory = this.FactoryFactory.Create(currentBindingContext.DataContext);
 
                     // Set the current factory used to generate bindings
                     if (factory != null)
@@ -170,7 +172,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             {
                 try
                 {
-                    return CreateView(name, prefix, attrs);
+                    return this.CreateView(name, prefix, attrs);
                 }
                 catch (Java.Lang.ClassNotFoundException) { }
             }
@@ -217,15 +219,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             // own secret sauce.
             if (Sdk > BuildVersionCodes.Honeycomb)
             {
-                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2)) // Check for FactoryWrapper2 may be too loose
+                if (this.Factory2 != null && !(this.Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2)) // Check for FactoryWrapper2 may be too loose
                 {
-                    MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, this._bindingVisitor));
+                    MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(this.Factory2, this._bindingVisitor));
                 }
             }
 
-            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper)) // Check for FactoryWrapper may be too loose
+            if (this.Factory != null && !(this.Factory is MvxLayoutInflaterCompat.FactoryWrapper)) // Check for FactoryWrapper may be too loose
             {
-                MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory1(Factory, this._bindingVisitor));
+                MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory1(this.Factory, this._bindingVisitor));
             }
         }
 
@@ -251,7 +253,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 {
                     setPrivateFactoryMethod.Accessible = true;
                     setPrivateFactoryMethod.Invoke(this,
-                        new PrivateFactoryWrapper2((IFactory2)Context, this, this._bindingVisitor));
+                        new PrivateFactoryWrapper2((IFactory2)this.Context, this, this._bindingVisitor));
                 }
                 catch (Java.Lang.Exception ex)
                 {
@@ -296,7 +298,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     this._constructorArgs.Set(this, constructorArgsArr);
                     try
                     {
-                        view = CreateView(name, null, attrs);
+                        view = this.CreateView(name, null, attrs);
                     }
                     catch (Java.Lang.ClassNotFoundException ignored) { }
                     finally

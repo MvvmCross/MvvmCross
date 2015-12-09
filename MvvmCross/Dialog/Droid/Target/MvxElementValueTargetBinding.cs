@@ -5,21 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using CrossUI.Droid.Dialog.Elements;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Dialog.Droid.Target
+namespace MvvmCross.Dialog.Droid.Target
 {
+    using System;
+    using System.Reflection;
+
+    using CrossUI.Droid.Dialog.Elements;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Platform.Platform;
+
     public class MvxElementValueTargetBinding : MvxPropertyInfoTargetBinding<ValueElement>
     {
         public MvxElementValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var valueElement = View;
+            var valueElement = this.View;
             if (valueElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -27,7 +29,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
             }
             else
             {
-                valueElement.ValueChanged += ElementOnValueChanged;
+                valueElement.ValueChanged += this.ElementOnValueChanged;
             }
         }
 
@@ -35,7 +37,7 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
 
         private void ElementOnValueChanged(object sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.Value);
+            this.FireValueChanged(this.View.Value);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -43,10 +45,10 @@ namespace Cirrious.MvvmCross.Dialog.Droid.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
+                var editText = this.View;
                 if (editText != null)
                 {
-                    editText.ValueChanged -= ElementOnValueChanged;
+                    editText.ValueChanged -= this.ElementOnValueChanged;
                 }
             }
         }

@@ -5,16 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Windows.Input;
 
 #if __UNIFIED__
 using AppKit;
@@ -22,8 +12,17 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Binding.Mac.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Windows.Input;
+
+    using global::MvvmCross.Platform.Core;
+    using global::MvvmCross.Platform.WeakSubscription;
+
     public class MvxTableViewSource : NSTableViewSource
     {
         private IEnumerable _itemsSource;
@@ -42,40 +41,40 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
         public override int GetRowCount(NSTableView tableView)
 #endif
         {
-            return ItemsSource.Count();
+            return this.ItemsSource.Count();
         }
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get { return this._itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
-                    && !ReloadOnAllItemsSourceSets)
+                if (Object.ReferenceEquals(this._itemsSource, value)
+                    && !this.ReloadOnAllItemsSourceSets)
                     return;
 
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
 
-                _itemsSource = value;
+                this._itemsSource = value;
 
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
+                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    this._subscription = collectionChanged.WeakSubscribe(this.CollectionChangedOnCollectionChanged);
                 }
 
-                ReloadTableData();
+                this.ReloadTableData();
             }
         }
 
         private void ReloadTableData()
         {
-            _tableView.ReloadData();
+            this._tableView.ReloadData();
         }
 
         private NSView GetOrCreateViewFor(NSTableView tableView, NSTableColumn tableColumn)
@@ -102,11 +101,11 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, int row)
 #endif
         {
-            if (ItemsSource == null)
+            if (this.ItemsSource == null)
                 return null;
 
-            var item = ItemsSource.ElementAt((int)row);
-            var view = GetOrCreateViewFor(tableView, tableColumn);
+            var item = this.ItemsSource.ElementAt((int)row);
+            var view = this.GetOrCreateViewFor(tableView, tableColumn);
 
             var bindable = view as IMvxDataConsumer;
             if (bindable != null)
@@ -117,7 +116,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            TryDoAnimatedChange(args);
+            this.TryDoAnimatedChange(args);
         }
 
         protected static NSIndexSet CreateNSIndexSet(int startingPosition, int count)
@@ -135,7 +134,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 
         public override void SelectionDidChange(NSNotification notification)
         {
-            var command = SelectionChangedCommand;
+            var command = this.SelectionChangedCommand;
             if (command == null)
                 return;
 
@@ -143,7 +142,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
             if (row < 0)
                 return;
 
-            var item = ItemsSource.ElementAt((int)row);
+            var item = this.ItemsSource.ElementAt((int)row);
 
             if (!command.CanExecute(item))
                 return;
@@ -158,25 +157,25 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
                 case NotifyCollectionChangedAction.Add:
                     {
                         var newIndexSet = CreateNSIndexSet(args.NewStartingIndex, args.NewItems.Count);
-                        _tableView.InsertRows(newIndexSet, NSTableViewAnimation.Fade);
+                        this._tableView.InsertRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
                         var newIndexSet = CreateNSIndexSet(args.OldStartingIndex, args.OldItems.Count);
-                        _tableView.RemoveRows(newIndexSet, NSTableViewAnimation.Fade);
+                        this._tableView.RemoveRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
                     {
                         if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
                             return false;
-                        _tableView.MoveRow(args.OldStartingIndex, args.NewStartingIndex);
+                        this._tableView.MoveRow(args.OldStartingIndex, args.NewStartingIndex);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Replace:
                     {
-                        _tableView.ReloadData();
+                        this._tableView.ReloadData();
                         return true;
                     }
                 default:

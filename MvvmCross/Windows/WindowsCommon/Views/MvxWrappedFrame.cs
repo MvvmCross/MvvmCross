@@ -5,60 +5,61 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsCommon.Views
+namespace MvvmCross.WindowsCommon.Views
 {
+    using System;
+
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+
     public class MvxWrappedFrame : IMvxWindowsFrame
     {
         private readonly Frame _frame;
 
         public MvxWrappedFrame(Frame frame)
         {
-            _frame = frame;
+            this._frame = frame;
         }
 
-        public Control UnderlyingControl => _frame;
+        public Control UnderlyingControl => this._frame;
 
-        public object Content => _frame.Content;
+        public object Content => this._frame.Content;
 
-        public bool CanGoBack => _frame.CanGoBack;
+        public bool CanGoBack => this._frame.CanGoBack;
 
         public bool Navigate(Type viewType, object parameter)
         {
-            return _frame.Navigate(viewType, parameter);
+            return this._frame.Navigate(viewType, parameter);
         }
 
         public void GoBack()
         {
-            _frame.GoBack();
+            this._frame.GoBack();
         }
 
         public void ClearValue(DependencyProperty property)
         {
-            _frame.ClearValue(property);
+            this._frame.ClearValue(property);
         }
 
         public object GetValue(DependencyProperty property)
         {
-            return _frame.GetValue(property);
+            return this._frame.GetValue(property);
         }
 
         public void SetValue(DependencyProperty property, object value)
         {
-            _frame.SetValue(property, value);
+            this._frame.SetValue(property, value);
         }
 
         public void SetNavigationState(string state)
         {
-            _frame.SetNavigationState(state);
+            this._frame.SetNavigationState(state);
         }
 
         public string GetNavigationState()
         {
-            return _frame.GetNavigationState();
+            return this._frame.GetNavigationState();
         }
     }
 }

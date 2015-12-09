@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using System;
-using System.IO;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.AutoView.Builders
+namespace MvvmCross.AutoView.Builders
 {
+    using System;
+    using System.IO;
+    using System.Reflection;
+
+    using MvvmCross.AutoView.Interfaces;
+
     public class MvxEmbeddedAutoViewTextLoader : IMvxAutoViewTextLoader
     {
         public bool HasDefinition(Type viewModelType, string key)

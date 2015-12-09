@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     // Special thanks for this file to Emi - https://github.com/eMi-/mvvmcross_datepicker_timepicker
     // Code used under Creative Commons with attribution
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
@@ -42,8 +43,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                int currentHour = CurrentHour.IntValue();
-                int currentMinute = CurrentMinute.IntValue();
+                int currentHour = this.CurrentHour.IntValue();
+                int currentMinute = this.CurrentMinute.IntValue();
                 return new TimeSpan(currentHour, currentMinute, 0);
             }
             set
@@ -51,19 +52,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaHour = new Java.Lang.Integer(value.Hours);
                 var javaMinutes = new Java.Lang.Integer(value.Minutes);
 
-                if (!_initialized)
+                if (!this._initialized)
                 {
-                    SetOnTimeChangedListener(this);
-                    _initialized = true;
+                    this.SetOnTimeChangedListener(this);
+                    this._initialized = true;
                 }
 
-                if (CurrentHour != javaHour)
+                if (this.CurrentHour != javaHour)
                 {
-                    CurrentHour = javaHour;
+                    this.CurrentHour = javaHour;
                 }
-                if (CurrentMinute != javaMinutes)
+                if (this.CurrentMinute != javaMinutes)
                 {
-                    CurrentMinute = javaMinutes;
+                    this.CurrentMinute = javaMinutes;
                 }
             }
         }
@@ -72,7 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
-            EventHandler handler = ValueChanged;
+            EventHandler handler = this.ValueChanged;
             handler?.Invoke(this, null);
         }
     }

@@ -5,24 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Media;
-
 #endif
-
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-
 #if WINDOWS_PHONE
-
-using Cirrious.CrossCore.WindowsPhone.Converters;
-
 #endif
 #if WINDOWS_WPF
 
@@ -34,10 +19,6 @@ using Cirrious.CrossCore.Wpf.Converters;
 using Cirrious.CrossCore.WindowsStore.Converters;
 
 #endif
-
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 
 #if NETFX_CORE
 
@@ -51,6 +32,16 @@ using Windows.UI.Xaml.Media;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
 // ReSharper restore CheckNamespace
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Media;
+
+    using global::MvvmCross.Platform;
+    using global::MvvmCross.Platform.Converters;
+    using global::MvvmCross.Platform.WindowsPhone.Converters;
+
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
         protected virtual void ApplyBinding(MvxBindingDescription bindingDescription, Type actualType,
@@ -101,7 +92,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
             var actualType = attachedObject.GetType();
             foreach (var bindingDescription in bindingDescriptions)
             {
-                ApplyBinding(bindingDescription, actualType, attachedObject);
+                this.ApplyBinding(bindingDescription, actualType, attachedObject);
             }
         }
 

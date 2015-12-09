@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding
+namespace MvvmCross.Binding.Parse.Binding
 {
+    using System.Collections.Generic;
+
     public class MvxSerializableBindingSpecification
         : Dictionary<string, MvxSerializableBindingDescription>
     {

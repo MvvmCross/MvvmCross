@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Touch.Platform
+namespace MvvmCross.Platform.Touch.Platform
 {
     public interface IMvxTouchSystem
     {

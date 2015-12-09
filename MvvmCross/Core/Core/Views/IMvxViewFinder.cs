@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Views
+namespace MvvmCross.Core.Views
 {
+    using System;
+
     public interface IMvxViewFinder
     {
         Type GetViewType(Type viewModelType);

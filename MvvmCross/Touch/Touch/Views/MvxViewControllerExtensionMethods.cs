@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public static class MvxViewControllerExtensionMethods
     {
         public static void OnViewCreate(this IMvxTouchView touchView)

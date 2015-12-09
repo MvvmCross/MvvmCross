@@ -5,19 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Threading;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Threading;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
@@ -32,12 +31,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             if (adapter != null)
             {
-                Adapter = adapter;
-                Adapter.ItemTemplateId = itemTemplateId;
+                this.Adapter = adapter;
+                this.Adapter.ItemTemplateId = itemTemplateId;
             }
 
-            this.ChildViewAdded += OnChildViewAdded;
-            this.ChildViewRemoved += OnChildViewRemoved;
+            this.ChildViewAdded += this.OnChildViewAdded;
+            this.ChildViewRemoved += this.OnChildViewRemoved;
         }
 
         protected MvxRadioGroup(IntPtr javaReference, JniHandleOwnership transfer)
@@ -61,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 {
                     radioButton.Id = GenerateViewId();
                 }
-                radioButton.CheckedChange += OnRadioButtonCheckedChange;
+                radioButton.CheckedChange += this.OnRadioButtonCheckedChange;
             }
         }
 
@@ -84,10 +83,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get { return this._adapter; }
             protected set
             {
-                var existing = _adapter;
+                var existing = this._adapter;
                 if (existing == value)
                 {
                     return;
@@ -95,7 +94,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 if (existing != null)
                 {
-                    existing.DataSetChanged -= AdapterOnDataSetChanged;
+                    existing.DataSetChanged -= this.AdapterOnDataSetChanged;
                     if (value != null)
                     {
                         value.ItemsSource = existing.ItemsSource;
@@ -103,14 +102,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                     }
                 }
 
-                _adapter = value;
+                this._adapter = value;
 
-                if (_adapter != null)
+                if (this._adapter != null)
                 {
-                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
+                    this._adapter.DataSetChanged += this.AdapterOnDataSetChanged;
                 }
 
-                if (_adapter == null)
+                if (this._adapter == null)
                 {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
@@ -121,14 +120,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get { return this.Adapter.ItemsSource; }
+            set { this.Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get { return this.Adapter.ItemTemplateId; }
+            set { this.Adapter.ItemTemplateId = value; }
         }
 
         private static long _nextGeneratedViewId = 1;

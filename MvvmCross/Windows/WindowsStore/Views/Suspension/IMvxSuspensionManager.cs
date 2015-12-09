@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
+﻿namespace MvvmCross.WindowsStore.Views.Suspension
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Windows.UI.Xaml.Controls;
+
     public interface IMvxSuspensionManager
     {
         /// <summary>

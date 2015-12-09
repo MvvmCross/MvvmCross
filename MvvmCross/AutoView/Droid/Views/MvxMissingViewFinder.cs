@@ -5,23 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace MvvmCross.AutoView.Droid.Views
 {
+    using System;
+
     public class MvxMissingViewFinder : IMvxViewFinder
     {
         public Type MissingViewType { get; set; }
 
         public MvxMissingViewFinder()
         {
-            MissingViewType = typeof(MvxMissingActivity);
+            this.MissingViewType = typeof(MvxMissingActivity);
         }
 
         public Type GetViewType(Type viewModelType)
         {
-            return MissingViewType;
+            return this.MissingViewType;
         }
     }
 }

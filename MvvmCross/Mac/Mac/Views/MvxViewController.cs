@@ -7,10 +7,6 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.CrossCore.Mac.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -18,8 +14,15 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System;
+
+    using Cirrious.CrossCore.Mac.Views;
+
+    using global::MvvmCross.Binding.BindingContext;
+    using global::MvvmCross.Core.ViewModels;
+
     public class MvxViewController
         : MvxEventSourceViewController
             , IMvxMacView
@@ -27,31 +30,31 @@ namespace Cirrious.MvvmCross.Mac.Views
         // Called when created from unmanaged code
         public MvxViewController(IntPtr handle) : base(handle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
         public MvxViewController(NSCoder coder) : base(coder)
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Call to load from the XIB/NIB file
         public MvxViewController(string viewName, NSBundle bundle) : base(viewName, bundle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Call to load from the XIB/NIB file
         public MvxViewController(string viewName) : base(viewName, NSBundle.MainBundle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         public MvxViewController() : base()
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Shared initialization code
@@ -62,14 +65,14 @@ namespace Cirrious.MvvmCross.Mac.Views
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
-            set { DataContext = value; }
+            get { return (IMvxViewModel)this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

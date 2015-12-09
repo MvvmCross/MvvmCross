@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace MvvmCross.AutoView.Droid.Views.Lists
 {
+    using System.Collections.Generic;
+
+    using Android.Content;
+    using Android.Views;
+
+    using MvvmCross.AutoView.Droid.Interfaces.Lists;
+
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
 
@@ -22,13 +23,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             var view = new GeneralListItemView(
                 context,
                 androidBindingContext.LayoutInflaterHolder,
-                Bindings,
+                this.Bindings,
                 source,
-                LayoutName);
+                this.LayoutName);
             return view;
         }
 
-        public string UniqueName => @"General$" + LayoutName;
+        public string UniqueName => @"General$" + this.LayoutName;
 
         public string LayoutName { get; set; }
 

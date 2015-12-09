@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using MvvmCross.Core.ViewModels;
+
     public abstract class AbstractTest1ViewModel : MvxViewModel
     {
     }

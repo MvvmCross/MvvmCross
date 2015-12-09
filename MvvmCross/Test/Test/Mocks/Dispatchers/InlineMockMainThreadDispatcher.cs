@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.Test.Mocks.Dispatchers
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
     public class InlineMockMainThreadDispatcher
         : MvxMainThreadDispatcher
           , IMvxMainThreadDispatcher

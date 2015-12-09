@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Reflection;
+
     public interface IMvxViewModelByNameRegistry
     {
         void Add(Type viewModelType);

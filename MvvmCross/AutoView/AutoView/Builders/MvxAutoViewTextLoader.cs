@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.AutoView.Builders
+namespace MvvmCross.AutoView.Builders
 {
     public class MvxAutoViewTextLoader : MvxCompositeAutoViewTextLoader
     {
         public MvxAutoViewTextLoader()
         {
             // note - order is important here...
-            Add(new MvxResourceAutoViewTextLoader());
-            Add(new MvxEmbeddedAutoViewTextLoader());
+            this.Add(new MvxResourceAutoViewTextLoader());
+            this.Add(new MvxEmbeddedAutoViewTextLoader());
         }
     }
 }

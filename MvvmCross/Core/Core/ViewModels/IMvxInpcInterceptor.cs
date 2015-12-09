@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.ComponentModel;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System.ComponentModel;
+
     public interface IMvxInpcInterceptor
     {
         MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args);

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
     public interface IMvxImageHelper<T>
         : IDisposable
         where T : class

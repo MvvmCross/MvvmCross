@@ -5,23 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System;
+    using System.Collections.Generic;
+
     public class MvxCompositeViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly List<IMvxViewTypeResolver> _resolvers;
 
         public MvxCompositeViewTypeResolver(params IMvxViewTypeResolver[] resolvers)
         {
-            _resolvers = new List<IMvxViewTypeResolver>(resolvers);
+            this._resolvers = new List<IMvxViewTypeResolver>(resolvers);
         }
 
         public Type Resolve(string tagName)
         {
-            foreach (var resolver in _resolvers)
+            foreach (var resolver in this._resolvers)
             {
                 var result = resolver.Resolve(tagName);
                 if (result != null)

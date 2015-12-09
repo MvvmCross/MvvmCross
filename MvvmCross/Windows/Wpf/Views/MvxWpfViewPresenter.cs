@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Windows;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System;
+    using System.Windows;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxWpfViewPresenter
         : MvxViewPresenter, IMvxWpfViewPresenter
     {
@@ -24,7 +25,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
             {
                 var loader = Mvx.Resolve<IMvxSimpleWpfViewLoader>();
                 var view = loader.CreateView(request);
-                Present(view);
+                this.Present(view);
             }
             catch (Exception exception)
             {
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Wpf.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

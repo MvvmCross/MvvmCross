@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.ViewModels;
+
     public class Test3ViewModel : MvxViewModel
     {
         public BundleObject SaveStateBundleObject { get; set; }
@@ -17,14 +18,14 @@ namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
 
         public BundleObject SaveState()
         {
-            return SaveStateBundleObject;
+            return this.SaveStateBundleObject;
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
-            if (AdditionalSaveStateFields != null)
+            if (this.AdditionalSaveStateFields != null)
             {
-                foreach (var kvp in AdditionalSaveStateFields)
+                foreach (var kvp in this.AdditionalSaveStateFields)
                 {
                     bundle.Data[kvp.Key] = kvp.Value;
                 }

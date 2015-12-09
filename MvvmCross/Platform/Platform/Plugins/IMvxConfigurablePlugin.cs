@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
     public interface IMvxConfigurablePlugin
         : IMvxPlugin

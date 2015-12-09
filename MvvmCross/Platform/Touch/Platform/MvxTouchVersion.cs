@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-
-namespace Cirrious.CrossCore.Touch.Platform
+namespace MvvmCross.Platform.Touch.Platform
 {
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxTouchVersion
     {
         public MvxTouchVersion(int[] parts)
@@ -16,12 +16,12 @@ namespace Cirrious.CrossCore.Touch.Platform
             if (parts == null || parts.Length == 0)
                 throw new MvxException("Invalid parts in constructor for MvxTouchVersion");
 
-            Parts = parts;
-            Major = parts[0];
+            this.Parts = parts;
+            this.Major = parts[0];
 
             if (parts.Length > 1)
             {
-                Minor = parts[1];
+                this.Minor = parts[1];
             }
         }
 

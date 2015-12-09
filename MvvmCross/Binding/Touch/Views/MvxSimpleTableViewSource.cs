@@ -5,20 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Touch.Platform;
-using Foundation;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Touch.Platform;
+
+    using UIKit;
+
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private readonly NSString _cellIdentifier;
         private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
 
-        protected virtual NSString CellIdentifier => _cellIdentifier;
+        protected virtual NSString CellIdentifier => this._cellIdentifier;
 
         public MvxSimpleTableViewSource(IntPtr handle)
             : base(handle)
@@ -32,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
-            _cellIdentifier = new NSString(cellIdentifier);
+            this._cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
         }
 
@@ -41,16 +44,16 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             // if no cellIdentifier supplied, then use the cell type name as cellId
             cellIdentifier = cellIdentifier ?? cellType.Name;
-            _cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
+            this._cellIdentifier = new NSString(cellIdentifier);
+            tableView.RegisterClassForCellReuse(cellType, this._cellIdentifier);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            if (_iosVersion6Checker.IsVersionOrHigher)
-                return tableView.DequeueReusableCell(CellIdentifier, indexPath);
+            if (this._iosVersion6Checker.IsVersionOrHigher)
+                return tableView.DequeueReusableCell(this.CellIdentifier, indexPath);
 
-            return tableView.DequeueReusableCell(CellIdentifier);
+            return tableView.DequeueReusableCell(this.CellIdentifier);
         }
     }
 }

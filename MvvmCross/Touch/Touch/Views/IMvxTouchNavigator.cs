@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxTouchNavigator
     {
         void NavigateTo(MvxViewModelRequest request);

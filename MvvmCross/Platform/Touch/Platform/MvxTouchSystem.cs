@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Linq;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Platform
+namespace MvvmCross.Platform.Touch.Platform
 {
+    using System.Linq;
+
+    using UIKit;
+
     public class MvxTouchSystem
         : IMvxTouchSystem
     {
@@ -17,14 +18,14 @@ namespace Cirrious.CrossCore.Touch.Platform
 
         public MvxTouchSystem()
         {
-            BuildVersion();
+            this.BuildVersion();
         }
 
         private void BuildVersion()
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
             var parts = version.Split('.').Select(int.Parse).ToArray();
-            Version = new MvxTouchVersion(parts);
+            this.Version = new MvxTouchVersion(parts);
         }
     }
 }

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Droid.Views;
-using System;
-
-namespace Cirrious.CrossCore.Droid.Platform
+namespace MvvmCross.Platform.Droid.Platform
 {
+    using System;
+
+    using MvvmCross.Platform.Droid.Views;
+
     public interface IMvxIntentResultSource
     {
         event EventHandler<MvxIntentResultEventArgs> Result;

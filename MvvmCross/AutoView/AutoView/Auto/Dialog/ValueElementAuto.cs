@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions.Dialog;
-using System;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
+namespace MvvmCross.AutoView.Auto.Dialog
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions.Dialog;
+
     public class ValueElementAuto : ElementAuto
     {
         public string Value { get; set; }
@@ -26,29 +27,29 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                                 Expression<Func<ICommand>> selectedCommand = null, string layoutName = null)
             : base(key ?? "String", caption, onlyFor, notFor, selectedCommand, layoutName)
         {
-            Value = value;
-            BindingExpression = bindingExpression;
-            Converter = converter;
-            ConverterParameter = converterParameter;
+            this.Value = value;
+            this.BindingExpression = bindingExpression;
+            this.Converter = converter;
+            this.ConverterParameter = converterParameter;
         }
 
         public override ElementDescription ToElementDescription()
         {
             var toReturn = base.ToElementDescription();
 
-            if (Value != null)
+            if (this.Value != null)
             {
-                toReturn.Properties["Value"] = Value;
+                toReturn.Properties["Value"] = this.Value;
             }
 
             string bindingText = null;
-            if (BindingExpressionTextOverride != null)
+            if (this.BindingExpressionTextOverride != null)
             {
-                bindingText = BindingExpressionTextOverride.CreateBindingText(Converter, ConverterParameter);
+                bindingText = this.BindingExpressionTextOverride.CreateBindingText(this.Converter, this.ConverterParameter);
             }
-            else if (BindingExpression != null)
+            else if (this.BindingExpression != null)
             {
-                bindingText = BindingExpression.CreateBindingText(Converter, ConverterParameter);
+                bindingText = this.BindingExpression.CreateBindingText(this.Converter, this.ConverterParameter);
             }
             if (bindingText != null)
             {

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+
     public class MvxConsoleViewDispatcher
         : MvxMainThreadDispatcher
         , IMvxViewDispatcher
@@ -26,13 +25,13 @@ namespace Cirrious.MvvmCross.Console.Views
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(() => navigation.Show(request));
+            return this.RequestMainThreadAction(() => navigation.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(() => navigation.ChangePresentation(hint));
+            return this.RequestMainThreadAction(() => navigation.ChangePresentation(hint));
         }
     }
 }

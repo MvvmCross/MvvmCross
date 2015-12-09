@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System.Linq;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Platform.Converters;
+
     public class MvxFormatValueCombiner : MvxValueCombiner
     {
         public override bool TryGetValue(System.Collections.Generic.IEnumerable<IMvxSourceStep> steps, out object value)

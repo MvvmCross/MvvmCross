@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System.Collections.Generic;
+
     public static class MvxApplicableExtensions
     {
         public static void Apply(this IEnumerable<IMvxApplicable> toApply)

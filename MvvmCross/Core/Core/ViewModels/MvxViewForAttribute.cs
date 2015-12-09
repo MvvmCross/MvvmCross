@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxViewForAttribute : Attribute
     {
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxViewForAttribute(Type viewModel)
         {
-            ViewModel = viewModel;
+            this.ViewModel = viewModel;
         }
     }
 }

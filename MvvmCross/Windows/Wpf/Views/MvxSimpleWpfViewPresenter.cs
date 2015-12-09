@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     public class MvxSimpleWpfViewPresenter
         : MvxWpfViewPresenter
     {
@@ -17,12 +17,12 @@ namespace Cirrious.MvvmCross.Wpf.Views
 
         public MvxSimpleWpfViewPresenter(ContentControl contentControl)
         {
-            _contentControl = contentControl;
+            this._contentControl = contentControl;
         }
 
         public override void Present(FrameworkElement frameworkElement)
         {
-            _contentControl.Content = frameworkElement;
+            this._contentControl.Content = frameworkElement;
         }
     }
 }

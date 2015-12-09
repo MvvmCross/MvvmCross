@@ -5,16 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Console.Views;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Console.Platform
+namespace MvvmCross.Console.Platform
 {
+    using MvvmCross.Console.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
@@ -37,7 +34,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateConsoleContainer();
+            var container = this.CreateConsoleContainer();
             Mvx.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
@@ -54,7 +51,7 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override void InitializeLastChance()
         {
-            InitializeMessagePump();
+            this.InitializeMessagePump();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

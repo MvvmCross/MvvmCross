@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.UI
+namespace MvvmCross.Platform.UI
 {
     public class MvxColor
     {
@@ -25,26 +25,26 @@ namespace Cirrious.CrossCore.UI
 
         public int R
         {
-            get { return MaskAndShiftRight(ARGB, 0xFF0000, 16); }
-            set { ARGB = ShiftOverwrite(ARGB, 0xFF00FFFF, value, 16); }
+            get { return MaskAndShiftRight(this.ARGB, 0xFF0000, 16); }
+            set { this.ARGB = ShiftOverwrite(this.ARGB, 0xFF00FFFF, value, 16); }
         }
 
         public int G
         {
-            get { return MaskAndShiftRight(ARGB, 0xFF00, 8); }
-            set { ARGB = ShiftOverwrite(ARGB, 0xFFFF00FF, value, 8); }
+            get { return MaskAndShiftRight(this.ARGB, 0xFF00, 8); }
+            set { this.ARGB = ShiftOverwrite(this.ARGB, 0xFFFF00FF, value, 8); }
         }
 
         public int B
         {
-            get { return MaskAndShiftRight(ARGB, 0xFF, 0); }
-            set { ARGB = ShiftOverwrite(ARGB, 0xFFFFFF00, value, 0); }
+            get { return MaskAndShiftRight(this.ARGB, 0xFF, 0); }
+            set { this.ARGB = ShiftOverwrite(this.ARGB, 0xFFFFFF00, value, 0); }
         }
 
         public int A
         {
-            get { return MaskAndShiftRight(ARGB, 0xFF000000, 24); }
-            set { ARGB = ShiftOverwrite(ARGB, 0x00FFFFFF, value, 24); }
+            get { return MaskAndShiftRight(this.ARGB, 0xFF000000, 24); }
+            set { this.ARGB = ShiftOverwrite(this.ARGB, 0x00FFFFFF, value, 24); }
         }
 
         public MvxColor(uint argb)
@@ -54,7 +54,7 @@ namespace Cirrious.CrossCore.UI
 
         public MvxColor(int argb)
         {
-            ARGB = argb;
+            this.ARGB = argb;
         }
 
         public MvxColor(uint rgb, int alpha)
@@ -64,21 +64,21 @@ namespace Cirrious.CrossCore.UI
 
         public MvxColor(int rgb, int alpha)
         {
-            ARGB = rgb;
-            A = alpha;
+            this.ARGB = rgb;
+            this.A = alpha;
         }
 
         public MvxColor(int red, int green, int blue, int alpha = 255)
         {
-            R = red;
-            G = green;
-            B = blue;
-            A = alpha;
+            this.R = red;
+            this.G = green;
+            this.B = blue;
+            this.A = alpha;
         }
 
         public override string ToString()
         {
-            return $"argb: #{A:X2}{R:X2}{G:X2}{B:X2}";
+            return $"argb: #{this.A:X2}{this.R:X2}{this.G:X2}{this.B:X2}";
         }
     }
 }

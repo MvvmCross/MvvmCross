@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using System.Collections;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System.Collections;
+
+    using Android.Widget;
+
     public interface IMvxAdapter
         : ISpinnerAdapter
         , IListAdapter

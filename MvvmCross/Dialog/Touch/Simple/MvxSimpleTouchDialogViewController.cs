@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Simple
+namespace MvvmCross.Dialog.Touch.Simple
 {
+    using MvvmCross.Core.ViewModels;
+
+    using UIKit;
+
     public abstract class MvxSimpleTouchDialogViewController : MvxDialogViewController
     {
         protected MvxSimpleTouchDialogViewController()
             : base(UITableViewStyle.Grouped, null, false)
         {
-            ViewModel = new MvxNullViewModel();
+            this.ViewModel = new MvxNullViewModel();
         }
     }
 }

@@ -1,8 +1,9 @@
-using Android.Widget;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Widget;
+
     public class MvxSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
     {
         public MvxSearchViewQueryTextTargetBinding(object target)
@@ -18,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            SearchView.QueryTextChange += HandleQueryTextChanged;
+            this.SearchView.QueryTextChange += this.HandleQueryTextChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -32,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var target = Target as SearchView;
                 if (target != null)
                 {
-                    target.QueryTextChange -= HandleQueryTextChanged;
+                    target.QueryTextChange -= this.HandleQueryTextChanged;
                 }
             }
 

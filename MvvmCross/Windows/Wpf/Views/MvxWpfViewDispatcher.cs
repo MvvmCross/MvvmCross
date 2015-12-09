@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System.Windows.Threading;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System.Windows.Threading;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher
           , IMvxViewDispatcher
@@ -20,17 +21,17 @@ namespace Cirrious.MvvmCross.Wpf.Views
         public MvxWpfViewDispatcher(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
             : base(dispatcher)
         {
-            _presenter = presenter;
+            this._presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
         {
-            return RequestMainThreadAction(() => _presenter.Show(request));
+            return this.RequestMainThreadAction(() => this._presenter.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
         }
     }
 }

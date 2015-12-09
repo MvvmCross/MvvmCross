@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Android.Views;
+
+    using MvvmCross.Platform.IoC;
+
     public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxNamespaceListViewTypeResolver
     {
         public IList<string> Namespaces { get; private set; }
@@ -19,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
         public MvxNamespaceListViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)
         {
-            Namespaces = new List<string>();
+            this.Namespaces = new List<string>();
         }
 
         public void Add(string namespaceName)
@@ -28,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
             if (!namespaceName.EndsWith("."))
                 namespaceName += ".";
 
-            Namespaces.Add(namespaceName);
+            this.Namespaces.Add(namespaceName);
         }
 
         public override Type Resolve(string tagName)
@@ -38,11 +40,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                 return null;
 
             var lowerTagName = tagName.ToLower();
-            foreach (var ns in Namespaces)
+            foreach (var ns in this.Namespaces)
             {
                 var candidateName = ns + lowerTagName;
                 Type type;
-                if (TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out type))
+                if (this.TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out type))
                     return type;
             }
 

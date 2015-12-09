@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
+namespace MvvmCross.Binding.Bindings.Target.Construction
 {
+    using System;
+
     public class MvxTypeAndNamePair
     {
         public MvxTypeAndNamePair()
@@ -17,8 +17,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         public MvxTypeAndNamePair(Type type, string name)
         {
-            Type = type;
-            Name = name;
+            this.Type = type;
+            this.Name = name;
         }
 
         public Type Type { get; set; }

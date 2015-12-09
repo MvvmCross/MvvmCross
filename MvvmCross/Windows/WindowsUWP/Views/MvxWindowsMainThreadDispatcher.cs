@@ -5,30 +5,32 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.UI.Core;
-using Cirrious.CrossCore.Core;
-
-namespace Cirrious.MvvmCross.WindowsUWP.Views
+namespace MvvmCross.WindowsUWP.Views
 {
+    using System;
+
+    using Windows.UI.Core;
+
+    using MvvmCross.Platform.Core;
+
     public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
 
         public MvxWindowsMainThreadDispatcher(CoreDispatcher uiDispatcher)
         {
-            _uiDispatcher = uiDispatcher;
+            this._uiDispatcher = uiDispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (_uiDispatcher.HasThreadAccess)
+            if (this._uiDispatcher.HasThreadAccess)
             {
                 action();
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
+            this._uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
             return true;
         }
     }

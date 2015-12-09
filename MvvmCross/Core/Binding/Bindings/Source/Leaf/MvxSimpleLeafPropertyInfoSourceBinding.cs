@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
+namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    using System.Reflection;
+
     public class MvxSimpleLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
         public MvxSimpleLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)

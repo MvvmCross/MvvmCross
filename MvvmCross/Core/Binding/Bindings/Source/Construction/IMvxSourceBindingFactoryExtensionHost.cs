@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
+namespace MvvmCross.Binding.Bindings.Source.Construction
 {
+    using System.Collections.Generic;
+
     public interface IMvxSourceBindingFactoryExtensionHost
     {
         IList<IMvxSourceBindingFactoryExtension> Extensions { get; }

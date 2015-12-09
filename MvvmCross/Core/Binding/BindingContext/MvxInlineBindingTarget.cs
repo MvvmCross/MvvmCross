@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
     public class MvxInlineBindingTarget<TViewModel>
     {
         public MvxInlineBindingTarget(IMvxBindingContextOwner bindingContextOwner)
         {
-            BindingContextOwner = bindingContextOwner;
+            this.BindingContextOwner = bindingContextOwner;
         }
 
         public IMvxBindingContextOwner BindingContextOwner { get; private set; }

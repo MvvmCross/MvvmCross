@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Menu;
-using System;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Menu
+namespace MvvmCross.AutoView.Auto.Menu
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions;
+    using CrossUI.Core.Descriptions.Menu;
+
     public class MenuAuto : KeyedAuto
     {
         public string Caption { get; set; }
@@ -24,30 +25,30 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Menu
                         string longCaption = null, string icon = null, Expression<Func<ICommand>> command = null)
             : base(key, onlyFor, notFor)
         {
-            Caption = caption;
-            LongCaption = longCaption;
-            Icon = icon;
-            Command = command;
+            this.Caption = caption;
+            this.LongCaption = longCaption;
+            this.Icon = icon;
+            this.Command = command;
         }
 
         public sealed override KeyedDescription ToDescription()
         {
-            return ToMenuDescription();
+            return this.ToMenuDescription();
         }
 
         public virtual MenuDescription ToMenuDescription()
         {
             var toReturn = new MenuDescription();
             base.Fill(toReturn);
-            if (Caption != null)
-                toReturn.Properties["Caption"] = Caption;
-            if (LongCaption != null)
-                toReturn.Properties["LongCaption"] = LongCaption;
-            if (Icon != null)
-                toReturn.Properties["Icon"] = Icon;
-            if (Command != null)
+            if (this.Caption != null)
+                toReturn.Properties["Caption"] = this.Caption;
+            if (this.LongCaption != null)
+                toReturn.Properties["LongCaption"] = this.LongCaption;
+            if (this.Icon != null)
+                toReturn.Properties["Icon"] = this.Icon;
+            if (this.Command != null)
             {
-                var command = Command.GetPropertyText();
+                var command = this.Command.GetPropertyText();
                 toReturn.Properties["Command"] = $"@MvxBind:{command}";
             }
 

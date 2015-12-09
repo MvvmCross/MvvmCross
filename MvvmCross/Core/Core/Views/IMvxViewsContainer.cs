@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Views
+namespace MvvmCross.Core.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxViewsContainer : IMvxViewFinder
     {
         void AddAll(IDictionary<Type, Type> viewModelViewLookup);

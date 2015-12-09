@@ -5,12 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using System;
+
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel
@@ -19,14 +17,14 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public T ViewModel
         {
-            get { return (T)DataContext; }
-            set { DataContext = value; }
+            get { return (T)this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         IMvxViewModel IMvxView.ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
-            set { DataContext = (T)value; }
+            get { return (IMvxViewModel)this.DataContext; }
+            set { this.DataContext = (T)value; }
         }
 
         public Type ViewModelType => typeof(T);
@@ -35,8 +33,8 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public void HackSetViewModel(object viewModel)
         {
-            ViewModel = (T)viewModel;
-            OnViewModelChanged();
+            this.ViewModel = (T)viewModel;
+            this.OnViewModelChanged();
         }
 
         public virtual bool HandleInput(string input)

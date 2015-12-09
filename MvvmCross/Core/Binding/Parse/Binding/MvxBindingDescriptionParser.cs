@@ -5,20 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Combiners;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding
+namespace MvvmCross.Binding.Parse.Binding
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Combiners;
+    using MvvmCross.Binding.Parse.Binding.Lang;
+    using MvvmCross.Binding.Parse.Binding.Tibet;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
     {
@@ -29,8 +30,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _bindingParser = _bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
-                return _bindingParser;
+                this._bindingParser = this._bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
+                return this._bindingParser;
             }
         }
 
@@ -40,8 +41,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _languageBindingParser = _languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
-                return _languageBindingParser;
+                this._languageBindingParser = this._languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                return this._languageBindingParser;
             }
         }
 
@@ -49,8 +50,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
-                return _valueConverterLookup;
+                this._valueConverterLookup = this._valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                return this._valueConverterLookup;
             }
         }
 
@@ -59,7 +60,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             if (converterName == null)
                 return null;
 
-            var toReturn = ValueConverterLookup.Find(converterName);
+            var toReturn = this.ValueConverterLookup.Find(converterName);
             if (toReturn == null)
                 MvxBindingTrace.Trace("Could not find named converter for {0}", converterName);
 
@@ -73,14 +74,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
-            var parser = BindingParser;
-            return Parse(text, parser);
+            var parser = this.BindingParser;
+            return this.Parse(text, parser);
         }
 
         public IEnumerable<MvxBindingDescription> LanguageParse(string text)
         {
-            var parser = LanguageBindingParser;
-            return Parse(text, parser);
+            var parser = this.LanguageBindingParser;
+            return this.Parse(text, parser);
         }
 
         public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
@@ -98,13 +99,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 return null;
 
             return from item in specification
-                   select SerializableBindingToBinding(item.Key, item.Value);
+                   select this.SerializableBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
         {
             MvxSerializableBindingDescription description;
-            var parser = BindingParser;
+            var parser = this.BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -116,7 +117,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             if (description == null)
                 return null;
 
-            return SerializableBindingToBinding(null, description);
+            return this.SerializableBindingToBinding(null, description);
         }
 
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
@@ -125,7 +126,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             return new MvxBindingDescription
             {
                 TargetName = targetName,
-                Source = SourceStepDescriptionFrom(description),
+                Source = this.SourceStepDescriptionFrom(description),
                 Mode = description.Mode,
             };
         }
@@ -137,7 +138,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 return new MvxPathSourceStepDescription()
                 {
                     SourcePropertyPath = description.Path,
-                    Converter = FindConverter(description.Converter),
+                    Converter = this.FindConverter(description.Converter),
                     ConverterParameter = description.ConverterParameter,
                     FallbackValue = description.FallbackValue
                 };
@@ -152,7 +153,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 return new MvxLiteralSourceStepDescription()
                 {
                     Literal = literal,
-                    Converter = FindConverter(description.Converter),
+                    Converter = this.FindConverter(description.Converter),
                     ConverterParameter = description.ConverterParameter,
                     FallbackValue = description.FallbackValue
                 };
@@ -161,7 +162,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             if (description.Function != null)
             {
                 // first look for a combiner with the name
-                var combiner = FindCombiner(description.Function);
+                var combiner = this.FindCombiner(description.Function);
                 if (combiner != null)
                 {
                     return new MvxCombinerSourceStepDescription()
@@ -169,8 +170,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                         Combiner = combiner,
                         InnerSteps = description.Sources == null
                             ? new List<MvxSourceStepDescription>() :
-                            description.Sources.Select(s => SourceStepDescriptionFrom(s)).ToList(),
-                        Converter = FindConverter(description.Converter),
+                            description.Sources.Select(s => this.SourceStepDescriptionFrom(s)).ToList(),
+                        Converter = this.FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue
                     };
@@ -178,7 +179,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 else
                 {
                     // no combiner, then drop back to looking for a converter
-                    var converter = FindConverter(description.Function);
+                    var converter = this.FindConverter(description.Function);
                     if (converter == null)
                     {
                         MvxBindingTrace.Error("Failed to find combiner or converter for {0}", description.Function);
@@ -205,8 +206,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                         return new MvxCombinerSourceStepDescription()
                         {
                             Combiner = new MvxValueConverterValueCombiner(converter),
-                            InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source)).ToList(),
-                            Converter = FindConverter(description.Converter),
+                            InnerSteps = description.Sources.Select(source => this.SourceStepDescriptionFrom(source)).ToList(),
+                            Converter = this.FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,
                             FallbackValue = description.FallbackValue
                         };
@@ -218,7 +219,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
             return new MvxPathSourceStepDescription()
             {
                 SourcePropertyPath = null,
-                Converter = FindConverter(description.Converter),
+                Converter = this.FindConverter(description.Converter),
                 ConverterParameter = description.ConverterParameter,
                 FallbackValue = description.FallbackValue
             };

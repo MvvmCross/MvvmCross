@@ -5,20 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Test.Core;
-using Moq;
-using NUnit.Framework;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Test.Bindings
+namespace MvvmCross.Binding.Test.Bindings
 {
+    using System;
+
+    using Moq;
+
+    using MvvmCross.Platform.Converters;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxFullBindingConstructionTest : MvxIoCSupportingTest
     {
@@ -49,15 +45,15 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             protected override void Dispose(bool isDisposing)
             {
-                if (DisposeCalled)
+                if (this.DisposeCalled)
                 {
                     throw new Exception("Multiple dispose calls seen");
                 }
 
-                DisposeCalled = true;
+                this.DisposeCalled = true;
                 if (isDisposing)
                 {
-                    DisposeCalledWithIsDisposing = true;
+                    this.DisposeCalledWithIsDisposing = true;
                 }
 
                 base.Dispose(isDisposing);
@@ -67,9 +63,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         [Test]
         public void Test_Creating_A_Binding_Calls_The_Source_And_Target_Factories()
         {
-            TestCommon(MvxBindingMode.TwoWay, true, true);
-            TestCommon(MvxBindingMode.OneWay, true, false);
-            TestCommon(MvxBindingMode.OneWayToSource, false, true);
+            this.TestCommon(MvxBindingMode.TwoWay, true, true);
+            this.TestCommon(MvxBindingMode.OneWay, true, false);
+            this.TestCommon(MvxBindingMode.OneWayToSource, false, true);
         }
 
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)

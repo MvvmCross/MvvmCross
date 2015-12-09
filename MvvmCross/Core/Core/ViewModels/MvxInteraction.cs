@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
     public class MvxInteraction : IMvxInteraction
     {
         public void Raise()
         {
-            Requested.Raise(this);
+            this.Requested.Raise(this);
         }
 
         public event EventHandler Requested;
@@ -24,7 +25,7 @@ namespace Cirrious.MvvmCross.ViewModels
     {
         public void Raise(T request)
         {
-            Requested.Raise(this, request);
+            this.Requested.Raise(this, request);
         }
 
         public event EventHandler<MvxValueEventArgs<T>> Requested;

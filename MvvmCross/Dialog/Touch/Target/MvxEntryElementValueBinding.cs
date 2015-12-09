@@ -5,28 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Target
+namespace MvvmCross.Dialog.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Platform.Platform;
+
     public class MvxEntryElementValueBinding : MvxPropertyInfoTargetBinding<EntryElement>
     {
         public MvxEntryElementValueBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var entryElement = View;
+            var entryElement = this.View;
             if (entryElement == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - entryElement is null in MvxEntryElementValueBinding");
             }
             else
             {
-                entryElement.Changed += EntryElementOnChanged;
+                entryElement.Changed += this.EntryElementOnChanged;
             }
         }
 
@@ -34,7 +36,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
 
         private void EntryElementOnChanged(object sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.Value);
+            this.FireValueChanged(this.View.Value);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -42,10 +44,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var entryElement = View;
+                var entryElement = this.View;
                 if (entryElement != null)
                 {
-                    entryElement.Changed -= EntryElementOnChanged;
+                    entryElement.Changed -= this.EntryElementOnChanged;
                 }
             }
         }

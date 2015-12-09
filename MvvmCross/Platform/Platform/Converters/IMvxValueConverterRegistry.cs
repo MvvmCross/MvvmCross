@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.CrossCore.Converters
+namespace MvvmCross.Platform.Converters
 {
+    using MvvmCross.Platform.Platform;
+
     public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
     {
     }

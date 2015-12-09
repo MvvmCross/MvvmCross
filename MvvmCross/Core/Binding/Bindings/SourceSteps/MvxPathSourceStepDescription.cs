@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxPathSourceStepDescription : MvxSourceStepDescription
     {
@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return SourcePropertyPath ?? "-empty-";
+            return this.SourcePropertyPath ?? "-empty-";
         }
     }
 }

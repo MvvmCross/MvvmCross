@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings;
-using CoreGraphics;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using CoreGraphics;
+
+    using Foundation;
+
+    using UIKit;
+
     public class MvxTableViewCell
         : UITableViewCell
           , IMvxBindable
@@ -70,7 +71,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                     UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
-            Accessory = tableViewCellAccessory;
+            this.Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingText);
         }
 
@@ -83,7 +84,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             // note that we allow the virtual Accessory property to be set here - but do not seal
             // it. Previous `sealed` code caused odd, unexplained behaviour in MonoTouch
             // - see https://github.com/MvvmCross/MvvmCross/issues/524
-            Accessory = tableViewCellAccessory;
+            this.Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingDescriptions);
         }
 
@@ -91,15 +92,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                BindingContext.ClearAllBindings();
+                this.BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
     }
 }

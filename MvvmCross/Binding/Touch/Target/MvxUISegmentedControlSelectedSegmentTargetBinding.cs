@@ -1,11 +1,12 @@
-﻿using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+﻿namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
     {
         private bool _subscribed;
@@ -34,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 return;
             }
 
-            _subscribed = true;
+            this._subscribed = true;
             segmentedControl.ValueChanged += HandleValueChanged;
         }
 
@@ -53,10 +54,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && _subscribed)
+                if (view != null && this._subscribed)
                 {
                     view.ValueChanged -= HandleValueChanged;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

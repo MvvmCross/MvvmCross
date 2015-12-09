@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Foundation;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
+    using UIKit;
+
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
         private IEnumerable _itemsSource;
@@ -37,10 +38,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
             }
 
@@ -50,34 +51,34 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get { return this._itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
-                    && !ReloadOnAllItemsSourceSets)
+                if (Object.ReferenceEquals(this._itemsSource, value)
+                    && !this.ReloadOnAllItemsSourceSets)
                     return;
 
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
 
-                _itemsSource = value;
+                this._itemsSource = value;
 
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
+                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
 
-                ReloadTableData();
+                this.ReloadTableData();
             }
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            return ItemsSource?.ElementAt(indexPath.Row);
+            return this.ItemsSource?.ElementAt(indexPath.Row);
         }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
@@ -89,18 +90,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected virtual void CollectionChangedOnCollectionChanged(object sender,
                                                                     NotifyCollectionChangedEventArgs args)
         {
-            if (!UseAnimations)
+            if (!this.UseAnimations)
             {
-                ReloadTableData();
+                this.ReloadTableData();
                 return;
             }
 
-            if (TryDoAnimatedChange(args))
+            if (this.TryDoAnimatedChange(args))
             {
                 return;
             }
 
-            ReloadTableData();
+            this.ReloadTableData();
         }
 
         protected bool TryDoAnimatedChange(NotifyCollectionChangedEventArgs args)
@@ -110,13 +111,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                 case NotifyCollectionChangedAction.Add:
                     {
                         var newIndexPaths = CreateNSIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
-                        TableView.InsertRows(newIndexPaths, AddAnimation);
+                        this.TableView.InsertRows(newIndexPaths, this.AddAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
                         var oldIndexPaths = CreateNSIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
-                        TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
+                        this.TableView.DeleteRows(oldIndexPaths, this.RemoveAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
@@ -126,7 +127,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
                         var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
                         var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        TableView.MoveRow(oldIndexPath, newIndexPath);
+                        this.TableView.MoveRow(oldIndexPath, newIndexPath);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Replace:
@@ -135,7 +136,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                             return false;
 
                         var indexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        TableView.ReloadRows(new[]
+                        this.TableView.ReloadRows(new[]
                             {
                                 indexPath
                             }, UITableViewRowAnimation.Fade);
@@ -158,10 +159,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            if (ItemsSource == null)
+            if (this.ItemsSource == null)
                 return 0;
 
-            return ItemsSource.Count();
+            return this.ItemsSource.Count();
         }
     }
 }

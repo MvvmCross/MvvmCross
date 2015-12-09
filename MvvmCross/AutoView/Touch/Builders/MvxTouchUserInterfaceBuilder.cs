@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Touch.Views;
-using CrossUI.Core.Builder;
-using CrossUI.Touch.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Builders
+namespace MvvmCross.AutoView.Touch.Builders
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Touch.Builder;
+
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder
     {
@@ -22,11 +21,11 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders
                                             string platformName = TouchConstants.PlatformName)
             : base(builderRegistry, platformName)
         {
-            _propertyBuilder = new PropertyBuilder();
+            this._propertyBuilder = new PropertyBuilder();
             var setter = new MvxBindingPropertySetter(activity, dataSource);
-            _propertyBuilder.CustomPropertySetters[bindTag] = setter;
+            this._propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override IPropertyBuilder PropertyBuilder => _propertyBuilder;
+        protected override IPropertyBuilder PropertyBuilder => this._propertyBuilder;
     }
 }

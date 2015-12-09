@@ -1,20 +1,16 @@
-﻿using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Test.Core;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace Cirrious.MvvmCross.Binding.Test.Bindings
+﻿namespace MvvmCross.Binding.Test.Bindings
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+
+    using Moq;
+
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Exceptions;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxFullBindingValueConversionTest : MvxIoCSupportingTest
     {
@@ -22,14 +18,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             public MockSourceBinding()
             {
-                SourceType = typeof(object);
+                this.SourceType = typeof(object);
             }
 
             public int DisposeCalled = 0;
 
             public void Dispose()
             {
-                DisposeCalled++;
+                this.DisposeCalled++;
             }
 
             public Type SourceType { get; set; }
@@ -38,12 +34,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                ValuesSet.Add(value);
+                this.ValuesSet.Add(value);
             }
 
             public void FireSourceChanged()
             {
-                var handler = Changed;
+                var handler = this.Changed;
                 handler?.Invoke(this, EventArgs.Empty);
             }
 
@@ -54,10 +50,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public object GetValue()
             {
-                if (!TryGetValueResult)
+                if (!this.TryGetValueResult)
                     return MvxBindingConstant.UnsetValue;
 
-                return TryGetValueValue;
+                return this.TryGetValueValue;
             }
         }
 
@@ -65,14 +61,14 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             public MockTargetBinding()
             {
-                TargetType = typeof(object);
+                this.TargetType = typeof(object);
             }
 
             public int DisposeCalled = 0;
 
             public void Dispose()
             {
-                DisposeCalled++;
+                this.DisposeCalled++;
             }
 
             public void SubscribeToEvents()
@@ -85,12 +81,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                Values.Add(value);
+                this.Values.Add(value);
             }
 
             public void FireValueChanged(MvxTargetChangedEventArgs args)
             {
-                var handler = ValueChanged;
+                var handler = this.ValueChanged;
                 handler?.Invoke(this, args);
             }
 
@@ -108,12 +104,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                ConversionsRequested.Add(value);
-                ConversionParameters.Add(parameter);
-                ConversionTypes.Add(targetType);
-                if (ThrowOnConversion)
+                this.ConversionsRequested.Add(value);
+                this.ConversionParameters.Add(parameter);
+                this.ConversionTypes.Add(targetType);
+                if (this.ThrowOnConversion)
                     throw new MvxException("Conversion throw requested");
-                return ConversionResult;
+                return this.ConversionResult;
             }
 
             public object ConversionBackResult;
@@ -124,12 +120,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                ConversionsBackRequested.Add(value);
-                ConversionBackParameters.Add(parameter);
-                ConversionBackTypes.Add(targetType);
-                if (ThrowOnConversionBack)
+                this.ConversionsBackRequested.Add(value);
+                this.ConversionBackParameters.Add(parameter);
+                this.ConversionBackTypes.Add(targetType);
+                if (this.ThrowOnConversionBack)
                     throw new MvxException("Conversion throw requested");
-                return ConversionBackResult;
+                return this.ConversionBackResult;
             }
         }
 
@@ -143,7 +139,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 ConversionResult = "Test ConversionResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
@@ -161,7 +157,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 ConversionResult = "Test ConversionResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
@@ -179,7 +175,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 ConversionBackResult = "Test ConversionBackResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
@@ -200,7 +196,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
                 ConversionBackResult = "Test ConversionBackResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
@@ -221,7 +217,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var targetType = new { Foo = 23 }.GetType();
-            var binding = TestSetupCommon(mockValueConverter, parameter, targetType, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, targetType, out mockSource, out mockTarget);
 
             mockSource.TryGetValueValue = "new value";
             mockSource.FireSourceChanged();
@@ -240,7 +236,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             {
             };
             var parameter = new { Ignored = 12 };
-            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var aType = new { Hello = 34 };
             mockSource.SourceType = aType.GetType();
@@ -261,7 +257,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var fallback = new { Fred = "Not Barney" };
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -281,7 +277,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var fallback = new { Fred = "Not Barney" };
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -310,7 +306,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -348,7 +344,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -386,7 +382,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -424,7 +420,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -472,7 +468,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -519,7 +515,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -558,7 +554,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter,
                                                Type targetType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
-            return TestSetupCommon(valueConverter, converterParameter, new { Value = 4 }, targetType, out mockSource, out mockTarget);
+            return this.TestSetupCommon(valueConverter, converterParameter, new { Value = 4 }, targetType, out mockSource, out mockTarget);
         }
 
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter, object fallbackValue,

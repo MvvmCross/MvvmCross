@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+
     public interface IMvxNamedInstanceRegistryFiller<out T>
     {
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);

@@ -1,14 +1,14 @@
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using System;
-using System.Collections;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Windows.Input;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {
@@ -25,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var groupTemplateId = MvxAttributeHelpers.ReadGroupItemTemplateId(context, attrs);
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
 
-            SetAdapter(adapter);
+            this.SetAdapter(adapter);
 
             adapter.GroupTemplateId = groupTemplateId;
             adapter.ItemTemplateId = itemTemplateId;
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
-        protected MvxExpandableListAdapter ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
+        protected MvxExpandableListAdapter ThisAdapter => this.ExpandableListAdapter as MvxExpandableListAdapter;
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
@@ -86,7 +86,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public new ICommand GroupClick
         {
-            get { return _groupClick; }
+            get { return this._groupClick; }
             set
             {
                 this._groupClick = value;
@@ -98,7 +98,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public new ICommand GroupLongClick
         {
-            get { return _groupLongClick; }
+            get { return this._groupLongClick; }
             set
             {
                 this._groupLongClick = value;

@@ -5,9 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Binding.Droid.BindingContext
 {
     public class MvxAndroidBindingContextStack
         : MvxBindingContextStack<IMvxAndroidBindingContext>

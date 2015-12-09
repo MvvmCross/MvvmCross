@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Exceptions;
+
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -109,8 +110,8 @@ namespace Cirrious.CrossCore.IoC
         {
             public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
             {
-                ImplementationType = implementationType;
-                ServiceTypes = serviceTypes;
+                this.ImplementationType = implementationType;
+                this.ServiceTypes = serviceTypes;
             }
 
             public List<Type> ServiceTypes { get; private set; }

@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.Threading;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+    using System.Threading;
+
+    using MvvmCross.Platform.Core;
+
+    using UIKit;
+
     public abstract class MvxTouchUIThreadDispatcher
         : MvxMainThreadDispatcher
     {
@@ -19,12 +21,12 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         protected MvxTouchUIThreadDispatcher()
         {
-            _uiSynchronizationContext = SynchronizationContext.Current;
+            this._uiSynchronizationContext = SynchronizationContext.Current;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (_uiSynchronizationContext == SynchronizationContext.Current)
+            if (this._uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));

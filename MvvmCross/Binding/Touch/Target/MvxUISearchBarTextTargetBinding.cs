@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxUISearchBarTextTargetBinding : MvxPropertyInfoTargetBinding<UISearchBar>
     {
         public MvxUISearchBarTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

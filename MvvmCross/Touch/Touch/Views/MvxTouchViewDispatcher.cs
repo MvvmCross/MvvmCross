@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Touch.Views.Presenters;
+
     public class MvxTouchViewDispatcher
         : MvxTouchUIThreadDispatcher
           , IMvxViewDispatcher
@@ -21,7 +22,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxTouchViewDispatcher(IMvxTouchViewPresenter presenter)
         {
-            _presenter = presenter;
+            this._presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
@@ -29,14 +30,14 @@ namespace Cirrious.MvvmCross.Touch.Views
             Action action = () =>
                 {
                     MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
-                    _presenter.Show(request);
+                    this._presenter.Show(request);
                 };
-            return RequestMainThreadAction(action);
+            return this.RequestMainThreadAction(action);
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
         }
     }
 }

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Reflection;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System.Reflection;
+
     public interface IMvxNamedInstanceRegistry<in T>
     {
         void AddOrOverwrite(string name, T instance);

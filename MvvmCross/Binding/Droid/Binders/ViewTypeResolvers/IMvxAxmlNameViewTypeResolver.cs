@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System.Collections.Generic;
+
     public interface IMvxAxmlNameViewTypeResolver
     {
         IDictionary<string, string> ViewNamespaceAbbreviations { get; }

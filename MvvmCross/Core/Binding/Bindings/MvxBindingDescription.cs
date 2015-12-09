@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-
-namespace Cirrious.MvvmCross.Binding.Bindings
+namespace MvvmCross.Binding.Bindings
 {
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Platform.Converters;
+
     public class MvxBindingDescription
     {
         public MvxBindingDescription()
@@ -19,9 +19,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         public MvxBindingDescription(string targetName, string sourcePropertyPath, IMvxValueConverter converter,
                                      object converterParameter, object fallbackValue, MvxBindingMode mode)
         {
-            TargetName = targetName;
-            Mode = mode;
-            Source = new MvxPathSourceStepDescription
+            this.TargetName = targetName;
+            this.Mode = mode;
+            this.Source = new MvxPathSourceStepDescription
             {
                 SourcePropertyPath = sourcePropertyPath,
                 Converter = converter,
@@ -36,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
         public override string ToString()
         {
-            return $"binding {TargetName} for {(Source == null ? "-null" : Source.ToString())}";
+            return $"binding {this.TargetName} for {(this.Source == null ? "-null" : this.Source.ToString())}";
         }
     }
 }

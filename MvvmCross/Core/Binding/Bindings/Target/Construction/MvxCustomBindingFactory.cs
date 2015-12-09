@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
+namespace MvvmCross.Binding.Bindings.Target.Construction
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxCustomBindingFactory<TTarget>
         : IMvxPluginTargetBindingFactory
         where TTarget : class
@@ -21,13 +22,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         public MvxCustomBindingFactory(string targetFakePropertyName,
                                        Func<TTarget, IMvxTargetBinding> targetBindingCreator)
         {
-            _targetFakePropertyName = targetFakePropertyName;
-            _targetBindingCreator = targetBindingCreator;
+            this._targetFakePropertyName = targetFakePropertyName;
+            this._targetBindingCreator = targetBindingCreator;
         }
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair(typeof(TTarget), _targetFakePropertyName) };
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair(typeof(TTarget), this._targetFakePropertyName) };
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
@@ -38,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 return null;
             }
 
-            return _targetBindingCreator(castTarget);
+            return this._targetBindingCreator(castTarget);
         }
 
         #endregion IMvxPluginTargetBindingFactory Members

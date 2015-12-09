@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.MvvmCross.Binding
+namespace MvvmCross.Binding
 {
+    using MvvmCross.Platform.Platform;
+
     public static class MvxBindingTrace
     {
         public static MvxTraceLevel TraceBindingLevel = MvxTraceLevel.Warning;

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using CrossUI.Core.Builder;
-using CrossUI.Droid.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace MvvmCross.AutoView.Droid.Builders
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Droid.Builder;
+
     public class MvxAndroidUserInterfaceBuilder
         : DroidUserInterfaceBuilder
     {
@@ -22,11 +21,11 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
                                             string platformName = DroidConstants.PlatformName)
             : base(builderRegistry, platformName)
         {
-            _propertyBuilder = new PropertyBuilder();
+            this._propertyBuilder = new PropertyBuilder();
             var setter = new MvxBindingPropertySetter(context, dataSource);
-            _propertyBuilder.CustomPropertySetters[bindTag] = setter;
+            this._propertyBuilder.CustomPropertySetters[bindTag] = setter;
         }
 
-        protected override IPropertyBuilder PropertyBuilder => _propertyBuilder;
+        protected override IPropertyBuilder PropertyBuilder => this._propertyBuilder;
     }
 }

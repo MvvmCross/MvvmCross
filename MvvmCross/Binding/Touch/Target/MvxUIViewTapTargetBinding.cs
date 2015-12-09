@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Touch.Views.Gestures;
-using System;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+    using System.Windows.Input;
+
+    using MvvmCross.Binding.Touch.Views.Gestures;
+
+    using UIKit;
+
     public class MvxUIViewTapTargetBinding : MvxConvertingTargetBinding
     {
         private readonly MvxTapGestureRecognizerBehaviour _behaviour;
@@ -20,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public MvxUIViewTapTargetBinding(UIView target, uint numberOfTapsRequired = 1, uint numberOfTouchesRequired = 1)
             : base(target)
         {
-            _behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired);
+            this._behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -29,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            _behaviour.Command = (ICommand)value;
+            this._behaviour.Command = (ICommand)value;
         }
     }
 }

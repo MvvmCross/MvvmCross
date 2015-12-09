@@ -5,28 +5,28 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
+namespace MvvmCross.Binding.Touch.Views.Gestures
 {
+    using UIKit;
+
     public class MvxTapGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior<UITapGestureRecognizer>
     {
         protected override void HandleGesture(UITapGestureRecognizer gesture)
         {
-            FireCommand();
+            this.FireCommand();
         }
 
         public MvxTapGestureRecognizerBehaviour(UIView target, uint numberOfTapsRequired = 1,
                                                 uint numberOfTouchesRequired = 1)
         {
-            var tap = new UITapGestureRecognizer(HandleGesture)
+            var tap = new UITapGestureRecognizer(this.HandleGesture)
             {
                 NumberOfTapsRequired = numberOfTapsRequired,
                 NumberOfTouchesRequired = numberOfTouchesRequired
             };
 
-            AddGestureRecognizer(target, tap);
+            this.AddGestureRecognizer(target, tap);
         }
     }
 }

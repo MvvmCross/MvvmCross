@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.ExtensionMethods;
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Globalization;
-
-namespace Cirrious.MvvmCross.Binding.ExtensionMethods
+namespace MvvmCross.Binding.ExtensionMethods
 {
+    using System;
+    using System.Globalization;
+
+    using MvvmCross.Platform.ExtensionMethods;
+    using MvvmCross.Platform.IoC;
+
     public static class MvxBindingExtensions
     {
         public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(this IMvxEditableTextView mvxEditableTextView, object target, object value)

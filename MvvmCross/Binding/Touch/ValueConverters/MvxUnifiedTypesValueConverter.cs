@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-
-namespace Cirrious.MvvmCross.Binding.Touch.ValueConverters
+namespace MvvmCross.Binding.Touch.ValueConverters
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.IoC;
+
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {

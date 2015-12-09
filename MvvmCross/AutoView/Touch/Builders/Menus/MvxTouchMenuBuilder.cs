@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Builder;
-using CrossUI.Core.Elements.Menu;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Menus
+namespace MvvmCross.AutoView.Touch.Builders.Menus
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Core.Elements.Menu;
+
     public class MvxTouchMenuBuilder : TypedUserInterfaceBuilder
     {
         public MvxTouchMenuBuilder(bool registerDefaults)
@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Menus
         {
             if (registerDefaults)
             {
-                RegisterConventionalKeys(this.GetType().Assembly);
+                this.RegisterConventionalKeys(this.GetType().Assembly);
             }
         }
     }

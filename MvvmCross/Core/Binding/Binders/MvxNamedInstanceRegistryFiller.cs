@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {
@@ -21,11 +22,11 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             if (type.GetTypeInfo().IsAbstract)
             {
-                FillFromStatic(registry, type);
+                this.FillFromStatic(registry, type);
             }
             else
             {
-                FillFromInstance(registry, type);
+                this.FillFromInstance(registry, type);
             }
         }
 
@@ -77,7 +78,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                         where type.GetTypeInfo().IsPublic
                         where !type.GetTypeInfo().IsAbstract
                         where typeof(T).IsAssignableFrom(type)
-                        let name = FindName(type)
+                        let name = this.FindName(type)
                         where !string.IsNullOrEmpty(name)
                         where type.IsConventional()
                         select new { Name = name, Type = type };

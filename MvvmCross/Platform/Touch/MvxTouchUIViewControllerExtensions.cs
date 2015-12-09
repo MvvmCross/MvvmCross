@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch
+namespace MvvmCross.Platform.Touch
 {
+    using UIKit;
+
     public static class MvxTouchUIViewControllerExtensions
     {
         public static bool IsVisible(this UIViewController controller)

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    using MvvmCross.Platform.Converters;
+
     public class MvxSourceStepDescription
     {
         public IMvxValueConverter Converter { get; set; }

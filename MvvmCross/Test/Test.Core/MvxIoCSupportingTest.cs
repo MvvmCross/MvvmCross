@@ -5,24 +5,26 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Platform;
-using System.Globalization;
-using System.Threading;
-
-namespace Cirrious.MvvmCross.Test.Core
+namespace MvvmCross.Test.Core
 {
+    using System.Globalization;
+    using System.Threading;
+
+    using MvvmCross.Core;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxIoCSupportingTest
     {
         private IMvxIoCProvider _ioc;
 
-        protected IMvxIoCProvider Ioc => _ioc;
+        protected IMvxIoCProvider Ioc => this._ioc;
 
         public void Setup()
         {
-            ClearAll();
+            this.ClearAll();
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
@@ -34,13 +36,13 @@ namespace Cirrious.MvvmCross.Test.Core
         {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
-            _ioc = MvxSimpleIoCContainer.Initialize(CreateIocOptions());
-            _ioc.RegisterSingleton(_ioc);
-            _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
+            this._ioc = MvxSimpleIoCContainer.Initialize(this.CreateIocOptions());
+            this._ioc.RegisterSingleton(this._ioc);
+            this._ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
-            InitializeMvxSettings();
+            this.InitializeMvxSettings();
             MvxTrace.Initialize();
-            AdditionalSetup();
+            this.AdditionalSetup();
         }
 
         private static void InitializeSingletonCache()
@@ -50,7 +52,7 @@ namespace Cirrious.MvvmCross.Test.Core
 
         protected virtual void InitializeMvxSettings()
         {
-            _ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
+            this._ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
         }
 
         protected virtual void AdditionalSetup()

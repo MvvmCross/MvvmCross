@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Views;
+    using Android.Widget;
+
+    using MvvmCross.Binding.Droid.BindingContext;
+
     public abstract class MvxBaseListItemView
         : FrameLayout
         , IMvxBindingContextOwner
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext)
             : base(context)
         {
-            _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
+            this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
         }
 
         protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -40,11 +41,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         }
         */
 
-        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
+        protected IMvxAndroidBindingContext AndroidBindingContext => this._bindingContext;
 
         public IMvxBindingContext BindingContext
         {
-            get { return _bindingContext; }
+            get { return this._bindingContext; }
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
@@ -54,20 +55,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         protected override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            _isAttachedToWindow = true;
-            if (_cachedDataContext != null
-                && DataContext == null)
+            this._isAttachedToWindow = true;
+            if (this._cachedDataContext != null
+                && this.DataContext == null)
             {
-                DataContext = _cachedDataContext;
+                this.DataContext = this._cachedDataContext;
             }
         }
 
         protected override void OnDetachedFromWindow()
         {
-            _cachedDataContext = DataContext;
-            DataContext = null;
+            this._cachedDataContext = this.DataContext;
+            this.DataContext = null;
             base.OnDetachedFromWindow();
-            _isAttachedToWindow = false;
+            this._isAttachedToWindow = false;
         }
 
         protected override void Dispose(bool disposing)
@@ -75,29 +76,29 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (disposing)
             {
                 this.ClearAllBindings();
-                _cachedDataContext = null;
+                this._cachedDataContext = null;
             }
 
             base.Dispose(disposing);
         }
 
-        protected View Content => FirstChild;
+        protected View Content => this.FirstChild;
 
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get { return this._bindingContext.DataContext; }
             set
             {
-                if (_isAttachedToWindow)
+                if (this._isAttachedToWindow)
                 {
-                    _bindingContext.DataContext = value;
+                    this._bindingContext.DataContext = value;
                 }
                 else
                 {
-                    _cachedDataContext = value;
-                    if (_bindingContext.DataContext != null)
+                    this._cachedDataContext = value;
+                    if (this._bindingContext.DataContext != null)
                     {
-                        _bindingContext.DataContext = null;
+                        this._bindingContext.DataContext = null;
                     }
                 }
             }
@@ -107,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                if (ChildCount == 0)
+                if (this.ChildCount == 0)
                     return null;
                 var firstChild = this.GetChildAt(0);
                 return firstChild;
@@ -118,17 +119,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                var firstChild = FirstChild;
+                var firstChild = this.FirstChild;
                 return firstChild as ICheckable;
             }
         }
 
         public virtual void Toggle()
         {
-            var contentCheckable = ContentCheckable;
+            var contentCheckable = this.ContentCheckable;
             if (contentCheckable == null)
             {
-                _checked = !_checked;
+                this._checked = !this._checked;
                 return;
             }
 
@@ -141,19 +142,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             get
             {
-                var contentCheckable = ContentCheckable;
+                var contentCheckable = this.ContentCheckable;
                 if (contentCheckable != null)
                 {
                     return contentCheckable.Checked;
                 }
 
-                return _checked;
+                return this._checked;
             }
             set
             {
-                _checked = value;
+                this._checked = value;
 
-                var contentCheckable = ContentCheckable;
+                var contentCheckable = this.ContentCheckable;
                 if (contentCheckable != null)
                 {
                     contentCheckable.Checked = value;
@@ -162,11 +163,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 // since we don't have genuinely checked content, then use FirstChild activation instead
                 // see https://github.com/MvvmCross/MvvmCross/issues/481
-                var firstChild = FirstChild;
+                var firstChild = this.FirstChild;
                 if (firstChild == null)
                     return;
 
-                if (Context.ApplicationInfo.TargetSdkVersion
+                if (this.Context.ApplicationInfo.TargetSdkVersion
                     >= Android.OS.BuildVersionCodes.Honeycomb &&
                     Android.OS.Build.VERSION.SdkInt
                     >= Android.OS.BuildVersionCodes.Honeycomb)

@@ -1,8 +1,9 @@
-﻿using System;
-using Cirrious.CrossCore.Exceptions;
-
-namespace Cirrious.MvvmCross.WindowsUWP.Views.Suspension
+﻿namespace MvvmCross.WindowsUWP.Views.Suspension
 {
+    using System;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxSuspensionManagerException : MvxException
     {
         public MvxSuspensionManagerException()

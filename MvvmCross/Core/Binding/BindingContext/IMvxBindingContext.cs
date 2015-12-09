@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.Bindings;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Platform.Core;
+
     public interface IMvxBindingContext
         : IMvxDataConsumer
     {

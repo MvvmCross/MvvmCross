@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.Droid
+namespace MvvmCross.Platform.Droid
 {
+    using System.Reflection;
+
+    using Android.Content;
+
     public interface IMvxAndroidGlobals
     {
         string ExecutableNamespace { get; }

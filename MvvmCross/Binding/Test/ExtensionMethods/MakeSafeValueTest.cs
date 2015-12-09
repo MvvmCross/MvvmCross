@@ -1,13 +1,12 @@
-﻿using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Cirrious.MvvmCross.Test.Core;
-using NUnit.Framework;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Test.ExtensionMethods
+﻿namespace MvvmCross.Binding.Test.ExtensionMethods
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MakeSafeValueTest : MvxIoCSupportingTest
     {

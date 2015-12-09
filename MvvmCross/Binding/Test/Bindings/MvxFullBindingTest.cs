@@ -5,21 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Test.Core;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Test.Bindings
+namespace MvvmCross.Binding.Test.Bindings
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Moq;
+
+    using MvvmCross.Platform.Converters;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxFullBindingTest : MvxIoCSupportingTest
     {
@@ -29,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void Dispose()
             {
-                DisposeCalled++;
+                this.DisposeCalled++;
             }
 
             public Type SourceType { get; set; }
@@ -38,12 +34,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                ValuesSet.Add(value);
+                this.ValuesSet.Add(value);
             }
 
             public void FireSourceChanged()
             {
-                var handler = Changed;
+                var handler = this.Changed;
                 handler?.Invoke(this, EventArgs.Empty);
             }
 
@@ -54,10 +50,10 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public object GetValue()
             {
-                if (!TryGetValueResult)
+                if (!this.TryGetValueResult)
                     return MvxBindingConstant.UnsetValue;
 
-                return TryGetValueValue;
+                return this.TryGetValueValue;
             }
         }
 
@@ -67,7 +63,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void Dispose()
             {
-                DisposeCalled++;
+                this.DisposeCalled++;
             }
 
             public Type TargetType { get; set; }
@@ -77,19 +73,19 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
 
             public void SubscribeToEvents()
             {
-                SubscribeToEventsCalled++;
+                this.SubscribeToEventsCalled++;
             }
 
             public List<object> Values = new List<object>();
 
             public void SetValue(object value)
             {
-                Values.Add(value);
+                this.Values.Add(value);
             }
 
             public void FireValueChanged(MvxTargetChangedEventArgs args)
             {
-                var handler = ValueChanged;
+                var handler = this.ValueChanged;
                 handler?.Invoke(this, args);
             }
 
@@ -101,7 +97,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.TwoWay, out mockSource, out mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
         }
@@ -111,7 +107,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockSource, out mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
         }
@@ -180,7 +176,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.OneWay, out mockSource, out mockTarget);
 
             OneWayAssertions(binding, mockTarget, mockSource);
         }
@@ -190,7 +186,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockSource, out mockTarget);
 
             OneWayAssertions(binding, mockTarget, mockSource);
         }
@@ -255,7 +251,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
         }
@@ -265,7 +261,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
         }
@@ -328,7 +324,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.OneTime, out mockSource, out mockTarget);
 
             OneTimeAssertions(binding, mockTarget, mockSource);
         }
@@ -338,7 +334,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockSource, out mockTarget);
 
             OneTimeAssertions(binding, mockTarget, mockSource);
         }
@@ -398,7 +394,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Bindings
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode,
                                      out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
-            return TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
+            return this.TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
         }
 
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)

@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Core.Elements.Menu;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace MvvmCross.AutoView.Touch.Views.Lists
 {
+    using CrossUI.Core.Elements.Menu;
+
+    using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Platform.IoC;
+
+    using UIKit;
+
     [MvxUnconventional]
     public class MvxAutoListActivityView
         : MvxTableViewController
@@ -34,25 +33,25 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         {
             base.ViewDidLoad();
 
-            _parentMenu = this.LoadMenu();
+            this._parentMenu = this.LoadMenu();
 
-            _list = this.LoadList<GeneralListLayout>();
-            var source = _list.InitializeSource(TableView);
+            this._list = this.LoadList<GeneralListLayout>();
+            var source = this._list.InitializeSource(TableView);
             TableView.Source = source;
             TableView.ReloadData();
 
-            if (_parentMenu != null)
+            if (this._parentMenu != null)
             {
                 NavigationItem.SetRightBarButtonItem(
                     new UIBarButtonItem(UIBarButtonSystemItem.Action,
-                                        (sender, e) => { ShowActionMenu(); }),
+                                        (sender, e) => { this.ShowActionMenu(); }),
                     false);
             }
         }
 
         private void ShowActionMenu()
         {
-            this.ShowOptionsMenu(_parentMenu);
+            this.ShowOptionsMenu(this._parentMenu);
         }
 
         /*

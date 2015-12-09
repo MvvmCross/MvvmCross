@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
     public abstract class MvxApplicableTo<T>
         : MvxApplicable,
@@ -13,7 +13,7 @@ namespace Cirrious.CrossCore.Core
     {
         public virtual void ApplyTo(T what)
         {
-            SuppressFinalizer();
+            this.SuppressFinalizer();
         }
     }
 }

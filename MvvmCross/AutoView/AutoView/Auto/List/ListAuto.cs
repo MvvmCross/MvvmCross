@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Lists;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.List
+namespace MvvmCross.AutoView.Auto.List
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions;
+    using CrossUI.Core.Descriptions.Lists;
+
     public class ListAuto : KeyedAuto
     {
         public ListAuto(string key = null, string onlyFor = null, string notFor = null,
@@ -22,10 +23,10 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
                         Expression<Func<IEnumerable>> itemsSource = null, ListLayoutAuto defaultLayout = null)
             : base(key, onlyFor, notFor)
         {
-            SelectedCommand = selectedCommand;
-            ItemsSource = itemsSource;
-            DefaultLayout = defaultLayout;
-            ItemLayouts = new Dictionary<string, ListLayoutAuto>();
+            this.SelectedCommand = selectedCommand;
+            this.ItemsSource = itemsSource;
+            this.DefaultLayout = defaultLayout;
+            this.ItemLayouts = new Dictionary<string, ListLayoutAuto>();
         }
 
         public Expression<Func<ICommand>> SelectedCommand { get; set; }
@@ -35,28 +36,28 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
 
         public sealed override KeyedDescription ToDescription()
         {
-            return ToListLayoutDescription();
+            return this.ToListLayoutDescription();
         }
 
         public virtual ListLayoutDescription ToListLayoutDescription()
         {
             var list = new ListLayoutDescription();
             base.Fill(list);
-            if (ItemsSource != null)
+            if (this.ItemsSource != null)
             {
-                var itemsSource = ItemsSource.GetPropertyText();
+                var itemsSource = this.ItemsSource.GetPropertyText();
                 list.Properties["ItemsSource"] = $"@MvxBind:{itemsSource}";
             }
-            if (SelectedCommand != null)
+            if (this.SelectedCommand != null)
             {
-                var selectedCommand = SelectedCommand.GetPropertyText();
+                var selectedCommand = this.SelectedCommand.GetPropertyText();
                 list.Properties["ItemClick"] = $"@MvxBind:{selectedCommand}";
             }
-            if (DefaultLayout != null)
+            if (this.DefaultLayout != null)
             {
-                list.DefaultLayout = DefaultLayout.ToListItemDescription();
+                list.DefaultLayout = this.DefaultLayout.ToListItemDescription();
             }
-            foreach (var kvp in ItemLayouts)
+            foreach (var kvp in this.ItemLayouts)
             {
                 list.ItemLayouts[kvp.Key] = kvp.Value.ToListItemDescription();
             }

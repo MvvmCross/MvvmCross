@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+
     public class MvxNavigationSerializer
         : IMvxNavigationSerializer
     {
         public MvxNavigationSerializer(IMvxTextSerializer serializer)
         {
-            Serializer = serializer;
+            this.Serializer = serializer;
         }
 
         public IMvxTextSerializer Serializer { get; private set; }

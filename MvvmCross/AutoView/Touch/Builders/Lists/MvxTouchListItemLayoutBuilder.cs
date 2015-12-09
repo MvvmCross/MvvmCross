@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
-using CrossUI.Core.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Lists
+namespace MvvmCross.AutoView.Touch.Builders.Lists
 {
+    using CrossUI.Core.Builder;
+
+    using MvvmCross.AutoView.Touch.Interfaces.Lists;
+
     public class MvxTouchListItemLayoutBuilder : TypedUserInterfaceBuilder
     {
         public MvxTouchListItemLayoutBuilder(bool registerDefaults)
@@ -17,7 +18,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Builders.Lists
         {
             if (registerDefaults)
             {
-                RegisterConventionalKeys(this.GetType().Assembly);
+                this.RegisterConventionalKeys(this.GetType().Assembly);
             }
         }
     }

@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+
     public class MvxCommandCollectionBuilder
         : IMvxCommandCollectionBuilder
     {
@@ -25,15 +26,15 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommandCollectionBuilder()
         {
-            CanExecutePrefix = DefaultCanExecutePrefix;
-            CommandSuffix = DefaultCommandSuffix;
-            AdditionalCommandSuffixes = null;
+            this.CanExecutePrefix = DefaultCanExecutePrefix;
+            this.CommandSuffix = DefaultCommandSuffix;
+            this.AdditionalCommandSuffixes = null;
         }
 
         public virtual IMvxCommandCollection BuildCollectionFor(object owner)
         {
             var toReturn = new MvxCommandCollection(owner);
-            CreateCommands(owner, toReturn);
+            this.CreateCommands(owner, toReturn);
             return toReturn;
         }
 
@@ -45,20 +46,20 @@ namespace Cirrious.MvvmCross.ViewModels
                          .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 let parameterCount = method.GetParameters().Count()
                 where parameterCount <= 1
-                let commandName = GetCommandNameOrNull(method)
+                let commandName = this.GetCommandNameOrNull(method)
                 where !string.IsNullOrEmpty(commandName)
                 select new { Method = method, CommandName = commandName, HasParameter = parameterCount > 0 };
 
             foreach (var item in commandMethods)
             {
-                CreateCommand(owner, toReturn, item.Method, item.CommandName, item.HasParameter);
+                this.CreateCommand(owner, toReturn, item.Method, item.CommandName, item.HasParameter);
             }
         }
 
         protected virtual void CreateCommand(object owner, MvxCommandCollection collection, MethodInfo commandMethod,
                                              string commandName, bool hasParameter)
         {
-            var canExecuteProperty = CanExecutePropertyInfo(owner.GetType(), commandMethod);
+            var canExecuteProperty = this.CanExecutePropertyInfo(owner.GetType(), commandMethod);
 
             var helper = hasParameter
                              ? (IMvxCommandBuilder)
@@ -71,7 +72,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected virtual PropertyInfo CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
         {
-            var canExecuteName = CanExecuteProperyName(commandMethod);
+            var canExecuteName = this.CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
                 return null;
             var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
@@ -87,19 +88,19 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected virtual string GetCommandNameOrNull(MethodInfo method)
         {
-            var commandAttribute = CommandAttribute(method);
+            var commandAttribute = this.CommandAttribute(method);
             if (commandAttribute != null)
                 return commandAttribute.CommandName;
 
-            var name = GetConventionalCommandNameOrNull(method, CommandSuffix);
+            var name = this.GetConventionalCommandNameOrNull(method, this.CommandSuffix);
             if (name != null)
                 return name;
 
-            if (AdditionalCommandSuffixes != null)
+            if (this.AdditionalCommandSuffixes != null)
             {
-                foreach (var additionalCommandSuffix in AdditionalCommandSuffixes)
+                foreach (var additionalCommandSuffix in this.AdditionalCommandSuffixes)
                 {
-                    name = GetConventionalCommandNameOrNull(method, additionalCommandSuffix);
+                    name = this.GetConventionalCommandNameOrNull(method, additionalCommandSuffix);
                     if (name != null)
                         return name;
                 }
@@ -127,11 +128,11 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected virtual string CanExecuteProperyName(MethodInfo method)
         {
-            var commandAttribute = CommandAttribute(method);
+            var commandAttribute = this.CommandAttribute(method);
             if (commandAttribute != null)
                 return commandAttribute.CanExecutePropertyName;
 
-            return CanExecutePrefix + method.Name;
+            return this.CanExecutePrefix + method.Name;
         }
 
         #region Nested classes for building commands by reflection - 'hidden as nested' currently as they are not used anywhere else
@@ -148,19 +149,19 @@ namespace Cirrious.MvvmCross.ViewModels
             private readonly MethodInfo _executeMethodInfo;
             private readonly PropertyInfo _canExecutePropertyInfo;
 
-            protected MethodInfo ExecuteMethodInfo => _executeMethodInfo;
+            protected MethodInfo ExecuteMethodInfo => this._executeMethodInfo;
 
-            protected PropertyInfo CanExecutePropertyInfo => _canExecutePropertyInfo;
+            protected PropertyInfo CanExecutePropertyInfo => this._canExecutePropertyInfo;
 
             protected MvxBaseCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
             {
-                _executeMethodInfo = executeMethodInfo;
-                _canExecutePropertyInfo = canExecutePropertyInfo;
+                this._executeMethodInfo = executeMethodInfo;
+                this._canExecutePropertyInfo = canExecutePropertyInfo;
             }
 
             public abstract IMvxCommand ToCommand(object owner);
 
-            public string CanExecutePropertyName => _canExecutePropertyInfo?.Name;
+            public string CanExecutePropertyName => this._canExecutePropertyInfo?.Name;
         }
 
         public class MvxCommandBuilder : MvxBaseCommandBuilder
@@ -172,10 +173,10 @@ namespace Cirrious.MvvmCross.ViewModels
 
             public override IMvxCommand ToCommand(object owner)
             {
-                var executeAction = new Action(() => ExecuteMethodInfo.Invoke(owner, new object[0]));
+                var executeAction = new Action(() => this.ExecuteMethodInfo.Invoke(owner, new object[0]));
                 Func<bool> canExecuteFunc = null;
-                if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = () => (bool)CanExecutePropertyInfo.GetValue(owner, null);
+                if (this.CanExecutePropertyInfo != null)
+                    canExecuteFunc = () => (bool)this.CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand(executeAction, canExecuteFunc);
             }
@@ -190,10 +191,10 @@ namespace Cirrious.MvvmCross.ViewModels
 
             public override IMvxCommand ToCommand(object owner)
             {
-                var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] { obj }));
+                var executeAction = new Action<object>((obj) => this.ExecuteMethodInfo.Invoke(owner, new[] { obj }));
                 Func<object, bool> canExecuteFunc = null;
-                if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = (ignored) => (bool)CanExecutePropertyInfo.GetValue(owner, null);
+                if (this.CanExecutePropertyInfo != null)
+                    canExecuteFunc = (ignored) => (bool)this.CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand<object>(executeAction, canExecuteFunc);
             }

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Foundation;
-using System;
-
-namespace Cirrious.CrossCore.Touch
+namespace MvvmCross.Platform.Touch
 {
+    using System;
+
+    using Foundation;
+
     public static class MvxTouchDateTimeExtensionMethods
     {
         private static readonly DateTime ReferenceNSDateTime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);

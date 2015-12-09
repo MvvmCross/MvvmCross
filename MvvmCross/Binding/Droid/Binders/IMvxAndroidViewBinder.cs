@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Util;
-using Android.Views;
-using Cirrious.MvvmCross.Binding.Bindings;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Binding.Droid.Binders
 {
+    using System.Collections.Generic;
+
+    using Android.Content;
+    using Android.Util;
+    using Android.Views;
+
     public interface IMvxAndroidViewBinder
     {
         void BindView(View view, Context context, IAttributeSet attrs);

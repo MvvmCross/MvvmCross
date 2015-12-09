@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.ExtensionMethods
+namespace MvvmCross.Binding.ExtensionMethods
 {
     public interface IMvxEditableTextView
     {

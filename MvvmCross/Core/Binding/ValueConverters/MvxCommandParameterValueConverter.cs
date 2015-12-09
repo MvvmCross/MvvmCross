@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Binding.ValueConverters
+namespace MvvmCross.Binding.ValueConverters
 {
+    using System.Windows.Input;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxCommandParameterValueConverter
         : MvxValueConverter<ICommand, ICommand>
     {

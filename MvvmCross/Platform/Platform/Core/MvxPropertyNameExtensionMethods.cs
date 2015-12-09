@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
     public static class MvxPropertyNameExtensionMethods
     {
         private const string WrongExpressionMessage =

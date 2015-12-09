@@ -5,30 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Builders;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.AutoView.Touch.Builders;
-using Cirrious.MvvmCross.AutoView.Touch.Views;
-using Cirrious.MvvmCross.Views;
-using CrossUI.Core.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Touch
+namespace MvvmCross.AutoView.Touch
 {
+    using CrossUI.Core.Builder;
+
+    using MvvmCross.AutoView.Builders;
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.AutoView.Touch.Builders;
+    using MvvmCross.AutoView.Touch.Views;
+    using MvvmCross.Platform;
+
     public class MvxAutoViewSetup
     {
         public void Initialize()
         {
-            RegisterAutomaticViewTextLoader();
-            RegisterViewFinders();
-            InitializeUserInterfaceBuilder();
+            this.RegisterAutomaticViewTextLoader();
+            this.RegisterViewFinders();
+            this.InitializeUserInterfaceBuilder();
         }
 
         protected virtual void InitializeUserInterfaceBuilder()
         {
-            var touchRegistry = CreateBuilderRegistry();
+            var touchRegistry = this.CreateBuilderRegistry();
             Mvx.RegisterSingleton<IBuilderRegistry>(touchRegistry);
-            var userInterfaceFactory = CreateUserInterfaceFactory();
+            var userInterfaceFactory = this.CreateUserInterfaceFactory();
             Mvx.RegisterSingleton(userInterfaceFactory);
         }
 
@@ -46,8 +46,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch
         protected virtual void RegisterViewFinders()
         {
             var container = Mvx.Resolve<IMvxViewsContainer>();
-            RegisterSecondaryViewFinders(container);
-            RegisterLastResortViewFinder(container);
+            this.RegisterSecondaryViewFinders(container);
+            this.RegisterLastResortViewFinder(container);
         }
 
         protected virtual void RegisterLastResortViewFinder(IMvxViewsContainer container)
@@ -64,9 +64,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch
 
         protected virtual void RegisterSecondaryViewFinders(IMvxViewsContainer container)
         {
-            var finder = CreateDefaultDialogViewFinder();
+            var finder = this.CreateDefaultDialogViewFinder();
             container.AddSecondary(finder);
-            var finder2 = CreateDefaultListViewFinder();
+            var finder2 = this.CreateDefaultListViewFinder();
             container.AddSecondary(finder2);
         }
 
@@ -84,7 +84,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch
 
         protected virtual void RegisterAutomaticViewTextLoader()
         {
-            var loader = CreateAutoViewTextLoader();
+            var loader = this.CreateAutoViewTextLoader();
             Mvx.RegisterSingleton(loader);
         }
 

@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Builder;
-using CrossUI.Core.Elements.Lists;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
+namespace MvvmCross.AutoView.Droid.Builders.Lists
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Core.Elements.Lists;
+
     public class MvxAndroidListLayoutBuilder : TypedUserInterfaceBuilder
     {
         public MvxAndroidListLayoutBuilder(bool registerDefaults)
@@ -17,7 +17,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders.Lists
         {
             if (registerDefaults)
             {
-                RegisterConventionalKeys(this.GetType().Assembly);
+                this.RegisterConventionalKeys(this.GetType().Assembly);
             }
         }
     }

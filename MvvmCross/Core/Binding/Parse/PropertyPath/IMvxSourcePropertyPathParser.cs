@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
+namespace MvvmCross.Binding.Parse.PropertyPath
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
     public interface IMvxSourcePropertyPathParser
     {
         IList<MvxPropertyToken> Parse(string textToParse);

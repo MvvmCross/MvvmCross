@@ -5,22 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Windows;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System;
+    using System.Windows;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxWpfViewsContainer
         : MvxViewsContainer
         , IMvxWpfViewsContainer
     {
         public virtual FrameworkElement CreateView(MvxViewModelRequest request)
         {
-            var viewType = GetViewType(request.ViewModelType);
+            var viewType = this.GetViewType(request.ViewModelType);
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 

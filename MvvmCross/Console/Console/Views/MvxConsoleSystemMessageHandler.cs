@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using MvvmCross.Platform;
+
     public class MvxConsoleSystemMessageHandler
     {
         public bool ExitFlag { get; set; }
@@ -23,13 +22,13 @@ namespace Cirrious.MvvmCross.Console.Views
             {
                 case "BACK":
                 case "B":
-                    if (ConsoleNavigation.CanGoBack())
-                        ConsoleNavigation.GoBack();
+                    if (this.ConsoleNavigation.CanGoBack())
+                        this.ConsoleNavigation.GoBack();
                     return true;
 
                 case "QUIT":
                 case "Q":
-                    ExitFlag = true;
+                    this.ExitFlag = true;
                     return true;
             }
 

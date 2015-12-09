@@ -1,4 +1,4 @@
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners.VeryExperimental
 {
     public class MvxGreaterThanValueCombiner : MvxObjectAsStringPairwiseValueCombiner
     {

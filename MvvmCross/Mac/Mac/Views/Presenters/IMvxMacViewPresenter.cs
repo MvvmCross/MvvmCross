@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Mac.Views.Presenters
+namespace MvvmCross.Mac.Views.Presenters
 {
+    using global::MvvmCross.Core.Views;
+
     public interface IMvxMacViewPresenter
         : IMvxViewPresenter
     {

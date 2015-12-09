@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Test.Mocks;
-using NUnit.Framework;
-
-namespace Cirrious.CrossCore.Test
+namespace MvvmCross.Platform.Test
 {
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Test.Mocks;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxBootstrapTest
     {
@@ -19,7 +20,7 @@ namespace Cirrious.CrossCore.Test
         {
             MockBootstrapAction.CallCount = 0;
             var runner = new MvxBootstrapRunner();
-            runner.Run(GetType().Assembly);
+            runner.Run(this.GetType().Assembly);
             Assert.AreEqual(1, MockBootstrapAction.CallCount);
         }
     }

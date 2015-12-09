@@ -5,23 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views
+namespace MvvmCross.AutoView.Touch.Views
 {
+    using System;
+
     public class MvxMissingViewFinder : IMvxViewFinder
     {
         public Type MissingViewType { get; set; }
 
         public MvxMissingViewFinder()
         {
-            MissingViewType = typeof(MvxMissingViewController);
+            this.MissingViewType = typeof(MvxMissingViewController);
         }
 
         public Type GetViewType(Type viewModelType)
         {
-            return MissingViewType;
+            return this.MissingViewType;
         }
     }
 }

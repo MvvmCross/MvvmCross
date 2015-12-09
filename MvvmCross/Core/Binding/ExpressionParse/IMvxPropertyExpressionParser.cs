@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.Binding.ExpressionParse
+namespace MvvmCross.Binding.ExpressionParse
 {
+    using System;
+    using System.Linq.Expressions;
+
     public interface IMvxPropertyExpressionParser
     {
         IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath);

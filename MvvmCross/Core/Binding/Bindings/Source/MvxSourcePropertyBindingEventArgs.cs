@@ -5,24 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace MvvmCross.Binding.Bindings.Source
 {
+    using System;
+
     public class MvxSourcePropertyBindingEventArgs : EventArgs
     {
         private readonly object _value;
 
         public MvxSourcePropertyBindingEventArgs(Object value)
         {
-            _value = value;
+            this._value = value;
         }
 
         public MvxSourcePropertyBindingEventArgs(IMvxSourceBinding propertySourceBinding)
         {
-            _value = propertySourceBinding.GetValue();
+            this._value = propertySourceBinding.GetValue();
         }
 
-        public object Value => _value;
+        public object Value => this._value;
     }
 }

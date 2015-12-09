@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Windows.Input;
-
-namespace Cirrious.CrossCore.WeakSubscription
+namespace MvvmCross.Platform.WeakSubscription
 {
+    using System;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Windows.Input;
+
+    using MvvmCross.Platform.Core;
+
     public static class MvxWeakSubscriptionExtensionMethods
     {
         public static MvxNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,

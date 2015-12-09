@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.ExpressionParse
+namespace MvvmCross.Binding.ExpressionParse
 {
     public interface IMvxParsedExpression
     {

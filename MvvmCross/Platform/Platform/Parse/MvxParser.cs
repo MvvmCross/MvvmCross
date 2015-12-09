@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-
-namespace Cirrious.CrossCore.Parse
+namespace MvvmCross.Platform.Parse
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+
+    using MvvmCross.Platform.Exceptions;
+
     public abstract class MvxParser
     {
         protected string FullText { get; private set; }
@@ -21,48 +22,48 @@ namespace Cirrious.CrossCore.Parse
 
         protected virtual void Reset(string textToParse)
         {
-            FullText = textToParse;
-            CurrentIndex = 0;
+            this.FullText = textToParse;
+            this.CurrentIndex = 0;
         }
 
-        protected bool IsComplete => CurrentIndex >= FullText.Length;
+        protected bool IsComplete => this.CurrentIndex >= this.FullText.Length;
 
-        protected char CurrentChar => FullText[CurrentIndex];
+        protected char CurrentChar => this.FullText[this.CurrentIndex];
 
         protected string ReadQuotedString()
         {
             bool nextCharEscaped = false;
-            char quoteDelimiterChar = CurrentChar;
+            char quoteDelimiterChar = this.CurrentChar;
 
             if (quoteDelimiterChar != '\'' && quoteDelimiterChar != '\"')
             {
                 throw new MvxException("Error parsing string indexer - unexpected quote character {0} in text {1}",
-                                       quoteDelimiterChar, FullText);
+                                       quoteDelimiterChar, this.FullText);
             }
 
-            MoveNext();
-            if (IsComplete)
+            this.MoveNext();
+            if (this.IsComplete)
             {
-                throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
+                throw new MvxException("Error parsing string indexer - unterminated in text {0}", this.FullText);
             }
 
             var textBuilder = new StringBuilder();
             while (true)
             {
-                if (IsComplete)
+                if (this.IsComplete)
                 {
-                    throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
+                    throw new MvxException("Error parsing string indexer - unterminated in text {0}", this.FullText);
                 }
 
                 if (nextCharEscaped)
                 {
-                    textBuilder.Append(ReadEscapedCharacter());
+                    textBuilder.Append(this.ReadEscapedCharacter());
                     nextCharEscaped = false;
                     continue;
                 }
 
-                var currentChar = CurrentChar;
-                MoveNext();
+                var currentChar = this.CurrentChar;
+                this.MoveNext();
 
                 if (currentChar == '\\')
                 {
@@ -85,24 +86,24 @@ namespace Cirrious.CrossCore.Parse
         protected uint ReadUnsignedInteger()
         {
             var integerStringBuilder = new StringBuilder();
-            while (!IsComplete && char.IsDigit(CurrentChar))
+            while (!this.IsComplete && char.IsDigit(this.CurrentChar))
             {
-                integerStringBuilder.Append(CurrentChar);
-                MoveNext();
+                integerStringBuilder.Append(this.CurrentChar);
+                this.MoveNext();
             }
             uint index;
             var integerText = integerStringBuilder.ToString();
             if (!uint.TryParse(integerText, out index))
             {
-                throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, FullText);
+                throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, this.FullText);
             }
             return index;
         }
 
         protected char ReadEscapedCharacter()
         {
-            var currentChar = CurrentChar;
-            MoveNext();
+            var currentChar = this.CurrentChar;
+            this.MoveNext();
 
             // list here based on the very helpful
             // http://dotneteers.net/blogs/divedeeper/archive/2008/08/03/ParsingCSharpStrings.aspx
@@ -149,14 +150,14 @@ namespace Cirrious.CrossCore.Parse
                         "We don't support string literals containing \\x - suggest using \\u escaped characters instead");
                 case 'u':
                     // Unicode hexa escape (exactly 4 digits)
-                    return ReadFourDigitUnicodeCharacter();
+                    return this.ReadFourDigitUnicodeCharacter();
 
                 case 'U':
                     // Unicode hexa escape (exactly 8 digits, first four must be 0000)
-                    var firstFourDigits = ReadNDigits(4);
+                    var firstFourDigits = this.ReadNDigits(4);
                     if (firstFourDigits != "0000")
-                        throw new MvxException("\\U unicode character does not start with 0000 in {1}", FullText);
-                    return ReadFourDigitUnicodeCharacter();
+                        throw new MvxException("\\U unicode character does not start with 0000 in {1}", this.FullText);
+                    return this.ReadFourDigitUnicodeCharacter();
 
                 default:
                     throw new MvxException("Sorry we don't currently support escaped characters like \\{0}",
@@ -166,10 +167,10 @@ namespace Cirrious.CrossCore.Parse
 
         private char ReadFourDigitUnicodeCharacter()
         {
-            var digits = ReadNDigits(4);
+            var digits = this.ReadNDigits(4);
             var number = UInt32.Parse(digits, NumberStyles.HexNumber);
             if (number > UInt16.MaxValue)
-                throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
+                throw new MvxException("\\u unicode character {0} out of range in {1}", number, this.FullText);
             return (char)number;
         }
 
@@ -178,16 +179,16 @@ namespace Cirrious.CrossCore.Parse
             var toReturn = new StringBuilder(count);
             for (int i = 0; i < count; i++)
             {
-                if (IsComplete)
-                    throw new MvxException("Error while reading {0} of {1} digits in {2}", i + 1, count, FullText);
+                if (this.IsComplete)
+                    throw new MvxException("Error while reading {0} of {1} digits in {2}", i + 1, count, this.FullText);
 
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (!char.IsDigit(currentChar))
                     throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1, count,
-                                           FullText, currentChar);
+                                           this.FullText, currentChar);
 
                 toReturn.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             return toReturn.ToString();
@@ -195,38 +196,38 @@ namespace Cirrious.CrossCore.Parse
 
         protected void MoveNext(uint increment = 1)
         {
-            CurrentIndex += (int)increment;
+            this.CurrentIndex += (int)increment;
         }
 
         protected void SkipWhitespaceAndCharacters(params char[] toSkip)
         {
-            SkipWhitespaceAndCharacters((IEnumerable<char>)toSkip);
+            this.SkipWhitespaceAndCharacters((IEnumerable<char>)toSkip);
         }
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
         {
-            while (!IsComplete
-                   && IsWhiteSpaceOrCharacter(CurrentChar, toSkip))
+            while (!this.IsComplete
+                   && IsWhiteSpaceOrCharacter(this.CurrentChar, toSkip))
             {
-                MoveNext();
+                this.MoveNext();
             }
         }
 
         protected void SkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
         {
-            while (!IsComplete
-                   && IsWhiteSpaceOrCharacter(CurrentChar, toSkip))
+            while (!this.IsComplete
+                   && IsWhiteSpaceOrCharacter(this.CurrentChar, toSkip))
             {
-                MoveNext();
+                this.MoveNext();
             }
         }
 
         protected void SkipWhitespace()
         {
-            while (!IsComplete
-                   && char.IsWhiteSpace(CurrentChar))
+            while (!this.IsComplete
+                   && char.IsWhiteSpace(this.CurrentChar))
             {
-                MoveNext();
+                this.MoveNext();
             }
         }
 
@@ -243,7 +244,7 @@ namespace Cirrious.CrossCore.Parse
         protected object ReadValue()
         {
             object toReturn;
-            if (!TryReadValue(AllowNonQuotedText.Allow, out toReturn))
+            if (!this.TryReadValue(AllowNonQuotedText.Allow, out toReturn))
                 throw new MvxException("Unable to read value");
             return toReturn;
         }
@@ -256,34 +257,34 @@ namespace Cirrious.CrossCore.Parse
 
         protected bool TryReadValue(AllowNonQuotedText allowNonQuotedText, out object value)
         {
-            SkipWhitespace();
+            this.SkipWhitespace();
 
-            if (IsComplete)
+            if (this.IsComplete)
             {
-                throw new MvxException("Unexpected termination while reading value in {0}", FullText);
+                throw new MvxException("Unexpected termination while reading value in {0}", this.FullText);
             }
 
-            var currentChar = CurrentChar;
+            var currentChar = this.CurrentChar;
             if (currentChar == '\'' || currentChar == '\"')
             {
-                value = ReadQuotedString();
+                value = this.ReadQuotedString();
                 return true;
             }
 
             if (char.IsDigit(currentChar) || currentChar == '-')
             {
-                value = ReadNumber();
+                value = this.ReadNumber();
                 return true;
             }
 
             bool booleanValue;
-            if (TryReadBoolean(out booleanValue))
+            if (this.TryReadBoolean(out booleanValue))
             {
                 value = booleanValue;
                 return true;
             }
 
-            if (TryReadNull())
+            if (this.TryReadNull())
             {
                 value = null;
                 return true;
@@ -291,7 +292,7 @@ namespace Cirrious.CrossCore.Parse
 
             if (allowNonQuotedText == AllowNonQuotedText.Allow)
             {
-                value = ReadTextUntil(',', ';');
+                value = this.ReadTextUntil(',', ';');
                 return true;
             }
 
@@ -305,7 +306,7 @@ namespace Cirrious.CrossCore.Parse
                 return false;
 
             if (peekString.Length != uppercaseKeyword.Length
-                && IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
+                && this.IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
                 return false;
 
             if (!peekString.StartsWith(uppercaseKeyword))
@@ -316,11 +317,11 @@ namespace Cirrious.CrossCore.Parse
 
         protected bool TryReadNull()
         {
-            var peek = SafePeekString(5);
+            var peek = this.SafePeekString(5);
             peek = peek.ToUpperInvariant();
-            if (TestKeywordInPeekString("NULL", peek))
+            if (this.TestKeywordInPeekString("NULL", peek))
             {
-                MoveNext(4);
+                this.MoveNext(4);
                 return true;
             }
 
@@ -329,17 +330,17 @@ namespace Cirrious.CrossCore.Parse
 
         protected bool TryReadBoolean(out bool booleanValue)
         {
-            var peek = SafePeekString(6);
+            var peek = this.SafePeekString(6);
             peek = peek.ToUpperInvariant();
-            if (TestKeywordInPeekString("TRUE", peek))
+            if (this.TestKeywordInPeekString("TRUE", peek))
             {
-                MoveNext(4);
+                this.MoveNext(4);
                 booleanValue = true;
                 return true;
             }
-            if (TestKeywordInPeekString("FALSE", peek))
+            if (this.TestKeywordInPeekString("FALSE", peek))
             {
-                MoveNext(5);
+                this.MoveNext(5);
                 booleanValue = false;
                 return true;
             }
@@ -350,34 +351,34 @@ namespace Cirrious.CrossCore.Parse
 
         protected string SafePeekString(int length)
         {
-            var safeLength = Math.Min(length, FullText.Length - CurrentIndex);
+            var safeLength = Math.Min(length, this.FullText.Length - this.CurrentIndex);
             if (safeLength == 0)
                 return string.Empty;
-            return FullText.Substring(CurrentIndex, safeLength);
+            return this.FullText.Substring(this.CurrentIndex, safeLength);
         }
 
         protected ValueType ReadNumber()
         {
             var stringBuilder = new StringBuilder();
 
-            var firstChar = CurrentChar;
+            var firstChar = this.CurrentChar;
             if (firstChar == '-')
             {
                 stringBuilder.Append(firstChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             var decimalPeriodSeen = false;
 
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 // note that we force users to use . as the decimal separator (no European commas allowed)
                 if (currentChar == '.')
                 {
                     if (decimalPeriodSeen)
-                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", FullText,
-                                               CurrentIndex);
+                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", this.FullText,
+                                               this.CurrentIndex);
                     decimalPeriodSeen = true;
                 }
                 else if (!char.IsDigit(currentChar))
@@ -386,16 +387,16 @@ namespace Cirrious.CrossCore.Parse
                 }
 
                 stringBuilder.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             var numberText = stringBuilder.ToString();
-            return NumberFromText(numberText, decimalPeriodSeen);
+            return this.NumberFromText(numberText, decimalPeriodSeen);
         }
 
         protected ValueType NumberFromText(string numberText)
         {
-            return NumberFromText(numberText, numberText.Contains("."));
+            return this.NumberFromText(numberText, numberText.Contains("."));
         }
 
         protected ValueType NumberFromText(string numberText, bool decimalPeriodSeen)
@@ -409,7 +410,7 @@ namespace Cirrious.CrossCore.Parse
                                     out doubleResult))
                     return doubleResult;
 
-                throw new MvxException("Failed to parse double from {0} in {1}", numberText, FullText);
+                throw new MvxException("Failed to parse double from {0} in {1}", numberText, this.FullText);
             }
             else
             {
@@ -421,20 +422,20 @@ namespace Cirrious.CrossCore.Parse
                                    out intResult))
                     return intResult;
 
-                throw new MvxException("Failed to parse Int64 from {0} in {1}", numberText, FullText);
+                throw new MvxException("Failed to parse Int64 from {0} in {1}", numberText, this.FullText);
             }
         }
 
         protected object ReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
         {
-            var name = ReadValidCSharpName();
+            var name = this.ReadValidCSharpName();
             try
             {
                 return Enum.Parse(enumerationType, name, ignoreCase);
             }
             catch (ArgumentException exception)
             {
-                throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, FullText);
+                throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, this.FullText);
             }
         }
 
@@ -442,16 +443,16 @@ namespace Cirrious.CrossCore.Parse
         {
             var toReturn = new StringBuilder();
 
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (terminatingCharacters.Contains(currentChar)
                     || char.IsWhiteSpace(currentChar))
                 {
                     break;
                 }
                 toReturn.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             return toReturn.ToString();
@@ -461,15 +462,15 @@ namespace Cirrious.CrossCore.Parse
         {
             var toReturn = new StringBuilder();
 
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (terminatingCharacters.Contains(currentChar))
                 {
                     break;
                 }
                 toReturn.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             return toReturn.ToString();
@@ -477,26 +478,26 @@ namespace Cirrious.CrossCore.Parse
 
         protected string ReadValidCSharpName()
         {
-            SkipWhitespace();
-            var firstChar = CurrentChar;
-            if (!IsValidFirstCharacterOfCSharpName(firstChar))
+            this.SkipWhitespace();
+            var firstChar = this.CurrentChar;
+            if (!this.IsValidFirstCharacterOfCSharpName(firstChar))
             {
                 throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}",
-                                       CurrentIndex, FullText, firstChar);
+                                       this.CurrentIndex, this.FullText, firstChar);
             }
             var toReturn = new StringBuilder();
             toReturn.Append(firstChar);
-            MoveNext();
-            while (!IsComplete)
+            this.MoveNext();
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (!char.IsLetterOrDigit(currentChar)
                     && currentChar != '_')
                 {
                     break;
                 }
                 toReturn.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
             return toReturn.ToString();
         }

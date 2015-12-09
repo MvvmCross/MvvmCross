@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using MvvmCross.Core.ViewModels;
+
 #warning Move to shared PCL code
 
     public class MvxViewModelInstanceRequest : MvxViewModelRequest
     {
         private readonly IMvxViewModel _viewModelInstance;
 
-        public IMvxViewModel ViewModelInstance => _viewModelInstance;
+        public IMvxViewModel ViewModelInstance => this._viewModelInstance;
 
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)
         {
-            _viewModelInstance = viewModelInstance;
+            this._viewModelInstance = viewModelInstance;
         }
     }
 }

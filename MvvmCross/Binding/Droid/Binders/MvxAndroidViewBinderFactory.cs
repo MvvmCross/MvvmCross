@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Binding.Droid.Binders
 {
     public class MvxAndroidViewBinderFactory
         : IMvxAndroidViewBinderFactory

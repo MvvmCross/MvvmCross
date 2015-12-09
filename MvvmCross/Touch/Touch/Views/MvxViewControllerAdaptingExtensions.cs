@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch.Views;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using MvvmCross.Platform.Touch.Views;
+
     public static class MvxViewControllerAdaptingExtensions
     {
         public static void AdaptForBinding(this IMvxEventSourceViewController view)

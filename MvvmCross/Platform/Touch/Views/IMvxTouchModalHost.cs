@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Views
+namespace MvvmCross.Platform.Touch.Views
 {
+    using UIKit;
+
     public interface IMvxTouchModalHost
     {
         bool PresentModalViewController(UIViewController controller, bool animated);

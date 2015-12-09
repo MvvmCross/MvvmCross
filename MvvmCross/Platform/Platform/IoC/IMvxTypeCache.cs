@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
     public interface IMvxTypeCache<TType>
     {
         Dictionary<string, Type> LowerCaseFullNameCache { get; }

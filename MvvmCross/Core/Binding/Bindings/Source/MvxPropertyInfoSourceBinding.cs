@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace MvvmCross.Binding.Bindings.Source
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
         private readonly PropertyInfo _propertyInfo;
@@ -23,44 +24,44 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         protected MvxPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
             : base(source)
         {
-            _propertyInfo = propertyInfo;
-            _propertyName = propertyInfo.Name;
+            this._propertyInfo = propertyInfo;
+            this._propertyName = propertyInfo.Name;
 
-            if (Source == null)
+            if (this.Source == null)
             {
                 MvxBindingTrace.Trace(
                     // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
                     MvxTraceLevel.Diagnostic,
                     "Unable to bind to source as it's null"
-                    , _propertyName);
+                    , this._propertyName);
                 return;
             }
 
-            var sourceNotify = Source as INotifyPropertyChanged;
+            var sourceNotify = this.Source as INotifyPropertyChanged;
             if (sourceNotify != null)
-                _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
+                this._subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
-        protected string PropertyName => _propertyName;
+        protected string PropertyName => this._propertyName;
 
         protected string PropertyNameForChangedEvent
         {
             get
             {
-                if (IsIndexedProperty)
-                    return _propertyName + "[]";
+                if (this.IsIndexedProperty)
+                    return this._propertyName + "[]";
                 else
-                    return _propertyName;
+                    return this._propertyName;
             }
         }
 
-        protected PropertyInfo PropertyInfo => _propertyInfo;
+        protected PropertyInfo PropertyInfo => this._propertyInfo;
 
         protected bool IsIndexedProperty
         {
             get
             {
-                var parameters = _propertyInfo.GetIndexParameters();
+                var parameters = this._propertyInfo.GetIndexParameters();
                 return parameters.Any();
             }
         }
@@ -69,10 +70,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         {
             if (isDisposing)
             {
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
             }
         }
@@ -83,8 +84,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             // we test for null or empty here - this means all properties have changed
             // - fix for https://github.com/slodge/MvvmCross/issues/280
             if (string.IsNullOrEmpty(e.PropertyName)
-                || e.PropertyName == PropertyNameForChangedEvent)
-                OnBoundPropertyChanged();
+                || e.PropertyName == this.PropertyNameForChangedEvent)
+                this.OnBoundPropertyChanged();
         }
 
         protected abstract void OnBoundPropertyChanged();

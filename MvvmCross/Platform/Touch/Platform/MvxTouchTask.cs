@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Foundation;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Platform
+namespace MvvmCross.Platform.Touch.Platform
 {
+    using Foundation;
+
+    using UIKit;
+
     public class MvxTouchTask
     {
         protected bool DoUrlOpen(NSUrl url)

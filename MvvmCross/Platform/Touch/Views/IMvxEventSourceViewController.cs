@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.CrossCore.Touch.Views
+namespace MvvmCross.Platform.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;

@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Droid.Views.Dialog;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace MvvmCross.AutoView.Droid.Views
 {
+    using System;
+
+    using MvvmCross.AutoView.Droid.Views.Dialog;
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+
     public class MvxAutoDialogViewFinder : IMvxViewFinder
     {
         public static Type DialogViewType { get; set; }

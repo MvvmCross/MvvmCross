@@ -5,18 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using CoreGraphics;
-using CrossUI.Touch.Dialog;
-using CrossUI.Touch.Dialog.Elements;
-using Foundation;
-using System;
-using System.Collections;
-using System.Globalization;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Elements
+namespace MvvmCross.Dialog.Touch.Elements
 {
+    using System;
+    using System.Collections;
+    using System.Globalization;
+
+    using CoreGraphics;
+
+    using CrossUI.Touch.Dialog;
+    using CrossUI.Touch.Dialog.Elements;
+
+    using Foundation;
+
+    using MvvmCross.Platform.Converters;
+
+    using UIKit;
+
     public class SimplePickerElement : ValueElement<object>
     {
         private static readonly NSString Key = new NSString("SimplePickerElement");
@@ -44,8 +49,8 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         public SimplePickerElement(string caption, object value, IMvxValueConverter displayValueConverter = null)
             : base(caption, value)
         {
-            DisplayValueConverter = displayValueConverter ?? new ToStringDisplayValueConverter();
-            BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;
+            this.DisplayValueConverter = displayValueConverter ?? new ToStringDisplayValueConverter();
+            this.BackgroundColor = (UIDevice.CurrentDevice.CheckSystemVersion(7, 0)) ? UIColor.White : UIColor.Black;
         }
 
         protected override UITableViewCell GetCellImpl(UITableView tv)
@@ -56,7 +61,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
                            Accessory = UITableViewCellAccessory.DisclosureIndicator
                        };
 
-            UpdateDetailDisplay(cell);
+            this.UpdateDetailDisplay(cell);
             return cell;
         }
 
@@ -65,12 +70,12 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             base.Dispose(disposing);
             if (disposing)
             {
-                if (_picker != null)
+                if (this._picker != null)
                 {
-                    _picker.Model.Dispose();
-                    _picker.Model = null;
-                    _picker.Dispose();
-                    _picker = null;
+                    this._picker.Model.Dispose();
+                    this._picker.Model = null;
+                    this._picker.Dispose();
+                    this._picker = null;
                 }
             }
         }
@@ -111,20 +116,20 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
         private string GetString(nint row)
         {
-            if (Entries == null)
+            if (this.Entries == null)
                 return string.Empty;
 
-            if (row >= Entries.Count)
+            if (row >= this.Entries.Count)
                 return string.Empty;
 
-            var whichObject = Entries[(int)row];
-            return ConvertToString(whichObject);
+            var whichObject = this.Entries[(int)row];
+            return this.ConvertToString(whichObject);
         }
 
         private string ConvertToString(object whichObject)
         {
             return
-                DisplayValueConverter.Convert(whichObject, typeof(string), null, CultureInfo.CurrentUICulture)
+                this.DisplayValueConverter.Convert(whichObject, typeof(string), null, CultureInfo.CurrentUICulture)
                                      .ToString();
         }
 
@@ -134,7 +139,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
             public SimplePickerViewModel(SimplePickerElement owner)
             {
-                _owner = owner;
+                this._owner = owner;
             }
 
             public override nint GetComponentCount(UIPickerView picker)
@@ -144,15 +149,15 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
             public override nint GetRowsInComponent(UIPickerView picker, nint component)
             {
-                if (_owner.Entries == null)
+                if (this._owner.Entries == null)
                     return 0;
 
-                return _owner.Entries.Count;
+                return this._owner.Entries.Count;
             }
 
             public override string GetTitle(UIPickerView picker, nint row, nint component)
             {
-                return _owner.GetString(row) ?? string.Empty;
+                return this._owner.GetString(row) ?? string.Empty;
             }
 
             public override nfloat GetComponentWidth(UIPickerView picker, nint component)
@@ -170,7 +175,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             public override void Selected(UIPickerView picker, nint row, nint component)
             {
                 // TODO - update the value here...
-                _owner.OnUserValueChanged(_owner.Entries[(int)row]);
+                this._owner.OnUserValueChanged(this._owner.Entries[(int)row]);
             }
         }
 
@@ -180,13 +185,13 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
 
             public SimplePickerViewController(SimplePickerElement container)
             {
-                _container = container;
+                this._container = container;
             }
 
             public override void DidRotate(UIInterfaceOrientation fromInterfaceOrientation)
             {
                 base.DidRotate(fromInterfaceOrientation);
-                _container._picker.Frame = PickerFrameWithSize(_container._picker.SizeThatFits(CGSize.Empty));
+                this._container._picker.Frame = PickerFrameWithSize(this._container._picker.SizeThatFits(CGSize.Empty));
             }
 
             public bool Autorotate { get; set; }
@@ -196,7 +201,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             [Obsolete]
             public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
             {
-                return Autorotate;
+                return this.Autorotate;
             }
         }
 
@@ -206,20 +211,20 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
             {
                 Autorotate = dvc.Autorotate
             };
-            _picker = CreatePicker();
-            _picker.Frame = PickerFrameWithSize(_picker.SizeThatFits(CGSize.Empty));
+            this._picker = this.CreatePicker();
+            this._picker.Frame = PickerFrameWithSize(this._picker.SizeThatFits(CGSize.Empty));
 
-            if (Entries != null)
+            if (this.Entries != null)
             {
-                var index = Entries.IndexOf(Value);
+                var index = this.Entries.IndexOf(this.Value);
                 if (index >= 0)
                 {
-                    _picker.Select(index, 0, true);
+                    this._picker.Select(index, 0, true);
                 }
             }
 
-            vc.View.BackgroundColor = BackgroundColor;
-            vc.View.AddSubview(_picker);
+            vc.View.BackgroundColor = this.BackgroundColor;
+            vc.View.AddSubview(this._picker);
             dvc.ActivateController(vc);
         }
 
@@ -227,7 +232,7 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Elements
         {
             if (cell?.DetailTextLabel != null)
             {
-                cell.DetailTextLabel.Text = ConvertToString(Value);
+                cell.DetailTextLabel.Text = this.ConvertToString(this.Value);
             }
         }
     }

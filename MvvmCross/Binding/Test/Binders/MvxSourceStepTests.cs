@@ -5,22 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Combiners;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath;
-using Cirrious.MvvmCross.Test.Core;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Cirrious.MvvmCross.Binding.Test.Binders
+namespace MvvmCross.Binding.Test.Binders
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    using MvvmCross.Platform.Converters;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxSourceStepTests : MvxIoCSupportingTest
     {
@@ -34,19 +30,19 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
             {
                 add
                 {
-                    _PropertyChanged += value;
-                    SubscriptionCount++;
+                    this._PropertyChanged += value;
+                    this.SubscriptionCount++;
                 }
                 remove
                 {
-                    _PropertyChanged -= value;
-                    SubscriptionCount--;
+                    this._PropertyChanged -= value;
+                    this.SubscriptionCount--;
                 }
             }
 
             protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
             {
-                var handler = _PropertyChanged;
+                var handler = this._PropertyChanged;
                 handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
@@ -57,64 +53,64 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             public string Property1
             {
-                get { return _property1; }
-                set { _property1 = value; RaisePropertyChanged(); }
+                get { return this._property1; }
+                set { this._property1 = value; this.RaisePropertyChanged(); }
             }
 
             private string _property2;
 
             public string Property2
             {
-                get { return _property2; }
-                set { _property2 = value; RaisePropertyChanged(); }
+                get { return this._property2; }
+                set { this._property2 = value; this.RaisePropertyChanged(); }
             }
 
             private int _intProperty1;
 
             public int IntProperty1
             {
-                get { return _intProperty1; }
-                set { _intProperty1 = value; RaisePropertyChanged(); }
+                get { return this._intProperty1; }
+                set { this._intProperty1 = value; this.RaisePropertyChanged(); }
             }
 
             private int _intProperty2;
 
             public int IntProperty2
             {
-                get { return _intProperty2; }
-                set { _intProperty2 = value; RaisePropertyChanged(); }
+                get { return this._intProperty2; }
+                set { this._intProperty2 = value; this.RaisePropertyChanged(); }
             }
 
             private double _doubleProperty1;
 
             public double DoubleProperty1
             {
-                get { return _doubleProperty1; }
-                set { _doubleProperty1 = value; RaisePropertyChanged(); }
+                get { return this._doubleProperty1; }
+                set { this._doubleProperty1 = value; this.RaisePropertyChanged(); }
             }
 
             private double _doubleProperty2;
 
             public double DoubleProperty2
             {
-                get { return _doubleProperty2; }
-                set { _doubleProperty2 = value; RaisePropertyChanged(); }
+                get { return this._doubleProperty2; }
+                set { this._doubleProperty2 = value; this.RaisePropertyChanged(); }
             }
 
             private ObservableCollection<string> _collection = new ObservableCollection<string>();
 
             public ObservableCollection<string> Collection
             {
-                get { return _collection; }
-                set { _collection = value; RaisePropertyChanged(); }
+                get { return this._collection; }
+                set { this._collection = value; this.RaisePropertyChanged(); }
             }
 
             private MySubSource _subSource;
 
             public MySubSource SubSource
             {
-                get { return _subSource; }
-                set { _subSource = value; RaisePropertyChanged(); }
+                get { return this._subSource; }
+                set { this._subSource = value; this.RaisePropertyChanged(); }
             }
         }
 
@@ -124,16 +120,16 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
 
             public string SubProperty1
             {
-                get { return _property1; }
-                set { _property1 = value; RaisePropertyChanged(); }
+                get { return this._property1; }
+                set { this._property1 = value; this.RaisePropertyChanged(); }
             }
 
             private string _property2;
 
             public string SubProperty2
             {
-                get { return _property2; }
-                set { _property2 = value; RaisePropertyChanged(); }
+                get { return this._property2; }
+                set { this._property2 = value; this.RaisePropertyChanged(); }
             }
         }
 
@@ -159,7 +155,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleStringBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -188,7 +184,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleIntBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -220,7 +216,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleDoubleBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -249,7 +245,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleCollectionBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -281,7 +277,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleSubPropertyBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -321,7 +317,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleChangePropagationBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -384,7 +380,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestIndedexedChangePropagationBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -447,7 +443,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleSubObjectChangePropagationBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -504,7 +500,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleIntWithValueConversionBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -542,7 +538,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestLiteralStringBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxLiteralSourceStepDescription()
             {
@@ -567,7 +563,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestLiteralDoubleBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxLiteralSourceStepDescription()
             {
@@ -592,7 +588,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestCombinerPropertiesPresentBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {
@@ -651,7 +647,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestCombinerPropertiesMissingBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {
@@ -718,7 +714,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Binders
         [Test]
         public void TestCombinerPropertiesMissingBinding_Part2()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
+            var realSourceStepFactory = this.SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {

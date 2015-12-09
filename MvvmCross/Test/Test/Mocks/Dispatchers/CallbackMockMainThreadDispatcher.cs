@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.Test.Mocks.Dispatchers
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
     public class CallbackMockMainThreadDispatcher
         : MvxMainThreadDispatcher
           , IMvxMainThreadDispatcher
@@ -18,12 +19,12 @@ namespace Cirrious.MvvmCross.Test.Mocks.Dispatchers
 
         public CallbackMockMainThreadDispatcher(Func<Action, bool> callback)
         {
-            _callback = callback;
+            this._callback = callback;
         }
 
         public virtual bool RequestMainThreadAction(Action action)
         {
-            return _callback(action);
+            return this._callback(action);
         }
     }
 }

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace MvvmCross.Binding.Bindings.Source
 {
+    using System;
+
     public interface IMvxSourceBinding : IMvxBinding
     {
         Type SourceType { get; }

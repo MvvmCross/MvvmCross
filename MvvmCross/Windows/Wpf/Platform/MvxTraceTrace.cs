@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Wpf.Platform
+namespace MvvmCross.Wpf.Platform
 {
+    using System;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxTraceTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

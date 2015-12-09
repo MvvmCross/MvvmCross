@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists
+namespace MvvmCross.AutoView.Touch.Interfaces.Lists
 {
     public interface IMvxLayoutListItemView
     {

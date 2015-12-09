@@ -5,26 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Bindings;
+
     public class MvxFromTextBinder
         : IMvxBinder
     {
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
             var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingText);
-            return Bind(source, target, bindingDescriptions);
+            return this.Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
             var bindingDescriptions =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
-            return Bind(source, target, bindingDescriptions);
+            return this.Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
@@ -34,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 return new IMvxUpdateableBinding[0];
 
             return
-                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
+                bindingDescriptions.Select(description => this.BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
@@ -47,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
             bindingDescription.TargetName = targetPropertyName;
             var request = new MvxBindingRequest(source, target, bindingDescription);
-            return BindSingle(request);
+            return this.BindSingle(request);
         }
 
         public IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest)

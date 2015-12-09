@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces;
-using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.Dialog.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Droid.Dialog.Elements;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views
+namespace MvvmCross.AutoView.Droid.Views
 {
+    using Android.App;
+
+    using CrossUI.Droid.Dialog.Elements;
+
+    using MvvmCross.AutoView.Droid.Interfaces;
+    using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.Platform.IoC;
+
     [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.MvxMissingActivity")]
     [MvxUnconventional]
     public class MvxMissingActivity

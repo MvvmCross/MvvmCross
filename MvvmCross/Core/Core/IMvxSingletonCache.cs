@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross
+namespace MvvmCross.Core
 {
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxSingletonCache
     {
         IMvxSettings Settings { get; }

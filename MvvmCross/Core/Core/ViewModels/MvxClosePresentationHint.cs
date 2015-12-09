@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
     public class MvxClosePresentationHint
         : MvxPresentationHint
     {
         public MvxClosePresentationHint(IMvxViewModel viewModelToClose)
         {
-            ViewModelToClose = viewModelToClose;
+            this.ViewModelToClose = viewModelToClose;
         }
 
         public IMvxViewModel ViewModelToClose { get; private set; }

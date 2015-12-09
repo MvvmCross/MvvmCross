@@ -5,20 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-
 #endif
-
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.BindingEx.WindowsShared;
 
 #if NETFX_CORE
 
@@ -30,6 +18,15 @@ using Windows.UI.Xaml;
 namespace mvx
 // ReSharper restore CheckNamespace
 {
+    using System.Collections.Generic;
+    using System.Windows;
+
+    using Cirrious.MvvmCross.BindingEx.WindowsShared;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     // ReSharper disable InconsistentNaming
     public static class Bi
     // ReSharper restore InconsistentNaming

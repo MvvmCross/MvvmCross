@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+
     public interface IMvxMainThreadDispatcher
     {
         bool RequestMainThreadAction(Action action);

@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using System;
-using System.Collections.Specialized;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections.Specialized;
+
+    using Android.Content;
+    using Android.Runtime;
+
     public class MvxAdapterWithChangedEvent
         : MvxAdapter
         , IMvxAdapterWithChangedEvent
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             base.NotifyDataSetChanged(e);
 
-            var handler = DataSetChanged;
+            var handler = this.DataSetChanged;
             handler?.Invoke(this, e);
         }
     }

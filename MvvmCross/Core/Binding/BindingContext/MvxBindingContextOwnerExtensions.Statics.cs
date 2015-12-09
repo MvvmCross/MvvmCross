@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.ExpressionParse;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.ExpressionParse;
+    using MvvmCross.Binding.Parse.Binding.Lang;
+
     public static partial class MvxBindingContextOwnerExtensions
     {
         public static IMvxLanguageBindingParser LanguageParser => MvxBindingSingletonCache.Instance.LanguageParser;

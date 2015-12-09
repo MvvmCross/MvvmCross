@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Wpf.Commands
+namespace MvvmCross.Wpf.Commands
 {
     public class MvxWithArgsEventToCommand : MvxEventToCommand
     {
         public MvxWithArgsEventToCommand()
         {
-            PassEventArgsToCommand = true;
+            this.PassEventArgsToCommand = true;
         }
     }
 }

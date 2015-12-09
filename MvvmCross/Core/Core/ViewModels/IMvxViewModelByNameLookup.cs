@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
     public interface IMvxViewModelByNameLookup
     {
         bool TryLookupByName(string name, out Type viewModelType);

@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -13,8 +12,10 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System;
+
     public class MvxNSDatePickerTimeTargetBinding : MvxBaseNSDatePickerTargetBinding
     {
         public MvxNSDatePickerTimeTargetBinding(NSDatePicker datePicker)
@@ -24,14 +25,14 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var picker = DatePicker;
+            var picker = this.DatePicker;
             if (picker == null)
                 return;
 
             var time = (DateTime)value;
 
             // Do this in a way that does not mess up the date, grab current date, then modify the time
-            var pickerDate = GetLocalTime(DatePicker);
+            var pickerDate = this.GetLocalTime(this.DatePicker);
             var date = new DateTime(pickerDate.Year, pickerDate.Month, pickerDate.Day,
                 time.Hour, time.Minute, time.Second, DateTimeKind.Local);
 
@@ -41,7 +42,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override object GetValueFrom(NSDatePicker view)
         {
-            var date = GetLocalTime(view);
+            var date = this.GetLocalTime(view);
             return date.TimeOfDay;
 
             //			var components = NSCalendar.CurrentCalendar.Components(

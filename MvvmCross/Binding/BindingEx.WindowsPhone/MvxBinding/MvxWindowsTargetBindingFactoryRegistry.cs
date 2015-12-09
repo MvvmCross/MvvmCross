@@ -5,22 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
-
 // ReSharper disable CheckNamespace
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
 // ReSharper restore CheckNamespace
 {
+    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
+
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {
         protected override bool TryCreateReflectionBasedBinding(object target, string targetName,
                                                                 out Binding.Bindings.Target.IMvxTargetBinding binding)
         {
-            if (TryCreatePropertyDependencyBasedBinding(target, targetName, out binding))
+            if (this.TryCreatePropertyDependencyBasedBinding(target, targetName, out binding))
             {
                 return true;
             }

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using System;
-using System.Collections;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView
         : AutoCompleteTextView
@@ -23,8 +23,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             : this(context, attrs, new MvxFilteringAdapter(context))
         {
             // note - we shouldn't realy need both of these... but we do
-            this.ItemClick += OnItemClick;
-            this.ItemSelected += OnItemSelected;
+            this.ItemClick += this.OnItemClick;
+            this.ItemSelected += this.OnItemSelected;
         }
 
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs,
@@ -33,8 +33,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-            Adapter = adapter;
-            this.ItemClick += OnItemClick;
+            this.Adapter = adapter;
+            this.ItemClick += this.OnItemClick;
         }
 
         protected MvxAutoCompleteTextView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -44,24 +44,24 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-            OnItemClick(itemClickEventArgs.Position);
+            this.OnItemClick(itemClickEventArgs.Position);
         }
 
         private void OnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
-            OnItemSelected(itemSelectedEventArgs.Position);
+            this.OnItemSelected(itemSelectedEventArgs.Position);
         }
 
         protected virtual void OnItemClick(int position)
         {
-            var selectedObject = Adapter.GetRawItem(position);
-            SelectedObject = selectedObject;
+            var selectedObject = this.Adapter.GetRawItem(position);
+            this.SelectedObject = selectedObject;
         }
 
         protected virtual void OnItemSelected(int position)
         {
-            var selectedObject = Adapter.GetRawItem(position);
-            SelectedObject = selectedObject;
+            var selectedObject = this.Adapter.GetRawItem(position);
+            this.SelectedObject = selectedObject;
         }
 
         public new MvxFilteringAdapter Adapter
@@ -69,12 +69,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return base.Adapter as MvxFilteringAdapter; }
             set
             {
-                var existing = Adapter;
+                var existing = this.Adapter;
                 if (existing == value)
                     return;
 
                 if (existing != null)
-                    existing.PartialTextChanged -= AdapterOnPartialTextChanged;
+                    existing.PartialTextChanged -= this.AdapterOnPartialTextChanged;
 
                 if (existing != null && value != null)
                 {
@@ -83,7 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 }
 
                 if (value != null)
-                    value.PartialTextChanged += AdapterOnPartialTextChanged;
+                    value.PartialTextChanged += this.AdapterOnPartialTextChanged;
 
                 base.Adapter = value;
             }
@@ -91,36 +91,36 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         private void AdapterOnPartialTextChanged(object sender, EventArgs eventArgs)
         {
-            FireChanged(PartialTextChanged);
+            this.FireChanged(this.PartialTextChanged);
         }
 
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get { return this.Adapter.ItemsSource; }
+            set { this.Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get { return this.Adapter.ItemTemplateId; }
+            set { this.Adapter.ItemTemplateId = value; }
         }
 
-        public string PartialText => Adapter.PartialText;
+        public string PartialText => this.Adapter.PartialText;
 
         private object _selectedObject;
 
         public object SelectedObject
         {
-            get { return _selectedObject; }
+            get { return this._selectedObject; }
             private set
             {
-                if (_selectedObject == value)
+                if (this._selectedObject == value)
                     return;
 
-                _selectedObject = value;
-                FireChanged(SelectedObjectChanged);
+                this._selectedObject = value;
+                this.FireChanged(this.SelectedObjectChanged);
             }
         }
 

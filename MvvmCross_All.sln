@@ -56,7 +56,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.BindingEx.Wpf", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Droid", "MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj", "{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Binding.Mac", "MvvmCross\Binding\Mac\Cirrious.MvvmCross.Binding.Mac.csproj", "{B4789586-AEBB-4597-A849-23F3E45AF421}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Mac", "MvvmCross\Binding\Mac\MvvmCross.Binding.Mac.csproj", "{B4789586-AEBB-4597-A849-23F3E45AF421}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Test", "MvvmCross\Binding\Test\MvvmCross.Binding.Test.csproj", "{2F41D56E-B1CE-4273-97E5-8835479C5A89}"
 EndProject
@@ -92,7 +92,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.WindowsS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Wpf", "MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj", "{3688D6FC-E7F4-485F-8B27-96C0A8C7EAED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Mac", "MvvmCross\Mac\Mac\Cirrious.MvvmCross.Mac.csproj", "{B3B40D12-3CF1-4BCE-B599-4E3AE438D39F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Mac", "MvvmCross\Mac\Mac\MvvmCross.Mac.csproj", "{B3B40D12-3CF1-4BCE-B599-4E3AE438D39F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test", "MvvmCross\Test\Test\MvvmCross.Test.csproj", "{1C4B1284-5B72-4ADB-AC5B-739F778233BD}"
 EndProject

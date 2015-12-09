@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Droid.Views
+namespace MvvmCross.Platform.Droid.Views
 {
     public enum MvxIntentRequestCode
     {

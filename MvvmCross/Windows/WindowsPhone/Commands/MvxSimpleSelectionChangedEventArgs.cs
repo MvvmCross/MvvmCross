@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Commands
+namespace MvvmCross.WindowsPhone.Commands
 {
+    using System;
+    using System.Collections;
+
     public class MvxSimpleSelectionChangedEventArgs : EventArgs
     {
         public IList AddedItems { get; set; }

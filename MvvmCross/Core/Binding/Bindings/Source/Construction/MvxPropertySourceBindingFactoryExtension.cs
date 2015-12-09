@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Chained;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Leaf;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
+namespace MvvmCross.Binding.Bindings.Source.Construction
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Binding.Bindings.Source.Chained;
+    using MvvmCross.Binding.Bindings.Source.Leaf;
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxPropertySourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, currentToken) : CreateChainedBinding(source, currentToken, remainingTokens);
+            result = remainingTokens.Count == 0 ? this.CreateLeafBinding(source, currentToken) : this.CreateChainedBinding(source, currentToken, remainingTokens);
             return result != null;
         }
 
@@ -36,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = FindItemPropertyInfo(source);
+                var itemPropertyInfo = this.FindItemPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
 
@@ -47,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
             if (propertyNameToken != null)
             {
-                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
+                var propertyInfo = this.FindPropertyInfo(source, propertyNameToken.PropertyName);
 
                 if (propertyInfo == null)
                     return null;
@@ -65,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = FindItemPropertyInfo(source);
+                var itemPropertyInfo = this.FindItemPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
                 return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
@@ -74,7 +75,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
             var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
             if (propertyNameToken != null)
             {
-                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
+                var propertyInfo = this.FindPropertyInfo(source, propertyNameToken.PropertyName);
                 if (propertyInfo == null)
                     return null;
                 return new MvxSimpleLeafPropertyInfoSourceBinding(source, propertyInfo);
@@ -90,7 +91,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
 
         protected PropertyInfo FindItemPropertyInfo(object source)
         {
-            return FindPropertyInfo(source, "Item");
+            return this.FindPropertyInfo(source, "Item");
         }
 
         protected PropertyInfo FindPropertyInfo(object source, string propertyName)

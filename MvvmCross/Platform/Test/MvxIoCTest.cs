@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using NUnit.Framework;
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Test
+namespace MvvmCross.Platform.Test
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxIocTest
     {
@@ -26,7 +28,7 @@ namespace Cirrious.CrossCore.Test
         {
             public A(IB b)
             {
-                B = b;
+                this.B = b;
             }
 
             public IB B { get; set; }

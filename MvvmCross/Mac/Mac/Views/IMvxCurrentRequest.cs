@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using global::MvvmCross.Core.ViewModels;
+
     public interface IMvxCurrentRequest
     {
         MvxViewModelRequest CurrentRequest { get; }

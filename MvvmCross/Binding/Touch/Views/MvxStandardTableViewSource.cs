@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+
+    using UIKit;
+
     public class MvxStandardTableViewSource : MvxTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
@@ -37,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly UITableViewCellStyle _cellStyle;
         private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
 
-        protected virtual NSString CellIdentifier => _cellIdentifier;
+        protected virtual NSString CellIdentifier => this._cellIdentifier;
 
         public MvxStandardTableViewSource(UITableView tableView)
             : this(tableView, UITableViewCellStyle.Default, DefaultCellIdentifier, DefaultBindingDescription)
@@ -78,13 +78,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(tableView)
         {
-            _cellStyle = style;
-            _cellIdentifier = cellIdentifier;
-            _bindingDescriptions = descriptions;
-            _tableViewCellAccessory = tableViewCellAccessory;
+            this._cellStyle = style;
+            this._cellIdentifier = cellIdentifier;
+            this._bindingDescriptions = descriptions;
+            this._tableViewCellAccessory = tableViewCellAccessory;
         }
 
-        protected IEnumerable<MvxBindingDescription> BindingDescriptions => _bindingDescriptions;
+        protected IEnumerable<MvxBindingDescription> BindingDescriptions => this._bindingDescriptions;
 
         private static IEnumerable<MvxBindingDescription> ParseBindingText(string bindingText)
         {
@@ -96,18 +96,18 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            var reuse = tableView.DequeueReusableCell(CellIdentifier);
+            var reuse = tableView.DequeueReusableCell(this.CellIdentifier);
             if (reuse != null)
                 return reuse;
 
-            return CreateDefaultBindableCell(tableView, indexPath, item);
+            return this.CreateDefaultBindableCell(tableView, indexPath, item);
         }
 
         protected virtual MvxStandardTableViewCell CreateDefaultBindableCell(UITableView tableView,
                                                                              NSIndexPath indexPath, object item)
         {
-            return new MvxStandardTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
-                                                _tableViewCellAccessory);
+            return new MvxStandardTableViewCell(this._bindingDescriptions, this._cellStyle, this.CellIdentifier,
+                                                this._tableViewCellAccessory);
         }
     }
 }

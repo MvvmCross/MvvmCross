@@ -1,14 +1,14 @@
-﻿using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
+﻿namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using MvvmCross.Platform.Platform;
+
+    using NUnit.Framework;
+
     public class MvxBaseSwissBindingTest<TParser>
         : MvxBindingTest
         where TParser : MvxSwissBindingParser, new()
@@ -28,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -128,38 +128,38 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
         public void TestSimpleBinding()
         {
-            foreach (var parameterSet in GenerateAllTestParameters())
+            foreach (var parameterSet in this.GenerateAllTestParameters())
             {
-                PerformParseTest(parameterSet);
+                this.PerformParseTest(parameterSet);
             }
         }
 
         [Test]
         public void TestTupleBinding()
         {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
+            foreach (var parameterSet1 in this.GenerateSampledTestParameters(101, 20))
+                foreach (var parameterSet2 in this.GenerateSampledTestParameters(23, 20))
                 {
-                    PerformParseTest(parameterSet1, parameterSet2);
+                    this.PerformParseTest(parameterSet1, parameterSet2);
                 }
         }
 
         [Test]
         public void TestLongTupleBinding()
         {
-            foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
-                foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
-                    foreach (var parameterSet3 in GenerateSampledTestParameters(111, 5))
-                        foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
-                            foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
+            foreach (var parameterSet1 in this.GenerateSampledTestParameters(79, 5))
+                foreach (var parameterSet2 in this.GenerateSampledTestParameters(23, 5))
+                    foreach (var parameterSet3 in this.GenerateSampledTestParameters(111, 5))
+                        foreach (var parameterSet4 in this.GenerateSampledTestParameters(103, 5))
+                            foreach (var parameterSet5 in this.GenerateSampledTestParameters(71, 5))
                             {
-                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
+                                this.PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
                                                  parameterSet5);
                             }
         }
@@ -217,7 +217,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         {
             var count = 0;
             var stillToReturn = maxToReturn;
-            foreach (var testParameters in GenerateAllTestParameters())
+            foreach (var testParameters in this.GenerateAllTestParameters())
             {
                 count++;
                 if (count % everyN != 1)
@@ -234,12 +234,12 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
         {
             foreach (var useInlinePath in new[] { true, false })
                 foreach (var testBindingMode in new[] { true, false })
-                    foreach (var bindingMode in _bindingModes)
-                        foreach (var targetName in _targetNames)
-                            foreach (var sourcePath in _sourcePaths)
-                                foreach (var converter in _converters)
-                                    foreach (var converterParameterValue in _values)
-                                        foreach (var fallbackValue in _values)
+                    foreach (var bindingMode in this._bindingModes)
+                        foreach (var targetName in this._targetNames)
+                            foreach (var sourcePath in this._sourcePaths)
+                                foreach (var converter in this._converters)
+                                    foreach (var converterParameterValue in this._values)
+                                        foreach (var fallbackValue in this._values)
                                             yield return new PerformSimpleTestParams(
                                                 sourcePath,
                                                 targetName,
@@ -254,7 +254,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         protected string CreateText(PerformSimpleTestParams testParams)
         {
-            var optionalParameters = BuildOptionalParameters(testParams);
+            var optionalParameters = this.BuildOptionalParameters(testParams);
             var text = $"{testParams.Target} {optionalParameters}";
             return text;
         }
@@ -335,45 +335,45 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 KeyValuePair<string, object> converterParameterValue,
                 KeyValuePair<string, object> fallbackValue)
             {
-                _source = sourcePath;
-                _useInlinePath = useInlinePath;
-                _target = targetName;
-                _bindingMode = bindingMode;
-                _testBindingMode = testBindingMode;
-                _converter = converter;
-                _converterParameterValue = converterParameterValue;
-                _fallbackValue = fallbackValue;
+                this._source = sourcePath;
+                this._useInlinePath = useInlinePath;
+                this._target = targetName;
+                this._bindingMode = bindingMode;
+                this._testBindingMode = testBindingMode;
+                this._converter = converter;
+                this._converterParameterValue = converterParameterValue;
+                this._fallbackValue = fallbackValue;
             }
 
-            public string Source => _source;
+            public string Source => this._source;
 
-            public string Target => _target;
+            public string Target => this._target;
 
-            public bool UseInlinePath => _useInlinePath;
+            public bool UseInlinePath => this._useInlinePath;
 
-            public MvxBindingMode BindingMode => _bindingMode;
+            public MvxBindingMode BindingMode => this._bindingMode;
 
-            public bool TestBindingMode => _testBindingMode;
+            public bool TestBindingMode => this._testBindingMode;
 
-            public string Converter => _converter;
+            public string Converter => this._converter;
 
-            public KeyValuePair<string, object> ConverterParameterValue => _converterParameterValue;
+            public KeyValuePair<string, object> ConverterParameterValue => this._converterParameterValue;
 
-            public KeyValuePair<string, object> FallbackValue => _fallbackValue;
+            public KeyValuePair<string, object> FallbackValue => this._fallbackValue;
         }
 
         private void PerformParseTest(params PerformSimpleTestParams[] testParamsArray)
         {
-            var text = CreateText(testParamsArray);
+            var text = this.CreateText(testParamsArray);
 
             var expectedLookup = new MvxSerializableBindingSpecification();
             foreach (var testParams in testParamsArray)
             {
-                expectedLookup[testParams.Target] = CreateExpectedDesciption(testParams);
+                expectedLookup[testParams.Target] = this.CreateExpectedDesciption(testParams);
             }
 
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expectedLookup);
+            this.PerformTest(text, expectedLookup);
         }
 
         private MvxSerializableBindingDescription CreateExpectedDesciption(PerformSimpleTestParams testParams)
@@ -390,7 +390,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         private string CreateText(IEnumerable<PerformSimpleTestParams> testParams)
         {
-            return string.Join(";", testParams.Select(CreateText));
+            return string.Join(";", testParams.Select(this.CreateText));
         }
 
         protected void PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)

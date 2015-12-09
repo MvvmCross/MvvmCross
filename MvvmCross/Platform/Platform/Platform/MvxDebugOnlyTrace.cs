@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Diagnostics;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System;
+    using System.Diagnostics;
+
     public class MvxDebugOnlyTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
@@ -30,7 +30,7 @@ namespace Cirrious.CrossCore.Platform
             }
             catch (FormatException)
             {
-                Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
+                this.Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
             }
         }
     }

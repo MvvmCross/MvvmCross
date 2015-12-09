@@ -5,19 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-using System.Windows.Data;
-
 #endif
-
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings;
 
 #if NETFX_CORE
 
@@ -26,8 +15,16 @@ using Windows.UI.Xaml.Data;
 
 #endif
 
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Data;
+
+    using Cirrious.MvvmCross.BindingEx.WindowsShared;
+
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {
         protected override void ApplyBindings(FrameworkElement attachedObject,
@@ -36,7 +33,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             var binder = MvxBindingSingletonCache.Instance.Binder;
             var bindingDescriptionList = bindingDescriptions.ToList();
             var bindings = binder.Bind(attachedObject.DataContext, attachedObject, bindingDescriptionList);
-            RegisterBindingsForUpdates(attachedObject, bindings);
+            this.RegisterBindingsForUpdates(attachedObject, bindings);
         }
 
         private void RegisterBindingsForUpdates(FrameworkElement attachedObject,
@@ -45,7 +42,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
             if (bindings == null)
                 return;
 
-            var bindingsList = GetOrCreateBindingsList(attachedObject);
+            var bindingsList = this.GetOrCreateBindingsList(attachedObject);
             foreach (var binding in bindings)
             {
                 bindingsList.Add(binding);

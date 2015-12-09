@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Touch.Views;
+
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxTouchView TouchView => base.ViewController as IMvxTouchView;
@@ -24,13 +25,13 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            TouchView.OnViewCreate();
+            this.TouchView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            TouchView.OnViewDestroy();
+            this.TouchView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

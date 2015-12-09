@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+
     public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup, IMvxViewModelByNameRegistry
     {
         private readonly Dictionary<string, Type> _availableViewModelsByName;
@@ -21,29 +22,29 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxViewModelByNameLookup()
         {
-            _availableViewModelsByName = new Dictionary<string, Type>();
-            _availableViewModelsByFullName = new Dictionary<string, Type>();
+            this._availableViewModelsByName = new Dictionary<string, Type>();
+            this._availableViewModelsByFullName = new Dictionary<string, Type>();
         }
 
         public bool TryLookupByName(string name, out Type viewModelType)
         {
-            return _availableViewModelsByName.TryGetValue(name, out viewModelType);
+            return this._availableViewModelsByName.TryGetValue(name, out viewModelType);
         }
 
         public bool TryLookupByFullName(string name, out Type viewModelType)
         {
-            return _availableViewModelsByFullName.TryGetValue(name, out viewModelType);
+            return this._availableViewModelsByFullName.TryGetValue(name, out viewModelType);
         }
 
         public void Add(Type viewModelType)
         {
-            _availableViewModelsByName[viewModelType.Name] = viewModelType;
-            _availableViewModelsByFullName[viewModelType.FullName] = viewModelType;
+            this._availableViewModelsByName[viewModelType.Name] = viewModelType;
+            this._availableViewModelsByFullName[viewModelType.FullName] = viewModelType;
         }
 
         public void Add<TViewModel>() where TViewModel : IMvxViewModel
         {
-            Add(typeof(TViewModel));
+            this.Add(typeof(TViewModel));
         }
 
         public void AddAll(Assembly assembly)
@@ -56,7 +57,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
             foreach (var viewModelType in viewModelTypes)
             {
-                Add(viewModelType);
+                this.Add(viewModelType);
             }
         }
     }

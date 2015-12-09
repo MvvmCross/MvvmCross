@@ -5,9 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Droid.Views;
-
-namespace Cirrious.MvvmCross.Dialog.Droid.Views
+namespace MvvmCross.Dialog.Droid.Views
 {
     public interface IMvxDialogActivityView : IMvxAndroidView
     {

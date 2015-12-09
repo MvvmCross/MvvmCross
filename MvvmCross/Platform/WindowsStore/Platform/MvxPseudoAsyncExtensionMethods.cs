@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.Foundation;
-
-namespace Cirrious.CrossCore.WindowsStore.Platform
+namespace MvvmCross.Platform.WindowsStore.Platform
 {
+    using System;
+
+    using Windows.Foundation;
+
     public static class MvxPseudoAsyncExtensionMethods
     {
         public static void Await(this IAsyncAction operation)

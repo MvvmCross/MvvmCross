@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
     public enum MvxTraceLevel
     {

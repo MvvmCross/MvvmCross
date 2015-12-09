@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+    using System.Threading;
+
     public static class MvxLockableObjectHelpers
     {
         public static void RunSyncWithLock(object lockObject, Action action)

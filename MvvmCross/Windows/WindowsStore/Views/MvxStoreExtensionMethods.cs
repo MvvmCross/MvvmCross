@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.WindowsStore.Views
+namespace MvvmCross.WindowsStore.Views
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform;
+
     public static class MvxStoreExtensionMethods
     {
         public static void OnViewCreate(this IMvxStoreView storeView, MvxViewModelRequest viewModelRequest, Func<IMvxBundle> bundleLoader)

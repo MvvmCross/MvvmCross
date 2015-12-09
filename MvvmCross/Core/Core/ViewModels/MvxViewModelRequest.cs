@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Platform;
+
     public class MvxViewModelRequest
     {
         public MvxViewModelRequest()
@@ -22,10 +23,10 @@ namespace Cirrious.MvvmCross.ViewModels
                                    IMvxBundle presentationBundle,
                                    MvxRequestedBy requestedBy)
         {
-            ViewModelType = viewModelType;
-            ParameterValues = parameterBundle.SafeGetData();
-            PresentationValues = presentationBundle.SafeGetData();
-            RequestedBy = requestedBy;
+            this.ViewModelType = viewModelType;
+            this.ParameterValues = parameterBundle.SafeGetData();
+            this.PresentationValues = presentationBundle.SafeGetData();
+            this.RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }

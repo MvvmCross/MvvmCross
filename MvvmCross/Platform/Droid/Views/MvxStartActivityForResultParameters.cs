@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-
-namespace Cirrious.CrossCore.Droid.Views
+namespace MvvmCross.Platform.Droid.Views
 {
+    using Android.Content;
+
     public class MvxStartActivityForResultParameters
     {
         public MvxStartActivityForResultParameters(Intent intent, int requestCode)
         {
-            RequestCode = requestCode;
-            Intent = intent;
+            this.RequestCode = requestCode;
+            this.Intent = intent;
         }
 
         public Intent Intent { get; private set; }

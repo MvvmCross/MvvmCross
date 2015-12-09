@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Droid.Views;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces
+namespace MvvmCross.AutoView.Droid.Interfaces
 {
+    using MvvmCross.AutoView.Interfaces;
+
     public interface IMvxAndroidAutoView
         : IMvxAndroidView
           , IMvxAutoView

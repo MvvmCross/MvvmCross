@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -13,27 +12,29 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Binding.Mac.Views
 {
+    using System;
+
     [Register("MvxTableColumn")]
     public class MvxTableColumn : NSTableColumn
     {
         // Called when created from unmanaged code
         public MvxTableColumn(IntPtr handle) : base(handle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
         public MvxTableColumn(NSCoder coder) : base(coder)
         {
-            Initialize();
+            this.Initialize();
         }
 
         public MvxTableColumn() : base()
         {
-            Initialize();
+            this.Initialize();
         }
 
         // Shared initialization code
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
         public override void SetValueForKey(NSObject value, NSString key)
         {
             if (key == "bindingText")
-                BindingText = value.ToString();
+                this.BindingText = value.ToString();
         }
     }
 }

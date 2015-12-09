@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
         public virtual void Inject(object target, IMvxPropertyInjectorOptions options = null)
@@ -25,11 +26,11 @@ namespace Cirrious.CrossCore.IoC
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            var injectableProperties = FindInjectableProperties(target.GetType(), options);
+            var injectableProperties = this.FindInjectableProperties(target.GetType(), options);
 
             foreach (var injectableProperty in injectableProperties)
             {
-                InjectProperty(target, injectableProperty, options);
+                this.InjectProperty(target, injectableProperty, options);
             }
         }
 

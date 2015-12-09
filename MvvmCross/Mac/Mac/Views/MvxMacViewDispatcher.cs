@@ -7,14 +7,16 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Mac.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System;
+
+    using global::MvvmCross.Core.ViewModels;
+    using global::MvvmCross.Core.Views;
+    using global::MvvmCross.Platform.Platform;
+
+    using MvvmCross.Mac.Views.Presenters;
+
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher
         , IMvxViewDispatcher
@@ -23,7 +25,7 @@ namespace Cirrious.MvvmCross.Mac.Views
 
         public MvxMacViewDispatcher(IMvxMacViewPresenter presenter)
         {
-            _presenter = presenter;
+            this._presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
@@ -31,9 +33,9 @@ namespace Cirrious.MvvmCross.Mac.Views
             Action action = () =>
             {
                 MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
-                _presenter.Show(request);
+                this._presenter.Show(request);
             };
-            return RequestMainThreadAction(action);
+            return this.RequestMainThreadAction(action);
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
@@ -41,9 +43,9 @@ namespace Cirrious.MvvmCross.Mac.Views
             Action action = () =>
                                 {
                                     MvxTrace.TaggedTrace("MacNavigation", "Change presentation requested");
-                                    _presenter.ChangePresentation(hint);
+                                    this._presenter.ChangePresentation(hint);
                                 };
-            return RequestMainThreadAction(action);
+            return this.RequestMainThreadAction(action);
         }
     }
 }

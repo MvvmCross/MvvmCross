@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Mac.Views;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using Cirrious.CrossCore.Mac.Views;
+
     public static class MvxViewControllerAdaptingExtensions
     {
         public static void AdaptForBinding(this IMvxEventSourceViewController view)

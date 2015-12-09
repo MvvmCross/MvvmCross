@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
           , IMvxTrace
@@ -118,8 +119,8 @@ namespace Cirrious.CrossCore.Platform
 
         public MvxTrace()
         {
-            _realTrace = Mvx.Resolve<IMvxTrace>();
-            if (_realTrace == null)
+            this._realTrace = Mvx.Resolve<IMvxTrace>();
+            if (this._realTrace == null)
                 throw new MvxException("No platform trace service available");
         }
 
@@ -127,17 +128,17 @@ namespace Cirrious.CrossCore.Platform
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            _realTrace.Trace(level, tag, message);
+            this._realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message)
         {
-            _realTrace.Trace(level, tag, message);
+            this._realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            _realTrace.Trace(level, tag, message, args);
+            this._realTrace.Trace(level, tag, message, args);
         }
 
         #endregion IMvxTrace Members

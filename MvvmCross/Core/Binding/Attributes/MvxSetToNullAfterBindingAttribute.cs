@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Attributes
+namespace MvvmCross.Binding.Attributes
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class MvxSetToNullAfterBindingAttribute : Attribute
     {

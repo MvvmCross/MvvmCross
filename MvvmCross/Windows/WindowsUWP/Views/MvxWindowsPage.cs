@@ -5,35 +5,37 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsUWP.Views.Suspension;
-
-namespace Cirrious.MvvmCross.WindowsUWP.Views
+namespace MvvmCross.WindowsUWP.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.WindowsUWP.Views.Suspension;
+
     public class MvxWindowsPage
         : Page
         , IMvxWindowsView
     {
         private IMvxViewModel _viewModel;
 
-        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
+        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(this.Frame);
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get { return this._viewModel; }
             set
             {
-                if (_viewModel == value)
+                if (this._viewModel == value)
                     return;
 
-                _viewModel = value;
-                DataContext = ViewModel;
+                this._viewModel = value;
+                this.DataContext = this.ViewModel;
             }
         }
 
@@ -56,7 +58,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
 
-            this.OnViewCreate(req, () => LoadStateBundle(e));
+            this.OnViewCreate(req, () => this.LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -64,7 +66,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
             base.OnNavigatedFrom(e);
 
             var bundle = this.CreateSaveStateBundle();
-            SaveStateBundle(e, bundle);
+            this.SaveStateBundle(e, bundle);
             
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
@@ -77,24 +79,24 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
         {
             get
             {
-                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
-                return _suspensionManager;
+                this._suspensionManager = this._suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
+                return this._suspensionManager;
             }
         }
 
         protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
         {
             // nothing loaded by default
-            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
-            _pageKey = "Page-" + Frame.BackStackDepth;
+            var frameState = this.SuspensionManager.SessionStateForFrame(this.WrappedFrame);
+            this._pageKey = "Page-" + this.Frame.BackStackDepth;
              IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {
                 // Clear existing state for forward navigation when adding a new page to the
                 // navigation stack
-                var nextPageKey = _pageKey;
-                var nextPageIndex = Frame.BackStackDepth;
+                var nextPageKey = this._pageKey;
+                var nextPageIndex = this.Frame.BackStackDepth;
                 while (frameState.Remove(nextPageKey))
                 {
                     nextPageIndex++;
@@ -103,7 +105,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
             }
             else
             {
-                var dictionary = (IDictionary<string, string>)frameState[_pageKey];
+                var dictionary = (IDictionary<string, string>)frameState[this._pageKey];
                 bundle = new MvxBundle(dictionary);
             }
 
@@ -112,8 +114,8 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
 
         protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
         {
-            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
-            frameState[_pageKey] = bundle.Data;
+            var frameState = this.SuspensionManager.SessionStateForFrame(this.WrappedFrame);
+            frameState[this._pageKey] = bundle.Data;
         }
     }
 

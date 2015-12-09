@@ -5,21 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-
-namespace Cirrious.MvvmCross.Binding.Droid
+namespace MvvmCross.Binding.Droid
 {
+    using Android.Views;
+
+    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxViewAssemblyBootstrapAction<TView>
         : IMvxBootstrapAction
     {
         public virtual void Run()
         {
-            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(RegisterViewTypes);
-            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(RegisterNamespace);
+            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(this.RegisterViewTypes);
+            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(this.RegisterNamespace);
         }
 
         protected virtual void RegisterViewTypes()

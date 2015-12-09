@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform;
+
     public static class MvxCanCreateTouchViewExtensionMethods
     {
         public static IMvxTouchView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateTouchView view,

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings;
+
     public interface IMvxBinder
     {
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText);

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
     public class MvxRequestedBy
     {
@@ -25,8 +25,8 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxRequestedBy(MvxRequestedByType requestedByType, string additionalInfo)
         {
-            Type = requestedByType;
-            AdditionalInfo = additionalInfo;
+            this.Type = requestedByType;
+            this.AdditionalInfo = additionalInfo;
         }
 
         public MvxRequestedByType Type { get; set; }

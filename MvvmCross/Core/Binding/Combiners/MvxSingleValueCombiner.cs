@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Platform.Converters;
+
     public class MvxSingleValueCombiner : MvxValueCombiner
     {
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)

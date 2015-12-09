@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Views
+namespace MvvmCross.Core.Views
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Core;
+
     public interface IMvxView
         : IMvxDataConsumer
     {

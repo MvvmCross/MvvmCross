@@ -5,43 +5,45 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using Android.Views;
+
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxAxmlNameViewTypeResolver
     {
         public MvxAxmlNameViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)
         {
-            ViewNamespaceAbbreviations = new Dictionary<string, string>();
+            this.ViewNamespaceAbbreviations = new Dictionary<string, string>();
         }
 
         public IDictionary<string, string> ViewNamespaceAbbreviations { get; private set; }
 
         public override Type Resolve(string tagName)
         {
-            var unabbreviatedTagName = UnabbreviateTagName(tagName);
-            var longLowerCaseName = GetLookupName(unabbreviatedTagName);
-            return ResolveLowerCaseTypeName(longLowerCaseName);
+            var unabbreviatedTagName = this.UnabbreviateTagName(tagName);
+            var longLowerCaseName = this.GetLookupName(unabbreviatedTagName);
+            return this.ResolveLowerCaseTypeName(longLowerCaseName);
         }
 
         private string UnabbreviateTagName(string tagName)
         {
             var filteredTagName = tagName;
-            if (ViewNamespaceAbbreviations != null)
+            if (this.ViewNamespaceAbbreviations != null)
             {
                 var split = tagName.Split(new[] { '.' }, 2, StringSplitOptions.RemoveEmptyEntries);
                 if (split.Length == 2)
                 {
                     var abbreviate = split[0];
                     string fullName;
-                    if (ViewNamespaceAbbreviations.TryGetValue(abbreviate, out fullName))
+                    if (this.ViewNamespaceAbbreviations.TryGetValue(abbreviate, out fullName))
                     {
                         filteredTagName = fullName + "." + split[1];
                     }

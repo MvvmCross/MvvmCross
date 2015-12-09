@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Util;
-using Android.Views;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Binding.Droid.Binders
 {
+    using Android.Content;
+    using Android.Util;
+    using Android.Views;
+
     public interface IMvxAndroidViewFactory
     {
         View CreateView(View parent, string name, Context context, IAttributeSet attrs);

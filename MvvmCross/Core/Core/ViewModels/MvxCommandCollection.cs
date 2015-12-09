@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxCommandCollection
         : IMvxCommandCollection
     {
@@ -21,17 +22,17 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommandCollection(object owner)
         {
-            _owner = owner;
-            SubscribeToNotifyPropertyChanged();
+            this._owner = owner;
+            this.SubscribeToNotifyPropertyChanged();
         }
 
         private void SubscribeToNotifyPropertyChanged()
         {
-            var inpc = _owner as INotifyPropertyChanged;
+            var inpc = this._owner as INotifyPropertyChanged;
             if (inpc == null)
                 return;
 
-            inpc.PropertyChanged += OnPropertyChanged;
+            inpc.PropertyChanged += this.OnPropertyChanged;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -39,12 +40,12 @@ namespace Cirrious.MvvmCross.ViewModels
             // if args.PropertyName is empty then it means all properties have changed.
             if (string.IsNullOrEmpty(args.PropertyName))
             {
-                RaiseAllCanExecuteChanged();
+                this.RaiseAllCanExecuteChanged();
                 return;
             }
 
             List<IMvxCommand> commands;
-            if (!_canExecuteLookup.TryGetValue(args.PropertyName, out commands))
+            if (!this._canExecuteLookup.TryGetValue(args.PropertyName, out commands))
                 return;
 
             foreach (var command in commands)
@@ -55,7 +56,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private void RaiseAllCanExecuteChanged()
         {
-            foreach (var command in _commandLookup)
+            foreach (var command in this._commandLookup)
             {
                 command.Value.RaiseCanExecuteChanged();
             }
@@ -65,22 +66,22 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             get
             {
-                if (!_commandLookup.Any())
+                if (!this._commandLookup.Any())
                 {
                     MvxTrace.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
                     return null;
                 }
 
                 IMvxCommand toReturn;
-                _commandLookup.TryGetValue(name, out toReturn);
+                this._commandLookup.TryGetValue(name, out toReturn);
                 return toReturn;
             }
         }
 
         public void Add(IMvxCommand command, string name, string canExecuteName)
         {
-            AddToLookup(_commandLookup, command, name);
-            AddToLookup(_canExecuteLookup, command, canExecuteName);
+            AddToLookup(this._commandLookup, command, name);
+            AddToLookup(this._canExecuteLookup, command, canExecuteName);
         }
 
         private static void AddToLookup(IDictionary<string, IMvxCommand> lookup, IMvxCommand command, string name)

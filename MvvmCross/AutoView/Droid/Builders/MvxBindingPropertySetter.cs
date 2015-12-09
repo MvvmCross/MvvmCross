@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using CrossUI.Core.Builder;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace MvvmCross.AutoView.Droid.Builders
 {
+    using System;
+
+    using CrossUI.Core.Builder;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxBindingPropertySetter : IPropertySetter
 
     {
@@ -24,8 +23,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
 
         public MvxBindingPropertySetter(IMvxAndroidBindingContext androidBindingContext, object source)
         {
-            _androidBindingContext = androidBindingContext;
-            _source = source;
+            this._androidBindingContext = androidBindingContext;
+            this._source = source;
         }
 
         public void Set(object element, string targetPropertyName, string configuration)
@@ -33,8 +32,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Builders
             try
             {
                 var binding = Mvx.Resolve<IMvxBinder>()
-                                 .BindSingle(_source, element, targetPropertyName, configuration);
-                _androidBindingContext.RegisterBinding(element, binding);
+                                 .BindSingle(this._source, element, targetPropertyName, configuration);
+                this._androidBindingContext.RegisterBinding(element, binding);
             }
             catch (Exception exception)
             {

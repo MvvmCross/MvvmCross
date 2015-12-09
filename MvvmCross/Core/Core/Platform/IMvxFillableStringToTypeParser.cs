@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Platform
+namespace MvvmCross.Core.Platform
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface IMvxFillableStringToTypeParser
     {
         IDictionary<Type, MvxStringToTypeParser.IParser> TypeParsers { get; }

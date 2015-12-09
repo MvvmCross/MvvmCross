@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.AutoView.Interfaces
+namespace MvvmCross.AutoView.Interfaces
 {
     public interface IMvxAutoListViewModel : IMvxAutoViewModel
     {

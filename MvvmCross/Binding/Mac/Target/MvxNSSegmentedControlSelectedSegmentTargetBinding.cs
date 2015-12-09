@@ -1,17 +1,16 @@
-﻿using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.CrossCore.Platform;
-
-#if __UNIFIED__
+﻿#if __UNIFIED__
 using AppKit;
 using Foundation;
 using ObjCRuntime;
 #else
 #endif
 
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System.Reflection;
+
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxNSSegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
     {
         private bool _subscribed;
@@ -43,7 +42,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
                 return;
             }
 
-            _subscribed = true;
+            this._subscribed = true;
             segmentedControl.Activated += HandleValueChanged;
         }
 
@@ -62,10 +61,10 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && _subscribed)
+                if (view != null && this._subscribed)
                 {
                     view.Activated -= HandleValueChanged;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

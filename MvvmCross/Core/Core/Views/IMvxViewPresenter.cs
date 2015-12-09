@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Views
+namespace MvvmCross.Core.Views
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxViewPresenter
     {
         void Show(MvxViewModelRequest request);

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Widget;
+
     public class MvxAdapterViewSelectedItemPositionTargetBinding
         : MvxAndroidTargetBinding
     {
@@ -36,13 +37,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var adapterView = AdapterView;
+            var adapterView = this.AdapterView;
 
             if (adapterView == null)
                 return;
 
-            _subscribed = true;
-            adapterView.ItemSelected += AdapterViewOnItemSelected;
+            this._subscribed = true;
+            adapterView.ItemSelected += this.AdapterViewOnItemSelected;
         }
 
         public override Type TargetType => typeof(Int32);
@@ -51,11 +52,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var adapterView = AdapterView;
-                if (adapterView != null && _subscribed)
+                var adapterView = this.AdapterView;
+                if (adapterView != null && this._subscribed)
                 {
-                    adapterView.ItemSelected -= AdapterViewOnItemSelected;
-                    _subscribed = false;
+                    adapterView.ItemSelected -= this.AdapterViewOnItemSelected;
+                    this._subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

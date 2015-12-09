@@ -7,13 +7,14 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System;
+
+    using global::MvvmCross.Core.ViewModels;
+    using global::MvvmCross.Core.Views;
+    using global::MvvmCross.Platform.Exceptions;
+
     // TODO - move this into another file
     public interface IMvxMacViewsContainer
         : IMvxViewsContainer
@@ -31,8 +32,8 @@ namespace Cirrious.MvvmCross.Mac.Views
         {
             try
             {
-                CurrentRequest = request;
-                var viewType = GetViewType(request.ViewModelType);
+                this.CurrentRequest = request;
+                var viewType = this.GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
@@ -44,14 +45,14 @@ namespace Cirrious.MvvmCross.Mac.Views
             }
             finally
             {
-                CurrentRequest = null;
+                this.CurrentRequest = null;
             }
         }
 
         public virtual IMvxMacView CreateView(IMvxViewModel viewModel)
         {
             var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = CreateView(request);
+            var view = this.CreateView(request);
             return view;
         }
     }

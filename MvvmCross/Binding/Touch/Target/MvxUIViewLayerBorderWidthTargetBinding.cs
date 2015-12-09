@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+
+    using UIKit;
+
     public class MvxUIViewLayerBorderWidthTargetBinding
         : MvxConvertingTargetBinding
     {

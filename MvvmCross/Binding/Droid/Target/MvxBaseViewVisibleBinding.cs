@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Views;
+
     public abstract class MvxBaseViewVisibleBinding
         : MvxAndroidTargetBinding
     {

@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsCommon.Views
+namespace MvvmCross.WindowsCommon.Views
 {
+    using System;
+
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+
     public interface IMvxWindowsFrame
     {
         Control UnderlyingControl { get; }

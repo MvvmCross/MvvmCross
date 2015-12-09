@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+
     public class MvxLazySingletonCreator
     {
         private readonly object _lockObject = new object();
@@ -20,20 +20,20 @@ namespace Cirrious.CrossCore.IoC
         {
             get
             {
-                if (_instance != null)
-                    return _instance;
+                if (this._instance != null)
+                    return this._instance;
 
-                lock (_lockObject)
+                lock (this._lockObject)
                 {
-                    _instance = _instance ?? Mvx.IocConstruct(_type);
-                    return _instance;
+                    this._instance = this._instance ?? Mvx.IocConstruct(this._type);
+                    return this._instance;
                 }
             }
         }
 
         public MvxLazySingletonCreator(Type type)
         {
-            _type = type;
+            this._type = type;
         }
     }
 }

@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Mac.Target;
-using System;
-
 #if __UNIFIED__
 using AppKit;
 #else
-using MonoMac.AppKit;
+
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac
+namespace MvvmCross.Binding.Mac
 {
+    using System;
+
+    using global::MvvmCross.Platform.Converters;
+
+    using MvvmCross.Binding.Mac.Target;
+
     public class MvxMacBindingBuilder
         : MvxBindingBuilder
     {
@@ -30,9 +30,9 @@ namespace Cirrious.MvvmCross.Binding.Mac
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
                                     Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
-            _fillBindingNamesAction = fillBindingNamesAction;
+            this._fillRegistryAction = fillRegistryAction;
+            this._fillValueConvertersAction = fillValueConvertersAction;
+            this._fillBindingNamesAction = fillBindingNamesAction;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -78,8 +78,8 @@ namespace Cirrious.MvvmCross.Binding.Mac
 			registry.RegisterCustomBindingFactory<NSView>("TwoFingerTap", view => new MvxNSViewTapTargetBinding(view, 1, 2));
 			*/
 
-            if (_fillRegistryAction != null)
-                _fillRegistryAction(registry);
+            if (this._fillRegistryAction != null)
+                this._fillRegistryAction(registry);
         }
 
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
@@ -92,8 +92,8 @@ namespace Cirrious.MvvmCross.Binding.Mac
         {
             base.FillValueConverters(registry);
 
-            if (_fillValueConvertersAction != null)
-                _fillValueConvertersAction(registry);
+            if (this._fillValueConvertersAction != null)
+                this._fillValueConvertersAction(registry);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -117,8 +117,8 @@ namespace Cirrious.MvvmCross.Binding.Mac
             //			registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
             registry.AddOrOverwrite(typeof(NSSegmentedControl), "SelectedSegment");
 
-            if (_fillBindingNamesAction != null)
-                _fillBindingNamesAction(registry);
+            if (this._fillBindingNamesAction != null)
+                this._fillBindingNamesAction(registry);
         }
     }
 }

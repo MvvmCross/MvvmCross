@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding
+namespace MvvmCross.Binding
 {
     public enum MvxBindingMode
     {

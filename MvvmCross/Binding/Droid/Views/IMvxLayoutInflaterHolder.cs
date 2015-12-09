@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using Android.Views;
+
     public interface IMvxLayoutInflaterHolder
     {
         LayoutInflater LayoutInflater { get; }

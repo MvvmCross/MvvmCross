@@ -5,17 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-
 #endif
-
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Bindings;
 
 #if NETFX_CORE
 
@@ -27,6 +18,12 @@ using Windows.UI.Xaml;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 // ReSharper restore CheckNamespace
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+
+    using global::MvvmCross.Platform;
+
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {
         public void CreateBindings(object sender, DependencyPropertyChangedEventArgs args,
@@ -47,7 +44,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
             if (bindingDescriptions == null)
                 return;
 
-            ApplyBindings(attachedObject, bindingDescriptions);
+            this.ApplyBindings(attachedObject, bindingDescriptions);
         }
 
         protected abstract void ApplyBindings(FrameworkElement attachedObject,

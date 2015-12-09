@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViews
+namespace MvvmCross.Test.Mocks.TestViews
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Test.Mocks.TestViewModels;
+
     public class NotTest2View : IMvxView
     {
         public object DataContext { get; set; }

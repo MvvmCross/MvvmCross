@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
+    using System;
+
     public interface IMvxAppResourceTypeFinder
     {
         Type Find();

@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.AutoView.Auto
+namespace MvvmCross.AutoView.Auto
 {
+    using System.Collections.Generic;
+
+    using CrossUI.Core.Descriptions;
+
     public class BaseAuto
     {
         public string OnlyFor { get; set; }
@@ -18,19 +19,19 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         public BaseAuto(string onlyFor = null, string notFor = null)
         {
-            OnlyFor = onlyFor;
-            NotFor = notFor;
-            Properties = new Dictionary<string, object>();
+            this.OnlyFor = onlyFor;
+            this.NotFor = notFor;
+            this.Properties = new Dictionary<string, object>();
         }
 
         protected void Fill(BaseDescription baseDescription)
         {
-            foreach (var kvp in Properties)
+            foreach (var kvp in this.Properties)
             {
                 baseDescription.Properties[kvp.Key] = kvp.Value;
             }
-            baseDescription.OnlyFor = OnlyFor;
-            baseDescription.NotFor = NotFor;
+            baseDescription.OnlyFor = this.OnlyFor;
+            baseDescription.NotFor = this.NotFor;
         }
     }
 }

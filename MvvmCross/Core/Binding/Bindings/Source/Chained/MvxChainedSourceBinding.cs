@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
+namespace MvvmCross.Binding.Bindings.Source.Chained
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxChainedSourceBinding
         : MvxPropertyInfoSourceBinding
     {
@@ -27,17 +28,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             IList<MvxPropertyToken> childTokens)
             : base(source, propertyInfo)
         {
-            _childTokens = childTokens;
+            this._childTokens = childTokens;
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                if (_currentChildBinding != null)
+                if (this._currentChildBinding != null)
                 {
-                    _currentChildBinding.Dispose();
-                    _currentChildBinding = null;
+                    this._currentChildBinding.Dispose();
+                    this._currentChildBinding = null;
                 }
             }
 
@@ -50,28 +51,28 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
         {
             get
             {
-                if (_currentChildBinding == null)
+                if (this._currentChildBinding == null)
                     return typeof(object);
 
-                return _currentChildBinding.SourceType;
+                return this._currentChildBinding.SourceType;
             }
         }
 
         protected void UpdateChildBinding()
         {
-            if (_currentChildBinding != null)
+            if (this._currentChildBinding != null)
             {
-                _currentChildBinding.Changed -= ChildSourceBindingChanged;
-                _currentChildBinding.Dispose();
-                _currentChildBinding = null;
+                this._currentChildBinding.Changed -= this.ChildSourceBindingChanged;
+                this._currentChildBinding.Dispose();
+                this._currentChildBinding = null;
             }
 
-            if (PropertyInfo == null)
+            if (this.PropertyInfo == null)
             {
                 return;
             }
 
-            var currentValue = PropertyInfo.GetValue(Source, PropertyIndexParameters());
+            var currentValue = this.PropertyInfo.GetValue(this.Source, this.PropertyIndexParameters());
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
@@ -79,8 +80,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             }
             else
             {
-                _currentChildBinding = SourceBindingFactory.CreateBinding(currentValue, _childTokens);
-                _currentChildBinding.Changed += ChildSourceBindingChanged;
+                this._currentChildBinding = this.SourceBindingFactory.CreateBinding(currentValue, this._childTokens);
+                this._currentChildBinding.Changed += this.ChildSourceBindingChanged;
             }
         }
 
@@ -88,35 +89,35 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
 
         private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
-            FireChanged();
+            this.FireChanged();
         }
 
         protected override void OnBoundPropertyChanged()
         {
-            UpdateChildBinding();
-            FireChanged();
+            this.UpdateChildBinding();
+            this.FireChanged();
         }
 
         public override object GetValue()
         {
-            if (_currentChildBinding == null)
+            if (this._currentChildBinding == null)
             {
                 return MvxBindingConstant.UnsetValue;
             }
 
-            return _currentChildBinding.GetValue();
+            return this._currentChildBinding.GetValue();
         }
 
         public override void SetValue(object value)
         {
-            if (_currentChildBinding == null)
+            if (this._currentChildBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "SetValue ignored in binding - target property path missing");
                 return;
             }
 
-            _currentChildBinding.SetValue(value);
+            this._currentChildBinding.SetValue(value);
         }
     }
 }

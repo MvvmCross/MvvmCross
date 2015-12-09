@@ -5,29 +5,31 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.CrossCore.Touch.Platform;
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Touch;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace MvvmCross.Touch.Platform
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Binding.Touch;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.Platform.Touch.Platform;
+    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Touch.Views;
+    using MvvmCross.Touch.Views.Presenters;
+
+    using UIKit;
+
     public abstract class MvxTouchSetup
         : MvxSetup
     {
@@ -38,19 +40,19 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
-            _window = window;
-            _applicationDelegate = applicationDelegate;
+            this._window = window;
+            this._applicationDelegate = applicationDelegate;
         }
 
         protected MvxTouchSetup(IMvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
         {
-            _presenter = presenter;
-            _applicationDelegate = applicationDelegate;
+            this._presenter = presenter;
+            this._applicationDelegate = applicationDelegate;
         }
 
-        protected UIWindow Window => _window;
+        protected UIWindow Window => this._window;
 
-        protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
+        protected IMvxApplicationDelegate ApplicationDelegate => this._applicationDelegate;
 
         protected override IMvxTrace CreateDebugTrace()
         {
@@ -61,7 +63,7 @@ namespace Cirrious.MvvmCross.Touch.Platform
         {
             var toReturn = new MvxLoaderPluginManager();
             var registry = new MvxLoaderPluginRegistry(".Touch", toReturn.Finders);
-            AddPluginsLoaders(registry);
+            this.AddPluginsLoaders(registry);
             return toReturn;
         }
 
@@ -72,8 +74,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateTouchViewsContainer();
-            RegisterTouchViewCreator(container);
+            var container = this.CreateTouchViewsContainer();
+            this.RegisterTouchViewCreator(container);
             return container;
         }
 
@@ -90,21 +92,21 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxTouchViewDispatcher(Presenter);
+            return new MvxTouchViewDispatcher(this.Presenter);
         }
 
         protected override void InitializePlatformServices()
         {
-            RegisterPlatformProperties();
+            this.RegisterPlatformProperties();
             // for now we continue to register the old style platform properties
-            RegisterOldStylePlatformProperties();
-            RegisterPresenter();
-            RegisterLifetime();
+            this.RegisterOldStylePlatformProperties();
+            this.RegisterPresenter();
+            this.RegisterLifetime();
         }
 
         protected virtual void RegisterPlatformProperties()
         {
-            Mvx.RegisterSingleton<IMvxTouchSystem>(CreateTouchSystemProperties());
+            Mvx.RegisterSingleton<IMvxTouchSystem>(this.CreateTouchSystemProperties());
         }
 
         protected virtual MvxTouchSystem CreateTouchSystemProperties()
@@ -120,48 +122,48 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+            Mvx.RegisterSingleton<IMvxLifetime>(this._applicationDelegate);
         }
 
         protected IMvxTouchViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreatePresenter();
-                return _presenter;
+                this._presenter = this._presenter ?? this.CreatePresenter();
+                return this._presenter;
             }
         }
 
         protected virtual IMvxTouchViewPresenter CreatePresenter()
         {
-            return new MvxTouchViewPresenter(_applicationDelegate, _window);
+            return new MvxTouchViewPresenter(this._applicationDelegate, this._window);
         }
 
         protected virtual void RegisterPresenter()
         {
-            var presenter = Presenter;
+            var presenter = this.Presenter;
             Mvx.RegisterSingleton(presenter);
             Mvx.RegisterSingleton<IMvxTouchModalHost>(presenter);
         }
 
         protected override void InitializeLastChance()
         {
-            InitializeBindingBuilder();
+            this.InitializeBindingBuilder();
             base.InitializeLastChance();
         }
 
         protected virtual void InitializeBindingBuilder()
         {
-            RegisterBindingBuilderCallbacks();
-            var bindingBuilder = CreateBindingBuilder();
+            this.RegisterBindingBuilderCallbacks();
+            var bindingBuilder = this.CreateBindingBuilder();
             bindingBuilder.DoRegistration();
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -177,8 +179,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.Fill(ValueConverterAssemblies);
-            registry.Fill(ValueConverterHolders);
+            registry.Fill(this.ValueConverterAssemblies);
+            registry.Fill(this.ValueConverterHolders);
         }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
@@ -188,8 +190,8 @@ namespace Cirrious.MvvmCross.Touch.Platform
             get
             {
                 var toReturn = new List<Assembly>();
-                toReturn.AddRange(GetViewModelAssemblies());
-                toReturn.AddRange(GetViewAssemblies());
+                toReturn.AddRange(this.GetViewModelAssemblies());
+                toReturn.AddRange(this.GetViewAssemblies());
                 return toReturn;
             }
         }

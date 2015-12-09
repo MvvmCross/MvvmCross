@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+
     public class Test4ViewModel : MvxViewModel
     {
         public ITestThing Thing { get; private set; }
 
         public Test4ViewModel(ITestThing thing)
         {
-            Thing = thing;
+            this.Thing = thing;
         }
 
         public override void Start()

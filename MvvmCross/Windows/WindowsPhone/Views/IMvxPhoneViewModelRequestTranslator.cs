@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxPhoneViewModelRequestTranslator
     {
         MvxViewModelRequest GetRequestFromXamlUri(Uri viewUri);

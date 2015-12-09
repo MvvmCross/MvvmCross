@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+
     [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIocOptions")]
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer

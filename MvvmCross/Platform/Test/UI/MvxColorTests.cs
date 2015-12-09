@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
-using NUnit.Framework;
-
-namespace Cirrious.CrossCore.Test.UI
+namespace MvvmCross.Platform.Test.UI
 {
+    using MvvmCross.Platform.UI;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxColorTests
     {

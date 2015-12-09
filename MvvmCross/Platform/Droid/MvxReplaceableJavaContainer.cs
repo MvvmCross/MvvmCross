@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Java.Lang;
-
-namespace Cirrious.CrossCore.Droid
+namespace MvvmCross.Platform.Droid
 {
+    using Java.Lang;
+
     public class MvxReplaceableJavaContainer : Object
     {
         public object Object { get; set; }
 
         public override string ToString()
         {
-            return Object?.ToString() ?? string.Empty;
+            return this.Object?.ToString() ?? string.Empty;
         }
     }
 }

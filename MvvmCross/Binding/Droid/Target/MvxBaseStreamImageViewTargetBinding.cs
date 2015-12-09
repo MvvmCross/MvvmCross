@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content.Res;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Widget;
-using System.IO;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System.IO;
+
+    using Android.Content.Res;
+    using Android.Graphics;
+    using Android.Graphics.Drawables;
+    using Android.Widget;
+
     public abstract class MvxBaseStreamImageViewTargetBinding
         : MvxBaseImageViewTargetBinding
     {
@@ -23,7 +24,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         protected override bool GetBitmap(object value, out Bitmap bitmap)
         {
-            var assetStream = GetStream(value);
+            var assetStream = this.GetStream(value);
             if (assetStream == null)
             {
                 bitmap = null;

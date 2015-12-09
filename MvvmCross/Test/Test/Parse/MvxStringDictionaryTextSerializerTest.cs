@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Parse.StringDictionary;
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Test.Parse
+namespace MvvmCross.Test.Parse
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Parse.StringDictionary;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform;
+    using MvvmCross.Test.Mocks.TestViewModels;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxStringDictionaryTextSerializerTest
         : MvxIoCSupportingTest
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Test.Parse
             ClearAll();
 
             var viewModelNameLookup = new MvxViewModelByNameLookup();
-            viewModelNameLookup.AddAll(GetType().Assembly);
+            viewModelNameLookup.AddAll(this.GetType().Assembly);
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });

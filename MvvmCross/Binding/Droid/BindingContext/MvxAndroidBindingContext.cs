@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Binding.Droid.BindingContext
 {
+    using System;
+
+    using Android.Content;
+    using Android.Views;
+
+    using MvvmCross.Binding.Droid.Views;
+
     public class MvxAndroidBindingContext
         : MvxBindingContext, IMvxAndroidBindingContext
     {
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflaterHolder layoutInflaterHolder, object source = null)
             : base(source)
         {
-            _droidContext = droidContext;
+            this._droidContext = droidContext;
             this._layoutInflaterHolder = layoutInflaterHolder;
         }
 
@@ -34,12 +35,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
-            return BindingInflate(resourceId, viewGroup, true);
+            return this.BindingInflate(resourceId, viewGroup, true);
         }
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup, bool attachToRoot)
         {
-            var view = CommonInflate(
+            var view = this.CommonInflate(
                 resourceId,
                 viewGroup,
                 attachToRoot);
@@ -49,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
         [Obsolete("Switch to new CommonInflate method - with additional attachToRoot parameter")]
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup)
         {
-            return CommonInflate(resourceId, viewGroup, viewGroup != null);
+            return this.CommonInflate(resourceId, viewGroup, viewGroup != null);
         }
 
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup, bool attachToRoot)

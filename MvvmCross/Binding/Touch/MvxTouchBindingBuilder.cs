@@ -5,19 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Touch.Target;
-using Cirrious.MvvmCross.Binding.Touch.ValueConverters;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch
+namespace MvvmCross.Binding.Touch
 {
+    using System;
+
+    using MvvmCross.Binding.Touch.Target;
+    using MvvmCross.Binding.Touch.ValueConverters;
+    using MvvmCross.Binding.Touch.Views;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxTouchBindingBuilder
         : MvxBindingBuilder
     {
@@ -32,12 +31,12 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                       Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
                                       Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            _fillRegistryAction = fillRegistryAction;
-            _fillValueConvertersAction = fillValueConvertersAction;
-            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
-            _fillBindingNamesAction = fillBindingNamesAction;
+            this._fillRegistryAction = fillRegistryAction;
+            this._fillValueConvertersAction = fillValueConvertersAction;
+            this._fillAutoValueConvertersAction = fillAutoValueConvertersAction;
+            this._fillBindingNamesAction = fillBindingNamesAction;
 
-            _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
+            this._unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -113,14 +112,14 @@ namespace Cirrious.MvvmCross.Binding.Touch
                                                           view => new MvxUIViewTapTargetBinding(view, 3, 3));
             */
 
-            _fillRegistryAction?.Invoke(registry);
+            this._fillRegistryAction?.Invoke(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
-            _fillValueConvertersAction?.Invoke(registry);
+            this._fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
@@ -129,9 +128,9 @@ namespace Cirrious.MvvmCross.Binding.Touch
 
             //register converter for xamarin unified types
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
-                autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
+                autoValueConverters.Register(kvp.Key, kvp.Value, this._unifiedValueTypesConverter);
 
-            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
+            this._fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -158,7 +157,7 @@ namespace Cirrious.MvvmCross.Binding.Touch
             registry.AddOrOverwrite(typeof(UISegmentedControl), "SelectedSegment");
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), "Hidden");
 
-            _fillBindingNamesAction?.Invoke(registry);
+            this._fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

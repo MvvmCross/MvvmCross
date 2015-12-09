@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Android.Widget;
-using System;
-using System.Collections.Specialized;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections.Specialized;
+
+    using Android.Views;
+    using Android.Widget;
+
     public static class MvxViewGroupExtensions
     {
         public static void UpdateDataSetFromChange<T>(this T viewGroup, object sender,

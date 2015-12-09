@@ -5,15 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Parse;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.CrossCore.Test
+namespace MvvmCross.Platform.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Parse;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxParserTest
     {
@@ -25,82 +27,82 @@ namespace Cirrious.CrossCore.Test
         {
             public void CallReset(string toParse)
             {
-                Reset(toParse);
+                this.Reset(toParse);
             }
 
             public string GetFullText()
             {
-                return FullText;
+                return this.FullText;
             }
 
             public bool GetIsComplete()
             {
-                return IsComplete;
+                return this.IsComplete;
             }
 
             public int GetCurrentIndex()
             {
-                return CurrentIndex;
+                return this.CurrentIndex;
             }
 
             public char GetCurrentChar()
             {
-                return CurrentChar;
+                return this.CurrentChar;
             }
 
             public void CallMoveNext(uint increment = 1)
             {
-                MoveNext(increment);
+                this.MoveNext(increment);
             }
 
             public string CallReadQuotedString()
             {
-                return ReadQuotedString();
+                return this.ReadQuotedString();
             }
 
             public uint CallReadUnsignedInteger()
             {
-                return ReadUnsignedInteger();
+                return this.ReadUnsignedInteger();
             }
 
             public char CallReadEscapedCharacter()
             {
-                return ReadEscapedCharacter();
+                return this.ReadEscapedCharacter();
             }
 
             public void CallSkipWhitespace()
             {
-                SkipWhitespace();
+                this.SkipWhitespace();
             }
 
             public void CallSkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
             {
-                SkipWhitespaceAndCharacters(toSkip);
+                this.SkipWhitespaceAndCharacters(toSkip);
             }
 
             public void CallSkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
             {
-                SkipWhitespaceAndCharacters(toSkip);
+                this.SkipWhitespaceAndCharacters(toSkip);
             }
 
             public object CallReadValue()
             {
-                return ReadValue();
+                return this.ReadValue();
             }
 
             public object CallReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
             {
-                return ReadEnumerationValue(enumerationType, ignoreCase);
+                return this.ReadEnumerationValue(enumerationType, ignoreCase);
             }
 
             public string CallReadValidCSharpName()
             {
-                return ReadValidCSharpName();
+                return this.ReadValidCSharpName();
             }
 
             public string CallReadTextUntilWhitespaceOr(params char[] items)
             {
-                return ReadTextUntilWhitespaceOr(items);
+                return this.ReadTextUntilWhitespaceOr(items);
             }
         }
 
@@ -178,13 +180,13 @@ namespace Cirrious.CrossCore.Test
                     {"\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar"},
                     {"\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar"},
                 };
-            DoReadValueTests(tests);
+            this.DoReadValueTests(tests);
         }
 
         private void DoReadValueTests(Dictionary<string, object> tests)
         {
             foreach (var t in tests)
-                DoReadValueTest(t.Key, t.Value);
+                this.DoReadValueTest(t.Key, t.Value);
         }
 
         private void DoReadValueTest(string input, object expectedOutput)
@@ -208,7 +210,7 @@ namespace Cirrious.CrossCore.Test
                     {"FALSE", false},
                     {"false", false},
                 };
-            DoReadValueTests(tests);
+            this.DoReadValueTests(tests);
         }
 
         [Test]
@@ -230,7 +232,7 @@ namespace Cirrious.CrossCore.Test
             var tests = new[] { 0, 1, 2, 3, -123, -1, Int64.MinValue, Int64.MaxValue };
             var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
                                           x => (object)x);
-            DoReadValueTests(dict);
+            this.DoReadValueTests(dict);
         }
 
         [Test]
@@ -240,7 +242,7 @@ namespace Cirrious.CrossCore.Test
             var tests = new[] { 0.001, 1.123, 2.2343, -123.1232, -1.2323, -99999.93454, 9999.343455 };
             var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
                                           x => (object)x);
-            DoReadValueTests(dict);
+            this.DoReadValueTests(dict);
         }
 
         public enum MyEnum
@@ -264,9 +266,9 @@ namespace Cirrious.CrossCore.Test
         {
             foreach (var value in Enum.GetValues(typeof(MyEnum)))
             {
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
+                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
+                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
+                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
             }
         }
 

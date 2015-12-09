@@ -5,19 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.CrossCore.WindowsPhone.Tasks
+namespace MvvmCross.Platform.WindowsPhone.Tasks
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxWindowsPhoneTask
         : MvxMainThreadDispatchingObject
     {
         protected void DoWithInvalidOperationProtection(Action action)
         {
-            Dispatcher.RequestMainThreadAction(() =>
+            this.Dispatcher.RequestMainThreadAction(() =>
                 {
                     try
                     {

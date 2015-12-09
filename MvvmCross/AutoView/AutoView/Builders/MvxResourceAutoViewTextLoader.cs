@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Builders
+namespace MvvmCross.AutoView.Builders
 {
+    using System;
+
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxResourceAutoViewTextLoader : IMvxAutoViewTextLoader
     {
         public bool HasDefinition(Type viewModelType, string key)

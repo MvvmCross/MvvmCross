@@ -5,20 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Touch.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Touch.Platform;
+
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFormFactorSpecificAttribute
         : MvxConditionalConventionalAttribute
     {
         public MvxFormFactorSpecificAttribute(MvxTouchFormFactor target)
         {
-            Target = target;
+            this.Target = target;
         }
 
         public MvxTouchFormFactor Target { get; private set; }
@@ -28,7 +29,7 @@ namespace Cirrious.MvvmCross.Touch.Views
             get
             {
                 var properties = Mvx.Resolve<IMvxTouchPlatformProperties>();
-                return (properties.FormFactor == Target);
+                return (properties.FormFactor == this.Target);
             }
         }
     }

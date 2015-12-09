@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Input;
+
+    using Foundation;
+
+    using UIKit;
+
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
@@ -22,26 +23,26 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         public MvxStandardTableViewCell(IntPtr handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
-            InitializeImageLoader();
+            this.InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            InitializeImageLoader();
+            this.InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitializeImageLoader();
+            this.InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageLoader();
+            this.InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -49,32 +50,32 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageLoader();
+            this.InitializeImageLoader();
         }
 
         private void InitializeImageLoader()
         {
-            _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
+            this._imageLoader = new MvxImageViewLoader(() => this.ImageView, this.SetNeedsLayout);
         }
 
-        public MvxImageViewLoader ImageLoader => _imageLoader;
+        public MvxImageViewLoader ImageLoader => this._imageLoader;
 
         public string TitleText
         {
-            get { return TextLabel.Text; }
-            set { TextLabel.Text = value; }
+            get { return this.TextLabel.Text; }
+            set { this.TextLabel.Text = value; }
         }
 
         public string DetailText
         {
-            get { return DetailTextLabel.Text; }
-            set { DetailTextLabel.Text = value; }
+            get { return this.DetailTextLabel.Text; }
+            set { this.DetailTextLabel.Text = value; }
         }
 
         public string ImageUrl
         {
-            get { return _imageLoader.ImageUrl; }
-            set { _imageLoader.ImageUrl = value; }
+            get { return this._imageLoader.ImageUrl; }
+            set { this._imageLoader.ImageUrl = value; }
         }
 
         public ICommand SelectedCommand { get; set; }
@@ -85,13 +86,13 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             base.SetSelected(selected, animated);
 
-            if (_isSelected == selected)
+            if (this._isSelected == selected)
                 return;
 
-            _isSelected = selected;
-            if (_isSelected)
+            this._isSelected = selected;
+            if (this._isSelected)
             {
-                SelectedCommand?.Execute(null);
+                this.SelectedCommand?.Execute(null);
             }
         }
 
@@ -99,7 +100,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                _imageLoader.Dispose();
+                this._imageLoader.Dispose();
             }
             base.Dispose(disposing);
         }

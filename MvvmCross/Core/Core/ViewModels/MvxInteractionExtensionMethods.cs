@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.WeakSubscription;
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.WeakSubscription;
+
     public static class MvxInteractionExtensionMethods
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)

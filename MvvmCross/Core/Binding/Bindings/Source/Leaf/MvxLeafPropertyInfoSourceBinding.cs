@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
+namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Binding.ExtensionMethods;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
         protected MvxLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
@@ -21,21 +22,21 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType => PropertyInfo?.PropertyType;
+        public override Type SourceType => this.PropertyInfo?.PropertyType;
 
         protected override void OnBoundPropertyChanged()
         {
-            FireChanged();
+            this.FireChanged();
         }
 
         public override object GetValue()
         {
-            if (PropertyInfo == null)
+            if (this.PropertyInfo == null)
             {
                 return MvxBindingConstant.UnsetValue;
             }
 
-            if (!PropertyInfo.CanRead)
+            if (!this.PropertyInfo.CanRead)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetValue ignored in binding - target property is writeonly");
                 return MvxBindingConstant.UnsetValue;
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
             try
             {
-                return PropertyInfo.GetValue(Source, PropertyIndexParameters());
+                return this.PropertyInfo.GetValue(this.Source, this.PropertyIndexParameters());
             }
             catch (TargetInvocationException)
             {
@@ -57,14 +58,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            if (PropertyInfo == null)
+            if (this.PropertyInfo == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - source property {0} is missing", PropertyName);
+                                      "SetValue ignored in binding - source property {0} is missing", this.PropertyName);
                 return;
             }
 
-            if (!PropertyInfo.CanWrite)
+            if (!this.PropertyInfo.CanWrite)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - target property is readonly");
                 return;
@@ -72,14 +73,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
             try
             {
-                var propertyType = PropertyInfo.PropertyType;
+                var propertyType = this.PropertyInfo.PropertyType;
                 var safeValue = propertyType.MakeSafeValue(value);
 
                 // if safeValue matches the existing value, then don't call set
-                if (EqualsCurrentValue(safeValue))
+                if (this.EqualsCurrentValue(safeValue))
                     return;
 
-                PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());
+                this.PropertyInfo.SetValue(this.Source, safeValue, this.PropertyIndexParameters());
             }
             catch (Exception exception)
             {

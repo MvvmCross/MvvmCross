@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
     public static class MvxConventionAttributeExtensionMethods
     {
         /// <summary>

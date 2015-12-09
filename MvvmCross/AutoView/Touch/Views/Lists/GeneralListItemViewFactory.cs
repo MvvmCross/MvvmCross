@@ -5,24 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Foundation;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace MvvmCross.AutoView.Touch.Views.Lists
 {
+    using System.Collections.Generic;
+
+    using Foundation;
+
+    using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Platform;
+
+    using UIKit;
+
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory
 
     {
         public UITableViewCell BuildView(NSIndexPath indexPath, object item, string cellId)
         {
-            var bindings = GetBindingDescriptions();
-            var style = GetCellStyle();
+            var bindings = this.GetBindingDescriptions();
+            var style = this.GetCellStyle();
             var cell = new GeneralTableViewCell(bindings, style, new NSString(cellId));
             return cell;
         }
@@ -33,12 +34,12 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         public Dictionary<string, string> Bindings
         {
-            get { return _bindings; }
+            get { return this._bindings; }
             set
             {
                 // clear the cached _cachedBindingDescriptions - these can be regenerated when required
-                _cachedBindingDescriptions = null;
-                _bindings = value;
+                this._cachedBindingDescriptions = null;
+                this._bindings = value;
             }
         }
 
@@ -52,14 +53,14 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         protected virtual IEnumerable<MvxBindingDescription> GetBindingDescriptions()
         {
-            return _cachedBindingDescriptions ?? (_cachedBindingDescriptions = CreateBindingDescriptions());
+            return this._cachedBindingDescriptions ?? (this._cachedBindingDescriptions = this.CreateBindingDescriptions());
         }
 
         private IEnumerable<MvxBindingDescription> CreateBindingDescriptions()
         {
             var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
             var toReturn = new List<MvxBindingDescription>();
-            foreach (var binding in Bindings)
+            foreach (var binding in this.Bindings)
             {
                 var bindingDescription = parser.ParseSingle(binding.Value);
                 bindingDescription.TargetName = binding.Key;

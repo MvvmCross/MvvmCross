@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.MvvmCross.Binding.Bindings
+namespace MvvmCross.Binding.Bindings
 {
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public static class MvxBindingModeExtensionMethods
     {
         public static MvxBindingMode IfDefault(this MvxBindingMode bindingMode, MvxBindingMode modeIfDefault)

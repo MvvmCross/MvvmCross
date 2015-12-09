@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsStore.Views
+namespace MvvmCross.WindowsStore.Views
 {
+    using Windows.UI.Xaml.Controls;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public class MvxStoreViewDispatcher
         : MvxStoreMainThreadDispatcher
           , IMvxViewDispatcher
@@ -21,18 +22,18 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
         public MvxStoreViewDispatcher(IMvxStoreViewPresenter presenter, Frame rootFrame)
             : base(rootFrame.Dispatcher)
         {
-            _presenter = presenter;
-            _rootFrame = rootFrame;
+            this._presenter = presenter;
+            this._rootFrame = rootFrame;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
         {
-            return RequestMainThreadAction(() => _presenter.Show(request));
+            return this.RequestMainThreadAction(() => this._presenter.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
         }
     }
 }

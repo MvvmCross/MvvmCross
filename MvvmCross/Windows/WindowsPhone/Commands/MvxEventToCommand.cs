@@ -11,14 +11,14 @@
 
 #endregion Credit - MvvmLight
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Interactivity;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Commands
+namespace MvvmCross.WindowsPhone.Commands
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Interactivity;
+
     public class MvxEventToCommand : TriggerAction<DependencyObject>
     {
         /// <summary>
@@ -84,9 +84,9 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         /// </summary>
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
+            get { return (ICommand)this.GetValue(CommandProperty); }
 
-            set { SetValue(CommandProperty, value); }
+            set { this.SetValue(CommandProperty, value); }
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         {
             get { return this.GetValue(CommandParameterProperty); }
 
-            set { SetValue(CommandParameterProperty, value); }
+            set { this.SetValue(CommandParameterProperty, value); }
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
 
             set
             {
-                _commandParameterValue = value;
-                EnableDisableElement();
+                this._commandParameterValue = value;
+                this.EnableDisableElement();
             }
         }
 
@@ -129,7 +129,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         {
             get { return (bool)this.GetValue(MustToggleIsEnabledProperty); }
 
-            set { SetValue(MustToggleIsEnabledProperty, value); }
+            set { this.SetValue(MustToggleIsEnabledProperty, value); }
         }
 
         /// <summary>
@@ -149,8 +149,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
 
             set
             {
-                _mustToggleValue = value;
-                EnableDisableElement();
+                this._mustToggleValue = value;
+                this.EnableDisableElement();
             }
         }
 
@@ -160,14 +160,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         protected override void OnAttached()
         {
             base.OnAttached();
-            EnableDisableElement();
+            this.EnableDisableElement();
         }
 
 #if SILVERLIGHT
 
         private Control GetAssociatedObject()
         {
-            return AssociatedObject as Control;
+            return this.AssociatedObject as Control;
         }
 
 #else
@@ -191,7 +191,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         /// this trigger is invoked.</returns>
         private ICommand GetCommand()
         {
-            return Command;
+            return this.Command;
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         /// </summary>
         public void Invoke()
         {
-            Invoke(null);
+            this.Invoke(null);
         }
 
         /// <summary>
@@ -219,18 +219,18 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
         /// <param name="parameter">The EventArgs of the fired event.</param>
         protected override void Invoke(object parameter)
         {
-            if (AssociatedElementIsDisabled())
+            if (this.AssociatedElementIsDisabled())
             {
                 return;
             }
 
-            var command = GetCommand();
-            var commandParameter = CommandParameterValue;
+            var command = this.GetCommand();
+            var commandParameter = this.CommandParameterValue;
 
             if (commandParameter == null
-                && PassEventArgsToCommand)
+                && this.PassEventArgsToCommand)
             {
-                commandParameter = MapCommandParameter(parameter);
+                commandParameter = this.MapCommandParameter(parameter);
             }
 
             if (command != null
@@ -271,16 +271,16 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
 
         private bool AssociatedElementIsDisabled()
         {
-            var element = GetAssociatedObject();
+            var element = this.GetAssociatedObject();
 
-            return AssociatedObject == null
+            return this.AssociatedObject == null
                    || (element != null
                        && !element.IsEnabled);
         }
 
         private void EnableDisableElement()
         {
-            var element = GetAssociatedObject();
+            var element = this.GetAssociatedObject();
 
             if (element == null)
             {
@@ -298,7 +298,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Commands
 
         private void OnCommandCanExecuteChanged(object sender, EventArgs e)
         {
-            EnableDisableElement();
+            this.EnableDisableElement();
         }
     }
 }

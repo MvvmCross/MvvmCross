@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
+namespace MvvmCross.BindingEx.WindowsPhone
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxWindowsAssemblyCache
         : MvxSingleton<IMvxWindowsAssemblyCache>
           , IMvxWindowsAssemblyCache
@@ -29,7 +30,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
 
         public MvxWindowsAssemblyCache()
         {
-            Assemblies = new List<Assembly>();
+            this.Assemblies = new List<Assembly>();
         }
 
         public IList<Assembly> Assemblies { get; private set; }

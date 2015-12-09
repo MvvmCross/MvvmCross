@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using UIKit;
+
     public class MvxUIViewHiddenTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {
         public MvxUIViewHiddenTargetBinding(UIView target)
@@ -19,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = View;
+            var view = this.View;
             if (view == null)
                 return;
 
