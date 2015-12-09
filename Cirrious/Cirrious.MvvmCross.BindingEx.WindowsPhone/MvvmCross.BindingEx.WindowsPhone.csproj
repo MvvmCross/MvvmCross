@@ -109,13 +109,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\MvvmCross.Core.WindowsPhone.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsPhone\MvvmCross.Platform.WindowsPhone.csproj">
       <Project>{2CA6800E-2CB5-4F76-BBE3-C4F7D445AF17}</Project>
-      <Name>MvvmCross.Core.WindowsPhone</Name>
+      <Name>MvvmCross.Platform.WindowsPhone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>

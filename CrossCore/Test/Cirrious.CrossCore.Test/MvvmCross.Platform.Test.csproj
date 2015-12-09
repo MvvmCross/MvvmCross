@@ -7,8 +7,8 @@
     <ProjectGuid>{666EB95D-7CD8-48B6-A2F8-395DECC84140}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Core.Test</RootNamespace>
-    <AssemblyName>MvvmCross.Core.Test</AssemblyName>
+    <RootNamespace>MvvmCross.Platform.Test</RootNamespace>
+    <AssemblyName>MvvmCross.Platform.Test</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

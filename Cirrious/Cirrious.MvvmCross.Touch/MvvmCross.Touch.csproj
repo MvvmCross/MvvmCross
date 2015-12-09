@@ -85,13 +85,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\MvvmCross.Core.Touch.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\MvvmCross.Platform.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
-      <Name>MvvmCross.Core.Touch</Name>
+      <Name>MvvmCross.Platform.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding.Touch\MvvmCross.Binding.Touch.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
@@ -105,9 +105,9 @@
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>MvvmCross.Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross</Name>
+      <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

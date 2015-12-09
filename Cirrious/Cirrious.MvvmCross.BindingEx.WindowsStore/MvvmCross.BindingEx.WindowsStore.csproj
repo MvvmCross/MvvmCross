@@ -35,13 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsStore\MvvmCross.Core.WindowsStore.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.WindowsStore\MvvmCross.Platform.WindowsStore.csproj">
       <Project>{e299a991-1d9f-47c0-9b65-5e7632372fa5}</Project>
-      <Name>MvvmCross.Core.WindowsStore</Name>
+      <Name>MvvmCross.Platform.WindowsStore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
@@ -55,9 +55,9 @@
       <Project>{ebe1bd6c-6a53-4e9f-9840-d6a1bd074dfd}</Project>
       <Name>MvvmCross.WindowsStore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.Core.csproj">
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
-      <Name>MvvmCross</Name>
+      <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

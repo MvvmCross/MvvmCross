@@ -7,8 +7,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Core.WindowsPhone</RootNamespace>
-    <AssemblyName>MvvmCross.Core.WindowsPhone</AssemblyName>
+    <RootNamespace>MvvmCross.Platform.WindowsPhone</RootNamespace>
+    <AssemblyName>MvvmCross.Platform.WindowsPhone</AssemblyName>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>
     </SilverlightVersion>
@@ -96,9 +96,9 @@
     <Compile Include="Tasks\MvxWindowsPhoneTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

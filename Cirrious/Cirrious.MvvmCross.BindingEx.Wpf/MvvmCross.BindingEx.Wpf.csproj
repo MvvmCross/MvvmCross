@@ -94,13 +94,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Wpf\MvvmCross.Core.Wpf.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Wpf\MvvmCross.Platform.Wpf.csproj">
       <Project>{3688D6FC-E7F4-485F-8B27-96C0A8C7EAED}</Project>
-      <Name>MvvmCross.Core.Wpf</Name>
+      <Name>MvvmCross.Platform.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Core</Name>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cirrious.MvvmCross.Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
@@ -110,9 +110,9 @@
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>MvvmCross.Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.csproj">
+    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross</Name>
+      <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
