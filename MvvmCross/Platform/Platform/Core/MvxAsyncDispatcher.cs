@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Threading.Tasks;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+    using System.Threading.Tasks;
+
 #warning should really kill this static - replace with IoC please
 
     public static class MvxAsyncDispatcher

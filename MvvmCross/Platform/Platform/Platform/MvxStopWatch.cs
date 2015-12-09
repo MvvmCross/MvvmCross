@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System;
+
     public class MvxStopWatch
         : IDisposable
     {
@@ -18,14 +18,14 @@ namespace Cirrious.CrossCore.Platform
 
         private MvxStopWatch(string tag, string text, params object[] args)
         {
-            _tag = tag;
-            _startTickCount = Environment.TickCount;
-            _message = string.Format(text, args);
+            this._tag = tag;
+            this._startTickCount = Environment.TickCount;
+            this._message = string.Format(text, args);
         }
 
         public void Dispose()
         {
-            MvxTrace.TaggedTrace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            MvxTrace.TaggedTrace(this._tag, "{0} - {1}", Environment.TickCount - this._startTickCount, this._message);
             GC.SuppressFinalize(this);
         }
 

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-
-namespace Cirrious.MvvmCross.ViewModels
+﻿namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
+
     public static class MvxNotifyPropertyChangedExtensions
     {
         private static TReturn RaiseAndSetIfChanged<TSource, TReturn, TActionParameter>(

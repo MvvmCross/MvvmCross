@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Platform;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxImageViewWrapper
         : IDisposable
     {
@@ -21,43 +23,43 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public string ImageUrl
         {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
+            get { return this._imageHelper.ImageUrl; }
+            set { this._imageHelper.ImageUrl = value; }
         }
 
         public string DefaultImagePath
         {
-            get { return _imageHelper.DefaultImagePath; }
-            set { _imageHelper.DefaultImagePath = value; }
+            get { return this._imageHelper.DefaultImagePath; }
+            set { this._imageHelper.DefaultImagePath = value; }
         }
 
         public string ErrorImagePath
         {
-            get { return _imageHelper.ErrorImagePath; }
-            set { _imageHelper.ErrorImagePath = value; }
+            get { return this._imageHelper.ErrorImagePath; }
+            set { this._imageHelper.ErrorImagePath = value; }
         }
 
         public MvxImageViewWrapper(Func<UIImageView> imageView)
         {
-            _imageView = imageView;
-            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
-            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+            this._imageView = imageView;
+            this._imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
+            this._imageHelper.ImageChanged += this.ImageHelperOnImageChanged;
         }
 
         ~MvxImageViewWrapper()
         {
-            Dispose(false);
+            this.Dispose(false);
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            var imageView = _imageView();
+            var imageView = this._imageView();
             if (imageView != null && mvxValueEventArgs.Value != null)
                 imageView.Image = mvxValueEventArgs.Value;
         }
@@ -66,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                _imageHelper.Dispose();
+                this._imageHelper.Dispose();
             }
         }
     }

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class MvxPhoneViewAttribute : Attribute
     {
         public MvxPhoneViewAttribute(String url)
         {
-            Url = url;
+            this.Url = url;
         }
 
         public string Url { get; private set; }

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Auto.Dialog;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Core.Descriptions.Dialog;
-using System.Collections;
-using System.Reflection;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
+namespace MvvmCross.AutoView.ExtensionMethods
 {
+    using System.Collections;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions.Dialog;
+
+    using MvvmCross.AutoView.Auto.Dialog;
+    using MvvmCross.Platform;
+
     public static class MvxMissingDescriptionExtensionMethods
     {
         public static ElementDescription CreateMissingDialogDescription(this IMvxViewModel viewModel)

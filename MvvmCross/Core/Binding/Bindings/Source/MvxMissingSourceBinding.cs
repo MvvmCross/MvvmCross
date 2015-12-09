@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace MvvmCross.Binding.Bindings.Source
 {
+    using System;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxMissingSourceBinding : MvxSourceBinding
     {
         public MvxMissingSourceBinding(object source) : base(source)

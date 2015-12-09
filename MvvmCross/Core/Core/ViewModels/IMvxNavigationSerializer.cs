@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using MvvmCross.Platform.Platform;
+
     public interface IMvxNavigationSerializer
     {
         IMvxTextSerializer Serializer { get; }

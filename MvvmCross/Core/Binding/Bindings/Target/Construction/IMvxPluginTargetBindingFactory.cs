@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
+namespace MvvmCross.Binding.Bindings.Target.Construction
 {
+    using System.Collections.Generic;
+
     public interface IMvxPluginTargetBindingFactory : IMvxTargetBindingFactory
     {
         IEnumerable<MvxTypeAndNamePair> SupportedTypes { get; }

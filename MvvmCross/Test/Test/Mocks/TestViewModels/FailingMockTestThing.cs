@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using System;
+
     public class FailingMockTestThing : ITestThing
     {
         public FailingMockTestThing()

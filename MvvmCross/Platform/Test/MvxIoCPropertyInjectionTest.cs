@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using NUnit.Framework;
-
-namespace Cirrious.CrossCore.Test
+namespace MvvmCross.Platform.Test
 {
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.IoC;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxIocPropertyInjectionTest
     {

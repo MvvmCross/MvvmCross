@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxBaseConsoleContainer
         : MvxViewsContainer
           , IMvxConsoleNavigation
@@ -21,14 +20,14 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
+            this._presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
         protected bool HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, bool> handler;
 
-            if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
+            if (this._presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
                 if (handler(hint)) return true;
             }
@@ -46,7 +45,7 @@ namespace Cirrious.MvvmCross.Console.Views
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

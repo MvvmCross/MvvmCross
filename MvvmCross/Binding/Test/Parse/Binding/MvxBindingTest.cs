@@ -1,9 +1,7 @@
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Test.Core;
-using NUnit.Framework;
-
-namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding
+namespace MvvmCross.Binding.Test.Parse.Binding
 {
+    using NUnit.Framework;
+
     public abstract class MvxBindingTest
         : MvxIoCSupportingTest
     {

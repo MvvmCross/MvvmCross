@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Dialog;
-using System;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
+namespace MvvmCross.AutoView.Auto.Dialog
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions;
+    using CrossUI.Core.Descriptions.Dialog;
+
     // TODO
     // - Radio, Html, Image, MultilineEntry, StringMultiline, StyledMultiline, View, WebContent
 
@@ -27,14 +28,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                            Expression<Func<ICommand>> selectedCommand = null, string layoutName = null)
             : base(key, onlyFor, notFor)
         {
-            Caption = caption;
-            SelectedCommand = selectedCommand;
-            LayoutName = layoutName;
+            this.Caption = caption;
+            this.SelectedCommand = selectedCommand;
+            this.LayoutName = layoutName;
         }
 
         public sealed override KeyedDescription ToDescription()
         {
-            return ToElementDescription();
+            return this.ToElementDescription();
         }
 
         public virtual ElementDescription ToElementDescription()
@@ -42,24 +43,24 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
             var toReturn = new ElementDescription();
             base.Fill(toReturn);
 
-            if (Caption != null)
+            if (this.Caption != null)
             {
-                toReturn.Properties["Caption"] = Caption;
+                toReturn.Properties["Caption"] = this.Caption;
             }
 
-            if (LayoutName != null)
+            if (this.LayoutName != null)
             {
-                toReturn.Properties["LayoutName"] = LayoutName;
+                toReturn.Properties["LayoutName"] = this.LayoutName;
             }
 
             string selectedCommandName = null;
-            if (SelectedCommandNameOverride != null)
+            if (this.SelectedCommandNameOverride != null)
             {
-                selectedCommandName = SelectedCommandNameOverride;
+                selectedCommandName = this.SelectedCommandNameOverride;
             }
-            else if (SelectedCommand != null)
+            else if (this.SelectedCommand != null)
             {
-                selectedCommandName = SelectedCommand.GetPropertyText();
+                selectedCommandName = this.SelectedCommand.GetPropertyText();
             }
 
             if (selectedCommandName != null)

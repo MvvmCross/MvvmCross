@@ -5,22 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Android.Widget;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using CrossUI.Droid;
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace MvvmCross.AutoView.Droid.Views.Lists
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Input;
+
+    using Android.Content;
+    using Android.Views;
+    using Android.Widget;
+
+    using CrossUI.Droid;
+
+    using MvvmCross.AutoView.Droid.Interfaces.Lists;
+    using MvvmCross.Platform;
+
     public class GeneralListItemView
         : MvxBaseListItemView
           , IMvxLayoutListItemView
@@ -34,10 +33,10 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                                    string templateName)
             : base(context, layoutInflaterHolder, source)
         {
-            _templateName = templateName;
-            var templateId = GetTemplateId();
+            this._templateName = templateName;
+            var templateId = this.GetTemplateId();
             this.BindingInflate(templateId, this);
-            BindProperties(textBindings);
+            this.BindProperties(textBindings);
 #warning Need to sort out the HandleClick stuff?
             //this.Click += HandleClick;
         }
@@ -46,15 +45,15 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         private void HandleClick(object sender, EventArgs e)
         {
-            _selectedCommand?.Execute(base.DataContext);
+            this._selectedCommand?.Execute(base.DataContext);
         }
 
         private int GetTemplateId()
         {
-            return DroidResources.FindResourceId("listitem_" + _templateName);
+            return DroidResources.FindResourceId("listitem_" + this._templateName);
         }
 
-        public string UniqueName => @"General$" + _templateName;
+        public string UniqueName => @"General$" + this._templateName;
 
         private void BindProperties(Dictionary<string, string> textBindings)
         {
@@ -72,22 +71,22 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         public string Title
         {
-            get { return GetTextFor("title"); }
-            set { SetTextFor("title", value); }
+            get { return this.GetTextFor("title"); }
+            set { this.SetTextFor("title", value); }
         }
 
         public string SubTitle
         {
-            get { return GetTextFor("subtitle"); }
-            set { SetTextFor("subtitle", value); }
+            get { return this.GetTextFor("subtitle"); }
+            set { this.SetTextFor("subtitle", value); }
         }
 
         private ICommand _selectedCommand;
 
         public ICommand SelectedCommand
         {
-            get { return _selectedCommand; }
-            set { _selectedCommand = value; }
+            get { return this._selectedCommand; }
+            set { this._selectedCommand = value; }
         }
 
         /*
@@ -112,7 +111,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         private void SetTextFor(string partName, string value)
         {
-            var view = FindSubView<TextView>(partName);
+            var view = this.FindSubView<TextView>(partName);
             if (view != null)
             {
                 view.Text = value;
@@ -121,7 +120,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
 
         private string GetTextFor(string partName)
         {
-            var view = FindSubView<TextView>(partName);
+            var view = this.FindSubView<TextView>(partName);
             return view?.Text;
         }
 

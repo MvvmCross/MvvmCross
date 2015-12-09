@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
+namespace MvvmCross.Binding.Bindings.Target.Construction
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+
     public class MvxTargetBindingFactoryRegistry : IMvxTargetBindingFactoryRegistry
     {
         private readonly Dictionary<string, IMvxPluginTargetBindingFactory> _lookups =
@@ -21,10 +22,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             IMvxTargetBinding binding;
-            if (TryCreateSpecificFactoryBinding(target, targetName, out binding))
+            if (this.TryCreateSpecificFactoryBinding(target, targetName, out binding))
                 return binding;
 
-            if (TryCreateReflectionBasedBinding(target, targetName, out binding))
+            if (this.TryCreateReflectionBasedBinding(target, targetName, out binding))
                 return binding;
 
             return null;
@@ -82,7 +83,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
-            var factory = FindSpecificFactory(target.GetType(), targetName);
+            var factory = this.FindSpecificFactory(target.GetType(), targetName);
             if (factory != null)
             {
                 binding = factory.CreateBinding(target, targetName);
@@ -97,8 +98,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         {
             foreach (var supported in factory.SupportedTypes)
             {
-                var key = GenerateKey(supported.Type, supported.Name);
-                _lookups[key] = factory;
+                var key = this.GenerateKey(supported.Type, supported.Name);
+                this._lookups[key] = factory;
             }
         }
 
@@ -110,14 +111,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
         {
             IMvxPluginTargetBindingFactory factory;
-            var key = GenerateKey(type, name);
-            if (_lookups.TryGetValue(key, out factory))
+            var key = this.GenerateKey(type, name);
+            if (this._lookups.TryGetValue(key, out factory))
             {
                 return factory;
             }
             var baseType = type.GetTypeInfo().BaseType;
             if (baseType != null)
-                return FindSpecificFactory(baseType, name);
+                return this.FindSpecificFactory(baseType, name);
             return null;
         }
     }

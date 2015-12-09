@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace MvvmCross.Touch.Views.Presenters
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxTouchViewPresenter
         : MvxBaseTouchViewPresenter
     {
@@ -24,14 +25,14 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             get; protected set;
         }
 
-        protected virtual IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
+        protected virtual IUIApplicationDelegate ApplicationDelegate => this._applicationDelegate;
 
-        protected virtual UIWindow Window => _window;
+        protected virtual UIWindow Window => this._window;
 
         public MvxTouchViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
-            _applicationDelegate = applicationDelegate;
-            _window = window;
+            this._applicationDelegate = applicationDelegate;
+            this._window = window;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -42,7 +43,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             //if (request.ClearTop)
             //    ClearBackStack();
 
-            Show(view);
+            this.Show(view);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -51,7 +52,7 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
             if (hint is MvxClosePresentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
         }
@@ -62,20 +63,20 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             if (viewController == null)
                 throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
 
-            if (MasterNavigationController == null)
-                ShowFirstView(viewController);
+            if (this.MasterNavigationController == null)
+                this.ShowFirstView(viewController);
             else
-                MasterNavigationController.PushViewController(viewController, true /*animated*/);
+                this.MasterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
         public virtual void CloseModalViewController()
         {
-            MasterNavigationController.PopViewController(true);
+            this.MasterNavigationController.PopViewController(true);
         }
 
         public virtual void Close(IMvxViewModel toClose)
         {
-            var topViewController = MasterNavigationController.TopViewController;
+            var topViewController = this.MasterNavigationController.TopViewController;
 
             if (topViewController == null)
             {
@@ -99,12 +100,12 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                 return;
             }
 
-            MasterNavigationController.PopViewController(true);
+            this.MasterNavigationController.PopViewController(true);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            CurrentTopViewController.PresentViewController(viewController, animated, () => { });
+            this.CurrentTopViewController.PresentViewController(viewController, animated, () => { });
             return true;
         }
 
@@ -115,20 +116,20 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         protected virtual void ShowFirstView(UIViewController viewController)
         {
-            foreach (var view in _window.Subviews)
+            foreach (var view in this._window.Subviews)
                 view.RemoveFromSuperview();
 
-            MasterNavigationController = CreateNavigationController(viewController);
+            this.MasterNavigationController = this.CreateNavigationController(viewController);
 
-            OnMasterNavigationControllerCreated();
+            this.OnMasterNavigationControllerCreated();
 
-            SetWindowRootViewController(MasterNavigationController);
+            this.SetWindowRootViewController(this.MasterNavigationController);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
         {
-            _window.AddSubview(controller.View);
-            _window.RootViewController = controller;
+            this._window.AddSubview(controller.View);
+            this._window.RootViewController = controller;
         }
 
         protected virtual void OnMasterNavigationControllerCreated()
@@ -140,6 +141,6 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
             return new UINavigationController(viewController);
         }
 
-        protected virtual UIViewController CurrentTopViewController => MasterNavigationController.TopViewController;
+        protected virtual UIViewController CurrentTopViewController => this.MasterNavigationController.TopViewController;
     }
 }

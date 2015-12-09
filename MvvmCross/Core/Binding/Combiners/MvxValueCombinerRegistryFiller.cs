@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Binders;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System;
+
+    using MvvmCross.Binding.Binders;
+
     public class MvxValueCombinerRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>
           , IMvxValueCombinerRegistryFiller

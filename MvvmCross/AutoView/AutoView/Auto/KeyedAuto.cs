@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-
-namespace Cirrious.MvvmCross.AutoView.Auto
+namespace MvvmCross.AutoView.Auto
 {
+    using CrossUI.Core.Descriptions;
+
     public abstract class KeyedAuto : BaseAuto
     {
         public string Key { get; set; }
 
         protected KeyedAuto(string key, string onlyFor = null, string notFor = null)
         {
-            Key = key;
+            this.Key = key;
         }
 
         public abstract KeyedDescription ToDescription();
@@ -23,7 +23,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
         public void Fill(KeyedDescription keyedDescription)
         {
             base.Fill(keyedDescription);
-            keyedDescription.Key = Key;
+            keyedDescription.Key = this.Key;
         }
     }
 }

@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-using System.ComponentModel;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Test.ViewModels
+namespace MvvmCross.Test.ViewModels
 {
+    using System.ComponentModel;
+    using System.Windows.Input;
+
+    using MvvmCross.Core.ViewModels;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxCommandCollectionTest : MvxIoCSupportingTest
     {
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public void MyCommand()
             {
-                CountMyCommandCalled++;
+                this.CountMyCommandCalled++;
             }
 
             public int CountCanExecuteMyCommandCalled { get; set; }
@@ -31,7 +32,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    CountCanExecuteMyCommandCalled++;
+                    this.CountCanExecuteMyCommandCalled++;
                     return true;
                 }
             }
@@ -40,7 +41,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public void MyExCommand()
             {
-                CountMyExCommandCalled++;
+                this.CountMyExCommandCalled++;
             }
 
             public int CountCanExecuteMyExCommandCalled { get; set; }
@@ -49,7 +50,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    CountCanExecuteMyExCommandCalled++;
+                    this.CountCanExecuteMyExCommandCalled++;
                     return true;
                 }
             }
@@ -58,14 +59,14 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public void NotACmd()
             {
-                CountNotACmdCalled++;
+                this.CountNotACmdCalled++;
             }
 
             public int CountAnIntReturningCalled { get; set; }
 
             public int AnIntReturningCommand()
             {
-                CountAnIntReturningCalled++;
+                this.CountAnIntReturningCalled++;
                 return 99;
             }
 
@@ -74,7 +75,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr")]
             public void AttributedCommand(string ignored)
             {
-                CountAttributedCalled++;
+                this.CountAttributedCalled++;
             }
 
             public int CountAttributed2Called { get; set; }
@@ -82,7 +83,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr2", "CanExecuteAttributed2")]
             public void AttributedWithProperty()
             {
-                CountAttributed2Called++;
+                this.CountAttributed2Called++;
             }
 
             public int CountCanExecuteAttributed2Called { get; set; }
@@ -91,7 +92,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    CountCanExecuteAttributed2Called++;
+                    this.CountCanExecuteAttributed2Called++;
                     return true;
                 }
             }
@@ -102,7 +103,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public void RaisePropertyChanged(string propertyName)
             {
-                var handler = PropertyChanged;
+                var handler = this.PropertyChanged;
                 handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
@@ -114,7 +115,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr", "CanExecuteAttributed")]
             public void AttributedCommand(string ignored)
             {
-                CountAttributedCalled++;
+                this.CountAttributedCalled++;
             }
 
             public int CountAttributed2Called { get; set; }
@@ -122,7 +123,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr2", "CanExecuteAttributed")]
             public void AttributedWithProperty()
             {
-                CountAttributed2Called++;
+                this.CountAttributed2Called++;
             }
 
             public int CountCanExecuteAttributedCalled { get; set; }
@@ -131,7 +132,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    CountCanExecuteAttributedCalled++;
+                    this.CountCanExecuteAttributedCalled++;
                     return true;
                 }
             }
@@ -140,7 +141,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public void RaisePropertyChanged(string propertyName)
             {
-                var handler = PropertyChanged;
+                var handler = this.PropertyChanged;
                 handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
@@ -156,13 +157,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countMyCalled: 1, countCanExecuteMyCalled: 1);
+            this.CheckCounts(testObject, countMyCalled: 1, countCanExecuteMyCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countMyCalled: 4, countCanExecuteMyCalled: 4);
+            this.CheckCounts(testObject, countMyCalled: 4, countCanExecuteMyCalled: 4);
         }
 
         [Test]
@@ -176,13 +177,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyCalled: 1);
+            this.CheckCounts(testObject, countCanExecuteMyCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyCalled: 4);
+            this.CheckCounts(testObject, countCanExecuteMyCalled: 4);
         }
 
         [Test]
@@ -196,13 +197,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
+            this.CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
+            this.CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
         }
 
         [Test]
@@ -216,13 +217,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyExCalled: 1);
+            this.CheckCounts(testObject, countCanExecuteMyExCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyExCalled: 4);
+            this.CheckCounts(testObject, countCanExecuteMyExCalled: 4);
         }
 
         [Test]
@@ -236,13 +237,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["AnIntReturning"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countIntReturningCalled: 1);
+            this.CheckCounts(testObject, countIntReturningCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countIntReturningCalled: 4);
+            this.CheckCounts(testObject, countIntReturningCalled: 4);
         }
 
         [Test]
@@ -256,13 +257,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countAttributedCalled: 1);
+            this.CheckCounts(testObject, countAttributedCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countAttributedCalled: 4);
+            this.CheckCounts(testObject, countAttributedCalled: 4);
         }
 
         [Test]
@@ -276,13 +277,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
+            this.CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
+            this.CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
         }
 
         [Test]
@@ -296,13 +297,13 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
+            this.CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
+            this.CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
         }
 
         [Test]
@@ -334,7 +335,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 
-            CheckCounts(testObject);
+            this.CheckCounts(testObject);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed2");
             Assert.AreEqual(0, countMy);

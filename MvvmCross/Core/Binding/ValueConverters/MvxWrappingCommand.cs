@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.WeakSubscription;
-using System;
-using System.Reflection;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Binding.ValueConverters
+namespace MvvmCross.Binding.ValueConverters
 {
+    using System;
+    using System.Reflection;
+    using System.Windows.Input;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
     public class MvxWrappingCommand
         : ICommand
     {
@@ -24,41 +25,41 @@ namespace Cirrious.MvvmCross.Binding.ValueConverters
 
         public MvxWrappingCommand(ICommand wrapped, object commandParameterOverride)
         {
-            _wrapped = wrapped;
-            _commandParameterOverride = commandParameterOverride;
+            this._wrapped = wrapped;
+            this._commandParameterOverride = commandParameterOverride;
 
-            if (_wrapped != null)
+            if (this._wrapped != null)
             {
-                _canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
+                this._canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(this._wrapped, WrappedOnCanExecuteChanged);
             }
         }
 
         // Note - this is public because we use it in weak referenced situations
         public void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
         {
-            var handler = CanExecuteChanged;
+            var handler = this.CanExecuteChanged;
             handler?.Invoke(this, eventArgs);
         }
 
         public bool CanExecute(object parameter)
         {
-            if (_wrapped == null)
+            if (this._wrapped == null)
                 return false;
 
             if (parameter != null)
                 Mvx.Warning("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
-            return _wrapped.CanExecute(_commandParameterOverride);
+            return this._wrapped.CanExecute(this._commandParameterOverride);
         }
 
         public void Execute(object parameter)
         {
-            if (_wrapped == null)
+            if (this._wrapped == null)
                 return;
 
             if (parameter != null)
                 Mvx.Warning("Non-null parameter overridden in MvxWrappingCommand");
-            _wrapped.Execute(_commandParameterOverride);
+            this._wrapped.Execute(this._commandParameterOverride);
         }
 
         public event EventHandler CanExecuteChanged;

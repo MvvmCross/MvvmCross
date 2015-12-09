@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Specialized;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.WeakSubscription
+namespace MvvmCross.Platform.WeakSubscription
 {
+    using System;
+    using System.Collections.Specialized;
+    using System.Reflection;
+
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {
@@ -32,7 +32,7 @@ namespace Cirrious.CrossCore.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new NotifyCollectionChangedEventHandler(OnSourceEvent);
+            return new NotifyCollectionChangedEventHandler(this.OnSourceEvent);
         }
     }
 }

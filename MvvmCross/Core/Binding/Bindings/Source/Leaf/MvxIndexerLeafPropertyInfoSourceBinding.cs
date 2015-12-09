@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
+namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    using System.Reflection;
+
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
     public class MvxIndexerLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
         private readonly object _key;
@@ -17,12 +18,12 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         public MvxIndexerLeafPropertyInfoSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexToken)
             : base(source, itemPropertyInfo)
         {
-            _key = indexToken.Key;
+            this._key = indexToken.Key;
         }
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] { _key };
+            return new[] { this._key };
         }
     }
 }

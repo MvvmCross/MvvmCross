@@ -7,11 +7,12 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Mac.Platform
+namespace MvvmCross.Mac.Platform
 {
+    using System;
+
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

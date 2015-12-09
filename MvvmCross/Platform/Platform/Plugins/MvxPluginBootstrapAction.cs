@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using MvvmCross.Platform.Platform;
+
     public class MvxPluginBootstrapAction<TPlugin>
         : IMvxBootstrapAction
     {
         public virtual void Run()
         {
-            Mvx.CallbackWhenRegistered<IMvxPluginManager>(RunAction);
+            Mvx.CallbackWhenRegistered<IMvxPluginManager>(this.RunAction);
         }
 
         protected virtual void RunAction()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            Load(manager);
+            this.Load(manager);
         }
 
         protected virtual void Load(IMvxPluginManager manager)

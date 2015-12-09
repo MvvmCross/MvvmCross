@@ -8,16 +8,16 @@
 // </copyright>
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Binding.BindingContext;
 
-#endregion Copyright
+#endregion Copyright
 
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
-    public interface IMvxMacView
+    using global::MvvmCross.Binding.BindingContext;
+    using global::MvvmCross.Core.ViewModels;
+    using global::MvvmCross.Core.Views;
+
+    public interface IMvxMacView
         : IMvxView
             , IMvxCanCreateMacView
             , IMvxBindingContextOwner

@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-
-namespace Cirrious.MvvmCross.AutoView.Auto
+namespace MvvmCross.AutoView.Auto
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public static class ExpressionExtensions
     {
         public static string CreateBindingText<T>(this Expression<Func<T, object>> bindingExpression, string converter,

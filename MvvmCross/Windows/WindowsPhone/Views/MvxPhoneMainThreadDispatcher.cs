@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.Windows.Threading;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System;
+    using System.Windows.Threading;
+
+    using MvvmCross.Platform.Core;
+
     public class MvxPhoneMainThreadDispatcher
         : MvxMainThreadDispatcher
     {
@@ -18,20 +19,20 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public MvxPhoneMainThreadDispatcher(Dispatcher uiDispatcher)
         {
-            _uiDispatcher = uiDispatcher;
+            this._uiDispatcher = uiDispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            return InvokeOrBeginInvoke(action);
+            return this.InvokeOrBeginInvoke(action);
         }
 
         private bool InvokeOrBeginInvoke(Action action)
         {
-            if (_uiDispatcher.CheckAccess())
+            if (this._uiDispatcher.CheckAccess())
                 ExceptionMaskedAction(action);
             else
-                _uiDispatcher.BeginInvoke(action);
+                this._uiDispatcher.BeginInvoke(action);
 
             return true;
         }

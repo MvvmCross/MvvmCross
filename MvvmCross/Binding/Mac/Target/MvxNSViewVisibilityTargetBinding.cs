@@ -5,16 +5,17 @@
 //
 // Contributed by Tim Uy, tim@loqu8.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.UI;
 
 #if __UNIFIED__
 using AppKit;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using global::MvvmCross.Platform.Platform;
+    using global::MvvmCross.Platform.UI;
+
     public class MvxNSViewVisibilityTargetBinding : MvxMacTargetBinding
     {
         protected NSView View
@@ -39,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = View;
+            var view = this.View;
             if (view == null)
                 return;
 

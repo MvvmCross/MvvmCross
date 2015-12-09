@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.BindingContext;
-
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Binding.Droid.BindingContext
 {
+    using MvvmCross.Platform;
+
     public static class MvxAndroidBindingContextHelpers
     {
         public static IMvxAndroidBindingContext Current()

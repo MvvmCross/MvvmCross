@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-
-namespace Cirrious.MvvmCross.AutoView.Interfaces
+namespace MvvmCross.AutoView.Interfaces
 {
+    using CrossUI.Core.Descriptions;
+
     public interface IMvxUserInterfaceFactory
     {
         TResult Build<TBuildable, TResult>(IMvxAutoView view, KeyedDescription description);

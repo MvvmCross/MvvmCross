@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+
     public abstract class MvxApplicable
         : IMvxApplicable
     {
@@ -16,21 +16,21 @@ namespace Cirrious.CrossCore.Core
 
         ~MvxApplicable()
         {
-            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", this.GetType().Name);
         }
 
         protected void SuppressFinalizer()
         {
-            if (_finalizerSuppressed)
+            if (this._finalizerSuppressed)
                 return;
 
-            _finalizerSuppressed = true;
+            this._finalizerSuppressed = true;
             GC.SuppressFinalize(this);
         }
 
         public virtual void Apply()
         {
-            SuppressFinalizer();
+            this.SuppressFinalizer();
         }
     }
 }

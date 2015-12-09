@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using System;
+
     public class BundleObject
     {
         public string TheString1 { get; set; }
@@ -22,7 +22,7 @@ namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
 
         public override int GetHashCode()
         {
-            return TheString1.GetHashCode();
+            return this.TheString1.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -32,14 +32,14 @@ namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
                 return false;
 
             return
-                TheBool1 == rhs.TheBool1
-                && TheBool2 == rhs.TheBool2
-                && TheGuid1 == rhs.TheGuid1
-                && TheGuid2 == rhs.TheGuid2
-                && TheInt1 == rhs.TheInt1
-                && TheInt2 == rhs.TheInt2
-                && TheString1 == rhs.TheString1
-                && TheString2 == rhs.TheString2;
+                this.TheBool1 == rhs.TheBool1
+                && this.TheBool2 == rhs.TheBool2
+                && this.TheGuid1 == rhs.TheGuid1
+                && this.TheGuid2 == rhs.TheGuid2
+                && this.TheInt1 == rhs.TheInt1
+                && this.TheInt2 == rhs.TheInt2
+                && this.TheString1 == rhs.TheString1
+                && this.TheString2 == rhs.TheString2;
         }
     }
 }

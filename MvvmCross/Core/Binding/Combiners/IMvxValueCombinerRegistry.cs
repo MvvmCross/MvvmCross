@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using MvvmCross.Platform.Platform;
+
     public interface IMvxValueCombinerRegistry
         : IMvxNamedInstanceRegistry<IMvxValueCombiner>
           , IMvxValueCombinerLookup

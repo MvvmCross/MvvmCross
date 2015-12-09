@@ -1,8 +1,9 @@
-﻿using NUnit.Framework;
-using System.Linq;
-
-namespace Cirrious.CrossCore.Test
+﻿namespace MvvmCross.Platform.Test
 {
+    using System.Linq;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class ReflectionExtensionsTests
     {

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Platform
+namespace MvvmCross.Core.Platform
 {
     public class MvxSettings : IMvxSettings
     {
@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Platform
 
         public MvxSettings()
         {
-            AlwaysRaiseInpcOnUserInterfaceThread = true;
+            this.AlwaysRaiseInpcOnUserInterfaceThread = true;
         }
     }
 }

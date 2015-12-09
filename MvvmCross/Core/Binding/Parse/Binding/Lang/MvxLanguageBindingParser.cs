@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
+namespace MvvmCross.Binding.Parse.Binding.Lang
 {
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxLanguageBindingParser
         : MvxBindingParser
           , IMvxLanguageBindingParser
@@ -21,17 +21,17 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
 
         public MvxLanguageBindingParser()
         {
-            DefaultConverterName = "Language";
-            DefaultTextSourceName = "TextSource";
-            DefaultBindingMode = MvxBindingMode.OneTime;
+            this.DefaultConverterName = "Language";
+            this.DefaultTextSourceName = "TextSource";
+            this.DefaultBindingMode = MvxBindingMode.OneTime;
         }
 
         protected void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
-            if (IsComplete)
+            if (this.IsComplete)
                 return;
 
-            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
+            var block = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
             block = block.Trim();
             if (string.IsNullOrEmpty(block))
             {
@@ -41,24 +41,24 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
             switch (block)
             {
                 case "Source":
-                    ParseEquals(block);
-                    var sourceName = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    this.ParseEquals(block);
+                    var sourceName = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     description.Path = sourceName;
                     break;
 
                 case "Converter":
-                    ParseEquals(block);
-                    description.Converter = ReadValidCSharpName();
+                    this.ParseEquals(block);
+                    description.Converter = this.ReadValidCSharpName();
                     break;
 
                 case "Key":
-                    ParseEquals(block);
-                    description.ConverterParameter = ReadValue();
+                    this.ParseEquals(block);
+                    description.ConverterParameter = this.ReadValue();
                     break;
 
                 case "FallbackValue":
-                    ParseEquals(block);
-                    description.FallbackValue = ReadValue();
+                    this.ParseEquals(block);
+                    description.FallbackValue = this.ReadValue();
                     break;
 
                 default:
@@ -66,10 +66,10 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
                     {
                         throw new MvxException(
                             "Problem parsing Language Binding near '{0}', Key set to '{1}', position {2} in {3}",
-                            block, description.ConverterParameter, CurrentIndex, FullText);
+                            block, description.ConverterParameter, this.CurrentIndex, this.FullText);
                     }
 
-                    block = UnquoteBlockIfNecessary(block);
+                    block = this.UnquoteBlockIfNecessary(block);
 
                     description.ConverterParameter = block;
                     break;
@@ -95,25 +95,25 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
         {
             var description = new MvxSerializableBindingDescription
             {
-                Converter = DefaultConverterName,
-                Path = DefaultTextSourceName,
-                Mode = DefaultBindingMode
+                Converter = this.DefaultConverterName,
+                Path = this.DefaultTextSourceName,
+                Mode = this.DefaultBindingMode
             };
 
-            SkipWhitespace();
+            this.SkipWhitespace();
 
             while (true)
             {
-                ParseNextBindingDescriptionOptionInto(description);
+                this.ParseNextBindingDescriptionOptionInto(description);
 
-                SkipWhitespace();
-                if (IsComplete)
+                this.SkipWhitespace();
+                if (this.IsComplete)
                     return description;
 
-                switch (CurrentChar)
+                switch (this.CurrentChar)
                 {
                     case ',':
-                        MoveNext();
+                        this.MoveNext();
                         break;
 
                     case ';':
@@ -122,9 +122,9 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
                     default:
                         throw new MvxException(
                             "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
-                            CurrentChar,
-                            CurrentIndex,
-                            FullText);
+                            this.CurrentChar,
+                            this.CurrentIndex,
+                            this.FullText);
                 }
             }
         }

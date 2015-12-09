@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Touch.Platform
+namespace MvvmCross.Platform.Touch.Platform
 {
     public class MvxIosMajorVersionChecker
     {
@@ -13,7 +13,7 @@ namespace Cirrious.CrossCore.Touch.Platform
 
         public MvxIosMajorVersionChecker(int major, bool defaultValue = true)
         {
-            IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
+            this.IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
         }
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)

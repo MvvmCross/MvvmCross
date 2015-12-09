@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Touch.Builders.Lists;
-using Cirrious.MvvmCross.AutoView.Touch.Builders.Menus;
-using CrossUI.Core.Elements.Lists;
-using CrossUI.Core.Elements.Menu;
-using CrossUI.Touch.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Builders
+namespace MvvmCross.AutoView.Touch.Builders
 {
+    using CrossUI.Core.Elements.Lists;
+    using CrossUI.Core.Elements.Menu;
+    using CrossUI.Touch.Builder;
+
+    using MvvmCross.AutoView.Touch.Builders.Lists;
+    using MvvmCross.AutoView.Touch.Builders.Menus;
+
     public class MvxTouchBuilderRegistry : TouchBuilderRegistry
     {
         public MvxTouchBuilderRegistry(bool registerDefaultElements = true)

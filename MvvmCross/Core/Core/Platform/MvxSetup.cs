@@ -5,21 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Platform
+namespace MvvmCross.Core.Platform
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+
     public abstract class MvxSetup
     {
         protected abstract IMvxTrace CreateDebugTrace();
@@ -32,69 +33,69 @@ namespace Cirrious.MvvmCross.Platform
 
         public virtual void Initialize()
         {
-            InitializePrimary();
-            InitializeSecondary();
+            this.InitializePrimary();
+            this.InitializeSecondary();
         }
 
         public virtual void InitializePrimary()
         {
-            if (State != MvxSetupState.Uninitialized)
+            if (this.State != MvxSetupState.Uninitialized)
             {
-                throw new MvxException("Cannot start primary - as state already {0}", State);
+                throw new MvxException("Cannot start primary - as state already {0}", this.State);
             }
-            State = MvxSetupState.InitializingPrimary;
+            this.State = MvxSetupState.InitializingPrimary;
             MvxTrace.Trace("Setup: Primary start");
-            InitializeIoC();
-            State = MvxSetupState.InitializedPrimary;
-            if (State != MvxSetupState.InitializedPrimary)
+            this.InitializeIoC();
+            this.State = MvxSetupState.InitializedPrimary;
+            if (this.State != MvxSetupState.InitializedPrimary)
             {
-                throw new MvxException("Cannot start seconday - as state is currently {0}", State);
+                throw new MvxException("Cannot start seconday - as state is currently {0}", this.State);
             }
-            State = MvxSetupState.InitializingSecondary;
+            this.State = MvxSetupState.InitializingSecondary;
             MvxTrace.Trace("Setup: FirstChance start");
-            InitializeFirstChance();
+            this.InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
-            InitializeDebugServices();
+            this.InitializeDebugServices();
             MvxTrace.Trace("Setup: PlatformServices start");
-            InitializePlatformServices();
+            this.InitializePlatformServices();
             MvxTrace.Trace("Setup: MvvmCross settings start");
-            InitializeSettings();
+            this.InitializeSettings();
             MvxTrace.Trace("Setup: Singleton Cache start");
-            InitializeSingletonCache();
+            this.InitializeSingletonCache();
         }
 
         public virtual void InitializeSecondary()
         {
             MvxTrace.Trace("Setup: Bootstrap actions");
-            PerformBootstrapActions();
+            this.PerformBootstrapActions();
             MvxTrace.Trace("Setup: StringToTypeParser start");
-            InitializeStringToTypeParser();
+            this.InitializeStringToTypeParser();
             MvxTrace.Trace("Setup: CommandHelper start");
-            InitializeCommandHelper();
+            this.InitializeCommandHelper();
             MvxTrace.Trace("Setup: ViewModelFramework start");
-            InitializeViewModelFramework();
+            this.InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
-            var pluginManager = InitializePluginFramework();
+            var pluginManager = this.InitializePluginFramework();
             MvxTrace.Trace("Setup: App start");
-            InitializeApp(pluginManager);
+            this.InitializeApp(pluginManager);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
-            InitializeViewModelTypeFinder();
+            this.InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
-            InitializeViewsContainer();
+            this.InitializeViewsContainer();
             MvxTrace.Trace("Setup: ViewDispatcher start");
-            InitializeViewDispatcher();
+            this.InitializeViewDispatcher();
             MvxTrace.Trace("Setup: Views start");
-            InitializeViewLookup();
+            this.InitializeViewLookup();
             MvxTrace.Trace("Setup: CommandCollectionBuilder start");
-            InitializeCommandCollectionBuilder();
+            this.InitializeCommandCollectionBuilder();
             MvxTrace.Trace("Setup: NavigationSerializer start");
-            InitializeNavigationSerializer();
+            this.InitializeNavigationSerializer();
             MvxTrace.Trace("Setup: InpcInterception start");
-            InitializeInpcInterception();
+            this.InitializeInpcInterception();
             MvxTrace.Trace("Setup: LastChance start");
-            InitializeLastChance();
+            this.InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
-            State = MvxSetupState.Initialized;
+            this.State = MvxSetupState.Initialized;
         }
 
         protected virtual void InitializeCommandHelper()
@@ -114,7 +115,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeSettings()
         {
-            Mvx.RegisterSingleton<IMvxSettings>(CreateSettings());
+            Mvx.RegisterSingleton<IMvxSettings>(this.CreateSettings());
         }
 
         protected virtual IMvxSettings CreateSettings()
@@ -124,7 +125,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeStringToTypeParser()
         {
-            var parser = CreateStringToTypeParser();
+            var parser = this.CreateStringToTypeParser();
             Mvx.RegisterSingleton<IMvxStringToTypeParser>(parser);
             Mvx.RegisterSingleton<IMvxFillableStringToTypeParser>(parser);
         }
@@ -137,7 +138,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void PerformBootstrapActions()
         {
             var bootstrapRunner = new MvxBootstrapRunner();
-            foreach (var assembly in GetBootstrapOwningAssemblies())
+            foreach (var assembly in this.GetBootstrapOwningAssemblies())
             {
                 bootstrapRunner.Run(assembly);
             }
@@ -145,7 +146,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeNavigationSerializer()
         {
-            var serializer = CreateNavigationSerializer();
+            var serializer = this.CreateNavigationSerializer();
             Mvx.RegisterSingleton(serializer);
         }
 
@@ -156,7 +157,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeCommandCollectionBuilder()
         {
-            Mvx.RegisterSingleton(CreateCommandCollectionBuilder);
+            Mvx.RegisterSingleton(this.CreateCommandCollectionBuilder);
         }
 
         protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
@@ -167,7 +168,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual void InitializeIoC()
         {
             // initialize the IoC registry, then add it to itself
-            var iocProvider = CreateIocProvider();
+            var iocProvider = this.CreateIocProvider();
             Mvx.RegisterSingleton(iocProvider);
         }
 
@@ -178,7 +179,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialize(CreateIocOptions());
+            return MvxSimpleIoCContainer.Initialize(this.CreateIocOptions());
         }
 
         protected virtual void InitializeFirstChance()
@@ -194,7 +195,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeDebugServices()
         {
-            var debugTrace = CreateDebugTrace();
+            var debugTrace = this.CreateDebugTrace();
             Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
             MvxTrace.Initialize();
         }
@@ -211,10 +212,10 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
-            var pluginManager = CreatePluginManager();
-            pluginManager.ConfigurationSource = GetPluginConfiguration;
+            var pluginManager = this.CreatePluginManager();
+            pluginManager.ConfigurationSource = this.GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
-            LoadPlugins(pluginManager);
+            this.LoadPlugins(pluginManager);
             return pluginManager;
         }
 
@@ -231,14 +232,14 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeApp(IMvxPluginManager pluginManager)
         {
-            var app = CreateAndInitializeApp(pluginManager);
+            var app = this.CreateAndInitializeApp(pluginManager);
             Mvx.RegisterSingleton(app);
             Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
 
         protected virtual IMvxApplication CreateAndInitializeApp(IMvxPluginManager pluginManager)
         {
-            var app = CreateApp();
+            var app = this.CreateApp();
             app.LoadPlugins(pluginManager);
             app.Initialize();
             return app;
@@ -246,20 +247,20 @@ namespace Cirrious.MvvmCross.Platform
 
         protected virtual void InitializeViewsContainer()
         {
-            var container = CreateViewsContainer();
+            var container = this.CreateViewsContainer();
             Mvx.RegisterSingleton<IMvxViewsContainer>(container);
         }
 
         protected virtual void InitializeViewDispatcher()
         {
-            var dispatcher = CreateViewDispatcher();
+            var dispatcher = this.CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
         protected virtual IEnumerable<Assembly> GetViewAssemblies()
         {
-            var assembly = GetType().GetTypeInfo().Assembly;
+            var assembly = this.GetType().GetTypeInfo().Assembly;
             return new[] { assembly };
         }
 
@@ -273,7 +274,7 @@ namespace Cirrious.MvvmCross.Platform
         protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
         {
             var assemblies = new List<Assembly>();
-            assemblies.AddRange(GetViewAssemblies());
+            assemblies.AddRange(this.GetViewAssemblies());
             //ideally we would also add ViewModelAssemblies here too :/
             //assemblies.AddRange(GetViewModelAssemblies());
             return assemblies.Distinct().ToArray();
@@ -285,7 +286,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             var viewModelByNameLookup = new MvxViewModelByNameLookup();
 
-            var viewModelAssemblies = GetViewModelAssemblies();
+            var viewModelAssemblies = this.GetViewModelAssemblies();
             foreach (var assembly in viewModelAssemblies)
             {
                 viewModelByNameLookup.AddAll(assembly);
@@ -294,14 +295,14 @@ namespace Cirrious.MvvmCross.Platform
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
             Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
 
-            var nameMappingStrategy = CreateViewToViewModelNaming();
+            var nameMappingStrategy = this.CreateViewToViewModelNaming();
             var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, nameMappingStrategy);
             Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
         }
 
         protected virtual void InitializeViewLookup()
         {
-            var viewAssemblies = GetViewAssemblies();
+            var viewAssemblies = this.GetViewAssemblies();
             var builder = new MvxViewModelViewLookupBuilder();
             var viewModelViewLookup = builder.Build(viewAssemblies);
             if (viewModelViewLookup == null)
@@ -319,7 +320,7 @@ namespace Cirrious.MvvmCross.Platform
 
         protected IEnumerable<Type> CreatableTypes()
         {
-            return CreatableTypes(this.GetType().GetTypeInfo().Assembly);
+            return this.CreatableTypes(this.GetType().GetTypeInfo().Assembly);
         }
 
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
@@ -342,7 +343,7 @@ namespace Cirrious.MvvmCross.Platform
         {
             public MvxSetupStateEventArgs(MvxSetupState setupState)
             {
-                SetupState = setupState;
+                this.SetupState = setupState;
             }
 
             public MvxSetupState SetupState { get; private set; }
@@ -354,26 +355,26 @@ namespace Cirrious.MvvmCross.Platform
 
         public MvxSetupState State
         {
-            get { return _state; }
+            get { return this._state; }
             private set
             {
-                _state = value;
-                FireStateChange(value);
+                this._state = value;
+                this.FireStateChange(value);
             }
         }
 
         private void FireStateChange(MvxSetupState state)
         {
-            var handler = StateChanged;
+            var handler = this.StateChanged;
             handler?.Invoke(this, new MvxSetupStateEventArgs(state));
         }
 
         public virtual void EnsureInitialized(Type requiredBy)
         {
-            switch (State)
+            switch (this.State)
             {
                 case MvxSetupState.Uninitialized:
-                    Initialize();
+                    this.Initialize();
                     break;
 
                 case MvxSetupState.InitializingPrimary:

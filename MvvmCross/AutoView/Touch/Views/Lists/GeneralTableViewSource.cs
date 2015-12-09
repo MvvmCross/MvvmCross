@@ -5,16 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace MvvmCross.AutoView.Touch.Views.Lists
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Foundation;
+
+    using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Platform;
+
+    using UIKit;
+
     public class GeneralTableViewSource : MvxTableViewSource
     {
         private readonly IMvxLayoutListItemViewFactory _defaultFactory;
@@ -24,8 +26,8 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
                                       Dictionary<string, IMvxLayoutListItemViewFactory> factories)
             : base(tableView)
         {
-            _defaultFactory = defaultFactory;
-            _factories = factories;
+            this._defaultFactory = defaultFactory;
+            this._factories = factories;
         }
 
         public GeneralTableViewSource(IntPtr handle)
@@ -45,9 +47,9 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
                 return reuse;
 
             IMvxLayoutListItemViewFactory factory;
-            if (_factories != null || !_factories.TryGetValue(item.GetType().Name, out factory))
+            if (this._factories != null || !this._factories.TryGetValue(item.GetType().Name, out factory))
             {
-                factory = _defaultFactory;
+                factory = this._defaultFactory;
             }
 
             var cell = factory.BuildView(indexPath, item, cellId);

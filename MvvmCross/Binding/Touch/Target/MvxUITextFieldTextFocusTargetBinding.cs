@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+
+    using UIKit;
+
     public class MvxUITextFieldTextFocusTargetBinding : MvxTargetBinding
     {
         private bool _subscribed;
@@ -28,25 +28,25 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         public override void SetValue(object value)
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
             value = value ?? string.Empty;
-            TextField.Text = value.ToString();
+            this.TextField.Text = value.ToString();
         }
 
         public override void SubscribeToEvents()
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
-            TextField.EditingDidEnd += HandleLostFocus;
-            _subscribed = true;
+            this.TextField.EditingDidEnd += this.HandleLostFocus;
+            this._subscribed = true;
         }
 
         private void HandleLostFocus(object sender, EventArgs e)
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
-            FireValueChanged(TextField.Text);
+            FireValueChanged(this.TextField.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -54,10 +54,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (TextField != null && _subscribed)
+            if (this.TextField != null && this._subscribed)
             {
-                TextField.EditingDidEnd -= HandleLostFocus;
-                _subscribed = false;
+                this.TextField.EditingDidEnd -= this.HandleLostFocus;
+                this._subscribed = false;
             }
         }
     }

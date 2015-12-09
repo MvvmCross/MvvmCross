@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxAppResourceTypeFinder : IMvxAppResourceTypeFinder
     {
         public Type Find()

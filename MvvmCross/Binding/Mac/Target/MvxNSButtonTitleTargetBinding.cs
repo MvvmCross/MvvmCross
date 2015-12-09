@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
 
 #if __UNIFIED__
 using AppKit;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
     {
         protected NSButton Button
@@ -42,7 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var button = Button;
+            var button = this.Button;
             if (button == null)
                 return;
 

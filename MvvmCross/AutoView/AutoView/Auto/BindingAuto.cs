@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.AutoView.Auto
+namespace MvvmCross.AutoView.Auto
 {
+    using System;
+    using System.Linq.Expressions;
+
     public abstract class BindingAuto
     {
         public string Target { get; set; }
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto
 
         protected BindingAuto(string target = null)
         {
-            Target = target;
+            this.Target = target;
         }
     }
 
@@ -32,14 +32,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto
                            string converter = null, string converterParameter = null)
             : base(target)
         {
-            BindingExpression = bindingExpression;
-            Converter = converter;
-            ConverterParameter = converterParameter;
+            this.BindingExpression = bindingExpression;
+            this.Converter = converter;
+            this.ConverterParameter = converterParameter;
         }
 
         public override string GetValueText()
         {
-            return BindingExpression.CreateBindingText(Converter, ConverterParameter);
+            return this.BindingExpression.CreateBindingText(this.Converter, this.ConverterParameter);
         }
     }
 }

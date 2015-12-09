@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.UI;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.UI;
+
+    using UIKit;
+
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {
         protected UIView View => (UIView)Target;

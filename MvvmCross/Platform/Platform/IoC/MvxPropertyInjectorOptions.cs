@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
     public class MvxPropertyInjectorOptions : IMvxPropertyInjectorOptions
     {
         public MvxPropertyInjectorOptions()
         {
-            InjectIntoProperties = MvxPropertyInjection.None;
-            ThrowIfPropertyInjectionFails = false;
+            this.InjectIntoProperties = MvxPropertyInjection.None;
+            this.ThrowIfPropertyInjectionFails = false;
         }
 
         public MvxPropertyInjection InjectIntoProperties { get; set; }

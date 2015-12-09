@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System;
-using System.Globalization;
-
-namespace Cirrious.MvvmCross.Localization
+namespace MvvmCross.Localization
 {
+    using System;
+    using System.Globalization;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxLanguageConverter
         : MvxValueConverter
     {

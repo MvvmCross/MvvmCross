@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Widget;
+
     public class MvxRatingBarRatingTargetBinding : MvxAndroidTargetBinding
     {
         protected RatingBar RatingBar => (RatingBar)Target;
@@ -21,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            RatingBar.RatingBarChange += RatingBar_RatingBarChange;
+            this.RatingBar.RatingBarChange += this.RatingBar_RatingBarChange;
         }
 
         private void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
@@ -52,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 var target = Target as RatingBar;
                 if (target != null)
                 {
-                    target.RatingBarChange -= RatingBar_RatingBarChange;
+                    target.RatingBarChange -= this.RatingBar_RatingBarChange;
                 }
             }
             base.Dispose(isDisposing);

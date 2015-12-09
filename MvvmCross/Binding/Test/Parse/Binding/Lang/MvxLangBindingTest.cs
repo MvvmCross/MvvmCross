@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
+namespace MvvmCross.Binding.Test.Parse.Binding.Lang
 {
+    using System.Collections.Generic;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxLangBindingTest
         : MvxBindingTest
@@ -20,9 +18,9 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Lang
         [Test]
         public void TestAll()
         {
-            foreach (var testPair in _toTest)
+            foreach (var testPair in this._toTest)
             {
-                DoTest(testPair);
+                this.DoTest(testPair);
             }
         }
 

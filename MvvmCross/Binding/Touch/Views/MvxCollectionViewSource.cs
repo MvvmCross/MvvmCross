@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using Foundation;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+
+    using Foundation;
+
+    using MvvmCross.Platform.WeakSubscription;
+
+    using UIKit;
+
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {
         private IEnumerable _itemsSource;
@@ -32,10 +33,10 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
             }
 
@@ -51,46 +52,46 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get { return this._itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
-                    && !ReloadOnAllItemsSourceSets)
+                if (Object.ReferenceEquals(this._itemsSource, value)
+                    && !this.ReloadOnAllItemsSourceSets)
                     return;
 
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
-                _itemsSource = value;
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
+                this._itemsSource = value;
+                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
-                ReloadData();
+                this.ReloadData();
             }
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            return ItemsSource?.ElementAt(indexPath.Row);
+            return this.ItemsSource?.ElementAt(indexPath.Row);
         }
 
         private void CollectionChangedOnCollectionChanged(object sender,
                                                           NotifyCollectionChangedEventArgs
                                                               notifyCollectionChangedEventArgs)
         {
-            ReloadData();
+            this.ReloadData();
         }
 
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            if (ItemsSource == null)
+            if (this.ItemsSource == null)
                 return 0;
 
-            return ItemsSource.Count();
+            return this.ItemsSource.Count();
         }
     }
 }

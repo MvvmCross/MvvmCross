@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Touch.Views;
+
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTouchView TouchView => ViewController as IMvxTouchView;
+        protected IMvxTouchView TouchView => this.ViewController as IMvxTouchView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
@@ -22,18 +23,18 @@ namespace Cirrious.MvvmCross.Touch.Views
             if (!(eventSource is IMvxTouchView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxTouchView");
 
-            TouchView.BindingContext = new MvxBindingContext();
+            this.TouchView.BindingContext = new MvxBindingContext();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (TouchView == null)
+            if (this.TouchView == null)
             {
                 MvxTrace.Warning("TouchView is null for clearup of bindings in type {0}",
-                               TouchView?.GetType().Name);
+                               this.TouchView?.GetType().Name);
                 return;
             }
-            TouchView.ClearAllBindings();
+            this.TouchView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
+namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
 {
     public class MvxIntegerIndexerPropertyToken : MvxIndexerPropertyToken<int>
     {

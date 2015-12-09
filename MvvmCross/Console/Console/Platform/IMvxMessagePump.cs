@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Console.Platform
+namespace MvvmCross.Console.Platform
 {
     public interface IMvxMessagePump
     {

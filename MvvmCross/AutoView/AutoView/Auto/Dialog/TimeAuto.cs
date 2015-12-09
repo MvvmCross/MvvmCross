@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
+namespace MvvmCross.AutoView.Auto.Dialog
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
     public class TimeAuto : ValueElementAuto
     {
         public TimeAuto(string key = null, Expression<Func<object>> bindingExpression = null, string converter = null,

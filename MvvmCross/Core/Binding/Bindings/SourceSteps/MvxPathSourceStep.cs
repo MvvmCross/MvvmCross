@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    using System;
+
+    using MvvmCross.Binding.Bindings.Source;
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Platform.Converters;
+
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
         private IMvxSourceBinding _sourceBinding;
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             if (isDisposing)
             {
-                ClearPathSourceBinding();
+                this.ClearPathSourceBinding();
             }
 
             base.Dispose(isDisposing);
@@ -37,31 +38,31 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             get
             {
-                if (_sourceBinding == null)
+                if (this._sourceBinding == null)
                     return typeof(object);
 
-                return _sourceBinding.SourceType;
+                return this._sourceBinding.SourceType;
             }
         }
 
         protected override void OnDataContextChanged()
         {
-            ClearPathSourceBinding();
-            _sourceBinding = SourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
-            if (_sourceBinding != null)
+            this.ClearPathSourceBinding();
+            this._sourceBinding = this.SourceBindingFactory.CreateBinding(this.DataContext, this.Description.SourcePropertyPath);
+            if (this._sourceBinding != null)
             {
-                _sourceBinding.Changed += SourceBindingOnChanged;
+                this._sourceBinding.Changed += this.SourceBindingOnChanged;
             }
             base.OnDataContextChanged();
         }
 
         private void ClearPathSourceBinding()
         {
-            if (_sourceBinding != null)
+            if (this._sourceBinding != null)
             {
-                _sourceBinding.Changed -= SourceBindingOnChanged;
-                _sourceBinding.Dispose();
-                _sourceBinding = null;
+                this._sourceBinding.Changed -= this.SourceBindingOnChanged;
+                this._sourceBinding.Dispose();
+                this._sourceBinding = null;
             }
         }
 
@@ -72,7 +73,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         protected override void SetSourceValue(object sourceValue)
         {
-            if (_sourceBinding == null)
+            if (this._sourceBinding == null)
                 return;
 
             if (sourceValue == MvxBindingConstant.UnsetValue)
@@ -81,17 +82,17 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
 
-            _sourceBinding.SetValue(sourceValue);
+            this._sourceBinding.SetValue(sourceValue);
         }
 
         protected override object GetSourceValue()
         {
-            if (_sourceBinding == null)
+            if (this._sourceBinding == null)
             {
                 return MvxBindingConstant.UnsetValue;
             }
 
-            return _sourceBinding.GetValue();
+            return this._sourceBinding.GetValue();
         }
     }
 }

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxUIButtonTitleTargetBinding : MvxConvertingTargetBinding
     {
         private readonly UIControlState _state;
@@ -20,7 +20,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public MvxUIButtonTitleTargetBinding(UIButton button, UIControlState state = UIControlState.Normal)
             : base(button)
         {
-            _state = state;
+            this._state = state;
             if (button == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
@@ -33,7 +33,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((UIButton)target).SetTitle(value as string, _state);
+            ((UIButton)target).SetTitle(value as string, this._state);
         }
     }
 }

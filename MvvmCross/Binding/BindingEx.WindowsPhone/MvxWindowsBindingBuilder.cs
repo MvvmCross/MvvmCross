@@ -5,24 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
-
 #endif
-
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.BindingEx.WindowsPhone;
-using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding;
-using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
-using Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding;
 
 #if NETFX_CORE
 
@@ -34,6 +18,19 @@ using Windows.UI.Xaml;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 // ReSharper restore CheckNamespace
 {
+    using System;
+    using System.Windows;
+
+    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding;
+    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
+    using Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding;
+
+    using global::MvvmCross.BindingEx.WindowsPhone;
+    using global::MvvmCross.BindingEx.WindowsPhone.MvxBinding;
+    using global::MvvmCross.Platform;
+    using global::MvvmCross.Platform.Converters;
+    using global::MvvmCross.Platform.Core;
+
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
     {
         public enum BindingType
@@ -47,18 +44,18 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
         public MvxWindowsBindingBuilder(
             BindingType bindingType = BindingType.MvvmCross)
         {
-            _bindingType = bindingType;
+            this._bindingType = bindingType;
         }
 
         public override void DoRegistration()
         {
             base.DoRegistration();
-            InitializeBindingCreator();
+            this.InitializeBindingCreator();
         }
 
         protected override void RegisterBindingFactories()
         {
-            switch (_bindingType)
+            switch (this._bindingType)
             {
                 case BindingType.Windows:
                     // no need for MvvmCross binding factories - so don't create them
@@ -75,7 +72,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
         protected override IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
         {
-            switch (_bindingType)
+            switch (this._bindingType)
             {
                 case BindingType.Windows:
                     return base.CreateTargetBindingRegistry();
@@ -90,13 +87,13 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 
         private void InitializeBindingCreator()
         {
-            var creator = CreateBindingCreator();
+            var creator = this.CreateBindingCreator();
             Mvx.RegisterSingleton(creator);
         }
 
         protected virtual IMvxBindingCreator CreateBindingCreator()
         {
-            switch (_bindingType)
+            switch (this._bindingType)
             {
                 case BindingType.Windows:
                     return new MvxWindowsBindingCreator();

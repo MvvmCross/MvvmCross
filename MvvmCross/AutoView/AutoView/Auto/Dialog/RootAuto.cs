@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions.Dialog;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
+namespace MvvmCross.AutoView.Auto.Dialog
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Descriptions.Dialog;
+
     public class RootAuto : ElementAuto, IEnumerable<SectionAuto>
     {
         public string GroupName { get; set; }
@@ -24,37 +25,37 @@ namespace Cirrious.MvvmCross.AutoView.Auto.Dialog
                         string notFor = null, Expression<Func<ICommand>> selectedCommand = null)
             : base(key ?? "Root", caption, onlyFor, notFor, selectedCommand)
         {
-            GroupName = groupName;
-            Sections = new List<SectionAuto>();
+            this.GroupName = groupName;
+            this.Sections = new List<SectionAuto>();
         }
 
         public void Add(SectionAuto section)
         {
-            Sections.Add(section);
+            this.Sections.Add(section);
         }
 
         public IEnumerator<SectionAuto> GetEnumerator()
         {
-            return Sections.GetEnumerator();
+            return this.Sections.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public override ElementDescription ToElementDescription()
         {
             var toReturn = base.ToElementDescription();
-            if (!string.IsNullOrEmpty(GroupName))
+            if (!string.IsNullOrEmpty(this.GroupName))
             {
                 toReturn.Group = new GroupDescription
                 {
                     Key = "Radio",
-                    Properties = {["Key"] = GroupName }
+                    Properties = {["Key"] = this.GroupName }
                 };
             }
-            foreach (var sectionAuto in Sections)
+            foreach (var sectionAuto in this.Sections)
             {
                 var sectionDescription = sectionAuto.ToSectionDescription();
                 toReturn.Sections.Add(sectionDescription);

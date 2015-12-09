@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
-using NUnit.Framework;
-
-namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
+namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
+    using MvvmCross.Platform.Platform;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxSwissBindingTest
         : MvxBaseSwissBindingTest<MvxSwissBindingParser>
@@ -39,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -66,7 +65,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -93,7 +92,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -120,7 +119,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -147,7 +146,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -174,7 +173,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
     }
 }

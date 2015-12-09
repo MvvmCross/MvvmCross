@@ -5,23 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Exceptions;
+
     public abstract class MvxSingleton
         : IDisposable
     {
         ~MvxSingleton()
         {
-            Dispose(false);
+            this.Dispose(false);
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 

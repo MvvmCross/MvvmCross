@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings
+namespace MvvmCross.Binding.Bindings
 {
+    using System;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxFullBinding
         : MvxBinding
           , IMvxUpdateableBinding
@@ -34,71 +35,71 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get { return this._dataContext; }
             set
             {
-                if (_dataContext == value)
+                if (this._dataContext == value)
                     return;
 
-                _dataContext = value;
-                if (_sourceStep != null)
-                    _sourceStep.DataContext = value;
-                UpdateTargetOnBind();
+                this._dataContext = value;
+                if (this._sourceStep != null)
+                    this._sourceStep.DataContext = value;
+                this.UpdateTargetOnBind();
             }
         }
 
         public MvxFullBinding(MvxBindingRequest bindingRequest)
         {
-            _bindingDescription = bindingRequest.Description;
-            CreateTargetBinding(bindingRequest.Target);
-            CreateSourceBinding(bindingRequest.Source);
+            this._bindingDescription = bindingRequest.Description;
+            this.CreateTargetBinding(bindingRequest.Target);
+            this.CreateSourceBinding(bindingRequest.Source);
         }
 
         protected virtual void ClearSourceBinding()
         {
-            if (_sourceStep != null)
+            if (this._sourceStep != null)
             {
-                if (_sourceBindingOnChanged != null)
+                if (this._sourceBindingOnChanged != null)
                 {
-                    _sourceStep.Changed -= _sourceBindingOnChanged;
-                    _sourceBindingOnChanged = null;
+                    this._sourceStep.Changed -= this._sourceBindingOnChanged;
+                    this._sourceBindingOnChanged = null;
                 }
 
-                _sourceStep.Dispose();
-                _sourceStep = null;
+                this._sourceStep.Dispose();
+                this._sourceStep = null;
             }
         }
 
         private void CreateSourceBinding(object source)
         {
-            _dataContext = source;
-            _sourceStep = SourceStepFactory.Create(_bindingDescription.Source);
-            _sourceStep.TargetType = _targetBinding.TargetType;
-            _sourceStep.DataContext = source;
+            this._dataContext = source;
+            this._sourceStep = this.SourceStepFactory.Create(this._bindingDescription.Source);
+            this._sourceStep.TargetType = this._targetBinding.TargetType;
+            this._sourceStep.DataContext = source;
 
-            if (NeedToObserveSourceChanges)
+            if (this.NeedToObserveSourceChanges)
             {
-                _sourceBindingOnChanged = (sender, args) =>
+                this._sourceBindingOnChanged = (sender, args) =>
                     {
-                        var value = _sourceStep.GetValue();
-                        UpdateTargetFromSource(value);
+                        var value = this._sourceStep.GetValue();
+                        this.UpdateTargetFromSource(value);
                     };
-                _sourceStep.Changed += _sourceBindingOnChanged;
+                this._sourceStep.Changed += this._sourceBindingOnChanged;
             }
 
-            UpdateTargetOnBind();
+            this.UpdateTargetOnBind();
         }
 
         private void UpdateTargetOnBind()
         {
-            if (NeedToUpdateTargetOnBind && _sourceStep != null)
+            if (this.NeedToUpdateTargetOnBind && this._sourceStep != null)
             {
                 // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
 
                 try
                 {
-                    var currentValue = _sourceStep.GetValue();
-                    UpdateTargetFromSource(currentValue);
+                    var currentValue = this._sourceStep.GetValue();
+                    this.UpdateTargetFromSource(currentValue);
                 }
                 catch (Exception exception)
                 {
@@ -109,35 +110,35 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
         protected virtual void ClearTargetBinding()
         {
-            if (_targetBinding != null)
+            if (this._targetBinding != null)
             {
-                if (_targetBindingOnValueChanged != null)
+                if (this._targetBindingOnValueChanged != null)
                 {
-                    _targetBinding.ValueChanged -= _targetBindingOnValueChanged;
-                    _targetBindingOnValueChanged = null;
+                    this._targetBinding.ValueChanged -= this._targetBindingOnValueChanged;
+                    this._targetBindingOnValueChanged = null;
                 }
 
-                _targetBinding.Dispose();
-                _targetBinding = null;
+                this._targetBinding.Dispose();
+                this._targetBinding = null;
             }
         }
 
         private void CreateTargetBinding(object target)
         {
-            _targetBinding = TargetBindingFactory.CreateBinding(target, _bindingDescription.TargetName);
+            this._targetBinding = this.TargetBindingFactory.CreateBinding(target, this._bindingDescription.TargetName);
 
-            if (_targetBinding == null)
+            if (this._targetBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Failed to create target binding for {0}", _bindingDescription.ToString());
-                _targetBinding = new MvxNullTargetBinding();
+                                      "Failed to create target binding for {0}", this._bindingDescription.ToString());
+                this._targetBinding = new MvxNullTargetBinding();
             }
 
-            if (NeedToObserveTargetChanges)
+            if (this.NeedToObserveTargetChanges)
             {
-                _targetBinding.SubscribeToEvents();
-                _targetBindingOnValueChanged = (sender, args) => UpdateSourceFromTarget(args.Value);
-                _targetBinding.ValueChanged += _targetBindingOnValueChanged;
+                this._targetBinding.SubscribeToEvents();
+                this._targetBindingOnValueChanged = (sender, args) => this.UpdateSourceFromTarget(args.Value);
+                this._targetBinding.ValueChanged += this._targetBindingOnValueChanged;
             }
         }
 
@@ -148,18 +149,18 @@ namespace Cirrious.MvvmCross.Binding.Bindings
                 return;
 
             if (value == MvxBindingConstant.UnsetValue)
-                value = _targetBinding.TargetType.CreateDefault();
+                value = this._targetBinding.TargetType.CreateDefault();
 
             try
             {
-                _targetBinding.SetValue(value);
+                this._targetBinding.SetValue(value);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Error,
                     "Problem seen during binding execution for {0} - problem {1}",
-                    _bindingDescription.ToString(),
+                    this._bindingDescription.ToString(),
                     exception.ToLongString());
             }
         }
@@ -175,14 +176,14 @@ namespace Cirrious.MvvmCross.Binding.Bindings
 
             try
             {
-                _sourceStep.SetValue(value);
+                this._sourceStep.SetValue(value);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Error,
                     "Problem seen during binding execution for {0} - problem {1}",
-                    _bindingDescription.ToString(),
+                    this._bindingDescription.ToString(),
                     exception.ToLongString());
             }
         }
@@ -191,7 +192,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             get
             {
-                var mode = ActualBindingMode;
+                var mode = this.ActualBindingMode;
                 return mode.RequireSourceObservation();
             }
         }
@@ -200,7 +201,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             get
             {
-                var mode = ActualBindingMode;
+                var mode = this.ActualBindingMode;
                 return mode.RequiresTargetObservation();
             }
         }
@@ -209,7 +210,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             get
             {
-                var bindingMode = ActualBindingMode;
+                var bindingMode = this.ActualBindingMode;
                 return bindingMode.RequireTargetUpdateOnFirstBind();
             }
         }
@@ -218,9 +219,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             get
             {
-                var mode = _bindingDescription.Mode;
+                var mode = this._bindingDescription.Mode;
                 if (mode == MvxBindingMode.Default)
-                    mode = _targetBinding.DefaultMode;
+                    mode = this._targetBinding.DefaultMode;
                 return mode;
             }
         }
@@ -229,8 +230,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings
         {
             if (isDisposing)
             {
-                ClearTargetBinding();
-                ClearSourceBinding();
+                this.ClearTargetBinding();
+                this.ClearSourceBinding();
             }
         }
     }

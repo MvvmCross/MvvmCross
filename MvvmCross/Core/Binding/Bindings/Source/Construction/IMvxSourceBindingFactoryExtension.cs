@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Construction
+namespace MvvmCross.Binding.Bindings.Source.Construction
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
     public interface IMvxSourceBindingFactoryExtension
     {
         bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result);

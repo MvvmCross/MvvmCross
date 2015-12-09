@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Globalization;
-
-namespace Cirrious.CrossCore.Converters
+namespace MvvmCross.Platform.Converters
 {
+    using System;
+    using System.Globalization;
+
     public interface IMvxValueConverter
     {
         object Convert(object value, Type targetType, object parameter, CultureInfo culture);

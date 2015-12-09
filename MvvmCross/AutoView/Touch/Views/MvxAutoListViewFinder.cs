@@ -5,21 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.AutoView.Touch.Views.Lists;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views
+namespace MvvmCross.AutoView.Touch.Views
 {
+    using System;
+
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.AutoView.Touch.Views.Lists;
+    using MvvmCross.Platform;
+
     public class MvxAutoListViewFinder : IMvxViewFinder
     {
         public Type ListViewType { get; set; }
 
         public MvxAutoListViewFinder()
         {
-            ListViewType = typeof(MvxAutoListActivityView);
+            this.ListViewType = typeof(MvxAutoListActivityView);
         }
 
         public Type GetViewType(Type viewModelType)
@@ -27,13 +27,13 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views
             // best of a bad bunch - http://www.hanselman.com/blog/DoesATypeImplementAnInterface.aspx
             if (viewModelType.GetInterface(typeof(IMvxAutoListViewModel).FullName) != null)
             {
-                return ListViewType;
+                return this.ListViewType;
             }
 
             var loader = Mvx.Resolve<IMvxAutoViewTextLoader>();
             if (loader.HasDefinition(viewModelType, MvxAutoViewConstants.List))
             {
-                return ListViewType;
+                return this.ListViewType;
             }
 
             return null;

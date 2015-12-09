@@ -5,30 +5,31 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Globalization;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    using System;
+    using System.Globalization;
+
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxSourceStep
         : IMvxSourceStep
     {
         private readonly MvxSourceStepDescription _description;
         private object _dataContext;
 
-        protected MvxSourceStepDescription Description => _description;
+        protected MvxSourceStepDescription Description => this._description;
 
         protected MvxSourceStep(MvxSourceStepDescription description)
         {
-            _description = description;
+            this._description = description;
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -43,11 +44,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get { return this._dataContext; }
             set
             {
-                _dataContext = value;
-                OnDataContextChanged();
+                this._dataContext = value;
+                this.OnDataContextChanged();
             }
         }
 
@@ -58,7 +59,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public void SetValue(object value)
         {
-            var sourceValue = ApplyValueConverterTargetToSource(value);
+            var sourceValue = this.ApplyValueConverterTargetToSource(value);
 
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
@@ -66,23 +67,23 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.UnsetValue)
                 return;
 
-            SetSourceValue(sourceValue);
+            this.SetSourceValue(sourceValue);
         }
 
         private object ApplyValueConverterTargetToSource(object value)
         {
-            if (_description.Converter == null)
+            if (this._description.Converter == null)
                 return value;
 
-            return _description.Converter.ConvertBack(value,
-                                                      SourceType,
-                                                      _description.ConverterParameter,
+            return this._description.Converter.ConvertBack(value,
+                                                      this.SourceType,
+                                                      this._description.ConverterParameter,
                                                       CultureInfo.CurrentUICulture);
         }
 
         private object ApplyValueConverterSourceToTarget(object value)
         {
-            if (_description.Converter == null)
+            if (this._description.Converter == null)
             {
                 return value;
             }
@@ -90,9 +91,9 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             try
             {
                 return
-                    _description.Converter.Convert(value,
-                                                   TargetType,
-                                                   _description.ConverterParameter,
+                    this._description.Converter.Convert(value,
+                                                   this.TargetType,
+                                                   this._description.ConverterParameter,
                                                    CultureInfo.CurrentUICulture);
             }
             catch (Exception exception)
@@ -102,7 +103,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Diagnostic,
                     "Problem seen during binding execution for {0} - problem {1}",
-                    _description.ToString(),
+                    this._description.ToString(),
                     exception.ToLongString());
             }
 
@@ -113,7 +114,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         protected virtual void SendSourcePropertyChanged()
         {
-            var handler = _changed;
+            var handler = this._changed;
 
             handler?.Invoke(this, EventArgs.Empty);
         }
@@ -125,7 +126,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
             if (value != MvxBindingConstant.UnsetValue)
             {
-                value = ApplyValueConverterSourceToTarget(value);
+                value = this.ApplyValueConverterSourceToTarget(value);
             }
 
             if (value != MvxBindingConstant.UnsetValue)
@@ -133,8 +134,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
                 return value;
             }
 
-            if (_description.FallbackValue != null)
-                return _description.FallbackValue;
+            if (this._description.FallbackValue != null)
+                return this._description.FallbackValue;
 
             return MvxBindingConstant.UnsetValue;
         }
@@ -145,16 +146,16 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             add
             {
-                var alreadyHasListeners = _changed != null;
-                _changed += value;
+                var alreadyHasListeners = this._changed != null;
+                this._changed += value;
                 if (!alreadyHasListeners)
-                    OnFirstChangeListenerAdded();
+                    this.OnFirstChangeListenerAdded();
             }
             remove
             {
-                _changed -= value;
-                if (_changed == null)
-                    OnLastChangeListenerRemoved();
+                this._changed -= value;
+                if (this._changed == null)
+                    this.OnLastChangeListenerRemoved();
             }
         }
 
@@ -170,8 +171,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public object GetValue()
         {
-            var sourceValue = GetSourceValue();
-            var value = ConvertSourceToTarget(sourceValue);
+            var sourceValue = this.GetSourceValue();
+            var value = this.ConvertSourceToTarget(sourceValue);
             return value;
         }
 

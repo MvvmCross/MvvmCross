@@ -5,16 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Foundation;
-using System;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Windows.Input;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
+    using UIKit;
+
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
         public static readonly NSString UnknownCellIdentifier = null;
@@ -22,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         private readonly NSString _cellIdentifier;
         private readonly UICollectionView _collectionView;
 
-        protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
+        protected virtual NSString DefaultCellIdentifier => this._cellIdentifier;
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView)
             : this(collectionView, UnknownCellIdentifier)
@@ -32,11 +35,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
                                               NSString cellIdentifier)
         {
-            _collectionView = collectionView;
-            _cellIdentifier = cellIdentifier;
+            this._collectionView = collectionView;
+            this._cellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView => _collectionView;
+        protected UICollectionView CollectionView => this._collectionView;
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -44,7 +47,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             try
             {
-                _collectionView.ReloadData();
+                this._collectionView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -55,33 +58,33 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
                                                                   object item)
         {
-            return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
+            return (UICollectionViewCell)collectionView.DequeueReusableCell(this.DefaultCellIdentifier, indexPath);
         }
 
         protected abstract object GetItemAt(NSIndexPath indexPath);
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = GetItemAt(indexPath);
+            var item = this.GetItemAt(indexPath);
 
-            var command = SelectionChangedCommand;
+            var command = this.SelectionChangedCommand;
             if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
-            SelectedItem = item;
+            this.SelectedItem = item;
         }
 
         private object _selectedItem;
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get { return this._selectedItem; }
             set
             {
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
-                _selectedItem = value;
-                var handler = SelectedItemChanged;
+                this._selectedItem = value;
+                var handler = this.SelectedItemChanged;
                 handler?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -90,8 +93,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = GetItemAt(indexPath);
-            var cell = GetOrCreateCellFor(collectionView, indexPath, item);
+            var item = this.GetItemAt(indexPath);
+            var cell = this.GetOrCreateCellFor(collectionView, indexPath, item);
 
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)

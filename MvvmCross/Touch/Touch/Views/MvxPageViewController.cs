@@ -1,13 +1,15 @@
-﻿using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Views
+﻿namespace MvvmCross.Touch.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Touch.Views;
+
+    using UIKit;
+
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTouchView
     {
         private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
@@ -15,13 +17,13 @@ namespace Cirrious.MvvmCross.Touch.Views
         public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
         {
             this.AdaptForBinding();
-            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
+            this._pagedViewControllerCache = new Dictionary<string, UIViewController>();
         }
 
         public MvxPageViewController(IntPtr handle) : base(handle)
         {
             this.AdaptForBinding();
-            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
+            this._pagedViewControllerCache = new Dictionary<string, UIViewController>();
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -29,31 +31,31 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (DataContext as IMvxViewModel); }
+            get { return (this.DataContext as IMvxViewModel); }
             set
             {
-                DataContext = value;
+                this.DataContext = value;
                 //Verify ViewModel is IMvxPageViewModel
-                if ((DataContext != null) && (!(DataContext is IMvxPageViewModel)))
+                if ((this.DataContext != null) && (!(this.DataContext is IMvxPageViewModel)))
                     MvxTrace.Error("Error - MvxPageViewController must be given an instance of IMvxPageViewModel");
             }
         }
 
         public object DataContext
         {
-            get { return (BindingContext.DataContext); }
-            set { BindingContext.DataContext = value; }
+            get { return (this.BindingContext.DataContext); }
+            set { this.BindingContext.DataContext = value; }
         }
 
         protected virtual void InitializePaging()
         {
-            IMvxPageViewModel pageVM = ViewModel as IMvxPageViewModel;
+            IMvxPageViewModel pageVM = this.ViewModel as IMvxPageViewModel;
             if (pageVM == null)
                 return;
             IMvxPagedViewModel defaultVM = pageVM.GetDefaultViewModel();
-            UIViewController defaultVC = GetViewControllerForViewModel(defaultVM);
-            SetViewControllers(new UIViewController[] { defaultVC }, UIPageViewControllerNavigationDirection.Forward, true, null);
-            GetNextViewController = delegate (UIPageViewController pc, UIViewController rc)
+            UIViewController defaultVC = this.GetViewControllerForViewModel(defaultVM);
+            this.SetViewControllers(new UIViewController[] { defaultVC }, UIPageViewControllerNavigationDirection.Forward, true, null);
+            this.GetNextViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
                 IMvxTouchView rcTV = rc as IMvxTouchView;
                 if (rcTV == null)
@@ -64,10 +66,10 @@ namespace Cirrious.MvvmCross.Touch.Views
                 IMvxPagedViewModel nextVM = pageVM.GetNextViewModel(currentVM);
                 if (nextVM == null)
                     return (null);
-                UIViewController nextVC = GetViewControllerForViewModel(nextVM);
+                UIViewController nextVC = this.GetViewControllerForViewModel(nextVM);
                 return (nextVC);
             };
-            GetPreviousViewController = delegate (UIPageViewController pc, UIViewController rc)
+            this.GetPreviousViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
                 IMvxTouchView rcTV = rc as IMvxTouchView;
                 if (rcTV == null)
@@ -78,7 +80,7 @@ namespace Cirrious.MvvmCross.Touch.Views
                 IMvxPagedViewModel prevVM = pageVM.GetPreviousViewModel(currentVM);
                 if (prevVM == null)
                     return (null);
-                UIViewController prevVC = GetViewControllerForViewModel(prevVM);
+                UIViewController prevVC = this.GetViewControllerForViewModel(prevVM);
                 return (prevVC);
             };
         }
@@ -86,24 +88,24 @@ namespace Cirrious.MvvmCross.Touch.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            InitializePaging();
+            this.InitializePaging();
         }
 
         public virtual void NavigateToViewModel(IMvxPagedViewModel targetVM, UIPageViewControllerNavigationDirection direction, bool animated = true)
         {
-            UIViewController targetVC = GetViewControllerForViewModel(targetVM);
-            SetViewControllers(new UIViewController[] { targetVC }, direction, animated, null);
+            UIViewController targetVC = this.GetViewControllerForViewModel(targetVM);
+            this.SetViewControllers(new UIViewController[] { targetVC }, direction, animated, null);
         }
 
         public virtual UIViewController GetViewControllerForViewModel(IMvxPagedViewModel queryVM)
         {
             UIViewController retVal = null;
-            if (_pagedViewControllerCache.ContainsKey(queryVM.PagedViewId))
-                retVal = _pagedViewControllerCache[queryVM.PagedViewId];
+            if (this._pagedViewControllerCache.ContainsKey(queryVM.PagedViewId))
+                retVal = this._pagedViewControllerCache[queryVM.PagedViewId];
             else
             {
                 retVal = this.CreateViewControllerFor(queryVM) as UIViewController;
-                _pagedViewControllerCache[queryVM.PagedViewId] = retVal;
+                this._pagedViewControllerCache[queryVM.PagedViewId] = retVal;
             }
             return (retVal);
         }

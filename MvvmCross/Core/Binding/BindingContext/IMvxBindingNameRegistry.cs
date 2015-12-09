@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+    using System.Linq.Expressions;
+
     public interface IMvxBindingNameRegistry
     {
         void AddOrOverwrite(Type type, string name);

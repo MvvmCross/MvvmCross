@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Wpf.Converters
+namespace MvvmCross.Wpf.Converters
 {
     /*
      * obsolete - use CrossCore version

@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Parse.Binding;
+
     public interface IMvxBindingDescriptionParser
     {
         IEnumerable<MvxBindingDescription> Parse(string text);

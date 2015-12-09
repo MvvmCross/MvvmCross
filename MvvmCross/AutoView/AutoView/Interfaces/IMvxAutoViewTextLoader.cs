@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Interfaces
+namespace MvvmCross.AutoView.Interfaces
 {
+    using System;
+
     public interface IMvxAutoViewTextLoader
     {
         bool HasDefinition(Type viewModelType, string key);

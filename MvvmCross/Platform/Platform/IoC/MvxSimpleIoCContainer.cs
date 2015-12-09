@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxSimpleIoCContainer
         : MvxSingleton<IMvxIoCProvider>
           , IMvxIoCProvider
@@ -39,19 +40,19 @@ namespace Cirrious.CrossCore.IoC
         private readonly IMvxIocOptions _options;
         private readonly IMvxPropertyInjector _propertyInjector;
 
-        protected object LockObject => _lockObject;
-        protected IMvxIocOptions Options => _options;
+        protected object LockObject => this._lockObject;
+        protected IMvxIocOptions Options => this._options;
 
         protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
-            _options = options ?? new MvxIocOptions();
-            if (_options.PropertyInjectorType != null)
+            this._options = options ?? new MvxIocOptions();
+            if (this._options.PropertyInjectorType != null)
             {
-                _propertyInjector = Activator.CreateInstance(_options.PropertyInjectorType) as IMvxPropertyInjector;
+                this._propertyInjector = Activator.CreateInstance(this._options.PropertyInjectorType) as IMvxPropertyInjector;
             }
-            if (_propertyInjector != null)
+            if (this._propertyInjector != null)
             {
-                RegisterSingleton(typeof(IMvxPropertyInjector), _propertyInjector);
+                this.RegisterSingleton(typeof(IMvxPropertyInjector), this._propertyInjector);
             }
         }
 
@@ -69,13 +70,13 @@ namespace Cirrious.CrossCore.IoC
 
             public ConstructingResolver(Type type, MvxSimpleIoCContainer parent)
             {
-                _type = type;
-                _parent = parent;
+                this._type = type;
+                this._parent = parent;
             }
 
             public object Resolve()
             {
-                return _parent.IoCConstruct(_type);
+                return this._parent.IoCConstruct(this._type);
             }
 
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
@@ -87,12 +88,12 @@ namespace Cirrious.CrossCore.IoC
 
             public FuncConstructingResolver(Func<object> constructor)
             {
-                _constructor = constructor;
+                this._constructor = constructor;
             }
 
             public object Resolve()
             {
-                return _constructor();
+                return this._constructor();
             }
 
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
@@ -104,12 +105,12 @@ namespace Cirrious.CrossCore.IoC
 
             public SingletonResolver(object theObject)
             {
-                _theObject = theObject;
+                this._theObject = theObject;
             }
 
             public object Resolve()
             {
-                return _theObject;
+                return this._theObject;
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -123,21 +124,21 @@ namespace Cirrious.CrossCore.IoC
 
             public ConstructingSingletonResolver(Func<object> theConstructor)
             {
-                _constructor = theConstructor;
+                this._constructor = theConstructor;
             }
 
             public object Resolve()
             {
-                if (_theObject != null)
-                    return _theObject;
+                if (this._theObject != null)
+                    return this._theObject;
 
-                lock (_syncObject)
+                lock (this._syncObject)
                 {
-                    if (_theObject == null)
-                        _theObject = _constructor();
+                    if (this._theObject == null)
+                        this._theObject = this._constructor();
                 }
 
-                return _theObject;
+                return this._theObject;
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -146,14 +147,14 @@ namespace Cirrious.CrossCore.IoC
         public bool CanResolve<T>()
             where T : class
         {
-            return CanResolve(typeof(T));
+            return this.CanResolve(typeof(T));
         }
 
         public bool CanResolve(Type t)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
-                return _resolvers.ContainsKey(t);
+                return this._resolvers.ContainsKey(t);
             }
         }
 
@@ -163,7 +164,7 @@ namespace Cirrious.CrossCore.IoC
             try
             {
                 object item;
-                var toReturn = TryResolve(typeof(T), out item);
+                var toReturn = this.TryResolve(typeof(T), out item);
                 resolved = (T)item;
                 return toReturn;
             }
@@ -176,24 +177,24 @@ namespace Cirrious.CrossCore.IoC
 
         public bool TryResolve(Type type, out object resolved)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
-                return InternalTryResolve(type, out resolved);
+                return this.InternalTryResolve(type, out resolved);
             }
         }
 
         public T Resolve<T>()
             where T : class
         {
-            return (T)Resolve(typeof(T));
+            return (T)this.Resolve(typeof(T));
         }
 
         public object Resolve(Type t)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, out resolved))
+                if (!this.InternalTryResolve(t, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -204,15 +205,15 @@ namespace Cirrious.CrossCore.IoC
         public T GetSingleton<T>()
             where T : class
         {
-            return (T)GetSingleton(typeof(T));
+            return (T)this.GetSingleton(typeof(T));
         }
 
         public object GetSingleton(Type t)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.Singleton, out resolved))
+                if (!this.InternalTryResolve(t, ResolverType.Singleton, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -223,15 +224,15 @@ namespace Cirrious.CrossCore.IoC
         public T Create<T>()
             where T : class
         {
-            return (T)Create(typeof(T));
+            return (T)this.Create(typeof(T));
         }
 
         public object Create(Type t)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
+                if (!this.InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -243,14 +244,14 @@ namespace Cirrious.CrossCore.IoC
             where TInterface : class
             where TToConstruct : class, TInterface
         {
-            RegisterType(typeof(TInterface), typeof(TToConstruct));
+            this.RegisterType(typeof(TInterface), typeof(TToConstruct));
         }
 
         public void RegisterType<TInterface>(Func<TInterface> constructor)
             where TInterface : class
         {
             var resolver = new FuncConstructingResolver(constructor);
-            InternalSetResolver(typeof(TInterface), resolver);
+            this.InternalSetResolver(typeof(TInterface), resolver);
         }
 
         public void RegisterType(Type t, Func<object> constructor)
@@ -264,42 +265,42 @@ namespace Cirrious.CrossCore.IoC
                 return ret;
             });
 
-            InternalSetResolver(t, resolver);
+            this.InternalSetResolver(t, resolver);
         }
 
         public void RegisterType(Type tInterface, Type tConstruct)
         {
             var resolver = new ConstructingResolver(tConstruct, this);
-            InternalSetResolver(tInterface, resolver);
+            this.InternalSetResolver(tInterface, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
-            RegisterSingleton(typeof(TInterface), theObject);
+            this.RegisterSingleton(typeof(TInterface), theObject);
         }
 
         public void RegisterSingleton(Type tInterface, object theObject)
         {
-            InternalSetResolver(tInterface, new SingletonResolver(theObject));
+            this.InternalSetResolver(tInterface, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
 #warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
+            this.RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
         }
 
         public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
+            this.InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
         public T IoCConstruct<T>()
             where T : class
         {
-            return (T)IoCConstruct(typeof(T));
+            return (T)this.IoCConstruct(typeof(T));
         }
 
         public virtual object IoCConstruct(Type type)
@@ -310,7 +311,7 @@ namespace Cirrious.CrossCore.IoC
             if (firstConstructor == null)
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
-            var parameters = GetIoCParameterValues(type, firstConstructor);
+            var parameters = this.GetIoCParameterValues(type, firstConstructor);
             object toReturn;
             try
             {
@@ -323,11 +324,11 @@ namespace Cirrious.CrossCore.IoC
 
             try
             {
-                InjectProperties(toReturn);
+                this.InjectProperties(toReturn);
             }
             catch (Exception)
             {
-                if (!Options.CheckDisposeIfPropertyInjectionFails)
+                if (!this.Options.CheckDisposeIfPropertyInjectionFails)
                     throw;
 
                 toReturn.DisposeIfDisposable();
@@ -338,24 +339,24 @@ namespace Cirrious.CrossCore.IoC
 
         public void CallbackWhenRegistered<T>(Action action)
         {
-            CallbackWhenRegistered(typeof(T), action);
+            this.CallbackWhenRegistered(typeof(T), action);
         }
 
         public void CallbackWhenRegistered(Type type, Action action)
         {
-            lock (_lockObject)
+            lock (this._lockObject)
             {
-                if (!CanResolve(type))
+                if (!this.CanResolve(type))
                 {
                     List<Action> actions;
-                    if (_waiters.TryGetValue(type, out actions))
+                    if (this._waiters.TryGetValue(type, out actions))
                     {
                         actions.Add(action);
                     }
                     else
                     {
                         actions = new List<Action> { action };
-                        _waiters[type] = actions;
+                        this._waiters[type] = actions;
                     }
                     return;
                 }
@@ -383,25 +384,25 @@ namespace Cirrious.CrossCore.IoC
 
         private bool InternalTryResolve(Type type, out object resolved)
         {
-            return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
+            return this.InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
         }
 
         private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
-            if (!_resolvers.TryGetValue(type, out resolver))
+            if (!this._resolvers.TryGetValue(type, out resolver))
             {
                 resolved = type.CreateDefault();
                 return false;
             }
 
-            if (!Supports(resolver, requiredResolverType))
+            if (!this.Supports(resolver, requiredResolverType))
             {
                 resolved = type.CreateDefault();
                 return false;
             }
 
-            return InternalTryResolve(type, resolver, out resolved);
+            return this.InternalTryResolve(type, resolver, out resolved);
         }
 
         private bool ShouldDetectCircularReferencesFor(IResolver resolver)
@@ -409,10 +410,10 @@ namespace Cirrious.CrossCore.IoC
             switch (resolver.ResolveType)
             {
                 case ResolverType.DynamicPerResolve:
-                    return Options.TryToDetectDynamicCircularReferences;
+                    return this.Options.TryToDetectDynamicCircularReferences;
 
                 case ResolverType.Singleton:
-                    return Options.TryToDetectSingletonCircularReferences;
+                    return this.Options.TryToDetectSingletonCircularReferences;
 
                 case ResolverType.Unknown:
                     throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
@@ -423,12 +424,12 @@ namespace Cirrious.CrossCore.IoC
 
         private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
         {
-            var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
+            var detectingCircular = this.ShouldDetectCircularReferencesFor(resolver);
             if (detectingCircular)
             {
                 try
                 {
-                    _circularTypeDetection.Add(type, true);
+                    this._circularTypeDetection.Add(type, true);
                 }
                 catch (ArgumentException)
                 {
@@ -457,7 +458,7 @@ namespace Cirrious.CrossCore.IoC
             {
                 if (detectingCircular)
                 {
-                    _circularTypeDetection.Remove(type);
+                    this._circularTypeDetection.Remove(type);
                 }
             }
         }
@@ -465,11 +466,11 @@ namespace Cirrious.CrossCore.IoC
         private void InternalSetResolver(Type tInterface, IResolver resolver)
         {
             List<Action> actions;
-            lock (_lockObject)
+            lock (this._lockObject)
             {
-                _resolvers[tInterface] = resolver;
-                if (_waiters.TryGetValue(tInterface, out actions))
-                    _waiters.Remove(tInterface);
+                this._resolvers[tInterface] = resolver;
+                if (this._waiters.TryGetValue(tInterface, out actions))
+                    this._waiters.Remove(tInterface);
             }
 
             if (actions != null)
@@ -483,7 +484,7 @@ namespace Cirrious.CrossCore.IoC
 
         protected virtual void InjectProperties(object toReturn)
         {
-            _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
+            this._propertyInjector?.Inject(toReturn, this._options.PropertyInjectorOptions);
         }
 
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
@@ -492,7 +493,7 @@ namespace Cirrious.CrossCore.IoC
             foreach (var parameterInfo in firstConstructor.GetParameters())
             {
                 object parameterValue;
-                if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+                if (!this.TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
                     if (parameterInfo.IsOptional)
                     {

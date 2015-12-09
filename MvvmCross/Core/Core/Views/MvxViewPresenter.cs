@@ -5,26 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Views
+namespace MvvmCross.Core.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.ViewModels;
+
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
         private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
+            this._presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
         protected bool HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, bool> handler;
 
-            if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
+            if (this._presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
                 if (handler(hint)) return true;
             }

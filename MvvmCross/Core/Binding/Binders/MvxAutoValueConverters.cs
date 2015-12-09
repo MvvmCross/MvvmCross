@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxAutoValueConverters
         : IMvxAutoValueConverters
     {
@@ -18,8 +19,8 @@ namespace Cirrious.MvvmCross.Binding.Binders
         {
             public Key(Type viewModel, Type view)
             {
-                ViewType = view;
-                ViewModelType = viewModel;
+                this.ViewType = view;
+                this.ViewModelType = viewModel;
             }
 
             public Type ViewModelType { get; private set; }
@@ -31,13 +32,13 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 if (rhs == null)
                     return false;
 
-                return ViewModelType == rhs.ViewModelType
-                       && ViewType == rhs.ViewType;
+                return this.ViewModelType == rhs.ViewModelType
+                       && this.ViewType == rhs.ViewType;
             }
 
             public override int GetHashCode()
             {
-                return ViewModelType.GetHashCode() + ViewType.GetHashCode();
+                return this.ViewModelType.GetHashCode() + this.ViewType.GetHashCode();
             }
         }
 
@@ -46,13 +47,13 @@ namespace Cirrious.MvvmCross.Binding.Binders
         public IMvxValueConverter Find(Type viewModelType, Type viewType)
         {
             IMvxValueConverter result;
-            _lookup.TryGetValue(new Key(viewModelType, viewType), out result);
+            this._lookup.TryGetValue(new Key(viewModelType, viewType), out result);
             return result;
         }
 
         public void Register(Type viewModelType, Type viewType, IMvxValueConverter converter)
         {
-            _lookup[new Key(viewModelType, viewType)] = converter;
+            this._lookup[new Key(viewModelType, viewType)] = converter;
         }
     }
 }

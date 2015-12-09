@@ -5,43 +5,42 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using Android.Views;
-using Android.Widget;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
-using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
-using Cirrious.MvvmCross.Binding.Droid.Target;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-
-namespace Cirrious.MvvmCross.Binding.Droid
+namespace MvvmCross.Binding.Droid
 {
+    using Android.Graphics;
+    using Android.Views;
+    using Android.Widget;
+
+    using MvvmCross.Binding.Droid.Binders;
+    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Binding.Droid.ResourceHelpers;
+    using MvvmCross.Binding.Droid.Target;
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
         public override void DoRegistration()
         {
-            InitializeAppResourceTypeFinder();
-            InitializeBindingResources();
-            InitializeLayoutInflation();
+            this.InitializeAppResourceTypeFinder();
+            this.InitializeBindingResources();
+            this.InitializeLayoutInflation();
             base.DoRegistration();
         }
 
         protected virtual void InitializeLayoutInflation()
         {
-            var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
+            var inflaterfactoryFactory = this.CreateLayoutInflaterFactoryFactory();
             Mvx.RegisterSingleton(inflaterfactoryFactory);
 
-            var viewFactory = CreateAndroidViewFactory();
+            var viewFactory = this.CreateAndroidViewFactory();
             Mvx.RegisterSingleton(viewFactory);
 
-            var viewBinderFactory = CreateAndroidViewBinderFactory();
+            var viewBinderFactory = this.CreateAndroidViewBinderFactory();
             Mvx.RegisterSingleton(viewBinderFactory);
         }
 
@@ -67,7 +66,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual void InitializeAppResourceTypeFinder()
         {
-            var resourceFinder = CreateAppResourceTypeFinder();
+            var resourceFinder = this.CreateAppResourceTypeFinder();
             Mvx.RegisterSingleton(resourceFinder);
         }
 
@@ -164,13 +163,13 @@ namespace Cirrious.MvvmCross.Binding.Droid
         {
             base.RegisterPlatformSpecificComponents();
 
-            InitializeViewTypeResolver();
-            InitializeContextStack();
+            this.InitializeViewTypeResolver();
+            this.InitializeContextStack();
         }
 
         protected virtual void InitializeContextStack()
         {
-            var stack = CreateContextStack();
+            var stack = this.CreateContextStack();
             Mvx.RegisterSingleton(stack);
         }
 
@@ -181,7 +180,7 @@ namespace Cirrious.MvvmCross.Binding.Droid
 
         protected virtual void InitializeViewTypeResolver()
         {
-            var typeCache = CreateViewTypeCache();
+            var typeCache = this.CreateViewTypeCache();
             Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);

@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-using System;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Test.ViewModels
+namespace MvvmCross.Test.ViewModels
 {
+    using System;
+    using System.Linq;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Mocks.TestViewModels;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxBundleTest : MvxIoCSupportingTest
     {
@@ -77,7 +78,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
             var bundle = new MvxBundle();
             bundle.Write(testObject);
 
-            var method = GetType().GetMethod("TestFunction");
+            var method = this.GetType().GetMethod("TestFunction");
             var args = bundle.CreateArgumentList(method.GetParameters(), "ignored debug text");
             var output = method.Invoke(this, args.ToArray());
 

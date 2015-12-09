@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Android.Widget;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Views;
+    using Android.Widget;
+
     public class MvxTextViewFocusTargetBinding
         : MvxAndroidTargetBinding
     {
@@ -29,26 +30,26 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
             value = value ?? string.Empty;
-            TextField.Text = value.ToString();
+            this.TextField.Text = value.ToString();
         }
 
         public override void SubscribeToEvents()
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
-            TextField.FocusChange += HandleLostFocus;
-            _subscribed = true;
+            this.TextField.FocusChange += this.HandleLostFocus;
+            this._subscribed = true;
         }
 
         private void HandleLostFocus(object sender, View.FocusChangeEventArgs e)
         {
-            if (TextField == null) return;
+            if (this.TextField == null) return;
 
             if (!e.HasFocus)
-                FireValueChanged(TextField.Text);
+                FireValueChanged(this.TextField.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -56,10 +57,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (TextField != null && _subscribed)
+            if (this.TextField != null && this._subscribed)
             {
-                TextField.FocusChange -= HandleLostFocus;
-                _subscribed = false;
+                this.TextField.FocusChange -= this.HandleLostFocus;
+                this._subscribed = false;
             }
         }
     }

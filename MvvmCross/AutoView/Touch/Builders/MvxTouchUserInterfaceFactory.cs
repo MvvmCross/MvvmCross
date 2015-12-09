@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
-using CrossUI.Core.Builder;
-using CrossUI.Core.Descriptions;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Builders
+namespace MvvmCross.AutoView.Touch.Builders
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Core.Descriptions;
+
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxTouchUserInterfaceFactory
         : IMvxUserInterfaceFactory
     {

@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.OS;
-using Cirrious.CrossCore.Core;
-using System;
-
-namespace Cirrious.CrossCore.Droid.Views
+namespace MvvmCross.Platform.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.OS;
+
+    using MvvmCross.Platform.Core;
+
     public interface IMvxEventSourceActivity : IMvxDisposeSource
     {
         event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;

@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxNamedInstanceRegistry<T>
         : IMvxNamedInstanceLookup<T>
           , IMvxNamedInstanceRegistry<T>
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
                 return null;
 
             T toReturn;
-            if (!_converters.TryGetValue(converterName, out toReturn))
+            if (!this._converters.TryGetValue(converterName, out toReturn))
             {
                 // no trace here - this is expected to fail sometimes - e.g. in the case where we look for first combiner, then converter
                 // MvxBindingTrace.Trace("Could not find named {0} for {1}", converterName,
@@ -36,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Binders
 
         public void AddOrOverwrite(string name, T converter)
         {
-            _converters[name] = converter;
+            this._converters[name] = converter;
         }
 
         public void AddOrOverwriteFrom(Assembly assembly)

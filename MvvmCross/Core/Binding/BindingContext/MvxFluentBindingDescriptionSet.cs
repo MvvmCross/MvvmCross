@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.Bindings;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Platform.Core;
+
     public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
         : MvxApplicable
         where TOwningTarget : class, IMvxBindingContextOwner
@@ -20,22 +21,22 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner)
         {
-            _bindingContextOwner = bindingContextOwner;
+            this._bindingContextOwner = bindingContextOwner;
         }
 
         public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
-            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
-                                                                                   _bindingContextOwner);
-            _applicables.Add(toReturn);
+            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(this._bindingContextOwner,
+                                                                                   this._bindingContextOwner);
+            this._applicables.Add(toReturn);
             return toReturn;
         }
 
         public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget)
             where TChildTarget : class
         {
-            var toReturn = new MvxFluentBindingDescription<TChildTarget, TSource>(_bindingContextOwner, childTarget);
-            _applicables.Add(toReturn);
+            var toReturn = new MvxFluentBindingDescription<TChildTarget, TSource>(this._bindingContextOwner, childTarget);
+            this._applicables.Add(toReturn);
             return toReturn;
         }
 
@@ -43,7 +44,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                                                      string bindingDescription)
             where TChildTarget : class
         {
-            var toReturn = Bind(childTarget);
+            var toReturn = this.Bind(childTarget);
             toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
@@ -53,14 +54,14 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                                                                                          bindingDescription)
             where TChildTarget : class
         {
-            var toReturn = Bind(childTarget);
+            var toReturn = this.Bind(childTarget);
             toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
 
         public override void Apply()
         {
-            foreach (var applicable in _applicables)
+            foreach (var applicable in this._applicables)
                 applicable.Apply();
             base.Apply();
         }

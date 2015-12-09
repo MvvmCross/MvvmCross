@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using MvvmCross.Core.Views;
+
     public interface IMvxWpfViewsContainer
         : IMvxViewsContainer
           , IMvxSimpleWpfViewLoader

@@ -5,27 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Microsoft.Phone.Controls;
-using System;
-using System.Threading;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System;
+    using System.Threading;
+
+    using Microsoft.Phone.Controls;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxPhoneViewPresenter
         : MvxViewPresenter, IMvxPhoneViewPresenter
     {
         private readonly PhoneApplicationFrame _rootFrame;
 
-        protected PhoneApplicationFrame RootFrame => _rootFrame;
+        protected PhoneApplicationFrame RootFrame => this._rootFrame;
 
         public MvxPhoneViewPresenter(PhoneApplicationFrame rootFrame)
         {
-            _rootFrame = rootFrame;
+            this._rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -34,7 +36,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             {
                 var requestTranslator = Mvx.Resolve<IMvxPhoneViewModelRequestTranslator>();
                 var xamlUri = requestTranslator.GetXamlUriFor(request);
-                _rootFrame.Navigate(xamlUri);
+                this._rootFrame.Navigate(xamlUri);
             }
             catch (ThreadAbortException)
             {
@@ -49,11 +51,11 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             if (hint is MvxClosePresentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -62,7 +64,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public virtual void Close(IMvxViewModel viewModel)
         {
-            var currentView = _rootFrame.Content as IMvxView;
+            var currentView = this._rootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
@@ -75,13 +77,13 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 return;
             }
 
-            if (!_rootFrame.CanGoBack)
+            if (!this._rootFrame.CanGoBack)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
                 return;
             }
 
-            _rootFrame.GoBack();
+            this._rootFrame.GoBack();
         }
     }
 }

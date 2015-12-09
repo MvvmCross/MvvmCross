@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Platform
+namespace MvvmCross.Core.Platform
 {
+    using System;
+
     public interface IMvxStringToTypeParser
     {
         bool TypeSupported(Type targetType);

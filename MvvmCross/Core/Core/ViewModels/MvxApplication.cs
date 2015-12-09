@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Plugins;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Plugins;
+
     public abstract class MvxApplication
         : IMvxApplication
     {
@@ -23,8 +24,8 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             get
             {
-                _defaultLocator = _defaultLocator ?? CreateDefaultViewModelLocator();
-                return _defaultLocator;
+                this._defaultLocator = this._defaultLocator ?? this.CreateDefaultViewModelLocator();
+                return this._defaultLocator;
             }
         }
 
@@ -45,7 +46,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
-            return DefaultLocator;
+            return this.DefaultLocator;
         }
 
         protected void RegisterAppStart<TViewModel>()
@@ -61,7 +62,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected IEnumerable<Type> CreatableTypes()
         {
-            return CreatableTypes(this.GetType().GetTypeInfo().Assembly);
+            return this.CreatableTypes(this.GetType().GetTypeInfo().Assembly);
         }
 
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)

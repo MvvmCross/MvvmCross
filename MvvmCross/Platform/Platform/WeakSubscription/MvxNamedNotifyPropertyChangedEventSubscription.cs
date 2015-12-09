@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-
-namespace Cirrious.CrossCore.WeakSubscription
+namespace MvvmCross.Platform.WeakSubscription
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+
     public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription
     {
@@ -20,7 +19,7 @@ namespace Cirrious.CrossCore.WeakSubscription
         public MvxNamedNotifyPropertyChangedEventSubscription(INotifyPropertyChanged source,
                                                               Expression<Func<T>> property,
                                                               EventHandler<PropertyChangedEventArgs> targetEventHandler)
-            : this(source, source.GetPropertyNameFromExpression(property), targetEventHandler)
+            : this(source, (string)source.GetPropertyNameFromExpression(property), targetEventHandler)
         {
         }
 
@@ -29,7 +28,7 @@ namespace Cirrious.CrossCore.WeakSubscription
                                                               EventHandler<PropertyChangedEventArgs> targetEventHandler)
             : base(source, targetEventHandler)
         {
-            _propertyName = propertyName;
+            this._propertyName = propertyName;
         }
 
         protected override Delegate CreateEventHandler()
@@ -37,9 +36,9 @@ namespace Cirrious.CrossCore.WeakSubscription
             return new PropertyChangedEventHandler((sender, e) =>
                 {
                     if (string.IsNullOrEmpty(e.PropertyName)
-                        || e.PropertyName == _propertyName)
+                        || e.PropertyName == this._propertyName)
                     {
-                        OnSourceEvent(sender, e);
+                        this.OnSourceEvent(sender, e);
                     }
                 });
         }

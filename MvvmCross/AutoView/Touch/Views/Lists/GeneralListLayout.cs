@@ -5,18 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using CrossUI.Core.Elements.Lists;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace MvvmCross.AutoView.Touch.Views.Lists
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Elements.Lists;
+
+    using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Platform.Exceptions;
+
+    using UIKit;
+
     public class GeneralListLayout : IListLayout
     {
         private MvxTableViewSource _source;
@@ -27,73 +29,73 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         public GeneralListLayout()
         {
-            ItemLayouts = new Dictionary<string, IListItemLayout>();
+            this.ItemLayouts = new Dictionary<string, IListItemLayout>();
         }
 
         public virtual MvxTableViewSource InitializeSource(UITableView tableView)
         {
-            if (_source != null)
+            if (this._source != null)
             {
                 throw new MvxException("You cannot create the source more than once");
             }
 
-            _source = CreateSource(tableView);
-            _source.ItemsSource = this.ItemsSource;
-            _source.SelectionChangedCommand = this.ItemClick;
-            return _source;
+            this._source = this.CreateSource(tableView);
+            this._source.ItemsSource = this.ItemsSource;
+            this._source.SelectionChangedCommand = this.ItemClick;
+            return this._source;
         }
 
         protected virtual MvxTableViewSource CreateSource(UITableView tableView)
         {
             return new GeneralTableViewSource(
                 tableView,
-                DefaultLayout as IMvxLayoutListItemViewFactory,
-                ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
+                this.DefaultLayout as IMvxLayoutListItemViewFactory,
+                this.ItemLayouts.ToDictionary(x => x.Key, x => x.Value as IMvxLayoutListItemViewFactory));
         }
 
         public IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get { return this._itemsSource; }
             set
             {
-                _itemsSource = value;
-                if (_source != null) _source.ItemsSource = _itemsSource;
+                this._itemsSource = value;
+                if (this._source != null) this._source.ItemsSource = this._itemsSource;
             }
         }
 
         public ICommand ItemClick
         {
-            get { return _itemClick; }
+            get { return this._itemClick; }
             set
             {
-                _itemClick = value;
-                if (_source != null) _source.SelectionChangedCommand = _itemClick;
+                this._itemClick = value;
+                if (this._source != null) this._source.SelectionChangedCommand = this._itemClick;
             }
         }
 
         public IListItemLayout DefaultLayout
         {
-            get { return _defaultLayout; }
+            get { return this._defaultLayout; }
             set
             {
-                CheckListIsNull();
-                _defaultLayout = value;
+                this.CheckListIsNull();
+                this._defaultLayout = value;
             }
         }
 
         public Dictionary<string, IListItemLayout> ItemLayouts
         {
-            get { return _itemLayouts; }
+            get { return this._itemLayouts; }
             private set
             {
-                CheckListIsNull();
-                _itemLayouts = value;
+                this.CheckListIsNull();
+                this._itemLayouts = value;
             }
         }
 
         private void CheckListIsNull()
         {
-            if (_source != null)
+            if (this._source != null)
             {
                 throw new MvxException("You cannot set the default layout after the list has been created.");
             }

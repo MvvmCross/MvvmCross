@@ -1,10 +1,10 @@
-using Android.Content;
-using Android.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.Views;
+
     public class MvxContextWrapper : ContextWrapper
     {
         private LayoutInflater _inflater;
@@ -30,7 +30,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             {
                 return this._inflater ??
                        (this._inflater =
-                           new MvxLayoutInflater(LayoutInflater.From(BaseContext), this, null, false));
+                           new MvxLayoutInflater(LayoutInflater.From(this.BaseContext), this, null, false));
             }
 
             return base.GetSystemService(name);

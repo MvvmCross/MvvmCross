@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+
     public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged
     {
         // this ShouldAlwaysRaiseInpcOnUserInterfaceThread is not a Property so as to avoid Inpc pollution

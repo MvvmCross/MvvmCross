@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Views;
-using Foundation;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+
+    using Foundation;
+
+    using UIKit;
+
     public class MvxImageViewLoader
         : MvxBaseImageViewLoader<UIImage>
     {

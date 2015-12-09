@@ -5,9 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
-using System.Drawing;
 
 #if __UNIFIED__
 using AppKit;
@@ -15,8 +12,11 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Binding.Mac.Views
 {
+    using System;
+    using System.Drawing;
+
     public class MvxView
         : NSView
           , IMvxBindable
@@ -50,15 +50,15 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
         {
             if (disposing)
             {
-                BindingContext.ClearAllBindings();
+                this.BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
     }
 }

@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public abstract class MvxBaseUIDatePickerTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
     {
         protected MvxBaseUIDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -35,7 +36,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(GetValueFrom(view));
+            FireValueChanged(this.GetValueFrom(view));
         }
 
         protected abstract object GetValueFrom(UIDatePicker view);

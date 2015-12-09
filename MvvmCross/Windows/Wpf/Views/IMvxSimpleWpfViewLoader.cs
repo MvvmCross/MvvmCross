@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using System.Windows;
-
-namespace Cirrious.MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views
 {
+    using System.Windows;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxSimpleWpfViewLoader
     {
         FrameworkElement CreateView(MvxViewModelRequest request);

@@ -5,10 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.WindowsUWP.Views
+namespace MvvmCross.WindowsUWP.Views
 {
+    using MvvmCross.Core.Views;
+
     public interface IMvxWindowsViewPresenter
         : IMvxViewPresenter
     {

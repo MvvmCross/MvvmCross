@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Platform;
-using System;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System;
+    using System.Linq;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.WindowsPhone.Platform;
+
     public class MvxPhoneViewsContainer
         : MvxViewsContainer
         , IMvxPhoneViewsContainer
@@ -35,7 +36,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public virtual Uri GetXamlUriFor(MvxViewModelRequest request)
         {
-            var viewType = GetViewType(request.ViewModelType);
+            var viewType = this.GetViewType(request.ViewModelType);
             if (viewType == null)
             {
                 throw new MvxException("View Type not found for " + request.ViewModelType);
@@ -44,7 +45,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
             var viewUrl =
-                $"{GetBaseXamlUrlForView(viewType)}?{QueryParameterKeyName}={Uri.EscapeDataString(requestText)}";
+                $"{this.GetBaseXamlUrlForView(viewType)}?{QueryParameterKeyName}={Uri.EscapeDataString(requestText)}";
             return new Uri(viewUrl, UriKind.Relative);
         }
 
@@ -54,7 +55,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
                 (MvxPhoneViewAttribute)
                 viewType.GetCustomAttributes(typeof(MvxPhoneViewAttribute), false).FirstOrDefault();
 
-            string viewUrl = customAttribute == null ? GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
+            string viewUrl = customAttribute == null ? this.GetConventionalXamlUrlForView(viewType) : customAttribute.Url;
 
             return viewUrl;
         }
@@ -62,7 +63,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         protected virtual string GetConventionalXamlUrlForView(Type viewType)
         {
             var splitName = viewType.FullName.Split('.');
-            var viewsAndBeyond = splitName.SkipWhile((segment) => segment != ViewsFolderName);
+            var viewsAndBeyond = splitName.SkipWhile((segment) => segment != this.ViewsFolderName);
             var viewUrl = $"/{string.Join("/", viewsAndBeyond)}.xaml";
             return viewUrl;
         }

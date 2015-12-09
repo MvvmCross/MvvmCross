@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Bindings
+namespace MvvmCross.Binding.Bindings
 {
     public interface IMvxUpdateableBinding : IMvxBinding
     {

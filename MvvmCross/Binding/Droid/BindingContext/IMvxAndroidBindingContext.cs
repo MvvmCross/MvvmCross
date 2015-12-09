@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-
-namespace Cirrious.MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Binding.Droid.BindingContext
 {
+    using Android.Views;
+
+    using MvvmCross.Binding.Droid.Views;
+
     public interface IMvxAndroidBindingContext
         : IMvxBindingContext
     {

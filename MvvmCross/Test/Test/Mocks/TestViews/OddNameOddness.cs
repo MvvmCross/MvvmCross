@@ -1,8 +1,8 @@
-﻿using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViews
+﻿namespace MvvmCross.Test.Mocks.TestViews
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public class OddNameOddness : IMvxView
     {
         public object DataContext { get; set; }

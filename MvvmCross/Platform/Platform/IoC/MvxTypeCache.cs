@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
     public class MvxTypeCache<TType> : IMvxTypeCache<TType>
     {
         public Dictionary<string, Type> LowerCaseFullNameCache { get; private set; }
@@ -21,15 +21,15 @@ namespace Cirrious.CrossCore.IoC
 
         public MvxTypeCache()
         {
-            LowerCaseFullNameCache = new Dictionary<string, Type>();
-            FullNameCache = new Dictionary<string, Type>();
-            NameCache = new Dictionary<string, Type>();
-            CachedAssemblies = new Dictionary<Assembly, bool>();
+            this.LowerCaseFullNameCache = new Dictionary<string, Type>();
+            this.FullNameCache = new Dictionary<string, Type>();
+            this.NameCache = new Dictionary<string, Type>();
+            this.CachedAssemblies = new Dictionary<Assembly, bool>();
         }
 
         public void AddAssembly(Assembly assembly)
         {
-            if (CachedAssemblies.ContainsKey(assembly))
+            if (this.CachedAssemblies.ContainsKey(assembly))
                 return;
 
             var viewType = typeof(TType);
@@ -41,16 +41,16 @@ namespace Cirrious.CrossCore.IoC
             {
                 if (!string.IsNullOrEmpty(type.FullName))
                 {
-                    FullNameCache[type.FullName] = type;
-                    LowerCaseFullNameCache[type.FullName.ToLowerInvariant()] = type;
+                    this.FullNameCache[type.FullName] = type;
+                    this.LowerCaseFullNameCache[type.FullName.ToLowerInvariant()] = type;
                 }
                 if (!string.IsNullOrEmpty(type.Name))
                 {
-                    NameCache[type.Name] = type;
+                    this.NameCache[type.Name] = type;
                 }
             }
 
-            CachedAssemblies[assembly] = true;
+            this.CachedAssemblies[assembly] = true;
         }
     }
 }

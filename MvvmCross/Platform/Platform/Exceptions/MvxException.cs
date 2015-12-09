@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Exceptions
+namespace MvvmCross.Platform.Exceptions
 {
+    using System;
+
     // Officially exception should support serialisation, but we don't add it here - mainly because of
     // serialization limits in PCLs
     public class MvxException : Exception

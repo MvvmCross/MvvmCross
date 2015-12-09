@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using CrossUI.Core.Builder;
-using CrossUI.Core.Descriptions;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace MvvmCross.AutoView.Droid.Builders
 {
+    using CrossUI.Core.Builder;
+    using CrossUI.Core.Descriptions;
+
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxAndroidUserInterfaceFactory
         : IMvxUserInterfaceFactory
 

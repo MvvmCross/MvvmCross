@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Text;
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Text;
+    using Android.Widget;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxTextViewTextTargetBinding
         : MvxAndroidTargetBinding
         , IMvxEditableTextView
@@ -31,14 +32,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            _isEditTextBinding = target is EditText;
+            this._isEditTextBinding = target is EditText;
         }
 
         public override Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
-            if (!_isEditTextBinding)
+            if (!this._isEditTextBinding)
                 return false;
 
             return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
@@ -49,21 +50,21 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             ((TextView)target).Text = (string)toSet;
         }
 
-        public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
+        public override MvxBindingMode DefaultMode => this._isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
-            var view = TextView;
+            var view = this.TextView;
             if (view == null)
                 return;
 
-            view.AfterTextChanged += EditTextOnAfterTextChanged;
-            _subscribed = true;
+            view.AfterTextChanged += this.EditTextOnAfterTextChanged;
+            this._subscribed = true;
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
         {
-            FireValueChanged(TextView.Text);
+            FireValueChanged(this.TextView.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -71,13 +72,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                if (_isEditTextBinding)
+                if (this._isEditTextBinding)
                 {
-                    var editText = TextView;
-                    if (editText != null && _subscribed)
+                    var editText = this.TextView;
+                    if (editText != null && this._subscribed)
                     {
-                        editText.AfterTextChanged -= EditTextOnAfterTextChanged;
-                        _subscribed = false;
+                        editText.AfterTextChanged -= this.EditTextOnAfterTextChanged;
+                        this._subscribed = false;
                     }
                 }
             }
@@ -87,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             get
             {
-                var view = TextView;
+                var view = this.TextView;
                 return view?.Text;
             }
         }

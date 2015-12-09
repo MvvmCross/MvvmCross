@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Foundation;
-using System;
-using System.Reflection;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+    using System.Reflection;
+
+    using Foundation;
+
+    using UIKit;
+
     public class MvxUIDatePickerDateTargetBinding : MvxBaseUIDatePickerTargetBinding
     {
         public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)

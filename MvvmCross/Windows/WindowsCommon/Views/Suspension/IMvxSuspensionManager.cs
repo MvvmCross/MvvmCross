@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.WindowsCommon.Views.Suspension
+﻿namespace MvvmCross.WindowsCommon.Views.Suspension
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface IMvxSuspensionManager
     {
         /// <summary>

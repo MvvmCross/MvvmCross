@@ -5,12 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces
+namespace MvvmCross.AutoView.Touch.Interfaces
 {
+    using MvvmCross.AutoView.Interfaces;
+
     public interface IMvxTouchAutoView
         : IMvxTouchView
           , IMvxAutoView

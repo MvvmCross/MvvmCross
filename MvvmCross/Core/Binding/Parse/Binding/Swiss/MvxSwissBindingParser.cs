@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
+namespace MvvmCross.Binding.Parse.Binding.Swiss
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxSwissBindingParser
         : MvxBindingParser
     {
@@ -21,76 +22,76 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
         protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
-            if (IsComplete)
+            if (this.IsComplete)
                 return;
 
-            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf(TerminatingCharacters().ToArray());
+            var block = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf(this.TerminatingCharacters().ToArray());
             block = block.Trim();
             if (string.IsNullOrEmpty(block))
             {
-                HandleEmptyBlock(description);
+                this.HandleEmptyBlock(description);
                 return;
             }
 
             switch (block)
             {
                 case "Path":
-                    ParseEquals(block);
-                    ThrowExceptionIfPathAlreadyDefined(description);
-                    description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    this.ParseEquals(block);
+                    this.ThrowExceptionIfPathAlreadyDefined(description);
+                    description.Path = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     break;
 
                 case "Converter":
-                    ParseEquals(block);
-                    var converter = ReadTargetPropertyName();
+                    this.ParseEquals(block);
+                    var converter = this.ReadTargetPropertyName();
                     if (!string.IsNullOrEmpty(description.Converter))
                         MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
                     description.Converter = converter;
                     break;
 
                 case "ConverterParameter":
-                    ParseEquals(block);
+                    this.ParseEquals(block);
                     if (description.ConverterParameter != null)
                         MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
-                    description.ConverterParameter = ReadValue();
+                    description.ConverterParameter = this.ReadValue();
                     break;
 
                 case "CommandParameter":
-                    if (!IsComplete &&
-                        CurrentChar == '(')
+                    if (!this.IsComplete &&
+                        this.CurrentChar == '(')
                     {
                         // following https://github.com/MvvmCross/MvvmCross/issues/704, if the next character is "(" then
                         // we can treat CommandParameter as a normal non-keyword block
-                        ParseNonKeywordBlockInto(description, block);
+                        this.ParseNonKeywordBlockInto(description, block);
                     }
                     else
                     {
-                        ParseEquals(block);
+                        this.ParseEquals(block);
                         if (!string.IsNullOrEmpty(description.Converter))
                             MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
                         description.Converter = "CommandParameter";
-                        description.ConverterParameter = ReadValue();
+                        description.ConverterParameter = this.ReadValue();
                     }
                     break;
 
                 case "FallbackValue":
-                    ParseEquals(block);
+                    this.ParseEquals(block);
                     if (description.FallbackValue != null)
                         MvxBindingTrace.Warning("Overwriting existing FallbackValue");
-                    description.FallbackValue = ReadValue();
+                    description.FallbackValue = this.ReadValue();
                     break;
 
                 case "Mode":
-                    ParseEquals(block);
+                    this.ParseEquals(block);
                     //if (description.Mode != MvxBindingMode.Default)
                     //{
                     //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
                     //}
-                    description.Mode = ReadBindingMode();
+                    description.Mode = this.ReadBindingMode();
                     break;
 
                 default:
-                    ParseNonKeywordBlockInto(description, block);
+                    this.ParseNonKeywordBlockInto(description, block);
                     break;
             }
         }
@@ -102,13 +103,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
 
         protected virtual void ParseNonKeywordBlockInto(MvxSerializableBindingDescription description, string block)
         {
-            if (!IsComplete && CurrentChar == '(')
+            if (!this.IsComplete && this.CurrentChar == '(')
             {
-                ParseFunctionStyleBlockInto(description, block);
+                this.ParseFunctionStyleBlockInto(description, block);
             }
             else
             {
-                ThrowExceptionIfPathAlreadyDefined(description);
+                this.ThrowExceptionIfPathAlreadyDefined(description);
                 description.Path = block;
             }
         }
@@ -116,47 +117,47 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
         protected virtual void ParseFunctionStyleBlockInto(MvxSerializableBindingDescription description, string block)
         {
             description.Converter = block;
-            MoveNext();
-            if (IsComplete)
+            this.MoveNext();
+            if (this.IsComplete)
                 throw new MvxException("Unterminated () pair for converter {0}", block);
 
-            ParseChildBindingDescriptionInto(description);
-            SkipWhitespace();
-            switch (CurrentChar)
+            this.ParseChildBindingDescriptionInto(description);
+            this.SkipWhitespace();
+            switch (this.CurrentChar)
             {
                 case ')':
-                    MoveNext();
+                    this.MoveNext();
                     break;
 
                 case ',':
-                    MoveNext();
-                    ReadConverterParameterAndClosingBracket(description);
+                    this.MoveNext();
+                    this.ReadConverterParameterAndClosingBracket(description);
                     break;
 
                 default:
-                    throw new MvxException("Unexpected character {0} while parsing () contents", CurrentChar);
+                    throw new MvxException("Unexpected character {0} while parsing () contents", this.CurrentChar);
             }
         }
 
         protected void ReadConverterParameterAndClosingBracket(MvxSerializableBindingDescription description)
         {
-            SkipWhitespace();
-            description.ConverterParameter = ReadValue();
-            SkipWhitespace();
-            if (CurrentChar != ')')
+            this.SkipWhitespace();
+            description.ConverterParameter = this.ReadValue();
+            this.SkipWhitespace();
+            if (this.CurrentChar != ')')
                 throw new MvxException("Unterminated () pair for converter {0}");
-            MoveNext();
+            this.MoveNext();
         }
 
         protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description,
                                                         ParentIsLookingForComma parentIsLookingForComma =
                                                             ParentIsLookingForComma.ParentIsLookingForComma)
         {
-            SkipWhitespace();
+            this.SkipWhitespace();
             description.Function = "Single";
             description.Sources = new[]
                 {
-                    ParseBindingDescription(parentIsLookingForComma)
+                    this.ParseBindingDescription(parentIsLookingForComma)
                 };
         }
 
@@ -168,13 +169,13 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             {
                 throw new MvxException(
                     "Make sure you are using ';' to separate multiple bindings. You cannot specify Path/Literal/Combiner more than once - position {0} in {1}",
-                    CurrentIndex, FullText);
+                    this.CurrentIndex, this.FullText);
             }
         }
 
         protected override MvxSerializableBindingDescription ParseBindingDescription()
         {
-            return ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
+            return this.ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
         }
 
         protected enum ParentIsLookingForComma
@@ -187,23 +188,23 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
             ParentIsLookingForComma parentIsLookingForComma)
         {
             var description = new MvxSerializableBindingDescription();
-            SkipWhitespace();
+            this.SkipWhitespace();
 
             while (true)
             {
-                ParseNextBindingDescriptionOptionInto(description);
+                this.ParseNextBindingDescriptionOptionInto(description);
 
-                SkipWhitespace();
-                if (IsComplete)
+                this.SkipWhitespace();
+                if (this.IsComplete)
                     return description;
 
-                switch (CurrentChar)
+                switch (this.CurrentChar)
                 {
                     case ',':
                         if (parentIsLookingForComma == ParentIsLookingForComma.ParentIsLookingForComma)
                             return description;
 
-                        MoveNext();
+                        this.MoveNext();
                         break;
 
                     case ';':
@@ -211,14 +212,14 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Swiss
                         return description;
 
                     default:
-                        if (DetectOperator())
-                            ParseOperatorWithLeftHand(description);
+                        if (this.DetectOperator())
+                            this.ParseOperatorWithLeftHand(description);
                         else
                             throw new MvxException(
                                 "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
-                                CurrentChar,
-                                CurrentIndex,
-                                FullText);
+                                this.CurrentChar,
+                                this.CurrentIndex,
+                                this.FullText);
                         break;
                 }
             }

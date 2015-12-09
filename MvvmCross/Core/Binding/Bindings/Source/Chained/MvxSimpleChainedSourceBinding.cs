@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
+namespace MvvmCross.Binding.Bindings.Source.Chained
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
     public class MvxSimpleChainedSourceBinding
         : MvxChainedSourceBinding
     {
@@ -20,7 +21,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Chained
             IList<MvxPropertyToken> childTokens)
             : base(source, propertyInfo, childTokens)
         {
-            UpdateChildBinding();
+            this.UpdateChildBinding();
         }
 
         protected override object[] PropertyIndexParameters()

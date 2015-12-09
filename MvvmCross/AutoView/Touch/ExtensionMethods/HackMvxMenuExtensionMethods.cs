@@ -5,14 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Touch.Views.Menus;
-using CrossUI.Core.Elements.Menu;
-using System.Collections.Generic;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.ExtensionMethods
+namespace MvvmCross.AutoView.Touch.ExtensionMethods
 {
+    using System.Collections.Generic;
+    using System.Windows.Input;
+
+    using CrossUI.Core.Elements.Menu;
+
+    using MvvmCross.AutoView.Touch.Views.Menus;
+
+    using UIKit;
+
     public static class HackMvxMenuExtensionMethods
     {
         public static void ShowOptionsMenu(this UIViewController vc, IParentMenu parentMenu)

@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Console.Platform;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using MvvmCross.Console.Platform;
+
     public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     {
         private readonly MvxConsoleSystemMessageHandler _systemMessageHandler = new MvxConsoleSystemMessageHandler();
@@ -25,11 +24,11 @@ namespace Cirrious.MvvmCross.Console.Views
         public void Run()
         {
             System.Console.WriteLine("Run loop starting");
-            while (!_systemMessageHandler.ExitFlag)
+            while (!this._systemMessageHandler.ExitFlag)
             {
                 System.Console.Write(">");
                 var input = System.Console.ReadLine();
-                if (CurrentView == null)
+                if (this.CurrentView == null)
                 {
                     System.Console.WriteLine("Error - no view shown currently");
                     return;
@@ -38,10 +37,10 @@ namespace Cirrious.MvvmCross.Console.Views
                 if (input == null)
                     input = string.Empty;
 
-                if (CurrentView.HandleInput(input))
+                if (this.CurrentView.HandleInput(input))
                     continue;
 
-                if (_systemMessageHandler.HandleInput(CurrentView.ReflectionGetViewModel(), input))
+                if (this._systemMessageHandler.HandleInput(this.CurrentView.ReflectionGetViewModel(), input))
                     continue;
 
                 System.Console.WriteLine("Error - unknown input");

@@ -1,14 +1,14 @@
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-using System.Collections;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Linq;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Views;
+    using Android.Widget;
+
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
         public MvxExpandableListAdapter(Context context)
@@ -32,8 +32,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
                 this._groupTemplateId = value;
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (ItemsSource != null)
-                    NotifyDataSetChanged();
+                if (this.ItemsSource != null)
+                    this.NotifyDataSetChanged();
             }
         }
 
@@ -105,7 +105,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
             var item = this.GetRawItem(groupPosition, childPosition);
 
-            return base.GetBindableView(convertView, item, ItemTemplateId);
+            return base.GetBindableView(convertView, item, this.ItemTemplateId);
         }
 
         public int GetChildrenCount(int groupPosition)

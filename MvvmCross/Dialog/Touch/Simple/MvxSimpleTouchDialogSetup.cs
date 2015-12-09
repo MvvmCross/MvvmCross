@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Dialog.Touch.Simple
+namespace MvvmCross.Dialog.Touch.Simple
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+
     public class MvxSimpleTouchDialogSetup
         : MvxTouchDialogSetup
     {
@@ -22,10 +22,10 @@ namespace Cirrious.MvvmCross.Dialog.Touch.Simple
         public MvxSimpleTouchDialogSetup(params Type[] converterTypes)
             : base(null, (IMvxTouchViewPresenter)null)
         {
-            _converterTypes = converterTypes.ToList();
+            this._converterTypes = converterTypes.ToList();
         }
 
-        protected override List<Type> ValueConverterHolders => _converterTypes;
+        protected override List<Type> ValueConverterHolders => this._converterTypes;
 
         protected override IMvxApplication CreateApp()
         {

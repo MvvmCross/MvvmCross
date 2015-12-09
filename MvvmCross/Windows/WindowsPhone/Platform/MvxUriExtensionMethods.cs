@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text.RegularExpressions;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Platform
+namespace MvvmCross.WindowsPhone.Platform
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Text.RegularExpressions;
+
     public static class MvxUriExtensionMethods
     {
         // based on http://densom.blogspot.com/2009/08/how-to-parse-query-string-without-using.html

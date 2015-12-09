@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.ExtensionMethods;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.ExtensionMethods;
+
     public interface IMvxCommandHelper
     {
         event EventHandler CanExecuteChanged;
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void RaiseCanExecuteChanged(object sender)
         {
-            var handler = CanExecuteChanged;
+            var handler = this.CanExecuteChanged;
             handler?.Invoke(sender, EventArgs.Empty);
         }
     }
@@ -42,21 +43,21 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             add
             {
-                lock (_syncRoot)
+                lock (this._syncRoot)
                 {
-                    _eventHandlers.Add(new WeakReference(value));
+                    this._eventHandlers.Add(new WeakReference(value));
                 }
             }
             remove
             {
-                lock (_syncRoot)
+                lock (this._syncRoot)
                 {
-                    foreach (var thing in _eventHandlers)
+                    foreach (var thing in this._eventHandlers)
                     {
                         if (thing.IsAlive
                             && ((EventHandler)thing.Target) == value)
                         {
-                            _eventHandlers.Remove(thing);
+                            this._eventHandlers.Remove(thing);
                             break;
                         }
                     }
@@ -66,12 +67,12 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
-            lock (_syncRoot)
+            lock (this._syncRoot)
             {
                 var toReturn = new List<EventHandler>();
                 var deadEntries = new List<WeakReference>();
 
-                foreach (var thing in _eventHandlers)
+                foreach (var thing in this._eventHandlers)
                 {
                     if (!thing.IsAlive)
                     {
@@ -87,7 +88,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
                 foreach (var weakReference in deadEntries)
                 {
-                    _eventHandlers.Remove(weakReference);
+                    this._eventHandlers.Remove(weakReference);
                 }
 
                 return toReturn;
@@ -96,7 +97,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void RaiseCanExecuteChanged(object sender)
         {
-            var list = SafeCopyEventHandlerList();
+            var list = this.SafeCopyEventHandlerList();
             foreach (var eventHandler in list)
             {
                 eventHandler(sender, EventArgs.Empty);
@@ -111,22 +112,22 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommandBase()
         {
-            if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
-                _commandHelper = new MvxWeakCommandHelper();
+            if (!Mvx.TryResolve<IMvxCommandHelper>(out this._commandHelper))
+                this._commandHelper = new MvxWeakCommandHelper();
 
             var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
-            ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
+            this.ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public event EventHandler CanExecuteChanged
         {
             add
             {
-                _commandHelper.CanExecuteChanged += value;
+                this._commandHelper.CanExecuteChanged += value;
             }
             remove
             {
-                _commandHelper.CanExecuteChanged -= value;
+                this._commandHelper.CanExecuteChanged -= value;
             }
         }
 
@@ -134,13 +135,13 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void RaiseCanExecuteChanged()
         {
-            if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
+            if (this.ShouldAlwaysRaiseCECOnUserInterfaceThread)
             {
-                InvokeOnMainThread(() => _commandHelper.RaiseCanExecuteChanged(this));
+                this.InvokeOnMainThread(() => this._commandHelper.RaiseCanExecuteChanged(this));
             }
             else
             {
-                _commandHelper.RaiseCanExecuteChanged(this);
+                this._commandHelper.RaiseCanExecuteChanged(this);
             }
         }
     }
@@ -159,31 +160,31 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommand(Action execute, Func<bool> canExecute)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute();
+            return this._canExecute == null || this._canExecute();
         }
 
         public bool CanExecute()
         {
-            return CanExecute(null);
+            return this.CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter))
+            if (this.CanExecute(parameter))
             {
-                _execute();
+                this._execute();
             }
         }
 
         public void Execute()
         {
-            Execute(null);
+            this.Execute(null);
         }
     }
 
@@ -201,31 +202,31 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
+            return this._canExecute == null || this._canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
         }
 
         public bool CanExecute()
         {
-            return CanExecute(null);
+            return this.CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter))
+            if (this.CanExecute(parameter))
             {
-                _execute((T)(typeof(T).MakeSafeValueCore(parameter)));
+                this._execute((T)(typeof(T).MakeSafeValueCore(parameter)));
             }
         }
 
         public void Execute()
         {
-            Execute(null);
+            this.Execute(null);
         }
     }
 }

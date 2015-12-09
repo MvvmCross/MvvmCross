@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Microsoft.Phone.Controls;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using Microsoft.Phone.Controls;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public class MvxPhoneViewDispatcher
         : MvxPhoneMainThreadDispatcher
           , IMvxViewDispatcher
@@ -21,18 +22,18 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         public MvxPhoneViewDispatcher(IMvxPhoneViewPresenter presenter, PhoneApplicationFrame rootFrame)
             : base(rootFrame.Dispatcher)
         {
-            _presenter = presenter;
-            _rootFrame = rootFrame;
+            this._presenter = presenter;
+            this._rootFrame = rootFrame;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
         {
-            return RequestMainThreadAction(() => _presenter.Show(request));
+            return this.RequestMainThreadAction(() => this._presenter.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
+            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
         }
     }
 }

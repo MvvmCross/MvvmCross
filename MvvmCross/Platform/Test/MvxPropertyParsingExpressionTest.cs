@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using NUnit.Framework;
-
-namespace Cirrious.CrossCore.Test
+namespace MvvmCross.Platform.Test
 {
+    using MvvmCross.Platform.Core;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxPropertyNameFromExpressionTests
     {
@@ -19,7 +20,7 @@ namespace Cirrious.CrossCore.Test
 
             public string GetFooExpression()
             {
-                return this.GetPropertyNameFromExpression(() => Foo);
+                return this.GetPropertyNameFromExpression(() => this.Foo);
             }
         }
 

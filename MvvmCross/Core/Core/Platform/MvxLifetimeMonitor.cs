@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Platform
+namespace MvvmCross.Core.Platform
 {
+    using System;
+
     public abstract class MvxLifetimeMonitor : IMvxLifetime
     {
         protected void FireLifetimeChange(MvxLifetimeEvent which)
         {
-            var handler = LifetimeChanged;
+            var handler = this.LifetimeChanged;
             handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 

@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using CrossUI.Core.Elements.Lists;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists
+namespace MvvmCross.AutoView.Droid.Interfaces.Lists
 {
+    using Android.Content;
+    using Android.Views;
+
+    using CrossUI.Core.Elements.Lists;
+
     public interface IMvxLayoutListItemViewFactory
         : IListItemLayout
     {

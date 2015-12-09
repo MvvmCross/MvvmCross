@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Graphics;
+    using Android.Widget;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxImageViewDrawableNameTargetBinding
         : MvxImageViewDrawableTargetBinding
     {
@@ -31,8 +33,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return false;
             }
 
-            var resources = AndroidGlobals.ApplicationContext.Resources;
-            var id = resources.GetIdentifier((string)value, "drawable", AndroidGlobals.ApplicationContext.PackageName);
+            var resources = this.AndroidGlobals.ApplicationContext.Resources;
+            var id = resources.GetIdentifier((string)value, "drawable", this.AndroidGlobals.ApplicationContext.PackageName);
             if (id == 0)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,

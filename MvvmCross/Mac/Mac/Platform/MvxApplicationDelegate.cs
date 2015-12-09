@@ -7,16 +7,18 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.MvvmCross.Platform;
-using System;
 
 #if __UNIFIED__
 using AppKit;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Mac.Platform
+namespace MvvmCross.Mac.Platform
 {
+    using System;
+
+    using global::MvvmCross.Core.Platform;
+
     public class MvxApplicationDelegate : NSApplicationDelegate
                                           , IMvxLifetime
     {
@@ -45,7 +47,7 @@ namespace Cirrious.MvvmCross.Mac.Platform
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
-            var handler = LifetimeChanged;
+            var handler = this.LifetimeChanged;
             if (handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
         }

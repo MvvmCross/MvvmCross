@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+
     public interface IMvxValueCombiner
     {
         Type SourceType(IEnumerable<IMvxSourceStep> steps);

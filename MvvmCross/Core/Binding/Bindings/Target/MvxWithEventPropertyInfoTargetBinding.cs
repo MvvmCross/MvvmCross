@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target
+namespace MvvmCross.Binding.Bindings.Target
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
     public class MvxWithEventPropertyInfoTargetBinding
         : MvxPropertyInfoTargetBinding
     {
@@ -32,27 +33,27 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         // Note - this is public because we use it in weak referenced situations
         public void OnValueChanged(object sender, EventArgs eventArgs)
         {
-            var target = Target;
+            var target = this.Target;
             if (target == null)
             {
                 MvxBindingTrace.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
-            var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
-            FireValueChanged(value);
+            var value = this.TargetPropertyInfo.GetGetMethod().Invoke(target, null);
+            this.FireValueChanged(value);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
-            var target = Target;
+            var target = this.Target;
             if (target == null)
                 return;
 
             var viewType = target.GetType();
-            var eventName = TargetPropertyInfo.Name + "Changed";
+            var eventName = this.TargetPropertyInfo.Name + "Changed";
             var eventInfo = viewType.GetEvent(eventName);
             if (eventInfo == null)
             {
@@ -71,7 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
                 return;
             }
 
-            _subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
+            this._subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -79,10 +80,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
             }
         }

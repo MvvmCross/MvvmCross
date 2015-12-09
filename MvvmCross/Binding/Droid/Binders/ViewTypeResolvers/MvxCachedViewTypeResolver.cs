@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System;
+    using System.Collections.Generic;
+
     public class MvxCachedViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly Dictionary<string, Type> _cache = new Dictionary<string, Type>();
@@ -17,17 +17,17 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
         public MvxCachedViewTypeResolver(IMvxViewTypeResolver resolver)
         {
-            _resolver = resolver;
+            this._resolver = resolver;
         }
 
         public Type Resolve(string tagName)
         {
             Type toReturn;
-            if (_cache.TryGetValue(tagName, out toReturn))
+            if (this._cache.TryGetValue(tagName, out toReturn))
                 return toReturn;
 
-            toReturn = _resolver.Resolve(tagName);
-            _cache[tagName] = toReturn;
+            toReturn = this._resolver.Resolve(tagName);
+            this._cache[tagName] = toReturn;
             return toReturn;
         }
     }

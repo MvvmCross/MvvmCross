@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Windows.Input;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
+    using UIKit;
+
     public class MvxPickerViewModel
         : UIPickerViewModel
     {
@@ -29,17 +29,17 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public MvxPickerViewModel(UIPickerView pickerView)
         {
-            _pickerView = pickerView;
+            this._pickerView = pickerView;
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
             }
 
@@ -49,29 +49,29 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get { return this._itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
-                    && !ReloadOnAllItemsSourceSets)
+                if (Object.ReferenceEquals(this._itemsSource, value)
+                    && !this.ReloadOnAllItemsSourceSets)
                     return;
 
-                if (_subscription != null)
+                if (this._subscription != null)
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    this._subscription.Dispose();
+                    this._subscription = null;
                 }
 
-                _itemsSource = value;
+                this._itemsSource = value;
 
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
+                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
 
-                Reload();
-                ShowSelectedItem();
+                this.Reload();
+                this.ShowSelectedItem();
             }
         }
 
@@ -79,12 +79,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             Mvx.Trace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
-            Reload();
+            this.Reload();
         }
 
         protected virtual void Reload()
         {
-            _pickerView.ReloadComponent(0);
+            this._pickerView.ReloadComponent(0);
         }
 
         public override nint GetComponentCount(UIPickerView picker)
@@ -94,12 +94,12 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
-            return _itemsSource?.Count() ?? 0;
+            return this._itemsSource?.Count() ?? 0;
         }
 
         public override string GetTitle(UIPickerView picker, nint row, nint component)
         {
-            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row));
+            return this._itemsSource == null ? "-" : this.RowTitle(row, this._itemsSource.ElementAt((int)row));
         }
 
         protected virtual string RowTitle(nint row, object item)
@@ -109,27 +109,27 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         public override void Selected(UIPickerView picker, nint row, nint component)
         {
-            if (_itemsSource.Count() == 0)
+            if (this._itemsSource.Count() == 0)
                 return;
 
-            _selectedItem = _itemsSource.ElementAt((int)row);
+            this._selectedItem = this._itemsSource.ElementAt((int)row);
 
-            var handler = SelectedItemChanged;
+            var handler = this.SelectedItemChanged;
             handler?.Invoke(this, EventArgs.Empty);
 
-            var command = SelectedChangedCommand;
+            var command = this.SelectedChangedCommand;
             if (command != null)
-                if (command.CanExecute(_selectedItem))
-                    command.Execute(_selectedItem);
+                if (command.CanExecute(this._selectedItem))
+                    command.Execute(this._selectedItem);
         }
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get { return this._selectedItem; }
             set
             {
-                _selectedItem = value;
-                ShowSelectedItem();
+                this._selectedItem = value;
+                this.ShowSelectedItem();
             }
         }
 
@@ -139,15 +139,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
 
         protected virtual void ShowSelectedItem()
         {
-            if (_itemsSource == null)
+            if (this._itemsSource == null)
                 return;
 
-            var position = _itemsSource.GetPosition(_selectedItem);
+            var position = this._itemsSource.GetPosition(this._selectedItem);
             if (position < 0)
                 return;
 
-            var animated = !_pickerView.Hidden;
-            _pickerView.Select(position, 0, animated);
+            var animated = !this._pickerView.Hidden;
+            this._pickerView.Select(position, 0, animated);
         }
     }
 }

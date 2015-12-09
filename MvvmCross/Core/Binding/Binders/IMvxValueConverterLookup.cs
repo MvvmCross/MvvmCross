@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using MvvmCross.Platform.Converters;
+
     public interface IMvxNamedInstanceLookup<out T>
     {
         T Find(string name);

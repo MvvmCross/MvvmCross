@@ -5,18 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
-using Cirrious.MvvmCross.Dialog.Droid.Target;
-using Cirrious.MvvmCross.Droid.Platform;
-using CrossUI.Droid;
-using CrossUI.Droid.Dialog.Elements;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Dialog.Droid
+namespace MvvmCross.Dialog.Droid
 {
+    using System.Linq;
+
+    using Android.Content;
+
+    using CrossUI.Droid;
+    using CrossUI.Droid.Dialog.Elements;
+
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Binding.Droid.ResourceHelpers;
+    using MvvmCross.Dialog.Droid.Target;
+    using MvvmCross.Platform;
+
     public abstract class MvxAndroidDialogSetup
         : MvxAndroidSetup
     {
@@ -28,8 +30,8 @@ namespace Cirrious.MvvmCross.Dialog.Droid
         protected override void InitializeBindingBuilder()
         {
             base.InitializeBindingBuilder();
-            InitializeDialogBinding();
-            InitializeUserInterfaceBuilder();
+            this.InitializeDialogBinding();
+            this.InitializeUserInterfaceBuilder();
         }
 
         private void InitializeUserInterfaceBuilder()

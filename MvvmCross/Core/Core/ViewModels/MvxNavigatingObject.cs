@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
@@ -20,13 +21,13 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected bool Close(IMvxViewModel viewModel)
         {
-            return ChangePresentation(new MvxClosePresentationHint(viewModel));
+            return this.ChangePresentation(new MvxClosePresentationHint(viewModel));
         }
 
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Trace("Requesting presentation change");
-            var viewDispatcher = ViewDispatcher;
+            var viewDispatcher = this.ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ChangePresentation(hint);
 
@@ -38,7 +39,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
-            return ShowViewModel(
+            return this.ShowViewModel(
                 typeof(TViewModel),
                 parameterValuesObject.ToSimplePropertyDictionary(),
                 presentationBundle,
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
-            return ShowViewModel(
+            return this.ShowViewModel(
                 typeof(TViewModel),
                 new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
                 presentationBundle,
@@ -62,7 +63,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                                  MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModel
         {
-            return ShowViewModel(
+            return this.ShowViewModel(
                 typeof(TViewModel),
                 parameterBundle,
                 presentationBundle,
@@ -74,7 +75,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                      IMvxBundle presentationBundle = null,
                                      MvxRequestedBy requestedBy = null)
         {
-            return ShowViewModel(viewModelType,
+            return this.ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
                                  presentationBundle,
                                  requestedBy);
@@ -85,7 +86,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                      IMvxBundle presentationBundle = null,
                                      MvxRequestedBy requestedBy = null)
         {
-            return ShowViewModel(viewModelType,
+            return this.ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValues),
                                  presentationBundle,
                                  requestedBy);
@@ -96,14 +97,14 @@ namespace Cirrious.MvvmCross.ViewModels
                                      IMvxBundle presentationBundle = null,
                                      MvxRequestedBy requestedBy = null)
         {
-            return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
+            return this.ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
         }
 
         private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle,
                                        MvxRequestedBy requestedBy)
         {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
-            var viewDispatcher = ViewDispatcher;
+            var viewDispatcher = this.ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(
                                                         viewModelType,

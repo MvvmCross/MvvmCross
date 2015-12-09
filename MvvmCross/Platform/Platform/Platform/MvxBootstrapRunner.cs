@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.Platform
+namespace MvvmCross.Platform.Platform
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+
     public class MvxBootstrapRunner
     {
         public virtual void Run(Assembly assembly)
@@ -21,7 +22,7 @@ namespace Cirrious.CrossCore.Platform
 
             foreach (var type in types)
             {
-                Run(type);
+                this.Run(type);
             }
         }
 

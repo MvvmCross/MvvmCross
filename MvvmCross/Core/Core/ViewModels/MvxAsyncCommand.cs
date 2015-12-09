@@ -1,12 +1,13 @@
-﻿using Cirrious.CrossCore;
-using Cirrious.CrossCore.ExtensionMethods;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Cirrious.MvvmCross.ViewModels
+﻿namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.ExtensionMethods;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase
     {
@@ -17,12 +18,12 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxAsyncCommandBase(bool allowConcurrentExecutions = false)
         {
-            _allowConcurrentExecutions = allowConcurrentExecutions;
+            this._allowConcurrentExecutions = allowConcurrentExecutions;
         }
 
-        public bool IsRunning => _concurrentExecutions > 0;
+        public bool IsRunning => this._concurrentExecutions > 0;
 
-        protected CancellationToken CancelToken => _cts.Token;
+        protected CancellationToken CancelToken => this._cts.Token;
 
         protected abstract bool CanExecuteImpl(object parameter);
 
@@ -30,37 +31,37 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void Cancel()
         {
-            lock (_syncRoot)
+            lock (this._syncRoot)
             {
-                if (_cts == null)
+                if (this._cts == null)
                 {
                     Mvx.Trace(MvxTraceLevel.Warning, "MvxAsyncCommand : Attempt to cancel a task that is not running");
                 }
                 else
                 {
-                    _cts.Cancel();
+                    this._cts.Cancel();
                 }
             }
         }
 
         public bool CanExecute()
         {
-            return CanExecute(null);
+            return this.CanExecute(null);
         }
 
         public bool CanExecute(object parameter)
         {
-            if (!_allowConcurrentExecutions && IsRunning)
+            if (!this._allowConcurrentExecutions && this.IsRunning)
                 return false;
             else
-                return CanExecuteImpl(parameter);
+                return this.CanExecuteImpl(parameter);
         }
 
         public async void Execute(object parameter)
         {
             try
             {
-                await ExecuteAsync(parameter, true).ConfigureAwait(false);
+                await this.ExecuteAsync(parameter, true).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -71,19 +72,19 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void Execute()
         {
-            Execute(null);
+            this.Execute(null);
         }
 
         public async Task ExecuteAsync(object parameter)
         {
-            await ExecuteAsync(parameter, false).ConfigureAwait(false);
+            await this.ExecuteAsync(parameter, false).ConfigureAwait(false);
         }
 
         private async Task ExecuteAsync(object parameter, bool hideCanceledException)
         {
-            if (CanExecuteImpl(parameter))
+            if (this.CanExecuteImpl(parameter))
             {
-                await ExecuteConcurrentAsync(parameter, hideCanceledException).ConfigureAwait(false);
+                await this.ExecuteConcurrentAsync(parameter, hideCanceledException).ConfigureAwait(false);
             }
         }
 
@@ -92,37 +93,37 @@ namespace Cirrious.MvvmCross.ViewModels
             bool started = false;
             try
             {
-                lock (_syncRoot)
+                lock (this._syncRoot)
                 {
-                    if (_concurrentExecutions == 0)
+                    if (this._concurrentExecutions == 0)
                     {
-                        InitCancellationTokenSource();
+                        this.InitCancellationTokenSource();
                     }
-                    else if (!_allowConcurrentExecutions)
+                    else if (!this._allowConcurrentExecutions)
                     {
                         Mvx.Trace(MvxTraceLevel.Diagnostic, "MvxAsyncCommand : execute ignored, already running.");
                         return;
                     }
-                    _concurrentExecutions++;
+                    this._concurrentExecutions++;
                     started = true;
                 }
-                if (!_allowConcurrentExecutions)
+                if (!this._allowConcurrentExecutions)
                 {
-                    RaiseCanExecuteChanged();
+                    this.RaiseCanExecuteChanged();
                 }
-                if (!CancelToken.IsCancellationRequested)
+                if (!this.CancelToken.IsCancellationRequested)
                 {
                     try
                     {
                         // With configure await false, the CanExecuteChanged raised in finally clause might run in another thread.
                         // This should not be an issue as long as ShouldAlwaysRaiseCECOnUserInterfaceThread is true.
-                        await ExecuteAsyncImpl(parameter).ConfigureAwait(false);
+                        await this.ExecuteAsyncImpl(parameter).ConfigureAwait(false);
                     }
                     catch (OperationCanceledException e)
                     {
                         Mvx.Trace(MvxTraceLevel.Diagnostic, "MvxAsyncCommand : OperationCanceledException");
                         //Rethrow if the exception does not comes from the current cancellation token
-                        if (!hideCanceledException || e.CancellationToken != CancelToken)
+                        if (!hideCanceledException || e.CancellationToken != this.CancelToken)
                         {
                             throw;
                         }
@@ -133,17 +134,17 @@ namespace Cirrious.MvvmCross.ViewModels
             {
                 if (started)
                 {
-                    lock (_syncRoot)
+                    lock (this._syncRoot)
                     {
-                        _concurrentExecutions--;
-                        if (_concurrentExecutions == 0)
+                        this._concurrentExecutions--;
+                        if (this._concurrentExecutions == 0)
                         {
-                            ClearCancellationTokenSource();
+                            this.ClearCancellationTokenSource();
                         }
                     }
-                    if (!_allowConcurrentExecutions)
+                    if (!this._allowConcurrentExecutions)
                     {
-                        RaiseCanExecuteChanged();
+                        this.RaiseCanExecuteChanged();
                     }
                 }
             }
@@ -151,24 +152,24 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private void ClearCancellationTokenSource()
         {
-            if (_cts == null)
+            if (this._cts == null)
             {
                 Mvx.Error("MvxAsyncCommand : Unexpected ClearCancellationTokenSource, no token available!");
             }
             else
             {
-                _cts.Dispose();
-                _cts = null;
+                this._cts.Dispose();
+                this._cts = null;
             }
         }
 
         private void InitCancellationTokenSource()
         {
-            if (_cts != null)
+            if (this._cts != null)
             {
                 Mvx.Error("MvxAsyncCommand : Unexpected InitCancellationTokenSource, a token is already available!");
             }
-            _cts = new CancellationTokenSource();
+            this._cts = new CancellationTokenSource();
         }
     }
 
@@ -185,8 +186,8 @@ namespace Cirrious.MvvmCross.ViewModels
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
 
-            _execute = (cancellationToken) => execute();
-            _canExecute = canExecute;
+            this._execute = (cancellationToken) => execute();
+            this._canExecute = canExecute;
         }
 
         public MvxAsyncCommand(Func<CancellationToken, Task> execute, Func<bool> canExecute = null, bool allowConcurrentExecutions = false)
@@ -195,18 +196,18 @@ namespace Cirrious.MvvmCross.ViewModels
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
 
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         protected override bool CanExecuteImpl(object parameter)
         {
-            return _canExecute == null || _canExecute();
+            return this._canExecute == null || this._canExecute();
         }
 
         protected override Task ExecuteAsyncImpl(object parameter)
         {
-            return _execute(CancelToken);
+            return this._execute(this.CancelToken);
         }
 
         public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
@@ -233,8 +234,8 @@ namespace Cirrious.MvvmCross.ViewModels
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
 
-            _execute = (p, c) => execute(p);
-            _canExecute = canExecute;
+            this._execute = (p, c) => execute(p);
+            this._canExecute = canExecute;
         }
 
         public MvxAsyncCommand(Func<T, CancellationToken, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
@@ -243,18 +244,18 @@ namespace Cirrious.MvvmCross.ViewModels
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
 
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
 
         protected override bool CanExecuteImpl(object parameter)
         {
-            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
+            return this._canExecute == null || this._canExecute((T)typeof(T).MakeSafeValueCore(parameter));
         }
 
         protected override Task ExecuteAsyncImpl(object parameter)
         {
-            return _execute((T)typeof(T).MakeSafeValueCore(parameter), CancelToken);
+            return this._execute((T)typeof(T).MakeSafeValueCore(parameter), this.CancelToken);
         }
     }
 }

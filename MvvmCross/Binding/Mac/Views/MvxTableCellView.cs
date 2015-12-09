@@ -5,36 +5,35 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.CrossCore.Core;
-
 #if __UNIFIED__
 using AppKit;
 using CoreGraphics;
 using Foundation;
 #else
 
-using System.Drawing;
-
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Binding.Mac.Views
 {
+    using System;
+    using System.Drawing;
+
+    using global::MvvmCross.Platform.Core;
+
     [Register("MvxTableCellView")]
     public class MvxTableCellView : NSTableCellView, IMvxBindingContextOwner, IMvxDataConsumer
     {
         // Called when created from unmanaged code
         public MvxTableCellView(IntPtr handle) : base(handle)
         {
-            Initialize(string.Empty);
+            this.Initialize(string.Empty);
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
         public MvxTableCellView(NSCoder coder) : base(coder)
         {
-            Initialize(string.Empty);
+            this.Initialize(string.Empty);
         }
 
         public MvxTableCellView(string bindingText)
@@ -53,7 +52,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
             };
 
             AddSubview(TextField);
-            Initialize(bindingText);
+            this.Initialize(bindingText);
         }
 
 #if __UNIFIED__
@@ -101,8 +100,8 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
 
         public string Text
@@ -121,7 +120,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Views
         {
             if (disposing)
             {
-                BindingContext.ClearAllBindings();
+                this.BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }

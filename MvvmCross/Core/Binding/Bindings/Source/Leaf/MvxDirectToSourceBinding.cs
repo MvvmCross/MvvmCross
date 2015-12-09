@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
+namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    using System;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxDirectToSourceBinding : MvxSourceBinding
     {
         public MvxDirectToSourceBinding(object source)
@@ -17,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType => Source == null ? typeof(object) : Source.GetType();
+        public override Type SourceType => this.Source == null ? typeof(object) : this.Source.GetType();
 
         public override void SetValue(object value)
         {
@@ -27,7 +28,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source.Leaf
 
         public override object GetValue()
         {
-            return Source;
+            return this.Source;
         }
     }
 }

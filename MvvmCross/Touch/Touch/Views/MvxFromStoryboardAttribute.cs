@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFromStoryboardAttribute : Attribute
     {
@@ -16,7 +16,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public MvxFromStoryboardAttribute(string storyboardName = null)
         {
-            StoryboardName = storyboardName;
+            this.StoryboardName = storyboardName;
         }
     }
 }

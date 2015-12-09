@@ -5,37 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-
-namespace Cirrious.MvvmCross.Binding
+namespace MvvmCross.Binding
 {
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Platform;
+
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
         public override void DoRegistration()
         {
             base.DoRegistration();
-            RegisterBindingFactories();
+            this.RegisterBindingFactories();
         }
 
         protected virtual void RegisterBindingFactories()
         {
-            RegisterMvxBindingFactories();
+            this.RegisterMvxBindingFactories();
         }
 
         protected virtual void RegisterMvxBindingFactories()
         {
-            RegisterSourceStepFactory();
-            RegisterSourceFactory();
-            RegisterTargetFactory();
+            this.RegisterSourceStepFactory();
+            this.RegisterSourceFactory();
+            this.RegisterTargetFactory();
         }
 
         protected virtual void RegisterSourceStepFactory()
         {
-            var sourceStepFactory = CreateSourceStepFactoryRegistry();
-            FillSourceStepFactory(sourceStepFactory);
+            var sourceStepFactory = this.CreateSourceStepFactoryRegistry();
+            this.FillSourceStepFactory(sourceStepFactory);
             Mvx.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
             Mvx.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
@@ -54,12 +54,12 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterSourceFactory()
         {
-            var sourceFactory = CreateSourceBindingFactory();
+            var sourceFactory = this.CreateSourceBindingFactory();
             Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
             var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
             if (extensionHost != null)
             {
-                RegisterSourceBindingFactoryExtensions(extensionHost);
+                this.RegisterSourceBindingFactoryExtensions(extensionHost);
                 Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
@@ -78,10 +78,10 @@ namespace Cirrious.MvvmCross.Binding
 
         protected virtual void RegisterTargetFactory()
         {
-            var targetRegistry = CreateTargetBindingRegistry();
+            var targetRegistry = this.CreateTargetBindingRegistry();
             Mvx.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
             Mvx.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
-            FillTargetFactories(targetRegistry);
+            this.FillTargetFactories(targetRegistry);
         }
 
         protected virtual IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()

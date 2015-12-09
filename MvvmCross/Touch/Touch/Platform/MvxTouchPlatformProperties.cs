@@ -5,12 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using ObjCRuntime;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace MvvmCross.Touch.Platform
 {
+    using System;
+
+    using ObjCRuntime;
+
+    using UIKit;
+
     [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
     public class MvxTouchPlatformProperties : IMvxTouchPlatformProperties
     {

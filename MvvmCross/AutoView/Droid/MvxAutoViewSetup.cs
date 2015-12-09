@@ -5,35 +5,36 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.AutoView.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Builders;
-using Cirrious.MvvmCross.AutoView.Droid.Views;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using Cirrious.MvvmCross.Views;
-using CrossUI.Core.Builder;
-using CrossUI.Droid;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Droid
+namespace MvvmCross.AutoView.Droid
 {
+    using System;
+
+    using CrossUI.Core.Builder;
+    using CrossUI.Droid;
+
+    using MvvmCross.AutoView.Builders;
+    using MvvmCross.AutoView.Droid.Builders;
+    using MvvmCross.AutoView.Droid.Views;
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+
 #warning Factor out a base class shared across platfroms (can use Generics)
 
     public class MvxAutoViewSetup
     {
         public void Initialize(Type resourceType)
         {
-            RegisterAutomaticViewTextLoader();
-            RegisterViewFinders();
-            InitializeDialogBinding(resourceType);
-            InitializeUserInterfaceBuilder();
+            this.RegisterAutomaticViewTextLoader();
+            this.RegisterViewFinders();
+            this.InitializeDialogBinding(resourceType);
+            this.InitializeUserInterfaceBuilder();
         }
 
         protected virtual void InitializeUserInterfaceBuilder()
         {
-            var droidRegistry = CreateBuilderRegistry();
+            var droidRegistry = this.CreateBuilderRegistry();
             Mvx.RegisterSingleton<IBuilderRegistry>(droidRegistry);
-            var userInterfaceFactory = CreateUserInterfaceFactory();
+            var userInterfaceFactory = this.CreateUserInterfaceFactory();
             Mvx.RegisterSingleton(userInterfaceFactory);
         }
 
@@ -56,8 +57,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid
         protected virtual void RegisterViewFinders()
         {
             var container = Mvx.Resolve<IMvxViewsContainer>();
-            RegisterSecondaryViewFinders(container);
-            RegisterLastResortViewFinder(container);
+            this.RegisterSecondaryViewFinders(container);
+            this.RegisterLastResortViewFinder(container);
         }
 
         protected virtual void RegisterLastResortViewFinder(IMvxViewsContainer container)
@@ -74,9 +75,9 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 
         protected virtual void RegisterSecondaryViewFinders(IMvxViewsContainer container)
         {
-            var finder = CreateDefaultDialogViewFinder();
+            var finder = this.CreateDefaultDialogViewFinder();
             container.AddSecondary(finder);
-            var finder2 = CreateDefaultListViewFinder();
+            var finder2 = this.CreateDefaultListViewFinder();
             container.AddSecondary(finder2);
         }
 
@@ -94,7 +95,7 @@ namespace Cirrious.MvvmCross.AutoView.Droid
 
         protected virtual void RegisterAutomaticViewTextLoader()
         {
-            var loader = CreateAutoViewTextLoader();
+            var loader = this.CreateAutoViewTextLoader();
             Mvx.RegisterSingleton(loader);
         }
 

@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Tibet;
-using NUnit.Framework;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
+namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Platform;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxTibetBindingTest
         : MvxBaseSwissBindingTest<MvxTibetBindingParser>
@@ -39,7 +39,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -155,7 +155,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -184,7 +184,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -241,7 +241,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -301,7 +301,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -361,7 +361,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -409,7 +409,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                         }
                     };
                 MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-                PerformTest(text, expected);
+                this.PerformTest(text, expected);
             }
         }
 
@@ -428,7 +428,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -446,7 +446,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -471,31 +471,31 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
         public void TestFunctionalValueConverterWithNullInTheName()
         {
-            TestFunctionalValueConverterWithKEYWORDInTheName("Null");
-            TestFunctionalValueConverterWithKEYWORDInTheName("null");
-            TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("Null");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("null");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
         }
 
         [Test]
         public void TestFunctionalValueConverterWithTrueInTheName()
         {
-            TestFunctionalValueConverterWithKEYWORDInTheName("True");
-            TestFunctionalValueConverterWithKEYWORDInTheName("true");
-            TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("True");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("true");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
         }
 
         [Test]
         public void TestFunctionalValueConverterWithFalseInTheName()
         {
-            TestFunctionalValueConverterWithKEYWORDInTheName("False");
-            TestFunctionalValueConverterWithKEYWORDInTheName("false");
-            TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("False");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("false");
+            this.TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
         }
 
         public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
@@ -523,7 +523,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
 
         [Test]
@@ -552,7 +552,7 @@ namespace Cirrious.MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            PerformTest(text, expected);
+            this.PerformTest(text, expected);
         }
     }
 }

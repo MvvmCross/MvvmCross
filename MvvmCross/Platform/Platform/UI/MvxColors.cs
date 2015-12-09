@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.UI
+namespace MvvmCross.Platform.UI
 {
     // The colors in this file are base on the list from:
     // https://github.com/mono/sysdrawing-coregraphics/blob/master/System.Drawing/KnownColors.cs

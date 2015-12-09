@@ -5,19 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Binding.Combiners;
-using Cirrious.MvvmCross.BindingEx.WindowsPhone;
-using Cirrious.MvvmCross.BindingEx.WindowsShared;
-using System.Reflection;
-
 // ReSharper disable CheckNamespace
 namespace mvx
 // ReSharper restore CheckNamespace
 {
+    using System.Reflection;
+
+    using Cirrious.MvvmCross.BindingEx.WindowsShared;
+
+    using MvvmCross.BindingEx.WindowsPhone;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.IoC;
+
     public class Import
     {
         static Import()
@@ -29,19 +30,19 @@ namespace mvx
 
         public object From
         {
-            get { return _from; }
+            get { return this._from; }
             set
             {
-                if (_from == value)
+                if (this._from == value)
                     return;
 
-                _from = value;
-                if (_from != null)
+                this._from = value;
+                if (this._from != null)
                 {
 #if NETFX_CORE
                     RegisterAssembly(_from.GetType().GetTypeInfo().Assembly);
 #else
-                    RegisterAssembly(_from.GetType().Assembly);
+                    RegisterAssembly(this._from.GetType().Assembly);
 #endif
                 }
             }

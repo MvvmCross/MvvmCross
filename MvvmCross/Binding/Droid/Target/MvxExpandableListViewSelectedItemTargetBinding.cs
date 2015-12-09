@@ -1,10 +1,12 @@
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Widget;
+
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Platform.Platform;
+
     // This isn't a "pure" target binder like MvxListViewSelectedItemTargetBinding.
     // It differs in two ways:
     //  1. It checks the selected item.

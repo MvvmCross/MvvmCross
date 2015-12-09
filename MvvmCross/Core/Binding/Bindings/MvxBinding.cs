@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings
+namespace MvvmCross.Binding.Bindings
 {
+    using System;
+
     public abstract class MvxBinding : IMvxBinding
     {
         ~MvxBinding()
         {
-            Dispose(false);
+            this.Dispose(false);
         }
 
         #region IMvxBinding Members
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 

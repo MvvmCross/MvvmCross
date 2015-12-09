@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Parse;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding
+namespace MvvmCross.Binding.Parse.Binding
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Parse;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxBindingParser
         : MvxParser
           , IMvxBindingParser
@@ -25,7 +26,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             try
             {
-                Reset(text);
+                this.Reset(text);
                 requestedDescription = this.ParseBindingDescription();
                 return true;
             }
@@ -42,15 +43,15 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
         {
             try
             {
-                Reset(text);
+                this.Reset(text);
 
                 var toReturn = new MvxSerializableBindingSpecification();
-                while (!IsComplete)
+                while (!this.IsComplete)
                 {
-                    SkipWhitespaceAndDescriptionSeparators();
-                    var result = ParseTargetPropertyNameAndDescription();
+                    this.SkipWhitespaceAndDescriptionSeparators();
+                    var result = this.ParseTargetPropertyNameAndDescription();
                     toReturn[result.Key] = result.Value;
-                    SkipWhitespaceAndDescriptionSeparators();
+                    this.SkipWhitespaceAndDescriptionSeparators();
                 }
 
                 requestedBindings = toReturn;
@@ -67,47 +68,47 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected KeyValuePair<string, MvxSerializableBindingDescription> ParseTargetPropertyNameAndDescription()
         {
-            var targetPropertyName = ReadTargetPropertyName();
-            SkipWhitespace();
-            var description = ParseBindingDescription();
+            var targetPropertyName = this.ReadTargetPropertyName();
+            this.SkipWhitespace();
+            var description = this.ParseBindingDescription();
             return new KeyValuePair<string, MvxSerializableBindingDescription>(targetPropertyName, description);
         }
 
         protected void ParseEquals(string block)
         {
-            if (IsComplete)
+            if (this.IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
                                        block,
-                                       FullText);
-            if (CurrentChar != '=')
+                                       this.FullText);
+            if (this.CurrentChar != '=')
                 throw new MvxException("Must follow binding option {0} with an '=' in {1}",
                                        block,
-                                       FullText);
+                                       this.FullText);
 
-            MoveNext();
-            if (IsComplete)
+            this.MoveNext();
+            if (this.IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
                                        block,
-                                       FullText);
+                                       this.FullText);
         }
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
+            return (MvxBindingMode)this.ReadEnumerationValue(typeof(MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)
         {
             var terminationLookup = terminationCharacters.ToDictionary(c => c, c => true);
-            SkipWhitespace();
+            this.SkipWhitespace();
             var toReturn = new StringBuilder();
 
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (currentChar == '\'' || currentChar == '\"')
                 {
-                    var subText = ReadQuotedString();
+                    var subText = this.ReadQuotedString();
                     toReturn.Append(currentChar);
                     toReturn.Append(subText);
                     toReturn.Append(currentChar);
@@ -120,7 +121,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
                 }
 
                 toReturn.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             return toReturn.ToString();
@@ -128,17 +129,17 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding
 
         protected string ReadTargetPropertyName()
         {
-            return ReadValidCSharpName();
+            return this.ReadValidCSharpName();
         }
 
         protected void SkipWhitespaceAndOptionSeparators()
         {
-            SkipWhitespaceAndCharacters(',');
+            this.SkipWhitespaceAndCharacters(',');
         }
 
         protected void SkipWhitespaceAndDescriptionSeparators()
         {
-            SkipWhitespaceAndCharacters(';');
+            this.SkipWhitespaceAndCharacters(';');
         }
     }
 }

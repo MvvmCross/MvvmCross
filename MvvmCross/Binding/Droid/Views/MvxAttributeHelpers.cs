@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Util;
-using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using Android.Content;
+    using Android.Util;
+
+    using MvvmCross.Binding.Droid.ResourceHelpers;
+
     public static class MvxAttributeHelpers
     {
         public static int ReadDropDownListItemTemplateId(Context context, IAttributeSet attrs)

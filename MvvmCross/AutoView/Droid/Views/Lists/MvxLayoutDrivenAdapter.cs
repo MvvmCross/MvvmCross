@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace MvvmCross.AutoView.Droid.Views.Lists
 {
+    using System.Collections.Generic;
+
+    using Android.Content;
+    using Android.Views;
+
+    using MvvmCross.AutoView.Droid.Interfaces.Lists;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxLayoutDrivenAdapter : MvxAdapter
     {
         protected readonly Dictionary<string, IMvxLayoutListItemViewFactory> _itemLayouts;
@@ -23,8 +24,8 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
                                       Dictionary<string, IMvxLayoutListItemViewFactory> itemLayouts)
             : base(context)
         {
-            _defaultItemLayout = defaultItemLayout;
-            _itemLayouts = itemLayouts;
+            this._defaultItemLayout = defaultItemLayout;
+            this._itemLayouts = itemLayouts;
         }
 
         protected override View GetBindableView(View convertView, object dataContext, int templateId)
@@ -32,13 +33,13 @@ namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
             IMvxLayoutListItemViewFactory layout;
             if (dataContext == null)
             {
-                layout = _defaultItemLayout;
+                layout = this._defaultItemLayout;
             }
             else
             {
-                if (!_itemLayouts.TryGetValue(dataContext.GetType().Name, out layout))
+                if (!this._itemLayouts.TryGetValue(dataContext.GetType().Name, out layout))
                 {
-                    layout = _defaultItemLayout;
+                    layout = this._defaultItemLayout;
                 }
             }
 

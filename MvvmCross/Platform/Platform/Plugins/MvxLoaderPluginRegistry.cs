@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxLoaderPluginRegistry
     {
         private readonly string _pluginPostfix;
@@ -19,34 +20,34 @@ namespace Cirrious.CrossCore.Plugins
 
         public MvxLoaderPluginRegistry(string expectedPostfix, IDictionary<string, Func<IMvxPlugin>> loaders)
         {
-            _pluginPostfix = expectedPostfix;
-            _loaders = loaders;
+            this._pluginPostfix = expectedPostfix;
+            this._loaders = loaders;
         }
 
         public void AddUnconventionalPlugin(string pluginName, Func<IMvxPlugin> loader)
         {
-            _loaders[pluginName] = loader;
+            this._loaders[pluginName] = loader;
         }
 
         public void AddConventionalPlugin<TPlugin>()
             where TPlugin : IMvxPlugin
         {
-            AddConventionalPlugin(typeof(TPlugin));
+            this.AddConventionalPlugin(typeof(TPlugin));
         }
 
         public void AddConventionalPlugin(Type plugin)
         {
             var name = plugin.Namespace ?? string.Empty;
-            if (!name.EndsWith(_pluginPostfix))
+            if (!name.EndsWith(this._pluginPostfix))
             {
                 throw new MvxException(
                     "You must pass in the type of a plugin instance - like 'typeof(Cirrious.MvvmCross.Plugins.Visibility{0}.Plugin)'",
-                    _pluginPostfix);
+                    this._pluginPostfix);
             }
 
-            name = name.Substring(0, name.Length - _pluginPostfix.Length);
+            name = name.Substring(0, name.Length - this._pluginPostfix.Length);
 
-            _loaders.Add(
+            this._loaders.Add(
                 name,
                 () => (IMvxPlugin)Activator.CreateInstance(plugin));
         }

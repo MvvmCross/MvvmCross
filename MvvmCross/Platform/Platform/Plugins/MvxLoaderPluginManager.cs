@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxLoaderPluginManager : MvxPluginManager, IMvxLoaderPluginManager
     {
         private readonly Dictionary<string, Func<IMvxPlugin>> _finders = new Dictionary<string, Func<IMvxPlugin>>();
 
-        public IDictionary<string, Func<IMvxPlugin>> Finders => _finders;
+        public IDictionary<string, Func<IMvxPlugin>> Finders => this._finders;
 
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {
@@ -26,7 +27,7 @@ namespace Cirrious.CrossCore.Plugins
             }
 
             Func<IMvxPlugin> finder;
-            if (!_finders.TryGetValue(pluginName, out finder))
+            if (!this._finders.TryGetValue(pluginName, out finder))
             {
                 throw new MvxException("plugin not registered for type {0}", pluginName);
             }

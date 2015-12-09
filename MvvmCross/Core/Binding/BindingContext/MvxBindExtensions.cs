@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Platform.Converters;
+
     public static class MvxBindExtensions
     {
         public static MvxInlineBindingTarget<TViewModel> CreateInlineBindingTarget<TViewModel>(

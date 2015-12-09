@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace MvvmCross.Touch.Platform
 {
+    using MvvmCross.Core.Platform;
+
+    using UIKit;
+
     public interface IMvxApplicationDelegate : IUIApplicationDelegate, IMvxLifetime
     {
     }

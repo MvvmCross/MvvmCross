@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Core
+namespace MvvmCross.Platform.Core
 {
+    using System;
+
     public class MvxValueEventArgs<T>
         : EventArgs
     {
         public MvxValueEventArgs(T value)
         {
-            Value = value;
+            this.Value = value;
         }
 
         public T Value { get; private set; }

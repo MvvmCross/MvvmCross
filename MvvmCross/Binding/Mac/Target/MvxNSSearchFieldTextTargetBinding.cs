@@ -5,9 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Reflection;
 
 #if __UNIFIED__
 using AppKit;
@@ -16,8 +13,12 @@ using ObjCRuntime;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System.Reflection;
+
+    using global::MvvmCross.Platform.Platform;
+
 #warning Unlikley this works!
 
     public class MvxNSSearchFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSSearchField>

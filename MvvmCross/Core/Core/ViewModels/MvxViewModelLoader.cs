@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxViewModelLoader
         : IMvxViewModelLoader
     {
@@ -20,16 +21,16 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             get
             {
-                _locatorCollection = _locatorCollection ?? Mvx.Resolve<IMvxViewModelLocatorCollection>();
-                return _locatorCollection;
+                this._locatorCollection = this._locatorCollection ?? Mvx.Resolve<IMvxViewModelLocatorCollection>();
+                return this._locatorCollection;
             }
         }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
         public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
         {
-            var viewModelLocator = FindViewModelLocator(request);
-            return ReloadViewModel(viewModel, request, savedState, viewModelLocator);
+            var viewModelLocator = this.FindViewModelLocator(request);
+            return this.ReloadViewModel(viewModel, request, savedState, viewModelLocator);
         }
 
         private IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState,
@@ -62,9 +63,9 @@ namespace Cirrious.MvvmCross.ViewModels
                 return new MvxNullViewModel();
             }
 
-            var viewModelLocator = FindViewModelLocator(request);
+            var viewModelLocator = this.FindViewModelLocator(request);
 
-            return LoadViewModel(request, savedState, viewModelLocator);
+            return this.LoadViewModel(request, savedState, viewModelLocator);
         }
 
         private IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState,
@@ -88,7 +89,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         private IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
-            var viewModelLocator = LocatorCollection.FindViewModelLocator(request);
+            var viewModelLocator = this.LocatorCollection.FindViewModelLocator(request);
 
             if (viewModelLocator == null)
             {

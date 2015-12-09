@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Binders;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using MvvmCross.Binding.Binders;
+
     public interface IMvxValueCombinerLookup
         : IMvxNamedInstanceLookup<IMvxValueCombiner>
     {

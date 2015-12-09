@@ -5,18 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Mac.Views.Presenters
 {
+    using System.Reflection;
+
+    using global::MvvmCross.Binding;
+    using global::MvvmCross.Binding.Bindings.Target;
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var checkBox = View;
+            var checkBox = this.View;
             if (checkBox == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
@@ -30,10 +32,10 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
         [Export("checkBoxAction:")]
         private void checkBoxAction()
         {
-            var view = View;
+            var view = this.View;
             if (view == null)
                 return;
-            FireValueChanged(view.State == NSCellStateValue.On);
+            this.FireValueChanged(view.State == NSCellStateValue.On);
         }
 
         public override MvxBindingMode DefaultMode
@@ -46,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var view = View;
+                var view = this.View;
                 if (view != null)
                 {
                     //                    view.ValueChanged -= HandleValueChanged;

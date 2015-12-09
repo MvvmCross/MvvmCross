@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxFilePluginManager
         : MvxPluginManager
     {
@@ -23,19 +24,19 @@ namespace Cirrious.CrossCore.Plugins
 
         public MvxFilePluginManager(string platformDllPostfix, string assemblyExtension = "")
         {
-            _platformDllPostfixes = new List<string>() { platformDllPostfix };
-            _assemblyExtension = assemblyExtension;
+            this._platformDllPostfixes = new List<string>() { platformDllPostfix };
+            this._assemblyExtension = assemblyExtension;
         }
 
         public MvxFilePluginManager(List<string> platformDllPostfixes, string assemblyExtension = "")
         {
-            _platformDllPostfixes = platformDllPostfixes;
-            _assemblyExtension = assemblyExtension;
+            this._platformDllPostfixes = platformDllPostfixes;
+            this._assemblyExtension = assemblyExtension;
         }
 
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {
-            var assembly = LoadAssembly(toLoad);
+            var assembly = this.LoadAssembly(toLoad);
 
             //var pluginTypes = assembly.ExceptionSafeGetTypes().Select(x => x.FullName);
             //foreach (var type in pluginTypes)
@@ -55,9 +56,9 @@ namespace Cirrious.CrossCore.Plugins
 
         protected virtual Assembly LoadAssembly(Type toLoad)
         {
-            foreach (var platformDllPostfix in _platformDllPostfixes)
+            foreach (var platformDllPostfix in this._platformDllPostfixes)
             {
-                var assemblyName = GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
+                var assemblyName = this.GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
                 MvxTrace.Trace("Loading plugin assembly: {0}", assemblyName);
 
                 try
@@ -77,7 +78,7 @@ namespace Cirrious.CrossCore.Plugins
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad, string platformDllPostfix)
         {
-            return $"{toLoad.Namespace}{platformDllPostfix}{_assemblyExtension}";
+            return $"{toLoad.Namespace}{platformDllPostfix}{this._assemblyExtension}";
         }
     }
 }

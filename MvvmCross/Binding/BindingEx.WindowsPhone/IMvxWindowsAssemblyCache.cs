@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.BindingEx.WindowsPhone
+namespace MvvmCross.BindingEx.WindowsPhone
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+
     public interface IMvxWindowsAssemblyCache
     {
         IList<Assembly> Assemblies { get; }

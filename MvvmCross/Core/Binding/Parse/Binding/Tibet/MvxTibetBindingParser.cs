@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Swiss;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
+namespace MvvmCross.Binding.Parse.Binding.Tibet
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Parse.Binding.Swiss;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxTibetBindingParser
         : MvxSwissBindingParser
     {
@@ -21,8 +22,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 
         protected override IEnumerable<char> TerminatingCharacters()
         {
-            return _terminatingCharacters ??
-                   (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters()).ToList());
+            return this._terminatingCharacters ??
+                   (this._terminatingCharacters = base.TerminatingCharacters().Union(this.OperatorCharacters()).ToList());
         }
 
         private char[] OperatorCharacters()
@@ -32,15 +33,15 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
-            if (IsComplete)
+            if (this.IsComplete)
                 return;
 
             object literal;
-            if (TryReadValue(AllowNonQuotedText.DoNotAllow, out literal))
+            if (this.TryReadValue(AllowNonQuotedText.DoNotAllow, out literal))
             {
                 // for null, replace with LiteralNull
                 literal = literal ?? LiteralNull;
-                ThrowExceptionIfPathAlreadyDefined(description);
+                this.ThrowExceptionIfPathAlreadyDefined(description);
                 description.Literal = literal;
                 return;
             }
@@ -51,33 +52,33 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
         protected override void ParseFunctionStyleBlockInto(MvxSerializableBindingDescription description, string block)
         {
             description.Function = block;
-            MoveNext();
-            if (IsComplete)
+            this.MoveNext();
+            if (this.IsComplete)
                 throw new MvxException("Unterminated () pair for combiner {0}", block);
 
             var terminationFound = false;
             var sources = new List<MvxSerializableBindingDescription>();
             while (!terminationFound)
             {
-                SkipWhitespace();
-                sources.Add(ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma));
-                SkipWhitespace();
-                if (IsComplete)
+                this.SkipWhitespace();
+                sources.Add(this.ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma));
+                this.SkipWhitespace();
+                if (this.IsComplete)
                     throw new MvxException("Unterminated () while parsing combiner {0}", block);
 
-                switch (CurrentChar)
+                switch (this.CurrentChar)
                 {
                     case ')':
-                        MoveNext();
+                        this.MoveNext();
                         terminationFound = true;
                         break;
 
                     case ',':
-                        MoveNext();
+                        this.MoveNext();
                         break;
 
                     default:
-                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", CurrentChar, block);
+                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", this.CurrentChar, block);
                 }
             }
 
@@ -87,7 +88,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
         protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
         {
             // get the operator Combiner
-            var twoCharacterOperatorString = SafePeekString(2);
+            var twoCharacterOperatorString = this.SafePeekString(2);
 
             // TODO - I guess this should be done by dictionaries
             string combinerName = null;
@@ -128,7 +129,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
             // TODO - I guess this should be done by dictionaries
             if (combinerName == null)
             {
-                switch (CurrentChar)
+                switch (this.CurrentChar)
                 {
                     case '>':
                         combinerName = "GreaterThan";
@@ -168,9 +169,9 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
             }
 
             if (combinerName == null)
-                throw new MvxException("Unexpected operator starting with {0}", CurrentChar);
+                throw new MvxException("Unexpected operator starting with {0}", this.CurrentChar);
 
-            MoveNext(moveFowards);
+            this.MoveNext(moveFowards);
 
             // now create the operator Combiner
             var child = new MvxSerializableBindingDescription()
@@ -195,7 +196,7 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
             description.Sources = new List<MvxSerializableBindingDescription>()
                 {
                     child,
-                    ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
+                    this.ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
                 };
 
             return description;
@@ -203,24 +204,24 @@ namespace Cirrious.MvvmCross.Binding.Parse.Binding.Tibet
 
         protected override bool DetectOperator()
         {
-            return OperatorCharacters().Contains(CurrentChar);
+            return this.OperatorCharacters().Contains(this.CurrentChar);
         }
 
         protected override void HandleEmptyBlock(MvxSerializableBindingDescription description)
         {
-            if (IsComplete)
+            if (this.IsComplete)
                 return;
 
-            if (CurrentChar == '(')
+            if (this.CurrentChar == '(')
             {
-                MoveNext();
-                ParseChildBindingDescriptionInto(description, ParentIsLookingForComma.ParentIsNotLookingForComma);
+                this.MoveNext();
+                this.ParseChildBindingDescriptionInto(description, ParentIsLookingForComma.ParentIsNotLookingForComma);
 
-                SkipWhitespace();
-                if (IsComplete || CurrentChar != ')')
+                this.SkipWhitespace();
+                if (this.IsComplete || this.CurrentChar != ')')
                     throw new MvxException("Unterminated () pair");
-                MoveNext();
-                SkipWhitespace();
+                this.MoveNext();
+                this.SkipWhitespace();
             }
         }
     }

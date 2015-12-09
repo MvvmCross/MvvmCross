@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.IO;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+    using System.IO;
+
+    using Android.Widget;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxImageViewImageTargetBinding
         : MvxBaseStreamImageViewTargetBinding
     {
@@ -38,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             }
 
             var drawableResourceName = GetImageAssetName(stringValue);
-            var assetStream = AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
+            var assetStream = this.AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
 
             return assetStream;
         }

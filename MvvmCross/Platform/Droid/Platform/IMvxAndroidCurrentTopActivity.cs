@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-
-namespace Cirrious.CrossCore.Droid.Platform
+namespace MvvmCross.Platform.Droid.Platform
 {
+    using Android.App;
+
     public interface IMvxAndroidCurrentTopActivity
     {
         Activity Activity { get; }

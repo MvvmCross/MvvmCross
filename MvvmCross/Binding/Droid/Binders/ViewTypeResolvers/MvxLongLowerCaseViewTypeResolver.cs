@@ -5,12 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Views;
-using Cirrious.CrossCore.IoC;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
+    using System;
+
+    using Android.Views;
+
+    using MvvmCross.Platform.IoC;
+
     public abstract class MvxLongLowerCaseViewTypeResolver : MvxReflectionViewTypeResolver
     {
         protected MvxLongLowerCaseViewTypeResolver(IMvxTypeCache<View> typeCache)
@@ -21,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
         protected Type ResolveLowerCaseTypeName(string longLowerCaseName)
         {
             Type toReturn;
-            TypeCache.LowerCaseFullNameCache.TryGetValue(longLowerCaseName, out toReturn);
+            this.TypeCache.LowerCaseFullNameCache.TryGetValue(longLowerCaseName, out toReturn);
             return toReturn;
         }
     }

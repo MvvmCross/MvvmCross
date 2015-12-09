@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target
+namespace MvvmCross.Binding.Bindings.Target
 {
+    using MvvmCross.Binding.ExtensionMethods;
+    using MvvmCross.Platform.Platform;
+
     public abstract class MvxConvertingTargetBinding : MvxTargetBinding
     {
         private bool _isUpdatingSource;
@@ -28,41 +28,41 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
         public override void SetValue(object value)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-            var target = Target;
+            var target = this.Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", this.GetType().Name);
                 return;
             }
 
-            if (ShouldSkipSetValueForViewSpecificReasons(target, value))
+            if (this.ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
 
-            var safeValue = MakeSafeValue(value);
+            var safeValue = this.MakeSafeValue(value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource)
+            if (this._isUpdatingSource)
             {
                 if (safeValue == null)
                 {
-                    if (_updatingSourceWith == null)
+                    if (this._updatingSourceWith == null)
                         return;
                 }
                 else
                 {
-                    if (safeValue.Equals(_updatingSourceWith))
+                    if (safeValue.Equals(this._updatingSourceWith))
                         return;
                 }
             }
 
             try
             {
-                _isUpdatingTarget = true;
-                SetValueImpl(target, safeValue);
+                this._isUpdatingTarget = true;
+                this.SetValueImpl(target, safeValue);
             }
             finally
             {
-                _isUpdatingTarget = false;
+                this._isUpdatingTarget = false;
             }
         }
 
@@ -73,29 +73,29 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-            var safeValue = TargetType.MakeSafeValue(value);
+            var safeValue = this.TargetType.MakeSafeValue(value);
             return safeValue;
         }
 
         protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
+            if (this._isUpdatingTarget
+                || this._isUpdatingSource)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
             try
             {
-                _isUpdatingSource = true;
-                _updatingSourceWith = newValue;
+                this._isUpdatingSource = true;
+                this._updatingSourceWith = newValue;
 
                 base.FireValueChanged(newValue);
             }
             finally
             {
-                _isUpdatingSource = false;
-                _updatingSourceWith = null;
+                this._isUpdatingSource = false;
+                this._updatingSourceWith = null;
             }
         }
     }

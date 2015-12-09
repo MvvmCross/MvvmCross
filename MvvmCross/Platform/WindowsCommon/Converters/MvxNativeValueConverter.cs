@@ -5,37 +5,39 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using System;
-using System.Globalization;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-
-namespace Cirrious.CrossCore.WindowsCommon.Converters
+namespace MvvmCross.Platform.WindowsCommon.Converters
 {
+    using System;
+    using System.Globalization;
+
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Data;
+
+    using MvvmCross.Platform.Converters;
+
     public class MvxNativeValueConverter
         : IValueConverter
     {
         private readonly IMvxValueConverter _wrapped;
 
-        protected IMvxValueConverter Wrapped => _wrapped;
+        protected IMvxValueConverter Wrapped => this._wrapped;
 
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
-            _wrapped = wrapped;
+            this._wrapped = wrapped;
         }
 
         public virtual object Convert(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = this._wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = this._wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 

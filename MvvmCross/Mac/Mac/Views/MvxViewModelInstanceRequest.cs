@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using global::MvvmCross.Core.ViewModels;
+
 #warning Move to shared PCL code
 
     public class MvxViewModelInstanceRequest : MvxViewModelRequest
@@ -17,13 +17,13 @@ namespace Cirrious.MvvmCross.Mac.Views
 
         public IMvxViewModel ViewModelInstance
         {
-            get { return _viewModelInstance; }
+            get { return this._viewModelInstance; }
         }
 
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)
         {
-            _viewModelInstance = viewModelInstance;
+            this._viewModelInstance = viewModelInstance;
         }
     }
 }

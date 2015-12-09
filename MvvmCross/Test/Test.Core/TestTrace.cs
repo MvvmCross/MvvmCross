@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Diagnostics;
-
-namespace Cirrious.MvvmCross.Test.Core
+namespace MvvmCross.Test.Core
 {
+    using System;
+    using System.Diagnostics;
+
+    using MvvmCross.Platform.Platform;
+
     public class TestTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

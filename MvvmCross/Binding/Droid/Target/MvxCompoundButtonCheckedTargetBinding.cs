@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System.Reflection;
+
+    using Android.Widget;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxCompoundButtonCheckedTargetBinding
         : MvxPropertyInfoTargetBinding<CompoundButton>
     {
@@ -34,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            _subscribed = true;
+            this._subscribed = true;
             compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
         }
 
@@ -49,10 +50,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var compoundButton = View;
-                if (compoundButton != null && _subscribed)
+                if (compoundButton != null && this._subscribed)
                 {
                     compoundButton.CheckedChange -= CompoundButtonOnCheckedChange;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

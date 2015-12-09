@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
     public enum MvxPropertyInjection
     {

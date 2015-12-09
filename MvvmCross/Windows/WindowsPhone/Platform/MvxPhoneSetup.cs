@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Views;
-using Microsoft.Phone.Controls;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Platform
+namespace MvvmCross.WindowsPhone.Platform
 {
+    using Microsoft.Phone.Controls;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.WindowsPhone.Views;
+
     public abstract class MvxPhoneSetup
         : MvxSetup
     {
@@ -23,7 +24,7 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected MvxPhoneSetup(PhoneApplicationFrame rootFrame)
         {
-            _rootFrame = rootFrame;
+            this._rootFrame = rootFrame;
         }
 
         protected override void InitializeCommandHelper()
@@ -40,14 +41,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateViewsContainer(_rootFrame);
+            var container = this.CreateViewsContainer(this._rootFrame);
             Mvx.RegisterSingleton<IMvxPhoneViewModelRequestTranslator>(container);
             return container;
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcher(_rootFrame);
+            return this.CreateViewDispatcher(this._rootFrame);
         }
 
         protected virtual IMvxPhoneViewPresenter CreateViewPresenter(PhoneApplicationFrame rootFrame)
@@ -57,8 +58,8 @@ namespace Cirrious.MvvmCross.WindowsPhone.Platform
 
         protected virtual IMvxViewDispatcher CreateViewDispatcher(PhoneApplicationFrame rootFrame)
         {
-            var presenter = CreateViewPresenter(rootFrame);
-            return CreateViewDispatcher(presenter, rootFrame);
+            var presenter = this.CreateViewPresenter(rootFrame);
+            return this.CreateViewDispatcher(presenter, rootFrame);
         }
 
         protected virtual MvxPhoneViewDispatcher CreateViewDispatcher(IMvxPhoneViewPresenter presenter,

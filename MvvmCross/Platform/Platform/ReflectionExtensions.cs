@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.CrossCore
+namespace MvvmCross.Platform
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
     public static class ReflectionExtensions
     {
         public static IEnumerable<Type> GetTypes(this Assembly assembly)

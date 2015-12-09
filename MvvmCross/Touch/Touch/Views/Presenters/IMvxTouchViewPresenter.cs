@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace MvvmCross.Touch.Views.Presenters
 {
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Touch.Views;
+
     public interface IMvxTouchViewPresenter
         : IMvxViewPresenter
         , IMvxCanCreateTouchView

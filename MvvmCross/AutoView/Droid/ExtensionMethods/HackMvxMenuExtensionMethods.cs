@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.CrossCore.Exceptions;
-using CrossUI.Core.Elements.Menu;
-using CrossUI.Droid.Menus;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.ExtensionMethods
+namespace MvvmCross.AutoView.Droid.ExtensionMethods
 {
+    using Android.Content;
+    using Android.Views;
+
+    using CrossUI.Core.Elements.Menu;
+    using CrossUI.Droid.Menus;
+
+    using MvvmCross.Platform.Exceptions;
+
     public static class HackMvxMenuExtensionMethods
     {
         public static bool ProcessMenuItemSelected(this IParentMenu parentMenu, IMenuItem item)

@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using System;
-using System.Collections;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Windows.Input;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxListView")]
     public class MvxListView
         : ListView
@@ -35,7 +35,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-            Adapter = adapter;
+            this.Adapter = adapter;
         }
 
         protected MvxListView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = Adapter;
+                var existing = this.Adapter;
                 if (existing == value)
                     return;
 
@@ -65,52 +65,52 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get { return this.Adapter.ItemsSource; }
+            set { this.Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get { return this.Adapter.ItemTemplateId; }
+            set { this.Adapter.ItemTemplateId = value; }
         }
 
         private ICommand _itemClick;
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
-            set { _itemClick = value; if (_itemClick != null) EnsureItemClickOverloaded(); }
+            get { return this._itemClick; }
+            set { this._itemClick = value; if (this._itemClick != null) this.EnsureItemClickOverloaded(); }
         }
 
         private bool _itemClickOverloaded = false;
 
         private void EnsureItemClickOverloaded()
         {
-            if (_itemClickOverloaded)
+            if (this._itemClickOverloaded)
                 return;
 
-            _itemClickOverloaded = true;
-            base.ItemClick += (sender, args) => ExecuteCommandOnItem(this.ItemClick, args.Position);
+            this._itemClickOverloaded = true;
+            base.ItemClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemClick, args.Position);
         }
 
         private ICommand _itemLongClick;
 
         public new ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
-            set { _itemLongClick = value; if (_itemLongClick != null) EnsureItemLongClickOverloaded(); }
+            get { return this._itemLongClick; }
+            set { this._itemLongClick = value; if (this._itemLongClick != null) this.EnsureItemLongClickOverloaded(); }
         }
 
         private bool _itemLongClickOverloaded = false;
 
         private void EnsureItemLongClickOverloaded()
         {
-            if (_itemLongClickOverloaded)
+            if (this._itemLongClickOverloaded)
                 return;
 
-            _itemLongClickOverloaded = true;
-            base.ItemLongClick += (sender, args) => ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+            this._itemLongClickOverloaded = true;
+            base.ItemLongClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemLongClick, args.Position);
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command, int position)
@@ -118,7 +118,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (command == null)
                 return;
 
-            var item = Adapter.GetRawItem(position);
+            var item = this.Adapter.GetRawItem(position);
             if (item == null)
                 return;
 

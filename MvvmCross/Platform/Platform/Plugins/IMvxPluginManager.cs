@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+
     public interface IMvxPluginManager
     {
         Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }

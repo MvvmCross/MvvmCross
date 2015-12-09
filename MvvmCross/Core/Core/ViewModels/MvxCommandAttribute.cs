@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Method)]
     public class MvxCommandAttribute : Attribute
     {
         public MvxCommandAttribute(string commandName, string canExecutePropertyName = null)
         {
-            CanExecutePropertyName = canExecutePropertyName;
-            CommandName = commandName;
+            this.CanExecutePropertyName = canExecutePropertyName;
+            this.CommandName = commandName;
         }
 
         public string CommandName { get; set; }

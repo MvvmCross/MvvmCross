@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Combiners;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Binding.Combiners;
+
     public class MvxCombinerSourceStepDescription : MvxSourceStepDescription
     {
         public IMvxValueCombiner Combiner { get; set; }
@@ -17,7 +18,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return Combiner == null ? "-null-" : Combiner.GetType().Name + " combiner-operation";
+            return this.Combiner == null ? "-null-" : this.Combiner.GetType().Name + " combiner-operation";
         }
     }
 }

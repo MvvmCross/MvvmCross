@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.MvvmCross.Binding.Attributes;
-using System;
-using System.Collections;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Windows.Input;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxSpinner")]
     public class MvxSpinner : Spinner
     {
@@ -36,8 +36,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             var dropDownItemTemplateId = MvxAttributeHelpers.ReadDropDownListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
-            Adapter = adapter;
-            SetupHandleItemSelected();
+            this.Adapter = adapter;
+            this.SetupHandleItemSelected();
         }
 
         protected MvxSpinner(IntPtr javaReference, JniHandleOwnership transfer)
@@ -50,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = Adapter;
+                var existing = this.Adapter;
                 if (existing == value)
                     return;
 
@@ -67,20 +67,20 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get { return this.Adapter.ItemsSource; }
+            set { this.Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get { return this.Adapter.ItemTemplateId; }
+            set { this.Adapter.ItemTemplateId = value; }
         }
 
         public int DropDownItemTemplateId
         {
-            get { return Adapter.DropDownItemTemplateId; }
-            set { Adapter.DropDownItemTemplateId = value; }
+            get { return this.Adapter.DropDownItemTemplateId; }
+            set { this.Adapter.DropDownItemTemplateId = value; }
         }
 
         public ICommand HandleItemSelected { get; set; }
@@ -90,13 +90,13 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             base.ItemSelected += (sender, args) =>
                 {
                     var position = args.Position;
-                    HandleSelected(position);
+                    this.HandleSelected(position);
                 };
         }
 
         protected virtual void HandleSelected(int position)
         {
-            var item = Adapter.GetRawItem(position);
+            var item = this.Adapter.GetRawItem(position);
             if (this.HandleItemSelected == null
                 || item == null
                 || !this.HandleItemSelected.CanExecute(item))

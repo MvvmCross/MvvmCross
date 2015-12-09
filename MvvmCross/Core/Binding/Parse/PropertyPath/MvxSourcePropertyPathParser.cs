@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Parse;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
+namespace MvvmCross.Binding.Parse.PropertyPath
 {
+    using System.Collections.Generic;
+    using System.Text;
+
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Parse;
+
     public class MvxSourcePropertyPathParser
         : MvxParser
           , IMvxSourcePropertyPathParser
@@ -21,8 +22,8 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
         protected override void Reset(string textToParse)
         {
-            textToParse = MakeSafe(textToParse);
-            CurrentTokens = new List<MvxPropertyToken>();
+            textToParse = this.MakeSafe(textToParse);
+            this.CurrentTokens = new List<MvxPropertyToken>();
             base.Reset(textToParse);
         }
 
@@ -37,135 +38,135 @@ namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath
 
         public IList<MvxPropertyToken> Parse(string textToParse)
         {
-            Reset(textToParse);
+            this.Reset(textToParse);
 
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                ParseNextToken();
+                this.ParseNextToken();
             }
 
-            if (CurrentTokens.Count == 0)
+            if (this.CurrentTokens.Count == 0)
             {
-                CurrentTokens.Add(new MvxEmptyPropertyToken());
+                this.CurrentTokens.Add(new MvxEmptyPropertyToken());
             }
 
-            return CurrentTokens;
+            return this.CurrentTokens;
         }
 
         private void ParseNextToken()
         {
-            SkipWhitespaceAndPeriods();
+            this.SkipWhitespaceAndPeriods();
 
-            if (IsComplete)
+            if (this.IsComplete)
             {
                 return;
             }
 
-            var currentChar = CurrentChar;
+            var currentChar = this.CurrentChar;
             if (currentChar == '[')
             {
-                ParseIndexer();
+                this.ParseIndexer();
             }
             else if (char.IsLetter(currentChar) || currentChar == '_')
             {
-                ParsePropertyName();
+                this.ParsePropertyName();
             }
             else
             {
                 throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
                                        currentChar,
-                                       CurrentIndex, FullText);
+                                       this.CurrentIndex, this.FullText);
             }
         }
 
         private void ParsePropertyName()
         {
             var propertyText = new StringBuilder();
-            while (!IsComplete)
+            while (!this.IsComplete)
             {
-                var currentChar = CurrentChar;
+                var currentChar = this.CurrentChar;
                 if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
                     break;
                 propertyText.Append(currentChar);
-                MoveNext();
+                this.MoveNext();
             }
 
             var text = propertyText.ToString();
-            CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
+            this.CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
         }
 
         private void ParseIndexer()
         {
-            if (CurrentChar != '[')
+            if (this.CurrentChar != '[')
             {
                 throw new MvxException(
                     "Internal error - ParseIndexer should only be called with a string starting with [");
             }
 
-            MoveNext();
-            if (IsComplete)
+            this.MoveNext();
+            if (this.IsComplete)
             {
-                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
+                throw new MvxException("Invalid indexer targetProperty text {0}", this.FullText);
             }
 
-            SkipWhitespaceAndPeriods();
+            this.SkipWhitespaceAndPeriods();
 
-            if (IsComplete)
+            if (this.IsComplete)
             {
-                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
+                throw new MvxException("Invalid indexer targetProperty text {0}", this.FullText);
             }
 
-            if (CurrentChar == '\'' || CurrentChar == '\"')
+            if (this.CurrentChar == '\'' || this.CurrentChar == '\"')
             {
-                ParseQuotedStringIndexer();
+                this.ParseQuotedStringIndexer();
             }
-            else if (char.IsDigit(CurrentChar))
+            else if (char.IsDigit(this.CurrentChar))
             {
-                ParseIntegerIndexer();
+                this.ParseIntegerIndexer();
             }
             else
             {
-                ParseUnquotedStringIndexer();
+                this.ParseUnquotedStringIndexer();
             }
 
-            SkipWhitespaceAndPeriods();
-            if (IsComplete)
+            this.SkipWhitespaceAndPeriods();
+            if (this.IsComplete)
             {
-                throw new MvxException("Invalid termination of indexer targetProperty text in {0}", FullText);
+                throw new MvxException("Invalid termination of indexer targetProperty text in {0}", this.FullText);
             }
 
-            if (CurrentChar != ']')
+            if (this.CurrentChar != ']')
             {
                 throw new MvxException(
                     "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator",
-                    CurrentChar,
-                    CurrentIndex, FullText);
+                    this.CurrentChar,
+                    this.CurrentIndex, this.FullText);
             }
 
-            MoveNext();
+            this.MoveNext();
         }
 
         private void ParseIntegerIndexer()
         {
-            var index = (int)ReadUnsignedInteger();
-            CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
+            var index = (int)this.ReadUnsignedInteger();
+            this.CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 
         private void ParseQuotedStringIndexer()
         {
-            var text = ReadQuotedString();
-            CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+            var text = this.ReadQuotedString();
+            this.CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
         }
 
         private void ParseUnquotedStringIndexer()
         {
-            var text = ReadTextUntil(']');
-            CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+            var text = this.ReadTextUntil(']');
+            this.CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
         }
 
         private void SkipWhitespaceAndPeriods()
         {
-            SkipWhitespaceAndCharacters(new[] { '.' });
+            this.SkipWhitespaceAndCharacters(new[] { '.' });
         }
     }
 }

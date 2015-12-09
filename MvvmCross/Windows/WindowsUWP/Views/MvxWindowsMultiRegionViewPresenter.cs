@@ -5,17 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.WindowsUWP.Views
+namespace MvvmCross.WindowsUWP.Views
 {
+    using System;
+
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Media;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxWindowsMultiRegionViewPresenter
         : MvxWindowsViewPresenter
     {
@@ -24,7 +26,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
         public MvxWindowsMultiRegionViewPresenter(IMvxWindowsFrame rootFrame)
             : base(rootFrame)
         {
-            _rootFrame = rootFrame;
+            this._rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -36,7 +38,7 @@ namespace Cirrious.MvvmCross.WindowsUWP.Views
                 var converter = Mvx.Resolve<IMvxNavigationSerializer>();
                 var requestText = converter.Serializer.SerializeObject(request);
 
-                var containerView = FindChild<Frame>(_rootFrame.UnderlyingControl, viewType.GetRegionName());
+                var containerView = FindChild<Frame>(this._rootFrame.UnderlyingControl, viewType.GetRegionName());
 
                 if (containerView == null)
                     throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");

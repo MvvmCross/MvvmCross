@@ -11,13 +11,13 @@
 
 #endregion Credit - MvvmLight
 
-using System;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Interactivity;
-
-namespace Cirrious.MvvmCross.Wpf.Commands
+namespace MvvmCross.Wpf.Commands
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Input;
+    using System.Windows.Interactivity;
+
     public class MvxEventToCommand : TriggerAction<DependencyObject>
     {
         /// <summary>
@@ -83,9 +83,9 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
+            get { return (ICommand)this.GetValue(CommandProperty); }
 
-            set { SetValue(CommandProperty, value); }
+            set { this.SetValue(CommandProperty, value); }
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         {
             get { return this.GetValue(CommandParameterProperty); }
 
-            set { SetValue(CommandParameterProperty, value); }
+            set { this.SetValue(CommandParameterProperty, value); }
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
             set
             {
-                _commandParameterValue = value;
-                EnableDisableElement();
+                this._commandParameterValue = value;
+                this.EnableDisableElement();
             }
         }
 
@@ -128,7 +128,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         {
             get { return (bool)this.GetValue(MustToggleIsEnabledProperty); }
 
-            set { SetValue(MustToggleIsEnabledProperty, value); }
+            set { this.SetValue(MustToggleIsEnabledProperty, value); }
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
             set
             {
-                _mustToggleValue = value;
-                EnableDisableElement();
+                this._mustToggleValue = value;
+                this.EnableDisableElement();
             }
         }
 
@@ -159,7 +159,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         protected override void OnAttached()
         {
             base.OnAttached();
-            EnableDisableElement();
+            this.EnableDisableElement();
         }
 
 #if SILVERLIGHT
@@ -177,7 +177,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// is attached.</returns>
         private FrameworkElement GetAssociatedObject()
         {
-            return AssociatedObject as FrameworkElement;
+            return this.AssociatedObject as FrameworkElement;
         }
 
 #endif
@@ -190,7 +190,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// this trigger is invoked.</returns>
         private ICommand GetCommand()
         {
-            return Command;
+            return this.Command;
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// </summary>
         public void Invoke()
         {
-            Invoke(null);
+            this.Invoke(null);
         }
 
         /// <summary>
@@ -218,18 +218,18 @@ namespace Cirrious.MvvmCross.Wpf.Commands
         /// <param name="parameter">The EventArgs of the fired event.</param>
         protected override void Invoke(object parameter)
         {
-            if (AssociatedElementIsDisabled())
+            if (this.AssociatedElementIsDisabled())
             {
                 return;
             }
 
-            var command = GetCommand();
-            var commandParameter = CommandParameterValue;
+            var command = this.GetCommand();
+            var commandParameter = this.CommandParameterValue;
 
             if (commandParameter == null
-                && PassEventArgsToCommand)
+                && this.PassEventArgsToCommand)
             {
-                commandParameter = MapCommandParameter(parameter);
+                commandParameter = this.MapCommandParameter(parameter);
             }
 
             if (command != null
@@ -270,16 +270,16 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
         private bool AssociatedElementIsDisabled()
         {
-            var element = GetAssociatedObject();
+            var element = this.GetAssociatedObject();
 
-            return AssociatedObject == null
+            return this.AssociatedObject == null
                    || (element != null
                        && !element.IsEnabled);
         }
 
         private void EnableDisableElement()
         {
-            var element = GetAssociatedObject();
+            var element = this.GetAssociatedObject();
 
             if (element == null)
             {
@@ -297,7 +297,7 @@ namespace Cirrious.MvvmCross.Wpf.Commands
 
         private void OnCommandCanExecuteChanged(object sender, EventArgs e)
         {
-            EnableDisableElement();
+            this.EnableDisableElement();
         }
     }
 }

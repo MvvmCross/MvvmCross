@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings;
-
-namespace Cirrious.MvvmCross.Binding
+namespace MvvmCross.Binding
 {
+    using MvvmCross.Binding.Bindings;
+
     public class MvxBindingRequest
     {
         public MvxBindingRequest()
@@ -17,9 +17,9 @@ namespace Cirrious.MvvmCross.Binding
 
         public MvxBindingRequest(object source, object target, MvxBindingDescription description)
         {
-            Target = target;
-            Source = source;
-            Description = description;
+            this.Target = target;
+            this.Source = source;
+            this.Description = description;
         }
 
         public object Target { get; set; }

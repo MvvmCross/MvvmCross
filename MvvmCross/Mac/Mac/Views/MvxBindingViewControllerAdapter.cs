@@ -5,18 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Mac.Views;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using System;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System;
+
+    using Cirrious.CrossCore.Mac.Views;
+
+    using global::MvvmCross.Binding.BindingContext;
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxMacView MacView
         {
-            get { return ViewController as IMvxMacView; }
+            get { return this.ViewController as IMvxMacView; }
         }
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
@@ -25,18 +27,18 @@ namespace Cirrious.MvvmCross.Mac.Views
             if (!(eventSource is IMvxMacView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxMacView");
 
-            MacView.BindingContext = new MvxBindingContext();
+            this.MacView.BindingContext = new MvxBindingContext();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (MacView == null)
+            if (this.MacView == null)
             {
                 MvxTrace.Warning("MacView is null for clearup of bindings in type {0}",
-                               MacView.GetType().Name);
+                               this.MacView.GetType().Name);
                 return;
             }
-            MacView.ClearAllBindings();
+            this.MacView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

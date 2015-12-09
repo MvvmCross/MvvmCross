@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Runtime;
-using CrossUI.Core;
-using System;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
+namespace CrossUI.Droid.Dialog
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using Android.Runtime;
+
+    using CrossUI.Core;
+
     public class LinearDialogStyleableResource
     {
         private static bool _initialized = false;

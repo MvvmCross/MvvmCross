@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Graphics;
+    using Android.Widget;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxImageViewDrawableTargetBinding
         : MvxBaseImageViewTargetBinding
     {
@@ -38,7 +40,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 bitmap = null;
             else
             {
-                var resources = AndroidGlobals.ApplicationContext.Resources;
+                var resources = this.AndroidGlobals.ApplicationContext.Resources;
                 bitmap = BitmapFactory.DecodeResource(resources, intValue, new BitmapFactory.Options() { InPurgeable = true });
             }
 

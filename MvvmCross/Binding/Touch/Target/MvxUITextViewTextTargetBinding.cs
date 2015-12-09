@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxUITextViewTextTargetBinding
         : MvxConvertingTargetBinding
     {
@@ -26,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
         {
-            var view = View;
+            var view = this.View;
             if (view == null)
                 return;
             FireValueChanged(view.Text);
@@ -36,7 +37,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         public override void SubscribeToEvents()
         {
-            var target = View;
+            var target = this.View;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -44,8 +45,8 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
                 return;
             }
 
-            target.Changed += EditTextOnChanged;
-            _subscribed = true;
+            target.Changed += this.EditTextOnChanged;
+            this._subscribed = true;
         }
 
         public override Type TargetType => typeof(string);
@@ -64,11 +65,11 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null && _subscribed)
+                var editText = this.View;
+                if (editText != null && this._subscribed)
                 {
-                    editText.Changed -= EditTextOnChanged;
-                    _subscribed = false;
+                    editText.Changed -= this.EditTextOnChanged;
+                    this._subscribed = false;
                 }
             }
         }

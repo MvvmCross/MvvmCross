@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Linq;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder
     {
@@ -23,27 +24,27 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup, IMvxNameMapping viewToViewModelNameMapping)
         {
-            _viewModelByNameLookup = viewModelByNameLookup;
-            _viewToViewModelNameMapping = viewToViewModelNameMapping;
+            this._viewModelByNameLookup = viewModelByNameLookup;
+            this._viewToViewModelNameMapping = viewToViewModelNameMapping;
         }
 
         public virtual Type FindTypeOrNull(Type candidateType)
         {
-            if (!CheckCandidateTypeIsAView(candidateType))
+            if (!this.CheckCandidateTypeIsAView(candidateType))
                 return null;
 
             if (!candidateType.IsConventional())
                 return null;
 
-            var typeByAttribute = LookupAttributedViewModelType(candidateType);
+            var typeByAttribute = this.LookupAttributedViewModelType(candidateType);
             if (typeByAttribute != null)
                 return typeByAttribute;
 
-            var concrete = LookupAssociatedConcreteViewModelType(candidateType);
+            var concrete = this.LookupAssociatedConcreteViewModelType(candidateType);
             if (concrete != null)
                 return concrete;
 
-            var typeByName = LookupNamedViewModelType(candidateType);
+            var typeByName = this.LookupNamedViewModelType(candidateType);
             if (typeByName != null)
                 return typeByName;
 
@@ -63,10 +64,10 @@ namespace Cirrious.MvvmCross.ViewModels
         protected virtual Type LookupNamedViewModelType(Type candidateType)
         {
             var viewName = candidateType.Name;
-            var viewModelName = _viewToViewModelNameMapping.Map(viewName);
+            var viewModelName = this._viewToViewModelNameMapping.Map(viewName);
 
             Type toReturn;
-            _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
+            this._viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
             return toReturn;
         }
 

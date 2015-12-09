@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Droid.Platform
+namespace MvvmCross.Platform.Droid.Platform
 {
+    using System;
+
     public static class MvxJavaDateUtils
     {
         public static DateTime DateTimeFromJava(int year, int month, int dayOfMonth)

@@ -1,9 +1,11 @@
-﻿using Cirrious.CrossCore.Core;
-using System;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Views
+﻿namespace MvvmCross.Platform.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Platform.Core;
+
+    using UIKit;
+
     public class MvxEventSourcePageViewController : UIPageViewController, IMvxEventSourceViewController
     {
         public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation orientation, UIPageViewControllerSpineLocation spine) : base(style, orientation, spine)
@@ -17,49 +19,49 @@ namespace Cirrious.CrossCore.Touch.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            ViewDidLoadCalled.Raise(this);
+            this.ViewDidLoadCalled.Raise(this);
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            ViewWillAppearCalled.Raise(this, animated);
+            this.ViewWillAppearCalled.Raise(this, animated);
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewDidAppearCalled.Raise(this, animated);
+            this.ViewDidAppearCalled.Raise(this, animated);
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewDidDisappearCalled.Raise(this, animated);
+            this.ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            ViewWillDisappearCalled.Raise(this, animated);
+            this.ViewWillDisappearCalled.Raise(this, animated);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                DisposeCalled.Raise(this);
+                this.DisposeCalled.Raise(this);
             base.Dispose(disposing);
         }
 
         public event EventHandler ViewDidLoadCalled;
 
-        public event EventHandler<Cirrious.CrossCore.Core.MvxValueEventArgs<bool>> ViewWillAppearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
-        public event EventHandler<Cirrious.CrossCore.Core.MvxValueEventArgs<bool>> ViewDidAppearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
 
-        public event EventHandler<Cirrious.CrossCore.Core.MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
 
-        public event EventHandler<Cirrious.CrossCore.Core.MvxValueEventArgs<bool>> ViewWillDisappearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
 
         public event EventHandler DisposeCalled;
     }

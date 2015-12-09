@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System;
+    using System.Windows.Input;
+
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
+    using UIKit;
+
     public class MvxUIControlTouchUpInsideTargetBinding : MvxConvertingTargetBinding
     {
         private ICommand _command;
@@ -31,21 +32,21 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             }
             else
             {
-                control.TouchUpInside += ControlOnTouchUpInside;
+                control.TouchUpInside += this.ControlOnTouchUpInside;
             }
 
-            _canExecuteEventHandler = new EventHandler<EventArgs>(this.OnCanExecuteChanged);
+            this._canExecuteEventHandler = new EventHandler<EventArgs>(this.OnCanExecuteChanged);
         }
 
         private void ControlOnTouchUpInside(object sender, EventArgs eventArgs)
         {
-            if (_command == null)
+            if (this._command == null)
                 return;
 
-            if (!_command.CanExecute(null))
+            if (!this._command.CanExecute(null))
                 return;
 
-            _command.Execute(null);
+            this._command.Execute(null);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -54,51 +55,51 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (_canExecuteSubscription != null)
+            if (this._canExecuteSubscription != null)
             {
-                _canExecuteSubscription.Dispose();
-                _canExecuteSubscription = null;
+                this._canExecuteSubscription.Dispose();
+                this._canExecuteSubscription = null;
             }
-            _command = value as ICommand;
-            if (_command != null)
+            this._command = value as ICommand;
+            if (this._command != null)
             {
-                _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
+                this._canExecuteSubscription = this._command.WeakSubscribe(this._canExecuteEventHandler);
             }
-            RefreshEnabledState();
+            this.RefreshEnabledState();
         }
 
         private void RefreshEnabledState()
         {
-            var view = Control;
+            var view = this.Control;
             if (view == null)
                 return;
 
             var shouldBeEnabled = false;
-            if (_command != null)
+            if (this._command != null)
             {
-                shouldBeEnabled = _command.CanExecute(null);
+                shouldBeEnabled = this._command.CanExecute(null);
             }
             view.Enabled = shouldBeEnabled;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
         {
-            RefreshEnabledState();
+            this.RefreshEnabledState();
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var view = Control;
+                var view = this.Control;
                 if (view != null)
                 {
-                    view.TouchUpInside -= ControlOnTouchUpInside;
+                    view.TouchUpInside -= this.ControlOnTouchUpInside;
                 }
-                if (_canExecuteSubscription != null)
+                if (this._canExecuteSubscription != null)
                 {
-                    _canExecuteSubscription.Dispose();
-                    _canExecuteSubscription = null;
+                    this._canExecuteSubscription.Dispose();
+                    this._canExecuteSubscription = null;
                 }
             }
             base.Dispose(isDisposing);

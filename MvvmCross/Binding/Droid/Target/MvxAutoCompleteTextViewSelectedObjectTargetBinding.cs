@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using System;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (autoComplete == null)
                 return;
 
-            _subscribed = true;
+            this._subscribed = true;
             autoComplete.SelectedObjectChanged += AutoCompleteOnSelectedObjectChanged;
         }
 
@@ -53,10 +53,10 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var autoComplete = View;
-                if (autoComplete != null && _subscribed)
+                if (autoComplete != null && this._subscribed)
                 {
                     autoComplete.SelectedObjectChanged -= AutoCompleteOnSelectedObjectChanged;
-                    _subscribed = false;
+                    this._subscribed = false;
                 }
             }
         }

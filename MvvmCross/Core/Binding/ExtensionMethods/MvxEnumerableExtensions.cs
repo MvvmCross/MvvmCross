@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections;
-
-namespace Cirrious.MvvmCross.Binding.ExtensionMethods
+namespace MvvmCross.Binding.ExtensionMethods
 {
+    using System.Collections;
+
     public static class MvxEnumerableExtensions
     {
         public static int Count(this IEnumerable enumerable)

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
-using System.Windows.Input;
-
-namespace Cirrious.CrossCore.WeakSubscription
+namespace MvvmCross.Platform.WeakSubscription
 {
+    using System;
+    using System.Reflection;
+    using System.Windows.Input;
+
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {
@@ -24,7 +24,7 @@ namespace Cirrious.CrossCore.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(OnSourceEvent);
+            return new EventHandler(this.OnSourceEvent);
         }
     }
 }

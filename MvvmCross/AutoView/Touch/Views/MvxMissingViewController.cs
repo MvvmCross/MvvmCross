@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.AutoView.ExtensionMethods;
-using Cirrious.MvvmCross.AutoView.Touch.Interfaces;
-using Cirrious.MvvmCross.Dialog.Touch;
-using Cirrious.MvvmCross.ViewModels;
-using CrossUI.Touch.Dialog.Elements;
-using System;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views
+namespace MvvmCross.AutoView.Touch.Views
 {
+    using System;
+
+    using CrossUI.Touch.Dialog.Elements;
+
+    using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.IoC;
+
     [MvxUnconventional]
     public class MvxMissingViewController
         : MvxDialogViewController

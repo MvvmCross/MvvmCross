@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Console.Views
+namespace MvvmCross.Console.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
     {
@@ -34,17 +34,17 @@ namespace Cirrious.MvvmCross.Console.Views
                 var viewModel = viewModelLoader.LoadViewModel(request, savedState);
                 view.HackSetViewModel(viewModel);
                 Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
-                _navigationStack.Push(request);
+                this._navigationStack.Push(request);
             }
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             if (hint is MvxClosePresentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -74,20 +74,20 @@ namespace Cirrious.MvvmCross.Console.Views
         {
             lock (this)
             {
-                if (!CanGoBack())
+                if (!this.CanGoBack())
                 {
                     System.Console.WriteLine("Back not possible");
                     return;
                 }
 
                 // pop off the current view
-                _navigationStack.Pop();
+                this._navigationStack.Pop();
 
                 // prepare to re-push the current view
-                var backTo = _navigationStack.Pop();
+                var backTo = this._navigationStack.Pop();
 
                 // re-display the view
-                Show(backTo);
+                this.Show(backTo);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Cirrious.MvvmCross.Console.Views
         {
             lock (this)
             {
-                if (_navigationStack.Count > 1)
+                if (this._navigationStack.Count > 1)
                     return true;
                 else
                     return false;

@@ -5,26 +5,28 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.CrossCore.Droid.Platform
+namespace MvvmCross.Platform.Droid.Platform
 {
+    using System;
+
+    using Android.App;
+    using Android.Content;
+
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Droid.Views;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAndroidTask
         : MvxMainThreadDispatchingObject
     {
         protected void StartActivity(Intent intent)
         {
-            DoOnActivity(activity => activity.StartActivity(intent));
+            this.DoOnActivity(activity => activity.StartActivity(intent));
         }
 
         protected void StartActivityForResult(int requestCode, Intent intent)
         {
-            DoOnActivity(activity =>
+            this.DoOnActivity(activity =>
                 {
                     var androidView = activity as IMvxStartActivityForResult;
                     if (androidView == null)
@@ -33,7 +35,7 @@ namespace Cirrious.CrossCore.Droid.Platform
                         return;
                     }
 
-                    Mvx.Resolve<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
+                    Mvx.Resolve<IMvxIntentResultSource>().Result += this.OnMvxIntentResultReceived;
                     androidView.MvxInternalStartActivityForResult(intent, requestCode);
                 });
         }
@@ -47,8 +49,8 @@ namespace Cirrious.CrossCore.Droid.Platform
         {
             MvxTrace.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
             // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
-            Mvx.Resolve<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
-            ProcessMvxIntentResult(e);
+            Mvx.Resolve<IMvxIntentResultSource>().Result -= this.OnMvxIntentResultReceived;
+            this.ProcessMvxIntentResult(e);
         }
 
         protected void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
@@ -57,7 +59,7 @@ namespace Cirrious.CrossCore.Droid.Platform
 
             if (ensureOnMainThread)
             {
-                InvokeOnMainThread(() => action(activity));
+                this.InvokeOnMainThread(() => action(activity));
             }
             else
             {

@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Touch.Views.Presenters
+namespace MvvmCross.Touch.Views.Presenters
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class MvxModalNavSupportTouchViewPresenter : MvxTouchViewPresenter
     {
         private UIViewController _currentModalViewController;
@@ -26,15 +27,15 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
         {
             if (view is IMvxModalTouchView)
             {
-                if (_currentModalViewController != null)
+                if (this._currentModalViewController != null)
                     throw new MvxException("Only one modal view controller at a time supported");
 
-                var newNav = CreateModalNavigationController();
+                var newNav = this.CreateModalNavigationController();
                 newNav.PushViewController(view as UIViewController, false);
 
-                _currentModalViewController = view as UIViewController;
+                this._currentModalViewController = view as UIViewController;
 
-                PresentModalViewController(newNav, true);
+                this.PresentModalViewController(newNav, true);
                 return;
             }
 
@@ -49,26 +50,26 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            if (_currentModalViewController != null)
+            if (this._currentModalViewController != null)
             {
                 MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
                 return;
             }
 
             // clear our local reference to avoid back confusion
-            _currentModalViewController = null;
+            this._currentModalViewController = null;
         }
 
         public override void CloseModalViewController()
         {
-            if (_currentModalViewController != null)
+            if (this._currentModalViewController != null)
             {
-                var nav = _currentModalViewController.ParentViewController as UINavigationController;
+                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissViewController(true, () => { });
-                _currentModalViewController = null;
+                    this._currentModalViewController.DismissViewController(true, () => { });
+                this._currentModalViewController = null;
                 return;
             }
 
@@ -77,9 +78,9 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (_currentModalViewController != null)
+            if (this._currentModalViewController != null)
             {
-                var touchView = _currentModalViewController as IMvxTouchView;
+                var touchView = this._currentModalViewController as IMvxTouchView;
                 if (touchView == null)
                 {
                     MvxTrace.Error(
@@ -95,12 +96,12 @@ namespace Cirrious.MvvmCross.Touch.Views.Presenters
                     return;
                 }
 
-                var nav = _currentModalViewController.ParentViewController as UINavigationController;
+                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    _currentModalViewController.DismissViewController(true, () => { });
-                _currentModalViewController = null;
+                    this._currentModalViewController.DismissViewController(true, () => { });
+                this._currentModalViewController = null;
                 return;
             }
 

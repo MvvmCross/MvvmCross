@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Source
+namespace MvvmCross.Binding.Bindings.Source
 {
+    using System;
+
     public abstract class MvxSourceBinding
         : MvxBinding
           , IMvxSourceBinding
@@ -17,10 +17,10 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         protected MvxSourceBinding(object source)
         {
-            _source = source;
+            this._source = source;
         }
 
-        protected object Source => _source;
+        protected object Source => this._source;
 
         public event EventHandler Changed;
 
@@ -32,13 +32,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
 
         protected void FireChanged()
         {
-            var handler = Changed;
+            var handler = this.Changed;
             handler?.Invoke(this, EventArgs.Empty);
         }
 
         protected bool EqualsCurrentValue(object testValue)
         {
-            var existing = GetValue();
+            var existing = this.GetValue();
 
             if (testValue == null)
             {

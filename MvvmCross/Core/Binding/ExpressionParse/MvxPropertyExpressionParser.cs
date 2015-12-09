@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using System;
-using System.Linq.Expressions;
-
-namespace Cirrious.MvvmCross.Binding.ExpressionParse
+namespace MvvmCross.Binding.ExpressionParse
 {
+    using System;
+    using System.Linq.Expressions;
+
+    using MvvmCross.Platform;
+
     // This class was inspired and influenced by the excellent binding work
     // by https://github.com/reactiveui/ReactiveUI/
     // Inspiration used under Microsoft Public License Ms-PL
@@ -18,7 +19,7 @@ namespace Cirrious.MvvmCross.Binding.ExpressionParse
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            return Parse((LambdaExpression)propertyPath);
+            return this.Parse((LambdaExpression)propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)

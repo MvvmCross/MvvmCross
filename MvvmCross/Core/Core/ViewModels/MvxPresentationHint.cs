@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System.Collections.Generic;
+
     public abstract class MvxPresentationHint
     {
         protected MvxPresentationHint()
@@ -18,7 +18,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         protected MvxPresentationHint(MvxBundle body)
         {
-            Body = body;
+            this.Body = body;
         }
 
         protected MvxPresentationHint(IDictionary<string, string> hints)

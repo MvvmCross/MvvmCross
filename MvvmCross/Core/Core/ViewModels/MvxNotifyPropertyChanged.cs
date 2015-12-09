@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
+
+    using MvvmCross.Platform.Core;
+
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject
         , IMvxNotifyPropertyChanged
@@ -23,59 +24,59 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
         {
-            return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+            return this._shouldAlwaysRaiseInpcOnUserInterfaceThread;
         }
 
         public void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value)
         {
-            _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
+            this._shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
         }
 
         protected MvxNotifyPropertyChanged()
         {
             var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
-            ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
+            this.ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
-            RaisePropertyChanged(name);
+            this.RaisePropertyChanged(name);
         }
 
         public void RaisePropertyChanged([CallerMemberName] string whichProperty = "")
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
-            RaisePropertyChanged(changedArgs);
+            this.RaisePropertyChanged(changedArgs);
         }
 
         public virtual void RaiseAllPropertiesChanged()
         {
             var changedArgs = new PropertyChangedEventArgs(string.Empty);
-            RaisePropertyChanged(changedArgs);
+            this.RaisePropertyChanged(changedArgs);
         }
 
         public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             // check for interception before broadcasting change
-            if (InterceptRaisePropertyChanged(changedArgs)
+            if (this.InterceptRaisePropertyChanged(changedArgs)
                 == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
 
             var raiseAction = new Action(() =>
                     {
-                        var handler = PropertyChanged;
+                        var handler = this.PropertyChanged;
 
                         handler?.Invoke(this, changedArgs);
                     });
 
-            if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
+            if (this.ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
-                if (PropertyChanged == null)
+                if (this.PropertyChanged == null)
                     return;
 
-                InvokeOnMainThread(raiseAction);
+                this.InvokeOnMainThread(raiseAction);
             }
             else
             {
@@ -91,7 +92,7 @@ namespace Cirrious.MvvmCross.ViewModels
             }
 
             storage = value;
-            RaisePropertyChanged(propertyName);
+            this.RaisePropertyChanged(propertyName);
             return true;
         }
 

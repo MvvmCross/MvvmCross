@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public interface IMvxTouchView
         : IMvxView
         , IMvxCanCreateTouchView

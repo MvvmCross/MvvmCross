@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
@@ -18,7 +19,7 @@ namespace Cirrious.MvvmCross.ViewModels
                                    IMvxBundle parameterValues,
                                    IMvxBundle savedState)
         {
-            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -37,7 +38,7 @@ namespace Cirrious.MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -56,10 +57,10 @@ namespace Cirrious.MvvmCross.ViewModels
         {
             try
             {
-                CallCustomInitMethods(viewModel, parameterValues);
+                this.CallCustomInitMethods(viewModel, parameterValues);
                 if (savedState != null)
                 {
-                    CallReloadStateMethods(viewModel, savedState);
+                    this.CallReloadStateMethods(viewModel, savedState);
                 }
                 viewModel.Start();
             }

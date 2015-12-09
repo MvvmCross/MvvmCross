@@ -5,17 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.ViewModels;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Test.ViewModels
+namespace MvvmCross.Test.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Moq;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Test.Mocks.TestViewModels;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxViewModelLoaderTest : MvxIoCSupportingTest
     {

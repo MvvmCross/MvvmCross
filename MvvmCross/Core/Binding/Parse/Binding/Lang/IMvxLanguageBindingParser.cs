@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Parse.Binding.Lang
+namespace MvvmCross.Binding.Parse.Binding.Lang
 {
     public interface IMvxLanguageBindingParser
         : IMvxBindingParser

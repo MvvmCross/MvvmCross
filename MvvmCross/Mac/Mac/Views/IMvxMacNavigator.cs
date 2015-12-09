@@ -7,10 +7,10 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using global::MvvmCross.Core.ViewModels;
+
     public interface IMvxMacNavigator
     {
         void NavigateTo(MvxViewModelRequest request);

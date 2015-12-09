@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.Dispatchers;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-namespace Cirrious.MvvmCross.Test.ViewModels
+namespace MvvmCross.Test.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Test.Mocks.Dispatchers;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxNotifyPropertyChangedTest : MvxIoCSupportingTest
     {
@@ -103,7 +104,7 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
             {
-                return Handler(sender, args);
+                return this.Handler(sender, args);
             }
         }
 

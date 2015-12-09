@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Combiners;
-using Cirrious.MvvmCross.Binding.ExpressionParse;
-using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
-
-namespace Cirrious.MvvmCross.Binding
+namespace MvvmCross.Binding
 {
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Binding.Combiners;
+    using MvvmCross.Binding.ExpressionParse;
+    using MvvmCross.Binding.Parse.Binding.Lang;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
 
@@ -51,8 +51,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _autoValueConverters = _autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
-                return _autoValueConverters;
+                this._autoValueConverters = this._autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
+                return this._autoValueConverters;
             }
         }
 
@@ -60,8 +60,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
-                return _bindingDescriptionParser;
+                this._bindingDescriptionParser = this._bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                return this._bindingDescriptionParser;
             }
         }
 
@@ -69,8 +69,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _languageParser = _languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
-                return _languageParser;
+                this._languageParser = this._languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                return this._languageParser;
             }
         }
 
@@ -78,8 +78,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _propertyExpressionParser = _propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
-                return _propertyExpressionParser;
+                this._propertyExpressionParser = this._propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
+                return this._propertyExpressionParser;
             }
         }
 
@@ -87,8 +87,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
-                return _valueConverterLookup;
+                this._valueConverterLookup = this._valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                return this._valueConverterLookup;
             }
         }
 
@@ -96,8 +96,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
-                return _valueCombinerLookup;
+                this._valueCombinerLookup = this._valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
+                return this._valueCombinerLookup;
             }
         }
 
@@ -105,8 +105,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _defaultBindingName = _defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
-                return _defaultBindingName;
+                this._defaultBindingName = this._defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
+                return this._defaultBindingName;
             }
         }
 
@@ -114,8 +114,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _binder = _binder ?? Mvx.Resolve<IMvxBinder>();
-                return _binder;
+                this._binder = this._binder ?? Mvx.Resolve<IMvxBinder>();
+                return this._binder;
             }
         }
 
@@ -123,8 +123,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
-                return _sourceBindingFactory;
+                this._sourceBindingFactory = this._sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
+                return this._sourceBindingFactory;
             }
         }
 
@@ -132,8 +132,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _targetBindingFactory = _targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
-                return _targetBindingFactory;
+                this._targetBindingFactory = this._targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
+                return this._targetBindingFactory;
             }
         }
 
@@ -141,8 +141,8 @@ namespace Cirrious.MvvmCross.Binding
         {
             get
             {
-                _sourceStepFactory = _sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
-                return _sourceStepFactory;
+                this._sourceStepFactory = this._sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
+                return this._sourceStepFactory;
             }
         }
     }

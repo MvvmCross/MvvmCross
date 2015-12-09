@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+
     // just a marker interface
     [Obsolete("Prefer to use Mvx.Resolve<T> static methods now")]
     public interface IMvxConsumer

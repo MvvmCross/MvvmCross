@@ -5,13 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Foundation;
-using System;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch.Views
+namespace MvvmCross.Platform.Touch.Views
 {
+    using System;
+
+    using Foundation;
+
+    using MvvmCross.Platform.Core;
+
+    using UIKit;
+
     public class MvxEventSourceTableViewController
         : UITableViewController
           , IMvxEventSourceViewController
@@ -34,38 +37,38 @@ namespace Cirrious.CrossCore.Touch.Views
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            ViewWillDisappearCalled.Raise(this, animated);
+            this.ViewWillDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewDidAppearCalled.Raise(this, animated);
+            this.ViewDidAppearCalled.Raise(this, animated);
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            ViewWillAppearCalled.Raise(this, animated);
+            this.ViewWillAppearCalled.Raise(this, animated);
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewDidDisappearCalled.Raise(this, animated);
+            this.ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            ViewDidLoadCalled.Raise(this);
+            this.ViewDidLoadCalled.Raise(this);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                DisposeCalled.Raise(this);
+                this.DisposeCalled.Raise(this);
             }
             base.Dispose(disposing);
         }

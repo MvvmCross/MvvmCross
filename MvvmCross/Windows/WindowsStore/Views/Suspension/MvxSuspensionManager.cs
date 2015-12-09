@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
+namespace MvvmCross.WindowsStore.Views.Suspension
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Threading.Tasks;
+
+    using Windows.Storage;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+
     /// <summary>
     /// MvxSuspensionManager captures global session state to simplify process lifetime management
     /// for an application.  Note that session state will be automatically cleared under a variety
@@ -37,14 +38,14 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         /// <see cref="DataContractSerializer"/> and should be as compact as possible.  Strings
         /// and other self-contained data types are strongly recommended.
         /// </summary>
-        public Dictionary<string, object> SessionState => _sessionState;
+        public Dictionary<string, object> SessionState => this._sessionState;
 
         /// <summary>
         /// List of custom types provided to the <see cref="DataContractSerializer"/> when
         /// reading and writing session state.  Initially empty, additional types may be
         /// added to customize the serialization process.
         /// </summary>
-        public List<Type> KnownTypes => _knownTypes;
+        public List<Type> KnownTypes => this._knownTypes;
 
         /// <summary>
         /// Save the current <see cref="SessionState"/>.  Any <see cref="Frame"/> instances
@@ -58,20 +59,20 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
             try
             {
                 // Save the navigation state for all registered frames
-                foreach (var weakFrameReference in _registeredFrames)
+                foreach (var weakFrameReference in this._registeredFrames)
                 {
                     Frame frame;
                     if (weakFrameReference.TryGetTarget(out frame))
                     {
-                        SaveFrameNavigationState(frame);
+                        this.SaveFrameNavigationState(frame);
                     }
                 }
 
                 // Serialize the session state synchronously to avoid asynchronous access to shared
                 // state
                 var sessionData = new MemoryStream();
-                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
-                serializer.WriteObject(sessionData, _sessionState);
+                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), this._knownTypes);
+                serializer.WriteObject(sessionData, this._sessionState);
 
                 // Get an output stream for the SessionState file and write the state asynchronously
                 var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SessionStateFilename, CreationCollisionOption.ReplaceExisting);
@@ -99,7 +100,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         /// completes.</returns>
         public async Task RestoreAsync()
         {
-            _sessionState = new Dictionary<String, Object>();
+            this._sessionState = new Dictionary<String, Object>();
 
             try
             {
@@ -108,18 +109,18 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
                 using (var inStream = await file.OpenSequentialReadAsync())
                 {
                     // Deserialize the Session State
-                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), _knownTypes);
-                    _sessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
+                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), this._knownTypes);
+                    this._sessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
                 }
 
                 // Restore any registered frames to their saved state
-                foreach (var weakFrameReference in _registeredFrames)
+                foreach (var weakFrameReference in this._registeredFrames)
                 {
                     Frame frame;
                     if (weakFrameReference.TryGetTarget(out frame))
                     {
-                        frame.ClearValue(MvxFrameSessionStateProperty);
-                        RestoreFrameNavigationState(frame);
+                        frame.ClearValue(this.MvxFrameSessionStateProperty);
+                        this.RestoreFrameNavigationState(frame);
                     }
                 }
             }
@@ -151,23 +152,23 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         /// store navigation-related information.</param>
         public void RegisterFrame(Frame frame, String sessionStateKey)
         {
-            if (frame.GetValue(MvxFrameSessionStateKeyProperty) != null)
+            if (frame.GetValue(this.MvxFrameSessionStateKeyProperty) != null)
             {
                 throw new InvalidOperationException("Frames can only be registered to one session state key");
             }
 
-            if (frame.GetValue(MvxFrameSessionStateProperty) != null)
+            if (frame.GetValue(this.MvxFrameSessionStateProperty) != null)
             {
                 throw new InvalidOperationException("Frames must be either be registered before accessing frame session state, or not registered at all");
             }
 
             // Use a dependency property to associate the session key with a frame, and keep a list of frames whose
             // navigation state should be managed
-            frame.SetValue(MvxFrameSessionStateKeyProperty, sessionStateKey);
-            _registeredFrames.Add(new WeakReference<Frame>(frame));
+            frame.SetValue(this.MvxFrameSessionStateKeyProperty, sessionStateKey);
+            this._registeredFrames.Add(new WeakReference<Frame>(frame));
 
             // Check to see if navigation state can be restored
-            RestoreFrameNavigationState(frame);
+            this.RestoreFrameNavigationState(frame);
         }
 
         /// <summary>
@@ -181,8 +182,8 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         {
             // Remove session state and remove the frame from the list of frames whose navigation
             // state will be saved (along with any weak references that are no longer reachable)
-            SessionState.Remove((String)frame.GetValue(MvxFrameSessionStateKeyProperty));
-            _registeredFrames.RemoveAll((weakFrameReference) =>
+            this.SessionState.Remove((String)frame.GetValue(this.MvxFrameSessionStateKeyProperty));
+            this._registeredFrames.RemoveAll((weakFrameReference) =>
             {
                 Frame testFrame;
                 return !weakFrameReference.TryGetTarget(out testFrame) || testFrame == frame;
@@ -204,33 +205,33 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
         /// <see cref="SessionState"/>.</returns>
         public Dictionary<String, Object> SessionStateForFrame(Frame frame)
         {
-            var frameState = (Dictionary<String, Object>)frame.GetValue(MvxFrameSessionStateProperty);
+            var frameState = (Dictionary<String, Object>)frame.GetValue(this.MvxFrameSessionStateProperty);
 
             if (frameState == null)
             {
-                var frameSessionKey = (String)frame.GetValue(MvxFrameSessionStateKeyProperty);
+                var frameSessionKey = (String)frame.GetValue(this.MvxFrameSessionStateKeyProperty);
                 if (frameSessionKey != null)
                 {
                     // Registered frames reflect the corresponding session state
-                    if (!_sessionState.ContainsKey(frameSessionKey))
+                    if (!this._sessionState.ContainsKey(frameSessionKey))
                     {
-                        _sessionState[frameSessionKey] = new Dictionary<String, Object>();
+                        this._sessionState[frameSessionKey] = new Dictionary<String, Object>();
                     }
-                    frameState = (Dictionary<String, Object>)_sessionState[frameSessionKey];
+                    frameState = (Dictionary<String, Object>)this._sessionState[frameSessionKey];
                 }
                 else
                 {
                     // Frames that aren't registered have transient state
                     frameState = new Dictionary<String, Object>();
                 }
-                frame.SetValue(MvxFrameSessionStateProperty, frameState);
+                frame.SetValue(this.MvxFrameSessionStateProperty, frameState);
             }
             return frameState;
         }
 
         private void RestoreFrameNavigationState(Frame frame)
         {
-            var frameState = SessionStateForFrame(frame);
+            var frameState = this.SessionStateForFrame(frame);
             if (frameState.ContainsKey("Navigation"))
             {
                 frame.SetNavigationState((String)frameState["Navigation"]);
@@ -239,7 +240,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views.Suspension
 
         private void SaveFrameNavigationState(Frame frame)
         {
-            var frameState = SessionStateForFrame(frame);
+            var frameState = this.SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
         }
     }

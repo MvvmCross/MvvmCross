@@ -5,22 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using Cirrious.MvvmCross.Binding.ExpressionParse;
-using Cirrious.MvvmCross.Test.Core;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
+namespace MvvmCross.Binding.Test.ExpressionParse
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+
+    using Moq;
+
+    using MvvmCross.Platform.Converters;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxExpressionBindingTest : MvxIoCSupportingTest
     {
@@ -106,7 +103,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -127,7 +124,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestUnderscoreDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -156,7 +153,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -185,7 +182,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -214,7 +211,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -243,7 +240,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -264,7 +261,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[0].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -285,7 +282,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -307,7 +304,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[index].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -329,7 +326,7 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup[index].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            this.DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -350,14 +347,14 @@ namespace Cirrious.MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            DoTest(test, mock => mock, expectedDesc);
+            this.DoTest(test, mock => mock, expectedDesc);
         }
 
         private void DoTest(
             Action<MockBindingContext> action,
             MvxBindingDescription expectedDescription)
         {
-            DoTest(action, (context) => context.Target, expectedDescription);
+            this.DoTest(action, (context) => context.Target, expectedDescription);
         }
 
         private void DoTest(

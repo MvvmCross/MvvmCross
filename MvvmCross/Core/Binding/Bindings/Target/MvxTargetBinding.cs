@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target
+namespace MvvmCross.Binding.Bindings.Target
 {
+    using System;
+
     public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
     {
         private readonly WeakReference _target;
 
         protected MvxTargetBinding(object target)
         {
-            _target = new WeakReference(target);
+            this._target = new WeakReference(target);
         }
 
-        protected object Target => _target.Target;
+        protected object Target => this._target.Target;
 
         public virtual void SubscribeToEvents()
         {
@@ -27,7 +27,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target
 
         protected virtual void FireValueChanged(object newValue)
         {
-            var handler = ValueChanged;
+            var handler = this.ValueChanged;
 
             handler?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
         }

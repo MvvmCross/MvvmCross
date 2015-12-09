@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.MvvmCross.Localization
+namespace MvvmCross.Localization
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxLanguageBinder
         : IMvxLanguageBinder
     {
@@ -24,8 +25,8 @@ namespace Cirrious.MvvmCross.Localization
 
         public MvxLanguageBinder(string namespaceName = null, string typeName = null)
         {
-            _namespaceName = namespaceName;
-            _typeName = typeName;
+            this._namespaceName = namespaceName;
+            this._typeName = typeName;
         }
 
         private IMvxTextProvider _cachedTextProvider;
@@ -34,36 +35,36 @@ namespace Cirrious.MvvmCross.Localization
         {
             get
             {
-                if (_cachedTextProvider != null)
-                    return _cachedTextProvider;
+                if (this._cachedTextProvider != null)
+                    return this._cachedTextProvider;
 
                 lock (this)
                 {
-                    Mvx.TryResolve(out _cachedTextProvider);
-                    if (_cachedTextProvider == null)
+                    Mvx.TryResolve(out this._cachedTextProvider);
+                    if (this._cachedTextProvider == null)
                     {
                         throw new MvxException(
                             "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");
                     }
-                    return _cachedTextProvider;
+                    return this._cachedTextProvider;
                 }
             }
         }
 
         public virtual string GetText(string entryKey)
         {
-            return GetText(_namespaceName, _typeName, entryKey);
+            return this.GetText(this._namespaceName, this._typeName, entryKey);
         }
 
         public virtual string GetText(string entryKey, params object[] args)
         {
-            var format = GetText(entryKey);
+            var format = this.GetText(entryKey);
             return string.Format(format, args);
         }
 
         protected virtual string GetText(string namespaceKey, string typeKey, string entryKey)
         {
-            return TextProvider.GetText(namespaceKey, typeKey, entryKey);
+            return this.TextProvider.GetText(namespaceKey, typeKey, entryKey);
         }
     }
 }

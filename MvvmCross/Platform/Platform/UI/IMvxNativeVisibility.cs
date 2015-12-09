@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.UI
+namespace MvvmCross.Platform.UI
 {
     public interface IMvxNativeVisibility
     {

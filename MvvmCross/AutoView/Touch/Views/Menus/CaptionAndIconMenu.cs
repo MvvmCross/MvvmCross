@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Elements.Menu;
-using System.Windows.Input;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Menus
+namespace MvvmCross.AutoView.Touch.Views.Menus
 {
+    using System.Windows.Input;
+
+    using CrossUI.Core.Elements.Menu;
+
     public class CaptionAndIconMenu : IMenu
     {
         private static int _menuCounter = 1;
 
         public CaptionAndIconMenu()
         {
-            UniqueId = _menuCounter++;
+            this.UniqueId = _menuCounter++;
         }
 
         public int UniqueId { get; private set; }

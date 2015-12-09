@@ -1,10 +1,11 @@
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.Test.Core;
-using NUnit.Framework;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Test.Platform
+namespace MvvmCross.Test.Platform
 {
+    using System.Collections.Generic;
+
+    using MvvmCross.Core.Platform;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests : MvxIoCSupportingTest
     {

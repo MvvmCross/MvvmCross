@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.Plugins
+namespace MvvmCross.Platform.Plugins
 {
+    using System;
+
     public class MvxLoaderPluginBootstrapAction<TPlugin, TPlatformPlugin>
         : MvxPluginBootstrapAction<TPlugin>
         where TPlugin : IMvxPluginLoader
@@ -16,7 +16,7 @@ namespace Cirrious.CrossCore.Plugins
     {
         protected override void Load(IMvxPluginManager manager)
         {
-            PreLoad(manager);
+            this.PreLoad(manager);
             base.Load(manager);
         }
 

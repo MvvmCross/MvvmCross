@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Touch.Platform
+namespace MvvmCross.Touch.Platform
 {
     public enum MvxTouchFormFactor
     {

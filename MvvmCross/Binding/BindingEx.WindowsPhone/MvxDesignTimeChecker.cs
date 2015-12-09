@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.ComponentModel;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Binding.Parse.Binding;
-
 // ReSharper disable CheckNamespace
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared
 // ReSharper restore CheckNamespace
 {
+    using System.ComponentModel;
+
+    using global::MvvmCross.Platform;
+    using global::MvvmCross.Platform.Core;
+    using global::MvvmCross.Platform.IoC;
+
     public static class MvxDesignTimeChecker
     {
         private static bool _checked;

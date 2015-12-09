@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
+namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
 {
     public class MvxIndexerPropertyToken : MvxPropertyToken
     {
         protected MvxIndexerPropertyToken(object key)
         {
-            Key = key;
+            this.Key = key;
         }
 
         public object Key { get; private set; }
 
         public override string ToString()
         {
-            return "IndexedProperty:" + (Key == null ? "null" : Key.ToString());
+            return "IndexedProperty:" + (this.Key == null ? "null" : this.Key.ToString());
         }
     }
 

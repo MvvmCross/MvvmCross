@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.IoC;
-using System;
-using System.Globalization;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.ExtensionMethods
+namespace MvvmCross.Platform.ExtensionMethods
 {
+    using System;
+    using System.Globalization;
+    using System.Reflection;
+
+    using MvvmCross.Platform.IoC;
+
     public static class MvxCrossCoreExtensions
     {
         // core implementation of ConvertToBoolean

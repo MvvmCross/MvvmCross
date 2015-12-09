@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.ViewModels
+namespace MvvmCross.Core.ViewModels
 {
     public class MvxViewToViewModelNameMapping
         : IMvxNameMapping
@@ -14,12 +14,12 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public MvxViewToViewModelNameMapping()
         {
-            ViewModelPostfix = "ViewModel";
+            this.ViewModelPostfix = "ViewModel";
         }
 
         public virtual string Map(string inputName)
         {
-            return inputName + ViewModelPostfix;
+            return inputName + this.ViewModelPostfix;
         }
     }
 }

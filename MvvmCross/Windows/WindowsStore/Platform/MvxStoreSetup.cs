@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsStore.Views;
-using Cirrious.MvvmCross.WindowsStore.Views.Suspension;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsStore.Platform
+namespace MvvmCross.WindowsStore.Platform
 {
+    using Windows.UI.Xaml.Controls;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.WindowsStore.Views;
+    using MvvmCross.WindowsStore.Views.Suspension;
+
     public abstract class MvxStoreSetup
         : MvxSetup
     {
@@ -25,8 +26,8 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 
         protected MvxStoreSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
         {
-            _rootFrame = rootFrame;
-            _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
+            this._rootFrame = rootFrame;
+            this._suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
         }
 
         protected override IMvxTrace CreateDebugTrace()
@@ -36,17 +37,17 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 
         protected override void InitializePlatformServices()
         {
-            InitializeSuspensionManager();
+            this.InitializeSuspensionManager();
             base.InitializePlatformServices();
         }
 
         protected virtual void InitializeSuspensionManager()
         {
-            var suspensionManager = CreateSuspensionManager();
+            var suspensionManager = this.CreateSuspensionManager();
             Mvx.RegisterSingleton(suspensionManager);
 
-            if (_suspensionManagerSessionStateKey != null)
-                suspensionManager.RegisterFrame(_rootFrame, _suspensionManagerSessionStateKey);
+            if (this._suspensionManagerSessionStateKey != null)
+                suspensionManager.RegisterFrame(this._rootFrame, this._suspensionManagerSessionStateKey);
         }
 
         protected virtual IMvxSuspensionManager CreateSuspensionManager()
@@ -61,7 +62,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            return CreateStoreViewsContainer();
+            return this.CreateStoreViewsContainer();
         }
 
         protected virtual IMvxStoreViewsContainer CreateStoreViewsContainer()
@@ -71,7 +72,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcher(_rootFrame);
+            return this.CreateViewDispatcher(this._rootFrame);
         }
 
         protected virtual IMvxStoreViewPresenter CreateViewPresenter(Frame rootFrame)
@@ -81,7 +82,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Platform
 
         protected virtual MvxStoreViewDispatcher CreateViewDispatcher(Frame rootFrame)
         {
-            var presenter = CreateViewPresenter(_rootFrame);
+            var presenter = this.CreateViewPresenter(this._rootFrame);
             return new MvxStoreViewDispatcher(presenter, rootFrame);
         }
 

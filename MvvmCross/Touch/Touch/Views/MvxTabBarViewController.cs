@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Touch.Views
+namespace MvvmCross.Touch.Views
 {
+    using System;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Touch.Views;
+
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
           , IMvxTouchView
@@ -32,15 +33,15 @@ namespace Cirrious.MvvmCross.Touch.Views
             get
             {
                 // special code needed in TabBar because View is initialized during construction
-                return BindingContext?.DataContext;
+                return this.BindingContext?.DataContext;
             }
-            set { BindingContext.DataContext = value; }
+            set { this.BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get { return this.DataContext as IMvxViewModel; }
+            set { this.DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

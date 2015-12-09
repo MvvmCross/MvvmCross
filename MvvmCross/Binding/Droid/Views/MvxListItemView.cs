@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.Runtime;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView
         : MvxBaseListItemView
@@ -24,8 +25,8 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                                int templateId)
             : base(context, layoutInflaterHolder, dataContext)
         {
-            _templateId = templateId;
-            AndroidBindingContext.BindingInflate(templateId, this);
+            this._templateId = templateId;
+            this.AndroidBindingContext.BindingInflate(templateId, this);
         }
 
         protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -33,6 +34,6 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        public int TemplateId => _templateId;
+        public int TemplateId => this._templateId;
     }
 }

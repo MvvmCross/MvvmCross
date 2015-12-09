@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views.Gestures
+namespace MvvmCross.Binding.Touch.Views.Gestures
 {
+    using System.Windows.Input;
+
+    using UIKit;
+
     public abstract class MvxGestureRecognizerBehavior
     {
         public ICommand Command { get; set; }
 
         protected void FireCommand(object argument = null)
         {
-            var command = Command;
+            var command = this.Command;
             command?.Execute(null);
         }
 

@@ -5,19 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings;
-using Cirrious.MvvmCross.Binding.Touch.Views;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
+namespace MvvmCross.AutoView.Touch.Views.Lists
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Input;
+
+    using Foundation;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Platform;
+
+    using UIKit;
+
     public class GeneralTableViewCell
         : MvxTableViewCell
     {
@@ -26,20 +27,20 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         public GeneralTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            InitializeImageHelper();
+            this.InitializeImageHelper();
         }
 
         public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitializeImageHelper();
+            this.InitializeImageHelper();
         }
 
         public GeneralTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                     UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageHelper();
+            this.InitializeImageHelper();
         }
 
         public GeneralTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -47,20 +48,20 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
                                     UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageHelper();
+            this.InitializeImageHelper();
         }
 
         public GeneralTableViewCell(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("GeneralTableViewCell IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
-            InitializeImageHelper();
+            this.InitializeImageHelper();
         }
 
         private void InitializeImageHelper()
         {
-            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
-            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+            this._imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
+            this._imageHelper.ImageChanged += this.ImageHelperOnImageChanged;
         }
 
         public string Title
@@ -77,11 +78,11 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
         public string ImageUrl
         {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
+            get { return this._imageHelper.ImageUrl; }
+            set { this._imageHelper.ImageUrl = value; }
         }
 
-        public IMvxImageHelper<UIImage> Image => _imageHelper;
+        public IMvxImageHelper<UIImage> Image => this._imageHelper;
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
@@ -100,7 +101,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
 
             if (selected)
             {
-                SelectedCommand?.Execute(null);
+                this.SelectedCommand?.Execute(null);
             }
         }
 
@@ -108,7 +109,7 @@ namespace Cirrious.MvvmCross.AutoView.Touch.Views.Lists
         {
             if (disposing)
             {
-                _imageHelper.Dispose();
+                this._imageHelper.Dispose();
             }
             base.Dispose(disposing);
         }

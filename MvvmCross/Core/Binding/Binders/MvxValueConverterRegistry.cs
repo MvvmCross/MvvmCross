@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace MvvmCross.Binding.Binders
 {
+    using MvvmCross.Platform.Converters;
+
     public class MvxValueConverterRegistry
         : MvxNamedInstanceRegistry<IMvxValueConverter>
           , IMvxValueConverterLookup

@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Mac.Views
+namespace MvvmCross.Mac.Views
 {
+    using System.Collections.Generic;
+
+    using global::MvvmCross.Core.Platform;
+    using global::MvvmCross.Core.ViewModels;
+    using global::MvvmCross.Core.Views;
+    using global::MvvmCross.Platform;
+    using global::MvvmCross.Platform.Exceptions;
+    using global::MvvmCross.Platform.Platform;
+
     public static class MvxViewControllerExtensionMethods
     {
         public static void OnViewCreate(this IMvxMacView macView)

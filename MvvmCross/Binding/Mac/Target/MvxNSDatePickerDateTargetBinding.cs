@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -13,8 +12,10 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System;
+
     public class MvxNSDatePickerDateTargetBinding : MvxBaseNSDatePickerTargetBinding
     {
         public MvxNSDatePickerDateTargetBinding(NSDatePicker datePicker)
@@ -24,7 +25,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var datePicker = DatePicker;
+            var datePicker = this.DatePicker;
             if (datePicker == null)
                 return;
 
@@ -40,7 +41,7 @@ namespace Cirrious.MvvmCross.Binding.Mac.Target
 
         protected override object GetValueFrom(NSDatePicker view)
         {
-            return GetLocalTime(view);
+            return this.GetLocalTime(view);
         }
 
         protected override object MakeSafeValue(object value)

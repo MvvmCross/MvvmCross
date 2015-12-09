@@ -5,16 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using Windows.UI.Xaml.Controls;
-
-namespace Cirrious.MvvmCross.WindowsStore.Views
+namespace MvvmCross.WindowsStore.Views
 {
+    using System;
+
+    using Windows.UI.Xaml.Controls;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxStoreViewPresenter
         : MvxViewPresenter, IMvxStoreViewPresenter
     {
@@ -22,7 +24,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
 
         public MvxStoreViewPresenter(Frame rootFrame)
         {
-            _rootFrame = rootFrame;
+            this._rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -35,7 +37,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
                 var converter = Mvx.Resolve<IMvxNavigationSerializer>();
                 var requestText = converter.Serializer.SerializeObject(request);
 
-                _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
+                this._rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
             }
             catch (Exception exception)
             {
@@ -46,11 +48,11 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (this.HandlePresentationChange(hint)) return;
 
             if (hint is MvxClosePresentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -59,7 +61,7 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
 
         public virtual void Close(IMvxViewModel viewModel)
         {
-            var currentView = _rootFrame.Content as IMvxView;
+            var currentView = this._rootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
@@ -72,13 +74,13 @@ namespace Cirrious.MvvmCross.WindowsStore.Views
                 return;
             }
 
-            if (!_rootFrame.CanGoBack)
+            if (!this._rootFrame.CanGoBack)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
                 return;
             }
 
-            _rootFrame.GoBack();
+            this._rootFrame.GoBack();
         }
     }
 }

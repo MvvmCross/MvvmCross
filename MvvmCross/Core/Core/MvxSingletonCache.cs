@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross
+namespace MvvmCross.Core
 {
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>
           , IMvxSingletonCache
@@ -37,12 +37,12 @@ namespace Cirrious.MvvmCross
         {
             get
             {
-                if (_inpcInterceptorResolveAttempted)
-                    return _inpcInterceptor;
+                if (this._inpcInterceptorResolveAttempted)
+                    return this._inpcInterceptor;
 
-                Mvx.TryResolve<IMvxInpcInterceptor>(out _inpcInterceptor);
-                _inpcInterceptorResolveAttempted = true;
-                return _inpcInterceptor;
+                Mvx.TryResolve<IMvxInpcInterceptor>(out this._inpcInterceptor);
+                this._inpcInterceptorResolveAttempted = true;
+                return this._inpcInterceptor;
             }
         }
 
@@ -52,8 +52,8 @@ namespace Cirrious.MvvmCross
         {
             get
             {
-                _parser = _parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
-                return _parser;
+                this._parser = this._parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
+                return this._parser;
             }
         }
 
@@ -63,8 +63,8 @@ namespace Cirrious.MvvmCross
         {
             get
             {
-                _settings = _settings ?? Mvx.Resolve<IMvxSettings>();
-                return _settings;
+                this._settings = this._settings ?? Mvx.Resolve<IMvxSettings>();
+                return this._settings;
             }
         }
     }

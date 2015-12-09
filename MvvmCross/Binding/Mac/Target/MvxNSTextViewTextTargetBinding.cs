@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System;
-using System.Reflection;
 
 #if __UNIFIED__
 using AppKit;
 #else
 #endif
 
-namespace Cirrious.MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Binding.Mac.Target
 {
+    using System;
+    using System.Reflection;
+
+    using global::MvvmCross.Platform.Platform;
+
     public class MvxNSTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextView>
     {
         public MvxNSTextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

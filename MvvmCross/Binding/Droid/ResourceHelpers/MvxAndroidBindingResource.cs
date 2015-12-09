@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
+    using System;
+
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAndroidBindingResource
         : MvxSingleton<IMvxAndroidBindingResource>
         , IMvxAndroidBindingResource
@@ -32,44 +33,44 @@ namespace Cirrious.MvvmCross.Binding.Droid.ResourceHelpers
             try
             {
                 var id = resourceType.GetNestedType("Id");
-                BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
+                this.BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
 
                 var styleable = resourceType.GetNestedType("Styleable");
 
-                ControlStylableGroupId =
+                this.ControlStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxControl", new int[0]);
-                TemplateId =
+                this.TemplateId =
                     (int)SafeGetFieldValue(styleable, "MvxControl_MvxTemplate");
 
-                BindingStylableGroupId =
+                this.BindingStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
-                BindingBindId =
+                this.BindingBindId =
                     (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
-                BindingLangId =
+                this.BindingLangId =
                     (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
 
-                ImageViewStylableGroupId =
+                this.ImageViewStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
-                SourceBindId =
+                this.SourceBindId =
                     (int)
                     SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
 
-                ListViewStylableGroupId =
+                this.ListViewStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxListView");
-                ListItemTemplateId =
+                this.ListItemTemplateId =
                     (int)
                     styleable
                         .GetField("MvxListView_MvxItemTemplate")
                         .GetValue(null);
-                DropDownListItemTemplateId =
+                this.DropDownListItemTemplateId =
                     (int)
                     styleable
                         .GetField("MvxListView_MvxDropDownItemTemplate")
                         .GetValue(null);
 
-                ExpandableListViewStylableGroupId =
+                this.ExpandableListViewStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxExpandableListView", new int[0]);
-                GroupItemTemplateId =
+                this.GroupItemTemplateId =
                     (int)SafeGetFieldValue(styleable, "MvxExpandableListView_GroupItemTemplate");
             }
             catch (Exception exception)

@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.BindingContext
+namespace MvvmCross.Binding.BindingContext
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
+    using MvvmCross.Platform;
+
     public class MvxBindingNameRegistry
         : IMvxBindingNameLookup
           , IMvxBindingNameRegistry
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public string DefaultFor(Type type)
         {
             string toReturn;
-            TryDefaultFor(type, out toReturn, true);
+            this.TryDefaultFor(type, out toReturn, true);
             return toReturn;
         }
 
@@ -34,13 +35,13 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 return false;
             }
 
-            if (_lookup.TryGetValue(type, out toReturn))
+            if (this._lookup.TryGetValue(type, out toReturn))
                 return true;
 
             if (type.IsConstructedGenericType)
             {
                 var openType = type.GetGenericTypeDefinition();
-                if (openType != null && _lookup.TryGetValue(openType, out toReturn))
+                if (openType != null && this._lookup.TryGetValue(openType, out toReturn))
                     return true;
             }
 
@@ -52,23 +53,23 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
                 var interfaces = type.GetInterfaces();
                 foreach (var iface in interfaces)
                 {
-                    if (TryDefaultFor(iface, out toReturn, false))
+                    if (this.TryDefaultFor(iface, out toReturn, false))
                         return true;
                 }
             }
 
-            return TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
+            return this.TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
         }
 
         public void AddOrOverwrite(Type type, string name)
         {
-            _lookup[type] = name;
+            this._lookup[type] = name;
         }
 
         public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
         {
             var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
-            _lookup[typeof(T)] = path.Print();
+            this._lookup[typeof(T)] = path.Print();
         }
     }
 }

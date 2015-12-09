@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxLiteralSourceStepDescription : MvxSourceStepDescription
     {
@@ -13,7 +13,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return Literal == null ? "-null-" : Literal.ToString();
+            return this.Literal == null ? "-null-" : this.Literal.ToString();
         }
     }
 }

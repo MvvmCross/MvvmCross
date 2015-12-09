@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
+namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxCombinerSourceStep : MvxSourceStep<MvxCombinerSourceStepDescription>
     {
         private readonly List<IMvxSourceStep> _subSteps;
@@ -21,7 +22,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             : base(description)
         {
             var sourceStepFactory = MvxBindingSingletonCache.Instance.SourceStepFactory;
-            _subSteps = description.InnerSteps
+            this._subSteps = description.InnerSteps
                                    .Select(d => sourceStepFactory.Create(d))
                                    .ToList();
         }
@@ -30,8 +31,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
         {
             if (isDisposing)
             {
-                UnsubscribeFromChangedEvents();
-                foreach (var step in _subSteps)
+                this.UnsubscribeFromChangedEvents();
+                foreach (var step in this._subSteps)
                 {
                     step.Dispose();
                 }
@@ -42,7 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         protected override void OnFirstChangeListenerAdded()
         {
-            SubscribeToChangedEvents();
+            this.SubscribeToChangedEvents();
             base.OnFirstChangeListenerAdded();
         }
 
@@ -52,20 +53,20 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             set
             {
                 base.TargetType = value;
-                SetSubTypeTargetTypes();
+                this.SetSubTypeTargetTypes();
             }
         }
 
         private void SetSubTypeTargetTypes()
         {
-            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, TargetType);
+            var targetTypes = this.Description.Combiner.SubStepTargetTypes(this._subSteps, this.TargetType);
             var targetTypeList = targetTypes.ToList();
-            if (targetTypeList.Count != _subSteps.Count)
+            if (targetTypeList.Count != this._subSteps.Count)
                 throw new MvxException("Description.Combiner provided incorrect length TargetType list");
 
             for (var i = 0; i < targetTypeList.Count; i++)
             {
-                _subSteps[i].TargetType = targetTypeList[i];
+                this._subSteps[i].TargetType = targetTypeList[i];
             }
         }
 
@@ -73,49 +74,49 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
 
         private void SubscribeToChangedEvents()
         {
-            if (_isSubscribeToChangedEvents)
+            if (this._isSubscribeToChangedEvents)
                 return;
 
-            foreach (var subStep in _subSteps)
+            foreach (var subStep in this._subSteps)
             {
-                subStep.Changed += SubStepOnChanged;
+                subStep.Changed += this.SubStepOnChanged;
             }
-            _isSubscribeToChangedEvents = true;
+            this._isSubscribeToChangedEvents = true;
         }
 
         protected override void OnLastChangeListenerRemoved()
         {
-            UnsubscribeFromChangedEvents();
+            this.UnsubscribeFromChangedEvents();
             base.OnLastChangeListenerRemoved();
         }
 
         private void UnsubscribeFromChangedEvents()
         {
-            if (!_isSubscribeToChangedEvents)
+            if (!this._isSubscribeToChangedEvents)
                 return;
 
-            foreach (var subStep in _subSteps)
+            foreach (var subStep in this._subSteps)
             {
-                subStep.Changed -= SubStepOnChanged;
+                subStep.Changed -= this.SubStepOnChanged;
             }
-            _isSubscribeToChangedEvents = false;
+            this._isSubscribeToChangedEvents = false;
         }
 
         private void SubStepOnChanged(object sender, EventArgs args)
         {
-            SendSourcePropertyChanged();
+            this.SendSourcePropertyChanged();
         }
 
         protected override void OnDataContextChanged()
         {
-            foreach (var step in _subSteps)
+            foreach (var step in this._subSteps)
             {
-                step.DataContext = DataContext;
+                step.DataContext = this.DataContext;
             }
             base.OnDataContextChanged();
         }
 
-        public override Type SourceType => Description.Combiner.SourceType(_subSteps);
+        public override Type SourceType => this.Description.Combiner.SourceType(this._subSteps);
 
         protected override void SetSourceValue(object sourceValue)
         {
@@ -125,13 +126,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
 
-            Description.Combiner.SetValue(_subSteps, sourceValue);
+            this.Description.Combiner.SetValue(this._subSteps, sourceValue);
         }
 
         protected override object GetSourceValue()
         {
             object value;
-            if (!Description.Combiner.TryGetValue(_subSteps, out value))
+            if (!this.Description.Combiner.TryGetValue(this._subSteps, out value))
                 value = MvxBindingConstant.UnsetValue;
 
             return value;

@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
+namespace MvvmCross.Binding.Bindings.Target.Construction
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
@@ -20,24 +21,24 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Target.Construction
 
         public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
         {
-            _bindingType = bindingType;
-            _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);
+            this._bindingType = bindingType;
+            this._innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, this.CreateTargetBinding);
         }
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => this._innerFactory.SupportedTypes;
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            return _innerFactory.CreateBinding(target, targetName);
+            return this._innerFactory.CreateBinding(target, targetName);
         }
 
         #endregion IMvxPluginTargetBindingFactory Members
 
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(_bindingType, new[] { target, targetPropertyInfo });
+            var targetBindingCandidate = Activator.CreateInstance(this._bindingType, new[] { target, targetPropertyInfo });
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {

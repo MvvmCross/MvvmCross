@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using Microsoft.Phone.Controls;
-using System.Linq;
-using System.Windows.Navigation;
-
-namespace Cirrious.MvvmCross.WindowsPhone.Views
+namespace MvvmCross.WindowsPhone.Views
 {
+    using System.Linq;
+    using System.Windows.Navigation;
+
+    using Microsoft.Phone.Controls;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public abstract class MvxPhonePage
         : PhoneApplicationPage
           , IMvxPhoneView
@@ -21,15 +23,15 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
-            set { DataContext = value; }
+            get { return (IMvxViewModel)this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         public void ClearBackStack()
         {
             // note - we do *not* use CanGoBack here - as that seems to always returns true!
-            while (NavigationService.BackStack.Any())
-                NavigationService.RemoveBackEntry();
+            while (this.NavigationService.BackStack.Any())
+                this.NavigationService.RemoveBackEntry();
         }
 
         #endregion IMvxPhoneView Members
@@ -38,14 +40,14 @@ namespace Cirrious.MvvmCross.WindowsPhone.Views
         {
             base.OnNavigatedTo(e);
 
-            var savedState = LoadStateBundle(e);
+            var savedState = this.LoadStateBundle(e);
             this.OnViewCreate(e.Uri, savedState);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             var bundle = this.CreateSaveStateBundle();
-            SaveStateBundle(e, bundle);
+            this.SaveStateBundle(e, bundle);
 
             base.OnNavigatedFrom(e);
         }

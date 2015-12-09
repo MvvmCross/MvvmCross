@@ -5,11 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
 #if WINDOWS_PHONE || WINDOWS_WPF
-
-using System.Windows;
 
 #endif
 #if NETFX_CORE
@@ -22,6 +18,9 @@ using Windows.UI.Xaml;
 namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 // ReSharper restore CheckNamespace
 {
+    using System;
+    using System.Windows;
+
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {
         public MvxVisibleTargetBinding(object target)

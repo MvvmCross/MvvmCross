@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Target;
-using System.Windows.Input;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Target
+namespace MvvmCross.Binding.Touch.Target
 {
+    using System.Windows.Input;
+
+    using UIKit;
+
     public class MvxUITextFieldShouldReturnTargetBinding
         : MvxTargetBinding
     {
@@ -21,20 +21,20 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
             : base(target)
         {
-            target.ShouldReturn = HandleShouldReturn;
+            target.ShouldReturn = this.HandleShouldReturn;
         }
 
         private bool HandleShouldReturn(UITextField textField)
         {
-            if (_command == null)
+            if (this._command == null)
                 return false;
 
             var text = textField.Text;
-            if (!_command.CanExecute(text))
+            if (!this._command.CanExecute(text))
                 return false;
 
             textField.ResignFirstResponder();
-            _command.Execute(text);
+            this._command.Execute(text);
             return true;
         }
 
@@ -43,7 +43,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
         public override void SetValue(object value)
         {
             var command = value as ICommand;
-            _command = command;
+            this._command = command;
         }
 
         public override System.Type TargetType => typeof(ICommand);
@@ -53,7 +53,7 @@ namespace Cirrious.MvvmCross.Binding.Touch.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
+                var editText = this.View;
                 if (editText != null)
                 {
                     editText.ShouldReturn = null;

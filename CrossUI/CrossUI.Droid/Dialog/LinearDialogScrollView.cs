@@ -12,7 +12,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+
 using CrossUI.Droid.Dialog.Elements;
 using System;
 using System.Linq;

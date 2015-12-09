@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using System;
-using System.Reflection;
-
-namespace Cirrious.CrossCore.WeakSubscription
+namespace MvvmCross.Platform.WeakSubscription
 {
+    using System;
+    using System.Reflection;
+
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxWeakEventSubscription<TSource, TEventArgs>
         : IDisposable
         where TSource : class
@@ -49,39 +50,39 @@ namespace Cirrious.CrossCore.WeakSubscription
                 throw new ArgumentNullException(nameof(sourceEventInfo),
                                                 "missing source event info in MvxWeakEventSubscription");
 
-            _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
-            _targetReference = new WeakReference(targetEventHandler.Target);
-            _sourceReference = new WeakReference(source);
-            _sourceEventInfo = sourceEventInfo;
+            this._eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
+            this._targetReference = new WeakReference(targetEventHandler.Target);
+            this._sourceReference = new WeakReference(source);
+            this._sourceEventInfo = sourceEventInfo;
 
             // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
-            _ourEventHandler = CreateEventHandler();
+            this._ourEventHandler = this.CreateEventHandler();
 
-            AddEventHandler();
+            this.AddEventHandler();
         }
 
         protected virtual Delegate CreateEventHandler()
         {
-            return new EventHandler<TEventArgs>(OnSourceEvent);
+            return new EventHandler<TEventArgs>(this.OnSourceEvent);
         }
 
         //This is the method that will handle the event of source.
         protected void OnSourceEvent(object sender, TEventArgs e)
         {
-            var target = _targetReference.Target;
+            var target = this._targetReference.Target;
             if (target != null)
             {
-                _eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
+                this._eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
             }
             else
             {
-                RemoveEventHandler();
+                this.RemoveEventHandler();
             }
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -89,33 +90,33 @@ namespace Cirrious.CrossCore.WeakSubscription
         {
             if (disposing)
             {
-                RemoveEventHandler();
+                this.RemoveEventHandler();
             }
         }
 
         private void RemoveEventHandler()
         {
-            if (!_subscribed)
+            if (!this._subscribed)
                 return;
 
-            var source = (TSource)_sourceReference.Target;
+            var source = (TSource)this._sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
-                _subscribed = false;
+                this._sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { this._ourEventHandler });
+                this._subscribed = false;
             }
         }
 
         private void AddEventHandler()
         {
-            if (_subscribed)
+            if (this._subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
-            var source = (TSource)_sourceReference.Target;
+            var source = (TSource)this._sourceReference.Target;
             if (source != null)
             {
-                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { _ourEventHandler });
-                _subscribed = true;
+                this._sourceEventInfo.GetAddMethod().Invoke(source, new object[] { this._ourEventHandler });
+                this._subscribed = true;
             }
         }
     }

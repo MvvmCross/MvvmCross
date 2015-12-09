@@ -1,7 +1,7 @@
-﻿using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Test.Mocks.TestViewModels
+﻿namespace MvvmCross.Test.Mocks.TestViewModels
 {
+    using MvvmCross.Core.ViewModels;
+
     public class OddNameViewModel : MvxViewModel
     {
     }

@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings;
-using CoreGraphics;
-using System;
-using System.Collections.Generic;
-using UIKit;
-
-namespace Cirrious.MvvmCross.Binding.Touch.Views
+namespace MvvmCross.Binding.Touch.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using CoreGraphics;
+
+    using UIKit;
+
     public class MvxCollectionViewCell
         : UICollectionViewCell
           , IMvxBindable
@@ -77,15 +77,15 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
         {
             if (disposing)
             {
-                BindingContext.ClearAllBindings();
+                this.BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
     }
 }

@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Lists;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.AutoView.Auto.List
+namespace MvvmCross.AutoView.Auto.List
 {
+    using System.Collections;
+    using System.Collections.Generic;
+
+    using CrossUI.Core.Descriptions;
+    using CrossUI.Core.Descriptions.Lists;
+
     public abstract class ListLayoutAuto : KeyedAuto
     {
         public string LayoutName { get; set; }
@@ -20,17 +21,17 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
                                  string layoutName = null)
             : base(key, onlyFor, notFor)
         {
-            LayoutName = layoutName;
+            this.LayoutName = layoutName;
         }
 
         public sealed override KeyedDescription ToDescription()
         {
-            return ToListItemDescription();
+            return this.ToListItemDescription();
         }
 
         protected virtual void Fill(ListItemLayoutDescription description)
         {
-            description.Properties["LayoutName"] = LayoutName ?? "TitleAndSubTitle";
+            description.Properties["LayoutName"] = this.LayoutName ?? "TitleAndSubTitle";
             base.Fill(description);
         }
 
@@ -42,14 +43,14 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
         public ListLayoutAuto(string key = null, string onlyFor = null, string notFor = null, string layoutName = null)
             : base(key, onlyFor, notFor, layoutName)
         {
-            Bindings = new List<BindingAuto<T>>();
+            this.Bindings = new List<BindingAuto<T>>();
         }
 
         public List<BindingAuto<T>> Bindings { get; set; }
 
         public void Add(BindingAuto<T> auto)
         {
-            Bindings.Add(auto);
+            this.Bindings.Add(auto);
         }
 
         public override ListItemLayoutDescription ToListItemDescription()
@@ -58,7 +59,7 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
             base.Fill(toReturn);
 
             var bindings = new Dictionary<string, string>();
-            foreach (var bindingAuto in Bindings)
+            foreach (var bindingAuto in this.Bindings)
             {
                 bindings[bindingAuto.Target] = bindingAuto.GetValueText();
             }
@@ -69,12 +70,12 @@ namespace Cirrious.MvvmCross.AutoView.Auto.List
 
         public IEnumerator<BindingAuto<T>> GetEnumerator()
         {
-            return Bindings.GetEnumerator();
+            return this.Bindings.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

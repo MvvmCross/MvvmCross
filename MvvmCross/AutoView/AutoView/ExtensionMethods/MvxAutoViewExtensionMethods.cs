@@ -5,19 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.AutoView.Interfaces;
-using CrossUI.Core.Descriptions;
-using CrossUI.Core.Descriptions.Dialog;
-using CrossUI.Core.Descriptions.Lists;
-using CrossUI.Core.Descriptions.Menu;
-using CrossUI.Core.Elements.Lists;
-using CrossUI.Core.Elements.Menu;
-
-namespace Cirrious.MvvmCross.AutoView.ExtensionMethods
+namespace MvvmCross.AutoView.ExtensionMethods
 {
+    using CrossUI.Core.Descriptions;
+    using CrossUI.Core.Descriptions.Dialog;
+    using CrossUI.Core.Descriptions.Lists;
+    using CrossUI.Core.Descriptions.Menu;
+    using CrossUI.Core.Elements.Lists;
+    using CrossUI.Core.Elements.Menu;
+
+    using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public static class MvxAutoViewExtensionMethods
     {
         public static IParentMenu LoadMenu(this IMvxAutoView view)

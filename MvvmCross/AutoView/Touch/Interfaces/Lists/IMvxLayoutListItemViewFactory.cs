@@ -5,12 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Elements.Lists;
-using Foundation;
-using UIKit;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Interfaces.Lists
+namespace MvvmCross.AutoView.Touch.Interfaces.Lists
 {
+    using CrossUI.Core.Elements.Lists;
+
+    using Foundation;
+
+    using UIKit;
+
     public interface IMvxLayoutListItemViewFactory
         : IListItemLayout
     {

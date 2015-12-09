@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Test.Core;
-using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
-using Cirrious.MvvmCross.Test.Mocks.TestViews;
-using Cirrious.MvvmCross.ViewModels;
-using NUnit.Framework;
-
-namespace Cirrious.MvvmCross.Test.Platform
+namespace MvvmCross.Test.Platform
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Mocks.TestViewModels;
+    using MvvmCross.Test.Mocks.TestViews;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class MvxViewModelViewLookupBuilderTest : MvxIoCSupportingTest
     {

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.UI
+namespace MvvmCross.Platform.UI
 {
     // note that this is an exact match for System.Windows.Visibility
     public enum MvxVisibility : byte

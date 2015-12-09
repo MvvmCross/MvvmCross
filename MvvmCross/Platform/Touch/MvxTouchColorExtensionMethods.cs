@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using UIKit;
-
-namespace Cirrious.CrossCore.Touch
+namespace MvvmCross.Platform.Touch
 {
+    using System;
+
+    using UIKit;
+
     public static class MvxTouchColorExtensionMethods
     {
         public static UIColor ColorFromInt(this uint rgbValue)

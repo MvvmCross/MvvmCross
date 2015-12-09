@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.AutoView.Droid.Builders.Lists;
-using CrossUI.Core.Elements.Lists;
-using CrossUI.Droid.Builder;
-
-namespace Cirrious.MvvmCross.AutoView.Droid.Builders
+namespace MvvmCross.AutoView.Droid.Builders
 {
+    using CrossUI.Core.Elements.Lists;
+    using CrossUI.Droid.Builder;
+
+    using MvvmCross.AutoView.Droid.Builders.Lists;
+
     public class MvxAndroidBuilderRegistry : DroidBuilderRegistry
     {
         public MvxAndroidBuilderRegistry(bool registerDefaultElements = true)

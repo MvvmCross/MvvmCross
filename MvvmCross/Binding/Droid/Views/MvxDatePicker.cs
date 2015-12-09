@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Widget;
-using Cirrious.CrossCore.Droid.Platform;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Util;
+    using Android.Widget;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker
         : DatePicker
@@ -38,7 +38,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public DateTime Value
         {
-            get { return MvxJavaDateUtils.DateTimeFromJava(Year, Month, DayOfMonth); }
+            get { return MvxJavaDateUtils.DateTimeFromJava(this.Year, this.Month, this.DayOfMonth); }
             set
             {
                 var javaYear = value.Year;
@@ -46,14 +46,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
                 var javaMonth = value.Month - 1;
                 var javaDay = value.Day;
 
-                if (!_initialized)
+                if (!this._initialized)
                 {
-                    Init(javaYear, javaMonth, javaDay, this);
-                    _initialized = true;
+                    this.Init(javaYear, javaMonth, javaDay, this);
+                    this._initialized = true;
                 }
-                else if (Year != javaYear || Month != javaMonth || DayOfMonth != javaDay)
+                else if (this.Year != javaYear || this.Month != javaMonth || this.DayOfMonth != javaDay)
                 {
-                    UpdateDate(javaYear, javaMonth, javaDay);
+                    this.UpdateDate(javaYear, javaMonth, javaDay);
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            var handler = ValueChanged;
+            var handler = this.ValueChanged;
             handler?.Invoke(this, null);
         }
     }

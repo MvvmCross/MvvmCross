@@ -1,6 +1,4 @@
-﻿using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross
+﻿namespace MvvmCross.Core.ViewModels
 {
     public interface IMvxPagedViewModel : IMvxViewModel
     {

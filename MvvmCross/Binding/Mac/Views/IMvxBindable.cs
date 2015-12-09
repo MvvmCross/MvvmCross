@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.Binding.BindingContext;
-
-namespace Cirrious.MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Binding.Mac.Views
 {
+    using global::MvvmCross.Platform.Core;
+
     public interface IMvxBindable
         : IMvxBindingContextOwner
           , IMvxDataConsumer

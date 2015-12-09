@@ -5,13 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Binding.Droid.Target
 {
+    using System;
+
+    using Android.Widget;
+
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Platform.Platform;
+
     public class MvxSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding
     {
@@ -27,7 +29,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = Spinner;
+            var spinner = this.Spinner;
             if (spinner == null)
                 return;
 
@@ -36,11 +38,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (_currentValue != null);
+                changed = (this._currentValue != null);
             }
             else
             {
-                changed = !(newValue.Equals(_currentValue));
+                changed = !(newValue.Equals(this._currentValue));
             }
 
             if (!changed)
@@ -48,7 +50,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            _currentValue = newValue;
+            this._currentValue = newValue;
             FireValueChanged(newValue);
         }
 
@@ -62,7 +64,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            if (!value.Equals(_currentValue))
+            if (!value.Equals(this._currentValue))
             {
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
@@ -70,7 +72,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
                     return;
                 }
-                _currentValue = value;
+                this._currentValue = value;
                 spinner.SetSelection(index);
             }
         }
@@ -79,12 +81,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var spinner = Spinner;
+            var spinner = this.Spinner;
             if (spinner == null)
                 return;
 
-            spinner.ItemSelected += SpinnerItemSelected;
-            _subscribed = true;
+            spinner.ItemSelected += this.SpinnerItemSelected;
+            this._subscribed = true;
         }
 
         public override Type TargetType => typeof(object);
@@ -93,11 +95,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var spinner = Spinner;
-                if (spinner != null && _subscribed)
+                var spinner = this.Spinner;
+                if (spinner != null && this._subscribed)
                 {
-                    spinner.ItemSelected -= SpinnerItemSelected;
-                    _subscribed = false;
+                    spinner.ItemSelected -= this.SpinnerItemSelected;
+                    this._subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

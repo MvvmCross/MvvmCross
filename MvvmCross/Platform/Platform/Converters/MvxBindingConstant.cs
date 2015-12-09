@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace Cirrious.CrossCore.Converters
+namespace MvvmCross.Platform.Converters
 {
     public class MvxBindingConstant
     {
@@ -16,12 +16,12 @@ namespace Cirrious.CrossCore.Converters
 
         private MvxBindingConstant(string debug)
         {
-            _debug = debug;
+            this._debug = debug;
         }
 
         public override string ToString()
         {
-            return "Binding:" + _debug;
+            return "Binding:" + this._debug;
         }
     }
 }

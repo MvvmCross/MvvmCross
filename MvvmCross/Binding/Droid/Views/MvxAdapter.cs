@@ -5,24 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using Object = Java.Lang.Object;
-
-namespace Cirrious.MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
+
+    using Android.Content;
+    using Android.Runtime;
+    using Android.Views;
+    using Android.Widget;
+
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.WeakSubscription;
+
+    using Object = Java.Lang.Object;
+
     public class MvxAdapter
         : BaseAdapter
         , IMvxAdapter
@@ -52,15 +53,15 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext)
         {
-            _context = context;
-            _bindingContext = bindingContext;
-            if (_bindingContext == null)
+            this._context = context;
+            this._bindingContext = bindingContext;
+            if (this._bindingContext == null)
             {
                 throw new MvxException(
                     "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
             }
-            SimpleViewLayoutId = Android.Resource.Layout.SimpleListItem1;
-            SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
+            this.SimpleViewLayoutId = Android.Resource.Layout.SimpleListItem1;
+            this.SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
         }
 
         protected MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
@@ -68,9 +69,9 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         {
         }
 
-        protected Context Context => _context;
+        protected Context Context => this._context;
 
-        protected IMvxAndroidBindingContext BindingContext => _bindingContext;
+        protected IMvxAndroidBindingContext BindingContext => this._bindingContext;
 
         public int SimpleViewLayoutId { get; set; }
 
@@ -81,81 +82,81 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
-            set { SetItemsSource(value); }
+            get { return this._itemsSource; }
+            set { this.SetItemsSource(value); }
         }
 
         public virtual int ItemTemplateId
         {
-            get { return _itemTemplateId; }
+            get { return this._itemTemplateId; }
             set
             {
-                if (_itemTemplateId == value)
+                if (this._itemTemplateId == value)
                     return;
-                _itemTemplateId = value;
+                this._itemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (_itemsSource != null)
-                    NotifyDataSetChanged();
+                if (this._itemsSource != null)
+                    this.NotifyDataSetChanged();
             }
         }
 
         public virtual int DropDownItemTemplateId
         {
-            get { return _dropDownItemTemplateId; }
+            get { return this._dropDownItemTemplateId; }
             set
             {
-                if (_dropDownItemTemplateId == value)
+                if (this._dropDownItemTemplateId == value)
                     return;
-                _dropDownItemTemplateId = value;
+                this._dropDownItemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (_itemsSource != null)
-                    NotifyDataSetChanged();
+                if (this._itemsSource != null)
+                    this.NotifyDataSetChanged();
             }
         }
 
-        public override int Count => _itemsSource.Count();
+        public override int Count => this._itemsSource.Count();
 
         protected virtual void SetItemsSource(IEnumerable value)
         {
-            if (Object.ReferenceEquals(_itemsSource, value)
-                && !ReloadOnAllItemsSourceSets)
+            if (Object.ReferenceEquals(this._itemsSource, value)
+                && !this.ReloadOnAllItemsSourceSets)
                 return;
 
-            if (_subscription != null)
+            if (this._subscription != null)
             {
-                _subscription.Dispose();
-                _subscription = null;
+                this._subscription.Dispose();
+                this._subscription = null;
             }
 
-            _itemsSource = value;
+            this._itemsSource = value;
 
-            if (_itemsSource != null && !(_itemsSource is IList))
+            if (this._itemsSource != null && !(this._itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
 
-            var newObservable = _itemsSource as INotifyCollectionChanged;
+            var newObservable = this._itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
             {
-                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+                this._subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
-            NotifyDataSetChanged();
+            this.NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged(e);
+            this.NotifyDataSetChanged(e);
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            RealNotifyDataSetChanged();
+            this.RealNotifyDataSetChanged();
         }
 
         public override void NotifyDataSetChanged()
         {
-            RealNotifyDataSetChanged();
+            this.RealNotifyDataSetChanged();
         }
 
         protected virtual void RealNotifyDataSetChanged()
@@ -172,12 +173,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public virtual int GetPosition(object item)
         {
-            return _itemsSource.GetPosition(item);
+            return this._itemsSource.GetPosition(item);
         }
 
         public virtual System.Object GetRawItem(int position)
         {
-            return _itemsSource.ElementAt(position);
+            return this._itemsSource.ElementAt(position);
         }
 
         public override Object GetItem(int position)
@@ -195,44 +196,44 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         public override View GetDropDownView(int position, View convertView, ViewGroup parent)
         {
-            _currentSimpleId = SimpleDropDownViewLayoutId;
-            _currentParent = parent;
-            var toReturn = GetView(position, convertView, parent, DropDownItemTemplateId);
-            _currentParent = null;
+            this._currentSimpleId = this.SimpleDropDownViewLayoutId;
+            this._currentParent = parent;
+            var toReturn = this.GetView(position, convertView, parent, this.DropDownItemTemplateId);
+            this._currentParent = null;
             return toReturn;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            _currentSimpleId = SimpleViewLayoutId;
-            _currentParent = parent;
-            var toReturn = GetView(position, convertView, parent, ItemTemplateId);
-            _currentParent = null;
+            this._currentSimpleId = this.SimpleViewLayoutId;
+            this._currentParent = parent;
+            var toReturn = this.GetView(position, convertView, parent, this.ItemTemplateId);
+            this._currentParent = null;
             return toReturn;
         }
 
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
-            if (_itemsSource == null)
+            if (this._itemsSource == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");
                 return null;
             }
 
-            var source = GetRawItem(position);
+            var source = this.GetRawItem(position);
 
-            return GetBindableView(convertView, source, templateId);
+            return this.GetBindableView(convertView, source, templateId);
         }
 
         protected virtual View GetSimpleView(View convertView, object dataContext)
         {
             if (convertView == null)
             {
-                convertView = CreateSimpleView(dataContext);
+                convertView = this.CreateSimpleView(dataContext);
             }
             else
             {
-                BindSimpleView(convertView, dataContext);
+                this.BindSimpleView(convertView, dataContext);
             }
 
             return convertView;
@@ -252,14 +253,14 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             // note - this could technically be a non-binding inflate - but the overhead is minimal
             // note - it's important to use `false` for the attachToRoot argument here
             //    see discussion in https://github.com/MvvmCross/MvvmCross/issues/507
-            var view = _bindingContext.BindingInflate(_currentSimpleId, _currentParent, false);
-            BindSimpleView(view, dataContext);
+            var view = this._bindingContext.BindingInflate(this._currentSimpleId, this._currentParent, false);
+            this.BindSimpleView(view, dataContext);
             return view;
         }
 
         protected virtual View GetBindableView(View convertView, object dataContext)
         {
-            return GetBindableView(convertView, dataContext, ItemTemplateId);
+            return this.GetBindableView(convertView, dataContext, this.ItemTemplateId);
         }
 
         protected virtual View GetBindableView(View convertView, object dataContext, int templateId)
@@ -267,7 +268,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             if (templateId == 0)
             {
                 // no template seen - so use a standard string view from Android and use ToString()
-                return GetSimpleView(convertView, dataContext);
+                return this.GetSimpleView(convertView, dataContext);
             }
 
             // we have a templateid so lets use bind and inflate on it :)
@@ -282,11 +283,11 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-                viewToUse = CreateBindableView(dataContext, templateId);
+                viewToUse = this.CreateBindableView(dataContext, templateId);
             }
             else
             {
-                BindBindableView(dataContext, viewToUse);
+                this.BindBindableView(dataContext, viewToUse);
             }
 
             return viewToUse as View;
@@ -299,7 +300,7 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
 
         protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
         {
-            return new MvxListItemView(_context, _bindingContext.LayoutInflaterHolder, dataContext, templateId);
+            return new MvxListItemView(this._context, this._bindingContext.LayoutInflaterHolder, dataContext, templateId);
         }
     }
 }

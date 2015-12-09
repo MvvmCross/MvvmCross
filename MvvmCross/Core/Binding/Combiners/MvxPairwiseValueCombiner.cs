@@ -5,15 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Cirrious.MvvmCross.Binding.Combiners
+namespace MvvmCross.Binding.Combiners
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+
     public abstract class MvxPairwiseValueCombiner
         : MvxValueCombiner
     {
@@ -48,8 +49,8 @@ namespace Cirrious.MvvmCross.Binding.Combiners
         {
             public TypeTuple(Type type1, Type type2)
             {
-                Type2 = type2;
-                Type1 = type1;
+                this.Type2 = type2;
+                this.Type1 = type1;
             }
 
             public Type Type1 { get; private set; }
@@ -62,14 +63,14 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                 if (rhs == null)
                     return false;
 
-                return rhs.Type2 == Type2
-                       && rhs.Type1 == Type1;
+                return rhs.Type2 == this.Type2
+                       && rhs.Type1 == this.Type1;
             }
 
             public override int GetHashCode()
             {
-                return (Type1?.GetHashCode() ?? 0)
-                       + (Type2?.GetHashCode() ?? 0);
+                return (this.Type1?.GetHashCode() ?? 0)
+                       + (this.Type2?.GetHashCode() ?? 0);
             }
         }
 
@@ -83,38 +84,38 @@ namespace Cirrious.MvvmCross.Binding.Combiners
 
         protected MvxPairwiseValueCombiner()
         {
-            _combinerActions = new Dictionary<TypeTuple, CombinerFunc<object, object>>();
-            AddSingle<object, object>(CombineObjectAndObject);
-            AddSingle<double, object>(CombineDoubleAndObject);
-            AddSingle<object, double>(CombineObjectAndDouble);
-            AddSingle<double, double>(CombineDoubleAndDouble);
-            AddSingle<long, object>(CombineLongAndObject);
-            AddSingle<object, long>(CombineObjectAndLong);
-            AddSingle<long, double>(CombineLongAndDouble);
-            AddSingle<double, long>(CombineDoubleAndLong);
-            AddSingle<long, long>(CombineLongAndLong);
-            AddSingle<object>(CombineObjectAndNull, CombineNullAndObject);
-            AddSingle<double>(CombineDoubleAndNull, CombineNullAndDouble);
-            AddSingle<long>(CombineLongAndNull, CombineNullAndLong);
-            AddSingle(CombineTwoNulls);
+            this._combinerActions = new Dictionary<TypeTuple, CombinerFunc<object, object>>();
+            this.AddSingle<object, object>(this.CombineObjectAndObject);
+            this.AddSingle<double, object>(this.CombineDoubleAndObject);
+            this.AddSingle<object, double>(this.CombineObjectAndDouble);
+            this.AddSingle<double, double>(this.CombineDoubleAndDouble);
+            this.AddSingle<long, object>(this.CombineLongAndObject);
+            this.AddSingle<object, long>(this.CombineObjectAndLong);
+            this.AddSingle<long, double>(this.CombineLongAndDouble);
+            this.AddSingle<double, long>(this.CombineDoubleAndLong);
+            this.AddSingle<long, long>(this.CombineLongAndLong);
+            this.AddSingle<object>(this.CombineObjectAndNull, this.CombineNullAndObject);
+            this.AddSingle<double>(this.CombineDoubleAndNull, this.CombineNullAndDouble);
+            this.AddSingle<long>(this.CombineLongAndNull, this.CombineNullAndLong);
+            this.AddSingle(this.CombineTwoNulls);
         }
 
         private void AddSingle(CombinerFunc combinerAction)
         {
-            _combinerActions[new TypeTuple(null, null)] = (object x, object y, out object v) => combinerAction(out v);
+            this._combinerActions[new TypeTuple(null, null)] = (object x, object y, out object v) => combinerAction(out v);
         }
 
         private void AddSingle<T1>(CombinerFunc<T1> combinerAction, CombinerFunc<T1> switchedCombinerAction)
         {
-            _combinerActions[new TypeTuple(typeof(T1), null)] =
+            this._combinerActions[new TypeTuple(typeof(T1), null)] =
                 (object x, object y, out object v) => combinerAction((T1)x, out v);
-            _combinerActions[new TypeTuple(null, typeof(T1))] =
+            this._combinerActions[new TypeTuple(null, typeof(T1))] =
                 (object x, object y, out object v) => switchedCombinerAction((T1)y, out v);
         }
 
         private void AddSingle<T1, T2>(CombinerFunc<T1, T2> combinerAction)
         {
-            _combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
+            this._combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
                 (object x, object y, out object v) => combinerAction((T1)x, (T2)y, out v);
         }
 
@@ -159,14 +160,14 @@ namespace Cirrious.MvvmCross.Binding.Combiners
                     return true;
                 }
 
-                first = ForceToSimpleValueTypes(first);
-                second = ForceToSimpleValueTypes(second);
+                first = this.ForceToSimpleValueTypes(first);
+                second = this.ForceToSimpleValueTypes(second);
 
-                var firstType = GetLookupTypeFor(first);
-                var secondType = GetLookupTypeFor(second);
+                var firstType = this.GetLookupTypeFor(first);
+                var secondType = this.GetLookupTypeFor(second);
 
                 CombinerFunc<object, object> combinerFunc;
-                if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
+                if (!this._combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
                     Mvx.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
                     value = MvxBindingConstant.UnsetValue;

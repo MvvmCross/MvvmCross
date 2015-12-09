@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Java.Lang;
-
-namespace Cirrious.CrossCore.Droid
+namespace MvvmCross.Platform.Droid
 {
+    using Java.Lang;
+
     public class MvxJavaContainer : Object
     {
         protected MvxJavaContainer(object theObject)
         {
-            Object = theObject;
+            this.Object = theObject;
         }
 
         public object Object { get; private set; }

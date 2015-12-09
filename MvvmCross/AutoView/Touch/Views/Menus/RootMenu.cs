@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CrossUI.Core.Elements.Menu;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.AutoView.Touch.Views.Menus
+namespace MvvmCross.AutoView.Touch.Views.Menus
 {
+    using System.Collections.Generic;
+
+    using CrossUI.Core.Elements.Menu;
+
     public class RootMenu : IParentMenu
     {
         public List<IMenu> Children { get; private set; }
 
         public RootMenu()
         {
-            Children = new List<IMenu>();
+            this.Children = new List<IMenu>();
         }
     }
 }

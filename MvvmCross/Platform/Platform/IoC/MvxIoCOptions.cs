@@ -5,21 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-
-namespace Cirrious.CrossCore.IoC
+namespace MvvmCross.Platform.IoC
 {
+    using System;
+
     public class MvxIocOptions : IMvxIocOptions
     {
         private IMvxPropertyInjector _injector;
 
         public MvxIocOptions()
         {
-            TryToDetectSingletonCircularReferences = true;
-            TryToDetectDynamicCircularReferences = true;
-            CheckDisposeIfPropertyInjectionFails = true;
-            PropertyInjectorType = typeof(MvxPropertyInjector);
-            PropertyInjectorOptions = new MvxPropertyInjectorOptions();
+            this.TryToDetectSingletonCircularReferences = true;
+            this.TryToDetectDynamicCircularReferences = true;
+            this.CheckDisposeIfPropertyInjectionFails = true;
+            this.PropertyInjectorType = typeof(MvxPropertyInjector);
+            this.PropertyInjectorOptions = new MvxPropertyInjectorOptions();
         }
 
         public bool TryToDetectSingletonCircularReferences { get; set; }
