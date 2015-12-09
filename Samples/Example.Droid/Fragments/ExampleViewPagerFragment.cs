@@ -4,8 +4,8 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Views;
-using Cirrious.MvvmCross.Droid.Support.Fragging;
-using Cirrious.MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.Fragging;
+using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
 
 namespace Example.Droid.Fragments

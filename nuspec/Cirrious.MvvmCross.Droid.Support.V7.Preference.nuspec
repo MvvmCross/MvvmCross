@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>Cirrious.MvvmCross.Droid.Support.V7.Preference</id>
+		<version>4.0.0-beta7</version>
+		<title>MvvmCross Android Support V7 - Preference</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v7 Preference support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support preference</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.Preference.*" target="lib\MonoAndroid403" />
+		<file src="..\MvvmCross.Droid.Support.V7.Preference\**\*.cs" target="src\MvvmCross.Droid.Support.V7.Preference" />
+	</files>
+</package>
+
+
+
