@@ -96,7 +96,7 @@
     <Compile Include="Tasks\MvxWindowsPhoneTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cirrious.CrossCore\MvvmCross.Platform.csproj">
+    <ProjectReference Include="..\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>

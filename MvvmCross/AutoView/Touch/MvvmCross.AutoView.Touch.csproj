@@ -79,7 +79,7 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\MvvmCross.AutoView.csproj">
+    <ProjectReference Include="..\AutoView\MvvmCross.AutoView.csproj">
       <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
       <Name>MvvmCross.AutoView</Name>
     </ProjectReference>
@@ -95,7 +95,7 @@
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>MvvmCross.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
@@ -103,7 +103,7 @@
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
       <Name>MvvmCross.Dialog.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.Touch</Name>
     </ProjectReference>

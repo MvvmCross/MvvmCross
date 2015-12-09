@@ -67,11 +67,11 @@
     <Compile Include="Views\MvxMissingViewFinder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossUI\CrossUI.Droid\CrossUI.Droid.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Droid\CrossUI.Droid.csproj">
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
       <Name>CrossUI.Droid</Name>
     </ProjectReference>
@@ -83,7 +83,7 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.AutoView\MvvmCross.AutoView.csproj">
+    <ProjectReference Include="..\AutoView\MvvmCross.AutoView.csproj">
       <Project>{274CB946-75BB-4B04-982B-D053C59597AA}</Project>
       <Name>MvvmCross.AutoView</Name>
     </ProjectReference>
