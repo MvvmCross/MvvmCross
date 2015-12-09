@@ -1,8 +1,9 @@
 using System.Windows.Input;
 using Android.Support.V17.Leanback.Widget;
 using Cirrious.CrossCore.Platform;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Listeners
+namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 {
 	/// <summary>
 	/// Forwards "OnChildViewHolderSelected"-Events to a command.
@@ -15,7 +16,7 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Listeners
 		{
 			base.OnChildViewHolderSelected(parent, child, position, subposition);
 
-			var adapter = parent.GetAdapter() as RecyclerView.MvxRecyclerAdapter;
+			var adapter = parent.GetAdapter() as MvxRecyclerAdapter;
 			var item = adapter?.GetItem(position);
 
 			if (item == null)
