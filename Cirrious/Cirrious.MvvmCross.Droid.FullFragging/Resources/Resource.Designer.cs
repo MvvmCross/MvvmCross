@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Droid.FullFragging.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Droid.FullFragging.Resource", IsApplication=false)]
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
 	
 	

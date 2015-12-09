@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvvmCross.Binding.Droid</RootNamespace>
+    <AssemblyName>MvvmCross.Binding.Droid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <MandroidI18n />
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Debug\Mvx\Droid\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>..\..\bin\Release\Mvx\Droid\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Export" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Binders\IMvxAndroidViewBinder.cs" />
+    <Compile Include="Binders\IMvxAndroidViewBinderFactory.cs" />
+    <Compile Include="Binders\IMvxAndroidViewFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterFactoryFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactory.cs" />
+    <Compile Include="Binders\IMvxLayoutInflaterHolderFactoryFactory.cs" />
+    <Compile Include="Binders\MvxAndroidViewBinder.cs" />
+    <Compile Include="Binders\MvxAndroidViewBinderFactory.cs" />
+    <Compile Include="Binders\MvxAndroidViewFactory.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterCompat.cs" />
+    <Compile Include="Binders\MvxLayoutInflaterFactoryFactory.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxAxmlNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxNamespaceListViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxCachedViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxCompositeViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxJustNameViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxLongLowerCaseViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxNamespaceListViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxReflectionViewTypeResolver.cs" />
+    <Compile Include="BindingContext\MvxAndroidBindingContextHelpers.cs" />
+    <Compile Include="BindingContext\MvxAndroidBindingContextStack.cs" />
+    <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
+    <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
+    <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="MvxViewAssemblyBootstrapAction.cs" />
+    <Compile Include="ResourceHelpers\IMvxAndroidBindingResource.cs" />
+    <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
+    <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
+    <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Target\MvxExpandableListViewSelectedItemTargetBinding.cs" />
+    <Compile Include="Target\MvxRatingBarRatingTargetBinding.cs" />
+    <Compile Include="Target\MvxBaseStreamImageViewTargetBinding.cs" />
+    <Compile Include="Target\MvxBaseViewVisibleBinding.cs" />
+    <Compile Include="Target\MvxImageViewBitmapTargetBinding.cs" />
+    <Compile Include="Target\MvxBaseImageViewTargetBinding.cs" />
+    <Compile Include="Target\MvxImageViewDrawableNameTargetBinding.cs" />
+    <Compile Include="Target\MvxImageViewImageTargetBinding.cs" />
+    <Compile Include="Target\MvxListViewSelectedItemTargetBinding.cs" />
+    <Compile Include="Target\MvxAdapterViewSelectedItemPositionTargetBinding.cs" />
+    <Compile Include="Target\MvxAutoCompleteTextViewPartialTextTargetBinding.cs" />
+    <Compile Include="Target\MvxAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
+    <Compile Include="Target\MvxRadioGroupSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxSearchViewQueryTextTargetBinding.cs" />
+    <Compile Include="Target\MvxTextViewFocusTargetBinding.cs" />
+    <Compile Include="Target\MvxTextViewTextFormattedTargetBinding.cs" />
+    <Compile Include="Target\MvxTextViewTextTargetBinding.cs" />
+    <Compile Include="Target\MvxSeekBarProgressTargetBinding.cs" />
+    <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxViewClickBinding.cs" />
+    <Compile Include="Target\MvxViewHiddenBinding.cs" />
+    <Compile Include="Target\MvxViewVisibleBinding.cs" />
+    <Compile Include="Views\IMvxAdapter.cs" />
+    <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
+    <Compile Include="Views\IMvxLayoutInflaterHolder.cs" />
+    <Compile Include="Target\MvxViewLongClickBinding.cs" />
+    <Compile Include="Views\MvxBaseListItemView.cs" />
+    <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
+    <Compile Include="Views\MvxContextWrapper.cs" />
+    <Compile Include="Views\MvxExpandableListAdapter.cs" />
+    <Compile Include="Views\MvxExpandableListView.cs" />
+    <Compile Include="Views\MvxFrameControl.cs" />
+    <Compile Include="Views\MvxDatePicker.cs" />
+    <Compile Include="Views\MvxGridView.cs" />
+    <Compile Include="Views\MvxAutoCompleteTextView.cs" />
+    <Compile Include="Views\MvxLayoutInflater.cs" />
+    <Compile Include="Views\MvxRadioGroup.cs" />
+    <Compile Include="Views\MvxSpinner.cs" />
+    <Compile Include="Views\MvxFilteringAdapter.cs" />
+    <Compile Include="Views\IMvxListItemView.cs" />
+    <Compile Include="Views\MvxLinearLayout.cs" />
+    <Compile Include="Views\MvxListItemView.cs" />
+    <Compile Include="Views\MvxListView.cs" />
+    <Compile Include="Views\MvxAdapter.cs" />
+    <Compile Include="Views\MvxAdapterWithChangedEvent.cs" />
+    <Compile Include="Views\MvxAttributeHelpers.cs" />
+    <Compile Include="Target\MvxAndroidTargetBinding.cs" />
+    <Compile Include="Target\MvxCompoundButtonCheckedTargetBinding.cs" />
+    <Compile Include="Target\MvxImageViewDrawableTargetBinding.cs" />
+    <Compile Include="Binders\MvxBindingLayoutInflaterFactory.cs" />
+    <Compile Include="MvxAndroidBindingBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MvxImageView.cs" />
+    <Compile Include="Views\MvxTimePicker.cs" />
+    <Compile Include="Views\MvxViewGroupExtensions.cs" />
+    <Compile Include="Views\IMvxWithChangeAdapter.cs" />
+    <Compile Include="Views\MvxRelativeLayout.cs" />
+    <Compile Include="Views\MvxFrameLayout.cs" />
+    <Compile Include="Views\MvxTableLayout.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\MvvmCross.Core.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>MvvmCross.Core.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Core.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cirrious.MvvmCross.Localization\MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>MvvmCross.Localization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\MvxBindingAttributes.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Ids.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
