@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Cirrious.MvvmCross.Binding.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Binding.Droid.Resource", IsApplication=false)]
 
-namespace Cirrious.MvvmCross.Binding.Droid
+namespace MvvmCross.Binding.Droid
 {
 	
 	
