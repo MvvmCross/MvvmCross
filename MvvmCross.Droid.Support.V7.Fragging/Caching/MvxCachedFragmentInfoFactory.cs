@@ -15,7 +15,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         /// <param name="viewModelType"></param>
         /// <param name="addToBackstack"></param>
         /// <returns></returns>
-        public IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
+        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
         {
             if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
                 throw new InvalidOperationException($"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
         }
 
-        public SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
+        public virtual SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
         {
             return new SerializableMvxCachedFragmentInfo()
             {
@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             };
         }
 
-        public IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(
+        public virtual IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(
             SerializableMvxCachedFragmentInfo fromSerializableMvxCachedFragmentInfo)
         {
             return new MvxCachedFragmentInfo(fromSerializableMvxCachedFragmentInfo.Tag,

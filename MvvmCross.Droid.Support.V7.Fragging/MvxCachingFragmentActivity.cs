@@ -28,10 +28,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging
         : MvxFragmentActivity, IFragmentCacheableActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
+        private FragmentCacheConfiguration _fragmentCacheConfiguration;
 
         protected MvxCachingFragmentActivity()
         {
-            FragmentCacheConfiguration = new FragmentCacheConfiguration();
         }
 
         protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
@@ -39,7 +39,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
-            FragmentCacheConfiguration = new FragmentCacheConfiguration();
         }
 
         protected override void OnPostCreate(Bundle savedInstanceState)
@@ -323,7 +322,21 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             return fragInfo;
         }
 
-        public virtual FragmentCacheConfiguration FragmentCacheConfiguration { get; }
+        public FragmentCacheConfiguration FragmentCacheConfiguration
+        {
+            get
+            {
+                if (_fragmentCacheConfiguration == null)
+                    _fragmentCacheConfiguration = BuildFragmentCacheConfiguration();
+
+                return _fragmentCacheConfiguration;
+            }
+        }
+
+        public virtual FragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        {
+            return new FragmentCacheConfiguration();
+        }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
