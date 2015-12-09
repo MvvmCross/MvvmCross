@@ -1,15 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
 using Android.Runtime;
+using Android.Support.V17.Leanback.Widget;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 
-//namespace Cirrious.MvvmCross.Droid.Support.Leanback.Adapters
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Adapters
+namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
     public abstract class MvxBaseObjectAdapter : Android.Support.V17.Leanback.Widget.ObjectAdapter, IMvxObjectAdapter
     {

@@ -4,15 +4,14 @@ using Android.Runtime;
 using Android.Views;
 using Cirrious.CrossCore.Core;
 using System;
+using Android.Support.V17.Leanback.App;
+using MvvmCross.Droid.Support.V7.Fragging;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {
-    public class MvxEventSourceGuidedStepFragment
-        : GuidedStepFragment
-        // GuidedSupportFragment is currently missing in Xamarin Bindings. It's in the SDK:
-        // https://developer.android.com/reference/android/support/v17/leanback/app/GuidedStepSupportFragment.html
-        // https://bugzilla.xamarin.com/show_bug.cgi?id=35126
-        //: GuidedStepSupportFragment
+    public class MvxEventSourceGuidedStepSupportFragment
+        : GuidedStepSupportFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
@@ -41,11 +40,11 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourceGuidedStepFragment()
+        public MvxEventSourceGuidedStepSupportFragment()
         {
         }
 
-        public MvxEventSourceGuidedStepFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        public MvxEventSourceGuidedStepSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }

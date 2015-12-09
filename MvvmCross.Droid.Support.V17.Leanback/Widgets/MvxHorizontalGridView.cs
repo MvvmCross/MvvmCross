@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using MvvmCross.Droid.Support.V7.RecyclerView;
 using System;
 using System.Collections;
 using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Binding.Attributes;
+using Cirrious.MvvmCross.Binding.Droid.Views;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
+namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {
     /// <remarks>
     /// This class is actually (almost) the same as MvxReyclerView. Please keep this in mind if fixing bugs or implementing improvements!
@@ -45,8 +46,13 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
                 return;
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+
+			adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
+
+			// We need this listener to get information about the currently _selected_ item
+	        OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
+            SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
         }
 
         #endregion ctor
@@ -80,7 +86,15 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
             }
         }
 
-        [MvxSetToNullAfterBinding]
+		protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
+
+		public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
+		{
+			MvxTrace.Warning("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelectedPosition command.");
+			base.SetOnChildViewHolderSelectedListener(listener);
+		}
+
+		[MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
@@ -104,5 +118,11 @@ namespace Cirrious.MvvmCross.Droid.Support.Leanback.Widgets
             get { return this.Adapter.ItemLongClick; }
             set { this.Adapter.ItemLongClick = value; }
         }
+
+		public ICommand ItemSelection
+		{
+			get { return OnChildViewHolderSelectedListener?.ItemSelection; }
+			set { OnChildViewHolderSelectedListener.ItemSelection = value; }
+		}
     }
 }

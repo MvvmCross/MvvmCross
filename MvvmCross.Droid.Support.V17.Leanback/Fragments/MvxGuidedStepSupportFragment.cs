@@ -4,33 +4,34 @@ using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using System;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
-    public class MvxGuidedStepFragment
-        : MvxEventSourceGuidedStepFragment
+    public class MvxGuidedStepSupportFragment
+        : MvxEventSourceGuidedStepSupportFragment
             , IMvxFragmentView
     {
         /// <summary>
-        /// Create new instance of a MvxGuidedStepFragment
+        /// Create new instance of a MvxGuidedStepSupportFragment
         /// </summary>
         /// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
         /// <returns>Returns an instance of a MvxFragment</returns>
-        public static MvxGuidedStepFragment NewInstance(Bundle bundle)
+        public static MvxGuidedStepSupportFragment NewInstance(Bundle bundle)
         {
             // Setting Arguments needs to happen before Fragment is attached
             // to Activity. Arguments are persisted when Fragment is recreated!
-            var fragment = new MvxGuidedStepFragment { Arguments = bundle };
+            var fragment = new MvxGuidedStepSupportFragment { Arguments = bundle };
 
             return fragment;
         }
 
-        protected MvxGuidedStepFragment()
+        protected MvxGuidedStepSupportFragment()
         {
             this.AddEventListeners();
         }
 
-        protected MvxGuidedStepFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxGuidedStepSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             this.AddEventListeners();
@@ -68,15 +69,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxGuidedStepFragment<TViewModel>
-: MvxGuidedStepFragment
+    public abstract class MvxGuidedStepSupportFragment<TViewModel>
+: MvxGuidedStepSupportFragment
 , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-        protected MvxGuidedStepFragment()
+        protected MvxGuidedStepSupportFragment()
         {
         }
 
-        protected MvxGuidedStepFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxGuidedStepSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
