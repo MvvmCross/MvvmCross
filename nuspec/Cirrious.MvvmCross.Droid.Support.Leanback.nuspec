@@ -20,25 +20,27 @@ This package contains Support v17 Leanback support for MvvmCross.
 				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+        <dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.1.1.3" />
+				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.1.1.0" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.0.1.3" />
-				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.0.1.3" />
+        <dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v14.Preference" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v17.Leanback" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v17.Preference.Leanback" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.AppCompat" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.Preference" version="23.1.1.0" />
+				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.1.1.0" />
 			</group>
 		</dependencies>
 	</metadata>

@@ -19,13 +19,13 @@ This package contains Support v4 Fragments support for MvvmCross.</description>
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.HotTuna.Plugin.Json" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
 			</group>
 		</dependencies>
 	</metadata>
