@@ -124,17 +124,21 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullSenderCausesException()
         {
-            var message = new TestMessage(null);
+            Assert.Throws<ArgumentNullException>(() => {
+                var message = new TestMessage(null);
+            });
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            messenger.Subscribe<TestMessage>(null);
+            Assert.Throws<ArgumentNullException>(() => {
+                messenger.Subscribe<TestMessage>(null);
+            });
         }
 
         [Test]
@@ -150,11 +154,13 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullPublishCausesException()
         {
             var messenger = new MvxMessengerHub();
-            messenger.Publish<TestMessage>(null);
+            Assert.Throws<ArgumentNullException>(() => {
+                messenger.Publish<TestMessage>(null);
+            });
         }
 
         [Test]
