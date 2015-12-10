@@ -1,9 +1,9 @@
 using Cirrious.CrossCore.Plugins;
 
-namespace Cirrious.MvvmCross.Droid.Support.Leanback.Bootstrap
+namespace MvvmCross.Droid.Support.V17.Leanback.Bootstrap
 {
     public class JsonPluginBootstrap
-        : MvxPluginBootstrapAction<PluginLoader>
+        : MvxPluginBootstrapAction<MvvmCross.Plugins.Json.PluginLoader>
     {
     }
 }
