@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.SQLitePCL</id>
-		<version>4.0.0-beta6</version>
+		<version>4.0.0-beta7</version>
 		<title>MvvmCross - Sqlite PCL Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge, Benedikt Neuhold</owners>
