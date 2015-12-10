@@ -36,8 +36,8 @@ This package contains Support v7 Design support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\Cirrious.MvvmCross.Droid.Support.Design.*" target="lib\MonoAndroid403" />
-		<file src="..\Cirrious.MvvmCross.Droid.Support.Design\**\*.cs" target="src\Cirrious.MvvmCross.Droid.Support.Design" />
+		<file src="..\bin\Release\MvvmCross.Droid.Support.Design.*" target="lib\MonoAndroid403" />
+		<file src="..\MvvmCross.Droid.Support.Design\**\*.cs" target="src\MvvmCross.Droid.Support.Design" />
 	</files>
 </package>
 
