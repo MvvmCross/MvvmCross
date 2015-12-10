@@ -120,9 +120,6 @@ namespace Cirrious.MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException),
-            ExpectedMessage = "Problem creating viewModel",
-            MatchType = MessageMatch.StartsWith)]
         public void Test_MissingDependency()
         {
             ClearAll();
@@ -131,15 +128,14 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var toTest = new MvxDefaultViewModelLocator();
 
-            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-
-            Assert.Fail("We should never reach this line");
+            Assert.That(
+                () => {
+                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException),
-            ExpectedMessage = "Problem creating viewModel",
-            MatchType = MessageMatch.StartsWith)]
         public void Test_FailingDependency()
         {
             ClearAll();
@@ -150,15 +146,14 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var toTest = new MvxDefaultViewModelLocator();
 
-            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-
-            Assert.Fail("We should never reach this line");
+            Assert.That(
+                () => {
+                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException),
-            ExpectedMessage = "Problem initialising viewModel",
-            MatchType = MessageMatch.StartsWith)]
         public void Test_FailingInitialisation()
         {
             ClearAll();
@@ -170,9 +165,11 @@ namespace Cirrious.MvvmCross.Test.ViewModels
 
             var toTest = new MvxDefaultViewModelLocator();
 
-            IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-
-            Assert.Fail("We should never reach this line");
+            Assert.That(
+                () => {
+                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem initialising viewModel"));
         }
     }
 }
