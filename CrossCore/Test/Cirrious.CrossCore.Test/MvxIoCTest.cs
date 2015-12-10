@@ -264,7 +264,6 @@ namespace Cirrious.CrossCore.Test
         }
 
         [Test]
-        [ExpectedException(typeof(MvxIoCResolveException))]
         public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
         {
             MvxSingleton.ClearAllSingletons();
@@ -272,11 +271,12 @@ namespace Cirrious.CrossCore.Test
 
             instance.RegisterType(typeof(IC), () => "Fail");
 
-            var c1 = Mvx.Resolve<IC>();
+            Assert.Throws<MvxIoCResolveException>(() => {
+                var c1 = Mvx.Resolve<IC>();
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(MvxIoCResolveException))]
         public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
         {
             MvxSingleton.ClearAllSingletons();
@@ -284,7 +284,9 @@ namespace Cirrious.CrossCore.Test
 
             instance.RegisterType(typeof(IC), () => 36);
 
-            var c1 = Mvx.Resolve<IC>();
+            Assert.Throws<MvxIoCResolveException>(() => {
+                var c1 = Mvx.Resolve<IC>();
+            });
         }
 
         // TODO - there are so many tests we could and should do here!
