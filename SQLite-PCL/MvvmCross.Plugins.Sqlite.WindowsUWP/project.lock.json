@@ -201,7 +201,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -1821,7 +1821,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -3474,7 +3474,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -5132,7 +5132,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -6785,7 +6785,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -8443,7 +8443,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -10096,7 +10096,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -12162,8 +12162,8 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
-      "sha512": "SqbWkxaMpgTDiWoFClGDLa1ywH4bfMA8DND/SeXMvRcWCsfya+iXdksfhAIuYzAmIPuyCK/FRH2tERYGE+Z7Ig==",
+    "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
+      "sha512": "S9bW3XJprHeSJ4UlS0lUWoSuw15NsW1jOTdvBcnXk8s5+HTiFKxARV4iaZeol7A5x0W83eL6aJWamKvAQWwTuw==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12201,7 +12201,7 @@
         "lib/Xamarin.iOS10/Cirrious.CrossCore.Touch.dll",
         "lib/Xamarin.iOS10/Cirrious.MvvmCross.Localization.dll",
         "MvvmCross.HotTuna.CrossCore.nuspec",
-        "package/services/metadata/core-properties/fd65cdde4e43403ba05a4a038d22a934.psmdcp"
+        "package/services/metadata/core-properties/770a3c5fbc8c42c59f9d0fe76c1d86b0.psmdcp"
       ]
     },
     "SQLite.Net-PCL/3.1.1": {
@@ -14945,7 +14945,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.HotTuna.CrossCore >= 4.0.0-beta5",
+      "MvvmCross.HotTuna.CrossCore >= 4.0.0-beta7",
       "SQLite.Net.Async-PCL >= 3.1.1",
       "SQLite.Net.Core-PCL >= 3.1.1",
       "SQLite.Net-PCL >= 3.1.1"
