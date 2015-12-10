@@ -17,6 +17,176 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp roslyn analyzers</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
+			<group targetFramework ="net">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="win">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="wp">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="wpa">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="MonoAndroid">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="MonoTouch">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="Xamarin.iOS">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="uap">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework ="dotnet">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>
