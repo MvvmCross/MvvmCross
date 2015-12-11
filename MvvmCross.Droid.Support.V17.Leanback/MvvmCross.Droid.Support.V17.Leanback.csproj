@@ -105,11 +105,15 @@
     <Compile Include="Fragments\MvxGuidedStepSupportFragment.cs" />
     <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
     <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
+    <Compile Include="Listeners\MvxFocusFirstChildOnChildLaidOutListener.cs" />
+    <Compile Include="Listeners\MvxOnChildViewHolderSelectedListener.cs" />
     <Compile Include="MvxObjectWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Widgets\MvxHorizontalGridView.cs" />
-    <Compile Include="Listeners\MvxOnChildViewHolderSelectedListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Attrs.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
