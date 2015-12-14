@@ -17,79 +17,79 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<dependencies>
 			<group targetFramework ="net">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="win">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="wp">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="wpa">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="MonoAndroid">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="MonoTouch">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="uap">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6484" />
+				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>   
 		<!-- PCL -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
 
 		<!-- dotnet -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
 
 		<!-- phone -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\wp8" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.WindowsPhone.*" target="lib\wp8" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\wp8" />
+		<file src="..\bin\Release\WindowsPhone\MvvmCross.Forms.Presenter.WindowsPhone.*" target="lib\wp8" />
 
 		<!-- win81 -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\wpa81" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\win81" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\win81" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-win81+wpa81" />
 
-		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" target="lib\wpa81" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" target="lib\win81" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Windows81.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\win81" />
+		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\portable-win81+wpa81" />
 
 		<!-- uap -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\uap" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.WindowsUWP\Properties\MvvmCross.Forms.Presenter.WindowsUWP.rd.xml" target="lib\uap\MvvmCross.Forms.Presenter.WindowsUWP\Properties" />
+		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\uap" />
+		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP\Properties\MvvmCross.Forms.Presenter.WindowsUWP.rd.xml" target="lib\uap\MvvmCross.Forms.Presenter.WindowsUWP\Properties" />
 
 
 		<!-- droid -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid403" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Droid.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\Droid\MvvmCross.Forms.Presenter.Droid.*" target="lib\MonoAndroid403" />
 
 		<!-- touch -->
-		<file src="..\bin\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\MvvmCross.Forms.Presenter.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Touch\MvvmCross.Forms.Presenter.Touch.*" target="lib\Xamarin.iOS10" />
 
 		<!-- Source Code For Debugging -->
 		<file src="..\MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
