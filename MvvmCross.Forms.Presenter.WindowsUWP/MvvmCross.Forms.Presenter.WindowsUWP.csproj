@@ -35,6 +35,7 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
@@ -117,11 +118,6 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms.Presenter.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.0.0.6484\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

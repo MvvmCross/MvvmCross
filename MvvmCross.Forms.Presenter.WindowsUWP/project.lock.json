@@ -201,7 +201,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -213,9 +213,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -1560,6 +1560,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -1804,7 +1818,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -1816,9 +1830,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -3210,6 +3224,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -3440,7 +3468,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -3452,9 +3480,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -4831,6 +4859,20 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       }
     },
@@ -5081,7 +5123,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -5093,9 +5135,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -6487,6 +6529,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -6717,7 +6773,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -6729,9 +6785,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -8108,6 +8164,20 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       }
     },
@@ -8358,7 +8428,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -8370,9 +8440,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -9764,6 +9834,20 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -9994,7 +10078,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
+      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
         "compile": {
           "lib/win81/Cirrious.CrossCore.dll": {},
           "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
@@ -10006,9 +10090,9 @@
           "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
+      "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
         "dependencies": {
-          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta5, )"
+          "MvvmCross.HotTuna.CrossCore": "[4.0.0-beta7, )"
         },
         "compile": {
           "lib/uap/Cirrious.MvvmCross.dll": {},
@@ -11385,6 +11469,20 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Xamarin.Forms/2.0.0.6490": {
+        "compile": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Xamarin.Forms.Core.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll": {},
+          "lib/uap10.0/Xamarin.Forms.Xaml.dll": {}
         }
       }
     }
@@ -12043,8 +12141,8 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "MvvmCross.HotTuna.CrossCore/4.0.0-beta5": {
-      "sha512": "SqbWkxaMpgTDiWoFClGDLa1ywH4bfMA8DND/SeXMvRcWCsfya+iXdksfhAIuYzAmIPuyCK/FRH2tERYGE+Z7Ig==",
+    "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
+      "sha512": "S9bW3XJprHeSJ4UlS0lUWoSuw15NsW1jOTdvBcnXk8s5+HTiFKxARV4iaZeol7A5x0W83eL6aJWamKvAQWwTuw==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12082,11 +12180,11 @@
         "lib/Xamarin.iOS10/Cirrious.CrossCore.Touch.dll",
         "lib/Xamarin.iOS10/Cirrious.MvvmCross.Localization.dll",
         "MvvmCross.HotTuna.CrossCore.nuspec",
-        "package/services/metadata/core-properties/fd65cdde4e43403ba05a4a038d22a934.psmdcp"
+        "package/services/metadata/core-properties/770a3c5fbc8c42c59f9d0fe76c1d86b0.psmdcp"
       ]
     },
-    "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta5": {
-      "sha512": "FDwwID+gTgIWTyT9EbGKwfe5rDlnxg03iqzR5m81twzzjrSGWLc+PHsdoeaEcDG12RwreMimaws7+XtKvgKDrg==",
+    "MvvmCross.HotTuna.MvvmCrossLibraries/4.0.0-beta7": {
+      "sha512": "O9gf/I17sgP5YXr4ZWtpG4zMUXQY7R0rupma0n0jL0Yu+VfNDK2tMS58oQW8ID6arz0Q9RIrW6i1n3HdjOiTNg==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12118,7 +12216,7 @@
         "lib/Xamarin.iOS10/Cirrious.MvvmCross.dll",
         "lib/Xamarin.iOS10/Cirrious.MvvmCross.Touch.dll",
         "MvvmCross.HotTuna.MvvmCrossLibraries.nuspec",
-        "package/services/metadata/core-properties/a8006af1964b4cb1a1c4a23736567b39.psmdcp"
+        "package/services/metadata/core-properties/a89ead6bcb5940da9699971b602b9d62.psmdcp"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -14815,12 +14913,114 @@
         "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll",
         "System.Xml.XmlSerializer.nuspec"
       ]
+    },
+    "Xamarin.Forms/2.0.0.6490": {
+      "sha512": "jTQp/dIlAT2J3dvFwr+UsP0COsTmkTuPQ2ySnYnrLyoHV0gbUueMt1oPmBnFEDedoUxhEQIhMFbzGRKuiS+Wvw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.Decompiler.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.Cecil.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.CSharp.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/ICSharpCode.NRefactory.Xml.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Mono.Cecil.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Mono.Cecil.Mdb.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Mono.Cecil.Pdb.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Mono.Cecil.Rocks.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Build.Tasks.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Core.dll",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.targets",
+        "build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Xaml.dll",
+        "lib/MonoAndroid10/FormsViewGroup.dll",
+        "lib/MonoAndroid10/Xamarin.Forms.Core.dll",
+        "lib/MonoAndroid10/Xamarin.Forms.Core.xml",
+        "lib/MonoAndroid10/Xamarin.Forms.Platform.Android.dll",
+        "lib/MonoAndroid10/Xamarin.Forms.Platform.dll",
+        "lib/MonoAndroid10/Xamarin.Forms.Xaml.dll",
+        "lib/MonoAndroid10/Xamarin.Forms.Xaml.xml",
+        "lib/MonoTouch10/Xamarin.Forms.Core.dll",
+        "lib/MonoTouch10/Xamarin.Forms.Core.xml",
+        "lib/MonoTouch10/Xamarin.Forms.Platform.dll",
+        "lib/MonoTouch10/Xamarin.Forms.Platform.iOS.Classic.dll",
+        "lib/MonoTouch10/Xamarin.Forms.Xaml.dll",
+        "lib/MonoTouch10/Xamarin.Forms.Xaml.xml",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Core.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Core.xml",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Platform.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Xaml.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.Xaml.xml",
+        "lib/uap10.0/Xamarin.Forms.Core.dll",
+        "lib/uap10.0/Xamarin.Forms.Core.xml",
+        "lib/uap10.0/Xamarin.Forms.Platform.dll",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP.pri",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsTextBox.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/PageControl.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/Properties/Xamarin.Forms.Platform.UAP.rd.xml",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/Resources.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/Xamarin.Forms.Platform.UAP.xr.xml",
+        "lib/uap10.0/Xamarin.Forms.Xaml.dll",
+        "lib/uap10.0/Xamarin.Forms.Xaml.xml",
+        "lib/win81/Xamarin.Forms.Core.dll",
+        "lib/win81/Xamarin.Forms.Core.xml",
+        "lib/win81/Xamarin.Forms.Platform.dll",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.dll",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.pri",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet.dll",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet.pri",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/Resources.xbf",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/TabletResources.xbf",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/Xamarin.Forms.Platform.WinRT.Tablet.xr.xml",
+        "lib/win81/Xamarin.Forms.Platform.WinRT/FormsTextBox.xbf",
+        "lib/win81/Xamarin.Forms.Platform.WinRT/PageControl.xbf",
+        "lib/win81/Xamarin.Forms.Platform.WinRT/StepperControl.xbf",
+        "lib/win81/Xamarin.Forms.Platform.WinRT/Xamarin.Forms.Platform.WinRT.xr.xml",
+        "lib/win81/Xamarin.Forms.Xaml.dll",
+        "lib/win81/Xamarin.Forms.Xaml.xml",
+        "lib/WP80/Xamarin.Forms.Core.dll",
+        "lib/WP80/Xamarin.Forms.Core.xml",
+        "lib/WP80/Xamarin.Forms.Platform.dll",
+        "lib/WP80/Xamarin.Forms.Platform.WP8.dll",
+        "lib/WP80/Xamarin.Forms.Xaml.dll",
+        "lib/WP80/Xamarin.Forms.Xaml.xml",
+        "lib/wpa81/Xamarin.Forms.Core.dll",
+        "lib/wpa81/Xamarin.Forms.Core.xml",
+        "lib/wpa81/Xamarin.Forms.Platform.dll",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.dll",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone.dll",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone.pri",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/PhoneResources.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/Resources.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/SearchBox.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/Xamarin.Forms.Platform.WinRT.Phone.xr.xml",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.pri",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT/FormsTextBox.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT/PageControl.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT/StepperControl.xbf",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT/Xamarin.Forms.Platform.WinRT.xr.xml",
+        "lib/wpa81/Xamarin.Forms.Xaml.dll",
+        "lib/wpa81/Xamarin.Forms.Xaml.xml",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Core.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Core.xml",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Platform.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Platform.iOS.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.xml",
+        "package/services/metadata/core-properties/bc55d49ed9c94f79b5764d7531ffc462.psmdcp",
+        "tools/init.ps1",
+        "tools/Xamarin.Forms.Core.Design.dll",
+        "tools/Xamarin.Forms.Xaml.Design.dll",
+        "Xamarin.Forms.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.HotTuna.MvvmCrossLibraries >= 4.0.0-beta5"
+      "MvvmCross.HotTuna.MvvmCrossLibraries >= 4.0.0-beta7",
+      "Xamarin.Forms >= 2.0.0.6490"
     ],
     "UAP,Version=v10.0": []
   }
