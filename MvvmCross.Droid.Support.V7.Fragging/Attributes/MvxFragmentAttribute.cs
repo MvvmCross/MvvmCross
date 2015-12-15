@@ -7,7 +7,7 @@
 
 using System;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFragmentAttribute : Attribute
@@ -17,17 +17,15 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             
         }
 
-        /// <summary>
-        /// That shall be used only if you are using non generic fragments.
-        /// </summary>
-        /// <param name="viewModelType"></param>
-        public MvxFragmentAttribute(Type viewModelType)
-        {
-            ViewModelType = viewModelType;
-        }
+		/// <summary>
+		/// That shall be used only if you are using non generic fragments.
+		/// </summary>
+		public Type ViewModelType { get; set; }
 
-        internal Type ViewModelType { get; set; }
+		/// <summary>
+		/// Indicates if the fragment can be cached. True by default.
+		/// </summary>
+		public bool IsCacheableFragment { get; set; } = true;
 
-        public bool IsCacheableFragment => true;
     }
 }

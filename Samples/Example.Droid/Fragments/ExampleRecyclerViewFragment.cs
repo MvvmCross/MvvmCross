@@ -6,12 +6,10 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace Example.Droid.Fragments
 {

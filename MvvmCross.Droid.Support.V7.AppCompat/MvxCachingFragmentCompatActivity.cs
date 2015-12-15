@@ -21,57 +21,20 @@ using Cirrious.MvvmCross.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Support.V7.Fragging.Caching;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
 	[Register("MvvmCross.Droid.Support.V7.AppCompat.MvxCachingFragmentCompatActivity")]
-	public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity
-	{
+    public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity
+    {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
-        private readonly Dictionary<string, IMvxCachedFragmentInfo> _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
-
-        /// <summary>
-        /// Enable OnFragmentPopped callback. This callback might represent a performance hit.
-        /// </summary>
-        protected bool EnableOnFragmentPoppedCallback { get; set; }
-
-        /// <summary>
-        ///     Register a Fragment to be shown, this should usually be done in OnCreate
-        /// </summary>
-        /// <typeparam name="TFragment">Fragment Type</typeparam>
-        /// <typeparam name="TViewModel">ViewModel Type</typeparam>
-        /// <param name="tag">The tag of the Fragment, it is used to register it with the FragmentManager</param>
-        public void RegisterFragment<TFragment, TViewModel>(string tag)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            var fragInfo = CreateFragmentInfo(tag, typeof(TFragment), typeof(TViewModel));
-
-            _lookup.Add(tag, fragInfo);
-        }
-
-	    public void RegisterFragment(string tag, Type fragmentType, Type viewModelType)
-        {
-            var fragInfo = CreateFragmentInfo(tag, fragmentType, viewModelType);
-            _lookup.Add(tag, fragInfo);
-        }
-
-        protected virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
-        {
-            if ( !typeof(IMvxFragmentView).IsAssignableFrom(fragmentType) )
-                throw new InvalidOperationException(
-                    $"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
-
-            if ( !typeof(IMvxViewModel).IsAssignableFrom(viewModelType) )
-                throw new InvalidOperationException(
-                    $"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
-
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
-        }
-
+	    private IFragmentCacheConfiguration _fragmentCacheConfiguration;
+        
         protected MvxCachingFragmentCompatActivity()
         {
-            EnableOnFragmentPoppedCallback = true; //Default
         }
 
         protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
@@ -86,9 +49,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnPostCreate(savedInstanceState);
             if (savedInstanceState == null) return;
 
-            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-            RestoreFragmentsCache();
-
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
@@ -96,6 +56,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     "Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
                 return;
             }
+
+            FragmentCacheConfiguration.RestoreCacheConfiguration(savedInstanceState, serializer);
+            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
+            RestoreFragmentsCache();
 
             RestoreViewModelsFromBundle(serializer, savedInstanceState);
         }
@@ -194,8 +158,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnSaveInstanceState(outState);
             IMvxJsonConverter ser;
-            if (_lookup.Any() && Mvx.TryResolve(out ser))
+            if (FragmentCacheConfiguration.HasAnyFragmentsRegisteredToCache && Mvx.TryResolve(out ser))
             {
+                FragmentCacheConfiguration.SaveFragmentCacheConfigurationState(outState, ser);
+
                 var typesForKeys = CreateFragmentTypesDictionary(outState);
                 if (typesForKeys == null)
                     return;
@@ -216,7 +182,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
-            _lookup.TryGetValue(tag, out fragInfo);
+            FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
@@ -271,7 +237,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 SupportFragmentManager.PopBackStackImmediate();
 
-                if (EnableOnFragmentPoppedCallback)
+                if (FragmentCacheConfiguration.EnableOnFragmentPoppedCallback)
                 {
                     //NOTE(vvolkgang) this is returning ALL the frags. Should we return only the visible ones?
                     var currentFragsInfo = GetCurrentCacheableFragmentsInfo();
@@ -298,7 +264,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 	        return currentFragments
 	            .Where(fragment => fragment != null)
                 // we are not interested in fragments which are not supposed to cache!
-                .Where(fragment => fragment.GetType().IsCacheableFragmentAttribute());
+                .Where(fragment => fragment.GetType().IsFragmentCacheable());
 	    }
 
 	    protected IMvxCachedFragmentInfo GetLastFragmentInfo()
@@ -313,7 +279,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return GetFragmentInfoByTag(tagFragment);
 	    }
 
-	    protected virtual string GetTagFromFragment(Fragment fragment)
+	    protected string GetTagFromFragment(Fragment fragment)
 	    {
 	        var mvxFragmentView = fragment as IMvxFragmentView;
 
@@ -354,13 +320,29 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
             IMvxCachedFragmentInfo fragInfo;
-            _lookup.TryGetValue(tag, out fragInfo);
+            FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
 
             if (fragInfo == null)
                 throw new MvxException("Could not find tag: {0} in cache, you need to register it first.", tag);
             return fragInfo;
         }
-    }
+
+	    public IFragmentCacheConfiguration FragmentCacheConfiguration
+	    {
+	        get
+	        {
+	            if (_fragmentCacheConfiguration == null)
+	                _fragmentCacheConfiguration = BuildFragmentCacheConfiguration();
+
+	            return _fragmentCacheConfiguration;
+	        }
+	    }
+
+	    public virtual IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
+	    {
+	        return new DefaultFragmentCacheConfiguration();
+	    }
+	}
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
         : MvxCachingFragmentCompatActivity

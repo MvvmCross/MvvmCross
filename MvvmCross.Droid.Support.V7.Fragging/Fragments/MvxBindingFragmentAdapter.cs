@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 {
@@ -35,8 +36,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
+
+            FragmentView.RegisterFragmentViewToCacheIfNeeded();
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
@@ -91,7 +94,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();

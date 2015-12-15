@@ -1,6 +1,7 @@
 ﻿using Android.Runtime;
 using MvvmCross.Droid.Support.V7.Fragging;
 using Example.Core.ViewModels;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace Example.Droid.Fragments
 {
