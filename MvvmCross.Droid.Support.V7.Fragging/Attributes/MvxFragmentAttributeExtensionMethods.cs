@@ -8,7 +8,7 @@
 using System;
 using System.Linq;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 {
     public static class MvxFragmentAttributeExtensionMethods
     {

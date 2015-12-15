@@ -1,7 +1,7 @@
 using System;
 using Android.Support.V4.App;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
     public interface IMvxCachedFragmentInfo
     {

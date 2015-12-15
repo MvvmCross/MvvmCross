@@ -7,7 +7,7 @@
 
 using System;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFragmentAttribute : Attribute

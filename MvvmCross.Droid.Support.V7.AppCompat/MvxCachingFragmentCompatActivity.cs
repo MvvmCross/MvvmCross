@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

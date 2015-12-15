@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 {
