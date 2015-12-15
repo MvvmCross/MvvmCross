@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging
         : MvxFragmentActivity, IFragmentCacheableActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
-        private FragmentCacheConfiguration _fragmentCacheConfiguration;
+        private IFragmentCacheConfiguration _fragmentCacheConfiguration;
 
         protected MvxCachingFragmentActivity()
         {
@@ -322,7 +322,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             return fragInfo;
         }
 
-        public FragmentCacheConfiguration FragmentCacheConfiguration
+        public IFragmentCacheConfiguration FragmentCacheConfiguration
         {
             get
             {
@@ -333,9 +333,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             }
         }
 
-        public virtual FragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        public virtual IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
         {
-            return new FragmentCacheConfiguration();
+            return new DefaultFragmentCacheConfiguration();
         }
     }
 

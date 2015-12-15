@@ -74,7 +74,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\DefaultFragmentCacheConfiguration.cs" />
     <Compile Include="Caching\FragmentCacheConfiguration.cs" />
+    <Compile Include="Caching\IFragmentCacheConfiguration.cs" />
     <Compile Include="Caching\IMvxCachedFragmentInfoFactory.cs" />
     <Compile Include="Caching\MvxCachedFragmentInfoFactory.cs" />
     <Compile Include="Caching\IFragmentCacheableActivity.cs" />

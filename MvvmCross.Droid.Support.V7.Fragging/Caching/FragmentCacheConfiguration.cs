@@ -8,14 +8,14 @@ using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
-    public class FragmentCacheConfiguration
+    public abstract class FragmentCacheConfiguration<TSerializableMvxCachedFragmentInfo> : IFragmentCacheConfiguration
     {
         private Dictionary<string, IMvxCachedFragmentInfo> _lookup;
         private const string SavedFragmentCacheConfiguration = "__mvxSavedFragmentCacheConfiguration";
         private const string SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState =
             "__mvxSavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState";
 
-        public FragmentCacheConfiguration()
+        protected FragmentCacheConfiguration()
         {
             _lookup = new Dictionary<string, IMvxCachedFragmentInfo>();
             EnableOnFragmentPoppedCallback = true; //Default
@@ -36,7 +36,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         /// <typeparam name="TViewModel">ViewModel Type</typeparam>
         /// <param name="tag">The tag of the Fragment, it is used to register it with the FragmentManager</param>
         /// <returns>True if fragment is registered, false if tag is already registered</returns>
-        internal bool RegisterFragmentToCache<TFragment, TViewModel>(string tag)
+        public bool RegisterFragmentToCache<TFragment, TViewModel>(string tag)
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel
         {
@@ -49,7 +49,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return true;
         }
 
-        internal bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType)
+        public bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType)
         {
             if (_lookup.ContainsKey(tag))
                 return false;
@@ -81,9 +81,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             if (string.IsNullOrEmpty(jsonSerializedMvxCachedFragmentInfosToRestore))
                 return;
 
-            var serializedMvxCachedFragmentInfos = serializer.DeserializeObject<Dictionary<string, SerializableMvxCachedFragmentInfo>>(jsonSerializedMvxCachedFragmentInfosToRestore);
+            var serializedMvxCachedFragmentInfos = serializer.DeserializeObject<Dictionary<string, TSerializableMvxCachedFragmentInfo>>(jsonSerializedMvxCachedFragmentInfosToRestore);
             _lookup = serializedMvxCachedFragmentInfos.ToDictionary(x => x.Key,
-                (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value));
+                (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value as SerializableMvxCachedFragmentInfo));
         }
 
 

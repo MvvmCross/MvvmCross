@@ -30,7 +30,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
-	    private FragmentCacheConfiguration _fragmentCacheConfiguration;
+	    private IFragmentCacheConfiguration _fragmentCacheConfiguration;
         
         protected MvxCachingFragmentCompatActivity()
         {
@@ -326,7 +326,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return fragInfo;
         }
 
-	    public FragmentCacheConfiguration FragmentCacheConfiguration
+	    public IFragmentCacheConfiguration FragmentCacheConfiguration
 	    {
 	        get
 	        {
@@ -337,9 +337,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 	        }
 	    }
 
-	    public virtual FragmentCacheConfiguration BuildFragmentCacheConfiguration()
+	    public virtual IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
 	    {
-	        return new FragmentCacheConfiguration();
+	        return new DefaultFragmentCacheConfiguration();
 	    }
 	}
 
