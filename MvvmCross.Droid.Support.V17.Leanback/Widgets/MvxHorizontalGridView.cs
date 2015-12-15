@@ -23,7 +23,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
     /// <remarks>
     /// This class is actually (almost) the same as MvxReyclerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
-    [Register("cirrious.mvvmcross.droid.support.leanback.widgets.MvxHorizontalGridView")]
+    [Register("mvvmcross.droid.support.leanback.widgets.MvxHorizontalGridView")]
     public class MvxHorizontalGridView : Android.Support.V17.Leanback.Widget.HorizontalGridView
     {
         #region ctor
