@@ -35,11 +35,15 @@ namespace Example.Droid.Activities
 
             SetContentView(Resource.Layout.activity_main);
 
+			//TODO: Maybe move this to the base class
+			var presenter = (MvxFragmentsPresenter)Mvx.Resolve<IMvxFragmentsPresenter> ();
+			presenter.FragmentHostCreated (this);
+
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
 			//TODO: Remove this workaround
-            if(bundle == null)
-                ViewModel.ShowMenuAndFirstDetail();
+            //if(bundle == null)
+            //    ViewModel.ShowMenuAndFirstDetail();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

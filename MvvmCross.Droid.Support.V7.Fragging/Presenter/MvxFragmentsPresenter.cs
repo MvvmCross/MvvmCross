@@ -15,6 +15,7 @@ using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
@@ -47,6 +48,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
         public override void Show(MvxViewModelRequest request)
         {
+			//if (_taskSource != null)
+				//TODO: We should wait here for tasks to finish when showing multiple fragments
+
             var bundle = new Bundle();
             var serializedRequest = Serializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
@@ -61,27 +65,33 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 				var fragmentHost = Activity as IMvxFragmentHost;
 				if(fragmentHost != null && host == fragmentHost.GetType())
 				{
-					if (Activity is IFragmentCacheableActivity) {
-						var cache = ((IFragmentCacheableActivity)Activity).FragmentCacheConfiguration;
-						if (!cache.HasAnyFragmentsRegisteredToCache) {
-							foreach (var item in _fragments.Where(x => x.Value == host)) {
-
-								//TODO: Should only take one GenericTypeArguments of type IMvxViewModel
-								var viewModel = item.Key.BaseType.GenericTypeArguments.FirstOrDefault ()
-									?? item.Key.GetViewModelType ();
-
-								cache.RegisterFragmentToCache (viewModel.Name, item.Key, viewModel);
-							}
-						}
-					}
-
 					if (fragmentHost.Show (request, bundle))
 						return;
 				}
 				else
 				{
-					var intentFor = new Intent (Activity.ApplicationContext, host);
-					base.Show (intentFor);
+					CreateFragmentHostAsync (host).ContinueWith(t => {
+						fragmentHost = t.Result;
+
+						if (Activity is IFragmentCacheableActivity) {
+							var cache = ((IFragmentCacheableActivity)Activity).FragmentCacheConfiguration;
+							if (!cache.HasAnyFragmentsRegisteredToCache) {
+								foreach (var item in _fragments.Where(x => x.Value == host)) {
+
+									//TODO: Should only take one GenericTypeArguments of type IMvxViewModel
+									var viewModel = item.Key.BaseType.GenericTypeArguments.FirstOrDefault ()
+										?? item.Key.GetViewModelType ();
+
+									cache.RegisterFragmentToCache (viewModel.Name, item.Key, viewModel);
+								}
+							}
+						}
+
+						fragmentHost.Show (request, bundle);
+					});
+
+					//var intentFor = new Intent (Activity.ApplicationContext, host);
+					//base.Show (intentFor);
 
 					//TODO: Find something to wait for Activity to show, and Show fragment afterwards
 					//Show (request);
@@ -90,6 +100,27 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 			else
 				base.Show (request);
         }
+
+		private TaskCompletionSource<IMvxFragmentHost> _taskSource;
+
+		public void FragmentHostCreated (IMvxFragmentHost fragmentHost)
+		{
+			if (_taskSource != null)
+			{
+				_taskSource.SetResult (fragmentHost);
+				_taskSource = null;
+			}
+		}
+
+		private Task<IMvxFragmentHost> CreateFragmentHostAsync (Type host)
+		{
+			_taskSource = new TaskCompletionSource<IMvxFragmentHost> ();
+
+			var intentFor = new Intent (Activity.ApplicationContext, host);
+			base.Show (intentFor);
+
+			return _taskSource.Task;
+		}  
 
         public override void Close (IMvxViewModel viewModel)
         {
