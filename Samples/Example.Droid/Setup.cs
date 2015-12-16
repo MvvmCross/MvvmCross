@@ -1,11 +1,13 @@
+using System.Collections.Generic;
+using System.Reflection;
 using Android.Content;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
-using System.Reflection;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace Example.Droid
@@ -36,6 +38,10 @@ namespace Example.Droid
         {
             var customPresenter = new MvxFragmentsPresenter();
             Mvx.RegisterSingleton<IMvxFragmentsPresenter>(customPresenter);
+
+			var fragments = CreatableTypes().WithAttribute<MvxFragmentAttribute>();
+			customPresenter.RegisterFragments(fragments);
+
             return customPresenter;
         }
 

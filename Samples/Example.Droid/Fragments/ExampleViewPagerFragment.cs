@@ -8,10 +8,13 @@ using MvvmCross.Droid.Support.V7.Fragging;
 using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment]
+	[MvxFragment(
+		ParentActivityType = typeof(MainActivity)
+	)]
     [Register("example.droid.fragments.ExampleViewPagerFragment")]
     public class ExampleViewPagerFragment : BaseFragment<ExampleViewPagerViewModel>
     {

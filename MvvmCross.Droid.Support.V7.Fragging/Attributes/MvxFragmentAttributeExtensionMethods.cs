@@ -37,5 +37,32 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
             var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
             return mvxFragmentAttribute.IsCacheableFragment;
         }
+
+		public static bool HasParentActvityType(this Type fragmentType)
+		{
+			if (!fragmentType.HasMvxFragmentAttribute())
+				return false;
+
+			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+			return mvxFragmentAttribute.ParentActivityType != null;
+		}
+
+		public static Type GetViewModelType(this Type fragmentType)
+		{
+			if (!fragmentType.HasMvxFragmentAttribute())
+				return null;
+
+			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+			return mvxFragmentAttribute.ViewModelType;
+		}
+
+		public static Type GetParentActvityType(this Type fragmentType)
+		{
+			if (!fragmentType.HasMvxFragmentAttribute())
+				return null;
+
+			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+			return mvxFragmentAttribute.ParentActivityType;
+		}
     }
 }

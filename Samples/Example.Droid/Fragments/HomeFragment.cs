@@ -1,17 +1,13 @@
-﻿using System.Collections.Generic;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
-using Android.Views;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V4;
+﻿using Android.Runtime;
 using Example.Core.ViewModels;
+using Example.Droid.Activities;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment]
+	[MvxFragment(
+		ParentActivityType = typeof(MainActivity)
+	)]
     [Register("example.droid.fragments.HomeFragment")]
     public class HomeFragment : BaseFragment<HomeViewModel>
     {
