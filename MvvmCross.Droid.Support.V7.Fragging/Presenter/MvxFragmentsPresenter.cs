@@ -65,8 +65,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 				var fragmentHost = Activity as IMvxFragmentHost;
 				if(fragmentHost != null && host == fragmentHost.GetType())
 				{
-					if (fragmentHost.Show (request, bundle))
-						return;
+				    fragmentHost.Show(request, bundle);
 				}
 				else
 				{
@@ -79,7 +78,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 								foreach (var item in _fragments.Where(x => x.Value == host)) {
 
 									//TODO: Should only take one GenericTypeArguments of type IMvxViewModel
-									var viewModel = item.Key.BaseType.GenericTypeArguments.FirstOrDefault ()
+									var viewModel = item.Key.BaseType?.GenericTypeArguments.FirstOrDefault ()
 										?? item.Key.GetViewModelType ();
 
 									cache.RegisterFragmentToCache (viewModel.Name, item.Key, viewModel);
@@ -131,9 +130,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 			Type host;
 			if (frag != null && _fragments.TryGetValue (frag, out host)) {
 				var fragmentHost = Activity as IMvxFragmentHost;
-				if (fragmentHost != null && host == fragmentHost.GetType ()) {
-					if (fragmentHost.Close(viewModel))
-						return;
+				if (fragmentHost != null && host == fragmentHost.GetType ())
+				{
+				    fragmentHost.Close(viewModel);
 				}
 			}
 			else
