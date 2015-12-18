@@ -16,6 +16,7 @@ using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
 using System.Threading.Tasks;
+using Cirrious.CrossCore.Exceptions;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
@@ -42,7 +43,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 		public void RegisterFragments(IEnumerable<Type> frags)
 		{
 			foreach (var item in frags) {
-				_fragments[item] = item.GetParentActvityType();
+				//TODO: Maybe not register fragments without host here
+				//if(item.HasParentActvityType())
+					_fragments[item] = item.GetParentActvityType();
 			}
 		}
 
@@ -63,10 +66,12 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 			if(frag != null && _fragments.TryGetValue(frag, out host))
 			{
 				var fragmentHost = Activity as IMvxFragmentHost;
-				if(fragmentHost != null && host == fragmentHost.GetType())
+				if(fragmentHost != null && host != null && host == fragmentHost.GetType())
 				{
 				    fragmentHost.Show(request, bundle);
 				}
+				else if(host == null)
+					throw new MvxException("No host registered for fragment: {0}. Use the MvxFragment attribute to register it first.", frag);
 				else
 				{
 					CreateFragmentHostAsync (host).ContinueWith(t => {
