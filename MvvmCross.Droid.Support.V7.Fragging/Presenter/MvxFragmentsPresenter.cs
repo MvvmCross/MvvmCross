@@ -49,14 +49,14 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 			}
 		}
 
-        public override void Show(MvxViewModelRequest request)
-        {
+		public override void Show(MvxViewModelRequest request)
+		{
 			//if (_taskSource != null)
-				//TODO: We should wait here for tasks to finish when showing multiple fragments
+			//TODO: We should wait here for tasks to finish when showing multiple fragments
 
-            var bundle = new Bundle();
-            var serializedRequest = Serializer.Serializer.SerializeObject(request);
-            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+			var bundle = new Bundle();
+			var serializedRequest = Serializer.Serializer.SerializeObject(request);
+			bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
 			var frag = _fragments.Keys.FirstOrDefault (
 				x => x.BaseType.GenericTypeArguments.Contains (request.ViewModelType) 
@@ -68,44 +68,45 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 				var fragmentHost = Activity as IMvxFragmentHost;
 				if(fragmentHost != null && host != null && host == fragmentHost.GetType())
 				{
-				    fragmentHost.Show(request, bundle);
+					RegisterFragments (host);
+					fragmentHost.Show(request, bundle);
 				}
 				else if(host == null)
 					throw new MvxException("No host registered for fragment: {0}. Use the MvxFragment attribute to register it first.", frag);
 				else
 				{
-					//Mvx.Resolve<IMvxAndroidActivityLifetimeListener>().OnCreate(
-
 					CreateFragmentHostAsync (host).ContinueWith(t => {
 						fragmentHost = t.Result;
 
-						if (Activity is IFragmentCacheableActivity) {
-							var cache = ((IFragmentCacheableActivity)Activity).FragmentCacheConfiguration;
-							if (!cache.HasAnyFragmentsRegisteredToCache) {
-								foreach (var item in _fragments.Where(x => x.Value == host)) {
-
-									//TODO: Should only take one GenericTypeArguments of type IMvxViewModel
-									var viewModel = item.Key.BaseType?.GenericTypeArguments.FirstOrDefault ()
-										?? item.Key.GetViewModelType ();
-
-									cache.RegisterFragmentToCache (viewModel.Name, item.Key, viewModel);
-								}
-							}
-						}
-
+						RegisterFragments (host);
 						fragmentHost.Show (request, bundle);
 					});
 
+					//TODO: Find something to wait for Activity to show, and Show fragment afterwards
 					//var intentFor = new Intent (Activity.ApplicationContext, host);
 					//base.Show (intentFor);
-
-					//TODO: Find something to wait for Activity to show, and Show fragment afterwards
-					//Show (request);
 				}
 			}
 			else
 				base.Show (request);
-        }
+		}
+
+		private void RegisterFragments(Type host)
+		{
+			if (Activity is IFragmentCacheableActivity) {
+				var cache = ((IFragmentCacheableActivity)Activity).FragmentCacheConfiguration;
+				if (!cache.HasAnyFragmentsRegisteredToCache) {
+					foreach (var item in _fragments.Where(x => x.Value == host)) {
+
+						//TODO: Should only take one GenericTypeArguments of type IMvxViewModel
+						var viewModel = item.Key.BaseType?.GenericTypeArguments.FirstOrDefault ()
+							?? item.Key.GetViewModelType ();
+
+						cache.RegisterFragmentToCache (viewModel.Name, item.Key, viewModel);
+					}
+				}
+			}			
+		}
 
 		private TaskCompletionSource<IMvxFragmentHost> _taskSource;
 
