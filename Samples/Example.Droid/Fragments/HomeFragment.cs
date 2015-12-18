@@ -6,7 +6,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 namespace Example.Droid.Fragments
 {
 	[MvxFragment(
-		ParentActivityType = typeof(MainActivity)
+		ParentType = typeof(MainActivity)
 	)]
     [Register("example.droid.fragments.HomeFragment")]
     public class HomeFragment : BaseFragment<HomeViewModel>

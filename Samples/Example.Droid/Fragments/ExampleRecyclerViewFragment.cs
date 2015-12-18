@@ -15,7 +15,7 @@ using Example.Droid.Activities;
 namespace Example.Droid.Fragments
 {
 	[MvxFragment(
-		ParentActivityType = typeof(MainActivity)
+		ParentType = typeof(MainActivity)
 	)]
     [Register("example.droid.fragments.ExampleRecyclerViewFragment")]
     public class ExampleRecyclerViewFragment : BaseFragment<ExampleRecyclerViewModel>

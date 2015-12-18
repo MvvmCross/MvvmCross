@@ -221,6 +221,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             OnFragmentChanging(fragInfo, ft);
             ft.Commit();
+
+			//TODO: manager crashes sometimes
             SupportFragmentManager.ExecutePendingTransactions();
             OnFragmentChanged(fragInfo);
         }

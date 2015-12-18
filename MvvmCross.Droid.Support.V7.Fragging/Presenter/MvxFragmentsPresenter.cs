@@ -74,6 +74,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 					throw new MvxException("No host registered for fragment: {0}. Use the MvxFragment attribute to register it first.", frag);
 				else
 				{
+					//Mvx.Resolve<IMvxAndroidActivityLifetimeListener>().OnCreate(
+
 					CreateFragmentHostAsync (host).ContinueWith(t => {
 						fragmentHost = t.Result;
 

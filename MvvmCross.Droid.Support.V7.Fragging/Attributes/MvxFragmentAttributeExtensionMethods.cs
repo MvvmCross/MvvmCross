@@ -44,7 +44,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 				return false;
 
 			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
-			return mvxFragmentAttribute.ParentActivityType != null;
+			return mvxFragmentAttribute.ParentType != null;
 		}
 
 		public static Type GetViewModelType(this Type fragmentType)
@@ -62,7 +62,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 				return null;
 
 			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
-			return mvxFragmentAttribute.ParentActivityType;
+			return mvxFragmentAttribute.ParentType;
 		}
     }
 }

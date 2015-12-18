@@ -33,5 +33,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 		/// TODO: Maybe support setting ViewModel which opens parent Activity as parent
 		/// </summary>
 		public Type ParentType { get; set; }
+
+		//TODO: AddToBackStack
+		//contentId
+		//
     }
 }
