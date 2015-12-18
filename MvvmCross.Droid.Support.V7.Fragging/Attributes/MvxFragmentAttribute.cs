@@ -30,7 +30,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 
 		/// <summary>
 		/// Use to present fragment on a parent activity of type IMvxFragmentHost
+		/// TODO: Maybe support setting ViewModel which opens parent Activity as parent
 		/// </summary>
-		public Type ParentActivityType { get; set; }
+		public Type ParentType { get; set; }
     }
 }
