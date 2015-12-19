@@ -15,6 +15,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Views;
     using Android.Widget;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Droid.BindingContext;
     using MvvmCross.Platform;
 

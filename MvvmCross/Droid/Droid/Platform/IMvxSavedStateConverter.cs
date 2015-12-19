@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Platform
+namespace MvvmCross.Droid.Platform
 {
+    using Android.OS;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxSavedStateConverter
     {
         IMvxBundle Read(Bundle bundle);

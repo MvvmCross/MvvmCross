@@ -9,6 +9,8 @@ namespace MvvmCross.Console.Views
 {
     using System;
 
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
 

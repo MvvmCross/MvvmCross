@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Droid.Views.Lists
     using Android.Views;
 
     using MvvmCross.AutoView.Droid.Interfaces.Lists;
+    using MvvmCross.Binding.Droid.BindingContext;
 
     public class GeneralListItemViewFactory
         : IMvxLayoutListItemViewFactory

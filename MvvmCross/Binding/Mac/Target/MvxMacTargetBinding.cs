@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Binding.Mac.Target
 {
+    using MvvmCross.Binding.Bindings.Target;
+
     public abstract class MvxMacTargetBinding : MvxConvertingTargetBinding
     {
         protected MvxMacTargetBinding(object view)

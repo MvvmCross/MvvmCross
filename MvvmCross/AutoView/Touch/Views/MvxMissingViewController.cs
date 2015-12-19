@@ -13,6 +13,8 @@ namespace MvvmCross.AutoView.Touch.Views
 
     using MvvmCross.AutoView.ExtensionMethods;
     using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Dialog.Touch;
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
 

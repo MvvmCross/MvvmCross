@@ -5,14 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using Android.OS;
+    using Android.Views;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Droid.Platform;
+    using MvvmCross.Platform;
+
     public abstract class MvxSplashScreenActivity
         : MvxActivity
           , IMvxAndroidSplashScreenActivity
@@ -29,7 +30,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected MvxSplashScreenActivity(int resourceId = NoContent)
         {
-            _resourceId = resourceId;
+            this._resourceId = resourceId;
         }
 
         protected virtual void RequestWindowFeatures()
@@ -39,19 +40,19 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void OnCreate(Bundle bundle)
         {
-            RequestWindowFeatures();
+            this.RequestWindowFeatures();
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeFromSplashScreen(this);
 
             base.OnCreate(bundle);
 
-            if (_resourceId != NoContent)
+            if (this._resourceId != NoContent)
             {
                 // Set our view from the "splash" layout resource
                 // Be careful to use non-binding inflation
-                var content = LayoutInflater.Inflate(_resourceId, null);
-                SetContentView(content);
+                var content = LayoutInflater.Inflate(this._resourceId, null);
+                this.SetContentView(content);
             }
         }
 
@@ -60,14 +61,14 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void OnResume()
         {
             base.OnResume();
-            _isResumed = true;
+            this._isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeFromSplashScreen(this);
         }
 
         protected override void OnPause()
         {
-            _isResumed = false;
+            this._isResumed = false;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.RemoveSplashScreen(this);
             base.OnPause();
@@ -75,10 +76,10 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void InitializationComplete()
         {
-            if (!_isResumed)
+            if (!this._isResumed)
                 return;
 
-            TriggerFirstNavigate();
+            this.TriggerFirstNavigate();
         }
 
         protected virtual void TriggerFirstNavigate()

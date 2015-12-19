@@ -17,6 +17,9 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.BindingContext;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {

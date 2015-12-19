@@ -11,6 +11,7 @@ namespace MvvmCross.Test.ViewModels
     using System.Windows.Input;
 
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

@@ -16,6 +16,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
+    using MvvmCross.Binding.Attributes;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxGridView")]
     public class MvxGridView
         : GridView

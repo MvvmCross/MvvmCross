@@ -16,6 +16,7 @@ namespace MvvmCross.AutoView.Droid
     using MvvmCross.AutoView.Droid.Builders;
     using MvvmCross.AutoView.Droid.Views;
     using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
 #warning Factor out a base class shared across platfroms (can use Generics)

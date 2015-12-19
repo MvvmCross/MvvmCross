@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Simple
+namespace MvvmCross.Droid.Simple
 {
+    using MvvmCross.Core.ViewModels;
+
     public class MvxSimpleEmptyAndroidApp : MvxApplication
     {
     }

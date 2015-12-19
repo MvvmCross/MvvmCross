@@ -17,6 +17,7 @@ namespace MvvmCross.Binding.Droid.Views
 
     using Java.Lang;
 
+    using MvvmCross.Platform.Droid;
     using MvvmCross.Platform.Platform;
 
     public class MvxFilteringAdapter

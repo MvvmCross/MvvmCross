@@ -11,6 +11,8 @@ namespace MvvmCross.Binding.Touch.Views
 
     using Foundation;
 
+    using MvvmCross.Binding.Views;
+
     using UIKit;
 
     public class MvxImageViewLoader

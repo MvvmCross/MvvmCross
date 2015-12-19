@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Platform;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using Android.App;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Droid.Platform;
+    using MvvmCross.Platform.Droid.Platform;
+
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible
@@ -27,27 +28,27 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void OnCreate(Activity activity)
         {
-            _createdActivityCount++;
-            if (_createdActivityCount == 1)
+            this._createdActivityCount++;
+            if (this._createdActivityCount == 1)
             {
                 FireLifetimeChange(MvxLifetimeEvent.ActivatedFromDisk);
             }
-            Activity = activity;
+            this.Activity = activity;
         }
 
         public virtual void OnStart(Activity activity)
         {
-            Activity = activity;
+            this.Activity = activity;
         }
 
         public virtual void OnRestart(Activity activity)
         {
-            Activity = activity;
+            this.Activity = activity;
         }
 
         public virtual void OnResume(Activity activity)
         {
-            Activity = activity;
+            this.Activity = activity;
         }
 
         public virtual void OnPause(Activity activity)
@@ -62,11 +63,11 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void OnDestroy(Activity activity)
         {
-            if (Activity == activity)
-                Activity = null;
+            if (this.Activity == activity)
+                this.Activity = null;
 
-            _createdActivityCount--;
-            if (_createdActivityCount == 0)
+            this._createdActivityCount--;
+            if (this._createdActivityCount == 0)
             {
                 FireLifetimeChange(MvxLifetimeEvent.Closing);
             }
@@ -74,7 +75,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void OnViewNewIntent(Activity activity)
         {
-            Activity = activity;
+            this.Activity = activity;
         }
 
         #endregion IMvxAndroidActivityLifetimeListener Members

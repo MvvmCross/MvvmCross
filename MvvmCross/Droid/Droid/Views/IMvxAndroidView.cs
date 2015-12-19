@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform.Droid.Views;
+
     public interface IMvxAndroidView
         : IMvxView
         , IMvxLayoutInflaterHolder

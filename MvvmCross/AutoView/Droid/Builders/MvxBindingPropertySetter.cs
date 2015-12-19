@@ -11,6 +11,9 @@ namespace MvvmCross.AutoView.Droid.Builders
 
     using CrossUI.Core.Builder;
 
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Droid.BindingContext;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;

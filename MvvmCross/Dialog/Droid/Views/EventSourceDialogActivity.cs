@@ -16,6 +16,7 @@ namespace MvvmCross.Dialog.Droid.Views
     using CrossUI.Droid.Dialog;
 
     using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Droid.Views;
 
     public abstract class EventSourceDialogActivity
         : DialogActivity

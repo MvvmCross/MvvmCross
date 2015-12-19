@@ -17,16 +17,17 @@ using Windows.UI.Xaml.Media;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
-// ReSharper restore CheckNamespace
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
 {
     using System;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Media;
 
-    using global::MvvmCross.Platform.Platform;
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Binding.ExtensionMethods;
+    using MvvmCross.Platform.Platform;
 
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
@@ -58,7 +59,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 
         public override void SubscribeToEvents()
         {
-            var frameworkElement = Target as FrameworkElement;
+            var frameworkElement = this.Target as FrameworkElement;
             if (frameworkElement == null)
                 return;
 
@@ -77,7 +78,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
                 "ListenAttached" + this._targetName + Guid.NewGuid().ToString("N")
                 , typeof(object)
                 , typeof(FrameworkElement)
-                , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
+                , new PropertyMetadata(null, (s, e) => this.FireValueChanged(e.NewValue)));
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
@@ -88,7 +89,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
 
         protected virtual object GetValueByReflection()
         {
-            var target = Target as FrameworkElement;
+            var target = this.Target as FrameworkElement;
             if (target == null)
             {
                 MvxBindingTrace.Warning("Weak Target is null in {0} - skipping Get", this.GetType().Name);

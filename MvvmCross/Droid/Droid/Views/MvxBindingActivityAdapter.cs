@@ -5,15 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using Android.OS;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Droid.Views;
+
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {
@@ -34,19 +36,19 @@ namespace Cirrious.MvvmCross.Droid.Views
         protected override void EventSourceOnCreateWillBeCalled(object sender,
                                                                 MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
-            BindingContext.ClearAllBindings();
+            this.BindingContext.ClearAllBindings();
             base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            BindingContext.ClearAllBindings();
+            this.BindingContext.ClearAllBindings();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            BindingContext.ClearAllBindings();
+            this.BindingContext.ClearAllBindings();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

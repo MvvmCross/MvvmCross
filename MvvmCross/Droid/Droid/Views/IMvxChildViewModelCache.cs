@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxChildViewModelCache
     {
         int Cache(IMvxViewModel viewModel);

@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
+
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding
     {

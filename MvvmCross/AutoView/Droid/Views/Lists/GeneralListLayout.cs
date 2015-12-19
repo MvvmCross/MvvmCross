@@ -18,6 +18,7 @@ namespace MvvmCross.AutoView.Droid.Views.Lists
     using CrossUI.Core.Elements.Lists;
 
     using MvvmCross.AutoView.Droid.Interfaces.Lists;
+    using MvvmCross.Binding.Droid.Views;
     using MvvmCross.Platform.Exceptions;
 
     public class GeneralListLayout : IListLayout

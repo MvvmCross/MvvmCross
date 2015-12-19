@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using Android.App;
+    using Android.Content;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Droid.Platform;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAndroidViewPresenter
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {
@@ -22,13 +23,13 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var intent = CreateIntentForRequest(request);
+            var intent = this.CreateIntentForRequest(request);
             Show(intent);
         }
 
         protected virtual void Show(Intent intent)
         {
-            var activity = Activity;
+            var activity = this.Activity;
             if (activity == null)
             {
                 MvxTrace.Warning("Cannot Resolve current top activity");
@@ -50,7 +51,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             if (hint is MvxClosePresentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -59,7 +60,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual void Close(IMvxViewModel viewModel)
         {
-            var activity = Activity;
+            var activity = this.Activity;
 
             var currentView = activity as IMvxView;
 

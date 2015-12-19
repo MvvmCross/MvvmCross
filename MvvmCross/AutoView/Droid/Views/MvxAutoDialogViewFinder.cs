@@ -11,6 +11,7 @@ namespace MvvmCross.AutoView.Droid.Views
 
     using MvvmCross.AutoView.Droid.Views.Dialog;
     using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
     public class MvxAutoDialogViewFinder : IMvxViewFinder

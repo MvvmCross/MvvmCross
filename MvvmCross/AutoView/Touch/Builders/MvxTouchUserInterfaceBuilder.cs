@@ -10,6 +10,8 @@ namespace MvvmCross.AutoView.Touch.Builders
     using CrossUI.Core.Builder;
     using CrossUI.Touch.Builder;
 
+    using MvvmCross.Touch.Views;
+
     public class MvxTouchUserInterfaceBuilder
         : TouchUserInterfaceBuilder
     {

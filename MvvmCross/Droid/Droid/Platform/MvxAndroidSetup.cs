@@ -5,31 +5,33 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Binders;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Cirrious.MvvmCross.Droid.Platform
+namespace MvvmCross.Droid.Platform
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using Android.Content;
+    using Android.Views;
+
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Binding.Droid;
+    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Droid.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Droid;
+    using MvvmCross.Platform.Droid.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+
     public abstract class MvxAndroidSetup
         : MvxSetup
           , IMvxAndroidGlobals
@@ -38,16 +40,16 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected MvxAndroidSetup(Context applicationContext)
         {
-            _applicationContext = applicationContext;
+            this._applicationContext = applicationContext;
         }
 
         #region IMvxAndroidGlobals Members
 
-        public virtual string ExecutableNamespace => GetType().Namespace;
+        public virtual string ExecutableNamespace => this.GetType().Namespace;
 
-        public virtual Assembly ExecutableAssembly => GetType().Assembly;
+        public virtual Assembly ExecutableAssembly => this.GetType().Assembly;
 
-        public Context ApplicationContext => _applicationContext;
+        public Context ApplicationContext => this._applicationContext;
 
         #endregion IMvxAndroidGlobals Members
 
@@ -63,7 +65,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override void InitializePlatformServices()
         {
-            InitializeLifetimeMonitor();
+            this.InitializeLifetimeMonitor();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
@@ -80,7 +82,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void InitializeLifetimeMonitor()
         {
-            var lifetimeMonitor = CreateLifetimeMonitor();
+            var lifetimeMonitor = this.CreateLifetimeMonitor();
             Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
             Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
             Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
@@ -93,7 +95,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void InitializeSavedStateConverter()
         {
-            var converter = CreateSavedStateConverter();
+            var converter = this.CreateSavedStateConverter();
             Mvx.RegisterSingleton(converter);
         }
 
@@ -104,7 +106,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateViewsContainer(_applicationContext);
+            var container = this.CreateViewsContainer(this._applicationContext);
             Mvx.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
             Mvx.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;
@@ -120,16 +122,16 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            var presenter = CreateViewPresenter();
+            var presenter = this.CreateViewPresenter();
             return new MvxAndroidViewDispatcher(presenter);
         }
 
         protected override void InitializeLastChance()
         {
-            InitializeSavedStateConverter();
+            this.InitializeSavedStateConverter();
 
             Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
-            InitializeBindingBuilder();
+            this.InitializeBindingBuilder();
             base.InitializeLastChance();
         }
 
@@ -140,8 +142,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void InitializeBindingBuilder()
         {
-            var bindingBuilder = CreateBindingBuilder();
-            RegisterBindingBuilderCallbacks();
+            var bindingBuilder = this.CreateBindingBuilder();
+            this.RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
         }
 
@@ -163,7 +165,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
         {
-            foreach (var assembly in AndroidViewAssemblies)
+            foreach (var assembly in this.AndroidViewAssemblies)
             {
                 cache.AddAssembly(assembly);
             }
@@ -184,7 +186,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void FillNamespaceListViewTypeResolver(IMvxNamespaceListViewTypeResolver viewTypeResolver)
         {
-            foreach (var viewNamespace in ViewNamespaces)
+            foreach (var viewNamespace in this.ViewNamespaces)
             {
                 viewTypeResolver.Add(viewNamespace);
             }
@@ -192,8 +194,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.Fill(ValueConverterAssemblies);
-            registry.Fill(ValueConverterHolders);
+            registry.Fill(this.ValueConverterAssemblies);
+            registry.Fill(this.ValueConverterHolders);
         }
 
         protected virtual IEnumerable<Type> ValueConverterHolders => new List<Type>();
@@ -211,7 +213,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            {"Mvx", "Cirrious.MvvmCross.Binding.Droid.Views"}
+            {"Mvx", "MvvmCross.Binding.Droid.Views"}
         };
 
         protected virtual IEnumerable<string> ViewNamespaces => new List<string>
@@ -219,13 +221,13 @@ namespace Cirrious.MvvmCross.Droid.Platform
             "Android.Views",
             "Android.Widget",
             "Android.Webkit",
-            "Cirrious.MvvmCross.Binding.Droid.Views",
+            "MvvmCross.Binding.Droid.Views",
         };
 
         protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()
         {
             typeof (Android.Views.View).Assembly,
-            typeof (Cirrious.MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
+            typeof (MvvmCross.Binding.Droid.Views.MvxDatePicker).Assembly,
             this.GetType().Assembly,
         };
 

@@ -18,6 +18,8 @@ namespace MvvmCross.Binding.Mac.Target
 
     using global::MvvmCross.Platform.Platform;
 
+    using MvvmCross.Binding.Bindings.Target;
+
     public class MvxNSSliderValueTargetBinding : MvxPropertyInfoTargetBinding<NSSlider>
     {
         public MvxNSSliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)

@@ -10,6 +10,7 @@ namespace MvvmCross.Test.Platform
     using System;
 
     using MvvmCross.Core.Platform;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

@@ -5,18 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Util;
-using Cirrious.CrossCore.Platform;
-using System;
-using System.Diagnostics;
-
-namespace Cirrious.MvvmCross.Droid.Platform
+namespace MvvmCross.Droid.Platform
 {
+    using System;
+    using System.Diagnostics;
+
+    using Android.Util;
+
+    using MvvmCross.Platform.Platform;
+
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            Trace(level, tag, message());
+            this.Trace(level, tag, message());
         }
 
         public void Trace(MvxTraceLevel level, string tag, string message)
@@ -34,8 +36,8 @@ namespace Cirrious.MvvmCross.Droid.Platform
             }
             catch (FormatException)
             {
-                Trace(MvxTraceLevel.Error, tag, "Exception during trace");
-                Trace(level, tag, message);
+                this.Trace(MvxTraceLevel.Error, tag, "Exception during trace");
+                this.Trace(level, tag, message);
             }
         }
     }

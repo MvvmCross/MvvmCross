@@ -10,6 +10,7 @@ namespace MvvmCross.Console.Views
     using System;
     using System.Collections.Generic;
 
+    using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;

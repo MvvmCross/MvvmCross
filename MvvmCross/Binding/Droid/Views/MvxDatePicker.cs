@@ -14,6 +14,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
+    using MvvmCross.Platform.Droid.Platform;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker
         : DatePicker

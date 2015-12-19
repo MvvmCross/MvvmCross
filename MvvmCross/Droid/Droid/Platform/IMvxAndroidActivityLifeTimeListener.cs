@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-
-namespace Cirrious.MvvmCross.Droid.Platform
+namespace MvvmCross.Droid.Platform
 {
+    using Android.App;
+
     public interface IMvxAndroidActivityLifetimeListener
     {
         void OnCreate(Activity activity);

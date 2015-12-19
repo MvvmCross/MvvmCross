@@ -12,6 +12,8 @@ namespace MvvmCross.AutoView.Touch.Views.Lists
     using Foundation;
 
     using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;
 
     using UIKit;

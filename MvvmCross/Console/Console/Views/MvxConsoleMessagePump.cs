@@ -8,6 +8,7 @@
 namespace MvvmCross.Console.Views
 {
     using MvvmCross.Console.Platform;
+    using MvvmCross.Core.Views;
 
     public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     {

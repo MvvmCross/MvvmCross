@@ -7,6 +7,7 @@
 
 namespace MvvmCross.Binding.Touch.Views
 {
+    using MvvmCross.Binding.BindingContext;
     using MvvmCross.Platform.Core;
 
     public interface IMvxBindable

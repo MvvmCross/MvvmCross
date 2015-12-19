@@ -13,6 +13,8 @@ namespace MvvmCross.Binding.Droid.Binders
     using Android.Util;
     using Android.Views;
 
+    using MvvmCross.Binding.Bindings;
+
     public interface IMvxLayoutInflaterHolderFactory : IMvxLayoutInflaterFactory
     {
         IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }

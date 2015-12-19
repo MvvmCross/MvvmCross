@@ -18,6 +18,8 @@ namespace MvvmCross.Binding.Mac.Target
 
     using global::MvvmCross.Platform.Platform;
 
+    using MvvmCross.Binding.Bindings.Target;
+
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)

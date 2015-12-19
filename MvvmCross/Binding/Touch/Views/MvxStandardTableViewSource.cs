@@ -12,6 +12,9 @@ namespace MvvmCross.Binding.Touch.Views
 
     using Foundation;
 
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Bindings.SourceSteps;
     using MvvmCross.Platform;
 
     using UIKit;

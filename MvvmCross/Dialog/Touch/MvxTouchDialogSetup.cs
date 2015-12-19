@@ -11,6 +11,8 @@ namespace MvvmCross.Dialog.Touch
 
     using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Dialog.Touch.Target;
+    using MvvmCross.Touch.Platform;
+    using MvvmCross.Touch.Views.Presenters;
 
     using UIKit;
 

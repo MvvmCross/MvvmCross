@@ -11,6 +11,8 @@ namespace MvvmCross.Binding.Mac.Target
 
     using global::MvvmCross.Platform.Platform;
 
+    using MvvmCross.Binding.Bindings.Target;
+
     public class MvxNSSegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
     {
         private bool _subscribed;

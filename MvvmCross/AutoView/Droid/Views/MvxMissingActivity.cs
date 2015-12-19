@@ -13,6 +13,8 @@ namespace MvvmCross.AutoView.Droid.Views
 
     using MvvmCross.AutoView.Droid.Interfaces;
     using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Dialog.Droid.Views;
     using MvvmCross.Platform.IoC;
 
     [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.MvxMissingActivity")]

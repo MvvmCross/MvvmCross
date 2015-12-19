@@ -12,7 +12,14 @@ namespace MvvmCross.Binding.Test.Bindings
 
     using Moq;
 
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Bindings.Source;
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Platform.Converters;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

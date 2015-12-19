@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System.Collections.Generic;
+
     public interface IMvxChildViewModelOwner
     {
         List<int> OwnedSubViewModelIndicies { get; }

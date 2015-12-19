@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Text;
 
+    using MvvmCross.Binding.Parse.Binding;
+    using MvvmCross.Binding.Parse.Binding.Swiss;
     using MvvmCross.Platform.Platform;
 
     using NUnit.Framework;

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Views;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using MvvmCross.Core.Views;
+
     public interface IMvxAndroidViewPresenter
         : IMvxViewPresenter
     {

@@ -8,6 +8,7 @@
 namespace MvvmCross.AutoView.Droid.Interfaces
 {
     using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Droid.Views;
 
     public interface IMvxAndroidAutoView
         : IMvxAndroidView

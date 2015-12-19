@@ -9,6 +9,8 @@ namespace MvvmCross.Binding.Droid.BindingContext
 {
     using Android.Views;
 
+    using MvvmCross.Binding.BindingContext;
+
     public static class MvxBindingContextOwnerExtensions
     {
         public static View BindingInflate(this IMvxBindingContextOwner owner, int resourceId, ViewGroup viewGroup)

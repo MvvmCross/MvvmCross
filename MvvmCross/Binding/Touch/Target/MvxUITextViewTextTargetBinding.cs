@@ -9,6 +9,7 @@ namespace MvvmCross.Binding.Touch.Target
 {
     using System;
 
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform.Platform;
 
     using UIKit;

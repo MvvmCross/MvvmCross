@@ -13,6 +13,8 @@ namespace MvvmCross.Binding.Touch.Views
 
     using Foundation;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform;
     using MvvmCross.Platform.WeakSubscription;
 

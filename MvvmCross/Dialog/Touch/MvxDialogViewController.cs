@@ -15,6 +15,7 @@ namespace MvvmCross.Dialog.Touch
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Touch.Views;
 
     using UIKit;
 

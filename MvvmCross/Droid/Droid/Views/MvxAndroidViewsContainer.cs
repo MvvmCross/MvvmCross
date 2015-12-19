@@ -5,16 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
          , IMvxAndroidViewsContainer
@@ -26,7 +28,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public MvxAndroidViewsContainer(Context applicationContext)
         {
-            _applicationContext = applicationContext;
+            this._applicationContext = applicationContext;
         }
 
         #region Implementation of IMvxAndroidViewModelRequestTranslator
@@ -47,29 +49,29 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (intent.Action == Intent.ActionMain)
             {
                 MvxTrace.Trace("Creating ViewModel for ActionMain");
-                return DirectLoad(savedState, viewModelTypeHint);
+                return this.DirectLoad(savedState, viewModelTypeHint);
             }
 
             if (intent.Extras == null)
             {
                 MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
-                return DirectLoad(savedState, viewModelTypeHint);
+                return this.DirectLoad(savedState, viewModelTypeHint);
             }
 
             IMvxViewModel mvxViewModel;
-            if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
+            if (this.TryGetEmbeddedViewModel(intent, out mvxViewModel))
             {
                 MvxTrace.Trace("Embedded ViewModel used");
                 return mvxViewModel;
             }
 
             MvxTrace.Trace("Attempting to load new ViewModel from Intent with Extras");
-            var toReturn = CreateViewModelFromIntent(intent, savedState);
+            var toReturn = this.CreateViewModelFromIntent(intent, savedState);
             if (toReturn != null)
                 return toReturn;
 
             MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
-            return DirectLoad(savedState, viewModelTypeHint);
+            return this.DirectLoad(savedState, viewModelTypeHint);
         }
 
         protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
@@ -95,7 +97,7 @@ namespace Cirrious.MvvmCross.Droid.Views
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var viewModelRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(extraData);
 
-            return ViewModelFromRequest(viewModelRequest, savedState);
+            return this.ViewModelFromRequest(viewModelRequest, savedState);
         }
 
         protected virtual IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
@@ -130,10 +132,10 @@ namespace Cirrious.MvvmCross.Droid.Views
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
 
-            var intent = new Intent(_applicationContext, viewType);
+            var intent = new Intent(this._applicationContext, viewType);
             intent.PutExtra(ExtrasKey, requestText);
 
-            AdjustIntentForPresentation(intent, request);
+            this.AdjustIntentForPresentation(intent, request);
 
             return intent;
         }
@@ -151,7 +153,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         public virtual Tuple<Intent, int> GetIntentWithKeyFor(IMvxViewModel viewModel)
         {
             var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
-            var intent = GetIntentFor(request);
+            var intent = this.GetIntentFor(request);
 
             var key = Mvx.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
             intent.PutExtra(SubViewModelKey, key);

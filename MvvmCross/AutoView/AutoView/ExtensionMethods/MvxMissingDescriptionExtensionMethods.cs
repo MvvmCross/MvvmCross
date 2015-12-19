@@ -8,11 +8,13 @@
 namespace MvvmCross.AutoView.ExtensionMethods
 {
     using System.Collections;
+    using System.Reflection;
     using System.Windows.Input;
 
     using CrossUI.Core.Descriptions.Dialog;
 
     using MvvmCross.AutoView.Auto.Dialog;
+    using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
 
     public static class MvxMissingDescriptionExtensionMethods

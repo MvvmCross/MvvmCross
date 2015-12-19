@@ -15,6 +15,10 @@ namespace MvvmCross.AutoView.Droid.Views.Lists
     using MvvmCross.AutoView.Droid.ExtensionMethods;
     using MvvmCross.AutoView.Droid.Interfaces;
     using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Droid.Views;
     using MvvmCross.Platform.IoC;
 
     [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.lists.MvxAutoListActivity")]

@@ -11,6 +11,7 @@ namespace MvvmCross.AutoView.Touch.Views
 
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.AutoView.Touch.Views.Lists;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
     public class MvxAutoListViewFinder : IMvxViewFinder

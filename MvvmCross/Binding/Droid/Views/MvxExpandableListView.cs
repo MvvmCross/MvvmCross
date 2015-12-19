@@ -9,6 +9,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
+    using MvvmCross.Binding.Attributes;
+
     [Register("cirrious.mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {

@@ -8,6 +8,8 @@
 namespace MvvmCross.AutoView.Touch.Interfaces
 {
     using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Touch.Views;
 
     public interface IMvxTouchAutoView
         : IMvxTouchView

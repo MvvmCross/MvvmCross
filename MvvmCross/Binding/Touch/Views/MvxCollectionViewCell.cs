@@ -12,6 +12,9 @@ namespace MvvmCross.Binding.Touch.Views
 
     using CoreGraphics;
 
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings;
+
     using UIKit;
 
     public class MvxCollectionViewCell

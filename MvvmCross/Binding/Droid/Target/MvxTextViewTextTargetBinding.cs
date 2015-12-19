@@ -12,6 +12,7 @@ namespace MvvmCross.Binding.Droid.Target
     using Android.Text;
     using Android.Widget;
 
+    using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform.Platform;
 
     public class MvxTextViewTextTargetBinding

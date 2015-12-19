@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Touch.Builders
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Touch.Views;
 
     public class MvxTouchUserInterfaceFactory
         : IMvxUserInterfaceFactory
