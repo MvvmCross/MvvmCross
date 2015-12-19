@@ -13,7 +13,13 @@ namespace MvvmCross.Binding.Test.Binders
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Combiners;
+    using MvvmCross.Binding.Parse.PropertyPath;
     using MvvmCross.Platform.Converters;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

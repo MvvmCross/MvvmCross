@@ -13,6 +13,8 @@ namespace MvvmCross.AutoView.Touch.Views.Lists
 
     using Foundation;
 
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Touch.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Platform;

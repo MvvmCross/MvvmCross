@@ -8,6 +8,10 @@
 namespace MvvmCross.Binding.Test.Parse.Binding.Lang
 {
     using System.Collections.Generic;
+    using System.Linq;
+
+    using MvvmCross.Binding.Parse.Binding;
+    using MvvmCross.Binding.Parse.Binding.Lang;
 
     using NUnit.Framework;
 

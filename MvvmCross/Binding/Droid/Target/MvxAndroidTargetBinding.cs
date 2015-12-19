@@ -7,7 +7,9 @@
 
 namespace MvvmCross.Binding.Droid.Target
 {
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform;
+    using MvvmCross.Platform.Droid;
 
     public abstract class MvxAndroidTargetBinding
         : MvxConvertingTargetBinding

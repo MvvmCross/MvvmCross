@@ -8,6 +8,9 @@
 namespace MvvmCross.Console.Platform
 {
     using MvvmCross.Console.Views;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
@@ -20,7 +23,7 @@ namespace MvvmCross.Console.Platform
             return new MvxDebugTrace();
         }
 
-        protected override ViewModels.IMvxNameMapping CreateViewToViewModelNaming()
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View");
         }

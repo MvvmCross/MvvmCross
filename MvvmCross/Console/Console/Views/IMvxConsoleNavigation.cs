@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Console.Views
 {
+    using MvvmCross.Core.Views;
+
     public interface IMvxConsoleNavigation
         : IMvxViewPresenter
     {

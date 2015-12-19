@@ -9,6 +9,9 @@ namespace MvvmCross.Binding.Touch
 {
     using System;
 
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Binding.Touch.Target;
     using MvvmCross.Binding.Touch.ValueConverters;
     using MvvmCross.Binding.Touch.Views;

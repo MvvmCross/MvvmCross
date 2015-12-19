@@ -11,6 +11,8 @@ namespace MvvmCross.Binding.Droid.Views
 
     using Android.Widget;
 
+    using MvvmCross.Binding.Attributes;
+
     public interface IMvxAdapter
         : ISpinnerAdapter
         , IListAdapter

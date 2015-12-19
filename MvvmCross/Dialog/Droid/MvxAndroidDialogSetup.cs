@@ -17,6 +17,7 @@ namespace MvvmCross.Dialog.Droid
     using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Binding.Droid.ResourceHelpers;
     using MvvmCross.Dialog.Droid.Target;
+    using MvvmCross.Droid.Platform;
     using MvvmCross.Platform;
 
     public abstract class MvxAndroidDialogSetup

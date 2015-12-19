@@ -15,9 +15,9 @@ using Windows.UI.Xaml;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System;
     using System.ComponentModel;

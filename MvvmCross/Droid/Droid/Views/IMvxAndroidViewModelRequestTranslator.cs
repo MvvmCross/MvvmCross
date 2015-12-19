@@ -5,12 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxAndroidViewModelRequestTranslator
     {
         Intent GetIntentFor(MvxViewModelRequest request);

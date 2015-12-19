@@ -10,6 +10,7 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
     using System;
 
     using MvvmCross.Platform;
+    using MvvmCross.Platform.Droid;
     using MvvmCross.Platform.Exceptions;
 
     public class MvxAppResourceTypeFinder : IMvxAppResourceTypeFinder

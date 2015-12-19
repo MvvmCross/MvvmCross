@@ -12,6 +12,7 @@ namespace MvvmCross.Test.Parse
     using MvvmCross.Core.Parse.StringDictionary;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
+    using MvvmCross.Test.Core;
     using MvvmCross.Test.Mocks.TestViewModels;
 
     using NUnit.Framework;

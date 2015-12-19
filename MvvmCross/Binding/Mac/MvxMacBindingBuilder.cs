@@ -17,6 +17,8 @@ namespace MvvmCross.Binding.Mac
 
     using global::MvvmCross.Platform.Converters;
 
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Binding.Mac.Target;
 
     public class MvxMacBindingBuilder

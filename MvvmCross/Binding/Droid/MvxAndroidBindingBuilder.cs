@@ -11,6 +11,8 @@ namespace MvvmCross.Binding.Droid
     using Android.Views;
     using Android.Widget;
 
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Binding.Droid.Binders;
     using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
     using MvvmCross.Binding.Droid.BindingContext;

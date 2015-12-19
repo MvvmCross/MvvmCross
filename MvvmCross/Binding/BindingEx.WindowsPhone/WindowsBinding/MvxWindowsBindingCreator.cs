@@ -28,9 +28,9 @@ using Windows.UI.Xaml.Media;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone.WindowsBinding
+
 {
     using System;
     using System.Collections.Generic;
@@ -38,6 +38,9 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding
     using System.Windows.Data;
     using System.Windows.Media;
 
+    using global::MvvmCross.Binding;
+    using global::MvvmCross.Binding.Bindings;
+    using global::MvvmCross.Binding.Bindings.SourceSteps;
     using global::MvvmCross.Platform;
     using global::MvvmCross.Platform.Converters;
     using global::MvvmCross.Platform.WindowsPhone.Converters;

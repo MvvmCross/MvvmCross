@@ -15,6 +15,7 @@ namespace MvvmCross.AutoView.Touch.Views.Lists
     using CrossUI.Core.Elements.Lists;
 
     using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Binding.Touch.Views;
     using MvvmCross.Platform.Exceptions;
 
     using UIKit;

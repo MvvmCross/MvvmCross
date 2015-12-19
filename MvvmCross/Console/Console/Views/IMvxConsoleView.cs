@@ -7,6 +7,9 @@
 
 namespace MvvmCross.Console.Views
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public interface IMvxConsoleView : IMvxView
     {
         void HackSetViewModel(object viewModel);

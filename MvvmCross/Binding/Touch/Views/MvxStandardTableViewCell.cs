@@ -13,6 +13,8 @@ namespace MvvmCross.Binding.Touch.Views
 
     using Foundation;
 
+    using MvvmCross.Binding.Bindings;
+
     using UIKit;
 
     public class MvxStandardTableViewCell

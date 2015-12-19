@@ -19,6 +19,8 @@ namespace MvvmCross.Binding.Mac.Target
 
     using global::MvvmCross.Platform.Platform;
 
+    using MvvmCross.Binding.Bindings.Target;
+
 #warning Unlikley this works!
 
     public class MvxNSSearchFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSSearchField>

@@ -14,7 +14,13 @@ namespace MvvmCross.Binding.Test.ExpressionParse
 
     using Moq;
 
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.ExpressionParse;
     using MvvmCross.Platform.Converters;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

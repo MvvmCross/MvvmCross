@@ -9,6 +9,8 @@ namespace MvvmCross.AutoView.Droid.Views
 {
     using System;
 
+    using MvvmCross.Core.Views;
+
     public class MvxMissingViewFinder : IMvxViewFinder
     {
         public Type MissingViewType { get; set; }

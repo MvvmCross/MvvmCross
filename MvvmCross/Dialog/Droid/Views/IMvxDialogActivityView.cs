@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Dialog.Droid.Views
 {
+    using MvvmCross.Droid.Views;
+
     public interface IMvxDialogActivityView : IMvxAndroidView
     {
     }

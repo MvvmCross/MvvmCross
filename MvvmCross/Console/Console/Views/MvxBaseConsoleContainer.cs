@@ -10,6 +10,8 @@ namespace MvvmCross.Console.Views
     using System;
     using System.Collections.Generic;
 
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
 
     public abstract class MvxBaseConsoleContainer

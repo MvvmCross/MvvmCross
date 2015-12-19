@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using System;
-using System.Threading;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+    using System.Threading;
+
+    using MvvmCross.Platform.Core;
+
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadDispatcher
     {
         public bool RequestMainThreadAction(Action action)

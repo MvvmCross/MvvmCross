@@ -11,6 +11,9 @@ namespace MvvmCross.Binding.Touch.Views
 
     using CoreGraphics;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.BindingContext;
+
     using UIKit;
 
     public class MvxView

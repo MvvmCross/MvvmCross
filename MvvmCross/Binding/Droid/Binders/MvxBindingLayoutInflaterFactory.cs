@@ -13,6 +13,7 @@ namespace MvvmCross.Binding.Droid.Binders
     using Android.Util;
     using Android.Views;
 
+    using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;
 
     public class MvxBindingLayoutInflaterFactory

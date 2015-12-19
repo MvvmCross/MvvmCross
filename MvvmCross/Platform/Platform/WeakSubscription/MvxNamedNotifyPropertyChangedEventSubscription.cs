@@ -11,6 +11,8 @@ namespace MvvmCross.Platform.WeakSubscription
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using MvvmCross.Platform.Core;
+
     public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription
     {

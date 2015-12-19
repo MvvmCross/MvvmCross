@@ -10,6 +10,7 @@ namespace MvvmCross.Binding.Touch.Target
     using System;
     using System.Windows.Input;
 
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.WeakSubscription;
 

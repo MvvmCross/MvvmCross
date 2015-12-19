@@ -7,6 +7,7 @@
 
 namespace MvvmCross.Console.Views
 {
+    using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
 
     public class MvxConsoleSystemMessageHandler

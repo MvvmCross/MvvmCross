@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Touch
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.AutoView.Touch.Builders;
     using MvvmCross.AutoView.Touch.Views;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
     public class MvxAutoViewSetup

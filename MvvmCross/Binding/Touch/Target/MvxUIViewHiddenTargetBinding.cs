@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Binding.Touch.Target
 {
+    using MvvmCross.Binding.ExtensionMethods;
+
     using UIKit;
 
     public class MvxUIViewHiddenTargetBinding : MvxBaseUIViewVisibleTargetBinding

@@ -19,6 +19,8 @@ namespace MvvmCross.Binding.Mac.Target
 
     using global::MvvmCross.Platform.Platform;
 
+    using MvvmCross.Binding.Bindings.Target;
+
     public class MvxNSTextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextField>
     {
         public MvxNSTextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

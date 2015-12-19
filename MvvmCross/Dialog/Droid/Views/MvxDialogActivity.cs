@@ -12,6 +12,7 @@ namespace MvvmCross.Dialog.Droid.Views
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Droid.BindingContext;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Droid.Views;
 
     public abstract class MvxDialogActivity
         : EventSourceDialogActivity

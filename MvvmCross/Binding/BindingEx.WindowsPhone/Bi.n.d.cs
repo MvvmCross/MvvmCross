@@ -14,15 +14,15 @@ using Windows.UI.Xaml;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace mvx
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System.Collections.Generic;
     using System.Windows;
 
-    using Cirrious.MvvmCross.BindingEx.WindowsShared;
-
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Exceptions;

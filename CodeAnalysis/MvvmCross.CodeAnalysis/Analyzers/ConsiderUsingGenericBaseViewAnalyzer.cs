@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ConsiderUsingGenericBaseViewAnalyzer : DiagnosticAnalyzer
     {
@@ -30,7 +33,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
         private static void AnalyzeSymbol(SymbolAnalysisContext context)
         {
             var namedSymbol = context.Symbol as INamedTypeSymbol;
-            var iMvxViewType = context.Compilation.GetTypeByMetadataName(typeof(Cirrious.MvvmCross.Views.IMvxView).FullName);
+            var iMvxViewType = context.Compilation.GetTypeByMetadataName(typeof(IMvxView).FullName);
 
             if (namedSymbol != null &&
                 namedSymbol.ImplementsSymbol(iMvxViewType) &&
@@ -59,7 +62,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
         private static bool IsViewModelType(SymbolAnalysisContext context, ITypeSymbol symbol)
         {
-            var iMvxViewModelType = context.Compilation.GetTypeByMetadataName(typeof(Cirrious.MvvmCross.ViewModels.IMvxViewModel).FullName);
+            var iMvxViewModelType = context.Compilation.GetTypeByMetadataName(typeof(IMvxViewModel).FullName);
             var iNotifyPropertyChangedType = context.Compilation.GetTypeByMetadataName(typeof(System.ComponentModel.INotifyPropertyChanged).FullName);
 
             return symbol.ImplementsSymbol(iMvxViewModelType) ||

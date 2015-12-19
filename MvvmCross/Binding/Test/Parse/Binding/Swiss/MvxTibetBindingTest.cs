@@ -9,6 +9,8 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
     using System.Collections.Generic;
 
+    using MvvmCross.Binding.Parse.Binding;
+    using MvvmCross.Binding.Parse.Binding.Tibet;
     using MvvmCross.Platform.Platform;
 
     using NUnit.Framework;

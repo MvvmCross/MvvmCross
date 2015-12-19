@@ -7,6 +7,9 @@
 
 namespace MvvmCross.AutoView.Interfaces
 {
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public interface IMvxAutoView
         : IMvxView
     {

@@ -11,9 +11,12 @@ namespace MvvmCross.AutoView.Touch.Builders
 
     using CrossUI.Core.Builder;
 
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Binders;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;
+    using MvvmCross.Touch.Views;
 
     public class MvxBindingPropertySetter : IPropertySetter
 

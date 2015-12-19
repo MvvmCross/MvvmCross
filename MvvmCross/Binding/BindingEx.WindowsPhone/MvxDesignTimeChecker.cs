@@ -5,12 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System.ComponentModel;
 
+    using global::MvvmCross.Binding.Parse.Binding;
     using global::MvvmCross.Platform;
     using global::MvvmCross.Platform.Core;
     using global::MvvmCross.Platform.IoC;

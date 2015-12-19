@@ -12,6 +12,8 @@ namespace MvvmCross.Binding.Touch.Views
     using System.Collections.Specialized;
     using System.Windows.Input;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform;
     using MvvmCross.Platform.WeakSubscription;
 

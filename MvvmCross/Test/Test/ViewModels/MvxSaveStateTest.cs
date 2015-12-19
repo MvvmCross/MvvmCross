@@ -12,6 +12,7 @@ namespace MvvmCross.Test.ViewModels
 
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Core;
     using MvvmCross.Test.Mocks.TestViewModels;
 
     using NUnit.Framework;

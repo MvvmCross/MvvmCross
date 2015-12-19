@@ -10,8 +10,11 @@ namespace MvvmCross.AutoView.Touch.Views.Lists
     using CrossUI.Core.Elements.Menu;
 
     using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.AutoView.Touch.ExtensionMethods;
     using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.IoC;
+    using MvvmCross.Touch.Views;
 
     using UIKit;
 

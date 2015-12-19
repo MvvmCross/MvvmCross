@@ -11,6 +11,7 @@ namespace MvvmCross.Binding.Droid.Target
 
     using Android.Widget;
 
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform.Platform;
 
     public class MvxCompoundButtonCheckedTargetBinding

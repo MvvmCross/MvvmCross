@@ -9,6 +9,8 @@ namespace MvvmCross.Binding.Droid.Target
 {
     using Android.Views;
 
+    using MvvmCross.Binding.ExtensionMethods;
+
     public class MvxViewVisibleBinding
         : MvxBaseViewVisibleBinding
     {

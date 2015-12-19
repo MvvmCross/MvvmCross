@@ -9,6 +9,9 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
 {
     using System.Collections.Generic;
 
+    using MvvmCross.Binding.Parse.PropertyPath;
+    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
     using NUnit.Framework;
 
     [TestFixture]

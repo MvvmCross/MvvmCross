@@ -9,6 +9,9 @@ namespace MvvmCross.Console.Views
 {
     using System;
 
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel

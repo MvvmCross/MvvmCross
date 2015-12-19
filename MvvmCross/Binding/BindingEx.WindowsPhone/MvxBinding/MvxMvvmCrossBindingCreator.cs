@@ -23,7 +23,8 @@ namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding
     using System.Windows;
     using System.Windows.Data;
 
-    using Cirrious.MvvmCross.BindingEx.WindowsShared;
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Bindings;
 
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {

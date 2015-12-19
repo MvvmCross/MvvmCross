@@ -13,6 +13,7 @@ namespace MvvmCross.Binding.BindingContext
 
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Localization;
 
     public static partial class MvxBindingContextOwnerExtensions
     {

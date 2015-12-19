@@ -12,6 +12,8 @@ namespace MvvmCross.AutoView.Droid.Interfaces.Lists
 
     using CrossUI.Core.Elements.Lists;
 
+    using MvvmCross.Binding.Droid.BindingContext;
+
     public interface IMvxLayoutListItemViewFactory
         : IListItemLayout
     {
