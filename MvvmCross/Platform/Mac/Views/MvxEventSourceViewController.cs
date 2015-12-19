@@ -1,11 +1,10 @@
 ﻿// MvxEventSourceViewController.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 
 #if __UNIFIED__
 using AppKit;
@@ -13,8 +12,10 @@ using Foundation;
 #else
 #endif
 
-namespace Cirrious.CrossCore.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
+    using System;
+
     using MvvmCross.Platform.Core;
 
     public class MvxEventSourceViewController
@@ -23,25 +24,25 @@ namespace Cirrious.CrossCore.Mac.Views
     {
         protected MvxEventSourceViewController()
         {
-            Initialize();
+            this.Initialize();
         }
 
         protected MvxEventSourceViewController(IntPtr handle)
             : base(handle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         protected MvxEventSourceViewController(NSCoder coder)
             : base(coder)
         {
-            Initialize();
+            this.Initialize();
         }
 
         protected MvxEventSourceViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            Initialize();
+            this.Initialize();
         }
 
         private void Initialize()
@@ -51,7 +52,7 @@ namespace Cirrious.CrossCore.Mac.Views
         public override void LoadView()
         {
             base.LoadView();
-            ViewDidLoad();
+            this.ViewDidLoad();
         }
 
         //        public override void ViewWillDisappear(bool animated)
@@ -80,14 +81,14 @@ namespace Cirrious.CrossCore.Mac.Views
         //
         public virtual void ViewDidLoad()
         {
-            ViewDidLoadCalled.Raise(this);
+            this.ViewDidLoadCalled.Raise(this);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                DisposeCalled.Raise(this);
+                this.DisposeCalled.Raise(this);
             }
             base.Dispose(disposing);
         }

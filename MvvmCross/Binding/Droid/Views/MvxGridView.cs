@@ -1,5 +1,5 @@
 // MvxGridView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Droid.Views
 
     using MvvmCross.Binding.Attributes;
 
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxGridView")]
+    [Register("mvvmcross.binding.droid.views.MvxGridView")]
     public class MvxGridView
         : GridView
     {

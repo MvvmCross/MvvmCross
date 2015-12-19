@@ -1,23 +1,27 @@
 #region Copyright
 
-// <copyright file="IMvxTouchView.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
+// <copyright file="IMvxTouchView.cs" company="">
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.
 // </copyright>
 //
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
-#endregion Copyright
 
-namespace MvvmCross.Mac.Views
+#endregion Copyright
+
+
+namespace MvvmCross.Mac.Views
 {
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
 
-    public interface IMvxMacView
+    using global::MvvmCross.Binding.BindingContext;
+
+    using global::MvvmCross.Core.ViewModels;
+
+    using global::MvvmCross.Core.Views;
+
+
+    public interface IMvxMacView
         : IMvxView
             , IMvxCanCreateMacView
             , IMvxBindingContextOwner

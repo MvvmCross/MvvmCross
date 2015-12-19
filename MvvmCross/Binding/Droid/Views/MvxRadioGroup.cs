@@ -1,5 +1,5 @@
 // MvxRadioGroup.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Droid.Views
     using MvvmCross.Binding.Attributes;
     using MvvmCross.Binding.BindingContext;
 
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxRadioGroup")]
+    [Register("mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
         public MvxRadioGroup(Context context, IAttributeSet attrs)
