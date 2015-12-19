@@ -1,5 +1,5 @@
 // MvxLayoutDrivenListAdapter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -9,11 +9,11 @@
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
-using Cirrious.MvvmCross.AutoView.Droid.Interfaces.Lists;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Exceptions;
+using MvvmCross.AutoView.Droid.Interfaces.Lists;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Exceptions;
 
-namespace Cirrious.MvvmCross.AutoView.Droid.Views.Lists
+namespace MvvmCross.AutoView.Droid.Views.Lists
 {
     public class MvxLayoutDrivenListAdapter : MvxBindableListAdapter
     {

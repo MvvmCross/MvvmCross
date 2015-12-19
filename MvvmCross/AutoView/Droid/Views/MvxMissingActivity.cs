@@ -1,5 +1,5 @@
 // MvxMissingActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -17,7 +17,7 @@ namespace MvvmCross.AutoView.Droid.Views
     using MvvmCross.Dialog.Droid.Views;
     using MvvmCross.Platform.IoC;
 
-    [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.MvxMissingActivity")]
+    [Activity(Name = "mvvmcross.autoview.droid.views.MvxMissingActivity")]
     [MvxUnconventional]
     public class MvxMissingActivity
         : MvxDialogActivity

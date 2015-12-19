@@ -1,5 +1,5 @@
 ﻿// AssemblyInfo.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -12,11 +12,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Cirrious.CrossCore")]
+[assembly: AssemblyTitle("MvvmCross.Platform")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cirrious")]
-[assembly: AssemblyProduct("Cirrious.CrossCore")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MvvmCross.Platform")]
 [assembly: AssemblyCopyright("Copyright © 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

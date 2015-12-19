@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Droid.Views
 
     using MvvmCross.Binding.Attributes;
 
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxExpandableListView")]
+    [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {
         public MvxExpandableListView(Context context, IAttributeSet attrs)

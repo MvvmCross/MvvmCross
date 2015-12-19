@@ -1,5 +1,5 @@
 ﻿// MvxWindowsBindingCreator.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -11,12 +11,12 @@
 #endif
 #if WINDOWS_WPF
 
-using Cirrious.CrossCore.Wpf.Converters;
+using CrossCore.Wpf.Converters;
 
 #endif
 #if NETFX_CORE
 
-using Cirrious.CrossCore.WindowsStore.Converters;
+using CrossCore.WindowsStore.Converters;
 
 #endif
 

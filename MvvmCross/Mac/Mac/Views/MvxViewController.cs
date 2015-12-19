@@ -1,11 +1,3 @@
-// <copyright file="MvxTouchViewController.cs" company="Cirrious">
-// (c) Copyright Cirrious. http://www.cirrious.com
-// This source is subject to the Microsoft Public License (Ms-PL)
-// Please see license.txt on http://opensource.org/licenses/ms-pl.html
-// All other rights reserved.
-// </copyright>
-//
-// Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
 
 #if __UNIFIED__
@@ -18,10 +10,10 @@ namespace MvvmCross.Mac.Views
 {
     using System;
 
-    using Cirrious.CrossCore.Mac.Views;
-
     using global::MvvmCross.Binding.BindingContext;
     using global::MvvmCross.Core.ViewModels;
+
+    using MvvmCross.Platform.Mac.Views;
 
     public class MvxViewController
         : MvxEventSourceViewController
