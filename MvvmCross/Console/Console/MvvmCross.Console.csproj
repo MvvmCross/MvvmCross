@@ -56,13 +56,13 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.Core.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

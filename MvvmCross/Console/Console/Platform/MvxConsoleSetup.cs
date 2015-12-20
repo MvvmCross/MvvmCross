@@ -11,6 +11,9 @@ namespace MvvmCross.Console.Platform
     using MvvmCross.Platform;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
 
     public abstract class MvxConsoleSetup
         : MvxSetup

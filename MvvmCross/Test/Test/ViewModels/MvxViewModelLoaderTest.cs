@@ -64,7 +64,6 @@ namespace MvvmCross.Test.ViewModels
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModel()
         {
             ClearAll();
@@ -85,13 +84,12 @@ namespace MvvmCross.Test.ViewModels
                                                                   MvxRequestedBy.UserAction);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
-            var viewModel = loader.LoadViewModel(request, state);
-
-            Assert.Fail("We should never reach this line");
+            Assert.Throws<MvxException>(() => {
+                var viewModel = loader.LoadViewModel(request, state);
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(MvxException))]
         public void Test_FailedViewModelLocatorCollection()
         {
             ClearAll();
@@ -107,9 +105,10 @@ namespace MvvmCross.Test.ViewModels
                                                                   MvxRequestedBy.UserAction);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
-            var viewModel = loader.LoadViewModel(request, state);
 
-            Assert.Fail("We should never reach this line");
+            Assert.Throws<MvxException>(() => {
+                var viewModel = loader.LoadViewModel(request, state);
+            });
         }
     }
 }
