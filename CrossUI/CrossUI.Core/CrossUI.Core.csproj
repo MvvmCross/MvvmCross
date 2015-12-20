@@ -39,7 +39,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\CrossCore\Cirrious.CrossCore\BindingFlags.cs">
+    <Compile Include="..\..\MvvmCross\Platform\Platform\BindingFlags.cs">
       <Link>BindingFlags.cs</Link>
     </Compile>
     <Compile Include="Builder\BaseUserInterfaceBuilder.cs" />

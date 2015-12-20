@@ -27,6 +27,27 @@ namespace MvvmCross.Dialog.Droid
 		public partial class Attribute
 		{
 			
+			// aapt resource value: 0x7f010000
+			public static int MvxBind = 2130771968;
+			
+			// aapt resource value: 0x7f010004
+			public static int MvxDropDownItemTemplate = 2130771972;
+			
+			// aapt resource value: 0x7f010005
+			public static int MvxGroupItemTemplate = 2130771973;
+			
+			// aapt resource value: 0x7f010003
+			public static int MvxItemTemplate = 2130771971;
+			
+			// aapt resource value: 0x7f010001
+			public static int MvxLang = 2130771969;
+			
+			// aapt resource value: 0x7f010006
+			public static int MvxSource = 2130771974;
+			
+			// aapt resource value: 0x7f010002
+			public static int MvxTemplate = 2130771970;
+			
 			static Attribute()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -68,50 +89,56 @@ namespace MvvmCross.Dialog.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040004
-			public static int dialog_BoolField = 2130968580;
-			
-			// aapt resource value: 0x7f040005
-			public static int dialog_Button = 2130968581;
-			
-			// aapt resource value: 0x7f04000a
-			public static int dialog_DisclosureField = 2130968586;
-			
-			// aapt resource value: 0x7f040009
-			public static int dialog_HtmlField = 2130968585;
-			
-			// aapt resource value: 0x7f040007
-			public static int dialog_ImageLeft = 2130968583;
-			
-			// aapt resource value: 0x7f040002
-			public static int dialog_ImageRight = 2130968578;
-			
 			// aapt resource value: 0x7f040000
-			public static int dialog_LabelField = 2130968576;
-			
-			// aapt resource value: 0x7f040003
-			public static int dialog_LabelPercentageField = 2130968579;
+			public static int MvvmCrossTagId = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public static int dialog_LabelSubtextField = 2130968577;
-			
-			// aapt resource value: 0x7f04000b
-			public static int dialog_Panel = 2130968587;
-			
-			// aapt resource value: 0x7f04000c
-			public static int dialog_RadioButtonList = 2130968588;
-			
-			// aapt resource value: 0x7f040008
-			public static int dialog_SliderField = 2130968584;
-			
-			// aapt resource value: 0x7f04000d
-			public static int dialog_Spinner = 2130968589;
+			public static int MvxBindingTagUnique = 2130968577;
 			
 			// aapt resource value: 0x7f040006
-			public static int dialog_ValueField = 2130968582;
+			public static int dialog_BoolField = 2130968582;
+			
+			// aapt resource value: 0x7f040007
+			public static int dialog_Button = 2130968583;
+			
+			// aapt resource value: 0x7f04000c
+			public static int dialog_DisclosureField = 2130968588;
+			
+			// aapt resource value: 0x7f04000b
+			public static int dialog_HtmlField = 2130968587;
+			
+			// aapt resource value: 0x7f040009
+			public static int dialog_ImageLeft = 2130968585;
+			
+			// aapt resource value: 0x7f040004
+			public static int dialog_ImageRight = 2130968580;
+			
+			// aapt resource value: 0x7f040002
+			public static int dialog_LabelField = 2130968578;
+			
+			// aapt resource value: 0x7f040005
+			public static int dialog_LabelPercentageField = 2130968581;
+			
+			// aapt resource value: 0x7f040003
+			public static int dialog_LabelSubtextField = 2130968579;
+			
+			// aapt resource value: 0x7f04000d
+			public static int dialog_Panel = 2130968589;
 			
 			// aapt resource value: 0x7f04000e
-			public static int iFormFieldValue = 2130968590;
+			public static int dialog_RadioButtonList = 2130968590;
+			
+			// aapt resource value: 0x7f04000a
+			public static int dialog_SliderField = 2130968586;
+			
+			// aapt resource value: 0x7f04000f
+			public static int dialog_Spinner = 2130968591;
+			
+			// aapt resource value: 0x7f040008
+			public static int dialog_ValueField = 2130968584;
+			
+			// aapt resource value: 0x7f040010
+			public static int iFormFieldValue = 2130968592;
 			
 			static Id()
 			{
@@ -198,6 +225,57 @@ namespace MvvmCross.Dialog.Droid
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] MvxBinding = new int[] {
+					2130771968,
+					2130771969};
+			
+			// aapt resource value: 0
+			public static int MvxBinding_MvxBind = 0;
+			
+			// aapt resource value: 1
+			public static int MvxBinding_MvxLang = 1;
+			
+			public static int[] MvxControl = new int[] {
+					2130771970};
+			
+			// aapt resource value: 0
+			public static int MvxControl_MvxTemplate = 0;
+			
+			public static int[] MvxExpandableListView = new int[] {
+					2130771973};
+			
+			// aapt resource value: 0
+			public static int MvxExpandableListView_MvxGroupItemTemplate = 0;
+			
+			public static int[] MvxImageView = new int[] {
+					2130771974};
+			
+			// aapt resource value: 0
+			public static int MvxImageView_MvxSource = 0;
+			
+			public static int[] MvxListView = new int[] {
+					2130771971,
+					2130771972};
+			
+			// aapt resource value: 1
+			public static int MvxListView_MvxDropDownItemTemplate = 1;
+			
+			// aapt resource value: 0
+			public static int MvxListView_MvxItemTemplate = 0;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}

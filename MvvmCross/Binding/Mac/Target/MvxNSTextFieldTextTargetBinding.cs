@@ -1,5 +1,5 @@
 // MvxUITextFieldTextTargetBinding.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -18,6 +18,8 @@ namespace MvvmCross.Binding.Mac.Target
     using System.Reflection;
 
     using global::MvvmCross.Platform.Platform;
+
+    using MvvmCross.Binding.Bindings.Target;
 
     public class MvxNSTextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextField>
     {

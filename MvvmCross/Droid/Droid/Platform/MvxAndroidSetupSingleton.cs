@@ -1,22 +1,24 @@
 // MvxAndroidSetupSingleton.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.Droid.Views;
-using System;
-using System.Linq;
-using System.Threading;
-
-namespace Cirrious.MvvmCross.Droid.Platform
+namespace MvvmCross.Droid.Platform
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+
+    using Android.Content;
+
+    using MvvmCross.Droid.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.IoC;
+
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>
     {
@@ -30,27 +32,27 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                if (_initialized)
+                if (this._initialized)
                     return;
 
-                if (_initializationStarted)
+                if (this._initializationStarted)
                 {
                     Mvx.Warning("Multiple Initialize calls made for MvxAndroidSetupSingleton singleton");
                     throw new MvxException("Multiple initialize calls made");
                 }
 
-                _initializationStarted = true;
+                this._initializationStarted = true;
             }
 
-            _setup.Initialize();
+            this._setup.Initialize();
 
             lock (LockObject)
             {
-                _initialized = true;
-                if (_currentSplashScreen != null)
+                this._initialized = true;
+                if (this._currentSplashScreen != null)
                 {
                     Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
-                    _currentSplashScreen.InitializationComplete();
+                    this._currentSplashScreen.InitializationComplete();
                 }
             }
         }
@@ -59,7 +61,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                _currentSplashScreen = null;
+                this._currentSplashScreen = null;
             }
         }
 
@@ -67,30 +69,30 @@ namespace Cirrious.MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                _currentSplashScreen = splashScreen;
+                this._currentSplashScreen = splashScreen;
 
-                if (_initializationStarted)
+                if (this._initializationStarted)
                 {
-                    if (_initialized)
+                    if (this._initialized)
                     {
-                        _currentSplashScreen.InitializationComplete();
+                        this._currentSplashScreen.InitializationComplete();
                         return;
                     }
 
                     return;
                 }
 
-                _initializationStarted = true;
+                this._initializationStarted = true;
             }
 
-            _setup.InitializePrimary();
+            this._setup.InitializePrimary();
             ThreadPool.QueueUserWorkItem(ignored =>
             {
-                _setup.InitializeSecondary();
+                this._setup.InitializeSecondary();
                 lock (LockObject)
                 {
-                    _initialized = true;
-                    _currentSplashScreen?.InitializationComplete();
+                    this._initialized = true;
+                    this._currentSplashScreen?.InitializationComplete();
                 }
             });
         }
@@ -117,7 +119,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
         protected virtual void CreateSetup(Context applicationContext)
         {
-            var setupType = FindSetupType();
+            var setupType = this.FindSetupType();
             if (setupType == null)
             {
                 throw new MvxException("Could not find a Setup class for application");
@@ -125,7 +127,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
 
             try
             {
-                _setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
+                this._setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
             }
             catch (Exception exception)
             {
@@ -150,7 +152,7 @@ namespace Cirrious.MvvmCross.Droid.Platform
             {
                 lock (LockObject)
                 {
-                    _currentSplashScreen = null;
+                    this._currentSplashScreen = null;
                 }
             }
             base.Dispose(isDisposing);

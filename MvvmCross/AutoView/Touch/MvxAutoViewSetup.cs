@@ -1,5 +1,5 @@
 // MvxAutoViewSetup.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Touch
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.AutoView.Touch.Builders;
     using MvvmCross.AutoView.Touch.Views;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
     public class MvxAutoViewSetup

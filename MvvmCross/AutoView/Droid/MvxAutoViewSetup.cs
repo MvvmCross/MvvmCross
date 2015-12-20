@@ -1,5 +1,5 @@
 // MvxAutoViewSetup.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -16,6 +16,7 @@ namespace MvvmCross.AutoView.Droid
     using MvvmCross.AutoView.Droid.Builders;
     using MvvmCross.AutoView.Droid.Views;
     using MvvmCross.AutoView.Interfaces;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
 #warning Factor out a base class shared across platfroms (can use Generics)

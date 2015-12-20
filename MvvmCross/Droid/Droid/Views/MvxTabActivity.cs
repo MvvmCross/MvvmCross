@@ -1,20 +1,22 @@
 // MvxTabActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System.Collections.Generic;
+
+    using Android.Content;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Binding.Droid.Views;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Droid.Views;
+
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity
           , IMvxAndroidView
@@ -22,27 +24,27 @@ namespace Cirrious.MvvmCross.Droid.Views
     {
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
-        public List<int> OwnedSubViewModelIndicies => _ownedSubViewModelIndicies;
+        public List<int> OwnedSubViewModelIndicies => this._ownedSubViewModelIndicies;
 
         protected MvxTabActivity()
         {
-            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get { return this.DataContext as IMvxViewModel; }
             set
             {
-                DataContext = value;
-                OnViewModelSet();
+                this.DataContext = value;
+                this.OnViewModelSet();
             }
         }
 
@@ -60,7 +62,7 @@ namespace Cirrious.MvvmCross.Droid.Views
         public override void SetContentView(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
-            SetContentView(view);
+            this.SetContentView(view);
         }
 
         protected override void AttachBaseContext(Context @base)

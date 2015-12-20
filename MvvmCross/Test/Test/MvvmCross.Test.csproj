@@ -92,7 +92,7 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Test.Core\MvvmCross.Test.Core.csproj">
+    <ProjectReference Include="..\Test.Core\MvvmCross.Test.Core.csproj">
       <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>

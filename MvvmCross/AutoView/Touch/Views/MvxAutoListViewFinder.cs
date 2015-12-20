@@ -1,5 +1,5 @@
 // MvxAutoListViewFinder.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -11,6 +11,7 @@ namespace MvvmCross.AutoView.Touch.Views
 
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.AutoView.Touch.Views.Lists;
+    using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 
     public class MvxAutoListViewFinder : IMvxViewFinder

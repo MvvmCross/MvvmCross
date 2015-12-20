@@ -1,4 +1,3 @@
-using Cirrious.CrossCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +5,8 @@ using System.Reflection;
 
 namespace CrossUI.Core
 {
+    using MvvmCross.Platform;
+
     internal static class ReflectionExtensions
     {
         internal static IEnumerable<Type> GetTypes(this Assembly assembly)

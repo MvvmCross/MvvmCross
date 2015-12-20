@@ -1,5 +1,5 @@
 // GeneralListItemView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -18,6 +18,10 @@ namespace MvvmCross.AutoView.Droid.Views.Lists
     using CrossUI.Droid;
 
     using MvvmCross.AutoView.Droid.Interfaces.Lists;
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Binding.Droid.Views;
     using MvvmCross.Platform;
 
     public class GeneralListItemView

@@ -1,8 +1,9 @@
-using Cirrious.MvvmCross.ViewModels;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using MvvmCross.Core.ViewModels;
+
     public interface IMvxMultipleViewModelCache
     {
         void Cache(IMvxViewModel toCache, string viewModelTag = "singleInstanceCache");

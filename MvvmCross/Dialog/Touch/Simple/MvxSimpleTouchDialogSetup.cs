@@ -1,5 +1,5 @@
 // MvxSimpleTouchDialogSetup.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.Dialog.Touch.Simple
 
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Touch.Views.Presenters;
 
     public class MvxSimpleTouchDialogSetup
         : MvxTouchDialogSetup

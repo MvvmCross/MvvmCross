@@ -5,6 +5,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Content;
     using Android.Views;
 
+    using MvvmCross.Binding.BindingContext;
+
     public class MvxContextWrapper : ContextWrapper
     {
         private LayoutInflater _inflater;

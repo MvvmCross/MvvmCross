@@ -1,5 +1,5 @@
 ﻿// MvxViewModelByNameLookupTest.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -10,6 +10,7 @@ namespace MvvmCross.Test.Platform
     using System;
 
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Core;
     using MvvmCross.Test.Mocks.TestViewModels;
 
     using NUnit.Framework;
@@ -36,21 +37,21 @@ namespace MvvmCross.Test.Platform
             Assert.IsNull(result);
             Assert.IsFalse(finder.TryLookupByName("NoWayTestViewModel", out result));
             Assert.IsNull(result);
-            Assert.IsTrue(finder.TryLookupByFullName("Cirrious.MvvmCross.Test.Mocks.TestViewModels.Test1ViewModel",
+            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test1ViewModel",
                                                      out result));
             Assert.AreEqual(typeof(Test1ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByFullName("Cirrious.MvvmCross.Test.Mocks.TestViewModels.Test2ViewModel",
+            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test2ViewModel",
                                                      out result));
             Assert.AreEqual(typeof(Test2ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByFullName("Cirrious.MvvmCross.Test.Mocks.TestViewModels.Test3ViewModel",
+            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test3ViewModel",
                                                      out result));
             Assert.AreEqual(typeof(Test3ViewModel), result);
             Assert.IsFalse(
-                finder.TryLookupByFullName("Cirrious.MvvmCross.Test.Mocks.TestViewModels.AbstractTest1ViewModel",
+                finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.AbstractTest1ViewModel",
                                            out result));
             Assert.IsNull(result);
             Assert.IsFalse(finder.TryLookupByFullName(
-                "Cirrious.MvvmCross.Test.Mocks.TestViewModels.NoWayTestViewModel", out result));
+                "MvvmCross.Test.Mocks.TestViewModels.NoWayTestViewModel", out result));
             Assert.IsNull(result);
         }
     }

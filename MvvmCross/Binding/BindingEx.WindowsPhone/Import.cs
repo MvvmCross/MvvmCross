@@ -1,19 +1,17 @@
 ﻿// Import.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-// ReSharper disable CheckNamespace
-namespace mvx
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System.Reflection;
 
-    using Cirrious.MvvmCross.BindingEx.WindowsShared;
-
-    using MvvmCross.BindingEx.WindowsPhone;
+    using MvvmCross.Binding.Combiners;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Core;
