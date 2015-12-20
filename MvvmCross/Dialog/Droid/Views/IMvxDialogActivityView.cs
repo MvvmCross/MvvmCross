@@ -1,5 +1,5 @@
 // IMvxDialogActivityView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Dialog.Droid.Views
 {
+    using MvvmCross.Droid.Views;
+
     public interface IMvxDialogActivityView : IMvxAndroidView
     {
     }

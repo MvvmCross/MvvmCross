@@ -1,5 +1,5 @@
 // MvxBindingContextOwnerExtensions.Language.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.Binding.BindingContext
 
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Localization;
 
     public static partial class MvxBindingContextOwnerExtensions
     {

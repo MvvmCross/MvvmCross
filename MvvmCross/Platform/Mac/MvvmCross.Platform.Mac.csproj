@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{596C75FB-F491-4037-89F6-B4F34183D83D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Cirrious.CrossCore.Mac</RootNamespace>
-    <AssemblyName>Cirrious.CrossCore.Mac</AssemblyName>
+    <RootNamespace>MvvmCross.Platform.Mac</RootNamespace>
+    <AssemblyName>MvvmCross.Platform.Mac</AssemblyName>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseMSBuildEngine>False</UseMSBuildEngine>

@@ -1,13 +1,13 @@
 ﻿// MvxCollapsedTargetBinding.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
+
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding
     {

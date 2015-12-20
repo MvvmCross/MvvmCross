@@ -1,20 +1,22 @@
 // MvxSavedStateConverter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Android.OS;
+
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Droid.Platform;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Platform;
+
     public class MvxSavedStateConverter : IMvxSavedStateConverter
     {
         private const string ExtrasKey = "MvxSaved";

@@ -1,24 +1,26 @@
 // MvxActivityViewExtensions.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.OS;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using Android.App;
+    using Android.OS;
+
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Droid.Platform;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Droid.Views;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+
     public static class MvxActivityViewExtensions
     {
         public static void AddEventListeners(this IMvxEventSourceActivity activity)

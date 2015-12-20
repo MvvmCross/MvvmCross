@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Binding.Droid.Resource", IsApplication=false)]
 
-namespace MvvmCross.Binding.Droid.Resources
+namespace MvvmCross.Binding.Droid
 {
 	
 	

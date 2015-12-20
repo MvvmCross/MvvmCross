@@ -1,5 +1,5 @@
 ﻿// MvxDependencyPropertyExtensionMethods.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -15,9 +15,9 @@ using Windows.UI.Xaml;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System;
     using System.ComponentModel;

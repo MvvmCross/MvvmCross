@@ -9,6 +9,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Views;
     using Android.Widget;
 
+    using MvvmCross.Binding.ExtensionMethods;
+
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
         public MvxExpandableListAdapter(Context context)

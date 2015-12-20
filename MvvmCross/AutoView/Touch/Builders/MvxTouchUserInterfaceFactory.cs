@@ -1,5 +1,5 @@
 // MvxTouchUserInterfaceFactory.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Touch.Builders
     using MvvmCross.AutoView.Interfaces;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Touch.Views;
 
     public class MvxTouchUserInterfaceFactory
         : IMvxUserInterfaceFactory

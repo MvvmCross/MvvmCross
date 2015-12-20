@@ -1,5 +1,5 @@
 ﻿// MvxVisibleTargetBinding.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -14,12 +14,14 @@ using Windows.UI.Xaml;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
+
 {
     using System;
     using System.Windows;
+
+    using MvvmCross.Binding;
 
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {
@@ -28,7 +30,7 @@ namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target
         {
         }
 
-        public override Binding.MvxBindingMode DefaultMode => Binding.MvxBindingMode.OneWay;
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         public override Type TargetType => typeof(bool);
 
