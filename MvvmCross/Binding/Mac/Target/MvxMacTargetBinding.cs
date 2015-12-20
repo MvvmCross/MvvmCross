@@ -1,5 +1,5 @@
 // MvxUIButtonTitleTargetBinding.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -7,6 +7,8 @@
 
 namespace MvvmCross.Binding.Mac.Target
 {
+    using MvvmCross.Binding.Bindings.Target;
+
     public abstract class MvxMacTargetBinding : MvxConvertingTargetBinding
     {
         protected MvxMacTargetBinding(object view)

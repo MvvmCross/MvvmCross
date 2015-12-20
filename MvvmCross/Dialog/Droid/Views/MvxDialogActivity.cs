@@ -1,5 +1,5 @@
 // MvxDialogActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -12,6 +12,7 @@ namespace MvvmCross.Dialog.Droid.Views
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Droid.BindingContext;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Droid.Views;
 
     public abstract class MvxDialogActivity
         : EventSourceDialogActivity

@@ -1,5 +1,5 @@
 ﻿// MvxStringToTypeParserTest.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -10,6 +10,7 @@ namespace MvvmCross.Test.Platform
     using System;
 
     using MvvmCross.Core.Platform;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

@@ -1,5 +1,5 @@
 // MvxLoaderPluginRegistry.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -41,7 +41,7 @@ namespace MvvmCross.Platform.Plugins
             if (!name.EndsWith(this._pluginPostfix))
             {
                 throw new MvxException(
-                    "You must pass in the type of a plugin instance - like 'typeof(Cirrious.MvvmCross.Plugins.Visibility{0}.Plugin)'",
+                    "You must pass in the type of a plugin instance - like 'typeof(MvvmCross.Plugins.Visibility{0}.Plugin)'",
                     this._pluginPostfix);
             }
 

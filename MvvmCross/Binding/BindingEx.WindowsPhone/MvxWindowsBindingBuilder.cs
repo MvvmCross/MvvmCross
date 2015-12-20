@@ -1,5 +1,5 @@
 ﻿// MvxWindowsBindingBuilder.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -14,22 +14,23 @@ using Windows.UI.Xaml;
 
 #endif
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared
-// ReSharper restore CheckNamespace
+
+namespace MvvmCross.BindingEx.WindowsPhone
+
 {
     using System;
     using System.Windows;
 
-    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding;
-    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
-    using Cirrious.MvvmCross.BindingEx.WindowsShared.WindowsBinding;
-
-    using global::MvvmCross.BindingEx.WindowsPhone;
-    using global::MvvmCross.BindingEx.WindowsPhone.MvxBinding;
+    using global::MvvmCross.Binding;
+    using global::MvvmCross.Binding.Binders;
+    using global::MvvmCross.Binding.Bindings.Target.Construction;
     using global::MvvmCross.Platform;
     using global::MvvmCross.Platform.Converters;
     using global::MvvmCross.Platform.Core;
+
+    using MvvmCross.BindingEx.WindowsPhone.MvxBinding;
+    using MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target;
+    using MvvmCross.BindingEx.WindowsPhone.WindowsBinding;
 
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
     {

@@ -1,5 +1,5 @@
 // MvxBindingViewControllerAdapter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -9,10 +9,10 @@ namespace MvvmCross.Mac.Views
 {
     using System;
 
-    using Cirrious.CrossCore.Mac.Views;
-
     using global::MvvmCross.Binding.BindingContext;
     using global::MvvmCross.Platform.Platform;
+
+    using MvvmCross.Platform.Mac.Views;
 
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

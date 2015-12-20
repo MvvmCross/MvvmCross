@@ -1,5 +1,5 @@
 ﻿// MvxFullBindingConstructionTest.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -11,7 +11,14 @@ namespace MvvmCross.Binding.Test.Bindings
 
     using Moq;
 
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Binding.Bindings.Source;
+    using MvvmCross.Binding.Bindings.Source.Construction;
+    using MvvmCross.Binding.Bindings.SourceSteps;
+    using MvvmCross.Binding.Bindings.Target;
+    using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Platform.Converters;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

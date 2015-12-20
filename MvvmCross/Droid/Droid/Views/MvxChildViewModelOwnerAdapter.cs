@@ -1,16 +1,17 @@
 // MvxChildViewModelOwnerAdapter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Exceptions;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using MvvmCross.Platform.Droid.Views;
+    using MvvmCross.Platform.Exceptions;
+
     public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
         protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner)base.Activity;
@@ -27,13 +28,13 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            ChildOwner.ClearOwnedSubIndicies();
+            this.ChildOwner.ClearOwnedSubIndicies();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            ChildOwner.ClearOwnedSubIndicies();
+            this.ChildOwner.ClearOwnedSubIndicies();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

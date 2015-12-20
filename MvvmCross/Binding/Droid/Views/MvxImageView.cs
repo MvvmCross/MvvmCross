@@ -1,5 +1,5 @@
 // MvxImageView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Droid.Views
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Platform;
 
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxImageView")]
+    [Register("mvvmcross.binding.droid.views.MvxImageView")]
     public class MvxImageView
         : ImageView
     {

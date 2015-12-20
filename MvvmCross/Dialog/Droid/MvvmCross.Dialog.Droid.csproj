@@ -62,11 +62,11 @@
       <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
       <Name>CrossUI.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Droid\MvvmCross.Platform.Droid.csproj">
+    <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
@@ -78,7 +78,7 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Droid\MvvmCross.Droid.csproj">
+    <ProjectReference Include="..\..\Droid\Droid\MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>MvvmCross.Droid</Name>
     </ProjectReference>

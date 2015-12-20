@@ -1,5 +1,5 @@
 // MvxConsoleMessagePump.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -8,6 +8,7 @@
 namespace MvvmCross.Console.Views
 {
     using MvvmCross.Console.Platform;
+    using MvvmCross.Core.Views;
 
     public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     {

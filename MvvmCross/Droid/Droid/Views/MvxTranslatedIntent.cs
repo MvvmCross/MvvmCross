@@ -1,14 +1,14 @@
 // MvxTranslatedIntent.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using MvvmCross.Core.ViewModels;
+
     public class MvxTranslatedIntent
     {
         #region TranslationResult enum
@@ -23,14 +23,14 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public MvxTranslatedIntent(MvxViewModelRequest viewModelRequest)
         {
-            ViewModelRequest = viewModelRequest;
-            Result = TranslationResult.Request;
+            this.ViewModelRequest = viewModelRequest;
+            this.Result = TranslationResult.Request;
         }
 
         public MvxTranslatedIntent(IMvxViewModel existingViewModel)
         {
-            ExistingViewModel = existingViewModel;
-            Result = TranslationResult.ExistingViewModel;
+            this.ExistingViewModel = existingViewModel;
+            this.Result = TranslationResult.ExistingViewModel;
         }
 
         public TranslationResult Result { get; private set; }

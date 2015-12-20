@@ -1,18 +1,20 @@
 // MvxChildViewModelOwnerExtensions.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using System.Collections.Generic;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System.Collections.Generic;
+
+    using Android.Content;
+
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform;
+
     public static class MvxChildViewModelOwnerExtensions
     {
         public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, object parameterObject)

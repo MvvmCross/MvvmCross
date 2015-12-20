@@ -1,5 +1,5 @@
 // MvxAndroidDialogSetup.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -17,6 +17,7 @@ namespace MvvmCross.Dialog.Droid
     using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Binding.Droid.ResourceHelpers;
     using MvvmCross.Dialog.Droid.Target;
+    using MvvmCross.Droid.Platform;
     using MvvmCross.Platform;
 
     public abstract class MvxAndroidDialogSetup

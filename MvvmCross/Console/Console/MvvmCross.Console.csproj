@@ -60,7 +60,7 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
