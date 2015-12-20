@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MvxFragmentPagerAdapter.cs" />
     <Compile Include="MvxSwipeRefreshLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxFragmentStatePagerAdapter.cs" />
