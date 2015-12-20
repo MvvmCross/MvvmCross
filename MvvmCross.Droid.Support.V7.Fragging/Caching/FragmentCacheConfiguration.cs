@@ -104,7 +104,5 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         {
             return _lookup.ToDictionary(x => x.Key, (keyValuePair) => MvxCachedFragmentInfoFactory.GetSerializableFragmentInfo(keyValuePair.Value));
         }
-
-      
     }
 }

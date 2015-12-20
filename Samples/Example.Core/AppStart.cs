@@ -11,7 +11,7 @@ namespace Example.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            ShowViewModel<LoginViewModel>();
+            ShowViewModel<MenuViewModel>();
         }
     }
 }

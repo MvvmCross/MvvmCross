@@ -13,7 +13,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
     [Register("example.droid.fragments.ExampleRecyclerViewFragment")]
     public class ExampleRecyclerViewFragment : BaseFragment<ExampleRecyclerViewModel>
     {

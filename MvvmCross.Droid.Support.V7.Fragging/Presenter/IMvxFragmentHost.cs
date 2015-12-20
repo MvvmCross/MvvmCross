@@ -5,14 +5,16 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
     public interface IMvxFragmentHost
     {
-        bool Show(MvxViewModelRequest request, Bundle bundle);
+        bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute );
         bool Close (IMvxViewModel viewModel);
     }
 }

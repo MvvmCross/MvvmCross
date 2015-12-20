@@ -7,84 +7,100 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Android.OS;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
     public class MvxFragmentsPresenter
         : MvxAndroidViewPresenter
-        , IMvxFragmentsPresenter
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 
-        private readonly Dictionary<Type, IMvxFragmentHost> _dictionary = new Dictionary<Type, IMvxFragmentHost>();
-        private IMvxNavigationSerializer _serializer;
+        private readonly FragmentHostRegistrationSettings _fragmentHostRegistrationSettings;
+        private readonly Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
 
-        protected IMvxNavigationSerializer Serializer
+        protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
+
+        public MvxFragmentsPresenter()
         {
-            get
-            {
-                if (_serializer != null)
-                    return _serializer;
-
-                _serializer = Mvx.Resolve<IMvxNavigationSerializer>();
-                return _serializer;
-            }
+            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
+            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(GetFragmentsAssemblies);
         }
 
-        /// <summary>
-        /// Register your ViewModel to be presented at a IMvxFragmentHost. Backingstore for this is a 
-        /// Dictionary, hence you can only have a ViewModel registered at one IMvxFragmentHost at a time.
-        /// Just call this method whenever you need to change the host.
-        /// </summary>
-        /// <typeparam name="TViewModel">Type of the ViewModel to present</typeparam>
-        /// <param name="host">Which IMvxFragmentHost (Activity) to present it at</param>
-        public void RegisterViewModelAtHost<TViewModel>(IMvxFragmentHost host) 
-            where TViewModel : IMvxViewModel
+        public override sealed void Show(MvxViewModelRequest request)
         {
-            if (host == null)
-            {
-                Mvx.Warning("You passed a null IMvxFragmentHost, removing the registration instead");
-                UnRegisterViewModelAtHost<TViewModel>();
-            }
-                
-            _dictionary[typeof (TViewModel)] = host;
+            if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType))
+                ShowFragment(request);
+            else
+                ShowActivity(request);
+            
         }
 
-        public void UnRegisterViewModelAtHost<TViewModel>()
-            where TViewModel : IMvxViewModel
+        protected virtual void ShowActivity(MvxViewModelRequest request)
         {
-            _dictionary.Remove(typeof (TViewModel));
+            base.Show(request);
         }
 
-        public override void Show(MvxViewModelRequest request)
+        protected virtual void ShowFragment(MvxViewModelRequest request)
         {
             var bundle = new Bundle();
             var serializedRequest = Serializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-            IMvxFragmentHost host;
-            if (_dictionary.TryGetValue(request.ViewModelType, out host))
+            if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
             {
-                if (host.Show(request, bundle))
-                    return;
+                Type newFragmentHostViewModelType =
+                    _fragmentHostRegistrationSettings.GetFragmentHostViewModelType(request.ViewModelType);
+
+                var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
+                ShowActivity(fragmentHostMvxViewModelRequest);
             }
-            
-            base.Show(request);
+
+            var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociated(request.ViewModelType);
+            var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
+            GetActualFragmentHost().Show(request, bundle, fragmentType, mvxFragmentAttributeAssociated);
         }
 
-        public override void Close (IMvxViewModel viewModel)
+        public override sealed void Close (IMvxViewModel viewModel)
         {
-            IMvxFragmentHost host;
-            if (_dictionary.TryGetValue(viewModel.GetType(), out host))
-            {
-                if (host.Close(viewModel))
-                    return;
-            }
-            base.Close (viewModel);
+            if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(viewModel.GetType()))
+                CloseFragment(viewModel);
+            else
+                CloseActivity(viewModel);
         }
+
+        protected virtual void CloseActivity(IMvxViewModel viewModel)
+        {
+            base.Close(viewModel);
+        }
+
+        protected virtual void CloseFragment(IMvxViewModel viewModel)
+        {
+            GetActualFragmentHost().Close(viewModel);
+        }
+
+        protected virtual IEnumerable<Assembly> GetFragmentsAssemblies()
+        {
+            yield return Assembly.GetExecutingAssembly();
+            yield return Assembly.GetCallingAssembly();
+        }
+
+        protected IMvxFragmentHost GetActualFragmentHost()
+        {
+            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var fragmentHost = currentActivity as IMvxFragmentHost;
+
+            if (fragmentHost == null)
+                throw new InvalidOperationException($"You are trying to close ViewModel associated with Fragment when currently top Activity ({currentActivity.GetType()} does not implement IMvxFragmentHost interface!");
+
+            return fragmentHost;
+        }
+         
     }
 }
