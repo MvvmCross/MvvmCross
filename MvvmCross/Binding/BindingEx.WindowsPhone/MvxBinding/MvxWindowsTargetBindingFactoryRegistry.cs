@@ -1,22 +1,25 @@
 ﻿// MvxWindowsTargetBindingFactoryRegistry.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-// ReSharper disable CheckNamespace
-namespace Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding
-// ReSharper restore CheckNamespace
-{
-    using Cirrious.MvvmCross.BindingEx.WindowsShared.MvxBinding.Target;
 
+namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding
+
+{
+    using global::MvvmCross.Binding;
+    using global::MvvmCross.Binding.Bindings.Target;
+    using global::MvvmCross.Binding.Bindings.Target.Construction;
     using global::MvvmCross.Platform.Platform;
+
+    using MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target;
 
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {
         protected override bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                                out Binding.Bindings.Target.IMvxTargetBinding binding)
+                                                                out IMvxTargetBinding binding)
         {
             if (this.TryCreatePropertyDependencyBasedBinding(target, targetName, out binding))
             {

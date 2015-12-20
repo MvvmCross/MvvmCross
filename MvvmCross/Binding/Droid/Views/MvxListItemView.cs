@@ -1,5 +1,5 @@
 // MvxListItemView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Content;
     using Android.Runtime;
 
-    [Register("cirrious.mvvmcross.binding.droid.views.MvxListItemView")]
+    [Register("mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView
         : MvxBaseListItemView
           , IMvxListItemView

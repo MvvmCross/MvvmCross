@@ -1,5 +1,5 @@
 // MvxCoreBindingBuilder.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -17,6 +17,7 @@ namespace MvvmCross.Binding
     using MvvmCross.Binding.Parse.Binding.Tibet;
     using MvvmCross.Binding.Parse.PropertyPath;
     using MvvmCross.Binding.ValueConverters;
+    using MvvmCross.Localization;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Platform;

@@ -1,15 +1,16 @@
 // MvxSingleViewModelCache.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using Cirrious.MvvmCross.ViewModels;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using Android.OS;
+
+    using MvvmCross.Core.ViewModels;
+
     public class MvxSingleViewModelCache
         : IMvxSingleViewModelCache
     {
@@ -21,27 +22,27 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public void Cache(IMvxViewModel toCache, Bundle bundle)
         {
-            _currentViewModel = toCache;
-            _counter++;
+            this._currentViewModel = toCache;
+            this._counter++;
 
-            if (_currentViewModel == null)
+            if (this._currentViewModel == null)
             {
                 return;
             }
 
-            bundle.PutInt(BundleCacheKey, _counter);
+            bundle.PutInt(BundleCacheKey, this._counter);
         }
 
         public IMvxViewModel GetAndClear(Bundle bundle)
         {
-            var storedViewModel = _currentViewModel;
-            _currentViewModel = null;
+            var storedViewModel = this._currentViewModel;
+            this._currentViewModel = null;
 
             if (bundle == null)
                 return null;
 
             var key = bundle.GetInt(BundleCacheKey);
-            var toReturn = (key == _counter) ? storedViewModel : null;
+            var toReturn = (key == this._counter) ? storedViewModel : null;
             return toReturn;
         }
     }

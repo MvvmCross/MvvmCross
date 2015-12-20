@@ -1,5 +1,5 @@
 // MvxBindingPropertySetter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -11,9 +11,12 @@ namespace MvvmCross.AutoView.Touch.Builders
 
     using CrossUI.Core.Builder;
 
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Binders;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;
+    using MvvmCross.Touch.Views;
 
     public class MvxBindingPropertySetter : IPropertySetter
 

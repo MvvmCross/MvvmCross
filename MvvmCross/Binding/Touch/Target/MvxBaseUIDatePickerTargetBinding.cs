@@ -1,5 +1,5 @@
 // MvxBaseUIDatePickerTargetBinding.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -10,6 +10,7 @@ namespace MvvmCross.Binding.Touch.Target
     using System;
     using System.Reflection;
 
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform.Platform;
 
     using UIKit;

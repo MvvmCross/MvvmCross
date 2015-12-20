@@ -1,23 +1,25 @@
 // MvxActivityAdapter.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Content;
-using Android.OS;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Views;
-using System;
-
-namespace Cirrious.MvvmCross.Droid.Views
+namespace MvvmCross.Droid.Views
 {
+    using System;
+
+    using Android.Content;
+    using Android.OS;
+
+    using MvvmCross.Core.Views;
+    using MvvmCross.Droid.Platform;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Droid.Platform;
+    using MvvmCross.Platform.Droid.Views;
+    using MvvmCross.Platform.Platform;
+
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {
         protected IMvxAndroidView AndroidView => Activity as IMvxAndroidView;
@@ -29,12 +31,12 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnStopCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewStop();
+            this.AndroidView.OnViewStop();
         }
 
         protected override void EventSourceOnStartCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewStart();
+            this.AndroidView.OnViewStart();
         }
 
         protected override void EventSourceOnStartActivityForResultCalled(object sender,
@@ -54,37 +56,37 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         protected override void EventSourceOnResumeCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewResume();
+            this.AndroidView.OnViewResume();
         }
 
         protected override void EventSourceOnRestartCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewRestart();
+            this.AndroidView.OnViewRestart();
         }
 
         protected override void EventSourceOnPauseCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewPause();
+            this.AndroidView.OnViewPause();
         }
 
         protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
         {
-            AndroidView.OnViewNewIntent();
+            this.AndroidView.OnViewNewIntent();
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            AndroidView.OnViewDestroy();
+            this.AndroidView.OnViewDestroy();
         }
 
         protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
-            AndroidView.OnViewCreate(eventArgs.Value);
+            this.AndroidView.OnViewCreate(eventArgs.Value);
         }
 
         protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            var mvxBundle = AndroidView.CreateSaveStateBundle();
+            var mvxBundle = this.AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
                 IMvxSavedStateConverter converter;
@@ -98,7 +100,7 @@ namespace Cirrious.MvvmCross.Droid.Views
                 }
             }
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-            cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
+            cache.Cache(this.AndroidView.ViewModel, bundleArgs.Value);
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,

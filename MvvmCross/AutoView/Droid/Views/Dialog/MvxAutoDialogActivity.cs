@@ -1,5 +1,5 @@
 // MvxAutoDialogActivity.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -16,9 +16,13 @@ namespace MvvmCross.AutoView.Droid.Views.Dialog
     using MvvmCross.AutoView.Droid.ExtensionMethods;
     using MvvmCross.AutoView.Droid.Interfaces;
     using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Droid.BindingContext;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Dialog.Droid.Views;
     using MvvmCross.Platform.IoC;
 
-    [Activity(Name = "cirrious.mvvmcross.autoview.droid.views.dialog.MvxAutoDialogActivity")]
+    [Activity(Name = "mvvmcross.autoview.droid.views.dialog.MvxAutoDialogActivity")]
     [MvxUnconventional]
     public class MvxAutoDialogActivity
         : MvxDialogActivity

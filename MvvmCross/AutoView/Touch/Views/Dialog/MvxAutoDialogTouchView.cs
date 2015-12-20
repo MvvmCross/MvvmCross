@@ -1,5 +1,5 @@
 // MvxAutoDialogTouchView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,7 +13,11 @@ namespace MvvmCross.AutoView.Touch.Views.Dialog
     using CrossUI.Touch.Dialog.Elements;
 
     using MvvmCross.AutoView.ExtensionMethods;
+    using MvvmCross.AutoView.Touch.ExtensionMethods;
     using MvvmCross.AutoView.Touch.Interfaces;
+    using MvvmCross.Binding.Bindings;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Dialog.Touch;
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
 

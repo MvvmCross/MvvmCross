@@ -1,5 +1,5 @@
 // MvxDialogViewController.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -15,6 +15,7 @@ namespace MvvmCross.Dialog.Touch
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Touch.Views;
 
     using UIKit;
 

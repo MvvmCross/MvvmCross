@@ -1,5 +1,5 @@
 ﻿// MvxViewModelLoaderTest.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -14,6 +14,7 @@ namespace MvvmCross.Test.ViewModels
 
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Test.Core;
     using MvvmCross.Test.Mocks.TestViewModels;
 
     using NUnit.Framework;

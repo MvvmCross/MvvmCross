@@ -4,11 +4,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cirrious.CrossCore.WindowsCommon")]
+[assembly: AssemblyTitle("MvvmCross.Platform.WindowsCommon")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Cirrious.CrossCore.WindowsCommon")]
+[assembly: AssemblyProduct("MvvmCross.Platform.WindowsCommon")]
 [assembly: AssemblyCopyright("Copyright © 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,5 +1,5 @@
 // GeneralTableViewSource.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.AutoView.Touch.Views.Lists
     using Foundation;
 
     using MvvmCross.AutoView.Touch.Interfaces.Lists;
+    using MvvmCross.Binding.Touch.Views;
     using MvvmCross.Platform;
 
     using UIKit;

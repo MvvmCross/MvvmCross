@@ -1,5 +1,5 @@
 // MvxCollectionViewSource.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,8 @@ namespace MvvmCross.Binding.Touch.Views
 
     using Foundation;
 
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform.WeakSubscription;
 
     using UIKit;

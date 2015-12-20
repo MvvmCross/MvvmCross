@@ -1,5 +1,5 @@
 ﻿// MvxCommandCollectionTest.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -11,6 +11,7 @@ namespace MvvmCross.Test.ViewModels
     using System.Windows.Input;
 
     using MvvmCross.Core.ViewModels;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

@@ -2,8 +2,11 @@
 {
     using System;
 
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Converters;
+    using MvvmCross.Test.Core;
 
     using NUnit.Framework;
 

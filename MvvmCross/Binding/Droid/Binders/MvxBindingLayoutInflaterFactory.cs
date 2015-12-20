@@ -1,5 +1,5 @@
 // MvxBindingLayoutInflaterFactory.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -13,6 +13,7 @@ namespace MvvmCross.Binding.Droid.Binders
     using Android.Util;
     using Android.Views;
 
+    using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;
 
     public class MvxBindingLayoutInflaterFactory

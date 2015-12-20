@@ -43,74 +43,74 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Bi.n.d.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\Bi.n.d.cs">
       <Link>Bi.n.d.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\Import.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\Import.cs">
       <Link>Import.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxBindingCreator.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\IMvxBindingCreator.cs">
       <Link>IMvxBindingCreator.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\IMvxWindowsAssemblyCache.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\IMvxWindowsAssemblyCache.cs">
       <Link>IMvxWindowsAssemblyCache.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\La.n.g.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\La.n.g.cs">
       <Link>La.n.g.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxBindingCreator.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\MvxBindingCreator.cs">
       <Link>MvxBindingCreator.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\mvxbinding\MvxMvvmCrossBindingCreator.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\mvxbinding\MvxMvvmCrossBindingCreator.cs">
       <Link>MvxBinding\MvxMvvmCrossBindingCreator.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\mvxbinding\MvxWindowsTargetBindingFactoryRegistry.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\mvxbinding\MvxWindowsTargetBindingFactoryRegistry.cs">
       <Link>MvxBinding\MvxWindowsTargetBindingFactoryRegistry.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxCollapsedTargetBinding.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxCollapsedTargetBinding.cs">
       <Link>MvxBinding\Target\MvxCollapsedTargetBinding.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxDependencyPropertyTargetBinding.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxDependencyPropertyTargetBinding.cs">
       <Link>MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxVisibleTargetBinding.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\mvxbinding\target\MvxVisibleTargetBinding.cs">
       <Link>MvxBinding\Target\MvxVisibleTargetBinding.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxDependencyPropertyExtensionMethods.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\MvxDependencyPropertyExtensionMethods.cs">
       <Link>MvxDependencyPropertyExtensionMethods.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxDesignTimeChecker.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\MvxDesignTimeChecker.cs">
       <Link>MvxDesignTimeChecker.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsAssemblyCache.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\MvxWindowsAssemblyCache.cs">
       <Link>MvxWindowsAssemblyCache.cs</Link>
     </Compile>
-    <Compile Include="..\Cirrious.MvvmCross.BindingEx.WindowsPhone\MvxWindowsBindingBuilder.cs">
+    <Compile Include="..\MvvmCross.BindingEx.WindowsPhone\MvxWindowsBindingBuilder.cs">
       <Link>MvxWindowsBindingBuilder.cs</Link>
     </Compile>
-    <Compile Include="..\cirrious.mvvmcross.bindingex.windowsphone\windowsbinding\MvxWindowsBindingCreator.cs">
+    <Compile Include="..\mvvmcross.bindingex.windowsphone\windowsbinding\MvxWindowsBindingCreator.cs">
       <Link>WindowsBinding\MvxWindowsBindingCreator.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Wpf\MvvmCross.Platform.Wpf.csproj">
+    <ProjectReference Include="..\..\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
       <Project>{3688D6FC-E7F4-485F-8B27-96C0A8C7EAED}</Project>
       <Name>MvvmCross.Platform.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore\MvvmCross.Platform.csproj">
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Binding\MvvmCross.Binding.csproj">
+    <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross.Localization\MvvmCross.Localization.csproj">
+    <ProjectReference Include="..\..\Core\Localization\MvvmCross.Localization.csproj">
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>MvvmCross.Localization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cirrious.MvvmCross\MvvmCross.Core.csproj">
+    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>

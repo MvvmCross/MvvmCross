@@ -1,5 +1,8 @@
 namespace MvvmCross.Binding.Test.Parse.Binding
 {
+    using MvvmCross.Binding.Parse.Binding;
+    using MvvmCross.Test.Core;
+
     using NUnit.Framework;
 
     public abstract class MvxBindingTest
