@@ -6,15 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
     public interface IMvxFragmentsPresenter
     {
-        void RegisterViewModelAtHost<TViewModel>(IMvxFragmentHost host) 
-            where TViewModel : IMvxViewModel;
-
-        void UnRegisterViewModelAtHost<TViewModel>() 
-            where TViewModel : IMvxViewModel;
+		void RegisterFragments (IEnumerable<Type> frags);
     }
 }

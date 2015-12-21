@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 {
@@ -27,5 +28,14 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 		/// </summary>
 		public bool IsCacheableFragment { get; set; } = true;
 
+		/// <summary>
+		/// Use to present fragment on a parent activity of type IMvxFragmentHost
+		/// TODO: Maybe support setting ViewModel which opens parent Activity as parent
+		/// </summary>
+		public Type ParentType { get; set; }
+
+		//TODO: AddToBackStack
+		//contentId
+		//
     }
 }

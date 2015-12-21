@@ -11,7 +11,10 @@ namespace Example.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            ShowViewModel<LoginViewModel>();
+			ShowViewModel<HomeViewModel>();
+
+			//This will show too soo on startup because the activity is not finished loading
+			ShowViewModel<MenuViewModel>();
         }
     }
 }

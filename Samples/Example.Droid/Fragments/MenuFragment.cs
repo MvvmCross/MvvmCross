@@ -12,7 +12,9 @@ using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment]
+	[MvxFragment(
+		ParentType = typeof(MainActivity)
+	)]
     [Register("example.droid.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {

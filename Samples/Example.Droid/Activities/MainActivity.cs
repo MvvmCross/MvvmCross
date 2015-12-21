@@ -33,14 +33,17 @@ namespace Example.Droid.Activities
         {
             base.OnCreate(bundle);
 
-            RegisterForDetailsRequests();
-
             SetContentView(Resource.Layout.activity_main);
+
+			//TODO: Maybe move this to the base class
+			var presenter = (MvxFragmentsPresenter)Mvx.Resolve<IMvxFragmentsPresenter> ();
+			presenter.FragmentHostCreated (this);
 
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
-            if(bundle == null)
-                ViewModel.ShowMenuAndFirstDetail();
+			//TODO: Remove this workaround
+            //if(bundle == null)
+            //    ViewModel.ShowMenuAndFirstDetail();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -59,31 +62,11 @@ namespace Example.Droid.Activities
             return new FragmentCacheConfigurationCustomFragmentInfo();
         }
 
-        private void RegisterForDetailsRequests()
-        {
-            //TODO improve Mvx and MvxAndroidSupport to enable registration based on a config dictionary.
-            //currently, all the register methods expect the Frag + VM types to be added as generics, thus, we need to change it to support parameters
-            RegisterFragmentAtHost<MenuFragment, MenuViewModel>(typeof(MenuViewModel).Name);
-            RegisterFragmentAtHost<HomeFragment, HomeViewModel>(typeof(HomeViewModel).Name);
-            RegisterFragmentAtHost<ExampleViewPagerFragment, ExampleViewPagerViewModel>(typeof(ExampleViewPagerViewModel).Name);
-            RegisterFragmentAtHost<ExampleRecyclerViewFragment, ExampleRecyclerViewModel>(typeof(ExampleRecyclerViewModel).Name);
-            RegisterFragmentAtHost<SettingsFragment, SettingsViewModel>(typeof(SettingsViewModel).Name);
-
-            (FragmentCacheConfiguration as FragmentCacheConfigurationCustomFragmentInfo).RegisterFragmentsToCache();
-        }
-        public void RegisterFragmentAtHost<TFragment, TViewModel>(string tag)
-            where TFragment : IMvxFragmentView
-            where TViewModel : IMvxViewModel
-        {
-            var customPresenter = Mvx.Resolve<IMvxFragmentsPresenter>();
-            customPresenter.RegisterViewModelAtHost<TViewModel>(this);
-        }
-
         public override void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, Android.Support.V4.App.FragmentTransaction transaction)
         {
             base.OnFragmentCreated(fragmentInfo, transaction);
 
-            var myCustomInfo = (CustomFragmentInfo)fragmentInfo;
+            //var myCustomInfo = (CustomFragmentInfo)fragmentInfo;
 
             // You can do fragment + transaction based configurations here.
             // Note that, the cached fragment might be reused in another transaction afterwards.
@@ -115,8 +98,6 @@ namespace Example.Droid.Activities
             //Unlock the menu sliding gesture
             DrawerLayout.SetDrawerLockMode(DrawerLayout.LockModeUnlocked);
         }
-
-
 
         public bool Show(MvxViewModelRequest request, Bundle bundle)
         {
