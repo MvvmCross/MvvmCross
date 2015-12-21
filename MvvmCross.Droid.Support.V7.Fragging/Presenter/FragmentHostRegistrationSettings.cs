@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Android.App;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
-    internal class FragmentHostRegistrationSettings
+    public class FragmentHostRegistrationSettings
     {
         private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
@@ -22,7 +22,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
         public FragmentHostRegistrationSettings(IEnumerable<Assembly> assembliesToLookup)
         {
-			_assembliesToLookup = assembliesToLookup;
+            _assembliesToLookup = assembliesToLookup;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
         }
 
@@ -36,7 +36,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
                 isInitialized = true;
 
                 var typesWithMvxFragmentAttribute =
-					_assembliesToLookup
+                    _assembliesToLookup
                         .SelectMany(x => x.DefinedTypes)
                         .Select(x => x.AsType())
                         .Where(x => x.HasMvxFragmentAttribute())
@@ -75,8 +75,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
                 throw new InvalidOperationException($"Sorry but looks like your Activity ({currentActivityType.ToString()}) does not inherit from MvvmCross Activity - Viewmodel Type is null!");
 
             return GetMvxFragmentAttributeAssociated(forViewModelType).ParentActivityViewModelType == activityViewModelType;
-
         }
+
         public Type GetFragmentHostViewModelType(Type forViewModelType)
         {
             InitializeIfNeeded();

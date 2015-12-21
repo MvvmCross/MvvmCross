@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
@@ -21,7 +21,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
         public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType)
         {
             var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxFragmentAttribute), true);
-            
+
             if (!attributes.Any())
                 throw new InvalidOperationException($"Type does not have {nameof(MvxFragmentAttribute)} attribute!");
 
@@ -32,19 +32,19 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
         public static bool IsFragmentCacheable(this Type fragmentType)
         {
             if (!fragmentType.HasMvxFragmentAttribute())
-             return false;
+                return false;
 
             var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
             return mvxFragmentAttribute.IsCacheableFragment;
         }
 
-		public static Type GetViewModelType(this Type fragmentType)
-		{
-			if (!fragmentType.HasMvxFragmentAttribute())
-				return null;
+        public static Type GetViewModelType(this Type fragmentType)
+        {
+            if (!fragmentType.HasMvxFragmentAttribute())
+                return null;
 
-			var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
-			return mvxFragmentAttribute.ViewModelType;
-		}
+            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+            return mvxFragmentAttribute.ViewModelType;
+        }
     }
 }

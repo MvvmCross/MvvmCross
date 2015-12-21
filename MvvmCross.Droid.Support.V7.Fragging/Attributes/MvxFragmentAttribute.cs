@@ -2,11 +2,10 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 {
@@ -24,16 +23,14 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
 		/// </summary>
 		public Type ViewModelType { get; set; }
 
-		/// <summary>
-		/// Indicates if the fragment can be cached. True by default.
-		/// </summary>
-		public bool IsCacheableFragment { get; set; } = true;
-
+        /// <summary>
+        /// Indicates if the fragment can be cached. True by default.
+        /// </summary>
+        public bool IsCacheableFragment { get; set; } = true;
 
         /// <summary>
         /// Fragment parent activity ViewModel Type. This activity is shown if ShowToViewModel call for Fragment is called from other activity.
         /// </summary>
-
         public Type ParentActivityViewModelType { get; private set; }
 
         /// <summary>
@@ -41,5 +38,4 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
         /// </summary>
         public int FragmentContentId { get; private set; }
     }
-
 }

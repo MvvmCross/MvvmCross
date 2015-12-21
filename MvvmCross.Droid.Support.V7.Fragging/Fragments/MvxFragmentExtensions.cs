@@ -2,10 +2,9 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
@@ -13,13 +12,14 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Support.V7.Fragging.Caching;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 {
@@ -39,7 +39,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
             {
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
-                RunViewModelLifecycle(fragmentView.ViewModel, bundle, request); 
+                RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
 
                 return;
             }
@@ -58,7 +58,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
             var type = fragmentView.GetType();
-                
+
             if (viewModelType == null)
             {
                 if (!type.HasMvxFragmentAttribute())
@@ -102,7 +102,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
             {
                 throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
             }
-
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
@@ -175,7 +174,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
         public static void RegisterFragmentViewToCacheIfNeeded(this IMvxFragmentView fragmentView)
         {
             Fragment representedFragment = fragmentView as Fragment;
-            
+
             if (representedFragment == null)
                 throw new InvalidOperationException($"Represented type: {fragmentView.GetType()} is not a Fragment!");
 
@@ -185,7 +184,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
                 throw new InvalidOperationException("Something wrong happend, fragment has no activity attached during registration!");
 
             IFragmentCacheableActivity cacheableActivity = fragmentParentActivtiy as IFragmentCacheableActivity;
-            
+
             if (cacheableActivity == null)
                 throw new InvalidOperationException($"Fragment has activity attached but it does not implement {nameof(IFragmentCacheableActivity)} ! Cannot register fragment to cache!");
 
@@ -195,6 +194,5 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
             var fragmentCacheConfiguration = cacheableActivity.FragmentCacheConfiguration;
             fragmentCacheConfiguration.RegisterFragmentToCache(fragmentView.UniqueImmutableCacheTag, fragmentView.GetType(), fragmentView.FindAssociatedViewModelType());
         }
-
     }
 }

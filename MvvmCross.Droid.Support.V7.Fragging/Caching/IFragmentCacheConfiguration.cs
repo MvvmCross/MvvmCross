@@ -1,8 +1,8 @@
-using System;
 using Android.OS;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
@@ -28,8 +28,11 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             where TViewModel : IMvxViewModel;
 
         bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType);
+
         bool TryGetValue(string registeredFragmentTag, out IMvxCachedFragmentInfo cachedFragmentInfo);
+
         void RestoreCacheConfiguration(Bundle savedInstanceState, IMvxJsonConverter serializer);
+
         void SaveFragmentCacheConfigurationState(Bundle outState, IMvxJsonConverter serializer);
     }
 }

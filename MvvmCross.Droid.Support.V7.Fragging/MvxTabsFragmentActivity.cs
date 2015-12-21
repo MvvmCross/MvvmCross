@@ -2,20 +2,20 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using Cirrious.CrossCore.Core;
 using Cirrious.MvvmCross.ViewModels;
-using Android.Runtime;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvvmCross.Droid.Support.V7.Fragging
 {
@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             _tabContentId = tabContentId;
         }
 
-        protected MvxTabsFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer): base(javaReference, transfer)
+        protected MvxTabsFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -101,7 +101,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost) FindViewById(Android.Resource.Id.TabHost);
+            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);
@@ -123,7 +123,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging
 
         protected void AddTab<TFragment>(Bundle args, IMvxViewModel viewModel, TabHost.TabSpec tabSpec)
         {
-            var tabInfo = new TabInfo(tabSpec.Tag, typeof (TFragment), args, viewModel);
+            var tabInfo = new TabInfo(tabSpec.Tag, typeof(TFragment), args, viewModel);
             AddTab(this, _tabHost, tabSpec, tabInfo);
             _lookup.Add(tabInfo.Tag, tabInfo);
         }

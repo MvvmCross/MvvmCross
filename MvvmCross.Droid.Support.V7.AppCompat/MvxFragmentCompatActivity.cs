@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
@@ -65,6 +65,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var view = this.BindingInflate(layoutResId, null);
             SetContentView(view);
         }
+
         protected override void AttachBaseContext(Context @base)
         {
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));

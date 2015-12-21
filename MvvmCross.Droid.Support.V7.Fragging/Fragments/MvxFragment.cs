@@ -2,14 +2,14 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
 using Android.Runtime;
 using Cirrious.MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
@@ -79,14 +79,13 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
         : MvxFragment
         , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-
         protected MvxFragment()
         {
-
         }
 
-        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         public new TViewModel ViewModel
         {

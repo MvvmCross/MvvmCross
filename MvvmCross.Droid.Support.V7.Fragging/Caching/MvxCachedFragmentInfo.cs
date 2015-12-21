@@ -1,5 +1,5 @@
-using System;
 using Android.Support.V4.App;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
@@ -19,6 +19,5 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         public Fragment CachedFragment { get; set; }
         public int ContentId { get; set; }
         public bool AddToBackStack { get; set; }
-
     }
 }
