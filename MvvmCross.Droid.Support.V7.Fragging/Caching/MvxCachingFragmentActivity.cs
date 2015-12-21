@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
@@ -13,15 +13,14 @@ using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Views;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
@@ -209,7 +208,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
             ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
 
-
             if (fragInfo.AddToBackStack || forceAddToBackStack)
             {
                 ft.AddToBackStack(fragInfo.Tag);
@@ -271,7 +269,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
             var lastFragment = currentCacheableFragments.Last();
             var tagFragment = GetTagFromFragment(lastFragment);
-            
+
             return GetFragmentInfoByTag(tagFragment);
         }
 
@@ -305,13 +303,24 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return namespaceText + fragmentType.Name;
         }
 
-        public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+        public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
         // Called before the transaction is commited
         public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
-        public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo) { }
-        public virtual void OnFragmentPopped(IList<IMvxCachedFragmentInfo> currentFragmentsInfo) { }
-        public virtual void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+
+        public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
+        {
+        }
+
+        public virtual void OnFragmentPopped(IList<IMvxCachedFragmentInfo> currentFragmentsInfo)
+        {
+        }
+
+        public virtual void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
         protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {

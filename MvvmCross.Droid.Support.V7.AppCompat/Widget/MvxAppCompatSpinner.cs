@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections;
-using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Cirrious.MvvmCross.Binding.Attributes;
 using Cirrious.MvvmCross.Binding.Droid.Views;
+using System;
+using System.Collections;
+using System.Windows.Input;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
@@ -30,7 +30,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 new MvxAdapter(context)
                 {
                     SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line
-                }) {}
+                })
+        { }
 
         public MvxAppCompatSpinner(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
@@ -44,7 +45,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         }
 
         protected MvxAppCompatSpinner(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) {}
+            : base(javaReference, transfer)
+        { }
 
         public new IMvxAdapter Adapter
         {

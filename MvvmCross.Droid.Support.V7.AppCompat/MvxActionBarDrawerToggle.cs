@@ -2,18 +2,18 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    public class ActionBarDrawerEventArgs : EventArgs 
+    public class ActionBarDrawerEventArgs : EventArgs
     {
         public View DrawerView { get; private set; }
 
@@ -23,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public sealed class ActionBarDrawerSlideEventArgs : ActionBarDrawerEventArgs 
+    public sealed class ActionBarDrawerSlideEventArgs : ActionBarDrawerEventArgs
     {
         public float SlideOffset { get; private set; }
 
@@ -34,7 +34,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public sealed class ActionBarDrawerStateChangeEventArgs : EventArgs 
+    public sealed class ActionBarDrawerStateChangeEventArgs : EventArgs
     {
         public int NewState { get; private set; }
 
@@ -44,17 +44,22 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle 
+    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle
     {
         public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
-            : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes) { }
+            : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes)
+        { }
 
         public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes)
-            : base(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes) { }
+            : base(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes)
+        { }
 
         public event EventHandler<ActionBarDrawerEventArgs> DrawerClosed;
+
         public event EventHandler<ActionBarDrawerEventArgs> DrawerOpened;
+
         public event EventHandler<ActionBarDrawerSlideEventArgs> DrawerSlide;
+
         public event EventHandler<ActionBarDrawerStateChangeEventArgs> DrawerStateChanged;
 
         public override void OnDrawerClosed(View drawerView)

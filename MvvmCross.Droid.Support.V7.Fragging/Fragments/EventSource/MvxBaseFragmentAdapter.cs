@@ -2,15 +2,13 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
-using Android.Support.V4.App;
 using Cirrious.CrossCore.Core;
-
+using System;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
@@ -66,7 +64,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
         protected virtual void HandleStartCalled(object sender, EventArgs e)
         {
         }
-
 
         protected virtual void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> e)
         {

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.OS;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
@@ -12,6 +12,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
     {
         private Dictionary<string, IMvxCachedFragmentInfo> _lookup;
         private const string SavedFragmentCacheConfiguration = "__mvxSavedFragmentCacheConfiguration";
+
         private const string SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState =
             "__mvxSavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState";
 
@@ -85,8 +86,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             _lookup = serializedMvxCachedFragmentInfos.ToDictionary(x => x.Key,
                 (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value as SerializableMvxCachedFragmentInfo));
         }
-
-
 
         public virtual void SaveFragmentCacheConfigurationState(Bundle outState, IMvxJsonConverter serializer)
         {

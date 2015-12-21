@@ -2,17 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Droid.Views;
-using Android.Runtime;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging
 {
@@ -23,7 +23,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging
         protected MvxEventSourceFragmentActivity()
         {
         }
-        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+
+        protected MvxEventSourceFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -92,27 +95,39 @@ namespace MvvmCross.Droid.Support.V7.Fragging
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				DisposeCalled.Raise(this);
-			}
-			base.Dispose(disposing);
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                DisposeCalled.Raise(this);
+            }
+            base.Dispose(disposing);
+        }
 
         public event EventHandler DisposeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+
         public event EventHandler DestroyCalled;
+
         public event EventHandler<MvxValueEventArgs<Intent>> NewIntentCalled;
+
         public event EventHandler ResumeCalled;
+
         public event EventHandler PauseCalled;
+
         public event EventHandler StartCalled;
+
         public event EventHandler RestartCalled;
+
         public event EventHandler StopCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }
 }

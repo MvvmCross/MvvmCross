@@ -2,7 +2,7 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
@@ -16,15 +16,18 @@ using System;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-	public abstract class MvxEventSourceAppCompatActivity
+    public abstract class MvxEventSourceAppCompatActivity
         : AppCompatActivity
         , IMvxEventSourceActivity
-	{
-		protected MvxEventSourceAppCompatActivity()
+    {
+        protected MvxEventSourceAppCompatActivity()
         {
         }
-        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-			
+
+        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             CreateWillBeCalled.Raise(this, bundle);
@@ -102,17 +105,29 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         public event EventHandler DisposeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+
         public event EventHandler DestroyCalled;
+
         public event EventHandler<MvxValueEventArgs<Intent>> NewIntentCalled;
+
         public event EventHandler ResumeCalled;
+
         public event EventHandler PauseCalled;
+
         public event EventHandler StartCalled;
+
         public event EventHandler RestartCalled;
+
         public event EventHandler StopCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
     }
 }

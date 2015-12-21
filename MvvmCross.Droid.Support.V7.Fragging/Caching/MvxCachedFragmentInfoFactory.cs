@@ -1,10 +1,9 @@
-using System;
 using Cirrious.MvvmCross.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
-
     public class MvxCachedFragmentInfoFactory : IMvxCachedFragmentInfoFactory
     {
         /// <summary>

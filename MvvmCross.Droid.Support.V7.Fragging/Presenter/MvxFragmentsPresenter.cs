@@ -2,18 +2,17 @@
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Android.OS;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
@@ -27,10 +26,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
         protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
 
-		public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
+        public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
             _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
-			_fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
+            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
         }
 
         public override sealed void Show(MvxViewModelRequest request)
@@ -39,7 +38,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
                 ShowFragment(request);
             else
                 ShowActivity(request);
-            
         }
 
         protected virtual void ShowActivity(MvxViewModelRequest request)
@@ -67,7 +65,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
             GetActualFragmentHost().Show(request, bundle, fragmentType, mvxFragmentAttributeAssociated);
         }
 
-        public override sealed void Close (IMvxViewModel viewModel)
+        public override sealed void Close(IMvxViewModel viewModel)
         {
             if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(viewModel.GetType()))
                 CloseFragment(viewModel);
@@ -95,6 +93,5 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
             return fragmentHost;
         }
-         
     }
 }
