@@ -12,7 +12,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
     internal class FragmentHostRegistrationSettings
     {
-        private readonly Func<IEnumerable<Assembly>> _assembliesToLookupProvider;
+        private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
         private Dictionary<Type, MvxFragmentAttribute> _fragmentTypeToMvxFragmentAttributeMap;
@@ -20,9 +20,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
         private bool isInitialized;
 
-        public FragmentHostRegistrationSettings(Func<IEnumerable<Assembly>> assembliesToLookupProvider)
+        public FragmentHostRegistrationSettings(IEnumerable<Assembly> assembliesToLookup)
         {
-            _assembliesToLookupProvider = assembliesToLookupProvider;
+			_assembliesToLookup = assembliesToLookup;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
         }
 
@@ -35,9 +35,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
                 isInitialized = true;
 
-                var assembliesToLookIn = _assembliesToLookupProvider();
                 var typesWithMvxFragmentAttribute =
-                    assembliesToLookIn
+					_assembliesToLookup
                         .SelectMany(x => x.DefinedTypes)
                         .Select(x => x.AsType())
                         .Where(x => x.HasMvxFragmentAttribute())

@@ -30,7 +30,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 		public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
             _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
-			_fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(() => AndroidViewAssemblies);
+			_fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
         }
 
         public override sealed void Show(MvxViewModelRequest request)
