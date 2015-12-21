@@ -3,7 +3,6 @@ using Cirrious.MvvmCross.Touch.Views;
 
 namespace $rootnamespace$.Views
 {
-    [Register("FirstView")]
     public partial class FirstView : MvxViewController
     {
         public FirstView() : base("FirstView", null)
