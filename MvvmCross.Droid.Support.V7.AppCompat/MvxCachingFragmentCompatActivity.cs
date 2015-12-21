@@ -24,11 +24,12 @@ using System.Linq;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
 	[Register("MvvmCross.Droid.Support.V7.AppCompat.MvxCachingFragmentCompatActivity")]
-    public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity
+    public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
 	    private IFragmentCacheConfiguration _fragmentCacheConfiguration;
@@ -329,22 +330,37 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return fragInfo;
         }
 
-	    public IFragmentCacheConfiguration FragmentCacheConfiguration
-	    {
-	        get
-	        {
-	            if (_fragmentCacheConfiguration == null)
-	                _fragmentCacheConfiguration = BuildFragmentCacheConfiguration();
-
-	            return _fragmentCacheConfiguration;
-	        }
-	    }
+	    public IFragmentCacheConfiguration FragmentCacheConfiguration => _fragmentCacheConfiguration ?? (_fragmentCacheConfiguration = BuildFragmentCacheConfiguration());
 
 	    public virtual IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
 	    {
 	        return new DefaultFragmentCacheConfiguration();
 	    }
-	}
+
+	    public virtual bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute)
+	    {
+	        var fragmentTag = GetFragmentTag(request, bundle, fragmentType);
+	        FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType);
+            
+            ShowFragment(fragmentTag, fragmentAttribute.FragmentContentId, bundle);
+	        return true;
+	    }
+
+	    protected virtual string GetFragmentTag(MvxViewModelRequest request, Bundle bundle, Type fragmentType)
+	    {
+            // THAT won't work properly if you have multiple instance of same fragment type in same FragmentHost.
+            // Override that in such cases
+	        return request.ViewModelType.FullName;
+	    }
+
+	    public bool Close(IMvxViewModel viewModel)
+	    {
+            // Close method can not be fixed at this moment
+            // That requires some changes in main MvvmCross library
+
+	        return false;
+	    }
+    }
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
         : MvxCachingFragmentCompatActivity

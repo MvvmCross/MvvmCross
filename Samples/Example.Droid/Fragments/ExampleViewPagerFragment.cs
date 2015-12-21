@@ -4,20 +4,18 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Views;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
+using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
-using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
-	[MvxFragment(
-		ParentType = typeof(MainActivity)
-	)]
+    [MvxFragment(typeof (MainViewModel), Resource.Id.content_frame)]
     [Register("example.droid.fragments.ExampleViewPagerFragment")]
     public class ExampleViewPagerFragment : BaseFragment<ExampleViewPagerViewModel>
     {
+        protected override int FragmentId => Resource.Layout.fragment_example_viewpager;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
@@ -25,15 +23,20 @@ namespace Example.Droid.Fragments
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager != null)
             {
-                var fragments = new List<MvxFragmentStatePagerAdapter.FragmentInfo>
+                var fragments = new List<MvxFragmentPagerAdapter.FragmentInfo>
                 {
-                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 1", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
-                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 2", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
-                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 3", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
-                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 4", typeof(RecyclerViewFragment), typeof(RecyclerViewModel)),
-                    new MvxFragmentStatePagerAdapter.FragmentInfo("RecyclerView 5", typeof(RecyclerViewFragment), typeof(RecyclerViewModel))
+                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 1", typeof (RecyclerViewFragment),
+                        typeof (RecyclerViewModel)),
+                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 2", typeof (RecyclerViewFragment),
+                        typeof (RecyclerViewModel)),
+                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 3", typeof (RecyclerViewFragment),
+                        typeof (RecyclerViewModel)),
+                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 4", typeof (RecyclerViewFragment),
+                        typeof (RecyclerViewModel)),
+                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 5", typeof (RecyclerViewFragment),
+                        typeof (RecyclerViewModel))
                 };
-                viewPager.Adapter = new MvxFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
+                viewPager.Adapter = new MvxFragmentPagerAdapter(Activity, ChildFragmentManager, fragments);
             }
 
             var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabs);
@@ -41,7 +44,5 @@ namespace Example.Droid.Fragments
 
             return view;
         }
-
-        protected override int FragmentId => Resource.Layout.fragment_example_viewpager;
     }
 }

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Example.Core.ViewModels;
 using Example.Droid.Fragments;
-using MvvmCross.Droid.Support.V7.Fragging;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities.Caching
@@ -14,26 +12,26 @@ namespace Example.Droid.Activities.Caching
             <string, CustomFragmentInfo>
         {
             {
-                typeof (MenuViewModel).Name,
+                typeof (MenuViewModel).ToString(),
                 new CustomFragmentInfo(typeof (MenuViewModel).Name, typeof (MenuFragment), typeof (MenuViewModel))
             },
             {
-                typeof (HomeViewModel).Name,
+                typeof (HomeViewModel).ToString(),
                 new CustomFragmentInfo(typeof (HomeViewModel).Name, typeof (HomeFragment), typeof (HomeViewModel),
                     isRoot: true)
             },
             {
-                typeof (ExampleViewPagerViewModel).Name,
+                typeof (ExampleViewPagerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleViewPagerViewModel).Name, typeof (ExampleViewPagerFragment),
                     typeof (ExampleViewPagerViewModel), isRoot: true)
             },
             {
-                typeof (ExampleRecyclerViewModel).Name,
+                typeof (ExampleRecyclerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
                     typeof (ExampleRecyclerViewModel), isRoot: true)
             },
             {
-                typeof (SettingsViewModel).Name,
+                typeof (SettingsViewModel).ToString(),
                 new CustomFragmentInfo(typeof (SettingsViewModel).Name, typeof (SettingsFragment),
                     typeof (SettingsViewModel), isRoot: true)
             }
@@ -47,7 +45,11 @@ namespace Example.Droid.Activities.Caching
         public override IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType,
             bool addToBackstack = false)
         {
-            var fragInfo = MyFragmentsInfo[tag];
+            var viewModelTypeString = viewModelType.ToString();
+            if (!MyFragmentsInfo.ContainsKey(viewModelTypeString))
+                return base.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
+
+            var fragInfo = MyFragmentsInfo[viewModelTypeString];
             return fragInfo;
         }
 
@@ -59,7 +61,7 @@ namespace Example.Droid.Activities.Caching
 
             return new SerializableCustomFragmentInfo(baseSerializableCachedFragmentInfo)
             {
-                IsRoot = customFragmentInfo.IsRoot
+                IsRoot = customFragmentInfo?.IsRoot ?? false
             };
         }
 
@@ -71,7 +73,7 @@ namespace Example.Droid.Activities.Caching
 
             return new CustomFragmentInfo(baseCachedFragmentInfo.Tag, baseCachedFragmentInfo.FragmentType,
                 baseCachedFragmentInfo.ViewModelType, baseCachedFragmentInfo.AddToBackStack,
-                serializableCustomFragmentInfo.IsRoot)
+                serializableCustomFragmentInfo?.IsRoot ?? false)
             {
                 ContentId = baseCachedFragmentInfo.ContentId,
                 CachedFragment = baseCachedFragmentInfo.CachedFragment

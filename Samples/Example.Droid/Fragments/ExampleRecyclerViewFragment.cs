@@ -10,13 +10,10 @@ using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
-using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
-	[MvxFragment(
-		ParentType = typeof(MainActivity)
-	)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
     [Register("example.droid.fragments.ExampleRecyclerViewFragment")]
     public class ExampleRecyclerViewFragment : BaseFragment<ExampleRecyclerViewModel>
     {
