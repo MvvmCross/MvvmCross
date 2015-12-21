@@ -6,24 +6,28 @@ using UIKit;
 
 namespace $rootnamespace$
 {
-	[Register("AppDelegate")]
-	public partial class AppDelegate : MvxApplicationDelegate
-	{
-		UIWindow _window;
+    [Register("AppDelegate")]
+    public partial class AppDelegate : MvxApplicationDelegate
+    {
+        public override UIWindow Window
+        {
+            get;
+            set;
+        }
 
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-		{
-			_window = new UIWindow(UIScreen.MainScreen.Bounds);
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-			var setup = new Setup(this, _window);
-			setup.Initialize();
+            var setup = new Setup(this, Window);
+            setup.Initialize();
 
-			var startup = Mvx.Resolve<IMvxAppStart>();
-			startup.Start();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
 
-			_window.MakeKeyAndVisible();
-			
-			return true;
-		}
-	}
+            Window.MakeKeyAndVisible();
+
+            return true;
+        }
+    }
 }
