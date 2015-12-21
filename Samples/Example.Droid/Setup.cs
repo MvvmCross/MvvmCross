@@ -36,23 +36,12 @@ namespace Example.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxApplicationFragmentsPresenter();
+			return new MvxFragmentsPresenter(AndroidViewAssemblies);
         }
 
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
-        }
-    }
-
-    public class MvxApplicationFragmentsPresenter : MvxFragmentsPresenter
-    {
-        protected override IEnumerable<Assembly> GetFragmentsAssemblies()
-        {
-            var fragmentAssemblies = base.GetFragmentsAssemblies().ToList();
-            fragmentAssemblies.Add(typeof(MenuFragment).Assembly);
-
-            return fragmentAssemblies;
         }
     }
 }

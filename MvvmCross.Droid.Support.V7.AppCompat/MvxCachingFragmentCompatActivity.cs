@@ -349,7 +349,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 	    protected virtual string GetFragmentTag(MvxViewModelRequest request, Bundle bundle, Type fragmentType)
 	    {
             // THAT won't work properly if you have multiple instance of same fragment type in same FragmentHost.
-            // Override that in such casex
+            // Override that in such cases
 	        return request.ViewModelType.FullName;
 	    }
 

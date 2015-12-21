@@ -27,10 +27,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 
         protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
 
-        public MvxFragmentsPresenter()
+		public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
             _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
-            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(GetFragmentsAssemblies);
+			_fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(() => AndroidViewAssemblies);
         }
 
         public override sealed void Show(MvxViewModelRequest request)
@@ -83,12 +83,6 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
         protected virtual void CloseFragment(IMvxViewModel viewModel)
         {
             GetActualFragmentHost().Close(viewModel);
-        }
-
-        protected virtual IEnumerable<Assembly> GetFragmentsAssemblies()
-        {
-            yield return Assembly.GetExecutingAssembly();
-            yield return Assembly.GetCallingAssembly();
         }
 
         protected IMvxFragmentHost GetActualFragmentHost()
