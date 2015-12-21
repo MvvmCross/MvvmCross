@@ -117,6 +117,7 @@ This package contains the 'Getting Started' libraries for MvvmCross
 		<file src="TouchContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
 		<file src="TouchContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
 		<file src="TouchContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
+		<file src="TouchContent\FirstView.designer.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.designer.cs.pp" />
 		<file src="TouchContent\FirstView.xib" target="content\Xamarin.iOS10\Views\FirstView.xib" />
 		<file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
