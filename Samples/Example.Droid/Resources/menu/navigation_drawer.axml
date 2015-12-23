@@ -13,6 +13,9 @@ xmlns:local="http://schemas.android.com/apk/res-auto">
        		<item
 	            android:id="@+id/nav_viewpager"
 	            android:title="ViewPager" />
+          <item
+	            android:id="@+id/nav_viewpager_state"
+	            android:title="ViewPagerState" />
             <item
 	            android:id="@+id/nav_recyclerview"
 	            android:title="Recyclerview" />

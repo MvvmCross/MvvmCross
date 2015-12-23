@@ -108,9 +108,9 @@ namespace Example.Droid.Activities
 
     public class CustomFragmentInfo : MvxCachedFragmentInfo
     {
-        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false,
+        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false,
             bool isRoot = false)
-            : base(tag, fragmentType, viewModelType, addToBackstack)
+            : base(tag, fragmentType, viewModelType, cacheFragment, addToBackstack)
         {
             IsRoot = isRoot;
         }

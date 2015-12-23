@@ -92,6 +92,8 @@
   <ItemGroup>
     <Compile Include="Activities\Caching\FragmentCacheConfigurationCustomFragmentInfo.cs" />
     <Compile Include="Activities\Caching\MainActivityFragmentCacheInfoFactory.cs" />
+    <Compile Include="Fragments\BaseStateFragment.cs" />
+    <Compile Include="Fragments\ExampleViewPagerStateFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DebugTrace.cs" />
@@ -121,8 +123,13 @@
     <AndroidResource Include="Resources\layout\toolbar_actionbar.axml" />
     <AndroidResource Include="Resources\drawable\MvvmCrossLogo.png" />
     <AndroidResource Include="Resources\layout\fragment_home.axml" />
-    <AndroidResource Include="Resources\layout\fragment_example_viewpager.axml" />
+    <AndroidResource Include="Resources\layout\fragment_example_viewpager.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_example_recyclerview.axml" />
+    <AndroidResource Include="Resources\layout\fragment_example_viewpager_state.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

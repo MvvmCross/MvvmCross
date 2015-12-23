@@ -26,6 +26,11 @@ namespace Example.Droid.Activities.Caching
                     typeof (ExampleViewPagerViewModel), isRoot: true)
             },
             {
+                typeof (ExampleViewPagerStateViewModel).ToString(),
+                new CustomFragmentInfo(typeof (ExampleViewPagerStateViewModel).Name, typeof (ExampleViewPagerStateFragment),
+                    typeof (ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
+            },
+            {
                 typeof (ExampleRecyclerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
                     typeof (ExampleRecyclerViewModel), isRoot: true)
@@ -42,12 +47,12 @@ namespace Example.Droid.Activities.Caching
             return MyFragmentsInfo;
         }
 
-        public override IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType,
+        public override IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true,
             bool addToBackstack = false)
         {
             var viewModelTypeString = viewModelType.ToString();
             if (!MyFragmentsInfo.ContainsKey(viewModelTypeString))
-                return base.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
+                return base.CreateFragmentInfo(tag, fragmentType, viewModelType, cacheFragment, addToBackstack);
 
             var fragInfo = MyFragmentsInfo[viewModelTypeString];
             return fragInfo;
