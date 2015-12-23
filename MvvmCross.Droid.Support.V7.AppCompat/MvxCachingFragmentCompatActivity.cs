@@ -197,7 +197,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             fragInfo.ContentId = contentId;
 
             //If we already have a previously created fragment, we only need to send the new parameters
-            if (fragInfo.CachedFragment != null)
+            if (fragInfo.CacheFragment && fragInfo.CachedFragment != null)
             {
                 fragInfo.CachedFragment.Arguments.Clear();
                 fragInfo.CachedFragment.Arguments.PutAll(bundle);

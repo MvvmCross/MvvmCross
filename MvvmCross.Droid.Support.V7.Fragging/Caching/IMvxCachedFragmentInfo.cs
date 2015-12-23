@@ -9,6 +9,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         Type FragmentType { get; set; }
         Type ViewModelType { get; set; }
         Fragment CachedFragment { get; set; }
+        bool CacheFragment { get; set; }
         int ContentId { get; set; }
         bool AddToBackStack { get; set; }
     }
