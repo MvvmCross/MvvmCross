@@ -6,15 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-using Foundation;
-#else
-#endif
-
 namespace MvvmCross.Platform.Mac.Views
 {
     using System;
+
+    using AppKit;
+    using Foundation;
 
     using MvvmCross.Platform.Core;
 

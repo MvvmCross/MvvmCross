@@ -3,12 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B3B40D12-3CF1-4BCE-B599-4E3AE438D39F}</ProjectGuid>
+    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{682DF427-C955-4815-BFB8-7AD8066DBB0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MvvmCross.Mac</RootNamespace>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
     <AssemblyName>MvvmCross.Mac</AssemblyName>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -20,6 +22,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <Prefer32Bit>false</Prefer32Bit>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,15 +39,20 @@
     <ConsolePause>False</ConsolePause>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.Mac" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\MvxMacUIThreadDispatcher.cs" />
@@ -59,14 +73,13 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
-    <Compile Include="Views\Presenters\MvxNSSwitchOnTargetBinding.cs">
-      <DependentUpon>IMvxMacViewPresenter.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Views\Presenters\MvxNSSwitchOnTargetBinding.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\Binding\Mac\MvvmCross.Binding.Mac.csproj">
-      <Project>{B4789586-AEBB-4597-A849-23F3E45AF421}</Project>
+      <Project>{F089E103-7F5D-4000-A4B0-B1D9F37594D9}</Project>
       <Name>MvvmCross.Binding.Mac</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
@@ -82,8 +95,11 @@
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Platform\Mac\MvvmCross.Platform.Mac.csproj">
-      <Project>{596C75FB-F491-4037-89F6-B4F34183D83D}</Project>
+      <Project>{EF426A55-0A10-4F13-BE4D-A96AC1C54706}</Project>
       <Name>MvvmCross.Platform.Mac</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

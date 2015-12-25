@@ -6,16 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-using Foundation;
-#else
-#endif
-
 namespace MvvmCross.Binding.Mac.Views
 {
     using System;
     using System.Drawing;
+
+    using AppKit;
+    using Foundation;
+
+    using global::MvvmCross.Binding.BindingContext;
 
     public class MvxView
         : NSView

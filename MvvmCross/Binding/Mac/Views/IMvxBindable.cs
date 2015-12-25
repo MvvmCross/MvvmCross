@@ -7,6 +7,7 @@
 
 namespace MvvmCross.Binding.Mac.Views
 {
+    using global::MvvmCross.Binding.BindingContext;
     using global::MvvmCross.Platform.Core;
 
     public interface IMvxBindable

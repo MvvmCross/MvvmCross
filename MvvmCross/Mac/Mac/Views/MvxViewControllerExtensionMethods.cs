@@ -52,7 +52,7 @@ namespace MvvmCross.Mac.Views
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view,
-                                                                              object parameterObject)
+                                                                            object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
             return
@@ -70,7 +70,7 @@ namespace MvvmCross.Mac.Views
         {
             var parameterBundle = new MvxBundle(parameterValues);
             var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null,
-                                                                        MvxRequestedBy.UserAction);
+                                                                    MvxRequestedBy.UserAction);
             return view.CreateViewControllerFor(request);
         }
 

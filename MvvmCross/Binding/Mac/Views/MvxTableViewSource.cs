@@ -6,12 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-using Foundation;
-#else
-#endif
-
 namespace MvvmCross.Binding.Mac.Views
 {
     using System;
@@ -20,6 +14,12 @@ namespace MvvmCross.Binding.Mac.Views
     using System.Linq;
     using System.Windows.Input;
 
+    using AppKit;
+    using Foundation;
+
+    using global::MvvmCross.Binding.Attributes;
+    using global::MvvmCross.Binding.BindingContext;
+    using global::MvvmCross.Binding.ExtensionMethods;
     using global::MvvmCross.Platform.Core;
     using global::MvvmCross.Platform.WeakSubscription;
 
@@ -34,12 +34,7 @@ namespace MvvmCross.Binding.Mac.Views
             this._tableView = tableView;
         }
 
-#if __UNIFIED__
 		public override nint GetRowCount (NSTableView tableView)
-#else
-
-        public override int GetRowCount(NSTableView tableView)
-#endif
         {
             return this.ItemsSource.Count();
         }
@@ -94,12 +89,7 @@ namespace MvvmCross.Binding.Mac.Views
             return view;
         }
 
-#if __UNIFIED__
-		public override NSView GetViewForItem (NSTableView tableView, NSTableColumn tableColumn, nint row)
-#else
-
-        public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, int row)
-#endif
+		public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
             if (this.ItemsSource == null)
                 return null;

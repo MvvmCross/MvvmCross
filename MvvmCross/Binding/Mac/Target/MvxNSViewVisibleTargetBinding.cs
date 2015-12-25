@@ -5,13 +5,11 @@
 //
 // Contributed by Tim Uy, tim@loqu8.com
 
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
 
 namespace MvvmCross.Binding.Mac.Target
 {
+    using AppKit;
+
     public class MvxNSViewVisibleTargetBinding : MvxMacTargetBinding
     {
         protected NSView View
