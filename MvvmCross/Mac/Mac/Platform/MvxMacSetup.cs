@@ -1,15 +1,10 @@
-
-
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
-
 namespace MvvmCross.Mac.Platform
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+
+    using AppKit;
 
     using global::MvvmCross.Binding;
     using global::MvvmCross.Binding.Binders;

@@ -9,6 +9,9 @@ namespace MvvmCross.Mac.Views.Presenters
 {
     using System.Reflection;
 
+    using AppKit;
+    using Foundation;
+
     using global::MvvmCross.Binding;
     using global::MvvmCross.Binding.Bindings.Target;
     using global::MvvmCross.Platform.Platform;
@@ -25,7 +28,7 @@ namespace MvvmCross.Mac.Views.Presenters
             }
             else
             {
-                checkBox.Action = new MonoMac.ObjCRuntime.Selector("checkBoxAction:");
+                checkBox.Action = new ObjCRuntime.Selector("checkBoxAction:");
             }
         }
 

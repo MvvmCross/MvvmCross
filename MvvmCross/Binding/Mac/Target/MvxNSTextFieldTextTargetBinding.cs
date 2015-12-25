@@ -6,16 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-using Foundation;
-#else
-#endif
-
 namespace MvvmCross.Binding.Mac.Target
 {
     using System;
     using System.Reflection;
+
+    using AppKit;
+    using Foundation;
 
     using global::MvvmCross.Platform.Platform;
 

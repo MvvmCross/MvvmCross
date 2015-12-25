@@ -1,14 +1,9 @@
-
-
-#if __UNIFIED__
-using AppKit;
-using Foundation;
-#else
-#endif
-
 namespace MvvmCross.Mac.Views
 {
     using System;
+
+    using AppKit;
+    using Foundation;
 
     using global::MvvmCross.Binding.BindingContext;
     using global::MvvmCross.Core.ViewModels;

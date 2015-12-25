@@ -1,13 +1,8 @@
-
-
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
-
 namespace MvvmCross.Mac.Platform
 {
     using System;
+
+    using AppKit;
 
     using global::MvvmCross.Core.Platform;
 

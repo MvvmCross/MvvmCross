@@ -1,4 +1,3 @@
-
 namespace MvvmCross.Mac.Views
 {
     using System;
