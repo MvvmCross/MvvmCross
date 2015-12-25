@@ -1,4 +1,3 @@
-
 namespace MvvmCross.Mac.Platform
 {
     using System;

@@ -5,15 +5,12 @@
 // </copyright>
 
 
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
-
 namespace MvvmCross.Mac.Views
 {
     using System;
     using System.Threading;
+
+    using AppKit;
 
     using global::MvvmCross.Platform.Core;
 

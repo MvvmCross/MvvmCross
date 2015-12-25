@@ -6,13 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
-
 namespace MvvmCross.Platform.Mac.Views
 {
+    using AppKit;
+
     using System;
 
     public class MvxBaseViewControllerAdapter

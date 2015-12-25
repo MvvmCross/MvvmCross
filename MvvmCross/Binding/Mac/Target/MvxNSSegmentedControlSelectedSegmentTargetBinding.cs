@@ -1,13 +1,10 @@
-﻿#if __UNIFIED__
-using AppKit;
-using Foundation;
-using ObjCRuntime;
-#else
-#endif
-
-namespace MvvmCross.Binding.Mac.Target
+﻿namespace MvvmCross.Binding.Mac.Target
 {
     using System.Reflection;
+
+    using AppKit;
+    using Foundation;
+    using ObjCRuntime;
 
     using global::MvvmCross.Platform.Platform;
 

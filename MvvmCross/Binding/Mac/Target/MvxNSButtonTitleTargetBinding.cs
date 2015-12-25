@@ -6,13 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
-#if __UNIFIED__
-using AppKit;
-#else
-#endif
-
 namespace MvvmCross.Binding.Mac.Target
 {
+    using AppKit;
+
     using global::MvvmCross.Platform.Platform;
 
     public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding

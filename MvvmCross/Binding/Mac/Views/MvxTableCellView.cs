@@ -5,19 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if __UNIFIED__
-using AppKit;
-using CoreGraphics;
-using Foundation;
-#else
-
-#endif
 
 namespace MvvmCross.Binding.Mac.Views
 {
     using System;
     using System.Drawing;
 
+    using AppKit;
+    using CoreGraphics;
+    using Foundation;
+
+    using global::MvvmCross.Binding.BindingContext;
     using global::MvvmCross.Platform.Core;
 
     [Register("MvxTableCellView")]
@@ -38,13 +36,8 @@ namespace MvvmCross.Binding.Mac.Views
 
         public MvxTableCellView(string bindingText)
         {
-#if __UNIFIED__
             this.Frame = new CGRect(0, 0, 100, 17);
             TextField = new NSTextField(new CGRect(0, 0, 100, 17))
-#else
-            this.Frame = new RectangleF(0, 0, 100, 17);
-            TextField = new NSTextField(new RectangleF(0, 0, 100, 17))
-#endif
             {
                 Editable = false,
                 Bordered = false,
@@ -55,13 +48,8 @@ namespace MvvmCross.Binding.Mac.Views
             this.Initialize(bindingText);
         }
 
-#if __UNIFIED__
-        public override CGRect Frame {
-#else
-
-        public override RectangleF Frame
+        public override CGRect Frame
         {
-#endif
             get
             {
                 return base.Frame;

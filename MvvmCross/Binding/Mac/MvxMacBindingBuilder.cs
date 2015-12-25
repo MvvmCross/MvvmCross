@@ -5,15 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if __UNIFIED__
-using AppKit;
-#else
-
-#endif
-
 namespace MvvmCross.Binding.Mac
 {
     using System;
+
+    using AppKit;
 
     using global::MvvmCross.Platform.Converters;
 
