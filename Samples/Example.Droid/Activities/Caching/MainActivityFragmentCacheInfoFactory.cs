@@ -13,32 +13,35 @@ namespace Example.Droid.Activities.Caching
         {
             {
                 typeof (MenuViewModel).ToString(),
-                new CustomFragmentInfo(typeof (MenuViewModel).Name, typeof (MenuFragment), typeof (MenuViewModel))
+                new CustomFragmentInfo(typeof (MenuViewModel).Name,
+                                       typeof (MenuFragment),
+                                       typeof (MenuViewModel))
             },
             {
                 typeof (HomeViewModel).ToString(),
                 new CustomFragmentInfo(typeof (HomeViewModel).Name, typeof (HomeFragment), typeof (HomeViewModel),
-                    isRoot: true)
+                                       isRoot: true)
             },
             {
                 typeof (ExampleViewPagerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleViewPagerViewModel).Name, typeof (ExampleViewPagerFragment),
-                    typeof (ExampleViewPagerViewModel), isRoot: true)
+                                       typeof (ExampleViewPagerViewModel), isRoot: true)
             },
             {
                 typeof (ExampleViewPagerStateViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleViewPagerStateViewModel).Name, typeof (ExampleViewPagerStateFragment),
-                    typeof (ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
+                new CustomFragmentInfo(typeof (ExampleViewPagerStateViewModel).Name,
+                                       typeof (ExampleViewPagerStateFragment),
+                                       typeof (ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
             },
             {
                 typeof (ExampleRecyclerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
-                    typeof (ExampleRecyclerViewModel), isRoot: true)
+                                       typeof (ExampleRecyclerViewModel), isRoot: true)
             },
             {
                 typeof (SettingsViewModel).ToString(),
                 new CustomFragmentInfo(typeof (SettingsViewModel).Name, typeof (SettingsFragment),
-                    typeof (SettingsViewModel), isRoot: true)
+                                       typeof (SettingsViewModel), isRoot: true)
             }
         };
 
@@ -99,6 +102,7 @@ namespace Example.Droid.Activities.Caching
                 FragmentType = baseFragmentInfo.FragmentType;
                 Tag = baseFragmentInfo.Tag;
                 ViewModelType = baseFragmentInfo.ViewModelType;
+                CacheFragment = baseFragmentInfo.CacheFragment;
             }
 
             public bool IsRoot { get; set; }
