@@ -153,6 +153,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return typesForKeys;
         }
 
+        protected virtual void ReplaceFragment(FragmentTransaction ft, IMvxCachedFragmentInfo fragInfo)
+        {
+            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+        }
+
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
@@ -210,7 +215,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 OnFragmentCreated(fragInfo, ft);
             }
 
-            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+            ReplaceFragment(ft, fragInfo);
 
             if (fragInfo.AddToBackStack || forceAddToBackStack)
             {
