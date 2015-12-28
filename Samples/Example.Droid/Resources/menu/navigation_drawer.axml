@@ -16,9 +16,12 @@ xmlns:local="http://schemas.android.com/apk/res-auto">
           <item
 	            android:id="@+id/nav_viewpager_state"
 	            android:title="ViewPagerState" />
-            <item
+          <item
 	            android:id="@+id/nav_recyclerview"
 	            android:title="Recyclerview" />
+          <item
+	            android:id="@+id/nav_compose_message"
+	            android:title="Compose Message" />
         </menu>
     </item>
 

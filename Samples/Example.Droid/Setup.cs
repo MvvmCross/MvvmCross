@@ -36,7 +36,9 @@ namespace Example.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-			return new MvxFragmentsPresenter(AndroidViewAssemblies);
+            var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
+            Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
+            return mvxFragmentsPresenter;
         }
 
         protected override IMvxTrace CreateDebugTrace()
