@@ -27,6 +27,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
     public class MvxCachingFragmentActivity
         : MvxFragmentActivity, IFragmentCacheableActivity
     {
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private IFragmentCacheConfiguration _fragmentCacheConfiguration;
 
@@ -285,6 +286,21 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             // ReSharper disable once PossibleNullReferenceException
             // Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
             return mvxFragmentView.UniqueImmutableCacheTag;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            var fragmentRequestText = Intent.Extras?.GetString(ViewModelRequestBundleKey);
+            if (fragmentRequestText == null)
+                return;
+
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+
+            var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
+            mvxAndroidViewPresenter.Show(fragmentRequest);
         }
 
         /// <summary>
