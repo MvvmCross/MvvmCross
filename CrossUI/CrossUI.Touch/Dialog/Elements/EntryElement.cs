@@ -187,13 +187,16 @@ namespace CrossUI.Touch.Dialog.Elements
             var s = Parent as Section;
 
             if (s != null && s.EntryAlignment.Width != 0)
+            {
                 return s.EntryAlignment;
+            }
 
             // If all EntryElements have a null Caption, align UITextField with the Caption
             // offset of normal cells (at 10px).
             var max = new CGSize(-15, "M".StringSize(DefaultFont).Height);
             if (s?.Elements != null)
-                foreach (var e in s?.Elements)
+            {
+                foreach (var e in s.Elements)
                 {
                     var ee = e as EntryElement;
 
@@ -201,12 +204,15 @@ namespace CrossUI.Touch.Dialog.Elements
                     {
                         var size = ee.Caption.StringSize(DefaultFont);
                         if (size.Width > max.Width)
+                        {
                             max = size;
+                        }
                     }
                 }
+            }
 
-                s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
-                return s.EntryAlignment;
+            s.EntryAlignment = new CGSize(25 + NMath.Min(max.Width, 160), max.Height);
+            return s.EntryAlignment;
         }
 
         protected virtual UITextField CreateTextField(CGRect frame)
