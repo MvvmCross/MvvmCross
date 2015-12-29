@@ -5,21 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+namespace MvvmCross.BindingEx.WindowsPhone
+{
+    using System;
+
 #if WINDOWS_PHONE || WINDOWS_WPF
+    using System.Windows;
 #endif
 
 #if NETFX_CORE
-
-using Windows.UI.Xaml;
-
+    using Windows.UI.Xaml;
 #endif
-
-
-namespace MvvmCross.BindingEx.WindowsPhone
-
-{
-    using System;
-    using System.Windows;
 
     using global::MvvmCross.Binding;
     using global::MvvmCross.Binding.Binders;
