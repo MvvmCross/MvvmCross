@@ -5,45 +5,43 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_PHONE || WINDOWS_WPF
-#endif
-#if WINDOWS_PHONE
-#endif
-#if WINDOWS_WPF
-
-using CrossCore.Wpf.Converters;
-
-#endif
-#if NETFX_CORE
-
-using CrossCore.WindowsStore.Converters;
-
-#endif
-
-#if NETFX_CORE
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-
-#endif
-
-
 namespace MvvmCross.BindingEx.WindowsPhone.WindowsBinding
-
 {
     using System;
     using System.Collections.Generic;
+
+#if WINDOWS_PHONE || WINDOWS_WPF
+
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Media;
+
+#endif
+#if WINDOWS_PHONE
+
+    using global::MvvmCross.Platform.WindowsPhone.Converters;
+
+#endif
+#if WINDOWS_WPF
+
+    using global::MvvmCross.Platform.Wpf.Converters;
+
+#endif
+#if NETFX_CORE
+
+    using global::MvvmCross.Platform.WindowsStore.Converters;
+
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Data;
+    using Windows.UI.Xaml.Media;
+
+#endif
 
     using global::MvvmCross.Binding;
     using global::MvvmCross.Binding.Bindings;
     using global::MvvmCross.Binding.Bindings.SourceSteps;
     using global::MvvmCross.Platform;
     using global::MvvmCross.Platform.Converters;
-    using global::MvvmCross.Platform.WindowsPhone.Converters;
 
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
