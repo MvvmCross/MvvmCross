@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.CodeAnalysis</id>
+		<id>MvvmCross.CodeAnalysis</id>
 		<version>4.0.0-beta7</version>
 		<title>MvvmCross - Code Analysis</title>
 		<authors>MvvmCross</authors>
@@ -31,8 +31,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="win">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -48,8 +48,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="wp">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -65,8 +65,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="wpa">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -82,8 +82,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="MonoAndroid">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -99,8 +99,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="MonoTouch">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -116,8 +116,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -133,8 +133,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -150,8 +150,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="uap">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -167,8 +167,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
@@ -184,8 +184,8 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="NuGet.CommandLine" version="3.3.0"/>
 				<dependency id="System.Collections.Immutable" version="1.1.37"/>
 				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta7" />
 			</group>
 		</dependencies>
 	</metadata>
