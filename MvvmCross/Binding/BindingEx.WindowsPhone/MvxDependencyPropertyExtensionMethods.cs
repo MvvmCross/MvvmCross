@@ -5,25 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_PHONE || WINDOWS_WPF
-
-#endif
-#if NETFX_CORE
-
-using System.Reflection;
-using Windows.UI.Xaml;
-
-#endif
-
-
 namespace MvvmCross.BindingEx.WindowsPhone
-
 {
     using System;
+
+#if WINDOWS_PHONE || WINDOWS_WPF
+    using System.Windows;
     using System.ComponentModel;
     using System.Linq;
+#endif
+
+#if NETFX_CORE
+    using Windows.UI.Xaml;
+#endif
+
     using System.Reflection;
-    using System.Windows;
+
 
     public static class MvxDependencyPropertyExtensionMethods
     {

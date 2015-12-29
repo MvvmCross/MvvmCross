@@ -5,9 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 namespace MvvmCross.BindingEx.WindowsPhone.MvxBinding.Target
-
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding
     {
