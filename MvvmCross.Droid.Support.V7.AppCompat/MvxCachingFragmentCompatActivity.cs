@@ -184,7 +184,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="forceAddToBackStack">If you want to force add the fragment to the backstack so on backbutton it will go back to it. Note: This will override IMvxCachedFragmentInfo.AddToBackStack configuration.</param>
         /// <param name="forceReplaceFragment">Force replace a fragment with the same tag at the same contentid</param>
-        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
+        protected virtual void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
             FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
