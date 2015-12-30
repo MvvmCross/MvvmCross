@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Droid.Dialog</id>
+		<id>MvvmCross.Dialog.Droid</id>
 		<version>4.0.0-beta7</version>
 		<title>MvvmCross - Android Dialog Support</title>
 		<authors>MvvmCross</authors>
@@ -17,11 +17,11 @@ This package contains the 'Android Dialog' libraries for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta7" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -35,9 +35,9 @@ This package contains the 'Android Dialog' libraries for MvvmCross
 
 		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
 
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Dialog.Droid.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Dialog.Droid.*" target="lib\MonoAndroid" />
 
-		<file src="..\Cirrious\Cirrious.MvvmCross.Dialog.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Dialog.Droid" />
+		<file src="..\MvvmCross\Dialog\Droid\**\*.cs" target="src\MvvmCross.Dialog.Droid" />
 	</files>
 </package>
 
