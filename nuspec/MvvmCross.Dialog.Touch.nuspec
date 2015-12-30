@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.AutoViews</id>
+		<id>MvvmCross.Dialog.Touch</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross - AutoViews Support</title>
+		<title>MvvmCross - iOS Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
@@ -12,25 +12,27 @@
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains the 'AutoViews' PCL assemblies for MvvmCross
+This package contains the 'iOS Touch' libraries for MvvmCross
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework="Xamarin.iOS">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
+			</group>
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Platorm" version="4.0.0-beta7" />
+			</group>
+		</dependencies>
 	</metadata>
-	<files>		
+	<files>
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Core.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Dialog.Touch.*" target="lib\Xamarin.iOS10" />
 
-		<!-- pcl -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.AutoView.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
-		
-		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.AutoView.*" target="lib\dotnet" />
-		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\dotnet" />
-		
-		<!-- src -->
-		<file src="..\MvvmCross\AutoView\**\*.cs" target="src\MvvmCross.AutoView" />
 		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
-		
+		<file src="..\CrossUI\CrossUI.Touch\**\*.cs" target="src\CrossUI.Touch" />
+		<file src="..\MvvmCross\Dialog\Touch\**\*.cs" target="src\MvvmCross.Dialog.Touch" />
 	</files>
 </package>
 
