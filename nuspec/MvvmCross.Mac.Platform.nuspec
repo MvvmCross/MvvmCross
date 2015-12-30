@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Mac.MvvmCrossLibraries</id>
+		<id>MvvmCross.Mac.Platform</id>
 		<version>4.0.0-beta7</version>
 		<title>MvvmCross - Mac MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
@@ -17,76 +17,73 @@ This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For 
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="net">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="win">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="wp">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="wpa">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="Xamarin.iOS">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="uap">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
-			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.Mac.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<!-- Common -->
-		<file src="..\Cirrious\Cirrious.MvvmCross\**\*.cs" target="src\Cirrious.MvvmCross" />
+		<file src="..\MvvmCross\Core\Core\**\*.cs" target="src\MvvmCross.Core" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.pdb" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\dotnet\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\dotnet\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\dotnet\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\dotnet\MvvmCross.Core.pdb" />
 		
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\Cirrious.MvvmCross.Droid.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.Droid.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.Droid\**\*.cs" target="src\Cirrious.MvvmCross.Droid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.dll" target="lib\MonoAndroid\MvvmCross.Droid.dll" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pdb" target="lib\MonoAndroid\MvvmCross.Droid.pdb" />
+		<file src="..\MvvmCross\Droid\Droid\**\*.cs" target="src\MvvmCross.Droid" />
 
 		<!-- droid - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\MonoAndroid\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\MonoAndroid\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid\MvvmCross.Core.pdb" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.Touch.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.Touch\**\*.cs" target="src\Cirrious.MvvmCross.Touch" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Touch.dll" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Touch.pdb" />
+		<file src="..\MvvmCross\Touch\Touch\**\*.cs" target="src\MvvmCross.Touch" />
 
 		<!-- touch - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\Xamarin.iOS10\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10\MvvmCross.Core.pdb" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Mac.dll" target="lib\net45\Cirrious.MvvmCross.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Mac\Cirrious.MvvmCross.Mac.pdb" target="lib\net45\Cirrious.MvvmCross.Mac.pdb" />
-		<file src="..\Cirrious\Cirrious.MvvmCross.Mac\**\*.cs" target="src\Cirrious.MvvmCross.Mac" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.dll" target="lib\net45\MvvmCross.Mac.dll" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.pdb" target="lib\net45\MvvmCross.Mac.pdb" />
+		<file src="..\MvvmCross\Mac\Mac\**\*.cs" target="src\MvvmCross.Mac" />
 
 		<!-- mac - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.dll" target="lib\net45\Cirrious.MvvmCross.dll" />
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.pdb" target="lib\net45\Cirrious.MvvmCross.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\net45\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45\MvvmCross.Core.pdb" />
 
 	</files>
 </package>

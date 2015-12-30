@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Touch.AutoViews</id>
+		<id>MvvmCross.AutoView.Touch</id>
 		<version>4.0.0-beta7</version>
-		<title>MvvmCross - iOS AutoViews Support</title>
+		<title>MvvmCross - iOS AutoView Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
@@ -12,33 +12,29 @@
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains the 'AutoViews' iOS libraries for MvvmCross
+This package contains the 'AutoView' iOS libraries for MvvmCross
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta7" />
+			<group targetFramework="Xamarin.iOS">
+				<dependency id="MvvmCross.AutoView" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Dialog.Touch" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta7" />
-			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.AutoViews" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.HotTuna.Touch.Dialog" version="4.0.0-beta7" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.AutoView" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Dialog.Touch" version="4.0.0-beta7" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>		
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\Cirrious.MvvmCross.AutoView.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Touch\MvvmCross.AutoView.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\CrossUI.Touch.*" target="lib\Xamarin.iOS10" />
 
-		<file src="..\Cirrious\Cirrious.MvvmCross.AutoView.Touch\**\*.cs" 
-			target="src\Cirrious.MvvmCross.AutoView.Touch" />		
+		<file src="..\MvvmCross\AutoView\Touch\**\*.cs" 
+			target="src\MvvmCross.AutoView.Touch" />		
 	</files>
 </package>
 

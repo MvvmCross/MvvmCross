@@ -17,44 +17,40 @@ This package contains the 'binding extensions' for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="net">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="win">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="win">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="wp">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="wp">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="wpa">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="Xamarin.iOS">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="uap">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
-			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
-			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Console.Platform" version="4.0.0-beta7" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta7" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta7" />
 			</group>
 		</dependencies>
