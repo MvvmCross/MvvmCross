@@ -41,8 +41,8 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\iOSConstants.cs" />
-    <Compile Include="Builder\iOSElementBuilder.cs" />
+    <Compile Include="Builder\IosConstants.cs" />
+    <Compile Include="Builder\IosElementBuilder.cs" />
     <Compile Include="Dialog\DialogViewController.cs" />
     <Compile Include="Dialog\Elements\ActivityElement.cs" />
     <Compile Include="Dialog\Elements\BaseBooleanImageElement.cs" />

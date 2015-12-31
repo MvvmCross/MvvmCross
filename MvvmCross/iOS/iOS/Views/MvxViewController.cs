@@ -17,7 +17,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxViewController
         : MvxEventSourceViewController
-          , IMvxTouchView
+          , IMvxIosView
     {
         public MvxViewController()
         {
@@ -55,7 +55,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxViewController<TViewModel>
         : MvxViewController
-          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {

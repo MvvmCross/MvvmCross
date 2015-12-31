@@ -43,7 +43,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxTouchBindingBuilder.cs" />
+    <Compile Include="MvxIosBindingBuilder.cs" />
     <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />

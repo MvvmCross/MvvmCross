@@ -21,12 +21,12 @@ namespace MvvmCross.AutoView.iOS.Builders
     public class MvxBindingPropertySetter : IPropertySetter
 
     {
-        private readonly IMvxTouchView _touchView;
+        private readonly IMvxIosView _iosView;
         private readonly object _source;
 
-        public MvxBindingPropertySetter(IMvxTouchView touchView, object source)
+        public MvxBindingPropertySetter(IMvxIosView iosView, object source)
         {
-            this._touchView = touchView;
+            this._iosView = iosView;
             this._source = source;
         }
 
@@ -36,7 +36,7 @@ namespace MvvmCross.AutoView.iOS.Builders
             {
                 var binding = Mvx.Resolve<IMvxBinder>()
                                  .BindSingle(this._source, element, targetPropertyName, configuration);
-                this._touchView.BindingContext.RegisterBinding(element, binding);
+                this._iosView.BindingContext.RegisterBinding(element, binding);
             }
             catch (Exception exception)
             {

@@ -38,12 +38,12 @@ namespace MvvmCross.AutoView.iOS
 
         protected virtual IMvxUserInterfaceFactory CreateUserInterfaceFactory()
         {
-            return new MvxTouchUserInterfaceFactory();
+            return new MvxIosUserInterfaceFactory();
         }
 
-        protected virtual MvxTouchBuilderRegistry CreateBuilderRegistry()
+        protected virtual MvxIosBuilderRegistry CreateBuilderRegistry()
         {
-            var touchRegistry = new MvxTouchBuilderRegistry(true);
+            var touchRegistry = new MvxIosBuilderRegistry(true);
             return touchRegistry;
         }
 

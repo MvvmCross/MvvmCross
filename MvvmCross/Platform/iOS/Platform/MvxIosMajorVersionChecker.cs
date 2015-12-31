@@ -18,11 +18,11 @@ namespace MvvmCross.Platform.iOS.Platform
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)
         {
-            IMvxTouchSystem touchSystem;
-            Mvx.TryResolve<IMvxTouchSystem>(out touchSystem);
+            IMvxIosSystem touchSystem;
+            Mvx.TryResolve<IMvxIosSystem>(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxTouchSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
+                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

@@ -23,7 +23,7 @@ namespace MvvmCross.AutoView.iOS.Views
     [MvxUnconventional]
     public class MvxMissingViewController
         : MvxDialogViewController
-          , IMvxTouchAutoView
+          , IMvxIosAutoView
     {
         public MvxMissingViewController()
         {

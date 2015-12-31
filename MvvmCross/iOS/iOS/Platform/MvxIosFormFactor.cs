@@ -1,4 +1,4 @@
-// IMvxApplicationDelegate.cs
+// MvxIosFormFactor.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,11 +7,10 @@
 
 namespace MvvmCross.iOS.Platform
 {
-    using MvvmCross.Core.Platform;
-
-    using UIKit;
-
-    public interface IMvxApplicationDelegate : IUIApplicationDelegate, IMvxLifetime
+    public enum MvxIosFormFactor
     {
+        Phone,
+        Pad,
+        TallPhone,
     }
 }

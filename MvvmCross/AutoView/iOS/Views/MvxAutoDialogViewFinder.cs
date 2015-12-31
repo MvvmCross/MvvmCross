@@ -22,7 +22,7 @@ namespace MvvmCross.AutoView.iOS.Views
 
         public MvxAutoDialogViewFinder()
         {
-            this.DialogViewType = typeof(MvxAutoDialogTouchView);
+            this.DialogViewType = typeof(MvxAutoDialogIosView);
         }
 
         public Type GetViewType(Type viewModelType)

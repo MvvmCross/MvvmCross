@@ -19,18 +19,18 @@ namespace MvvmCross.iOS.Views
     public class MvxFormFactorSpecificAttribute
         : MvxConditionalConventionalAttribute
     {
-        public MvxFormFactorSpecificAttribute(MvxTouchFormFactor target)
+        public MvxFormFactorSpecificAttribute(MvxIosFormFactor target)
         {
             this.Target = target;
         }
 
-        public MvxTouchFormFactor Target { get; private set; }
+        public MvxIosFormFactor Target { get; private set; }
 
         public override bool IsConditionSatisfied
         {
             get
             {
-                var properties = Mvx.Resolve<IMvxTouchPlatformProperties>();
+                var properties = Mvx.Resolve<IMvxIosPlatformProperties>();
                 return (properties.FormFactor == this.Target);
             }
         }

@@ -21,7 +21,7 @@ namespace MvvmCross.Dialog.iOS
 
     public class MvxDialogViewController
         : EventSourceDialogViewController
-          , IMvxTouchView
+          , IMvxIosView
     {
         protected MvxDialogViewController(UITableViewStyle style = UITableViewStyle.Grouped,
                                           RootElement root = null,
@@ -70,7 +70,7 @@ namespace MvvmCross.Dialog.iOS
 
     public class MvxDialogViewController<TViewModel>
         : MvxDialogViewController
-          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxDialogViewController(UITableViewStyle style = UITableViewStyle.Grouped,
                                        RootElement root = null,

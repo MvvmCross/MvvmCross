@@ -14,24 +14,24 @@ namespace MvvmCross.iOS.Views
 
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTouchView TouchView => base.ViewController as IMvxTouchView;
+        protected IMvxIosView IosView => base.ViewController as IMvxIosView;
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
-            if (!(eventSource is IMvxTouchView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxTouchView");
+            if (!(eventSource is IMvxIosView))
+                throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
         }
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.TouchView.OnViewCreate();
+            this.IosView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.TouchView.OnViewDestroy();
+            this.IosView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }
