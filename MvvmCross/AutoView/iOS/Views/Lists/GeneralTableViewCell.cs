@@ -14,7 +14,7 @@ namespace MvvmCross.AutoView.iOS.Views.Lists
     using Foundation;
 
     using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Touch.Views;
+    using Binding.iOS.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Platform;
