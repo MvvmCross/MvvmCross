@@ -8,7 +8,7 @@
 namespace MvvmCross.iOS.Views.Presenters
 {
     using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Platform.iOS.Views;
 
     public interface IMvxTouchViewPresenter
         : IMvxViewPresenter

@@ -1,11 +1,11 @@
-﻿// MvxEventSourceViewController.cs
+﻿// MvxEventSourceCollectionViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.Touch.Views
+namespace MvvmCross.Platform.iOS.Views
 {
     using System;
 
@@ -15,20 +15,21 @@ namespace MvvmCross.Platform.Touch.Views
 
     using UIKit;
 
-    public class MvxEventSourceViewController
-        : UIViewController
+    public class MvxEventSourceCollectionViewController
+        : UICollectionViewController
           , IMvxEventSourceViewController
     {
-        protected MvxEventSourceViewController()
+        protected MvxEventSourceCollectionViewController(UICollectionViewLayout layout)
+            : base(layout)
         {
         }
 
-        protected MvxEventSourceViewController(IntPtr handle)
+        protected MvxEventSourceCollectionViewController(IntPtr handle)
             : base(handle)
         {
         }
 
-        protected MvxEventSourceViewController(string nibName, NSBundle bundle)
+        protected MvxEventSourceCollectionViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
         }

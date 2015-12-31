@@ -11,7 +11,7 @@ namespace MvvmCross.iOS.Views
 
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Platform.iOS.Views;
 
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

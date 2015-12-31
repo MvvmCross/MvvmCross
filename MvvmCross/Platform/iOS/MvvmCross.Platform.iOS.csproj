@@ -6,15 +6,15 @@
     <ProjectGuid>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>MvvmCross.Platform.Touch</RootNamespace>
+    <RootNamespace>MvvmCross.Platform.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>MvvmCross.Platform.Touch</AssemblyName>
+    <AssemblyName>MvvmCross.Platform.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\Mvx\iOS\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -23,7 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\Mvx\iOS\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
