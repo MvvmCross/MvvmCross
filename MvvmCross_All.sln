@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Core", "CrossUI\Cro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Droid", "CrossUI\CrossUI.Droid\CrossUI.Droid.csproj", "{33044C7B-47A4-4113-A61A-EB429407F818}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Touch", "CrossUI\CrossUI.Touch\CrossUI.Touch.csproj", "{371B2408-732A-40CA-8242-70DBC17F9825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.iOS", "CrossUI\CrossUI.iOS\CrossUI.iOS.csproj", "{371B2408-732A-40CA-8242-70DBC17F9825}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CFC09D0C-4B82-4F63-8445-F58C3562EFE7}"
 EndProject
@@ -38,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mac", "Mac", "{72A8F00E-AC0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0A4F4A91-1070-42F3-BC18-06FF31D7348E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Touch", "Touch", "{164B62DA-28BF-46AD-8EB3-D0DA24676106}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{164B62DA-28BF-46AD-8EB3-D0DA24676106}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{80E14EC8-6E98-4AE9-B4F4-8DBE6642A0D0}"
 EndProject
@@ -46,7 +46,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView", "MvvmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.Droid", "MvvmCross\AutoView\Droid\MvvmCross.AutoView.Droid.csproj", "{9599095A-50F9-468D-B39E-3D59F2193DE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.Touch", "MvvmCross\AutoView\Touch\MvvmCross.AutoView.Touch.csproj", "{F0B24118-AA83-4CEE-8632-B9619576D311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.iOS", "MvvmCross\AutoView\iOS\MvvmCross.AutoView.iOS.csproj", "{F0B24118-AA83-4CEE-8632-B9619576D311}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.BindingEx.WindowsPhone", "MvvmCross\Binding\BindingEx.WindowsPhone\MvvmCross.BindingEx.WindowsPhone.csproj", "{7F3E7612-59B6-4E5B-B300-755DA6647F22}"
 EndProject
@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Mac", "Mv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Test", "MvvmCross\Binding\Test\MvvmCross.Binding.Test.csproj", "{2F41D56E-B1CE-4273-97E5-8835479C5A89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Touch", "MvvmCross\Binding\Touch\MvvmCross.Binding.Touch.csproj", "{913B13B5-7B2C-4DDA-BECB-DADC827ED895}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.iOS", "MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj", "{913B13B5-7B2C-4DDA-BECB-DADC827ED895}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Console", "MvvmCross\Console\Console\MvvmCross.Console.csproj", "{CF9E4C49-4D40-4375-A522-25D33233B0E9}"
 EndProject
@@ -72,7 +72,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Localization", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.Droid", "MvvmCross\Dialog\Droid\MvvmCross.Dialog.Droid.csproj", "{D56E4F48-6ECC-4481-9948-078F620881F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.Touch", "MvvmCross\Dialog\Touch\MvvmCross.Dialog.Touch.csproj", "{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.iOS", "MvvmCross\Dialog\iOS\MvvmCross.Dialog.iOS.csproj", "{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Droid", "MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj", "{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}"
 EndProject
@@ -82,7 +82,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform", "MvvmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Test", "MvvmCross\Platform\Test\MvvmCross.Platform.Test.csproj", "{666EB95D-7CD8-48B6-A2F8-395DECC84140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Touch", "MvvmCross\Platform\Touch\MvvmCross.Platform.Touch.csproj", "{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.iOS", "MvvmCross\Platform\iOS\MvvmCross.Platform.iOS.csproj", "{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.WindowsCommon", "MvvmCross\Platform\WindowsCommon\MvvmCross.Platform.WindowsCommon.csproj", "{17BDF4A5-B29B-42CF-AAAE-B533D8364296}"
 EndProject
@@ -98,7 +98,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test", "MvvmCross
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test.Core", "MvvmCross\Test\Test.Core\MvvmCross.Test.Core.csproj", "{8E788346-A72B-4939-9D95-A44AC5F46D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Touch", "MvvmCross\Touch\Touch\MvvmCross.Touch.csproj", "{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS", "MvvmCross\iOS\iOS\MvvmCross.iOS.csproj", "{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.WindowsCommon", "MvvmCross\Windows\WindowsCommon\MvvmCross.WindowsCommon.csproj", "{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}"
 EndProject

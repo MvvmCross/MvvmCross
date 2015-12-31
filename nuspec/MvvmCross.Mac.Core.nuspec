@@ -80,15 +80,15 @@ This package contains Xamarin.Mac (also PCL, MonoAndroid and Xamarin.iOS10 for c
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.dll" target="lib\MonoAndroid\MvvmCross.Localization.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.pdb" target="lib\MonoAndroid\MvvmCross.Localization.pdb" />
 
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Touch.pdb" />
-		<file src="..\MvvmCross\Touch\Touch\**\*.cs" target="src\MvvmCross.Touch" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Binding.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Binding.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Binding.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Binding.Touch.pdb" />
-		<file src="..\MvvmCross\Binding\Touch\**\*.cs" target="src\MvvmCross.Binding.Touch" />
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.iOS.dll" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10\MvvmCross.iOS.pdb" />
+		<file src="..\MvvmCross\iOS\iOS\**\*.cs" target="src\MvvmCross.iOS" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Binding.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Binding.iOS.pdb" target="lib\Xamarin.iOS10\MvvmCross.Binding.iOS.pdb" />
+		<file src="..\MvvmCross\Binding\iOS\**\*.cs" target="src\MvvmCross.Binding.iOS" />
 
-		<!-- touch - PCL -->
+		<!-- iOS - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10\MvvmCross.Core.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10\MvvmCross.Core.pdb" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.dll" target="lib\Xamarin.iOS10\MvvmCross.Binding.dll" />
