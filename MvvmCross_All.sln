@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Core", "CrossUI\Cro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Droid", "CrossUI\CrossUI.Droid\CrossUI.Droid.csproj", "{33044C7B-47A4-4113-A61A-EB429407F818}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Touch", "CrossUI\CrossUI.Touch\CrossUI.Touch.csproj", "{371B2408-732A-40CA-8242-70DBC17F9825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.iOS", "CrossUI\CrossUI.iOS\CrossUI.iOS.csproj", "{371B2408-732A-40CA-8242-70DBC17F9825}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CFC09D0C-4B82-4F63-8445-F58C3562EFE7}"
 EndProject

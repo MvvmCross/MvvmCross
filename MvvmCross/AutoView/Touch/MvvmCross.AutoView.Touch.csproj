@@ -103,7 +103,7 @@
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
       <Name>MvvmCross.Dialog.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Touch\CrossUI.Touch.csproj">
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.iOS\CrossUI.iOS.csproj">
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.Touch</Name>
     </ProjectReference>
