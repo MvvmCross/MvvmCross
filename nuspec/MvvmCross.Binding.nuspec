@@ -60,8 +60,8 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Binding.Droid.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\MonoAndroid" />
 
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Binding.Touch.*" target="lib\Xamarin.iOS10" />
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Binding.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
 
 		<!-- phone -->
@@ -79,7 +79,7 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<!-- src -->
 		<file src="..\MvvmCross\Core\Binding\**\*.cs" target="src\MvvmCross.Binding" />
 		<file src="..\MvvmCross\Binding\Droid\**\*.cs" target="src\MvvmCross.Binding.Droid" />
-		<file src="..\MvvmCross\Binding\Touch\**\*.cs" target="src\MvvmCross.Binding.Touch" />
+		<file src="..\MvvmCross\Binding\iOS\**\*.cs" target="src\MvvmCross.Binding.iOS" />
 
 	</files>
 </package>

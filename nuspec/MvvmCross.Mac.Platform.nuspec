@@ -67,12 +67,12 @@ This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For 
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid\MvvmCross.Core.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid\MvvmCross.Core.pdb" />
 
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Touch.pdb" />
-		<file src="..\MvvmCross\Touch\Touch\**\*.cs" target="src\MvvmCross.Touch" />
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.iOS.dll" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10\MvvmCross.iOS.pdb" />
+		<file src="..\MvvmCross\iOS\iOS\**\*.cs" target="src\MvvmCross.iOS" />
 
-		<!-- touch - PCL -->
+		<!-- iOS - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10\MvvmCross.Core.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10\MvvmCross.Core.pdb" />
 
