@@ -19,7 +19,7 @@ namespace MvvmCross.AutoView.iOS.Views.Dialog
     using iOS.Interfaces;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Dialog.Touch;
+    using MvvmCross.Dialog.iOS;
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
 

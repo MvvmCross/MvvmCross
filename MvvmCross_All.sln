@@ -72,7 +72,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Localization", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.Droid", "MvvmCross\Dialog\Droid\MvvmCross.Dialog.Droid.csproj", "{D56E4F48-6ECC-4481-9948-078F620881F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.Touch", "MvvmCross\Dialog\Touch\MvvmCross.Dialog.Touch.csproj", "{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Dialog.iOS", "MvvmCross\Dialog\iOS\MvvmCross.Dialog.iOS.csproj", "{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Droid", "MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj", "{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}"
 EndProject

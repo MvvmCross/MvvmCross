@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Dialog.Touch
+namespace MvvmCross.Dialog.iOS
 {
     using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Dialog.Touch.Target;
+    using iOS.Target;
     using MvvmCross.iOS.Platform;
     using MvvmCross.iOS.Views.Presenters;
 
