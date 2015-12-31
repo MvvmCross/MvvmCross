@@ -31,7 +31,7 @@ namespace MvvmCross.iOS.Views
         {
             Action action = () =>
                 {
-                    MvxTrace.TaggedTrace("TouchNavigation", "Navigate requested");
+                    MvxTrace.TaggedTrace("iOSNavigation", "Navigate requested");
                     this._presenter.Show(request);
                 };
             return this.RequestMainThreadAction(action);

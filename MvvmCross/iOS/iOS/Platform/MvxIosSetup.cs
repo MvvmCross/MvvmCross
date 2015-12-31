@@ -65,7 +65,7 @@ namespace MvvmCross.iOS.Platform
         protected override IMvxPluginManager CreatePluginManager()
         {
             var toReturn = new MvxLoaderPluginManager();
-            var registry = new MvxLoaderPluginRegistry(".Touch", toReturn.Finders);
+            var registry = new MvxLoaderPluginRegistry(".iOS", toReturn.Finders);
             this.AddPluginsLoaders(registry);
             return toReturn;
         }
