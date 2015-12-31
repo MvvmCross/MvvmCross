@@ -10,7 +10,7 @@ namespace MvvmCross.Dialog.Touch.Target
     using System;
     using System.Reflection;
 
-    using CrossUI.Touch.Dialog.Elements;
+    using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Binding;
     using MvvmCross.Binding.Bindings.Target;

@@ -7,12 +7,12 @@
 
 namespace MvvmCross.Dialog.Touch
 {
-    using CrossUI.Touch.Dialog.Elements;
+    using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Binding.Bindings.Target.Construction;
     using MvvmCross.Dialog.Touch.Target;
-    using MvvmCross.Touch.Platform;
-    using MvvmCross.Touch.Views.Presenters;
+    using MvvmCross.iOS.Platform;
+    using MvvmCross.iOS.Views.Presenters;
 
     using UIKit;
 

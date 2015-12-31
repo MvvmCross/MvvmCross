@@ -46,7 +46,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView", "MvvmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.Droid", "MvvmCross\AutoView\Droid\MvvmCross.AutoView.Droid.csproj", "{9599095A-50F9-468D-B39E-3D59F2193DE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.Touch", "MvvmCross\AutoView\Touch\MvvmCross.AutoView.Touch.csproj", "{F0B24118-AA83-4CEE-8632-B9619576D311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.AutoView.iOS", "MvvmCross\AutoView\iOS\MvvmCross.AutoView.iOS.csproj", "{F0B24118-AA83-4CEE-8632-B9619576D311}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.BindingEx.WindowsPhone", "MvvmCross\Binding\BindingEx.WindowsPhone\MvvmCross.BindingEx.WindowsPhone.csproj", "{7F3E7612-59B6-4E5B-B300-755DA6647F22}"
 EndProject
