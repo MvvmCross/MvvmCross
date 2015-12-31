@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Dialog.Touch.Elements
+namespace MvvmCross.Dialog.iOS.Elements
 {
     using System;
     using System.Collections;

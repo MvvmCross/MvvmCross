@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Dialog.Touch.Target
+namespace MvvmCross.Dialog.iOS.Target
 {
     using System;
     using System.Reflection;

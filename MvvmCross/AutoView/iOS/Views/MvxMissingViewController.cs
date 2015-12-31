@@ -16,7 +16,7 @@ namespace MvvmCross.AutoView.iOS.Views
     using MvvmCross.AutoView.ExtensionMethods;
     using iOS.Interfaces;
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Dialog.Touch;
+    using MvvmCross.Dialog.iOS;
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
 

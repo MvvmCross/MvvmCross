@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Dialog.Touch.Simple
+namespace MvvmCross.Dialog.iOS.Simple
 {
     using MvvmCross.Core.ViewModels;
 

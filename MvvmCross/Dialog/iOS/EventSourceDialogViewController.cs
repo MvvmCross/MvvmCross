@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Dialog.Touch
+namespace MvvmCross.Dialog.iOS
 {
     using System;
 

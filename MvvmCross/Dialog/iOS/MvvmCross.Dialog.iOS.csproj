@@ -6,15 +6,15 @@
     <ProjectGuid>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>MvvmCross.Dialog.Touch</RootNamespace>
-    <AssemblyName>MvvmCross.Dialog.Touch</AssemblyName>
+    <RootNamespace>MvvmCross.Dialog.iOS</RootNamespace>
+    <AssemblyName>MvvmCross.Dialog.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\Mvx\iOS\</OutputPath>
     <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <NoStdLib>True</NoStdLib>
     <DebugType>pdbonly</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\Mvx\iOS\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -45,15 +45,15 @@
   <ItemGroup>
     <Compile Include="MvxDialogViewController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
-    <Compile Include="Simple\MvxSimpleTouchDialogSetup.cs" />
+    <Compile Include="Simple\MvxSimpleiOSDialogViewController.cs" />
+    <Compile Include="Simple\MvxSimpleiOSDialogSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
     <Compile Include="EventSourceDialogViewController.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
     <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
     <Compile Include="Elements\SimplePickerElement.cs" />
-    <Compile Include="MvxTouchDialogSetup.cs" />
+    <Compile Include="MvxiOSDialogSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
@@ -62,7 +62,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.iOS\CrossUI.iOS.csproj">
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
-      <Name>CrossUI.Touch</Name>
+      <Name>CrossUI.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Platform\Touch\MvvmCross.Platform.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
@@ -82,7 +82,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\iOS\iOS\MvvmCross.iOS.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
-      <Name>MvvmCross.Touch</Name>
+      <Name>MvvmCross.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>

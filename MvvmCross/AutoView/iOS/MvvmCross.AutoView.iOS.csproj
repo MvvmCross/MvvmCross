@@ -15,7 +15,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\Mvx\iOS\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
     <NoStdLib>True</NoStdLib>
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>..\..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\Mvx\iOS\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -93,19 +93,19 @@
     </ProjectReference>
     <ProjectReference Include="..\..\iOS\iOS\MvvmCross.iOS.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
-      <Name>MvvmCross.Touch</Name>
+      <Name>MvvmCross.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
       <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
       <Name>CrossUI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Dialog\Touch\MvvmCross.Dialog.Touch.csproj">
+    <ProjectReference Include="..\..\Dialog\iOS\MvvmCross.Dialog.iOS.csproj">
       <Project>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</Project>
-      <Name>MvvmCross.Dialog.Touch</Name>
+      <Name>MvvmCross.Dialog.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.iOS\CrossUI.iOS.csproj">
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
-      <Name>CrossUI.Touch</Name>
+      <Name>CrossUI.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
