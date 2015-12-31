@@ -26,8 +26,8 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
-    using MvvmCross.Platform.Touch.Platform;
-    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Platform.iOS.Platform;
+    using MvvmCross.Platform.iOS.Views;
     using iOS.Views;
     using iOS.Views.Presenters;
 

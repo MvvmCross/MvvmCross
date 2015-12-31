@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.Touch.Platform
+namespace MvvmCross.Platform.iOS.Platform
 {
     using Foundation;
 

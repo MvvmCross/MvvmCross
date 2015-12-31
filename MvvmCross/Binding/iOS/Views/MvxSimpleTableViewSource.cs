@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.iOS.Views
     using Foundation;
 
     using MvvmCross.Platform;
-    using MvvmCross.Platform.Touch.Platform;
+    using Platform.iOS.Platform;
 
     using UIKit;
 

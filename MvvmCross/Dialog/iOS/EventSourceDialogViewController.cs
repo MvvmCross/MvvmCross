@@ -13,7 +13,7 @@ namespace MvvmCross.Dialog.iOS
     using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Touch.Views;
+    using Platform.iOS.Views;
 
     using UIKit;
 

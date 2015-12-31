@@ -7,7 +7,7 @@
 
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Platform.iOS.Views;
 
     public static class MvxViewControllerAdaptingExtensions
     {

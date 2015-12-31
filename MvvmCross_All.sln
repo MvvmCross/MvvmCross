@@ -82,7 +82,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform", "MvvmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Test", "MvvmCross\Platform\Test\MvvmCross.Platform.Test.csproj", "{666EB95D-7CD8-48B6-A2F8-395DECC84140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Touch", "MvvmCross\Platform\Touch\MvvmCross.Platform.Touch.csproj", "{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.iOS", "MvvmCross\Platform\iOS\MvvmCross.Platform.iOS.csproj", "{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.WindowsCommon", "MvvmCross\Platform\WindowsCommon\MvvmCross.Platform.WindowsCommon.csproj", "{17BDF4A5-B29B-42CF-AAAE-B533D8364296}"
 EndProject

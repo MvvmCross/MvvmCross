@@ -10,7 +10,7 @@ namespace MvvmCross.iOS.Views
     using System;
 
     using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Touch.Views;
+    using MvvmCross.Platform.iOS.Views;
 
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {

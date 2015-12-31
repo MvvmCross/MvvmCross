@@ -1,11 +1,4 @@
-// MvxEventSourceTabBarController.cs
-
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
-namespace MvvmCross.Platform.Touch.Views
+﻿namespace MvvmCross.Platform.iOS.Views
 {
     using System;
 
@@ -13,41 +6,14 @@ namespace MvvmCross.Platform.Touch.Views
 
     using UIKit;
 
-    public class MvxEventSourceTabBarController
-        : UITabBarController
-          , IMvxEventSourceViewController
+    public class MvxEventSourcePageViewController : UIPageViewController, IMvxEventSourceViewController
     {
-        protected MvxEventSourceTabBarController()
+        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation orientation, UIPageViewControllerSpineLocation spine) : base(style, orientation, spine)
         {
         }
 
-        protected MvxEventSourceTabBarController(IntPtr handle)
-            : base(handle)
+        public MvxEventSourcePageViewController(IntPtr handle) : base(handle)
         {
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
-            this.ViewWillDisappearCalled.Raise(this, animated);
-        }
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-            this.ViewDidAppearCalled.Raise(this, animated);
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-            this.ViewWillAppearCalled.Raise(this, animated);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-            this.ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidLoad()
@@ -56,12 +22,34 @@ namespace MvvmCross.Platform.Touch.Views
             this.ViewDidLoadCalled.Raise(this);
         }
 
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            this.ViewWillAppearCalled.Raise(this, animated);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            this.ViewDidAppearCalled.Raise(this, animated);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            this.ViewDidDisappearCalled.Raise(this, animated);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            this.ViewWillDisappearCalled.Raise(this, animated);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 this.DisposeCalled.Raise(this);
-            }
             base.Dispose(disposing);
         }
 
