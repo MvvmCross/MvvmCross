@@ -15,36 +15,36 @@ namespace MvvmCross.iOS.Views
 
     public static class MvxViewControllerExtensionMethods
     {
-        public static void OnViewCreate(this IMvxTouchView touchView)
+        public static void OnViewCreate(this IMvxIosView iosView)
         {
-            //var view = touchView as IMvxView<TViewModel>;
-            touchView.OnViewCreate(touchView.LoadViewModel);
+            //var view = iosView as IMvxView<TViewModel>;
+            iosView.OnViewCreate(iosView.LoadViewModel);
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxTouchView touchView)
+        private static IMvxViewModel LoadViewModel(this IMvxIosView iosView)
         {
 #warning NullViewModel needed?
             // how to do N
             //if (typeof (TViewModel) == typeof (MvxNullViewModel))
             //    return new MvxNullViewModel() as TViewModel;
 
-            if (touchView.Request == null)
+            if (iosView.Request == null)
             {
                 MvxTrace.Trace(
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                touchView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                iosView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
-            var instanceRequest = touchView.Request as MvxViewModelInstanceRequest;
+            var instanceRequest = iosView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
             {
                 return instanceRequest.ViewModelInstance;
             }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(touchView.Request, null /* no saved state on iOS currently */);
+            var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on iOS currently */);
             if (viewModel == null)
-                throw new MvxException("ViewModel not loaded for " + touchView.Request.ViewModelType);
+                throw new MvxException("ViewModel not loaded for " + iosView.Request.ViewModelType);
             return viewModel;
         }
     }

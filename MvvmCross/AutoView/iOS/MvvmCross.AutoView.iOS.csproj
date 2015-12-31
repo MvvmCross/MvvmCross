@@ -42,23 +42,23 @@
   <!-- see http://slodge.blogspot.co.uk/2012/09/the-type-or-namespace-name.html -->
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <ItemGroup>
-    <Compile Include="Builders\MvxTouchUserInterfaceFactory.cs" />
-    <Compile Include="Interfaces\IMvxTouchAutoView.cs" />
+    <Compile Include="Builders\MvxIosUserInterfaceFactory.cs" />
+    <Compile Include="Interfaces\IMvxIosAutoView.cs" />
     <Compile Include="MvxAutoViewSetup.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemView.cs" />
     <Compile Include="Interfaces\Lists\IMvxLayoutListItemViewFactory.cs" />
-    <Compile Include="Builders\Lists\MvxTouchListItemLayoutBuilder.cs" />
-    <Compile Include="Builders\Lists\MvxTouchListLayoutBuilder.cs" />
+    <Compile Include="Builders\Lists\MvxIosListItemLayoutBuilder.cs" />
+    <Compile Include="Builders\Lists\MvxIosListLayoutBuilder.cs" />
     <Compile Include="Builders\MvxBindingPropertySetter.cs" />
-    <Compile Include="Builders\MvxTouchBuilderRegistry.cs" />
-    <Compile Include="Builders\MvxTouchUserInterfaceBuilder.cs" />
+    <Compile Include="Builders\MvxIosBuilderRegistry.cs" />
+    <Compile Include="Builders\MvxIosUserInterfaceBuilder.cs" />
     <Compile Include="ExtensionMethods\HackMvxMenuExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Lists\GeneralTableViewCell.cs" />
     <Compile Include="Views\Lists\GeneralListLayout.cs" />
     <Compile Include="Views\Lists\GeneralListItemViewFactory.cs" />
     <Compile Include="Views\Lists\GeneralTableViewSource.cs" />
-    <Compile Include="Views\Dialog\MvxAutoDialogTouchView.cs" />
+    <Compile Include="Views\Dialog\MvxAutoDialogIosView.cs" />
     <Compile Include="Views\MvxAutoDialogViewFinder.cs" />
     <Compile Include="Views\Lists\MvxAutoListActivityView.cs" />
     <Compile Include="Views\MvxAutoListViewFinder.cs" />
@@ -67,7 +67,7 @@
     <Compile Include="Views\MvxMissingViewFinder.cs" />
     <Compile Include="Views\Menus\CaptionAndIconMenu.cs" />
     <Compile Include="Views\Menus\RootMenu.cs" />
-    <Compile Include="Builders\Menus\MvxTouchMenuBuilder.cs" />
+    <Compile Include="Builders\Menus\MvxIosMenuBuilder.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

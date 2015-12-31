@@ -15,26 +15,26 @@ namespace MvvmCross.iOS.Views
 
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTouchView TouchView => this.ViewController as IMvxTouchView;
+        protected IMvxIosView IosView => this.ViewController as IMvxIosView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
-            if (!(eventSource is IMvxTouchView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxTouchView");
+            if (!(eventSource is IMvxIosView))
+                throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
 
-            this.TouchView.BindingContext = new MvxBindingContext();
+            this.IosView.BindingContext = new MvxBindingContext();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (this.TouchView == null)
+            if (this.IosView == null)
             {
-                MvxTrace.Warning("TouchView is null for clearup of bindings in type {0}",
-                               this.TouchView?.GetType().Name);
+                MvxTrace.Warning("iosView is null for clearup of bindings in type {0}",
+                               this.IosView?.GetType().Name);
                 return;
             }
-            this.TouchView.ClearAllBindings();
+            this.IosView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

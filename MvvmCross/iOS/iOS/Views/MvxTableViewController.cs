@@ -19,7 +19,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxTableViewController
         : MvxEventSourceTableViewController
-          , IMvxTouchView
+          , IMvxIosView
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -83,7 +83,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxTableViewController<TViewModel>
         : MvxTableViewController
-          , IMvxTouchView<TViewModel> where TViewModel : class, IMvxViewModel
+          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

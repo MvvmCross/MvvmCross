@@ -23,7 +23,7 @@ namespace MvvmCross.AutoView.iOS.Views.Lists
     [MvxUnconventional]
     public class MvxAutoListActivityView
         : MvxTableViewController
-          , IMvxTouchAutoView
+          , IMvxIosAutoView
     {
         private IParentMenu _parentMenu;
         private GeneralListLayout _list;

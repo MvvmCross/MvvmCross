@@ -35,16 +35,16 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform\IMvxTouchSystem.cs" />
+    <Compile Include="Platform\IMvxIosSystem.cs" />
     <Compile Include="Platform\MvxIosMajorVersionChecker.cs" />
-    <Compile Include="Platform\MvxTouchSystem.cs" />
-    <Compile Include="Platform\MvxTouchVersion.cs" />
+    <Compile Include="Platform\MvxIosSystem.cs" />
+    <Compile Include="Platform\MvxIosVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\IMvxTouchModalHost.cs" />
-    <Compile Include="MvxTouchColorExtensionMethods.cs" />
-    <Compile Include="MvxTouchDateTimeExtensionMethods.cs" />
-    <Compile Include="MvxTouchUIViewControllerExtensions.cs" />
-    <Compile Include="Platform\MvxTouchTask.cs" />
+    <Compile Include="Views\IMvxIosModalHost.cs" />
+    <Compile Include="MvxIosColorExtensionMethods.cs" />
+    <Compile Include="MvxIosDateTimeExtensionMethods.cs" />
+    <Compile Include="MvxIosUIViewControllerExtensions.cs" />
+    <Compile Include="Platform\MvxIosTask.cs" />
     <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
     <Compile Include="Views\MvxEventSourceCollectionViewController.cs" />
     <Compile Include="Views\MvxEventSourceTabBarController.cs" />

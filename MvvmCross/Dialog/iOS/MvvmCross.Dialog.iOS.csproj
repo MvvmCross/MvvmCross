@@ -45,15 +45,15 @@
   <ItemGroup>
     <Compile Include="MvxDialogViewController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simple\MvxSimpleiOSDialogViewController.cs" />
-    <Compile Include="Simple\MvxSimpleiOSDialogSetup.cs" />
+    <Compile Include="Simple\MvxSimpleIosDialogViewController.cs" />
+    <Compile Include="Simple\MvxSimpleIosDialogSetup.cs" />
     <Compile Include="Simple\MvxEmptyApp.cs" />
     <Compile Include="EventSourceDialogViewController.cs" />
     <Compile Include="Target\MvxEntryElementValueBinding.cs" />
     <Compile Include="Target\MvxRadioRootElementBinding.cs" />
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
     <Compile Include="Elements\SimplePickerElement.cs" />
-    <Compile Include="MvxiOSDialogSetup.cs" />
+    <Compile Include="MvxIosDialogSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">

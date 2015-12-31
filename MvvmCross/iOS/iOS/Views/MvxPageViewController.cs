@@ -10,7 +10,7 @@
 
     using UIKit;
 
-    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTouchView
+    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {
         private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
 
@@ -57,7 +57,7 @@
             this.SetViewControllers(new UIViewController[] { defaultVC }, UIPageViewControllerNavigationDirection.Forward, true, null);
             this.GetNextViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
-                IMvxTouchView rcTV = rc as IMvxTouchView;
+                IMvxIosView rcTV = rc as IMvxIosView;
                 if (rcTV == null)
                     return (null);
                 IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
@@ -71,7 +71,7 @@
             };
             this.GetPreviousViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
-                IMvxTouchView rcTV = rc as IMvxTouchView;
+                IMvxIosView rcTV = rc as IMvxIosView;
                 if (rcTV == null)
                     return (null);
                 IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
@@ -111,7 +111,7 @@
         }
     }
 
-    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxTouchView<TViewModel> where TViewModel : class, IMvxPageViewModel
+    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxPageViewModel
     {
         public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
         {
