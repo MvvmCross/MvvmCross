@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F073E4F8-E0B6-43E7-84C1-B71AE4BEA0E0}</ProjectGuid>
+    <ProjectGuid>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>MvvmCross.Dialog.Touch</RootNamespace>
-    <AssemblyName>MvvmCross.Dialog.Touch</AssemblyName>
+    <RootNamespace>MvvmCross.iOS</RootNamespace>
+    <AssemblyName>MvvmCross.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -37,33 +37,54 @@
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
-    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxDialogViewController.cs" />
+    <Compile Include="Platform\IMvxApplicationDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simple\MvxSimpleTouchDialogViewController.cs" />
-    <Compile Include="Simple\MvxSimpleTouchDialogSetup.cs" />
-    <Compile Include="Simple\MvxEmptyApp.cs" />
-    <Compile Include="EventSourceDialogViewController.cs" />
-    <Compile Include="Target\MvxEntryElementValueBinding.cs" />
-    <Compile Include="Target\MvxRadioRootElementBinding.cs" />
-    <Compile Include="Target\MvxValueElementValueBinding.cs" />
-    <Compile Include="Elements\SimplePickerElement.cs" />
-    <Compile Include="MvxTouchDialogSetup.cs" />
+    <Compile Include="Views\IMvxCanCreateTouchView.cs" />
+    <Compile Include="Views\IMvxCurrentRequest.cs" />
+    <Compile Include="Platform\IMvxTouchPlatformProperties.cs" />
+    <Compile Include="Platform\MvxTouchDisplayDensity.cs" />
+    <Compile Include="Platform\MvxTouchFormFactor.cs" />
+    <Compile Include="Views\IMvxModalTouchView.cs" />
+    <Compile Include="Platform\MvxApplicationDelegate.cs" />
+    <Compile Include="Platform\MvxTouchPlatformProperties.cs" />
+    <Compile Include="Views\IMvxTouchViewCreator.cs" />
+    <Compile Include="Views\IMvxTouchViewsContainer.cs" />
+    <Compile Include="Views\MvxCanCreateTouchViewExtensionMethods.cs" />
+    <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
+    <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
+    <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxTabBarViewController.cs" />
+    <Compile Include="Views\MvxViewControllerAdapter.cs" />
+    <Compile Include="Views\IMvxTouchView.cs" />
+    <Compile Include="Views\MvxTableViewController.cs" />
+    <Compile Include="Views\MvxTouchViewsContainer.cs" />
+    <Compile Include="Views\IMvxTouchNavigator.cs" />
+    <Compile Include="Views\MvxTouchViewDispatcher.cs" />
+    <Compile Include="Views\MvxTouchUIThreadDispatcher.cs" />
+    <Compile Include="Platform\MvxDebugTrace.cs" />
+    <Compile Include="Views\Presenters\IMvxTouchViewPresenter.cs" />
+    <Compile Include="Views\MvxViewController.cs" />
+    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
+    <Compile Include="Views\Presenters\MvxBaseTouchViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxModalNavSupportTouchViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxModalSupportTouchViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxTouchViewPresenter.cs" />
+    <Compile Include="Platform\MvxTouchSetup.cs" />
+    <Compile Include="Views\MvxCollectionViewController.cs" />
+    <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
+    <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
+    <Compile Include="Views\MvxPageViewController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
-      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
-      <Name>CrossUI.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\CrossUI\CrossUI.iOS\CrossUI.iOS.csproj">
-      <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
-      <Name>CrossUI.Touch</Name>
-    </ProjectReference>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
     <ProjectReference Include="..\..\Platform\Touch\MvvmCross.Platform.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>MvvmCross.Platform.Touch</Name>
@@ -80,22 +101,15 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\iOS\iOS\MvvmCross.iOS.csproj">
-      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
-      <Name>MvvmCross.Touch</Name>
+    <ProjectReference Include="..\..\Core\Localization\MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>MvvmCross.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

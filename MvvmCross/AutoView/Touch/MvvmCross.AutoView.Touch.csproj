@@ -91,7 +91,7 @@
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>MvvmCross.Binding.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Touch\Touch\MvvmCross.Touch.csproj">
+    <ProjectReference Include="..\..\iOS\iOS\MvvmCross.iOS.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
       <Name>MvvmCross.Touch</Name>
     </ProjectReference>
