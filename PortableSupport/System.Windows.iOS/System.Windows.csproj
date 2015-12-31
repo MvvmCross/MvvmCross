@@ -6,7 +6,7 @@
     <ProjectGuid>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>System.Windows.Touch</RootNamespace>
+    <RootNamespace>System.Windows.iOS</RootNamespace>
     <AssemblyName>System.Windows</AssemblyName>
     <SignAssembly>false</SignAssembly>
     <DelaySign>true</DelaySign>
@@ -20,7 +20,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\iOS\</OutputPath>
     <DefineConstants Condition="'$(OS)' != 'Windows_NT'">DEBUG;MONOTOUCH</DefineConstants>
     <DefineConstants Condition="'$(OS)' == 'Windows_NT'">DEBUG;MONOTOUCH;HACK_DO_NOT_FORWARD_ICOMMAND</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -34,7 +34,7 @@
     <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\iOS\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
