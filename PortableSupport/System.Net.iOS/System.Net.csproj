@@ -8,10 +8,10 @@
     <ProjectGuid>{13D0CB9B-25EC-48E0-9091-4FF0208545CA}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>System.Net.Touch</RootNamespace>
+    <RootNamespace>System.Net.iOS</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-    <AssemblyName>System.Net.Touch</AssemblyName>
+    <AssemblyName>System.Net.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <AssemblyName Condition="'$(OS)' == 'Windows_NT'">System.Net</AssemblyName>
@@ -23,7 +23,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\iOS\</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,7 +35,7 @@
     <NoStdLib>True</NoStdLib>
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\iOS\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>

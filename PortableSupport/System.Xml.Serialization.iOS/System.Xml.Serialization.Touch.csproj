@@ -8,11 +8,11 @@
     <ProjectGuid>{3F51A706-7BE0-4B53-AEE9-A4FB5DEE57B2}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>System.Xml.Serialization.Touch</RootNamespace>
+    <RootNamespace>System.Xml.Serialization.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-    <AssemblyName>System.Xml.Serialization.Touch</AssemblyName>
+    <AssemblyName>System.Xml.Serialization.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <AssemblyName>System.Xml.Serialization</AssemblyName>
@@ -36,10 +36,10 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <OutputPath>..\..\bin\Release\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\iOS\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <OutputPath>..\..\bin\Debug\Mvx\Touch\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\iOS\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Forwarding.cs" />
