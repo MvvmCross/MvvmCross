@@ -13,8 +13,8 @@ namespace MvvmCross.Dialog.Touch.Elements
 
     using CoreGraphics;
 
-    using CrossUI.Touch.Dialog;
-    using CrossUI.Touch.Dialog.Elements;
+    using CrossUI.iOS.Dialog;
+    using CrossUI.iOS.Dialog.Elements;
 
     using Foundation;
 

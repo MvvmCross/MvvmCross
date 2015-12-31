@@ -10,12 +10,12 @@ namespace MvvmCross.Dialog.Touch
     using System;
     using System.Collections.Generic;
 
-    using CrossUI.Touch.Dialog.Elements;
+    using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Touch.Views;
+    using MvvmCross.iOS.Views;
 
     using UIKit;
 

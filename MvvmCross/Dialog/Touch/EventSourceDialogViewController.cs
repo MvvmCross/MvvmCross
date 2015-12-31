@@ -9,8 +9,8 @@ namespace MvvmCross.Dialog.Touch
 {
     using System;
 
-    using CrossUI.Touch.Dialog;
-    using CrossUI.Touch.Dialog.Elements;
+    using CrossUI.iOS.Dialog;
+    using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Touch.Views;

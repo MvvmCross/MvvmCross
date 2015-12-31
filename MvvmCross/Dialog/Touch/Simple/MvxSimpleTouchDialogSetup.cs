@@ -13,7 +13,7 @@ namespace MvvmCross.Dialog.Touch.Simple
 
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Touch.Views.Presenters;
+    using MvvmCross.iOS.Views.Presenters;
 
     public class MvxSimpleTouchDialogSetup
         : MvxTouchDialogSetup
