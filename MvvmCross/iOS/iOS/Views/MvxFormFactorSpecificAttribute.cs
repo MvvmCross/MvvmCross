@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.iOS.Platform;
-
 namespace MvvmCross.iOS.Views
 {
     using System;
 
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
-    using iOS.Platform;
+    using MvvmCross.iOS.Platform;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFormFactorSpecificAttribute

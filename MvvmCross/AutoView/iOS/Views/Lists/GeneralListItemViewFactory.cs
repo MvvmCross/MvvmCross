@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Interfaces.Lists;
-
 namespace MvvmCross.AutoView.iOS.Views.Lists
 {
     using System.Collections.Generic;
 
     using Foundation;
 
-    using iOS.Interfaces.Lists;
+    using MvvmCross.AutoView.iOS.Interfaces.Lists;
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;

@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Interfaces.Lists;
-
 namespace MvvmCross.AutoView.iOS.Views.Lists
 {
     using System.Collections;
@@ -16,7 +14,7 @@ namespace MvvmCross.AutoView.iOS.Views.Lists
 
     using CrossUI.Core.Elements.Lists;
 
-    using iOS.Interfaces.Lists;
+    using MvvmCross.AutoView.iOS.Interfaces.Lists;
     using Binding.iOS.Views;
     using MvvmCross.Platform.Exceptions;
 

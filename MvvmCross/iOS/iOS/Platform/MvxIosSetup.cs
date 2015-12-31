@@ -5,9 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-
 namespace MvvmCross.iOS.Platform
 {
     using System;
@@ -18,7 +15,7 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings.Target.Construction;
-    using Binding.iOS;
+    using MvvmCross.Binding.iOS;
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
@@ -28,8 +25,8 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Platform.Plugins;
     using MvvmCross.Platform.iOS.Platform;
     using MvvmCross.Platform.iOS.Views;
-    using iOS.Views;
-    using iOS.Views.Presenters;
+    using MvvmCross.iOS.Views;
+    using MvvmCross.iOS.Views.Presenters;
 
     using UIKit;
 

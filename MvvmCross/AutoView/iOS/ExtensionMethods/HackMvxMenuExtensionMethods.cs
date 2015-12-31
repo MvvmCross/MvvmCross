@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Views.Menus;
-
 namespace MvvmCross.AutoView.iOS.ExtensionMethods
 {
     using System.Collections.Generic;
@@ -14,7 +12,7 @@ namespace MvvmCross.AutoView.iOS.ExtensionMethods
 
     using CrossUI.Core.Elements.Menu;
 
-    using iOS.Views.Menus;
+    using MvvmCross.AutoView.iOS.Views.Menus;
 
     using UIKit;
 

@@ -5,17 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Builders;
-using MvvmCross.AutoView.iOS.Views;
-
 namespace MvvmCross.AutoView.iOS
 {
     using CrossUI.Core.Builder;
 
     using MvvmCross.AutoView.Builders;
     using MvvmCross.AutoView.Interfaces;
-    using iOS.Builders;
-    using iOS.Views;
+    using MvvmCross.AutoView.iOS.Builders;
+    using MvvmCross.AutoView.iOS.Views;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 

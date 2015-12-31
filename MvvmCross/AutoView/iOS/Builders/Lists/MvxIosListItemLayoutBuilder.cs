@@ -5,13 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Interfaces.Lists;
-
 namespace MvvmCross.AutoView.iOS.Builders.Lists
 {
     using CrossUI.Core.Builder;
 
-    using iOS.Interfaces.Lists;
+    using MvvmCross.AutoView.iOS.Interfaces.Lists;
 
     public class MvxIosListItemLayoutBuilder : TypedUserInterfaceBuilder
     {
