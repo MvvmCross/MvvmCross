@@ -38,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mac", "Mac", "{72A8F00E-AC0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0A4F4A91-1070-42F3-BC18-06FF31D7348E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Touch", "Touch", "{164B62DA-28BF-46AD-8EB3-D0DA24676106}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{164B62DA-28BF-46AD-8EB3-D0DA24676106}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{80E14EC8-6E98-4AE9-B4F4-8DBE6642A0D0}"
 EndProject
@@ -98,7 +98,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test", "MvvmCross
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test.Core", "MvvmCross\Test\Test.Core\MvvmCross.Test.Core.csproj", "{8E788346-A72B-4939-9D95-A44AC5F46D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Touch", "MvvmCross\Touch\Touch\MvvmCross.Touch.csproj", "{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS", "MvvmCross\iOS\iOS\MvvmCross.iOS.csproj", "{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.WindowsCommon", "MvvmCross\Windows\WindowsCommon\MvvmCross.WindowsCommon.csproj", "{3E8C6FE7-9D2B-4A90-94F4-1B545B908911}"
 EndProject
