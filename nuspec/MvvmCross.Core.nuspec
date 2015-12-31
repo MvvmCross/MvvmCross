@@ -87,10 +87,10 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\MonoAndroid" />
 
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.*" target="lib\Xamarin.iOS10" />
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
 
-		<!-- touch - PCL -->
+		<!-- iOS - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.iOS10" />
 	</files>

@@ -64,15 +64,15 @@ This package contains the Mac 'Getting Started' libraries for MvvmCross
 		<file src="DroidContent\splash.png" target="content\MonoAndroid\Resources\Drawable\splash.png" />
 		<file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
 
-		<!-- touch - Content -->
-		<file src="TouchContent\_ Touch UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ Touch UI.txt" />
-		<file src="TouchContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
-		<file src="TouchContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
-		<file src="TouchContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
-		<file src="TouchContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
-		<file src="TouchContent\FirstView.designer.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.designer.cs.pp" />
-		<file src="TouchContent\FirstView.xib" target="content\Xamarin.iOS10\Views\FirstView.xib" />
-		<file src="TouchContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
+		<!-- iOS - Content -->
+		<file src="iOSContent\_ iOS UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ iOS UI.txt" />
+		<file src="iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
+		<file src="iOSContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
+		<file src="iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
+		<file src="iOSContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
+		<file src="iOSContent\FirstView.designer.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.designer.cs.pp" />
+		<file src="iOSContent\FirstView.xib" target="content\Xamarin.iOS10\Views\FirstView.xib" />
+		<file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
 		<!-- mac - Content -->
 		<file src="MacContent\_ Mac UI.txt" target="content\net45\ToDo-MvvmCross\_ Mac UI.txt" />

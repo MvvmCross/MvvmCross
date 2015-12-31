@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{371B2408-732A-40CA-8242-70DBC17F9825}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CrossUI.iOS</RootNamespace>
+    <AssemblyName>CrossUI.iOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <NoStdLib>True</NoStdLib>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Debug\Mvx\iOS\</OutputPath>
+    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <NoStdLib>True</NoStdLib>
+    <DebugType>none</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\Release\Mvx\iOS\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <DefineConstants>MONOTOUCH</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builder\IosConstants.cs" />
+    <Compile Include="Builder\IosElementBuilder.cs" />
+    <Compile Include="Dialog\DialogViewController.cs" />
+    <Compile Include="Dialog\Elements\ActivityElement.cs" />
+    <Compile Include="Dialog\Elements\BaseBooleanImageElement.cs" />
+    <Compile Include="Dialog\Elements\BooleanElement.cs" />
+    <Compile Include="Dialog\Elements\BooleanImageElement.cs" />
+    <Compile Include="Dialog\Elements\CheckboxElement.cs" />
+    <Compile Include="Dialog\Elements\DateElement.cs" />
+    <Compile Include="Dialog\Elements\DateTimeElement.cs" />
+    <Compile Include="Dialog\Elements\Element.cs" />
+    <Compile Include="Dialog\Elements\ElementBadge.cs" />
+    <Compile Include="Dialog\Elements\EntryElement.cs" />
+    <Compile Include="Dialog\Elements\FloatElement.cs" />
+    <Compile Include="Dialog\Elements\Group.cs" />
+    <Compile Include="Dialog\Elements\HtmlElement.cs" />
+    <Compile Include="Dialog\Elements\IColorizeBackground.cs" />
+    <Compile Include="Dialog\Elements\IElementSizing.cs" />
+    <Compile Include="Dialog\Elements\ImageElement.cs" />
+    <Compile Include="Dialog\Elements\ImageStringElement.cs" />
+    <Compile Include="Dialog\Elements\Json.cs" />
+    <Compile Include="Dialog\Elements\MessageElement.cs" />
+    <Compile Include="Dialog\Elements\MessageSummaryView.cs" />
+    <Compile Include="Dialog\Elements\MultilineElement.cs" />
+    <Compile Include="Dialog\Elements\OwnerDrawnElement.cs" />
+    <Compile Include="Dialog\Elements\RadioElement.cs" />
+    <Compile Include="Dialog\Elements\RadioGroup.cs" />
+    <Compile Include="Dialog\Elements\RootElement.cs" />
+    <Compile Include="Dialog\Elements\Section.cs" />
+    <Compile Include="Dialog\Elements\StringElement.cs" />
+    <Compile Include="Dialog\Elements\StyledMultilineElement.cs" />
+    <Compile Include="Dialog\Elements\StyledStringElement.cs" />
+    <Compile Include="Dialog\Elements\TimeElement.cs" />
+    <Compile Include="Dialog\Elements\UIViewElement.cs" />
+    <Compile Include="Dialog\Elements\ValueElement.cs" />
+    <Compile Include="Dialog\OldElements\LoadMoreElement.cs" />
+    <Compile Include="Dialog\Reflect.cs" />
+    <Compile Include="Dialog\Utilities\Controls.cs" />
+    <Compile Include="Dialog\Utilities\GlassButton.cs" />
+    <Compile Include="Dialog\Utilities\Graphics.cs" />
+    <Compile Include="Dialog\Utilities\ImageLoader.cs" />
+    <Compile Include="Dialog\Utilities\LocalizationExtensions.cs" />
+    <Compile Include="Dialog\Utilities\LRUCache.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog\Images\arrow.png" />
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <None Include="Dialog\NoteAndLicense.MonoTouch.Dialog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrossUI.Core\CrossUI.Core.csproj">
+      <Project>{D9CBBFFE-57E8-4E97-9E16-C34BC4C52827}</Project>
+      <Name>CrossUI.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
