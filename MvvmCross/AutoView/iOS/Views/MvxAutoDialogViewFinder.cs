@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Views.Dialog;
-
 namespace MvvmCross.AutoView.iOS.Views
 {
     using System;
 
     using MvvmCross.AutoView.Interfaces;
-    using iOS.Views.Dialog;
+    using MvvmCross.AutoView.iOS.Views.Dialog;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform;
 

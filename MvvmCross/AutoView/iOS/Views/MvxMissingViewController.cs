@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Interfaces;
-
 namespace MvvmCross.AutoView.iOS.Views
 {
     using System;
@@ -14,7 +12,7 @@ namespace MvvmCross.AutoView.iOS.Views
     using CrossUI.iOS.Dialog.Elements;
 
     using MvvmCross.AutoView.ExtensionMethods;
-    using iOS.Interfaces;
+    using MvvmCross.AutoView.iOS.Interfaces;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Dialog.iOS;
     using MvvmCross.Platform;

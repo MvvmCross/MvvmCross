@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.AutoView.iOS.Interfaces;
-
 namespace MvvmCross.AutoView.iOS.Views.Lists
 {
     using CrossUI.Core.Elements.Menu;
 
     using MvvmCross.AutoView.ExtensionMethods;
-    using iOS.ExtensionMethods;
-    using iOS.Interfaces;
+    using MvvmCross.AutoView.iOS.ExtensionMethods;
+    using MvvmCross.AutoView.iOS.Interfaces;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.IoC;
     using MvvmCross.iOS.Views;

@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.iOS.Views.Presenters;
-
 namespace MvvmCross.iOS.Views
 {
     using System;
@@ -14,7 +12,7 @@ namespace MvvmCross.iOS.Views
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
-    using iOS.Views.Presenters;
+    using MvvmCross.iOS.Views.Presenters;
 
     public class MvxIosViewDispatcher
         : MvxIosUIThreadDispatcher
