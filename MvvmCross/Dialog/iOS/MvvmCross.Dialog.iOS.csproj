@@ -72,7 +72,7 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Binding\Touch\MvvmCross.Binding.Touch.csproj">
+    <ProjectReference Include="..\..\Binding\iOS\MvvmCross.Binding.iOS.csproj">
       <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
       <Name>MvvmCross.Binding.Touch</Name>
     </ProjectReference>

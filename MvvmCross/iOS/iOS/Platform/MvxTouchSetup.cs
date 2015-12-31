@@ -18,7 +18,7 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Touch;
+    using Binding.iOS;
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;

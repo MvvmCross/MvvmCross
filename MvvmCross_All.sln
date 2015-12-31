@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Mac", "Mv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Test", "MvvmCross\Binding\Test\MvvmCross.Binding.Test.csproj", "{2F41D56E-B1CE-4273-97E5-8835479C5A89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Touch", "MvvmCross\Binding\Touch\MvvmCross.Binding.Touch.csproj", "{913B13B5-7B2C-4DDA-BECB-DADC827ED895}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.iOS", "MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj", "{913B13B5-7B2C-4DDA-BECB-DADC827ED895}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Console", "MvvmCross\Console\Console\MvvmCross.Console.csproj", "{CF9E4C49-4D40-4375-A522-25D33233B0E9}"
 EndProject
