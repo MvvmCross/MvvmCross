@@ -107,8 +107,8 @@ This package contains the 'Getting Started' libraries for MvvmCross
 		<file src="DroidContent\splash.png" target="content\MonoAndroid\Resources\drawable\splash.png" />
 		<file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
 
-		<!-- touch - Content -->
-		<file src="iOSContent\_ Touch UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ Touch UI.txt" />
+		<!-- iOS - Content -->
+		<file src="iOSContent\_ iOS UI.txt" target="content\Xamarin.iOS10\ToDo-MvvmCross\_ iOS UI.txt" />
 		<file src="iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
 		<file src="iOSContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
 		<file src="iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
