@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
     public class MvxCachingFragmentActivity
         : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
-        private enum FragmentReplaceMode
+        protected enum FragmentReplaceMode
         {
             NoReplace,
             ReplaceFragment,
@@ -230,7 +230,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
             //if replacing ViewModel then clear the cache after the fragment
             //has been added to the transaction so that the Tag property is not null
-            //and the UniqueImmutableCacheTag property (if not overriden) has the correct value
+            //and the UniqueImmutableCacheTag property (if not overridden) has the correct value
             if (fragmentReplaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
             {
                 var cache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
@@ -248,9 +248,9 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             OnFragmentChanged(fragInfo);
         }
 
-        private static FragmentReplaceMode ShouldReplaceCurrentFragment(IMvxCachedFragmentInfo newFragment, IMvxCachedFragmentInfo oldFragment, Bundle replacementBundle)
+        protected virtual FragmentReplaceMode ShouldReplaceCurrentFragment(IMvxCachedFragmentInfo newFragment, IMvxCachedFragmentInfo currentFragment, Bundle replacementBundle)
         {
-            var oldBundle = newFragment?.CachedFragment?.Arguments;
+            var oldBundle = newFragment.CachedFragment?.Arguments;
             if (oldBundle == null) return FragmentReplaceMode.ReplaceFragment;
 
             var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
@@ -267,14 +267,16 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
              (oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
              !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
 
-            if (oldFragment.Tag != newFragment.Tag)
+            if (currentFragment?.Tag != newFragment.Tag)
             {
-                return !areParametersEqual ? FragmentReplaceMode.ReplaceFragmentAndViewModel : FragmentReplaceMode.ReplaceFragment;
+                return !areParametersEqual
+                    ? FragmentReplaceMode.ReplaceFragmentAndViewModel
+                    : FragmentReplaceMode.ReplaceFragment;
             }
             else
-            {
-                return !areParametersEqual ? FragmentReplaceMode.ReplaceFragmentAndViewModel : FragmentReplaceMode.NoReplace;
-            }
+                return !areParametersEqual
+                    ? FragmentReplaceMode.ReplaceFragmentAndViewModel
+                    : FragmentReplaceMode.NoReplace;
         }
 
         public override void OnBackPressed()
