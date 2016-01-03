@@ -1,8 +1,8 @@
-using Cirrious.CrossCore.IoC;
+using MvvmCross.Core.IoC;
 
 namespace $rootnamespace$
 {
-    public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+    public class App : MvvmCross.Core.ViewModels.MvxApplication
     {
         public override void Initialize()
         {
@@ -10,7 +10,7 @@ namespace $rootnamespace$
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-				
+
             RegisterAppStart<ViewModels.FirstViewModel>();
         }
     }

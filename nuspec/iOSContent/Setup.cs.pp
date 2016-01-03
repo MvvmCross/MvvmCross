@@ -1,31 +1,31 @@
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Touch.Platform;
+using MvvmCross.Core.Platform;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
 using UIKit;
 
 namespace $rootnamespace$
 {
-	public class Setup : MvxTouchSetup
-	{
-		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
-			: base(applicationDelegate, window)
-		{
-		}
-		
-		public Setup(MvxApplicationDelegate applicationDelegate, IMvxTouchViewPresenter presenter)
-			: base(applicationDelegate, presenter)
-		{
-		}
+    public class Setup : MvxIosSetup
+    {
+        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+            : base(applicationDelegate, window)
+        {
+        }
+        
+        public Setup(MvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+            : base(applicationDelegate, presenter)
+        {
+        }
 
-		protected override IMvxApplication CreateApp()
-		{
-			return new Core.App();
-		}
-		
-		protected override IMvxTrace CreateDebugTrace()
-		{
-			return new DebugTrace();
-		}
-	}
+        protected override IMvxApplication CreateApp()
+        {
+            return new Core.App();
+        }
+        
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
+        }
+    }
 }

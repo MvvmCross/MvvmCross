@@ -1,6 +1,6 @@
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Core.ViewModels;
 using Foundation;
 using UIKit;
 
