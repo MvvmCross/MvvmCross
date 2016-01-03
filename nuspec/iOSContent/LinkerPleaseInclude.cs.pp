@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Touch.Views;
+using MvvmCross.iOS.Views;
 using Foundation;
 using UIKit;
 
@@ -91,21 +91,20 @@ namespace $rootnamespace$
         {
             changed.CollectionChanged += (s, e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
         }
-		
+
         public void Include(ICommand command)
         {
            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-		public void Include(Cirrious.CrossCore.IoC.MvxPropertyInjector injector)
-		{
-			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector();
-		} 
+        public void Include(MvvmCross.Core.IoC.MvxPropertyInjector injector)
+        {
+            injector = new MvvmCross.Core.IoC.MvxPropertyInjector();
+        } 
 
-		public void Include(System.ComponentModel.INotifyPropertyChanged changed)
-		{
-			changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
-		}
-	}
+        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
+        }
+    }
 }
-

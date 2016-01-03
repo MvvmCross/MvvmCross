@@ -33,7 +33,7 @@ namespace $rootnamespace$
         public void Include(TextView text)
         {
             text.TextChanged += (sender, args) => text.Text = "" + text.Text;
-			text.Hint = "" + text.Hint;
+            text.Hint = "" + text.Hint;
         }
         
         public void Include(CheckedTextView text)
@@ -66,17 +66,17 @@ namespace $rootnamespace$
         {
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
-		
-		public void Include(Cirrious.CrossCore.IoC.MvxPropertyInjector injector)
-		{
-			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector ();
-		} 
+        
+        public void Include(MvvmCross.Core.IoC.MvxPropertyInjector injector)
+        {
+            injector = new MvvmCross.Core.IoC.MvxPropertyInjector ();
+        } 
 
-		public void Include(System.ComponentModel.INotifyPropertyChanged changed)
-		{
-			changed.PropertyChanged += (sender, e) =>  {
-				var test = e.PropertyName;
-			};
-		}
+        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += (sender, e) =>  {
+                var test = e.PropertyName;
+            };
+        }
     }
 }

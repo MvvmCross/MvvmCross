@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.WindowsStore.Views;
+using MvvmCross.WindowsStore.Views;
 
 namespace $rootnamespace$.Views
 {
