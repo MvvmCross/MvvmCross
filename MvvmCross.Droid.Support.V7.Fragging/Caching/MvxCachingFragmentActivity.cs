@@ -181,8 +181,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         /// <param name="contentId">Where you want to show the Fragment</param>
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="forceAddToBackStack">If you want to force add the fragment to the backstack so on backbutton it will go back to it. Note: This will override IMvxCachedFragmentInfo.AddToBackStack configuration.</param>
-        /// <param name="forceReplace">If you want the fragment to be re-created</param>
-        protected void ShowFragment(string tag, int contentId, Bundle bundle, bool forceAddToBackStack = false, bool forceReplace = false)
+        /// <param name="forceReplaceFragment">If you want the fragment to be re-created</param>
+        protected void ShowFragment(string tag, int contentId, Bundle bundle, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
             FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
@@ -198,7 +198,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
             // We shouldn't replace the current fragment unless we really need to.
             FragmentReplaceMode fragmentReplaceMode = FragmentReplaceMode.ReplaceFragmentAndViewModel;
-            if (!forceReplace)
+            if (!forceReplaceFragment)
                 fragmentReplaceMode = ShouldReplaceCurrentFragment(fragInfo, currentFragInfo, bundle);
 
             if (fragmentReplaceMode == FragmentReplaceMode.NoReplace)
