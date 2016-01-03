@@ -10,17 +10,16 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Cirrious.CrossCore.Core;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvxActivity = Cirrious.MvvmCross.Droid.FullFragging.Views.MvxActivity;
+using MvvmCross.Core.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
     public abstract class MvxTabsFragmentActivity
-        : MvxActivity
+        : Views.MvxActivity
         , TabHost.IOnTabChangeListener
     {
         private const string SavedTabIndexStateKey = "__savedTabIndex";

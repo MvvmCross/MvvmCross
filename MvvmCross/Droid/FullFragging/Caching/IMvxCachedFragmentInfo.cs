@@ -1,7 +1,7 @@
 using System;
 using Android.App;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.FullFragging.Caching
 {
     public interface IMvxCachedFragmentInfo
     {

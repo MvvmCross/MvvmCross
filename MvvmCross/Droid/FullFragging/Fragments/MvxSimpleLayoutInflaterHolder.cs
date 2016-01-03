@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.Views;
+using MvvmCross.Binding.Droid.Views;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
+namespace MvvmCross.Droid.FullFragging.Fragments
 {
     public class MvxSimpleLayoutInflaterHolder : IMvxLayoutInflaterHolder
     {
