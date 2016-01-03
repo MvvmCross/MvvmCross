@@ -1,4 +1,4 @@
-﻿// <copyright file="MvxTouchUIThreadDispatcher.cs" company="">
+﻿// <copyright file="MvxMacUIThreadDispatcher.cs" company="">
 // This source is subject to the Microsoft Public License (Ms-PL)
 // Please see license.txt on http://opensource.org/licenses/ms-pl.html
 // All other rights reserved.

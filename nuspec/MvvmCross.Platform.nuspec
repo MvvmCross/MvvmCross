@@ -62,8 +62,8 @@ This package contains the 'MvvmCross Library' libraries for MvvmCross
 			target="src\MvvmCross.WindowsUWP" />
 		<file src="..\MvvmCross\Droid\Droid\**\*.cs" 
 			target="src\MvvmCross.Droid" />
-		<file src="..\MvvmCross\Touch\Touch\**\*.cs" 
-			target="src\MvvmCross.Touch" />
+		<file src="..\MvvmCross\iOS\iOS\**\*.cs" 
+			target="src\MvvmCross.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-win+net45+wp8+win8+wpa81" />
@@ -111,8 +111,8 @@ This package contains the 'MvvmCross Library' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid" />
 
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Touch.*" target="lib\Xamarin.iOS10" />
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10" />
 	</files>

@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Bindings.Target
             this._targetEventInfo = targetEventInfo;
 
             // 	addMethod is used because of error:
-            // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (MonoTouch.UIKit.UIControl,System.EventHandler)' while running with --aot-only."
+            // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (UIKit.UIControl,System.EventHandler)' while running with --aot-only."
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = this._targetEventInfo.GetAddMethod();
