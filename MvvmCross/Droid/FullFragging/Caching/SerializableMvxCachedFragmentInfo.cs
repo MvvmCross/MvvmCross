@@ -1,6 +1,6 @@
 using System;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.FullFragging.Caching
 {
     public class SerializableMvxCachedFragmentInfo
     {

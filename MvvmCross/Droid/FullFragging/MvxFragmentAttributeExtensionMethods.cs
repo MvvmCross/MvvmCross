@@ -8,7 +8,7 @@
 using System;
 using System.Linq;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
     public static class MvxFragmentAttributeExtensionMethods
     {

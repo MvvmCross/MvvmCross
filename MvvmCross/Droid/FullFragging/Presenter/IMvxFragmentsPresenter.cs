@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
+namespace MvvmCross.Droid.FullFragging.Presenter
 {
     public interface IMvxFragmentsPresenter
     {

@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
+namespace MvvmCross.Droid.FullFragging.Fragments
 {
     public interface IMvxFragmentView
         : IMvxBindingContextOwner

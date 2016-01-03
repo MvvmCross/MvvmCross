@@ -1,19 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.FullFragging.Fragments;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.FullFragging.Fragments;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.FullFragging.Caching
 {
     public class FragmentCacheConfiguration
     {

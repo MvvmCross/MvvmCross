@@ -1,10 +1,10 @@
 using System;
 using Android.Runtime;
-using Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
+namespace MvvmCross.Droid.FullFragging.Fragments
 {
     public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
     {
