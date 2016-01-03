@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Core</id>
-		<version>4.0.0-beta7</version>
+		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Core</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -19,19 +19,19 @@ This package contains the 'Core' libraries for MvvmCross
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\MvvmCross\Core\Core\MvvmCross.Core\**\*.cs" 
+		<file src="..\MvvmCross\Core\Core\**\*.cs" 
 			target="src\MvvmCross.Core" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf\**\*.cs" 
+		<file src="..\MvvmCross\Platform\Wpf\**\*.cs" 
 			target="src\MvvmCross.Platform.Wpf" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.WindowsStore\**\*.cs" 
+		<file src="..\MvvmCross\Platform\WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Platform.WindowsStore" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.WindowsPhone\**\*.cs" 
+		<file src="..\MvvmCross\Platform\WindowsPhone\**\*.cs" 
 			target="src\MvvmCross.Platform.WindowsPhone" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.WindowsCommon\**\*.cs" 
+		<file src="..\MvvmCross\Platform\WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Platform.WindowsCommon" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Droid\**\*.cs" 
+		<file src="..\MvvmCross\Platform\Droid\**\*.cs" 
 			target="src\MvvmCross.Platform.Droid" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.iOS\**\*.cs" 
+		<file src="..\MvvmCross\Platform\iOS\**\*.cs" 
 			target="src\MvvmCross.Platform.iOS" />
 
 		<!-- PCL -->

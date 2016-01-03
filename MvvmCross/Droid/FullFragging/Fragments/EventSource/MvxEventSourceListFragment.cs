@@ -9,10 +9,10 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
+namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     public class MvxEventSourceListFragment
         : ListFragment

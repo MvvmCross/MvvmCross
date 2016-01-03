@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFragmentAttribute : Attribute

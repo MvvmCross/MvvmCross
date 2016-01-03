@@ -7,10 +7,10 @@
 
 using Android.App;
 using Android.OS;
-using Cirrious.CrossCore.Core;
 using System;
+using MvvmCross.Platform.Core;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
+namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {
