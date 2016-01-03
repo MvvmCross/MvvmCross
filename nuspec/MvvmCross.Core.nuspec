@@ -31,8 +31,8 @@ This package contains the 'Core' libraries for MvvmCross
 			target="src\MvvmCross.Platform.WindowsCommon" />
 		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Droid\**\*.cs" 
 			target="src\MvvmCross.Platform.Droid" />
-		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Touch\**\*.cs" 
-			target="src\MvvmCross.Platform.Touch" />
+		<file src="..\MvvmCross\Platform\Wpf\MvvmCross.Platform.iOS\**\*.cs" 
+			target="src\MvvmCross.Platform.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\portable-win+net45+wp8+win8+wpa81" />

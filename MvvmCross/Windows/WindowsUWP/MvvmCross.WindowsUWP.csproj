@@ -136,7 +136,7 @@
     <Compile Include="Views\Suspension\IMvxSuspensionManager.cs" />
     <Compile Include="Views\Suspension\MvxSuspensionManager.cs" />
     <Compile Include="Views\Suspension\MvxSuspensionManagerException.cs" />
-    <Content Include="Properties\Cirrious.MvvmCross.WindowsUWP.rd.xml" />
+    <Content Include="Properties\MvvmCross.WindowsUWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
