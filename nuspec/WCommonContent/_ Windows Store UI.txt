@@ -32,15 +32,16 @@ The steps to get this Store UI working are:
                 var setup = new Setup(rootFrame);
                 setup.Initialize();
 
-                var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+                var start = MvvmCross.Core.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
                 start.Start();
             }
             // Ensure the current window is active
             Window.Current.Activate();
         }
 
-3. For Windows 8 - Add a views folder and a view - xaml.cs and .xaml based on BasicPage - this will add 5 files to the Common folder. 
-  - Change the Common/LayoutAwarePage.cs inheritance to Cirrious.MvvmCross.WindowsStore.Views.MvxStorePage
+3. For Windows 8 - Add a views folder and a view - xaml.cs and .xaml based on BasicPage - this
+   will add 5 files to the Common folder. 
+  - Change the Common/LayoutAwarePage.cs inheritance to MvvmCross.WindowsStore.Views.MvxStorePage
   - Change the Common/LayoutAwarePage.cs - remove the OnNavigatedTo and OnNavigatedFrom handlers
   - Add some content for your Xaml - e.g. <TextBlock Grid.Row="1" Text="{Binding Hello}" />
   

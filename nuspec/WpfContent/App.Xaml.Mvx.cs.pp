@@ -1,8 +1,8 @@
 using System;
 using System.Windows;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Wpf.Views;
+using MvvmCross.Core;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$
 {
@@ -12,8 +12,8 @@ namespace $rootnamespace$
 
         private void DoSetup()
         {
-			LoadMvxAssemblyResources();
-			
+            LoadMvxAssemblyResources();
+            
             var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
 
             var setup = new Setup(Dispatcher, presenter);
@@ -28,11 +28,13 @@ namespace $rootnamespace$
         protected override void OnActivated(EventArgs e)
         {
             if (!_setupComplete)
+            {
                 DoSetup();
+            }
 
             base.OnActivated(e);
         }
-		
+
         private void LoadMvxAssemblyResources()
         {
             for (var i = 0;; i++)
@@ -40,7 +42,9 @@ namespace $rootnamespace$
                 string key = "MvxAssemblyImport" + i;
                 var data = TryFindResource(key);
                 if (data == null)
+                {
                     return;
+                }
             }
         }
     }
