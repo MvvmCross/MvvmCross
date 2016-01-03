@@ -72,6 +72,7 @@ For manual project creation install the necessary packages from [Nuget](https://
 * [DeapSquatter's blog][deapsquatter]
 * [Odenaxos's blog][odenaxos]
 * [Greg's blog][gshackles] 
+* [Kerry's blog][lothrop]
 * others? Get in touch if you think your blog should be here......
 
 
@@ -135,3 +136,4 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 [mvxtwitter]: https://twitter.com/MvvmCross "MvvmCross on Twitter"
 [mvxmail]: http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html "MvvmCross e-mail"
 [mvxv3]: http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html "MvvmCross v3"
+[lothrop]: http://kerry.lothrop.de/tag/mvvmcross/ "Kerry Lothrop's blog"
