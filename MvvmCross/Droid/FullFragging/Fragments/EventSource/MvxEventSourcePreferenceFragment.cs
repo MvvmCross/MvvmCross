@@ -4,9 +4,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Preferences;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource
+namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
     , IMvxEventSourceFragment

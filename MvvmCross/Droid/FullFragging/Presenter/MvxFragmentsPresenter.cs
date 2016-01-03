@@ -6,13 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.OS;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Presenter
+namespace MvvmCross.Droid.FullFragging.Presenter
 {
     public class MvxFragmentsPresenter
         : MvxAndroidViewPresenter

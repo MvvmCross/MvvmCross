@@ -1,14 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.FullFragging.Caching
 {
     // ok so now first quick note from @thefex
     // Why does this interface exists and what it is for?

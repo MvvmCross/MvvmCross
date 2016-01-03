@@ -8,7 +8,7 @@
 using Android.OS;
 using Android.Views;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
     public class MvxCreateViewParameters
     {

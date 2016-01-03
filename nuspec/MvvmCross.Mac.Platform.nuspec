@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Mac.Platform</id>
-		<version>4.0.0-beta7</version>
+		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Mac MvvmCross Libraries</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,31 +18,31 @@ This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For 
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="Xamarin.iOS">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
 	</metadata>

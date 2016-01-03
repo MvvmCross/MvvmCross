@@ -9,18 +9,18 @@ using System;
 using Android.App;
 using Android.OS;
 using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Droid.FullFragging.Caching;
-using Cirrious.MvvmCross.Droid.FullFragging.Fragments.EventSource;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.FullFragging.Caching;
+using MvvmCross.Droid.FullFragging.Fragments.EventSource;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Fragments
+namespace MvvmCross.Droid.FullFragging.Fragments
 {
     public static class MvxFragmentExtensions
     {

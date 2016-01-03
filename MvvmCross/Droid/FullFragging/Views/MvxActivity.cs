@@ -8,16 +8,16 @@
 using Android.App;
 using Android.Content;
 using Android.Runtime;
-using Cirrious.CrossCore.Droid.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.Views;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Droid.Views;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging.Views
+namespace MvvmCross.Droid.FullFragging.Views
 {
     public abstract class MvxActivity
         : MvxEventSourceActivity

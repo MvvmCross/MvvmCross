@@ -6,16 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.FullFragging.Fragments;
-using Cirrious.MvvmCross.ViewModels;
-using MvxActivity = Cirrious.MvvmCross.Droid.FullFragging.Views.MvxActivity;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.FullFragging.Fragments;
+using MvvmCross.Platform;
 
-namespace Cirrious.MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.FullFragging
 {
     public static class MvxFragmentExtensionMethods
     {
-        public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
+        public static TFragment FindFragmentById<TFragment>(this Views.MvxActivity activity, int resourceId)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentById(resourceId);
@@ -28,7 +27,7 @@ namespace Cirrious.MvvmCross.Droid.FullFragging
             return SafeCast<TFragment>(fragment);
         }
 
-        public static TFragment FindFragmentByTag<TFragment>(this MvxActivity activity, string tag)
+        public static TFragment FindFragmentByTag<TFragment>(this Views.MvxActivity activity, string tag)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(tag);
