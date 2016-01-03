@@ -1,4 +1,4 @@
-// MvxTouchViewPresenter.cs
+// MvxMacViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -71,7 +71,7 @@ namespace MvvmCross.Mac.Views.Presenters
         {
             var viewController = view as NSViewController;
             if (viewController == null)
-                throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
+                throw new MvxException("Passed in IMvxMacView is not a UIViewController");
 
             this.Show(viewController, request);
         }
