@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Core.Platform;
 
 namespace $rootnamespace$
 {

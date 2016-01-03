@@ -1,6 +1,6 @@
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsStore.Platform;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.WindowsStore.Platform;
 using Windows.UI.Xaml.Controls;
 
 namespace $rootnamespace$
@@ -15,7 +15,7 @@ namespace $rootnamespace$
         {
             return new Core.App();
         }
-		
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();

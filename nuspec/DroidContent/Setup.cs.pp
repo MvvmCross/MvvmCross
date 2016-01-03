@@ -1,7 +1,7 @@
 using Android.Content;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.Platform;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -15,7 +15,7 @@ namespace $rootnamespace$
         {
             return new Core.App();
         }
-		
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();

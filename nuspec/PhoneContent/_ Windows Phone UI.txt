@@ -17,6 +17,5 @@ The steps to get this WindowsPhone UI working are:
         {
             args.Cancel = true;
             RootFrame.Navigating -= RootFrameOnNavigating;
-            RootFrame.Dispatcher.BeginInvoke(() => { Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start(); });
+            RootFrame.Dispatcher.BeginInvoke(() => { MvvmCross.Core.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>().Start(); });
         }
-	
