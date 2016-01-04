@@ -35,7 +35,7 @@ This package contains the 'Test Helpers' for MvvmCross
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
