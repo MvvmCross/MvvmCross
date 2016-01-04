@@ -35,7 +35,7 @@ This package contains Xamarin.Mac (also PCL, MonoAndroid and Xamarin.iOS10 for c
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Mac.PortableSupport" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
@@ -53,10 +53,10 @@ This package contains Xamarin.Mac (also PCL, MonoAndroid and Xamarin.iOS10 for c
 		<file src="..\MvvmCross\Core\Binding\**\*.cs" target="src\MvvmCross.Binding" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.pdb" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Localization.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Localization.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.dll" target="lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.pdb" target="lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.pdb" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\dotnet\MvvmCross.Core.dll" />
@@ -97,11 +97,11 @@ This package contains Xamarin.Mac (also PCL, MonoAndroid and Xamarin.iOS10 for c
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.pdb" target="lib\Xamarin.iOS10\MvvmCross.Localization.pdb" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.dll" target="lib\net45\MvvmCross.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.pdb" target="lib\net45\MvvmCross.Mac.pdb" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.dll" target="lib\Xamarin.Mac20\MvvmCross.Mac.dll" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.pdb" target="lib\Xamarin.Mac20\MvvmCross.Mac.pdb" />
 		<file src="..\MvvmCross\Mac\Mac\**\*.cs" target="src\MvvmCross.Mac" />
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.dll" target="lib\net45\MvvmCross.Binding.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.pdb" target="lib\net45\MvvmCross.Binding.Mac.pdb" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.dll" target="lib\Xamarin.Mac20\MvvmCross.Binding.Mac.dll" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.pdb" target="lib\Xamarin.Mac20\MvvmCross.Binding.Mac.pdb" />
 		<file src="..\MvvmCross\Binding\Mac\**\*.cs" target="src\MvvmCross.Binding.Mac" />
 
 		<!-- mac - PCL -->

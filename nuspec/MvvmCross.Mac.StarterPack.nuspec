@@ -35,7 +35,7 @@ This package contains the Mac 'Getting Started' libraries for MvvmCross
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
@@ -48,9 +48,9 @@ This package contains the Mac 'Getting Started' libraries for MvvmCross
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\_ Core.txt" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\ToDo-MvvmCross\_ Core.txt" />
-		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\ViewModels\FirstViewModel.cs.pp" />
-		<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\App.cs.pp" />
+		<file src="CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
+		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\FirstViewModel.cs.pp" />
+		<file src="CoreContent\App.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.cs.pp" />
 
 		<!-- droid - Content -->
 		<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
@@ -75,12 +75,12 @@ This package contains the Mac 'Getting Started' libraries for MvvmCross
 		<file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
 		<!-- mac - Content -->
-		<file src="MacContent\_ Mac UI.txt" target="content\net45\ToDo-MvvmCross\_ Mac UI.txt" />
-		<file src="MacContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
-		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\net45\AppDelegate.cs.txt.pp" />
-		<file src="MacContent\DebugTrace.cs.pp" target="content\net45\DebugTrace.cs.pp" />
-		<file src="MacContent\FirstView.cs.txt.pp" target="content\net45\Views\FirstView.cs.txt.pp" />
-		<file src="MacContent\FirstViewController.cs.txt.pp" target="content\net45\Views\FirstViewController.cs.txt.pp" />
+		<file src="MacContent\_ Mac UI.txt" target="content\Xamarin.Mac20\ToDo-MvvmCross\_ Mac UI.txt" />
+		<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
+		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\Xamarin.Mac20\AppDelegate.cs.txt.pp" />
+		<file src="MacContent\DebugTrace.cs.pp" target="content\Xamarin.Mac20\DebugTrace.cs.pp" />
+		<file src="MacContent\FirstView.cs.txt.pp" target="content\Xamarin.Mac20\Views\FirstView.cs.txt.pp" />
+		<file src="MacContent\FirstViewController.cs.txt.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.txt.pp" />
 	</files>
 </package>
 
