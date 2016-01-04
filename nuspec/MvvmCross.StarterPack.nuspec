@@ -41,7 +41,7 @@ This package contains the 'Getting Started' libraries for MvvmCross
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
@@ -57,8 +57,8 @@ This package contains the 'Getting Started' libraries for MvvmCross
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\ViewModels\FirstViewModel.cs.pp" />
-		<file src="CoreContent\App.cs.pp" target="content\portable-win+net45+wp8+win8+wpa81\App.cs.pp" />
+		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\FirstViewModel.cs.pp" />
+		<file src="CoreContent\App.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.cs.pp" />
 
 		<!-- wpf - Content -->
 		<file src="WpfContent\_ Wpf UI.txt" target="content\net45\ToDo-MvvmCross\_ Wpf UI.txt" />

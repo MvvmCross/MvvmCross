@@ -35,7 +35,7 @@ This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For 
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Mac.Core" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
@@ -51,39 +51,31 @@ This package contains the Mac 'MvvmCross Library' assemblies for MvvmCross. For 
 		<file src="..\MvvmCross\Core\Core\**\*.cs" target="src\MvvmCross.Core" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\portable-win+net45+sl50+wp8+MonoAndroid+Xamarin.iOS10\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\dotnet\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\dotnet\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\dotnet" />
 		
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.dll" target="lib\MonoAndroid\MvvmCross.Droid.dll" />
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pdb" target="lib\MonoAndroid\MvvmCross.Droid.pdb" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.*" exclude="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
 		<file src="..\MvvmCross\Droid\Droid\**\*.cs" target="src\MvvmCross.Droid" />
 
 		<!-- droid - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.iOS.dll" />
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10\MvvmCross.iOS.pdb" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross\iOS\iOS\**\*.cs" target="src\MvvmCross.iOS" />
 
 		<!-- iOS - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\Xamarin.iOS10" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.dll" target="lib\net45\MvvmCross.Mac.dll" />
-		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.pdb" target="lib\net45\MvvmCross.Mac.pdb" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\MvvmCross\Mac\Mac\**\*.cs" target="src\MvvmCross.Mac" />
 
 		<!-- mac - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\net45\MvvmCross.Core.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45\MvvmCross.Core.pdb" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\net45" />
 
 	</files>
 </package>
