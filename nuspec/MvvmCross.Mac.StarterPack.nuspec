@@ -48,7 +48,6 @@ This package contains the Mac 'Getting Started' libraries for MvvmCross
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
 		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\FirstViewModel.cs.pp" />
 		<file src="CoreContent\App.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.cs.pp" />
 
