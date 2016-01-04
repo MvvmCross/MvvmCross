@@ -119,7 +119,7 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
 				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
 				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
