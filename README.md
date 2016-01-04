@@ -73,6 +73,7 @@ For manual project creation install the necessary packages from [Nuget](https://
 * [Odenaxos's blog][odenaxos]
 * [Greg's blog][gshackles] 
 * [Kerry's blog][lothrop]
+* [Jammer's blog](http://www.jammer.biz/category/geek-bits/)
 * others? Get in touch if you think your blog should be here......
 
 
