@@ -35,7 +35,7 @@ This package contains the 'Core Binding' libraries for MvvmCross
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="Xamarin.iOS">		
+			<group targetFramework="Xamarin.iOS10">		
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />		
  			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
@@ -47,6 +47,9 @@ This package contains the 'Core Binding' libraries for MvvmCross
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
+			<group targetFramework="Xamarin.Mac20">		
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />		
+ 			</group>
 		</dependencies>
 	</metadata>
 	<files>		
@@ -63,6 +66,10 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Binding.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
+
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.Mac20" />
 
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" 

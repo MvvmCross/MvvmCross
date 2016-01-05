@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
-using MvvmCross.Core;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$
@@ -39,7 +39,7 @@ namespace $rootnamespace$
         {
             for (var i = 0;; i++)
             {
-                string key = "MvxAssemblyImport" + i;
+                var key = "MvxAssemblyImport" + i;
                 var data = TryFindResource(key);
                 if (data == null)
                 {

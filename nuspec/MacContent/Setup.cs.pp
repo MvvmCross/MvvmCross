@@ -1,9 +1,9 @@
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using AppKit;
+using Foundation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Mac.Platform;
 using MvvmCross.Mac.Views.Presenters;
-using CrossCore.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace $rootnamespace$
 {

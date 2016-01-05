@@ -37,7 +37,11 @@ This package contains the 'binding extensions' for MvvmCross
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="Xamarin.iOS">
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>

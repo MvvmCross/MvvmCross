@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Foundation;
 using AppKit;
+using Foundation;
 using MvvmCross.Binding.Mac.Views;
 
 namespace $rootnamespace$.Views

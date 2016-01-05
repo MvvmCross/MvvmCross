@@ -17,7 +17,7 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework="Xamarin.iOS">
+			<group targetFramework="Xamarin.iOS10">
 				<dependency id="MvvmCross.AutoView" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Dialog.iOS" version="4.0.0-beta8" />
 			</group>

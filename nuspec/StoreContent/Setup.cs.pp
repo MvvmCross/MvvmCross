@@ -1,5 +1,5 @@
-using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 using MvvmCross.WindowsStore.Platform;
 using Windows.UI.Xaml.Controls;
 

@@ -1,6 +1,6 @@
 using System.Windows.Threading;
-using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 using MvvmCross.Wpf.Platform;
 using MvvmCross.Wpf.Views;
 

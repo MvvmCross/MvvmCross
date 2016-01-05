@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Foundation;
 using AppKit;
+using Foundation;
 using MvvmCross.Mac.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using $rootnamespace$.Core.ViewModels;
 
 namespace $rootnamespace$.Views
 {
-    [MvxViewFor(typeof(FirstViewModel))]
+    [MvxViewFor(typeof(Core.ViewModels.FirstViewModel))]
     public partial class FirstViewController : MvxViewController
     {
         #region Constructors
@@ -54,8 +53,8 @@ namespace $rootnamespace$.Views
         {
             base.ViewDidLoad ();
 
-            var set = this.CreateBindingSet<FirstViewController, FirstViewModel>();
-            set.Bind(textFirst).For(v => v.StringValue).To(vm => vm.Hello);
+            var set = this.CreateBindingSet<FirstViewController, Core.ViewModels.FirstViewModel>();
+            //set.Bind(textFirst).To(vm => vm.Hello);
             set.Apply();
         }
     }

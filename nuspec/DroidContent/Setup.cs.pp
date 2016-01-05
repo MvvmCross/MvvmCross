@@ -1,7 +1,7 @@
 using Android.Content;
-using MvvmCross.Core.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 
 namespace $rootnamespace$
 {
