@@ -10,7 +10,7 @@ using Cirrious.CrossCore.Plugins;
 using MvvmCross.Plugins.Network.Reachability;
 using MvvmCross.Plugins.Network.Rest;
 
-namespace MvvmCross.Plugins.Network.Touch
+namespace MvvmCross.Plugins.Network.iOS
 {
     public class Plugin
         : IMvxPlugin

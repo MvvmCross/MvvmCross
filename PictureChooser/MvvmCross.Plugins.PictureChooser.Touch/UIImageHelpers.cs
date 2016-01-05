@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CoreGraphics;
 using System;
+using CoreGraphics;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     public static class UIImageHelpers
     {

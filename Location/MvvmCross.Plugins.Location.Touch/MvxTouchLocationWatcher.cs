@@ -1,13 +1,13 @@
-﻿using Cirrious.CrossCore;
+﻿using System;
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
 using Cirrious.CrossCore.Touch.Platform;
 using CoreLocation;
 using Foundation;
-using System;
 
-namespace MvvmCross.Plugins.Location.Touch
+namespace MvvmCross.Plugins.Location.iOS
 {
     public sealed class MvxTouchLocationWatcher
         : MvxLocationWatcher

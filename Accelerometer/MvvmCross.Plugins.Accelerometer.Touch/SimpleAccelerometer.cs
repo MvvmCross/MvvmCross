@@ -7,12 +7,12 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
+using System;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using System;
 using UIKit;
 
-namespace MvvmCross.Plugins.Accelerometer.Touch
+namespace MvvmCross.Plugins.Accelerometer.iOS
 {
     public class MvxAccelerometer
         : IMvxAccelerometer

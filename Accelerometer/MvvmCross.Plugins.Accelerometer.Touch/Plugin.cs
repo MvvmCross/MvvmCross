@@ -10,7 +10,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.Accelerometer.Touch
+namespace MvvmCross.Plugins.Accelerometer.iOS
 {
     public class Plugin
         : IMvxPlugin

@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using MvvmCross.Plugins.File;
-using MvvmCross.Plugins.File.Touch;
-using System;
-using System.IO;
+using MvvmCross.Plugins.File.iOS;
 
-namespace MvvmCross.Plugins.ResourceLoader.Touch
+namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
     public class MvxTouchResourceLoader
         : MvxResourceLoader

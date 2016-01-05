@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using CoreGraphics;
 using Foundation;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     public class MvxImagePickerTask
         : MvxTouchTask

@@ -13,6 +13,7 @@ using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
 using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using System;
 using System.Collections.Generic;
+using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

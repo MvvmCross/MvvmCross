@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Converters;
 using Foundation;
-using System;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.Touch
+namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>
     {

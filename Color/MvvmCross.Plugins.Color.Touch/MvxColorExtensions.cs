@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.UI;
 using UIKit;
 
-namespace MvvmCross.Plugins.Color.Touch
+namespace MvvmCross.Plugins.Color.iOS
 {
     public static class MvxColorExtensions
     {

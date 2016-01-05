@@ -8,7 +8,7 @@
 using System;
 using System.Threading;
 
-namespace MvvmCross.Plugins.ThreadUtils.Touch
+namespace MvvmCross.Plugins.ThreadUtils.iOS
 {
     public class MvxThreadSleep : IMvxThreadSleep
     {

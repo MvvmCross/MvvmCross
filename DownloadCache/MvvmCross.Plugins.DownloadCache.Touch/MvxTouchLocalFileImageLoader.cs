@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading.Tasks;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using MvvmCross.Plugins.File;
-using System.Threading.Tasks;
 using UIKit;
 
-namespace MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     public class MvxTouchLocalFileImageLoader
         : MvxAllThreadDispatchingObject

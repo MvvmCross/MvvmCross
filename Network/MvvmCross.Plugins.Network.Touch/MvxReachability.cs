@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using CoreFoundation;
-using MvvmCross.Plugins.Network.Reachability;
 using System;
 using System.Net;
 using SystemConfiguration;
+using CoreFoundation;
+using MvvmCross.Plugins.Network.Reachability;
 
-namespace MvvmCross.Plugins.Network.Touch
+namespace MvvmCross.Plugins.Network.iOS
 {
     public class MvxReachability
         : IMvxReachability

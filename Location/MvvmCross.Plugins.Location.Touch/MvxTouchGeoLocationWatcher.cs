@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Touch;
 using CoreLocation;
 using Foundation;
-using System;
 
-namespace MvvmCross.Plugins.Location.Touch
+namespace MvvmCross.Plugins.Location.iOS
 {
     [Obsolete("Use MvxTouchLocationWatcher instead")]
     public sealed class MvxTouchGeoLocationWatcher

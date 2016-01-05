@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.Share.Touch
+namespace MvvmCross.Plugins.Share.iOS
 {
     public class Plugin
         : IMvxPlugin

@@ -8,7 +8,7 @@
 using Cirrious.CrossCore.Touch.Platform;
 using Foundation;
 
-namespace MvvmCross.Plugins.WebBrowser.Touch
+namespace MvvmCross.Plugins.WebBrowser.iOS
 {
     public class MvxWebBrowserTask : MvxTouchTask, IMvxWebBrowserTask
     {

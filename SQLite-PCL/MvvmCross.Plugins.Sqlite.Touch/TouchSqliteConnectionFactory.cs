@@ -1,9 +1,9 @@
-﻿using SQLite.Net.Interop;
-using SQLite.Net.Platform.XamarinIOS;
-using System;
+﻿using System;
 using System.IO;
+using SQLite.Net.Interop;
+using SQLite.Net.Platform.XamarinIOS;
 
-namespace MvvmCross.Plugins.Sqlite.Touch
+namespace MvvmCross.Plugins.Sqlite.iOS
 {
     public class TouchSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {

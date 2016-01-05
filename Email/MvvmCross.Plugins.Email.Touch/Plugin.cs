@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.Email.Touch
+namespace MvvmCross.Plugins.Email.iOS
 {
     public class Plugin
         : IMvxPlugin

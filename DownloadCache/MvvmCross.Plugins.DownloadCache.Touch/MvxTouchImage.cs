@@ -7,7 +7,7 @@
 
 using UIKit;
 
-namespace MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     public class MvxTouchImage
         : MvxImage<UIImage>

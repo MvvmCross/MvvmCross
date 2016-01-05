@@ -7,7 +7,7 @@
 
 using Cirrious.CrossCore.UI;
 
-namespace MvvmCross.Plugins.Visibility.Touch
+namespace MvvmCross.Plugins.Visibility.iOS
 {
     public class MvxTouchVisibility : IMvxNativeVisibility
     {

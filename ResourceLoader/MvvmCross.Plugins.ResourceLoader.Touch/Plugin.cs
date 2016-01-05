@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
 using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.ResourceLoader.Touch
+namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
 #warning One day I would like to decouple this implementation from the FileStore plugin
 

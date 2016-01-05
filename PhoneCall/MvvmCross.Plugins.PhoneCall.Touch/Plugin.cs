@@ -8,7 +8,7 @@
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.PhoneCall.Touch
+namespace MvvmCross.Plugins.PhoneCall.iOS
 {
     public class Plugin
         : IMvxPlugin

@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cirrious.CrossCore;
 using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore.Touch.Platform;
 using Cirrious.CrossCore.Touch.Views;
 using Foundation;
 using MessageUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UIKit;
 
-namespace MvvmCross.Plugins.Email.Touch
+namespace MvvmCross.Plugins.Email.iOS
 {
     public class MvxComposeEmailTask
         : MvxTouchTask

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Plugins;
 using System;
+using Cirrious.CrossCore.Plugins;
 
-namespace MvvmCross.Plugins.DownloadCache.Touch
+namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     public class MvxDownloadCacheConfiguration
         : IMvxPluginConfiguration

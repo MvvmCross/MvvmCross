@@ -9,7 +9,7 @@ using Cirrious.CrossCore;
 using Cirrious.CrossCore.Plugins;
 using Cirrious.CrossCore.UI;
 
-namespace MvvmCross.Plugins.Color.Touch
+namespace MvvmCross.Plugins.Color.iOS
 {
     public class Plugin
         : IMvxPlugin

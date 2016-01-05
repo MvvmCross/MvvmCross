@@ -11,7 +11,7 @@ using Cirrious.CrossCore.Touch.Views;
 using Foundation;
 using Twitter;
 
-namespace MvvmCross.Plugins.Share.Touch
+namespace MvvmCross.Plugins.Share.iOS
 {
     public class MvxShareTask
         : MvxTouchTask
