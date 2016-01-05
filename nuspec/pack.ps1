@@ -24,9 +24,5 @@ nuget pack MvvmCross.AutoView.nuspec -Symbols
 nuget pack MvvmCross.AutoView.iOS.nuspec -Symbols
 nuget pack MvvmCross.AutoView.Droid.nuspec -Symbols
 nuget pack MvvmCross.Droid.FullFragging.nuspec -Symbols
-nuget pack MvvmCross.Mac.Core.nuspec -Symbols
-nuget pack MvvmCross.Mac.Platform.nuspec -Symbols
-# note no -Symbols
-nuget pack MvvmCross.Mac.StarterPack.nuspec
 
 pause

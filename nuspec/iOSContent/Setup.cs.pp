@@ -1,7 +1,7 @@
-using MvvmCross.Core.Platform;
-using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Platform;
 using UIKit;
 
 namespace $rootnamespace$

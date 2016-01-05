@@ -102,7 +102,24 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="Xamarin.iOS">
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
+				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
+				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
+				<dependency id="Microsoft.Composition" version="1.0.30"/>
+				<dependency id="NuGet.CommandLine" version="3.3.0"/>
+				<dependency id="System.Collections.Immutable" version="1.1.37"/>
+				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="Xamarin.Mac20">
 				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
 				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
 				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
