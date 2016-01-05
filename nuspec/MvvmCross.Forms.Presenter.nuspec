@@ -16,43 +16,43 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
 		</dependencies>
