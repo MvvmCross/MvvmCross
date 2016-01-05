@@ -50,50 +50,50 @@ This package contains the 'FieldBinding' plugin for MvvmCross</description>
 	<files>		
 		<!-- src -->
 		<file src="..\FieldBinding\MvvmCross.FieldBinding\**\*.cs" 
-			target="src\Cirrious.MvvmCross.FieldBinding" />
+			target="src\MvvmCross.FieldBinding" />
 		<file src="..\FieldBinding\MvvmCross.Plugins.FieldBinding\**\*.cs" 
 			target="src\MvvmCross.Plugins.FieldBinding" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\dotnet" />
 
 		<!-- wpf -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\net45" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\net45\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\netcore45" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\wp8" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\wp8" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\win81" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\win81\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\wpa81" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
 		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\Cirrious.MvvmCross.FieldBinding.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.FieldBinding.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.FieldBinding.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\FieldBindingPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\FieldBindingPluginBootstrap.cs.pp" />
 
