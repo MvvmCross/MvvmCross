@@ -1,4 +1,4 @@
-using MvvmCross.Core.IoC;
+using MvvmCross.Platform.IoC;
 
 namespace $rootnamespace$
 {
