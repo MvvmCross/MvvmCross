@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.FieldBinding
 {
     public class NotifyChange
         : MvxMainThreadDispatchingObject

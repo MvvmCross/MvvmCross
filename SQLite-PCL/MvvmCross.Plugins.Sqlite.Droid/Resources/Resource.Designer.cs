@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Plugins.Sqlite.Droid.Resource", IsApplication=false)]
 
-namespace MvvmCross.Plugins.Sqlite.Droid
+namespace MvvmCross.Plugins.Sqlite.Droid.Resources
 {
 	
 	

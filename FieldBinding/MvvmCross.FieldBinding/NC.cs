@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.FieldBinding
 {
     public class NC<T> : NotifyChange<T>, INC<T>
     {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accelerometer", "Accelerometer", "{D9F520C0-4C25-465B-9C16-CADDDE3E72B8}"
 EndProject
@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Dro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Test", "Color\MvvmCross.Plugins.Color.Test\MvvmCross.Plugins.Color.Test.csproj", "{B61DC1C8-0641-4FD2-AD8C-8A179CEE136E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Touch", "Color\MvvmCross.Plugins.Color.Touch\MvvmCross.Plugins.Color.Touch.csproj", "{E51F2FD2-0F1B-4D2A-B48B-021A46F9511E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.iOS", "Color\MvvmCross.Plugins.Color.iOS\MvvmCross.Plugins.Color.iOS.csproj", "{E51F2FD2-0F1B-4D2A-B48B-021A46F9511E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.WindowsCommon", "Color\MvvmCross.Plugins.Color.WindowsCommon\MvvmCross.Plugins.Color.WindowsCommon.csproj", "{22B51F2E-5E0F-440D-ABF3-9C8F137542E0}"
 EndProject
@@ -79,13 +79,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.DownloadC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.DownloadCache.Droid", "DownloadCache\MvvmCross.Plugins.DownloadCache.Droid\MvvmCross.Plugins.DownloadCache.Droid.csproj", "{81A58551-7D1C-4687-A5A5-C73EB5F15563}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.DownloadCache.Touch", "DownloadCache\MvvmCross.Plugins.DownloadCache.Touch\MvvmCross.Plugins.DownloadCache.Touch.csproj", "{59452E25-103C-4677-AB2A-E0D33B9FBDDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.DownloadCache.iOS", "DownloadCache\MvvmCross.Plugins.DownloadCache.iOS\MvvmCross.Plugins.DownloadCache.iOS.csproj", "{59452E25-103C-4677-AB2A-E0D33B9FBDDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Email", "Email\MvvmCross.Plugins.Email\MvvmCross.Plugins.Email.csproj", "{157A8846-529E-4549-84EA-7FC8BAFBC25A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Email.Droid", "Email\MvvmCross.Plugins.Email.Droid\MvvmCross.Plugins.Email.Droid.csproj", "{B13DDC77-3A1A-4A20-AFD7-025DD2907457}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Email.Touch", "Email\MvvmCross.Plugins.Email.Touch\MvvmCross.Plugins.Email.Touch.csproj", "{27C65A14-A063-4B22-8BB1-C33B2E0DDB1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Email.iOS", "Email\MvvmCross.Plugins.Email.iOS\MvvmCross.Plugins.Email.iOS.csproj", "{27C65A14-A063-4B22-8BB1-C33B2E0DDB1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Email.WindowsCommon", "Email\MvvmCross.Plugins.Email.WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.csproj", "{989C0E47-F2FF-4729-A9A4-ADAC6272EF03}"
 EndProject
@@ -103,7 +103,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.File", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.File.Droid", "File\MvvmCross.Plugins.File.Droid\MvvmCross.Plugins.File.Droid.csproj", "{EE2D94C9-032E-4EBE-B3D5-6A585D03F188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.File.Touch", "File\MvvmCross.Plugins.File.Touch\MvvmCross.Plugins.File.Touch.csproj", "{5B8CF261-197A-48AF-BC7C-899CF81AA187}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.File.iOS", "File\MvvmCross.Plugins.File.iOS\MvvmCross.Plugins.File.iOS.csproj", "{5B8CF261-197A-48AF-BC7C-899CF81AA187}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.File.WindowsCommon", "File\MvvmCross.Plugins.File.WindowsCommon\MvvmCross.Plugins.File.WindowsCommon.csproj", "{7F791CA6-B6A8-4B10-A5CA-F8CCF1E80C6F}"
 EndProject
@@ -121,7 +121,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.Droid", "Location\MvvmCross.Plugins.Location.Droid\MvvmCross.Plugins.Location.Droid.csproj", "{21312500-978A-4608-87FB-933D270A0A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.Touch", "Location\MvvmCross.Plugins.Location.Touch\MvvmCross.Plugins.Location.Touch.csproj", "{F12E9352-FD63-4097-9E06-5CF0EF3B22F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.iOS", "Location\MvvmCross.Plugins.Location.iOS\MvvmCross.Plugins.Location.iOS.csproj", "{F12E9352-FD63-4097-9E06-5CF0EF3B22F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.WindowsCommon", "Location\MvvmCross.Plugins.Location.WindowsCommon\MvvmCross.Plugins.Location.WindowsCommon.csproj", "{6E7591E8-8651-40CE-9A62-4F835A63ABA3}"
 EndProject
@@ -147,7 +147,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Network.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Network.Test", "Network\MvvmCross.Plugins.Network.Test\MvvmCross.Plugins.Network.Test.csproj", "{73A0F51C-FCF4-4C1A-92BF-4EF018E18DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Network.Touch", "Network\MvvmCross.Plugins.Network.Touch\MvvmCross.Plugins.Network.Touch.csproj", "{02C04423-CC72-4745-920A-80B36EB67ADB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Network.iOS", "Network\MvvmCross.Plugins.Network.iOS\MvvmCross.Plugins.Network.iOS.csproj", "{02C04423-CC72-4745-920A-80B36EB67ADB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Network.WindowsCommon", "Network\MvvmCross.Plugins.Network.WindowsCommon\MvvmCross.Plugins.Network.WindowsCommon.csproj", "{22797A56-C5C4-4E80-9B8C-E0549E25037D}"
 EndProject
@@ -157,7 +157,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PhoneCall
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PhoneCall.Droid", "PhoneCall\MvvmCross.Plugins.PhoneCall.Droid\MvvmCross.Plugins.PhoneCall.Droid.csproj", "{3509366C-414C-4555-BCAE-5DB7A2ACCA72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PhoneCall.Touch", "PhoneCall\MvvmCross.Plugins.PhoneCall.Touch\MvvmCross.Plugins.PhoneCall.Touch.csproj", "{17DF9EB0-AACD-47DB-B986-CDE83C0CD58F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PhoneCall.iOS", "PhoneCall\MvvmCross.Plugins.PhoneCall.iOS\MvvmCross.Plugins.PhoneCall.iOS.csproj", "{17DF9EB0-AACD-47DB-B986-CDE83C0CD58F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PhoneCall.WindowsPhoneStore", "PhoneCall\MvvmCross.Plugins.PhoneCall.WindowsCommon\MvvmCross.Plugins.PhoneCall.WindowsPhoneStore.csproj", "{66F31CDF-01CD-42CE-AFCB-7C394591202E}"
 EndProject
@@ -169,7 +169,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.Droid", "PictureChooser\MvvmCross.Plugins.PictureChooser.Droid\MvvmCross.Plugins.PictureChooser.Droid.csproj", "{5254CD19-7D5E-4285-B4DD-81DE27D158DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.Touch", "PictureChooser\MvvmCross.Plugins.PictureChooser.Touch\MvvmCross.Plugins.PictureChooser.Touch.csproj", "{BCB3340E-5833-4132-901C-93A6B4C0758A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.iOS", "PictureChooser\MvvmCross.Plugins.PictureChooser.iOS\MvvmCross.Plugins.PictureChooser.iOS.csproj", "{BCB3340E-5833-4132-901C-93A6B4C0758A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.WindowsPhoneStore", "PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsCommon\MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
 EndProject
@@ -183,7 +183,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Reflectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Droid", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.Droid\MvvmCross.Plugins.ReflectionEx.Droid.csproj", "{1368DB16-DFAE-4985-A0CD-CE3C753DAB70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Touch", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.Touch\MvvmCross.Plugins.ReflectionEx.Touch.csproj", "{2E587DF6-82DC-4F71-87AB-6EEB7A9F4C91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.iOS", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.iOS\MvvmCross.Plugins.ReflectionEx.iOS.csproj", "{2E587DF6-82DC-4F71-87AB-6EEB7A9F4C91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.WindowsCommon", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsCommon\MvvmCross.Plugins.ReflectionEx.WindowsCommon.csproj", "{E846ECBD-C585-4F6F-915C-7A6227FC95DF}"
 EndProject
@@ -197,7 +197,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader.Droid", "ResourceLoader\MvvmCross.Plugins.ResourceLoader.Droid\MvvmCross.Plugins.ResourceLoader.Droid.csproj", "{65DA5A26-5D2B-4237-84D5-38265100F7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader.Touch", "ResourceLoader\MvvmCross.Plugins.ResourceLoader.Touch\MvvmCross.Plugins.ResourceLoader.Touch.csproj", "{4C6DCFAD-536A-46DC-9702-006290227750}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader.iOS", "ResourceLoader\MvvmCross.Plugins.ResourceLoader.iOS\MvvmCross.Plugins.ResourceLoader.iOS.csproj", "{4C6DCFAD-536A-46DC-9702-006290227750}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader.WindowsCommon", "ResourceLoader\MvvmCross.Plugins.ResourceLoader.WindowsCommon\MvvmCross.Plugins.ResourceLoader.WindowsCommon.csproj", "{3EC85E5B-0D47-43C9-8B55-5C1D1031360C}"
 EndProject
@@ -211,7 +211,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Share", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Share.Droid", "Share\MvvmCross.Plugins.Share.Droid\MvvmCross.Plugins.Share.Droid.csproj", "{C1169352-EE99-4C96-AC83-923D2F3D42FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Share.Touch", "Share\MvvmCross.Plugins.Share.Touch\MvvmCross.Plugins.Share.Touch.csproj", "{88622A7A-E15F-4B56-B259-AB3C669D4251}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Share.iOS", "Share\MvvmCross.Plugins.Share.iOS\MvvmCross.Plugins.Share.iOS.csproj", "{88622A7A-E15F-4B56-B259-AB3C669D4251}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Share.WindowsCommon", "Share\MvvmCross.Plugins.Share.WindowsCommon\MvvmCross.Plugins.Share.WindowsCommon.csproj", "{894CC298-956D-490A-B964-C62D692BC847}"
 EndProject
@@ -251,7 +251,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibilit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibility.Droid", "Visibility\MvvmCross.Plugins.Visibility.Droid\MvvmCross.Plugins.Visibility.Droid.csproj", "{36228B32-A08B-477B-9320-EC5EA5DF05A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibility.Touch", "Visibility\MvvmCross.Plugins.Visibility.Touch\MvvmCross.Plugins.Visibility.Touch.csproj", "{66002805-EBCE-4B07-A0B3-9BE19927FF87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibility.iOS", "Visibility\MvvmCross.Plugins.Visibility.iOS\MvvmCross.Plugins.Visibility.iOS.csproj", "{66002805-EBCE-4B07-A0B3-9BE19927FF87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibility.WindowsCommon", "Visibility\MvvmCross.Plugins.Visibility.WindowsCommon\MvvmCross.Plugins.Visibility.WindowsCommon.csproj", "{FBC07387-3560-471C-B0DF-E519F3ABFA07}"
 EndProject
@@ -263,7 +263,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Visibilit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser", "WebBrowser\MvvmCross.Plugins.WebBrowser\MvvmCross.Plugins.WebBrowser.csproj", "{4DD71F8B-40DF-4DC3-84B5-7A76722F1C67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser.Touch", "WebBrowser\MvvmCross.Plugins.WebBrowser.Touch\MvvmCross.Plugins.WebBrowser.Touch.csproj", "{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser.iOS", "WebBrowser\MvvmCross.Plugins.WebBrowser.iOS\MvvmCross.Plugins.WebBrowser.iOS.csproj", "{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser.Droid", "WebBrowser\MvvmCross.Plugins.WebBrowser.Droid\MvvmCross.Plugins.WebBrowser.Droid.csproj", "{94EF5795-5912-4B3B-B255-63A6FEC10F0D}"
 EndProject
@@ -273,13 +273,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser.WindowsStore", "WebBrowser\MvvmCross.Plugins.WebBrowser.WindowsStore\MvvmCross.Plugins.WebBrowser.WindowsStore.csproj", "{63FE32E5-A833-4A7B-971E-A2C901C03B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.Touch", "SQLite-PCL\MvvmCross.Plugins.Sqlite.Touch\MvvmCross.Plugins.Sqlite.Touch.csproj", "{423C08FA-D6F4-4327-B6EA-B1C1DB28FEDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.iOS", "SQLite-PCL\MvvmCross.Plugins.Sqlite.iOS\MvvmCross.Plugins.Sqlite.iOS.csproj", "{423C08FA-D6F4-4327-B6EA-B1C1DB28FEDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ThreadUtils.Touch", "ThreadUtils\MvvmCross.Plugins.ThreadUtils.Touch\MvvmCross.Plugins.ThreadUtils.Touch.csproj", "{B3956AB3-B4DA-4144-8C3B-889D99A9DBD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ThreadUtils.iOS", "ThreadUtils\MvvmCross.Plugins.ThreadUtils.iOS\MvvmCross.Plugins.ThreadUtils.iOS.csproj", "{B3956AB3-B4DA-4144-8C3B-889D99A9DBD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.Droid", "Accelerometer\MvvmCross.Plugins.Accelerometer.Droid\MvvmCross.Plugins.Accelerometer.Droid.csproj", "{1BA31472-796C-4407-9183-5F3C29E5B0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.Touch", "Accelerometer\MvvmCross.Plugins.Accelerometer.Touch\MvvmCross.Plugins.Accelerometer.Touch.csproj", "{ED445165-3EBC-4474-8178-A2C3A41A18FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.iOS", "Accelerometer\MvvmCross.Plugins.Accelerometer.iOS\MvvmCross.Plugins.Accelerometer.iOS.csproj", "{ED445165-3EBC-4474-8178-A2C3A41A18FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.WindowsCommon", "Accelerometer\MvvmCross.Plugins.Accelerometer.WindowsCommon\MvvmCross.Plugins.Accelerometer.WindowsCommon.csproj", "{BA60B7DF-9009-4FBD-B361-F7CFAEB96C7C}"
 EndProject

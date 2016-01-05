@@ -7,6 +7,7 @@
 
 using Cirrious.MvvmCross.Binding.ExtensionMethods;
 using System;
+using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

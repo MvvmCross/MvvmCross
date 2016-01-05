@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.FieldBinding
 {
     public interface INC<T> : INotifyChange<T>
     {

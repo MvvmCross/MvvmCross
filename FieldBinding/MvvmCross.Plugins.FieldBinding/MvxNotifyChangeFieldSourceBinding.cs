@@ -10,6 +10,7 @@ using Cirrious.CrossCore.WeakSubscription;
 using Cirrious.MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Reflection;
+using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

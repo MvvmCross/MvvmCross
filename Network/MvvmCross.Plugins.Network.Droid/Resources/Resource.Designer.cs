@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Plugins.Network.Droid.Resource", IsApplication=false)]
 
-namespace MvvmCross.Plugins.Network.Droid
+namespace MvvmCross.Plugins.Network.Droid.Resources
 {
 	
 	
