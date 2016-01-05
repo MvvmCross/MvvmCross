@@ -62,7 +62,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.Plugins.Accelerometer\MvvmCross.Plugins.Accelerometer.csproj">
       <Project>{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}</Project>
-      <Name>Cirrious.MvvmCross.Plugins.Accelerometer</Name>
+      <Name>MvvmCross.Plugins.Accelerometer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

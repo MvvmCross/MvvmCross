@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accelerometer", "Accelerometer", "{D9F520C0-4C25-465B-9C16-CADDDE3E72B8}"
 EndProject
@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Dro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Test", "Color\MvvmCross.Plugins.Color.Test\MvvmCross.Plugins.Color.Test.csproj", "{B61DC1C8-0641-4FD2-AD8C-8A179CEE136E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.Touch", "Color\MvvmCross.Plugins.Color.Touch\MvvmCross.Plugins.Color.Touch.csproj", "{E51F2FD2-0F1B-4D2A-B48B-021A46F9511E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.iOS", "Color\MvvmCross.Plugins.Color.Touch\MvvmCross.Plugins.Color.iOS.csproj", "{E51F2FD2-0F1B-4D2A-B48B-021A46F9511E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Color.WindowsCommon", "Color\MvvmCross.Plugins.Color.WindowsCommon\MvvmCross.Plugins.Color.WindowsCommon.csproj", "{22B51F2E-5E0F-440D-ABF3-9C8F137542E0}"
 EndProject
@@ -279,7 +279,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ThreadUti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.Droid", "Accelerometer\MvvmCross.Plugins.Accelerometer.Droid\MvvmCross.Plugins.Accelerometer.Droid.csproj", "{1BA31472-796C-4407-9183-5F3C29E5B0C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.Touch", "Accelerometer\MvvmCross.Plugins.Accelerometer.Touch\MvvmCross.Plugins.Accelerometer.Touch.csproj", "{ED445165-3EBC-4474-8178-A2C3A41A18FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.iOS", "Accelerometer\MvvmCross.Plugins.Accelerometer.Touch\MvvmCross.Plugins.Accelerometer.iOS.csproj", "{ED445165-3EBC-4474-8178-A2C3A41A18FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerometer.WindowsCommon", "Accelerometer\MvvmCross.Plugins.Accelerometer.WindowsCommon\MvvmCross.Plugins.Accelerometer.WindowsCommon.csproj", "{BA60B7DF-9009-4FBD-B361-F7CFAEB96C7C}"
 EndProject
