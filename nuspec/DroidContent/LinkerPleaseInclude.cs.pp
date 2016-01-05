@@ -59,7 +59,7 @@ namespace $rootnamespace$
 
         public void Include(INotifyCollectionChanged changed)
         {
-            changed.CollectionChanged += (s,e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action,e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); } ;
+            changed.CollectionChanged += (s,e) => { var test = $"{e.Action}{e.NewItems}{e.NewStartingIndex}{e.OldItems}{e.OldStartingIndex}"; };
         }
 
         public void Include(ICommand command)
@@ -67,9 +67,9 @@ namespace $rootnamespace$
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
         
-        public void Include(MvvmCross.Core.IoC.MvxPropertyInjector injector)
+        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Core.IoC.MvxPropertyInjector ();
+            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector ();
         } 
 
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)

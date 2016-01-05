@@ -1,5 +1,5 @@
-using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
 using MvvmCross.WindowsPhone.Platform;
 using Microsoft.Phone.Controls;
 

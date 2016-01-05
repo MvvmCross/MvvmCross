@@ -18,39 +18,43 @@ This package contains the 'Getting Started' libraries for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework="Xamarin.iOS">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="Xamarin.Mac20">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
@@ -118,12 +122,12 @@ This package contains the 'Getting Started' libraries for MvvmCross
 		<file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
 		<!-- mac - Content -->
-		<file src="MacContent\_ Mac UI.txt" target="content\MonoMac\ToDo-MvvmCross\_ Mac UI.txt" />		
-		<file src="MacContent\Setup.cs.pp" target="content\MonoMac\Setup.cs.pp" />
-		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\MonoMac\AppDelegate.cs.txt.pp" />
-		<file src="MacContent\DebugTrace.cs.pp" target="content\MonoMac\DebugTrace.cs.pp" />
-		<file src="MacContent\FirstView.cs.txt.pp" target="content\MonoMac\Views\FirstView.cs.txt.pp" />
-		<file src="MacContent\FirstViewController.cs.txt.pp" target="content\MonoMac\Views\FirstViewController.cs.txt.pp" />
+		<file src="MacContent\_ Mac UI.txt" target="content\Xamarin.Mac20\ToDo-MvvmCross\_ Mac UI.txt" />		
+		<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
+		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\Xamarin.Mac20\AppDelegate.cs.txt.pp" />
+		<file src="MacContent\DebugTrace.cs.pp" target="content\Xamarin.Mac20\DebugTrace.cs.pp" />
+		<file src="MacContent\FirstView.cs.pp" target="content\Xamarin.Mac20\Views\FirstView.cs.pp" />
+		<file src="MacContent\FirstViewController.cs.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.pp" />
 	</files>
 </package>
 
