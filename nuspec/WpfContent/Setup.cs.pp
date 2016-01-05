@@ -1,8 +1,8 @@
 using System.Windows.Threading;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Wpf.Platform;
-using Cirrious.MvvmCross.Wpf.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Wpf.Platform;
+using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$
 {
@@ -18,7 +18,7 @@ namespace $rootnamespace$
         {
             return new Core.App();
         }
-		
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();

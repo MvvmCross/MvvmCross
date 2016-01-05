@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.Wpf.Views;
+using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$.Views
 {

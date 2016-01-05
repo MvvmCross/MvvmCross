@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.WindowsCommon.Views;
+using MvvmCross.WindowsCommon.Views;
 
 namespace $rootnamespace$.Views
 {

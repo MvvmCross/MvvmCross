@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace $rootnamespace$
 {
@@ -20,7 +20,7 @@ namespace $rootnamespace$
         {
             try
             {
-                Debug.WriteLine(string.Format(tag + ":" + level + ":" + message, args));
+                Debug.WriteLine(tag + ":" + level + ":" + message, args);
             }
             catch (FormatException)
             {

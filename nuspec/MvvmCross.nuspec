@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross</id>
-		<version>4.0.0-beta7</version>
+		<version>4.0.0-beta8</version>
 		<title>MvvmCross</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,35 +16,35 @@ This package contains the 'Getting Started' libraries for MvvmCross.
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="net">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="win">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="wp">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="wpa">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="portable-net45+win+wpa81+wp80">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="uap">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.StarterPack" version="4.0.0-beta7" />
+			<group targetFramework="Xamarin.Mac20">
+				<dependency id="MvvmCross.StarterPack" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
 	</metadata>

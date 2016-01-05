@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Console.Platform</id>
+		<version>4.0.0-beta8</version>
+		<title>MvvmCross - MvvmCross Libraries for Console</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the Console 'MvvmCross Library' assemblies for MvvmCross
+		</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp console</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework="net">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="win">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="portable-net45+win+wpa81+wp80">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="uap">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.*" target="lib\dotnet" />
+		
+		<!-- console -->
+		<file src="..\bin\Release\Mvx\Console\MvvmCross.Console.*" target="lib\net45" />
+
+		<!-- console - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\net45\MvvmCross.Core.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45\MvvmCross.Core.pdb" />
+	</files>
+</package>
+
+
+
+
+
+
+
+

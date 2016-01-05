@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Platform</id>
+		<version>4.0.0-beta8</version>
+		<title>MvvmCross - Core</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Core' libraries for MvvmCross
+		</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+	</metadata>
+	<files>
+		<!-- src -->
+		<file src="..\MvvmCross\Platform\Platform\**\*.cs" 
+			target="src\MvvmCross.Platform" />
+		<file src="..\MvvmCross\Platform\Wpf\**\*.cs" 
+			target="src\MvvmCross.Platform.Wpf" />
+		<file src="..\MvvmCross\Platform\WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Platform.WindowsStore" />
+		<file src="..\MvvmCross\Platform\WindowsPhone\**\*.cs" 
+			target="src\MvvmCross.Platform.WindowsPhone" />
+		<file src="..\MvvmCross\Platform\WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Platform.WindowsCommon" />
+		<file src="..\MvvmCross\Platform\Droid\**\*.cs" 
+			target="src\MvvmCross.Platform.Droid" />
+		<file src="..\MvvmCross\Platform\iOS\**\*.cs" 
+			target="src\MvvmCross.Platform.iOS" />
+		<file src="..\MvvmCross\Platform\Mac\**\*.cs" 
+			target="src\MvvmCross.Platform.Mac" />
+
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-net45+win+wpa81+wp80" />
+		<file src="..\MvvmCross\Core\Localization\**\*.cs" target="src\MvvmCross.Localization" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\dotnet" />
+		
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Wpf.*" target="lib\net45" />
+
+		<!-- wpf - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
+
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.WindowsStore.*" target="lib\netcore45" />
+
+		<!-- store - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\netcore45" />
+
+		<!-- phone -->
+		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.WindowsPhone.*" target="lib\wp8" />
+
+		<!-- phone - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wp8" />
+
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.WindowsCommon.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.WindowsCommon.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+
+		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\win81" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wpa81" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.*" exclude="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Platform.Droid.*" target="lib\MonoAndroid" />
+
+		<!-- droid - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\MonoAndroid" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Platform.iOS.*" target="lib\Xamarin.iOS10" />
+
+		<!-- iOS - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.iOS10" />
+
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Platform.Mac.*" target="lib\Xamarin.Mac20" />
+
+		<!-- mac - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.Mac20" />
+	</files>
+</package>
