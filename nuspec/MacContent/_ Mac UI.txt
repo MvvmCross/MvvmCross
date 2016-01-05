@@ -1,7 +1,7 @@
 NOTE 
 - Use Xamarin Studio for this...
 
-0. Add a MonoMac or Xamarin.Mac Project
+0. Add a Xamarin.Mac Project
 1. Add a reference to your Core PCL project, e.g., <root>.Core
 2. Right-click on the project and under Tools -> Edit File, then add <TargetFrameworkVersion>4.5</TargetFrameworkVersion> in the first PropertyGroup, this is needed to access PCLs using Profile 158
 3. Use nuget to add the MvvmCross.Mac package
@@ -11,39 +11,39 @@ NOTE
 7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
 8. Edit FirstView.cs by adding the using statement below and changing the base type to MvxView
 
-		using Cirrious.MvvmCross.Binding.Mac.Views;
+        using MvvmCross.Binding.Mac.Views;
 
-		public partial class FirstView : MvxView
+        public partial class FirstView : MvxView
 
 9. Edit FirstViewController.cs by adding the using statements below, adding MvxViewFor and changing the base type to MvxViewController
 
-		using Cirrious.MvvmCross.Mac.Views;
-		using Cirrious.MvvmCross.Binding.BindingContext;
-		using Cirrious.MvvmCross.ViewModels;
-		using <root>.Core.ViewModels;
+        using MvvmCross.Mac.Views;
+        using MvvmCross.Binding.BindingContext;
+        using MvvmCross.Core.ViewModels;
+        using <root>.Core.ViewModels;
 
-		[MvxViewFor(typeof(FirstViewModel))]
-		public partial class FirstViewController : MvxViewController
+        [MvxViewFor(typeof(FirstViewModel))]
+        public partial class FirstViewController : MvxViewController
 
 10. In FirstViewController.cs, override ViewDidLoad, add controls programmatically or in the .xib, then bind, e.g.,
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
 
-			...
-			
-			var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
-			set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.FirstName);
-			set.Bind (textEditSecond).For(v => v.StringValue).To (vm => vm.LastName);
-			set.Bind (labelFull).For(v => v.StringValue).To (vm => vm.FullName);	
-			set.Bind (bu).For("Activated").To ("GoCommand");
-			set.Apply ();
-		}
-		
+            ...
+            
+            var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
+            set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.FirstName);
+            set.Bind (textEditSecond).For(v => v.StringValue).To (vm => vm.LastName);
+            set.Bind (labelFull).For(v => v.StringValue).To (vm => vm.FullName);
+            set.Bind (bu).For("Activated").To ("GoCommand");
+            set.Apply ();
+        }
+        
 s
 Where this requires using's of:
 
-    using YourNameSpace.Core.ViewModels;
-    using Cirrious.MvvmCross.Binding.BindingContext;
-    using Cirrious.MvvmCross.Mac.Views;
+    using <core>.Core.ViewModels;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Mac.Views;

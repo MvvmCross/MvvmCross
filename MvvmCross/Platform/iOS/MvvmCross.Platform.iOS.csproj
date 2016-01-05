@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MvvmCross.Platform.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>MvvmCross.Platform.iOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\..\bin\Debug\Mvx\iOS\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\Release\Mvx\iOS\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Platform\IMvxIosSystem.cs" />
+    <Compile Include="Platform\MvxIosMajorVersionChecker.cs" />
+    <Compile Include="Platform\MvxIosSystem.cs" />
+    <Compile Include="Platform\MvxIosVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\IMvxIosModalHost.cs" />
+    <Compile Include="MvxIosColorExtensionMethods.cs" />
+    <Compile Include="MvxIosDateTimeExtensionMethods.cs" />
+    <Compile Include="MvxIosUIViewControllerExtensions.cs" />
+    <Compile Include="Platform\MvxIosTask.cs" />
+    <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxEventSourceCollectionViewController.cs" />
+    <Compile Include="Views\MvxEventSourceTabBarController.cs" />
+    <Compile Include="Views\MvxEventSourceTableViewController.cs" />
+    <Compile Include="Views\MvxEventSourceViewController.cs" />
+    <Compile Include="Views\IMvxEventSourceViewController.cs" />
+    <Compile Include="Views\MvxEventSourcePageViewController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Platform\MvvmCross.Platform.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

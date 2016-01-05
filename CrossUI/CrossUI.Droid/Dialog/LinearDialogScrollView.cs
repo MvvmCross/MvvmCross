@@ -1,5 +1,5 @@
 // LinearDialogScrollView.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
@@ -12,7 +12,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Cirrious.MvvmCross.Binding.Droid.ResourceHelpers;
+
 using CrossUI.Droid.Dialog.Elements;
 using System;
 using System.Linq;

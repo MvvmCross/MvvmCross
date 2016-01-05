@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MvvmCross.CodeAnalysis")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cirrious")]
-[assembly: AssemblyProduct("MvvmCross.CodeAnalysis")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MvvmCross")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
