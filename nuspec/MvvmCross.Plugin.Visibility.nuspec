@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.HotTuna.Plugin.Visibility</id>
-		<version>4.0.0-beta7</version>
+		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Visibility Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,34 +16,34 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="net">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="win">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="wp">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="MonoTouch">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework ="Xamarin.Mac20">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+			<group targetFramework ="Xamarin.iOS10">
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="uap">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.HotTuna.CrossCore" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -63,11 +63,11 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Visibility.WindowsCommon" />
 		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Visibility.Droid" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.Touch" />	
+		<file src="..\Visibility\MvvmCross.Plugins.Visibility.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Visibility.iOS" />	
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-win+net45+wp8+win8+wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\dotnet" />
@@ -104,10 +104,13 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Visibility.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
 
-		<!-- touch -->
+		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Visibility.Touch.*" target="lib\Xamarin.iOS10" />
-		<file src="TouchBootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Visibility.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.Mac20" />
 
 	</files>
 </package>
