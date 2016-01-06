@@ -289,9 +289,13 @@ This package contains all plugins for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\MonoAndroid\MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\MonoAndroid\MvvmCross.Plugins.All.pdb" />
 
-		<!-- touch -->
+		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.All.pdb" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\Xamarin.Mac20\MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\Xamarin.Mac20\MvvmCross.Plugins.All.pdb" />
 
 	</files>
 </package>

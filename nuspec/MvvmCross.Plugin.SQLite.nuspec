@@ -73,7 +73,7 @@ This package contains the old 'Sqlite' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.pdb" />
 
-		<!-- touch -->
+		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
 		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.pdb" />
 

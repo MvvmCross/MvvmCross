@@ -103,10 +103,14 @@ This package contains the 'Share' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Share.Droid.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SharePluginBootstrap.cs.pp" />
 
-		<!-- touch -->
+		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Share.Touch.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SharePluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\Xamarin.Mac20" />
+		
 	</files>
 </package>
 

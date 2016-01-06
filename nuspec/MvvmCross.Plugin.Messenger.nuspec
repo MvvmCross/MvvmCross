@@ -83,9 +83,13 @@ This package contains the 'Messenger' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 
-		<!-- touch -->
+		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\MessengerPluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\Xamarin.Mac20" />
+		
 	</files>
 </package>
 
