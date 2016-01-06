@@ -25,4 +25,17 @@ nuget pack MvvmCross.AutoView.iOS.nuspec -Symbols
 nuget pack MvvmCross.AutoView.Droid.nuspec -Symbols
 nuget pack MvvmCross.Droid.FullFragging.nuspec -Symbols
 
+# HotTuna legacy
+nuget pack MvvmCross.HotTuna.Binding.nuspec
+nuget pack MvvmCross.HotTuna.CrossCore.nuspec
+nuget pack MvvmCross.HotTuna.MvvmCrossLibraries.nuspec
+nuget pack MvvmCross.HotTuna.StarterPack.nuspec
+nuget pack MvvmCross.HotTuna.Tests.nuspec
+nuget pack MvvmCross.HotTuna.Touch.Dialog.nuspec
+nuget pack MvvmCross.HotTuna.Droid.Dialog.nuspec
+nuget pack MvvmCross.HotTuna.AutoViews.nuspec
+nuget pack MvvmCross.HotTuna.Touch.AutoViews.nuspec
+nuget pack MvvmCross.HotTuna.Droid.AutoViews.nuspec
+nuget pack MvvmCross.HotTuna.Droid.FullFragging.nuspec
+
 pause
