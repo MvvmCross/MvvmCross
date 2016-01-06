@@ -61,8 +61,8 @@ This package contains the 'Share' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Share.WindowsCommon" />
 		<file src="..\Share\MvvmCross.Plugins.Share.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Share.Droid" />
-		<file src="..\Share\MvvmCross.Plugins.Share.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Share.Touch" />
+		<file src="..\Share\MvvmCross.Plugins.Share.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Share.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -105,7 +105,7 @@ This package contains the 'Share' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Share.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Share.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

@@ -63,8 +63,8 @@ This package contains the 'ReflectionEx' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.ReflectionEx.WindowsCommon" />
 		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.ReflectionEx.Droid" />
-		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.ReflectionEx.Touch" />
+		<file src="..\ReflectionEx\MvvmCross.Plugins.ReflectionEx.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.ReflectionEx.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -106,7 +106,7 @@ This package contains the 'ReflectionEx' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ReflectionEx.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.ReflectionEx.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.ReflectionEx.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\ReflectionExPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ReflectionExPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

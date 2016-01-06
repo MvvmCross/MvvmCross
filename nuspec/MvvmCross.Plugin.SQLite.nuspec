@@ -69,13 +69,13 @@ This package contains the old 'Sqlite' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Sqlite.Droid.pdb" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.pdb" />
 
-		<!-- touch - PCL -->
+		<!-- iOS - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.pdb" />
 
 		<!-- iOS -->
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.pdb" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Sqlite.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.iOS.dll" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Sqlite.iOS.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.iOS.pdb" />
 
 		<!-- store - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\netcore45\MvvmCross.Plugins.Sqlite.dll" />

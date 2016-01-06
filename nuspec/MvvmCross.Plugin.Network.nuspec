@@ -71,8 +71,8 @@ This package contains the 'Network' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Network.WindowsCommon" />
 		<file src="..\Network\MvvmCross.Plugins.Network.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Network.Droid" />
-		<file src="..\Network\MvvmCross.Plugins.Network.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Network.Touch" />
+		<file src="..\Network\MvvmCross.Plugins.Network.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Network.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Network.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -114,7 +114,7 @@ This package contains the 'Network' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Network.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Network.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Network.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" 
 			target="content\Xamarin.iOS10\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 

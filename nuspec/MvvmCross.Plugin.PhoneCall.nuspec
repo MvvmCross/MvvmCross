@@ -59,8 +59,8 @@ This package contains the 'PhoneCall' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.PhoneCall.WindowsCommon" />
 		<file src="..\PhoneCall\MvvmCross.Plugins.PhoneCall.Droid\**\*.cs" 	
 			target="src\MvvmCross.Plugins.PhoneCall.Droid" />
-		<file src="..\PhoneCall\MvvmCross.Plugins.PhoneCall.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.PhoneCall.Touch" />
+		<file src="..\PhoneCall\MvvmCross.Plugins.PhoneCall.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.PhoneCall.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PhoneCall.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -94,7 +94,7 @@ This package contains the 'PhoneCall' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PhoneCall.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.PhoneCall.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.PhoneCall.iOS.*" target="lib\Xamarin.iOS10" />
 
 		<file src="TouchBootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 		

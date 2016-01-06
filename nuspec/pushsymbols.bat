@@ -30,9 +30,9 @@ nuget push MvvmCross.HotTuna.MvvmCrossLibraries.3.5.1.symbols.nupkg
 rem nuget push MvvmCross.HotTuna.StarterPack.3.5.1.symbols.nupkg
 nuget push MvvmCross.HotTuna.Tests.3.5.1.symbols.nupkg
 rem nuget push MvvmCross.3.5.1.symbols.nupkg
-nuget push MvvmCross.HotTuna.Touch.Dialog.3.5.1.symbols.nupkg
+nuget push MvvmCross.HotTuna.iOS.Dialog.3.5.1.symbols.nupkg
 nuget push MvvmCross.HotTuna.Droid.Dialog.3.5.1.symbols.nupkg
 nuget push MvvmCross.BindingEx.3.5.1.symbols.nupkg
 nuget push MvvmCross.HotTuna.AutoViews.3.5.1.symbols.nupkg
-nuget push MvvmCross.HotTuna.Touch.AutoViews.3.5.1.symbols.nupkg
+nuget push MvvmCross.HotTuna.iOS.AutoViews.3.5.1.symbols.nupkg
 nuget push MvvmCross.HotTuna.Droid.AutoViews.3.5.1.symbols.nupkg

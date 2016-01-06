@@ -61,8 +61,8 @@ This package contains the 'ThreadUtils' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.ThreadUtils.WindowsCommon" />	
 		<file src="..\ThreadUtils\MvvmCross.Plugins.ThreadUtils.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.ThreadUtils.Droid" />
-		<file src="..\ThreadUtils\MvvmCross.Plugins.ThreadUtils.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.ThreadUtils.Touch" />	
+		<file src="..\ThreadUtils\MvvmCross.Plugins.ThreadUtils.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.ThreadUtils.iOS" />	
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ThreadUtils.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -104,7 +104,7 @@ This package contains the 'ThreadUtils' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ThreadUtils.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.ThreadUtils.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.ThreadUtils.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\ThreadUtilsPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ThreadUtilsPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

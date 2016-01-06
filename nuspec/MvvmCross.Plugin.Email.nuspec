@@ -61,8 +61,8 @@ This package contains the 'Email' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Email.WindowsCommon" />
 		<file src="..\Email\MvvmCross.Plugins.Email.Droid\**\*.cs" 	
 			target="src\MvvmCross.Plugins.Email.Droid" />
-		<file src="..\Email\MvvmCross.Plugins.Email.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Email.Touch" />
+		<file src="..\Email\MvvmCross.Plugins.Email.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -104,7 +104,7 @@ This package contains the 'Email' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Email.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Email.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\EmailPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\EmailPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

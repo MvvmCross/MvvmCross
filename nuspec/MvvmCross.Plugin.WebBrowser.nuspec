@@ -86,7 +86,7 @@ This package contains the 'WebBrowser' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.WebBrowser.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.WebBrowser.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\WebBrowserPluginBootstrap.cs.pp" 
 			target="content\Xamarin.iOS10\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
 			
@@ -109,8 +109,8 @@ This package contains the 'WebBrowser' plugin for MvvmCross</description>
 		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.WebBrowser.Droid" />
 
-		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.WebBrowser.Touch" />
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser.iOS" />
 	</files>
 </package>
 

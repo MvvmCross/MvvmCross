@@ -61,8 +61,8 @@ This package contains the 'Location' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Location.WindowsCommon" />
 		<file src="..\Location\MvvmCross.Plugins.Location.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Location.Droid" />
-		<file src="..\Location\MvvmCross.Plugins.Location.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.Touch" />
+		<file src="..\Location\MvvmCross.Plugins.Location.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Location.iOS" />
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -104,7 +104,7 @@ This package contains the 'Location' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Location.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Location.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\LocationPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\LocationPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

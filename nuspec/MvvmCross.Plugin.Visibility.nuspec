@@ -63,8 +63,8 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Visibility.WindowsCommon" />
 		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Visibility.Droid" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.Touch" />	
+		<file src="..\Visibility\MvvmCross.Plugins.Visibility.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Visibility.iOS" />	
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -106,7 +106,7 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Visibility.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Visibility.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

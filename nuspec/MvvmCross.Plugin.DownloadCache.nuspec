@@ -54,8 +54,8 @@ This package contains the 'DownloadCache' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.DownloadCache" />
 		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.DownloadCache.Droid" />
-		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.DownloadCache.Touch" />	
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache.iOS" />	
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\portable-net45+win+wpa81+wp80" />
@@ -70,7 +70,7 @@ This package contains the 'DownloadCache' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.DownloadCache.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.DownloadCache.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
 		
 		<!-- mac -->

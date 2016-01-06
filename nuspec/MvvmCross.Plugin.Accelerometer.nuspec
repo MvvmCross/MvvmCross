@@ -60,8 +60,8 @@ This package contains the 'Accelerometer' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Accelerometer.WindowsPhone" />
 		<file src="..\Accelerometer\MvvmCross.Plugins.Accelerometer.WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Plugins.Accelerometer.WindowsCommon" />	
-		<file src="..\Accelerometer\MvvmCross.Plugins.Accelerometer.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.Accelerometer.Touch" />
+		<file src="..\Accelerometer\MvvmCross.Plugins.Accelerometer.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Accelerometer.iOS" />
 		<file src="..\Accelerometer\MvvmCross.Plugins.Accelerometer.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.Accelerometer.Droid" />
 
@@ -107,7 +107,7 @@ This package contains the 'Accelerometer' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Accelerometer.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Accelerometer.iOS.*" target="lib\Xamarin.iOS10" />
 
 		<file src="TouchBootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
 

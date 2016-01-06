@@ -59,8 +59,8 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.PictureChooser.WindowsCommon" />
 		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.Droid\**\*.cs" 
 			target="src\MvvmCross.Plugins.PictureChooser.Droid" />	
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.Touch\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.Touch" />	
+		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.PictureChooser.iOS" />	
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
@@ -96,7 +96,7 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.PictureChooser.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.PictureChooser.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="TouchBootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- mac -->

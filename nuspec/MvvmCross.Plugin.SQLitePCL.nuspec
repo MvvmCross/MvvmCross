@@ -101,7 +101,7 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.dll" />
-		<file src="..\bin\Release\Mvx\Touch\MvvmCross.Plugins.Sqlite.Touch.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.Touch.dll" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Sqlite.iOS.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.Sqlite.iOS.dll" />
 		<file src="TouchBootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 		
 		<!-- mac -->
