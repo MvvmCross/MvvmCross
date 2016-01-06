@@ -114,7 +114,7 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\Xamarin.iOS10\MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\Xamarin.iOS10\MvvmCross.Plugins.ResourceLoader.pdb" />
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.ResourceLoader.iOS.*" target="lib\Xamarin.iOS10" />
-		<file src="TouchBootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
+		<file src="iOSBootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\Xamarin.Mac20\MvvmCross.Plugins.ResourceLoader.dll" />

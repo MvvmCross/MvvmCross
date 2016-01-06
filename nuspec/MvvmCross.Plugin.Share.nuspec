@@ -106,7 +106,7 @@ This package contains the 'Share' plugin for MvvmCross</description>
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Share.iOS.*" target="lib\Xamarin.iOS10" />
-		<file src="TouchBootstrapContent\SharePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SharePluginBootstrap.cs.pp" />
+		<file src="iOSBootstrapContent\SharePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SharePluginBootstrap.cs.pp" />
 		
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\Xamarin.Mac20" />

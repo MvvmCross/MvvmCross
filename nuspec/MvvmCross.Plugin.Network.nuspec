@@ -115,7 +115,7 @@ This package contains the 'Network' plugin for MvvmCross</description>
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Network.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Network.iOS.*" target="lib\Xamarin.iOS10" />
-		<file src="TouchBootstrapContent\NetworkPluginBootstrap.cs.pp" 
+		<file src="iOSBootstrapContent\NetworkPluginBootstrap.cs.pp" 
 			target="content\Xamarin.iOS10\Bootstrap\NetworkPluginBootstrap.cs.pp" />
 
 		<!-- mac -->
