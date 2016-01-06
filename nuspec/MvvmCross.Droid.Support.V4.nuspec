@@ -16,13 +16,13 @@ This package contains Support v4 support for MvvmCross.</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework ="MonoAndroid">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
 			</group>
 			<group targetFramework ="dotnet">
-				<dependency id="Cirrious.MvvmCross.Droid.Support.Fragging" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
