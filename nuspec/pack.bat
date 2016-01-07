@@ -1,7 +1,7 @@
 del *.nupkg
 nuget setapikey
 
-nuget pack Cirrious.MvvmCross.Forms.Presenter.nuspec -symbols
+nuget pack MvvmCross.Forms.Presenter.nuspec -symbols
 
 for /r %%i in (*.nupkg) do (call :pushpackage "%%i")
 pause

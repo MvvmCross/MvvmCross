@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Core
