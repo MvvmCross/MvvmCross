@@ -12,50 +12,40 @@
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains the 'Getting Started' libraries for MvvmCross
+This package contains the 'Getting Started' libraries for MvvmCross and installs sample files. This package can be removed after installation so the sample files don't get recreated on each update.
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Binding" version="4.0.0-beta8" />
+				<dependency id="MvvmCross" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
 	</metadata>
