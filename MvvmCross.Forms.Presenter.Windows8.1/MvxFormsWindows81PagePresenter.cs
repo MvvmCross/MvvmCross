@@ -7,7 +7,7 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 using MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.WindowsCommon.Views;
+using MvvmCross.WindowsCommon.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Windows81

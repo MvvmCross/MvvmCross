@@ -2,11 +2,11 @@
 
 1. Add the following piece of code to Setup.cs from iOS project:
 
-	protected override IMvxTouchViewPresenter CreatePresenter()
+	protected override IMvxIosViewPresenter CreatePresenter()
     {
         Forms.Init();
 
         var xamarinFormsApp = new MvxFormsApp();
 
-        return new MvxFormsTouchPagePresenter(Window, xamarinFormsApp);
+        return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
     }

@@ -6,7 +6,7 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using Cirrious.MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Presenter.Core;
 
 namespace MvvmCross.Forms.Presenter.Droid

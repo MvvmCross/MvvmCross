@@ -7,7 +7,7 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 using MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.WindowsPhone.Views;
+using MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
 using System;
 using Xamarin.Forms;

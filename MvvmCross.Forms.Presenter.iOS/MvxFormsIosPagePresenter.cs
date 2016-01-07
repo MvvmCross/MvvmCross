@@ -1,4 +1,4 @@
-// MvxFormsTouchPagePresenter.cs
+// MvxFormsIosPagePresenter.cs
 // 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
 // MvvmCross.Forms.Presenter is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,19 +7,19 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 using MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Touch.Views.Presenters;
+using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Touch
+namespace MvvmCross.Forms.Presenter.iOS
 {
-    public class MvxFormsTouchPagePresenter
+    public class MvxFormsIosPagePresenter
         : MvxFormsPagePresenter
-        , IMvxTouchViewPresenter
+        , IMvxIosViewPresenter
     {
         private readonly UIWindow _window;
 
-        public MvxFormsTouchPagePresenter(UIWindow window, Application mvxFormsApp)
+        public MvxFormsIosPagePresenter(UIWindow window, Application mvxFormsApp)
             : base(mvxFormsApp)
         {
             _window = window;

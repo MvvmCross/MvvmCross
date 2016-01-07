@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MvvmCross.Forms.Presenter.Windows81")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unattended")]
-[assembly: AssemblyProduct("MvvmCross.Forms.Presenter.Windows81")]
-[assembly: AssemblyCopyright("Copyright © Unattended 2015")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MvvmCross")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

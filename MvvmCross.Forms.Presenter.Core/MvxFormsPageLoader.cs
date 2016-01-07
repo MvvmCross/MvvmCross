@@ -1,6 +1,6 @@
-﻿using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
-using Cirrious.MvvmCross.ViewModels;
+﻿using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Core.ViewModels;
 using System;
 using System.Linq;
 using System.Reflection;

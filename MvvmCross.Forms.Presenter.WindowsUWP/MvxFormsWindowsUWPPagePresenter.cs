@@ -7,7 +7,7 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 
-using Cirrious.MvvmCross.WindowsUWP.Views;
+using MvvmCross.WindowsUWP.Views;
 using MvvmCross.Forms.Presenter.Core;
 using Xamarin.Forms;
 

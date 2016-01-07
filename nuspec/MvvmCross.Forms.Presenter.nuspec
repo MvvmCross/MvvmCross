@@ -15,43 +15,39 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp formspresenters presenters</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
+			<group targetFramework="net">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="win">
+			<group targetFramework="win">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="wp">
+			<group targetFramework="wp">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="wpa">
+			<group targetFramework="wpa">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="MonoAndroid">
+			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="MonoTouch">
+			<group targetFramework="Xamarin.iOS10">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="Xamarin.iOS">
+			<group targetFramework="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
+			<group targetFramework="uap">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
-			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
-				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
-			</group>
-			<group targetFramework ="dotnet">
+			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
 				<dependency id="Xamarin.Forms" version="2.0.0.6490" />
 			</group>
@@ -89,7 +85,7 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 
 		<!-- touch -->
 		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Touch\MvvmCross.Forms.Presenter.Touch.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\iOS\MvvmCross.Forms.Presenter.iOS.*" target="lib\Xamarin.iOS10" />
 
 		<!-- Source Code For Debugging -->
 		<file src="..\MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
