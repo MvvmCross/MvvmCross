@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-using Cirrious.CrossCore;
+using MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.WebBrowser;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using Example.Models;
 using Example.Services;
 

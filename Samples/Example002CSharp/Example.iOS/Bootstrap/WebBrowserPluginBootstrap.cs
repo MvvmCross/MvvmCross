@@ -1,9 +1,9 @@
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform.Plugins;
 
 namespace Example.iOS.Bootstrap
 {
     public class WebBrowserPluginBootstrap
-        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.WebBrowser.PluginLoader, MvvmCross.Plugins.WebBrowser.Touch.Plugin>
+        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.WebBrowser.PluginLoader, MvvmCross.Plugins.WebBrowser.iOS.Plugin>
     {
     }
 }

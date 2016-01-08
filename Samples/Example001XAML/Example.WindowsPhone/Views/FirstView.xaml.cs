@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.WindowsPhone.Views;
+using MvvmCross.WindowsPhone.Views;
 
 namespace Example.WindowsPhone.Views
 {

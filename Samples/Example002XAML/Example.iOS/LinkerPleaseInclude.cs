@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Touch.Views;
+using MvvmCross.iOS.Views;
 using Foundation;
 using UIKit;
 
@@ -97,9 +97,9 @@ namespace Example.iOS
            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-		public void Include(Cirrious.CrossCore.IoC.MvxPropertyInjector injector)
+		public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
 		{
-			injector = new Cirrious.CrossCore.IoC.MvxPropertyInjector();
+			injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
 		} 
 
 		public void Include(System.ComponentModel.INotifyPropertyChanged changed)

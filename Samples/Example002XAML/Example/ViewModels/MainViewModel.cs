@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using Example.Models;
 using Example.Services;
 

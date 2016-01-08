@@ -13,9 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Forms.Platform.WinRT;
-using Cirrious.MvvmCross.Views;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Forms.Presenter.Windows81;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Forms.Presenter.Windows81;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,7 +34,7 @@ namespace Example.W81
             InitializeComponent();
 
             // Start MvvMCross
-            var start = Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+            var start = Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
             start.Start();
 
             // Locate the MvvMCross-Forms Presenter
