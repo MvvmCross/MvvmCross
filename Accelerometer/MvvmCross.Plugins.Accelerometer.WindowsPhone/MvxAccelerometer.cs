@@ -7,8 +7,8 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Exceptions;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
 using Microsoft.Devices.Sensors;
 using System;
 

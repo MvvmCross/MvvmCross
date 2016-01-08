@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 
 namespace MvvmCross.Plugins.Location

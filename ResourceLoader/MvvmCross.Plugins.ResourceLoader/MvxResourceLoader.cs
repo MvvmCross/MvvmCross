@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
 

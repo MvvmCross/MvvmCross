@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.ReflectionEx.HackShare;
 
 namespace MvvmCross.Plugins.ReflectionEx.iOS

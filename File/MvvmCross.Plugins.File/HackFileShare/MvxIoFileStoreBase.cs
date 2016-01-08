@@ -7,8 +7,8 @@
 
 // ReSharper disable all
 
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;

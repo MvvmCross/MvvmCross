@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.WindowsPhone.Tasks;
+using MvvmCross.Platform.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
 using System;
 

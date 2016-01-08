@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
 using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
@@ -34,7 +34,7 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(CreateHttpFileDownloader);
             Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache);
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
-            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxTouchLocalFileImageLoader());
+            Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxIosLocalFileImageLoader());
         }
 
         private MvxHttpFileDownloader CreateHttpFileDownloader()

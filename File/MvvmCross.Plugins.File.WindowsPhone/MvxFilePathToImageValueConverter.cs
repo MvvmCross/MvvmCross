@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Converters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
 using System;
 using System.Windows.Media.Imaging;
 

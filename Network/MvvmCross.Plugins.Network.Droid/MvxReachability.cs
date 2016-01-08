@@ -8,9 +8,9 @@
 using System;
 using Android.Content;
 using Android.Net;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Exceptions;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.Network.Reachability;
 using Java.Net;
 

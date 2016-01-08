@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
-using Cirrious.CrossCore.Droid.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.WebBrowser.Droid
 {

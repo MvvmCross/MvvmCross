@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Graphics;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding;
 using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;

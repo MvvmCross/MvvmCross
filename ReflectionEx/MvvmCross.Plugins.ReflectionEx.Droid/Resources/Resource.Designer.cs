@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("MvvmCross.Plugins.ReflectionEx.Droid.Resource", IsApplication=false)]
 
-namespace MvvmCross.Plugins.ReflectionEx.Droid.Resources
+namespace MvvmCross.Plugins.ReflectionEx.Droid
 {
 	
 	

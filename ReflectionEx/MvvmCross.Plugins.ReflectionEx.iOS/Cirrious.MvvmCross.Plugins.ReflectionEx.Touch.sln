@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Touch", "Cirrious.MvvmCross.Plugins.ReflectionEx.Touch.csproj", "{2E587DF6-82DC-4F71-87AB-6EEB7A9F4C91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Touch", "MvvmCross.Plugins.ReflectionEx.Touch.csproj", "{2E587DF6-82DC-4F71-87AB-6EEB7A9F4C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Droid", "..\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid\Cirrious.MvvmCross.Plugins.ReflectionEx.Droid.csproj", "{1368DB16-DFAE-4985-A0CD-CE3C753DAB70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Droid", "..\MvvmCross.Plugins.ReflectionEx.Droid\MvvmCross.Plugins.ReflectionEx.Droid.csproj", "{1368DB16-DFAE-4985-A0CD-CE3C753DAB70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone", "..\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsPhone.csproj", "{A1212B48-4142-4B49-9FBC-DC68CB6931E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.WindowsPhone", "..\MvvmCross.Plugins.ReflectionEx.WindowsPhone\MvvmCross.Plugins.ReflectionEx.WindowsPhone.csproj", "{A1212B48-4142-4B49-9FBC-DC68CB6931E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore", "..\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore\Cirrious.MvvmCross.Plugins.ReflectionEx.WindowsStore.csproj", "{70423584-026A-4F66-82D2-943D7E903007}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.WindowsStore", "..\MvvmCross.Plugins.ReflectionEx.WindowsStore\MvvmCross.Plugins.ReflectionEx.WindowsStore.csproj", "{70423584-026A-4F66-82D2-943D7E903007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf", "..\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf\Cirrious.MvvmCross.Plugins.ReflectionEx.Wpf.csproj", "{73E38ABA-14A4-4A83-BAA0-D7139D459A5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Wpf", "..\MvvmCross.Plugins.ReflectionEx.Wpf\MvvmCross.Plugins.ReflectionEx.Wpf.csproj", "{73E38ABA-14A4-4A83-BAA0-D7139D459A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.ReflectionEx.Console", "..\Cirrious.MvvmCross.Plugins.ReflectionEx.Console\Cirrious.MvvmCross.Plugins.ReflectionEx.Console.csproj", "{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Console", "..\MvvmCross.Plugins.ReflectionEx.Console\MvvmCross.Plugins.ReflectionEx.Console.csproj", "{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

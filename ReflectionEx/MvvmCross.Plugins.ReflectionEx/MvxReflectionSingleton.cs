@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.ReflectionEx
 {

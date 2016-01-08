@@ -34,9 +34,9 @@ The Json plugin can optionally be requested **not** to register Json as `IMvxTex
 
         protected override IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
-            if (plugin == typeof(Cirrious.MvvmCross.Plugins.Json.PluginLoader))
+            if (plugin == typeof(MvvmCross.Plugins.Json.PluginLoader))
             {
-                return new Cirrious.MvvmCross.Plugins.Json.MvxJsonConfiguration()
+                return new MvvmCross.Plugins.Json.MvxJsonConfiguration()
                 {
                     RegisterAsTextSerializer = false
                 };

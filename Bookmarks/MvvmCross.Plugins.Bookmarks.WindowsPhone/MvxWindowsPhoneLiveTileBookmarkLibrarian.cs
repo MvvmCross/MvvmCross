@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsPhone.Platform;
-using Cirrious.MvvmCross.WindowsPhone.Views;
+using MvvmCross.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.WindowsPhone.Platform;
+using MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;

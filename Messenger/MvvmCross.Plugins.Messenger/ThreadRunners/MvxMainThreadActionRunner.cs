@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
 using System;
 
 namespace MvvmCross.Plugins.Messenger.ThreadRunners

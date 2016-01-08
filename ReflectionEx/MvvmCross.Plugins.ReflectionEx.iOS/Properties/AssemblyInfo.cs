@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cirrious.MvvmCross.Plugins.ReflectionEx.Touch")]
+[assembly: AssemblyTitle("MvvmCross.Plugins.ReflectionEx.Touch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cirrious")]
-[assembly: AssemblyProduct("Cirrious.MvvmCross.Plugins.ReflectionEx.Touch")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("MvvmCross.Plugins.ReflectionEx.Touch")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

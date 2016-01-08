@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.WindowsPhone.Converters;
+using MvvmCross.Platform.WindowsPhone.Converters;
 
 namespace MvvmCross.Plugins.File.WindowsPhone
 {

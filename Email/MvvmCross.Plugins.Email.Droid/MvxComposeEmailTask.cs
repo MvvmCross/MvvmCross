@@ -9,7 +9,7 @@ using Android.Content;
 using Android.Net;
 using Android.OS;
 using Android.Text;
-using Cirrious.CrossCore.Droid.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using System.Collections.Generic;
 using System.Linq;
 using Java.IO;

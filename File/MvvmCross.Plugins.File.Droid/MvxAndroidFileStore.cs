@@ -9,8 +9,8 @@
 
 using System.IO;
 using Android.Content;
-using Cirrious.CrossCore.Droid;
-using Cirrious.CrossCore;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform;
 
 #endregion
 

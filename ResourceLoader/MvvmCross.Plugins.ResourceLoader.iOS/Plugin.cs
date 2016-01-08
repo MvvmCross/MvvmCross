@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.ResourceLoader.iOS
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxResourceLoader, MvxTouchResourceLoader>();
+            Mvx.RegisterType<IMvxResourceLoader, MvxIosResourceLoader>();
         }
     }
 }

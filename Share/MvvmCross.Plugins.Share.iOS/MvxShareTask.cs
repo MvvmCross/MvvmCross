@@ -5,25 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Touch.Platform;
-using Cirrious.CrossCore.Touch.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.iOS.Platform;
+using MvvmCross.Platform.iOS.Views;
 using Foundation;
 using Twitter;
 
 namespace MvvmCross.Plugins.Share.iOS
 {
     public class MvxShareTask
-        : MvxTouchTask
+        : MvxIosTask
           , IMvxShareTask
 
     {
-        private readonly IMvxTouchModalHost _modalHost;
+        private readonly IMvxIosModalHost _modalHost;
         private TWTweetComposeViewController _tweet;
 
         public MvxShareTask()
         {
-            _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
+            _modalHost = Mvx.Resolve<IMvxIosModalHost>();
         }
 
         public void ShareShort(string message)

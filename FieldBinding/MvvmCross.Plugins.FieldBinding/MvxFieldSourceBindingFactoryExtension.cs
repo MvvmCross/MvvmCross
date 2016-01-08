@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Bindings.Source;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
-using Cirrious.MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Platform;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Source;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

@@ -5,10 +5,10 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.CrossCore.UI;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Platform.UI;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace MvvmCross.Plugins.Color.Droid

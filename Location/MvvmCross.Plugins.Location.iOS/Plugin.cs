@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Location.iOS
 {
@@ -16,10 +16,10 @@ namespace MvvmCross.Plugins.Location.iOS
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxTouchLocationWatcher());
+            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxIosLocationWatcher());
 #pragma warning disable 618 // 618 is that this interface is obsolete
             // ReSharper disable CSharpWarnings::CS0612
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxTouchGeoLocationWatcher());
+            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxIosGeoLocationWatcher());
             // ReSharper restore CSharpWarnings::CS0612
 #pragma warning restore 618 // 618 is that this interface is obsolete
         }

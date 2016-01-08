@@ -1,4 +1,4 @@
-// MvxTouchLocalFileImageLoader.cs
+// MvxIosLocalFileImageLoader.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,14 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Threading.Tasks;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Plugins.File;
 using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
-    public class MvxTouchLocalFileImageLoader
+    public class MvxIosLocalFileImageLoader
         : MvxAllThreadDispatchingObject
         , IMvxLocalFileImageLoader<UIImage>
     {
@@ -29,7 +29,7 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
 
                 uiImage = localPath.StartsWith(ResourcePrefix) ? LoadResourceImage(localPath.Substring(ResourcePrefix.Length)) : LoadUiImage(localPath);
 
-                var result = (MvxImage<UIImage>)new MvxTouchImage(uiImage);
+                var result = (MvxImage<UIImage>)new MvxIosImage(uiImage);
 
                 tcs.TrySetResult(result);
             });

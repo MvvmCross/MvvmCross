@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Converters;
+using MvvmCross.Platform.Converters;
 using Foundation;
 using UIKit;
 

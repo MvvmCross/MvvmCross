@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform.UI;
 using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Plugins.Color.WindowsStore

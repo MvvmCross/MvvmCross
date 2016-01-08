@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform.UI;
 using System.Windows.Media;
 
 namespace MvvmCross.Plugins.Color.WindowsPhone

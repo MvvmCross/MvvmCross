@@ -1,15 +1,15 @@
-// MvxTouchVisibility.cs
+// MvxIosVisibility.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.iOS
 {
-    public class MvxTouchVisibility : IMvxNativeVisibility
+    public class MvxIosVisibility : IMvxNativeVisibility
     {
         #region Implementation of IMvxNativeVisibility
 

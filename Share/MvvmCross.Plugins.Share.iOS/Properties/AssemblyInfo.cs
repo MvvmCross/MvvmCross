@@ -11,12 +11,12 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Cirrious.MvvmCross.Plugins.Share.Touch")]
+[assembly: AssemblyTitle("MvvmCross.Plugins.Share.Touch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cirrious")]
-[assembly: AssemblyProduct("Cirrious.MvvmCross.Plugins.Share.Touch")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyProduct("MvvmCross.Plugins.Share.Touch")]
+[assembly: AssemblyCopyright("Copyright Â© 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

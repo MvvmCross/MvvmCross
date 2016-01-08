@@ -1,15 +1,15 @@
 ﻿using System;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.Touch;
-using Cirrious.CrossCore.Touch.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.iOS;
+using MvvmCross.Platform.iOS.Platform;
 using CoreLocation;
 using Foundation;
 
 namespace MvvmCross.Plugins.Location.iOS
 {
-    public sealed class MvxTouchLocationWatcher
+    public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {
         private CLLocationManager _locationManager;
@@ -28,7 +28,7 @@ namespace MvvmCross.Plugins.Location.iOS
             }
         }
 
-        public MvxTouchLocationWatcher()
+        public MvxIosLocationWatcher()
         {
             EnsureStopped();
         }
@@ -149,9 +149,9 @@ namespace MvvmCross.Plugins.Location.iOS
 
         private class LocationDelegate : CLLocationManagerDelegate
         {
-            private readonly MvxTouchLocationWatcher _owner;
+            private readonly MvxIosLocationWatcher _owner;
 
-            public LocationDelegate(MvxTouchLocationWatcher owner)
+            public LocationDelegate(MvxIosLocationWatcher owner)
             {
                 _owner = owner;
             }

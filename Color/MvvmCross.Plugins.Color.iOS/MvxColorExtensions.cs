@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform.UI;
 using UIKit;
 
 namespace MvvmCross.Plugins.Color.iOS
@@ -14,7 +14,7 @@ namespace MvvmCross.Plugins.Color.iOS
     {
         public static UIColor ToNativeColor(this MvxColor color)
         {
-            return MvxTouchColor.ToUIColor(color);
+            return MvxIosColor.ToUIColor(color);
         }
     }
 }
