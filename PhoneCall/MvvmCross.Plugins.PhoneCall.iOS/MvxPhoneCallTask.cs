@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Touch.Platform;
+using MvvmCross.Platform.iOS.Platform;
 using Foundation;
 
 namespace MvvmCross.Plugins.PhoneCall.iOS
 {
-    public class MvxPhoneCallTask : MvxTouchTask, IMvxPhoneCallTask
+    public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask
     {
         #region IMvxPhoneCallTask Members
 

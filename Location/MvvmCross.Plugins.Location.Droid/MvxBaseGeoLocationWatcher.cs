@@ -8,7 +8,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com
 
 using System;
-using Cirrious.MvvmCross.Interfaces.Platform.Location;
+using MvvmCross.Interfaces.Platform.Location;
 
 namespace MvvmCross.Plugins.Location
 {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
 	<metadata>
-		<id>MvvmCross.HotTuna.Plugin.SQLitePCL</id>
+		<id>MvvmCross.Plugin.SQLitePCL</id>
 		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Sqlite PCL Plugin</title>
 		<authors>MvvmCross</authors>

@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Touch.Platform;
-using Cirrious.CrossCore.Touch.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.iOS.Platform;
+using MvvmCross.Platform.iOS.Views;
 using Foundation;
 using MessageUI;
 using UIKit;
@@ -19,15 +19,15 @@ using UIKit;
 namespace MvvmCross.Plugins.Email.iOS
 {
     public class MvxComposeEmailTask
-        : MvxTouchTask
+        : MvxIosTask
         , IMvxComposeEmailTaskEx
     {
-        private readonly IMvxTouchModalHost _modalHost;
+        private readonly IMvxIosModalHost _modalHost;
         private MFMailComposeViewController _mail;
 
         public MvxComposeEmailTask()
         {
-            _modalHost = Mvx.Resolve<IMvxTouchModalHost>();
+            _modalHost = Mvx.Resolve<IMvxIosModalHost>();
         }
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,

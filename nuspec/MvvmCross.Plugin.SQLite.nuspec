@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Plugin.Sqlite</id>
+		<id>MvvmCross.Plugin.Sqlite</id>
 		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Sqlite Plugin (Old)</title>
 		<authors>MvvmCross</authors>
@@ -99,7 +99,7 @@ This package contains the old 'Sqlite' plugin for MvvmCross</description>
 
 		<!-- scripts -->
 		<file src="tools\Install.ps1" target="tools\Install.ps1" />
-		<file src="tools\MvvmCross.HotTuna.Plugin.Sqlite.targets" target="tools\MvvmCross.HotTuna.Plugin.Sqlite.targets" />
+		<file src="tools\MvvmCross.Plugin.Sqlite.targets" target="tools\MvvmCross.Plugin.Sqlite.targets" />
 		<file src="tools\Uninstall.ps1" target="tools\Uninstall.ps1" />
 	</files>
 </package>

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Plugins;
+using MvvmCross.Platform.Plugins;
 using System;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid

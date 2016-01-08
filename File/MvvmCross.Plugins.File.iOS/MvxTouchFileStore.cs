@@ -1,4 +1,4 @@
-﻿// MvxTouchFileStore.cs
+﻿// MvxIosFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using System.IO;
 
 namespace MvvmCross.Plugins.File.iOS
 {
-    public class MvxTouchFileStore : MvxIoFileStoreBase
+    public class MvxIosFileStore : MvxIoFileStoreBase
     {
         public const string ResScheme = "res:";
 

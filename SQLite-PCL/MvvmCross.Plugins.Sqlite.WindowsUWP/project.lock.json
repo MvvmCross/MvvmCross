@@ -201,18 +201,6 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        }
-      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -1819,18 +1807,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -3472,18 +3448,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -5132,18 +5096,6 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        }
-      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -6783,18 +6735,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -8443,18 +8383,6 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        }
-      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -10094,18 +10022,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
-        }
-      },
-      "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-        "compile": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
-        },
-        "runtime": {
-          "lib/win81/Cirrious.CrossCore.dll": {},
-          "lib/win81/Cirrious.CrossCore.WindowsCommon.dll": {},
-          "lib/win81/Cirrious.MvvmCross.Localization.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -12160,48 +12076,6 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
-      ]
-    },
-    "MvvmCross.HotTuna.CrossCore/4.0.0-beta7": {
-      "sha512": "S9bW3XJprHeSJ4UlS0lUWoSuw15NsW1jOTdvBcnXk8s5+HTiFKxARV4iaZeol7A5x0W83eL6aJWamKvAQWwTuw==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/dotnet/Cirrious.CrossCore.dll",
-        "lib/dotnet/Cirrious.MvvmCross.Localization.dll",
-        "lib/MonoAndroid/Cirrious.CrossCore.dll",
-        "lib/MonoAndroid/Cirrious.CrossCore.Droid.dll",
-        "lib/MonoAndroid/Cirrious.MvvmCross.Localization.dll",
-        "lib/net45/Cirrious.CrossCore.dll",
-        "lib/net45/Cirrious.CrossCore.Wpf.dll",
-        "lib/net45/Cirrious.MvvmCross.Localization.dll",
-        "lib/netcore45/Cirrious.CrossCore.dll",
-        "lib/netcore45/Cirrious.CrossCore.WindowsStore.dll",
-        "lib/netcore45/Cirrious.CrossCore.WindowsStore.pri",
-        "lib/netcore45/Cirrious.MvvmCross.Localization.dll",
-        "lib/portable-win+net45+wp8+win8+wpa81/Cirrious.CrossCore.dll",
-        "lib/portable-win+net45+wp8+win8+wpa81/Cirrious.MvvmCross.Localization.dll",
-        "lib/portable-win81+wpa81/Cirrious.CrossCore.dll",
-        "lib/portable-win81+wpa81/Cirrious.CrossCore.WindowsCommon.dll",
-        "lib/portable-win81+wpa81/Cirrious.CrossCore.WindowsCommon.pri",
-        "lib/portable-win81+wpa81/Cirrious.MvvmCross.Localization.dll",
-        "lib/win81/Cirrious.CrossCore.dll",
-        "lib/win81/Cirrious.CrossCore.WindowsCommon.dll",
-        "lib/win81/Cirrious.CrossCore.WindowsCommon.pri",
-        "lib/win81/Cirrious.MvvmCross.Localization.dll",
-        "lib/wp8/Cirrious.CrossCore.dll",
-        "lib/wp8/Cirrious.CrossCore.WindowsPhone.dll",
-        "lib/wp8/Cirrious.MvvmCross.Localization.dll",
-        "lib/wpa81/Cirrious.CrossCore.dll",
-        "lib/wpa81/Cirrious.CrossCore.WindowsCommon.dll",
-        "lib/wpa81/Cirrious.CrossCore.WindowsCommon.pri",
-        "lib/wpa81/Cirrious.MvvmCross.Localization.dll",
-        "lib/Xamarin.iOS10/Cirrious.CrossCore.dll",
-        "lib/Xamarin.iOS10/Cirrious.CrossCore.Touch.dll",
-        "lib/Xamarin.iOS10/Cirrious.MvvmCross.Localization.dll",
-        "MvvmCross.HotTuna.CrossCore.nuspec",
-        "package/services/metadata/core-properties/770a3c5fbc8c42c59f9d0fe76c1d86b0.psmdcp"
       ]
     },
     "SQLite.Net-PCL/3.1.1": {
@@ -14945,7 +14819,6 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.HotTuna.CrossCore >= 4.0.0-beta7",
       "SQLite.Net.Async-PCL >= 3.1.1",
       "SQLite.Net.Core-PCL >= 3.1.1",
       "SQLite.Net-PCL >= 3.1.1"

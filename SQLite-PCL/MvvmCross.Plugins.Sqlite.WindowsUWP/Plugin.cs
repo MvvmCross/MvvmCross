@@ -1,5 +1,5 @@
-﻿using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
+﻿using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Sqlite.WindowsUWP
 {

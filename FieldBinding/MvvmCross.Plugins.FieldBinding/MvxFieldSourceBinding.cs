@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.Bindings.Source;
+using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Reflection;
 

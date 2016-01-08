@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color.iOS
 {
@@ -17,7 +17,7 @@ namespace MvvmCross.Plugins.Color.iOS
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxTouchColor());
+            Mvx.RegisterSingleton<IMvxNativeColor>(new MvxIosColor());
         }
     }
 }

@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.CrossCore.UI;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.iOS
 {
@@ -16,7 +16,7 @@ namespace MvvmCross.Plugins.Visibility.iOS
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxTouchVisibility());
+            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxIosVisibility());
         }
     }
 }

@@ -7,7 +7,7 @@
 
 using System;
 using Android.Graphics;
-using Cirrious.CrossCore.Converters;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {

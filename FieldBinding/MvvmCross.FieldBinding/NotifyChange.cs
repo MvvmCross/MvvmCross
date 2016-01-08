@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.FieldBinding
 {

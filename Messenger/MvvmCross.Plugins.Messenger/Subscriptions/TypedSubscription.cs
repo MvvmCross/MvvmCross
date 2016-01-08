@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions

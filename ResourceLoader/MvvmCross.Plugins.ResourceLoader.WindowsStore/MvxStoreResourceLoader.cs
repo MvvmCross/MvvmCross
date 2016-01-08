@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.WindowsCommon.Platform;
+using MvvmCross.Platform.WindowsCommon.Platform;
 using System;
 using System.IO;
 using Windows.ApplicationModel;

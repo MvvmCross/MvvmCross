@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.DownloadCache

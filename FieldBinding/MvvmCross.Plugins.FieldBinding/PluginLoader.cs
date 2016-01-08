@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Plugins;
-using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Binding.Bindings.Source.Construction;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

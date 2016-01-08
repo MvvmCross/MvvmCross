@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.HotTuna.Plugin.Email</id>
+		<id>MvvmCross.Plugin.Email</id>
 		<version>4.0.0-beta8</version>
 		<title>MvvmCross - Email Plugin</title>
 		<authors>MvvmCross</authors>

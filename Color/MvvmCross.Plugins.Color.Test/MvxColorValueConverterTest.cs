@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.UI;
-using Cirrious.MvvmCross.Test.Core;
+using MvvmCross.Platform.UI;
+using MvvmCross.Test.Core;
 
 namespace MvvmCross.Plugins.Color.Test
 {

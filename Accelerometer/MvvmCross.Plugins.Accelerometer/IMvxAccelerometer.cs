@@ -7,7 +7,7 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 
 namespace MvvmCross.Plugins.Accelerometer

@@ -1,4 +1,4 @@
-// MvxTouchImage.cs
+// MvxIosImage.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,10 +9,10 @@ using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
-    public class MvxTouchImage
+    public class MvxIosImage
         : MvxImage<UIImage>
     {
-        public MvxTouchImage(UIImage rawImage)
+        public MvxIosImage(UIImage rawImage)
             : base(rawImage)
         {
         }

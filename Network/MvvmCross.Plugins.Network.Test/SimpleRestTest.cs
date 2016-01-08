@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Test.Core;
+using MvvmCross.Test.Core;
 using MvvmCross.Plugins.Network.Rest;
 using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using NUnit.Framework;
