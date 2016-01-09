@@ -201,6 +201,42 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        }
+      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -1807,6 +1843,42 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -3448,6 +3520,42 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -5096,6 +5204,42 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        }
+      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -6735,6 +6879,42 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -8383,6 +8563,42 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        }
+      },
       "SQLite.Net-PCL/3.1.1": {
         "dependencies": {
           "SQLite.Net.Core-PCL": "[3.1.1, )"
@@ -10022,6 +10238,42 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MvvmCross.Binding/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Core": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/MvvmCross.Binding.dll": {}
+        }
+      },
+      "MvvmCross.Core/4.0.0-beta8": {
+        "dependencies": {
+          "MvvmCross.Platform": "[4.0.0-beta8, )"
+        },
+        "compile": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        },
+        "runtime": {
+          "lib/uap/MvvmCross.Core.dll": {},
+          "lib/uap/MvvmCross.WindowsUWP.dll": {}
+        }
+      },
+      "MvvmCross.Platform/4.0.0-beta8": {
+        "compile": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
+        },
+        "runtime": {
+          "lib/win81/MvvmCross.Localization.dll": {},
+          "lib/win81/MvvmCross.Platform.dll": {},
+          "lib/win81/MvvmCross.WindowsCommon.dll": {}
         }
       },
       "SQLite.Net-PCL/3.1.1": {
@@ -12076,6 +12328,139 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "MvvmCross.Binding/4.0.0-beta8": {
+      "sha512": "LZ39MP+0qtE7JHocYSoIkbcvNkJJpRf76D2YnmAlv2mL+UAzg50BjhAjJ6VkIhg5k2MJg34dBqOjH95Nhu7MQw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/dotnet/MvvmCross.Binding.dll",
+        "lib/dotnet/MvvmCross.Binding.dll.mdb",
+        "lib/MonoAndroid/MvvmCross.Binding.dll",
+        "lib/MonoAndroid/MvvmCross.Binding.dll.mdb",
+        "lib/MonoAndroid/MvvmCross.Binding.Droid.dll",
+        "lib/net45/MvvmCross.Binding.dll",
+        "lib/net45/MvvmCross.Binding.dll.mdb",
+        "lib/netcore45/MvvmCross.Binding.dll",
+        "lib/netcore45/MvvmCross.Binding.dll.mdb",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Binding.dll",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Binding.dll.mdb",
+        "lib/wp8/MvvmCross.Binding.dll",
+        "lib/wp8/MvvmCross.Binding.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Binding.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Binding.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Binding.iOS.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Binding.iOS.dll.mdb",
+        "MvvmCross.Binding.nuspec",
+        "package/services/metadata/core-properties/efe9d37fb4a3431e8e4bff67c01fcbf8.psmdcp"
+      ]
+    },
+    "MvvmCross.Core/4.0.0-beta8": {
+      "sha512": "zlCUCUhxK0jTQynWciT01p9Ajo8k6h97w3rOa/CUWHh09BdcVtfk3W+gyqIg0r+f2ybMrq/hZBdpX73hAEMlXA==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/dotnet/MvvmCross.Core.dll",
+        "lib/MonoAndroid/MvvmCross.Core.dll",
+        "lib/MonoAndroid/MvvmCross.Droid.dll",
+        "lib/MonoAndroid/MvvmCross.Platform.Droid.dll",
+        "lib/net45/MvvmCross.Core.dll",
+        "lib/net45/MvvmCross.Wpf.dll",
+        "lib/netcore45/MvvmCross.Core.dll",
+        "lib/netcore45/MvvmCross.WindowsStore.dll",
+        "lib/netcore45/MvvmCross.WindowsStore.pri",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Core.dll",
+        "lib/portable-win81+wpa81/MvvmCross.Core.dll",
+        "lib/portable-win81+wpa81/MvvmCross.WindowsCommon.dll",
+        "lib/portable-win81+wpa81/MvvmCross.WindowsCommon.pri",
+        "lib/uap/MvvmCross.Core.dll",
+        "lib/uap/MvvmCross.WindowsUWP.dll",
+        "lib/uap/MvvmCross.WindowsUWP.pri",
+        "lib/uap/MvvmCross.WindowsUWP/Properties/MvvmCross.WindowsUWP.rd.xml",
+        "lib/win81/MvvmCross.Core.dll",
+        "lib/win81/MvvmCross.WindowsCommon.dll",
+        "lib/win81/MvvmCross.WindowsCommon.pri",
+        "lib/wp8/MvvmCross.Core.dll",
+        "lib/wp8/MvvmCross.WindowsPhone.dll",
+        "lib/wpa81/MvvmCross.Core.dll",
+        "lib/wpa81/MvvmCross.WindowsCommon.dll",
+        "lib/wpa81/MvvmCross.WindowsCommon.pri",
+        "lib/Xamarin.iOS10/MvvmCross.Core.dll",
+        "lib/Xamarin.iOS10/MvvmCross.iOS.dll",
+        "lib/Xamarin.iOS10/MvvmCross.iOS.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.iOS.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.iOS.dll.mdb",
+        "MvvmCross.Core.nuspec",
+        "package/services/metadata/core-properties/cb7300a8ca2246e6b0dba20414ae7c0b.psmdcp"
+      ]
+    },
+    "MvvmCross.Platform/4.0.0-beta8": {
+      "sha512": "UlfQhk/kPXFsOQcJAT3htNEpUrnhTPcEaSBDQN+0XXz+epCP9eM6MmbJAO4Jnlt48PQbOXfuTPYzIkQoDZc21Q==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/dotnet/MvvmCross.Localization.dll",
+        "lib/dotnet/MvvmCross.Localization.dll.mdb",
+        "lib/dotnet/MvvmCross.Platform.dll",
+        "lib/dotnet/MvvmCross.Platform.dll.mdb",
+        "lib/MonoAndroid/MvvmCross.Droid.dll",
+        "lib/MonoAndroid/MvvmCross.Localization.dll",
+        "lib/MonoAndroid/MvvmCross.Localization.dll.mdb",
+        "lib/MonoAndroid/MvvmCross.Platform.dll",
+        "lib/MonoAndroid/MvvmCross.Platform.dll.mdb",
+        "lib/MonoAndroid/MvvmCross.Platform.Droid.dll",
+        "lib/net45/MvvmCross.Localization.dll",
+        "lib/net45/MvvmCross.Localization.dll.mdb",
+        "lib/net45/MvvmCross.Platform.dll",
+        "lib/net45/MvvmCross.Platform.dll.mdb",
+        "lib/net45/MvvmCross.Wpf.dll",
+        "lib/netcore45/MvvmCross.Localization.dll",
+        "lib/netcore45/MvvmCross.Localization.dll.mdb",
+        "lib/netcore45/MvvmCross.Platform.dll",
+        "lib/netcore45/MvvmCross.Platform.dll.mdb",
+        "lib/netcore45/MvvmCross.WindowsStore.dll",
+        "lib/netcore45/MvvmCross.WindowsStore.pri",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Localization.dll",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Localization.dll.mdb",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Platform.dll",
+        "lib/portable-net45+win+wpa81+wp80/MvvmCross.Platform.dll.mdb",
+        "lib/portable-win81+wpa81/MvvmCross.Localization.dll",
+        "lib/portable-win81+wpa81/MvvmCross.Localization.dll.mdb",
+        "lib/portable-win81+wpa81/MvvmCross.Platform.dll",
+        "lib/portable-win81+wpa81/MvvmCross.Platform.dll.mdb",
+        "lib/portable-win81+wpa81/MvvmCross.WindowsCommon.dll",
+        "lib/portable-win81+wpa81/MvvmCross.WindowsCommon.pri",
+        "lib/win81/MvvmCross.Localization.dll",
+        "lib/win81/MvvmCross.Localization.dll.mdb",
+        "lib/win81/MvvmCross.Platform.dll",
+        "lib/win81/MvvmCross.Platform.dll.mdb",
+        "lib/win81/MvvmCross.WindowsCommon.dll",
+        "lib/win81/MvvmCross.WindowsCommon.pri",
+        "lib/wp8/MvvmCross.Localization.dll",
+        "lib/wp8/MvvmCross.Localization.dll.mdb",
+        "lib/wp8/MvvmCross.Platform.dll",
+        "lib/wp8/MvvmCross.Platform.dll.mdb",
+        "lib/wp8/MvvmCross.WindowsPhone.dll",
+        "lib/wpa81/MvvmCross.Localization.dll",
+        "lib/wpa81/MvvmCross.Localization.dll.mdb",
+        "lib/wpa81/MvvmCross.Platform.dll",
+        "lib/wpa81/MvvmCross.Platform.dll.mdb",
+        "lib/wpa81/MvvmCross.WindowsCommon.dll",
+        "lib/wpa81/MvvmCross.WindowsCommon.pri",
+        "lib/Xamarin.iOS10/MvvmCross.iOS.dll",
+        "lib/Xamarin.iOS10/MvvmCross.iOS.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Localization.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Localization.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.dll.mdb",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.iOS.dll",
+        "lib/Xamarin.iOS10/MvvmCross.Platform.iOS.dll.mdb",
+        "MvvmCross.Platform.nuspec",
+        "package/services/metadata/core-properties/85baa78721bf433798192abd866cd2a7.psmdcp"
       ]
     },
     "SQLite.Net-PCL/3.1.1": {
@@ -14819,6 +15204,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
+      "MvvmCross.Binding >= 4.0.0-beta8",
+      "MvvmCross.Core >= 4.0.0-beta8",
+      "MvvmCross.Platform >= 4.0.0-beta8",
       "SQLite.Net.Async-PCL >= 3.1.1",
       "SQLite.Net.Core-PCL >= 3.1.1",
       "SQLite.Net-PCL >= 3.1.1"
