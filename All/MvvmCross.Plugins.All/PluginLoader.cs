@@ -32,6 +32,7 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.JsonLocalisation.PluginLoader),
                 typeof(MvvmCross.Plugins.Location.PluginLoader),
                 typeof(MvvmCross.Plugins.Messenger.PluginLoader),
+                typeof(MvvmCross.Plugins.MethodBinding.PluginLoader),
                 typeof(MvvmCross.Plugins.Network.PluginLoader),
                 typeof(MvvmCross.Plugins.PhoneCall.PluginLoader),
                 typeof(MvvmCross.Plugins.PictureChooser.PluginLoader),

@@ -74,6 +74,10 @@
       <Project>{299C250C-50E4-4522-AADC-C31B9AAC62D3}</Project>
       <Name>MvvmCross.Plugins.Messenger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MethodBinding\MvvmCross.Plugins.MethodBinding\MvvmCross.Plugins.MethodBinding.csproj">
+      <Project>{f681045a-852f-4a2d-953d-4dd9b75a2f93}</Project>
+      <Name>MvvmCross.Plugins.MethodBinding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\PhoneCall\MvvmCross.Plugins.PhoneCall\MvvmCross.Plugins.PhoneCall.csproj">
       <Project>{97C01AFB-C43A-4B75-A456-079706A2F888}</Project>
       <Name>MvvmCross.Plugins.PhoneCall</Name>
