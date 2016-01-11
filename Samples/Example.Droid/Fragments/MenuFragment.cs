@@ -56,10 +56,16 @@ namespace Example.Droid.Fragments
             case Resource.Id.nav_viewpager:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
                 break;
+            case Resource.Id.nav_viewpager_state:
+                ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerStateViewModel));
+                break;
             case Resource.Id.nav_recyclerview:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
                 break;
-            case Resource.Id.nav_settings:
+            case Resource.Id.nav_compose_message:
+                ViewModel.ShowViewModelAndroid(typeof(ComposeMessageViewModel));
+                break;
+                case Resource.Id.nav_settings:
                 ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
                 break;
             case Resource.Id.nav_helpfeedback:

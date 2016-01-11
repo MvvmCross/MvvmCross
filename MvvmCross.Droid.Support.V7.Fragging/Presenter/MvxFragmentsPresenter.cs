@@ -32,7 +32,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
             _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
         }
 
-        public override sealed void Show(MvxViewModelRequest request)
+        public sealed override void Show(MvxViewModelRequest request)
         {
             if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType))
                 ShowFragment(request);
@@ -40,9 +40,25 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
                 ShowActivity(request);
         }
 
-        protected virtual void ShowActivity(MvxViewModelRequest request)
+        protected virtual void ShowActivity(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest = null)
         {
-            base.Show(request);
+            if (fragmentRequest == null)
+                base.Show(request);
+            else
+                Show(request, fragmentRequest);
+        }
+
+        public void Show(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest)
+        {
+            var intent = CreateIntentForRequest(request);
+            if (fragmentRequest != null)
+            {
+                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+                var requestText = converter.Serializer.SerializeObject(fragmentRequest);
+                intent.PutExtra(ViewModelRequestBundleKey, requestText);
+            }
+
+            Show(intent);
         }
 
         protected virtual void ShowFragment(MvxViewModelRequest request)
@@ -57,7 +73,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
                     _fragmentHostRegistrationSettings.GetFragmentHostViewModelType(request.ViewModelType);
 
                 var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
-                ShowActivity(fragmentHostMvxViewModelRequest);
+                ShowActivity(fragmentHostMvxViewModelRequest, request);
+                return;
             }
 
             var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociated(request.ViewModelType);
@@ -65,7 +82,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
             GetActualFragmentHost().Show(request, bundle, fragmentType, mvxFragmentAttributeAssociated);
         }
 
-        public override sealed void Close(IMvxViewModel viewModel)
+        public sealed override void Close(IMvxViewModel viewModel)
         {
             if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(viewModel.GetType()))
                 CloseFragment(viewModel);
