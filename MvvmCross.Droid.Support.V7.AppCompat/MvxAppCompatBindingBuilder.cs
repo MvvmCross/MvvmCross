@@ -1,5 +1,5 @@
-using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
+using MvvmCross.Binding.Droid;
+using MvvmCross.Binding.Droid.Binders;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

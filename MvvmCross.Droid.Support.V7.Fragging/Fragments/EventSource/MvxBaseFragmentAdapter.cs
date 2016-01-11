@@ -7,7 +7,7 @@
 
 using Android.App;
 using Android.OS;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 using Fragment = Android.Support.V4.App.Fragment;
 

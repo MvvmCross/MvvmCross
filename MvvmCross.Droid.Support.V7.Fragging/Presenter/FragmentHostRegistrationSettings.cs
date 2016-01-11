@@ -1,7 +1,7 @@
 using Android.App;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using System;
 using System.Collections.Generic;

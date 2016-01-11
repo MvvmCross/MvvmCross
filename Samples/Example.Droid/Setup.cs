@@ -1,10 +1,10 @@
 using Android.Content;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
-using Cirrious.CrossCore;
+using MvvmCross.Platform;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 

@@ -3,7 +3,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.Droid.Binders;
+using MvvmCross.Binding.Droid.Binders;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat

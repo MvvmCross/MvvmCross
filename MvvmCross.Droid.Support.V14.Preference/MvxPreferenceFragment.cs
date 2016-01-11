@@ -3,8 +3,8 @@ using Android.Support.V14.Preferences;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Android.Runtime;
 using Android.OS;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {

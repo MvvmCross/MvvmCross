@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Droid.Support.Leanback", "Cirrious.MvvmCross.Droid.Support.Leanback.csproj", "{24C19002-AD02-4B88-9E57-1C254819D30E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Droid.Support.V17.Leanback.csproj", "{24C19002-AD02-4B88-9E57-1C254819D30E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

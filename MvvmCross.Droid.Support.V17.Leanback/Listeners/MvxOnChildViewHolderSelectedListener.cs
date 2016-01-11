@@ -1,6 +1,6 @@
 using System.Windows.Input;
 using Android.Support.V17.Leanback.Widget;
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Listeners

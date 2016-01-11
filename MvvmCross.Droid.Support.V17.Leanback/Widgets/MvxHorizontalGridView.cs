@@ -12,9 +12,9 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
 using Android.Util;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 

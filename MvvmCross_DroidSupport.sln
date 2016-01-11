@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
 EndProject
@@ -17,16 +17,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V14
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj", "{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{22132440-48FD-462E-8075-DFB1D5C09827}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{22132440-48FD-462E-8075-DFB1D5C09827}"
 	ProjectSection(SolutionItems) = preProject
-		nuspec\Cirrious.MvvmCross.Droid.Support.AppCompat.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.AppCompat.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.Design.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Design.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.Fragging.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Fragging.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.Leanback.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Leanback.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.Preference.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.Preference.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.V4.nuspec
-		nuspec\Cirrious.MvvmCross.Droid.Support.V7.Preference.nuspec = nuspec\Cirrious.MvvmCross.Droid.Support.V7.Preference.nuspec
+		nuspec\MvvmCross.Droid.Support.Design.nuspec = nuspec\MvvmCross.Droid.Support.Design.nuspec
+		nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec = nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec
+		nuspec\MvvmCross.Droid.Support.V17.Leanback.nuspec = nuspec\MvvmCross.Droid.Support.V17.Leanback.nuspec
+		nuspec\MvvmCross.Droid.Support.V4.nuspec = nuspec\MvvmCross.Droid.Support.V4.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.AppCompat.nuspec = nuspec\MvvmCross.Droid.Support.V7.AppCompat.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.Fragging.nuspec = nuspec\MvvmCross.Droid.Support.V7.Fragging.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.Preference.nuspec = nuspec\MvvmCross.Droid.Support.V7.Preference.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.RecyclerView.nuspec = nuspec\MvvmCross.Droid.Support.V7.RecyclerView.nuspec
 		nuspec\pack.bat = nuspec\pack.bat
 	EndProjectSection
 EndProject
