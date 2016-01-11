@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.FullFragging.Attributes;
 
 namespace MvvmCross.Droid.FullFragging.Presenter
 {
     public interface IMvxFragmentHost
     {
-        bool Show(MvxViewModelRequest request, Bundle bundle);
+        bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute);
 
         bool Close(IMvxViewModel viewModel);
     }

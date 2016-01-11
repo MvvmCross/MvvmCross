@@ -5,86 +5,110 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.FullFragging.Presenter
 {
     public class MvxFragmentsPresenter
         : MvxAndroidViewPresenter
-        , IMvxFragmentsPresenter
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 
-        private readonly Dictionary<Type, IMvxFragmentHost> _dictionary = new Dictionary<Type, IMvxFragmentHost>();
-        private IMvxNavigationSerializer _serializer;
+        private readonly FragmentHostRegistrationSettings _fragmentHostRegistrationSettings;
+        private readonly Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
 
-        protected IMvxNavigationSerializer Serializer
+        protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
+
+        public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
-            get
+            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
+            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
+        }
+
+        public sealed override void Show(MvxViewModelRequest request)
+        {
+            if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType))
+                ShowFragment(request);
+            else
+                ShowActivity(request);
+        }
+
+        protected virtual void ShowActivity(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest = null)
+        {
+            if (fragmentRequest == null)
+                base.Show(request);
+            else
+                Show(request, fragmentRequest);
+        }
+
+        public void Show(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest)
+        {
+            var intent = CreateIntentForRequest(request);
+            if (fragmentRequest != null)
             {
-                if (_serializer != null)
-                    return _serializer;
-
-                _serializer = Mvx.Resolve<IMvxNavigationSerializer>();
-                return _serializer;
-            }
-        }
-
-        /// <summary>
-        /// Register your ViewModel to be presented at a IMvxFragmentHost. Backingstore for this is a
-        /// Dictionary, hence you can only have a ViewModel registered at one IMvxFragmentHost at a time.
-        /// Just call this method whenever you need to change the host.
-        /// </summary>
-        /// <typeparam name="TViewModel">Type of the ViewModel to present</typeparam>
-        /// <param name="host">Which IMvxFragmentHost (Activity) to present it at</param>
-        public void RegisterViewModelAtHost<TViewModel>(IMvxFragmentHost host)
-            where TViewModel : IMvxViewModel
-        {
-            if (host == null)
-            {
-                Mvx.Warning("You passed a null IMvxFragmentHost, removing the registration instead");
-                UnRegisterViewModelAtHost<TViewModel>();
+                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+                var requestText = converter.Serializer.SerializeObject(fragmentRequest);
+                intent.PutExtra(ViewModelRequestBundleKey, requestText);
             }
 
-            _dictionary[typeof(TViewModel)] = host;
+            Show(intent);
         }
 
-        public void UnRegisterViewModelAtHost<TViewModel>()
-            where TViewModel : IMvxViewModel
-        {
-            _dictionary.Remove(typeof(TViewModel));
-        }
-
-        public override void Show(MvxViewModelRequest request)
+        protected virtual void ShowFragment(MvxViewModelRequest request)
         {
             var bundle = new Bundle();
             var serializedRequest = Serializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-            IMvxFragmentHost host;
-            if (_dictionary.TryGetValue(request.ViewModelType, out host))
+            if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
             {
-                if (host.Show(request, bundle))
-                    return;
+                Type newFragmentHostViewModelType =
+                    _fragmentHostRegistrationSettings.GetFragmentHostViewModelType(request.ViewModelType);
+
+                var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
+                ShowActivity(fragmentHostMvxViewModelRequest, request);
+                return;
             }
 
-            base.Show(request);
+            var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociated(request.ViewModelType);
+            var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
+            GetActualFragmentHost().Show(request, bundle, fragmentType, mvxFragmentAttributeAssociated);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public sealed override void Close(IMvxViewModel viewModel)
         {
-            IMvxFragmentHost host;
-            if (_dictionary.TryGetValue(viewModel.GetType(), out host))
-            {
-                if (host.Close(viewModel))
-                    return;
-            }
+            if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(viewModel.GetType()))
+                CloseFragment(viewModel);
+            else
+                CloseActivity(viewModel);
+        }
+
+        protected virtual void CloseActivity(IMvxViewModel viewModel)
+        {
             base.Close(viewModel);
+        }
+
+        protected virtual void CloseFragment(IMvxViewModel viewModel)
+        {
+            GetActualFragmentHost().Close(viewModel);
+        }
+
+        protected IMvxFragmentHost GetActualFragmentHost()
+        {
+            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var fragmentHost = currentActivity as IMvxFragmentHost;
+
+            if (fragmentHost == null)
+                throw new InvalidOperationException($"You are trying to close ViewModel associated with Fragment when currently top Activity ({currentActivity.GetType()} does not implement IMvxFragmentHost interface!");
+
+            return fragmentHost;
         }
     }
 }

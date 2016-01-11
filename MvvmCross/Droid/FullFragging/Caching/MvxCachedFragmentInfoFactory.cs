@@ -12,9 +12,10 @@ namespace MvvmCross.Droid.FullFragging.Caching
         /// <param name="tag"></param>
         /// <param name="fragmentType"></param>
         /// <param name="viewModelType"></param>
+        /// <param name="cacheFragment"></param>
         /// <param name="addToBackstack"></param>
         /// <returns></returns>
-        public IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
+        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false)
         {
             if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
                 throw new InvalidOperationException($"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
@@ -22,27 +23,29 @@ namespace MvvmCross.Droid.FullFragging.Caching
             if (!typeof(IMvxViewModel).IsAssignableFrom(viewModelType))
                 throw new InvalidOperationException($"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
 
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
+            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, cacheFragment, addToBackstack);
         }
 
-        public SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
+        public virtual SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
         {
             return new SerializableMvxCachedFragmentInfo()
             {
                 Tag = objectToSerialize.Tag,
                 FragmentType = objectToSerialize.FragmentType,
                 ViewModelType = objectToSerialize.ViewModelType,
+                CacheFragment = objectToSerialize.CacheFragment,
                 ContentId = objectToSerialize.ContentId,
                 AddToBackStack = objectToSerialize.AddToBackStack
             };
         }
 
-        public IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(
+        public virtual IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(
             SerializableMvxCachedFragmentInfo fromSerializableMvxCachedFragmentInfo)
         {
             return new MvxCachedFragmentInfo(fromSerializableMvxCachedFragmentInfo.Tag,
                            fromSerializableMvxCachedFragmentInfo.FragmentType,
                            fromSerializableMvxCachedFragmentInfo.ViewModelType,
+                           fromSerializableMvxCachedFragmentInfo.CacheFragment,
                            fromSerializableMvxCachedFragmentInfo.AddToBackStack)
             {
                 ContentId = fromSerializableMvxCachedFragmentInfo.ContentId

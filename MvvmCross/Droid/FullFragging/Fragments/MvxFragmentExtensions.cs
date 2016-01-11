@@ -12,6 +12,7 @@ using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Droid.FullFragging.Attributes;
 using MvvmCross.Droid.FullFragging.Caching;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Platform;
@@ -32,18 +33,19 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             }
         }
 
-        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle,
-            MvxViewModelRequest request = null)
+        public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
         {
             if (fragmentView.ViewModel != null)
             {
-                Mvx.Trace("Fragment {0} already has a ViewModel, skipping ViewModel rehydration",
-                    fragmentView.GetType().ToString());
+                //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
+                //until then, we're going to re-run the viewmodel lifecycle here.
+                RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
+
                 return;
             }
 
-            var view = fragmentView as IMvxView;
             var viewModelType = fragmentView.FindAssociatedViewModelType();
+            var view = fragmentView as IMvxView;
 
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
@@ -59,10 +61,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
             if (viewModelType == null)
             {
-                if (!type.IsCacheableFragmentAttribute())
+                if (!type.HasMvxFragmentAttribute())
                     throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
 
-                var cacheableFragmentAttribute = type.GetCacheableFragmentAttribute();
+                var cacheableFragmentAttribute = type.GetMvxFragmentAttribute();
                 if (cacheableFragmentAttribute.ViewModelType == null)
                     throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
 
@@ -78,6 +80,28 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             if (activity == null)
                 throw new MvxException("ToFragment called on an IMvxFragmentView which is not an Android Fragment: {0}", fragmentView);
             return activity;
+        }
+
+        private static void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle savedState,
+            MvxViewModelRequest request)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var parameterValues = new MvxBundle(request.ParameterValues);
+                    viewModel.CallBundleMethods("Init", parameterValues);
+                }
+                if (savedState != null)
+                {
+                    viewModel.CallBundleMethods("ReloadState", savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
+            }
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
