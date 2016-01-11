@@ -6,43 +6,18 @@ using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities.Caching
 {
-    internal class MainActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
+    internal class MessagesActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
     {
         private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary
             <string, CustomFragmentInfo>
         {
             {
-                typeof (MenuViewModel).ToString(),
-                new CustomFragmentInfo(typeof (MenuViewModel).Name,
-                                       typeof (MenuFragment),
+                typeof (ComposeMessageViewModel).ToString(),
+                new CustomFragmentInfo(typeof (ComposeMessageViewModel).Name,
+                                       typeof (MessageComposeFragment),
                                        typeof (MenuViewModel))
             },
-            {
-                typeof (HomeViewModel).ToString(),
-                new CustomFragmentInfo(typeof (HomeViewModel).Name, typeof (HomeFragment), typeof (HomeViewModel),
-                                       isRoot: true)
-            },
-            {
-                typeof (ExampleViewPagerViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleViewPagerViewModel).Name, typeof (ExampleViewPagerFragment),
-                                       typeof (ExampleViewPagerViewModel), isRoot: true)
-            },
-            {
-                typeof (ExampleViewPagerStateViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleViewPagerStateViewModel).Name,
-                                       typeof (ExampleViewPagerStateFragment),
-                                       typeof (ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
-            },
-            {
-                typeof (ExampleRecyclerViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
-                                       typeof (ExampleRecyclerViewModel), isRoot: true)
-            },
-            {
-                typeof (SettingsViewModel).ToString(),
-                new CustomFragmentInfo(typeof (SettingsViewModel).Name, typeof (SettingsFragment),
-                                       typeof (SettingsViewModel), isRoot: true)
-            }
+            
         };
 
         public Dictionary<string, CustomFragmentInfo> GetFragmentsRegistrationData()
@@ -92,7 +67,7 @@ namespace Example.Droid.Activities.Caching
         {
             public SerializableCustomFragmentInfo()
             {
-                
+
             }
 
             public SerializableCustomFragmentInfo(SerializableMvxCachedFragmentInfo baseFragmentInfo)
