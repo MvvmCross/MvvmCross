@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public interface IMvxJsonDictionaryTextLoader
     {

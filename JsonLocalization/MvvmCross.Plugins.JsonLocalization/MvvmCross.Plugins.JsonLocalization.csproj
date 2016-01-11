@@ -6,8 +6,8 @@
     <ProjectGuid>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Plugins.JsonLocalisation</RootNamespace>
-    <AssemblyName>MvvmCross.Plugins.JsonLocalisation</AssemblyName>
+    <RootNamespace>MvvmCross.Plugins.JsonLocalization</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.JsonLocalization</AssemblyName>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

@@ -23,5 +23,5 @@ For a text file 'Hello.txt' bundled in a folder 'Foo', this can be called as:
 
 Samples using the ResourceLoader plugin include:
 
-- Babel - JsonLocalisation - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/Babel
+- Babel - JsonLocalization - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/Babel
 - Conference - the sessions are loaded from Json resources - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20CirriousConference

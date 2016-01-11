@@ -29,7 +29,7 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.Email.PluginLoader),
                 typeof(MvvmCross.Plugins.File.PluginLoader),
                 typeof(MvvmCross.Plugins.Json.PluginLoader),
-                typeof(MvvmCross.Plugins.JsonLocalisation.PluginLoader),
+                typeof(MvvmCross.Plugins.JsonLocalization.PluginLoader),
                 typeof(MvvmCross.Plugins.Location.PluginLoader),
                 typeof(MvvmCross.Plugins.Messenger.PluginLoader),
                 typeof(MvvmCross.Plugins.MethodBinding.PluginLoader),

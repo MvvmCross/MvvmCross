@@ -11,7 +11,7 @@ using MvvmCross.Localization;
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder
@@ -44,29 +44,29 @@ namespace MvvmCross.Plugins.JsonLocalisation
 
         public IMvxTextProvider TextProvider => _textProvider;
 
-        public void LoadResources(string whichLocalisationFolder)
+        public void LoadResources(string whichLocalizationFolder)
         {
             foreach (var kvp in ResourceFiles)
             {
                 try
                 {
                     _textLoader.LoadJsonFromResource(_generalNamespaceKey, kvp.Key,
-                                                      GetResourceFilePath(whichLocalisationFolder, kvp.Value));
+                                                      GetResourceFilePath(whichLocalizationFolder, kvp.Value));
                 }
                 catch (Exception exception)
                 {
                     MvxTrace.Warning("Language file could not be loaded for {0}.{1} - {2}",
-                                   whichLocalisationFolder, kvp.Key, exception.ToLongString());
+                                   whichLocalizationFolder, kvp.Key, exception.ToLongString());
                 }
             }
         }
 
-        protected virtual string GetResourceFilePath(string whichLocalisationFolder, string whichFile)
+        protected virtual string GetResourceFilePath(string whichLocalizationFolder, string whichFile)
         {
-            if (string.IsNullOrEmpty(whichLocalisationFolder))
+            if (string.IsNullOrEmpty(whichLocalizationFolder))
                 return $"{_rootFolderForResources}/{whichFile}.json";
             else
-                return $"{_rootFolderForResources}/{whichLocalisationFolder}/{whichFile}.json";
+                return $"{_rootFolderForResources}/{whichLocalizationFolder}/{whichFile}.json";
         }
     }
 }

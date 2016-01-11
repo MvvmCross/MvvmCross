@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider

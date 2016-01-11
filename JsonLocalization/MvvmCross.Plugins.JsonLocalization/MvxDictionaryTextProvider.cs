@@ -8,7 +8,7 @@
 using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public class MvxDictionaryTextProvider : MvxTextProvider
     {

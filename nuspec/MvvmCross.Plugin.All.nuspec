@@ -24,7 +24,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -49,7 +49,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -74,7 +74,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -99,7 +99,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -124,7 +124,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -149,7 +149,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -174,7 +174,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -199,7 +199,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -224,7 +224,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />
@@ -249,7 +249,7 @@ This package contains all plugins for MvvmCross</description>
 				<dependency id="MvvmCross.Plugin.Email" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugin.JsonLocalisation" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Location" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.Messenger" version="4.0.0-beta8" />
 				<dependency id="MvvmCross.Plugin.MethodBinding" version="4.0.0-beta8" />

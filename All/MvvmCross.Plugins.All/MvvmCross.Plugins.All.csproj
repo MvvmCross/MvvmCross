@@ -58,9 +58,9 @@
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>
       <Name>MvvmCross.Plugins.File</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\JsonLocalisation\MvvmCross.Plugins.JsonLocalisation\MvvmCross.Plugins.JsonLocalisation.csproj">
+    <ProjectReference Include="..\..\JsonLocalization\MvvmCross.Plugins.JsonLocalization\MvvmCross.Plugins.JsonLocalization.csproj">
       <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
-      <Name>MvvmCross.Plugins.JsonLocalisation</Name>
+      <Name>MvvmCross.Plugins.JsonLocalization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Json\MvvmCross.Plugins.Json\MvvmCross.Plugins.Json.csproj">
       <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>

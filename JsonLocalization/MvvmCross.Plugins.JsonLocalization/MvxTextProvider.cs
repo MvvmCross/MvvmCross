@@ -8,7 +8,7 @@
 using MvvmCross.Localization;
 using MvvmCross.Plugins.ResourceLoader;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public abstract class MvxTextProvider :
         MvxResourceProvider, IMvxTextProvider

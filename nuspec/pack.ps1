@@ -19,7 +19,7 @@ nuget pack MvvmCross.Plugin.Email.nuspec -Symbols
 nuget pack MvvmCross.Plugin.FieldBinding.nuspec -Symbols
 nuget pack MvvmCross.Plugin.File.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Json.nuspec -Symbols
-nuget pack MvvmCross.Plugin.JsonLocalisation.nuspec -Symbols
+nuget pack MvvmCross.Plugin.JsonLocalization.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Location.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Messenger.nuspec -Symbols
 nuget pack MvvmCross.Plugin.MethodBinding.nuspec -Symbols

@@ -11,11 +11,11 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("MvvmCross.Plugins.JsonLocalisation")]
+[assembly: AssemblyTitle("MvvmCross.Plugins.JsonLocalization")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cirrious")]
-[assembly: AssemblyProduct("MvvmCross.Plugins.JsonLocalisation")]
+[assembly: AssemblyProduct("MvvmCross.Plugins.JsonLocalization")]
 [assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System.IO;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public class MvxContentJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider

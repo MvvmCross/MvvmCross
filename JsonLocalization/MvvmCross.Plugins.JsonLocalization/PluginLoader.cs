@@ -7,7 +7,7 @@
 
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.JsonLocalisation
+namespace MvvmCross.Plugins.JsonLocalization
 {
     public class PluginLoader
         : IMvxPluginLoader
