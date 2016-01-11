@@ -4,6 +4,7 @@ using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
+using Cirrious.CrossCore;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
