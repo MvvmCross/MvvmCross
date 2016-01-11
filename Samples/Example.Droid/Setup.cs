@@ -36,7 +36,8 @@ namespace Example.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-			return new MvxFragmentsPresenter(AndroidViewAssemblies);
+            //This is very important to override. The default view presenter does not know how to show fragments!
+            return new MvxFragmentsPresenter(AndroidViewAssemblies);
         }
 
         protected override IMvxTrace CreateDebugTrace()
