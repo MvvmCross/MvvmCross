@@ -13,7 +13,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
     /// </summary>
     public interface IMvxCachedFragmentInfoFactory
     {
-        IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType,
+        IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true,
             bool addToBackstack = false);
 
         SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize);

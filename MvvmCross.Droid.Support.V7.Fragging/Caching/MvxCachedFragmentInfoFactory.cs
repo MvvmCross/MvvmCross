@@ -12,9 +12,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         /// <param name="tag"></param>
         /// <param name="fragmentType"></param>
         /// <param name="viewModelType"></param>
+        /// <param name="cacheFragment"></param>
         /// <param name="addToBackstack"></param>
         /// <returns></returns>
-        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool addToBackstack = false)
+        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false)
         {
             if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
                 throw new InvalidOperationException($"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
@@ -22,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             if (!typeof(IMvxViewModel).IsAssignableFrom(viewModelType))
                 throw new InvalidOperationException($"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
 
-            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, addToBackstack);
+            return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, cacheFragment, addToBackstack);
         }
 
         public virtual SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
@@ -32,6 +33,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
                 Tag = objectToSerialize.Tag,
                 FragmentType = objectToSerialize.FragmentType,
                 ViewModelType = objectToSerialize.ViewModelType,
+                CacheFragment = objectToSerialize.CacheFragment,
                 ContentId = objectToSerialize.ContentId,
                 AddToBackStack = objectToSerialize.AddToBackStack
             };
@@ -43,6 +45,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return new MvxCachedFragmentInfo(fromSerializableMvxCachedFragmentInfo.Tag,
                            fromSerializableMvxCachedFragmentInfo.FragmentType,
                            fromSerializableMvxCachedFragmentInfo.ViewModelType,
+                           fromSerializableMvxCachedFragmentInfo.CacheFragment,
                            fromSerializableMvxCachedFragmentInfo.AddToBackStack)
             {
                 ContentId = fromSerializableMvxCachedFragmentInfo.ContentId

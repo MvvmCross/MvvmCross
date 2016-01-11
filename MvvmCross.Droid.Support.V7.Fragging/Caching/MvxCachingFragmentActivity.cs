@@ -27,6 +27,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
     public class MvxCachingFragmentActivity
         : MvxFragmentActivity, IFragmentCacheableActivity
     {
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private IFragmentCacheConfiguration _fragmentCacheConfiguration;
 
@@ -149,6 +150,11 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return typesForKeys;
         }
 
+        protected virtual void ReplaceFragment(FragmentTransaction ft, IMvxCachedFragmentInfo fragInfo)
+        {
+            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+        }
+
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
@@ -174,7 +180,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         /// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
         /// <param name="forceAddToBackStack">If you want to force add the fragment to the backstack so on backbutton it will go back to it. Note: This will override IMvxCachedFragmentInfo.AddToBackStack configuration.</param>
         /// <param name="forceReplaceFragment">Force replace a fragment with the same tag at the same contentid</param>
-        protected void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
+        protected virtual void ShowFragment(string tag, int contentId, Bundle bundle = null, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
         {
             IMvxCachedFragmentInfo fragInfo;
             FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
@@ -206,7 +212,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
                 OnFragmentCreated(fragInfo, ft);
             }
 
-            ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+            ReplaceFragment(ft, fragInfo);
 
             if (fragInfo.AddToBackStack || forceAddToBackStack)
             {
@@ -280,6 +286,21 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             // ReSharper disable once PossibleNullReferenceException
             // Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
             return mvxFragmentView.UniqueImmutableCacheTag;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            var fragmentRequestText = Intent.Extras?.GetString(ViewModelRequestBundleKey);
+            if (fragmentRequestText == null)
+                return;
+
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+
+            var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
+            mvxAndroidViewPresenter.Show(fragmentRequest);
         }
 
         /// <summary>

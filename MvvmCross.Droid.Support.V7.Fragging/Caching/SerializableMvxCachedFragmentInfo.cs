@@ -14,6 +14,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             Tag = serializableMvxCachedFragmentInfoToClone.Tag;
             FragmentType = serializableMvxCachedFragmentInfoToClone.FragmentType;
             ViewModelType = serializableMvxCachedFragmentInfoToClone.ViewModelType;
+            CacheFragment = serializableMvxCachedFragmentInfoToClone.CacheFragment;
             ContentId = serializableMvxCachedFragmentInfoToClone.ContentId;
             AddToBackStack = serializableMvxCachedFragmentInfoToClone.AddToBackStack;
         }
@@ -21,6 +22,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
         public string Tag { get; set; }
         public Type FragmentType { get; set; }
         public Type ViewModelType { get; set; }
+        public bool CacheFragment { get; set; }
         public int ContentId { get; set; }
         public bool AddToBackStack { get; set; }
     }

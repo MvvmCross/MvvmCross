@@ -90,8 +90,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\Caching\MessagesActivityFragmentCacheInfoFactory.cs" />
+    <Compile Include="Activities\Caching\MessagesFragmentCacheConfigurationCustomFragmentInfo.cs" />
+    <Compile Include="Activities\MessagesActivity.cs" />
     <Compile Include="Activities\Caching\FragmentCacheConfigurationCustomFragmentInfo.cs" />
     <Compile Include="Activities\Caching\MainActivityFragmentCacheInfoFactory.cs" />
+    <Compile Include="Fragments\MessageComposeFragment.cs" />
+    <Compile Include="Fragments\BaseStateFragment.cs" />
+    <Compile Include="Fragments\ExampleViewPagerStateFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DebugTrace.cs" />
@@ -115,14 +121,31 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\fragment_settings.axml" />
-    <AndroidResource Include="Resources\layout\activity_login.axml" />
+    <AndroidResource Include="Resources\layout\activity_login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\layout\splash_screen.axml" />
     <AndroidResource Include="Resources\layout\toolbar_actionbar.axml" />
     <AndroidResource Include="Resources\drawable\MvvmCrossLogo.png" />
-    <AndroidResource Include="Resources\layout\fragment_home.axml" />
-    <AndroidResource Include="Resources\layout\fragment_example_viewpager.axml" />
-    <AndroidResource Include="Resources\layout\fragment_example_recyclerview.axml" />
+    <AndroidResource Include="Resources\layout\fragment_home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_example_viewpager.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_example_recyclerview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_example_viewpager_state.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_compose_message.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_messages.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -134,8 +157,12 @@
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
-    <AndroidResource Include="Resources\layout\activity_main.axml" />
-    <AndroidResource Include="Resources\layout\fragment_navigation.axml" />
+    <AndroidResource Include="Resources\layout\activity_main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_navigation.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_navigation_header.axml" />
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
     <AndroidResource Include="Resources\layout\fragment_recyclerview.axml" />
