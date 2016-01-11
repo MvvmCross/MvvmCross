@@ -14,7 +14,7 @@ namespace MvvmCross.Droid.Support.V4
 {
     //http://speakman.net.nz/blog/2014/02/20/a-bug-in-and-a-fix-for-the-way-fragmentstatepageradapter-handles-fragment-restoration/
     //https://github.com/adamsp/FragmentStatePagerIssueExample/blob/master/app/src/main/java/com/example/fragmentstatepagerissueexample/app/FixedFragmentStatePagerAdapter.java
-    public abstract class FixedFragmentStatePagerAdapter : PagerAdapter
+	public abstract class MvxFragmentPagerAdapter2 : PagerAdapter
     {
         private Fragment _currentPrimaryItem;
         private FragmentTransaction _curTransaction;
@@ -23,12 +23,12 @@ namespace MvvmCross.Droid.Support.V4
         private List<string> _savedFragmentTags = new List<string>();
         private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
-        protected FixedFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+		protected MvxFragmentPagerAdapter2(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-        protected FixedFragmentStatePagerAdapter(FragmentManager fragmentManager)
+		protected MvxFragmentPagerAdapter2(FragmentManager fragmentManager)
         {
             _fragmentManager = fragmentManager;
         }
