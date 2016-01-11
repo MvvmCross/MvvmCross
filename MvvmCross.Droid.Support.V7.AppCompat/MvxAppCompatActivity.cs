@@ -7,6 +7,8 @@
 
 using Android.Content;
 using Android.Runtime;
+using Android.Util;
+using Android.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.BindingContext;
 using Cirrious.MvvmCross.Binding.Droid.Views;
@@ -69,6 +71,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override void AttachBaseContext(Context @base)
         {
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
         }
     }
 
