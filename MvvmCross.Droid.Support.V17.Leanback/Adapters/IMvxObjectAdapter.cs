@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Cirrious.MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {

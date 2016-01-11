@@ -6,7 +6,7 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
-using Cirrious.CrossCore;
+using MvvmCross.Platform;
 using Java.Lang;
 using Object = Java.Lang.Object;
 

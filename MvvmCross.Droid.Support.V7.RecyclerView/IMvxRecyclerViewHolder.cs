@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

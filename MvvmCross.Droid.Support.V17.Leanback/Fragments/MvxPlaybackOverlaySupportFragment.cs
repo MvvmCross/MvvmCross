@@ -1,7 +1,7 @@
 using Android.OS;
 using Android.Runtime;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using System;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;

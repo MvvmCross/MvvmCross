@@ -7,10 +7,10 @@
 
 using Android.OS;
 using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

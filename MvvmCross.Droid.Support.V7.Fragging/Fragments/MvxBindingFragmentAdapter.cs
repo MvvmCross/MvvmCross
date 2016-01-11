@@ -7,13 +7,13 @@
 
 using Android.OS;
 using Android.Support.V4.App;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Core;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;

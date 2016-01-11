@@ -9,7 +9,7 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 using Fragment = Android.Support.V4.App.Fragment;
 

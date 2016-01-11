@@ -12,8 +12,8 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.Views;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

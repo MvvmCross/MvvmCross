@@ -3,7 +3,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Android.Views;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Support.V7.Fragging;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;

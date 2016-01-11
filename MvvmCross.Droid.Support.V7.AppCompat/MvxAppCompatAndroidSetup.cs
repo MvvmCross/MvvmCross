@@ -1,7 +1,7 @@
 using Android.Content;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
-using Cirrious.MvvmCross.Binding.Droid;
-using Cirrious.MvvmCross.Droid.Platform;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Droid;
+using MvvmCross.Droid.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

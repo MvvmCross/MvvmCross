@@ -7,7 +7,7 @@
 
 using Android.App;
 using Android.OS;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource

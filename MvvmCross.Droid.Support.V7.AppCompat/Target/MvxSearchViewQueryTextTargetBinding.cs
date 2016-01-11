@@ -1,6 +1,6 @@
 using Android.Support.V7.Widget;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Droid.Target;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
 using System;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target

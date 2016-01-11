@@ -1,7 +1,7 @@
 using Android.Runtime;
-using Cirrious.MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using System;
 
 namespace MvvmCross.Droid.Support.V7.Preference

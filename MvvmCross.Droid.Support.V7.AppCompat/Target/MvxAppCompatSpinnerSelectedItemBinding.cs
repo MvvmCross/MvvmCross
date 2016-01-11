@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Widget;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using System;
 
