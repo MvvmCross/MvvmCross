@@ -10,11 +10,12 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
+using MvvmCross.Droid.FullFragging.Attributes;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
@@ -31,21 +32,14 @@ namespace MvvmCross.Droid.FullFragging.Fragments
                 throw new ArgumentException("eventSource must be an IMvxFragmentView");
         }
 
-        protected override void HandlePauseCalled(object sender, EventArgs e)
-        {
-            base.HandlePauseCalled(sender, e);
-            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
-                return;
-
-            FragmentView.RegisterFragmentViewToCacheIfNeeded();
-        }
-
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
+
+            FragmentView.RegisterFragmentViewToCacheIfNeeded();
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
@@ -100,7 +94,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsCacheableFragmentAttribute())
+            if (!FragmentView.GetType().IsFragmentCacheable())
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
