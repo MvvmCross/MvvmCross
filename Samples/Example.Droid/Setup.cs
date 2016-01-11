@@ -34,9 +34,11 @@ namespace Example.Droid
 			typeof(MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView).Assembly
 		};
 
+        /// <summary>
+		/// This is very important to override. The default view presenter does not know how to show fragments!
+        /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            //This is very important to override. The default view presenter does not know how to show fragments!
             return new MvxFragmentsPresenter(AndroidViewAssemblies);
         }
 
