@@ -1,18 +1,16 @@
 using Android.Content;
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.Droid.Views;
 using Cirrious.MvvmCross.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Example.Droid.Fragments;
+using Cirrious.CrossCore;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace Example.Droid
 {
-    public class Setup : MvxAndroidSetup
+    public class Setup : MvxAppCompatAndroidSetup 
     {
         public Setup(Context applicationContext)
             : base(applicationContext)
