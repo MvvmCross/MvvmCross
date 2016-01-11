@@ -14,17 +14,17 @@ using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
-    public class MvxFixedFragmentStatePagerAdapter
-        : FixedFragmentStatePagerAdapter
+	public class MvxFragmentStatePagerAdapter2
+		: MvxFragmentPagerAdapter2
     {
         private readonly Context _context;
 
-        protected MvxFixedFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+		protected MvxFragmentStatePagerAdapter2(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-        public MvxFixedFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
+		public MvxFragmentStatePagerAdapter2(Context context, FragmentManager fragmentManager,
                                                  IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)
         {

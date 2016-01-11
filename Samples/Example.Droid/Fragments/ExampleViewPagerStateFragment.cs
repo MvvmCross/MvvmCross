@@ -23,20 +23,20 @@ namespace Example.Droid.Fragments
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager != null)
             {
-                var fragments = new List<MvxFixedFragmentStatePagerAdapter.FragmentInfo>
+				var fragments = new List<MvxFragmentStatePagerAdapter2.FragmentInfo>
                 {
-                    new MvxFixedFragmentStatePagerAdapter.FragmentInfo("RecyclerView 1", typeof (RecyclerViewFragment),
+					new MvxFragmentStatePagerAdapter2.FragmentInfo("RecyclerView 1", typeof (RecyclerViewFragment),
                                                                        typeof (RecyclerViewModel)),
-                    new MvxFixedFragmentStatePagerAdapter.FragmentInfo("RecyclerView 2", typeof (RecyclerViewFragment),
+					new MvxFragmentStatePagerAdapter2.FragmentInfo("RecyclerView 2", typeof (RecyclerViewFragment),
                                                                        typeof (RecyclerViewModel)),
-                    new MvxFixedFragmentStatePagerAdapter.FragmentInfo("RecyclerView 3", typeof (RecyclerViewFragment),
+					new MvxFragmentStatePagerAdapter2.FragmentInfo("RecyclerView 3", typeof (RecyclerViewFragment),
                                                                        typeof (RecyclerViewModel)),
-                    new MvxFixedFragmentStatePagerAdapter.FragmentInfo("RecyclerView 4", typeof (RecyclerViewFragment),
+					new MvxFragmentStatePagerAdapter2.FragmentInfo("RecyclerView 4", typeof (RecyclerViewFragment),
                                                                        typeof (RecyclerViewModel)),
-                    new MvxFixedFragmentStatePagerAdapter.FragmentInfo("RecyclerView 5", typeof (RecyclerViewFragment),
+					new MvxFragmentStatePagerAdapter2.FragmentInfo("RecyclerView 5", typeof (RecyclerViewFragment),
                                                                        typeof (RecyclerViewModel))
                 };
-                viewPager.Adapter = new MvxFixedFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
+				viewPager.Adapter = new MvxFragmentStatePagerAdapter2(Activity, ChildFragmentManager, fragments);
             }
 
             var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabs);
