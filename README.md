@@ -2,7 +2,10 @@
 
 MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for [Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms) and the [Android support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport). Lots of [plugins](https://github.com/MvvmCross/MvvmCross-Plugins) are available as well.
 
-See the official [MvvmCross blog](http://mvvmcross.com/) for the latest news!
+## Documentation & blog
+
+* See our [official website](http://www.mvvmcross.com/docs) for an extensive set of documentation!
+* To stay up-to-date with the latest news go to the [MvvmCross blog](http://www.mvvmcross.com/blog)!
 
 ### Get started
 
