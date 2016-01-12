@@ -17,43 +17,43 @@ This package contains the 'Json' plugin for MvvmCross</description>
 		<dependencies>
 			<group targetFramework ="net">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="win">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="wp">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="wpa">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="MonoAndroid">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="Xamarin.iOS10">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="uap">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 			<group targetFramework ="dotnet">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="Newtonsoft.Json" version="8.0.1" />
+				<dependency id="Newtonsoft.Json" version="8.0.2" />
 			</group>
 		</dependencies>
 	</metadata>
