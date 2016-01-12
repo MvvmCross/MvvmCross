@@ -10,7 +10,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace Example.Droid
 {
-    public class Setup : MvxAppCompatAndroidSetup 
+    public class Setup : MvxAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)

@@ -78,10 +78,8 @@
   <ItemGroup>
     <Compile Include="MvxActionBarDrawerToggle.cs" />
     <Compile Include="MvxAppCompatActivity.cs" />
-    <Compile Include="MvxAppCompatAndroidSetup.cs" />
-    <Compile Include="MvxAppCompatBindingBuilder.cs" />
+    <Compile Include="MvxAppCompatActivityHelper.cs" />
     <Compile Include="MvxAppCompatSetupHelper.cs" />
-    <Compile Include="MvxAppCompatViewFactory.cs" />
     <Compile Include="MvxEventSourceAppCompatActivity.cs" />
     <Compile Include="MvxFragmentCompatActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

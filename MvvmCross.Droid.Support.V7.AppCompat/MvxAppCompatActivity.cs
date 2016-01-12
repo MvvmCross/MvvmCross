@@ -70,6 +70,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
+
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
     }
 
     public abstract class MvxAppCompatActivity<TViewModel>
