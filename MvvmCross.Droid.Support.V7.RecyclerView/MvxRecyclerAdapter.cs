@@ -10,14 +10,14 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
 using Android.Views;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.CrossCore.WeakSubscription;
-using Cirrious.MvvmCross.Binding;
-using Cirrious.MvvmCross.Binding.Attributes;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.ExtensionMethods;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

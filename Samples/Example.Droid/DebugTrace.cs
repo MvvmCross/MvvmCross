@@ -1,4 +1,4 @@
-using Cirrious.CrossCore.Platform;
+using MvvmCross.Platform.Platform;
 using System;
 using System.Diagnostics;
 

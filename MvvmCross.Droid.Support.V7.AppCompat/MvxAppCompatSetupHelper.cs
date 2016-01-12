@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using SearchView = Android.Support.V7.Widget.SearchView;

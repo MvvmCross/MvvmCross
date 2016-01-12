@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using System;
 

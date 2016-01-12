@@ -8,8 +8,8 @@
 using System;
 using System.Windows.Input;
 using Android.Views;
-using Cirrious.MvvmCross.Binding.BindingContext;
-using Cirrious.MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

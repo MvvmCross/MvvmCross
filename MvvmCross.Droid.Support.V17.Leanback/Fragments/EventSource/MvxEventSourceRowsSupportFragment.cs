@@ -2,7 +2,7 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Cirrious.CrossCore.Core;
+using MvvmCross.Platform.Core;
 using System;
 using Android.Support.V17.Leanback.App;
 using MvvmCross.Droid.Support.V7.Fragging;

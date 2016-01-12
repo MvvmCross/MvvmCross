@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Support.V4.App;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.Fragging

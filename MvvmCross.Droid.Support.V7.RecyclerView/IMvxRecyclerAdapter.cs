@@ -7,7 +7,7 @@
 
 using System.Collections;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

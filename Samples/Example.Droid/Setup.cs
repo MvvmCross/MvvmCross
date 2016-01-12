@@ -1,13 +1,11 @@
 using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Example.Droid.Fragments;
+using MvvmCross.Platform;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace Example.Droid
