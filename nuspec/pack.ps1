@@ -12,6 +12,7 @@ del *.nupkg
 nuget pack MvvmCross.Binding.nuspec -Symbols
 nuget pack MvvmCross.Core.nuspec -Symbols
 nuget pack MvvmCross.Platform.nuspec -Symbols
+nuget pack MvvmCross.Console.Platform.nuspec -Symbols
 # note no -Symbols
 nuget pack MvvmCross.StarterPack.nuspec
 nuget pack MvvmCross.Tests.nuspec -Symbols
