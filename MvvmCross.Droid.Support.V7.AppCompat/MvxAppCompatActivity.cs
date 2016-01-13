@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
 using Android.Runtime;
+using Android.Util;
+using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using System;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
