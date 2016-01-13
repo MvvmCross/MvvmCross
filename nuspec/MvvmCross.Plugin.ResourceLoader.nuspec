@@ -32,11 +32,11 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</description>
 			</group>
 			<group targetFramework ="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugins.File" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="Xamarin.iOS10">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Plugins.File" version="4.0.0-beta7" />
+				<dependency id="MvvmCross.Plugin.File" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework ="portable-net45+win8+wpa81+wp8">
 				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
