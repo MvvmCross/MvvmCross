@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.Plugin.JsonLocalisation</id>
+		<id>MvvmCross.Plugin.JsonLocalization</id>
 		<version>4.0.0-beta8</version>
-		<title>MvvmCross - JsonLocalisation Plugin</title>
+		<title>MvvmCross - JsonLocalization Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
 		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
@@ -11,7 +11,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains the 'JsonLocalisation' plugin for MvvmCross</description>
+This package contains the 'JsonLocalization' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
@@ -69,41 +69,41 @@ This package contains the 'JsonLocalisation' plugin for MvvmCross</description>
 	</metadata>
 	<files>
 		<!-- src -->
-		<file src="..\JsonLocalisation\MvvmCross.Plugins.JsonLocalisation\**.*"
-			target="src\MvvmCross.Plugins.JsonLocalisation" />
+		<file src="..\JsonLocalization\MvvmCross.Plugins.JsonLocalization\**.*"
+			target="src\MvvmCross.Plugins.JsonLocalization" />
 
 		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\portable-net45+win+wpa81+wp80" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\dotnet" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\netcore45" />
-		<file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\netcore45" />
+		<file src="BootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\wp8" />
-		<file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\wp8" />
+		<file src="BootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\win81" />		
-		<file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\win81\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\wpa81" />		
-		<file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\win81" />		
+		<file src="BootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\win81\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\wpa81" />		
+		<file src="BootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
 
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\portable-win81+wpa81" />		
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\portable-win81+wpa81" />		
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\MonoAndroid" />
-		<file src="BootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
 
 		<!-- iOS -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\Xamarin.iOS10" />
-		<file src="iOSBootstrapContent\JsonLocalisationPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\JsonLocalisationPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\JsonLocalizationPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\JsonLocalizationPluginBootstrap.cs.pp" />
 
 		<!-- mac -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalisation.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.JsonLocalization.*" target="lib\Xamarin.Mac20" />
 		
 	</files>
 </package>
