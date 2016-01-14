@@ -39,68 +39,39 @@ This package contains the 'Core' libraries for MvvmCross
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\portable-net45+win+wpa81+wp80" />
 
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-net45+win+wpa81+wp80" />
-		<file src="..\MvvmCross\Core\Localization\**\*.cs" target="src\MvvmCross.Localization" />
-
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\dotnet" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\dotnet" />
 		
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Platform.Wpf.*" target="lib\net45" />
-
-		<!-- wpf - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\net45" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
 
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Platform.WindowsStore.*" target="lib\netcore45" />
-
-		<!-- store - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\netcore45" />
 
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Platform.WindowsPhone.*" target="lib\wp8" />
-
-		<!-- phone - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wp8" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Platform.WindowsCommon.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Platform.WindowsCommon.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Platform.WindowsCommon.*" target="lib\portable-win81+wpa81" />
-
-		<!-- windows common - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\win81" />
-
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wpa81" />
-
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Platform.Droid.*" target="lib\MonoAndroid" />
-
-		<!-- droid - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Platform.iOS.*" target="lib\Xamarin.iOS10" />
-
-		<!-- iOS - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.iOS10" />
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Platform.Mac.*" target="lib\Xamarin.Mac20" />
-
-		<!-- mac - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.Mac20" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.Mac20" />
 	</files>
 </package>

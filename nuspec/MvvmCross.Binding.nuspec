@@ -55,38 +55,49 @@ This package contains the 'Core Binding' libraries for MvvmCross
 	<files>		
 		<!-- pcl -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\portable-net45+win+wpa81+wp80" />
-
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-net45+win+wpa81+wp80" />
+		
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\dotnet" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Binding.Droid.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Binding.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.iOS10" />
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.Mac20" />
 
 		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" 
-			target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\wp8" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wp8" />
+		
+		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
 
 		<!-- store - pcl -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" 
-			target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\netcore45" />
 
 		<!-- wpf - pcl -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" 
-			target="lib\net45" />	
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
 
 		<!-- src -->
 		<file src="..\MvvmCross\Core\Binding\**\*.cs" target="src\MvvmCross.Binding" />
 		<file src="..\MvvmCross\Binding\Droid\**\*.cs" target="src\MvvmCross.Binding.Droid" />
 		<file src="..\MvvmCross\Binding\iOS\**\*.cs" target="src\MvvmCross.Binding.iOS" />
+		<file src="..\MvvmCross\Core\Localization\**\*.cs" target="src\MvvmCross.Localization" />
 
 	</files>
 </package>
