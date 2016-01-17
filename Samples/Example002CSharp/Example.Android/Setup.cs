@@ -1,11 +1,11 @@
 using Android.Content;
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.Droid.Views;
-using Cirrious.MvvmCross.Forms.Presenter.Droid;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Presenter.Droid;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 
 namespace Example.Droid
 {

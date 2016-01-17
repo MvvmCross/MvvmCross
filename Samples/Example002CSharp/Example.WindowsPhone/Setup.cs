@@ -1,10 +1,10 @@
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsPhone;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.WindowsPhone.Platform;
-using Cirrious.MvvmCross.WindowsPhone.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Forms.Presenter.WindowsPhone;
+using MvvmCross.Core.Views;
+using MvvmCross.WindowsPhone.Platform;
+using MvvmCross.WindowsPhone.Views;
 using Microsoft.Phone.Controls;
 using Xamarin.Forms;
 
@@ -16,7 +16,7 @@ namespace Example.WindowsPhone
         {
         }
 
-        protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp()
+        protected override MvvmCross.Core.ViewModels.IMvxApplication CreateApp()
         {
             return new Example.App();
         }

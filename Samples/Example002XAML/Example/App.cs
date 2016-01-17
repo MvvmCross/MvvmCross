@@ -1,10 +1,10 @@
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.IoC;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
 using System.Linq;
 
 namespace Example
 {
-    public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+    public class App : MvvmCross.Core.ViewModels.MvxApplication
     {
         public override void Initialize()
         {

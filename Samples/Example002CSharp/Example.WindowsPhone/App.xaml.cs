@@ -70,7 +70,7 @@ namespace Example.WindowsPhone
         {
             args.Cancel = true;
             RootFrame.Navigating -= RootFrameOnNavigating;
-            RootFrame.Dispatcher.BeginInvoke(() => { Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start(); });
+            RootFrame.Dispatcher.BeginInvoke(() => { MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>().Start(); });
         }
 
         // Code to execute when the application is activated (brought to foreground)

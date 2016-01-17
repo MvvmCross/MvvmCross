@@ -13,11 +13,11 @@ using Android.Widget;
 using Android.Content.PM;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Forms.Presenter.Droid;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Platform;
+using MvvmCross.Core.Views;
+using MvvmCross.Forms.Presenter.Droid;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.Droid
 {

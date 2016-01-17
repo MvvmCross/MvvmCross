@@ -4,9 +4,9 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.CrossCore;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace Example.iOS
 {

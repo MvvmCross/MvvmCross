@@ -8,9 +8,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Example.WindowsPhone.Resources;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Views;
-using Cirrious.MvvmCross.Forms.Presenter.WindowsPhone;
+using MvvmCross.Platform;
+using MvvmCross.Core.Views;
+using MvvmCross.Forms.Presenter.WindowsPhone;
 using Xamarin.Forms.Platform.WinPhone;
 
 namespace Example.WindowsPhone

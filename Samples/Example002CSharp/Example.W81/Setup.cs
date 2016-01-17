@@ -1,12 +1,12 @@
-using Cirrious.CrossCore;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.WindowsCommon.Platform;
-using Cirrious.MvvmCross.Forms.Presenter.Core;
-using Cirrious.MvvmCross.Forms.Presenter.Windows81;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.WindowsCommon.Platform;
+using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Forms.Presenter.Windows81;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using Xamarin.Forms;
-using Cirrious.MvvmCross.WindowsCommon.Views;
+using MvvmCross.WindowsCommon.Views;
 using XamlControls = Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
 

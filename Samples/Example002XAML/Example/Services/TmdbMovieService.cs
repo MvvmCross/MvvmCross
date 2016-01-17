@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Cirrious.CrossCore;
+using MvvmCross.Platform;
 using Example.Models;
 using ModernHttpClient;
 using Newtonsoft.Json;
