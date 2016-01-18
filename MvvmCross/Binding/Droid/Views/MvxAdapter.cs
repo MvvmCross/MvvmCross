@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
+
 namespace MvvmCross.Binding.Droid.Views
 {
     using System;
@@ -163,14 +165,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected virtual void RealNotifyDataSetChanged()
         {
-            try
-            {
-                base.NotifyDataSetChanged();
-            }
-            catch (Exception exception)
-            {
-                Mvx.Warning("Exception masked during Adapter RealNotifyDataSetChanged {0}", exception.ToLongString());
-            }
+            using (var handler = new Handler(Looper.MainLooper))
+                handler.Post(() => base.NotifyDataSetChanged());
         }
 
         public virtual int GetPosition(object item)
