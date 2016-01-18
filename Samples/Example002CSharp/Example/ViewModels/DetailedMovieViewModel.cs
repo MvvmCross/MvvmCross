@@ -1,9 +1,9 @@
 ﻿using System.Windows.Input;
 using MvvmCross.Platform;
-using Cirrious.MvvmCross.Plugins.WebBrowser;
 using MvvmCross.Core.ViewModels;
 using Example.Models;
 using Example.Services;
+using MvvmCross.Plugins.WebBrowser;
 
 namespace Example.ViewModels
 {
