@@ -72,6 +72,11 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 {
                     SetAdapter((Adapter)value);
                 }
+
+                if (existing != null)
+                {
+                    existing.ItemsSource = null;
+                }
             }
         }
 
