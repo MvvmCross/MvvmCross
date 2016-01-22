@@ -97,6 +97,7 @@
     <Compile Include="Combiners\MvxValueConverterValueCombiner.cs" />
     <Compile Include="ExtensionMethods\IMvxEditableTextView.cs" />
     <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
+    <Compile Include="ValueConverters\MvxBooleanInverterValueConverter.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />
