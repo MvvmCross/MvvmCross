@@ -4,8 +4,8 @@ MvvmCross-AndroidSupport
 
 ## Documentation & blog
 
-* See our [official website](http://www.mvvmcross.com/docs) for an extensive set of documentation!
-* To stay up-to-date with the latest news go to the [MvvmCross blog](http://www.mvvmcross.com/blog)!
+* See our [official website](http://mvvmcross.com/docs) for an extensive set of documentation!
+* To stay up-to-date with the latest news go to the [MvvmCross blog](http://mvvmcross.com/blog)!
 
 ### Questions & support
 
