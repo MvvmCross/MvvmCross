@@ -13,6 +13,8 @@ using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using System;
+using Android.Util;
+using Android.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -20,6 +22,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxEventSourceAppCompatActivity
           , IMvxAndroidView
     {
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+        
         protected MvxFragmentCompatActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);

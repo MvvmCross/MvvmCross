@@ -9,25 +9,61 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using SearchView = Android.Support.V7.Widget.SearchView;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
+    using Android.Support.V4.Widget;
+    using Android.Support.V7.Widget;
+    using Android.Widget;
+
     public static class MvxAppCompatSetupHelper
     {
         public static void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>("SelectedItem",
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding),
+                typeof(AppCompatAutoCompleteTextView), "PartialText");
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding),
+                typeof(AppCompatAutoCompleteTextView),
+                "SelectedObject");
+
+            registry.RegisterCustomBindingFactory<AppCompatImageView>(
+                "Bitmap",
+                imageView => new MvxAppCompatImageViewBitmapTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<AppCompatImageView>(
+                "DrawableId",
+                imageView => new MvxAppCompatImageViewDrawableTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<AppCompatImageView>(
+                "DrawableName",
+                imageView => new MvxAppCompatImageViewDrawableNameTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<AppCompatImageView>(
+                "AssetImagePath",
+                imageView => new MvxAppCompatImageViewImageTargetBinding(imageView));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
+                "SelectedItem",
                 spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
-            registry.RegisterCustomBindingFactory<SearchView>(
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatListView>(
+                "SelectedItem",
+                adapterView => new MvxAppCompatListViewSelectedItemTargetBinding(adapterView));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
+                "SelectedItem",
+                radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
+            registry.RegisterCustomBindingFactory<SearchViewCompat>(
                 "Query",
-                search => new MvxSearchViewQueryTextTargetBinding(search)
+                search => new MvxAppCompatSearchViewQueryTextTargetBinding(search)
                 );
         }
 
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
-            registry.AddOrOverwrite(typeof(SearchView), "Query");
+            registry.AddOrOverwrite(typeof(SearchViewCompat), "Query");
+            registry.AddOrOverwrite(typeof(MvxAppCompatListView), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxAppCompatImageView), "ImageUrl");
+
         }
     }
 }
