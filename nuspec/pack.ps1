@@ -15,6 +15,8 @@ nuget pack MvvmCross.Platform.nuspec -Symbols
 nuget pack MvvmCross.Console.Platform.nuspec -Symbols
 # note no -Symbols
 nuget pack MvvmCross.StarterPack.nuspec
+# note no -Symbols
+nuget pack MvvmCross.CodeAnalysis.nuspec
 nuget pack MvvmCross.Tests.nuspec -Symbols
 # note no -Symbols
 nuget pack MvvmCross.nuspec
