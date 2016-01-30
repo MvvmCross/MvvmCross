@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Apple.iOS.Platform
+namespace MvvmCross.iOS.Platform
 {
     using System;
     using System.Diagnostics;
