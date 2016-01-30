@@ -6,8 +6,8 @@
     <ProjectGuid>{0FCCA405-DF41-4EC8-9729-BE9805BDCF17}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>MvvmCross.Binding.Apple.iOS</RootNamespace>
-    <AssemblyName>MvvmCross.Binding.Apple.iOS</AssemblyName>
+    <RootNamespace>MvvmCross.Binding.Apple</RootNamespace>
+    <AssemblyName>MvvmCross.Binding.Apple</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
   </PropertyGroup>

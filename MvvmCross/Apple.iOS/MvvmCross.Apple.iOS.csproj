@@ -108,7 +108,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Binding\Apple\MvvmCross.Binding.Apple.iOS.csproj">
       <Project>{0FCCA405-DF41-4EC8-9729-BE9805BDCF17}</Project>
-      <Name>MvvmCross.Binding.Apple.iOS</Name>
+      <Name>MvvmCross.Binding.Apple</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -78,7 +78,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Apple", "MvvmCros
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Apple", "MvvmCross\Platform\Apple\MvvmCross.Platform.Apple.csproj", "{5D200CB8-B0E8-4095-AF6B-10A7341A0F17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Apple.iOS", "MvvmCross\Binding\Apple\MvvmCross.Binding.Apple.iOS.csproj", "{0FCCA405-DF41-4EC8-9729-BE9805BDCF17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Binding.Apple", "MvvmCross\Binding\Apple\MvvmCross.Binding.Apple.csproj", "{0FCCA405-DF41-4EC8-9729-BE9805BDCF17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
