@@ -43,7 +43,10 @@ namespace MvvmCross.iOS.Views
 
         protected virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
-            var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
+#warning SHARED-APPLE: Switched back to PCL profile 7, missing member 'GetCustomAttribute'
+            //var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
+
+            var storyboardAttribute = viewType.GetTypeInfo().GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)
             {
                 var storyboardName = storyboardAttribute.StoryboardName ?? viewType.Name;

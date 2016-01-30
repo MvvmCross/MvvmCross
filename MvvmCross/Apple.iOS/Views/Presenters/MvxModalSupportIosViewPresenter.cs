@@ -55,7 +55,8 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (this._currentModalViewController != null)
             {
-                this._currentModalViewController.DismissModalViewController(true);
+#warning SHARED-APPLE: Missing member 'DismissModalViewController(bool)'
+                //this._currentModalViewController.DismissModalViewController(true);
                 this._currentModalViewController = null;
                 return;
             }
