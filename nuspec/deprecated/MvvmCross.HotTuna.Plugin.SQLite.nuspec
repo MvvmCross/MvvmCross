@@ -15,34 +15,34 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Plugin.SQLite" version="4.0.0-beta8" />
+				<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.0.0-beta8" />
 			</group>
 		</dependencies>
 	</metadata>
