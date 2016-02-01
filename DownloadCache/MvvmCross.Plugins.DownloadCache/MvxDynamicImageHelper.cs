@@ -11,6 +11,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -30,6 +31,8 @@ namespace MvvmCross.Plugins.DownloadCache
         #endregion ImageState enum
 
         private ImageState _currentImageState = ImageState.DefaultShown;
+
+		private CancellationTokenSource _cancellationSource;
 
         private string _defaultImagePath;
 
@@ -104,6 +107,16 @@ namespace MvvmCross.Plugins.DownloadCache
 
         private async Task RequestImageAsync(string imageSource)
         {
+			if (_cancellationSource != null) 
+			{
+				_cancellationSource.Cancel ();
+				_cancellationSource = null;
+			}
+
+			var cancelTokenSource = new CancellationTokenSource ();
+			var cancelToken = cancelTokenSource.Token;
+			_cancellationSource = cancelTokenSource;
+
             FireImageChanged(null);
 
             if (string.IsNullOrEmpty(imageSource))
@@ -121,6 +134,11 @@ namespace MvvmCross.Plugins.DownloadCache
                 {
                     var cache = Mvx.Resolve<IMvxImageCache<T>>();
                     var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
+
+					if (cancelToken.IsCancellationRequested) {
+						return;
+					}
+
                     if (image == null)
                         await ShowErrorImage().ConfigureAwait(false);
                     else
@@ -140,6 +158,11 @@ namespace MvvmCross.Plugins.DownloadCache
                 try
                 {
                     var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
+
+					if (cancelToken.IsCancellationRequested) {
+						return;
+					}
+
                     if (image == null)
                         await ShowErrorImage().ConfigureAwait(false);
                     else
