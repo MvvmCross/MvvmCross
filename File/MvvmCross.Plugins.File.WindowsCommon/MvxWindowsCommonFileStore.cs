@@ -158,7 +158,14 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             if (string.IsNullOrEmpty(folderPath))
                 return rootFolder;
             var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath)).ConfigureAwait(false);
-            return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
+
+            //folder name may be empty if original path was ended by a separator like My/Custom/Path/ instead of My/Custom/Path
+            var folderName = Path.GetFileName(folderPath);
+            if (string.IsNullOrEmpty(folderName))
+                return currentFolder;
+            else
+                return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
+
         }
 
         public override IEnumerable<string> GetFilesIn(string folderPath)
