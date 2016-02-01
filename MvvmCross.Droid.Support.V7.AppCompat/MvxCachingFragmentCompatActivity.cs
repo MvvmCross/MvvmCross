@@ -8,9 +8,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Android.Util;
+using Android.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
@@ -33,7 +36,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
         private IFragmentCacheConfiguration _fragmentCacheConfiguration;
 
-		protected enum FragmentReplaceMode
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+
+        protected enum FragmentReplaceMode
 		{
 			NoReplace,
 			ReplaceFragment,

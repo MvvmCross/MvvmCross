@@ -1,13 +1,15 @@
-using Android.Support.V7.Widget;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using System;
-
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    public class MvxSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
+    using System;
+
+    using Android.Support.V7.Widget;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Droid.Target;
+
+    public class MvxAppCompatSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
     {
-        public MvxSearchViewQueryTextTargetBinding(object target)
+        public MvxAppCompatSearchViewQueryTextTargetBinding(object target)
             : base(target)
         {
         }
@@ -16,11 +18,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
-        protected SearchView SearchView => (SearchView)Target;
+        protected SearchView SearchView => (SearchView)this.Target;
 
         public override void SubscribeToEvents()
         {
-            SearchView.QueryTextChange += HandleQueryTextChanged;
+            this.SearchView.QueryTextChange += this.HandleQueryTextChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -31,10 +33,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         {
             if (isDisposing)
             {
-                var target = Target as SearchView;
+                var target = this.Target as SearchView;
                 if (target != null)
                 {
-                    target.QueryTextChange -= HandleQueryTextChanged;
+                    target.QueryTextChange -= this.HandleQueryTextChanged;
                 }
             }
 
@@ -43,7 +45,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void HandleQueryTextChanged(object sender, SearchView.QueryTextChangeEventArgs e)
         {
-            var target = Target as SearchView;
+            var target = this.Target as SearchView;
 
             if (target == null)
             {
@@ -51,7 +53,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
 
             var value = target.Query;
-            FireValueChanged(value);
+            this.FireValueChanged(value);
         }
     }
 }

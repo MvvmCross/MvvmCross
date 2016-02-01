@@ -84,10 +84,24 @@
     <Compile Include="MvxFragmentCompatActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxCachingFragmentCompatActivity.cs" />
+    <Compile Include="Target\MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatBaseImageViewTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatBaseStreamImageViewTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatImageViewBitmapTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatImageViewDrawableNameTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatImageViewDrawableTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatImageViewImageTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatListViewSelectedItemTargetBinding.cs" />
+    <Compile Include="Target\MvxAppCompatRadioGroupSelectedItemBinding.cs" />
+    <Compile Include="Target\MvxAppCompatSearchViewQueryTextTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
+    <Compile Include="Widget\MvxAppCompatAutoCompleteTextView.cs" />
+    <Compile Include="Widget\MvxAppCompatImageView.cs" />
+    <Compile Include="Widget\MvxAppCompatListView.cs" />
+    <Compile Include="Widget\MvxAppCompatRadioGroup.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
     <Compile Include="MvxSplashScreenCompatActivity.cs" />
-    <Compile Include="Target\MvxSearchViewQueryTextTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

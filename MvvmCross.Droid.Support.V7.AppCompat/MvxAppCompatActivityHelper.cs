@@ -17,12 +17,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         public static View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             // Swap our AppCompat Views
-            if (name == "MvxSpinner")
+            switch (name)
             {
-                return new MvxAppCompatSpinner(context, attrs);
+                case "MvxSpinner":
+                    return new MvxAppCompatSpinner(context, attrs);
+                case "MvxImageView":
+                    return new MvxAppCompatImageView(context, attrs);
+                case "MvxListView":
+                    return new MvxAppCompatListView(context, attrs);
+                case "MvxRadioGroup":
+                    return new MvxAppCompatRadioGroup(context, attrs);
+                case "MvxAutoCompleteTextView":
+                    return new MvxAppCompatAutoCompleteTextView(context, attrs);
+                default:
+                    return null;
             }
-
-            return null;
         }
     }
 }
