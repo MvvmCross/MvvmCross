@@ -116,7 +116,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsSqliteConnectionFactory.cs" />
-    <Content Include="Properties\MvvmCross.Plugins.Sqlite.UWP.rd.xml" />
+    <Content Include="Properties\MvvmCross.Plugins.Sqlite.WindowsUWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross.Plugins.Sqlite\MvvmCross.Plugins.Sqlite.csproj">
