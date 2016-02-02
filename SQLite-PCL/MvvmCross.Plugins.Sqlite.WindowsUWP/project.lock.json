@@ -201,9 +201,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -212,9 +212,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -225,7 +225,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -1845,9 +1845,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -1856,9 +1856,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -1869,7 +1869,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -3522,9 +3522,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -3533,9 +3533,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -3546,7 +3546,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -5204,9 +5204,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -5215,9 +5215,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -5228,7 +5228,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -6881,9 +6881,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -6892,9 +6892,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -6905,7 +6905,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -8563,9 +8563,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -8574,9 +8574,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -8587,7 +8587,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -10240,9 +10240,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0-beta8": {
+      "MvvmCross.Binding/4.0.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0-beta8, )"
+          "MvvmCross.Core": "[4.0.0, )"
         },
         "compile": {
           "lib/netcore45/MvvmCross.Binding.dll": {}
@@ -10251,9 +10251,9 @@
           "lib/netcore45/MvvmCross.Binding.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0-beta8": {
+      "MvvmCross.Core/4.0.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0-beta8, )"
+          "MvvmCross.Platform": "[4.0.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -10264,7 +10264,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0-beta8": {
+      "MvvmCross.Platform/4.0.0": {
         "compile": {
           "lib/win81/MvvmCross.Localization.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {},
@@ -12330,7 +12330,7 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "MvvmCross.Binding/4.0.0-beta8": {
+    "MvvmCross.Binding/4.0.0": {
       "sha512": "6aoz0t79Cc+8b6/I9HIsXMbyzQ6r9mnpvUlsoPPDbnATZJPwcIIJ3phWFbZeeVxjjGUKsFZRro6qUlQy33QOqg==",
       "type": "Package",
       "files": [
@@ -12352,7 +12352,7 @@
         "package/services/metadata/core-properties/adf1702407534833a2b7e042da1260f0.psmdcp"
       ]
     },
-    "MvvmCross.Core/4.0.0-beta8": {
+    "MvvmCross.Core/4.0.0": {
       "sha512": "/LZ9WlPDW7reo9YvpCZ0LqP8kuUi5yaiZjwhORs3iJnZDfcj7gEsf8GMHBY1/SSn1woIrW0RjfF7KYZEJWdbBw==",
       "type": "Package",
       "files": [
@@ -12391,7 +12391,7 @@
         "package/services/metadata/core-properties/d0b587fca3c14e30ae7bd0b797f118ca.psmdcp"
       ]
     },
-    "MvvmCross.Platform/4.0.0-beta8": {
+    "MvvmCross.Platform/4.0.0": {
       "sha512": "xqdwYHnTJFnAPdt2n2Kyw+aJkHt2S5q6kic6J1k9yVP+z2SI4Styp1x91+QN7Yg/ALFhEvhTc8EkARaghNyZfw==",
       "type": "Package",
       "files": [
@@ -15178,9 +15178,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.Binding >= 4.0.0-beta8",
-      "MvvmCross.Core >= 4.0.0-beta8",
-      "MvvmCross.Platform >= 4.0.0-beta8",
+      "MvvmCross.Binding >= 4.0.0",
+      "MvvmCross.Core >= 4.0.0",
+      "MvvmCross.Platform >= 4.0.0",
       "SQLite.Net.Async-PCL >= 3.1.1",
       "SQLite.Net.Core-PCL >= 3.1.1",
       "SQLite.Net-PCL >= 3.1.1"

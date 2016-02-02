@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Bookmarks</id>
-		<version>4.0.0-beta8</version>
+		<version>4.0.0</version>
 		<title>MvvmCross - Bookmarks Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,35 +15,35 @@ This package contains the 'Bookmarks' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="net">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="net">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="win">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="win">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="wp">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="wp">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="wpa">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="wpa">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="Xamarin.Mac20">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="Xamarin.Mac20">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="Xamarin.iOS10">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="portable-net45+win8+wpa81+wp8">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="uap">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="uap">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
 			</group>
 		</dependencies>
 	</metadata>
