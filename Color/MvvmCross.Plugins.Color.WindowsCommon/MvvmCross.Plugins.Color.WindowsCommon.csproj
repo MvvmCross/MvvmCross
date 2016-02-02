@@ -46,15 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-win81+wpa81\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-win81+wpa81\MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-win81+wpa81\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-win81+wpa81\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform.WindowsCommon, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-win81+wpa81\MvvmCross.Platform.WindowsCommon.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-win81+wpa81\MvvmCross.Platform.WindowsCommon.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
