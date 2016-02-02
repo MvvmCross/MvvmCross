@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V7.RecyclerView</id>
-		<version>4.0.0-beta8</version>
+		<version>4.0.0</version>
 		<title>MvvmCross Android Support V7 - RecyclerView</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,15 +15,15 @@ This package contains Support v7 RecyclerView support for MvvmCross.</descriptio
 		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support recyclerview</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework ="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.0.0" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
 				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.1.1.0" />
 			</group>
-			<group targetFramework ="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.0.0-beta8" />
-				<dependency id="MvvmCross.Core" version="4.0.0-beta8" />
+			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.0.0" />
 				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
 				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.1.1.0" />
 			</group>
