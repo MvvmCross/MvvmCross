@@ -51,22 +51,22 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <Reference Include="MvvmCross.Binding">
-      <HintPath>..\..\..\packages\MvvmCross.Binding.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Binding.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Core">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Forms.Presenter.Core">
-      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.0-beta8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\MvvmCross.Forms.Presenter.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\MvvmCross.Forms.Presenter.Core.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Localization">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Platform">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Plugins.WebBrowser">
-      <HintPath>..\..\..\packages\MvvmCross.Plugin.WebBrowser.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.WebBrowser.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Plugin.WebBrowser.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.WebBrowser.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

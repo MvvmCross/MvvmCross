@@ -62,39 +62,39 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding">
-      <HintPath>..\..\..\packages\MvvmCross.Binding.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Binding.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Core">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Forms.Presenter.Core">
-      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.0-beta8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\MvvmCross.Forms.Presenter.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\MvvmCross.Forms.Presenter.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Localization">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Color">
-      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.Color.4.0.0-beta8\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.Color.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.Color.4.0.0\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.Color.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Json">
-      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.Json.4.0.0-beta8\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.Json.4.0.0\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.JsonLocalisation">
-      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.JsonLocalisation.4.0.0-beta8\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.JsonLocalisation.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.HotTuna.Plugin.JsonLocalisation.4.0.0\lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.JsonLocalisation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.WebBrowser">
-      <HintPath>..\..\..\packages\MvvmCross.Plugin.WebBrowser.4.0.0-beta8\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.WebBrowser.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Plugin.WebBrowser.4.0.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.WebBrowser.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
