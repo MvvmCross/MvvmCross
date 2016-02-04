@@ -11,15 +11,15 @@ nuget pack MvvmCross.Droid.Support.V4.nuspec -Symbols
 nuget pack MvvmCross.Droid.Support.V14.Preference.nuspec -Symbols
 
 # Cirrious legacy
-nuget pack Cirrious.MvvmCross.Droid.Support.AppCompat.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.Design.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.Fragging.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.Leanback.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.Preference.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.V4.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.V7.Preference.nuspec
-nuget pack Cirrious.MvvmCross.Droid.Support.V14.Preference.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.AppCompat.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.Design.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.Fragging.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.Leanback.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.Preference.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.RecyclerView.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.V4.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.V7.Preference.nuspec
+nuget pack deprecated\Cirrious.MvvmCross.Droid.Support.V14.Preference.nuspec
 
 for /r %%i in (*.nupkg) do (call :pushpackage "%%i")
 pause
