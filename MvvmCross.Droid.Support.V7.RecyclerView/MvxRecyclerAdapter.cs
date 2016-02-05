@@ -220,7 +220,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during Adapter RealNotifyDataSetChanged {0}", exception.ToLongString());
+                Mvx.Warning(
+                    "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
+                    exception.ToLongString());
             }
         }
 
