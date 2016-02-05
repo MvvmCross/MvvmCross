@@ -5,7 +5,7 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Platform;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace Example.Droid
