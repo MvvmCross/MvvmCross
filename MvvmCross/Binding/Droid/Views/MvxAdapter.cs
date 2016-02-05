@@ -169,7 +169,9 @@ namespace MvvmCross.Binding.Droid.Views
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during Adapter RealNotifyDataSetChanged {0}", exception.ToLongString());
+                Mvx.Warning(
+                    "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task ? see http://goo.gl/0nW0L6",
+                    exception.ToLongString());
             }
         }
 
