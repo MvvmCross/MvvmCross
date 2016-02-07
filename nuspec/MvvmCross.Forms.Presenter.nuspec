@@ -74,6 +74,7 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\portable-win81+wpa81" />
 
 		<!-- uap -->
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\uap" />
 		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\uap" />
 		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP\Properties\MvvmCross.Forms.Presenter.WindowsUWP.rd.xml" target="lib\uap\MvvmCross.Forms.Presenter.WindowsUWP\Properties" />
