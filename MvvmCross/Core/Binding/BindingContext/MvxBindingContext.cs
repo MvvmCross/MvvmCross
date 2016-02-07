@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Source.Construction;
+
 namespace MvvmCross.Binding.BindingContext
 {
     using System;
@@ -37,54 +39,74 @@ namespace MvvmCross.Binding.BindingContext
         private readonly List<KeyValuePair<object, IList<TargetAndBinding>>> _viewBindings =
             new List<KeyValuePair<object, IList<TargetAndBinding>>>();
 
-        private object _dataContext;
+        private IMvxEnhancedDataContext _dataContext;
 
         public MvxBindingContext()
             : this((object)null)
         {
         }
 
-        public MvxBindingContext(object dataContext)
+        public MvxBindingContext(object dataContext, object parentDataContext = null)
+            : this(dataContext, parentDataContext, (IDictionary<object, string>)null)
         {
-            this._dataContext = dataContext;
         }
 
         public MvxBindingContext(IDictionary<object, string> firstBindings)
-            : this(null, firstBindings)
+            : this(null, null, firstBindings)
         {
         }
 
         public MvxBindingContext(object dataContext, IDictionary<object, string> firstBindings)
+            : this(dataContext, null, firstBindings)
         {
-            foreach (var kvp in firstBindings)
+        }
+
+        public MvxBindingContext(object dataContext, object parentDataContext, IDictionary<object, string> firstBindings)
+        {
+            if (firstBindings != null)
             {
-                this.AddDelayedAction(kvp);
+                foreach (var kvp in firstBindings)
+                {
+                    this.AddDelayedAction(kvp);
+                }
             }
-            if (dataContext != null)
-                this.DataContext = dataContext;
+            if (dataContext != null || parentDataContext != null)
+            {
+                this.EnhancedDataContext = MvxSimpleEnhancedDataContext.FromCoreAndParent(dataContext, parentDataContext);
+            }
         }
 
         public MvxBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
-            : this(null, firstBindings)
+            : this(null, null, firstBindings)
         {
         }
 
         public MvxBindingContext(object dataContext,
+            IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+            : this(null, null, firstBindings)
+        {
+        }
+
+        public MvxBindingContext(object dataContext,
+                                 object parentDataContext,
                                  IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             foreach (var kvp in firstBindings)
             {
                 this.AddDelayedAction(kvp);
             }
-            if (dataContext != null)
-                this.DataContext = dataContext;
+            if (dataContext != null || parentDataContext != null)
+            {
+                this.EnhancedDataContext = MvxSimpleEnhancedDataContext.FromCoreAndParent(dataContext, parentDataContext);
+            }
         }
 
         private void AddDelayedAction(KeyValuePair<object, string> kvp)
         {
             this._delayedActions.Add(() =>
             {
-                var bindings = this.Binder.Bind(this.DataContext, kvp.Key, kvp.Value);
+#warning TODO - passing the EnhancedDataContext is v v v naughty...
+                var bindings = this.Binder.Bind(this.EnhancedDataContext, kvp.Key, kvp.Value);
                 foreach (var b in bindings)
                     this.RegisterBinding(kvp.Key, b);
             });
@@ -94,7 +116,8 @@ namespace MvvmCross.Binding.BindingContext
         {
             this._delayedActions.Add(() =>
             {
-                var bindings = this.Binder.Bind(this.DataContext, kvp.Key, kvp.Value);
+#warning TODO - passing the EnhancedDataContext is v v v naughty...
+                var bindings = this.Binder.Bind(this.EnhancedDataContext, kvp.Key, kvp.Value);
                 foreach (var b in bindings)
                     this.RegisterBinding(kvp.Key, b);
             });
@@ -132,10 +155,20 @@ namespace MvvmCross.Binding.BindingContext
 
         public object DataContext
         {
+            get { return this.EnhancedDataContext?.Core; }
+            set
+            {
+                this.EnhancedDataContext = MvxSimpleEnhancedDataContext.FromCoreAndParent(value,
+                    EnhancedDataContext?.Parent);
+            }
+        }
+
+        public IMvxEnhancedDataContext EnhancedDataContext
+        {
             get { return this._dataContext; }
             set
             {
-                this._dataContext = value;
+                this._dataContext = MvxSimpleEnhancedDataContext.Clone(value);
                 this.OnDataContextChange();
                 var handler = this.DataContextChanged;
                 handler?.Invoke(this, EventArgs.Empty);
@@ -144,6 +177,15 @@ namespace MvvmCross.Binding.BindingContext
 
         public event EventHandler DataContextChanged;
 
+        private void SetDataContextOnBinding(IMvxUpdateableBinding binding)
+        {
+            // TODO - would be nice to drop this "is" check one day
+            if (binding is IMvxEnhancedDataContextAwareBinding)
+                binding.DataContext = this._dataContext;
+            else
+                binding.DataContext = this._dataContext?.Core;
+        }
+
         protected virtual void OnDataContextChange()
         {
             // update existing bindings
@@ -151,13 +193,13 @@ namespace MvvmCross.Binding.BindingContext
             {
                 foreach (var bind in binding.Value)
                 {
-                    bind.Binding.DataContext = this._dataContext;
+                    SetDataContextOnBinding(bind.Binding);
                 }
             }
 
             foreach (var binding in this._directBindings)
             {
-                binding.Binding.DataContext = this._dataContext;
+                SetDataContextOnBinding(binding.Binding);
             }
 
             // add new bindings

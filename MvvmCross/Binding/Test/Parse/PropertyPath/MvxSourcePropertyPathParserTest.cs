@@ -71,6 +71,57 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         }
 
         [Test]
+        public void TestTokeniser_OnChainedSimplePropertyWithParent()
+        {
+            var text = "$parent.Hello.World.Good.Morning.Foo.Bar";
+            var split = text.Split('.');
+
+            var result = this.Tokenise(text);
+            Assert.AreEqual(7, result.Count);
+            Assert.IsTrue(result[0] is MvxParentPropertyToken);
+            for (var i = 1; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result[i], split[i]);
+            }
+
+            var result2 = this.Tokenise(this.AddWhitespace(text));
+            Assert.AreEqual(7, result2.Count);
+            Assert.IsTrue(result2[0] is MvxParentPropertyToken);
+            for (var i = 1; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result2[i], split[i]);
+            }
+        }
+
+        [Test]
+        public void TestTokeniser_MultipleParent()
+        {
+            var text = "$parent.$parent.$parent.Foo";
+            var split = text.Split('.');
+
+            var result = this.Tokenise(text);
+            Assert.AreEqual(4, result.Count);
+            Assert.IsTrue(result[0] is MvxParentPropertyToken);
+            Assert.IsTrue(result[1] is MvxParentPropertyToken);
+            Assert.IsTrue(result[2] is MvxParentPropertyToken);
+            for (var i = 3; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result[i], split[i]);
+            }
+
+            var result2 = this.Tokenise(this.AddWhitespace(text));
+            Assert.AreEqual(4, result2.Count);
+            Assert.IsTrue(result2[0] is MvxParentPropertyToken);
+            Assert.IsTrue(result2[1] is MvxParentPropertyToken);
+            Assert.IsTrue(result2[2] is MvxParentPropertyToken);
+            for (var i = 3; i < split.Length; i++)
+            {
+                AssertIsSimplePropertyToken(result2[i], split[i]);
+            }
+        }
+
+
+        [Test]
         public void TestTokeniser_OnIntegerPropertyIndexer()
         {
             var toTest = new[] { 0, 1, 123, int.MaxValue };

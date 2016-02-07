@@ -75,6 +75,22 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        //Don't let this happen?
+        //[Obsolete("Should this method be added?")]
+        //public MvxFluentBindingDescription<TTarget, TSource> ToParent(string sourcePropertyPath)
+        //{
+        //    // TODO - not sure about this string addition ... it kind of battles the free text...
+        //    this.SetFreeTextPropertyPath("$parent." + sourcePropertyPath);
+        //    return this;
+        //}
+
+        public MvxFluentBindingDescription<TTarget, TSource> To<TParent>(Expression<Func<TParent, object>> parentSourceProperty)
+        {
+            var sourcePropertyPath = SourcePropertyPath(parentSourceProperty);
+            this.SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
+        }
+
         public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
         {
             return this.WithConversion(new MvxCommandParameterValueConverter(), parameter);

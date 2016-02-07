@@ -11,10 +11,9 @@ namespace MvvmCross.Binding.BindingContext
     using System.Collections.Generic;
 
     using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform.Core;
 
     public interface IMvxBindingContext
-        : IMvxDataConsumer
+        : IMvxEnhancedDataConsumer
     {
         event EventHandler DataContextChanged;
 

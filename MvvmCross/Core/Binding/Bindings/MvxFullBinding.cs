@@ -19,7 +19,8 @@ namespace MvvmCross.Binding.Bindings
 
     public class MvxFullBinding
         : MvxBinding
-          , IMvxUpdateableBinding
+        , IMvxUpdateableBinding
+        , IMvxEnhancedDataContextAwareBinding
     {
         private IMvxSourceStepFactory SourceStepFactory => MvxBindingSingletonCache.Instance.SourceStepFactory;
 
@@ -233,6 +234,7 @@ namespace MvvmCross.Binding.Bindings
                 this.ClearTargetBinding();
                 this.ClearSourceBinding();
             }
+            base.Dispose(isDisposing);
         }
     }
 }

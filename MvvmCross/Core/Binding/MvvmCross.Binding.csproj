@@ -43,6 +43,8 @@
     <Compile Include="Binders\MvxNamedInstanceRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
+    <Compile Include="BindingContext\IMvxEnhancedDataConsumer.cs" />
+    <Compile Include="Bindings\IMvxEnhancedDataContextAwareBinding.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactory.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactoryRegistry.cs" />
@@ -55,8 +57,10 @@
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepDescription.cs" />
     <Compile Include="Bindings\SourceSteps\MvxPathSourceStepFactory.cs" />
+    <Compile Include="Bindings\Source\Construction\IMvxEnhancedDataContext.cs" />
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtension.cs" />
     <Compile Include="Bindings\Source\Construction\IMvxSourceBindingFactoryExtensionHost.cs" />
+    <Compile Include="Bindings\Source\Construction\MvxSimpleEnhancedDataContext.cs" />
     <Compile Include="Bindings\Source\MvxMissingSourceBinding.cs" />
     <Compile Include="Bindings\Source\Construction\MvxPropertySourceBindingFactoryExtension.cs" />
     <Compile Include="Bindings\Target\MvxConvertingTargetBinding.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Combiners\MvxValueConverterValueCombiner.cs" />
     <Compile Include="ExtensionMethods\IMvxEditableTextView.cs" />
     <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
+    <Compile Include="Parse\PropertyPath\PropertyTokens\MvxParentPropertyToken.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />

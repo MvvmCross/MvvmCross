@@ -193,7 +193,7 @@ namespace MvvmCross.Binding.BindingContext
             return targetPropertyName;
         }
 
-        protected static string SourcePropertyPath<TSource>(Expression<Func<TSource, object>> sourceProperty)
+        protected static string SourcePropertyPath<T>(Expression<Func<T, object>> sourceProperty)
         {
             var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
             var sourcePropertyPath = parser.Parse(sourceProperty).Print();

@@ -71,6 +71,10 @@ namespace MvvmCross.Binding.Parse.PropertyPath
             {
                 this.ParsePropertyName();
             }
+            else if (currentChar == '$')
+            {
+                this.ParseSpecialProperty();
+            }
             else
             {
                 throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
@@ -93,6 +97,26 @@ namespace MvvmCross.Binding.Parse.PropertyPath
 
             var text = propertyText.ToString();
             this.CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
+        }
+
+        private void ParseSpecialProperty()
+        {
+            var propertyText = new StringBuilder();
+            while (!this.IsComplete)
+            {
+                var currentChar = this.CurrentChar;
+                if (!char.IsLetterOrDigit(currentChar) && currentChar != '_' && currentChar != '$')
+                    break;
+                propertyText.Append(currentChar);
+                this.MoveNext();
+            }
+
+            var text = propertyText.ToString();
+            if (text.ToLowerInvariant() != "$parent")
+            {
+                throw new MvxException("Unknown special property {0}", text);
+            }
+            this.CurrentTokens.Add(new MvxParentPropertyToken());
         }
 
         private void ParseIndexer()
