@@ -57,9 +57,6 @@
     <Reference Include="MvvmCross.Droid, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Droid.dll</HintPath>
     </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Localization.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
     </Reference>

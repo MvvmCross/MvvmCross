@@ -205,10 +205,6 @@
       <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.0\lib\wp8\MvvmCross.Forms.Presenter.WindowsPhone.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\wp8\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\wp8\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>

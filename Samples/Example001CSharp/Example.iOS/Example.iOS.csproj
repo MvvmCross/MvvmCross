@@ -124,10 +124,6 @@
       <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
@@ -145,10 +141,6 @@
       <HintPath>..\..\..\packages\Xamarin.Forms.2.0.0.6490\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Forms.Core.Design, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.0.6484\lib\Xamarin.iOS10\Design\Xamarin.Forms.Core.Design.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.0.0.6490\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
       <Private>True</Private>
@@ -159,10 +151,6 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.0.0.6490\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml.Design, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.0.6484\lib\Xamarin.iOS10\Design\Xamarin.Forms.Xaml.Design.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.iOS" />
