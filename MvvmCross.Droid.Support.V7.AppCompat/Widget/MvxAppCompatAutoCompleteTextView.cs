@@ -19,7 +19,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     using MvvmCross.Binding.Attributes;
     using MvvmCross.Binding.Droid.Views;
 
-    [Register("MvvmCross.Droid.Support.V7.AppCompat.widget.MvxAppCompatAutoCompleteTextView")]
+    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatAutoCompleteTextView")]
     public class MvxAppCompatAutoCompleteTextView
         : AppCompatAutoCompleteTextView
     {
