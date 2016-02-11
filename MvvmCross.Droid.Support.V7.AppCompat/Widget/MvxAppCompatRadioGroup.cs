@@ -23,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Droid.Views;
 
-    [Register("MvvmCross.Droid.Support.V7.AppCompat.widget.MvxAppCompatRadioGroup")]
+    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
         public MvxAppCompatRadioGroup(Context context, IAttributeSet attrs)

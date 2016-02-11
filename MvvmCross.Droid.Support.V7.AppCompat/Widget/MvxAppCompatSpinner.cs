@@ -21,7 +21,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     /// Tint-aware version of MvxSpinner styled properly with AppCompat V22.2+.
     /// TODO: We may want to figure out a way to delegate to a common class for both.
     /// </summary>
-    [Register("MvvmCross.Droid.Support.V7.AppCompat.widget.MvxAppCompatSpinner")]
+    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatSpinner")]
     public class MvxAppCompatSpinner : AppCompatSpinner
     {
         public MvxAppCompatSpinner(Context context, IAttributeSet attrs)

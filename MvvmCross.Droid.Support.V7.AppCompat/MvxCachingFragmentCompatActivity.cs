@@ -29,7 +29,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    [Register("MvvmCross.Droid.Support.V7.AppCompat.MvxCachingFragmentCompatActivity")]
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxCachingFragmentCompatActivity")]
     public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
