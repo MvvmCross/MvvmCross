@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cirrious.MvvmCross.Droid.Support.Design</id>
-		<version>4.0.0</version>
+		<version>4.0.1</version>
 		<title>Deprecated - MvvmCross Android Support - Design</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,10 +15,10 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Droid.Support.Design" version="4.0.0" />
+				<dependency id="MvvmCross.Droid.Support.Design" version="4.0.1" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Droid.Support.Design" version="4.0.0" />
+				<dependency id="MvvmCross.Droid.Support.Design" version="4.0.1" />
 			</group>
 		</dependencies>
 	</metadata>

@@ -15,10 +15,10 @@
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Droid.Support.V14.Preference" version="4.0.0" />
+				<dependency id="MvvmCross.Droid.Support.V14.Preference" version="4.0.1" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Droid.Support.V14.Preference" version="4.0.0" />
+				<dependency id="MvvmCross.Droid.Support.V14.Preference" version="4.0.1" />
 			</group>
 		</dependencies>
 	</metadata>
