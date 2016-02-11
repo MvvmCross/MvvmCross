@@ -7,7 +7,7 @@ namespace $rootnamespace$
     [Activity(
         Label = "$rootnamespace$"
         , MainLauncher = true
-        , Icon = "@drawable/icon"
+        , Icon = "@mipmap/icon"
         , Theme = "@style/Theme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
