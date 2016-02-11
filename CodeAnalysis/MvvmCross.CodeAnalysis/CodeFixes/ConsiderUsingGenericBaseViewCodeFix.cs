@@ -11,6 +11,7 @@ using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Formatting;
 
 namespace MvvmCross.CodeAnalysis.CodeFixes
 {
@@ -73,7 +74,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                             SyntaxFactory.SingletonSeparatedList(viewModelProperty.Type)
                         )
                     )
-                );
+                ).WithAdditionalAnnotations(Formatter.Annotation);
 
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
             editor.RemoveNode(viewModelProperty);
