@@ -17,7 +17,7 @@ using MvvmCross.Binding.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
-    [Register("MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView")]
+    [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
         #region ctor

@@ -21,7 +21,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Platform;
 
-    [Register("MvvmCross.Droid.Support.V7.AppCompat.widget.MvxAppCompatImageView")]
+    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView")]
     public class MvxAppCompatImageView : AppCompatImageView
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
