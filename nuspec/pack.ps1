@@ -35,31 +35,4 @@ nuget pack MvvmCross.Plugin.ThreadUtils.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Visibility.nuspec -Symbols
 nuget pack MvvmCross.Plugin.WebBrowser.nuspec -Symbols
 
-# HotTuna legacy
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Accelerometer.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.All.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Bookmarks.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Color.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.DownloadCache.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Email.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.FieldBinding.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.File.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Json.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.JsonLocalisation.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Location.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Messenger.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.MethodBinding.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Network.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.PhoneCall.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.PictureChooser.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.ReflectionEx.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.ResourceLoader.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.SQLite.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.SQLitePCL.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Share.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.SoundEffects.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.ThreadUtils.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.Visibility.nuspec
-nuget pack deprecated\MvvmCross.HotTuna.Plugin.WebBrowser.nuspec
-
 pause
