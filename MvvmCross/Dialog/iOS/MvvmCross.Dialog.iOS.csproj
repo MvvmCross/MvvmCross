@@ -54,6 +54,7 @@
     <Compile Include="Target\MvxValueElementValueBinding.cs" />
     <Compile Include="Elements\SimplePickerElement.cs" />
     <Compile Include="MvxIosDialogSetup.cs" />
+    <Compile Include="IMvxIosView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossUI\CrossUI.Core\CrossUI.Core.csproj">
@@ -64,29 +65,29 @@
       <Project>{371B2408-732A-40CA-8242-70DBC17F9825}</Project>
       <Name>CrossUI.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Platform\iOS\MvvmCross.Platform.iOS.csproj">
-      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
-      <Name>MvvmCross.Platform.iOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Binding\iOS\MvvmCross.Binding.iOS.csproj">
-      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
-      <Name>MvvmCross.Binding.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\iOS\iOS\MvvmCross.iOS.csproj">
-      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
-      <Name>MvvmCross.iOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Binding\Apple\MvvmCross.Binding.Apple.iOS.csproj">
+      <Project>{0FCCA405-DF41-4EC8-9729-BE9805BDCF17}</Project>
+      <Name>MvvmCross.Binding.Apple.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\Apple\MvvmCross.Platform.Apple.csproj">
+      <Project>{5D200CB8-B0E8-4095-AF6B-10A7341A0F17}</Project>
+      <Name>MvvmCross.Platform.Apple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Apple.iOS\MvvmCross.Apple.iOS.csproj">
+      <Project>{07DA9315-1336-492C-B74F-E5E7E12CA287}</Project>
+      <Name>MvvmCross.Apple.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
