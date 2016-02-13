@@ -226,9 +226,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			}
 			else
 			{
-				if (fragmentReplaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
-					ft.Remove(fragInfo.CachedFragment);
-
 				//Otherwise, create one and cache it
 				fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
 					bundle);
