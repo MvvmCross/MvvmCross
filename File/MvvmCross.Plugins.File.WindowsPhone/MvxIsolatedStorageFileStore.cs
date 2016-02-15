@@ -134,21 +134,28 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public override bool TryMove(string from, string to, bool deleteExistingTo)
+        public override bool TryMove(string from, string to, bool overwrite)
         {
             try
             {
                 using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
                 {
                     if (!isf.FileExists(from))
+                    {
+                        MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                         return false;
+                    }
 
                     if (isf.FileExists(to))
                     {
-                        if (deleteExistingTo)
+                        if (overwrite)
+                        {
                             isf.DeleteFile(to);
+                        }
                         else
+                        {
                             return false;
+                        }
                     }
 
                     isf.MoveFile(from, to);
@@ -162,6 +169,33 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error masked during file move {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
+
+        public override bool TryCopy(string from, string to, bool overwrite)
+        {
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.FileExists(from))
+                    {
+                        MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                        return false;
+                    }
+
+                    isf.CopyFile(from, to, overwrite);
+                    return true;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error masked during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
                 return false;
             }
         }
