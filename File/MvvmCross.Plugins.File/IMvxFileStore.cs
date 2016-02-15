@@ -27,6 +27,8 @@ namespace MvvmCross.Plugins.File
 
 		bool TryMove(string from, string to, bool overwrite);
 
+        bool TryCopy(string from, string to, bool overwrite);
+
         bool Exists(string path);
 
         bool FolderExists(string folderPath);

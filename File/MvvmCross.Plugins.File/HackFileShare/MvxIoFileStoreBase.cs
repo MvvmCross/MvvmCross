@@ -119,6 +119,28 @@ namespace MvvmCross.Plugins.File
             }
         }
 
+		public override bool TryCopy (string from, string to, bool overwrite)
+		{
+			try
+			{
+				var fullFrom = FullPath(from);
+				var fullTo = FullPath(to);
+
+				if (!System.IO.File.Exists(fullFrom)) {
+					MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+					return false;
+				}
+
+				System.IO.File.Copy(fullFrom, fullTo, overwrite);
+				return true;
+			}
+			catch (Exception exception)
+			{
+				MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+				return false;
+			}
+		}
+
         public override string NativePath(string path)
         {
             return FullPath(path);

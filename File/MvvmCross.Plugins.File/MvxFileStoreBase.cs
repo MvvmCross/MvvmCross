@@ -121,6 +121,8 @@ namespace MvvmCross.Plugins.File
 
         public abstract string NativePath(string path);
 
+		public abstract bool TryCopy(string from, string to, bool overwrite);
+
         #endregion IMvxFileStore Members
 
         #region IMvxFileStore Async
