@@ -94,8 +94,10 @@ namespace MvvmCross.Plugins.File
                 var fullFrom = FullPath(from);
                 var fullTo = FullPath(to);
 
-                if (!System.IO.File.Exists(fullFrom))
+				if (!System.IO.File.Exists(fullFrom)) {
+					MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                     return false;
+				}
 
                 if (System.IO.File.Exists(fullTo))
                 {
