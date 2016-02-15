@@ -40,10 +40,10 @@ namespace MvvmCross.Binding.iOS.Views
         {
             if (disposing)
             {
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
             }
 
@@ -53,34 +53,34 @@ namespace MvvmCross.Binding.iOS.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
+            get { return _itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(this._itemsSource, value)
-                    && !this.ReloadOnAllItemsSourceSets)
+                if (Object.ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
 
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
 
-                this._itemsSource = value;
+                _itemsSource = value;
 
-                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
+                var collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
 
-                this.ReloadTableData();
+                ReloadTableData();
             }
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            return this.ItemsSource?.ElementAt(indexPath.Row);
+            return ItemsSource?.ElementAt(indexPath.Row);
         }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
@@ -92,18 +92,18 @@ namespace MvvmCross.Binding.iOS.Views
         protected virtual void CollectionChangedOnCollectionChanged(object sender,
                                                                     NotifyCollectionChangedEventArgs args)
         {
-            if (!this.UseAnimations)
+            if (!UseAnimations)
             {
-                this.ReloadTableData();
+                ReloadTableData();
                 return;
             }
 
-            if (this.TryDoAnimatedChange(args))
+            if (TryDoAnimatedChange(args))
             {
                 return;
             }
 
-            this.ReloadTableData();
+            ReloadTableData();
         }
 
         protected bool TryDoAnimatedChange(NotifyCollectionChangedEventArgs args)
@@ -113,13 +113,13 @@ namespace MvvmCross.Binding.iOS.Views
                 case NotifyCollectionChangedAction.Add:
                     {
                         var newIndexPaths = CreateNSIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
-                        this.TableView.InsertRows(newIndexPaths, this.AddAnimation);
+                        TableView.InsertRows(newIndexPaths, AddAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
                         var oldIndexPaths = CreateNSIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
-                        this.TableView.DeleteRows(oldIndexPaths, this.RemoveAnimation);
+                        TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
@@ -129,7 +129,7 @@ namespace MvvmCross.Binding.iOS.Views
 
                         var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
                         var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        this.TableView.MoveRow(oldIndexPath, newIndexPath);
+                        TableView.MoveRow(oldIndexPath, newIndexPath);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Replace:
@@ -138,10 +138,10 @@ namespace MvvmCross.Binding.iOS.Views
                             return false;
 
                         var indexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        this.TableView.ReloadRows(new[]
+                        TableView.ReloadRows(new[]
                             {
                                 indexPath
-                            }, UITableViewRowAnimation.Fade);
+						}, ReplaceAnimation);
                         return true;
                     }
                 default:
@@ -161,10 +161,10 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            if (this.ItemsSource == null)
+            if (ItemsSource == null)
                 return 0;
 
-            return this.ItemsSource.Count();
+            return ItemsSource.Count();
         }
     }
 }
