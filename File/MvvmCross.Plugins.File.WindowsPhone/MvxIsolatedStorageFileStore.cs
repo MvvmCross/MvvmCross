@@ -173,6 +173,33 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
+        public override bool TryCopy(string from, string to, bool overwrite)
+        {
+            try
+            {
+                using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!isf.FileExists(from))
+                    {
+                        MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                        return false;
+                    }
+
+                    isf.CopyFile(from, to, overwrite);
+                    return true;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Error masked during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
+
         public override string NativePath(string path)
         {
             return path;

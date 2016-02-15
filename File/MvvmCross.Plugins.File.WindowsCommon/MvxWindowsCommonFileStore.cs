@@ -81,6 +81,35 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
+        public override bool TryCopy(string @from, string to, bool overwrite)
+        {
+            try
+            {
+                var fromFile = StorageFileFromRelativePath(from);
+
+                var fullToPath = ToFullPath(to);
+                var toDirectory = Path.GetDirectoryName(fullToPath);
+                var toFileName = Path.GetFileName(fullToPath);
+
+                if (overwrite)
+                {
+                    var toFile = StorageFileFromRelativePath(to);
+                    fromFile.CopyAndReplaceAsync(toFile).Await();
+                }
+                else
+                {
+                    var toStorageFolder = StorageFolder.GetFolderFromPathAsync(toDirectory).Await();
+                    fromFile.CopyAsync(toStorageFolder, toFileName).Await();
+                }
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Trace("Exception during file copy from {0} to {1} - {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
+
         public override bool Exists(string path)
         {
             try
