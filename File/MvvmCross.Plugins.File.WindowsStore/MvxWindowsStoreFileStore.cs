@@ -53,7 +53,7 @@ namespace MvvmCross.Plugins.File.WindowsStore
             }
         }
 
-        public override bool TryMove(string from, string to, bool deleteExistingTo)
+        public override bool TryMove(string from, string to, bool overwrite)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace MvvmCross.Plugins.File.WindowsStore
                     return false;
                 }
 
-                if (deleteExistingTo)
+                if (overwrite)
                 {
                     if (!SafeDeleteFile(to))
                     {

@@ -134,21 +134,27 @@ namespace MvvmCross.Plugins.File.WindowsPhone
             }
         }
 
-        public override bool TryMove(string from, string to, bool deleteExistingTo)
+        public override bool TryMove(string from, string to, bool overwrite)
         {
             try
             {
                 using (var isf = IsolatedStorageFile.GetUserStoreForApplication())
                 {
                     if (!isf.FileExists(from))
+                    {
                         return false;
+                    }
 
                     if (isf.FileExists(to))
                     {
-                        if (deleteExistingTo)
+                        if (overwrite)
+                        {
                             isf.DeleteFile(to);
+                        }
                         else
+                        {
                             return false;
+                        }
                     }
 
                     isf.MoveFile(from, to);
