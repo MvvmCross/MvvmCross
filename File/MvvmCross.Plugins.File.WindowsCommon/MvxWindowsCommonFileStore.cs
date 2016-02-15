@@ -57,16 +57,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             try
             {
-                StorageFile fromFile;
-
-                try
-                {
-                    fromFile = StorageFileFromRelativePath(from);
-                }
-                catch (FileNotFoundException)
-                {
-                    return false;
-                }
+                var fromFile = StorageFileFromRelativePath(from);
 
                 if (overwrite)
                 {

@@ -142,6 +142,7 @@ namespace MvvmCross.Plugins.File.WindowsPhone
                 {
                     if (!isf.FileExists(from))
                     {
+                        MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                         return false;
                     }
 

@@ -63,8 +63,9 @@ namespace MvvmCross.Plugins.File.WindowsStore
                 {
                     fromFile = StorageFileFromRelativePath(from);
                 }
-                catch (FileNotFoundException)
+                catch (FileNotFoundException exception)
                 {
+                    MvxTrace.Error("Exception during file move from {0} to {1} - {2}", from, to, exception.ToLongString());
                     return false;
                 }
 
