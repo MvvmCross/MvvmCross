@@ -87,7 +87,7 @@ namespace MvvmCross.Plugins.File
             Directory.Delete(fullPath, recursive);
         }
 
-        public override bool TryMove(string from, string to, bool deleteExistingTo)
+        public override bool TryMove(string from, string to, bool overwrite)
         {
             try
             {
@@ -99,19 +99,17 @@ namespace MvvmCross.Plugins.File
 
                 if (System.IO.File.Exists(fullTo))
                 {
-                    if (deleteExistingTo)
+					if (overwrite) {
                         System.IO.File.Delete(fullTo);
-                    else
+					}
+					else {
                         return false;
+					}
                 }
 
                 System.IO.File.Move(fullFrom, fullTo);
                 return true;
             }
-            //catch (ThreadAbortException)
-            //{
-            //    throw;
-            //}
             catch (Exception exception)
             {
                 MvxTrace.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());

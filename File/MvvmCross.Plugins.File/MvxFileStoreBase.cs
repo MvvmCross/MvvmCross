@@ -117,7 +117,7 @@ namespace MvvmCross.Plugins.File
             WriteFileCommon(path, writeMethod);
         }
 
-        public abstract bool TryMove(string from, string to, bool deleteExistingTo);
+        public abstract bool TryMove(string from, string to, bool overwrite);
 
         public abstract string NativePath(string path);
 

@@ -25,7 +25,7 @@ namespace MvvmCross.Plugins.File
 
         void WriteFile(string path, Action<Stream> writeMethod);
 
-        bool TryMove(string from, string to, bool deleteExistingTo);
+		bool TryMove(string from, string to, bool overwrite);
 
         bool Exists(string path);
 
