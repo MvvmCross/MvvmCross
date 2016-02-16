@@ -141,7 +141,7 @@ namespace MvvmCross.Binding.iOS.Views
                         TableView.ReloadRows(new[]
                             {
                                 indexPath
-						}, ReplaceAnimation);
+                            }, ReplaceAnimation);
                         return true;
                     }
                 default:
