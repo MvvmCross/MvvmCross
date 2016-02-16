@@ -69,17 +69,17 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\SidePanels\ActivePanelPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\BaseSplitViewController.cs" />
-    <Compile Include="Presenters\SidePanels\MultiPanelController.cs" />
-    <Compile Include="Presenters\SidePanels\SidePanelsPresenter.cs" />
-    <Compile Include="Presenters\SidePanels\PanelEnum.cs" />
-    <Compile Include="Presenters\SidePanels\PanelHintType.cs" />
-    <Compile Include="Presenters\SidePanels\PanelPopToRootPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\PanelPresentationAttribute.cs" />
-    <Compile Include="Presenters\SidePanels\PanelResetRootPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\SplitViewBehaviour.cs" />
-    <Compile Include="Presenters\SidePanels\SplitViewControllerHost.cs" />
+    <Compile Include="Presenters\SidePanels\MvxActivePanelPresentationHint.cs" />
+    <Compile Include="Presenters\SidePanels\MvxBaseSplitViewController.cs" />
+    <Compile Include="Presenters\SidePanels\MvxMultiPanelController.cs" />
+    <Compile Include="Presenters\SidePanels\MvxSidePanelsPresenter.cs" />
+    <Compile Include="Presenters\SidePanels\MvxPanelEnum.cs" />
+    <Compile Include="Presenters\SidePanels\MvxPanelHintType.cs" />
+    <Compile Include="Presenters\SidePanels\MvxPanelPopToRootPresentationHint.cs" />
+    <Compile Include="Presenters\SidePanels\MvxPanelPresentationAttribute.cs" />
+    <Compile Include="Presenters\SidePanels\MvxPanelResetRootPresentationHint.cs" />
+    <Compile Include="Presenters\SidePanels\MvxSplitViewBehaviour.cs" />
+    <Compile Include="Presenters\SidePanels\MvxSplitViewControllerHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
