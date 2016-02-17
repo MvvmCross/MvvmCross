@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presenters\SidePanels\MvxActivePanelPresentationHint.cs" />

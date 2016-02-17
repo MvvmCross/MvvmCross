@@ -1,26 +1,39 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-using UIKit;
-using Foundation;
-using CoreGraphics;
-
-namespace MvvmCross.iOS.Support
+﻿namespace MvvmCross.iOS.Support.Views
 {
-	/// <summary>
+    using Core.ViewModels;
+    using CoreGraphics;
+    using Foundation;
+    using iOS.Views;
+    using UIKit;
+
+    /// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.
 	/// </summary>
-	public abstract class MvxBaseViewController<TViewModel> : MvvmCross.iOS.Views.MvxViewController where TViewModel : IMvxViewModel
+	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : MvxViewModel
 	{
-		protected new TViewModel ViewModel
+        /// <summary>
+        /// Gets or sets the view model.
+        /// </summary>
+        /// <value>
+        /// The view model.
+        /// </value>
+        protected new TViewModel ViewModel
 		{
 			get { return (TViewModel)base.ViewModel; }
 			set { base.ViewModel = value; }
 		}
 
-		protected UIView ViewToCenterOnKeyboardShown;
-		protected UIScrollView ScrollToCenterOnKeyboardShown;
+        /// <summary>
+        /// The view to center on keyboard shown
+        /// </summary>
+        protected UIView ViewToCenterOnKeyboardShown;
 
-		/// <summary>
+        /// <summary>
+        /// The scroll to center on keyboard shown
+        /// </summary>
+        protected UIScrollView ScrollToCenterOnKeyboardShown;
+
+        /// <summary>
 		/// Initialises the keyboard handling.  The view must also contain a UIScrollView for this to work.  You must also override HandlesKeyboardNotifications() and return true from that method.
 		/// </summary>
 		/// <param name="enableAutoDismiss">If set to <c>true</c> enable auto dismiss.</param>
@@ -37,8 +50,12 @@ namespace MvvmCross.iOS.Support
 				DismissKeyboardOnBackgroundTap();
 			}
 		}
-			
-		public virtual bool HandlesKeyboardNotifications()
+
+        /// <summary>
+        /// Override this in derived Views in order to handle the keyboard.
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool HandlesKeyboardNotifications()
 		{
 			return false;
 		}
@@ -87,7 +104,11 @@ namespace MvvmCross.iOS.Support
 			return View.FindFirstResponder();
 		}
 
-		void OnKeyboardNotification(NSNotification notification)
+        /// <summary>
+        /// Called when keyboard notifications are produced.
+        /// </summary>
+        /// <param name="notification">The notification.</param>
+        void OnKeyboardNotification(NSNotification notification)
 		{
 			if (!IsViewLoaded) return;
 
@@ -155,5 +176,5 @@ namespace MvvmCross.iOS.Support
 			tap.ShouldReceiveTouch = (recognizer, touch) => !(touch.View is UIControl || touch.View.FindSuperviewOfType(View, typeof(UITableViewCell)) != null);
 			View.AddGestureRecognizer(tap);
 		}
-	}
+    }
 }

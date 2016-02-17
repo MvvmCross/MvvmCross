@@ -90,6 +90,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="Views\BaseViewController.cs" />
     <Compile Include="Views\DetailView.cs" />
+    <Compile Include="Views\KeyboardHandlingView.cs" />
     <Compile Include="Views\MasterView.cs" />
     <Compile Include="Views\LeftPanelView.cs" />
     <Compile Include="Views\RightPanelView.cs" />

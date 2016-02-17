@@ -30,5 +30,18 @@
         {
             ShowViewModel<MasterViewModel>();
         }
+
+        public IMvxCommand ShowKeyboardHandlingCommand
+        {
+            get
+            {
+                return new MvxCommand(ShowKeyboardHandlingCommandExecuted);
+            }
+        }
+
+        private void ShowKeyboardHandlingCommandExecuted()
+        {
+            ShowViewModel<KeyboardHandlingViewModel>();
+        }
     }
 }
