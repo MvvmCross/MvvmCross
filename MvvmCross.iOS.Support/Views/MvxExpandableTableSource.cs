@@ -10,16 +10,20 @@ using UIKit;
 
 namespace MvvmCross.iOS.Support.Views
 {
-    public abstract class MvxExpandableTableSource : MvxTableViewSource
+    public abstract class MvxExpandableTableViewSource : MvxTableViewSource
     {
+        /// <summary>
+        /// Indicates which sections are expanded.
+        /// </summary>
         private bool[] _isCollapsed;
 
-        public MvxExpandableTableSource(UITableView tableView) : base(tableView)
+        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
+            // When the collection is changed collapse all sections
             _isCollapsed = new bool[ItemsSource.Count()];
 
             for (var i = 0; i < _isCollapsed.Length; i++)
@@ -30,6 +34,7 @@ namespace MvvmCross.iOS.Support.Views
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
+            // If the section is not colapsed return the rows in that section otherwise return 0
             if (((IEnumerable<object>)ItemsSource?.ElementAt((int)section)).Any() == true && !_isCollapsed[(int)section])
                 return ((IEnumerable<object>)ItemsSource.ElementAt((int)section)).Count();
             return 0;
@@ -60,10 +65,12 @@ namespace MvvmCross.iOS.Support.Views
         {
             var header = GetOrCreateHeaderCellFor(tableView, section);
 
+            // Create a button to make the header clickable
             UIButton hiddenButton = new UIButton(header.Frame);
             hiddenButton.TouchUpInside += EventHandler(tableView, section);
             header.AddSubview(hiddenButton);
 
+            // Set the header data context
             var bindable = header as IMvxDataConsumer;
             if (bindable != null)
                 bindable.DataContext = GetHeaderItemAt(section);
@@ -74,9 +81,11 @@ namespace MvvmCross.iOS.Support.Views
         {
             return (sender, e) =>
             {
+                // Toggle the is collapsed
                 _isCollapsed[(int)section] = !_isCollapsed[(int)section];
                 tableView.ReloadData();
 
+                // Animate the section cells
                 var paths = new NSIndexPath[RowsInSection(tableView, section)];
                 for (int i = 0; i < paths.Length; i++)
                 {
@@ -110,6 +119,12 @@ namespace MvvmCross.iOS.Support.Views
             return base.GetCell(tableView, indexPath);
         }
 
+        /// <summary>
+        /// Gets the cell used for the header
+        /// </summary>
+        /// <param name="tableView"></param>
+        /// <param name="section"></param>
+        /// <returns></returns>
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
     }
