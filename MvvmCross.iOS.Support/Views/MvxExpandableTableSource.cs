@@ -76,6 +76,14 @@ namespace MvvmCross.iOS.Support.Views
             {
                 _isCollapsed[(int)section] = !_isCollapsed[(int)section];
                 tableView.ReloadData();
+
+                var paths = new NSIndexPath[RowsInSection(tableView, section)];
+                for (int i = 0; i < paths.Length; i++)
+                {
+                    paths[i] = NSIndexPath.FromItemSection(i, section);
+                }
+
+                tableView.ReloadRows(paths, UITableViewRowAnimation.Automatic);
             };
         }
 
