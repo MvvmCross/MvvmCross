@@ -81,7 +81,7 @@
     <Compile Include="Presenters\SidePanels\MvxSplitViewBehaviour.cs" />
     <Compile Include="Presenters\SidePanels\MvxSplitViewControllerHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\MvxExpandableTableSource.cs" />
+    <Compile Include="Views\MvxExpandableTableViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="jasidepanels">
