@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.ValueConverters
             handler?.Invoke(this, eventArgs);
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object parameter = null)
         {
             if (this._wrapped == null)
                 return false;
@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.ValueConverters
             return this._wrapped.CanExecute(this._commandParameterOverride);
         }
 
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
             if (this._wrapped == null)
                 return;
