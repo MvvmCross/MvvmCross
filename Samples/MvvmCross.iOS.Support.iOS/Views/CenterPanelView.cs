@@ -25,23 +25,30 @@
 
             var label = new UILabel();
 
-            var rightPanelInstructions = new UILabel();
-            rightPanelInstructions.Lines = 0;
-            rightPanelInstructions.LineBreakMode = UILineBreakMode.WordWrap;
-            rightPanelInstructions.TextAlignment = UITextAlignment.Center;
+            var rightPanelInstructions = new UILabel
+            {
+                Lines = 0,
+                LineBreakMode = UILineBreakMode.WordWrap,
+                TextAlignment = UITextAlignment.Center
+            };
 
             var masterButton = new UIButton();
-            masterButton.SetTitle("Show Master", UIControlState.Normal);
+            masterButton.SetTitle("Show Master View", UIControlState.Normal);
+
+            var keyboardHandlingButton = new UIButton();
+            keyboardHandlingButton.SetTitle("Show Keyboard Handling View", UIControlState.Normal);
 
             var bindingSet = this.CreateBindingSet<CenterPanelView, CenterPanelViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
             bindingSet.Bind(rightPanelInstructions).To(vm => vm.RightPanelInstructions);
             bindingSet.Bind(masterButton).To(vm => vm.ShowMasterCommand);
+            bindingSet.Bind(keyboardHandlingButton).To(vm => vm.ShowKeyboardHandlingCommand);
+            bindingSet.Apply();
 
             Add(label);
             Add(rightPanelInstructions);
             Add(masterButton);
-            
+            Add(keyboardHandlingButton);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
@@ -56,11 +63,12 @@
                 rightPanelInstructions.WithSameCenterX(View),
 
                 masterButton.Below(rightPanelInstructions, 10),
-                masterButton.WithSameCenterX(View)
+                masterButton.WithSameCenterX(View),
+
+                keyboardHandlingButton.Below(masterButton, 10),
+                keyboardHandlingButton.WithSameCenterX(View)
 
                 );
-
-            bindingSet.Apply();
         }
     }
 }

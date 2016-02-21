@@ -6,12 +6,6 @@
 
     public class BaseViewController<TViewModel> : MvxViewController where TViewModel : BaseViewModel
     {
-        protected new TViewModel ViewModel
-        {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
         /// </summary>
