@@ -114,7 +114,7 @@ namespace MvvmCross.Binding.Droid.Views
                 var currentBindingContext = MvxAndroidBindingContextHelpers.Current();
                 if (currentBindingContext != null)
                 {
-                    factory = this.FactoryFactory.Create(currentBindingContext.DataContext);
+                    factory = this.FactoryFactory.Create(currentBindingContext.EnhancedDataContext);
 
                     // Set the current factory used to generate bindings
                     if (factory != null)

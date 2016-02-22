@@ -21,8 +21,8 @@ namespace MvvmCross.Binding.Droid.BindingContext
         private readonly Context _droidContext;
         private IMvxLayoutInflaterHolder _layoutInflaterHolder;
 
-        public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflaterHolder layoutInflaterHolder, object source = null)
-            : base(source)
+        public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflaterHolder layoutInflaterHolder, object source = null, object parentSource = null)
+            : base(source, parentSource)
         {
             this._droidContext = droidContext;
             this._layoutInflaterHolder = layoutInflaterHolder;

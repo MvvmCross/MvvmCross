@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
     using System.Collections.Generic;
@@ -26,12 +28,29 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
         private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
 
-        protected bool TryCreateBindingFromExtensions(object source, MvxPropertyToken propertyToken,
-                                            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        protected bool TryCreateBindingFromExtensions(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
+            var enhancedSource = source as IMvxEnhancedDataContext;
+            if (enhancedSource != null)
+            {
+                // it's a bit nasty doing the parent detection and handling here... but it works
+                if (propertyToken is MvxParentPropertyToken)
+                {
+                    var parentSource = enhancedSource.Parent;
+                    var nextPropertyToken = remainingTokens.FirstOrDefault() ?? new MvxEmptyPropertyToken();
+                    var fewerTokens = remainingTokens.Skip(1).ToList();
+
+                    // recurse... this allows us to handle $parent.$parent.$parent.path expressions
+                    return TryCreateBindingFromExtensions(parentSource, nextPropertyToken, fewerTokens, out result);
+                }
+            }
+
+            // beyond this point parent source isn't needed.... hackeroo
+            var realSource = enhancedSource == null ? source : enhancedSource.Core;
+
             foreach (var extension in this._extensions)
             {
-                if (extension.TryCreateBinding(source, propertyToken, remainingTokens, out result))
+                if (extension.TryCreateBinding(realSource, propertyToken, remainingTokens, out result))
                 {
                     return true;
                 }

@@ -23,7 +23,16 @@ namespace MvvmCross.Binding.Droid.Views
                                IMvxLayoutInflaterHolder layoutInflaterHolder,
                                object dataContext,
                                int templateId)
-            : base(context, layoutInflaterHolder, dataContext)
+            : this(context, layoutInflaterHolder, dataContext, null, templateId)
+        {
+        }
+
+        public MvxListItemView(Context context,
+                               IMvxLayoutInflaterHolder layoutInflaterHolder,
+                               object dataContext,
+                               object parentDataContext,
+                               int templateId)
+            : base(context, layoutInflaterHolder, dataContext, parentDataContext)
         {
             this._templateId = templateId;
             this.AndroidBindingContext.BindingInflate(templateId, this);

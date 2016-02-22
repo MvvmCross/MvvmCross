@@ -5,6 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.Source.Construction;
+
 namespace MvvmCross.Binding.Droid.Views
 {
     using System;
@@ -20,14 +24,15 @@ namespace MvvmCross.Binding.Droid.Views
     public abstract class MvxBaseListItemView
         : FrameLayout
         , IMvxBindingContextOwner
+        , IMvxEnhancedDataConsumer
         , ICheckable
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-        protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext)
+        protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, object parentDataContext = null)
             : base(context)
         {
-            this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
+            this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext, parentDataContext);
         }
 
         protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -50,24 +55,24 @@ namespace MvvmCross.Binding.Droid.Views
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
-        private object _cachedDataContext;
+        private IMvxEnhancedDataContext _cachedEnhancedDataContext;
         private bool _isAttachedToWindow;
 
         protected override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
             this._isAttachedToWindow = true;
-            if (this._cachedDataContext != null
-                && this.DataContext == null)
+            if (this._cachedEnhancedDataContext != null
+                && this.EnhancedDataContext == null)
             {
-                this.DataContext = this._cachedDataContext;
+                this.EnhancedDataContext = this._cachedEnhancedDataContext;
             }
+            this._cachedEnhancedDataContext = null;
         }
 
         protected override void OnDetachedFromWindow()
         {
-            this._cachedDataContext = this.DataContext;
-            this.DataContext = null;
+            this.EnhancedDataContext = null;
             base.OnDetachedFromWindow();
             this._isAttachedToWindow = false;
         }
@@ -77,7 +82,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (disposing)
             {
                 this.ClearAllBindings();
-                this._cachedDataContext = null;
+                this._cachedEnhancedDataContext = null;
             }
 
             base.Dispose(disposing);
@@ -87,19 +92,32 @@ namespace MvvmCross.Binding.Droid.Views
 
         public object DataContext
         {
-            get { return this._bindingContext.DataContext; }
+            get { return this._bindingContext.EnhancedDataContext.Core; }
+            set
+            {
+                this.EnhancedDataContext = MvxSimpleEnhancedDataContext.FromCoreAndParent(value,
+                    _bindingContext.EnhancedDataContext?.Parent);
+            }
+        }
+
+        public IMvxEnhancedDataContext EnhancedDataContext
+        {
+            get { return this._bindingContext.EnhancedDataContext; }
             set
             {
                 if (this._isAttachedToWindow)
                 {
-                    this._bindingContext.DataContext = value;
+                    this._bindingContext.EnhancedDataContext = value;
+                    this._cachedEnhancedDataContext = null;
                 }
                 else
                 {
-                    this._cachedDataContext = value;
-                    if (this._bindingContext.DataContext != null)
+                    this._cachedEnhancedDataContext = MvxSimpleEnhancedDataContext.Clone(value);
+
+                    if (this._bindingContext.EnhancedDataContext?.Core != null
+                        || this._bindingContext.EnhancedDataContext?.Parent != null)
                     {
-                        this._bindingContext.DataContext = null;
+                        this._bindingContext.EnhancedDataContext = MvxSimpleEnhancedDataContext.CreateEmpty();
                     }
                 }
             }

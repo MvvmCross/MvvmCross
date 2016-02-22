@@ -5,6 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.Source.Construction;
+
 namespace MvvmCross.Binding.Droid.Views
 {
     using System;
@@ -287,7 +292,9 @@ namespace MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
+#pragma warning disable 618 // disable the obsolete warning here ... until we can ge rid of the non-parentDataObject
                 viewToUse = this.CreateBindableView(dataContext, templateId);
+#pragma warning restore 618
             }
             else
             {
@@ -299,12 +306,28 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
         {
-            viewToUse.DataContext = source;
+            var enhanced = viewToUse as IMvxEnhancedDataConsumer;
+            if (enhanced != null)
+                enhanced.EnhancedDataContext = MvxSimpleEnhancedDataContext.FromCoreAndParent(source,
+                    _bindingContext?.EnhancedDataContext);
+            else
+                viewToUse.DataContext = source;
         }
 
+        // This method is out of date really now...
+        [Obsolete("Override the version which has a parentDataContext parameter too instead - CreateBindableView(object dataContext, object parentDataContext, int templateId)")]
         protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
         {
-            return new MvxListItemView(this._context, this._bindingContext.LayoutInflaterHolder, dataContext, templateId);
+            return CreateBindableView(dataContext, _bindingContext?.EnhancedDataContext, templateId);
         }
+
+        protected virtual IMvxListItemView CreateBindableView(object dataContext, object parentDataContext, int templateId)
+        {
+            return new MvxListItemView(this._context, this._bindingContext.LayoutInflaterHolder, dataContext, parentDataContext, templateId);
+        }
+    }
+
+    public interface IMvxSupportsEnhancedBindings
+    {
     }
 }

@@ -124,12 +124,14 @@ namespace MvvmCross.Binding.Test.Bindings
 
             var toTest = new MvxFullBinding(request);
 
+#warning TODO - why are these commented out? Do they need removing or is there something needs fixing?
             //var sourceBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
             //mockSourceBinding.Verify(x => x.Changed += It.IsAny<EventHandler<MvxSourcePropertyBindingEventArgs>>(), sourceBindingTimes);
             mockSourceBindingFactory
                 .Verify(x => x.CreateBinding(It.Is<object>(s => s == source), It.Is<string>(s => s == sourceText)),
                         Times.Once());
 
+#warning // TODO - why are these commented out? Do they need removing or is there something needs fixing?
             //var targetBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
             //mockTargetBinding.Verify(x => x.ValueChanged += It.IsAny<EventHandler<MvxTargetChangedEventArgs>>(), targetBindingTimes);
             mockTargetBindingFactory
