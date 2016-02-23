@@ -66,7 +66,7 @@ namespace MvvmCross.Forms.Presenter.Core
         {
 			// async void is a nono, calling this sync because weirdness on startup as 
 			// Show method is not awaited itself hence code continues without blocking.
-			if (TryShowPage(request).GetAwaiter().GetResult())
+			if (TryShowPage(request))
                 return;
 
             Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
@@ -76,7 +76,7 @@ namespace MvvmCross.Forms.Presenter.Core
         {
         }
 
-        private async Task<bool> TryShowPage(MvxViewModelRequest request)
+        private bool TryShowPage(MvxViewModelRequest request)
         {
             var page = MvxPresenterHelpers.CreatePage(request);
             if (page == null)
@@ -97,7 +97,7 @@ namespace MvvmCross.Forms.Presenter.Core
             {
                 try
                 {
-                    await mainPage.PushAsync(page);
+					mainPage.PushAsync(page).GetAwaiter().GetResult();
                 }
                 catch (Exception e)
                 {
