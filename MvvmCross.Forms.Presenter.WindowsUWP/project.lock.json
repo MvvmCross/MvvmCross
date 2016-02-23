@@ -1570,7 +1570,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -3243,7 +3243,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -4888,7 +4888,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -6566,7 +6566,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -8211,7 +8211,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -9889,7 +9889,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -11534,7 +11534,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.0.6490": {
+      "Xamarin.Forms/2.0.1.6505": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -12205,7 +12205,7 @@
       ]
     },
     "MvvmCross.Binding/4.0.0": {
-      "sha512": "7OytddY5NfUDpjdWDpBrJBP6O/GpfvqPRZSh8JysW7YurhBxs/B/x0tgHo6tV/VfrIAOn75eQV01ujPElXF97w==",
+      "sha512": "ViHZIlEEM4lf2mOJiHbNMbWFs36dePMTyS1zIlIvfPfVUc6GEapnErhZ19W6nzZZG7NKa2d6i0YUrshLw6AT5A==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12254,11 +12254,11 @@
         "lib/Xamarin.Mac20/MvvmCross.Localization.dll",
         "lib/Xamarin.Mac20/MvvmCross.Localization.dll.mdb",
         "MvvmCross.Binding.nuspec",
-        "package/services/metadata/core-properties/68785fa7da3949f4aa005a6facbc2140.psmdcp"
+        "package/services/metadata/core-properties/55916a9779bd4830b0d41b2e5b0118fd.psmdcp"
       ]
     },
     "MvvmCross.Core/4.0.0": {
-      "sha512": "l0o9vEAwnuiQf9drmGLKHeBbgtJ/Df75AJOEFZryT/5bQ6dhA9o7J/OWje9g3L1vsOT0+M+aHT3i/LWHc0iqIA==",
+      "sha512": "tUS2aluir/2ie82ILmQFZoIhxT8o+MgDMv4z8NCLGwHVGoqU1WA238lA0fcXVFNXvcMktnr6iV6S0cpxo7IpZQ==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12294,11 +12294,11 @@
         "lib/Xamarin.Mac20/MvvmCross.Mac.dll",
         "lib/Xamarin.Mac20/MvvmCross.Mac.dll.mdb",
         "MvvmCross.Core.nuspec",
-        "package/services/metadata/core-properties/221848a91ed94165a9ac36bac9f09aba.psmdcp"
+        "package/services/metadata/core-properties/3e50cbf4348a49d98dc7158115dedfa6.psmdcp"
       ]
     },
     "MvvmCross.Platform/4.0.0": {
-      "sha512": "ecVDg0PoM37hW2c2kIfMNwo1QCyogFGlsNiOxYOB+zTZKsSqS5fQX5+umDGYuX58uZCTlJEKJ04r3FZr7tD6hA==",
+      "sha512": "PAwMCnppKblgGqFUugXaz4DQVWUXgsm2rQU54b5e1wgKbeZQ+F0VTstDv5FIY0ZwdwNq98Ky37xa/k8pZOOIKA==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12341,7 +12341,7 @@
         "lib/Xamarin.Mac20/MvvmCross.Platform.Mac.dll",
         "lib/Xamarin.Mac20/MvvmCross.Platform.Mac.dll.mdb",
         "MvvmCross.Platform.nuspec",
-        "package/services/metadata/core-properties/6981e9fc693e4f62a71ae55b89b9e96e.psmdcp"
+        "package/services/metadata/core-properties/61c744d2795d43adbb5960b10d375fdf.psmdcp"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15039,8 +15039,8 @@
         "System.Xml.XmlSerializer.nuspec"
       ]
     },
-    "Xamarin.Forms/2.0.0.6490": {
-      "sha512": "jTQp/dIlAT2J3dvFwr+UsP0COsTmkTuPQ2ySnYnrLyoHV0gbUueMt1oPmBnFEDedoUxhEQIhMFbzGRKuiS+Wvw==",
+    "Xamarin.Forms/2.0.1.6505": {
+      "sha512": "hmaHk7j3mWZY7rmWKq2/pnqDnbxFGQ20VXro2W2yaMS4ZDZBcQb6ePzH5/y0l6wRFgiPkA+oXPlrXbXICrE5hw==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -15116,6 +15116,7 @@
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.dll",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone.dll",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone.pri",
+        "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/FormsTextBoxStyle.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/PhoneResources.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/Resources.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/SearchBox.xbf",
@@ -15133,7 +15134,7 @@
         "lib/Xamarin.iOS10/Xamarin.Forms.Platform.iOS.dll",
         "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.dll",
         "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.xml",
-        "package/services/metadata/core-properties/bc55d49ed9c94f79b5764d7531ffc462.psmdcp",
+        "package/services/metadata/core-properties/a020f0c26e2c4330b18512b6bcf23b4e.psmdcp",
         "tools/init.ps1",
         "tools/Xamarin.Forms.Core.Design.dll",
         "tools/Xamarin.Forms.Xaml.Design.dll",
@@ -15147,7 +15148,7 @@
       "MvvmCross.Binding >= 4.0.0",
       "MvvmCross.Core >= 4.0.0",
       "MvvmCross.Platform >= 4.0.0",
-      "Xamarin.Forms >= 2.0.0.6490"
+      "Xamarin.Forms >= 2.0.1.6505"
     ],
     "UAP,Version=v10.0": []
   }
