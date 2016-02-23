@@ -18,172 +18,42 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="Microsoft.CodeAnalysis" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Analyzers" version="1.1.0"/>
-				<dependency id="Microsoft.CodeAnalysis.Common" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Extensions" version="1.0.0"/>
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.VisualBasic.Workspaces" version="1.1.1"/>
-				<dependency id="Microsoft.CodeAnalysis.Workspaces.Common" version="1.1.1"/>
-				<dependency id="Microsoft.Composition" version="1.0.30"/>
-				<dependency id="NuGet.CommandLine" version="3.3.0"/>
-				<dependency id="System.Collections.Immutable" version="1.1.37"/>
-				<dependency id="System.Reflection.Metadata" version="1.1.0"/>
 				<dependency id="MvvmCross.Platform" version="4.0.0" />
 				<dependency id="MvvmCross.Core" version="4.0.0" />
 			</group>
@@ -191,7 +61,7 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
 	</metadata>
 	<files>
 		<!-- The convention for analyzers is to put language agnostic dlls in analyzers\dotnet and language specific analyzers in either analyzers\dotnet\cs or analyzers\dotnet\vb -->
-		<file src="..\CodeAnalysis\MvvmCross.CodeAnalysis\*.dll" target="analyzers\dotnet\cs" exclude="**\Microsoft.CodeAnalysis.*;**\System.Collections.Immutable.*;**\System.Reflection.Metadata.*;**\System.Composition.*" />
+		<file src="..\CodeAnalysis\MvvmCross.CodeAnalysis\bin\Release\*.dll" target="analyzers\dotnet\cs" exclude="**\Microsoft.CodeAnalysis.*;**\System.Collections.Immutable.*;**\System.Reflection.Metadata.*;**\System.Composition.*" />
 		<file src="..\CodeAnalysis\MvvmCross.CodeAnalysis\tools\*.ps1" target="tools\" />
 	</files>
 </package>
