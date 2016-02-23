@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Forms.Presenter.WindowsUWP", "MvvmCross.Forms.Presenter.WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.csproj", "{8583F087-0543-4D27-8F11-F7D8DC1480E2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4764C2F2-8A1E-4E3C-A28D-C450C66D5E72}"
+	ProjectSection(SolutionItems) = preProject
+		nuspec\MvvmCross.Forms.Presenter.nuspec = nuspec\MvvmCross.Forms.Presenter.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
