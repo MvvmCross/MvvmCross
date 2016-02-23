@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Forms.Presenter</id>
-		<version>4.0.2</version>
+		<version>4.0.3</version>
 		<title>MvvmCross FormsPresenters</title>
 		<authors>Tomasz Cielecki, Marcos Cobeña Morián, Peter Burke</authors>
 		<owners>Tomasz Cielecki</owners>
