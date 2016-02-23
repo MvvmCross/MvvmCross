@@ -62,14 +62,11 @@ namespace MvvmCross.Forms.Presenter.Core
             }
         }
 
-        public void AddPresentationHintHandler<THint>(Func<THint, bool> action)
-            where THint : MvxPresentationHint
+        public override void Show(MvxViewModelRequest request)
         {
-        }
-
-        public override async void Show(MvxViewModelRequest request)
-        {
-            if (await TryShowPage(request))
+			// async void is a nono, calling this sync because weirdness on startup as 
+			// Show method is not awaited itself hence code continues without blocking.
+			if (TryShowPage(request).GetAwaiter().GetResult())
                 return;
 
             Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
