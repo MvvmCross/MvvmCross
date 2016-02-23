@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V7.AppCompat</id>
-		<version>4.0.1</version>
+		<version>4.0.2</version>
 		<title>MvvmCross Android Support V7 - AppCompat</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
