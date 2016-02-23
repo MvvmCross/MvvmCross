@@ -21,20 +21,17 @@ namespace MvvmCross.Forms.Presenter.Core
 
         protected override void OnStart()
         {
-            var handler = Start;
-            handler?.Invoke(this, EventArgs.Empty);
+            Start?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void OnSleep()
         {
-            var handler = Sleep;
-            handler?.Invoke(this, EventArgs.Empty);
+            Sleep?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void OnResume()
         {
-            var handler = Resume;
-            handler?.Invoke(this, EventArgs.Empty);
+            Resume?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -16,9 +16,9 @@ using Xamarin.Forms;
 namespace MvvmCross.Forms.Presenter.Core
 {
     public class MvxFormsPagePresenter
-        : MvxViewPresenter, IMvxViewPresenter
+        : MvxViewPresenter
     {
-        protected Application _mvxFormsApp;
+        private Application _mvxFormsApp;
 
         public Application MvxFormsApp
         {
@@ -39,7 +39,7 @@ namespace MvvmCross.Forms.Presenter.Core
 
         public MvxFormsPagePresenter(Application mvxFormsApp)
         {
-            _mvxFormsApp = mvxFormsApp;
+            MvxFormsApp = mvxFormsApp;
         }
 
         public override async void ChangePresentation(MvxPresentationHint hint)
@@ -48,7 +48,7 @@ namespace MvvmCross.Forms.Presenter.Core
 
             if (hint is MvxClosePresentationHint)
             {
-                var mainPage = _mvxFormsApp.MainPage as NavigationPage;
+                var mainPage = MvxFormsApp.MainPage as NavigationPage;
 
                 if (mainPage == null)
                 {
@@ -90,7 +90,7 @@ namespace MvvmCross.Forms.Presenter.Core
             if (mainPage == null)
             {
                 _mvxFormsApp.MainPage = new NavigationPage(page);
-                mainPage = _mvxFormsApp.MainPage as NavigationPage;
+                mainPage = MvxFormsApp.MainPage as NavigationPage;
                 CustomPlatformInitialization(mainPage);
             }
             else
@@ -102,6 +102,7 @@ namespace MvvmCross.Forms.Presenter.Core
                 catch (Exception e)
                 {
                     Mvx.Error("Exception pushing {0}: {1}\n{2}", page.GetType(), e.Message, e.StackTrace);
+                    return false;
                 }
             }
 
