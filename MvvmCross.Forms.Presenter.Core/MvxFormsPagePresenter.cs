@@ -56,16 +56,13 @@ namespace MvvmCross.Forms.Presenter.Core
                 }
                 else
                 {
-                    // TODO - perhaps we should do more here... also async void is a boo boo
-                    await mainPage.PopAsync();
+                    mainPage.PopAsync();
                 }
             }
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-			// async void is a nono, calling this sync because weirdness on startup as 
-			// Show method is not awaited itself hence code continues without blocking.
 			if (TryShowPage(request))
                 return;
 
@@ -97,7 +94,8 @@ namespace MvvmCross.Forms.Presenter.Core
             {
                 try
                 {
-					mainPage.PushAsync(page).GetAwaiter().GetResult();
+					// calling this sync blocks UI and never navigates hence code continues regardless here
+					mainPage.PushAsync(page);
                 }
                 catch (Exception e)
                 {
