@@ -3,6 +3,11 @@ using MvvmCross.Core.ViewModels;
 using System;
 using Xamarin.Forms;
 using MvvmCross.Core.Views;
+using System.Reflection;
+using MvvmCross.Platform.IoC;
+using System.Linq;
+using MvvmCross.Platform.Exceptions;
+using System.Collections.Generic;
 
 namespace MvvmCross.Forms.Presenter.Core
 {
@@ -40,7 +45,16 @@ namespace MvvmCross.Forms.Presenter.Core
 			if (_viewFinder == null)
 				_viewFinder = Mvx.Resolve<IMvxViewsContainer> ();
 
-			return _viewFinder.GetViewType (request.ViewModelType);
+			try
+			{
+				return _viewFinder.GetViewType (request.ViewModelType);
+			}
+			catch(KeyNotFoundException) 
+			{
+				var pageName = GetPageName(request);
+				return request.ViewModelType.GetTypeInfo().Assembly.CreatableTypes()
+					.FirstOrDefault(t => t.Name == pageName);
+			}
         }
     }
 }
