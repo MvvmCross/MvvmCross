@@ -28,6 +28,7 @@ nuget pack MvvmCross.Plugin.PhoneCall.nuspec -Symbols
 nuget pack MvvmCross.Plugin.PictureChooser.nuspec -Symbols
 nuget pack MvvmCross.Plugin.ReflectionEx.nuspec -Symbols
 nuget pack MvvmCross.Plugin.ResourceLoader.nuspec -Symbols
+nuget pack MvvmCross.Plugin.ResxLocalization.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Share.nuspec -Symbols
 nuget pack MvvmCross.Plugin.SoundEffects.nuspec -Symbols
 nuget pack MvvmCross.Plugin.SQLitePCL.nuspec -Symbols
