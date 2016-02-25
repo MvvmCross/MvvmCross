@@ -4,7 +4,7 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public static class MvxFluentBindingDescriptionExtension
+    public static class MvxFluentBindingDescriptionExtensions
     {
         public static MvxFluentBindingDescription<TTarget, TSource> ToLocalizationId<TTarget, TSource>(
             this MvxFluentBindingDescription<TTarget, TSource> bindingDescription, string localizationId)
