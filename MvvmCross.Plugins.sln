@@ -291,6 +291,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Accelerom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.Wpf", "SQLite-PCL\MvvmCross.Plugins.Sqlite.Wpf\MvvmCross.Plugins.Sqlite.Wpf.csproj", "{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResxLocalization", "ResxLocalization", "{8D6F4620-D8BD-4E14-B698-4998138EEA32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResxLocalization", "ResxLocalization\MvvmCross.Plugins.ResxLocalization\MvvmCross.Plugins.ResxLocalization.csproj", "{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2223,6 +2227,22 @@ Global
 		{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6}.Release|x64.Build.0 = Release|Any CPU
 		{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6}.Release|x86.ActiveCfg = Release|Any CPU
 		{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6}.Release|x86.Build.0 = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|x64.Build.0 = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Debug|x86.Build.0 = Debug|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|ARM.Build.0 = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|x64.ActiveCfg = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|x64.Build.0 = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|x86.ActiveCfg = Release|Any CPU
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2348,5 +2368,6 @@ Global
 		{87C31E67-3DED-43A7-982D-B108C45CA0AD} = {D9F520C0-4C25-465B-9C16-CADDDE3E72B8}
 		{BFD90EC2-CBDA-4198-81DA-1A13AD2803E1} = {D9F520C0-4C25-465B-9C16-CADDDE3E72B8}
 		{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6} = {9B45C8EC-18B9-4A88-950E-8D8FF8FAA1DA}
+		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B} = {8D6F4620-D8BD-4E14-B698-4998138EEA32}
 	EndGlobalSection
 EndGlobal
