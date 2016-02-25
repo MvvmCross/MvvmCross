@@ -200,7 +200,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 		/// <param name="bundle">Bundle which usually contains a Serialized MvxViewModelRequest</param>
 		/// <param name="forceAddToBackStack">If you want to force add the fragment to the backstack so on backbutton it will go back to it. Note: This will override IMvxCachedFragmentInfo.AddToBackStack configuration.</param>
 		/// <param name="forceReplaceFragment">If you want the fragment to be re-created</param>
-		protected void ShowFragment(string tag, int contentId, Bundle bundle, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
+		protected virtual void ShowFragment(string tag, int contentId, Bundle bundle, bool forceAddToBackStack = false, bool forceReplaceFragment = false)
 		{
 			IMvxCachedFragmentInfo fragInfo;
 			FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
@@ -313,14 +313,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnBackPressed();
         }
 
-        protected List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
+        protected virtual List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
         {
             return GetCurrentCacheableFragments()
                     .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
                     .ToList();
         }
 
-        protected IEnumerable<Fragment> GetCurrentCacheableFragments()
+        protected virtual IEnumerable<Fragment> GetCurrentCacheableFragments()
         {
             var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
 
@@ -330,7 +330,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 .Where(fragment => fragment.GetType().IsFragmentCacheable());
         }
 
-        protected IMvxCachedFragmentInfo GetLastFragmentInfo()
+        protected virtual IMvxCachedFragmentInfo GetLastFragmentInfo()
         {
             var currentCacheableFragments = GetCurrentCacheableFragments().ToList();
             if (!currentCacheableFragments.Any())
@@ -342,7 +342,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return GetFragmentInfoByTag(tagFragment);
         }
 
-        protected string GetTagFromFragment(Fragment fragment)
+        protected virtual string GetTagFromFragment(Fragment fragment)
         {
             var mvxFragmentView = fragment as IMvxFragmentView;
 
@@ -371,7 +371,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         /// </summary>
         /// <param name="tag">The tag for the fragment to lookup</param>
         /// <param name="contentId">Where you want to close the Fragment</param>
-        protected void CloseFragment(string tag, int contentId)
+        protected virtual void CloseFragment(string tag, int contentId)
         {
             var frag = SupportFragmentManager.FindFragmentById(contentId);
             if (frag == null) return;
@@ -406,7 +406,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
+        protected virtual IMvxCachedFragmentInfo GetFragmentInfoByTag(string tag)
         {
             IMvxCachedFragmentInfo fragInfo;
             FragmentCacheConfiguration.TryGetValue(tag, out fragInfo);
@@ -430,7 +430,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			return request.ViewModelType.FullName;
 		}
 
-		public bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute)
+		public virtual bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute)
 		{
 			var fragmentTag = GetFragmentTag(request, bundle, fragmentType);
 			FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType);
@@ -439,7 +439,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			return true;
 		}
 
-		public bool Close(IMvxViewModel viewModel)
+		public virtual bool Close(IMvxViewModel viewModel)
 		{
 			// Close method can not be fixed at this moment
 			// That requires some changes in main MvvmCross library
