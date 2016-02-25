@@ -43,6 +43,7 @@
     <Compile Include="Binders\MvxNamedInstanceRegistryFiller.cs" />
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
+    <Compile Include="BindingContext\MvxFluentBindingDescriptionExtensions.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactory.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactoryRegistry.cs" />
