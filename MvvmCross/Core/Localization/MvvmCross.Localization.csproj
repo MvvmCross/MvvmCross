@@ -37,6 +37,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMvxLocalizedTextSourceOwner.cs" />
     <Compile Include="MvxLanguageConverter.cs" />
     <Compile Include="IMvxLanguageBinder.cs" />
     <Compile Include="IMvxTextProvider.cs" />
