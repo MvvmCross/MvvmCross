@@ -1,4 +1,4 @@
-﻿using Cirrious.MvvmCross.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using Example.Core.ViewModels;
 
 namespace Example.Core
@@ -11,7 +11,7 @@ namespace Example.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            ShowViewModel<MainViewModel>();
+            ShowViewModel<MenuViewModel>();
         }
     }
 }

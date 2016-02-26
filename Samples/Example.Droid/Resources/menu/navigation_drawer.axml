@@ -2,12 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:local="http://schemas.android.com/apk/res-auto">
 
-    <group android:id="@+id/nav_items" 
-    	android:checkableBehavior="single">
+    <group android:id="@+id/nav_items">
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />
+            android:title="Home" />        
     </group>
+
+    <item android:title="Examples">
+        <menu>
+       		<item
+	            android:id="@+id/nav_viewpager"
+	            android:title="ViewPager" />
+          <item
+	            android:id="@+id/nav_viewpager_state"
+	            android:title="ViewPagerState" />
+          <item
+	            android:id="@+id/nav_recyclerview"
+	            android:title="Recyclerview" />
+          <item
+	            android:id="@+id/nav_compose_message"
+	            android:title="Compose Message" />
+        </menu>
+    </item>
 
 	<group android:id="@+id/nav_footer">
         <item

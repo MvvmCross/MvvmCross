@@ -2,13 +2,18 @@ MvvmCross-AndroidSupport
 ============
 [MvvmCross](https://github.com/MvvmCross/MvvmCross) support for the [Android Support library](http://developer.android.com/tools/support-library/index.html) components.
 
+## Documentation & blog
+
+* See our [official website](http://mvvmcross.com/docs) for an extensive set of documentation!
+* To stay up-to-date with the latest news go to the [MvvmCross blog](http://mvvmcross.com/blog)!
+
 ### Questions & support
 
 * [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
 * [Xamarin forums](http://forums.xamarin.com)
-* [Jabbr](http://jabbr.net/#/rooms/mvvmcross)
+* [Slack](https://xamarinchat.herokuapp.com/) join the mvvmcross channel after you are in
 
-### Documentation and Examples
+### Examples
 
 **The [MvvmCross-Samples](https://github.com/MvvmCross/MvvmCross-Samples) and [Support-Samples](https://github.com/MvvmCross/MvvmCross-AndroidSupport/tree/master/Samples) repos contains the latest samples. See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for additional articles and information.**
 
@@ -31,6 +36,12 @@ If you would like to help make MvvmCross even better, then please do:
 * Thanks to [kjeremy](https://github.com/kjeremy)
 * Thanks to [jamie94bc](https://github.com/jamie94bc)
 * Thanks to [andyci](https://github.com/andyci)
+* Thanks to [Cheesebaron](https://github.com/cheesebaron)
+* Thanks to [Martijn00](https://github.com/martijn00)
+* Thanks to [vvolkgang](https://github.com/vvolkgang)
+* Thanks to [Dexyon](https://github.com/Dexyon)
+* Thanks to [thefex](https://github.com/thefex)
+* Thanks to [mattwhetton](https://github.com/mattwhetton)
 
 Licensing
 ---------

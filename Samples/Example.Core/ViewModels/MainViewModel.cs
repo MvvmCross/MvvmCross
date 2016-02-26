@@ -1,20 +1,18 @@
-﻿using Cirrious.MvvmCross.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 
 namespace Example.Core.ViewModels
 {
     public class MainViewModel
         : MvxViewModel
     {
-        public ExamplesViewModel Examples { get; private set; }
-
-        public MainViewModel() {
-            Examples = new ExamplesViewModel();
+        public MainViewModel()
+        {
         }
 
-        public void ShowMenu()
+        public void ShowMenuAndFirstDetail()
         {
             ShowViewModel<MenuViewModel>();
-            ShowViewModel<ExamplesViewModel>();
+            ShowViewModel<HomeViewModel>();
         }
     }
 }
