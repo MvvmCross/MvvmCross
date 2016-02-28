@@ -17,7 +17,7 @@ namespace MvvmCross.WindowsUWP.Views
     using MvvmCross.Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
-
+    using System.Collections.Generic;
     public class MvxWindowsMultiRegionViewPresenter
         : MvxWindowsViewPresenter
     {
@@ -64,6 +64,7 @@ namespace MvvmCross.WindowsUWP.Views
             if (reference == null) return null;
 
             var foundChild = default(T);
+            var nextPhase = new List<DependencyObject>();
 
             var childrenCount = VisualTreeHelper.GetChildrenCount(reference);
             for (var index = 0; index < childrenCount; index++)
@@ -90,12 +91,31 @@ namespace MvvmCross.WindowsUWP.Views
                         foundChild = (T)child;
                         break;
                     }
+                    else
+                    {
+                        // keep for searching inside this frame
+                        nextPhase.Add(child);
+                    }
                 }
                 else
                 {
                     // child element found.
                     foundChild = (T)child;
                     break;
+                }
+            }
+
+            // if failed to find the child, search inside the frames we found
+            if (foundChild == null)
+            {
+                foreach (var item in nextPhase)
+                {
+                    // recursively drill down the tree
+                    foundChild = FindChild<T>(item, childName);
+
+                    // If the child is found, break so we do not overwrite the found child. 
+                    if (foundChild != null) break;
+
                 }
             }
 
