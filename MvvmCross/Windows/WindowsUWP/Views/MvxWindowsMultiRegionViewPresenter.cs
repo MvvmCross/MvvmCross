@@ -115,7 +115,6 @@ namespace MvvmCross.WindowsUWP.Views
 
                     // If the child is found, break so we do not overwrite the found child. 
                     if (foundChild != null) break;
-
                 }
             }
 
