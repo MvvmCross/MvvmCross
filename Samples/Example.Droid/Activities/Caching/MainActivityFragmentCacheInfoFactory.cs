@@ -80,8 +80,8 @@ namespace Example.Droid.Activities.Caching
             var baseCachedFragmentInfo = base.ConvertSerializableFragmentInfo(fromSerializableMvxCachedFragmentInfo);
 
             return new CustomFragmentInfo(baseCachedFragmentInfo.Tag, baseCachedFragmentInfo.FragmentType,
-                baseCachedFragmentInfo.ViewModelType, baseCachedFragmentInfo.AddToBackStack,
-                serializableCustomFragmentInfo?.IsRoot ?? false)
+				baseCachedFragmentInfo.ViewModelType, baseCachedFragmentInfo.CacheFragment, 
+				baseCachedFragmentInfo.AddToBackStack, serializableCustomFragmentInfo?.IsRoot ?? false)
             {
                 ContentId = baseCachedFragmentInfo.ContentId,
                 CachedFragment = baseCachedFragmentInfo.CachedFragment
