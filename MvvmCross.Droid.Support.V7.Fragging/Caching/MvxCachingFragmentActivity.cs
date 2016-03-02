@@ -153,7 +153,8 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 				savedStateConverter.Write(bundle, mvxBundle);
 				outState.PutBundle(info.Tag, bundle);
 
-				typesForKeys.Add(info.Tag, info.ViewModelType);
+				if(!typesForKeys.ContainsKey(info.Tag))
+					typesForKeys.Add(info.Tag, info.ViewModelType);
 			}
 
 			return typesForKeys;
