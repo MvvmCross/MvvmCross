@@ -66,7 +66,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
                                 if (objectCreation.ArgumentList.Arguments.Count == 2)
                                 {
                                     // Is using CanExecute
-                                    if (CallingCanExecuteChanged(classDeclaration) == false)
+                                    if (ClassIsCallingRaiseCanExecuteChanged(classDeclaration) == false)
                                     {
                                         var canExecute = objectCreation.ArgumentList.Arguments[1];
 
@@ -98,20 +98,29 @@ namespace MvvmCross.CodeAnalysis.Analyzers
                 .OfType<ArrowExpressionClauseSyntax>()
                 .SingleOrDefault(a => a.Expression is ObjectCreationExpressionSyntax)
                 ?.Expression as ObjectCreationExpressionSyntax;
-
             if (arrowExpressionClause != null)
             {
                 objectCreations.Add(arrowExpressionClause);
             }
 
+            var getAcessorDeclararion = propertyDeclarationSyntax.DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>()
+                .SingleOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
+            if (getAcessorDeclararion != null)
+            {
+                objectCreations.AddRange(getAcessorDeclararion.DescendantNodes()
+                            .OfType<ObjectCreationExpressionSyntax>());
+            }
+
             return objectCreations;
         }
 
-        private static bool CallingCanExecuteChanged(ClassDeclarationSyntax classDeclaration)
+        private static bool ClassIsCallingRaiseCanExecuteChanged(ClassDeclarationSyntax classDeclaration)
         {
             return classDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Any(i => ((i.Expression as MemberAccessExpressionSyntax)?.Name as IdentifierNameSyntax)?.Identifier.Value.Equals("RaiseCanExecuteChanged") ?? false);
+                .Any(i => ((i.Expression as MemberAccessExpressionSyntax)?.Name as IdentifierNameSyntax)
+                ?.Identifier.Value.Equals("RaiseCanExecuteChanged") ?? false);
         }
 
         private static bool IsViewModelType(SyntaxNodeAnalysisContext context, ITypeSymbol symbol)
