@@ -1,12 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
 using MvvmCross.CodeAnalysis.Analyzers;
+using MvvmCross.CodeAnalysis.CodeFixes;
 using MvvmCross.CodeAnalysis.Core;
 using NUnit.Framework;
 
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests : DiagnosticVerifier<CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer>//, CommandWithCanExecuteWithoutCanExecuteChangedCodeFix>
+    public class CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests : CodeFixVerifier<CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer, CommandWithCanExecuteWithoutCanExecuteChangedCodeFix>
     {
         private const string Expected = @"
 using System;
@@ -291,10 +292,10 @@ namespace CoreApp
             VerifyCSharpDiagnostic(TestWithLazyLoading, expectedDiagnostic);
         }
 
-        //[Test]
-        //public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldFixTheCode()
-        //{
-        //    VerifyCSharpFix(Test, Expected);
-        //}
+        [Test]
+        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldFixTheCode()
+        {
+            VerifyCSharpFix(TestWithLazyLoading, Expected);
+        }
     }
 }
