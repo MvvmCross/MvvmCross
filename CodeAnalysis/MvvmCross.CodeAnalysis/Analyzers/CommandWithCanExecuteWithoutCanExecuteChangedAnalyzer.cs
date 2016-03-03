@@ -15,8 +15,8 @@ namespace MvvmCross.CodeAnalysis.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer : DiagnosticAnalyzer
     {
-        internal static readonly LocalizableString Title = "Commands with CanExecute should have the CanExecuteChanged method called at least once";
-        internal static readonly LocalizableString MessageFormat = "Remove '{0}' from the constructor or call '{1}.CanExecuteChanged' from your code";
+        internal static readonly LocalizableString Title = "Commands with CanExecute should have the RaiseCanExecuteChanged method called at least once";
+        internal static readonly LocalizableString MessageFormat = "Remove '{0}' from the constructor or call '{1}.RaiseCanExecuteChanged' from your code";
         internal const string Category = Categories.Usage;
 
         internal static readonly DiagnosticDescriptor Rule =
@@ -119,8 +119,10 @@ namespace MvvmCross.CodeAnalysis.Analyzers
         {
             return classDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Any(i => ((i.Expression as MemberAccessExpressionSyntax)?.Name as IdentifierNameSyntax)
-                ?.Identifier.Value.Equals("RaiseCanExecuteChanged") ?? false);
+                .Any(i =>
+                    (((i.Expression as MemberAccessExpressionSyntax)?.Name
+                      ?? (i.Expression as MemberBindingExpressionSyntax)?.Name
+                        ) as IdentifierNameSyntax)?.Identifier.Value.Equals("RaiseCanExecuteChanged") ?? false);
         }
 
         private static bool IsViewModelType(SyntaxNodeAnalysisContext context, ITypeSymbol symbol)
