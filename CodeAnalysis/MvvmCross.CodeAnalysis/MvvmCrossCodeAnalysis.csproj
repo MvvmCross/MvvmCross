@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Analyzers\CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer.cs" />
+    <Compile Include="CodeFixes\CommandWithCanExecuteWithoutCanExecuteChangedCodeFix.cs" />
     <Compile Include="CodeFixes\ConsiderUsingGenericBaseViewCodeFix.cs" />
     <Compile Include="Analyzers\ConsiderUsingGenericBaseViewAnalyzer.cs" />
     <Compile Include="Core\Categories.cs" />

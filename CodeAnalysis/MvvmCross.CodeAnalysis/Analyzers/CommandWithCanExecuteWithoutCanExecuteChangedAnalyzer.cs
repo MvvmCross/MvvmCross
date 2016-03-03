@@ -70,10 +70,13 @@ namespace MvvmCross.CodeAnalysis.Analyzers
                                     {
                                         var canExecute = objectCreation.ArgumentList.Arguments[1];
 
+                                        var properties = new Dictionary<string, string> { { nameof(canExecute), canExecute.ToString() } }.ToImmutableDictionary();
+
                                         context.ReportDiagnostic(
                                             Diagnostic.Create(
                                                 Rule
                                                 , canExecute.GetLocation()
+                                                , properties
                                                 , canExecute.ToString()
                                                 , propertySymbol.Name)
                                             );
