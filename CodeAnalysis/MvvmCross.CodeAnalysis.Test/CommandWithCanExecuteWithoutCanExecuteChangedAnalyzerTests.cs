@@ -43,7 +43,7 @@ namespace CoreApp
     }
 }";
 
-        private const string Test = @"
+        private const string TestWithLazyLoading = @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -225,6 +225,24 @@ namespace CoreApp
             };
 
             VerifyCSharpDiagnostic(TestWithPropertyCreatedWithCs6, expectedDiagnostic);
+        }
+
+        [Test]
+        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerWithLazyLoadingShouldShowOneDiagnostic()
+        {
+            var expectedDiagnostic = new DiagnosticResult
+            {
+                Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
+                Message = "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.CanExecuteChanged' from your code",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", 22, 77)
+                    }
+            };
+
+            VerifyCSharpDiagnostic(TestWithLazyLoading, expectedDiagnostic);
         }
 
         //[Test]
