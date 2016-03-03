@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -53,37 +54,31 @@ namespace MvvmCross.CodeAnalysis.Analyzers
                     var classDeclaration = context.Node.Ancestors().OfType<ClassDeclarationSyntax>().FirstOrDefault();
                     if (classDeclaration != null)
                     {
-                        var containingAssignments = classDeclaration.DescendantNodes()
-                            .OfType<AssignmentExpressionSyntax>()
-                            .Where(a => context.SemanticModel.GetSymbolInfo(a.Left).Symbol.Equals(propertySymbol));
-
                         var mvxCommandType = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(MvxCommand).FullName);
 
-                        foreach (var assignment in containingAssignments)
-                        {
-                            var objectCreationExpressionSyntax = assignment.Right as ObjectCreationExpressionSyntax;
-                            if (objectCreationExpressionSyntax != null)
-                            {
-                                var objectCreationSymbol = context.SemanticModel.GetSymbolInfo(objectCreationExpressionSyntax.Type).Symbol;
-                                if (objectCreationSymbol != null && objectCreationSymbol.Equals(mvxCommandType))
-                                {
-                                    if (objectCreationExpressionSyntax.ArgumentList.Arguments.Count == 2)
-                                    {
-                                        // Is using CanExecute
-                                        if (CallingCanExecuteChanged(context, classDeclaration) == false)
-                                        {
-                                            var canExecute = objectCreationExpressionSyntax.ArgumentList.Arguments[1];
+                        var objectCreations = GetObjectCreations(context, classDeclaration, propertyDeclarationSyntax, propertySymbol);
 
-                                            context.ReportDiagnostic(
-                                                Diagnostic.Create(
-                                                    Rule
-                                                    , canExecute.GetLocation()
-                                                    , canExecute.ToString()
-                                                    , propertySymbol.Name)
-                                                );
-                                        }
-                                        break;
+                        foreach (var objectCreation in objectCreations)
+                        {
+                            var objectCreationSymbol = context.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol;
+                            if (objectCreationSymbol != null && objectCreationSymbol.Equals(mvxCommandType))
+                            {
+                                if (objectCreation.ArgumentList.Arguments.Count == 2)
+                                {
+                                    // Is using CanExecute
+                                    if (CallingCanExecuteChanged(classDeclaration) == false)
+                                    {
+                                        var canExecute = objectCreation.ArgumentList.Arguments[1];
+
+                                        context.ReportDiagnostic(
+                                            Diagnostic.Create(
+                                                Rule
+                                                , canExecute.GetLocation()
+                                                , canExecute.ToString()
+                                                , propertySymbol.Name)
+                                            );
                                     }
+                                    break;
                                 }
                             }
                         }
@@ -92,7 +87,27 @@ namespace MvvmCross.CodeAnalysis.Analyzers
             }
         }
 
-        private static bool CallingCanExecuteChanged(SyntaxNodeAnalysisContext context, ClassDeclarationSyntax classDeclaration)
+        private static IEnumerable<ObjectCreationExpressionSyntax> GetObjectCreations(SyntaxNodeAnalysisContext context, ClassDeclarationSyntax classDeclaration, PropertyDeclarationSyntax propertyDeclarationSyntax, IPropertySymbol propertySymbol)
+        {
+            var objectCreations = classDeclaration.DescendantNodes()
+                            .OfType<AssignmentExpressionSyntax>()
+                            .Where(a => context.SemanticModel.GetSymbolInfo(a.Left).Symbol.Equals(propertySymbol) && a.Right is ObjectCreationExpressionSyntax)
+                            .Select(a => a.Right as ObjectCreationExpressionSyntax).ToList();
+
+            var arrowExpressionClause = propertyDeclarationSyntax.DescendantNodes()
+                .OfType<ArrowExpressionClauseSyntax>()
+                .SingleOrDefault(a => a.Expression is ObjectCreationExpressionSyntax)
+                ?.Expression as ObjectCreationExpressionSyntax;
+
+            if (arrowExpressionClause != null)
+            {
+                objectCreations.Add(arrowExpressionClause);
+            }
+
+            return objectCreations;
+        }
+
+        private static bool CallingCanExecuteChanged(ClassDeclarationSyntax classDeclaration)
         {
             return classDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()

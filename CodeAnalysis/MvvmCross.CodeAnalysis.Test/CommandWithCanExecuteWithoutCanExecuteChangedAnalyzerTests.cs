@@ -154,6 +154,37 @@ namespace CoreApp
     }
 }";
 
+        private const string TestWithPropertyCreatedWithCs6 = @"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
+
+namespace CoreApp
+{
+    public class FirstViewModel : MvxViewModel
+    {
+        public bool ShouldSubmit { get; set; }
+
+        public MvxCommand SubmitCommand => new MvxCommand(DoSubmit, CanDoSubmit);
+
+        public FirstViewModel()
+        {
+        }
+
+        private void DoSubmit() { }
+
+        private bool CanDoSubmit()
+        {
+            return ShouldSubmit;
+        }
+    }
+}";
+
         [Test]
         public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldShowOneDiagnostic()
         {
@@ -176,6 +207,24 @@ namespace CoreApp
         public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldNotShowAnyDiagnostic()
         {
             VerifyCSharpDiagnostic(TestWithPropertyButCalling);
+        }
+
+        [Test]
+        public void CommandWithCanExecuteWithCs6WithoutCanExecuteChangedAnalyzerShouldShowOneDiagnostic()
+        {
+            var expectedDiagnostic = new DiagnosticResult
+            {
+                Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
+                Message = "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.CanExecuteChanged' from your code",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", 17, 69)
+                    }
+            };
+
+            VerifyCSharpDiagnostic(TestWithPropertyCreatedWithCs6, expectedDiagnostic);
         }
 
         //[Test]
