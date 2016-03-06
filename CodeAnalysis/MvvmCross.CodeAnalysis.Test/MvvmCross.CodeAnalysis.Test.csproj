@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests.cs" />
     <Compile Include="ConsiderUsingGenericBaseViewAnalyzerTests.cs" />
     <Compile Include="Helpers\CodeFixVerifier.Helper.cs" />
     <Compile Include="Helpers\DiagnosticResult.cs" />
