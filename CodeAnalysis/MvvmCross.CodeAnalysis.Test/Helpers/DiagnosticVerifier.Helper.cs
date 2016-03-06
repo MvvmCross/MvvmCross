@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,6 +26,21 @@ namespace MvvmCross.CodeAnalysis.Test
         private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
         private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
+        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath());
+
+        private static string GetCorrectObjectModelPath()
+        {
+            var winDir = Environment.GetEnvironmentVariable("windir");
+
+            if (winDir != null)
+            {
+                var gacObjectModelPath = Path.Combine(winDir, @"Microsoft.NET\assembly\GAC_MSIL\System.ObjectModel");
+                var finalPath = Directory.GetDirectories(gacObjectModelPath).First();
+
+                return Directory.GetFiles(finalPath).First();
+            }
+            throw new ArgumentException("You don't have ObjectModel inside your GAC! Fix your environment.");
+        }
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
@@ -153,7 +169,8 @@ namespace MvvmCross.CodeAnalysis.Test
                 .AddMetadataReference(projectId, _codeAnalysisReference)
                 .AddMetadataReference(projectId, _mvvmCrossCoreReference)
                 .AddMetadataReference(projectId, _mvvmCrossDroidReference)
-                .AddMetadataReference(projectId, _componentModelReference);
+                .AddMetadataReference(projectId, _componentModelReference)
+                .AddMetadataReference(projectId, _objectModelReference);
 
             int count = 0;
             foreach (var source in sources)
