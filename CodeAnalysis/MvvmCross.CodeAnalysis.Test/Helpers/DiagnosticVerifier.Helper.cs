@@ -54,13 +54,12 @@ namespace MvvmCross.CodeAnalysis.Test
         /// <summary>
         /// Given classes in the form of strings, their language, and an IDiagnosticAnlayzer to apply to it, return the diagnostics found in the string after converting it to a document.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="analyzer">The analyzer to be run on the sources</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
         /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-        private static Diagnostic[] GetSortedDiagnostics(string[] sources, DiagnosticAnalyzer analyzer, MvxProjType projType)
+        private static Diagnostic[] GetSortedDiagnostics(MvxTestFileSource[] fileSources, DiagnosticAnalyzer analyzer)
         {
-            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, projType));
+            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(fileSources));
         }
 
         /// <summary>
@@ -118,42 +117,49 @@ namespace MvvmCross.CodeAnalysis.Test
         /// <summary>
         /// Given an array of strings as sources and a language, turn them into a project and return the documents and spans of it.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <returns>A Tuple containing the Documents produced from the sources and their TextSpans if relevant</returns>
-        private static Document[] GetDocuments(string[] sources, MvxProjType projType)
+        protected static Document[] GetDocuments(MvxTestFileSource[] fileSources)
         {
-            var project = CreateSolution(sources, projType)
-                .GetProject(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId);
-            var documents = project.Documents.ToArray();
+            var solution = CreateSolution(fileSources);
 
-            if (sources.Length != documents.Length)
+            var documents = new List<Document>();
+            foreach (var projectId in solution.ProjectIds)
             {
-                throw new SystemException("Amount of sources did not match amount of Documents created");
+                var project = solution.GetProject(projectId);
+                var projectDocuments = project.Documents.ToArray();
+
+                if (fileSources.Count(f => f.ProjType == (projectId == _coreProjectId ? MvxProjType.Core : MvxProjType.Droid)) != projectDocuments.Length)
+                {
+                    throw new SystemException("Amount of sources did not match amount of Documents created");
+                }
+                documents.AddRange(projectDocuments);
             }
 
-            return documents;
+            return documents.ToArray();
         }
 
         /// <summary>
         /// Create a Document from a string through creating a project that contains it.
         /// </summary>
-        /// <param name="source">Classes in the form of a string</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
+        /// <param name="fileSource">The file the should be added last, aldo also to be returned</param>
         /// <returns>A Document created from the source string</returns>
-        protected static Document CreateDocument(string source, MvxProjType projType)
+        protected static Document CreateDocument(MvxTestFileSource[] fileSources, MvxTestFileSource fileSource)
         {
-            return CreateSolution(new[] {source}, projType)
-                .GetProject(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId).Documents.First();
+            var documents = fileSources?.ToList() ?? new List<MvxTestFileSource>();
+            documents.Add(fileSource);
+
+            return CreateSolution(documents.ToArray())
+                .GetProject(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId).Documents.Last();
         }
 
         /// <summary>
         /// Create a project using the inputted strings as sources.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <returns>A Solution created out of the Documents created from the source strings</returns>
-        private static Solution CreateSolution(string[] sources, MvxProjType projType)
+        private static Solution CreateSolution(MvxTestFileSource[] fileSources)
         {
             string fileNamePrefix = DefaultFilePathPrefix;
 
@@ -178,14 +184,15 @@ namespace MvvmCross.CodeAnalysis.Test
                 .AddMetadataReference(_droidProjectId, _mvvmCrossCoreReference)
                 .AddMetadataReference(_droidProjectId, _mvvmCrossDroidReference)
                 .AddMetadataReference(_droidProjectId, _componentModelReference)
-                .AddMetadataReference(_droidProjectId, _objectModelReference);
+                .AddMetadataReference(_droidProjectId, _objectModelReference)
+                .AddProjectReference(_droidProjectId, new ProjectReference(_coreProjectId));
 
             int count = 0;
-            foreach (var source in sources)
+            foreach (var fileSource in fileSources)
             {
                 var newFileName = fileNamePrefix + count + "." + CSharpDefaultFileExt;
-                var documentId = DocumentId.CreateNewId(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId, debugName: newFileName);
-                solution = solution.AddDocument(documentId, newFileName, SourceText.From(source));
+                var documentId = DocumentId.CreateNewId(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId, debugName: newFileName);
+                solution = solution.AddDocument(documentId, newFileName, SourceText.From(fileSource.Source));
                 count++;
             }
 

@@ -43,32 +43,41 @@ namespace MvvmCross.CodeAnalysis.Test
         /// <param name="expected"> DiagnosticResults that should appear after the analyzer is run on the source</param>
         protected void VerifyCSharpDiagnostic(string source, MvxProjType projType, params DiagnosticResult[] expected)
         {
-            VerifyDiagnostics(new[] { source }, GetCSharpDiagnosticAnalyzer(), projType, expected);
+            VerifyDiagnostics(new[] { new MvxTestFileSource(source, projType) }, GetCSharpDiagnosticAnalyzer(), expected);
+        }
+
+        /// <summary>
+        /// Called to test a C# DiagnosticAnalyzer when applied on the single inputted string as a source
+        /// Note: input a DiagnosticResult for each Diagnostic expected
+        /// </summary>
+        /// <param name="fileSource">A class in the form of a MvxTestFileSources to run the analyzer on</param>
+        /// <param name="expected"> DiagnosticResults that should appear after the analyzer is run on the source</param>
+        protected void VerifyCSharpDiagnostic(MvxTestFileSource fileSource, params DiagnosticResult[] expected)
+        {
+            VerifyDiagnostics(new[] { fileSource }, GetCSharpDiagnosticAnalyzer(), expected);
         }
 
         /// <summary>
         /// Called to test a C# DiagnosticAnalyzer when applied on the inputted strings as a source
         /// Note: input a DiagnosticResult for each Diagnostic expected
         /// </summary>
-        /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="fileSources">An array of MvxTestFileSources to create source documents from to run the analyzers on</param>
         /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
-        protected void VerifyCSharpDiagnostic(string[] sources, MvxProjType projType, params DiagnosticResult[] expected)
+        protected void VerifyCSharpDiagnostic(MvxTestFileSource[] fileSources, params DiagnosticResult[] expected)
         {
-            VerifyDiagnostics(sources, GetCSharpDiagnosticAnalyzer(), projType, expected);
+            VerifyDiagnostics(fileSources, GetCSharpDiagnosticAnalyzer(), expected);
         }
 
         /// <summary>
         /// General method that gets a collection of actual diagnostics found in the source after the analyzer is run, 
         /// then verifies each of them.
         /// </summary>
-        /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>
+        /// <param name="fileSources">An array of MvxTestFileSources to create source documents from to run the analyzers on</param>
         /// <param name="analyzer">The analyzer to be run on the source code</param>
-        /// <param name="projType">MvvmCross Project Type to be returned</param>
         /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
-        private static void VerifyDiagnostics(string[] sources, DiagnosticAnalyzer analyzer, MvxProjType projType, params DiagnosticResult[] expected)
+        private static void VerifyDiagnostics(MvxTestFileSource[] fileSources, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expected)
         {
-            var diagnostics = GetSortedDiagnostics(sources, analyzer, projType);
+            var diagnostics = GetSortedDiagnostics(fileSources, analyzer);
             VerifyDiagnosticResults(diagnostics, analyzer, expected);
         }
 
