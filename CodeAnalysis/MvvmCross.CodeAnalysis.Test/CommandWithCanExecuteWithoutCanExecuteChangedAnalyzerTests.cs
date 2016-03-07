@@ -245,7 +245,7 @@ namespace CoreApp
                     }
             };
 
-            VerifyCSharpDiagnostic(TestWithProperty, expectedDiagnostic);
+            VerifyCSharpDiagnostic(TestWithProperty, MvxProjType.Core, expectedDiagnostic);
         }
 
         [TestCase(TestWithPropertyButCalling)]
@@ -253,7 +253,7 @@ namespace CoreApp
         [Test]
         public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldNotShowAnyDiagnostic(string testCase)
         {
-            VerifyCSharpDiagnostic(testCase);
+            VerifyCSharpDiagnostic(testCase, MvxProjType.Core);
         }
 
         [Test]
@@ -271,7 +271,7 @@ namespace CoreApp
                     }
             };
 
-            VerifyCSharpDiagnostic(TestWithPropertyCreatedWithCs6, expectedDiagnostic);
+            VerifyCSharpDiagnostic(TestWithPropertyCreatedWithCs6, MvxProjType.Core, expectedDiagnostic);
         }
 
         [Test]
@@ -289,13 +289,13 @@ namespace CoreApp
                     }
             };
 
-            VerifyCSharpDiagnostic(TestWithLazyLoading, expectedDiagnostic);
+            VerifyCSharpDiagnostic(TestWithLazyLoading, MvxProjType.Core, expectedDiagnostic);
         }
 
         [Test]
         public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldFixTheCode()
         {
-            VerifyCSharpFix(TestWithLazyLoading, Expected);
+            VerifyCSharpFix(TestWithLazyLoading, MvxProjType.Core, Expected);
         }
     }
 }
