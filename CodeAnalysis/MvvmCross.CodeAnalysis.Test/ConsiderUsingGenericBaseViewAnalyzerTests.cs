@@ -65,13 +65,13 @@ namespace AndroidApp
                     }
             };
 
-            VerifyCSharpDiagnostic(Test, expectedDiagnostic);
+            VerifyCSharpDiagnostic(Test, MvxProjType.Droid, expectedDiagnostic);
         }
 
         [Test]
         public void ConsiderUsingGenericBaseViewAnalyzerShouldFixTheCode()
         {
-            VerifyCSharpFix(Test, Expected);
+            VerifyCSharpFix(Test, MvxProjType.Droid, Expected);
         }
     }
 }

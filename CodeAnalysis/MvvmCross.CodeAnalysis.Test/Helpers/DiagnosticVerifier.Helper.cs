@@ -44,8 +44,10 @@ namespace MvvmCross.CodeAnalysis.Test
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
-        internal static string VisualBasicDefaultExt = "vb";
-        internal static string TestProjectName = "TestProject";
+        internal static string TestCoreProjectName = "CoreTestProject";
+        internal static string TestDroidProjectName = "DroidTestProject";
+        private static ProjectId _coreProjectId;
+        private static ProjectId _droidProjectId;
 
         #region  Get Diagnostics
 
@@ -53,12 +55,12 @@ namespace MvvmCross.CodeAnalysis.Test
         /// Given classes in the form of strings, their language, and an IDiagnosticAnlayzer to apply to it, return the diagnostics found in the string after converting it to a document.
         /// </summary>
         /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source classes are in</param>
         /// <param name="analyzer">The analyzer to be run on the sources</param>
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
         /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-        private static Diagnostic[] GetSortedDiagnostics(string[] sources, string language, DiagnosticAnalyzer analyzer)
+        private static Diagnostic[] GetSortedDiagnostics(string[] sources, DiagnosticAnalyzer analyzer, MvxProjType projType)
         {
-            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, language));
+            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, projType));
         }
 
         /// <summary>
@@ -112,20 +114,17 @@ namespace MvvmCross.CodeAnalysis.Test
         #endregion
 
         #region Set up compilation and documents
+
         /// <summary>
         /// Given an array of strings as sources and a language, turn them into a project and return the documents and spans of it.
         /// </summary>
         /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source code is in</param>
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
         /// <returns>A Tuple containing the Documents produced from the sources and their TextSpans if relevant</returns>
-        private static Document[] GetDocuments(string[] sources, string language)
+        private static Document[] GetDocuments(string[] sources, MvxProjType projType)
         {
-            if (language != LanguageNames.CSharp && language != LanguageNames.VisualBasic)
-            {
-                throw new ArgumentException("Unsupported Language");
-            }
-
-            var project = CreateProject(sources, language);
+            var project = CreateSolution(sources, projType)
+                .GetProject(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId);
             var documents = project.Documents.ToArray();
 
             if (sources.Length != documents.Length)
@@ -140,47 +139,57 @@ namespace MvvmCross.CodeAnalysis.Test
         /// Create a Document from a string through creating a project that contains it.
         /// </summary>
         /// <param name="source">Classes in the form of a string</param>
-        /// <param name="language">The language the source code is in</param>
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
         /// <returns>A Document created from the source string</returns>
-        protected static Document CreateDocument(string source, string language = LanguageNames.CSharp)
+        protected static Document CreateDocument(string source, MvxProjType projType)
         {
-            return CreateProject(new[] { source }, language).Documents.First();
+            return CreateSolution(new[] {source}, projType)
+                .GetProject(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId).Documents.First();
         }
 
         /// <summary>
         /// Create a project using the inputted strings as sources.
         /// </summary>
         /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source code is in</param>
-        /// <returns>A Project created out of the Documents created from the source strings</returns>
-        private static Project CreateProject(string[] sources, string language = LanguageNames.CSharp)
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <returns>A Solution created out of the Documents created from the source strings</returns>
+        private static Solution CreateSolution(string[] sources, MvxProjType projType)
         {
             string fileNamePrefix = DefaultFilePathPrefix;
-            string fileExt = language == LanguageNames.CSharp ? CSharpDefaultFileExt : VisualBasicDefaultExt;
 
-            var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
+            _coreProjectId = ProjectId.CreateNewId(debugName: TestCoreProjectName);
+            _droidProjectId = ProjectId.CreateNewId(debugName: TestDroidProjectName);
 
             var solution = new AdhocWorkspace()
                 .CurrentSolution
-                .AddProject(projectId, TestProjectName, TestProjectName, language)
-                .AddMetadataReference(projectId, _corlibReference)
-                .AddMetadataReference(projectId, _systemCoreReference)
-                .AddMetadataReference(projectId, _cSharpSymbolsReference)
-                .AddMetadataReference(projectId, _codeAnalysisReference)
-                .AddMetadataReference(projectId, _mvvmCrossCoreReference)
-                .AddMetadataReference(projectId, _mvvmCrossDroidReference)
-                .AddMetadataReference(projectId, _componentModelReference)
-                .AddMetadataReference(projectId, _objectModelReference);
+                .AddProject(_coreProjectId, TestCoreProjectName, TestCoreProjectName, LanguageNames.CSharp)
+                .AddProject(_droidProjectId, TestDroidProjectName, TestDroidProjectName, LanguageNames.CSharp)
+                .AddMetadataReference(_coreProjectId, _corlibReference)
+                .AddMetadataReference(_coreProjectId, _systemCoreReference)
+                .AddMetadataReference(_coreProjectId, _cSharpSymbolsReference)
+                .AddMetadataReference(_coreProjectId, _codeAnalysisReference)
+                .AddMetadataReference(_coreProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_coreProjectId, _componentModelReference)
+                .AddMetadataReference(_coreProjectId, _objectModelReference)
+                .AddMetadataReference(_droidProjectId, _corlibReference)
+                .AddMetadataReference(_droidProjectId, _systemCoreReference)
+                .AddMetadataReference(_droidProjectId, _cSharpSymbolsReference)
+                .AddMetadataReference(_droidProjectId, _codeAnalysisReference)
+                .AddMetadataReference(_droidProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_droidProjectId, _mvvmCrossDroidReference)
+                .AddMetadataReference(_droidProjectId, _componentModelReference)
+                .AddMetadataReference(_droidProjectId, _objectModelReference);
 
             int count = 0;
             foreach (var source in sources)
             {
-                var newFileName = fileNamePrefix + count + "." + fileExt;
-                var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
+                var newFileName = fileNamePrefix + count + "." + CSharpDefaultFileExt;
+                var documentId = DocumentId.CreateNewId(projType == MvxProjType.Core ? _coreProjectId : _droidProjectId, debugName: newFileName);
                 solution = solution.AddDocument(documentId, newFileName, SourceText.From(source));
                 count++;
             }
-            return solution.GetProject(projectId);
+
+            return solution;
         }
         #endregion
     }
