@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,53 +36,42 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
-    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Binding.Droid, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.Droid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Droid, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Droid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.Droid, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding.Droid, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Binding.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Droid, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Core.4.0.0\lib\MonoAndroid\MvvmCross.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\MonoAndroid\MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.Droid, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.Preference, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Android.Support.v7.Preference, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Android.Support.v7.Preference.23.1.1.1\lib\MonoAndroid41\Xamarin.Android.Support.v7.Preference.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
