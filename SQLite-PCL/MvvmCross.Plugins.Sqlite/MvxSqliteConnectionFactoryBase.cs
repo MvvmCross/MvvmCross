@@ -13,7 +13,7 @@ namespace MvvmCross.Plugins.Sqlite
         protected SQLiteConnectionString GetConnectionString(SqLiteConfig config, bool appendPlatformPath)
         {
             var path = appendPlatformPath ? GetPlattformDatabasePath(config.DatabaseName) : config.DatabaseName;
-            return new SQLiteConnectionString(path, config.StoreDateTimeAsTicks, config.BlobSerializer, config.ContractResolver);
+            return new SQLiteConnectionString(path, config.StoreDateTimeAsTicks, config.BlobSerializer, config.ContractResolver, config.OpenFlags);
         }
 
         public SQLiteConnection GetConnection(string databaseName, bool appendPlatformPath = true)
