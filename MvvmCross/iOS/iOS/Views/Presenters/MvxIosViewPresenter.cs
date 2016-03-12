@@ -55,6 +55,18 @@ namespace MvvmCross.iOS.Views.Presenters
                 this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
+
+			if (hint is MvxClearHistoryHint) 
+			{
+				UIViewController root;
+
+				if (MasterNavigationController != null)
+					root = CreateNavigationController (CurrentTopViewController);
+				else
+					root = CurrentTopViewController;
+				
+				SetWindowRootViewController (root);
+			}
         }
 
         public virtual void Show(IMvxIosView view)
