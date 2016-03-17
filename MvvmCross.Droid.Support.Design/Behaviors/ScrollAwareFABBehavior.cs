@@ -8,7 +8,8 @@ using Android.Views;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    public class ScrollAwareFABBehavior : FloatingActionButton.Behavior
+    [Register("MvvmCross.Droid.Support.Design.Behaviors.ScrollAwareFABBehavior")]
+    public class ScrollAwareFABBehavior : CoordinatorLayout.Behavior
     {
         public ScrollAwareFABBehavior(IntPtr handle, JniHandleOwnership ownership) : base(handle, ownership)
         {
@@ -17,7 +18,12 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
 
         public ScrollAwareFABBehavior()
         {
-         
+            
+        }
+
+        public ScrollAwareFABBehavior(Context context, IAttributeSet attributeSet) : base()
+        {
+
         }
 
         public override bool OnStartNestedScroll(CoordinatorLayout coordinatorLayout, Java.Lang.Object child, View directTargetChild, View target, int nestedScrollAxes)
@@ -25,7 +31,6 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
             return nestedScrollAxes == ViewCompat.ScrollAxisVertical ||
                    base.OnStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
         }
-
 
         public override void OnNestedScroll(CoordinatorLayout coordinatorLayout, Java.Lang.Object child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed)
         {

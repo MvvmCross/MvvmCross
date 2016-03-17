@@ -17,4 +17,16 @@
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
             local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
     </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/autoScrollFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        local:borderWidth="0dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        local:elevation="6dp"
+        local:pressedTranslationZ="12dp"
+        local:fabSize="normal"
+        android:src="@drawable/ic_check_white_24dp"
+        local:layout_behavior="@string/fab_scroll_autohide_behavior" />
 </android.support.design.widget.CoordinatorLayout>
