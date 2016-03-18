@@ -134,5 +134,13 @@ namespace MvvmCross.Binding.Droid.Views
                     this.SetImageBitmap(mvxValueEventArgs.Value);
                 });
         }
+
+        public override void SetImageBitmap (Bitmap bm)
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                base.SetImageBitmap (bm);
+            }
+        }
     }
 }
