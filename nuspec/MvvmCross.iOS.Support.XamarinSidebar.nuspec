@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>MvvmCross.iOS.Support</id>
+		<id>MvvmCross.iOS.Support.XamarinSidebar</id>
 		<version>4.0.0</version>
 		<title>MvvmCross iOS Support</title>
 		<authors>MvvmCross</authors>
@@ -24,8 +24,8 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.iOS.Support.*" target="lib\Xamarin.iOS10" />
-		<file src="..\MvvmCross.iOS.Support\**\*.cs" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\MvvmCross.iOS.Support.XamarinSidebar.*" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\**\*.cs" target="lib\Xamarin.iOS10" />
 	</files>
 </package>
 
