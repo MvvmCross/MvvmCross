@@ -8,20 +8,20 @@ using Android.Views;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    [Register("MvvmCross.Droid.Support.Design.Behaviors.ScrollAwareFABBehavior")]
-    public class ScrollAwareFABBehavior : CoordinatorLayout.Behavior
+    [Register("MvvmCross.Droid.Support.Design.Behaviors.ScrollAwareGrowShrinkFABBehavior")]
+    public class ScrollAwareGrowShrinkFABBehavior : CoordinatorLayout.Behavior
     {
-        public ScrollAwareFABBehavior(IntPtr handle, JniHandleOwnership ownership) : base(handle, ownership)
+        public ScrollAwareGrowShrinkFABBehavior(IntPtr handle, JniHandleOwnership ownership) : base(handle, ownership)
         {
             
         }
 
-        public ScrollAwareFABBehavior()
+        public ScrollAwareGrowShrinkFABBehavior()
         {
             
         }
 
-        public ScrollAwareFABBehavior(Context context, IAttributeSet attributeSet) : base()
+        public ScrollAwareGrowShrinkFABBehavior(Context context, IAttributeSet attributeSet) : base()
         {
 
         }

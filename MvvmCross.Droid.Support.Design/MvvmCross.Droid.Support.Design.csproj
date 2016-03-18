@@ -54,7 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\ScrollAwareFABBehavior.cs" />
+    <Compile Include="Behaviors\ScrollAwareGrowShrinkFABBehavior.cs" />
+    <Compile Include="Behaviors\ScrollAwareTranslationHideFABBehavior.cs" />
+    <Compile Include="Extensions\FABExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
   </ItemGroup>
