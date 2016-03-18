@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
     /// <summary>
     /// Denotes where this view should be displayed when the application is running on an iPad

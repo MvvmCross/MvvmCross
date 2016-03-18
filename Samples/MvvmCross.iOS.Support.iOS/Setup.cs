@@ -4,7 +4,6 @@
     using MvvmCross.iOS.Views.Presenters;
     using MvvmCross.Platform.Platform;
     using Platform;
-    using Presenters.SidePanels;
     using UIKit;
 
     public class Setup : MvxIosSetup
@@ -33,7 +32,7 @@
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            return new MvxSidePanelsPresenter((MvxApplicationDelegate) ApplicationDelegate, Window);
+            return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
         }
     }
 }

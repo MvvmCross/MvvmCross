@@ -1,10 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿using MvvmCross.iOS.Support.SidePanels;
+
+namespace MvvmCross.iOS.Support.iOS.Views
 {
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
-    using Presenters.SidePanels;
     using UIKit;
 
     [Register("DetailView")]
@@ -29,7 +30,7 @@
 
             var bindingSet = this.CreateBindingSet<DetailView, DetailViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
-            
+
             bindingSet.Apply();
 
             Add(label);
@@ -42,7 +43,6 @@
                 label.WithSameCenterY(View)
 
                 );
-
         }
     }
 }

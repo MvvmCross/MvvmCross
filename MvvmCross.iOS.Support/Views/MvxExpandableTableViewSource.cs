@@ -126,6 +126,7 @@ namespace MvvmCross.iOS.Support.Views
         /// <param name="section"></param>
         /// <returns></returns>
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
+
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
     }
 }

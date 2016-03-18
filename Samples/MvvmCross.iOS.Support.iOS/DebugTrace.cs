@@ -1,8 +1,8 @@
 ﻿namespace MvvmCross.iOS.Support.iOS
 {
+    using MvvmCross.Platform.Platform;
     using System;
     using System.Diagnostics;
-    using MvvmCross.Platform.Platform;
 
     public class DebugTrace : IMvxTrace
     {

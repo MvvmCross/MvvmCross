@@ -1,7 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
-{
-    using System;
+﻿using System;
 
+namespace MvvmCross.iOS.Support.SidePanels
+{
     /// <summary>
     /// The panel presentation hint
     /// </summary>
