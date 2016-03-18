@@ -29,9 +29,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JASidePanels">
-      <HintPath>..\Components\jasidepanels-1.3.2.2\lib\ios-unified\JASidePanels.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -60,33 +57,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="SidePanels\" />
+    <Folder Include="Presenters\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\SidePanels\MvxActivePanelPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\MvxBaseSplitViewController.cs" />
-    <Compile Include="Presenters\SidePanels\MvxMultiPanelController.cs" />
-    <Compile Include="Presenters\SidePanels\MvxSidePanelsPresenter.cs" />
-    <Compile Include="Presenters\SidePanels\MvxPanelEnum.cs" />
-    <Compile Include="Presenters\SidePanels\MvxPanelHintType.cs" />
-    <Compile Include="Presenters\SidePanels\MvxPanelPopToRootPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\MvxPanelPresentationAttribute.cs" />
-    <Compile Include="Presenters\SidePanels\MvxPanelResetRootPresentationHint.cs" />
-    <Compile Include="Presenters\SidePanels\MvxSplitViewBehaviour.cs" />
-    <Compile Include="Presenters\SidePanels\MvxSplitViewControllerHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxExpandableTableViewSource.cs" />
     <Compile Include="Views\Extensions.cs" />
     <Compile Include="Views\MvxBaseViewController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="jasidepanels">
-      <Version>1.3.2.2</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="jasidepanels">
-      <Visible>False</Visible>
-      <Version>1.3.2.2</Version>
-    </XamarinComponentReference>
+    <Compile Include="SidePanels\MvxActivePanelPresentationHint.cs" />
+    <Compile Include="SidePanels\MvxBaseSplitViewController.cs" />
+    <Compile Include="SidePanels\MvxPanelEnum.cs" />
+    <Compile Include="SidePanels\MvxPanelHintType.cs" />
+    <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
+    <Compile Include="SidePanels\MvxPanelPresentationAttribute.cs" />
+    <Compile Include="SidePanels\MvxPanelResetRootPresentationHint.cs" />
+    <Compile Include="SidePanels\MvxSplitViewBehaviour.cs" />
+    <Compile Include="SidePanels\MvxSplitViewControllerHost.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
