@@ -20,6 +20,9 @@ namespace Example.Core.ViewModels
                 new ListItem { Title = "title four" },
                 new ListItem { Title = "title five" }
             };
+
+            for (int i = 0; i < 20; ++i)
+                Items.Add(new ListItem() { Title = "Test FAB Behavior " + i});
         }
 
         private ObservableCollection<ListItem> _items;
