@@ -1,7 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
-{
-    using UIKit;
+﻿using UIKit;
 
+namespace MvvmCross.iOS.Support.SidePanels
+{
     /// <summary>
     /// A wrapper UIViewController to present a UISplitViewController view nested
     /// in a navigation stack instead of being the root application view controller

@@ -1,7 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
-{
-    using Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 
+namespace MvvmCross.iOS.Support.SidePanels
+{
     /// <summary>
     /// The Panel reset hint
     /// </summary>

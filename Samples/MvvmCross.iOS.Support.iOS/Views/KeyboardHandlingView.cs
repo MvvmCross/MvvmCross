@@ -1,9 +1,10 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿using MvvmCross.iOS.Support.SidePanels;
+
+namespace MvvmCross.iOS.Support.iOS.Views
 {
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
-    using Presenters.SidePanels;
     using Support.Views;
     using UIKit;
 
@@ -54,7 +55,7 @@
 
                 scrollView.Add(textField);
             }
-            
+
             scrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             var constraints = scrollView.VerticalStackPanelConstraints(new Margins(15, 15, 15, 15, 5, 80), scrollView.Subviews);

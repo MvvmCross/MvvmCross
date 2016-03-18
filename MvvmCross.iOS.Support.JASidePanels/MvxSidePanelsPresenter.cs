@@ -1,12 +1,14 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
+﻿using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
+namespace MvvmCross.iOS.Support.JASidePanels
 {
-    using System.Linq;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
-    using MvvmCross.iOS.Views;
-    using MvvmCross.iOS.Views.Presenters;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
+    using System.Linq;
     using UIKit;
 
     /// <summary>
@@ -38,7 +40,7 @@
         /// </summary>
         private MvxBaseSplitViewController _splitviewController;
 
-        #endregion
+        #endregion Private fields
 
         #region ctors
 
@@ -54,7 +56,7 @@
             _activePanel = MvxPanelEnum.Center;
         }
 
-        #endregion
+        #endregion ctors
 
         #region Private Properties
 
@@ -72,8 +74,10 @@
                 {
                     case MvxPanelEnum.Center:
                         return CentrePanelUiNavigationController();
+
                     case MvxPanelEnum.Left:
                         return LeftPanelUiNavigationController();
+
                     case MvxPanelEnum.Right:
                         return RightPanelUiNavigationController();
                 }
@@ -82,7 +86,7 @@
             }
         }
 
-        #endregion
+        #endregion Private Properties
 
         #region Private Methods
 
@@ -150,10 +154,12 @@
                         if (CentrePanelUiNavigationController() != null)
                             CentrePanelUiNavigationController().PopToRootViewController(false);
                         break;
+
                     case MvxPanelEnum.Left:
                         if (LeftPanelUiNavigationController() != null)
                             LeftPanelUiNavigationController().PopToRootViewController(false);
                         break;
+
                     case MvxPanelEnum.Right:
                         if (RightPanelUiNavigationController() != null)
                             RightPanelUiNavigationController().PopToRootViewController(false);
@@ -178,9 +184,11 @@
                     case MvxPanelEnum.Center:
                         _multiPanelController.CenterPanel = null;
                         break;
+
                     case MvxPanelEnum.Left:
                         _multiPanelController.LeftPanel = null;
                         break;
+
                     case MvxPanelEnum.Right:
                         _multiPanelController.RightPanel = null;
                         break;
@@ -199,9 +207,11 @@
                 case MvxPanelEnum.Center:
                     _multiPanelController.ShowCenterPanelAnimated(true);
                     break;
+
                 case MvxPanelEnum.Left:
                     _multiPanelController.ShowLeftPanelAnimated(true);
                     break;
+
                 case MvxPanelEnum.Right:
                     _multiPanelController.ShowRightPanelAnimated(true);
                     break;
@@ -236,7 +246,7 @@
             return true;
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Public Methods
 
@@ -265,7 +275,7 @@
                 return;
             }
 
-            // Then handle panels 
+            // Then handle panels
             var viewController = view as UIViewController;
             if (viewController == null)
             {
@@ -279,7 +289,7 @@
             else
             {
                 // here we need to get the Presentation Panel attribute details
-                var panelAttribute = viewController.GetType().GetCustomAttributes(typeof (MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
+                var panelAttribute = viewController.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
                 if (panelAttribute != null)
                 {
                     // this section of presentation code deals with showing master/detail views on
@@ -307,9 +317,11 @@
                         case MvxPanelHintType.ActivePanel:
                             ChangePresentation(new MvxActivePanelPresentationHint(panelAttribute.Panel, panelAttribute.ShowPanel));
                             break;
+
                         case MvxPanelHintType.PopToRoot:
                             ChangePresentation(new MvxPanelPopToRootPresentationHint(panelAttribute.Panel));
                             break;
+
                         case MvxPanelHintType.ResetRoot:
                             ChangePresentation(new MvxPanelResetRootPresentationHint(panelAttribute.Panel));
                             break;
@@ -319,15 +331,17 @@
                 if (GetActivePanelUiNavigationController == null)
                 {
                     // If we have cleared down our panel completely, then we will be setting a new root view
-                    // this is perfect for Menu items 
+                    // this is perfect for Menu items
                     switch (_activePanel)
                     {
                         case MvxPanelEnum.Center:
                             _multiPanelController.CenterPanel = new UINavigationController(viewController);
                             break;
+
                         case MvxPanelEnum.Left:
                             _multiPanelController.LeftPanel = new UINavigationController(viewController);
                             break;
+
                         case MvxPanelEnum.Right:
                             _multiPanelController.RightPanel = new UINavigationController(viewController);
                             break;
@@ -335,7 +349,7 @@
                 }
                 else
                 {
-                    // Otherwise we just want to push to the designated panel 
+                    // Otherwise we just want to push to the designated panel
                     GetActivePanelUiNavigationController.PushViewController(viewController, false);
                 }
             }
@@ -412,7 +426,7 @@
             }
 
             // We will look across all active navigation stacks to see if we can
-            // pop our MvxView associated with this MvxViewModel (saves explicitly having to specify)            
+            // pop our MvxView associated with this MvxViewModel (saves explicitly having to specify)
             var modelClosed = CloseTopView(toClose, CentrePanelUiNavigationController());
             if (!modelClosed) modelClosed = CloseTopView(toClose, LeftPanelUiNavigationController());
             if (!modelClosed) modelClosed = CloseTopView(toClose, RightPanelUiNavigationController());
@@ -423,7 +437,7 @@
             }
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -443,6 +457,6 @@
             _multiPanelController.CenterPanel = new UINavigationController(viewController);
         }
 
-        #endregion
+        #endregion Protected Methods
     }
 }

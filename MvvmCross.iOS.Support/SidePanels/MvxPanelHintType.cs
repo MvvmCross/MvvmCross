@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
     /// <summary>
     /// Denotes the panel hint type

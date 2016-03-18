@@ -1,6 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.Presenters.SidePanels
+﻿using JASidePanels;
+
+namespace MvvmCross.iOS.Support.JASidePanels
 {
-    using JASidePanels;
     using UIKit;
 
     public class MvxMultiPanelController : JASidePanelController
