@@ -2,7 +2,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities.Caching
 {
-    class FragmentCacheConfigurationCustomFragmentInfo : FragmentCacheConfiguration<MainActivityFragmentCacheInfoFactory.SerializableCustomFragmentInfo>
+    /*class FragmentCacheConfigurationCustomFragmentInfo : FragmentCacheConfiguration<MainActivityFragmentCacheInfoFactory.SerializableCustomFragmentInfo>
     {
         private readonly MainActivityFragmentCacheInfoFactory _mainActivityFragmentCacheInfoFactory;
         public FragmentCacheConfigurationCustomFragmentInfo()
@@ -11,5 +11,5 @@ namespace Example.Droid.Activities.Caching
         }
 
         public override MvxCachedFragmentInfoFactory MvxCachedFragmentInfoFactory => _mainActivityFragmentCacheInfoFactory;
-    }
+    }*/
 }

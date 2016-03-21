@@ -16,10 +16,10 @@ namespace Example.Droid.Activities
        )]
     public class MessagesActivity : MvxCachingFragmentCompatActivity<MessagesViewModel>
     {
-        public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        /*public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
         {
             return new MessagesFragmentCacheConfigurationCustomFragmentInfo();
-        }
+        }*/
 
         protected override void OnCreate(Bundle bundle)
         {

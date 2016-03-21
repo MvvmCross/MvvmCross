@@ -12,10 +12,11 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFragmentAttribute : Attribute
     {
-        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId)
+        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false)
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
+			AddToBackStack = addToBackStack;
         }
 
         /// <summary>
@@ -37,5 +38,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Attributes
         /// Content id - place where to show fragment.
         /// </summary>
         public int FragmentContentId { get; private set; }
+
+		/// <summary>
+		/// Indicates if the fragment can be cached. True by default.
+		/// </summary>
+		public bool AddToBackStack { get; set; } = false;
     }
 }

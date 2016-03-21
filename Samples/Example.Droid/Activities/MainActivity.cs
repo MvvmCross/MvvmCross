@@ -9,8 +9,9 @@ using Example.Core.ViewModels;
 using Example.Droid.Activities.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
-using MvvmCross.Droid.Support.V7.Fragging.Presenter;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using Android.Views.InputMethods;
 
 namespace Example.Droid.Activities
 {
@@ -47,12 +48,12 @@ namespace Example.Droid.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        /*public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
         {
             return new FragmentCacheConfigurationCustomFragmentInfo(); // custom FragmentCacheConfiguration is used because custom IMvxFragmentInfo is used -> CustomFragmentInfo
-        }
+        }*/
 
-        public override void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        /*public override void OnFragmentCreated(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
         {
             base.OnFragmentCreated(fragmentInfo, transaction);
 
@@ -60,27 +61,27 @@ namespace Example.Droid.Activities
 
             // You can do fragment + transaction based configurations here.
             // Note that, the cached fragment might be reused in another transaction afterwards.
-        }
+        }*/
 
-        private void CheckIfMenuIsNeeded(CustomFragmentInfo myCustomInfo)
+        /*private void CheckIfMenuIsNeeded(CustomFragmentInfo myCustomInfo)
         {
             //If not root, we will block the menu sliding gesture and show the back button on top
             if (myCustomInfo.IsRoot)
                 ShowHamburguerMenu();
             else
                 ShowBackButton();
-        }
+        }*/
 
-        private void ShowBackButton()
+        /*private void ShowBackButton()
         {
             //TODO Tell the toggle to set the indicator off
             //this.DrawerToggle.DrawerIndicatorEnabled = false;
 
             //Block the menu slide gesture
             DrawerLayout.SetDrawerLockMode(DrawerLayout.LockModeLockedClosed);
-        }
+        }*/
 
-        private void ShowHamburguerMenu()
+        /*private void ShowHamburguerMenu()
         {
             //TODO set toggle indicator as enabled 
             //this.DrawerToggle.DrawerIndicatorEnabled = true;
@@ -88,13 +89,24 @@ namespace Example.Droid.Activities
             //Unlock the menu sliding gesture
             DrawerLayout.SetDrawerLockMode(DrawerLayout.LockModeUnlocked);
         }
+		*/
 
+		/*public override void OnBeforeFragmentChanging (IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+		{
+			var currentFrag = SupportFragmentManager.FindFragmentById (Resource.Id.content_frame) as MvxFragment;
 
-        public override void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
+			if(currentFrag != null 
+				&& fragmentInfo.ViewModelType != typeof(MenuViewModel) 
+				&& currentFrag.FindAssociatedViewModelType() != fragmentInfo.ViewModelType)
+				fragmentInfo.AddToBackStack = true;
+			base.OnBeforeFragmentChanging (fragmentInfo, transaction);
+		}*/
+
+        /*public override void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
         {
             var myCustomInfo = fragmentInfo as CustomFragmentInfo;
             CheckIfMenuIsNeeded(myCustomInfo);
-        }
+        }*/
 
 
         public override void OnBackPressed()
@@ -104,9 +116,19 @@ namespace Example.Droid.Activities
             else
                 base.OnBackPressed();
         }
+
+		public void HideSoftKeyboard()
+		{
+			if (CurrentFocus == null) return;
+
+			InputMethodManager inputMethodManager = (InputMethodManager)GetSystemService(InputMethodService);
+			inputMethodManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, 0);
+
+			CurrentFocus.ClearFocus();
+		}
     }
 
-    public class CustomFragmentInfo : MvxCachedFragmentInfo
+    /*public class CustomFragmentInfo : MvxCachedFragmentInfo
     {
         public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false,
             bool isRoot = false)
@@ -116,5 +138,5 @@ namespace Example.Droid.Activities
         }
 
         public bool IsRoot { get; set; }
-    }
+    }*/
 }
