@@ -1,14 +1,14 @@
-using Android.App;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Android.App;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
+namespace MvvmCross.Droid.Shared.Presenter
 {
     public class FragmentHostRegistrationSettings
     {

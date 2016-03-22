@@ -1,7 +1,7 @@
 using System;
 using MvvmCross.Droid.Shared.Fragments;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Caching
+namespace MvvmCross.Droid.Shared.Caching
 {
     public class MvxCachedFragmentInfo : IMvxCachedFragmentInfo
     {

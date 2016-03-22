@@ -8,7 +8,7 @@
 using Android.OS;
 using Android.Views;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Shared
 {
     public class MvxCreateViewParameters
     {

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
+namespace MvvmCross.Droid.Shared.Presenter
 {
     public class MvxFragmentsPresenter
         : MvxAndroidViewPresenter

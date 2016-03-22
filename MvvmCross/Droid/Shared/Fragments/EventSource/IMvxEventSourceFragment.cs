@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
 using Android.OS;
 using MvvmCross.Platform.Core;
-using System;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
+namespace MvvmCross.Droid.Shared.Fragments.EventSource
 {
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {
