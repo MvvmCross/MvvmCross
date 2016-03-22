@@ -9,6 +9,8 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
