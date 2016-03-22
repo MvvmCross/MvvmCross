@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Windows.Input;
 using MvvmCross.Binding.Attributes;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         [MvxSetToNullAfterBinding]
         IEnumerable ItemsSource { get; set; }
 
-        int ItemTemplateId { get; set; }
+        IItemTemplateSelector ItemTemplateSelector { get; set; }
         ICommand ItemClick { get; set; }
         ICommand ItemLongClick { get; set; }
 
