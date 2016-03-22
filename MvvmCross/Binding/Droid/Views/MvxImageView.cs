@@ -139,6 +139,11 @@ namespace MvvmCross.Binding.Droid.Views
         {
             if (Handle != IntPtr.Zero)
             {
+                if (bm != null && (bm.Handle == IntPtr.Zero || bm.IsRecycled))
+                {
+                    // Don't try to update disposed or recycled bitmap
+                    return;
+                }
                 base.SetImageBitmap (bm);
             }
         }
