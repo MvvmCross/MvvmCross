@@ -16,7 +16,7 @@ namespace MvvmCross.Droid.Shared.Attributes
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
-			AddToBackStack = addToBackStack;
+            AddToBackStack = addToBackStack;
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace MvvmCross.Droid.Shared.Attributes
         /// </summary>
         public int FragmentContentId { get; private set; }
 
-		/// <summary>
-		/// Indicates if the fragment can be cached. True by default.
-		/// </summary>
-		public bool AddToBackStack { get; set; } = false;
+        /// <summary>
+        /// Indicates if the fragment can be cached. True by default.
+        /// </summary>
+        public bool AddToBackStack { get; set; } = false;
     }
 }

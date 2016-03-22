@@ -8,7 +8,6 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Shared.Fragments
 {

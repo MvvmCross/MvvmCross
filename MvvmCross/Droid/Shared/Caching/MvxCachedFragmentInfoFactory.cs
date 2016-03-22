@@ -1,6 +1,6 @@
-using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
+using System;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
