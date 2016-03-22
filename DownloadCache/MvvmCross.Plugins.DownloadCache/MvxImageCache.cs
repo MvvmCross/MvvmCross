@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Immutable;
+using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -18,7 +20,7 @@ namespace MvvmCross.Plugins.DownloadCache
         : MvxAllThreadDispatchingObject
         , IMvxImageCache<T>
     {
-        private readonly Dictionary<string, Entry> _entriesByHttpUrl = new Dictionary<string, Entry>();
+        private ImmutableDictionary<string, Entry> _entriesByHttpUrl = ImmutableDictionary.Create<string, Entry>();
 
         private readonly IMvxFileDownloadCache _fileDownloadCache;
         private readonly int _maxInMemoryBytes;
@@ -55,13 +57,8 @@ namespace MvvmCross.Plugins.DownloadCache
                         async s =>
                         {
                             var image = await Parse(s).ConfigureAwait(false);
-                            lock (_entriesByHttpUrl)
-                            {
-                                if (!_entriesByHttpUrl.ContainsKey(url))
-                                {
-                                    _entriesByHttpUrl.Add(url, new Entry(url, image));
-                                }
-                            }
+                            var entriesByUrl = _entriesByHttpUrl.SetItem (url, new Entry(url, image));
+                            Interlocked.Exchange (ref _entriesByHttpUrl, entriesByUrl);
                             tcs.TrySetResult(image.RawImage);
                         },
                         exception =>
@@ -84,30 +81,52 @@ namespace MvvmCross.Plugins.DownloadCache
         {
             RunSyncOrAsyncWithLock(() =>
             {
-                var currentSizeInBytes = _entriesByHttpUrl.Values.Sum(x => x.Image.GetSizeInBytes());
-                var currentCountFiles = _entriesByHttpUrl.Values.Count;
+                var entries = _entriesByHttpUrl.Select (kvp => kvp.Value).ToList ();
+
+                var currentSizeInBytes = entries.Sum(x => x.Image.GetSizeInBytes());
+                var currentCountFiles = entries.Count;
 
                 if (currentCountFiles <= _maxInMemoryFiles
                     && currentSizeInBytes <= _maxInMemoryBytes)
                     return;
 
                 // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
-                List<Entry> sortedEntries = _entriesByHttpUrl.Values.ToList();
-                sortedEntries.Sort(new MvxImageComparer());
+                entries.Sort(new MvxImageComparer());
+
+                var entriesToRemove = new List<Entry>();
 
                 while (currentCountFiles > _maxInMemoryFiles
                         || currentSizeInBytes > _maxInMemoryBytes)
                 {
-                    var toRemove = sortedEntries[0];
-                    sortedEntries.RemoveAt(0);
+                    var toRemove = entries[0];
+                    entries.RemoveAt(0);
+
+                    entriesToRemove.Add (toRemove);
 
                     currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                     currentCountFiles--;
 
-                    if (_disposeOnRemove)
-                        toRemove.Image.RawImage.DisposeIfDisposable();
+                    var entriesByUrl = _entriesByHttpUrl.Remove (toRemove.Url);
+                    Interlocked.Exchange (ref _entriesByHttpUrl, entriesByUrl);
+                }
 
-                    _entriesByHttpUrl.Remove(toRemove.Url);
+                if (_disposeOnRemove && entriesToRemove.Count > 0)
+                {
+                    // It is important to Dispose images on UI-thread
+                    // otherwise there could be a crash when the image could be disposed
+                    // just about to be rendered
+                    // see https://github.com/MvvmCross/MvvmCross-Plugins/issues/41#issuecomment-199833494
+                    DisposeImagesOnMainThread (entriesToRemove);
+                }
+            });
+        }
+
+        private void DisposeImagesOnMainThread (List<Entry> entries)
+        {
+            InvokeOnMainThread (() => {
+                foreach (var entry in entries)
+                {
+                    entry.Image.RawImage.DisposeIfDisposable();
                 }
             });
         }
