@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.FullFragging.Attributes;
+using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using System;
 
-namespace MvvmCross.Droid.FullFragging.Presenter
+namespace MvvmCross.Droid.Support.V7.Fragging.Presenter
 {
     public interface IMvxFragmentHost
     {
