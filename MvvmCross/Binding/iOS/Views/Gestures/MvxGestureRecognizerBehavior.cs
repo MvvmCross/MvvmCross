@@ -40,16 +40,6 @@ namespace MvvmCross.Binding.iOS.Views.Gestures
 
     /*
      * these commented out as no use has been found for any of them yet
-    public class MvxSwipeGestureRecognizerBehaviour
-        : MvxGestureRecognizerBehavior<UISwipeGestureRecognizer>
-    {
-        public void Apply(UIView view, UISwipeGestureRecognizerDirection direction = UISwipeGestureRecognizerDirection.Right)
-        {
-            var tap = new UISwipeGestureRecognizer(FireCommandWithNull) {Direction = direction};
-            view.AddGestureRecognizer(tap);
-        }
-    }
-
     public class MvxPinchGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior
     {

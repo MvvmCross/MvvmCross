@@ -65,6 +65,7 @@
     <Compile Include="ValueConverters\MvxUnifiedTypesValueConverter.cs" />
     <Compile Include="Views\Gestures\MvxBehaviourExtensions.cs" />
     <Compile Include="Views\Gestures\MvxGestureRecognizerBehavior.cs" />
+    <Compile Include="Views\Gestures\MvxSwipeGestureRecognizerBehaviour.cs" />
     <Compile Include="Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxImageViewWrapper.cs" />
