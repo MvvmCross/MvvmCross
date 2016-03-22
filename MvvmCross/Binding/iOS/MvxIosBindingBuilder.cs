@@ -49,6 +49,9 @@ namespace MvvmCross.Binding.iOS
             registry.RegisterCustomBindingFactory<UIControl>("TouchUpInside",
                                                              view =>
                                                              new MvxUIControlTouchUpInsideTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIControl>("ValueChanged",
+                                                             view =>
+                                                             new MvxUIControlValueChangedTargetBinding(view));
             registry.RegisterCustomBindingFactory<UIView>("Visibility",
                                                           view =>
                                                           new MvxUIViewVisibilityTargetBinding(view));
