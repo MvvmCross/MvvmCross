@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>MvvmCross.Plugin.SQLitePCL</id>
-		<version>4.0.0</version>
+		<version>4.1.0</version>
 		<title>MvvmCross - Sqlite PCL Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge, Benedikt Neuhold</owners>
@@ -16,53 +16,53 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
 				<dependency id="SQLite.Net-PCL" version="3.1.1" />
@@ -109,5 +109,6 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 
 	</files>
 </package>
+
 
 
