@@ -6,7 +6,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities.Caching
 {
-    internal class MessagesActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
+    /*internal class MessagesActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
     {
         private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary
             <string, CustomFragmentInfo>
@@ -82,5 +82,5 @@ namespace Example.Droid.Activities.Caching
 
             public bool IsRoot { get; set; }
         }
-    }
+    }*/
 }

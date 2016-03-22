@@ -50,12 +50,12 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             return true;
         }
 
-        public bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType)
+        public bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType, bool addToBackStack = false)
         {
             if (_lookup.ContainsKey(tag))
                 return false;
 
-            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType);
+			var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack: addToBackStack);
             _lookup.Add(tag, fragInfo);
             return true;
         }

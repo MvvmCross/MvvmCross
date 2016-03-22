@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel;
 
-        bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType);
+		bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType, bool addToBackStack = false);
 
         bool TryGetValue(string registeredFragmentTag, out IMvxCachedFragmentInfo cachedFragmentInfo);
 
