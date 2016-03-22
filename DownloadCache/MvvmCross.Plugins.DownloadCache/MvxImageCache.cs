@@ -93,20 +93,40 @@ namespace MvvmCross.Plugins.DownloadCache
                 // we don't use LINQ OrderBy here because of AOT/JIT problems on MonoTouch
                 entries.Sort(new MvxImageComparer());
 
+                var entriesToRemove = new List<Entry>();
+
                 while (currentCountFiles > _maxInMemoryFiles
                         || currentSizeInBytes > _maxInMemoryBytes)
                 {
                     var toRemove = entries[0];
                     entries.RemoveAt(0);
 
+                    entriesToRemove.Add (toRemove);
+
                     currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                     currentCountFiles--;
 
-                    if (_disposeOnRemove)
-                        toRemove.Image.RawImage.DisposeIfDisposable();
-
                     var entriesByUrl = _entriesByHttpUrl.Remove (toRemove.Url);
                     Interlocked.Exchange (ref _entriesByHttpUrl, entriesByUrl);
+                }
+
+                if (_disposeOnRemove && entriesToRemove.Count > 0)
+                {
+                    // It is important to Dispose images on UI-thread
+                    // otherwise there could be a crash when the image could be disposed
+                    // just about to be rendered
+                    // see https://github.com/MvvmCross/MvvmCross-Plugins/issues/41#issuecomment-199833494
+                    DisposeImagesOnMainThread (entriesToRemove);
+                }
+            });
+        }
+
+        private void DisposeImagesOnMainThread (List<Entry> entries)
+        {
+            InvokeOnMainThread (() => {
+                foreach (var entry in entries)
+                {
+                    entry.Image.RawImage.DisposeIfDisposable();
                 }
             });
         }
