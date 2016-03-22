@@ -43,20 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\MvxFragmentAttribute.cs" />
-    <Compile Include="Attributes\MvxFragmentAttributeExtensionMethods.cs" />
-    <Compile Include="Caching\CachedFragmentManager.cs" />
-    <Compile Include="Caching\DefaultFragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\FragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\IFragmentCacheableActivity.cs" />
-    <Compile Include="Caching\IFragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\IMvxCachedFragmentInfo.cs" />
-    <Compile Include="Caching\IMvxCachedFragmentInfoFactory.cs" />
-    <Compile Include="Caching\MvxCachedFragmentInfo.cs" />
-    <Compile Include="Caching\MvxCachedFragmentInfoFactory.cs" />
     <Compile Include="Caching\MvxCachingFragmentActivity.cs" />
-    <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
-    <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceFragment.cs" />
