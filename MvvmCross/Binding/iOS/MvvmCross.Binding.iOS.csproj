@@ -52,6 +52,7 @@
     <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
     <Compile Include="Target\MvxUILabelTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISearchBarTextTargetBinding.cs" />
+    <Compile Include="Target\MvxUIStepperValueTargetBinding.cs" />
     <Compile Include="Target\MvxUITextFieldShouldReturnTargetBinding.cs" />
     <Compile Include="Target\MvxUITextFieldTextFocusTargetBinding.cs" />
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />

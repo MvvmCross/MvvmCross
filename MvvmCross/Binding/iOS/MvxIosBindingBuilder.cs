@@ -63,6 +63,9 @@ namespace MvvmCross.Binding.iOS
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding),
                                                         typeof(UISlider),
                                                         "Value");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUIStepperValueTargetBinding),
+                                                        typeof(UIStepper),
+                                                        "Value");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISegmentedControlSelectedSegmentTargetBinding),
                                                         typeof(UISegmentedControl),
                                                         "SelectedSegment");
