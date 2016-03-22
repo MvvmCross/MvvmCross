@@ -17,5 +17,12 @@ namespace MvvmCross.Binding.iOS.Views.Gestures
             var toReturn = new MvxTapGestureRecognizerBehaviour(view, numberOfTapsRequired, numberOfTouchesRequired);
             return toReturn;
         }
+
+        public static MvxSwipeGestureRecognizerBehaviour Swipe(this UIView view, UISwipeGestureRecognizerDirection direction,
+            uint numberOfTouchesRequired = 1)
+        {
+            var toReturn = new MvxSwipeGestureRecognizerBehaviour(view, direction, numberOfTouchesRequired);
+            return toReturn;
+        }
     }
 }
