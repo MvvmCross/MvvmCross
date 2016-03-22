@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using Android.App;
 using Android.OS;
 using MvvmCross.Platform.Core;
+using System;
 
 namespace MvvmCross.Droid.Shared.Fragments.EventSource
 {

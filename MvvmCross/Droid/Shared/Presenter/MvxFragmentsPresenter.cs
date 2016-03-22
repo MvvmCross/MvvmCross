@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {

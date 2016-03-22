@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Android.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {

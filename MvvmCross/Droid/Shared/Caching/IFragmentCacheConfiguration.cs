@@ -1,8 +1,8 @@
-using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
+using System;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Shared.Caching
             where TFragment : IMvxFragmentView
             where TViewModel : IMvxViewModel;
 
-		bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType, bool addToBackStack = false);
+        bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType, bool addToBackStack = false);
 
         bool TryGetValue(string registeredFragmentTag, out IMvxCachedFragmentInfo cachedFragmentInfo);
 

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
@@ -55,7 +55,7 @@ namespace MvvmCross.Droid.Shared.Caching
             if (_lookup.ContainsKey(tag))
                 return false;
 
-			var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack: addToBackStack);
+            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack: addToBackStack);
             _lookup.Add(tag, fragInfo);
             return true;
         }
