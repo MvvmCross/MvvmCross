@@ -81,8 +81,11 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wp8" />
 		
 		<!-- windows common - PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
 
 		<!-- store - pcl -->
