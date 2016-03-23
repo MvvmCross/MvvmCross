@@ -12,7 +12,7 @@ namespace MvvmCross.Plugins.PictureChooser
 {
     public interface IMvxCombinedPictureChooserTask
     {
-        void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+        void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                  Action assumeCancelled);
     }
 }
