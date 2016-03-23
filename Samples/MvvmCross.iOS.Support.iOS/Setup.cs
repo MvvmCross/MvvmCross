@@ -1,4 +1,6 @@
-﻿namespace MvvmCross.iOS.Support.iOS
+﻿using MvvmCross.iOS.Support.JASidePanels;
+
+namespace MvvmCross.iOS.Support.iOS
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.iOS.Views.Presenters;
