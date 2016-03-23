@@ -201,20 +201,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -225,7 +227,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -1570,7 +1572,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -1827,20 +1829,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -1851,7 +1855,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -3243,7 +3247,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -3486,20 +3490,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -3510,7 +3516,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -4888,7 +4894,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -5150,20 +5156,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -5174,7 +5182,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -6566,7 +6574,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -6809,20 +6817,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -6833,7 +6843,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -8211,7 +8221,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -8473,20 +8483,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -8497,7 +8509,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -9889,7 +9901,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -10132,20 +10144,22 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Binding/4.0.0": {
+      "MvvmCross.Binding/4.1.0": {
         "dependencies": {
-          "MvvmCross.Core": "[4.0.0, )"
+          "MvvmCross.Core": "[4.1.0, )"
         },
         "compile": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         },
         "runtime": {
+          "lib/win81/MvvmCross.Binding.dll": {},
           "lib/win81/MvvmCross.Localization.dll": {}
         }
       },
-      "MvvmCross.Core/4.0.0": {
+      "MvvmCross.Core/4.1.0": {
         "dependencies": {
-          "MvvmCross.Platform": "[4.0.0, )"
+          "MvvmCross.Platform": "[4.1.0, )"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -10156,7 +10170,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.0.0": {
+      "MvvmCross.Platform/4.1.0": {
         "compile": {
           "lib/win81/MvvmCross.Platform.dll": {},
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {}
@@ -11534,7 +11548,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Xamarin.Forms/2.0.1.6505": {
+      "Xamarin.Forms/2.1.0.6529": {
         "compile": {
           "lib/uap10.0/Xamarin.Forms.Core.dll": {},
           "lib/uap10.0/Xamarin.Forms.Platform.dll": {},
@@ -11707,7 +11721,7 @@
       ]
     },
     "Microsoft.NETCore.Runtime.CoreCLR-arm/1.0.0": {
-      "sha512": "hoJfIl981eXwn9Tz8onO/J1xaYApIfp/YrhjSh9rRhml1U5Wj80LBgyp/6n+KI3VlvcAraThhnHnCTp+M3Uh+w==",
+      "sha512": "vUQyaKbHCa7BJAAzdfCP2FfBYOSt0YnDw7VMJLmD1/k68HIJgw1QO7GAfHhqoa39zkkvimC47QBH27wG4C5OGQ==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12204,8 +12218,8 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "MvvmCross.Binding/4.0.0": {
-      "sha512": "ViHZIlEEM4lf2mOJiHbNMbWFs36dePMTyS1zIlIvfPfVUc6GEapnErhZ19W6nzZZG7NKa2d6i0YUrshLw6AT5A==",
+    "MvvmCross.Binding/4.1.0": {
+      "sha512": "W30/XqE7LTE1qWu9NY5XlIRWz1NQJP544kUukoFePSYIbbOvUOXOmgN/h460vVye5wnSq/TmgdhxqnE88nRMCg==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12231,14 +12245,20 @@
         "lib/portable-net45+win+wpa81+wp80/MvvmCross.Binding.dll.mdb",
         "lib/portable-net45+win+wpa81+wp80/MvvmCross.Localization.dll",
         "lib/portable-net45+win+wpa81+wp80/MvvmCross.Localization.dll.mdb",
+        "lib/portable-win81+wpa81/MvvmCross.Binding.dll",
+        "lib/portable-win81+wpa81/MvvmCross.Binding.dll.mdb",
         "lib/portable-win81+wpa81/MvvmCross.Localization.dll",
         "lib/portable-win81+wpa81/MvvmCross.Localization.dll.mdb",
+        "lib/win81/MvvmCross.Binding.dll",
+        "lib/win81/MvvmCross.Binding.dll.mdb",
         "lib/win81/MvvmCross.Localization.dll",
         "lib/win81/MvvmCross.Localization.dll.mdb",
         "lib/wp8/MvvmCross.Binding.dll",
         "lib/wp8/MvvmCross.Binding.dll.mdb",
         "lib/wp8/MvvmCross.Localization.dll",
         "lib/wp8/MvvmCross.Localization.dll.mdb",
+        "lib/wpa81/MvvmCross.Binding.dll",
+        "lib/wpa81/MvvmCross.Binding.dll.mdb",
         "lib/wpa81/MvvmCross.Localization.dll",
         "lib/wpa81/MvvmCross.Localization.dll.mdb",
         "lib/Xamarin.iOS10/MvvmCross.Binding.dll",
@@ -12254,11 +12274,11 @@
         "lib/Xamarin.Mac20/MvvmCross.Localization.dll",
         "lib/Xamarin.Mac20/MvvmCross.Localization.dll.mdb",
         "MvvmCross.Binding.nuspec",
-        "package/services/metadata/core-properties/55916a9779bd4830b0d41b2e5b0118fd.psmdcp"
+        "package/services/metadata/core-properties/77159147f9b64621813d53c459ddfb3a.psmdcp"
       ]
     },
-    "MvvmCross.Core/4.0.0": {
-      "sha512": "tUS2aluir/2ie82ILmQFZoIhxT8o+MgDMv4z8NCLGwHVGoqU1WA238lA0fcXVFNXvcMktnr6iV6S0cpxo7IpZQ==",
+    "MvvmCross.Core/4.1.0": {
+      "sha512": "yfxzpL2UpyRzjJMyD99nePtLpMndvu0sgIEgiwswqvU6Y8V6XwtNgYLFrNA1/6v0YQ1M0+Kwcu94sKHmPL5+hg==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12294,11 +12314,11 @@
         "lib/Xamarin.Mac20/MvvmCross.Mac.dll",
         "lib/Xamarin.Mac20/MvvmCross.Mac.dll.mdb",
         "MvvmCross.Core.nuspec",
-        "package/services/metadata/core-properties/3e50cbf4348a49d98dc7158115dedfa6.psmdcp"
+        "package/services/metadata/core-properties/122d4bc2603a4e8c8328f9e6456b502d.psmdcp"
       ]
     },
-    "MvvmCross.Platform/4.0.0": {
-      "sha512": "PAwMCnppKblgGqFUugXaz4DQVWUXgsm2rQU54b5e1wgKbeZQ+F0VTstDv5FIY0ZwdwNq98Ky37xa/k8pZOOIKA==",
+    "MvvmCross.Platform/4.1.0": {
+      "sha512": "YcpR+chmmOLDT6ktapadcUbX0Zm5fCew5xLqfhfSMX5Uo8VmYqBbBCP/POi4EMbceU1MGRVvlbvOw2VOvb5pGg==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12341,7 +12361,7 @@
         "lib/Xamarin.Mac20/MvvmCross.Platform.Mac.dll",
         "lib/Xamarin.Mac20/MvvmCross.Platform.Mac.dll.mdb",
         "MvvmCross.Platform.nuspec",
-        "package/services/metadata/core-properties/61c744d2795d43adbb5960b10d375fdf.psmdcp"
+        "package/services/metadata/core-properties/8c73a28b440d4c53960dd3cd3c0b70b5.psmdcp"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15039,8 +15059,8 @@
         "System.Xml.XmlSerializer.nuspec"
       ]
     },
-    "Xamarin.Forms/2.0.1.6505": {
-      "sha512": "hmaHk7j3mWZY7rmWKq2/pnqDnbxFGQ20VXro2W2yaMS4ZDZBcQb6ePzH5/y0l6wRFgiPkA+oXPlrXbXICrE5hw==",
+    "Xamarin.Forms/2.1.0.6529": {
+      "sha512": "lHvfEGdk9P8PtPUDH5wAR0L8ZSbov3LwWDvN1mx2UzYNd1zm4WwAHyK2h5XknE90KA+6JgyIuTTfDvxgz0rlLA==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -15081,7 +15101,7 @@
         "lib/uap10.0/Xamarin.Forms.Platform.dll",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP.dll",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP.pri",
-        "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsTextBox.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsTextBoxStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/PageControl.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/Properties/Xamarin.Forms.Platform.UAP.rd.xml",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/Resources.xbf",
@@ -15095,10 +15115,10 @@
         "lib/win81/Xamarin.Forms.Platform.WinRT.pri",
         "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet.dll",
         "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet.pri",
+        "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/FormsTextBoxStyle.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/Resources.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/TabletResources.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT.Tablet/Xamarin.Forms.Platform.WinRT.Tablet.xr.xml",
-        "lib/win81/Xamarin.Forms.Platform.WinRT/FormsTextBox.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT/PageControl.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT/StepperControl.xbf",
         "lib/win81/Xamarin.Forms.Platform.WinRT/Xamarin.Forms.Platform.WinRT.xr.xml",
@@ -15122,7 +15142,6 @@
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/SearchBox.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.Phone/Xamarin.Forms.Platform.WinRT.Phone.xr.xml",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT.pri",
-        "lib/wpa81/Xamarin.Forms.Platform.WinRT/FormsTextBox.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT/PageControl.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT/StepperControl.xbf",
         "lib/wpa81/Xamarin.Forms.Platform.WinRT/Xamarin.Forms.Platform.WinRT.xr.xml",
@@ -15134,7 +15153,7 @@
         "lib/Xamarin.iOS10/Xamarin.Forms.Platform.iOS.dll",
         "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.dll",
         "lib/Xamarin.iOS10/Xamarin.Forms.Xaml.xml",
-        "package/services/metadata/core-properties/a020f0c26e2c4330b18512b6bcf23b4e.psmdcp",
+        "package/services/metadata/core-properties/97610f62c25d40b9ab8a50c19c33b4bf.psmdcp",
         "tools/init.ps1",
         "tools/Xamarin.Forms.Core.Design.dll",
         "tools/Xamarin.Forms.Xaml.Design.dll",
@@ -15145,10 +15164,10 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.Binding >= 4.0.0",
-      "MvvmCross.Core >= 4.0.0",
-      "MvvmCross.Platform >= 4.0.0",
-      "Xamarin.Forms >= 2.0.1.6505"
+      "MvvmCross.Binding >= 4.1.0",
+      "MvvmCross.Core >= 4.1.0",
+      "MvvmCross.Platform >= 4.1.0",
+      "Xamarin.Forms >= 2.1.0.6529"
     ],
     "UAP,Version=v10.0": []
   }
