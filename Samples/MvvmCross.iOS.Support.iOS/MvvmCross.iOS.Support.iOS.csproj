@@ -142,6 +142,10 @@
       <Project>{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}</Project>
       <Name>MvvmCross.iOS.Support.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross.iOS.Support.JASidePanels\MvvmCross.iOS.Support.JASidePanels.csproj">
+      <Project>{0E866698-7054-4786-A43F-E6E0E99D90A1}</Project>
+      <Name>MvvmCross.iOS.Support.JASidePanels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
