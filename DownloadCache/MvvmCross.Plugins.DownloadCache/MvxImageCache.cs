@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Immutable;
-using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -57,8 +56,7 @@ namespace MvvmCross.Plugins.DownloadCache
                         async s =>
                         {
                             var image = await Parse(s).ConfigureAwait(false);
-                            var entriesByUrl = _entriesByHttpUrl.SetItem (url, new Entry(url, image));
-                            Interlocked.Exchange (ref _entriesByHttpUrl, entriesByUrl);
+                            _entriesByHttpUrl = _entriesByHttpUrl.SetItem (url, new Entry(url, image));
                             tcs.TrySetResult(image.RawImage);
                         },
                         exception =>
@@ -106,8 +104,7 @@ namespace MvvmCross.Plugins.DownloadCache
                     currentSizeInBytes -= toRemove.Image.GetSizeInBytes();
                     currentCountFiles--;
 
-                    var entriesByUrl = _entriesByHttpUrl.Remove (toRemove.Url);
-                    Interlocked.Exchange (ref _entriesByHttpUrl, entriesByUrl);
+                    _entriesByHttpUrl = _entriesByHttpUrl.Remove (toRemove.Url);
                 }
 
                 if (_disposeOnRemove && entriesToRemove.Count > 0)
