@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V4</id>
-		<version>4.0.1</version>
+		<version>4.1.0</version>
 		<title>MvvmCross Android Support - V4</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,16 +16,16 @@ This package contains Support v4 support for MvvmCross.</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.0.1" />
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
-				<dependency id="MvvmCross.Core" version="4.0.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
+				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.1" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.0.1" />
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
-				<dependency id="MvvmCross.Core" version="4.0.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.0" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
+				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.1.1.1" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -34,6 +34,7 @@ This package contains Support v4 support for MvvmCross.</description>
 		<file src="..\MvvmCross.Droid.Support.V4\**\*.cs" target="src\MvvmCross.Droid.Support.V4" />
 	</files>
 </package>
+
 
 
 

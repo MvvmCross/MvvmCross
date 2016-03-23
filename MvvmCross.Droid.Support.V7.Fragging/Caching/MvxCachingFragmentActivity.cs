@@ -423,7 +423,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 		public virtual bool Show(MvxViewModelRequest request, Bundle bundle, Type fragmentType, MvxFragmentAttribute fragmentAttribute)
 		{
 			var fragmentTag = GetFragmentTag(request, bundle, fragmentType);
-			FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType);
+			FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, fragmentAttribute.AddToBackStack);
 
 			ShowFragment(fragmentTag, fragmentAttribute.FragmentContentId, bundle);
 			return true;
