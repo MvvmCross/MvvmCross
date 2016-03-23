@@ -9,6 +9,7 @@ using Android.Support.V4.App;
 using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.Fragging
 {
