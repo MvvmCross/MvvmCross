@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.iOS.Support.XamarinSidebar</id>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<title>MvvmCross iOS Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -25,8 +25,12 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
+		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\bin\Release\MvvmCross.iOS.Support.XamarinSidebar.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\bin\Release\Xamarin-Sidebar-Unified.dll" target="lib\Xamarin.iOS10" />
+		<!--
 		<file src="..\bin\Release\MvvmCross.iOS.Support.XamarinSidebar.*" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\**\*.cs" target="lib\Xamarin.iOS10" />
+	-->
 	</files>
 </package>
 
