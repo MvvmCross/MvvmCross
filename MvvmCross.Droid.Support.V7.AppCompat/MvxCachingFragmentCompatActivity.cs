@@ -452,6 +452,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxCachingFragmentCompatActivity
     , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxCachingFragmentCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        {
+            
+        }
+
+        protected MvxCachingFragmentCompatActivity()
+        {
+                
+        }
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

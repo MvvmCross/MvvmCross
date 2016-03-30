@@ -84,6 +84,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxAppCompatActivity
         , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        {
+            
+        }
+
+        protected MvxAppCompatActivity()
+        {
+            
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
