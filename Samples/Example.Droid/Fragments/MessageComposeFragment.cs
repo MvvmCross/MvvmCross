@@ -8,7 +8,7 @@ using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MessagesViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(MessagesViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.MessageComposeFragment")]
     public class MessageComposeFragment : MvxFragment<ComposeMessageViewModel>
     {

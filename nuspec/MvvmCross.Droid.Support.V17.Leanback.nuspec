@@ -17,6 +17,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.1" />
 				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.0" />
 				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.0" />
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
@@ -31,6 +32,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 				<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="23.1.1.1" />
 			</group>
 			<group targetFramework="dotnet">
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.1" />
 				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.0" />
 				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.0" />
 				<dependency id="MvvmCross.Platform" version="4.1.0" />

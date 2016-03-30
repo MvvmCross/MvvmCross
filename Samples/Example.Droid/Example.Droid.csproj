@@ -55,9 +55,6 @@
     <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\Xamarin.Android.Support.v7.RecyclerView.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
-    <Reference Include="MvvmCross.Droid.Shared">
-      <HintPath>..\..\..\MvvmCross\bin\Debug\Mvx\Droid\MvvmCross.Droid.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Platform.Droid">
       <HintPath>..\..\packages\MvvmCross.Platform.4.1.0\lib\MonoAndroid\MvvmCross.Platform.Droid.dll</HintPath>
     </Reference>
@@ -90,6 +87,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Droid.Shared">
+      <HintPath>..\..\packages\MvvmCross.Droid.Shared.4.1.1\lib\MonoAndroid\MvvmCross.Droid.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
