@@ -12,6 +12,8 @@ using MvvmCross.Droid.Support.V7.Fragging.Caching;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Android.Views.InputMethods;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Shared.Caching;
 
 namespace Example.Droid.Activities
 {
@@ -34,7 +36,7 @@ namespace Example.Droid.Activities
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             if (bundle == null)
-                ViewModel.ShowMenuAndFirstDetail();
+                ViewModel.ShowMenu();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -91,23 +93,11 @@ namespace Example.Droid.Activities
         }
 		*/
 
-		/*public override void OnBeforeFragmentChanging (IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+		public override bool Close (IMvxViewModel viewModel)
 		{
-			var currentFrag = SupportFragmentManager.FindFragmentById (Resource.Id.content_frame) as MvxFragment;
-
-			if(currentFrag != null 
-				&& fragmentInfo.ViewModelType != typeof(MenuViewModel) 
-				&& currentFrag.FindAssociatedViewModelType() != fragmentInfo.ViewModelType)
-				fragmentInfo.AddToBackStack = true;
-			base.OnBeforeFragmentChanging (fragmentInfo, transaction);
-		}*/
-
-        /*public override void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
-        {
-            var myCustomInfo = fragmentInfo as CustomFragmentInfo;
-            CheckIfMenuIsNeeded(myCustomInfo);
-        }*/
-
+			CloseFragment(viewModel.GetType().Name, Resource.Id.content_frame);
+			return true;
+		}
 
         public override void OnBackPressed()
         {
@@ -127,16 +117,4 @@ namespace Example.Droid.Activities
 			CurrentFocus.ClearFocus();
 		}
     }
-
-    /*public class CustomFragmentInfo : MvxCachedFragmentInfo
-    {
-        public CustomFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false,
-            bool isRoot = false)
-            : base(tag, fragmentType, viewModelType, cacheFragment, addToBackstack)
-        {
-            IsRoot = isRoot;
-        }
-
-        public bool IsRoot { get; set; }
-    }*/
 }

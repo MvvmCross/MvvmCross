@@ -15,7 +15,7 @@ using MvvmCross.Droid.Shared.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.RecyclerViewFragment")]
     public class RecyclerViewFragment : MvxFragment<RecyclerViewModel>
     {
