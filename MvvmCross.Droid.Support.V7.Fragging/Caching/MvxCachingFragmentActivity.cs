@@ -244,7 +244,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if (fragInfo.AddToBackStack || forceAddToBackStack)
+			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
