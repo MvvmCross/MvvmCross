@@ -43,39 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\MvxFragmentAttribute.cs" />
-    <Compile Include="Attributes\MvxFragmentAttributeExtensionMethods.cs" />
-    <Compile Include="Caching\CachedFragmentManager.cs" />
-    <Compile Include="Caching\DefaultFragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\FragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\IFragmentCacheableActivity.cs" />
-    <Compile Include="Caching\IFragmentCacheConfiguration.cs" />
-    <Compile Include="Caching\IMvxCachedFragmentInfo.cs" />
-    <Compile Include="Caching\IMvxCachedFragmentInfoFactory.cs" />
-    <Compile Include="Caching\MvxCachedFragmentInfo.cs" />
-    <Compile Include="Caching\MvxCachedFragmentInfoFactory.cs" />
     <Compile Include="Caching\MvxCachingFragmentActivity.cs" />
-    <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
-    <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceListFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourcePreferenceFragment.cs" />
-    <Compile Include="Fragments\IMvxFragmentView.cs" />
     <Compile Include="Fragments\MvxBindingFragmentAdapter.cs" />
     <Compile Include="Fragments\MvxDialogFragment.cs" />
     <Compile Include="Fragments\MvxFragment.cs" />
     <Compile Include="Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Fragments\MvxListFragment.cs" />
     <Compile Include="Fragments\MvxPreferenceFragment.cs" />
-    <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
-    <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
-    <Compile Include="Presenter\FragmentHostRegistrationSettings.cs" />
-    <Compile Include="Presenter\IMvxFragmentHost.cs" />
-    <Compile Include="Presenter\MvxFragmentsPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MvxActivity.cs" />
@@ -110,6 +91,10 @@
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\MvvmCross.Droid.Shared.csproj">
+      <Project>{85EE0907-158C-481C-87B8-E4C0FA93C00A}</Project>
+      <Name>MvvmCross.Droid.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
