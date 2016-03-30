@@ -433,9 +433,12 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
 		public virtual bool Close(IMvxViewModel viewModel)
 		{
-			// Close method can not be fixed at this moment
-			// That requires some changes in main MvvmCross library
-			return false;
+			//Workaround for closing fragments. This will not work when showing multiple fragments of the same viewmodel type in one activity
+			var frag = GetCurrentCacheableFragmentsInfo ().First (x => x.ViewModelType == viewModel.GetType());
+			CloseFragment(frag.Tag, frag.ContentId);
+
+			// Close method can not be fully fixed at this moment. That requires some changes in main MvvmCross library
+			return true;
 		}
     }
 
