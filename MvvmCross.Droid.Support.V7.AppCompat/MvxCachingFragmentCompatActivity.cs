@@ -26,7 +26,6 @@ using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

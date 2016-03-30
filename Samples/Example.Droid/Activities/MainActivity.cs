@@ -1,19 +1,13 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Views;
-using Example.Core.ViewModels;
-using Example.Droid.Activities.Caching;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
-using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using Android.Views.InputMethods;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Caching;
+using Example.Core.ViewModels;
+using MvvmCross.Droid.Support.V7.AppCompat;
+using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace Example.Droid.Activities
 {
@@ -92,12 +86,6 @@ namespace Example.Droid.Activities
             DrawerLayout.SetDrawerLockMode(DrawerLayout.LockModeUnlocked);
         }
 		*/
-
-		public override bool Close (IMvxViewModel viewModel)
-		{
-			CloseFragment(viewModel.GetType().Name, Resource.Id.content_frame);
-			return true;
-		}
 
         public override void OnBackPressed()
         {
