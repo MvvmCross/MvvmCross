@@ -1,10 +1,10 @@
 using Android.Runtime;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Shared.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.RecyclerViewMultiItemTemplateFragment")]
     public class RecyclerViewMultiItemTemplateFragment : BaseFragment<RecyclerViewMultiItemTemplateViewModel>
     {

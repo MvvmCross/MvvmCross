@@ -11,6 +11,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;
+using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 {

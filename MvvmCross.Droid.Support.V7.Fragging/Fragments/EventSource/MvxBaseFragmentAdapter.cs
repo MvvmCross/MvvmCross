@@ -10,6 +10,8 @@ using Android.OS;
 using MvvmCross.Platform.Core;
 using System;
 using Fragment = Android.Support.V4.App.Fragment;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
 {

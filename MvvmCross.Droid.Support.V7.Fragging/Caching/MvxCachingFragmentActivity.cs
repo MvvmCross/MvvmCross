@@ -19,9 +19,11 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
-using MvvmCross.Droid.Support.V7.Fragging.Presenter;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Shared.Fragments;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 {
@@ -127,7 +129,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 				var fragmentTag = GetTagFromFragment(fragment);
 				var fragmentInfo = GetFragmentInfoByTag(fragmentTag);
 
-				fragmentInfo.CachedFragment = fragment;
+				fragmentInfo.CachedFragment = fragment as IMvxFragmentView;
 			}
 		}
 
@@ -162,7 +164,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
 		protected virtual void ReplaceFragment(FragmentTransaction ft, IMvxCachedFragmentInfo fragInfo)
 		{
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
 		}
 
 		protected override void OnSaveInstanceState(Bundle outState)
@@ -220,18 +222,18 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 			//If we already have a previously created fragment, we only need to send the new parameters
 			if (fragInfo.CachedFragment != null && fragmentReplaceMode == FragmentReplaceMode.ReplaceFragment)
 			{
-				fragInfo.CachedFragment.Arguments.Clear();
-				fragInfo.CachedFragment.Arguments.PutAll(bundle);
+				((Fragment)fragInfo.CachedFragment).Arguments.Clear();
+				((Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
 			}
 			else
 			{
 				//Otherwise, create one and cache it
 				fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
-					bundle);
+					bundle) as IMvxFragmentView;
 				OnFragmentCreated(fragInfo, ft);
 			}
 
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment, fragInfo.Tag);
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
 
 			//if replacing ViewModel then clear the cache after the fragment
 			//has been added to the transaction so that the Tag property is not null
@@ -239,10 +241,10 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 			if (fragmentReplaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
 			{
 				var cache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
-				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment));
+				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if (fragInfo.AddToBackStack || forceAddToBackStack)
+			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
@@ -255,7 +257,7 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
 		protected virtual FragmentReplaceMode ShouldReplaceCurrentFragment(IMvxCachedFragmentInfo newFragment, IMvxCachedFragmentInfo currentFragment, Bundle replacementBundle)
 		{
-			var oldBundle = newFragment.CachedFragment?.Arguments;
+			var oldBundle = ((Fragment)newFragment.CachedFragment)?.Arguments;
 			if (oldBundle == null) return FragmentReplaceMode.ReplaceFragment;
 
 			var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
@@ -341,19 +343,21 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 			return mvxFragmentView.UniqueImmutableCacheTag;
 		}
 
-		protected override void OnStart()
+		protected override void OnCreate (Bundle bundle)
 		{
-			base.OnStart();
+			base.OnCreate (bundle);
 
-			var fragmentRequestText = Intent.Extras?.GetString(ViewModelRequestBundleKey);
-			if (fragmentRequestText == null)
-				return;
+			if (bundle == null) {
+				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
+				if (fragmentRequestText == null)
+					return;
 
-			var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-			var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+				var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
+				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
 
-			var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
-			mvxAndroidViewPresenter.Show(fragmentRequest);
+				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
+				mvxAndroidViewPresenter.Show (fragmentRequest);
+			}
 		}
 
 		/// <summary>
@@ -431,9 +435,12 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Caching
 
 		public virtual bool Close(IMvxViewModel viewModel)
 		{
-			// Close method can not be fixed at this moment
-			// That requires some changes in main MvvmCross library
-			return false;
+			//Workaround for closing fragments. This will not work when showing multiple fragments of the same viewmodel type in one activity
+			var frag = GetCurrentCacheableFragmentsInfo ().First (x => x.ViewModelType == viewModel.GetType());
+			CloseFragment(frag.Tag, frag.ContentId);
+
+			// Close method can not be fully fixed at this moment. That requires some changes in main MvvmCross library
+			return true;
 		}
     }
 

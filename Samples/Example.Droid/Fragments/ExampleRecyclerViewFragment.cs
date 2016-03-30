@@ -9,7 +9,7 @@ using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Shared.Attributes;
 
 namespace Example.Droid.Fragments
 {

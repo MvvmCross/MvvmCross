@@ -6,11 +6,11 @@ using Android.Support.V4.View;
 using Android.Views;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Shared.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.ExampleViewPagerStateFragment")]
     public class ExampleViewPagerStateFragment : BaseStateFragment<ExampleViewPagerStateViewModel>
     {

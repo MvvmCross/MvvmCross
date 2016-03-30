@@ -16,10 +16,13 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
 using MvvmCross.Droid.Support.V7.Fragging.Caching;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
 {

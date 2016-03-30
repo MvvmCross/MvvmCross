@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Support.V7.Fragging.Presenter;
+using MvvmCross.Droid.Shared.Presenter;
 
 namespace Example.Droid
 {
