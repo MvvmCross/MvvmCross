@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Shared</id>
-		<version>4.0.0</version>
+		<version>4.1.0</version>
 		<title>MvvmCross - Android Fragment Shared Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,16 +18,16 @@ This package contains the 'Android Shared' assemblies for Android Honeycomb or l
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
-				<dependency id="MvvmCross.Binding" version="4.0.0" />
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
-				<dependency id="MvvmCross.Droid" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="MvvmCross.Binding" version="4.1.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
+				<dependency id="MvvmCross.Droid" version="4.1.0" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
-				<dependency id="MvvmCross.Binding" version="4.0.0" />
-				<dependency id="MvvmCross.Platform" version="4.0.0" />
-				<dependency id="MvvmCross.Droid" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="MvvmCross.Binding" version="4.1.0" />
+				<dependency id="MvvmCross.Platform" version="4.1.0" />
+				<dependency id="MvvmCross.Droid" version="4.1.0" />
 			</group>
 		</dependencies>
 	</metadata>
