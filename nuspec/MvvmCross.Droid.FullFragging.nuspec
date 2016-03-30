@@ -19,9 +19,11 @@ This package contains the 'Android Fragment' assemblies for Android Honeycomb or
 		<dependencies>
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.1" />
 			</group>
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Core" version="4.1.0" />
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.1" />
 			</group>
 		</dependencies>
 	</metadata>

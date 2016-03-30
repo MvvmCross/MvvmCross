@@ -244,7 +244,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if (fragInfo.AddToBackStack || forceAddToBackStack)
+			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
@@ -343,19 +343,21 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			return mvxFragmentView.UniqueImmutableCacheTag;
 		}
 
-		protected override void OnStart()
+		protected override void OnCreate (Bundle bundle)
 		{
-			base.OnStart();
+			base.OnCreate (bundle);
 
-			var fragmentRequestText = Intent.Extras?.GetString(ViewModelRequestBundleKey);
-			if (fragmentRequestText == null)
-				return;
+			if (bundle == null) {
+				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
+				if (fragmentRequestText == null)
+					return;
 
-			var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-			var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+				var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
+				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
 
-			var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
-			mvxAndroidViewPresenter.Show(fragmentRequest);
+				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
+				mvxAndroidViewPresenter.Show (fragmentRequest);
+			}
 		}
 
 		/// <summary>
@@ -433,9 +435,12 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
 		public virtual bool Close(IMvxViewModel viewModel)
 		{
-			// Close method can not be fixed at this moment
-			// That requires some changes in main MvvmCross library
-			return false;
+			//Workaround for closing fragments. This will not work when showing multiple fragments of the same viewmodel type in one activity
+			var frag = GetCurrentCacheableFragmentsInfo ().First (x => x.ViewModelType == viewModel.GetType());
+			CloseFragment(frag.Tag, frag.ContentId);
+
+			// Close method can not be fully fixed at this moment. That requires some changes in main MvvmCross library
+			return true;
 		}
 	}
 
