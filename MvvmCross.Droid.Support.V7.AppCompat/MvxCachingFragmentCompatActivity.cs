@@ -352,20 +352,22 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return mvxFragmentView.UniqueImmutableCacheTag;
         }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
+		protected override void OnCreate (Bundle bundle)
+		{
+			base.OnCreate (bundle);
 
-            var fragmentRequestText = Intent.Extras?.GetString(ViewModelRequestBundleKey);
-            if (fragmentRequestText == null)
-                return;
+			if (bundle == null) {
+				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
+				if (fragmentRequestText == null)
+					return;
 
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+				var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
+				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
 
-            var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
-            mvxAndroidViewPresenter.Show(fragmentRequest);
-        }
+				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
+				mvxAndroidViewPresenter.Show (fragmentRequest);
+			}
+		}
 
         /// <summary>
         /// Close Fragment with a specific tag at a specific placeholder
