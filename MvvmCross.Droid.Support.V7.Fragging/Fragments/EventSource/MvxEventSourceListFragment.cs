@@ -12,6 +12,8 @@ using Android.Views;
 using MvvmCross.Platform.Core;
 using System;
 using ListFragment = Android.Support.V4.App.ListFragment;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared;
 
 namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
 {

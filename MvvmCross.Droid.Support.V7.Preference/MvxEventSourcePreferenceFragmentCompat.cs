@@ -7,6 +7,8 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Support.V7.Fragging;
 using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
