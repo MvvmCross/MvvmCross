@@ -5,7 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
@@ -26,6 +28,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             get { return base.ViewModel as MvxNullViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        protected MvxSplashScreenCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        {
+            
         }
 
         protected MvxSplashScreenCompatActivity(int resourceId = NoContent)

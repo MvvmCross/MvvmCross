@@ -39,6 +39,12 @@ namespace Example.Droid.Activities.Caching
                                        typeof (ExampleRecyclerViewModel), isRoot: true)
             },
             {
+                typeof(RecyclerViewMultiItemTemplateViewModel).ToString(),
+                new CustomFragmentInfo(typeof(RecyclerViewMultiItemTemplateViewModel).Name, 
+                                       typeof(RecyclerViewMultiItemTemplateFragment),
+                                       typeof(RecyclerViewMultiItemTemplateViewModel), isRoot: true)
+            },
+            {
                 typeof (SettingsViewModel).ToString(),
                 new CustomFragmentInfo(typeof (SettingsViewModel).Name, typeof (SettingsFragment),
                                        typeof (SettingsViewModel), isRoot: true)

@@ -98,9 +98,11 @@
     <Compile Include="Activities\MessagesActivity.cs" />
     <Compile Include="Activities\Caching\FragmentCacheConfigurationCustomFragmentInfo.cs" />
     <Compile Include="Activities\Caching\MainActivityFragmentCacheInfoFactory.cs" />
+    <Compile Include="Common\TemplateSelectors\MultiItemTemplateModelTemplateSelector.cs" />
     <Compile Include="Fragments\MessageComposeFragment.cs" />
     <Compile Include="Fragments\BaseStateFragment.cs" />
     <Compile Include="Fragments\ExampleViewPagerStateFragment.cs" />
+    <Compile Include="Fragments\RecyclerViewMultiItemTemplateFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DebugTrace.cs" />
@@ -149,6 +151,9 @@
     <AndroidResource Include="Resources\layout\activity_messages.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_recyclerview_multiitemtemplate.axml" />
+    <AndroidResource Include="Resources\layout\listitem_recyclerviewmultiitem_descriptiontemplate.axml" />
+    <AndroidResource Include="Resources\layout\listitem_recyclerviewmultiitem_titletemplate.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

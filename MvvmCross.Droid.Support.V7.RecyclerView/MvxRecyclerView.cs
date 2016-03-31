@@ -14,6 +14,8 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -28,15 +30,20 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
         {
             // Note: Any calling derived class passing a null adapter is responsible for setting
-            // it's own itemTemplateId
+            // it's own ItemTemplateSelector
             if (adapter == null)
                 return;
 
             SetLayoutManager(new LinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+            var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
+
+            adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
+
+            if (itemTemplateSelector.GetType() == typeof (SingleItemDefaultTemplateSelector))
+                ItemTemplateId = itemTemplateId;
         }
 
         #endregion
@@ -62,7 +69,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;
-                    value.ItemTemplateId = existing.ItemTemplateId;
+                    value.ItemTemplateSelector = existing.ItemTemplateSelector;
                     value.ItemClick = existing.ItemClick;
                     value.ItemLongClick = existing.ItemLongClick;
 
@@ -89,8 +96,36 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get
+            {
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as SingleItemDefaultTemplateSelector;
+
+                if (singleItemDefaultTemplateSelector == null)
+                    throw new InvalidOperationException(
+                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"{nameof(IItemTemplateSelector)} to anything other than {nameof(SingleItemDefaultTemplateSelector)}");
+
+                return singleItemDefaultTemplateSelector.ItemTemplateId;
+            }
+            set
+            {
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as SingleItemDefaultTemplateSelector;
+
+                if (singleItemDefaultTemplateSelector == null)
+                    throw new InvalidOperationException(
+                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"{nameof(IItemTemplateSelector)} to anything other than {nameof(SingleItemDefaultTemplateSelector)}");
+
+                singleItemDefaultTemplateSelector.ItemTemplateId = value;
+                Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
+            }
+        }
+
+
+        public IItemTemplateSelector ItemTemplateSelector
+        {
+            get { return Adapter.ItemTemplateSelector; }
+            set { Adapter.ItemTemplateSelector = value; }
         }
 
         public ICommand ItemClick

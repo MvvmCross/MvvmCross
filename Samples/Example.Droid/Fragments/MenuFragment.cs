@@ -62,6 +62,9 @@ namespace Example.Droid.Fragments
             case Resource.Id.nav_recyclerview:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
                 break;
+            case Resource.Id.nav_recyclerview_multiitem:
+                ViewModel.ShowViewModelAndroid(typeof (RecyclerViewMultiItemTemplateViewModel));
+                break;
             case Resource.Id.nav_compose_message:
                 ViewModel.ShowViewModelAndroid(typeof(ComposeMessageViewModel));
                 break;

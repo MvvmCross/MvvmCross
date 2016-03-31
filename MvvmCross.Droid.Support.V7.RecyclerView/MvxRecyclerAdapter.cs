@@ -18,6 +18,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -30,7 +31,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
-        private int _itemTemplateId;
+        private IItemTemplateSelector _itemTemplateSelector;
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
@@ -86,23 +87,20 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             set { SetItemsSource(value); }
         }
 
-        public virtual int ItemTemplateId
+        
+        public virtual IItemTemplateSelector ItemTemplateSelector
         {
-            get { return _itemTemplateId; }
+            get { return _itemTemplateSelector; }
             set
             {
-                if (_itemTemplateId == value)
-                {
+                if (ReferenceEquals(_itemTemplateSelector, value))
                     return;
-                }
 
-                _itemTemplateId = value;
+                _itemTemplateSelector = value;
 
-                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
+                // since the template selector has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
-                {
                     NotifyAndRaiseDataSetChanged();
-                }
             }
         }
 
@@ -133,9 +131,16 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             };
         }
 
+        public sealed override int GetItemViewType(int position)
+        {
+            var itemAtPosition = GetItem(position);
+            return ItemTemplateSelector.GetItemViewType(itemAtPosition);
+        }
+
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
-            return bindingContext.BindingInflate(this.ItemTemplateId, parent, false);
+            var layoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
+            return bindingContext.BindingInflate(layoutId, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
