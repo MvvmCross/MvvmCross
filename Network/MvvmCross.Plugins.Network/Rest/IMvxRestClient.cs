@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
@@ -15,8 +16,8 @@ namespace MvvmCross.Plugins.Network.Rest
         void ClearSetting(string key);
 
         void SetSetting(string key, object value);
-        
-        Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest);
-        Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest);
+
+        Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
+        Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -10,6 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
@@ -55,7 +56,7 @@ namespace MvvmCross.Plugins.Network.Rest
             Options[key] = value;
         }
 
-        public Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest)
+        public Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
             TaskCompletionSource<MvxStreamRestResponse> taskCompletionSource = new TaskCompletionSource<MvxStreamRestResponse>();
 
@@ -65,21 +66,28 @@ namespace MvvmCross.Plugins.Network.Rest
                 {
                     httpRequest = BuildHttpRequest(restRequest);
 
-                    Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
-                    if (restRequest.NeedsRequestStream)
+                    using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() =>
                     {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
-                    }
-                    else
+                        httpRequest.Abort();
+                        taskCompletionSource.SetCanceled();
+                    }))
                     {
-                        processResponse();
+                        Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
+                        if (restRequest.NeedsRequestStream)
+                        {
+                            ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
+                        }
+                        else
+                        {
+                            processResponse();
+                        }
                     }
                 }, exception => taskCompletionSource.SetException(exception));
 
             return taskCompletionSource.Task;
         }
 
-        public Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest)
+        public Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
             TaskCompletionSource<MvxRestResponse> taskCompletionSource = new TaskCompletionSource<MvxRestResponse>();
 
@@ -89,14 +97,21 @@ namespace MvvmCross.Plugins.Network.Rest
                 {
                     httpRequest = BuildHttpRequest(restRequest);
 
-                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
-                    if (restRequest.NeedsRequestStream)
+                    using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() =>
                     {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
-                    }
-                    else
+                        httpRequest.Abort();
+                        taskCompletionSource.SetCanceled();
+                    }))
                     {
-                        processResponse();
+                        Action processResponse = () => ProcessResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
+                        if (restRequest.NeedsRequestStream)
+                        {
+                            ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
+                        }
+                        else
+                        {
+                            processResponse();
+                        }
                     }
                 }, exception => taskCompletionSource.SetException(exception));
 
