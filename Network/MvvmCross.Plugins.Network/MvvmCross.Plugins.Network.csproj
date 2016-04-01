@@ -34,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Reachability\IMvxReachability.cs" />
-    <Compile Include="Rest\IMvxAbortable.cs" />
     <Compile Include="Rest\IMvxJsonRestClient.cs" />
     <Compile Include="Rest\IMvxRestClient.cs" />
     <Compile Include="Rest\MvxContentType.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="Rest\MvxWwwFormRestRequest.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rest\MvxRestRequestAsyncHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
