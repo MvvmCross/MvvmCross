@@ -11,6 +11,7 @@ using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using NUnit.Framework;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Test
 {
@@ -24,7 +25,7 @@ namespace MvvmCross.Plugins.Network.Test
         }
 
         [Test]
-        public void GetDataFromGoogleBooks()
+        public async Task GetDataFromGoogleBooks()
         {
             ClearAll();
 
@@ -39,9 +40,7 @@ namespace MvvmCross.Plugins.Network.Test
             var request = new MvxRestRequest(url);
             MvxDecodedRestResponse<BookSearchResult> theResponse = null;
             Exception exception = null;
-            client.MakeRequestFor<BookSearchResult>(request,
-                                                    (result) => { theResponse = result; },
-                                                    (error) => { exception = error; });
+            theResponse = await client.MakeRequestFor<BookSearchResult>(request);
 
             System.Threading.Thread.Sleep(3000);
             Assert.IsNotNull(theResponse);

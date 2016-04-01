@@ -10,6 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -54,48 +55,52 @@ namespace MvvmCross.Plugins.Network.Rest
             Options[key] = value;
         }
 
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
+        public Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest)
         {
+            TaskCompletionSource<MvxStreamRestResponse> taskCompletionSource = new TaskCompletionSource<MvxStreamRestResponse>();
+
             HttpWebRequest httpRequest = null;
 
             TryCatch(() =>
                 {
                     httpRequest = BuildHttpRequest(restRequest);
 
-                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
+                    Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
                     if (restRequest.NeedsRequestStream)
                     {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
+                        ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
                     }
                     else
                     {
                         processResponse();
                     }
-                }, errorAction);
+                }, exception => taskCompletionSource.SetException(exception));
 
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
+            return taskCompletionSource.Task;
         }
 
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
+        public Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest)
         {
+            TaskCompletionSource<MvxRestResponse> taskCompletionSource = new TaskCompletionSource<MvxRestResponse>();
+
             HttpWebRequest httpRequest = null;
 
             TryCatch(() =>
                 {
                     httpRequest = BuildHttpRequest(restRequest);
 
-                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
+                    Action processResponse = () => ProcessResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response), exception => taskCompletionSource.SetException(exception));
                     if (restRequest.NeedsRequestStream)
                     {
-                        ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
+                        ProcessRequestThen(restRequest, httpRequest, processResponse, exception => taskCompletionSource.SetException(exception));
                     }
                     else
                     {
                         processResponse();
                     }
-                }, errorAction);
+                }, exception => taskCompletionSource.SetException(exception));
 
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
+            return taskCompletionSource.Task;
         }
 
         protected virtual HttpWebRequest BuildHttpRequest(MvxRestRequest restRequest)
@@ -212,7 +217,7 @@ namespace MvvmCross.Plugins.Network.Rest
                                          , null);
         }
 
-        protected virtual void ProcessResponse(
+        protected virtual void ProcessStreamResponse(
             MvxRestRequest restRequest,
             HttpWebRequest httpRequest,
             Action<MvxStreamRestResponse> successAction,

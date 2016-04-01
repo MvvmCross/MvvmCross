@@ -9,6 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -18,24 +19,23 @@ namespace MvvmCross.Plugins.Network.Rest
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        public IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
+        public async Task<MvxDecodedRestResponse<T>> MakeRequestFor<T>(MvxRestRequest restRequest)
         {
-            return MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) =>
+            var streamResponse = await MakeStreamRequest(restRequest);
+
+            using (var textReader = new StreamReader(streamResponse.Stream))
             {
-                using (var textReader = new StreamReader(streamResponse.Stream))
+                var text = textReader.ReadToEnd();
+                var result = JsonConverterProvider().DeserializeObject<T>(text);
+                var decodedResponse = new MvxDecodedRestResponse<T>
                 {
-                    var text = textReader.ReadToEnd();
-                    var result = JsonConverterProvider().DeserializeObject<T>(text);
-                    var decodedResponse = new MvxDecodedRestResponse<T>
-                    {
-                        CookieCollection = streamResponse.CookieCollection,
-                        Result = result,
-                        StatusCode = streamResponse.StatusCode,
-                        Tag = streamResponse.Tag
-                    };
-                    successAction?.Invoke(decodedResponse);
-                }
-            }, errorAction);
+                    CookieCollection = streamResponse.CookieCollection,
+                    Result = result,
+                    StatusCode = streamResponse.StatusCode,
+                    Tag = streamResponse.Tag
+                };
+                return decodedResponse;
+            }
         }
 
         public MvxJsonRestClient()

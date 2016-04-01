@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -14,11 +15,8 @@ namespace MvvmCross.Plugins.Network.Rest
         void ClearSetting(string key);
 
         void SetSetting(string key, object value);
-
-        IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction,
-                         Action<Exception> errorAction);
-
-        IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction,
-                         Action<Exception> errorAction);
+        
+        Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest);
+        Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest);
     }
 }
