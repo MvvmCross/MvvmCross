@@ -96,13 +96,11 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         public MvxImageView(Context context, IAttributeSet attrs)
-            : base(context, attrs)
-        {
-            Init(context, attrs);
-        }
+            : this(context, attrs, 0)
+        { }
 
         public MvxImageView(Context context)
-            : base(context)
+            : this(context, null)
         { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
