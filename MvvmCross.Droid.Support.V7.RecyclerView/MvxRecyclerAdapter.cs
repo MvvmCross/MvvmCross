@@ -155,6 +155,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             return _itemsSource.ElementAt(position);
         }
 
+        public int ItemTemplateId { get; set; }
+
         protected virtual void SetItemsSource(IEnumerable value)
         {
             if (ReferenceEquals(_itemsSource, value) && !ReloadOnAllItemsSourceSets)
