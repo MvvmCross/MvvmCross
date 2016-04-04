@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -22,7 +23,9 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
-    public class MvxRecyclerAdapter : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter
+    public class MvxRecyclerAdapter 
+        : Android.Support.V7.Widget.RecyclerView.Adapter
+        , IMvxRecyclerAdapter
     {
         public event EventHandler DataSetChanged;
 
@@ -40,6 +43,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             this._bindingContext = bindingContext;
         }
+
+        public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer) { }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -62,7 +68,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public ICommand ItemLongClick {
+        public ICommand ItemLongClick
+        {
             get { return _itemLongClick; }
             set
             {
