@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Binding</id>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<title>MvvmCross - Binding</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
