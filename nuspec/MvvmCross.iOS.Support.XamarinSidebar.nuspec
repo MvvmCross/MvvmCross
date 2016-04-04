@@ -17,7 +17,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross" version="4.1.0" />
-				<dependency id="MvvmCross.iOS.Support" version="4.1.0" />
+				<dependency id="MvvmCross.iOS.Support" version="4.1.1" />
 			</group>
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross" version="4.1.0" />
