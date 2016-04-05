@@ -44,7 +44,7 @@ namespace MvvmCross.Plugins.Network.Rest
             Options[key] = value;
         }
 
-        public Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<MvxStreamRestResponse> MakeStreamRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
             TaskCompletionSource<MvxStreamRestResponse> taskCompletionSource = new TaskCompletionSource<MvxStreamRestResponse>();
 
@@ -70,7 +70,7 @@ namespace MvvmCross.Plugins.Network.Rest
             return taskCompletionSource.Task;
         }
 
-        public Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<MvxRestResponse> MakeRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
             TaskCompletionSource<MvxRestResponse> taskCompletionSource = new TaskCompletionSource<MvxRestResponse>();
 

@@ -16,6 +16,6 @@ namespace MvvmCross.Plugins.Network.Rest
     {
         Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        Task<MvxDecodedRestResponse<T>> MakeRequestFor<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
+        Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

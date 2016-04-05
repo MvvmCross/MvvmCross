@@ -17,7 +17,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         void SetSetting(string key, object value);
 
-        Task<MvxRestResponse> MakeRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
-        Task<MvxStreamRestResponse> MakeStreamRequest(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
+        Task<MvxRestResponse> MakeRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
+        Task<MvxStreamRestResponse> MakeStreamRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

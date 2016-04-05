@@ -40,7 +40,7 @@ namespace MvvmCross.Plugins.Network.Test
             var request = new MvxRestRequest(url);
             MvxDecodedRestResponse<BookSearchResult> theResponse = null;
             Exception exception = null;
-            theResponse = await client.MakeRequestFor<BookSearchResult>(request);
+            theResponse = await client.MakeRequestForAsync<BookSearchResult>(request);
 
             
             Assert.IsNotNull(theResponse);

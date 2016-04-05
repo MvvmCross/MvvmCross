@@ -20,9 +20,9 @@ namespace MvvmCross.Plugins.Network.Rest
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        public async Task<MvxDecodedRestResponse<T>> MakeRequestFor<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var streamResponse = await MakeStreamRequest(restRequest, cancellationToken);
+            var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken);
 
             using (var textReader = new StreamReader(streamResponse.Stream))
             {
