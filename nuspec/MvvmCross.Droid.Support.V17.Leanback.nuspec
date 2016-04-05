@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V17.Leanback</id>
-		<version>4.1.1</version>
+		<version>4.1.3</version>
 		<title>MvvmCross Android Support V17 - Leanback</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,8 +18,8 @@ This package contains Support v17 Leanback support for MvvmCross.
 		<dependencies>
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Droid.Shared" version="4.1.2" />
-				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.1" />
-				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.1" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.3" />
+				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.3" />
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="MvvmCross.Core" version="4.1.0" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.1.0" />
@@ -33,8 +33,8 @@ This package contains Support v17 Leanback support for MvvmCross.
 			</group>
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Droid.Shared" version="4.1.2" />
-				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.1" />
-				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.1" />
+				<dependency id="MvvmCross.Droid.Support.V7.Fragging" version="4.1.3" />
+				<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.3" />
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="MvvmCross.Core" version="4.1.0" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.1.0" />
