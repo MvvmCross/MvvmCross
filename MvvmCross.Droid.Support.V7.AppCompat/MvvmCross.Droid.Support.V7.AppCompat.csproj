@@ -88,11 +88,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventSource\MvxEventSourceAppCompatDialogFragment.cs" />
     <Compile Include="MvxActionBarDrawerToggle.cs" />
     <Compile Include="MvxAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatActivityHelper.cs" />
     <Compile Include="MvxAppCompatSetupHelper.cs" />
-    <Compile Include="MvxEventSourceAppCompatActivity.cs" />
+    <Compile Include="EventSource\MvxEventSourceAppCompatActivity.cs" />
+    <Compile Include="MvxAppCompatDialogFragment.cs" />
     <Compile Include="MvxFragmentCompatActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxCachingFragmentCompatActivity.cs" />
@@ -133,6 +135,7 @@
       <Name>MvvmCross.Droid.Support.V7.Fragging</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

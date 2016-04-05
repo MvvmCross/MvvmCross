@@ -15,6 +15,7 @@ using MvvmCross.Core.ViewModels;
 using System;
 using Android.Util;
 using Android.Views;
+using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
