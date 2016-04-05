@@ -13,8 +13,9 @@ using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using System;
+using MvvmCross.Droid.Support.V4.EventSource;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V4
 {
     public class MvxFragmentActivity
         : MvxEventSourceFragmentActivity

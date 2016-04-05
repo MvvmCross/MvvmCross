@@ -1,10 +1,10 @@
 ﻿using System;
 using Android.Support.V14.Preferences;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+
 using MvvmCross.Platform.Core;
 using Android.App;
 using Android.OS;
-using MvvmCross.Droid.Support.V7.Fragging;
+
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Droid.Shared.Fragments.EventSource;

@@ -13,7 +13,7 @@ using Fragment = Android.Support.V4.App.Fragment;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource
+namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public class MvxBaseFragmentAdapter
     {

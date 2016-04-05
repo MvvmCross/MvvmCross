@@ -5,8 +5,8 @@ using Android.Views;
 using MvvmCross.Platform.Core;
 using System;
 using Android.Support.V17.Leanback.App;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+
+
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
 

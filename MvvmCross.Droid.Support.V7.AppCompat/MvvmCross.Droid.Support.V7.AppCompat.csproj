@@ -127,12 +127,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ProjectReference Include="..\MvvmCross.Droid.Support.V7.Fragging\MvvmCross.Droid.Support.V7.Fragging.csproj">
-      <Project>{5B74F15E-E377-4662-9636-4233049EDDC3}</Project>
-      <Name>MvvmCross.Droid.Support.V7.Fragging</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
