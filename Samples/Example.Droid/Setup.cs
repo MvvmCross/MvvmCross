@@ -22,18 +22,27 @@ namespace Example.Droid
             return new Core.App();
         }
 
-		protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
-		{
-			typeof(Android.Support.Design.Widget.NavigationView).Assembly,
-			typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly,
-			typeof(Android.Support.V7.Widget.Toolbar).Assembly,
-			typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
-			typeof(Android.Support.V4.View.ViewPager).Assembly,
-			typeof(MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView).Assembly
-		};
+	protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
+	{
+		typeof(Android.Support.Design.Widget.NavigationView).Assembly,
+		typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly,
+		typeof(Android.Support.V7.Widget.Toolbar).Assembly,
+		typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
+		typeof(Android.Support.V4.View.ViewPager).Assembly,
+		typeof(MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView).Assembly
+	};
+	
+	/// <summary>
+	/// Fill the Binding Factory Registry with bindings from the support library.
+	/// </summary>
+	protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+	{
+	    MvxAppCompatSetupHelper.FillTargetFactories(registry);
+	    base.FillTargetFactories(registry);
+	}
 
         /// <summary>
-		/// This is very important to override. The default view presenter does not know how to show fragments!
+        /// This is very important to override. The default view presenter does not know how to show fragments!
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
