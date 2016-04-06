@@ -4,7 +4,6 @@ using Android.OS;
 using Example.Core.ViewModels;
 using Example.Droid.Activities.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities
 {
