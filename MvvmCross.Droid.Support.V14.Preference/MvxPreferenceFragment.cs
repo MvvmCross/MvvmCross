@@ -1,11 +1,12 @@
 ﻿using System;
 using Android.Support.V14.Preferences;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+
 using Android.Runtime;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {

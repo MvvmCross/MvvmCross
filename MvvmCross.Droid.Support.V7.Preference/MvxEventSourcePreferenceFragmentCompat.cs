@@ -4,8 +4,8 @@ using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Android.Views;
 using MvvmCross.Platform.Core;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+
+
 using System;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;

@@ -8,7 +8,6 @@ using MvvmCross.Platform;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using Java.Lang;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using String = Java.Lang.String;
 using MvvmCross.Droid.Shared.Attributes;
 
