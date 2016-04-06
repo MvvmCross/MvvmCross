@@ -10,23 +10,23 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    [Register("MvvmCross.Droid.Support.Design.Behaviors.ScrollAwareTranslationHideFABBehavior")]
-    public class ScrollAwareTranslationHideFABBehavior : CoordinatorLayout.Behavior
+    [Register("MvvmCross.Droid.Support.Design.Behaviors.MvxScrollAwareTranslationHideFABBehavior")]
+    public class MvxScrollAwareTranslationHideFABBehavior : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;
         private bool isFabVisible = true;
         private float scrolledDistance;
 
-        public ScrollAwareTranslationHideFABBehavior(IntPtr handle, JniHandleOwnership ownership)
+        public MvxScrollAwareTranslationHideFABBehavior(IntPtr handle, JniHandleOwnership ownership)
             : base(handle, ownership)
         {
         }
 
-        public ScrollAwareTranslationHideFABBehavior()
+        public MvxScrollAwareTranslationHideFABBehavior()
         {
         }
 
-        public ScrollAwareTranslationHideFABBehavior(Context context, IAttributeSet attributeSet)
+        public MvxScrollAwareTranslationHideFABBehavior(Context context, IAttributeSet attributeSet)
         {
         }
 

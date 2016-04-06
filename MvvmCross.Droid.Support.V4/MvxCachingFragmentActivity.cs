@@ -11,21 +11,21 @@ using System.Linq;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Shared.Fragments;
 using Fragment = Android.Support.V4.App.Fragment;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Caching
+namespace MvvmCross.Droid.Support.V4
 {
     public class MvxCachingFragmentActivity : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {

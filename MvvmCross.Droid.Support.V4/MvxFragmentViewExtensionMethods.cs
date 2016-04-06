@@ -8,10 +8,10 @@
 using Android.Support.V4.App;
 using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V4;
 
-namespace MvvmCross.Droid.Support.V7.Fragging
+namespace MvvmCross.Droid.Support.V4
 {
     public static class MvxFragmentExtensionMethods
     {

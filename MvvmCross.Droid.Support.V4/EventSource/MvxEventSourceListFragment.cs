@@ -1,17 +1,24 @@
+// MvxEventSourceListFragment.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+//
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
 using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform.Core;
 using System;
-using Android.Support.V17.Leanback.App;
+using ListFragment = Android.Support.V4.App.ListFragment;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
+namespace MvvmCross.Droid.Support.V4.EventSource
 {
-    public class MvxEventSourceSearchSupportFragment
-        : SearchSupportFragment
+    public class MvxEventSourceListFragment
+        : ListFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
@@ -40,12 +47,11 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourceSearchSupportFragment()
+        protected MvxEventSourceListFragment()
         {
         }
 
-        public MvxEventSourceSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
+        protected MvxEventSourceListFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 

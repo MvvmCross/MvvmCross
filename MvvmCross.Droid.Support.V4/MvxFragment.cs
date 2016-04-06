@@ -1,4 +1,4 @@
-// MvxDialogFragment.cs
+// MvxFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,22 +9,36 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
 using System;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V4.EventSource;
 
-namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
+namespace MvvmCross.Droid.Support.V4
 {
-    public abstract class MvxDialogFragment
-        : MvxEventSourceDialogFragment
+    public class MvxFragment
+        : MvxEventSourceFragment
         , IMvxFragmentView
     {
-        protected MvxDialogFragment()
+        /// <summary>
+        /// Create new instance of a Fragment
+        /// </summary>
+        /// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
+        /// <returns>Returns an instance of a MvxFragment</returns>
+        public static MvxFragment NewInstance(Bundle bundle)
+        {
+            // Setting Arguments needs to happen before Fragment is attached
+            // to Activity. Arguments are persisted when Fragment is recreated!
+            var fragment = new MvxFragment { Arguments = bundle };
+
+            return fragment;
+        }
+
+        protected MvxFragment()
         {
             this.AddEventListeners();
         }
 
-        protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             this.AddEventListeners();
@@ -48,21 +62,32 @@ namespace MvvmCross.Droid.Support.V7.Fragging.Fragments
         public virtual IMvxViewModel ViewModel
         {
             get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
+        public virtual void OnViewModelSet()
         {
-            this.EnsureBindingContextIsSet(b0);
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment
+    public abstract class MvxFragment<TViewModel>
+        : MvxFragment
         , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxFragment()
+        {
+        }
+
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

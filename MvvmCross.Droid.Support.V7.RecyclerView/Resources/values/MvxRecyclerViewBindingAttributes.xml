@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <declare-styleable name="MvxRecyclerView">
-    <attr name="MvxItemTemplateSelector" format="string"/>
+    <attr name="MvxItemTemplateSelector" format="string" />
   </declare-styleable>
 </resources>

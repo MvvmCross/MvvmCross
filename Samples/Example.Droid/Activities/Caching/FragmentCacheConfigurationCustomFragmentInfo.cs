@@ -1,5 +1,3 @@
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
-
 namespace Example.Droid.Activities.Caching
 {
     /*class FragmentCacheConfigurationCustomFragmentInfo : FragmentCacheConfiguration<MainActivityFragmentCacheInfoFactory.SerializableCustomFragmentInfo>

@@ -4,8 +4,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using System;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {

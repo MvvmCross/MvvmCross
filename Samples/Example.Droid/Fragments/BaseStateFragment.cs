@@ -4,9 +4,9 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
 using MvvmCross.Core.ViewModels;
 using Example.Droid.Activities;
+using MvvmCross.Droid.Support.V4;
 
 namespace Example.Droid.Fragments
 {

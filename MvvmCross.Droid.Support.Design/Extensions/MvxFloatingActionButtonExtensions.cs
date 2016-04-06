@@ -4,7 +4,7 @@ using Android.Views.Animations;
 
 namespace MvvmCross.Droid.Support.Design.Extensions
 {
-    public static class FloatingActionButtonExtensions
+    public static class MvxFloatingActionButtonExtensions
     {
         public static FloatingActionButton ShowWithTranslateAnimation(this FloatingActionButton actionButton)
         {
