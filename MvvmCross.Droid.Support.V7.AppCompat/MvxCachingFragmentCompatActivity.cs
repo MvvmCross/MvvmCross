@@ -449,9 +449,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			if (frag != null)
 			{
 				CloseFragment(frag.Tag, frag.ContentId);
+				return true;
 			}
 			// Close method can not be fully fixed at this moment. That requires some changes in main MvvmCross library
-			return true;
+			return false;
 		}
     }
 
