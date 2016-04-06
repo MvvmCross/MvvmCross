@@ -32,13 +32,19 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 
         #region IMvxPictureChooserTask Members
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
+                                     Action assumeCancelled)
         {
             var intent = new Intent(Intent.ActionGetContent);
             intent.SetType("image/*");
             ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
                                 pictureAvailable, assumeCancelled);
+        }
+
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                             Action assumeCancelled)
+        {
+            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
@@ -52,7 +58,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             intent.PutExtra("return-data", true);
 
             ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
-                                pictureAvailable, assumeCancelled);
+                                (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
 
@@ -89,7 +95,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         }
 
         public void ChoosePictureCommon(MvxIntentRequestCode pickId, Intent intent, int maxPixelDimension,
-                                        int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+                                        int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             if (_currentRequestParameters != null)
                 throw new MvxException("Cannot request a second picture while the first request is still pending");
@@ -158,7 +164,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 MvxTrace.Trace("Loading InMemoryBitmap complete...");
                 responseSent = true;
                 MvxTrace.Trace("Sending pictureAvailable...");
-                _currentRequestParameters.PictureAvailable(memoryStream);
+                _currentRequestParameters.PictureAvailable(memoryStream, System.IO.Path.GetFileNameWithoutExtension(uri.Path));
                 MvxTrace.Trace("pictureAvailable completed...");
                 return;
             }
@@ -288,7 +294,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 
         private class RequestParameters
         {
-            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                      Action assumeCancelled)
             {
                 PercentQuality = percentQuality;
@@ -297,7 +303,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 PictureAvailable = pictureAvailable;
             }
 
-            public Action<Stream> PictureAvailable { get; private set; }
+            public Action<Stream, string> PictureAvailable { get; private set; }
             public Action AssumeCancelled { get; private set; }
             public int MaxPixelDimension { get; private set; }
             public int PercentQuality { get; private set; }

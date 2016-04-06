@@ -20,14 +20,19 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+        }
+
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -48,7 +53,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
         {
         }
 
-        private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+        private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                              Action assumeCancelled)
         {
             var dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
@@ -61,7 +66,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
                                     });
         }
 
-        private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             var file = await storageFile();
             if (file == null)
@@ -73,7 +78,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsStore
             var rawFileStream = await file.OpenAsync(FileAccessMode.Read);
             var resizedStream = await ResizeJpegStreamAsync(maxPixelDimension, percentQuality, rawFileStream);
 
-            pictureAvailable(resizedStream.AsStreamForRead());
+            pictureAvailable(resizedStream.AsStreamForRead(), file.DisplayName);
         }
 
         private static async Task<StorageFile> StorageFileFromCamera()

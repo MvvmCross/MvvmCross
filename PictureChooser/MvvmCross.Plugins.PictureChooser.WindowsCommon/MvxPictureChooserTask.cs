@@ -24,10 +24,10 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
     {
         private int _maxPixelDimension;
         private int _percentQuality;
-        private Action<Stream> _pictureAvailable;
+        private Action<Stream, string> _pictureAvailable;
         private Action _assumeCancelled;
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             // This method requires that PickFileContinuation is implemented within the Windows Phone project and that
             // the ContinueFileOpenPicker method on the View invokes (via the ViewModel) the ContinueFileOpenPicker method
@@ -41,6 +41,11 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
             _assumeCancelled = assumeCancelled;
 
             PickStorageFileFromDisk();
+        }
+
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        {
+            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void ContinueFileOpenPicker(object args)
@@ -57,7 +62,7 @@ namespace MvvmCross.Plugins.PictureChooser.WindowsPhoneStore
                         var resizedStream =
                             await ResizeJpegStreamAsync(_maxPixelDimension, _percentQuality, rawFileStream);
 
-                        _pictureAvailable?.Invoke(resizedStream.AsStreamForRead());
+                        _pictureAvailable?.Invoke(resizedStream.AsStreamForRead(), continuationArgs.Files[0].DisplayName);
                     });
             }
             else
