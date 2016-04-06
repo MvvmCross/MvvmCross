@@ -11,10 +11,10 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 {
 	public class FusedLocationHandler
 		: LocationCallback
-		, IGoogleApiClientConnectionCallbacks
-		, IGoogleApiClientOnConnectionFailedListener
+		, GoogleApiClient.IConnectionCallbacks
+		, GoogleApiClient.IOnConnectionFailedListener
 	{
-		private IGoogleApiClient _client;
+		private GoogleApiClient _client;
 		private LocationRequest _request;
 
 		private readonly MvxAndroidFusedLocationWatcher _owner;
@@ -102,7 +102,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 
 		private void Initialize (Context context)
 		{
-			_client = new GoogleApiClientBuilder (context)
+			_client = new GoogleApiClient.Builder (context)
 				.AddApi (LocationServices.API)
 				.AddConnectionCallbacks (this)
 				.AddOnConnectionFailedListener (this)
