@@ -25,10 +25,7 @@ namespace MvvmCross.Droid.FullFragging.Views
     {
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         protected MvxActivity()
         {
