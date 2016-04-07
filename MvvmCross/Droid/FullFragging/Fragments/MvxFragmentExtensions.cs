@@ -47,16 +47,22 @@ namespace MvvmCross.Droid.FullFragging.Fragments
                 return;
             }
 
-            var viewModelType = fragmentView.FindAssociatedViewModelType();
+            Fragment fragment = fragmentView as Fragment;
+            if (fragmentView == null)
+                throw new InvalidOperationException($"Something really weird. ${nameof(fragmentView)} passed is not a Fragment!");
+
+            // as it is called during onCreate it is safe to assume that fragment has Activity attached.
+            var viewModelType = fragmentView.FindAssociatedViewModelType(fragment.Activity.GetType());
             var view = fragmentView as IMvxView;
 
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
-            view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, request));
+            view.OnViewCreate(() => cached ?? LoadViewModel(fragmentView, bundle, fragment.Activity.GetType(), request));
+
         }
 
-        public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView)
+        public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
@@ -67,7 +73,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
                 if (!type.HasMvxFragmentAttribute())
                     throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
 
-                var cacheableFragmentAttribute = type.GetMvxFragmentAttribute();
+                var cacheableFragmentAttribute = type.GetMvxFragmentAttribute(fragmentActivityParentType);
                 if (cacheableFragmentAttribute.ViewModelType == null)
                     throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
 
@@ -107,10 +113,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             }
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
+        private static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, Type fragmentParentActivityType,
             MvxViewModelRequest request = null)
         {
-            var viewModelType = fragmentView.FindAssociatedViewModelType();
+            var viewModelType = fragmentView.FindAssociatedViewModelType(fragmentParentActivityType);
             if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
 
@@ -174,7 +180,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             setupSingleton.EnsureInitialized();
         }
 
-        public static void RegisterFragmentViewToCacheIfNeeded(this IMvxFragmentView fragmentView)
+        public static void RegisterFragmentViewToCacheIfNeeded(this IMvxFragmentView fragmentView, Type fragmentParentActivityType)
         {
             Fragment representedFragment = fragmentView as Fragment;
 
@@ -195,7 +201,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
                 throw new InvalidOperationException("Contract failed - Fragment tag is null! Fragment tags are not set by default, you should add tag during FragmentTransaction or override UniqueImmutableCacheTag in your Fragment class.");
 
             var fragmentCacheConfiguration = cacheableActivity.FragmentCacheConfiguration;
-            fragmentCacheConfiguration.RegisterFragmentToCache(fragmentView.UniqueImmutableCacheTag, fragmentView.GetType(), fragmentView.FindAssociatedViewModelType());
+            fragmentCacheConfiguration.RegisterFragmentToCache(fragmentView.UniqueImmutableCacheTag, fragmentView.GetType(), fragmentView.FindAssociatedViewModelType(fragmentParentActivityType));
         }
     }
 }

@@ -9,10 +9,10 @@ using System;
 
 namespace MvvmCross.Droid.Shared.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentAttribute : Attribute
     {
-        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false)
+        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false, int attributePriorityOrder = 0)
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
