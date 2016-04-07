@@ -16,9 +16,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         public IMvxBindingContext BindingContext { get; set; }
 
