@@ -35,9 +35,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         protected MvxFragment()
         {
