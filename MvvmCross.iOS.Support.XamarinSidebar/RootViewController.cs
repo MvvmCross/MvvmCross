@@ -10,6 +10,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         public SidebarNavigation.SidebarController SidebarController { get; set; }
 
 		public UINavigationController NavController;
+		public UINavigationController MenuController;
 
         private static bool UserInterfaceIdiomIsPhone
         {
@@ -30,8 +31,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             // Perform any additional setup after loading the view, typically from a nib.
 
             NavController = new UINavigationController();
-			var menuContentView = new UINavigationController();
-            SidebarController = new SidebarController(this, NavController, menuContentView)
+			MenuController = new UINavigationController();
+			SidebarController = new SidebarController(this, NavController, MenuController)
             {
 				MenuLocation = SidebarController.MenuLocations.Left,
                 HasShadowing = true,
