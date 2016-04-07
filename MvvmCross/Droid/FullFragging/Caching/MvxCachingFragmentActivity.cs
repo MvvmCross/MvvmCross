@@ -41,10 +41,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 		}
 
         protected MvxCachingFragmentActivity()
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
