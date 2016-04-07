@@ -8,9 +8,9 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using Foundation;
     using UIKit;
 
-    [Register("DetailView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
-    public class DetailView : BaseViewController<DetailViewModel>
+    [Register("LeftPanelView")]
+    [MvxPanelPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
+    public class LeftPanelView : BaseViewController<LeftPanelViewModel>
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
@@ -24,13 +24,10 @@ namespace MvvmCross.iOS.Support.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Gray;
-
             var label = new UILabel();
 
-            var bindingSet = this.CreateBindingSet<DetailView, DetailViewModel>();
+            var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
-
             bindingSet.Apply();
 
             Add(label);
@@ -39,6 +36,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
             View.AddConstraints(
 
+                label.WithSameHeight(View),
                 label.WithSameCenterX(View),
                 label.WithSameCenterY(View)
 

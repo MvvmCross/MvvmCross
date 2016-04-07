@@ -18,6 +18,12 @@
         /// <summary>
         /// The active panel
         /// </summary>
-        ActivePanel
+        ActivePanel,
+
+
+		/// <summary>
+		/// The view to be pushed
+		/// </summary>
+		PushView
     }
 }

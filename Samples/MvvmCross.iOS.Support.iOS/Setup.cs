@@ -2,11 +2,13 @@
 
 namespace MvvmCross.iOS.Support.iOS
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Views.Presenters;
-    using MvvmCross.Platform.Platform;
-    using Platform;
-    using UIKit;
+	using MvvmCross.Core;
+	using MvvmCross.iOS.Platform;
+	using MvvmCross.iOS.Views.Presenters;
+	using MvvmCross.Platform.Platform;
+	using UIKit;
+	using MvvmCross.Core.ViewModels;
+
 
     public class Setup : MvxIosSetup
     {

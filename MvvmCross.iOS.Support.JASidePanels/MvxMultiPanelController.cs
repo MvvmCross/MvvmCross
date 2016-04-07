@@ -12,6 +12,7 @@ namespace MvvmCross.iOS.Support.JASidePanels
         /// <param name="panel">The panel.</param>
         public override void StylePanel(UIView panel)
         {
+			
         }
     }
 }

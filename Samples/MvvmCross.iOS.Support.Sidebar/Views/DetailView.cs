@@ -1,4 +1,5 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
+﻿
+
 
 namespace MvvmCross.iOS.Support.iOS.Views
 {
@@ -7,6 +8,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using Core.ViewModels;
     using Foundation;
     using UIKit;
+	using MvvmCross.iOS.Support.SidePanels;
 
     [Register("DetailView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]

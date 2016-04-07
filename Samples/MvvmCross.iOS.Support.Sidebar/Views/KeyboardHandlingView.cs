@@ -1,5 +1,6 @@
 ﻿using MvvmCross.iOS.Support.SidePanels;
 
+
 namespace MvvmCross.iOS.Support.iOS.Views
 {
     using Cirrious.FluentLayouts.Touch;

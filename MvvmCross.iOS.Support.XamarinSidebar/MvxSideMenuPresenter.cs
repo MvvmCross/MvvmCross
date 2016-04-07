@@ -6,14 +6,15 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using System.Linq;
 using UIKit;
+using MvvmCross.iOS.Support.SidePanels;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
-    /*public class SideMenuPresenter : MvxIosViewPresenter
+    public class MvxSideMenuPresenter : MvxIosViewPresenter
     {
-        private RootViewController _rootController;
+		private RootViewController _rootController;
 
-        private RootViewController RootController
+		private RootViewController RootController
         {
             get { return _rootController; }
             set
@@ -26,15 +27,15 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             }
         }
 
-        public SideMenuPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
+        public MvxSideMenuPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
-            AddPresentationHintHandler<PopToRootPresentationHint>(PopToRootPresentationHintHandler);
-            AddPresentationHintHandler<ResetRootPresentationHint>(ResetRootPresentationHintHandler);
-            AddPresentationHintHandler<PushViewPresentationHint>(PushViewPresentationHintHandler);
+            AddPresentationHintHandler<MvxPanelPopToRootPresentationHint>(PopToRootPresentationHintHandler);
+            AddPresentationHintHandler<MvxPanelResetRootPresentationHint>(ResetRootPresentationHintHandler);
+            AddPresentationHintHandler<MvxPanelPushViewPresentationHint>(PushViewPresentationHintHandler);
         }
 
-        private bool PopToRootPresentationHintHandler(PopToRootPresentationHint hint)
+		private bool PopToRootPresentationHintHandler(MvxPanelPopToRootPresentationHint hint)
         {
             if (hint == null)
                 return false;
@@ -46,7 +47,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        private bool ResetRootPresentationHintHandler(ResetRootPresentationHint hint)
+        private bool ResetRootPresentationHintHandler(MvxPanelResetRootPresentationHint hint)
         {
             if (hint == null)
                 return false;
@@ -56,7 +57,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        private bool PushViewPresentationHintHandler(PushViewPresentationHint hint)
+        private bool PushViewPresentationHintHandler(MvxPanelPushViewPresentationHint hint)
         {
             if (hint == null)
                 return false;
@@ -89,7 +90,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (RootController == null)
             {
                 RootController = new RootViewController();
-                ChangePresentation(new PopToRootPresentationHint(viewController));
+				ChangePresentation(new MvxPanelPopToRootPresentationHint(viewController));
             }
             else
             {
@@ -97,28 +98,39 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
                 switch (viewPresentationAttribute.HintType)
                 {
-                    case PresentationHintType.PopToRoot:
-                        ChangePresentation(new PopToRootPresentationHint(viewController));
+				case MvxPanelHintType.PopToRoot:
+                        ChangePresentation(new MvxPanelPopToRootPresentationHint(viewController));
                         break;
 
-                    case PresentationHintType.ResetRoot:
-                        ChangePresentation(new ResetRootPresentationHint(viewController));
+				case MvxPanelHintType.ResetRoot:
+                        ChangePresentation(new MvxPanelResetRootPresentationHint(viewController));
                         break;
 
-                    case PresentationHintType.PushView:
+				case MvxPanelHintType.PushView:
                     default:
-                        ChangePresentation(new PushViewPresentationHint(viewController));
+                        ChangePresentation(new MvxPanelPushViewPresentationHint(viewController));
                         break;
                 }
+
+				switch (viewPresentationAttribute.Panel) {
+				case MvxPanelEnum.Left:
+					//RootController.SidebarController.MenuAreaController = new UINavigationController(viewController); MenuAreaController = GET ONLY
+					break;
+				case MvxPanelEnum.Center:
+					break;
+				case MvxPanelEnum.Right:
+					break;
+				
+				}
             }
         }
 
-        private ViewPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
+		private MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
         {
             if (view == null)
-                return default(ViewPresentationAttribute);
+				return default(MvxPanelPresentationAttribute);
 
-            return view.GetType().GetCustomAttributes(typeof(ViewPresentationAttribute), true).FirstOrDefault() as ViewPresentationAttribute;
+			return view.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -155,5 +167,5 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         {
             base.CloseModalViewController();
         }
-    }*/
+    }
 }

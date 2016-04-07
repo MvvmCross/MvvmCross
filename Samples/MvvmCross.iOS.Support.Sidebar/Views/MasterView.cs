@@ -8,9 +8,9 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using Foundation;
     using UIKit;
 
-    [Register("DetailView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
-    public class DetailView : BaseViewController<DetailViewModel>
+    [Register("MasterView")]
+    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Master)]
+    public class MasterView : BaseViewController<MasterViewModel>
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
@@ -24,23 +24,30 @@ namespace MvvmCross.iOS.Support.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Gray;
+            View.BackgroundColor = UIColor.LightGray;
 
             var label = new UILabel();
 
-            var bindingSet = this.CreateBindingSet<DetailView, DetailViewModel>();
-            bindingSet.Bind(label).To(vm => vm.ExampleValue);
+            var detailButton = new UIButton();
+            detailButton.SetTitle("Show Detail", UIControlState.Normal);
 
+            var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();
+            bindingSet.Bind(label).To(vm => vm.ExampleValue);
+            bindingSet.Bind(detailButton).To(vm => vm.ShowDetailCommand);
             bindingSet.Apply();
 
             Add(label);
+            Add(detailButton);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             View.AddConstraints(
 
                 label.WithSameCenterX(View),
-                label.WithSameCenterY(View)
+                label.WithSameCenterY(View),
+
+                detailButton.Below(label, 10),
+                detailButton.WithSameCenterX(View)
 
                 );
         }

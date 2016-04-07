@@ -1,14 +1,15 @@
 using MvvmCross.iOS.Views;
 using SidebarNavigation;
 using UIKit;
+using MvvmCross.iOS.Support.Core.ViewModels;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
-    /*public partial class RootViewController : UIViewController, IMvxCanCreateIosView
+    public partial class RootViewController : UIViewController, IMvxCanCreateIosView
     {
-        public SidebarNavigation.SidebarController SidebarController { get; private set; }
+        public SidebarNavigation.SidebarController SidebarController { get; set; }
 
-        public NavigationController NavController { get; private set; }
+		public UINavigationController NavController;
 
         private static bool UserInterfaceIdiomIsPhone
         {
@@ -28,16 +29,16 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             // Perform any additional setup after loading the view, typically from a nib.
 
-            NavController = new NavigationController();
-            var menuContentView = this.CreateViewControllerFor<MenuViewModel>() as MenuViewController;
+            NavController = new UINavigationController();
+			var menuContentView = new UINavigationController();
             SidebarController = new SidebarController(this, NavController, menuContentView)
             {
-                MenuLocation = SidebarController.MenuLocations.Left,
+				MenuLocation = SidebarController.MenuLocations.Left,
                 HasShadowing = true,
                 MenuWidth = UserInterfaceIdiomIsPhone ?
                     int.Parse(UIScreen.MainScreen.Bounds.Width.ToString()) - MinSpaceRightOfTheMenu :
                     MaxMenuWidth
             };
         }
-    }*/
+    }
 }

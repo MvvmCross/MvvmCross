@@ -72,6 +72,14 @@
       <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
       <Name>MvvmCross.iOS.Support</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Samples\MvvmCross.iOS.Support.Core\MvvmCross.iOS.Support.Core.csproj">
+      <Project>{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}</Project>
+      <Name>MvvmCross.iOS.Support.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.iOS.csproj">
+      <Project>{4B3F7784-069E-47EE-903A-25542CCF03C3}</Project>
+      <Name>MvvmCross.iOS.Support.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
