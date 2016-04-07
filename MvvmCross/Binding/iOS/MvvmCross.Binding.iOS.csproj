@@ -69,6 +69,7 @@
     <Compile Include="Views\Gestures\MvxGestureRecognizerBehavior.cs" />
     <Compile Include="Views\Gestures\MvxSwipeGestureRecognizerBehaviour.cs" />
     <Compile Include="Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />
+    <Compile Include="Views\MvxCollectionReusableView.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxImageViewWrapper.cs" />
     <Compile Include="Views\MvxBaseTableViewSource.cs" />
