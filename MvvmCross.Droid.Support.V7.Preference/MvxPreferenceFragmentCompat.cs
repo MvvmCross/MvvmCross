@@ -17,9 +17,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
         protected MvxPreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{
-            this.AddEventListeners();
-        }
+		{}
 
         public IMvxBindingContext BindingContext { get; set; }
 

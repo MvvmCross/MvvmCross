@@ -26,9 +26,7 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         public IMvxBindingContext BindingContext { get; set; }
 

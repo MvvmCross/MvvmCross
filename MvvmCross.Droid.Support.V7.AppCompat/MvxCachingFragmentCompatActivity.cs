@@ -55,10 +55,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         protected override void OnPostCreate(Bundle savedInstanceState)
         {
