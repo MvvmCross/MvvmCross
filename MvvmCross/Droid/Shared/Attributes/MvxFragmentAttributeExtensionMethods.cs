@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MvvmCross.Droid.Shared.Attributes
@@ -18,23 +19,35 @@ namespace MvvmCross.Droid.Shared.Attributes
             return attributes.Length > 0;
         }
 
-        public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType)
+        public static IEnumerable<MvxFragmentAttribute> GetMvxFragmentAttributes(this Type fromFragmentType)
         {
             var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxFragmentAttribute), true);
 
             if (!attributes.Any())
                 throw new InvalidOperationException($"Type does not have {nameof(MvxFragmentAttribute)} attribute!");
 
-            var cacheableFragmentAttribute = attributes.First() as MvxFragmentAttribute;
-            return cacheableFragmentAttribute;
+            return attributes.Cast<MvxFragmentAttribute>();
         }
 
-        public static bool IsFragmentCacheable(this Type fragmentType)
+        public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType,
+            Type fragmentActivityViewModelType)
+        {
+            var mvxFragmentAttributes = fromFragmentType.GetMvxFragmentAttributes();
+
+           var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == fragmentActivityViewModelType);
+
+            if (mvxFragmentAttributes == null)
+                throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityViewModelType}");
+
+            return mvxFragmentAttribute;
+        }
+
+        public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
         {
             if (!fragmentType.HasMvxFragmentAttribute())
                 return false;
 
-            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute(fragmentActivityParentType);
             return mvxFragmentAttribute.IsCacheableFragment;
         }
 
@@ -43,8 +56,9 @@ namespace MvvmCross.Droid.Shared.Attributes
             if (!fragmentType.HasMvxFragmentAttribute())
                 return null;
 
-            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
-            return mvxFragmentAttribute.ViewModelType;
+            return fragmentType.GetMvxFragmentAttributes()
+                .Select(x => x.ViewModelType)
+                .First();
         }
     }
 }
