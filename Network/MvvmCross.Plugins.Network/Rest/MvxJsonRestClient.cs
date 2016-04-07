@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.Network.Rest
 
         public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken);
+            var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
 
             using (var textReader = new StreamReader(streamResponse.Stream))
             {
