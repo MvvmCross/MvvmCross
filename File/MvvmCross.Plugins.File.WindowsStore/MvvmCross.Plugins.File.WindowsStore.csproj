@@ -41,8 +41,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MvvmCross.Plugins.File.WindowsCommon\MvxWindowsCommonFileStore.cs">
+      <Link>MvxWindowsCommonFileStore.cs</Link>
+    </Compile>
     <Compile Include="Plugin.cs" />
-    <Compile Include="MvxWindowsStoreFileStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
