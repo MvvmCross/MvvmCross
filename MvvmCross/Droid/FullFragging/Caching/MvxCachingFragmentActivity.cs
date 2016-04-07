@@ -40,16 +40,15 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			ReplaceFragmentAndViewModel
 		}
 
-		protected MvxCachingFragmentActivity()
-		{
-		}
+        protected MvxCachingFragmentActivity()
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
+        }
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{
-			BindingContext = new MvxAndroidBindingContext(this, this);
-			this.AddEventListeners();
-		}
+		{}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{
