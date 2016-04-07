@@ -40,9 +40,7 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         public IMvxBindingContext BindingContext { get; set; }
 

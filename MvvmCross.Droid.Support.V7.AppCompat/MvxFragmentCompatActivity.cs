@@ -37,10 +37,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         public object DataContext
         {
