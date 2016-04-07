@@ -24,10 +24,7 @@ namespace MvvmCross.Droid.Views
     {
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         protected MvxActivity()
         {
