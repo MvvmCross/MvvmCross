@@ -9,6 +9,9 @@ namespace MvvmCross.iOS.Support.SidePanels
     /// <seealso cref="MvxPresentationHint" />
     public class MvxPanelPushViewPresentationHint : MvxPresentationHint
     {
+		/// <summary>
+		/// The viewcontroller thats has to be pushed
+		/// </summary>
 		public UIViewController ViewController;
 
         /// <summary>

@@ -10,7 +10,7 @@
 
             // show the other panels
             ShowViewModel<LeftPanelViewModel>();
-            ShowViewModel<RightPanelViewModel>();
+            //ShowViewModel<RightPanelViewModel>();
         }
 
         public string RightPanelInstructions

@@ -80,4 +80,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\threelines.png" />
+  </ItemGroup>
 </Project>

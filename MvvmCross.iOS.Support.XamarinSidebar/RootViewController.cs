@@ -31,6 +31,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             // Perform any additional setup after loading the view, typically from a nib.
 
             NavController = new UINavigationController();
+
 			MenuController = new UINavigationController();
 			MenuController.View.BackgroundColor = UIColor.Cyan;
 
@@ -41,6 +42,15 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 MenuWidth = UserInterfaceIdiomIsPhone ? int.Parse(UIScreen.MainScreen.Bounds.Width.ToString()) - MinSpaceRightOfTheMenu :
                     MaxMenuWidth,
             };
+
+			var navigationItem = SidebarController.ContentAreaController.NavigationItem;
+
+			var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
+				, UIBarButtonItemStyle.Plain
+				, (sender, args) => SidebarController.ToggleMenu ());
+
+			navigationItem.SetLeftBarButtonItem (barButton, false);
+
 
         }
     }
