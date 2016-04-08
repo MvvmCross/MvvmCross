@@ -117,11 +117,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 				switch (viewPresentationAttribute.Panel) {
 					case MvxPanelEnum.Left:
 						RootController.SidebarController.ChangeMenuView (viewController);
+						RootController.SidebarController.MenuLocation = MenuLocations.Left;
 						break;
 					case MvxPanelEnum.Center:
 						break;
 					case MvxPanelEnum.Right:
-						//RootController.SidebarController.ChangeMenuView (viewController);
+						RootController.SidebarController.ChangeMenuView (viewController);
+						RootController.SidebarController.MenuLocation = MenuLocations.Right;
 						break;
 				
 				}
