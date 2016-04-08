@@ -316,7 +316,7 @@ namespace MvvmCross.Droid.Support.V4
 			return currentFragments
 				.Where(fragment => fragment != null)
 				// we are not interested in fragments which are not supposed to cache!
-				.Where(fragment => fragment.GetType().IsFragmentCacheable());
+				.Where(fragment => fragment.GetType().IsFragmentCacheable(GetType()));
 		}
 
 		protected virtual IMvxCachedFragmentInfo GetLastFragmentInfo()

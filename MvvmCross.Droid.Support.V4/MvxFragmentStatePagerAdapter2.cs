@@ -52,7 +52,7 @@ namespace MvvmCross.Droid.Support.V4
             if (mvxFragment == null)
                 return fragment;
 
-            if (mvxFragment.GetType().IsFragmentCacheable() && fragmentSavedState != null)
+			if (mvxFragment.GetType().IsFragmentCacheable(fragment.Activity.GetType()) && fragmentSavedState != null)
                 return fragment;
 
             var viewModel = CreateViewModel(position);
