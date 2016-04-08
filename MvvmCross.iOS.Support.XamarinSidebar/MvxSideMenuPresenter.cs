@@ -64,7 +64,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 return false;
 
             RootController.NavController.ShowViewController(hint.ViewController, null);
-            RootController.SidebarController?.CloseMenu(true);
+            RootController.SidebarController.CloseMenu(true);
 
             return true;
         }
@@ -119,26 +119,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 						, UIBarButtonItemStyle.Plain
 						, (sender, args) => RootController.SidebarController.ToggleMenu ());
 
-
 					RootController.SidebarController.ChangeMenuView (viewController);
 
 					if (viewPresentationAttribute.Panel == MvxPanelEnum.Left) {
 						RootController.SidebarController.MenuLocation = MenuLocations.Left;
-//						RootController.SidebarController.NavigationItem.SetLeftBarButtonItem(barButton,true);
-//						RootController.SidebarController.NavigationItem.LeftBarButtonItem = barButton;
-//					//	RootController.SidebarController.NavigationController.NavigationItem.LeftBarButtonItem = barButton;
-//						RootController.NavigationItem.LeftBarButtonItem = barButton;
-//						RootController.NavController.NavigationItem.SetLeftBarButtonItem(barButton,false);
-
-						RootController.SidebarController.ContentAreaController.NavigationItem.SetLeftBarButtonItem (barButton, false);
-						RootController.SidebarController.NavigationItem.SetLeftBarButtonItem (barButton, false);
-						RootController.SidebarController.MenuAreaController.NavigationItem.SetLeftBarButtonItem (barButton, false);
-						RootController.NavigationItem.SetLeftBarButtonItem (barButton, false);
 						RootController.NavController.NavigationItem.SetLeftBarButtonItem (barButton, false);
 					} else {
-
 						RootController.SidebarController.MenuLocation = MenuLocations.Right;
-						RootController.NavController.NavigationItem.SetRightBarButtonItem(barButton,true);
+						RootController.NavController.NavigationItem.SetRightBarButtonItem (barButton, true);
 					}
 
 				}
