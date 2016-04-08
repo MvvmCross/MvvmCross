@@ -33,9 +33,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin-Sidebar-Unified">
-      <HintPath>Xamarin-Sidebar-Unified.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Platform.iOS">
       <HintPath>..\packages\MvvmCross.Platform.4.0.0\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
     </Reference>
@@ -57,6 +54,9 @@
     <Reference Include="MvvmCross.Localization">
       <HintPath>..\packages\MvvmCross.Binding.4.0.0\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin-Sidebar-Unified">
+      <HintPath>..\packages\SidebarNavigation.1.9.0\lib\Xamarin.iOS10\Xamarin-Sidebar-Unified.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -75,10 +75,6 @@
     <ProjectReference Include="..\Samples\MvvmCross.iOS.Support.Core\MvvmCross.iOS.Support.Core.csproj">
       <Project>{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}</Project>
       <Name>MvvmCross.iOS.Support.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Samples\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.iOS.csproj">
-      <Project>{4B3F7784-069E-47EE-903A-25542CCF03C3}</Project>
-      <Name>MvvmCross.iOS.Support.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

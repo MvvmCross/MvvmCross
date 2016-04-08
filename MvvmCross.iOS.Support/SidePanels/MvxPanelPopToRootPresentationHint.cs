@@ -7,7 +7,7 @@ namespace MvvmCross.iOS.Support
 {
 	public class MvxPanelPopToRootPresentationHint: MvxPresentationHint
 	{
-		public UIViewController ViewController{ get; set; }
+		public UIViewController ViewController { get; set; }
 		/// <summary>
 		/// The panel
 		/// </summary>

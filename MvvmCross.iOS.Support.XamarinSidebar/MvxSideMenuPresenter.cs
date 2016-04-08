@@ -7,6 +7,7 @@ using MvvmCross.Platform.Exceptions;
 using System.Linq;
 using UIKit;
 using MvvmCross.iOS.Support.SidePanels;
+using SidebarNavigation;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
@@ -42,7 +43,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             RootController.NavController.ViewControllers = null;
             RootController.NavController.PushViewController(hint.ViewController, false);
-            RootController.SidebarController.CloseMenu(true);
+            RootController.SidebarController?.CloseMenu(true);
 
             return true;
         }
@@ -63,7 +64,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 return false;
 
             RootController.NavController.ShowViewController(hint.ViewController, null);
-            RootController.SidebarController.CloseMenu(true);
+            RootController.SidebarController?.CloseMenu(true);
 
             return true;
         }
@@ -87,40 +88,41 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (viewController == null)
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
 
-            if (RootController == null)
-            {
-                RootController = new RootViewController();
+			if (RootController == null)
+			{
+				RootController = new RootViewController();
 				ChangePresentation(new MvxPanelPopToRootPresentationHint(viewController));
-            }
+			}
+           
             else
             {
                 var viewPresentationAttribute = GetViewPresentationAttribute(view);
 
                 switch (viewPresentationAttribute.HintType)
                 {
-				case MvxPanelHintType.PopToRoot:
-                        ChangePresentation(new MvxPanelPopToRootPresentationHint(viewController));
+					case MvxPanelHintType.PopToRoot:
+						ChangePresentation(new MvxPanelPopToRootPresentationHint(viewPresentationAttribute.Panel));
                         break;
 
-				case MvxPanelHintType.ResetRoot:
-                        ChangePresentation(new MvxPanelResetRootPresentationHint(viewController));
+					case MvxPanelHintType.ResetRoot:
+						ChangePresentation(new MvxPanelResetRootPresentationHint(viewPresentationAttribute.Panel));
                         break;
 
-				case MvxPanelHintType.PushView:
-                    default:
-                        ChangePresentation(new MvxPanelPushViewPresentationHint(viewController));
+					case MvxPanelHintType.ActivePanel:
+	                    default:
+						ChangePresentation(new MvxActivePanelPresentationHint(viewPresentationAttribute.Panel,viewPresentationAttribute.ShowPanel));
                         break;
                 }
 
 				switch (viewPresentationAttribute.Panel) {
-				case MvxPanelEnum.Left:
-					RootController.MenuController = viewController;
-					//RootController.SidebarController.MenuAreaController = new UINavigationController(viewController); MenuAreaController = GET ONLY
-					break;
-				case MvxPanelEnum.Center:
-					break;
-				case MvxPanelEnum.Right:
-					break;
+					case MvxPanelEnum.Left:
+						RootController.SidebarController.ChangeMenuView (viewController);
+						break;
+					case MvxPanelEnum.Center:
+						break;
+					case MvxPanelEnum.Right:
+						//RootController.SidebarController.ChangeMenuView (viewController);
+						break;
 				
 				}
             }

@@ -14,11 +14,6 @@ namespace MvvmCross.iOS.Support.SidePanels
         /// </summary>
         public readonly MvxPanelEnum Panel;
 
-		/// <summary>
-		/// The panel
-		/// </summary>
-		public readonly UIViewController ViewController;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
         /// </summary>
@@ -28,13 +23,5 @@ namespace MvvmCross.iOS.Support.SidePanels
             Panel = panel;
         }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
-		/// </summary>
-		/// <param name="panel">The panel.</param>
-		public MvxPanelResetRootPresentationHint(UIViewController view)
-		{
-			ViewController = view;
-		}
     }
 }
