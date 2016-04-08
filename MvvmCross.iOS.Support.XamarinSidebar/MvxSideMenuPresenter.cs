@@ -41,9 +41,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (hint == null)
                 return false;
 
-            RootController.NavController.ViewControllers = null;
-            RootController.NavController.PushViewController(hint.ViewController, false);
-            RootController.SidebarController?.CloseMenu(true);
+            RootController.ContentController.ViewControllers = null;
+            RootController.ContentController.PushViewController(hint.ViewController, false);
+            RootController.SidebarController.CloseMenu(true);
 
             return true;
         }
@@ -63,7 +63,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (hint == null)
                 return false;
 
-            RootController.NavController.ShowViewController(hint.ViewController, null);
+            RootController.ContentController.ShowViewController(hint.ViewController, null);
             RootController.SidebarController.CloseMenu(true);
 
             return true;
@@ -115,18 +115,21 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 }
 
 				if (viewPresentationAttribute.Panel == MvxPanelEnum.Left || viewPresentationAttribute.Panel == MvxPanelEnum.Right) {
-					var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
+
+					var barButton = new UIBarButtonItem(UIImage.FromBundle("threelines")
 						, UIBarButtonItemStyle.Plain
-						, (sender, args) => RootController.SidebarController.ToggleMenu ());
+						, (sender,args) => {
+							RootController.SidebarController.ToggleMenu();
+						});
 
 					RootController.SidebarController.ChangeMenuView (viewController);
 
 					if (viewPresentationAttribute.Panel == MvxPanelEnum.Left) {
 						RootController.SidebarController.MenuLocation = MenuLocations.Left;
-						RootController.NavController.NavigationItem.SetLeftBarButtonItem (barButton, false);
+						RootController.ContentController.TopViewController.NavigationItem.SetLeftBarButtonItem (barButton, false);	
 					} else {
 						RootController.SidebarController.MenuLocation = MenuLocations.Right;
-						RootController.NavController.NavigationItem.SetRightBarButtonItem (barButton, true);
+						RootController.ContentController.TopViewController.NavigationItem.SetRightBarButtonItem (barButton, false);	
 					}
 
 				}
@@ -148,15 +151,15 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (RootController.NavController == null)
+            if (RootController.ContentController == null)
                 return;
 
-            var mvxIosView = RootController.NavController.TopViewController as IMvxIosView;
+            var mvxIosView = RootController.ContentController.TopViewController as IMvxIosView;
 
             if (mvxIosView == null || mvxIosView.ReflectionGetViewModel() != toClose)
                 return;
 
-            RootController.NavController.PopViewController(true);
+            RootController.ContentController.PopViewController(true);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
@@ -167,12 +170,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             var recognizer = new UISwipeGestureRecognizer(CloseModalViewController);
             recognizer.Direction = UISwipeGestureRecognizerDirection.Down;
             viewController.View.AddGestureRecognizer(recognizer);
-
-			var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
-				, UIBarButtonItemStyle.Plain
-				, (sender, args) => RootController.SidebarController.ToggleMenu ());
-
-			viewController.NavigationItem.LeftBarButtonItem = barButton;
 
             return result;
         }
