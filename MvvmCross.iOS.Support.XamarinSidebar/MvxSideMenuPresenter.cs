@@ -116,11 +116,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
 				if (viewPresentationAttribute.Panel == MvxPanelEnum.Left || viewPresentationAttribute.Panel == MvxPanelEnum.Right) {
 
-					var barButton = new UIBarButtonItem(UIImage.FromBundle("threelines")
+					var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
 						, UIBarButtonItemStyle.Plain
-						, (sender,args) => {
-							RootController.SidebarController.ToggleMenu();
-						});
+						, (sender, args) => {
+						RootController.SidebarController.ToggleMenu ();
+					});
 
 					RootController.SidebarController.ChangeMenuView (viewController);
 
@@ -131,7 +131,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 						RootController.SidebarController.MenuLocation = MenuLocations.Right;
 						RootController.ContentController.TopViewController.NavigationItem.SetRightBarButtonItem (barButton, false);	
 					}
-
+				} else {
+					RootController.ContentController.PushViewController (view as UIViewController, false);
 				}
             }
         }
