@@ -13,12 +13,14 @@ namespace MvvmCross.Platform.Plugins
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;
 
-    public abstract class MvxPluginManager
+    public class MvxPluginManager
         : IMvxPluginManager
     {
         private readonly Dictionary<Type, IMvxPlugin> _loadedPlugins = new Dictionary<Type, IMvxPlugin>();
 
         public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
+
+        public MvxLoaderPluginRegistry Registry { get; private set; } = new MvxLoaderPluginRegistry ();
 
         public bool IsPluginLoaded<T>() where T : IMvxPluginLoader
         {
@@ -117,7 +119,7 @@ namespace MvvmCross.Platform.Plugins
         {
             try
             {
-                var plugin = this.FindPlugin(toLoad);
+                var plugin = this.LoadPlugin(toLoad);
                 var configurablePlugin = plugin as IMvxConfigurablePlugin;
                 if (configurablePlugin != null)
                 {
@@ -137,8 +139,22 @@ namespace MvvmCross.Platform.Plugins
             }
         }
 
+        private IMvxPlugin LoadFromRegistry (Type toLoad)
+        {
+            var loader = Registry.FindLoader (toLoad);
+            return loader?.Invoke ();
+        }
+
+        private IMvxPlugin LoadPlugin (Type toLoad)
+        {
+            return this.LoadFromRegistry (toLoad) ?? this.FindPlugin(toLoad);
+        }
+
         protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => this.ConfigurationSource?.Invoke(toLoad);
 
-        protected abstract IMvxPlugin FindPlugin(Type toLoad);
+        protected virtual IMvxPlugin FindPlugin(Type toLoad)
+        {
+            throw new MvxException ("Could not find plugin loader for type {0}", toLoad.FullName);
+        }
     }
 }
