@@ -8,6 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Shared.Attributes
 {
@@ -30,16 +33,28 @@ namespace MvvmCross.Droid.Shared.Attributes
         }
 
         public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType,
-            Type fragmentActivityViewModelType)
+            Type fragmentActivityParentType)
         {
             var mvxFragmentAttributes = fromFragmentType.GetMvxFragmentAttributes();
+            var activityViewModelType = GetActivityViewModelType(fragmentActivityParentType);
+            var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
 
-           var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == fragmentActivityViewModelType);
-
-            if (mvxFragmentAttributes == null)
-                throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityViewModelType}");
+            if (mvxFragmentAttribute == null)
+                throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityParentType}");
 
             return mvxFragmentAttribute;
+        }
+
+        private static Type GetActivityViewModelType(Type activityType)
+        {
+            IMvxViewModelTypeFinder associatedTypeFinder;
+            if (!Mvx.TryResolve(out associatedTypeFinder))
+            {
+                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+                return typeof(MvxNullViewModel);
+            }
+
+            return associatedTypeFinder.FindTypeOrNull(activityType);
         }
 
         public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
