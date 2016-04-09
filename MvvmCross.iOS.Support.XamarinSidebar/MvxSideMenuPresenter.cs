@@ -13,60 +13,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public class MvxSideMenuPresenter : MvxIosViewPresenter
     {
-		private RootViewController _rootController;
-
-		private RootViewController RootController
-        {
-            get { return _rootController; }
-            set
-            {
-                if (_rootController == value)
-                    return;
-
-                _rootController = value;
-                base.SetWindowRootViewController(_rootController);
-            }
-        }
+        protected virtual SidebarController SidebarController { get; private set;}
 
         public MvxSideMenuPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
-            AddPresentationHintHandler<MvxPanelPopToRootPresentationHint>(PopToRootPresentationHintHandler);
-            AddPresentationHintHandler<MvxPanelResetRootPresentationHint>(ResetRootPresentationHintHandler);
-            AddPresentationHintHandler<MvxPanelPushViewPresentationHint>(PushViewPresentationHintHandler);
-        }
-
-		private bool PopToRootPresentationHintHandler(MvxPanelPopToRootPresentationHint hint)
-        {
-            if (hint == null)
-                return false;
-
-            RootController.NavController.ViewControllers = null;
-            RootController.NavController.PushViewController(hint.ViewController, false);
-            RootController.SidebarController?.CloseMenu(true);
-
-            return true;
-        }
-
-        private bool ResetRootPresentationHintHandler(MvxPanelResetRootPresentationHint hint)
-        {
-            if (hint == null)
-                return false;
-
-            RootController = null;
-
-            return true;
-        }
-
-        private bool PushViewPresentationHintHandler(MvxPanelPushViewPresentationHint hint)
-        {
-            if (hint == null)
-                return false;
-
-            RootController.NavController.ShowViewController(hint.ViewController, null);
-            RootController.SidebarController.CloseMenu(true);
-
-            return true;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -88,98 +39,35 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (viewController == null)
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
 
-			if (RootController == null)
-			{
-				RootController = new RootViewController();
-				ChangePresentation(new MvxPanelPopToRootPresentationHint(viewController));
-			}
-           
+            if (this.MasterNavigationController == null)
+                this.ShowFirstView(viewController);
             else
+                this.MasterNavigationController.PushViewController(viewController, true /*animated*/);
+        }
+
+        protected override void ShowFirstView(UIViewController viewController)
+        {
+            base.ShowFirstView(viewController);
+
+            if (SidebarController == null)
             {
-                var viewPresentationAttribute = GetViewPresentationAttribute(view);
+                SidebarController = CreateSidebarController(viewController);
 
-                switch (viewPresentationAttribute.HintType)
-                {
-					case MvxPanelHintType.PopToRoot:
-						ChangePresentation(new MvxPanelPopToRootPresentationHint(viewPresentationAttribute.Panel));
-                        break;
-
-					case MvxPanelHintType.ResetRoot:
-						ChangePresentation(new MvxPanelResetRootPresentationHint(viewPresentationAttribute.Panel));
-                        break;
-
-					case MvxPanelHintType.ActivePanel:
-	                    default:
-						ChangePresentation(new MvxActivePanelPresentationHint(viewPresentationAttribute.Panel,viewPresentationAttribute.ShowPanel));
-                        break;
-                }
-
-				if (viewPresentationAttribute.Panel == MvxPanelEnum.Left || viewPresentationAttribute.Panel == MvxPanelEnum.Right) {
-					var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
-						, UIBarButtonItemStyle.Plain
-						, (sender, args) => RootController.SidebarController.ToggleMenu ());
-
-					RootController.SidebarController.ChangeMenuView (viewController);
-
-					if (viewPresentationAttribute.Panel == MvxPanelEnum.Left) {
-						RootController.SidebarController.MenuLocation = MenuLocations.Left;
-						RootController.NavController.NavigationItem.SetLeftBarButtonItem (barButton, false);
-					} else {
-						RootController.SidebarController.MenuLocation = MenuLocations.Right;
-						RootController.NavController.NavigationItem.SetRightBarButtonItem (barButton, true);
-					}
-
-				}
+                viewController.NavigationItem.SetLeftBarButtonItem(
+                    new UIBarButtonItem(UIImage.FromBundle("threelines")
+                        , UIBarButtonItemStyle.Plain
+                        , (sender, args) => SidebarController.ToggleMenu ()), true);
             }
         }
 
-		private MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
+        private SidebarController CreateSidebarController(UIViewController viewController)
         {
-            if (view == null)
-				return default(MvxPanelPresentationAttribute);
+            var sidebarController = new SidebarController(Window.RootViewController, viewController, new UIViewController());
+            sidebarController.HasShadowing = false;
+            sidebarController.MenuWidth = 220;
+            sidebarController.MenuLocation = SidebarNavigation.MenuLocations.Left;
 
-			return view.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
-        }
-
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            base.ChangePresentation(hint);
-        }
-
-        public override void Close(IMvxViewModel toClose)
-        {
-            if (RootController.NavController == null)
-                return;
-
-            var mvxIosView = RootController.NavController.TopViewController as IMvxIosView;
-
-            if (mvxIosView == null || mvxIosView.ReflectionGetViewModel() != toClose)
-                return;
-
-            RootController.NavController.PopViewController(true);
-        }
-
-        public override bool PresentModalViewController(UIViewController viewController, bool animated)
-        {
-            var result = base.PresentModalViewController(viewController, animated);
-
-            // Add swipe-down gesture to all modal ViewControllers, since you expect, that you can move them downwards, the direction they came from.
-            var recognizer = new UISwipeGestureRecognizer(CloseModalViewController);
-            recognizer.Direction = UISwipeGestureRecognizerDirection.Down;
-            viewController.View.AddGestureRecognizer(recognizer);
-
-			var barButton = new UIBarButtonItem (UIImage.FromBundle ("threelines")
-				, UIBarButtonItemStyle.Plain
-				, (sender, args) => RootController.SidebarController.ToggleMenu ());
-
-			viewController.NavigationItem.LeftBarButtonItem = barButton;
-
-            return result;
-        }
-
-        public override void CloseModalViewController()
-        {
-            base.CloseModalViewController();
+            return sidebarController;
         }
     }
 }

@@ -9,7 +9,7 @@
             ExampleValue = "Center Panel";
 
             // show the other panels
-            ShowViewModel<LeftPanelViewModel>();
+            //ShowViewModel<LeftPanelViewModel>();
             //ShowViewModel<RightPanelViewModel>();
         }
 
