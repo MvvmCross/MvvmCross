@@ -1,4 +1,5 @@
 ﻿using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Support.XamarinSidebar;
 
 
 namespace MvvmCross.iOS.Support.iOS.Views
@@ -11,6 +12,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
     [Register("KeyboardHandlingView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxSidebarPresentation(MvxSidebarHintType.Detail)]
     public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>
     {
         /// <summary>

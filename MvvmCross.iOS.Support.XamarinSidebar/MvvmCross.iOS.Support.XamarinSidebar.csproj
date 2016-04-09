@@ -60,10 +60,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Hints\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxSideMenuPresenter.cs" />
+    <Compile Include="MvxSidebarPresentationAttribute.cs" />
+    <Compile Include="Hints\MvxSidebarBasePresentationHint.cs" />
+    <Compile Include="Hints\MvxSidebarMasterPresentationHint.cs" />
+    <Compile Include="Hints\MvxSidebarDetailPresentationHint.cs" />
+    <Compile Include="MvxSidebarHintType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

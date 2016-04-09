@@ -6,8 +6,8 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using System.Linq;
 using UIKit;
-using MvvmCross.iOS.Support.SidePanels;
 using SidebarNavigation;
+using MvvmCross.iOS.Support.XamarinSidebar.Hints;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
@@ -18,6 +18,18 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         public MvxSideMenuPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
+            AddPresentationHintHandler<MvxSidebarMasterPresentationHint>(PresentationHintHandler);
+            AddPresentationHintHandler<MvxSidebarDetailPresentationHint>(PresentationHintHandler);
+        }
+
+        private bool PresentationHintHandler(MvxSidebarBasePresentationHint hint)
+        {
+            if (hint == null)
+                return false;
+
+            hint.HandleNavigation();
+
+            return true;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -40,9 +52,18 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
 
             if (this.MasterNavigationController == null)
+            {
                 this.ShowFirstView(viewController);
+            }
             else
-                this.MasterNavigationController.PushViewController(viewController, true /*animated*/);
+            {
+                var viewPresentationAttribute = GetViewPresentationAttribute(view);
+                
+                if (viewPresentationAttribute.HintType == MvxSidebarHintType.Master)
+                    ChangePresentation(new MvxSidebarMasterPresentationHint(viewController, SidebarController));
+                else
+                    ChangePresentation(new MvxSidebarDetailPresentationHint(viewController, MasterNavigationController));
+            }
         }
 
         protected override void ShowFirstView(UIViewController viewController)
@@ -52,18 +73,31 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (SidebarController == null)
             {
                 SidebarController = CreateSidebarController(viewController);
-
-                viewController.NavigationItem.SetLeftBarButtonItem(
-                    new UIBarButtonItem(UIImage.FromBundle("threelines")
-                        , UIBarButtonItemStyle.Plain
-                        , (sender, args) => SidebarController.ToggleMenu ()), true);
             }
+
+            AddSidebarToggle(viewController);
         }
+
+        protected virtual void AddSidebarToggle(UIViewController viewController)
+        {
+            viewController.NavigationItem.SetLeftBarButtonItem(
+                new UIBarButtonItem(UIImage.FromBundle("threelines")
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => SidebarController.ToggleMenu ()), true);
+        }
+ 
+        private MvxSidebarPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
+        {
+            if (view == null)
+                return default(MvxSidebarPresentationAttribute);
+
+            return view.GetType().GetCustomAttributes(typeof(MvxSidebarPresentationAttribute), true).FirstOrDefault() as MvxSidebarPresentationAttribute;
+        }       
 
         private SidebarController CreateSidebarController(UIViewController viewController)
         {
             var sidebarController = new SidebarController(Window.RootViewController, viewController, new UIViewController());
-            sidebarController.HasShadowing = false;
+            sidebarController.HasShadowing = true;
             sidebarController.MenuWidth = 220;
             sidebarController.MenuLocation = SidebarNavigation.MenuLocations.Left;
 

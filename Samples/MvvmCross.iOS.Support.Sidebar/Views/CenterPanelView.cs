@@ -1,4 +1,5 @@
 ﻿using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Support.XamarinSidebar;
 
 
 namespace MvvmCross.iOS.Support.iOS.Views
@@ -10,7 +11,8 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using UIKit;
 
     [Register("CenterPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.PopToRoot, true)]
+    [MvxSidebarPresentation(MvxSidebarHintType.Master)]
     public class CenterPanelView : BaseViewController<CenterPanelViewModel>
     {
         /// <summary>
