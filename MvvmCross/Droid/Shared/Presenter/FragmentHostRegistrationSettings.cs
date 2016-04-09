@@ -16,7 +16,7 @@ namespace MvvmCross.Droid.Shared.Presenter
         private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
-        private readonly Dictionary<Type, SortedSet<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
+        private readonly Dictionary<Type, IList<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
         private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
 
         private bool isInitialized;
@@ -25,7 +25,7 @@ namespace MvvmCross.Droid.Shared.Presenter
         {
             _assembliesToLookup = assembliesToLookup;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-            _fragmentTypeToMvxFragmentAttributeMap = new Dictionary<Type, SortedSet<MvxFragmentAttribute>>();
+            _fragmentTypeToMvxFragmentAttributeMap = new Dictionary<Type, IList<MvxFragmentAttribute>>();
         }
 
         private void InitializeIfNeeded()
@@ -47,7 +47,7 @@ namespace MvvmCross.Droid.Shared.Presenter
                 foreach (var typeWithMvxFragmentAttribute in typesWithMvxFragmentAttribute)
                 {
                     if (!_fragmentTypeToMvxFragmentAttributeMap.ContainsKey(typeWithMvxFragmentAttribute))
-                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new SortedSet<MvxFragmentAttribute>());
+                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxFragmentAttribute>());
 
                     foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetMvxFragmentAttributes())
                         _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
@@ -112,7 +112,7 @@ namespace MvvmCross.Droid.Shared.Presenter
             return _viewModelToFragmentTypeMap[viewModelType];
         }
 
-        private SortedSet<MvxFragmentAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
+        private IList<MvxFragmentAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
         {
             var fragmentTypeAssociatedWithViewModel = GetFragmentTypeAssociatedWith(withFragmentViewModelType);
             return _fragmentTypeToMvxFragmentAttributeMap[fragmentTypeAssociatedWithViewModel];
