@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Droid.Shared.Presenter
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
         private readonly Dictionary<Type, SortedSet<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
-        private Dictionary<Type, Type> _viewModelToFragmentMap;
+        private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
 
         private bool isInitialized;
 
@@ -52,7 +53,7 @@ namespace MvvmCross.Droid.Shared.Presenter
                         _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
                 }
 
-                _viewModelToFragmentMap =
+                _viewModelToFragmentTypeMap =
                     typesWithMvxFragmentAttribute.ToDictionary(GetAssociatedViewModelType, fragmentType => fragmentType);
             }
         }
@@ -68,7 +69,7 @@ namespace MvvmCross.Droid.Shared.Presenter
         {
             InitializeIfNeeded();
 
-            return _viewModelToFragmentMap.ContainsKey(viewModelType);
+            return _viewModelToFragmentTypeMap.ContainsKey(viewModelType);
         }
 
         public bool IsActualHostValid(Type forViewModelType)
@@ -76,6 +77,11 @@ namespace MvvmCross.Droid.Shared.Presenter
             InitializeIfNeeded();
 
             var activityViewModelType = GetCurrentActivityViewModelType();
+
+            // for example: MvxSplashScreen usually does not have associated ViewModel
+            // it is for sure not valid host - and it can not be used with Fragment Presenter.
+            if (activityViewModelType == typeof(MvxNullViewModel))
+                return false;
 
             return
                 GetMvxFragmentAssociatedAttributes(forViewModelType)
@@ -88,10 +94,6 @@ namespace MvvmCross.Droid.Shared.Presenter
             Type currentActivityType = currentActivity.GetType();
 
             var activityViewModelType = _viewModelTypeFinder.FindTypeOrNull(currentActivityType);
-
-            if (activityViewModelType == null)
-                throw new InvalidOperationException($"Sorry but looks like your Activity ({currentActivityType.ToString()}) does not inherit from MvvmCross Activity - Viewmodel Type is null!");
-
             return activityViewModelType;
         }
 
@@ -99,18 +101,22 @@ namespace MvvmCross.Droid.Shared.Presenter
         {
             InitializeIfNeeded();
 
-            return GetMvxFragmentAssociatedAttributes(forViewModelType).First().ParentActivityViewModelType;
+            var associatedMvxFragmentAttributes = GetMvxFragmentAssociatedAttributes(forViewModelType).ToList();
+            return associatedMvxFragmentAttributes.First().ParentActivityViewModelType;
         }
 
         public Type GetFragmentTypeAssociatedWith(Type viewModelType)
         {
             InitializeIfNeeded();
 
-            return _viewModelToFragmentMap[viewModelType];
+            return _viewModelToFragmentTypeMap[viewModelType];
         }
 
         private SortedSet<MvxFragmentAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
-            => _fragmentTypeToMvxFragmentAttributeMap[withFragmentViewModelType];
+        {
+            var fragmentTypeAssociatedWithViewModel = GetFragmentTypeAssociatedWith(withFragmentViewModelType);
+            return _fragmentTypeToMvxFragmentAttributeMap[fragmentTypeAssociatedWithViewModel];
+        }
 
         public MvxFragmentAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
         {

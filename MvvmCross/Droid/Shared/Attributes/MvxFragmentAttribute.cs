@@ -12,7 +12,7 @@ namespace MvvmCross.Droid.Shared.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentAttribute : Attribute
     {
-        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false, int attributePriorityOrder = 0)
+        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false)
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
