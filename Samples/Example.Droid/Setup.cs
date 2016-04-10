@@ -4,9 +4,11 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Example.Droid
 {
