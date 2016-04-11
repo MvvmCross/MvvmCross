@@ -6,7 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Shared.Attributes
 {
@@ -18,23 +22,47 @@ namespace MvvmCross.Droid.Shared.Attributes
             return attributes.Length > 0;
         }
 
-        public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType)
+        public static IEnumerable<MvxFragmentAttribute> GetMvxFragmentAttributes(this Type fromFragmentType)
         {
             var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxFragmentAttribute), true);
 
             if (!attributes.Any())
                 throw new InvalidOperationException($"Type does not have {nameof(MvxFragmentAttribute)} attribute!");
 
-            var cacheableFragmentAttribute = attributes.First() as MvxFragmentAttribute;
-            return cacheableFragmentAttribute;
+            return attributes.Cast<MvxFragmentAttribute>();
         }
 
-        public static bool IsFragmentCacheable(this Type fragmentType)
+        public static MvxFragmentAttribute GetMvxFragmentAttribute(this Type fromFragmentType,
+            Type fragmentActivityParentType)
+        {
+            var mvxFragmentAttributes = fromFragmentType.GetMvxFragmentAttributes();
+            var activityViewModelType = GetActivityViewModelType(fragmentActivityParentType);
+            var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
+
+            if (mvxFragmentAttribute == null)
+                throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityParentType}");
+
+            return mvxFragmentAttribute;
+        }
+
+        private static Type GetActivityViewModelType(Type activityType)
+        {
+            IMvxViewModelTypeFinder associatedTypeFinder;
+            if (!Mvx.TryResolve(out associatedTypeFinder))
+            {
+                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+                return typeof(MvxNullViewModel);
+            }
+
+            return associatedTypeFinder.FindTypeOrNull(activityType);
+        }
+
+        public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
         {
             if (!fragmentType.HasMvxFragmentAttribute())
                 return false;
 
-            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
+            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute(fragmentActivityParentType);
             return mvxFragmentAttribute.IsCacheableFragment;
         }
 
@@ -43,8 +71,9 @@ namespace MvvmCross.Droid.Shared.Attributes
             if (!fragmentType.HasMvxFragmentAttribute())
                 return null;
 
-            var mvxFragmentAttribute = fragmentType.GetMvxFragmentAttribute();
-            return mvxFragmentAttribute.ViewModelType;
+            return fragmentType.GetMvxFragmentAttributes()
+                .Select(x => x.ViewModelType)
+                .First();
         }
     }
 }

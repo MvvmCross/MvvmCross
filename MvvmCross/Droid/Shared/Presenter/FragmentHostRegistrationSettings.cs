@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
@@ -15,8 +16,8 @@ namespace MvvmCross.Droid.Shared.Presenter
         private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
-        private Dictionary<Type, MvxFragmentAttribute> _fragmentTypeToMvxFragmentAttributeMap;
-        private Dictionary<Type, Type> _viewModelToFragmentMap;
+        private readonly Dictionary<Type, IList<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
+        private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
 
         private bool isInitialized;
 
@@ -24,6 +25,7 @@ namespace MvvmCross.Droid.Shared.Presenter
         {
             _assembliesToLookup = assembliesToLookup;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+            _fragmentTypeToMvxFragmentAttributeMap = new Dictionary<Type, IList<MvxFragmentAttribute>>();
         }
 
         private void InitializeIfNeeded()
@@ -42,8 +44,16 @@ namespace MvvmCross.Droid.Shared.Presenter
                         .Where(x => x.HasMvxFragmentAttribute())
                         .ToList();
 
-                _fragmentTypeToMvxFragmentAttributeMap = typesWithMvxFragmentAttribute.ToDictionary(key => key, key => key.GetMvxFragmentAttribute());
-                _viewModelToFragmentMap =
+                foreach (var typeWithMvxFragmentAttribute in typesWithMvxFragmentAttribute)
+                {
+                    if (!_fragmentTypeToMvxFragmentAttributeMap.ContainsKey(typeWithMvxFragmentAttribute))
+                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxFragmentAttribute>());
+
+                    foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetMvxFragmentAttributes())
+                        _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
+                }
+
+                _viewModelToFragmentTypeMap =
                     typesWithMvxFragmentAttribute.ToDictionary(GetAssociatedViewModelType, fragmentType => fragmentType);
             }
         }
@@ -52,47 +62,71 @@ namespace MvvmCross.Droid.Shared.Presenter
         {
             Type viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
 
-            return viewModelType ?? fromFragmentType.GetMvxFragmentAttribute().ViewModelType;
+            return viewModelType ?? fromFragmentType.GetMvxFragmentAttributes().First().ViewModelType;
         }
 
         public bool IsTypeRegisteredAsFragment(Type viewModelType)
         {
             InitializeIfNeeded();
 
-            return _viewModelToFragmentMap.ContainsKey(viewModelType);
+            return _viewModelToFragmentTypeMap.ContainsKey(viewModelType);
         }
 
         public bool IsActualHostValid(Type forViewModelType)
         {
             InitializeIfNeeded();
 
+            var activityViewModelType = GetCurrentActivityViewModelType();
+
+            // for example: MvxSplashScreen usually does not have associated ViewModel
+            // it is for sure not valid host - and it can not be used with Fragment Presenter.
+            if (activityViewModelType == typeof(MvxNullViewModel))
+                return false;
+
+            return
+                GetMvxFragmentAssociatedAttributes(forViewModelType)
+                    .Any(x => x.ParentActivityViewModelType == activityViewModelType);
+        }
+
+        private Type GetCurrentActivityViewModelType()
+        {
             Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
             Type currentActivityType = currentActivity.GetType();
 
             var activityViewModelType = _viewModelTypeFinder.FindTypeOrNull(currentActivityType);
-
-            if (activityViewModelType == null)
-                throw new InvalidOperationException($"Sorry but looks like your Activity ({currentActivityType.ToString()}) does not inherit from MvvmCross Activity - Viewmodel Type is null!");
-
-            return GetMvxFragmentAttributeAssociated(forViewModelType).ParentActivityViewModelType == activityViewModelType;
+            return activityViewModelType;
         }
 
         public Type GetFragmentHostViewModelType(Type forViewModelType)
         {
             InitializeIfNeeded();
 
-            return GetMvxFragmentAttributeAssociated(forViewModelType).ParentActivityViewModelType;
+            var associatedMvxFragmentAttributes = GetMvxFragmentAssociatedAttributes(forViewModelType).ToList();
+            return associatedMvxFragmentAttributes.First().ParentActivityViewModelType;
         }
 
         public Type GetFragmentTypeAssociatedWith(Type viewModelType)
         {
-            return _viewModelToFragmentMap[viewModelType];
+            InitializeIfNeeded();
+
+            return _viewModelToFragmentTypeMap[viewModelType];
         }
 
-        public MvxFragmentAttribute GetMvxFragmentAttributeAssociated(Type withFragmentForViewModelType)
+        private IList<MvxFragmentAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
         {
-            var fragmentType = GetFragmentTypeAssociatedWith(withFragmentForViewModelType);
-            return _fragmentTypeToMvxFragmentAttributeMap[fragmentType];
+            var fragmentTypeAssociatedWithViewModel = GetFragmentTypeAssociatedWith(withFragmentViewModelType);
+            return _fragmentTypeToMvxFragmentAttributeMap[fragmentTypeAssociatedWithViewModel];
+        }
+
+        public MvxFragmentAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
+        {
+            InitializeIfNeeded();
+
+            var currentActivityViewModelType = GetCurrentActivityViewModelType();
+
+            return
+                GetMvxFragmentAssociatedAttributes(fragmentViewModelType)
+                    .Single(x => x.ParentActivityViewModelType == currentActivityViewModelType);
         }
     }
 }

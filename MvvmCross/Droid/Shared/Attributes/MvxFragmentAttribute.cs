@@ -9,7 +9,7 @@ using System;
 
 namespace MvvmCross.Droid.Shared.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentAttribute : Attribute
     {
         public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false)
