@@ -39,10 +39,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         {
             FragmentView.EnsureSetupInitialized();
 
-            if (!FragmentView.GetType().IsFragmentCacheable())
+            // Create is called after Fragment is attached to Activity
+            // it's safe to assume that Fragment has activity
+            if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
                 return;
 
-            FragmentView.RegisterFragmentViewToCacheIfNeeded();
+            FragmentView.RegisterFragmentViewToCacheIfNeeded(Fragment.Activity.GetType());
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
@@ -97,7 +99,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            if (!FragmentView.GetType().IsFragmentCacheable())
+            // it is guarannted that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
+            // it is safe to assume that Fragment has activity attached
+
+            if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
                 return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
