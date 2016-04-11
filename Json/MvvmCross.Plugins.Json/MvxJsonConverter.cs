@@ -5,14 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Platform;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Json
 {
-    public class MvxJsonConverter : IMvxJsonConverter
+    public class MvxJsonConverter 
+        : IMvxJsonConverter
     {
         private static readonly JsonSerializerSettings Settings;
 
@@ -20,11 +22,11 @@ namespace MvvmCross.Plugins.Json
         {
             Settings = new JsonSerializerSettings
             {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 Converters = new List<JsonConverter>
-                        {
-                            new MvxEnumJsonConverter()
-                        },
+                {
+                    new MvxEnumJsonConverter()
+                },
                 DateFormatHandling = DateFormatHandling.IsoDateFormat
             };
         }
@@ -42,6 +44,17 @@ namespace MvvmCross.Plugins.Json
         public object DeserializeObject(Type type, string inputText)
         {
             return JsonConvert.DeserializeObject(inputText, type, Settings);
+        }
+
+        public T DeserializeObject<T>(Stream stream)
+        {
+            var serializer = new JsonSerializer();
+
+            using (var sr = new StreamReader(stream))
+            using (var jsonTextReader = new JsonTextReader(sr))
+            {
+                return serializer.Deserialize<T>(jsonTextReader);
+            }
         }
     }
 }
