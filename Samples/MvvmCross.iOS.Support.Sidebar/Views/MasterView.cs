@@ -11,7 +11,6 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
     [Register("MasterView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.PopToRoot, true, MvxSplitViewBehaviour.Master)]
-    [MvxSidebarPresentation(MvxSidebarHintType.Master)]
     public class MasterView : BaseViewController<MasterViewModel>
     {
         /// <summary>

@@ -12,7 +12,6 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
     [Register("DetailView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
-    [MvxSidebarPresentation(MvxSidebarHintType.Detail)]
     public class DetailView : BaseViewController<DetailViewModel>
     {
         /// <summary>

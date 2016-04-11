@@ -75,6 +75,7 @@
     <Compile Include="SidePanels\MvxSplitViewControllerHost.cs" />
     <Compile Include="SidePanels\MvxPanelPushViewPresentationHint.cs" />
     <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
+    <Compile Include="SidePanels\MvxPanelPresentationHint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
