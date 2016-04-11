@@ -5,7 +5,10 @@ xmlns:local="http://schemas.android.com/apk/res-auto">
     <group android:id="@+id/nav_items">
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />        
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_second_home"
+            android:title="Second host home" />
     </group>
 
     <item android:title="Examples">

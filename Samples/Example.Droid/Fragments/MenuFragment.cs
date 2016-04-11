@@ -53,6 +53,9 @@ namespace Example.Droid.Fragments
             case Resource.Id.nav_home:
                 ViewModel.ShowViewModelAndroid(typeof(HomeViewModel));
                 break;
+			case Resource.Id.nav_second_home:
+				ViewModel.ShowViewModelAndroid(typeof(SecondHostViewModel));
+				break;
             case Resource.Id.nav_viewpager:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
                 break;

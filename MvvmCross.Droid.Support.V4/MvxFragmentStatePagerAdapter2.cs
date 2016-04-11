@@ -10,6 +10,7 @@ using MvvmCross.Core.ViewModels;
 using Java.Lang;
 using String = Java.Lang.String;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -52,7 +53,7 @@ namespace MvvmCross.Droid.Support.V4
             if (mvxFragment == null)
                 return fragment;
 
-            if (mvxFragment.GetType().IsFragmentCacheable() && fragmentSavedState != null)
+			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
                 return fragment;
 
             var viewModel = CreateViewModel(position);

@@ -128,6 +128,8 @@
     <Compile Include="Fragments\ExampleRecyclerViewFragment.cs" />
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
+    <Compile Include="Activities\SecondHostActivity.cs" />
+    <Compile Include="Activities\INavigationActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

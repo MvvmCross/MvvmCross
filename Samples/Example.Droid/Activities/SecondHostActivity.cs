@@ -15,9 +15,9 @@ namespace Example.Droid.Activities
         Label = "Examples",
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
-        Name = "example.droid.activities.MainActivity"
+		Name = "example.droid.activities.SecondHostActivity"
         )]
-	public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, INavigationActivity
+	public class SecondHostActivity : MvxCachingFragmentCompatActivity<SecondHostViewModel>, INavigationActivity
     {
 		public DrawerLayout DrawerLayout { get; set; }
 
