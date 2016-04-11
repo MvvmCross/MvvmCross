@@ -7,6 +7,7 @@
 
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Plugins.File.WindowsCommon;
 
 namespace MvvmCross.Plugins.File.WindowsStore
 {
@@ -15,8 +16,8 @@ namespace MvvmCross.Plugins.File.WindowsStore
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxFileStore, MvxWindowsStoreFileStore>();
-            Mvx.RegisterType<IMvxFileStoreAsync, MvxWindowsStoreFileStore>();
+            Mvx.RegisterType<IMvxFileStore, MvxWindowsCommonFileStore>();
+            Mvx.RegisterType<IMvxFileStoreAsync, MvxWindowsCommonFileStore>();
         }
     }
 }
