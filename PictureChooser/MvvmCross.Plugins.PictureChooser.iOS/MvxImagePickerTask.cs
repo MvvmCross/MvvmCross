@@ -27,7 +27,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         private bool _currentlyActive;
         private int _maxPixelDimension;
         private int _percentQuality;
-        private Action<Stream> _pictureAvailable;
+        private Action<Stream, string> _pictureAvailable;
         private Action _assumeCancelled;
 
         public MvxImagePickerTask()
@@ -43,18 +43,24 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             _picker.Canceled += Picker_Canceled;
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
+                                     Action assumeCancelled)
         {
             _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                             Action assumeCancelled)
+        {
+            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                 Action assumeCancelled)
         {
             _picker.SourceType = UIImagePickerControllerSourceType.Camera;
-            ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            ChoosePictureCommon(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -76,7 +82,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         }
 
         private void ChoosePictureCommon(int maxPixelDimension, int percentQuality,
-                                         Action<Stream> pictureAvailable, Action assumeCancelled)
+                                         Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             SetCurrentlyActive();
             _maxPixelDimension = maxPixelDimension;
@@ -87,7 +93,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             _modalHost.PresentModalViewController(_picker, true);
         }
 
-        private void HandleImagePick(UIImage image)
+        private void HandleImagePick(UIImage image, string name)
         {
             ClearCurrentlyActive();
             if (image != null)
@@ -104,7 +110,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
 
                     var imageStream = new MemoryStream(byteArray, false);
-                    _pictureAvailable?.Invoke(imageStream);
+                    _pictureAvailable?.Invoke(imageStream, name);
                 }
             }
             else
@@ -119,14 +125,16 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
+            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
             var image = e.EditedImage ?? e.OriginalImage;
-            HandleImagePick(image);
+            HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
+            NSUrl referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
             var image = e.Image;
-            HandleImagePick(image);
+            HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_Canceled(object sender, EventArgs e)

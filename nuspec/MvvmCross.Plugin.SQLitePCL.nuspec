@@ -74,7 +74,7 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.pdb" target="lib\portable-win+net45+wp8+win8+wpa81+win81+dotnet\MvvmCross.Plugins.Sqlite.pdb" />
 
-		<!-- UAP -->
+    <!-- UAP -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.dll" />
 		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" target="lib\uap10.0\MvvmCross.Plugins.Sqlite.WindowsUWP.pdb" />
@@ -94,7 +94,12 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" target="lib\wpa81\MvvmCross.Plugins.Sqlite.WindowsCommon.dll" />
 		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 
-		<!-- droid -->
+    <!-- windows phone -->
+    <file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.*" target="lib\wp8" />
+    <file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Sqlite.WindowsPhone.*" target="lib\wp8" />
+    <file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SqlitePclPluginBootstrap.cs.pp" />
+
+    <!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Sqlite.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.dll" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Sqlite.Droid.dll" target="lib\MonoAndroid\MvvmCross.Plugins.Sqlite.Droid.dll" />
 		<file src="BootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\SqlitePluginBootstrap.cs.pp" />
