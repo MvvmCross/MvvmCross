@@ -40,16 +40,12 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			ReplaceFragmentAndViewModel
 		}
 
-		protected MvxCachingFragmentActivity()
-		{
-		}
+        protected MvxCachingFragmentActivity()
+        {}
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{
-			BindingContext = new MvxAndroidBindingContext(this, this);
-			this.AddEventListeners();
-		}
+		{}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{
@@ -319,7 +315,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			return currentFragments
 				.Where(fragment => fragment != null)
 				// we are not interested in fragments which are not supposed to cache!
-				.Where(fragment => fragment.GetType().IsFragmentCacheable());
+				.Where(fragment => fragment.GetType().IsFragmentCacheable(GetType()));
 		}
 
 		protected virtual IMvxCachedFragmentInfo GetLastFragmentInfo()
