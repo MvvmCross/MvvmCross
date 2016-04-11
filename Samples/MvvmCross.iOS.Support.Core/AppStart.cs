@@ -12,6 +12,7 @@
         public void Start(object hint = null)
         {
             ShowViewModel<CenterPanelViewModel>();
+            ShowViewModel<LeftPanelViewModel>();
         }
     }
 }

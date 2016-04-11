@@ -24,30 +24,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 
             SidebarController.ChangeContentView(ViewController);
 
-            //if(Panel == MvxPanelEnum.Left || Panel == MvxPanelEnum.Right)
-                ShowSidebarToggle();
-
             return true;
-        }
-
-        protected virtual void ShowSidebarToggle()
-        {
-            var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
-                , UIBarButtonItemStyle.Plain
-                , (sender, args) => SidebarController.ToggleMenu());
-             
-            var navigationItem = ViewController.NavigationItem;
-
-            if (Panel == MvxPanelEnum.Left)
-            {
-                SidebarController.MenuLocation = MenuLocations.Left;
-                ViewController.NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
-            }
-            else
-            {
-                SidebarController.MenuLocation = MenuLocations.Right;    
-                ViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
-            }
         }
     }
 }

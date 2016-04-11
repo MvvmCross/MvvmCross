@@ -69,7 +69,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                     break;
 				case MvxPanelHintType.ActivePanel:
                     default:
-					ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, MasterNavigationController, viewController));
+                    ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, MasterNavigationController, SidebarController, viewController));
                     break;
             }
 		}
@@ -99,7 +99,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
         private SidebarController CreateSidebarController(UIViewController viewController)
         {
-            var sidebarController = new SidebarController(Window.RootViewController, viewController, new UIViewController());
+            var menuViewController = new UIViewController();
+
+            var sidebarController = new SidebarController(Window.RootViewController, viewController, menuViewController);
             sidebarController.HasShadowing = true;
             sidebarController.MenuWidth = 220;
 
