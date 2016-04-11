@@ -45,6 +45,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ExampleViewPagerViewModel.cs" />
     <Compile Include="ViewModels\ExampleRecyclerViewModel.cs" />
+    <Compile Include="ViewModels\SecondHostViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
