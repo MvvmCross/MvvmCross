@@ -27,7 +27,6 @@ namespace MvvmCross.Plugins.Json
 
             _loaded = true;
             Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
-            Mvx.RegisterType<IMvxJsonConverterEx, MvxJsonConverter>();
             var configuration = _configuration ?? MvxJsonConfiguration.Default;
 
             if (configuration.RegisterAsTextSerializer)

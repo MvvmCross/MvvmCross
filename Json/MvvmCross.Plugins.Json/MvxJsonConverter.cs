@@ -14,7 +14,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Plugins.Json
 {
     public class MvxJsonConverter 
-        : IMvxJsonConverterEx
+        : IMvxJsonConverter
     {
         private static readonly JsonSerializerSettings Settings;
 
