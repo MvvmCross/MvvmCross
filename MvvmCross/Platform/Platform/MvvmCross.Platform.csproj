@@ -52,6 +52,7 @@
     <Compile Include="IoC\MvxPropertyInjection.cs" />
     <Compile Include="IoC\MvxPropertyInjectorOptions.cs" />
     <Compile Include="IoC\MvxPropertyInjector.cs" />
+    <Compile Include="Platform\IMvxJsonConverterEx.cs" />
     <Compile Include="Platform\IMvxNamedInstanceRegistry.cs" />
     <Compile Include="Converters\IMvxValueConverterRegistry.cs" />
     <Compile Include="Converters\MvxValueConverter.cs" />
