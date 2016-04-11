@@ -15,9 +15,9 @@ namespace Example.Droid.Fragments
         private Toolbar _toolbar;
         private MvxActionBarDrawerToggle _drawerToggle;
 
-		public MainActivity ParentActivity { 
+		public MvxCachingFragmentCompatActivity ParentActivity { 
 			get {
-				return ((MainActivity)Activity);
+				return ((MvxCachingFragmentCompatActivity)Activity);
 			}
 		}
 
@@ -40,13 +40,13 @@ namespace Example.Droid.Fragments
 
 				_drawerToggle = new MvxActionBarDrawerToggle(
 					Activity,                               // host Activity
-					ParentActivity.DrawerLayout,  // DrawerLayout object
+					(ParentActivity as INavigationActivity).DrawerLayout,  // DrawerLayout object
 					_toolbar,                               // nav drawer icon to replace 'Up' caret
 					Resource.String.drawer_open,            // "open drawer" description
 					Resource.String.drawer_close            // "close drawer" description
 				);
 				_drawerToggle.DrawerOpened += (object sender, ActionBarDrawerEventArgs e) => ((MainActivity)Activity).HideSoftKeyboard ();
-				ParentActivity.DrawerLayout.AddDrawerListener(_drawerToggle);
+				(ParentActivity as INavigationActivity).DrawerLayout.AddDrawerListener(_drawerToggle);
 			}
 
 			return view;

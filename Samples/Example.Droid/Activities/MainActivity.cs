@@ -17,9 +17,9 @@ namespace Example.Droid.Activities
         LaunchMode = LaunchMode.SingleTop,
         Name = "example.droid.activities.MainActivity"
         )]
-    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
+	public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, INavigationActivity
     {
-        public DrawerLayout DrawerLayout;
+		public DrawerLayout DrawerLayout { get; set; }
 
         protected override void OnCreate(Bundle bundle)
         {

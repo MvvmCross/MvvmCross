@@ -17,9 +17,9 @@ namespace Example.Droid.Activities
         LaunchMode = LaunchMode.SingleTop,
 		Name = "example.droid.activities.SecondHostActivity"
         )]
-	public class SecondHostActivity : MvxCachingFragmentCompatActivity<SecondHostViewModel>
+	public class SecondHostActivity : MvxCachingFragmentCompatActivity<SecondHostViewModel>, INavigationActivity
     {
-        public DrawerLayout DrawerLayout;
+		public DrawerLayout DrawerLayout { get; set; }
 
         protected override void OnCreate(Bundle bundle)
         {
