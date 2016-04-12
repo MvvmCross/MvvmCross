@@ -46,19 +46,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
                 , UIBarButtonItemStyle.Plain
                 , (sender, args) => SidebarController.ToggleMenu());
 
-            var navigationItem = SidebarController.ChildViewControllers[0].NavigationItem;
+            UINavigationItem navigationItem = null;
+
+            if(SidebarController.ChildViewControllers.Length > 0)
+                navigationItem = SidebarController.ChildViewControllers[0].NavigationItem;
 
             SidebarController.ChangeMenuView(ViewController);
 
             if (Panel == MvxPanelEnum.Left)
             {
                 SidebarController.MenuLocation = MenuLocations.Left;
-                navigationItem.SetLeftBarButtonItem(barButtonItem, true);
+                navigationItem?.SetLeftBarButtonItem(barButtonItem, true);
             }
             else
             {
                 SidebarController.MenuLocation = MenuLocations.Right;    
-                navigationItem.SetRightBarButtonItem(barButtonItem, true);
+                navigationItem?.SetRightBarButtonItem(barButtonItem, true);
             }
         }
     }
