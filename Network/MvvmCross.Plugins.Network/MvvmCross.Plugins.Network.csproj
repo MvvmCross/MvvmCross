@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Reachability\IMvxReachability.cs" />
+    <Compile Include="Rest\IMvxAbortable.cs" />
     <Compile Include="Rest\IMvxJsonRestClient.cs" />
     <Compile Include="Rest\IMvxRestClient.cs" />
     <Compile Include="Rest\MvxContentType.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Rest\MvxMultiPartFormRestRequest.cs" />
     <Compile Include="Rest\MvxRestClient.cs" />
     <Compile Include="Rest\MvxRestRequest.cs" />
+    <Compile Include="Rest\MvxRestRequestAsyncHandle.cs" />
     <Compile Include="Rest\MvxRestResponse.cs" />
     <Compile Include="Rest\MvxStreamRestRequest.cs" />
     <Compile Include="Rest\MvxStreamRestResponse.cs" />

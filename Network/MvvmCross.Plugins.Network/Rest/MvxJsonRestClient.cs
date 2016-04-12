@@ -20,6 +20,26 @@ namespace MvvmCross.Plugins.Network.Rest
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
+        public IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
+        {
+            return MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) =>
+            {
+                using (var textReader = new StreamReader(streamResponse.Stream))
+                {
+                    var text = textReader.ReadToEnd();
+                    var result = JsonConverterProvider().DeserializeObject<T>(text);
+                    var decodedResponse = new MvxDecodedRestResponse<T>
+                    {
+                        CookieCollection = streamResponse.CookieCollection,
+                        Result = result,
+                        StatusCode = streamResponse.StatusCode,
+                        Tag = streamResponse.Tag
+                    };
+                    successAction?.Invoke(decodedResponse);
+                }
+            }, errorAction);
+        }
+
         public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
             var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
