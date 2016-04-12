@@ -1,4 +1,6 @@
 ﻿using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Support.XamarinSidebar;
+
 
 namespace MvvmCross.iOS.Support.iOS.Views
 {
