@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {

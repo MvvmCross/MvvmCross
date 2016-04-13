@@ -9,7 +9,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Droid.FullFragging.Fragments
+namespace MvvmCross.Droid.Shared.Fragments
 {
     public interface IMvxFragmentView
         : IMvxBindingContextOwner
