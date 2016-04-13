@@ -13,7 +13,7 @@ namespace MvvmCross.Core.ViewModels
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
-
+    using MvvmCross.Platform;
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
@@ -32,6 +32,25 @@ namespace MvvmCross.Core.ViewModels
                 return viewDispatcher.ChangePresentation(hint);
 
             return false;
+        }
+
+		/// <summary>
+		///     ShowViewModel with non-primitive type object using json to pass object to the next ViewModel
+		/// 	Be aware that pasing big objects will block your UI, and should be handled async by yourself
+		/// </summary>
+		/// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
+        protected bool ShowViewModel<TViewModel, TInit>(TInit parameter) where TViewModel : MvxViewModel<TInit>
+        {
+            IMvxJsonConverter serializer;
+            if (!Mvx.TryResolve(out serializer))
+            {
+                Mvx.Trace(
+                    "Could not resolve IMvxJsonConverter, it is going to be hard to initialize with custom object");
+                return false;
+            }
+
+            var json = serializer.SerializeObject(parameter);
+            return this.ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } });
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject,

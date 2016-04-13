@@ -48,10 +48,12 @@
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
     <Compile Include="Target\MvxUIControlTouchUpInsideTargetBinding.cs" />
+    <Compile Include="Target\MvxUIControlValueChangedTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
     <Compile Include="Target\MvxUILabelTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISearchBarTextTargetBinding.cs" />
+    <Compile Include="Target\MvxUIStepperValueTargetBinding.cs" />
     <Compile Include="Target\MvxUITextFieldShouldReturnTargetBinding.cs" />
     <Compile Include="Target\MvxUITextFieldTextFocusTargetBinding.cs" />
     <Compile Include="Target\MvxUITextViewTextTargetBinding.cs" />
@@ -65,7 +67,9 @@
     <Compile Include="ValueConverters\MvxUnifiedTypesValueConverter.cs" />
     <Compile Include="Views\Gestures\MvxBehaviourExtensions.cs" />
     <Compile Include="Views\Gestures\MvxGestureRecognizerBehavior.cs" />
+    <Compile Include="Views\Gestures\MvxSwipeGestureRecognizerBehaviour.cs" />
     <Compile Include="Views\Gestures\MvxTapGestureRecognizerBehaviour.cs" />
+    <Compile Include="Views\MvxCollectionReusableView.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Views\MvxImageViewWrapper.cs" />
     <Compile Include="Views\MvxBaseTableViewSource.cs" />
