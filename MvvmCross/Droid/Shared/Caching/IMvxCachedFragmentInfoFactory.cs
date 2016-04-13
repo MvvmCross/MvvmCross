@@ -1,6 +1,6 @@
 using System;
 
-namespace MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.Shared.Caching
 {
     // ok so now first quick note from @thefex
     // Why does this interface exists and what it is for?

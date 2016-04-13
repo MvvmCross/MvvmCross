@@ -5,9 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.IO;
+
 namespace MvvmCross.Platform.Platform
 {
     public interface IMvxJsonConverter : IMvxTextSerializer
     {
+		T DeserializeObject<T>(Stream stream);
     }
 }

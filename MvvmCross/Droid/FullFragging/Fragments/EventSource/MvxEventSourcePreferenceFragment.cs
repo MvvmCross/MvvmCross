@@ -5,6 +5,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Preferences;
 using MvvmCross.Platform.Core;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {

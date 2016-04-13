@@ -1,7 +1,7 @@
+using MvvmCross.Droid.Shared.Fragments;
 using System;
-using Android.App;
 
-namespace MvvmCross.Droid.FullFragging.Caching
+namespace MvvmCross.Droid.Shared.Caching
 {
     public class MvxCachedFragmentInfo : IMvxCachedFragmentInfo
     {
@@ -17,7 +17,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
         public string Tag { get; set; }
         public Type FragmentType { get; set; }
         public Type ViewModelType { get; set; }
-        public Fragment CachedFragment { get; set; }
+        public IMvxFragmentView CachedFragment { get; set; }
         public bool CacheFragment { get; set; }
         public int ContentId { get; set; }
         public bool AddToBackStack { get; set; }
