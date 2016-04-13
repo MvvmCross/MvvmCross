@@ -5,6 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using System.Threading.Tasks;
+
 namespace MvvmCross.Core.ViewModels
 {
     public abstract class MvxViewModel
@@ -48,5 +52,24 @@ namespace MvvmCross.Core.ViewModels
         protected virtual void SaveStateToBundle(IMvxBundle bundle)
         {
         }
+    }
+
+    public abstract class MvxViewModel<TInit> : MvxViewModel
+    {
+        public async Task Init(string parameter)
+        {
+            IMvxJsonConverter serializer;
+            if (!Mvx.TryResolve(out serializer))
+            {
+                Mvx.Trace(
+                    "Could not resolve IMvxJsonConverter, it is going to be hard to initialize with custom object");
+                return;
+            }
+
+            var deserialized = serializer.DeserializeObject<TInit>(parameter);
+            await Init(deserialized);
+        }
+
+        protected abstract Task Init(TInit parameter);
     }
 }

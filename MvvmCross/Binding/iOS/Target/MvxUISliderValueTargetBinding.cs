@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISliderValueTargetBinding
         : MvxPropertyInfoTargetBinding<UISlider>
     {
@@ -33,7 +32,7 @@ namespace MvvmCross.Binding.iOS.Target
             view.Value = (float)value;
         }
 
-        private void HandleSliderValueChanged(object sender, System.EventArgs e)
+        private void HandleSliderValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
