@@ -51,6 +51,8 @@ namespace MvvmCross.iOS.Support.iOS.Views
                 detailButton.WithSameCenterX(View)
 
                 );
+
+            ((MasterViewModel)ViewModel).ShowMenu();
         }
     }
 }

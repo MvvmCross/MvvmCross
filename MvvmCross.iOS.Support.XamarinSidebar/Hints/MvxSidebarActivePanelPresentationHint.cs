@@ -8,22 +8,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
     public class MvxSidebarActivePanelPresentationHint : MvxPanelPresentationHint
     {
-        public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, UINavigationController navigationController, SidebarController sidebarController, UIViewController viewController)
+        public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
             : base(panel)
         {
-            NavigationController = navigationController;
-            SidebarController = sidebarController;
+            SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
 
-        protected readonly UINavigationController NavigationController;
-        protected readonly SidebarController SidebarController;
+        protected readonly MvxSidebarPanelController SidebarPanelController;
         protected readonly UIViewController ViewController;
 
         public override bool Navigate()
         {
-            if (ViewController == null || NavigationController == null)
+            if (ViewController == null || SidebarPanelController == null)
                 return false;
+
+            var navigationController = SidebarPanelController.NavigationController;
 
             switch(Panel)
             {
@@ -33,7 +33,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
                     break;
                 case MvxPanelEnum.Center:
                 default:
-                    NavigationController.PushViewController(ViewController, true);
+                    navigationController?.PushViewController(ViewController, true);
                     break;
             }
 
@@ -42,26 +42,24 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 
         protected virtual void InitSidebar()
         {
+            var sidebarController = SidebarPanelController.SidebarController;
             var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
                 , UIBarButtonItemStyle.Plain
-                , (sender, args) => SidebarController.ToggleMenu());
+                , (sender, args) => sidebarController.ToggleMenu());
+            
+            var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
-            UINavigationItem navigationItem = null;
-
-            if(SidebarController.ChildViewControllers.Length > 0)
-                navigationItem = SidebarController.ChildViewControllers[0].NavigationItem;
-
-            SidebarController.ChangeMenuView(ViewController);
+            sidebarController.ChangeMenuView(ViewController);
 
             if (Panel == MvxPanelEnum.Left)
             {
-                SidebarController.MenuLocation = MenuLocations.Left;
-                navigationItem?.SetLeftBarButtonItem(barButtonItem, true);
+                sidebarController.MenuLocation = MenuLocations.Left;
+                topViewController.NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
             }
             else
             {
-                SidebarController.MenuLocation = MenuLocations.Right;    
-                navigationItem?.SetRightBarButtonItem(barButtonItem, true);
+                sidebarController.MenuLocation = MenuLocations.Right;    
+                topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
             }
         }
     }

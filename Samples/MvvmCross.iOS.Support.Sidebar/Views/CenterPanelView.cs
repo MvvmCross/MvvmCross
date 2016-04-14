@@ -72,6 +72,8 @@ namespace MvvmCross.iOS.Support.iOS.Views
                 keyboardHandlingButton.WithSameCenterX(View)
 
                 );
+
+            ((CenterPanelViewModel)ViewModel).ShowMenu();
         }
     }
 }
