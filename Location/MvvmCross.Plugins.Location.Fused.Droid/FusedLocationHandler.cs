@@ -54,12 +54,13 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 
 		public void OnConnected (Bundle connectionHint)
 		{
+			LocationServices.FusedLocationApi.RequestLocationUpdates (_client, _request, this, Looper.MainLooper);
+
 			var location = LocationServices.FusedLocationApi.GetLastLocation(_client);
 			if (location != null)
 			{
 				_owner.OnLocationUpdated (location);
 			}
-			LocationServices.FusedLocationApi.RequestLocationUpdates (_client, _request, this, Looper.MainLooper);
 		}
 
 		public void OnConnectionSuspended (int cause)
