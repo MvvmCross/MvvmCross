@@ -46,6 +46,7 @@
     <Compile Include="Rest\MvxMultiPartFormRestRequest.cs" />
     <Compile Include="Rest\MvxRestClient.cs" />
     <Compile Include="Rest\MvxRestRequest.cs" />
+    <Compile Include="Rest\MvxRestRequestAsyncHandle.cs" />
     <Compile Include="Rest\MvxRestResponse.cs" />
     <Compile Include="Rest\MvxStreamRestRequest.cs" />
     <Compile Include="Rest\MvxStreamRestResponse.cs" />
@@ -55,7 +56,6 @@
     <Compile Include="Rest\MvxWwwFormRestRequest.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rest\MvxRestRequestAsyncHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

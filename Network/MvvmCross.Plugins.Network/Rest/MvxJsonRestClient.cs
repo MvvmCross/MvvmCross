@@ -9,6 +9,8 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -36,6 +38,25 @@ namespace MvvmCross.Plugins.Network.Rest
                     successAction?.Invoke(decodedResponse);
                 }
             }, errorAction);
+        }
+
+        public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
+
+            using (var textReader = new StreamReader(streamResponse.Stream))
+            {
+                var text = textReader.ReadToEnd();
+                var result = JsonConverterProvider().DeserializeObject<T>(text);
+                var decodedResponse = new MvxDecodedRestResponse<T>
+                {
+                    CookieCollection = streamResponse.CookieCollection,
+                    Result = result,
+                    StatusCode = streamResponse.StatusCode,
+                    Tag = streamResponse.Tag
+                };
+                return decodedResponse;
+            }
         }
 
         public MvxJsonRestClient()

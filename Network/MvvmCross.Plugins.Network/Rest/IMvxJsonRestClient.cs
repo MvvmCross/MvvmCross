@@ -7,6 +7,8 @@
 
 using MvvmCross.Platform.Platform;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -14,7 +16,6 @@ namespace MvvmCross.Plugins.Network.Rest
     {
         Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction,
-                               Action<Exception> errorAction);
+        Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
