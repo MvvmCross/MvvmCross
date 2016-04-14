@@ -12,12 +12,6 @@
         public void Start(object hint = null)
         {            
             ShowViewModel<CenterPanelViewModel>();
-
-            // Loads the flyout menu on the left
-            ShowViewModel<LeftPanelViewModel>();
-
-            // Loads the flyout menu on the right
-            //ShowViewModel<RightPanelViewModel>();
         }
     }
 }

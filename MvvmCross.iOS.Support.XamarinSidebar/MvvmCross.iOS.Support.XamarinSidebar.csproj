@@ -67,6 +67,7 @@
     <Compile Include="Hints\MvxSidebarPopToRootPresentationHint.cs" />
     <Compile Include="Hints\MvxSidebarActivePanelPresentationHint.cs" />
     <Compile Include="MvxSidebarPresenter.cs" />
+    <Compile Include="MvxSidebarPanelController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

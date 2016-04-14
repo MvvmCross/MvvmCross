@@ -1,10 +1,10 @@
 ﻿namespace MvvmCross.iOS.Support.iOS.Views
 {
-    using Core.ViewModels;
+    using MvvmCross.Core.ViewModels;
     using MvvmCross.iOS.Views;
     using UIKit;
 
-    public class BaseViewController<TViewModel> : MvxViewController where TViewModel : BaseViewModel
+    public class BaseViewController<TViewModel> : MvxViewController<TViewModel> where TViewModel : class, IMvxViewModel
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.

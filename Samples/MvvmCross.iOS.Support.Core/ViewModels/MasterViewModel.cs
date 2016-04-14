@@ -21,5 +21,11 @@
         {
             ShowViewModel<DetailViewModel>();
         }
+
+        public void ShowMenu()
+        {
+            // Loads the flyout menu on the left
+            ShowViewModel<LeftPanelViewModel>();
+        }
     }
 }

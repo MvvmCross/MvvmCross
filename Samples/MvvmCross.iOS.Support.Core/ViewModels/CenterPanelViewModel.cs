@@ -8,9 +8,6 @@
         {
             ExampleValue = "Center Panel";
 
-            // show the other panels
-            //ShowViewModel<LeftPanelViewModel>();
-            //ShowViewModel<RightPanelViewModel>();
         }
 
         public string RightPanelInstructions
@@ -24,6 +21,12 @@
             {
                 return new MvxCommand(ShowMasterCommandExecuted);
             }
+        }
+
+        public void ShowMenu()
+        {
+            // Loads the flyout menu on the left
+            ShowViewModel<LeftPanelViewModel>();
         }
 
         private void ShowMasterCommandExecuted()
