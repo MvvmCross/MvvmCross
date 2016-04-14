@@ -73,7 +73,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
                 );
 
-            ((CenterPanelViewModel)ViewModel).ShowMenu();
+            ViewModel.ShowMenu();
         }
     }
 }
