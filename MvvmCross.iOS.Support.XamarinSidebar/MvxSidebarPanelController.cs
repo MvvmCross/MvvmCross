@@ -10,19 +10,18 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             NavigationController = navigationController;
         }
 
-        public SidebarController SidebarController { get; private set; }
         public UINavigationController NavigationController { get; private set; }
+        public SidebarController SidebarController { get; private set; }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
             var initialEmptySideMenu = new UIViewController();
-            SidebarController = new SidebarController(this, NavigationController, initialEmptySideMenu);
-            SidebarController.HasShadowing = true;
-            SidebarController.MenuWidth = 220;
 
+            SidebarController = new SidebarController(this, NavigationController, initialEmptySideMenu);
         }
+
     }
 }
 

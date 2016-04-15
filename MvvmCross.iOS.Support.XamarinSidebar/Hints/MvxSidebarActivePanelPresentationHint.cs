@@ -61,6 +61,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
                 sidebarController.MenuLocation = MenuLocations.Right;    
                 topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
             }
+
+            var xamarinSidebarMenu = ViewController as IXamarinSidebarMenu;
+            if (xamarinSidebarMenu != null)
+            {
+                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
+                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;  
+            }
         }
     }
 }

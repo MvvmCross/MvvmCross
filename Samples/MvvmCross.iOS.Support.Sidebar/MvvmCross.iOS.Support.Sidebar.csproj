@@ -129,6 +129,7 @@
     <Compile Include="Views\LeftPanelView.cs" />
     <Compile Include="Views\MasterView.cs" />
     <Compile Include="Views\RightPanelView.cs" />
+    <Compile Include="Views\BaseMenuViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

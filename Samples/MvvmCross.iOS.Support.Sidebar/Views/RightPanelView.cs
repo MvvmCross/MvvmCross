@@ -10,7 +10,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
     [Register("RightPanelView")]
     [MvxPanelPresentation(MvxPanelEnum.Right, MvxPanelHintType.ActivePanel, false)]
-    public class RightPanelView : BaseViewController<RightPanelViewModel>
+    public class RightPanelView : BaseMenuViewController<RightPanelViewModel>
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
