@@ -10,7 +10,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using UIKit;
 
     [Register("MasterView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.PopToRoot, true, MvxSplitViewBehaviour.Master)]
+    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true, MvxSplitViewBehaviour.Master)]
     public class MasterView : BaseViewController<MasterViewModel>
     {
         /// <summary>

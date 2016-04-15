@@ -3,11 +3,11 @@ using MvvmCross.iOS.Support.SidePanels;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
-    public class MvxSidebarPopToRootPresentationHint : MvxPanelPresentationHint
+    public class MvxSidebarResetRootPresentationHint : MvxPanelPresentationHint
     {
-        public MvxSidebarPopToRootPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
+        public MvxSidebarResetRootPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
             : base(panel)
-        {
+        { 
             SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
@@ -25,8 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             if (navigationController == null)
                 return false;
 
-            navigationController.PopToRootViewController(false);
-            navigationController.PushViewController(ViewController, false);
+            navigationController.ViewControllers = new UIViewController[] { ViewController };
 
             return true;
         }

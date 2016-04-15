@@ -11,7 +11,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
     using UIKit;
 
     [Register("CenterPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.PopToRoot, true)]
+    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
     public class CenterPanelView : BaseViewController<CenterPanelViewModel>
     {
         /// <summary>
