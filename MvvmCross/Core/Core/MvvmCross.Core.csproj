@@ -43,6 +43,7 @@
     <Compile Include="Parse\StringDictionary\MvxStringDictionaryWriter.cs" />
     <Compile Include="Platform\IMvxFillableStringToTypeParser.cs" />
     <Compile Include="Platform\IMvxStringToTypeParser.cs" />
+    <Compile Include="ViewModels\IMvxAsyncCommand.cs" />
     <Compile Include="ViewModels\IMvxCommandCollection.cs" />
     <Compile Include="ViewModels\IMvxCommandCollectionBuilder.cs" />
     <Compile Include="ViewModels\IMvxInpcInterceptor.cs" />
