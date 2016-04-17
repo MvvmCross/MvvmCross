@@ -1,4 +1,4 @@
-// MvxModalNavSupportIosViewPresenter.cs
+﻿// MvxModalNavSupportIosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,105 +7,93 @@
 
 namespace MvvmCross.iOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
+	using MvvmCross.Core.ViewModels;
+	using MvvmCross.Core.Views;
+	using MvvmCross.Platform.Exceptions;
+	using MvvmCross.Platform.Platform;
 
-    using UIKit;
+	using UIKit;
+	using System.Linq;
+	using System.Collections.Generic;
 
-    public class MvxModalNavSupportIosViewPresenter : MvxIosViewPresenter
-    {
-        private UIViewController _currentModalViewController;
+	public class MvxModalNavSupportIosViewPresenter : MvxIosViewPresenter
+	{
+		public MvxModalNavSupportIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window) 
+			: base(applicationDelegate, window)
+		{
+		}
 
-        public MvxModalNavSupportIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-            : base(applicationDelegate, window)
-        {
-        }
+		private readonly Stack<UIViewController> _modalViewControllers = new Stack<UIViewController>();
 
-        public override void Show(IMvxIosView view)
-        {
-            if (view is IMvxModalIosView)
-            {
-                if (this._currentModalViewController != null)
-                    throw new MvxException("Only one modal view controller at a time supported");
+		protected override UIViewController CurrentTopViewController  
+		{
+			get 
+			{
+				return _modalViewControllers.FirstOrDefault() ?? MasterNavigationController?.TopViewController;
+			}
+		}
 
-                var newNav = this.CreateModalNavigationController();
-                newNav.PushViewController(view as UIViewController, false);
+		private UINavigationController CurrentNavigationController  
+		{
+			get { return (CurrentTopViewController as UINavigationController) ?? MasterNavigationController; }
+		}
 
-                this._currentModalViewController = view as UIViewController;
+		public override void Show(IMvxIosView view)  
+		{
+			var viewControllerToShow = (UIViewController)view;
 
-                this.PresentModalViewController(newNav, true);
-                return;
-            }
 
-            base.Show(view);
-        }
+			if (view is IMvxModalIosView)
+			{
+				var newNav = new UINavigationController(viewControllerToShow);
 
-        protected virtual UINavigationController CreateModalNavigationController()
-        {
-            var newNav = new UINavigationController();
-            return newNav;
-        }
+				PresentModalViewController(newNav, true);
 
-        public override void NativeModalViewControllerDisappearedOnItsOwn()
-        {
-            if (this._currentModalViewController != null)
-            {
-                MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
-                return;
-            }
+				return;
+			}
 
-            // clear our local reference to avoid back confusion
-            this._currentModalViewController = null;
-        }
+			if (MasterNavigationController == null)
+			{
+				ShowFirstView(viewControllerToShow);
+			}
+			else
+			{
+				CurrentNavigationController.PushViewController(viewControllerToShow, true);
+			}
+		}
 
-        public override void CloseModalViewController()
-        {
-            if (this._currentModalViewController != null)
-            {
-                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
-                if (nav != null)
-                    nav.DismissViewController(true, () => { });
-                else
-                    this._currentModalViewController.DismissViewController(true, () => { });
-                this._currentModalViewController = null;
-                return;
-            }
+		public override bool PresentModalViewController(UIViewController viewController, bool animated)  
+		{
+			CurrentNavigationController.PresentViewController(viewController, animated, null);
 
-            base.CloseModalViewController();
-        }
+			_modalViewControllers.Push(viewController);
 
-        public override void Close(IMvxViewModel toClose)
-        {
-            if (this._currentModalViewController != null)
-            {
-                var touchView = this._currentModalViewController as IMvxIosView;
-                if (touchView == null)
-                {
-                    MvxTrace.Error(
-                                   "Unable to close view - modal is showing but not an IMvxIosView");
-                    return;
-                }
+			return true;
+		}
 
-                var viewModel = touchView.ReflectionGetViewModel();
-                if (viewModel != toClose)
-                {
-                    MvxTrace.Error(
-                                   "Unable to close view - modal is showing but is not the requested viewmodel");
-                    return;
-                }
+		public override void CloseModalViewController()  
+		{
+			var currentNav = _modalViewControllers.Pop();
 
-                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
-                if (nav != null)
-                    nav.DismissViewController(true, () => { });
-                else
-                    this._currentModalViewController.DismissViewController(true, () => { });
-                this._currentModalViewController = null;
-                return;
-            }
+			currentNav.DismissViewController(true, null);
+		}
 
-            base.Close(toClose);
-        }
-    }
+		public override void Close(IMvxViewModel toClose)  
+		{
+			if (_modalViewControllers.Any() && CurrentNavigationController.ViewControllers.Count() == 1)
+			{
+				CloseModalViewController();
+
+				return;
+			}
+
+			CurrentNavigationController.PopViewController(true);
+		}
+
+		public override void NativeModalViewControllerDisappearedOnItsOwn ()
+		{
+			CloseModalViewController ();
+		}
+	}
 }
+
