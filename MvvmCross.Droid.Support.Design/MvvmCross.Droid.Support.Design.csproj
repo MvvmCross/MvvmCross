@@ -85,18 +85,6 @@
     <Reference Include="MvvmCross.Droid.Shared">
       <HintPath>..\packages\MvvmCross.Droid.Shared.4.1.2\lib\MonoAndroid\MvvmCross.Droid.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Plugins.Json">
-      <HintPath>..\packages\MvvmCross.Plugin.Json.4.1.0\lib\MonoAndroid\MvvmCross.Plugins.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Droid.Support.V7.Fragging">
-      <HintPath>..\packages\MvvmCross.Droid.Support.V7.Fragging.4.1.1\lib\MonoAndroid403\MvvmCross.Droid.Support.V7.Fragging.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Droid.Support.V4">
-      <HintPath>..\packages\MvvmCross.Droid.Support.V4.4.1.1\lib\MonoAndroid403\MvvmCross.Droid.Support.V4.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\MvxScrollAwareGrowShrinkFABBehavior.cs" />
@@ -106,7 +94,6 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="MvxBottomSheetDialogFragment.cs" />
     <Compile Include="EventSource\MvxEventSourceBottomSheetDialogFragment.cs" />
-    <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml">
@@ -129,4 +116,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
   </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmCross.Droid.Support.V4\MvvmCross.Droid.Support.V4.csproj">
+      <Project>{24C19002-AD02-4B88-9E57-1C254819D30E}</Project>
+      <Name>MvvmCross.Droid.Support.V4</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
