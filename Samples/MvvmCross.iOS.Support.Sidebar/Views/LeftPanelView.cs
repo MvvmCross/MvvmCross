@@ -1,7 +1,7 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-
-namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.iOS.Views
 {
+    using MvvmCross.iOS.Support.SidePanels;
+    using MvvmCross.iOS.Support.XamarinSidebar;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
