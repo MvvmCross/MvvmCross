@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
@@ -39,8 +40,15 @@ namespace MvvmCross.CodeAnalysis.Analyzers
             if (!(invocationExpressionSyntax?.Parent is ExpressionStatementSyntax)) return;
 
             //Method is one of IMvxMessenger's Subscribe Methods
-            var memberAccessExpression = (MemberAccessExpressionSyntax) invocationExpressionSyntax.Expression;
-            var genericNameSyntax = memberAccessExpression.Name;
+            SimpleNameSyntax genericNameSyntax = null;
+
+            var memberAccessExpression = invocationExpressionSyntax.Expression as MemberAccessExpressionSyntax;
+            if (memberAccessExpression != null)
+            {
+                genericNameSyntax = memberAccessExpression.Name;
+            }
+            if (genericNameSyntax == null) return;
+
             var isCallToSubscribe = SubscribeMethods.Contains(genericNameSyntax?.Identifier.Text);
             if (!isCallToSubscribe) return;
 

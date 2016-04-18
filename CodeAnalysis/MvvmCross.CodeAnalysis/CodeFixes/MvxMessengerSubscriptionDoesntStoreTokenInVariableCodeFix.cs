@@ -23,7 +23,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
         public sealed override FixAllProvider GetFixAllProvider() =>
             WellKnownFixAllProviders.BatchFixer;
 
-        public static readonly string Message = "Store the returned token in a field";
+        private static readonly string Message = "Store the returned token in a field";
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -39,25 +39,25 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
 
         private static async Task<Document> ApplyFix(Document document, TextSpan span, CancellationToken cancellationToken)
         {
-            var root = await document   
+            var root = await document
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var spanNode = root.FindNode(span);
             var classDeclarationSyntax = spanNode.FirstAncestorOrSelf<ClassDeclarationSyntax>();
 
-            var tokenField = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("MvvmCross.Plugins.Messenger.MvxSubscriptionToken"))
+            var tokenField = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("MvxSubscriptionToken"))
                 .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier("_token")))))
                 .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)));
 
             var ignoredSubscribeCall = spanNode.FirstAncestorOrSelf<InvocationExpressionSyntax>();
             var identifierSyntax = SyntaxFactory.IdentifierName("_token");
-            var storeResultInTokenCall = SyntaxFactory.AssignmentExpression(SyntaxKind.EqualsExpression, identifierSyntax, ignoredSubscribeCall.Expression);
+            var storeResultInTokenCall = SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, identifierSyntax, ignoredSubscribeCall);
 
             var newMembers = classDeclarationSyntax.Members.Insert(0, tokenField);
             var newClassDeclarationSyntax = classDeclarationSyntax
                                                 .WithMembers(newMembers)
-                                                .ReplaceNode(ignoredSubscribeCall, storeResultInTokenCall)
+                                                .ReplaceNode(spanNode.FirstAncestorOrSelf<ExpressionStatementSyntax>(), storeResultInTokenCall)
                                                 .NormalizeWhitespace();
 
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
