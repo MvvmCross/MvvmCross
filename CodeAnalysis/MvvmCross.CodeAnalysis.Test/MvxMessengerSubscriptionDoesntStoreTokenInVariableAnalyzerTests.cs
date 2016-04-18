@@ -13,10 +13,9 @@ namespace MvvmCross.CodeAnalysis.Test
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 
 namespace AndroidApp.Core.ViewModels
 {
@@ -24,10 +23,10 @@ namespace AndroidApp.Core.ViewModels
     {
         public FirstViewModel(IMvxMessenger messenger)
         {
-            messenger.Subscribe<LocationMessage>(OnLocationMessage);
+            messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage);
         }
 
-        private static void OnLocationMessage(LocationMessage message)
+        private static void OnLocationMessage(AndroidApp.Core.Messages.LocationMessage message)
         {
         }
     }
@@ -37,23 +36,22 @@ namespace AndroidApp.Core.ViewModels
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 
 namespace AndroidApp.Core.ViewModels
 {
     public class FirstViewModel : MvxViewModel
     {
-        private readonly MvvmCross.Plugins.Messenger.MvxSubscriptionToken _token;
+        private readonly MvxSubscriptionToken _token;
 
         public FirstViewModel(IMvxMessenger messenger)
         {
-            _token = messenger.Subscribe<LocationMessage>(OnLocationMessage);
+            _token = messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage);
         }
 
-        private static void OnLocationMessage(LocationMessage message)
+        private static void OnLocationMessage(AndroidApp.Core.Messages.LocationMessage message)
         {
         }
     }
@@ -65,22 +63,21 @@ namespace AndroidApp.Core.ViewModels
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.MvxMessengerSubscriptionDoesntStoreTokenInVariableId,
-                Message = "You need to store the token returned from 'messenger.Subscribe<LocationMessage>(OnLocationMessage)'.",
+                Message = "You need to store the token returned from 'messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage)'.",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
                     {
-                        new DiagnosticResultLocation("Test0.cs", 16, 13)
+                        new DiagnosticResultLocation("Test0.cs", 15, 13)
                     }
             };
 
             var project = new[]
             {
                 new MvxTestFileSource(Test, MvxProjType.Core),
-                new MvxTestFileSource(IMvxMessenger, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
                 new MvxTestFileSource(MvxMessage, MvxProjType.Core),
-                new MvxTestFileSource(LocationMessage, MvxProjType.Core),
-                new MvxTestFileSource(IMvxMessenger, MvxProjType.Core)
+                new MvxTestFileSource(LocationMessage, MvxProjType.Core)
             };
 
             VerifyCSharpDiagnostic(project, expectedDiagnostic);
@@ -91,10 +88,10 @@ namespace AndroidApp.Core.ViewModels
         {
             var project = new[]
             {
-                new MvxTestFileSource(IMvxMessenger, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
                 new MvxTestFileSource(MvxMessage, MvxProjType.Core),
                 new MvxTestFileSource(LocationMessage, MvxProjType.Core),
-                new MvxTestFileSource(IMvxMessenger, MvxProjType.Core)
+                new MvxTestFileSource(MvxSubscriptionToken, MvxProjType.Core)
             };
 
             VerifyCSharpFix(project, Test, MvxProjType.Core, Expected);
@@ -104,9 +101,46 @@ namespace AndroidApp.Core.ViewModels
         #region Work around to missing IMvxMessengerReferences
 
 
-#endregion
+        #endregion
 
-        private const string IMvxMessenger = @"using System;
+        private const string MvxSubscriptionToken = @"
+using System;
+
+namespace MvvmCross.Plugins.Messenger
+{
+    public sealed class MvxSubscriptionToken
+        : IDisposable
+    {
+        public Guid Id { get; private set; }
+#pragma warning disable 414 // 414 is that this private field is only set, not used
+        private readonly object[] _dependentObjects;
+#pragma warning restore 414
+        private readonly Action _disposeMe;
+
+        public MvxSubscriptionToken(Guid id, Action disposeMe, params object[] dependentObjects)
+        {
+            Id = id;
+            _disposeMe = disposeMe;
+            _dependentObjects = dependentObjects;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                _disposeMe();
+            }
+        }
+    }
+}";
+
+        private const string MvxMessenger = @"using System;
 using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.Messenger
@@ -188,6 +222,5 @@ namespace MvvmCross.Plugins.Messenger
         public double Lng { get; private set; }
     }
 }";
-
     }
 }

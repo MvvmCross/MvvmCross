@@ -24,17 +24,19 @@ namespace MvvmCross.CodeAnalysis.Test
         private static readonly MetadataReference _cSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
         private static readonly MetadataReference _codeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
+        private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Platform.Mvx).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
         private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
-        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath());
+        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.ObjectModel"));
+        private static readonly MetadataReference _runtimeReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.Runtime"));
 
-        private static string GetCorrectObjectModelPath()
+        private static string GetCorrectObjectModelPath(string path)
         {
             var winDir = Environment.GetEnvironmentVariable("windir");
 
             if (winDir != null)
             {
-                var gacObjectModelPath = Path.Combine(winDir, @"Microsoft.NET\assembly\GAC_MSIL\System.ObjectModel");
+                var gacObjectModelPath = Path.Combine(winDir, $@"Microsoft.NET\assembly\GAC_MSIL\{path}");
                 var finalPath = Directory.GetDirectories(gacObjectModelPath).First();
 
                 return Directory.GetFiles(finalPath).First();
@@ -175,8 +177,10 @@ namespace MvvmCross.CodeAnalysis.Test
                 .AddMetadataReference(_coreProjectId, _cSharpSymbolsReference)
                 .AddMetadataReference(_coreProjectId, _codeAnalysisReference)
                 .AddMetadataReference(_coreProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_coreProjectId, _mvvmCrossPlatformReference)
                 .AddMetadataReference(_coreProjectId, _componentModelReference)
                 .AddMetadataReference(_coreProjectId, _objectModelReference)
+                .AddMetadataReference(_coreProjectId, _runtimeReference)
                 .AddMetadataReference(_droidProjectId, _corlibReference)
                 .AddMetadataReference(_droidProjectId, _systemCoreReference)
                 .AddMetadataReference(_droidProjectId, _cSharpSymbolsReference)
