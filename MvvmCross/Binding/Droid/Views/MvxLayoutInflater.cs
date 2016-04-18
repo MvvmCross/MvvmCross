@@ -1,9 +1,12 @@
 namespace MvvmCross.Binding.Droid.Views
 {
+    using System;
+
     using Android.Content;
     using Android.OS;
     using Android.Util;
     using Android.Views;
+    using Android.Runtime;
 
     using Java.Interop;
     using Java.Lang.Reflect;
@@ -83,6 +86,10 @@ namespace MvvmCross.Binding.Droid.Views
 
             this.SetupLayoutFactories(cloned);
         }
+
+        public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
+            : base(handle, transfer)
+        { }
 
         public override LayoutInflater CloneInContext(Context newContext)
         {
@@ -379,6 +386,10 @@ namespace MvvmCross.Binding.Droid.Views
                 this._inflater = inflater;
                 this._bindingVisitor = bindingVisitor;
             }
+
+            public PrivateFactoryWrapper2(IntPtr handle, JniHandleOwnership transfer)
+                : base(handle, transfer)
+            { }
 
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {
