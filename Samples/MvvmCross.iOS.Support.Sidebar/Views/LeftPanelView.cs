@@ -10,7 +10,7 @@
 
     [Register("LeftPanelView")]
     [MvxPanelPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
-    public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>
+    public class LeftPanelView : BaseViewController<LeftPanelViewModel>
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
