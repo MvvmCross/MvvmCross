@@ -20,14 +20,14 @@ This package contains Support v4 Fragments support for MvvmCross.</description>
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="MvvmCross.Core" version="4.1.0" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.1.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.2.1" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.3.0" />
 			</group>
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Droid.Shared" version="4.1.2" />
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
 				<dependency id="MvvmCross.Core" version="4.1.0" />
 				<dependency id="MvvmCross.Plugin.Json" version="4.1.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.2.1" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.3.0" />
 			</group>
 		</dependencies>
 	</metadata>
