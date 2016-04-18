@@ -74,13 +74,8 @@
         {
             this.Execute(null);
         }
-
-        public async Task ExecuteAsync(object parameter)
-        {
-            await this.ExecuteAsync(parameter, false).ConfigureAwait(false);
-        }
-
-        private async Task ExecuteAsync(object parameter, bool hideCanceledException)
+        
+        protected async Task ExecuteAsync(object parameter, bool hideCanceledException)
         {
             if (this.CanExecuteImpl(parameter))
             {
@@ -175,7 +170,7 @@
 
     public class MvxAsyncCommand
         : MvxAsyncCommandBase
-        , IMvxCommand
+        , IMvxAsyncCommand
     {
         private readonly Func<CancellationToken, Task> _execute;
         private readonly Func<bool> _canExecute;
@@ -219,11 +214,16 @@
         {
             return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
         }
+
+        public async Task ExecuteAsync(object parameter = null)
+        {
+            await base.ExecuteAsync(parameter, false).ConfigureAwait(false);
+        }
     }
 
     public class MvxAsyncCommand<T>
         : MvxAsyncCommandBase
-        , IMvxCommand
+        , IMvxAsyncCommand
     {
         private readonly Func<T, CancellationToken, Task> _execute;
         private readonly Func<T, bool> _canExecute;
@@ -256,6 +256,11 @@
         protected override Task ExecuteAsyncImpl(object parameter)
         {
             return this._execute((T)typeof(T).MakeSafeValueCore(parameter), this.CancelToken);
+        }
+
+        public async Task ExecuteAsync(object parameter)
+        {
+            await base.ExecuteAsync(parameter, false).ConfigureAwait(false);
         }
     }
 }
