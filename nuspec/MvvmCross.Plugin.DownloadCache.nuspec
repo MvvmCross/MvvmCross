@@ -30,7 +30,7 @@ This package contains the 'DownloadCache' plugin for MvvmCross</description>
 			</group>
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.2.1" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.3.0" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.1.0" />
