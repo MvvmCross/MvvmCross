@@ -100,7 +100,19 @@ namespace MvvmCross.Binding.Droid.Views
             this._isAttachedToWindow = false;
         }
 
-        protected View Content { get; set; }
+        private View _content;
+
+        protected View Content
+        {
+            get { return _content; }
+            set
+            {
+                _content = value;
+                OnContentSet();
+            }
+        }
+
+        protected virtual void OnContentSet() { }
 
         [MvxSetToNullAfterBinding]
         public object DataContext
