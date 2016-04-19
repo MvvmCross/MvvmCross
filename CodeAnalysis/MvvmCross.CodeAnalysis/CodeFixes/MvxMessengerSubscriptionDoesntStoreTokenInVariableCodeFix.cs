@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Editing;
 using MvvmCross.CodeAnalysis.Core;
 using System.Collections.Immutable;
 using System.Composition;
@@ -44,7 +43,6 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                 .ConfigureAwait(false);
 
             var spanNode = root.FindNode(span);
-            var classDeclarationSyntax = spanNode.FirstAncestorOrSelf<ClassDeclarationSyntax>();
 
             var tokenField = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName("MvxSubscriptionToken"))
                 .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier("_token")))))
@@ -54,15 +52,31 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             var identifierSyntax = SyntaxFactory.IdentifierName("_token");
             var storeResultInTokenCall = SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, identifierSyntax, ignoredSubscribeCall);
 
-            var newMembers = classDeclarationSyntax.Members.Insert(0, tokenField);
-            var newClassDeclarationSyntax = classDeclarationSyntax
-                                                .WithMembers(newMembers)
-                                                .ReplaceNode(spanNode.FirstAncestorOrSelf<ExpressionStatementSyntax>(), storeResultInTokenCall)
-                                                .NormalizeWhitespace();
+            var classDeclarationId = spanNode.FirstAncestorOrSelf<ClassDeclarationSyntax>().Identifier;
 
-            var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
-            editor.ReplaceNode(classDeclarationSyntax, newClassDeclarationSyntax);
-            return editor.GetChangedDocument();
+            root = root
+                .ReplaceNode(ignoredSubscribeCall, storeResultInTokenCall);
+
+            var classDeclarationSyntax =
+                root
+                    .DescendantNodes()
+                    .OfType<ClassDeclarationSyntax>()
+                    .FirstOrDefault(c => c.Identifier.ValueText == classDeclarationId.ValueText);
+
+            if (classDeclarationSyntax != null)
+            {
+                var newMembers = classDeclarationSyntax.Members.Insert(0, tokenField);
+
+                var newClassDeclarationSyntax = classDeclarationSyntax
+                    .WithMembers(newMembers)
+                    .ReplaceNode(ignoredSubscribeCall, storeResultInTokenCall);
+
+                root = root
+                    .ReplaceNode(classDeclarationSyntax, newClassDeclarationSyntax);
+            }
+
+            document = document.WithSyntaxRoot(root.NormalizeWhitespace());
+            return document;
         }
     }
 }

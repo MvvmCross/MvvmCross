@@ -45,7 +45,6 @@ namespace AndroidApp.Core.ViewModels
     public class FirstViewModel : MvxViewModel
     {
         private readonly MvxSubscriptionToken _token;
-
         public FirstViewModel(IMvxMessenger messenger)
         {
             _token = messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage);
