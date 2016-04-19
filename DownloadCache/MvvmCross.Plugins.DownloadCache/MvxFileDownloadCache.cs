@@ -130,7 +130,7 @@ namespace MvvmCross.Plugins.DownloadCache
             var cachedFiles = new Dictionary<string, Entry>();
             foreach (var e in _entriesByHttpUrl)
             {
-                cachedFiles[e.Value.DownloadedPath] = e.Value;
+                cachedFiles[store.NativePath(e.Value.DownloadedPath)] = e.Value;
             }
 
             var toDelete = new List<string>();
