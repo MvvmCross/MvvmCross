@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.FullFragging</id>
-		<version>4.1.1</version>
+		<version>4.1.4</version>
 		<title>MvvmCross - Android Full Fragment Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,12 +18,12 @@ This package contains the 'Android Fragment' assemblies for Android Honeycomb or
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.1.0" />
-				<dependency id="MvvmCross.Droid.Shared" version="4.1.2" />
+				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.4" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.1.0" />
-				<dependency id="MvvmCross.Droid.Shared" version="4.1.2" />
+				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Droid.Shared" version="4.1.4" />
 			</group>
 		</dependencies>
 	</metadata>

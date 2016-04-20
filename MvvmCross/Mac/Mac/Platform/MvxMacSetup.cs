@@ -65,15 +65,7 @@ namespace MvvmCross.Mac.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            var toReturn = new MvxLoaderPluginManager();
-            var registry = new MvxLoaderPluginRegistry(".Mac", toReturn.Finders);
-            this.AddPluginsLoaders(registry);
-            return toReturn;
-        }
-
-        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry loaders)
-        {
-            // none added by default
+            return new MvxPluginManager();
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
