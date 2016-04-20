@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.AutoView</id>
-		<version>4.1.0</version>
+		<version>4.1.4</version>
 		<title>MvvmCross - AutoView Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>

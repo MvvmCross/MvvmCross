@@ -90,7 +90,6 @@
     <Compile Include="Platform\MvxBootstrapRunner.cs" />
     <Compile Include="Plugins\IMvxConfigurablePlugin.cs" />
     <Compile Include="Plugins\IMvxConfigurablePluginLoader.cs" />
-    <Compile Include="Plugins\IMvxLoaderPluginManager.cs" />
     <Compile Include="Plugins\IMvxPluginConfiguration.cs" />
     <Compile Include="Plugins\IMvxPluginLoader.cs" />
     <Compile Include="IoC\MvxIoCExtensions.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Plugins\IMvxPluginManager.cs" />
     <Compile Include="Plugins\MvxPluginManager.cs" />
     <Compile Include="Plugins\MvxFilePluginManager.cs" />
-    <Compile Include="Plugins\MvxLoaderPluginManager.cs" />
     <Compile Include="Plugins\MvxLoaderPluginRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\IMvxImageHelper.cs" />

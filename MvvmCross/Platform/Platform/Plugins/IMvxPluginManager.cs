@@ -13,6 +13,8 @@ namespace MvvmCross.Platform.Plugins
     {
         Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
 
+        MvxLoaderPluginRegistry Registry { get; }
+
         bool IsPluginLoaded<T>() where T : IMvxPluginLoader;
 
         void EnsurePluginLoaded<TType>();

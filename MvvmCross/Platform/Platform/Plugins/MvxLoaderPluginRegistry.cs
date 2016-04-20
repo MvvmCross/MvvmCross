@@ -14,42 +14,47 @@ namespace MvvmCross.Platform.Plugins
 
     public class MvxLoaderPluginRegistry
     {
-        private readonly string _pluginPostfix;
+        private readonly IDictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>> ();
 
-        private readonly IDictionary<string, Func<IMvxPlugin>> _loaders;
-
-        public MvxLoaderPluginRegistry(string expectedPostfix, IDictionary<string, Func<IMvxPlugin>> loaders)
+        public void Register<TPlugin, TPlatformPlugin>()
+            where TPlugin : IMvxPluginLoader
+            where TPlatformPlugin : IMvxPlugin
         {
-            this._pluginPostfix = expectedPostfix;
-            this._loaders = loaders;
+            this.Register(typeof(TPlugin), typeof (TPlatformPlugin));
         }
 
-        public void AddUnconventionalPlugin(string pluginName, Func<IMvxPlugin> loader)
+        public void Register(Type plugin, Type platformPlugin)
         {
-            this._loaders[pluginName] = loader;
+            this.Register (plugin, () => (IMvxPlugin)Activator.CreateInstance (platformPlugin));
         }
 
-        public void AddConventionalPlugin<TPlugin>()
+        public void Register<TPlugin> (Func<IMvxPlugin> loader)
             where TPlugin : IMvxPlugin
         {
-            this.AddConventionalPlugin(typeof(TPlugin));
+            this.Register (typeof (TPlugin), loader);
         }
 
-        public void AddConventionalPlugin(Type plugin)
+        public void Register(Type plugin, Func<IMvxPlugin> loader)
         {
-            var name = plugin.Namespace ?? string.Empty;
-            if (!name.EndsWith(this._pluginPostfix))
+            var name = plugin.Namespace;
+            if (string.IsNullOrEmpty (name)) 
             {
-                throw new MvxException(
-                    "You must pass in the type of a plugin instance - like 'typeof(MvvmCross.Plugins.Visibility{0}.Plugin)'",
-                    this._pluginPostfix);
+                throw new MvxException("Invalid plugin type {0}", plugin);
             }
 
-            name = name.Substring(0, name.Length - this._pluginPostfix.Length);
+            if (loader == null)
+            {
+                throw new MvxException("Loader function can not be null");
+            }
 
-            this._loaders.Add(
-                name,
-                () => (IMvxPlugin)Activator.CreateInstance(plugin));
+            this._loaders.Add(name, loader);
+        }
+
+        public Func<IMvxPlugin> FindLoader (Type plugin)
+        {
+            Func<IMvxPlugin> loader = null;
+            this._loaders.TryGetValue (plugin.Namespace, out loader);
+            return loader;
         }
     }
 }
