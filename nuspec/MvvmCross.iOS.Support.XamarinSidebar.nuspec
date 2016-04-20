@@ -28,6 +28,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 	<files>
 		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\bin\Release\MvvmCross.iOS.Support.XamarinSidebar.dll" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\bin\Release\Xamarin-Sidebar-Unified.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\**\*.cs" target="src\MvvmCross.iOS.Support.XamarinSidebar" />
 		<!--
 		<file src="..\bin\Release\MvvmCross.iOS.Support.XamarinSidebar.*" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross.iOS.Support.XamarinSidebar\**\*.cs" target="lib\Xamarin.iOS10" />

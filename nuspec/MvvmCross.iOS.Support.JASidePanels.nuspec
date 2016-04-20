@@ -27,6 +27,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 	<files>
 		<file src="..\MvvmCross.iOS.Support.JASidePanels\bin\Release\MvvmCross.iOS.Support.JASidePanels.dll" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross.iOS.Support.JASidePanels\bin\Release\JASidePanels.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.JASidePanels\**\*.cs" target="src\MvvmCross.iOS.Support.JASidePanels" />
 		<!--
 		<file src="..\bin\Release\MvvmCross.iOS.Support.JASidePanels.*" target="lib\Xamarin.iOS10" />
 		<file src="..\MvvmCross.iOS.Support.JASidePanels\**\*.cs" target="lib\Xamarin.iOS10" />
