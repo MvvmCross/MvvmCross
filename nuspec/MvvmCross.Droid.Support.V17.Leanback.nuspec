@@ -18,7 +18,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 		<dependencies>
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Droid.Shared" version="4.1.4" />
-                <dependency id="MvvmCross.Droid.Support.V4" version="4.1.4" />
+                <dependency id="MvvmCross.Droid.Support.V4" version="4.1.5" />
                 <dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.4" />
 				<dependency id="MvvmCross.Platform" version="4.1.4" />
 				<dependency id="MvvmCross.Core" version="4.1.4" />
@@ -33,7 +33,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 			</group>
 			<group targetFramework="dotnet">
 				<dependency id="MvvmCross.Droid.Shared" version="4.1.4" />
-                <dependency id="MvvmCross.Droid.Support.V4" version="4.1.4" />
+                <dependency id="MvvmCross.Droid.Support.V4" version="4.1.5" />
                 <dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="4.1.4" />
 				<dependency id="MvvmCross.Platform" version="4.1.4" />
 				<dependency id="MvvmCross.Core" version="4.1.4" />
