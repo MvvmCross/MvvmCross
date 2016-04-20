@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMvxLocationReceiver.cs" />
-    <Compile Include="MvxAndroidGeoLocationWatcher.cs" />
     <Compile Include="MvxAndroidLocationWatcher.cs" />
     <Compile Include="MvxLocationListener.cs" />
     <Compile Include="Plugin.cs" />

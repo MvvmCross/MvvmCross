@@ -17,11 +17,6 @@ namespace MvvmCross.Plugins.Location.iOS
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxIosLocationWatcher());
-#pragma warning disable 618 // 618 is that this interface is obsolete
-            // ReSharper disable CSharpWarnings::CS0612
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxIosGeoLocationWatcher());
-            // ReSharper restore CSharpWarnings::CS0612
-#pragma warning restore 618 // 618 is that this interface is obsolete
         }
     }
 }

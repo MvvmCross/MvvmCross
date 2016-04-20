@@ -90,7 +90,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MvxWindowsPhoneGeoLocationWatcher.cs" />
     <Compile Include="MvxWindowsPhoneLocationWatcher.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

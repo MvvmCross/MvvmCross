@@ -54,12 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMvxGeoLocationWatcher.cs" />
     <Compile Include="IMvxLocationWatcher.cs" />
-    <Compile Include="MvxGeoLocationWatcher.cs" />
     <Compile Include="MvxCoordinates.cs" />
     <Compile Include="MvxGeoLocation.cs" />
-    <Compile Include="MvxGeolocationOptions.cs" />
     <Compile Include="MvxLocationAccuracy.cs" />
     <Compile Include="MvxLocationError.cs" />
     <Compile Include="MvxLocationErrorCode.cs" />

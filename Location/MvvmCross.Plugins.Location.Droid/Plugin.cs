@@ -12,16 +12,10 @@ namespace MvvmCross.Plugins.Location.Droid
 {
     public class Plugin
         : IMvxPlugin
-          
     {
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidLocationWatcher());
-#pragma warning disable 618 // 618 is that this interface is obsolete
-// ReSharper disable CSharpWarnings::CS0612
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxAndroidGeoLocationWatcher());
-// ReSharper restore CSharpWarnings::CS0612
-#pragma warning restore 618
 		}
     }
 }
