@@ -40,8 +40,7 @@ namespace MvvmCross.iOS.Support.Sidebar
 		{
 			var presenter = new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
 
-            if(presenter is IMvxSideMenu)
-                Mvx.RegisterSingleton<IMvxSideMenu>(presenter);
+            Mvx.RegisterSingleton<IMvxSideMenu>(presenter);
 
             return presenter;
 		}
