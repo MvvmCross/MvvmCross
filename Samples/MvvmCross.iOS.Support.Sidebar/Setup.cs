@@ -3,9 +3,10 @@ using MvvmCross.iOS.Support.XamarinSidebar;
 
 namespace MvvmCross.iOS.Support.Sidebar
 {
-	using MvvmCross.Core;
-	using MvvmCross.iOS.Platform;
+	using MvvmCross.Platform;
+    using MvvmCross.iOS.Platform;
 	using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.iOS.Support.SidePanels;
 	using MvvmCross.Platform.Platform;
 	using UIKit;
 	using MvvmCross.Core.ViewModels;
@@ -37,7 +38,11 @@ namespace MvvmCross.iOS.Support.Sidebar
 
 		protected override IMvxIosViewPresenter CreatePresenter()
 		{
-			return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+			var presenter = new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+
+            Mvx.RegisterSingleton<IMvxSideMenu>(presenter);
+
+            return presenter;
 		}
 	}
 }
