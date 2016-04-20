@@ -62,3 +62,22 @@ Notes:
 - it's not unusual for Android developers to hit issues with location detection on different phones and on different Android - check StackOverflow and Issues for questions and answers - e.g. https://github.com/slodge/MvvmCross/issues/360
 - some platforms (especially Android) insist on the Location Watcher being started/stopped on the UI thread
 - the MvvmCross coordinates object - MvxCoordinates - does not currently come with any built-in maths operations. Algorithms for some common coordinate operations can be found on (for example) http://slodge.blogspot.co.uk/2012/04/calculating-distance-between-latlng.html.
+
+
+### Known issue
+
+1. Android plugin does not track location in case `MvxLocationOptions` does not match current device GPS mode. For example `MvxLocationOptions.Coarse` works only with **Battery saving** mode and does not work for **High accuracy** and **Device only**. As a solution use Fused plugin: `MvvmCross.Plugins.Location.Fused.Droid`
+
+### Fused Location (Android only)
+
+There is a new **preferred** way to access location in Android which is called `FusedLocationApi`: http://developer.android.com/intl/ru/training/location/index.html 
+
+There are few benefits of using it (over the old approach):
+
+- `Coarse` option means **Low power** mode
+- location still tracked when device's GPS mode chagned
+- the plugin is more power efficient in general
+
+NOTE: the plugin requires GooglePlayServices (which is not installed by default on emulators)
+
+This plugin is not compatible with default `MvvmCross.Plugins.Location.Droid` plugin. Ensure only one is used in Android project. 
