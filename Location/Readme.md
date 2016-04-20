@@ -2,33 +2,38 @@
 
 The `Location` plugin provides access to GeoLocation (typically GPS) functionality via the API:
 
-    public interface IMvxGeoLocationWatcher
+    public interface IMvxLocationWatcher
     {
         void Start(
-            MvxGeoLocationOptions options, 
+            MvxLocationOptions options, 
             Action<MvxGeoLocation> success, 
             Action<MvxLocationError> error);
         void Stop();
         bool Started { get; }
+        
+        MvxGeoLocation CurrentLocation { get; }
+        MvxGeoLocation LastSeenLocation { get; }
+        
+        event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged;
     }
 
-The `Location` plugin is implemented on all platforms EXCEPT Wpf.
+The `Location` plugin is implemented on all platforms (even Wpf).
 
-Because of the `Action` based nature of the `IMvxGeoLocationWatcher` API, it's generally best **not** to use this interface directly inside ViewModels, but instead to use the API in a singleton service which can then send Messages to your ViewModels.
+Because of the `Action` based nature of the `IMvxLocationWatcher` API, it's generally best **not** to use this interface directly inside ViewModels, but instead to use the API in a singleton service which can then send Messages to your ViewModels.
 
 An example implementation of such a service is:
 
     public class LocationService
         : ILocationService
     {
-        private readonly IMvxGeoLocationWatcher _watcher;
+        private readonly IMvxLocationWatcher _watcher;
         private readonly IMvxMessenger _messenger;
 
-        public LocationService(IMvxGeoLocationWatcher watcher, IMvxMessenger messenger)
+        public LocationService(IMvxLocationWatcher watcher, IMvxMessenger messenger)
         {
             _watcher = watcher;
             _messenger = messenger;
-            _watcher.Start(new MvxGeoLocationOptions(), OnLocation, OnError);
+            _watcher.Start(new MvxLocationOptions(), OnLocation, OnError);
         }
 
         private void OnLocation(MvxGeoLocation location)
@@ -52,7 +57,7 @@ For a good walk-through of using the location plugin, including using it in tand
 
 Notes:
 
-- the `MvxGeoLocationOptions` object passed into the Start method provides a number of options like `EnableHighAccuracy` - not all of these options are well implemented on all platforms. For iOS8 and later, these options include the type of location permission request used (see https://github.com/MvvmCross/MvvmCross/pull/789)
+- the `MvxLocationOptions` object passed into the Start method provides a number of options like `EnableHighAccuracy` - not all of these options are well implemented on all platforms. For iOS8 and later, these options include the type of location permission request used (see https://github.com/MvvmCross/MvvmCross/pull/789)
 - the default implementation is a good 'general' module if you just need 'location information' in your app. If your app requires more - e.g. control over time and distance tracking, geo-fencing, etc - then consider building your own plugin (or injecting your own service from the UI project on each platform). The source code for the Location plugin should provide you with a good starting place for this.
 - it's not unusual for Android developers to hit issues with location detection on different phones and on different Android - check StackOverflow and Issues for questions and answers - e.g. https://github.com/slodge/MvvmCross/issues/360
 - some platforms (especially Android) insist on the Location Watcher being started/stopped on the UI thread
