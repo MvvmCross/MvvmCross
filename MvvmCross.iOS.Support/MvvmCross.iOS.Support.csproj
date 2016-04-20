@@ -76,6 +76,7 @@
     <Compile Include="SidePanels\MvxPanelPushViewPresentationHint.cs" />
     <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
     <Compile Include="SidePanels\MvxPanelPresentationHint.cs" />
+    <Compile Include="SidePanels\IMvxToggleMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

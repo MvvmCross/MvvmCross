@@ -1,8 +1,7 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.iOS.Support.XamarinSidebar;
-
-namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.iOS.Views
 {
+    using MvvmCross.Platform;
+    using MvvmCross.iOS.Support.SidePanels;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
@@ -32,6 +31,14 @@ namespace MvvmCross.iOS.Support.iOS.Views
             var detailButton = new UIButton();
             detailButton.SetTitle("Show Detail", UIControlState.Normal);
 
+            var toggleMenuButton = new UIButton();
+            toggleMenuButton.SetTitle("Toggle menu", UIControlState.Normal);
+            toggleMenuButton.TouchUpInside += (s, e) =>
+            {
+                var menuToggler = Mvx.Resolve<IMvxToggleMenu>();
+                menuToggler?.Toggle();
+            };
+
             var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
             bindingSet.Bind(detailButton).To(vm => vm.ShowDetailCommand);
@@ -39,6 +46,7 @@ namespace MvvmCross.iOS.Support.iOS.Views
 
             Add(label);
             Add(detailButton);
+            Add(toggleMenuButton);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
@@ -48,7 +56,10 @@ namespace MvvmCross.iOS.Support.iOS.Views
                 label.WithSameCenterY(View),
 
                 detailButton.Below(label, 10),
-                detailButton.WithSameCenterX(View)
+                detailButton.WithSameCenterX(View),
+
+                toggleMenuButton.Below(detailButton, 10),
+                toggleMenuButton.WithSameCenterX(View)
 
                 );
 
