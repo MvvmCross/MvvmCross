@@ -213,10 +213,15 @@ namespace MvvmCross.Core.Platform
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = this.CreatePluginManager();
+            AddPluginsLoaders (pluginManager.Registry);
             pluginManager.ConfigurationSource = this.GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
             this.LoadPlugins(pluginManager);
             return pluginManager;
+        }
+
+        protected virtual void AddPluginsLoaders (MvxLoaderPluginRegistry registry)
+        {
         }
 
         protected abstract IMvxPluginManager CreatePluginManager();

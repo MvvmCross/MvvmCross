@@ -22,23 +22,7 @@ namespace MvvmCross.Platform.Plugins
 
         protected virtual void PreLoad(IMvxPluginManager manager)
         {
-            var loaderManager = manager as IMvxLoaderPluginManager;
-
-            if (loaderManager == null)
-            {
-                Mvx.Warning(
-                    "You should not register a loader plugin bootstrap action when using a non-loader plugin manager");
-                return;
-            }
-
-            var pluginNamespace = typeof(TPlugin).Namespace;
-            if (string.IsNullOrEmpty(pluginNamespace))
-            {
-                Mvx.Warning("Unable to find namespace for {0} - skipping", typeof(TPlugin).Name);
-                return;
-            }
-
-            loaderManager.Finders[pluginNamespace] = () => Activator.CreateInstance<TPlatformPlugin>();
+            manager.Registry.Register<TPlugin, TPlatformPlugin> ();
         }
     }
 }
