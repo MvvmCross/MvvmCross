@@ -10,7 +10,7 @@ using MvvmCross.iOS.Support.XamarinSidebar.Hints;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
-    public class MvxSidebarPresenter : MvxIosViewPresenter, IMvxToggleMenu
+    public class MvxSidebarPresenter : MvxIosViewPresenter, IMvxSideMenu
     {
         protected virtual MvxSidebarPanelController SidebarPanelController { get; private set;}
 
@@ -95,7 +95,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             SetWindowRootViewController(SidebarPanelController);
         }
 
-        public void Toggle()
+        public void ToggleMenu()
         {
             SidebarPanelController?.SidebarController?.ToggleMenu();
         }

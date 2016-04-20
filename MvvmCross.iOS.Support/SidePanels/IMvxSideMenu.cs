@@ -1,8 +1,8 @@
 ﻿namespace MvvmCross.iOS.Support.SidePanels
 {
-    public interface IMvxToggleMenu
+    public interface IMvxSideMenu
     {
-        void Toggle();
+        void ToggleMenu();
     }
 }
 
