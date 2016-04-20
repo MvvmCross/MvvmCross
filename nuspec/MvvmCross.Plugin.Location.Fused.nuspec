@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.Location.Fused</id>
+		<version>4.1.4</version>
+		<title>MvvmCross - Fused Location Plugin</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the implementation of FusedLocationApi as 'Location' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android plugin fused fusedlocation</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.1.4" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.0.1.3" />
+				<dependency id="Xamarin.GooglePlayServices.Base" version="29.0.0.1" />
+				<dependency id="Xamarin.GooglePlayServices.Basement" version="29.0.0.1" />
+				<dependency id="Xamarin.GooglePlayServices.Location" version="29.0.0.1" />
+				<dependency id="Xamarin.GooglePlayServices.Maps" version="29.0.0.1" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- Common -->
+		<file src="..\Location\MvvmCross.Plugins.Location\**\*.cs" 
+			target="src\MvvmCross.Plugins.Location" />
+		<file src="..\Location\MvvmCross.Plugins.Location.Fused.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.Location.Fused.Droid" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Location.Fused.Droid.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\FusedLocationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FusedLocationPluginBootstrap.cs.pp" />
+
+	</files>
+</package>
