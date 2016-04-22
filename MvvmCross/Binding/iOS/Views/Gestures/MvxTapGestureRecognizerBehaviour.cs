@@ -18,12 +18,14 @@ namespace MvvmCross.Binding.iOS.Views.Gestures
         }
 
         public MvxTapGestureRecognizerBehaviour(UIView target, uint numberOfTapsRequired = 1,
-                                                uint numberOfTouchesRequired = 1)
+                                                uint numberOfTouchesRequired = 1,
+                                                bool cancelsTouchesInView = true)
         {
             var tap = new UITapGestureRecognizer(this.HandleGesture)
             {
                 NumberOfTapsRequired = numberOfTapsRequired,
-                NumberOfTouchesRequired = numberOfTouchesRequired
+                NumberOfTouchesRequired = numberOfTouchesRequired,
+                CancelsTouchesInView = cancelsTouchesInView
             };
 
             this.AddGestureRecognizer(target, tap);
