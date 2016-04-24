@@ -56,7 +56,7 @@ namespace MvvmCross.Droid.Support.V4
 			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
                 return fragment;
 
-            var viewModel = CreateViewModel(position);
+            var viewModel = fragInfo.ViewModel ?? CreateViewModel(position);
             mvxFragment.ViewModel = viewModel;
 
             return fragment;
@@ -108,6 +108,18 @@ namespace MvvmCross.Droid.Support.V4
                 ViewModelType = viewModelType;
                 ParameterValuesObject = parameterValuesObject;
             }
+            
+            public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
+		: this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
+	    {
+		ViewModel = viewModel;
+	    }
+
+	    public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
+		: this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
+	    {  
+		ViewModel = viewModel;
+	    }
 
             public Type FragmentType { get; }
 
@@ -118,6 +130,8 @@ namespace MvvmCross.Droid.Support.V4
             public string Title { get; }
 
             public Type ViewModelType { get; }
+            
+            public IMvxViewModel ViewModel { get; }
         }
     }
 }
