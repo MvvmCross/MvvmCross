@@ -95,9 +95,17 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             SetWindowRootViewController(SidebarPanelController);
         }
 
-        public void ToggleMenu()
+        public void Close()
         {
-            SidebarPanelController?.SidebarController?.ToggleMenu();
+            var sidebarPanelController = SidebarPanelController;
+
+            if (sidebarPanelController == null) return;
+
+            if (sidebarPanelController.LeftSidebarController.IsOpen)
+                sidebarPanelController.LeftSidebarController.CloseMenu();
+
+            if (sidebarPanelController.RightSidebarController.IsOpen)
+                sidebarPanelController.RightSidebarController.CloseMenu();
         }
     }
 }

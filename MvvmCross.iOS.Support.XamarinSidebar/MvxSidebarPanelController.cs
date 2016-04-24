@@ -11,7 +11,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         }
 
         public UINavigationController NavigationController { get; private set; }
-        public SidebarController SidebarController { get; private set; }
+        public SidebarController LeftSidebarController { get; private set; }
+        public SidebarController RightSidebarController { get; private set; }
 
         public override void ViewDidLoad()
         {
@@ -19,7 +20,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             var initialEmptySideMenu = new UIViewController();
 
-            SidebarController = new SidebarController(this, NavigationController, initialEmptySideMenu);
+            LeftSidebarController = new SidebarController(this, NavigationController, initialEmptySideMenu);
+            RightSidebarController = new SidebarController(this, NavigationController, initialEmptySideMenu);
         }
 
     }

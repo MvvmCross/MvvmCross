@@ -35,8 +35,8 @@
             toggleMenuButton.SetTitle("Toggle menu", UIControlState.Normal);
             toggleMenuButton.TouchUpInside += (s, e) =>
             {
-                var menuToggler = Mvx.Resolve<IMvxSideMenu>();
-                menuToggler?.ToggleMenu();
+                var sideMenu = Mvx.Resolve<IMvxSideMenu>();
+                sideMenu?.Close();
             };
 
             var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();
