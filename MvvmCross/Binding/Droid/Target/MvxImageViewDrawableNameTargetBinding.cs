@@ -9,7 +9,6 @@ namespace MvvmCross.Binding.Droid.Target
 {
     using System;
 
-    using Android.Graphics;
     using Android.Widget;
 
     using MvvmCross.Platform.Platform;
@@ -17,20 +16,25 @@ namespace MvvmCross.Binding.Droid.Target
     public class MvxImageViewDrawableNameTargetBinding
         : MvxImageViewDrawableTargetBinding
     {
-        public MvxImageViewDrawableNameTargetBinding(ImageView imageView) : base(imageView)
+        public MvxImageViewDrawableNameTargetBinding(ImageView imageView)
+            : base(imageView)
         {
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
         public override Type TargetType => typeof(string);
 
-        protected override bool GetBitmap(object value, out Bitmap bitmap)
+        protected override void SetValueImpl(object target, object value)
         {
+            var imageView = (ImageView)target;
+
             if (!(value is string))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value '{0}' could not be parsed as a valid string identifier", value);
-                bitmap = null;
-                return false;
+                    "Value '{0}' could not be parsed as a valid string identifier", value);
+                imageView.SetImageDrawable(null);
+                return;
             }
 
             var resources = this.AndroidGlobals.ApplicationContext.Resources;
@@ -38,12 +42,12 @@ namespace MvvmCross.Binding.Droid.Target
             if (id == 0)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value '{0}' was not a known drawable name", value);
-                bitmap = null;
-                return false;
+                    "Value '{0}' was not a known drawable name", value);
+                imageView.SetImageDrawable(null);
+                return;
             }
 
-            return base.GetBitmap(id, out bitmap);
+            base.SetValueImpl(target, id);
         }
     }
 }
