@@ -9,7 +9,7 @@ namespace MvvmCross.CodeAnalysis.Test
     [TestFixture]
     public class ConsiderUsingGenericBaseViewAnalyzerTests : CodeFixVerifier<ConsiderUsingGenericBaseViewAnalyzer, ConsiderUsingGenericBaseViewCodeFix>
     {
-        private const string Expected = @"
+        private const string ViewModel = @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +19,24 @@ using System.Diagnostics;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 
-namespace AndroidApp
+namespace AndroidApp.Core.ViewModels
 {
-    class FirstViewModel : MvxViewModel { }
-    
+    public class FirstViewModel : MvxViewModel { }
+}";
+
+        private const string Expected = @"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using MvvmCross.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using AndroidApp.Core.ViewModels;
+
+namespace AndroidApp.Droid
+{
     [Activity(FirstActivity)]
     class FirstView : MvxActivity<FirstViewModel>
     {
@@ -38,11 +52,10 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
+using AndroidApp.Core.ViewModels;
 
-namespace AndroidApp
+namespace AndroidApp.Droid
 {
-    class FirstViewModel : MvxViewModel { }
-    
     [Activity(FirstActivity)]
     class FirstView : MvxActivity
     {
@@ -61,17 +74,27 @@ namespace AndroidApp
                 Locations =
                     new[]
                     {
-                        new DiagnosticResultLocation("Test0.cs", 16, 23)
+                        new DiagnosticResultLocation("Test0.cs", 15, 23)
                     }
             };
 
-            VerifyCSharpDiagnostic(Test, expectedDiagnostic);
+            VerifyCSharpDiagnostic(
+                new[]
+                {
+                    new MvxTestFileSource(Test, MvxProjType.Droid),
+                    new MvxTestFileSource(ViewModel, MvxProjType.Core)
+                },
+                expectedDiagnostic);
         }
 
         [Test]
         public void ConsiderUsingGenericBaseViewAnalyzerShouldFixTheCode()
         {
-            VerifyCSharpFix(Test, Expected);
+            var solution = new[]
+            {
+                new MvxTestFileSource(ViewModel, MvxProjType.Core)
+            };
+            VerifyCSharpFix(solution, Test, MvxProjType.Droid, Expected);
         }
     }
 }

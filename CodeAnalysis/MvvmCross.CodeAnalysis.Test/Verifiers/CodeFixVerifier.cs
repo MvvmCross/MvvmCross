@@ -33,33 +33,55 @@ namespace MvvmCross.CodeAnalysis.Test
         protected virtual CodeFixProvider GetCSharpCodeFixProvider() => null;
 
         /// <summary>
-        /// Returns the codefix being tested (VB) - to be implemented in non-abstract class
+        /// Called to test a C# codefix when applied on the inputted string as a source
         /// </summary>
-        /// <returns>The CodeFixProvider to be used for VisualBasic code</returns>
-        protected virtual CodeFixProvider GetBasicCodeFixProvider() => null;
+        /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="newSource">A class in the form of a string after the CodeFix was applied to it</param>
+        /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
+        /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
+        protected void VerifyCSharpFix(string oldSource, MvxProjType projType, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
+        {
+            VerifyFix(GetCSharpDiagnosticAnalyzer(), GetCSharpCodeFixProvider(), null, new MvxTestFileSource(oldSource, projType), newSource, codeFixIndex, allowNewCompilerDiagnostics);
+        }
 
         /// <summary>
         /// Called to test a C# codefix when applied on the inputted string as a source
         /// </summary>
-        /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>
+        /// <param name="oldSource">A class in the form of a MvxTestFileSource before the CodeFix was applied to it</param>
         /// <param name="newSource">A class in the form of a string after the CodeFix was applied to it</param>
         /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
         /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
-        protected void VerifyCSharpFix(string oldSource, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
+        protected void VerifyCSharpFix(MvxTestFileSource oldSource, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
         {
-            VerifyFix(LanguageNames.CSharp, GetCSharpDiagnosticAnalyzer(), GetCSharpCodeFixProvider(), oldSource, newSource, codeFixIndex, allowNewCompilerDiagnostics);
+            VerifyFix(GetCSharpDiagnosticAnalyzer(), GetCSharpCodeFixProvider(), null, oldSource, newSource, codeFixIndex, allowNewCompilerDiagnostics);
         }
 
         /// <summary>
-        /// Called to test a VB codefix when applied on the inputted string as a source
+        /// Called to test a C# codefix when applied on the inputted string as a source
         /// </summary>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
+        /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>
+        /// <param name="projType">MvvmCross Project Type to be returned</param>
+        /// <param name="newSource">A class in the form of a string after the CodeFix was applied to it</param>
+        /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
+        /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
+        protected void VerifyCSharpFix(MvxTestFileSource[] fileSources, string oldSource, MvxProjType projType, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
+        {
+            VerifyFix(GetCSharpDiagnosticAnalyzer(), GetCSharpCodeFixProvider(), fileSources, new MvxTestFileSource(oldSource, projType), newSource, codeFixIndex, allowNewCompilerDiagnostics);
+        }
+
+        /// <summary>
+        /// Called to test a C# codefix when applied on the inputted string as a source
+        /// </summary>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>
         /// <param name="newSource">A class in the form of a string after the CodeFix was applied to it</param>
         /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
         /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
-        protected void VerifyBasicFix(string oldSource, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
+        protected void VerifyCSharpFix(MvxTestFileSource[] fileSources, MvxTestFileSource oldSource, string newSource, int? codeFixIndex = null, bool allowNewCompilerDiagnostics = false)
         {
-            VerifyFix(LanguageNames.VisualBasic, GetBasicDiagnosticAnalyzer(), GetBasicCodeFixProvider(), oldSource, newSource, codeFixIndex, allowNewCompilerDiagnostics);
+            VerifyFix(GetCSharpDiagnosticAnalyzer(), GetCSharpCodeFixProvider(), fileSources, oldSource, newSource, codeFixIndex, allowNewCompilerDiagnostics);
         }
 
         /// <summary>
@@ -68,16 +90,16 @@ namespace MvvmCross.CodeAnalysis.Test
         /// Then gets the string after the codefix is applied and compares it with the expected result.
         /// Note: If any codefix causes new diagnostics to show up, the test fails unless allowNewCompilerDiagnostics is set to true.
         /// </summary>
-        /// <param name="language">The language the source code is in</param>
         /// <param name="analyzer">The analyzer to be applied to the source code</param>
         /// <param name="codeFixProvider">The codefix to be applied to the code wherever the relevant Diagnostic is found</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>
         /// <param name="newSource">A class in the form of a string after the CodeFix was applied to it</param>
         /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
         /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
-        private static void VerifyFix(string language, DiagnosticAnalyzer analyzer, CodeFixProvider codeFixProvider, string oldSource, string newSource, int? codeFixIndex, bool allowNewCompilerDiagnostics)
+        private static void VerifyFix(DiagnosticAnalyzer analyzer, CodeFixProvider codeFixProvider, MvxTestFileSource[] fileSources, MvxTestFileSource oldSource, string newSource, int? codeFixIndex, bool allowNewCompilerDiagnostics)
         {
-            var document = CreateDocument(oldSource, language);
+            var document = CreateDocument(fileSources, oldSource);
             var analyzerDiagnostics = GetSortedDiagnosticsFromDocuments(analyzer, new[] { document });
             var compilerDiagnostics = GetCompilerDiagnostics(document);
             var attempts = analyzerDiagnostics.Length;
