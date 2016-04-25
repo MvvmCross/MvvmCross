@@ -3,6 +3,7 @@ using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform;
 
 namespace MvvmCross.iOS.Support.JASidePanels
 {
@@ -54,6 +55,8 @@ namespace MvvmCross.iOS.Support.JASidePanels
         {
             _multiPanelController = new MvxMultiPanelController();
             _activePanel = MvxPanelEnum.Center;
+
+            Mvx.RegisterSingleton<IMvxSideMenu>(_multiPanelController);
         }
 
         #endregion ctors
