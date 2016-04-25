@@ -32,11 +32,11 @@
             detailButton.SetTitle("Show Detail", UIControlState.Normal);
 
             var toggleMenuButton = new UIButton();
-            toggleMenuButton.SetTitle("Toggle menu", UIControlState.Normal);
+            toggleMenuButton.SetTitle("Open menu", UIControlState.Normal);
             toggleMenuButton.TouchUpInside += (s, e) =>
             {
                 var sideMenu = Mvx.Resolve<IMvxSideMenu>();
-                sideMenu?.Close();
+                sideMenu?.Open(MvxPanelEnum.Left);
             };
 
             var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();

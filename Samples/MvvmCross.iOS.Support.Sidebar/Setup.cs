@@ -38,11 +38,7 @@ namespace MvvmCross.iOS.Support.Sidebar
 
 		protected override IMvxIosViewPresenter CreatePresenter()
 		{
-			var presenter = new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
-
-            Mvx.RegisterSingleton<IMvxSideMenu>(presenter);
-
-            return presenter;
+			return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
 		}
 	}
 }
