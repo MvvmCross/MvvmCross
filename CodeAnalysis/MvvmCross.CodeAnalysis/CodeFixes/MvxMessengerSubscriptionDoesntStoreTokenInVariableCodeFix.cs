@@ -22,7 +22,8 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
         public sealed override FixAllProvider GetFixAllProvider() =>
             WellKnownFixAllProviders.BatchFixer;
 
-        private static readonly string Message = "Store the returned token in a field";
+        private const string Message = "Store the returned token in a field";
+        private const string MessengerNamespace = "MvvmCross.Plugins.Messenger";
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -38,9 +39,9 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
 
         private static async Task<Document> ApplyFix(Document document, TextSpan span, CancellationToken cancellationToken)
         {
-            var root = await document
+            var root = (CompilationUnitSyntax)(await document
                 .GetSyntaxRootAsync(cancellationToken)
-                .ConfigureAwait(false);
+                .ConfigureAwait(false));
 
             var spanNode = root.FindNode(span);
 
@@ -73,6 +74,11 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
 
                 root = root
                     .ReplaceNode(classDeclarationSyntax, newClassDeclarationSyntax);
+                
+                if (root.Usings.All(u => u.Name.ToString() != MessengerNamespace))
+                {
+                    root = root.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(MessengerNamespace)));
+                }
             }
 
             document = document.WithSyntaxRoot(root.NormalizeWhitespace());
