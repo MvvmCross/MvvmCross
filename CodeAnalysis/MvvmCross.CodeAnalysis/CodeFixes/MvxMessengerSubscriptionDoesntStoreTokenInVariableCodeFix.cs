@@ -74,10 +74,12 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
 
                 root = root
                     .ReplaceNode(classDeclarationSyntax, newClassDeclarationSyntax);
-                
+
                 if (root.Usings.All(u => u.Name.ToString() != MessengerNamespace))
                 {
-                    root = root.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName(MessengerNamespace)));
+                    var name = SyntaxFactory.QualifiedName(SyntaxFactory.QualifiedName(SyntaxFactory.IdentifierName("MvvmCross"),
+                                    SyntaxFactory.IdentifierName("Plugins")), SyntaxFactory.IdentifierName("Messenger"));
+                    root = root.AddUsings(SyntaxFactory.UsingDirective(name).NormalizeWhitespace());
                 }
             }
 
