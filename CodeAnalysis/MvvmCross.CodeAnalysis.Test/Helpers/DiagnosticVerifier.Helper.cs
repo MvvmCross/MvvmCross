@@ -24,17 +24,19 @@ namespace MvvmCross.CodeAnalysis.Test
         private static readonly MetadataReference _cSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
         private static readonly MetadataReference _codeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
+        private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Platform.Mvx).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
         private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
-        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath());
+        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.ObjectModel"));
+        private static readonly MetadataReference _runtimeReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.Runtime"));
 
-        private static string GetCorrectObjectModelPath()
+        private static string GetCorrectObjectModelPath(string path)
         {
             var winDir = Environment.GetEnvironmentVariable("windir");
 
             if (winDir != null)
             {
-                var gacObjectModelPath = Path.Combine(winDir, @"Microsoft.NET\assembly\GAC_MSIL\System.ObjectModel");
+                var gacObjectModelPath = Path.Combine(winDir, $@"Microsoft.NET\assembly\GAC_MSIL\{path}");
                 var finalPath = Directory.GetDirectories(gacObjectModelPath).First();
 
                 return Directory.GetFiles(finalPath).First();
@@ -44,21 +46,22 @@ namespace MvvmCross.CodeAnalysis.Test
 
         internal static string DefaultFilePathPrefix = "Test";
         internal static string CSharpDefaultFileExt = "cs";
-        internal static string VisualBasicDefaultExt = "vb";
-        internal static string TestProjectName = "TestProject";
+        internal static string TestCoreProjectName = "CoreTestProject";
+        internal static string TestDroidProjectName = "DroidTestProject";
+        private static ProjectId _coreProjectId;
+        private static ProjectId _droidProjectId;
 
         #region  Get Diagnostics
 
         /// <summary>
         /// Given classes in the form of strings, their language, and an IDiagnosticAnlayzer to apply to it, return the diagnostics found in the string after converting it to a document.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source classes are in</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="analyzer">The analyzer to be run on the sources</param>
         /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-        private static Diagnostic[] GetSortedDiagnostics(string[] sources, string language, DiagnosticAnalyzer analyzer)
+        private static Diagnostic[] GetSortedDiagnostics(MvxTestFileSource[] fileSources, DiagnosticAnalyzer analyzer)
         {
-            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, language));
+            return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(fileSources));
         }
 
         /// <summary>
@@ -112,75 +115,92 @@ namespace MvvmCross.CodeAnalysis.Test
         #endregion
 
         #region Set up compilation and documents
+
         /// <summary>
         /// Given an array of strings as sources and a language, turn them into a project and return the documents and spans of it.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source code is in</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <returns>A Tuple containing the Documents produced from the sources and their TextSpans if relevant</returns>
-        private static Document[] GetDocuments(string[] sources, string language)
+        protected static Document[] GetDocuments(MvxTestFileSource[] fileSources)
         {
-            if (language != LanguageNames.CSharp && language != LanguageNames.VisualBasic)
+            var solution = CreateSolution(fileSources);
+
+            var documents = new List<Document>();
+            foreach (var projectId in solution.ProjectIds)
             {
-                throw new ArgumentException("Unsupported Language");
+                var project = solution.GetProject(projectId);
+                var projectDocuments = project.Documents.ToArray();
+
+                if (fileSources.Count(f => f.ProjType == (projectId == _coreProjectId ? MvxProjType.Core : MvxProjType.Droid)) != projectDocuments.Length)
+                {
+                    throw new SystemException("Amount of sources did not match amount of Documents created");
+                }
+                documents.AddRange(projectDocuments);
             }
 
-            var project = CreateProject(sources, language);
-            var documents = project.Documents.ToArray();
-
-            if (sources.Length != documents.Length)
-            {
-                throw new SystemException("Amount of sources did not match amount of Documents created");
-            }
-
-            return documents;
+            return documents.ToArray();
         }
 
         /// <summary>
         /// Create a Document from a string through creating a project that contains it.
         /// </summary>
-        /// <param name="source">Classes in the form of a string</param>
-        /// <param name="language">The language the source code is in</param>
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
+        /// <param name="fileSource">The file the should be added last, aldo also to be returned</param>
         /// <returns>A Document created from the source string</returns>
-        protected static Document CreateDocument(string source, string language = LanguageNames.CSharp)
+        protected static Document CreateDocument(MvxTestFileSource[] fileSources, MvxTestFileSource fileSource)
         {
-            return CreateProject(new[] { source }, language).Documents.First();
+            var documents = fileSources?.ToList() ?? new List<MvxTestFileSource>();
+            documents.Add(fileSource);
+
+            return CreateSolution(documents.ToArray())
+                .GetProject(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId).Documents.Last();
         }
 
         /// <summary>
         /// Create a project using the inputted strings as sources.
         /// </summary>
-        /// <param name="sources">Classes in the form of strings</param>
-        /// <param name="language">The language the source code is in</param>
-        /// <returns>A Project created out of the Documents created from the source strings</returns>
-        private static Project CreateProject(string[] sources, string language = LanguageNames.CSharp)
+        /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
+        /// <returns>A Solution created out of the Documents created from the source strings</returns>
+        private static Solution CreateSolution(MvxTestFileSource[] fileSources)
         {
             string fileNamePrefix = DefaultFilePathPrefix;
-            string fileExt = language == LanguageNames.CSharp ? CSharpDefaultFileExt : VisualBasicDefaultExt;
 
-            var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
+            _coreProjectId = ProjectId.CreateNewId(debugName: TestCoreProjectName);
+            _droidProjectId = ProjectId.CreateNewId(debugName: TestDroidProjectName);
 
             var solution = new AdhocWorkspace()
                 .CurrentSolution
-                .AddProject(projectId, TestProjectName, TestProjectName, language)
-                .AddMetadataReference(projectId, _corlibReference)
-                .AddMetadataReference(projectId, _systemCoreReference)
-                .AddMetadataReference(projectId, _cSharpSymbolsReference)
-                .AddMetadataReference(projectId, _codeAnalysisReference)
-                .AddMetadataReference(projectId, _mvvmCrossCoreReference)
-                .AddMetadataReference(projectId, _mvvmCrossDroidReference)
-                .AddMetadataReference(projectId, _componentModelReference)
-                .AddMetadataReference(projectId, _objectModelReference);
+                .AddProject(_coreProjectId, TestCoreProjectName, TestCoreProjectName, LanguageNames.CSharp)
+                .AddProject(_droidProjectId, TestDroidProjectName, TestDroidProjectName, LanguageNames.CSharp)
+                .AddMetadataReference(_coreProjectId, _corlibReference)
+                .AddMetadataReference(_coreProjectId, _systemCoreReference)
+                .AddMetadataReference(_coreProjectId, _cSharpSymbolsReference)
+                .AddMetadataReference(_coreProjectId, _codeAnalysisReference)
+                .AddMetadataReference(_coreProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_coreProjectId, _mvvmCrossPlatformReference)
+                .AddMetadataReference(_coreProjectId, _componentModelReference)
+                .AddMetadataReference(_coreProjectId, _objectModelReference)
+                .AddMetadataReference(_coreProjectId, _runtimeReference)
+                .AddMetadataReference(_droidProjectId, _corlibReference)
+                .AddMetadataReference(_droidProjectId, _systemCoreReference)
+                .AddMetadataReference(_droidProjectId, _cSharpSymbolsReference)
+                .AddMetadataReference(_droidProjectId, _codeAnalysisReference)
+                .AddMetadataReference(_droidProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_droidProjectId, _mvvmCrossDroidReference)
+                .AddMetadataReference(_droidProjectId, _componentModelReference)
+                .AddMetadataReference(_droidProjectId, _objectModelReference)
+                .AddProjectReference(_droidProjectId, new ProjectReference(_coreProjectId));
 
             int count = 0;
-            foreach (var source in sources)
+            foreach (var fileSource in fileSources)
             {
-                var newFileName = fileNamePrefix + count + "." + fileExt;
-                var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
-                solution = solution.AddDocument(documentId, newFileName, SourceText.From(source));
+                var newFileName = fileNamePrefix + count + "." + CSharpDefaultFileExt;
+                var documentId = DocumentId.CreateNewId(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId, debugName: newFileName);
+                solution = solution.AddDocument(documentId, newFileName, SourceText.From(fileSource.Source));
                 count++;
             }
-            return solution.GetProject(projectId);
+
+            return solution;
         }
         #endregion
     }
