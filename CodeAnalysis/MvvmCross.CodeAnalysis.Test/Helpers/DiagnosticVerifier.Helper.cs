@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views;
+using MvvmCross.iOS.Views;
 
 namespace MvvmCross.CodeAnalysis.Test
 {
@@ -26,6 +27,7 @@ namespace MvvmCross.CodeAnalysis.Test
         private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Platform.Mvx).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
+        private static readonly MetadataReference _mvvmCrossIosReference = MetadataReference.CreateFromFile(typeof(MvxViewController).Assembly.Location);
         private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
         private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.ObjectModel"));
         private static readonly MetadataReference _runtimeReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.Runtime"));
@@ -48,8 +50,10 @@ namespace MvvmCross.CodeAnalysis.Test
         internal static string CSharpDefaultFileExt = "cs";
         internal static string TestCoreProjectName = "CoreTestProject";
         internal static string TestDroidProjectName = "DroidTestProject";
+        internal static string TestIosProjectName = "IosTestProject";
         private static ProjectId _coreProjectId;
         private static ProjectId _droidProjectId;
+        private static ProjectId _iosProjectId;
 
         #region  Get Diagnostics
 
@@ -131,7 +135,7 @@ namespace MvvmCross.CodeAnalysis.Test
                 var project = solution.GetProject(projectId);
                 var projectDocuments = project.Documents.ToArray();
 
-                if (fileSources.Count(f => f.ProjType == (projectId == _coreProjectId ? MvxProjType.Core : MvxProjType.Droid)) != projectDocuments.Length)
+                if (fileSources.Count(f => IsFromProject(f, projectId)) != projectDocuments.Length)
                 {
                     throw new SystemException("Amount of sources did not match amount of Documents created");
                 }
@@ -139,6 +143,18 @@ namespace MvvmCross.CodeAnalysis.Test
             }
 
             return documents.ToArray();
+        }
+
+        private static bool IsFromProject(MvxTestFileSource file, ProjectId projectId)
+        {
+            MvxProjType mvxProjType;
+            if (projectId == _coreProjectId)
+                mvxProjType = MvxProjType.Core;
+            else if (projectId == _droidProjectId)
+                mvxProjType = MvxProjType.Droid;
+            else
+                mvxProjType = MvxProjType.Ios;
+            return file.ProjType == mvxProjType;
         }
 
         /// <summary>
@@ -153,7 +169,16 @@ namespace MvvmCross.CodeAnalysis.Test
             documents.Add(fileSource);
 
             return CreateSolution(documents.ToArray())
-                .GetProject(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId).Documents.Last();
+                .GetProject(GetProjectId(fileSource)).Documents.Last();
+        }
+
+        private static ProjectId GetProjectId(MvxTestFileSource fileSource)
+        {
+            if (fileSource.ProjType == MvxProjType.Core)
+                return _coreProjectId;
+            if (fileSource.ProjType == MvxProjType.Droid)
+                return _droidProjectId;
+            return _iosProjectId;
         }
 
         /// <summary>
@@ -167,11 +192,13 @@ namespace MvvmCross.CodeAnalysis.Test
 
             _coreProjectId = ProjectId.CreateNewId(debugName: TestCoreProjectName);
             _droidProjectId = ProjectId.CreateNewId(debugName: TestDroidProjectName);
+            _iosProjectId = ProjectId.CreateNewId(debugName: TestIosProjectName);
 
             var solution = new AdhocWorkspace()
                 .CurrentSolution
                 .AddProject(_coreProjectId, TestCoreProjectName, TestCoreProjectName, LanguageNames.CSharp)
                 .AddProject(_droidProjectId, TestDroidProjectName, TestDroidProjectName, LanguageNames.CSharp)
+                .AddProject(_iosProjectId, TestIosProjectName, TestIosProjectName, LanguageNames.CSharp)
                 .AddMetadataReference(_coreProjectId, _corlibReference)
                 .AddMetadataReference(_coreProjectId, _systemCoreReference)
                 .AddMetadataReference(_coreProjectId, _cSharpSymbolsReference)
@@ -189,13 +216,22 @@ namespace MvvmCross.CodeAnalysis.Test
                 .AddMetadataReference(_droidProjectId, _mvvmCrossDroidReference)
                 .AddMetadataReference(_droidProjectId, _componentModelReference)
                 .AddMetadataReference(_droidProjectId, _objectModelReference)
-                .AddProjectReference(_droidProjectId, new ProjectReference(_coreProjectId));
+                .AddProjectReference(_droidProjectId, new ProjectReference(_coreProjectId))
+                .AddMetadataReference(_iosProjectId, _corlibReference)
+                .AddMetadataReference(_iosProjectId, _systemCoreReference)
+                .AddMetadataReference(_iosProjectId, _cSharpSymbolsReference)
+                .AddMetadataReference(_iosProjectId, _codeAnalysisReference)
+                .AddMetadataReference(_iosProjectId, _mvvmCrossCoreReference)
+                .AddMetadataReference(_iosProjectId, _mvvmCrossIosReference)
+                .AddMetadataReference(_iosProjectId, _componentModelReference)
+                .AddMetadataReference(_iosProjectId, _objectModelReference)
+                .AddProjectReference(_iosProjectId, new ProjectReference(_coreProjectId));
 
             int count = 0;
             foreach (var fileSource in fileSources)
             {
                 var newFileName = fileNamePrefix + count + "." + CSharpDefaultFileExt;
-                var documentId = DocumentId.CreateNewId(fileSource.ProjType == MvxProjType.Core ? _coreProjectId : _droidProjectId, debugName: newFileName);
+                var documentId = DocumentId.CreateNewId(GetProjectId(fileSource), debugName: newFileName);
                 solution = solution.AddDocument(documentId, newFileName, SourceText.From(fileSource.Source));
                 count++;
             }
@@ -205,4 +241,3 @@ namespace MvvmCross.CodeAnalysis.Test
         #endregion
     }
 }
-

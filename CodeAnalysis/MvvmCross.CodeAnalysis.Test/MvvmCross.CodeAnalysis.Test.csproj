@@ -56,6 +56,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
     </Reference>
+	<Reference Include="Xamarin.iOS, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerTests.cs" />
     <Compile Include="CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests.cs" />
     <Compile Include="MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerTests.cs" />
     <Compile Include="ConsiderUsingGenericBaseViewAnalyzerTests.cs" />
@@ -114,6 +119,10 @@
       <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
       <Name>MvvmCross.Binding.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj">
+      <Project>{913b13b5-7b2c-4dda-becb-dadc827ed895}</Project>
+      <Name>MvvmCross.Binding.iOS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
@@ -126,9 +135,17 @@
       <Project>{7a6be137-d0f1-46a1-ae5c-81faeedddf02}</Project>
       <Name>MvvmCross.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\iOS\iOS\MvvmCross.iOS.csproj">
+      <Project>{e042edd9-e89d-4928-bf4d-27f0fc29ceda}</Project>
+      <Name>MvvmCross.iOS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj">
       <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Platform\iOS\MvvmCross.Platform.iOS.csproj">
+      <Project>{bbbcd850-e7cb-4b6c-86d9-ce01f2b1c81c}</Project>
+      <Name>MvvmCross.Platform.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
