@@ -3,6 +3,7 @@
     public enum MvxProjType
     {
         Core,
-        Droid
+        Droid,
+        Ios
     }
 }
