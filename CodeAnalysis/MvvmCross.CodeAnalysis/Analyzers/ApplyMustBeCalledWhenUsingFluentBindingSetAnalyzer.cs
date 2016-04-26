@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
 using System.Collections.Immutable;
@@ -43,17 +44,21 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
             var parentBlock = memberAccessExpressionSyntax.FirstAncestorOrSelf<BlockSyntax>();
 
-            if (parentBlock?.DescendantNodes().OfType<MemberAccessExpressionSyntax>().Any(n => IsInvocationofApply(n, variableDeclarationSyntax.Identifier)) == false)
+            var bindingSetIdentifier = variableDeclarationSyntax.Identifier.ValueText;
+
+            if (parentBlock?.DescendantNodes().OfType<MemberAccessExpressionSyntax>().Any(n => IsInvocationOfApply(n, bindingSetIdentifier)) == false)
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, genericNameSyntax.Identifier.GetLocation(), variableDeclarationSyntax.Identifier.ToFullString().Trim()));
+                var properties = new Dictionary<string, string> { { nameof(bindingSetIdentifier), bindingSetIdentifier } }.ToImmutableDictionary();
+
+                context.ReportDiagnostic(Diagnostic.Create(Rule, variableDeclarationSyntax.Identifier.GetLocation(), properties, variableDeclarationSyntax.Identifier.ToFullString().Trim()));
             }
         }
 
-        private static bool IsInvocationofApply(MemberAccessExpressionSyntax memberAccessSyntax, SyntaxToken bindingSetIdentifier)
+        private static bool IsInvocationOfApply(MemberAccessExpressionSyntax memberAccessSyntax, string bindingSetIdentifierString)
         {
             var identifierName = memberAccessSyntax.Expression as IdentifierNameSyntax;
 
-            if (identifierName?.Identifier.ValueText != bindingSetIdentifier.ValueText) return false;
+            if (identifierName?.Identifier.ValueText != bindingSetIdentifierString) return false;
 
             return memberAccessSyntax.Name.Identifier.ValueText == "Apply";
         }
