@@ -152,7 +152,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((IMvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = GetItem(position);
         }
 
         public override int ItemCount => _itemsSource.Count();
