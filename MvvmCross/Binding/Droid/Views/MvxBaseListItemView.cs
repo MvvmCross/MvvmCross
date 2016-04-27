@@ -51,12 +51,11 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         private object _cachedDataContext;
-        private bool _isAttachedToWindow;
 
         protected override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            this._isAttachedToWindow = true;
+
             if (this._cachedDataContext != null
                 && this.DataContext == null)
             {
@@ -67,9 +66,8 @@ namespace MvvmCross.Binding.Droid.Views
         protected override void OnDetachedFromWindow()
         {
             this._cachedDataContext = this.DataContext;
-            this.DataContext = null;
+
             base.OnDetachedFromWindow();
-            this._isAttachedToWindow = false;
         }
 
         protected override void Dispose(bool disposing)
@@ -88,21 +86,7 @@ namespace MvvmCross.Binding.Droid.Views
         public object DataContext
         {
             get { return this._bindingContext.DataContext; }
-            set
-            {
-                if (this._isAttachedToWindow)
-                {
-                    this._bindingContext.DataContext = value;
-                }
-                else
-                {
-                    this._cachedDataContext = value;
-                    if (this._bindingContext.DataContext != null)
-                    {
-                        this._bindingContext.DataContext = null;
-                    }
-                }
-            }
+			set { this._bindingContext.DataContext = value; }
         }
 
         protected virtual View FirstChild
