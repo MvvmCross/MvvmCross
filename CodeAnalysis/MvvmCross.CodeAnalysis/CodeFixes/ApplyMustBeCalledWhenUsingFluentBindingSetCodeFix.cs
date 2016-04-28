@@ -75,7 +75,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                             SyntaxFactory.IdentifierName("Apply"))));
 
                 root = root.InsertNodesAfter(lastBindCall.FirstAncestorOrSelf<ExpressionStatementSyntax>(),
-                    new List<SyntaxNode> { applyCallNode });
+                    new List<SyntaxNode> { applyCallNode.WithLeadingTrivia(lastBindCall.GetLeadingTrivia()) });
 
                 document = document.WithSyntaxRoot(root);
             }
