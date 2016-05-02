@@ -29,15 +29,8 @@ This package contains the 'Android Dialog' libraries for MvvmCross
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\MonoAndroid" />
-		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
-
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.*" target="lib\MonoAndroid" />
-
-		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid" />
-
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Dialog.Droid.*" target="lib\MonoAndroid" />
-
-		<file src="..\MvvmCross\Dialog\Droid\**\*.cs" target="src\MvvmCross.Dialog.Droid" />
 	</files>
 </package>
 

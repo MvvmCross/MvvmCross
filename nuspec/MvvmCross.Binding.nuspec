@@ -96,12 +96,6 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
 
-		<!-- src -->
-		<file src="..\MvvmCross\Core\Binding\**\*.cs" target="src\MvvmCross.Binding" />
-		<file src="..\MvvmCross\Binding\Droid\**\*.cs" target="src\MvvmCross.Binding.Droid" />
-		<file src="..\MvvmCross\Binding\iOS\**\*.cs" target="src\MvvmCross.Binding.iOS" />
-		<file src="..\MvvmCross\Core\Localization\**\*.cs" target="src\MvvmCross.Localization" />
-
 	</files>
 </package>
 

@@ -32,9 +32,6 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.AutoView.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\iOS\CrossUI.iOS.*" target="lib\Xamarin.iOS10" />
-
-		<file src="..\MvvmCross\AutoView\iOS\**\*.cs" 
-			target="src\MvvmCross.AutoView.iOS" />		
 	</files>
 </package>
 

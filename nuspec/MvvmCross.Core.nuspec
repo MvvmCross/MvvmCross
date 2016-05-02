@@ -49,26 +49,7 @@ This package contains the 'Core' libraries for MvvmCross
 			</group>
 		</dependencies>
 	</metadata>
-	<files>		
-		<!-- src -->
-		<file src="..\MvvmCross\Core\Core\**\*.cs" 
-			target="src\MvvmCross.Core" />
-		<file src="..\MvvmCross\Windows\Wpf\**\*.cs" 
-			target="src\MvvmCross.Wpf" />
-		<file src="..\MvvmCross\Windows\WindowsStore\**\*.cs" 
-			target="src\MvvmCross.WindowsStore" />
-		<file src="..\MvvmCross\Windows\WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.WindowsPhone" />
-		<file src="..\MvvmCross\Windows\WindowsCommon\**\*.cs" 
-			target="src\MvvmCross.WindowsCommon" />
-		<file src="..\MvvmCross\Windows\WindowsUWP\**\*.cs" 
-			target="src\MvvmCross.WindowsUWP" />
-		<file src="..\MvvmCross\Droid\Droid\**\*.cs" 
-			target="src\MvvmCross.Droid" />
-		<file src="..\MvvmCross\iOS\iOS\**\*.cs" 
-			target="src\MvvmCross.iOS" />
-		<file src="..\MvvmCross\Mac\Mac\**\*.cs"
-			target="src\MvvmCross.Mac" />
+	<files>
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-net45+win+wpa81+wp80" />

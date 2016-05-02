@@ -59,16 +59,7 @@ This package contains the 'binding extensions' for MvvmCross
 			</group>
 		</dependencies>
 	</metadata>
-	<files>		
-
-		<!-- common -->
-		<file src="..\MvvmCross\Binding\BindingEx.Wpf\**\*.cs" 
-			target="src\MvvmCross.BindingEx.Wpf" />
-		<file src="..\MvvmCross\Binding\BindingEx.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.BindingEx.WindowsStore" />
-		<file src="..\MvvmCross\Binding\BindingEx.WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.BindingEx.WindowsPhone" />
-
+	<files>
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.BindingEx.Wpf.*" target="lib\net45" />
 
