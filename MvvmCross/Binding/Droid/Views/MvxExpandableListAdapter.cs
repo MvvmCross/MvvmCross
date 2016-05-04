@@ -43,7 +43,7 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public int GroupCount => base.Count;
+        public int GroupCount => this.Count;
 
         public void OnGroupExpanded(int groupPosition)
         {
@@ -63,7 +63,7 @@ namespace MvvmCross.Binding.Droid.Views
         public View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
             var item = this.GetRawGroup(groupPosition);
-            return base.GetBindableView(convertView, item, this.GroupTemplateId);
+            return this.GetBindableView(convertView, item, this.GroupTemplateId);
         }
 
         public long GetGroupId(int groupPosition)
@@ -103,7 +103,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public object GetRawGroup(int groupPosition)
         {
-            return base.GetRawItem(groupPosition);
+            return this.GetRawItem(groupPosition);
         }
 
         public View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView,
@@ -111,7 +111,7 @@ namespace MvvmCross.Binding.Droid.Views
         {
             var item = this.GetRawItem(groupPosition, childPosition);
 
-            return base.GetBindableView(convertView, item, this.ItemTemplateId);
+            return this.GetBindableView(convertView, item, this.ItemTemplateId);
         }
 
         public int GetChildrenCount(int groupPosition)
