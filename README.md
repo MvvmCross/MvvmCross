@@ -4,8 +4,6 @@ MvvmCross is a cross-platform mvvm framework that enables developers to create c
 
 ## Documentation & blog
 
-> We are currently experiencing some DNS issues, please use https://mvvmcross.readme.io while we are fixing it.
-
 * See our [official website](http://mvvmcross.com/docs) for an extensive set of documentation!
 * To stay up-to-date with the latest news go to the [MvvmCross blog](http://www.mvvmcross.com/blog)!
 
