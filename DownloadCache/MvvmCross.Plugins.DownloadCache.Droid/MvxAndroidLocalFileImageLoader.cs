@@ -73,10 +73,15 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
         private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
         {
+            // If the localPath is a content:// url, 
+            // try to load with a FileDescriptor
             if (localPath.ToLower().StartsWith("content"))
-            {
+            {                
                 Bitmap bmp = null;
 
+                // There is no Async version of DecodeFileDescriptor that
+                // takes Options object. Wrapping with a Task Factory
+                // to maintain async nature of the method call
                 await Task.Factory.StartNew(() =>
                 {
                     var globals = Mvx.Resolve<IMvxAndroidGlobals>();
@@ -87,8 +92,12 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                     var opts = new BitmapFactory.Options { InJustDecodeBounds = true };
                     BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
 
+                    // Calculate inSampleSize
                     opts.InSampleSize = CalculateInSampleSize(opts, maxWidth, maxHeight);
+                    // see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
                     opts.InPurgeable = true;
+
+                    // Decode bitmap with inSampleSize set
                     opts.InJustDecodeBounds = false;
                     bmp = BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
 
