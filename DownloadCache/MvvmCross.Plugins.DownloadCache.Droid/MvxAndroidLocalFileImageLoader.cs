@@ -73,6 +73,31 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
         private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
         {
+            if (localPath.ToLower().StartsWith("content"))
+            {
+                Bitmap bmp = null;
+
+                await Task.Factory.StartNew(() =>
+                {
+                    var globals = Mvx.Resolve<IMvxAndroidGlobals>();
+                    var uri = Android.Net.Uri.Parse(localPath);
+                    var parcelFileDescriptor = globals?.ApplicationContext?.ContentResolver.OpenFileDescriptor(uri, "r");
+                    var fileDescriptor = parcelFileDescriptor?.FileDescriptor;
+
+                    var opts = new BitmapFactory.Options { InJustDecodeBounds = true };
+                    BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
+
+                    opts.InSampleSize = CalculateInSampleSize(opts, maxWidth, maxHeight);
+                    opts.InPurgeable = true;
+                    opts.InJustDecodeBounds = false;
+                    bmp = BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
+
+                    parcelFileDescriptor?.Close();
+                }).ConfigureAwait(false);
+
+                return bmp;
+            }
+
             if (maxWidth > 0 || maxHeight > 0)
             {
                 // load thumbnail - see: http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
