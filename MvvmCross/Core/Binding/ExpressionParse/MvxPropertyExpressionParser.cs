@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+
 namespace MvvmCross.Binding.ExpressionParse
 {
     using System;
@@ -76,17 +78,28 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression ConvertMemberAccessToConstant(Expression argument)
         {
-            if (argument.NodeType != ExpressionType.MemberAccess) return argument;
+            var memberExpr = argument as MemberExpression;
+            if (memberExpr == null)
+                return argument;
 
             try
             {
-                var boxed = Expression.Convert(argument, typeof(object));
-                var constant = Expression.Lambda<Func<object>>(boxed)
-                    .Compile()
-                    ();
-                var constExpr = Expression.Constant(constant);
+                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression) as ConstantExpression;
+                var value = constExpr?.Value;
 
-                return constExpr;
+                var property = memberExpr.Member as PropertyInfo;
+                if (property != null)
+                {
+                    var constant = property.GetValue(value);
+                    return Expression.Constant(constant);
+                }
+
+                var field = memberExpr.Member as FieldInfo;
+                if (field != null)
+                {
+                    var constant = field.GetValue(value);
+                    return Expression.Constant(constant);
+                }
             }
             catch
             {
