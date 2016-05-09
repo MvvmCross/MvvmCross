@@ -22,14 +22,13 @@ namespace MvvmCross.FieldBinding
             _shouldAlwaysRaiseChangedOnUserInterfaceThread = true;
         }
 
-        protected NotifyChange(object value)
+        protected NotifyChange(object value) : this()
         {
             _value = value;
         }
 
-        protected NotifyChange(object value, Action<object> valueChanged)
+        protected NotifyChange(object value, Action<object> valueChanged) : this(value)
         {
-            _value = value;
             Changed += (s, e) => { valueChanged?.Invoke(Value); };
         }
 
