@@ -17,9 +17,6 @@ namespace MvvmCross.Plugins.Location.WindowsStore
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxStoreLocationWatcher());
-            // ReSharper disable CSharpWarnings::CS0612
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxStoreGeoLocationWatcher());
-            // ReSharper restore CSharpWarnings::CS0612
         }
     }
 }

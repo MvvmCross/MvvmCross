@@ -16,9 +16,6 @@ namespace MvvmCross.Plugins.Location.WindowsPhone
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxWindowsPhoneLocationWatcher());
-            // ReSharper disable CSharpWarnings::CS0612
-            Mvx.RegisterSingleton<IMvxGeoLocationWatcher>(() => new MvxWindowsPhoneGeoLocationWatcher());
-            // ReSharper restore CSharpWarnings::CS0612
         }
     }
 }

@@ -45,22 +45,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxStoreGeoLocationWatcher.cs" />
     <Compile Include="MvxStoreLocationWatcher.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.1.4\lib\win81\MvvmCross.Binding.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmCross.Core.4.1.4\lib\win81\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.1.4\lib\win81\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Binding.4.1.0\lib\win81\MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
