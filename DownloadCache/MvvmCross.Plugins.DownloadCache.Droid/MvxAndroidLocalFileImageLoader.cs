@@ -82,7 +82,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                 // There is no Async version of DecodeFileDescriptor that
                 // takes Options object. Wrapping with a Task Factory
                 // to maintain async nature of the method call
-                await Task.Factory.StartNew(() =>
+                await Task.Run(() =>
                 {
                     var globals = Mvx.Resolve<IMvxAndroidGlobals>();
                     var uri = Android.Net.Uri.Parse(localPath);
