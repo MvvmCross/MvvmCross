@@ -1,6 +1,6 @@
 namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
 {
-    public abstract class ItemTemplateSelector<TItem> : IItemTemplateSelector where TItem : class
+    public abstract class MvxTemplateSelector<TItem> : IMvxTemplateSelector where TItem : class
     {
         public int GetItemViewType(object forItemObject)
         {

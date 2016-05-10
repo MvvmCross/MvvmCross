@@ -42,7 +42,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
 
-            if (itemTemplateSelector.GetType() == typeof (SingleItemDefaultTemplateSelector))
+            if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
         }
 
@@ -98,23 +98,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             get
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as SingleItemDefaultTemplateSelector;
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
 
                 if (singleItemDefaultTemplateSelector == null)
                     throw new InvalidOperationException(
                         $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
-                        $"{nameof(IItemTemplateSelector)} to anything other than {nameof(SingleItemDefaultTemplateSelector)}");
+                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 return singleItemDefaultTemplateSelector.ItemTemplateId;
             }
             set
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as SingleItemDefaultTemplateSelector;
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
 
                 if (singleItemDefaultTemplateSelector == null)
                     throw new InvalidOperationException(
                         $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
-                        $"{nameof(IItemTemplateSelector)} to anything other than {nameof(SingleItemDefaultTemplateSelector)}");
+                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 singleItemDefaultTemplateSelector.ItemTemplateId = value;
                 Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
@@ -122,7 +122,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         }
 
 
-        public IItemTemplateSelector ItemTemplateSelector
+        public IMvxTemplateSelector ItemTemplateSelector
         {
             get { return Adapter.ItemTemplateSelector; }
             set { Adapter.ItemTemplateSelector = value; }

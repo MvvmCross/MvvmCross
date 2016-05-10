@@ -36,12 +36,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             }
             
             if (string.IsNullOrEmpty(className))
-                return typeof (SingleItemDefaultTemplateSelector).FullName;
+                return typeof (MvxDefaultTemplateSelector).FullName;
 
             return className;
         }
             
-        public static IItemTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs)
+        public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
             var type = Type.GetType(templateSelectorClassName);
@@ -55,21 +55,21 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
                 throw new InvalidOperationException(message);
             }
          
-            if (!typeof (IItemTemplateSelector).IsAssignableFrom(type))
+            if (!typeof (IMvxTemplateSelector).IsAssignableFrom(type))
             {
-                string message = $"Sorry but type: {type} does not implement {nameof(IItemTemplateSelector)} interface.";
+                string message = $"Sorry but type: {type} does not implement {nameof(IMvxTemplateSelector)} interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                string message = $"Sorry can not instatiate {nameof(IItemTemplateSelector)} as provided type: {type} is abstract/interface.";
+                string message = $"Sorry can not instatiate {nameof(IMvxTemplateSelector)} as provided type: {type} is abstract/interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
-            return Activator.CreateInstance(type) as IItemTemplateSelector;
+            return Activator.CreateInstance(type) as IMvxTemplateSelector;
         }
 
 
