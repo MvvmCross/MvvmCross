@@ -138,7 +138,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             };
         }
 
-        public sealed override int GetItemViewType(int position)
+        public override int GetItemViewType(int position)
         {
             var itemAtPosition = GetItem(position);
             return ItemTemplateSelector.GetItemViewType(itemAtPosition);
