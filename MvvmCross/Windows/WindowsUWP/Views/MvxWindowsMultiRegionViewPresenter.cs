@@ -51,6 +51,26 @@ namespace MvvmCross.WindowsUWP.Views
             }
         }
 
+        public override void Close(IMvxViewModel viewModel)
+        {
+            var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
+            var viewType = viewFinder.GetViewType(viewModel.GetType());
+            if (viewType.HasRegionAttribute())
+            {
+                var containerView = FindChild<Frame>(_rootFrame.UnderlyingControl, viewType.GetRegionName());
+
+                if (containerView == null)
+                    throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
+
+                if (containerView.CanGoBack)
+                    containerView.GoBack();
+            }
+            else
+            {
+                base.Close(viewModel);
+            }
+        }
+
         private static Type GetViewType(MvxViewModelRequest request)
         {
             var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
