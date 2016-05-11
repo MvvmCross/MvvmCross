@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
+
 namespace MvvmCross.iOS.Views
 {
     using System;
@@ -23,7 +25,7 @@ namespace MvvmCross.iOS.Views
             if (!(eventSource is IMvxIosView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
 
-            this.IosView.BindingContext = new MvxBindingContext();
+            this.IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

@@ -83,6 +83,10 @@
       <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Test\Test\MvvmCross.Test.csproj">
+      <Project>{1c4b1284-5b72-4adb-ac5b-739f778233bd}</Project>
+      <Name>MvvmCross.Test</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
