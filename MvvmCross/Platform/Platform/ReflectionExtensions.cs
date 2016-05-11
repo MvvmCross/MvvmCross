@@ -103,8 +103,12 @@ namespace MvvmCross.Platform
 
         public static IEnumerable<PropertyInfo> GetProperties(this Type type, BindingFlags flags)
         {
-            var properties = type.GetTypeInfo().DeclaredProperties;
-            if ((flags & BindingFlags.FlattenHierarchy) == BindingFlags.FlattenHierarchy)
+            IEnumerable<PropertyInfo> properties;
+            if ((flags & BindingFlags.FlattenHierarchy) == 0)
+            {
+                properties = type.GetTypeInfo().DeclaredProperties;
+            }
+            else
             {
                 properties = type.GetRuntimeProperties();
             }

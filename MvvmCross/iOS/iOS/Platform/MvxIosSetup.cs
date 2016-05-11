@@ -160,8 +160,7 @@ namespace MvvmCross.iOS.Platform
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxIosBindingBuilder();
-            return bindingBuilder;
+            return new MvxIosBindingBuilder();
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)

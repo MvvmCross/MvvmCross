@@ -5,6 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Test.Mocks.Dispatchers;
+
 namespace MvvmCross.Binding.Test.Bindings
 {
     using System;
@@ -79,6 +83,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             ClearAll();
             MvxBindingSingletonCache.Initialize();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             Ioc.RegisterSingleton(mockSourceBindingFactory.Object);

@@ -5,6 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding.Bindings
 {
     using System;
@@ -33,6 +37,10 @@ namespace MvvmCross.Binding.Bindings
         private EventHandler _sourceBindingOnChanged;
         private EventHandler<MvxTargetChangedEventArgs> _targetBindingOnValueChanged;
 
+        private object _defaultTargetValue;
+        private CancellationTokenSource cancelSource = new CancellationTokenSource();
+        private IMvxMainThreadDispatcher dispatcher => MvxBindingSingletonCache.Instance.MainThreadDispatcher;
+
         public object DataContext
         {
             get { return this._dataContext; }
@@ -40,10 +48,11 @@ namespace MvvmCross.Binding.Bindings
             {
                 if (this._dataContext == value)
                     return;
-
                 this._dataContext = value;
+
                 if (this._sourceStep != null)
                     this._sourceStep.DataContext = value;
+
                 this.UpdateTargetOnBind();
             }
         }
@@ -81,8 +90,12 @@ namespace MvvmCross.Binding.Bindings
             {
                 this._sourceBindingOnChanged = (sender, args) =>
                     {
+                        //Capture the cancel token first
+                        var cancel = cancelSource.Token;
+                        //GetValue can now be executed in a worker thread. Is it the responsibility of the caller to switch threads, or ours ?
+                        //As the source is the viewmodel, i suppose it is the responsibility of the caller.
                         var value = this._sourceStep.GetValue();
-                        this.UpdateTargetFromSource(value);
+                        this.UpdateTargetFromSource(value, cancel);
                     };
                 this._sourceStep.Changed += this._sourceBindingOnChanged;
             }
@@ -94,12 +107,14 @@ namespace MvvmCross.Binding.Bindings
         {
             if (this.NeedToUpdateTargetOnBind && this._sourceStep != null)
             {
-                // note that we expect Bind to be called on the UI thread - so no need to use RunOnUIThread here
+                cancelSource.Cancel();
+                cancelSource = new CancellationTokenSource();
+                var cancel = cancelSource.Token;
 
                 try
                 {
                     var currentValue = this._sourceStep.GetValue();
-                    this.UpdateTargetFromSource(currentValue);
+                    this.UpdateTargetFromSource(currentValue, cancel);
                 }
                 catch (Exception exception)
                 {
@@ -129,8 +144,7 @@ namespace MvvmCross.Binding.Bindings
 
             if (this._targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Failed to create target binding for {0}", this._bindingDescription.ToString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Failed to create target binding for {0}", this._bindingDescription.ToString());
                 this._targetBinding = new MvxNullTargetBinding();
             }
 
@@ -140,29 +154,36 @@ namespace MvvmCross.Binding.Bindings
                 this._targetBindingOnValueChanged = (sender, args) => this.UpdateSourceFromTarget(args.Value);
                 this._targetBinding.ValueChanged += this._targetBindingOnValueChanged;
             }
+
+            this._defaultTargetValue = this._targetBinding.TargetType.CreateDefault();
         }
 
-        private void UpdateTargetFromSource(
-            object value)
+        private void UpdateTargetFromSource(object value, CancellationToken cancel)
         {
-            if (value == MvxBindingConstant.DoNothing)
+            if (value == MvxBindingConstant.DoNothing || cancel.IsCancellationRequested)
                 return;
 
             if (value == MvxBindingConstant.UnsetValue)
-                value = this._targetBinding.TargetType.CreateDefault();
+                value = _defaultTargetValue;
 
-            try
+            dispatcher.RequestMainThreadAction(() =>
             {
-                this._targetBinding.SetValue(value);
-            }
-            catch (Exception exception)
-            {
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Error,
-                    "Problem seen during binding execution for {0} - problem {1}",
-                    this._bindingDescription.ToString(),
-                    exception.ToLongString());
-            }
+                if (cancel.IsCancellationRequested)
+                    return;
+
+                try
+                {
+                    this._targetBinding.SetValue(value);
+                }
+                catch (Exception exception)
+                {
+                    MvxBindingTrace.Trace(
+                        MvxTraceLevel.Error,
+                        "Problem seen during binding execution for {0} - problem {1}",
+                        this._bindingDescription.ToString(),
+                        exception.ToLongString());
+                }
+            });
         }
 
         private void UpdateSourceFromTarget(
