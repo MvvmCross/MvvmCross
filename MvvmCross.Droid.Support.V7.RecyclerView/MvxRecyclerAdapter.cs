@@ -34,7 +34,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
-        private IItemTemplateSelector _itemTemplateSelector;
+        private IMvxTemplateSelector _itemTemplateSelector;
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
@@ -95,7 +95,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         }
 
         
-        public virtual IItemTemplateSelector ItemTemplateSelector
+        public virtual IMvxTemplateSelector ItemTemplateSelector
         {
             get { return _itemTemplateSelector; }
             set
@@ -138,7 +138,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             };
         }
 
-        public sealed override int GetItemViewType(int position)
+        public override int GetItemViewType(int position)
         {
             var itemAtPosition = GetItem(position);
             return ItemTemplateSelector.GetItemViewType(itemAtPosition);

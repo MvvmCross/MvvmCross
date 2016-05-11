@@ -84,8 +84,8 @@
     <Compile Include="IMvxRecyclerAdapter.cs" />
     <Compile Include="IMvxRecyclerViewHolder.cs" />
     <Compile Include="ItemTemplates\IItemTemplateSelector.cs" />
-    <Compile Include="ItemTemplates\ItemTemplateSelector.cs" />
-    <Compile Include="ItemTemplates\SingleItemDefaultTemplateSelector.cs" />
+    <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
+    <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
     <Compile Include="MvxRecyclerView.cs" />
     <Compile Include="MvxRecyclerViewHolder.cs" />
