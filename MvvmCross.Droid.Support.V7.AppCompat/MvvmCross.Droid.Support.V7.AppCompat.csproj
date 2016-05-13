@@ -116,6 +116,7 @@
     <Compile Include="Widget\MvxAppCompatListView.cs" />
     <Compile Include="Widget\MvxAppCompatRadioGroup.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
+    <Compile Include="MvxAppCompatSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
