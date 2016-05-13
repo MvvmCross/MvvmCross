@@ -42,7 +42,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 
         protected virtual void InitSidebar()
         {
-            var sidebarController = SidebarPanelController.SidebarController;
+            var sidebarController = Panel == MvxPanelEnum.Left 
+                                                         ? SidebarPanelController.LeftSidebarController 
+                                                         : SidebarPanelController.RightSidebarController;
+
             var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
                 , UIBarButtonItemStyle.Plain
                 , (sender, args) => sidebarController.ToggleMenu());

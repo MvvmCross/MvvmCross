@@ -10,9 +10,9 @@ using MvvmCross.iOS.Support.XamarinSidebar.Hints;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {
-    public class MvxSidebarPresenter : MvxIosViewPresenter, IMvxSideMenu
+    public class MvxSidebarPresenter : MvxIosViewPresenter
     {
-        protected virtual MvxSidebarPanelController SidebarPanelController { get; private set;}
+        protected virtual MvxSidebarPanelController RootViewController { get; private set;}
 
         public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -51,9 +51,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (viewController == null)
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
 
-            if (this.SidebarPanelController == null)
+            if (this.RootViewController == null)
             {
-                this.InitSidebarController();
+                this.InitRootViewController();
             }
 
             var viewPresentationAttribute = GetViewPresentationAttribute(view);
@@ -61,14 +61,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             switch (viewPresentationAttribute.HintType)
             {
 				case MvxPanelHintType.PopToRoot:
-                    ChangePresentation(new MvxSidebarPopToRootPresentationHint(viewPresentationAttribute.Panel, SidebarPanelController, viewController));
+                    ChangePresentation(new MvxSidebarPopToRootPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
                     break;
                 case MvxPanelHintType.ResetRoot:
-                    ChangePresentation(new MvxSidebarResetRootPresentationHint(viewPresentationAttribute.Panel, SidebarPanelController, viewController));
+                    ChangePresentation(new MvxSidebarResetRootPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
                     break;
 				case MvxPanelHintType.ActivePanel:
                     default:
-                    ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, SidebarPanelController, viewController));
+                    ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
                     break;
             }
 		}
@@ -81,7 +81,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return view.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
         }	
 
-        protected virtual void InitSidebarController()
+        protected virtual void InitRootViewController()
         {
             foreach (var view in Window.Subviews)
                 view.RemoveFromSuperview();
@@ -90,14 +90,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             this.OnMasterNavigationControllerCreated();
 
-            SidebarPanelController = new MvxSidebarPanelController(MasterNavigationController);
+            RootViewController = new MvxSidebarPanelController(MasterNavigationController);
 
-            SetWindowRootViewController(SidebarPanelController);
+            SetWindowRootViewController(RootViewController);
+
+            Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
         }
 
-        public void ToggleMenu()
-        {
-            SidebarPanelController?.SidebarController?.ToggleMenu();
-        }
+
     }
 }
