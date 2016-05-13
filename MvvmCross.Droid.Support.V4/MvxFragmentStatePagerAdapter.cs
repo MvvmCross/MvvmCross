@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace MvvmCross.Droid.Support.V4
 {
-    internal class MvxFragmentStatePagerAdapter
+    public class MvxFragmentStatePagerAdapter
         : FragmentStatePagerAdapter
     {
         private readonly Context _context;
@@ -32,6 +32,7 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
+		[Obsolete("MvxFragmentStatePagerAdapter is deprecated, please use MvxCachingFragmentStatePagerAdapter instead.")]
         public MvxFragmentStatePagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)

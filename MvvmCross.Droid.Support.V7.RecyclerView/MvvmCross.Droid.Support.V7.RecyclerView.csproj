@@ -83,7 +83,6 @@
     <Compile Include="AttributeHelpers\MvxRecyclerViewAttributeExtensions.cs" />
     <Compile Include="IMvxRecyclerAdapter.cs" />
     <Compile Include="IMvxRecyclerViewHolder.cs" />
-    <Compile Include="ItemTemplates\IItemTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
@@ -91,6 +90,7 @@
     <Compile Include="MvxRecyclerViewHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="ItemTemplates\IMvxTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
