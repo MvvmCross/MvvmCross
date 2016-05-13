@@ -95,8 +95,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxFragmentStatePagerAdapter.cs" />
     <Compile Include="MvxCachingFragmentPagerAdapter.cs" />
-    <Compile Include="MvxFragmentStatePagerAdapter2.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
+    <Compile Include="MvxCachingFragmentStatePagerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
