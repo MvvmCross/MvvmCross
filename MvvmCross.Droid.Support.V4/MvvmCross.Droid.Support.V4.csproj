@@ -94,7 +94,7 @@
     <Compile Include="MvxTabsFragmentActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxFragmentStatePagerAdapter.cs" />
-    <Compile Include="MvxFragmentPagerAdapter2.cs" />
+    <Compile Include="MvxCachingFragmentPagerAdapter.cs" />
     <Compile Include="MvxFragmentStatePagerAdapter2.cs" />
     <Compile Include="MvxCachingFragmentActivity.cs" />
   </ItemGroup>

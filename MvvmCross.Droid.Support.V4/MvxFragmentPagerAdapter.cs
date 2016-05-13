@@ -24,6 +24,7 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
+		[Obsolete("MvxFragmentPagerAdapter is deprecated, please use MvxCachingFragmentPagerAdapter instead.")]
         public MvxFragmentPagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)
