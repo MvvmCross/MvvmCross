@@ -39,7 +39,12 @@ namespace MvvmCross.Platform
 
         public static bool IsInstanceOfType(this Type type, object obj)
         {
-            return type.IsAssignableFrom(obj.GetType());
+            return type.IsAssignableFrom(obj.GetType()) || obj.IsMarshalByRefObject();
+        }
+
+        private static bool IsMarshalByRefObject(this object obj)
+        {
+            return obj != null && obj.GetType().FullName == "System.MarshalByRefObject";
         }
 
         public static MethodInfo GetAddMethod(this EventInfo eventInfo, bool nonPublic = false)
