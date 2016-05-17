@@ -113,7 +113,7 @@ namespace MvvmCross.Droid.Platform
             }
         }
 
-        private MvxAndroidSetupSingleton()
+        protected MvxAndroidSetupSingleton()
         {
         }
 
