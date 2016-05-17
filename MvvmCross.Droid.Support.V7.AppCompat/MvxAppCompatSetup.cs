@@ -6,7 +6,6 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 
@@ -23,7 +22,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
 		{
-			typeof(MvxSwipeRefreshLayout).Assembly
+			typeof(Android.Support.V7.Widget.Toolbar).Assembly,
+			typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
+         	typeof(Android.Support.V4.Widget.NestedScrollView).Assembly,
+			typeof(Android.Support.V4.Widget.SlidingPaneLayout).Assembly,
+			typeof(Android.Support.V4.View.ViewPager).Assembly,
+			typeof(MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout).Assembly,
 		};
 
 		/// <summary>
