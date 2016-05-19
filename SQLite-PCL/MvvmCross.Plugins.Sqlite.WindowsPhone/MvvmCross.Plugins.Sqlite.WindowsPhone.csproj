@@ -92,20 +92,20 @@
     <Compile Include="WindowsSqliteConnectionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MvvmCross.Core">
-      <HintPath>..\..\packages\MvvmCross.Core.4.1.4\lib\wp8\MvvmCross.Core.dll</HintPath>
+    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Core.4.1.5\lib\wp8\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Platform">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.1.4\lib\wp8\MvvmCross.Platform.dll</HintPath>
+    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.1.5\lib\wp8\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Platform.WindowsPhone">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.1.4\lib\wp8\MvvmCross.Platform.WindowsPhone.dll</HintPath>
+    <Reference Include="MvvmCross.Platform.WindowsPhone, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.1.5\lib\wp8\MvvmCross.Platform.WindowsPhone.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.WindowsPhone">
-      <HintPath>..\..\packages\MvvmCross.Core.4.1.4\lib\wp8\MvvmCross.WindowsPhone.dll</HintPath>
+    <Reference Include="MvvmCross.WindowsPhone, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Core.4.1.5\lib\wp8\MvvmCross.WindowsPhone.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sqlite, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
