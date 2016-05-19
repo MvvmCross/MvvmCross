@@ -45,6 +45,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			MvxAppCompatSetupHelper.FillTargetFactories(registry);
 			base.FillTargetFactories(registry);
 		}
+
+		protected override void FillBindingNames(IMvxBindingNameRegistry registry)
+		{
+			MvxAppCompatSetupHelper.FillDefaultBindingNames(registry);
+			base.FillBindingNames(registry);
+		}
 	}
 }
 
