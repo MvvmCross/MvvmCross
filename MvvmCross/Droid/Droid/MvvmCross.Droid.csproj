@@ -78,7 +78,6 @@
     </Compile>
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\IMvxAndroidView.cs" />
-    <Compile Include="Platform\MvxAndroidTask.cs" />
     <Compile Include="Views\MvxAndroidMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
