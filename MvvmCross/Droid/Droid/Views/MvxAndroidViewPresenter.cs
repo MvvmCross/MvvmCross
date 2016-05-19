@@ -55,6 +55,12 @@ namespace MvvmCross.Droid.Views
                 return;
             }
 
+			if (hint is MvxClearHistoryHint) 
+			{
+				Activity.Finish ();
+				return;
+			}
+
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
