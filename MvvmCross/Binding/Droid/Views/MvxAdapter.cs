@@ -309,5 +309,30 @@ namespace MvvmCross.Binding.Droid.Views
         }
     }
 
-	public class MvxAdapter<TItem> : MvxAdapter, IMvxAdapter where TItem : class 	{ 		public MvxAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current()) 		{ 		}  		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext) 		{ 		}  		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) 		{ 		}  		public new IList<TItem> ItemsSource 		{ 			get 			{ 				return base.ItemsSource as IList<TItem>; 			} 			set 			{ 				base.ItemsSource = value; 			} 		} 	} 
+	public class MvxAdapter<TItem> : MvxAdapter, IMvxAdapter where TItem : class
+	{
+		public MvxAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
+		{
+		}
+
+		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
+		{
+		}
+
+		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
+		}
+
+		public new IList<TItem> ItemsSource
+		{
+			get
+			{
+				return base.ItemsSource as IList<TItem>;
+			}
+			set
+			{
+				base.ItemsSource = value;
+			}
+		}
+	} 
 }
