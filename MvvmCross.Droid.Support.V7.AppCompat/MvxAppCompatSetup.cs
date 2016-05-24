@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
