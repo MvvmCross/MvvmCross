@@ -21,6 +21,7 @@ nuget pack MvvmCross.Plugin.File.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Json.nuspec -Symbols
 nuget pack MvvmCross.Plugin.JsonLocalization.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Location.nuspec -Symbols
+nuget pack MvvmCross.Plugin.Location.Fused.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Messenger.nuspec -Symbols
 nuget pack MvvmCross.Plugin.MethodBinding.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Network.nuspec -Symbols
