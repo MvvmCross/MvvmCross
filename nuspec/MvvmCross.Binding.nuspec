@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Binding</id>
-		<version>4.1.5</version>
+		<version>4.1.6</version>
 		<title>MvvmCross - Binding</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -21,34 +21,34 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		</frameworkAssemblies>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">		
-				<dependency id="MvvmCross.Core" version="4.1.5" />		
+				<dependency id="MvvmCross.Core" version="4.1.6" />		
  			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="uap">		
-				<dependency id="MvvmCross.Core" version="4.1.5" />		
+				<dependency id="MvvmCross.Core" version="4.1.6" />		
  			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.1.5" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">		
-				<dependency id="MvvmCross.Core" version="4.1.5" />		
+				<dependency id="MvvmCross.Core" version="4.1.6" />		
  			</group>
 		</dependencies>
 	</metadata>
@@ -104,6 +104,7 @@ This package contains the 'Core Binding' libraries for MvvmCross
 
 	</files>
 </package>
+
 
 
 

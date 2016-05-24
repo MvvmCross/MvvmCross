@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Core</id>
-		<version>4.1.5</version>
+		<version>4.1.6</version>
 		<title>MvvmCross - Core</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,34 +18,34 @@ This package contains the 'Core' libraries for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.1.5" />
+				<dependency id="MvvmCross.Platform" version="4.1.6" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -127,4 +127,5 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.Mac20" />
 	</files>
 </package>
+
 
