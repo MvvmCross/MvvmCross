@@ -255,9 +255,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -268,7 +268,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -2088,9 +2088,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -2101,7 +2101,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -3767,9 +3767,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -3780,7 +3780,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -5444,9 +5444,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -5457,7 +5457,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -7123,9 +7123,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -7136,7 +7136,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -8800,9 +8800,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -8813,7 +8813,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -10479,9 +10479,9 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "MvvmCross.Core/4.1.5": {
+      "MvvmCross.Core/4.1.6": {
         "dependencies": {
-          "MvvmCross.Platform": "4.1.5"
+          "MvvmCross.Platform": "4.1.6"
         },
         "compile": {
           "lib/uap/MvvmCross.Core.dll": {},
@@ -10492,7 +10492,7 @@
           "lib/uap/MvvmCross.WindowsUWP.dll": {}
         }
       },
-      "MvvmCross.Platform/4.1.5": {
+      "MvvmCross.Platform/4.1.6": {
         "compile": {
           "lib/win81/MvvmCross.Platform.WindowsCommon.dll": {},
           "lib/win81/MvvmCross.Platform.dll": {}
@@ -12062,7 +12062,7 @@
       ]
     },
     "Microsoft.NETCore.Runtime.CoreCLR-arm/1.0.0": {
-      "sha512": "vUQyaKbHCa7BJAAzdfCP2FfBYOSt0YnDw7VMJLmD1/k68HIJgw1QO7GAfHhqoa39zkkvimC47QBH27wG4C5OGQ==",
+      "sha512": "hoJfIl981eXwn9Tz8onO/J1xaYApIfp/YrhjSh9rRhml1U5Wj80LBgyp/6n+KI3VlvcAraThhnHnCTp+M3Uh+w==",
       "type": "package",
       "files": [
         "Microsoft.NETCore.Runtime.CoreCLR-arm.1.0.0.nupkg.sha512",
@@ -12557,11 +12557,11 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "MvvmCross.Core/4.1.5": {
-      "sha512": "6jIRXyHPDsabdDKjSicw1JHQm51DUDYmWWostnP3/lZks3Vuwk632XKr+2WlT9B7XSEQRYYtPiI4PEZ93WjAdQ==",
+    "MvvmCross.Core/4.1.6": {
+      "sha512": "+H0mLGOD7PjDyLr0Cvlnn/cMAU/RQeb2ERPXC97letLH7HQY0yPHijZr5ACkM+D/K8pTOGS/h4hHjzx9gAMuhA==",
       "type": "package",
       "files": [
-        "MvvmCross.Core.4.1.5.nupkg.sha512",
+        "MvvmCross.Core.4.1.6.nupkg.sha512",
         "MvvmCross.Core.nuspec",
         "lib/MonoAndroid/MvvmCross.Core.dll",
         "lib/MonoAndroid/MvvmCross.Droid.Shared.dll",
@@ -12596,11 +12596,11 @@
         "lib/wpa81/MvvmCross.WindowsCommon.pri"
       ]
     },
-    "MvvmCross.Platform/4.1.5": {
-      "sha512": "RvzhdqXywriQ1F2VmDV16pdVriIrbY3h4rOQSRs65RLeROMajMOhEJTegmbqEFSbnMGCCUJCzCOEy+hKMOCORQ==",
+    "MvvmCross.Platform/4.1.6": {
+      "sha512": "3Hi77k55wJxehl9CKoekQEkk938Hzky9N1GVT3KQgDzKtP1y4vglATvEMutT3SLHAA3rBmUWVFordQL4is64jA==",
       "type": "package",
       "files": [
-        "MvvmCross.Platform.4.1.5.nupkg.sha512",
+        "MvvmCross.Platform.4.1.6.nupkg.sha512",
         "MvvmCross.Platform.nuspec",
         "lib/MonoAndroid/MvvmCross.Platform.Droid.dll",
         "lib/MonoAndroid/MvvmCross.Platform.dll",
@@ -15382,8 +15382,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "MvvmCross.Core >= 4.1.5",
-      "MvvmCross.Platform >= 4.1.5",
+      "MvvmCross.Core >= 4.1.6",
+      "MvvmCross.Platform >= 4.1.6",
       "SQLite.Net-PCL >= 3.1.1",
       "SQLite.Net.Async-PCL >= 3.1.1",
       "SQLite.Net.Core-PCL >= 3.1.1"
