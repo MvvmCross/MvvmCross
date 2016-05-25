@@ -242,8 +242,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         private void RaiseDataSetChanged()
         {
-            var handler = DataSetChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            DataSetChanged?.Invoke(this, EventArgs.Empty);
         }
         
         private void NotifyAndRaiseDataSetChanged()
