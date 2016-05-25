@@ -37,16 +37,18 @@ namespace MvvmCross.Binding.Droid.Views
     {
         public class MvxBindingVisitor
         {
+            private static readonly Java.Lang.Boolean TheTruth = Java.Lang.Boolean.True;
+
             public IMvxLayoutInflaterHolderFactory Factory { get; set; }
 
             public View OnViewCreated(View view, Context context, IAttributeSet attrs)
             {
-                if (this.Factory != null && view != null && view.GetTag(Resource.Id.MvvmCrossTagId) != Java.Lang.Boolean.True)
+                if (this.Factory != null && view != null && view.GetTag(Resource.Id.MvvmCrossTagId) != TheTruth)
                 {
                     // Bind here.
                     view = this.Factory.BindCreatedView(view, context, attrs);
 
-                    view.SetTag(Resource.Id.MvvmCrossTagId, Java.Lang.Boolean.True);
+                    view.SetTag(Resource.Id.MvvmCrossTagId, TheTruth);
                 }
 
                 return view;
