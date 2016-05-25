@@ -84,7 +84,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             var styleableType = resourceTypeFinder.GetNestedType("Styleable");
 
             MvxRecyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);
-            MvxRecyclerViewItemTemplateSelector = (int) styleableType.GetField("MvxRecyclerView_MvxItemTemplateSelector").GetValue(null);
+            MvxRecyclerViewItemTemplateSelector = (int) styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
         }
 
         private static int[] MvxRecyclerViewItemTemplateSelectorGroupId { get; set; }
