@@ -57,6 +57,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             : base(javaReference, transfer)
         {}
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            // Prevents crash when activity in background with history enable is reopened after 
+            // Android does some auto memory management.
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
+            setup.EnsureInitialized();
+
+            base.OnCreate(bundle);
+        }
+
         protected override void OnPostCreate(Bundle savedInstanceState)
         {
             base.OnPostCreate(savedInstanceState);
