@@ -134,8 +134,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void FireChanged(EventHandler eventHandler)
         {
-            var handler = eventHandler;
-            handler?.Invoke(this, EventArgs.Empty);
+            eventHandler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

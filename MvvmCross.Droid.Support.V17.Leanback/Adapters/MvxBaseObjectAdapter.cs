@@ -131,8 +131,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 
         private void RaiseDataSetChanged()
         {
-            var handler = DataSetChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            DataSetChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void NotifyAndRaiseDataSetChanged()
