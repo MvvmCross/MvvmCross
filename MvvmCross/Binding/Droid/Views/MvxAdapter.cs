@@ -323,11 +323,11 @@ namespace MvvmCross.Binding.Droid.Views
 		{
 		}
 
-		public new IList<TItem> ItemsSource
+		public new IEnumerable<TItem> ItemsSource
 		{
 			get
 			{
-				return base.ItemsSource as IList<TItem>;
+				return base.ItemsSource as IEnumerable<TItem>;
 			}
 			set
 			{
