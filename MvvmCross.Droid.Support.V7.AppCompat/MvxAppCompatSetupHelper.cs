@@ -9,13 +9,11 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    using Android.Support.V4.Widget;
-    using Android.Support.V7.Widget;
-    using Android.Widget;
-
     public static class MvxAppCompatSetupHelper
     {
         public static void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -54,8 +52,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
             registry.RegisterCustomBindingFactory<SearchViewCompat>(
                 "Query",
-                search => new MvxAppCompatSearchViewQueryTextTargetBinding(search)
-                );
+                search => new MvxAppCompatSearchViewQueryTextTargetBinding(search));
+
+            registry.RegisterCustomBindingFactory<Android.Support.V7.Widget.Toolbar>(
+                "Subtitle",
+                toolbar => new MvxToolbarSubtitleBinding(toolbar));
         }
 
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
