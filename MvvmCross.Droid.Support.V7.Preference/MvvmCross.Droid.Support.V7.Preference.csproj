@@ -99,8 +99,8 @@
     <Compile Include="MvxPreferenceSetupHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxPreferenceValueTargetBinding.cs" />
-    <Compile Include="Target\MvxEditTextPreferenceValueTargetBinding.cs" />
-    <Compile Include="Target\MvxTwoStatePreferenceValueTargetBinding.cs" />
+    <Compile Include="Target\MvxEditTextPreferenceTextTargetBinding.cs" />
+    <Compile Include="Target\MvxTwoStatePreferenceCheckedTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
