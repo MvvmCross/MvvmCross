@@ -1,0 +1,36 @@
+#
+# This list is used by git-shortlog to aggregate contributions.  It is
+# necessary when either the author's full name is not always written
+# the same way, and/or the same author contributes from different
+# email addresses.
+#
+
+# Stuart
+Stuart Lodge <me@slodge.com> 
+Stuart Lodge <me@slodge.com> Stuart <lodge.stuart@gmail.com>
+Stuart Lodge <me@slodge.com> <lodge.stuart@gmail.com>
+
+Martijn van Dijk <mhvdijk@gmail.com> <Martijn@PC185W7.sigmax2000.local>
+Martijn van Dijk <mhvdijk@gmail.com> Marrtijn van Dijk
+
+Jonathan Stoneman <jon@stoneman.me.uk> <github@jonstoneman.org>
+Jonathan Stoneman <jon@stoneman.me.uk> <jonathan@stoneman.me.uk>
+
+Andy Joiner <andy.joiner@tekkies.co.uk> <Andy.Joiner@tekkies.co.uk>
+
+Geir Sagberg <uffjohn@gmail.com> <geir.sagberg@gmail.com>
+
+Jamie Clarke <jamie@mystudylife.com> <jamie.clarke@virblue.com>
+
+Jeremy Kolb <jkolb@ara.com> <kjeremy@gmail.com>
+
+Kerry W. Lothrop <kerry@lothrop.de> <kwl@zuehlke.com>
+
+Mikkel Jensen <mgj@hugelawn.com> <mgj@miracle.dk>
+
+Sergii Volchkov <seed-seifer@ya.ru> <s.volchkov@gmail.com>
+
+Stephen Dunford <stephen.dunford@sequence.co.uk> Steve Dunford
+
+Guillaume <guillaume.moissaing@hotmail.fr> <guillaume.moissaing@gmail.com>
+

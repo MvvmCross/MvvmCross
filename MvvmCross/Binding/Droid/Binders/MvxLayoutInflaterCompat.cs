@@ -20,6 +20,10 @@ namespace MvvmCross.Binding.Droid.Binders
         {
             protected readonly IMvxLayoutInflaterFactory DelegateFactory;
 
+            public FactoryWrapper(System.IntPtr handle, Android.Runtime.JniHandleOwnership ownership)
+                : base(handle, ownership)
+            {}
+
             public FactoryWrapper(IMvxLayoutInflaterFactory delegateFactory)
             {
                 this.DelegateFactory = delegateFactory;
@@ -33,6 +37,10 @@ namespace MvvmCross.Binding.Droid.Binders
 
         internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
+            public FactoryWrapper2(System.IntPtr handle, Android.Runtime.JniHandleOwnership ownership)
+                : base(handle, ownership)
+            {}
+
             public FactoryWrapper2(IMvxLayoutInflaterFactory delegateFactory)
                 : base(delegateFactory)
             { }

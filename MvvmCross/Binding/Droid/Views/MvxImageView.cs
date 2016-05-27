@@ -89,27 +89,18 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs)
-            : base(context, attrs)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
+            : base(context, attrs, defStyleAttr)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs,
-                                                            MvxAndroidBindingResource.Instance
-                                                                .ImageViewStylableGroupId);
-
-            int numStyles = typedArray.IndexCount;
-            for (var i = 0; i < numStyles; ++i)
-            {
-                int attributeId = typedArray.GetIndex(i);
-                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
-                {
-                    this.ImageUrl = typedArray.GetString(attributeId);
-                }
-            }
-            typedArray.Recycle();
+            Init(context, attrs);
         }
 
+        public MvxImageView(Context context, IAttributeSet attrs)
+            : this(context, attrs, 0)
+        { }
+
         public MvxImageView(Context context)
-            : base(context)
+            : this(context, null)
         { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -133,6 +124,35 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     this.SetImageBitmap(mvxValueEventArgs.Value);
                 });
+        }
+
+        private void Init(Context context, IAttributeSet attrs)
+        {
+            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
+
+            int numStyles = typedArray.IndexCount;
+            for (var i = 0; i < numStyles; ++i)
+            {
+                int attributeId = typedArray.GetIndex(i);
+                if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
+                {
+                    this.ImageUrl = typedArray.GetString(attributeId);
+                }
+            }
+            typedArray.Recycle();
+        }
+
+        public override void SetImageBitmap (Bitmap bm)
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                if (bm != null && (bm.Handle == IntPtr.Zero || bm.IsRecycled))
+                {
+                    // Don't try to update disposed or recycled bitmap
+                    return;
+                }
+                base.SetImageBitmap (bm);
+            }
         }
     }
 }

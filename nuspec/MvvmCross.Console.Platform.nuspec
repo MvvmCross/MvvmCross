@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Console.Platform</id>
-		<version>4.0.0</version>
+		<version>4.1.6</version>
 		<title>MvvmCross - Core for Console</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,19 +18,19 @@ This package contains the Console 'MvvmCross Library' assemblies for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.0.0" />
+				<dependency id="MvvmCross.Core" version="4.1.6" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -49,6 +49,8 @@ This package contains the Console 'MvvmCross Library' assemblies for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45\MvvmCross.Core.pdb" />
 	</files>
 </package>
+
+
 
 
 

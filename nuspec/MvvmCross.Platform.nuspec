@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Platform</id>
-		<version>4.0.0</version>
+		<version>4.1.6</version>
 		<title>MvvmCross - Platform</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -75,3 +75,5 @@ This package contains the 'Platform' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.Mac20" />
 	</files>
 </package>
+
+

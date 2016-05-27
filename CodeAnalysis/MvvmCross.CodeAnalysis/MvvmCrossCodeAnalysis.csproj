@@ -35,6 +35,12 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer.cs" />
+    <Compile Include="Analyzers\MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzer.cs" />
+    <Compile Include="Analyzers\CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer.cs" />
+    <Compile Include="CodeFixes\ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix.cs" />
+    <Compile Include="CodeFixes\MvxMessengerSubscriptionDoesntStoreTokenInVariableCodeFix.cs" />
+    <Compile Include="CodeFixes\CommandWithCanExecuteWithoutCanExecuteChangedCodeFix.cs" />
     <Compile Include="CodeFixes\ConsiderUsingGenericBaseViewCodeFix.cs" />
     <Compile Include="Analyzers\ConsiderUsingGenericBaseViewAnalyzer.cs" />
     <Compile Include="Core\Categories.cs" />

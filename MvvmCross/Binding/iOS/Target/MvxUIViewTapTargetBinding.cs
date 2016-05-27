@@ -19,10 +19,10 @@ namespace MvvmCross.Binding.iOS.Target
     {
         private readonly MvxTapGestureRecognizerBehaviour _behaviour;
 
-        public MvxUIViewTapTargetBinding(UIView target, uint numberOfTapsRequired = 1, uint numberOfTouchesRequired = 1)
+        public MvxUIViewTapTargetBinding(UIView target, uint numberOfTapsRequired = 1, uint numberOfTouchesRequired = 1, bool cancelsTouchesInView = true)
             : base(target)
         {
-            this._behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired);
+            this._behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired, cancelsTouchesInView);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;

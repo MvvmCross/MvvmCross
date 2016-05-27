@@ -49,6 +49,9 @@ namespace MvvmCross.Binding.iOS
             registry.RegisterCustomBindingFactory<UIControl>("TouchUpInside",
                                                              view =>
                                                              new MvxUIControlTouchUpInsideTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIControl>("ValueChanged",
+                                                             view =>
+                                                             new MvxUIControlValueChangedTargetBinding(view));
             registry.RegisterCustomBindingFactory<UIView>("Visibility",
                                                           view =>
                                                           new MvxUIViewVisibilityTargetBinding(view));
@@ -62,6 +65,9 @@ namespace MvvmCross.Binding.iOS
                                                           new MvxUIViewHiddenTargetBinding(view));
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISliderValueTargetBinding),
                                                         typeof(UISlider),
+                                                        "Value");
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxUIStepperValueTargetBinding),
+                                                        typeof(UIStepper),
                                                         "Value");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxUISegmentedControlSelectedSegmentTargetBinding),
                                                         typeof(UISegmentedControl),
