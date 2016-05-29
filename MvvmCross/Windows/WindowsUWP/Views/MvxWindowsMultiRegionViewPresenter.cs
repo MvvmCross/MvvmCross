@@ -40,15 +40,14 @@ namespace MvvmCross.WindowsUWP.Views
 
                 var containerView = FindChild<Frame>(this._rootFrame.UnderlyingControl, viewType.GetRegionName());
 
-                if (containerView == null)
-                    throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
+                if (containerView != null)
+                {
+                    containerView.Navigate(viewType, requestText);
+                    return;
+                }
+            }
 
-                containerView.Navigate(viewType, requestText);
-            }
-            else
-            {
-                base.Show(request);
-            }
+            base.Show(request);
         }
 
         private static Type GetViewType(MvxViewModelRequest request)
