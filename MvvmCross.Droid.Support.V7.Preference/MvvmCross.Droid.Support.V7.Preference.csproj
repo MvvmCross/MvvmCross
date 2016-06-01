@@ -96,7 +96,11 @@
   <ItemGroup>
     <Compile Include="MvxEventSourcePreferenceFragmentCompat.cs" />
     <Compile Include="MvxPreferenceFragmentCompat.cs" />
+    <Compile Include="MvxPreferenceSetupHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Target\MvxPreferenceValueTargetBinding.cs" />
+    <Compile Include="Target\MvxEditTextPreferenceTextTargetBinding.cs" />
+    <Compile Include="Target\MvxTwoStatePreferenceCheckedTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
