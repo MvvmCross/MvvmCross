@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Preferences;
+
 namespace MvvmCross.Binding.Droid
 {
     using Android.Graphics;
@@ -134,8 +136,16 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
             registry.RegisterCustomBindingFactory<SearchView>(
                 "Query",
-                search => new MvxSearchViewQueryTextTargetBinding(search)
-                );
+                search => new MvxSearchViewQueryTextTargetBinding(search));
+            registry.RegisterCustomBindingFactory<Preference>(
+                "Value",
+                preference => new MvxPreferenceValueTargetBinding(preference));
+            registry.RegisterCustomBindingFactory<EditTextPreference>(
+                "Text",
+                preference => new MvxEditTextPreferenceTextTargetBinding(preference));
+            registry.RegisterCustomBindingFactory<TwoStatePreference>(
+                "Checked",
+                preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
