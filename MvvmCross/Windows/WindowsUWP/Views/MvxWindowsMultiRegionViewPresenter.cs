@@ -40,15 +40,14 @@ namespace MvvmCross.WindowsUWP.Views
 
                 var containerView = FindChild<Frame>(this._rootFrame.UnderlyingControl, viewType.GetRegionName());
 
-                if (containerView == null)
-                    throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
+                if (containerView != null)
+                {
+                    containerView.Navigate(viewType, requestText);
+                    return;
+                }
+            }
 
-                containerView.Navigate(viewType, requestText);
-            }
-            else
-            {
-                base.Show(request);
-            }
+            base.Show(request);
         }
 
         public override void Close(IMvxViewModel viewModel)
@@ -135,6 +134,7 @@ namespace MvvmCross.WindowsUWP.Views
 
                     // If the child is found, break so we do not overwrite the found child. 
                     if (foundChild != null) break;
+
                 }
             }
 
