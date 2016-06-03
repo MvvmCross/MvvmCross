@@ -15,6 +15,7 @@ namespace MvvmCross.Platform.Droid.Views
 
     using MvvmCross.Platform.Core;
 
+    [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     public abstract class MvxEventSourceTabActivity
         : TabActivity
           , IMvxEventSourceActivity
