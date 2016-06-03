@@ -206,8 +206,9 @@ namespace MvvmCross.Platform.Parse
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
         {
+            var skipChars = toSkip.ToArray();
             while (!this.IsComplete
-                   && IsWhiteSpaceOrCharacter(this.CurrentChar, toSkip))
+                   && IsWhiteSpaceOrCharacter(this.CurrentChar, skipChars))
             {
                 this.MoveNext();
             }
