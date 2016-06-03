@@ -9,7 +9,8 @@ namespace MvvmCross.Platform
     {
         public static IEnumerable<Type> GetTypes(this Assembly assembly)
         {
-            return assembly.DefinedTypes.Select(t => t.AsType());
+            foreach (var type in assembly.DefinedTypes)
+                yield return type.AsType();
         }
 
         public static EventInfo GetEvent(this Type type, string name)
@@ -34,7 +35,11 @@ namespace MvvmCross.Platform
 
         public static IEnumerable<ConstructorInfo> GetConstructors(this Type type)
         {
-            return type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic);
+            var ctors = type.GetTypeInfo().DeclaredConstructors;
+
+            foreach(var ctor in ctors)
+                if (ctor.IsPublic)
+                    yield return ctor;
         }
 
         public static bool IsInstanceOfType(this Type type, object obj)
@@ -114,24 +119,48 @@ namespace MvvmCross.Platform
                 properties = type.GetRuntimeProperties();
             }
 
-            return from property in properties
-                   let getMethod = property.GetMethod
-                   let setMethod = property.SetMethod
-                   where (getMethod != null || setMethod != null)
-                   where (flags & BindingFlags.Public) != BindingFlags.Public || getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic()
-                   where (flags & BindingFlags.Instance) != BindingFlags.Instance || !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic()
-                   where (flags & BindingFlags.Static) != BindingFlags.Static || getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic()
-                   select property;
+            foreach (var property in properties)
+            {
+                var getMethod = property.GetMethod;
+                var setMethod = property.SetMethod;
+                if (getMethod == null && setMethod == null) continue;
+
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || 
+                    getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic();
+
+                var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance ||
+                    !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic();
+
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || 
+                    getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic();
+
+                if (publicTest && instanceTest && staticTest)
+                {
+                    yield return property;
+                }
+            }
         }
 
         public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags)
         {
-            return GetProperties(type, flags).FirstOrDefault(p => p.Name == name);
+            var properties = GetProperties(type, flags);
+
+            foreach(var property in properties)
+                if (property.Name == name)
+                    return property;
+
+            return default(PropertyInfo);
         }
 
         public static PropertyInfo GetProperty(this Type type, string name)
         {
-            return GetProperties(type, BindingFlags.Public | BindingFlags.FlattenHierarchy).FirstOrDefault(p => p.Name == name);
+            var properties = GetProperties(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
+
+            foreach(var property in properties)
+                if (property.Name == name)
+                    return property;
+
+            return default(PropertyInfo);
         }
 
         public static IEnumerable<MethodInfo> GetMethods(this Type type)
@@ -141,35 +170,61 @@ namespace MvvmCross.Platform
 
         public static IEnumerable<MethodInfo> GetMethods(this Type type, BindingFlags flags)
         {
-            var properties = type.GetTypeInfo().DeclaredMethods;
+            var methods = type.GetTypeInfo().DeclaredMethods;
             if ((flags & BindingFlags.FlattenHierarchy) == BindingFlags.FlattenHierarchy)
             {
-                properties = type.GetRuntimeMethods();
+                methods = type.GetRuntimeMethods();
             }
 
-            return properties
-                .Where(m => (flags & BindingFlags.Public) != BindingFlags.Public || m.IsPublic)
-                .Where(m => (flags & BindingFlags.Instance) != BindingFlags.Instance || !m.IsStatic)
-                .Where(m => (flags & BindingFlags.Static) != BindingFlags.Static || m.IsStatic);
+            foreach (var method in methods)
+            {
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || method.IsPublic;
+                var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance || !method.IsStatic;
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || method.IsStatic;
+
+                if (publicTest && instanceTest && staticTest)
+                    yield return method;
+            }
         }
 
         public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags)
         {
-            return GetMethods(type, flags).FirstOrDefault(m => m.Name == name);
+            var methods = GetMethods(type, flags);
+
+            foreach(var method in methods)
+            {
+                if (method.Name == name)
+                    return method;
+            }
+
+            return default(MethodInfo);
         }
 
         public static MethodInfo GetMethod(this Type type, string name)
         {
-            return GetMethods(type, BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                   .FirstOrDefault(m => m.Name == name);
+            var methods = GetMethods(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            foreach (var method in methods)
+            {
+                if (method.Name == name)
+                    return method;
+            }
+
+            return default(MethodInfo);
         }
 
         public static IEnumerable<ConstructorInfo> GetConstructors(this Type type, BindingFlags flags)
         {
-            return type.GetConstructors()
-                .Where(m => (flags & BindingFlags.Public) != BindingFlags.Public || m.IsPublic)
-                .Where(m => (flags & BindingFlags.Instance) != BindingFlags.Instance || !m.IsStatic)
-                .Where(m => (flags & BindingFlags.Static) != BindingFlags.Static || m.IsStatic);
+            var ctors = type.GetConstructors();
+
+            foreach (var ctor in ctors)
+            {
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || ctor.IsPublic;
+                var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance || !ctor.IsStatic;
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || ctor.IsStatic;
+
+                if (publicTest && instanceTest && staticTest)
+                    yield return ctor;
+            }
         }
 
         public static IEnumerable<FieldInfo> GetFields(this Type type)
@@ -185,20 +240,39 @@ namespace MvvmCross.Platform
                 fields = type.GetRuntimeFields();
             }
 
-            return fields
-                .Where(f => (flags & BindingFlags.Public) != BindingFlags.Public || f.IsPublic)
-                .Where(f => (flags & BindingFlags.Instance) != BindingFlags.Instance || !f.IsStatic)
-                .Where(f => (flags & BindingFlags.Static) != BindingFlags.Static || f.IsStatic);
+            foreach (var field in fields)
+            {
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || field.IsPublic;
+                var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance || !field.IsStatic;
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || field.IsStatic;
+
+                if (publicTest && instanceTest && staticTest)
+                    yield return field;
+            }
         }
 
         public static FieldInfo GetField(this Type type, string name, BindingFlags flags)
         {
-            return GetFields(type, flags).FirstOrDefault(p => p.Name == name);
+            var fields = GetFields(type, flags);
+            foreach (var field in fields)
+            {
+                if (field.Name == name)
+                    return field;
+            }
+
+            return default(FieldInfo);
         }
 
         public static FieldInfo GetField(this Type type, string name)
         {
-            return GetFields(type, BindingFlags.Public | BindingFlags.FlattenHierarchy).FirstOrDefault(p => p.Name == name);
+            var fields = GetFields(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            foreach (var field in fields)
+            {
+                if (field.Name == name)
+                    return field;
+            }
+
+            return default(FieldInfo);
         }
 
         public static Type[] GetGenericArguments(this Type type)
