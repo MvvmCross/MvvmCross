@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Droid.Views
 {
     using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace MvvmCross.Droid.Views
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Droid.Views;
 
+    [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity
           , IMvxAndroidView
@@ -71,6 +74,7 @@ namespace MvvmCross.Droid.Views
         }
     }
 
+    [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     public class MvxTabActivity<TViewModel>
         : MvxTabActivity
         , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
