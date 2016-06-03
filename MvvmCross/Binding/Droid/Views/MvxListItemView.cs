@@ -17,16 +17,14 @@ namespace MvvmCross.Binding.Droid.Views
         : MvxBaseListItemView
           , IMvxListItemView
     {
-        private readonly int _templateId;
-
         public MvxListItemView(Context context,
                                IMvxLayoutInflaterHolder layoutInflaterHolder,
                                object dataContext,
                                int templateId)
             : base(context, layoutInflaterHolder, dataContext)
         {
-            this._templateId = templateId;
-            this.AndroidBindingContext.BindingInflate(templateId, this);
+            TemplateId = templateId;
+            AndroidBindingContext.BindingInflate(templateId, this);
         }
 
         protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -34,6 +32,6 @@ namespace MvvmCross.Binding.Droid.Views
         {
         }
 
-        public int TemplateId => this._templateId;
+        public int TemplateId { get; }
     }
 }

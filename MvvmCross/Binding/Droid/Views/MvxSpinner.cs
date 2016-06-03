@@ -38,8 +38,8 @@ namespace MvvmCross.Binding.Droid.Views
             var dropDownItemTemplateId = MvxAttributeHelpers.ReadDropDownListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
-            this.Adapter = adapter;
-            this.SetupHandleItemSelected();
+            Adapter = adapter;
+            ItemSelected += OnItemSelected;
         }
 
         protected MvxSpinner(IntPtr javaReference, JniHandleOwnership transfer)
@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.Droid.Views
             get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = this.Adapter;
+                var existing = Adapter;
                 if (existing == value)
                     return;
 
@@ -73,42 +73,49 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
         }
 
         public int DropDownItemTemplateId
         {
-            get { return this.Adapter.DropDownItemTemplateId; }
-            set { this.Adapter.DropDownItemTemplateId = value; }
+            get { return Adapter.DropDownItemTemplateId; }
+            set { Adapter.DropDownItemTemplateId = value; }
         }
 
         public ICommand HandleItemSelected { get; set; }
 
-        private void SetupHandleItemSelected()
+        private void OnItemSelected(object sender, ItemSelectedEventArgs e)
         {
-            base.ItemSelected += (sender, args) =>
-                {
-                    var position = args.Position;
-                    this.HandleSelected(position);
-                };
+            var position = e.Position;
+            HandleSelected(position);
         }
 
         protected virtual void HandleSelected(int position)
         {
-            var item = this.Adapter.GetRawItem(position);
-            if (this.HandleItemSelected == null
+            var item = Adapter.GetRawItem(position);
+            if (HandleItemSelected == null
                 || item == null
-                || !this.HandleItemSelected.CanExecute(item))
+                || !HandleItemSelected.CanExecute(item))
                 return;
 
-            this.HandleItemSelected.Execute(item);
+            HandleItemSelected.Execute(item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (disposing)
+            {
+                ItemSelected += OnItemSelected;
+            }
         }
     }
 }
