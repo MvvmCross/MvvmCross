@@ -115,7 +115,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (disposing)
             {
                 if (_adapter != null)
-                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
+                    _adapter.DataSetChanged -= AdapterOnDataSetChanged;
 
                 ChildViewRemoved -= OnChildViewRemoved;
             }
