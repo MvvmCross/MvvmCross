@@ -114,7 +114,7 @@ namespace MvvmCross.Binding.Droid.Views
 
             if (disposing)
             {
-                ItemSelected += OnItemSelected;
+                ItemSelected -= OnItemSelected;
             }
         }
     }
