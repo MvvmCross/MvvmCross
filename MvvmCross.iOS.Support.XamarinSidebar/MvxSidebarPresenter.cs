@@ -58,6 +58,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             var viewPresentationAttribute = GetViewPresentationAttribute(view);
 
+			//Create fall back viewPresentationAttribute, when nothing is set
+			if (viewPresentationAttribute == null)
+			{
+				Mvx.Warning("No " + nameof(MvxPanelPresentationAttribute) + " has been set, each viewcontroller should provide one.");
+				viewPresentationAttribute = new MvxPanelPresentationAttribute(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true);
+			}
+
             switch (viewPresentationAttribute.HintType)
             {
 				case MvxPanelHintType.PopToRoot:
