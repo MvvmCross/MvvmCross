@@ -5,6 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Concurrent;
+using System.Linq;
+
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
     using System.Collections.Generic;
@@ -16,9 +19,14 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
 
+    /// <summary>
+    /// Uses a global cache of calls in Reflection namespace
+    /// </summary>
     public class MvxPropertySourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
+        static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache = new ConcurrentDictionary<int, PropertyInfo>();
+
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
@@ -37,7 +45,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = this.FindItemPropertyInfo(source);
+                var itemPropertyInfo = this.FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
 
@@ -66,7 +74,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = this.FindItemPropertyInfo(source);
+                var itemPropertyInfo = this.FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
                 return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
@@ -89,16 +97,29 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
         }
 
-        protected PropertyInfo FindItemPropertyInfo(object source)
+        protected PropertyInfo FindPropertyInfo(object source, string propertyName = "Item")
         {
-            return this.FindPropertyInfo(source, "Item");
-        }
+            var sourceType = source.GetType();
+            var key = (sourceType.FullName + "." + propertyName).GetHashCode();
 
-        protected PropertyInfo FindPropertyInfo(object source, string propertyName)
-        {
-            var propertyInfo = source.GetType()
-                                         .GetProperty(propertyName);
-            return propertyInfo;
+            PropertyInfo pi;
+            if (PropertyInfoCache.TryGetValue(key, out pi))
+                return pi;
+
+
+            //Try top level properties first
+            //This extension method "GetProperty" always uses the DeclaredOnly flag
+            pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
+
+            if (pi == null)
+            {
+                //Try base properties. 
+                //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
+                pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            }
+
+            PropertyInfoCache.TryAdd(key, pi);
+            return pi;
         }
     }
 }

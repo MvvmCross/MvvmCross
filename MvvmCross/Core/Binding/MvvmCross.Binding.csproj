@@ -32,6 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile7\System.Collections.Concurrent.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +47,7 @@
     <Compile Include="Binders\MvxValueConverterRegistryFiller.cs" />
     <Compile Include="Binders\MvxRegistryFillerExtensions.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescriptionExtensions.cs" />
+    <Compile Include="BindingContext\MvxTaskBasedBindingContext.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactory.cs" />
     <Compile Include="Bindings\SourceSteps\IMvxSourceStepFactoryRegistry.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Combiners\MvxValueConverterValueCombiner.cs" />
     <Compile Include="ExtensionMethods\IMvxEditableTextView.cs" />
     <Compile Include="Parse\Binding\Tibet\MvxTibetBindingParser.cs" />
+    <Compile Include="Parse\PropertyPath\MvxPropertyPathParser.cs" />
     <Compile Include="ValueConverters\MvxCommandParameterValueConverter.cs" />
     <Compile Include="BindingContext\MvxInlineBindingTarget.cs" />
     <Compile Include="BindingContext\MvxFluentBindingDescription.cs" />

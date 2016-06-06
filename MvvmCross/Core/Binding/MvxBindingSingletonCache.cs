@@ -46,6 +46,8 @@ namespace MvvmCross.Binding
         private IMvxBinder _binder;
         private IMvxSourceStepFactory _sourceStepFactory;
         private IMvxValueCombinerLookup _valueCombinerLookup;
+        private IMvxMainThreadDispatcher _mainThreadDispatcher;
+
 
         public IMvxAutoValueConverters AutoValueConverters
         {
@@ -143,6 +145,15 @@ namespace MvvmCross.Binding
             {
                 this._sourceStepFactory = this._sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
                 return this._sourceStepFactory;
+            }
+        }
+
+        public IMvxMainThreadDispatcher MainThreadDispatcher
+        {
+            get
+            {
+                this._mainThreadDispatcher = this._mainThreadDispatcher ?? Mvx.Resolve<IMvxMainThreadDispatcher>();
+                return this._mainThreadDispatcher;
             }
         }
     }

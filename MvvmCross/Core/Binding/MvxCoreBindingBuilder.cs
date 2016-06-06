@@ -95,8 +95,11 @@ namespace MvvmCross.Binding
 
         protected virtual void RegisterCore()
         {
-            var binder = new MvxFromTextBinder();
-            Mvx.RegisterSingleton<IMvxBinder>(binder);
+            Mvx.RegisterSingleton<IMvxBinder>(new MvxFromTextBinder());
+
+            //To get the old behavior back, you can override this registration with
+            //Mvx.RegisterType<IMvxBindingContext, MvxBindingContext>();
+            Mvx.RegisterType<IMvxBindingContext, MvxTaskBasedBindingContext>();
         }
 
         protected virtual void RegisterValueConverterProvider()
@@ -214,7 +217,7 @@ namespace MvvmCross.Binding
             Mvx.RegisterSingleton<IMvxSourcePropertyPathParser>(tokeniser);
         }
 
-        protected virtual MvxSourcePropertyPathParser CreateSourcePropertyPathParser()
+        protected virtual IMvxSourcePropertyPathParser CreateSourcePropertyPathParser()
         {
             return new MvxSourcePropertyPathParser();
         }

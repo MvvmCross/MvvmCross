@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding
 {
     using MvvmCross.Binding.Binders;
@@ -29,5 +31,6 @@ namespace MvvmCross.Binding
         IMvxTargetBindingFactory TargetBindingFactory { get; }
         IMvxSourceStepFactory SourceStepFactory { get; }
         IMvxValueCombinerLookup ValueCombinerLookup { get; }
+        IMvxMainThreadDispatcher MainThreadDispatcher { get; }
     }
 }
