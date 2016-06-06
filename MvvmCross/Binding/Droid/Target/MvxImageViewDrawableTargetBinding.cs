@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.Droid.Target
             {
 				var appContext = AndroidGlobals.ApplicationContext;
 				Drawable drawable;
-				if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+				if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
 					drawable = appContext.Resources.GetDrawable(intValue, appContext.Theme);
 				else
 					drawable = appContext.Resources.GetDrawable(intValue);
