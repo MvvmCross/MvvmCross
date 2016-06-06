@@ -82,6 +82,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             this._bindingContext = context;
         }
 
+        public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership transfer)
+            : base(handle, transfer)
+        {}
+
         public void OnAttachedToWindow()
         {
             if (_cachedDataContext != null && DataContext == null)
