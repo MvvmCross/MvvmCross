@@ -23,6 +23,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     public class MvxAppCompatListView
         : ListViewCompat
     {
+        private bool _itemClickOverloaded;
+        private bool _itemLongClickOverloaded;
+
+        private ICommand _itemClick;
+        private ICommand _itemLongClick;
+
         public MvxAppCompatListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapter(context))
         {
@@ -38,7 +44,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-            this.Adapter = adapter;
+            Adapter = adapter;
         }
 
         protected MvxAppCompatListView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -51,7 +57,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = this.Adapter;
+                var existing = Adapter;
                 if (existing == value)
                     return;
 
@@ -72,25 +78,26 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
         }
-
-        private ICommand _itemClick;
 
         public new ICommand ItemClick
         {
             get { return this._itemClick; }
-            set { this._itemClick = value; if (this._itemClick != null) this.EnsureItemClickOverloaded(); }
+            set
+            {
+                this._itemClick = value;
+                if (this._itemClick != null)
+                    this.EnsureItemClickOverloaded();
+            }
         }
-
-        private bool _itemClickOverloaded = false;
 
         private void EnsureItemClickOverloaded()
         {
@@ -98,18 +105,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 return;
 
             this._itemClickOverloaded = true;
-            base.ItemClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemClick, args.Position);
+            base.ItemClick += OnItemClick;
         }
-
-        private ICommand _itemLongClick;
 
         public new ICommand ItemLongClick
         {
             get { return this._itemLongClick; }
-            set { this._itemLongClick = value; if (this._itemLongClick != null) this.EnsureItemLongClickOverloaded(); }
+            set
+            {
+                this._itemLongClick = value;
+                if (this._itemLongClick != null)
+                    this.EnsureItemLongClickOverloaded();
+            }
         }
-
-        private bool _itemLongClickOverloaded = false;
 
         private void EnsureItemLongClickOverloaded()
         {
@@ -117,7 +125,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 return;
 
             this._itemLongClickOverloaded = true;
-            base.ItemLongClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+            base.ItemLongClick += OnItemLongClick;
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command, int position)
@@ -125,7 +133,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             if (command == null)
                 return;
 
-            var item = this.Adapter.GetRawItem(position);
+            var item = Adapter.GetRawItem(position);
             if (item == null)
                 return;
 
@@ -133,6 +141,27 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 return;
 
             command.Execute(item);
+        }
+
+        private void OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            ExecuteCommandOnItem(ItemClick, e.Position);
+        }
+
+        private void OnItemLongClick(object sender, ItemLongClickEventArgs e)
+        {
+            ExecuteCommandOnItem(ItemLongClick, e.Position);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                base.ItemLongClick -= OnItemLongClick;
+                base.ItemClick -= OnItemClick;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }
