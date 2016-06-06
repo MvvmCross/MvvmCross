@@ -24,7 +24,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     {
         #region ctor
 
-        protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
@@ -48,7 +48,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         #endregion
 
-        public override sealed void SetLayoutManager(LayoutManager layout)
+        public sealed override void SetLayoutManager(LayoutManager layout)
         {
             base.SetLayoutManager(layout);
         }
