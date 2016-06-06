@@ -45,6 +45,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             }
         }
 
+        //TODO: optim: dont recreate the source binding on each datacontext change, as SourcePropertyPath does not change.
+        //TODO: optim: don't subscribe to the Changed event if the binding mode does not need it.
         protected override void OnDataContextChanged()
         {
             this.ClearPathSourceBinding();

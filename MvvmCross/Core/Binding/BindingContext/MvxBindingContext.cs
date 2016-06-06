@@ -10,13 +10,13 @@ namespace MvvmCross.Binding.BindingContext
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Platform;
 
-    public class MvxBindingContext
-        : IMvxBindingContext
+    public class MvxBindingContext : IMvxBindingContext
     {
         public class TargetAndBinding
         {
@@ -50,27 +50,26 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxBindingContext(IDictionary<object, string> firstBindings)
-            : this(null, firstBindings)
         {
+            Init(null, firstBindings);
         }
 
         public MvxBindingContext(object dataContext, IDictionary<object, string> firstBindings)
         {
-            foreach (var kvp in firstBindings)
-            {
-                this.AddDelayedAction(kvp);
-            }
-            if (dataContext != null)
-                this.DataContext = dataContext;
+            Init(dataContext, firstBindings);
         }
 
         public MvxBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
-            : this(null, firstBindings)
         {
+            Init(null, firstBindings);
         }
 
-        public MvxBindingContext(object dataContext,
-                                 IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        public MvxBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        {
+            Init(dataContext, firstBindings);
+        }
+
+        public MvxBindingContext Init(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             foreach (var kvp in firstBindings)
             {
@@ -78,6 +77,58 @@ namespace MvvmCross.Binding.BindingContext
             }
             if (dataContext != null)
                 this.DataContext = dataContext;
+
+            return this;
+        }
+
+        public MvxBindingContext Init(object dataContext, IDictionary<object, string> firstBindings)
+        {
+            foreach (var kvp in firstBindings)
+            {
+                this.AddDelayedAction(kvp);
+            }
+            if (dataContext != null)
+                this.DataContext = dataContext;
+
+            return this;
+        }
+
+        public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
+        {
+            this.AddDelayedAction(firstBindingKey, firstBindingValue);
+            if (dataContext != null)
+                this.DataContext = dataContext;
+
+            return this;
+        }
+
+        public IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue)
+        {
+            this.AddDelayedAction(firstBindingKey, firstBindingValue);
+            if (dataContext != null)
+                this.DataContext = dataContext;
+
+            return this;
+        }
+
+        private void AddDelayedAction(object key, string value)
+        {
+            this._delayedActions.Add(() =>
+            {
+                var bindings = this.Binder.Bind(this.DataContext, key, value);
+                foreach (var b in bindings)
+                    this.RegisterBinding(key, b);
+            });
+        }
+
+        private void AddDelayedAction(object key, IEnumerable<MvxBindingDescription> value)
+        {
+            this._delayedActions.Add(() =>
+            {
+                var bindings = this.Binder.Bind(this.DataContext, key, value);
+                foreach (var b in bindings)
+                    this.RegisterBinding(key, b);
+            });
         }
 
         private void AddDelayedAction(KeyValuePair<object, string> kvp)

@@ -11,8 +11,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     {
         protected override IMvxSourceStep TypedCreate(MvxPathSourceStepDescription description)
         {
-            var toReturn = new MvxPathSourceStep(description);
-            return toReturn;
+            return new MvxPathSourceStep(description);
         }
     }
 }
