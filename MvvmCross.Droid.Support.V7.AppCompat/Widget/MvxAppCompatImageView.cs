@@ -37,7 +37,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 var attributeId = typedArray.GetIndex(i);
                 if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
                 {
-                    this.ImageUrl = typedArray.GetString(attributeId);
+                    ImageUrl = typedArray.GetString(attributeId);
                 }
             }
             typedArray.Recycle();
@@ -57,15 +57,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             get
             {
-                return this.ImageHelper?.ImageUrl;
+                return ImageHelper?.ImageUrl;
             }
             set
             {
-                if (this.ImageHelper == null)
+                if (ImageHelper == null)
                 {
                     return;
                 }
-                this.ImageHelper.ImageUrl = value;
+                ImageHelper.ImageUrl = value;
             }
         }
 
@@ -73,11 +73,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             get
             {
-                return this.ImageHelper.DefaultImagePath;
+                return ImageHelper.DefaultImagePath;
             }
             set
             {
-                this.ImageHelper.DefaultImagePath = value;
+                ImageHelper.DefaultImagePath = value;
             }
         }
 
@@ -85,11 +85,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             get
             {
-                return this.ImageHelper.ErrorImagePath;
+                return ImageHelper.ErrorImagePath;
             }
             set
             {
-                this.ImageHelper.ErrorImagePath = value;
+                ImageHelper.ErrorImagePath = value;
             }
         }
 
@@ -97,26 +97,26 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             get
             {
-                if (this._imageHelper == null)
+                if (_imageHelper == null)
                 {
-                    if (!Mvx.TryResolve(out this._imageHelper))
+                    if (!Mvx.TryResolve(out _imageHelper))
                     {
                         MvxTrace.Error("No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
                     }
                     else
                     {
-                        this._imageHelper.ImageChanged += this.ImageHelperOnImageChanged;
+                        _imageHelper.ImageChanged += ImageHelperOnImageChanged;
                     }
                 }
-                return this._imageHelper;
+                return _imageHelper;
             }
         }
 
         public override void SetMaxHeight(int maxHeight)
         {
-            if (this.ImageHelper != null)
+            if (ImageHelper != null)
             {
-                this.ImageHelper.MaxHeight = maxHeight;
+                ImageHelper.MaxHeight = maxHeight;
             }
 
             base.SetMaxHeight(maxHeight);
@@ -124,9 +124,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public override void SetMaxWidth(int maxWidth)
         {
-            if (this.ImageHelper != null)
+            if (ImageHelper != null)
             {
-                this.ImageHelper.MaxWidth = maxWidth;
+                ImageHelper.MaxWidth = maxWidth;
             }
 
             base.SetMaxWidth(maxWidth);
@@ -136,7 +136,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             if (disposing)
             {
-                this._imageHelper?.Dispose();
+                if (this._imageHelper != null)
+                {
+                    _imageHelper.ImageChanged -= ImageHelperOnImageChanged;
+                    _imageHelper.Dispose();
+                }
             }
 
             base.Dispose(disposing);
@@ -144,7 +148,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
-            using (var h = new Handler(Looper.MainLooper)) h.Post(() => { this.SetImageBitmap(mvxValueEventArgs.Value); });
+            using (var h = new Handler(Looper.MainLooper))
+                h.Post(() => { SetImageBitmap(mvxValueEventArgs.Value); });
         }
     }
 }
