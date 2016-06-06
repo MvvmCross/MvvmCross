@@ -7,6 +7,7 @@
 
 using System;
 using System.Windows.Input;
+using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
@@ -36,7 +37,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public ICommand Click
         {
             get { return this._click; }
-            set { this._click = value; if (this._click != null) this.EnsureClickOverloaded(); }
+            set
+            {
+                this._click = value;
+                if (this._click != null)
+                    this.EnsureClickOverloaded();
+            }
         }
 
         private void EnsureClickOverloaded()
@@ -44,13 +50,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (this._clickOverloaded)
                 return;
             this._clickOverloaded = true;
-            this.ItemView.Click += (sender, args) => ExecuteCommandOnItem(this.Click);
+            this.ItemView.Click += OnItemViewOnClick;
         }
 
         public ICommand LongClick
         {
             get { return this._longClick; }
-            set { this._longClick = value; if (this._longClick != null) this.EnsureLongClickOverloaded(); }
+            set
+            {
+                this._longClick = value;
+                if (this._longClick != null)
+                    this.EnsureLongClickOverloaded();
+            }
         }
 
         private void EnsureLongClickOverloaded()
@@ -58,7 +69,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (this._longClickOverloaded)
                 return;
             this._longClickOverloaded = true;
-            this.ItemView.LongClick += (sender, args) => ExecuteCommandOnItem(this.LongClick);
+            this.ItemView.LongClick += OnItemViewOnLongClick;
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command)
@@ -74,6 +85,16 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 return;
 
             command.Execute(item);
+        }
+
+        private void OnItemViewOnClick(object sender, EventArgs args)
+        {
+            this.ExecuteCommandOnItem(this.Click);
+        }
+
+        private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
+        {
+            this.ExecuteCommandOnItem(this.LongClick);
         }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
@@ -104,6 +125,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             {
                 _bindingContext.ClearAllBindings();
                 _cachedDataContext = null;
+
+                if (ItemView != null)
+                {
+                    ItemView.Click -= this.OnItemViewOnClick;
+                    ItemView.LongClick -= this.OnItemViewOnLongClick;
+                }
             }
 
             base.Dispose(disposing);
