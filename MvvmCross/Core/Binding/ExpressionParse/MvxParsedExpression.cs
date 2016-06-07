@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.ExpressionParse
                 this.PropertyName = propertyName;
             }
 
-            public string PropertyName { get; private set; }
+            public string PropertyName { get; }
 
             public void AppendPrintTo(StringBuilder builder)
             {
@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.ExpressionParse
                 this.IndexValue = indexValue;
             }
 
-            public string IndexValue { get; private set; }
+            public string IndexValue { get; }
 
             public void AppendPrintTo(StringBuilder builder)
             {

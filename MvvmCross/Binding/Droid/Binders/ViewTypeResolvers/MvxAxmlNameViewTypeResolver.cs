@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
             this.ViewNamespaceAbbreviations = new Dictionary<string, string>();
         }
 
-        public IDictionary<string, string> ViewNamespaceAbbreviations { get; private set; }
+        public IDictionary<string, string> ViewNamespaceAbbreviations { get; }
 
         public override Type Resolve(string tagName)
         {

@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.BindingContext
             }
 
             public object Target { get; private set; }
-            public IMvxUpdateableBinding Binding { get; private set; }
+            public IMvxUpdateableBinding Binding { get; }
         }
 
         private readonly List<Action> _delayedActions = new List<Action>();
