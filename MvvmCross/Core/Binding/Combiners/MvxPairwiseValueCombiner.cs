@@ -53,8 +53,8 @@ namespace MvvmCross.Binding.Combiners
                 this.Type1 = type1;
             }
 
-            public Type Type1 { get; private set; }
-            public Type Type2 { get; private set; }
+            public Type Type1 { get; }
+            public Type Type2 { get; }
 
             public override bool Equals(object obj)
             {

@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
     public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxNamespaceListViewTypeResolver
     {
-        public IList<string> Namespaces { get; private set; }
+        public IList<string> Namespaces { get; }
 
         public MvxNamespaceListViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)

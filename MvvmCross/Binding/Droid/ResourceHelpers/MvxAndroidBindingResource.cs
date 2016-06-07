@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             if (Instance != null)
                 return;
 
-            new MvxAndroidBindingResource();
+            var androidBindingResource = new MvxAndroidBindingResource();
         }
 
         private MvxAndroidBindingResource()
@@ -97,23 +97,23 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             return field.GetValue(null);
         }
 
-        public int BindingTagUnique { get; private set; }
+        public int BindingTagUnique { get; }
 
-        public int[] BindingStylableGroupId { get; private set; }
-        public int BindingBindId { get; private set; }
-        public int BindingLangId { get; private set; }
+        public int[] BindingStylableGroupId { get; }
+        public int BindingBindId { get; }
+        public int BindingLangId { get; }
 
-        public int[] ControlStylableGroupId { get; private set; }
-        public int TemplateId { get; private set; }
+        public int[] ControlStylableGroupId { get; }
+        public int TemplateId { get; }
 
-        public int[] ImageViewStylableGroupId { get; private set; }
-        public int SourceBindId { get; private set; }
+        public int[] ImageViewStylableGroupId { get; }
+        public int SourceBindId { get; }
 
-        public int[] ListViewStylableGroupId { get; private set; }
-        public int ListItemTemplateId { get; private set; }
-        public int DropDownListItemTemplateId { get; private set; }
+        public int[] ListViewStylableGroupId { get; }
+        public int ListItemTemplateId { get; }
+        public int DropDownListItemTemplateId { get; }
 
-        public int[] ExpandableListViewStylableGroupId { get; private set; }
-        public int GroupItemTemplateId { get; private set; }
+        public int[] ExpandableListViewStylableGroupId { get; }
+        public int GroupItemTemplateId { get; }
     }
 }
