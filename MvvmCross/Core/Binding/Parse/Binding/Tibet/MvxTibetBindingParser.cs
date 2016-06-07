@@ -23,10 +23,10 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
         protected override IEnumerable<char> TerminatingCharacters()
         {
             return this._terminatingCharacters ??
-                   (this._terminatingCharacters = base.TerminatingCharacters().Union(this.OperatorCharacters()).ToList());
+                   (this._terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters()).ToList());
         }
 
-        private char[] OperatorCharacters()
+        private static char[] OperatorCharacters()
         {
             return new char[] { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%' };
         }
@@ -204,7 +204,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 
         protected override bool DetectOperator()
         {
-            return this.OperatorCharacters().Contains(this.CurrentChar);
+            return OperatorCharacters().Contains(this.CurrentChar);
         }
 
         protected override void HandleEmptyBlock(MvxSerializableBindingDescription description)

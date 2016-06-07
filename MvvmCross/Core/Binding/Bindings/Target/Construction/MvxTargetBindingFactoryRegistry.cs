@@ -98,12 +98,12 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         {
             foreach (var supported in factory.SupportedTypes)
             {
-                var key = this.GenerateKey(supported.Type, supported.Name);
+                var key = GenerateKey(supported.Type, supported.Name);
                 this._lookups[key] = factory;
             }
         }
 
-        private string GenerateKey(Type type, string name)
+        private static string GenerateKey(Type type, string name)
         {
             return $"{type.FullName}:{name}";
         }
@@ -111,7 +111,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
         {
             IMvxPluginTargetBindingFactory factory;
-            var key = this.GenerateKey(type, name);
+            var key = GenerateKey(type, name);
             if (this._lookups.TryGetValue(key, out factory))
             {
                 return factory;
