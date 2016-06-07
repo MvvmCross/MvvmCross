@@ -70,7 +70,6 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 if (this._isEditTextBinding)
@@ -83,6 +82,7 @@ namespace MvvmCross.Binding.Droid.Target
                     }
                 }
             }
+            base.Dispose(isDisposing);
         }
 
         public string CurrentText
