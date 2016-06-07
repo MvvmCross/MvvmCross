@@ -37,6 +37,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             {
                 if (this._currentChildBinding != null)
                 {
+                    this._currentChildBinding.Changed -= this.ChildSourceBindingChanged;
                     this._currentChildBinding.Dispose();
                     this._currentChildBinding = null;
                 }
