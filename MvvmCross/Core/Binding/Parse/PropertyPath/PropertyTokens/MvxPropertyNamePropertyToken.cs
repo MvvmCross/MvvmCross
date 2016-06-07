@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
             this.PropertyName = propertyText;
         }
 
-        public string PropertyName { get; private set; }
+        public string PropertyName { get; }
 
         public override string ToString()
         {

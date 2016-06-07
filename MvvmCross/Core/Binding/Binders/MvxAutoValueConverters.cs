@@ -23,8 +23,8 @@ namespace MvvmCross.Binding.Binders
                 this.ViewModelType = viewModel;
             }
 
-            public Type ViewModelType { get; private set; }
-            public Type ViewType { get; private set; }
+            public Type ViewModelType { get; }
+            public Type ViewType { get; }
 
             public override bool Equals(object obj)
             {
