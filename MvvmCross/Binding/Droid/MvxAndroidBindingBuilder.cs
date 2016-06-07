@@ -89,6 +89,8 @@ namespace MvvmCross.Binding.Droid
                                                             textView => new MvxTextViewTextTargetBinding(textView));
             registry.RegisterCustomBindingFactory<TextView>("TextFormatted",
                                                             textView => new MvxTextViewTextFormattedTargetBinding(textView));
+            registry.RegisterCustomBindingFactory<TextView>("Hint",
+                                                            textView => new MvxTextViewHintTargetBinding(textView));
             registry.RegisterPropertyInfoBindingFactory((typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
                                                     typeof(AutoCompleteTextView), "PartialText");
             registry.RegisterPropertyInfoBindingFactory(
