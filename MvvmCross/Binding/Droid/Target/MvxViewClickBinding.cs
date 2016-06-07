@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Droid.Target
         public MvxViewClickBinding(View view)
             : base(view)
         {
-            this._canExecuteEventHandler = new EventHandler<EventArgs>(this.OnCanExecuteChanged);
+            this._canExecuteEventHandler = this.OnCanExecuteChanged;
             view.Click += this.ViewOnClick;
         }
 

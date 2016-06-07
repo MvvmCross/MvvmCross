@@ -24,9 +24,6 @@ namespace MvvmCross.Binding.Droid.Views
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxFilteringAdapter(context))
         {
-            // note - we shouldn't realy need both of these... but we do
-            ItemClick += OnItemClick;
-            ItemSelected += OnItemSelected;
         }
 
         public MvxAutoCompleteTextView(Context context, IAttributeSet attrs,
@@ -36,7 +33,10 @@ namespace MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
+
+            // note - we shouldn't realy need both of these... but we do
             ItemClick += OnItemClick;
+            ItemSelected += OnItemSelected;
         }
 
         protected MvxAutoCompleteTextView(IntPtr javaReference, JniHandleOwnership transfer)
