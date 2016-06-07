@@ -81,6 +81,7 @@
     <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Target\MvxTextViewHintTargetBinding.cs" />
     <Compile Include="Target\MvxEditTextPreferenceTextTargetBinding.cs" />
     <Compile Include="Target\MvxExpandableListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxPreferenceValueTargetBinding.cs" />
