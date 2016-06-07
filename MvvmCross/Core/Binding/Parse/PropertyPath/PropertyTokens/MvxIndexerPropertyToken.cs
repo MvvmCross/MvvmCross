@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
             this.Key = key;
         }
 
-        public object Key { get; private set; }
+        public object Key { get; }
 
         public override string ToString()
         {

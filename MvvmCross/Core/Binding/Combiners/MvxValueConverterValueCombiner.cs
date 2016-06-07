@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Combiners
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
             var sourceStep = steps.First();
-            var parameter = this.GetParameterValue(steps);
+            var parameter = GetParameterValue(steps);
 
             if (this._valueConverter == null)
             {
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Combiners
             return base.SubStepTargetTypes(subSteps, overallTargetType);
         }
 
-        private object GetParameterValue(IEnumerable<IMvxSourceStep> steps)
+        private static object GetParameterValue(IEnumerable<IMvxSourceStep> steps)
         {
             var parameterStep = steps.Skip(1).FirstOrDefault();
             object parameter = null;
@@ -55,7 +55,7 @@ namespace MvvmCross.Binding.Combiners
         public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var sourceStep = steps.First();
-            var parameter = this.GetParameterValue(steps);
+            var parameter = GetParameterValue(steps);
 
             object sourceValue = sourceStep.GetValue();
             if (sourceValue == MvxBindingConstant.DoNothing)

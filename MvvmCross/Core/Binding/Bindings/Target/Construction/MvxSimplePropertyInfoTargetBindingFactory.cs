@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(this._bindingType, new[] { target, targetPropertyInfo });
+            var targetBindingCandidate = Activator.CreateInstance(this._bindingType, target, targetPropertyInfo);
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {

@@ -156,7 +156,7 @@ namespace MvvmCross.Binding.Parse.PropertyPath
 
         private void SkipWhitespaceAndPeriods()
         {
-            this.SkipWhitespaceAndCharacters(new[] { '.' });
+            this.SkipWhitespaceAndCharacters('.');
         }
     }
 }
