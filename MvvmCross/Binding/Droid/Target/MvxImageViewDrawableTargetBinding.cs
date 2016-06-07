@@ -49,9 +49,9 @@ namespace MvvmCross.Binding.Droid.Target
                 var context = imageView.Context;
 				Drawable drawable;
 				if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-					drawable = context.Resources.GetDrawable(intValue, context.Theme);
+					drawable = context?.Resources?.GetDrawable(intValue, context.Theme);
 				else
-					drawable = context.Resources.GetDrawable(intValue);
+					drawable = context?.Resources?.GetDrawable(intValue);
 
 				if (drawable != null)
 					imageView.SetImageDrawable(drawable);
