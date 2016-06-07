@@ -42,7 +42,6 @@ namespace MvvmCross.Dialog.Droid.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var editText = this.View;
@@ -51,6 +50,7 @@ namespace MvvmCross.Dialog.Droid.Target
                     editText.ValueChanged -= this.ElementOnValueChanged;
                 }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

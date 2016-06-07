@@ -54,14 +54,15 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            if (this.TextField != null && this._subscribed)
+            if (isDisposing)
             {
-                this.TextField.FocusChange -= this.HandleLostFocus;
-                this._subscribed = false;
+                if (this.TextField != null && this._subscribed)
+                {
+                    this.TextField.FocusChange -= this.HandleLostFocus;
+                    this._subscribed = false;
+                }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

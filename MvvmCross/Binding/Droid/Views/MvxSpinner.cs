@@ -110,12 +110,11 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (disposing)
             {
                 ItemSelected -= OnItemSelected;
             }
+            base.Dispose(disposing);
         }
     }
 }

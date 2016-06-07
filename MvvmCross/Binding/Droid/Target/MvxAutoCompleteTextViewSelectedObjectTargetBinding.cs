@@ -50,7 +50,6 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var autoComplete = View;
@@ -60,6 +59,8 @@ namespace MvvmCross.Binding.Droid.Target
                     this._subscribed = false;
                 }
             }
+
+            base.Dispose(isDisposing);
         }
     }
 }
