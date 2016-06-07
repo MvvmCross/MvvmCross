@@ -46,12 +46,12 @@ namespace MvvmCross.Binding.Droid.Target
                 imageView.SetImageDrawable(null);
             else
             {
-				var appContext = AndroidGlobals.ApplicationContext;
+                var context = imageView.Context;
 				Drawable drawable;
 				if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-					drawable = appContext.Resources.GetDrawable(intValue, appContext.Theme);
+					drawable = context.Resources.GetDrawable(intValue, context.Theme);
 				else
-					drawable = appContext.Resources.GetDrawable(intValue);
+					drawable = context.Resources.GetDrawable(intValue);
 
 				if (drawable != null)
 					imageView.SetImageDrawable(drawable);
