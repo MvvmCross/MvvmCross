@@ -7,13 +7,14 @@
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
+	using System;
+	using Android.Graphics.Drawables;
+	using Android.Widget;
+	using Android.OS;
 
-    using Android.Widget;
+	using MvvmCross.Platform.Platform;
 
-    using MvvmCross.Platform.Platform;
-
-    public class MvxImageViewDrawableTargetBinding
+	public class MvxImageViewDrawableTargetBinding
         : MvxAndroidTargetBinding
     {
         protected ImageView ImageView => (ImageView)Target;
@@ -45,7 +46,15 @@ namespace MvvmCross.Binding.Droid.Target
                 imageView.SetImageDrawable(null);
             else
             {
-                imageView.SetImageResource(intValue);
+                var context = imageView.Context;
+				Drawable drawable;
+				if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+					drawable = context?.Resources?.GetDrawable(intValue, context.Theme);
+				else
+					drawable = context?.Resources?.GetDrawable(intValue);
+
+				if (drawable != null)
+					imageView.SetImageDrawable(drawable);
             }
         }
     }
