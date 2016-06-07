@@ -77,7 +77,6 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 if (this._subscription != null)
@@ -86,6 +85,8 @@ namespace MvvmCross.Binding.Bindings.Target
                     this._subscription = null;
                 }
             }
+
+            base.Dispose(isDisposing);
         }
     }
 }

@@ -110,8 +110,6 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (disposing)
             {
                 ChildViewRemoved -= OnChildViewRemoved;
@@ -119,6 +117,7 @@ namespace MvvmCross.Binding.Droid.Views
                 if (_adapter != null)
                     _adapter.DataSetChanged -= AdapterOnDataSetChanged;
             }
+            base.Dispose(disposing);
         }
     }
 }

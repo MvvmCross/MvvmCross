@@ -154,13 +154,13 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (disposing)
             {
                 base.ItemClick -= ItemOnClick;
                 base.ItemLongClick -= ItemOnLongClick;
             }
+
+            base.Dispose(disposing);
         }
     }
 }

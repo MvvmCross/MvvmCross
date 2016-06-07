@@ -138,8 +138,6 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (disposing)
             {
                 ItemClick -= OnItemClick;
@@ -150,6 +148,7 @@ namespace MvvmCross.Binding.Droid.Views
                     Adapter.PartialTextChanged -= AdapterOnPartialTextChanged;
                 }
             }
+            base.Dispose(disposing);
         }
     }
 }

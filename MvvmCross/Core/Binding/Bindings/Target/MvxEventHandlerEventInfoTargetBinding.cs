@@ -44,7 +44,6 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var target = this.Target;
@@ -54,6 +53,8 @@ namespace MvvmCross.Binding.Bindings.Target
                     removeMethod.Invoke(target, new[] { this._eventHandler });
                 }
             }
+
+            base.Dispose(isDisposing);
         }
 
         private void HandleEvent(object sender, EventArgs args)
