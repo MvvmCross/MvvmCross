@@ -41,6 +41,8 @@ namespace MvvmCross.WindowsCommon.Views
             {
                 MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                                exception.ToLongString());
+
+                throw;
             }
         }
 
