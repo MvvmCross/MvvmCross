@@ -27,9 +27,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual void FireValueChanged(object newValue)
         {
-            var handler = this.ValueChanged;
-
-            handler?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
+            ValueChanged?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
         }
 
         public abstract Type TargetType { get; }

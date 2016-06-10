@@ -13,8 +13,7 @@ namespace MvvmCross.Core.Platform
     {
         protected void FireLifetimeChange(MvxLifetimeEvent which)
         {
-            var handler = this.LifetimeChanged;
-            handler?.Invoke(this, new MvxLifetimeEventArgs(which));
+            LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
         #region Implementation of IMvxLifetime

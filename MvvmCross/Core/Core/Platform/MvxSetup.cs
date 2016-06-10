@@ -370,8 +370,7 @@ namespace MvvmCross.Core.Platform
 
         private void FireStateChange(MvxSetupState state)
         {
-            var handler = this.StateChanged;
-            handler?.Invoke(this, new MvxSetupStateEventArgs(state));
+            StateChanged?.Invoke(this, new MvxSetupStateEventArgs(state));
         }
 
         public virtual void EnsureInitialized(Type requiredBy)
