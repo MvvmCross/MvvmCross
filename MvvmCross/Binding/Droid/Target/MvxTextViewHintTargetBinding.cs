@@ -1,9 +1,11 @@
 using System;
 using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxTextViewHintTargetBinding : MvxAndroidTargetBinding
+    public class MvxTextViewHintTargetBinding 
+        : MvxConvertingTargetBinding
     {
         public MvxTextViewHintTargetBinding(TextView target)
             : base(target) {}

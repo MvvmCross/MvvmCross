@@ -5,19 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform.Platform;
-
 #warning Can this be expanded to GridView too? Or to others?
 
     public class MvxListViewSelectedItemTargetBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         protected MvxListView ListView => (MvxListView)Target;
 
@@ -31,22 +30,22 @@ namespace MvvmCross.Binding.Droid.Target
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-            var listView = this.ListView;
+            var listView = ListView;
             if (listView == null)
                 return;
 
             var newValue = listView.Adapter.GetRawItem(itemClickEventArgs.Position);
 
-            if (!newValue.Equals(this._currentValue))
+            if (!newValue.Equals(_currentValue))
             {
-                this._currentValue = newValue;
+                _currentValue = newValue;
                 FireValueChanged(newValue);
             }
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (value == null || value == this._currentValue)
+            if (value == null || value == _currentValue)
                 return;
 
             var listView = (MvxListView)target;
@@ -57,7 +56,7 @@ namespace MvvmCross.Binding.Droid.Target
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
                 return;
             }
-            this._currentValue = value;
+            _currentValue = value;
             listView.SetSelection(index);
         }
 
@@ -65,12 +64,12 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var listView = ((ListView)this.ListView);
+            var listView = ((ListView)ListView);
             if (listView == null)
                 return;
 
-            listView.ItemClick += this.OnItemClick;
-            this._subscribed = true;
+            listView.ItemClick += OnItemClick;
+            _subscribed = true;
         }
 
         public override Type TargetType => typeof(object);
@@ -79,11 +78,11 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var listView = (ListView)this.ListView;
-                if (listView != null && this._subscribed)
+                var listView = (ListView)ListView;
+                if (listView != null && _subscribed)
                 {
-                    listView.ItemClick -= this.OnItemClick;
-                    this._subscribed = false;
+                    listView.ItemClick -= OnItemClick;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

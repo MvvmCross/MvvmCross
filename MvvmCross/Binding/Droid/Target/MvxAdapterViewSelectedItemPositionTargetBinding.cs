@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
     public class MvxAdapterViewSelectedItemPositionTargetBinding
         : MvxAndroidTargetBinding
     {

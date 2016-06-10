@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid;
-
     public abstract class MvxAndroidTargetBinding
         : MvxConvertingTargetBinding
     {
@@ -21,6 +21,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
         }
 
-        protected IMvxAndroidGlobals AndroidGlobals => this._androidGlobals ?? (this._androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
+        protected IMvxAndroidGlobals AndroidGlobals
+            => _androidGlobals ?? (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
     }
 }
