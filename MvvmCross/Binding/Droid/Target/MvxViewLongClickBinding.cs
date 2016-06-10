@@ -8,11 +8,12 @@
 using System;
 using System.Windows.Input;
 using Android.Views;
+using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxViewLongClickBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         private ICommand _command;
 
