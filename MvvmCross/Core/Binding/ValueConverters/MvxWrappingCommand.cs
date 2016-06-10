@@ -37,8 +37,7 @@ namespace MvvmCross.Binding.ValueConverters
         // Note - this is public because we use it in weak referenced situations
         public void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
         {
-            var handler = this.CanExecuteChanged;
-            handler?.Invoke(this, eventArgs);
+            CanExecuteChanged?.Invoke(this, eventArgs);
         }
 
         public bool CanExecute(object parameter = null)

@@ -15,8 +15,7 @@ namespace MvvmCross.Platform.Droid.Platform
     {
         public void OnResult(MvxIntentResultEventArgs result)
         {
-            var handler = this.Result;
-            handler?.Invoke(this, result);
+            Result?.Invoke(this, result);
         }
 
         public event EventHandler<MvxIntentResultEventArgs> Result;
