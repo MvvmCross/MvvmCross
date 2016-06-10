@@ -15,10 +15,8 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxAutoCompleteTextViewPartialTextTargetBinding
-       : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
+       : MvxWithEventPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
-        private bool _subscribed;
-
         public MvxAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
@@ -30,36 +28,6 @@ namespace MvvmCross.Binding.Droid.Target
             }
         }
 
-        private void AutoCompleteOnPartialTextChanged(object sender, EventArgs eventArgs)
-        {
-            FireValueChanged(View.PartialText);
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
-
-        public override void SubscribeToEvents()
-        {
-            var autoComplete = View;
-            if (autoComplete == null)
-                return;
-
-            _subscribed = true;
-            autoComplete.PartialTextChanged += AutoCompleteOnPartialTextChanged;
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                var autoComplete = View;
-                if (autoComplete != null && _subscribed)
-                {
-                    autoComplete.PartialTextChanged -= AutoCompleteOnPartialTextChanged;
-                    _subscribed = false;
-                }
-            }
-
-            base.Dispose(isDisposing);
-        }
+        public override Type TargetType => typeof(string);
     }
 }
