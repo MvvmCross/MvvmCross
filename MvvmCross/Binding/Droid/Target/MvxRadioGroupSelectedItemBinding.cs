@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.Views;
-
-    public class MvxRadioGroupSelectedItemBinding : MvxAndroidTargetBinding
+    public class MvxRadioGroupSelectedItemBinding 
+        : MvxConvertingTargetBinding
     {
         private object _currentValue;
 
         public MvxRadioGroupSelectedItemBinding(MvxRadioGroup radioGroup)
             : base(radioGroup)
         {
-            radioGroup.CheckedChange += this.RadioGroupCheckedChanged;
+            radioGroup.CheckedChange += RadioGroupCheckedChanged;
         }
 
         private bool CheckValueChanged(object newValue)
@@ -28,11 +28,11 @@ namespace MvvmCross.Binding.Droid.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (this._currentValue != null);
+                changed = (_currentValue != null);
             }
             else
             {
-                changed = !(newValue.Equals(this._currentValue));
+                changed = !(newValue.Equals(_currentValue));
             }
             return changed;
         }
@@ -50,10 +50,10 @@ namespace MvvmCross.Binding.Droid.Target
                 newValue = li.DataContext;
             }
 
-            bool changed = this.CheckValueChanged(newValue);
+            bool changed = CheckValueChanged(newValue);
             if (!changed) { return; }
 
-            this._currentValue = newValue;
+            _currentValue = newValue;
             FireValueChanged(newValue);
         }
 
@@ -62,7 +62,7 @@ namespace MvvmCross.Binding.Droid.Target
             var radioGroup = (MvxRadioGroup)target;
             if (radioGroup == null) { return; }
 
-            bool changed = this.CheckValueChanged(newValue);
+            bool changed = CheckValueChanged(newValue);
             if (!changed) { return; }
 
             int checkid = Android.Views.View.NoId;
@@ -109,7 +109,7 @@ namespace MvvmCross.Binding.Droid.Target
                 var radioGroup = (MvxRadioGroup)Target;
                 if (radioGroup != null)
                 {
-                    radioGroup.CheckedChange -= this.RadioGroupCheckedChanged;
+                    radioGroup.CheckedChange -= RadioGroupCheckedChanged;
                 }
             }
             base.Dispose(isDisposing);

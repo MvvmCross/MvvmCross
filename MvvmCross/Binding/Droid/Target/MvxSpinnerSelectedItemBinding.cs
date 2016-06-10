@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform.Platform;
-
     public class MvxSpinnerSelectedItemBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         protected MvxSpinner Spinner => (MvxSpinner)Target;
 
@@ -29,7 +28,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = this.Spinner;
+            var spinner = Spinner;
             if (spinner == null)
                 return;
 
@@ -38,11 +37,11 @@ namespace MvvmCross.Binding.Droid.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (this._currentValue != null);
+                changed = (_currentValue != null);
             }
             else
             {
-                changed = !(newValue.Equals(this._currentValue));
+                changed = !(newValue.Equals(_currentValue));
             }
 
             if (!changed)
@@ -50,7 +49,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            this._currentValue = newValue;
+            _currentValue = newValue;
             FireValueChanged(newValue);
         }
 
@@ -64,7 +63,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            if (!value.Equals(this._currentValue))
+            if (!value.Equals(_currentValue))
             {
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
@@ -72,7 +71,7 @@ namespace MvvmCross.Binding.Droid.Target
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
                     return;
                 }
-                this._currentValue = value;
+                _currentValue = value;
                 spinner.SetSelection(index);
             }
         }
@@ -81,12 +80,12 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var spinner = this.Spinner;
+            var spinner = Spinner;
             if (spinner == null)
                 return;
 
-            spinner.ItemSelected += this.SpinnerItemSelected;
-            this._subscribed = true;
+            spinner.ItemSelected += SpinnerItemSelected;
+            _subscribed = true;
         }
 
         public override Type TargetType => typeof(object);
@@ -95,11 +94,11 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var spinner = this.Spinner;
-                if (spinner != null && this._subscribed)
+                var spinner = Spinner;
+                if (spinner != null && _subscribed)
                 {
-                    spinner.ItemSelected -= this.SpinnerItemSelected;
-                    this._subscribed = false;
+                    spinner.ItemSelected -= SpinnerItemSelected;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

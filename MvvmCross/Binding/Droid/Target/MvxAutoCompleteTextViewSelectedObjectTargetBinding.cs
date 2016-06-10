@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Droid.Target
             if (autoComplete == null)
                 return;
 
-            this._subscribed = true;
+            _subscribed = true;
             autoComplete.SelectedObjectChanged += AutoCompleteOnSelectedObjectChanged;
         }
 
@@ -53,10 +53,10 @@ namespace MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var autoComplete = View;
-                if (autoComplete != null && this._subscribed)
+                if (autoComplete != null && _subscribed)
                 {
                     autoComplete.SelectedObjectChanged -= AutoCompleteOnSelectedObjectChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
 

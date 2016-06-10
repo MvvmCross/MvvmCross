@@ -28,41 +28,41 @@ namespace MvvmCross.Binding.Bindings.Target
         public override void SetValue(object value)
         {
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
-            var target = this.Target;
+            var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", this.GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
-            if (this.ShouldSkipSetValueForViewSpecificReasons(target, value))
+            if (ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
 
-            var safeValue = this.MakeSafeValue(value);
+            var safeValue = MakeSafeValue(value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (this._isUpdatingSource)
+            if (_isUpdatingSource)
             {
                 if (safeValue == null)
                 {
-                    if (this._updatingSourceWith == null)
+                    if (_updatingSourceWith == null)
                         return;
                 }
                 else
                 {
-                    if (safeValue.Equals(this._updatingSourceWith))
+                    if (safeValue.Equals(_updatingSourceWith))
                         return;
                 }
             }
 
             try
             {
-                this._isUpdatingTarget = true;
-                this.SetValueImpl(target, safeValue);
+                _isUpdatingTarget = true;
+                SetValueImpl(target, safeValue);
             }
             finally
             {
-                this._isUpdatingTarget = false;
+                _isUpdatingTarget = false;
             }
         }
 
@@ -73,29 +73,29 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-            var safeValue = this.TargetType.MakeSafeValue(value);
+            var safeValue = TargetType.MakeSafeValue(value);
             return safeValue;
         }
 
         protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
-            if (this._isUpdatingTarget
-                || this._isUpdatingSource)
+            if (_isUpdatingTarget
+                || _isUpdatingSource)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
             try
             {
-                this._isUpdatingSource = true;
-                this._updatingSourceWith = newValue;
+                _isUpdatingSource = true;
+                _updatingSourceWith = newValue;
 
                 base.FireValueChanged(newValue);
             }
             finally
             {
-                this._isUpdatingSource = false;
-                this._updatingSourceWith = null;
+                _isUpdatingSource = false;
+                _updatingSourceWith = null;
             }
         }
     }

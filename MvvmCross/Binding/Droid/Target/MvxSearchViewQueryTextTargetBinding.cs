@@ -1,10 +1,11 @@
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    public class MvxSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
+    public class MvxSearchViewQueryTextTargetBinding 
+        : MvxConvertingTargetBinding
     {
         public MvxSearchViewQueryTextTargetBinding(object target)
             : base(target)
@@ -19,7 +20,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            this.SearchView.QueryTextChange += this.HandleQueryTextChanged;
+            SearchView.QueryTextChange += HandleQueryTextChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -33,7 +34,7 @@ namespace MvvmCross.Binding.Droid.Target
                 var target = Target as SearchView;
                 if (target != null)
                 {
-                    target.QueryTextChange -= this.HandleQueryTextChanged;
+                    target.QueryTextChange -= HandleQueryTextChanged;
                 }
             }
 
