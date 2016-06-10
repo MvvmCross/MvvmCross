@@ -38,8 +38,7 @@ namespace MvvmCross.Binding.Droid.Views
         {
             base.NotifyDataSetChanged(e);
 
-            var handler = this.DataSetChanged;
-            handler?.Invoke(this, e);
+            DataSetChanged?.Invoke(this, e);
         }
     }
 }

@@ -185,16 +185,14 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            var handler = ValueChanged;
-            handler?.Invoke(sender, args);
+            ValueChanged?.Invoke(sender, args);
         }
 
         public event EventHandler ElementsChanged;
 
         protected void HandleElementsChangedEvent()
         {
-            var handler = ElementsChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            ElementsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

@@ -114,9 +114,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         protected virtual void SendSourcePropertyChanged()
         {
-            var handler = this._changed;
-
-            handler?.Invoke(this, EventArgs.Empty);
+            this._changed?.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
