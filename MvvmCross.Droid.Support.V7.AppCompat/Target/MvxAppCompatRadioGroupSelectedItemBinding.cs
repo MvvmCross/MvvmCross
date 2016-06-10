@@ -13,11 +13,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     using Android.Widget;
 
     using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
+    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Binding.Droid.Views;
     using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 
-    public class MvxAppCompatRadioGroupSelectedItemBinding : MvxAndroidTargetBinding
+    public class MvxAppCompatRadioGroupSelectedItemBinding : MvxConvertingTargetBinding
     {
         private object _currentValue;
 

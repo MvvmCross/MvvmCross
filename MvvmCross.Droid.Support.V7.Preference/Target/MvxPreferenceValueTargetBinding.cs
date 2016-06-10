@@ -1,11 +1,11 @@
 using System;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target
 {
-    public class MvxPreferenceValueTargetBinding : MvxAndroidTargetBinding
+    public class MvxPreferenceValueTargetBinding : MvxConvertingTargetBinding
     {
         public MvxPreferenceValueTargetBinding(Android.Support.V7.Preferences.Preference preference)
             : base(preference)

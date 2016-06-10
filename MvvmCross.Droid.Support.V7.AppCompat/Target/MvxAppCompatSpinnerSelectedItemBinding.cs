@@ -8,14 +8,14 @@
 using Android.Widget;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using System;
+using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     public class MvxAppCompatSpinnerSelectedItemBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         protected MvxAppCompatSpinner Spinner => (MvxAppCompatSpinner)Target;
 
