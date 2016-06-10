@@ -119,7 +119,6 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             }
 
             _picker.DismissViewController(true, () => { });
-            _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
@@ -142,7 +141,6 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
             _picker.DismissViewController(true, () => { });
-            _picker.Delegate = null;
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
         }
 
