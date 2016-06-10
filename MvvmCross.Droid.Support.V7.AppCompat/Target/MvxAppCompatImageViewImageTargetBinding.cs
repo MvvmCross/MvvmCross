@@ -29,14 +29,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         {
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to ImageView binding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to AppCompatImageView binding");
                 return null;
             }
 
             var stringValue = value as string;
             if (string.IsNullOrWhiteSpace(stringValue))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Empty value passed to ImageView binding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Empty value passed to AppCompatImageView binding");
                 return null;
             }
 

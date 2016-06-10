@@ -9,43 +9,56 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     using System;
 
+    using Android.OS;
     using Android.Graphics;
+    using Android.Graphics.Drawables;
     using Android.Support.V7.Widget;
 
     using MvvmCross.Binding;
+    using MvvmCross.Binding.Droid.Target;
     using MvvmCross.Platform.Platform;
 
     public class MvxAppCompatImageViewDrawableTargetBinding
-        : MvxAppCompatBaseImageViewTargetBinding
+        : MvxAndroidTargetBinding
     {
+        protected AppCompatImageView ImageView => (AppCompatImageView)Target;
+
         public MvxAppCompatImageViewDrawableTargetBinding(AppCompatImageView imageView)
             : base(imageView)
         {
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
         public override Type TargetType => typeof(int);
 
-        protected override bool GetBitmap(object value, out Bitmap bitmap)
+        protected override void SetValueImpl(object target, object value)
         {
+            var imageView = (AppCompatImageView)target;
+
             if (!(value is int))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                    "Value was not a valid Drawable");
-                bitmap = null;
-                return false;
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value was not a valid Drawable");
+                imageView.SetImageDrawable(null);
+                return;
             }
 
             var intValue = (int)value;
 
             if (intValue == 0)
-                bitmap = null;
+                imageView.SetImageDrawable(null);
             else
             {
-                var resources = this.AndroidGlobals.ApplicationContext.Resources;
-                bitmap = BitmapFactory.DecodeResource(resources, intValue, new BitmapFactory.Options() { InPurgeable = true });
-            }
+                var context = imageView.Context;
+                Drawable drawable;
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                    drawable = context?.Resources?.GetDrawable(intValue, context.Theme);
+                else
+                    drawable = context?.Resources?.GetDrawable(intValue);
 
-            return true;
+                if (drawable != null)
+                    imageView.SetImageDrawable(drawable);
+            }
         }
     }
 }
