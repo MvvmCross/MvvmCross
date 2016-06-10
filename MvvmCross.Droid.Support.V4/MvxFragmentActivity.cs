@@ -17,9 +17,9 @@ using MvvmCross.Droid.Support.V4.EventSource;
 
 namespace MvvmCross.Droid.Support.V4
 {
+    [Register("mvvmcross.droid.support.v4.MvxFragmentActivity")]
     public class MvxFragmentActivity
-        : MvxEventSourceFragmentActivity
-          , IMvxAndroidView
+        : MvxEventSourceFragmentActivity, IMvxAndroidView
     {
         protected MvxFragmentActivity()
         {

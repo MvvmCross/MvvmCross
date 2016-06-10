@@ -45,6 +45,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxActionBarDrawerToggle")]
     public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle
     {
         public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)

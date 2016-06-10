@@ -14,6 +14,7 @@ using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
+    [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
         private readonly IMvxBindingContext _bindingContext;

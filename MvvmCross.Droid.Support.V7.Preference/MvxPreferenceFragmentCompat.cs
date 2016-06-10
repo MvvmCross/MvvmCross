@@ -8,6 +8,7 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
+    [Register("mvvmcross.droid.support.v7.preference.MvxPreferenceFragmentCompat")]
     public abstract class MvxPreferenceFragmentCompat : MvxEventSourcePreferenceFragmentCompat, IMvxFragmentView
     {
         protected MvxPreferenceFragmentCompat()
