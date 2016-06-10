@@ -107,14 +107,12 @@
     <Compile Include="Target\MvxAppCompatImageViewDrawableNameTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatImageViewDrawableTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatImageViewImageTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatRadioGroupSelectedItemBinding.cs" />
     <Compile Include="Target\MvxAppCompatSearchViewQueryTextTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
     <Compile Include="Target\MvxToolbarSubtitleBinding.cs" />
     <Compile Include="Widget\MvxAppCompatAutoCompleteTextView.cs" />
     <Compile Include="Widget\MvxAppCompatImageView.cs" />
-    <Compile Include="Widget\MvxAppCompatListView.cs" />
     <Compile Include="Widget\MvxAppCompatRadioGroup.cs" />
     <Compile Include="Widget\MvxAppCompatSpinner.cs" />
     <Compile Include="MvxAppCompatSetup.cs" />

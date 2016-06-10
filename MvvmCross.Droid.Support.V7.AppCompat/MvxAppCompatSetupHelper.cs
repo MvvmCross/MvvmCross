@@ -43,10 +43,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 "SelectedItem",
                 spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
 
-            registry.RegisterCustomBindingFactory<MvxAppCompatListView>(
-                "SelectedItem",
-                adapterView => new MvxAppCompatListViewSelectedItemTargetBinding(adapterView));
-
             registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
                 "SelectedItem",
                 radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
@@ -62,7 +58,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             registry.AddOrOverwrite(typeof(SearchViewCompat), "Query");
-            registry.AddOrOverwrite(typeof(MvxAppCompatListView), "ItemsSource");
             registry.AddOrOverwrite(typeof(MvxAppCompatImageView), "ImageUrl");
 
         }
