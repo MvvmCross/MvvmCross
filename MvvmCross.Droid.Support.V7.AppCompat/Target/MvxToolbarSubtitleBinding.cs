@@ -1,11 +1,11 @@
 using System;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    public class MvxToolbarSubtitleBinding : MvxAndroidTargetBinding
+    public class MvxToolbarSubtitleBinding : MvxConvertingTargetBinding
     {
         public MvxToolbarSubtitleBinding(Toolbar toolbar) : base(toolbar) {}
 

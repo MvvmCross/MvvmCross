@@ -5,9 +5,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     using Android.Support.V7.Widget;
 
     using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
+    using MvvmCross.Binding.Bindings.Target;
 
-    public class MvxAppCompatSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
+    public class MvxAppCompatSearchViewQueryTextTargetBinding : MvxConvertingTargetBinding
     {
         public MvxAppCompatSearchViewQueryTextTargetBinding(object target)
             : base(target)
