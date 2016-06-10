@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Android.Views;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-    using System.Windows.Input;
-
-    using Android.Views;
-
     public class MvxViewLongClickBinding
         : MvxAndroidTargetBinding
     {
@@ -22,23 +21,23 @@ namespace MvvmCross.Binding.Droid.Target
         public MvxViewLongClickBinding(View view)
             : base(view)
         {
-            view.LongClick += this.ViewOnLongClick;
+            view.LongClick += ViewOnLongClick;
         }
 
         private void ViewOnLongClick(object sender, View.LongClickEventArgs longClickEventArgs)
         {
-            if (this._command == null)
+            if (_command == null)
                 return;
 
-            if (!this._command.CanExecute(null))
+            if (!_command.CanExecute(null))
                 return;
 
-            this._command.Execute(null);
+            _command.Execute(null);
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            this._command = value as ICommand;
+            _command = value as ICommand;
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -49,10 +48,10 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var view = this.View;
+                var view = View;
                 if (view != null)
                 {
-                    view.LongClick -= this.ViewOnLongClick;
+                    view.LongClick -= ViewOnLongClick;
                 }
             }
             base.Dispose(isDisposing);

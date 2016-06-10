@@ -1,10 +1,12 @@
 ﻿using System;
 using Android.Preferences;
+using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxPreferenceValueTargetBinding : MvxAndroidTargetBinding
+    public class MvxPreferenceValueTargetBinding 
+        : MvxConvertingTargetBinding
     {
         public MvxPreferenceValueTargetBinding(Preference preference)
             : base(preference)
@@ -25,7 +27,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (e.Preference == Preference)
             {
-                this.FireValueChanged(e.NewValue);
+                FireValueChanged(e.NewValue);
                 e.Handled = true;
             }
         }
@@ -36,7 +38,7 @@ namespace MvvmCross.Binding.Droid.Target
             {
                 if (Preference != null)
                 {
-                    Preference.PreferenceChange -= this.HandlePreferenceChange;
+                    Preference.PreferenceChange -= HandlePreferenceChange;
                 }
             }
 

@@ -1,19 +1,19 @@
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform.Platform;
-
     // This isn't a "pure" target binder like MvxListViewSelectedItemTargetBinding.
     // It differs in two ways:
     //  1. It checks the selected item.
     //  2. SetValueImpl typically compares value with null and _currentValue, returing
     //     if null or equal respectively.  This class foregoes this so that if the bound value of
     //     SelectedItem is set to null we can "override" _currentValue.
-    public class MvxExpandableListViewSelectedItemTargetBinding : MvxAndroidTargetBinding
+    public class MvxExpandableListViewSelectedItemTargetBinding 
+        : MvxConvertingTargetBinding
     {
         private object _currentValue;
         private bool _subscribed;
@@ -33,8 +33,8 @@ namespace MvvmCross.Binding.Droid.Target
 
             if (value == null)
             {
-                this._currentValue = null;
-                this.ListView.ClearChoices();
+                _currentValue = null;
+                ListView.ClearChoices();
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            this._currentValue = value;
+            _currentValue = value;
             listView.SetSelectedChild(positions.Item1, positions.Item2, true);
 
             var pos =
@@ -59,23 +59,23 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var listView = ((ExpandableListView)this.ListView);
+            var listView = ((ExpandableListView)ListView);
             if (listView == null)
                 return;
 
-            listView.ChildClick += this.OnChildClick;
-            this._subscribed = true;
+            listView.ChildClick += OnChildClick;
+            _subscribed = true;
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var listView = (ExpandableListView)this.ListView;
-                if (listView != null && this._subscribed)
+                var listView = (ExpandableListView)ListView;
+                if (listView != null && _subscribed)
                 {
-                    listView.ChildClick -= this.OnChildClick;
-                    this._subscribed = false;
+                    listView.ChildClick -= OnChildClick;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);
@@ -83,7 +83,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         private void OnChildClick(object sender, ExpandableListView.ChildClickEventArgs childClickEventArgs)
         {
-            var listView = this.ListView;
+            var listView = ListView;
             if (listView == null)
                 return;
 
@@ -91,7 +91,7 @@ namespace MvvmCross.Binding.Droid.Target
                 ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetRawItem(
                     childClickEventArgs.GroupPosition, childClickEventArgs.ChildPosition);
 
-            if (!newValue.Equals(this._currentValue))
+            if (!newValue.Equals(_currentValue))
             {
                 var pos = listView.GetFlatListPosition(
                     ExpandableListView.GetPackedPositionForChild(
@@ -99,7 +99,7 @@ namespace MvvmCross.Binding.Droid.Target
                         childClickEventArgs.ChildPosition));
                 listView.SetItemChecked(pos, true);
 
-                this._currentValue = newValue;
+                _currentValue = newValue;
                 FireValueChanged(newValue);
             }
         }

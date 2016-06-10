@@ -5,13 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
-    public class MvxRatingBarRatingTargetBinding : MvxAndroidTargetBinding
+    public class MvxRatingBarRatingTargetBinding 
+        : MvxConvertingTargetBinding
     {
         protected RatingBar RatingBar => (RatingBar)Target;
 
@@ -22,7 +23,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            this.RatingBar.RatingBarChange += this.RatingBar_RatingBarChange;
+            RatingBar.RatingBarChange += RatingBar_RatingBarChange;
         }
 
         private void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
@@ -53,7 +54,7 @@ namespace MvvmCross.Binding.Droid.Target
                 var target = Target as RatingBar;
                 if (target != null)
                 {
-                    target.RatingBarChange -= this.RatingBar_RatingBarChange;
+                    target.RatingBarChange -= RatingBar_RatingBarChange;
                 }
             }
             base.Dispose(isDisposing);
