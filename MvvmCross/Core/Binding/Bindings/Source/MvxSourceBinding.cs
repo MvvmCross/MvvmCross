@@ -32,8 +32,7 @@ namespace MvvmCross.Binding.Bindings.Source
 
         protected void FireChanged()
         {
-            var handler = this.Changed;
-            handler?.Invoke(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
         }
 
         protected bool EqualsCurrentValue(object testValue)

@@ -96,8 +96,7 @@ namespace MvvmCross.Binding.Droid.Views
 
             activity?.RunOnUiThread(() =>
             {
-                var handler = this.PartialTextChanged;
-                handler?.Invoke(this, EventArgs.Empty);
+                PartialTextChanged?.Invoke(this, EventArgs.Empty);
             });
         }
 

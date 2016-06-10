@@ -73,8 +73,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
-            EventHandler handler = this.ValueChanged;
-            handler?.Invoke(this, null);
+            ValueChanged?.Invoke(this, null);
         }
     }
 }

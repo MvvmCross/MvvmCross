@@ -48,8 +48,7 @@ namespace MvvmCross.Binding.Test.Binders
 
             protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
             {
-                var handler = this._PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                _PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
