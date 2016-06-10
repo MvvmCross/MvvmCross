@@ -132,8 +132,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         private void FireChanged(EventHandler eventHandler)
         {
-            var handler = eventHandler;
-            handler?.Invoke(this, EventArgs.Empty);
+            eventHandler?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void Dispose(bool disposing)

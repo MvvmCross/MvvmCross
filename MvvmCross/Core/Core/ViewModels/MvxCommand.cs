@@ -28,8 +28,7 @@ namespace MvvmCross.Core.ViewModels
 
         public void RaiseCanExecuteChanged(object sender)
         {
-            var handler = this.CanExecuteChanged;
-            handler?.Invoke(sender, EventArgs.Empty);
+            CanExecuteChanged?.Invoke(sender, EventArgs.Empty);
         }
     }
 
