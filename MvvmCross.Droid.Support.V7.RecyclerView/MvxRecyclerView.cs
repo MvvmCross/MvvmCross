@@ -22,8 +22,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        #region ctor
-
         public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
@@ -45,8 +43,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
         }
-
-        #endregion
 
         public sealed override void SetLayoutManager(LayoutManager layout)
         {

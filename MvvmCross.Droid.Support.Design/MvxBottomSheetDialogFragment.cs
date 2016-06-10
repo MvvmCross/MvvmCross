@@ -16,7 +16,8 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.Design
 {
-	public abstract class MvxBottomSheetDialogFragment
+    [Register("mvvmcross.droid.support.design.MvxBottomSheetDialogFragment")]
+    public abstract class MvxBottomSheetDialogFragment
 		: MvxEventSourceBottomSheetDialogFragment
 		, IMvxFragmentView
 	{

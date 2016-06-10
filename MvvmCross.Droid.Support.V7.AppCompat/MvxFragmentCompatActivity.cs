@@ -19,9 +19,9 @@ using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxFragmentCompatActivity")]
     public class MvxFragmentCompatActivity
-        : MvxEventSourceAppCompatActivity
-          , IMvxAndroidView
+        : MvxEventSourceAppCompatActivity , IMvxAndroidView
     {
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {

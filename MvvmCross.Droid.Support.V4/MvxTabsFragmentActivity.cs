@@ -19,6 +19,7 @@ using System.Linq;
 
 namespace MvvmCross.Droid.Support.V4
 {
+    [Register("mvvmcross.droid.support.v4.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : MvxFragmentActivity
           , TabHost.IOnTabChangeListener

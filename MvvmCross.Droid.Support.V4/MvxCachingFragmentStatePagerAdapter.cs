@@ -14,7 +14,8 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Support.V4
 {
-	public class MvxCachingFragmentStatePagerAdapter
+    [Register("mvvmcross.droid.support.v4.MvxCachingFragmentStatePagerAdapter")]
+    public class MvxCachingFragmentStatePagerAdapter
 		: MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;

@@ -10,7 +10,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback
         private object _strongReference;
 
         /// <summary>
-        /// Weak reference. Should be fine for most cases, since data usually will be refereced somewhere else too, e.g. by a List in a MvxViewModel or similar.
+        /// Weak reference. Should be fine for most cases, since data usually will be referenced somewhere else too, e.g. by a List in a MvxViewModel or similar.
         /// </summary>
         private readonly WeakReference<object> _weakReference;
 
