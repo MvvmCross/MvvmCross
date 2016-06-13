@@ -349,27 +349,33 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return mvxFragmentView.UniqueImmutableCacheTag;
         }
 
-	protected override void OnCreate (Bundle bundle)
-	{
-		// Prevents crash when activity in background with history enable is reopened after 
-        	// Android does some auto memory management.
-        	var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
-        	setup.EnsureInitialized();
+	    protected override void OnCreate (Bundle bundle)
+	    {
+		    // Prevents crash when activity in background with history enable is reopened after 
+        	    // Android does some auto memory management.
+        	    var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
+        	    setup.EnsureInitialized();
             
-		base.OnCreate (bundle);
+		    base.OnCreate (bundle);
 
-		if (bundle == null) {
-			var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
-			if (fragmentRequestText == null)
-				return;
+		    if (bundle == null)
+		        OnNewIntent(Intent);
+	    }
 
-			var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
-			var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
 
-			var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
-			mvxAndroidViewPresenter.Show (fragmentRequest);
-		}
-	}
+            var fragmentRequestText = intent.Extras?.GetString(ViewModelRequestBundleKey);
+            if (fragmentRequestText == null)
+                return;
+
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+
+            var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
+            mvxAndroidViewPresenter.Show(fragmentRequest);
+        }
 
         /// <summary>
         /// Close Fragment with a specific tag at a specific placeholder
