@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.FieldBinding</id>
-		<version>4.1.6</version>
+		<version>4.2.0</version>
 		<title>MvvmCross - FieldBinding Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,44 +16,44 @@ This package contains the 'FieldBinding' plugin for MvvmCross</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="wp">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.1.6" />
-				<dependency id="MvvmCross.Binding" version="4.1.6" />
+				<dependency id="MvvmCross.Platform" version="4.2.0" />
+				<dependency id="MvvmCross.Binding" version="4.2.0" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -112,6 +112,7 @@ This package contains the 'FieldBinding' plugin for MvvmCross</description>
 
 	</files>
 </package>
+
 
 
 
