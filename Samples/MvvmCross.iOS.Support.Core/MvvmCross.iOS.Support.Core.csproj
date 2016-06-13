@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AppStart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,6 +45,27 @@
     <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\RightPanelViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Binding.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Core.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Binding.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.2.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -57,22 +74,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.1.4\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Core.4.1.4\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.1.4\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.1.4\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
 </Project>
