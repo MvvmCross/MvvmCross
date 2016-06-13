@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.AutoView.iOS</id>
-		<version>4.1.6</version>
+		<version>4.2.0</version>
 		<title>MvvmCross - iOS AutoView Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,12 +18,12 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.AutoView" version="4.1.6" />
-				<dependency id="MvvmCross.Dialog.iOS" version="4.1.6" />
+				<dependency id="MvvmCross.AutoView" version="4.2.0" />
+				<dependency id="MvvmCross.Dialog.iOS" version="4.2.0" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.AutoView" version="4.1.6" />
-				<dependency id="MvvmCross.Dialog.iOS" version="4.1.6" />
+				<dependency id="MvvmCross.AutoView" version="4.2.0" />
+				<dependency id="MvvmCross.Dialog.iOS" version="4.2.0" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -37,6 +37,7 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 			target="src\MvvmCross.AutoView.iOS" />		
 	</files>
 </package>
+
 
 
 

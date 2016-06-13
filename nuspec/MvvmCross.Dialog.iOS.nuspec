@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Dialog.iOS</id>
-		<version>4.1.6</version>
+		<version>4.2.0</version>
 		<title>MvvmCross - iOS Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,10 +18,10 @@ This package contains the 'iOS Dialog' libraries for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Core" version="4.1.6" />
+				<dependency id="MvvmCross.Core" version="4.2.0" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.1.6" />
+				<dependency id="MvvmCross.Core" version="4.2.0" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -35,6 +35,7 @@ This package contains the 'iOS Dialog' libraries for MvvmCross
 		<file src="..\MvvmCross\Dialog\iOS\**\*.cs" target="src\MvvmCross.Dialog.iOS" />
 	</files>
 </package>
+
 
 
 
