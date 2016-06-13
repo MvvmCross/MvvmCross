@@ -352,20 +352,25 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 	    protected override void OnCreate (Bundle bundle)
 	    {
 		    // Prevents crash when activity in background with history enable is reopened after 
-        	    // Android does some auto memory management.
-        	    var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
-        	    setup.EnsureInitialized();
+        	// Android does some auto memory management.
+        	var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
+        	setup.EnsureInitialized();
             
 		    base.OnCreate (bundle);
 
 		    if (bundle == null)
-		        OnNewIntent(Intent);
+                HandleIntent(Intent);
 	    }
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
 
+            HandleIntent(intent);
+        }
+
+        protected virtual void HandleIntent(Intent intent)
+        {
             var fragmentRequestText = intent.Extras?.GetString(ViewModelRequestBundleKey);
             if (fragmentRequestText == null)
                 return;
