@@ -92,10 +92,10 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<TextView>("Hint",
                                                             textView => new MvxTextViewHintTargetBinding(textView));
             registry.RegisterPropertyInfoBindingFactory((typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
-                                                    typeof(AutoCompleteTextView), "PartialText");
+                                                    typeof(MvxAutoCompleteTextView), "PartialText");
             registry.RegisterPropertyInfoBindingFactory(
                                                     typeof(MvxAutoCompleteTextViewSelectedObjectTargetBinding),
-                                                    typeof(AutoCompleteTextView),
+                                                    typeof(MvxAutoCompleteTextView),
                                                     "SelectedObject");
             registry.RegisterPropertyInfoBindingFactory(typeof(MvxCompoundButtonCheckedTargetBinding),
                                                     typeof(CompoundButton), "Checked");
@@ -114,17 +114,11 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
                                                              imageView => new MvxImageViewImageTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
-                                                                             spinner =>
-                                                                             new MvxSpinnerSelectedItemBinding(
-                                                                                 spinner));
+                                                              spinner => new MvxSpinnerSelectedItemBinding(spinner));
             registry.RegisterCustomBindingFactory<AdapterView>("SelectedItemPosition",
-                                                                              adapterView =>
-                                                                              new MvxAdapterViewSelectedItemPositionTargetBinding
-                                                                                  (adapterView));
+                                                               adapterView => new MvxAdapterViewSelectedItemPositionTargetBinding(adapterView));
             registry.RegisterCustomBindingFactory<MvxListView>("SelectedItem",
-                                                                              adapterView =>
-                                                                              new MvxListViewSelectedItemTargetBinding
-                                                                                  (adapterView));
+                                                               adapterView => new MvxListViewSelectedItemTargetBinding(adapterView));
             registry.RegisterCustomBindingFactory<MvxExpandableListView>("SelectedItem",
                                                                          adapterView =>
                                                                              new MvxExpandableListViewSelectedItemTargetBinding(adapterView));
@@ -133,7 +127,8 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<View>("LongClick",
                                                             view =>
                                                             new MvxViewLongClickBinding(view));
-            registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
+            registry.RegisterCustomBindingFactory<MvxRadioGroup>(
+                "SelectedItem",
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
             registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
             registry.RegisterCustomBindingFactory<SearchView>(
