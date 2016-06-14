@@ -26,19 +26,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 typeof(AppCompatAutoCompleteTextView),
                 "SelectedObject");
 
-            registry.RegisterCustomBindingFactory<AppCompatImageView>(
-                "Bitmap",
-                imageView => new MvxAppCompatImageViewBitmapTargetBinding(imageView));
-            registry.RegisterCustomBindingFactory<AppCompatImageView>(
-                "DrawableId",
-                imageView => new MvxAppCompatImageViewDrawableTargetBinding(imageView));
-            registry.RegisterCustomBindingFactory<AppCompatImageView>(
-                "DrawableName",
-                imageView => new MvxAppCompatImageViewDrawableNameTargetBinding(imageView));
-            registry.RegisterCustomBindingFactory<AppCompatImageView>(
-                "AssetImagePath",
-                imageView => new MvxAppCompatImageViewImageTargetBinding(imageView));
-
             registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
                 "SelectedItem",
                 spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
