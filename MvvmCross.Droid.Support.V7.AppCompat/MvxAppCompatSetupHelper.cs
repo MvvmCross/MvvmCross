@@ -9,7 +9,6 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -33,7 +32,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
                 "SelectedItem",
                 radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
-            registry.RegisterCustomBindingFactory<SearchViewCompat>(
+            registry.RegisterCustomBindingFactory<SearchView>(
                 "Query",
                 search => new MvxAppCompatSearchViewQueryTextTargetBinding(search));
 
@@ -44,7 +43,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
-            registry.AddOrOverwrite(typeof(SearchViewCompat), "Query");
+            registry.AddOrOverwrite(typeof(SearchView), "Query");
             registry.AddOrOverwrite(typeof(MvxAppCompatImageView), "ImageUrl");
 
         }
