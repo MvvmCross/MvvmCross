@@ -431,14 +431,19 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
 		public virtual bool Close(IMvxViewModel viewModel)
 		{
+			if (FragmentManager.BackStackEntryCount == 0)
+			{
+				base.OnBackPressed();
+				return true;
+			}
+
 			//Workaround for closing fragments. This will not work when showing multiple fragments of the same viewmodel type in one activity
-			var frag = GetCurrentCacheableFragmentsInfo ().FirstOrDefault (x => x.ViewModelType == viewModel.GetType());
-			
+			var frag = GetCurrentCacheableFragmentsInfo().FirstOrDefault(x => x.ViewModelType == viewModel.GetType());
 			if (frag == null)
 			{
 				return false;
 			}
-			
+
 			// Close method can not be fully fixed at this moment. That requires some changes in main MvvmCross library
 			CloseFragment(frag.Tag, frag.ContentId);
 			return true;
