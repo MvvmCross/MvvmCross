@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
     public class MvxWithEventPropertyInfoTargetBinding
         : MvxPropertyInfoTargetBinding
     {
@@ -26,34 +26,35 @@ namespace MvvmCross.Binding.Bindings.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                                       "Error - target is null in MvxWithEventPropertyInfoTargetBinding");
-                return;
             }
         }
+
+        protected string EventSuffix { get; set; } = "Changed";
 
         // Note - this is public because we use it in weak referenced situations
         public void OnValueChanged(object sender, EventArgs eventArgs)
         {
-            var target = this.Target;
+            var target = Target;
             if (target == null)
             {
                 MvxBindingTrace.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
-            var value = this.TargetPropertyInfo.GetGetMethod().Invoke(target, null);
-            this.FireValueChanged(value);
+            var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
+            FireValueChanged(value);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
-            var target = this.Target;
+            var target = Target;
             if (target == null)
                 return;
 
             var viewType = target.GetType();
-            var eventName = this.TargetPropertyInfo.Name + "Changed";
+            var eventName = TargetPropertyInfo.Name + EventSuffix;
             var eventInfo = viewType.GetEvent(eventName);
             if (eventInfo == null)
             {
@@ -72,21 +73,32 @@ namespace MvvmCross.Binding.Bindings.Target
                 return;
             }
 
-            this._subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
+            _subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
             }
 
             base.Dispose(isDisposing);
         }
+    }
+
+    public class MvxWithEventPropertyInfoTargetBinding<T> : MvxWithEventPropertyInfoTargetBinding
+        where T : class
+    {
+        public MvxWithEventPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
+            : base(target, targetPropertyInfo)
+        {
+        }
+
+        protected T View => Target as T;
     }
 }

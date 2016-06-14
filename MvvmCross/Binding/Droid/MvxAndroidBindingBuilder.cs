@@ -6,45 +6,44 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Preferences;
+using Android.Graphics;
+using Android.Views;
+using Android.Widget;
+
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Droid.Binders;
+using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid
 {
-    using Android.Graphics;
-    using Android.Views;
-    using Android.Widget;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Droid.Binders;
-    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Binding.Droid.Target;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
         public override void DoRegistration()
         {
-            this.InitializeAppResourceTypeFinder();
-            this.InitializeBindingResources();
-            this.InitializeLayoutInflation();
+            InitializeAppResourceTypeFinder();
+            InitializeBindingResources();
+            InitializeLayoutInflation();
             base.DoRegistration();
         }
 
         protected virtual void InitializeLayoutInflation()
         {
-            var inflaterfactoryFactory = this.CreateLayoutInflaterFactoryFactory();
+            var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
             Mvx.RegisterSingleton(inflaterfactoryFactory);
 
-            var viewFactory = this.CreateAndroidViewFactory();
+            var viewFactory = CreateAndroidViewFactory();
             Mvx.RegisterSingleton(viewFactory);
 
-            var viewBinderFactory = this.CreateAndroidViewBinderFactory();
+            var viewBinderFactory = CreateAndroidViewBinderFactory();
             Mvx.RegisterSingleton(viewBinderFactory);
         }
 
@@ -70,7 +69,7 @@ namespace MvvmCross.Binding.Droid
 
         protected virtual void InitializeAppResourceTypeFinder()
         {
-            var resourceFinder = this.CreateAppResourceTypeFinder();
+            var resourceFinder = CreateAppResourceTypeFinder();
             Mvx.RegisterSingleton(resourceFinder);
         }
 
@@ -91,7 +90,7 @@ namespace MvvmCross.Binding.Droid
                                                             textView => new MvxTextViewTextFormattedTargetBinding(textView));
             registry.RegisterCustomBindingFactory<TextView>("Hint",
                                                             textView => new MvxTextViewHintTargetBinding(textView));
-            registry.RegisterPropertyInfoBindingFactory((typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxAutoCompleteTextViewPartialTextTargetBinding),
                                                     typeof(AutoCompleteTextView), "PartialText");
             registry.RegisterPropertyInfoBindingFactory(
                                                     typeof(MvxAutoCompleteTextViewSelectedObjectTargetBinding),
@@ -128,17 +127,15 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<MvxExpandableListView>("SelectedItem",
                                                                          adapterView =>
                                                                              new MvxExpandableListViewSelectedItemTargetBinding(adapterView));
-            registry.RegisterCustomBindingFactory<RatingBar>("Rating",
-                                                            ratingBar => new MvxRatingBarRatingTargetBinding(ratingBar));
+            registry.RegisterPropertyInfoBindingFactory(typeof(MvxRatingBarRatingTargetBinding), typeof(RatingBar), "Rating");
             registry.RegisterCustomBindingFactory<View>("LongClick",
                                                             view =>
                                                             new MvxViewLongClickBinding(view));
             registry.RegisterCustomBindingFactory<MvxRadioGroup>("SelectedItem",
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
             registry.RegisterCustomBindingFactory("TextFocus", (EditText view) => new MvxTextViewFocusTargetBinding(view));
-            registry.RegisterCustomBindingFactory<SearchView>(
-                "Query",
-                search => new MvxSearchViewQueryTextTargetBinding(search));
+            registry.RegisterPropertyInfoBindingFactory(typeof (MvxSearchViewQueryTextTargetBinding),
+                typeof (SearchView), "Query");
             registry.RegisterCustomBindingFactory<Preference>(
                 "Value",
                 preference => new MvxPreferenceValueTargetBinding(preference));
@@ -171,19 +168,20 @@ namespace MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof(SeekBar), "Progress");
             registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), "ImageUrl");
             registry.AddOrOverwrite(typeof(SearchView), "Query");
+            registry.AddOrOverwrite(typeof(RatingBar), "Rating");
         }
 
         protected override void RegisterPlatformSpecificComponents()
         {
             base.RegisterPlatformSpecificComponents();
 
-            this.InitializeViewTypeResolver();
-            this.InitializeContextStack();
+            InitializeViewTypeResolver();
+            InitializeContextStack();
         }
 
         protected virtual void InitializeContextStack()
         {
-            var stack = this.CreateContextStack();
+            var stack = CreateContextStack();
             Mvx.RegisterSingleton(stack);
         }
 
@@ -194,7 +192,7 @@ namespace MvvmCross.Binding.Droid
 
         protected virtual void InitializeViewTypeResolver()
         {
-            var typeCache = this.CreateViewTypeCache();
+            var typeCache = CreateViewTypeCache();
             Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);

@@ -13,49 +13,21 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxCompoundButtonCheckedTargetBinding
-        : MvxPropertyInfoTargetBinding<CompoundButton>
+        : MvxWithEventPropertyInfoTargetBinding<CompoundButton>
     {
         private bool _subscribed;
 
         public MvxCompoundButtonCheckedTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-        }
+            EventSuffix = "Change";
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override void SubscribeToEvents()
-        {
-            var compoundButton = View;
-            if (compoundButton == null)
+            var button = View;
+            if (button == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
-                return;
+                                      "Error - button is null in MvxCompoundButtonCheckedTargetBinding");
             }
-
-            _subscribed = true;
-            compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
-        }
-
-        private void CompoundButtonOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
-        {
-            FireValueChanged(View.Checked);
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                var compoundButton = View;
-                if (compoundButton != null && _subscribed)
-                {
-                    compoundButton.CheckedChange -= CompoundButtonOnCheckedChange;
-                    _subscribed = false;
-                }
-            }
-
-            base.Dispose(isDisposing);
         }
     }
 }
