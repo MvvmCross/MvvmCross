@@ -19,10 +19,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding),
-                typeof(AppCompatAutoCompleteTextView), "PartialText");
+                typeof(MvxAppCompatAutoCompleteTextView),
+                "PartialText");
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding),
-                typeof(AppCompatAutoCompleteTextView),
+                typeof(MvxAppCompatAutoCompleteTextView),
                 "SelectedObject");
 
             registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
