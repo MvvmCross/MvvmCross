@@ -37,7 +37,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 "Query",
                 search => new MvxAppCompatSearchViewQueryTextTargetBinding(search));
 
-            registry.RegisterCustomBindingFactory<Android.Support.V7.Widget.Toolbar>(
+            registry.RegisterCustomBindingFactory<Toolbar>(
                 "Subtitle",
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
         }
