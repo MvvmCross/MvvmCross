@@ -457,6 +457,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		public virtual bool Close(IMvxViewModel viewModel)
 		{
+			if (SupportFragmentManager.BackStackEntryCount == 0)
+			{
+				base.OnBackPressed();
+				return true;
+			}
+
 			//Workaround for closing fragments. This will not work when showing multiple fragments of the same viewmodel type in one activity
 			var frag = GetCurrentCacheableFragmentsInfo ().FirstOrDefault (x => x.ViewModelType == viewModel.GetType());
 			if (frag == null)

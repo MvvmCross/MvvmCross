@@ -16,4 +16,13 @@
         android:textColor="@color/black"
         android:gravity="center"
         android:layout_centerInParent="true" />
+    <Button
+        android:text="Close view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="@dimen/element_margin_medium"
+        android:layout_centerHorizontal="true"
+        local:MvxBind="Click CloseViewCommand" />
 </RelativeLayout>
