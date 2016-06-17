@@ -1,16 +1,29 @@
 ﻿namespace MvvmCross.iOS.Support.Views
 {
-    using Core.ViewModels;
-    using CoreGraphics;
-    using Foundation;
-    using iOS.Views;
-    using UIKit;
+	using System;
+	using Core.ViewModels;
+	using CoreGraphics;
+	using Foundation;
+	using iOS.Views;
+	using UIKit;
 
-    /// <summary>
+	/// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : MvxViewModel
     {
+		public MvxBaseViewController()
+		{
+		}
+
+		public MvxBaseViewController(IntPtr handle) : base(handle)
+        {
+		}
+
+		protected MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+		}
+
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
