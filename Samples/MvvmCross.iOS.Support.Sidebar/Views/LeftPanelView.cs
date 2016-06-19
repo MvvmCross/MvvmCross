@@ -25,7 +25,7 @@
             base.ViewDidLoad();
 
             var centerButton = new UIButton(new CGRect(0, 100, 320, 40));
-            centerButton.SetTitle("Center Panel Menu Item", UIControlState.Normal);
+            centerButton.SetTitle("Master View Menu Item", UIControlState.Normal);
             centerButton.BackgroundColor = UIColor.White;
             centerButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
             
@@ -37,7 +37,7 @@
 
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);
-            bindingSet.Bind(centerButton).To(vm => vm.ShowCenterPanelCommand);
+            bindingSet.Bind(centerButton).To(vm => vm.ShowMasterViewCommand);
             bindingSet.Apply();
 
             var scrollView = new UIScrollView(View.Frame)

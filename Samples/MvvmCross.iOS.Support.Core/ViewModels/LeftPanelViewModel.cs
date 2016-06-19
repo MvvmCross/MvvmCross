@@ -20,20 +20,20 @@ namespace MvvmCross.iOS.Support.Core.ViewModels
             ShowViewModel<ExampleMenuItemViewModel>();
         }
 
-        private MvxCommand showCenterPanelCommand;
+        private MvxCommand showMasterViewCommand;
 
-        public MvxCommand ShowCenterPanelCommand
+        public MvxCommand ShowMasterViewCommand
         {
             get
             {
-                showCenterPanelCommand = showCenterPanelCommand ?? new MvxCommand(DoShowCenterPanel);
-                return showCenterPanelCommand;
+                showMasterViewCommand = showMasterViewCommand ?? new MvxCommand(ShowMasterView);
+                return showMasterViewCommand;
             }
         }
 
-        private void DoShowCenterPanel()
+        private void ShowMasterView()
         {
-            ShowViewModel<CenterPanelViewModel>();
+            ShowViewModel<MasterViewModel>();
         }
     }
 }
