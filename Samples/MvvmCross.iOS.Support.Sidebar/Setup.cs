@@ -3,16 +3,16 @@ using MvvmCross.iOS.Support.XamarinSidebar;
 
 namespace MvvmCross.iOS.Support.Sidebar
 {
-	using MvvmCross.Platform;
+    using MvvmCross.Platform;
     using MvvmCross.iOS.Platform;
-	using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.iOS.Views.Presenters;
     using MvvmCross.iOS.Support.SidePanels;
-	using MvvmCross.Platform.Platform;
-	using UIKit;
-	using MvvmCross.Core.ViewModels;
+    using MvvmCross.Platform.Platform;
+    using UIKit;
+    using MvvmCross.Core.ViewModels;
+    using JASidePanels;
 
-
-	public class Setup : MvxIosSetup
+    public class Setup : MvxIosSetup
 	{
 		/// <summary>Initializes a new instance of the <see cref="Setup"/> class.</summary>
 		/// <param name="applicationDelegate">The application delegate.</param>
@@ -38,7 +38,8 @@ namespace MvvmCross.iOS.Support.Sidebar
 
 		protected override IMvxIosViewPresenter CreatePresenter()
 		{
-			return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
-		}
+            //return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+            return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+        }
 	}
 }

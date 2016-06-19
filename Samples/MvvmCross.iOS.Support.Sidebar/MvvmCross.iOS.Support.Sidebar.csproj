@@ -133,6 +133,7 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Views\BaseViewController.cs" />
     <Compile Include="Views\CenterPanelView.cs" />
+    <Compile Include="Views\ExampleMenuItemView.cs" />
     <Compile Include="Views\DetailView.cs" />
     <Compile Include="Views\KeyboardHandlingView.cs" />
     <Compile Include="Views\LeftPanelView.cs" />
