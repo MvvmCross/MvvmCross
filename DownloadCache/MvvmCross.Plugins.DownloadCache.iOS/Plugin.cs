@@ -32,7 +32,11 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(CreateHttpFileDownloader);
-            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache);
+
+            var fileDownloadCache = CreateFileDownloadCache();
+
+            Mvx.RegisterSingleton<IMvxFileDownloadCache>(fileDownloadCache);
+            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache(fileDownloadCache));
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxIosLocalFileImageLoader());
         }
@@ -43,16 +47,22 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
             return new MvxHttpFileDownloader(configuration.MaxConcurrentDownloads);
         }
 
-        private MvxImageCache<UIImage> CreateCache()
+        private MvxImageCache<UIImage> CreateCache(IMvxFileDownloadCache fileDownloadCache)
         {
             var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
+            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
+            return fileCache;
+        }
 
+        private IMvxFileDownloadCache CreateFileDownloadCache()
+        {
+            var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
             var fileDownloadCache = new MvxFileDownloadCache(configuration.CacheName,
                                                              configuration.CacheFolderPath,
                                                              configuration.MaxFiles,
                                                              configuration.MaxFileAge);
-            var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
-            return fileCache;
+
+            return fileDownloadCache;
         }
     }
 }
