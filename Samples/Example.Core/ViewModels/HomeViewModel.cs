@@ -8,5 +8,15 @@ namespace Example.Core.ViewModels
         public HomeViewModel()
         {
         }
+
+		private MvxCommand closeViewCommand;
+
+		public IMvxCommand CloseViewCommand
+		{
+			get
+			{
+				return closeViewCommand = closeViewCommand ?? new MvxCommand(() => Close(this));
+			}
+		}
     }
 }

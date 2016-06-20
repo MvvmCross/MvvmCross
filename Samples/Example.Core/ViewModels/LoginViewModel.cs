@@ -48,7 +48,7 @@ namespace Example.Core.ViewModels
         {
             get
             {
-                return new MvxCommand(() => ShowViewModel<MainViewModel>());
+				return new MvxCommand(() => ShowViewModel<HomeViewModel>());
             }
         }
     }
