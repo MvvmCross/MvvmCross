@@ -1,10 +1,39 @@
-﻿namespace MvvmCross.iOS.Support.Core.ViewModels
+﻿using MvvmCross.Core.ViewModels;
+
+namespace MvvmCross.iOS.Support.Core.ViewModels
 {
     public class LeftPanelViewModel : BaseViewModel
-    {
-        public LeftPanelViewModel()
+    {      
+        private MvxCommand showExampleMenuItemCommand;
+
+        public MvxCommand ShowExampleMenuItemCommand
         {
-            ExampleValue = "Left Panel";
+            get
+            {
+                showExampleMenuItemCommand = showExampleMenuItemCommand ?? new MvxCommand(DoShowExampleMenuItem);
+                return showExampleMenuItemCommand;
+            }
+        }
+
+        private void DoShowExampleMenuItem()
+        {
+            ShowViewModel<ExampleMenuItemViewModel>();
+        }
+
+        private MvxCommand showMasterViewCommand;
+
+        public MvxCommand ShowMasterViewCommand
+        {
+            get
+            {
+                showMasterViewCommand = showMasterViewCommand ?? new MvxCommand(ShowMasterView);
+                return showMasterViewCommand;
+            }
+        }
+
+        private void ShowMasterView()
+        {
+            ShowViewModel<MasterViewModel>();
         }
     }
 }

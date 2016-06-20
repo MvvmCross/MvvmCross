@@ -352,8 +352,38 @@ namespace MvvmCross.iOS.Support.JASidePanels
                 }
                 else
                 {
-                    // Otherwise we just want to push to the designated panel
-                    GetActivePanelUiNavigationController.PushViewController(viewController, false);
+                    //figure out which panel we were just asked to show, left, right, center and properly place it
+                    switch (panelAttribute.Panel)
+                    {
+                        case MvxPanelEnum.Center:
+                            if (null == _multiPanelController.CenterPanel)
+                                _multiPanelController.CenterPanel = new UINavigationController(viewController);
+                            else
+                            {
+                                CentrePanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Left:
+                            if (null == _multiPanelController.LeftPanel)
+                            {
+                                _multiPanelController.LeftPanel = new UINavigationController(viewController);
+                            }
+                            else
+                            {
+                                LeftPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Right:
+                            if (null == _multiPanelController.RightPanel)
+                            {
+                                _multiPanelController.RightPanel = new UINavigationController(viewController);
+                            }
+                            else
+                            {
+                                RightPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                    }
                 }
             }
         }
