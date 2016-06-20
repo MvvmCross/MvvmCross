@@ -102,11 +102,6 @@
     <Compile Include="Target\MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatBaseImageViewTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatBaseStreamImageViewTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatImageViewBitmapTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatImageViewDrawableNameTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatImageViewDrawableTargetBinding.cs" />
-    <Compile Include="Target\MvxAppCompatImageViewImageTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatRadioGroupSelectedItemBinding.cs" />
     <Compile Include="Target\MvxAppCompatSearchViewQueryTextTargetBinding.cs" />
     <Compile Include="Target\MvxAppCompatSpinnerSelectedItemBinding.cs" />
