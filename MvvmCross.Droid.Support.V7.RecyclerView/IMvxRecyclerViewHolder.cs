@@ -15,5 +15,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         void OnAttachedToWindow();
         void OnDetachedFromWindow();
+        void OnViewRecycled();
     }
 }

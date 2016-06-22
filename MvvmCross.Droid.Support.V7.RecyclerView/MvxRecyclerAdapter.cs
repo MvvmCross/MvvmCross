@@ -128,6 +128,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnDetachedFromWindow();
         }
 
+        public override void OnViewRecycled(Java.Lang.Object holder)
+        {
+            base.OnViewRecycled(holder);
+
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.OnViewRecycled();
+        }
+
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflaterHolder);
