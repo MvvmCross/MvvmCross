@@ -114,9 +114,32 @@ namespace MvvmCross.Binding.iOS.Views
                     CollectionView.InsertItems(indexes);
                 }, ok => { });
             }
+            else if (args.Action == NotifyCollectionChangedAction.Move)
+            {
+                CollectionView.PerformBatchUpdates(() =>
+                {
+                    var oldCount = args.OldItems.Count;
+                    var newCount = args.NewItems.Count;
+                    var indexes = new NSIndexPath[oldCount + newCount];
+
+                    var startIndex = args.OldStartingIndex;
+                    for (var i = 0; i < oldCount; i++)
+                        indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
+                    startIndex = args.NewStartingIndex;
+                    for (var i = oldCount; i < oldCount + newCount; i++)
+                        indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
+
+                    CollectionView.ReloadItems(indexes);
+                }, ok => { });
+            }
             else
             {
-                ReloadData();
+                //Wait for all previous updates / animations to finish, otherwise it crashes with a consistency exception.
+                //Unit test case: using a non empty ObservableCollection, call .Clear() then .Add(items) on the observablecollection.
+                CollectionView.PerformBatchUpdates(() => { }, animationsCompleted =>
+                {
+                    ReloadData();
+                });
             }
         }
         
