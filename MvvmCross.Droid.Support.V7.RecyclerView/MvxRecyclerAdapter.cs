@@ -28,8 +28,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         : Android.Support.V7.Widget.RecyclerView.Adapter
         , IMvxRecyclerAdapter
     {
-        public event EventHandler DataSetChanged;
-
         private readonly IMvxAndroidBindingContext _bindingContext;
 
         private ICommand _itemClick, _itemLongClick;
@@ -108,7 +106,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 // since the template selector has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
-                    NotifyAndRaiseDataSetChanged();
+                    NotifyDataSetChanged();
             }
         }
 
@@ -200,7 +198,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
 
-            NotifyAndRaiseDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -215,8 +213,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        this.NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
@@ -224,20 +221,17 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                             var oldItem = e.OldItems[i];
                             var newItem = e.NewItems[i];
 
-                            this.NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
-                            this.RaiseDataSetChanged();
+                            NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
                         }
                         break;
                     case NotifyCollectionChangedAction.Replace:
-                        this.NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        this.NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Reset:
-                        this.NotifyAndRaiseDataSetChanged();
+                        NotifyDataSetChanged();
                         break;
                 }
             }
@@ -247,17 +241,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
             }
-        }
-
-        private void RaiseDataSetChanged()
-        {
-            DataSetChanged?.Invoke(this, EventArgs.Empty);
-        }
-        
-        private void NotifyAndRaiseDataSetChanged()
-        {
-            this.RaiseDataSetChanged();
-            this.NotifyDataSetChanged();
         }
     }
 }
