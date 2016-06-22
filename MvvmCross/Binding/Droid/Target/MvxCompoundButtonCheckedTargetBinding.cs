@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System.Reflection;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
     public class MvxCompoundButtonCheckedTargetBinding
         : MvxPropertyInfoTargetBinding<CompoundButton>
     {
@@ -36,7 +34,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
         }
 
@@ -47,16 +45,17 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var compoundButton = View;
-                if (compoundButton != null && this._subscribed)
+                if (compoundButton != null && _subscribed)
                 {
                     compoundButton.CheckedChange -= CompoundButtonOnCheckedChange;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
+
+            base.Dispose(isDisposing);
         }
     }
 }

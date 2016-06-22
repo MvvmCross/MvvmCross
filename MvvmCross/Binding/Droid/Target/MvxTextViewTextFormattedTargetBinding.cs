@@ -5,19 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Text;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Text;
-    using Android.Widget;
-
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
-
     public class MvxTextViewTextFormattedTargetBinding
-        : MvxAndroidTargetBinding
-        , IMvxEditableTextView
+        : MvxConvertingTargetBinding, IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
         private bool _subscribed;
@@ -33,14 +31,14 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            this._isEditTextBinding = target is EditText;
+            _isEditTextBinding = target is EditText;
         }
 
         public override Type TargetType => typeof(ISpanned);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
-            if (!this._isEditTextBinding)
+            if (!_isEditTextBinding)
                 return false;
 
             return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
@@ -51,45 +49,45 @@ namespace MvvmCross.Binding.Droid.Target
             ((TextView)target).TextFormatted = (ISpanned)toSet;
         }
 
-        public override MvxBindingMode DefaultMode => this._isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
+        public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
-            var view = this.TextView;
+            var view = TextView;
             if (view == null)
                 return;
 
-            view.AfterTextChanged += this.EditTextOnAfterTextChanged;
-            this._subscribed = true;
+            view.AfterTextChanged += EditTextOnAfterTextChanged;
+            _subscribed = true;
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
         {
-            FireValueChanged(this.TextView.TextFormatted);
+            FireValueChanged(TextView.TextFormatted);
         }
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                if (this._isEditTextBinding)
+                if (_isEditTextBinding)
                 {
-                    var editText = this.TextView;
-                    if (editText != null && this._subscribed)
+                    var editText = TextView;
+                    if (editText != null && _subscribed)
                     {
-                        editText.AfterTextChanged -= this.EditTextOnAfterTextChanged;
-                        this._subscribed = false;
+                        editText.AfterTextChanged -= EditTextOnAfterTextChanged;
+                        _subscribed = false;
                     }
                 }
             }
+            base.Dispose(isDisposing);
         }
 
         public string CurrentText
         {
             get
             {
-                var view = this.TextView;
+                var view = TextView;
                 return view?.TextFormatted.ToString();
             }
         }

@@ -5,6 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
+using MvvmCross.Test.Mocks.Dispatchers;
+
 namespace MvvmCross.Test.ViewModels
 {
     using System.ComponentModel;
@@ -104,8 +107,7 @@ namespace MvvmCross.Test.ViewModels
 
             public void RaisePropertyChanged(string propertyName)
             {
-                var handler = this.PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -142,8 +144,7 @@ namespace MvvmCross.Test.ViewModels
 
             public void RaisePropertyChanged(string propertyName)
             {
-                var handler = this.PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -312,6 +313,9 @@ namespace MvvmCross.Test.ViewModels
         {
             ClearAll();
 
+            var dispatcher = new InlineMockMainThreadDispatcher();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
@@ -382,6 +386,9 @@ namespace MvvmCross.Test.ViewModels
         public void Test_PropertyChanged_Raises_Multiple_CanExecuteChange()
         {
             ClearAll();
+
+            var dispatcher = new InlineMockMainThreadDispatcher();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 
             var testObject = new SharedCommandTestClass();
             var collection = new MvxCommandCollectionBuilder()

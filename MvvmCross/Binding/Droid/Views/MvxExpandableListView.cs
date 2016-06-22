@@ -14,6 +14,15 @@ namespace MvvmCross.Binding.Droid.Views
     [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {
+        private bool _groupClickOverloaded;
+        private bool _itemClickOverloaded;
+        private bool _itemLongClickOverloaded;
+
+        private ICommand _itemClick;
+        private ICommand _itemLongClick;
+        private ICommand _groupClick;
+        private ICommand _groupLongClick;
+
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context))
         { }
@@ -27,7 +36,7 @@ namespace MvvmCross.Binding.Droid.Views
             var groupTemplateId = MvxAttributeHelpers.ReadGroupItemTemplateId(context, attrs);
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
 
-            this.SetAdapter(adapter);
+            SetAdapter(adapter);
 
             adapter.GroupTemplateId = groupTemplateId;
             adapter.ItemTemplateId = itemTemplateId;
@@ -39,122 +48,118 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
-        protected MvxExpandableListAdapter ThisAdapter => this.ExpandableListAdapter as MvxExpandableListAdapter;
+        protected MvxExpandableListAdapter ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this.ThisAdapter.ItemsSource; }
-            set { this.ThisAdapter.ItemsSource = value; }
+            get { return ThisAdapter.ItemsSource; }
+            set { ThisAdapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.ThisAdapter.ItemTemplateId; }
-            set { this.ThisAdapter.ItemTemplateId = value; }
+            get { return ThisAdapter.ItemTemplateId; }
+            set { ThisAdapter.ItemTemplateId = value; }
         }
 
         public int GroupTemplateId
         {
-            get { return this.ThisAdapter.GroupTemplateId; }
-            set { this.ThisAdapter.GroupTemplateId = value; }
+            get { return ThisAdapter.GroupTemplateId; }
+            set { ThisAdapter.GroupTemplateId = value; }
         }
-
-        private ICommand _itemClick;
 
         public new ICommand ItemClick
         {
-            get { return this._itemClick; }
+            get { return _itemClick; }
             set
             {
-                this._itemClick = value;
-                if (this._itemClick != null) this.EnsureItemClickOverloaded();
+                _itemClick = value;
+                if (_itemClick != null) EnsureItemClickOverloaded();
             }
         }
-
-        private ICommand _itemLongClick;
 
         public new ICommand ItemLongClick
         {
-            get { return this._itemLongClick; }
+            get { return _itemLongClick; }
             set
             {
-                this._itemLongClick = value;
-                if (this._itemLongClick != null) this.EnsureItemLongClickOverloaded();
+                _itemLongClick = value;
+                if (_itemLongClick != null) EnsureItemLongClickOverloaded();
             }
         }
-
-        private ICommand _groupClick;
 
         public new ICommand GroupClick
         {
-            get { return this._groupClick; }
+            get { return _groupClick; }
             set
             {
-                this._groupClick = value;
-                if (this._groupClick != null) this.EnsureGroupClickOverloaded();
+                _groupClick = value;
+                if (_groupClick != null) EnsureGroupClickOverloaded();
             }
         }
 
-        private ICommand _groupLongClick;
-
-        public new ICommand GroupLongClick
+        public ICommand GroupLongClick
         {
-            get { return this._groupLongClick; }
+            get { return _groupLongClick; }
             set
             {
-                this._groupLongClick = value;
-                if (this._groupLongClick != null) this.EnsureItemLongClickOverloaded();
+                _groupLongClick = value;
+                if (_groupLongClick != null) EnsureItemLongClickOverloaded();
             }
         }
-
-        private bool _itemClickOverloaded = false;
 
         private void EnsureItemClickOverloaded()
         {
-            if (this._itemClickOverloaded)
+            if (_itemClickOverloaded)
                 return;
 
-            this._itemClickOverloaded = true;
-            base.ChildClick +=
-                (sender, args) => this.ExecuteCommandOnItem(this.ItemClick, args.GroupPosition, args.ChildPosition);
+            _itemClickOverloaded = true;
+            ChildClick += ChildOnClick;
         }
 
-        private bool _groupClickOverloaded = false;
+        private void ChildOnClick(object sender, ChildClickEventArgs e)
+        {
+            ExecuteCommandOnItem(ItemClick, e.GroupPosition, e.ChildPosition);
+        }
 
         private void EnsureGroupClickOverloaded()
         {
-            if (this._groupClickOverloaded)
+            if (_groupClickOverloaded)
                 return;
 
-            this._groupClickOverloaded = true;
-            base.GroupClick +=
-                (sender, args) => this.ExecuteCommandOnGroup(this.GroupClick, args.GroupPosition);
+            _groupClickOverloaded = true;
+            base.GroupClick += GroupOnClick;
         }
 
-        private bool _itemLongClickOverloaded;
+        private void GroupOnClick(object sender, GroupClickEventArgs e)
+        {
+           ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
+        }
 
         private void EnsureItemLongClickOverloaded()
         {
-            if (this._itemLongClickOverloaded)
+            if (_itemLongClickOverloaded)
                 return;
-            this._itemLongClickOverloaded = true;
-            base.ItemLongClick += (sender, args) =>
-            {
-                var type = GetPackedPositionType(args.Id);
-                long packedPos = ((ExpandableListView)args.Parent).GetExpandableListPosition(args.Position);
-                int groupPosition = GetPackedPositionGroup(packedPos);
-                int childPosition = GetPackedPositionChild(packedPos);
+            _itemLongClickOverloaded = true;
+            base.ItemLongClick += ItemOnLongClick;
+        }
 
-                if (type == PackedPositionType.Child)
-                {
-                    this.ExecuteCommandOnItem(this.ItemLongClick, groupPosition, childPosition);
-                }
-                else if (type == PackedPositionType.Group)
-                {
-                    this.ExecuteCommandOnGroup(this.GroupLongClick, groupPosition);
-                }
-            };
+        private void ItemOnLongClick(object sender, ItemLongClickEventArgs e)
+        {
+            var type = GetPackedPositionType(e.Id);
+            long packedPos = ((ExpandableListView)e.Parent).GetExpandableListPosition(e.Position);
+            int groupPosition = GetPackedPositionGroup(packedPos);
+            int childPosition = GetPackedPositionChild(packedPos);
+
+            if (type == PackedPositionType.Child)
+            {
+                ExecuteCommandOnItem(ItemLongClick, groupPosition, childPosition);
+            }
+            else if (type == PackedPositionType.Group)
+            {
+                ExecuteCommandOnGroup(GroupLongClick, groupPosition);
+            }
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command, int groupPosition, int position)
@@ -162,7 +167,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (command == null)
                 return;
 
-            var item = this.ThisAdapter.GetRawItem(groupPosition, position);
+            var item = ThisAdapter.GetRawItem(groupPosition, position);
             if (item == null)
                 return;
 
@@ -177,7 +182,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (command == null)
                 return;
 
-            var item = this.ThisAdapter.GetRawGroup(groupPosition);
+            var item = ThisAdapter.GetRawGroup(groupPosition);
             if (item == null)
                 return;
 
@@ -185,6 +190,17 @@ namespace MvvmCross.Binding.Droid.Views
                 return;
 
             command.Execute(item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                base.GroupClick -= GroupOnClick;
+                ChildClick -= ChildOnClick;
+                base.ItemLongClick -= ItemOnLongClick;
+            }
+            base.Dispose(disposing);
         }
     }
 }

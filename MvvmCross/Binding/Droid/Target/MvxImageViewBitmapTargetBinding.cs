@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Graphics;
+using Android.Widget;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Graphics;
-    using Android.Widget;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxImageViewBitmapTargetBinding
         : MvxBaseImageViewTargetBinding
     {

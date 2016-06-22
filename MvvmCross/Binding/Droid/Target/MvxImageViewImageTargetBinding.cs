@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
+using Android.Widget;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-    using System.IO;
-
-    using Android.Widget;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxImageViewImageTargetBinding
         : MvxBaseStreamImageViewTargetBinding
     {
@@ -40,7 +38,7 @@ namespace MvvmCross.Binding.Droid.Target
             }
 
             var drawableResourceName = GetImageAssetName(stringValue);
-            var assetStream = this.AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
+            var assetStream = AndroidGlobals.ApplicationContext.Assets.Open(drawableResourceName);
 
             return assetStream;
         }

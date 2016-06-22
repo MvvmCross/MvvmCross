@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Views;
+using MvvmCross.Binding.ExtensionMethods;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using Android.Views;
-
-    using MvvmCross.Binding.ExtensionMethods;
-
     public class MvxViewVisibleBinding
         : MvxBaseViewVisibleBinding
     {

@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.Bindings
         private EventHandler<MvxTargetChangedEventArgs> _targetBindingOnValueChanged;
 
         private object _defaultTargetValue;
-        private CancellationTokenSource cancelSource = new CancellationTokenSource();
+        private CancellationTokenSource _cancelSource = new CancellationTokenSource();
         private IMvxMainThreadDispatcher dispatcher => MvxBindingSingletonCache.Instance.MainThreadDispatcher;
 
         public object DataContext
@@ -91,7 +91,7 @@ namespace MvvmCross.Binding.Bindings
                 this._sourceBindingOnChanged = (sender, args) =>
                     {
                         //Capture the cancel token first
-                        var cancel = cancelSource.Token;
+                        var cancel = _cancelSource.Token;
                         //GetValue can now be executed in a worker thread. Is it the responsibility of the caller to switch threads, or ours ?
                         //As the source is the viewmodel, i suppose it is the responsibility of the caller.
                         var value = this._sourceStep.GetValue();
@@ -107,9 +107,9 @@ namespace MvvmCross.Binding.Bindings
         {
             if (this.NeedToUpdateTargetOnBind && this._sourceStep != null)
             {
-                cancelSource.Cancel();
-                cancelSource = new CancellationTokenSource();
-                var cancel = cancelSource.Token;
+                _cancelSource.Cancel();
+                _cancelSource = new CancellationTokenSource();
+                var cancel = _cancelSource.Token;
 
                 try
                 {

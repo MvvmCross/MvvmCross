@@ -7,32 +7,31 @@
 
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Collections.Specialized;
 
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Views;
-    using Android.Widget;
+	using Android.Content;
+	using Android.Runtime;
+	using Android.Views;
+	using Android.Widget;
 
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.WeakSubscription;
+	using MvvmCross.Binding.Attributes;
+	using MvvmCross.Binding.Droid.BindingContext;
+	using MvvmCross.Binding.ExtensionMethods;
+	using MvvmCross.Platform;
+	using MvvmCross.Platform.Exceptions;
+	using MvvmCross.Platform.Platform;
+	using MvvmCross.Platform.WeakSubscription;
 
-    using Object = Java.Lang.Object;
+	using Object = Java.Lang.Object;
 
-    public class MvxAdapter
+	public class MvxAdapter
         : BaseAdapter
         , IMvxAdapter
     {
-        private readonly IMvxAndroidBindingContext _bindingContext;
-        private readonly Context _context;
-        private int _itemTemplateId;
+	    private int _itemTemplateId;
         private int _dropDownItemTemplateId;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
@@ -55,15 +54,15 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext)
         {
-            this._context = context;
-            this._bindingContext = bindingContext;
-            if (this._bindingContext == null)
+            Context = context;
+            BindingContext = bindingContext;
+            if (BindingContext == null)
             {
                 throw new MvxException(
                     "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
             }
-            this.SimpleViewLayoutId = Android.Resource.Layout.SimpleListItem1;
-            this.SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
+            SimpleViewLayoutId = Android.Resource.Layout.SimpleListItem1;
+            SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
         }
 
         protected MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
@@ -71,11 +70,11 @@ namespace MvvmCross.Binding.Droid.Views
         {
         }
 
-        protected Context Context => this._context;
+        protected Context Context { get; }
 
-        protected IMvxAndroidBindingContext BindingContext => this._bindingContext;
+	    protected IMvxAndroidBindingContext BindingContext { get; }
 
-        public int SimpleViewLayoutId { get; set; }
+	    public int SimpleViewLayoutId { get; set; }
 
         public int SimpleDropDownViewLayoutId { get; set; }
 
@@ -84,81 +83,81 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
-            set { this.SetItemsSource(value); }
+            get { return _itemsSource; }
+            set { SetItemsSource(value); }
         }
 
         public virtual int ItemTemplateId
         {
-            get { return this._itemTemplateId; }
+            get { return _itemTemplateId; }
             set
             {
-                if (this._itemTemplateId == value)
+                if (_itemTemplateId == value)
                     return;
-                this._itemTemplateId = value;
+                _itemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (this._itemsSource != null)
-                    this.NotifyDataSetChanged();
+                if (_itemsSource != null)
+                    NotifyDataSetChanged();
             }
         }
 
         public virtual int DropDownItemTemplateId
         {
-            get { return this._dropDownItemTemplateId; }
+            get { return _dropDownItemTemplateId; }
             set
             {
-                if (this._dropDownItemTemplateId == value)
+                if (_dropDownItemTemplateId == value)
                     return;
-                this._dropDownItemTemplateId = value;
+                _dropDownItemTemplateId = value;
 
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (this._itemsSource != null)
-                    this.NotifyDataSetChanged();
+                if (_itemsSource != null)
+                    NotifyDataSetChanged();
             }
         }
 
-        public override int Count => this._itemsSource.Count();
+        public override int Count => _itemsSource.Count();
 
         protected virtual void SetItemsSource(IEnumerable value)
         {
-            if (Object.ReferenceEquals(this._itemsSource, value)
-                && !this.ReloadOnAllItemsSourceSets)
+            if (ReferenceEquals(_itemsSource, value)
+                && !ReloadOnAllItemsSourceSets)
                 return;
 
-            if (this._subscription != null)
+            if (_subscription != null)
             {
-                this._subscription.Dispose();
-                this._subscription = null;
+                _subscription.Dispose();
+                _subscription = null;
             }
 
-            this._itemsSource = value;
+            _itemsSource = value;
 
-            if (this._itemsSource != null && !(this._itemsSource is IList))
+            if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
 
-            var newObservable = this._itemsSource as INotifyCollectionChanged;
+            var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
             {
-                this._subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
-            this.NotifyDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.NotifyDataSetChanged(e);
+            NotifyDataSetChanged(e);
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            this.RealNotifyDataSetChanged();
+            RealNotifyDataSetChanged();
         }
 
         public override void NotifyDataSetChanged()
         {
-            this.RealNotifyDataSetChanged();
+            RealNotifyDataSetChanged();
         }
 
         protected virtual void RealNotifyDataSetChanged()
@@ -177,12 +176,12 @@ namespace MvvmCross.Binding.Droid.Views
 
         public virtual int GetPosition(object item)
         {
-            return this._itemsSource.GetPosition(item);
+            return _itemsSource.GetPosition(item);
         }
 
-        public virtual System.Object GetRawItem(int position)
+        public virtual object GetRawItem(int position)
         {
-            return this._itemsSource.ElementAt(position);
+            return _itemsSource.ElementAt(position);
         }
 
         public override Object GetItem(int position)
@@ -200,44 +199,44 @@ namespace MvvmCross.Binding.Droid.Views
 
         public override View GetDropDownView(int position, View convertView, ViewGroup parent)
         {
-            this._currentSimpleId = this.SimpleDropDownViewLayoutId;
-            this._currentParent = parent;
-            var toReturn = this.GetView(position, convertView, parent, this.DropDownItemTemplateId);
-            this._currentParent = null;
+            _currentSimpleId = SimpleDropDownViewLayoutId;
+            _currentParent = parent;
+            var toReturn = GetView(position, convertView, parent, DropDownItemTemplateId);
+            _currentParent = null;
             return toReturn;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            this._currentSimpleId = this.SimpleViewLayoutId;
-            this._currentParent = parent;
-            var toReturn = this.GetView(position, convertView, parent, this.ItemTemplateId);
-            this._currentParent = null;
+            _currentSimpleId = SimpleViewLayoutId;
+            _currentParent = parent;
+            var toReturn = GetView(position, convertView, parent, ItemTemplateId);
+            _currentParent = null;
             return toReturn;
         }
 
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
-            if (this._itemsSource == null)
+            if (_itemsSource == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");
                 return null;
             }
 
-            var source = this.GetRawItem(position);
+            var source = GetRawItem(position);
 
-            return this.GetBindableView(convertView, source, templateId);
+            return GetBindableView(convertView, source, templateId);
         }
 
         protected virtual View GetSimpleView(View convertView, object dataContext)
         {
             if (convertView == null)
             {
-                convertView = this.CreateSimpleView(dataContext);
+                convertView = CreateSimpleView(dataContext);
             }
             else
             {
-                this.BindSimpleView(convertView, dataContext);
+                BindSimpleView(convertView, dataContext);
             }
 
             return convertView;
@@ -257,14 +256,14 @@ namespace MvvmCross.Binding.Droid.Views
             // note - this could technically be a non-binding inflate - but the overhead is minimal
             // note - it's important to use `false` for the attachToRoot argument here
             //    see discussion in https://github.com/MvvmCross/MvvmCross/issues/507
-            var view = this._bindingContext.BindingInflate(this._currentSimpleId, this._currentParent, false);
-            this.BindSimpleView(view, dataContext);
+            var view = BindingContext.BindingInflate(_currentSimpleId, _currentParent, false);
+            BindSimpleView(view, dataContext);
             return view;
         }
 
         protected virtual View GetBindableView(View convertView, object dataContext)
         {
-            return this.GetBindableView(convertView, dataContext, this.ItemTemplateId);
+            return GetBindableView(convertView, dataContext, ItemTemplateId);
         }
 
         protected virtual View GetBindableView(View convertView, object dataContext, int templateId)
@@ -272,7 +271,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (templateId == 0)
             {
                 // no template seen - so use a standard string view from Android and use ToString()
-                return this.GetSimpleView(convertView, dataContext);
+                return GetSimpleView(convertView, dataContext);
             }
 
             // we have a templateid so lets use bind and inflate on it :)
@@ -287,11 +286,11 @@ namespace MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-                viewToUse = this.CreateBindableView(dataContext, templateId);
+                viewToUse = CreateBindableView(dataContext, templateId);
             }
             else
             {
-                this.BindBindableView(dataContext, viewToUse);
+                BindBindableView(dataContext, viewToUse);
             }
 
             return viewToUse as View;
@@ -304,7 +303,35 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
         {
-            return new MvxListItemView(this._context, this._bindingContext.LayoutInflaterHolder, dataContext, templateId);
+            return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder, dataContext, templateId);
         }
     }
+
+	public class MvxAdapter<TItem> : MvxAdapter where TItem : class
+	{
+		public MvxAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
+		{
+		}
+
+		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
+		{
+		}
+
+		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
+		}
+
+        [MvxSetToNullAfterBinding]
+        public new IEnumerable<TItem> ItemsSource
+		{
+			get
+			{
+				return base.ItemsSource as IEnumerable<TItem>;
+			}
+			set
+			{
+				base.ItemsSource = value;
+			}
+		}
+	} 
 }

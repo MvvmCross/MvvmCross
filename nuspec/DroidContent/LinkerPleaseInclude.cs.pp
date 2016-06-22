@@ -78,5 +78,12 @@ namespace $rootnamespace$
                 var test = e.PropertyName;
             };
         }
+        
+        public void Include(MvxTaskBasedBindingContext context)
+        {
+            context.Dispose();
+            var context2 = new MvxTaskBasedBindingContext();
+            context2.Dispose();
+        }
     }
 }

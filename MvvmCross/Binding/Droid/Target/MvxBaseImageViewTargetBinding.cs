@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
+using Android.Graphics;
+using Android.Widget;
+
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Graphics;
-    using Android.Widget;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
@@ -34,9 +34,9 @@ namespace MvvmCross.Binding.Droid.Target
             try
             {
                 Bitmap bitmap;
-                if (!this.GetBitmap(value, out bitmap))
+                if (!GetBitmap(value, out bitmap))
                     return;
-                this.SetImageBitmap(imageView, bitmap);
+                SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {

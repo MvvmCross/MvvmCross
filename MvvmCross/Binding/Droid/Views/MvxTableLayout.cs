@@ -35,10 +35,10 @@ namespace MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             if (adapter != null)
             {
-                this.Adapter = adapter;
-                this.Adapter.ItemTemplateId = itemTemplateId;
+                Adapter = adapter;
+                Adapter.ItemTemplateId = itemTemplateId;
             }
-            this.ChildViewRemoved += this.OnChildViewRemoved;
+            ChildViewRemoved += OnChildViewRemoved;
         }
 
         protected MvxTableLayout(IntPtr javaReference, JniHandleOwnership transfer)
@@ -61,10 +61,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return this._adapter; }
+            get { return _adapter; }
             protected set
             {
-                var existing = this._adapter;
+                var existing = _adapter;
                 if (existing == value)
                 {
                     return;
@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Views
 
                 if (existing != null)
                 {
-                    existing.DataSetChanged -= this.AdapterOnDataSetChanged;
+                    existing.DataSetChanged -= AdapterOnDataSetChanged;
                     if (value != null)
                     {
                         value.ItemsSource = existing.ItemsSource;
@@ -80,17 +80,17 @@ namespace MvvmCross.Binding.Droid.Views
                     }
                 }
 
-                this._adapter = value;
+                _adapter = value;
 
-                if (this._adapter != null)
+                if (_adapter != null)
                 {
-                    this._adapter.DataSetChanged += this.AdapterOnDataSetChanged;
+                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
                 }
 
-                if (this._adapter == null)
+                if (_adapter == null)
                 {
                     MvxBindingTrace.Warning(
-                        "Setting Adapter to null is not recommended - you amy lose ItemsSource binding when doing this");
+                        "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
             }
         }
@@ -98,14 +98,26 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_adapter != null)
+                    _adapter.DataSetChanged -= AdapterOnDataSetChanged;
+
+                ChildViewRemoved -= OnChildViewRemoved;
+            }
+            base.Dispose(disposing);
         }
     }
 }

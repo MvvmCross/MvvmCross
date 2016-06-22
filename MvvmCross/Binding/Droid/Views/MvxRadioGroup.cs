@@ -34,12 +34,12 @@ namespace MvvmCross.Binding.Droid.Views
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             if (adapter != null)
             {
-                this.Adapter = adapter;
-                this.Adapter.ItemTemplateId = itemTemplateId;
+                Adapter = adapter;
+                Adapter.ItemTemplateId = itemTemplateId;
             }
 
-            this.ChildViewAdded += this.OnChildViewAdded;
-            this.ChildViewRemoved += this.OnChildViewRemoved;
+            ChildViewAdded += OnChildViewAdded;
+            ChildViewRemoved += OnChildViewRemoved;
         }
 
         protected MvxRadioGroup(IntPtr javaReference, JniHandleOwnership transfer)
@@ -52,18 +52,18 @@ namespace MvvmCross.Binding.Droid.Views
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        private void OnChildViewAdded(object sender, Android.Views.ViewGroup.ChildViewAddedEventArgs args)
+        private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
         {
             var li = (args.Child as MvxListItemView);
             var radioButton = li?.GetChildAt(0) as RadioButton;
             if (radioButton != null)
             {
                 // radio buttons require an id so that they get un-checked correctly
-                if (radioButton.Id == Android.Views.View.NoId)
+                if (radioButton.Id == NoId)
                 {
                     radioButton.Id = GenerateViewId();
                 }
-                radioButton.CheckedChange += this.OnRadioButtonCheckedChange;
+                radioButton.CheckedChange += OnRadioButtonCheckedChange;
             }
         }
 
@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Views
             var radionButton = (sender as RadioButton);
             if (radionButton != null)
             {
-                this.Check(radionButton.Id);
+                Check(radionButton.Id);
             }
         }
 
@@ -86,10 +86,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return this._adapter; }
+            get { return _adapter; }
             protected set
             {
-                var existing = this._adapter;
+                var existing = _adapter;
                 if (existing == value)
                 {
                     return;
@@ -97,7 +97,7 @@ namespace MvvmCross.Binding.Droid.Views
 
                 if (existing != null)
                 {
-                    existing.DataSetChanged -= this.AdapterOnDataSetChanged;
+                    existing.DataSetChanged -= AdapterOnDataSetChanged;
                     if (value != null)
                     {
                         value.ItemsSource = existing.ItemsSource;
@@ -105,14 +105,14 @@ namespace MvvmCross.Binding.Droid.Views
                     }
                 }
 
-                this._adapter = value;
+                _adapter = value;
 
-                if (this._adapter != null)
+                if (_adapter != null)
                 {
-                    this._adapter.DataSetChanged += this.AdapterOnDataSetChanged;
+                    _adapter.DataSetChanged += AdapterOnDataSetChanged;
                 }
 
-                if (this._adapter == null)
+                if (_adapter == null)
                 {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
@@ -123,14 +123,14 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
         }
 
         private static long _nextGeneratedViewId = 1;
@@ -154,6 +154,28 @@ namespace MvvmCross.Binding.Droid.Views
                     return result;
                 }
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_adapter != null)
+                    _adapter.DataSetChanged -= AdapterOnDataSetChanged;
+
+                ChildViewAdded -= OnChildViewAdded;
+                ChildViewRemoved -= OnChildViewRemoved;
+
+                var childCount = ChildCount;
+                for (var i = 0; i < childCount; i++)
+                {
+                    var child = GetChildAt(i) as RadioButton;
+                    if (child != null)
+                        child.CheckedChange -= OnRadioButtonCheckedChange;
+                }
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

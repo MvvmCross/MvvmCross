@@ -84,6 +84,20 @@ namespace CrossUI.Core
             return property.SetMethod;
         }
 
+        private static bool NullSafeIsPublic(this MethodInfo info)
+        {
+            if (info == null)
+                return false;
+            return info.IsPublic;
+        }
+
+        private static bool NullSafeIsStatic(this MethodInfo info)
+        {
+            if (info == null)
+                return false;
+            return info.IsStatic;
+        }
+
         internal static IEnumerable<PropertyInfo> GetProperties(this Type type)
         {
             return GetProperties(type, BindingFlags.FlattenHierarchy | BindingFlags.Public);
@@ -99,10 +113,11 @@ namespace CrossUI.Core
 
             return from property in properties
                    let getMethod = property.GetMethod
-                   where getMethod != null
-                   where (flags & BindingFlags.Public) != BindingFlags.Public || getMethod.IsPublic
-                   where (flags & BindingFlags.Instance) != BindingFlags.Instance || !getMethod.IsStatic
-                   where (flags & BindingFlags.Static) != BindingFlags.Static || getMethod.IsStatic
+                   let setMethod = property.SetMethod
+                   where (getMethod != null || setMethod != null)
+                   where (flags & BindingFlags.Public) != BindingFlags.Public || getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic()
+                   where (flags & BindingFlags.Instance) != BindingFlags.Instance || !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic()
+                   where (flags & BindingFlags.Static) != BindingFlags.Static || getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic()
                    select property;
         }
 

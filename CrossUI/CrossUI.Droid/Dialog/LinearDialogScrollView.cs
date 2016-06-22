@@ -242,8 +242,7 @@ namespace CrossUI.Droid.Dialog
 
         private void HandleValueChangedEvent(object sender, EventArgs args)
         {
-            var handler = ValueChanged;
-            handler?.Invoke(sender, args);
+            ValueChanged?.Invoke(sender, args);
         }
 
         public void ReloadData()

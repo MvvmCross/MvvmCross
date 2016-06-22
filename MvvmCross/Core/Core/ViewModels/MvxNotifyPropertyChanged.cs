@@ -65,9 +65,7 @@ namespace MvvmCross.Core.ViewModels
 
             var raiseAction = new Action(() =>
                     {
-                        var handler = this.PropertyChanged;
-
-                        handler?.Invoke(this, changedArgs);
+                        PropertyChanged?.Invoke(this, changedArgs);
                     });
 
             if (this.ShouldAlwaysRaiseInpcOnUserInterfaceThread())

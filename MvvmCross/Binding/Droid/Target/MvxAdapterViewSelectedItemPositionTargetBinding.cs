@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Widget;
-
     public class MvxAdapterViewSelectedItemPositionTargetBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         protected AdapterView AdapterView => (AdapterView)Target;
 
@@ -37,13 +37,13 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var adapterView = this.AdapterView;
+            var adapterView = AdapterView;
 
             if (adapterView == null)
                 return;
 
-            this._subscribed = true;
-            adapterView.ItemSelected += this.AdapterViewOnItemSelected;
+            _subscribed = true;
+            adapterView.ItemSelected += AdapterViewOnItemSelected;
         }
 
         public override Type TargetType => typeof(Int32);
@@ -52,11 +52,11 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var adapterView = this.AdapterView;
-                if (adapterView != null && this._subscribed)
+                var adapterView = AdapterView;
+                if (adapterView != null && _subscribed)
                 {
-                    adapterView.ItemSelected -= this.AdapterViewOnItemSelected;
-                    this._subscribed = false;
+                    adapterView.ItemSelected -= AdapterViewOnItemSelected;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

@@ -10,6 +10,7 @@ namespace MvvmCross.Binding.iOS.Views
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Threading.Tasks;
 
     using Foundation;
 
@@ -80,14 +81,45 @@ namespace MvvmCross.Binding.iOS.Views
         {
             return this.ItemsSource?.ElementAt(indexPath.Row);
         }
-
-        private void CollectionChangedOnCollectionChanged(object sender,
-                                                          NotifyCollectionChangedEventArgs
-                                                              notifyCollectionChangedEventArgs)
+            
+        /// <summary>
+        /// Wait for all animations to finish
+        /// </summary>
+        public async Task WaitAnimationsCompleted()
         {
-            this.ReloadData();
+            await CollectionView.PerformBatchUpdatesAsync(() => { }); 
         }
 
+        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            if (args.Action == NotifyCollectionChangedAction.Remove)
+            {
+                CollectionView.PerformBatchUpdates(() => 
+                {
+                    var startIndex = args.OldStartingIndex;
+                    var indexes = new NSIndexPath[args.OldItems.Count];
+                    for(var i=0; i<indexes.Length; i++)
+                        indexes[i] = NSIndexPath.FromRowSection(startIndex+i, 0);
+                    CollectionView.DeleteItems(indexes);
+                }, ok => { });
+            }
+            else if (args.Action == NotifyCollectionChangedAction.Add)
+            {
+                CollectionView.PerformBatchUpdates(() =>
+                {
+                    var startIndex = args.NewStartingIndex;
+                    var indexes = new NSIndexPath[args.NewItems.Count];
+                    for (var i = 0; i < indexes.Length; i++)
+                        indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
+                    CollectionView.InsertItems(indexes);
+                }, ok => { });
+            }
+            else
+            {
+                ReloadData();
+            }
+        }
+        
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
             if (this.ItemsSource == null)

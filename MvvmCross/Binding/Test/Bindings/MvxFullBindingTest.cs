@@ -49,8 +49,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void FireSourceChanged()
             {
-                var handler = this.Changed;
-                handler?.Invoke(this, EventArgs.Empty);
+                Changed?.Invoke(this, EventArgs.Empty);
             }
 
             public event EventHandler Changed;
@@ -95,8 +94,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void FireValueChanged(MvxTargetChangedEventArgs args)
             {
-                var handler = this.ValueChanged;
-                handler?.Invoke(this, args);
+                ValueChanged?.Invoke(this, args);
             }
 
             public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;

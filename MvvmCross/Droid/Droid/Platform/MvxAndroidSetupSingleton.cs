@@ -18,11 +18,13 @@ namespace MvvmCross.Droid.Platform
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.IoC;
+    using System.Threading.Tasks;
 
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>
     {
         private static readonly object LockObject = new object();
+        private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private MvxAndroidSetup _setup;
         private bool _initialized;
         private bool _initializationStarted;
@@ -35,24 +37,25 @@ namespace MvvmCross.Droid.Platform
                 if (this._initialized)
                     return;
 
-                if (this._initializationStarted)
+                if (IsInitialisedTaskCompletionSource != null)
                 {
-                    Mvx.Warning("Multiple Initialize calls made for MvxAndroidSetupSingleton singleton");
-                    throw new MvxException("Multiple initialize calls made");
+                    Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
+                    IsInitialisedTaskCompletionSource.Task.Wait();
                 }
-
-                this._initializationStarted = true;
-            }
-
-            this._setup.Initialize();
-
-            lock (LockObject)
-            {
-                this._initialized = true;
-                if (this._currentSplashScreen != null)
+                else
                 {
-                    Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
-                    this._currentSplashScreen.InitializationComplete();
+                    _initializationStarted = true;
+                    IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
+                    this._setup.Initialize();
+                    this._initialized = true;
+
+                    if (this._currentSplashScreen != null)
+                    {
+                        Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
+                        this._currentSplashScreen.InitializationComplete();
+                    }
+
+                    IsInitialisedTaskCompletionSource.SetResult(true);
                 }
             }
         }
@@ -113,7 +116,7 @@ namespace MvvmCross.Droid.Platform
             }
         }
 
-        private MvxAndroidSetupSingleton()
+        protected MvxAndroidSetupSingleton()
         {
         }
 
