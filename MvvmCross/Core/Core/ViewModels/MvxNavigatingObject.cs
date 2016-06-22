@@ -39,7 +39,9 @@ namespace MvvmCross.Core.ViewModels
 		/// 	Be aware that pasing big objects will block your UI, and should be handled async by yourself
 		/// </summary>
 		/// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
-        protected bool ShowViewModel<TViewModel, TInit>(TInit parameter) where TViewModel : MvxViewModel<TInit>
+        protected bool ShowViewModel<TViewModel, TInit>(TInit parameter,
+												 IMvxBundle presentationBundle = null,
+												 MvxRequestedBy requestedBy = null) where TViewModel : MvxViewModel<TInit>
         {
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
@@ -50,7 +52,7 @@ namespace MvvmCross.Core.ViewModels
             }
 
             var json = serializer.SerializeObject(parameter);
-            return this.ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } });
+            return this.ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } }, presentationBundle, requestedBy);
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject,

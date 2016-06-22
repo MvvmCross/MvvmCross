@@ -171,7 +171,7 @@ namespace MvvmCross.Test.ViewModels
                 () => {
                     IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
                 },
-                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem initialising viewModel"));
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem running viewModel lifecycle"));
         }
     }
 }

@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System.Reflection;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
     public class MvxSeekBarProgressTargetBinding
         : MvxPropertyInfoTargetBinding<SeekBar>
     {
@@ -58,7 +56,7 @@ namespace MvvmCross.Binding.Droid.Target
             }
 
             seekBar.ProgressChanged += SeekBarProgressChanged;
-            this._subscribed = true;
+            _subscribed = true;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -66,10 +64,10 @@ namespace MvvmCross.Binding.Droid.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     view.ProgressChanged -= SeekBarProgressChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
             base.Dispose(isDisposing);

@@ -22,6 +22,12 @@ namespace MvvmCross.Binding.Droid.Views
     public class MvxGridView
         : GridView
     {
+        private ICommand _itemClick;
+        private ICommand _itemLongClick;
+
+        private bool _itemClickOverloaded;
+        private bool _itemLongClickOverloaded;
+
         public MvxGridView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapter(context))
         {
@@ -37,7 +43,7 @@ namespace MvvmCross.Binding.Droid.Views
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-            this.Adapter = adapter;
+            Adapter = adapter;
         }
 
         protected MvxGridView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -50,7 +56,7 @@ namespace MvvmCross.Binding.Droid.Views
             get { return base.Adapter as IMvxAdapter; }
             set
             {
-                var existing = this.Adapter;
+                var existing = Adapter;
                 if (existing == value)
                     return;
 
@@ -71,52 +77,64 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
         }
-
-        private ICommand _itemClick;
 
         public new ICommand ItemClick
         {
-            get { return this._itemClick; }
-            set { this._itemClick = value; if (this._itemClick != null) this.EnsureItemClickOverloaded(); }
+            get { return _itemClick; }
+            set
+            {
+                _itemClick = value;
+                if (_itemClick != null)
+                    EnsureItemClickOverloaded();
+            }
         }
-
-        private bool _itemClickOverloaded = false;
 
         private void EnsureItemClickOverloaded()
         {
-            if (this._itemClickOverloaded)
+            if (_itemClickOverloaded)
                 return;
 
-            this._itemClickOverloaded = true;
-            base.ItemClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemClick, args.Position);
+            _itemClickOverloaded = true;
+            base.ItemClick += ItemOnClick;
         }
 
-        private ICommand _itemLongClick;
+        private void ItemOnClick(object sender, ItemClickEventArgs e)
+        {
+            ExecuteCommandOnItem(ItemClick, e.Position);
+        }
 
         public new ICommand ItemLongClick
         {
-            get { return this._itemLongClick; }
-            set { this._itemLongClick = value; if (this._itemLongClick != null) this.EnsureItemLongClickOverloaded(); }
+            get { return _itemLongClick; }
+            set
+            {
+                _itemLongClick = value;
+                if (_itemLongClick != null)
+                    EnsureItemLongClickOverloaded(); 
+            }
         }
-
-        private bool _itemLongClickOverloaded = false;
 
         private void EnsureItemLongClickOverloaded()
         {
-            if (this._itemLongClickOverloaded)
+            if (_itemLongClickOverloaded)
                 return;
 
-            this._itemLongClickOverloaded = true;
-            base.ItemLongClick += (sender, args) => this.ExecuteCommandOnItem(this.ItemLongClick, args.Position);
+            _itemLongClickOverloaded = true;
+            base.ItemLongClick += ItemOnLongClick;
+        }
+
+        private void ItemOnLongClick(object sender, ItemLongClickEventArgs e)
+        {
+            ExecuteCommandOnItem(ItemLongClick, e.Position);
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command, int position)
@@ -124,7 +142,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (command == null)
                 return;
 
-            var item = this.Adapter.GetRawItem(position);
+            var item = Adapter.GetRawItem(position);
             if (item == null)
                 return;
 
@@ -132,6 +150,17 @@ namespace MvvmCross.Binding.Droid.Views
                 return;
 
             command.Execute(item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                base.ItemClick -= ItemOnClick;
+                base.ItemLongClick -= ItemOnLongClick;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Views;
+using Android.Widget;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-
-    using Android.Views;
-    using Android.Widget;
-
     public class MvxTextViewFocusTargetBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         private bool _subscribed;
 
@@ -30,38 +30,39 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
             value = value ?? string.Empty;
-            this.TextField.Text = value.ToString();
+            TextField.Text = value.ToString();
         }
 
         public override void SubscribeToEvents()
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
-            this.TextField.FocusChange += this.HandleLostFocus;
-            this._subscribed = true;
+            TextField.FocusChange += HandleLostFocus;
+            _subscribed = true;
         }
 
         private void HandleLostFocus(object sender, View.FocusChangeEventArgs e)
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
             if (!e.HasFocus)
-                FireValueChanged(this.TextField.Text);
+                FireValueChanged(TextField.Text);
         }
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            if (this.TextField != null && this._subscribed)
+            if (isDisposing)
             {
-                this.TextField.FocusChange -= this.HandleLostFocus;
-                this._subscribed = false;
+                if (TextField != null && _subscribed)
+                {
+                    TextField.FocusChange -= HandleLostFocus;
+                    _subscribed = false;
+                }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

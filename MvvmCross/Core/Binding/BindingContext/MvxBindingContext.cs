@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.BindingContext
             }
 
             public object Target { get; private set; }
-            public IMvxUpdateableBinding Binding { get; private set; }
+            public IMvxUpdateableBinding Binding { get; }
         }
 
         private readonly List<Action> _delayedActions = new List<Action>();
@@ -188,8 +188,7 @@ namespace MvvmCross.Binding.BindingContext
             {
                 this._dataContext = value;
                 this.OnDataContextChange();
-                var handler = this.DataContextChanged;
-                handler?.Invoke(this, EventArgs.Empty);
+                DataContextChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

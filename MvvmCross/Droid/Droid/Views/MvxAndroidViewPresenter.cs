@@ -49,9 +49,10 @@ namespace MvvmCross.Droid.Views
         {
             if (HandlePresentationChange(hint)) return;
 
-            if (hint is MvxClosePresentationHint)
+            var presentationHint = hint as MvxClosePresentationHint;
+            if (presentationHint != null)
             {
-                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                this.Close(presentationHint.ViewModelToClose);
                 return;
             }
 

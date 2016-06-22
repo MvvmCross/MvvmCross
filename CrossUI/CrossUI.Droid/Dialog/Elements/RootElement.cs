@@ -133,8 +133,7 @@ namespace CrossUI.Droid.Dialog.Elements
 
         protected void HandleElementsChangedEvent(object sender, EventArgs eventArgs)
         {
-            var handler = ElementsChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            ElementsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         internal int IndexOf(Section target)
@@ -339,8 +338,7 @@ namespace CrossUI.Droid.Dialog.Elements
                 RadioSelected = which;
                 var radioValue = GetSelectedValue();
 #warning This radio selection is a bit of a mess currently - both radio value and RadioSelected change...
-                var handler = RadioSelectedChanged;
-                handler?.Invoke(this, EventArgs.Empty);
+                RadioSelectedChanged?.Invoke(this, EventArgs.Empty);
                 OnUserValueChanged(radioValue);
             }
 

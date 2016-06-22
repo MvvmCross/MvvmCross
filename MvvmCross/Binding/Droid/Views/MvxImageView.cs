@@ -31,40 +31,40 @@ namespace MvvmCross.Binding.Droid.Views
         {
             get
             {
-                return this.ImageHelper?.ImageUrl;
+                return ImageHelper?.ImageUrl;
             }
             set
             {
-                if (this.ImageHelper == null)
+                if (ImageHelper == null)
                     return;
-                this.ImageHelper.ImageUrl = value;
+                ImageHelper.ImageUrl = value;
             }
         }
 
         public string DefaultImagePath
         {
-            get { return this.ImageHelper.DefaultImagePath; }
-            set { this.ImageHelper.DefaultImagePath = value; }
+            get { return ImageHelper.DefaultImagePath; }
+            set { ImageHelper.DefaultImagePath = value; }
         }
 
         public string ErrorImagePath
         {
-            get { return this.ImageHelper.ErrorImagePath; }
-            set { this.ImageHelper.ErrorImagePath = value; }
+            get { return ImageHelper.ErrorImagePath; }
+            set { ImageHelper.ErrorImagePath = value; }
         }
 
         public override void SetMaxHeight(int maxHeight)
         {
-            if (this.ImageHelper != null)
-                this.ImageHelper.MaxHeight = maxHeight;
+            if (ImageHelper != null)
+                ImageHelper.MaxHeight = maxHeight;
 
             base.SetMaxHeight(maxHeight);
         }
 
         public override void SetMaxWidth(int maxWidth)
         {
-            if (this.ImageHelper != null)
-                this.ImageHelper.MaxWidth = maxWidth;
+            if (ImageHelper != null)
+                ImageHelper.MaxWidth = maxWidth;
 
             base.SetMaxWidth(maxWidth);
         }
@@ -73,19 +73,19 @@ namespace MvvmCross.Binding.Droid.Views
         {
             get
             {
-                if (this._imageHelper == null)
+                if (_imageHelper == null)
                 {
-                    if (!Mvx.TryResolve(out this._imageHelper))
+                    if (!Mvx.TryResolve(out _imageHelper))
                     {
                         MvxTrace.Error(
                             "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
                     }
                     else
                     {
-                        this._imageHelper.ImageChanged += this.ImageHelperOnImageChanged;
+                        _imageHelper.ImageChanged += ImageHelperOnImageChanged;
                     }
                 }
-                return this._imageHelper;
+                return _imageHelper;
             }
         }
 
@@ -111,7 +111,11 @@ namespace MvvmCross.Binding.Droid.Views
         {
             if (disposing)
             {
-                this._imageHelper?.Dispose();
+                if (_imageHelper != null)
+                {
+                    _imageHelper.ImageChanged -= ImageHelperOnImageChanged;
+                    _imageHelper?.Dispose();
+                }
             }
 
             base.Dispose(disposing);
@@ -122,7 +126,7 @@ namespace MvvmCross.Binding.Droid.Views
             using (var h = new Handler(Looper.MainLooper))
                 h.Post(() =>
                 {
-                    this.SetImageBitmap(mvxValueEventArgs.Value);
+                    SetImageBitmap(mvxValueEventArgs.Value);
                 });
         }
 
@@ -136,7 +140,7 @@ namespace MvvmCross.Binding.Droid.Views
                 int attributeId = typedArray.GetIndex(i);
                 if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
                 {
-                    this.ImageUrl = typedArray.GetString(attributeId);
+                    ImageUrl = typedArray.GetString(attributeId);
                 }
             }
             typedArray.Recycle();

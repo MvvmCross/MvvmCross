@@ -69,14 +69,14 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
                             block, description.ConverterParameter, this.CurrentIndex, this.FullText);
                     }
 
-                    block = this.UnquoteBlockIfNecessary(block);
+                    block = UnquoteBlockIfNecessary(block);
 
                     description.ConverterParameter = block;
                     break;
             }
         }
 
-        private string UnquoteBlockIfNecessary(string block)
+        private static string UnquoteBlockIfNecessary(string block)
         {
             if (string.IsNullOrEmpty(block))
                 return block;

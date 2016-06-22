@@ -15,7 +15,7 @@ namespace MvvmCross.Platform.Droid.Views
 
     using MvvmCross.Platform.Core;
 
-    public class MvxBaseActivityAdapter
+    public abstract class MvxBaseActivityAdapter
     {
         private readonly IMvxEventSourceActivity _eventSource;
 

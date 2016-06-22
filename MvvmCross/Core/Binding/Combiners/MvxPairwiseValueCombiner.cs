@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Combiners
             public object Value { get; set; }
         }
 
-        private Type GetLookupTypeFor(object value)
+        private static Type GetLookupTypeFor(object value)
         {
             if (value == null)
                 return null;
@@ -53,8 +53,8 @@ namespace MvvmCross.Binding.Combiners
                 this.Type1 = type1;
             }
 
-            public Type Type1 { get; private set; }
-            public Type Type2 { get; private set; }
+            public Type Type1 { get; }
+            public Type Type2 { get; }
 
             public override bool Equals(object obj)
             {
@@ -69,8 +69,7 @@ namespace MvvmCross.Binding.Combiners
 
             public override int GetHashCode()
             {
-                return (this.Type1?.GetHashCode() ?? 0)
-                       + (this.Type2?.GetHashCode() ?? 0);
+                return (this.Type1?.GetHashCode() ?? 0) + (this.Type2?.GetHashCode() ?? 0);
             }
         }
 
@@ -163,8 +162,8 @@ namespace MvvmCross.Binding.Combiners
                 first = this.ForceToSimpleValueTypes(first);
                 second = this.ForceToSimpleValueTypes(second);
 
-                var firstType = this.GetLookupTypeFor(first);
-                var secondType = this.GetLookupTypeFor(second);
+                var firstType = GetLookupTypeFor(first);
+                var secondType = GetLookupTypeFor(second);
 
                 CombinerFunc<object, object> combinerFunc;
                 if (!this._combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))

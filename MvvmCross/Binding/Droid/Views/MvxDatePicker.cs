@@ -64,8 +64,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
-            var handler = this.ValueChanged;
-            handler?.Invoke(this, null);
+            ValueChanged?.Invoke(this, null);
         }
     }
 }

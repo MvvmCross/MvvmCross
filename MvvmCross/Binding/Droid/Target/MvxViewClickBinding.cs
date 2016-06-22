@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Android.Views;
+using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding.Bindings.Target;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System;
-    using System.Windows.Input;
-
-    using Android.Views;
-
-    using MvvmCross.Platform.WeakSubscription;
-
     public class MvxViewClickBinding
-        : MvxAndroidTargetBinding
+        : MvxConvertingTargetBinding
     {
         private ICommand _command;
         private IDisposable _canExecuteSubscription;
@@ -26,53 +25,53 @@ namespace MvvmCross.Binding.Droid.Target
         public MvxViewClickBinding(View view)
             : base(view)
         {
-            this._canExecuteEventHandler = new EventHandler<EventArgs>(this.OnCanExecuteChanged);
-            view.Click += this.ViewOnClick;
+            _canExecuteEventHandler = OnCanExecuteChanged;
+            view.Click += ViewOnClick;
         }
 
         private void ViewOnClick(object sender, EventArgs args)
         {
-            if (this._command == null)
+            if (_command == null)
                 return;
 
-            if (!this._command.CanExecute(null))
+            if (!_command.CanExecute(null))
                 return;
 
-            this._command.Execute(null);
+            _command.Execute(null);
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (this._canExecuteSubscription != null)
+            if (_canExecuteSubscription != null)
             {
-                this._canExecuteSubscription.Dispose();
-                this._canExecuteSubscription = null;
+                _canExecuteSubscription.Dispose();
+                _canExecuteSubscription = null;
             }
-            this._command = value as ICommand;
-            if (this._command != null)
+            _command = value as ICommand;
+            if (_command != null)
             {
-                this._canExecuteSubscription = this._command.WeakSubscribe(this._canExecuteEventHandler);
+                _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
-            this.RefreshEnabledState();
+            RefreshEnabledState();
         }
 
         private void RefreshEnabledState()
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
 
             var shouldBeEnabled = false;
-            if (this._command != null)
+            if (_command != null)
             {
-                shouldBeEnabled = this._command.CanExecute(null);
+                shouldBeEnabled = _command.CanExecute(null);
             }
             view.Enabled = shouldBeEnabled;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
         {
-            this.RefreshEnabledState();
+            RefreshEnabledState();
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -83,15 +82,15 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var view = this.View;
+                var view = View;
                 if (view != null)
                 {
-                    view.Click -= this.ViewOnClick;
+                    view.Click -= ViewOnClick;
                 }
-                if (this._canExecuteSubscription != null)
+                if (_canExecuteSubscription != null)
                 {
-                    this._canExecuteSubscription.Dispose();
-                    this._canExecuteSubscription = null;
+                    _canExecuteSubscription.Dispose();
+                    _canExecuteSubscription = null;
                 }
             }
             base.Dispose(isDisposing);

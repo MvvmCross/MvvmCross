@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.IO;
+
+using Android.Content.Res;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+using Android.Widget;
+
 namespace MvvmCross.Binding.Droid.Target
 {
-    using System.IO;
-
-    using Android.Content.Res;
-    using Android.Graphics;
-    using Android.Graphics.Drawables;
-    using Android.Widget;
-
     public abstract class MvxBaseStreamImageViewTargetBinding
         : MvxBaseImageViewTargetBinding
     {
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override bool GetBitmap(object value, out Bitmap bitmap)
         {
-            var assetStream = this.GetStream(value);
+            var assetStream = GetStream(value);
             if (assetStream == null)
             {
                 bitmap = null;
@@ -38,7 +38,6 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetImageBitmap(ImageView imageView, Bitmap bitmap)
         {
-#warning ASK STEVE @ SEQUENCE - WHY IS THIS NEEDED?
             var drawable = new BitmapDrawable(Resources.System, bitmap);
             imageView.SetImageDrawable(drawable);
         }
