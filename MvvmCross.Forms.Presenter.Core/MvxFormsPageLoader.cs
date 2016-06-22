@@ -6,7 +6,6 @@ using MvvmCross.Core.Views;
 using System.Reflection;
 using MvvmCross.Platform.IoC;
 using System.Linq;
-using MvvmCross.Platform.Exceptions;
 using System.Collections.Generic;
 
 namespace MvvmCross.Forms.Presenter.Core

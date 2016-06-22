@@ -10,12 +10,11 @@ using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Core
 {
-    public class MvxFormsPagePresenter
+    public abstract class MvxFormsPagePresenter
         : MvxViewPresenter
     {
         private Application _mvxFormsApp;
@@ -34,15 +33,16 @@ namespace MvvmCross.Forms.Presenter.Core
             }
         }
 
-        public MvxFormsPagePresenter()
-        { }
+        protected MvxFormsPagePresenter()
+        {
+        }
 
-        public MvxFormsPagePresenter(Application mvxFormsApp)
+        protected MvxFormsPagePresenter(Application mvxFormsApp)
         {
             MvxFormsApp = mvxFormsApp;
         }
 
-        public override async void ChangePresentation(MvxPresentationHint hint)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
             if (HandlePresentationChange(hint)) return;
 
@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Presenter.Core
 
                 if (mainPage == null)
                 {
-                    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Shit, son! Don't know what to do");
+                    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
                 }
                 else
                 {
