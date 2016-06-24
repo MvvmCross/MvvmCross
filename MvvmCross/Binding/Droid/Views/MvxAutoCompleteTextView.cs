@@ -88,6 +88,9 @@ namespace MvvmCross.Binding.Droid.Views
                     value.PartialTextChanged += AdapterOnPartialTextChanged;
 
                 base.Adapter = value;
+
+                if (existing != null)
+                    existing.ItemsSource = null;
             }
         }
 
