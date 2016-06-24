@@ -60,6 +60,7 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
+                    value.DropDownItemTemplateId = existing.DropDownItemTemplateId;
                 }
                 if (existing != null)
                 {
