@@ -32,7 +32,15 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public object DataContext
         {
             get { return _bindingContext.DataContext; }
-            set { _bindingContext.DataContext = value; }
+            set
+            {
+                _bindingContext.DataContext = value;
+
+                // This is just a precaution.  If we've set the DataContext to something
+                // then we don't need to have the old one still cached.
+                if (value != null)
+                    this._cachedDataContext = null;
+            }
         }
 
         public ICommand Click
@@ -104,10 +112,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             this._bindingContext = context;
         }
 
-        public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership transfer)
-            : base(handle, transfer)
-        {}
-
         public void OnAttachedToWindow()
         {
             if (_cachedDataContext != null && DataContext == null)
@@ -117,6 +121,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public void OnDetachedFromWindow()
         {
             _cachedDataContext = DataContext;
+            DataContext = null;
+        }
+
+        public void OnViewRecycled()
+        {
+            _cachedDataContext = null;
             DataContext = null;
         }
 
