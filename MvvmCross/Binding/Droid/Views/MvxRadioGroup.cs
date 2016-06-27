@@ -111,12 +111,14 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     _adapter.DataSetChanged += AdapterOnDataSetChanged;
                 }
-
-                if (_adapter == null)
+                else
                 {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
+
+                if (existing != null)
+                    existing.ItemsSource = null;
             }
         }
 
