@@ -301,6 +301,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.Wi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.Fused.Droid", "Location\MvvmCross.Plugins.Location.Fused.Droid\MvvmCross.Plugins.Location.Fused.Droid.csproj", "{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.Wpf", "MvvmCross.Plugins.PictureChooser.Wpf\MvvmCross.Plugins.PictureChooser.Wpf.csproj", "{F7A0B1BC-4212-457A-A289-6539820C2778}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2297,6 +2299,22 @@ Global
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Release|x64.Build.0 = Release|Any CPU
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Release|x86.ActiveCfg = Release|Any CPU
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Release|x86.Build.0 = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|x64.Build.0 = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Debug|x86.Build.0 = Debug|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|ARM.Build.0 = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|x64.ActiveCfg = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|x64.Build.0 = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|x86.ActiveCfg = Release|Any CPU
+		{F7A0B1BC-4212-457A-A289-6539820C2778}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2426,5 +2444,6 @@ Global
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5} = {E7C40E91-1D44-4CE7-A137-3C444738E94F}
 		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7} = {9B45C8EC-18B9-4A88-950E-8D8FF8FAA1DA}
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85} = {B5BE527E-B554-4A0F-9627-62E0F2DD8889}
+		{F7A0B1BC-4212-457A-A289-6539820C2778} = {EB7A7EA9-995D-44EC-A4C9-7936BD6DF759}
 	EndGlobalSection
 EndGlobal
