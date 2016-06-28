@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7A0B1BC-4212-457A-A289-6539820C2778}</ProjectGuid>
+    <ProjectGuid>{0B08507A-DA49-4069-B8CF-0FB0B7895B21}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvvmCross.Plugins.PictureChooser.Wpf</RootNamespace>
@@ -31,19 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.2.0\lib\net45\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Core.4.2.0\lib\net45\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.2.0\lib\net45\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.2.0\lib\net45\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.2.0\lib\net45\MvvmCross.Platform.Wpf.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.2.0\lib\net45\MvvmCross.Platform.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.2.0\lib\net45\MvvmCross.Wpf.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Core.4.2.0\lib\net45\MvvmCross.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -65,7 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PictureChooser\MvvmCross.Plugins.PictureChooser\MvvmCross.Plugins.PictureChooser.csproj">
+    <ProjectReference Include="..\MvvmCross.Plugins.PictureChooser\MvvmCross.Plugins.PictureChooser.csproj">
       <Project>{a6c9f4ef-f26e-4d54-a0d6-49a6373cb0d2}</Project>
       <Name>MvvmCross.Plugins.PictureChooser</Name>
     </ProjectReference>

@@ -11,4 +11,3 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
         }
     }
 }
-}
