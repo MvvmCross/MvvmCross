@@ -12,7 +12,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {
-        protected virtual MvxSidebarPanelController RootViewController { get; private set;}
+		protected virtual UINavigationController ParentRootViewController { get; set; }
+        protected virtual MvxSidebarPanelController RootViewController { get; set;}
 
         public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -61,8 +62,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 			//Create fall back viewPresentationAttribute, when nothing is set
 			if (viewPresentationAttribute == null)
 			{
-				Mvx.Warning("No " + nameof(MvxPanelPresentationAttribute) + " has been set, each viewcontroller should provide one.");
-				viewPresentationAttribute = new MvxPanelPresentationAttribute(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true);
+				ParentRootViewController.PushViewController(viewController, true);
+				return;
 			}
 
             switch (viewPresentationAttribute.HintType)
@@ -80,7 +81,17 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             }
 		}
 
-        private MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
+		public override void Close(IMvxViewModel toClose)
+		{
+			if (ParentRootViewController.ViewControllers.Count() > 1)
+				ParentRootViewController.PopViewController(true);
+			else if (RootViewController.NavigationController.ViewControllers.Count() > 1)
+				RootViewController.NavigationController.PopViewController(true);
+			else
+				base.Close(toClose);
+		}
+
+		protected MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
         {
             if (view == null)
                 return default(MvxPanelPresentationAttribute);
@@ -97,13 +108,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             this.OnMasterNavigationControllerCreated();
 
-            RootViewController = new MvxSidebarPanelController(MasterNavigationController);
+			RootViewController = new MvxSidebarPanelController(MasterNavigationController);
+			ParentRootViewController = new UINavigationController(RootViewController);
+			ParentRootViewController.NavigationBarHidden = true;
 
-            SetWindowRootViewController(RootViewController);
+            SetWindowRootViewController(ParentRootViewController);
 
             Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
         }
-
-
     }
 }
