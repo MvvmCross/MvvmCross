@@ -8,6 +8,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
     {
         private readonly UIViewController _subRootViewController;
 
+		public bool StatusBarHidden { get; set; } = false;
+		public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
+
         public MvxSidebarPanelController(UINavigationController navigationController)
         {
             _subRootViewController = new UIViewController();
@@ -26,7 +29,43 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, initialEmptySideMenu);
             RightSidebarController = new SidebarController(this, _subRootViewController, initialEmptySideMenu);
+
+			LeftSidebarController.StateChangeHandler += (object sender, bool e) =>
+			{
+				if(ToggleStatusBarHiddenOnOpen)
+					ToggleStatusBarStatus();
+			};
+
+			RightSidebarController.StateChangeHandler += (object sender, bool e) =>
+			{
+				if (ToggleStatusBarHiddenOnOpen)
+					ToggleStatusBarStatus();
+			};
         }
+
+		public override UIStatusBarAnimation PreferredStatusBarUpdateAnimation
+		{
+			get
+			{
+				return UIStatusBarAnimation.Fade;
+			}
+		}
+
+		public override bool PrefersStatusBarHidden()
+		{
+			return StatusBarHidden;
+		}
+
+		public void ToggleStatusBarStatus()
+		{
+			UIView.Animate(0.25,
+				animation: () =>
+				{
+					StatusBarHidden = !StatusBarHidden;
+					SetNeedsStatusBarAppearanceUpdate();
+				}
+			);
+		}
 
         public void Close()
         {

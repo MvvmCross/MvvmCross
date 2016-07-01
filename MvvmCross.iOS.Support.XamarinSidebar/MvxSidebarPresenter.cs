@@ -62,7 +62,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 			//Create fall back viewPresentationAttribute, when nothing is set
 			if (viewPresentationAttribute == null)
 			{
-				ParentRootViewController.PushViewController(viewController, true);
+				ParentRootViewController.PushViewController(viewController, ParentRootViewController.ViewControllers.Count() > 1);
 				return;
 			}
 
