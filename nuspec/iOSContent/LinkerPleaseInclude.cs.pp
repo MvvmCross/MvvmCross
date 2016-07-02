@@ -11,6 +11,13 @@ namespace $rootnamespace$
     [Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
     {
+		public void Include(MvxTaskBasedBindingContext c)
+        {
+            c.Dispose();
+            var c2 = new MvxTaskBasedBindingContext();
+            c2.Dispose();
+        }
+
         public void Include(UIButton uiButton)
         {
             uiButton.TouchUpInside += (s, e) =>
