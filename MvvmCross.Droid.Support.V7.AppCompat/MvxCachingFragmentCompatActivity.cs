@@ -57,7 +57,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             : base(javaReference, transfer)
         {}
 
-        protected override void OnPostCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnPostCreate(savedInstanceState);
             if (savedInstanceState == null) return;
