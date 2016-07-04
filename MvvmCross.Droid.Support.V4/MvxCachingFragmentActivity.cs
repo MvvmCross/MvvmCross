@@ -49,9 +49,9 @@ namespace MvvmCross.Droid.Support.V4
 			: base(javaReference, transfer)
 		{}
 
-		protected override void OnPostCreate(Bundle savedInstanceState)
+		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			base.OnPostCreate(savedInstanceState);
+			base.OnCreate(savedInstanceState);
 			if (savedInstanceState == null) return;
 
 			IMvxJsonConverter serializer;

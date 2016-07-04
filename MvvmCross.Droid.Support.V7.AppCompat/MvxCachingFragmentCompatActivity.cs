@@ -59,7 +59,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnPostCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);
             if (savedInstanceState == null) return;
 
             IMvxJsonConverter serializer;
