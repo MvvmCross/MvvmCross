@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
@@ -49,24 +50,53 @@ namespace MvvmCross.Droid.Support.V4
 			: base(javaReference, transfer)
 		{}
 
-		protected override void OnCreate(Bundle savedInstanceState)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate(savedInstanceState);
-			if (savedInstanceState == null) return;
+			// Prevents crash when activity in background with history enable is reopened after 
+			// Android does some auto memory management.
+			var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
+			setup.EnsureInitialized();
 
-			IMvxJsonConverter serializer;
-			if (!Mvx.TryResolve(out serializer))
+			base.OnCreate(bundle);
+
+			if (bundle == null)
+				HandleIntent(Intent);
+			else
 			{
-				Mvx.Trace(
-					"Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
-				return;
+				IMvxJsonConverter serializer;
+				if (!Mvx.TryResolve(out serializer))
+				{
+					Mvx.Trace(
+						"Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
+					return;
+				}
+
+				FragmentCacheConfiguration.RestoreCacheConfiguration(bundle, serializer);
+				// Gabriel has blown his trumpet. Ressurect Fragments from the dead
+				RestoreFragmentsCache();
+
+				RestoreViewModelsFromBundle(serializer, bundle);
 			}
+		}
 
-			FragmentCacheConfiguration.RestoreCacheConfiguration(savedInstanceState, serializer);
-			// Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-			RestoreFragmentsCache();
+		protected override void OnNewIntent(Intent intent)
+		{
+			base.OnNewIntent(intent);
 
-			RestoreViewModelsFromBundle(serializer, savedInstanceState);
+			HandleIntent(intent);
+		}
+
+		protected virtual void HandleIntent(Intent intent)
+		{
+			var fragmentRequestText = intent.Extras?.GetString(ViewModelRequestBundleKey);
+			if (fragmentRequestText == null)
+				return;
+
+			var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+			var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
+
+			var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
+			mvxAndroidViewPresenter.Show(fragmentRequest);
 		}
 
 		private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
@@ -339,23 +369,6 @@ namespace MvvmCross.Droid.Support.V4
 			// ReSharper disable once PossibleNullReferenceException
 			// Fragment can never be null because registered fragment has to inherit from IMvxFragmentView
 			return mvxFragmentView.UniqueImmutableCacheTag;
-		}
-
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
-
-			if (bundle == null) {
-				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
-				if (fragmentRequestText == null)
-					return;
-
-				var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
-				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
-
-				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
-				mvxAndroidViewPresenter.Show (fragmentRequest);
-			}
 		}
 
 		/// <summary>
