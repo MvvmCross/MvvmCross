@@ -57,26 +57,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             : base(javaReference, transfer)
         {}
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            if (savedInstanceState == null) return;
-
-            IMvxJsonConverter serializer;
-            if (!Mvx.TryResolve(out serializer))
-            {
-                Mvx.Trace(
-                    "Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
-                return;
-            }
-
-            FragmentCacheConfiguration.RestoreCacheConfiguration(savedInstanceState, serializer);
-            // Gabriel has blown his trumpet. Ressurect Fragments from the dead.
-            RestoreFragmentsCache();
-
-            RestoreViewModelsFromBundle(serializer, savedInstanceState);
-        }
-
         private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
             IMvxSavedStateConverter savedStateConverter;
@@ -360,6 +340,22 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		    if (bundle == null)
                 HandleIntent(Intent);
+			else
+			{
+				IMvxJsonConverter serializer;
+				if (!Mvx.TryResolve(out serializer))
+				{
+					Mvx.Trace(
+						"Could not resolve IMvxJsonConverter, it is going to be hard to create ViewModel cache");
+					return;
+				}
+
+				FragmentCacheConfiguration.RestoreCacheConfiguration(bundle, serializer);
+				// Gabriel has blown his trumpet. Ressurect Fragments from the dead.
+				RestoreFragmentsCache();
+
+				RestoreViewModelsFromBundle(serializer, bundle);
+			}
 	    }
 
         protected override void OnNewIntent(Intent intent)
