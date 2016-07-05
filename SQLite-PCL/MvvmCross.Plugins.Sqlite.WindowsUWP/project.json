@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MvvmCross.Core": "4.2.0",
-    "MvvmCross.Platform": "4.2.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "MvvmCross.Core": "4.2.1",
+    "MvvmCross.Platform": "4.2.1",
     "SQLite.Net-PCL": "3.1.1",
     "SQLite.Net.Async-PCL": "3.1.1",
     "SQLite.Net.Core-PCL": "3.1.1"
