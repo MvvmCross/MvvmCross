@@ -17,11 +17,11 @@ This package contains the implementation of FusedLocationApi as 'Location' plugi
 		<dependencies>
 			<group targetFramework="MonoAndroid">
 				<dependency id="MvvmCross.Platform" version="4.2.1" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.3.0" />
-				<dependency id="Xamarin.GooglePlayServices.Base" version="29.0.0.1" />
-				<dependency id="Xamarin.GooglePlayServices.Basement" version="29.0.0.1" />
-				<dependency id="Xamarin.GooglePlayServices.Location" version="29.0.0.1" />
-				<dependency id="Xamarin.GooglePlayServices.Maps" version="29.0.0.1" />
+				<dependency id="Xamarin.Android.Support.v4" version="23.4.0" />
+				<dependency id="Xamarin.GooglePlayServices.Base" version="29.0.0.2" />
+				<dependency id="Xamarin.GooglePlayServices.Basement" version="29.0.0.2" />
+				<dependency id="Xamarin.GooglePlayServices.Location" version="29.0.0.2" />
+				<dependency id="Xamarin.GooglePlayServices.Maps" version="29.0.0.2" />
 			</group>
 		</dependencies>
 	</metadata>
