@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.Bindings
         private readonly MvxBindingDescription _bindingDescription;
         private IMvxSourceStep _sourceStep;
         private IMvxTargetBinding _targetBinding;
-        private object _targetLocker;
+        private readonly object _targetLocker = new object();
 
         private object _dataContext;
         private EventHandler _sourceBindingOnChanged;
@@ -126,9 +126,9 @@ namespace MvvmCross.Binding.Bindings
 
         protected virtual void ClearTargetBinding()
         {
-            if (this._targetBinding != null)
+            lock (this._targetLocker)
             {
-                lock (this._targetLocker)
+                if (this._targetBinding != null)
                 {
                     if (this._targetBindingOnValueChanged != null)
                     {
@@ -144,7 +144,6 @@ namespace MvvmCross.Binding.Bindings
 
         private void CreateTargetBinding(object target)
         {
-            this._targetLocker = new object();
             this._targetBinding = this.TargetBindingFactory.CreateBinding(target, this._bindingDescription.TargetName);
 
             if (this._targetBinding == null)
@@ -180,8 +179,7 @@ namespace MvvmCross.Binding.Bindings
                 {
                     lock (this._targetLocker)
                     {
-                        if (this._targetBinding != null)
-                            this._targetBinding.SetValue(value);
+                        this._targetBinding?.SetValue(value);
                     }
                 }
                 catch (Exception exception)
