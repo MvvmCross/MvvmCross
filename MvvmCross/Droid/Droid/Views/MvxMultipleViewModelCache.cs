@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Concurrent;
+
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-    using System.Collections.Concurrent;
-
-    using MvvmCross.Core.ViewModels;
-
     public class MvxMultipleViewModelCache
         : IMvxMultipleViewModelCache
     {
@@ -12,10 +12,12 @@ namespace MvvmCross.Droid.Views
 
         public MvxMultipleViewModelCache()
         {
-            this._lazyCurrentViewModels = new Lazy<ConcurrentDictionary<CachedViewModelType, IMvxViewModel>>(() => new ConcurrentDictionary<CachedViewModelType, IMvxViewModel>());
+            _lazyCurrentViewModels = 
+                new Lazy<ConcurrentDictionary<CachedViewModelType, IMvxViewModel>>(
+                    () => new ConcurrentDictionary<CachedViewModelType, IMvxViewModel>());
         }
 
-        private ConcurrentDictionary<CachedViewModelType, IMvxViewModel> CurrentViewModels => this._lazyCurrentViewModels.Value;
+        private ConcurrentDictionary<CachedViewModelType, IMvxViewModel> CurrentViewModels => _lazyCurrentViewModels.Value;
 
         public void Cache(IMvxViewModel toCache, string viewModelTag = "singleInstanceCache")
         {
@@ -24,8 +26,8 @@ namespace MvvmCross.Droid.Views
             var type = toCache.GetType();
 
             var cachedViewModelType = new CachedViewModelType(type, viewModelTag);
-            if (!this.CurrentViewModels.ContainsKey(cachedViewModelType))
-                this.CurrentViewModels.TryAdd(cachedViewModelType, toCache);
+            if (!CurrentViewModels.ContainsKey(cachedViewModelType))
+                CurrentViewModels.TryAdd(cachedViewModelType, toCache);
         }
 
         public IMvxViewModel GetAndClear(Type viewModelType, string viewModelTag = "singleInstanceCache")
@@ -34,25 +36,25 @@ namespace MvvmCross.Droid.Views
 
             IMvxViewModel vm;
             var cachedViewModelType = new CachedViewModelType(viewModelType, viewModelTag);
-            this.CurrentViewModels.TryRemove(cachedViewModelType, out vm);
+            CurrentViewModels.TryRemove(cachedViewModelType, out vm);
 
             return vm;
         }
 
         public T GetAndClear<T>(string viewModelTag = "singleInstanceCache") where T : IMvxViewModel
         {
-            return (T)this.GetAndClear(typeof(T), viewModelTag);
+            return (T)GetAndClear(typeof(T), viewModelTag);
         }
 
         private class CachedViewModelType
         {
-            public Type ViewModelType { get; private set; }
-            public string ViewModelTag { get; private set; }
+            public Type ViewModelType { get; }
+            public string ViewModelTag { get; }
 
             public CachedViewModelType(Type viewModelType, string viewModelTag)
             {
-                this.ViewModelType = viewModelType;
-                this.ViewModelTag = viewModelTag ?? string.Empty;
+                ViewModelType = viewModelType;
+                ViewModelTag = viewModelTag ?? string.Empty;
             }
 
             public override int GetHashCode()
@@ -60,8 +62,8 @@ namespace MvvmCross.Droid.Views
                 unchecked
                 {
                     int hashCode = 17;
-                    hashCode = hashCode * 23 + this.ViewModelType.GetHashCode();
-                    hashCode = hashCode * 23 + this.ViewModelTag.GetHashCode();
+                    hashCode = hashCode * 23 + ViewModelType.GetHashCode();
+                    hashCode = hashCode * 23 + ViewModelTag.GetHashCode();
                     return hashCode;
                 }
             }
@@ -74,8 +76,8 @@ namespace MvvmCross.Droid.Views
                 var other = obj as CachedViewModelType;
 
                 return other != null &&
-                       other.ViewModelTag.Equals(this.ViewModelTag) &&
-                       other.ViewModelType == this.ViewModelType;
+                       other.ViewModelTag.Equals(ViewModelTag) &&
+                       other.ViewModelType == ViewModelType;
             }
         }
     }
