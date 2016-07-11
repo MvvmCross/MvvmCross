@@ -22,6 +22,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
+        bool _temporarilyDetached = false;
+
         public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
@@ -42,6 +44,32 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
             if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
+        }
+
+        public override void OnStartTemporaryDetach()
+        {
+            _temporarilyDetached = true;
+            base.OnStartTemporaryDetach();
+        }
+
+        public override void OnFinishTemporaryDetach()
+        {
+            _temporarilyDetached = false;
+            base.OnFinishTemporaryDetach();
+        }
+
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+
+            if (!_temporarilyDetached)
+            {
+                // Clear out all bindings from the ViewHolders created by the current adapter.
+                // This is for https://github.com/MvvmCross/MvvmCross/issues/1379
+                // According to the documentation Adapters can be owned by multiple
+                // RecyclerViews so this might not be entirely accurate.
+                this.Adapter?.ClearAllBindings();
+            }
         }
 
         public sealed override void SetLayoutManager(LayoutManager layout)
