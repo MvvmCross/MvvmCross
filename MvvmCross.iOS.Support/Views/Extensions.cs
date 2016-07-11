@@ -1,12 +1,13 @@
 ﻿namespace MvvmCross.iOS.Support.Views
 {
-    using CoreGraphics;
-    using Foundation;
-    using System;
-    using System.Linq;
-    using UIKit;
+	using CoreGraphics;
+	using Foundation;
+	using System;
+	using System.Linq;
+	using UIKit;
+	using System.Collections.Generic;
 
-    public static class ViewExtensions
+	public static class ViewExtensions
     {
         /// <summary>
         /// Find the first responder in the <paramref name="view"/>'s subview hierarchy
@@ -147,5 +148,33 @@
             bool landscape = orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight;
             return landscape;
         }
+
+		/// <summary>
+		/// Finds all descendants of a type within the view
+		/// </summary>
+		/// <returns>List of views of the type</returns>
+		/// <param name="view">View</param>
+		/// <typeparam name="T">The type to find.</typeparam>
+		public static List<T> DescendantViewsOfType<T>(this UIView view) where T : UIView
+		{
+			return view.DescendantViews().OfType<T>().ToList();
+		}
+
+		private static List<UIView> DescendantViews(this UIView view)
+		{
+			var descendantViews = new List<UIView>();
+
+			if (view.Subviews.Any())
+			{
+				descendantViews.AddRange(view.Subviews);
+
+				foreach (var subview in view.Subviews)
+				{
+					descendantViews.AddRange(subview.DescendantViews());
+				}
+			}
+
+			return descendantViews;
+		}
     }
 }
