@@ -266,7 +266,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public void ClearAllBindings()
+        public virtual void ClearAllBindings()
         {
             // Only clear bindings if we're attached to at least one RecyclerView.
             // This might be wrong if we're sharing the adapter with multiple RecyclerViews but
