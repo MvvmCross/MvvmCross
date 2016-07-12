@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="MvxFormsIosPagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MvxFormsApplicationDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
