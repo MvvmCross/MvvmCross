@@ -181,12 +181,12 @@ namespace MvvmCross.Plugins.Location.iOS
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
-                // ignored for now
+                _owner.SendError (ToMvxLocationErrorCode (manager, error));
             }
 
             public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
             {
-                // ignored for now
+                _owner.SendError (ToMvxLocationErrorCode (manager, error, region));
             }
 
             public override void AuthorizationChanged(CLLocationManager manager, CLAuthorizationStatus status)
@@ -210,6 +210,25 @@ namespace MvvmCross.Plugins.Location.iOS
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+            }
+
+            private MvxLocationErrorCode ToMvxLocationErrorCode (CLLocationManager manager, NSError error, CLRegion region = null)
+            {
+                var errorType = (CLError)(int)error.Code;
+
+                if (errorType == CLError.Denied) {
+                    return MvxLocationErrorCode.PermissionDenied;
+                }
+
+                if (errorType == CLError.Network) {
+                    return MvxLocationErrorCode.Network;
+                }
+
+                if (errorType == CLError.DeferredCanceled) {
+                    return MvxLocationErrorCode.Canceled;
+                }
+
+                return MvxLocationErrorCode.ServiceUnavailable;
             }
         }
 

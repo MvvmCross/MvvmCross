@@ -141,6 +141,14 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 				return MvxLocationErrorCode.Timeout;
 			}
 
+            if (errorCode == ConnectionResult.NetworkError) {
+                return MvxLocationErrorCode.Network;
+            }
+
+            if (errorCode == ConnectionResult.Canceled) {
+                return MvxLocationErrorCode.Canceled;
+            }
+
 			// TODO handle more error-codes?
 
 			return MvxLocationErrorCode.ServiceUnavailable;
