@@ -12,6 +12,8 @@ namespace MvvmCross.Plugins.Location
         ServiceUnavailable,
         PermissionDenied,
         PositionUnavailable,
-        Timeout
+        Timeout,
+        Network,
+        Canceled
     }
 }
