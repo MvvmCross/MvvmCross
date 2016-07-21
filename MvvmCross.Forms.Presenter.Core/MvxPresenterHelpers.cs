@@ -8,6 +8,7 @@
 
 using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Binding.BindingContext;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Core
@@ -34,5 +35,15 @@ namespace MvvmCross.Forms.Presenter.Core
             var page = viewPageLoader.LoadPage(request);
             return page;
         }
+
+        public static void AdaptForBinding(VisualElement element, IMvxBindingContextOwner contextOwner)
+        {
+            var mvxPage = element as IMvxContentPage;
+            if (mvxPage != null) {
+                contextOwner.BindingContext = new MvxBindingContext();
+                contextOwner.BindingContext.DataContext = mvxPage.ViewModel;
+            }
+        }
+
     }
 }

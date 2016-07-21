@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxFormsWindowsUWPPagePresenter.cs" />
+    <Compile Include="MvxPageRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\MvvmCross.Forms.Presenter.WindowsUWP.rd.xml" />
     <None Include="TODO.txt" />

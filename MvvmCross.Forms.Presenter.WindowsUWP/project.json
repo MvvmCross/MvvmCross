@@ -4,7 +4,7 @@
     "MvvmCross.Binding": "4.1.4",
     "MvvmCross.Core": "4.1.4",
     "MvvmCross.Platform": "4.1.4",
-    "Xamarin.Forms": "2.1.0.6529"
+    "Xamarin.Forms": "2.3.0.49"
   },
   "frameworks": {
     "uap10.0": {}

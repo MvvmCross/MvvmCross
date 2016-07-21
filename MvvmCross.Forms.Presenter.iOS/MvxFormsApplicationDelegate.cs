@@ -1,4 +1,4 @@
-﻿// MvxFormsIosPagePresenter.cs
+// MvxFormsIosPagePresenter.cs
 // 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
 // MvvmCross.Forms.Presenter is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
