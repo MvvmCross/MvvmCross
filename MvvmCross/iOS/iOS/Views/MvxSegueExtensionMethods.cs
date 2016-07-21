@@ -19,7 +19,7 @@ namespace MvvmCross.iOS.Views {
             return prop?.PropertyType;
         }
 
-        internal static void InstantiateViewModelForSegue(this UIViewController _, UIStoryboardSegue segue)
+        internal static void InstantiateViewModelForSegue(this IMvxEventSourceViewController _, UIStoryboardSegue segue)
         {
             var view = segue.DestinationViewController as IMvxIosView;
             if (view != null && view.Request == null)
