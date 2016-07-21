@@ -8,10 +8,11 @@
 namespace MvvmCross.iOS.Views
 {
     using System;
-
+    using Foundation;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.iOS.Views;
+    using UIKit;
 
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
@@ -66,6 +67,13 @@ namespace MvvmCross.iOS.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        // CHECKME: won't this interfer with the hack for TabBar in LoadViewModel()
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            this.InstantiateViewModelForSegue(segue);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace MvvmCross.iOS.Views
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.iOS.Views;
+    using UIKit;
 
     public class MvxViewController
         : MvxEventSourceViewController
@@ -75,6 +76,11 @@ namespace MvvmCross.iOS.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
+            base.PrepareForSegue(segue, sender);
+            this.InstantiateViewModelForSegue(segue);
         }
     }
 }
