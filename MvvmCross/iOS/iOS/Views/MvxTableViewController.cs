@@ -109,7 +109,7 @@ namespace MvvmCross.iOS.Views
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
         {
             base.PrepareForSegue(segue, sender);
-            this.InstantiateViewModelForSegue(segue);
+            this.ViewModelRequestForSegue(segue);
         }
     }
 }
