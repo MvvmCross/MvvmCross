@@ -15,12 +15,13 @@ using MvvmCross.Core.ViewModels;
 using System;
 using Android.Util;
 using Android.Views;
+using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxFragmentCompatActivity")]
     public class MvxFragmentCompatActivity
-        : MvxEventSourceAppCompatActivity
-          , IMvxAndroidView
+        : MvxEventSourceAppCompatActivity , IMvxAndroidView
     {
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
@@ -36,10 +37,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         public object DataContext
         {

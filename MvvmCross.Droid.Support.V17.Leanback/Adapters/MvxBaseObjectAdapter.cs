@@ -84,13 +84,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) : this(MvxAndroidBindingContextHelpers.Current(), javaReference, transfer)
+        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-        }
-
-        protected MvxBaseObjectAdapter(IMvxAndroidBindingContext bindingContext, IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-            BindingContext = bindingContext;
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
@@ -136,8 +131,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 
         private void RaiseDataSetChanged()
         {
-            var handler = DataSetChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            DataSetChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void NotifyAndRaiseDataSetChanged()

@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using Example.Core.ViewModels;
 using Example.Droid.Fragments;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities.Caching
 {
-    internal class MainActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
+    /*internal class MainActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
     {
         private static readonly Dictionary<string, CustomFragmentInfo> MyFragmentsInfo = new Dictionary
             <string, CustomFragmentInfo>
@@ -37,6 +36,12 @@ namespace Example.Droid.Activities.Caching
                 typeof (ExampleRecyclerViewModel).ToString(),
                 new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
                                        typeof (ExampleRecyclerViewModel), isRoot: true)
+            },
+            {
+                typeof(RecyclerViewMultiItemTemplateViewModel).ToString(),
+                new CustomFragmentInfo(typeof(RecyclerViewMultiItemTemplateViewModel).Name, 
+                                       typeof(RecyclerViewMultiItemTemplateFragment),
+                                       typeof(RecyclerViewMultiItemTemplateViewModel), isRoot: true)
             },
             {
                 typeof (SettingsViewModel).ToString(),
@@ -80,8 +85,8 @@ namespace Example.Droid.Activities.Caching
             var baseCachedFragmentInfo = base.ConvertSerializableFragmentInfo(fromSerializableMvxCachedFragmentInfo);
 
             return new CustomFragmentInfo(baseCachedFragmentInfo.Tag, baseCachedFragmentInfo.FragmentType,
-                baseCachedFragmentInfo.ViewModelType, baseCachedFragmentInfo.AddToBackStack,
-                serializableCustomFragmentInfo?.IsRoot ?? false)
+				baseCachedFragmentInfo.ViewModelType, baseCachedFragmentInfo.CacheFragment, 
+				baseCachedFragmentInfo.AddToBackStack, serializableCustomFragmentInfo?.IsRoot ?? false)
             {
                 ContentId = baseCachedFragmentInfo.ContentId,
                 CachedFragment = baseCachedFragmentInfo.CachedFragment
@@ -107,5 +112,5 @@ namespace Example.Droid.Activities.Caching
 
             public bool IsRoot { get; set; }
         }
-    }
+    }*/
 }

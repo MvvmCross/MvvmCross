@@ -14,34 +14,65 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        #region ctor
+        bool _temporarilyDetached = false;
 
-        protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
         {
             // Note: Any calling derived class passing a null adapter is responsible for setting
-            // it's own itemTemplateId
+            // it's own ItemTemplateSelector
             if (adapter == null)
                 return;
 
             SetLayoutManager(new LinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+            var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
+
+            adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
+
+            if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
+                ItemTemplateId = itemTemplateId;
         }
 
-        #endregion
+        public override void OnStartTemporaryDetach()
+        {
+            _temporarilyDetached = true;
+            base.OnStartTemporaryDetach();
+        }
 
-        public override sealed void SetLayoutManager(LayoutManager layout)
+        public override void OnFinishTemporaryDetach()
+        {
+            _temporarilyDetached = false;
+            base.OnFinishTemporaryDetach();
+        }
+
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+
+            if (!_temporarilyDetached)
+            {
+                // Clear out all bindings from the ViewHolders created by the current adapter.
+                // This is for https://github.com/MvvmCross/MvvmCross/issues/1379
+                // According to the documentation Adapters can be owned by multiple
+                // RecyclerViews so this might not be entirely accurate.
+                this.Adapter?.ClearAllBindings();
+            }
+        }
+
+        public sealed override void SetLayoutManager(LayoutManager layout)
         {
             base.SetLayoutManager(layout);
         }
@@ -62,7 +93,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;
-                    value.ItemTemplateId = existing.ItemTemplateId;
+                    value.ItemTemplateSelector = existing.ItemTemplateSelector;
                     value.ItemClick = existing.ItemClick;
                     value.ItemLongClick = existing.ItemLongClick;
 
@@ -89,8 +120,36 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get
+            {
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
+
+                if (singleItemDefaultTemplateSelector == null)
+                    throw new InvalidOperationException(
+                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
+
+                return singleItemDefaultTemplateSelector.ItemTemplateId;
+            }
+            set
+            {
+                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
+
+                if (singleItemDefaultTemplateSelector == null)
+                    throw new InvalidOperationException(
+                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
+
+                singleItemDefaultTemplateSelector.ItemTemplateId = value;
+                Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
+            }
+        }
+
+
+        public IMvxTemplateSelector ItemTemplateSelector
+        {
+            get { return Adapter.ItemTemplateSelector; }
+            set { Adapter.ItemTemplateSelector = value; }
         }
 
         public ICommand ItemClick

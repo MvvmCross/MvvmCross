@@ -5,8 +5,10 @@ using Android.Views;
 using MvvmCross.Platform.Core;
 using System;
 using Android.Support.V17.Leanback.App;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+
+
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {
@@ -51,7 +53,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 
         public override void OnAttach(Activity activity)
         {
-            AttachCalled.Raise(this, Activity);
+            AttachCalled.Raise(this, activity);
             base.OnAttach(activity);
         }
 

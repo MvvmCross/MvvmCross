@@ -10,6 +10,7 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
 using System;
+using Android.Runtime;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -44,8 +45,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxActionBarDrawerToggle")]
     public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle
     {
+        public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        {
+                
+        }
+
         public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes)
         { }
@@ -64,32 +71,28 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public override void OnDrawerClosed(View drawerView)
         {
-            var handler = DrawerClosed;
-            handler?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
+            DrawerClosed?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
 
             base.OnDrawerClosed(drawerView);
         }
 
         public override void OnDrawerOpened(View drawerView)
         {
-            var handler = DrawerOpened;
-            handler?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
+            DrawerOpened?.Invoke(this, new ActionBarDrawerEventArgs(drawerView));
 
             base.OnDrawerOpened(drawerView);
         }
 
         public override void OnDrawerSlide(View drawerView, float slideOffset)
         {
-            var handler = DrawerSlide;
-            handler?.Invoke(this, new ActionBarDrawerSlideEventArgs(drawerView, slideOffset));
+            DrawerSlide?.Invoke(this, new ActionBarDrawerSlideEventArgs(drawerView, slideOffset));
 
             base.OnDrawerSlide(drawerView, slideOffset);
         }
 
         public override void OnDrawerStateChanged(int newState)
         {
-            var handler = DrawerStateChanged;
-            handler?.Invoke(this, new ActionBarDrawerStateChangeEventArgs(newState));
+            DrawerStateChanged?.Invoke(this, new ActionBarDrawerStateChangeEventArgs(newState));
 
             base.OnDrawerStateChanged(newState);
         }

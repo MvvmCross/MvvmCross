@@ -12,6 +12,7 @@ using Java.Lang;
 
 namespace MvvmCross.Droid.Support.V4
 {
+    [Register("mvvmcross.droid.support.v4.MvxFragmentPagerAdapter")]
     public class MvxFragmentPagerAdapter : FragmentPagerAdapter
     {
         private readonly Context _context;
@@ -24,6 +25,7 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
+		[Obsolete("MvxFragmentPagerAdapter is deprecated, please use MvxCachingFragmentPagerAdapter instead.")]
         public MvxFragmentPagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)

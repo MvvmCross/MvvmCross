@@ -15,9 +15,11 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public abstract class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity
         , IMvxAndroidView
@@ -30,10 +32,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         public object DataContext
         {
@@ -84,6 +83,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxAppCompatActivity
         , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        {
+            
+        }
+
+        protected MvxAppCompatActivity()
+        {
+            
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

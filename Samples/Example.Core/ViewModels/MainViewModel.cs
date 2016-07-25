@@ -9,10 +9,9 @@ namespace Example.Core.ViewModels
         {
         }
 
-        public void ShowMenuAndFirstDetail()
+        public void ShowMenu()
         {
             ShowViewModel<MenuViewModel>();
-            ShowViewModel<HomeViewModel>();
         }
     }
 }

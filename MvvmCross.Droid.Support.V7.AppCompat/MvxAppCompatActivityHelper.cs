@@ -23,8 +23,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     return new MvxAppCompatSpinner(context, attrs);
                 case "MvxImageView":
                     return new MvxAppCompatImageView(context, attrs);
-                case "MvxListView":
-                    return new MvxAppCompatListView(context, attrs);
                 case "MvxRadioGroup":
                     return new MvxAppCompatRadioGroup(context, attrs);
                 case "MvxAutoCompleteTextView":

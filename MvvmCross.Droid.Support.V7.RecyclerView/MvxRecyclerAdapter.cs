@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -18,27 +19,40 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+using System.Collections.Generic;
+using Android.Support.V7.Widget;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
-    public class MvxRecyclerAdapter : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter
+    [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
+    public class MvxRecyclerAdapter 
+        : Android.Support.V7.Widget.RecyclerView.Adapter
+        , IMvxRecyclerAdapter
     {
-        public event EventHandler DataSetChanged;
-
         private readonly IMvxAndroidBindingContext _bindingContext;
+
+        // Keep track of all ViewHolders created by this adapter.
+        private readonly List<WeakReference<IMvxRecyclerViewHolder>> _viewHolders = new List<WeakReference<IMvxRecyclerViewHolder>>();
 
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
-        private int _itemTemplateId;
+        private IMvxTemplateSelector _itemTemplateSelector;
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
+
+        int _attachedRecyclerViews;
 
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
             this._bindingContext = bindingContext;
         }
+
+        public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer) { }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -61,7 +75,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public ICommand ItemLongClick {
+        public ICommand ItemLongClick
+        {
             get { return _itemLongClick; }
             set
             {
@@ -85,24 +100,20 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             get { return _itemsSource; }
             set { SetItemsSource(value); }
         }
-
-        public virtual int ItemTemplateId
+        
+        public virtual IMvxTemplateSelector ItemTemplateSelector
         {
-            get { return _itemTemplateId; }
+            get { return _itemTemplateSelector; }
             set
             {
-                if (_itemTemplateId == value)
-                {
+                if (ReferenceEquals(_itemTemplateSelector, value))
                     return;
-                }
 
-                _itemTemplateId = value;
+                _itemTemplateSelector = value;
 
-                // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
+                // since the template selector has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
                 if (_itemsSource != null)
-                {
-                    NotifyAndRaiseDataSetChanged();
-                }
+                    NotifyDataSetChanged();
             }
         }
 
@@ -122,25 +133,56 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnDetachedFromWindow();
         }
 
+        public override void OnViewRecycled(Java.Lang.Object holder)
+        {
+            base.OnViewRecycled(holder);
+
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.OnViewRecycled();
+        }
+
+        public override void OnAttachedToRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
+        {
+            ++_attachedRecyclerViews;
+            base.OnAttachedToRecyclerView(recyclerView);
+        }
+
+        public override void OnDetachedFromRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
+        {
+            --_attachedRecyclerViews;
+            base.OnDetachedFromRecyclerView(recyclerView);
+        }
+
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflaterHolder);
-
-            return new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
+            
+            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
                 LongClick = ItemLongClick
             };
+
+            _viewHolders.Add(new WeakReference<IMvxRecyclerViewHolder>(vh));
+
+            return vh;
+        }
+
+        public override int GetItemViewType(int position)
+        {
+            var itemAtPosition = GetItem(position);
+            return ItemTemplateSelector.GetItemViewType(itemAtPosition);
         }
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
-            return bindingContext.BindingInflate(this.ItemTemplateId, parent, false);
+            var layoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
+            return bindingContext.BindingInflate(layoutId, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((IMvxRecyclerViewHolder)holder).DataContext = _itemsSource.ElementAt(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = GetItem(position);
         }
 
         public override int ItemCount => _itemsSource.Count();
@@ -149,6 +191,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             return _itemsSource.ElementAt(position);
         }
+
+        public int ItemTemplateId { get; set; }
 
         protected virtual void SetItemsSource(IEnumerable value)
         {
@@ -177,7 +221,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
             }
 
-            NotifyAndRaiseDataSetChanged();
+            NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -192,8 +236,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        this.NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
@@ -201,20 +244,17 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                             var oldItem = e.OldItems[i];
                             var newItem = e.NewItems[i];
 
-                            this.NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
-                            this.RaiseDataSetChanged();
+                            NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
                         }
                         break;
                     case NotifyCollectionChangedAction.Replace:
-                        this.NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        this.NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
-                        this.RaiseDataSetChanged();
+                        NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Reset:
-                        this.NotifyAndRaiseDataSetChanged();
+                        NotifyDataSetChanged();
                         break;
                 }
             }
@@ -226,16 +266,22 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        private void RaiseDataSetChanged()
+        public virtual void ClearAllBindings()
         {
-            var handler = DataSetChanged;
-            handler?.Invoke(this, EventArgs.Empty);
-        }
-        
-        private void NotifyAndRaiseDataSetChanged()
-        {
-            this.RaiseDataSetChanged();
-            this.NotifyDataSetChanged();
+            // Only clear bindings if we're attached to at least one RecyclerView.
+            // This might be wrong if we're sharing the adapter with multiple RecyclerViews but
+            // I haven't hit this case in the wild.  We may need to revisit this if it's a problem.
+            if (_attachedRecyclerViews > 0)
+            {
+                foreach (var vhRef in _viewHolders)
+                {
+                    IMvxRecyclerViewHolder vh;
+                    if (vhRef.TryGetTarget(out vh))
+                        vh.ClearAllBindings();
+                }
+
+                _viewHolders.Clear();
+            }
         }
     }
 }

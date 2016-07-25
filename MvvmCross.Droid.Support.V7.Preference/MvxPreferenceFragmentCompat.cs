@@ -1,11 +1,14 @@
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+
 using MvvmCross.Core.ViewModels;
 using System;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
+    [Register("mvvmcross.droid.support.v7.preference.MvxPreferenceFragmentCompat")]
     public abstract class MvxPreferenceFragmentCompat : MvxEventSourcePreferenceFragmentCompat, IMvxFragmentView
     {
         protected MvxPreferenceFragmentCompat()
@@ -15,9 +18,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
         protected MvxPreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{
-            this.AddEventListeners();
-        }
+		{}
 
         public IMvxBindingContext BindingContext { get; set; }
 

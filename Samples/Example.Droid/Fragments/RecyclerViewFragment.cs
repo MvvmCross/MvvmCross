@@ -7,15 +7,15 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
+using MvvmCross.Droid.Shared.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.RecyclerViewFragment")]
     public class RecyclerViewFragment : MvxFragment<RecyclerViewModel>
     {

@@ -5,8 +5,8 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.Fragging.Attributes;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
 using Example.Droid.Activities;
 
@@ -53,6 +53,9 @@ namespace Example.Droid.Fragments
             case Resource.Id.nav_home:
                 ViewModel.ShowViewModelAndroid(typeof(HomeViewModel));
                 break;
+			case Resource.Id.nav_second_home:
+				ViewModel.ShowViewModelAndroid(typeof(SecondHostViewModel));
+				break;
             case Resource.Id.nav_viewpager:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
                 break;
@@ -61,6 +64,9 @@ namespace Example.Droid.Fragments
                 break;
             case Resource.Id.nav_recyclerview:
                 ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
+                break;
+            case Resource.Id.nav_recyclerview_multiitem:
+                ViewModel.ShowViewModelAndroid(typeof (RecyclerViewMultiItemTemplateViewModel));
                 break;
             case Resource.Id.nav_compose_message:
                 ViewModel.ShowViewModelAndroid(typeof(ComposeMessageViewModel));

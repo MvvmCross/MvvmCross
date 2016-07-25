@@ -4,7 +4,6 @@ using Android.OS;
 using Example.Core.ViewModels;
 using Example.Droid.Activities.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.Fragging.Caching;
 
 namespace Example.Droid.Activities
 {
@@ -16,10 +15,10 @@ namespace Example.Droid.Activities
        )]
     public class MessagesActivity : MvxCachingFragmentCompatActivity<MessagesViewModel>
     {
-        public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        /*public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
         {
             return new MessagesFragmentCacheConfigurationCustomFragmentInfo();
-        }
+        }*/
 
         protected override void OnCreate(Bundle bundle)
         {

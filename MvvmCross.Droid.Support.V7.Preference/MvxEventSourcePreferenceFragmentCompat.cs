@@ -4,9 +4,11 @@ using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Android.Views;
 using MvvmCross.Platform.Core;
-using MvvmCross.Droid.Support.V7.Fragging;
-using MvvmCross.Droid.Support.V7.Fragging.Fragments.EventSource;
+
+
 using System;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Shared;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
@@ -41,7 +43,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
         public override void OnAttach(Activity activity)
         {
-            AttachCalled.Raise(this, Activity);
+            AttachCalled.Raise(this, activity);
             base.OnAttach(activity);
         }
 
