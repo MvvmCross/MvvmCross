@@ -112,19 +112,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             this._bindingContext = context;
         }
 
-        public void OnAttachedToWindow()
+        public virtual void OnAttachedToWindow()
         {
             if (_cachedDataContext != null && DataContext == null)
                 DataContext = _cachedDataContext;
         }
 
-        public void OnDetachedFromWindow()
+        public virtual void OnDetachedFromWindow()
         {
             _cachedDataContext = DataContext;
             DataContext = null;
         }
 
-        public void OnViewRecycled()
+        public virtual void OnViewRecycled()
         {
             _cachedDataContext = null;
             DataContext = null;
