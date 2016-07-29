@@ -19,7 +19,7 @@ using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    public abstract class MvxAppCompatActivity
+    public class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity
         , IMvxAndroidView
     {
