@@ -54,7 +54,7 @@ namespace MvvmCross.Core.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TInit> : MvxViewModel
+    public abstract class MvxViewModel<TInit> : MvxViewModel, IMvxViewModelInitializer<TInit>
     {
         public async Task Init(string parameter)
         {
