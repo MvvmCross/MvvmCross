@@ -34,14 +34,15 @@ namespace MvvmCross.Core.ViewModels
             return false;
         }
 
-		/// <summary>
-		///     ShowViewModel with non-primitive type object using json to pass object to the next ViewModel
-		/// 	Be aware that pasing big objects will block your UI, and should be handled async by yourself
-		/// </summary>
-		/// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
+        /// <summary>
+        /// ShowViewModel with non-primitive type object using json to pass object to the next ViewModel
+        /// Be aware that pasing big objects will block your UI, and should be handled async by yourself
+        /// </summary>
+        /// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
         protected bool ShowViewModel<TViewModel, TInit>(TInit parameter,
-												 IMvxBundle presentationBundle = null,
-												 MvxRequestedBy requestedBy = null) where TViewModel : MvxViewModel<TInit>
+                                                 IMvxBundle presentationBundle = null,
+                                                 MvxRequestedBy requestedBy = null) 
+            where TViewModel : IMvxViewModelInitializer<TInit>
         {
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
