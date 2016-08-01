@@ -80,8 +80,7 @@ namespace MvvmCross.Binding.Bindings.Target
         protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
+            if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
