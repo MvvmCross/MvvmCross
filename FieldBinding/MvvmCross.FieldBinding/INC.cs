@@ -11,6 +11,11 @@ namespace MvvmCross.FieldBinding
     {
     }
 
+    public interface INCString : INC<string>
+    {
+
+    }
+
     public interface INCList<TValue> : INotifyChangeList<TValue>
     {
     }

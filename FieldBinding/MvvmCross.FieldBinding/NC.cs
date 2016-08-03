@@ -27,6 +27,41 @@ namespace MvvmCross.FieldBinding
         }
     }
 
+    public class NCString : NC<string>, INCString
+    {
+        public NCString() : base() { }
+
+        public NCString(string value) : base(value) { }
+
+        public NCString(string value, Action<string> valueChanged) : base(value, valueChanged) { }
+
+        public NCString(int maxLength) : this()
+        {
+            MaxLength = maxLength;
+            Changed += NCString_Changed;
+        }
+
+        public NCString(string value, int maxLength) : this(value)
+        {
+            MaxLength = maxLength;
+            Changed += NCString_Changed;
+        }
+
+        public NCString(string value, Action<string> valueChanged, int maxLength) : this(value, valueChanged)
+        {
+            MaxLength = maxLength;
+            Changed += NCString_Changed;
+        }
+
+        public int MaxLength { get; private set; }
+
+        private void NCString_Changed(object sender, EventArgs e)
+        {
+            if (MaxLength > 0 && Value != null && Value.Length > MaxLength)
+                Value = Value.Remove(MaxLength);
+        }
+    }
+
     public class NCList<TValue>
         : NotifyChangeList<TValue>
         , INCList<TValue>
