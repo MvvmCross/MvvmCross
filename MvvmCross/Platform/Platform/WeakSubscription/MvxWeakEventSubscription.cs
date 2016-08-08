@@ -13,7 +13,6 @@ namespace MvvmCross.Platform.WeakSubscription
 {
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class
-        where TEventArgs : EventArgs
     {
         private readonly WeakReference _targetReference;
         private readonly WeakReference<TSource> _sourceReference;
@@ -64,10 +63,15 @@ namespace MvvmCross.Platform.WeakSubscription
             return new EventHandler<TEventArgs>(this.OnSourceEvent);
         }
 
+        protected virtual object GetTargetObject()
+        {
+            return _targetReference.Target;
+        }
+
         //This is the method that will handle the event of source.
         protected void OnSourceEvent(object sender, TEventArgs e)
         {
-            var target = this._targetReference.Target;
+            var target = GetTargetObject();
             if (target != null)
             {
                 this._eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
@@ -166,6 +170,11 @@ namespace MvvmCross.Platform.WeakSubscription
             this.AddEventHandler();
         }
 
+        protected virtual object GetTargetObject()
+        {
+            return _targetReference.Target;
+        }
+
         protected virtual Delegate CreateEventHandler()
         {
             return new EventHandler(this.OnSourceEvent);
@@ -174,7 +183,7 @@ namespace MvvmCross.Platform.WeakSubscription
         //This is the method that will handle the event of source.
         protected void OnSourceEvent(object sender, EventArgs e)
         {
-            var target = this._targetReference.Target;
+            var target = GetTargetObject();
             if (target != null)
             {
                 this._eventHandlerMethodInfo.Invoke(target, new[] { sender, e });

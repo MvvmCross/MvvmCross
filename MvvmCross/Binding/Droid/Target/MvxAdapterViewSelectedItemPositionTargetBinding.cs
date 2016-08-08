@@ -8,6 +8,7 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Binding.Droid.Target
     {
         protected AdapterView AdapterView => (AdapterView)Target;
 
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
             : base(adapterView)
@@ -42,8 +43,8 @@ namespace MvvmCross.Binding.Droid.Target
             if (adapterView == null)
                 return;
 
-            _subscribed = true;
-            adapterView.ItemSelected += AdapterViewOnItemSelected;
+            _subscription = adapterView.WeakSubscribe<AdapterView, AdapterView.ItemSelectedEventArgs>(
+                nameof(adapterView.ItemSelected), AdapterViewOnItemSelected);
         }
 
         public override Type TargetType => typeof(Int32);
@@ -52,13 +53,10 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var adapterView = AdapterView;
-                if (adapterView != null && _subscribed)
-                {
-                    adapterView.ItemSelected -= AdapterViewOnItemSelected;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
+
             base.Dispose(isDisposing);
         }
     }

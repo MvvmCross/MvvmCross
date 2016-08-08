@@ -2,12 +2,15 @@
 using Android.Preferences;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxPreferenceValueTargetBinding 
         : MvxConvertingTargetBinding
     {
+        private IDisposable _subscription;
+
         public MvxPreferenceValueTargetBinding(Preference preference)
             : base(preference)
         { }
@@ -20,7 +23,9 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            Preference.PreferenceChange += HandlePreferenceChange;
+            _subscription = Preference.WeakSubscribe<Preference, Preference.PreferenceChangeEventArgs>(
+                nameof(Preference.PreferenceChange),
+                HandlePreferenceChange);
         }
 
         protected void HandlePreferenceChange(object sender, Preference.PreferenceChangeEventArgs e)
@@ -36,10 +41,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                if (Preference != null)
-                {
-                    Preference.PreferenceChange -= HandlePreferenceChange;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);

@@ -10,6 +10,7 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -19,7 +20,7 @@ namespace MvvmCross.Binding.Droid.Target
         protected MvxSpinner Spinner => (MvxSpinner)Target;
 
         private object _currentValue;
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxSpinnerSelectedItemBinding(MvxSpinner spinner)
             : base(spinner)
@@ -84,8 +85,9 @@ namespace MvvmCross.Binding.Droid.Target
             if (spinner == null)
                 return;
 
-            spinner.ItemSelected += SpinnerItemSelected;
-            _subscribed = true;
+            _subscription = spinner.WeakSubscribe<AdapterView, AdapterView.ItemSelectedEventArgs>(
+                nameof(spinner.ItemSelected),
+                SpinnerItemSelected);
         }
 
         public override Type TargetType => typeof(object);
@@ -94,12 +96,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var spinner = Spinner;
-                if (spinner != null && _subscribed)
-                {
-                    spinner.ItemSelected -= SpinnerItemSelected;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

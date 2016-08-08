@@ -10,6 +10,7 @@ using Android.Text;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -18,7 +19,7 @@ namespace MvvmCross.Binding.Droid.Target
         : MvxConvertingTargetBinding, IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         protected TextView TextView => Target as TextView;
 
@@ -57,8 +58,9 @@ namespace MvvmCross.Binding.Droid.Target
             if (view == null)
                 return;
 
-            view.AfterTextChanged += EditTextOnAfterTextChanged;
-            _subscribed = true;
+            _subscription = view.WeakSubscribe<TextView, AfterTextChangedEventArgs>(
+                nameof(view.AfterTextChanged),
+                EditTextOnAfterTextChanged);
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
@@ -70,15 +72,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                if (_isEditTextBinding)
-                {
-                    var editText = TextView;
-                    if (editText != null && _subscribed)
-                    {
-                        editText.AfterTextChanged -= EditTextOnAfterTextChanged;
-                        _subscribed = false;
-                    }
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

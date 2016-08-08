@@ -9,13 +9,14 @@ using System;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxTextViewFocusTargetBinding
         : MvxConvertingTargetBinding
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         protected EditText TextField => Target as EditText;
 
@@ -40,8 +41,9 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (TextField == null) return;
 
-            TextField.FocusChange += HandleLostFocus;
-            _subscribed = true;
+            _subscription = TextField.WeakSubscribe<View, View.FocusChangeEventArgs>(
+                nameof(TextField.FocusChange),
+                HandleLostFocus);
         }
 
         private void HandleLostFocus(object sender, View.FocusChangeEventArgs e)
@@ -56,11 +58,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                if (TextField != null && _subscribed)
-                {
-                    TextField.FocusChange -= HandleLostFocus;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

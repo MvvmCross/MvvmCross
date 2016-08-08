@@ -10,6 +10,7 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -21,7 +22,7 @@ namespace MvvmCross.Binding.Droid.Target
         protected MvxListView ListView => (MvxListView)Target;
 
         private object _currentValue;
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxListViewSelectedItemTargetBinding(MvxListView view)
             : base(view)
@@ -68,8 +69,7 @@ namespace MvvmCross.Binding.Droid.Target
             if (listView == null)
                 return;
 
-            listView.ItemClick += OnItemClick;
-            _subscribed = true;
+            _subscription = listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
         }
 
         public override Type TargetType => typeof(object);
@@ -78,12 +78,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var listView = (ListView)ListView;
-                if (listView != null && _subscribed)
-                {
-                    listView.ItemClick -= OnItemClick;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }
