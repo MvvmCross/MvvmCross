@@ -3,6 +3,7 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Binding.Droid.Target
         : MvxConvertingTargetBinding
     {
         private object _currentValue;
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
             : base(target)
@@ -63,20 +64,16 @@ namespace MvvmCross.Binding.Droid.Target
             if (listView == null)
                 return;
 
-            listView.ChildClick += OnChildClick;
-            _subscribed = true;
+            _subscription = listView.WeakSubscribe<ExpandableListView, ExpandableListView.ChildClickEventArgs>(
+                nameof(listView.ChildClick),
+                OnChildClick);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var listView = (ExpandableListView)ListView;
-                if (listView != null && _subscribed)
-                {
-                    listView.ChildClick -= OnChildClick;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
             }
             base.Dispose(isDisposing);
         }

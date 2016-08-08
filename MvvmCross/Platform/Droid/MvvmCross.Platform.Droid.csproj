@@ -62,6 +62,8 @@
     <Compile Include="Views\MvxIntentRequestCode.cs" />
     <Compile Include="Views\MvxIntentResultEventArgs.cs" />
     <Compile Include="Views\MvxStartActivityForResultParameters.cs" />
+    <Compile Include="WeakSubscription\MvxAndroidTargetEventSubscription.cs" />
+    <Compile Include="WeakSubscription\MvxAndroidWeakSubscriptionExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Platform\MvvmCross.Platform.csproj">

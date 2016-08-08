@@ -1,6 +1,7 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -12,6 +13,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
         }
 
+        private IDisposable _subscription;
+
         public override Type TargetType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
@@ -20,7 +23,9 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            SearchView.QueryTextChange += HandleQueryTextChanged;
+            _subscription = SearchView.WeakSubscribe<SearchView, SearchView.QueryTextChangeEventArgs>(
+                nameof(SearchView.QueryTextChange),
+                HandleQueryTextChanged);
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -31,11 +36,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var target = Target as SearchView;
-                if (target != null)
-                {
-                    target.QueryTextChange -= HandleQueryTextChanged;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);

@@ -8,6 +8,7 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -16,6 +17,8 @@ namespace MvvmCross.Binding.Droid.Target
     {
         protected RatingBar RatingBar => (RatingBar)Target;
 
+        private IDisposable _subscription;
+
         public MvxRatingBarRatingTargetBinding(RatingBar target)
             : base(target)
         {
@@ -23,7 +26,9 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            RatingBar.RatingBarChange += RatingBar_RatingBarChange;
+            _subscription = RatingBar.WeakSubscribe<RatingBar, RatingBar.RatingBarChangeEventArgs>(
+                nameof(RatingBar.RatingBarChange),
+                RatingBar_RatingBarChange);
         }
 
         private void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
@@ -51,11 +56,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var target = Target as RatingBar;
-                if (target != null)
-                {
-                    target.RatingBarChange -= RatingBar_RatingBarChange;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }
