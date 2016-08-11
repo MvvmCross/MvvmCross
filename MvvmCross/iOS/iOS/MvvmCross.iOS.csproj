@@ -49,6 +49,7 @@
     <Compile Include="Platform\IMvxIosPlatformProperties.cs" />
     <Compile Include="Platform\MvxIosDisplayDensity.cs" />
     <Compile Include="Platform\MvxIosFormFactor.cs" />
+    <Compile Include="Views\IMvxIosViewSegue.cs" />
     <Compile Include="Views\IMvxModalIosView.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxIosPlatformProperties.cs" />
