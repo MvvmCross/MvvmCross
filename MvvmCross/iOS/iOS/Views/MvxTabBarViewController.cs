@@ -17,7 +17,6 @@ namespace MvvmCross.iOS.Views
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
           , IMvxIosView
-          , IMvxIosViewSegue
     {
         protected MvxTabBarViewController()
         {
@@ -55,11 +54,6 @@ namespace MvvmCross.iOS.Views
         {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
-        }
-
-        public virtual object PrepareViewModelParametersForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            return null;
         }
     }
 

@@ -20,7 +20,6 @@ namespace MvvmCross.iOS.Views
     public class MvxTableViewController
         : MvxEventSourceTableViewController
           , IMvxIosView
-          , IMvxIosViewSegue
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -85,11 +84,6 @@ namespace MvvmCross.iOS.Views
         {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
-        }
-
-        public virtual object PrepareViewModelParametersForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            return null;
         }
     }
 

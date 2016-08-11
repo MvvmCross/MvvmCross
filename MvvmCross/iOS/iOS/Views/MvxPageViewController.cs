@@ -11,7 +11,7 @@
     using UIKit;
     using Foundation;
 
-    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView, IMvxIosViewSegue
+    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {
         private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
 
@@ -115,11 +115,6 @@
         {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
-        }
-
-        public virtual object PrepareViewModelParametersForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            return null;
         }
     }
 
