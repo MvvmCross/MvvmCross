@@ -19,7 +19,6 @@ namespace MvvmCross.iOS.Views
     public class MvxViewController
         : MvxEventSourceViewController
           , IMvxIosView
-          , IMvxIosViewSegue
     {
         public MvxViewController()
         {
@@ -57,10 +56,6 @@ namespace MvvmCross.iOS.Views
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
-        }
-
-        public virtual object PrepareViewModelParametersForSegue(UIStoryboardSegue segue, NSObject sender) {
-            return null;
         }
     }
 
