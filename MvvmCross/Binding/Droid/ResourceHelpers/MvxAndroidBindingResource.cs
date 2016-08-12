@@ -71,7 +71,7 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
                 this.ExpandableListViewStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxExpandableListView", new int[0]);
                 this.GroupItemTemplateId =
-                    (int)SafeGetFieldValue(styleable, "MvxExpandableListView_GroupItemTemplate");
+                    (int)SafeGetFieldValue(styleable, "MvxExpandableListView_MvxGroupItemTemplate");
             }
             catch (Exception exception)
             {
