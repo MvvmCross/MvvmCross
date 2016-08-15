@@ -54,6 +54,7 @@
     <Compile Include="Platform\IMvxSettings.cs" />
     <Compile Include="ViewModels\IMvxTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameRegistry.cs" />
+    <Compile Include="ViewModels\IMvxViewModelInitializer.cs" />
     <Compile Include="ViewModels\IMvxViewModelTypeFinder.cs" />
     <Compile Include="ViewModels\IMvxTypeToTypeLookupBuilder.cs" />
     <Compile Include="ViewModels\IMvxViewModelByNameLookup.cs" />
