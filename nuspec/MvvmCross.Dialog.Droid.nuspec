@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Dialog.Droid</id>
-		<version>4.2.2</version>
+		<version>4.2.3</version>
 		<title>MvvmCross - Android Dialog Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -18,10 +18,10 @@ This package contains the 'Android Dialog' libraries for MvvmCross
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.2.2" />
+				<dependency id="MvvmCross.Core" version="4.2.3" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.2.2" />
+				<dependency id="MvvmCross.Core" version="4.2.3" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -40,6 +40,7 @@ This package contains the 'Android Dialog' libraries for MvvmCross
 		<file src="..\MvvmCross\Dialog\Droid\**\*.cs" target="src\MvvmCross.Dialog.Droid" />
 	</files>
 </package>
+
 
 
 
