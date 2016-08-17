@@ -10,7 +10,7 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    [Register("MvvmCross.Droid.Support.Design.Behaviors.MvxScrollAwareTranslationHideFABBehavior")]
+    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareTranslationHideFABBehavior")]
     public class MvxScrollAwareTranslationHideFABBehavior : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;

@@ -41,7 +41,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             adapter.ItemTemplateId = itemTemplateId;
             adapter.DropDownItemTemplateId = dropDownItemTemplateId;
             Adapter = adapter;
-            SetupHandleItemSelected();
+            ItemSelected += OnItemSelected;
         }
 
         protected MvxAppCompatSpinner(IntPtr javaReference, JniHandleOwnership transfer)
@@ -89,13 +89,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public ICommand HandleItemSelected { get; set; }
 
-        private void SetupHandleItemSelected()
+        private void OnItemSelected(object sender, ItemSelectedEventArgs e)
         {
-            base.ItemSelected += (sender, args) =>
-            {
-                var position = args.Position;
-                HandleSelected(position);
-            };
+            var position = e.Position;
+            HandleSelected(position);
         }
 
         protected virtual void HandleSelected(int position)
@@ -107,6 +104,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 return;
 
             this.HandleItemSelected.Execute(item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (disposing)
+            {
+                ItemSelected -= OnItemSelected;
+            }
         }
     }
 }

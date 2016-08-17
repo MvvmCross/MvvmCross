@@ -19,6 +19,7 @@ using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
+    [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity
         , IMvxAndroidView
@@ -31,10 +32,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
-        }
+        {}
 
         public object DataContext
         {

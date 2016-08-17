@@ -3,7 +3,6 @@ nuget setapikey
 
 nuget pack MvvmCross.Droid.Support.V7.AppCompat.nuspec -symbols
 nuget pack MvvmCross.Droid.Support.Design.nuspec -Symbols
-nuget pack MvvmCross.Droid.Support.V7.Fragging.nuspec -Symbols
 nuget pack MvvmCross.Droid.Support.V17.Leanback.nuspec -Symbols
 nuget pack MvvmCross.Droid.Support.V7.Preference.nuspec -Symbols
 nuget pack MvvmCross.Droid.Support.V7.RecyclerView.nuspec -Symbols

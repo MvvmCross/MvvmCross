@@ -10,7 +10,8 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {
-	public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
+    [Register("mvvmcross.droid.support.v14.preference.MvxPreferenceFragment")]
+    public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
 	{
 		protected MvxPreferenceFragment()
 		{
@@ -19,9 +20,7 @@ namespace MvvmCross.Droid.Support.V14.Preference
 
 		protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{
-			this.AddEventListeners();
-		}
+		{}
 
 		public IMvxBindingContext BindingContext { get; set; }
 

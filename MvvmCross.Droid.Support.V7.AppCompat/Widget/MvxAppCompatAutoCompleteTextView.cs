@@ -27,8 +27,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             : this(context, attrs, new MvxFilteringAdapter(context))
         {
             // note - we shouldn't realy need both of these... but we do
-            this.ItemClick += this.OnItemClick;
-            this.ItemSelected += this.OnItemSelected;
+            ItemClick += OnItemClick;
+            ItemSelected += OnItemSelected;
         }
 
         public MvxAppCompatAutoCompleteTextView(Context context, IAttributeSet attrs,
@@ -37,8 +37,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
-            this.Adapter = adapter;
-            this.ItemClick += this.OnItemClick;
+            Adapter = adapter;
+            ItemClick += OnItemClick;
         }
 
         protected MvxAppCompatAutoCompleteTextView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -48,24 +48,24 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
-            this.OnItemClick(itemClickEventArgs.Position);
+            OnItemClick(itemClickEventArgs.Position);
         }
 
         private void OnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
-            this.OnItemSelected(itemSelectedEventArgs.Position);
+            OnItemSelected(itemSelectedEventArgs.Position);
         }
 
         protected virtual void OnItemClick(int position)
         {
-            var selectedObject = this.Adapter.GetRawItem(position);
-            this.SelectedObject = selectedObject;
+            var selectedObject = Adapter.GetRawItem(position);
+            SelectedObject = selectedObject;
         }
 
         protected virtual void OnItemSelected(int position)
         {
-            var selectedObject = this.Adapter.GetRawItem(position);
-            this.SelectedObject = selectedObject;
+            var selectedObject = Adapter.GetRawItem(position);
+            SelectedObject = selectedObject;
         }
 
         public new MvxFilteringAdapter Adapter
@@ -78,7 +78,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                     return;
 
                 if (existing != null)
-                    existing.PartialTextChanged -= this.AdapterOnPartialTextChanged;
+                    existing.PartialTextChanged -= AdapterOnPartialTextChanged;
 
                 if (existing != null && value != null)
                 {
@@ -87,7 +87,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 }
 
                 if (value != null)
-                    value.PartialTextChanged += this.AdapterOnPartialTextChanged;
+                    value.PartialTextChanged += AdapterOnPartialTextChanged;
 
                 base.Adapter = value;
             }
@@ -95,36 +95,36 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void AdapterOnPartialTextChanged(object sender, EventArgs eventArgs)
         {
-            this.FireChanged(this.PartialTextChanged);
+            FireChanged(PartialTextChanged);
         }
 
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return this.Adapter.ItemsSource; }
-            set { this.Adapter.ItemsSource = value; }
+            get { return Adapter.ItemsSource; }
+            set { Adapter.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return this.Adapter.ItemTemplateId; }
-            set { this.Adapter.ItemTemplateId = value; }
+            get { return Adapter.ItemTemplateId; }
+            set { Adapter.ItemTemplateId = value; }
         }
 
-        public string PartialText => this.Adapter.PartialText;
+        public string PartialText => Adapter.PartialText;
 
         private object _selectedObject;
 
         public object SelectedObject
         {
-            get { return this._selectedObject; }
+            get { return _selectedObject; }
             private set
             {
-                if (this._selectedObject == value)
+                if (_selectedObject == value)
                     return;
 
-                this._selectedObject = value;
-                this.FireChanged(this.SelectedObjectChanged);
+                _selectedObject = value;
+                FireChanged(SelectedObjectChanged);
             }
         }
 
@@ -134,8 +134,22 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void FireChanged(EventHandler eventHandler)
         {
-            var handler = eventHandler;
-            handler?.Invoke(this, EventArgs.Empty);
+            eventHandler?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ItemClick -= OnItemClick;
+                ItemSelected -= OnItemSelected;
+
+                if (Adapter != null)
+                {
+                    Adapter.PartialTextChanged -= AdapterOnPartialTextChanged;
+                }
+            }
+            base.Dispose(disposing);
         }
     }
 }

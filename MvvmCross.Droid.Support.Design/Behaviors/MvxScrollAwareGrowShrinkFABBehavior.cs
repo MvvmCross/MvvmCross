@@ -8,7 +8,7 @@ using Android.Views;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    [Register("MvvmCross.Droid.Support.Design.Behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
+    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
     public class MvxScrollAwareGrowShrinkFABBehavior : CoordinatorLayout.Behavior
     {
         public MvxScrollAwareGrowShrinkFABBehavior(IntPtr handle, JniHandleOwnership ownership) : base(handle, ownership)

@@ -46,7 +46,7 @@ namespace MvvmCross.Droid.Support.V4
                 return;
 
             _refreshOverloaded = true;
-            Refresh += (sender, args) => ExecuteRefreshCommand(RefreshCommand);
+            Refresh += OnRefresh;
         }
 
         protected virtual void ExecuteRefreshCommand(ICommand command)
@@ -58,6 +58,21 @@ namespace MvvmCross.Droid.Support.V4
                 return;
 
             command.Execute(null);
+        }
+
+        private void OnRefresh(object sender, EventArgs args)
+        {
+            this.ExecuteRefreshCommand(this.RefreshCommand);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Refresh -= this.OnRefresh;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

@@ -3,7 +3,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace Example.Droid.Common.TemplateSelectors
 {
-    public class MultiItemTemplateModelTemplateSelector : ItemTemplateSelector<MultiItemTemplateModel>
+    public class MultiItemTemplateModelTemplateSelector : MvxTemplateSelector<MultiItemTemplateModel>
     {
         public override int GetItemLayoutId(int fromViewType)
         {

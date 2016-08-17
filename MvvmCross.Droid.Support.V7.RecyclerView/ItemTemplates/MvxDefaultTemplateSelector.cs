@@ -1,15 +1,16 @@
 namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
 {
-    public class SingleItemDefaultTemplateSelector : IItemTemplateSelector
+	//MvxDefaultTemplateSelector
+	public class MvxDefaultTemplateSelector : IMvxTemplateSelector
     {
         public int ItemTemplateId { get; set; }
 
-        public SingleItemDefaultTemplateSelector(int itemTemplateId)
+        public MvxDefaultTemplateSelector(int itemTemplateId)
         {
             ItemTemplateId = itemTemplateId;
         }
 
-        public SingleItemDefaultTemplateSelector()
+        public MvxDefaultTemplateSelector()
         {
         }
 

@@ -35,9 +35,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxDetailsSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         public IMvxBindingContext BindingContext { get; set; }
 

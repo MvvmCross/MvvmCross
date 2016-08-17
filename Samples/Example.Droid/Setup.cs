@@ -4,9 +4,12 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Example.Droid
 {
@@ -32,8 +35,17 @@ namespace Example.Droid
 			typeof(MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView).Assembly
 		};
 
+		/// <summary>
+		/// Fill the Binding Factory Registry with bindings from the support library.
+		/// </summary>
+		protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+		{
+			MvxAppCompatSetupHelper.FillTargetFactories(registry);
+			base.FillTargetFactories(registry);
+		}
+
         /// <summary>
-		/// This is very important to override. The default view presenter does not know how to show fragments!
+        /// This is very important to override. The default view presenter does not know how to show fragments!
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {

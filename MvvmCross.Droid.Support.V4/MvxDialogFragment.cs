@@ -15,6 +15,7 @@ using MvvmCross.Droid.Support.V4.EventSource;
 
 namespace MvvmCross.Droid.Support.V4
 {
+    [Register("mvvmcross.droid.support.v4.MvxDialogFragment")]
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment
         , IMvxFragmentView
@@ -26,9 +27,7 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
-            this.AddEventListeners();
-        }
+        {}
 
         public IMvxBindingContext BindingContext { get; set; }
 

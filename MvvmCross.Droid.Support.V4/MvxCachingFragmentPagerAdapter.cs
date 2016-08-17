@@ -14,7 +14,8 @@ namespace MvvmCross.Droid.Support.V4
 {
     //http://speakman.net.nz/blog/2014/02/20/a-bug-in-and-a-fix-for-the-way-fragmentstatepageradapter-handles-fragment-restoration/
     //https://github.com/adamsp/FragmentStatePagerIssueExample/blob/master/app/src/main/java/com/example/fragmentstatepagerissueexample/app/FixedFragmentStatePagerAdapter.java
-	public abstract class MvxFragmentPagerAdapter2 : PagerAdapter
+    [Register("mvvmcross.droid.support.v4.MvxCachingFragmentPagerAdapter")]
+    public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
         private Fragment _currentPrimaryItem;
         private FragmentTransaction _curTransaction;
@@ -23,12 +24,12 @@ namespace MvvmCross.Droid.Support.V4
         private List<string> _savedFragmentTags = new List<string>();
         private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
-		protected MvxFragmentPagerAdapter2(IntPtr javaReference, JniHandleOwnership transfer)
+		protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-		protected MvxFragmentPagerAdapter2(FragmentManager fragmentManager)
+		protected MvxCachingFragmentPagerAdapter(FragmentManager fragmentManager)
         {
             _fragmentManager = fragmentManager;
         }
@@ -155,6 +156,9 @@ namespace MvvmCross.Droid.Support.V4
                     continue;
 
                 var index = Integer.ParseInt(key.Substring(1));
+
+				if (_fragmentManager.Fragments == null) return;
+
                 var f = _fragmentManager.GetFragment(bundle, key);
                 if (f != null)
                 {

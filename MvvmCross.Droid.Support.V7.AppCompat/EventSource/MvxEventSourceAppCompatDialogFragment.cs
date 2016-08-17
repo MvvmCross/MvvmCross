@@ -57,7 +57,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.EventSource
 
         public override void OnAttach(Activity activity)
         {
-            AttachCalled.Raise(this, Activity);
+            AttachCalled.Raise(this, activity);
             base.OnAttach(activity);
         }
 
