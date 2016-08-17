@@ -30,7 +30,7 @@ using MvvmCross.Droid.Shared.Fragments;
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxCachingFragmentCompatActivity")]
-    public class MvxCachingFragmentCompatActivity : MvxFragmentCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentCompatActivity : MvxAppCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
