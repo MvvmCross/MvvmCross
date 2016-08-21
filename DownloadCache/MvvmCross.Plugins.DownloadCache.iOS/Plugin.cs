@@ -33,10 +33,8 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
         {
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(CreateHttpFileDownloader);
 
-            var fileDownloadCache = CreateFileDownloadCache();
-
-            Mvx.RegisterSingleton<IMvxFileDownloadCache>(fileDownloadCache);
-            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache(fileDownloadCache));
+            Mvx.RegisterSingleton<IMvxFileDownloadCache>(CreateFileDownloadCache);
+            Mvx.RegisterSingleton<IMvxImageCache<UIImage>>(CreateCache);
             Mvx.RegisterType<IMvxImageHelper<UIImage>, MvxDynamicImageHelper<UIImage>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<UIImage>>(() => new MvxIosLocalFileImageLoader());
         }
@@ -47,9 +45,10 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
             return new MvxHttpFileDownloader(configuration.MaxConcurrentDownloads);
         }
 
-        private MvxImageCache<UIImage> CreateCache(IMvxFileDownloadCache fileDownloadCache)
+        private MvxImageCache<UIImage> CreateCache()
         {
             var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
+            var fileDownloadCache = Mvx.Resolve<IMvxFileDownloadCache>();
             var fileCache = new MvxImageCache<UIImage>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
             return fileCache;
         }
