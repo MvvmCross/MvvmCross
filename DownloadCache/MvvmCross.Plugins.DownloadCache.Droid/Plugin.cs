@@ -33,10 +33,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         {
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());
 
-            var fileDownloadCache = CreateFileDownloadCache();
-
-            Mvx.RegisterSingleton<IMvxFileDownloadCache>(fileDownloadCache);
-            Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(() => CreateCache(fileDownloadCache));
+            Mvx.RegisterSingleton<IMvxFileDownloadCache>(CreateFileDownloadCache);
+            Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(CreateCache);
             Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(() => new MvxAndroidLocalFileImageLoader());
         }
@@ -58,11 +56,11 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             return fileDownloadCache;
         }
 
-        private MvxImageCache<Bitmap> CreateCache(IMvxFileDownloadCache fileDownloadCache)
+        private MvxImageCache<Bitmap> CreateCache()
         {
             var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
 
-
+            var fileDownloadCache = Mvx.Resolve<IMvxFileDownloadCache>();
             var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
             return fileCache;
         }
