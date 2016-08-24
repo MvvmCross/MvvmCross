@@ -48,7 +48,7 @@ namespace MvvmCross.Plugins.Json
 
         public T DeserializeObject<T>(Stream stream)
         {
-            var serializer = new JsonSerializer();
+			var serializer = JsonSerializer.Create(Settings);
 
             using (var sr = new StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(sr))
