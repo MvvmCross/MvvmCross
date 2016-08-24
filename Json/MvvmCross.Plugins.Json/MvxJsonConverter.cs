@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using MvvmCross.Platform.Platform;
+using Newtonsoft.Json;
 
 namespace MvvmCross.Plugins.Json
 {
