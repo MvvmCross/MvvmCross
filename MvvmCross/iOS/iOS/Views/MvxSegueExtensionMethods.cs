@@ -42,7 +42,7 @@
 
         private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController self, UIStoryboardSegue segue, IDictionary<string, string> parameterValues)
         {
-            self.ViewModelRequestForSegueImpl(segue, new MvxBundle(parameterValues.ToSimplePropertyDictionary()));
+            self.ViewModelRequestForSegueImpl(segue, new MvxBundle(parameterValues));
         }
 
         private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, UIStoryboardSegue segue, IMvxBundle parameterBundle = null)
