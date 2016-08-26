@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accelerometer", "Accelerometer", "{D9F520C0-4C25-465B-9C16-CADDDE3E72B8}"
 EndProject
@@ -296,8 +296,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResxLocalization", "ResxLocalization\MvvmCross.Plugins.ResxLocalization\MvvmCross.Plugins.ResxLocalization.csproj", "{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.WebBrowser.Wpf", "WebBrowser\MvvmCross.Plugins.WebBrowser.Wpf\MvvmCross.Plugins.WebBrowser.Wpf.csproj", "{3BD0462A-71C0-4240-A780-0C0BD284A0D5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Sqlite.WindowsPhone", "SQLite-PCL\MvvmCross.Plugins.Sqlite.WindowsPhone\MvvmCross.Plugins.Sqlite.WindowsPhone.csproj", "{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.Location.Fused.Droid", "Location\MvvmCross.Plugins.Location.Fused.Droid\MvvmCross.Plugins.Location.Fused.Droid.csproj", "{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}"
 EndProject
@@ -2267,22 +2265,6 @@ Global
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5}.Release|x64.Build.0 = Release|Any CPU
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5}.Release|x86.Build.0 = Release|Any CPU
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|ARM.ActiveCfg = Debug|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|ARM.Build.0 = Debug|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|x64.Build.0 = Debug|Any CPU
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|x86.ActiveCfg = Debug|x86
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Debug|x86.Build.0 = Debug|x86
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|Any CPU.ActiveCfg = Release|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|Any CPU.Build.0 = Release|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|ARM.ActiveCfg = Release|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|ARM.Build.0 = Release|ARM
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|x64.ActiveCfg = Release|x86
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|x64.Build.0 = Release|x86
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|x86.ActiveCfg = Release|x86
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7}.Release|x86.Build.0 = Release|x86
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -2442,7 +2424,6 @@ Global
 		{19B4DBB9-F476-433E-9DD2-37DEFE2CECA6} = {9B45C8EC-18B9-4A88-950E-8D8FF8FAA1DA}
 		{8AE35C8E-CC76-4E4C-98F8-CA68FBCB550B} = {8D6F4620-D8BD-4E14-B698-4998138EEA32}
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5} = {E7C40E91-1D44-4CE7-A137-3C444738E94F}
-		{E7CC2E25-7F05-42BC-9FF6-34A9A28D02C7} = {9B45C8EC-18B9-4A88-950E-8D8FF8FAA1DA}
 		{6F1EEC6C-49B6-4710-AD52-8EBAEBBFEB85} = {B5BE527E-B554-4A0F-9627-62E0F2DD8889}
 		{0B08507A-DA49-4069-B8CF-0FB0B7895B21} = {EB7A7EA9-995D-44EC-A4C9-7936BD6DF759}
 	EndGlobalSection
