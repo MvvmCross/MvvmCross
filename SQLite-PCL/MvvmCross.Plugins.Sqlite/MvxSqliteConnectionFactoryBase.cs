@@ -1,51 +1,45 @@
-﻿using SQLite.Net;
-using SQLite.Net.Async;
-using SQLite.Net.Interop;
+﻿using SQLite;
 
 namespace MvvmCross.Plugins.Sqlite
 {
     public abstract class MvxSqliteConnectionFactoryBase : IMvxSqliteConnectionFactory
     {
-        public abstract ISQLitePlatform CurrentPlattform { get; }
-
         public abstract string GetPlattformDatabasePath(string databaseName);
 
-        protected SQLiteConnectionString GetConnectionString(SqLiteConfig config, bool appendPlatformPath)
+        protected string GetConnectionString(SqLiteConfig config, bool prefixPlatformPath = true)
         {
-            var path = appendPlatformPath ? GetPlattformDatabasePath(config.DatabaseName) : config.DatabaseName;
-            return new SQLiteConnectionString(path, config.StoreDateTimeAsTicks, config.BlobSerializer, config.ContractResolver, config.OpenFlags);
+            var path = prefixPlatformPath ? GetPlattformDatabasePath(config.DatabaseName) : config.DatabaseName;
+            return path;
         }
 
-        public SQLiteConnection GetConnection(string databaseName, bool appendPlatformPath = true)
+        public SQLiteConnection GetConnection(string databaseName, bool prefixPlatformPath = true)
         {
-            return GetConnection(new SqLiteConfig(databaseName), appendPlatformPath);
+            var config = new SqLiteConfig(databaseName);
+            var databasePath = GetConnectionString(config, prefixPlatformPath);
+
+            return new SQLiteConnection(databasePath, config.OpenFlags, config.StoreDateTimeAsTicks);
         }
 
-        public SQLiteConnection GetConnection(SqLiteConfig config, bool appendPlatformPath = true)
+        public SQLiteConnection GetConnection(SqLiteConfig config, bool prefixPlatformPath = true)
         {
-            var connectionString = GetConnectionString(config, appendPlatformPath);
-            return new SQLiteConnection(CurrentPlattform, connectionString.DatabasePath, connectionString.StoreDateTimeAsTicks, connectionString.Serializer);
+            var databasePath = GetConnectionString(config, prefixPlatformPath);
+
+            return new SQLiteConnection(databasePath, config.OpenFlags, config.StoreDateTimeAsTicks);
         }
 
-        public SQLiteConnectionWithLock GetConnectionWithLock(string databaseName, bool appendPlatformPath = true)
+        public SQLiteAsyncConnection GetAsyncConnection(string databaseName, bool prefixPlatformPath = true)
         {
-            return GetConnectionWithLock(new SqLiteConfig(databaseName), appendPlatformPath);
+            var config = new SqLiteConfig(databaseName);
+            var databasePath = GetConnectionString(config, prefixPlatformPath);
+
+            return new SQLiteAsyncConnection(databasePath, config.OpenFlags, config.StoreDateTimeAsTicks);
         }
 
-        public SQLiteConnectionWithLock GetConnectionWithLock(SqLiteConfig config, bool appendPlatformPath = true)
+        public SQLiteAsyncConnection GetAsyncConnection(SqLiteConfig config, bool prefixPlatformPath = true)
         {
-            var connectionString = GetConnectionString(config, appendPlatformPath);
-            return new SQLiteConnectionWithLock(CurrentPlattform, connectionString);
-        }
+            var databasePath = GetConnectionString(config, prefixPlatformPath);
 
-        public SQLiteAsyncConnection GetAsyncConnection(string databaseName, bool appendPlatformPath = true)
-        {
-            return new SQLiteAsyncConnection(() => GetConnectionWithLock(databaseName, appendPlatformPath));
-        }
-
-        public SQLiteAsyncConnection GetAsyncConnection(SqLiteConfig config, bool appendPlatformPath = true)
-        {
-            return new SQLiteAsyncConnection(() => GetConnectionWithLock(config, appendPlatformPath));
+            return new SQLiteAsyncConnection(databasePath, config.OpenFlags, config.StoreDateTimeAsTicks);
         }
     }
 }
