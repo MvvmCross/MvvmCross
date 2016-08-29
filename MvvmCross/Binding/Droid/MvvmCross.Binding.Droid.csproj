@@ -144,6 +144,7 @@
     <Compile Include="Views\MvxRelativeLayout.cs" />
     <Compile Include="Views\MvxFrameLayout.cs" />
     <Compile Include="Views\MvxTableLayout.cs" />
+    <Compile Include="Target\MvxImageViewResourceNameTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">

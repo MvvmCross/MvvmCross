@@ -111,6 +111,8 @@ namespace MvvmCross.Binding.Droid
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableName",
                                                             imageView => new MvxImageViewDrawableNameTargetBinding(imageView));
+			registry.RegisterCustomBindingFactory<ImageView>("ResourceName",
+															imageView => new MvxImageViewResourceNameTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
                                                              imageView => new MvxImageViewImageTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
