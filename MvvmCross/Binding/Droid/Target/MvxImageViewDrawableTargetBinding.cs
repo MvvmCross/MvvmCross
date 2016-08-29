@@ -7,54 +7,57 @@
 
 using System;
 using Android.Graphics.Drawables;
-using Android.Widget;
 using Android.OS;
+using Android.Widget;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Target
 {
 	public class MvxImageViewDrawableTargetBinding
-        : MvxAndroidTargetBinding
-    {
-        protected ImageView ImageView => (ImageView)Target;
+		: MvxAndroidTargetBinding
+	{
+		protected ImageView ImageView => (ImageView)Target;
 
-        public MvxImageViewDrawableTargetBinding(ImageView imageView)
-            : base(imageView)
-        {
-        }
+		public MvxImageViewDrawableTargetBinding(ImageView imageView)
+			: base(imageView)
+		{
+		}
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+		public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(int);
+		public override Type TargetType => typeof(int);
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            var imageView = (ImageView)target;
+		protected override void SetValueImpl(object target, object value)
+		{
+			var imageView = (ImageView)target;
 
-            if (!(value is int))
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                    "Value was not a valid Drawable");
-                imageView.SetImageDrawable(null);
-                return;
-            }
+			if(!(value is int))
+			{
+				MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+					"Value was not a valid Drawable");
+				imageView.SetImageDrawable(null);
+				return;
+			}
 
-            var intValue = (int)value;
+			var intValue = (int)value;
 
-            if (intValue == 0)
-                imageView.SetImageDrawable(null);
-            else
-            {
-                var context = imageView.Context;
-				Drawable drawable;
-				if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-					drawable = context?.Resources?.GetDrawable(intValue, context.Theme);
-				else
-					drawable = context?.Resources?.GetDrawable(intValue);
+			if(intValue == 0)
+				imageView.SetImageDrawable(null);
+			else
+				this.SetImage(imageView, intValue);
+		}
 
-				if (drawable != null)
-					imageView.SetImageDrawable(drawable);
-            }
-        }
-    }
+		protected virtual void SetImage(ImageView imageView, int id)
+		{
+			var context = imageView.Context;
+			Drawable drawable;
+			if(Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+				drawable = context?.Resources?.GetDrawable(id, context.Theme);
+			else
+				drawable = context?.Resources?.GetDrawable(id);
+
+			if(drawable != null)
+				imageView.SetImageDrawable(drawable);
+		}
+	}
 }
