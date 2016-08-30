@@ -9,6 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,21 +43,36 @@ namespace MvvmCross.Plugins.Network.Rest
 
         public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
+            var decodedResponse = new MvxDecodedRestResponse<T>();
 
-            using (var textReader = new StreamReader(streamResponse.Stream))
+            try
             {
-                var text = textReader.ReadToEnd();
-                var result = JsonConverterProvider().DeserializeObject<T>(text);
-                var decodedResponse = new MvxDecodedRestResponse<T>
+                var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
+
+                if(streamResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    CookieCollection = streamResponse.CookieCollection,
-                    Result = result,
-                    StatusCode = streamResponse.StatusCode,
-                    Tag = streamResponse.Tag
-                };
-                return decodedResponse;
+                    decodedResponse.StatusCode = HttpStatusCode.BadRequest;
+                }
+                else
+                {
+                    using (var textReader = new StreamReader(streamResponse.Stream))
+                    {
+                        var text = textReader.ReadToEnd();
+                        var result = JsonConverterProvider().DeserializeObject<T>(text);
+
+                        decodedResponse.CookieCollection = streamResponse.CookieCollection;
+                        decodedResponse.Result = result;
+                        decodedResponse.StatusCode = streamResponse.StatusCode;
+                        decodedResponse.Tag = streamResponse.Tag;
+                    }
+                }
             }
+            catch
+            {
+                decodedResponse.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            return decodedResponse;
         }
 
         public MvxJsonRestClient()

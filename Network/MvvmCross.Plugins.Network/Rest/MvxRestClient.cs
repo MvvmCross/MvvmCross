@@ -113,9 +113,10 @@ namespace MvvmCross.Plugins.Network.Rest
             }))
             {
                 Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response));
+                Action<Exception> processExceptionResponse = (ex) => ProcessExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
                 if (restRequest.NeedsRequestStream)
                 {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse);
+                    ProcessRequestThen(restRequest, httpRequest, processResponse, processExceptionResponse);
                 }
                 else
                 {
@@ -139,9 +140,10 @@ namespace MvvmCross.Plugins.Network.Rest
             }))
             {
                 Action processResponse = () => ProcessResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response));
+                Action<Exception> processExceptionResponse = (ex) => ProcessExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
                 if (restRequest.NeedsRequestStream)
                 {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse);
+                    ProcessRequestThen(restRequest, httpRequest, processResponse, processExceptionResponse);
                 }
                 else
                 {
@@ -277,6 +279,28 @@ namespace MvvmCross.Plugins.Network.Rest
                 };
                 successAction?.Invoke(restResponse);
             }, null);
+        }
+
+        protected virtual void ProcessExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxStreamRestResponse> continueAction)
+        {
+            var restResponse = new MvxStreamRestResponse
+            {
+                Tag = restRequest.Tag,
+                StatusCode = HttpStatusCode.BadRequest
+            };
+
+            continueAction?.Invoke(restResponse);
+        }
+
+        protected virtual void ProcessExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxRestResponse> continueAction)
+        {
+            var restResponse = new MvxRestResponse
+            {
+                Tag = restRequest.Tag,
+                StatusCode = HttpStatusCode.BadRequest
+            };
+
+            continueAction?.Invoke(restResponse);
         }
 
         protected virtual void ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action continueAction)
