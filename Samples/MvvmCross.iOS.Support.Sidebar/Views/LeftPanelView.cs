@@ -1,13 +1,13 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
-    using MvvmCross.iOS.Support.SidePanels;
-    using MvvmCross.iOS.Support.XamarinSidebar;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
-    using Foundation;
-    using UIKit;
     using CoreGraphics;
+    using Foundation;
+    using SidePanels;
+    using UIKit;
+
     [Register("LeftPanelView")]
     [MvxPanelPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
     public class LeftPanelView : BaseViewController<LeftPanelViewModel>

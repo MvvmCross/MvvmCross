@@ -1,11 +1,9 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-using UIKit;
-using MvvmCross.iOS.Support.SidePanels;
-using SidebarNavigation;
-
-namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
+    using UIKit;
+    using SidePanels;
+    using SidebarNavigation;
+
     public class MvxSidebarActivePanelPresentationHint : MvxPanelPresentationHint
     {
         public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)

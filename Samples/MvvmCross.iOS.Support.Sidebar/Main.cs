@@ -1,8 +1,8 @@
-﻿using UIKit;
-
-namespace MvvmCross.iOS.Support.Sidebar
+﻿namespace MvvmCross.iOS.Support.Sidebar
 {
-	public class Application
+    using UIKit;
+
+    public class Application
 	{
 		// This is the main entry point of the application.
 		static void Main (string[] args)

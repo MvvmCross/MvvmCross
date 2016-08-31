@@ -1,14 +1,14 @@
-﻿using Foundation;
-using UIKit;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Platform;
-
-namespace MvvmCross.iOS.Support.Sidebar
+﻿namespace MvvmCross.iOS.Support.Sidebar
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the
-	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
-	[Register ("AppDelegate")]
+    using Foundation;
+    using UIKit;
+    using MvvmCross.Platform;
+    using MvvmCross.Core.ViewModels;
+    using Platform;
+
+    // The UIApplicationDelegate for the application. This class is responsible for launching the
+    // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
+    [Register ("AppDelegate")]
 	public class AppDelegate : MvxApplicationDelegate
 	{
 		// class-level declarations
@@ -65,5 +65,3 @@ namespace MvvmCross.iOS.Support.Sidebar
 		}
 	}
 }
-
-

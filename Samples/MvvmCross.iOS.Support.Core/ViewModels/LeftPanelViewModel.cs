@@ -1,17 +1,17 @@
-﻿using MvvmCross.Core.ViewModels;
-
-namespace MvvmCross.iOS.Support.Core.ViewModels
+﻿namespace MvvmCross.iOS.Support.Core.ViewModels
 {
+    using MvvmCross.Core.ViewModels;
+
     public class LeftPanelViewModel : BaseViewModel
     {      
-        private MvxCommand showExampleMenuItemCommand;
+        private MvxCommand _showExampleMenuItemCommand;
 
         public MvxCommand ShowExampleMenuItemCommand
         {
             get
             {
-                showExampleMenuItemCommand = showExampleMenuItemCommand ?? new MvxCommand(DoShowExampleMenuItem);
-                return showExampleMenuItemCommand;
+                _showExampleMenuItemCommand = _showExampleMenuItemCommand ?? new MvxCommand(DoShowExampleMenuItem);
+                return _showExampleMenuItemCommand;
             }
         }
 
@@ -20,14 +20,14 @@ namespace MvvmCross.iOS.Support.Core.ViewModels
             ShowViewModel<ExampleMenuItemViewModel>();
         }
 
-        private MvxCommand showMasterViewCommand;
+        private MvxCommand _showMasterViewCommand;
 
         public MvxCommand ShowMasterViewCommand
         {
             get
             {
-                showMasterViewCommand = showMasterViewCommand ?? new MvxCommand(ShowMasterView);
-                return showMasterViewCommand;
+                _showMasterViewCommand = _showMasterViewCommand ?? new MvxCommand(ShowMasterView);
+                return _showMasterViewCommand;
             }
         }
 

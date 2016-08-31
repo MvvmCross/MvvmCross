@@ -1,9 +1,9 @@
-using System;
-using System.Diagnostics;
-using MvvmCross.Platform.Platform;
-
 namespace MvvmCross.iOS.Support.Sidebar
 {
+    using System;
+    using System.Diagnostics;
+    using MvvmCross.Platform.Platform;
+
     public class DebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

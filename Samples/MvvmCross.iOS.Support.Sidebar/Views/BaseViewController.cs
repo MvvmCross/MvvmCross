@@ -1,7 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Views;
+    using iOS.Views;
     using UIKit;
 
     public class BaseViewController<TViewModel> : MvxViewController<TViewModel> where TViewModel : class, IMvxViewModel

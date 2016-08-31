@@ -1,7 +1,6 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-
-namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.iOS.Views
 {
+    using SidePanels;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
