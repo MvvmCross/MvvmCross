@@ -40,8 +40,10 @@ namespace MvvmCross.Binding.Combiners
                 return null;
             if (value is long)
                 return typeof(long);
-            if (value is double)
-                return typeof(double);
+			if (value is double)
+				return typeof(double);
+			if (value is decimal)
+				return typeof(decimal);
             return typeof(object);
         }
 
@@ -85,17 +87,25 @@ namespace MvvmCross.Binding.Combiners
         {
             this._combinerActions = new Dictionary<TypeTuple, CombinerFunc<object, object>>();
             this.AddSingle<object, object>(this.CombineObjectAndObject);
-            this.AddSingle<double, object>(this.CombineDoubleAndObject);
-            this.AddSingle<object, double>(this.CombineObjectAndDouble);
-            this.AddSingle<double, double>(this.CombineDoubleAndDouble);
-            this.AddSingle<long, object>(this.CombineLongAndObject);
-            this.AddSingle<object, long>(this.CombineObjectAndLong);
-            this.AddSingle<long, double>(this.CombineLongAndDouble);
-            this.AddSingle<double, long>(this.CombineDoubleAndLong);
-            this.AddSingle<long, long>(this.CombineLongAndLong);
+			this.AddSingle<object, double>(this.CombineObjectAndDouble);
+			this.AddSingle<object, long>(this.CombineObjectAndLong);
+			this.AddSingle<object, decimal>(this.CombineObjectAndDecimal);
+			this.AddSingle<double, object>(this.CombineDoubleAndObject);
+			this.AddSingle<double, double>(this.CombineDoubleAndDouble);
+			this.AddSingle<double, long>(this.CombineDoubleAndLong);
+			this.AddSingle<double, decimal>(this.CombineDoubleAndDecimal);
+			this.AddSingle<long, object>(this.CombineLongAndObject);
+			this.AddSingle<long, double>(this.CombineLongAndDouble);
+			this.AddSingle<long, long>(this.CombineLongAndLong);
+			this.AddSingle<long, decimal>(this.CombineLongAndDecimal);
+			this.AddSingle<decimal, object>(this.CombineDecimalAndObject);
+			this.AddSingle<decimal, double>(this.CombineDecimalAndDouble);
+			this.AddSingle<decimal, long>(this.CombineDecimalAndLong);
+			this.AddSingle<decimal, decimal>(this.CombineDecimalAndDecimal);
             this.AddSingle<object>(this.CombineObjectAndNull, this.CombineNullAndObject);
             this.AddSingle<double>(this.CombineDoubleAndNull, this.CombineNullAndDouble);
-            this.AddSingle<long>(this.CombineLongAndNull, this.CombineNullAndLong);
+			this.AddSingle<long>(this.CombineLongAndNull, this.CombineNullAndLong);
+			this.AddSingle<decimal>(this.CombineDecimalAndNull, this.CombineNullAndDecimal);
             this.AddSingle(this.CombineTwoNulls);
         }
 
@@ -195,13 +205,17 @@ namespace MvvmCross.Binding.Combiners
 
         protected abstract bool CombineObjectAndObject(object object1, object object2, out object value);
 
-        protected abstract bool CombineObjectAndNull(object input1, out object value);
+		protected abstract bool CombineObjectAndDecimal(object input1, decimal input2, out object value);
+
+		protected abstract bool CombineObjectAndNull(object input1, out object value);
 
         protected abstract bool CombineDoubleAndObject(double input1, object input2, out object value);
 
         protected abstract bool CombineDoubleAndDouble(double input1, double input2, out object value);
 
-        protected abstract bool CombineDoubleAndLong(double input1, long input2, out object value);
+		protected abstract bool CombineDoubleAndLong(double input1, long input2, out object value);
+
+		protected abstract bool CombineDoubleAndDecimal(double input1, decimal input2, out object value);
 
         protected abstract bool CombineDoubleAndNull(double input1, out object value);
 
@@ -209,15 +223,29 @@ namespace MvvmCross.Binding.Combiners
 
         protected abstract bool CombineLongAndDouble(long input1, double input2, out object value);
 
-        protected abstract bool CombineLongAndLong(long input1, long input2, out object value);
+		protected abstract bool CombineLongAndLong(long input1, long input2, out object value);
+
+		protected abstract bool CombineLongAndDecimal(long input1, decimal input2, out object value);
 
         protected abstract bool CombineLongAndNull(long input1, out object value);
+
+		protected abstract bool CombineDecimalAndDouble(decimal input1, double input2, out object value);
+
+		protected abstract bool CombineDecimalAndLong(decimal input1, long input2, out object value);
+
+		protected abstract bool CombineDecimalAndObject(decimal object1, object object2, out object value);
+
+		protected abstract bool CombineDecimalAndDecimal(decimal input1, decimal input2, out object value);
+
+		protected abstract bool CombineDecimalAndNull(decimal input1, out object value);
 
         protected abstract bool CombineNullAndObject(object object1, out object value);
 
         protected abstract bool CombineNullAndDouble(double input2, out object value);
 
-        protected abstract bool CombineNullAndLong(long input2, out object value);
+		protected abstract bool CombineNullAndLong(long input2, out object value);
+
+		protected abstract bool CombineNullAndDecimal(decimal input2, out object value);
 
         protected abstract bool CombineTwoNulls(out object value);
     }
