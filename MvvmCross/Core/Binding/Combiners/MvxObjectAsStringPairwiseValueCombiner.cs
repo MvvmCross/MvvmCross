@@ -14,13 +14,17 @@ namespace MvvmCross.Binding.Combiners
 
         protected abstract bool CombineLongAndString(long input1, string input2, out object value);
 
-        protected abstract bool CombineDoubleAndString(double input1, string input2, out object value);
+		protected abstract bool CombineDoubleAndString(double input1, string input2, out object value);
+
+		protected abstract bool CombineDecimalAndString(decimal input1, string input2, out object value);
 
         protected abstract bool CombineNullAndString(string input2, out object value);
 
         protected abstract bool CombineStringAndDouble(string input1, double input2, out object value);
 
-        protected abstract bool CombineStringAndLong(string input1, long input2, out object value);
+		protected abstract bool CombineStringAndLong(string input1, long input2, out object value);
+
+		protected abstract bool CombineStringAndDecimal(string input1, decimal input2, out object value);
 
         protected abstract bool CombineStringAndNull(string input1, out object value);
 
@@ -34,10 +38,15 @@ namespace MvvmCross.Binding.Combiners
             return this.CombineLongAndString(int1, object1.ToString(), out value);
         }
 
-        protected sealed override bool CombineDoubleAndObject(double double1, object object1, out object value)
-        {
-            return this.CombineDoubleAndString(double1, object1.ToString(), out value);
-        }
+		protected sealed override bool CombineDoubleAndObject(double double1, object object1, out object value)
+		{
+			return this.CombineDoubleAndString(double1, object1.ToString(), out value);
+		}
+
+		protected sealed override bool CombineDecimalAndObject(decimal decimal1, object object1, out object value)
+		{
+			return this.CombineDecimalAndString(decimal1, object1.ToString(), out value);
+		}
 
         protected sealed override bool CombineNullAndObject(object object1, out object value)
         {
@@ -49,10 +58,15 @@ namespace MvvmCross.Binding.Combiners
             return this.CombineStringAndDouble(input1.ToString(), input2, out value);
         }
 
-        protected sealed override bool CombineObjectAndLong(object input1, long input2, out object value)
-        {
-            return this.CombineStringAndLong(input1.ToString(), input2, out value);
-        }
+		protected sealed override bool CombineObjectAndLong(object input1, long input2, out object value)
+		{
+			return this.CombineStringAndLong(input1.ToString(), input2, out value);
+		}
+
+		protected sealed override bool CombineObjectAndDecimal(object input1, decimal input2, out object value)
+		{
+			return this.CombineStringAndDecimal(input1.ToString(), input2, out value);
+		}
 
         protected sealed override bool CombineObjectAndNull(object input1, out object value)
         {
