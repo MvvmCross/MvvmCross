@@ -113,7 +113,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }))
             {
                 Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response));
-                Action<Exception> processExceptionResponse = (ex) => ProcessExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
+                Action<Exception> processExceptionResponse = (ex) => ProcessStreamExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
                 if (restRequest.NeedsRequestStream)
                 {
                     ProcessRequestThen(restRequest, httpRequest, processResponse, processExceptionResponse);
@@ -281,11 +281,11 @@ namespace MvvmCross.Plugins.Network.Rest
             }, null);
         }
 
-        protected virtual void ProcessExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxStreamRestResponse> continueAction)
+        protected virtual void ProcessStreamExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxStreamRestResponse> continueAction)
         {
             var restResponse = new MvxStreamRestResponse
             {
-                Tag = restRequest.Tag,
+                Tag = restRequest?.Tag,
                 StatusCode = HttpStatusCode.BadRequest
             };
 
@@ -296,7 +296,7 @@ namespace MvvmCross.Plugins.Network.Rest
         {
             var restResponse = new MvxRestResponse
             {
-                Tag = restRequest.Tag,
+                Tag = restRequest?.Tag,
                 StatusCode = HttpStatusCode.BadRequest
             };
 
