@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Xamar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TabsSample", "TabsSample", "{8A6ADF69-9587-4BA6-BF40-B816A2666D62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.Core", "MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj", "{5FB086C9-CA74-45CC-86CC-8DD523DCE004}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.Core", "Samples\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj", "{5FB086C9-CA74-45CC-86CC-8DD523DCE004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.iOS", "MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.iOS\MvvmCross.iOS.Support.Tabs.iOS.csproj", "{52A40A0D-96BA-4038-B420-C4855AA8619C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.iOS", "Samples\MvvmCross.iOS.Support.Tabs.iOS\MvvmCross.iOS.Support.Tabs.iOS.csproj", "{52A40A0D-96BA-4038-B420-C4855AA8619C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

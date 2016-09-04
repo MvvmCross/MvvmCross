@@ -98,9 +98,6 @@
     <Reference Include="MvvmCross.Platform.iOS">
       <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="MvvmCross.Platform">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.iOS">
       <HintPath>..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
     </Reference>
@@ -124,6 +121,9 @@
     </Reference>
     <Reference Include="Plugin.Settings.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -156,13 +156,13 @@
     <Compile Include="Views\ModalView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvvmCross.iOS.Support.Tabs.Core.csproj">
-      <Project>{5FB086C9-CA74-45CC-86CC-8DD523DCE004}</Project>
-      <Name>MvvmCross.iOS.Support.Tabs.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross.iOS.Support\MvvmCross.iOS.Support.csproj">
       <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
       <Name>MvvmCross.iOS.Support</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj">
+      <Project>{5FB086C9-CA74-45CC-86CC-8DD523DCE004}</Project>
+      <Name>MvvmCross.iOS.Support.Tabs.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

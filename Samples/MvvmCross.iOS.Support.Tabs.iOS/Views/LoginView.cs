@@ -1,10 +1,10 @@
 ﻿using System;
 using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Support.Tabs.Core.ViewModels;
 using UIKit;
 using Cirrious.FluentLayouts.Touch;
 using MvvmCross.iOS.Support.Presenters;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.Tabs.Core.ViewModels;
 
 namespace MvvmCross.iOS.Support.Tabs.iOS.Views
 {
