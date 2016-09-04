@@ -31,7 +31,8 @@ namespace MvvmCross.iOS.Support.Tabs.iOS.Views
 			View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
 			View.AddConstraints(
-				_lblSample.WithSameCenterX(View),
+				_lblSample.AtLeftOf(View),
+				_lblSample.AtRightOf(View),
 				_lblSample.WithSameCenterY(View)
 			);
 		}
