@@ -95,35 +95,35 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="MvvmCross.Platform.iOS">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.iOS">
-      <HintPath>..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Core">
-      <HintPath>..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Binding.iOS">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Binding">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Localization">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.FluentLayouts.Touch">
-      <HintPath>..\..\packages\Cirrious.FluentLayout.2.5.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Settings">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+      <HintPath>..\..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+      <HintPath>..\..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.iOS">
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Platform">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.iOS">
+      <HintPath>..\..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Core">
+      <HintPath>..\..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding.iOS">
+      <HintPath>..\..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding">
+      <HintPath>..\..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Localization">
+      <HintPath>..\..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.FluentLayouts.Touch">
+      <HintPath>..\..\..\packages\Cirrious.FluentLayout.2.5.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +146,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\MainView.cs" />
     <Compile Include="Views\Tab1View.cs" />
@@ -154,16 +153,7 @@
     <Compile Include="Views\TabChildView.cs" />
     <Compile Include="Views\RegisterView.cs" />
     <Compile Include="Views\ModalView.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.iOS.Support\MvvmCross.iOS.Support.csproj">
-      <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
-      <Name>MvvmCross.iOS.Support</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj">
-      <Project>{5FB086C9-CA74-45CC-86CC-8DD523DCE004}</Project>
-      <Name>MvvmCross.iOS.Support.Tabs.Core</Name>
-    </ProjectReference>
+    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_tabbar_menu.png" />
@@ -172,6 +162,16 @@
     <BundleResource Include="Resources\home.png" />
     <BundleResource Include="Resources\home%402x.png" />
     <BundleResource Include="Resources\home%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.iOS.Support\MvvmCross.iOS.Support.csproj">
+      <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
+      <Name>MvvmCross.iOS.Support</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj">
+      <Project>{5FB086C9-CA74-45CC-86CC-8DD523DCE004}</Project>
+      <Name>MvvmCross.iOS.Support.Tabs.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

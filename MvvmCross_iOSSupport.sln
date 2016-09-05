@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support", "Mv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SideMenuSample", "SideMenuSample", "{19AB8DF5-4F81-4E53-9CB7-FAFC410E98C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.iOS", "Samples\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.iOS.csproj", "{4B3F7784-069E-47EE-903A-25542CCF03C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.iOS", "Samples\SideMenuSample\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.iOS.csproj", "{4B3F7784-069E-47EE-903A-25542CCF03C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Core", "Samples\MvvmCross.iOS.Support.Core\MvvmCross.iOS.Support.Core.csproj", "{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Core", "Samples\SideMenuSample\MvvmCross.iOS.Support.Core\MvvmCross.iOS.Support.Core.csproj", "{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Sidebar", "Samples\MvvmCross.iOS.Support.Sidebar\MvvmCross.iOS.Support.Sidebar.csproj", "{8EADF357-81D7-426D-A64E-5EF83E635737}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Sidebar", "Samples\SideMenuSample\MvvmCross.iOS.Support.Sidebar\MvvmCross.iOS.Support.Sidebar.csproj", "{8EADF357-81D7-426D-A64E-5EF83E635737}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.JASidePanels", "MvvmCross.iOS.Support.JASidePanels\MvvmCross.iOS.Support.JASidePanels.csproj", "{0E866698-7054-4786-A43F-E6E0E99D90A1}"
 EndProject
@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Xamar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TabsSample", "TabsSample", "{8A6ADF69-9587-4BA6-BF40-B816A2666D62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.Core", "Samples\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj", "{5FB086C9-CA74-45CC-86CC-8DD523DCE004}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.Core", "Samples\TabsSample\MvvmCross.iOS.Support.Tabs.Core\MvvmCross.iOS.Support.Tabs.Core.csproj", "{5FB086C9-CA74-45CC-86CC-8DD523DCE004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.iOS", "Samples\MvvmCross.iOS.Support.Tabs.iOS\MvvmCross.iOS.Support.Tabs.iOS.csproj", "{52A40A0D-96BA-4038-B420-C4855AA8619C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Tabs.iOS", "Samples\TabsSample\MvvmCross.iOS.Support.Tabs.iOS\MvvmCross.iOS.Support.Tabs.iOS.csproj", "{52A40A0D-96BA-4038-B420-C4855AA8619C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
