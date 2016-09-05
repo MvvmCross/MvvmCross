@@ -258,6 +258,7 @@ namespace MvvmCross.Droid.Support.V4
 				//Otherwise, create one and cache it
 				fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
 					bundle) as IMvxFragmentView;
+                currentFragment = fragInfo.CachedFragment as Fragment;
 				OnFragmentCreated(fragInfo, ft);
 			}
 
