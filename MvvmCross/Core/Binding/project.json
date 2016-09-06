@@ -5,6 +5,6 @@
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1"
   },
   "frameworks": {
-    "netstandard1.1": {}
+    "netstandard1.4": {}
   }
 }
