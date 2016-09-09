@@ -1,14 +1,14 @@
-﻿using SidebarNavigation;
-using UIKit;
-using MvvmCross.iOS.Support.SidePanels;
-
-namespace MvvmCross.iOS.Support.XamarinSidebar
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar
 {
+    using SidebarNavigation;
+    using UIKit;
+    using SidePanels;
+
     public class MvxSidebarPanelController : UIViewController, IMvxSideMenu
     {
         private readonly UIViewController _subRootViewController;
 
-		public bool StatusBarHidden { get; set; } = false;
+		public bool StatusBarHidden { get; set; }
 		public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
 
         public MvxSidebarPanelController(UINavigationController navigationController)
@@ -17,7 +17,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             NavigationController = navigationController;
         }
 
-        public UINavigationController NavigationController { get; private set; }
+        public new UINavigationController NavigationController { get; private set; }
         public SidebarController LeftSidebarController { get; private set; }
         public SidebarController RightSidebarController { get; private set; }
 

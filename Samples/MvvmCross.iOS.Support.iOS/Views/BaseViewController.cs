@@ -1,7 +1,6 @@
 ﻿namespace MvvmCross.iOS.Support.iOS.Views
 {
     using MvvmCross.Core.ViewModels;
-    using Core.ViewModels;
     using MvvmCross.iOS.Views;
     using UIKit;
 

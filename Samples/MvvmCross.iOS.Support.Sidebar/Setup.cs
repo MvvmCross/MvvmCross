@@ -1,12 +1,7 @@
-using MvvmCross.iOS.Support.XamarinSidebar;
-
-
 namespace MvvmCross.iOS.Support.Sidebar
 {
-    using MvvmCross.Platform;
-    using MvvmCross.iOS.Platform;
-    using MvvmCross.iOS.Views.Presenters;
-    using MvvmCross.iOS.Support.SidePanels;
+    using Platform;
+    using iOS.Views.Presenters;
     using MvvmCross.Platform.Platform;
     using UIKit;
     using MvvmCross.Core.ViewModels;

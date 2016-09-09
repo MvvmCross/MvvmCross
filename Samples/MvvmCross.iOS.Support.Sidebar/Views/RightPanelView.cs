@@ -1,11 +1,10 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-
-namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using SidePanels;
     using UIKit;
 
     [Register("RightPanelView")]

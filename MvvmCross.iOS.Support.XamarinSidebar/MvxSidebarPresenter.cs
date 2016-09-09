@@ -1,15 +1,15 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using System.Linq;
-using UIKit;
-using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.iOS.Support.XamarinSidebar.Hints;
-
-namespace MvvmCross.iOS.Support.XamarinSidebar
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar
 {
+    using Core.ViewModels;
+    using iOS.Views;
+    using iOS.Views.Presenters;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using System.Linq;
+    using UIKit;
+    using SidePanels;
+    using Hints;
+
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {
 		protected virtual UINavigationController ParentRootViewController { get; set; }
@@ -52,9 +52,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             if (viewController == null)
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
 
-            if (this.RootViewController == null)
+            if (RootViewController == null)
             {
-                this.InitRootViewController();
+                InitRootViewController();
             }
 
             var viewPresentationAttribute = GetViewPresentationAttribute(view);
@@ -104,9 +104,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             foreach (var view in Window.Subviews)
                 view.RemoveFromSuperview();
 
-            this.MasterNavigationController = new UINavigationController();
+            MasterNavigationController = new UINavigationController();
 
-            this.OnMasterNavigationControllerCreated();
+            OnMasterNavigationControllerCreated();
 
 			RootViewController = new MvxSidebarPanelController(MasterNavigationController);
 			ParentRootViewController = new UINavigationController(RootViewController);

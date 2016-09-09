@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
-    using MvvmCross.Platform;
-    using MvvmCross.iOS.Support.SidePanels;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.Platform;
+    using SidePanels;
     using UIKit;
 
     [Register("MasterView")]
@@ -62,8 +62,6 @@
                 toggleMenuButton.WithSameCenterX(View)
 
                 );
-
-            ViewModel.ShowMenu();
         }
     }
 }

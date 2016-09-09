@@ -1,14 +1,14 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform;
-
-namespace MvvmCross.iOS.Support.JASidePanels
+﻿namespace MvvmCross.iOS.Support.JASidePanels
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using SidePanels;
+    using iOS.Views;
+    using iOS.Views.Presenters;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform;
+
+    using Core.ViewModels;
+    using Core.Views;
     using System.Linq;
     using UIKit;
 

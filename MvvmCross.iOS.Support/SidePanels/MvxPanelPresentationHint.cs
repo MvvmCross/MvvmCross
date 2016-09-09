@@ -1,8 +1,7 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-
-namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
+    using Core.ViewModels;
+
     public abstract class MvxPanelPresentationHint : MvxPresentationHint
     {
         protected readonly MvxPanelEnum Panel;
@@ -15,4 +14,3 @@ namespace MvvmCross.iOS.Support.SidePanels
         public abstract bool Navigate();
     }
 }
-
