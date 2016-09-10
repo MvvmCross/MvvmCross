@@ -57,8 +57,12 @@ This package contains the 'Email' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Email.WindowsStore" />
 		<file src="..\Email\MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
 			target="src\MvvmCross.Plugins.Email.WindowsPhone" />
+		<file src="..\Email\MvvmCross.Plugins.Email.WindowsPhoneStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.WindowsPhoneStore" />
 		<file src="..\Email\MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Plugins.Email.WindowsCommon" />
+		<file src="..\Email\MvvmCross.Plugins.Email.WindowsUWP\**\*.cs" 
+			target="src\MvvmCross.Plugins.Email.WindowsUWP" />
 		<file src="..\Email\MvvmCross.Plugins.Email.Droid\**\*.cs" 	
 			target="src\MvvmCross.Plugins.Email.Droid" />
 		<file src="..\Email\MvvmCross.Plugins.Email.iOS\**\*.cs" 
@@ -85,14 +89,25 @@ This package contains the 'Email' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Email.WindowsPhone.*" target="lib\wp8" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
+		<!-- UAP -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.Email.WindowsUWP.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\EmailPluginBootstrap.cs.pp" />
+		
+		<!-- wpa -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsPhoneStore\MvvmCross.Plugins.Email.WindowsPhoneStore.*" target="lib\wpa81" />
+		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\EmailPluginBootstrap.cs.pp" />
+
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\win81" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\win81\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
+		<!-- Replaced with custom WPA library
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\wpa81" />
-		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\EmailPluginBootstrap.cs.pp" />
+		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\EmailPluginBootstrap.cs.pp" /> -->
 
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\portable-win81+wpa81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Email.WindowsCommon.*" target="lib\portable-win81+wpa81" />
