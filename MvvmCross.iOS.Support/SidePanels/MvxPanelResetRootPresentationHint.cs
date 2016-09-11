@@ -1,8 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
-using UIKit;
-
-namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
+    using Core.ViewModels;
+
     /// <summary>
     /// The Panel reset hint
     /// </summary>
@@ -22,6 +21,5 @@ namespace MvvmCross.iOS.Support.SidePanels
         {
             Panel = panel;
         }
-
     }
 }

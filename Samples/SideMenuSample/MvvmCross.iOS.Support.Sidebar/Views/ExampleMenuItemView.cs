@@ -1,16 +1,12 @@
-﻿using Cirrious.FluentLayouts.Touch;
-using Foundation;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.iOS.Support.Core.ViewModels;
-using MvvmCross.iOS.Support.iOS.Views;
-using MvvmCross.iOS.Support.SidePanels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UIKit;
-
-namespace MvvmCross.iOS.Support.Sidebar.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
+    using Cirrious.FluentLayouts.Touch;
+    using Foundation;
+    using Binding.BindingContext;
+    using Core.ViewModels;
+    using SidePanels;
+    using UIKit;
+
     [Register("ExampleMenuItemView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
     public class ExampleMenuItemView : BaseViewController<ExampleMenuItemViewModel>
