@@ -1,13 +1,12 @@
-﻿using System;
-using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.Core.ViewModels;
-using UIKit;
-
-namespace MvvmCross.iOS.Support
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
-	public class MvxPanelPopToRootPresentationHint: MvxPresentationHint
+    using Core.ViewModels;
+    using UIKit;
+
+    public class MvxPanelPopToRootPresentationHint: MvxPresentationHint
 	{
 		public UIViewController ViewController { get; set; }
+
 		/// <summary>
 		/// The panel
 		/// </summary>
@@ -22,15 +21,13 @@ namespace MvvmCross.iOS.Support
 			Panel = panel;
 		}
 
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
-		/// </summary>
-		/// <param name="panel">The panel.</param>
-		public MvxPanelPopToRootPresentationHint(UIViewController view)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
+        /// </summary>
+        /// <param name="view">The view.</param>
+        public MvxPanelPopToRootPresentationHint(UIViewController view)
 		{
 			ViewController = view;
 		}
 	}
 }
-

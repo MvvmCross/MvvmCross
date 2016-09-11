@@ -1,16 +1,29 @@
 ﻿namespace MvvmCross.iOS.Support.Views
 {
-    using Core.ViewModels;
-    using CoreGraphics;
-    using Foundation;
-    using iOS.Views;
-    using UIKit;
+	using System;
+	using Core.ViewModels;
+	using CoreGraphics;
+	using Foundation;
+	using iOS.Views;
+	using UIKit;
 
-    /// <summary>
+	/// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : MvxViewModel
     {
+		public MvxBaseViewController()
+		{
+		}
+
+		public MvxBaseViewController(IntPtr handle) : base(handle)
+        {
+		}
+
+		protected MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+		}
+
         /// <summary>
         /// Gets or sets the view model.
         /// </summary>
@@ -176,5 +189,27 @@
             tap.ShouldReceiveTouch = (recognizer, touch) => !(touch.View is UIControl || touch.View.FindSuperviewOfType(View, typeof(UITableViewCell)) != null);
             View.AddGestureRecognizer(tap);
         }
+
+
+		/// <summary>
+		/// Selects next TextField to become FirstResponder.
+		/// Usage: textField.ShouldReturn += TextFieldShouldReturn;
+		/// </summary>
+		/// <returns></returns>
+		/// <param name="textField">The TextField</param>
+		public bool TextFieldShouldReturn(UITextField textField)
+		{
+			var nextTag = textField.Tag + 1;
+			UIResponder nextResponder = View.ViewWithTag(nextTag);
+			if (nextResponder != null)
+			{
+				nextResponder.BecomeFirstResponder();
+			}
+			else {
+				// Not found, so remove keyboard.
+				textField.ResignFirstResponder();
+			}
+			return false; // We do not want UITextField to insert line-breaks.
+		}
     }
 }

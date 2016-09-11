@@ -1,7 +1,7 @@
-﻿using UIKit;
-
-namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
+    using UIKit;
+
     /// <summary>
     /// A derived UISplitViewController to make presentation of lots of
     /// data nicer in iPads and large screen devices.

@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
-    using MvvmCross.iOS.Support.SidePanels;
-    using MvvmCross.iOS.Support.XamarinSidebar;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
+    using CoreGraphics;
     using Foundation;
+    using SidePanels;
     using UIKit;
 
     [Register("LeftPanelView")]
@@ -24,23 +24,45 @@
         {
             base.ViewDidLoad();
 
-            var label = new UILabel();
+            var centerButton = new UIButton(new CGRect(0, 100, 320, 40));
+            centerButton.SetTitle("Master View Menu Item", UIControlState.Normal);
+            centerButton.BackgroundColor = UIColor.White;
+            centerButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
+            
+            var exampleButton = new UIButton(new CGRect(0, 100, 320, 40));
+            exampleButton.SetTitle("Example Menu Item", UIControlState.Normal);
+            exampleButton.BackgroundColor = UIColor.White;
+            exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
+            
 
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
-            bindingSet.Bind(label).To(vm => vm.ExampleValue);
+            bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);
+            bindingSet.Bind(centerButton).To(vm => vm.ShowMasterViewCommand);
             bindingSet.Apply();
 
-            Add(label);
+            var scrollView = new UIScrollView(View.Frame)
+            {
+                ShowsHorizontalScrollIndicator = false,
+                AutoresizingMask = UIViewAutoresizing.FlexibleHeight
+            };
+            Add(scrollView);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             View.AddConstraints(
+                scrollView.AtLeftOf(View),
+                scrollView.AtTopOf(View),
+                scrollView.WithSameWidth(View),
+                scrollView.WithSameHeight(View));
 
-                label.WithSameHeight(View),
-                label.WithSameCenterX(View),
-                label.WithSameCenterY(View)
+            scrollView.AddSubviews(centerButton, exampleButton);
 
-                );
+            View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+
+            scrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+
+            var constraints = scrollView.VerticalStackPanelConstraints(new Margins(20, 10, 20, 10, 5, 5), scrollView.Subviews);
+            scrollView.AddConstraints(constraints);
         }
     }
 }

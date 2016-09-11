@@ -1,9 +1,7 @@
-﻿using MvvmCross.iOS.Support.JASidePanels;
-
-namespace MvvmCross.iOS.Support.iOS
+﻿namespace MvvmCross.iOS.Support.iOS
 {
-	using MvvmCross.Core;
-	using MvvmCross.iOS.Platform;
+    using JASidePanels;
+    using Platform;
 	using MvvmCross.iOS.Views.Presenters;
 	using MvvmCross.Platform.Platform;
 	using UIKit;
@@ -34,6 +32,10 @@ namespace MvvmCross.iOS.Support.iOS
             return new DebugTrace();
         }
 
+        /// <summary>
+        /// Creates the presenter.
+        /// </summary>
+        /// <returns></returns>
         protected override IMvxIosViewPresenter CreatePresenter()
         {
             return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);

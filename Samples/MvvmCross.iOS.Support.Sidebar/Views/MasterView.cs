@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
-    using MvvmCross.Platform;
-    using MvvmCross.iOS.Support.SidePanels;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.Platform;
+    using SidePanels;
     using UIKit;
 
     [Register("MasterView")]
@@ -32,11 +32,11 @@
             detailButton.SetTitle("Show Detail", UIControlState.Normal);
 
             var toggleMenuButton = new UIButton();
-            toggleMenuButton.SetTitle("Toggle menu", UIControlState.Normal);
+            toggleMenuButton.SetTitle("Open menu", UIControlState.Normal);
             toggleMenuButton.TouchUpInside += (s, e) =>
             {
-                var menuToggler = Mvx.Resolve<IMvxSideMenu>();
-                menuToggler?.ToggleMenu();
+                var sideMenu = Mvx.Resolve<IMvxSideMenu>();
+                sideMenu?.Open(MvxPanelEnum.Left);
             };
 
             var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();
@@ -62,8 +62,6 @@
                 toggleMenuButton.WithSameCenterX(View)
 
                 );
-
-            ViewModel.ShowMenu();
         }
     }
 }

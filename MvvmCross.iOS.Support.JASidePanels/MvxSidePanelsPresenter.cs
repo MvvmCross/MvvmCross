@@ -1,13 +1,14 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-
-namespace MvvmCross.iOS.Support.JASidePanels
+﻿namespace MvvmCross.iOS.Support.JASidePanels
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using SidePanels;
+    using iOS.Views;
+    using iOS.Views.Presenters;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform;
+
+    using Core.ViewModels;
+    using Core.Views;
     using System.Linq;
     using UIKit;
 
@@ -54,6 +55,8 @@ namespace MvvmCross.iOS.Support.JASidePanels
         {
             _multiPanelController = new MvxMultiPanelController();
             _activePanel = MvxPanelEnum.Center;
+
+            Mvx.RegisterSingleton<IMvxSideMenu>(_multiPanelController);
         }
 
         #endregion ctors
@@ -349,8 +352,38 @@ namespace MvvmCross.iOS.Support.JASidePanels
                 }
                 else
                 {
-                    // Otherwise we just want to push to the designated panel
-                    GetActivePanelUiNavigationController.PushViewController(viewController, false);
+                    //figure out which panel we were just asked to show, left, right, center and properly place it
+                    switch (panelAttribute.Panel)
+                    {
+                        case MvxPanelEnum.Center:
+                            if (null == _multiPanelController.CenterPanel)
+                                _multiPanelController.CenterPanel = new UINavigationController(viewController);
+                            else
+                            {
+                                CentrePanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Left:
+                            if (null == _multiPanelController.LeftPanel)
+                            {
+                                _multiPanelController.LeftPanel = new UINavigationController(viewController);
+                            }
+                            else
+                            {
+                                LeftPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Right:
+                            if (null == _multiPanelController.RightPanel)
+                            {
+                                _multiPanelController.RightPanel = new UINavigationController(viewController);
+                            }
+                            else
+                            {
+                                RightPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                    }
                 }
             }
         }
