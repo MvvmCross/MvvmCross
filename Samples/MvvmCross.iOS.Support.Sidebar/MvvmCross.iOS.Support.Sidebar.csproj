@@ -160,8 +160,10 @@
       <Name>MvvmCross.iOS.Support.JASidePanels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="Resources\threelines.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\twolines.png" />
   </ItemGroup>
 </Project>

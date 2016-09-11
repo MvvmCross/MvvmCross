@@ -44,10 +44,26 @@
                                                          ? SidebarPanelController.LeftSidebarController 
                                                          : SidebarPanelController.RightSidebarController;
 
-            var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
-                , UIBarButtonItemStyle.Plain
-                , (sender, args) => sidebarController.ToggleMenu());
-            
+            UIBarButtonItem barButtonItem; 
+
+            var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
+            if (xamarinSidebarMenu != null)
+            {
+                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
+                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+
+                barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => sidebarController.ToggleMenu());
+            }
+            else
+            {
+                barButtonItem = new UIBarButtonItem("Menu"
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => sidebarController.ToggleMenu());
+            }
+
+
             var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
             sidebarController.ChangeMenuView(ViewController);
@@ -61,13 +77,6 @@
             {
                 sidebarController.MenuLocation = MenuLocations.Right;    
                 topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
-            }
-
-            var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
-            if (xamarinSidebarMenu != null)
-            {
-                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
-                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;  
             }
         }
     }
