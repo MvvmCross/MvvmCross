@@ -1,14 +1,11 @@
-﻿using MvvmCross.iOS.Support.XamarinSidebar;
-
-
-namespace MvvmCross.iOS.Support.iOS.Views
+﻿namespace MvvmCross.iOS.Support.Sidebar.Views
 {
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using SidePanels;
     using UIKit;
-	using MvvmCross.iOS.Support.SidePanels;
 
     [Register("DetailView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
