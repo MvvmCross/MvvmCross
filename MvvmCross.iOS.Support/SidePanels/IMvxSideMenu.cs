@@ -15,4 +15,3 @@
         void Open(MvxPanelEnum panelEnum);
     }
 }
-
