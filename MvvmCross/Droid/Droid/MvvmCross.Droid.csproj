@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\MvxBroadcastReceiver.cs" />
+    <Compile Include="Services\MvxIntentService.cs" />
     <Compile Include="ViewModels\MvxAndroidPropertyChangedListener.cs" />
     <Compile Include="Views\IMvxAndroidViewModelLoader.cs" />
     <Compile Include="Views\IMvxAndroidViewsContainer.cs" />
