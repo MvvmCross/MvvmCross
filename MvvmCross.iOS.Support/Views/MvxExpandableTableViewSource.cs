@@ -11,7 +11,6 @@ namespace MvvmCross.iOS.Support.Views
     using UIKit;
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : List<TItem>
-    {
 	{
         /// <summary>
         /// Indicates which sections are expanded.
