@@ -219,6 +219,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 				OnFragmentCreated(fragInfo, ft);
 			}
 
+			currentFragment = fragInfo.CachedFragment as Fragment;
 			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
 
 			//if replacing ViewModel then clear the cache after the fragment
