@@ -50,7 +50,11 @@ namespace MvvmCross.Droid.Platform
                     if (this._currentSplashScreen != null)
                     {
                         Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
-                        this._currentSplashScreen.InitializationComplete();
+                        var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                        dispatcher.RequestMainThreadAction(() =>
+                        {
+                            this._currentSplashScreen?.InitializationComplete();
+                        });
                     }
 
                     IsInitialisedTaskCompletionSource.SetResult(true);
@@ -88,9 +92,16 @@ namespace MvvmCross.Droid.Platform
                     ThreadPool.QueueUserWorkItem(ignored =>
                     {
                         this._setup.InitializeSecondary();
-                        IsInitialisedTaskCompletionSource.SetResult(true);
-                        this._initialized = true;
-                        this._currentSplashScreen?.InitializationComplete();
+                        lock (LockObject)
+                        {
+                            IsInitialisedTaskCompletionSource.SetResult(true);
+                            this._initialized = true;
+                            var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                            dispatcher.RequestMainThreadAction(() =>
+                            {
+                                this._currentSplashScreen?.InitializationComplete();
+                            });
+                        }
                     });
                 }
             }
