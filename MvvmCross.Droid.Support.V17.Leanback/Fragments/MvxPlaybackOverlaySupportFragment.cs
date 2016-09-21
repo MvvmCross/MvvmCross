@@ -10,6 +10,7 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
+    [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxPlaybackOverlaySupportFragment")]
     public class MvxPlaybackOverlaySupportFragment
         : MvxEventSourcePlaybackOverlaySupportFragment
             , IMvxFragmentView
