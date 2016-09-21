@@ -18,6 +18,7 @@ namespace MvvmCross.Droid.Views
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Droid.Views;
 
+    [Register("mvvmcross.droid.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView

@@ -5,6 +5,7 @@ using MvvmCross.Droid.Platform;
 
 namespace MvvmCross.Droid.Services
 {
+    [Register("mvvmcross.droid.services.MvxBroadcastReceiver")]
     public abstract class MvxBroadcastReceiver : BroadcastReceiver
     {
         protected MvxBroadcastReceiver(IntPtr javaReference, JniHandleOwnership transfer)
