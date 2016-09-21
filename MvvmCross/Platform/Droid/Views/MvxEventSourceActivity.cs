@@ -16,9 +16,9 @@ namespace MvvmCross.Platform.Droid.Views
 
     using MvvmCross.Platform.Core;
 
+    [Register("mvvmcross.platform.droid.views.MvxEventSourceActivity")]
     public abstract class MvxEventSourceActivity
-        : Activity
-          , IMvxEventSourceActivity
+        : Activity, IMvxEventSourceActivity
     {
         protected MvxEventSourceActivity()
         {

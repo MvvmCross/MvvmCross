@@ -27,7 +27,8 @@ using MvvmCross.Droid.Shared.Caching;
 
 namespace MvvmCross.Droid.FullFragging.Caching
 {
-	public class MvxCachingFragmentActivity : Views.MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    [Register("mvvmcross.droid.fullfragging.caching.MvxCachingFragmentActivity")]
+    public class MvxCachingFragmentActivity : Views.MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
 	{
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";

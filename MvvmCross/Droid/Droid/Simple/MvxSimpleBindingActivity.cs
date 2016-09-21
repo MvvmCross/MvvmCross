@@ -5,12 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Runtime;
+
 namespace MvvmCross.Droid.Simple
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Droid.Views;
     using MvvmCross.Platform.Exceptions;
 
+    [Register("mvvmcross.droid.simple.MvxSimpleBindingActivity")]
     public class MvxSimpleBindingActivity
         : MvxActivity
     {

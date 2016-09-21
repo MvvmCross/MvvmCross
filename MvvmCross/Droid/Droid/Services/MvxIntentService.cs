@@ -6,6 +6,7 @@ using MvvmCross.Droid.Platform;
 
 namespace MvvmCross.Droid.Services
 {
+    [Register("mvvmcross.droid.services.MvxIntentService")]
     public abstract class MvxIntentService : IntentService
     {
         protected MvxIntentService(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
