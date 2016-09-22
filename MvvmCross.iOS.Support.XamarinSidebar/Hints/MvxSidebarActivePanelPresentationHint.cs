@@ -44,22 +44,33 @@
                                                          ? SidebarPanelController.LeftSidebarController 
                                                          : SidebarPanelController.RightSidebarController;
 
+            UIBarButtonItem barButtonItem; 
+
             var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
             if (xamarinSidebarMenu != null)
             {
                 sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
+                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+
+                barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => {
+                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
+            }
+            else
+            {
+                barButtonItem = new UIBarButtonItem("Menu"
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => {
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
             }
 
-            var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
-                , UIBarButtonItemStyle.Plain, (sender, args) =>
-                                                    {
-                                                        if (xamarinSidebarMenu != null)
-                                                            sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
-                
-                                                        sidebarController.ViewWillAppear(false);
-                                                        sidebarController.ToggleMenu();
-            });
-            
+
             var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
             sidebarController.ChangeMenuView(ViewController);
@@ -74,7 +85,6 @@
                 sidebarController.MenuLocation = MenuLocations.Right;    
                 topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
             }
-          
         }
     }
 }
