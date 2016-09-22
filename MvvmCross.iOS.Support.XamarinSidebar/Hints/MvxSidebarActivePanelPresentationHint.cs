@@ -53,7 +53,9 @@
             var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
                 , UIBarButtonItemStyle.Plain, (sender, args) =>
                                                     {
-                                                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                                                        if (xamarinSidebarMenu != null)
+                                                            sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                
                                                         sidebarController.ViewWillAppear(false);
                                                         sidebarController.ToggleMenu();
             });
