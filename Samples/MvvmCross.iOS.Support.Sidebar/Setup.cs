@@ -5,7 +5,6 @@ namespace MvvmCross.iOS.Support.Sidebar
     using MvvmCross.Platform.Platform;
     using UIKit;
     using MvvmCross.Core.ViewModels;
-    using JASidePanels;
     using MvvmCross.iOS.Support.XamarinSidebar;
 
     public class Setup : MvxIosSetup
