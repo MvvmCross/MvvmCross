@@ -16,6 +16,7 @@ using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
+    [Register("mvvmcross.droid.fullfragging.fragments.eventsource.MvxEventSourceFragment")]
     public class MvxEventSourceFragment
         : Fragment
         , IMvxEventSourceFragment

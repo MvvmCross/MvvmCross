@@ -33,6 +33,7 @@ namespace MvvmCross.Binding.Droid.Views
     /// Heavily based on Calligraphy's CalligraphyLayoutInflater
     /// See: https://github.com/chrisjenx/Calligraphy/blob/master/calligraphy/src/main/java/uk/co/chrisjenx/calligraphy/CalligraphyLayoutInflater.java" />
     /// </summary>
+    [Register("mvvmcross.binding.droid.views.MvxLayoutInflater")]
     public class MvxLayoutInflater : LayoutInflater
     {
         public class MvxBindingVisitor
