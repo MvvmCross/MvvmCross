@@ -54,13 +54,20 @@
 
                 barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
                     , UIBarButtonItemStyle.Plain
-                    , (sender, args) => sidebarController.ToggleMenu());
+                    , (sender, args) => {
+                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
             }
             else
             {
                 barButtonItem = new UIBarButtonItem("Menu"
                     , UIBarButtonItemStyle.Plain
-                    , (sender, args) => sidebarController.ToggleMenu());
+                    , (sender, args) => {
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
             }
 
 
