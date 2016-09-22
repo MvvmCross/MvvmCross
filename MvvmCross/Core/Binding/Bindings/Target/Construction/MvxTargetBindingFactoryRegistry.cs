@@ -116,6 +116,12 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             {
                 return factory;
             }
+            var implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
+            foreach (var implementedInterface in implementedInterfaces)
+            {
+                factory = this.FindSpecificFactory(implementedInterface, name);
+                if (factory != null) return factory;
+            }
             var baseType = type.GetTypeInfo().BaseType;
             if (baseType != null)
                 return this.FindSpecificFactory(baseType, name);
