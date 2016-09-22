@@ -17,6 +17,7 @@ using Android.Content;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {
+    [Register("mvvmcross.droid.fullfragging.fragments.MvxDialogFragment")]
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment
           , IMvxFragmentView

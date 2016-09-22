@@ -7,6 +7,7 @@ using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {
+    [Register("mvvmcross.droid.fullfragging.fragments.MvxPreferenceFragment")]
     public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
     {
         protected MvxPreferenceFragment()

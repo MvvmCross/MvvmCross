@@ -19,6 +19,7 @@ using MvvmCross.Platform.Droid.Views;
 
 namespace MvvmCross.Droid.FullFragging.Views
 {
+    [Register("mvvmcross.droid.fullfragging.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView

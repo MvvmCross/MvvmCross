@@ -14,10 +14,12 @@ using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.FullFragging
 {
+    [Register("mvvmcross.droid.fullfragging.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : Views.MvxActivity
         , TabHost.IOnTabChangeListener

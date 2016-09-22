@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Runtime;
 
 namespace MvvmCross.Droid.Views
 {
@@ -20,6 +21,7 @@ namespace MvvmCross.Droid.Views
     using MvvmCross.Platform.Droid.Views;
 
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
+    [Register("mvvmcross.droid.views.MvxTabActivity")]
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity
           , IMvxAndroidView
