@@ -6,6 +6,7 @@ namespace MvvmCross.iOS.Support.Sidebar
     using UIKit;
     using MvvmCross.Core.ViewModels;
     using JASidePanels;
+    using MvvmCross.iOS.Support.XamarinSidebar;
 
     public class Setup : MvxIosSetup
 	{
@@ -33,8 +34,7 @@ namespace MvvmCross.iOS.Support.Sidebar
 
 		protected override IMvxIosViewPresenter CreatePresenter()
 		{
-            //return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
-            return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+            return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
         }
 	}
 }
