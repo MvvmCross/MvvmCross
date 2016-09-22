@@ -9,9 +9,9 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
+    [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxBrowseSupportFragment")]
     public class MvxBrowseSupportFragment
-        : MvxEventSourceBrowseSupportFragment
-            , IMvxFragmentView
+        : MvxEventSourceBrowseSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxBrowseSupportFragment

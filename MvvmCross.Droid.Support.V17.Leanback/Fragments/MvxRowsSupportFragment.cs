@@ -9,6 +9,7 @@ using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
+    [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxRowsSupportFragment")]
     public class MvxRowsSupportFragment
         : MvxEventSourceRowsSupportFragment
             , IMvxFragmentView
