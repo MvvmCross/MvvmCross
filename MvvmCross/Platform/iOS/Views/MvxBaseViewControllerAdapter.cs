@@ -34,9 +34,14 @@ namespace MvvmCross.Platform.iOS.Views
             this._eventSource.ViewWillDisappearCalled += this.HandleViewWillDisappearCalled;
             this._eventSource.DisposeCalled += this.HandleDisposeCalled;
             this._eventSource.ViewDidLoadCalled += this.HandleViewDidLoadCalled;
+            this._eventSource.ViewDidLayoutSubviewsCalled += this.HandleViewDidLayoutSubviewsCalled;
         }
 
         public virtual void HandleViewDidLoadCalled(object sender, EventArgs e)
+        {
+        }
+
+        public virtual void HandleViewDidLayoutSubviewsCalled(object sender, EventArgs e)
         {
         }
 
