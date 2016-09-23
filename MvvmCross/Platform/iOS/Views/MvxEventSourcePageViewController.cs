@@ -22,6 +22,12 @@
             this.ViewDidLoadCalled.Raise(this);
         }
 
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+            this.ViewDidLayoutSubviewsCalled.Raise(this);
+        }
+
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -54,6 +60,8 @@
         }
 
         public event EventHandler ViewDidLoadCalled;
+
+        public event EventHandler ViewDidLayoutSubviewsCalled;
 
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
