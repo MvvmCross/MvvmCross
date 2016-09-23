@@ -27,7 +27,6 @@ namespace MvvmCross.Droid.Platform
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private MvxAndroidSetup _setup;
         private bool _initialized;
-        private bool _initializationStarted;
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
 
         public virtual void EnsureInitialized()
@@ -44,7 +43,6 @@ namespace MvvmCross.Droid.Platform
                 }
                 else
                 {
-                    _initializationStarted = true;
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
                     this._setup.Initialize();
                     this._initialized = true;
@@ -52,7 +50,11 @@ namespace MvvmCross.Droid.Platform
                     if (this._currentSplashScreen != null)
                     {
                         Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
-                        this._currentSplashScreen.InitializationComplete();
+                        var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                        dispatcher.RequestMainThreadAction(() =>
+                        {
+                            this._currentSplashScreen?.InitializationComplete();
+                        });
                     }
 
                     IsInitialisedTaskCompletionSource.SetResult(true);
@@ -73,31 +75,36 @@ namespace MvvmCross.Droid.Platform
             lock (LockObject)
             {
                 this._currentSplashScreen = splashScreen;
-
-                if (this._initializationStarted)
+                if (_initialized)
                 {
-                    if (this._initialized)
-                    {
-                        this._currentSplashScreen.InitializationComplete();
-                        return;
-                    }
-
+                    this._currentSplashScreen?.InitializationComplete();
                     return;
                 }
 
-                this._initializationStarted = true;
-            }
-
-            this._setup.InitializePrimary();
-            ThreadPool.QueueUserWorkItem(ignored =>
-            {
-                this._setup.InitializeSecondary();
-                lock (LockObject)
+                if (IsInitialisedTaskCompletionSource != null)
                 {
-                    this._initialized = true;
-                    this._currentSplashScreen?.InitializationComplete();
+                    return;
                 }
-            });
+                else
+                {
+                    IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
+                    this._setup.InitializePrimary();
+                    ThreadPool.QueueUserWorkItem(ignored =>
+                    {
+                        this._setup.InitializeSecondary();
+                        lock (LockObject)
+                        {
+                            IsInitialisedTaskCompletionSource.SetResult(true);
+                            this._initialized = true;
+                            var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                            dispatcher.RequestMainThreadAction(() =>
+                            {
+                                this._currentSplashScreen?.InitializationComplete();
+                            });
+                        }
+                    });
+                }
+            }
         }
 
         public static MvxAndroidSetupSingleton EnsureSingletonAvailable(Context applicationContext)
