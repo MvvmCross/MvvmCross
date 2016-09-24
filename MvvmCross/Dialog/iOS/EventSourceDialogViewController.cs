@@ -63,6 +63,12 @@ namespace MvvmCross.Dialog.iOS
             this.ViewDidLoadCalled.Raise(this);
         }
 
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+            this.ViewDidLayoutSubviewsCalled.Raise(this);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -74,6 +80,8 @@ namespace MvvmCross.Dialog.iOS
 
         public event EventHandler ViewDidLoadCalled;
 
+        public event EventHandler ViewDidLayoutSubviewsCalled;
+        
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
         public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;

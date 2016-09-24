@@ -15,6 +15,8 @@ namespace MvvmCross.Platform.iOS.Views
     {
         event EventHandler ViewDidLoadCalled;
 
+        event EventHandler ViewDidLayoutSubviewsCalled;
+        
         event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
         event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
