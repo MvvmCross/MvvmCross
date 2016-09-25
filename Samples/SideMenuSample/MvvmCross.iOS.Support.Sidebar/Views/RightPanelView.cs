@@ -41,5 +41,7 @@
 
                 );
         }
+
+        public override UIImage MenuButtonImage => UIImage.FromBundle("twolines");
     }
 }

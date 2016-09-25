@@ -1,13 +1,13 @@
 namespace MvvmCross.iOS.Support.Sidebar
 {
-    using Platform;
-    using iOS.Views.Presenters;
-    using MvvmCross.Platform.Platform;
-    using UIKit;
-    using MvvmCross.Core.ViewModels;
-    using JASidePanels;
+	using Platform;
+	using iOS.Views.Presenters;
+	using MvvmCross.Platform.Platform;
+	using UIKit;
+	using MvvmCross.Core.ViewModels;
+	using XamarinSidebar;
 
-    public class Setup : MvxIosSetup
+	public class Setup : MvxIosSetup
 	{
 		/// <summary>Initializes a new instance of the <see cref="Setup"/> class.</summary>
 		/// <param name="applicationDelegate">The application delegate.</param>
@@ -17,7 +17,7 @@ namespace MvvmCross.iOS.Support.Sidebar
 		{
 		}
 
-		/// <summary>Creates the application.</summary>
+		/// <summary>C reates the application.</summary>
 		/// <returns>The IMvxApplication <see langword="object"/></returns>
 		protected override IMvxApplication CreateApp()
 		{
@@ -33,8 +33,8 @@ namespace MvvmCross.iOS.Support.Sidebar
 
 		protected override IMvxIosViewPresenter CreatePresenter()
 		{
-            //return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
-            return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
-        }
+			return new MvxSidebarPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+			//return new MvxSidePanelsPresenter((MvxApplicationDelegate)ApplicationDelegate, Window);
+		}
 	}
 }
