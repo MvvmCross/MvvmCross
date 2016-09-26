@@ -227,6 +227,8 @@ namespace MvvmCross.Plugins.DownloadCache
                 var fileService = MvxFileStoreHelper.SafeGetFileStore();
                 if (fileService.Exists(nextFileToDelete))
                     fileService.DeleteFile(nextFileToDelete);
+
+                _toDeleteFiles.Remove(nextFileToDelete);
             }
             catch (Exception exception)
             {
