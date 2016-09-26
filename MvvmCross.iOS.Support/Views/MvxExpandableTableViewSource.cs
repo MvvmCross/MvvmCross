@@ -36,18 +36,19 @@ namespace MvvmCross.iOS.Support.Views
             }
         }
 
-        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
-        {
-        }
-
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             // When the collection is changed collapse all sections
             _isCollapsed = new bool[ItemsSource.Count()];
 
-
             for (var i = 0; i < _isCollapsed.Length; i++)
+        {
+            // When the collection is changed collapse all sections
                 _isCollapsed[i] = true;
+
+
+            base.CollectionChangedOnCollectionChanged(sender, args);
+        }
 
 
             base.CollectionChangedOnCollectionChanged(sender, args);
@@ -63,6 +64,11 @@ namespace MvvmCross.iOS.Support.Views
 
 
         public override nint NumberOfSections(UITableView tableView)
+        {
+            return ItemsSource.Count();
+        }
+
+        protected override object GetItemAt(NSIndexPath indexPath)
         {
             return ItemsSource?.Count() ?? 0;
         }
@@ -134,11 +140,19 @@ namespace MvvmCross.iOS.Support.Views
             return 44; // Default value.
         }
 
-
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             return base.GetCell(tableView, indexPath);
         }
+
+
+        /// <summary>
+        /// Gets the cell used for the header
+        /// </summary>
+        /// <param name="tableView"></param>
+        /// <param name="section"></param>
+        /// <returns></returns>
+        protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
 
         /// <summary>
         /// Gets the cell used for the header
