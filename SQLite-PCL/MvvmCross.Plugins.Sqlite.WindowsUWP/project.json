@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "MvvmCross.Core": "4.2.3",
-    "MvvmCross.Platform": "4.2.3",
-    "sqlite-net-pcl": "1.1.2"
+    "MvvmCross.Core": "4.3.0",
+    "MvvmCross.Platform": "4.3.0",
+    "sqlite-net-pcl": "1.2.0"
   },
   "frameworks": {
     "uap10.0": {}
