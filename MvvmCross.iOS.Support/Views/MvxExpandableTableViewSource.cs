@@ -10,7 +10,14 @@ namespace MvvmCross.iOS.Support.Views
     using System.Linq;
     using UIKit;
 
-    public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : List<TItem>
+    public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
+    {
+        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        {
+        }
+    }
+
+    public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
         /// <summary>
         /// Indicates which sections are expanded.
@@ -36,51 +43,55 @@ namespace MvvmCross.iOS.Support.Views
             }
         }
 
+        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        {
+        }
+
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             // When the collection is changed collapse all sections
             _isCollapsed = new bool[ItemsSource.Count()];
 
             for (var i = 0; i < _isCollapsed.Length; i++)
-        {
-            // When the collection is changed collapse all sections
+            {
+                // When the collection is changed collapse all sections
                 _isCollapsed[i] = true;
-
-
-            base.CollectionChangedOnCollectionChanged(sender, args);
-        }
-
-
+            }
             base.CollectionChangedOnCollectionChanged(sender, args);
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
+            if (ItemsSource == null)
+                return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if ((ItemsSource?.ElementAt((int)section)).Any() && !_isCollapsed[(int)section])
+            if ((ItemsSource.ElementAt((int)section)).Any() && !_isCollapsed[(int)section])
                 return (ItemsSource.ElementAt((int)section)).Count();
             return 0;
         }
 
-
         public override nint NumberOfSections(UITableView tableView)
         {
+            if (ItemsSource == null)
+                return 0;
+
             return ItemsSource.Count();
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            return ItemsSource?.Count() ?? 0;
-        }
+            if (ItemsSource == null)
+                return null;
 
-        protected override object GetItemAt(NSIndexPath indexPath)
-        {
-            return ((IEnumerable<object>)ItemsSource?.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
+            return ((IEnumerable<object>)ItemsSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
         }
 
         protected object GetHeaderItemAt(nint section)
         {
-            return ItemsSource?.ElementAt((int)section);
+            if (ItemsSource == null)
+                return null;
+
+            return ItemsSource.ElementAt((int)section);
         }
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
@@ -144,15 +155,6 @@ namespace MvvmCross.iOS.Support.Views
         {
             return base.GetCell(tableView, indexPath);
         }
-
-
-        /// <summary>
-        /// Gets the cell used for the header
-        /// </summary>
-        /// <param name="tableView"></param>
-        /// <param name="section"></param>
-        /// <returns></returns>
-        protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
 
         /// <summary>
         /// Gets the cell used for the header
