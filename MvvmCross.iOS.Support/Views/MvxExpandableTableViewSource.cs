@@ -98,12 +98,10 @@ namespace MvvmCross.iOS.Support.Views
         {
             var header = GetOrCreateHeaderCellFor(tableView, section);
 
-
             // Create a button to make the header clickable
             UIButton hiddenButton = new UIButton(header.Frame);
             hiddenButton.TouchUpInside += EventHandler(tableView, section);
             header.AddSubview(hiddenButton);
-
 
             // Set the header data context
             var bindable = header as IMvxDataConsumer;
@@ -120,14 +118,12 @@ namespace MvvmCross.iOS.Support.Views
                 _isCollapsed[(int)section] = !_isCollapsed[(int)section];
                 tableView.ReloadData();
 
-
                 // Animate the section cells
                 var paths = new NSIndexPath[RowsInSection(tableView, section)];
                 for (int i = 0; i < paths.Length; i++)
                 {
                     paths[i] = NSIndexPath.FromItemSection(i, section);
                 }
-
 
                 tableView.ReloadRows(paths, UITableViewRowAnimation.Automatic);
             };
