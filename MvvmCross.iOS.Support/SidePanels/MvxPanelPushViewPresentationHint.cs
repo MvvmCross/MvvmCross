@@ -1,8 +1,8 @@
-﻿using MvvmCross.Core.ViewModels;
-using UIKit;
-
-namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.SidePanels
 {
+    using Core.ViewModels;
+    using UIKit;
+
     /// <summary>
     /// The Panel reset hint
     /// </summary>
@@ -28,11 +28,11 @@ namespace MvvmCross.iOS.Support.SidePanels
             Panel = panel;
         }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
-		/// </summary>
-		/// <param name="panel">The panel.</param>
-		public MvxPanelPushViewPresentationHint(UIViewController view)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MvxPanelResetRootPresentationHint"/> class.
+        /// </summary>
+        /// <param name="view">The view.</param>
+        public MvxPanelPushViewPresentationHint(UIViewController view)
 		{
 			ViewController = view;
 		}

@@ -200,7 +200,7 @@
 		public bool TextFieldShouldReturn(UITextField textField)
 		{
 			var nextTag = textField.Tag + 1;
-			UIResponder nextResponder = this.View.ViewWithTag(nextTag);
+			UIResponder nextResponder = View.ViewWithTag(nextTag);
 			if (nextResponder != null)
 			{
 				nextResponder.BecomeFirstResponder();

@@ -25,7 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             if (navigationController == null)
                 return false;
 
-            navigationController.ViewControllers = new UIViewController[] { ViewController };
+            navigationController.ViewControllers = new[] { ViewController };
 
             return true;
         }

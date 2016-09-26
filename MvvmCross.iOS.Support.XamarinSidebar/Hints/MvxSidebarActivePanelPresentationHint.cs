@@ -1,11 +1,9 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-using UIKit;
-using MvvmCross.iOS.Support.SidePanels;
-using SidebarNavigation;
-
-namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
+    using UIKit;
+    using SidePanels;
+    using SidebarNavigation;
+
     public class MvxSidebarActivePanelPresentationHint : MvxPanelPresentationHint
     {
         public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
@@ -46,10 +44,33 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
                                                          ? SidebarPanelController.LeftSidebarController 
                                                          : SidebarPanelController.RightSidebarController;
 
-            var barButtonItem = new UIBarButtonItem(UIImage.FromBundle("threelines")
-                , UIBarButtonItemStyle.Plain
-                , (sender, args) => sidebarController.ToggleMenu());
-            
+            UIBarButtonItem barButtonItem; 
+
+            var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
+            if (xamarinSidebarMenu != null)
+            {
+                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
+                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+
+                barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => {
+                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
+            }
+            else
+            {
+                barButtonItem = new UIBarButtonItem("Menu"
+                    , UIBarButtonItemStyle.Plain
+                    , (sender, args) => {
+                        sidebarController.ViewWillAppear(false);
+                        sidebarController.ToggleMenu();
+                    });
+            }
+
+
             var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
             sidebarController.ChangeMenuView(ViewController);
@@ -63,13 +84,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             {
                 sidebarController.MenuLocation = MenuLocations.Right;    
                 topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
-            }
-
-            var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
-            if (xamarinSidebarMenu != null)
-            {
-                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
-                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;  
             }
         }
     }
