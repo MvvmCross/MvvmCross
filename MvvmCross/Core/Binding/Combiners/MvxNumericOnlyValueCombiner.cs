@@ -22,6 +22,12 @@ namespace MvvmCross.Binding.Combiners
             return false;
         }
 
+        protected override bool CombineStringAndDecimal(string input1, decimal input2, out object value)
+        {
+            value = null;
+            return false;
+        }
+
         protected override bool CombineStringAndNull(string input1, out object value)
         {
             value = null;
@@ -41,6 +47,12 @@ namespace MvvmCross.Binding.Combiners
         }
 
         protected sealed override bool CombineDoubleAndString(double input1, string input2, out object value)
+        {
+            value = null;
+            return false;
+        }
+
+        protected sealed override bool CombineDecimalAndString(decimal input1, string input2, out object value)
         {
             value = null;
             return false;
