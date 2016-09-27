@@ -76,8 +76,13 @@ namespace MvvmCross.Droid.Shared.Caching
                 savedInstanceState.GetBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState, true);
 
             // restore what fragments we have registered - and informations about registered fragments.
-            var jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
 
+            string jsonSerializedMvxCachedFragmentInfosToRestore = string.Empty;
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.HoneycombMr1)
+                jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
+            else
+                jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration);
+            
             // there are no registered fragments at this moment, skip restore
             if (string.IsNullOrEmpty(jsonSerializedMvxCachedFragmentInfosToRestore))
                 return;
