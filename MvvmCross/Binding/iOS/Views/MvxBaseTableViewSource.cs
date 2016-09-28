@@ -107,6 +107,11 @@ namespace MvvmCross.Binding.iOS.Views
             var cell = this.GetOrCreateCellFor(tableView, indexPath, item);
 
             var bindable = cell as IMvxDataConsumer;
+
+            var bindingContext = Mvx.Resolve<IMvxBindingContext>() as MvxTaskBasedBindingContext;
+            if (bindingContext != null && this._tableView.RowHeight == UITableView.AutomaticDimension)
+                bindingContext.RunSynchronously = true;
+
             if (bindable != null)
                 bindable.DataContext = item;
 
@@ -115,13 +120,6 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {   
-            var bindingContext = Mvx.Resolve<IMvxBindingContext>() as MvxTaskBasedBindingContext;
-            if (bindingContext != null)
-            {
-                if (this._tableView.RowHeight == UITableView.AutomaticDimension)
-                    bindingContext.RunSynchronously = true;
-            }
-
             return base.GetHeightForRow(tableView, indexPath);
         }
 
