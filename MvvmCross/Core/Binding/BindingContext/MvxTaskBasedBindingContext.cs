@@ -19,6 +19,8 @@ namespace MvvmCross.Binding.BindingContext
         private object _dataContext;
         private IMvxBinder _binder;
 
+        public bool RunSynchronously { get; set; }
+
         public event EventHandler DataContextChanged;
 
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
@@ -113,30 +115,33 @@ namespace MvvmCross.Binding.BindingContext
                 }
                 this._delayedActions.Clear();
             }
-
-            Task.Run(() =>
-            {
-                foreach (var binding in this._viewBindings)
+            var task = Task.Run(() =>
                 {
-                    foreach (var bind in binding.Value)
+                    foreach (var binding in this._viewBindings)
                     {
-                        bind.Binding.DataContext = this._dataContext;
+                        foreach (var bind in binding.Value)
+                        {
+                            bind.Binding.DataContext = this._dataContext;
+                        }
                     }
-                }
 
-                foreach (var binding in this._directBindings)
-                {
-                    binding.Binding.DataContext = this._dataContext;
-                }
-            });
+                    foreach (var binding in this._directBindings)
+                    {
+                        binding.Binding.DataContext = this._dataContext;
+                    }
+                });
+
+            if (RunSynchronously)
+            {
+                task.RunSynchronously();
+            }
         }
+
 
         public virtual void DelayBind(Action action)
         {
             this._delayedActions.Add(action);
         }
-
-
 
         public virtual void RegisterBinding(object target, IMvxUpdateableBinding binding)
         {

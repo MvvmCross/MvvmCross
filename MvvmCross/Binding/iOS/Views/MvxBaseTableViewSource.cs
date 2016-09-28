@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.iOS.Views
     using System.Windows.Input;
 
     using Foundation;
-
+    using MvvmCross.Binding.BindingContext;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Exceptions;
@@ -112,6 +112,19 @@ namespace MvvmCross.Binding.iOS.Views
 
             return cell;
         }
+
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {   
+            var bindingContext = Mvx.Resolve<IMvxBindingContext>() as MvxTaskBasedBindingContext;
+            if (bindingContext != null)
+            {
+                if (this._tableView.RowHeight == UITableView.AutomaticDimension)
+                    bindingContext.RunSynchronously = true;
+            }
+
+            return base.GetHeightForRow(tableView, indexPath);
+        }
+
 
         public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
