@@ -108,12 +108,14 @@ namespace MvvmCross.Binding.iOS.Views
 
             var bindable = cell as IMvxDataConsumer;
 
-            var bindingContext = Mvx.Resolve<IMvxBindingContext>() as MvxTaskBasedBindingContext;
-            if (bindingContext != null && this._tableView.RowHeight == UITableView.AutomaticDimension)
-                bindingContext.RunSynchronously = true;
-
             if (bindable != null)
+            {
+                var bindingContext = Mvx.Resolve<IMvxBindingContext>() as MvxTaskBasedBindingContext;
+                if (bindingContext != null && this._tableView.RowHeight == UITableView.AutomaticDimension)
+                    bindingContext.RunSynchronously = true;
+
                 bindable.DataContext = item;
+            }
 
             return cell;
         }
