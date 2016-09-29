@@ -132,10 +132,15 @@ namespace MvvmCross.Binding.BindingContext
                     }
                 });
 
-            if (RunSynchronously)
-                Task.Run(setBindingsAction).RunSynchronously();
-            else
+            if (!RunSynchronously)
+            {
+                Task task = new Task(setBindingsAction);
+                task.RunSynchronously();
+            }
+            else 
+            {
                 Task.Run(setBindingsAction);
+            }
         }
 
 
