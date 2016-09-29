@@ -139,7 +139,6 @@ namespace MvvmCross.Binding.BindingContext
                 Task.Run(setBindingsAction);
         }
 
-
         public virtual void DelayBind(Action action)
         {
             this._delayedActions.Add(action);
