@@ -19,7 +19,7 @@ namespace Sample.iOS
 
             var table = new UITableView();
             table.RowHeight = UITableView.AutomaticDimension;
-            table.EstimatedRowHeight = 540;
+            table.EstimatedRowHeight = 100;
 
             var source = new MvxSimpleTableViewSource(table, TestCell.Key);
             table.Source = source;
