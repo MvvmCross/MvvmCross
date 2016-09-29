@@ -103,7 +103,8 @@ namespace MvvmCross.Binding.BindingContext
 
         /// <summary>
         /// Must be called on main thread as it creates the target bindings, and creating target bindings might subscribe to events that
-        /// needs to be done on main thread (like touchupinside).
+        /// needs to be done on main thread (like touchupinside). 
+        /// If the code is run in Synchronous mode there will be a performance hit, there are however some use-cases(iOS automatic resizing cells).
         /// </summary>
         protected virtual void OnDataContextChange()
         {
