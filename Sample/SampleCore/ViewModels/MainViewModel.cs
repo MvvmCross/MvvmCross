@@ -7,7 +7,7 @@ namespace SampleCore.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
-        public OptimizedObservableCollection<TestItem> TestItems { get; set; } = new OptimizedObservableCollection<TestItem>();
+        public List<TestItem> TestItems { get; set; } = new List<TestItem>();
 
         public MainViewModel()
         {
@@ -48,7 +48,7 @@ namespace SampleCore.ViewModels
                         Title = "test6",
                         Description = "blabla"
                     }
-            }
+                }
             );
                         
         }
