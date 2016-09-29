@@ -115,7 +115,7 @@ namespace MvvmCross.Binding.BindingContext
                 }
                 this._delayedActions.Clear();
             }
-            var task = Task.Run(() =>
+            var task = new Task(() =>
                 {
                     foreach (var binding in this._viewBindings)
                     {
@@ -132,9 +132,9 @@ namespace MvvmCross.Binding.BindingContext
                 });
 
             if (RunSynchronously)
-            {
                 task.RunSynchronously();
-            }
+            else
+                task.Start();
         }
 
 
