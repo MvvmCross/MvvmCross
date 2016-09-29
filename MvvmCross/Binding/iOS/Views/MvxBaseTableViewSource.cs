@@ -120,12 +120,6 @@ namespace MvvmCross.Binding.iOS.Views
             return cell;
         }
 
-        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-        {   
-            return base.GetHeightForRow(tableView, indexPath);
-        }
-
-
         public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
             //Don't bind to NULL to speed up cells in lists when fast scrolling

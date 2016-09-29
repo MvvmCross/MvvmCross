@@ -102,6 +102,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="TestCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -114,6 +115,12 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainView.cs" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="TestCell.cs" />
+    <Compile Include="TestCell.designer.cs">
+      <DependentUpon>TestCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
@@ -124,9 +131,25 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Platform\iOS\MvvmCross.Platform.iOS.csproj">
+      <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
+      <Name>MvvmCross.Platform.iOS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\iOS\iOS\MvvmCross.iOS.csproj">
+      <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
+      <Name>MvvmCross.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleCore\SampleCore.csproj">
+      <Project>{B0012168-4350-4F12-B2E5-4B958E7BE192}</Project>
+      <Name>SampleCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj">
+      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
+      <Name>MvvmCross.Binding.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
