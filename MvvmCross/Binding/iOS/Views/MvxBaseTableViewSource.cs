@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.iOS.Views
     using System.Windows.Input;
 
     using Foundation;
-
+    using MvvmCross.Binding.BindingContext;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Exceptions;
@@ -106,9 +106,15 @@ namespace MvvmCross.Binding.iOS.Views
             var item = this.GetItemAt(indexPath);
             var cell = this.GetOrCreateCellFor(tableView, indexPath, item);
 
-            var bindable = cell as IMvxDataConsumer;
+            var bindable = cell as MvxTableViewCell;
+
             if (bindable != null)
+            {
+                var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
+                if (bindingContext != null && this._tableView.RowHeight == UITableView.AutomaticDimension)
+                    bindingContext.RunSynchronously = true;
                 bindable.DataContext = item;
+            }
 
             return cell;
         }

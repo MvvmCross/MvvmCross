@@ -19,6 +19,8 @@ namespace MvvmCross.Binding.BindingContext
         private object _dataContext;
         private IMvxBinder _binder;
 
+        public bool RunSynchronously { get; set; }
+
         public event EventHandler DataContextChanged;
 
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
@@ -101,7 +103,8 @@ namespace MvvmCross.Binding.BindingContext
 
         /// <summary>
         /// Must be called on main thread as it creates the target bindings, and creating target bindings might subscribe to events that
-        /// needs to be done on main thread (like touchupinside).
+        /// needs to be done on main thread (like touchupinside). 
+        /// If the code is run in Synchronous mode there will be a performance hit, there are however some use-cases(iOS automatic resizing cells).
         /// </summary>
         protected virtual void OnDataContextChange()
         {
@@ -114,29 +117,32 @@ namespace MvvmCross.Binding.BindingContext
                 this._delayedActions.Clear();
             }
 
-            Task.Run(() =>
-            {
-                foreach (var binding in this._viewBindings)
+            Action setBindingsAction = (() =>
                 {
-                    foreach (var bind in binding.Value)
+                    foreach (var binding in this._viewBindings)
                     {
-                        bind.Binding.DataContext = this._dataContext;
+                        foreach (var bind in binding.Value)
+                        {
+                            bind.Binding.DataContext = this._dataContext;
+                        }
                     }
-                }
 
-                foreach (var binding in this._directBindings)
-                {
-                    binding.Binding.DataContext = this._dataContext;
-                }
-            });
+                    foreach (var binding in this._directBindings)
+                    {
+                        binding.Binding.DataContext = this._dataContext;
+                    }
+                });
+
+            if (RunSynchronously)
+                setBindingsAction();
+            else 
+                Task.Run(setBindingsAction);
         }
 
         public virtual void DelayBind(Action action)
         {
             this._delayedActions.Add(action);
         }
-
-
 
         public virtual void RegisterBinding(object target, IMvxUpdateableBinding binding)
         {
