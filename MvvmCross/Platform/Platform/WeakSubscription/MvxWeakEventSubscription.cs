@@ -5,19 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class
         where TEventArgs : EventArgs
     {
         private readonly WeakReference _targetReference;
-        private readonly WeakReference _sourceReference;
+        private readonly WeakReference<TSource> _sourceReference;
 
         private readonly MethodInfo _eventHandlerMethodInfo;
 
@@ -51,7 +50,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
             this._eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             this._targetReference = new WeakReference(targetEventHandler.Target);
-            this._sourceReference = new WeakReference(source);
+            this._sourceReference = new WeakReference<TSource>(source);
             this._sourceEventInfo = sourceEventInfo;
 
             // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
@@ -98,8 +97,8 @@ namespace MvvmCross.Platform.WeakSubscription
             if (!this._subscribed)
                 return;
 
-            var source = (TSource)this._sourceReference.Target;
-            if (source != null)
+            TSource source;
+            if (this._sourceReference.TryGetTarget(out source))
             {
                 this._sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { this._ourEventHandler });
                 this._subscribed = false;
@@ -111,8 +110,8 @@ namespace MvvmCross.Platform.WeakSubscription
             if (this._subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
-            var source = (TSource)this._sourceReference.Target;
-            if (source != null)
+            TSource source;
+            if (this._sourceReference.TryGetTarget(out source))
             {
                 this._sourceEventInfo.GetAddMethod().Invoke(source, new object[] { this._ourEventHandler });
                 this._subscribed = true;
@@ -124,7 +123,7 @@ namespace MvvmCross.Platform.WeakSubscription
         where TSource : class
     {
         private readonly WeakReference _targetReference;
-        private readonly WeakReference _sourceReference;
+        private readonly WeakReference<TSource> _sourceReference;
 
         private readonly MethodInfo _eventHandlerMethodInfo;
 
@@ -158,7 +157,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
             this._eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             this._targetReference = new WeakReference(targetEventHandler.Target);
-            this._sourceReference = new WeakReference(source);
+            this._sourceReference = new WeakReference<TSource>(source);
             this._sourceEventInfo = sourceEventInfo;
 
             // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
@@ -205,8 +204,8 @@ namespace MvvmCross.Platform.WeakSubscription
             if (!this._subscribed)
                 return;
 
-            var source = (TSource)this._sourceReference.Target;
-            if (source != null)
+            TSource source;
+            if (this._sourceReference.TryGetTarget(out source))
             {
                 this._sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { this._ourEventHandler });
                 this._subscribed = false;
@@ -218,8 +217,8 @@ namespace MvvmCross.Platform.WeakSubscription
             if (this._subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
-            var source = (TSource)this._sourceReference.Target;
-            if (source != null)
+            TSource source;
+            if (this._sourceReference.TryGetTarget(out source))
             {
                 this._sourceEventInfo.GetAddMethod().Invoke(source, new object[] { this._ourEventHandler });
                 this._subscribed = true;
