@@ -54,7 +54,7 @@ namespace MvvmCross.iOS.Support.Presenters
 					ShowRootViewController(viewController);
 					break;
 				case MvxTabPresentationMode.Tab:
-					ShowTabViewController(viewController, attribute.WrapInNavigationController, request.PresentationValues);
+					ShowTabViewController(viewController, attribute.WrapInNavigationController, attribute.TabTitle, attribute.TabIconName);
 					break;
 				case MvxTabPresentationMode.Child:
 					ShowChildViewController(viewController);
@@ -143,15 +143,16 @@ namespace MvvmCross.iOS.Support.Presenters
 		protected virtual void ShowTabViewController(
 			UIViewController viewController,
 			bool needsNavigationController,
-			IDictionary<string, string> presentationValues)
+			string tabTitle,
+			string tabIconName)
 		{
 			if(TabBarViewController == null)
 				throw new MvxException("You need a TabBarViewController to show a ViewModel as a Tab!");
 
-			if(presentationValues == null || !presentationValues.Keys.Any())
-				throw new MvxException("You need to pass MvxTabPresentationValues in order to show a new Tab!");
+			if(string.IsNullOrEmpty(tabTitle) && string.IsNullOrEmpty(tabIconName))
+				throw new MvxException("You need to set at least an icon or a title when trying to show a ViewModel as a Tab!");
 
-			TabBarViewController.ShowTabView(viewController, needsNavigationController, presentationValues);
+			TabBarViewController.ShowTabView(viewController, needsNavigationController, tabTitle, tabIconName);
 		}
 
 		protected virtual void ShowChildViewController(UIViewController viewController)

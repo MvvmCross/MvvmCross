@@ -8,7 +8,7 @@ using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.iOS.Support.Tabs.iOS.Views
 {
-	[MvxTabPresentation(MvxTabPresentationMode.Tab, true)]
+	[MvxTabPresentation(MvxTabPresentationMode.Tab, "Tab 1", "home", true)]
 	public class Tab1View : MvxViewController<Tab1ViewModel>
 	{
 		private UIButton _btnChild, _btnModal;
