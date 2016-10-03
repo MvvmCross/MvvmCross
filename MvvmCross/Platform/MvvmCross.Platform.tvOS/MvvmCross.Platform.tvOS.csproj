@@ -49,16 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MvxIosColorExtensionMethods.cs" />
-    <Compile Include="MvxIosDateTimeExtensionMethods.cs" />
-    <Compile Include="MvxIosUIViewControllerExtensions.cs" />
-    <Compile Include="Platform\IMvxIosSystem.cs" />
-    <Compile Include="Platform\MvxIosMajorVersionChecker.cs" />
-    <Compile Include="Platform\MvxIosSystem.cs" />
-    <Compile Include="Platform\MvxIosTask.cs" />
-    <Compile Include="Platform\MvxIosVersion.cs" />
+    <Compile Include="MvxTvosColorExtensionMethods.cs" />
+    <Compile Include="MvxTvosDateTimeExtensionMethods.cs" />
+    <Compile Include="MvxTvosUIViewControllerExtensions.cs" />
+    <Compile Include="Platform\IMvxTvosSystem.cs" />
+    <Compile Include="Platform\MvxTvosMajorVersionChecker.cs" />
+    <Compile Include="Platform\MvxTvosSystem.cs" />
+    <Compile Include="Platform\MvxTvosTask.cs" />
+    <Compile Include="Platform\MvxTvosVersion.cs" />
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
-    <Compile Include="Views\IMvxIosModalHost.cs" />
+    <Compile Include="Views\IMvxTvosModalHost.cs" />
     <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
     <Compile Include="Views\MvxEventSourceCollectionViewController.cs" />
     <Compile Include="Views\MvxEventSourcePageViewController.cs" />
