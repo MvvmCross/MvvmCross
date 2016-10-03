@@ -7,7 +7,6 @@
 
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
 using System;
 using MvvmCross.Platform.WeakSubscription;
@@ -15,7 +14,7 @@ using MvvmCross.Platform.WeakSubscription;
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxCompoundButtonCheckedTargetBinding
-        : MvxPropertyInfoTargetBinding<CompoundButton>
+        : MvxAndroidPropertyInfoTargetBinding<CompoundButton>
     {
         private IDisposable _subscription;
 

@@ -2,7 +2,6 @@ using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -14,7 +13,7 @@ namespace MvvmCross.Binding.Droid.Target
     //     if null or equal respectively.  This class foregoes this so that if the bound value of
     //     SelectedItem is set to null we can "override" _currentValue.
     public class MvxExpandableListViewSelectedItemTargetBinding 
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private object _currentValue;
         private IDisposable _subscription;
@@ -32,14 +31,14 @@ namespace MvvmCross.Binding.Droid.Target
             //if (value == null || value == _currentValue)
             //    return;
 
+            var listView = (MvxExpandableListView)target;
+
             if (value == null)
             {
                 _currentValue = null;
-                ListView.ClearChoices();
+                listView.ClearChoices();
                 return;
             }
-
-            var listView = (MvxExpandableListView)target;
             var positions = ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetPositions(value);
             if (positions == null)
             {

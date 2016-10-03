@@ -7,13 +7,12 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxAdapterViewSelectedItemPositionTargetBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected AdapterView AdapterView => (AdapterView)Target;
 

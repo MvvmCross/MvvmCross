@@ -7,13 +7,12 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxRatingBarRatingTargetBinding 
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected RatingBar RatingBar => (RatingBar)Target;
 

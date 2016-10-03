@@ -8,13 +8,12 @@
 using System;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxTextViewFocusTargetBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
 

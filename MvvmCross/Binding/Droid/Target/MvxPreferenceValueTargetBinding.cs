@@ -1,13 +1,12 @@
 ﻿using System;
 using Android.Preferences;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxPreferenceValueTargetBinding 
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
 

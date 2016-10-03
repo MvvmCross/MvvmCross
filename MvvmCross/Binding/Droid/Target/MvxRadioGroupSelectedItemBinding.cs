@@ -8,13 +8,12 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxRadioGroupSelectedItemBinding 
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private object _currentValue;
         private IDisposable _subscription;
@@ -44,7 +43,8 @@ namespace MvvmCross.Binding.Droid.Target
         private void RadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs args)
         {
             var radioGroup = (MvxRadioGroup)Target;
-            if (radioGroup == null) { return; }
+            if (radioGroup == null)
+                return;
 
             object newValue = null;
             var r = radioGroup.FindViewById<RadioButton>(args.CheckedId);

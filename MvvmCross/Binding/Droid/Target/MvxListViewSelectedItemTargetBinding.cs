@@ -9,7 +9,6 @@ using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -17,7 +16,7 @@ namespace MvvmCross.Binding.Droid.Target
 #warning Can this be expanded to GridView too? Or to others?
 
     public class MvxListViewSelectedItemTargetBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected MvxListView ListView => (MvxListView)Target;
 
