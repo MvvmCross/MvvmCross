@@ -1,4 +1,4 @@
-// MvxIosPlatformProperties.cs
+// MvxTvosPlatformProperties.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,11 +14,11 @@ namespace MvvmCross.tvOS.Platform
     using UIKit;
 
     [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
-    public class MvxIosPlatformProperties : IMvxIosPlatformProperties
+    public class MvxTvosPlatformProperties : IMvxTvosPlatformProperties
     {
-        #region Implementation of IMvxIosPlatformProperties
+        #region Implementation of IMvxTvosPlatformProperties
 
-        public MvxIosFormFactor FormFactor
+        public MvxTvosFormFactor FormFactor
         {
             get
             {
@@ -26,12 +26,12 @@ namespace MvvmCross.tvOS.Platform
                 {
                     case UIUserInterfaceIdiom.Phone:
                         if (UIScreen.MainScreen.Bounds.Height * UIScreen.MainScreen.Scale >= 1136)
-                            return MvxIosFormFactor.TallPhone;
+                            return MvxTvosFormFactor.TallPhone;
 
-                        return MvxIosFormFactor.Phone;
+                        return MvxTvosFormFactor.Phone;
 
                     case UIUserInterfaceIdiom.Pad:
-                        return MvxIosFormFactor.Pad;
+                        return MvxTvosFormFactor.Pad;
 
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -39,7 +39,7 @@ namespace MvvmCross.tvOS.Platform
             }
         }
 
-        public MvxIosDisplayDensity DisplayDensity
+        public MvxTvosDisplayDensity DisplayDensity
         {
             get
             {
@@ -48,14 +48,14 @@ namespace MvvmCross.tvOS.Platform
                     var scale = (int)Math.Round(UIScreen.MainScreen.Scale);
                     if (scale == 2)
                     {
-                        return MvxIosDisplayDensity.Retina;
+                        return MvxTvosDisplayDensity.Retina;
                     }
                 }
 
-                return MvxIosDisplayDensity.Normal;
+                return MvxTvosDisplayDensity.Normal;
             }
         }
 
-        #endregion Implementation of IMvxIosPlatformProperties
+        #endregion Implementation of IMvxTvosPlatformProperties
     }
 }

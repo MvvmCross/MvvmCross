@@ -1,4 +1,4 @@
-// MvxIosViewPresenter.cs
+// MvxTvosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,8 +14,8 @@ namespace MvvmCross.tvOS.Views.Presenters
 
     using UIKit;
 
-    public class MvxIosViewPresenter
-        : MvxBaseIosViewPresenter
+    public class MvxTvosViewPresenter
+        : MvxBaseTvosViewPresenter
     {
         private readonly IUIApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
@@ -29,7 +29,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         protected virtual UIWindow Window => this._window;
 
-        public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
+        public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
             this._applicationDelegate = applicationDelegate;
             this._window = window;
@@ -57,11 +57,11 @@ namespace MvvmCross.tvOS.Views.Presenters
             }
         }
 
-        public virtual void Show(IMvxIosView view)
+        public virtual void Show(IMvxTvosView view)
         {
             var viewController = view as UIViewController;
             if (viewController == null)
-                throw new MvxException("Passed in IMvxIosView is not a UIViewController");
+                throw new MvxException("Passed in IMvxTvosView is not a UIViewController");
 
             if (this.MasterNavigationController == null)
                 this.ShowFirstView(viewController);
@@ -84,7 +84,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 return;
             }
 
-            var topView = topViewController as IMvxIosView;
+            var topView = topViewController as IMvxTvosView;
             if (topView == null)
             {
                 MvxTrace.Warning(

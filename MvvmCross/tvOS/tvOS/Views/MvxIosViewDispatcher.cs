@@ -1,4 +1,4 @@
-// MvxIosViewDispatcher.cs
+// MvxTvosViewDispatcher.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,13 +14,13 @@ namespace MvvmCross.tvOS.Views
     using MvvmCross.Platform.Platform;
     using MvvmCross.tvOS.Views.Presenters;
 
-    public class MvxIosViewDispatcher
-        : MvxIosUIThreadDispatcher
+    public class MvxTvosViewDispatcher
+        : MvxTvosUIThreadDispatcher
           , IMvxViewDispatcher
     {
-        private readonly IMvxIosViewPresenter _presenter;
+        private readonly IMvxTvosViewPresenter _presenter;
 
-        public MvxIosViewDispatcher(IMvxIosViewPresenter presenter)
+        public MvxTvosViewDispatcher(IMvxTvosViewPresenter presenter)
         {
             this._presenter = presenter;
         }

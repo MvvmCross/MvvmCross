@@ -17,18 +17,18 @@ namespace MvvmCross.tvOS.Views
     public class MvxFormFactorSpecificAttribute
         : MvxConditionalConventionalAttribute
     {
-        public MvxFormFactorSpecificAttribute(MvxIosFormFactor target)
+        public MvxFormFactorSpecificAttribute(MvxTvosFormFactor target)
         {
             this.Target = target;
         }
 
-        public MvxIosFormFactor Target { get; private set; }
+        public MvxTvosFormFactor Target { get; private set; }
 
         public override bool IsConditionSatisfied
         {
             get
             {
-                var properties = Mvx.Resolve<IMvxIosPlatformProperties>();
+                var properties = Mvx.Resolve<IMvxTvosPlatformProperties>();
                 return (properties.FormFactor == this.Target);
             }
         }

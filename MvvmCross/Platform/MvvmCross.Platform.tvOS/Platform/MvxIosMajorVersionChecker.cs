@@ -1,4 +1,4 @@
-// MvxIosMajorVersionChecker.cs
+// MvxTvosMajorVersionChecker.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,22 +7,22 @@
 
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    public class MvxIosMajorVersionChecker
+    public class MvxTvosMajorVersionChecker
     {
         public bool IsVersionOrHigher { get; private set; }
 
-        public MvxIosMajorVersionChecker(int major, bool defaultValue = true)
+        public MvxTvosMajorVersionChecker(int major, bool defaultValue = true)
         {
-            this.IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
+            this.IsVersionOrHigher = ReadIsTvosVersionOrHigher(major, defaultValue);
         }
 
-        private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)
+        private static bool ReadIsTvosVersionOrHigher(int target, bool defaultValue)
         {
-            IMvxIosSystem touchSystem;
-            Mvx.TryResolve<IMvxIosSystem>(out touchSystem);
+            IMvxTvosSystem touchSystem;
+            Mvx.TryResolve<IMvxTvosSystem>(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
+                Mvx.Warning("IMvxTvosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

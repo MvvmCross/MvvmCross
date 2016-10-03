@@ -1,4 +1,4 @@
-// MvxIosTask.cs
+// MvxTvosTask.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,7 @@ namespace MvvmCross.Platform.tvOS.Platform
 
     using UIKit;
 
-    public class MvxIosTask
+    public class MvxTvosTask
     {
         protected bool DoUrlOpen(NSUrl url)
         {

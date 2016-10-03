@@ -14,24 +14,24 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxIosView IosView => base.ViewController as IMvxIosView;
+        protected IMvxTvosView TvosView => base.ViewController as IMvxTvosView;
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
-            if (!(eventSource is IMvxIosView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
+            if (!(eventSource is IMvxTvosView))
+                throw new ArgumentException("eventSource", "eventSource should be a IMvxTvosView");
         }
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.IosView.OnViewCreate();
+            this.TvosView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.IosView.OnViewDestroy();
+            this.TvosView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

@@ -17,26 +17,26 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxIosView IosView => this.ViewController as IMvxIosView;
+        protected IMvxTvosView TvosView => this.ViewController as IMvxTvosView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
-            if (!(eventSource is IMvxIosView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
+            if (!(eventSource is IMvxTvosView))
+                throw new ArgumentException("eventSource", "eventSource should be a IMvxTvosView");
 
-            this.IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
+            this.TvosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (this.IosView == null)
+            if (this.TvosView == null)
             {
                 MvxTrace.Warning("iosView is null for clearup of bindings in type {0}",
-                               this.IosView?.GetType().Name);
+                               this.TvosView?.GetType().Name);
                 return;
             }
-            this.IosView.ClearAllBindings();
+            this.TvosView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

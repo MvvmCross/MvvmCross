@@ -15,7 +15,7 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
-          , IMvxIosView
+          , IMvxTvosView
     {
         protected MvxTabBarViewController()
         {
@@ -51,7 +51,7 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxTabBarViewController<TViewModel>
         : MvxTabBarViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTabBarViewController()
         {

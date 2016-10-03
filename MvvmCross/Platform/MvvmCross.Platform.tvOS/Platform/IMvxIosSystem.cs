@@ -1,4 +1,4 @@
-// IMvxIosSystem.cs
+// IMvxTvosSystem.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    public interface IMvxIosSystem
+    public interface IMvxTvosSystem
     {
-        MvxIosVersion Version { get; }
+        MvxTvosVersion Version { get; }
     }
 }

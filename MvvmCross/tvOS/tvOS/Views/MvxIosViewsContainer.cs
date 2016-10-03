@@ -1,4 +1,4 @@
-// MvxIosViewsContainer.cs
+// MvxTvosViewsContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,13 +16,13 @@ namespace MvvmCross.tvOS.Views
 
     using UIKit;
 
-    public class MvxIosViewsContainer
+    public class MvxTvosViewsContainer
         : MvxViewsContainer
-        , IMvxIosViewsContainer
+        , IMvxTvosViewsContainer
     {
         public MvxViewModelRequest CurrentRequest { get; private set; }
 
-        public virtual IMvxIosView CreateView(MvxViewModelRequest request)
+        public virtual IMvxTvosView CreateView(MvxViewModelRequest request)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace MvvmCross.tvOS.Views
             }
         }
 
-        protected virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        protected virtual IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)
@@ -51,7 +51,7 @@ namespace MvvmCross.tvOS.Views
                 {
                     var storyboard = UIStoryboard.FromName(storyboardName, null);
                     var viewController = storyboard.InstantiateViewController(viewType.Name);
-                    return (IMvxIosView)viewController;
+                    return (IMvxTvosView)viewController;
                 }
                 catch (Exception ex)
                 {
@@ -59,13 +59,13 @@ namespace MvvmCross.tvOS.Views
                 }
             }
 
-            var view = Activator.CreateInstance(viewType) as IMvxIosView;
+            var view = Activator.CreateInstance(viewType) as IMvxTvosView;
             if (view == null)
                 throw new MvxException("View not loaded for " + viewType);
             return view;
         }
 
-        public virtual IMvxIosView CreateView(IMvxViewModel viewModel)
+        public virtual IMvxTvosView CreateView(IMvxViewModel viewModel)
         {
             var request = new MvxViewModelInstanceRequest(viewModel);
             var view = this.CreateView(request);

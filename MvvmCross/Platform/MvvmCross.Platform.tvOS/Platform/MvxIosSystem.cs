@@ -1,4 +1,4 @@
-// MvxIosSystem.cs
+// MvxTvosSystem.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,12 +11,12 @@ namespace MvvmCross.Platform.tvOS.Platform
 
     using UIKit;
 
-    public class MvxIosSystem
-        : IMvxIosSystem
+    public class MvxTvosSystem
+        : IMvxTvosSystem
     {
-        public MvxIosVersion Version { get; private set; }
+        public MvxTvosVersion Version { get; private set; }
 
-        public MvxIosSystem()
+        public MvxTvosSystem()
         {
             this.BuildVersion();
         }
@@ -25,7 +25,7 @@ namespace MvvmCross.Platform.tvOS.Platform
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
             var parts = version.Split('.').Select(int.Parse).ToArray();
-            this.Version = new MvxIosVersion(parts);
+            this.Version = new MvxTvosVersion(parts);
         }
     }
 }

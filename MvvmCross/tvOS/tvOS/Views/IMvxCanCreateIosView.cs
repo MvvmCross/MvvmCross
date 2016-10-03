@@ -1,4 +1,4 @@
-// IMvxCanCreateIosView.cs
+// IMvxCanCreateTvosView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,7 @@
 namespace MvvmCross.tvOS.Views
 {
     // just a marker interface
-    public interface IMvxCanCreateIosView
+    public interface IMvxCanCreateTvosView
     {
     }
 }

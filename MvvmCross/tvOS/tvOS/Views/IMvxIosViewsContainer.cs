@@ -1,4 +1,4 @@
-// IMvxIosViewsContainer.cs
+// IMvxTvosViewsContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,8 +9,8 @@ namespace MvvmCross.tvOS.Views
 {
     using MvvmCross.Core.Views;
 
-    public interface IMvxIosViewsContainer
+    public interface IMvxTvosViewsContainer
         : IMvxViewsContainer
-          , IMvxIosViewCreator
+          , IMvxTvosViewCreator
     { }
 }

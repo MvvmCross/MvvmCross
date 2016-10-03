@@ -1,4 +1,4 @@
-// MvxIosBindingBuilder.cs
+// MvxTvosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.tvOS
 
     using UIKit;
 
-    public class MvxIosBindingBuilder
+    public class MvxTvosBindingBuilder
         : MvxBindingBuilder
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.tvOS
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
 
-        public MvxIosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
+        public MvxTvosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
                                     Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
                                     Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)

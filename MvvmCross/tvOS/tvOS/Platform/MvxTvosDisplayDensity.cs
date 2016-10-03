@@ -1,4 +1,4 @@
-// MvxIosDisplayDensity.cs
+// MvxTvosDisplayDensity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Platform
 {
-    public enum MvxIosDisplayDensity
+    public enum MvxTvosDisplayDensity
     {
         Normal,
         Retina

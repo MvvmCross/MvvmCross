@@ -1,4 +1,4 @@
-// IMvxIosViewCreator.cs
+// IMvxTvosViewCreator.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,10 +9,10 @@ namespace MvvmCross.tvOS.Views
 {
     using MvvmCross.Core.ViewModels;
 
-    public interface IMvxIosViewCreator : IMvxCurrentRequest
+    public interface IMvxTvosViewCreator : IMvxCurrentRequest
     {
-        IMvxIosView CreateView(MvxViewModelRequest request);
+        IMvxTvosView CreateView(MvxViewModelRequest request);
 
-        IMvxIosView CreateView(IMvxViewModel viewModel);
+        IMvxTvosView CreateView(IMvxViewModel viewModel);
     }
 }
