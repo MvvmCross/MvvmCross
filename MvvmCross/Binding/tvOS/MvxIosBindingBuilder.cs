@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS
+namespace MvvmCross.Binding.tvOS
 {
     using System;
 
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.iOS.Target;
-    using MvvmCross.Binding.iOS.ValueConverters;
-    using MvvmCross.Binding.iOS.Views;
+    using MvvmCross.Binding.tvOS.Target;
+    using MvvmCross.Binding.tvOS.ValueConverters;
+    using MvvmCross.Binding.tvOS.Views;
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Platform;
 

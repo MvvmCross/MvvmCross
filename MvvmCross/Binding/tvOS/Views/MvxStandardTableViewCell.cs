@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Binding.tvOS.Views
 {
     using System;
     using System.Collections.Generic;

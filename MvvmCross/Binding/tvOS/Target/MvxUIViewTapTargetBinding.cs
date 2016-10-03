@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Binding.tvOS.Target
 {
     using System;
     using System.Windows.Input;
 
     using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.iOS.Views.Gestures;
+    using MvvmCross.Binding.tvOS.Views.Gestures;
 
     using UIKit;
 

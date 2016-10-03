@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Binding.tvOS.Views
 {
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Platform.Core;

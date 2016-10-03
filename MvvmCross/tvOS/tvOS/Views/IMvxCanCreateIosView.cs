@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.tvOS.Views
 {
     // just a marker interface
     public interface IMvxCanCreateIosView

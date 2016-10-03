@@ -1,18 +1,18 @@
-﻿// MvxIosViewDispatcher.cs
+// MvxIosViewDispatcher.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.tvOS.Views
 {
     using System;
 
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
-    using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.tvOS.Views.Presenters;
 
     public class MvxIosViewDispatcher
         : MvxIosUIThreadDispatcher
@@ -29,7 +29,7 @@ namespace MvvmCross.iOS.Views
         {
             Action action = () =>
                 {
-                    MvxTrace.TaggedTrace("iOSNavigation", "Navigate requested");
+                    MvxTrace.TaggedTrace("tvOSNavigation", "Navigate requested");
                     this._presenter.Show(request);
                 };
             return this.RequestMainThreadAction(action);

@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.iOS.Platform
+namespace MvvmCross.Platform.tvOS.Platform
 {
     public class MvxIosMajorVersionChecker
     {
@@ -22,7 +22,7 @@ namespace MvvmCross.Platform.iOS.Platform
             Mvx.TryResolve<IMvxIosSystem>(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
+                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

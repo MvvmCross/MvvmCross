@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Views.Presenters
+namespace MvvmCross.tvOS.Views.Presenters
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;

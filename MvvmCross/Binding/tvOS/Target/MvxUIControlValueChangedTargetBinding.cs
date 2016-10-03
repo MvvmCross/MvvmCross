@@ -10,7 +10,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Binding.tvOS.Target
 {
     public class MvxUIControlValueChangedTargetBinding
         : MvxConvertingTargetBinding

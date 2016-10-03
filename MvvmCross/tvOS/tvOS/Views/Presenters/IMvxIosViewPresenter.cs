@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Views.Presenters
+namespace MvvmCross.tvOS.Views.Presenters
 {
     using MvvmCross.Core.Views;
-    using MvvmCross.Platform.iOS.Views;
+    using MvvmCross.Platform.tvOS.Views;
 
     public interface IMvxIosViewPresenter
         : IMvxViewPresenter
