@@ -27,13 +27,16 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
+
+            if (ShouldSkipSetValueForPlatformSpecificReasons(target, value))
+                return;
 
             if (ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
@@ -67,6 +70,11 @@ namespace MvvmCross.Binding.Bindings.Target
         }
 
         protected virtual bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
+        {
+            return false;
+        }
+
+        protected virtual bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object value)
         {
             return false;
         }
