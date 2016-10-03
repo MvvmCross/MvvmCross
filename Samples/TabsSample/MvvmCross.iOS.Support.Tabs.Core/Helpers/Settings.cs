@@ -4,40 +4,42 @@ using Plugin.Settings.Abstractions;
 
 namespace MvvmCross.iOS.Support.Tabs.Core.Helpers
 {
-  /// <summary>
-  /// This is the Settings static class that can be used in your Core solution or in any
-  /// of your client applications. All settings are laid out the same exact way with getters
-  /// and setters. 
-  /// </summary>
-  public static class Settings
-  {
-    private static ISettings AppSettings
-    {
-      get
-      {
-        return CrossSettings.Current;
-      }
-    }
+	/// <summary>
+	/// This is the Settings static class that can be used in your Core solution or in any
+	/// of your client applications. All settings are laid out the same exact way with getters
+	/// and setters. 
+	/// </summary>
+	public static class Settings
+	{
+		public const string TokenKey = "token";
 
-    #region Setting Constants
+		private static ISettings AppSettings
+		{
+			get
+			{
+				return CrossSettings.Current;
+			}
+		}
 
-    private const string SettingsKey = "settings_key";
-    private static readonly string SettingsDefault = string.Empty;
+		#region Setting Constants
 
-    #endregion
+		private const string SettingsKey = "settings_key";
+		private static readonly string SettingsDefault = string.Empty;
+
+		#endregion
 
 
-    public static string GeneralSettings
-    {
-      get
-      {
-        return AppSettings.GetValueOrDefault<string>(SettingsKey, SettingsDefault);
-      }
-      set
-      {
-        AppSettings.AddOrUpdateValue<string>(SettingsKey, value);
-      }
-    }
+		public static string GeneralSettings
+		{
+			get
+			{
+				return AppSettings.GetValueOrDefault<string>(SettingsKey, SettingsDefault);
+			}
+			set
+			{
+				AppSettings.AddOrUpdateValue<string>(SettingsKey, value);
+			}
+		}
 
-  }
+	}
 }

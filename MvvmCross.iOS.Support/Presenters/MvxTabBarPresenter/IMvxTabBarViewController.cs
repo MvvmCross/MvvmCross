@@ -7,7 +7,7 @@ namespace MvvmCross.iOS.Support.Presenters
 {
 	public interface IMvxTabBarViewController
 	{
-		void ShowTabView(UIViewController viewController, bool wrapInNavigationController, IDictionary<string, string> presentationValues);
+		void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName);
 
 		bool ShowChildView(UIViewController viewController);
 
