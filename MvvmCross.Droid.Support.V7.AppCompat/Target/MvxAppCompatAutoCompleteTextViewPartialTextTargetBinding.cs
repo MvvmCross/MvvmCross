@@ -5,20 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     using System;
     using System.Reflection;
 
     using MvvmCross.Binding;
-    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Droid.Support.V7.AppCompat.Widget;
     using MvvmCross.Platform.Platform;
 
     public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
-       : MvxPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
+       : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -44,22 +46,18 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             if (autoComplete == null)
                 return;
 
-            this._subscribed = true;
-            autoComplete.PartialTextChanged += this.AutoCompleteOnPartialTextChanged;
+            _subscription = autoComplete.WeakSubscribe(
+                nameof(autoComplete.PartialTextChanged),
+                AutoCompleteOnPartialTextChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var autoComplete = this.View;
-                if (autoComplete != null && this._subscribed)
-                {
-                    autoComplete.PartialTextChanged -= this.AutoCompleteOnPartialTextChanged;
-                    this._subscribed = false;
-                }
+                _subscription?.Dispose();
             }
+            base.Dispose(isDisposing);
         }
     }
 }

@@ -24,8 +24,5 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         object GetItem(int position);
 
         int ItemTemplateId { get; set; }
-
-        // Clears bindings associated with the view holders
-        void ClearAllBindings();
     }
 }

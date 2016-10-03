@@ -5,6 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     using System;
@@ -13,18 +16,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     using Android.Widget;
 
     using MvvmCross.Binding;
-    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Binding.Droid.Views;
     using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 
-    public class MvxAppCompatRadioGroupSelectedItemBinding : MvxConvertingTargetBinding
+    public class MvxAppCompatRadioGroupSelectedItemBinding : MvxAndroidTargetBinding
     {
+        private IDisposable _subscription;
         private object _currentValue;
 
         public MvxAppCompatRadioGroupSelectedItemBinding(MvxAppCompatRadioGroup radioGroup)
             : base(radioGroup)
         {
-            radioGroup.CheckedChange += this.RadioGroupCheckedChanged;
+            _subscription = radioGroup.WeakSubscribe<MvxAppCompatRadioGroup, RadioGroup.CheckedChangeEventArgs>(
+                nameof(radioGroup.CheckedChange), 
+                RadioGroupCheckedChanged);
         }
 
         private bool CheckValueChanged(object newValue)
@@ -110,11 +115,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         {
             if (isDisposing)
             {
-                var radioGroup = (MvxAppCompatRadioGroup)this.Target;
-                if (radioGroup != null)
-                {
-                    radioGroup.CheckedChange -= this.RadioGroupCheckedChanged;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }
