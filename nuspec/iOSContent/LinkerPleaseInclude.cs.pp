@@ -9,7 +9,7 @@ namespace $rootnamespace$
 {
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
-    [Preserve(AllMembers = true)]
+    [Foundation.Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
     {
 		public void Include(MvxTaskBasedBindingContext c)
