@@ -12,6 +12,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
     using MvvmCross.Binding.Attributes;
     using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
 
     public class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
     {
@@ -47,7 +48,15 @@ namespace MvvmCross.Binding.Bindings.Target
         {
 #warning Check this is Unity compatible :/
             var setMethod = this.TargetPropertyInfo.GetSetMethod();
-            setMethod.Invoke(target, new object[] { value });
+
+            if (setMethod != null)
+            {
+                setMethod.Invoke(target, new object[] { value });
+            }
+            else
+            {
+                throw new MvxException("No Set method found for property {0}. Check property not read-only", this.TargetPropertyInfo.Name);
+            }
         }
     }
 
