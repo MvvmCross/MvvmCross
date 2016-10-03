@@ -10,7 +10,7 @@ namespace MvvmCross.tvOS.Views
 
     using UIKit;
 
-    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
+    public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTvosView
     {
         private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
 
@@ -57,7 +57,7 @@ namespace MvvmCross.tvOS.Views
             this.SetViewControllers(new UIViewController[] { defaultVC }, UIPageViewControllerNavigationDirection.Forward, true, null);
             this.GetNextViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
-                IMvxIosView rcTV = rc as IMvxIosView;
+                IMvxTvosView rcTV = rc as IMvxTvosView;
                 if (rcTV == null)
                     return (null);
                 IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
@@ -71,7 +71,7 @@ namespace MvvmCross.tvOS.Views
             };
             this.GetPreviousViewController = delegate (UIPageViewController pc, UIViewController rc)
             {
-                IMvxIosView rcTV = rc as IMvxIosView;
+                IMvxTvosView rcTV = rc as IMvxTvosView;
                 if (rcTV == null)
                     return (null);
                 IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
@@ -111,7 +111,7 @@ namespace MvvmCross.tvOS.Views
         }
     }
 
-    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxPageViewModel
+    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxPageViewModel
     {
         public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
         {

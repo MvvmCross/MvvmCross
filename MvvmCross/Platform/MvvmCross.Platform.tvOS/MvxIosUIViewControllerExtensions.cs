@@ -1,4 +1,4 @@
-// MvxIosUIViewControllerExtensions.cs
+// MvxTvosUIViewControllerExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.tvOS
 {
     using UIKit;
 
-    public static class MvxIosUIViewControllerExtensions
+    public static class MvxTvosUIViewControllerExtensions
     {
         public static bool IsVisible(this UIViewController controller)
         {

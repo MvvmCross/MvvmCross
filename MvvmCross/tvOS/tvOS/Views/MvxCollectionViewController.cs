@@ -19,7 +19,7 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxCollectionViewController
         : MvxEventSourceCollectionViewController
-          , IMvxIosView
+          , IMvxTvosView
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
@@ -58,7 +58,7 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxCollectionViewController<TViewModel>
         : MvxCollectionViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {

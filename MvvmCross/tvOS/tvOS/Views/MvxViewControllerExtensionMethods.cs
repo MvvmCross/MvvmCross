@@ -15,13 +15,13 @@ namespace MvvmCross.tvOS.Views
 
     public static class MvxViewControllerExtensionMethods
     {
-        public static void OnViewCreate(this IMvxIosView iosView)
+        public static void OnViewCreate(this IMvxTvosView iosView)
         {
             //var view = iosView as IMvxView<TViewModel>;
             iosView.OnViewCreate(iosView.LoadViewModel);
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxIosView iosView)
+        private static IMvxViewModel LoadViewModel(this IMvxTvosView iosView)
         {
 #warning NullViewModel needed?
             // how to do N

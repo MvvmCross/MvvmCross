@@ -11,7 +11,7 @@ namespace MvvmCross.Platform.tvOS
 
     using UIKit;
 
-    public static class MvxIosColorExtensionMethods
+    public static class MvxTvosColorExtensionMethods
     {
         public static UIColor ColorFromInt(this uint rgbValue)
         {

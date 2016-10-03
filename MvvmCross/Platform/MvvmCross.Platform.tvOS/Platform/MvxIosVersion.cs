@@ -1,4 +1,4 @@
-// MvxIosVersion.cs
+// MvxTvosVersion.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,12 +9,12 @@ namespace MvvmCross.Platform.tvOS.Platform
 {
     using MvvmCross.Platform.Exceptions;
 
-    public class MvxIosVersion
+    public class MvxTvosVersion
     {
-        public MvxIosVersion(int[] parts)
+        public MvxTvosVersion(int[] parts)
         {
             if (parts == null || parts.Length == 0)
-                throw new MvxException("Invalid parts in constructor for MvxIosVersion");
+                throw new MvxException("Invalid parts in constructor for MvxTvosVersion");
 
             this.Parts = parts;
             this.Major = parts[0];

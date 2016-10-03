@@ -1,4 +1,4 @@
-// MvxCanCreateIosViewExtensionMethods.cs
+// MvxCanCreateTvosViewExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,9 +13,9 @@ namespace MvvmCross.tvOS.Views
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
 
-    public static class MvxCanCreateIosViewExtensionMethods
+    public static class MvxCanCreateTvosViewExtensionMethods
     {
-        public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateIosView view,
+        public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateTvosView view,
                                                                               object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
@@ -25,8 +25,8 @@ namespace MvvmCross.tvOS.Views
 
 #warning TODO - could this move down to IMvxView level?
 
-        public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxCanCreateIosView view,
+        public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(
+            this IMvxCanCreateTvosView view,
             IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
@@ -36,26 +36,26 @@ namespace MvvmCross.tvOS.Views
             return view.CreateViewControllerFor(request);
         }
 
-        public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxCanCreateIosView view,
+        public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(
+            this IMvxCanCreateTvosView view,
             MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(request);
         }
 
-        public static IMvxIosView CreateViewControllerFor(
-            this IMvxCanCreateIosView view,
+        public static IMvxTvosView CreateViewControllerFor(
+            this IMvxCanCreateTvosView view,
             MvxViewModelRequest request)
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
+            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(request);
         }
 
-        public static IMvxIosView CreateViewControllerFor(
-            this IMvxCanCreateIosView view,
+        public static IMvxTvosView CreateViewControllerFor(
+            this IMvxCanCreateTvosView view,
             IMvxViewModel viewModel)
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(viewModel);
+            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(viewModel);
         }
     }
 }

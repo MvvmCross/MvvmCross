@@ -19,7 +19,7 @@ namespace MvvmCross.Binding.tvOS.Views
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private readonly NSString _cellIdentifier;
-        private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
+        private readonly MvxTvosMajorVersionChecker _iosVersion6Checker = new MvxTvosMajorVersionChecker(6);
 
         protected virtual NSString CellIdentifier => this._cellIdentifier;
 

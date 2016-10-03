@@ -1,4 +1,4 @@
-// IMvxIosModalHost.cs
+// IMvxTvosModalHost.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.tvOS.Views
 {
     using UIKit;
 
-    public interface IMvxIosModalHost
+    public interface IMvxTvosModalHost
     {
         bool PresentModalViewController(UIViewController controller, bool animated);
 

@@ -1,4 +1,4 @@
-// MvxIosFormFactor.cs
+// MvxTvosFormFactor.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Platform
 {
-    public enum MvxIosFormFactor
+    public enum MvxTvosFormFactor
     {
         Phone,
         Pad,

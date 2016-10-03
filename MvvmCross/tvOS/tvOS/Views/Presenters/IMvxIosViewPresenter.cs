@@ -1,4 +1,4 @@
-// IMvxIosViewPresenter.cs
+// IMvxTvosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,10 +10,10 @@ namespace MvvmCross.tvOS.Views.Presenters
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.tvOS.Views;
 
-    public interface IMvxIosViewPresenter
+    public interface IMvxTvosViewPresenter
         : IMvxViewPresenter
-        , IMvxCanCreateIosView
-        , IMvxIosModalHost
+        , IMvxCanCreateTvosView
+        , IMvxTvosModalHost
     {
     }
 }

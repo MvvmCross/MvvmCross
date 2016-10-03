@@ -1,4 +1,4 @@
-// MvxIosUIThreadDispatcher.cs
+// MvxTvosUIThreadDispatcher.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,12 +14,12 @@ namespace MvvmCross.tvOS.Views
 
     using UIKit;
 
-    public abstract class MvxIosUIThreadDispatcher
+    public abstract class MvxTvosUIThreadDispatcher
         : MvxMainThreadDispatcher
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
-        protected MvxIosUIThreadDispatcher()
+        protected MvxTvosUIThreadDispatcher()
         {
             this._uiSynchronizationContext = SynchronizationContext.Current;
         }

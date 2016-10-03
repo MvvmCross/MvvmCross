@@ -1,4 +1,4 @@
-// MvxModalNavSupportIosViewPresenter.cs
+// MvxModalNavSupportTvosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,18 +14,18 @@ namespace MvvmCross.tvOS.Views.Presenters
 
     using UIKit;
 
-    public class MvxModalNavSupportIosViewPresenter : MvxIosViewPresenter
+    public class MvxModalNavSupportTvosViewPresenter : MvxTvosViewPresenter
     {
         private UIViewController _currentModalViewController;
 
-        public MvxModalNavSupportIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
+        public MvxModalNavSupportTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
 
-        public override void Show(IMvxIosView view)
+        public override void Show(IMvxTvosView view)
         {
-            if (view is IMvxModalIosView)
+            if (view is IMvxModalTvosView)
             {
                 if (this._currentModalViewController != null)
                     throw new MvxException("Only one modal view controller at a time supported");
@@ -80,11 +80,11 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (this._currentModalViewController != null)
             {
-                var touchView = this._currentModalViewController as IMvxIosView;
+                var touchView = this._currentModalViewController as IMvxTvosView;
                 if (touchView == null)
                 {
                     MvxTrace.Error(
-                                   "Unable to close view - modal is showing but not an IMvxIosView");
+                                   "Unable to close view - modal is showing but not an IMvxTvosView");
                     return;
                 }
 

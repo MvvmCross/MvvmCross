@@ -1,4 +1,4 @@
-// MvxIosDateTimeExtensionMethods.cs
+// MvxTvosDateTimeExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,7 @@ namespace MvvmCross.Platform.tvOS
 
     using Foundation;
 
-    public static class MvxIosDateTimeExtensionMethods
+    public static class MvxTvosDateTimeExtensionMethods
     {
         private static readonly DateTime ReferenceNSDateTime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 

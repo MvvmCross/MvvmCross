@@ -1,4 +1,4 @@
-// MvxBaseIosViewPresenter.cs
+// MvxBaseTvosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,8 @@ namespace MvvmCross.tvOS.Views.Presenters
 
     using UIKit;
 
-    public class MvxBaseIosViewPresenter
-        : MvxViewPresenter, IMvxIosViewPresenter
+    public class MvxBaseTvosViewPresenter
+        : MvxViewPresenter, IMvxTvosViewPresenter
     {
         public override void Show(MvxViewModelRequest request)
         {

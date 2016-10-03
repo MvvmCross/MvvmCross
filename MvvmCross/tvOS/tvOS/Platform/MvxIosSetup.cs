@@ -1,4 +1,4 @@
-// MvxIosSetup.cs
+// MvxTvosSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -30,21 +30,21 @@ namespace MvvmCross.tvOS.Platform
 
     using UIKit;
 
-    public abstract class MvxIosSetup
+    public abstract class MvxTvosSetup
         : MvxSetup
     {
         private readonly IMvxApplicationDelegate _applicationDelegate;
         private readonly UIWindow _window;
 
-        private IMvxIosViewPresenter _presenter;
+        private IMvxTvosViewPresenter _presenter;
 
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
             this._window = window;
             this._applicationDelegate = applicationDelegate;
         }
 
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
         {
             this._presenter = presenter;
             this._applicationDelegate = applicationDelegate;
@@ -66,25 +66,25 @@ namespace MvvmCross.tvOS.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = this.CreateIosViewsContainer();
-            this.RegisterIosViewCreator(container);
+            var container = this.CreateTvosViewsContainer();
+            this.RegisterTvosViewCreator(container);
             return container;
         }
 
-        protected virtual IMvxIosViewsContainer CreateIosViewsContainer()
+        protected virtual IMvxTvosViewsContainer CreateTvosViewsContainer()
         {
-            return new MvxIosViewsContainer();
+            return new MvxTvosViewsContainer();
         }
 
-        protected virtual void RegisterIosViewCreator(IMvxIosViewsContainer container)
+        protected virtual void RegisterTvosViewCreator(IMvxTvosViewsContainer container)
         {
-            Mvx.RegisterSingleton<IMvxIosViewCreator>(container);
+            Mvx.RegisterSingleton<IMvxTvosViewCreator>(container);
             Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxIosViewDispatcher(this.Presenter);
+            return new MvxTvosViewDispatcher(this.Presenter);
         }
 
         protected override void InitializePlatformServices()
@@ -98,18 +98,18 @@ namespace MvvmCross.tvOS.Platform
 
         protected virtual void RegisterPlatformProperties()
         {
-            Mvx.RegisterSingleton<IMvxIosSystem>(this.CreateIosSystemProperties());
+            Mvx.RegisterSingleton<IMvxTvosSystem>(this.CreateTvosSystemProperties());
         }
 
-        protected virtual MvxIosSystem CreateIosSystemProperties()
+        protected virtual MvxTvosSystem CreateTvosSystemProperties()
         {
-            return new MvxIosSystem();
+            return new MvxTvosSystem();
         }
 
         [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
         protected virtual void RegisterOldStylePlatformProperties()
         {
-            Mvx.RegisterSingleton<IMvxIosPlatformProperties>(new MvxIosPlatformProperties());
+            Mvx.RegisterSingleton<IMvxTvosPlatformProperties>(new MvxTvosPlatformProperties());
         }
 
         protected virtual void RegisterLifetime()
@@ -117,7 +117,7 @@ namespace MvvmCross.tvOS.Platform
             Mvx.RegisterSingleton<IMvxLifetime>(this._applicationDelegate);
         }
 
-        protected IMvxIosViewPresenter Presenter
+        protected IMvxTvosViewPresenter Presenter
         {
             get
             {
@@ -126,16 +126,16 @@ namespace MvvmCross.tvOS.Platform
             }
         }
 
-        protected virtual IMvxIosViewPresenter CreatePresenter()
+        protected virtual IMvxTvosViewPresenter CreatePresenter()
         {
-            return new MvxIosViewPresenter(this._applicationDelegate, this._window);
+            return new MvxTvosViewPresenter(this._applicationDelegate, this._window);
         }
 
         protected virtual void RegisterPresenter()
         {
             var presenter = this.Presenter;
             Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxIosModalHost>(presenter);
+            Mvx.RegisterSingleton<IMvxTvosModalHost>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -160,7 +160,7 @@ namespace MvvmCross.tvOS.Platform
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxIosBindingBuilder();
+            return new MvxTvosBindingBuilder();
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
