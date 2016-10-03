@@ -8,7 +8,6 @@
 using System;
 using System.Reflection;
 
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
@@ -16,7 +15,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
-        : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
+        : MvxAndroidPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
         private IDisposable _subscription;
 

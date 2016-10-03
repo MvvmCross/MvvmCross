@@ -9,12 +9,10 @@ using System;
 using System.Windows.Input;
 using Android.Views;
 using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewClickBinding
-        : MvxConvertingTargetBinding
+    public class MvxViewClickBinding : MvxAndroidTargetBinding
     {
         private ICommand _command;
         private IDisposable _clickSubscription;

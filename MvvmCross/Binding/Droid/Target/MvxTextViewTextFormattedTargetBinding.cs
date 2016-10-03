@@ -8,7 +8,6 @@
 using System;
 using Android.Text;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
@@ -16,7 +15,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxTextViewTextFormattedTargetBinding
-        : MvxConvertingTargetBinding, IMvxEditableTextView
+        : MvxAndroidTargetBinding, IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
         private IDisposable _subscription;
