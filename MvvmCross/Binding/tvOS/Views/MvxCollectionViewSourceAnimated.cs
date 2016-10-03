@@ -9,7 +9,7 @@ using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Binding.tvOS.Views
 {
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {

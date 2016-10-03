@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Platform
+namespace MvvmCross.tvOS.Platform
 {
     public enum MvxIosFormFactor
     {

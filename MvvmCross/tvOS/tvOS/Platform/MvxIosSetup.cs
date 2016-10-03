@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Platform
+namespace MvvmCross.tvOS.Platform
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.iOS;
+    using MvvmCross.Binding.tvOS;
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
@@ -23,10 +23,10 @@ namespace MvvmCross.iOS.Platform
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
-    using MvvmCross.Platform.iOS.Platform;
-    using MvvmCross.Platform.iOS.Views;
-    using MvvmCross.iOS.Views;
-    using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.Platform.tvOS.Platform;
+    using MvvmCross.Platform.tvOS.Views;
+    using MvvmCross.tvOS.Views;
+    using MvvmCross.tvOS.Views.Presenters;
 
     using UIKit;
 

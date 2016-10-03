@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.Platform.iOS.Views
+namespace MvvmCross.Platform.tvOS.Views
 {
     using System;
 

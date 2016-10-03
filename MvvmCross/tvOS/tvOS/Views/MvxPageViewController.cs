@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Views
+namespace MvvmCross.tvOS.Views
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.iOS.Views;
+    using MvvmCross.Platform.tvOS.Views;
 
     using UIKit;
 

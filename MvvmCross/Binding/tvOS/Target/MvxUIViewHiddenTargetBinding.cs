@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Binding.tvOS.Target
 {
     using MvvmCross.Binding.ExtensionMethods;
 

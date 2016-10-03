@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.ValueConverters
+namespace MvvmCross.Binding.tvOS.ValueConverters
 {
     using System;
     using System.Collections.Generic;

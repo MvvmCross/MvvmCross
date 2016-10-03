@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.tvOS.Views
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
@@ -42,7 +42,7 @@ namespace MvvmCross.iOS.Views
             }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on iOS currently */);
+            var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on tvOS currently */);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + iosView.Request.ViewModelType);
             return viewModel;

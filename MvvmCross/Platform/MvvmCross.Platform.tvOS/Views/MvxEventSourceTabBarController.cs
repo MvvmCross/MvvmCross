@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.iOS.Views
+namespace MvvmCross.Platform.tvOS.Views
 {
     using System;
 

@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Binding.tvOS.Views
 {
     using System;
 
     using Foundation;
 
     using MvvmCross.Platform;
-    using Platform.iOS.Platform;
+    using Platform.tvOS.Platform;
 
     using UIKit;
 

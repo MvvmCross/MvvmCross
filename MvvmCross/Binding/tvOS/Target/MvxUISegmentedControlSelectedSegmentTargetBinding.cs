@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Binding.tvOS.Target
 {
     using System;
     using System.Reflection;

@@ -1,11 +1,11 @@
-﻿// MvxUIActivityIndicatorViewHiddenTargetBinding.cs
+// MvxUIActivityIndicatorViewHiddenTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Binding.tvOS.Target
 {
     using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Platform.Platform;
