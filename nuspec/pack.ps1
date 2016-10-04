@@ -9,24 +9,33 @@ if (-Not(Test-Path ("nuget.exe")))
 Set-Alias nuget $targetNugetExe -Scope Global -Verbose
 
 del *.nupkg
-nuget pack MvvmCross.Binding.nuspec -Symbols
-nuget pack MvvmCross.Core.nuspec -Symbols
-nuget pack MvvmCross.Platform.nuspec -Symbols
-nuget pack MvvmCross.Console.Platform.nuspec -Symbols
-# note no -Symbols
+
+if (-Not(Get-Command "gitlink.exe" -ErrorAction SilentlyContinue))
+{
+    Write-Host "gitlink.exe is required to provide source information directly from the MvvmCross repositories on github." -ForegroundColor Yellow
+	Write-Host "See https://github.com/GitTools/GitLink for more information." -ForegroundColor Yellow
+    Write-Host "Please install gitlink via chocolatey" -ForegroundColor Red
+	return
+}
+
+$sourcePath = (Get-Item $PSScriptRoot).parent.FullName
+gitlink $sourcePath -u https://github.com/MvvmCross/MvvmCross
+
+nuget pack MvvmCross.Binding.nuspec
+nuget pack MvvmCross.Core.nuspec
+nuget pack MvvmCross.Platform.nuspec
+nuget pack MvvmCross.Console.Platform.nuspec
 nuget pack MvvmCross.StarterPack.nuspec
-# note no -Symbols
 nuget pack MvvmCross.CodeAnalysis.nuspec
-nuget pack MvvmCross.Tests.nuspec -Symbols
-# note no -Symbols
+nuget pack MvvmCross.Tests.nuspec
 nuget pack MvvmCross.nuspec
-nuget pack MvvmCross.Dialog.iOS.nuspec -Symbols
-nuget pack MvvmCross.Dialog.Droid.nuspec -Symbols
-nuget pack MvvmCross.BindingEx.nuspec -Symbols
-nuget pack MvvmCross.AutoView.nuspec -Symbols
-nuget pack MvvmCross.AutoView.iOS.nuspec -Symbols
-nuget pack MvvmCross.AutoView.Droid.nuspec -Symbols
-nuget pack MvvmCross.Droid.FullFragging.nuspec -Symbols
-nuget pack MvvmCross.Droid.Shared.nuspec -Symbols
+nuget pack MvvmCross.Dialog.iOS.nuspec
+nuget pack MvvmCross.Dialog.Droid.nuspec
+nuget pack MvvmCross.BindingEx.nuspec
+nuget pack MvvmCross.AutoView.nuspec
+nuget pack MvvmCross.AutoView.iOS.nuspec
+nuget pack MvvmCross.AutoView.Droid.nuspec
+nuget pack MvvmCross.Droid.FullFragging.nuspec
+nuget pack MvvmCross.Droid.Shared.nuspec
 
 pause

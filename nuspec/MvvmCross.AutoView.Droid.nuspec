@@ -30,9 +30,7 @@ This package contains the 'AutoView' Android libraries for MvvmCross
 	<files>		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.AutoView.Droid.*" target="lib\MonoAndroid" />
-		<file src="..\MvvmCross\AutoView\Droid\**\*.cs" target="src\MvvmCross.AutoView.Droid" />
 		<file src="..\bin\Release\Mvx\Droid\CrossUI.Droid.*" target="lib\MonoAndroid" />
-		<file src="..\CrossUI\CrossUI.Droid\**\*.cs" target="src\CrossUI.Droid"/>
 	</files>
 </package>
 

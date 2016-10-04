@@ -30,7 +30,6 @@ This package contains the 'Android Fragment' assemblies for Android Honeycomb or
 	<files>		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.FullFragging.*" target="lib\MonoAndroid" />
-		<file src="..\MvvmCross\Droid\FullFragging\**\*.cs" target="src\MvvmCross.Droid.FullFragging" />
 	</files>
 </package>
 

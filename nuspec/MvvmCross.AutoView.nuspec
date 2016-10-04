@@ -27,10 +27,6 @@ This package contains the 'AutoView' PCL assemblies for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.AutoView.*" target="lib\dotnet" />
 		<file src="..\bin\Release\Mvx\Portable\CrossUI.Core.*" target="lib\dotnet" />
 		
-		<!-- src -->
-		<file src="..\MvvmCross\AutoView\**\*.cs" target="src\MvvmCross.AutoView" />
-		<file src="..\CrossUI\CrossUI.Core\**\*.cs" target="src\CrossUI.Core" />
-		
 	</files>
 </package>
 

@@ -32,7 +32,6 @@ This package contains the 'Android Shared' assemblies for Android Honeycomb or l
 	<files>		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Shared.*" target="lib\MonoAndroid" />
-		<file src="..\MvvmCross\Droid\Shared\**\*.cs" target="src\MvvmCross.Droid.Shared" />
 	</files>
 </package>
 
