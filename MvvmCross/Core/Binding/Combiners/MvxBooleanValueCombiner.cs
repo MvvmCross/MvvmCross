@@ -1,4 +1,4 @@
-namespace MvvmCross.Binding.Combiners.VeryExperimental
+namespace MvvmCross.Binding.Combiners
 {
     using System.Collections.Generic;
     using System.Linq;
