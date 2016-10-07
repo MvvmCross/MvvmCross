@@ -97,7 +97,6 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Views\MainViewController.xib" />
   </ItemGroup>
   <ItemGroup>
