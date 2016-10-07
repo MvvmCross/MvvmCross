@@ -64,15 +64,8 @@
     <Compile Include="Bindings\Source\Construction\MvxPropertySourceBindingFactoryExtension.cs" />
     <Compile Include="Bindings\Target\MvxConvertingTargetBinding.cs" />
     <Compile Include="Combiners\IMvxValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxBooleanValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxEqualToValueCombiner.cs" />
     <Compile Include="Combiners\MvxFormatValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanOrEqualToValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxGreaterThanValueCombiner.cs" />
     <Compile Include="Combiners\MvxIfValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxLessThanOrEqualToValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxLessThanValueCombiner.cs" />
-    <Compile Include="Combiners\VeryExperimental\MvxNotEqualToPairwiseValueCombiner.cs" />
     <Compile Include="Combiners\MvxSingleValueCombiner.cs" />
     <Compile Include="Bindings\SourceSteps\MvxSourceStep.cs" />
     <Compile Include="Bindings\SourceSteps\MvxSourceStepDescription.cs" />
@@ -190,6 +183,13 @@
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Clear.cs" />
     <Compile Include="Views\MvxBaseImageViewLoader.cs" />
+    <Compile Include="Combiners\MvxBooleanValueCombiner.cs" />
+    <Compile Include="Combiners\MvxEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\MvxGreaterThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\MvxGreaterThanValueCombiner.cs" />
+    <Compile Include="Combiners\MvxLessThanOrEqualToValueCombiner.cs" />
+    <Compile Include="Combiners\MvxLessThanValueCombiner.cs" />
+    <Compile Include="Combiners\MvxNotEqualToPairwiseValueCombiner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
