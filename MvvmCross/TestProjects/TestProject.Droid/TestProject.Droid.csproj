@@ -44,10 +44,10 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\..\..\packages\Xamarin.Android.Support.v4.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\..\..\packages\Xamarin.Android.Support.v4.23.4.0.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\..\..\packages\Xamarin.Android.Support.v7.AppCompat.23.1.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <HintPath>..\..\..\packages\Xamarin.Android.Support.v7.AppCompat.23.4.0.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,52 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Binding\Droid\MvvmCross.Binding.Droid.csproj">
+      <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
+      <Name>MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dialog\Droid\MvvmCross.Dialog.Droid.csproj">
+      <Project>{D56E4F48-6ECC-4481-9948-078F620881F3}</Project>
+      <Name>MvvmCross.Dialog.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Droid\Droid\MvvmCross.Droid.csproj">
+      <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
+      <Name>MvvmCross.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Droid\FullFragging\MvvmCross.Droid.FullFragging.csproj">
+      <Project>{2E89ED83-E5B6-4FAC-AD45-FC3B141DEA8C}</Project>
+      <Name>MvvmCross.Droid.FullFragging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossUI\CrossUI.Droid\CrossUI.Droid.csproj">
+      <Project>{33044C7B-47A4-4113-A61A-EB429407F818}</Project>
+      <Name>CrossUI.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AutoView\Droid\MvvmCross.AutoView.Droid.csproj">
+      <Project>{9599095A-50F9-468D-B39E-3D59F2193DE3}</Project>
+      <Name>MvvmCross.AutoView.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
+      <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
+      <Name>MvvmCross.Platform.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Localization\MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>MvvmCross.Localization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

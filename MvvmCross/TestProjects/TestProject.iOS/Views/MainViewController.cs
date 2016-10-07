@@ -1,14 +1,12 @@
-﻿using System;
-
-using UIKit;
+﻿using MvvmCross.iOS.Views;
+using TestProject.Core.ViewModels;
 
 namespace TestProject.iOS
 {
-    public partial class ViewController : UIViewController
+    public partial class MainViewController : MvxViewController<MainViewModel>
     {
-        protected ViewController(IntPtr handle) : base(handle)
+        public MainViewController() : base("MainViewController", null)
         {
-            // Note: this .ctor should not contain any initialization logic.
         }
 
         public override void ViewDidLoad()
@@ -24,3 +22,4 @@ namespace TestProject.iOS
         }
     }
 }
+

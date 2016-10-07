@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.IoC;
 
 namespace TestProject.Core
 {
@@ -11,7 +12,7 @@ namespace TestProject.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.ContentViewModel>();
+            RegisterAppStart<ViewModels.MainViewModel>();
         }
     }
 }
