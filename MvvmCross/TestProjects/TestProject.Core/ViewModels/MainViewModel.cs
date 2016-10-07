@@ -1,4 +1,5 @@
 ﻿using System;
+using MvvmCross.Core.ViewModels;
 
 namespace TestProject.Core.ViewModels
 {
