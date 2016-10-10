@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support", "Mv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SideMenuSample", "SideMenuSample", "{19AB8DF5-4F81-4E53-9CB7-FAFC410E98C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.iOS", "Samples\SideMenuSample\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.iOS.csproj", "{4B3F7784-069E-47EE-903A-25542CCF03C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Sidepanels", "Samples\SideMenuSample\MvvmCross.iOS.Support.iOS\MvvmCross.iOS.Support.Sidepanels.csproj", "{4B3F7784-069E-47EE-903A-25542CCF03C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS.Support.Core", "Samples\SideMenuSample\MvvmCross.iOS.Support.Core\MvvmCross.iOS.Support.Core.csproj", "{760EE7E0-BC68-46A7-8AB3-4BE2D8C806FA}"
 EndProject

@@ -10,6 +10,16 @@ namespace MvvmCross.iOS.Support.Sidebar.Views
         public virtual UIImage MenuButtonImage => UIImage.FromBundle("threelines");
 
         public virtual bool HasShadowing => true;
-        public virtual int MenuWidth => 320;
+        private int MaxMenuWidth = 300;
+        private int MinSpaceRightOfTheMenu = 55;
+
+        public int MenuWidth => UserInterfaceIdiomIsPhone ?
+        int.Parse(UIScreen.MainScreen.Bounds.Width.ToString()) - MinSpaceRightOfTheMenu : MaxMenuWidth;
+
+        private bool UserInterfaceIdiomIsPhone
+        {
+            get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
+        }
+
     }
 }
