@@ -75,7 +75,6 @@
                     });
             }
 
-
             var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
             sidebarController.ChangeMenuView(ViewController);
@@ -90,8 +89,6 @@
                 sidebarController.MenuLocation = MenuLocations.Right;    
                 topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
             }
-
-
         }
     }
 }
