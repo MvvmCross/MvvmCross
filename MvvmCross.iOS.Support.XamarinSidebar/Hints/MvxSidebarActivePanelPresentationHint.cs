@@ -49,8 +49,8 @@
             var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
             if (xamarinSidebarMenu != null)
             {
+
                 sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
-                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
 
                 barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
                     , UIBarButtonItemStyle.Plain
@@ -59,17 +59,21 @@
                         sidebarController.ViewWillAppear(false);
                         sidebarController.ToggleMenu();
                     });
+
+                sidebarController.StateChangeHandler += (object sender, bool e) =>
+                   {
+                       sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                       sidebarController.ViewWillAppear(false);
+                   };
             }
             else
             {
                 barButtonItem = new UIBarButtonItem("Menu"
                     , UIBarButtonItemStyle.Plain
                     , (sender, args) => {
-                        sidebarController.ViewWillAppear(false);
                         sidebarController.ToggleMenu();
                     });
             }
-
 
             var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
