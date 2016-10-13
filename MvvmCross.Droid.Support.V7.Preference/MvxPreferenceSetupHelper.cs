@@ -15,6 +15,10 @@ namespace MvvmCross.Droid.Support.V7.Preference
                 "Text",
                 preference => new MvxEditTextPreferenceTextTargetBinding(preference));
 
+            registry.RegisterCustomBindingFactory<Android.Support.V7.Preferences.ListPreference>(
+                "Value",
+                preference => new MvxListPreferenceTargetBinding(preference));
+
             registry.RegisterCustomBindingFactory<Android.Support.V7.Preferences.TwoStatePreference>(
                 "Checked",
                 preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
