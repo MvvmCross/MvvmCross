@@ -10,7 +10,9 @@
         /// Hint contains information in case the app is started with extra parameters
         /// </summary>
         public void Start(object hint = null)
-        {            
+        {
+            ShowViewModel<LeftPanelViewModel>();
+            ShowViewModel<RightPanelViewModel>();
             ShowViewModel<CenterPanelViewModel>();
         }
     }

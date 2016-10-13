@@ -70,7 +70,6 @@
 
                 );
 
-            ViewModel.ShowMenu();
         }
     }
 }

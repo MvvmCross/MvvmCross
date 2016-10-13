@@ -7,12 +7,6 @@
         public CenterPanelViewModel()
         {
             ExampleValue = "Center Panel";
-
-            // Show the various available side panels
-            // Only required by the iOS demo application, not required for SideBar demo but
-            // has been re-introduced to ensure both demos function correctly
-            ShowViewModel<LeftPanelViewModel>();
-            ShowViewModel<RightPanelViewModel>();
         }
 
         public string RightPanelInstructions
@@ -26,15 +20,6 @@
             {
                 return new MvxCommand(ShowMasterCommandExecuted);
             }
-        }
-
-        /// <summary>
-        /// Used to show the menu in the SideBar demo application.
-        /// </summary>
-        public void ShowMenu()
-        {
-            // Loads the flyout menu on the left
-            ShowViewModel<LeftPanelViewModel>();
         }
 
         /// <summary>
