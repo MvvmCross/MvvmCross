@@ -10,7 +10,6 @@ namespace MvvmCross.Binding
     using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Combiners;
-    using MvvmCross.Binding.Combiners.VeryExperimental;
     using MvvmCross.Binding.ExpressionParse;
     using MvvmCross.Binding.Parse.Binding;
     using MvvmCross.Binding.Parse.Binding.Lang;
