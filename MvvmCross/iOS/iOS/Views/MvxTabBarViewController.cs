@@ -49,7 +49,6 @@ namespace MvvmCross.iOS.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        // CHECKME: won't this interfer with the hack for TabBar in LoadViewModel()
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
         {
             base.PrepareForSegue(segue, sender);
