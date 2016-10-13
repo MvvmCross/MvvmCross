@@ -142,6 +142,9 @@ namespace MvvmCross.Binding.Droid
             registry.RegisterCustomBindingFactory<EditTextPreference>(
                 "Text",
                 preference => new MvxEditTextPreferenceTextTargetBinding(preference));
+            registry.RegisterCustomBindingFactory<ListPreference>(
+                "Value",
+                preference => new MvxListPreferenceTargetBinding(preference));
             registry.RegisterCustomBindingFactory<TwoStatePreference>(
                 "Checked",
                 preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
