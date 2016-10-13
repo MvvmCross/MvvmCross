@@ -9,6 +9,7 @@
     using MvvmCross.Platform.iOS.Views;
 
     using UIKit;
+    using Foundation;
 
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {
@@ -108,6 +109,12 @@
                 this._pagedViewControllerCache[queryVM.PagedViewId] = retVal;
             }
             return (retVal);
+        }
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            this.ViewModelRequestForSegue(segue, sender);
         }
     }
 
