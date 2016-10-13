@@ -100,7 +100,7 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Platform\MvvmCross.Platform.tvOS\MvvmCross.Platform.tvOS.csproj">
+    <ProjectReference Include="..\..\Platform\tvOS\MvvmCross.Platform.tvOS.csproj">
       <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
       <Name>MvvmCross.Platform.tvOS</Name>
     </ProjectReference>

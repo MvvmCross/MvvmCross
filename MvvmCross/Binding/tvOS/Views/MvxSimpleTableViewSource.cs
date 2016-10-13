@@ -12,8 +12,7 @@ namespace MvvmCross.Binding.tvOS.Views
     using Foundation;
 
     using MvvmCross.Platform;
-    using Platform.tvOS.Platform;
-
+    using MvvmCross.Platform.tvOS.Platform;
     using UIKit;
 
     public class MvxSimpleTableViewSource : MvxTableViewSource

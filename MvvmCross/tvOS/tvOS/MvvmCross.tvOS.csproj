@@ -100,13 +100,13 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Platform\MvvmCross.Platform.tvOS\MvvmCross.Platform.tvOS.csproj">
-      <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
-      <Name>MvvmCross.Platform.tvOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Binding\tvOS\MvvmCross.Binding.tvOS.csproj">
       <Project>{116A5BEF-70D6-4D45-BBD5-6C26C2C39C06}</Project>
       <Name>MvvmCross.Binding.tvOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\tvOS\MvvmCross.Platform.tvOS.csproj">
+      <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
+      <Name>MvvmCross.Platform.tvOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />
