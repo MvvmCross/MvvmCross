@@ -50,6 +50,9 @@ This package contains the 'Core Binding' libraries for MvvmCross
 			<group targetFramework="Xamarin.Mac20">		
 				<dependency id="MvvmCross.Core" version="4.3.0" />
  			</group>
+			<group targetFramework="Xamarin.tvOS">
+				<dependency id="MvvmCross.Core" version="4.3.0" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>		
@@ -75,6 +78,11 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Binding.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.Mac20" />
+		
+		<!-- tvOS -->
+		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.Binding.tvOS.*" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.tvOS" />
 
 		<!-- phone -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\wp8" />
