@@ -38,6 +38,9 @@ This package contains the 'Core' libraries for MvvmCross
 			<group targetFramework="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.3.0" />
 			</group>
+			<group targetFramework="Xamarin.tvOS">
+				<dependency id="MvvmCross.Platform" version="4.3.0" />
+			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Platform" version="4.3.0" />
 			</group>
@@ -125,6 +128,11 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.Mac20" />
+		
+		<!-- tvOS -->
+		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.tvOS.*" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.tvOS" />
 	</files>
 </package>
 

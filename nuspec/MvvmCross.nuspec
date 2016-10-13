@@ -44,6 +44,10 @@ This package contains the 'Getting Started' libraries for MvvmCross.
 				<dependency id="MvvmCross.Core" version="4.3.0" />
 				<dependency id="MvvmCross.Binding" version="4.3.0" />
 			</group>
+			<group targetFramework="Xamarin.tvOS">
+				<dependency id="MvvmCross.Core" version="4.3.0" />
+				<dependency id="MvvmCross.Binding" version="4.3.0" />
+			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Core" version="4.3.0" />
 				<dependency id="MvvmCross.Binding" version="4.3.0" />

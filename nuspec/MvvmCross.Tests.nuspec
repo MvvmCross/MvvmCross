@@ -38,6 +38,9 @@ This package contains the 'Test Helpers' for MvvmCross
 			<group targetFramework="Xamarin.Mac20">
 				<dependency id="MvvmCross.Platform" version="4.3.0" />
 			</group>
+			<group targetFramework="Xamarin.tvOS">
+				<dependency id="MvvmCross.Platform" version="4.3.0" />
+			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross.Platform" version="4.3.0" />
 			</group>

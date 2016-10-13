@@ -1,0 +1,200 @@
+// MvxTvosSetup.cs
+
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+//
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+namespace MvvmCross.tvOS.Platform
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using MvvmCross.Binding;
+    using MvvmCross.Binding.Binders;
+    using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Bindings.Target.Construction;
+    using MvvmCross.Binding.tvOS;
+    using MvvmCross.Core.Platform;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Converters;
+    using MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Plugins;
+    using MvvmCross.Platform.tvOS.Platform;
+    using MvvmCross.Platform.tvOS.Views;
+    using MvvmCross.tvOS.Views;
+    using MvvmCross.tvOS.Views.Presenters;
+
+    using UIKit;
+
+    public abstract class MvxTvosSetup
+        : MvxSetup
+    {
+        private readonly IMvxApplicationDelegate _applicationDelegate;
+        private readonly UIWindow _window;
+
+        private IMvxTvosViewPresenter _presenter;
+
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        {
+            this._window = window;
+            this._applicationDelegate = applicationDelegate;
+        }
+
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
+        {
+            this._presenter = presenter;
+            this._applicationDelegate = applicationDelegate;
+        }
+
+        protected UIWindow Window => this._window;
+
+        protected IMvxApplicationDelegate ApplicationDelegate => this._applicationDelegate;
+
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new MvxDebugTrace();
+        }
+
+        protected override IMvxPluginManager CreatePluginManager()
+        {
+            return new MvxPluginManager();
+        }
+
+        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        {
+            var container = this.CreateTvosViewsContainer();
+            this.RegisterTvosViewCreator(container);
+            return container;
+        }
+
+        protected virtual IMvxTvosViewsContainer CreateTvosViewsContainer()
+        {
+            return new MvxTvosViewsContainer();
+        }
+
+        protected virtual void RegisterTvosViewCreator(IMvxTvosViewsContainer container)
+        {
+            Mvx.RegisterSingleton<IMvxTvosViewCreator>(container);
+            Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
+        }
+
+        protected override IMvxViewDispatcher CreateViewDispatcher()
+        {
+            return new MvxTvosViewDispatcher(this.Presenter);
+        }
+
+        protected override void InitializePlatformServices()
+        {
+            this.RegisterPlatformProperties();
+            // for now we continue to register the old style platform properties
+            this.RegisterOldStylePlatformProperties();
+            this.RegisterPresenter();
+            this.RegisterLifetime();
+        }
+
+        protected virtual void RegisterPlatformProperties()
+        {
+            Mvx.RegisterSingleton<IMvxTvosSystem>(this.CreateTvosSystemProperties());
+        }
+
+        protected virtual MvxTvosSystem CreateTvosSystemProperties()
+        {
+            return new MvxTvosSystem();
+        }
+
+        [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
+        protected virtual void RegisterOldStylePlatformProperties()
+        {
+            Mvx.RegisterSingleton<IMvxTvosPlatformProperties>(new MvxTvosPlatformProperties());
+        }
+
+        protected virtual void RegisterLifetime()
+        {
+            Mvx.RegisterSingleton<IMvxLifetime>(this._applicationDelegate);
+        }
+
+        protected IMvxTvosViewPresenter Presenter
+        {
+            get
+            {
+                this._presenter = this._presenter ?? this.CreatePresenter();
+                return this._presenter;
+            }
+        }
+
+        protected virtual IMvxTvosViewPresenter CreatePresenter()
+        {
+            return new MvxTvosViewPresenter(this._applicationDelegate, this._window);
+        }
+
+        protected virtual void RegisterPresenter()
+        {
+            var presenter = this.Presenter;
+            Mvx.RegisterSingleton(presenter);
+            Mvx.RegisterSingleton<IMvxTvosModalHost>(presenter);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            this.InitializeBindingBuilder();
+            base.InitializeLastChance();
+        }
+
+        protected virtual void InitializeBindingBuilder()
+        {
+            this.RegisterBindingBuilderCallbacks();
+            var bindingBuilder = this.CreateBindingBuilder();
+            bindingBuilder.DoRegistration();
+        }
+
+        protected virtual void RegisterBindingBuilderCallbacks()
+        {
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
+        }
+
+        protected virtual MvxBindingBuilder CreateBindingBuilder()
+        {
+            return new MvxTvosBindingBuilder();
+        }
+
+        protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
+        {
+            // this base class does nothing
+        }
+
+        protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
+        {
+            registry.Fill(this.ValueConverterAssemblies);
+            registry.Fill(this.ValueConverterHolders);
+        }
+
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();
+
+        protected virtual IEnumerable<Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<Assembly>();
+                toReturn.AddRange(this.GetViewModelAssemblies());
+                toReturn.AddRange(this.GetViewAssemblies());
+                return toReturn;
+            }
+        }
+
+        protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            // this base class does nothing
+        }
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
+        }
+    }
+}

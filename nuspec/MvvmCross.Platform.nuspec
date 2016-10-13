@@ -73,6 +73,10 @@ This package contains the 'Platform' libraries for MvvmCross
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Platform.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.Mac20" />
+		
+		<!-- tvOS -->
+		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.Platform.tvOS.*" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\Xamarin.tvOS" />
 	</files>
 </package>
 

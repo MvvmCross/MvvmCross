@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B22DBF4-818E-4C3B-A5A0-A45654F4C385}</ProjectGuid>
+    <ProjectTypeGuids>{06FA79CB-D6CD-4721-BB4B-1BD202089C55};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MvvmCross.tvOS</RootNamespace>
+    <AssemblyName>MvvmCross.tvOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\Debug\Mvx\tvOS\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchLink></MtouchLink>
+    <MtouchHttpClientHandler></MtouchHttpClientHandler>
+    <MtouchTlsProvider></MtouchTlsProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\Release\Mvx\tvOS\</OutputPath>
+    <DefineConstants></DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchLink></MtouchLink>
+    <MtouchHttpClientHandler></MtouchHttpClientHandler>
+    <MtouchTlsProvider></MtouchTlsProvider>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.TVOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Platform\" />
+    <Folder Include="Properties\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\IMvxApplicationDelegate.cs" />
+    <Compile Include="Platform\IMvxTvosPlatformProperties.cs" />
+    <Compile Include="Platform\MvxApplicationDelegate.cs" />
+    <Compile Include="Platform\MvxDebugTrace.cs" />
+    <Compile Include="Platform\MvxTvosDisplayDensity.cs" />
+    <Compile Include="Platform\MvxTvosFormFactor.cs" />
+    <Compile Include="Platform\MvxTvosPlatformProperties.cs" />
+    <Compile Include="Platform\MvxTvosSetup.cs" />
+    <Compile Include="Views\IMvxCanCreateTvosView.cs" />
+    <Compile Include="Views\IMvxCurrentRequest.cs" />
+    <Compile Include="Views\IMvxTvosNavigator.cs" />
+    <Compile Include="Views\IMvxTvosView.cs" />
+    <Compile Include="Views\IMvxTvosViewCreator.cs" />
+    <Compile Include="Views\IMvxTvosViewsContainer.cs" />
+    <Compile Include="Views\IMvxModalTvosView.cs" />
+    <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxCanCreateTvosViewExtensionMethods.cs" />
+    <Compile Include="Views\MvxCollectionViewController.cs" />
+    <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
+    <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
+    <Compile Include="Views\MvxTvosUIThreadDispatcher.cs" />
+    <Compile Include="Views\MvxTvosViewDispatcher.cs" />
+    <Compile Include="Views\MvxTvosViewsContainer.cs" />
+    <Compile Include="Views\MvxPageViewController.cs" />
+    <Compile Include="Views\MvxTabBarViewController.cs" />
+    <Compile Include="Views\MvxTableViewController.cs" />
+    <Compile Include="Views\MvxViewController.cs" />
+    <Compile Include="Views\MvxViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
+    <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
+    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
+    <Compile Include="Views\Presenters\IMvxTvosViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxModalNavSupportTvosViewPresenter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Binding\tvOS\MvvmCross.Binding.tvOS.csproj">
+      <Project>{116A5BEF-70D6-4D45-BBD5-6C26C2C39C06}</Project>
+      <Name>MvvmCross.Binding.tvOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\tvOS\MvvmCross.Platform.tvOS.csproj">
+      <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
+      <Name>MvvmCross.Platform.tvOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />
+</Project>
