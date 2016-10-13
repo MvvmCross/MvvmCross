@@ -38,6 +38,9 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 			<group targetFramework="Xamarin.Mac20">
 				<dependency id="MvvmCross" version="4.2.2" />
 			</group>
+			<group targetFramework="Xamarin.tvOS">
+				<dependency id="MvvmCross" version="4.2.2" />
+			</group>
 			<group targetFramework="portable-net45+win+wpa81+wp80">
 				<dependency id="MvvmCross" version="4.2.2" />
 			</group>
