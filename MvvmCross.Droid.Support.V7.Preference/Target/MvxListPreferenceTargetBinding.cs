@@ -13,7 +13,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
         {
             var pref = target as ListPreference;
             if (pref != null)
-                pref.Value = value.ToString();
+                pref.Value = (string)value;
         }
     }
 }
