@@ -1,17 +1,15 @@
+using System;
+using System.Collections;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Droid.BindingContext;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Linq;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Views;
-    using Android.Widget;
-
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Binding.Droid.BindingContext;
-
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
         public MvxExpandableListAdapter(Context context)
@@ -46,33 +44,33 @@ namespace MvvmCross.Binding.Droid.Views
 
         public int GroupCount => this.Count;
 
-        public void OnGroupExpanded(int groupPosition)
+        public virtual void OnGroupExpanded(int groupPosition)
         {
             // do nothing
         }
 
-        public void OnGroupCollapsed(int groupPosition)
+        public virtual void OnGroupCollapsed(int groupPosition)
         {
             // do nothing
         }
 
-        public bool IsChildSelectable(int groupPosition, int childPosition)
+        public virtual bool IsChildSelectable(int groupPosition, int childPosition)
         {
             return true;
         }
 
-        public View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
+        public virtual View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
             var item = this.GetRawGroup(groupPosition);
             return this.GetBindableView(convertView, item, this.GroupTemplateId);
         }
 
-        public long GetGroupId(int groupPosition)
+        public virtual long GetGroupId(int groupPosition)
         {
             return groupPosition;
         }
 
-        public Java.Lang.Object GetGroup(int groupPosition)
+        public virtual Java.Lang.Object GetGroup(int groupPosition)
         {
             return null;
         }
@@ -82,7 +80,7 @@ namespace MvvmCross.Binding.Droid.Views
         //        this bit will be 1.
         // bit 1-31: Lower 31 bits of the groupId
         // bit 32-63: Lower 32 bits of the childId.
-        public long GetCombinedGroupId(long groupId)
+        public virtual long GetCombinedGroupId(long groupId)
         {
             return (groupId & 0x7FFFFFFF) << 32;
         }
@@ -92,45 +90,44 @@ namespace MvvmCross.Binding.Droid.Views
         //        this bit will be 0.
         // bit 1-31: Lower 31 bits of the groupId
         // bit 32-63: Lower 32 bits of the childId.
-        public long GetCombinedChildId(long groupId, long childId)
+        public virtual long GetCombinedChildId(long groupId, long childId)
         {
             return (long)(0x8000000000000000UL | (ulong)((groupId & 0x7FFFFFFF) << 32) | (ulong)(childId & 0xFFFFFFFF));
         }
 
-        public object GetRawItem(int groupPosition, int position)
+        public virtual object GetRawItem(int groupPosition, int position)
         {
             return ((IEnumerable)this.GetRawGroup(groupPosition)).ElementAt(position);
         }
 
-        public object GetRawGroup(int groupPosition)
+        public virtual object GetRawGroup(int groupPosition)
         {
             return this.GetRawItem(groupPosition);
         }
 
-        public View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView,
-            ViewGroup parent)
+        public virtual View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
         {
             var item = this.GetRawItem(groupPosition, childPosition);
 
             return this.GetBindableView(convertView, item, this.ItemTemplateId);
         }
 
-        public int GetChildrenCount(int groupPosition)
+        public virtual int GetChildrenCount(int groupPosition)
         {
             return ((IEnumerable)this.GetRawGroup(groupPosition)).Count();
         }
 
-        public long GetChildId(int groupPosition, int childPosition)
+        public virtual long GetChildId(int groupPosition, int childPosition)
         {
             return childPosition;
         }
 
-        public Java.Lang.Object GetChild(int groupPosition, int childPosition)
+        public virtual Java.Lang.Object GetChild(int groupPosition, int childPosition)
         {
             return null;
         }
 
-        public Tuple<int, int> GetPositions(object childItem)
+        public virtual Tuple<int, int> GetPositions(object childItem)
         {
             int groupCount = this.Count;
 
