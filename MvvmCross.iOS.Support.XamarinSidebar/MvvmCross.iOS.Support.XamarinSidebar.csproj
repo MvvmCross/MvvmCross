@@ -75,6 +75,7 @@
     <Compile Include="MvxSidebarPanelController.cs" />
     <Compile Include="Hints\MvxSidebarPopToRootPresentationHint.cs" />
     <Compile Include="IMvxSidebarMenu.cs" />
+    <Compile Include="Extensions\ViewControllerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -88,5 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

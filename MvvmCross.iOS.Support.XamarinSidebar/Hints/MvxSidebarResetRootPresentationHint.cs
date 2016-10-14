@@ -1,5 +1,6 @@
 ﻿using UIKit;
 using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
@@ -7,7 +8,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
     {
         public MvxSidebarResetRootPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
             : base(panel)
-        { 
+        {
             SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
@@ -26,6 +27,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
                 return false;
 
             navigationController.ViewControllers = new[] { ViewController };
+
+            if (Panel == MvxPanelEnum.Center)
+                ViewController.ShowMenuButton(SidebarPanelController);
 
             return true;
         }
