@@ -83,10 +83,6 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.Binding.tvOS.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.tvOS" />
-
-		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wp8" />
 		
 		<!-- windows common - PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\win81" />

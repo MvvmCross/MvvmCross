@@ -71,14 +71,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="StoreContent\DebugTrace.cs.pp" target="content\netcore45\DebugTrace.cs.pp" />
 		<file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
 		<file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
-
-		<!-- phone - Content -->
-		<file src="PhoneContent\_ Windows Phone UI.txt" target="content\wp8\ToDo-MvvmCross\_ Windows Phone UI.txt" />
-		<file src="PhoneContent\Setup.cs.pp" target="content\wp8\Setup.cs.pp" />
-		<file src="PhoneContent\DebugTrace.cs.pp" target="content\wp8\DebugTrace.cs.pp" />
-		<file src="PhoneContent\FirstView.xaml.pp" target="content\wp8\Views\FirstView.xaml.pp" />
-		<file src="PhoneContent\FirstView.xaml.cs.pp" target="content\wp8\Views\FirstView.xaml.cs.pp" />
-
+		
 		<!-- Windows Common - Content -->
 		<file src="WCommonContent\_ Windows Store UI.txt" target="content\win81\ToDo-MvvmCross\_ Windows Store UI.txt" />
 		<file src="WCommonContent\Setup.cs.pp" target="content\win81\Setup.cs.pp" />
