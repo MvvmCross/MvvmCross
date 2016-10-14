@@ -11,6 +11,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using System;
 using Xamarin.Forms;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Forms.Presenter.Core
 {
@@ -73,6 +74,20 @@ namespace MvvmCross.Forms.Presenter.Core
         {
         }
 
+        private void SetupForBinding(Page page, MvxViewModelRequest request)
+        {
+            var viewModel = MvxPresenterHelpers.LoadViewModel(request);
+
+            var mvxContentPage = page as IMvxContentPage;
+            if (mvxContentPage != null) {
+                mvxContentPage.Request = request;
+                mvxContentPage.ViewModel = viewModel;
+            } else {
+                page.BindingContext = viewModel;
+            }
+
+        }
+
         private bool TryShowPage(MvxViewModelRequest request)
         {
             var page = MvxPresenterHelpers.CreatePage(request);
@@ -81,8 +96,9 @@ namespace MvvmCross.Forms.Presenter.Core
 
             var viewModel = MvxPresenterHelpers.LoadViewModel(request);
 
+            SetupForBinding(page, request);
+
             var mainPage = _mvxFormsApp.MainPage as NavigationPage;
-            page.BindingContext = viewModel;
 
             if (mainPage == null)
             {

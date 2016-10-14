@@ -106,6 +106,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MvxFormsWindows81PagePresenter.cs" />
+    <Compile Include="MvxPageRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
