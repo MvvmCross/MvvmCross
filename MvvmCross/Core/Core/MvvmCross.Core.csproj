@@ -119,7 +119,6 @@
     <Compile Include="ViewModels\MvxViewModelRequest.cs" />
     <Compile Include="Views\MvxViewPresenter.cs" />
     <Compile Include="Views\MvxViewsContainer.cs" />
-    <Compile Include="ViewModels\IMvxPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

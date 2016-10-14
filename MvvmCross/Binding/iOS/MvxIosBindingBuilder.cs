@@ -154,6 +154,7 @@ namespace MvvmCross.Binding.iOS
             registry.AddOrOverwrite(typeof(UITextView), "Text");
             registry.AddOrOverwrite(typeof(UILabel), "Text");
             registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
+            registry.AddOrOverwrite(typeof(MvxPageViewSource), "ItemSource");
             registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");
             registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
             registry.AddOrOverwrite(typeof(UIImageView), "Image");
