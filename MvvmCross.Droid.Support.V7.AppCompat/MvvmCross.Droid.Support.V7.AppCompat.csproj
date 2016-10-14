@@ -99,6 +99,7 @@
     <Compile Include="MvxAppCompatSetupHelper.cs" />
     <Compile Include="EventSource\MvxEventSourceAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatDialogFragment.cs" />
+    <Compile Include="MvxSplashScreenAppCompatActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxCachingFragmentCompatActivity.cs" />
     <Compile Include="Target\MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding.cs" />
