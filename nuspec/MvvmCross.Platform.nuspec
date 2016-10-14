@@ -25,8 +25,6 @@ This package contains the 'Platform' libraries for MvvmCross
 			target="src\MvvmCross.Platform.Wpf" />
 		<file src="..\MvvmCross\Platform\WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Platform.WindowsStore" />
-		<file src="..\MvvmCross\Platform\WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.Platform.WindowsPhone" />
 		<file src="..\MvvmCross\Platform\WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Platform.WindowsCommon" />
 		<file src="..\MvvmCross\Platform\Droid\**\*.cs" 
@@ -49,11 +47,7 @@ This package contains the 'Platform' libraries for MvvmCross
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Platform.WindowsStore.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\netcore45" />
-
-		<!-- phone -->
-		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Platform.WindowsPhone.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\wp8" />
-
+		
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Platform.WindowsCommon.*" target="lib\win81" />
 		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Platform.WindowsCommon.*" target="lib\wpa81" />
