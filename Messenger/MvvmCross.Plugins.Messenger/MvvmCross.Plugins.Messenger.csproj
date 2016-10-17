@@ -49,6 +49,9 @@
     <Compile Include="Subscriptions\StrongSubscription.cs" />
     <Compile Include="Subscriptions\WeakSubscription.cs" />
     <Compile Include="MvxSubscriptionToken.cs" />
+    <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
+      <Link>Preserve.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

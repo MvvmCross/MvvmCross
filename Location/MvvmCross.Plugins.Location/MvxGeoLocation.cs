@@ -9,7 +9,8 @@ using System;
 
 namespace MvvmCross.Plugins.Location
 {
-    public class MvxGeoLocation
+    [Preserve(AllMembers = true)]
+	public class MvxGeoLocation
     {
         public MvxGeoLocation()
         {

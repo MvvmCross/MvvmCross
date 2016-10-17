@@ -13,7 +13,8 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.ResourceLoader.Droid
 {
-    public class MvxAndroidResourceLoader
+    [Preserve(AllMembers = true)]
+	public class MvxAndroidResourceLoader
         : MvxResourceLoader          
     {
         private AssetManager _assets;

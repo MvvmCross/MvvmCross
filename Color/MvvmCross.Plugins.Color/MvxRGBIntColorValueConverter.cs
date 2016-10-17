@@ -10,7 +10,8 @@ using System.Globalization;
 
 namespace MvvmCross.Plugins.Color
 {
-    public class MvxRGBIntColorValueConverter : MvxColorValueConverter<int>
+    [Preserve(AllMembers = true)]
+	public class MvxRGBIntColorValueConverter : MvxColorValueConverter<int>
     {
         protected override MvxColor Convert(int value, object parameter, CultureInfo culture)
         {

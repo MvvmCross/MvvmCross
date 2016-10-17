@@ -9,7 +9,8 @@ using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
-    public class MvxIosImage
+    [Preserve(AllMembers = true)]
+	public class MvxIosImage
         : MvxImage<UIImage>
     {
         public MvxIosImage(UIImage rawImage)

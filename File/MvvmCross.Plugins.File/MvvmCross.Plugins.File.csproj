@@ -54,6 +54,9 @@
     <Compile Include="TryResult.cs" />
     <Compile Include="IMvxFileStoreAsync.cs" />
     <None Include="packages.config" />
+    <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
+      <Link>Preserve.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

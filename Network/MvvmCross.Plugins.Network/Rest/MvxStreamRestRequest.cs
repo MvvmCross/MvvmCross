@@ -10,7 +10,8 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxStreamRestRequest
+    [Preserve(AllMembers = true)]
+	public class MvxStreamRestRequest
         : MvxRestRequest
     {
         public MvxStreamRestRequest(string url, Action<Stream> streamAction = null, string verb = MvxVerbs.Post,

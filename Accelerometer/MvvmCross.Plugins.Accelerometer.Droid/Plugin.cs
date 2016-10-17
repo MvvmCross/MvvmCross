@@ -12,6 +12,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Accelerometer.Droid
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

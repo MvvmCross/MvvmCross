@@ -11,7 +11,8 @@ using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {
-    public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
+    [Preserve(AllMembers = true)]
+	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
     {
         protected override Bitmap Convert(byte[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

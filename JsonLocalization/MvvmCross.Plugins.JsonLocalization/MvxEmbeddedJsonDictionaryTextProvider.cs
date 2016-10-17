@@ -12,7 +12,8 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
-    public class MvxEmbeddedJsonDictionaryTextProvider
+    [Preserve(AllMembers = true)]
+	public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
         public MvxEmbeddedJsonDictionaryTextProvider(bool maskErrors = true)

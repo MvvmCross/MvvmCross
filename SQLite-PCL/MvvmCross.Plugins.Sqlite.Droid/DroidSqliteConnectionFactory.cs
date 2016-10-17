@@ -3,7 +3,8 @@ using Environment = System.Environment;
 
 namespace MvvmCross.Plugins.Sqlite.Droid
 {
-    public class DroidSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
+    [Preserve(AllMembers = true)]
+	public class DroidSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {
         public override string GetPlattformDatabasePath(string databaseName)
         {

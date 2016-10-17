@@ -11,8 +11,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
-#warning One day I would like to decouple this implementation from the FileStore plugin
-
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

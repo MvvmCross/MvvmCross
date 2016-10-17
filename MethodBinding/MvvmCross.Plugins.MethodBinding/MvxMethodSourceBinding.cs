@@ -13,7 +13,8 @@ using System.Windows.Input;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    public class MvxMethodSourceBinding
+    [Preserve(AllMembers = true)]
+	public class MvxMethodSourceBinding
         : MvxSourceBinding
           , ICommand
     {

@@ -13,7 +13,8 @@ using Newtonsoft.Json;
 
 namespace MvvmCross.Plugins.Json
 {
-    public class MvxJsonConverter 
+    [Preserve(AllMembers = true)]
+	public class MvxJsonConverter 
         : IMvxJsonConverter
     {
         private static readonly JsonSerializerSettings Settings;

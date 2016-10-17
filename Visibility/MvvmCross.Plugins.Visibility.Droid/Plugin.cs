@@ -11,6 +11,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Droid
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin          
     {

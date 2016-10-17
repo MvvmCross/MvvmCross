@@ -11,7 +11,8 @@ using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    public static class MvxFileStoreHelper
+    [Preserve(AllMembers = true)]
+	public static class MvxFileStoreHelper
     {
         public static IMvxFileStore SafeGetFileStore()
         {

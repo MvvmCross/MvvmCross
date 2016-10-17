@@ -10,7 +10,8 @@ using Android.OS;
 
 namespace MvvmCross.Plugins.Location.Droid
 {
-    public class MvxLocationListener
+    [Preserve(AllMembers = true)]
+	public class MvxLocationListener
         : Java.Lang.Object
         , ILocationListener
     {

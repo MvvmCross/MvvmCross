@@ -10,7 +10,8 @@ using Foundation;
 
 namespace MvvmCross.Plugins.PhoneCall.iOS
 {
-    public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask
+    [Preserve(AllMembers = true)]
+	public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask
     {
         #region IMvxPhoneCallTask Members
 

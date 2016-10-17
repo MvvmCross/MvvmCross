@@ -15,7 +15,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxRestClient : IMvxRestClient
+    [Preserve(AllMembers = true)]
+	public class MvxRestClient : IMvxRestClient
     {
         protected static void TryCatch(Action toTry, Action<Exception> errorAction)
         {

@@ -7,7 +7,8 @@
 
 namespace MvvmCross.Plugins.Location
 {
-    public class MvxCoordinates
+    [Preserve(AllMembers = true)]
+	public class MvxCoordinates
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }

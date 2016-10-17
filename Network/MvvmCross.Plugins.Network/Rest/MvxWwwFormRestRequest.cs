@@ -12,7 +12,8 @@ using System.Text;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxWwwFormRestRequest<T>
+    [Preserve(AllMembers = true)]
+	public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest
     {
         public override bool NeedsRequestStream => Parameters != null && Parameters.Count > 0;

@@ -10,7 +10,8 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
-    public class MvxDownloadCacheConfiguration
+    [Preserve(AllMembers = true)]
+	public class MvxDownloadCacheConfiguration
         : IMvxPluginConfiguration
     {
         public static readonly MvxDownloadCacheConfiguration Default = new MvxDownloadCacheConfiguration();

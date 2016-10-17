@@ -16,7 +16,8 @@ using Java.IO;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
-    public class MvxComposeEmailTask
+    [Preserve(AllMembers = true)]
+	public class MvxComposeEmailTask
         : MvxAndroidTask
         , IMvxComposeEmailTaskEx
     {

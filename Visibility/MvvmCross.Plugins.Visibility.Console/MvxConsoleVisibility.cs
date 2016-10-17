@@ -9,7 +9,8 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Console
 {
-    public class MvxConsoleVisibility : IMvxNativeVisibility
+    [Preserve(AllMembers = true)]
+	public class MvxConsoleVisibility : IMvxNativeVisibility
     {
         #region Implementation of IMvxNativeVisibility
 

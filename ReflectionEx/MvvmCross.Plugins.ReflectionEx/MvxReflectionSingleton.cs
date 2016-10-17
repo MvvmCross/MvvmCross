@@ -10,7 +10,8 @@ using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.ReflectionEx
 {
-    public class MvxReflectionSingleton
+    [Preserve(AllMembers = true)]
+	public class MvxReflectionSingleton
         : MvxSingleton
     {
         public static readonly MvxReflectionSingleton Instance = new MvxReflectionSingleton();

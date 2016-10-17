@@ -10,6 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Share
 {
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

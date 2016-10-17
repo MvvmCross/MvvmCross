@@ -12,6 +12,7 @@ using MvvmCross.Plugins.Network.Rest;
 
 namespace MvvmCross.Plugins.Network.iOS
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

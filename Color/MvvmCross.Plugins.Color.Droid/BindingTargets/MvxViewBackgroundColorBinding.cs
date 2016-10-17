@@ -9,6 +9,7 @@ using Android.Views;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
+    [Preserve(AllMembers = true)]
     public class MvxViewBackgroundColorBinding
         : MvxViewColorBinding
     {

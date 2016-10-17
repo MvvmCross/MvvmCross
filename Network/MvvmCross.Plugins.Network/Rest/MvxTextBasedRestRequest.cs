@@ -11,7 +11,8 @@ using System.Text;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public abstract class MvxTextBasedRestRequest
+    [Preserve(AllMembers = true)]
+	public abstract class MvxTextBasedRestRequest
         : MvxRestRequest
     {
         protected MvxTextBasedRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,

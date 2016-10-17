@@ -12,7 +12,8 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxJsonRestRequest<T>
+    [Preserve(AllMembers = true)]
+	public class MvxJsonRestRequest<T>
         : MvxTextBasedRestRequest
         where T : class
     {

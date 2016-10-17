@@ -10,6 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Location.iOS
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
 

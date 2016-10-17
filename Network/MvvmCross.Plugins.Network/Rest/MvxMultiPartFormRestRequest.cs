@@ -14,7 +14,8 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxMultiPartFormRestRequest
+    [Preserve(AllMembers = true)]
+	public class MvxMultiPartFormRestRequest
         : MvxTextBasedRestRequest
     {
         protected virtual string GenerateBoundary()

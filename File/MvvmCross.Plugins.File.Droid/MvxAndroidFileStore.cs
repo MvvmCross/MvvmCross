@@ -16,6 +16,7 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.File.Droid
 {
+    [Preserve(AllMembers = true)]
     public class MvxAndroidFileStore
         : MvxIoFileStoreBase
     {

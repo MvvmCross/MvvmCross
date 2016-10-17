@@ -11,7 +11,8 @@ using MvvmCross.Localization;
 
 namespace MvvmCross.Plugins.ResxLocalization
 {
-    public class MvxResxTextProvider :
+    [Preserve(AllMembers = true)]
+	public class MvxResxTextProvider :
         IMvxTextProvider
     {
         private readonly ResourceManager _resourceManager;

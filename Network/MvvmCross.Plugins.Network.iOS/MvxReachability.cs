@@ -13,7 +13,8 @@ using MvvmCross.Plugins.Network.Reachability;
 
 namespace MvvmCross.Plugins.Network.iOS
 {
-    public class MvxReachability
+    [Preserve(AllMembers = true)]
+	public class MvxReachability
         : IMvxReachability
     {
         private const string DefaultHostName = "www.google.com";

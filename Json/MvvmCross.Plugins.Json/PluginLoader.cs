@@ -12,6 +12,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Json
 {
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxConfigurablePluginLoader
     {

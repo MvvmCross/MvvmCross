@@ -13,6 +13,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
+    [Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet
     {
         public void RegisterBindings()

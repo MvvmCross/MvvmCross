@@ -3,7 +3,8 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Sqlite.iOS
 {
-    public class TouchSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
+    [Preserve(AllMembers = true)]
+	public class TouchSqliteConnectionFactory : MvxSqliteConnectionFactoryBase
     {
         public override string GetPlattformDatabasePath(string databaseName)
         {

@@ -9,7 +9,8 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.iOS
 {
-    public class MvxIosVisibility : IMvxNativeVisibility
+    [Preserve(AllMembers = true)]
+	public class MvxIosVisibility : IMvxNativeVisibility
     {
         #region Implementation of IMvxNativeVisibility
 

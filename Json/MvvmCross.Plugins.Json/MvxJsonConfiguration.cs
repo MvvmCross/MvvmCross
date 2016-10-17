@@ -9,7 +9,8 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Json
 {
-    public class MvxJsonConfiguration
+    [Preserve(AllMembers = true)]
+	public class MvxJsonConfiguration
         : IMvxPluginConfiguration
     {
         public static readonly MvxJsonConfiguration Default = new MvxJsonConfiguration();

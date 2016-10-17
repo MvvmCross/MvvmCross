@@ -10,6 +10,7 @@ using System.Globalization;
 
 namespace MvvmCross.Plugins.Visibility
 {
+    [Preserve(AllMembers = true)]
     public class MvxVisibilityValueConverter : MvxBaseVisibilityValueConverter
     {
         protected override MvxVisibility Convert(object value, object parameter, CultureInfo culture)
@@ -18,4 +19,4 @@ namespace MvvmCross.Plugins.Visibility
             return visibility ? MvxVisibility.Visible : MvxVisibility.Collapsed;
         }
     }
-}
+}	

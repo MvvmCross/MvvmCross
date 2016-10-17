@@ -10,6 +10,7 @@ using System.IO;
 
 namespace MvvmCross.Plugins.File.iOS
 {
+    [Preserve(AllMembers = true)]
     public class MvxIosFileStore : MvxIoFileStoreBase
     {
         public const string ResScheme = "res:";

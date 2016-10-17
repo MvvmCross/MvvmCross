@@ -17,6 +17,7 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.Accelerometer.Droid
 {
+    [Preserve(AllMembers = true)]
     public class MvxAccelerometer
         : Java.Lang.Object
           , ISensorEventListener

@@ -10,6 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.File.Droid
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin          
     {

@@ -11,7 +11,8 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.Json
 {
-    public class MvxEnumJsonConverter : JsonConverter
+    [Preserve(AllMembers = true)]
+	public class MvxEnumJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

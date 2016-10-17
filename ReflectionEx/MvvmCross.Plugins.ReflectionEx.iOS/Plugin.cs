@@ -11,6 +11,7 @@ using MvvmCross.Plugins.ReflectionEx.HackShare;
 
 namespace MvvmCross.Plugins.ReflectionEx.iOS
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

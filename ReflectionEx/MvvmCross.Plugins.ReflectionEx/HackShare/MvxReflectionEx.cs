@@ -11,7 +11,8 @@ using System.Reflection;
 namespace MvvmCross.Plugins.ReflectionEx.HackShare
 // ReSharper restore CheckNamespace
 {
-    public class MvxReflectionEx
+    [Preserve(AllMembers = true)]
+	public class MvxReflectionEx
         : IMvxReflectionEx
     {
         public AssemblyName[] GetReflectedAssembliesEx(Assembly assembly)

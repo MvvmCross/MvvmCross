@@ -16,7 +16,8 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    public class MvxMethodSourceBindingFactoryExtension
+    [Preserve(AllMembers = true)]
+	public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)

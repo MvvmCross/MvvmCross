@@ -11,6 +11,7 @@ namespace MvvmCross.Plugins.Bookmarks
 {
 #warning this bookmark code may be too wp7 sepcific?
 
+    [Preserve(AllMembers = true)]
     public class MvxBookmarkMetadata
     {
         public Uri BackgroundImageUri { get; set; }

@@ -16,7 +16,8 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
-    public class MvxChainedFieldSourceBinding
+    [Preserve(AllMembers = true)]
+	public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding
     {
         private readonly IList<MvxPropertyToken> _childTokens;

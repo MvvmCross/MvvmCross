@@ -48,6 +48,9 @@
     <Compile Include="MvxBaseVisibilityValueConverter.cs" />
     <Compile Include="MvxInvertedVisibilityValueConverter.cs" />
     <Compile Include="MvxVisibilityValueConverter.cs" />
+    <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
+      <Link>Preserve.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

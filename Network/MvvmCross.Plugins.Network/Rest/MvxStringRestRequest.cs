@@ -10,7 +10,8 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    public class MvxStringRestRequest
+    [Preserve(AllMembers = true)]
+	public class MvxStringRestRequest
         : MvxTextBasedRestRequest
     {
         public MvxStringRestRequest(string url, string body = null, string verb = MvxVerbs.Post,

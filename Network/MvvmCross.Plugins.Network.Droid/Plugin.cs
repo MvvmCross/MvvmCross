@@ -12,6 +12,7 @@ using MvvmCross.Plugins.Network.Rest;
 
 namespace MvvmCross.Plugins.Network.Droid
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

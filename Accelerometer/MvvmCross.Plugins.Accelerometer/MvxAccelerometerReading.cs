@@ -9,6 +9,7 @@
 
 namespace MvvmCross.Plugins.Accelerometer
 {
+    [Preserve(AllMembers = true)]
     public class MvxAccelerometerReading
     {
         public double X { get; set; }

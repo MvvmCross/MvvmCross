@@ -10,6 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

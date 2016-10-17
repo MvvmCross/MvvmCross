@@ -9,7 +9,8 @@ using System;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    public class MvxFileDownloadedEventArgs
+    [Preserve(AllMembers = true)]
+	public class MvxFileDownloadedEventArgs
         : EventArgs
     {
         public MvxFileDownloadedEventArgs(string url, string downloadPath)

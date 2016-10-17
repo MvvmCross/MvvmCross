@@ -7,10 +7,7 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.File;
-using MvvmCross.Plugins.File.iOS;
 
 namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
@@ -20,14 +17,15 @@ namespace MvvmCross.Plugins.ResourceLoader.iOS
     {
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-            resourcePath = MvxIosFileStore.ResScheme + resourcePath;
-            var fileService = Mvx.Resolve<IMvxFileStore>();
-            if (!fileService.TryReadBinaryFile(resourcePath, (stream) =>
-                {
-                    streamAction?.Invoke(stream);
-                    return true;
-                }))
-                throw new MvxException("Failed to read file {0}", resourcePath);
+			if (!File.Exists(resourcePath))
+			{
+				throw new MvxException("Failed to read file {0}", resourcePath);
+			}
+
+			using (var fileStream = File.Open(resourcePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+			{
+				streamAction?.Invoke(fileStream);
+			}
         }
     }
 }

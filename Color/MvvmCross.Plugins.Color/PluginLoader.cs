@@ -11,6 +11,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Color
 {
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

@@ -10,7 +10,8 @@ using System.Threading;
 
 namespace MvvmCross.Plugins.ThreadUtils.iOS
 {
-    public class MvxThreadSleep : IMvxThreadSleep
+    [Preserve(AllMembers = true)]
+	public class MvxThreadSleep : IMvxThreadSleep
     {
         #region Implementation of IMvxThreadSleep
 

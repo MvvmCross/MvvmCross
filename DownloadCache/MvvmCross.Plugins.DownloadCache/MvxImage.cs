@@ -7,7 +7,8 @@
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    public abstract class MvxImage<T>
+    [Preserve(AllMembers = true)]
+	public abstract class MvxImage<T>
     {
         protected MvxImage(T rawImage)
         {

@@ -10,7 +10,8 @@ using Android.Support.V4.Graphics;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    public class MvxAndroidImage
+    [Preserve(AllMembers = true)]
+	public class MvxAndroidImage
         : MvxImage<Bitmap>
     {
         public MvxAndroidImage(Bitmap rawImage)

@@ -15,6 +15,7 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
 {
 #warning One day I would like to decouple this plugin from the FileStore plugin
 
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxConfigurablePlugin
     {

@@ -2,7 +2,8 @@
 
 namespace MvvmCross.Plugins.Sqlite
 {
-    public class SqLiteConfig
+    [Preserve(AllMembers = true)]
+	public class SqLiteConfig
     {
         public SqLiteConfig(
             string databaseName,

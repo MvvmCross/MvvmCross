@@ -11,7 +11,8 @@ using System.Globalization;
 
 namespace MvvmCross.Plugins.Color
 {
-    public class MvxARGBValueConverter : MvxRGBValueConverter
+    [Preserve(AllMembers = true)]
+	public class MvxARGBValueConverter : MvxRGBValueConverter
     {
         protected override MvxColor Parse8DigitColor(string value)
         {

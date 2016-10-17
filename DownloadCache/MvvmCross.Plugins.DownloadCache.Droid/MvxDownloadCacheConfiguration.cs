@@ -10,7 +10,8 @@ using System;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    public class MvxDownloadCacheConfiguration
+    [Preserve(AllMembers = true)]
+	public class MvxDownloadCacheConfiguration
         : IMvxPluginConfiguration
     {
         public static readonly MvxDownloadCacheConfiguration Default = new MvxDownloadCacheConfiguration();

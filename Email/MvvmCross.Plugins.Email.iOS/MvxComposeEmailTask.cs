@@ -18,7 +18,8 @@ using UIKit;
 
 namespace MvvmCross.Plugins.Email.iOS
 {
-    public class MvxComposeEmailTask
+    [Preserve(AllMembers = true)]
+	public class MvxComposeEmailTask
         : MvxIosTask
         , IMvxComposeEmailTaskEx
     {

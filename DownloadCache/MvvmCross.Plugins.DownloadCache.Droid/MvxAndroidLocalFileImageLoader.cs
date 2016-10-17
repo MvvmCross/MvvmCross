@@ -17,7 +17,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    public class MvxAndroidLocalFileImageLoader
+    [Preserve(AllMembers = true)]
+	public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
     {
         private const string ResourcePrefix = "res:";

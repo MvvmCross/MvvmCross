@@ -12,7 +12,8 @@ using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS
 {
-    public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>
+    [Preserve(AllMembers = true)]
+	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>
     {
         protected override UIImage Convert(byte[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

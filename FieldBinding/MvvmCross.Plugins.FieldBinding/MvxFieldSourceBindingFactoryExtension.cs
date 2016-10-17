@@ -17,7 +17,8 @@ using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
-    public class MvxFieldSourceBindingFactoryExtension
+    [Preserve(AllMembers = true)]
+	public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken,

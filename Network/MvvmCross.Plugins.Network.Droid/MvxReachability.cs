@@ -16,7 +16,8 @@ using Java.Net;
 
 namespace MvvmCross.Plugins.Network.Droid
 {
-    public class MvxReachability : IMvxReachability
+    [Preserve(AllMembers = true)]
+	public class MvxReachability : IMvxReachability
     {
         private const int ReachableTimeoutInMilliseconds = 5000;
 
