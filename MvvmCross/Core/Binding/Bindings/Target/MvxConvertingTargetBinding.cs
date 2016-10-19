@@ -27,13 +27,16 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
+            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
+
+            if (ShouldSkipSetValueForPlatformSpecificReasons(target, value))
+                return;
 
             if (ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
@@ -71,6 +74,11 @@ namespace MvvmCross.Binding.Bindings.Target
             return false;
         }
 
+        protected virtual bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object value)
+        {
+            return false;
+        }
+
         protected virtual object MakeSafeValue(object value)
         {
             var safeValue = TargetType.MakeSafeValue(value);
@@ -80,8 +88,7 @@ namespace MvvmCross.Binding.Bindings.Target
         protected sealed override void FireValueChanged(object newValue)
         {
             // we don't allow 'reentrant' updates of any kind from target to source
-            if (_isUpdatingTarget
-                || _isUpdatingSource)
+            if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));

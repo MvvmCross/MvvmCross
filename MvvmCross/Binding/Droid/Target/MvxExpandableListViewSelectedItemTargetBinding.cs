@@ -2,7 +2,7 @@ using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -13,10 +13,10 @@ namespace MvvmCross.Binding.Droid.Target
     //     if null or equal respectively.  This class foregoes this so that if the bound value of
     //     SelectedItem is set to null we can "override" _currentValue.
     public class MvxExpandableListViewSelectedItemTargetBinding 
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private object _currentValue;
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
             : base(target)
@@ -31,14 +31,14 @@ namespace MvvmCross.Binding.Droid.Target
             //if (value == null || value == _currentValue)
             //    return;
 
+            var listView = (MvxExpandableListView)target;
+
             if (value == null)
             {
                 _currentValue = null;
-                ListView.ClearChoices();
+                listView.ClearChoices();
                 return;
             }
-
-            var listView = (MvxExpandableListView)target;
             var positions = ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetPositions(value);
             if (positions == null)
             {
@@ -63,20 +63,16 @@ namespace MvvmCross.Binding.Droid.Target
             if (listView == null)
                 return;
 
-            listView.ChildClick += OnChildClick;
-            _subscribed = true;
+            _subscription = listView.WeakSubscribe<ExpandableListView, ExpandableListView.ChildClickEventArgs>(
+                nameof(listView.ChildClick),
+                OnChildClick);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var listView = (ExpandableListView)ListView;
-                if (listView != null && _subscribed)
-                {
-                    listView.ChildClick -= OnChildClick;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
             }
             base.Dispose(isDisposing);
         }
