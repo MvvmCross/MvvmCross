@@ -4,7 +4,7 @@ namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxListPreferenceTargetBinding : MvxPreferenceValueTargetBinding
     {
-        public MvxListPreferenceTargetBinding(Preference preference)
+        public MvxListPreferenceTargetBinding(ListPreference preference)
             : base(preference)
         {
         }
