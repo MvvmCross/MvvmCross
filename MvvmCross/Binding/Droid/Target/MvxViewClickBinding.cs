@@ -9,14 +9,13 @@ using System;
 using System.Windows.Input;
 using Android.Views;
 using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxViewClickBinding
-        : MvxConvertingTargetBinding
+    public class MvxViewClickBinding : MvxAndroidTargetBinding
     {
         private ICommand _command;
+        private IDisposable _clickSubscription;
         private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
@@ -26,7 +25,7 @@ namespace MvvmCross.Binding.Droid.Target
             : base(view)
         {
             _canExecuteEventHandler = OnCanExecuteChanged;
-            view.Click += ViewOnClick;
+            _clickSubscription = view.WeakSubscribe(nameof(view.Click), ViewOnClick);
         }
 
         private void ViewOnClick(object sender, EventArgs args)
@@ -42,11 +41,9 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (_canExecuteSubscription != null)
-            {
-                _canExecuteSubscription.Dispose();
-                _canExecuteSubscription = null;
-            }
+            _canExecuteSubscription?.Dispose();
+            _canExecuteSubscription = null;
+
             _command = value as ICommand;
             if (_command != null)
             {
@@ -82,16 +79,11 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var view = View;
-                if (view != null)
-                {
-                    view.Click -= ViewOnClick;
-                }
-                if (_canExecuteSubscription != null)
-                {
-                    _canExecuteSubscription.Dispose();
-                    _canExecuteSubscription = null;
-                }
+                _clickSubscription?.Dispose();
+                _clickSubscription = null;
+
+                _canExecuteSubscription?.Dispose();
+                _canExecuteSubscription = null;
             }
             base.Dispose(isDisposing);
         }

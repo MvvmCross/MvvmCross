@@ -7,12 +7,11 @@
 
 using System;
 using Android.Views;
-using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public abstract class MvxBaseViewVisibleBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected View View => (View)Target;
 

@@ -7,15 +7,16 @@
 
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using System;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxCompoundButtonCheckedTargetBinding
-        : MvxPropertyInfoTargetBinding<CompoundButton>
+        : MvxAndroidPropertyInfoTargetBinding<CompoundButton>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxCompoundButtonCheckedTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -33,9 +34,10 @@ namespace MvvmCross.Binding.Droid.Target
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
                 return;
             }
-
-            _subscribed = true;
-            compoundButton.CheckedChange += CompoundButtonOnCheckedChange;
+            
+            _subscription = compoundButton.WeakSubscribe<CompoundButton, CompoundButton.CheckedChangeEventArgs>(
+                nameof(compoundButton.CheckedChange),
+                CompoundButtonOnCheckedChange);
         }
 
         private void CompoundButtonOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
@@ -47,12 +49,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var compoundButton = View;
-                if (compoundButton != null && _subscribed)
-                {
-                    compoundButton.CheckedChange -= CompoundButtonOnCheckedChange;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);

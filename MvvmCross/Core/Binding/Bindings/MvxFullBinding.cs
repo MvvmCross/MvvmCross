@@ -193,8 +193,7 @@ namespace MvvmCross.Binding.Bindings
             });
         }
 
-        private void UpdateSourceFromTarget(
-            object value)
+        private void UpdateSourceFromTarget(object value)
         {
             if (value == MvxBindingConstant.DoNothing)
                 return;
