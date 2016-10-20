@@ -5,20 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     using System;
     using System.Reflection;
 
     using MvvmCross.Binding;
-    using MvvmCross.Binding.Bindings.Target;
     using MvvmCross.Droid.Support.V7.AppCompat.Widget;
     using MvvmCross.Platform.Platform;
 
     public class MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding
-        : MvxPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
+        : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -45,22 +47,18 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             if (autoComplete == null)
                 return;
 
-            this._subscribed = true;
-            autoComplete.SelectedObjectChanged += AutoCompleteOnSelectedObjectChanged;
+            _subscription = autoComplete.WeakSubscribe(
+                nameof(autoComplete.SelectedObjectChanged),
+                AutoCompleteOnSelectedObjectChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var autoComplete = this.View;
-                if (autoComplete != null && this._subscribed)
-                {
-                    autoComplete.SelectedObjectChanged -= AutoCompleteOnSelectedObjectChanged;
-                    this._subscribed = false;
-                }
+                _subscription?.Dispose();
             }
+            base.Dispose(isDisposing);
         }
     }
 }

@@ -10,17 +10,18 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Binding;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using System;
-using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
     public class MvxAppCompatSpinnerSelectedItemBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         protected MvxAppCompatSpinner Spinner => (MvxAppCompatSpinner)Target;
 
+        private IDisposable _subscription;
         private object _currentValue;
-        private bool _subscribed;
 
         public MvxAppCompatSpinnerSelectedItemBinding(MvxAppCompatSpinner spinner)
             : base(spinner)
@@ -84,8 +85,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             if (spinner == null)
                 return;
 
-            spinner.ItemSelected += this.SpinnerItemSelected;
-            this._subscribed = true;
+            _subscription = spinner.WeakSubscribe<MvxAppCompatSpinner, AdapterView.ItemSelectedEventArgs>(
+                nameof(spinner.ItemSelected),
+                SpinnerItemSelected);
         }
 
         public override Type TargetType => typeof(object);
@@ -94,12 +96,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         {
             if (isDisposing)
             {
-                var spinner = this.Spinner;
-                if (spinner != null && this._subscribed)
-                {
-                    spinner.ItemSelected -= this.SpinnerItemSelected;
-                    this._subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

@@ -103,7 +103,7 @@ namespace MvvmCross.Droid.Support.V4
                 fragment.SetInitialSavedState(fss);
 
 #if DEBUG
-            Mvx.Trace("Adding item #" + position + ": f=" + fragment + " t=" + fragmentTag);
+            Mvx.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
 #endif
 
             while (_fragments.Count <= position)

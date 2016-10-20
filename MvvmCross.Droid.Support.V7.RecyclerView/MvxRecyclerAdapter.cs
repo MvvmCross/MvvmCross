@@ -20,9 +20,6 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
-using System.Collections.Generic;
-using Android.Support.V7.Widget;
-using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -33,17 +30,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-        // Keep track of all ViewHolders created by this adapter.
-        private readonly List<WeakReference<IMvxRecyclerViewHolder>> _viewHolders = new List<WeakReference<IMvxRecyclerViewHolder>>();
-
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
         private IMvxTemplateSelector _itemTemplateSelector;
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
-
-        int _attachedRecyclerViews;
 
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
@@ -141,29 +133,15 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnViewRecycled();
         }
 
-        public override void OnAttachedToRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
-        {
-            ++_attachedRecyclerViews;
-            base.OnAttachedToRecyclerView(recyclerView);
-        }
-
-        public override void OnDetachedFromRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
-        {
-            --_attachedRecyclerViews;
-            base.OnDetachedFromRecyclerView(recyclerView);
-        }
-
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            var itemBindingContext = new MvxAndroidBindingContext(parent.Context, _bindingContext.LayoutInflaterHolder);
+            var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
             
             var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
                 LongClick = ItemLongClick
             };
-
-            _viewHolders.Add(new WeakReference<IMvxRecyclerViewHolder>(vh));
 
             return vh;
         }
@@ -201,11 +179,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 return;
             }
 
-            if (_subscription != null)
-            {
-                _subscription.Dispose();
-                _subscription = null;
-            }
+            _subscription?.Dispose();
+            _subscription = null;
 
             _itemsSource = value;
 
@@ -263,24 +238,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 Mvx.Warning(
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
-            }
-        }
-
-        public virtual void ClearAllBindings()
-        {
-            // Only clear bindings if we're attached to at least one RecyclerView.
-            // This might be wrong if we're sharing the adapter with multiple RecyclerViews but
-            // I haven't hit this case in the wild.  We may need to revisit this if it's a problem.
-            if (_attachedRecyclerViews > 0)
-            {
-                foreach (var vhRef in _viewHolders)
-                {
-                    IMvxRecyclerViewHolder vh;
-                    if (vhRef.TryGetTarget(out vh))
-                        vh.ClearAllBindings();
-                }
-
-                _viewHolders.Clear();
             }
         }
     }
