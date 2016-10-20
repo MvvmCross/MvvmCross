@@ -81,6 +81,7 @@
     <Compile Include="ResourceHelpers\MvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\MvxAppResourceTypeFinder.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Target\MvxImageViewImageDrawableTargetBinding.cs" />
     <Compile Include="Target\MvxListPreferenceTargetBinding.cs" />
     <Compile Include="Target\MvxAndroidPropertyInfoTargetBinding.cs" />
     <Compile Include="Target\MvxTextViewHintTargetBinding.cs" />
