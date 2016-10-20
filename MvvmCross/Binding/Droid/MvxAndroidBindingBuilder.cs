@@ -107,6 +107,8 @@ namespace MvvmCross.Binding.Droid
                                                             view => new MvxViewHiddenBinding(view));
             registry.RegisterCustomBindingFactory<ImageView>("Bitmap",
                                                             imageView => new MvxImageViewBitmapTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("Drawable",
+                                                            imageView => new MvxImageViewImageDrawableTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableId",
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableName",
