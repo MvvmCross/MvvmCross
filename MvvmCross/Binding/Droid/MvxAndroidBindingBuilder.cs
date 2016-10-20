@@ -6,25 +6,24 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Preferences;
+using Android.Graphics;
+using Android.Views;
+using Android.Widget;
+
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Droid.Binders;
+using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid
 {
-    using Android.Graphics;
-    using Android.Views;
-    using Android.Widget;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Droid.Binders;
-    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Binding.Droid.Target;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
@@ -113,8 +112,8 @@ namespace MvvmCross.Binding.Droid
                                                             imageView => new MvxImageViewDrawableTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("DrawableName",
                                                             imageView => new MvxImageViewDrawableNameTargetBinding(imageView));
-			registry.RegisterCustomBindingFactory<ImageView>("ResourceName",
-															imageView => new MvxImageViewResourceNameTargetBinding(imageView));
+            registry.RegisterCustomBindingFactory<ImageView>("ResourceName",
+                                                            imageView => new MvxImageViewResourceNameTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<ImageView>("AssetImagePath",
                                                              imageView => new MvxImageViewImageTargetBinding(imageView));
             registry.RegisterCustomBindingFactory<MvxSpinner>("SelectedItem",
