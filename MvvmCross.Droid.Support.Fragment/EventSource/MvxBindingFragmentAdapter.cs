@@ -54,7 +54,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
             }
             else
             {
-                var fragment = FragmentView as Fragment;
+                var fragment = FragmentView as Android.Support.V4.App.Fragment;
                 if (fragment?.Arguments != null)
                 {
                     bundle = fragment.Arguments;

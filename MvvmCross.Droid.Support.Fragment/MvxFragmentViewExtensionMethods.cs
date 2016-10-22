@@ -16,7 +16,7 @@ namespace MvvmCross.Droid.Support.V4
     public static class MvxFragmentExtensionMethods
     {
         public static TFragment FindFragmentById<TFragment>(this MvxFragmentActivity activity, int resourceId)
-            where TFragment : Fragment
+            where TFragment : Android.Support.V4.App.Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentById(resourceId);
             if (fragment == null)
@@ -29,7 +29,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public static TFragment FindFragmentByTag<TFragment>(this MvxFragmentActivity activity, string tag)
-            where TFragment : Fragment
+            where TFragment : Android.Support.V4.App.Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (fragment == null)
@@ -41,7 +41,7 @@ namespace MvvmCross.Droid.Support.V4
             return SafeCast<TFragment>(fragment);
         }
 
-        private static TFragment SafeCast<TFragment>(Fragment fragment) where TFragment : Fragment
+        private static TFragment SafeCast<TFragment>(Android.Support.V4.App.Fragment fragment) where TFragment : Android.Support.V4.App.Fragment
         {
             if (!(fragment is TFragment))
             {

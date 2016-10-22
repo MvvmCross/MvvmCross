@@ -46,7 +46,7 @@ namespace MvvmCross.Droid.Support.V4
 				return;
 			}
 
-			Fragment fragment = fragmentView as Fragment;
+			Android.Support.V4.App.Fragment fragment = fragmentView as Android.Support.V4.App.Fragment;
 			if (fragmentView == null)
 				throw new InvalidOperationException($"Something really weird. ${nameof(fragmentView)} passed is not a Fragment!");
 
@@ -82,9 +82,9 @@ namespace MvvmCross.Droid.Support.V4
 			return viewModelType;
 		}
 
-		public static Fragment ToFragment(this IMvxFragmentView fragmentView)
+		public static Android.Support.V4.App.Fragment ToFragment(this IMvxFragmentView fragmentView)
 		{
-			var activity = fragmentView as Fragment;
+			var activity = fragmentView as Android.Support.V4.App.Fragment;
 			if (activity == null)
 				throw new MvxException("ToFragment called on an IMvxFragmentView which is not an Android Fragment: {0}", fragmentView);
 			return activity;
@@ -137,7 +137,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)
 		{
-			var actualFragment = (Fragment)fragment;
+			var actualFragment = (Android.Support.V4.App.Fragment)fragment;
 
 			if (fragment.BindingContext == null)
 			{
@@ -155,7 +155,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
 		{
-			var actualFragment = (Fragment)fragment;
+			var actualFragment = (Android.Support.V4.App.Fragment)fragment;
 
 			if (fragment.BindingContext == null)
 			{
@@ -181,7 +181,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		public static void RegisterFragmentViewToCacheIfNeeded(this IMvxFragmentView fragmentView, Type fragmentParentActivityType)
 		{
-			Fragment representedFragment = fragmentView as Fragment;
+			Android.Support.V4.App.Fragment representedFragment = fragmentView as Android.Support.V4.App.Fragment;
 
 			if (representedFragment == null)
 				throw new InvalidOperationException($"Represented type: {fragmentView.GetType()} is not a Fragment!");

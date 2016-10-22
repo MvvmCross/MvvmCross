@@ -50,7 +50,7 @@ namespace MvvmCross.Droid.Support.V4
             public Bundle Bundle { get; private set; }
             public IMvxViewModel ViewModel { get; private set; }
 
-            public Fragment CachedFragment { get; set; }
+            public Android.Support.V4.App.Fragment CachedFragment { get; set; }
 
             public TabInfo(string tag, Type fragmentType, Bundle bundle, IMvxViewModel viewModel)
             {
@@ -168,7 +168,7 @@ namespace MvvmCross.Droid.Support.V4
                 {
                     if (newTab.CachedFragment == null)
                     {
-                        newTab.CachedFragment = Fragment.Instantiate(this,
+                        newTab.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(this,
                                                                      FragmentJavaName(newTab.FragmentType),
                                                                      newTab.Bundle);
                         FixupDataContext(newTab);

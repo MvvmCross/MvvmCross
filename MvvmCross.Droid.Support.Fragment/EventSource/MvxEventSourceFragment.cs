@@ -18,7 +18,7 @@ using MvvmCross.Droid.Shared;
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public class MvxEventSourceFragment
-        : Fragment
+        : Android.Support.V4.App.Fragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;

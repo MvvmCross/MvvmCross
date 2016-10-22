@@ -44,13 +44,13 @@ namespace MvvmCross.Droid.Support.V4
             throw new InvalidOperationException("MvxFragmentStatePagerAdapter has broken cache implementation, use MvxFragmentPagerAdapter at this moment.");
         }
 
-        public override Fragment GetItem(int position)
+        public override Android.Support.V4.App.Fragment GetItem(int position)
         {
             var fragInfo = Fragments.ElementAt(position);
 
             if (fragInfo.CachedFragment == null)
             {
-                fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+                fragInfo.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
                 var request = new MvxViewModelRequest (fragInfo.ViewModelType, null, null, null);
                 ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
@@ -90,7 +90,7 @@ namespace MvvmCross.Droid.Support.V4
             public string Title { get; set; }
             public Type FragmentType { get; private set; }
             public Type ViewModelType { get; private set; }
-            public Fragment CachedFragment { get; set; }
+            public Android.Support.V4.App.Fragment CachedFragment { get; set; }
         }
     }
 }

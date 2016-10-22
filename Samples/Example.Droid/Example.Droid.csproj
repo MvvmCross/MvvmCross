@@ -121,10 +121,6 @@
       <HintPath>..\..\packages\Xamarin.Android.Support.Media.Compat.24.2.1\lib\MonoAndroid70\Xamarin.Android.Support.Media.Compat.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Android.Support.v4.24.2.1\lib\MonoAndroid70\Xamarin.Android.Support.v4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Android.Support.v7.AppCompat.24.2.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
       <Private>True</Private>
@@ -229,10 +225,6 @@
       <Project>{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}</Project>
       <Name>MvvmCross.Droid.Support.Design</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross.Droid.Support.V4\MvvmCross.Droid.Support.V4.csproj">
-      <Project>{24C19002-AD02-4B88-9E57-1C254819D30E}</Project>
-      <Name>MvvmCross.Droid.Support.V4</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
       <Project>{31C39E0F-116E-4EAC-921D-A79E6AA28204}</Project>
       <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
@@ -244,6 +236,10 @@
     <ProjectReference Include="..\..\MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
       <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
       <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj">
+      <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
+      <Name>MvvmCross.Droid.Support.Fragment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

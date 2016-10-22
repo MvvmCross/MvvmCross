@@ -45,10 +45,10 @@ namespace MvvmCross.Droid.Support.V4
             return namespaceText + fragmentType.Name;
         }
 
-        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
+        public override Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = Fragments.ElementAt(position);
-            var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+            var fragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
             if (mvxFragment == null)

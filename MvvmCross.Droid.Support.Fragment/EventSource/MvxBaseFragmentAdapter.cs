@@ -19,14 +19,14 @@ namespace MvvmCross.Droid.Support.V4.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Fragment Fragment => _eventSource as Fragment;
+        protected Android.Support.V4.App.Fragment Fragment => _eventSource as Android.Support.V4.App.Fragment;
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
             if (eventSource == null)
                 throw new ArgumentException("eventSource should not be null", nameof(eventSource));
 
-            if (!(eventSource is Fragment))
+            if (!(eventSource is Android.Support.V4.App.Fragment))
                 throw new ArgumentException("eventSource should be a Fragment", nameof(eventSource));
 
             _eventSource = eventSource;
