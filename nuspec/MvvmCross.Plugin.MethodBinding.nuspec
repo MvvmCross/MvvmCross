@@ -15,46 +15,8 @@ This package contains the 'MethodBinding' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework="net">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="win">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="wp">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="Xamarin.Mac20">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="uap">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
-			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
-			</group>
+			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Binding" version="4.3.0" />
 		</dependencies>
 	</metadata>
 	<files>
