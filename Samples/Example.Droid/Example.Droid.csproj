@@ -241,6 +241,14 @@
       <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
       <Name>MvvmCross.Droid.Support.Fragment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross.Droid.Support.Core.UI\MvvmCross.Droid.Support.Core.UI.csproj">
+      <Project>{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}</Project>
+      <Name>MvvmCross.Droid.Support.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross.Droid.Support.Core.Utils\MvvmCross.Droid.Support.Core.Utils.csproj">
+      <Project>{61C1EB25-483E-4C77-89CD-CA202C82C6BF}</Project>
+      <Name>MvvmCross.Droid.Support.Core.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />

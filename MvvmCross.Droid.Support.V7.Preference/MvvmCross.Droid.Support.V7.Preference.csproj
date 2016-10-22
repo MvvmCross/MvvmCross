@@ -133,6 +133,10 @@
       <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
       <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj">
+      <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
+      <Name>MvvmCross.Droid.Support.Fragment</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
