@@ -15,23 +15,16 @@ This package contains Support v4 support for MvvmCross.</description>
 		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support v4</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Droid.Shared" version="4.3.0" />
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Core" version="4.3.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.4.0.1" />
-			</group>
-			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Droid.Shared" version="4.3.0" />
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Core" version="4.3.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.4.0.1" />
-			</group>
+			<!-- Disable those as long as we don't have actual content in them
+			<dependency id="MvvmCross.Droid.Support.Compat" version="4.3.0"/>
+			<dependency id="MvvmCross.Droid.Support.Media.Compat" version="4.3.0"/>
+			-->
+			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.3.0"/>
+			<dependency id="MvvmCross.Droid.Support.Core.UI" version="4.3.0"/>
+			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="4.3.0"/>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.V4.*" target="lib\MonoAndroid403" />
-		<file src="..\MvvmCross.Droid.Support.V4\**\*.cs" target="src\MvvmCross.Droid.Support.V4" />
 	</files>
 </package>
 

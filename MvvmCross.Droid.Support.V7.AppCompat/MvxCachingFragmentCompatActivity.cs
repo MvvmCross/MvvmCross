@@ -150,7 +150,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual void ReplaceFragment(FragmentTransaction ft, IMvxCachedFragmentInfo fragInfo)
         {
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Android.Support.V4.App.Fragment, fragInfo.Tag);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
@@ -208,19 +208,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			//If we already have a previously created fragment, we only need to send the new parameters
 			if (fragInfo.CachedFragment != null && fragmentReplaceMode == FragmentReplaceMode.ReplaceFragment)
 			{
-				(fragInfo.CachedFragment as Fragment).Arguments.Clear();
-				(fragInfo.CachedFragment as Fragment).Arguments.PutAll(bundle);
+				(fragInfo.CachedFragment as Android.Support.V4.App.Fragment).Arguments.Clear();
+				(fragInfo.CachedFragment as Android.Support.V4.App.Fragment).Arguments.PutAll(bundle);
 			}
 			else
 			{
 				//Otherwise, create one and cache it
-				fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
+				fragInfo.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
 					bundle) as IMvxFragmentView;
 				OnFragmentCreated(fragInfo, ft);
 			}
 
-			currentFragment = fragInfo.CachedFragment as Fragment;
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
+			currentFragment = fragInfo.CachedFragment as Android.Support.V4.App.Fragment;
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Android.Support.V4.App.Fragment, fragInfo.Tag);
 
 			//if replacing ViewModel then clear the cache after the fragment
 			//has been added to the transaction so that the Tag property is not null
@@ -228,7 +228,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			if (fragmentReplaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
 			{
 				var cache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
-				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
+				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Android.Support.V4.App.Fragment));
 			}
 
 			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
@@ -244,7 +244,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		protected virtual FragmentReplaceMode ShouldReplaceCurrentFragment(IMvxCachedFragmentInfo newFragment, IMvxCachedFragmentInfo currentFragment, Bundle replacementBundle)
 		{
-			var oldBundle = (newFragment.CachedFragment as Fragment)?.Arguments;
+			var oldBundle = (newFragment.CachedFragment as Android.Support.V4.App.Fragment)?.Arguments;
 			if (oldBundle == null) return FragmentReplaceMode.ReplaceFragment;
 
 			var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
@@ -299,9 +299,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     .ToList();
         }
 
-        protected virtual IEnumerable<Fragment> GetCurrentCacheableFragments()
+        protected virtual IEnumerable<Android.Support.V4.App.Fragment> GetCurrentCacheableFragments()
         {
-            var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
+            var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Android.Support.V4.App.Fragment>();
 
             return currentFragments
                 .Where(fragment => fragment != null)
@@ -321,7 +321,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return GetFragmentInfoByTag(tagFragment);
         }
 
-        protected virtual string GetTagFromFragment(Fragment fragment)
+        protected virtual string GetTagFromFragment(Android.Support.V4.App.Fragment fragment)
         {
             var mvxFragmentView = fragment as IMvxFragmentView;
 
