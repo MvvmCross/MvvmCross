@@ -17,14 +17,8 @@ This package contains the 'Android Fragment' assemblies for Android Honeycomb or
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp fragments</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.3.0" />
-				<dependency id="MvvmCross.Droid.Shared" version="4.3.0" />
-			</group>
-			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.3.0" />
-				<dependency id="MvvmCross.Droid.Shared" version="4.3.0" />
-			</group>
+			<dependency id="MvvmCross.Core" version="4.3.0" />
+			<dependency id="MvvmCross.Droid.Shared" version="4.3.0" />
 		</dependencies>
 	</metadata>
 	<files>		
