@@ -9,7 +9,7 @@
     {
 
         private readonly UIPageViewController _pageView;
-        protected UIPageViewController PageView => this._pageView;
+        public UIPageViewController PageView => this._pageView;
 
         protected MvxBasePageViewSource(UIPageViewController pageView)
         {

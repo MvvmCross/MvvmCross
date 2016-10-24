@@ -57,6 +57,7 @@
     <Compile Include="Views\IMvxIosViewsContainer.cs" />
     <Compile Include="Views\MvxCanCreateIosViewExtensionMethods.cs" />
     <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
+    <Compile Include="Views\MvxPageViewExtensionMethods.cs" />
     <Compile Include="Views\MvxSegueExtensionMethods.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
