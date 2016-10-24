@@ -75,10 +75,6 @@
 
         public virtual int GetPageIndexForController(UIViewController referenceViewController)
         {
-            var mvxPageView = referenceViewController as IMvxPageViewController;
-            if (mvxPageView != null)
-                return mvxPageView.PageIndex;
-
             var mvxView = referenceViewController as IMvxView;
             if (mvxView != null)
             {
@@ -86,7 +82,11 @@
                 if (vm != null)
                     return vm.PageIndex;
             }
-            
+
+            var mvxPageView = referenceViewController as IMvxPageViewController;
+            if (mvxPageView != null)
+                return mvxPageView.PageIndex;
+
             return -1;
         }
 
