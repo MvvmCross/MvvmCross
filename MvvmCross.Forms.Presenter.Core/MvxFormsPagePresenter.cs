@@ -74,10 +74,8 @@ namespace MvvmCross.Forms.Presenter.Core
         {
         }
 
-        private void SetupForBinding(Page page, MvxViewModelRequest request)
+        private void SetupForBinding(Page page, IMvxViewModel viewModel, MvxViewModelRequest request)
         {
-            var viewModel = MvxPresenterHelpers.LoadViewModel(request);
-
             var mvxContentPage = page as IMvxContentPage;
             if (mvxContentPage != null) {
                 mvxContentPage.Request = request;
@@ -96,7 +94,7 @@ namespace MvvmCross.Forms.Presenter.Core
 
             var viewModel = MvxPresenterHelpers.LoadViewModel(request);
 
-            SetupForBinding(page, request);
+            SetupForBinding(page, viewModel, request);
 
             var mainPage = _mvxFormsApp.MainPage as NavigationPage;
 
