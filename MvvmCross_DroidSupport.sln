@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V4", "MvvmCross.Droid.Support.V4\MvvmCross.Droid.Support.V4.csproj", "{24C19002-AD02-4B88-9E57-1C254819D30E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Droid.Support.V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Droid.Support.V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
@@ -57,10 +55,6 @@ Global
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24C19002-AD02-4B88-9E57-1C254819D30E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24C19002-AD02-4B88-9E57-1C254819D30E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24C19002-AD02-4B88-9E57-1C254819D30E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24C19002-AD02-4B88-9E57-1C254819D30E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.ActiveCfg = Release|Any CPU
