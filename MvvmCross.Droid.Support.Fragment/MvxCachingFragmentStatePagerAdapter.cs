@@ -39,10 +39,7 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            var namespaceText = fragmentType.Namespace ?? "";
-            if (namespaceText.Length > 0)
-                namespaceText = namespaceText.ToLowerInvariant() + ".";
-            return namespaceText + fragmentType.Name;
+            return Java.Lang.Class.FromType(fragmentType).Name;
         }
 
         public override Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null)
