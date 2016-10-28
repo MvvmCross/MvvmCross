@@ -373,11 +373,8 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
 		protected virtual string FragmentJavaName(Type fragmentType)
 		{
-			var namespaceText = fragmentType.Namespace ?? "";
-			if (namespaceText.Length > 0)
-				namespaceText = namespaceText.ToLowerInvariant() + ".";
-			return namespaceText + fragmentType.Name;
-		}
+            return Java.Lang.Class.FromType(fragmentType).Name;
+        }
 
 		public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
 		{
