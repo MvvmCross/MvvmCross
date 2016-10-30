@@ -26,14 +26,14 @@ This package contains the 'binding extensions' for MvvmCross
 		<!-- common -->
 		<file src="..\MvvmCross\Binding\BindingEx.Wpf\**\*.cs" 
 			target="src\MvvmCross.BindingEx.Wpf" />
-		<file src="..\MvvmCross\Binding\BindingEx.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.BindingEx.WindowsStore" />
+		<file src="..\MvvmCross\Binding\BindingEx.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.BindingEx.WindowsCommon" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.BindingEx.Wpf.*" target="lib\net45" />
 
 		<!-- store -->
-		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.BindingEx.WindowsStore.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.BindingEx.WindowsCommon.*" target="lib\portable-win81+wpa81" />
 		
 	</files>
 </package>
