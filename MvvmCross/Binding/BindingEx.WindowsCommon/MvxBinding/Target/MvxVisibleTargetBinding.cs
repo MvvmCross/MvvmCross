@@ -6,21 +6,17 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-
-#if WINDOWS_WPF
-    using System.Windows;
-#endif
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-#endif
-
 using MvvmCross.Binding;
 
 #if WINDOWS_COMMON
+using Windows.UI.Xaml;
+
 namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
+using System.Windows;
+
 namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
 #endif
 {

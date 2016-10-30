@@ -5,8 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com\
 
-using System.ComponentModel;
-
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
@@ -17,6 +15,8 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System.ComponentModel;
+
 namespace MvvmCross.BindingEx.Wpf
 #endif
 {
