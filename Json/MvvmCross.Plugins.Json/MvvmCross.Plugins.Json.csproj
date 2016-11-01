@@ -58,10 +58,8 @@
     <Compile Include="MvxJsonConfiguration.cs" />
     <Compile Include="MvxJsonConverter.cs" />
     <Compile Include="PluginLoader.cs" />
+    <Compile Include="Preserve.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
-      <Link>Preserve.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
