@@ -40,7 +40,7 @@ This package contains the 'PhoneCall' plugin for MvvmCross</description>
 		<!-- store -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PhoneCall.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.PhoneCall.WindowsStore.*" target="lib\netcore45" />
-		<file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />>
+		<file src="BootstrapContent\PhoneCallPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PhoneCallPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PhoneCall.*" target="lib\win81" />

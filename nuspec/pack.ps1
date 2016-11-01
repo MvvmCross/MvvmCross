@@ -12,7 +12,6 @@ del *.nupkg
 
 nuget pack MvvmCross.Plugin.Accelerometer.nuspec -Symbols
 nuget pack MvvmCross.Plugin.All.nuspec -Symbols
-nuget pack MvvmCross.Plugin.Bookmarks.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Color.nuspec -Symbols
 nuget pack MvvmCross.Plugin.DownloadCache.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Email.nuspec -Symbols
@@ -31,7 +30,6 @@ nuget pack MvvmCross.Plugin.ReflectionEx.nuspec -Symbols
 nuget pack MvvmCross.Plugin.ResourceLoader.nuspec -Symbols
 nuget pack MvvmCross.Plugin.ResxLocalization.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Share.nuspec -Symbols
-nuget pack MvvmCross.Plugin.SoundEffects.nuspec -Symbols
 nuget pack MvvmCross.Plugin.SQLitePCL.nuspec -Symbols
 nuget pack MvvmCross.Plugin.ThreadUtils.nuspec -Symbols
 nuget pack MvvmCross.Plugin.Visibility.nuspec -Symbols
