@@ -35,6 +35,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer.cs" />
     <Compile Include="Analyzers\ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer.cs" />
     <Compile Include="Analyzers\MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzer.cs" />
     <Compile Include="Analyzers\CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer.cs" />
