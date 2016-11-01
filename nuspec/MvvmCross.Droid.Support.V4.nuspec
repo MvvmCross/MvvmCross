@@ -21,22 +21,9 @@ This package contains Support v4 support for MvvmCross.</description>
 			-->
 			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.4.0"/>
 			<dependency id="MvvmCross.Droid.Support.Core.UI" version="4.4.0"/>
-			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="4.4.0"/>
+			<dependency id="MvvmCross.Droid.Support.Core.Util" version="4.4.0"/>
 		</dependencies>
 	</metadata>
 	<files>
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-
