@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.AutoView.iOS</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - iOS AutoView Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -17,8 +17,8 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.AutoView" version="4.3.0" />
-			<dependency id="MvvmCross.Dialog.iOS" version="4.3.0" />
+			<dependency id="MvvmCross.AutoView" version="4.4.0" />
+			<dependency id="MvvmCross.Dialog.iOS" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -31,6 +31,7 @@ This package contains the 'AutoView' iOS libraries for MvvmCross
 			target="src\MvvmCross.AutoView.iOS" />		
 	</files>
 </package>
+
 
 
 

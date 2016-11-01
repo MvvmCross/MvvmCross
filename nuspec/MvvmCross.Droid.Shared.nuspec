@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Shared</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Android Fragment Shared Support</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -17,9 +17,9 @@ This package contains the 'Android Shared' assemblies for Android Honeycomb or l
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp fragments</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Core" version="4.3.0" />
-			<dependency id="MvvmCross.Binding" version="4.3.0" />
-			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Core" version="4.4.0" />
+			<dependency id="MvvmCross.Binding" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -28,6 +28,7 @@ This package contains the 'Android Shared' assemblies for Android Honeycomb or l
 		<file src="..\MvvmCross\Droid\Shared\**\*.cs" target="src\MvvmCross.Droid.Shared" />
 	</files>
 </package>
+
 
 
 

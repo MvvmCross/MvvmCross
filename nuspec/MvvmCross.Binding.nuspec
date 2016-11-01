@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Binding</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Binding</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -20,7 +20,7 @@ This package contains the 'Core Binding' libraries for MvvmCross
 			<frameworkAssembly assemblyName="Mono.Android.Export" targetFramework="MonoAndroid" />
 		</frameworkAssemblies>
 		<dependencies>
-			<dependency id="MvvmCross.Core" version="4.3.0" />
+			<dependency id="MvvmCross.Core" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -76,6 +76,7 @@ This package contains the 'Core Binding' libraries for MvvmCross
 
 	</files>
 </package>
+
 
 
 
