@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.iOS.Support.JASidePanels</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross iOS Support - JASidePanels</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,7 +16,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS">
-				<dependency id="MvvmCross.iOS.Support" version="4.3.0" />
+				<dependency id="MvvmCross.iOS.Support" version="4.4.0" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -30,6 +30,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		-->
 	</files>
 </package>
+
 
 
 
