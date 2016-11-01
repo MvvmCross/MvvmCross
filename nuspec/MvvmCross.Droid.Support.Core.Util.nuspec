@@ -23,7 +23,7 @@ This package contains Support Core Util support for MvvmCross.</description>
 	</metadata>
 	<files>
 		<file src="..\bin\Release\MvvmCross.Droid.Support.Core.Util.*" target="lib\MonoAndroid70" />
-		<file src="..\MvvmCross.Droid.Support.Core.Util\**\*.cs" target="src\MvvmCross.Droid.Support.Core.Util" />
+		<file src="..\MvvmCross.Droid.Support.Core.Utils\**\*.cs" target="src\MvvmCross.Droid.Support.Core.Util" />
 	</files>
 </package>
 
