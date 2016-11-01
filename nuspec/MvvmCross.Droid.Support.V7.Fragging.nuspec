@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V7.Fragging</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross Android Support V7 - Fragments</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,12 +15,13 @@ This package contains Support v4 Fragments support for MvvmCross.</description>
 		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support fragging fragments</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.3.0" />
+			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>
 	</files>
 </package>
+
 
 
 
