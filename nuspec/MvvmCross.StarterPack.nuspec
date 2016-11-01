@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.StarterPack</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Starter Pack</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -84,6 +84,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="MacContent\FirstViewController.cs.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.pp" />
 	</files>
 </package>
+
 
 
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Core</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Core</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -17,7 +17,7 @@ This package contains the 'Core' libraries for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -98,6 +98,7 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.tvOS" />
 	</files>
 </package>
+
 
 
 
