@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Forms.Presenter</id>
-		<version>4.1.4</version>
+		<version>4.4.0</version>
 		<title>MvvmCross FormsPresenters</title>
 		<authors>Tomasz Cielecki, Marcos Cobeña Morián, Peter Burke</authors>
 		<owners>Tomasz Cielecki</owners>
@@ -16,42 +16,42 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="win">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.1.4" />
+				<dependency id="MvvmCross.Core" version="4.4.0" />
 				<dependency id="Xamarin.Forms" version="2.3.2.127" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>   
 		<!-- PCL -->
-		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10" />
+		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-net45+netcore45+wpa81+MonoAndroid10+Xamarin.iOS10" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
