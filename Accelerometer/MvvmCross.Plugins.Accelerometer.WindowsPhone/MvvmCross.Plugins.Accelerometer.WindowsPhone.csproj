@@ -63,19 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Core.4.3.0\lib\wp8\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Core.4.4.0\lib\dotnet\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.3.0\lib\wp8\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.WindowsPhone, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.3.0\lib\wp8\MvvmCross.Platform.WindowsPhone.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.WindowsPhone, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Core.4.3.0\lib\wp8\MvvmCross.WindowsPhone.dll</HintPath>
+      <HintPath>..\..\packages\MvvmCross.Platform.4.4.0\lib\dotnet\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
