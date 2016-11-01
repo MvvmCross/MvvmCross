@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Share</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Share Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,7 +15,7 @@ This package contains the 'Share' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>
@@ -26,8 +26,6 @@ This package contains the 'Share' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Share.Wpf" />
 		<file src="..\Share\MvvmCross.Plugins.Share.WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Plugins.Share.WindowsStore" />
-		<file src="..\Share\MvvmCross.Plugins.Share.WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.Plugins.Share.WindowsPhone" />
 		<file src="..\Share\MvvmCross.Plugins.Share.WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Plugins.Share.WindowsCommon" />
 		<file src="..\Share\MvvmCross.Plugins.Share.Droid\**\*.cs" 
@@ -51,11 +49,6 @@ This package contains the 'Share' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Share.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\SharePluginBootstrap.cs.pp" />
-
-		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Share.WindowsPhone.*" target="lib\wp8" />
-		<file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\wp8\Bootstrap\SharePluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\win81" />
@@ -84,6 +77,7 @@ This package contains the 'Share' plugin for MvvmCross</description>
 		
 	</files>
 </package>
+
 
 
 

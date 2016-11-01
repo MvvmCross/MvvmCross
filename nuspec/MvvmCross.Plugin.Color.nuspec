@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Color</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Color Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,11 +16,11 @@ This package contains the 'Color' plugin for MvvmCross</description>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group>
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="MvvmCross.Binding" version="4.3.0" />
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="MvvmCross.Binding" version="4.4.0" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -32,8 +32,6 @@ This package contains the 'Color' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Color.Wpf" />
 		<file src="..\Color\MvvmCross.Plugins.Color.WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Plugins.Color.WindowsStore" />
-		<file src="..\Color\MvvmCross.Plugins.Color.WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.Plugins.Color.WindowsPhone" />
 		<file src="..\Color\MvvmCross.Plugins.Color.WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Plugins.Color.WindowsCommon" />
 		<file src="..\Color\MvvmCross.Plugins.Color.Droid\**\*.cs" 
@@ -56,11 +54,6 @@ This package contains the 'Color' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Color.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
-
-		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Color.WindowsPhone.*" target="lib\wp8" />
-		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\ColorPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\win81" />
@@ -89,6 +82,7 @@ This package contains the 'Color' plugin for MvvmCross</description>
 		
 	</files>
 </package>
+
 
 
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Location.Fused</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Fused Location Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -16,8 +16,8 @@ This package contains the implementation of FusedLocationApi as 'Location' plugi
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
-				<dependency id="Xamarin.Android.Support.v4" version="23.4.0" />
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="Xamarin.Android.Support.v4" version="24.2.1" />
 				<dependency id="Xamarin.GooglePlayServices.Base" version="29.0.0.2" />
 				<dependency id="Xamarin.GooglePlayServices.Basement" version="29.0.0.2" />
 				<dependency id="Xamarin.GooglePlayServices.Location" version="29.0.0.2" />
@@ -39,6 +39,7 @@ This package contains the implementation of FusedLocationApi as 'Location' plugi
 
 	</files>
 </package>
+
 
 
 

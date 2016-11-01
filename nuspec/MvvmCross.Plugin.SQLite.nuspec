@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Sqlite</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Sqlite Plugin (Old)</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,7 +15,7 @@ This package contains the old 'Sqlite' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-				<dependency id="MvvmCross.Platform" version="4.3.0" />
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
 		</dependencies>
 		<references>
 			<group targetFramework="native0.0">
@@ -74,6 +74,7 @@ This package contains the old 'Sqlite' plugin for MvvmCross</description>
 		<file src="tools\Uninstall.ps1" target="tools\Uninstall.ps1" />
 	</files>
 </package>
+
 
 
 

@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>MvvmCross.Plugin.SQLitePCL</id>
-		<version>4.3.4</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Sqlite PCL Plugin</title>
 		<authors>Stuart Lodge, Benedikt Neuhold, Tomasz Cielecki</authors>
 		<owners>MvvmCross</owners>
@@ -15,7 +15,7 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
 			<dependency id="sqlite-net-pcl" version="1.1.2" />
 		</dependencies>
 	</metadata>
@@ -56,6 +56,7 @@ This package contains the 'Sqlite' plugin for MvvmCross</description>
 		<file src="iOSBootstrapContent\SqlitePclPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\SqlitePluginBootstrap.cs.pp" />
 	</files>
 </package>
+
 
 
 

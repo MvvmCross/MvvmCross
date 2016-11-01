@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Email</id>
-		<version>4.3.0</version>
+		<version>4.4.0</version>
 		<title>MvvmCross - Email Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -15,7 +15,7 @@ This package contains the 'Email' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.3.0" />
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -26,8 +26,6 @@ This package contains the 'Email' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.Email.Wpf" />
 		<file src="..\Email\MvvmCross.Plugins.Email.WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Plugins.Email.WindowsStore" />
-		<file src="..\Email\MvvmCross.Plugins.Email.WindowsPhone\**\*.cs" 
-			target="src\MvvmCross.Plugins.Email.WindowsPhone" />
 		<file src="..\Email\MvvmCross.Plugins.Email.WindowsPhoneStore\**\*.cs" 
 			target="src\MvvmCross.Plugins.Email.WindowsPhoneStore" />
 		<file src="..\Email\MvvmCross.Plugins.Email.WindowsCommon\**\*.cs" 
@@ -54,11 +52,6 @@ This package contains the 'Email' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\netcore45" />
 		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Email.WindowsStore.*" target="lib\netcore45" />
 		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\EmailPluginBootstrap.cs.pp" />
-
-		<!-- phone -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\wp8" />
-		<file src="..\bin\Release\Mvx\WindowsPhone\MvvmCross.Plugins.Email.WindowsPhone.*" target="lib\wp8" />
-		<file src="BootstrapContent\EmailPluginBootstrap.cs.pp" target="content\wp8\Bootstrap\EmailPluginBootstrap.cs.pp" />
 
 		<!-- UAP -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Email.*" target="lib\uap10.0" />
@@ -98,6 +91,7 @@ This package contains the 'Email' plugin for MvvmCross</description>
 		
 	</files>
 </package>
+
 
 
 
