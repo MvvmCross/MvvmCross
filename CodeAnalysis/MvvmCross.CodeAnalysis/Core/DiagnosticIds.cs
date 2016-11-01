@@ -6,5 +6,6 @@
         public const string CommandWithCanExecuteWithoutCanExecuteChangedRuleId = "MVX1002";
         public const string MvxMessengerSubscriptionDoesntStoreTokenInVariableId = "MVX1003";
         public const string ApplyMustBeCalledWhenUsingFluentBindingSetId = "MVX1004";
+        public const string AddArgumentToShowViewModelWhenUsingGenericViewModelId = "MVX1005";
     }
 }
