@@ -28,14 +28,3 @@ This package contains Support v7 Design support for MvvmCross.</description>
 		<file src="..\MvvmCross.Droid.Support.Design\**\*.cs" target="src\MvvmCross.Droid.Support.Design" />
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-

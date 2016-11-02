@@ -16,7 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{22132440-48FD-462E-8075-DFB1D5C09827}"
 	ProjectSection(SolutionItems) = preProject
 		nuspec\MvvmCross.Droid.Support.Core.UI.nuspec = nuspec\MvvmCross.Droid.Support.Core.UI.nuspec
-		nuspec\MvvmCross.Droid.Support.Core.Util.nuspec = nuspec\MvvmCross.Droid.Support.Core.Util.nuspec
+		nuspec\MvvmCross.Droid.Support.Core.Utils.nuspec = nuspec\MvvmCross.Droid.Support.Core.Utils.nuspec
 		nuspec\MvvmCross.Droid.Support.Design.nuspec = nuspec\MvvmCross.Droid.Support.Design.nuspec
 		nuspec\MvvmCross.Droid.Support.Fragment.nuspec = nuspec\MvvmCross.Droid.Support.Fragment.nuspec
 		nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec = nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec
@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.UI", "MvvmCross.Droid.Support.Core.UI\MvvmCross.Droid.Support.Core.UI.csproj", "{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.Util", "MvvmCross.Droid.Support.Core.Utils\MvvmCross.Droid.Support.Core.Util.csproj", "{61C1EB25-483E-4C77-89CD-CA202C82C6BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.Utils", "MvvmCross.Droid.Support.Core.Utils\MvvmCross.Droid.Support.Core.Utils.csproj", "{61C1EB25-483E-4C77-89CD-CA202C82C6BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Fragment", "MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
 EndProject

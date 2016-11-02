@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("MvvmCross.Droid.Support.Core.Util")]
+[assembly: AssemblyTitle("MvvmCross.Droid.Support.Core.Utils")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("martijnvandijk")]
+[assembly: AssemblyCopyright("MvvmCross")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

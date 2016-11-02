@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V4</id>
-		<version>4.4.0</version>
+		<version>4.4.1</version>
 		<title>MvvmCross Android Support - V4</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -21,7 +21,7 @@ This package contains Support v4 support for MvvmCross.</description>
 			-->
 			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.4.0"/>
 			<dependency id="MvvmCross.Droid.Support.Core.UI" version="4.4.0"/>
-			<dependency id="MvvmCross.Droid.Support.Core.Util" version="4.4.0"/>
+			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="4.4.1"/>
 		</dependencies>
 	</metadata>
 	<files>
