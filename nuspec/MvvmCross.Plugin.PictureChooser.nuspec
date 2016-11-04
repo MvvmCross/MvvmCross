@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.PictureChooser</id>
-		<version>4.4.0</version>
+		<version>4.4.1</version>
 		<title>MvvmCross - PictureChooser Plugin</title>
 		<authors>MvvmCross</authors>
 		<owners>Stuart Lodge</owners>
@@ -24,6 +24,8 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 			target="src\MvvmCross.Plugins.PictureChooser" />
 		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
 			target="src\MvvmCross.Plugins.PictureChooser.WindowsStore" />
+		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.PictureChooser.WindowsUWP" />
 		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" 
 			target="src\MvvmCross.Plugins.PictureChooser.WindowsCommon" />
 		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.Droid\**\*.cs" 
@@ -33,16 +35,16 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
-			target="lib\portable-net45+win+wpa81+wp80" />
+			target="lib\portable-net45+win+wpa81" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
 			target="lib\dotnet" />
 
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.PictureChooser.WindowsStore.*" target="lib\netcore45" />
-		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.PictureChooser.WindowsUWP.*" target="lib\uap" />
+		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\uap\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- windows common -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\win81" />

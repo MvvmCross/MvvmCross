@@ -8,8 +8,14 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
+#if WINDOWS_STORE
 namespace MvvmCross.Plugins.PictureChooser.WindowsStore
+#endif
+#if WINDOWS_UWP
+namespace MvvmCross.Plugins.PictureChooser.WindowsUWP
+#endif
 {
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {
