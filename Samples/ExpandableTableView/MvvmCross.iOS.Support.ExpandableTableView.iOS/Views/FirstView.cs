@@ -14,7 +14,7 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 		{
 			base.ViewDidLoad();
 
-            NavigationItem.LeftBarButtonItem = EditButtonItem;
+			NavigationItem.LeftBarButtonItem = EditButtonItem;
 
 			var source = new ExpandableTableSource(TableView)
 			{
@@ -32,12 +32,12 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 			TableView.ReloadData();
 		}
 
-        public override void SetEditing(bool editing, bool animated)
-        {
-            TableView.AllowsMultipleSelectionDuringEditing = !Editing;
+		public override void SetEditing(bool editing, bool animated)
+		{
+			TableView.AllowsMultipleSelectionDuringEditing = !Editing;
 
-            base.SetEditing(editing, animated);
-        }
+			base.SetEditing(editing, animated);
+		}
 	}
 
 	public class ExpandableTableSource : MvxExpandableTableViewSource
@@ -59,19 +59,19 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 			return 120f;
 		}
 
-        public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
-        {
-            return true;
-        }
+		public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
+		{
+			return true;
+		}
 
-        public override UITableViewCellEditingStyle EditingStyleForRow(UITableView tableView, NSIndexPath indexPath)
-        {
-            return UITableViewCellEditingStyle.Delete;
-        }
+		public override UITableViewCellEditingStyle EditingStyleForRow(UITableView tableView, NSIndexPath indexPath)
+		{
+			return UITableViewCellEditingStyle.Delete;
+		}
 
-        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
-        {
-        }
+		public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+		{
+		}
 
 		protected override UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section)
 		{
