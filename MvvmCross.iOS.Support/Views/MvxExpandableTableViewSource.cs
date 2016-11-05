@@ -101,13 +101,13 @@ namespace MvvmCross.iOS.Support.Views
             // Create a button to make the header clickable
             UIButton hiddenButton = new UIButton(header.Frame);
             hiddenButton.TouchUpInside += EventHandler(tableView, section);
-            header.AddSubview(hiddenButton);
+            header.ContentView.AddSubview(hiddenButton);
 
             // Set the header data context
             var bindable = header as IMvxDataConsumer;
             if (bindable != null)
                 bindable.DataContext = GetHeaderItemAt(section);
-            return header;
+            return header.ContentView;
         }
 
         private EventHandler EventHandler(UITableView tableView, nint section)
