@@ -11,7 +11,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            ShowViewModel<LeftPanelViewModel>();
+            //ShowViewModel<LeftPanelViewModel>();
             ShowViewModel<RightPanelViewModel>();
             ShowViewModel<CenterPanelViewModel>();
         }
