@@ -23,7 +23,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
         public void Initialize()
         {
-            var initialEmptySideMenu = new UIViewController();
+            var initialEmptySideMenu = new MvxInitialEmptySideMenu();
 
             LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, initialEmptySideMenu);
             RightSidebarController = new SidebarController(this, _subRootViewController, initialEmptySideMenu);
@@ -46,6 +46,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         public new UINavigationController NavigationController { get; private set; }
         public SidebarController LeftSidebarController { get; private set; }
         public SidebarController RightSidebarController { get; private set; }
+        public bool HasLeftMenu => LeftSidebarController != null && !(LeftSidebarController.MenuAreaController is MvxInitialEmptySideMenu);
+        public bool HasRightMenu => RightSidebarController != null && !(RightSidebarController.MenuAreaController is MvxInitialEmptySideMenu);
 
         public override void ViewDidLoad()
         {
