@@ -9,6 +9,7 @@ namespace MvvmCross.iOS.Support.Views
     using System.Collections.Specialized;
     using System.Linq;
     using UIKit;
+    using CoreGraphics;
 
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {
@@ -23,7 +24,7 @@ namespace MvvmCross.iOS.Support.Views
         /// Indicates which sections are expanded.
         /// </summary>
         private bool[] _isCollapsed;
-
+        private EventHandler _headerButtonCommand;
 
         private IEnumerable<TItemSource> _itemsSource;
         new public IEnumerable<TItemSource> ItemsSource
@@ -45,6 +46,22 @@ namespace MvvmCross.iOS.Support.Views
 
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
+            _headerButtonCommand = (sender, e) =>
+            {
+                var button = sender as UIButton;
+                var section = button.Tag;
+                _isCollapsed[(int)section] = !_isCollapsed[(int)section];
+                tableView.ReloadData();
+
+                // Animate the section cells
+                var paths = new NSIndexPath[RowsInSection(tableView, section)];
+                for (int i = 0; i < paths.Length; i++)
+                {
+                    paths[i] = NSIndexPath.FromItemSection(i, section);
+                }
+
+                tableView.ReloadRows(paths, UITableViewRowAnimation.Automatic);
+            };
         }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -97,11 +114,26 @@ namespace MvvmCross.iOS.Support.Views
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var header = GetOrCreateHeaderCellFor(tableView, section);
+            bool hasHiddenButton = false;
 
-            // Create a button to make the header clickable
-            UIButton hiddenButton = new UIButton(header.Frame);
-            hiddenButton.TouchUpInside += EventHandler(tableView, section);
-            header.AddSubview(hiddenButton);
+            foreach (var view in header.Subviews)
+            {
+                if (view is HiddenHeaderButton)
+                {
+                    var hiddenbutton = view as HiddenHeaderButton;
+                    hiddenbutton.Tag = section;
+                    hasHiddenButton = true;
+                }
+            }
+
+            if (!hasHiddenButton)
+            {
+				// Create a button to make the header clickable
+				var buttonFrame = header.Frame;
+				buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
+                var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
+                header.ContentView.AddSubview(hiddenButton);
+            }
 
             // Set the header data context
             var bindable = header as IMvxDataConsumer;
@@ -110,23 +142,12 @@ namespace MvvmCross.iOS.Support.Views
             return header;
         }
 
-        private EventHandler EventHandler(UITableView tableView, nint section)
+        private HiddenHeaderButton CreateHiddenHeaderButton(CGRect frame, nint tag)
         {
-            return (sender, e) =>
-            {
-                // Toggle the is collapsed
-                _isCollapsed[(int)section] = !_isCollapsed[(int)section];
-                tableView.ReloadData();
-
-                // Animate the section cells
-                var paths = new NSIndexPath[RowsInSection(tableView, section)];
-                for (int i = 0; i < paths.Length; i++)
-                {
-                    paths[i] = NSIndexPath.FromItemSection(i, section);
-                }
-
-                tableView.ReloadRows(paths, UITableViewRowAnimation.Automatic);
-            };
+            var button = new HiddenHeaderButton(frame);
+            button.Tag = tag;
+            button.TouchUpInside += _headerButtonCommand;
+            return button;
         }
 
         public override void HeaderViewDisplayingEnded(UITableView tableView, UIView headerView, nint section)
@@ -161,5 +182,10 @@ namespace MvvmCross.iOS.Support.Views
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
 
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+    }
+
+    public class HiddenHeaderButton : UIButton 
+    {
+        public HiddenHeaderButton(CGRect frame) : base(frame) { }
     }
 }
