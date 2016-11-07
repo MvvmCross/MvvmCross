@@ -128,9 +128,9 @@ namespace MvvmCross.iOS.Support.Views
 
             if (!hasHiddenButton)
             {
-				// Create a button to make the header clickable
-				var buttonFrame = header.Frame;
-				buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
+                // Create a button to make the header clickable
+                var buttonFrame = header.Frame;
+                buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
                 var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
                 header.ContentView.AddSubview(hiddenButton);
             }
@@ -184,7 +184,7 @@ namespace MvvmCross.iOS.Support.Views
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
     }
 
-    public class HiddenHeaderButton : UIButton 
+    public class HiddenHeaderButton : UIButton
     {
         public HiddenHeaderButton(CGRect frame) : base(frame) { }
     }
