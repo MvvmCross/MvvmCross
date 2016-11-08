@@ -35,6 +35,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MvxFormsIosMasterDetailPagePresenter.cs" />
     <Compile Include="MvxFormsIosPagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxFormsApplicationDelegate.cs" />

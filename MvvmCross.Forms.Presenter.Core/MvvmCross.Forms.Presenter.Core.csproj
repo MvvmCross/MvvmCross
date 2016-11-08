@@ -37,8 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IMvxFormsPageLoader.cs" />
+    <Compile Include="IMvxMasterDetailViewModel.cs" />
+    <Compile Include="MvxFormsMasterDetailPagePresenter.cs" />
     <Compile Include="MvxFormsPageLoader.cs" />
     <Compile Include="MvxFormsPagePresenter.cs" />
+    <Compile Include="MvxMasterDetailViewModel.cs" />
     <Compile Include="MvxPresenterHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxFormsApp.cs" />
