@@ -139,7 +139,7 @@ namespace MvvmCross.iOS.Support.Views
             var bindable = header as IMvxDataConsumer;
             if (bindable != null)
                 bindable.DataContext = GetHeaderItemAt(section);
-            return header;
+            return header.ContentView;
         }
 
         private HiddenHeaderButton CreateHiddenHeaderButton(CGRect frame, nint tag)
