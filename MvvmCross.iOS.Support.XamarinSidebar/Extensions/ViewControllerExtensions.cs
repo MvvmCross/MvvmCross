@@ -12,7 +12,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
 
             var topViewController = sidebarPanelController.NavigationController.TopViewController;
 
-            if (sidebarPanelController.LeftSidebarController != null)
+            // Make there are currently no left or right buttons
+            topViewController.NavigationItem.SetLeftBarButtonItem(null, true);
+            topViewController.NavigationItem.SetRightBarButtonItem(null, true);
+
+            if (sidebarPanelController.HasLeftMenu)
             {
                 var mvxSidebarMenu = sidebarPanelController.LeftSidebarController.MenuAreaController as IMvxSidebarMenu;
                 sidebarPanelController.LeftSidebarController.MenuLocation = MenuLocations.Left;
@@ -21,7 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
                 topViewController.NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
             }
 
-            if (sidebarPanelController.RightSidebarController != null)
+            if (sidebarPanelController.HasRightMenu)
             {
                 var mvxSidebarMenu = sidebarPanelController.RightSidebarController.MenuAreaController as IMvxSidebarMenu;
                 sidebarPanelController.RightSidebarController.MenuLocation = MenuLocations.Right;

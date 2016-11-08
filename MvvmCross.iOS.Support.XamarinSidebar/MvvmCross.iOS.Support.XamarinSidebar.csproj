@@ -76,6 +76,7 @@
     <Compile Include="Hints\MvxSidebarPopToRootPresentationHint.cs" />
     <Compile Include="IMvxSidebarMenu.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
+    <Compile Include="MvxInitialEmptySideMenu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
