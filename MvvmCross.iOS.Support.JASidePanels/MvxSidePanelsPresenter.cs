@@ -127,24 +127,17 @@
         /// <param name="hint">The hint.</param>
         private void ProcessActivePanelPresentation(MvxPresentationHint hint)
         {
-            try
+            var activePresentationHint = hint as MvxActivePanelPresentationHint;
+            if (activePresentationHint != null)
             {
-                var activePresentationHint = hint as MvxActivePanelPresentationHint;
-                if (activePresentationHint != null)
+                var panelHint = activePresentationHint;
+
+                _activePanel = panelHint.ActivePanel;
+
+                if (panelHint.ShowPanel)
                 {
-                    var panelHint = activePresentationHint;
-
-                    _activePanel = panelHint.ActivePanel;
-
-                    if (panelHint.ShowPanel)
-                    {
-                        ShowPanel(panelHint.ActivePanel);
-                    }
+                    ShowPanel(panelHint.ActivePanel);
                 }
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());
             }
         }
 
@@ -154,41 +147,34 @@
         /// <param name="hint">The hint.</param>
         private void ProcessPopToRootPresentation(MvxPresentationHint hint)
         {
-            try
+            var popHint = hint as MvxPanelPopToRootPresentationHint;
+            if (popHint != null)
             {
-                var popHint = hint as MvxPanelPopToRootPresentationHint;
-                if (popHint != null)
+                var panelHint = popHint;
+
+                switch (panelHint.Panel)
                 {
-                    var panelHint = popHint;
+                    case MvxPanelEnum.Center:
+                        if (CentrePanelUiNavigationController() != null)
+                        {
+                            CentrePanelUiNavigationController().PopToRootViewController(false);
+                        }
+                        break;
 
-                    switch (panelHint.Panel)
-                    {
-                        case MvxPanelEnum.Center:
-                            if (CentrePanelUiNavigationController() != null)
-                            {
-                                CentrePanelUiNavigationController().PopToRootViewController(false);
-                            }
-                            break;
+                    case MvxPanelEnum.Left:
+                        if (LeftPanelUiNavigationController() != null)
+                        {
+                            LeftPanelUiNavigationController().PopToRootViewController(false);
+                        }
+                        break;
 
-                        case MvxPanelEnum.Left:
-                            if (LeftPanelUiNavigationController() != null)
-                            {
-                                LeftPanelUiNavigationController().PopToRootViewController(false);
-                            }
-                            break;
-
-                        case MvxPanelEnum.Right:
-                            if (RightPanelUiNavigationController() != null)
-                            {
-                                RightPanelUiNavigationController().PopToRootViewController(false);
-                            }
-                            break;
-                    }
+                    case MvxPanelEnum.Right:
+                        if (RightPanelUiNavigationController() != null)
+                        {
+                            RightPanelUiNavigationController().PopToRootViewController(false);
+                        }
+                        break;
                 }
-            }
-            catch (Exception ex)
-            {
-                
             }
         }
 
@@ -198,56 +184,49 @@
         /// <param name="hint">The hint.</param>
         private void ProcessResetRootPresentation(MvxPresentationHint hint)
         {
-            try
+            var popHint = hint as MvxPanelResetRootPresentationHint;
+            if (popHint != null)
             {
-                var popHint = hint as MvxPanelResetRootPresentationHint;
-                if (popHint != null)
+                var panelHint = popHint;
+                UINavigationController navController;
+                switch (panelHint.Panel)
                 {
-                    var panelHint = popHint;
-                    UINavigationController navController;
-                    switch (panelHint.Panel)
-                    {
-                        case MvxPanelEnum.Center:
-                            navController = _multiPanelController.CenterPanel as UINavigationController;
-                            if (navController != null)
-                            {
-                                navController.ViewControllers = new UIViewController[0];
-                            }
-                            else
-                            {
-                                _multiPanelController.CenterPanel = null;
-                            }
-                            break;
+                    case MvxPanelEnum.Center:
+                        navController = _multiPanelController.CenterPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.CenterPanel = null;
+                        }
+                        break;
 
-                        case MvxPanelEnum.Left:
-                            navController = _multiPanelController.LeftPanel as UINavigationController;
-                            if (navController != null)
-                            {
-                                navController.ViewControllers = new UIViewController[0];
-                            }
-                            else
-                            {
-                                _multiPanelController.LeftPanel = null;
-                            }
-                            break;
+                    case MvxPanelEnum.Left:
+                        navController = _multiPanelController.LeftPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.LeftPanel = null;
+                        }
+                        break;
 
-                        case MvxPanelEnum.Right:
-                            navController = _multiPanelController.RightPanel as UINavigationController;
-                            if (navController != null)
-                            {
-                                navController.ViewControllers = new UIViewController[0];
-                            }
-                            else
-                            {
-                                _multiPanelController.RightPanel = null;
-                            }
-                            break;
-                    }
+                    case MvxPanelEnum.Right:
+                        navController = _multiPanelController.RightPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.RightPanel = null;
+                        }
+                        break;
                 }
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());
             }
         }
 
@@ -257,26 +236,19 @@
         /// <param name="panel">The panel.</param>
         private void ShowPanel(MvxPanelEnum panel)
         {
-            try
+            switch (panel)
             {
-                switch (panel)
-                {
-                    case MvxPanelEnum.Center:
-                        _multiPanelController.ShowCenterPanelAnimated(true);
-                        break;
+                case MvxPanelEnum.Center:
+                    _multiPanelController.ShowCenterPanelAnimated(true);
+                    break;
 
-                    case MvxPanelEnum.Left:
-                        _multiPanelController.ShowLeftPanelAnimated(true);
-                        break;
+                case MvxPanelEnum.Left:
+                    _multiPanelController.ShowLeftPanelAnimated(true);
+                    break;
 
-                    case MvxPanelEnum.Right:
-                        _multiPanelController.ShowRightPanelAnimated(true);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());
+                case MvxPanelEnum.Right:
+                    _multiPanelController.ShowRightPanelAnimated(true);
+                    break;
             }
         }
 
@@ -286,36 +258,28 @@
         /// </summary>
         private bool CloseTopView(IMvxViewModel toClose, UINavigationController uiNavigationController)
         {
-            try
+            if (uiNavigationController == null)
             {
-                if (uiNavigationController == null)
-                {
-                    return false;
-                }
-
-                var mvxTouchView = uiNavigationController.TopViewController as IMvxIosView;
-
-                if (mvxTouchView == null)
-                {
-                    return false;
-                }
-
-                var viewModelToShow = mvxTouchView.ReflectionGetViewModel();
-
-                if (viewModelToShow != toClose)
-                {
-                    return false;
-                }
-
-                uiNavigationController.PopViewController(true);
-
-                return true;
+                return false;
             }
-            catch (Exception ex)
+
+            var mvxTouchView = uiNavigationController.TopViewController as IMvxIosView;
+
+            if (mvxTouchView == null)
             {
-                MvxTrace.Error(ex.ToString());
+                return false;
             }
-            return false;
+
+            var viewModelToShow = mvxTouchView.ReflectionGetViewModel();
+
+            if (viewModelToShow != toClose)
+            {
+                return false;
+            }
+
+            uiNavigationController.PopViewController(true);
+
+            return true;
         }
 
         #endregion Private Methods
@@ -333,136 +297,129 @@
         /// </exception>
         public override void Show(IMvxIosView view)
         {
-            try
+            // Handle modal first
+            // This will use our TopLevel UINavigation Controller, to present over the top of the Panels UX
+            if (view is IMvxModalIosView)
             {
-                // Handle modal first
-                // This will use our TopLevel UINavigation Controller, to present over the top of the Panels UX
-                if (view is IMvxModalIosView)
+                if (_currentModalViewController != null)
                 {
-                    if (_currentModalViewController != null)
+                    throw new MvxException("Only one modal view controller at a time supported");
+                }
+
+                _currentModalViewController = view as UIViewController;
+                PresentModalViewController(view as UIViewController, true);
+                return;
+            }
+
+            // Then handle panels
+            var viewController = view as UIViewController;
+            if (viewController == null)
+            {
+                throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
+            }
+
+            if (MasterNavigationController == null)
+            {
+                ShowFirstView(viewController);
+            }
+            else
+            {
+                // here we need to get the Presentation Panel attribute details
+                var panelAttribute = viewController.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
+                if (panelAttribute != null)
+                {
+                    // this section of presentation code deals with showing master/detail views on
+                    // large screen devices (i.e. iPads)
+                    if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
                     {
-                        throw new MvxException("Only one modal view controller at a time supported");
+                        if (panelAttribute.SplitViewBehaviour == MvxSplitViewBehaviour.Master)
+                        {
+                            var splitHost = new MvxSplitViewControllerHost();
+                            _splitviewController = new MvxBaseSplitViewController();
+                            _splitviewController.SetLeft(new UINavigationController((UIViewController)view));
+                            splitHost.DisplayContentController(_splitviewController);
+                            viewController = splitHost;
+                        }
+                        else if (panelAttribute.SplitViewBehaviour == MvxSplitViewBehaviour.Detail && _splitviewController != null)
+                        {
+                            _splitviewController.SetRight(new UINavigationController((UIViewController)view));
+                            // since we have now shown the view simply return
+                            return;
+                        }
                     }
 
-                    _currentModalViewController = view as UIViewController;
-                    PresentModalViewController(view as UIViewController, true);
-                    return;
+                    switch (panelAttribute.HintType)
+                    {
+                        case MvxPanelHintType.ActivePanel:
+                            ChangePresentation(new MvxActivePanelPresentationHint(panelAttribute.Panel, panelAttribute.ShowPanel));
+                            break;
+
+                        case MvxPanelHintType.PopToRoot:
+                            ChangePresentation(new MvxPanelPopToRootPresentationHint(panelAttribute.Panel));
+                            break;
+
+                        case MvxPanelHintType.ResetRoot:
+                            ChangePresentation(new MvxPanelResetRootPresentationHint(panelAttribute.Panel));
+                            break;
+                    }
                 }
 
-                // Then handle panels
-                var viewController = view as UIViewController;
-                if (viewController == null)
+                if (GetActivePanelUiNavigationController == null)
                 {
-                    throw new MvxException("Passed in IMvxTouchView is not a UIViewController");
-                }
+                    // If we have cleared down our panel completely, then we will be setting a new root view
+                    // this is perfect for Menu items
+                    switch (_activePanel)
+                    {
+                        case MvxPanelEnum.Center:
+                            _multiPanelController.CenterPanel = new UINavigationController(viewController);
+                            break;
 
-                if (MasterNavigationController == null)
-                {
-                    ShowFirstView(viewController);
+                        case MvxPanelEnum.Left:
+                            _multiPanelController.LeftPanel = new UINavigationController(viewController);
+                            break;
+
+                        case MvxPanelEnum.Right:
+                            _multiPanelController.RightPanel = new UINavigationController(viewController);
+                            break;
+                    }
                 }
                 else
                 {
-                    // here we need to get the Presentation Panel attribute details
-                    var panelAttribute = viewController.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
-                    if (panelAttribute != null)
+                    //figure out which panel we were just asked to show, left, right, center and properly place it
+                    switch (panelAttribute.Panel)
                     {
-                        // this section of presentation code deals with showing master/detail views on
-                        // large screen devices (i.e. iPads)
-                        if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-                        {
-                            if (panelAttribute.SplitViewBehaviour == MvxSplitViewBehaviour.Master)
+                        case MvxPanelEnum.Center:
+                            if (null == _multiPanelController.CenterPanel)
                             {
-                                var splitHost = new MvxSplitViewControllerHost();
-                                _splitviewController = new MvxBaseSplitViewController();
-                                _splitviewController.SetLeft(new UINavigationController((UIViewController)view));
-                                splitHost.DisplayContentController(_splitviewController);
-                                viewController = splitHost;
-                            }
-                            else if (panelAttribute.SplitViewBehaviour == MvxSplitViewBehaviour.Detail && _splitviewController != null)
-                            {
-                                _splitviewController.SetRight(new UINavigationController((UIViewController)view));
-                                // since we have now shown the view simply return
-                                return;
-                            }
-                        }
-
-                        switch (panelAttribute.HintType)
-                        {
-                            case MvxPanelHintType.ActivePanel:
-                                ChangePresentation(new MvxActivePanelPresentationHint(panelAttribute.Panel, panelAttribute.ShowPanel));
-                                break;
-
-                            case MvxPanelHintType.PopToRoot:
-                                ChangePresentation(new MvxPanelPopToRootPresentationHint(panelAttribute.Panel));
-                                break;
-
-                            case MvxPanelHintType.ResetRoot:
-                                ChangePresentation(new MvxPanelResetRootPresentationHint(panelAttribute.Panel));
-                                break;
-                        }
-                    }
-
-                    if (GetActivePanelUiNavigationController == null)
-                    {
-                        // If we have cleared down our panel completely, then we will be setting a new root view
-                        // this is perfect for Menu items
-                        switch (_activePanel)
-                        {
-                            case MvxPanelEnum.Center:
                                 _multiPanelController.CenterPanel = new UINavigationController(viewController);
-                                break;
-
-                            case MvxPanelEnum.Left:
+                            }
+                            else
+                            {
+                                CentrePanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Left:
+                            if (null == _multiPanelController.LeftPanel)
+                            {
                                 _multiPanelController.LeftPanel = new UINavigationController(viewController);
-                                break;
-
-                            case MvxPanelEnum.Right:
+                            }
+                            else
+                            {
+                                LeftPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
+                        case MvxPanelEnum.Right:
+                            if (null == _multiPanelController.RightPanel)
+                            {
                                 _multiPanelController.RightPanel = new UINavigationController(viewController);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        //figure out which panel we were just asked to show, left, right, center and properly place it
-                        switch (panelAttribute.Panel)
-                        {
-                            case MvxPanelEnum.Center:
-                                if (null == _multiPanelController.CenterPanel)
-                                {
-                                    _multiPanelController.CenterPanel = new UINavigationController(viewController);
-                                }
-                                else
-                                {
-                                    CentrePanelUiNavigationController().PushViewController(viewController, true);
-                                }
-                                break;
-                            case MvxPanelEnum.Left:
-                                if (null == _multiPanelController.LeftPanel)
-                                {
-                                    _multiPanelController.LeftPanel = new UINavigationController(viewController);
-                                }
-                                else
-                                {
-                                    LeftPanelUiNavigationController().PushViewController(viewController, true);
-                                }
-                                break;
-                            case MvxPanelEnum.Right:
-                                if (null == _multiPanelController.RightPanel)
-                                {
-                                    _multiPanelController.RightPanel = new UINavigationController(viewController);
-                                }
-                                else
-                                {
-                                    RightPanelUiNavigationController().PushViewController(viewController, true);
-                                }
-                                break;
-                        }
+                            }
+                            else
+                            {
+                                RightPanelUiNavigationController().PushViewController(viewController, true);
+                            }
+                            break;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());
             }
         }
 
@@ -471,20 +428,13 @@
         /// </summary>
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            try
+            if (_currentModalViewController != null)
             {
-                if (_currentModalViewController != null)
-                {
-                    MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
-                }
-                else
-                {
-                    _currentModalViewController = null;
-                }
+                MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
             }
-            catch (Exception ex)
+            else
             {
-                MvxTrace.Error(ex.ToString());
+                _currentModalViewController = null;
             }
         }
 
@@ -493,21 +443,14 @@
         /// </summary>
         public override void CloseModalViewController()
         {
-            try
+            if (_currentModalViewController != null)
             {
-                if (_currentModalViewController != null)
-                {
-                    _currentModalViewController.DismissModalViewController(false);
-                    _currentModalViewController = null;
-                }
-                else
-                {
-                    base.CloseModalViewController();
-                }
+                _currentModalViewController.DismissModalViewController(false);
+                _currentModalViewController = null;
             }
-            catch (Exception ex)
+            else
             {
-                MvxTrace.Error(ex.ToString());
+                base.CloseModalViewController();
             }
         }
 
@@ -517,18 +460,11 @@
         /// <param name="hint">The hint.</param>
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            try
-            {
-                ProcessActivePanelPresentation(hint);
-                ProcessResetRootPresentation(hint);
-                ProcessPopToRootPresentation(hint);
+            ProcessActivePanelPresentation(hint);
+            ProcessResetRootPresentation(hint);
+            ProcessPopToRootPresentation(hint);
 
-                base.ChangePresentation(hint);
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());  
-            }
+            base.ChangePresentation(hint);
         }
 
         /// <summary>
@@ -537,48 +473,41 @@
         /// <param name="toClose">To close.</param>
         public override void Close(IMvxViewModel toClose)
         {
-            try
+            if (_currentModalViewController != null)
             {
-                if (_currentModalViewController != null)
+                var mvxTouchView = _currentModalViewController as IMvxIosView;
+                if (mvxTouchView == null)
                 {
-                    var mvxTouchView = _currentModalViewController as IMvxIosView;
-                    if (mvxTouchView == null)
-                    {
-                        MvxTrace.Error("Unable to close view - modal is showing but not an IMvxTouchView");
-                    }
-                    else if (mvxTouchView.ReflectionGetViewModel() != toClose)
-                    {
-                        MvxTrace.Error("Unable to close view - modal is showing but is not the requested viewmodel");
-                    }
-                    else
-                    {
-                        _currentModalViewController.DismissViewController(true, () => { });
-                        _currentModalViewController = null;
-                    }
-
-                    return;
+                    MvxTrace.Error("Unable to close view - modal is showing but not an IMvxTouchView");
+                }
+                else if (mvxTouchView.ReflectionGetViewModel() != toClose)
+                {
+                    MvxTrace.Error("Unable to close view - modal is showing but is not the requested viewmodel");
+                }
+                else
+                {
+                    _currentModalViewController.DismissViewController(true, () => { });
+                    _currentModalViewController = null;
                 }
 
-                // We will look across all active navigation stacks to see if we can
-                // pop our MvxView associated with this MvxViewModel (saves explicitly having to specify)
-                var modelClosed = CloseTopView(toClose, CentrePanelUiNavigationController());
-                if (!modelClosed)
-                {
-                    modelClosed = CloseTopView(toClose, LeftPanelUiNavigationController());
-                }
-                if (!modelClosed)
-                {
-                    modelClosed = CloseTopView(toClose, RightPanelUiNavigationController());
-                }
-
-                if (!modelClosed)
-                {
-                    MvxTrace.Warning("Don't know how to close this viewmodel - none of topmost views represent this viewmodel");
-                }
+                return;
             }
-            catch (Exception ex)
+
+            // We will look across all active navigation stacks to see if we can
+            // pop our MvxView associated with this MvxViewModel (saves explicitly having to specify)
+            var modelClosed = CloseTopView(toClose, CentrePanelUiNavigationController());
+            if (!modelClosed)
             {
-                MvxTrace.Error(ex.ToString());
+                modelClosed = CloseTopView(toClose, LeftPanelUiNavigationController());
+            }
+            if (!modelClosed)
+            {
+                modelClosed = CloseTopView(toClose, RightPanelUiNavigationController());
+            }
+
+            if (!modelClosed)
+            {
+                MvxTrace.Warning("Don't know how to close this viewmodel - none of topmost views represent this viewmodel");
             }
         }
 
@@ -592,21 +521,13 @@
         /// <param name="viewController">The view controller.</param>
         protected override void ShowFirstView(UIViewController viewController)
         {
-            try
-            {
-                // Creates our top level UINavigationController as standard
-                base.ShowFirstView(viewController);
+            base.ShowFirstView(viewController);
 
-                // So lets push our JaSidePanels viewController and then our first viewController in the centre panel to start things off
-                // We will let our initial viewmodel load up the panels as required
-                MasterNavigationController.NavigationBarHidden = true;
-                MasterNavigationController.PushViewController(_multiPanelController, false);
-                _multiPanelController.CenterPanel = new UINavigationController(viewController);
-            }
-            catch (Exception ex)
-            {
-                MvxTrace.Error(ex.ToString());
-            }
+            // So lets push our JaSidePanels viewController and then our first viewController in the centre panel to start things off
+            // We will let our initial viewmodel load up the panels as required
+            MasterNavigationController.NavigationBarHidden = true;
+            MasterNavigationController.PushViewController(_multiPanelController, false);
+            _multiPanelController.CenterPanel = new UINavigationController(viewController);
         }
 
         #endregion Protected Methods
