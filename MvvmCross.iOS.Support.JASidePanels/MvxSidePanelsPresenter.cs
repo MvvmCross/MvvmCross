@@ -270,9 +270,7 @@
                 return false;
             }
 
-            var viewModelToShow = mvxTouchView.ReflectionGetViewModel();
-
-            if (viewModelToShow != toClose)
+            if (mvxTouchView.ReflectionGetViewModel() != toClose)
             {
                 return false;
             }
