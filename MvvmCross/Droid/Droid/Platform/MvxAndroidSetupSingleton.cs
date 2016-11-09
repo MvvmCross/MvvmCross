@@ -30,37 +30,24 @@ namespace MvvmCross.Droid.Platform
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
 
         public virtual void EnsureInitialized()
-        {
-            lock (LockObject)
-            {
-                if (this._initialized)
-                    return;
+		{
+			lock (LockObject)
+			{
+				if (this._initialized)
+					return;
 
-                if (IsInitialisedTaskCompletionSource != null)
-                {
-                    Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
-                    IsInitialisedTaskCompletionSource.Task.Wait();
-                }
-                else
-                {
-                    IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-                    this._setup.Initialize();
-                    this._initialized = true;
+				if (IsInitialisedTaskCompletionSource == null)
+				{
+					IsInitialisedTaskCompletionSource = StartSetupInitialization();
+				}
+				else
+				{
+					Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
+				}
+			}
 
-                    if (this._currentSplashScreen != null)
-                    {
-                        Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
-                        var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                        dispatcher.RequestMainThreadAction(() =>
-                        {
-                            this._currentSplashScreen?.InitializationComplete();
-                        });
-                    }
-
-                    IsInitialisedTaskCompletionSource.SetResult(true);
-                }
-            }
-        }
+			IsInitialisedTaskCompletionSource.Task.Wait();
+		}
 
         public virtual void RemoveSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
         {
@@ -71,41 +58,24 @@ namespace MvvmCross.Droid.Platform
         }
 
         public virtual void InitializeFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
-        {
-            lock (LockObject)
-            {
-                this._currentSplashScreen = splashScreen;
-                if (_initialized)
-                {
-                    this._currentSplashScreen?.InitializationComplete();
-                    return;
-                }
+		{
+			lock (LockObject)
+			{
+				this._currentSplashScreen = splashScreen;
+				if (_initialized)
+				{
+					this._currentSplashScreen?.InitializationComplete();
+					return;
+				}
 
-                if (IsInitialisedTaskCompletionSource != null)
-                {
-                    return;
-                }
-                else
-                {
-                    IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-                    this._setup.InitializePrimary();
-                    ThreadPool.QueueUserWorkItem(ignored =>
-                    {
-                        this._setup.InitializeSecondary();
-                        lock (LockObject)
-                        {
-                            IsInitialisedTaskCompletionSource.SetResult(true);
-                            this._initialized = true;
-                            var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                            dispatcher.RequestMainThreadAction(() =>
-                            {
-                                this._currentSplashScreen?.InitializationComplete();
-                            });
-                        }
-                    });
-                }
-            }
-        }
+				if (IsInitialisedTaskCompletionSource != null)
+				{
+					return;
+				}
+
+				IsInitialisedTaskCompletionSource = StartSetupInitialization();
+			}
+		}
 
         public static MvxAndroidSetupSingleton EnsureSingletonAvailable(Context applicationContext)
         {
@@ -167,5 +137,30 @@ namespace MvvmCross.Droid.Platform
             }
             base.Dispose(isDisposing);
         }
+
+		private TaskCompletionSource<bool> StartSetupInitialization()
+		{
+			var completionSource = new TaskCompletionSource<bool>();
+			this._setup.InitializePrimary();
+			ThreadPool.QueueUserWorkItem(ignored =>
+			{
+				this._setup.InitializeSecondary();
+				lock (LockObject)
+				{
+					completionSource.SetResult(true);
+					this._initialized = true;
+					var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+					dispatcher.RequestMainThreadAction(() =>
+					{
+						if (this._currentSplashScreen != null)
+						{
+							this._currentSplashScreen?.InitializationComplete();
+						}
+					});
+				}
+			});
+
+			return completionSource;
+		}
     }
 }
