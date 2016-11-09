@@ -30,24 +30,24 @@ namespace MvvmCross.Droid.Platform
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
 
         public virtual void EnsureInitialized()
-		{
-			lock (LockObject)
-			{
-				if (this._initialized)
-					return;
+        {
+            lock (LockObject)
+            {
+                if (this._initialized)
+                  	return;
 
-				if (IsInitialisedTaskCompletionSource == null)
-				{
-					IsInitialisedTaskCompletionSource = StartSetupInitialization();
-				}
-				else
-				{
-					Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
-				}
-			}
+                if (IsInitialisedTaskCompletionSource == null)
+                {
+                    IsInitialisedTaskCompletionSource = StartSetupInitialization();
+                }
+                else
+                {
+                    Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
+                }
+            }
 
-			IsInitialisedTaskCompletionSource.Task.Wait();
-		}
+            IsInitialisedTaskCompletionSource.Task.Wait();
+        }
 
         public virtual void RemoveSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
         {
@@ -58,24 +58,24 @@ namespace MvvmCross.Droid.Platform
         }
 
         public virtual void InitializeFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
-		{
-			lock (LockObject)
-			{
-				this._currentSplashScreen = splashScreen;
-				if (_initialized)
-				{
-					this._currentSplashScreen?.InitializationComplete();
-					return;
-				}
+        {
+            lock (LockObject)
+            {
+                this._currentSplashScreen = splashScreen;
+                if (_initialized)
+                {
+                    this._currentSplashScreen?.InitializationComplete();
+                    return;
+                }
 
-				if (IsInitialisedTaskCompletionSource != null)
-				{
-					return;
-				}
+                if (IsInitialisedTaskCompletionSource != null)
+                {
+                    return;
+                }
 
-				IsInitialisedTaskCompletionSource = StartSetupInitialization();
-			}
-		}
+                IsInitialisedTaskCompletionSource = StartSetupInitialization();
+            }
+        }
 
         public static MvxAndroidSetupSingleton EnsureSingletonAvailable(Context applicationContext)
         {
@@ -138,29 +138,29 @@ namespace MvvmCross.Droid.Platform
             base.Dispose(isDisposing);
         }
 
-		private TaskCompletionSource<bool> StartSetupInitialization()
-		{
-			var completionSource = new TaskCompletionSource<bool>();
-			this._setup.InitializePrimary();
-			ThreadPool.QueueUserWorkItem(ignored =>
-			{
-				this._setup.InitializeSecondary();
-				lock (LockObject)
-				{
-					completionSource.SetResult(true);
-					this._initialized = true;
-					var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-					dispatcher.RequestMainThreadAction(() =>
-					{
-						if (this._currentSplashScreen != null)
-						{
-							this._currentSplashScreen?.InitializationComplete();
-						}
-					});
-				}
-			});
+        private TaskCompletionSource<bool> StartSetupInitialization()
+        {
+            var completionSource = new TaskCompletionSource<bool>();
+            this._setup.InitializePrimary();
+            ThreadPool.QueueUserWorkItem(ignored =>
+            {
+                this._setup.InitializeSecondary();
+                lock (LockObject)
+                {
+                    completionSource.SetResult(true);
+                    this._initialized = true;
+                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                    dispatcher.RequestMainThreadAction(() =>
+                    {
+                        if (this._currentSplashScreen != null)
+                        {
+                            this._currentSplashScreen?.InitializationComplete();
+                        }
+                    });
+                }
+            });
 
-			return completionSource;
-		}
+            return completionSource;
+        }
     }
 }
