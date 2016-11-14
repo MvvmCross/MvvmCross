@@ -11,6 +11,7 @@
     using Core.Views;
     using System.Linq;
     using UIKit;
+    using System;
 
     /// <summary>
     /// A presenter that uses the JASidePanels component to allow 3 panels for view presentation
@@ -155,17 +156,23 @@
                 {
                     case MvxPanelEnum.Center:
                         if (CentrePanelUiNavigationController() != null)
+                        {
                             CentrePanelUiNavigationController().PopToRootViewController(false);
+                        }
                         break;
 
                     case MvxPanelEnum.Left:
                         if (LeftPanelUiNavigationController() != null)
+                        {
                             LeftPanelUiNavigationController().PopToRootViewController(false);
+                        }
                         break;
 
                     case MvxPanelEnum.Right:
                         if (RightPanelUiNavigationController() != null)
+                        {
                             RightPanelUiNavigationController().PopToRootViewController(false);
+                        }
                         break;
                 }
             }
@@ -181,19 +188,43 @@
             if (popHint != null)
             {
                 var panelHint = popHint;
-
+                UINavigationController navController;
                 switch (panelHint.Panel)
                 {
                     case MvxPanelEnum.Center:
-                        _multiPanelController.CenterPanel = null;
+                        navController = _multiPanelController.CenterPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.CenterPanel = null;
+                        }
                         break;
 
                     case MvxPanelEnum.Left:
-                        _multiPanelController.LeftPanel = null;
+                        navController = _multiPanelController.LeftPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.LeftPanel = null;
+                        }
                         break;
 
                     case MvxPanelEnum.Right:
-                        _multiPanelController.RightPanel = null;
+                        navController = _multiPanelController.RightPanel as UINavigationController;
+                        if (navController != null)
+                        {
+                            navController.ViewControllers = new UIViewController[0];
+                        }
+                        else
+                        {
+                            _multiPanelController.RightPanel = null;
+                        }
                         break;
                 }
             }
@@ -357,7 +388,9 @@
                     {
                         case MvxPanelEnum.Center:
                             if (null == _multiPanelController.CenterPanel)
+                            {
                                 _multiPanelController.CenterPanel = new UINavigationController(viewController);
+                            }
                             else
                             {
                                 CentrePanelUiNavigationController().PushViewController(viewController, true);
@@ -461,8 +494,14 @@
             // We will look across all active navigation stacks to see if we can
             // pop our MvxView associated with this MvxViewModel (saves explicitly having to specify)
             var modelClosed = CloseTopView(toClose, CentrePanelUiNavigationController());
-            if (!modelClosed) modelClosed = CloseTopView(toClose, LeftPanelUiNavigationController());
-            if (!modelClosed) modelClosed = CloseTopView(toClose, RightPanelUiNavigationController());
+            if (!modelClosed)
+            {
+                modelClosed = CloseTopView(toClose, LeftPanelUiNavigationController());
+            }
+            if (!modelClosed)
+            {
+                modelClosed = CloseTopView(toClose, RightPanelUiNavigationController());
+            }
 
             if (!modelClosed)
             {
@@ -480,7 +519,6 @@
         /// <param name="viewController">The view controller.</param>
         protected override void ShowFirstView(UIViewController viewController)
         {
-            // Creates our top level UINavigationController as standard
             base.ShowFirstView(viewController);
 
             // So lets push our JaSidePanels viewController and then our first viewController in the centre panel to start things off
