@@ -10,6 +10,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
     public class MvxSidebarPanelController : UIViewController, IMvxSideMenu
     {
         private readonly UIViewController _subRootViewController;
+        private bool _isInitializing;
         private bool _isInitialized;
 
         public bool StatusBarHidden { get; set; }
@@ -23,24 +24,32 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
         public void Initialize()
         {
-            var initialEmptySideMenu = new MvxInitialEmptySideMenu();
+            _isInitializing = true;
 
-            LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, initialEmptySideMenu);
-            RightSidebarController = new SidebarController(this, _subRootViewController, initialEmptySideMenu);
-
-            LeftSidebarController.StateChangeHandler += (object sender, bool e) =>
+            try
             {
-                if (ToggleStatusBarHiddenOnOpen)
-                    ToggleStatusBarStatus();
-            };
+                var initialEmptySideMenu = new MvxInitialEmptySideMenu();
 
-            RightSidebarController.StateChangeHandler += (object sender, bool e) =>
+                LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, initialEmptySideMenu);
+                RightSidebarController = new SidebarController(this, _subRootViewController, initialEmptySideMenu);
+
+                LeftSidebarController.StateChangeHandler += (object sender, bool e) =>
+                {
+                    if (ToggleStatusBarHiddenOnOpen)
+                        ToggleStatusBarStatus();
+                };
+
+                RightSidebarController.StateChangeHandler += (object sender, bool e) =>
+                {
+                    if (ToggleStatusBarHiddenOnOpen)
+                        ToggleStatusBarStatus();
+                };
+            }
+            finally
             {
-                if (ToggleStatusBarHiddenOnOpen)
-                    ToggleStatusBarStatus();
-            };
-
-            _isInitialized = true;
+                _isInitializing = false;
+                _isInitialized = true;
+            }
         }
 
         public new UINavigationController NavigationController { get; private set; }
@@ -53,7 +62,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         {
             base.ViewDidLoad();
 
-            if (!_isInitialized)
+            if (!_isInitialized && !_isInitializing)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, "The instance of 'MvxSidebarPanelController' class is not initialized. Showing or hiding the sidemenu could show unexpected behaviour. Please call the 'Initialize()' method after constructing the 'MvxSidebarPanelController' class.");
             }

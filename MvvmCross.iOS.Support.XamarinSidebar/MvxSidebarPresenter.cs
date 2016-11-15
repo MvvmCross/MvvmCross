@@ -79,6 +79,12 @@
                     ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
                     break;
             }
+
+            if (!viewPresentationAttribute.ShowPanel)
+            {
+                var menu = Mvx.Resolve<IMvxSideMenu>();
+                menu?.Close();
+            }
         }
 
         public override void Close(IMvxViewModel toClose)
