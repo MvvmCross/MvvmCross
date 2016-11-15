@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS.Views
 {
     using SidePanels;
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
     using Foundation;
     using UIKit;
+    using MvvmCross.iOS.Support.JASidePanelsSample.Core.ViewModels;
 
     [Register("MasterView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Master)]

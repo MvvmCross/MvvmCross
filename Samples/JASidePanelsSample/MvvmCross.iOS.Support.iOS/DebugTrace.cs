@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.iOS
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS
 {
     using MvvmCross.Platform.Platform;
     using System;

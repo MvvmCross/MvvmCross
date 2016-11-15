@@ -1,11 +1,12 @@
-﻿namespace MvvmCross.iOS.Support.iOS
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS
 {
     using JASidePanels;
     using Platform;
-	using MvvmCross.iOS.Views.Presenters;
-	using MvvmCross.Platform.Platform;
-	using UIKit;
-	using MvvmCross.Core.ViewModels;
+    using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.Platform.Platform;
+    using UIKit;
+    using MvvmCross.Core.ViewModels;
+    using MvvmCross.iOS.Support.JASidePanelsSample.Core;
 
 
     public class Setup : MvxIosSetup
@@ -22,7 +23,7 @@
         /// <returns>The IMvxApplication <see langword="object"/></returns>
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         /// <summary>Creates the debug trace.</summary>

@@ -50,7 +50,9 @@
             var viewController = view as UIViewController;
 
             if (viewController == null)
+            {
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
+            }
 
             if (RootViewController == null)
             {
