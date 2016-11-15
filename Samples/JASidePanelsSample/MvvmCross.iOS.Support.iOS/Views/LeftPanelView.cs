@@ -1,11 +1,11 @@
-﻿using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Support.SidePanels;
 
-namespace MvvmCross.iOS.Support.iOS.Views
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS.Views
 {
     using Binding.BindingContext;
     using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.JASidePanelsSample.Core.ViewModels;
     using UIKit;
 
     [Register("LeftPanelView")]

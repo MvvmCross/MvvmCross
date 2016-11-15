@@ -1,7 +1,7 @@
-﻿
+
 using UIKit;
 
-namespace MvvmCross.iOS.Support.iOS
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS
 {
     public class Application
     {

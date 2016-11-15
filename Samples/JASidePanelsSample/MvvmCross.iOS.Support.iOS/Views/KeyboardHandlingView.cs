@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.iOS.Support.iOS.Views
+namespace MvvmCross.iOS.Support.JASidePanelsSample.iOS.Views
 {
     using SidePanels;
     using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
     using Foundation;
     using Support.Views;
     using UIKit;
+    using JASidePanelsSample.Core.ViewModels;
 
     [Register("KeyboardHandlingView")]
     [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
