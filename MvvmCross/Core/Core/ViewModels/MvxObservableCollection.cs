@@ -213,7 +213,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 SuppressEvents = false;
 
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
