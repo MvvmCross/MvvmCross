@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MvvmCross.iOS.Support.Views.ExpandableInternal
+namespace MvvmCross.iOS.Support.Views.Expandable
 {
 	internal abstract class SectionExpandableController
 	{

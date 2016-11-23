@@ -1,4 +1,4 @@
-using MvvmCross.iOS.Support.Views.ExpandableInternal;
+using MvvmCross.iOS.Support.Views.Expandable;
 
 namespace MvvmCross.iOS.Support.Views
 {
