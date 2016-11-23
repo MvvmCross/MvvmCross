@@ -5,6 +5,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.Views;
 using MvvmCross.iOS.Views;
 using UIKit;
+using System.Linq;
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 {
@@ -89,5 +90,19 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 
 		private readonly NSString _headerCellIdentifier;
 		protected virtual NSString HeaderCellIdentifier => _headerCellIdentifier;
+
+		protected override void OnSectionExpanded(IEnumerable<int> sectionIndexes)
+		{
+			var indexes = sectionIndexes;
+			// you can handle on section expanded
+
+		}
+
+		protected override void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
+		{
+			var indexes = collapsedSectionIndexes;
+			// you can handle on section collapsed
+		
+		}
 	}
 }

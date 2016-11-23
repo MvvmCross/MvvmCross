@@ -1,4 +1,5 @@
 using MvvmCross.iOS.Support.Views.Expandable;
+using MvvmCross.iOS.Support.Views.Expandable.Controllers;
 
 namespace MvvmCross.iOS.Support.Views
 {
@@ -24,10 +25,10 @@ namespace MvvmCross.iOS.Support.Views
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
 	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
-        private EventHandler _headerButtonCommand;
+        private readonly EventHandler _headerButtonCommand;
 
         private IEnumerable<TItemSource> _itemsSource;
-        new public IEnumerable<TItemSource> ItemsSource
+        public new IEnumerable<TItemSource> ItemsSource
         {
             get
             {
@@ -49,12 +50,12 @@ namespace MvvmCross.iOS.Support.Views
                 var button = sender as UIButton;
                 var section = button.Tag;
 
-	            var changedSections = _sectionExpandableController.ToggleState((int) section).ToList();
+	            var changedSectionsResponse = _sectionExpandableController.ToggleState((int) section);
                 tableView.ReloadData();
 
 	            List<NSIndexPath> pathsToAnimate = new List<NSIndexPath>();
 
-	            foreach (var changedSection in changedSections)
+	            foreach (var changedSection in changedSectionsResponse.AllModifiedIndexes)
 	            {
 		            // Animate the section cells
 		            nint rowCountForSection = RowsInSection(tableView, changedSection);
@@ -65,8 +66,24 @@ namespace MvvmCross.iOS.Support.Views
 
 	            tableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
 	            ScrollToSection(tableView, section);
+
+	            if (changedSectionsResponse.CollapsedIndexes.Any())
+		            OnSectionCollapsed(changedSectionsResponse.CollapsedIndexes);
+
+	            if (changedSectionsResponse.ExpandedIndexes.Any())
+		            OnSectionExpanded(changedSectionsResponse.ExpandedIndexes);
             };
         }
+
+	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
+	    {
+		    
+	    }
+
+	    protected virtual void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
+	    {
+		    
+	    }
 
 	    private void ScrollToSection(UITableView tableView, nint atIndex)
 	    {
@@ -118,6 +135,16 @@ namespace MvvmCross.iOS.Support.Views
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var header = GetOrCreateHeaderCellFor(tableView, section);
+	        var expandableHeaderCell = header as IExpandableHeaderCell;
+
+	        if (expandableHeaderCell != null)
+	        {
+		        if (_sectionExpandableController.IsExpanded((int) section))
+			        expandableHeaderCell.OnExpanded();
+		        else
+			        expandableHeaderCell.OnCollapsed();
+	        }
+
             bool hasHiddenButton = false;
 
             foreach (var view in header.Subviews)
