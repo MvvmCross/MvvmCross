@@ -64,8 +64,16 @@ namespace MvvmCross.iOS.Support.Views
 	            }
 
 	            tableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
+	            ScrollToSection(tableView, section);
             };
         }
+
+	    private void ScrollToSection(UITableView tableView, nint atIndex)
+	    {
+		    var sectionRect = tableView.RectForSection(atIndex);
+		    sectionRect.Height = tableView.Frame.Height;
+		    tableView.ScrollRectToVisible(sectionRect, true);
+	    }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
