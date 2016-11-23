@@ -2,31 +2,18 @@ using System.Collections.Generic;
 
 namespace MvvmCross.iOS.Support.Views.ExpandableInternal
 {
-	internal class SectionExpandableController
+	internal abstract class SectionExpandableController
 	{
-		private readonly HashSet<int> _expandedIndexesSet = new HashSet<int>();
-
-		public SectionExpandableController()
-		{
-			
-		}
+		protected readonly HashSet<int> ExpandedIndexesSet = new HashSet<int>();
 
 		/// <summary>
 		/// Toggles expandable state and returns what indexes had changed.
 		/// </summary>
 		/// <param name="atIndex"></param>
-		public IEnumerable<int> ToggleState(int atIndex)
-		{
-			if (_expandedIndexesSet.Contains(atIndex))
-				_expandedIndexesSet.Remove(atIndex);
-			else
-				_expandedIndexesSet.Add(atIndex);
+		public abstract IEnumerable<int> ToggleState(int atIndex);
 
-			yield return atIndex;
-		}
+		public bool IsExpanded(int atIndex) => ExpandedIndexesSet.Contains(atIndex);
 
-		public bool IsExpanded(int atIndex) => _expandedIndexesSet.Contains(atIndex);
-
-		public void ResetState() => _expandedIndexesSet.Clear();
+		public void ResetState() => ExpandedIndexesSet.Clear();
 	}
 }

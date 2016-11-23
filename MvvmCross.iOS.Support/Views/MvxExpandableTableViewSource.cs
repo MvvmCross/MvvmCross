@@ -23,7 +23,7 @@ namespace MvvmCross.iOS.Support.Views
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
-	    private readonly SectionExpandableController _sectionExpandableController = new SectionExpandableController();
+	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
         private EventHandler _headerButtonCommand;
 
         private IEnumerable<TItemSource> _itemsSource;
@@ -178,6 +178,26 @@ namespace MvvmCross.iOS.Support.Views
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
 
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+
+	    private bool isAccordionExpandCollapseEnabled;
+	    public bool IsAccordionExpandCollapseEnabled
+	    {
+		    get { return isAccordionExpandCollapseEnabled; }
+		    set
+		    {
+				if (isAccordionExpandCollapseEnabled == value)
+					return;
+
+				isAccordionExpandCollapseEnabled = value;
+
+			    if (isAccordionExpandCollapseEnabled)
+				    _sectionExpandableController = new AccordionSectionExpandableController();
+			    else
+				    _sectionExpandableController = new DefaultAllSectionsExpandableController();
+
+				ReloadTableData();
+			}
+		} 
     }
 
     public class HiddenHeaderButton : UIButton
