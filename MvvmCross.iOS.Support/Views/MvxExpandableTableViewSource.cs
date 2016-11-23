@@ -1,3 +1,5 @@
+using MvvmCross.iOS.Support.Views.ExpandableInternal;
+
 namespace MvvmCross.iOS.Support.Views
 {
     using Foundation;
@@ -16,14 +18,12 @@ namespace MvvmCross.iOS.Support.Views
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
+
     }
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
-        /// <summary>
-        /// Indicates which sections are expanded.
-        /// </summary>
-        private bool[] _isCollapsed;
+	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
         private EventHandler _headerButtonCommand;
 
         private IEnumerable<TItemSource> _itemsSource;
@@ -36,10 +36,8 @@ namespace MvvmCross.iOS.Support.Views
             set
             {
                 _itemsSource = value;
-                _isCollapsed = new bool[ItemsSource.Count()];
+	            _sectionExpandableController.ResetState();
 
-                for (var i = 0; i < _isCollapsed.Length; i++)
-                    _isCollapsed[i] = true;
                 ReloadTableData();
             }
         }
@@ -50,31 +48,29 @@ namespace MvvmCross.iOS.Support.Views
             {
                 var button = sender as UIButton;
                 var section = button.Tag;
-                _isCollapsed[(int)section] = !_isCollapsed[(int)section];
+
+	            var changedSections = _sectionExpandableController.ToggleState((int) section).ToList();
                 tableView.ReloadData();
 
-                // Animate the section cells
-                var paths = new NSIndexPath[RowsInSection(tableView, section)];
-                for (int i = 0; i < paths.Length; i++)
-                {
-                    paths[i] = NSIndexPath.FromItemSection(i, section);
-                }
+	            List<NSIndexPath> pathsToAnimate = new List<NSIndexPath>();
 
-                tableView.ReloadRows(paths, UITableViewRowAnimation.Automatic);
+	            foreach (var changedSection in changedSections)
+	            {
+		            // Animate the section cells
+		            nint rowCountForSection = RowsInSection(tableView, changedSection);
+
+		            for (int i = 0; i < rowCountForSection; i++)
+						pathsToAnimate.Add(NSIndexPath.FromItemSection(i, changedSection));
+	            }
+
+	            tableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
             };
         }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            // When the collection is changed collapse all sections
-            _isCollapsed = new bool[ItemsSource.Count()];
-
-            for (var i = 0; i < _isCollapsed.Length; i++)
-            {
-                // When the collection is changed collapse all sections
-                _isCollapsed[i] = true;
-            }
-            base.CollectionChangedOnCollectionChanged(sender, args);
+	        _sectionExpandableController.ResetState();
+			base.CollectionChangedOnCollectionChanged(sender, args);
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -82,7 +78,7 @@ namespace MvvmCross.iOS.Support.Views
             if (ItemsSource == null)
                 return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if ((ItemsSource.ElementAt((int)section)).Any() && !_isCollapsed[(int)section])
+            if ((ItemsSource.ElementAt((int)section)).Any() && _sectionExpandableController.IsExpanded((int)section))
                 return (ItemsSource.ElementAt((int)section)).Count();
             return 0;
         }
@@ -182,6 +178,26 @@ namespace MvvmCross.iOS.Support.Views
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
 
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+
+	    private bool isAccordionExpandCollapseEnabled;
+	    public bool IsAccordionExpandCollapseEnabled
+	    {
+		    get { return isAccordionExpandCollapseEnabled; }
+		    set
+		    {
+				if (isAccordionExpandCollapseEnabled == value)
+					return;
+
+				isAccordionExpandCollapseEnabled = value;
+
+			    if (isAccordionExpandCollapseEnabled)
+				    _sectionExpandableController = new AccordionSectionExpandableController();
+			    else
+				    _sectionExpandableController = new DefaultAllSectionsExpandableController();
+
+				ReloadTableData();
+			}
+		} 
     }
 
     public class HiddenHeaderButton : UIButton
