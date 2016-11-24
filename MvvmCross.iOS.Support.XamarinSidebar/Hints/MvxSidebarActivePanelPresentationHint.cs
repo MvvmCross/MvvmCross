@@ -23,7 +23,7 @@
 
             var navigationController = SidebarPanelController.NavigationController;
 
-            switch(Panel)
+            switch (Panel)
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
@@ -40,51 +40,23 @@
 
         protected virtual void InitSidebar()
         {
-            var sidebarController = Panel == MvxPanelEnum.Left 
-                                                         ? SidebarPanelController.LeftSidebarController 
+            var sidebarController = Panel == MvxPanelEnum.Left
+                                                         ? SidebarPanelController.LeftSidebarController
                                                          : SidebarPanelController.RightSidebarController;
-
-            UIBarButtonItem barButtonItem; 
 
             var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
             if (xamarinSidebarMenu != null)
             {
+
                 sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
-                sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
-
-                barButtonItem = new UIBarButtonItem(xamarinSidebarMenu.MenuButtonImage
-                    , UIBarButtonItemStyle.Plain
-                    , (sender, args) => {
-                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
-                        sidebarController.ViewWillAppear(false);
-                        sidebarController.ToggleMenu();
-                    });
+                sidebarController.StateChangeHandler += (object sender, bool e) =>
+                   {
+                       sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
+                       sidebarController.ViewWillAppear(false);
+                   };
             }
-            else
-            {
-                barButtonItem = new UIBarButtonItem("Menu"
-                    , UIBarButtonItemStyle.Plain
-                    , (sender, args) => {
-                        sidebarController.ViewWillAppear(false);
-                        sidebarController.ToggleMenu();
-                    });
-            }
-
-
-            var topViewController = SidebarPanelController.NavigationController.TopViewController;
 
             sidebarController.ChangeMenuView(ViewController);
-
-            if (Panel == MvxPanelEnum.Left)
-            {
-                sidebarController.MenuLocation = MenuLocations.Left;
-                topViewController.NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
-            }
-            else
-            {
-                sidebarController.MenuLocation = MenuLocations.Right;    
-                topViewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
-            }
         }
     }
 }

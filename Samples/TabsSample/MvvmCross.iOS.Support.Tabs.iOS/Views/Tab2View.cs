@@ -8,7 +8,7 @@ using UIKit;
 
 namespace MvvmCross.iOS.Support.Tabs.iOS.Views
 {
-	[MvxTabPresentation(MvxTabPresentationMode.Tab, true)]
+	[MvxTabPresentation(MvxTabPresentationMode.Tab, "Tab 2", "ic_tabbar_menu", true)]
 	public class Tab2View : MvxViewController<Tab2ViewModel>
 	{
 		private UIButton _btnLogout;

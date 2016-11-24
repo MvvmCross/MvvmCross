@@ -23,24 +23,16 @@ namespace MvvmCross.iOS.Support.Views
 		{
 		}
 
-		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, IDictionary<string, string> presentationValues)
+		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName)
 		{
-			// get parameter values
-			var title = string.Empty;
-			var iconName = string.Empty;
-
-			// TODO: remove hard-coded keys! To do so, there must be consts defined at Core level
-			presentationValues.TryGetValue("title", out title);
-			presentationValues.TryGetValue("icon_name", out iconName);
-
 			// setup Tab
-			this.SetTitleAndTabBarItem(viewController, title, iconName);
+			SetTitleAndTabBarItem(viewController, tabTitle, tabIconName);
 
 			// add Tab
 			var currentTabs = new List<UIViewController>();
 			if(ViewControllers != null)
 			{
-				currentTabs = this.ViewControllers.ToList();
+				currentTabs = ViewControllers.ToList();
 			}
 
 			if(wrapInNavigationController)
@@ -63,7 +55,10 @@ namespace MvvmCross.iOS.Support.Views
 		protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
 		{
 			viewController.Title = title;
-			viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), this._tabsCount);
+
+			if(!string.IsNullOrEmpty(iconName))
+				viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), this._tabsCount);
+
 			_tabsCount++;
 		}
 
@@ -77,7 +72,7 @@ namespace MvvmCross.iOS.Support.Views
 				return false;
 			}
 
-			navigationController.PushViewController((UIViewController)viewController, true);
+			navigationController.PushViewController(viewController, true);
 
 			return true;
 		}
