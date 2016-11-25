@@ -257,8 +257,7 @@ namespace MvvmCross.Core.ViewModels
         protected void InvokeOnMainThread(Action action)
         {
             var dispatcher = MvxSingleton<IMvxMainThreadDispatcher>.Instance;
-            if (dispatcher != null)
-                dispatcher.RequestMainThreadAction(action);
+            dispatcher?.RequestMainThreadAction(action);
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
