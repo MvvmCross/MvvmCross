@@ -193,7 +193,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="items">The collection which items will be removed.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
-        public void RemoveRange(IEnumerable<T> items)
+        public void RemoveItems(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -213,7 +213,44 @@ namespace MvvmCross.Core.ViewModels
             {
                 SuppressEvents = false;
 
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+        }
+
+        /// <summary>
+        /// Removes the current <see cref="MvxObservableCollection{T}"/> instance items of the ones specified in the range, raising the minimum required change events.
+        /// </summary>
+        /// <param name="start">The start index.</param>
+        /// <param name="count">The count of items to remove.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Start index or count incorrect</exception>
+        public void RemoveRange(int start, int count)
+        {
+            if (start < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(start));
+            }
+
+            var end = start + count - 1;
+
+            if (end > Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            try
+            {
+                SuppressEvents = true;
+
+                for (var i = end; i >= start; i--)
+                {
+                    RemoveAt(i);
+                }
+            }
+            finally
+            {
+                SuppressEvents = false;
+
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
