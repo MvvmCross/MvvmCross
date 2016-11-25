@@ -49,6 +49,7 @@
             {
 
                 sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
+                sidebarController.DisablePanGesture = false;
                 sidebarController.StateChangeHandler += (object sender, bool e) =>
                    {
                        sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;

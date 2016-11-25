@@ -33,6 +33,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, initialEmptySideMenu);
                 RightSidebarController = new SidebarController(this, _subRootViewController, initialEmptySideMenu);
 
+                LeftSidebarController.DisablePanGesture = true;
+                RightSidebarController.DisablePanGesture = true;
+
                 LeftSidebarController.StateChangeHandler += (object sender, bool e) =>
                 {
                     if (ToggleStatusBarHiddenOnOpen)
