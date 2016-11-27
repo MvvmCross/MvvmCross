@@ -123,6 +123,7 @@ namespace MvvmCross.Droid.Platform
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
             var presenter = this.CreateViewPresenter();
+            Mvx.RegisterSingleton(presenter);
             return new MvxAndroidViewDispatcher(presenter);
         }
 
