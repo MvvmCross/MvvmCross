@@ -53,8 +53,8 @@ namespace MvvmCross.Core.ViewModels
                 {
                     foreach (var thing in this._eventHandlers)
                     {
-                        if (thing.IsAlive
-                            && ((EventHandler)thing.Target) == value)
+                        var target = thing.Target;
+                        if (target != null && (EventHandler)target == value)
                         {
                             this._eventHandlers.Remove(thing);
                             break;
