@@ -20,7 +20,8 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 			{
 				UseAnimations = true,
 				AddAnimation = UITableViewRowAnimation.Left,
-				RemoveAnimation = UITableViewRowAnimation.Right
+				RemoveAnimation = UITableViewRowAnimation.Right,
+				IsAccordionExpandCollapseEnabled = true
 			};
 
 			this.AddBindings(new Dictionary<object, string>

@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Expandable\AccordionSectionExpandableController.cs" />
+    <Compile Include="Views\Expandable\SectionExpandableController.cs" />
+    <Compile Include="Views\Expandable\DefaultAllSectionsExpandableController.cs" />
     <Compile Include="Views\MvxExpandableTableViewSource.cs" />
     <Compile Include="Views\Extensions.cs" />
     <Compile Include="Views\MvxBaseViewController.cs" />
