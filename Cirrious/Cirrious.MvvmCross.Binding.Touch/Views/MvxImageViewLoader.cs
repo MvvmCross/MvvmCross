@@ -14,12 +14,14 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
     public class MvxImageViewLoader
         : MvxBaseImageViewLoader<UIImage>
     {
-        public MvxImageViewLoader(Func<UIImageView> imageViewAccess, Action afterImageChangeAction = null)
+        public MvxImageViewLoader(Func<UIImageView> imageViewAccess,Action beforeImageChangeAction = null, Action afterImageChangeAction = null)
             : base((image) =>
                 {
+				if (beforeImageChangeAction != null)
+					beforeImageChangeAction();
                     OnImage(imageViewAccess(), image);
-                    if (afterImageChangeAction != null)
-                        afterImageChangeAction();
+				if (afterImageChangeAction != null)
+					afterImageChangeAction();
                 })
         {
         }
