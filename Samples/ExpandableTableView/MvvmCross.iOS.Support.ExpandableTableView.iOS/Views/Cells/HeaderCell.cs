@@ -1,11 +1,12 @@
 ﻿using System;
 using Foundation;
 using MvvmCross.Binding.iOS.Views;
+using MvvmCross.iOS.Support.Views.Expandable;
 using UIKit;
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 {
-	public partial class HeaderCell : MvxTableViewCell
+	public partial class HeaderCell : MvxTableViewCell, IExpandableHeaderCell
 	{
 		private const string BindingText = "Title Title";
 		public static readonly NSString Key = new NSString("HeaderCell");
@@ -30,6 +31,16 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 		{
 			get { return MainLabel.Text; }
 			set { MainLabel.Text = value; }
+		}
+
+		public void OnExpanded()
+		{
+			ContentView.BackgroundColor = UIColor.Blue;
+		}
+
+		public void OnCollapsed()
+		{
+			ContentView.BackgroundColor = UIColor.Green;
 		}
 	}
 }
