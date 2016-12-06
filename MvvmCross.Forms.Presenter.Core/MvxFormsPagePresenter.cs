@@ -18,6 +18,8 @@ namespace MvvmCross.Forms.Presenter.Core
     public abstract class MvxFormsPagePresenter
         : MvxViewPresenter
     {
+        public const string ModalPresentationParameter = "modal";
+
         private Application _mvxFormsApp;
 
         public Application MvxFormsApp
@@ -108,8 +110,13 @@ namespace MvvmCross.Forms.Presenter.Core
             {
                 try
                 {
-					// calling this sync blocks UI and never navigates hence code continues regardless here
-					mainPage.PushAsync(page);
+                    // check for modal presentation parameter
+                    string modalParameter;
+                    if (request.PresentationValues != null && request.PresentationValues.TryGetValue(ModalPresentationParameter, out modalParameter) && bool.Parse(modalParameter))
+                        mainPage.Navigation.PushModalAsync(page);
+                    else
+                        // calling this sync blocks UI and never navigates hence code continues regardless here
+                        mainPage.PushAsync(page);
                 }
                 catch (Exception e)
                 {
