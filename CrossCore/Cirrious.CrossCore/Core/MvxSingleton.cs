@@ -69,6 +69,10 @@ namespace Cirrious.CrossCore.Core
         {
             if (isDisposing)
             {
+                IDisposable disposable = Instance as IDisposable;
+                if (disposable != null)
+                    disposable.Dispose();
+
                 Instance = null;
             }
         }
