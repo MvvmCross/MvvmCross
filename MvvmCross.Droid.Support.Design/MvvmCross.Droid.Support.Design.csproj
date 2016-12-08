@@ -16,6 +16,7 @@
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -121,14 +122,8 @@
     <Compile Include="Behaviors\MvxScrollAwareTranslationHideFABBehavior.cs" />
     <Compile Include="Extensions\MvxFloatingActionButtonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="MvxBottomSheetDialogFragment.cs" />
     <Compile Include="EventSource\MvxEventSourceBottomSheetDialogFragment.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\strings.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
