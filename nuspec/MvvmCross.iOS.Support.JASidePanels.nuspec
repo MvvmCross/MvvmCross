@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.iOS.Support.JASidePanels</id>
+		<version>4.4.0</version>
+		<title>MvvmCross iOS Support - JASidePanels</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the iOS Support libraries for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group targetFramework="Xamarin.iOS">
+				<dependency id="MvvmCross.iOS.Support" version="4.4.0" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\MvvmCross.iOS.Support.JASidePanels\bin\Release\MvvmCross.iOS.Support.JASidePanels.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.JASidePanels\bin\Release\JASidePanels.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.JASidePanels\**\*.cs" target="src\MvvmCross.iOS.Support.JASidePanels" />
+		<!--
+		<file src="..\bin\Release\MvvmCross.iOS.Support.JASidePanels.*" target="lib\Xamarin.iOS10" />
+		<file src="..\MvvmCross.iOS.Support.JASidePanels\**\*.cs" target="lib\Xamarin.iOS10" />
+		-->
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
