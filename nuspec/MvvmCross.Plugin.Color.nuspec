@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.Color</id>
+		<version>4.4.0</version>
+		<title>MvvmCross - Color Plugin</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Color' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group>
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+			</group>
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="MvvmCross.Binding" version="4.4.0" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- src -->
+		<file src="..\Color\MvvmCross.Plugins.Color\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color" />
+		<file src="..\Color\MvvmCross.Plugins.Color.Wpf\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color.Wpf" />
+		<file src="..\Color\MvvmCross.Plugins.Color.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color.WindowsStore" />
+		<file src="..\Color\MvvmCross.Plugins.Color.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color.WindowsCommon" />
+		<file src="..\Color\MvvmCross.Plugins.Color.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color.Droid" />
+		<file src="..\Color\MvvmCross.Plugins.Color.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.Color.iOS" />
+
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\dotnet" />
+
+		<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Color.Wpf.*" target="lib\net45" />
+		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\net45\Bootstrap\ColorPluginBootstrap.cs.pp" />
+
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Color.WindowsStore.*" target="lib\netcore45" />
+		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ColorPluginBootstrap.cs.pp" />
+
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\win81" />
+		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ColorPluginBootstrap.cs.pp" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\wpa81" />
+		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ColorPluginBootstrap.cs.pp" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Color.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Color.Droid.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\ColorPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\ColorPluginBootstrap.cs.pp" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Color.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\ColorPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\ColorPluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Color.*" target="lib\Xamarin.Mac20" />
+		
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

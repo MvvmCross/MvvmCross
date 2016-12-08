@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.DownloadCache</id>
+		<version>4.4.0</version>
+		<title>MvvmCross - DownloadCache Plugin</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'DownloadCache' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<group>
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="System.Collections.Immutable" version="1.2.0" />
+			</group>
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="MvvmCross.Binding" version="4.4.0" />
+				<dependency id="System.Collections.Immutable" version="1.2.0" />
+				<dependency id="Xamarin.Android.Support.Compat" version="24.2.1" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- src -->
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache" />
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache.Droid" />
+		<file src="..\DownloadCache\MvvmCross.Plugins.DownloadCache.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.DownloadCache.iOS" />	
+
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\dotnet" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.DownloadCache.Droid.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.DownloadCache.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\DownloadCachePluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\DownloadCachePluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.DownloadCache.*" target="lib\Xamarin.Mac20" />
+
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
