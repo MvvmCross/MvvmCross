@@ -10,7 +10,7 @@
 	/// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.
 	/// </summary>
-	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : MvxViewModel
+	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
 		public MvxBaseViewController()
 		{
