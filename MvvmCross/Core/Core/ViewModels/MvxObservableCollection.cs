@@ -19,6 +19,24 @@ namespace MvvmCross.Core.ViewModels
         : ObservableCollection<T>
         , IList<T>
     {
+        protected struct SuppressEventsDisposable : IDisposable
+        {
+            private readonly MvxObservableCollection<T> _collection;
+
+            public SuppressEventsDisposable(MvxObservableCollection<T> collection)
+            {
+                _collection = collection;
+                ++collection._suppressEvents;
+            }
+
+            public void Dispose()
+            {
+                --_collection._suppressEvents;
+            }
+        }
+
+        private int _suppressEvents;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MvxObservableCollection{T}"/> class.
         /// </summary>
@@ -35,27 +53,14 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        private bool _suppressEvents;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the <see cref="MvxObservableCollection{T}.CollectionChanged"/> events are raised.
-        /// </summary>
-        /// <value>true if the <see cref="MvxObservableCollection{T}.CollectionChanged"/> events are raised; otherwise, false.</value>
-        public bool SuppressEvents
+        protected SuppressEventsDisposable SuppressEvents()
         {
-            get
-            {
-                return _suppressEvents;
-            }
-            set
-            {
-                if (_suppressEvents != value)
-                {
-                    _suppressEvents = value;
+            return new SuppressEventsDisposable(this);
+        }
 
-                    OnPropertyChanged(new PropertyChangedEventArgs("SuppressEvents"));
-                }
-            }
+        public bool EventsAreSuppressed
+        {
+            get { return this._suppressEvents > 0; }
         }
 
         /// <summary>
@@ -64,7 +69,7 @@ namespace MvvmCross.Core.ViewModels
         /// <param name="e">The event data to report in the event.</param>
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (!SuppressEvents)
+            if (!EventsAreSuppressed)
             {
                 InvokeOnMainThread(() => base.OnCollectionChanged(e));
             }
@@ -82,21 +87,15 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            try
+            using(SuppressEvents())
             {
-                SuppressEvents = true;
-
                 foreach (var item in items)
                 {
                     Add(item);
                 }
             }
-            finally
-            {
-                SuppressEvents = false;
 
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
         }
 
         /// <summary>
@@ -111,11 +110,13 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            SuppressEvents = true;
+            using (SuppressEvents())
+            {
+                Clear();
+                AddRange(items);
+            }
 
-            Clear();
-
-            AddRange(items);
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public void ReplaceRange(IEnumerable<T> items, int firstIndex, int oldSize)
@@ -125,10 +126,8 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            try
+            using(SuppressEvents())
             {
-                SuppressEvents = true;
-
                 var lastIndex = firstIndex + oldSize - 1;
 
                 // If there are more items in the previous list, remove them.
@@ -145,12 +144,11 @@ namespace MvvmCross.Core.ViewModels
                         Insert(firstIndex++, item);
                 }
             }
-            finally
-            {
-                SuppressEvents = false;
 
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
+            // TODO: Emit up to two OnCollectionChangedEvents:
+            //   1. Replace for those items replaced.
+            //   2. Add for items added beyond the original size.
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         /// <summary>
@@ -200,21 +198,14 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            try
+            using(SuppressEvents())
             {
-                SuppressEvents = true;
-
                 foreach (var item in items)
                 {
                     Remove(item);
                 }
             }
-            finally
-            {
-                SuppressEvents = false;
-
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         /// <summary>
@@ -237,28 +228,28 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
-            try
+            var removedItems = new List<T>(count);
+            for (int i = start; i < count; i++)
             {
-                SuppressEvents = true;
+                removedItems.Add(this[i]);
+            }
 
+            using(SuppressEvents())
+            {
                 for (var i = end; i >= start; i--)
                 {
                     RemoveAt(i);
                 }
             }
-            finally
-            {
-                SuppressEvents = false;
 
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, start));
         }
 
         protected void InvokeOnMainThread(Action action)
         {
             var dispatcher = MvxSingleton<IMvxMainThreadDispatcher>.Instance;
-            if (dispatcher != null)
-                dispatcher.RequestMainThreadAction(action);
+            dispatcher?.RequestMainThreadAction(action);
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
