@@ -24,8 +24,6 @@ namespace MvvmCross.iOS.Support.Tabs.iOS
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 			Window.BackgroundColor = UIColor.White;
 
-			Presenter = new MvxTabsViewPresenter(this, this.Window);
-
 			var setup = new Setup(this, this.Presenter);
 			setup.Initialize();
 
