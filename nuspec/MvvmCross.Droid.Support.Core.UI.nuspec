@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Droid.Support.Core.UI</id>
+		<version>4.4.0</version>
+		<title>MvvmCross Android Support - Core UI</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support Core UI support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support v4 Core UI</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<dependency id="MvvmCross.Core" version="4.4.0" />
+			<dependency id="MvvmCross.Droid.Shared" version="4.4.0" />
+			<dependency id="Xamarin.Android.Support.Core.UI" version="24.2.1"/>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\bin\Release\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
+		<file src="..\MvvmCross.Droid.Support.Core.UI\**\*.cs" target="src\MvvmCross.Droid.Support.Core.UI" />
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+

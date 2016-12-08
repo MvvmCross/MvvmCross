@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{31C39E0F-116E-4EAC-921D-A79E6AA28204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{911D9032-EA82-41B9-80D7-5DB84951B6E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Droid.Support.V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{FFC83AE3-D1FB-4A7B-974E-72697235E047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Droid.Support.V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj", "{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{22132440-48FD-462E-8075-DFB1D5C09827}"
+	ProjectSection(SolutionItems) = preProject
+		nuspec\MvvmCross.Droid.Support.Core.UI.nuspec = nuspec\MvvmCross.Droid.Support.Core.UI.nuspec
+		nuspec\MvvmCross.Droid.Support.Core.Utils.nuspec = nuspec\MvvmCross.Droid.Support.Core.Utils.nuspec
+		nuspec\MvvmCross.Droid.Support.Design.nuspec = nuspec\MvvmCross.Droid.Support.Design.nuspec
+		nuspec\MvvmCross.Droid.Support.Fragment.nuspec = nuspec\MvvmCross.Droid.Support.Fragment.nuspec
+		nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec = nuspec\MvvmCross.Droid.Support.V14.Preference.nuspec
+		nuspec\MvvmCross.Droid.Support.V17.Leanback.nuspec = nuspec\MvvmCross.Droid.Support.V17.Leanback.nuspec
+		nuspec\MvvmCross.Droid.Support.V4.nuspec = nuspec\MvvmCross.Droid.Support.V4.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.AppCompat.nuspec = nuspec\MvvmCross.Droid.Support.V7.AppCompat.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.Preference.nuspec = nuspec\MvvmCross.Droid.Support.V7.Preference.nuspec
+		nuspec\MvvmCross.Droid.Support.V7.RecyclerView.nuspec = nuspec\MvvmCross.Droid.Support.V7.RecyclerView.nuspec
+		nuspec\pack.bat = nuspec\pack.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.Preference", "MvvmCross.Droid.Support.V7.Preference\MvvmCross.Droid.Support.V7.Preference.csproj", "{C6DA15E8-A377-40BE-970F-E2681C79BB34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Compat", "MvvmCross.Droid.Support.Compat\MvvmCross.Droid.Support.Compat.csproj", "{EA8563C7-102B-41D4-AF04-4C92B1DDD132}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.UI", "MvvmCross.Droid.Support.Core.UI\MvvmCross.Droid.Support.Core.UI.csproj", "{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.Utils", "MvvmCross.Droid.Support.Core.Utils\MvvmCross.Droid.Support.Core.Utils.csproj", "{61C1EB25-483E-4C77-89CD-CA202C82C6BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Fragment", "MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Media.Compat", "MvvmCross.Droid.Support.Media.Compat\MvvmCross.Droid.Support.Media.Compat.csproj", "{240A1627-FBB5-4CDD-94D3-545E13FF0AD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C39E0F-116E-4EAC-921D-A79E6AA28204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911D9032-EA82-41B9-80D7-5DB84951B6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC83AE3-D1FB-4A7B-974E-72697235E047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C110DA1-7CF0-4919-B6E7-A25B16D6DB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DA15E8-A377-40BE-970F-E2681C79BB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8563C7-102B-41D4-AF04-4C92B1DDD132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8563C7-102B-41D4-AF04-4C92B1DDD132}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8563C7-102B-41D4-AF04-4C92B1DDD132}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8563C7-102B-41D4-AF04-4C92B1DDD132}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C1EB25-483E-4C77-89CD-CA202C82C6BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C1EB25-483E-4C77-89CD-CA202C82C6BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C1EB25-483E-4C77-89CD-CA202C82C6BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C1EB25-483E-4C77-89CD-CA202C82C6BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{240A1627-FBB5-4CDD-94D3-545E13FF0AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{240A1627-FBB5-4CDD-94D3-545E13FF0AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{240A1627-FBB5-4CDD-94D3-545E13FF0AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{240A1627-FBB5-4CDD-94D3-545E13FF0AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
