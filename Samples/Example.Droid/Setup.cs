@@ -8,7 +8,6 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Example.Droid
