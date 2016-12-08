@@ -35,7 +35,7 @@ namespace Example.Droid.Fragments
                     Resource.String.drawer_close            // "close drawer" description
                 );
 
-                ((MainActivity)Activity).DrawerLayout.SetDrawerListener(_drawerToggle);
+                ((MainActivity)Activity).DrawerLayout.AddDrawerListener(_drawerToggle);
             }
 
             return view;
