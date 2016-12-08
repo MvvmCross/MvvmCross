@@ -33,7 +33,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
             var variableDeclarationSyntax = context.Node as VariableDeclaratorSyntax;
             if (variableDeclarationSyntax == null) return;
 
-            var invocationExpressionSyntax = variableDeclarationSyntax.Initializer.Value as InvocationExpressionSyntax;
+            var invocationExpressionSyntax = variableDeclarationSyntax.Initializer?.Value as InvocationExpressionSyntax;
 
             var memberAccessExpressionSyntax = invocationExpressionSyntax?.Expression as MemberAccessExpressionSyntax;
 
