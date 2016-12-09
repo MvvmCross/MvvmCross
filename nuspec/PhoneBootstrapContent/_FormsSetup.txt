@@ -1,0 +1,16 @@
+The steps to get the presenters working:
+
+1. Add following method override to your MvxSetup class (usually Setup.cs):
+
+	protected override IMvxPhoneViewPresenter CreateViewPresenter(PhoneApplicationFrame rootFrame)
+	{
+		Forms.Init();
+
+		var app = new MvxFormsApp();
+
+		return new MvxFormsWindowsPhonePagePresenter(app, rootFrame);
+	}
+
+2. ??
+
+3. Profit

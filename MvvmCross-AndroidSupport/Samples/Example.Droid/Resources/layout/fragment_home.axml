@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/toolbar_actionbar" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_marginLeft="@dimen/element_margin_medium"
+        android:layout_marginRight="@dimen/element_margin_medium"
+        android:text="Use the menu to browse through all examples"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_centerInParent="true" />
+    <Button
+        android:text="Close view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="@dimen/element_margin_medium"
+        android:layout_centerHorizontal="true"
+        local:MvxBind="Click CloseViewCommand" />
+</RelativeLayout>

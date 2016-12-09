@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterDetailExample.Core.Views.MainPage"             
+             Title="MasterDetail" Icon="Hamburger.png" Padding="0, 40, 0, 0">
+
+    <ListView ItemsSource="{Binding Menu}" SelectedItem="{Binding SelectedMenu, Mode=TwoWay}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Detail="{Binding Description}" Text="{Binding Title}"></TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>        
+    </ListView>
+</ContentPage>
