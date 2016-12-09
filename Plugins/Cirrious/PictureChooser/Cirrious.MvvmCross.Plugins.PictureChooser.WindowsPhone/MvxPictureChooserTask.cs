@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Cirrious.CrossCore.WindowsPhone.Tasks;
 using Microsoft.Phone.Tasks;
@@ -42,6 +43,21 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone
         {
             var chooser = new CameraCaptureTask {};
             ChoosePictureCommon(chooser, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+        }
+
+
+        public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
+        public Task<Stream> TakePicture(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
         }
 
         #endregion

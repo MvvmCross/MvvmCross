@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Cirrious.MvvmCross.Plugins.PictureChooser
 {
@@ -17,5 +18,15 @@ namespace Cirrious.MvvmCross.Plugins.PictureChooser
 
         void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                          Action assumeCancelled);
+
+        /// <summary>
+        /// Returns null if cancelled
+        /// </summary>
+        Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality);
+
+        /// <summary>
+        /// Returns null if cancelled
+        /// </summary>
+        Task<Stream> TakePicture(int maxPixelDimension, int percentQuality);
     }
 }
