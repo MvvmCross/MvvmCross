@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
     <AndroidTlsProvider></AndroidTlsProvider>
