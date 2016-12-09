@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.WebBrowser</id>
+		<version>4.4.0</version>
+		<title>MvvmCross - WebBrowser Plugin</title>
+		<authors>MvvmCross</authors>
+		<owners>Stuart Lodge</owners>
+		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'WebBrowser' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
+		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="4.4.0" />
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\portable-net45+win+wpa81+wp80" />
+		
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\dotnet" />
+
+		<!-- store -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\netcore45" />
+		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.WebBrowser.WindowsStore.*" target="lib\netcore45" />
+
+		<file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+
+		<!-- windows common -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\win81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.WebBrowser.WindowsCommon.*" target="lib\win81" />
+		<file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.WebBrowser.WindowsCommon.*" target="lib\wpa81" />
+		<file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\portable-win81+wpa81" />
+		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.WebBrowser.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.WebBrowser.Droid.*" target="lib\MonoAndroid" />
+
+		<file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.WebBrowser.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\WebBrowserPluginBootstrap.cs.pp" 
+			target="content\Xamarin.iOS10\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+            
+        <!-- WPF -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.WebBrowser.Wpf.*" target="lib\net45" />
+
+		<file src="BootstrapContent\WebBrowserPluginBootstrap.cs.pp" target="content\net45\Bootstrap\WebBrowserPluginBootstrap.cs.pp" />
+			
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.WebBrowser.*" target="lib\Xamarin.Mac20" />
+
+		<!-- src -->
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.WindowsCommon\**\*.cs" 
+			target="src\MvvmCross.Plugins.WindowsCommon" />
+
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser" />
+
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.WindowsStore\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser.WindowsStore" />
+
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.Droid\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser.Droid" />
+
+		<file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.iOS\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser.iOS" />
+            
+        <file src="..\WebBrowser\MvvmCross.Plugins.WebBrowser.Wpf\**\*.cs" 
+			target="src\MvvmCross.Plugins.WebBrowser.Wpf" />
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

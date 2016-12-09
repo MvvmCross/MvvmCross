@@ -1,0 +1,4 @@
+The steps to get this iOS UI working are:
+
+1. Add a reference to your Core PCL project
+2. Modify AppDelegate.cs to create the new Setup and to call the IMvxAppStart - there is sample code for this in AppDelegate.cs.txt
