@@ -1,3 +1,0 @@
-﻿The code in this folder is adapted from MonoTouch.Dialog - https://github.com/migueldeicaza/MonoTouch.Dialog
-
-License used - "This code is licensed under the terms of the MIT X11 license."
