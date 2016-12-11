@@ -20,8 +20,6 @@ nuget pack MvvmCross.CodeAnalysis.nuspec
 nuget pack MvvmCross.Tests.nuspec -Symbols
 # note no -Symbols
 nuget pack MvvmCross.nuspec
-nuget pack MvvmCross.Dialog.iOS.nuspec -Symbols
-nuget pack MvvmCross.Dialog.Droid.nuspec -Symbols
 nuget pack MvvmCross.BindingEx.nuspec -Symbols
 nuget pack MvvmCross.Droid.FullFragging.nuspec -Symbols
 nuget pack MvvmCross.Droid.Shared.nuspec -Symbols
