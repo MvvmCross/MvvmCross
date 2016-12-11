@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -21,7 +22,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         : ListFragment
         , IMvxEventSourceFragment
     {
-        public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+        public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
 
@@ -55,10 +56,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
             : base(javaReference, transfer)
         { }
 
-        public override void OnAttach(Activity activity)
+        public override void OnAttach(Context context)
         {
-            AttachCalled.Raise(this, activity);
-            base.OnAttach(activity);
+            AttachCalled.Raise(this, context);
+            base.OnAttach(context);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
