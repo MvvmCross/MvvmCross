@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(NuGetPackageRoot)' == ''">
     <NuGetPackageRoot>$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
   </PropertyGroup>
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)sqlitepclraw.lib.e_sqlite3.v140\1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets" Condition="Exists('$(NuGetPackageRoot)sqlitepclraw.lib.e_sqlite3.v140\1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets')" />
+  <ImportGroup>
+    <Import Project="$(NuGetPackageRoot)\SQLitePCLRaw.lib.e_sqlite3.v140\1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets" Condition="Exists('$(NuGetPackageRoot)\SQLitePCLRaw.lib.e_sqlite3.v140\1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets')" />
   </ImportGroup>
 </Project>
