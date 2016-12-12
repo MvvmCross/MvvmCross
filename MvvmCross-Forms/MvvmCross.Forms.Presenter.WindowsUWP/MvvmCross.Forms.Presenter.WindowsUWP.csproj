@@ -116,6 +116,26 @@
     <None Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Platform\WindowsCommon\MvvmCross.Platform.WindowsCommon.csproj">
+      <Project>{17bdf4a5-b29b-42cf-aaae-b533d8364296}</Project>
+      <Name>MvvmCross.Platform.WindowsCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.WindowsUWP.csproj">
+      <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
+      <Name>MvvmCross.WindowsUWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms.Presenter.Core</Name>
