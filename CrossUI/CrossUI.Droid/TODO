@@ -1,5 +1,0 @@
-* Sync elements with MonoTouch.Dialog
-* Add binding context
-* Check compatibility with Android 1.6
-* Create a DialogFragment that works with the compatibility library
-* Merge the dialog_* layouts into the Android.Dialog class library after layouts in class libraries is supported (slated for Mono for Android 4.4)
