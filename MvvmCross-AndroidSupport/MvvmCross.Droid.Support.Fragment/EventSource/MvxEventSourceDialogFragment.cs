@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -14,6 +13,7 @@ using System;
 using DialogFragment = Android.Support.V4.App.DialogFragment;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
+using Android.Content;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
@@ -21,7 +21,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         : DialogFragment
         , IMvxEventSourceFragment
     {
-        public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+        public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
 
@@ -55,10 +55,10 @@ namespace MvvmCross.Droid.Support.V4.EventSource
             : base(javaReference, transfer)
         { }
 
-        public override void OnAttach(Activity activity)
+		public override void OnAttach(Context context)
         {
-            AttachCalled.Raise(this, activity);
-            base.OnAttach(activity);
+            AttachCalled.Raise(this, context);
+            base.OnAttach(context);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
