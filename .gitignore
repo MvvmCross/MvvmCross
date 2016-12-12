@@ -42,6 +42,12 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
 *_i.c
 *_p.c
 *_i.h
@@ -151,9 +157,9 @@ publish/
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
-packages/
-!packages/Microsoft.Office.js.1.0.0/
-!packages/repositories.config
+# NuGet v3's project.json files produces more ignoreable files
+*.nuget.props
+*.nuget.targets
 
 #Allow NuGet.exe (do not ignore)
 !NuGet.exe
