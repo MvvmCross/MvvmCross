@@ -128,10 +128,6 @@
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross\Platform\WindowsCommon\MvvmCross.Platform.WindowsCommon.csproj">
-      <Project>{17bdf4a5-b29b-42cf-aaae-b533d8364296}</Project>
-      <Name>MvvmCross.Platform.WindowsCommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.WindowsUWP.csproj">
       <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
       <Name>MvvmCross.WindowsUWP</Name>
