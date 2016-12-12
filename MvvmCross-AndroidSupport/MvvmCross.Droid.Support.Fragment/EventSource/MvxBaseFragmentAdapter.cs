@@ -12,6 +12,7 @@ using System;
 using Fragment = Android.Support.V4.App.Fragment;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
+using Android.Content;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
@@ -71,7 +72,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         {
         }
 
-        protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Activity> e)
+        protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Context> e)
         {
         }
 
