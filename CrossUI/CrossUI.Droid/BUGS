@@ -1,3 +1,0 @@
-EntryElements that are offscreen can't be navigated to by the return key on the keyboard from another EntryElement
-ButtonElements and EntryElements can't be used with D-pad navigation (critical for non-touchscreen devices)
-Using a collection initializer on Section.Elements doesn't ensure those elements' Parent property is set to the Section
