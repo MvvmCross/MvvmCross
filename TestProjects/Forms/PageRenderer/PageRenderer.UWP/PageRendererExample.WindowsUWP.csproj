@@ -129,15 +129,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
       <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
       <Name>MvvmCross.Forms.Presenter.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross.Forms.Presenter.WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.csproj">
       <Project>{8583f087-0543-4d27-8f11-f7d8dc1480e2}</Project>
       <Name>MvvmCross.Forms.Presenter.WindowsUWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\pagerenderexample\PageRendererExample.csproj">
+    <ProjectReference Include="..\PageRenderer.Core\PageRendererExample.csproj">
       <Project>{8a421af2-ea6f-456b-8ea2-3a3ff8ac8b57}</Project>
       <Name>PageRendererExample</Name>
     </ProjectReference>
