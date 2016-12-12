@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +16,8 @@
     <AssemblyName>pagerenderexample.Droid</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -109,15 +110,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\pagerenderexample\PageRendererExample.csproj">
+    <ProjectReference Include="..\PageRenderer.Core\PageRendererExample.csproj">
       <Project>{8A421AF2-EA6F-456B-8EA2-3A3FF8AC8B57}</Project>
       <Name>PageRendererExample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross.Forms.Presenter.Droid\MvvmCross.Forms.Presenter.Droid.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Droid\MvvmCross.Forms.Presenter.Droid.csproj">
       <Project>{F823EE03-AC94-4124-AB5B-91B69FE7B85A}</Project>
       <Name>MvvmCross.Forms.Presenter.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms.Presenter.Core</Name>
     </ProjectReference>
@@ -137,10 +138,7 @@
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\layout\" />
-    <Folder Include="Resources\values\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
