@@ -2,20 +2,20 @@
 using Android.Support.V14.Preferences;
 
 using MvvmCross.Platform.Core;
-using Android.App;
 using Android.OS;
 
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
+using Android.Content;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {
 	public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
 	, IMvxEventSourceFragment
 	{
-		public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+		public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 		public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
 		public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
 		public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
@@ -41,10 +41,10 @@ namespace MvvmCross.Droid.Support.V14.Preference
 
 		}
 
-		public override void OnAttach(Activity activity)
+		public override void OnAttach(Context context)
 		{
-			AttachCalled.Raise(this, activity);
-			base.OnAttach(activity);
+			AttachCalled.Raise(this, context);
+			base.OnAttach(context);
 		}
 
 		public override void OnCreate(Bundle savedInstanceState)

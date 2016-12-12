@@ -58,9 +58,24 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         public override void OnAttach(Context context)
         {
-            AttachCalled.Raise(this, context);
+			if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+			{
+				AttachCalled.Raise(this, context);
+			}
+
             base.OnAttach(context);
         }
+
+		public override void OnAttach(Activity activity)
+		{
+			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+			{
+				AttachCalled.Raise(this, activity);
+			}
+
+			base.OnAttach(activity);
+		}
+
 
         public override void OnCreate(Bundle savedInstanceState)
         {
