@@ -242,3 +242,7 @@ DerivedData
 #CocoaPods
 Pods
 nuspec/nuget.exe
+
+# NuGet
+packages/
+repositories.config
