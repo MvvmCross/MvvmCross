@@ -128,6 +128,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
+      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.WindowsUWP.csproj">
+      <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
+      <Name>MvvmCross.WindowsUWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MasterDetailExample.Core\MasterDetailExample.Core.csproj">
       <Project>{74043e51-ef7b-4ce1-af3f-7612ed1d05b6}</Project>
       <Name>MasterDetailExample.Core</Name>
@@ -136,11 +152,11 @@
   <ItemGroup>
     <Reference Include="MvvmCross.Forms.Presenter.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\bin\MvvmCross.Forms.Presenter.Core.dll</HintPath>
+      <HintPath>..\..\..\..\MvvmCross-Forms\bin\Debug\Portable\MvvmCross.Forms.Presenter.Core.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Forms.Presenter.WindowsUWP, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\bin\Release\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.dll</HintPath>
+      <HintPath>..\..\..\..\MvvmCross-Forms\bin\Debug\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
