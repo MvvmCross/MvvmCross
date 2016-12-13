@@ -17,7 +17,13 @@ This package contains the 'Core' libraries for MvvmCross
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<group>
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+			</group>
+			<group targetFramework=".NETFramework4.5">
+				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="Expression.Blend.Sdk3" version="1.0.1340.1" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>		
