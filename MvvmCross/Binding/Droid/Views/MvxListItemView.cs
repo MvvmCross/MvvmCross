@@ -7,12 +7,13 @@
 
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
+	using System;
 
-    using Android.Content;
-    using Android.Runtime;
+	using Android.Content;
+	using Android.Runtime;
+	using Android.Views;
 
-    [Register("mvvmcross.binding.droid.views.MvxListItemView")]
+	[Register("mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView
         : MvxBaseListItemView
           , IMvxListItemView
@@ -20,11 +21,12 @@ namespace MvvmCross.Binding.Droid.Views
         public MvxListItemView(Context context,
                                IMvxLayoutInflaterHolder layoutInflaterHolder,
                                object dataContext,
+		                       ViewGroup parent,
                                int templateId)
-            : base(context, layoutInflaterHolder, dataContext)
+			: base(context, layoutInflaterHolder, dataContext, parent)
         {
             TemplateId = templateId;
-            AndroidBindingContext.BindingInflate(templateId, this);
+			AndroidBindingContext.BindingInflate(templateId, parent);
         }
 
         protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)

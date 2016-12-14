@@ -18,18 +18,20 @@ namespace MvvmCross.Binding.Droid.Views
     using MvvmCross.Binding.Droid.BindingContext;
 
     public abstract class MvxBaseListItemView
-        : FrameLayout
-        , IMvxBindingContextOwner
-        , ICheckable
+		: View, IMvxBindingContextOwner , View.IOnAttachStateChangeListener
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-        protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext)
-            : base(context)
-        {
-            this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
-        }
+		//Context Context;
 
+		protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, ViewGroup parent)
+			: base(context)
+		{
+			//this.Context = context;
+			this.ParentViewGroup = parent;
+			this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
+			this.ParentViewGroup.AddOnAttachStateChangeListener(this);
+		}
         protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
@@ -53,24 +55,22 @@ namespace MvvmCross.Binding.Droid.Views
         private object _cachedDataContext;
         private bool _isAttachedToWindow;
 
-        protected override void OnAttachedToWindow()
-        {
-            base.OnAttachedToWindow();
-            this._isAttachedToWindow = true;
-            if (this._cachedDataContext != null
-                && this.DataContext == null)
-            {
-                this.DataContext = this._cachedDataContext;
-            }
-        }
+		public void OnViewAttachedToWindow(View attachedView)
+		{
+		    this._isAttachedToWindow = true;
+		    if (this._cachedDataContext != null
+		        && this.DataContext == null)
+		    {
+		        this.DataContext = this._cachedDataContext;
+		    }
+		}
 
-        protected override void OnDetachedFromWindow()
-        {
-            this._cachedDataContext = this.DataContext;
-            this.DataContext = null;
-            base.OnDetachedFromWindow();
-            this._isAttachedToWindow = false;
-        }
+		public void OnViewDetachedFromWindow(View detachedView)
+		{
+		    this._cachedDataContext = this.DataContext;
+		    this.DataContext = null;
+		    this._isAttachedToWindow = false;
+		}
 
         protected override void Dispose(bool disposing)
         {
@@ -83,7 +83,7 @@ namespace MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-        protected View Content => this.FirstChild;
+		protected View Content => this.FirstChild;
 
         public object DataContext
         {
@@ -105,76 +105,16 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
+		public ViewGroup ParentViewGroup { get; set; }
+
         protected virtual View FirstChild
         {
             get
             {
-                if (this.ChildCount == 0)
+                if (ParentViewGroup.ChildCount == 0)
                     return null;
-                var firstChild = this.GetChildAt(0);
+                var firstChild = ParentViewGroup.GetChildAt(0);
                 return firstChild;
-            }
-        }
-
-        protected virtual ICheckable ContentCheckable
-        {
-            get
-            {
-                var firstChild = this.FirstChild;
-                return firstChild as ICheckable;
-            }
-        }
-
-        public virtual void Toggle()
-        {
-            var contentCheckable = this.ContentCheckable;
-            if (contentCheckable == null)
-            {
-                this._checked = !this._checked;
-                return;
-            }
-
-            contentCheckable.Toggle();
-        }
-
-        private bool _checked;
-
-        public virtual bool Checked
-        {
-            get
-            {
-                var contentCheckable = this.ContentCheckable;
-                if (contentCheckable != null)
-                {
-                    return contentCheckable.Checked;
-                }
-
-                return this._checked;
-            }
-            set
-            {
-                this._checked = value;
-
-                var contentCheckable = this.ContentCheckable;
-                if (contentCheckable != null)
-                {
-                    contentCheckable.Checked = value;
-                    return;
-                }
-
-                // since we don't have genuinely checked content, then use FirstChild activation instead
-                // see https://github.com/MvvmCross/MvvmCross/issues/481
-                var firstChild = this.FirstChild;
-                if (firstChild == null)
-                    return;
-
-                if (this.Context.ApplicationInfo.TargetSdkVersion
-                    >= Android.OS.BuildVersionCodes.Honeycomb &&
-                    Android.OS.Build.VERSION.SdkInt
-                    >= Android.OS.BuildVersionCodes.Honeycomb)
-                {
-                    firstChild.Activated = value;
-                }
             }
         }
     }
