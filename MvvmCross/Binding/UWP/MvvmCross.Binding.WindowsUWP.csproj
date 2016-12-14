@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE025C02-196A-4BD7-9097-E4646F4033B7}</ProjectGuid>
+    <ProjectGuid>{637533EE-756B-4817-94B2-7C1E56132208}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Platform.Uwp</RootNamespace>
-    <AssemblyName>MvvmCross.Platform.Uwp</AssemblyName>
+    <RootNamespace>MvvmCross.Binding.WindowsUWP</RootNamespace>
+    <AssemblyName>MvvmCross.Binding.WindowsUWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -107,17 +107,42 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\MvxNativeValueConverter.cs" />
-    <Compile Include="Platform\MvxDesignTimeHelper.cs" />
-    <Compile Include="Platform\MvxPseudoAsyncExtensionMethods.cs" />
+    <Compile Include="Bi.n.d.cs" />
+    <Compile Include="Import.cs" />
+    <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="IMvxWindowsAssemblyCache.cs" />
+    <Compile Include="La.n.g.cs" />
+    <Compile Include="MvxBindingCreator.cs" />
+    <Compile Include="MvxDependencyPropertyExtensionMethods.cs" />
+    <Compile Include="MvxDesignTimeChecker.cs" />
+    <Compile Include="MvxWindowsAssemblyCache.cs" />
+    <Compile Include="MvxWindowsBindingBuilder.cs" />
+    <Compile Include="MvxWindowsBindingCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\MvvmCross.Platform.Uwp.rd.xml" />
+    <EmbeddedResource Include="Properties\MvvmCross.Binding.UWP.rd.xml" />
+    <Compile Include="MvxBinding\Target\MvxCollapsedTargetBinding.cs" />
+    <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />
+    <Compile Include="MvxBinding\Target\MvxVisibleTargetBinding.cs" />
+    <Compile Include="MvxBinding\MvxMvvmCrossBindingCreator.cs" />
+    <Compile Include="MvxBinding\MvxWindowsTargetBindingFactoryRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Platform\MvvmCross.Platform.csproj">
+    <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Platform\UWP\MvvmCross.Platform.WindowsUWP.csproj">
+      <Project>{ce025c02-196a-4bd7-9097-e4646f4033b7}</Project>
+      <Name>MvvmCross.Platform.WindowsUWP</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MvxBinding\" />
+    <Folder Include="MvxBinding\Target\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
