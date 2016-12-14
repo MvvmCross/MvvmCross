@@ -225,7 +225,7 @@ namespace MvvmCross.Binding.Droid.Views
 
             var source = GetRawItem(position);
 
-            return GetBindableView(convertView, source, templateId);
+			return GetBindableView(convertView, source, parent, templateId);
         }
 
         protected virtual View GetSimpleView(View convertView, object dataContext)
@@ -261,12 +261,12 @@ namespace MvvmCross.Binding.Droid.Views
             return view;
         }
 
-        protected virtual View GetBindableView(View convertView, object dataContext)
-        {
-            return GetBindableView(convertView, dataContext, ItemTemplateId);
-        }
+        //protected virtual View GetBindableView(View convertView, object dataContext)
+        //{
+        //    return GetBindableView(convertView, dataContext, ItemTemplateId);
+        //}
 
-        protected virtual View GetBindableView(View convertView, object dataContext, int templateId)
+        protected virtual View GetBindableView(View convertView, object dataContext, ViewGroup parent, int templateId)
         {
             if (templateId == 0)
             {
@@ -286,7 +286,7 @@ namespace MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-                viewToUse = CreateBindableView(dataContext, templateId);
+				viewToUse = CreateBindableView(dataContext, parent, templateId);
             }
             else
             {
@@ -301,9 +301,9 @@ namespace MvvmCross.Binding.Droid.Views
             viewToUse.DataContext = source;
         }
 
-        protected virtual IMvxListItemView CreateBindableView(object dataContext, int templateId)
+		protected virtual IMvxListItemView CreateBindableView(object dataContext, ViewGroup parent, int templateId)
         {
-            return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder, dataContext, templateId);
+			return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder, dataContext, parent, templateId);
         }
     }
 
