@@ -155,7 +155,7 @@
     </ProjectReference>
     <ProjectReference Include="..\PageRenderer.Core\PageRendererExample.Core.csproj">
       <Project>{8a421af2-ea6f-456b-8ea2-3a3ff8ac8b57}</Project>
-      <Name>PageRendererExample</Name>
+      <Name>PageRendererExample.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
