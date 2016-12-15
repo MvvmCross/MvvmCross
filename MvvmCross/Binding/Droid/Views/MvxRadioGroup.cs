@@ -54,8 +54,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
         {
-            var li = (args.Child as MvxListItemView);
-			var radioButton = li?.Content as RadioButton;
+            //var li = (args.Child as MvxListItemView);
+            var radioButton = args.Child as RadioButton;
             if (radioButton != null)
             {
                 // radio buttons require an id so that they get un-checked correctly
