@@ -81,7 +81,7 @@ namespace MvvmCross.Binding.Droid.Target
                     {
                         if (newValue.Equals(li.DataContext))
                         {
-                            var radioButton = li.ParentViewGroup.GetChildAt(0) as RadioButton;
+							var radioButton = li.Content as RadioButton;
                             if (radioButton != null)
                             {
                                 checkid = radioButton.Id;
