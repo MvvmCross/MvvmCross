@@ -19,6 +19,7 @@ namespace MvvmCross.Core.ViewModels
         : MvxMainThreadDispatchingObject
         , IMvxNotifyPropertyChanged
     {
+        private static readonly PropertyChangedEventArgs AllPropertiesChanged = new PropertyChangedEventArgs(string.Empty);
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
@@ -53,8 +54,7 @@ namespace MvvmCross.Core.ViewModels
 
         public virtual void RaiseAllPropertiesChanged()
         {
-            var changedArgs = new PropertyChangedEventArgs(string.Empty);
-            this.RaisePropertyChanged(changedArgs);
+            this.RaisePropertyChanged(AllPropertiesChanged);
         }
 
         public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
