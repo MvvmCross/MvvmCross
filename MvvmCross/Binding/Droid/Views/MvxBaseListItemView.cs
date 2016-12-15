@@ -22,15 +22,11 @@ namespace MvvmCross.Binding.Droid.Views
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-		//Context Context;
-
 		protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, ViewGroup parent)
 			: base(context)
 		{
-			//this.Context = context;
-			this.ParentViewGroup = parent;
 			this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
-			this.ParentViewGroup.AddOnAttachStateChangeListener(this);
+			this.Content.AddOnAttachStateChangeListener(this);
 		}
         protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -83,7 +79,7 @@ namespace MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-		protected View Content => this.FirstChild;
+		public View Content { get; set; }// => this.FirstChild;
 
         public object DataContext
         {
@@ -105,17 +101,15 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-		public ViewGroup ParentViewGroup { get; set; }
-
-        protected virtual View FirstChild
-        {
-            get
-            {
-                if (ParentViewGroup.ChildCount == 0)
-                    return null;
-                var firstChild = ParentViewGroup.GetChildAt(0);
-                return firstChild;
-            }
-        }
+        //protected virtual View FirstChild
+        //{
+        //    get
+        //    {
+        //        if (ParentViewGroup.ChildCount == 0)
+        //            return null;
+        //        var firstChild = ParentViewGroup.GetChildAt(0);
+        //        return firstChild;
+        //    }
+        //}
     }
 }

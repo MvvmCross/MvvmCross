@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Droid.Views
 			: base(context, layoutInflaterHolder, dataContext, parent)
         {
             TemplateId = templateId;
-			AndroidBindingContext.BindingInflate(templateId, parent);
+			Content = AndroidBindingContext.BindingInflate(templateId, parent, false);
         }
 
         protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)

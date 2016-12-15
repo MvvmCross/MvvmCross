@@ -293,7 +293,7 @@ namespace MvvmCross.Binding.Droid.Views
                 BindBindableView(dataContext, viewToUse);
             }
 
-            return viewToUse as View;
+			return viewToUse.Content;// as View;
         }
 
         protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
