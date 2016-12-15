@@ -64,22 +64,17 @@ namespace MvvmCross.Core.ViewModels
                 == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
 
-            var raiseAction = new Action(() =>
-                    {
-                        PropertyChanged?.Invoke(this, changedArgs);
-                    });
-
             if (this.ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
                 if (this.PropertyChanged == null)
                     return;
 
-                this.InvokeOnMainThread(raiseAction);
+                this.InvokeOnMainThread(() => PropertyChanged?.Invoke(this, changedArgs));
             }
             else
             {
-                raiseAction();
+                PropertyChanged?.Invoke(this, changedArgs);
             }
         }
 
