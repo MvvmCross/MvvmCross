@@ -32,7 +32,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (adapter == null)
                 return;
 
-            SetLayoutManager(new LinearLayoutManager(context));
+            if (base.GetLayoutManager() == null)
+                SetLayoutManager(new LinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
