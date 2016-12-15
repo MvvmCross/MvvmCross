@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Views
             var radionButton = (sender as RadioButton);
             if (radionButton != null)
             {
-                Check(radionButton.Id);
+                //Check(radionButton.Id);
             }
         }
 

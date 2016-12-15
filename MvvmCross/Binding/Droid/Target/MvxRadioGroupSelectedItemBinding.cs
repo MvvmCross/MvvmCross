@@ -7,6 +7,7 @@
 
 using System;
 using Android.Widget;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -47,11 +48,12 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
 
             object newValue = null;
+
             var r = radioGroup.FindViewById<RadioButton>(args.CheckedId);
-            var li = r?.Parent as MvxListItemView;
-            if (li != null)
+            //var li = r?.Parent as RadioGroup;// as MvxListItemView;
+            if (r != null)
             {
-                newValue = li.DataContext;
+                newValue = (r.Tag as MvxListItemView.ContextObject)?.BindingContext.DataContext; //li.DataContext;
             }
 
             bool changed = CheckValueChanged(newValue);

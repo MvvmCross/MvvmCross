@@ -11,6 +11,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Content;
     using Android.Runtime;
     using Android.Views;
+    using MvvmCross.Binding.Droid.BindingContext;
 
     [Register("mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView
@@ -26,6 +27,17 @@ namespace MvvmCross.Binding.Droid.Views
         {
             TemplateId = templateId;
 			Content = AndroidBindingContext.BindingInflate(templateId, parent, false);
+            Content.Tag = new ContextObject(AndroidBindingContext);
+        }
+
+        public class ContextObject : Java.Lang.Object
+        {
+            public ContextObject(IMvxAndroidBindingContext bindingContext)
+            {
+                this.BindingContext = bindingContext;
+            }
+
+            public IMvxAndroidBindingContext BindingContext { get; set; }
         }
 
         protected MvxListItemView(IntPtr javaReference, JniHandleOwnership transfer)
