@@ -1,4 +1,4 @@
-// MvxColorDesignTimeHelper.cs
+// MvxVisibilityDesignTimeHelper.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,23 +7,23 @@
 
 using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
-using MvvmCross.Platform.WindowsCommon.Platform;
+using MvvmCross.Platform.Uwp.Platform;
 
-namespace MvvmCross.Plugins.Color.WindowsCommon
+namespace MvvmCross.Plugins.Visibility.WindowsCommon
 {
-    public class MvxColorDesignTimeHelper
+    public class MvxVisibilityDesignTimeHelper
         : MvxDesignTimeHelper
     {
-        public MvxColorDesignTimeHelper()
+        public MvxVisibilityDesignTimeHelper()
         {
             if (!IsInDesignTool)
                 return;
 
-            if (Mvx.CanResolve<IMvxNativeColor>())
+            if (Mvx.CanResolve<IMvxNativeVisibility>())
                 return;
 
-            var forceLoaded = new Plugin();
-            forceLoaded.Load();
+            var forceVisibilityLoaded = new Plugin();
+            forceVisibilityLoaded.Load();
         }
     }
 }

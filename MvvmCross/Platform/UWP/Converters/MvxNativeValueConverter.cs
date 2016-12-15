@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.WindowsCommon.Converters
+namespace MvvmCross.Platform.Uwp.Converters
 {
     using System;
     using System.Globalization;

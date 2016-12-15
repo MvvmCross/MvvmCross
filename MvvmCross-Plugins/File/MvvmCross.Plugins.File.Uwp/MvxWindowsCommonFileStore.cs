@@ -7,7 +7,7 @@
 
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WindowsCommon.Platform;
+using MvvmCross.Platform.Uwp.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
