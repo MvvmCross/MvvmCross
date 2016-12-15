@@ -18,27 +18,21 @@ namespace MvvmCross.Binding.Droid.Views
     using MvvmCross.Binding.Droid.BindingContext;
 
     public abstract class MvxBaseListItemView
-		: View, IMvxBindingContextOwner , View.IOnAttachStateChangeListener
+        : View
+        , IMvxBindingContextOwner
+        , View.IOnAttachStateChangeListener
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
-		protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, ViewGroup parent)
-			: base(context)
-		{
-			this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
-			this.Content.AddOnAttachStateChangeListener(this);
-		}
+        protected MvxBaseListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, ViewGroup parent)
+            : base(context)
+        {
+            this._bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
+        }
         protected MvxBaseListItemView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
-
-        /*
-        protected override ViewGroup.LayoutParams GenerateDefaultLayoutParams()
-        {
-            return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FillParent, FrameLayout.LayoutParams.WrapContent);
-        }
-        */
 
         protected IMvxAndroidBindingContext AndroidBindingContext => this._bindingContext;
 
@@ -51,22 +45,22 @@ namespace MvvmCross.Binding.Droid.Views
         private object _cachedDataContext;
         private bool _isAttachedToWindow;
 
-		public void OnViewAttachedToWindow(View attachedView)
-		{
-		    this._isAttachedToWindow = true;
-		    if (this._cachedDataContext != null
-		        && this.DataContext == null)
-		    {
-		        this.DataContext = this._cachedDataContext;
-		    }
-		}
+        public void OnViewAttachedToWindow(View attachedView)
+        {
+            this._isAttachedToWindow = true;
+            if (this._cachedDataContext != null
+                && this.DataContext == null)
+            {
+                this.DataContext = this._cachedDataContext;
+            }
+        }
 
-		public void OnViewDetachedFromWindow(View detachedView)
-		{
-		    this._cachedDataContext = this.DataContext;
-		    this.DataContext = null;
-		    this._isAttachedToWindow = false;
-		}
+        public void OnViewDetachedFromWindow(View detachedView)
+        {
+            this._cachedDataContext = this.DataContext;
+            this.DataContext = null;
+            this._isAttachedToWindow = false;
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -79,7 +73,15 @@ namespace MvvmCross.Binding.Droid.Views
             base.Dispose(disposing);
         }
 
-		public View Content { get; set; }// => this.FirstChild;
+        private View _content;
+
+        public View Content { 
+            get { return _content; } 
+            set { 
+                _content = value;
+                _content.AddOnAttachStateChangeListener(this);
+            }
+        }
 
         public object DataContext
         {
@@ -100,16 +102,5 @@ namespace MvvmCross.Binding.Droid.Views
                 }
             }
         }
-
-        //protected virtual View FirstChild
-        //{
-        //    get
-        //    {
-        //        if (ParentViewGroup.ChildCount == 0)
-        //            return null;
-        //        var firstChild = ParentViewGroup.GetChildAt(0);
-        //        return firstChild;
-        //    }
-        //}
     }
 }
