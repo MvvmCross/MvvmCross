@@ -45,10 +45,6 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MvvmCross.Plugins.ReflectionEx\HackShare\MvxReflectionEx.cs">
-      <Link>MvxReflectionEx.cs</Link>
-    </Compile>
-    <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +64,6 @@
       <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\portable-win81+wpa81\MvvmCross.WindowsCommon.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

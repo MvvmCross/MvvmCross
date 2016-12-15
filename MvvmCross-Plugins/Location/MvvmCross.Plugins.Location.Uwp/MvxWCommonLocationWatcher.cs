@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.WindowsCommon.Platform;
+using MvvmCross.Platform.Uwp.Platform;
 using System;
 using Windows.Devices.Geolocation;
 
