@@ -21,12 +21,12 @@ namespace MvvmCross.Binding.Droid.Views
         public MvxListItemView(Context context,
                                IMvxLayoutInflaterHolder layoutInflaterHolder,
                                object dataContext,
-		                       ViewGroup parent,
+                               ViewGroup parent,
                                int templateId)
-			: base(context, layoutInflaterHolder, dataContext, parent)
+            : base(context, layoutInflaterHolder, dataContext, parent)
         {
             TemplateId = templateId;
-			Content = AndroidBindingContext.BindingInflate(templateId, parent, false);
+            Content = AndroidBindingContext.BindingInflate(templateId, parent, false);
             Content.Tag = new ContextObject(AndroidBindingContext);
         }
 
