@@ -72,9 +72,9 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected Context Context { get; }
 
-	    protected IMvxAndroidBindingContext BindingContext { get; }
+        protected IMvxAndroidBindingContext BindingContext { get; }
 
-	    public int SimpleViewLayoutId { get; set; }
+        public int SimpleViewLayoutId { get; set; }
 
         public int SimpleDropDownViewLayoutId { get; set; }
 
@@ -286,14 +286,14 @@ namespace MvvmCross.Binding.Droid.Views
 
             if (viewToUse == null)
             {
-				viewToUse = CreateBindableView(dataContext, parent, templateId);
+                viewToUse = CreateBindableView(dataContext, parent, templateId);
             }
             else
             {
                 BindBindableView(dataContext, viewToUse);
             }
 
-			return viewToUse.Content;// as View;
+            return viewToUse.Content;// as View;
         }
 
         protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
@@ -301,9 +301,9 @@ namespace MvvmCross.Binding.Droid.Views
             viewToUse.DataContext = source;
         }
 
-		protected virtual IMvxListItemView CreateBindableView(object dataContext, ViewGroup parent, int templateId)
+        protected virtual IMvxListItemView CreateBindableView(object dataContext, ViewGroup parent, int templateId)
         {
-			return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder, dataContext, parent, templateId);
+            return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder, dataContext, parent, templateId);
         }
     }
 
