@@ -50,12 +50,10 @@ namespace MvvmCross.Binding.Droid.Target
             object newValue = null;
 
             var r = radioGroup.FindViewById<RadioButton>(args.CheckedId);
-
             if (r != null)
             {
                 var index = radioGroup.IndexOfChild(r);
                 newValue = radioGroup.Adapter.GetRawItem(index);
-                //newValue = (r.Tag as MvxListItemView.ContextObject)?.BindingContext.DataContext; //li.DataContext;
             }
 
             bool changed = CheckValueChanged(newValue);
@@ -80,12 +78,13 @@ namespace MvvmCross.Binding.Droid.Target
             {
                 for (int i = 0; i < radioGroup.ChildCount; i++)
                 {
-                    var li = radioGroup.GetChildAt(i) as MvxListItemView;
+                    var li = radioGroup.GetChildAt(i);
+                    var data = radioGroup.Adapter.GetRawItem(i);
                     if (li != null)
                     {
-                        if (newValue.Equals(li.DataContext))
+                        if (newValue.Equals(data))
                         {
-							var radioButton = li.Content as RadioButton;
+							var radioButton = li as RadioButton;
                             if (radioButton != null)
                             {
                                 checkid = radioButton.Id;
