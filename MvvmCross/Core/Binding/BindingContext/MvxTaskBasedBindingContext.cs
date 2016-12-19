@@ -94,6 +94,9 @@ namespace MvvmCross.Binding.BindingContext
             get { return this._dataContext; }
             set
             {
+                if (this._dataContext == value)
+                    return;
+
                 this._dataContext = value;
                 this.OnDataContextChange();
                 DataContextChanged?.Invoke(this, EventArgs.Empty);
