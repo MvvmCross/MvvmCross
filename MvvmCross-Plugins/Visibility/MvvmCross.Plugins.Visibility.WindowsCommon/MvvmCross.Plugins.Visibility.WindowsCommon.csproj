@@ -38,9 +38,6 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxVisibilityDesignTimeHelper.cs" />
-    <Compile Include="MvxWinRTVisibility.cs" />
-    <Compile Include="PlugIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
