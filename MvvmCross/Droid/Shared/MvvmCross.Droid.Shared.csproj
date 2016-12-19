@@ -56,6 +56,7 @@
     <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\IMvxFragmentView.cs" />
+    <Compile Include="Fragments\MvxSharedFragmentExtensions.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="Presenter\FragmentHostRegistrationSettings.cs" />
