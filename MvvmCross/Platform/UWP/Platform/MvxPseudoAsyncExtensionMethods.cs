@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Platform.WindowsCommon.Platform
+namespace MvvmCross.Platform.Uwp.Platform
 {
     using System;
 

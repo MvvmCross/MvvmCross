@@ -49,8 +49,6 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxWindowsCommonFileStore.cs" />
-    <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

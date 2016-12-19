@@ -109,15 +109,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MvvmCross.Plugins.PictureChooser.WindowsStore\MvxInMemoryImageValueConverter.cs">
-      <Link>MvxInMemoryImageValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\MvvmCross.Plugins.PictureChooser.WindowsStore\MvxPictureChooserTask.cs">
-      <Link>MvxPictureChooserTask.cs</Link>
-    </Compile>
-    <Compile Include="..\MvvmCross.Plugins.PictureChooser.WindowsStore\Plugin.cs">
-      <Link>Plugin.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Plugins.PictureChooser.WindowsUWP.rd.xml" />
   </ItemGroup>

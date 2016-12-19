@@ -128,6 +128,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.WindowsUWP\MvvmCross.Forms.Presenter.Uwp.csproj">
+      <Project>{8583f087-0543-4d27-8f11-f7d8dc1480e2}</Project>
+      <Name>MvvmCross.Forms.Presenter.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
@@ -140,9 +144,9 @@
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.WindowsUWP.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.Uwp.csproj">
       <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
-      <Name>MvvmCross.WindowsUWP</Name>
+      <Name>MvvmCross.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\MasterDetailExample.Core\MasterDetailExample.Core.csproj">
       <Project>{74043e51-ef7b-4ce1-af3f-7612ed1d05b6}</Project>
@@ -153,10 +157,6 @@
     <Reference Include="MvvmCross.Forms.Presenter.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\MvvmCross-Forms\bin\Debug\Portable\MvvmCross.Forms.Presenter.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmCross.Forms.Presenter.WindowsUWP, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\MvvmCross-Forms\bin\Debug\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
