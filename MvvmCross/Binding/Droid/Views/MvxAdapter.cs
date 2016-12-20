@@ -275,7 +275,7 @@ namespace MvvmCross.Binding.Droid.Views
             }
 
             // we have a templateid so lets use bind and inflate on it :)
-            var viewToUse = convertView as IMvxListItemView;
+            var viewToUse = convertView?.Tag as IMvxListItemView;
             if (viewToUse != null)
             {
                 if (viewToUse.TemplateId != templateId)
@@ -287,6 +287,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (viewToUse == null)
             {
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
+                viewToUse.Content.Tag = viewToUse as Java.Lang.Object;
             }
             else
             {
