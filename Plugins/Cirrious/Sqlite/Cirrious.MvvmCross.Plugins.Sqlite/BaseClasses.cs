@@ -164,13 +164,21 @@ namespace Cirrious.MvvmCross.Plugins.Sqlite
 
         int Insert(object obj, string extra, Type objType);
 
+        int InsertOrReplace(object obj);
+
+        int InsertOrReplace(object obj, Type objType);
+
         int Update(object obj);
 
         int Update(object obj, Type objType);
 
+        int UpdateAll(System.Collections.IEnumerable objects, bool beginTransaction = true);
+
         int Delete(object objectToDelete);
 
         int Delete<T>(object primaryKey);
+
+        int DeleteAll<T>();
 
         void Close();
     }
