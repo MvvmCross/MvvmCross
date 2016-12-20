@@ -132,9 +132,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected override void Dispose(bool disposing)
         {
+            // Clean up the binding context since nothing
+            // explicitly Disposes of the ViewHolder.
+            _bindingContext?.ClearAllBindings();
+
             if (disposing)
             {
-                _bindingContext.ClearAllBindings();
                 _cachedDataContext = null;
 
                 if (ItemView != null)
