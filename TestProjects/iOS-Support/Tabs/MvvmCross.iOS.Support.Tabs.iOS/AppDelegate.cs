@@ -1,9 +1,8 @@
 ﻿using Foundation;
-using UIKit;
-using MvvmCross.iOS.Support.Presenters;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.Tabs.iOS
 {
@@ -14,8 +13,6 @@ namespace MvvmCross.iOS.Support.Tabs.iOS
 	{
 		public override UIWindow Window { get; set; }
 
-		public MvxTabsViewPresenter Presenter { get; set; }
-
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			// Override point for customization after application launch.
@@ -24,7 +21,7 @@ namespace MvvmCross.iOS.Support.Tabs.iOS
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 			Window.BackgroundColor = UIColor.White;
 
-			var setup = new Setup(this, this.Presenter);
+			var setup = new Setup(this, Window);
 			setup.Initialize();
 
 			Mvx.Resolve<IMvxAppStart>().Start();
