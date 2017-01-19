@@ -1,8 +1,11 @@
 using MvvmCross.Core.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Example.Core.Model;
 
 namespace Example.Core.ViewModels
 {
@@ -14,11 +17,33 @@ namespace Example.Core.ViewModels
         public ExampleRecyclerViewModel()
         {
             Items = new ObservableCollection<ListItem> {
-                new ListItem { Title = "title one" },
-                new ListItem { Title = "title two" },
-                new ListItem { Title = "title three" },
-                new ListItem { Title = "title four" },
-                new ListItem { Title = "title five" }
+                new ListItem { Title = "title one", Name = "1"},
+                new ListItem { Title = "title one 2", Name = "1"},
+                new ListItem { Title = "title one 3", Name = "1"},
+                new ListItem { Title = "title one 4", Name = "1"},
+                new ListItem { Title = "title one 5", Name = "1"},
+
+                new ListItem { Title = "title two", Name = "2"},
+                new ListItem { Title = "title two 2", Name = "2"},
+                new ListItem { Title = "title two 3", Name = "2"},
+                new ListItem { Title = "title two 4", Name = "2"},
+                new ListItem { Title = "title two 5", Name = "2"},
+
+                new ListItem { Title = "title three", Name = "3" },
+                new ListItem { Title = "title three 2", Name = "3" },
+                new ListItem { Title = "title three 3", Name = "3" },
+                new ListItem { Title = "title three 4", Name = "3" },
+                new ListItem { Title = "title three 5", Name = "3" },
+
+                new ListItem { Title = "title four ", Name = "4"},
+                new ListItem { Title = "title four 1", Name = "4"},
+                new ListItem { Title = "title four 2", Name = "4"},
+                new ListItem { Title = "title four 3", Name = "4"},
+                new ListItem { Title = "title four 4", Name = "4"},
+
+                new ListItem { Title = "title five", Name = "MvvmCross Awesome ObservableCollectionGrouping"},
+                new ListItem { Title = "title five 2", Name = "MvvmCross Awesome ObservableCollectionGrouping"},
+                new ListItem { Title = "title five 3", Name = "MvvmCross Awesome ObservableCollectionGrouping"}
             };
         }
 
@@ -31,6 +56,16 @@ namespace Example.Core.ViewModels
             {
                 _items = value;
                 RaisePropertyChanged(() => Items);
+                RaisePropertyChanged(() => GroupedItems);
+            }
+        }
+
+        public IEnumerable<IGrouping<string, ListItem>> GroupedItems
+        {
+            get
+            {
+                var groupedItems = Items.GroupBy(x => x.Name, x => x);
+                return groupedItems;
             }
         }
 

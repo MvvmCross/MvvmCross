@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26009.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{CFC09D0C-4B82-4F63-8445-F58C3562EFE7}"
 EndProject
@@ -681,20 +681,34 @@ Global
 		{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}.Release|x64.Build.0 = Release|Any CPU
 		{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}.Release|x86.ActiveCfg = Release|Any CPU
 		{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}.Release|x86.Build.0 = Release|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|ARM.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Mixed Platforms.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x64.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x86.ActiveCfg = Ad-Hoc|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Any CPU.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|ARM.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhone.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Mixed Platforms.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x64.ActiveCfg = AppStore|Any CPU
-		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x86.ActiveCfg = AppStore|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x64.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Ad-Hoc|x86.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|ARM.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|ARM.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x64.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x64.Build.0 = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.AppStore|x86.Build.0 = Release|Any CPU
 		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D891C51D-4E60-41C6-8F0D-57284CED94F4}.Debug|ARM.ActiveCfg = Debug|Any CPU
