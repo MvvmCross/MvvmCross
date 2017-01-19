@@ -1,34 +1,31 @@
-// MvxAppCompatRadioGroupSelectedItemBinding.cs
+// MvxRadioGroupSelectedItemBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Support.V7.Widget;
+using Android.Widget;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-
-    using Android.Support.V7.Widget;
-    using Android.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-
-    public class MvxAppCompatRadioGroupSelectedItemBinding : MvxAndroidTargetBinding
+    public class MvxAppCompatRadioGroupSelectedItemBinding
+        : MvxAndroidTargetBinding
     {
-        private IDisposable _subscription;
         private object _currentValue;
+        private IDisposable _subscription;
 
         public MvxAppCompatRadioGroupSelectedItemBinding(MvxAppCompatRadioGroup radioGroup)
             : base(radioGroup)
         {
-            _subscription = radioGroup.WeakSubscribe<MvxAppCompatRadioGroup, RadioGroup.CheckedChangeEventArgs>(
-                nameof(radioGroup.CheckedChange), 
+            _subscription = radioGroup.WeakSubscribe<RadioGroup, RadioGroup.CheckedChangeEventArgs>(
+                nameof(RadioGroup.CheckedChange),
                 RadioGroupCheckedChanged);
         }
 
@@ -37,33 +34,35 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (this._currentValue != null);
+                changed = _currentValue != null;
             }
             else
             {
-                changed = !(newValue.Equals(this._currentValue));
+                changed = !newValue.Equals(_currentValue);
             }
             return changed;
         }
 
         private void RadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs args)
         {
-            var radioGroup = (MvxAppCompatRadioGroup)this.Target;
-            if (radioGroup == null) { return; }
+            var radioGroup = (MvxAppCompatRadioGroup)Target;
+            if (radioGroup == null)
+                return;
 
             object newValue = null;
+
             var r = radioGroup.FindViewById<AppCompatRadioButton>(args.CheckedId);
-            var li = r?.Parent as MvxListItemView;
-            if (li != null)
+            if (r != null)
             {
-                newValue = li.DataContext;
+                var index = radioGroup.IndexOfChild(r);
+                newValue = radioGroup.Adapter.GetRawItem(index);
             }
 
-            bool changed = this.CheckValueChanged(newValue);
+            bool changed = CheckValueChanged(newValue);
             if (!changed) { return; }
 
-            this._currentValue = newValue;
-            this.FireValueChanged(newValue);
+            _currentValue = newValue;
+            FireValueChanged(newValue);
         }
 
         protected override void SetValueImpl(object target, object newValue)
@@ -71,7 +70,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             var radioGroup = (MvxAppCompatRadioGroup)target;
             if (radioGroup == null) { return; }
 
-            bool changed = this.CheckValueChanged(newValue);
+            bool changed = CheckValueChanged(newValue);
             if (!changed) { return; }
 
             int checkid = Android.Views.View.NoId;
@@ -81,12 +80,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             {
                 for (int i = 0; i < radioGroup.ChildCount; i++)
                 {
-                    var li = radioGroup.GetChildAt(i) as MvxListItemView;
+                    var li = radioGroup.GetChildAt(i);
+                    var data = radioGroup.Adapter.GetRawItem(i);
                     if (li != null)
                     {
-                        if (newValue.Equals(li.DataContext))
+                        if (newValue.Equals(data))
                         {
-                            var radioButton = li.GetChildAt(0) as AppCompatRadioButton;
+                            var radioButton = li as AppCompatRadioButton;
                             if (radioButton != null)
                             {
                                 checkid = radioButton.Id;
