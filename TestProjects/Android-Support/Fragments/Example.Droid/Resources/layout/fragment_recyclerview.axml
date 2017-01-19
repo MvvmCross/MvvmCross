@@ -27,5 +27,5 @@
         local:elevation="4dp"
         local:backgroundTint="@color/colorPrimary"
         local:rippleColor="@color/colorPrimaryDark"
-        local:layout_behavior="@string/fab_scroll_translation_autohide_behavior" />
+        local:layout_behavior="@string/view_scroll_translation_autohide_behavior" />
 </android.support.design.widget.CoordinatorLayout>
