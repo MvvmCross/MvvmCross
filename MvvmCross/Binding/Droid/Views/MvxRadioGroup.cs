@@ -56,13 +56,11 @@ namespace MvvmCross.Binding.Droid.Views
         {
             //var li = (args.Child as MvxListItemView);
             var radioButton = args.Child as RadioButton;
-            if (radioButton != null)
+            
+            // radio buttons require an id so that they get un-checked correctly
+            if (radioButton?.Id == NoId)
             {
-                // radio buttons require an id so that they get un-checked correctly
-                if (radioButton.Id == NoId)
-                {
-                    radioButton.Id = GenerateViewId();
-                }
+                radioButton.Id = GenerateViewId();
             }
         }
 
