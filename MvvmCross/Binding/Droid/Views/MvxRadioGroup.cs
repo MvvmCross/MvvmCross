@@ -54,8 +54,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
         {
-            var li = (args.Child as MvxListItemView);
-            var radioButton = li?.GetChildAt(0) as RadioButton;
+            //var li = (args.Child as MvxListItemView);
+            var radioButton = args.Child as RadioButton;
             if (radioButton != null)
             {
                 // radio buttons require an id so that they get un-checked correctly
@@ -63,16 +63,6 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     radioButton.Id = GenerateViewId();
                 }
-                radioButton.CheckedChange += OnRadioButtonCheckedChange;
-            }
-        }
-
-        private void OnRadioButtonCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
-        {
-            var radionButton = (sender as RadioButton);
-            if (radionButton != null)
-            {
-                Check(radionButton.Id);
             }
         }
 
@@ -167,14 +157,6 @@ namespace MvvmCross.Binding.Droid.Views
 
                 ChildViewAdded -= OnChildViewAdded;
                 ChildViewRemoved -= OnChildViewRemoved;
-
-                var childCount = ChildCount;
-                for (var i = 0; i < childCount; i++)
-                {
-                    var child = GetChildAt(i) as RadioButton;
-                    if (child != null)
-                        child.CheckedChange -= OnRadioButtonCheckedChange;
-                }
             }
 
             base.Dispose(disposing);
