@@ -18,7 +18,8 @@
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +90,7 @@
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="Common\TemplateSelectors\MultiItemTemplateModelTemplateSelector.cs" />
+    <Compile Include="Converters\ListItemGroupDataConverter.cs" />
     <Compile Include="Fragments\MessageComposeFragment.cs" />
     <Compile Include="Fragments\BaseStateFragment.cs" />
     <Compile Include="Fragments\ExampleViewPagerStateFragment.cs" />
@@ -144,6 +146,12 @@
     <AndroidResource Include="Resources\layout\fragment_recyclerview_multiitemtemplate.axml" />
     <AndroidResource Include="Resources\layout\listitem_recyclerviewmultiitem_descriptiontemplate.axml" />
     <AndroidResource Include="Resources\layout\listitem_recyclerviewmultiitem_titletemplate.axml" />
+    <AndroidResource Include="Resources\layout\recyclerviewexample_header.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\listitem_recyclerviewexample_groupheader.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -163,8 +171,12 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_navigation_header.axml" />
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
-    <AndroidResource Include="Resources\layout\fragment_recyclerview.axml" />
-    <AndroidResource Include="Resources\layout\listitem_recyclerviewexample.axml" />
+    <AndroidResource Include="Resources\layout\fragment_recyclerview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\listitem_recyclerviewexample.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
@@ -420,6 +432,9 @@
       <Project>{36228B32-A08B-477B-9320-EC5EA5DF05A3}</Project>
       <Name>MvvmCross.Plugins.Visibility.Droid</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerviewexample_footer.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\..\..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\..\..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

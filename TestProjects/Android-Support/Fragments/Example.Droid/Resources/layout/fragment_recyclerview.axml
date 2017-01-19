@@ -15,6 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
+            local:MvxHeaderLayoutId="@layout/recyclerviewexample_header"
+            local:MvxFooterLayoutId="@layout/recyclerviewexample_footer"
+            local:MvxHidesHeaderIfEmpty="true"
+            local:MvxHidesFooterIfEmpty="true"
             local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
     </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
     <android.support.design.widget.FloatingActionButton
