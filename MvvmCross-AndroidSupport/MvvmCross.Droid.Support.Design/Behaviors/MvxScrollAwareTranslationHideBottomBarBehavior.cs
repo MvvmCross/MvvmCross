@@ -10,23 +10,23 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
-    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareTranslationHideFABBehavior")]
-    public class MvxScrollAwareTranslationHideFABBehavior : CoordinatorLayout.Behavior
+    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
+    public class MvxScrollAwareTranslationHideBottomBarBehavior : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;
-        private bool isFabVisible = true;
+        private bool isBottomBarVisible = true;
         private float scrolledDistance;
 
-        public MvxScrollAwareTranslationHideFABBehavior(IntPtr handle, JniHandleOwnership ownership)
+        public MvxScrollAwareTranslationHideBottomBarBehavior(IntPtr handle, JniHandleOwnership ownership)
             : base(handle, ownership)
         {
         }
 
-        public MvxScrollAwareTranslationHideFABBehavior()
+        public MvxScrollAwareTranslationHideBottomBarBehavior()
         {
         }
 
-        public MvxScrollAwareTranslationHideFABBehavior(Context context, IAttributeSet attributeSet)
+        public MvxScrollAwareTranslationHideBottomBarBehavior(Context context, IAttributeSet attributeSet)
         {
         }
 
@@ -42,25 +42,25 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
         {
             base.OnNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 
-            var floatingActionButtonChild = child.JavaCast<FloatingActionButton>();
+            var viewChild = child.JavaCast<View>();
 
-            if (!floatingActionButtonChild.Enabled)
+            if (!viewChild.Enabled)
                 return;
 
-            if (isFabVisible && scrolledDistance >= MinimalScrollDistance)
+            if (isBottomBarVisible && scrolledDistance >= MinimalScrollDistance)
             {
-                floatingActionButtonChild.HideWithTranslateAnimation();
+                viewChild.HideWithTranslateAnimation();
                 scrolledDistance = 0;
-                isFabVisible = false;
+                isBottomBarVisible = false;
             }
-            else if (!isFabVisible && scrolledDistance <= -MinimalScrollDistance)
+            else if (!isBottomBarVisible && scrolledDistance <= -MinimalScrollDistance)
             {
-                floatingActionButtonChild.ShowWithTranslateAnimation();
+                viewChild.ShowWithTranslateAnimation();
                 scrolledDistance = 0;
-                isFabVisible = true;
+                isBottomBarVisible = true;
             }
 
-            if ((isFabVisible && dyConsumed >= 0) || (!isFabVisible && dyConsumed <= 0))
+            if ((isBottomBarVisible && dyConsumed >= 0) || (!isBottomBarVisible && dyConsumed <= 0))
                 scrolledDistance += dyConsumed;
         }
     }
