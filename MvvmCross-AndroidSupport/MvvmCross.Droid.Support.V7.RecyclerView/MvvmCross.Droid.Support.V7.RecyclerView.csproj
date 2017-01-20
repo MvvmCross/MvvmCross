@@ -14,7 +14,8 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,9 +55,11 @@
   <ItemGroup>
     <Compile Include="AttributeHelpers\MvxRecyclerViewAttributeExtensions.cs" />
     <Compile Include="IMvxRecyclerAdapter.cs" />
+    <Compile Include="IMvxRecyclerAdapterBindableHolder.cs" />
     <Compile Include="IMvxRecyclerViewHolder.cs" />
     <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
+    <Compile Include="Model\MvxViewHolderBindedEventArgs.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
     <Compile Include="MvxRecyclerView.cs" />
     <Compile Include="MvxRecyclerViewHolder.cs" />

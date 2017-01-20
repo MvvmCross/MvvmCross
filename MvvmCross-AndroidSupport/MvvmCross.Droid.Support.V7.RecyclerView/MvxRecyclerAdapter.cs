@@ -20,6 +20,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -27,6 +28,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     public class MvxRecyclerAdapter 
         : Android.Support.V7.Widget.RecyclerView.Adapter
         , IMvxRecyclerAdapter
+        , IMvxRecyclerAdapterBindableHolder
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
@@ -160,7 +162,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((IMvxRecyclerViewHolder)holder).DataContext = GetItem(position);
+            var dataContext = GetItem(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            OnMvxViewHolderBinded(new MvxViewHolderBindedEventArgs(position, dataContext, holder));
         }
 
         public override int ItemCount => _itemsSource.Count();
@@ -239,6 +243,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
             }
+        }
+
+        public event Action<MvxViewHolderBindedEventArgs> MvxViewHolderBinded;
+
+        protected virtual void OnMvxViewHolderBinded(MvxViewHolderBindedEventArgs obj)
+        {
+            MvxViewHolderBinded?.Invoke(obj);
         }
     }
 }
