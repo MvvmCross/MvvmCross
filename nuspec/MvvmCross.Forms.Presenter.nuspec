@@ -2,49 +2,35 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Forms.Presenter</id>
-		<version>4.4.0</version>
-		<title>MvvmCross FormsPresenters</title>
-		<authors>Tomasz Cielecki, Marcos Cobeña Morián, Peter Burke</authors>
-		<owners>Tomasz Cielecki</owners>
-		<licenseUrl>https://github.com/MvvmCross/MvvmCross-Forms/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Forms</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<version>$version$</version>
+		<title>MvvmCross Forms Presenters</title>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains Presenters for MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp formspresenters presenters</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="win">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="wpa">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 			<group targetFramework="uap">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
 				<dependency id="Xamarin.Forms" version="2.3.3.180" />
 			</group>
 		</dependencies>
@@ -55,15 +41,6 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
-
-		<!-- win81 -->
-		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\win81" />
-		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-win81+wpa81" />
-
-		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\win81" />
-		<file src="..\bin\Release\Windows81\MvvmCross.Forms.Presenter.Windows81.*" target="lib\portable-win81+wpa81" />
 
 		<!-- uap -->
 		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\uap" />
@@ -79,8 +56,6 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<!-- touch -->
 		<file src="..\bin\Release\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\iOS\MvvmCross.Forms.Presenter.iOS.*" target="lib\Xamarin.iOS10" />
-
-		<!-- Source Code For Debugging -->
-		<file src="..\MvvmCross.Forms.Presenter.*\**\*.cs" target="src" />
 	</files>
 </package>
+
