@@ -2,37 +2,17 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Location</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - Location Plugin</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'Location' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>		
-		<!-- Common -->
-		<file src="..\Location\MvvmCross.Plugins.Location\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location" />
-		<file src="..\Location\MvvmCross.Plugins.Location.Wpf\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.Wpf" />
-		<file src="..\Location\MvvmCross.Plugins.Location.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.WindowsStore" />
-		<file src="..\Location\MvvmCross.Plugins.Location.WindowsCommon\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.WindowsCommon" />
-		<file src="..\Location\MvvmCross.Plugins.Location.Droid\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.Droid" />
-		<file src="..\Location\MvvmCross.Plugins.Location.iOS\**\*.cs" 
-			target="src\MvvmCross.Plugins.Location.iOS" />
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\portable-net45+win+wpa81+wp80" />
 
@@ -44,22 +24,10 @@ This package contains the 'Location' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Location.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\net45\Bootstrap\LocationPluginBootstrap.cs.pp" />
 
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Location.WindowsStore.*" target="lib\netcore45" />
-		<file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\LocationPluginBootstrap.cs.pp" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Location.WindowsCommon.*" target="lib\win81" />
-		<file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\win81\Bootstrap\LocationPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Location.WindowsCommon.*" target="lib\wpa81" />
-		<file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\LocationPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Location.WindowsCommon.*" target="lib\portable-win81+wpa81" />
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.Location.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\LocationPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\LocationPluginBootstrap.cs.pp" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\MonoAndroid" />
@@ -73,22 +41,5 @@ This package contains the 'Location' plugin for MvvmCross</description>
 		
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\Xamarin.Mac20" />
-
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

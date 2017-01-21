@@ -1,0 +1,19 @@
+version: 1.0.{build}
+image: Visual Studio 2017 RC
+environment:
+  ANDROID_HOME: "C:\\android-sdk-windows"
+init:
+- cd \
+- appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
+- 7z x android-sdk_r24.4.1-windows.zip > nul
+- cd "C:\projects\MvvmCross"
+install: 
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t android-24
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
+- echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
+build_script:
+- ps: .\build.ps1
+test: off
