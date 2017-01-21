@@ -9,30 +9,8 @@
 This package contains Presenters for MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp formspresenters presenters</tags>
 		<dependencies>
-			<group targetFramework="net">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="MonoAndroid">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="portable-net45+win8+wpa81+wp8">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="uap">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
-			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.180" />
-			</group>
+			<dependency id="MvvmCross.Core" version="[$version$]" />
+			<dependency id="Xamarin.Forms" version="2.3.3.180" />
 		</dependencies>
 	</metadata>
 	<files>   
@@ -43,11 +21,10 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
 
 		<!-- uap -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Forms.Presenter.WindowsUWP\Properties\MvvmCross.Forms.Presenter.WindowsUWP.rd.xml" target="lib\uap\MvvmCross.Forms.Presenter.WindowsUWP\Properties" />
-
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Presenter.Uwp.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Presenter.Uwp\Properties\MvvmCross.Forms.Presenter.Uwp.rd.xml" 
+			target="lib\uap10.0\MvvmCross.Forms.Presenter.Uwp\Properties" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid403" />
