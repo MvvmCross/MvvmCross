@@ -2,21 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.iOS.Support.XamarinSidebar</id>
-		<version>4.4.1-pre1</version>
+		<version>$version$</version>
 		<title>MvvmCross iOS Support - XamarinSidebar</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the iOS Support libraries for MvvmCross.</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS">
-				<dependency id="MvvmCross.iOS.Support" version="4.4.1-pre1" />
+				<dependency id="MvvmCross.iOS.Support" version="[$version$]" />
 				<dependency id="SidebarNavigation" version="1.9.1" />
 			</group>
 		</dependencies>
@@ -26,6 +20,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.Support.XamarinSidebar.pdb" target="lib\Xamarin.iOS10" />
 	</files>
 </package>
+
 
 
 

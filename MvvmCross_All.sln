@@ -117,7 +117,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test.Core", "Mvvm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.iOS", "MvvmCross\iOS\iOS\MvvmCross.iOS.csproj", "{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Uwp", "MvvmCross\Windows\WindowsUWP\MvvmCross.Uwp.csproj", "{C7E12CDD-6370-426A-8907-0ED6AF353F79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Uwp", "MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj", "{C7E12CDD-6370-426A-8907-0ED6AF353F79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid", "MvvmCross\Droid\Droid\MvvmCross.Droid.csproj", "{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}"
 EndProject

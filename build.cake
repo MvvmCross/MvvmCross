@@ -49,7 +49,8 @@ Task("GitLink")
 {
 	GitLink(sln.GetDirectory(), 
 		new GitLinkSettings {
-			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid")
+			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
+			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81")
 		});
 });
 
@@ -59,17 +60,18 @@ Task("Package")
 {
 	var nugetSettings = new NuGetPackSettings {
 		Authors = new [] { "MvvmCross contributors" },
-		Owners = new [] { "MvvmCross Team" },
+		Owners = new [] { "MvvmCross" },
 		IconUrl = new Uri("http://i.imgur.com/BvdAtgT.png"),
 		ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
 		LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
-		Copyright = "Copyright (c) MvvmCross Team",
+		Copyright = "Copyright (c) MvvmCross",
 		RequireLicenseAcceptance = false,
 		Version = versionInfo.NuGetVersion,
 		Symbols = false,
 		NoPackageAnalysis = true,
 		OutputDirectory = outputDir,
-		Verbosity = NuGetVerbosity.Detailed
+		Verbosity = NuGetVerbosity.Detailed,
+		BasePath = "./nuspec"
 	};
 
 	EnsureDirectoryExists(outputDir);
@@ -77,7 +79,6 @@ Task("Package")
 	var nuspecs = new List<string> {
 		"MvvmCross.nuspec",
 		"MvvmCross.Binding.nuspec",
-		"MvvmCross.BindingEx.nuspec",
 		"MvvmCross.CodeAnalysis.nuspec",
 		"MvvmCross.Console.Platform.nuspec",
 		"MvvmCross.Core.nuspec",
@@ -122,8 +123,8 @@ Task("Package")
 		"MvvmCross.Plugin.ThreadUtils.nuspec",
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
-		"MvvmCross.Plugin.StarterPack.nuspec",
-		"MvvmCross.Plugin.Tests.nuspec"
+		"MvvmCross.StarterPack.nuspec",
+		"MvvmCross.Tests.nuspec"
 	};
 
 	foreach(var nuspec in nuspecs)
