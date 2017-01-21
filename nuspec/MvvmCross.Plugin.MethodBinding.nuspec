@@ -14,10 +14,6 @@ This package contains the 'MethodBinding' plugin for MvvmCross</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<!-- src -->
-		<file src="..\MethodBinding\MvvmCross.Plugins.MethodBinding\**\*.cs" 
-			target="src\MvvmCross.Plugins.MethodBinding" />
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.MethodBinding.*" target="lib\portable-net45+win+wpa81+wp80" />
 
