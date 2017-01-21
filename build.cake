@@ -59,17 +59,18 @@ Task("Package")
 {
 	var nugetSettings = new NuGetPackSettings {
 		Authors = new [] { "MvvmCross contributors" },
-		Owners = new [] { "MvvmCross Team" },
+		Owners = new [] { "MvvmCross" },
 		IconUrl = new Uri("http://i.imgur.com/BvdAtgT.png"),
 		ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
 		LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
-		Copyright = "Copyright (c) MvvmCross Team",
+		Copyright = "Copyright (c) MvvmCross",
 		RequireLicenseAcceptance = false,
 		Version = versionInfo.NuGetVersion,
 		Symbols = false,
 		NoPackageAnalysis = true,
 		OutputDirectory = outputDir,
-		Verbosity = NuGetVerbosity.Detailed
+		Verbosity = NuGetVerbosity.Detailed,
+		BasePath = "./nuspec"
 	};
 
 	EnsureDirectoryExists(outputDir);
@@ -77,7 +78,6 @@ Task("Package")
 	var nuspecs = new List<string> {
 		"MvvmCross.nuspec",
 		"MvvmCross.Binding.nuspec",
-		"MvvmCross.BindingEx.nuspec",
 		"MvvmCross.CodeAnalysis.nuspec",
 		"MvvmCross.Console.Platform.nuspec",
 		"MvvmCross.Core.nuspec",
