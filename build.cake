@@ -122,8 +122,8 @@ Task("Package")
 		"MvvmCross.Plugin.ThreadUtils.nuspec",
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
-		"MvvmCross.Plugin.StarterPack.nuspec",
-		"MvvmCross.Plugin.Tests.nuspec"
+		"MvvmCross.StarterPack.nuspec",
+		"MvvmCross.Tests.nuspec"
 	};
 
 	foreach(var nuspec in nuspecs)
