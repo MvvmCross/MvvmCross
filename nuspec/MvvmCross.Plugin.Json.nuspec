@@ -24,6 +24,10 @@ This package contains the 'Json' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\net45" />
 		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\net45\Bootstrap\JsonPluginBootstrap.cs.pp" />
 
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\JsonPluginBootstrap.cs.pp" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\JsonPluginBootstrap.cs.pp" />

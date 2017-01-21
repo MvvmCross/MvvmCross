@@ -28,6 +28,10 @@ This package contains the 'MethodBinding' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.MethodBinding.*" target="lib\net45" />
 		<file src="BootstrapContent\MethodBindingPluginBootstrap.cs.pp" target="content\net45\Bootstrap\MethodBindingPluginBootstrap.cs.pp" />
 
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.MethodBinding.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\MethodBindingPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\MethodBindingPluginBootstrap.cs.pp" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.MethodBinding.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\MethodBindingPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\MethodBindingPluginBootstrap.cs.pp" />

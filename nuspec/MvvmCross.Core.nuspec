@@ -35,10 +35,10 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45" />
 
 		<!-- uap -->
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Uwp.*" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Uwp\Properties\MvvmCross.Uwp.rd.xml" target="lib\uap\MvvmCross.Uwp\Properties" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\uap" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp\Properties\MvvmCross.Uwp.rd.xml" target="lib\uap10.0\MvvmCross.Uwp\Properties" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\uap10.0" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.*"

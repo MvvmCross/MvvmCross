@@ -47,12 +47,14 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.tvOS" />
 
-		<!-- store - pcl -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\netcore45" />
-
-		<!-- wpf - pcl -->
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Binding.Wpf.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
+
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Binding.Uwp.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\uap10.0" />
 	</files>
 </package>

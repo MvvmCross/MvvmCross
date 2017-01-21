@@ -22,6 +22,10 @@ This package contains the 'Platform' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Platform.Wpf.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\net45" />
 
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Platform.Uwp.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\uap10.0" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Platform.Droid.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Platform.*" target="lib\MonoAndroid" />

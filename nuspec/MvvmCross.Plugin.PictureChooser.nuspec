@@ -22,9 +22,9 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 			target="lib\dotnet" />
 
 		<!-- uwp -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.PictureChooser.Uwp.*" target="lib\uap" />
-		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\uap\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.PictureChooser.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\MonoAndroid" />

@@ -25,6 +25,12 @@ This package contains the 'Share' plugin for MvvmCross</description>
 
 		<file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\net45\Bootstrap\SharePluginBootstrap.cs.pp" />
 
+		<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.Share.Uwp.*" target="lib\uap10.0" />
+
+		<file src="BootstrapContent\SharePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\SharePluginBootstrap.cs.pp" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Share.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Share.Droid.*" target="lib\MonoAndroid" />

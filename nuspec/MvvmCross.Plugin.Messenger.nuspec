@@ -23,6 +23,10 @@ This package contains the 'Messenger' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\net45" />
 		<file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\MessengerPluginBootstrap.cs.pp" />
 
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\MessengerPluginBootstrap.cs.pp" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Messenger.*" target="lib\MonoAndroid" />
 		<file src="BootstrapContent\MessengerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\MessengerPluginBootstrap.cs.pp" />

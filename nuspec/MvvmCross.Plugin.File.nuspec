@@ -24,6 +24,11 @@ This package contains the 'File' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.File.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\net45\Bootstrap\FilePluginBootstrap.cs.pp" />
 
+		<!-- uwp  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.File.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.File.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\FilePluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\FilePluginBootstrap.cs.pp" />
+
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.File.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.File.Droid.*" target="lib\MonoAndroid" />
