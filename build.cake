@@ -6,6 +6,15 @@ var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 
+var local = BuildSystem.IsLocalBuild;
+var isDevelopBranch = StringComparer.OrdinalIgnoreCase.Equals("develop", AppVeyor.Environment.Repository.Branch);
+var isReleaseBranch = StringComparer.OrdinalIgnoreCase.Equals("master", AppVeyor.Environment.Repository.Branch);
+var isTagged = AppVeyor.Environment.Repository.Tag.IsTag;
+
+var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
+var isRepository = StringComparer.OrdinalIgnoreCase.Equals("mvvmcross/mvvmcross", AppVeyor.Environment.Repository.Name);
+
 Task("Clean").Does(() =>
 {
     CleanDirectories("./**/bin");
@@ -24,13 +33,21 @@ Task("Version").Does(() => {
 	Information("VI:\t{0}", versionInfo.FullSemVer);
 });
 
+Task("UpdateAppVeyorBuildNumber")
+	.IsDependentOn("Version")
+    .WithCriteria(() => isRunningOnAppVeyor)
+    .Does(() =>
+{
+    AppVeyor.UpdateBuildVersion(gitVersion.FullBuildMetaData);
+});
+
 Task("Restore").Does(() => {
 	NuGetRestore(sln);
 });
 
 Task("Build")
 	.IsDependentOn("Clean")
-	.IsDependentOn("Version")
+	.IsDependentOn("UpdateAppVeyorBuildNumber")
 	.IsDependentOn("Restore")
 	.Does(() =>  {
 	
@@ -133,8 +150,47 @@ Task("Package")
 	}
 });
 
+Task("PublishPackages")
+    .IsDependentOn("Package")
+    .WithCriteria(() => !local)
+    .WithCriteria(() => !isPullRequest)
+    .WithCriteria(() => isRepository)
+    .WithCriteria(() => isDevelopBranch || isReleaseBranch)
+    .Does (() =>
+{
+	if (isReleaseBranch && !isTagged)
+    {
+        Information("Packages will not be published as this release has not been tagged.");
+        return;
+    }
+
+	// Resolve the API key.
+    var apiKey = EnvironmentVariable("NUGET_APIKEY");
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        throw new Exception("The NUGET_APIKEY environment variable is not defined.");
+    }
+
+    var source = EnvironmentVariable("NUGET_SOURCE");
+    if (string.IsNullOrEmpty(source))
+    {
+        throw new Exception("The NUGET_SOURCE environment variable is not defined.");
+    }
+
+	var nugetFiles = GetFiles(outputDir + "/*.nupkg");
+
+	foreach(var nugetFile in nugetFiles)
+	{
+    	NuGetPush(nugetFile, new NuGetPushSettings {
+            Source = source,
+            ApiKey = apiKey
+        });
+	}
+});
+
+
 Task("Default")
-	.IsDependentOn("Package")
+	.IsDependentOn("PublishPackages")
 	.Does(() => {
 	
 	});
