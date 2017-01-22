@@ -38,7 +38,7 @@ Task("UpdateAppVeyorBuildNumber")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() =>
 {
-    AppVeyor.UpdateBuildVersion(gitVersion.FullBuildMetaData);
+    AppVeyor.UpdateBuildVersion(versionInfo.FullBuildMetaData);
 });
 
 Task("Restore").Does(() => {
