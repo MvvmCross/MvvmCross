@@ -41,7 +41,6 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.ResourceLoader.PluginLoader),
                 typeof(MvvmCross.Plugins.Share.PluginLoader),
                 typeof(MvvmCross.Plugins.SoundEffects.PluginLoader),
-                typeof(MvvmCross.Plugins.Sqlite.PluginLoader),
                 typeof(MvvmCross.Plugins.ThreadUtils.PluginLoader),
                 typeof(MvvmCross.Plugins.Visibility.PluginLoader),
                 typeof(MvvmCross.Plugins.WebBrowser.PluginLoader)

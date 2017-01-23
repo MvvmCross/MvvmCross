@@ -1,6 +1,13 @@
 ## MvvmCross
 
-MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for [Xamarin.Forms](https://github.com/MvvmCross/MvvmCross-Forms) and the [Android support library](https://github.com/MvvmCross/MvvmCross-AndroidSupport). Lots of [plugins](https://github.com/MvvmCross/MvvmCross-Plugins) are available as well.
+[![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
+![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)
+![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)
+[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v2)
+
+[![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
+
+MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps.
 
 ## Documentation & blog
 
@@ -13,13 +20,11 @@ A quick way to get started is to use the Visual Studio MvvmCross [Ninja Coder](h
 
 For manual project creation install the necessary packages from [Nuget](https://www.nuget.org/packages?q=mvvmcross)
 
-
 ### Questions & support
 
 * [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
 * [Xamarin forums](http://forums.xamarin.com)
-* [Slack](https://xamarinchat.herokuapp.com/) join the mvvmcross channel after you are in
-
+* [Slack](https://xamarinchat.herokuapp.com/) join the #mvvmcross channel after you are in
 
 ### Documentation and Examples
 

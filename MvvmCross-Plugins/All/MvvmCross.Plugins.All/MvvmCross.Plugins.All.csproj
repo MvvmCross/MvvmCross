@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\Portable\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\Mvx\Portable\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\Portable\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\Mvx\Portable\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -101,10 +101,6 @@
     <ProjectReference Include="..\..\SoundEffects\MvvmCross.Plugins.SoundEffects\MvvmCross.Plugins.SoundEffects.csproj">
       <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
       <Name>MvvmCross.Plugins.SoundEffects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SQLite-PCL\MvvmCross.Plugins.Sqlite\MvvmCross.Plugins.Sqlite.csproj">
-      <Project>{4c7378a4-f173-43fd-b24f-9f54d6496dc8}</Project>
-      <Name>MvvmCross.Plugins.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ThreadUtils\MvvmCross.Plugins.ThreadUtils\MvvmCross.Plugins.ThreadUtils.csproj">
       <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>

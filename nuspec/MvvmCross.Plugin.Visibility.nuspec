@@ -2,39 +2,17 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Visibility</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - Visibility Plugin</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'Visibility' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>
-		<!-- src -->
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Console\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.Console" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Wpf\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.Wpf" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.WindowsStore" />	
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.WindowsCommon\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.WindowsCommon" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.Droid\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.Droid" />
-		<file src="..\Visibility\MvvmCross.Plugins.Visibility.iOS\**\*.cs" 
-			target="src\MvvmCross.Plugins.Visibility.iOS" />	
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-net45+win+wpa81+wp80" />
 
@@ -46,23 +24,6 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Visibility.Wpf.*" target="lib\net45" />
 		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\net45\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
 
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.Visibility.WindowsStore.*" target="lib\netcore45" />
-		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Visibility.WindowsCommon.*" target="lib\win81" />
-		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\win81\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Visibility.WindowsCommon.*" target="lib\wpa81" />
-		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsCommon\MvvmCross.Plugins.Visibility.WindowsCommon.*" target="lib\portable-win81+wpa81" />
-
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Visibility.Droid.*" target="lib\MonoAndroid" />
@@ -72,18 +33,14 @@ This package contains the 'Visibility' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Visibility.iOS.*" target="lib\Xamarin.iOS10" />
 		<file src="iOSBootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+
+		<!-- Uwp  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.Visibility.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
 		
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.Mac20" />
 
 	</files>
 </package>
-
-
-
-
-
-
-
-
-

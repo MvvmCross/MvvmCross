@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\Droid</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,7 +33,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\Droid</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -78,8 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\MvxScrollAwareGrowShrinkFABBehavior.cs" />
-    <Compile Include="Behaviors\MvxScrollAwareTranslationHideFABBehavior.cs" />
-    <Compile Include="Extensions\MvxFloatingActionButtonExtensions.cs" />
+    <Compile Include="Behaviors\MvxScrollAwareTranslationHideBottomBarBehavior.cs" />
+    <Compile Include="Extensions\MvxViewExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="MvxBottomSheetDialogFragment.cs" />
