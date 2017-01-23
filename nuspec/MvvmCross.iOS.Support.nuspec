@@ -2,43 +2,27 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.iOS.Support</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross iOS Support</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-iOSSupport</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the iOS Support libraries for MvvmCross.</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
-				<dependency id="MvvmCross.Binding" version="4.4.0" />
-				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
+				<dependency id="MvvmCross.Binding" version="[$version$]" />
+				<dependency id="MvvmCross.Platform" version="[$version$]" />
 			</group>
 			<group targetFramework="dotnet">
-				<dependency id="MvvmCross.Core" version="4.4.0" />
-				<dependency id="MvvmCross.Binding" version="4.4.0" />
-				<dependency id="MvvmCross.Platform" version="4.4.0" />
+				<dependency id="MvvmCross.Core" version="[$version$]" />
+				<dependency id="MvvmCross.Binding" version="[$version$]" />
+				<dependency id="MvvmCross.Platform" version="[$version$]" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.iOS.Support.*" target="lib\Xamarin.iOS10" />
-		<file src="..\MvvmCross.iOS.Support\**\*.cs" target="src\MvvmCross.iOS.Support" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.Support.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.Support.pdb" target="lib\Xamarin.iOS10" />
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-

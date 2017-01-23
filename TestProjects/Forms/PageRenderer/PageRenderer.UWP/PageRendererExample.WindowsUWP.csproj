@@ -149,7 +149,7 @@
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\WindowsUWP\MvvmCross.Uwp.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj">
       <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
       <Name>MvvmCross.Uwp</Name>
     </ProjectReference>
