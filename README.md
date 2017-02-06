@@ -12,7 +12,7 @@ MvvmCross is a cross-platform mvvm framework that enables developers to create c
 ## Documentation & blog
 
 * See our [official website](http://mvvmcross.com/docs) for an extensive set of documentation!
-* To stay up-to-date with the latest news go to the [MvvmCross blog](http://www.mvvmcross.com/blog)!
+* To stay up-to-date with the latest news go to the [MvvmCross blog](http://mvvmcross.com/blog)!
 
 ### Get started
 
@@ -60,7 +60,7 @@ For manual project creation install the necessary packages from [Nuget](https://
 * [Value Converters](https://github.com/MvvmCross/MvvmCross/wiki/Value-Converters)
 * [View Model Lifecycle](https://github.com/MvvmCross/MvvmCross/wiki/View-Model-Lifecycle)
 * [ViewModel  to ViewModel navigation](https://github.com/MvvmCross/MvvmCross/wiki/ViewModel--to-ViewModel-navigation)
-* [Customising App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customising-using-App-and-Setup)
+* [Customizing App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customizing-using-App-and-Setup)
 * [Service Location and Inversion of Control](https://github.com/MvvmCross/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
 * [Assemblies](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Assemblies)
 * [Plugins](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-plugins)
@@ -109,7 +109,7 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 * Tiny bits of [MvvmLight](http://mvvmlight.codeplex.com/) are redistributed and modified under MIT
 * [NewtonSoft.Json](https://github.com/JamesNK/Newtonsoft.Json) is redistributed and modified here under MIT
 * The original work on the [JSON.Net port](https://github.com/chrisntr/Newtonsoft.Json) to MonoTouch and MonoDroid was done by @ChrisNTR
-* [Sqlite-net](https://github.com/praeclarum/sqlite-net/blob/master/license.md) - custom license
+* [Sqlite-net](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.md) - custom license
 * [MonoTouch.Dialog](https://github.com/migueldeicaza/MonoTouch.Dialog) - MIT X11 
 * [MonoDroid.Dialog](https://github.com/kevinmcmahon/MonoDroid.Dialog) - MIT X11
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
@@ -127,7 +127,7 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 [ninjavsgallery]: http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767 "Ninja Coder Visual Studio Gallery"
 [n1]: http://mvvmcross.wordpress.com "MvvmCross N+1 table of contents"
 [n1github]: https://github.com/MvvmCross/NPlus1DaysOfMvvmCross "MvvmCross N+1 on GitHub"
-[n1videos]: https://github.com/MvvmCross/MvvmCross/wiki/N-1-Videos-Of-MvvmCross
+[n1videos]: https://github.com/MvvmCross/MvvmCross/wiki/N-plus-1-Videos-Of-MvvmCross
 [mvxtuts]: https://github.com/MvvmCross/MvvmCross-Tutorials/ "MvvmCross Tutorials"
 [mvxwiki]: https://github.com/MvvmCross/MvvmCross/wiki "MvvmCross Wiki"
 [mvxnuget]: https://www.nuget.org/packages?q=mvvmcross "MvvmCross on NuGet"
