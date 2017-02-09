@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -120,9 +121,18 @@ namespace MvvmCross.Binding.BindingContext
                 this._delayedActions.Clear();
             }
 
+            // Copy the lists to ensure that if the main thread modifies the collection
+            // once we are on the background thread we don't get an InvalidOperationException. 
+            // Issue: #1398
+            // View bindings need to be deep copied
+            var viewBindingsCopy = this._viewBindings.Select(vb => new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key, vb.Value.ToList()))
+                                                     .ToList();
+
+            var directBindingsCopy = this._directBindings.ToList();
+
             Action setBindingsAction = (() =>
                 {
-                    foreach (var binding in this._viewBindings)
+                    foreach (var binding in viewBindingsCopy)
                     {
                         foreach (var bind in binding.Value)
                         {
@@ -130,7 +140,7 @@ namespace MvvmCross.Binding.BindingContext
                         }
                     }
 
-                    foreach (var binding in this._directBindings)
+                    foreach (var binding in directBindingsCopy)
                     {
                         binding.Binding.DataContext = this._dataContext;
                     }
