@@ -68,6 +68,11 @@ namespace MvvmCross.Binding.Droid.Views
 
         private int SetConstraintAndWaitForDataChange(string newConstraint)
         {
+            if (this.PartialText == newConstraint)
+            {
+                return this.Count;
+            }
+            
             MvxTrace.Trace("Wait starting for {0}", newConstraint);
             this._dataChangedEvent.Reset();
             this.PartialText = newConstraint;

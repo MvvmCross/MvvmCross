@@ -68,5 +68,17 @@ namespace MvvmCross.Platform.WeakSubscription
         {
             return new MvxCanExecuteChangedEventSubscription(source, eventHandler);
         }
+
+        public static MvxWeakEventSubscription<TSource> WeakSubscribe<TSource>(this TSource source, string eventName, EventHandler eventHandler)
+            where TSource : class
+        {
+            return new MvxWeakEventSubscription<TSource>(source, eventName, eventHandler);
+        }
+
+        public static MvxWeakEventSubscription<TSource, TEventArgs> WeakSubscribe<TSource, TEventArgs>(this TSource source, string eventName, EventHandler<TEventArgs> eventHandler)
+            where TSource : class
+        {
+            return new MvxWeakEventSubscription<TSource, TEventArgs>(source, eventName, eventHandler);
+        }
     }
 }

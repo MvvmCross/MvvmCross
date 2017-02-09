@@ -48,12 +48,6 @@ namespace MvvmCross.Binding.Droid.BindingContext
             return view;
         }
 
-        [Obsolete("Switch to new CommonInflate method - with additional attachToRoot parameter")]
-        protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup)
-        {
-            return this.CommonInflate(resourceId, viewGroup, viewGroup != null);
-        }
-
         protected virtual View CommonInflate(int resourceId, ViewGroup viewGroup, bool attachToRoot)
         {
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Droid.Support.V7.RecyclerView</id>
+		<version>$version$</version>
+		<title>MvvmCross Android Support V7 - RecyclerView</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v7 RecyclerView support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support recyclerview</tags>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+			<dependency id="MvvmCross.Core" version="[$version$]" />
+			<dependency id="Xamarin.Android.Support.v7.RecyclerView" version="25.1.0" />
+		</dependencies>
+		<releaseNotes>
+		</releaseNotes>
+	</metadata>
+	<files>
+		<file src="..\bin\Release\MvvmCross.Droid.Support.V7.RecyclerView.*" target="lib\MonoAndroid70" />
+	</files>
+</package>

@@ -9,6 +9,8 @@ using System.Reflection;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using System;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -20,7 +22,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
         }
 
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         // this variable isn't used, but including this here prevents Mono from optimising the call out!
         private int JustForReflection
@@ -55,20 +57,17 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            seekBar.ProgressChanged += SeekBarProgressChanged;
-            _subscribed = true;
+            _subscription = seekBar.WeakSubscribe<SeekBar, SeekBar.ProgressChangedEventArgs>(
+                nameof(seekBar.ProgressChanged),
+                SeekBarProgressChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var view = View;
-                if (view != null && _subscribed)
-                {
-                    view.ProgressChanged -= SeekBarProgressChanged;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

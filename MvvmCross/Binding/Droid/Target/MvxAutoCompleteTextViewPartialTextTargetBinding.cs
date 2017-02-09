@@ -8,16 +8,16 @@
 using System;
 using System.Reflection;
 
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxAutoCompleteTextViewPartialTextTargetBinding
-       : MvxPropertyInfoTargetBinding<MvxAutoCompleteTextView>
+       : MvxAndroidPropertyInfoTargetBinding<MvxAutoCompleteTextView>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -43,20 +43,17 @@ namespace MvvmCross.Binding.Droid.Target
             if (autoComplete == null)
                 return;
 
-            _subscribed = true;
-            autoComplete.PartialTextChanged += AutoCompleteOnPartialTextChanged;
+            _subscription = autoComplete.WeakSubscribe(
+                nameof(autoComplete.PartialTextChanged),
+                AutoCompleteOnPartialTextChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var autoComplete = View;
-                if (autoComplete != null && _subscribed)
-                {
-                    autoComplete.PartialTextChanged -= AutoCompleteOnPartialTextChanged;
-                    _subscribed = false;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);

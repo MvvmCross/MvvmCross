@@ -79,6 +79,12 @@ namespace MvvmCross.iOS.Views
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            this.ViewModelRequestForSegue(segue, sender);
+        }
     }
 
     public class MvxTableViewController<TViewModel>

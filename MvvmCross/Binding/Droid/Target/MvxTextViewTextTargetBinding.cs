@@ -8,20 +8,21 @@
 using System;
 using Android.Text;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxTextViewTextTargetBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
         , IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
-        private bool _subscribed;
 
         protected TextView TextView => Target as TextView;
+
+        private IDisposable _subscription;
 
         public MvxTextViewTextTargetBinding(TextView target)
             : base(target)
@@ -58,11 +59,12 @@ namespace MvvmCross.Binding.Droid.Target
             if (view == null)
                 return;
 
-            view.AfterTextChanged += EditTextOnAfterTextChanged;
-            _subscribed = true;
+            _subscription = view.WeakSubscribe<TextView, AfterTextChangedEventArgs>(
+                nameof(view.AfterTextChanged),
+                EditTextOnAfterTextChanged);
         }
 
-        private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs afterTextChangedEventArgs)
+        private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs e)
         {
             FireValueChanged(TextView.Text);
         }
@@ -71,15 +73,8 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                if (_isEditTextBinding)
-                {
-                    var editText = TextView;
-                    if (editText != null && _subscribed)
-                    {
-                        editText.AfterTextChanged -= EditTextOnAfterTextChanged;
-                        _subscribed = false;
-                    }
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
             base.Dispose(isDisposing);
         }

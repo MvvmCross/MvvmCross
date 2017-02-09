@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.Location.Fused</id>
+		<version>$version$</version>
+		<title>MvvmCross - Fused Location Plugin</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the implementation of FusedLocationApi as 'Location' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android plugin fused fusedlocation</tags>
+		<dependencies>
+			<group targetFramework="MonoAndroid">
+				<dependency id="MvvmCross.Platform" version="[$version$]" />
+				<dependency id="Xamarin.Android.Support.v4" version="25.1.0" />
+				<dependency id="Xamarin.GooglePlayServices.Base" version="42.1001.0" />
+				<dependency id="Xamarin.GooglePlayServices.Basement" version="42.1001.0" />
+				<dependency id="Xamarin.GooglePlayServices.Location" version="42.1001.0" />
+				<dependency id="Xamarin.GooglePlayServices.Maps" version="42.1001.0" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Location.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Location.Fused.Droid.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\FusedLocationPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\FusedLocationPluginBootstrap.cs.pp" />
+	</files>
+</package>

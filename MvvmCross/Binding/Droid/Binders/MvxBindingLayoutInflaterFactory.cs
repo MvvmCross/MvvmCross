@@ -24,8 +24,7 @@ namespace MvvmCross.Binding.Droid.Binders
         private IMvxAndroidViewFactory _androidViewFactory;
         private IMvxAndroidViewBinder _binder;
 
-        public MvxBindingLayoutInflaterFactory(
-            object source)
+        public MvxBindingLayoutInflaterFactory(object source)
         {
             this._source = source;
         }

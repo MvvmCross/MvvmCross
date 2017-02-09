@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
@@ -65,14 +64,14 @@ namespace MvvmCross.Droid.Shared.Presenter
             return viewModelType ?? fromFragmentType.GetMvxFragmentAttributes().First().ViewModelType;
         }
 
-        public bool IsTypeRegisteredAsFragment(Type viewModelType)
+        public virtual bool IsTypeRegisteredAsFragment(Type viewModelType)
         {
             InitializeIfNeeded();
 
             return _viewModelToFragmentTypeMap.ContainsKey(viewModelType);
         }
 
-        public bool IsActualHostValid(Type forViewModelType)
+        public virtual bool IsActualHostValid(Type forViewModelType)
         {
             InitializeIfNeeded();
 
@@ -97,7 +96,7 @@ namespace MvvmCross.Droid.Shared.Presenter
             return activityViewModelType;
         }
 
-        public Type GetFragmentHostViewModelType(Type forViewModelType)
+        public virtual Type GetFragmentHostViewModelType(Type forViewModelType)
         {
             InitializeIfNeeded();
 
@@ -105,7 +104,7 @@ namespace MvvmCross.Droid.Shared.Presenter
             return associatedMvxFragmentAttributes.First().ParentActivityViewModelType;
         }
 
-        public Type GetFragmentTypeAssociatedWith(Type viewModelType)
+        public virtual Type GetFragmentTypeAssociatedWith(Type viewModelType)
         {
             InitializeIfNeeded();
 
@@ -118,15 +117,30 @@ namespace MvvmCross.Droid.Shared.Presenter
             return _fragmentTypeToMvxFragmentAttributeMap[fragmentTypeAssociatedWithViewModel];
         }
 
-        public MvxFragmentAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
+        public virtual MvxFragmentAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
         {
             InitializeIfNeeded();
 
             var currentActivityViewModelType = GetCurrentActivityViewModelType();
+            Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
-            return
-                GetMvxFragmentAssociatedAttributes(fragmentViewModelType)
-                    .Single(x => x.ParentActivityViewModelType == currentActivityViewModelType);
+            var fragmentAttributes = GetMvxFragmentAssociatedAttributes(fragmentViewModelType)
+                .Where(x => x.ParentActivityViewModelType == currentActivityViewModelType);
+            MvxFragmentAttribute attribute = fragmentAttributes.FirstOrDefault();
+
+            if (fragmentAttributes.Count() > 1)
+            {
+                foreach (var item in fragmentAttributes)
+                {
+                    if (currentActivity.FindViewById(item.FragmentContentId) != null)
+                    {
+                        attribute = item;
+                        break;
+                    }
+                }
+            }
+
+            return attribute;
         }
     }
 }

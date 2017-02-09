@@ -8,21 +8,22 @@
 using System;
 using System.Windows.Input;
 using Android.Views;
-using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxViewLongClickBinding
-        : MvxConvertingTargetBinding
+        : MvxAndroidTargetBinding
     {
         private ICommand _command;
+        private IDisposable _subscription;
 
         protected View View => (View)Target;
 
         public MvxViewLongClickBinding(View view)
             : base(view)
         {
-            view.LongClick += ViewOnLongClick;
+            _subscription = view.WeakSubscribe<View, View.LongClickEventArgs>(nameof(view.LongClick), ViewOnLongClick);
         }
 
         private void ViewOnLongClick(object sender, View.LongClickEventArgs longClickEventArgs)
@@ -49,11 +50,10 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (isDisposing)
             {
-                var view = View;
-                if (view != null)
-                {
-                    view.LongClick -= ViewOnLongClick;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
+
+                _command = null;
             }
             base.Dispose(isDisposing);
         }

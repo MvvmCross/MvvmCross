@@ -7,9 +7,7 @@
 
 namespace MvvmCross.Platform.Droid
 {
-    using Java.Lang;
-
-    public class MvxReplaceableJavaContainer : Object
+    public class MvxReplaceableJavaContainer : Java.Lang.Object
     {
         public object Object { get; set; }
 

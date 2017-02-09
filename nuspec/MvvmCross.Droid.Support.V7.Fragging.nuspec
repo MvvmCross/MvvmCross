@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Droid.Support.V7.Fragging</id>
+		<version>$version$</version>
+		<title>MvvmCross Android Support V7 - Fragments</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v4 Fragments support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support fragging fragments</tags>
+		<dependencies>
+			<dependency id="MvvmCross.Droid.Support.Fragment" version="[$version$]" />
+		</dependencies>
+	</metadata>
+	<files>
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

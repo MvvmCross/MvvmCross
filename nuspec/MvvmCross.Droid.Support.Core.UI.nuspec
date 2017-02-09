@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Droid.Support.Core.UI</id>
+		<version>$version$</version>
+		<title>MvvmCross Android Support - Core UI</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support Core UI support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support v4 Core UI</tags>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+			<dependency id="MvvmCross.Core" version="[$version$]" />
+			<dependency id="MvvmCross.Droid.Shared" version="[$version$]" />
+			<dependency id="Xamarin.Android.Support.Core.UI" version="25.1.0"/>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\bin\Release\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
+	</files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
