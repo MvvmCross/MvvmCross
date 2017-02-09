@@ -15,7 +15,8 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,10 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
+    <Reference Include="MvvmCross.Platform.Droid, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Debug\Mvx\Droid\MvvmCross.Platform.Droid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,8 +59,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeHelpers\MvxRecyclerViewAttributeExtensions.cs" />
+    <Compile Include="AttributeHelpers\MvxRecyclerViewTemplateSelectorAttributes.cs" />
+    <Compile Include="Grouping\DataConverters\IMvxGroupedDataConverter.cs" />
+    <Compile Include="Grouping\DataConverters\MvxDefaultGroupedDataConverter.cs" />
+    <Compile Include="Grouping\DataConverters\MvxGroupedItemsSourceProvider.cs" />
+    <Compile Include="Grouping\IMvxGroupableRecyclerViewAdapter.cs" />
+    <Compile Include="Grouping\IMvxHeaderFooterRecyclerViewAdapter.cs" />
+    <Compile Include="Grouping\MvxGroupedData.cs" />
     <Compile Include="IMvxRecyclerAdapter.cs" />
     <Compile Include="IMvxRecyclerViewHolder.cs" />
+    <Compile Include="ItemSources\Data\MvxFooterItemData.cs" />
+    <Compile Include="ItemSources\Data\MvxHeaderItemData.cs" />
+    <Compile Include="ItemSources\IMvxRecyclerViewItemsSourceBridge.cs" />
+    <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridge.cs" />
+    <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridgeConfiguration.cs" />
+    <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridgeGroupingDecorator.cs" />
+    <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridgeHeaderFooterDecorator.cs" />
     <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
@@ -63,7 +82,7 @@
     <Compile Include="MvxRecyclerViewHolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="ItemTemplates\IMvxTemplateSelector.cs" />
+    <Compile Include="ItemTemplates\MvxBaseTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

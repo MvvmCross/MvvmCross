@@ -1,7 +1,8 @@
+using System;
+
 namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
 {
-	//MvxDefaultTemplateSelector
-	public class MvxDefaultTemplateSelector : IMvxTemplateSelector
+    public class MvxDefaultTemplateSelector : MvxBaseTemplateSelector
     {
         public int ItemTemplateId { get; set; }
 
@@ -14,10 +15,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
         {
         }
 
-        public int GetItemViewType(object forItemObject)
+        protected override int GetItemViewType(object forItemObject)
             => 0;
 
-        public int GetItemLayoutId(int fromViewType)
+        protected override int GetItemLayoutId(int fromViewType)
             => ItemTemplateId;
     }
 }
