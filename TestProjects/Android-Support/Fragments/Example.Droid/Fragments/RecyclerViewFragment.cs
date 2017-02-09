@@ -32,10 +32,10 @@ namespace Example.Droid.Fragments
                 recyclerView.HasFixedSize = true;
                 var layoutManager = new LinearLayoutManager(Activity);
                 recyclerView.SetLayoutManager(layoutManager);
-                (recyclerView.Adapter as IMvxRecyclerAdapterBindableHolder).MvxViewHolderBinded += (args) =>
+                (recyclerView.Adapter as IMvxRecyclerAdapterBindableHolder).MvxViewHolderBound += (args) =>
                 {
                     var item = args.Holder.ItemView;
-                    // you can access binded holder item here.
+                    // you can access bound holder item here.
                 };
             }
 

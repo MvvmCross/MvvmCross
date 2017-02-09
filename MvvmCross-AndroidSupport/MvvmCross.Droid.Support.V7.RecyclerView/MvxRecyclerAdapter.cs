@@ -259,7 +259,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var dataContext = GetItem(position);
             ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
-            OnMvxViewHolderBinded(new MvxViewHolderBindedEventArgs(position, dataContext, holder));
+            OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -304,11 +304,11 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public event Action<MvxViewHolderBindedEventArgs> MvxViewHolderBinded;
+        public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
 
-        protected virtual void OnMvxViewHolderBinded(MvxViewHolderBindedEventArgs obj)
+        protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
         {
-            MvxViewHolderBinded?.Invoke(obj);
+            MvxViewHolderBound?.Invoke(obj);
         }
     }
 }
