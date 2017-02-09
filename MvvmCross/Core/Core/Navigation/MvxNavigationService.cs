@@ -97,6 +97,16 @@ namespace MvvmCross.Core.Navigation
         {
             return RouteAsync(url, MvxRequestedBy.UserAction);
         }
+
+        public Task RouteAsync(Uri url)
+        {
+            return RouteAsync(url, MvxRequestedBy.UserAction);
+        }
+
+        public Task RouteAsync(Uri url, MvxRequestedBy requestedBy)
+        {
+            return RouteAsync(url.ToString(), requestedBy);
+        }
         
         public async Task RouteAsync(string url, MvxRequestedBy requestedBy)
         {
