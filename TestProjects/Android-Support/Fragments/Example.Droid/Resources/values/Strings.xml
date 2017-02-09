@@ -6,4 +6,5 @@
   <string name="drawer_close">Close navigation drawer</string>
 
   <string name="recyclerview_multiitem_templateselector">Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid</string>
+  <string name="recyclerview_listitem_grouped_data_converter">Example.Droid.Converters.ListItemGroupDataConverter, Example.Droid</string>
 </resources>
