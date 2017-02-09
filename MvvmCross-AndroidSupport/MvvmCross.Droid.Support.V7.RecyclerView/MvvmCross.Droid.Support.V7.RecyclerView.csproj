@@ -78,7 +78,7 @@
     <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridgeHeaderFooterDecorator.cs" />
     <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
-    <Compile Include="Model\MvxViewHolderBindedEventArgs.cs" />
+    <Compile Include="Model\MvxViewHolderBoundEventArgs.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
     <Compile Include="MvxRecyclerView.cs" />
     <Compile Include="MvxRecyclerViewHolder.cs" />
