@@ -67,14 +67,14 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\..\..\..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings">
-      <HintPath>..\..\..\..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
-    </Reference>
     <Reference Include="Cirrious.FluentLayouts.Touch">
       <HintPath>..\..\..\..\packages\Cirrious.FluentLayout.2.5.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\..\..\..\packages\Xam.Plugins.Settings.2.5.2.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\..\..\..\packages\Xam.Plugins.Settings.2.5.2.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,9 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
                 return 0;
 
             var cg = RawImage.CGImage;
+            if (cg == null)
+                return 0;
+
             return (int)(cg.BytesPerRow * cg.Height);
         }
     }
