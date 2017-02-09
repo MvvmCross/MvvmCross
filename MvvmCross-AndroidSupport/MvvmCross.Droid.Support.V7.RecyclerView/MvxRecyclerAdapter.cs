@@ -19,6 +19,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
@@ -29,9 +30,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter
         : Android.Support.V7.Widget.RecyclerView.Adapter
-            , IMvxRecyclerAdapter
-            , IMvxGroupableRecyclerViewAdapter
-            , IMvxHeaderFooterRecyclerViewAdapter
+        , IMvxRecyclerAdapter
+        , IMvxRecyclerAdapterBindableHolder
+        , IMvxGroupableRecyclerViewAdapter
+        , IMvxHeaderFooterRecyclerViewAdapter
     {
         private readonly MvxRecyclerViewItemsSourceBridgeConfiguration _itemsSourceBridgeConfiguration;
 
@@ -255,7 +257,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((IMvxRecyclerViewHolder)holder).DataContext = GetItem(position);
+            var dataContext = GetItem(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -298,6 +302,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
             }
+        }
+
+        public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
+
+        protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
+        {
+            MvxViewHolderBound?.Invoke(obj);
         }
     }
 }

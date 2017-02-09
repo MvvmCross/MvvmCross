@@ -67,6 +67,7 @@
     <Compile Include="Grouping\IMvxHeaderFooterRecyclerViewAdapter.cs" />
     <Compile Include="Grouping\MvxGroupedData.cs" />
     <Compile Include="IMvxRecyclerAdapter.cs" />
+    <Compile Include="IMvxRecyclerAdapterBindableHolder.cs" />
     <Compile Include="IMvxRecyclerViewHolder.cs" />
     <Compile Include="ItemSources\Data\MvxFooterItemData.cs" />
     <Compile Include="ItemSources\Data\MvxHeaderItemData.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="ItemSources\MvxRecyclerViewItemsSourceBridgeHeaderFooterDecorator.cs" />
     <Compile Include="ItemTemplates\MvxTemplateSelector.cs" />
     <Compile Include="ItemTemplates\MvxDefaultTemplateSelector.cs" />
+    <Compile Include="Model\MvxViewHolderBoundEventArgs.cs" />
     <Compile Include="MvxRecyclerAdapter.cs" />
     <Compile Include="MvxRecyclerView.cs" />
     <Compile Include="MvxRecyclerViewHolder.cs" />
