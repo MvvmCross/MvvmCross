@@ -27,6 +27,15 @@ namespace MvvmCross.Core.Navigation
         /// <returns>A task to await upon</returns>
         Task RouteAsync(string uri);
 
+
+        /// <summary>
+        /// Translates the provided Uri to a ViewModel request and dispatches it.
+        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
+        /// </summary>
+        /// <param name="uri">URI to route</param>
+        /// <returns>A task to await upon</returns>
+        Task RouteAsync(Uri uri);
+
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
         /// </summary>
@@ -34,5 +43,13 @@ namespace MvvmCross.Core.Navigation
         /// <param name="requestedBy">Specify how the route was requested. This can be useful if you want to clear your stack, etc.</param>
         /// <returns>A task to await upon</returns>
         Task RouteAsync(string uri, MvxRequestedBy requestedBy);
+
+        /// <summary>
+        /// Translates the provided Uri to a ViewModel request and dispatches it.
+        /// </summary>
+        /// <param name="uri">URI to route</param>
+        /// <param name="requestedBy">Specify how the route was requested. This can be useful if you want to clear your stack, etc.</param>
+        /// <returns>A task to await upon</returns>
+        Task RouteAsync(Uri uri, MvxRequestedBy requestedBy);
     }
 }
