@@ -5,24 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Threading;
+using Android.Content;
+using Android.Runtime;
+using Android.Support.V7.Widget;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Threading;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Support.V7.Widget;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
@@ -57,25 +55,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
         {
-            var li = (args.Child as MvxListItemView);
-            var radioButton = li?.GetChildAt(0) as AppCompatRadioButton;
-            if (radioButton != null)
+            //var li = (args.Child as MvxListItemView);
+            var radioButton = args.Child as AppCompatRadioButton;
+            
+            // radio buttons require an id so that they get un-checked correctly
+            if (radioButton?.Id == NoId)
             {
-                // radio buttons require an id so that they get un-checked correctly
-                if (radioButton.Id == NoId)
-                {
-                    radioButton.Id = GenerateViewId();
-                }
-                radioButton.CheckedChange += OnRadioButtonCheckedChange;
-            }
-        }
-
-        private void OnRadioButtonCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
-        {
-            var radionButton = (sender as AppCompatRadioButton);
-            if (radionButton != null)
-            {
-                Check(radionButton.Id);
+                radioButton.Id = GenerateViewId();
             }
         }
 
@@ -114,12 +100,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 {
                     _adapter.DataSetChanged += AdapterOnDataSetChanged;
                 }
-
-                if (_adapter == null)
+                else
                 {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
+
+                if (existing != null)
+                    existing.ItemsSource = null;
             }
         }
 
@@ -134,28 +122,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             get { return Adapter.ItemTemplateId; }
             set { Adapter.ItemTemplateId = value; }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (disposing)
-            {
-                if (_adapter != null)
-                    _adapter.DataSetChanged -= AdapterOnDataSetChanged;
-
-                ChildViewAdded -= this.OnChildViewAdded;
-                ChildViewRemoved -= this.OnChildViewRemoved;
-
-                var childCount = ChildCount;
-                for (var i = 0; i < childCount; i++)
-                {
-                    var child = GetChildAt(i) as AppCompatRadioButton;
-                    if (child != null)
-                        child.CheckedChange -= OnRadioButtonCheckedChange;
-                }
-            }
         }
 
         private static long _nextGeneratedViewId = 1;
@@ -179,6 +145,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                     return result;
                 }
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_adapter != null)
+                    _adapter.DataSetChanged -= AdapterOnDataSetChanged;
+
+                ChildViewAdded -= OnChildViewAdded;
+                ChildViewRemoved -= OnChildViewRemoved;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

@@ -1,0 +1,54 @@
+# configuration for "master" branch
+-
+  branches:
+      only:
+        - master
+  version: 1.0.{build}
+  image: Visual Studio 2017 RC
+  environment:
+    ANDROID_HOME: "C:\\android-sdk-windows"
+    NUGET_SOURCE: https://www.nuget.org/api/v2/package
+    NUGET_APIKEY:
+      secure: I7T89cNuXIoOooGTaZm/nKrJ5JwZpt3F82D6Y7bJoxO5yQ6hpDnz0xQhef/KKr0G
+  init:
+  - cd \
+  - appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
+  - 7z x android-sdk_r24.4.1-windows.zip > nul
+  - cd "C:\projects\MvvmCross"
+  install: 
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t android-24
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
+  build_script:
+  - ps: .\build.ps1
+  test: off
+  # configuration for "master" branch
+-
+  branches:
+      only:
+        - develop
+  version: 1.0.{build}
+  image: Visual Studio 2017 RC
+  environment:
+    ANDROID_HOME: "C:\\android-sdk-windows"
+    NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
+    NUGET_APIKEY:
+      secure: m3uewWCh6Y5jqTZIfwMDfs8GWdbwTZjfiEl13AWY7T3u3bPspGA/lgwe8jdxjBm9
+  init:
+  - cd \
+  - appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
+  - 7z x android-sdk_r24.4.1-windows.zip > nul
+  - cd "C:\projects\MvvmCross"
+  install: 
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t android-24
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
+  build_script:
+  - ps: .\build.ps1
+  test: off
