@@ -17,7 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
-            local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
+            local:MvxGroupedDataConverter="@string/recyclerview_listitem_grouped_data_converter"
+            local:MvxGroupSectionLayoutId="@layout/listitem_recyclerviewexample_groupheader"
+            local:MvxBind="ItemsSource GroupedItems; ItemClick ItemSelected" />
     </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

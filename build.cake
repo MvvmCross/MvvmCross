@@ -6,6 +6,15 @@ var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 
+var local = BuildSystem.IsLocalBuild;
+var isDevelopBranch = StringComparer.OrdinalIgnoreCase.Equals("develop", AppVeyor.Environment.Repository.Branch);
+var isReleaseBranch = StringComparer.OrdinalIgnoreCase.Equals("master", AppVeyor.Environment.Repository.Branch);
+var isTagged = AppVeyor.Environment.Repository.Tag.IsTag;
+
+var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
+var isRepository = StringComparer.OrdinalIgnoreCase.Equals("mvvmcross/mvvmcross", AppVeyor.Environment.Repository.Name);
+
 Task("Clean").Does(() =>
 {
     CleanDirectories("./**/bin");
@@ -24,13 +33,21 @@ Task("Version").Does(() => {
 	Information("VI:\t{0}", versionInfo.FullSemVer);
 });
 
+Task("UpdateAppVeyorBuildNumber")
+	.IsDependentOn("Version")
+    .WithCriteria(() => isRunningOnAppVeyor)
+    .Does(() =>
+{
+    AppVeyor.UpdateBuildVersion(versionInfo.FullBuildMetaData);
+});
+
 Task("Restore").Does(() => {
 	NuGetRestore(sln);
 });
 
 Task("Build")
 	.IsDependentOn("Clean")
-	.IsDependentOn("Version")
+	.IsDependentOn("UpdateAppVeyorBuildNumber")
 	.IsDependentOn("Restore")
 	.Does(() =>  {
 	
@@ -49,7 +66,8 @@ Task("GitLink")
 {
 	GitLink(sln.GetDirectory(), 
 		new GitLinkSettings {
-			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid")
+			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
+			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81")
 		});
 });
 
@@ -59,17 +77,18 @@ Task("Package")
 {
 	var nugetSettings = new NuGetPackSettings {
 		Authors = new [] { "MvvmCross contributors" },
-		Owners = new [] { "MvvmCross Team" },
+		Owners = new [] { "MvvmCross" },
 		IconUrl = new Uri("http://i.imgur.com/BvdAtgT.png"),
 		ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
 		LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
-		Copyright = "Copyright (c) MvvmCross Team",
+		Copyright = "Copyright (c) MvvmCross",
 		RequireLicenseAcceptance = false,
 		Version = versionInfo.NuGetVersion,
 		Symbols = false,
 		NoPackageAnalysis = true,
 		OutputDirectory = outputDir,
-		Verbosity = NuGetVerbosity.Detailed
+		Verbosity = NuGetVerbosity.Detailed,
+		BasePath = "./nuspec"
 	};
 
 	EnsureDirectoryExists(outputDir);
@@ -77,7 +96,6 @@ Task("Package")
 	var nuspecs = new List<string> {
 		"MvvmCross.nuspec",
 		"MvvmCross.Binding.nuspec",
-		"MvvmCross.BindingEx.nuspec",
 		"MvvmCross.CodeAnalysis.nuspec",
 		"MvvmCross.Console.Platform.nuspec",
 		"MvvmCross.Core.nuspec",
@@ -122,8 +140,8 @@ Task("Package")
 		"MvvmCross.Plugin.ThreadUtils.nuspec",
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
-		"MvvmCross.Plugin.StarterPack.nuspec",
-		"MvvmCross.Plugin.Tests.nuspec"
+		"MvvmCross.StarterPack.nuspec",
+		"MvvmCross.Tests.nuspec"
 	};
 
 	foreach(var nuspec in nuspecs)
@@ -132,8 +150,47 @@ Task("Package")
 	}
 });
 
+Task("PublishPackages")
+    .IsDependentOn("Package")
+    .WithCriteria(() => !local)
+    .WithCriteria(() => !isPullRequest)
+    .WithCriteria(() => isRepository)
+    .WithCriteria(() => isDevelopBranch || isReleaseBranch)
+    .Does (() =>
+{
+	if (isReleaseBranch && !isTagged)
+    {
+        Information("Packages will not be published as this release has not been tagged.");
+        return;
+    }
+
+	// Resolve the API key.
+    var apiKey = EnvironmentVariable("NUGET_APIKEY");
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        throw new Exception("The NUGET_APIKEY environment variable is not defined.");
+    }
+
+    var source = EnvironmentVariable("NUGET_SOURCE");
+    if (string.IsNullOrEmpty(source))
+    {
+        throw new Exception("The NUGET_SOURCE environment variable is not defined.");
+    }
+
+	var nugetFiles = GetFiles(outputDir + "/*.nupkg");
+
+	foreach(var nugetFile in nugetFiles)
+	{
+    	NuGetPush(nugetFile, new NuGetPushSettings {
+            Source = source,
+            ApiKey = apiKey
+        });
+	}
+});
+
+
 Task("Default")
-	.IsDependentOn("Package")
+	.IsDependentOn("PublishPackages")
 	.Does(() => {
 	
 	});

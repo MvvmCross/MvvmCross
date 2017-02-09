@@ -2,27 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.Json</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - Json Plugin</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'Json' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
 			<dependency id="Newtonsoft.Json" version="9.0.1" />
 		</dependencies>
 	</metadata>
 	<files>
-		<!-- Common -->
-		<file src="..\Json\MvvmCross.Plugins.Json\**\*.cs" target="src\MvvmCross.Plugins.Json" />
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\portable-net45+win+wpa81+wp80" />
 
@@ -33,16 +24,9 @@ This package contains the 'Json' plugin for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\net45" />
 		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\net45\Bootstrap\JsonPluginBootstrap.cs.pp" />
 
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\netcore45" />
-		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\JsonPluginBootstrap.cs.pp" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\portable-win81+wpa81" />	
-		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\win81\Bootstrap\JsonPluginBootstrap.cs.pp" />	
-		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\JsonPluginBootstrap.cs.pp" />	
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\JsonPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\JsonPluginBootstrap.cs.pp" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Json.*" target="lib\MonoAndroid" />
@@ -57,19 +41,3 @@ This package contains the 'Json' plugin for MvvmCross</description>
 		
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
