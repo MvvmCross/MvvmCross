@@ -10,8 +10,9 @@ namespace MvvmCross.Wpf.Views
     using System.Windows.Controls;
 
     using MvvmCross.Core.ViewModels;
+    using System;
 
-    public class MvxWpfView : UserControl, IMvxWpfView
+    public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
     {
         private IMvxViewModel _viewModel;
 
@@ -23,6 +24,30 @@ namespace MvvmCross.Wpf.Views
                 this._viewModel = value;
                 this.DataContext = value;
             }
+        }
+
+        public MvxWpfView()
+        {
+            this.Unloaded += MvxWpfView_Unloaded;
+            this.Loaded += MvxWpfView_Loaded;
+        }
+
+        private void MvxWpfView_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ViewModel?.Disappearing();
+            ViewModel?.Disappeared();
+        }
+
+        private void MvxWpfView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ViewModel?.Appearing();
+            ViewModel?.Appeared();
+        }
+
+        public void Dispose()
+        {
+            this.Unloaded -= MvxWpfView_Unloaded;
+            this.Loaded -= MvxWpfView_Loaded;
         }
     }
 
