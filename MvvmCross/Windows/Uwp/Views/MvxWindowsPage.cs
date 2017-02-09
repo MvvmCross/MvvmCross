@@ -21,7 +21,36 @@ namespace MvvmCross.WindowsUWP.Views
     public class MvxWindowsPage
         : Page
         , IMvxWindowsView
+        , IDisposable
     {
+        public MvxWindowsPage()
+        {
+            this.Loading += MvxWindowsPage_Loading;
+            this.Loaded += MvxWindowsPage_Loaded;
+            this.Unloaded += MvxWindowsPage_Unloaded;
+        }
+
+        private void MvxWindowsPage_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
+        {
+            ViewModel?.Appearing();
+        }
+
+        private void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ViewModel?.Appeared();
+        }
+
+        private void MvxWindowsPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ViewModel?.Disappeared();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            ViewModel?.Disappearing();
+            base.OnNavigatingFrom(e);
+        }
+
         private IMvxViewModel _viewModel;
 
         public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(this.Frame);
@@ -116,6 +145,13 @@ namespace MvvmCross.WindowsUWP.Views
         {
             var frameState = this.SuspensionManager.SessionStateForFrame(this.WrappedFrame);
             frameState[this._pageKey] = bundle.Data;
+        }
+
+        public void Dispose()
+        {
+            this.Loading -= MvxWindowsPage_Loading;
+            this.Loaded -= MvxWindowsPage_Loaded;
+            this.Unloaded -= MvxWindowsPage_Unloaded;
         }
     }
 
