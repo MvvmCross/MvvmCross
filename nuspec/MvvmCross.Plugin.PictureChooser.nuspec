@@ -2,37 +2,17 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.PictureChooser</id>
-		<version>4.4.1</version>
+		<version>$version$</version>
 		<title>MvvmCross - PictureChooser Plugin</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'PictureChooser' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>
-		<!-- src -->
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser" />
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.WindowsStore" />
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsStore\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.WindowsUWP" />
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsCommon\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.WindowsCommon" />
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.Droid\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.Droid" />	
-		<file src="..\PictureChooser\MvvmCross.Plugins.PictureChooser.iOS\**\*.cs" 
-			target="src\MvvmCross.Plugins.PictureChooser.iOS" />	
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
 			target="lib\portable-net45+win+wpa81" />
@@ -42,18 +22,9 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 			target="lib\dotnet" />
 
 		<!-- uwp -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\uap" />
-		<file src="..\bin\Release\Mvx\WindowsUWP\MvvmCross.Plugins.PictureChooser.WindowsUWP.*" target="lib\uap" />
-		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\uap\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\WindowsStore\MvvmCross.Plugins.PictureChooser.WindowsStore.*" target="lib\win81" />
-		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\win81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\WindowsPhoneStore\MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.*" target="lib\wpa81" />
-		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.PictureChooser.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\PictureChooserPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\PictureChooserPluginBootstrap.cs.pp" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" target="lib\MonoAndroid" />
@@ -75,6 +46,7 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 
 	</files>
 </package>
+
 
 
 

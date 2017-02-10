@@ -47,6 +47,9 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             get { return this._dataContext; }
             set
             {
+                if (this._dataContext == value)
+                    return;
+
                 this._dataContext = value;
                 this.OnDataContextChanged();
             }

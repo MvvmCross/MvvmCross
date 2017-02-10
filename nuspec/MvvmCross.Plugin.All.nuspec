@@ -2,46 +2,36 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.All</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - All Plugins</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains all plugins for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Accelerometer" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Color" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.DownloadCache" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Email" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.File" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Json" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.JsonLocalization" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Location" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Messenger" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.MethodBinding" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Network" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.PhoneCall" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.PictureChooser" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.ReflectionEx" version="4.4.0" />		  
-			<dependency id="MvvmCross.Plugin.ResourceLoader" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Share" version="4.4.0" />	  
-			<dependency id="MvvmCross.Plugin.SQLitePCL" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.ThreadUtils" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.Visibility" version="4.4.0" />
-			<dependency id="MvvmCross.Plugin.WebBrowser" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Accelerometer" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Color" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.DownloadCache" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Email" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.File" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Json" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.JsonLocalization" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Location" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Messenger" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.MethodBinding" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Network" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.PhoneCall" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.PictureChooser" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.ReflectionEx" version="[$version$]" />		  
+			<dependency id="MvvmCross.Plugin.ResourceLoader" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Share" version="[$version$]" />	  
+			<dependency id="MvvmCross.Plugin.ThreadUtils" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.Visibility" version="[$version$]" />
+			<dependency id="MvvmCross.Plugin.WebBrowser" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>		
-		<!-- Common -->
-		<file src="..\All\MvvmCross.Plugins.All\**\*.cs" target="src\MvvmCross.Plugins.All" />
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\portable-win+net45+wp8+win8+wpa81\MvvmCross.Plugins.All.pdb" />
@@ -54,13 +44,9 @@ This package contains all plugins for MvvmCross</description>
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\net45\MvvmCross.Plugins.All.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\net45\MvvmCross.Plugins.All.pdb" />
 
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\netcore45\MvvmCross.Plugins.All.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\netcore45\MvvmCross.Plugins.All.pdb" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\win81\MvvmCross.Plugins.All.dll" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\wpa81\MvvmCross.Plugins.All.dll" />
+		<!-- uap -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\uap10.0\MvvmCross.Plugins.All.dll" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.pdb" target="lib\uap10.0\MvvmCross.Plugins.All.pdb" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.All.dll" target="lib\MonoAndroid\MvvmCross.Plugins.All.dll" />
@@ -76,4 +62,5 @@ This package contains all plugins for MvvmCross</description>
 
 	</files>
 </package>
+
 

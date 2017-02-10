@@ -2,28 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Droid.Support.V4</id>
-		<version>4.4.1</version>
+		<version>$version$</version>
 		<title>MvvmCross Android Support - V4</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport/blob/master/LICENSE</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-AndroidSupport</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains Support v4 support for MvvmCross.</description>
 		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support v4</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<!-- Disable those as long as we don't have actual content in them
-			<dependency id="MvvmCross.Droid.Support.Compat" version="4.4.0"/>
-			<dependency id="MvvmCross.Droid.Support.Media.Compat" version="4.4.0"/>
+			<dependency id="MvvmCross.Droid.Support.Compat" version="$version$"/>
+			<dependency id="MvvmCross.Droid.Support.Media.Compat" version="$version$"/>
 			-->
-			<dependency id="MvvmCross.Droid.Support.Fragment" version="4.4.0"/>
-			<dependency id="MvvmCross.Droid.Support.Core.UI" version="4.4.0"/>
-			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="4.4.1"/>
+			<dependency id="MvvmCross.Droid.Support.Fragment" version="[$version$]"/>
+			<dependency id="MvvmCross.Droid.Support.Core.UI" version="[$version$]"/>
+			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="[$version$]"/>
 		</dependencies>
 	</metadata>
 	<files>
 	</files>
 </package>
+

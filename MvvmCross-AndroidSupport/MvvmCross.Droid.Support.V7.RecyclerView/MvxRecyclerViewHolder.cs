@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -81,6 +83,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             this.ItemView.LongClick += OnItemViewOnLongClick;
         }
 
+        public ICommand HeaderClickCommand { get; set; }
+    
+        public ICommand FooterClickCommand { get; set; }
+
+        public ICommand GroupHeaderClickCommand { get; set; }
+
         protected virtual void ExecuteCommandOnItem(ICommand command)
         {
             if (command == null)
@@ -90,6 +98,28 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (item == null)
                 return;
 
+            if (item is MvxHeaderItemData)
+            {
+                if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
+                    HeaderClickCommand.Execute(null);
+                return;
+            }
+
+            if (item is MvxFooterItemData)
+            {
+                if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
+                    FooterClickCommand.Execute(null);
+                return;
+            }
+
+            if (item is MvxGroupedData)
+            {
+                var groupedData = item as MvxGroupedData;
+                if (GroupHeaderClickCommand != null && GroupHeaderClickCommand.CanExecute(groupedData.Key))
+                    GroupHeaderClickCommand.Execute(groupedData.Key);
+                return;
+            }
+                
             if (!command.CanExecute(item))
                 return;
 
@@ -132,9 +162,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected override void Dispose(bool disposing)
         {
+            // Clean up the binding context since nothing
+            // explicitly Disposes of the ViewHolder.
+            _bindingContext?.ClearAllBindings();
+
             if (disposing)
             {
-                _bindingContext.ClearAllBindings();
                 _cachedDataContext = null;
 
                 if (ItemView != null)

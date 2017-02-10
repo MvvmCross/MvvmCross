@@ -2,45 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Plugin.ResxLocalization</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - ResxLocalization Plugin</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross-Plugins</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'ResxLocalization' plugin for MvvmCross</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross.Platform" version="4.4.0" />
-			<dependency id="MvvmCross.Binding" version="4.4.0" />
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+			<dependency id="MvvmCross.Binding" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>
-		<!-- src -->
-		<file src="..\ResxLocalization\MvvmCross.Plugins.ResxLocalization\**.*"
-			target="src\MvvmCross.Plugins.ResxLocalization" />
-
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\dotnet" />
-
-		<!-- store -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\netcore45" />
-		<file src="BootstrapContent\ResxLocalizationPluginBootstrap.cs.pp" target="content\netcore45\Bootstrap\ResxLocalizationPluginBootstrap.cs.pp" />
-
-		<!-- windows common -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\win81" />		
-		<file src="BootstrapContent\ResxLocalizationPluginBootstrap.cs.pp" target="content\win81\Bootstrap\ResxLocalizationPluginBootstrap.cs.pp" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\wpa81" />		
-		<file src="BootstrapContent\ResxLocalizationPluginBootstrap.cs.pp" target="content\wpa81\Bootstrap\ResxLocalizationPluginBootstrap.cs.pp" />
-
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\portable-win81+wpa81" />		
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\dotnet" />	
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\MonoAndroid" />
@@ -52,24 +30,5 @@ This package contains the 'ResxLocalization' plugin for MvvmCross</description>
 
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResxLocalization.*" target="lib\Xamarin.Mac20" />
-		
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
