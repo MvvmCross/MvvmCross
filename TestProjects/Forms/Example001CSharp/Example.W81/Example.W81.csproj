@@ -142,71 +142,71 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.ApplicationInsights.1.2.3\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Microsoft.ApplicationInsights.1.2.3\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights.Extensibility.Windows, Version=1.1.1.482, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.ApplicationInsights.WindowsApps.1.1.1\lib\win81\Microsoft.ApplicationInsights.Extensibility.Windows.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Microsoft.ApplicationInsights.WindowsApps.1.1.1\lib\win81\Microsoft.ApplicationInsights.Extensibility.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights.PersistenceChannel, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.ApplicationInsights.PersistenceChannel.1.2.3\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.PersistenceChannel.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Microsoft.ApplicationInsights.PersistenceChannel.1.2.3\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.PersistenceChannel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\portable-win8+wpa81\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\portable-win8+wpa81\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Binding.4.0.0\lib\netcore45\MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Binding.4.0.0\lib\netcore45\MvvmCross.Binding.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\win81\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Core.4.0.0\lib\win81\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Forms.Presenter.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.1\lib\win81\MvvmCross.Forms.Presenter.Core.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Forms.Presenter.4.0.1\lib\win81\MvvmCross.Forms.Presenter.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Forms.Presenter.Windows81, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Forms.Presenter.4.0.1\lib\win81\MvvmCross.Forms.Presenter.Windows81.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Forms.Presenter.4.0.1\lib\win81\MvvmCross.Forms.Presenter.Windows81.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform.WindowsCommon, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Platform.WindowsCommon.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Platform.4.0.0\lib\win81\MvvmCross.Platform.WindowsCommon.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.WindowsCommon, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.0.0\lib\win81\MvvmCross.WindowsCommon.dll</HintPath>
+      <HintPath>..\..\..\..\packages\MvvmCross.Core.4.0.0\lib\win81\MvvmCross.WindowsCommon.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.WinRT, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.WinRT.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.WinRT.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.WinRT.Tablet, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.WinRT.Tablet.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Platform.WinRT.Tablet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\lib\win81\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -220,12 +220,12 @@
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Import Project="..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
