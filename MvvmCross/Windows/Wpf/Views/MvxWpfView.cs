@@ -5,40 +5,40 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Controls;
+using MvvmCross.Core.ViewModels;
+using System;
+using System.Windows;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System.Windows.Controls;
-
-    using MvvmCross.Core.ViewModels;
-    using System;
-
     public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
     {
         private IMvxViewModel _viewModel;
 
         public IMvxViewModel ViewModel
         {
-            get { return this._viewModel; }
+            get { return _viewModel; }
             set
             {
-                this._viewModel = value;
-                this.DataContext = value;
+                _viewModel = value;
+                DataContext = value;
             }
         }
 
         public MvxWpfView()
         {
-            this.Unloaded += MvxWpfView_Unloaded;
-            this.Loaded += MvxWpfView_Loaded;
+            Unloaded += MvxWpfView_Unloaded;
+            Loaded += MvxWpfView_Loaded;
         }
 
-        private void MvxWpfView_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        private void MvxWpfView_Unloaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.Disappearing();
             ViewModel?.Disappeared();
         }
 
-        private void MvxWpfView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void MvxWpfView_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.Appearing();
             ViewModel?.Appeared();
@@ -46,8 +46,22 @@ namespace MvvmCross.Wpf.Views
 
         public void Dispose()
         {
-            this.Unloaded -= MvxWpfView_Unloaded;
-            this.Loaded -= MvxWpfView_Loaded;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~MvxWpfView()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Unloaded -= MvxWpfView_Unloaded;
+                Loaded -= MvxWpfView_Loaded;
+            }
         }
     }
 
