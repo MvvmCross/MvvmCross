@@ -11,13 +11,13 @@ namespace MvvmCross.Core.ViewModels
     {
         MvxRequestedBy RequestedBy { get; set; }
 
-		void Appearing();
+        void Appearing();
 
-		void Appeared();
+        void Appeared();
 
-		void Disappearing();
+        void Disappearing();
 
-		void Disappeared();
+        void Disappeared();
 
         void Init(IMvxBundle parameters);
 
