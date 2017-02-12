@@ -58,6 +58,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         }
 
         public string UniqueImmutableCacheTag => Tag;
+
+        public override void OnDestroy ()
+        {
+            base.OnDestroy ();
+            ViewModel?.Destroy ();
+        }
     }
 
     public abstract class MvxDialogFragment<TViewModel>

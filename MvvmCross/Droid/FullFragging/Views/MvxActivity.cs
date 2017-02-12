@@ -96,6 +96,12 @@ namespace MvvmCross.Droid.FullFragging.Views
                 return ret;
             }
         }
+
+        protected override void OnDestroy ()
+        {
+            base.OnDestroy ();
+            ViewModel?.Destroy ();
+        }
     }
 
     public abstract class MvxActivity<TViewModel>
