@@ -77,6 +77,14 @@ namespace MvvmCross.iOS.Views
 			ViewModel?.Disappeared();
 		}
 
+        public override void DidMoveToParentViewController (UIViewController parent)
+        {
+            base.DidMoveToParentViewController (parent);
+            if (parent == null) {
+                ViewModel?.Destroy ();
+            }
+        }
+
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
