@@ -5,19 +5,19 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.WindowsUWP.Views.Suspension;
+
 namespace MvvmCross.WindowsUWP.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Windows.UI.Xaml.Controls;
-    using Windows.UI.Xaml.Navigation;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.WindowsUWP.Views.Suspension;
-
     public class MvxWindowsPage
         : Page
         , IMvxWindowsView
@@ -25,9 +25,9 @@ namespace MvvmCross.WindowsUWP.Views
     {
         public MvxWindowsPage()
         {
-            this.Loading += MvxWindowsPage_Loading;
-            this.Loaded += MvxWindowsPage_Loaded;
-            this.Unloaded += MvxWindowsPage_Unloaded;
+            Loading += MvxWindowsPage_Loading;
+            Loaded += MvxWindowsPage_Loaded;
+            Unloaded += MvxWindowsPage_Unloaded;
         }
 
         private void MvxWindowsPage_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
@@ -53,18 +53,18 @@ namespace MvvmCross.WindowsUWP.Views
 
         private IMvxViewModel _viewModel;
 
-        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(this.Frame);
+        public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
 
         public IMvxViewModel ViewModel
         {
-            get { return this._viewModel; }
+            get { return _viewModel; }
             set
             {
-                if (this._viewModel == value)
+                if (_viewModel == value)
                     return;
 
-                this._viewModel = value;
-                this.DataContext = this.ViewModel;
+                _viewModel = value;
+                DataContext = ViewModel;
             }
         }
 
@@ -87,7 +87,7 @@ namespace MvvmCross.WindowsUWP.Views
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
 
-            this.OnViewCreate(req, () => this.LoadStateBundle(e));
+            this.OnViewCreate(req, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -95,37 +95,37 @@ namespace MvvmCross.WindowsUWP.Views
             base.OnNavigatedFrom(e);
 
             var bundle = this.CreateSaveStateBundle();
-            this.SaveStateBundle(e, bundle);
+            SaveStateBundle(e, bundle);
             
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
         }
 
-        private String _pageKey;
+        private string _pageKey;
 
         private IMvxSuspensionManager _suspensionManager;
         protected IMvxSuspensionManager SuspensionManager
         {
             get
             {
-                this._suspensionManager = this._suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
-                return this._suspensionManager;
+                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
+                return _suspensionManager;
             }
         }
 
         protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
         {
             // nothing loaded by default
-            var frameState = this.SuspensionManager.SessionStateForFrame(this.WrappedFrame);
-            this._pageKey = "Page-" + this.Frame.BackStackDepth;
+            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
+            _pageKey = "Page-" + Frame.BackStackDepth;
              IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {
                 // Clear existing state for forward navigation when adding a new page to the
                 // navigation stack
-                var nextPageKey = this._pageKey;
-                var nextPageIndex = this.Frame.BackStackDepth;
+                var nextPageKey = _pageKey;
+                var nextPageIndex = Frame.BackStackDepth;
                 while (frameState.Remove(nextPageKey))
                 {
                     nextPageIndex++;
@@ -134,7 +134,7 @@ namespace MvvmCross.WindowsUWP.Views
             }
             else
             {
-                var dictionary = (IDictionary<string, string>)frameState[this._pageKey];
+                var dictionary = (IDictionary<string, string>)frameState[_pageKey];
                 bundle = new MvxBundle(dictionary);
             }
 
@@ -143,15 +143,30 @@ namespace MvvmCross.WindowsUWP.Views
 
         protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
         {
-            var frameState = this.SuspensionManager.SessionStateForFrame(this.WrappedFrame);
-            frameState[this._pageKey] = bundle.Data;
+            var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
+            frameState[_pageKey] = bundle.Data;
         }
+
 
         public void Dispose()
         {
-            this.Loading -= MvxWindowsPage_Loading;
-            this.Loaded -= MvxWindowsPage_Loaded;
-            this.Unloaded -= MvxWindowsPage_Unloaded;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~MvxWindowsPage()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Loading -= MvxWindowsPage_Loading;
+                Loaded -= MvxWindowsPage_Loaded;
+                Unloaded -= MvxWindowsPage_Unloaded;
+            }
         }
     }
 
