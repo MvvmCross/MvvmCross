@@ -23,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
             _subscription?.Dispose();
             _subscription = null;
 
-            _itemsSource = itemsSourceEnumerable ?? Enumerable.Empty<object>();
+			_itemsSource = itemsSourceEnumerable ?? Enumerable.Empty<object>();
 
             if (_itemsSource != null && !(_itemsSource is IList))
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,

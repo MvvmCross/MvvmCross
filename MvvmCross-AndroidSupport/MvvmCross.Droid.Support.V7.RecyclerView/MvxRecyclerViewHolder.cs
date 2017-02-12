@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
 
