@@ -51,6 +51,10 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
+        public virtual void Destroy ()
+        {
+        }
+
         public void SaveState(IMvxBundle state)
         {
             this.SaveStateToBundle(state);
