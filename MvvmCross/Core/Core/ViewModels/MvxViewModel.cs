@@ -37,7 +37,7 @@ namespace MvvmCross.Core.ViewModels
 		{ 
 		}
 
-public void Init(IMvxBundle parameters)
+		public void Init(IMvxBundle parameters)
         {
             this.InitFromBundle(parameters);
         }
@@ -50,6 +50,10 @@ public void Init(IMvxBundle parameters)
         public virtual void Start()
         {
         }
+
+		public virtual void Destroy ()
+		{
+		}
 
         public void SaveState(IMvxBundle state)
         {
