@@ -25,7 +25,7 @@ namespace MvvmCross.Core.ViewModels
 
         void Start();
 
-		void Destroy ();
+        void Destroy ();
 
         void SaveState(IMvxBundle state);
     }
