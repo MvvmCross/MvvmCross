@@ -90,10 +90,6 @@
       <Project>{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}</Project>
       <Name>MvvmCross.Plugins.PictureChooser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ReflectionEx\MvvmCross.Plugins.ReflectionEx\MvvmCross.Plugins.ReflectionEx.csproj">
-      <Project>{22648A57-3D94-4604-A238-B0B92BDDC3A5}</Project>
-      <Name>MvvmCross.Plugins.ReflectionEx</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>MvvmCross.Plugins.ResourceLoader</Name>
