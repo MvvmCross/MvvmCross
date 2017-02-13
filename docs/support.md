@@ -1,6 +1,6 @@
 ---
 layout: page
-title: support
+title: Support
 permalink: /support/
 ---
 
