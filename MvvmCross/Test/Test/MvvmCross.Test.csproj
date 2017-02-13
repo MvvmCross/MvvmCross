@@ -83,6 +83,10 @@
     <Compile Include="ViewModels\MvxNotifyPropertyChangedTest.cs" />
     <Compile Include="ViewModels\MvxSaveStateTest.cs" />
     <Compile Include="ViewModels\MvxViewModelLoaderTest.cs" />
+    <Compile Include="Navigation\RoutingServiceTests.cs" />
+    <Compile Include="Mocks\Dispatchers\NavigationMockDispatcher.cs" />
+    <Compile Include="Mocks\TestViewModels\MvxDummyViewModels.cs" />
+    <Compile Include="Stubs\SimpleRoutingFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
@@ -103,6 +107,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Navigation\" />
+    <Folder Include="Stubs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
