@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="RoutingExample.Droid.RoutingExample.Droid" android:versionCode="1" android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="24" />
+	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="24" />
 	<application android:label="RoutingExample.Droid"></application>
 </manifest>
