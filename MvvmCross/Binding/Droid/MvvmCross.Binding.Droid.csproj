@@ -20,7 +20,8 @@
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <AndroidStoreUncompressedFileExtensions />
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -77,6 +78,7 @@
     <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="MvxAndroidPropertyBinding.cs" />
     <Compile Include="MvxViewAssemblyBootstrapAction.cs" />
     <Compile Include="ResourceHelpers\IMvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
