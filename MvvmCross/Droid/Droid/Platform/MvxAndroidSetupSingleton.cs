@@ -33,7 +33,7 @@ namespace MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                if (this._initialized)
+                if (_initialized)
                     return;
 
                 if (IsInitialisedTaskCompletionSource != null)
@@ -66,7 +66,7 @@ namespace MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                this._currentSplashScreen = null;
+                _currentSplashScreen = null;
             }
         }
 
@@ -129,15 +129,13 @@ namespace MvvmCross.Droid.Platform
 
         protected virtual void CreateSetup(Context applicationContext)
         {
-            var setupType = this.FindSetupType();
+            var setupType = FindSetupType();
             if (setupType == null)
-            {
                 throw new MvxException("Could not find a Setup class for application");
-            }
 
             try
             {
-                this._setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
+                _setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
             }
             catch (Exception exception)
             {
@@ -147,13 +145,18 @@ namespace MvvmCross.Droid.Platform
 
         protected virtual Type FindSetupType()
         {
-            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.ExceptionSafeGetTypes()
-                        where type.Name == "Setup"
-                        where typeof(MvxAndroidSetup).IsAssignableFrom(type)
-                        select type;
+			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+			{
+				foreach (var type in assembly.ExceptionSafeGetTypes())
+				{
+					if (type.Name != "Setup") continue;
+					if (!typeof(MvxAndroidSetup).IsAssignableFrom(type)) continue;
 
-            return query.FirstOrDefault();
+					return type;
+				}
+			}
+
+			return default(Type);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -162,7 +165,7 @@ namespace MvvmCross.Droid.Platform
             {
                 lock (LockObject)
                 {
-                    this._currentSplashScreen = null;
+                    _currentSplashScreen = null;
                 }
             }
             base.Dispose(isDisposing);
