@@ -67,7 +67,7 @@ Task("GitLink")
 	GitLink(sln.GetDirectory(), 
 		new GitLinkSettings {
 			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
-			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81,Eventhooks.Core,Eventhooks.Droid,Eventhooks.iOS")
+			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81,Eventhooks.Core,Eventhooks.Droid,Eventhooks.iOS,RoutingExample.Core,RoutingExample.iOS,RoutingExample.Droid,RoutingExample.Uwp,RoutingExample.Wpf")
 		});
 });
 
@@ -133,7 +133,6 @@ Task("Package")
 		"MvvmCross.Plugin.Network.nuspec",
 		"MvvmCross.Plugin.PhoneCall.nuspec",
 		"MvvmCross.Plugin.PictureChooser.nuspec",
-		"MvvmCross.Plugin.ReflectionEx.nuspec",
 		"MvvmCross.Plugin.ResourceLoader.nuspec",
 		"MvvmCross.Plugin.ResxLocalization.nuspec",
 		"MvvmCross.Plugin.Share.nuspec",
