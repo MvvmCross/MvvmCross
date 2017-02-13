@@ -7,7 +7,7 @@
 
 [![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
 
-MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps.
+MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. 
 
 ## Documentation & blog
 
