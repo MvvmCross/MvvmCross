@@ -37,7 +37,6 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.Network.PluginLoader),
                 typeof(MvvmCross.Plugins.PhoneCall.PluginLoader),
                 typeof(MvvmCross.Plugins.PictureChooser.PluginLoader),
-                typeof(MvvmCross.Plugins.ReflectionEx.PluginLoader),
                 typeof(MvvmCross.Plugins.ResourceLoader.PluginLoader),
                 typeof(MvvmCross.Plugins.Share.PluginLoader),
                 typeof(MvvmCross.Plugins.SoundEffects.PluginLoader),

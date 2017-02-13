@@ -37,8 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneCall", "PhoneCall", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PictureChooser", "PictureChooser", "{EB7A7EA9-995D-44EC-A4C9-7936BD6DF759}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReflectionEx", "ReflectionEx", "{465527B1-058F-4533-A92C-8477A93AC1AB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResourceLoader", "ResourceLoader", "{B3724F4D-C99C-4C89-88EC-76E823F01FB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Share", "Share", "{69F563DE-F6E1-4E6B-8C27-0F442F0EEFF0}"
@@ -160,20 +158,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.WindowsPhoneStore", "PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsCommon\MvvmCross.Plugins.PictureChooser.WindowsPhoneStore.csproj", "{46336EAF-2FBF-44D6-8276-52CAB32A485C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.PictureChooser.WindowsStore", "PictureChooser\MvvmCross.Plugins.PictureChooser.WindowsStore\MvvmCross.Plugins.PictureChooser.WindowsStore.csproj", "{C98A53D6-DDCB-4271-B55F-F8CC4C2608BE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx", "ReflectionEx\MvvmCross.Plugins.ReflectionEx\MvvmCross.Plugins.ReflectionEx.csproj", "{22648A57-3D94-4604-A238-B0B92BDDC3A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Console", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.Console\MvvmCross.Plugins.ReflectionEx.Console.csproj", "{ED3A71F0-8E9C-49DC-9EA2-B4821E31E777}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Droid", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.Droid\MvvmCross.Plugins.ReflectionEx.Droid.csproj", "{1368DB16-DFAE-4985-A0CD-CE3C753DAB70}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.iOS", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.iOS\MvvmCross.Plugins.ReflectionEx.iOS.csproj", "{2E587DF6-82DC-4F71-87AB-6EEB7A9F4C91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.WindowsCommon", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsCommon\MvvmCross.Plugins.ReflectionEx.WindowsCommon.csproj", "{E846ECBD-C585-4F6F-915C-7A6227FC95DF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.WindowsStore", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.WindowsStore\MvvmCross.Plugins.ReflectionEx.WindowsStore.csproj", "{70423584-026A-4F66-82D2-943D7E903007}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ReflectionEx.Wpf", "ReflectionEx\MvvmCross.Plugins.ReflectionEx.Wpf\MvvmCross.Plugins.ReflectionEx.Wpf.csproj", "{73E38ABA-14A4-4A83-BAA0-D7139D459A5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader", "ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj", "{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}"
 EndProject

@@ -133,7 +133,6 @@ Task("Package")
 		"MvvmCross.Plugin.Network.nuspec",
 		"MvvmCross.Plugin.PhoneCall.nuspec",
 		"MvvmCross.Plugin.PictureChooser.nuspec",
-		"MvvmCross.Plugin.ReflectionEx.nuspec",
 		"MvvmCross.Plugin.ResourceLoader.nuspec",
 		"MvvmCross.Plugin.ResxLocalization.nuspec",
 		"MvvmCross.Plugin.Share.nuspec",
