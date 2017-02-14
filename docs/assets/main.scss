@@ -14,7 +14,7 @@ $spacing-unit:     30px;
 
 $text-color:       #4c555a;
 $background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
+$brand-color:      #00ac65;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
@@ -66,4 +66,51 @@ $on-laptop:        800px;
     background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
     background-size: cover;
     min-height: 500px;
+}
+
+
+.landing-intro
+{
+    background: #2D2D2D;
+    padding: 50px 0;
+    color: #FDF3E7;
+    font-weight: 300;
+    margin-top: -30px;
+    text-align: center;
+}
+
+.button {
+  background: -webkit-linear-gradient( #9a9a9a, #646464);
+  background: linear-gradient( #9a9a9a, #646464);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 12px;
+  display: inline-block;
+  color: #fafafa;
+  text-decoration: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button:active {
+  box-shadow: none;
+}
+
+.buttons-unit .button {
+  font-size: 24px;
+  background: $brand-color;
+  color: #fafafa;
+}
+
+.landing-title
+{
+    font-weight: 400;
+    font-size: 64px;
 }
