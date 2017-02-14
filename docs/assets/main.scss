@@ -55,7 +55,13 @@ $on-laptop:        800px;
 
 .site-nav .page-link {
     color: rgba(255,255,255,0.8);
-    line-height: 1.5;
+    line-height: $base-line-height;
+}
+
+@media screen and (max-width: 600px) {
+    .site-nav .page-link {
+        color: $text-color;
+    }
 }
 
 .landing-intro
