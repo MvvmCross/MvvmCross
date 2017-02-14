@@ -4,3 +4,26 @@
       url: /documentation/basics/getting-started
     - text: Tutorial
       url: /documentation/basics/tutorial
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial
+
+- category: Not basics
+  subitems:
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial

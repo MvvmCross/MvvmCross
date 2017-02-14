@@ -122,15 +122,9 @@ $documentation-width: $content-width * 0.75;
 .documentation-menu > ul > li {
     font-weight: bold;
 }
-//reset list
-ol, ul {
-	list-style: none;
-}
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+.category{margin-top:25px;}
+//reset list
 
 ul, li{
 	margin: 0;

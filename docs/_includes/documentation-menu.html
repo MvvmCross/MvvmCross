@@ -3,7 +3,7 @@
 {% for item in include.nav %}
 	<li>
         {% if item.category %}
-            <span class="category">{{ item.category }}</span>
+            <div class="category">{{ item.category }}</div>
         {% endif %}
         {% if item.url %}
             <a href="{{ item.url }}">
