@@ -50,9 +50,20 @@ $on-laptop:        800px;
 {
     background-color: #00ac65;
     background-image: url({{ site.baseurl }}/img/triangles.png);
+    border-bottom: 0px;
 }
 
 .site-nav .page-link {
     color: rgba(255,255,255,0.8);
     line-height: 1.5;
+}
+
+.intro-header {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 500px;
 }
