@@ -4,7 +4,7 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
 $base-font-size:   16px;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
@@ -12,7 +12,7 @@ $base-line-height: 1.5;
 
 $spacing-unit:     30px;
 
-$text-color:       #111;
+$text-color:       #4c555a;
 $background-color: #fdfdfd;
 $brand-color:      #2a7ae2;
 
@@ -40,12 +40,6 @@ $on-laptop:        800px;
 
 //custom styling starts here
 
-body
-{
-    font-family: 'Proxima Nova', 'Open Sans', sans-serif;
-    color: #4c555a;
-}
-
 .header-logo
 {
     width: 129px;
@@ -55,7 +49,7 @@ body
 .site-header
 {
     background-color: #00ac65;
-    background-image: url(./img/triangles.png);
+    background-image: url({{ site.baseurl }}/img/triangles.png);
 }
 
 .site-nav .page-link {
