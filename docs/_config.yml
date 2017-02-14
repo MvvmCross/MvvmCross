@@ -33,3 +33,8 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+
+collections:
+  documentation:
+    output: true
+    permalink: /:collection/:path/:title:output_ext
