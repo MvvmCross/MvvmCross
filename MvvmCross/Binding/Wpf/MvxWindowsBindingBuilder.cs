@@ -134,12 +134,17 @@ namespace MvvmCross.BindingEx.Wpf
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterCustomBindingFactory<FrameworkElement>("Visible",
-                                                                    view => new MvxVisibleTargetBinding(view));
-            registry.RegisterCustomBindingFactory<FrameworkElement>("Collapsed",
-                                                                    view => new MvxCollapsedTargetBinding(view));
-            registry.RegisterCustomBindingFactory<FrameworkElement>("Hidden",
-                                                                    view => new MvxCollapsedTargetBinding(view));
+            registry.RegisterCustomBindingFactory<FrameworkElement>(
+                MvxWindowsPropertyBinding.FrameworkElement_Visible,
+                view => new MvxVisibleTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<FrameworkElement>(
+                MvxWindowsPropertyBinding.FrameworkElement_Collapsed,
+                view => new MvxCollapsedTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<FrameworkElement>(
+                MvxWindowsPropertyBinding.FrameworkElement_Hidden,
+                view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);
         }

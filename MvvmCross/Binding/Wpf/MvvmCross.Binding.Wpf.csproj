@@ -58,6 +58,7 @@
     <Compile Include="MvxDesignTimeChecker.cs" />
     <Compile Include="MvxWindowsAssemblyCache.cs" />
     <Compile Include="MvxWindowsBindingBuilder.cs" />
+    <Compile Include="MvxWindowsPropertyBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsBinding\MvxWindowsBindingCreator.cs" />
   </ItemGroup>
