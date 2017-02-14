@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="MvxMacBindingBuilder.cs" />
     <Compile Include="MvxMacPropertyBinding.cs" />
+    <Compile Include="MvxMacPropertyBindingExtensions.cs" />
     <Compile Include="Target\MvxNSViewVisibilityTargetBinding.cs" />
     <Compile Include="Target\MvxNSViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxNSSliderValueTargetBinding.cs" />
