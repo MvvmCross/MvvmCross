@@ -1,5 +1,5 @@
 ---
-layout: doc
+layout: documentation
 title: Tutorial
 permalink: /documentation/basics/tutorial
 ---

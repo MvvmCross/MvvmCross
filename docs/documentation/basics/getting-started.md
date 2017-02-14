@@ -1,5 +1,5 @@
 ---
-layout: doc
+layout: documentation
 title: Getting started
 permalink: /documentation/basics/getting-started
 ---
