@@ -4,6 +4,8 @@ title: Support
 permalink: /support/
 ---
 
+Got stuck? Need help? Get in touch with us on these different platforms. We do our best to answer your questions.
+
 **[StackOverflow][so]**
 
 Use StackOverflow to find already asked questions, and post new questions with details about your problem. Do add tags to at least MvvmCross and Xamarin so we are able to find it.
