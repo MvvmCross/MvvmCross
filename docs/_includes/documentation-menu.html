@@ -1,23 +1,19 @@
 {% assign navurl = page.url | remove: 'index.html' %}
-<ul>
-{% for item in include.nav %}
-	<li>
-        {% if item.category %}
-            <div class="category">{{ item.category }}</div>
-        {% endif %}
-        {% if item.url %}
-            <a href="{{ site.baseurl }}{{ item.url }}">
-                {% if item.url == navurl %}
-                    <u>{{ item.text }}</u>
-                {% else %}
-                    {{ item.text }}
-                {% endif %}
-            </a>
-        {% endif %}
-	</li>
+{% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
 
-	{% if item.subitems %}
-		{% include documentation-menu.html nav=item.subitems %}
-	{% endif %}
+{% for category in docs_by_category %}
+  <ul>
+    <div class="category">{{ category.name }}</div>
+  {% for item in category.items %}
+    <li>
+        <a href="{{ site.baseurl }}{{ item.url }}">
+        {% if item.url == navurl %}
+          <u>{{ item.title }}</u>
+        {% else %}
+          {{ item.title }}
+        {% endif %}
+        </a>
+    </li>
+  {% endfor %}
+  </ul>
 {% endfor %}
-</ul>
