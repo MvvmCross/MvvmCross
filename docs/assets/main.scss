@@ -94,6 +94,36 @@ $on-laptop:        800px;
   text-decoration: none;
 }
 
+.button-landing {
+  background: -webkit-linear-gradient( #9a9a9a, #646464);
+  background: linear-gradient( #9a9a9a, #646464);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 12px;
+  display: inline-block;
+  color: #fafafa;
+  text-decoration: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.button-landing:hover {
+  text-decoration: none;
+}
+
+.button-landing:active {
+  box-shadow: none;
+}
+
+.buttons-unit .button-landing {
+  font-size: 24px;
+  background: $brand-color;
+  color: #fafafa;
+}
+
 .landing-title
 {
     font-weight: 400;
