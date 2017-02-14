@@ -39,6 +39,13 @@ $on-laptop:        800px;
 @import "minima";
 
 //custom styling starts here
+
+body
+{
+    font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+    color: #4c555a;
+}
+
 .header-logo
 {
     width: 129px;
