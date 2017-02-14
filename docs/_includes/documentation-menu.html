@@ -1,0 +1,23 @@
+{% assign navurl = page.url | remove: 'index.html' %}
+<ul>
+{% for item in include.nav %}
+	<li>
+        {% if item.category %}
+            <span class="category">{{ item.category }}</span>
+        {% endif %}
+        {% if item.url %}
+            <a href="{{ item.url }}">
+                {% if item.url == navurl %}
+                    <u>{{ item.text }}</u>
+                {% else %}
+                    {{ item.text }}
+                {% endif %}
+            </a>
+        {% endif %}
+	</li>
+
+	{% if item.subitems %}
+		{% include documentation-menu.html nav=item.subitems %}
+	{% endif %}
+{% endfor %}
+</ul>

@@ -58,17 +58,6 @@ $on-laptop:        800px;
     line-height: 1.5;
 }
 
-.intro-header {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    
-    background-size: cover;
-    min-height: 500px;
-}
-
-
 .landing-intro
 {
     background: #2D2D2D;
@@ -114,4 +103,41 @@ $on-laptop:        800px;
 {
     font-weight: 400;
     font-size: 64px;
+    text-shadow: 1px 0px #000000;
+}
+
+$documentation-menu-width: $content-width * 0.25;
+.documentation-menu
+{
+    float:left;
+}
+
+$documentation-width: $content-width * 0.75;
+.documentation
+{
+    float: right;
+    width: $documentation-width;
+}
+
+.documentation-menu > ul > li {
+    font-weight: bold;
+}
+//reset list
+ol, ul {
+	list-style: none;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+ul, li{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	list-style: none;
 }

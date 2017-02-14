@@ -1,0 +1,6 @@
+- category: The basics
+  subitems:
+    - text: Getting Started
+      url: /documentation/basics/getting-started
+    - text: Tutorial
+      url: /documentation/basics/tutorial
