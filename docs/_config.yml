@@ -32,3 +32,15 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  
+menu:
+  - title: "Home"
+    url: "/"
+  - title: "Blog"
+    url: "/blog"
+  - title: "Documentation"
+    url: "/documentation"
+  - title: "About"
+    url: "/about"
+  - title: "Support"
+    url: "/support"
