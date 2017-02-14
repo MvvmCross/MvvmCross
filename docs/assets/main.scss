@@ -123,7 +123,11 @@ $documentation-width: $content-width * 0.75;
     font-weight: bold;
 }
 
-.category{margin-top:25px;}
+.category
+{
+    padding:8px 0;
+    text-transform: uppercase;
+}
 //reset list
 
 ul, li{
