@@ -63,7 +63,7 @@ $on-laptop:        800px;
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
+    
     background-size: cover;
     min-height: 500px;
 }
@@ -72,7 +72,8 @@ $on-laptop:        800px;
 .landing-intro
 {
     background: #2D2D2D;
-    padding: 50px 0;
+    background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
+    padding: 150px 0;
     color: #FDF3E7;
     font-weight: 300;
     margin-top: -30px;
