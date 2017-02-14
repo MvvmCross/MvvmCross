@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxTvosPropertyBinding.cs" />
+    <Compile Include="MvxTvosPropertyBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxTvosBindingBuilder.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />

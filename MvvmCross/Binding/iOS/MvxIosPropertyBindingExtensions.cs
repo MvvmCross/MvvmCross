@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.iOS
         public static string BindingHidden(this UIActivityIndicatorView uiActivityIndicatorView)
              => MvxIosPropertyBinding.UIActivityIndicatorView_Hidden;
 
-        public static string BindingClick(this UIView uiView)
+        public static string BindingHidden(this UIView uiView)
             => MvxIosPropertyBinding.UIView_Hidden;
 
         public static string BindingValue(this UISlider uiSlider)
@@ -77,7 +77,7 @@ namespace MvvmCross.Binding.iOS
         public static string BindingSelectedTitle(this UIButton uiButton)
             => MvxIosPropertyBinding.UIButton_SelectedTitle;
 
-        public static string BindingTapk(this UIView uiView)
+        public static string BindingTap(this UIView uiView)
             => MvxIosPropertyBinding.UIView_Tap;
 
         public static string BindingDoubleTap(this UIView uiView)
