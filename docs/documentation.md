@@ -3,4 +3,5 @@ layout: documentation
 title: Documentation
 permalink: /documentation/
 ---
-Test
+
+Welcome to the MvvmCross documentation!
