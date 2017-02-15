@@ -1,6 +1,7 @@
 ---
-title: "Visibility"
-excerpt: ""
+layout: documentation
+title: Visibility
+category: Plugins
 ---
 The `Visibility` plugin provides native implementations for the `MvxVisibility` enumeration.
 

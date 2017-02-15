@@ -1,6 +1,7 @@
 ---
-title: "MethodBinding"
-excerpt: ""
+layout: documentation
+title: MethodBinding
+category: Plugins
 ---
 The `MethodBinding` plugin is part of the `Rio` binding extensions for MvvmCross.
 

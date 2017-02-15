@@ -1,6 +1,7 @@
 ---
-title: "Network"
-excerpt: ""
+layout: documentation
+title: Network
+category: Plugins
 ---
 The original purpose of the `Network` plugin was to provide `IMvxReachability` **on iOS only**
 [block:code]

@@ -1,6 +1,7 @@
 ---
-title: "Json"
-excerpt: ""
+layout: documentation
+title: Json
+category: Plugins
 ---
 The `Json` plugin provides a wrapper for a PCL version of the NewtonSoft Json.Net library allowing it to support.
 [block:code]

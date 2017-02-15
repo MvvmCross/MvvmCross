@@ -1,6 +1,7 @@
 ---
-title: "FieldBinding"
-excerpt: ""
+layout: documentation
+title: FieldBinding
+category: Plugins
 ---
 The `FieldBinding` plugin is part of the `Rio` binding extensions for MvvmCross. The plugin is a pure PCL plugin - it contains only PCL assemblies.
 

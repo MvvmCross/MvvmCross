@@ -1,6 +1,7 @@
 ---
-title: "DownloadCache"
-excerpt: ""
+layout: documentation
+title: DownloadCache
+category: Plugins
 ---
 The `DownloadCache` plugin provides a managed disk and memory cache for downloaded files - especially images.
 

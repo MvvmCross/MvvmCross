@@ -1,6 +1,7 @@
 ---
-title: "Accelerometer"
-excerpt: ""
+layout: documentation
+title: Accelerometer
+category: Plugins
 ---
 The `Accelerometer` plugin provides access to a platforms accelerometer using a singleton implementing the API.
 [block:code]

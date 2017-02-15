@@ -1,6 +1,7 @@
 ---
-title: "Messenger"
-excerpt: ""
+layout: documentation
+title: Messenger
+category: Plugins
 ---
 The MvvmCross `Messenger` plugin provides an Event aggregation Messenger which is biased towards using Weak references for event subscription.
 

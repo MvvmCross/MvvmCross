@@ -1,6 +1,7 @@
 ---
-title: "PictureChooser"
-excerpt: ""
+layout: documentation
+title: PictureChooser
+category: Plugins
 ---
 The `PictureChooser` plugin provides implementations of:
 [block:code]

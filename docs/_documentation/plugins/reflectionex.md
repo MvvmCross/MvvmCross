@@ -1,6 +1,7 @@
 ---
-title: "ReflectionEx"
-excerpt: ""
+layout: documentation
+title: ReflectionEx
+category: Plugins
 ---
 The `Reflection` Plugin was intended to help fill in some of the gaps for the portable Reflection API set.
 

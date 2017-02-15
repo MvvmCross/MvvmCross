@@ -1,6 +1,7 @@
 ---
-title: "WebBrowser"
-excerpt: ""
+layout: documentation
+title: WebBrowser
+category: Plugins
 ---
 The `WebBrowser` plugin provides cross platform support for showing web pages using the external web browser using:
 [block:code]

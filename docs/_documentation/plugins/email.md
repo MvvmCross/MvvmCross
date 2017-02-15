@@ -1,6 +1,7 @@
 ---
-title: "Email"
-excerpt: ""
+layout: documentation
+title: Email
+category: Plugins
 ---
 The `Email` plugin provides a cross-platform implementation for sending emails.
 [block:code]

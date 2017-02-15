@@ -1,6 +1,7 @@
 ---
-title: "PhoneCall"
-excerpt: ""
+layout: documentation
+title: PhoneCall
+category: Plugins
 ---
 The `PhoneCall` plugin provides implementations of:
 [block:code]
