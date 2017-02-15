@@ -1,6 +1,7 @@
 ---
-title: "A Windows Universal App Platform Project"
-excerpt: ""
+layout: documentation
+title: A Windows Universal App Platform Project
+category: Tutorials
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
