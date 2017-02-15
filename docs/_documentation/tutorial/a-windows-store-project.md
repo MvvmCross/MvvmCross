@@ -1,6 +1,7 @@
 ---
-title: "A Windows Store Project"
-excerpt: ""
+layout: documentation
+title: A Windows Store Project
+category: Tutorials
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 

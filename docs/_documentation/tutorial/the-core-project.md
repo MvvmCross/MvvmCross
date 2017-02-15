@@ -1,6 +1,7 @@
 ---
-title: "The Core Project"
-excerpt: ""
+layout: documentation
+title: The Core Project
+category: Tutorials
 ---
 MvvmCross application's are normally structured with:
 

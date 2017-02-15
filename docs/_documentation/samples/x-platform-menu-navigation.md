@@ -1,4 +1,5 @@
 ---
-title: "X-Platform menu navigation"
-excerpt: ""
+layout: documentation
+title: X-Platform menu navigation
+category: Plugins
 ---
