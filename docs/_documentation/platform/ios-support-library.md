@@ -1,6 +1,7 @@
 ---
-title: "iOS Support Library"
-excerpt: ""
+layout: documentation
+title: iOS Support Library
+category: Platform
 ---
 In version 4.0.0 we have also started work on a new library dedicated to providing further classes and extended functionality targeting the iOS platform.
 

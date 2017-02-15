@@ -1,4 +1,5 @@
 ---
-title: "Xamarin.iOS"
-excerpt: ""
+layout: documentation
+title: Xamarin.iOS
+category: Platform
 ---

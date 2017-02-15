@@ -1,6 +1,7 @@
 ---
-title: "Android support library"
-excerpt: ""
+layout: documentation
+title: Android support library
+category: Platform
 ---
 To get the bindings working from the support libraries (for example if you want to use `MvxAutoCompleteTextView`) you'll need to do the following:
 In Setup.cs override `FillTargetFactories`.

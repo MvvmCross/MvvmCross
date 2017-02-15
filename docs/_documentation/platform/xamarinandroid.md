@@ -1,4 +1,5 @@
 ---
-title: "Xamarin.Android"
-excerpt: ""
+layout: documentation
+title: Xamarin.Android
+category: Platform
 ---
