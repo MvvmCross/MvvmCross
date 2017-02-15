@@ -1,0 +1,52 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+          <h2 class="footer-heading"><b>Blog</b></h2>
+          <ul class="blog-list">
+                {% for post in site.posts %}
+                    <li>
+                        <h4><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+                    </li>
+                {% endfor %}
+            </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+            <h2 class="footer-heading"><b>Guides</b></h2>
+            <ul class="blog-list">
+                    {% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
+                    {% for category in docs_by_category %}
+                        {{ category | jsonify }}
+                    {% endfor %}
+                    {% for post in site.posts %}
+                        <li>
+                            <h4><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
+                        </li>
+                    {% endfor %}
+             </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <h2 class="footer-heading"><b>Social</b></h2>
+        <ul class="social-media-list">
+          {% if site.github_username %}
+          <li>
+            {% include icon-github.html username=site.github_username %}
+          </li>
+          {% endif %}
+
+          {% if site.twitter_username %}
+          <li>
+            {% include icon-twitter.html username=site.twitter_username %}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>

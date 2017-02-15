@@ -41,6 +41,11 @@ $on-laptop:        800px;
 
 //custom styling starts here
 
+h2,h3,h4,h5,h6
+{
+    color: $brand-color;
+}
+
 .header-logo
 {
     width: 129px;
@@ -166,8 +171,51 @@ a:visited {
     text-transform: uppercase;
     font-weight: bold;
 }
-//reset list
 
+
+//footer
+.footer-heading{border-bottom: 1px solid #ddd;}
+.blog-list 
+{
+    li
+    {
+        a
+        {
+            color: #888;
+            font-size: 15px;
+        }
+    }
+}
+
+.footer-col-1 {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width:         calc(35% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-2 {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width:         calc(35% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-3 {
+  width: -webkit-calc(30% - (#{$spacing-unit} / 2));
+  width:         calc(30% - (#{$spacing-unit} / 2));
+}
+
+@include media-query($on-laptop) {
+  .footer-col-1,
+  .footer-col-2 {
+    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
+    width:         calc(50% - (#{$spacing-unit} / 2));
+  }
+
+  .footer-col-3 {
+    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+    width:         calc(100% - (#{$spacing-unit} / 2));
+  }
+}
+
+//reset list
 ul, li{
 	margin: 0;
 	padding: 0;
