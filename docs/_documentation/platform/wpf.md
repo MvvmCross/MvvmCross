@@ -1,4 +1,5 @@
 ---
-title: "Windows WPF"
-excerpt: ""
+layout: documentation
+title: Windows WPF
+category: Platform
 ---

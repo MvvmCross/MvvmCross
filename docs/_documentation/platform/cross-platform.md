@@ -1,4 +1,5 @@
 ---
-title: "Cross-Platform"
-excerpt: ""
+layout: documentation
+title: Cross-Platform
+category: Platform
 ---

@@ -1,6 +1,7 @@
 ---
-title: "Universal Windows platform (UWP)"
-excerpt: ""
+layout: documentation
+title: Universal Windows platform (UWP)
+category: Platform
 ---
 ## Installation
 This tutorial will walk you through the installation of MvvmCross into a new Universal Windows Platform project.

@@ -1,4 +1,5 @@
 ---
-title: "Xamarin.Mac"
-excerpt: ""
+layout: documentation
+title: Xamarin.Mac
+category: Platform
 ---
