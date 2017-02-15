@@ -1,6 +1,7 @@
 ---
-title: "Code Analysis"
-excerpt: "MvvmCross is a Code-Aware Library in the sense that it provides feedback on how to use the Framework while coding."
+layout: documentation
+title: Code Analysis
+category: Developer-guide
 ---
 # Background
 

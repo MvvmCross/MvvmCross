@@ -1,6 +1,7 @@
 ---
-title: "Acknowledgements"
-excerpt: ""
+layout: documentation
+title: Acknowledgements
+category: Contribute
 ---
 [block:api-header]
 {

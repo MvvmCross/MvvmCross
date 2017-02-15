@@ -1,6 +1,7 @@
 ---
-title: "Portable Class Library (PCL)"
-excerpt: ""
+layout: documentation
+title: Portable Class Library (PCL)
+category: Developer-guide
 ---
 **Why PCL and not Shared Project?**
 

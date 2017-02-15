@@ -1,6 +1,7 @@
 ---
-title: "Introduction to Mvvm"
-excerpt: ""
+layout: documentation
+title: Introduction to Mvvm
+category: Developer-guide
 ---
 Model–view–viewmodel (MVVM) is a software architectural pattern.
 

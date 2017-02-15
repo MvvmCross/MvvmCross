@@ -1,4 +1,5 @@
 ---
-title: "Android Fragments"
-excerpt: ""
+layout: documentation
+title: Android Fragments
+category: Advanced
 ---

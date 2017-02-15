@@ -1,6 +1,7 @@
 ---
-title: "Getting Started with MvvmCross"
-excerpt: "This page will help you get started with MvvmCross. You'll be up and running in a jiffy!"
+layout: documentation
+title: Getting Started with MvvmCross
+category: Getting-started
 ---
 [block:embed]
 {
