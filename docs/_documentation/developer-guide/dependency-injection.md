@@ -1,6 +1,7 @@
 ---
-title: "Dependency injection"
-excerpt: ""
+layout: documentation
+title: Dependency injection
+category: Developer-guide
 ---
 ## Constructor Injection
 

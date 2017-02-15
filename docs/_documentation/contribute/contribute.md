@@ -1,6 +1,7 @@
 ---
-title: "New contributions"
-excerpt: ""
+layout: documentation
+title: New contributions
+category: Contribute
 ---
 Some of the best ways to contribute are to try things out, file bugs, and join conversations.
 

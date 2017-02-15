@@ -1,6 +1,7 @@
 ---
-title: "References"
-excerpt: ""
+layout: documentation
+title: References
+category: Licensing
 ---
 * [MonoCross](http://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
 * [Phone7.Fx](http://phone7.codeplex.com) is redistributed and modified under MS-PL

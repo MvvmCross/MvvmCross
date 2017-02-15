@@ -1,4 +1,5 @@
 ---
-title: "Android lifecycle"
-excerpt: ""
+layout: documentation
+title: Android lifecycle
+category: Advanced
 ---

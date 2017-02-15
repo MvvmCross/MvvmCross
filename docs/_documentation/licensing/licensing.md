@@ -1,6 +1,7 @@
 ---
-title: "Licensing"
-excerpt: ""
+layout: documentation
+title: Licensing
+category: Licensing
 ---
 **MvvmCross** is licensed under the [MS-PL License](http://opensource.org/licenses/ms-pl.html)
 [block:api-header]

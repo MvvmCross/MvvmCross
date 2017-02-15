@@ -1,6 +1,7 @@
 ---
-title: "Generics"
-excerpt: ""
+layout: documentation
+title: Generics
+category: Developer-guide
 ---
 **Introduction**
 

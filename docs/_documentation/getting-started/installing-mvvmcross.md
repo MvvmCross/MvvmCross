@@ -1,6 +1,7 @@
 ---
-title: "Get MvvmCross"
-excerpt: ""
+layout: documentation
+title: Get MvvmCross
+category: Getting-started
 ---
 [block:parameters]
 {

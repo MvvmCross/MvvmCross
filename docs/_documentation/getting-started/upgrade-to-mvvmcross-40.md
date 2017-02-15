@@ -1,6 +1,7 @@
 ---
-title: "Upgrade to MvvmCross 4.0"
-excerpt: ""
+layout: documentation
+title: Upgrade to MvvmCross 4.0
+category: Getting-started
 ---
 [block:api-header]
 {

@@ -1,6 +1,7 @@
 ---
-title: "Value converters"
-excerpt: ""
+layout: documentation
+title: Value converters
+category: Developer-guide
 ---
 Value Converters in MvvmCross are used to provide mappings to/from logical values in the view models and presented values in the user interface.
 

@@ -1,6 +1,7 @@
 ---
-title: "Feature overview"
-excerpt: ""
+layout: documentation
+title: Feature overview
+category: Developer-guide
 ---
 Deployed MvvmCross applications consist of two parts:
 
