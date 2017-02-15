@@ -156,6 +156,10 @@ $documentation-width: $effective-content-width * 0.75;
     }
 }
 
+a:visited {
+    color: $brand-color;
+}
+
 .category
 {
     padding:8px 0;
