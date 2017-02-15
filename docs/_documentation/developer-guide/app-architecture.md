@@ -1,6 +1,7 @@
----
-title: "App architecture"
-excerpt: ""
+--
+layout: documentation
+title: App architecture
+category: Developer-guide
 ---
 Deployed MvvmCross applications consist of two parts:
 
