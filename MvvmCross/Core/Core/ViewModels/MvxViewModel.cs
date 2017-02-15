@@ -19,8 +19,23 @@ namespace MvvmCross.Core.ViewModels
         {
             this.RequestedBy = MvxRequestedBy.Unknown;
         }
+		public MvxRequestedBy RequestedBy { get; set; }
 
-        public MvxRequestedBy RequestedBy { get; set; }
+		public virtual void Appearing() 
+		{ 
+		}
+			
+		public virtual void Appeared() 
+		{ 
+		}
+
+		public virtual void Disappearing() 
+		{ 
+		}
+
+		public virtual void Disappeared() 
+		{ 
+		}
 
         public void Init(IMvxBundle parameters)
         {
@@ -33,6 +48,10 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual void Start()
+        {
+        }
+
+        public virtual void Destroy ()
         {
         }
 
