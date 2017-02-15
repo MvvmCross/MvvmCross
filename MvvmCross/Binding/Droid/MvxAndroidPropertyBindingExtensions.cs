@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Droid
         public static string BindText(this TextView textview)
             => MvxAndroidPropertyBinding.TextView_Text;
 
-        public static string BindextFormatted(this TextView textview) 
+        public static string BindTextFormatted(this TextView textview) 
             => MvxAndroidPropertyBinding.TextView_TextFormatted;
 
         public static string BindHint(this TextView textview) 
