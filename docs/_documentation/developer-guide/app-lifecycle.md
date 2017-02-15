@@ -1,6 +1,7 @@
----
-title: "App lifecycle"
-excerpt: ""
+--
+layout: documentation
+title: App lifecycle
+category: Developer-guide
 ---
 #ViewModel Creation
 
