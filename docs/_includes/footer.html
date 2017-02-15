@@ -17,10 +17,6 @@
       <div class="footer-col footer-col-2">
             <h2 class="footer-heading"><b>Guides</b></h2>
             <ul class="blog-list">
-                    {% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
-                    {% for category in docs_by_category %}
-                        {{ category | jsonify }}
-                    {% endfor %}
                     {% for post in site.posts %}
                         <li>
                             <h4><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h4>
