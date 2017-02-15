@@ -1,6 +1,7 @@
 ---
-title: "3rd party plugins"
-excerpt: ""
+layout: documentation
+title: 3rd party plugins
+category: Plugins
 ---
 On this page you can find MvvmCross plugins that are made by 3rd parties. Feel free to add any missing plugin to this table.
 [block:parameters]

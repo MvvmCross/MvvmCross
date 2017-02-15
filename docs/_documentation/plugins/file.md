@@ -1,6 +1,7 @@
 ---
-title: "File"
-excerpt: ""
+layout: documentation
+title: File
+category: Plugins
 ---
 The `File` plugin provides cross-platform access to a File Store API.
 [block:code]

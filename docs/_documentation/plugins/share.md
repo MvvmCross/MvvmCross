@@ -1,6 +1,7 @@
 ---
-title: "Share"
-excerpt: ""
+layout: documentation
+title: Share
+category: Plugins
 ---
 The `Share` plugin provides implementations of:
 [block:code]

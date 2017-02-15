@@ -1,6 +1,7 @@
 ---
-title: "ThreadUtils"
-excerpt: ""
+layout: documentation
+title: ThreadUtils
+category: Plugins
 ---
 The ThreadUtils plugin provides a trivial cross-platform access to a `Thread.Sleep` implementation.
 

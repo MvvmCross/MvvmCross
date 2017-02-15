@@ -1,6 +1,7 @@
 ---
-title: "Bookmarks"
-excerpt: ""
+layout: documentation
+title: Bookmarks
+category: Plugins
 ---
 The `Bookmarks` plugin provides a simple 'live tile' service for WindowsPhone only.
 [block:code]

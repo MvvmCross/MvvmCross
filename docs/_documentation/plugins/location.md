@@ -1,6 +1,7 @@
 ---
-title: "Location"
-excerpt: ""
+layout: documentation
+title: Location
+category: Plugins
 ---
 The `Location` plugin provides access to GeoLocation (typically GPS) functionality via the API:
 [block:code]

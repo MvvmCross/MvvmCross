@@ -1,6 +1,7 @@
 ---
-title: "ResxLocalization"
-excerpt: ""
+layout: documentation
+title: ResxLocalization
+category: Plugins
 ---
 ### ResxLocalization
 

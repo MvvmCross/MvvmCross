@@ -1,6 +1,7 @@
 ---
-title: "SoundEffects"
-excerpt: ""
+layout: documentation
+title: SoundEffects
+category: Plugins
 ---
 The `SoundEffects` plugin is only supported on WindowsPhone currently.
 

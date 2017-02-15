@@ -1,6 +1,7 @@
 ---
-title: "JsonLocalization"
-excerpt: ""
+layout: documentation
+title: JsonLocalization
+category: Plugins
 ---
 The `JsonLocalization` plugin provides a number of support classes to help load Json language text files for internationalization (i18n).
 

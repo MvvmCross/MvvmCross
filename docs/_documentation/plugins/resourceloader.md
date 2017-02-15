@@ -1,6 +1,7 @@
 ---
-title: "ResourceLoader"
-excerpt: ""
+layout: documentation
+title: ResourceLoader
+category: Plugins
 ---
 The `ResourceLoader` plugin provides access to files bundled within the app package.
 
