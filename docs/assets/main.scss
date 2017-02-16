@@ -137,19 +137,31 @@ h2,h3,h4,h5,h6
 }
 
 $effective-content-width: $content-width - ($spacing-unit * 2);
-$documentation-menu-width: $effective-content-width * 0.25;
+$documentation-menu-width: $effective-content-width * 0.30;
 .documentation-menu
 {
     float:left;
     width: $documentation-menu-width - 10px;
     padding-bottom: 30px;
     margin-right: 10px;
+    ul
+    {
+    li
+    {
+        a
+        {
+            font-size: 15px;
+            color: #bbb;
+            font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+        }
+    }
+    }
 }
 
-$documentation-width: $effective-content-width * 0.75;
+$documentation-width: $effective-content-width * 0.70;
 .documentation
 {
-    float: right;
+    float: left;
     width: $documentation-width;
 }
 
