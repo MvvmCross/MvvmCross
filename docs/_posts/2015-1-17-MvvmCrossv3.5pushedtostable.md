@@ -1,8 +1,8 @@
 ---
 layout: post
 title: MvvmCross v3.5 pushed to stable
-date:   2017-02-13 11:37:35 +0100
-categories: jekyll update
+date:   2015-01-17 11:37:35 +0100
+categories: mvvmcross
 ---
 
 MvvmCross v3.5 pushed to stable

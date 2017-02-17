@@ -1,8 +1,8 @@
 ---
 layout: post
 title: MvvmCross 4.0-beta3
-date:   2017-02-13 11:37:35 +0100
-categories: jekyll update
+date:   2015-09-10 11:37:35 +0100
+categories: mvvmcross
 ---
 
 Roslyn, SQLite-PCL, and plugin changes
