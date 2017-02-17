@@ -61,12 +61,35 @@ namespace MvvmCross.Droid.Support.V4
         public override void SetContentView(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
+
+            EventHandler onGlobalLayout = null;
+            onGlobalLayout = (sender, args) =>
+            {
+                view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+                ViewModel.Appeared();
+            };
+
+            view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
             SetContentView(view);
         }
 
         protected override void AttachBaseContext(Context @base)
         {
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel.Disappearing(); // we don't have anywhere to get this info
+            ViewModel.Disappeared();
         }
     }
 

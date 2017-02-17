@@ -86,6 +86,18 @@ namespace MvvmCross.Droid.Support.V4
             base.OnCreate(savedInstanceState);
 
             SetContentView(_layoutId);
+
+            var rootView = Window.DecorView.RootView;
+
+            EventHandler onGlobalLayout = null;
+            onGlobalLayout = (sender, args) =>
+            {
+                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+                ViewModel.Appeared();
+            };
+
+            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
             InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)
@@ -204,6 +216,19 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)
         {
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel.Disappearing(); // we don't have anywhere to get this info
+            ViewModel.Disappeared();
         }
     }
 }

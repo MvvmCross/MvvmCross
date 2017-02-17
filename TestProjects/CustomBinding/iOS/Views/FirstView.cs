@@ -5,6 +5,7 @@ using MvvmCross.TestProjects.CustomBinding.Core.ViewModels;
 using ObjCRuntime;
 using UIKit;
 using Foundation;
+using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
 
 namespace MvvmCross.TestProjects.CustomBinding.iOS
 {
