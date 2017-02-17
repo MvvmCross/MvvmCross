@@ -13,7 +13,7 @@ category: Getting-started
   "width": "140",
   "height": "20"
 }
-[/block]
+```
 
 [block:embed]
 {
@@ -25,7 +25,7 @@ category: Getting-started
   "width": "140",
   "height": "20"
 }
-[/block]
+```
 
 [block:embed]
 {
@@ -37,14 +37,10 @@ category: Getting-started
   "width": "140",
   "height": "20"
 }
-[/block]
+```
 MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for Xamarin.Forms and the Android support library. Lots of plugins are available as well.
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Your first project with Xamarin and MvvmCross 4"
-}
-[/block]
+## Your first project with Xamarin and MvvmCross 4
+
 Here is a video that will help you creating a project from scratch with Xamarin and MvvmCross 4.
 
 It gives all the detailed steps for the Core PCL, iOS, Android and Windows Phone apps.
@@ -68,10 +64,6 @@ or
 ## Xamarin Studio (Visual Studio for Mac)
 
 Find the MVVMCross Template Pack in the Add-In Gallery or [online in the Add-In repository](http://addins.monodevelop.com/Project/Index/227) 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Help updating the docs!"
-}
-[/block]
+## Help updating the docs!
+
 Everyone can contribute and help improving the docs! Just click "Suggest Edits" in the right top corner of a page!

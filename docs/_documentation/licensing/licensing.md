@@ -4,12 +4,8 @@ title: Licensing
 category: Licensing
 ---
 **MvvmCross** is licensed under the [MS-PL License](http://opensource.org/licenses/ms-pl.html)
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Microsoft Public License (MS-PL)"
-}
-[/block]
+## Microsoft Public License (MS-PL)
+
 This license governs use of the accompanying software. If you use the software, you
 accept this license. If you do not accept the license, do not use the software.
 
