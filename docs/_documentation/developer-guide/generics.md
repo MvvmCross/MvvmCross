@@ -9,7 +9,6 @@ Generics are the most powerful feature of C# 2.0. Generics allow you to define t
 Generics Problem Statement
 Consider an everyday data structure such as a stack, providing the classic Push() and Pop() methods. When developing a general-purpose stack, you would like to use it to store instances of various types. Under C# 1.1, you have to use an Object-based stack, meaning that the internal data type used in the stack is an amorphous Object, and the stack methods interact with Objects:
 ```c# 
-
 public class Stack\n{\n   object[] m_Items; \n   public void Push(object item)\n   {...}\n   public object Pop()\n   {...}\n}\n",
       "language": "csharp",
       "name": null
@@ -20,14 +19,12 @@ public class Stack\n{\n   object[] m_Items; \n   public void Push(object item)\n
 Code block 1 shows the full implementation of the Object-based stack. Because Object is the canonical .NET base type, you can use the Object-based stack to hold any type of items, items, such as integers:
 ```c# 
 
-
 Stack stack = new Stack();\nstack.Push(1);\nstack.Push(2);\nint number = (int)stack.Pop();",
 ```
    
 Code block 1. An Object-based stack
     
 ```c# 
-
 public class Stack\n{\n  readonly int m_Size; \n  int m_StackPointer = 0;\n  object[] m_Items; \n  \n  public Stack():this(100)\n  {}\n  \n  public Stack(int size)\n  {\n    m_Size = size;\n    m_Items = new object[m_Size];\n  }\n  \n  public void Push(object item)\n  {\n    if(m_StackPointer >= m_Size) \n    throw new StackOverflowException();   \n    m_Items[m_StackPointer] = item;\n    m_StackPointer++;\n  }\n  \n  public object Pop()\n  {\n    m_StackPointer--;\n    if(m_StackPointer >= 0)\n    {\n      return m_Items[m_StackPointer];\n    }\n    else\n    {\n      m_StackPointer = 0;\n      throw new InvalidOperationException(\"Cannot pop an empty stack\");\n    }\n  }\n}",
 ```
     
@@ -42,7 +39,6 @@ stack.Push(1);
 string number = (string)stack.Pop();
 You can overcome these two problems by providing a type-specific (and hence, type-safe) performant stack. For integers you can implement and use the IntStack:
 ```c# 
-
 public class IntStack\n{\n   int[] m_Items; \n   public void Push(int item){...}\n   public int Pop(){...}\n} \n\nIntStack stack = new IntStack();\nstack.Push(1);\nint number = stack.Pop();\n\n//For strings you would implement the StringStack:\n\npublic class StringStack\n{\n   string[] m_Items; \n   public void Push(string item){...}\n   public string Pop(){...}\n}\n\nStringStack stack = new StringStack();\nstack.Push(\"1\");\nstring number = stack.Pop();",
 ```
 
@@ -50,7 +46,6 @@ And so on. Unfortunately, solving the performance and type-safety problems this 
 What Are Generics
 Generics allow you to define type-safe classes without compromising type safety, performance, or productivity. You implement the server only once as a generic server, while at the same time you can declare and use it with any type. To do that, use the < and > brackets, enclosing a generic type parameter. For example, here is how you define and use a generic stack:
 ```c# 
-
 public class Stack<T>\n{\n   T[] m_Items; \n   public void Push(T item)\n   {...}\n   public T Pop()\n   {...}\n}\n\nStack<int> stack = new Stack<int>();\nstack.Push(1);\nstack.Push(2);\nint number = stack.Pop();",
 ```
 
@@ -62,7 +57,6 @@ Stack<int> stack = new Stack<int>();
 The compiler and the runtime do the rest. All the methods (or properties) that accept or return a T will instead use the specified type, an integer in the example above.
 Code block 2. The generic stack
 ```c# 
-
 public class Stack<T>\n{\n   readonly int m_Size; \n   int m_StackPointer = 0;\n   T[] m_Items;\n   public Stack():this(100)\n   {}\n   public Stack(int size)\n   {\n      m_Size = size;\n      m_Items = new T[m_Size];\n   }\n   public void Push(T item)\n   {\n      if(m_StackPointer >= m_Size) \n         throw new StackOverflowException();\n      m_Items[m_StackPointer] = item;\n      m_StackPointer++;\n   }\n   public T Pop()\n   {\n      m_StackPointer--;\n      if(m_StackPointer >= 0)\n      {\n         return m_Items[m_StackPointer];\n      }\n      else\n      {\n         m_StackPointer = 0;\n         throw new InvalidOperationException(\"Cannot pop an empty stack\");\n      }\n   }\n}",
 ```
 

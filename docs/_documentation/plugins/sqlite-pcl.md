@@ -7,7 +7,6 @@ Using the SQLite-Plugin for MvvmCross is quite simple. The plugin injects the IM
 
 ```c# 
 
-
 private readonly IMvxSqliteConnectionFactory _sqliteConnectionFactory;
 
 public Repository(IMvxSqliteConnectionFactory sqliteConnectionFactory)
@@ -21,7 +20,6 @@ public Repository(IMvxSqliteConnectionFactory sqliteConnectionFactory)
 The API of IMvxSqliteConnectionFactory is very easy to understand and to use.
 
 ```c# 
-
 
 public interface IMvxSqliteConnectionFactory
 {
@@ -38,14 +36,12 @@ public interface IMvxSqliteConnectionFactory
 Using the name of the database only:
 ```c# 
 
-
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetConnection(databaseName);
 ```
 
 Using the SqliteConfig Object:
 ```c# 
-
 
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
@@ -60,14 +56,12 @@ var connection = _sqliteConnectionFactory.GetConnection(config);
 Using the name of the database only:
 ```c# 
 
-
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetConnectionWithLock(databaseName);
 ```
 
 Using the SqliteConfig Object:
 ```c# 
-
 
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
@@ -82,14 +76,12 @@ var connection = _sqliteConnectionFactory.GetConnectionWithLock(config);
 * Using the name of the database only:
 ```c# 
 
-
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetAsyncConnection(databaseName);
 ```
 
 Using the SqliteConfig Object:
 ```c# 
-
 
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
