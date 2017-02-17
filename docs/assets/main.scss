@@ -130,9 +130,14 @@ h2,h3,h4,h5,h6
 .landing-title
 {
     font-weight: 400;
-    font-size: 64px;
+    font-size: 30px;
     text-shadow: 1px 0px #000000;
     margin:0px;
+    color:#FFF;
+}
+.landing-subtitle
+{
+    font-size: 22px;
 }
 
 $effective-content-width: $content-width - ($spacing-unit * 2);
