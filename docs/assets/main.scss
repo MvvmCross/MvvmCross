@@ -54,13 +54,13 @@ h2,h3,h4,h5,h6
 
 .site-header
 {
-    background-color: #00ac65;
-    background-image: url({{ site.baseurl }}/img/triangles.png);
-    border-bottom: 0px;
+    background-color: #FFF;
+    border-bottom: 2px solid #69f0ae;
+    border-top:0px;
 }
 
 .site-nav .page-link {
-    color: rgba(255,255,255,0.8);
+    color: #37474f;
     line-height: $base-line-height;
 }
 
@@ -146,16 +146,30 @@ $documentation-menu-width: $effective-content-width * 0.30;
     margin-right: 10px;
     ul
     {
-    li
-    {
-        a
+        overflow:hidden; 
+        overflow-y:scroll;
+
+        li
         {
-            font-size: 15px;
-            color: #bbb;
-            font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+            padding:0 -15px 0 0;
+            a
+            {
+                font-size: 15px;
+                color: #bbb;
+                font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+            }
         }
     }
-    }
+}
+
+
+.active
+{
+    background-color: #00ac65;
+    color:#FFF;
+    border-radius: 2px;
+    border: 2px solid #00ac65;
+    width: 100%;
 }
 
 $documentation-width: $effective-content-width * 0.70;
