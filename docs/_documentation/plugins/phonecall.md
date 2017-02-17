@@ -5,7 +5,6 @@ category: Plugins
 ---
 The `PhoneCall` plugin provides implementations of:
 ```c# 
-
 public interface IMvxPhoneCallTask\n{\n  void MakePhoneCall(string name, string number);\n}",
 ```
 The PhoneCall plugin is available on Android, iOS, and WindowsPhone with a Skype-based implementation on WindowsStore.

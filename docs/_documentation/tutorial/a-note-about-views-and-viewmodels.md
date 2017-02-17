@@ -14,12 +14,10 @@ Instead of using the normal view base classes, there are generic versions availa
 
 
 ```c# 
-
 public class TipViewBase : MvxWindowsPage<TipViewModel>\n{\n}",
 ```
 The `TipView` class can then derive from this class and the following XAML can be used:
 ```c# 
-
 <views:TipViewBase\n    xmlns:views=\"using:MvvmCross.WindowsUWP.Views\"\n    ...\n</views:TipViewBase>",
       "language": "xml"
     }
@@ -31,6 +29,5 @@ The `TipView` class can then derive from this class and the following XAML can b
 
 The `ViewModel` property of a View can be explicitly defined.  In the case of `TipView`, you would use the following code:
 ```c# 
-
 public new TipViewModel ViewModel\n{\n    get { return (TipViewModel)base.ViewModel; }\n    set { base.ViewModel = value; }\n}",
 ```

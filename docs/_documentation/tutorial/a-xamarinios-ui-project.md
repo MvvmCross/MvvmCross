@@ -67,7 +67,6 @@ Most of this functionality is provided for you automatically. Within your iOS UI
 
 For `TipCalc` here's all that is needed in Setup.cs:
 ```c# 
-
 using MvvmCross.iOS.Platform;\nusing MvvmCross.iOS.Views.Presenters;\nusing MvvmCross.Core.ViewModels;\nusing TipCalc.Core;\n\nnamespace TipCalc.UI.iOS\n{\n    public class Setup : MvxIosSetup\n    {\n        public Setup(MvxApplicationDelegate appDelegate, IMvxIosViewPresenter presenter)\n            : base(appDelegate, presenter)\n        {\n        }\n\n        protected override IMvxApplication CreateApp ()\n        {\n            return new App();\n        }\n    }\n}",
 ```
 ## Modify the AppDelegate to use Setup
@@ -84,22 +83,18 @@ To use this `AppDelegate` within MvvmCross, we need to:
 
    * create a new presenter - this is the class that will determine how Views are shown - for this sample, we choose a 'standard' one:
 ```c# 
-
 var presenter = new MvxIosViewPresenter(this, Window);",
 ```
    * create and call Initialize on a `Setup`:
 ```c# 
-
 var setup = new Setup(this, presenter);\nsetup.Initialize();",
 ```
    * with `Setup` completed, use the `Mvx` Inversion of Control container in order to find and `Start` the `IMvxAppStart` object:
 ```c# 
-
 var startup = Mvx.Resolve<IMvxAppStart>();\nstartup.Start();",
 ```
 Together, this looks like:
 ```c# 
-
 using Foundation;\nusing UIKit;\nusing MvvmCross.iOS.Platform;\nusing MvvmCross.iOS.Views.Presenters;\nusing MvvmCross.Platform;\nusing MvvmCross.Core.ViewModels;\n\nnamespace TipCalc.UI.iOS\n{\n    [Register(\"AppDelegate\")]\n    public class AppDelegate : MvxApplicationDelegate\n    {\n        public override UIWindow Window { get; set; }\n\n        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)\n        {\n            Window = new UIWindow(UIScreen.MainScreen.Bounds);\n\n            var presenter = new MvxIosViewPresenter(this, Window);\n\n            var setup = new Setup(this, presenter);\n            setup.Initialize();\n\n            var startup = Mvx.Resolve<IMvxAppStart>();\n            startup.Start();\n\n            Window.MakeKeyAndVisible();\n\n            return true;\n        }\n    }\n}",
 ```
 ## Add your View
@@ -139,7 +134,6 @@ Using drag and drop, you should be able to quite quickly generate a design simil
 
 Because we want our `TipView` to be not only a `UIViewController` but also an Mvvm `View`, then change the inheritance of `TipView` so that it inherits from `MvxViewController`.
 ```c# 
-
 public class TipView : MvxViewController<TipViewModel>",
 ```
 The generic parameter to MvxViewController is used to link `TipView` to `TipViewModel`.
@@ -148,7 +142,6 @@ To add the data-binding code, go to the `ViewDidLoad` method in your `TipView` c
 
 This makes `ViewDidLoad` a perfect place for us to call some data-binding extension methods which will specify how we want the UI data-bound to the ViewModel:
 ```c# 
-
 public override void ViewDidLoad()\n{\n    base.ViewDidLoad();\n\n    this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();\n    this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();\n    this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();\n}",
 ```
 What this code does is to generate 'in code' exactly the same type of data-binding information as we generated 'in XML' in Android.
@@ -157,7 +150,6 @@ What this code does is to generate 'in code' exactly the same type of data-bindi
 
 Altogether this looks like:
 ```c# 
-
 using MvvmCross.Binding.BindingContext;\nusing MvvmCross.iOS.Views;\nusing TipCalc.Core.ViewModels;\n\nnamespace TipCalc.UI.iOS\n{\n    public partial class TipView : MvxViewController<TipViewModel>\n    {\n        public TipView() : base(\"TipView\", null)\n        {\n        }\n\n        public override void ViewDidLoad()\n        {\n            base.ViewDidLoad();\n\n            this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();\n            this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();\n            this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();\n        }\n    }\n}",
 ```
 ### Binding in Xamarin.iOS
@@ -168,7 +160,6 @@ This is because the XIB format used in iOS is a lot less human manipulable and e
 
 Within this section of the tutorial all of our iOS bindings look like:
 ```c# 
-
 this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();",
 ```
 what this line means is:
@@ -180,7 +171,6 @@ As with Android, this will be a `TwoWay` binding by default - which is different
 
 If you had wanted to specify the `TipLabel` property to use instead of relying on the default, then you could have done this with:
 ```c# 
-
 this.CreateBinding(TipLabel).For(label => label.Text).To((TipViewModel vm) => vm.Tip).Apply(); ",
 ```
 In later topics we'll cover more on binding in iOS, including more on binding to non-default fields; other code-based binding code mechanisms; custom bindings; using `ValueConverter`s; and creating bound sub-views.
@@ -197,7 +187,6 @@ This seems to work perfectly, although you may notice that if you tap on the `Su
 
 This is a View concern - it is a UI problem. So we can fix it just in the iOS UI code - in this View. For example, to fix this here, you can add a gesture recognizer to the end of the `ViewDidLoad` method like:
 ```c# 
-
 View.AddGestureRecognizer(new UITapGestureRecognizer(() => {\n    this.SubTotalTextField.ResignFirstResponder();\n}));",
 ```
 	
