@@ -21,7 +21,7 @@ Here's a sketch of where we hope to end up:
     }
   ]
 }
-[/block]
+```
 The goals of this first application are all about **introducing**:
 
 1. the general structure of MvvmCross applications

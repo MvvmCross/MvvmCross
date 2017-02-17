@@ -24,12 +24,8 @@ Known issues:
 - one user has reported MonoTouch download issues in certain network conditions - these problems seem to be related to known MonoTouch issues - see [StackOverflow Q&A on this](http://stackoverflow.com/questions/17238809/mvxdynamicimagehelper-unreliable). That first StackOverflow post has a suggested workaround - overriding the `IMvxHttpFileDownloader` registration with an implementation which uses the `UIImage.LoadFromData` method.
 
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Download Cache and Android Bitmap"
-}
-[/block]
+## Download Cache and Android Bitmap
+
 When loading images from remote source, you have to be carefull with the images size. Loading a 2000x2000 pixels bitmap in a 40dp x 40dp ImageView will do no good to your application. You want eventually to scale down the image to a more pragmatic size.
 
 [Xamarin wrote a recipe for this].(https://developer.xamarin.com/recipes/android/resources/general/load_large_bitmaps_efficiently/)

@@ -51,14 +51,10 @@ category: Getting-started
   "cols": 3,
   "rows": 15
 }
-[/block]
+```
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Android Support"
-}
-[/block]
+## Android Support
+
 
 [block:parameters]
 {
@@ -88,14 +84,10 @@ category: Getting-started
   "cols": 3,
   "rows": 8
 }
-[/block]
+```
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "iOS Support"
-}
-[/block]
+## iOS Support
+
 
 [block:parameters]
 {
@@ -113,14 +105,11 @@ category: Getting-started
   "cols": 3,
   "rows": 3
 }
-[/block]
+```
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Plugins"
+## Plugins"
 }
-[/block]
+```
 
 [block:parameters]
 {
@@ -182,4 +171,4 @@ category: Getting-started
   "cols": 3,
   "rows": 25
 }
-[/block]
+```

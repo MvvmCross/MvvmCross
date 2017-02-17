@@ -3,12 +3,8 @@ layout: documentation
 title: Upgrade to MvvmCross 4.0
 category: Getting-started
 ---
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Nuget package changes"
-}
-[/block]
+## Nuget package changes
+
 Since MvvmCross beta8, the Nuget package names have changed. All packages containing the name `HotTuna` or `Cirrious` have been renamed. If you update the packages using Nuget to a version greater than beta7 or to the stable, the new Nuget packages will be automatically installed. However, you should delete the old `HotTuna` or `Cirrious` packages from your solution after the update.
 [block:parameters]
 {
@@ -41,27 +37,15 @@ Since MvvmCross beta8, the Nuget package names have changed. All packages contai
   "cols": 2,
   "rows": 11
 }
-[/block]
+```
 Additionally, the `JsonLocalisation` plugin has been renamed to `JsonLocalization`.
 The package `MvvmCross.StarterPack` contains sample code and should be removed manually from the `packages.config` files after adding it to your project (its dependencies will remain there). For an empty project, it is suggested you install `MvvmCross.StarterPack`. For an existing project or if you don't want the sample code, it is suggested you install `MvvmCross`.
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Namespace changes"
-}
-[/block]
+## Namespace changes
+
 The namespaces beginning with `Cirrious` have had the `Cirrious` part removed from them. `Cirrious.CrossCore` has been moved to `MvvmCross.Platform` and `Cirrious.MvvmCross` has moved to `MvvmCross.Core`. All namespaces named `Touch` have been renamed to `iOS` since MonoTouch has since been renamed to Xamarin.iOS. If you are maintaining a plugin and have a project ending in `.Touch` you should also rename it to `.iOS`.
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Type changes"
-}
-[/block]
+## Type changes
+
 All classes, methods, and properties containing the term `Touch` were replaced with `Ios`. For example, the class `MvxTouchSetup` is now called `MvxIosSetup`.
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Mac support"
-}
-[/block]
+## Mac support
+
 All Nugets now support Xamarin.Mac ([Unified API](https://developer.xamarin.com/guides/cross-platform/macios/unified/)). Add the `MvvmCross.StarterPack` Nuget to an empty Xamarin.Mac project in Xamarin Studio to help you get started with sample code.
