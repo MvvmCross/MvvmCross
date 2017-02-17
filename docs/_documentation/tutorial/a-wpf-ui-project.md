@@ -43,7 +43,9 @@ We do actually want a `MainWindow` for this app :)
 ## Install MvvmCross
 
 In the Package Manager Console, enter...
-```C# Install-Package MvvmCross.Core",
+```c# 
+
+Install-Package MvvmCross.Core",
 ```
 ## Add a reference to TipCalc.Core.csproj
 
@@ -69,7 +71,9 @@ Most of this functionality is provided for you automatically. Within your Wpf UI
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```C# using System.Windows.Threading;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Wpf.Platform;\nusing MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf\n{\n    public class Setup : MvxWpfSetup\n    {\n        public Setup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new Core.App();\n        }\n    }\n}",
+```c# 
+
+using System.Windows.Threading;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Wpf.Platform;\nusing MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf\n{\n    public class Setup : MvxWpfSetup\n    {\n        public Setup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new Core.App();\n        }\n    }\n}",
 ```
  ## Modify the App.xaml.cs to use Setup
 
@@ -80,16 +84,24 @@ However, here we will just use a 'one window with one view' approach.
 To achieve this, add some lines to the WPF `App` class that:
 
 * provide a private flag to determine if setup has already been done
-```C# bool _setupComplete;",
+```c# 
+
+bool _setupComplete;",
 ```
 * perform the setup - using a `Simple` presenter based on `MainWindow`
-```C# void DoSetup()\n{\n    var presenter = new MvxSimpleWpfViewPresenter(MainWindow);\n\n    var setup = new Setup(Dispatcher, presenter);\n    setup.Initialize();\n\n    var start = Mvx.Resolve<IMvxAppStart>();\n    start.Start();\n\n    _setupComplete = true;\n}",
+```c# 
+
+void DoSetup()\n{\n    var presenter = new MvxSimpleWpfViewPresenter(MainWindow);\n\n    var setup = new Setup(Dispatcher, presenter);\n    setup.Initialize();\n\n    var start = Mvx.Resolve<IMvxAppStart>();\n    start.Start();\n\n    _setupComplete = true;\n}",
 ```
 * override the `OnActivated` event to perform this startup        
-```C# protected override void OnActivated(System.EventArgs e)\n{\n    if (!_setupComplete)\n        DoSetup();\n\n    base.OnActivated(e);\n}",
+```c# 
+
+protected override void OnActivated(System.EventArgs e)\n{\n    if (!_setupComplete)\n        DoSetup();\n\n    base.OnActivated(e);\n}",
 ```
 After you've done this your `App.xaml.cs` might look like:
-```C# using System.Windows;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;\nusing MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf\n{\n    public partial class App : Application\n    {\n        bool _setupComplete;\n\n        void DoSetup()\n        {\n            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);\n\n            var setup = new Setup(Dispatcher, presenter);\n            setup.Initialize();\n\n            var start = Mvx.Resolve<IMvxAppStart>();\n            start.Start();\n\n            _setupComplete = true;\n        }\n\n        protected override void OnActivated(System.EventArgs e)\n        {\n            if (!_setupComplete)\n                DoSetup();\n\n            base.OnActivated(e);\n        }\n    }\n}\n",
+```c# 
+
+using System.Windows;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;\nusing MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf\n{\n    public partial class App : Application\n    {\n        bool _setupComplete;\n\n        void DoSetup()\n        {\n            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);\n\n            var setup = new Setup(Dispatcher, presenter);\n            setup.Initialize();\n\n            var start = Mvx.Resolve<IMvxAppStart>();\n            start.Start();\n\n            _setupComplete = true;\n        }\n\n        protected override void OnActivated(System.EventArgs e)\n        {\n            if (!_setupComplete)\n                DoSetup();\n\n            base.OnActivated(e);\n        }\n    }\n}\n",
 ```
 ## Add your View
 
@@ -109,10 +121,14 @@ The page will generate:
 Open the TipView.xaml.cs file.
 
 Change the class to inherit from `MvxWpfView`
-```C# public partial class TipView : MvxWpfView",
+```c# 
+
+public partial class TipView : MvxWpfView",
 ```
 Altogether this looks like:
-```C# using MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf.Views\n{\n    /// <summary>\n    /// Interaction logic for TipView.xaml\n    /// </summary>\n    public partial class TipView : MvxWpfView\n    {\n        public TipView()\n        {\n            InitializeComponent();\n        }\n    }\n}",
+```c# 
+
+using MvvmCross.Wpf.Views;\n\nnamespace TipCalc.UI.Wpf.Views\n{\n    /// <summary>\n    /// Interaction logic for TipView.xaml\n    /// </summary>\n    public partial class TipView : MvxWpfView\n    {\n        public TipView()\n        {\n            InitializeComponent();\n        }\n    }\n}",
 ```
 ### Edit the XAML layout
 
@@ -123,14 +139,18 @@ This will open the XAML editor within Visual Studio.
 Just as with the WindowsPhone and WindowsStore, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 Change the root node from:
-```C# <UserControl \n         ...\n</UserControl>",
+```c# 
+
+<UserControl \n         ...\n</UserControl>",
       "language": "xml"
     }
   ]
 }
 ```
 to:
-```C# <views:MvxWpfView \n\txmlns:views=\"clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf\"                  \n        ...\n</views:MvxWpfView>",
+```c# 
+
+<views:MvxWpfView \n\txmlns:views=\"clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf\"                  \n        ...\n</views:MvxWpfView>",
       "language": "xml"
     }
   ]
@@ -145,7 +165,9 @@ To add the XAML user interface for our tip calculator, we will add exactly the s
   * a bound `TextBlock` for the `Tip`
 
 This will produce finished XAML like:
-```C# <views:MvxWpfView\n    x:Class=\"TipCalc.UI.Wpf.Views.TipView\"\n    xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\n    xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\n    xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" \n    xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\" \n    xmlns:local=\"clr-namespace:TipCalc.UI.Wpf.Views\"\n    xmlns:views=\"clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf\"\n    mc:Ignorable=\"d\" \n    d:DesignHeight=\"300\" d:DesignWidth=\"300\">\n    <Grid>\n        <StackPanel>\n            <TextBlock Text=\"SubTotal\" />\n            <TextBox Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n            <TextBlock Text=\"Generosity\" />\n            <Slider \n                Value=\"{Binding Generosity, Mode=TwoWay}\" \n                SmallChange=\"1\" \n                LargeChange=\"10\" \n                Minimum=\"0\" \n                Maximum=\"100\" /> \n            <TextBlock Text=\"Tip\" />\n            <TextBlock Text=\"{Binding Tip}\" />\n        </StackPanel>\n    </Grid>\n</views:MvxWpfView>\n",
+```c# 
+
+<views:MvxWpfView\n    x:Class=\"TipCalc.UI.Wpf.Views.TipView\"\n    xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\n    xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\n    xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" \n    xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\" \n    xmlns:local=\"clr-namespace:TipCalc.UI.Wpf.Views\"\n    xmlns:views=\"clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf\"\n    mc:Ignorable=\"d\" \n    d:DesignHeight=\"300\" d:DesignWidth=\"300\">\n    <Grid>\n        <StackPanel>\n            <TextBlock Text=\"SubTotal\" />\n            <TextBox Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n            <TextBlock Text=\"Generosity\" />\n            <Slider \n                Value=\"{Binding Generosity, Mode=TwoWay}\" \n                SmallChange=\"1\" \n                LargeChange=\"10\" \n                Minimum=\"0\" \n                Maximum=\"100\" /> \n            <TextBlock Text=\"Tip\" />\n            <TextBlock Text=\"{Binding Tip}\" />\n        </StackPanel>\n    </Grid>\n</views:MvxWpfView>\n",
       "language": "xml"
     }
   ]

@@ -82,7 +82,9 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```C# using Windows.UI.Xaml.Controls;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.WindowsCommon.Platform;\n\nnamespace TipCalc.UI.WindowsCommon\n{\n    public class Setup : MvxWindowsSetup\n    {\n        public Setup(Frame rootFrame) : base(rootFrame)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new Core.App();\n        }\n    }\n}",
+```c# 
+
+using Windows.UI.Xaml.Controls;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.WindowsCommon.Platform;\n\nnamespace TipCalc.UI.WindowsCommon\n{\n    public class Setup : MvxWindowsSetup\n    {\n        public Setup(Frame rootFrame) : base(rootFrame)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new Core.App();\n        }\n    }\n}",
 ```
 ## Modify the App.xaml.cs to use Setup
 
@@ -93,13 +95,19 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 * modify the `OnLaunched` callback
 
  * remove these lines 
-```C# // When the navigation stack isn't restored navigate to the first page,\n// configuring the new page by passing required information as a navigation\n// parameter\nif (!rootFrame.Navigate(typeof(MainPage), e.Arguments))\n{\n    throw new Exception(\"Failed to create initial page\");\n}",
+```c# 
+
+// When the navigation stack isn't restored navigate to the first page,\n// configuring the new page by passing required information as a navigation\n// parameter\nif (!rootFrame.Navigate(typeof(MainPage), e.Arguments))\n{\n    throw new Exception(\"Failed to create initial page\");\n}",
 ```
  * add these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
-```C# var setup = new Setup(rootFrame);\nsetup.Initialize();\n\nvar start = Mvx.Resolve<IMvxAppStart>();\nstart.Start();",
+```c# 
+
+var setup = new Setup(rootFrame);\nsetup.Initialize();\n\nvar start = Mvx.Resolve<IMvxAppStart>();\nstart.Start();",
 ```
 To do this, you will need to add these `using` lines:
-```C# using MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;",
+```c# 
+
+using MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;",
 ```
 ## Add your View
 
@@ -128,24 +136,36 @@ A Common folder will be added containing:
 Change `TipView` so that it inherits from `MvxWindowsPage`
 
 Change:
-```C# public class TipView : Page",
+```c# 
+
+public class TipView : Page",
 ```
 to:
-```C# public class TipView : MvxWindowsPage",
+```c# 
+
+public class TipView : MvxWindowsPage",
 ```
 This requires the addition of:
-```C# using MvvmCross.WindowsCommon.Views;",
+```c# 
+
+using MvvmCross.WindowsCommon.Views;",
 ```
 ### Persuade TipView to cooperate more reasonably with the `MvxWindowsPage` base class
 
 Change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-```C# base.OnNavigatedTo(e);",
+```c# 
+
+base.OnNavigatedTo(e);",
 ```
 and
-```C# base.OnNavigatedFrom(e);",
+```c# 
+
+base.OnNavigatedFrom(e);",
 ```
 Altogether this looks like:
-```C# using TipCalc.UI.WindowsCommon.Common;\nusing Windows.UI.Xaml.Navigation;\nusing MvvmCross.WindowsCommon.Views;\n\n// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237\n\nnamespace TipCalc.UI.WindowsCommon.Views\n{\n    /// <summary>\n    /// A basic page that provides characteristics common to most applications.\n    /// </summary>\n    public sealed partial class TipView : MvxWindowsPage\n    {\n\n        private NavigationHelper navigationHelper;\n        private ObservableDictionary defaultViewModel = new ObservableDictionary();\n\n        /// <summary>\n        /// This can be changed to a strongly typed view model.\n        /// </summary>\n        public ObservableDictionary DefaultViewModel\n        {\n            get { return this.defaultViewModel; }\n        }\n\n        /// <summary>\n        /// NavigationHelper is used on each page to aid in navigation and \n        /// process lifetime management\n        /// </summary>\n        public NavigationHelper NavigationHelper\n        {\n            get { return this.navigationHelper; }\n        }\n\n\n        public TipView()\n        {\n            this.InitializeComponent();\n            this.navigationHelper = new NavigationHelper(this);\n            this.navigationHelper.LoadState += navigationHelper_LoadState;\n            this.navigationHelper.SaveState += navigationHelper_SaveState;\n        }\n\n        /// <summary>\n        /// Populates the page with content passed during navigation. Any saved state is also\n        /// provided when recreating a page from a prior session.\n        /// </summary>\n        /// <param name=\"sender\">\n        /// The source of the event; typically <see cref=\"Common.NavigationHelper\"/>\n        /// </param>\n        /// <param name=\"e\">Event data that provides both the navigation parameter passed to\n        /// <see cref=\"Frame.Navigate(Type, Object)\"/> when this page was initially requested and\n        /// a dictionary of state preserved by this page during an earlier\n        /// session. The state will be null the first time a page is visited.</param>\n        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)\n        {\n        }\n\n        /// <summary>\n        /// Preserves state associated with this page in case the application is suspended or the\n        /// page is discarded from the navigation cache.  Values must conform to the serialization\n        /// requirements of <see cref=\"Common.SuspensionManager.SessionState\"/>.\n        /// </summary>\n        /// <param name=\"sender\">The source of the event; typically <see cref=\"Common.NavigationHelper\"/></param>\n        /// <param name=\"e\">Event data that provides an empty dictionary to be populated with\n        /// serializable state.</param>\n        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)\n        {\n        }\n\n        #region NavigationHelper registration\n\n        /// The methods provided in this section are simply used to allow\n        /// NavigationHelper to respond to the page's navigation methods.\n        /// \n        /// Page specific logic should be placed in event handlers for the  \n        /// <see cref=\"Common.NavigationHelper.LoadState\"/>\n        /// and <see cref=\"Common.NavigationHelper.SaveState\"/>.\n        /// The navigation parameter is available in the LoadState method \n        /// in addition to page state preserved during an earlier session.\n\n        protected override void OnNavigatedTo(NavigationEventArgs e)\n        {\n            base.OnNavigatedTo(e);\n            navigationHelper.OnNavigatedTo(e);\n        }\n\n        protected override void OnNavigatedFrom(NavigationEventArgs e)\n        {\n            base.OnNavigatedFrom(e);\n            navigationHelper.OnNavigatedFrom(e);\n        }\n\n        #endregion\n    }\n}",
+```c# 
+
+using TipCalc.UI.WindowsCommon.Common;\nusing Windows.UI.Xaml.Navigation;\nusing MvvmCross.WindowsCommon.Views;\n\n// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237\n\nnamespace TipCalc.UI.WindowsCommon.Views\n{\n    /// <summary>\n    /// A basic page that provides characteristics common to most applications.\n    /// </summary>\n    public sealed partial class TipView : MvxWindowsPage\n    {\n\n        private NavigationHelper navigationHelper;\n        private ObservableDictionary defaultViewModel = new ObservableDictionary();\n\n        /// <summary>\n        /// This can be changed to a strongly typed view model.\n        /// </summary>\n        public ObservableDictionary DefaultViewModel\n        {\n            get { return this.defaultViewModel; }\n        }\n\n        /// <summary>\n        /// NavigationHelper is used on each page to aid in navigation and \n        /// process lifetime management\n        /// </summary>\n        public NavigationHelper NavigationHelper\n        {\n            get { return this.navigationHelper; }\n        }\n\n\n        public TipView()\n        {\n            this.InitializeComponent();\n            this.navigationHelper = new NavigationHelper(this);\n            this.navigationHelper.LoadState += navigationHelper_LoadState;\n            this.navigationHelper.SaveState += navigationHelper_SaveState;\n        }\n\n        /// <summary>\n        /// Populates the page with content passed during navigation. Any saved state is also\n        /// provided when recreating a page from a prior session.\n        /// </summary>\n        /// <param name=\"sender\">\n        /// The source of the event; typically <see cref=\"Common.NavigationHelper\"/>\n        /// </param>\n        /// <param name=\"e\">Event data that provides both the navigation parameter passed to\n        /// <see cref=\"Frame.Navigate(Type, Object)\"/> when this page was initially requested and\n        /// a dictionary of state preserved by this page during an earlier\n        /// session. The state will be null the first time a page is visited.</param>\n        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)\n        {\n        }\n\n        /// <summary>\n        /// Preserves state associated with this page in case the application is suspended or the\n        /// page is discarded from the navigation cache.  Values must conform to the serialization\n        /// requirements of <see cref=\"Common.SuspensionManager.SessionState\"/>.\n        /// </summary>\n        /// <param name=\"sender\">The source of the event; typically <see cref=\"Common.NavigationHelper\"/></param>\n        /// <param name=\"e\">Event data that provides an empty dictionary to be populated with\n        /// serializable state.</param>\n        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)\n        {\n        }\n\n        #region NavigationHelper registration\n\n        /// The methods provided in this section are simply used to allow\n        /// NavigationHelper to respond to the page's navigation methods.\n        /// \n        /// Page specific logic should be placed in event handlers for the  \n        /// <see cref=\"Common.NavigationHelper.LoadState\"/>\n        /// and <see cref=\"Common.NavigationHelper.SaveState\"/>.\n        /// The navigation parameter is available in the LoadState method \n        /// in addition to page state preserved during an earlier session.\n\n        protected override void OnNavigatedTo(NavigationEventArgs e)\n        {\n            base.OnNavigatedTo(e);\n            navigationHelper.OnNavigatedTo(e);\n        }\n\n        protected override void OnNavigatedFrom(NavigationEventArgs e)\n        {\n            base.OnNavigatedFrom(e);\n            navigationHelper.OnNavigatedFrom(e);\n        }\n\n        #endregion\n    }\n}",
 ```
 ### Edit the XAML layout
 
@@ -156,14 +176,18 @@ This will open the XAML editor within Visual Studio.
 I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxWindowsPage` inheritance, change the outer root node of the Xaml file from:
-```C# <Page \n    ... >\n    <!-- content -->\n</Page>",
+```c# 
+
+<Page \n    ... >\n    <!-- content -->\n</Page>",
       "language": "xml"
     }
   ]
 }
 ```
 to:
-```C# <views:MvxWindowsPage\n    xmlns:views=\"using:MvvmCross.WindowsCommon.Views\"\n    ... >\n    <!-- content -->\n</views:MvxWindowsPage>",
+```c# 
+
+<views:MvxWindowsPage\n    xmlns:views=\"using:MvvmCross.WindowsCommon.Views\"\n    ... >\n    <!-- content -->\n</views:MvxWindowsPage>",
       "language": "xml"
     }
   ]
@@ -178,7 +202,9 @@ To add the XAML user interface for our tip calculator, we will add a `ContentPan
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```C# <Grid x:Name=\"ContentPanel\" Grid.Row=\"1\" Margin=\"12,0,12,0\">\n    <StackPanel>\n        <TextBlock\n            Text=\"SubTotal\" />\n        <TextBox \n            Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n        <TextBlock\n            Text=\"Generosity\" />\n        <Slider \n            Value=\"{Binding Generosity,Mode=TwoWay}\" \n            SmallChange=\"1\" \n            LargeChange=\"10\" \n            Minimum=\"0\" \n            Maximum=\"100\" />\n        <TextBlock\n            Text=\"Tip\" />\n        <TextBlock \n            Text=\"{Binding Tip}\" />\n    </StackPanel>\n</Grid>",
+```c# 
+
+<Grid x:Name=\"ContentPanel\" Grid.Row=\"1\" Margin=\"12,0,12,0\">\n    <StackPanel>\n        <TextBlock\n            Text=\"SubTotal\" />\n        <TextBox \n            Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n        <TextBlock\n            Text=\"Generosity\" />\n        <Slider \n            Value=\"{Binding Generosity,Mode=TwoWay}\" \n            SmallChange=\"1\" \n            LargeChange=\"10\" \n            Minimum=\"0\" \n            Maximum=\"100\" />\n        <TextBlock\n            Text=\"Tip\" />\n        <TextBlock \n            Text=\"{Binding Tip}\" />\n    </StackPanel>\n</Grid>",
       "language": "xml"
     }
   ]
@@ -217,24 +243,36 @@ A Common folder will be added containing:
 Change `TipView` so that it inherits from `MvxWindowsPage`
 
 Change:
-```C# public class TipView : Page",
+```c# 
+
+public class TipView : Page",
 ```
 to:
-```C# public class TipView : MvxWindowsPage",
+```c# 
+
+public class TipView : MvxWindowsPage",
 ```
 This requires the addition of:
-```C# using MvvmCross.WindowsCommon.Views;",
+```c# 
+
+using MvvmCross.WindowsCommon.Views;",
 ```
 ### Persuade TipCalc to cooperate more reasonably with the `MvxWindowsPage` base class
 
 Change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-```C# base.OnNavigatedTo(e);",
+```c# 
+
+base.OnNavigatedTo(e);",
 ```
 and 
-```C# base.OnNavigatedFrom(e);",
+```c# 
+
+base.OnNavigatedFrom(e);",
 ```
 Altogether this looks like:
-```C# using TipCalc.UI.WindowsCommon.Common;\nusing Windows.UI.Xaml.Navigation;\nusing MvvmCross.WindowsCommon.Views;\n\n// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556\n\nnamespace TipCalc.UI.WindowsCommon.Views\n{\n    /// <summary>\n    /// An empty page that can be used on its own or navigated to within a Frame.\n    /// </summary>\n    public sealed partial class TipView : MvxWindowsPage\n    {\n        private NavigationHelper navigationHelper;\n        private ObservableDictionary defaultViewModel = new ObservableDictionary();\n\n        public TipView()\n        {\n            this.InitializeComponent();\n\n            this.navigationHelper = new NavigationHelper(this);\n            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;\n            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;\n        }\n\n        /// <summary>\n        /// Gets the <see cref=\"NavigationHelper\"/> associated with this <see cref=\"Page\"/>.\n        /// </summary>\n        public NavigationHelper NavigationHelper\n        {\n            get { return this.navigationHelper; }\n        }\n\n        /// <summary>\n        /// Gets the view model for this <see cref=\"Page\"/>.\n        /// This can be changed to a strongly typed view model.\n        /// </summary>\n        public ObservableDictionary DefaultViewModel\n        {\n            get { return this.defaultViewModel; }\n        }\n\n        /// <summary>\n        /// Populates the page with content passed during navigation.  Any saved state is also\n        /// provided when recreating a page from a prior session.\n        /// </summary>\n        /// <param name=\"sender\">\n        /// The source of the event; typically <see cref=\"NavigationHelper\"/>\n        /// </param>\n        /// <param name=\"e\">Event data that provides both the navigation parameter passed to\n        /// <see cref=\"Frame.Navigate(Type, Object)\"/> when this page was initially requested and\n        /// a dictionary of state preserved by this page during an earlier\n        /// session.  The state will be null the first time a page is visited.</param>\n        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)\n        {\n        }\n\n        /// <summary>\n        /// Preserves state associated with this page in case the application is suspended or the\n        /// page is discarded from the navigation cache.  Values must conform to the serialization\n        /// requirements of <see cref=\"SuspensionManager.SessionState\"/>.\n        /// </summary>\n        /// <param name=\"sender\">The source of the event; typically <see cref=\"NavigationHelper\"/></param>\n        /// <param name=\"e\">Event data that provides an empty dictionary to be populated with\n        /// serializable state.</param>\n        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)\n        {\n        }\n\n        #region NavigationHelper registration\n\n        /// <summary>\n        /// The methods provided in this section are simply used to allow\n        /// NavigationHelper to respond to the page's navigation methods.\n        /// <para>\n        /// Page specific logic should be placed in event handlers for the  \n        /// <see cref=\"NavigationHelper.LoadState\"/>\n        /// and <see cref=\"NavigationHelper.SaveState\"/>.\n        /// The navigation parameter is available in the LoadState method \n        /// in addition to page state preserved during an earlier session.\n        /// </para>\n        /// </summary>\n        /// <param name=\"e\">Provides data for navigation methods and event\n        /// handlers that cannot cancel the navigation request.</param>\n        protected override void OnNavigatedTo(NavigationEventArgs e)\n        {\n            base.OnNavigatedTo(e);\n            this.navigationHelper.OnNavigatedTo(e);\n        }\n\n        protected override void OnNavigatedFrom(NavigationEventArgs e)\n        {\n            base.OnNavigatedFrom(e);\n            this.navigationHelper.OnNavigatedFrom(e);\n        }\n\n        #endregion\n    }\n}",
+```c# 
+
+using TipCalc.UI.WindowsCommon.Common;\nusing Windows.UI.Xaml.Navigation;\nusing MvvmCross.WindowsCommon.Views;\n\n// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556\n\nnamespace TipCalc.UI.WindowsCommon.Views\n{\n    /// <summary>\n    /// An empty page that can be used on its own or navigated to within a Frame.\n    /// </summary>\n    public sealed partial class TipView : MvxWindowsPage\n    {\n        private NavigationHelper navigationHelper;\n        private ObservableDictionary defaultViewModel = new ObservableDictionary();\n\n        public TipView()\n        {\n            this.InitializeComponent();\n\n            this.navigationHelper = new NavigationHelper(this);\n            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;\n            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;\n        }\n\n        /// <summary>\n        /// Gets the <see cref=\"NavigationHelper\"/> associated with this <see cref=\"Page\"/>.\n        /// </summary>\n        public NavigationHelper NavigationHelper\n        {\n            get { return this.navigationHelper; }\n        }\n\n        /// <summary>\n        /// Gets the view model for this <see cref=\"Page\"/>.\n        /// This can be changed to a strongly typed view model.\n        /// </summary>\n        public ObservableDictionary DefaultViewModel\n        {\n            get { return this.defaultViewModel; }\n        }\n\n        /// <summary>\n        /// Populates the page with content passed during navigation.  Any saved state is also\n        /// provided when recreating a page from a prior session.\n        /// </summary>\n        /// <param name=\"sender\">\n        /// The source of the event; typically <see cref=\"NavigationHelper\"/>\n        /// </param>\n        /// <param name=\"e\">Event data that provides both the navigation parameter passed to\n        /// <see cref=\"Frame.Navigate(Type, Object)\"/> when this page was initially requested and\n        /// a dictionary of state preserved by this page during an earlier\n        /// session.  The state will be null the first time a page is visited.</param>\n        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)\n        {\n        }\n\n        /// <summary>\n        /// Preserves state associated with this page in case the application is suspended or the\n        /// page is discarded from the navigation cache.  Values must conform to the serialization\n        /// requirements of <see cref=\"SuspensionManager.SessionState\"/>.\n        /// </summary>\n        /// <param name=\"sender\">The source of the event; typically <see cref=\"NavigationHelper\"/></param>\n        /// <param name=\"e\">Event data that provides an empty dictionary to be populated with\n        /// serializable state.</param>\n        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)\n        {\n        }\n\n        #region NavigationHelper registration\n\n        /// <summary>\n        /// The methods provided in this section are simply used to allow\n        /// NavigationHelper to respond to the page's navigation methods.\n        /// <para>\n        /// Page specific logic should be placed in event handlers for the  \n        /// <see cref=\"NavigationHelper.LoadState\"/>\n        /// and <see cref=\"NavigationHelper.SaveState\"/>.\n        /// The navigation parameter is available in the LoadState method \n        /// in addition to page state preserved during an earlier session.\n        /// </para>\n        /// </summary>\n        /// <param name=\"e\">Provides data for navigation methods and event\n        /// handlers that cannot cancel the navigation request.</param>\n        protected override void OnNavigatedTo(NavigationEventArgs e)\n        {\n            base.OnNavigatedTo(e);\n            this.navigationHelper.OnNavigatedTo(e);\n        }\n\n        protected override void OnNavigatedFrom(NavigationEventArgs e)\n        {\n            base.OnNavigatedFrom(e);\n            this.navigationHelper.OnNavigatedFrom(e);\n        }\n\n        #endregion\n    }\n}",
 ```
 ### Edit the XAML layout
 
@@ -245,10 +283,14 @@ This will open the XAML editor within Visual Studio.
 Again, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxWindowsPage` inheritance, change the outer root node of the Xaml file from:
-```C# <Page \n    ... >\n    <!-- content -->\n</Page>",
+```c# 
+
+<Page \n    ... >\n    <!-- content -->\n</Page>",
 ```
 to:
-```C# <views:MvxWindowsPage\n    xmlns:views=\"using:MvvmCross.WindowsCommon.Views\"\n    ... >\n    <!-- content -->\n</views:MvxWindowsPage>",
+```c# 
+
+<views:MvxWindowsPage\n    xmlns:views=\"using:MvvmCross.WindowsCommon.Views\"\n    ... >\n    <!-- content -->\n</views:MvxWindowsPage>",
 ```
 To add the XAML user interface for our tip calculator, we will add a `ContentPanel` Grid in place of the `ContentRoot` Grid in the existing XAML.
 
@@ -261,7 +303,9 @@ This `Content Panel` will include exactly the same XAML as we added to the Windo
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```C# <Grid Grid.Row=\"1\" x:Name=\"ContentRoot\" Margin=\"19,9.5,19,0\">\n    <StackPanel>\n        <TextBlock\n            Text=\"SubTotal\" />\n        <TextBox \n            Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n        <TextBlock\n            Text=\"Generosity\" />\n        <Slider \n            Value=\"{Binding Generosity,Mode=TwoWay}\" \n            SmallChange=\"1\" \n            LargeChange=\"10\" \n            Minimum=\"0\" \n            Maximum=\"100\" />\n        <TextBlock\n            Text=\"Tip\" />\n        <TextBlock \n            Text=\"{Binding Tip}\" />\n    </StackPanel>\n</Grid>",
+```c# 
+
+<Grid Grid.Row=\"1\" x:Name=\"ContentRoot\" Margin=\"19,9.5,19,0\">\n    <StackPanel>\n        <TextBlock\n            Text=\"SubTotal\" />\n        <TextBox \n            Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n        <TextBlock\n            Text=\"Generosity\" />\n        <Slider \n            Value=\"{Binding Generosity,Mode=TwoWay}\" \n            SmallChange=\"1\" \n            LargeChange=\"10\" \n            Minimum=\"0\" \n            Maximum=\"100\" />\n        <TextBlock\n            Text=\"Tip\" />\n        <TextBlock \n            Text=\"{Binding Tip}\" />\n    </StackPanel>\n</Grid>",
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 
@@ -279,7 +323,9 @@ Universal Windows Phone apps seem to differ from Silverlight Windows Phone apps 
 If you do enable caching by setting the NavigationCacheMode property of a Page to "Required" and navigate backwards or forwards, the view is retrieved from the cache. This includes the ViewModel property of the view. While this doesn't create a problem when navigating backwards, it does when you navigate forward! If you already have cached a view with a particular state (loading from the init parameters into the viewmodel), that state is also retrieved from the cache and you'll end up with a view with an 'old' viewmodel state.
 
 To counter this, you must set the viewmodel to null when navigating to a page:
-```C# protected override void OnNavigatedTo(NavigationEventArgs e)\n{\n    if (e.NavigationMode == NavigationMode.New)\n        ViewModel = null;\n\n    base.OnNavigatedTo(e);\n    this.navigationHelper.OnNavigatedTo(e);\n}",
+```c# 
+
+protected override void OnNavigatedTo(NavigationEventArgs e)\n{\n    if (e.NavigationMode == NavigationMode.New)\n        ViewModel = null;\n\n    base.OnNavigatedTo(e);\n    this.navigationHelper.OnNavigatedTo(e);\n}",
 ```
 ## The Universal Windows App is complete!
 

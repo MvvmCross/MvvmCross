@@ -80,7 +80,9 @@ Most of this functionality is provided for you automatically. Within your Droid 
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```C# using Android.Content;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Droid.Platform;\nusing TipCalc.Core;\n\nnamespace TipCalc.UI.Droid\n{\n    public class Setup : MvxAndroidSetup\n    {\n        public Setup(Context applicationContext)\n            : base(applicationContext)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new App();\n        }\n    }\n}",
+```c# 
+
+using Android.Content;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Droid.Platform;\nusing TipCalc.Core;\n\nnamespace TipCalc.UI.Droid\n{\n    public class Setup : MvxAndroidSetup\n    {\n        public Setup(Context applicationContext)\n            : base(applicationContext)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new App();\n        }\n    }\n}",
 ```
 ## Add your View
 
@@ -95,14 +97,18 @@ To achieve the basic layout:
 - we'll add a new AXML file - `View_Tip.axml` in the `/Resources/Layout` folder
 
 - we'll edit this using either the Xamarin Android designer or the Visual Studio XML editor - the designer gives us a visual display, while the VS editor *sometimes* gives us XML Intellisense.
-```C# <?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
+```c# 
+
+<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
       "language": "xml"
     }
   ]
 }
 ```
 - we'll add a local app namespace - `http://schemas.android.com/apk/res-auto` - this is just like adding a namespace in XAML.
-```C# <?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
+```c# 
+
+<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
       "language": "xml"
     }
   ]
@@ -111,14 +117,18 @@ To achieve the basic layout:
 - notice that this 'layout' is already by default a **vertical** `LinearLayout` - for XAMLites, this layout is just like a `StackPanel` except that it is **very important** to specify the **vertical** orientation
 
 - within this layout we'll add some `TextView`s to provide some static text labels - for XAMLites, these are like `TextBlock`s
-```C# <TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"SubTotal\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Generosity\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Tip to leave\" /",
+```c# 
+
+<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"SubTotal\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Generosity\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Tip to leave\" /",
       "language": "xml"
     }
   ]
 }
 ```
 - we'll also add a short, wide `View` with a yellow background to provide a small amount of chrome:
-```C# <View\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"1dp\"\n    android:background=\"#ffff00\" />",
+```c# 
+
+<View\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"1dp\"\n    android:background=\"#ffff00\" />",
       "language": "xml"
     }
   ]
@@ -127,28 +137,36 @@ To achieve the basic layout:
 - we'll add some `View`s for data display and entry, and we'll **databind** these `View`s to properties in our `TipViewModel` 
 
   - an `EditText` for text data entry of the `SubTotal` - for XAMLites, this is a `TextBox`
-```C# <EditText\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text SubTotal\" />",
+```c# 
+
+<EditText\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text SubTotal\" />",
       "language": "xml"
     }
   ]
 }
 ```
   - a `SeekBar` for touch/slide entry of the `Generosity` - for XAMLites, this is like a `ProgressBar`
-```C# <SeekBar\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:max=\"100\"\n    local:MvxBind=\"Progress Generosity\" />",
+```c# 
+
+<SeekBar\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:max=\"100\"\n    local:MvxBind=\"Progress Generosity\" />",
       "language": "xml"
     }
   ]
 }
 ```
   - we'll add a `TextView` to display the `Tip` that results from the calculation:
-```C# <TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text Tip\" />",
+```c# 
+
+<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text Tip\" />",
       "language": "xml"
     }
   ]
 }
 ```
 Put together, this looks like:
-```C# <?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\">\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"SubTotal\" />\n  <EditText\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text SubTotal\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Generosity\" />\n  <SeekBar\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:max=\"100\"\n      local:MvxBind=\"Progress Generosity\" />\n  <View\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"1dp\"\n      android:background=\"#ffff00\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Tip to leave\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text Tip\" />\n</LinearLayout>",
+```c# 
+
+<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\">\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"SubTotal\" />\n  <EditText\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text SubTotal\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Generosity\" />\n  <SeekBar\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:max=\"100\"\n      local:MvxBind=\"Progress Generosity\" />\n  <View\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"1dp\"\n      android:background=\"#ffff00\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Tip to leave\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text Tip\" />\n</LinearLayout>",
       "language": "xml"
     }
   ]
@@ -188,16 +206,24 @@ Not that tThe name of this class **MUST** match the name of the viewmodel. As ou
 * This class will:
 
  * inherit from `MvxActivity`
-```C# public class TipCalcView : MvxActivity",
+```c# 
+
+public class TipCalcView : MvxActivity",
 ```
  * be marked with the Xamarin.Android `Activity` attribute, marking it as the `MainLauncher` for the project
-```C# [Activity(Label = \"Tip\", MainLauncher=true)]",
+```c# 
+
+[Activity(Label = \"Tip\", MainLauncher=true)]",
 ```
   * use `OnViewModelSet` to inflate its `ContentView` from the AXML - this will use a resource identifier generated by the Android and Xamarin tools. 
-```C# protected override void OnViewModelSet()\n{\n    SetContentView(Resource.Layout.View_Tip);\n}",
+```c# 
+
+protected override void OnViewModelSet()\n{\n    SetContentView(Resource.Layout.View_Tip);\n}",
 ```
 As a result this completed class is very simple:
-```C# using Android.App;\nusing MvvmCross.Droid.Views;\n\nnamespace TipCalc.UI.Droid.Views\n{\n    [Activity(Label = \"Tip\", MainLauncher = true)]\n    public class TipView : MvxActivity\n    {\n        protected override void OnViewModelSet()\n        {\n            SetContentView(Resource.Layout.View_Tip);\n        }\n    }\n}",
+```c# 
+
+using Android.App;\nusing MvvmCross.Droid.Views;\n\nnamespace TipCalc.UI.Droid.Views\n{\n    [Activity(Label = \"Tip\", MainLauncher = true)]\n    public class TipView : MvxActivity\n    {\n        protected override void OnViewModelSet()\n        {\n            SetContentView(Resource.Layout.View_Tip);\n        }\n    }\n}",
 ```
 ## The Android UI is complete!
 

@@ -4,14 +4,18 @@ title: PictureChooser
 category: Plugins
 ---
 The `PictureChooser` plugin provides implementations of:
-```C# public interface IMvxPictureChooserTask\n{\n  void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                                Action assumeCancelled);\n\n  void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                   Action assumeCancelled);\n}",
+```c# 
+
+public interface IMvxPictureChooserTask\n{\n  void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                                Action assumeCancelled);\n\n  void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                   Action assumeCancelled);\n}",
 ```
 This is available on Android, iOS, WindowsPhone and WindowsStore. 
 
 This interface is designed for single use only - i.e. each time you require a picture you should request a new `IMvxPictureChooserTask` instance.
 
 The interface can be used as:
-```C# var task = Mvx.Resolve<IMvxPictureChooserTask>();\ntask.ChoosePictureFromLibrary(500, 90,\n                              stream => {\n                                // use the stream\n                                // expect the stream to be disposed after immediately this method returns.\n                              },\n                              () => {\n                                // perform any cancelled operation\n                              });",
+```c# 
+
+var task = Mvx.Resolve<IMvxPictureChooserTask>();\ntask.ChoosePictureFromLibrary(500, 90,\n                              stream => {\n                                // use the stream\n                                // expect the stream to be disposed after immediately this method returns.\n                              },\n                              () => {\n                                // perform any cancelled operation\n                              });",
 ```
 **Note:** Using this interface well on Android is very difficult.
 
@@ -22,7 +26,9 @@ If you want to use this `IMvxPictureChooserTask` effectively and reliably on And
 There is a simple demo for `IMvxPictureChooserTask` in [PictureTaking](https://github.com/slodge/MvvmCross-Tutorials/tree/master/PictureTaking) - however, this simple demo doesn't currently show this full Android technique. 
 
 **Note:** On Windows Phone 8.0, an additional implementation is available:
-```C# public interface IMvxCombinedPictureChooserTask\n{\n  void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                           Action assumeCancelled);\n}\n\nClient code can test for the availability of this interface using:\n\nvar isAvailable = Mvx.CanResolve<IMvxCombinedPictureChooserTask>();\n\nor:\n\nIMvxCombinedPictureChooserTask combined;\nvar isAvailable = Mvx.TryResolve(out combined);",
+```c# 
+
+public interface IMvxCombinedPictureChooserTask\n{\n  void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,\n                           Action assumeCancelled);\n}\n\nClient code can test for the availability of this interface using:\n\nvar isAvailable = Mvx.CanResolve<IMvxCombinedPictureChooserTask>();\n\nor:\n\nIMvxCombinedPictureChooserTask combined;\nvar isAvailable = Mvx.TryResolve(out combined);",
 ```
 Finally, the `PictureChooser` plugin also provides an "InMemoryImage" ValueConverter - `MvxInMemoryImageValueConverter`. This value converter allows images to be decoded from byte arrays for use on-screen.
 
