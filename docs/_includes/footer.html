@@ -4,24 +4,30 @@
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
-          <h2 class="footer-heading"><b>Blog</b></h2>
+          <a href="{{ site.baseurl }}{% link blog %}"><h2 class="footer-heading"><b>Blog</b></h2></a>
           <ul class="blog-list">
                 {% for post in site.posts limit:5 %}
                     <li>
                         <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
                     </li>
                 {% endfor %}
+                <li>
+                  <a class="post-link last" href="{{ site.baseurl }}{% link blog %}">Read More</a>
+                </li>
             </ul>
       </div>
 
       <div class="footer-col footer-col-2">
-            <h2 class="footer-heading"><b>Tutorials</b></h2>
+            <a href="{{ site.baseurl }}{% link blog %}"><h2 class="footer-heading"><b>Tutorials</b></h2></a>
             <ul class="blog-list">
                     {% for post in site.posts limit:5 %}
                         <li>
                             <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
                         </li>
                     {% endfor %}
+                  <li>
+                    <a class="post-link last" href="{{ site.baseurl }}{% link blog %}">Read More</a>
+                  </li>
              </ul>
       </div>
 
