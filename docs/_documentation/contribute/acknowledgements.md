@@ -3,12 +3,7 @@ layout: documentation
 title: Acknowledgements
 category: Contribute
 ---
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Owners"
-}
-[/block]
+## Owners
 
 [block:parameters]
 {
@@ -23,14 +18,9 @@ category: Contribute
   "cols": 2,
   "rows": 3
 }
-[/block]
+```
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "Contributors"
-}
-[/block]
+## Contributors
 
 [block:parameters]
 {
@@ -38,14 +28,11 @@ category: Contribute
   "cols": 2,
   "rows": 4
 }
-[/block]
+```
 
-[block:api-header]
-{
-  "type": "basic",
-  "title": "General"
+## General"
 }
-[/block]
+```
 
 * Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
 * Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project

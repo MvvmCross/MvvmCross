@@ -11,16 +11,8 @@ The `ResourceLoader` plugin provides access to files bundled within the app pack
 On several platforms, the ResourceLoader plugin requires an `IMvxFileStore` is available. One easy way to supply this is to load the `File` plugin.
 
 The main interface supplied by this plugin is:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "public interface IMvxResourceLoader\n{\n  bool ResourceExists(string resourcePath);\n  string GetTextResource(string resourcePath);\n  void GetResourceStream(string resourcePath, Action<Stream> streamAction);\n}",
-      "language": "csharp"
-    }
-  ]
-}
-[/block]
+```C# public interface IMvxResourceLoader\n{\n  bool ResourceExists(string resourcePath);\n  string GetTextResource(string resourcePath);\n  void GetResourceStream(string resourcePath, Action<Stream> streamAction);\n}",
+```
 For a text file 'Hello.txt' bundled in a folder 'Foo', this can be called as:    
 
     var loader = Mvx.Resolve<IMvxResourceLoader>();

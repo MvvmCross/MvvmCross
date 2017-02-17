@@ -4,31 +4,15 @@ title: Location
 category: Plugins
 ---
 The `Location` plugin provides access to GeoLocation (typically GPS) functionality via the API:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "public interface IMvxGeoLocationWatcher\n{\n  void Start(\n    MvxGeoLocationOptions options, \n    Action<MvxGeoLocation> success, \n    Action<MvxLocationError> error);\n  void Stop();\n  bool Started { get; }\n}",
-      "language": "csharp"
-    }
-  ]
-}
-[/block]
+```C# public interface IMvxGeoLocationWatcher\n{\n  void Start(\n    MvxGeoLocationOptions options, \n    Action<MvxGeoLocation> success, \n    Action<MvxLocationError> error);\n  void Stop();\n  bool Started { get; }\n}",
+```
 The `Location` plugin is implemented on all platforms EXCEPT Wpf.
 
 Because of the `Action` based nature of the `IMvxGeoLocationWatcher` API, it's generally best **not** to use this interface directly inside ViewModels, but instead to use the API in a singleton service which can then send Messages to your ViewModels.
 
 An example implementation of such a service is:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "public class LocationService\n  : ILocationService\n  {\n    private readonly IMvxGeoLocationWatcher _watcher;\n    private readonly IMvxMessenger _messenger;\n\n    public LocationService(IMvxGeoLocationWatcher watcher, IMvxMessenger messenger)\n    {\n      _watcher = watcher;\n      _messenger = messenger;\n      _watcher.Start(new MvxGeoLocationOptions(), OnLocation, OnError);\n    }\n\n    private void OnLocation(MvxGeoLocation location)\n    {\n      var message = new LocationMessage(this,\n                                        location.Coordinates.Latitude,\n                                        location.Coordinates.Longitude\n                                       );\n\n      _messenger.Publish(message);\n    }\n\n    private void OnError(MvxLocationError error)\n    {\n      Mvx.Error(\"Seen location error {0}\", error.Code);\n    }\n  }",
-      "language": "csharp"
-    }
-  ]
-}
-[/block]
+```C# public class LocationService\n  : ILocationService\n  {\n    private readonly IMvxGeoLocationWatcher _watcher;\n    private readonly IMvxMessenger _messenger;\n\n    public LocationService(IMvxGeoLocationWatcher watcher, IMvxMessenger messenger)\n    {\n      _watcher = watcher;\n      _messenger = messenger;\n      _watcher.Start(new MvxGeoLocationOptions(), OnLocation, OnError);\n    }\n\n    private void OnLocation(MvxGeoLocation location)\n    {\n      var message = new LocationMessage(this,\n                                        location.Coordinates.Latitude,\n                                        location.Coordinates.Longitude\n                                       );\n\n      _messenger.Publish(message);\n    }\n\n    private void OnError(MvxLocationError error)\n    {\n      Mvx.Error(\"Seen location error {0}\", error.Code);\n    }\n  }",
+```
 For a good walk-through of using the location plugin, including using it in tandem with the MvvmCross messenger, see both N=8 and N=9 in N+1 videos of MvvmCross - [N+1 videos](https://github.com/slodge/MvvmCross/wiki/N-1-Videos-Of-MvvmCross)
 
 Notes:
