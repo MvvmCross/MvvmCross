@@ -134,10 +134,11 @@ h2,h3,h4,h5,h6
     text-shadow: 1px 0px #000000;
     margin:0px;
     color:#FFF;
+    font-weight: bold;
 }
 .landing-subtitle
 {
-    font-size: 22px;
+    font-size: 24px;
 }
 
 $effective-content-width: $content-width - ($spacing-unit * 2);
