@@ -69,7 +69,7 @@
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomBinding\MvvmCross.TestProjects.CustomBinding.Core.csproj">
+    <ProjectReference Include="..\Core\MvvmCross.TestProjects.CustomBinding.Core.csproj">
       <Project>{E02C8D6D-505A-4263-9A93-63C658AF2040}</Project>
       <Name>MvvmCross.TestProjects.CustomBinding.Core</Name>
     </ProjectReference>

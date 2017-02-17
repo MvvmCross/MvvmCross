@@ -143,7 +143,7 @@
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>MvvmCross.Platform.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomBinding\MvvmCross.TestProjects.CustomBinding.Core.csproj">
+    <ProjectReference Include="..\Core\MvvmCross.TestProjects.CustomBinding.Core.csproj">
       <Project>{E02C8D6D-505A-4263-9A93-63C658AF2040}</Project>
       <Name>MvvmCross.TestProjects.CustomBinding.Core</Name>
     </ProjectReference>
