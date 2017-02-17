@@ -75,7 +75,7 @@ h2,h3,h4,h5,h6
     background: #2D2D2D;
     background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
     padding: 150px 0;
-    color: #FDF3E7;
+    color: #FFF;
     font-weight: 300;
     margin-top: -30px;
     text-align: center;
@@ -132,6 +132,7 @@ h2,h3,h4,h5,h6
     font-weight: 400;
     font-size: 64px;
     text-shadow: 1px 0px #000000;
+    margin:0px;
 }
 
 $effective-content-width: $content-width - ($spacing-unit * 2);
