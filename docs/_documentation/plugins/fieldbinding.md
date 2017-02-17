@@ -11,10 +11,14 @@ When FieldBinding is loaded, then MvvmCross data-binding:
 - can use `INotifyChanged` for dynamic fields.
 
 An example, Rio-based ViewModel using both FieldBinding and MethodBinding is:
-```C# public class FirstViewModel\n       : MvxViewModel\n    {\n        private readonly IDataStore _dataStore;\n        \n        public FirstViewModel(IDataStore dataStore)\n        {\n            _dataStore = dataStore;\n        }\n        \n        public void Init(int id)\n        {\n            var person = _dataStore.Get<Person>(id);\n            Id.Value = id;\n            FirstName.Value = person.FirstName;\n            LastName.Value = person.LastName;\n        }\n        \n        public readonly INC<int> Id = new NC<int>();\n        public readonly INC<string> FirstName = new NC<string>();\n        public readonly INC<string> LastName = new NC<string>();\n        \n        public void Save()\n        {\n            var person = _dataStore.Get<Person>(id);\n            person.FirstName = FirstName.Value;\n            person.LastName = LastName.Value;\n            _dataStore.Update(person);\n            Close(this);\n        }\n    }",
+```c# 
+
+public class FirstViewModel\n       : MvxViewModel\n    {\n        private readonly IDataStore _dataStore;\n        \n        public FirstViewModel(IDataStore dataStore)\n        {\n            _dataStore = dataStore;\n        }\n        \n        public void Init(int id)\n        {\n            var person = _dataStore.Get<Person>(id);\n            Id.Value = id;\n            FirstName.Value = person.FirstName;\n            LastName.Value = person.LastName;\n        }\n        \n        public readonly INC<int> Id = new NC<int>();\n        public readonly INC<string> FirstName = new NC<string>();\n        public readonly INC<string> LastName = new NC<string>();\n        \n        public void Save()\n        {\n            var person = _dataStore.Get<Person>(id);\n            person.FirstName = FirstName.Value;\n            person.LastName = LastName.Value;\n            _dataStore.Update(person);\n            Close(this);\n        }\n    }",
 ```
 The field in this class could be accessed using Android syntax:
-```C# <TextView\n\tandroid:layout_width='fill_parent'\n  android:layout_height='wrap_content'\n  local:MvxBind='Text FirstName' />\n\n<TextView\n  android:layout_width='fill_parent'\n  android:layout_height='wrap_content'\n  local:MvxBind='Text LastName' />",
+```c# 
+
+<TextView\n\tandroid:layout_width='fill_parent'\n  android:layout_height='wrap_content'\n  local:MvxBind='Text FirstName' />\n\n<TextView\n  android:layout_width='fill_parent'\n  android:layout_height='wrap_content'\n  local:MvxBind='Text LastName' />",
       "language": "xml"
     }
   ]

@@ -4,7 +4,9 @@ title: Color
 category: Plugins
 ---
 The `Color` plugin provides native implementations for conversion from the cross-platform `MvxColor` to platform-specific `Color` implementations.
-```C# public interface IMvxNativeColor\n{\n  object ToNative(MvxColor mvxColor);\n}",
+```c# 
+
+public interface IMvxNativeColor\n{\n  object ToNative(MvxColor mvxColor);\n}",
 ```
 This plugin is available on all platforms.
 

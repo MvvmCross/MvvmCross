@@ -5,7 +5,9 @@ category: Plugins
 ---
 Using the SQLite-Plugin for MvvmCross is quite simple. The plugin injects the IMvxSqliteConnectionFactory into the IoC container. First you have to inject the factory in your class through the contructor or through property injection.
 
-```C# 
+```c# 
+
+
 private readonly IMvxSqliteConnectionFactory _sqliteConnectionFactory;
 
 public Repository(IMvxSqliteConnectionFactory sqliteConnectionFactory)
@@ -18,7 +20,9 @@ public Repository(IMvxSqliteConnectionFactory sqliteConnectionFactory)
 
 The API of IMvxSqliteConnectionFactory is very easy to understand and to use.
 
-```C# 
+```c# 
+
+
 public interface IMvxSqliteConnectionFactory
 {
     SQLiteConnectionWithLock GetConnectionWithLock(string databaseName);
@@ -32,13 +36,17 @@ public interface IMvxSqliteConnectionFactory
 #### SQLite Connection
 
 Using the name of the database only:
-```C# 
+```c# 
+
+
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetConnection(databaseName);
 ```
 
 Using the SqliteConfig Object:
-```C# 
+```c# 
+
+
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
                               new CustomBlobSerializer(), 
@@ -50,13 +58,17 @@ var connection = _sqliteConnectionFactory.GetConnection(config);
 #### SQLite Connection with lock
 
 Using the name of the database only:
-```C# 
+```c# 
+
+
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetConnectionWithLock(databaseName);
 ```
 
 Using the SqliteConfig Object:
-```C# 
+```c# 
+
+
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
                               new CustomBlobSerializer(), 
@@ -68,13 +80,17 @@ var connection = _sqliteConnectionFactory.GetConnectionWithLock(config);
 #### Async SQLite Connection
 
 * Using the name of the database only:
-```C# 
+```c# 
+
+
 var databaseName = "myTestDatabase.sqlite";
 var connection = _sqliteConnectionFactory.GetAsyncConnection(databaseName);
 ```
 
 Using the SqliteConfig Object:
-```C# 
+```c# 
+
+
 var config = new SqLiteConfig("myTestDatabase.sqlite", 
                               true, 
                               new CustomBlobSerializer(), 
