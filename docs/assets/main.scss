@@ -62,6 +62,9 @@ h2,h3,h4,h5,h6
 .site-nav .page-link {
     color: #37474f;
     line-height: $base-line-height;
+    font-size: 16px;
+	font-weight: bold;
+    text-transform: uppercase;
 }
 
 @media screen and (max-width: 600px) {
