@@ -1,8 +1,8 @@
 ---
 layout: post
 title: MvvmCross 4.0-beta4
-date:   2017-02-13 11:37:35 +0100
-categories: jekyll update
+date:   2015-10-21 11:37:35 +0100
+categories: mvvmcross
 ---
 
 New logo, Android support improvements, UWP presenter and bug fixes
