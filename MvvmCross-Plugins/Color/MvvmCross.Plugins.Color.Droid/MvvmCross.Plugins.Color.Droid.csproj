@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingTargets\MvxDefaultColorBindingSet.cs" />
+    <Compile Include="Binding\MvxAndroidColorPropertyBinding.cs" />
+    <Compile Include="Binding\MvxAndroidColorPropertyBindingExtensions.cs" />
     <Compile Include="MvxAndroidColor.cs" />
     <Compile Include="BindingTargets\MvxViewColorBinding.cs" />
     <Compile Include="MvxColorExtensions.cs" />
