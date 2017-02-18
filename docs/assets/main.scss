@@ -271,8 +271,6 @@ a:visited {
     }
 }
 
-
-
 .company-col
 {
     float:left;
@@ -291,9 +289,19 @@ a:visited {
     {
         a
         {
-            color: #888;
+            color: #FFF;
             font-size: 15px;
         }
+    }
+}
+
+.site-footer
+{
+    background:#37474f;
+    color:#FFF;
+
+    h2, h3, h4, h5, h6 {
+        color:#FFF;
     }
 }
 
