@@ -239,6 +239,40 @@ a:visited {
 }
 
 
+.sponsors
+{
+    background-color: #FFF;
+
+    .wrapper
+    {
+        text-align: center;
+        
+        .sponsors-text
+        {
+            padding:60px 0;
+
+            h2
+            {
+                font-size: 30px;
+                color: #37474f;
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-bottom: 0px;
+            }
+
+            div
+            {
+                font-size: 24px;
+                color: #37474f;
+                line-height: 1.25;
+            }
+
+        }
+    }
+}
+
+
+
 .company-col
 {
     float:left;
