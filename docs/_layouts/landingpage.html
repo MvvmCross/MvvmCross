@@ -7,20 +7,34 @@
 
     {% include header.html %}
 
-    <main class="landing-intro" aria-label="Content">
-          <h1 class="landing-title">LEARN ONCE, WRITE ANYWHERE</h1>
-          <div class="landing-subtitle">Build mobile apps with MvvmCross</div><br/>
-          <div class="buttons-unit"><a href="{{site.baseurl}}/documentation/basics/getting-started/getting-started.html" class="button-landing">Get started</a></div>
-          {{ content }}
+    <main class="page-content landing-page" aria-label="Content">
+          <div class="landing-intro">
+            <h1 class="landing-title">LEARN ONCE, WRITE ANYWHERE</h1>
+            <div class="landing-subtitle">Build mobile apps with MvvmCross</div><br/>
+            <div class="buttons-unit"><a href="{{site.baseurl}}/documentation/basics/getting-started/getting-started.html" class="button-landing">Get started</a></div>
+          </div>
+
+           <div class="companies">
+             <div class="wrapper">
+              <h2>Companies that use MvvmCross</h2>
+              <span>Lorem ipsum dolor sit amet</span>
+              <div class="companyGallery">
+                <div class="company-col">
+                  <img src="https://www.xamarin.com/content/images/pages/branding/assets/xamarin-logo.png"/>
+                </div>
+                <div class="company-col">
+                  <img src="https://www.xamarin.com/content/images/pages/branding/assets/xamarin-logo.png"/>
+                </div>
+                <div class="company-col">
+                  <img src="https://www.xamarin.com/content/images/pages/branding/assets/xamarin-logo.png"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     </main>
 
-    <div class="companies">
-      <h2>Companies that use MvvmCross</h2>
-      <span>Lorem ipsum dolor sit amet</span>
-      <div class="companyGallery">
-        
-      </div>
-    </div>
+   
 
     {% include footer.html %}
 
