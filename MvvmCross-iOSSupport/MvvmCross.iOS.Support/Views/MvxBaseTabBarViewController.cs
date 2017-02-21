@@ -23,10 +23,13 @@ namespace MvvmCross.iOS.Support.Views
 		{
 		}
 
-		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier)
+		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
 		{
+			if(!string.IsNullOrEmpty(tabAccessibilityIdentifier))
+				viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
+
 			// setup Tab
-			SetTitleAndTabBarItem(viewController, tabTitle, tabIconName, tabAccessibilityIdentifier);
+			SetTitleAndTabBarItem(viewController, tabTitle, tabIconName);
 
 			// add Tab
 			var currentTabs = new List<UIViewController>();
@@ -52,10 +55,8 @@ namespace MvvmCross.iOS.Support.Views
 			ViewControllers = currentTabs.ToArray();
 		}
 
-		protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string tabAccessibilityIdentifier)
+		protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
 		{
-			viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
-
 			viewController.Title = title;
 
 			if(!string.IsNullOrEmpty(iconName))
