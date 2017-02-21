@@ -15,6 +15,8 @@ using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers;
+using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
+using MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
@@ -41,8 +43,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
 
-            if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
+            if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
+
+            HidesHeaderIfEmpty = MvxRecyclerViewAttributeExtensions.IsHidesHeaderIfEmptyEnabled(context, attrs);
+            HidesFooterIfEmpty = MvxRecyclerViewAttributeExtensions.IsHidesFooterIfEmptyEnabled(context, attrs);
+
+            if (MvxRecyclerViewAttributeExtensions.IsGroupingSupported(context, attrs))
+                GroupedDataConverter = MvxRecyclerViewAttributeExtensions.BuildMvxGroupedDataConverter(context, attrs);
         }
 
         public sealed override void SetLayoutManager(LayoutManager layout)
@@ -81,6 +89,26 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     value.ItemClick = existing.ItemClick;
                     value.ItemLongClick = existing.ItemLongClick;
 
+                    var existingGroupableAdapter = existing as IMvxGroupableRecyclerViewAdapter;
+                    var newGroupableAdapter = value as IMvxGroupableRecyclerViewAdapter;
+
+                    if (existingGroupableAdapter != null && newGroupableAdapter != null)
+                    {
+                        newGroupableAdapter.GroupHeaderClickCommand = existingGroupableAdapter.GroupHeaderClickCommand;
+                        newGroupableAdapter.GroupedDataConverter = existingGroupableAdapter.GroupedDataConverter;
+                    }
+
+                    var existingHeaderFooterAdapter = existing as IMvxHeaderFooterRecyclerViewAdapter;
+                    var newHeaderFooterAdapter = value as IMvxHeaderFooterRecyclerViewAdapter;
+
+                    if (existingGroupableAdapter != null && newHeaderFooterAdapter != null)
+                    {
+                        newHeaderFooterAdapter.FooterClickCommand = existingHeaderFooterAdapter.FooterClickCommand;
+                        newHeaderFooterAdapter.HeaderClickCommand = existingHeaderFooterAdapter.HeaderClickCommand;
+                        newHeaderFooterAdapter.HidesFooterIfEmpty = existingHeaderFooterAdapter.HidesFooterIfEmpty;
+                        newHeaderFooterAdapter.HidesHeaderIfEmpty = existingHeaderFooterAdapter.HidesHeaderIfEmpty;
+                    }
+
                     SwapAdapter((Adapter)value, false);
                 }
                 else
@@ -99,7 +127,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            set
+            {
+                Adapter.ItemsSource = value;
+            }
         }
 
         public int ItemTemplateId
@@ -111,7 +142,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 if (singleItemDefaultTemplateSelector == null)
                     throw new InvalidOperationException(
                         $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
-                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
+                        $"{nameof(MvxBaseTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 return singleItemDefaultTemplateSelector.ItemTemplateId;
             }
@@ -122,18 +153,70 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 if (singleItemDefaultTemplateSelector == null)
                     throw new InvalidOperationException(
                         $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
-                        $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
+                        $"{nameof(MvxBaseTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 singleItemDefaultTemplateSelector.ItemTemplateId = value;
                 Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
             }
         }
 
+        public int HeaderLayoutId
+        {
+            get { return ItemTemplateSelector.HeaderLayoutId; }
+            set { ItemTemplateSelector.HeaderLayoutId = value; }
+        }
 
-        public IMvxTemplateSelector ItemTemplateSelector
+        public int FooterLayoutId
+        {
+            get { return ItemTemplateSelector.FooterLayoutId; }
+            set { ItemTemplateSelector.FooterLayoutId = value; }
+        }
+
+        public int GroupSectionLayoutId
+        {
+            get { return ItemTemplateSelector.GroupSectionLayoutId; }
+            set { ItemTemplateSelector.GroupSectionLayoutId = value; }
+        }
+
+        public bool HidesHeaderIfEmpty
+        {
+            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesHeaderIfEmpty ?? false; }
+            set
+            {
+                var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
+
+                if (headerFooterAdapter != null)
+                    headerFooterAdapter.HidesHeaderIfEmpty = value;
+            }
+        }
+
+        public bool HidesFooterIfEmpty
+        {
+            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesFooterIfEmpty ?? false; }
+            set
+            {
+                var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
+
+                if (headerFooterAdapter != null)
+                    headerFooterAdapter.HidesFooterIfEmpty = value;
+            }
+        }
+
+        public MvxBaseTemplateSelector ItemTemplateSelector
         {
             get { return Adapter.ItemTemplateSelector; }
-            set { Adapter.ItemTemplateSelector = value; }
+            set
+            {
+                var oldTemplateSelector = Adapter.ItemTemplateSelector;
+                if (oldTemplateSelector != null && value != null)
+                {
+                    value.HeaderLayoutId = oldTemplateSelector.HeaderLayoutId;
+                    value.FooterLayoutId = oldTemplateSelector.FooterLayoutId;
+                    value.GroupSectionLayoutId = oldTemplateSelector.GroupSectionLayoutId;
+                }
+
+                Adapter.ItemTemplateSelector = value;
+            }
         }
 
         public ICommand ItemClick
@@ -142,10 +225,63 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             set { this.Adapter.ItemClick = value; }
         }
 
+        public ICommand HeaderClickCommand
+        {
+            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HeaderClickCommand; }
+            set
+            {
+                var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
+
+                if (headerFooterAdapter != null)
+                    headerFooterAdapter.HeaderClickCommand = value;
+            }
+        }
+
+        public ICommand FooterClickCommand
+        {
+            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.FooterClickCommand; }
+            set
+            {
+                var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
+
+                if (headerFooterAdapter != null)
+                    headerFooterAdapter.FooterClickCommand = value;
+            }
+        }
+
+        public ICommand GroupHeaderClickCommand
+        {
+            get { return GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupHeaderClickCommand; }
+            set
+            {
+                var groupableAdapter = GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>();
+
+                if (groupableAdapter != null)
+                    groupableAdapter.GroupHeaderClickCommand = value;
+            }
+        }
+
+        public IMvxGroupedDataConverter GroupedDataConverter
+        {
+            get { return GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupedDataConverter; }
+            set
+            {
+                var groupableAdapter = GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>();
+
+                if (groupableAdapter != null)
+                    groupableAdapter.GroupedDataConverter = value;
+            }
+        }
+
         public ICommand ItemLongClick
         {
             get { return this.Adapter.ItemLongClick; }
             set { this.Adapter.ItemLongClick = value; }
+        }
+
+        private T GetCastedAdapter<T>() where T : class, IMvxRecyclerAdapter
+        {
+            return Adapter as T;
         }
     }
 }

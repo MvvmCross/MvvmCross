@@ -106,7 +106,7 @@ namespace MvvmCross.Binding.iOS.Views
             var item = this.GetItemAt(indexPath);
             var cell = this.GetOrCreateCellFor(tableView, indexPath, item);
 
-            var bindable = cell as MvxTableViewCell;
+            var bindable = cell as IMvxBindable;
 
             if (bindable != null)
             {

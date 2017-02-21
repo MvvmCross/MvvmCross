@@ -51,6 +51,10 @@
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\UWP\MvvmCross.Platform.Uwp.csproj">
+      <Project>{ce025c02-196a-4bd7-9097-e4646f4033b7}</Project>
+      <Name>MvvmCross.Platform.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.Email\MvvmCross.Plugins.Email.csproj">
       <Project>{157a8846-529e-4549-84ea-7fc8bafbc25a}</Project>
       <Name>MvvmCross.Plugins.Email</Name>
