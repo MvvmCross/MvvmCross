@@ -34,6 +34,14 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.FieldBinding\MvvmCross.FieldBinding.csproj">
       <Project>{64FAF565-E6CD-4C86-B965-DF228DEA61EB}</Project>
       <Name>MvvmCross.FieldBinding</Name>
@@ -52,27 +60,6 @@
     <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
       <Link>Preserve.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Binding.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Binding.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

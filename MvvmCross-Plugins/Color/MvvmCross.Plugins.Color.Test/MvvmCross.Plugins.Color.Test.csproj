@@ -32,30 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\net45\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\net45\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\net45\MvvmCross.Platform.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Test.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Tests.4.4.0\lib\net45\MvvmCross.Test.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\net45\MvvmCross.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +39,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxRgbaValueConverterTest.cs" />
@@ -71,6 +50,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Test\MvvmCross.Platform.Test.csproj">
+      <Project>{666eb95d-7cd8-48b6-a2f8-395decc84140}</Project>
+      <Name>MvvmCross.Platform.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Test\Test.Core\MvvmCross.Test.Core.csproj">
+      <Project>{8e788346-a72b-4939-9d95-a44ac5f46d9d}</Project>
+      <Name>MvvmCross.Test.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Test\Test\MvvmCross.Test.csproj">
+      <Project>{1c4b1284-5b72-4adb-ac5b-739f778233bd}</Project>
+      <Name>MvvmCross.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.Color\MvvmCross.Plugins.Color.csproj">
       <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
       <Name>MvvmCross.Plugins.Color</Name>
