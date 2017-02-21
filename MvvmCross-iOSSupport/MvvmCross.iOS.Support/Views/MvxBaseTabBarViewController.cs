@@ -23,8 +23,11 @@ namespace MvvmCross.iOS.Support.Views
 		{
 		}
 
-		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName)
+		public virtual void ShowTabView(UIViewController viewController, bool wrapInNavigationController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
 		{
+			if(!string.IsNullOrEmpty(tabAccessibilityIdentifier))
+				viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
+
 			// setup Tab
 			SetTitleAndTabBarItem(viewController, tabTitle, tabIconName);
 
