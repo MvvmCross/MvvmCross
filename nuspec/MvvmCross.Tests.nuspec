@@ -16,6 +16,6 @@ This package contains the 'Test Helpers' for MvvmCross
 	</metadata>
 	<files>
 		<!-- full -->
-		<file src="..\bin\Release\Mvx\Console\MvvmCross.Test.Core.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Console\MvvmCross.Test.Core.*" target="lib\portable45-net45+win8+wp8+wpa81" />
 	</files>
 </package>
