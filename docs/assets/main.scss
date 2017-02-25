@@ -192,8 +192,8 @@ $documentation-width: $effective-content-width * 0.70;
 {
     float: right;
     width: $documentation-width;
-    overflow-y:scroll;
-    height: $documentation-page-height;
+   // overflow-y:scroll;
+   // height: $documentation-page-height;
 }
 
 @media screen and (max-width: $effective-content-width) {
