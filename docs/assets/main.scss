@@ -23,6 +23,8 @@ $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
 $content-width:    1000px;
+$documentation-menu-height: 700px;
+$documentation-page-height: 700px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
@@ -153,7 +155,7 @@ $documentation-menu-width: $effective-content-width * 0.30;
     padding-bottom: 30px;
     margin-right: 10px;
     overflow-y:scroll;
-    height: 700px;
+    height: $documentation-menu-height;
     ul
     {
 
@@ -165,6 +167,11 @@ $documentation-menu-width: $effective-content-width * 0.30;
                 font-size: 15px;
                 color: #bbb;
                 font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+
+                u
+                {
+                    color: #CCC;
+                }
             }
         }
     }
@@ -186,7 +193,7 @@ $documentation-width: $effective-content-width * 0.70;
     float: right;
     width: $documentation-width;
     overflow-y:scroll;
-    height: 700px;
+    height: $documentation-page-height;
 }
 
 @media screen and (max-width: $effective-content-width) {
