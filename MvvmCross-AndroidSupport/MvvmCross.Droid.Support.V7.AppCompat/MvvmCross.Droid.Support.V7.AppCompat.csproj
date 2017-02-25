@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,8 +73,10 @@
   <ItemGroup>
     <Compile Include="EventSource\MvxEventSourceAppCompatDialogFragment.cs" />
     <Compile Include="MvxActionBarDrawerToggle.cs" />
+    <Compile Include="MvxAppCompatPropertyBinding.cs" />
     <Compile Include="MvxAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatActivityHelper.cs" />
+    <Compile Include="MvxAppCompatPropertyBindingExtensions.cs" />
     <Compile Include="MvxAppCompatSetupHelper.cs" />
     <Compile Include="EventSource\MvxEventSourceAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatDialogFragment.cs" />
