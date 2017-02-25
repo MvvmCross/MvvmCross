@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using Android.Support.V7.Widget;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -20,32 +20,34 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding),
                 typeof(MvxAppCompatAutoCompleteTextView),
-                "PartialText");
+                MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_PartialText);
+
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding),
                 typeof(MvxAppCompatAutoCompleteTextView),
-                "SelectedObject");
+                MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_SelectedObject);
 
             registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
-                "SelectedItem",
+                MvxAppCompatPropertyBinding.MvxAppCompatSpinner_SelectedItem,
                 spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
 
             registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
-                "SelectedItem",
+                MvxAppCompatPropertyBinding.MvxAppCompatRadioGroup_SelectedItem,
                 radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
+
             registry.RegisterCustomBindingFactory<SearchView>(
-                "Query",
+                MvxAppCompatPropertyBinding.SearchView_Query,
                 search => new MvxAppCompatSearchViewQueryTextTargetBinding(search));
 
             registry.RegisterCustomBindingFactory<Toolbar>(
-                "Subtitle",
+                MvxAppCompatPropertyBinding.Toolbar_Subtitle,
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
         }
 
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
-            registry.AddOrOverwrite(typeof(SearchView), "Query");
-            registry.AddOrOverwrite(typeof(MvxAppCompatImageView), "ImageUrl");
+            registry.AddOrOverwrite(typeof(SearchView), MvxAppCompatPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(MvxAppCompatImageView), nameof(MvxAppCompatImageView.ImageUrl));
 
         }
     }
