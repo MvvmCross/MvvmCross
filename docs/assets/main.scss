@@ -152,11 +152,10 @@ $documentation-menu-width: $effective-content-width * 0.30;
     width: $documentation-menu-width - 10px;
     padding-bottom: 30px;
     margin-right: 10px;
-    
+    overflow-y:scroll;
+    height: 700px;
     ul
     {
-        overflow:hidden; 
-        overflow-y:scroll;
 
         li
         {
@@ -184,8 +183,10 @@ $documentation-menu-width: $effective-content-width * 0.30;
 $documentation-width: $effective-content-width * 0.70;
 .documentation
 {
-    float: left;
+    float: right;
     width: $documentation-width;
+    overflow-y:scroll;
+    height: 700px;
 }
 
 @media screen and (max-width: $effective-content-width) {
@@ -343,6 +344,11 @@ ul, li{
 	font: inherit;
 	vertical-align: baseline;
 	list-style: none;
+}
+
+html {
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
 }
 
 .documentation-header {
