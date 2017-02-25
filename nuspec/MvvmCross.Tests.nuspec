@@ -11,11 +11,13 @@ This package contains the 'Test Helpers' for MvvmCross
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
 		<dependencies>
+			<dependency id="MvvmCross.Core" version="[$version$]" />
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
-		</dependencies>
+			<dependency id="NUnit" version="3.6.0" />
+		</dependencies>s
 	</metadata>
 	<files>
 		<!-- full -->
-		<file src="..\bin\Release\Mvx\Console\MvvmCross.Test.Core.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Test.Core.*" target="lib\portable45-net45+win8+wp8+wpa81" />
 	</files>
 </package>

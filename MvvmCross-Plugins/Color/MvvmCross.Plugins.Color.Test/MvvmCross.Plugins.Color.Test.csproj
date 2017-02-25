@@ -59,7 +59,7 @@
       <Name>MvvmCross.Platform.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Test\Test.Core\MvvmCross.Test.Core.csproj">
-      <Project>{8e788346-a72b-4939-9d95-a44ac5f46d9d}</Project>
+      <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Test\Test\MvvmCross.Test.csproj">
