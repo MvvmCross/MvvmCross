@@ -246,6 +246,15 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
+            where TValueConverter : IMvxValueConverter
+        {
+            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var converterName = filler.FindName(typeof(TValueConverter));
+
+            return WithConversion(converterName, converterParameter);
+        }
+
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
             this.SourceStepDescription.FallbackValue = fallback;
