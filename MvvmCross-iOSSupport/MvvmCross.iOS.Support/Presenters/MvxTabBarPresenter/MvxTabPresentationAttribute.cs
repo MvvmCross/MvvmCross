@@ -19,11 +19,16 @@ namespace MvvmCross.iOS.Support.Presenters
 		public readonly string TabTitle;
 
 		/// <summary>
+		/// Tab accessibility identifier. Unless explicitly defined, it is equal to TabTitle plus 'Tab'
+		/// </summary>
+		public readonly string TabAccessibilityIdentifier;
+
+		/// <summary>
 		/// Set to true if want to wrap the view inside a NavigationController
 		/// </summary>
 		public readonly bool WrapInNavigationController;
 
-		/// <summary>
+		/// <summary> 
 		/// Initializes a new instance of the <see cref="T:MvvmCross.iOS.Support.Presenters.MvxTabPresentationAttribute"/> class.
 		/// </summary>
 		/// <param name="mode">The presentation mode</param>
@@ -38,15 +43,17 @@ namespace MvvmCross.iOS.Support.Presenters
 		/// Initializes a new instance of the <see cref="T:MvvmCross.iOS.Support.Presenters.MvxTabPresentationAttribute"/> class.
 		/// </summary>
 		/// <param name="mode">The presentation mode</param>
-		/// <param name="wrapInNavigationController">If set to <c>true</c> if want to wrap in navigation controller.</param>
-		/// <param name="tabIconName">Tab icon name.</param>
 		/// <param name="tabTitle">Tab title.</param>
-		public MvxTabPresentationAttribute(MvxTabPresentationMode mode, string tabTitle, string tabIconName, bool wrapInNavigationController = false)
+		/// <param name="tabIconName">Tab icon name.</param>
+		/// <param name="wrapInNavigationController">If set to <c>true</c> if want to wrap in navigation controller.</param>
+		/// <param name="tabAccessibilityIdentifier">Tab accessibility identifier.</param>
+		public MvxTabPresentationAttribute(MvxTabPresentationMode mode, string tabTitle, string tabIconName, bool wrapInNavigationController = false, string tabAccessibilityIdentifier = null)
 		{
 			Mode = mode;
 			TabIconName = tabIconName;
 			TabTitle = tabTitle;
 			WrapInNavigationController = wrapInNavigationController;
+			TabAccessibilityIdentifier = tabAccessibilityIdentifier ?? $"{tabTitle}Tab";
 		}
 	}
 

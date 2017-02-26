@@ -1,9 +1,9 @@
 ## MvvmCross
 
 [![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
-![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)
-![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)
-[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v2)
+[![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
+[![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
+[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 
 [![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
 
