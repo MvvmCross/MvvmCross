@@ -47,7 +47,9 @@ h2,h3,h4,h5,h6
 {
     color: $brand-color;
 }
-
+.page-content{
+    padding: 0px;
+}
 .header-logo
 {
     width: 129px;
@@ -152,7 +154,6 @@ $documentation-menu-width: $effective-content-width * 0.30;
 {
     float:left;
     width: $documentation-menu-width - 10px;
-    padding-bottom: 30px;
     margin-right: 10px;
     overflow-y:scroll;
     height: $documentation-menu-height;
@@ -177,7 +178,6 @@ $documentation-menu-width: $effective-content-width * 0.30;
     }
 }
 
-
 .active
 {
     background-color: #00ac65;
@@ -191,9 +191,10 @@ $documentation-width: $effective-content-width * 0.70;
 .documentation
 {
     float: right;
-    width: $documentation-width;
-   // overflow-y:scroll;
-   // height: $documentation-page-height;
+    width: $documentation-width - 20;
+    overflow-y:scroll;
+    height: $documentation-page-height;
+    padding: 10px;
 }
 
 @media screen and (max-width: $effective-content-width) {
@@ -351,11 +352,6 @@ ul, li{
 	font: inherit;
 	vertical-align: baseline;
 	list-style: none;
-}
-
-html {
-    overflow: -moz-scrollbars-vertical; 
-    overflow-y: scroll;
 }
 
 .documentation-header {
