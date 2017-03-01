@@ -12,6 +12,7 @@ namespace MvvmCross.Core.Navigation
     /// </summary>
     public interface IMvxNavigationService
     {
+        /*
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.
         /// </summary>
@@ -51,5 +52,22 @@ namespace MvvmCross.Core.Navigation
         /// <param name="requestedBy">Specify how the route was requested. This can be useful if you want to clear your stack, etc.</param>
         /// <returns>A task to await upon</returns>
         Task RouteAsync(Uri uri, MvxRequestedBy requestedBy);
+        */
+
+        Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+        Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
+        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
+        Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
+        Task Navigate(Uri path);
+        Task Navigate<TParameter>(Uri path, TParameter param);
+        Task<TResult> Navigate<TResult>(Uri path);
+        Task<TResult> Navigate<TParameter, TResult>(Uri path, TParameter param);
+        Task Navigate(string path);
+        Task Navigate<TParameter>(string path, TParameter param);
+        Task<TResult> Navigate<TResult>(string path);
+        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
+        Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+        Task<bool> CanNavigate(Uri path);
+        Task<bool> CanNavigate(string path);
     }
 }
