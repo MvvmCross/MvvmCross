@@ -12,7 +12,7 @@ This package contains Support Fragment support for MvvmCross.</description>
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
 			<dependency id="MvvmCross.Core" version="[$version$]" />
 			<dependency id="MvvmCross.Droid.Shared" version="[$version$]" />
-			<dependency id="Xamarin.Android.Support.Fragment" version="25.1.0"/>
+			<dependency id="Xamarin.Android.Support.Fragment" version="25.1.1"/>
 		</dependencies>
 	</metadata>
 	<files>
