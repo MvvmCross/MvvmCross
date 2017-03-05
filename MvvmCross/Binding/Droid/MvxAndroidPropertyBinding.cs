@@ -17,6 +17,7 @@ namespace MvvmCross.Binding.Droid
         public const string MvxAutoCompleteTextView_SelectedObject = "SelectedObject";
         public const string CompoundButton_Checked = "Checked";
         public const string SeekBar_Progress = "Progress";
+        public const string View_Alpha = "Alpha";
         public const string View_Visible = "Visible";
         public const string View_Hidden = "Hidden";
         public const string ImageView_Bitmap = "Bitmap";

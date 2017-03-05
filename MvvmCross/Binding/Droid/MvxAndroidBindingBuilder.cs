@@ -118,6 +118,10 @@ namespace MvvmCross.Binding.Droid
                 MvxAndroidPropertyBinding.SeekBar_Progress);
 
             registry.RegisterCustomBindingFactory<View>(
+                MvxAndroidPropertyBinding.View_Alpha,
+                view => new MvxViewAlphaBinding(view));
+
+            registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Visible,
                 view => new MvxViewVisibleBinding(view));
 

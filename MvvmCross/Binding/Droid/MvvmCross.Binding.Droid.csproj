@@ -112,6 +112,7 @@
     <Compile Include="Target\MvxSeekBarProgressTargetBinding.cs" />
     <Compile Include="Target\MvxSpinnerSelectedItemBinding.cs" />
     <Compile Include="Target\MvxTwoStatePreferenceCheckedTargetBinding.cs" />
+    <Compile Include="Target\MvxViewAlphaBinding.cs" />
     <Compile Include="Target\MvxViewClickBinding.cs" />
     <Compile Include="Target\MvxViewHiddenBinding.cs" />
     <Compile Include="Target\MvxViewVisibleBinding.cs" />
