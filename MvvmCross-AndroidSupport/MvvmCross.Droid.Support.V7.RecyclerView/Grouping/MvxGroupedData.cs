@@ -10,13 +10,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.Grouping
 
         public override int GetHashCode()
         {
-            return Key.GetHashCode() * 23 + 29 * Items.GetHashCode();
+            return Key.GetHashCode();
         }
 
         public override bool Equals(object obj)
         {
             var other = obj as MvxGroupedData;
-            return other != null && Key.Equals(other.Key) && Items.Equals(other.Items);
+            return other != null && Key.Equals(other.Key);
         }
     }
 }
