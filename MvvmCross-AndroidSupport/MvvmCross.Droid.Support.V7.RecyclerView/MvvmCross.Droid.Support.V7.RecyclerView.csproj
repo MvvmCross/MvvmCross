@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AttributeHelpers\MvxRecyclerViewAttributeExtensions.cs" />
     <Compile Include="AttributeHelpers\MvxRecyclerViewTemplateSelectorAttributes.cs" />
+    <Compile Include="MvxGuardedLinearLayoutManager.cs" />
     <Compile Include="Grouping\DataConverters\IMvxGroupedDataConverter.cs" />
     <Compile Include="Grouping\DataConverters\MvxDefaultGroupedDataConverter.cs" />
     <Compile Include="Grouping\DataConverters\MvxGroupedItemsSourceProvider.cs" />
