@@ -235,7 +235,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 Click = ItemClick,
                 LongClick = ItemLongClick,
                 FooterClickCommand = FooterClickCommand,
-                HeaderClickCommand = FooterClickCommand,
+                HeaderClickCommand = HeaderClickCommand,
                 GroupHeaderClickCommand = GroupHeaderClickCommand
             };
 
