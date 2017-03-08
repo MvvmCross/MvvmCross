@@ -13,12 +13,14 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
+using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
+        private readonly int _viewType;
         private readonly IMvxBindingContext _bindingContext;
 
         private object _cachedDataContext;
@@ -98,17 +100,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (item == null)
                 return;
 
-            if (item is MvxHeaderItemData)
+            if (_viewType == MvxBaseTemplateSelector.HeaderViewTypeId)
             {
-                if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
-                    HeaderClickCommand.Execute(null);
+                if (item is MvxHeaderItemData)
+                {
+                    if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
+                        HeaderClickCommand.Execute(null);
+                }
                 return;
             }
 
-            if (item is MvxFooterItemData)
+            if (_viewType == MvxBaseTemplateSelector.FooterViewTypeId)
             {
-                if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
-                    FooterClickCommand.Execute(null);
+                if (item is MvxFooterItemData)
+                {
+                    if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
+                        FooterClickCommand.Execute(null);
+                }
                 return;
             }
 
@@ -135,10 +143,15 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             this.ExecuteCommandOnItem(this.LongClick);
         }
-
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
+            : this(itemView, context, 0)
+        {
+        }
+
+        public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context, int viewType = 0)
             : base(itemView)
         {
+            _viewType = viewType;
             this._bindingContext = context;
         }
 
