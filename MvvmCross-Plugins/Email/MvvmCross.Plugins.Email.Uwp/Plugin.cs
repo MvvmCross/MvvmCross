@@ -16,7 +16,7 @@ namespace MvvmCross.Plugins.Email.WindowsCommon
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
-            // note that WindowsStore does not support IMvxComposeEmailTaskEx
+            Mvx.RegisterType<IMvxComposeEmailTaskEx, MvxComposeEmailTask>();
         }
     }
 }
