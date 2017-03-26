@@ -4,9 +4,9 @@
 {% for category in docs_by_category %}
   <div class="category_wrapper">
     <div class="category">{{ category.name }}</div>
-    <ul>
+    <ul class="menu-no-bullet">
     {% for item in category.items %}
-      <li class="collapsed">
+      <li class="collapsed menu-no-bullet">
           <a href="{{ site.baseurl }}{{ item.url }}">
           {% if item.url == navurl %}
             <u>{{ item.title }}</u>
