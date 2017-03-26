@@ -312,7 +312,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![v1](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Android.png)
+![Android TipCalc](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android.png)
 
 If you then want to make it 'more beautiful', then try adding a few attributes to some of your AXML - things like:
 
@@ -325,7 +325,7 @@ If you then want to make it 'more beautiful', then try adding a few attributes t
 
 Within a very short time, you should hopefully be able to create something 'styled'...
 
-![v2](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android_Styled.png)
 
 ... but actually making it look 'nice' might take some design skills!
 
