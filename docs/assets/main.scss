@@ -155,7 +155,7 @@ $documentation-menu-width: $effective-content-width * 0.30;
     margin-right: 10px;
     ul
     {
-
+        transition: opacity 0.2s;
         li
         {
             padding:0 -15px 0 0;
@@ -171,8 +171,19 @@ $documentation-menu-width: $effective-content-width * 0.30;
                 }
             }
         }
+
+        .collapsed {
+            display: none;
+            opacity: 0;
+        }
+
+        .expanded {
+            opacity: 1;
+        }
     }
 }
+
+
 
 .active
 {
@@ -208,11 +219,18 @@ a:visited {
     padding:8px 0;
     text-transform: uppercase;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.category:hover {
+    cursor: hand;
+    color: #00ac65;
 }
 
 .companies
 {
     background-color: #eceff1;
+    padding-bottom: 50px;
 
     .wrapper
     {
@@ -246,6 +264,7 @@ a:visited {
 .sponsors
 {
     background-color: #FFF;
+    padding-bottom: 50px;
 
     .wrapper
     {
@@ -279,6 +298,11 @@ a:visited {
 {
     float:left;
     width: $effective-content-width * 0.33;
+
+    img {
+        height: 60px;
+        padding: 10px;
+    }
 }
 
 .landing-page 
