@@ -2,18 +2,20 @@
 {% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
 
 {% for category in docs_by_category %}
-  <ul>
+  <div class="category_wrapper">
     <div class="category">{{ category.name }}</div>
-  {% for item in category.items %}
-    <li>
-        <a href="{{ site.baseurl }}{{ item.url }}">
-        {% if item.url == navurl %}
-          <u>{{ item.title }}</u>
-        {% else %}
-          {{ item.title }}
-        {% endif %}
-        </a>
-    </li>
-  {% endfor %}
-  </ul>
+    <ul>
+    {% for item in category.items %}
+      <li class="collapsed">
+          <a href="{{ site.baseurl }}{{ item.url }}">
+          {% if item.url == navurl %}
+            <u>{{ item.title }}</u>
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+          </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
 {% endfor %}

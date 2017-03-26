@@ -23,8 +23,6 @@ $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
 $content-width:    1000px;
-$documentation-menu-height: 700px;
-$documentation-page-height: 700px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
@@ -155,11 +153,9 @@ $documentation-menu-width: $effective-content-width * 0.30;
     float:left;
     width: $documentation-menu-width - 10px;
     margin-right: 10px;
-    overflow-y:scroll;
-    height: $documentation-menu-height;
     ul
     {
-
+        transition: opacity 0.2s;
         li
         {
             padding:0 -15px 0 0;
@@ -175,8 +171,19 @@ $documentation-menu-width: $effective-content-width * 0.30;
                 }
             }
         }
+
+        .collapsed {
+            display: none;
+            opacity: 0;
+        }
+
+        .expanded {
+            opacity: 1;
+        }
     }
 }
+
+
 
 .active
 {
@@ -192,8 +199,6 @@ $documentation-width: $effective-content-width * 0.70;
 {
     float: right;
     width: $documentation-width - 20;
-    overflow-y:scroll;
-    height: $documentation-page-height;
     padding: 10px;
 }
 
@@ -214,11 +219,18 @@ a:visited {
     padding:8px 0;
     text-transform: uppercase;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.category:hover {
+    cursor: hand;
+    color: #00ac65;
 }
 
 .description
 {
     background-color: #eceff1;
+    padding-bottom: 50px;
 
     .wrapper
     {
@@ -282,6 +294,7 @@ a:visited {
 .sponsors
 {
     background-color: #eceff1;
+    padding-bottom: 50px;
 
     .wrapper
     {
@@ -315,6 +328,11 @@ a:visited {
 {
     float:left;
     width: $effective-content-width * 0.33;
+
+    img {
+        height: 60px;
+        padding: 10px;
+    }
 }
 
 .landing-page
