@@ -23,8 +23,6 @@ $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
 $content-width:    1000px;
-$documentation-menu-height: 700px;
-$documentation-page-height: 700px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
@@ -155,8 +153,6 @@ $documentation-menu-width: $effective-content-width * 0.30;
     float:left;
     width: $documentation-menu-width - 10px;
     margin-right: 10px;
-    overflow-y:scroll;
-    height: $documentation-menu-height;
     ul
     {
 
@@ -192,8 +188,6 @@ $documentation-width: $effective-content-width * 0.70;
 {
     float: right;
     width: $documentation-width - 20;
-    overflow-y:scroll;
-    height: $documentation-page-height;
     padding: 10px;
 }
 
