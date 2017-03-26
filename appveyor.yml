@@ -4,7 +4,7 @@
       only:
         - master
   version: 1.0.{build}
-  image: Visual Studio 2017 RC
+  image: Visual Studio 2017
   environment:
     ANDROID_HOME: "C:\\android-sdk-windows"
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
@@ -31,7 +31,7 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Visual Studio 2017 RC
+  image: Visual Studio 2017
   environment:
     ANDROID_HOME: "C:\\android-sdk-windows"
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
