@@ -216,14 +216,45 @@ a:visited {
     font-weight: bold;
 }
 
-.companies
+.description
 {
     background-color: #eceff1;
 
     .wrapper
     {
         text-align: center;
-        
+
+        .description-text
+        {
+            padding:60px 0;
+
+            h2
+            {
+                font-size: 30px;
+                color: #37474f;
+                font-weight: bold;
+                margin-bottom: 0px;
+            }
+
+            div
+            {
+                font-size: 24px;
+                color: #37474f;
+                line-height: 1.25;
+            }
+
+        }
+    }
+}
+
+.companies
+{
+    background-color: #FFF;
+
+    .wrapper
+    {
+        text-align: center;
+
         .company-text
         {
             padding:60px 0;
@@ -248,15 +279,14 @@ a:visited {
     }
 }
 
-
 .sponsors
 {
-    background-color: #FFF;
+    background-color: #eceff1;
 
     .wrapper
     {
         text-align: center;
-        
+
         .sponsors-text
         {
             padding:60px 0;
@@ -287,13 +317,13 @@ a:visited {
     width: $effective-content-width * 0.33;
 }
 
-.landing-page 
+.landing-page
 {
     margin: 0 auto;
 }
 //footer
 .footer-heading{border-bottom: 1px solid #ddd;}
-.blog-list 
+.blog-list
 {
     li
     {
