@@ -6,17 +6,25 @@ NOTE
 2. Right-click on the project and under Tools -> Edit File, then add <TargetFrameworkVersion>4.5</TargetFrameworkVersion> in the first PropertyGroup, this is needed to access PCLs using Profile 158
 3. Use nuget to add the MvvmCross.Mac package
 4. Verify the Setup.cs file (automatically created)
-5. Replace the contents of AppDelegate.cs from AppDelegate.cs.txt
+5. Replace the contents of AppDelegate.cs/.fs from AppDelegate.cs/.fs.txt
 6. Delete MainWindow.cs, MainWindow.xib and MainWindowController.cs
 7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
-8. Edit FirstView.cs by adding the using statement below and changing the base type to MvxView
+8. Edit FirstView.cs/.fs by adding the using/open statement below and changing the base type to MvxView
 
+	C#
         using MvvmCross.Binding.Mac.Views;
 
         public partial class FirstView : MvxView
 
-9. Edit FirstViewController.cs by adding the using statements below, adding MvxViewFor and changing the base type to MvxViewController
+	F#
+        open MvvmCross.Binding.Mac.Views
 
+        type FirstView()
+	    inherit MvxView()
+
+9. Edit FirstViewController.cs/.fs by adding the using/open statements below, adding MvxViewFor and changing the base type to MvxViewController
+
+	C#
         using MvvmCross.Mac.Views;
         using MvvmCross.Binding.BindingContext;
         using MvvmCross.Core.ViewModels;
@@ -25,8 +33,19 @@ NOTE
         [MvxViewFor(typeof(FirstViewModel))]
         public partial class FirstViewController : MvxViewController
 
-10. In FirstViewController.cs, override ViewDidLoad, add controls programmatically or in the .xib, then bind, e.g.,
+	F#
+        open MvvmCross.Mac.Views
+        open MvvmCross.Binding.BindingContext
+        open MvvmCross.Core.ViewModels
+        open <root>.Core.ViewModels
 
+        [<MvxViewFor(typeof<FirstViewModel>)>]
+        type FirstViewController() =
+	    inherit MvxViewController()
+
+10. In FirstViewController.cs/.fs, override ViewDidLoad, add controls programmatically or in the .xib, then bind, e.g.,
+
+	C#
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();
@@ -40,10 +59,15 @@ NOTE
             set.Bind (bu).For("Activated").To ("GoCommand");
             set.Apply ();
         }
-        
-s
-Where this requires using's of:
 
-    using <core>.Core.ViewModels;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Mac.Views;
+	F#
+	override this.ViewDidLoad() =
+	    base.ViewDidLoad()
+	    ...
+ 
+
+Where this requires using/open:
+
+<core>.Core.ViewModels
+MvvmCross.Binding.BindingContext
+MvvmCross.Mac.Views
