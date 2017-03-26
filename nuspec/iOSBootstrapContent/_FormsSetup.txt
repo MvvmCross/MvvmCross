@@ -1,14 +1,23 @@
 The steps to get the presenters working:
 
-1. Add following method override to your MvxSetup class (usually Setup.cs):
+1. Add following method override to your MvxSetup class (usually Setup.cs/.fs):
 
-	protected override IMvxIosViewPresenter CreatePresenter()
+    C#
+    protected override IMvxIosViewPresenter CreatePresenter()
     {
         Forms.Init();
 
         var app = new MvxFormsApp();
 		
         return new MvxFormsIosPagePresenter(Window, app);
+    }
+
+    F#
+    override this.CreatePresenter() =
+        Forms.Init()
+
+        let app = new MvxFormsApp()
+        new MvxFormsIosPagePresenter(this.Window, app);
     }
 	
 2. ??
