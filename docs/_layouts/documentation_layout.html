@@ -23,6 +23,13 @@
       });
 
       $('a.active').parentsUntil('div.category').children('li').show();
+      $('a.active').parentsUntil('div.documentation-menu').addClass('active-category');
+
+      if ($('div.active-category').length <= 0)
+      {
+        console.log('hello');
+        $('div.category').first().siblings('ul').children('li').show();
+      }
     });
   </script>
 
