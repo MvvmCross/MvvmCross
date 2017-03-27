@@ -22,9 +22,7 @@
   <script type="text/javascript">
     $(function () {
       $('div.category').on('click', function () {
-        $(this).siblings('ul').children('li').slideToggle(function() {
-          $(this).toggleClass('collapsed expanded');
-        });
+        $(this).siblings('ul').children('li').slideToggle(200);
       });
     });
   </script>
