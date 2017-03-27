@@ -3,15 +3,14 @@ layout: default
 ---
 {% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
 
-
-<form action="{{ "/search" | relative_url }}" method="get">
+<form action="{{ "/search" | relative_url }}">
   <label for="search-box">Search</label>
-  <input type="text" id="search-box" name="query">
-  <input type="submit" value="search">
+  <input type="text" id="search-box" name="query" autocomplete="off">
 </form>
 
-<ul id="search-results"></ul>
-
+<ul id="search-results">
+  <h2 class="searching-text">Searching.....</h2>
+</ul>
 
 <script>
   window.store = {
@@ -38,6 +37,7 @@ layout: default
     {% endfor %}
   };
 </script>
+<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
 <script src="{{ "/js/lunr.min.js" | relative_url }}"></script>
 <script src="{{ "/js/search.js" | relative_url }}"></script>
 
