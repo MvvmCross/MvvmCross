@@ -6,7 +6,7 @@
      var content = 1;
 
      var contentLength = 300;
-     var searchDelay = 600;
+     var searchThrottle = 600;
 
      function displaySearchResults(results, store) {
          var searchResults = document.getElementById('search-results');
@@ -27,7 +27,7 @@
 
      $("#search-box").keydown(throttle(function() {
          getResults($('#search-box').val());
-     }, searchDelay));
+     }, searchThrottle));
 
      $("#search-box").keydown(function() {
          if($("#search-box").val().length > 0)
