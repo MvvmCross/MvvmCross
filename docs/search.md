@@ -24,7 +24,7 @@ layout: default
           }
           {% unless forloop.last %},{% endunless %}
         {% endfor %}
-        {% unless forloop.last %},{% endunless %}
+        ,
     {% endfor %}
     {% for post in site.posts %}
       "{{ post.url | slugify }}": {
