@@ -426,17 +426,12 @@ To make the XAML inheritance match the `MvxPhonePage` inheritance, change the ou
 </phone:PhoneApplicationPage>
 ```
 to:
-```c# 
+```xml
 <views:MvxPhonePage
     xmlns:views="clr-namespace:MvvmCross.WindowsPhone.Views;assembly=MvvmCross.WindowsPhone"
     ... >
     <!-- content -->
 </views:MvxPhonePage>
-
-      "language": "xml"
-    }
-  ]
-}
 ```
 To then add the XAML user interface for our tip calculator, we will edit the `ContentPanel` to include:
 
@@ -447,7 +442,7 @@ To then add the XAML user interface for our tip calculator, we will edit the `Co
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```c# 
+```xml
 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
     <StackPanel>
         <TextBlock
@@ -471,10 +466,6 @@ This will produce XAML like:
             Text="{Binding Tip}" />
     </StackPanel>
 </Grid>
-      "language": "text"
-    }
-  ]
-}
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 

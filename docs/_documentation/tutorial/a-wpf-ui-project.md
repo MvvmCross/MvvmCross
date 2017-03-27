@@ -213,25 +213,17 @@ This will open the XAML editor within Visual Studio.
 Just as with the WindowsPhone and WindowsStore, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 Change the root node from:
-```c# 
+```xml
 <UserControl 
          ...
 </UserControl>
-      "language": "xml"
-    }
-  ]
-}
 ```
 to:
-```c# 
+```xml
 <views:MvxWpfView 
 	xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"                  
         ...
 </views:MvxWpfView>
-      "language": "xml"
-    }
-  ]
-}
 ```
 To add the XAML user interface for our tip calculator, we will add exactly the same XAML as we added inside the `ContentPanel` grid for the Windows UWP example. This includes:
 
@@ -242,7 +234,7 @@ To add the XAML user interface for our tip calculator, we will add exactly the s
   * a bound `TextBlock` for the `Tip`
 
 This will produce finished XAML like:
-```c# 
+```xml
 <views:MvxWpfView
     x:Class="TipCalc.UI.Wpf.Views.TipView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -269,11 +261,6 @@ This will produce finished XAML like:
         </StackPanel>
     </Grid>
 </views:MvxWpfView>
-
-      "language": "xml"
-    }
-  ]
-}
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 

@@ -263,11 +263,7 @@ protected override void OnNavigatedFrom(NavigationEventArgs e)
     ...
 }
 
-#endregion 
-      "language": "text"
-    }
-  ]
-}
+#endregion
 ```
 Or change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
 ```c# 
@@ -396,7 +392,7 @@ This `StackPanel` will include **almost** exactly the same XAML as we added to t
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```c# 
+```xml
 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
     <StackPanel>
         <TextBlock
@@ -417,10 +413,6 @@ This will produce XAML like:
             Text="{Binding Tip}" />
     </StackPanel>
 </Grid>
-      "language": "xml"
-    }
-  ]
-}
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 

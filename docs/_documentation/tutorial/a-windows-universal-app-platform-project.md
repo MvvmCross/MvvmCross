@@ -299,7 +299,7 @@ To add the XAML user interface for our tip calculator, we will add a StackPanel 
   * a bound `TextBlock` for the `Tip`
 
 The full page will look like:
-```c# 
+```xml
 <views:MvxWindowsPage
     x:Class="TipCalc.UI.UWP.Views.TipView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -325,10 +325,6 @@ The full page will look like:
         </StackPanel>
     </Grid>
 </views:MvxWindowsPage>
-      "language": "xml"
-    }
-  ]
-}
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 

@@ -55,9 +55,5 @@ The field in this class could be accessed using Android syntax:
   android:layout_width='fill_parent'
   android:layout_height='wrap_content'
   local:MvxBind='Text LastName' />
-      "language": "xml"
-    }
-  ]
-}
 ```
 For more on Rio FieldBinding see the [N=36 video](http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)

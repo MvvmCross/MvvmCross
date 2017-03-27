@@ -24,10 +24,6 @@ The `TipView` class can then derive from this class and the following XAML can b
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     ...
 </views:TipViewBase>
-      "language": "xml"
-    }
-  ]
-}
 ```
 
 ## Explicit ViewModel properties
