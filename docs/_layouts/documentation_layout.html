@@ -16,11 +16,13 @@
   </body>
 
   <script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
-  <script type="text/javascript">
+  <script type="text/javascript" async>
     $(function () {
       $('div.category').on('click', function () {
         $(this).siblings('ul').children('li').slideToggle(200);
       });
+
+      $('a.active').parentsUntil('div.category').children('li').show();
     });
   </script>
 
