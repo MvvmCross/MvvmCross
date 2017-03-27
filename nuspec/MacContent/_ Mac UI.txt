@@ -8,21 +8,21 @@ NOTE
 4. Verify the Setup.cs file (automatically created)
 5. Replace the contents of AppDelegate.cs/.fs from AppDelegate.cs/.fs.txt
 6. Delete MainWindow.cs, MainWindow.xib and MainWindowController.cs
-7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
-8. Edit FirstView.cs/.fs by adding the using/open statement below and changing the base type to MvxView
+7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "MainViewModel", recommended naming for the View is "MainView"
+8. Edit MainView.cs/.fs by adding the using/open statement below and changing the base type to MvxView
 
 	C#
         using MvvmCross.Binding.Mac.Views;
 
-        public partial class FirstView : MvxView
+        public partial class MainView : MvxView
 
 	F#
         open MvvmCross.Binding.Mac.Views
 
-        type FirstView()
+        type MainView()
 	    inherit MvxView()
 
-9. Edit FirstViewController.cs/.fs by adding the using/open statements below, adding MvxViewFor and changing the base type to MvxViewController
+9. Edit MainViewController.cs/.fs by adding the using/open statements below, adding MvxViewFor and changing the base type to MvxViewController
 
 	C#
         using MvvmCross.Mac.Views;
@@ -30,8 +30,8 @@ NOTE
         using MvvmCross.Core.ViewModels;
         using <root>.Core.ViewModels;
 
-        [MvxViewFor(typeof(FirstViewModel))]
-        public partial class FirstViewController : MvxViewController
+        [MvxViewFor(typeof(MainViewModel))]
+        public partial class MainViewController : MvxViewController
 
 	F#
         open MvvmCross.Mac.Views
@@ -39,11 +39,11 @@ NOTE
         open MvvmCross.Core.ViewModels
         open <root>.Core.ViewModels
 
-        [<MvxViewFor(typeof<FirstViewModel>)>]
-        type FirstViewController() =
+        [<MvxViewFor(typeof<MainViewModel>)>]
+        type MainViewController() =
 	    inherit MvxViewController()
 
-10. In FirstViewController.cs/.fs, override ViewDidLoad, add controls programmatically or in the .xib, then bind, e.g.,
+10. In MainViewController.cs/.fs, override ViewDidLoad, add controls programmatically or in the .xib, then bind, e.g.,
 
 	C#
         public override void ViewDidLoad ()
@@ -52,7 +52,7 @@ NOTE
 
             ...
             
-            var set = this.CreateBindingSet<FirstViewController, FirstViewModel> ();
+            var set = this.CreateBindingSet<MainViewController, MainViewModel> ();
             set.Bind (textEditFirst).For(v => v.StringValue).To (vm => vm.FirstName);
             set.Bind (textEditSecond).For(v => v.StringValue).To (vm => vm.LastName);
             set.Bind (labelFull).For(v => v.StringValue).To (vm => vm.FullName);

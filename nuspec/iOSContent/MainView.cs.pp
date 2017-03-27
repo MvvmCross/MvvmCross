@@ -3,9 +3,9 @@ using MvvmCross.iOS.Views;
 
 namespace $rootnamespace$.Views
 {
-    public partial class FirstView : MvxViewController
+    public partial class MainView : MvxViewController
     {
-        public FirstView() : base("FirstView", null)
+        public MainView() : base("MainView", null)
         {
         }
 
@@ -13,7 +13,7 @@ namespace $rootnamespace$.Views
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<FirstView, Core.ViewModels.FirstViewModel>();
+            var set = this.CreateBindingSet<MainView, Core.ViewModels.MainViewModel>();
             set.Bind(Label).To(vm => vm.Hello);
             set.Bind(TextField).To(vm => vm.Hello);
             set.Apply();

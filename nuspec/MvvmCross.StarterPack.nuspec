@@ -16,7 +16,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\FirstViewModel.cs.pp" />
+		<file src="CoreContent\MainViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MainViewModel.cs.pp" />
 		<file src="CoreContent\App.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.cs.pp" />
 
 		<!-- wpf - Content -->
@@ -24,13 +24,13 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="WpfContent\Setup.cs.pp" target="content\net45\Setup.cs.pp" />
 		<file src="WpfContent\DebugTrace.cs.pp" target="content\net45\DebugTrace.cs.pp" />
 		<file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
-		<file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
-		<file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
+		<file src="WpfContent\MainView.xaml.pp" target="content\net45\Views\MainView.xaml.pp" />
+		<file src="WpfContent\MainView.xaml.cs.pp" target="content\net45\Views\MainView.xaml.cs.pp" />
 
 		<!-- droid - Content -->
 		<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
-		<file src="DroidContent\FirstView.axml" target="content\MonoAndroid\Resources\layout\FirstView.axml" />
-		<file src="DroidContent\FirstView.cs.pp" target="content\MonoAndroid\Views\FirstView.cs.pp" />
+		<file src="DroidContent\MainView.axml" target="content\MonoAndroid\Resources\layout\MainView.axml" />
+		<file src="DroidContent\MainView.cs.pp" target="content\MonoAndroid\Views\MainView.cs.pp" />
 		<file src="DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid\DebugTrace.cs.pp" />
 		<file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
 		<file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\layout\SplashScreen.axml" />
@@ -44,9 +44,9 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
 		<file src="iOSContent\AppDelegate.cs.txt.pp" target="content\Xamarin.iOS10\AppDelegate.cs.txt.pp" />
 		<file src="iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
-		<file src="iOSContent\FirstView.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.cs.pp" />
-		<file src="iOSContent\FirstView.designer.cs.pp" target="content\Xamarin.iOS10\Views\FirstView.designer.cs.pp" />
-		<file src="iOSContent\FirstView.xib" target="content\Xamarin.iOS10\Views\FirstView.xib" />
+		<file src="iOSContent\MainView.cs.pp" target="content\Xamarin.iOS10\Views\MainView.cs.pp" />
+		<file src="iOSContent\MainView.designer.cs.pp" target="content\Xamarin.iOS10\Views\MainView.designer.cs.pp" />
+		<file src="iOSContent\MainView.xib" target="content\Xamarin.iOS10\Views\MainView.xib" />
 		<file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
 		<!-- mac - Content -->
@@ -54,7 +54,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
 		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\Xamarin.Mac20\AppDelegate.cs.txt.pp" />
 		<file src="MacContent\DebugTrace.cs.pp" target="content\Xamarin.Mac20\DebugTrace.cs.pp" />
-		<file src="MacContent\FirstView.cs.pp" target="content\Xamarin.Mac20\Views\FirstView.cs.pp" />
-		<file src="MacContent\FirstViewController.cs.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.pp" />
+		<file src="MacContent\MainView.cs.pp" target="content\Xamarin.Mac20\Views\MainView.cs.pp" />
+		<file src="MacContent\MainViewController.cs.pp" target="content\Xamarin.Mac20\Views\MainViewController.cs.pp" />
 	</files>
 </package>

@@ -2,7 +2,7 @@ namespace $rootnamespace$.ViewModels
 
 open MvvmCross.Core.ViewModels
 
-type FirstViewModel() = 
+type MainViewModel() = 
     inherit MvxViewModel()
 
     let mutable hello = "Hello MvvmCross"

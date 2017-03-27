@@ -11,8 +11,8 @@ using UIKit;
 
 namespace $rootnamespace$.Views
 {
-    [Register ("FirstView")]
-    partial class FirstView
+    [Register ("MainView")]
+    partial class MainView
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
