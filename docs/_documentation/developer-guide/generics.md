@@ -9,8 +9,16 @@ Generics are the most powerful feature of C# 2.0. Generics allow you to define t
 Generics Problem Statement
 Consider an everyday data structure such as a stack, providing the classic Push() and Pop() methods. When developing a general-purpose stack, you would like to use it to store instances of various types. Under C# 1.1, you have to use an Object-based stack, meaning that the internal data type used in the stack is an amorphous Object, and the stack methods interact with Objects:
 ```c# 
-public class Stack\n{\n   object[] m_Items; \n   public void Push(object item)\n   {...}\n   public object Pop()\n   {...}\n}\n",
-      "language": "csharp",
+public class Stack
+{
+   object[] m_Items; 
+   public void Push(object item)
+   {...}
+   public object Pop()
+   {...}
+}
+
+      "language": "csharp
       "name": null
     }
   ]
@@ -19,13 +27,52 @@ public class Stack\n{\n   object[] m_Items; \n   public void Push(object item)\n
 Code block 1 shows the full implementation of the Object-based stack. Because Object is the canonical .NET base type, you can use the Object-based stack to hold any type of items, items, such as integers:
 ```c# 
 
-Stack stack = new Stack();\nstack.Push(1);\nstack.Push(2);\nint number = (int)stack.Pop();",
+Stack stack = new Stack();
+stack.Push(1);
+stack.Push(2);
+int number = (int)stack.Pop();
 ```
    
 Code block 1. An Object-based stack
     
 ```c# 
-public class Stack\n{\n  readonly int m_Size; \n  int m_StackPointer = 0;\n  object[] m_Items; \n  \n  public Stack():this(100)\n  {}\n  \n  public Stack(int size)\n  {\n    m_Size = size;\n    m_Items = new object[m_Size];\n  }\n  \n  public void Push(object item)\n  {\n    if(m_StackPointer >= m_Size) \n    throw new StackOverflowException();   \n    m_Items[m_StackPointer] = item;\n    m_StackPointer++;\n  }\n  \n  public object Pop()\n  {\n    m_StackPointer--;\n    if(m_StackPointer >= 0)\n    {\n      return m_Items[m_StackPointer];\n    }\n    else\n    {\n      m_StackPointer = 0;\n      throw new InvalidOperationException(\"Cannot pop an empty stack\");\n    }\n  }\n}",
+public class Stack
+{
+  readonly int m_Size; 
+  int m_StackPointer = 0;
+  object[] m_Items; 
+  
+  public Stack():this(100)
+  {}
+  
+  public Stack(int size)
+  {
+    m_Size = size;
+    m_Items = new object[m_Size];
+  }
+  
+  public void Push(object item)
+  {
+    if(m_StackPointer >= m_Size) 
+    throw new StackOverflowException();   
+    m_Items[m_StackPointer] = item;
+    m_StackPointer++;
+  }
+  
+  public object Pop()
+  {
+    m_StackPointer--;
+    if(m_StackPointer >= 0)
+    {
+      return m_Items[m_StackPointer];
+    }
+    else
+    {
+      m_StackPointer = 0;
+      throw new InvalidOperationException("Cannot pop an empty stack");
+    }
+  }
+}
 ```
     
 However, there are two problems with Object-based solutions. The first issue is performance. When using value types, you have to box them in order to push and store them, and unbox the value types when popping them off the stack. Boxing and unboxing incurs a significant performance penalty in their own right, but it also increases the pressure on the managed heap, resulting in more garbage collections, which is not great for performance either. Even when using reference types instead of value types, there is still a performance penalty because you have to cast from an Object to the actual type you interact with and incur the casting cost:
@@ -39,14 +86,48 @@ stack.Push(1);
 string number = (string)stack.Pop();
 You can overcome these two problems by providing a type-specific (and hence, type-safe) performant stack. For integers you can implement and use the IntStack:
 ```c# 
-public class IntStack\n{\n   int[] m_Items; \n   public void Push(int item){...}\n   public int Pop(){...}\n} \n\nIntStack stack = new IntStack();\nstack.Push(1);\nint number = stack.Pop();\n\n//For strings you would implement the StringStack:\n\npublic class StringStack\n{\n   string[] m_Items; \n   public void Push(string item){...}\n   public string Pop(){...}\n}\n\nStringStack stack = new StringStack();\nstack.Push(\"1\");\nstring number = stack.Pop();",
+public class IntStack
+{
+   int[] m_Items; 
+   public void Push(int item){...}
+   public int Pop(){...}
+} 
+
+IntStack stack = new IntStack();
+stack.Push(1);
+int number = stack.Pop();
+
+//For strings you would implement the StringStack:
+
+public class StringStack
+{
+   string[] m_Items; 
+   public void Push(string item){...}
+   public string Pop(){...}
+}
+
+StringStack stack = new StringStack();
+stack.Push("1");
+string number = stack.Pop();
 ```
 
 And so on. Unfortunately, solving the performance and type-safety problems this way introduces a third, and just as serious problem—productivity impact. Writing type-specific data structures is a tedious, repetitive, and error-prone task. When fixing a defect in the data structure, you have to fix it not just in one place, but in as many places as there are type-specific duplicates of what is essentially the same data structure. In addition, there is no way to foresee the use of unknown or yet-undefined future types, so you have to keep an Object-based data structure as well. As a result, most C# 1.1 developers found type-specific data structures to be impractical and opt for using Object-based data structures, in spite of their deficiencies.
 What Are Generics
 Generics allow you to define type-safe classes without compromising type safety, performance, or productivity. You implement the server only once as a generic server, while at the same time you can declare and use it with any type. To do that, use the < and > brackets, enclosing a generic type parameter. For example, here is how you define and use a generic stack:
 ```c# 
-public class Stack<T>\n{\n   T[] m_Items; \n   public void Push(T item)\n   {...}\n   public T Pop()\n   {...}\n}\n\nStack<int> stack = new Stack<int>();\nstack.Push(1);\nstack.Push(2);\nint number = stack.Pop();",
+public class Stack<T>
+{
+   T[] m_Items; 
+   public void Push(T item)
+   {...}
+   public T Pop()
+   {...}
+}
+
+Stack<int> stack = new Stack<int>();
+stack.Push(1);
+stack.Push(2);
+int number = stack.Pop();
 ```
 
 Code block 2 shows the full implementation of the generic stack. Compare Code block 1 to Code block 2 and see that it is as if every use of object in Code block 1 is replaced with T in Code block 2, except that the Stack is defined using the generic type parameter T:
@@ -57,7 +138,39 @@ Stack<int> stack = new Stack<int>();
 The compiler and the runtime do the rest. All the methods (or properties) that accept or return a T will instead use the specified type, an integer in the example above.
 Code block 2. The generic stack
 ```c# 
-public class Stack<T>\n{\n   readonly int m_Size; \n   int m_StackPointer = 0;\n   T[] m_Items;\n   public Stack():this(100)\n   {}\n   public Stack(int size)\n   {\n      m_Size = size;\n      m_Items = new T[m_Size];\n   }\n   public void Push(T item)\n   {\n      if(m_StackPointer >= m_Size) \n         throw new StackOverflowException();\n      m_Items[m_StackPointer] = item;\n      m_StackPointer++;\n   }\n   public T Pop()\n   {\n      m_StackPointer--;\n      if(m_StackPointer >= 0)\n      {\n         return m_Items[m_StackPointer];\n      }\n      else\n      {\n         m_StackPointer = 0;\n         throw new InvalidOperationException(\"Cannot pop an empty stack\");\n      }\n   }\n}",
+public class Stack<T>
+{
+   readonly int m_Size; 
+   int m_StackPointer = 0;
+   T[] m_Items;
+   public Stack():this(100)
+   {}
+   public Stack(int size)
+   {
+      m_Size = size;
+      m_Items = new T[m_Size];
+   }
+   public void Push(T item)
+   {
+      if(m_StackPointer >= m_Size) 
+         throw new StackOverflowException();
+      m_Items[m_StackPointer] = item;
+      m_StackPointer++;
+   }
+   public T Pop()
+   {
+      m_StackPointer--;
+      if(m_StackPointer >= 0)
+      {
+         return m_Items[m_StackPointer];
+      }
+      else
+      {
+         m_StackPointer = 0;
+         throw new InvalidOperationException("Cannot pop an empty stack");
+      }
+   }
+}
 ```
 
 Note   T is the generic type parameter (or type parameter) while the generic type is the Stack<T>. The int in Stack<int> is the type argument.
