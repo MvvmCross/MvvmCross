@@ -3,7 +3,8 @@ layout: documentation
 title: iOS Support Library
 category: Platform
 ---
-In version 4.0.0 we have also started work on a new library dedicated to providing further classes and extended functionality targeting the iOS platform.
+
+In version 4.0.0 we have started work on a new library dedicated to providing further classes and extended functionality targeting the iOS platform.
 
 Currently the classes available in this library consists of:
 
@@ -17,16 +18,19 @@ This presenter provides 3 panels as view “targets”, a main central panel, a 
 
 A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
 ```c# 
-public MvxPanelPresentationAttribute(MvxPanelEnum panel, MvxPanelHintType hintType, 
-    bool showPanel, MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
+public MvxPanelPresentationAttribute(
+	MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, 
+	MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
 {
 }
 ```
 This attribute is used by the presenter to make decisions about what to do with the view request when showing this view using the syntax shown below:
 ```c# 
 [Register("CenterPanelView")]
-[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
-public class CenterPanelView : BaseViewController<CenterPanelViewModel>
+[MvxPanelPresentation(
+	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+public class CenterPanelView 
+	: BaseViewController<CenterPanelViewModel>
 {
 }
 ```
@@ -48,26 +52,32 @@ However on devices with large screens this would often be displayed to the user 
 The issue this behaviour deals with is that often iOS application will only user split views as the root view controller, this gets around this issue by allowing a split view to be shown as part of the normal flow of views without the need for explicitly setting this view as the root view in the view hierarchy.
 
 You can see an example of this below:
+
 ```c# 
 [Register("MasterView")]
-[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Master)]
-public class MasterView : BaseViewController<MasterViewModel>
+[MvxPanelPresentation(
+	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, 
+	true, MvxSplitViewBehaviour.Master)]
+public class MasterView 
+	: BaseViewController<MasterViewModel>
 {
 }
 
 [Register("DetailView")]
-[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
-public class DetailView : BaseViewController<DetailViewModel>
+[MvxPanelPresentation(
+	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, 
+	true, MvxSplitViewBehaviour.Detail)]
+public class DetailView 
+	: BaseViewController<DetailViewModel>
 {
 }
-
-
 ```
+
 So when the presenter receives a request to show the master view **and** the application is running on a large screen device the presenter will respond to that request by constructing a number of controllers to manage the hosting of the split view controller and will then ultimately show the view in the appropriate section of the spit view.
 
 Subsequent touches on the UI master view which result in a request for view controller that requests to be shown as a detail view will then be shown in this same view (with no navigation occurring) but placed in the detail panel of the same instance of the split view created when the user navigated to the master view.
 
-Confused?  See the [demo application](https://github.com/MvvmCross/MvvmCross-iOSSupport)
+Confused? See the [demo applications](https://github.com/MvvmCross/MvvmCross/tree/develop/TestProjects/iOS-Support)
 
 ## MvxBaseViewController
 
@@ -80,36 +90,42 @@ At the moment this class is a generic view controller that has currently only on
 The feature requires there to be a UIScrollView in the view hierarchy in order to function.  It will detect a touch on a UIView that also expands the keyboard, it will then ensure that the view with focus is not obscured by the keyboard and is centered in the applications UI.  It can also optionally hide the keyboard when the user makes any further touches that moves focus away from the edit view.
 
 You can make use of this class using the following standard inheritance syntax:
+
 ```c# 
 [Register("KeyboardHandlingView")]
-public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>
+public class KeyboardHandlingView 
+	: MvxBaseViewController<KeyboardHandlingViewModel>
 {
 }
 ```
+
 In order to enable the keyboard handing features you need to first call the initialising method during view initialisation, such as:
+
 ```c# 
 public override void ViewDidLoad()
 {
-  base.ViewDidLoad();
-  // setup the keyboard handling
-  InitKeyboardHandling();
+	base.ViewDidLoad();
+    // setup the keyboard handling
+    InitKeyboardHandling();
 
-  var scrollView = new UIScrollView();
+    var scrollView = new UIScrollView();
 
-  Add(scrollView);
-  View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
-  View.AddConstraints(
-    scrollView.AtTopOf(View),
-    scrollView.AtLeftOf(View),
-    scrollView.WithSameWidth(View),
-    scrollView.WithSameHeight(View)
-  );
+    Add(scrollView);
+    View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+    View.AddConstraints(
+        scrollView.AtTopOf(View),
+        scrollView.AtLeftOf(View),
+        scrollView.WithSameWidth(View),
+        scrollView.WithSameHeight(View)
+    );
 }
 ```
+
 In addition to calling this initialisation method you also need to override the following method and ensure that it returns true:
+
 ```c# 
 public override bool HandlesKeyboardNotifications()
 {
-	return true;
+    return true;
 }
 ```
