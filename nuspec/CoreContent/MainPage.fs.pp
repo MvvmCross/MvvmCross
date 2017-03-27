@@ -2,7 +2,7 @@ namespace $rootnamespace$.Pages
 
 open Xamarin.Forms
 
-type FirstPage() as this =
+type MainPage() as this =
     inherit ContentPage()
 
     do

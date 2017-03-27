@@ -8,5 +8,5 @@ open Foundation
 open MvvmCross.Binding.Mac.Views
 
 [<Export("initWithCoder:")>]
-type FirstView(coder: NSCoder) = 
+type MainView(coder: NSCoder) = 
     inherit MvxView(coder)

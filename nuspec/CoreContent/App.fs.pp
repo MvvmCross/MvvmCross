@@ -13,4 +13,4 @@ type App() =
             .AsInterfaces()
             .RegisterAsLazySingleton();
 
-        this.RegisterAppStart<FirstViewModel>()
+        this.RegisterAppStart<MainViewModel>()

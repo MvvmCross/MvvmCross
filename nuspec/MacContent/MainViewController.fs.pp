@@ -9,15 +9,15 @@ open MvvmCross.Mac.Views
 open MvvmCross.Binding.BindingContext
 open MvvmCross.Core.ViewModels
 
-[<MvxViewFor(typeof<Core.ViewModels.FirstViewModel>)>]
+[<MvxViewFor(typeof<Core.ViewModels.MainViewModel>)>]
 [<Export("initWithCoder:")>]
-type FirstViewController(coder: NSCoder) =
+type MainViewController(coder: NSCoder) =
     inherit MvxViewController(coder)
 
     override this.ViewDidLoad() = 
 
         base.ViewDidLoad ()
 
-        let set = this.CreateBindingSet<FirstViewController, Core.ViewModels.FirstViewModel>()
-        //set.Bind(textFirst).To(vm => vm.Hello)
+        let set = this.CreateBindingSet<MainViewController, Core.ViewModels.MainViewModel>()
+        //set.Bind(textMain).To(vm => vm.Hello)
         set.Apply()

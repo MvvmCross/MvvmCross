@@ -1,5 +1,5 @@
 <views:MvxWpfView 
-             x:Class="$rootnamespace$.Views.FirstView"
+             x:Class="$rootnamespace$.Views.MainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
