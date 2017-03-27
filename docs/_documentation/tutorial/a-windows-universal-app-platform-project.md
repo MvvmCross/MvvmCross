@@ -73,7 +73,24 @@ Most of this functionality is provided for you automatically. Within your Window
 
 For `TipCalc` here's all that is needed in Setup.cs:
 ```c# 
-using Windows.UI.Xaml.Controls;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.WindowsUWP.Platform;\n\nnamespace TipCalc.UI.UWP\n{\n    public class Setup : MvxWindowsSetup\n    {\n        public Setup(Frame rootFrame) : base(rootFrame)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new Core.App();\n        }\n    }\n}",
+using Windows.UI.Xaml.Controls;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.WindowsUWP.Platform;
+
+namespace TipCalc.UI.UWP
+{
+    public class Setup : MvxWindowsSetup
+    {
+        public Setup(Frame rootFrame) : base(rootFrame)
+        {
+        }
+
+        protected override IMvxApplication CreateApp()
+        {
+            return new Core.App();
+        }
+    }
+}
 ```
 ## Modify the App.xaml.cs to use Setup
 
@@ -85,15 +102,136 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 
  * replace this lines
 ```c# 
-// When the navigation stack isn't restored navigate to the first page,\n// configuring the new page by passing required information as a navigation\n// parameter\nrootFrame.Navigate(typeof(MainPage), e.Arguments);",
+// When the navigation stack isn't restored navigate to the first page,
+// configuring the new page by passing required information as a navigation
+// parameter
+rootFrame.Navigate(typeof(MainPage), e.Arguments);
 ```
   * with these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
 ```c# 
-var setup = new Setup(rootFrame);\nsetup.Initialize();\n\nvar start = Mvx.Resolve<IMvxAppStart>();\nstart.Start();",
+var setup = new Setup(rootFrame);
+setup.Initialize();
+
+var start = Mvx.Resolve<IMvxAppStart>();
+start.Start();
 ```
 After you've done this your code might look like:
 ```c# 
-using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Linq;\nusing System.Runtime.InteropServices.WindowsRuntime;\nusing Windows.ApplicationModel;\nusing Windows.ApplicationModel.Activation;\nusing Windows.Foundation;\nusing Windows.Foundation.Collections;\nusing Windows.UI.Xaml;\nusing Windows.UI.Xaml.Controls;\nusing Windows.UI.Xaml.Controls.Primitives;\nusing Windows.UI.Xaml.Data;\nusing Windows.UI.Xaml.Input;\nusing Windows.UI.Xaml.Media;\nusing Windows.UI.Xaml.Navigation;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;\n\nnamespace TipCalc.UI.UWP\n{\n    /// <summary>\n    /// Provides application-specific behavior to supplement the default Application class.\n    /// </summary>\n    sealed partial class App : Application\n    {\n        /// <summary>\n        /// Initializes the singleton application object.  This is the first line of authored code\n        /// executed, and as such is the logical equivalent of main() or WinMain().\n        /// </summary>\n        public App()\n        {\n            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(\n                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |\n                Microsoft.ApplicationInsights.WindowsCollectors.Session);\n            this.InitializeComponent();\n            this.Suspending += OnSuspending;\n        }\n\n        /// <summary>\n        /// Invoked when the application is launched normally by the end user.  Other entry points\n        /// will be used such as when the application is launched to open a specific file.\n        /// </summary>\n        /// <param name=\"e\">Details about the launch request and process.</param>\n        protected override void OnLaunched(LaunchActivatedEventArgs e)\n        {\n\n#if DEBUG\n            if (System.Diagnostics.Debugger.IsAttached)\n            {\n                this.DebugSettings.EnableFrameRateCounter = true;\n            }\n#endif\n\n            Frame rootFrame = Window.Current.Content as Frame;\n\n            // Do not repeat app initialization when the Window already has content,\n            // just ensure that the window is active\n            if (rootFrame == null)\n            {\n                // Create a Frame to act as the navigation context and navigate to the first page\n                rootFrame = new Frame();\n\n                rootFrame.NavigationFailed += OnNavigationFailed;\n\n                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)\n                {\n                    //TODO: Load state from previously suspended application\n                }\n\n                // Place the frame in the current Window\n                Window.Current.Content = rootFrame;\n            }\n\n            if (rootFrame.Content == null)\n            {\n                //// When the navigation stack isn't restored navigate to the first page,\n                //// configuring the new page by passing required information as a navigation\n                //// parameter\n                //rootFrame.Navigate(typeof(MainPage), e.Arguments);\n                var setup = new Setup(rootFrame);\n                setup.Initialize();\n\n                var start = Mvx.Resolve<IMvxAppStart>();\n                start.Start();\n            }\n            // Ensure the current window is active\n            Window.Current.Activate();\n        }\n\n        /// <summary>\n        /// Invoked when Navigation to a certain page fails\n        /// </summary>\n        /// <param name=\"sender\">The Frame which failed navigation</param>\n        /// <param name=\"e\">Details about the navigation failure</param>\n        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)\n        {\n            throw new Exception(\"Failed to load Page \" + e.SourcePageType.FullName);\n        }\n\n        /// <summary>\n        /// Invoked when application execution is being suspended.  Application state is saved\n        /// without knowing whether the application will be terminated or resumed with the contents\n        /// of memory still intact.\n        /// </summary>\n        /// <param name=\"sender\">The source of the suspend request.</param>\n        /// <param name=\"e\">Details about the suspend request.</param>\n        private void OnSuspending(object sender, SuspendingEventArgs e)\n        {\n            var deferral = e.SuspendingOperation.GetDeferral();\n            //TODO: Save application state and stop any background activity\n            deferral.Complete();\n        }\n    }\n}",
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
+namespace TipCalc.UI.UWP
+{
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
+    sealed partial class App : Application
+    {
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
+        public App()
+        {
+            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
+                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
+                Microsoft.ApplicationInsights.WindowsCollectors.Session);
+            this.InitializeComponent();
+            this.Suspending += OnSuspending;
+        }
+
+        /// <summary>
+        /// Invoked when the application is launched normally by the end user.  Other entry points
+        /// will be used such as when the application is launched to open a specific file.
+        /// </summary>
+        /// <param name="e">Details about the launch request and process.</param>
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        {
+
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+
+            if (rootFrame.Content == null)
+            {
+                //// When the navigation stack isn't restored navigate to the first page,
+                //// configuring the new page by passing required information as a navigation
+                //// parameter
+                //rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
+
+                var start = Mvx.Resolve<IMvxAppStart>();
+                start.Start();
+            }
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+
+        /// <summary>
+        /// Invoked when Navigation to a certain page fails
+        /// </summary>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        /// <summary>
+        /// Invoked when application execution is being suspended.  Application state is saved
+        /// without knowing whether the application will be terminated or resumed with the contents
+        /// of memory still intact.
+        /// </summary>
+        /// <param name="sender">The source of the suspend request.</param>
+        /// <param name="e">Details about the suspend request.</param>
+        private void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            //TODO: Save application state and stop any background activity
+            deferral.Complete();
+        }
+    }
+}
 ```
 ## Add your View
 
@@ -126,7 +264,23 @@ This requires the addition of:
 
 Altogether this looks like:
 ```c# 
-using MvvmCross.WindowsUWP.Views;\n\n// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238\n\nnamespace TipCalc.UI.UWP.Views\n{\n    /// <summary>\n    /// An empty page that can be used on its own or navigated to within a Frame.\n    /// </summary>\n    public sealed partial class TipView : MvxWindowsPage\n    {\n        public TipView()\n        {\n            this.InitializeComponent();\n        }\n    }\n}",
+using MvvmCross.WindowsUWP.Views;
+
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace TipCalc.UI.UWP.Views
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class TipView : MvxWindowsPage
+    {
+        public TipView()
+        {
+            this.InitializeComponent();
+        }
+    }
+}
 ```
 ### Edit the XAML layout
 
@@ -146,7 +300,31 @@ To add the XAML user interface for our tip calculator, we will add a StackPanel 
 
 The full page will look like:
 ```c# 
-<views:MvxWindowsPage\n    x:Class=\"TipCalc.UI.UWP.Views.TipView\"\n    xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\n    xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\n    xmlns:local=\"using:TipCalc.UI.UWP.Views\"\n    xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\"\n    xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"\n    xmlns:views=\"using:MvvmCross.WindowsUWP.Views\"\n    mc:Ignorable=\"d\">\n\n    <Grid Background=\"{ThemeResource ApplicationPageBackgroundThemeBrush}\">\n        <StackPanel Margin=\"12,0,12,0\">\n            <TextBlock Text=\"SubTotal\" />\n            <TextBox Text=\"{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}\" />\n            <TextBlock Text=\"Generosity\" />\n            <Slider Value=\"{Binding Generosity,Mode=TwoWay}\" \n                SmallChange=\"1\" \n                LargeChange=\"10\" \n                Minimum=\"0\" \n                Maximum=\"100\" />\n            <TextBlock Text=\"Tip\" />\n            <TextBlock Text=\"{Binding Tip}\" />\n        </StackPanel>\n    </Grid>\n</views:MvxWindowsPage>",
+<views:MvxWindowsPage
+    x:Class="TipCalc.UI.UWP.Views.TipView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TipCalc.UI.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="12,0,12,0">
+            <TextBlock Text="SubTotal" />
+            <TextBox Text="{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Generosity" />
+            <Slider Value="{Binding Generosity,Mode=TwoWay}" 
+                SmallChange="1" 
+                LargeChange="10" 
+                Minimum="0" 
+                Maximum="100" />
+            <TextBlock Text="Tip" />
+            <TextBlock Text="{Binding Tip}" />
+        </StackPanel>
+    </Grid>
+</views:MvxWindowsPage>
       "language": "xml"
     }
   ]
@@ -162,11 +340,11 @@ In the designer, this will look like:
   "images": [
     {
       "image": [
-        "https://files.readme.io/zedtG5waSFCP0PF5uot7_Capture.PNG",
-        "Capture.PNG",
-        "1155",
-        "989",
-        "#89a7d3",
+        "https://files.readme.io/zedtG5waSFCP0PF5uot7_Capture.PNG
+        "Capture.PNG
+        "1155
+        "989
+        "#89a7d3
         ""
       ]
     }
@@ -183,11 +361,11 @@ When it starts... you should see this for the local machine:
   "images": [
     {
       "image": [
-        "https://files.readme.io/bwvmKGSTRci3XX9H05Dr_Capture.PNG",
-        "Capture.PNG",
-        "1338",
-        "883",
-        "#cd913f",
+        "https://files.readme.io/bwvmKGSTRci3XX9H05Dr_Capture.PNG
+        "Capture.PNG
+        "1338
+        "883
+        "#cd913f
         ""
       ]
     }
@@ -200,11 +378,11 @@ and in the mobile emulator:
   "images": [
     {
       "image": [
-        "https://files.readme.io/9nlBnmbWR4WSn3PrUNU5_Capture.PNG",
-        "Capture.PNG",
-        "566",
-        "1059",
-        "#c88854",
+        "https://files.readme.io/9nlBnmbWR4WSn3PrUNU5_Capture.PNG
+        "Capture.PNG
+        "566
+        "1059
+        "#c88854
         ""
       ]
     }

@@ -17,11 +17,18 @@ This presenter provides 3 panels as view “targets”, a main central panel, a 
 
 A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
 ```c# 
-public MvxPanelPresentationAttribute(MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)\n{\n}",
+public MvxPanelPresentationAttribute(MvxPanelEnum panel, MvxPanelHintType hintType, 
+    bool showPanel, MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
+{
+}
 ```
 This attribute is used by the presenter to make decisions about what to do with the view request when showing this view using the syntax shown below:
 ```c# 
-[Register(\"CenterPanelView\")]\n[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]\npublic class CenterPanelView : BaseViewController<CenterPanelViewModel>\n{\n}",
+[Register("CenterPanelView")]
+[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+public class CenterPanelView : BaseViewController<CenterPanelViewModel>
+{
+}
 ```
 
 So to explain this example it’s telling the MvxSidePanelsPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
@@ -42,7 +49,19 @@ The issue this behaviour deals with is that often iOS application will only user
 
 You can see an example of this below:
 ```c# 
-[Register(\"MasterView\")]\n[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Master)]\npublic class MasterView : BaseViewController<MasterViewModel>\n{\n}\n\n[Register(\"DetailView\")]\n[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]\npublic class DetailView : BaseViewController<DetailViewModel>\n{\n}\n\n",
+[Register("MasterView")]
+[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Master)]
+public class MasterView : BaseViewController<MasterViewModel>
+{
+}
+
+[Register("DetailView")]
+[MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
+public class DetailView : BaseViewController<DetailViewModel>
+{
+}
+
+
 ```
 So when the presenter receives a request to show the master view **and** the application is running on a large screen device the presenter will respond to that request by constructing a number of controllers to manage the hosting of the split view controller and will then ultimately show the view in the appropriate section of the spit view.
 
@@ -62,13 +81,35 @@ The feature requires there to be a UIScrollView in the view hierarchy in order t
 
 You can make use of this class using the following standard inheritance syntax:
 ```c# 
-[Register(\"KeyboardHandlingView\")]\npublic class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>\n{\n}",
+[Register("KeyboardHandlingView")]
+public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>
+{
+}
 ```
 In order to enable the keyboard handing features you need to first call the initialising method during view initialisation, such as:
 ```c# 
-public override void ViewDidLoad()\n{\n  base.ViewDidLoad();\n  // setup the keyboard handling\n  InitKeyboardHandling();\n\n  var scrollView = new UIScrollView();\n\n  Add(scrollView);\n  View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();\n  View.AddConstraints(\n    scrollView.AtTopOf(View),\n    scrollView.AtLeftOf(View),\n    scrollView.WithSameWidth(View),\n    scrollView.WithSameHeight(View)\n  );\n}",
+public override void ViewDidLoad()
+{
+  base.ViewDidLoad();
+  // setup the keyboard handling
+  InitKeyboardHandling();
+
+  var scrollView = new UIScrollView();
+
+  Add(scrollView);
+  View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+  View.AddConstraints(
+    scrollView.AtTopOf(View),
+    scrollView.AtLeftOf(View),
+    scrollView.WithSameWidth(View),
+    scrollView.WithSameHeight(View)
+  );
+}
 ```
 In addition to calling this initialisation method you also need to override the following method and ensure that it returns true:
 ```c# 
-public override bool HandlesKeyboardNotifications()\n{\n\treturn true;\n}",
+public override bool HandlesKeyboardNotifications()
+{
+	return true;
+}
 ```
