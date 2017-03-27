@@ -34,9 +34,16 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             {
                 shouldAddToCache = false;
             }
-            else if (localPath.StartsWith(ResourcePrefix))
+            else if (localPath.ToLower().StartsWith(ResourcePrefix))
             {
                 var resourcePath = localPath.Substring(ResourcePrefix.Length);
+                bitmap = await LoadResourceBitmapAsync(resourcePath).ConfigureAwait(false);
+            }
+            else if (localPath.ToLower().StartsWith("android.resource"))
+            {
+                var substrings = localPath.Split(new[] { "/" }, StringSplitOptions.None);
+                var resourceId = int.Parse(substrings[substrings.Length - 1]);
+                var resourcePath = Android.App.Application.Context.Resources.GetResourceEntryName(resourceId);
                 bitmap = await LoadResourceBitmapAsync(resourcePath).ConfigureAwait(false);
             }
             else
