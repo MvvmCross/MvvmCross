@@ -1,5 +1,12 @@
  (function() {
 
+  var titleBoost = 1;
+  var authorBoost = 1;
+  var categoryBoost = 1;
+  var content = 1;
+
+  var contentLength = 300;
+
   function displaySearchResults(results, store) {
     var searchResults = document.getElementById('search-results');
 
@@ -9,9 +16,8 @@
       for (var i = 0; i < results.length; i++) {  // Iterate over the results
         var item = store[results[i].ref];
         appendString += '<li><a href=".' + item.url + '"><h3>' + item.title + '</h3></a>';
-        appendString += '<p>' + item.content.substring(0, 150) + '...</p></li>';
+        appendString += '<p>' + item.content.substring(0, contentLength) + '...</p></li>';
       }
-
       searchResults.innerHTML = appendString;
     } else {
       searchResults.innerHTML = '<li>No results found</li>';
@@ -39,11 +45,10 @@
     // a boost of 10 to indicate matches on this field are more important.
     var idx = lunr(function () {
       this.field('id');
-      this.field('title', { boost: 10 });
-      this.field('author');
-      this.field('category');
-      this.field('documentation');
-      this.field('content');
+      this.field('title', { boost: titleBoost });
+      this.field('author', { boost: authorBoost });
+      this.field('category', { boost: categoryBoost });
+      this.field('content', { boost: content });
     });
 
     for (var key in window.store) { // Add the data to lunr
@@ -52,7 +57,6 @@
         'title': window.store[key].title,
         'author': window.store[key].author,
         'category': window.store[key].category,
-        'documentation': window.store[key].documentation,
         'content': window.store[key].content
       });
 
