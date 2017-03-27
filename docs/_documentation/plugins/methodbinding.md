@@ -52,9 +52,5 @@ The `Save` method in this class could be accessed using Android syntax:
         android:layout_height='wrap_content'
         android:text='Save'
         local:MvxBind='Click Save' />
-      "language": "xml"
-    }
-  ]
-}
 ```
 For more on Rio MethodBinding see N=36 on http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html

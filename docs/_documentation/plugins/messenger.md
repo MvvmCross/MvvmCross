@@ -92,10 +92,6 @@ public void MayNotEverReceiveAMessage()
   // - so will be garbage collected *at some point*
   // - so trace may never get called
 }
-      "language": "text"
-    }
-  ]
-}
 ```
 For any code wishing to observe the current subscription status on any message type (including subscriptions that have been requested with a named string `tag`) then this can be done:
 

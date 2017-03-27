@@ -168,10 +168,6 @@ Open the XAML file and replace its contents with the following XAML code:
         </StackPanel>
     </Grid>
 </views:MvxWindowsPage>
-      "language": "xml"
-    }
-  ]
-}
 ```
 Now there is only one more thing left to do. Open the `FirstView.xaml.cs` code file and change the type from which the `FirstView` class derives to `MvxWindowsPage`:
 

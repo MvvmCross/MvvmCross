@@ -294,10 +294,6 @@ To make the XAML inheritance match the `MvxWindowsPage` inheritance, change the 
     ... >
     <!-- content -->
 </Page>
-      "language": "xml"
-    }
-  ]
-}
 ```
 to:
 ```c# 
@@ -306,10 +302,6 @@ to:
     ... >
     <!-- content -->
 </views:MvxWindowsPage>
-      "language": "xml"
-    }
-  ]
-}
 ```
 To add the XAML user interface for our tip calculator, we will add a `ContentPanel` Grid just above the final `</Grid>` in the existing XAML.  This will contain:
 
@@ -341,10 +333,6 @@ This will produce XAML like:
             Text="{Binding Tip}" />
     </StackPanel>
 </Grid>
-      "language": "xml"
-    }
-  ]
-}
 ```
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 
