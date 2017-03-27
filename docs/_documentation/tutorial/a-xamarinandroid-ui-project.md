@@ -6,27 +6,15 @@ category: Tutorials
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant.
 
 We had a plan to produce a UI based on this concept:
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/kN3s1ie6RxOGzpiFMJJ1_68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f4d76766d43726f73732f76332f76335475746f7269616c2f50696374757265732f54697043616c635f536b657463682e706e67",
-        "68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f4d76766d43726f73732f76332f76335475746f7269616c2f50696374757265732f54697043616c635f536b657463682e706e67",
-        "250",
-        "449",
-        "#7ea0e9",
-        ""
-      ]
-    }
-  ]
-}
-```
+
+![TipCalc interface](https://mvvmcross.github.io/mvvmcross-docs/img/tipcalc.png)
+
+
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
-* our 'business logic' - `ICalculation`
-* our ViewModel - `TipViewModel`
-* our `App` which contains the application wiring, including the start instructions.
+- Our 'business logic' - `ICalculation`
+- Our ViewModel - `TipViewModel`
+- Our `App` which contains the application wiring, including the start instructions.
 
 We're now ready to add out first User Interface.
 
@@ -40,13 +28,14 @@ Add a new project to your solution - a 'Blank App (Android)' application with na
 
 Within this, you'll find the normal Android application constructs:
 
-* the Assets folder
-* the Resources folder
-* the MainActivity.cs
+- the Assets folder
+- the Resources folder
+- the MainActivity.cs
+
 
 ## Delete MainActivity.cs
 
-No-one really needs an `MainActivity` :)
+No-one really needs a `MainActivity` :)
 
 Also, delete `Main.axml` in the /resources/Layout folder.
 
@@ -55,14 +44,15 @@ Also, delete `Main.axml` in the /resources/Layout folder.
 In the Package Manager Console, enter...
 
     Install-Package MvvmCross.Binding
-    
+
 ## Add a reference to TipCalc.Core.csproj
 
 Add a reference to your `TipCalc.Core` project - the project we created in the last step which included:
 
-* your `Calculation` service, 
-* your `TipViewModel` 
-* your `App` wiring.
+- Your `Calculation` service,
+- Your `TipViewModel`
+- Your `App` wiring.
+
 
 ## Add a Setup class
 
@@ -70,100 +60,176 @@ Every MvvmCross UI project requires a `Setup` class.
 
 This class sits in the root namespace (folder) of our UI project and performs the initialisation of the MvvmCross framework and your application, including:
 
-  * the Inversion of Control (IoC) system
-  * the MvvmCross data-binding
-  * your `App` and its collection of `ViewModel`s
-  * your UI project and its collection of `View`s
+- The Inversion of Control (IoC) system
+- The MvvmCross data-binding
+- Your `App` and its collection of `ViewModel`s
+- Your UI project and its collection of `View`s
 
 Most of this functionality is provided for you automatically. Within your Droid UI project all you have to supply are:
 
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
-using Android.Content;\nusing MvvmCross.Core.ViewModels;\nusing MvvmCross.Droid.Platform;\nusing TipCalc.Core;\n\nnamespace TipCalc.UI.Droid\n{\n    public class Setup : MvxAndroidSetup\n    {\n        public Setup(Context applicationContext)\n            : base(applicationContext)\n        {\n        }\n\n        protected override IMvxApplication CreateApp()\n        {\n            return new App();\n        }\n    }\n}",
+
 ```
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
+using TipCalc.Core;
+
+namespace TipCalc.UI.Droid
+{
+      public class Setup : MvxAndroidSetup
+      {
+            public Setup(Context applicationContext)
+              : base(applicationContext)
+            {
+            }
+
+            protected override IMvxApplication CreateApp()
+            {
+                  return new App();
+            }
+      }
+}
+```
+
+
 ## Add your View
 
 ### Add the Android Layout XML (AXML)
 
 This tutorial doesn't attempt to give an introduction to Android XML layout.
 
-Instead all I'll say here is the bare minimum. If you are new to Android, then you can find out more about Android XML from lots of places including the official documentation at: http://developer.android.com/guide/topics/ui/declaring-layout.html. If you are coming from a XAML background - you are a *XAMLite* - then I'll include some simple XAML-AXML comparisons to help you out.
+Instead all I'll say here is the bare minimum. If you are new to Android, then you can find out more about Android XML from lots of places including the official documentation at [this site](http://developer.android.com/guide/topics/ui/declaring-layout.html). If you are coming from a XAML background - you are a *XAMLite* - then I'll include some simple XAML-AXML comparisons to help you out.
 
 To achieve the basic layout:
 
-- we'll add a new AXML file - `View_Tip.axml` in the `/Resources/Layout` folder
+- We'll add a new AXML file - `View_Tip.axml` in the `/Resources/Layout` folder
 
-- we'll edit this using either the Xamarin Android designer or the Visual Studio XML editor - the designer gives us a visual display, while the VS editor *sometimes* gives us XML Intellisense.
-```c# 
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
-      "language": "xml"
-    }
-  ]
-}
-```
-- we'll add a local app namespace - `http://schemas.android.com/apk/res-auto` - this is just like adding a namespace in XAML.
-```c# 
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\" />",
-      "language": "xml"
-    }
-  ]
-}
-```
-- notice that this 'layout' is already by default a **vertical** `LinearLayout` - for XAMLites, this layout is just like a `StackPanel` except that it is **very important** to specify the **vertical** orientation
+- We'll edit this using either the Xamarin Android designer or the Visual Studio XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense.
 
-- within this layout we'll add some `TextView`s to provide some static text labels - for XAMLites, these are like `TextBlock`s
-```c# 
-<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"SubTotal\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Generosity\" />\n<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:text=\"Tip to leave\" /",
-      "language": "xml"
-    }
-  ]
-}
 ```
-- we'll also add a short, wide `View` with a yellow background to provide a small amount of chrome:
-```c# 
-<View\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"1dp\"\n    android:background=\"#ffff00\" />",
-      "language": "xml"
-    }
-  ]
-}
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 ```
-- we'll add some `View`s for data display and entry, and we'll **databind** these `View`s to properties in our `TipViewModel` 
 
-  - an `EditText` for text data entry of the `SubTotal` - for XAMLites, this is a `TextBox`
-```c# 
-<EditText\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text SubTotal\" />",
-      "language": "xml"
-    }
-  ]
-}
+- We'll add a local app namespace - `http://schemas.android.com/apk/res-auto` - this is just like adding a namespace in XAML.
+
+
 ```
-  - a `SeekBar` for touch/slide entry of the `Generosity` - for XAMLites, this is like a `ProgressBar`
-```c# 
-<SeekBar\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    android:max=\"100\"\n    local:MvxBind=\"Progress Generosity\" />",
-      "language": "xml"
-    }
-  ]
-}
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 ```
-  - we'll add a `TextView` to display the `Tip` that results from the calculation:
-```c# 
-<TextView\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\"\n    local:MvxBind=\"Text Tip\" />",
-      "language": "xml"
-    }
-  ]
-}
+
+- Notice that the `LinearLayout` has by default a **horizontal** orientation - for XAMLites, this layout is just like a `StackPanel` except that it is **very important** to specify the **vertical** orientation
+
+- Within this layout we'll add some `TextView`s to provide some static text labels - for XAMLites, these are like `TextBlock`s
+
 ```
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="SubTotal" />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Generosity" />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Tip to leave" />
+```
+
+- We'll also add a short, wide `View` with a yellow background to provide a small amount of chrome:
+
+```
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#ffff00" />
+```
+
+- We'll add some `View`s for data display and entry, and we'll **databind** these `View`s to properties in our `TipViewModel`
+
+  - An `EditText` for text data entry of the `SubTotal` - for XAMLites, this is a `TextBox`
+
+```
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    local:MvxBind="Text SubTotal" />
+```
+
+  - A `SeekBar` for touch/slide entry of the `Generosity` - for XAMLites, this is like a `ProgressBar`:
+
+```
+<SeekBar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:max="100"
+    local:MvxBind="Progress Generosity" />
+```
+
+  - We'll add a `TextView` to display the `Tip` that results from the calculation:
+
+```
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    local:MvxBind="Text Tip" />
+```
+
 Put together, this looks like:
-```c# 
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:local=\"http://schemas.android.com/apk/res-auto\"\n    android:orientation=\"vertical\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\">\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"SubTotal\" />\n  <EditText\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text SubTotal\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Generosity\" />\n  <SeekBar\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:max=\"100\"\n      local:MvxBind=\"Progress Generosity\" />\n  <View\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"1dp\"\n      android:background=\"#ffff00\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Tip to leave\" />\n  <TextView\n      android:layout_width=\"match_parent\"\n      android:layout_height=\"wrap_content\"\n      local:MvxBind=\"Text Tip\" />\n</LinearLayout>",
-      "language": "xml"
-    }
-  ]
-}
+
 ```
-### About the data-binding syntax 
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="SubTotal" />
+    <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          local:MvxBind="Text SubTotal" />
+    <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Generosity" />
+    <SeekBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="100"
+          local:MvxBind="Progress Generosity" />
+    <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#ffff00" />
+    <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Tip to leave" />
+    <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          local:MvxBind="Text Tip" />
+</LinearLayout>
+```
+
+
+### About the data-binding syntax
 
 Each of the data-binding blocks within our first sample looks similar:
 
@@ -171,16 +237,17 @@ Each of the data-binding blocks within our first sample looks similar:
 
 What this line means is:
 
-* data-bind:
-  * the property `Text` on the `View`
-  * to the property `SubTotal` on the `DataContext` - which in this case will be a `TipViewModel`
-* so:
-  * whenever the `TipViewModel` calls `RaisePropertyChanged` on `SubTotal` then the `View` should update
-  * and whenever the user enters text into the `View` then the `SubTotal` value should be `set` on the `TipViewModel`
+- Data-bind:
+  - The property `Text` on the `View`
+  - To the property `SubTotal` on the `DataContext` - which in this case will be a `TipViewModel`
+- So:
+  - Whenever the `TipViewModel` calls `RaisePropertyChanged` on `SubTotal` then the `View` should update
+  - And whenever the user enters text into the `View` then the `SubTotal` value should be `set` on the `TipViewModel`
 
 Note that this `TwoWay` binding is **different** to XAML where generally the default `BindingMode` is only `OneWay`.
 
 In later topics, we'll return to show you more options for data-binding, including how to use `ValueConverter`s, but for now all our binding uses this simple `ViewProperty ViewModelProperty` syntax.
+
 
 ### Add the View class
 
@@ -188,37 +255,64 @@ With our AXML layout complete, we can now add the C# `Activity` which is used to
 
 To create our `Activity` - which will also be our MVVM `View`:
 
-* Create a Views folder within your TipCalc.UI.Droid project
+- Create a Views folder within your TipCalc.UI.Droid project
 
-* Within this folder create a new C# class - `TipView`
+- Within this folder create a new C# class - `TipView`
 
-Not that tThe name of this class **MUST** match the name of the viewmodel. As our viewmodel is called TipViewModel our class must be named TipView).
+Not that the name of this class **MUST** match the name of the viewmodel. As our viewmodel is called TipViewModel our class must be named TipView).
 
-* This class will:
+- This class will:
 
- * inherit from `MvxActivity`
-```c# 
-public class TipCalcView : MvxActivity",
+  - Inherit from `MvxActivity`:
+
+
 ```
- * be marked with the Xamarin.Android `Activity` attribute, marking it as the `MainLauncher` for the project
-```c# 
+public class TipCalcView : MvxActivity"
+```
+
+   - Be marked with the Xamarin.Android `Activity` attribute, marking it as the `MainLauncher` for the project:
+
+```
 [Activity(Label = \"Tip\", MainLauncher=true)]",
 ```
-  * use `OnViewModelSet` to inflate its `ContentView` from the AXML - this will use a resource identifier generated by the Android and Xamarin tools. 
-```c# 
-protected override void OnViewModelSet()\n{\n    SetContentView(Resource.Layout.View_Tip);\n}",
+
+  - Use `OnViewModelSet` to inflate its `ContentView` from the AXML - this will use a resource identifier generated by the Android and Xamarin tools.
+
 ```
+protected override void OnViewModelSet()
+{
+      SetContentView(Resource.Layout.View_Tip);
+}
+```
+
 As a result this completed class is very simple:
-```c# 
-using Android.App;\nusing MvvmCross.Droid.Views;\n\nnamespace TipCalc.UI.Droid.Views\n{\n    [Activity(Label = \"Tip\", MainLauncher = true)]\n    public class TipView : MvxActivity\n    {\n        protected override void OnViewModelSet()\n        {\n            SetContentView(Resource.Layout.View_Tip);\n        }\n    }\n}",
+
+
 ```
+using Android.App;
+using MvvmCross.Droid.Views;
+
+namespace TipCalc.UI.Droid.Views
+{
+      [Activity(Label = \"Tip\", MainLauncher = true)]
+      public class TipView : MvxActivity
+      {
+            protected override void OnViewModelSet()
+            {
+                  SetContentView(Resource.Layout.View_Tip);
+            }
+      }
+}
+```
+
+
 ## The Android UI is complete!
 
 At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![v1](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Android.png)
+![Android TipCalc](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android.png)
 
 If you then want to make it 'more beautiful', then try adding a few attributes to some of your AXML - things like:
 
@@ -231,10 +325,11 @@ If you then want to make it 'more beautiful', then try adding a few attributes t
 
 Within a very short time, you should hopefully be able to create something 'styled'...
 
-![v2](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android_Styled.png)
 
 ... but actually making it look 'nice' might take some design skills!
-        
+
+
 ## Moving on
 
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
