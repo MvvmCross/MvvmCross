@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+{% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
+
+
 <form action="{{ "/search" | relative_url }}" method="get">
   <label for="search-box">Search</label>
   <input type="text" id="search-box" name="query">
@@ -9,8 +12,20 @@ layout: default
 
 <ul id="search-results"></ul>
 
+
 <script>
   window.store = {
+    {% for category in docs_by_category %}
+        {% for item in category.items %}
+          "{{ item.url | slugify }}" :{
+            "title": "{{ item.title | xml_escape }}",
+            "content": {{ item.content | strip_html | strip_newlines | jsonify }},
+            "url": "{{ item.url | xml_escape }}"
+          }
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
     {% for post in site.posts %}
       "{{ post.url | slugify }}": {
         "title": "{{ post.title | xml_escape }}",
@@ -25,3 +40,6 @@ layout: default
 </script>
 <script src="{{ "/js/lunr.min.js" | relative_url }}"></script>
 <script src="{{ "/js/search.js" | relative_url }}"></script>
+
+
+    
