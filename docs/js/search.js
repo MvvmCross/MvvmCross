@@ -6,7 +6,7 @@
      var content = 1;
 
      var contentLength = 300;
-     var searchDelay = 700;
+     var searchDelay = 600;
 
      function displaySearchResults(results, store) {
          var searchResults = document.getElementById('search-results');
