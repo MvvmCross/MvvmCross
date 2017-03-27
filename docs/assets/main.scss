@@ -155,7 +155,7 @@ $documentation-menu-width: $effective-content-width * 0.30;
     margin-right: 10px;
     ul
     {
-        transition: opacity 0.2s;
+        transition: opacity 0.1s;
         li
         {
             padding:0 -15px 0 0;
@@ -170,15 +170,6 @@ $documentation-menu-width: $effective-content-width * 0.30;
                     color: #CCC;
                 }
             }
-        }
-
-        .collapsed {
-            display: none;
-            opacity: 0;
-        }
-
-        .expanded {
-            opacity: 1;
         }
     }
 }
@@ -349,6 +340,11 @@ input[type="submit"] {
 	width: 50%;
 	margin: 0 auto;
 	padding: 100px 0;
+}
+
+.searching-text
+{
+    display: none;
 }
 
 //footer
