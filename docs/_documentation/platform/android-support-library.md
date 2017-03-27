@@ -13,5 +13,5 @@ protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry reg
 }
 ```
 
-##Samples
+## Samples
 A sample project can be found on github - [MvvmCross\MvvmCross-AndroidSupport](https://github.com/MvvmCross/MvvmCross-AndroidSupport)
