@@ -339,6 +339,18 @@ a:visited {
 {
     margin: 0 auto;
 }
+
+input[type="submit"] {
+	margin: 30px 0 0 0;
+	font-size: 20px;
+}
+
+.search {
+	width: 50%;
+	margin: 0 auto;
+	padding: 100px 0;
+}
+
 //footer
 .footer-heading{border-bottom: 1px solid #ddd;}
 .blog-list
