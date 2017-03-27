@@ -6,12 +6,12 @@
      var content = 1;
 
      var contentLength = 300;
-     var searchDelay = 200;
+     var searchDelay = 700;
 
      function displaySearchResults(results, store) {
          var searchResults = document.getElementById('search-results');
 
-         if (results.length) { // Are there any results?
+         if (results.length) {
              var appendString = '';
 
              for (var i = 0; i < results.length; i++) { // Iterate over the results
@@ -29,6 +29,14 @@
          getResults($('#search-box').val());
      }, searchDelay));
 
+     $("#search-box").keydown(function() {
+         if($("#search-box").val().length > 0)
+            $(".searching-text").show();
+         else
+            $(".searching-text").hide();
+     });
+
+     
      function throttle(f, delay) {
          var timer = null;
          return function() {
@@ -45,9 +53,6 @@
      function getResults(searchValue) {
          var searchTerm = searchValue;
          if (searchTerm) {
-             // document.getElementById('search-box').setAttribute("value", searchTerm);
-             // Initalize lunr with the fields it will be searching on. I've given title
-             // a boost of 10 to indicate matches on this field are more important.
              var idx = lunr(function() {
                  this.field('id');
                  this.field('title', {
@@ -74,7 +79,7 @@
                  });
 
                  var results = idx.search(searchTerm); // Get lunr to perform a search
-                 displaySearchResults(results, window.store); // We'll write this in the next section
+                 displaySearchResults(results, window.store); 
              }
          }
      }
