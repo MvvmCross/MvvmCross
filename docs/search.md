@@ -7,11 +7,9 @@ layout: default
 <form action="{{ "/search" | relative_url }}" method="get">
   <label for="search-box">Search</label>
   <input type="text" id="search-box" name="query">
-  <input type="submit" value="search">
 </form>
 
 <ul id="search-results"></ul>
-
 
 <script>
   window.store = {
@@ -38,6 +36,7 @@ layout: default
     {% endfor %}
   };
 </script>
+<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
 <script src="{{ "/js/lunr.min.js" | relative_url }}"></script>
 <script src="{{ "/js/search.js" | relative_url }}"></script>
 
