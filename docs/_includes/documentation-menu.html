@@ -7,15 +7,15 @@
     <div class="category">{{ category.name }}</div>
     <ul class="menu-no-bullet">
     {% for item in category.items %}
-      <li class="menu-no-bullet" style="display:none;">
-          <a href="{{ site.baseurl }}{{ item.url }}">
+        <li class="menu-no-bullet" style="display:none;">
+          <a href="{{ site.baseurl }}{{ item.url }}"
           {% if item.url == navurl %}
-            <u>{{ item.title }}</u>
-          {% else %}
-            {{ item.title }}
+            class="active"
           {% endif %}
+          >
+            {{ item.title }}
           </a>
-      </li>
+        </li>
     {% endfor %}
     </ul>
   </div>

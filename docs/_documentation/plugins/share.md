@@ -5,7 +5,11 @@ category: Plugins
 ---
 The `Share` plugin provides implementations of:
 ```c# 
-public interface IMvxShareTask\n{\n  void ShareShort(string message);\n  void ShareLink(string title, string message, string link);\n}",
+public interface IMvxShareTask
+{
+  void ShareShort(string message);
+  void ShareLink(string title, string message, string link);
+}
 ```
 This plugin is available on Android, iOS, and WindowsPhone. On WindowsStore, sharing is done more by UI-based sharing (swipe in from the right).
 

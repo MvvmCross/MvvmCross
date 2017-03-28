@@ -55,7 +55,7 @@ There is also a generic version, [`DiagnosticVerifier<T>`], where T should be yo
 - If your Analyzer also contains a code fix, your test classe should inherit from 
 [`CodeFixVerifier`]. This class inherits from [`DiagnosticVerifier`], and adds a few methods related to testing code fixes. There is also a generic version for this, [`CodeFixVerifier<T, TU>`], where T should inherit from [`DiagnosticAnalyzer`] and TU should inherit from [`CodeFixProvider`].
 
-- To test your code fix, you should add another test case that calls method [`VerifyCSharpFix`], passing the original source sample and another string containing the final result of how the code should look after the code fix executes. Remember about line endings and blank spaces. Tabs (\t) are not spaces.
+- To test your code fix, you should add another test case that calls method [`VerifyCSharpFix`], passing the original source sample and another string containing the final result of how the code should look after the code fix executes. Remember about line endings and blank spaces. Tabs (	) are not spaces.
 
 ## More info
 - For additional information about analyzers and code fixes, follow this article:
