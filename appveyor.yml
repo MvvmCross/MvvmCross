@@ -15,8 +15,7 @@
   - appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
   - 7z x android-sdk_r24.4.1-windows.zip > nul
   - cd "C:\projects\MvvmCross"
-  install: 
-  - C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat
+  install:
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
@@ -43,8 +42,7 @@
   - appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
   - 7z x android-sdk_r24.4.1-windows.zip > nul
   - cd "C:\projects\MvvmCross"
-  install: 
-  - C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat
+  install:
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
