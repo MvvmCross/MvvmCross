@@ -67,11 +67,26 @@ Create a folder called 'Services'
 
 Within this folder create a new Interface which will be used for calculating tips:
 ```c# 
-namespace TipCalc.Core.Services\n{\n    public interface ICalculation\n    {\n        double TipAmount(double subTotal, int generosity);\n    }\n}",
+namespace TipCalc.Core.Services
+{
+    public interface ICalculation
+    {
+        double TipAmount(double subTotal, int generosity);
+    }
+}
 ```
 Within this folder create an implementation of this interface:
 ```c# 
-namespace TipCalc.Core.Services\n{\n    public class Calculation : ICalculation\n    {\n        public double TipAmount(double subTotal, int generosity)\n        {\n            return subTotal * ((double)generosity)/100.0;\n        }\n    }\n}",
+namespace TipCalc.Core.Services
+{
+    public class Calculation : ICalculation
+    {
+        public double TipAmount(double subTotal, int generosity)
+        {
+            return subTotal * ((double)generosity)/100.0;
+        }
+    }
+}
 ```
 This provides us with some simple business logic for our app
 
@@ -93,17 +108,94 @@ Within MvvmCross, all ViewModels should inherit from `MvxViewModel`.
 
 So now create a ViewModels folder in our project, and in this folder add a new `TipViewModel` class like:
 ```c# 
-using MvvmCross.Core.ViewModels;\nusing TipCalc.Core.Services;\n\nnamespace TipCalc.Core.ViewModels\n{\n    public class TipViewModel : MvxViewModel\n    {\n        readonly ICalculation _calculation;\n\n        public TipViewModel(ICalculation calculation)\n        {\n            _calculation = calculation;\n        }\n\n        public override void Start()\n        {\n            _subTotal = 100;\n            _generosity = 10;\n            Recalculate();\n            base.Start();\n        }\n\n        double _subTotal;\n\n        public double SubTotal\n        {\n            get { return _subTotal; }\n            set\n            {\n                _subTotal = value;\n                RaisePropertyChanged(() => SubTotal);\n                Recalculate();\n            }\n        }\n\n        int _generosity;\n\n        public int Generosity\n        {\n            get { return _generosity; }\n            set\n            {\n                _generosity = value;\n                RaisePropertyChanged(() => Generosity);\n                Recalculate();\n            }\n        }\n\n        double _tip;\n\n        public double Tip\n        {\n            get { return _tip; }\n            set\n            {\n                _tip = value;\n                RaisePropertyChanged(() => Tip);\n            }\n        }\n\n        void Recalculate()\n        {\n            Tip = _calculation.TipAmount(SubTotal, Generosity);\n        }\n    }\n}",
+using MvvmCross.Core.ViewModels;
+using TipCalc.Core.Services;
+
+namespace TipCalc.Core.ViewModels
+{
+    public class TipViewModel : MvxViewModel
+    {
+        readonly ICalculation _calculation;
+
+        public TipViewModel(ICalculation calculation)
+        {
+            _calculation = calculation;
+        }
+
+        public override void Start()
+        {
+            _subTotal = 100;
+            _generosity = 10;
+            Recalculate();
+            base.Start();
+        }
+
+        double _subTotal;
+
+        public double SubTotal
+        {
+            get { return _subTotal; }
+            set
+            {
+                _subTotal = value;
+                RaisePropertyChanged(() => SubTotal);
+                Recalculate();
+            }
+        }
+
+        int _generosity;
+
+        public int Generosity
+        {
+            get { return _generosity; }
+            set
+            {
+                _generosity = value;
+                RaisePropertyChanged(() => Generosity);
+                Recalculate();
+            }
+        }
+
+        double _tip;
+
+        public double Tip
+        {
+            get { return _tip; }
+            set
+            {
+                _tip = value;
+                RaisePropertyChanged(() => Tip);
+            }
+        }
+
+        void Recalculate()
+        {
+            Tip = _calculation.TipAmount(SubTotal, Generosity);
+        }
+    }
+}
 ```
 For many of you, this `TipViewModel` will already make sense to you. If it does then **skip ahead** to 'Add the App(lication)'. If not, then here are some simple explanations:
 
 * the `TipViewModel` is constructed with an `ICalculation` service
 ```c# 
-readonly ICalculation _calculation;\n\npublic TipViewModel(ICalculation calculation)\n{\n    _calculation = calculation;\n}",
+readonly ICalculation _calculation;
+
+public TipViewModel(ICalculation calculation)
+{
+    _calculation = calculation;
+}
 ```
 * after construction, the `TipViewModel` will be started - during this it sets some initial values.
 ```c# 
-public override void Start()\n{\n    // set some start values\n    SubTotal = 100.0;\n    Generosity = 10;\n    Recalculate();\n    base.Start();\n}",
+public override void Start()
+{
+    // set some start values
+    SubTotal = 100.0;
+    Generosity = 10;
+    Recalculate();
+    base.Start();
+}
 ```
 * the view data held within the `TipViewModel` is exposed through properties. 
   * Each of these properties is backed by a private member variable
@@ -112,11 +204,50 @@ public override void Start()\n{\n    // set some start values\n    SubTotal = 10
   * All of the set accessors call `RaisePropertyChanged` to tell the base `MvxViewModel` that the data has changed
   * The `SubTotal` and `Generosity` set accessors also call `Recalculate()`
 ```c# 
-double _subTotal;\n\npublic double SubTotal\n{\n    get { return _subTotal; }\n    set\n    {\n        _subTotal = value;\n        RaisePropertyChanged(() => SubTotal);\n        Recalculate();\n    }\n}\n\nint _generosity;\n\npublic int Generosity\n{\n    get { return _generosity; }\n    set\n    {\n        _generosity = value;\n        RaisePropertyChanged(() => Generosity);\n        Recalculate();\n    }\n}\n\ndouble _tip;\n\npublic double Tip\n{\n    get { return _tip; }\n    set\n    {\n        _tip = value;\n        RaisePropertyChanged(() => Tip);\n    }\n}",
+double _subTotal;
+
+public double SubTotal
+{
+    get { return _subTotal; }
+    set
+    {
+        _subTotal = value;
+        RaisePropertyChanged(() => SubTotal);
+        Recalculate();
+    }
+}
+
+int _generosity;
+
+public int Generosity
+{
+    get { return _generosity; }
+    set
+    {
+        _generosity = value;
+        RaisePropertyChanged(() => Generosity);
+        Recalculate();
+    }
+}
+
+double _tip;
+
+public double Tip
+{
+    get { return _tip; }
+    set
+    {
+        _tip = value;
+        RaisePropertyChanged(() => Tip);
+    }
+}
 ```
 * The `Recalculate` method uses the `_calculation` service to update `Tip` from the current values in `SubTotal` and `Generosity`
 ```c# 
-void Recalculate()\n{\n    Tip = _calculation.TipAmount(SubTotal, Generosity);\n}",
+void Recalculate()
+{
+    Tip = _calculation.TipAmount(SubTotal, Generosity);
+}
 ```
 ## Add the App(lication)
 
@@ -138,20 +269,36 @@ For our Tip Calculation app:
 
 * we register the `Calculation` class to implement the `ICalculation` service
 ```c# 
-Mvx.RegisterType<ICalculation, Calculation>();",
+Mvx.RegisterType<ICalculation, Calculation>();
 ```
 this line tells the MvvmCross framework that whenever any code requests an `ICalculation` reference, then the framework should create a new instance of `Calculation`. Note the single static class `Mvx` which acts as a single place for both registering and resolving interfaces and their implementations.
 
 * we want the app to start with the `TipViewModel`
 ```c# 
-var appStart = new MvxAppStart<TipViewModel>();\nMvx.RegisterSingleton<IMvxAppStart>(appStart);",
+var appStart = new MvxAppStart<TipViewModel>();
+Mvx.RegisterSingleton<IMvxAppStart>(appStart);
 ```
  this line tells the MvvmCross framework that whenever any code requests an `IMvxAppStart` reference, then the framework should return that same `appStart` instance.
 
 So here's what App.cs looks like:
 ```c# 
-using MvvmCross.Core.ViewModels;\nusing MvvmCross.Platform;\nusing TipCalc.Core.Services;\nusing TipCalc.Core.ViewModels;\n\nnamespace TipCalc.Core\n{\n    public class App : MvxApplication\n    {\n        public App()\n        {\n            Mvx.RegisterType<ICalculation, Calculation>();\n           Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());\n        }\n    }\n}",
-      "language": "csharp",
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using TipCalc.Core.Services;
+using TipCalc.Core.ViewModels;
+
+namespace TipCalc.Core
+{
+    public class App : MvxApplication
+    {
+        public App()
+        {
+            Mvx.RegisterType<ICalculation, Calculation>();
+           Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
+        }
+    }
+}
+      "language": "csharp
       "name": "App.cs"
     }
   ]

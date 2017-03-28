@@ -50,3 +50,12 @@ collections:
   documentation:
     output: true
     permalink: /:collection/:path/:title:output_ext
+
+category_order:
+  - 'Getting-started'
+  - 'Platform'
+  - 'Plugins'
+  - 'Tutorials'
+  - 'Developer-guide'
+  - 'Contribute'
+  - 'Licensing'

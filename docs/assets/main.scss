@@ -47,6 +47,7 @@ h2,h3,h4,h5,h6
 }
 .page-content{
     padding: 0px;
+    padding-top: 20px;
 }
 .header-logo
 {
@@ -162,19 +163,19 @@ $documentation-menu-width: $effective-content-width * 0.30;
             a
             {
                 font-size: 15px;
-                color: #bbb;
+                color: $grey-color;
                 font-family: 'Proxima Nova', 'Open Sans', sans-serif;
-
-                u
-                {
-                    color: #CCC;
-                }
+            }
+            a.active
+            {
+                background-color: transparent;
+                border: none;
+                color: $text-color;
+                text-decoration: underline;
             }
         }
     }
 }
-
-
 
 .active
 {
@@ -340,6 +341,11 @@ input[type="submit"] {
 	width: 50%;
 	margin: 0 auto;
 	padding: 100px 0;
+}
+
+.searching-text
+{
+    display: none;
 }
 
 //footer
