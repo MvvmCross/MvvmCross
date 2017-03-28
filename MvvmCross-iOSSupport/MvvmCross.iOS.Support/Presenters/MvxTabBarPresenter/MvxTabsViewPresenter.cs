@@ -195,6 +195,12 @@ namespace MvvmCross.iOS.Support.Presenters
                 null);
         }
 
+        public override bool PresentModalViewController(UIViewController viewController, bool animated)
+        {
+            ShowModalViewController(viewController, false);
+            return true;
+        }
+
         private UIViewController GetViewController(IMvxIosView view)
         {
             var viewController = view as UIViewController;
