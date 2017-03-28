@@ -7,7 +7,7 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Sketch.png)
+![Sketch](../TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -340,7 +340,7 @@ This will produce XAML like:
 
 In the designer, this will look like:
 
-![Designer](https://raw.githubusercontent.com/sequence/MvvmCross/universalapping/v3Tutorial/Pictures/TipCalc_WindowsCommonWindows_Designer.png)
+![Designer](../TipCalc_WindowsCommonWindows_Designer.png)
 
 ### Create an initial Page for the WindowsCommon.WindowsPhone project
 
@@ -553,7 +553,7 @@ This will produce XAML like:
 
 In the designer, this will look like:
 
-![Designer](https://raw.githubusercontent.com/sequence/MvvmCross/universalapping/v3Tutorial/Pictures/TipCalc_WindowsCommonWindowsPhone_Designer.png)
+![Designer](../TipCalc_WindowsCommonWindowsPhone_Designer.png)
 
 ### The navigation cache
 
@@ -578,11 +578,11 @@ At this point you should be able to run your application.
 
 When you run the WindowsCommon.Windows project... you should see:
 
-![v1](https://raw.githubusercontent.com/sequence/MvvmCross/universalapping/v3Tutorial/Pictures/TipCalc_WindowsCommonWindows_Emu.png)
+![v1](../TipCalc_WindowsCommonWindows_Emu.png)
 
 When you run the WindowsCommon.WindowsPhone project... you should see:
 
-![v1](https://raw.githubusercontent.com/sequence/MvvmCross/universalapping/v3Tutorial/Pictures/TipCalc_WindowsCommonWindowsPhone_Emu.png)
+![v1](../TipCalc_WindowsCommonWindowsPhone_Emu.png)
       
 ## Moving on...
 
