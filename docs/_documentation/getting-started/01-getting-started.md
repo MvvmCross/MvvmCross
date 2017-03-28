@@ -3,9 +3,9 @@ layout: documentation
 title: Getting Started with MvvmCross
 category: Getting-started
 ---
-stable | prerelease
+NuGet | Continuous Integration
 -------|-----------
-![](https://img.shields.io/nuget/vpre/MvvmCross.svg) | ![](https://img.shields.io/nuget/vpre/MvvmCross.svg)
+[![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/) | [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 
 MvvmCross is a cross-platform MVVM framework that enables developers to create cross platform apps. Additional support is available for Xamarin.Forms and the Android support library. Lots of plugins are available as well.
 ## Your first project with Xamarin and MvvmCross
