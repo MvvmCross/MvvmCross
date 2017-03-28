@@ -10,11 +10,16 @@ Create a new solution in Visual Studio. Right-click the solution in `Solution Ex
 
 In the `Add New Project` dialog select the `Windows Universal` tab and select the `Blank App` template. In the bottom you can set the name. We will use `MvvmCrossDocs.WindowsUniversal` in this example.
 
+![Add new project UWP](../new-project.png)
+
 Now, we will open the New Project dialog again and create a Portable Class Library, that will act as the `Core` shared library in MvvmCross. In the dialog click the `Visual C#` node and find `Class Library (Portable for iOS, Android and Windows)`. Name the project, in our case `MvvmCrossDocs.Core`.
+
 
 We will now want to reference the `Core` project inside of our Universal Windows project. To do that, right-click the References node under the UWP project in Solution Explorer and select `Add reference…`. In the opened dialog navigate to `Projects -> Solution` in the left-side pane and then check the box next to our `Core` project in the list.
 
 Our projects are now ready and we can install `MvvmCross` from **NuGet**. First right-click the solution in `Solution Explorer` and then select `Manage NuGet Packages for Solution`.
+
+![Select MvvmCross in nuget](../mvvmcross-select-nuget.png)
 
 In the NuGet Package Manager window choose the **Browse** tab and enter *mvvmcross* into the search box. MvvmCross package should appear as the first result, which you can select and then check the boxes next to your project names in the right hand pane. When you are done, you can click the **Install** button to install the package. The installation might take a while and you will be prompted to agree with the changes. Confirm the prompt with **OK** and continue.
 
@@ -169,5 +174,7 @@ Now there is only one more thing left to do. Open the `FirstView.xaml.cs` code f
 public sealed partial class FirstView : MvxWindowsPage
 
 Now everything should be correctly set up and you can try to launch the application. If everything is correct, you should see a UI very similar to the following.
+
+![Hello MvvmCross](../hello-mvvmcross.png)
 
 Change the contents of the `TextBox`, and click elsewhere. The text below the `TextBox` should automatically update, proving that the data-binding is working as expected.
