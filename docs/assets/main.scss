@@ -27,6 +27,7 @@ $content-width:    1000px;
 $on-palm:          600px;
 $on-laptop:        800px;
 
+$syntax-background-color: #f2f2f2;
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
 // @include media-query($on-palm) {
@@ -464,6 +465,10 @@ table tr th :last-child, table tr td :last-child
 }
 
 //syntax highlighting
+pre, code {
+    background-color: $syntax-background-color;
+}
+.highlighter-rouge .highlight{background-color:$syntax-background-color;}
 
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #008000 } /* Comment */
