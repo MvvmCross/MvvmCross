@@ -3,45 +3,14 @@ layout: documentation
 title: Getting Started with MvvmCross
 category: Getting-started
 ---
-[block:embed]
-{
-  "html": false,
-  "url": "https://img.shields.io/nuget/dt/MvvmCross.svg",
-  "title": null,
-  "favicon": null,
-  "iframe": true,
-  "width": "140",
-  "height": "20"
-}
-```
+NuGet | Continuous Integration
+-------|-----------
+[![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/) | [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 
-[block:embed]
-{
-  "html": false,
-  "url": "https://img.shields.io/nuget/v/MvvmCross.svg",
-  "title": null,
-  "favicon": null,
-  "iframe": true,
-  "width": "140",
-  "height": "20"
-}
-```
+MvvmCross is a cross-platform MVVM framework that enables developers to create cross platform apps. Additional support is available for Xamarin.Forms and the Android support library. Lots of plugins are available as well.
+## Your first project with Xamarin and MvvmCross
 
-[block:embed]
-{
-  "html": false,
-  "url": "https://img.shields.io/nuget/vpre/MvvmCross.svg",
-  "title": null,
-  "favicon": null,
-  "iframe": true,
-  "width": "140",
-  "height": "20"
-}
-```
-MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps. Additional support is available for Xamarin.Forms and the Android support library. Lots of plugins are available as well.
-## Your first project with Xamarin and MvvmCross 4
-
-Here is a video that will help you creating a project from scratch with Xamarin and MvvmCross 4.
+Here is a video that will help you creating a project from scratch with Xamarin and MvvmCross.
 
 It gives all the detailed steps for the Core PCL, iOS, Android and Windows Phone apps.
 
@@ -66,4 +35,4 @@ or
 Find the MVVMCross Template Pack in the Add-In Gallery or [online in the Add-In repository](http://addins.monodevelop.com/Project/Index/227) 
 ## Help updating the docs!
 
-Everyone can contribute and help improving the docs! Just click "Suggest Edits" in the right top corner of a page!
+Everyone can contribute and help improving the docs! The docs are part of the source tree, so just go over to github and help us out!
