@@ -22,27 +22,32 @@ Name | Description | Link
 `MvvmCross.AutoView.iOS`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.AutoView.iOS/)
 `MvvmCross.AutoView.Droid`     |  | [NuGet](https://www.nuget.org/packages/MvvmCross.AutoView.Droid/)
 
+
 ## Android Support
+
 Name | Description | Link
 ---- | ----------- | ----
-`MvvmCross.Droid.Support.V4`              |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V4/)
+`MvvmCross.Droid.Support.V4` | a | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V4/)
 `MvvmCross.Droid.Support.V7.AppCompat`    | AppCompat for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.AppCompat/)
 `MvvmCross.Droid.Support.V7.Fragging`     | Android support fragments, caching and helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Fragging/)
-`MvvmCross.Droid.Support.V7.Preference`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Preference/)
-`MvvmCross.Droid.Support.V7.RecyclerView` |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.RecyclerView/)
-`MvvmCross.Droid.Support.V14.Preference`  |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V14.Preference/)
-`MvvmCross.Droid.Support.V17.Leanback`    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V17.Leanback/)
-`MvvmCross.Droid.Support.Design`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
+`MvvmCross.Droid.Support.V7.Preference`   | b | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Preference/)
+`MvvmCross.Droid.Support.V7.RecyclerView` | c | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.RecyclerView/)
+`MvvmCross.Droid.Support.V14.Preference`  | d | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V14.Preference/)
+`MvvmCross.Droid.Support.V17.Leanback`    | e | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V17.Leanback/)
+`MvvmCross.Droid.Support.Design`          | f | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
 
 
 ## iOS Support
+
 Name | Description | Link
 ---- | ----------- | ----
 `MvvmCross.iOS.Support`                | Helpers, featured ViewPresenters and Base classes for iOS | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support/)
 `MvvmCross.iOS.Support.JASidePanels`   | Implementation for `JASidePanels` library                 | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support.JASidePanels/)
 `MvvmCross.iOS.Support.XamarinSidebar` | Implementation for `XamarinSidebar` library               | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support.XamarinSidebar/)
 
+
 ## Plugins
+
 Name | Description | Link
 ---- | ----------- | ----
 `MvvmCross.Plugin.All`              |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.All/)
