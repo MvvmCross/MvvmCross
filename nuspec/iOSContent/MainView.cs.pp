@@ -14,8 +14,8 @@ namespace $rootnamespace$.Views
             base.ViewDidLoad();
 
             var set = this.CreateBindingSet<MainView, Core.ViewModels.MainViewModel>();
-            set.Bind(Label).To(vm => vm.Hello);
-            set.Bind(TextField).To(vm => vm.Hello);
+            set.Bind(TextField).To(vm => vm.Text);
+            set.Bind(Button).To(vm => vm.ResetTextCommand);
             set.Apply();
         }
     }
