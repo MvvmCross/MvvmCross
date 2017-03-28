@@ -39,7 +39,7 @@ Name | Description | Link
 Name | Description | Link
 ---- | ----------- | ----
 `MvvmCross.iOS.Support`                | Helpers, featured ViewPresenters and Base classes for iOS | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support/)
-`MvvmCross.iOS.Support.JASidePanels`   | Implementation for `JASidePanels` library                   | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support.JASidePanels/)
+`MvvmCross.iOS.Support.JASidePanels`   | Implementation for `JASidePanels` library                 | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support.JASidePanels/)
 `MvvmCross.iOS.Support.XamarinSidebar` | Implementation for `XamarinSidebar` library               | [NuGet](https://www.nuget.org/packages/MvvmCross.iOS.Support.XamarinSidebar/)
 
 ## Plugins
