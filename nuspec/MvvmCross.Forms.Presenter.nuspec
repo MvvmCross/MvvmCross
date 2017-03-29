@@ -9,8 +9,10 @@
 This package contains Presenters for MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp formspresenters presenters</tags>
 		<dependencies>
-			<dependency id="MvvmCross.Core" version="[$version$]" />
-			<dependency id="Xamarin.Forms" version="2.3.3.180" />
+			<group targetFramework="MonoAndroid70">
+				<dependency id="MvvmCross.Core" version="[$version$]" />
+				<dependency id="Xamarin.Forms" version="2.3.3.193" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>   
@@ -27,8 +29,8 @@ This package contains Presenters for MvvmCross to use with Xamarin.Forms</descri
 			target="lib\uap10.0\MvvmCross.Forms.Presenter.Uwp\Properties" />
 
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid403" />
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Forms.Presenter.Droid.*" target="lib\MonoAndroid403" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Forms.Presenter.Droid.*" target="lib\MonoAndroid70" />
 
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />

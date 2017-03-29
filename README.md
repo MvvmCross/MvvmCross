@@ -1,9 +1,9 @@
 ## MvvmCross
 
 [![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
-![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)
-![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)
-[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v2)
+[![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
+[![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
+[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 
 [![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
 
@@ -122,6 +122,12 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 * Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
 * Thanks to [Infragistics](http://www.infragistics.com/) for a control license for Nuclios and .Net
 
+### Laptop Stickers!
+
+Show your support for MvvmCross and get a sticker!
+
+[![sticker][stickermuleimg]][stickermule]
+
 
 [ninja]: http://i.imgur.com/eJ3ewEq.png "Ninja Plugin"
 [ninjavsgallery]: http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767 "Ninja Coder Visual Studio Gallery"
@@ -146,3 +152,5 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 [mvxmail]: http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html "MvvmCross e-mail"
 [mvxv3]: http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html "MvvmCross v3"
 [lothrop]: http://kerry.lothrop.de/tag/mvvmcross/ "Kerry Lothrop's blog"
+[stickermuleimg]: https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/11713/large/1460721292/mvvmcross.png "MvvmCross Sticker"
+[stickermule]: https://www.stickermule.com/marketplace/11713-mvvmcross "MvvmCross Stickers on StickerMule"

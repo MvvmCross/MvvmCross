@@ -59,7 +59,18 @@ namespace MvvmCross.Droid.Support.V4
 
 			base.OnCreate(bundle);
 
-			if (bundle == null)
+            var rootView = Window.DecorView.RootView;
+
+            EventHandler onGlobalLayout = null;
+            onGlobalLayout = (sender, args) =>
+            {
+                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+                ViewModel.Appeared();
+            };
+
+            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
+            if (bundle == null)
 				HandleIntent(Intent);
 			else
 			{
@@ -454,6 +465,19 @@ namespace MvvmCross.Droid.Support.V4
 			CloseFragment(frag.Tag, frag.ContentId);
 			return true;
 		}
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel.Disappearing(); // we don't have anywhere to get this info
+            ViewModel.Disappeared();
+        }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>

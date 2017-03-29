@@ -43,4 +43,35 @@ namespace MvvmCross.Binding.Droid.Target
             return false;
         }
     }
+
+    public abstract class MvxAndroidTargetBinding<TTarget, TValue>
+        : MvxConvertingTargetBinding<TTarget, TValue>
+        where TTarget : class
+    {
+        private IMvxAndroidGlobals _androidGlobals;
+
+        protected MvxAndroidTargetBinding(TTarget target)
+            : base(target)
+        {
+        }
+
+        protected IMvxAndroidGlobals AndroidGlobals
+            => _androidGlobals ?? (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
+
+        protected override bool ShouldSkipSetValueForPlatformSpecificReasons(TTarget target, TValue value)
+        {
+            return TargetIsInvalid(target);
+        }
+
+        public static bool TargetIsInvalid(TTarget target)
+        {
+            var javaTarget = target as IJavaObject;
+            if (javaTarget != null && javaTarget.Handle == IntPtr.Zero)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
+                return true;
+            }
+            return false;
+        }
+    }
 }

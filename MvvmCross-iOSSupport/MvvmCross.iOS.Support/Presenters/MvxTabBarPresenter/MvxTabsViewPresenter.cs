@@ -39,7 +39,7 @@ namespace MvvmCross.iOS.Support.Presenters
         {
             base.ChangePresentation(hint);
 
-            if (hint is MvxClosePresentationHint)
+            if(hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
             }
@@ -51,7 +51,7 @@ namespace MvvmCross.iOS.Support.Presenters
 
             var attribute = GetMvxTabPresentationAttribute(viewController);
 
-            switch (attribute.Mode)
+            switch(attribute.Mode)
             {
                 case MvxTabPresentationMode.Root:
                     ShowRootViewController(viewController);
@@ -60,8 +60,9 @@ namespace MvvmCross.iOS.Support.Presenters
                     {
                         var title = attribute.TabTitle ?? GetFromPresentationValues(TITLE_KEY, request.PresentationValues);
                         var iconName = attribute.TabIconName ?? GetFromPresentationValues(ICON_NAME_KEY, request.PresentationValues);
+                        var tabAccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
 
-                        ShowTabViewController(viewController, attribute.WrapInNavigationController, title, iconName);
+                        ShowTabViewController(viewController, attribute.WrapInNavigationController, title, iconName, tabAccessibilityIdentifier);
                     }
                     break;
                 case MvxTabPresentationMode.Child:
@@ -78,7 +79,7 @@ namespace MvvmCross.iOS.Support.Presenters
             UIViewController currentViewController;
 
             // get current ViewController based on Root. 
-            if (TabBarViewController != null)
+            if(TabBarViewController != null)
                 currentViewController = (TabBarViewController as UIViewController);
             else
                 currentViewController = NavigationController.TopViewController;
@@ -90,7 +91,7 @@ namespace MvvmCross.iOS.Support.Presenters
         protected virtual void Close(IMvxViewModel toClose)
         {
             // check if toClose is a modal ViewController
-            if (Window.RootViewController.PresentedViewController != null)
+            if(Window.RootViewController.PresentedViewController != null)
             {
                 if (CanCloseModal(toClose))
                 {
@@ -101,14 +102,14 @@ namespace MvvmCross.iOS.Support.Presenters
 
             // check if ViewModel is shown inside TabBarViewController
             // if so, the TabBarViewController takes care of it
-            if (TabBarViewController != null)
+            if(TabBarViewController != null)
             {
                 TabBarViewController.CloseChildViewModel(toClose);
                 return;
             }
 
             // close ViewModel shown inside NavigationController
-            if (NavigationController.TopViewController.GetIMvxIosView().ViewModel == toClose)
+            if(NavigationController.TopViewController.GetIMvxIosView().ViewModel == toClose)
                 NavigationController.PopViewController(true);
             else
                 ClosePreviousController(toClose);
@@ -125,10 +126,7 @@ namespace MvvmCross.iOS.Support.Presenters
 
             var mvxView = viewController.GetIMvxIosView();
 
-            if (mvxView.ViewModel == toClose)
-                return true;
-
-            return false;
+            return mvxView.ViewModel == toClose;
         }
 
         protected virtual void CloseModal()
@@ -149,7 +147,7 @@ namespace MvvmCross.iOS.Support.Presenters
         protected virtual void ShowRootViewController(UIViewController viewController)
         {
             // if viewController is a TabBarViewController, then update current. If not, clear it
-            if (viewController is IMvxTabBarViewController)
+            if(viewController is IMvxTabBarViewController)
             {
                 TabBarViewController = viewController as IMvxTabBarViewController;
                 NavigationController = null;
@@ -163,7 +161,7 @@ namespace MvvmCross.iOS.Support.Presenters
                 TabBarViewController = null;
 
                 // set RootViewController
-                foreach (var v in Window.Subviews)
+                foreach(var v in Window.Subviews)
                     v.RemoveFromSuperview();
 
                 Window.AddSubview(NavigationController.View);
@@ -173,17 +171,18 @@ namespace MvvmCross.iOS.Support.Presenters
 
         protected virtual void ShowTabViewController(
             UIViewController viewController,
-            bool needsNavigationController,
+            bool wrapInNavigationController,
             string tabTitle,
-            string tabIconName)
+            string tabIconName,
+            string tabAccessibilityIdentifier)
         {
-            if (TabBarViewController == null)
+            if(TabBarViewController == null)
                 throw new MvxException("You need a TabBarViewController to show a ViewModel as a Tab!");
 
-            if (string.IsNullOrEmpty(tabTitle) && string.IsNullOrEmpty(tabIconName))
+            if(string.IsNullOrEmpty(tabTitle) && string.IsNullOrEmpty(tabIconName))
                 throw new MvxException("You need to set at least an icon or a title when trying to show a ViewModel as a Tab!");
 
-            TabBarViewController.ShowTabView(viewController, needsNavigationController, tabTitle, tabIconName);
+            TabBarViewController.ShowTabView(viewController, wrapInNavigationController, tabTitle, tabIconName, tabAccessibilityIdentifier);
         }
 
         protected virtual void ShowChildViewController(UIViewController viewController)
@@ -192,14 +191,14 @@ namespace MvvmCross.iOS.Support.Presenters
             Window.RootViewController?.DismissViewController(true, null);
 
             // if current RootViewController is a TabBarViewController, the TabBarViewController takes care of it
-            if (TabBarViewController != null)
+            if(TabBarViewController != null)
             {
                 TabBarViewController?.ShowChildView(viewController);
                 return;
             }
 
             // if current RootViewController is a NavigationController, push it
-            if (NavigationController != null)
+            if(NavigationController != null)
             {
                 NavigationController.PushViewController(viewController, true);
                 return;
@@ -227,7 +226,7 @@ namespace MvvmCross.iOS.Support.Presenters
         private UIViewController GetViewController(IMvxIosView view)
         {
             var viewController = view as UIViewController;
-            if (viewController == null)
+            if(viewController == null)
                 throw new MvxException("Trying to show a view that isn't a UIViewController!");
 
             return viewController;
@@ -236,7 +235,7 @@ namespace MvvmCross.iOS.Support.Presenters
         private MvxTabPresentationAttribute GetMvxTabPresentationAttribute(UIViewController viewController)
         {
             var attributes = viewController.GetType().GetCustomAttributes(typeof(MvxTabPresentationAttribute), true).FirstOrDefault() as MvxTabPresentationAttribute;
-            if (attributes == null)
+            if(attributes == null)
                 throw new MvxException("Please remember to set PresentationAttributes!");
 
             return attributes;
@@ -244,10 +243,10 @@ namespace MvvmCross.iOS.Support.Presenters
 
         private void ClosePreviousController(IMvxViewModel toClose)
         {
-            foreach (var viewController in NavigationController.ViewControllers)
+            foreach(var viewController in NavigationController.ViewControllers)
             {
                 var mvxView = viewController.GetIMvxIosView();
-                if (mvxView.ViewModel == toClose)
+                if(mvxView.ViewModel == toClose)
                 {
                     var newViewControllers = NavigationController.ViewControllers.Where(v => v != viewController).ToArray();
                     NavigationController.ViewControllers = newViewControllers;

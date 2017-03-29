@@ -83,6 +83,10 @@
     <Compile Include="ViewModels\MvxNotifyPropertyChangedTest.cs" />
     <Compile Include="ViewModels\MvxSaveStateTest.cs" />
     <Compile Include="ViewModels\MvxViewModelLoaderTest.cs" />
+    <Compile Include="Navigation\RoutingServiceTests.cs" />
+    <Compile Include="Mocks\Dispatchers\NavigationMockDispatcher.cs" />
+    <Compile Include="Mocks\TestViewModels\MvxDummyViewModels.cs" />
+    <Compile Include="Stubs\SimpleRoutingFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
@@ -94,7 +98,7 @@
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Core\MvvmCross.Test.Core.csproj">
-      <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
+      <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
   </ItemGroup>
@@ -103,6 +107,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Navigation\" />
+    <Folder Include="Stubs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
