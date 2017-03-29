@@ -12,7 +12,8 @@ When MethodBinding is loaded, then MvvmCross data-binding:
 - can use public methods as well as `ICommand` properties for action/command binding.
 
 An example, Rio-based ViewModel using both FieldBinding and MethodBinding is:
-```c# 
+
+```cs
 public class FirstViewModel
   : MvxViewModel
   {
@@ -45,12 +46,15 @@ public class FirstViewModel
     }
   }
 ```
+
 The `Save` method in this class could be accessed using Android syntax:
-```c# 
+
+```xml
     <Button
         android:layout_width='fill_parent'
         android:layout_height='wrap_content'
         android:text='Save'
         local:MvxBind='Click Save' />
 ```
+
 For more on Rio MethodBinding see N=36 on http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html
