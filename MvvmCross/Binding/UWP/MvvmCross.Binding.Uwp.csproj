@@ -52,6 +52,8 @@
     <Compile Include="MvxWindowsAssemblyCache.cs" />
     <Compile Include="MvxWindowsBindingBuilder.cs" />
     <Compile Include="MvxWindowsBindingCreator.cs" />
+    <Compile Include="MvxWindowsPropertyBinding.cs" />
+    <Compile Include="MvxWindowsPropertyBindingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Binding.UWP.rd.xml" />
     <Compile Include="MvxBinding\Target\MvxCollapsedTargetBinding.cs" />

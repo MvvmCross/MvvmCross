@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using AppKit;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Mac.Target;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Mac
 {
-    using System;
-
-    using AppKit;
-
-    using global::MvvmCross.Platform.Converters;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Mac.Target;
-
     public class MvxMacBindingBuilder
         : MvxBindingBuilder
     {
@@ -37,47 +34,64 @@ namespace MvvmCross.Binding.Mac
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterCustomBindingFactory<NSView>("Visibility",
-                                                          view =>
-                                                          new MvxNSViewVisibilityTargetBinding(view));
-            registry.RegisterCustomBindingFactory<NSView>("Visible",
-                                                          view =>
-                                                          new MvxNSViewVisibleTargetBinding(view));
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSliderValueTargetBinding),
-                                                        typeof(NSSlider),
-                                                        "IntValue");
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSegmentedControlSelectedSegmentTargetBinding),
-                                                        typeof(NSSegmentedControl),
-                                                        "SelectedSegment");
+            registry.RegisterCustomBindingFactory<NSView>(
+                MvxMacPropertyBinding.NSView_Visibility,
+                view => new MvxNSViewVisibilityTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<NSView>(
+                MvxMacPropertyBinding.NSView_Visible,
+                view => new MvxNSViewVisibleTargetBinding(view));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSSliderValueTargetBinding),
+                typeof(NSSlider),
+                MvxMacPropertyBinding.NSSlider_IntValue);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSSegmentedControlSelectedSegmentTargetBinding),
+                typeof(NSSegmentedControl),
+                MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
+
             registry.RegisterCustomBindingFactory<NSDatePicker>(
-                "Time",
+                MvxMacPropertyBinding.NSDatePicker_Time,
                 view => new MvxNSDatePickerTimeTargetBinding(view));
+
             registry.RegisterCustomBindingFactory<NSDatePicker>(
-                "Date",
+                MvxMacPropertyBinding.NSDatePicker_Date,
                 view => new MvxNSDatePickerDateTargetBinding(view));
 
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSTextFieldTextTargetBinding), typeof(NSTextField),
-                                                        "StringValue");
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSTextViewTextTargetBinding), typeof(NSTextView),
-                                                        "StringValue");
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTextFieldTextTargetBinding),
+                typeof(NSTextField),
+                MvxMacPropertyBinding.NSTextField_StringValue);
 
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSwitchOnTargetBinding), typeof(NSButton), "State");
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSearchFieldTextTargetBinding), typeof(NSSearchField), "Text");
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTextViewTextTargetBinding),
+                typeof(NSTextView),
+                MvxMacPropertyBinding.NSTextView_StringValue);
 
-            // NSButton
-            registry.RegisterCustomBindingFactory<NSButton>("Title",
-                                                            (button) => new MvxNSButtonTitleTargetBinding(button));
-            registry.RegisterPropertyInfoBindingFactory(typeof(MvxNSSwitchOnTargetBinding), typeof(NSButton),
-                "State");
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSSwitchOnTargetBinding),
+                typeof(NSButton),
+                MvxMacPropertyBinding.NSButton_State);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSSearchFieldTextTargetBinding),
+                typeof(NSSearchField),
+                MvxMacPropertyBinding.NSSearchField_Text);
+
+            registry.RegisterCustomBindingFactory<NSButton>(
+                MvxMacPropertyBinding.NSButton_Title,
+                button => new MvxNSButtonTitleTargetBinding(button));
+
 
             /* Todo: Address this for trackpad
-			registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
-			registry.RegisterCustomBindingFactory<NSView>("DoubleTap", view => new MvxNSViewTapTargetBinding(view, 2, 1));
-			registry.RegisterCustomBindingFactory<NSView>("TwoFingerTap", view => new MvxNSViewTapTargetBinding(view, 1, 2));
-			*/
+            registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
+            registry.RegisterCustomBindingFactory<NSView>("DoubleTap", view => new MvxNSViewTapTargetBinding(view, 2, 1));
+            registry.RegisterCustomBindingFactory<NSView>("TwoFingerTap", view => new MvxNSViewTapTargetBinding(view, 1, 2));
+            */
 
-            if (this._fillRegistryAction != null)
-                this._fillRegistryAction(registry);
+            this._fillRegistryAction?.Invoke(registry);
         }
 
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
@@ -90,33 +104,31 @@ namespace MvvmCross.Binding.Mac
         {
             base.FillValueConverters(registry);
 
-            if (this._fillValueConvertersAction != null)
-                this._fillValueConvertersAction(registry);
+            this._fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             base.FillDefaultBindingNames(registry);
 
-            registry.AddOrOverwrite(typeof(NSButton), "Activated");
-            registry.AddOrOverwrite(typeof(NSButtonCell), "Activated");
-            registry.AddOrOverwrite(typeof(NSSegmentedControl), "Activated");
-            registry.AddOrOverwrite(typeof(NSSearchField), "StringValue");
-            registry.AddOrOverwrite(typeof(NSTextField), "StringValue");
-            registry.AddOrOverwrite(typeof(NSTextView), "StringValue");
+            registry.AddOrOverwrite(typeof(NSButton), nameof(NSButton.Activated));
+            registry.AddOrOverwrite(typeof(NSButtonCell), nameof(NSButtonCell.Activated));
+            registry.AddOrOverwrite(typeof(NSSegmentedControl), nameof(NSSegmentedControl.Activated));
+            registry.AddOrOverwrite(typeof(NSSearchField), MvxMacPropertyBinding.NSSearchField_Text);
+            registry.AddOrOverwrite(typeof(NSTextField), MvxMacPropertyBinding.NSTextField_StringValue);
+            registry.AddOrOverwrite(typeof(NSTextView), MvxMacPropertyBinding.NSTextView_StringValue);
+            registry.AddOrOverwrite(typeof(NSImageView), nameof(NSImageView.Image));
+            registry.AddOrOverwrite(typeof(NSDatePicker), MvxMacPropertyBinding.NSDatePicker_Date);
+            registry.AddOrOverwrite(typeof(NSSlider), MvxMacPropertyBinding.NSSlider_IntValue);
+            registry.AddOrOverwrite(typeof(NSSegmentedControl), MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
 
-            //			registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
-            //			registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
-            //			registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
-            registry.AddOrOverwrite(typeof(NSImageView), "Image");
-            registry.AddOrOverwrite(typeof(NSDatePicker), "Date");
-            registry.AddOrOverwrite(typeof(NSSlider), "IntValue");
-            //			registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
-            //			registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
-            registry.AddOrOverwrite(typeof(NSSegmentedControl), "SelectedSegment");
+            //registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
+            //registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
+            //registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
+            //registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
+            //registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
 
-            if (this._fillBindingNamesAction != null)
-                this._fillBindingNamesAction(registry);
+            this._fillBindingNamesAction?.Invoke(registry);
         }
     }
 }
