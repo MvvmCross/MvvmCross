@@ -4,7 +4,8 @@ title: PictureChooser
 category: Plugins
 ---
 The `PictureChooser` plugin provides implementations of:
-```c# 
+
+```cs
 public interface IMvxPictureChooserTask
 {
   void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
@@ -14,12 +15,14 @@ public interface IMvxPictureChooserTask
                    Action assumeCancelled);
 }
 ```
+
 This is available on Android, iOS, WindowsPhone and WindowsStore. 
 
 This interface is designed for single use only - i.e. each time you require a picture you should request a new `IMvxPictureChooserTask` instance.
 
 The interface can be used as:
-```c# 
+
+```cs
 var task = Mvx.Resolve<IMvxPictureChooserTask>();
 task.ChoosePictureFromLibrary(500, 90,
                               stream => {
@@ -30,6 +33,7 @@ task.ChoosePictureFromLibrary(500, 90,
                                 // perform any cancelled operation
                               });
 ```
+
 **Note:** Using this interface well on Android is very difficult.
 
 The reason for this is because of Android's Activity lifecyle. The Android lifecycle means that the image that may be returned to a different View and ViewModel than the one that requested it. This is partly because camera apps generally use a lot of RAM (raw camera images are large files) - so while th camera app is capturing you image, then Android may look to free up additional RAM by killing your app's Activity.
@@ -39,22 +43,28 @@ If you want to use this `IMvxPictureChooserTask` effectively and reliably on And
 There is a simple demo for `IMvxPictureChooserTask` in [PictureTaking](https://github.com/slodge/MvvmCross-Tutorials/tree/master/PictureTaking) - however, this simple demo doesn't currently show this full Android technique. 
 
 **Note:** On Windows Phone 8.0, an additional implementation is available:
-```c# 
+
+```cs
 public interface IMvxCombinedPictureChooserTask
 {
   void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                            Action assumeCancelled);
 }
+```
 
 Client code can test for the availability of this interface using:
 
+```cs
 var isAvailable = Mvx.CanResolve<IMvxCombinedPictureChooserTask>();
+```
 
 or:
 
+```cs
 IMvxCombinedPictureChooserTask combined;
 var isAvailable = Mvx.TryResolve(out combined);
 ```
+
 Finally, the `PictureChooser` plugin also provides an "InMemoryImage" ValueConverter - `MvxInMemoryImageValueConverter`. This value converter allows images to be decoded from byte arrays for use on-screen.
 
 The "InMemoryImage" ValueConverter can be seen in use in the PictureTaking sample - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/PictureTaking.
@@ -71,7 +81,7 @@ view.Activated += ViewOnActivated;
 
 The `ViewOnActivated` `EventHandler` will look something like this:
 
-```
+```cs
 private void ViewOnActivated(CoreApplicationView sender, IActivatedEventArgs args)
 {
     var continuationArgs = args as FileOpenPickerContinuationEventArgs;
@@ -83,7 +93,7 @@ private void ViewOnActivated(CoreApplicationView sender, IActivatedEventArgs arg
 
 The `ContinueFileOpenPicker()` method in the `ViewModel` simply calls the same method on the `IMvxPictureChooserTask`:
 
-```
+```cs
 public void ContinueFilePicker(object args)
 {
     if (_currentChooserTask == null) return;
