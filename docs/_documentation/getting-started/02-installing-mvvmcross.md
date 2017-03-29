@@ -27,14 +27,14 @@ Name | Description | Link
 
 Name | Description | Link
 ---- | ----------- | ----
-`MvvmCross.Droid.Support.V4` | a | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V4/)
+`MvvmCross.Droid.Support.V4`              |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V4/)
 `MvvmCross.Droid.Support.V7.AppCompat`    | AppCompat for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.AppCompat/)
 `MvvmCross.Droid.Support.V7.Fragging`     | Android support fragments, caching and helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Fragging/)
-`MvvmCross.Droid.Support.V7.Preference`   | b | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Preference/)
-`MvvmCross.Droid.Support.V7.RecyclerView` | c | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.RecyclerView/)
-`MvvmCross.Droid.Support.V14.Preference`  | d | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V14.Preference/)
-`MvvmCross.Droid.Support.V17.Leanback`    | e | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V17.Leanback/)
-`MvvmCross.Droid.Support.Design`          | f | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
+`MvvmCross.Droid.Support.V7.Preference`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Preference/)
+`MvvmCross.Droid.Support.V7.RecyclerView` |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.RecyclerView/)
+`MvvmCross.Droid.Support.V14.Preference`  |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V14.Preference/)
+`MvvmCross.Droid.Support.V17.Leanback`    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V17.Leanback/)
+`MvvmCross.Droid.Support.Design`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
 
 
 ## iOS Support
