@@ -82,7 +82,8 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
+
+```cs
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.WindowsCommon.Platform;
@@ -102,6 +103,7 @@ namespace TipCalc.UI.WindowsCommon
     }
 }
 ```
+
 ## Modify the App.xaml.cs to use Setup
 
 Your `App.xaml.cs` provides the Universal Windows App 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
@@ -110,29 +112,35 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 
 * modify the `OnLaunched` callback
 
- * remove these lines 
-```c# 
+* remove these lines 
+
+```cs
 // When the navigation stack isn't restored navigate to the first page,
 // configuring the new page by passing required information as a navigation
 // parameter
 if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
 {
-    throw new Exception("Failed to create initial page");
+   throw new Exception("Failed to create initial page");
 }
 ```
+
  * add these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
-```c# 
+
+```cs
 var setup = new Setup(rootFrame);
 setup.Initialize();
 
 var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
+
 To do this, you will need to add these `using` lines:
-```c# 
+
+```cs
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 ```
+
 ## Add your View
 
 ### Create an initial Page for the WindowsCommon.Windows project
@@ -160,29 +168,40 @@ A Common folder will be added containing:
 Change `TipView` so that it inherits from `MvxWindowsPage`
 
 Change:
-```c# 
+
+```cs
 public class TipView : Page
 ```
+
 to:
-```c# 
+
+```cs
 public class TipView : MvxWindowsPage
 ```
+
 This requires the addition of:
-```c# 
+
+```cs
 using MvvmCross.WindowsCommon.Views;
 ```
+
 ### Persuade TipView to cooperate more reasonably with the `MvxWindowsPage` base class
 
 Change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-```c# 
+
+```cs
 base.OnNavigatedTo(e);
 ```
+
 and
-```c# 
+
+```cs
 base.OnNavigatedFrom(e);
 ```
+
 Altogether this looks like:
-```c# 
+
+```cs
 using TipCalc.UI.WindowsCommon.Common;
 using Windows.UI.Xaml.Navigation;
 using MvvmCross.WindowsCommon.Views;
@@ -280,6 +299,7 @@ namespace TipCalc.UI.WindowsCommon.Views
     }
 }
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file
@@ -289,20 +309,23 @@ This will open the XAML editor within Visual Studio.
 I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxWindowsPage` inheritance, change the outer root node of the Xaml file from:
-```c# 
+
+```xml
 <Page 
     ... >
     <!-- content -->
 </Page>
 ```
 to:
-```c# 
+
+```xml
 <views:MvxWindowsPage
     xmlns:views="using:MvvmCross.WindowsCommon.Views"
     ... >
     <!-- content -->
 </views:MvxWindowsPage>
 ```
+
 To add the XAML user interface for our tip calculator, we will add a `ContentPanel` Grid just above the final `</Grid>` in the existing XAML.  This will contain:
 
 * a `StackPanel` container, into which we add:
@@ -312,7 +335,8 @@ To add the XAML user interface for our tip calculator, we will add a `ContentPan
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```c# 
+
+```xml
 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
     <StackPanel>
         <TextBlock
@@ -334,6 +358,7 @@ This will produce XAML like:
     </StackPanel>
 </Grid>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 
 **Note** the binding for the TextBox uses `UpdateSourceTrigger=PropertyChanged` so that the `SubTotal` property of `TipViewModel` is updated immediately rather than when the TextBox loses focus.
@@ -367,29 +392,40 @@ A Common folder will be added containing:
 Change `TipView` so that it inherits from `MvxWindowsPage`
 
 Change:
-```c# 
+
+```cs
 public class TipView : Page
 ```
+
 to:
-```c# 
+
+```cs
 public class TipView : MvxWindowsPage
 ```
+
 This requires the addition of:
-```c# 
+
+```cs
 using MvvmCross.WindowsCommon.Views;
 ```
+
 ### Persuade TipCalc to cooperate more reasonably with the `MvxWindowsPage` base class
 
 Change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-```c# 
+
+```cs
 base.OnNavigatedTo(e);
 ```
+
 and 
-```c# 
+
+```cs
 base.OnNavigatedFrom(e);
 ```
+
 Altogether this looks like:
-```c# 
+
+```cs
 using TipCalc.UI.WindowsCommon.Common;
 using Windows.UI.Xaml.Navigation;
 using MvvmCross.WindowsCommon.Views;
@@ -490,6 +526,7 @@ namespace TipCalc.UI.WindowsCommon.Views
     }
 }
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file
@@ -499,20 +536,24 @@ This will open the XAML editor within Visual Studio.
 Again, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxWindowsPage` inheritance, change the outer root node of the Xaml file from:
-```c# 
+
+```xml
 <Page 
     ... >
     <!-- content -->
 </Page>
 ```
+
 to:
-```c# 
+
+```xml
 <views:MvxWindowsPage
     xmlns:views="using:MvvmCross.WindowsCommon.Views"
     ... >
     <!-- content -->
 </views:MvxWindowsPage>
 ```
+
 To add the XAML user interface for our tip calculator, we will add a `ContentPanel` Grid in place of the `ContentRoot` Grid in the existing XAML.
 
 This `Content Panel` will include exactly the same XAML as we added to the WindowsCommon.WindowsPhone project except for the margins:
@@ -524,7 +565,8 @@ This `Content Panel` will include exactly the same XAML as we added to the Windo
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
-```c# 
+
+```xml
 <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
     <StackPanel>
         <TextBlock
@@ -546,6 +588,7 @@ This will produce XAML like:
     </StackPanel>
 </Grid>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 
 
@@ -562,7 +605,8 @@ Universal Windows Phone apps seem to differ from Silverlight Windows Phone apps 
 If you do enable caching by setting the NavigationCacheMode property of a Page to "Required" and navigate backwards or forwards, the view is retrieved from the cache. This includes the ViewModel property of the view. While this doesn't create a problem when navigating backwards, it does when you navigate forward! If you already have cached a view with a particular state (loading from the init parameters into the viewmodel), that state is also retrieved from the cache and you'll end up with a view with an 'old' viewmodel state.
 
 To counter this, you must set the viewmodel to null when navigating to a page:
-```c# 
+
+```cs
 protected override void OnNavigatedTo(NavigationEventArgs e)
 {
     if (e.NavigationMode == NavigationMode.New)
@@ -572,6 +616,7 @@ protected override void OnNavigatedTo(NavigationEventArgs e)
     this.navigationHelper.OnNavigatedTo(e);
 }
 ```
+
 ## The Universal Windows App is complete!
 
 At this point you should be able to run your application.
