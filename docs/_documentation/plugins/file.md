@@ -4,7 +4,8 @@ title: File
 category: Plugins
 ---
 The `File` plugin provides cross-platform access to a File Store API.
-```c# 
+
+```cs
 public interface IMvxFileStore
 {
   bool TryReadTextFile(string path, out string contents);
@@ -25,14 +26,17 @@ public interface IMvxFileStore
   void DeleteFolder(string folderPath, bool recursive);
 }
 ```
+
 This plugin is implemented on all platforms - except WindowsStore where the `Folder` APIs are currently unimplemented.
 
-By defautlt, the plugin reads and writes files in paths relative to:
+By default, the plugin reads and writes files in paths relative to:
 
-- Android - `Context.FilesDir`
-- iOS - `Environment.SpecialFolder.MyDocuments`
-- WindowsPhone - app-specific isolated storage
-- WindowsStore - `Windows.Storage.ApplicationData.Current.LocalFolder.Path`
-- Wpf - `Environment.SpecialFolder.ApplicationData`
+platform     | location
+-------------|---------
+Android      | `Context.FilesDir`
+iOS          | `Environment.SpecialFolder.MyDocuments`
+WindowsPhone | app-specific isolated storage
+WindowsStore | `Windows.Storage.ApplicationData.Current.LocalFolder.Path`
+WPF          | `Environment.SpecialFolder.ApplicationData`
 
 Note: while it works, the use of a synchronous API for File IO on WindowsStore applications is slightly 'naughty'. It's likely that an asynchronous version of the IMvxFileStore interface will be provided in the near future.

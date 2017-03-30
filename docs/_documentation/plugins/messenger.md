@@ -20,7 +20,8 @@ The `IMvxMessenger` API includes:
 The basic use of the `Messenger` is:
 
 - define one or more Message classes for communication between components. These should inherit from `MvxMessage` - e.g.:
-```c# 
+
+```cs
 public class LocationMessage
   : MvxMessage
   {
@@ -35,8 +36,10 @@ public class LocationMessage
     public double Lng { get; private set; }
   }
 ```
+
 - define the classes which will create and send these Messages - e.g. a `LocationService` might create and send `LocationMessage`s using
-```c# 
+
+```cs
 var message = new LocationMessage(
   this,
   location.Coordinates.Latitude,
@@ -45,8 +48,10 @@ var message = new LocationMessage(
 
 _messenger.Publish(message);
 ```
+
 - define the classes which will subscribe to and receive these messages. Each of these classes must call one of the `Subscribe` methods on the `IMvxMessenger` and **must store the returned token**. For example part of a ViewModel receivin `LocationMessage`s might look like:
-```c# 
+
+```cs
 public class LocationViewModel 
   : MvxViewModel
   {
@@ -66,6 +71,7 @@ public class LocationViewModel
     // remainder of ViewModel
   }
 ```
+
 The three different options for subscribing for messages differ only in terms of which thread messages will be passed back on:
 
 - `Subscribe` - messages will be passed directly on the `Publish` thread. These subscriptions have the lowest processing overhead - messages will always be received synchronously whenever they are published. You should use this type of subscription if you already know which type of thread the Publish will be called on and if you have a good understanding on the resource and UI usage of your message handler.
@@ -82,7 +88,8 @@ Subscriptions can be cancelled at any time using the `Unsubscribe` method on the
 However, in many cases, `Unsubscribe`/`Dispose` is never called. Instead listeners rely on the `WeakReference` implementation of the  `MvxSubscriptionToken` to clear up the subscription when objects go out of scope and Garbage Collection occurs.
 
 This GC-based unsubscription will occur whenever the subscription token returned from `Subscribe` is Garbage Collected - so if the token is **not** stored, then unsubscription may occur immediately - e.g. in this method
-```c# 
+
+```cs
 public void MayNotEverReceiveAMessage()
 {
   var token = _messenger.Subscribe<MyMessage>((message) => {
@@ -93,24 +100,27 @@ public void MayNotEverReceiveAMessage()
   // - so trace may never get called
 }
 ```
+
 For any code wishing to observe the current subscription status on any message type (including subscriptions that have been requested with a named string `tag`) then this can be done:
 
 - using the `HasSubscriptionsFor` and `CountSubscriptionsFor` methods
 - by subscribing for `MvxSubscriberChangeMessage` messages - the Messenger itself publishes these `MvxSubscriberChangeMessage` messages whenever subscriptions are made, are removed or have expired.
-```c# 
+
+```cs
 public class MvxSubscriberChangeMessage : MvxMessage
-	    {
-	        public Type MessageType { get; private set; }
-	        public int SubscriberCount { get; private set; }
-	
-	        public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0) 
-	            : base(sender)
-	        {
-	            SubscriberCount = countSubscribers;
-	            MessageType = messageType;
-	        }
-	    }
+{
+   public Type MessageType { get; private set; }
+   public int SubscriberCount { get; private set; }
+
+   public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0) 
+   : base(sender)
+   {
+      SubscriberCount = countSubscribers;
+      MessageType = messageType;
+   }
+}
 ```
+
 These mechanisms allow you to author singleton services which can adapt their resource requirements according to the current needs of the app. 
 
 For example, suppose you have a service which tracks stock prices using calls to a web service. Individual clients might subscribe to Messages from this service for individual stock codes. The stock service can track when subscribers are present for each stock code and can then adjust which network calls it makes.
