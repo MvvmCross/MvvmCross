@@ -6,7 +6,6 @@
      var content = 1;
 
      var contentLength = 300;
-     var searchThrottle = 600;
 
      function displaySearchResults(results, store) {
          var searchResults = document.getElementById('search-results');
@@ -24,34 +23,25 @@
              searchResults.innerHTML = '<li>No results found</li>';
          }
      }
+    
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
 
-     $("#search-box").keydown(throttle(function() {
-         getResults($('#search-box').val());
-     }, searchThrottle));
+        for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
 
-     $("#search-box").keydown(function() {
-         if($("#search-box").val().length > 0)
-            $(".searching-text").show();
-         else
-            $(".searching-text").hide();
-     });
+        if (pair[0] === variable) {
+            return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
+        }
+        }
+    }
 
-     
-     function throttle(f, delay) {
-         var timer = null;
-         return function() {
-             var context = this,
-                 args = arguments;
-             clearTimeout(timer);
-             timer = window.setTimeout(function() {
-                     f.apply(context, args);
-                 },
-                 delay || 1000);
-         };
-     }
 
-     function getResults(searchValue) {
-         var searchTerm = searchValue;
+    var searchTerm = getQueryVariable('query');
+
+    if (searchTerm) {
+         document.getElementById('search-box').setAttribute("value", searchTerm);
          if (searchTerm) {
              var idx = lunr(function() {
                  this.field('id');
