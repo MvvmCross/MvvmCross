@@ -21,6 +21,10 @@
            <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title | escape }}</a>
          {% endfor %}
          
+        <form id="searchthis" action="{{ site.baseurl }}/search" style="display:inline;" method="get">
+          <input id="search-box" name="query" size="40" type="text" placeholder="Search for stuff"/>
+          <input class="search-btn" value="search" type="submit"/>
+        </form>
       </div>
     </nav>
 

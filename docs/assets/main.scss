@@ -27,6 +27,8 @@ $content-width:    1000px;
 $on-palm:          600px;
 $on-laptop:        800px;
 
+$searchbar-width: 140px;
+
 $syntax-background-color: #f2f2f2;
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
@@ -77,6 +79,34 @@ h2,h3,h4,h5,h6
     }
 }
 
+//search box
+input:focus {
+    outline:none !important;
+}
+.search-btn {
+    background:$brand-color;
+    color:white;
+    padding:10px 20px;
+    border-radius:0 5px 5px 0;
+    -moz-border-radius:0 5px 5px 0;
+    -webkit-border-radius:0 5px 5px 0;
+    border:0 none;
+    font-weight:bold;
+    margin-left:-5px;
+    cursor: pointer;
+}
+ 
+#search-box {
+    background: #eee;
+    padding:10px;
+    border-radius:5px 0 0 5px;
+    -moz-border-radius:5px 0 0 5px;
+    -webkit-border-radius:5px 0 0 5px;
+    border:0 none;
+    width:$searchbar-width;
+ }
+
+//homepage
 .landing-intro
 {
     background: #2D2D2D;
@@ -333,11 +363,6 @@ a:visited {
     margin: 0 auto;
 }
 
-input[type="submit"] {
-	margin: 30px 0 0 0;
-	font-size: 20px;
-}
-
 .search {
 	width: 50%;
 	margin: 0 auto;
@@ -347,6 +372,42 @@ input[type="submit"] {
 .searching-text
 {
     display: none;
+}
+//table styling
+
+table { padding: 0; border-spacing: 0px;}
+table tr 
+{
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; 
+}
+table tr:nth-child(2n) 
+{
+    background-color: #f8f8f8; 
+}
+table tr th 
+{
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th :first-child, table tr td :first-child 
+{
+    margin-top: 0; 
+}
+table tr th :last-child, table tr td :last-child 
+{
+      margin-bottom: 0; 
 }
 
 //footer
@@ -427,41 +488,6 @@ input[type="submit"] {
 
 .documentation-content {
     clear: both;
-}
-
-table { padding: 0; border-spacing: 0px;}
-table tr 
-{
-    border-top: 1px solid #cccccc;
-    background-color: white;
-    margin: 0;
-    padding: 0; 
-}
-table tr:nth-child(2n) 
-{
-    background-color: #f8f8f8; 
-}
-table tr th 
-{
-    font-weight: bold;
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-table tr td {
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-table tr th :first-child, table tr td :first-child 
-{
-    margin-top: 0; 
-}
-table tr th :last-child, table tr td :last-child 
-{
-      margin-bottom: 0; 
 }
 
 //syntax highlighting
