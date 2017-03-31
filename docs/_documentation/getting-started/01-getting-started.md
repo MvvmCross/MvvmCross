@@ -9,7 +9,7 @@ NuGet | Continuous Integration
 
 ## Introduction
 
-MvvmCross is a cross-platform MVVM framework that enables developers to create powerful cross platform apps. It supports Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF). Lots of plugins are available as well.
+MvvmCross is a cross-platform MVVM framework that enables developers to create powerful cross platform apps. It supports Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF).
 
 The high level features that MvvmCross provides you with are:
 * MVVM architecture pattern
@@ -17,7 +17,7 @@ The high level features that MvvmCross provides you with are:
 * Data Binding
 * Platform specifics support
 * Inversion of control and Dependency Injection
-* External Plugins
+* Lots of plugins for common functionalities
 * Unit test helpers
 * Complete flexibility - your app is King!
 
@@ -35,13 +35,17 @@ Here is the article that contains the text version:
 
 ## MvvmCross Templates
 
-You can also install the templates for Visual Studio and Xamarin Studio made by Jim Bennet:
+You can also install the templates for Visual Studio and Xamarin Studio:
 
-### Visual Studio
-You can download the extension and install it by yourself from  [here](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) or you can download it from the Extension Manager in Visual Studio by searching for MvvmCross.
+* XabluCross for MvvmCross (by XabluCross) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=XabluCross.XabluCrossVSPackage)
+* MvvmCross for Visual Studio (by Jim Bennet) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) | [Xamarin Studio](http://addins.monodevelop.com/Project/Index/227)
+* MvvmCross Plugin Template for Visual Studio (by EShy) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
+* Xamarin MvvmCross Dreams (by Artmdev) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
+* Xamarin Forms with MvvmCross Solution Template (by Cristian Chereches) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
+* Ninja Coder For MvvmCross and Xamarin Forms (by Ninja Coder for MvvmCross) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
+* MVXTemplates (by Luke Pothier) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
 
-### Xamarin Studio (Visual Studio for Mac)
-Find the MvvmCross Template Pack in the Add-In Gallery or [online in the Add-In repository](http://addins.monodevelop.com/Project/Index/227)
+You can choose to download and install an extension manually, or you can get it from the Extension Manager in Visual Studio / the Add-In Gallery in Xamarin Studio (Visual Studio for Mac).
 
 
 ## Help updating the docs!
