@@ -41,7 +41,7 @@ You can also install the templates for Visual Studio and Xamarin Studio made by 
 You can download the extension and install it by yourself from  [here](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) or you can download it from the Extension Manager in Visual Studio by searching for MvvmCross.
 
 ### Xamarin Studio (Visual Studio for Mac)
-Find the MvvMCross Template Pack in the Add-In Gallery or [online in the Add-In repository](http://addins.monodevelop.com/Project/Index/227)
+Find the MvvmCross Template Pack in the Add-In Gallery or [online in the Add-In repository](http://addins.monodevelop.com/Project/Index/227)
 
 
 ## Help updating the docs!
