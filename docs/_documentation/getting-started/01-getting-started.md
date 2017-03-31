@@ -37,13 +37,15 @@ Here is the article that contains the text version:
 
 You can also install the templates for Visual Studio and Xamarin Studio:
 
-* XabluCross for MvvmCross (by XabluCross) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=XabluCross.XabluCrossVSPackage)
-* MvvmCross for Visual Studio (by Jim Bennet) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) | [Xamarin Studio](http://addins.monodevelop.com/Project/Index/227)
-* MvvmCross Plugin Template for Visual Studio (by EShy) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
-* Xamarin MvvmCross Dreams (by Artmdev) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
-* Xamarin Forms with MvvmCross Solution Template (by Cristian Chereches) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
-* Ninja Coder For MvvmCross and Xamarin Forms (by Ninja Coder for MvvmCross) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
-* MVXTemplates (by Luke Pothier) [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
+Name | Author | Link
+---- | ----------- | ----
+XabluCross for MvvmCross | XabluCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=XabluCross.XabluCrossVSPackage)
+MvvmCross for Visual Studio | Jim Bennet | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) | [Xamarin Studio](http://addins.monodevelop.com/Project/Index/227)
+MvvmCross Plugin Template for Visual Studio | EShy | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
+Xamarin MvvmCross Dreams | Artmdev | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
+Xamarin Forms with MvvmCross Solution Template | Cristian Chereches | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
+Ninja Coder For MvvmCross and Xamarin Forms | Ninja Coder for MvvmCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
+MVXTemplates | Luke Pothier | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
 
 You can choose to download and install an extension manually, or you can get it from the Extension Manager in Visual Studio / the Add-In Gallery in Xamarin Studio (Visual Studio for Mac).
 
