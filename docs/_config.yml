@@ -25,6 +25,7 @@ git_repo: mvvmcross-docs
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
 theme: minima
 gems:
   - jekyll-feed
@@ -50,3 +51,12 @@ collections:
   documentation:
     output: true
     permalink: /:collection/:path/:title:output_ext
+
+category_order:
+  - 'Getting-started'
+  - 'Platform'
+  - 'Plugins'
+  - 'Tutorials'
+  - 'Developer-guide'
+  - 'Contribute'
+  - 'Licensing'
