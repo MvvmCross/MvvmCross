@@ -22,7 +22,7 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    1000px;
+$content-width:    100%;
 
 $on-palm:          600px;
 $on-laptop:        800px;
@@ -178,13 +178,13 @@ input:focus {
     font-size: 24px;
 }
 
-$effective-content-width: $content-width - ($spacing-unit * 2);
+$effective-content-width: $content-width;
 $documentation-menu-width: $effective-content-width * 0.30;
 .documentation-menu
 {
     float:left;
-    width: $documentation-menu-width - 10px;
-    margin-right: 10px;
+    width: 20%;
+    margin-left: 30px;
 	-webkit-box-shadow: 1px 0 0 rgba(81,88,90,0.17);
     box-shadow: 1px 0 0 rgba(81,88,90,0.17);
     ul
@@ -222,9 +222,9 @@ $documentation-menu-width: $effective-content-width * 0.30;
 $documentation-width: $effective-content-width * 0.70;
 .documentation
 {
-    float: right;
-    width: $documentation-width - 20;
-    padding: 10px;
+    float: left;
+    width: 70%;
+    padding: 10px 0px 0px 30px;
 }
 
 @media screen and (max-width: $effective-content-width) {
