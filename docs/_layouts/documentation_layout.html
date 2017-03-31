@@ -15,17 +15,21 @@
 
   </body>
 
-  <script
-    src="//code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script type="text/javascript">
+  <script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
+  <script type="text/javascript" async>
     $(function () {
       $('div.category').on('click', function () {
-        $(this).siblings('ul').children('li').slideToggle(function() {
-          $(this).toggleClass('collapsed expanded');
-        });
+        $(this).siblings('ul').children('li').slideToggle(200);
       });
+
+      $('a.active').parentsUntil('div.category').children('li').show();
+      $('a.active').parentsUntil('div.documentation-menu').addClass('active-category');
+
+      if ($('div.active-category').length <= 0)
+      {
+        console.log('hello');
+        $('div.category').first().siblings('ul').children('li').show();
+      }
     });
   </script>
 

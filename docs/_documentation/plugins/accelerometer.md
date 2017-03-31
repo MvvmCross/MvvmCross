@@ -5,7 +5,14 @@ category: Plugins
 ---
 The `Accelerometer` plugin provides access to a platforms accelerometer using a singleton implementing the API.
 ```c# 
- public interface IMvxAccelerometer\n {\n   void Start();\n   void Stop();\n   bool Started { get; }\n   MvxAccelerometerReading LastReading { get; }\n   event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;\n }",
+ public interface IMvxAccelerometer
+ {
+   void Start();
+   void Stop();
+   bool Started { get; }
+   MvxAccelerometerReading LastReading { get; }
+   event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
+ }
 ```
 This plugin is available on all of Android, iOS, WindowsPhone, WindowsStore and Wpf.
 

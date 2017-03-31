@@ -12,7 +12,12 @@ On several platforms, the ResourceLoader plugin requires an `IMvxFileStore` is a
 
 The main interface supplied by this plugin is:
 ```c# 
-public interface IMvxResourceLoader\n{\n  bool ResourceExists(string resourcePath);\n  string GetTextResource(string resourcePath);\n  void GetResourceStream(string resourcePath, Action<Stream> streamAction);\n}",
+public interface IMvxResourceLoader
+{
+  bool ResourceExists(string resourcePath);
+  string GetTextResource(string resourcePath);
+  void GetResourceStream(string resourcePath, Action<Stream> streamAction);
+}
 ```
 For a text file 'Hello.txt' bundled in a folder 'Foo', this can be called as:    
 
