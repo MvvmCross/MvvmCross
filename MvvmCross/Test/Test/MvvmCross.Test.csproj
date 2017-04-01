@@ -98,7 +98,7 @@
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Core\MvvmCross.Test.Core.csproj">
-      <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
+      <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
   </ItemGroup>

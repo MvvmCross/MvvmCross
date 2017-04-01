@@ -53,6 +53,16 @@ namespace $rootnamespace$
             sb.ProgressChanged += (sender, args) => sb.Progress = sb.Progress + 1;
         }
 
+        public void Include(RadioGroup radioGroup)
+        {
+            radioGroup.CheckedChange += (sender, args) => radioGroup.Check(args.CheckedId);
+        }
+
+        public void Include(RadioButton radioButton)
+        {
+            radioButton.CheckedChange += (sender, args) => radioButton.Checked = args.IsChecked;
+        }
+
         public void Include(Activity act)
         {
             act.Title = act.Title + "";
