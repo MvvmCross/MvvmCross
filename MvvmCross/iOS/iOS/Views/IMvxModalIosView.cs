@@ -5,19 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
-    public interface IMvxModalIosView
-        : IMvxView
+    public interface IMvxModalIosView : IMvxView
     {
     }
 
-    public interface IMvxModalIosView<TViewModel>
-        : IMvxModalIosView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+    public interface IMvxModalIosView<TViewModel> : IMvxModalIosView, IMvxView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
     }
 }

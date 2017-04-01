@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Support.Views;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;

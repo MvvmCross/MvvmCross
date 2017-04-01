@@ -64,7 +64,6 @@
     <Compile Include="Presenters\MvxTabBarPresenter\MvxTabPresentationAttribute.cs" />
     <Compile Include="Presenters\MvxTabBarPresenter\MvxTabsViewPresenter.cs" />
     <Compile Include="Views\MvxBaseTabBarViewController.cs" />
-    <Compile Include="Views\MvxExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
