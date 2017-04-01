@@ -55,7 +55,7 @@ h2,h3,h4,h5,h6
 }
 .page-content{
     padding: 0px;
-    padding-top: 20px;
+    padding-top: 70px;
 }
 .header-logo
 {
@@ -68,6 +68,9 @@ h2,h3,h4,h5,h6
     background-color: #FFF;
     border-bottom: 2px solid #69f0ae;
     border-top:0px;
+    right:0px;
+    left:0px;
+    position: fixed;
 }
 
 .site-nav .page-link {
@@ -473,6 +476,9 @@ table tr th :last-child, table tr td :last-child
 }
 
 //reset list
+html{
+    overflow: hidden;
+}
 .menu {
 	margin: 0;
 	padding: 0;
@@ -482,7 +488,6 @@ table tr th :last-child, table tr td :last-child
 	vertical-align: baseline;
 	list-style: none;
 }
-
 .documentation-header {
     display: block;
     clear:both;
