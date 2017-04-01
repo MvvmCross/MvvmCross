@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxModalSupportIosViewPresenter : MvxIosViewPresenter
     {
         private UIViewController _currentModalViewController;
@@ -25,14 +24,14 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void Show(IMvxIosView view)
         {
-            if (view is IMvxModalIosView)
+            if(view is IMvxModalIosView)
             {
-                if (this._currentModalViewController != null)
+                if(_currentModalViewController != null)
                     throw new MvxException("Only one modal view controller at a time supported");
 
-                this._currentModalViewController = view as UIViewController;
+                _currentModalViewController = view as UIViewController;
 
-                this.PresentModalViewController(view as UIViewController, true);
+                PresentModalViewController(view as UIViewController, true);
                 return;
             }
 
@@ -41,22 +40,22 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            if (this._currentModalViewController != null)
+            if(_currentModalViewController != null)
             {
                 MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
                 return;
             }
 
             // clear our local reference to avoid back confusion
-            this._currentModalViewController = null;
+            _currentModalViewController = null;
         }
 
         public override void CloseModalViewController()
         {
-            if (this._currentModalViewController != null)
+            if(_currentModalViewController != null)
             {
-                this._currentModalViewController.DismissModalViewController(true);
-                this._currentModalViewController = null;
+                _currentModalViewController.DismissModalViewController(true);
+                _currentModalViewController = null;
                 return;
             }
 
@@ -65,10 +64,10 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (this._currentModalViewController != null)
+            if(_currentModalViewController != null)
             {
-                var touchView = this._currentModalViewController as IMvxIosView;
-                if (touchView == null)
+                var touchView = _currentModalViewController as IMvxIosView;
+                if(touchView == null)
                 {
                     MvxTrace.Error(
                                    "Unable to close view - modal is showing but not an IMvxIosView");
@@ -76,15 +75,15 @@ namespace MvvmCross.iOS.Views.Presenters
                 }
 
                 var viewModel = touchView.ReflectionGetViewModel();
-                if (viewModel != toClose)
+                if(viewModel != toClose)
                 {
                     MvxTrace.Error(
                                    "Unable to close view - modal is showing but is not the requested viewmodel");
                     return;
                 }
 
-                this._currentModalViewController.DismissViewController(true, () => { });
-                this._currentModalViewController = null;
+                _currentModalViewController.DismissViewController(true, () => { });
+                _currentModalViewController = null;
                 return;
             }
 
