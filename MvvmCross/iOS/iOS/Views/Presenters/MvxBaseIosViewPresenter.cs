@@ -7,6 +7,7 @@
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using UIKit;
 

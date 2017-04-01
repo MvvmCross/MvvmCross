@@ -82,6 +82,11 @@
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
     <Compile Include="Views\MvxPageViewController.cs" />
     <Compile Include="Views\MvxUIRefreshControl.cs" />
+    <Compile Include="Views\Presenters\MvxStackViewPresenter.cs" />
+    <Compile Include="Views\MvxNavigationController.cs" />
+    <Compile Include="Views\IMvxNavModalIosView.cs" />
+    <Compile Include="Views\MvxModalDisplayStyleAttribute.cs" />
+    <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
