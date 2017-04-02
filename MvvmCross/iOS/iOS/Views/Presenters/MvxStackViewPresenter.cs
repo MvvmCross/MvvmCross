@@ -74,6 +74,11 @@ namespace MvvmCross.iOS.Views.Presenters
 
             if(view is IMvxModalIosView)
             {
+                // grab presentation and transition attributes for modal view
+                var attribute = GetMvxModalDisplayStyleAttribute(viewController);
+                var animated = true;
+
+
                 // a modal ViewController can request by itself to be wrapped in a NavigationController
                 if(view is IMvxNavModalIosView)
                 {
@@ -81,10 +86,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     viewController = ModalNavigationController;
                 }
 
-                // setup presentation and transition for modal view
-                var attribute = GetMvxModalDisplayStyleAttribute(viewController);
-                var animated = true;
-
+                // assign animated, presentation and transition styles
                 if(attribute != null)
                 {
                     if(attribute.ModalPresentationStyle.HasValue)
@@ -154,7 +156,7 @@ namespace MvvmCross.iOS.Views.Presenters
             if(CurrentTopViewController.NavigationController == ModalNavigationController)
             {
                 // if the ViewModel to close is the root of the modal navigation stack, then close the entire stack
-                CloseModalViewController(toClose, true);
+                CloseModalViewController(toClose, animated);
                 return;
             }
 
