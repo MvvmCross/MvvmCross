@@ -31,7 +31,7 @@ namespace Playground.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            return new MvxStackViewPresenter(this.ApplicationDelegate, this.Window);
+            return new MvxIosViewPresenter(this.ApplicationDelegate, this.Window);
         }
     }
 }
