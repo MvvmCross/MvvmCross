@@ -4,10 +4,12 @@ using UIKit;
 using Playground.Core.ViewModels;
 using MvvmCross.iOS.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
+    [MvxChildPresentation]
     public partial class ChildView : MvxViewController<ChildViewModel>
     {
         public ChildView(IntPtr handle) : base(handle)

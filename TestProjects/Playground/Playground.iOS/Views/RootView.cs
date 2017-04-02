@@ -4,10 +4,12 @@ using UIKit;
 using MvvmCross.iOS.Views;
 using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class RootView : MvxViewController<RootViewModel>
     {
         public RootView(IntPtr handle) : base(handle)

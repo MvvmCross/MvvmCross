@@ -7,10 +7,10 @@ namespace MvvmCross.iOS.Views.Presenters.Attributes
     {
         public bool WrapInNavigationController { get; set; }
 
-        public UIModalPresentationStyle ModalPresentationStyle { get; private set; }
+        public UIModalPresentationStyle ModalPresentationStyle { get; set; }
 
-        public UIModalTransitionStyle ModalTransitionStyle { get; private set; }
+        public UIModalTransitionStyle ModalTransitionStyle { get; set; }
 
-        public bool Animated { get; private set; }
+        public bool Animated { get; set; } = true;
     }
 }

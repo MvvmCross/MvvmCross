@@ -50,7 +50,6 @@
     <Compile Include="Platform\MvxIosDisplayDensity.cs" />
     <Compile Include="Platform\MvxIosFormFactor.cs" />
     <Compile Include="Views\IMvxIosViewSegue.cs" />
-    <Compile Include="Views\IMvxModalIosView.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxIosPlatformProperties.cs" />
     <Compile Include="Views\IMvxIosViewCreator.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="Views\MvxUIRefreshControl.cs" />
     <Compile Include="Views\Presenters\MvxIosViewPresenter.cs" />
     <Compile Include="Views\MvxNavigationController.cs" />
-    <Compile Include="Views\IMvxNavModalIosView.cs" />
     <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />

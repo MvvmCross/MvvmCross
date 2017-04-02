@@ -204,7 +204,6 @@ namespace MvvmCross.iOS.Views.Presenters
 
             TabBarViewController.ShowTabView(
                 viewController,
-                attribute.WrapInNavigationController,
                 attribute.TabName,
                 attribute.TabIconName,
                 attribute.TabAccessibilityIdentifier);

@@ -4,11 +4,13 @@ using UIKit;
 using MvvmCross.iOS.Views;
 using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    public partial class ModalNavView : MvxViewController<ModalNavViewModel>, IMvxNavModalIosView
+    [MvxModalPresentation(WrapInNavigationController = true)]
+    public partial class ModalNavView : MvxViewController<ModalNavViewModel>
     {
         public ModalNavView(IntPtr handle) : base(handle)
         {
