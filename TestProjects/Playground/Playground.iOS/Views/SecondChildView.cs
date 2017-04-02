@@ -7,10 +7,12 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
+    [MvxChildPresentation]
     public partial class SecondChildView : MvxViewController<SecondChildViewModel>
     {
         public SecondChildView(IntPtr handle) : base(handle)

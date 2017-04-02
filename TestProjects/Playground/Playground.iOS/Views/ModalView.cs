@@ -3,12 +3,13 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using Playground.Core.ViewModels;
 using UIKit;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
-    [MvxModalDisplayStyle(UIModalPresentationStyle.OverFullScreen, UIModalTransitionStyle.CrossDissolve, animated: true)]
     [MvxFromStoryboard("Main")]
-    public partial class ModalView : MvxViewController<ModalViewModel>, IMvxModalIosView
+    [MvxModalPresentation(ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen, ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve)]
+    public partial class ModalView : MvxViewController<ModalViewModel>
     {
         public ModalView(IntPtr handle) : base(handle)
         {
