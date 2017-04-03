@@ -42,25 +42,36 @@ Task("UpdateAppVeyorBuildNumber")
     AppVeyor.UpdateBuildVersion(versionInfo.FullBuildMetaData);
 });
 
-Task("Restore").Does(() => {
-	NuGetRestore(sln);
+FilePath msBuildPath;
+Task("ResolveBuildTools")
+	.Does(() => 
+{
+	var vsLatest = VSWhereLatest();
+	msBuildPath = (vsLatest == null)
+		? null
+		: vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+});
+
+Task("Restore")
+	.IsDependentOn("ResolveBuildTools")
+	.Does(() => {
+	NuGetRestore(sln, new NuGetRestoreSettings {
+		ToolPath = "tools/nuget.exe"
+	});
+	// MSBuild(sln, settings => settings.WithTarget("Restore"));
 });
 
 Task("Build")
+	.IsDependentOn("ResolveBuildTools")
 	.IsDependentOn("Clean")
 	.IsDependentOn("UpdateAppVeyorBuildNumber")
 	.IsDependentOn("Restore")
 	.Does(() =>  {
 
-	var vsLatest = VSWhereLatest();
-	var msBuildPathX64 = (vsLatest == null)
-		? null
-		: vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
-
 	var settings = new MSBuildSettings 
 	{
 		Configuration = "Release",
-		ToolPath = msBuildPathX64
+		ToolPath = msBuildPath
 	};
 
 	settings.Properties.Add("DebugSymbols", new List<string> { "True" });
