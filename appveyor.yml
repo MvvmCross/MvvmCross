@@ -24,7 +24,7 @@
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
   build_script:
-  - ps: .\build.ps1
+  - ps: .\build.ps1 -verbosity Diagnostic
   test: off
   # configuration for "master" branch
 -
@@ -52,5 +52,5 @@
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
   build_script:
-  - ps: .\build.ps1
+  - ps: .\build.ps1 -verbosity Diagnostic
   test: off
