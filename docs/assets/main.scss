@@ -22,7 +22,7 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    100%;
+$content-width:    1200px;
 
 $content-padding: 1%;
 $documentation-width: 75%;
@@ -476,9 +476,6 @@ table tr th :last-child, table tr td :last-child
 }
 
 //reset list
-html{
-    overflow: hidden;
-}
 .menu {
 	margin: 0;
 	padding: 0;
