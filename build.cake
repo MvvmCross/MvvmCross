@@ -1,5 +1,6 @@
-#tool "nuget:?package=GitVersion.CommandLine"
-#tool "nuget:?package=gitlink"
+#tool nuget:?package=GitVersion.CommandLine
+#tool nuget:?package=gitlink
+#tool nuget:?package=vswhere
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -50,12 +51,22 @@ Task("Build")
 	.IsDependentOn("UpdateAppVeyorBuildNumber")
 	.IsDependentOn("Restore")
 	.Does(() =>  {
-	
-	DotNetBuild(sln, 
-		settings => settings.SetConfiguration("Release")
-							.WithProperty("DebugSymbols", "true")
-            				.WithProperty("DebugType", "Full")
-							.WithTarget("Build"));
+
+	var vsLatest = VSWhereLatest();
+	var msBuildPathX64 = (vsLatest == null)
+		? null
+		: vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+	var settings = new MSBuildSettings 
+	{
+		Configuration = "Release",
+		ToolPath = msBuildPathX64
+	};
+
+	settings.Properties.Add("DebugSymbols", new List<string> { "True" });
+	settings.Properties.Add("DebugType", new List<string> { "Full" });
+
+	MSBuild(sln, settings);
 });
 
 Task("GitLink")
