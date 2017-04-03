@@ -34,7 +34,7 @@ $on-laptop:        800px;
 $searchbar-width: 110px;
 $searchbar-expanded-width: 220px;
 
-$social-icons-spacing: 5px;
+$social-icons-spacing: 4px;
 
 $syntax-background-color: #f2f2f2;
 // Minima also includes a mixin for defining media queries.
@@ -64,7 +64,7 @@ h2,h3,h4,h5,h6
     width: 129px;
     height: 40px;
 }
-.page-link{margin-left: 36px;}
+
 .site-header
 {
     background-color: #FFF;
@@ -83,6 +83,7 @@ h2,h3,h4,h5,h6
         font-size: 16px;
         font-weight: bold;
         text-transform: uppercase;
+        margin-left: 30px;
     }
 }
 @media screen and (max-width: 600px) {

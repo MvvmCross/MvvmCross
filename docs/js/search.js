@@ -37,11 +37,10 @@
         }
     }
 
-
     var searchTerm = getQueryVariable('query');
 
     if (searchTerm) {
-         document.getElementById('search-box').setAttribute("value", searchTerm);
+         document.getElementById('search').setAttribute("value", searchTerm);
          if (searchTerm) {
              var idx = lunr(function() {
                  this.field('id');
