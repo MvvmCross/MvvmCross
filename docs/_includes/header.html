@@ -31,8 +31,12 @@
           <input class="search-btn" value="search" type="submit"/>
         </form>-->
 
-        
-
+        <div class="search-box">
+            <span class="icon"><i class="fa fa-search"></i></span>
+            <form id="searchthis" action="{{ site.baseurl }}/search" style="display:inline;" method="get">
+            <input type="search" id="search" placeholder="Search..." />
+            </form>
+        </div>
       </div>
     </nav>
 
