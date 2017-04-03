@@ -31,8 +31,8 @@ $documentation-menu-width: (100% - $documentation-width) - ($content-padding * 4
 $on-palm:          600px;
 $on-laptop:        800px;
 
-$searchbar-width: 140px;
-
+$searchbar-width: 130px;
+$social-icons-spacing: 5px;
 
 $syntax-background-color: #f2f2f2;
 // Minima also includes a mixin for defining media queries.
@@ -62,7 +62,7 @@ h2,h3,h4,h5,h6
     width: 129px;
     height: 40px;
 }
-
+.page-link{margin-left: 36px;}
 .site-header
 {
     background-color: #FFF;
@@ -113,7 +113,31 @@ input:focus {
     border:0 none;
     width:$searchbar-width;
  }
-
+//social icons
+.ic-stackoverflow {
+	width: 17.5px;
+	height: 23px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-linkedin {
+	width: 25px;
+	height: 25px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-twitter {
+	width: 25px;
+	height: 20.5px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-github {
+	width: 24px;
+	height: 23.5px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
 //homepage
 .landing-intro
 {
@@ -306,39 +330,6 @@ a:visited {
         .company-text
         {
             padding:60px 0;
-
-            h2
-            {
-                font-size: 30px;
-                color: #37474f;
-                font-weight: bold;
-                text-transform: uppercase;
-                margin-bottom: 0px;
-            }
-
-            div
-            {
-                font-size: 24px;
-                color: #37474f;
-                line-height: 1.25;
-            }
-
-        }
-    }
-}
-
-.sponsors
-{
-    background-color: #eceff1;
-    padding-bottom: 50px;
-
-    .wrapper
-    {
-        text-align: center;
-
-        .sponsors-text
-        {
-            padding:60px;
 
             h2
             {
