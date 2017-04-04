@@ -29,7 +29,9 @@ and provide you with a IDE tooltip to transform the code into:
 
 ```c#
 [Activity(...)]
-class FirstView : MvxActivity<FirstViewModel> { ... }
+class FirstView : MvxActivity<FirstViewModel> {
+    ...
+}
 ```
 
 # What's in it?

@@ -19,8 +19,8 @@ This presenter provides 3 panels as view “targets”, a main central panel, a 
 A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
 ```c#
 public MvxPanelPresentationAttribute(
-	MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, 
-	MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
+    MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel,
+    MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
 {
 }
 ```
@@ -28,9 +28,9 @@ This attribute is used by the presenter to make decisions about what to do with 
 ```c#
 [Register("CenterPanelView")]
 [MvxPanelPresentation(
-	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
-public class CenterPanelView 
-	: BaseViewController<CenterPanelViewModel>
+     MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+public class CenterPanelView
+    : BaseViewController<CenterPanelViewModel>
 {
 }
 ```
@@ -56,19 +56,19 @@ You can see an example of this below:
 ```c#
 [Register("MasterView")]
 [MvxPanelPresentation(
-	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, 
-	true, MvxSplitViewBehaviour.Master)]
-public class MasterView 
-	: BaseViewController<MasterViewModel>
+     MvxPanelEnum.Center, MvxPanelHintType.ActivePanel,
+     true, MvxSplitViewBehaviour.Master)]
+public class MasterView
+    : BaseViewController<MasterViewModel>
 {
 }
 
 [Register("DetailView")]
 [MvxPanelPresentation(
-	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, 
-	true, MvxSplitViewBehaviour.Detail)]
-public class DetailView 
-	: BaseViewController<DetailViewModel>
+     MvxPanelEnum.Center, MvxPanelHintType.ActivePanel,
+     true, MvxSplitViewBehaviour.Detail)]
+public class DetailView
+    : BaseViewController<DetailViewModel>
 {
 }
 ```
@@ -93,8 +93,8 @@ You can make use of this class using the following standard inheritance syntax:
 
 ```c#
 [Register("KeyboardHandlingView")]
-public class KeyboardHandlingView 
-	: MvxBaseViewController<KeyboardHandlingViewModel>
+public class KeyboardHandlingView
+    : MvxBaseViewController<KeyboardHandlingViewModel>
 {
 }
 ```
@@ -104,7 +104,7 @@ In order to enable the keyboard handing features you need to first call the init
 ```c#
 public override void ViewDidLoad()
 {
-	base.ViewDidLoad();
+    base.ViewDidLoad();
     // setup the keyboard handling
     InitKeyboardHandling();
 

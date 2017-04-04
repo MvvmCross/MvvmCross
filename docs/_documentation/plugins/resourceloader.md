@@ -11,14 +11,16 @@ The `ResourceLoader` plugin provides access to files bundled within the app pack
 On several platforms, the ResourceLoader plugin requires an `IMvxFileStore` is available. One easy way to supply this is to load the `File` plugin.
 
 The main interface supplied by this plugin is:
+
 ```c#
 public interface IMvxResourceLoader
 {
-  bool ResourceExists(string resourcePath);
-  string GetTextResource(string resourcePath);
-  void GetResourceStream(string resourcePath, Action<Stream> streamAction);
+    bool ResourceExists(string resourcePath);
+    string GetTextResource(string resourcePath);
+    void GetResourceStream(string resourcePath, Action<Stream> streamAction);
 }
 ```
+
 For a text file 'Hello.txt' bundled in a folder 'Foo', this can be called as:    
 
     var loader = Mvx.Resolve<IMvxResourceLoader>();
@@ -28,3 +30,4 @@ Samples using the ResourceLoader plugin include:
 
 - Babel - JsonLocalisation - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/Babel
 - Conference - the sessions are loaded from Json resources - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20CirriousConference
+
