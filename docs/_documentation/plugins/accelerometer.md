@@ -4,7 +4,7 @@ title: Accelerometer
 category: Plugins
 ---
 The `Accelerometer` plugin provides access to a platforms accelerometer using a singleton implementing the API.
-```c# 
+```c#
  public interface IMvxAccelerometer
  {
    void Start();

@@ -72,7 +72,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content.
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
+```c#
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.WindowsUWP.Platform;
@@ -101,14 +101,14 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 * modify the `OnLaunched` callback
 
  * replace this lines
-```c# 
+```c#
 // When the navigation stack isn't restored navigate to the first page,
 // configuring the new page by passing required information as a navigation
 // parameter
 rootFrame.Navigate(typeof(MainPage), e.Arguments);
 ```
   * with these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
-```c# 
+```c#
 var setup = new Setup(rootFrame);
 setup.Initialize();
 
@@ -116,7 +116,7 @@ var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
 After you've done this your code might look like:
-```c# 
+```c#
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -263,7 +263,7 @@ This requires the addition of:
 ```using MvvmCross.WindowsUWP.Views;```
 
 Altogether this looks like:
-```c# 
+```c#
 using MvvmCross.WindowsUWP.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238

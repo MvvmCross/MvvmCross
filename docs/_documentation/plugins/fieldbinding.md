@@ -11,7 +11,7 @@ When FieldBinding is loaded, then MvvmCross data-binding:
 - can use `INotifyChanged` for dynamic fields.
 
 An example, Rio-based ViewModel using both FieldBinding and MethodBinding is:
-```c# 
+```c#
 public class FirstViewModel
        : MvxViewModel
     {
@@ -45,7 +45,7 @@ public class FirstViewModel
     }
 ```
 The field in this class could be accessed using Android syntax:
-```c# 
+```c#
 <TextView
 	android:layout_width='fill_parent'
   android:layout_height='wrap_content'
