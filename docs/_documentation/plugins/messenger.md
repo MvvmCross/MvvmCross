@@ -21,29 +21,35 @@ The basic use of the `Messenger` is:
 
 - define one or more Message classes for communication between components. These should inherit from `MvxMessage` - e.g.:
 
-```cs
+```c#
 public class LocationMessage
-  : MvxMessage
-  {
-    public LocationMessage(object sender, double lat, double lng) 
-      : base(sender)
-      {
+    : MvxMessage
+{
+    public LocationMessage(object sender, double lat, double lng)
+    : base(sender)
+    {
         Lng = lng;
         Lat = lat;
-      }
+    }
 
-    public double Lat { get; private set; }
-    public double Lng { get; private set; }
-  }
+    public double Lat {
+        get;
+        private set;
+    }
+    public double Lng {
+        get;
+        private set;
+    }
+}
 ```
 
 - define the classes which will create and send these Messages - e.g. a `LocationService` might create and send `LocationMessage`s using
 
-```cs
+```c#
 var message = new LocationMessage(
-  this,
-  location.Coordinates.Latitude,
-  location.Coordinates.Longitude
+    this,
+    location.Coordinates.Latitude,
+    location.Coordinates.Longitude
 );
 
 _messenger.Publish(message);
@@ -51,25 +57,25 @@ _messenger.Publish(message);
 
 - define the classes which will subscribe to and receive these messages. Each of these classes must call one of the `Subscribe` methods on the `IMvxMessenger` and **must store the returned token**. For example part of a ViewModel receivin `LocationMessage`s might look like:
 
-```cs
-public class LocationViewModel 
-  : MvxViewModel
-  {
+```c#
+public class LocationViewModel
+    : MvxViewModel
+{
     private readonly MvxSubscriptionToken _token;
 
     public LocationViewModel(IMvxMessenger messenger)
     {
-      _token = messenger.Subscribe<LocationMessage>(OnLocationMessage);
+        _token = messenger.Subscribe<LocationMessage>(OnLocationMessage);
     }
 
     private void OnLocationMessage(LocationMessage locationMessage)
     {
-      Lat = locationMessage.Lat;
-      Lng = locationMessage.Lng;
+        Lat = locationMessage.Lat;
+        Lng = locationMessage.Lng;
     }
 
     // remainder of ViewModel
-  }
+}
 ```
 
 The three different options for subscribing for messages differ only in terms of which thread messages will be passed back on:
@@ -89,15 +95,15 @@ However, in many cases, `Unsubscribe`/`Dispose` is never called. Instead listene
 
 This GC-based unsubscription will occur whenever the subscription token returned from `Subscribe` is Garbage Collected - so if the token is **not** stored, then unsubscription may occur immediately - e.g. in this method
 
-```cs
+```c#
 public void MayNotEverReceiveAMessage()
 {
-  var token = _messenger.Subscribe<MyMessage>((message) => {
-  Mvx.Trace("Message received!");
-  });
-  // token goes out of scope now 
-  // - so will be garbage collected *at some point*
-  // - so trace may never get called
+    var token = _messenger.Subscribe<MyMessage>((message) => {
+        Mvx.Trace("Message received!");
+    });
+    // token goes out of scope now
+    // - so will be garbage collected *at some point*
+    // - so trace may never get called
 }
 ```
 
@@ -106,21 +112,28 @@ For any code wishing to observe the current subscription status on any message t
 - using the `HasSubscriptionsFor` and `CountSubscriptionsFor` methods
 - by subscribing for `MvxSubscriberChangeMessage` messages - the Messenger itself publishes these `MvxSubscriberChangeMessage` messages whenever subscriptions are made, are removed or have expired.
 
-```cs
+```c#
 public class MvxSubscriberChangeMessage : MvxMessage
 {
-   public Type MessageType { get; private set; }
-   public int SubscriberCount { get; private set; }
+    public Type MessageType {
+        get;
+        private set;
+    }
+    public int SubscriberCount {
+        get;
+        private set;
+    }
 
-   public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0) 
-   : base(sender)
-   {
-      SubscriberCount = countSubscribers;
-      MessageType = messageType;
-   }
+    public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0)
+    : base(sender)
+    {
+        SubscriberCount = countSubscribers;
+        MessageType = messageType;
+    }
 }
 ```
 
 These mechanisms allow you to author singleton services which can adapt their resource requirements according to the current needs of the app. 
 
 For example, suppose you have a service which tracks stock prices using calls to a web service. Individual clients might subscribe to Messages from this service for individual stock codes. The stock service can track when subscribers are present for each stock code and can then adjust which network calls it makes.
+

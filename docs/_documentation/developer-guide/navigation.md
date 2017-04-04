@@ -52,23 +52,23 @@ To add a splashscreen:
 
 3. Add a simple Activity for the splashscreen. This will contain C# like:
 
-    ```cs
-    using Android.App;
-    using Cirrious.MvvmCross.Droid.Views;
+```c#
+using Android.App;
+using Cirrious.MvvmCross.Droid.Views;
 
-    namespace CalcApp.UI.Droid
+namespace CalcApp.UI.Droid
+{
+[Activity(Label = "My App", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
+public class SplashScreenActivity
+    : MvxSplashScreenActivity
+{
+    public SplashScreenActivity()
+    : base(Resource.Layout.SplashScreen)
     {
-        [Activity(Label = "My App", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
-        public class SplashScreenActivity
-            : MvxSplashScreenActivity
-        {
-            public SplashScreenActivity()
-                : base(Resource.Layout.SplashScreen)
-            {
-            }
-        }
     }
-    ```
+}
+}
+```
 
   This `SplashScreenActivity` uses the base `MvxSplashScreenActivity` which will start the MvvmCross framework and, when initialization is complete, will then use the `IMvxAppStart` interface.
 
@@ -86,30 +86,30 @@ If you wanted instead to start with a different `ViewModel` - e.g. with `LoginVi
 
 If you wanted instead to start with some logic, then you can do this by providing a custom `IMvxAppStart` implementation - e.g.:
 
-```cs
-    public class CustomAppStart 
-        : MvxNavigatingObject
-        , IMvxAppStart
+```c#
+public class CustomAppStart
+    : MvxNavigatingObject
+    , IMvxAppStart
+{
+    private readonly ILoginService _service;
+
+    public CustomAppStart(ILoginService service)
     {
-        private readonly ILoginService _service;
+        _service = service;
+    }
 
-        public CustomAppStart(ILoginService service)
+    public void Start(object hint = null)
+    {
+        if (!_service.IsLoggedIn)
         {
-            _service = service;
+            ShowViewModel<LoginViewModel>();
         }
-
-        public void Start(object hint = null)
+        else
         {
-            if (!_service.IsLoggedIn)
-            {
-                ShowViewModel<LoginViewModel>();
-            }
-            else
-            {
-                ShowViewModel<TipViewModel>();
-            }
+            ShowViewModel<TipViewModel>();
         }
     }
+}
 ```
 
 Notice that to request this initial navigation, the `CustomAppStart` uses the `ShowViewModel<TViewModel>` method on the `MvxNavigatingObject` base class. We'll see this method used throughout this article - it is the core of the MvvmCross navigation mechanism.
@@ -137,30 +137,30 @@ To see an example of this, let's set up a simple Android application.
 
 2. Within this Core application add two `ViewModel`s:
 
-    ```cs
-	using System;
-	using System.Windows.Input;
-	using Cirrious.CrossCore.Platform;
-	using Cirrious.MvvmCross.ViewModels;
+```c#
+using System;
+using System.Windows.Input;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
-	namespace MyApp.Core
-	{
-		public class FirstViewModel : MvxViewModel
-		{
-			public ICommand GoCommand
-			{
-				get
-				{
-					return new MvxCommand(() => ShowViewModel<SecondViewModel>();
-				}
-			}
-		}		
+namespace MyApp.Core
+{
+public class FirstViewModel : MvxViewModel
+{
+    public ICommand GoCommand
+    {
+        get
+        {
+            return new MvxCommand(() => ShowViewModel<SecondViewModel>();
+        }
+    }
+}
 
-		public class SecondViewModel : MvxViewModel
-		{
-		}
-	}
-    ```		
+public class SecondViewModel : MvxViewModel
+{
+}
+}
+```
 
 3. For `IMvxAppStart` choose to always show the `FirstViewModel` using:
 
@@ -227,12 +227,15 @@ To achieve this, the navigation from `MasterViewModel` to `DetailViewModel` will
 
 - we declare a class `DetailParameters` for the navigation:
 
-    ```cs
-    public class DetailParameters
-    {
-        public int Index { get; set; }
+```c#
+public class DetailParameters
+{
+    public int Index {
+        get;
+        set;
     }
-    ```
+}
+```
 
 - the `MasterViewModel` makes `ShowViewModel` a call like:
 
@@ -240,12 +243,12 @@ To achieve this, the navigation from `MasterViewModel` to `DetailViewModel` will
 
 - the `DetailViewModel` declares an `Init` method in order to receive this `DetailParameters`:
 
-    ```cs
-    public void Init(DetailParameters parameters)
-    {
-        // use the parameters here
-    }
-    ```
+```c#
+public void Init(DetailParameters parameters)
+{
+    // use the parameters here
+}
+```
 
 **Note** that the `DetailParameters` class used here must be a 'simple' class used only for these navigations:
 
@@ -281,12 +284,12 @@ For example, you can:
 
 - in the `DetailViewModel` declare an `Init` method in order to receive this `index` as:
 
-    ```cs
-    public void Init(int index)
-    {
-        // use the index here
-    }
-    ```
+```c#
+public void Init(int index)
+{
+    // use the index here
+}
+```
 
 **Note** that due to serialization requirements, the only available parameter types used within this technique are only:
 

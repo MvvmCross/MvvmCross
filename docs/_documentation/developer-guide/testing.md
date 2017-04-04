@@ -39,12 +39,12 @@ using NUnit.Framework;
 public class MyTest : MvxIoCSupportingTest
 {
     [Test]
-	public void TestViewModel()
-	{
-		base.Setup(); // from MvxIoCSupportingTest
-        
+    public void TestViewModel()
+    {
+        base.Setup(); // from MvxIoCSupportingTest
+
         // your test code
-	}
+    }
 }
 ```
 
@@ -55,7 +55,7 @@ Now that you have the bare bones for your test to work, you can use the `Ioc` pr
 Also, there's a special method named `AdditionalSetup()` which can be overridden to automatically do custom initialisation: 
 
 ```c#
-protected override void AdditionalSetup() 
+protected override void AdditionalSetup()
 {
     // an automatically Mocked service:
     var firstService = new Mock<IFirstService>();
@@ -99,9 +99,12 @@ which can be registered as:
 
 ```c#
 
-protected MockDispatcher MockDispatcher { get; private set; }
+protected MockDispatcher MockDispatcher {
+    get;
+    private set;
+}
 
-protected override void AdditionalSetup() 
+protected override void AdditionalSetup()
 {
     MockDispatcher = new MockDispatcher();
     Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher);
@@ -113,16 +116,19 @@ If you are also using object based navigation - e.g. `ShowViewModel<MyViewModel>
 
 ```c#
 
-protected MockDispatcher MockDispatcher { get; private set; }
+protected MockDispatcher MockDispatcher {
+    get;
+    private set;
+}
 
-protected override void AdditionalSetup() 
+protected override void AdditionalSetup()
 {
-       MockDispatcher = new MockDispatcher();
-       Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher);
-       Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher);
+    MockDispatcher = new MockDispatcher();
+    Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher);
+    Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher);
 
-       // for navigation parsing
-       Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
+    // for navigation parsing
+    Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 }
 ```
 
