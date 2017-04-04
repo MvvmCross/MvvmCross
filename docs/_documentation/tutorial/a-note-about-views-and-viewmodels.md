@@ -12,14 +12,14 @@ We can however link Views with ViewModels that have different names and have the
 
 Instead of using the normal view base classes, there are generic versions available for use.  For example, we could have used `MvxViewController<TipViewModel>` instead of `MvxViewController`.  Unfortunately on Windows you can't use generic types within XAML.  You therefore need an extra class such as this:
 
-
-```c# 
+```c#
 public class TipViewBase : MvxWindowsPage<TipViewModel>
 {
 }
 ```
 The `TipView` class can then derive from this class and the following XAML can be used:
-```c# 
+
+```xml
 <views:TipViewBase
     xmlns:views="using:MvvmCross.WindowsUWP.Views"
     ...
@@ -29,7 +29,8 @@ The `TipView` class can then derive from this class and the following XAML can b
 ## Explicit ViewModel properties
 
 The `ViewModel` property of a View can be explicitly defined.  In the case of `TipView`, you would use the following code:
-```c# 
+
+```c#
 public new TipViewModel ViewModel
 {
     get { return (TipViewModel)base.ViewModel; }

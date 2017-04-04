@@ -150,7 +150,7 @@ Finally, we will create a sample view. Create a folder `Views` in the UWP projec
 
 Open the XAML file and replace its contents with the following XAML code:
 
-```c# 
+```xml
 <views:MvxWindowsPage
     x:Class="MvvmCrossDocs.WindowsUniversal.Views.FirstView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
