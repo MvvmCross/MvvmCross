@@ -4,7 +4,7 @@ title: Share
 category: Plugins
 ---
 The `Share` plugin provides implementations of:
-```c# 
+```c#
 public interface IMvxShareTask
 {
   void ShareShort(string message);

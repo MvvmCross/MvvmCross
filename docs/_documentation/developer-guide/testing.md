@@ -30,7 +30,7 @@ Your test classes should inherit from [`MvxIoCSupportingTest`](https://github.co
 
 Each test method should then call the `Setup` method:
 
-```csharp
+```c#
 using MvvmCross.Test.Core;
 using Moq;
 using NUnit.Framework;
@@ -54,7 +54,7 @@ Now that you have the bare bones for your test to work, you can use the `Ioc` pr
 
 Also, there's a special method named `AdditionalSetup()` which can be overridden to automatically do custom initialisation: 
 
-```csharp
+```c#
 protected override void AdditionalSetup() 
 {
     // an automatically Mocked service:
@@ -97,7 +97,7 @@ When creating `ViewModel` or `Service` test objects, one common requirement is t
 
 which can be registered as:
 
-```csharp
+```c#
 
 protected MockDispatcher MockDispatcher { get; private set; }
 
@@ -111,7 +111,7 @@ protected override void AdditionalSetup()
 
 If you are also using object based navigation - e.g. `ShowViewModel<MyViewModel>(new { id = 12 })` - then you may also need to register an `IMvxStringToTypeParser` parser to facilitate this:
 
-```csharp
+```c#
 
 protected MockDispatcher MockDispatcher { get; private set; }
 

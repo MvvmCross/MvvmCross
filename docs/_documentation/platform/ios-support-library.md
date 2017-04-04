@@ -17,7 +17,7 @@ Currently the classes available in this library consists of:
 This presenter provides 3 panels as view “targets”, a main central panel, a right side panel and a left side panel.  Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
 
 A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
-```c# 
+```c#
 public MvxPanelPresentationAttribute(
 	MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, 
 	MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
@@ -25,7 +25,7 @@ public MvxPanelPresentationAttribute(
 }
 ```
 This attribute is used by the presenter to make decisions about what to do with the view request when showing this view using the syntax shown below:
-```c# 
+```c#
 [Register("CenterPanelView")]
 [MvxPanelPresentation(
 	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
@@ -53,7 +53,7 @@ The issue this behaviour deals with is that often iOS application will only user
 
 You can see an example of this below:
 
-```c# 
+```c#
 [Register("MasterView")]
 [MvxPanelPresentation(
 	MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, 
@@ -91,7 +91,7 @@ The feature requires there to be a UIScrollView in the view hierarchy in order t
 
 You can make use of this class using the following standard inheritance syntax:
 
-```c# 
+```c#
 [Register("KeyboardHandlingView")]
 public class KeyboardHandlingView 
 	: MvxBaseViewController<KeyboardHandlingViewModel>
@@ -101,7 +101,7 @@ public class KeyboardHandlingView
 
 In order to enable the keyboard handing features you need to first call the initialising method during view initialisation, such as:
 
-```c# 
+```c#
 public override void ViewDidLoad()
 {
 	base.ViewDidLoad();
@@ -123,7 +123,7 @@ public override void ViewDidLoad()
 
 In addition to calling this initialisation method you also need to override the following method and ensure that it returns true:
 
-```c# 
+```c#
 public override bool HandlesKeyboardNotifications()
 {
     return true;

@@ -43,7 +43,7 @@ We do actually want a `MainWindow` for this app :)
 ## Install MvvmCross
 
 In the Package Manager Console, enter...
-```c# 
+```c#
 Install-Package MvvmCross.Core
 ```
 ## Add a reference to TipCalc.Core.csproj
@@ -70,7 +70,7 @@ Most of this functionality is provided for you automatically. Within your Wpf UI
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
+```c#
 using System.Windows.Threading;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Wpf.Platform;
@@ -100,11 +100,11 @@ However, here we will just use a 'one window with one view' approach.
 To achieve this, add some lines to the WPF `App` class that:
 
 * provide a private flag to determine if setup has already been done
-```c# 
+```c#
 bool _setupComplete;
 ```
 * perform the setup - using a `Simple` presenter based on `MainWindow`
-```c# 
+```c#
 void DoSetup()
 {
     var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
@@ -119,7 +119,7 @@ void DoSetup()
 }
 ```
 * override the `OnActivated` event to perform this startup        
-```c# 
+```c#
 protected override void OnActivated(System.EventArgs e)
 {
     if (!_setupComplete)
@@ -129,7 +129,7 @@ protected override void OnActivated(System.EventArgs e)
 }
 ```
 After you've done this your `App.xaml.cs` might look like:
-```c# 
+```c#
 using System.Windows;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -183,11 +183,11 @@ The page will generate:
 Open the TipView.xaml.cs file.
 
 Change the class to inherit from `MvxWpfView`
-```c# 
+```c#
 public partial class TipView : MvxWpfView
 ```
 Altogether this looks like:
-```c# 
+```c#
 using MvvmCross.Wpf.Views;
 
 namespace TipCalc.UI.Wpf.Views

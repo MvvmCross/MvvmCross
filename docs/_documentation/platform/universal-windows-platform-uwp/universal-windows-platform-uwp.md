@@ -27,7 +27,7 @@ Now we will need to add some basic code to get MvvmCross up and running.
 
 First inside the `MvvmCrossDocs.Core` portable project create a file named `App.cs` and enter the following:
 
-```c# 
+```c#
 using MvvmCross.Platform.IoC;
 
 namespace MvvmCrossDocs.Core
@@ -49,7 +49,7 @@ namespace MvvmCrossDocs.Core
 
 As you can see, in this code we are registering a first view model, which we will create now to be able to demonstrate the functionality of our setup later. Create a folder called `ViewModels` and inside a new file `FirstViewModel.cs`.
 
-```c# 
+```c#
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCrossDocs.Core.ViewModels
@@ -69,7 +69,7 @@ namespace MvvmCrossDocs.Core.ViewModels
 
 Now we turn our attention to the Universal Windows Project. In the root of the project create a source file called `Setup.cs` with the following contents:
 
-```c# 
+```c#
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 using MvvmCross.WindowsUWP.Platform;
@@ -99,7 +99,7 @@ namespace MvvmCrossDocs.WindowsUniversal
 
 As you can see, the `DebugTrace` class does not exist. This class is recommended for all MvvmCross projects and it facilitates platform-based console logging during debug. Create a new file `DebugTrace.cs` in the root of your UWP project and paste the following:
 
-```c# 
+```c#
 using System;
 using System.Diagnostics;
 using MvvmCross.Platform.Platform;
@@ -135,7 +135,7 @@ namespace MvvmCrossDocs.WindowsUniversal
 
 Now navigate to the `App.xaml.cs` file in Solution Explorer. We want to start MvvmCross when the app launches. For that to happen, find the conditional `if` check for app's `rootFrame.Content` and replace it with the following:
 
-```c# 
+```c#
 if (rootFrame.Content == null)
 {
     var setup = new Setup( rootFrame );
