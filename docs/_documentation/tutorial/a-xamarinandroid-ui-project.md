@@ -109,7 +109,7 @@ To achieve the basic layout:
 
 - We'll edit this using either the Xamarin Android designer or the Visual Studio XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense.
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -119,8 +119,7 @@ To achieve the basic layout:
 
 - We'll add a local app namespace - `http://schemas.android.com/apk/res-auto` - this is just like adding a namespace in XAML.
 
-
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
@@ -133,7 +132,7 @@ To achieve the basic layout:
 
 - Within this layout we'll add some `TextView`s to provide some static text labels - for XAMLites, these are like `TextBlock`s
 
-```
+```xml
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -150,7 +149,7 @@ To achieve the basic layout:
 
 - We'll also add a short, wide `View` with a yellow background to provide a small amount of chrome:
 
-```
+```xml
 <View
     android:layout_width="match_parent"
     android:layout_height="1dp"
@@ -161,7 +160,7 @@ To achieve the basic layout:
 
   - An `EditText` for text data entry of the `SubTotal` - for XAMLites, this is a `TextBox`
 
-```
+```xml
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -170,7 +169,7 @@ To achieve the basic layout:
 
   - A `SeekBar` for touch/slide entry of the `Generosity` - for XAMLites, this is like a `ProgressBar`:
 
-```
+```xml
 <SeekBar
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -180,7 +179,7 @@ To achieve the basic layout:
 
   - We'll add a `TextView` to display the `Tip` that results from the calculation:
 
-```
+```xml
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -189,7 +188,7 @@ To achieve the basic layout:
 
 Put together, this looks like:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
