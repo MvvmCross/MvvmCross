@@ -57,7 +57,6 @@ h2,h3,h4,h5,h6
 }
 .page-content{
     padding: 0px;
-    padding-top: 70px;
 }
 .header-logo
 {
@@ -70,9 +69,10 @@ h2,h3,h4,h5,h6
     background-color: #FFF;
     border-bottom: 2px solid #69f0ae;
     border-top:0px;
-    right:0px;
-    left:0px;
-    position: fixed;
+}
+.clear-menu
+{
+    height: 60px; //to clear the fixed height of the menu with a relative position
 }
 .site-nav
 {
