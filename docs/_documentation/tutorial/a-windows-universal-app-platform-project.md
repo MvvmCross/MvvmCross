@@ -299,6 +299,7 @@ To add the XAML user interface for our tip calculator, we will add a StackPanel 
   * a bound `TextBlock` for the `Tip`
 
 The full page will look like:
+
 ```xml
 <views:MvxWindowsPage
     x:Class="TipCalc.UI.UWP.Views.TipView"

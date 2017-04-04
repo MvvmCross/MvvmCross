@@ -213,18 +213,21 @@ This will open the XAML editor within Visual Studio.
 Just as with the WindowsPhone and WindowsStore, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 Change the root node from:
+
 ```xml
 <UserControl 
          ...
 </UserControl>
 ```
 to:
+
 ```xml
 <views:MvxWpfView 
 	xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"                  
         ...
 </views:MvxWpfView>
 ```
+
 To add the XAML user interface for our tip calculator, we will add exactly the same XAML as we added inside the `ContentPanel` grid for the Windows UWP example. This includes:
 
 * a `StackPanel` container, into which we add:
@@ -234,6 +237,7 @@ To add the XAML user interface for our tip calculator, we will add exactly the s
   * a bound `TextBlock` for the `Tip`
 
 This will produce finished XAML like:
+
 ```xml
 <views:MvxWpfView
     x:Class="TipCalc.UI.Wpf.Views.TipView"
