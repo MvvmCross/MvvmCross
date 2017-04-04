@@ -442,6 +442,7 @@ To then add the XAML user interface for our tip calculator, we will edit the `Co
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
+
 ```xml
 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
     <StackPanel>
