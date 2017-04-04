@@ -33,7 +33,11 @@ The `ViewModel` property of a View can be explicitly defined.  In the case of `T
 ```c#
 public new TipViewModel ViewModel
 {
-    get { return (TipViewModel)base.ViewModel; }
-    set { base.ViewModel = value; }
+    get {
+        return (TipViewModel)base.ViewModel;
+    }
+    set {
+        base.ViewModel = value;
+    }
 }
 ```

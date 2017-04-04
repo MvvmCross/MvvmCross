@@ -5,14 +5,14 @@ category: Plugins
 ---
 The `PictureChooser` plugin provides implementations of:
 
-```cs
+```c#
 public interface IMvxPictureChooserTask
 {
-  void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                Action assumeCancelled);
+    void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                                  Action assumeCancelled);
 
-  void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                   Action assumeCancelled);
+    void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                     Action assumeCancelled);
 }
 ```
 
@@ -22,16 +22,16 @@ This interface is designed for single use only - i.e. each time you require a pi
 
 The interface can be used as:
 
-```cs
+```c#
 var task = Mvx.Resolve<IMvxPictureChooserTask>();
 task.ChoosePictureFromLibrary(500, 90,
-                              stream => {
-                                // use the stream
-                                // expect the stream to be disposed after immediately this method returns.
-                              },
-                              () => {
-                                // perform any cancelled operation
-                              });
+stream => {
+    // use the stream
+    // expect the stream to be disposed after immediately this method returns.
+},
+() => {
+    // perform any cancelled operation
+});
 ```
 
 **Note:** Using this interface well on Android is very difficult.
@@ -44,23 +44,23 @@ There is a simple demo for `IMvxPictureChooserTask` in [PictureTaking](https://g
 
 **Note:** On Windows Phone 8.0, an additional implementation is available:
 
-```cs
+```c#
 public interface IMvxCombinedPictureChooserTask
 {
-  void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                           Action assumeCancelled);
+    void ChooseOrTakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+                             Action assumeCancelled);
 }
 ```
 
 Client code can test for the availability of this interface using:
 
-```cs
+```c#
 var isAvailable = Mvx.CanResolve<IMvxCombinedPictureChooserTask>();
 ```
 
 or:
 
-```cs
+```c#
 IMvxCombinedPictureChooserTask combined;
 var isAvailable = Mvx.TryResolve(out combined);
 ```
@@ -74,14 +74,14 @@ Windows Phone 8.1 and Windows 8.1 API hasn't converged entirely and there are di
 
 Hence in your constructor of your page add:
 
-```
+```c#
 var view = CoreApplication.GetCurrentView();
 view.Activated += ViewOnActivated;
 ```
 
 The `ViewOnActivated` `EventHandler` will look something like this:
 
-```cs
+```c#
 private void ViewOnActivated(CoreApplicationView sender, IActivatedEventArgs args)
 {
     var continuationArgs = args as FileOpenPickerContinuationEventArgs;
@@ -93,13 +93,14 @@ private void ViewOnActivated(CoreApplicationView sender, IActivatedEventArgs arg
 
 The `ContinueFileOpenPicker()` method in the `ViewModel` simply calls the same method on the `IMvxPictureChooserTask`:
 
-```cs
+```c#
 public void ContinueFilePicker(object args)
 {
     if (_currentChooserTask == null) return;
-            
+
     _currentChooserTask.ContinueFileOpenPicker(args);
 }
 ```
 
 If you don't want to expose this method in your `ViewModel`, the alternative is to pass a message using `IMvxMessenger` instead.
+
