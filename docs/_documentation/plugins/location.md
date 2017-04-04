@@ -4,7 +4,7 @@ title: Location
 category: Plugins
 ---
 The `Location` plugin provides access to GeoLocation (typically GPS) functionality via the API:
-```c# 
+```c#
 public interface IMvxGeoLocationWatcher
 {
   void Start(
@@ -20,7 +20,7 @@ The `Location` plugin is implemented on all platforms EXCEPT Wpf.
 Because of the `Action` based nature of the `IMvxGeoLocationWatcher` API, it's generally best **not** to use this interface directly inside ViewModels, but instead to use the API in a singleton service which can then send Messages to your ViewModels.
 
 An example implementation of such a service is:
-```c# 
+```c#
 public class LocationService
   : ILocationService
   {

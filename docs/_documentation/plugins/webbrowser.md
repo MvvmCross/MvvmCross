@@ -4,7 +4,7 @@ title: WebBrowser
 category: Plugins
 ---
 The `WebBrowser` plugin provides cross platform support for showing web pages using the external web browser using:
-```c# 
+```c#
 private void MySampleCommand()
 {
    PluginLoader.Instance.EnsureLoaded();

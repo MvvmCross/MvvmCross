@@ -6,7 +6,7 @@ category: Plugins
 The `SoundEffects` plugin is only supported on WindowsPhone currently.
 
 It uses the ResourceLoader plugin and allows small SoundEffect files to be played via:
-```c# 
+```c#
 public interface IMvxSoundEffectLoader
   : IMvxResourceObjectLoader<IMvxSoundEffect>
   {

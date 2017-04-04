@@ -70,7 +70,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
+```c#
 using Microsoft.Phone.Controls;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.WindowsPhone.Platform;
@@ -98,16 +98,16 @@ Your `App.xaml.cs` provides the Windows Phone Silverlight 'main application' obj
 To modify this `App.xaml.cs` for MvvmCross, we need to:
 
 * modify the constructor so that it creates and starts 'Setup'
-```c# 
+```c#
 var setup = new Setup(RootFrame);
 setup.Initialize();
 ```
 * add a private field - just a boolean flag which we will set after we have done one navigation
-```c# 
+```c#
 private bool _hasDoneFirstNavigation = false;
 ```
 * modify the Application_Launching callback so that we can intercept the first navigation, can cancel it and can delegate the initial navigation to `IMvxAppStart` instead.
-```c# 
+```c#
 private void Application_Launching(object sender, LaunchingEventArgs e)
 {
     RootFrame.Navigating += (navigatingSender, navigatingArgs) =>
@@ -123,7 +123,7 @@ private void Application_Launching(object sender, LaunchingEventArgs e)
 }
 ```
 After you've done this your code might look like:
-```c# 
+```c#
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -392,11 +392,11 @@ This will generate:
 Open the TipView.xaml.cs file.
 
 To change TipView from a `PhonePage` into an MvvmCross view, change it so that it inherits from `MvxPhonePage`:
-```c# 
+```c#
 public partial class TipView : MvxPhonePage
 ```
  Altogether this looks like:
-```c# 
+```c#
 using MvvmCross.WindowsPhone.Views;
 
 namespace TipCalc.UI.WP.Views
@@ -419,7 +419,7 @@ This will open the XAML editor within Visual Studio.
 I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxPhonePage` inheritance, change the outer root node of the Xaml file from:
-```c# 
+```c#
 <phone:PhoneApplicationPage 
     ... >
     <!-- content -->

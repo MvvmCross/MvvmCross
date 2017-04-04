@@ -4,7 +4,7 @@ title: Network
 category: Plugins
 ---
 The original purpose of the `Network` plugin was to provide `IMvxReachability` **on iOS only**
-```c# 
+```c#
 public interface IMvxReachability
 {
   bool IsHostReachable(string host);
@@ -15,7 +15,7 @@ public interface IMvxReachability
 Since this original purpose, Network has now further been expanded to provide a simple Rest implementation - and this is available on Droid, Touch, WindowsPhone, WindowsStore and Wpf.
 
 The Rest client is mainly implemented using the `IMvxRestClient` and `IMvxJsonRestClient` interfaces
-```c# 
+```c#
 public interface IMvxRestClient
 {
   void ClearSetting(string key);
@@ -42,7 +42,7 @@ These are supported by a small set of `Request` and `Response` classes:
 - `MvxRestResponse`, `MvxStreamRestResponse`, `MvxJsonRestResponse`
 
 To make a simple fixed url Rest request, you can use:
-```c# 
+```c#
 var request = new MvxRestRequest("http://myService.org/things/list");
 var client = Mvx.Resolve<IMvxRestClient>();
 client.MakeRequest(request,
@@ -54,7 +54,7 @@ client.MakeRequest(request,
                    });
 ```
 To use the Json APIs, you must have an `IMvxJsonConverter` implementation available - one way to get this is to load the Json plugin. With this in place, a simple Json upload with Json response might look like:
-```c# 
+```c#
 var request = new MvxJsonRestRequest<Person>("http://myService.org/things/add")
 {
   Body = person

@@ -4,7 +4,7 @@ title: PhoneCall
 category: Plugins
 ---
 The `PhoneCall` plugin provides implementations of:
-```c# 
+```c#
 public interface IMvxPhoneCallTask
 {
   void MakePhoneCall(string name, string number);
