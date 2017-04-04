@@ -32,18 +32,18 @@ using MvvmCross.Platform.IoC;
 
 namespace MvvmCrossDocs.Core
 {
-    public class App : MvvmCross.Core.ViewModels.MvxApplication
+public class App : MvvmCross.Core.ViewModels.MvxApplication
+{
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            CreatableTypes()
-                .EndingWith("Service")
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
+        CreatableTypes()
+        .EndingWith("Service")
+        .AsInterfaces()
+        .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.FirstViewModel>();
-        }
+        RegisterAppStart<ViewModels.FirstViewModel>();
     }
+}
 }
 ```
 
@@ -54,16 +54,20 @@ using MvvmCross.Core.ViewModels;
 
 namespace MvvmCrossDocs.Core.ViewModels
 {
-    public class FirstViewModel 
-        : MvxViewModel
+public class FirstViewModel
+    : MvxViewModel
+{
+    private string _hello = "Hello MvvmCross";
+    public string Hello
     {
-        private string _hello = "Hello MvvmCross";
-        public string Hello
-        { 
-            get { return _hello; }
-            set { SetProperty (ref _hello, value); }
+        get {
+            return _hello;
+        }
+        set {
+            SetProperty (ref _hello, value);
         }
     }
+}
 }
 ```
 
@@ -77,24 +81,23 @@ using Windows.UI.Xaml.Controls;
 
 namespace MvvmCrossDocs.WindowsUniversal
 {
-    public class Setup : MvxWindowsSetup
+public class Setup : MvxWindowsSetup
+{
+    public Setup( Frame rootFrame ) : base( rootFrame )
     {
-        public Setup( Frame rootFrame ) : base( rootFrame )
-        {
-        }
+    }
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
+    protected override IMvxTrace CreateDebugTrace()
+    {
+        return new DebugTrace();
     }
 }
-
+}
 ```
 
 As you can see, the `DebugTrace` class does not exist. This class is recommended for all MvvmCross projects and it facilitates platform-based console logging during debug. Create a new file `DebugTrace.cs` in the root of your UWP project and paste the following:
@@ -106,30 +109,30 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCrossDocs.WindowsUniversal
 {
-    public class DebugTrace : IMvxTrace
+public class DebugTrace : IMvxTrace
+{
+    public void Trace( MvxTraceLevel level, string tag, Func<string> message )
     {
-        public void Trace( MvxTraceLevel level, string tag, Func<string> message )
-        {
-            Debug.WriteLine( tag + ":" + level + ":" + message() );
-        }
+        Debug.WriteLine( tag + ":" + level + ":" + message() );
+    }
 
-        public void Trace( MvxTraceLevel level, string tag, string message )
-        {
-            Debug.WriteLine( tag + ":" + level + ":" + message );
-        }
+    public void Trace( MvxTraceLevel level, string tag, string message )
+    {
+        Debug.WriteLine( tag + ":" + level + ":" + message );
+    }
 
-        public void Trace( MvxTraceLevel level, string tag, string message, params object[] args )
+    public void Trace( MvxTraceLevel level, string tag, string message, params object[] args )
+    {
+        try
         {
-            try
-            {
-                Debug.WriteLine( tag + ":" + level + ":" + message, args );
-            }
-            catch ( FormatException )
-            {
-                Trace( MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message );
-            }
+            Debug.WriteLine( tag + ":" + level + ":" + message, args );
+        }
+        catch ( FormatException )
+        {
+            Trace( MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message );
         }
     }
+}
 }
 ```
 

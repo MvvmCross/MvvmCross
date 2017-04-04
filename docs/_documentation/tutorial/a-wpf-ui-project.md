@@ -78,17 +78,17 @@ using MvvmCross.Wpf.Views;
 
 namespace TipCalc.UI.Wpf
 {
-    public class Setup : MvxWpfSetup
+public class Setup : MvxWpfSetup
+{
+    public Setup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)
     {
-        public Setup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)
-        {
-        }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
     }
+
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
+}
 }
 ```
  ## Modify the App.xaml.cs to use Setup
@@ -137,31 +137,31 @@ using MvvmCross.Wpf.Views;
 
 namespace TipCalc.UI.Wpf
 {
-    public partial class App : Application
+public partial class App : Application
+{
+    bool _setupComplete;
+
+    void DoSetup()
     {
-        bool _setupComplete;
+        var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
 
-        void DoSetup()
-        {
-            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
+        var setup = new Setup(Dispatcher, presenter);
+        setup.Initialize();
 
-            var setup = new Setup(Dispatcher, presenter);
-            setup.Initialize();
+        var start = Mvx.Resolve<IMvxAppStart>();
+        start.Start();
 
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
-
-            _setupComplete = true;
-        }
-
-        protected override void OnActivated(System.EventArgs e)
-        {
-            if (!_setupComplete)
-                DoSetup();
-
-            base.OnActivated(e);
-        }
+        _setupComplete = true;
     }
+
+    protected override void OnActivated(System.EventArgs e)
+    {
+        if (!_setupComplete)
+            DoSetup();
+
+        base.OnActivated(e);
+    }
+}
 }
 
 ```
@@ -192,16 +192,16 @@ using MvvmCross.Wpf.Views;
 
 namespace TipCalc.UI.Wpf.Views
 {
-    /// <summary>
-    /// Interaction logic for TipView.xaml
-    /// </summary>
-    public partial class TipView : MvxWpfView
+/// <summary>
+/// Interaction logic for TipView.xaml
+/// </summary>
+public partial class TipView : MvxWpfView
+{
+    public TipView()
     {
-        public TipView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+}
 }
 ```
 ### Edit the XAML layout

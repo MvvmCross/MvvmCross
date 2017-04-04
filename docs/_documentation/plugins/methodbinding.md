@@ -13,23 +13,23 @@ When MethodBinding is loaded, then MvvmCross data-binding:
 
 An example, Rio-based ViewModel using both FieldBinding and MethodBinding is:
 
-```cs
+```c#
 public class FirstViewModel
-  : MvxViewModel
-  {
+    : MvxViewModel
+{
     private readonly IDataStore _dataStore;
 
     public FirstViewModel(IDataStore dataStore)
     {
-      _dataStore = dataStore;
+        _dataStore = dataStore;
     }
 
     public void Init(int id)
     {
-      var person = _dataStore.Get<Person>(id);
-      Id.Value = id;
-      FirstName.Value = person.FirstName;
-      LastName.Value = person.LastName;
+        var person = _dataStore.Get<Person>(id);
+        Id.Value = id;
+        FirstName.Value = person.FirstName;
+        LastName.Value = person.LastName;
     }
 
     public readonly INC<int> Id = new NC<int>();
@@ -38,13 +38,13 @@ public class FirstViewModel
 
     public void Save()
     {
-      var person = _dataStore.Get<Person>(id);
-      person.FirstName = FirstName.Value;
-      person.LastName = LastName.Value;
-      _dataStore.Update(person);
-      Close(this);
+        var person = _dataStore.Get<Person>(id);
+        person.FirstName = FirstName.Value;
+        person.LastName = LastName.Value;
+        _dataStore.Update(person);
+        Close(this);
     }
-  }
+}
 ```
 
 The `Save` method in this class could be accessed using Android syntax:
@@ -58,3 +58,4 @@ The `Save` method in this class could be accessed using Android syntax:
 ```
 
 For more on Rio MethodBinding see N=36 on http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html
+

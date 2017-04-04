@@ -74,18 +74,18 @@ using TipCalc.Core;
 
 namespace TipCalc.UI.iOS
 {
-    public class Setup : MvxIosSetup
+public class Setup : MvxIosSetup
+{
+    public Setup(MvxApplicationDelegate appDelegate, IMvxIosViewPresenter presenter)
+    : base(appDelegate, presenter)
     {
-        public Setup(MvxApplicationDelegate appDelegate, IMvxIosViewPresenter presenter)
-            : base(appDelegate, presenter)
-        {
-        }
-
-        protected override IMvxApplication CreateApp ()
-        {
-            return new App();
-        }
     }
+
+    protected override IMvxApplication CreateApp ()
+    {
+        return new App();
+    }
+}
 }
 ```
 ## Modify the AppDelegate to use Setup
@@ -125,28 +125,31 @@ using MvvmCross.Core.ViewModels;
 
 namespace TipCalc.UI.iOS
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : MvxApplicationDelegate
-    {
-        public override UIWindow Window { get; set; }
-
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-        {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            var presenter = new MvxIosViewPresenter(this, Window);
-
-            var setup = new Setup(this, presenter);
-            setup.Initialize();
-
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-
-            Window.MakeKeyAndVisible();
-
-            return true;
-        }
+[Register("AppDelegate")]
+public class AppDelegate : MvxApplicationDelegate
+{
+    public override UIWindow Window {
+        get;
+        set;
     }
+
+    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+        var presenter = new MvxIosViewPresenter(this, Window);
+
+        var setup = new Setup(this, presenter);
+        setup.Initialize();
+
+        var startup = Mvx.Resolve<IMvxAppStart>();
+        startup.Start();
+
+        Window.MakeKeyAndVisible();
+
+        return true;
+    }
+}
 }
 ```
 ## Add your View
@@ -215,21 +218,21 @@ using TipCalc.Core.ViewModels;
 
 namespace TipCalc.UI.iOS
 {
-    public partial class TipView : MvxViewController<TipViewModel>
+public partial class TipView : MvxViewController<TipViewModel>
+{
+    public TipView() : base("TipView", null)
     {
-        public TipView() : base("TipView", null)
-        {
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
-            this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();
-            this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();
-        }
     }
+
+    public override void ViewDidLoad()
+    {
+        base.ViewDidLoad();
+
+        this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
+        this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();
+        this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();
+    }
+}
 }
 ```
 ### Binding in Xamarin.iOS
@@ -251,7 +254,7 @@ As with Android, this will be a `TwoWay` binding by default - which is different
 
 If you had wanted to specify the `TipLabel` property to use instead of relying on the default, then you could have done this with:
 ```c#
-this.CreateBinding(TipLabel).For(label => label.Text).To((TipViewModel vm) => vm.Tip).Apply(); 
+this.CreateBinding(TipLabel).For(label => label.Text).To((TipViewModel vm) => vm.Tip).Apply();
 ```
 In later topics we'll cover more on binding in iOS, including more on binding to non-default fields; other code-based binding code mechanisms; custom bindings; using `ValueConverter`s; and creating bound sub-views.
 
