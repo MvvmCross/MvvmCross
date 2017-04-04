@@ -4,7 +4,7 @@ title: Bookmarks
 category: Plugins
 ---
 The `Bookmarks` plugin provides a simple 'live tile' service for WindowsPhone only.
-```c# 
+```c#
 public interface IMvxBookmarkLibrarian
 {
   bool HasBookmark(string uniqueName);

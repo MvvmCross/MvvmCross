@@ -69,7 +69,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content.
 
 For `TipCalc` here's all that is needed in Setup.cs:
-```c# 
+```c#
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.WindowsCommon.Platform;
@@ -98,14 +98,14 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 * modify the `OnLaunched` callback
 
  * replace this lines
-```c# 
+```c#
 // When the navigation stack isn't restored navigate to the first page,
 // configuring the new page by passing required information as a navigation
 // parameter
 rootFrame.Navigate(typeof(MainPage), e.Arguments);
 ```
   * with these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
-```c# 
+```c#
 var setup = new Setup(rootFrame);
 setup.Initialize();
 
@@ -113,7 +113,7 @@ var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
 After you've done this your code might look like:
-```c# 
+```c#
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -236,21 +236,21 @@ The page will generate:
 ### Turn TipView into the MvvmCross View for TipViewModel
 
 Change:
-```c# 
+```c#
  public class TipView : Page
 ```
 to:
-```c# 
+```c#
 public class TipView : MvxWindowsPage
 ```
 This requires the addition of:
-```c# 
+```c#
 using MvvmCross.WindowsCommon.Views;
 ```
 ### Persuade TipView to cooperate more reasonably with the `MvxStorePage` base class
 
 Either remove the `region`:
-```c# 
+```c#
 #region NavigationHelper registration
         
 protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -266,15 +266,15 @@ protected override void OnNavigatedFrom(NavigationEventArgs e)
 #endregion
 ```
 Or change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-```c# 
+```c#
 base.OnNavigatedTo(e);
 ```
 and 
-```c# 
+```c#
 base.OnNavigatedFrom(e);
 ```
 Altogether this looks like:
-```c# 
+```c#
 using MvvmCross.WindowsCommon.Views;
 using TipCalc.UI.WindowsStore.Common;
 using Windows.UI.Xaml.Navigation;

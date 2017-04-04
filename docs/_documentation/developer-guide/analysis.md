@@ -17,7 +17,7 @@ In short it helps developers use the MvvmCross library the way it was intended t
 
 This first analyzer will identify the following code:
 
-```csharp
+```c#
 [Activity(...)]
 class FirstView : MvxActivity
 {
@@ -27,7 +27,7 @@ class FirstView : MvxActivity
 
 and provide you with a IDE tooltip to transform the code into:
 
-```csharp
+```c#
 [Activity(...)]
 class FirstView : MvxActivity<FirstViewModel> { ... }
 ```
