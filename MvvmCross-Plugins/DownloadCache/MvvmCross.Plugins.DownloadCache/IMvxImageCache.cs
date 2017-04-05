@@ -11,6 +11,7 @@ namespace MvvmCross.Plugins.DownloadCache
 {
     public interface IMvxImageCache<T>
     {
+        bool ContainsImage(string url);
         Task<T> RequestImage(string url);
     }
 }
