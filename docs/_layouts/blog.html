@@ -17,7 +17,7 @@ layout: default
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h2>
         <span>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.content | escape | truncatewords: 300 }}</a>
+          <a class="post-meta" href="{{ post.url | relative_url }}">{{ post.content | markdownify | escape | truncatewords: 100 }}</a>
         </span>
       </li>
     {% endfor %}
