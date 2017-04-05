@@ -206,7 +206,7 @@ namespace MvvmCross.Binding.iOS
             registry.AddOrOverwrite(typeof(MvxImageViewLoader), nameof(MvxImageViewLoader.ImageUrl));
             registry.AddOrOverwrite(typeof(UISegmentedControl), MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), MvxIosPropertyBinding.UIActivityIndicatorView_Hidden);
-
+            registry.AddOrOverwrite(typeof(MvxPageViewSource), nameof(MvxPageViewSource.ItemSource));
             this._fillBindingNamesAction?.Invoke(registry);
         }
     }
