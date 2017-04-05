@@ -66,6 +66,7 @@ Most of this functionality is provided for you automatically. Within your iOS UI
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
+
 ```c#
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
@@ -88,6 +89,7 @@ public class Setup : MvxIosSetup
 }
 }
 ```
+
 ## Modify the AppDelegate to use Setup
 
 Your `AppDelegate` provides a set of callback that iOS uses to inform you about events in your application's lifecycle.
@@ -101,20 +103,27 @@ To use this `AppDelegate` within MvvmCross, we need to:
 * modify it so that the method that is called on startup (FinishedLaunching) does some UI application setup:
 
    * create a new presenter - this is the class that will determine how Views are shown - for this sample, we choose a 'standard' one:
+
 ```c#
 var presenter = new MvxIosViewPresenter(this, Window);
 ```
+
    * create and call Initialize on a `Setup`:
+
 ```c#
 var setup = new Setup(this, presenter);
 setup.Initialize();
 ```
+
    * with `Setup` completed, use the `Mvx` Inversion of Control container in order to find and `Start` the `IMvxAppStart` object:
+
 ```c#
 var startup = Mvx.Resolve<IMvxAppStart>();
 startup.Start();
 ```
+
 Together, this looks like:
+
 ```c#
 using Foundation;
 using UIKit;
@@ -152,6 +161,7 @@ public class AppDelegate : MvxApplicationDelegate
 }
 }
 ```
+
 ## Add your View
 
 ### Create an initial UIViewController
@@ -188,14 +198,17 @@ Using drag and drop, you should be able to quite quickly generate a design simil
 ### Edit TipView.cs
 
 Because we want our `TipView` to be not only a `UIViewController` but also an Mvvm `View`, then change the inheritance of `TipView` so that it inherits from `MvxViewController`.
+
 ```c#
 public class TipView : MvxViewController<TipViewModel>
 ```
+
 The generic parameter to MvxViewController is used to link `TipView` to `TipViewModel`.
 
 To add the data-binding code, go to the `ViewDidLoad` method in your `TipView` class. This is a method that will be called after the View is loaded within iOS but before it is displayed on the screen.
 
 This makes `ViewDidLoad` a perfect place for us to call some data-binding extension methods which will specify how we want the UI data-bound to the ViewModel:
+
 ```c#
 public override void ViewDidLoad()
 {
@@ -206,11 +219,13 @@ public override void ViewDidLoad()
     this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();
 }
 ```
+
 What this code does is to generate 'in code' exactly the same type of data-binding information as we generated 'in XML' in Android.
 
 **Note** that before the calls to `this.Bind` are made, then we first call `base.ViewDidLoad()`. This is important because `base.ViewDidLoad()` is where MvvmCross locates the `TipViewModel` that this `TipView` will bind to.
 
 Altogether this looks like:
+
 ```c#
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
@@ -235,6 +250,7 @@ public partial class TipView : MvxViewController<TipViewModel>
 }
 }
 ```
+
 ### Binding in Xamarin.iOS
 
 You will no doubt have noticed that data-binding in iOS looks very different to the way it looked in Android - and to what you may have expected from XAML.
@@ -242,9 +258,11 @@ You will no doubt have noticed that data-binding in iOS looks very different to 
 This is because the XIB format used in iOS is a lot less human manipulable and extensible than the XML formats used in Android AXML and Windows XAML - so it makes more sense to use C# rather than the XIB to register our bindings.
 
 Within this section of the tutorial all of our iOS bindings look like:
+
 ```c#
 this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
 ```
+
 what this line means is:
 
 * bind the `TipLabel`'s default binding property - which happens to be a property called `Text`
@@ -253,9 +271,11 @@ what this line means is:
 As with Android, this will be a `TwoWay` binding by default - which is different to what XAML developers may expect to see.
 
 If you had wanted to specify the `TipLabel` property to use instead of relying on the default, then you could have done this with:
+
 ```c#
 this.CreateBinding(TipLabel).For(label => label.Text).To((TipViewModel vm) => vm.Tip).Apply();
 ```
+
 In later topics we'll cover more on binding in iOS, including more on binding to non-default fields; other code-based binding code mechanisms; custom bindings; using `ValueConverter`s; and creating bound sub-views.
 
 ## The iOS UI is complete!
@@ -269,15 +289,16 @@ When it starts... you should see:
 This seems to work perfectly, although you may notice that if you tap on the `SubTotal` property and start entering text, then you cannot afterwards close the keyboard.
 
 This is a View concern - it is a UI problem. So we can fix it just in the iOS UI code - in this View. For example, to fix this here, you can add a gesture recognizer to the end of the `ViewDidLoad` method like:
+
 ```c#
 View.AddGestureRecognizer(new UITapGestureRecognizer(() => {
     this.SubTotalTextField.ResignFirstResponder();
 }));
 ```
-	
-        
+
 ## Moving on...
 
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
 Let's move on to Windows!
+

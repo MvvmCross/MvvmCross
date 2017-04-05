@@ -74,3 +74,4 @@ Name | Description | Link
 `MvvmCross.Plugin.ThreadUtils`      |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ThreadUtils/)
 `MvvmCross.Plugin.Visibility`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Visibility/)
 `MvvmCross.Plugin.WebBrowser`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.WebBrowser/)
+
