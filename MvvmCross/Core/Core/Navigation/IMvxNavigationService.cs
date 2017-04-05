@@ -20,8 +20,12 @@ namespace MvvmCross.Core.Navigation
         /// <returns>A task to await upon</returns>
         Task Navigate(string path);
 
-        //Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+        Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+
+        //TODO: Find out if we can use IMvxViewModel instead of IMvxViewModelInitializer<TParameter>
         //Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
+        Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModelInitializer<TParameter>;
+
         //Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
         //Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
         //Task Navigate<TParameter>(string path, TParameter param);
