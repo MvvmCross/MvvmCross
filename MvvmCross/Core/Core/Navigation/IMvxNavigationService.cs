@@ -12,62 +12,29 @@ namespace MvvmCross.Core.Navigation
     /// </summary>
     public interface IMvxNavigationService
     {
-        /*
+        /// <summary>
+        /// Translates the provided Uri to a ViewModel request and dispatches it.
+        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
+        /// </summary>
+        /// <param name="path">URI to route</param>
+        /// <returns>A task to await upon</returns>
+        Task Navigate(string path);
+
+        //Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+        //Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
+        //Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
+        //Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
+        //Task Navigate<TParameter>(string path, TParameter param);
+        //Task<TResult> Navigate<TResult>(string path);
+        //Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
+
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.
         /// </summary>
-        /// <param name="uri">URI to route</param>
+        /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
-        bool CanRoute(string uri);
-
-        /// <summary>
-        /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
-        /// </summary>
-        /// <param name="uri">URI to route</param>
-        /// <returns>A task to await upon</returns>
-        Task RouteAsync(string uri);
-
-
-        /// <summary>
-        /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
-        /// </summary>
-        /// <param name="uri">URI to route</param>
-        /// <returns>A task to await upon</returns>
-        Task RouteAsync(Uri uri);
-
-        /// <summary>
-        /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// </summary>
-        /// <param name="uri">URI to route</param>
-        /// <param name="requestedBy">Specify how the route was requested. This can be useful if you want to clear your stack, etc.</param>
-        /// <returns>A task to await upon</returns>
-        Task RouteAsync(string uri, MvxRequestedBy requestedBy);
-
-        /// <summary>
-        /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// </summary>
-        /// <param name="uri">URI to route</param>
-        /// <param name="requestedBy">Specify how the route was requested. This can be useful if you want to clear your stack, etc.</param>
-        /// <returns>A task to await upon</returns>
-        Task RouteAsync(Uri uri, MvxRequestedBy requestedBy);
-        */
-
-        Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
-        Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
-        Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
-        Task Navigate(Uri path);
-        Task Navigate<TParameter>(Uri path, TParameter param);
-        Task<TResult> Navigate<TResult>(Uri path);
-        Task<TResult> Navigate<TParameter, TResult>(Uri path, TParameter param);
-        Task Navigate(string path);
-        Task Navigate<TParameter>(string path, TParameter param);
-        Task<TResult> Navigate<TResult>(string path);
-        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
-        Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
-        Task<bool> CanNavigate(Uri path);
         Task<bool> CanNavigate(string path);
+
+        //Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
     }
 }
