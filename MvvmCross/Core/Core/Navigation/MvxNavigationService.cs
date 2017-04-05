@@ -21,6 +21,8 @@ namespace MvvmCross.Core.Navigation
 
         public event BeforeNavigateEventHandler BeforeNavigate;
         public event BeforeNavigateEventHandler AfterNavigate;
+        public event BeforeNavigateEventHandler BeforeClose;
+        public event BeforeNavigateEventHandler AfterClose;
 
         public MvxNavigationService(IMvxViewDispatcher viewDispatcher)
         {
@@ -94,7 +96,7 @@ namespace MvvmCross.Core.Navigation
         public async Task Navigate(string path)
         {
             var args = new NavigateEventArgs(path);
-			OnBeforeNavigate(this, args);
+            OnBeforeNavigate(this, args);
 
             KeyValuePair<Regex, Type> entry;
 
@@ -151,7 +153,7 @@ namespace MvvmCross.Core.Navigation
         public async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
         {
             var args = new NavigateEventArgs(typeof(TViewModel));
-			OnBeforeNavigate(this, args);
+            OnBeforeNavigate(this, args);
             ShowViewModel<TViewModel>();
             OnAfterNavigate(this, args);
         }
@@ -164,14 +166,33 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
+        public async Task<bool> Close(IMvxViewModel viewModel)
+        {
+            var args = new NavigateEventArgs();
+            OnBeforeClose(this, args);
+            var close = base.Close(viewModel);
+            OnAfterClose(this, args);
+            return close;
+        }
+
         private void OnBeforeNavigate(object sender, NavigateEventArgs e)
         {
-        	BeforeNavigate?.Invoke(sender, e);
+            BeforeNavigate?.Invoke(sender, e);
         }
 
         private void OnAfterNavigate(object sender, NavigateEventArgs e)
         {
             AfterNavigate?.Invoke(sender, e);
+        }
+
+        private void OnBeforeClose(object sender, NavigateEventArgs e)
+        {
+            BeforeClose?.Invoke(sender, e);
+        }
+
+        private void OnAfterClose(object sender, NavigateEventArgs e)
+        {
+            AfterClose?.Invoke(sender, e);
         }
     }
 }
