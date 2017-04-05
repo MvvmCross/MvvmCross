@@ -11,8 +11,8 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
-    public class MvxNavigationService
-        : IMvxNavigationService
+    //TODO: Remove MvxNavigatingObject workaround when new navigation is fully integrated
+    public class MvxNavigationService : MvxNavigatingObject, IMvxNavigationService
     {
         private readonly IMvxViewDispatcher _viewDispatcher;
         private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
@@ -137,6 +137,16 @@ namespace MvvmCross.Core.Navigation
             KeyValuePair<Regex, Type> entry;
 
             return TryGetRoute(path, out entry);
+        }
+
+        public async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            ShowViewModel<TViewModel>();
+        }
+
+        public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModelInitializer<TParameter>
+        {
+            ShowViewModel<TViewModel, TParameter>(param);
         }
     }
 }
