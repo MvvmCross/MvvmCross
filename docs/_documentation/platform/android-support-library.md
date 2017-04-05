@@ -19,3 +19,4 @@ protected override void FillTargetFactories(
 
 ## Samples
 A sample project can be found on github - [MvvmCross-AndroidSupport](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross-AndroidSupport)
+

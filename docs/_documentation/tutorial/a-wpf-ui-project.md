@@ -43,9 +43,11 @@ We do actually want a `MainWindow` for this app :)
 ## Install MvvmCross
 
 In the Package Manager Console, enter...
+
 ```c#
 Install-Package MvvmCross.Core
 ```
+
 ## Add a reference to TipCalc.Core.csproj
 
 Add a reference to your `TipCalc.Core` project - the project we created in the last step which included:
@@ -70,6 +72,7 @@ Most of this functionality is provided for you automatically. Within your Wpf UI
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
+
 ```c#
 using System.Windows.Threading;
 using MvvmCross.Core.ViewModels;
@@ -91,7 +94,8 @@ public class Setup : MvxWpfSetup
 }
 }
 ```
- ## Modify the App.xaml.cs to use Setup
+
+## Modify the App.xaml.cs to use Setup
 
 There are other lifecycles and display techniques that you can use to write Wpf apps.
 
@@ -100,10 +104,13 @@ However, here we will just use a 'one window with one view' approach.
 To achieve this, add some lines to the WPF `App` class that:
 
 * provide a private flag to determine if setup has already been done
+
 ```c#
 bool _setupComplete;
 ```
+
 * perform the setup - using a `Simple` presenter based on `MainWindow`
+
 ```c#
 void DoSetup()
 {
@@ -118,7 +125,9 @@ void DoSetup()
     _setupComplete = true;
 }
 ```
+
 * override the `OnActivated` event to perform this startup        
+
 ```c#
 protected override void OnActivated(System.EventArgs e)
 {
@@ -128,7 +137,9 @@ protected override void OnActivated(System.EventArgs e)
     base.OnActivated(e);
 }
 ```
+
 After you've done this your `App.xaml.cs` might look like:
+
 ```c#
 using System.Windows;
 using MvvmCross.Core.ViewModels;
@@ -163,8 +174,8 @@ public partial class App : Application
     }
 }
 }
-
 ```
+
 ## Add your View
 
 ### Create the UserControl
@@ -183,10 +194,13 @@ The page will generate:
 Open the TipView.xaml.cs file.
 
 Change the class to inherit from `MvxWpfView`
+
 ```c#
 public partial class TipView : MvxWpfView
 ```
+
 Altogether this looks like:
+
 ```c#
 using MvvmCross.Wpf.Views;
 
@@ -204,6 +218,7 @@ public partial class TipView : MvxWpfView
 }
 }
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file
@@ -219,6 +234,7 @@ Change the root node from:
          ...
 </UserControl>
 ```
+
 to:
 
 ```xml
@@ -266,6 +282,7 @@ This will produce finished XAML like:
     </Grid>
 </views:MvxWpfView>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 
 In the designer, this will look like:
@@ -287,3 +304,4 @@ There's more we could do to make this User Interface nicer and to make the app r
 And actually... that's the end of our journey through this first app.
 
 One day soon there will be more steps - a step for Mac desktop, a step for XBox, a step for TV, etc - but for now this is the end.
+
