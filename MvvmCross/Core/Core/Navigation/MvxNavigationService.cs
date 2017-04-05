@@ -86,44 +86,9 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        public Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel
-        {
-            throw new NotImplementedException();
-        }
-
         public Task Navigate(Uri path)
         {
             return Navigate(path.ToString());
-        }
-
-        public Task Navigate<TParameter>(Uri path, TParameter param)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TResult>(Uri path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TParameter, TResult>(Uri path, TParameter param)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task Navigate(string path)
@@ -169,26 +134,6 @@ namespace MvvmCross.Core.Navigation
             }
 
             _viewDispatcher.ShowViewModel(request);
-        }
-
-        public Task Navigate<TParameter>(string path, TParameter param)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TResult>(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            throw new NotImplementedException();
         }
 
         public Task<bool> CanNavigate(Uri path)
