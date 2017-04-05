@@ -86,11 +86,6 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        public Task Navigate(Uri path)
-        {
-            return Navigate(path.ToString());
-        }
-
         public async Task Navigate(string path)
         {
             KeyValuePair<Regex, Type> entry;
@@ -136,10 +131,6 @@ namespace MvvmCross.Core.Navigation
             _viewDispatcher.ShowViewModel(request);
         }
 
-        public Task<bool> CanNavigate(Uri path)
-        {
-            return CanNavigate(path.ToString());
-        }
 
         public async Task<bool> CanNavigate(string path)
         {
