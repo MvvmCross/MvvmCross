@@ -180,7 +180,7 @@ namespace MvvmCross.Binding.tvOS
             registry.AddOrOverwrite(typeof(MvxImageViewLoader), nameof(MvxImageViewLoader.ImageUrl));
             registry.AddOrOverwrite(typeof(UISegmentedControl), MvxTvosPropertyBinding.UISegmentedControl_SelectedSegment);
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), MvxTvosPropertyBinding.UIActivityIndicatorView_Hidden);
-
+            registry.AddOrOverwrite(typeof(MvxPageViewSource), nameof(MvxPageViewSource.ItemSource));
             this._fillBindingNamesAction?.Invoke(registry);
         }
     }

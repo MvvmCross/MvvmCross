@@ -82,6 +82,7 @@
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
     <Compile Include="Views\MvxPageViewController.cs" />
     <Compile Include="Views\MvxUIRefreshControl.cs" />
+    <Compile Include="Views\MvxPageViewExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

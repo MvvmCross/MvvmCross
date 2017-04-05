@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxTvosPropertyBinding.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="Views\MvxTableViewCell.cs" />
     <Compile Include="Views\MvxTableViewSource.cs" />
     <Compile Include="Views\MvxView.cs" />
+    <Compile Include="ViewModels\IMvxPageViewModel.cs" />
+    <Compile Include="Views\IMvxPageViewController.cs" />
+    <Compile Include="Views\MvxBasePageViewSource.cs" />
+    <Compile Include="Views\MvxPageViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
@@ -109,6 +114,10 @@
     <ProjectReference Include="..\..\Platform\tvOS\MvvmCross.Platform.tvOS.csproj">
       <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
       <Name>MvvmCross.Platform.tvOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />

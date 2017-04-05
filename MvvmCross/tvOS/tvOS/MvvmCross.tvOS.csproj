@@ -81,6 +81,8 @@
     <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalNavSupportTvosViewPresenter.cs" />
+    <Compile Include="Views\MvxPageViewController.cs" />
+    <Compile Include="Views\MvxPageViewExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
