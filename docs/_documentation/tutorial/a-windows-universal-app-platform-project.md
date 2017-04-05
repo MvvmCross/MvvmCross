@@ -72,6 +72,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content.
 
 For `TipCalc` here's all that is needed in Setup.cs:
+
 ```c#
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
@@ -92,6 +93,7 @@ public class Setup : MvxWindowsSetup
 }
 }
 ```
+
 ## Modify the App.xaml.cs to use Setup
 
 Your `App.xaml.cs` provides the Windows UWP 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
@@ -101,13 +103,16 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 * modify the `OnLaunched` callback
 
  * replace this lines
+
 ```c#
 // When the navigation stack isn't restored navigate to the first page,
 // configuring the new page by passing required information as a navigation
 // parameter
 rootFrame.Navigate(typeof(MainPage), e.Arguments);
 ```
+
   * with these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
+
 ```c#
 var setup = new Setup(rootFrame);
 setup.Initialize();
@@ -115,7 +120,9 @@ setup.Initialize();
 var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
+
 After you've done this your code might look like:
+
 ```c#
 using System;
 using System.Collections.Generic;
@@ -233,6 +240,7 @@ sealed partial class App : Application
 }
 }
 ```
+
 ## Add your View
 
 ### Create an initial Page
@@ -263,6 +271,7 @@ This requires the addition of:
 ```using MvvmCross.WindowsUWP.Views;```
 
 Altogether this looks like:
+
 ```c#
 using MvvmCross.WindowsUWP.Views;
 
@@ -282,6 +291,7 @@ public sealed partial class TipView : MvxWindowsPage
 }
 }
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file
@@ -327,11 +337,13 @@ The full page will look like:
     </Grid>
 </views:MvxWindowsPage>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 
 **Note** the binding for the TextBox uses `UpdateSourceTrigger=PropertyChanged` so that the `SubTotal` property of `TipViewModel` is updated immediately rather than when the TextBox loses focus.
 
 In the designer, this will look like:
+
 [block:image]
 {
   "images": [
@@ -348,11 +360,13 @@ In the designer, this will look like:
   ]
 }
 ```
+
 ## The Store UI is complete!
 
 At this point you should be able to run your application either on the Local Machine or in a Mobile emulator.
 
 When it starts... you should see this for the local machine:
+
 [block:image]
 {
   "images": [
@@ -369,7 +383,9 @@ When it starts... you should see this for the local machine:
   ]
 }
 ```
+
 and in the mobile emulator:
+
 [block:image]
 {
   "images": [
@@ -386,8 +402,10 @@ and in the mobile emulator:
   ]
 }
 ```
+
 ## Moving on...
 
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
 Let's move on to the next piece of Windows!
+

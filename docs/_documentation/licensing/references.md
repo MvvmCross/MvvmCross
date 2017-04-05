@@ -13,3 +13,4 @@ category: Licensing
 * [MonoDroid.Dialog](https://github.com/kevinmcmahon/MonoDroid.Dialog) - MIT X11
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 * [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
+

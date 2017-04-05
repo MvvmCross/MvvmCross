@@ -9,13 +9,15 @@ As well as `Mvx.Resolve<T>`, the `Mvx` static class provides a reflection based 
 
 For example, if we add a class like:
 
-        public class Bar
-        {
-            public Bar(IFoo foo)
-            {
-                // do stuff
-            }
-        }
+```c#
+public class Bar
+{
+    public Bar(IFoo foo)
+    {
+        // do stuff
+    }
+}
+```
 
 Then you can create this object using: 
 
@@ -155,3 +157,4 @@ Understanding object lifecycles in this type of situation - where some objects a
   [1]: http://www.martinfowler.com/articles/injection.html
   [2]: http://joelabrahamsson.com/inversion-of-control-an-introduction-with-examples-in-net/
   [3]: https://github.com/slodge/MvvmCross-Presentations/blob/master/MvxDay/InterfaceDrivenDevelopment.pptx
+

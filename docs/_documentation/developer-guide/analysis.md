@@ -62,3 +62,4 @@ There is also a generic version, [`DiagnosticVerifier<T>`], where T should be yo
 ## More info
 - For additional information about analyzers and code fixes, follow this article:
 https://msdn.microsoft.com/en-us/magazine/dn904670.aspx
+
