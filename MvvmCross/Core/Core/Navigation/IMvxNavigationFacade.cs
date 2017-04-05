@@ -9,6 +9,6 @@ namespace MvvmCross.Core.Navigation
 {
     public interface IMvxNavigationFacade
     {
-        Task<MvxViewModelRequest> BuildViewModelRequest(string url, IDictionary<string, string> currentParameters, MvxRequestedBy requestedBy);
+        Task<MvxViewModelRequest> BuildViewModelRequest(string url, IDictionary<string, string> currentParameters);
     }
 }
