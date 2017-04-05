@@ -6,22 +6,78 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Windows.System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Email;
+using Windows.Storage;
 
 namespace MvvmCross.Plugins.Email.WindowsCommon
 {
-    // IMvxComposeEmailTaskEx not supported currently in WinStore
-    // to support this we'd need to experiment with multiple addresses (e.g. see http://www.sightspecific.com/~mosh/www_faq/multrec.html)
     public class MvxComposeEmailTask
-        : IMvxComposeEmailTask
+      : IMvxComposeEmailTaskEx
     {
+        public bool CanSendAttachments => true;
+
+        public bool CanSendEmail => true;
+
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
-            // this is the best I can do so far...
-            // see - http://stackoverflow.com/questions/10674193/winrt-how-to-email-a-message-to-a-specific-person
-            var url = new MvxMailToUrlBuilder().Build(to, cc, subject, body);
-            var uri = new Uri(url, UriKind.Absolute);
-            Launcher.LaunchUriAsync(uri);
+            var toArray = to == null ? null : new[] { to };
+            var ccArray = cc == null ? null : new[] { cc };
+            ComposeEmail(
+                toArray,
+                ccArray,
+                subject,
+                body,
+                isHtml,
+                null,
+                dialogTitle);
+        }
+
+        public async void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null, string body = null, bool isHtml = false, IEnumerable<MvvmCross.Plugins.Email.EmailAttachment> attachments = null, string dialogTitle = null)
+        {
+            //TODO: It is better to have this function as async Task so to avoid exception swallowing
+            EmailMessage email = new EmailMessage();
+
+            if (to != null)
+                foreach (var item in to)
+                {
+                    email.To.Add(new EmailRecipient(item));
+                }
+
+            if (cc != null)
+                foreach (var item in cc)
+                {
+                    email.CC.Add(new EmailRecipient(item));
+                }
+
+            email.Subject = subject ?? "";
+            email.Body = body ?? "";
+
+            if (attachments != null)
+                foreach (var item in attachments)
+                {
+                    email.Attachments.Add(new Windows.ApplicationModel.Email.EmailAttachment(item.FileName, await GetTextFile(item))
+                    );
+                }
+
+
+            await EmailManager.ShowComposeNewEmailAsync(email);
+
+        }
+
+
+        private static async Task<StorageFile> GetTextFile(MvvmCross.Plugins.Email.EmailAttachment attachement)
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var file = await localFolder.CreateFileAsync(attachement.FileName, CreationCollisionOption.ReplaceExisting);
+
+            using (var reader = new StreamReader(attachement.Content))
+            {
+                await FileIO.WriteTextAsync(file, await reader.ReadToEndAsync());
+            }
+            return file;
         }
     }
 }

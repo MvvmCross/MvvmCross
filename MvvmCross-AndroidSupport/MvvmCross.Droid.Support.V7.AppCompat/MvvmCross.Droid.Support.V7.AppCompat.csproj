@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="EventSource\MvxEventSourceAppCompatDialogFragment.cs" />
     <Compile Include="MvxActionBarDrawerToggle.cs" />
     <Compile Include="MvxAppCompatPropertyBinding.cs" />
@@ -137,6 +138,9 @@
       <Project>{BA68B924-17C4-41F7-9B02-53C0DE9B8D4B}</Project>
       <Name>MvvmCross.Droid.Support.Core.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Xml\Empty.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
