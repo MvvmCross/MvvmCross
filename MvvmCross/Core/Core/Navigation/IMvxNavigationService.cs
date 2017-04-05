@@ -10,6 +10,8 @@ namespace MvvmCross.Core.Navigation
 {
     public delegate void BeforeNavigateEventHandler(object sender, NavigateEventArgs e);
     public delegate void AfterNavigateEventHandler(object sender, NavigateEventArgs e);
+    public delegate void BeforeCloseEventHandler(object sender, NavigateEventArgs e);
+    public delegate void AfterCloseEventHandler(object sender, NavigateEventArgs e);
 
     /// <summary>
     /// Allows for URI based navigation in MvvmCross
@@ -18,6 +20,8 @@ namespace MvvmCross.Core.Navigation
     {
         event BeforeNavigateEventHandler BeforeNavigate;
         event BeforeNavigateEventHandler AfterNavigate;
+        event BeforeNavigateEventHandler BeforeClose;
+        event BeforeNavigateEventHandler AfterClose;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -47,5 +51,7 @@ namespace MvvmCross.Core.Navigation
         Task<bool> CanNavigate(string path);
 
         //Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+
+        Task<bool> Close(IMvxViewModel viewModel);
     }
 }

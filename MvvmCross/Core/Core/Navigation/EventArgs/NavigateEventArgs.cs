@@ -3,6 +3,10 @@ namespace MvvmCross.Core.Navigation.EventArguments
 {
     public class NavigateEventArgs : EventArgs
     {
+        public NavigateEventArgs()
+        {
+        }
+
         public NavigateEventArgs(Type viewModelType)
         {
             ViewModelType = viewModelType;
