@@ -41,10 +41,10 @@ namespace RoutingExample.iOS
         {
             var normalized = Uri.UnescapeDataString(url.ToString());
 
-            var routing = Mvx.Resolve<IMvxNavigationService>();
+            var navigationService = Mvx.Resolve<IMvxNavigationService>();
 
-            if (routing.CanNavigate(normalized).Result)
-                routing.Navigate(normalized);
+            if (navigationService.CanNavigate(normalized).Result)
+                navigationService.Navigate(normalized);
 
             return true;
         }
