@@ -1,4 +1,4 @@
----
+--
 layout: documentation
 title: A Windows Store Project
 category: Tutorials
@@ -69,6 +69,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content.
 
 For `TipCalc` here's all that is needed in Setup.cs:
+
 ```c#
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
@@ -89,6 +90,7 @@ public class Setup : MvxWindowsSetup
 }
 }
 ```
+
 ## Modify the App.xaml.cs to use Setup
 
 Your `App.xaml.cs` provides the WindowsStore 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
@@ -98,13 +100,16 @@ To modify this `App.xaml.cs` for MvvmCross, we need to:
 * modify the `OnLaunched` callback
 
  * replace this lines
+
 ```c#
 // When the navigation stack isn't restored navigate to the first page,
 // configuring the new page by passing required information as a navigation
 // parameter
 rootFrame.Navigate(typeof(MainPage), e.Arguments);
 ```
+
   * with these lines to allow it to create `Setup`, and to then initiate the `IMvxAppStart` `Start` navigation
+
 ```c#
 var setup = new Setup(rootFrame);
 setup.Initialize();
@@ -112,7 +117,9 @@ setup.Initialize();
 var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
+
 After you've done this your code might look like:
+
 ```c#
 using System;
 using Windows.ApplicationModel;
@@ -216,8 +223,8 @@ sealed partial class App : Application
     }
 }
 }
-
 ```
+
 ## Add your View
 
 ### Create an initial Page
@@ -236,20 +243,27 @@ The page will generate:
 ### Turn TipView into the MvvmCross View for TipViewModel
 
 Change:
+
 ```c#
 public class TipView : Page
 ```
+
 to:
+
 ```c#
 public class TipView : MvxWindowsPage
 ```
+
 This requires the addition of:
+
 ```c#
 using MvvmCross.WindowsCommon.Views;
 ```
+
 ### Persuade TipView to cooperate more reasonably with the `MvxStorePage` base class
 
 Either remove the `region`:
+
 ```c#
 #region NavigationHelper registration
 
@@ -265,15 +279,21 @@ protected override void OnNavigatedFrom(NavigationEventArgs e)
 
 #endregion
 ```
+
 Or change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
+
 ```c#
 base.OnNavigatedTo(e);
 ```
+
 and 
+
 ```c#
 base.OnNavigatedFrom(e);
 ```
+
 Altogether this looks like:
+
 ```c#
 using MvvmCross.WindowsCommon.Views;
 using TipCalc.UI.WindowsStore.Common;
@@ -375,8 +395,8 @@ public sealed partial class TipView : MvxWindowsPage
     #endregion
 }
 }
-
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file
@@ -396,6 +416,7 @@ This `StackPanel` will include **almost** exactly the same XAML as we added to t
   * a bound `TextBlock` for the `Tip`
 
 This will produce XAML like:
+
 ```xml
 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
     <StackPanel>
@@ -418,6 +439,7 @@ This will produce XAML like:
     </StackPanel>
 </Grid>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
 
 **Note** the binding for the TextBox uses `UpdateSourceTrigger=PropertyChanged` so that the `SubTotal` property of `TipViewModel` is updated immediately rather than when the TextBox loses focus.
@@ -439,3 +461,4 @@ When it starts... you should see:
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
 But there are other ways of building Windows apps...
+

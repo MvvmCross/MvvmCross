@@ -20,3 +20,4 @@ The Android version of this plugin also registers some Binding Targets for use w
 
 - `BackgroundColor` for any Android `View` 
 - `TextColor` for any Android `TextView`
+

@@ -12,12 +12,13 @@ The `IMvxValueConverter` interface provides:
 - a `Convert` method - for changing ViewModel values into View values
 - a `ConvertBack` method - for changing View values into ViewModel values
 
-
-        public interface IMvxValueConverter
-        {
-            object Convert(object value, Type targetType, object parameter, CultureInfo culture);
-            object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
-        }
+```c#
+public interface IMvxValueConverter
+{
+    object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+    object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
+}
+```
 
 For value converters which are used with non-editable UI fields (e.g. labels, images, etc), it is very common for Value Converters to implement **only** the `Convert` method - with the `ConvertBack` left as `throw new NotImplementedException();`
 
@@ -36,18 +37,20 @@ For several good ValueConverter samples, including Strings, Dates, Colors, Visib
 
 To implement a ValueConverter from the 'raw interface' you could implement something like:
 
-     public class PlusOneValueConverter : IMvxValueConverter
-     {
-         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-         {
-             return ((int)value) + 1;
-         }
-         
-         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-         {
-             return ((int)value) - 1;
-         }
-     }
+```c#
+public class PlusOneValueConverter : IMvxValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((int)value) + 1;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return ((int)value) - 1;
+    }
+}
+```
      
 Notice how this 'raw' value converter provides you with `object`-level input parameters and output values.     
 
@@ -59,34 +62,36 @@ In many cases, the `MvxValueConverter<TFrom, TTo>` helper class can do this cast
 
 For example, a value converter for converting `DateTime`s in the ViewModel to 'time ago' `string`s in the View might look like:
 
-    public class MyTimeAgoValueConverter : MvxValueConverter<DateTime, string>
+```c#
+public class MyTimeAgoValueConverter : MvxValueConverter<DateTime, string>
+{
+    protected override string Convert(DateTime value, Type targetType, object parameter, CultureInfo cultureInfo)
     {
-        protected override string Convert(DateTime value, Type targetType, object parameter, CultureInfo cultureInfo)
+        var timeAgo = DateTime.UtcNow - value;
+        if (timeAgo.TotalSeconds < 30)
         {
-            var timeAgo = DateTime.UtcNow - value;
-            if (timeAgo.TotalSeconds < 30)
-            {
-            	return "just now";
-            }
-            
-            if (timeAgo.TotalMinutes < 10)
-            {
-            	return "a few minutes ago";
-            }
-            
-            if (timeAgo.TotalMinutes < 60)
-            {
-            	return "in the last hour";
-            }
-            
-            if (timeAgo.TotalMinutes < 24*60)
-            {
-            	return "in the last day";
-            }
-            
-            return "previously";            
+            return "just now";
         }
+
+        if (timeAgo.TotalMinutes < 10)
+        {
+            return "a few minutes ago";
+        }
+
+        if (timeAgo.TotalMinutes < 60)
+        {
+            return "in the last hour";
+        }
+
+        if (timeAgo.TotalMinutes < 24*60)
+        {
+            return "in the last day";
+        }
+
+        return "previously";
     }
+}
+```
 
 Note:
 
@@ -168,24 +173,28 @@ To prevent value converter classes being registered during this reflection sweep
 
 To include additional assemblies in the ValueConverter reflection sweep, you can do this in your `Setup` class using an override of the `protected virtual List<Assembly> ValueConverterAssemblies { get; }` property - e.g.:
 
-     protected override List<Assembly> ValueConverterAssemblies 
-     {
-      	get
-      	{
-      		var toReturn = base.ValueConverterAssemblies;
-      		toReturn.Add(typeof(SomeValueConverter).Assembly);
-      		return toReturn;
-      	}
+```c#
+protected override List<Assembly> ValueConverterAssemblies
+{
+    get
+    {
+        var toReturn = base.ValueConverterAssemblies;
+        toReturn.Add(typeof(SomeValueConverter).Assembly);
+        return toReturn;
     }
+}
+```
 
 To manually register additional value converters, you can do this in your `Setup` class using an override of the `FillValueConverters` method - e.g.
 
-     protected override FillValueConverters (IMvxValueConverterRegistry registry)
-     {
-         base.FillValueConverters(registry);
-         registry.AddOrOverwrite("CustomName", new MyVerySpecialValueConverter(42));
-         registry.AddOrOverwrite("CustomName2", new AnotherVerySpecialValueConverter("Summer"));
-     }
+```c#
+protected override FillValueConverters (IMvxValueConverterRegistry registry)
+{
+    base.FillValueConverters(registry);
+    registry.AddOrOverwrite("CustomName", new MyVerySpecialValueConverter(42));
+    registry.AddOrOverwrite("CustomName2", new AnotherVerySpecialValueConverter("Summer"));
+}
+```
 
 Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against indidivual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatability.
 
@@ -196,13 +205,15 @@ The ValueConverter sweeps do use a small amount of Reflection and so can add a v
 
 To do this, override the `FillValueConverters` method in your `Setup` class, do not call the base class method and instead use just register your own value converters - e.g.
 
-     protected override FillValueConverters (IMvxValueConverterRegistry registry)
-     {
-         // avoid the reflection overhead - do not call base class
-         // base.FillValueConverters(registry);
-         registry.AddOrOverwrite("Foo", new FooValueConverter());
-         registry.AddOrOverwrite("Bar", new BarValueConverter());
-     }
+```c#
+protected override FillValueConverters (IMvxValueConverterRegistry registry)
+{
+    // avoid the reflection overhead - do not call base class
+    // base.FillValueConverters(registry);
+    registry.AddOrOverwrite("Foo", new FooValueConverter());
+    registry.AddOrOverwrite("Bar", new BarValueConverter());
+}
+```
 
 Note: unless your application is very large, this is most likely only a micro-optimisation and will most likely not significantly change your app's startup time.
  
@@ -216,35 +227,35 @@ The steps to do this are similar on each Windows platform:
 
 - for each `IMvxValueConverter` class, e.g. for 
  
-``` 
-       public class TheTruthValueConverter 
-           : MvxValueConverter<bool, string> 
-       { 
-       		public string Convert(bool value, Type targetType, CultureInfo cultureInfo, object parameter)
-			{
-				return value ? "Yay" : "Nay";
-			} 
-       }
+```c#
+public class TheTruthValueConverter
+    : MvxValueConverter<bool, string>
+{
+    public string Convert(bool value, Type targetType, CultureInfo cultureInfo, object parameter)
+    {
+        return value ? "Yay" : "Nay";
+    }
+}
 ```
 
 - in your UI project, create a 'native' wrapper using the `MvxNativeValueConverter` class:
 
-```
-       public class TheNativeTruthValueConverter
-       		: MvxNativeValueConverter<TheTruthValueConverter>
-       {
-       }
+```c#
+public class TheNativeTruthValueConverter
+    : MvxNativeValueConverter<TheTruthValueConverter>
+{
+}
 ```
 
 - in your Xaml, include an instance of your ValueConverter as a static resource - this can be done in the `Resources` at App, Page or Control Xaml level, e.g.:
 
-```
+```xml
        <converters:TheNativeTruthValueConverter x:Key="TheTruth" />
 ```
        
 - now your converter can be used - e.g.:
 
-```
+```xml
        <TextBlock Text="{Binding HasAccepted, Converter={StaticResource TheTruth}}" />
 ```
 
@@ -258,22 +269,25 @@ Further, if using 'Tibet' binding then an entire assembly's worth of value conve
 
 To include all value converters within an Assembly at the Xaml level, then use an `mvx:Import` block with an inner `From` attribute which contains an instance of a class from that Assembly.
 
-This may sound complicated… but actually it is quite simple. 
+This may sound complicated... but actually it is quite simple. 
 
 - Suppose you have an Assembly `MyTools` containing `FooValueConverter`, `BarValueConverter`, etc
 - Within this Assembly add a simple, instanciable public Class which we will use only for the import - e.g. `public class MarkerClass {}`
 - Then within the xaml, you can include a static resource import block like:
 
+```xml
 	     <mvx:Import x:Key="MvxAssemblyImport0">
 	       <mvx:Import.From>
 	         <myTools:MarkerClass />
 	       <mvx:Import.From>
 	     </mvx:Import>
+```
      
 - After this is done, then the ValueConverters `Foo` and `Bar` will be available for use within 'Tibet' bindings - e.g. as:
 
+```xml
      	 <TextBlock mvx:Bi.nd="Text Foo(Name)" />
-
+```
  
 ### Using platform-specific Value Converters
 
@@ -325,13 +339,15 @@ Note: to use the Visibility converters at design-time on the Windows platforms, 
 
 If you need to create your own Visibility ValueConverter's then the `MvxBaseVisibilityValueConverter<T>` and `MvxBaseVisibilityValueConverter` base classes can assist with this - e.g.:
 
-	public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter<string>
-	{
-		protected override MvxVisibility Convert(string value, object parameter, CultureInfo culture)
-                {
-                    return (value == "Please) ? MvxVisibility.Visible : MvxVisibility.Collapsed;
-                }
-	}
+```c#
+public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter<string>
+{
+    protected override MvxVisibility Convert(string value, object parameter, CultureInfo culture)
+    {
+        return (value == "Please) ? MvxVisibility.Visible : MvxVisibility.Collapsed;
+    }
+}
+```
 
 **Note:** In addition to the `Visibility` properties that are available on all `UIElement`s within Xaml, MvvmCross also provides a `Visible` custom binding - allowing ViewModel properties of type `Boolean` to be bound directly to the UI visibility without using the `VisibilityConverter` - e.g.:
 
@@ -410,47 +426,49 @@ If using the MvvmCross JsonLocalisation system, then that same value converter c
 
 For example, it could be rewritten:
 
-    public class MyTimeAgoValueConverter : MvxValueConverter<DateTime, string>
+```c#
+public class MyTimeAgoValueConverter : MvxValueConverter<DateTime, string>
+{
+    private IMvxTextProvider _textProvider;
+    private IMvxTextProvider TextProvider
     {
-        private IMvxTextProvider _textProvider;
-        private IMvxTextProvider TextProvider
+        get
         {
-            get
-            {
-                _textProvider = _textProvider ?? Mvx.Resolve<IMvxTextProvider>();
-                return _textProvider;
-            }
-        }
-            
-        protected override string Convert(DateTime value, Type targetType, CultureInfo culruteInfo, object parameter)
-        {
-            var timeAgo = DateTime.UtcNow - value;
-            var key = "unknown";
-            
-            if (timeAgo.TotalSeconds < 30)
-            {
-            	key = "just.now";
-            }            
-            else if (timeAgo.TotalMinutes < 10)
-            {
-            	key = "a.few.minutes.ago";
-            }   
-            else if (timeAgo.TotalMinutes < 60)
-            {
-            	key = "in.the.last.hour";
-            }    
-            else if (timeAgo.TotalMinutes < 24*60)
-            {
-            	key = "in.the.last.day";
-            }
-            else
-            {
-            	key = "previously";
-            }
-            
-            return TextProvider.GetText(Constants.GeneralNamespace, Constants.TimeAgoStrings, key)        
+            _textProvider = _textProvider ?? Mvx.Resolve<IMvxTextProvider>();
+            return _textProvider;
         }
     }
+
+    protected override string Convert(DateTime value, Type targetType, CultureInfo culruteInfo, object parameter)
+    {
+        var timeAgo = DateTime.UtcNow - value;
+        var key = "unknown";
+
+        if (timeAgo.TotalSeconds < 30)
+        {
+            key = "just.now";
+        }
+        else if (timeAgo.TotalMinutes < 10)
+        {
+            key = "a.few.minutes.ago";
+        }
+        else if (timeAgo.TotalMinutes < 60)
+        {
+            key = "in.the.last.hour";
+        }
+        else if (timeAgo.TotalMinutes < 24*60)
+        {
+            key = "in.the.last.day";
+        }
+        else
+        {
+            key = "previously";
+        }
+
+        return TextProvider.GetText(Constants.GeneralNamespace, Constants.TimeAgoStrings, key)
+    }
+}
+```
 
 Where `Constants.TimeAgoStrings` refers to JSON content loaded (for EN-US) as:
 
@@ -494,7 +512,7 @@ I'm not 100% sure why they've said this, but I believe the main reasons are base
 
 I personally suspect these concerns are valid - that there can be situations where putting the conversion functionality directly into the ViewModels rather than into the ValueConverters can make apps easier to understand and can help avoid performance issues. However, I also suspect that these concerns are over-stated. I can't see any reason why a developer who makes use of value converters should be any more prone to architectural or performance problems than another deverloper who doesn't. Indeed I'd suspect the reverse.
 
-In summary… **ValueConverters are good** - use them.
+In summary - **ValueConverters are good** - use them.
 
 
 ### ValueConverters and FallbackValues
@@ -524,47 +542,51 @@ Please be aware that withing the MvvmCross Tibet binding syntax, ValueCombiners 
           
 The API for `IMvxValueCombiner` is significantly more complicated than `IMvxValueConverter` at present and it's tied to ImvxSubStep - which is part of the internal structure of the MvvmCross binding evaluation engine.
 
-    public interface IMvxValueCombiner
-    {
-        Type SourceType(IEnumerable<IMvxSourceStep> steps);
-        void SetValue(IEnumerable<IMvxSourceStep> steps, object value);
-        bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value);
-        IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType);
-    }
+```c#
+public interface IMvxValueCombiner
+{
+    Type SourceType(IEnumerable<IMvxSourceStep> steps);
+    void SetValue(IEnumerable<IMvxSourceStep> steps, object value);
+    bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value);
+    IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType);
+}
+```
 
 To assist with authoring ValueCombiners, a number of helper classes are available including the base `MvxValueCombiner` class which provides default implementations for all methods in the interface.
 
 An example ValueCombiner which counts the number of non-null inputs bound to it might be:
 
-	public class CountingValueCombiner
-		: MvxValueCombiner
-	{
-		public override Type SourceType (IEnumerable<IMvxSourceStep> steps)
-		{
-			return typeof(int);
-		}
-	
-		public override System.Boolean TryGetValue (IEnumerable<IMvxSourceStep> steps, out Object value)
-		{
-			var count = 0;
-			foreach (var input in steps) 
-			{
-				object innerResult;
-				if (!input.TryGetValue (out innerResult)) 
-				{
-					// one of our input bindings is missing so we can't work out our answer
-					value = null;
-					return false;
-				}
+```c#
+public class CountingValueCombiner
+    : MvxValueCombiner
+{
+    public override Type SourceType (IEnumerable<IMvxSourceStep> steps)
+    {
+        return typeof(int);
+    }
 
-				if (innerResult != null)
-					count++;
-			}
+    public override System.Boolean TryGetValue (IEnumerable<IMvxSourceStep> steps, out Object value)
+    {
+        var count = 0;
+        foreach (var input in steps)
+        {
+            object innerResult;
+            if (!input.TryGetValue (out innerResult))
+            {
+                // one of our input bindings is missing so we can't work out our answer
+                value = null;
+                return false;
+            }
 
-			value = count;
-			return true;
-		}
-	}
+            if (innerResult != null)
+                count++;
+        }
+
+        value = count;
+        return true;
+    }
+}
+```
 
 This could be used in a binding to count (for example) how many peoples have been picked for a band:
 
@@ -573,7 +595,6 @@ This could be used in a binding to count (for example) how many peoples have bee
 Note that it's unusual for a ValueCombiner to meaningfully implement `SetValue` - this is because it's unusual (but not unheard of) for multi-bindings to support updating of the multiple source elements from changes in the View.
 
 Developers are very welcome to write their own ValueCombiners if they wish to - please do - but please also be aware that it's likely that this internal `IMvxValueCombiner` API will change in future MvvmCross revisions - we are looking at ways to either simplify this Tibet binding interface and/or ways to make the binding structure more Type-aware so that conversions can be performed at more places within the binding engine. (Developers are also very welcome to suggest improvements for this API!)
-
 
 ### Available ValueCombiners
 
@@ -629,3 +650,4 @@ The 'standard' ValueCombiners available in MvvmCross are:
 - To be continued... GreaterThan, EqualTo, LessThan, GreaterThanOrEqualTo, LessThanOrEqualTo etc
 
 - To be continued... RGB from the Color plugin
+

@@ -22,3 +22,4 @@ Aboo, Alan Yost, Alex Boyd, Alex Petrenko, Alex Sorokoletov, Alexandre Zollinger
 * Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
 * Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
 * Thanks to [Infragistics](http://www.infragistics.com/) for a control license for Nuclios and .Net
+

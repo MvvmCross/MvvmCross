@@ -69,36 +69,37 @@ protected override void AdditionalSetup()
 
 When creating `ViewModel` or `Service` test objects, one common requirement is to provide a mock object which implements both `IMvxViewDispatcher` and `IMvxMainThreadDispatcher`. These interfaces are required for MvvmCross UI thread marshalling and for MvvmCross ViewModel navigation. This object can be implemented using a class like [`MockDispatcher`](https://github.com/slodge/NPlus1DaysOfMvvmCross/blob/master/N-29-TipCalcTest/TipCalcTest.Tests/MockDispatcher.cs):
 
-    public class MockDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxViewDispatcher
+```c#
+public class MockDispatcher
+    : MvxMainThreadDispatcher
+    , IMvxViewDispatcher
+{
+    public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
+    public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
+
+    public bool RequestMainThreadAction(Action action)
     {
-        public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
-        public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
-
-        public bool RequestMainThreadAction(Action action)
-        {
-            action();
-            return true;
-        }
-
-        public bool ShowViewModel(MvxViewModelRequest request)
-        {
-            Requests.Add(request);
-            return true;
-        }
-
-        public bool ChangePresentation(MvxPresentationHint hint)
-        {
-            Hints.Add(hint);
-            return true;
-        }
+        action();
+        return true;
     }
+
+    public bool ShowViewModel(MvxViewModelRequest request)
+    {
+        Requests.Add(request);
+        return true;
+    }
+
+    public bool ChangePresentation(MvxPresentationHint hint)
+    {
+        Hints.Add(hint);
+        return true;
+    }
+}
+```
 
 which can be registered as:
 
 ```c#
-
 protected MockDispatcher MockDispatcher {
     get;
     private set;
@@ -115,7 +116,6 @@ protected override void AdditionalSetup()
 If you are also using object based navigation - e.g. `ShowViewModel<MyViewModel>(new { id = 12 })` - then you may also need to register an `IMvxStringToTypeParser` parser to facilitate this:
 
 ```c#
-
 protected MockDispatcher MockDispatcher {
     get;
     private set;
@@ -142,3 +142,4 @@ protected override void AdditionalSetup()
 * [MvvmCross: Enable Unit-testing](http://blog.fire-development.com/2013/06/29/mvvmcross-enable-unit-testing/). A blog post presenting a slightly different approach, using a custom `MvvmCrossTestSetup` class.
 
 * [MvvmCross: Unit-testing with AutoFixture](http://blog.fire-development.com/2013/06/29/mvvmcross-unit-testing-with-autofixture/). A blog post introducing a way to combine MvvmCross with [AutoFixture](https://github.com/AutoFixture/AutoFixture)
+
