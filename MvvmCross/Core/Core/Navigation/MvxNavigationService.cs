@@ -5,9 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MvvmCross.Core.Navigation.EventArguments;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
@@ -16,6 +18,9 @@ namespace MvvmCross.Core.Navigation
     {
         private readonly IMvxViewDispatcher _viewDispatcher;
         private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
+
+        public event BeforeNavigateEventHandler BeforeNavigate;
+        public event BeforeNavigateEventHandler AfterNavigate;
 
         public MvxNavigationService(IMvxViewDispatcher viewDispatcher)
         {
@@ -88,6 +93,9 @@ namespace MvvmCross.Core.Navigation
 
         public async Task Navigate(string path)
         {
+            var args = new NavigateEventArgs(path);
+			OnBeforeNavigate(this, args);
+
             KeyValuePair<Regex, Type> entry;
 
             if (!TryGetRoute(path, out entry)) return;
@@ -129,6 +137,7 @@ namespace MvvmCross.Core.Navigation
             }
 
             _viewDispatcher.ShowViewModel(request);
+            OnAfterNavigate(this, args);
         }
 
 
@@ -141,12 +150,28 @@ namespace MvvmCross.Core.Navigation
 
         public async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
         {
+            var args = new NavigateEventArgs(typeof(TViewModel));
+			OnBeforeNavigate(this, args);
             ShowViewModel<TViewModel>();
+            OnAfterNavigate(this, args);
         }
 
         public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModelInitializer<TParameter>
         {
+            var args = new NavigateEventArgs(typeof(TViewModel));
+            OnBeforeNavigate(this, args);
             ShowViewModel<TViewModel, TParameter>(param);
+            OnAfterNavigate(this, args);
+        }
+
+        private void OnBeforeNavigate(object sender, NavigateEventArgs e)
+        {
+        	BeforeNavigate?.Invoke(sender, e);
+        }
+
+        private void OnAfterNavigate(object sender, NavigateEventArgs e)
+        {
+            AfterNavigate?.Invoke(sender, e);
         }
     }
 }

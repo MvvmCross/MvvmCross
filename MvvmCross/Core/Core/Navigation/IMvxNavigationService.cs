@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvvmCross.Core.Navigation.EventArguments;
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Core.Navigation
 {
+    public delegate void BeforeNavigateEventHandler(object sender, NavigateEventArgs e);
+    public delegate void AfterNavigateEventHandler(object sender, NavigateEventArgs e);
+
     /// <summary>
     /// Allows for URI based navigation in MvvmCross
     /// </summary>
     public interface IMvxNavigationService
     {
+        event BeforeNavigateEventHandler BeforeNavigate;
+        event BeforeNavigateEventHandler AfterNavigate;
+
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
         /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
