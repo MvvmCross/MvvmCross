@@ -53,3 +53,4 @@ You can choose to download and install an extension manually, or you can get it 
 ## Help updating the docs!
 
 Everyone can contribute and help improving the docs! The docs are part of the source tree, so just go over to github and help us out!
+

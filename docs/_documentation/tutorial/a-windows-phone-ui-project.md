@@ -70,6 +70,7 @@ Most of this functionality is provided for you automatically. Within your Window
 - your `App` - your link to the business logic and `ViewModel` content
 
 For `TipCalc` here's all that is needed in Setup.cs:
+
 ```c#
 using Microsoft.Phone.Controls;
 using MvvmCross.Core.ViewModels;
@@ -91,6 +92,7 @@ public class Setup : MvxPhoneSetup
 }
 }
 ```
+
 ## Modify the App.xaml.cs to use Setup
 
 Your `App.xaml.cs` provides the Windows Phone Silverlight 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
@@ -98,15 +100,20 @@ Your `App.xaml.cs` provides the Windows Phone Silverlight 'main application' obj
 To modify this `App.xaml.cs` for MvvmCross, we need to:
 
 * modify the constructor so that it creates and starts 'Setup'
+
 ```c#
 var setup = new Setup(RootFrame);
 setup.Initialize();
 ```
+
 * add a private field - just a boolean flag which we will set after we have done one navigation
+
 ```c#
 private bool _hasDoneFirstNavigation = false;
 ```
+
 * modify the Application_Launching callback so that we can intercept the first navigation, can cancel it and can delegate the initial navigation to `IMvxAppStart` instead.
+
 ```c#
 private void Application_Launching(object sender, LaunchingEventArgs e)
 {
@@ -122,7 +129,9 @@ private void Application_Launching(object sender, LaunchingEventArgs e)
     };
 }
 ```
+
 After you've done this your code might look like:
+
 ```c#
 using System;
 using System.Diagnostics;
@@ -375,6 +384,7 @@ public partial class App : Application
 }
 }
 ```
+
 ## Add your View
 
 ### Create an initial Page
@@ -395,10 +405,13 @@ This will generate:
 Open the TipView.xaml.cs file.
 
 To change TipView from a `PhonePage` into an MvvmCross view, change it so that it inherits from `MvxPhonePage`:
+
 ```c#
 public partial class TipView : MvxPhonePage
 ```
+
  Altogether this looks like:
+
 ```c#
 using MvvmCross.WindowsPhone.Views;
 
@@ -413,6 +426,7 @@ public partial class TipView : MvxPhonePage
 }
 }
 ```
+
 ### Edit the XAML layout
 
 Double click on the XAML file.
@@ -422,13 +436,16 @@ This will open the XAML editor within Visual Studio.
 I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 To make the XAML inheritance match the `MvxPhonePage` inheritance, change the outer root node of the Xaml file from:
-```c#
+
+```xml
 <phone:PhoneApplicationPage
 ... >
 <!-- content -->
 </phone:PhoneApplicationPage>
 ```
+
 to:
+
 ```xml
 <views:MvxPhonePage
     xmlns:views="clr-namespace:MvvmCross.WindowsPhone.Views;assembly=MvvmCross.WindowsPhone"
@@ -436,6 +453,7 @@ to:
     <!-- content -->
 </views:MvxPhonePage>
 ```
+
 To then add the XAML user interface for our tip calculator, we will edit the `ContentPanel` to include:
 
 * a `StackPanel` container, into which we add:
@@ -471,6 +489,7 @@ This will produce XAML like:
     </StackPanel>
 </Grid>
 ```
+
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity, Mode=TwoWay}"`
 
 In the designer, this will look like:
@@ -496,3 +515,4 @@ This is a View concern - it is a UI problem. So we can fix it just in the Window
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
 Let's move on to even more Windows!
+

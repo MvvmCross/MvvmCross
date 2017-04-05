@@ -15,3 +15,4 @@ If you would like to help make MvvmCross even better, then please do:
 * please do blog about your adventures with MvvmCross!
 * please suggest editions for the documentation files - we're currently light on documentation!
 * if you use the framework, then please let us know - we love to see what people are doing with it
+

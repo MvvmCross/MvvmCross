@@ -16,6 +16,9 @@ layout: default
         <h2>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h2>
+        <span class="post-meta">
+          {{ post.content | strip_html | escape | truncatewords: 80 }}
+        </span>
       </li>
     {% endfor %}
   </ul>

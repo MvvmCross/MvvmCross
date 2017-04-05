@@ -21,3 +21,4 @@ Notes:
   - using a single JSON file or a single CSV (Comma Separated Variables) file to store all languages in one single file (again see https://github.com/slodge/MvvmCross/issues/55)
   
   we *hope* that some of these alternatives will become open source realities in the future
+

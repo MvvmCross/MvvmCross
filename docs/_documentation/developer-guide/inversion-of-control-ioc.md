@@ -19,19 +19,20 @@ Specifically within MvvmCross, we provide a single static class `Mvx` which acts
 
 The core idea of MvvmCross Service Location is that you can write classes and interfaces like:
 
-        public interface IFoo
-        {
-             string Request();
-        }
-    
-        public class Foo : IFoo
-        {
-            public string Request()
-            {
-                return "Hello World";
-            }
-        }
+```c#
+public interface IFoo
+{
+    string Request();
+}
 
+public class Foo : IFoo
+{
+    public string Request()
+    {
+        return "Hello World";
+    }
+}
+```
 
 ### Singleton Registration
 
@@ -489,72 +490,79 @@ If you use constructor injection, then for each dependency you can only ever rec
 
 Take the following code: 
 
-    // Registered with Mvx.RegisterType<IBar, Bar>();
-    public class Bar : IBar
+```c#
+// Registered with Mvx.RegisterType<IBar, Bar>();
+public class Bar : IBar
+{
+    public void DoStuff()
     {
-       public void DoStuff()
-       {
-          // implementation
-       }
+        // implementation
+    }
+}
+
+// Registered with Mvx.ConstructAndRegisterSingleton<IFooSingleton, FooSingleton>();
+public class FooSingleton : IFooSingleton
+{
+    private readonly IBar _bar;
+
+    public FooSingleton(IBar bar)
+    {
+        // This "bar" instance will be held forever,
+        // no other instance will be created for the
+        // lifetime of this singleton
+        _bar = bar;
     }
 
-    // Registered with Mvx.ConstructAndRegisterSingleton<IFooSingleton, FooSingleton>();
-    public class FooSingleton : IFooSingleton
+    public void DoFoo()
     {
-       private readonly IBar _bar;
-    
-       public FooSingleton(IBar bar)
-       {
-         // This "bar" instance will be held forever, 
-         // no other instance will be created for the 
-         // lifetime of this singleton 
-         _bar = bar;
-       }
-
-       public void DoFoo()
-       {
-          _bar.DoStuff();
-       }
+        _bar.DoStuff();
     }
+}
+```
 
 In this case, `FooSingleton` is registered as a singleton within MvvmCross, and when it is created it will receive a instance of `Bar`, which it will always use.
 
 If instead, you wanted the `FooSingleton` to request a new instance each time then you could remove the constructor injection and instead use dynamic resolution - for example:
 
-    public class FooSingleton : IFooSingleton
+```c#
+public class FooSingleton : IFooSingleton
+{
+    public FooSingleton()
     {
-      public FooSingleton()
-      {
         // No "IBar" dependency in the constructor
-      }
-
-      public void DoFoo()
-      {
-         var bar = Mvx.Resolve<IBar>();
-         bar.DoStuff();
-      }
     }
+
+    public void DoFoo()
+    {
+        var bar = Mvx.Resolve<IBar>();
+        bar.DoStuff();
+    }
+}
+```
 
 As another alternative, you could continue to use constructor injection, but could use an `IBarFactory` dependency instead of an `IBar` - e.g.:
 
-    public class FooSingleton : IFooSingleton
+```c#
+public class FooSingleton : IFooSingleton
+{
+    private readonly IFactory<IBar> _barFactory;
+
+    public FooSingleton(IFactory<IBar> barFactory)
     {
-      private readonly IFactory<IBar> _barFactory;
-
-      public FooSingleton(IFactory<IBar> barFactory)
-      {
         _barFactory = barFactory;
-      }
-
-      public void DoFoo()
-      {
-         var bar = _barFactory.Create();
-         bar.DoStuff();
-      }
     }
+
+    public void DoFoo()
+    {
+        var bar = _barFactory.Create();
+        bar.DoStuff();
+    }
+}
+```
 
 Understanding object lifecycles in this type of situation - where some objects are dynamic and some are singletons - can be difficult, especially in large applications. To work with these type of objects it may help to adopt and follow patterns and naming conventions within your application - these may allow developers to more easily identify which interfaces should and should not be used dynamically.
 
   [1]: http://www.martinfowler.com/articles/injection.html
   [2]: http://joelabrahamsson.com/inversion-of-control-an-introduction-with-examples-in-net/
   [3]: https://github.com/slodge/MvvmCross-Presentations/blob/master/MvxDay/InterfaceDrivenDevelopment.pptx
+

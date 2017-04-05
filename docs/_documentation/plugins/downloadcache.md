@@ -44,3 +44,4 @@ android:maxWidth="40dp"
 ```
 
 To go further, I strongly advise you to create a "avatarStyle", with your custom attributes, and apply it to your MvxImageView.
+

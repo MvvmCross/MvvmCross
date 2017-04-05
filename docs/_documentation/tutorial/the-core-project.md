@@ -380,3 +380,4 @@ These are the same steps that you need to go through for every new MvvmCross app
 ## Moving on
 
 Next we'll start looking at how to add a first UI to this MvvmCross application.
+

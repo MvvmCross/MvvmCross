@@ -14,7 +14,7 @@ Currently the classes available in this library consists of:
 
 ## MvxSidePanelsPresenter
 
-This presenter provides 3 panels as view “targets”, a main central panel, a right side panel and a left side panel.  Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
+This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel.  Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
 
 A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
 ```c#
@@ -35,7 +35,7 @@ public class CenterPanelView
 }
 ```
 
-So to explain this example it’s telling the MvxSidePanelsPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
+So to explain this example it's telling the MvxSidePanelsPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
 
 If this was using MvxPanelEnum.Left for instance this would be shown in the left hand panel and would also immediately slide the left panel into view.
 
@@ -129,3 +129,4 @@ public override bool HandlesKeyboardNotifications()
     return true;
 }
 ```
+
