@@ -34,10 +34,16 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             {
                 shouldAddToCache = false;
             }
-            else if (localPath.StartsWith(ResourcePrefix))
+            else if (localPath.ToLower().StartsWith(ResourcePrefix))
             {
                 var resourcePath = localPath.Substring(ResourcePrefix.Length);
                 bitmap = await LoadResourceBitmapAsync(resourcePath).ConfigureAwait(false);
+            }
+            else if (localPath.ToLower().StartsWith("android.resource"))
+            {
+                var substrings = localPath.Split(new[] { "/" }, StringSplitOptions.None);
+                var resourceId = int.Parse(substrings[substrings.Length - 1]);
+                bitmap = await LoadResourceBitmapAsync(resourceId).ConfigureAwait(false);
             }
             else
             {
@@ -66,10 +72,14 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                                       "Value '{0}' was not a known drawable name", resourcePath);
                 return null;
             }
+            return await LoadResourceBitmapAsync(id).ConfigureAwait(false);
+        }
 
-            return
-                await BitmapFactory.DecodeResourceAsync(resources, id,
-                    new BitmapFactory.Options { InPurgeable = true }).ConfigureAwait(false);
+        private async Task<Bitmap> LoadResourceBitmapAsync(int resourceId)
+        {
+            var resources = AndroidGlobals.ApplicationContext.Resources;
+            return await BitmapFactory.DecodeResourceAsync(resources, resourceId,
+                new BitmapFactory.Options { InPurgeable = true }).ConfigureAwait(false);
         }
 
         private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
