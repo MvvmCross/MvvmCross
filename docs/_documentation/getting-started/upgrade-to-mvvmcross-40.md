@@ -35,3 +35,4 @@ All classes, methods, and properties containing the term `Touch` were replaced w
 ## Mac support
 
 All Nugets now support Xamarin.Mac ([Unified API](https://developer.xamarin.com/guides/cross-platform/macios/unified/)). Add the `MvvmCross.StarterPack` NuGet to an empty Xamarin.Mac project in Xamarin Studio to help you get started with sample code.
+

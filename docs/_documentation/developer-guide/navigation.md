@@ -35,7 +35,7 @@ To add a splashscreen:
 
 2. Add some simple AXML for a splashscreen. For example, a very simple screen might be:
 
-    ```xml
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -46,7 +46,7 @@ To add a splashscreen:
             android:gravity="center"
             android:text="loading..." />
     </FrameLayout>
-    ```
+```
 
    Note that this splashscreen will be displayed before the MvvmCross system is fully booted - so you **cannot** use data-binding within the splashscreen AXML.
 
@@ -172,7 +172,7 @@ public class SecondViewModel : MvxViewModel
 
 6. For `FirstView` include a button - and bind it's `Click` event to the `GoCommand` within the `FirstViewModel`
 
-    ```xml
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout
       xmlns:android="http://schemas.android.com/apk/res/android"
@@ -188,11 +188,11 @@ public class SecondViewModel : MvxViewModel
     	  local:MvxBind="Click GoCommand"
     	  />
     </LinearLayout>
-    ```
+```
  
 7. For `SecondView` include only some 'simple' text:
 
-    ```xml
+```xml
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout
 	  xmlns:android="http://schemas.android.com/apk/res/android"
@@ -207,7 +207,7 @@ public class SecondViewModel : MvxViewModel
 		  android:textSize="40dp"
 		  />
 	</LinearLayout>
-    ```
+```
  
 8. As discussed above in 'The initial navigation' add a SplashScreen for this Droid app.
 
@@ -328,3 +328,4 @@ TODO
 ###Dialogs
 
 TODO
+

@@ -78,23 +78,25 @@ The specific jobs that your `App` should do during its `Initialize` are:
 
 A default `App` supplied via nuget, looks like:
 
-    using Cirrious.CrossCore.IoC;
+```c#
+using Cirrious.CrossCore.IoC;
 
-    namespace MyName.Core
+namespace MyName.Core
+{
+public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+{
+    public override void Initialize()
     {
-        public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
-        {
-            public override void Initialize()
-            {
-                CreatableTypes()
-                    .EndingWith("Service")
-                    .AsInterfaces()
-                    .RegisterAsLazySingleton();
-  			
-                RegisterAppStart<ViewModels.FirstViewModel>();
-            }
-        }
+        CreatableTypes()
+        .EndingWith("Service")
+        .AsInterfaces()
+        .RegisterAsLazySingleton();
+
+        RegisterAppStart<ViewModels.FirstViewModel>();
     }
+}
+}
+```
 
 This `App`:
 
@@ -119,31 +121,38 @@ For MvvmCross, `ViewModels` normally inherit from `MvxViewModel`
 
 A typical `ViewModel` might look like:
 
-    public class FirstViewModel 
-        : MvxViewModel
+```c#
+public class FirstViewModel
+    : MvxViewModel
+{
+    private string _name;
+    public string Name
     {
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; RaisePropertyChanged(() => Name); }
+        get {
+            return _name;
         }
-        
-        private MvxCommand _resetCommand;
-        public ICommand ResetCommand
-        {
-            get 
-            {
-                _resetCommand = _resetCommand ?? new MvxCommand(() => Reset());
-                return _resetCommand;
-            }
-        }
-        
-        private void Reset()
-        {
-            Name = string.Empty;
+        set {
+            _name = value;
+            RaisePropertyChanged(() => Name);
         }
     }
+
+    private MvxCommand _resetCommand;
+    public ICommand ResetCommand
+    {
+        get
+        {
+            _resetCommand = _resetCommand ?? new MvxCommand(() => Reset());
+            return _resetCommand;
+        }
+    }
+
+    private void Reset()
+    {
+        Name = string.Empty;
+    }
+}
+```
 
 This `FirstViewModel` has:
 
@@ -155,10 +164,10 @@ Beyond this simple example, `ViewModels` can also:
 - contain dynamic lists (see https://github.com/slodge/MvvmCross/wiki/MvvmCross-Tutorials#working-with-collections)
 - be constructed from IoC (https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
 - use 'techniques' like:
-  - `MvxCommandCollection` (see http://slodge.blogspot.co.uk/2013/03/fixing-mvvm-commands-making-hot-tuna.html), 
-  - `IMvxINPCInterceptor` (see http://slodge.blogspot.co.uk/2013/07/intercepting-raisepropertychanged.html)
-  - Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
-  - Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
+- `MvxCommandCollection` (see http://slodge.blogspot.co.uk/2013/03/fixing-mvvm-commands-making-hot-tuna.html), 
+- `IMvxINPCInterceptor` (see http://slodge.blogspot.co.uk/2013/07/intercepting-raisepropertychanged.html)
+- Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
+- Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
 
 ##The MvvmCross UI
 
@@ -178,61 +187,65 @@ On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplica
 
 An initial replacement looks like:
 
-	using MonoTouch.Foundation;
-	using MonoTouch.UIKit;
-	using Cirrious.CrossCore;
-	using Cirrious.MvvmCross.Touch.Platform;
-	using Cirrious.MvvmCross.ViewModels;
+```c#
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
-	namespace MyName.Touch
-	{
-		[Register ("AppDelegate")]
-		public partial class AppDelegate : MvxApplicationDelegate
-		{
-			UIWindow _window;
+namespace MyName.Touch
+{
+[Register ("AppDelegate")]
+public partial class AppDelegate : MvxApplicationDelegate
+{
+    UIWindow _window;
 
-			public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-			{
-				_window = new UIWindow (UIScreen.MainScreen.Bounds);
+    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+    {
+        _window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-				var setup = new Setup(this, _window);
-				setup.Initialize();
+        var setup = new Setup(this, _window);
+        setup.Initialize();
 
-				var startup = Mvx.Resolve<IMvxAppStart>();
-				startup.Start();
+        var startup = Mvx.Resolve<IMvxAppStart>();
+        startup.Start();
 
-				_window.MakeKeyAndVisible ();
-			
-				return true;
-			}
-		}
-	}
+        _window.MakeKeyAndVisible ();
+
+        return true;
+    }
+}
+}
+```
   
 ####Android
 
 On Android, we don't normally have any `Application` to override. Instead of this, MvvmCross by default provides a `SplashScreen` - this typically looks like:
 
-    using Android.App;
-    using Android.Content.PM;
-    using Cirrious.MvvmCross.Droid.Views;
+```c#
+using Android.App;
+using Android.Content.PM;
+using Cirrious.MvvmCross.Droid.Views;
 
-    namespace MyName.Droid
+namespace MyName.Droid
+{
+[Activity(
+     Label = "CustomBinding.Droid"
+             , MainLauncher = true
+     , Icon = "@drawable/icon"
+     , Theme = "@style/Theme.Splash"
+     , NoHistory = true
+     , ScreenOrientation = ScreenOrientation.Portrait)]
+public class SplashScreen : MvxSplashScreenActivity
+{
+    public SplashScreen()
+    : base(Resource.Layout.SplashScreen)
     {
-        [Activity(
-  	    Label = "CustomBinding.Droid"
-		    , MainLauncher = true
-		    , Icon = "@drawable/icon"
-		    , Theme = "@style/Theme.Splash"
-		    , NoHistory = true
-		    , ScreenOrientation = ScreenOrientation.Portrait)]
-        public class SplashScreen : MvxSplashScreenActivity
-        {
-            public SplashScreen()
-                : base(Resource.Layout.SplashScreen)
-            {
-            }
-        }
     }
+}
+}
+```
     
 Importantly, please note that this class is marked with `MainLauncher = true` to ensure that this is the first thing created when the native platform starts.
 
@@ -249,17 +262,21 @@ To adapt this for MvvmCross, we simply:
 
 2. add a block to `Application_Launching` to force the native app to defer the start actions to `IMvxAppStart`
  
-        private void Application_Launching(object sender, LaunchingEventArgs e)
-        {
-            RootFrame.Navigating += RootFrameOnNavigating;
-        }
+```c#
+private void Application_Launching(object sender, LaunchingEventArgs e)
+{
+    RootFrame.Navigating += RootFrameOnNavigating;
+}
 
-        private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
-        {
-            args.Cancel = true;
-            RootFrame.Navigating -= RootFrameOnNavigating;
-            RootFrame.Dispatcher.BeginInvoke(() => { Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start(); });
-        }
+private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
+{
+    args.Cancel = true;
+    RootFrame.Navigating -= RootFrameOnNavigating;
+    RootFrame.Dispatcher.BeginInvoke(() => {
+        Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start();
+    });
+}
+```
 
 ####Wpf
 
@@ -321,11 +338,13 @@ On WindowsStore, a new project will again contain a native `App.xaml.cs`
 
 To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace the `if (rootFrame.Content == null)` block with:
 
-                var setup = new Setup(rootFrame);
-                setup.Initialize();
-                
-                var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
-                start.Start();
+```c#
+var setup = new Setup(rootFrame);
+setup.Initialize();
+
+var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+start.Start();
+```
 
 ###Setup.cs
 
@@ -344,116 +363,126 @@ Beyond this, a larger list of Setup customisation options is discussed in https:
 
 ####Minimal Setup - Android
 
-    using Android.Content;
-    using Cirrious.MvvmCross.Droid.Platform;
-    using Cirrious.MvvmCross.ViewModels;
-    
-    namespace MyName.Droid
-    {
-        public class Setup : MvxAndroidSetup
-        {
-            public Setup(Context applicationContext) : base(applicationContext)
-            {
-            }
+```c#
+using Android.Content;
+using Cirrious.MvvmCross.Droid.Platform;
+using Cirrious.MvvmCross.ViewModels;
 
-            protected override IMvxApplication CreateApp()
-            {
-                return new Core.App();
-            }
-        }
+namespace MyName.Droid
+{
+public class Setup : MvxAndroidSetup
+{
+    public Setup(Context applicationContext) : base(applicationContext)
+    {
     }
+
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
+}
+}
+```
 
 ####Minimal Setup - iOS
 
-    using MonoTouch.UIKit;
-    using Cirrious.MvvmCross.Touch.Platform;
-    
-    namespace MyName.Touch
-    {
-	    public class Setup : MvxTouchSetup
-	    {
-		    public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
-                : base(applicationDelegate, window)
-		    {
-		    }
+```c#
+using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Platform;
 
-		    protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp ()
-		    {
-			    return new Core.App();
-		    }
-	    }
+namespace MyName.Touch
+{
+public class Setup : MvxTouchSetup
+{
+    public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+    : base(applicationDelegate, window)
+    {
     }
+
+    protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp ()
+    {
+        return new Core.App();
+    }
+}
+}
+```
 
 ####Minimal Setup - WindowsPhone
 
-    using Cirrious.MvvmCross.ViewModels;
-    using Cirrious.MvvmCross.WindowsPhone.Platform;
-    using Microsoft.Phone.Controls;
+```c#
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.WindowsPhone.Platform;
+using Microsoft.Phone.Controls;
 
-    namespace MyName.Phone
+namespace MyName.Phone
+{
+public class Setup : MvxPhoneSetup
+{
+    public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
     {
-        public class Setup : MvxPhoneSetup
-        {
-            public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
-            {
-            }
-
-            protected override IMvxApplication CreateApp()
-            {
-                return new Core.App();
-            }
-        }
     }
+
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
+}
+}
+```
     
 ####Minimal Setup - Wpf
 
-    using System.Windows.Threading;
-    using Cirrious.MvvmCross.Platform;
-    using Cirrious.MvvmCross.ViewModels;
-    using Cirrious.MvvmCross.Wpf.Platform;
-    using Cirrious.MvvmCross.Wpf.Views;
+```c#
+using System.Windows.Threading;
+using Cirrious.MvvmCross.Platform;
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.Wpf.Platform;
+using Cirrious.MvvmCross.Wpf.Views;
 
-    namespace MyName.Wpf
+namespace MyName.Wpf
+{
+public class Setup : MvxWpfSetup
+{
+    public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
+    : base(dispatcher, presenter)
     {
-        public class Setup : MvxWpfSetup
-        {
-            public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
-                : base(dispatcher, presenter)
-            {
-            }
-
-            protected override IMvxApplication CreateApp()
-            {
-                return new Core.App();
-            }
-
-            protected override IMvxTrace CreateDebugTrace()
-            {
-                return new DebugTrace();
-            }
-        }
     }
+
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
+
+    protected override IMvxTrace CreateDebugTrace()
+    {
+        return new DebugTrace();
+    }
+}
+}
+```
     
 ####Setup - WindowsStore
 
-    using Cirrious.MvvmCross.ViewModels;
-    using Cirrious.MvvmCross.WindowsStore.Platform;
-    using Windows.UI.Xaml.Controls;
+```c#
+using Cirrious.MvvmCross.ViewModels;
+using Cirrious.MvvmCross.WindowsStore.Platform;
+using Windows.UI.Xaml.Controls;
 
-    namespace MyName.Store
+namespace MyName.Store
+{
+public class Setup : MvxStoreSetup
+{
+    public Setup(Frame rootFrame) : base(rootFrame)
     {
-        public class Setup : MvxStoreSetup
-        {
-            public Setup(Frame rootFrame) : base(rootFrame)
-            {
-            }
-
-            protected override IMvxApplication CreateApp()
-            {
-                return new Core.App();
-            }
-        }
     }
+
+    protected override IMvxApplication CreateApp()
+    {
+        return new Core.App();
+    }
+}
+}
+```
 
 ###Views
 
@@ -478,3 +507,4 @@ Each UI Platform provides a `Presenter` which implements `IMvxViewPresenter`.
 In default applications, the `Presenter` used normally fills the entire screen with a `Page` and allows back button navigation to previous pages.
 
 When more advanced screen layouts are needed - e.g. flyouts, tabs, pivots, split-screens, etc - then these can be supplied by using a custom presenter. For more on this, see http://slodge.blogspot.co.uk/2013/06/presenter-roundup.html
+

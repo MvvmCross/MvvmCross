@@ -26,17 +26,21 @@ C# properties are used for data-binding on both the View and the ViewModel.
 
 On the ViewModel, these properties often look like:
 
-    private string _myProperty;
-    public string MyProperty
-    {
-       get { return _myProperty; }
-       set 
-       { 
-          _myProperty = value;
-          RaisePropertyChanged(() => MyProperty);
-          // take any additional actions here which are required when MyProperty is updated
-       }
+```c#
+private string _myProperty;
+public string MyProperty
+{
+    get {
+        return _myProperty;
     }
+    set
+    {
+        _myProperty = value;
+        RaisePropertyChanged(() => MyProperty);
+        // take any additional actions here which are required when MyProperty is updated
+    }
+}
+```
 
 This pattern uses a local private backing variable to store the current value, and relies on `RaisePropertyChanged` to signal changes in the value to any listening Views.
 
@@ -65,16 +69,20 @@ For example:
 - if your View contained a `CheckBox` which has an `IsChecked` property
 - then your ViewModel might contain a property:
 
-        private bool _rememberMe;
-        public bool RememberMe
-        {
-           get { return _rememberMe; }
-           set 
-           { 
-              _rememberMe = value;
-              RaisePropertyChanged(() => RememberMe);
-           }
-        }
+```c#
+private bool _rememberMe;
+public bool RememberMe
+{
+    get {
+        return _rememberMe;
+    }
+    set
+    {
+        _rememberMe = value;
+        RaisePropertyChanged(() => RememberMe);
+    }
+}
+```
 
 - then a binding might connect together `IsChecked` on the View with `RememberMe` in the ViewModel.
 
@@ -147,16 +155,18 @@ Further, MvvmCross provides some supporting base classes to help with writing va
 
 As an example, a `LengthValueConverter` which is only used to help display the lenght of a string - with no `ConvertBack` use - might be implemented:
 
-    public class LengthValueConverter 
-    	: MvxValueConverter<string, int>
+```c#
+public class LengthValueConverter
+    : MvxValueConverter<string, int>
+{
+    protected override int Converter(string value, Type targetType, object parameter, CultureInfo cultureInfo)
     {
-        protected override int Converter(string value, Type targetType, object parameter, CultureInfo cultureInfo)
-        {
-            if (value == null)
-            	return 0;
-            return value.Length;
-        }
+        if (value == null)
+            return 0;
+        return value.Length;
     }
+}
+```
 
 ValueConverters can also be provided with a `parameter` - this can sometimes be useful to reuse a single value converter in different situations. For example, a `TrimValueConverter` might be able to take the characters to trim in its `parameter`.
 
@@ -301,7 +311,7 @@ where `$Target$` must always be the direct path to the View property - e.g.:
 - Text
 - IsChecked
 - Value
-- …
+- ... 
 
 `$SourcePath$` can be any C# style path to the property on the ViewModel or on a sub-object exposed using a property - e.g.:
 
@@ -314,7 +324,7 @@ where `$Target$` must always be the direct path to the View property - e.g.:
 - Customer.Orders[0].Total
 - Customer.Cards["Primary"].Expiry
 - Customer.Cards["Primary"].Number
-- …
+- ... 
 
      
 Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
@@ -548,7 +558,7 @@ There are a small number of ValueCombiners provided within Tibet, including:
   - a boolean test value
   - an if_true value which is used if the test value is true
   - an if_false value which is used otherwise
-- `Format(format, args…)` - takes 1 or more inputs
+- `Format(format, args...)` - takes 1 or more inputs
   - a string value which evaluates to a format string template
   - 0 or more args which will be evaluated in the string template
 - `Add(one,two)` - takes 2 arguments which it 'combines' together. For two strings, this means concatenation. For two doubles or two longs it means numeric addition. For mixtures of those items, the result is currently not fully specified.
@@ -859,3 +869,4 @@ The framework that enables the Rio and Tibet binding extensions is interface-bas
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
+
