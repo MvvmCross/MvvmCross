@@ -32,6 +32,7 @@ namespace MvvmCross.Core.Navigation
 
         public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
         {
+            //TODO: Find viewmodel with this type in stack and close it
             throw new NotImplementedException();
             //return navigationService.Close();
         }
