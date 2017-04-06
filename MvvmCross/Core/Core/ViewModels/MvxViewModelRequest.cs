@@ -25,23 +25,20 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxViewModelRequest(Type viewModelType,
                                    IMvxBundle parameterBundle,
-                                   IMvxBundle presentationBundle,
-                                   MvxRequestedBy requestedBy)
+                                   IMvxBundle presentationBundle)
         {
             this.ViewModelType = viewModelType;
             this.ParameterValues = parameterBundle.SafeGetData();
             this.PresentationValues = presentationBundle.SafeGetData();
-            this.RequestedBy = requestedBy;
         }
 
         public Type ViewModelType { get; set; }
         public IDictionary<string, string> ParameterValues { get; set; }
         public IDictionary<string, string> PresentationValues { get; set; }
-        public MvxRequestedBy RequestedBy { get; set; }
 
         public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
         {
-            return new MvxViewModelRequest(viewModelType, null, null, MvxRequestedBy.Unknown);
+            return new MvxViewModelRequest(viewModelType, null, null);
         }
     }
 
@@ -51,8 +48,8 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle, MvxRequestedBy requestedBy)
-            : base(typeof(TViewModel), parameterBundle, presentationBundle, requestedBy)
+        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle)
+            : base(typeof(TViewModel), parameterBundle, presentationBundle)
         {
         }
 
