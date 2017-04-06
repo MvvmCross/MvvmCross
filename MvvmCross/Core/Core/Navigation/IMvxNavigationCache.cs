@@ -18,7 +18,7 @@ namespace MvvmCross.Core.Navigation
         /// <param name="key">Key</param>
         /// <param name="value">Value to set</param>
         /// <returns>True of was added or updated and you need to save it.</returns>
-        bool AddOrUpdateValue<T>(string key, T value);
+        bool AddValue<T>(string key, T value);
 
         /// <summary>
         /// Removes a desired key

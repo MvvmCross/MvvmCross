@@ -7,7 +7,7 @@ namespace MvvmCross.Core.Navigation
     {
         private IDictionary<string, object> cache => new Dictionary<string, object>();
 
-        public bool AddOrUpdateValue<T>(string key, T value)
+        public bool AddValue<T>(string key, T value)
         {
             if (Contains(key))
                 return false;

@@ -199,15 +199,51 @@ namespace MvvmCross.Core.Navigation
             AfterClose?.Invoke(sender, e);
         }
 
-        public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel
+        public Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param)
+            where TViewModel : IMvxViewModel<TParameter, TResult>
+            where TParameter : class
+            where TResult : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TResult> Navigate<TViewModel, TResult>()
+            where TViewModel : IMvxViewModelReturn<TResult>
+            where TResult : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Navigate<TParameter>(string path, TParameter param)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TResult> Navigate<TResult>(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task Navigate<TViewModel, TParameter>(TParameter param)
+            where TViewModel : IMvxViewModel<TParameter>
+            where TParameter : class
         {
             var cacheKey = Guid.NewGuid().ToString();
 
             var args = new NavigateEventArgs(typeof(TViewModel));
+
             OnBeforeNavigate(this, args);
 
-            NavigationCache.AddOrUpdateValue<TParameter>(cacheKey, param);
+            NavigationCache.AddValue<TParameter>(cacheKey, param);
+
+            //TODO: Await showing viewmodel and return instance
             ShowViewModel<TViewModel>(cacheKey);
+            //TODO: Call Init(TParameter param) here
 
             OnAfterNavigate(this, args);
         }
