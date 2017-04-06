@@ -18,5 +18,7 @@ namespace MvvmCross.Core.Views
         void ChangePresentation(MvxPresentationHint hint);
 
         void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint;
+
+        void Close(IMvxViewModel toClose);
     }
 }
