@@ -11,8 +11,6 @@ namespace MvvmCross.Core.ViewModels
 {
     public interface IMvxViewModel
     {
-        MvxRequestedBy RequestedBy { get; set; }
-
         void Appearing();
 
         void Appeared();

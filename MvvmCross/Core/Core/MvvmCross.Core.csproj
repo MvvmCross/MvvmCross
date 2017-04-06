@@ -100,8 +100,6 @@
     <Compile Include="ViewModels\IMvxViewModel.cs" />
     <Compile Include="ViewModels\IMvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxViewModelLocator.cs" />
-    <Compile Include="ViewModels\MvxRequestedBy.cs" />
-    <Compile Include="ViewModels\MvxRequestedByType.cs" />
     <Compile Include="Views\IMvxView.cs" />
     <Compile Include="Views\IMvxViewDispatcher.cs" />
     <Compile Include="Views\IMvxViewFinder.cs" />

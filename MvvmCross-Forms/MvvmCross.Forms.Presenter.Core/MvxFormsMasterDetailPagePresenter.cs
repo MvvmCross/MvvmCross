@@ -107,7 +107,7 @@ namespace MvvmCross.Forms.Presenter.Core
                 Page rootContentPage = null;
                 if (masterDetailViewModel.RootContentPageViewModelType != null)
                 {
-                    var rootContentRequest = new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null, null);
+                    var rootContentRequest = new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null);
 
                     var rootContentViewModel = MvxPresenterHelpers.LoadViewModel(rootContentRequest);
                     rootContentPage = MvxPresenterHelpers.CreatePage(rootContentRequest);

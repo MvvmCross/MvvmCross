@@ -19,9 +19,7 @@ namespace MvvmCross.Core.ViewModels
     {
         protected MvxViewModel()
         {
-            this.RequestedBy = MvxRequestedBy.Unknown;
         }
-		public MvxRequestedBy RequestedBy { get; set; }
 
 		public virtual void Appearing()
 		{

@@ -21,7 +21,7 @@ namespace MvvmCross.Mac.Views
         }
 
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
-            : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)
+            : base(viewModelInstance.GetType(), null, null)
         {
             this._viewModelInstance = viewModelInstance;
         }

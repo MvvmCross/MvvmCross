@@ -18,7 +18,7 @@ namespace MvvmCross.tvOS.Views
         public IMvxViewModel ViewModelInstance => this._viewModelInstance;
 
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
-            : base(viewModelInstance.GetType(), null, null, MvxRequestedBy.Unknown)
+            : base(viewModelInstance.GetType(), null, null)
         {
             this._viewModelInstance = viewModelInstance;
         }

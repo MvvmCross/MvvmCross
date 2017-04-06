@@ -53,8 +53,7 @@
                 var type = view.GetViewModelType();
                 if (type != null)
                 {
-                    var by = new MvxRequestedBy(MvxRequestedByType.Other, $"Segue: {segue.Identifier}");
-                    view.Request = new MvxViewModelRequest(type, parameterBundle, null, by);
+                    view.Request = new MvxViewModelRequest(type, parameterBundle, null);
                 }
             }
         }

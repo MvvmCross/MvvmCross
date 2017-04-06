@@ -31,8 +31,7 @@ namespace MvvmCross.tvOS.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
-            var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null,
-                                                                    MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null);
             return view.CreateViewControllerFor(request);
         }
 

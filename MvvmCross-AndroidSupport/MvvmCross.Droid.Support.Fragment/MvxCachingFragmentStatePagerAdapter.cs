@@ -78,7 +78,7 @@ namespace MvvmCross.Droid.Support.V4
             if (fragInfo.ParameterValuesObject != null)
                 mvxBundle = new MvxBundle(fragInfo.ParameterValuesObject.ToSimplePropertyDictionary());
 
-            var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null, null);
+            var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
 
             return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
         }

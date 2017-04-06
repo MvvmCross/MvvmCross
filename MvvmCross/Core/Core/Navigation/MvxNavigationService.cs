@@ -158,7 +158,6 @@ namespace MvvmCross.Core.Navigation
                     viewModelType,
 
                     new MvxBundle(paramDict),
-                    null,
                     null);
             }
 
