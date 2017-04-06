@@ -18,6 +18,11 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
+        public MvxViewModelRequest(Type viewModelType)
+        {
+            this.ViewModelType = viewModelType;
+        }
+
         public MvxViewModelRequest(Type viewModelType,
                                    IMvxBundle parameterBundle,
                                    IMvxBundle presentationBundle,
@@ -42,8 +47,11 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
-        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle,
-                                   MvxRequestedBy requestedBy)
+        public MvxViewModelRequest() : base(typeof(TViewModel))
+        {
+        }
+
+        public MvxViewModelRequest(IMvxBundle parameterBundle, IMvxBundle presentationBundle, MvxRequestedBy requestedBy)
             : base(typeof(TViewModel), parameterBundle, presentationBundle, requestedBy)
         {
         }
