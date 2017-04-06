@@ -102,7 +102,7 @@ namespace MvvmCross.Mac.Views.Presenters
                 .Select(attr => NSLayoutConstraint.Create(child, attr, NSLayoutRelation.Equal, container, attr, 1, 0)).ToArray());
         }
 
-        public virtual void Close(IMvxViewModel toClose)
+        public override void Close(IMvxViewModel toClose)
         {
             Mvx.Error("Sorry - don't know how to close a view!");
 

@@ -7,6 +7,7 @@
 
 namespace MvvmCross.iOS.Views.Presenters
 {
+    using System;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
@@ -33,6 +34,10 @@ namespace MvvmCross.iOS.Views.Presenters
         }
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+        }
+
+        public override void Close(IMvxViewModel toClose)
         {
         }
     }

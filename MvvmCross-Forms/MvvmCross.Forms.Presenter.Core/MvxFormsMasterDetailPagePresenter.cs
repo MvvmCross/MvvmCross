@@ -169,5 +169,9 @@ namespace MvvmCross.Forms.Presenter.Core
             var mainPage = Application.Current.MainPage as MasterDetailPage;            
             (mainPage.Master.BindingContext as MvxMasterDetailViewModel)?.RootContentPageActivated();
         }
+
+        public override void Close(IMvxViewModel toClose)
+        {
+        }
     }
 }

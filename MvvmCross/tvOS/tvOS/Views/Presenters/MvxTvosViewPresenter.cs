@@ -74,7 +74,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             this.MasterNavigationController.PopViewController(true);
         }
 
-        public virtual void Close(IMvxViewModel toClose)
+        public override void Close(IMvxViewModel toClose)
         {
             var topViewController = this.MasterNavigationController.TopViewController;
 
