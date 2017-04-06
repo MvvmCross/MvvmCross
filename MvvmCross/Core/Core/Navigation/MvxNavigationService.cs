@@ -16,8 +16,12 @@ namespace MvvmCross.Core.Navigation
     //TODO: Remove MvxNavigatingObject workaround when new navigation is fully integrated
     public class MvxNavigationService : MvxNavigatingObject, IMvxNavigationService
     {
+        //TODO: Should we get the dispatcher via MvxMainThreadDispatcher.Instance; ?
         private readonly IMvxViewDispatcher _viewDispatcher;
+
         private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
+
+        protected virtual IMvxNavigationCache NavigationCache => new MvxNavigationCache();
 
         public event BeforeNavigateEventHandler BeforeNavigate;
         public event BeforeNavigateEventHandler AfterNavigate;
@@ -158,14 +162,14 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModelInitializer<TParameter>
+        /*public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModelInitializer<TParameter>
         {
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
             ShowViewModel<TViewModel, TParameter>(param);
             OnAfterNavigate(this, args);
         }
-
+*/
         public async Task<bool> Close(IMvxViewModel viewModel)
         {
             var args = new NavigateEventArgs();
@@ -193,6 +197,19 @@ namespace MvvmCross.Core.Navigation
         private void OnAfterClose(object sender, NavigateEventArgs e)
         {
             AfterClose?.Invoke(sender, e);
+        }
+
+        public async Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel
+        {
+            var cacheKey = Guid.NewGuid().ToString();
+
+            var args = new NavigateEventArgs(typeof(TViewModel));
+            OnBeforeNavigate(this, args);
+
+            NavigationCache.AddOrUpdateValue<TParameter>(cacheKey, param);
+            ShowViewModel<TViewModel>(cacheKey);
+
+            OnAfterNavigate(this, args);
         }
     }
 }

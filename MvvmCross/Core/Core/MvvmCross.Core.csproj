@@ -127,6 +127,8 @@
     <Compile Include="Navigation\MvxNavigationService.cs" />
     <Compile Include="Navigation\MvxNavigationExtensions.cs" />
     <Compile Include="Navigation\EventArgs\NavigateEventArgs.cs" />
+    <Compile Include="Navigation\IMvxNavigationCache.cs" />
+    <Compile Include="Navigation\MvxNavigationCache.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
