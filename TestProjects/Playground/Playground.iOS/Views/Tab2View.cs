@@ -20,6 +20,7 @@ namespace Playground.iOS.Views
 
             var set = this.CreateBindingSet<Tab2View, Tab2ViewModel>();
 
+            set.Bind(btnShowStack).To(vm => vm.ShowRootViewModelCommand);
             set.Bind(btnClose).To(vm => vm.CloseViewModelCommand);
 
             set.Apply();

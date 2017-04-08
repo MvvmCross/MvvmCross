@@ -333,8 +333,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="333" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="280.5" y="241.5" width="39" height="30"/>
+                                <rect key="frame" x="280" y="301" width="39" height="30"/>
                                 <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="369" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="260.5" y="237.5" width="79" height="30"/>
+                                <state key="normal" title="Show stack">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -343,12 +349,15 @@
                             <constraint id="165" firstItem="164" firstAttribute="leading" secondItem="132" secondAttribute="leading" constant="61"/>
                             <constraint id="166" firstItem="132" firstAttribute="trailing" secondItem="164" secondAttribute="trailing" constant="36"/>
                             <constraint id="167" firstItem="164" firstAttribute="top" secondItem="128" secondAttribute="bottom" constant="154"/>
-                            <constraint id="334" firstItem="333" firstAttribute="top" secondItem="164" secondAttribute="bottom" constant="34"/>
-                            <constraint id="335" firstItem="333" firstAttribute="centerX" secondItem="132" secondAttribute="centerX"/>
+                            <constraint id="370" firstItem="369" firstAttribute="top" secondItem="164" secondAttribute="bottom" constant="30"/>
+                            <constraint id="371" firstItem="369" firstAttribute="centerX" secondItem="132" secondAttribute="centerX"/>
+                            <constraint id="372" firstItem="333" firstAttribute="top" secondItem="369" secondAttribute="bottom" constant="33"/>
+                            <constraint id="373" firstItem="333" firstAttribute="centerX" secondItem="132" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="333" id="name-outlet-333"/>
+                        <outlet property="btnShowStack" destination="369" id="name-outlet-369"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="133" userLabel="First Responder" sceneMemberID="firstResponder"/>

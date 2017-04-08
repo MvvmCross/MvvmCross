@@ -6,10 +6,6 @@ namespace Playground.Core.ViewModels
 {
     public class SplitRootViewModel : MvxViewModel
     {
-        public SplitRootViewModel()
-        {
-        }
-
         private ICommand _showInitialViewModelsCommand;
         public ICommand ShowInitialViewModelsCommand
         {
