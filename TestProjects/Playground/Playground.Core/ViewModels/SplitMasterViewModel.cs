@@ -17,5 +17,14 @@ namespace Playground.Core.ViewModels
                 return _openDetailCommand ?? (_openDetailCommand = new MvxCommand(() => ShowViewModel<SplitDetailViewModel>()));
             }
         }
+
+        private ICommand _openDetailNavCommand;
+        public ICommand OpenDetailNavCommand
+        {
+            get
+            {
+                return _openDetailNavCommand ?? (_openDetailNavCommand = new MvxCommand(() => ShowViewModel<SplitDetailNavViewModel>()));
+            }
+        }
     }
 }

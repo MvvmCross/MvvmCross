@@ -30,16 +30,25 @@ namespace MvvmCross.iOS.Views
             PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
         }
 
-        public virtual void ShowDetailView(UIViewController viewController)
+        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
         {
+            viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
+
             ShowDetailViewController(viewController, this);
         }
 
-        public virtual void ShowMasterView(UIViewController viewController)
+        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
         {
-            var currentDetail = ViewControllers.LastOrDefault() ?? new UIViewController();
+            var newStack = ViewControllers.ToList();
 
-            ViewControllers = new UIViewController[] { viewController, currentDetail };
+            viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
+
+            if(newStack.Any())
+                newStack.RemoveAt(0);
+
+            newStack.Insert(0, viewController);
+
+            ViewControllers = newStack.ToArray();
         }
     }
 

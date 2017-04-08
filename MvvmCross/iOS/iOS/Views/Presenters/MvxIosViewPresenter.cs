@@ -240,7 +240,7 @@ namespace MvvmCross.iOS.Views.Presenters
             if(SplitViewController == null)
                 throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
 
-            SplitViewController.ShowMasterView(viewController);
+            SplitViewController.ShowMasterView(viewController, attribute.WrapInNavigationController);
         }
 
         protected virtual void ShowDetailSplitViewController(
@@ -251,7 +251,7 @@ namespace MvvmCross.iOS.Views.Presenters
             if(SplitViewController == null)
                 throw new MvxException("Trying to show a detail page without a SplitViewController, this is not possible!");
 
-            SplitViewController.ShowDetailView(viewController);
+            SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
         }
 
         //public override bool PresentModalViewController(UIViewController viewController, bool animated)
