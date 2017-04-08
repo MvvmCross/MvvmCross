@@ -1,9 +1,8 @@
-using Foundation;
 using System;
-using UIKit;
-using Playground.Core.ViewModels;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
 {
@@ -13,6 +12,17 @@ namespace Playground.iOS.Views
     {
         public Tab2View(IntPtr handle) : base(handle)
         {
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            var set = this.CreateBindingSet<Tab2View, Tab2ViewModel>();
+
+            set.Bind(btnClose).To(vm => vm.CloseViewModelCommand);
+
+            set.Apply();
         }
     }
 }

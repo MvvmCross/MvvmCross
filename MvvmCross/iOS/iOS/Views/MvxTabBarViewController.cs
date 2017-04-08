@@ -72,13 +72,24 @@ namespace MvvmCross.iOS.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            // current implementation assumes the ViewModel to close is the currently shown ViewController 
             var navController = SelectedViewController as UINavigationController;
             if(navController != null)
             {
                 navController.PopViewController(true);
                 return true;
             }
+
+            // loop through Tabs
+            var toClose = ViewControllers.Where(v => v.GetType() != typeof(MvxNavigationController))
+                                         .Select(v => v.GetIMvxIosView())
+                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if(toClose != null)
+            {
+                var newTabs = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
+                ViewControllers = newTabs.ToArray();
+                return true;
+            }
+
             return false;
         }
 

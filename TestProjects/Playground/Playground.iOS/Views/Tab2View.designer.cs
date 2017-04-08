@@ -11,11 +11,19 @@ using UIKit;
 
 namespace Playground.iOS.Views
 {
-    [Register("Tab2View")]
+    [Register ("Tab2View")]
     partial class Tab2View
     {
-        void ReleaseDesignerOutlets()
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnClose { get; set; }
+
+        void ReleaseDesignerOutlets ()
         {
+            if (btnClose != null) {
+                btnClose.Dispose ();
+                btnClose = null;
+            }
         }
     }
 }
