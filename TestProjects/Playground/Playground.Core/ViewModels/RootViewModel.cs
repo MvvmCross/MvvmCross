@@ -51,7 +51,16 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => this.ShowViewModel<TabsViewModel>()));
+                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => this.ShowViewModel<TabsRootViewModel>()));
+            }
+        }
+
+        private ICommand _showSplitCommand;
+        public ICommand ShowSplitCommand
+        {
+            get
+            {
+                return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => this.ShowViewModel<SplitRootViewModel>()));
             }
         }
     }

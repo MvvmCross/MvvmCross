@@ -7,11 +7,11 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxRootPresentation]
-    public partial class TabsView : MvxTabBarViewController<TabsViewModel>
+    public partial class TabsRootView : MvxTabBarViewController<TabsRootViewModel>
     {
-        private bool isPresentedFirstTime = true;
+        private bool _isPresentedFirstTime = true;
 
-        public TabsView(IntPtr handle) : base(handle)
+        public TabsRootView(IntPtr handle) : base(handle)
         {
         }
 
@@ -19,9 +19,9 @@ namespace Playground.iOS.Views
         {
             base.ViewWillAppear(animated);
 
-            if(ViewModel != null && isPresentedFirstTime)
+            if(ViewModel != null && _isPresentedFirstTime)
             {
-                isPresentedFirstTime = false;
+                _isPresentedFirstTime = false;
                 ViewModel.ShowInitialViewModelsCommand.Execute(null);
             }
         }

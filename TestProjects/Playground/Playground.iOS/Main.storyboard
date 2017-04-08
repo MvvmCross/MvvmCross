@@ -19,19 +19,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="32" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="262" y="148" width="77" height="30"/>
+                                <rect key="frame" x="262" y="205" width="77" height="30"/>
                                 <state key="normal" title="Show Child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="33" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="258" y="214" width="84" height="30"/>
+                                <rect key="frame" x="258" y="260" width="84" height="30"/>
                                 <state key="normal" title="Show modal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="45" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="244" y="273" width="112" height="30"/>
+                                <rect key="frame" x="244" y="327" width="112" height="30"/>
                                 <state key="normal" title="Show nav modal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -42,16 +42,24 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="229" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="263.5" y="145" width="73" height="30"/>
+                                <state key="normal" title="Show Split">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint id="147" firstItem="142" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="72"/>
-                            <constraint id="148" firstItem="142" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="149" firstItem="32" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="26"/>
-                            <constraint id="150" firstItem="32" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="151" firstItem="33" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="152" firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="36"/>
-                            <constraint id="153" firstItem="45" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="29"/>
-                            <constraint id="154" firstItem="45" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="230" firstItem="142" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="72"/>
+                            <constraint id="231" firstItem="142" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="232" firstItem="229" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="23"/>
+                            <constraint id="233" firstItem="229" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="234" firstItem="32" firstAttribute="top" secondItem="229" secondAttribute="bottom" constant="30"/>
+                            <constraint id="235" firstItem="32" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="236" firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="25"/>
+                            <constraint id="237" firstItem="33" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="238" firstItem="45" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="37"/>
+                            <constraint id="239" firstItem="45" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -59,6 +67,7 @@
                         <outlet property="btnModal" destination="33" id="name-outlet-33"/>
                         <outlet property="btnNavModal" destination="45" id="name-outlet-45"/>
                         <outlet property="btnTabs" destination="142" id="name-outlet-142"/>
+                        <outlet property="btnSplit" destination="229" id="name-outlet-229"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,7 +231,7 @@
         </scene>
         <scene sceneID="116">
             <objects>
-                <viewController id="117" sceneMemberID="viewController" customClass="TabsView" storyboardIdentifier="TabsView" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                <viewController id="117" sceneMemberID="viewController" customClass="TabsRootView" storyboardIdentifier="TabsRootView" useStoryboardIdentifierAsRestorationIdentifier="YES">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="114"/>
                         <viewControllerLayoutGuide type="bottom" id="115"/>
@@ -325,6 +334,103 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="133" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1967" y="668"/>
+        </scene>
+        <scene sceneID="191">
+            <objects>
+                <viewController id="192" sceneMemberID="viewController" customClass="SplitRootView" storyboardIdentifier="SplitRootView" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="189"/>
+                        <viewControllerLayoutGuide type="bottom" id="190"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="193">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="194" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="654" y="1342"/>
+        </scene>
+        <scene sceneID="198">
+            <objects>
+                <viewController id="199" sceneMemberID="viewController" customClass="SplitMasterView" storyboardIdentifier="SplitMasterView" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="196"/>
+                        <viewControllerLayoutGuide type="bottom" id="197"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="200">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.6" green="0.4" blue="0.2" alpha="1"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="221" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="253" y="290" width="94.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="268" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="260" y="364.5" width="80" height="30"/>
+                                <state key="normal" title="Show detail">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="224" firstItem="221" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="225" firstItem="221" firstAttribute="centerY" secondItem="200" secondAttribute="centerY"/>
+                            <constraint id="269" firstItem="268" firstAttribute="top" secondItem="221" secondAttribute="bottom" constant="54"/>
+                            <constraint id="270" firstItem="268" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnDetail" destination="268" id="name-outlet-268"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="201" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1302" y="1347"/>
+        </scene>
+        <scene sceneID="216">
+            <objects>
+                <viewController id="217" sceneMemberID="viewController" customClass="SplitDetailView" storyboardIdentifier="SplitDetailView" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="214"/>
+                        <viewControllerLayoutGuide type="bottom" id="215"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="218">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="1" alpha="1"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="226" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="257.5" y="290" width="85.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="273" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="178" y="338.5" width="244" height="30"/>
+                                <state key="normal" title="Close (only when master is hidden) ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="227" firstItem="226" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
+                            <constraint id="228" firstItem="226" firstAttribute="centerY" secondItem="218" secondAttribute="centerY"/>
+                            <constraint id="274" firstItem="273" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
+                            <constraint id="275" firstItem="273" firstAttribute="top" secondItem="226" secondAttribute="bottom" constant="28"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="273" id="name-outlet-273"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="219" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1972" y="1345"/>
         </scene>
     </scenes>
     <resources>

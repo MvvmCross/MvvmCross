@@ -138,9 +138,21 @@
     <Compile Include="Views\Tab2View.designer.cs">
       <DependentUpon>Tab2View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TabsView.cs" />
-    <Compile Include="Views\TabsView.designer.cs">
-      <DependentUpon>TabsView.cs</DependentUpon>
+    <Compile Include="Views\TabsRootView.cs" />
+    <Compile Include="Views\TabsRootView.designer.cs">
+      <DependentUpon>TabsRootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailView.cs" />
+    <Compile Include="Views\SplitDetailView.designer.cs">
+      <DependentUpon>SplitDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitMasterView.cs" />
+    <Compile Include="Views\SplitMasterView.designer.cs">
+      <DependentUpon>SplitMasterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitRootView.cs" />
+    <Compile Include="Views\SplitRootView.designer.cs">
+      <DependentUpon>SplitRootView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

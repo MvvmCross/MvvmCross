@@ -23,18 +23,23 @@ namespace MvvmCross.iOS.Views
             this.AdaptForBinding();
         }
 
-        public void ShowDetailView(UIViewController viewController)
+        public override void ViewDidLoad()
         {
-            var currentRoot = this.ViewControllers.FirstOrDefault() ?? new UIViewController();
+            base.ViewDidLoad();
 
-            this.ViewControllers = new UIViewController[] { currentRoot, viewController };
+            PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
         }
 
-        public void ShowMasterView(UIViewController viewController)
+        public virtual void ShowDetailView(UIViewController viewController)
         {
-            var currentDetail = this.ViewControllers.LastOrDefault() ?? new UIViewController();
+            ShowDetailViewController(viewController, this);
+        }
 
-            this.ViewControllers = new UIViewController[] { viewController, currentDetail };
+        public virtual void ShowMasterView(UIViewController viewController)
+        {
+            var currentDetail = ViewControllers.LastOrDefault() ?? new UIViewController();
+
+            ViewControllers = new UIViewController[] { viewController, currentDetail };
         }
     }
 
@@ -59,7 +64,6 @@ namespace MvvmCross.iOS.Views
         protected MvxSplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            this.AdaptForBinding();
         }
     }
 }

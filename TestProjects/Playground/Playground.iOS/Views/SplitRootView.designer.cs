@@ -11,8 +11,8 @@ using UIKit;
 
 namespace Playground.iOS.Views
 {
-    [Register("TabsView")]
-    partial class TabsView
+    [Register("SplitRootView")]
+    partial class SplitRootView
     {
         void ReleaseDesignerOutlets()
         {
