@@ -71,8 +71,8 @@ namespace MvvmCross.Test.Navigation
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
-            Assert.That(RoutingService.CanRoute(url), Is.False);
-            await RoutingService.RouteAsync(url);
+            Assert.That(RoutingService.CanNavigate(url), Is.False);
+            await RoutingService.Navigate(url);
 
             MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
@@ -80,7 +80,7 @@ namespace MvvmCross.Test.Navigation
         [Test]
         public async Task TestDirectMatchRegexAsync()
         {
-            await RoutingService.RouteAsync("mvx://test/?id=" + Guid.Empty.ToString("N"));
+            await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"));
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelB))),
@@ -91,7 +91,7 @@ namespace MvvmCross.Test.Navigation
         [Test]
         public async Task TestRegexWithParametersAsync()
         {
-            await RoutingService.RouteAsync("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelC))),
@@ -102,7 +102,7 @@ namespace MvvmCross.Test.Navigation
         [Test]
         public async Task TestFacadeAsync()
         {
-            await RoutingService.RouteAsync("mvx://facade/?id=a");
+            await RoutingService.Navigate("mvx://facade/?id=a");
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelA))),

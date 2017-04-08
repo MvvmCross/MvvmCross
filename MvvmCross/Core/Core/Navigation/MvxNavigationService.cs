@@ -22,7 +22,7 @@ namespace MvvmCross.Core.Navigation
             _viewDispatcher = viewDispatcher;
         }
 
-        public static void LoadRoutes(Assembly[] assemblies)
+        public static void LoadRoutes(IEnumerable<Assembly> assemblies)
         {
             Routes.Clear();
             foreach (var routeAttr in
@@ -43,7 +43,7 @@ namespace MvvmCross.Core.Navigation
                 {
                     case 0:
                         entry = default(KeyValuePair<Regex, Type>);
-                        Mvx.TaggedTrace("MvxRoutingService", "Unable to find routing for {0}", url);
+                        Mvx.TaggedTrace("MvxNavigationService", "Unable to find routing for {0}", url);
                         return false;
                     case 1:
                         entry = matches[0];
@@ -58,7 +58,7 @@ namespace MvvmCross.Core.Navigation
                     return true;
                 }
 
-                Mvx.TaggedWarning("MvxRoutingService",
+                Mvx.TaggedWarning("MvxNavigationService",
                     "The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
@@ -67,7 +67,7 @@ namespace MvvmCross.Core.Navigation
             }
             catch (Exception ex)
             {
-                Mvx.TaggedError("MvxRoutingService", "Unable to determine routability: {0}", ex);
+                Mvx.TaggedError("MvxNavigationService", "Unable to determine routability: {0}", ex);
                 return false;
             }
         }
@@ -86,36 +86,14 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        public bool CanRoute(string url)
+        public async Task Navigate(string path)
         {
             KeyValuePair<Regex, Type> entry;
 
-            return TryGetRoute(url, out entry);
-        }
-
-        public Task RouteAsync(string url)
-        {
-            return RouteAsync(url, MvxRequestedBy.UserAction);
-        }
-
-        public Task RouteAsync(Uri url)
-        {
-            return RouteAsync(url, MvxRequestedBy.UserAction);
-        }
-
-        public Task RouteAsync(Uri url, MvxRequestedBy requestedBy)
-        {
-            return RouteAsync(url.ToString(), requestedBy);
-        }
-        
-        public async Task RouteAsync(string url, MvxRequestedBy requestedBy)
-        {
-            KeyValuePair<Regex, Type> entry;
-
-            if (!TryGetRoute(url, out entry)) return;
+            if (!TryGetRoute(path, out entry)) return;
 
             var regex = entry.Key;
-            var match = regex.Match(url);
+            var match = regex.Match(path);
             var paramDict = BuildParamDictionary(regex, match);
 
             var viewModelType = entry.Value;
@@ -123,21 +101,21 @@ namespace MvvmCross.Core.Navigation
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
-                
+
                 try
                 {
-                    request = await facade.BuildViewModelRequest(url, paramDict, requestedBy);
+                    request = await facade.BuildViewModelRequest(path, paramDict);
                 }
                 catch (Exception ex)
                 {
-                    Mvx.TaggedError("MvxRoutingService",
+                    Mvx.TaggedError("MvxNavigationService",
                         "Exception thrown while processing URL: {0} with RoutingFacade: {1}, {2}",
-                        url, viewModelType, ex);
+                        path, viewModelType, ex);
                 }
 
                 if (request == null)
                 {
-                    Mvx.TaggedWarning("MvxRoutingService", "Facade did not return a valid MvxViewModelRequest.");
+                    Mvx.TaggedWarning("MvxNavigationService", "Facade did not return a valid MvxViewModelRequest.");
                     return;
                 }
             }
@@ -147,10 +125,18 @@ namespace MvvmCross.Core.Navigation
                     viewModelType,
                     new MvxBundle(paramDict),
                     null,
-                    requestedBy);
+                    null);
             }
-            
+
             _viewDispatcher.ShowViewModel(request);
+        }
+
+
+        public async Task<bool> CanNavigate(string path)
+        {
+            KeyValuePair<Regex, Type> entry;
+
+            return TryGetRoute(path, out entry);
         }
     }
 }

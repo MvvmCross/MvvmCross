@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
 using RoutingExample.Core;
 using UIKit;
 
@@ -14,9 +16,6 @@ namespace RoutingExample.iOS
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window) { }
 
-
-        #region Overrides of MvxSetup
-
         protected override IMvxApplication CreateApp()
         {
             return new App();
@@ -26,13 +25,14 @@ namespace RoutingExample.iOS
         protected override void InitializePlatformServices()
         {
             base.InitializePlatformServices();
-
-
         }
 
-
-
-
-        #endregion
+        protected override MvvmCross.Core.Views.IMvxViewDispatcher CreateViewDispatcher()
+        {
+            var dispatcher = base.CreateViewDispatcher();
+            Mvx.RegisterSingleton<IMvxNavigationService>(() => new MvxNavigationService(dispatcher));
+            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
+            return dispatcher;
+        }
     }
 }
