@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+
 namespace Playground.Core.ViewModels
 {
     public class RootViewModel : MvxViewModel
@@ -42,7 +43,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showModalNavCommand ?? (_showModalNavCommand = new MvxCommand(() => this.ShowViewModel<ModalNavViewModel>()));
+                return _showModalNavCommand ?? (_showModalNavCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
             }
         }
 
@@ -51,7 +52,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => this.ShowViewModel<TabsRootViewModel>()));
+                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => ShowViewModel<TabsRootViewModel>()));
             }
         }
 
@@ -60,7 +61,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => this.ShowViewModel<SplitRootViewModel>()));
+                return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => ShowViewModel<SplitRootViewModel>()));
             }
         }
     }

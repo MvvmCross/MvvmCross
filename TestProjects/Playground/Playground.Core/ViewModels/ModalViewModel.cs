@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+
 namespace Playground.Core.ViewModels
 {
     public class ModalViewModel : MvxViewModel
@@ -19,7 +20,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => this.Close(this)));
+                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
             }
         }
     }

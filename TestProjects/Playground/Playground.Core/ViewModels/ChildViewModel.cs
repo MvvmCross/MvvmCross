@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+
 namespace Playground.Core.ViewModels
 {
     public class ChildViewModel : MvxViewModel
@@ -14,7 +15,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => this.Close(this)));
+                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
             }
         }
 
@@ -23,7 +24,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showSecondChildCommand ?? (_showSecondChildCommand = new MvxCommand(() => this.ShowViewModel<SecondChildViewModel>()));
+                return _showSecondChildCommand ?? (_showSecondChildCommand = new MvxCommand(() => ShowViewModel<SecondChildViewModel>()));
             }
         }
     }
