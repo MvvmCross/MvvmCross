@@ -4,6 +4,7 @@ using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters
@@ -59,33 +60,16 @@ namespace MvvmCross.iOS.Views.Presenters
                 (vc, attribute, request) => ShowDetailSplitViewController(vc, attribute as MvxDetailSplitViewPresentationAttribute, request));
         }
 
-        //protected virtual UIViewController CurrentTopViewController
-        //{
-        //    get
-        //    {
-        //        // exploring the stack manually instead checking MasterNavigationController / ModalNavigationController
-        //        // allows the user to present his own modals outside the presenter without problem
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            base.ChangePresentation(hint);
 
-        //        var windowRoot = _window.RootViewController;
-
-        //        // check for a presented ViewController
-        //        if(windowRoot.PresentedViewController != null)
-        //        {
-        //            var presentedViewController = windowRoot.PresentedViewController;
-
-        //            // the presented ViewController can also have a stack of ViewControllers
-        //            if(presentedViewController.GetType().Equals(typeof(UINavigationController)) || presentedViewController.GetType().IsSubclassOf(typeof(UINavigationController)))
-        //                return (presentedViewController as UINavigationController).TopViewController;
-        //            else
-        //                return windowRoot.PresentedViewController;
-        //        }
-
-        //        if(windowRoot.GetType().Equals(typeof(UINavigationController)) || windowRoot.GetType().IsSubclassOf(typeof(UINavigationController)))
-        //            return (windowRoot as UINavigationController).TopViewController;
-
-        //        return windowRoot;
-        //    }
-        //}
+            if(hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+        }
 
         public override void Show(MvxViewModelRequest request)
         {
@@ -167,6 +151,9 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if(viewController is IMvxTabBarViewController)
                 throw new MvxException("A TabBarViewController cannot be presented as a child. Consider using Root instead");
+
+            if(viewController is IMvxSplitViewController)
+                throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
 
             if(ModalNavigationController != null)
             {
@@ -254,82 +241,78 @@ namespace MvvmCross.iOS.Views.Presenters
             SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
         }
 
-        //public override bool PresentModalViewController(UIViewController viewController, bool animated)
-        //{
-        //    // if there is currently a modal ViewController, dismiss it (otherwise nothing happens when presenting)
-        //    if(_window.RootViewController.PresentedViewController != null)
-        //        _window.RootViewController.DismissViewController(animated, null);
-
-        //    _window.RootViewController.PresentViewController(viewController, animated, null);
-
-        //    return true;
-        //}
-
-        public void Close(IMvxViewModel toClose)
+        public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            //Close(toClose, true);
+            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
+            return true;
         }
 
-        //public void Close(IMvxViewModel toClose, bool animated)
-        //{
-        //    // check if toClose is a modal ViewController that is NOT wrapped in a navigation controller
-        //    if(_window.RootViewController.PresentedViewController != null
-        //       && _window.RootViewController.PresentedViewController as MvxNavigationController == null)
-        //    {
-        //        var mvxIosView = _window.RootViewController.PresentedViewController.GetIMvxIosView();
-        //        if(mvxIosView != null)
-        //        {
-        //            if(mvxIosView.ViewModel == toClose)
-        //            {
-        //                _window.RootViewController.DismissViewController(animated, null);
-        //                return;
-        //            }
-        //        }
-        //    }
+        public virtual void Close(IMvxViewModel toClose)
+        {
+            // check if there is a modal presented
+            if(_window.RootViewController.PresentedViewController != null && CloseModalViewController(toClose))
+                return;
 
-        //    if(CurrentTopViewController.NavigationController == null)
-        //    {
-        //        MvxTrace.Warning($"Don't know how to close ViewModel of type: {toClose.GetType().Name} - There is no current NavigationController");
-        //        return;
-        //    }
+            // if the current root is a TabBarViewController, delegate close responsibility to it
+            if(TabBarViewController != null && TabBarViewController.CloseChildViewModel(toClose))
+                return;
 
-        //    // check if the current navigation controller is ModalNavigationController
-        //    if(CurrentTopViewController.NavigationController == ModalNavigationController)
-        //    {
-        //        // if the ViewModel to close is the root of the modal navigation stack, then close the entire stack
-        //        CloseModalViewController(toClose, animated);
-        //        return;
-        //    }
+            // if the current root is a SplitViewController, delegate close responsibility to it
+            if(SplitViewController != null && SplitViewController.CloseChildViewModel(toClose))
+                return;
 
-        //    if(CurrentTopViewController.NavigationController == MasterNavigationController)
-        //    {
-        //        CloseViewControllerInNavigationController(toClose, MasterNavigationController, animated);
-        //        return;
-        //    }
-        //}
+            // if the current root is a NavigationController, close it in the stack
+            if(MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, toClose))
+                return;
 
-        //private void CloseViewControllerInNavigationController(IMvxViewModel toClose, UINavigationController navController, bool animated)
-        //{
-        //    // check if toClose is the top most ViewController
-        //    var topViewController = navController.TopViewController.GetIMvxIosView();
-        //    if(topViewController.ViewModel == toClose)
-        //    {
-        //        navController.PopViewController(animated);
-        //        return;
-        //    }
+            MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
+        }
 
-        //    // loop stack 
-        //    foreach(var viewController in navController.ViewControllers)
-        //    {
-        //        var mvxView = viewController.GetIMvxIosView();
-        //        if(mvxView.ViewModel == toClose)
-        //        {
-        //            var newViewControllers = navController.ViewControllers.Where(v => v != viewController).ToArray();
-        //            navController.ViewControllers = newViewControllers;
-        //            break;
-        //        }
-        //    }
-        //}
+        protected virtual bool CloseModalViewController(IMvxViewModel toClose)
+        {
+            // check if there is a modal stack presented
+            if(ModalNavigationController != null)
+            {
+                if(TryCloseViewControllerInsideStack(ModalNavigationController, toClose))
+                {
+                    // First() is the RootViewController of the stack. If it is being closed, then remove the nav stack
+                    if(ModalNavigationController.ViewControllers.First().GetIMvxIosView().ViewModel == toClose)
+                    {
+                        _window.RootViewController.DismissViewController(true, null);
+                        ModalNavigationController = null;
+                    }
+                    return true;
+                }
+            }
+
+            // close any plain modal presented
+            _window.RootViewController.PresentedViewController.DismissViewController(true, null);
+            return true;
+        }
+
+        protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController, IMvxViewModel toClose)
+        {
+            // check for top view controller
+            var topView = navController.TopViewController.GetIMvxIosView();
+            if(topView != null && topView.ViewModel == toClose)
+            {
+                navController.PopViewController(true);
+                return true;
+            }
+
+            // loop through stack
+            foreach(var viewController in navController.ViewControllers)
+            {
+                var mvxView = viewController.GetIMvxIosView();
+                if(mvxView.ViewModel == toClose)
+                {
+                    var newViewControllers = navController.ViewControllers.Where(v => v != viewController).ToArray();
+                    navController.ViewControllers = newViewControllers;
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //public void CloseModalViewController(IMvxViewModel toClose, bool animated)
         //{
@@ -358,17 +341,6 @@ namespace MvvmCross.iOS.Views.Presenters
         //    _window.RootViewController.DismissViewController(animated, null);
         //}
 
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            base.ChangePresentation(hint);
-
-            if(hint is MvxClosePresentationHint)
-            {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
-                return;
-            }
-        }
-
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
             _window.RootViewController.DismissViewController(false, null);
@@ -392,7 +364,5 @@ namespace MvvmCross.iOS.Views.Presenters
 
             return attributes;
         }
-
-        //private bool IsClassOrSubclass(Type source, Type target) => source.Equals(target) || source.IsSubclassOf(target);
     }
 }

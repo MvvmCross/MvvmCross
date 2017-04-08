@@ -50,6 +50,25 @@ namespace MvvmCross.iOS.Views
 
             ViewControllers = newStack.ToArray();
         }
+
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
+        {
+            if(!ViewControllers.Any())
+                return false;
+
+            var toClose = ViewControllers.ToList()
+                                         .Select(v => v.GetIMvxIosView())
+                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if(toClose != null)
+            {
+                var newStack = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
+                ViewControllers = newStack.ToArray();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 
     public class MvxSplitViewController<TViewModel> : MvxSplitViewController
