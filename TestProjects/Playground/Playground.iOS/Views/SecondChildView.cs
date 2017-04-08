@@ -53,7 +53,6 @@ namespace Playground.iOS.Views
 
             if(appDelegate.Window.RootViewController.PresentedViewController != null)
             {
-
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
                 presenter.NativeModalViewControllerDisappearedOnItsOwn();
             }

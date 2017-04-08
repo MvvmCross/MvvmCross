@@ -106,9 +106,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 TabBarViewController = viewController as IMvxTabBarViewController;
                 SetWindowRootViewController(viewController);
 
-                MasterNavigationController = null;
-                ModalNavigationController = null;
-                SplitViewController = null;
+                CloseMasterNavigationController();
+                CloseModalNavigationController();
+                CloseSplitViewController();
 
                 return;
             }
@@ -119,9 +119,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 SplitViewController = viewController as IMvxSplitViewController;
                 SetWindowRootViewController(viewController);
 
-                MasterNavigationController = null;
-                ModalNavigationController = null;
-                TabBarViewController = null;
+                CloseMasterNavigationController();
+                CloseModalNavigationController();
+                CloseTabBarViewController();
 
                 return;
             }
@@ -133,9 +133,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 MasterNavigationController = viewController as MvxNavigationController;
                 SetWindowRootViewController(viewController);
 
-                ModalNavigationController = null;
-                TabBarViewController = null;
-                SplitViewController = null;
+                CloseModalNavigationController();
+                CloseTabBarViewController();
+                CloseSplitViewController();
 
                 return;
             }
@@ -345,6 +345,46 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             _window.RootViewController.DismissViewController(false, null);
             ModalNavigationController = null;
+        }
+
+        private void CloseMasterNavigationController()
+        {
+            if(MasterNavigationController == null)
+                return;
+
+            foreach(var item in MasterNavigationController.ViewControllers)
+                item.DidMoveToParentViewController(null);
+            MasterNavigationController = null;
+        }
+
+        private void CloseModalNavigationController()
+        {
+            if(ModalNavigationController == null)
+                return;
+
+            foreach(var item in ModalNavigationController.ViewControllers)
+                item.DidMoveToParentViewController(null);
+            ModalNavigationController = null;
+        }
+
+        private void CloseTabBarViewController()
+        {
+            if(TabBarViewController == null)
+                return;
+
+            foreach(var item in (TabBarViewController as UITabBarController).ViewControllers)
+                item.DidMoveToParentViewController(null);
+            TabBarViewController = null;
+        }
+
+        private void CloseSplitViewController()
+        {
+            if(SplitViewController == null)
+                return;
+
+            foreach(var item in (SplitViewController as UISplitViewController).ViewControllers)
+                item.DidMoveToParentViewController(null);
+            SplitViewController = null;
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
