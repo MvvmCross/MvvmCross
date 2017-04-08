@@ -15,13 +15,13 @@ namespace RoutingExample.Core.RoutingFacades
     public class RandomRoutingFacade
         : IMvxNavigationFacade
     {
-        public Task<MvxViewModelRequest> BuildViewModelRequest(string url, IDictionary<string, string> currentParameters, MvxRequestedBy requestedBy)
+        public Task<MvxViewModelRequest> BuildViewModelRequest(string url, IDictionary<string, string> currentParameters)
         {
             // you can also use the values captured by the regex in currentPrameters
 
             var viewModelType = (new Random().Next() % 2 == 0) ? typeof(TestAViewModel) : typeof(TestBViewModel);
 
-            return Task.FromResult(new MvxViewModelRequest(viewModelType, new MvxBundle(), null, requestedBy));
+            return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null, null));
         }
     }
 }

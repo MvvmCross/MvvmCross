@@ -37,6 +37,14 @@ namespace MvvmCross.Plugins.DownloadCache
 
         #region IMvxImageCache<T> Members
 
+        public bool ContainsImage(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+                return false;
+
+            return _entriesByHttpUrl.ContainsKey(url);
+        }
+
         public Task<T> RequestImage(string url)
         {
             var tcs = new TaskCompletionSource<T>();
