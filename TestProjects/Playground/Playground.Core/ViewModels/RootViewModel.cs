@@ -45,5 +45,14 @@ namespace Playground.Core.ViewModels
                 return _showModalNavCommand ?? (_showModalNavCommand = new MvxCommand(() => this.ShowViewModel<ModalNavViewModel>()));
             }
         }
+
+        private ICommand _showTabsCommand;
+        public ICommand ShowTabsCommand
+        {
+            get
+            {
+                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => this.ShowViewModel<TabsViewModel>()));
+            }
+        }
     }
 }

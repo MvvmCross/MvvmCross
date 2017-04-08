@@ -11,8 +11,8 @@ using UIKit;
 
 namespace Playground.iOS.Views
 {
-    [Register ("RootView")]
-    partial class RootView
+    [Register ("Tab1View")]
+    partial class Tab1View
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -25,10 +25,6 @@ namespace Playground.iOS.Views
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnNavModal { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnTabs { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -45,11 +41,6 @@ namespace Playground.iOS.Views
             if (btnNavModal != null) {
                 btnNavModal.Dispose ();
                 btnNavModal = null;
-            }
-
-            if (btnTabs != null) {
-                btnTabs.Dispose ();
-                btnTabs = null;
             }
         }
     }

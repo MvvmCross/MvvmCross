@@ -104,11 +104,11 @@ namespace MvvmCross.iOS.Views.Presenters
 
             var attribute = GetPresentationAttributes(viewController);
 
-            Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> callback;
-            if(!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out callback))
-                throw new KeyNotFoundException($"The type {attribute.GetType().FullName} is not configured in the presenter dictionary");
+            Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
+            if(!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
+                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
-            callback.Invoke(viewController, attribute, request);
+            showAction.Invoke(viewController, attribute, request);
         }
 
         protected virtual void ShowRootViewController(
@@ -116,8 +116,6 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxRootPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var rootType = viewController.GetType();
-
             // check if viewController is a TabBarController
             if(viewController is IMvxTabBarViewController)
             {
@@ -145,7 +143,7 @@ namespace MvvmCross.iOS.Views.Presenters
             }
 
             // check if viewController is trying to initialize a navigation stack
-            if(IsClassOrSubclass(rootType, typeof(UIViewController)) && attribute.WrapInNavigationController)
+            if(attribute.WrapInNavigationController)
             {
                 viewController = new MvxNavigationController(viewController);
                 MasterNavigationController = viewController as MvxNavigationController;
@@ -170,15 +168,15 @@ namespace MvvmCross.iOS.Views.Presenters
             if(viewController is IMvxTabBarViewController)
                 throw new MvxException("A TabBarViewController cannot be presented as a child. Consider using Root instead");
 
-            if(TabBarViewController != null)
-            {
-                TabBarViewController.ShowChildView(viewController);
-                return;
-            }
-
             if(ModalNavigationController != null)
             {
                 ModalNavigationController.PushViewController(viewController, attribute.Animated);
+                return;
+            }
+
+            if(TabBarViewController != null)
+            {
+                TabBarViewController.ShowChildView(viewController);
                 return;
             }
 
@@ -214,7 +212,7 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // if there is currently a modal ViewController, dismiss it (otherwise nothing happens when presenting)
+            // if there is currently a modal ViewController, dismiss it forced (otherwise nothing happens when presenting)
             if(_window.RootViewController.PresentedViewController != null)
                 _window.RootViewController.DismissViewController(attribute.Animated, null);
 
@@ -395,6 +393,6 @@ namespace MvvmCross.iOS.Views.Presenters
             return attributes;
         }
 
-        private bool IsClassOrSubclass(Type source, Type target) => source.Equals(target) || source.IsSubclassOf(target);
+        //private bool IsClassOrSubclass(Type source, Type target) => source.Equals(target) || source.IsSubclassOf(target);
     }
 }

@@ -130,6 +130,18 @@
     <Compile Include="Views\SecondChildView.designer.cs">
       <DependentUpon>SecondChildView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tab1View.cs" />
+    <Compile Include="Views\Tab1View.designer.cs">
+      <DependentUpon>Tab1View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab2View.cs" />
+    <Compile Include="Views\Tab2View.designer.cs">
+      <DependentUpon>Tab2View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabsView.cs" />
+    <Compile Include="Views\TabsView.designer.cs">
+      <DependentUpon>TabsView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
@@ -160,6 +172,14 @@
       <Project>{56CD2748-857D-442A-9268-95D99F552840}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\home%403x.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu%402x.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
