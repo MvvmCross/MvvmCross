@@ -11,19 +11,27 @@ using UIKit;
 
 namespace Playground.iOS.Views
 {
-    [Register("ModalView")]
+    [Register ("ModalView")]
     partial class ModalView
     {
         [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnClose { get; set; }
 
-        void ReleaseDesignerOutlets()
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnTabs { get; set; }
+
+        void ReleaseDesignerOutlets ()
         {
-            if(btnClose != null)
-            {
-                btnClose.Dispose();
+            if (btnClose != null) {
+                btnClose.Dispose ();
                 btnClose = null;
+            }
+
+            if (btnTabs != null) {
+                btnTabs.Dispose ();
+                btnTabs = null;
             }
         }
     }

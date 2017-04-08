@@ -133,14 +133,23 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="350" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="264" y="120" width="72" height="30"/>
+                                <state key="normal" title="Show tabs">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint id="52" firstItem="51" firstAttribute="centerX" secondItem="22" secondAttribute="centerX"/>
-                            <constraint id="53" firstItem="51" firstAttribute="top" secondItem="18" secondAttribute="bottom" constant="176"/>
+                            <constraint id="351" firstItem="350" firstAttribute="top" secondItem="18" secondAttribute="bottom" constant="100"/>
+                            <constraint id="352" firstItem="350" firstAttribute="centerX" secondItem="22" secondAttribute="centerX"/>
+                            <constraint id="353" firstItem="51" firstAttribute="centerX" secondItem="22" secondAttribute="centerX"/>
+                            <constraint id="354" firstItem="51" firstAttribute="top" secondItem="350" secondAttribute="bottom" constant="46"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="51" id="name-outlet-51"/>
+                        <outlet property="btnTabs" destination="350" id="name-outlet-350"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" userLabel="First Responder" sceneMemberID="firstResponder"/>

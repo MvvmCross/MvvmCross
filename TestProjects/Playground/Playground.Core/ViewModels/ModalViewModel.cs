@@ -5,6 +5,15 @@ namespace Playground.Core.ViewModels
 {
     public class ModalViewModel : MvxViewModel
     {
+        private ICommand _showTabsCommand;
+        public ICommand ShowTabsCommand
+        {
+            get
+            {
+                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => ShowViewModel<TabsRootViewModel>()));
+            }
+        }
+
         private ICommand _closeCommand;
         public ICommand CloseCommand
         {

@@ -67,7 +67,6 @@ namespace MvvmCross.iOS.Views.Presenters
             if(hint is MvxClosePresentationHint)
             {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
-                return;
             }
         }
 
@@ -279,7 +278,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     if(ModalNavigationController.ViewControllers.First().GetIMvxIosView().ViewModel == toClose)
                     {
                         _window.RootViewController.DismissViewController(true, null);
-                        ModalNavigationController = null;
+                        CloseModalNavigationController();
                     }
                     return true;
                 }
@@ -314,37 +313,10 @@ namespace MvvmCross.iOS.Views.Presenters
             return false;
         }
 
-        //public void CloseModalViewController(IMvxViewModel toClose, bool animated)
-        //{
-        //    if(_window.RootViewController.PresentedViewController == null)
-        //        return;
-
-        //    if(_window.RootViewController.PresentedViewController == ModalNavigationController)
-        //    {
-        //        var modalViewController = ModalNavigationController.ViewControllers.First();
-
-        //        var mvxIosView = modalViewController.GetIMvxIosView();
-        //        if(mvxIosView.ViewModel == toClose)
-        //        {
-        //            _window.RootViewController.DismissViewController(animated, null);
-        //            ModalNavigationController = null;
-        //        }
-        //        else
-        //        {
-        //            CloseViewControllerInNavigationController(toClose, ModalNavigationController, animated);
-        //        }
-
-        //        return;
-        //    }
-
-        //    // if modal presented is not part of any stack, close it anyways
-        //    _window.RootViewController.DismissViewController(animated, null);
-        //}
-
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
             _window.RootViewController.DismissViewController(false, null);
-            ModalNavigationController = null;
+            CloseModalNavigationController();
         }
 
         private void CloseMasterNavigationController()
