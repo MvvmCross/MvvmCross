@@ -1,9 +1,9 @@
 using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using UIKit;
-using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Playground.iOS.Views
 {
@@ -23,6 +23,7 @@ namespace Playground.iOS.Views
 
             var set = this.CreateBindingSet<ModalView, ModalViewModel>();
 
+            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
 
             set.Apply();
