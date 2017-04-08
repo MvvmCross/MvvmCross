@@ -93,18 +93,9 @@ namespace MvvmCross.iOS.Support.Presenters
             // check if toClose is a modal ViewController
             if(Window.RootViewController.PresentedViewController != null)
             {
-                UIViewController viewController;
-                // the presented ViewController might be a NavigationController as well
-                var navigationController = Window.RootViewController.PresentedViewController as UINavigationController;
-                viewController = navigationController != null
-                                    ? navigationController.TopViewController
-                                    : Window.RootViewController.PresentedViewController;
-
-                var mvxView = viewController.GetIMvxIosView();
-
-                if(mvxView.ViewModel == toClose)
+                if (CanCloseModal(toClose))
                 {
-                    Window.RootViewController.DismissViewController(true, null);
+                    CloseModal();
                     return;
                 }
             }
@@ -122,6 +113,35 @@ namespace MvvmCross.iOS.Support.Presenters
                 NavigationController.PopViewController(true);
             else
                 ClosePreviousController(toClose);
+        }
+
+        bool CanCloseModal(IMvxViewModel toClose)
+        {
+            UIViewController viewController;
+            // the presented ViewController might be a NavigationController as well
+            var navigationController = Window.RootViewController.PresentedViewController as UINavigationController;
+            viewController = navigationController != null
+                                ? navigationController.TopViewController
+                                : Window.RootViewController.PresentedViewController;
+
+            var mvxView = viewController.GetIMvxIosView();
+
+            return mvxView.ViewModel == toClose;
+        }
+
+        protected virtual void CloseModal()
+        {
+            var navigationController = Window.RootViewController.PresentedViewController as UINavigationController;
+            if (navigationController != null)
+            {
+                navigationController.DismissViewController(true, () =>
+                    {
+                        foreach (var item in navigationController.ViewControllers)
+                            item.DidMoveToParentViewController(null);
+                    });
+            }
+            else
+                Window.RootViewController.DismissViewController(true, null);
         }
 
         protected virtual void ShowRootViewController(UIViewController viewController)
@@ -195,6 +215,12 @@ namespace MvvmCross.iOS.Support.Presenters
                 needsNavigationController ? new UINavigationController(viewController) : viewController,
                 true,
                 null);
+        }
+
+        public override bool PresentModalViewController(UIViewController viewController, bool animated)
+        {
+            ShowModalViewController(viewController, false);
+            return true;
         }
 
         private UIViewController GetViewController(IMvxIosView view)
