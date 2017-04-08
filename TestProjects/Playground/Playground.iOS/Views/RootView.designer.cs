@@ -28,6 +28,10 @@ namespace Playground.iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnSplit { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnTabs { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -45,6 +49,11 @@ namespace Playground.iOS.Views
             if (btnNavModal != null) {
                 btnNavModal.Dispose ();
                 btnNavModal = null;
+            }
+
+            if (btnSplit != null) {
+                btnSplit.Dispose ();
+                btnSplit = null;
             }
 
             if (btnTabs != null) {

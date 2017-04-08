@@ -24,10 +24,11 @@ namespace Playground.iOS.Views
 
             var set = this.CreateBindingSet<RootView, RootViewModel>();
 
+            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
+            set.Bind(btnSplit).To(vm => vm.ShowSplitCommand);
             set.Bind(btnChild).To(vm => vm.ShowChildCommand);
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnNavModal).To(vm => vm.ShowModalNavCommand);
-            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
 
             set.Apply();
         }

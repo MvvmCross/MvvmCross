@@ -35,9 +35,12 @@
     <Compile Include="ViewModels\ModalNavViewModel.cs" />
     <Compile Include="ViewModels\ModalViewModel.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
-    <Compile Include="ViewModels\TabsViewModel.cs" />
+    <Compile Include="ViewModels\TabsRootViewModel.cs" />
     <Compile Include="ViewModels\Tab1ViewModel.cs" />
     <Compile Include="ViewModels\Tab2ViewModel.cs" />
+    <Compile Include="ViewModels\SplitRootViewModel.cs" />
+    <Compile Include="ViewModels\SplitMasterViewModel.cs" />
+    <Compile Include="ViewModels\SplitDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
