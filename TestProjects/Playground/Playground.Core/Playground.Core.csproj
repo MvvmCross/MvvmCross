@@ -35,6 +35,9 @@
     <Compile Include="ViewModels\ModalNavViewModel.cs" />
     <Compile Include="ViewModels\ModalViewModel.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
+    <Compile Include="ViewModels\TabsViewModel.cs" />
+    <Compile Include="ViewModels\Tab1ViewModel.cs" />
+    <Compile Include="ViewModels\Tab2ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
