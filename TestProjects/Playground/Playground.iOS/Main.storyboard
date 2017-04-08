@@ -376,16 +376,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="316" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="246" y="421.5" width="108" height="30"/>
+                                <state key="normal" title="Show detail nav">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint id="224" firstItem="221" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
                             <constraint id="225" firstItem="221" firstAttribute="centerY" secondItem="200" secondAttribute="centerY"/>
                             <constraint id="269" firstItem="268" firstAttribute="top" secondItem="221" secondAttribute="bottom" constant="54"/>
                             <constraint id="270" firstItem="268" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="317" firstItem="316" firstAttribute="top" secondItem="268" secondAttribute="bottom" constant="27"/>
+                            <constraint id="318" firstItem="316" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnDetail" destination="268" id="name-outlet-268"/>
+                        <outlet property="btnDetailNav" destination="316" id="name-outlet-316"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="201" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,17 +420,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="273" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="178" y="338.5" width="244" height="30"/>
-                                <state key="normal" title="Close (only when master is hidden) ">
+                                <rect key="frame" x="280.5" y="338.5" width="39" height="30"/>
+                                <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="308" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="58" y="397" width="483" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint id="227" firstItem="226" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
                             <constraint id="228" firstItem="226" firstAttribute="centerY" secondItem="218" secondAttribute="centerY"/>
                             <constraint id="274" firstItem="273" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
                             <constraint id="275" firstItem="273" firstAttribute="top" secondItem="226" secondAttribute="bottom" constant="28"/>
+                            <constraint id="309" firstItem="308" firstAttribute="top" secondItem="273" secondAttribute="bottom" constant="28"/>
+                            <constraint id="310" firstItem="218" firstAttribute="trailing" secondItem="308" secondAttribute="trailing" constant="59"/>
+                            <constraint id="311" firstItem="308" firstAttribute="leading" secondItem="218" secondAttribute="leading" constant="58"/>
                         </constraints>
                     </view>
                     <connections>
@@ -431,6 +449,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="219" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1972" y="1345"/>
+        </scene>
+        <scene sceneID="288">
+            <objects>
+                <viewController id="289" sceneMemberID="viewController" customClass="SplitDetailNavView" storyboardIdentifier="SplitDetailNavView" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="286"/>
+                        <viewControllerLayoutGuide type="bottom" id="287"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="290">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="1" alpha="1"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="293" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="250.5" y="310" width="99.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="294" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="282.5" y="358.5" width="35" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="304" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="60" y="413.5" width="483" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint id="295" firstItem="293" firstAttribute="top" secondItem="286" secondAttribute="bottom" constant="290"/>
+                            <constraint id="296" firstItem="293" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
+                            <constraint id="297" firstItem="294" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
+                            <constraint id="298" firstItem="294" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
+                            <constraint id="299" firstItem="294" firstAttribute="top" secondItem="293" secondAttribute="bottom" constant="28"/>
+                            <constraint id="305" firstItem="304" firstAttribute="leading" secondItem="290" secondAttribute="leading" constant="60"/>
+                            <constraint id="306" firstItem="290" firstAttribute="trailing" secondItem="304" secondAttribute="trailing" constant="57"/>
+                            <constraint id="307" firstItem="304" firstAttribute="top" secondItem="294" secondAttribute="bottom" constant="27"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="294" id="name-outlet-294"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="291" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2616" y="1344"/>
         </scene>
     </scenes>
     <resources>

@@ -41,6 +41,7 @@
     <Compile Include="ViewModels\SplitRootViewModel.cs" />
     <Compile Include="ViewModels\SplitMasterViewModel.cs" />
     <Compile Include="ViewModels\SplitDetailViewModel.cs" />
+    <Compile Include="ViewModels\SplitDetailNavViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">

@@ -25,7 +25,7 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IOSDebuggerPort>15826</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>x86_64</MtouchArch>
+    <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
@@ -153,6 +153,10 @@
     <Compile Include="Views\SplitRootView.cs" />
     <Compile Include="Views\SplitRootView.designer.cs">
       <DependentUpon>SplitRootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailNavView.cs" />
+    <Compile Include="Views\SplitDetailNavView.designer.cs">
+      <DependentUpon>SplitDetailNavView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
