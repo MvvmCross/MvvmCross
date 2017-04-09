@@ -4,10 +4,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public interface IMvxSidebarMenu
     {
-        UIImage MenuButtonImage { get; }
-        bool HasShadowing { get; }
-        bool DisablePanGesture { get; }
         bool AnimateMenu { get; }
+        bool DisablePanGesture { get; }
+        bool HasShadowing { get; }
+        UIImage MenuButtonImage { get; }
+        
         int MenuWidth { get; }
     }
 }
