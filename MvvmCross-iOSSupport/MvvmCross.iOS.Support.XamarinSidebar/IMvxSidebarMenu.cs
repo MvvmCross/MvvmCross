@@ -6,6 +6,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
     {
         UIImage MenuButtonImage { get; }
         bool HasShadowing { get; }
+        bool DisablePanGesture { get; }
+        bool AnimateMenu { get; }
         int MenuWidth { get; }
     }
 }

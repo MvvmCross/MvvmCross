@@ -9,7 +9,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     {
         public virtual UIImage MenuButtonImage => UIImage.FromBundle("threelines");
 
+        public virtual bool AnimateMenu => true;
         public virtual bool HasShadowing => true;
+        public virtual bool DisablePanGesture => false;
+
         private int MaxMenuWidth = 300;
         private int MinSpaceRightOfTheMenu = 55;
 
