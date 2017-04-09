@@ -160,9 +160,11 @@
 
             if (mvxSideMenuSettings != null)
             {
-
+                sidebarController.DarkOverlayAlpha = mvxSideMenuSettings.DarkOverlayAlpha;
+                sidebarController.HasDarkOverlay = mvxSideMenuSettings.HasDarkOverlay;
                 sidebarController.HasShadowing = mvxSideMenuSettings.HasShadowing;
                 sidebarController.DisablePanGesture = mvxSideMenuSettings.DisablePanGesture;
+                sidebarController.ReopenOnRotate = mvxSideMenuSettings.ReopenOnRotate;
                 sidebarController.StateChangeHandler += (object sender, bool e) =>
                 {
                     sidebarController.MenuWidth = mvxSideMenuSettings.MenuWidth;
