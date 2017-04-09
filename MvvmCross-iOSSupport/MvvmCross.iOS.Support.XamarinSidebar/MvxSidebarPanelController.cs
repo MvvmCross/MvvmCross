@@ -130,9 +130,28 @@
 
         private IMvxIosView CreateInstance(Type viewControllerType)
         {
-            var viewModelType = viewControllerType.BaseType.GetGenericArguments().FirstOrDefault(argument => typeof(IMvxViewModel).IsAssignableFrom(argument));
+            var viewModelType = GetBaseType(viewControllerType);
             var presenter = Mvx.Resolve<IMvxIosViewPresenter>();
             return presenter.CreateViewControllerFor(new MvxViewModelRequest(viewModelType, null, null, null));
+        }
+
+        private Type GetBaseType(Type type)
+        {
+            while (type.BaseType != null)
+            {
+                type = type.BaseType;
+                if (type.IsGenericType)
+                {
+                    var viewModelType = type.GetGenericArguments().FirstOrDefault(argument => typeof(IMvxViewModel).IsAssignableFrom(argument));
+
+                    if (viewModelType != null)
+                    {
+                        return viewModelType;
+                    }
+                }
+            }
+
+            throw new InvalidOperationException("Unable to locate ViewModel type on ViewController.");
         }
 
         private void ConfigureSideMenu(UIViewController viewController, SidebarController sidebarController)
