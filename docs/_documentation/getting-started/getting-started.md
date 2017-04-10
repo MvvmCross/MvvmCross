@@ -2,7 +2,7 @@
 layout: documentation
 title: Getting Started with MvvmCross
 category: Getting-started
-order: 2
+order: 1
 ---
 NuGet | Continuous Integration
 -------|-----------

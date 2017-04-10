@@ -1,8 +1,8 @@
 ---
 layout: documentation
-title: Get MvvmCross
+title: MvvmCross Packages
 category: Getting-started
-order: 1
+order: 2
 ---
 
 Name | Description | Link
