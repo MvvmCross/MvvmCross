@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Dependency injection
-category: Developer-guide
+category: Fundamentals
 ---
 ## Constructor Injection
 

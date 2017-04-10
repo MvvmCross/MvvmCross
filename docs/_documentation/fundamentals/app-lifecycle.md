@@ -1,7 +1,7 @@
 --
 layout: documentation
 title: App lifecycle
-category: Developer-guide
+category: Fundamentals
 ---
 #ViewModel Creation
 

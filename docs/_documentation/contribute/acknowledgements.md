@@ -1,8 +1,9 @@
 ---
 layout: documentation
 title: Acknowledgements
-category: Contribute
+category: Contributing
 ---
+
 ## Owners
 
 who                                                    | contact
