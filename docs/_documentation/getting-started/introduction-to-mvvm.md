@@ -2,7 +2,7 @@
 layout: documentation
 title: Introduction to MVVM
 category: Getting-started
-order: 3
+order: 4
 ---
 Model-view-viewmodel (MVVM) is a software architectural pattern.
 
