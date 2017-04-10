@@ -4,7 +4,9 @@
 @charset "utf-8";
 
 // Our variables
-$base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+
+//$base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+$base-font-family: 'Lato', sans-serif;
 $base-font-size:   16px;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
@@ -20,6 +22,9 @@ $grey-color:       #828282;
 $grey-color-super-light: lighten($grey-color, 45%);
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
+
+//header height
+$header-height:60px;
 
 // Width of the content area
 $content-width:    1200px;
@@ -37,6 +42,7 @@ $searchbar-expanded-width: 220px;
 $social-icons-spacing: 4px;
 
 $syntax-background-color: #f2f2f2;
+
 // Minima also includes a mixin for defining media queries.
 // Use media queries like this:
 // @include media-query($on-palm) {
@@ -55,9 +61,11 @@ h2,h3,h4,h5,h6
 {
     color: $brand-color;
 }
+
 .page-content{
-    padding: 0px;
+    padding: 1% 0;
 }
+
 .header-logo
 {
     width: 129px;
@@ -69,11 +77,9 @@ h2,h3,h4,h5,h6
     background-color: #FFF;
     border-bottom: 2px solid #69f0ae;
     border-top:0px;
+    min-height: $header-height;
 }
-.clear-menu
-{
-    height: 60px; //to clear the fixed height of the menu with a relative position
-}
+
 .site-nav
 {
     .page-link 
@@ -159,6 +165,15 @@ h2,h3,h4,h5,h6
  
 .search-box:hover .icon{
   color: #93a2ad;
+}
+
+
+#search-results
+{
+    li
+    {
+        list-style: none;
+    }
 }
 
 //social icons
@@ -262,9 +277,9 @@ h2,h3,h4,h5,h6
 {
     float:left;
     width: $documentation-menu-width;
-    height:100vh;
+    height:calc(100vh - (#{$header-height} + 30px));
     overflow-y: auto;
-    padding: 0 $content-padding;
+    padding: $content-padding;
 	-webkit-box-shadow: 1px 0 0 rgba(81,88,90,0.17);
     box-shadow: 1px 0 0 rgba(81,88,90,0.17);
     ul
@@ -304,10 +319,10 @@ h2,h3,h4,h5,h6
 .documentation
 {
     float: left;
-    height:100vh;
+    height:calc(100vh - (#{$header-height} + 30px));
     overflow-y: auto;
     width: $documentation-width;
-    padding: 0 $content-padding;
+    padding: $content-padding;
 }
 
 // @media screen and (max-width: $effective-content-width) {
