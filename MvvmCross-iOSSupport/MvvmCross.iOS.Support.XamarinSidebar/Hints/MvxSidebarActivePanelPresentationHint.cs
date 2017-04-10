@@ -27,7 +27,6 @@
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
-                    InitSidebar();
                     break;
                 case MvxPanelEnum.Center:
                 default:
@@ -36,28 +35,6 @@
             }
 
             return true;
-        }
-
-        protected virtual void InitSidebar()
-        {
-            var sidebarController = Panel == MvxPanelEnum.Left
-                                                         ? SidebarPanelController.LeftSidebarController
-                                                         : SidebarPanelController.RightSidebarController;
-
-            var xamarinSidebarMenu = ViewController as IMvxSidebarMenu;
-            if (xamarinSidebarMenu != null)
-            {
-
-                sidebarController.HasShadowing = xamarinSidebarMenu.HasShadowing;
-                sidebarController.DisablePanGesture = false;
-                sidebarController.StateChangeHandler += (object sender, bool e) =>
-                   {
-                       sidebarController.MenuWidth = xamarinSidebarMenu.MenuWidth;
-                       sidebarController.ViewWillAppear(false);
-                   };
-            }
-
-            sidebarController.ChangeMenuView(ViewController);
         }
     }
 }
