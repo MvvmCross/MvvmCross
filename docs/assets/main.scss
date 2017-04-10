@@ -165,6 +165,15 @@ h2,h3,h4,h5,h6
   color: #93a2ad;
 }
 
+
+#search-results
+{
+    li
+    {
+        list-style: none;
+    }
+}
+
 //social icons
 .ic-stackoverflow {
 	width: 17.5px;
