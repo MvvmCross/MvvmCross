@@ -2,6 +2,7 @@
 layout: documentation
 title: Data binding
 category: Fundamentals
+order: 2
 ---
 DataBinding is the key technology that Mvvm relies on to link Views with their ViewModels.
 

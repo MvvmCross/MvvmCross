@@ -4,6 +4,7 @@ title: MvvmCross Packages
 category: Getting-started
 order: 3
 ---
+MvvmCross is a very extensible framework. There is a lot already been made by the community which you can use. On this page you will find the MvvmCross nuget packages currently available.
 
 Name | Description | Link
 ---- | ----------- | ----
@@ -13,15 +14,10 @@ Name | Description | Link
 `MvvmCross.Core`               | Core libraries for the base of your app. | [NuGet](https://www.nuget.org/packages/MvvmCross.Core/)
 `MvvmCross.Tests`              | Test helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Tests/)
 `MvvmCross.Droid.FullFragging` | Support for native (Android > 4.0) fragments, and more Android helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.FullFragging/)
-`MvvmCross.Dialog.iOS`         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Dialog.iOS/)
-`MvvmCross.Dialog.Droid`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.StarterPack/)
 `MvvmCross.Console.Platform`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Console.Platform/)
 `MvvmCross.CodeAnalysis`       | Code fixes for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.CodeAnalysis/)
 `MvvmCross.Binding`            | Bindings system for all platforms | [NuGet](https://www.nuget.org/packages/MvvmCross.Binding/)
 `MvvmCross.BindingEx`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.BindingEx/)
-`MvvmCross.AutoView`           |  | [NuGet](https://www.nuget.org/packages/MvvmCross.AutoView/)
-`MvvmCross.AutoView.iOS`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.AutoView.iOS/)
-`MvvmCross.AutoView.Droid`     |  | [NuGet](https://www.nuget.org/packages/MvvmCross.AutoView.Droid/)
 
 
 ## Android Support
