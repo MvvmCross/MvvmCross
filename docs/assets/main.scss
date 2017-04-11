@@ -16,7 +16,7 @@ $spacing-unit:     30px;
 
 $text-color:       #4c555a;
 $background-color: #fdfdfd;
-$brand-color:      #27a566;
+$brand-color:      #2FB681;
 
 $grey-color:       #828282;
 $grey-color-super-light: lighten($grey-color, 45%);
@@ -75,7 +75,7 @@ h2,h3,h4,h5,h6
 .site-header
 {
     background-color: #FFF;
-    border-bottom: 2px solid #69f0ae;
+    border-bottom: 2px solid #2FB681;
     border-top:0px;
     min-height: $header-height;
 }
@@ -255,8 +255,8 @@ h2,h3,h4,h5,h6
 
 .buttons-unit .button-landing {
   font-size: 16px;
-  background: #69f0ae;
-  color: #37474f;
+  background: #2FB681;
+  color: #ffffff;
 }
 
 .landing-title
