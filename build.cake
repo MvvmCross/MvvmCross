@@ -78,7 +78,7 @@ Task("Package")
 	var nugetSettings = new NuGetPackSettings {
 		Authors = new [] { "MvvmCross contributors" },
 		Owners = new [] { "MvvmCross" },
-		IconUrl = new Uri("http://i.imgur.com/BvdAtgT.png"),
+		IconUrl = new Uri("http://i.imgur.com/Baucn8c.png"),
 		ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
 		LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
 		Copyright = "Copyright (c) MvvmCross",
