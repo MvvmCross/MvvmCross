@@ -372,8 +372,10 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             var attributes = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
             if(attributes == null)
-                throw new MvxException("Please remember to set PresentationAttributes!");
-
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewController.GetType().Name}, assuming animated Child presentation");
+                attributes = new MvxChildPresentationAttribute();
+            }
             return attributes;
         }
     }
