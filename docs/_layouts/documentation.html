@@ -18,19 +18,3 @@ layout: documentation_layout
   </div>
 
 </article>
-
-
-
-<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
-<script>
-$(document).ready(function() {
-  console.log(getAbsolutePath());
-  //$(".documentation-menu").offset({ top: 250, left: 0 });
-  function getAbsolutePath() {
-      var loc = window.location;
-      var pathName = loc.pathname;
-      return pathName;
-  }
-});
-</script>
-
