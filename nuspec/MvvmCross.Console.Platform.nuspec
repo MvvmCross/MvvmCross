@@ -10,7 +10,6 @@
 This package contains the Console 'MvvmCross Library' assemblies for MvvmCross
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp console</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
 			<dependency id="MvvmCross.Core" version="[$version$]" />
 		</dependencies>
