@@ -1,18 +1,15 @@
-using Foundation;
 using System;
-using UIKit;
-using MvvmCross.iOS.Views;
-using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.iOS.Views.Presenters.Attributes;
+using Playground.Core.ViewModels;
+using UIKit;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxChildPresentation]
     public partial class SecondChildView : MvxViewController<SecondChildViewModel>
     {
         public SecondChildView(IntPtr handle) : base(handle)
