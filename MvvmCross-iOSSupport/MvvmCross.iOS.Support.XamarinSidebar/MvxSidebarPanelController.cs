@@ -120,7 +120,7 @@
                 return null;
             }
 
-            if (types != null && types.Length > 0)
+            if (types != null && types.Length > 1)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, $"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
             }
