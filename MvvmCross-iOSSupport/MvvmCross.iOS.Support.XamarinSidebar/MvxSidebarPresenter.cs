@@ -117,7 +117,6 @@
             OnMasterNavigationControllerCreated();
 
             RootViewController = new MvxSidebarPanelController(MasterNavigationController);
-            RootViewController.Initialize();
            
             SetWindowRootViewController(RootViewController);
 
