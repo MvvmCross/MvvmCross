@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Navigation
-category: Developer-guide
+category: Fundamentals
+order: 3
 ---
 This article will cover some of the techniques available within MvvmCross for navigating between Page-level **ViewModels**.
 

@@ -54,9 +54,12 @@ collections:
 
 category_order:
   - 'Getting-started'
-  - 'Platform'
-  - 'Plugins'
+  - 'Fundamentals'
   - 'Tutorials'
-  - 'Developer-guide'
-  - 'Contribute'
+  - 'Platform specifics'
+  - 'Upgrading'
+  - 'Samples'
+  - 'Plugins'
+  - 'Testing'
+  - 'Contributing'
   - 'Licensing'

@@ -6,7 +6,8 @@
     <div class="category_wrapper">
     <div class="category">{{ category.name }}</div>
     <ul class="menu-no-bullet">
-    {% for item in category.items %}
+    {% assign items = category.items | sort: "order"  %}
+    {% for item in items %}
         <li class="menu-no-bullet">
           <a href="{{ site.baseurl }}{{ item.url }}"
           {% if item.url == navurl %}
