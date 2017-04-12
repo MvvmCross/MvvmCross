@@ -23,7 +23,7 @@
             AddPresentationHintHandler<MvxSidebarResetRootPresentationHint>(PresentationHintHandler);
         }
 
-        private bool PresentationHintHandler(MvxPanelPresentationHint hint)
+        protected virtual bool PresentationHintHandler(MvxPanelPresentationHint hint)
         {
             if (hint == null)
                 return false;

@@ -30,7 +30,7 @@
 		public bool HasLeftMenu => LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
 		public bool HasRightMenu => RightSidebarController != null && RightSidebarController.MenuAreaController != null;
 
-        private void SetupSideMenu()
+        protected virtual void SetupSideMenu()
         {
 			var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
 			var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
@@ -63,7 +63,7 @@
             }
         }
 
-        private UIViewController ResolveSideMenu(MvxPanelEnum location)
+        protected virtual UIViewController ResolveSideMenu(MvxPanelEnum location)
         {
             var assembly = Assembly.GetEntryAssembly();
 
@@ -85,14 +85,14 @@
             return CreateInstance(types[0]) as UIViewController;
         }
 
-        private IMvxIosView CreateInstance(Type viewControllerType)
+        protected virtual IMvxIosView CreateInstance(Type viewControllerType)
         {
             var viewModelType = GetBaseType(viewControllerType);
             var presenter = Mvx.Resolve<IMvxIosViewPresenter>();
             return presenter.CreateViewControllerFor(new MvxViewModelRequest(viewModelType, null, null, null));
         }
 
-        private Type GetBaseType(Type type)
+        protected virtual Type GetBaseType(Type type)
         {
             while (type.BaseType != null)
             {
@@ -111,7 +111,7 @@
             throw new InvalidOperationException("Unable to locate ViewModel type on ViewController.");
         }
 
-        private void ConfigureSideMenu(SidebarController sidebarController)
+        protected virtual void ConfigureSideMenu(SidebarController sidebarController)
         {
             var mvxSideMenuSettings = sidebarController.MenuAreaController as IMvxSidebarMenu;
 
@@ -178,7 +178,7 @@
                 OpenMenu(RightSidebarController);
         }
 
-        private void OpenMenu(SidebarController sidebarController)
+        protected virtual void OpenMenu(SidebarController sidebarController)
         {
             if (sidebarController != null && !sidebarController.IsOpen)
                 sidebarController.OpenMenu();
