@@ -38,6 +38,7 @@
 			if (leftSideMenu == null && rightSideMenu == null)
 			{	
 				Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
+				AttachNavigationController();
 				return;
 			}
 
@@ -62,6 +63,12 @@
                 ConfigureSideMenu(RightSidebarController);
             }
         }
+
+		protected virtual void AttachNavigationController()
+		{
+			this.AddChildViewController(NavigationController);
+			this.View.AddSubview(NavigationController.View);
+		}
 
         protected virtual UIViewController ResolveSideMenu(MvxPanelEnum location)
         {
