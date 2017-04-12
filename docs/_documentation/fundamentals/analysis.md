@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Code Analysis
-category: Developer-guide
+category: Fundamentals
+order: 7
 ---
 # Background
 

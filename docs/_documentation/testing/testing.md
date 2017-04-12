@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Testing
-category: Developer-guide
+category: Testing
 ---
 In order to test objects that make use of MvvmCross infrastructure, like ViewModels and the IoC container, there are some setup steps that are required. 
 

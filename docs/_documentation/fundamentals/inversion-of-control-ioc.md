@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Inversion of Control
-category: Developer-guide
+category: Fundamentals
+order: 6
 ---
 Two key ideas that are used in MvvmCross are:
 

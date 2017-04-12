@@ -1,7 +1,7 @@
----
+--
 layout: documentation
-title: Feature overview
-category: Developer-guide
+title: App architecture
+category: Fundamentals
 ---
 Deployed MvvmCross applications consist of two parts:
 
@@ -83,7 +83,7 @@ using Cirrious.CrossCore.IoC;
 
 namespace MyName.Core
 {
-public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+public class App : MvvmCross.ViewModels.MvxApplication
 {
     public override void Initialize()
     {
@@ -137,7 +137,7 @@ public class FirstViewModel
         }
     }
 
-    private MvxCommand _resetCommand;
+    private readonly MvxCommand _resetCommand;
     public ICommand ResetCommand
     {
         get
@@ -164,10 +164,10 @@ Beyond this simple example, `ViewModels` can also:
 - contain dynamic lists (see https://github.com/slodge/MvvmCross/wiki/MvvmCross-Tutorials#working-with-collections)
 - be constructed from IoC (https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
 - use 'techniques' like:
-- `MvxCommandCollection` (see http://slodge.blogspot.co.uk/2013/03/fixing-mvvm-commands-making-hot-tuna.html), 
-- `IMvxINPCInterceptor` (see http://slodge.blogspot.co.uk/2013/07/intercepting-raisepropertychanged.html)
-- Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
-- Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
+  - `MvxCommandCollection` (see http://slodge.blogspot.co.uk/2013/03/fixing-mvvm-commands-making-hot-tuna.html), 
+  - `IMvxINPCInterceptor` (see http://slodge.blogspot.co.uk/2013/07/intercepting-raisepropertychanged.html)
+  - Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
+  - Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
 
 ##The MvvmCross UI
 
@@ -188,11 +188,10 @@ On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplica
 An initial replacement looks like:
 
 ```c#
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using Foundation;
+using UIKit;
+using MvvmCross.Touch.Platform;
+using MvvmCross.ViewModels;
 
 namespace MyName.Touch
 {
@@ -226,7 +225,7 @@ On Android, we don't normally have any `Application` to override. Instead of thi
 ```c#
 using Android.App;
 using Android.Content.PM;
-using Cirrious.MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views;
 
 namespace MyName.Droid
 {
@@ -262,73 +261,70 @@ To adapt this for MvvmCross, we simply:
 
 2. add a block to `Application_Launching` to force the native app to defer the start actions to `IMvxAppStart`
  
-```c#
-private void Application_Launching(object sender, LaunchingEventArgs e)
-{
-    RootFrame.Navigating += RootFrameOnNavigating;
-}
+        private void Application_Launching(object sender, LaunchingEventArgs e)
+        {
+            RootFrame.Navigating += RootFrameOnNavigating;
+        }
 
-private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
-{
-    args.Cancel = true;
-    RootFrame.Navigating -= RootFrameOnNavigating;
-    RootFrame.Dispatcher.BeginInvoke(() => {
-        Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start();
-    });
-}
-```
+        private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
+        {
+            args.Cancel = true;
+            RootFrame.Navigating -= RootFrameOnNavigating;
+            RootFrame.Dispatcher.BeginInvoke(() => { Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start(); });
+        }
 
 ####Wpf
 
 On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via Nuget a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
 
-   using System;
-   using System.Windows;
-   using Cirrious.CrossCore;
-   using Cirrious.MvvmCross.ViewModels;
-  `using Cirrious.MvvmCross.Wpf.Views;`
+```c#
+using System;
+using System.Windows;
+using MvvmCross.ViewModels;
+using MvvmCross.Wpf.Views;
 
-  namespace MyName.Wpf
-  {
-      public partial class App : Application
-      {
-          private bool _setupComplete;
+namespace MyName.Wpf
+{
+public partial class App : Application
+{
+    private bool _setupComplete;
 
-          private void DoSetup()
-          {
-              LoadMvxAssemblyResources();
-			
-              var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
+    private void DoSetup()
+    {
+        LoadMvxAssemblyResources();
 
-              var setup = new Setup(Dispatcher, presenter);
-              setup.Initialize();
+        var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
 
-              var start = Mvx.Resolve<IMvxAppStart>();
-              start.Start();
+        var setup = new Setup(Dispatcher, presenter);
+        setup.Initialize();
 
-              _setupComplete = true;
-          }
+        var start = Mvx.Resolve<IMvxAppStart>();
+        start.Start();
 
-          protected override void OnActivated(EventArgs e)
-          {
-              if (!_setupComplete)
-                  DoSetup();
+        _setupComplete = true;
+    }
 
-              base.OnActivated(e);
-          }
-		
-          private void LoadMvxAssemblyResources()
-          {
-              for (var i = 0;; i++)
-              {
-                  string key = "MvxAssemblyImport" + i;
-                  var data = TryFindResource(key);
-                  if (data == null)
-                      return;
-              }
-          }
-      }
-  }
+    protected override void OnActivated(EventArgs e)
+    {
+        if (!_setupComplete)
+            DoSetup();
+
+        base.OnActivated(e);
+    }
+
+    private void LoadMvxAssemblyResources()
+    {
+        for (var i = 0;; i++)
+        {
+            string key = "MvxAssemblyImport" + i;
+            var data = TryFindResource(key);
+            if (data == null)
+                return;
+        }
+    }
+}
+}
+```
 
 A default FirstView should also exist.
 
@@ -338,13 +334,11 @@ On WindowsStore, a new project will again contain a native `App.xaml.cs`
 
 To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace the `if (rootFrame.Content == null)` block with:
 
-```c#
-var setup = new Setup(rootFrame);
-setup.Initialize();
-
-var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
-start.Start();
-```
+                var setup = new Setup(rootFrame);
+                setup.Initialize();
+                
+                var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+                start.Start();
 
 ###Setup.cs
 
@@ -365,8 +359,8 @@ Beyond this, a larger list of Setup customisation options is discussed in https:
 
 ```c#
 using Android.Content;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.Platform;
+using MvvmCross.ViewModels;
 
 namespace MyName.Droid
 {
@@ -387,19 +381,19 @@ public class Setup : MvxAndroidSetup
 ####Minimal Setup - iOS
 
 ```c#
-using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Touch.Platform;
+using UIKit;
+using MvvmCross.Touch.Platform;
 
 namespace MyName.Touch
 {
-public class Setup : MvxTouchSetup
+public class Setup : MvxiOSSetup
 {
     public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
     : base(applicationDelegate, window)
     {
     }
 
-    protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp ()
+    protected override MvvmCross.ViewModels.IMvxApplication CreateApp ()
     {
         return new Core.App();
     }
@@ -464,8 +458,8 @@ public class Setup : MvxWpfSetup
 ####Setup - WindowsStore
 
 ```c#
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsStore.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross.WindowsStore.Platform;
 using Windows.UI.Xaml.Controls;
 
 namespace MyName.Store
