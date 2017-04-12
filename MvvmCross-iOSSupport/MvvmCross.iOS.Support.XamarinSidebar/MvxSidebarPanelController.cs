@@ -15,8 +15,6 @@
     public class MvxSidebarPanelController : UIViewController, IMvxSideMenu
     {
         private readonly UIViewController _subRootViewController;
-        private bool _isInitializing;
-        private bool _isInitialized;
         private UIViewController _leftSideMenu;
         private UIViewController _rightSideMenu;
 
@@ -60,26 +58,18 @@
 
         public bool HasRightMenu => RightSideMenu != null;
 
-        public void Initialize()
-        {
-            _isInitializing = true;
-
-            try
-            {
-                _leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
-                _rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
-
-                SetupSideMenu();
-            }
-            finally
-            {
-                _isInitializing = false;
-                _isInitialized = true;
-            }
-        }
 
         private void SetupSideMenu()
         {
+			_leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
+			_rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
+
+			if (_leftSideMenu == null && _rightSideMenu == null)
+			{	
+				Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
+				return;
+			}
+
             if (_leftSideMenu != null && _rightSideMenu != null)
             {
                 LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, _leftSideMenu);
@@ -99,10 +89,6 @@
                 LeftSidebarController = null;
                 RightSidebarController = new SidebarController(this, NavigationController, _rightSideMenu);
                 ConfigureSideMenu(_rightSideMenu, RightSidebarController);
-            }
-            else
-            {
-                Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
             }
         }
 
@@ -177,10 +163,7 @@
         {
             base.ViewDidLoad();
 
-            if (!_isInitialized && !_isInitializing)
-            {
-                Mvx.Trace(MvxTraceLevel.Warning, "The instance of 'MvxSidebarPanelController' class is not initialized. Showing or hiding the sidemenu could show unexpected behaviour. Please call the 'Initialize()' method after constructing the 'MvxSidebarPanelController' class.");
-            }
+			SetupSideMenu();
         }
 
         public override UIStatusBarAnimation PreferredStatusBarUpdateAnimation
