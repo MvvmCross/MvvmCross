@@ -118,11 +118,8 @@
 
             RootViewController = new MvxSidebarPanelController(MasterNavigationController);
             RootViewController.Initialize();
-
-            ParentRootViewController = new UINavigationController(RootViewController);
-            ParentRootViewController.NavigationBarHidden = true;
-
-            SetWindowRootViewController(ParentRootViewController);
+           
+            SetWindowRootViewController(RootViewController);
 
             Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
         }
