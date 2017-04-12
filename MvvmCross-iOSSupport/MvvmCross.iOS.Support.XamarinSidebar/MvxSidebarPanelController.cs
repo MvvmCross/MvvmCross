@@ -15,8 +15,6 @@
     public class MvxSidebarPanelController : UIViewController, IMvxSideMenu
     {
         private readonly UIViewController _subRootViewController;
-        private UIViewController _leftSideMenu;
-        private UIViewController _rightSideMenu;
 
         public MvxSidebarPanelController(UINavigationController navigationController)
         {
@@ -25,70 +23,43 @@
         }
 
         public bool StatusBarHidden { get; set; }
-
-        public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
-
-        public new UINavigationController NavigationController { get; private set; }
-
-        public SidebarController LeftSidebarController { get; private set; }
-
+		public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
+		public new UINavigationController NavigationController { get; private set; }
+		public SidebarController LeftSidebarController { get; private set; }
         public SidebarController RightSidebarController {get; private set; }
-
-        public UIViewController LeftSideMenu
-        {
-            get { return _leftSideMenu; }
-            set
-            {
-                _leftSideMenu = value;
-                SetupSideMenu();
-            }
-        }
-
-        public UIViewController RightSideMenu
-        {
-            get { return _rightSideMenu; }
-            set
-            {
-                _rightSideMenu = value;
-                SetupSideMenu();
-            }
-        }
-
-        public bool HasLeftMenu => LeftSideMenu != null;
-
-        public bool HasRightMenu => RightSideMenu != null;
-
+		public bool HasLeftMenu => LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
+		public bool HasRightMenu => RightSidebarController != null && RightSidebarController.MenuAreaController != null;
 
         private void SetupSideMenu()
         {
-			_leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
-			_rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
+			var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
+			var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
 
-			if (_leftSideMenu == null && _rightSideMenu == null)
+			if (leftSideMenu == null && rightSideMenu == null)
 			{	
 				Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
 				return;
 			}
 
-            if (_leftSideMenu != null && _rightSideMenu != null)
+            if (leftSideMenu != null && rightSideMenu != null)
             {
-                LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, _leftSideMenu);
-                ConfigureSideMenu(_leftSideMenu, LeftSidebarController);
+                LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, leftSideMenu);
+                ConfigureSideMenu(LeftSidebarController);
 
-                RightSidebarController = new SidebarController(this, _subRootViewController, _rightSideMenu);
-                ConfigureSideMenu(_rightSideMenu, RightSidebarController);
+                RightSidebarController = new SidebarController(this, _subRootViewController, rightSideMenu);
+                ConfigureSideMenu(RightSidebarController);
             }
-            else if (_leftSideMenu != null)
+            else if (leftSideMenu != null)
             {
-                LeftSidebarController = new SidebarController(this, NavigationController, _leftSideMenu);
+                LeftSidebarController = new SidebarController(this, NavigationController, leftSideMenu);
                 RightSidebarController = null;
-                ConfigureSideMenu(_leftSideMenu, LeftSidebarController);
+                ConfigureSideMenu(LeftSidebarController);
             }
-            else if (_rightSideMenu != null)
+            else if (rightSideMenu != null)
             {
                 LeftSidebarController = null;
-                RightSidebarController = new SidebarController(this, NavigationController, _rightSideMenu);
-                ConfigureSideMenu(_rightSideMenu, RightSidebarController);
+                RightSidebarController = new SidebarController(this, NavigationController, rightSideMenu);
+                ConfigureSideMenu(RightSidebarController);
             }
         }
 
@@ -140,9 +111,9 @@
             throw new InvalidOperationException("Unable to locate ViewModel type on ViewController.");
         }
 
-        private void ConfigureSideMenu(UIViewController viewController, SidebarController sidebarController)
+        private void ConfigureSideMenu(SidebarController sidebarController)
         {
-            var mvxSideMenuSettings = viewController as IMvxSidebarMenu;
+            var mvxSideMenuSettings = sidebarController.MenuAreaController as IMvxSidebarMenu;
 
             if (mvxSideMenuSettings != null)
             {
