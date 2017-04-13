@@ -59,12 +59,6 @@
     <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
     <Compile Include="SidePanels\MvxPanelPresentationHint.cs" />
     <Compile Include="SidePanels\IMvxSideMenu.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\IMvxTabBarPresenter.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\IMvxTabBarViewController.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\MvxTabPresentationAttribute.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\MvxTabsViewPresenter.cs" />
-    <Compile Include="Views\MvxBaseTabBarViewController.cs" />
-    <Compile Include="Views\MvxExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
