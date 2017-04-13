@@ -5,11 +5,11 @@ namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
     public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
     {
-        public bool WrapInNavigationController { get; set; }
+        public bool WrapInNavigationController { get; set; } = false;
 
-        public UIModalPresentationStyle ModalPresentationStyle { get; set; }
+        public UIModalPresentationStyle ModalPresentationStyle { get; set; } = UIModalPresentationStyle.FullScreen;
 
-        public UIModalTransitionStyle ModalTransitionStyle { get; set; }
+        public UIModalTransitionStyle ModalTransitionStyle { get; set; } = UIModalTransitionStyle.CoverVertical;
 
         public bool Animated { get; set; } = true;
     }

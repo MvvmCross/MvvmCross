@@ -23,6 +23,7 @@ namespace Playground.iOS.Views
             var set = this.CreateBindingSet<SplitMasterView, SplitMasterViewModel>();
             set.Bind(btnDetail).To(vm => vm.OpenDetailCommand);
             set.Bind(btnDetailNav).To(vm => vm.OpenDetailNavCommand);
+            set.Bind(btnStack).To(vm => vm.ShowRootViewModel);
             set.Apply();
         }
     }

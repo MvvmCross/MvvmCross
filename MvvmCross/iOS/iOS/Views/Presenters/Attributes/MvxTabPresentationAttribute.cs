@@ -7,7 +7,7 @@ namespace MvvmCross.iOS.Views.Presenters.Attributes
 
         public string TabIconName { get; set; }
 
-        public bool WrapInNavigationController { get; set; }
+        public bool WrapInNavigationController { get; set; } = true;
 
         public string TabAccessibilityIdentifier { get; set; }
     }
