@@ -21,7 +21,7 @@ baseurl: "/mvvmcross-docs" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: MvvmCross
 github_username:  MvvmCross
-git_repo: mvvmcross-docs
+git_repo: MvvmCross
 
 # Build settings
 markdown: kramdown
