@@ -1,23 +1,24 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CSharp;
+using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {
-    using MvvmCross.Core.ViewModels;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer : DiagnosticAnalyzer
     {
         internal static readonly LocalizableString Title = "Consider passing a parameter to ShowViewModel<T> for the generic form of MvxViewModel<T>";
-        internal static readonly LocalizableString MessageFormat = "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument";
+        internal static readonly LocalizableString MessageFormat = "'{0}' inherits from generic 'MvxViewModel<TInit>' or implements 'IMvxViewModelInitializer<TInit>' and requires an argument of type {1}";
+        internal static readonly LocalizableString Description = "When calling 'ShowViewModel<TViewModel, TInit>()', if TViewModel inherits from the generic 'MvxViewModel<TInit>' or implements 'IMvxViewModelInitializer<TInit>', then the method call to ShowViewModel should be passing a TInit argument";
         internal const string Category = Categories.Usage;
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true);
-        private static readonly string MvxViewModelGenericFullName = typeof(MvxViewModel<>).FullName;
+        internal static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, "Required Matching Type");
+        private static readonly string MvxViewModelInitializerName = typeof(IMvxViewModelInitializer<>).Name;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(Rule);
@@ -41,40 +42,25 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
             if (namedSymbol != null &&
                 namedSymbol.IsGenericMethod &&
-                namedSymbol.TypeArguments != null &&
                 namedSymbol.TypeArguments.Length == 1)
             {
-                var genericViewModelMetadataName = context.SemanticModel.Compilation.GetTypeByMetadataName(MvxViewModelGenericFullName);
-                var baseType = GetBaseGenericViewModelType(namedSymbol.TypeArguments[0], genericViewModelMetadataName);
-                if (baseType != null)
-                {
-                    if (baseType.TypeArguments != null && baseType.TypeArguments.Length == 1)
-                    {
-                        var arguments = invocationExpressionSyntax.ArgumentList?.Arguments;
-                        if (arguments != null &&
-                            arguments.Value.Count > 0 &&
-                            context.SemanticModel.GetTypeInfo(arguments.Value[0].Expression).Type.Equals(baseType.TypeArguments[0]))
-                        {
-                            return;
-                        }
+                var baseInterface = namedSymbol.TypeArguments[0].AllInterfaces.FirstOrDefault(x => x.MetadataName == MvxViewModelInitializerName);
 
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(
-                                Rule
-                                , genericNameSyntax.GetLocation())
-                        );
+                if (baseInterface != null &&
+                    baseInterface.TypeArguments.Length == 1)
+                {
+                    var arguments = invocationExpressionSyntax.ArgumentList?.Arguments;
+
+                    if (arguments != null &&
+                        arguments.Value.Count > 0 &&
+                        context.SemanticModel.GetTypeInfo(arguments.Value[0].Expression).Type.Equals(baseInterface.TypeArguments[0]))
+                    {
+                        return;
                     }
+
+                    context.ReportDiagnostic(Diagnostic.Create(Rule, genericNameSyntax.GetLocation(), namedSymbol.TypeArguments[0].Name, baseInterface.TypeArguments[0].Name));
                 }
             }
-        }
-
-        private static INamedTypeSymbol GetBaseGenericViewModelType(ITypeSymbol typeSymbol, INamedTypeSymbol genericViewModelMetadataName)
-        {
-            if (typeSymbol.BaseType == null || typeSymbol.BaseType.ConstructedFrom.Equals(genericViewModelMetadataName))
-            {
-                return typeSymbol.BaseType;
-            }
-            return GetBaseGenericViewModelType(typeSymbol.BaseType, genericViewModelMetadataName);
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -7,6 +7,7 @@ using Android.Preferences;
 using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
+using Android.App;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -14,7 +15,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
     public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
     , IMvxEventSourceFragment
     {
-        public event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+        public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
         public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
@@ -40,11 +41,25 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         }
 
-        public override void OnAttach(Activity activity)
-        {
-            AttachCalled.Raise(this, activity);
-            base.OnAttach(activity);
-        }
+		public override void OnAttach(Context context)
+		{
+			if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+			{
+				AttachCalled.Raise(this, context);
+			}
+
+			base.OnAttach(context);
+		}
+
+		public override void OnAttach(Activity activity)
+		{
+			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+			{
+				AttachCalled.Raise(this, activity);
+			}
+
+			base.OnAttach(activity);
+		}
 
         public override void OnCreate(Bundle savedInstanceState)
         {

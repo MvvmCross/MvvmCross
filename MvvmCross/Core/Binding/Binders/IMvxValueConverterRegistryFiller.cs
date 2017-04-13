@@ -15,6 +15,8 @@ namespace MvvmCross.Binding.Binders
 
     public interface IMvxNamedInstanceRegistryFiller<out T>
     {
+        string FindName(Type type);
+
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
 
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly);

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.Visibility</id>
+		<version>$version$</version>
+		<title>MvvmCross - Visibility Plugin</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Visibility' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\dotnet" />
+
+		<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Visibility.Wpf.*" target="lib\net45" />
+		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\net45\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Visibility.Droid.*" target="lib\MonoAndroid" />
+		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Visibility.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="iOSBootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+
+		<!-- Uwp  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.Visibility.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\VisibilityPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\VisibilityPluginBootstrap.cs.pp" />
+		
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Visibility.*" target="lib\Xamarin.Mac20" />
+
+	</files>
+</package>

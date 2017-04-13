@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <declare-styleable name="MvxRecyclerView">
+    <attr name="MvxTemplateSelector" format="string" />
+    <attr name="MvxHeaderLayoutId" format="string" />
+    <attr name="MvxFooterLayoutId" format="string" />
+    <attr name="MvxGroupedDataConverter" format="string"/>
+    <attr name="MvxGroupSectionLayoutId" format="string" />
+    <attr name="MvxHidesHeaderIfEmpty" format="boolean"/>
+    <attr name="MvxHidesFooterIfEmpty" format="boolean"/>
+  </declare-styleable>
+</resources>

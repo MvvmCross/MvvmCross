@@ -2,25 +2,19 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.Binding</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - Binding</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'Core Binding' libraries for MvvmCross
 		</description>
-		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf net net45 netcore uwp</tags>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="Mono.Android.Export" targetFramework="MonoAndroid" />
 		</frameworkAssemblies>
 		<dependencies>
-			<dependency id="MvvmCross.Core" version="4.4.0" />
+			<dependency id="MvvmCross.Core" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -51,41 +45,15 @@ This package contains the 'Core Binding' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.Binding.tvOS.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\Xamarin.tvOS" />
-		
-		<!-- windows common - PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\win81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\portable-win81+wpa81" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\portable-win81+wpa81" />
 
-		<!-- store - pcl -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\netcore45" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\netcore45" />
-
-		<!-- wpf - pcl -->
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Binding.Wpf.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\net45" />
 
-		<!-- src -->
-		<file src="..\MvvmCross\Core\Binding\**\*.cs" target="src\MvvmCross.Binding" />
-		<file src="..\MvvmCross\Binding\Droid\**\*.cs" target="src\MvvmCross.Binding.Droid" />
-		<file src="..\MvvmCross\Binding\iOS\**\*.cs" target="src\MvvmCross.Binding.iOS" />
-		<file src="..\MvvmCross\Core\Localization\**\*.cs" target="src\MvvmCross.Localization" />
-
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Binding.Uwp.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Binding.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Localization.*" target="lib\uap10.0" />
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,22 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>MvvmCross.StarterPack</id>
-		<version>4.4.0</version>
+		<version>$version$</version>
 		<title>MvvmCross - Starter Pack</title>
-		<authors>MvvmCross</authors>
-		<owners>Stuart Lodge</owners>
-		<licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
-		<projectUrl>https://github.com/MvvmCross/MvvmCross</projectUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
 		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'Getting Started' libraries for MvvmCross and installs sample files. This package can be removed after installation so the sample files don't get recreated on each update.
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<dependencies>
-			<dependency id="MvvmCross" version="4.3.0" />
+			<dependency id="MvvmCross" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>		
@@ -32,26 +26,6 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="WpfContent\App.Xaml.Mvx.cs.pp" target="content\net45\App.Xaml.Mvx.cs.pp" />
 		<file src="WpfContent\FirstView.xaml.pp" target="content\net45\Views\FirstView.xaml.pp" />
 		<file src="WpfContent\FirstView.xaml.cs.pp" target="content\net45\Views\FirstView.xaml.cs.pp" />
-
-		<!-- store - Content -->
-		<file src="StoreContent\_ Windows Store UI.txt" target="content\netcore45\ToDo-MvvmCross\_ Windows Store UI.txt" />
-		<file src="StoreContent\Setup.cs.pp" target="content\netcore45\Setup.cs.pp" />
-		<file src="StoreContent\DebugTrace.cs.pp" target="content\netcore45\DebugTrace.cs.pp" />
-		<file src="StoreContent\FirstView.xaml.pp" target="content\netcore45\Views\FirstView.xaml.pp" />
-		<file src="StoreContent\FirstView.xaml.cs.pp" target="content\netcore45\Views\FirstView.xaml.cs.pp" />
-		
-		<!-- Windows Common - Content -->
-		<file src="WCommonContent\_ Windows Store UI.txt" target="content\win81\ToDo-MvvmCross\_ Windows Store UI.txt" />
-		<file src="WCommonContent\Setup.cs.pp" target="content\win81\Setup.cs.pp" />
-		<file src="WCommonContent\DebugTrace.cs.pp" target="content\win81\DebugTrace.cs.pp" />
-		<file src="WCommonContent\FirstView.xaml.pp" target="content\win81\Views\FirstView.xaml.pp" />
-		<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\win81\Views\FirstView.xaml.cs.pp" />
-
-		<file src="WCommonContent\_ Windows Store UI.txt" target="content\wpa81\ToDo-MvvmCross\_ Windows Store UI.txt" />
-		<file src="WCommonContent\Setup.cs.pp" target="content\wpa81\Setup.cs.pp" />
-		<file src="WCommonContent\DebugTrace.cs.pp" target="content\wpa81\DebugTrace.cs.pp" />
-		<file src="WCommonContent\FirstView.xaml.pp" target="content\wpa81\Views\FirstView.xaml.pp" />
-		<file src="WCommonContent\FirstView.xaml.cs.pp" target="content\wpa81\Views\FirstView.xaml.cs.pp" />
 
 		<!-- droid - Content -->
 		<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
@@ -84,18 +58,3 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="MacContent\FirstViewController.cs.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.pp" />
 	</files>
 </package>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
