@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Views;
+
 namespace MvvmCross.Droid.Views
 {
     using System;
@@ -59,7 +61,17 @@ namespace MvvmCross.Droid.Views
         public override void SetContentView(int layoutResId)
         {
             var view = this.BindingInflate(layoutResId, null);
-            this.SetContentView(view);
+
+            EventHandler onGlobalLayout = null;
+            onGlobalLayout = (sender, args) =>
+            {
+                view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+                ViewModel.Appeared();
+            };
+
+            view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
+            SetContentView(view);
         }
 
         protected virtual void OnViewModelSet()
@@ -75,6 +87,19 @@ namespace MvvmCross.Droid.Views
                 return;
             }
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel.Disappearing(); // we don't have anywhere to get this info
+            ViewModel.Disappeared();
         }
     }
 

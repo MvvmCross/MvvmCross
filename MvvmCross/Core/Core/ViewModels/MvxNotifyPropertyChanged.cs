@@ -8,6 +8,7 @@
 namespace MvvmCross.Core.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
@@ -18,6 +19,7 @@ namespace MvvmCross.Core.ViewModels
         : MvxMainThreadDispatchingObject
         , IMvxNotifyPropertyChanged
     {
+        private static readonly PropertyChangedEventArgs AllPropertiesChanged = new PropertyChangedEventArgs(string.Empty);
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
@@ -52,8 +54,7 @@ namespace MvvmCross.Core.ViewModels
 
         public virtual void RaiseAllPropertiesChanged()
         {
-            var changedArgs = new PropertyChangedEventArgs(string.Empty);
-            this.RaisePropertyChanged(changedArgs);
+            this.RaisePropertyChanged(AllPropertiesChanged);
         }
 
         public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
@@ -63,28 +64,23 @@ namespace MvvmCross.Core.ViewModels
                 == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
 
-            var raiseAction = new Action(() =>
-                    {
-                        PropertyChanged?.Invoke(this, changedArgs);
-                    });
-
             if (this.ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
                 if (this.PropertyChanged == null)
                     return;
 
-                this.InvokeOnMainThread(raiseAction);
+                this.InvokeOnMainThread(() => PropertyChanged?.Invoke(this, changedArgs));
             }
             else
             {
-                raiseAction();
+                PropertyChanged?.Invoke(this, changedArgs);
             }
         }
 
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(storage, value))
+            if (EqualityComparer<T>.Default.Equals(storage, value))
             {
                 return false;
             }

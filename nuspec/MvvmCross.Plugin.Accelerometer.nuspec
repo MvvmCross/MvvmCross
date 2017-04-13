@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Plugin.Accelerometer</id>
+		<version>$version$</version>
+		<title>MvvmCross - Accelerometer Plugin</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Accelerometer' plugin for MvvmCross</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp plugin</tags>
+		<dependencies>
+			<dependency id="MvvmCross.Platform" version="[$version$]" />
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\portable-net45+win+wpa81+wp80" />
+		
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\dotnet" />
+
+		<!-- wpf  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Plugins.Accelerometer.Wpf.*" target="lib\net45" />
+		<file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\net45\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
+
+		<!-- uwp  -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.Accelerometer.Uwp.*" target="lib\uap10.0" />
+		<file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Plugins.Accelerometer.Droid.*" target="lib\MonoAndroid" />
+
+		<file src="BootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\MonoAndroid\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Plugins.Accelerometer.iOS.*" target="lib\Xamarin.iOS10" />
+
+		<file src="iOSBootstrapContent\AccelerometerPluginBootstrap.cs.pp" target="content\Xamarin.iOS10\Bootstrap\AccelerometerPluginBootstrap.cs.pp" />
+
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.Accelerometer.*" target="lib\Xamarin.Mac20" />
+	</files>
+</package>

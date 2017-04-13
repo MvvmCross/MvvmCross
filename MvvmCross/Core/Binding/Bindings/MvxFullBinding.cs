@@ -82,6 +82,10 @@ namespace MvvmCross.Binding.Bindings
 
         private void CreateSourceBinding(object source)
         {
+            // NOTE: We do not call the setter for DataContext here because we are
+            // setting up the sourceStep.
+            // If that method is updated we will need to make sure that this method
+            // does the right thing.
             this._dataContext = source;
             this._sourceStep = this.SourceStepFactory.Create(this._bindingDescription.Source);
             this._sourceStep.TargetType = this._targetBinding.TargetType;

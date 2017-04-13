@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+        android:id="@+id/refresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        local:layout_behavior="@string/appbar_scrolling_view_behavior"
+        local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
+        <MvxRecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            local:MvxItemTemplate="@layout/listitem_recyclerviewexample"
+            local:MvxHeaderLayoutId="@layout/recyclerviewexample_header"
+            local:MvxFooterLayoutId="@layout/recyclerviewexample_footer"
+            local:MvxHidesHeaderIfEmpty="true"
+            local:MvxHidesFooterIfEmpty="true"
+            local:MvxBind="ItemsSource Items; ItemClick ItemSelected" />
+    </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/autoScrollFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_white_24dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        local:elevation="4dp"
+        local:backgroundTint="@color/colorPrimary"
+        local:rippleColor="@color/colorPrimaryDark"
+        local:layout_behavior="@string/view_scroll_translation_autohide_behavior" />
+</android.support.design.widget.CoordinatorLayout>

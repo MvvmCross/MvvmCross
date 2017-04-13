@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Framework DisplayName="VS MonoTouch"
-  Identifier=".NETFramework"
-  Profile="*"
-  MinimumVersion="1.0"
-  MaximumVersion="1.0" />

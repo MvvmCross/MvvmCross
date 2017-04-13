@@ -98,7 +98,7 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
-        protected virtual string FindName(Type type)
+        public virtual string FindName(Type type)
         {
             var name = type.Name;
             name = RemoveHead(name, "Mvx");
