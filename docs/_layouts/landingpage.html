@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: en }}">
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+
+    <main class="page-content landing-page" aria-label="Content">
+          <div class="landing-intro">
+            <h1 class="landing-title">Learn once, write anywhere</h1>
+            <div class="landing-subtitle">Build polished mobile apps with MvvmCross</div><br/>
+            <div class="buttons-unit"><a href="{{site.baseurl}}/documentation/basics/getting-started/getting-started.html" class="button-landing">Get started</a></div>
+          </div>
+
+          <div class="description">
+            <div class="wrapper">
+              <div class="description-text">
+                 <h2>Get the most out of Xamarin using MvvmCross</h2>
+                 <div>Build clean, pixel perfect, native UIs. Share behavior and business logic in a single codebase 
+ across supported platforms, using the Model-View-ViewModel (MVVM) design pattern.
+MvvmCross is a framework specifically developed for Xamarin and the mobile ecosystem. 
+It supports Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF)</div>
+               </div>
+             </div>
+           </div>
+
+           <div class="companies">
+             <div class="wrapper">
+               <div class="company-text">
+                  <h2>Over 5000 companies rely on MvvmCross</h2>
+                  <div></div>
+                </div>
+                <div class="companyGallery">
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/xamarin.png"/>
+                  </div>
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/microsoft.png"/>
+                  </div>
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/bksv-logo.png"/>
+                  </div>
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/24ent.png"/>
+                  </div>
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/xablu.png"/>
+                  </div>
+                  <div class="company-col">
+                    <img src="{{site.baseurl}}/img/olo.png"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </main>
+
+    {% include footer.html %}
+
+  </body>
+
+</html>
