@@ -1,0 +1,20 @@
+---
+layout: documentation_layout
+---
+
+<div class="documentation-menu">
+     {% include documentation-menu.html %}
+</div>
+
+<article class="documentation">
+
+  <header class="documentation-header">
+    <h1 class="documentation-title">{{ page.title | escape }}</h1>
+    <a class="documentation-edit button" href="{{site.github.repository_url}}/tree/master/docs/{{page.relative_path}}">Edit</a>
+  </header>
+
+  <div class="documentation-content">
+    {{content}}
+  </div>
+
+</article>
