@@ -22,6 +22,10 @@ namespace Playground.iOS.Views
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnDetailNav { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnStack { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (btnDetail != null) {
@@ -32,6 +36,11 @@ namespace Playground.iOS.Views
             if (btnDetailNav != null) {
                 btnDetailNav.Dispose ();
                 btnDetailNav = null;
+            }
+
+            if (btnStack != null) {
+                btnStack.Dispose ();
+                btnStack = null;
             }
         }
     }

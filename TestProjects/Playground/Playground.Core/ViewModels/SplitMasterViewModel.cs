@@ -23,5 +23,14 @@ namespace Playground.Core.ViewModels
                 return _openDetailNavCommand ?? (_openDetailNavCommand = new MvxCommand(() => ShowViewModel<SplitDetailNavViewModel>()));
             }
         }
+
+        private ICommand _showRootViewModel;
+        public ICommand ShowRootViewModel
+        {
+            get
+            {
+                return _showRootViewModel ?? (_showRootViewModel = new MvxCommand(() => ShowViewModel<RootViewModel>()));
+            }
+        }
     }
 }

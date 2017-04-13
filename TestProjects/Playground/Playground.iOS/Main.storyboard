@@ -19,32 +19,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="32" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="262" y="205" width="77" height="30"/>
+                                <rect key="frame" x="262" y="268" width="77" height="30"/>
                                 <state key="normal" title="Show Child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="33" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="258" y="260" width="84" height="30"/>
+                                <rect key="frame" x="258" y="333" width="84" height="30"/>
                                 <state key="normal" title="Show modal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="45" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="244" y="327" width="112" height="30"/>
-                                <state key="normal" title="Show nav modal">
+                                <rect key="frame" x="216" y="200" width="167" height="30"/>
+                                <state key="normal" title="Initiate Modal navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="142" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="262.5" y="92" width="75" height="30"/>
-                                <state key="normal" title="Show Tabs">
+                                <rect key="frame" x="221" y="92" width="158" height="30"/>
+                                <state key="normal" title="Initiate Tabs navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="229" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="263.5" y="145" width="73" height="30"/>
-                                <state key="normal" title="Show Split">
+                                <rect key="frame" x="222.5" y="145" width="155" height="30"/>
+                                <state key="normal" title="Initiate Split navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -54,12 +54,12 @@
                             <constraint id="231" firstItem="142" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
                             <constraint id="232" firstItem="229" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="23"/>
                             <constraint id="233" firstItem="229" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="234" firstItem="32" firstAttribute="top" secondItem="229" secondAttribute="bottom" constant="30"/>
-                            <constraint id="235" firstItem="32" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="236" firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="25"/>
-                            <constraint id="237" firstItem="33" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
-                            <constraint id="238" firstItem="45" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="37"/>
-                            <constraint id="239" firstItem="45" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="388" firstItem="45" firstAttribute="top" secondItem="229" secondAttribute="bottom" constant="25"/>
+                            <constraint id="389" firstItem="45" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="390" firstItem="32" firstAttribute="top" secondItem="45" secondAttribute="bottom" constant="38"/>
+                            <constraint id="391" firstItem="32" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
+                            <constraint id="392" firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="35"/>
+                            <constraint id="393" firstItem="33" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -87,23 +87,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="48" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="280" y="250" width="39" height="30"/>
+                                <rect key="frame" x="280" y="163" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="93" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="236" y="180" width="129" height="30"/>
+                                <rect key="frame" x="236" y="98" width="129" height="30"/>
                                 <state key="normal" title="Show second child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint id="103" firstItem="93" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="160"/>
-                            <constraint id="104" firstItem="93" firstAttribute="centerX" secondItem="15" secondAttribute="centerX"/>
-                            <constraint id="105" firstItem="48" firstAttribute="centerX" secondItem="15" secondAttribute="centerX"/>
-                            <constraint id="106" firstItem="48" firstAttribute="top" secondItem="93" secondAttribute="bottom" constant="40"/>
+                            <constraint id="394" firstItem="93" firstAttribute="centerX" secondItem="15" secondAttribute="centerX"/>
+                            <constraint id="395" firstItem="93" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="78"/>
+                            <constraint id="396" firstItem="48" firstAttribute="top" secondItem="93" secondAttribute="bottom" constant="35"/>
+                            <constraint id="397" firstItem="48" firstAttribute="centerX" secondItem="15" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -134,8 +134,8 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="350" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="264" y="120" width="72" height="30"/>
-                                <state key="normal" title="Show tabs">
+                                <rect key="frame" x="221" y="120" width="158" height="30"/>
+                                <state key="normal" title="Initiate Tabs navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -169,23 +169,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="54" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="262.5" y="207" width="75" height="30"/>
+                                <rect key="frame" x="262" y="106" width="75" height="30"/>
                                 <state key="normal" title="Show child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="55" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="280.5" y="291" width="39" height="30"/>
+                                <rect key="frame" x="280" y="174" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint id="56" firstItem="54" firstAttribute="top" secondItem="25" secondAttribute="bottom" constant="187"/>
-                            <constraint id="57" firstItem="54" firstAttribute="centerX" secondItem="29" secondAttribute="centerX"/>
-                            <constraint id="58" firstItem="55" firstAttribute="top" secondItem="54" secondAttribute="bottom" constant="54"/>
-                            <constraint id="59" firstItem="55" firstAttribute="centerX" secondItem="29" secondAttribute="centerX"/>
+                            <constraint id="398" firstItem="54" firstAttribute="top" secondItem="25" secondAttribute="bottom" constant="86"/>
+                            <constraint id="399" firstItem="54" firstAttribute="centerX" secondItem="29" secondAttribute="centerX"/>
+                            <constraint id="400" firstItem="55" firstAttribute="top" secondItem="54" secondAttribute="bottom" constant="38"/>
+                            <constraint id="401" firstItem="55" firstAttribute="centerX" secondItem="29" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -267,20 +267,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="155" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="258" y="93" width="84" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="155" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="259" y="162" width="84" height="30"/>
                                 <state key="normal" title="Show modal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="156" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="244" y="159" width="112" height="30"/>
-                                <state key="normal" title="Show nav modal">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="156" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="218" y="106" width="167" height="30"/>
+                                <state key="normal" title="Initiate Modal navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="157" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                                <rect key="frame" x="262.5" y="229" width="75" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="157" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="262.5" y="225" width="75" height="30"/>
                                 <state key="normal" title="Show child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -293,15 +293,16 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint id="161" firstItem="156" firstAttribute="centerX" secondItem="125" secondAttribute="centerX"/>
-                            <constraint id="162" firstItem="157" firstAttribute="top" secondItem="156" secondAttribute="bottom" constant="40"/>
                             <constraint id="163" firstItem="157" firstAttribute="centerX" secondItem="125" secondAttribute="centerX"/>
                             <constraint id="173" firstItem="172" firstAttribute="top" secondItem="121" secondAttribute="bottom" constant="36"/>
                             <constraint id="174" firstItem="172" firstAttribute="leading" secondItem="125" secondAttribute="leading" constant="39"/>
                             <constraint id="175" firstItem="125" firstAttribute="trailing" secondItem="172" secondAttribute="trailing" constant="37"/>
-                            <constraint id="176" firstItem="155" firstAttribute="top" secondItem="172" secondAttribute="bottom" constant="16"/>
-                            <constraint id="177" firstItem="155" firstAttribute="centerX" secondItem="125" secondAttribute="centerX"/>
-                            <constraint id="178" firstItem="156" firstAttribute="top" secondItem="155" secondAttribute="bottom" constant="36"/>
+                            <constraint id="402" firstItem="156" firstAttribute="top" secondItem="172" secondAttribute="bottom" constant="33"/>
+                            <constraint id="403" firstItem="156" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" constant="1"/>
+                            <constraint id="404" firstItem="155" firstAttribute="top" secondItem="156" secondAttribute="bottom" constant="26"/>
+                            <constraint id="405" firstItem="155" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" constant="1"/>
+                            <constraint id="406" firstItem="157" firstAttribute="centerX" secondItem="125" secondAttribute="centerX"/>
+                            <constraint id="407" firstItem="157" firstAttribute="top" secondItem="155" secondAttribute="bottom" constant="33"/>
                         </constraints>
                     </view>
                     <connections>
@@ -339,8 +340,8 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="369" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="260.5" y="237.5" width="79" height="30"/>
-                                <state key="normal" title="Show stack">
+                                <rect key="frame" x="218.5" y="237.5" width="163" height="30"/>
+                                <state key="normal" title="Initiate Stack navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -394,36 +395,45 @@
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.6" green="0.4" blue="0.2" alpha="1"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="221" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="253" y="290" width="94.5" height="20.5"/>
+                                <rect key="frame" x="253" y="148" width="94.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="268" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="260" y="364.5" width="80" height="30"/>
+                                <rect key="frame" x="260" y="194" width="80" height="30"/>
                                 <state key="normal" title="Show detail">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="316" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="246" y="421.5" width="108" height="30"/>
+                                <rect key="frame" x="246" y="252" width="108" height="30"/>
                                 <state key="normal" title="Show detail nav">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="414" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="218.5" y="309.5" width="163" height="30"/>
+                                <state key="normal" title="Initiate Stack navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint id="224" firstItem="221" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
-                            <constraint id="225" firstItem="221" firstAttribute="centerY" secondItem="200" secondAttribute="centerY"/>
-                            <constraint id="269" firstItem="268" firstAttribute="top" secondItem="221" secondAttribute="bottom" constant="54"/>
-                            <constraint id="270" firstItem="268" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
-                            <constraint id="317" firstItem="316" firstAttribute="top" secondItem="268" secondAttribute="bottom" constant="27"/>
-                            <constraint id="318" firstItem="316" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="408" firstItem="221" firstAttribute="top" secondItem="196" secondAttribute="bottom" constant="128"/>
+                            <constraint id="409" firstItem="221" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="410" firstItem="268" firstAttribute="top" secondItem="221" secondAttribute="bottom" constant="25"/>
+                            <constraint id="411" firstItem="268" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="412" firstItem="316" firstAttribute="top" secondItem="268" secondAttribute="bottom" constant="28"/>
+                            <constraint id="413" firstItem="316" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
+                            <constraint id="415" firstItem="414" firstAttribute="top" secondItem="316" secondAttribute="bottom" constant="28"/>
+                            <constraint id="416" firstItem="414" firstAttribute="centerX" secondItem="200" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnDetail" destination="268" id="name-outlet-268"/>
                         <outlet property="btnDetailNav" destination="316" id="name-outlet-316"/>
+                        <outlet property="btnStack" destination="414" id="name-outlet-414"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="201" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -440,35 +450,35 @@
                     <view key="view" contentMode="scaleToFill" id="218">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="1" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="226" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="257.5" y="290" width="85.5" height="20.5"/>
+                                <rect key="frame" x="257" y="123" width="86" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="273" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="280.5" y="338.5" width="39" height="30"/>
+                                <rect key="frame" x="280" y="185" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="308" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
-                                <rect key="frame" x="58" y="397" width="483" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="308" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="45" y="259" width="483" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint id="227" firstItem="226" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
-                            <constraint id="228" firstItem="226" firstAttribute="centerY" secondItem="218" secondAttribute="centerY"/>
-                            <constraint id="274" firstItem="273" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
-                            <constraint id="275" firstItem="273" firstAttribute="top" secondItem="226" secondAttribute="bottom" constant="28"/>
-                            <constraint id="309" firstItem="308" firstAttribute="top" secondItem="273" secondAttribute="bottom" constant="28"/>
-                            <constraint id="310" firstItem="218" firstAttribute="trailing" secondItem="308" secondAttribute="trailing" constant="59"/>
-                            <constraint id="311" firstItem="308" firstAttribute="leading" secondItem="218" secondAttribute="leading" constant="58"/>
+                            <constraint id="419" firstItem="226" firstAttribute="top" secondItem="214" secondAttribute="bottom" constant="103"/>
+                            <constraint id="420" firstItem="226" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
+                            <constraint id="421" firstItem="273" firstAttribute="top" secondItem="226" secondAttribute="bottom" constant="42"/>
+                            <constraint id="422" firstItem="273" firstAttribute="centerX" secondItem="218" secondAttribute="centerX"/>
+                            <constraint id="423" firstItem="308" firstAttribute="leading" secondItem="218" secondAttribute="leading" constant="45"/>
+                            <constraint id="424" firstItem="218" firstAttribute="trailing" secondItem="308" secondAttribute="trailing" constant="72"/>
+                            <constraint id="425" firstItem="308" firstAttribute="top" secondItem="273" secondAttribute="bottom" constant="44"/>
                         </constraints>
                     </view>
                     <connections>
@@ -492,35 +502,34 @@
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="1" alpha="1"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="293" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="250.5" y="310" width="99.5" height="20.5"/>
+                                <rect key="frame" x="248.5" y="123" width="100" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="294" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="282.5" y="358.5" width="35" height="28"/>
+                                <rect key="frame" x="280.5" y="171.5" width="35" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="304" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
-                                <rect key="frame" x="60" y="413.5" width="483" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="304" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="0">
+                                <rect key="frame" x="58" y="226.5" width="483" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint id="295" firstItem="293" firstAttribute="top" secondItem="286" secondAttribute="bottom" constant="290"/>
-                            <constraint id="296" firstItem="293" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
-                            <constraint id="297" firstItem="294" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
-                            <constraint id="298" firstItem="294" firstAttribute="centerX" secondItem="290" secondAttribute="centerX"/>
-                            <constraint id="299" firstItem="294" firstAttribute="top" secondItem="293" secondAttribute="bottom" constant="28"/>
-                            <constraint id="305" firstItem="304" firstAttribute="leading" secondItem="290" secondAttribute="leading" constant="60"/>
-                            <constraint id="306" firstItem="290" firstAttribute="trailing" secondItem="304" secondAttribute="trailing" constant="57"/>
-                            <constraint id="307" firstItem="304" firstAttribute="top" secondItem="294" secondAttribute="bottom" constant="27"/>
+                            <constraint id="427" firstItem="293" firstAttribute="top" secondItem="286" secondAttribute="bottom" constant="103"/>
+                            <constraint id="428" firstItem="290" firstAttribute="centerX" secondItem="293" secondAttribute="centerX" constant="1"/>
+                            <constraint id="429" firstItem="294" firstAttribute="top" secondItem="293" secondAttribute="bottom" constant="28"/>
+                            <constraint id="430" firstItem="290" firstAttribute="centerX" secondItem="294" secondAttribute="centerX" constant="2"/>
+                            <constraint id="431" firstItem="304" firstAttribute="top" secondItem="294" secondAttribute="bottom" constant="27"/>
+                            <constraint id="432" firstItem="304" firstAttribute="leading" secondItem="290" secondAttribute="leading" constant="58"/>
+                            <constraint id="433" firstItem="290" firstAttribute="trailing" secondItem="304" secondAttribute="trailing" constant="59"/>
                         </constraints>
                     </view>
                     <connections>
