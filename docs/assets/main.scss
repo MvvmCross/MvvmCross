@@ -1,0 +1,590 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+// Our variables
+
+//$base-font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+$base-font-family: 'Lato', sans-serif;
+$base-font-size:   16px;
+$base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+$spacing-unit:     30px;
+
+$text-color:       #4c555a;
+$background-color: #fdfdfd;
+$brand-color:      #2FB681;
+
+$grey-color:       #828282;
+$grey-color-super-light: lighten($grey-color, 45%);
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+//header height
+$header-height:60px;
+
+// Width of the content area
+$content-width:    1200px;
+
+$content-padding: 1%;
+$documentation-width: 75%;
+$documentation-menu-width: (100% - $documentation-width) - ($content-padding * 4);
+
+$on-palm:          600px;
+$on-laptop:        800px;
+
+$searchbar-width: 110px;
+$searchbar-expanded-width: 220px;
+
+$social-icons-spacing: 4px;
+
+$syntax-background-color: #f2f2f2;
+
+// Minima also includes a mixin for defining media queries.
+// Use media queries like this:
+// @include media-query($on-palm) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+
+// Import partials from the `minima` theme.
+@import "minima";
+
+//custom styling starts here
+
+h2,h3,h4,h5,h6
+{
+    color: $brand-color;
+}
+
+.page-content{
+    padding: 1% 0;
+}
+
+.header-logo
+{
+    width: 120px;
+}
+
+.site-header
+{
+    background-color: #FFF;
+    border-bottom: 2px solid #2FB681;
+    border-top:0px;
+    min-height: $header-height;
+}
+
+.site-nav
+{
+    .page-link 
+    {
+        color: #37474f;
+        line-height: $base-line-height;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-left: 30px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .site-nav .page-link {
+        color: $text-color;
+    }
+}
+
+//search box
+.search-box{
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+  margin-top: 5px;
+  margin-left: 35px;
+  float: right;
+}
+
+.search-box input#search{
+  width: $searchbar-width;
+  height: 48px;
+  background: #FFF;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #262626;
+  padding-left: 35px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: width .55s ease;
+  -moz-transition: width .55s ease;
+  -ms-transition: width .55s ease;
+  -o-transition: width .55s ease;
+  transition: width .55s ease;
+  border-radius: 3px;
+  border: 1px solid #ECEEF1;
+}
+
+.search-box input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+ 
+.search-box input#search:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;  
+}
+ 
+.search-box input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;  
+}
+ 
+.search-box input#search:-ms-input-placeholder {  
+   color: #65737e;  
+}
+
+.search-box .icon{
+  position: absolute;
+  top: 50%;
+  margin-left: 13px;
+  margin-top: -28px;
+  z-index: 1;
+  color: #4f5b66;
+}
+.search-box input#search:focus, .search-box input#search:active{
+  outline:none;
+  width: $searchbar-expanded-width;
+}
+
+.search-box:hover input#search{
+    width: $searchbar-expanded-width;
+}
+ 
+.search-box:hover .icon{
+  color: #93a2ad;
+}
+
+
+#search-results
+{
+    li
+    {
+        list-style: none;
+    }
+}
+
+//social icons
+.ic-stackoverflow {
+	width: 17.5px;
+	height: 23px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-linkedin {
+	width: 25px;
+	height: 25px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-twitter {
+	width: 25px;
+	height: 20.5px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+.ic-github {
+	width: 24px;
+	height: 23.5px;
+	object-fit: contain;
+    margin: 0px $social-icons-spacing;
+}
+//homepage
+.landing-intro
+{
+    background: #2D2D2D;
+    background: url({{ site.baseurl }}/img/intro-bg.jpg) no-repeat center center;
+    padding: 150px 0;
+    color: #FFF;
+    font-weight: 300;
+    margin-top: -30px;
+    text-align: center;
+}
+
+.button {
+  color: $text-color;
+  padding: 5px 10px 5px 10px;
+  border: solid $grey-color 1px;
+  text-decoration: none;
+  font-size: $small-font-size;
+}
+
+.button:hover {
+  background: $grey-color-super-light;
+  text-decoration: none;
+}
+
+.button:active {
+  background: $grey-color-light;
+  text-decoration: none;
+}
+
+.button-landing {
+  background: -webkit-linear-gradient( #9a9a9a, #646464);
+  background: linear-gradient( #9a9a9a, #646464);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 12px;
+  display: inline-block;
+  color: #fafafa;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.button-landing:hover {
+  text-decoration: none;
+}
+
+.button-landing:active {
+  box-shadow: none;
+}
+
+.buttons-unit .button-landing {
+  font-size: 16px;
+  background: #2FB681;
+  color: #ffffff;
+}
+
+.landing-title
+{
+    font-weight: 400;
+    font-size: 30px;
+    text-shadow: 1px 0px #000000;
+    margin:0px;
+    color:#FFF;
+    font-weight: bold;
+}
+.landing-subtitle
+{
+    font-size: 24px;
+}
+
+.documentation-menu
+{
+    float:left;
+    width: $documentation-menu-width;
+    height:calc(100vh - (#{$header-height} + 30px));
+    overflow-y: auto;
+    padding: $content-padding;
+	-webkit-box-shadow: 1px 0 0 rgba(81,88,90,0.17);
+    box-shadow: 1px 0 0 rgba(81,88,90,0.17);
+    ul
+    {
+        transition: opacity 0.1s;
+        overflow-y: auto;
+
+        li
+        {
+            padding:0 -15px 0 0;
+            a
+            {
+                font-size: 15px;
+                color: $grey-color;
+                font-family: 'Proxima Nova', 'Open Sans', sans-serif;
+            }
+            a.active
+            {
+                background-color: transparent;
+                border: none;
+                color: $text-color;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.active
+{
+    background-color: #00ac65;
+    color:#FFF;
+    border-radius: 2px;
+    border: 2px solid #00ac65;
+    width: 100%;
+}
+
+.documentation
+{
+    float: left;
+    height:calc(100vh - (#{$header-height} + 30px));
+    overflow-y: auto;
+    width: $documentation-width;
+    padding: $content-padding;
+}
+
+// @media screen and (max-width: $effective-content-width) {
+//     .documentation
+//     {
+//         float: right;
+//         width: 100%;
+//     }
+// }
+
+a:visited {
+    color: $brand-color;
+}
+
+.category
+{
+    padding:8px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: default;
+}
+
+.description
+{
+    background-color: #eceff1;
+
+    .wrapper
+    {
+        text-align: center;
+
+        .description-text
+        {
+            padding:60px 0;
+
+            h2
+            {
+                font-size: 30px;
+                color: #37474f;
+                font-weight: bold;
+                margin-bottom: 0px;
+            }
+
+            div
+            {
+                font-size: 24px;
+                color: #37474f;
+                line-height: 1.25;
+            }
+
+        }
+    }
+}
+
+.companies
+{
+    background-color: #FFF;
+    padding-bottom: 50px;
+
+    .wrapper
+    {
+        text-align: center;
+
+        .company-text
+        {
+            padding:60px 0;
+
+            h2
+            {
+                font-size: 30px;
+                color: #37474f;
+                font-weight: bold;
+                margin-bottom: 0px;
+            }
+
+            div
+            {
+                font-size: 24px;
+                color: #37474f;
+                line-height: 1.25;
+            }
+
+        }
+    }
+}
+
+.company-col
+{
+    float:left;
+    width: 33%;
+
+    img {
+        height: 60px;
+        padding: 10px;
+    }
+}
+
+.landing-page
+{
+    margin: 0 auto;
+}
+
+.search {
+	width: 50%;
+	margin: 0 auto;
+	padding: 100px 0;
+}
+
+.searching-text
+{
+    display: none;
+}
+//table styling
+
+table { padding: 0; border-spacing: 0px;}
+table tr 
+{
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; 
+}
+table tr:nth-child(2n) 
+{
+    background-color: #f8f8f8; 
+}
+table tr th 
+{
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th :first-child, table tr td :first-child 
+{
+    margin-top: 0; 
+}
+table tr th :last-child, table tr td :last-child 
+{
+      margin-bottom: 0; 
+}
+
+//footer
+.footer-heading{border-bottom: 1px solid #ddd;}
+.blog-list
+{
+    li
+    {
+        a
+        {
+            color: #FFF;
+            font-size: 15px;
+        }
+    }
+}
+
+.site-footer
+{
+    background:#37474f;
+    color:#FFF;
+
+    h2, h3, h4, h5, h6 {
+        color:#FFF;
+    }
+}
+
+.footer-col-1 {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width:         calc(35% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-2 {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width:         calc(35% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-3 {
+  width: -webkit-calc(30% - (#{$spacing-unit} / 2));
+  width:         calc(30% - (#{$spacing-unit} / 2));
+}
+
+@include media-query($on-laptop) {
+  .footer-col-1,
+  .footer-col-2 {
+    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
+    width:         calc(50% - (#{$spacing-unit} / 2));
+  }
+
+  .footer-col-3 {
+    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+    width:         calc(100% - (#{$spacing-unit} / 2));
+  }
+}
+
+//reset list
+.menu {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	list-style: none;
+}
+.documentation-header {
+    display: block;
+    clear:both;
+}
+
+.documentation-title {
+    float: left;
+}
+
+.documentation-edit {
+    float: right;
+}
+
+.documentation-content {
+    clear: both;
+}
+
+//syntax highlighting
+pre, code {
+    background-color: $syntax-background-color;
+}
+.highlighter-rouge .highlight{background-color:$syntax-background-color;}
+
+.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #008000 } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #0000ff } /* Keyword */
+.highlight .cm { color: #008000 } /* Comment.Multiline */
+.highlight .cp { color: #0000ff } /* Comment.Preproc */
+.highlight .c1 { color: #008000 } /* Comment.Single */
+.highlight .cs { color: #008000 } /* Comment.Special */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gh { font-weight: bold } /* Generic.Heading */
+.highlight .gp { font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { font-weight: bold } /* Generic.Subheading */
+.highlight .kc { color: #0000ff } /* Keyword.Constant */
+.highlight .kd { color: #0000ff } /* Keyword.Declaration */
+.highlight .kn { color: #0000ff } /* Keyword.Namespace */
+.highlight .kp { color: #0000ff } /* Keyword.Pseudo */
+.highlight .kr { color: #0000ff } /* Keyword.Reserved */
+.highlight .kt { color: #2b91af } /* Keyword.Type */
+.highlight .s { color: #a31515 } /* Literal.String */
+.highlight .nc { color: #2b91af } /* Name.Class */
+.highlight .ow { color: #0000ff } /* Operator.Word */
+.highlight .sb { color: #a31515 } /* Literal.String.Backtick */
+.highlight .sc { color: #a31515 } /* Literal.String.Char */
+.highlight .sd { color: #a31515 } /* Literal.String.Doc */
+.highlight .s2 { color: #a31515 } /* Literal.String.Double */
+.highlight .se { color: #a31515 } /* Literal.String.Escape */
+.highlight .sh { color: #a31515 } /* Literal.String.Heredoc */
+.highlight .si { color: #a31515 } /* Literal.String.Interpol */
+.highlight .sx { color: #a31515 } /* Literal.String.Other */
+.highlight .sr { color: #a31515 } /* Literal.String.Regex */
+.highlight .s1 { color: #a31515 } /* Literal.String.Single */
+.highlight .ss { color: #a31515 } /* Literal.String.Symbol */

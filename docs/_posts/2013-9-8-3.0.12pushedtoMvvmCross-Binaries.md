@@ -1,0 +1,36 @@
+---
+layout: post
+title: 3.0.12 pushed to MvvmCross-Binaries (not quite on Nuget yet)
+date:   2013-09-08 11:37:35 +0100
+categories: mvvmcross
+---
+
+I've just pushed build 3.0.12 to https://github.com/slodge/MvvmCross-Binaries/
+
+It will appear on Nuget when I can work out what's broken on https://nuget.codeplex.com/discussions/456158 (apparently this is a nuget.org problem - and should be fixed tomorrow)
+
+This build is pretty similar to the 3.0.11-beta build that I know many of you have been using for the last week.
+
+This is the first build to be linked against the new 'async' and 'PCL' Mono 3 based releases from Xamarin.
+
+There seems to be some issues with the latest releases from Xamarin - especially concerning https://bugzilla.xamarin.com/show_bug.cgi?id=14520 - so other patches may follow soon.
+
+
+Possible breaking changes in 3.0.12 are:
+Updates for Xamarin PCL support - iOS apps must now use the Mono 'System.Windows' PCL shim and not the ones previously supplied by MvvmCross. 
+
+This Mono 'System.Windows' assembly should be present in the 'Add Reference...|Assemblies|Framework' list after you have connected Visual Studio to your Mac and have synced the SDK. However, I have personally had some issues with this (sometimes it has asked me to sync every few minutes...)
+
+Using this Mono Shim may report in some 'warnings' about different strong-named System.Windows assemblies during linking from the MonoTouch compiler - but these warnings (so far) seem to result only in slightly slower link times.
+Updates for Xamarin PCL support - all PCL projects should currently build as Profile 104 on both PC and Mac (previously we had to specify 'Profile1' for Mac support)
+The default constructors in the MvvmCross Dialog port of StyledStringElement now match the main MonoTouch.Dialog implementations - this clears #402 and#328 but may effect any users currently relying on the current implementation (to workaround any problems, use the constructor which allows cell type to be specified)
+  
+Other noteworthy changes for MvvmCross in 3.0.12 are:
+
+- small changes to unify `Adapter` configuration across all Android list-based views (all can now be passed null in the constructor) - #390
+- small fix in Email plugin for empty cc field - #385
+- a new `IMvxViewModelByNameRegistry` interface which allows plugins to register ViewModels if they want to - #405
+- StyledStringElement Visible implemented - #403
+
+
+As an aside... some of you may be wondering what happened to 3.0.11? It kind of got confused in the build process... so I decided to clean and build 3.0.12 instead - sorry!
