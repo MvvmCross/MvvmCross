@@ -50,7 +50,6 @@
     <Compile Include="Platform\MvxIosDisplayDensity.cs" />
     <Compile Include="Platform\MvxIosFormFactor.cs" />
     <Compile Include="Views\IMvxIosViewSegue.cs" />
-    <Compile Include="Views\IMvxModalIosView.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxIosPlatformProperties.cs" />
     <Compile Include="Views\IMvxIosViewCreator.cs" />
@@ -60,7 +59,7 @@
     <Compile Include="Views\MvxSegueExtensionMethods.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
-    <Compile Include="Views\MvxTabBarViewController.cs" />
+    <Compile Include="Views\MvxBaseTabBarViewController.cs" />
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\IMvxIosView.cs" />
     <Compile Include="Views\MvxTableViewController.cs" />
@@ -73,18 +72,32 @@
     <Compile Include="Views\MvxViewController.cs" />
     <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseIosViewPresenter.cs" />
-    <Compile Include="Views\Presenters\MvxModalNavSupportIosViewPresenter.cs" />
-    <Compile Include="Views\Presenters\MvxModalSupportIosViewPresenter.cs" />
-    <Compile Include="Views\Presenters\MvxIosViewPresenter.cs" />
     <Compile Include="Platform\MvxIosSetup.cs" />
     <Compile Include="Views\MvxCollectionViewController.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
     <Compile Include="Views\MvxPageViewController.cs" />
     <Compile Include="Views\MvxUIRefreshControl.cs" />
+    <Compile Include="Views\Presenters\MvxIosViewPresenter.cs" />
+    <Compile Include="Views\MvxNavigationController.cs" />
+    <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxRootPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxChildPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxMasterSplitViewPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxDetailSplitViewPresentationAttribute.cs" />
+    <Compile Include="Views\MvxTabBarViewController.cs" />
+    <Compile Include="Views\IMvxTabBarViewController.cs" />
+    <Compile Include="Views\MvxBaseSplitViewController.cs" />
+    <Compile Include="Views\IMvxSplitViewController.cs" />
+    <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
+    <Compile Include="Views\MvxSplitViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Views\Presenters\Attributes\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
