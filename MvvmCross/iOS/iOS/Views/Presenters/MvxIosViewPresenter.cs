@@ -81,7 +81,7 @@ namespace MvvmCross.iOS.Views.Presenters
             Show(view, request);
         }
 
-        public void Show(IMvxIosView view, MvxViewModelRequest request)
+        public virtual void Show(IMvxIosView view, MvxViewModelRequest request)
         {
             var viewController = view as UIViewController;
 
