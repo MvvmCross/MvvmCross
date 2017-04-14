@@ -22,11 +22,9 @@ This package contains all plugins for MvvmCross</description>
 			<dependency id="MvvmCross.Plugin.MethodBinding" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Network" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.PhoneCall" version="[$version$]" />
-			<dependency id="MvvmCross.Plugin.PictureChooser" version="[$version$]" />
-			<dependency id="MvvmCross.Plugin.ReflectionEx" version="[$version$]" />		  
+			<dependency id="MvvmCross.Plugin.PictureChooser" version="[$version$]" />  
 			<dependency id="MvvmCross.Plugin.ResourceLoader" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Share" version="[$version$]" />	  
-			<dependency id="MvvmCross.Plugin.ThreadUtils" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Visibility" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.WebBrowser" version="[$version$]" />
 		</dependencies>
