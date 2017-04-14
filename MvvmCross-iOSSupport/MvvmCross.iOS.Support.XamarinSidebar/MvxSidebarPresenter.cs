@@ -25,7 +25,7 @@
 
         protected virtual bool PresentationHintHandler(MvxPanelPresentationHint hint)
         {
-            if (hint == null)
+            if(hint == null)
                 return false;
 
             hint.Navigate();
@@ -36,12 +36,12 @@
         public override void Show(MvxViewModelRequest request)
         {
             IMvxIosView viewController = Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
-            Show(viewController);
+            Show(viewController, request);
         }
 
-        public override void Show(IMvxIosView view)
+        public override void Show(IMvxIosView view, MvxViewModelRequest request)
         {
-            if (view is IMvxModalIosView)
+            if(view is IMvxModalIosView)
             {
                 PresentModalViewController(view as UIViewController, true);
                 return;
@@ -49,12 +49,12 @@
 
             var viewController = view as UIViewController;
 
-            if (viewController == null)
+            if(viewController == null)
             {
                 throw new MvxException("Passed in IMvxIosView is not a UIViewController");
             }
 
-            if (RootViewController == null)
+            if(RootViewController == null)
             {
                 InitRootViewController();
             }
@@ -62,13 +62,13 @@
             var viewPresentationAttribute = GetViewPresentationAttribute(view);
 
             //Create fall back viewPresentationAttribute, when nothing is set
-            if (viewPresentationAttribute == null)
+            if(viewPresentationAttribute == null)
             {
                 ParentRootViewController.PushViewController(viewController, ParentRootViewController.ViewControllers.Count() > 1);
                 return;
             }
 
-            switch (viewPresentationAttribute.HintType)
+            switch(viewPresentationAttribute.HintType)
             {
                 case MvxPanelHintType.PopToRoot:
                     ChangePresentation(new MvxSidebarPopToRootPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
@@ -82,7 +82,7 @@
                     break;
             }
 
-            if (!viewPresentationAttribute.ShowPanel)
+            if(!viewPresentationAttribute.ShowPanel)
             {
                 var menu = Mvx.Resolve<IMvxSideMenu>();
                 menu?.Close();
@@ -91,9 +91,9 @@
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (ParentRootViewController.ViewControllers.Count() > 1)
+            if(ParentRootViewController.ViewControllers.Count() > 1)
                 ParentRootViewController.PopViewController(true);
-            else if (RootViewController.NavigationController.ViewControllers.Count() > 1)
+            else if(RootViewController.NavigationController.ViewControllers.Count() > 1)
                 RootViewController.NavigationController.PopViewController(true);
             else
                 base.Close(toClose);
@@ -101,7 +101,7 @@
 
         protected MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
         {
-            if (view == null)
+            if(view == null)
                 return default(MvxPanelPresentationAttribute);
 
             return view.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
@@ -109,15 +109,13 @@
 
         protected virtual void InitRootViewController()
         {
-            foreach (var view in Window.Subviews)
+            foreach(var view in _window.Subviews)
                 view.RemoveFromSuperview();
 
             MasterNavigationController = new UINavigationController();
 
-            OnMasterNavigationControllerCreated();
-
             RootViewController = new MvxSidebarPanelController(MasterNavigationController);
-           
+
             SetWindowRootViewController(RootViewController);
 
             Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
