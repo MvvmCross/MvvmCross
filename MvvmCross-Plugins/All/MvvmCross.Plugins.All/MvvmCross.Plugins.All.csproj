@@ -102,10 +102,6 @@
       <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
       <Name>MvvmCross.Plugins.SoundEffects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ThreadUtils\MvvmCross.Plugins.ThreadUtils\MvvmCross.Plugins.ThreadUtils.csproj">
-      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
-      <Name>MvvmCross.Plugins.ThreadUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Visibility\MvvmCross.Plugins.Visibility\MvvmCross.Plugins.Visibility.csproj">
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>MvvmCross.Plugins.Visibility</Name>
