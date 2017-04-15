@@ -1,7 +1,7 @@
 ﻿using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar
+namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {
     /// <summary>
     /// A wrapper UIViewController to present a UISplitViewController view nested
