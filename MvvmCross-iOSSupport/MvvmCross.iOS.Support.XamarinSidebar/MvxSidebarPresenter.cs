@@ -92,6 +92,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
                 return;
             }
+            else
+            {
+                SideBarViewController = null;
+                MasterNavigationController = null;
+            }
 
             base.ShowRootViewController(viewController, attribute, request);
         }
