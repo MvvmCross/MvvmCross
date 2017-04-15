@@ -1,4 +1,4 @@
-﻿using UIKit;
+using UIKit;
 using MvvmCross.iOS.Support.SidePanels;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 
@@ -6,14 +6,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
     public class MvxSidebarResetRootPresentationHint : MvxPanelPresentationHint
     {
-        public MvxSidebarResetRootPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
+        public MvxSidebarResetRootPresentationHint(MvxPanelEnum panel, IMvxSidebarViewController sidebarPanelController, UIViewController viewController)
             : base(panel)
         {
             SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
 
-        protected readonly MvxSidebarPanelController SidebarPanelController;
+        protected readonly IMvxSidebarViewController SidebarPanelController;
         protected readonly UIViewController ViewController;
 
         public override bool Navigate()
@@ -21,7 +21,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             if (ViewController == null || SidebarPanelController == null)
                 return false;
 
-            var navigationController = SidebarPanelController.NavigationController;
+            var navigationController = (SidebarPanelController as MvxSidebarViewController).NavigationController;
 
             if (navigationController == null)
                 return false;
@@ -29,7 +29,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             navigationController.ViewControllers = new[] { ViewController };
 
             if (Panel == MvxPanelEnum.Center)
-                ViewController.ShowMenuButton(SidebarPanelController);
+                ViewController.ShowMenuButton((SidebarPanelController as MvxSidebarViewController));
 
             return true;
         }

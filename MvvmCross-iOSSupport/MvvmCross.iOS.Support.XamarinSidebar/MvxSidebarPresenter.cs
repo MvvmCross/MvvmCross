@@ -1,22 +1,21 @@
-﻿namespace MvvmCross.iOS.Support.XamarinSidebar
+namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     using Core.ViewModels;
+    using Hints;
     using iOS.Views;
     using iOS.Views.Presenters;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+    using MvvmCross.iOS.Views.Presenters.Attributes;
     using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using System.Linq;
-    using UIKit;
     using SidePanels;
-    using Hints;
+    using UIKit;
 
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {
-        protected virtual UINavigationController ParentRootViewController { get; set; }
-        protected virtual MvxSidebarPanelController RootViewController { get; set; }
+        protected virtual IMvxSidebarViewController SideBarViewController { get; set; }
 
         public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-            : base(applicationDelegate, window)
+                    : base(applicationDelegate, window)
         {
             AddPresentationHintHandler<MvxSidebarActivePanelPresentationHint>(PresentationHintHandler);
             AddPresentationHintHandler<MvxSidebarPopToRootPresentationHint>(PresentationHintHandler);
@@ -33,94 +32,82 @@
             return true;
         }
 
-        public override void Show(MvxViewModelRequest request)
+        protected override void RegisterAttributeTypes()
         {
-            IMvxIosView viewController = Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
-            Show(viewController);
+            base.RegisterAttributeTypes();
+
+            _attributeTypesToShowMethodDictionary.Add(
+                typeof(MvxSidebarPresentationAttribute),
+                (vc, attribute, request) => ShowSidebarViewController(vc, attribute as MvxSidebarPresentationAttribute, request));
         }
 
-        public override void Show(IMvxIosView view)
+        protected virtual void ShowSidebarViewController(
+            UIViewController viewController,
+            MvxSidebarPresentationAttribute attribute,
+            MvxViewModelRequest request)
         {
-            if (view is IMvxModalIosView)
-            {
-                PresentModalViewController(view as UIViewController, true);
-                return;
-            }
+            if (SideBarViewController == null)
+                ShowRootViewController(new MvxSidebarViewController(), null, request);
 
-            var viewController = view as UIViewController;
-
-            if (viewController == null)
-            {
-                throw new MvxException("Passed in IMvxIosView is not a UIViewController");
-            }
-
-            if (RootViewController == null)
-            {
-                InitRootViewController();
-            }
-
-            var viewPresentationAttribute = GetViewPresentationAttribute(view);
-
-            //Create fall back viewPresentationAttribute, when nothing is set
-            if (viewPresentationAttribute == null)
-            {
-                ParentRootViewController.PushViewController(viewController, ParentRootViewController.ViewControllers.Count() > 1);
-                return;
-            }
-
-            switch (viewPresentationAttribute.HintType)
+            switch (attribute.HintType)
             {
                 case MvxPanelHintType.PopToRoot:
-                    ChangePresentation(new MvxSidebarPopToRootPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
+                    ChangePresentation(new MvxSidebarPopToRootPresentationHint(attribute.Panel, SideBarViewController, viewController));
                     break;
                 case MvxPanelHintType.ResetRoot:
-                    ChangePresentation(new MvxSidebarResetRootPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
+
+                    ChangePresentation(new MvxSidebarResetRootPresentationHint(attribute.Panel, SideBarViewController, viewController));
                     break;
                 case MvxPanelHintType.ActivePanel:
                 default:
-                    ChangePresentation(new MvxSidebarActivePanelPresentationHint(viewPresentationAttribute.Panel, RootViewController, viewController));
+
+                    ChangePresentation(new MvxSidebarActivePanelPresentationHint(attribute.Panel, SideBarViewController, viewController));
                     break;
             }
 
-            if (!viewPresentationAttribute.ShowPanel)
+            if (!attribute.ShowPanel)
             {
-                var menu = Mvx.Resolve<IMvxSideMenu>();
-                menu?.Close();
+                var menu = Mvx.Resolve<IMvxSidebarViewController>();
+                menu?.CloseMenu();
             }
+        }
+
+        protected override void ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            // check if viewController is a MvxSidebarPanelController
+            if (viewController is IMvxSidebarViewController)
+            {
+                MasterNavigationController = new MvxNavigationController();
+
+                SideBarViewController = viewController as IMvxSidebarViewController;
+                SideBarViewController.SetNavigationController(MasterNavigationController);
+
+                SetWindowRootViewController(viewController);
+
+                Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
+
+                CloseMasterNavigationController();
+                CloseModalNavigationController();
+                CloseSplitViewController();
+
+                return;
+            }
+            else
+            {
+                SideBarViewController = null;
+                MasterNavigationController = null;
+            }
+
+            base.ShowRootViewController(viewController, attribute, request);
         }
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (ParentRootViewController.ViewControllers.Count() > 1)
-                ParentRootViewController.PopViewController(true);
-            else if (RootViewController.NavigationController.ViewControllers.Count() > 1)
-                RootViewController.NavigationController.PopViewController(true);
-            else
-                base.Close(toClose);
-        }
+            // if the current root is a SideBarViewController, delegate close responsibility to it
+            if (SideBarViewController != null && SideBarViewController.CloseChildViewModel(toClose))
+                return;
 
-        protected MvxPanelPresentationAttribute GetViewPresentationAttribute(IMvxIosView view)
-        {
-            if (view == null)
-                return default(MvxPanelPresentationAttribute);
-
-            return view.GetType().GetCustomAttributes(typeof(MvxPanelPresentationAttribute), true).FirstOrDefault() as MvxPanelPresentationAttribute;
-        }
-
-        protected virtual void InitRootViewController()
-        {
-            foreach (var view in Window.Subviews)
-                view.RemoveFromSuperview();
-
-            MasterNavigationController = new UINavigationController();
-
-            OnMasterNavigationControllerCreated();
-
-            RootViewController = new MvxSidebarPanelController(MasterNavigationController);
-           
-            SetWindowRootViewController(RootViewController);
-
-            Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
+            base.Close(toClose);
         }
     }
 }

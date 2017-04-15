@@ -11,36 +11,41 @@
     using MvvmCross.iOS.Views;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.iOS.Views.Presenters;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 
-    public class MvxSidebarPanelController : UIViewController, IMvxSideMenu
+    public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {
         private readonly UIViewController _subRootViewController;
 
-        public MvxSidebarPanelController(UINavigationController navigationController)
+        public MvxSidebarViewController()
         {
             _subRootViewController = new UIViewController();
+        }
+
+        public void SetNavigationController(UINavigationController navigationController)
+        {
             NavigationController = navigationController;
         }
 
         public bool StatusBarHidden { get; set; }
-		public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
-		public new UINavigationController NavigationController { get; private set; }
-		public SidebarController LeftSidebarController { get; private set; }
-        public SidebarController RightSidebarController {get; private set; }
-		public bool HasLeftMenu => LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
-		public bool HasRightMenu => RightSidebarController != null && RightSidebarController.MenuAreaController != null;
+        public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
+        public new UINavigationController NavigationController { get; private set; }
+        public SidebarController LeftSidebarController { get; private set; }
+        public SidebarController RightSidebarController { get; private set; }
+        public bool HasLeftMenu => LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
+        public bool HasRightMenu => RightSidebarController != null && RightSidebarController.MenuAreaController != null;
 
         protected virtual void SetupSideMenu()
         {
-			var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
-			var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
+            var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
+            var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
 
-			if (leftSideMenu == null && rightSideMenu == null)
-			{	
-				Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
-				AttachNavigationController();
-				return;
-			}
+            if (leftSideMenu == null && rightSideMenu == null)
+            {
+                Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
+                AttachNavigationController();
+                return;
+            }
 
             if (leftSideMenu != null && rightSideMenu != null)
             {
@@ -64,20 +69,20 @@
             }
         }
 
-		protected virtual void AttachNavigationController()
-		{
-			this.AddChildViewController(NavigationController);
-			this.View.AddSubview(NavigationController.View);
-		}
+        protected virtual void AttachNavigationController()
+        {
+            this.AddChildViewController(NavigationController);
+            this.View.AddSubview(NavigationController.View);
+        }
 
         protected virtual UIViewController ResolveSideMenu(MvxPanelEnum location)
         {
             var assembly = Assembly.GetEntryAssembly();
 
             var types = (from type in assembly.GetTypes()
-                         from attribute in type.GetCustomAttributes<MvxPanelPresentationAttribute>(true)
+                         from attribute in type.GetCustomAttributes<MvxSidebarPresentationAttribute>(true)
                          where attribute.Panel == location
-                        select type).ToArray();
+                         select type).ToArray();
 
             if (types == null || types.Length == 0)
             {
@@ -141,7 +146,7 @@
         {
             base.ViewDidLoad();
 
-			SetupSideMenu();
+            SetupSideMenu();
         }
 
         public override UIStatusBarAnimation PreferredStatusBarUpdateAnimation
@@ -168,7 +173,7 @@
             );
         }
 
-        public void Close()
+        public void CloseMenu()
         {
             if (LeftSidebarController != null && LeftSidebarController.IsOpen)
                 LeftSidebarController.CloseMenu();
@@ -189,6 +194,16 @@
         {
             if (sidebarController != null && !sidebarController.IsOpen)
                 sidebarController.OpenMenu();
+        }
+
+        public bool CloseChildViewModel(IMvxViewModel viewModel)
+        {
+            if (NavigationController.ViewControllers.Count() > 1)
+            {
+                NavigationController.PopViewController(true);
+                return true;
+            }
+            return false;
         }
     }
 }

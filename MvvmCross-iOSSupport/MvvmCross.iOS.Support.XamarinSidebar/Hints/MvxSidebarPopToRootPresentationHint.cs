@@ -1,18 +1,18 @@
-﻿using UIKit;
+using UIKit;
 using MvvmCross.iOS.Support.SidePanels;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
     public class MvxSidebarPopToRootPresentationHint : MvxPanelPresentationHint
     {
-        public MvxSidebarPopToRootPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
+        public MvxSidebarPopToRootPresentationHint(MvxPanelEnum panel, IMvxSidebarViewController sidebarPanelController, UIViewController viewController)
             : base(panel)
         {
             SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
 
-        protected readonly MvxSidebarPanelController SidebarPanelController;
+        protected readonly IMvxSidebarViewController SidebarPanelController;
         protected readonly UIViewController ViewController;
 
         public override bool Navigate()
@@ -20,7 +20,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
             if (ViewController == null || SidebarPanelController == null)
                 return false;
 
-            var navigationController = SidebarPanelController.NavigationController;
+            var navigationController = (SidebarPanelController as MvxSidebarViewController).NavigationController;
 
             if (navigationController == null)
                 return false;

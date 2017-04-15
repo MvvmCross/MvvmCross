@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UIKit;
 using SidebarNavigation;
 
@@ -6,7 +6,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
 {
     public static class ViewControllerExtensions
     {
-        public static void ShowMenuButton(this UIViewController viewController, MvxSidebarPanelController sidebarPanelController)
+        public static void ShowMenuButton(this UIViewController viewController, MvxSidebarViewController sidebarPanelController)
         {
             UIBarButtonItem barButtonItem;
 

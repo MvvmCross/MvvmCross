@@ -5,11 +5,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Core.ViewModels;
     using CoreGraphics;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using SidePanels;
     using UIKit;
 
     [Register("LeftPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
     public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>
     {
         /// <summary>
@@ -28,12 +29,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             centerButton.SetTitle("Master View Menu Item", UIControlState.Normal);
             centerButton.BackgroundColor = UIColor.White;
             centerButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
-            
+
             var exampleButton = new UIButton(new CGRect(0, 100, 320, 40));
             exampleButton.SetTitle("Example Menu Item", UIControlState.Normal);
             exampleButton.BackgroundColor = UIColor.White;
             exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
-            
+
 
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);
