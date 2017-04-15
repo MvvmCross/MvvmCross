@@ -6,9 +6,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Core.ViewModels;
     using SidePanels;
     using UIKit;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 
     [Register("ExampleMenuItemView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, false)]
     public class ExampleMenuItemView : BaseViewController<ExampleMenuItemViewModel>
     {
         public override void ViewDidLoad()

@@ -4,11 +4,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using SidePanels;
     using UIKit;
 
     [Register("CenterPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
     public class CenterPanelView : BaseViewController<CenterPanelViewModel>
     {
         /// <summary>

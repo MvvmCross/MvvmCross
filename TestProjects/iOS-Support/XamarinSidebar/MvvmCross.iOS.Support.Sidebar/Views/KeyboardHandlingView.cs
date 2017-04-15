@@ -3,12 +3,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using SidePanels;
     using Support.Views;
     using UIKit;
 
     [Register("KeyboardHandlingView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
     public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>
     {
         /// <summary>
