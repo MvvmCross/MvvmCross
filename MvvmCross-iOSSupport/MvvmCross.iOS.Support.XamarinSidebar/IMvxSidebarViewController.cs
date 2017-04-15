@@ -1,7 +1,7 @@
 ﻿using MvvmCross.Core.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.SidePanels
+namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public interface IMvxSidebarViewController
     {

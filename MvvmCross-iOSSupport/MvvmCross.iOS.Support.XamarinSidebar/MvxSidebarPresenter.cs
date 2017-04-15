@@ -1,5 +1,4 @@
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Support.SidePanels;
 using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Views;
@@ -26,7 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxSidebarPresentationAttribute),
-                (vc, attribute, request) => ShowSidebarViewController(vc, attribute as MvxSidebarPresentationAttribute, request));
+                (vc, attribute, request) => ShowSidebarViewController(vc, (MvxSidebarPresentationAttribute)attribute, request));
         }
 
         protected virtual void ShowSidebarViewController(
@@ -47,9 +46,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                     ShowPanelAndResetToRoot(attribute.Panel, viewController);
                     break;
 
-                case MvxPanelHintType.ActivePanel:
+                case MvxPanelHintType.PushPanel:
                 default:
-                    ShowPanelAndActivePanel(attribute.Panel, viewController);
+                    ShowPanel(attribute.Panel, viewController);
                     break;
             }
 
@@ -88,7 +87,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        protected virtual bool ShowPanelAndActivePanel(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanel(MvxPanelEnum panel, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 

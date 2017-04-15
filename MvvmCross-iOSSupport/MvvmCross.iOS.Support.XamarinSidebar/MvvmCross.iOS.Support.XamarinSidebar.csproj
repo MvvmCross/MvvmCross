@@ -45,13 +45,9 @@
     <Compile Include="IMvxSidebarMenu.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
     <Compile Include="Attributes\MvxSidebarPresentationAttribute.cs" />
-    <Compile Include="SidePanels\MvxActivePanelPresentationHint.cs" />
     <Compile Include="SidePanels\MvxBaseSplitViewController.cs" />
     <Compile Include="SidePanels\MvxPanelEnum.cs" />
     <Compile Include="SidePanels\MvxPanelHintType.cs" />
-    <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxPanelPushViewPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxPanelResetRootPresentationHint.cs" />
     <Compile Include="SidePanels\MvxSplitViewBehaviour.cs" />
     <Compile Include="SidePanels\MvxSplitViewControllerHost.cs" />
     <Compile Include="IMvxSidebarViewController.cs" />
