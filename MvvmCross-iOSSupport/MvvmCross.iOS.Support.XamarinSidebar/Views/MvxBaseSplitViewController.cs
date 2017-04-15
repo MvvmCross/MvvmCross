@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {
     using UIKit;
 

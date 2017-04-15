@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.SidePanels
+﻿namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     /// <summary>
     /// Denotes where this view should be displayed when the application is running on an iPad

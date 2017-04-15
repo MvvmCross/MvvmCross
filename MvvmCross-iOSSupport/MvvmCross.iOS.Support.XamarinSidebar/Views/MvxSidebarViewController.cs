@@ -1,17 +1,17 @@
-﻿namespace MvvmCross.iOS.Support.XamarinSidebar
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using SidebarNavigation;
+using UIKit;
+
+namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {
-    using SidebarNavigation;
-    using UIKit;
-    using SidePanels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using System.Linq;
-    using System.Reflection;
-    using System;
-    using MvvmCross.iOS.Views;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Views.Presenters;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 
     public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {
@@ -40,14 +40,14 @@
             var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
             var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
 
-            if (leftSideMenu == null && rightSideMenu == null)
+            if(leftSideMenu == null && rightSideMenu == null)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
                 AttachNavigationController();
                 return;
             }
 
-            if (leftSideMenu != null && rightSideMenu != null)
+            if(leftSideMenu != null && rightSideMenu != null)
             {
                 LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, leftSideMenu);
                 ConfigureSideMenu(LeftSidebarController);
@@ -55,13 +55,13 @@
                 RightSidebarController = new SidebarController(this, _subRootViewController, rightSideMenu);
                 ConfigureSideMenu(RightSidebarController);
             }
-            else if (leftSideMenu != null)
+            else if(leftSideMenu != null)
             {
                 LeftSidebarController = new SidebarController(this, NavigationController, leftSideMenu);
                 RightSidebarController = null;
                 ConfigureSideMenu(LeftSidebarController);
             }
-            else if (rightSideMenu != null)
+            else if(rightSideMenu != null)
             {
                 LeftSidebarController = null;
                 RightSidebarController = new SidebarController(this, NavigationController, rightSideMenu);
@@ -84,12 +84,12 @@
                          where attribute.Panel == location
                          select type).ToArray();
 
-            if (types == null || types.Length == 0)
+            if(types == null || types.Length == 0)
             {
                 return null;
             }
 
-            if (types != null && types.Length > 1)
+            if(types != null && types.Length > 1)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, $"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
             }
@@ -106,14 +106,14 @@
 
         protected virtual Type GetBaseType(Type type)
         {
-            while (type.BaseType != null)
+            while(type.BaseType != null)
             {
                 type = type.BaseType;
-                if (type.IsGenericType)
+                if(type.IsGenericType)
                 {
                     var viewModelType = type.GetGenericArguments().FirstOrDefault(argument => typeof(IMvxViewModel).IsAssignableFrom(argument));
 
-                    if (viewModelType != null)
+                    if(viewModelType != null)
                     {
                         return viewModelType;
                     }
@@ -127,7 +127,7 @@
         {
             var mvxSideMenuSettings = sidebarController.MenuAreaController as IMvxSidebarMenu;
 
-            if (mvxSideMenuSettings != null)
+            if(mvxSideMenuSettings != null)
             {
                 sidebarController.DarkOverlayAlpha = mvxSideMenuSettings.DarkOverlayAlpha;
                 sidebarController.HasDarkOverlay = mvxSideMenuSettings.HasDarkOverlay;
@@ -175,30 +175,30 @@
 
         public void CloseMenu()
         {
-            if (LeftSidebarController != null && LeftSidebarController.IsOpen)
+            if(LeftSidebarController != null && LeftSidebarController.IsOpen)
                 LeftSidebarController.CloseMenu();
 
-            if (RightSidebarController != null && RightSidebarController.IsOpen)
+            if(RightSidebarController != null && RightSidebarController.IsOpen)
                 RightSidebarController.CloseMenu();
         }
 
         public void Open(MvxPanelEnum panelEnum)
         {
-            if (panelEnum == MvxPanelEnum.Left)
+            if(panelEnum == MvxPanelEnum.Left)
                 OpenMenu(LeftSidebarController);
-            else if (panelEnum == MvxPanelEnum.Right)
+            else if(panelEnum == MvxPanelEnum.Right)
                 OpenMenu(RightSidebarController);
         }
 
         protected virtual void OpenMenu(SidebarController sidebarController)
         {
-            if (sidebarController != null && !sidebarController.IsOpen)
+            if(sidebarController != null && !sidebarController.IsOpen)
                 sidebarController.OpenMenu();
         }
 
-        public bool CloseChildViewModel(IMvxViewModel viewModel)
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if (NavigationController.ViewControllers.Count() > 1)
+            if(NavigationController.ViewControllers.Count() > 1)
             {
                 NavigationController.PopViewController(true);
                 return true;
@@ -207,4 +207,3 @@
         }
     }
 }
-

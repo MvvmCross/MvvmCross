@@ -5,12 +5,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Core.ViewModels;
     using CoreGraphics;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar;
     using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using SidePanels;
     using UIKit;
 
     [Register("LeftPanelView")]
-    [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.PushPanel, false)]
     public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>
     {
         /// <summary>
