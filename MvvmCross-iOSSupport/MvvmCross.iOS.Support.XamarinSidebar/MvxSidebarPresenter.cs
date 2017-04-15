@@ -1,6 +1,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
+using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.iOS.Views.Presenters.Attributes;

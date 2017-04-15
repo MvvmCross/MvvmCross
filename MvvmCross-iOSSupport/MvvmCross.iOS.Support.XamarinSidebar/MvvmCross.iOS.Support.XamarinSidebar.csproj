@@ -41,16 +41,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxSidebarPresenter.cs" />
-    <Compile Include="MvxSidebarViewController.cs" />
-    <Compile Include="IMvxSidebarMenu.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
     <Compile Include="Attributes\MvxSidebarPresentationAttribute.cs" />
-    <Compile Include="SidePanels\MvxBaseSplitViewController.cs" />
-    <Compile Include="SidePanels\MvxPanelEnum.cs" />
-    <Compile Include="SidePanels\MvxPanelHintType.cs" />
-    <Compile Include="SidePanels\MvxSplitViewBehaviour.cs" />
-    <Compile Include="SidePanels\MvxSplitViewControllerHost.cs" />
-    <Compile Include="IMvxSidebarViewController.cs" />
+    <Compile Include="MvxPanelEnum.cs" />
+    <Compile Include="MvxPanelHintType.cs" />
+    <Compile Include="MvxSplitViewBehaviour.cs" />
+    <Compile Include="Views\IMvxSidebarMenu.cs" />
+    <Compile Include="Views\IMvxSidebarViewController.cs" />
+    <Compile Include="Views\MvxBaseSplitViewController.cs" />
+    <Compile Include="Views\MvxSidebarViewController.cs" />
+    <Compile Include="Views\MvxSplitViewControllerHost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -88,6 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="SidePanels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 </Project>
