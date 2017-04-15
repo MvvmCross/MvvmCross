@@ -14,6 +14,8 @@ namespace MvvmCross.Core.ViewModels
     using MvvmCross.Core.Views;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
@@ -41,15 +43,13 @@ namespace MvvmCross.Core.ViewModels
         /// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
         protected bool ShowViewModel<TViewModel, TInit>(TInit parameter,
                                                  IMvxBundle presentationBundle = null,
-                                                 MvxRequestedBy requestedBy = null) 
+                                                 MvxRequestedBy requestedBy = null)
             where TViewModel : IMvxViewModelInitializer<TInit>
         {
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
-                Mvx.Trace(
-                    "Could not resolve IMvxJsonConverter, it is going to be hard to initialize with custom object");
-                return false;
+                throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
             var json = serializer.SerializeObject(parameter);

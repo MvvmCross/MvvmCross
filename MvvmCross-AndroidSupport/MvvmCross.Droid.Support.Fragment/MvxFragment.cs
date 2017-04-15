@@ -73,6 +73,36 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.Destroy();
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            ViewModel.Appearing();
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            ViewModel.Appeared();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            ViewModel.Disappearing();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            ViewModel.Disappeared();
+        }
     }
 
     public abstract class MvxFragment<TViewModel>

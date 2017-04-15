@@ -63,8 +63,6 @@ namespace MvvmCross.Test.Core
         protected void SetInvariantCulture()
         {
             var invariantCulture = CultureInfo.InvariantCulture;
-            Thread.CurrentThread.CurrentCulture = invariantCulture;
-            Thread.CurrentThread.CurrentUICulture = invariantCulture;
             CultureInfo.DefaultThreadCurrentCulture = invariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = invariantCulture;
         }

@@ -67,7 +67,7 @@ Task("GitLink")
 	GitLink(sln.GetDirectory(), 
 		new GitLinkSettings {
 			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
-			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81")
+			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81,Eventhooks.Core,Eventhooks.Droid,Eventhooks.iOS,Eventhooks.Uwp,Eventhooks.Wpf,RoutingExample.Core,RoutingExample.iOS,RoutingExample.Droid,MvvmCross.TestProjects.CustomBinding.Core,MvvmCross.TestProjects.CustomBinding.iOS,MvvmCross.TestProjects.CustomBinding.Droid")
 		});
 });
 
@@ -78,7 +78,7 @@ Task("Package")
 	var nugetSettings = new NuGetPackSettings {
 		Authors = new [] { "MvvmCross contributors" },
 		Owners = new [] { "MvvmCross" },
-		IconUrl = new Uri("http://i.imgur.com/BvdAtgT.png"),
+		IconUrl = new Uri("http://i.imgur.com/Baucn8c.png"),
 		ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
 		LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
 		Copyright = "Copyright (c) MvvmCross",
@@ -133,7 +133,6 @@ Task("Package")
 		"MvvmCross.Plugin.Network.nuspec",
 		"MvvmCross.Plugin.PhoneCall.nuspec",
 		"MvvmCross.Plugin.PictureChooser.nuspec",
-		"MvvmCross.Plugin.ReflectionEx.nuspec",
 		"MvvmCross.Plugin.ResourceLoader.nuspec",
 		"MvvmCross.Plugin.ResxLocalization.nuspec",
 		"MvvmCross.Plugin.Share.nuspec",

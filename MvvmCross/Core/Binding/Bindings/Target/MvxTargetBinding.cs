@@ -38,4 +38,49 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public abstract MvxBindingMode DefaultMode { get; }
     }
+
+    public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTargetBinding
+        where TTarget : class
+    {
+        private readonly WeakReference<TTarget> _target;
+
+        protected MvxTargetBinding(TTarget target)
+        {
+            _target = new WeakReference<TTarget>(target);
+        }
+
+        protected TTarget Target 
+        { 
+            get 
+            {
+                TTarget target = null;
+                _target.TryGetTarget(out target);
+
+                return target;
+            } 
+        }
+
+        public virtual void SubscribeToEvents()
+        {
+            // do nothing by default
+        }
+
+        protected virtual void FireValueChanged(TValue newValue)
+        {
+            ValueChanged?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
+        }
+
+        public abstract MvxBindingMode DefaultMode { get; }
+
+        public Type TargetType => typeof(TTarget);
+
+        public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
+
+        protected abstract void SetValue(TValue value);
+
+        public void SetValue(object value)
+        {
+            this.SetValue((TValue)value);
+        }
+    }
 }

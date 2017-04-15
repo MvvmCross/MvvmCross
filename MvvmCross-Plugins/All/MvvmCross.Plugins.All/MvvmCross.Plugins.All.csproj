@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Accelerometer\MvvmCross.Plugins.Accelerometer\MvvmCross.Plugins.Accelerometer.csproj">
       <Project>{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}</Project>
       <Name>MvvmCross.Plugins.Accelerometer</Name>
@@ -86,10 +90,6 @@
       <Project>{A6C9F4EF-F26E-4D54-A0D6-49A6373CB0D2}</Project>
       <Name>MvvmCross.Plugins.PictureChooser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ReflectionEx\MvvmCross.Plugins.ReflectionEx\MvvmCross.Plugins.ReflectionEx.csproj">
-      <Project>{22648A57-3D94-4604-A238-B0B92BDDC3A5}</Project>
-      <Name>MvvmCross.Plugins.ReflectionEx</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75CA1824-C7F3-4827-93ED-E75B2C01CB2C}</Project>
       <Name>MvvmCross.Plugins.ResourceLoader</Name>
@@ -101,10 +101,6 @@
     <ProjectReference Include="..\..\SoundEffects\MvvmCross.Plugins.SoundEffects\MvvmCross.Plugins.SoundEffects.csproj">
       <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
       <Name>MvvmCross.Plugins.SoundEffects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ThreadUtils\MvvmCross.Plugins.ThreadUtils\MvvmCross.Plugins.ThreadUtils.csproj">
-      <Project>{9EA4F024-4966-42B8-82C0-A2023AD52F64}</Project>
-      <Name>MvvmCross.Plugins.ThreadUtils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Visibility\MvvmCross.Plugins.Visibility\MvvmCross.Plugins.Visibility.csproj">
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
@@ -123,19 +119,6 @@
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Preserve.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

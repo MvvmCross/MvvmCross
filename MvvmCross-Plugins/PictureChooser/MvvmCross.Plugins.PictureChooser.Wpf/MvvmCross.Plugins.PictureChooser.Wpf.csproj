@@ -30,22 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\net45\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\net45\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Platform.4.4.0\lib\net45\MvvmCross.Platform.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Wpf, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmCross.Core.4.4.0\lib\net45\MvvmCross.Wpf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -65,13 +49,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
+      <Project>{3688d6fc-e7f4-485f-8b27-96c0a8c7eaed}</Project>
+      <Name>MvvmCross.Platform.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.PictureChooser\MvvmCross.Plugins.PictureChooser.csproj">
       <Project>{a6c9f4ef-f26e-4d54-a0d6-49a6373cb0d2}</Project>
       <Name>MvvmCross.Plugins.PictureChooser</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

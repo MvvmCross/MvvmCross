@@ -29,7 +29,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = global::Android.Resource.Layout.SimpleDropDownItem1Line
+                    SimpleViewLayoutId = global::Android.Resource.Layout.SimpleSpinnerItem,
+                    DropDownItemTemplateId = Resource.Layout.support_simple_spinner_dropdown_item
                 })
         { }
 
