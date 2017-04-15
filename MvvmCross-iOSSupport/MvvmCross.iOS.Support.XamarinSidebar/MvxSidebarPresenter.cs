@@ -23,7 +23,7 @@
             AddPresentationHintHandler<MvxSidebarResetRootPresentationHint>(PresentationHintHandler);
         }
 
-        private bool PresentationHintHandler(MvxPanelPresentationHint hint)
+        protected virtual bool PresentationHintHandler(MvxPanelPresentationHint hint)
         {
             if (hint == null)
                 return false;
@@ -117,12 +117,8 @@
             OnMasterNavigationControllerCreated();
 
             RootViewController = new MvxSidebarPanelController(MasterNavigationController);
-            RootViewController.Initialize();
-
-            ParentRootViewController = new UINavigationController(RootViewController);
-            ParentRootViewController.NavigationBarHidden = true;
-
-            SetWindowRootViewController(ParentRootViewController);
+           
+            SetWindowRootViewController(RootViewController);
 
             Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
         }
