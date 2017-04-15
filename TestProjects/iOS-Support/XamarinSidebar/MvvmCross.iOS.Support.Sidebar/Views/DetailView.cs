@@ -4,11 +4,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using SidePanels;
     using UIKit;
 
     [Register("DetailView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true, MvxSplitViewBehaviour.Detail)]
     public class DetailView : BaseViewController<DetailViewModel>
     {
         /// <summary>

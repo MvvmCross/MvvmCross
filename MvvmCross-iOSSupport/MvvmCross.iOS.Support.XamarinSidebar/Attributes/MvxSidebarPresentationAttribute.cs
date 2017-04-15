@@ -1,12 +1,10 @@
-﻿namespace MvvmCross.iOS.Support.SidePanels
-{
-    using System;
+﻿using System;
+using MvvmCross.iOS.Support.SidePanels;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
-    /// <summary>
-    /// The panel presentation hint
-    /// </summary>
-    /// <seealso cref="System.Attribute" />
-    public class MvxPanelPresentationAttribute : Attribute
+namespace MvvmCross.iOS.Support.XamarinSidebar.Attributes
+{
+    public class MvxSidebarPresentationAttribute : MvxBasePresentationAttribute
     {
         /// <summary>
         /// The hint type
@@ -35,7 +33,7 @@
         /// <param name="hintType">Type of the hint.</param>
         /// <param name="showPanel">if set to <c>true</c> [show panel].</param>
         /// <param name="behaviour">The splitview behaviour value</param>
-        public MvxPanelPresentationAttribute(MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
+        public MvxSidebarPresentationAttribute(MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel, MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
         {
             Panel = panel;
             ShowPanel = showPanel;
