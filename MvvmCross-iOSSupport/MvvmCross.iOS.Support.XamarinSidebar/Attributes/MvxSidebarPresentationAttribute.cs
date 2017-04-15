@@ -1,6 +1,4 @@
-﻿using System;
-using MvvmCross.iOS.Support.SidePanels;
-using MvvmCross.iOS.Views.Presenters.Attributes;
+﻿using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Attributes
 {
@@ -27,7 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Attributes
         public readonly bool ShowPanel;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MvxPanelPresentationAttribute"/> class.
+        /// Initializes a new instance of the <see cref="MvxSidebarPresentationAttribute"/> class.
         /// </summary>
         /// <param name="panel">The panel.</param>
         /// <param name="hintType">Type of the hint.</param>

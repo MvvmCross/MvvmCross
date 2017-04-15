@@ -4,9 +4,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar;
     using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using MvvmCross.Platform;
-    using SidePanels;
     using UIKit;
 
     [Register("MasterView")]
