@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Platform.iOS.Views
 {
-    using UIKit;
-
     public interface IMvxIosModalHost
     {
         bool PresentModalViewController(UIViewController controller, bool animated);
