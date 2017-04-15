@@ -114,11 +114,18 @@
 
             MasterNavigationController = new UINavigationController();
 
+            OnMasterNavigationControllerCreated();
+
             RootViewController = new MvxSidebarPanelController(MasterNavigationController);
 
             SetWindowRootViewController(RootViewController);
 
             Mvx.RegisterSingleton<IMvxSideMenu>(RootViewController);
+        }
+
+        protected virtual void OnMasterNavigationControllerCreated()
+        {
+
         }
     }
 }
