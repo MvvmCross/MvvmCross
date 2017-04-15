@@ -4,11 +4,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using SidePanels;
     using UIKit;
 
     [Register("RightPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Right, MvxPanelHintType.ActivePanel, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Right, MvxPanelHintType.ActivePanel, false)]
     public class RightPanelView : BaseMenuViewController<RightPanelViewModel>
     {
         /// <summary>

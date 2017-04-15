@@ -46,16 +46,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IMvxCanCreateIosView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
-    <Compile Include="Platform\IMvxIosPlatformProperties.cs" />
-    <Compile Include="Platform\MvxIosDisplayDensity.cs" />
-    <Compile Include="Platform\MvxIosFormFactor.cs" />
     <Compile Include="Views\IMvxIosViewSegue.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
-    <Compile Include="Platform\MvxIosPlatformProperties.cs" />
     <Compile Include="Views\IMvxIosViewCreator.cs" />
     <Compile Include="Views\IMvxIosViewsContainer.cs" />
     <Compile Include="Views\MvxCanCreateIosViewExtensionMethods.cs" />
-    <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
     <Compile Include="Views\MvxSegueExtensionMethods.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />

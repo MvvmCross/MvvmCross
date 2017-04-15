@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
+namespace MvvmCross.iOS.Support.XamarinSidebar.Hints
 {
     using UIKit;
     using SidePanels;
@@ -6,14 +6,14 @@
 
     public class MvxSidebarActivePanelPresentationHint : MvxPanelPresentationHint
     {
-        public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, MvxSidebarPanelController sidebarPanelController, UIViewController viewController)
+        public MvxSidebarActivePanelPresentationHint(MvxPanelEnum panel, IMvxSidebarViewController sidebarPanelController, UIViewController viewController)
             : base(panel)
         {
             SidebarPanelController = sidebarPanelController;
             ViewController = viewController;
         }
 
-        protected readonly MvxSidebarPanelController SidebarPanelController;
+        protected readonly IMvxSidebarViewController SidebarPanelController;
         protected readonly UIViewController ViewController;
 
         public override bool Navigate()
@@ -21,7 +21,7 @@
             if (ViewController == null || SidebarPanelController == null)
                 return false;
 
-            var navigationController = SidebarPanelController.NavigationController;
+            var navigationController = (SidebarPanelController as MvxSidebarViewController).NavigationController;
 
             switch (Panel)
             {
