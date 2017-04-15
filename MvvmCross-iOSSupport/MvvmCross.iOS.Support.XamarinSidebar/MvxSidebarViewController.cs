@@ -196,7 +196,7 @@
                 sidebarController.OpenMenu();
         }
 
-        public bool CloseChildViewModel(IMvxViewModel viewModel)
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
             if (NavigationController.ViewControllers.Count() > 1)
             {
@@ -207,4 +207,3 @@
         }
     }
 }
-
