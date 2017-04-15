@@ -1,4 +1,5 @@
-﻿using UIKit;
+﻿using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.SidePanels
 {
@@ -8,7 +9,7 @@ namespace MvvmCross.iOS.Support.SidePanels
     /// class
     /// </summary>
     /// <seealso cref="UIKit.UIViewController" />
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
     public class MvxSplitViewControllerHost : UIViewController
     {
         /// <summary>
