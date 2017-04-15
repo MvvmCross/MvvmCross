@@ -1,7 +1,7 @@
 ﻿using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.SidePanels
+namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {
     /// <summary>
     /// A wrapper UIViewController to present a UISplitViewController view nested
@@ -9,7 +9,7 @@ namespace MvvmCross.iOS.Support.SidePanels
     /// class
     /// </summary>
     /// <seealso cref="UIKit.UIViewController" />
-    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.PushPanel, true)]
     public class MvxSplitViewControllerHost : UIViewController
     {
         /// <summary>
