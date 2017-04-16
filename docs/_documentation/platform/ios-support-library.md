@@ -8,17 +8,17 @@ In version 4.0.0 we have started work on a new library dedicated to providing fu
 
 Currently the classes available in this library consists of:
 
- * MvxSidePanelsPresenter
+ * MvxSidebarPresenter
  * MvxBaseViewController
  * MvxExpandableTableViewSource
 
-## MvxSidePanelsPresenter
+## MvxSidebarPresenter
 
-This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel.  Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
+This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel. Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
 
-A view controller class can be decorated with the MvxPanelPresentationAttribute.  The constructor for this attribute is shown below:
+A view controller class can be decorated with the MvxSidebarPresentationAttribute. The constructor for this attribute is shown below:
 ```c#
-public MvxPanelPresentationAttribute(
+public MvxSidebarPresentationAttribute(
     MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel,
     MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
 {
@@ -27,7 +27,7 @@ public MvxPanelPresentationAttribute(
 This attribute is used by the presenter to make decisions about what to do with the view request when showing this view using the syntax shown below:
 ```c#
 [Register("CenterPanelView")]
-[MvxPanelPresentation(
+[MvxSidebarPresentation(
      MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
 public class CenterPanelView
     : BaseViewController<CenterPanelViewModel>
@@ -35,7 +35,7 @@ public class CenterPanelView
 }
 ```
 
-So to explain this example it's telling the MvxSidePanelsPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
+So to explain this example it's telling the MvxSidebarPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
 
 If this was using MvxPanelEnum.Left for instance this would be shown in the left hand panel and would also immediately slide the left panel into view.
 
