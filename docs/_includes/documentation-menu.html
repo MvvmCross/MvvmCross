@@ -10,9 +10,9 @@
     {% for item in items %}
         <li class="menu-no-bullet">
           {% if item.url == navurl %}
-              <a href="{{ site.baseurl }}{{ item.url }}" class="active menu-item">  {{ item.title }} </a>
+              <a href="{{ item.url | relative_url }}" class="active menu-item">  {{ item.title }} </a>
           {% else %}
-              <a href="{{ site.baseurl }}{{ item.url }}" class="menu-item">  {{ item.title }} </a>
+              <a href="{{ item.url | relative_url }}" class="menu-item">  {{ item.title }} </a>
           {% endif %}
         </li>
     {% endfor %}
