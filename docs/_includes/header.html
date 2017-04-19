@@ -2,8 +2,8 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="{{ "/" | relative_url}}">
-      <img class="header-logo" alt="{{ site.title | escape }}" src="{{ site.baseurl }}/img/MvvmCross-logo.png"/>
+    <a class="site-title" href="{{ site.url }}">
+      <img class="header-logo" alt="{{ site.title | escape }}" src="{{ "/img/MvvmCross-logo.png" | relative_url }}"
     </a>
 
     <nav class="site-nav">
@@ -21,14 +21,14 @@
            <a class="page-link" href="{{ item.url | relative_url }}">{{ item.title | escape }}</a>
          {% endfor %}
          
-        <a href="http://stackoverflow.com/questions/tagged/mvvmcross" rel="external" target="_blank"><img src="{{ site.baseurl }}/img/ic-stackoverflow.svg" class="ic-stackoverflow"></a>
-        <a href="https://www.linkedin.com/groups/8456977" rel="external" target="_blank"><img src="{{ site.baseurl }}/img/ic-linkedin.svg" class="ic-linkedin"></a>
-        <a href="https://twitter.com/MvvmCross" rel="external" target="_blank"><img src="{{ site.baseurl }}/img/ic-twitter.svg" class="ic-twitter"></a>
-        <a href="https://github.com/MvvmCross/MvvmCross" rel="external" target="_blank"><img src="{{ site.baseurl }}/img/ic-github.svg" class="ic-github"></a>
+        <a href="http://stackoverflow.com/questions/tagged/mvvmcross" rel="external" target="_blank"><img src="{{ "/img/ic-stackoverflow.svg" | relative_url }}" class="ic-stackoverflow"></a>
+        <a href="https://www.linkedin.com/groups/8456977" rel="external" target="_blank"><img src="{{ "img/ic-linkedin.svg" | relative_url }}" class="ic-linkedin"></a>
+        <a href="https://twitter.com/MvvmCross" rel="external" target="_blank"><img src="{{ "/img/ic-twitter.svg" | relative_url }}" class="ic-twitter"></a>
+        <a href="https://github.com/MvvmCross/MvvmCross" rel="external" target="_blank"><img src="{{ "/img/ic-github.svg" | relative_url }}" class="ic-github"></a>
 
         <div class="search-box">
             <span class="icon"><i class="fa fa-search"></i></span>
-            <form id="searchthis" action="{{ site.baseurl }}/search" style="display:inline;" method="get">
+            <form id="searchthis" action="{{ "/search" | relative_url }}" style="display:inline;" method="get">
               <input type="search" id="search" name="query" placeholder="Search..." />
             </form>
         </div>
