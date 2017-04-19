@@ -34,8 +34,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (adapter == null)
                 return;
 
-            if (base.GetLayoutManager() == null)
-                SetLayoutManager(new LinearLayoutManager(context));
+            var currentLayoutManager = base.GetLayoutManager();
+
+            // Love you Android
+            // https://code.google.com/p/android/issues/detail?id=77846#c10
+            // Don't believe those bastards, it's not fixed - workaround hack hack hack
+            if (currentLayoutManager == null)
+                SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
+
+            if (currentLayoutManager is LinearLayoutManager)
+            {
+                var currentLinearLayoutManager = currentLayoutManager as LinearLayoutManager;
+                SetLayoutManager(new MvxGuardedLinearLayoutManager(context) { Orientation = currentLinearLayoutManager.Orientation });
+            }
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
@@ -66,7 +77,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
             // Eventually the GC will come along and clear out the binding contexts.
             // Issue #1405
-            this.GetLayoutManager()?.RemoveAllViews();
+            GetLayoutManager()?.RemoveAllViews();
         }
 
         public new IMvxRecyclerAdapter Adapter

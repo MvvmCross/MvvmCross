@@ -3,12 +3,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
-    using SidePanels;
+    using MvvmCross.iOS.Support.XamarinSidebar;
+    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
     using Support.Views;
     using UIKit;
 
     [Register("KeyboardHandlingView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.PushPanel, true)]
     public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>
     {
         /// <summary>
@@ -44,7 +45,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 
                 );
 
-            for (int i = 1; i < 8; i++)
+            for(int i = 1; i < 8; i++)
             {
                 var textField = new UITextField
                 {

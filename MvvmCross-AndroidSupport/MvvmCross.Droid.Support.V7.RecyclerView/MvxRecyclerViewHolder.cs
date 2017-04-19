@@ -143,6 +143,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             this.ExecuteCommandOnItem(this.LongClick);
         }
+
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
             : this(itemView, context, 0)
         {
@@ -153,6 +154,11 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             _viewType = viewType;
             this._bindingContext = context;
+        }
+
+        public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
+            : base(handle, ownership)
+        {
         }
 
         public virtual void OnAttachedToWindow()
