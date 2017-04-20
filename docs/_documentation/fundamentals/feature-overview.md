@@ -17,7 +17,7 @@ For a multi-platform application, it's typical for there to be:
 
 This is the way that MvvmCross encourages people to write their applications, and this guide will. However, other approaches are possible - e.g. a single project can include both "core" and "ui", or multiple "core" projects can be written using copy-and-paste or using a technique such as file-linking
 
-##Some key MvvmCross objects
+## Some key MvvmCross objects
 
 There are a few key objects within an MvvmCross application:
 
@@ -34,7 +34,7 @@ There are a few key objects within an MvvmCross application:
  - a `Presenter` - responsible for deciding how `Views` are shown
  - custom UI code - for controls, gestures, events, etc
 
-##How an MvvmCross application starts
+## How an MvvmCross application starts
 
 When an MvvmCross app starts on a native project, then:
 
@@ -51,7 +51,7 @@ When an MvvmCross app starts on a native project, then:
 - to do this, it requests a reference to the `Start` object and calls `Start()` on it 
 - after this, the app will start presenting `ViewModels` using databound `Views`
 
-##The MvvmCross Core
+## The MvvmCross Core
 
 An MvvmCross Core project provides:
 
@@ -170,7 +170,7 @@ Beyond this simple example, `ViewModels` can also:
 - Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
 - Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
 
-##The MvvmCross UI
+## The MvvmCross UI
 
 An MvvmCross 'ui' project provides:
 
@@ -180,9 +180,9 @@ An MvvmCross 'ui' project provides:
 - a `Presenter` - responsible for deciding how `Views` are shown
 - custom UI code - for controls, gestures, events, etc
 
-###Platform specific application code
+### Platform specific application code
 
-####iOS
+#### iOS
 
 On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplicationDelegate`
 
@@ -220,7 +220,7 @@ public partial class AppDelegate : MvxApplicationDelegate
 }
 ```
   
-####Android
+#### Android
 
 On Android, we don't normally have any `Application` to override. Instead of this, MvvmCross by default provides a `SplashScreen` - this typically looks like:
 
@@ -250,7 +250,7 @@ public class SplashScreen : MvxSplashScreenActivity
     
 Importantly, please note that this class is marked with `MainLauncher = true` to ensure that this is the first thing created when the native platform starts.
 
-####WindowsPhone
+#### WindowsPhone
 
 On WindowsPhone, a new project will contain a native `App.xaml.cs`
 
@@ -279,7 +279,7 @@ private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args
 }
 ```
 
-####Wpf
+#### Wpf
 
 On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via Nuget a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
 
@@ -333,7 +333,7 @@ On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the Mvv
 
 A default FirstView should also exist.
 
-####WindowsStore
+#### WindowsStore
 
 On WindowsStore, a new project will again contain a native `App.xaml.cs`
 
@@ -347,7 +347,7 @@ var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxApp
 start.Start();
 ```
 
-###Setup.cs
+### Setup.cs
 
 The Setup class is the bootstrapper for the MvvmCross system.
 
@@ -362,7 +362,7 @@ Some key ones you should be aware of are:
 
 Beyond this, a larger list of Setup customisation options is discussed in https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup
 
-####Minimal Setup - Android
+#### Minimal Setup - Android
 
 ```c#
 using Android.Content;
@@ -385,7 +385,7 @@ public class Setup : MvxAndroidSetup
 }
 ```
 
-####Minimal Setup - iOS
+#### Minimal Setup - iOS
 
 ```c#
 using MonoTouch.UIKit;
@@ -408,7 +408,7 @@ public class Setup : MvxTouchSetup
 }
 ```
 
-####Minimal Setup - WindowsPhone
+#### Minimal Setup - WindowsPhone
 
 ```c#
 using Cirrious.MvvmCross.ViewModels;
@@ -431,7 +431,7 @@ public class Setup : MvxPhoneSetup
 }
 ```
     
-####Minimal Setup - Wpf
+#### Minimal Setup - Wpf
 
 ```c#
 using System.Windows.Threading;
@@ -462,7 +462,7 @@ public class Setup : MvxWpfSetup
 }
 ```
     
-####Setup - WindowsStore
+#### Setup - WindowsStore
 
 ```c#
 using Cirrious.MvvmCross.ViewModels;
@@ -485,7 +485,7 @@ public class Setup : MvxStoreSetup
 }
 ```
 
-###Views
+### Views
 
 Each UI Platform needs a set of Views
 
@@ -501,7 +501,7 @@ Within this introduction we won't go further into how these Views are actually w
 
 One important thing to note, is that by default `View`s are associated with `ViewModel`s using a naming convention in MvvmCross. This can be overridden if required (see the https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup#overriding-view-viewmodel-associations) - but by default the MvvmCross system links a View called `FooView` to a ViewModel called `FooViewModel`
 
-###A Presenter
+### A Presenter
 
 Each UI Platform provides a `Presenter` which implements `IMvxViewPresenter`.
 
