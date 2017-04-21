@@ -50,7 +50,7 @@ twitter:
 collections:
   documentation:
     output: true
-    permalink: /:collection/:path/:title:output_ext
+    permalink: /:collection/:path
 
 category_order:
   - 'Getting-started'
