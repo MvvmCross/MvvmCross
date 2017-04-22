@@ -33,13 +33,13 @@ namespace $rootnamespace$
 
         public void Include(TextView text)
         {
-            text.TextChanged += (sender, args) => text.Text = "" + text.Text;
+            text.AfterTextChanged += (sender, args) => text.Text = "" + text.Text;
             text.Hint = "" + text.Hint;
         }
         
         public void Include(CheckedTextView text)
         {
-            text.TextChanged += (sender, args) => text.Text = "" + text.Text;
+            text.AfterTextChanged += (sender, args) => text.Text = "" + text.Text;
             text.Hint = "" + text.Hint;
         }
 
@@ -51,6 +51,16 @@ namespace $rootnamespace$
         public void Include(SeekBar sb)
         {
             sb.ProgressChanged += (sender, args) => sb.Progress = sb.Progress + 1;
+        }
+
+        public void Include(RadioGroup radioGroup)
+        {
+            radioGroup.CheckedChange += (sender, args) => radioGroup.Check(args.CheckedId);
+        }
+
+        public void Include(RadioButton radioButton)
+        {
+            radioButton.CheckedChange += (sender, args) => radioButton.Checked = args.IsChecked;
         }
 
         public void Include(Activity act)

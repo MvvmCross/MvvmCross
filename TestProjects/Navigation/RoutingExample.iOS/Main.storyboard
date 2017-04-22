@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="4">
+            <objects>
+                <viewController id="5" sceneMemberID="viewController" customClass="MainViewController" storyboardIdentifier="MainViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2"/>
+                        <viewControllerLayoutGuide type="bottom" id="3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="15" y="74" width="570" height="30"/>
+                                <state key="normal" title="mvx://test/a">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="10" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="15" y="134" width="570" height="30"/>
+                                <state key="normal" title="mvx://test/b">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="11" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="15" y="194" width="570" height="30"/>
+                                <state key="normal" title="mvx://random">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="12" firstItem="9" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="15"/>
+                            <constraint id="13" firstItem="6" firstAttribute="trailing" secondItem="9" secondAttribute="trailing" constant="15"/>
+                            <constraint id="14" firstItem="10" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="15"/>
+                            <constraint id="15" firstItem="6" firstAttribute="trailing" secondItem="10" secondAttribute="trailing" constant="15"/>
+                            <constraint id="16" firstItem="10" firstAttribute="top" secondItem="9" secondAttribute="bottom" constant="30"/>
+                            <constraint id="17" firstItem="11" firstAttribute="top" secondItem="10" secondAttribute="bottom" constant="30"/>
+                            <constraint id="18" firstItem="11" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="15"/>
+                            <constraint id="20" firstItem="6" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="15"/>
+                            <constraint id="21" firstItem="9" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="54"/>
+                        </constraints>
+                    </view>
+                    <navigationItem title="Example" id="201" key="navigationItem"/>
+                    <connections>
+                        <outlet property="BtnTestA" destination="9" id="name-outlet-9"/>
+                        <outlet property="BtnTestB" destination="10" id="name-outlet-10"/>
+                        <outlet property="BtnRandom" destination="11" id="name-outlet-11"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="-82"/>
+        </scene>
+        <scene sceneID="28">
+            <objects>
+                <viewController id="29" sceneMemberID="viewController" customClass="TestAViewController" storyboardIdentifier="TestAViewController" title="Example A">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="26"/>
+                        <viewControllerLayoutGuide type="bottom" id="27"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="30">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.41960784313725491" green="0.41960784313725491" blue="0.984313725490196" alpha="1"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="A" lineBreakMode="tailTruncation" minimumFontSize="10" id="33" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES" textAlignment="center">
+                                <rect key="frame" x="208" y="192" width="132" height="125"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <constraints>
+                                    <constraint id="44" firstItem="33" firstAttribute="height" constant="150"/>
+                                    <constraint id="45" firstItem="33" firstAttribute="width" constant="150"/>
+                                </constraints>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint id="39" firstItem="33" firstAttribute="centerY" secondItem="30" secondAttribute="centerY"/>
+                            <constraint id="40" firstItem="30" firstAttribute="centerX" secondItem="33" secondAttribute="centerX"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-447" y="601"/>
+        </scene>
+        <scene sceneID="46">
+            <objects>
+                <viewController id="47" sceneMemberID="viewController" customClass="TestBViewController" storyboardIdentifier="TestBViewController" title="Example B">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="54"/>
+                        <viewControllerLayoutGuide type="bottom" id="55"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="48">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.41960784313725491" green="0.984313725490196" blue="0.4392156862745098" alpha="1"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="B" lineBreakMode="tailTruncation" minimumFontSize="10" id="49" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES" textAlignment="center">
+                                <rect key="frame" x="208" y="192" width="132" height="125"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <constraints>
+                                    <constraint id="50" firstItem="49" firstAttribute="height" constant="150"/>
+                                    <constraint id="51" firstItem="49" firstAttribute="width" constant="150"/>
+                                </constraints>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint id="52" firstItem="49" firstAttribute="centerY" secondItem="48" secondAttribute="centerY"/>
+                            <constraint id="53" firstItem="48" firstAttribute="centerX" secondItem="49" secondAttribute="centerX"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="56" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="238" y="603"/>
+        </scene>
+    </scenes>
+</document>

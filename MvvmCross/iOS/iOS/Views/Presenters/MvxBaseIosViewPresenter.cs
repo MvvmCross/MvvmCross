@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
-    public class MvxBaseIosViewPresenter
-        : MvxViewPresenter, IMvxIosViewPresenter
+    public class MvxBaseIosViewPresenter : MvxViewPresenter, IMvxIosViewPresenter
     {
         public override void Show(MvxViewModelRequest request)
         {
@@ -22,7 +20,8 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if(HandlePresentationChange(hint))
+                return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

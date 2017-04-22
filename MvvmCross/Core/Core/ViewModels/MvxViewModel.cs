@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Core.ViewModels
 {
+    using MvvmCross.Platform.Exceptions;
+
     public abstract class MvxViewModel
         : MvxNavigatingObject
           , IMvxViewModel
@@ -19,8 +21,23 @@ namespace MvvmCross.Core.ViewModels
         {
             this.RequestedBy = MvxRequestedBy.Unknown;
         }
+		public MvxRequestedBy RequestedBy { get; set; }
 
-        public MvxRequestedBy RequestedBy { get; set; }
+		public virtual void Appearing()
+		{
+		}
+
+		public virtual void Appeared()
+		{
+		}
+
+		public virtual void Disappearing()
+		{
+		}
+
+		public virtual void Disappeared()
+		{
+		}
 
         public void Init(IMvxBundle parameters)
         {
@@ -33,6 +50,10 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual void Start()
+        {
+        }
+
+        public virtual void Destroy ()
         {
         }
 
@@ -61,9 +82,7 @@ namespace MvvmCross.Core.ViewModels
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
-                Mvx.Trace(
-                    "Could not resolve IMvxJsonConverter, it is going to be hard to initialize with custom object");
-                return;
+                throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
             var deserialized = serializer.DeserializeObject<TInit>(parameter);

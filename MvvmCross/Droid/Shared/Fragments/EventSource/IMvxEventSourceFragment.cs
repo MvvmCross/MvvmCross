@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
+using Android.Content;
 using Android.OS;
 using MvvmCross.Platform.Core;
 using System;
@@ -15,7 +15,7 @@ namespace MvvmCross.Droid.Shared.Fragments.EventSource
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {
         //Created sate
-        event EventHandler<MvxValueEventArgs<Activity>> AttachCalled;
+        event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
         event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
 

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="using:Xamarin.Forms"
+             x:Class="Example.Pages.FirstPage"
+             Title="First Page">
+
+    <!-- Jul 22 2015 Xamarin have not yet provided Device.OnPlatform property for W81. The below syntax works by putting "5, 0, 5, 95" into the default-->
+    <ContentPage.Padding Thickness="5, 0, 5, 95">
+        <OnPlatform x:TypeArguments="Thickness"
+                iOS="5, 20, 5, 0"
+                Android="5, 0, 5, 0"
+                WinPhone="5, 0, 5, 0"
+         />
+    </ContentPage.Padding>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Menu1" Text = "About" ClassId = "About" Order = "Primary" Command="{Binding ShowAboutPageCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource"
+                    WinPhone="Toolkit.Content/ApplicationBar.Add.png" 
+                />
+            </ToolbarItem.Icon>            
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+
+    <StackLayout Spacing="10" Orientation="Vertical">
+        <Label FontSize = "24" Text = "Enter your nickname in the box below" />
+        <Entry Placeholder="Who are you?" TextColor="Red" Text="{Binding YourNickname}" />
+        <Label FontSize="24" Text="{Binding Hello}" />
+    </StackLayout>
+	
+</ContentPage>

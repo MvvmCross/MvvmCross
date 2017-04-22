@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq.Expressions;
 using System.Reflection;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.ExpressionParse
 {
-    using System;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Platform;
-
     // This class was inspired and influenced by the excellent binding work
     // by https://github.com/reactiveui/ReactiveUI/
     // Inspiration used under Microsoft Public License Ms-PL
@@ -21,6 +19,12 @@ namespace MvvmCross.Binding.ExpressionParse
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
+            if (propertyPath.Body is MethodCallExpression 
+                && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
+            {
+                return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
+            }
+
             return this.Parse((LambdaExpression)propertyPath);
         }
 
@@ -74,6 +78,16 @@ namespace MvvmCross.Binding.ExpressionParse
             toReturn.PrependIndexed(argument.ToString());
             current = me.Object;
             return current;
+        }
+
+        private static IMvxParsedExpression ParseBindExtensionMethod(LambdaExpression propertyPath, object controlType)
+        {
+            var compiled = propertyPath.Compile();
+            var virtualPropertyName = compiled.DynamicInvoke(controlType) as string;
+
+            var toReturn = new MvxParsedExpression();
+            toReturn.PrependProperty(virtualPropertyName);
+            return toReturn;
         }
 
         private static Expression ConvertMemberAccessToConstant(Expression argument)

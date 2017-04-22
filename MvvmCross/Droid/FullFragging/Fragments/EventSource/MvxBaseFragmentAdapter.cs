@@ -11,6 +11,7 @@ using MvvmCross.Platform.Core;
 using System;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
+using Android.Content;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -70,7 +71,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         {
         }
 
-        protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Activity> e)
+        protected virtual void HandleAttachCalled(object sender, MvxValueEventArgs<Context> e)
         {
         }
 

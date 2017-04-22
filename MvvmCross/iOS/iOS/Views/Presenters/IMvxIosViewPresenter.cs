@@ -5,15 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.iOS.Views;
+
 namespace MvvmCross.iOS.Views.Presenters
 {
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.iOS.Views;
-
-    public interface IMvxIosViewPresenter
-        : IMvxViewPresenter
-        , IMvxCanCreateIosView
-        , IMvxIosModalHost
+    public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView, IMvxIosModalHost
     {
     }
 }

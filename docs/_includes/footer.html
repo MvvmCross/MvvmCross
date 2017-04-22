@@ -1,0 +1,40 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+          <a href="{{ "/blog" | relative_url }}"><h2 class="footer-heading"><b>Blog</b></h2></a>
+          <ul class="blog-list menu-no-bullet">
+                {% for post in site.posts limit:5 %}
+                    <li>
+                        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+                    </li>
+                {% endfor %}
+                <li>
+                  <a class="post-link last" href="{{ "/blog" | relative_url }}">Read More</a>
+                </li>
+            </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <h2 class="footer-heading"><b>Social</b></h2>
+        <ul class="social-media-list">
+          {% if site.github_username %}
+          <li>
+            {% include icon-github.html username=site.github_username %}
+          </li>
+          {% endif %}
+
+          {% if site.twitter_username %}
+          <li>
+            {% include icon-twitter.html username=site.twitter_username %}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</footer>

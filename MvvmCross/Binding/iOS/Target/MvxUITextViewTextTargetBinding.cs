@@ -46,7 +46,16 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            target.Changed += this.EditTextOnChanged;
+			var textStorage = target.LayoutManager?.TextStorage;
+
+			if (textStorage == null)
+			{ 
+			    MvxBindingTrace.Trace(MvxTraceLevel.Error,
+						  "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
+				return;
+			}
+
+            textStorage.DidProcessEditing += this.EditTextOnChanged;
             this._subscribed = true;
         }
 

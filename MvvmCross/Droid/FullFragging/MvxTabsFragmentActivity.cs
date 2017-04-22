@@ -82,12 +82,37 @@ namespace MvvmCross.Droid.FullFragging
             base.OnCreate(savedInstanceState);
 
             SetContentView(_layoutId);
+
+            var rootView = Window.DecorView.RootView;
+
+            EventHandler onGlobalLayout = null;
+            onGlobalLayout = (sender, args) =>
+            {
+                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+                ViewModel.Appeared();
+            };
+
+            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
             InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)
             {
                 _tabHost.SetCurrentTabByTag(savedInstanceState.GetString(SavedTabIndexStateKey));
             }
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel.Disappearing(); // we don't have anywhere to get this info
+            ViewModel.Disappeared();
         }
 
         protected override void OnSaveInstanceState(Bundle outState)

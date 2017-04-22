@@ -13,7 +13,8 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,7 @@
     <Compile Include="Caching\SerializableMvxCachedFragmentInfo.cs" />
     <Compile Include="Fragments\EventSource\IMvxEventSourceFragment.cs" />
     <Compile Include="Fragments\IMvxFragmentView.cs" />
+    <Compile Include="Fragments\MvxSharedFragmentExtensions.cs" />
     <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="MvxCreateViewParameters.cs" />
     <Compile Include="Presenter\FragmentHostRegistrationSettings.cs" />
