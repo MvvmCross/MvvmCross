@@ -7,11 +7,13 @@
 
 namespace MvvmCross.Binding.Droid.Views
 {
+    using Android.Views;
     using MvvmCross.Platform.Core;
 
     public interface IMvxListItemView
         : IMvxDataConsumer
     {
         int TemplateId { get; }
+        View Content { get; set; }
     }
 }

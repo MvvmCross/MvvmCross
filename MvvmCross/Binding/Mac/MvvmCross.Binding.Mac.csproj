@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxMacBindingBuilder.cs" />
+    <Compile Include="MvxMacPropertyBinding.cs" />
+    <Compile Include="MvxMacPropertyBindingExtensions.cs" />
     <Compile Include="Target\MvxNSViewVisibilityTargetBinding.cs" />
     <Compile Include="Target\MvxNSViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxNSSliderValueTargetBinding.cs" />
@@ -74,10 +76,8 @@
     <Compile Include="Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>

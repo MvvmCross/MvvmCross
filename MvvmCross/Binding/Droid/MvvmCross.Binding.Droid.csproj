@@ -13,13 +13,15 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <MandroidI18n />
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <AndroidStoreUncompressedFileExtensions />
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -38,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
@@ -75,6 +78,8 @@
     <Compile Include="Binders\ViewTypeResolvers\IMvxViewTypeResolver.cs" />
     <Compile Include="Binders\ViewTypeResolvers\MvxAxmlNameViewTypeResolver.cs" />
     <Compile Include="BindingContext\IMvxAndroidBindingContext.cs" />
+    <Compile Include="MvxAndroidPropertyBinding.cs" />
+    <Compile Include="MvxAndroidPropertyBindingExtensions.cs" />
     <Compile Include="MvxViewAssemblyBootstrapAction.cs" />
     <Compile Include="ResourceHelpers\IMvxAndroidBindingResource.cs" />
     <Compile Include="ResourceHelpers\IMvxAppResourceTypeFinder.cs" />
@@ -114,7 +119,6 @@
     <Compile Include="Views\IMvxAdapterWithChangedEvent.cs" />
     <Compile Include="Views\IMvxLayoutInflaterHolder.cs" />
     <Compile Include="Target\MvxViewLongClickBinding.cs" />
-    <Compile Include="Views\MvxBaseListItemView.cs" />
     <Compile Include="BindingContext\MvxAndroidBindingContext.cs" />
     <Compile Include="Views\MvxContextWrapper.cs" />
     <Compile Include="Views\MvxExpandableListAdapter.cs" />

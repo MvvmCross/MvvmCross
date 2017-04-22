@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Droid.Support.V4</id>
+		<version>$version$</version>
+		<title>MvvmCross Android Support - V4</title>
+		<description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v4 support for MvvmCross.</description>
+		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support v4</tags>
+		<dependencies>
+			<!-- Disable those as long as we don't have actual content in them
+			<dependency id="MvvmCross.Droid.Support.Compat" version="$version$"/>
+			<dependency id="MvvmCross.Droid.Support.Media.Compat" version="$version$"/>
+			-->
+			<dependency id="MvvmCross.Droid.Support.Fragment" version="[$version$]"/>
+			<dependency id="MvvmCross.Droid.Support.Core.UI" version="[$version$]"/>
+			<dependency id="MvvmCross.Droid.Support.Core.Utils" version="[$version$]"/>
+		</dependencies>
+	</metadata>
+	<files>
+	</files>
+</package>
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<d:MvxFormsApp 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   x:Class="PageRendererExample.PageRendererExampleApp"
+   xmlns:d="clr-namespace:MvvmCross.Forms.Presenter.Core;assembly=PageRendererExample">
+
+   <Application.Resources>
+        <ResourceDictionary>
+
+        <Color x:Key="textColor">White</Color>
+        <Color x:Key="labelBackgroundColor">#484D51</Color>
+
+        <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource textColor}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource labelBackgroundColor}" />
+        </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</d:MvxFormsApp>

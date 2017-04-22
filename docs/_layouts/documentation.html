@@ -1,0 +1,49 @@
+---
+layout: documentation_layout
+---
+
+<div class="documentation-menu">
+     {% include documentation-menu.html %}
+</div>
+
+<article class="documentation">
+
+  <header class="documentation-header">
+    <h1 class="documentation-title">{{ page.title | escape }}</h1>
+    <a class="documentation-edit button" href="{{site.github.repository_url}}/tree/master/docs/{{page.relative_path}}">Edit</a>
+  </header>
+
+  <div class="documentation-content">
+    {{content}}
+  </div>
+
+</article>
+
+<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
+<script>
+   $(document).ready(function (){
+
+     var scrollPosition = getParameterByName('scroll');
+     if(scrollPosition)
+      $(".documentation-menu").scrollTop(scrollPosition);
+
+     $('.menu-item').click(function(){
+        var scrollTop = $(".documentation-menu").scrollTop();
+        if(scrollTop > 0)
+          $(this).attr("href",this.href + "?scroll=" + $(".documentation-menu").scrollTop());
+     });
+
+     function getParameterByName(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+   });
+</script>

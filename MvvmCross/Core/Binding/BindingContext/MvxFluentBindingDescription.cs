@@ -10,9 +10,10 @@ namespace MvvmCross.Binding.BindingContext
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-
+    using MvvmCross.Binding.Binders;
     using MvvmCross.Binding.Bindings;
     using MvvmCross.Binding.ValueConverters;
+    using MvvmCross.Platform;
     using MvvmCross.Platform.Converters;
 
     public class MvxFluentBindingDescription<TTarget, TSource>
@@ -93,6 +94,15 @@ namespace MvvmCross.Binding.BindingContext
             this.SourceStepDescription.Converter = converter;
             this.SourceStepDescription.ConverterParameter = converterParameter;
             return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
+            where TValueConverter : IMvxValueConverter
+        {
+            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var converterName = filler.FindName(typeof(TValueConverter));
+
+            return WithConversion(converterName, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
@@ -234,6 +244,15 @@ namespace MvvmCross.Binding.BindingContext
             this.SourceStepDescription.Converter = converter;
             this.SourceStepDescription.ConverterParameter = converterParameter;
             return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
+            where TValueConverter : IMvxValueConverter
+        {
+            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var converterName = filler.FindName(typeof(TValueConverter));
+
+            return WithConversion(converterName, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)

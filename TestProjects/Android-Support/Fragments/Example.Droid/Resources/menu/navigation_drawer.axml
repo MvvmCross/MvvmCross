@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:local="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/nav_items">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_second_home"
+            android:title="Second host home" />
+    </group>
+
+    <item android:title="Examples">
+        <menu>
+       		<item
+	            android:id="@+id/nav_viewpager"
+	            android:title="ViewPager" />
+          <item
+	            android:id="@+id/nav_viewpager_state"
+	            android:title="ViewPagerState" />
+          <item
+	            android:id="@+id/nav_recyclerview"
+	            android:title="Recyclerview" />
+          <item
+              android:id="@+id/nav_recyclerview_multiitem"
+              android:title="RecyclerView MultiItem template"/>
+          <item
+	            android:id="@+id/nav_compose_message"
+	            android:title="Compose Message" />
+        </menu>
+    </item>
+
+	<group android:id="@+id/nav_footer">
+        <item
+            android:id="@+id/nav_settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_helpfeedback"
+            android:title="Help and Feedback" />
+    </group>
+
+</menu>
