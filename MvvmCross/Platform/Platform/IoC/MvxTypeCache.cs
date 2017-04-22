@@ -31,7 +31,8 @@ namespace MvvmCross.Platform.IoC
                 return;
 
             var viewType = typeof(TType);
-            var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType));
+            var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType)).Select(ti => ti.AsType()); 
+            //ti.AsType() is required only in PCL libs. Remove when this lib is converted to either a Shared project or a NetStandard project
 
             foreach (var type in query)
             {
