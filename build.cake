@@ -246,36 +246,48 @@ RunTarget(target);
 
 bool IsBranch(string branch)
 {
+	var buildEnvBranch = string.Empty;
+
 	if (isRunningOnAppVeyor)
-		return StringComparer.OrdinalIgnoreCase.Equals(branch, AppVeyor.Environment.Repository.Branch);
+		buildEnvBranch = AppVeyor.Environment.Repository.Branch;
 	
 	if (isRunningOnVSTS)
-		return StringComparer.OrdinalIgnoreCase.Equals(branch, TFBuild.Environment.Repository.Branch);
+		buildEnvBranch = TFBuild.Environment.Repository.Branch;
 
-	return false;
+	Information(string.Format("Checking branch: {0} against build branch: {1}", branch, buildEnvBranch));
+
+	return StringComparer.OrdinalIgnoreCase.Equals(branch, buildEnvBranch);
 }
 
 bool IsRepository(string repoName)
 {
+	var buildEnvRepoName = string.Empty;
+
 	if (isRunningOnAppVeyor)
-		return StringComparer.OrdinalIgnoreCase.Equals(repoName, AppVeyor.Environment.Repository.Name);
+		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
 	
 	if (isRunningOnVSTS)
-		return StringComparer.OrdinalIgnoreCase.Equals(repoName, TFBuild.Environment.Repository.RepoName);
+		buildEnvRepoName = TFBuild.Environment.Repository.RepoName;
+
+	Information(string.Format("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName));
 
 	return false;
 }
 
 bool IsTagged()
 {
+	var toReturn = false;
 	int commitsSinceTag = -1;
 	if (int.TryParse(versionInfo.CommitsSinceVersionSource, out commitsSinceTag))
 	{
 		// if tag is current commit this will be 0
-		if (commitsSinceTag != 0) return false;
+		if (commitsSinceTag == 0)
+			toReturn = true;
 	}
 
-	return true;
+	Information(string.Format("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn));
+
+	return toReturn;
 }
 
 Tuple<string, string> GetNugetKeyAndSource()
