@@ -136,7 +136,6 @@ Task("Package")
 		"MvvmCross.Droid.Support.V17.Leanback.nuspec",
 		"MvvmCross.Forms.Presenter.nuspec",
 		"MvvmCross.iOS.Support.nuspec",
-		"MvvmCross.iOS.Support.JASidePanels.nuspec",
 		"MvvmCross.iOS.Support.XamarinSidebar.nuspec",
 		"MvvmCross.Platform.nuspec",
 		"MvvmCross.Plugin.Accelerometer.nuspec",
