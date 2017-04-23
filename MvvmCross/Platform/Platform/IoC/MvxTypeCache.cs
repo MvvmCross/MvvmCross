@@ -33,20 +33,21 @@ namespace MvvmCross.Platform.IoC
                 return;
 
             var viewType = typeof(TType);
-            var query = from type in assembly.ExceptionSafeGetTypes()
-                        where viewType.IsAssignableFrom(type)
-                        select type;
+            var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType)).Select(ti => ti.AsType());
 
             foreach (var type in query)
             {
-                if (!string.IsNullOrEmpty(type.FullName))
+                var fullName = type.FullName;
+                if (!string.IsNullOrEmpty(fullName))
                 {
-                    this.FullNameCache[type.FullName] = type;
-                    this.LowerCaseFullNameCache[type.FullName.ToLowerInvariant()] = type;
+                    this.FullNameCache[fullName] = type;
+                    this.LowerCaseFullNameCache[fullName.ToLowerInvariant()] = type;
                 }
-                if (!string.IsNullOrEmpty(type.Name))
+
+                var name = type.Name;
+                if (!string.IsNullOrEmpty(name))
                 {
-                    this.NameCache[type.Name] = type;
+                    this.NameCache[name] = type;
                 }
             }
 
