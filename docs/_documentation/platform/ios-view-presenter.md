@@ -96,3 +96,7 @@ _attributeTypesToShowMethodDictionary.Add(
 
 4. Implement a method that takes care of the presentation mode (in the example above, `ShowMyCustomModeViewController`).
 5. Use your attribute over a view class. Ready!
+
+
+## Sample please!
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) iOS project to see this presenter in action.
