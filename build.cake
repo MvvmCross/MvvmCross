@@ -1,6 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
 #tool nuget:?package=vswhere
+#addin "Cake.Incubator"
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -25,7 +26,7 @@ Task("Version").Does(() => {
 	});
 
 	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
-	Information("VI:\t{0}", versionInfo.FullSemVer);
+	Information("GitVersion -> {0}", versionInfo.Dump());
 });
 
 Task("UpdateAppVeyorBuildNumber")
@@ -232,7 +233,10 @@ Task("PublishPackages")
 
 Task("Default")
 	.IsDependentOn("PublishPackages")
-	.Does(() => { });
+	.Does(() => 
+{ 
+	Information("Is Local Build: {0}", BuildSystem.IsLocalBuild);
+});
 
 RunTarget(target);
 
@@ -243,7 +247,7 @@ bool IsRepository(string repoName)
 	if (isRunningOnAppVeyor)
 		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
 
-	Information(string.Format("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName));
+	Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
 
 	// repo name on VSTS is empty :(
 	if (isRunningOnVSTS) return true;
@@ -262,7 +266,7 @@ bool IsTagged()
 			toReturn = true;
 	}
 
-	Information(string.Format("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn));
+	Information("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn);
 
 	return toReturn;
 }
