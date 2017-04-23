@@ -157,7 +157,6 @@ Task("Package")
 		"MvvmCross.Plugin.ResourceLoader.nuspec",
 		"MvvmCross.Plugin.ResxLocalization.nuspec",
 		"MvvmCross.Plugin.Share.nuspec",
-		"MvvmCross.Plugin.ThreadUtils.nuspec",
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
 		"MvvmCross.StarterPack.nuspec",
