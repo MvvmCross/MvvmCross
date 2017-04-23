@@ -9,7 +9,6 @@ var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
-var isRunningOnVSTS = TFBuild.IsRunningOnVSTS;
 
 Task("Clean").Does(() =>
 {
@@ -236,33 +235,23 @@ Task("PublishPackages")
 Task("Default")
 	.IsDependentOn("PublishPackages")
 	.Does(() => 
-{ 
-	Information("Is Local Build: {0}", BuildSystem.IsLocalBuild);
-	Information("Is AppVeyor Build: {0}", isRunningOnAppVeyor);
-	Information("Is VSTS Build: {0}", isRunningOnVSTS);
+{
 });
 
 RunTarget(target);
 
 bool IsRepository(string repoName)
 {
-	var buildEnvRepoName = string.Empty;
-
-	// repo name on VSTS is empty :(
-	if (isRunningOnVSTS) 
-	{
-		Information("IsRepository, returning true, on VSTS");
-		return true;
-	}
-
 	if (isRunningOnAppVeyor)
 	{
-		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
+		var buildEnvRepoName = AppVeyor.Environment.Repository.Name;
 		Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
 		return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
 	}
-
-	return false;
+	else
+	{
+		return true;
+	}
 }
 
 bool IsTagged()
@@ -290,7 +279,7 @@ Tuple<string, string> GetNugetKeyAndSource()
 		apiKeyKey = "NUGET_APIKEY";
 		sourceKey = "NUGET_SOURCE";
 	}
-	else if (isRunningOnVSTS)
+	else
 	{
 		if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop"))
 		{
