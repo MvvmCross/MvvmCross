@@ -2,8 +2,6 @@
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 namespace MvvmCross.Platform.IoC
 {
@@ -29,28 +27,29 @@ namespace MvvmCross.Platform.IoC
 
         public void AddAssembly(Assembly assembly)
         {
-            if (this.CachedAssemblies.ContainsKey(assembly))
+            if (CachedAssemblies.ContainsKey(assembly))
                 return;
 
             var viewType = typeof(TType);
-            var query = from type in assembly.ExceptionSafeGetTypes()
-                        where viewType.IsAssignableFrom(type)
-                        select type;
+            var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType)).Select(ti => ti.AsType()); 
+            //ti.AsType() is required only in PCL libs. Remove when this lib is converted to either a Shared project or a NetStandard project
 
             foreach (var type in query)
             {
-                if (!string.IsNullOrEmpty(type.FullName))
+                var fullName = type.FullName;
+                if (!string.IsNullOrEmpty(fullName))
                 {
-                    this.FullNameCache[type.FullName] = type;
-                    this.LowerCaseFullNameCache[type.FullName.ToLowerInvariant()] = type;
+                    FullNameCache[fullName] = type;
+                    LowerCaseFullNameCache[fullName.ToLowerInvariant()] = type;
                 }
-                if (!string.IsNullOrEmpty(type.Name))
+                var name = type.Name;
+                if (!string.IsNullOrEmpty(name))
                 {
-                    this.NameCache[type.Name] = type;
+                    NameCache[name] = type;
                 }
             }
 
-            this.CachedAssemblies[assembly] = true;
+            CachedAssemblies[assembly] = true;
         }
     }
 }
