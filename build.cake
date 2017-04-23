@@ -206,10 +206,12 @@ Task("PublishPackages")
     .IsDependentOn("Package")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
-    .WithCriteria(() => versionInfo.BranchName == "master" || versionInfo.BranchName == "develop")
+    .WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
     .Does (() =>
 {
-	if (versionInfo.BranchName == "master" && !IsTagged())
+	if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master") && !IsTagged())
     {
         Information("Packages will not be published as this release has not been tagged.");
         return;
@@ -236,6 +238,8 @@ Task("Default")
 	.Does(() => 
 { 
 	Information("Is Local Build: {0}", BuildSystem.IsLocalBuild);
+	Information("Is AppVeyor Build: {0}", isRunningOnAppVeyor);
+	Information("Is VSTS Build: {0}", isRunningOnVSTS);
 });
 
 RunTarget(target);
@@ -244,15 +248,21 @@ bool IsRepository(string repoName)
 {
 	var buildEnvRepoName = string.Empty;
 
-	if (isRunningOnAppVeyor)
-		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
-
-	Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
-
 	// repo name on VSTS is empty :(
-	if (isRunningOnVSTS) return true;
+	if (isRunningOnVSTS) 
+	{
+		Information("IsRepository, returning true, on VSTS");
+		return true;
+	}
 
-	return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
+	if (isRunningOnAppVeyor)
+	{
+		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
+		Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
+		return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
+	}
+
+	return false;
 }
 
 bool IsTagged()
@@ -282,12 +292,12 @@ Tuple<string, string> GetNugetKeyAndSource()
 	}
 	else if (isRunningOnVSTS)
 	{
-		if (versionInfo.BranchName == "develop")
+		if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop"))
 		{
 			apiKeyKey = "NUGET_APIKEY_DEVELOP";
 			sourceKey = "NUGET_SOURCE_DEVELOP";
 		}
-		else if (versionInfo.BranchName == "master")
+		else if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
 		{
 			apiKeyKey = "NUGET_APIKEY_MASTER";
 			sourceKey = "NUGET_SOURCE_MASTER";
