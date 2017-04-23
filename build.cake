@@ -7,12 +7,6 @@ var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 
-var local = BuildSystem.IsLocalBuild;
-var isDevelopBranch = IsBranch("develop");
-var isReleaseBranch = IsBranch("master");
-
-var isRepository = IsRepository("mvvmcross/mvvmcross");
-
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 var isRunningOnVSTS = TFBuild.IsRunningOnVSTS;
 
@@ -209,12 +203,12 @@ Task("Package")
 
 Task("PublishPackages")
     .IsDependentOn("Package")
-    .WithCriteria(() => !local)
-    .WithCriteria(() => isRepository)
-    .WithCriteria(() => isDevelopBranch || isReleaseBranch)
+    .WithCriteria(() => !BuildSystem.IsLocalBuild)
+    .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
+    .WithCriteria(() => versionInfo.BranchName == "master" || versionInfo.BranchName == "develop")
     .Does (() =>
 {
-	if (isReleaseBranch && !IsTagged())
+	if (versionInfo.BranchName == "master" && !IsTagged())
     {
         Information("Packages will not be published as this release has not been tagged.");
         return;
@@ -238,26 +232,9 @@ Task("PublishPackages")
 
 Task("Default")
 	.IsDependentOn("PublishPackages")
-	.Does(() => {
-	
-	});
+	.Does(() => { });
 
 RunTarget(target);
-
-bool IsBranch(string branch)
-{
-	var buildEnvBranch = string.Empty;
-
-	if (isRunningOnAppVeyor)
-		buildEnvBranch = AppVeyor.Environment.Repository.Branch;
-	
-	if (isRunningOnVSTS)
-		buildEnvBranch = TFBuild.Environment.Repository.Branch;
-
-	Information(string.Format("Checking branch: {0} against build branch: {1}", branch, buildEnvBranch));
-
-	return StringComparer.OrdinalIgnoreCase.Equals(branch, buildEnvBranch);
-}
 
 bool IsRepository(string repoName)
 {
@@ -265,13 +242,13 @@ bool IsRepository(string repoName)
 
 	if (isRunningOnAppVeyor)
 		buildEnvRepoName = AppVeyor.Environment.Repository.Name;
-	
-	if (isRunningOnVSTS)
-		buildEnvRepoName = TFBuild.Environment.Repository.RepoName;
 
 	Information(string.Format("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName));
 
-	return false;
+	// repo name on VSTS is empty :(
+	if (isRunningOnVSTS) return true;
+
+	return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
 }
 
 bool IsTagged()
@@ -301,12 +278,12 @@ Tuple<string, string> GetNugetKeyAndSource()
 	}
 	else if (isRunningOnVSTS)
 	{
-		if (isDevelopBranch)
+		if (versionInfo.BranchName == "develop")
 		{
 			apiKeyKey = "NUGET_APIKEY_DEVELOP";
 			sourceKey = "NUGET_SOURCE_DEVELOP";
 		}
-		else if (isReleaseBranch)
+		else if (versionInfo.BranchName == "master")
 		{
 			apiKeyKey = "NUGET_APIKEY_MASTER";
 			sourceKey = "NUGET_SOURCE_MASTER";
