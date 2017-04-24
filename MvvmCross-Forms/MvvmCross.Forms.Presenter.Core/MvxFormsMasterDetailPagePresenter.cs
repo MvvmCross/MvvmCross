@@ -107,7 +107,7 @@ namespace MvvmCross.Forms.Presenter.Core
                 Page rootContentPage = null;
                 if (masterDetailViewModel.RootContentPageViewModelType != null)
                 {
-                    var rootContentRequest = new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null, null);
+                    var rootContentRequest = new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null);
 
                     var rootContentViewModel = MvxPresenterHelpers.LoadViewModel(rootContentRequest);
                     rootContentPage = MvxPresenterHelpers.CreatePage(rootContentRequest);
@@ -168,6 +168,10 @@ namespace MvvmCross.Forms.Presenter.Core
         {
             var mainPage = Application.Current.MainPage as MasterDetailPage;            
             (mainPage.Master.BindingContext as MvxMasterDetailViewModel)?.RootContentPageActivated();
+        }
+
+        public override void Close(IMvxViewModel toClose)
+        {
         }
     }
 }

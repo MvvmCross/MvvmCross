@@ -21,7 +21,7 @@ namespace RoutingExample.Core.RoutingFacades
 
             var viewModelType = (new Random().Next() % 2 == 0) ? typeof(TestAViewModel) : typeof(TestBViewModel);
 
-            return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null, null));
+            return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null));
         }
     }
 }

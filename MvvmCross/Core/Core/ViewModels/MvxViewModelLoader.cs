@@ -52,7 +52,6 @@ namespace MvvmCross.Core.ViewModels
                     "Failed to reload a previously created created ViewModel for type {0} from locator {1} - check InnerException for more information",
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
-            viewModel.RequestedBy = request.RequestedBy;
             return viewModel;
         }
 
@@ -83,7 +82,6 @@ namespace MvvmCross.Core.ViewModels
                     "Failed to construct and initialize ViewModel for type {0} from locator {1} - check InnerException for more information",
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
-            viewModel.RequestedBy = request.RequestedBy;
             return viewModel;
         }
 

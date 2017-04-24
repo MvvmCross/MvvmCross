@@ -27,13 +27,5 @@ namespace RoutingExample.Droid
         {
             return new App();
         }
-
-        protected override MvvmCross.Core.Views.IMvxViewDispatcher CreateViewDispatcher()
-        {
-            var dispatcher = base.CreateViewDispatcher();
-            Mvx.RegisterSingleton<IMvxNavigationService>(() => new MvxNavigationService(dispatcher));
-            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
-            return dispatcher;
-        }
     }
 }

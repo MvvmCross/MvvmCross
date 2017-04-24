@@ -100,8 +100,6 @@
     <Compile Include="ViewModels\IMvxViewModel.cs" />
     <Compile Include="ViewModels\IMvxViewModelLoader.cs" />
     <Compile Include="ViewModels\IMvxViewModelLocator.cs" />
-    <Compile Include="ViewModels\MvxRequestedBy.cs" />
-    <Compile Include="ViewModels\MvxRequestedByType.cs" />
     <Compile Include="Views\IMvxView.cs" />
     <Compile Include="Views\IMvxViewDispatcher.cs" />
     <Compile Include="Views\IMvxViewFinder.cs" />
@@ -126,6 +124,9 @@
     <Compile Include="Navigation\MvxNavigationAttribute.cs" />
     <Compile Include="Navigation\MvxNavigationService.cs" />
     <Compile Include="Navigation\MvxNavigationExtensions.cs" />
+    <Compile Include="Navigation\EventArgs\NavigateEventArgs.cs" />
+    <Compile Include="Navigation\IMvxNavigationCache.cs" />
+    <Compile Include="Navigation\MvxNavigationCache.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -144,5 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Navigation\" />
+    <Folder Include="Navigation\EventArgs\" />
   </ItemGroup>
 </Project>
