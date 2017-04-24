@@ -36,5 +36,7 @@ namespace MvvmCross.Core.Views
         public abstract void Show(MvxViewModelRequest request);
 
         public abstract void ChangePresentation(MvxPresentationHint hint);
+
+        public abstract void Close(IMvxViewModel toClose);
     }
 }
