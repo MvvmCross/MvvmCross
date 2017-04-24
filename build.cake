@@ -207,7 +207,7 @@ Task("PublishPackages")
     .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
     .WithCriteria(() => 
 		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
-		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
+		IsMasterOrReleases())
     .Does (() =>
 {
 	if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master") && !IsTagged())
@@ -239,6 +239,17 @@ Task("Default")
 });
 
 RunTarget(target);
+
+bool IsMasterOrReleases()
+{
+	if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
+		return true;
+
+	if (versionInfo.BranchName.Contains("releases/"))
+		return true;
+
+	return false;
+}
 
 bool IsRepository(string repoName)
 {
@@ -286,7 +297,7 @@ Tuple<string, string> GetNugetKeyAndSource()
 			apiKeyKey = "NUGET_APIKEY_DEVELOP";
 			sourceKey = "NUGET_SOURCE_DEVELOP";
 		}
-		else if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
+		else if (IsMasterOrReleases())
 		{
 			apiKeyKey = "NUGET_APIKEY_MASTER";
 			sourceKey = "NUGET_SOURCE_MASTER";
