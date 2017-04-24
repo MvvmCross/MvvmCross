@@ -42,10 +42,6 @@
       <Project>{B81C8F9A-FE2C-4807-90BA-D34CB25D8CE6}</Project>
       <Name>MvvmCross.Plugins.Accelerometer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Bookmarks\MvvmCross.Plugins.Bookmarks\MvvmCross.Plugins.Bookmarks.csproj">
-      <Project>{0E34F411-7FCE-4ECE-AFAD-FF51136E30D4}</Project>
-      <Name>MvvmCross.Plugins.Bookmarks</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Color\MvvmCross.Plugins.Color\MvvmCross.Plugins.Color.csproj">
       <Project>{5C48D946-D083-4271-819E-DBFA2016853B}</Project>
       <Name>MvvmCross.Plugins.Color</Name>
@@ -97,10 +93,6 @@
     <ProjectReference Include="..\..\Share\MvvmCross.Plugins.Share\MvvmCross.Plugins.Share.csproj">
       <Project>{3787C5C0-7A05-44CD-A270-62D6AD03B5E3}</Project>
       <Name>MvvmCross.Plugins.Share</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SoundEffects\MvvmCross.Plugins.SoundEffects\MvvmCross.Plugins.SoundEffects.csproj">
-      <Project>{9270635A-BFB4-453D-A5D3-DA6FFC6005BE}</Project>
-      <Name>MvvmCross.Plugins.SoundEffects</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Visibility\MvvmCross.Plugins.Visibility\MvvmCross.Plugins.Visibility.csproj">
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
