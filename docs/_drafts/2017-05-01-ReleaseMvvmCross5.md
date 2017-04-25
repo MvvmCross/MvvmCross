@@ -1,5 +1,5 @@
 ---
-layout: draft/post
+layout: post
 title: MvvmCross 5.0 release!
 date:   2017-05-01 11:37:35 +0100
 categories: mvvmcross
@@ -7,9 +7,15 @@ categories: mvvmcross
 
 # Announcing MvvmCross 5.0!
 
+## Open Collective
+
+https://opencollective.com/mvvmcross
+
 ## Highlights
 
 ### Merge of repos
+
+* Enables CI
 
 ### New website with improved documentation
 
@@ -17,12 +23,34 @@ categories: mvvmcross
 
 ### Improved navigation
 
-### Event hooks
+### Lifecycle / Event hooks
 
 ### Recyclerview features
 
 ### Generic and typed bindings
 
-### Removal of WindowsPhone and Windows 8.x
+### Removal of WindowsPhone 8.x and Windows 8.x
+
+### Removal of deprecated plugins
+
+* AutoView 
+* CrossUI
+* Dialog
+* SQLite plugin
+* Bookmarks
+* SoundEffects
+* ThreadUtils
+* JASidePanels
+
+### Other improvements
+
+* tvOS support
+* Test projects in main repo
+* Migrate Test.Core to PCL 
+* Sidebar fixes
+
+### Bugfixes
 
 ## Changelog
+
+https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5.0.0
