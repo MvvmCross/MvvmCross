@@ -127,7 +127,7 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 
 Show your support for MvvmCross and get a sticker!
 
-[![sticker][stickermuleimg]][https://goo.gl/forms/zkNTcMLanxvX4Dxv1]
+[![sticker][stickermuleimg]](https://goo.gl/forms/zkNTcMLanxvX4Dxv1)
 
 
 [ninja]: http://i.imgur.com/eJ3ewEq.png "Ninja Plugin"
