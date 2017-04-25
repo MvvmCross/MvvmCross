@@ -246,7 +246,7 @@ namespace MvvmCross.iOS.Views.Presenters
             return true;
         }
 
-        public virtual void Close(IMvxViewModel toClose)
+        public override void Close(IMvxViewModel toClose)
         {
             // check if there is a modal presented
             if (_window.RootViewController.PresentedViewController != null && CloseModalViewController(toClose))
