@@ -37,13 +37,14 @@ This package contains the 'Core' libraries for MvvmCross
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\uap10.0" />
 		
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.*"
-			exclude="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.dll" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pdb" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10" />
         
