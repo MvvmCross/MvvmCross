@@ -62,6 +62,11 @@ namespace $rootnamespace$
         {
             radioButton.CheckedChange += (sender, args) => radioButton.Checked = args.IsChecked;
         }
+		
+		public void Include(RatingBar ratingBar)
+        {
+            ratingBar.RatingBarChange += (sender, args) => ratingBar.Rating = 0 + ratingBar.Rating;
+        }
 
         public void Include(Activity act)
         {
