@@ -19,43 +19,43 @@ This package contains the 'Core' libraries for MvvmCross
 	<files>		
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\portable-net45+win+wpa81+wp80" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\portable-net45+win+wpa81+wp80" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\dotnet" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\dotnet" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\dotnet" />
 
 		<!-- wpf -->
 		<file src="..\bin\Release\Mvx\Wpf\MvvmCross.Wpf.*" target="lib\net45" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\net45" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\net45" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\net45" />
 
 		<!-- uap -->
 		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp.*" target="lib\uap10.0" />
 		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp\Properties\MvvmCross.WindowsUWP.rd.xml" target="lib\uap10.0\MvvmCross.Uwp\Properties" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\uap10.0" />
 		
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.dll" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pdb" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pd*" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pd*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\Xamarin.iOS10" />
         
 		<!-- mac -->
 		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Mac.*" target="lib\Xamarin.Mac20" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.Mac20" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\Xamarin.Mac20" />
 		
 		<!-- tvOS -->
 		<file src="..\bin\Release\Mvx\tvOS\MvvmCross.tvOS.*" target="lib\Xamarin.tvOS" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.tvOS" />
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.tvOS" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pd*" target="lib\Xamarin.tvOS" />
 	</files>
 </package>
