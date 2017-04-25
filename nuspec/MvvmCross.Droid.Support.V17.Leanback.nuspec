@@ -25,7 +25,7 @@ This package contains Support v17 Leanback support for MvvmCross.
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.V17.Leanback.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Support.V17.Leanback.*" target="lib\MonoAndroid70" />
 	</files>
 </package>
 
