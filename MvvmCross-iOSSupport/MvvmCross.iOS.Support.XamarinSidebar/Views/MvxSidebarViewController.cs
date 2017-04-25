@@ -101,7 +101,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         {
             var viewModelType = GetBaseType(viewControllerType);
             var presenter = Mvx.Resolve<IMvxIosViewPresenter>();
-            return presenter.CreateViewControllerFor(new MvxViewModelRequest(viewModelType, null, null, null));
+            return presenter.CreateViewControllerFor(new MvxViewModelRequest(viewModelType, null, null));
         }
 
         protected virtual Type GetBaseType(Type type)
