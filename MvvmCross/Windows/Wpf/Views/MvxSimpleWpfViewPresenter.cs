@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Wpf.Views
 {
     using System.Windows;
@@ -23,6 +25,10 @@ namespace MvvmCross.Wpf.Views
         public override void Present(FrameworkElement frameworkElement)
         {
             this._contentControl.Content = frameworkElement;
+        }
+
+        public override void Close(IMvxViewModel toClose)
+        {
         }
     }
 }
