@@ -78,6 +78,9 @@ Task("GitLink")
 	.IsDependentOn("Build")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
 	var projectsToIgnore = new string[] {
@@ -129,6 +132,9 @@ Task("GitLink")
 
 Task("Package")
 	.IsDependentOn("GitLink")
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
 	var nugetSettings = new NuGetPackSettings {
