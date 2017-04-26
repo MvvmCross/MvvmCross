@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Style Guide
-category: Contribute
+category: Contributing
 ---
 
 This document provides an overview of how articles published on docs.mvvmcross.com should be formatted. You can actually use this file, itself, as a template when contributing articles.
