@@ -19,12 +19,11 @@ Task("Clean").Does(() =>
 
 GitVersion versionInfo = null;
 Task("Version").Does(() => {
-	GitVersion(new GitVersionSettings {
+	versionInfo = GitVersion(new GitVersionSettings {
 		UpdateAssemblyInfo = true,
 		OutputType = GitVersionOutput.BuildServer
 	});
 
-	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
 	Information("GitVersion -> {0}", versionInfo.Dump());
 });
 
