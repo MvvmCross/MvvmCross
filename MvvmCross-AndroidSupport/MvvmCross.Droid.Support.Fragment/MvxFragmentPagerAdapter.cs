@@ -42,7 +42,7 @@ namespace MvvmCross.Droid.Support.V4
             {
                 fragInfo.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
-                var request = new MvxViewModelRequest(fragInfo.ViewModelType, null, null, null);
+                var request = new MvxViewModelRequest(fragInfo.ViewModelType, null, null);
                 ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
             }
 

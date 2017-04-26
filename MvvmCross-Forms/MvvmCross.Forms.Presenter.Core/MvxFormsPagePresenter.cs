@@ -127,5 +127,9 @@ namespace MvvmCross.Forms.Presenter.Core
 
             return true;
         }
+
+        public override void Close(IMvxViewModel toClose)
+        {
+        }
     }
 }

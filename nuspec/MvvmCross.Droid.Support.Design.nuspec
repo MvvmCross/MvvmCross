@@ -18,7 +18,7 @@ This package contains Support v7 Design support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.Design.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Support.Design.*" target="lib\MonoAndroid70" />
 	</files>
 </package>
 
