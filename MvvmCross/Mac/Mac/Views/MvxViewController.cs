@@ -62,4 +62,29 @@ namespace MvvmCross.Mac.Views
 
         public IMvxBindingContext BindingContext { get; set; }
     }
+
+    public class MvxViewController<TViewModel>
+        : MvxViewController
+          , IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public MvxViewController()
+        {
+        }
+
+        public MvxViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected MvxViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
+    }
 }

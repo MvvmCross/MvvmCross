@@ -9,7 +9,6 @@
 
 #endregion Copyright
 
-
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -22,5 +21,11 @@ namespace MvvmCross.Mac.Views
             , IMvxBindingContextOwner
     {
         MvxViewModelRequest Request { get; set; }
+    }
+
+    public interface IMvxMacView<TViewModel>
+        : IMvxMacView
+        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
     }
 }
