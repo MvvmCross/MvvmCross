@@ -122,9 +122,11 @@ Task("GitLink")
 		"playground.ios"
 	};
 
-	GitLink(sln.GetDirectory(), 
+	GitLink("./", 
 		new GitLinkSettings {
 			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
+			Configuration = "Release",
+			SolutionFileName = "MvvmCross_All.sln",
 			ArgumentCustomization = args => args.Append("-ignore " + string.Join(",", projectsToIgnore))
 		});
 });
