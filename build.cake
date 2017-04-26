@@ -21,7 +21,7 @@ GitVersion versionInfo = null;
 Task("Version").Does(() => {
 	versionInfo = GitVersion(new GitVersionSettings {
 		UpdateAssemblyInfo = true,
-		OutputType = GitVersionOutput.BuildServer
+		OutputType = GitVersionOutput.Json
 	});
 
 	Information("GitVersion -> {0}", versionInfo.Dump());
