@@ -4,36 +4,32 @@ using MvvmCross.Core.Platform;
 
 namespace MvvmCross.Mac.Platform
 {
-    public class MvxApplicationDelegate : NSApplicationDelegate
-                                          , IMvxLifetime
+    public class MvxApplicationDelegate : NSApplicationDelegate, IMvxLifetime
     {
-#warning Removed this lifetime functionality....
-        /*
-        public override void WillEnterForeground (NSApplication application)
+        public override void WillBecomeActive(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
         }
 
-        public override void DidEnterBackground (NSApplication application)
+        public override void DidResignActive(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
         }
 
-        public override void WillTerminate (NSApplication application)
+        public override void WillTerminate(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
         }
 
-        public override void FinishedLaunching (NSApplication application)
+        public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
         }
-		*/
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
-            var handler = LifetimeChanged;
-            if (handler != null)
+            var handler = this.LifetimeChanged;
+            if(handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
         }
 
