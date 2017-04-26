@@ -52,7 +52,7 @@ namespace MvvmCross.Console.Views
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public void Close(IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
             var currentView = Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView;
 

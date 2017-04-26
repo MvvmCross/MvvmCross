@@ -1,20 +1,14 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
 #tool nuget:?package=vswhere
+#addin "Cake.Incubator"
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 
-var local = BuildSystem.IsLocalBuild;
-var isDevelopBranch = StringComparer.OrdinalIgnoreCase.Equals("develop", AppVeyor.Environment.Repository.Branch);
-var isReleaseBranch = StringComparer.OrdinalIgnoreCase.Equals("master", AppVeyor.Environment.Repository.Branch);
-var isTagged = AppVeyor.Environment.Repository.Tag.IsTag;
-
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
-var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
-var isRepository = StringComparer.OrdinalIgnoreCase.Equals("mvvmcross/mvvmcross", AppVeyor.Environment.Repository.Name);
 
 Task("Clean").Does(() =>
 {
@@ -25,13 +19,12 @@ Task("Clean").Does(() =>
 
 GitVersion versionInfo = null;
 Task("Version").Does(() => {
-	GitVersion(new GitVersionSettings {
+	versionInfo = GitVersion(new GitVersionSettings {
 		UpdateAssemblyInfo = true,
-		OutputType = GitVersionOutput.BuildServer
+		OutputType = GitVersionOutput.Json
 	});
 
-	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
-	Information("VI:\t{0}", versionInfo.FullSemVer);
+	Information("GitVersion -> {0}", versionInfo.Dump());
 });
 
 Task("UpdateAppVeyorBuildNumber")
@@ -84,17 +77,63 @@ Task("GitLink")
 	.IsDependentOn("Build")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
+	var projectsToIgnore = new string[] {
+		"MasterDetailExample.Core",
+		"MasterDetailExample.Droid",
+		"MasterDetailExample.iOS",
+		"MasterDetailExample.UWP",
+		"PageRendererExample.Core",
+		"PageRendererExample.Droid",
+		"PageRendererExample.iOS",
+		"PageRendererExample.WindowsUWP",
+		"MvvmCross.iOS.Support.ExpandableTableView.Core",
+		"MvvmCross.iOS.Support.ExpandableTableView.iOS",
+		"MvvmCross.iOS.Support.JASidePanelsSample.Core",
+		"MvvmCross.iOS.Support.JASidePanelsSample.iOS",
+		"MvvmCross.iOS.Support.Tabs.Core",
+		"MvvmCross.iOS.Support.Tabs.iOS",
+		"MvvmCross.iOS.Support.XamarinSidebarSample.Core",
+		"MvvmCross.iOS.Support.XamarinSidebarSample.iOS",
+		"mvvmcross.codeanalysis.vsix",
+		"example",
+		"example.android",
+		"example.ios",
+		"example.windowsphone",
+		"example.core",
+		"example.droid",
+		"Example.W81",
+		"Eventhooks.Core",
+		"Eventhooks.Droid",
+		"Eventhooks.iOS",
+		"Eventhooks.Uwp",
+		"Eventhooks.Wpf",
+		"RoutingExample.Core",
+		"RoutingExample.iOS",
+		"RoutingExample.Droid",
+		"MvvmCross.TestProjects.CustomBinding.Core",
+		"MvvmCross.TestProjects.CustomBinding.iOS",
+		"MvvmCross.TestProjects.CustomBinding.Droid",
+		"playground",
+		"playground.ios"
+	};
+
 	GitLink(sln.GetDirectory(), 
 		new GitLinkSettings {
 			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
-			ArgumentCustomization = args => args.Append("-ignore MasterDetailExample.Core,MasterDetailExample.Droid,MasterDetailExample.iOS,MasterDetailExample.UWP,PageRendererExample.Core,PageRendererExample.Droid,PageRendererExample.iOS,PageRendererExample.WindowsUWP,MvvmCross.iOS.Support.ExpandableTableView.Core,MvvmCross.iOS.Support.ExpandableTableView.iOS,MvvmCross.iOS.Support.JASidePanelsSample.Core,MvvmCross.iOS.Support.JASidePanelsSample.iOS,MvvmCross.iOS.Support.Tabs.Core,MvvmCross.iOS.Support.Tabs.iOS,MvvmCross.iOS.Support.XamarinSidebarSample.Core,MvvmCross.iOS.Support.XamarinSidebarSample.iOS,mvvmcross.codeanalysis.vsix,example,example.android,example.ios,example.windowsphone,example.core,example.droid,Example.W81,Eventhooks.Core,Eventhooks.Droid,Eventhooks.iOS,Eventhooks.Uwp,Eventhooks.Wpf,RoutingExample.Core,RoutingExample.iOS,RoutingExample.Droid,MvvmCross.TestProjects.CustomBinding.Core,MvvmCross.TestProjects.CustomBinding.iOS,MvvmCross.TestProjects.CustomBinding.Droid")
+			ArgumentCustomization = args => args.Append("-ignore " + string.Join(",", projectsToIgnore))
 		});
 });
 
 Task("Package")
 	.IsDependentOn("GitLink")
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
 	var nugetSettings = new NuGetPackSettings {
@@ -112,8 +151,6 @@ Task("Package")
 		Verbosity = NuGetVerbosity.Detailed,
 		BasePath = "./nuspec"
 	};
-
-	EnsureDirectoryExists(outputDir);
 
 	var nuspecs = new List<string> {
 		"MvvmCross.nuspec",
@@ -136,7 +173,6 @@ Task("Package")
 		"MvvmCross.Droid.Support.V17.Leanback.nuspec",
 		"MvvmCross.Forms.Presenter.nuspec",
 		"MvvmCross.iOS.Support.nuspec",
-		"MvvmCross.iOS.Support.JASidePanels.nuspec",
 		"MvvmCross.iOS.Support.XamarinSidebar.nuspec",
 		"MvvmCross.Platform.nuspec",
 		"MvvmCross.Plugin.Accelerometer.nuspec",
@@ -158,7 +194,6 @@ Task("Package")
 		"MvvmCross.Plugin.ResourceLoader.nuspec",
 		"MvvmCross.Plugin.ResxLocalization.nuspec",
 		"MvvmCross.Plugin.Share.nuspec",
-		"MvvmCross.Plugin.ThreadUtils.nuspec",
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
 		"MvvmCross.StarterPack.nuspec",
@@ -173,30 +208,23 @@ Task("Package")
 
 Task("PublishPackages")
     .IsDependentOn("Package")
-    .WithCriteria(() => !local)
-    .WithCriteria(() => !isPullRequest)
-    .WithCriteria(() => isRepository)
-    .WithCriteria(() => isDevelopBranch || isReleaseBranch)
+    .WithCriteria(() => !BuildSystem.IsLocalBuild)
+    .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
+    .WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
     .Does (() =>
 {
-	if (isReleaseBranch && !isTagged)
+	if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master") && !IsTagged())
     {
         Information("Packages will not be published as this release has not been tagged.");
         return;
     }
 
 	// Resolve the API key.
-    var apiKey = EnvironmentVariable("NUGET_APIKEY");
-    if (string.IsNullOrEmpty(apiKey))
-    {
-        throw new Exception("The NUGET_APIKEY environment variable is not defined.");
-    }
-
-    var source = EnvironmentVariable("NUGET_SOURCE");
-    if (string.IsNullOrEmpty(source))
-    {
-        throw new Exception("The NUGET_SOURCE environment variable is not defined.");
-    }
+	var nugetKeySource = GetNugetKeyAndSource();
+	var apiKey = nugetKeySource.Item1;
+	var source = nugetKeySource.Item2;
 
 	var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
@@ -209,11 +237,85 @@ Task("PublishPackages")
 	}
 });
 
-
 Task("Default")
 	.IsDependentOn("PublishPackages")
-	.Does(() => {
-	
-	});
+	.Does(() => 
+{
+});
 
 RunTarget(target);
+
+bool IsMasterOrReleases()
+{
+	if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
+		return true;
+
+	if (versionInfo.BranchName.Contains("releases/"))
+		return true;
+
+	return false;
+}
+
+bool IsRepository(string repoName)
+{
+	if (isRunningOnAppVeyor)
+	{
+		var buildEnvRepoName = AppVeyor.Environment.Repository.Name;
+		Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
+		return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool IsTagged()
+{
+	var toReturn = false;
+	int commitsSinceTag = -1;
+	if (int.TryParse(versionInfo.CommitsSinceVersionSource, out commitsSinceTag))
+	{
+		// if tag is current commit this will be 0
+		if (commitsSinceTag == 0)
+			toReturn = true;
+	}
+
+	Information("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn);
+
+	return toReturn;
+}
+
+Tuple<string, string> GetNugetKeyAndSource()
+{
+	var apiKeyKey = string.Empty;
+	var sourceKey = string.Empty;
+	if (isRunningOnAppVeyor)
+	{
+		apiKeyKey = "NUGET_APIKEY";
+		sourceKey = "NUGET_SOURCE";
+	}
+	else
+	{
+		if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop"))
+		{
+			apiKeyKey = "NUGET_APIKEY_DEVELOP";
+			sourceKey = "NUGET_SOURCE_DEVELOP";
+		}
+		else if (IsMasterOrReleases())
+		{
+			apiKeyKey = "NUGET_APIKEY_MASTER";
+			sourceKey = "NUGET_SOURCE_MASTER";
+		}
+	}
+
+	var apiKey = EnvironmentVariable(apiKeyKey);
+	if (string.IsNullOrEmpty(apiKey))
+		throw new Exception(string.Format("The {0} environment variable is not defined.", apiKeyKey));
+
+	var source = EnvironmentVariable(sourceKey);
+	if (string.IsNullOrEmpty(source))
+		throw new Exception(string.Format("The {0} environment variable is not defined.", sourceKey));
+
+	return Tuple.Create(apiKey, source);
+}

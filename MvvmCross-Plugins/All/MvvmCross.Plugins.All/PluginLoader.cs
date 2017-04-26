@@ -24,7 +24,6 @@ namespace MvvmCross.Plugins.All
 
         private static readonly Type[] AllPluginTypes = {
                 typeof(MvvmCross.Plugins.Accelerometer.PluginLoader),
-                typeof(MvvmCross.Plugins.Bookmarks.PluginLoader),
                 typeof(MvvmCross.Plugins.Color.PluginLoader),
                 typeof(MvvmCross.Plugins.DownloadCache.PluginLoader),
                 typeof(MvvmCross.Plugins.Email.PluginLoader),
@@ -39,14 +38,13 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.PictureChooser.PluginLoader),
                 typeof(MvvmCross.Plugins.ResourceLoader.PluginLoader),
                 typeof(MvvmCross.Plugins.Share.PluginLoader),
-                typeof(MvvmCross.Plugins.SoundEffects.PluginLoader),
                 typeof(MvvmCross.Plugins.Visibility.PluginLoader),
                 typeof(MvvmCross.Plugins.WebBrowser.PluginLoader)
             };
 
         public void EnsureLoaded()
         {
-            if(_loaded)
+            if (_loaded)
                 return;
 
             _loaded = true;
@@ -57,9 +55,9 @@ namespace MvvmCross.Plugins.All
             var failed = new List<Type>();
 
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            foreach(var type in AllPluginTypes)
+            foreach (var type in AllPluginTypes)
             {
-                if(OptionalLoadPlatformAdaption(manager, type))
+                if (OptionalLoadPlatformAdaption(manager, type))
                 {
                     loaded.Add(type);
                 }
@@ -80,7 +78,7 @@ namespace MvvmCross.Plugins.All
                 manager.EnsurePluginLoaded(type);
                 return true;
             }
-            catch(Exception exception /*Pokemon - catch them all*/)
+            catch (Exception exception /*Pokemon - catch them all*/)
             {
                 MvxTrace.Trace("Exception loading {0} was {1}", type.FullName, exception.ToLongString());
                 return false;
