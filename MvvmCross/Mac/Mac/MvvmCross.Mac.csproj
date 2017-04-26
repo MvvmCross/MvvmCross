@@ -76,6 +76,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtensionMethods\MvxMacDateTimeExtensionMethods.cs" />
     <Compile Include="Views\IMvxMacViewsContainer.cs" />
+    <Compile Include="Views\MvxWindowController.cs" />
+    <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
