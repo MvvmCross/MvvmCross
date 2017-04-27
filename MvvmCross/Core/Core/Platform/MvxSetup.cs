@@ -11,7 +11,7 @@ namespace MvvmCross.Core.Platform
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
+    using MvvmCross.Core.Navigation;
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
     using MvvmCross.Platform;
@@ -261,6 +261,15 @@ namespace MvvmCross.Core.Platform
             var dispatcher = this.CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            InitializeNavigationService(dispatcher);
+        }
+
+        protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewDispatcher dispatcher)
+        {
+            var navigationService = new MvxNavigationService(dispatcher);
+            Mvx.RegisterSingleton<IMvxNavigationService>(navigationService);
+            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
+            return navigationService;
         }
 
         protected virtual IEnumerable<Assembly> GetViewAssemblies()

@@ -47,24 +47,6 @@
     <Compile Include="Views\MvxExpandableTableViewSource.cs" />
     <Compile Include="Views\Extensions.cs" />
     <Compile Include="Views\MvxBaseViewController.cs" />
-    <Compile Include="SidePanels\MvxActivePanelPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxBaseSplitViewController.cs" />
-    <Compile Include="SidePanels\MvxPanelEnum.cs" />
-    <Compile Include="SidePanels\MvxPanelHintType.cs" />
-    <Compile Include="SidePanels\MvxPanelPresentationAttribute.cs" />
-    <Compile Include="SidePanels\MvxPanelResetRootPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxSplitViewBehaviour.cs" />
-    <Compile Include="SidePanels\MvxSplitViewControllerHost.cs" />
-    <Compile Include="SidePanels\MvxPanelPushViewPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxPanelPopToRootPresentationHint.cs" />
-    <Compile Include="SidePanels\MvxPanelPresentationHint.cs" />
-    <Compile Include="SidePanels\IMvxSideMenu.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\IMvxTabBarPresenter.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\IMvxTabBarViewController.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\MvxTabPresentationAttribute.cs" />
-    <Compile Include="Presenters\MvxTabBarPresenter\MvxTabsViewPresenter.cs" />
-    <Compile Include="Views\MvxBaseTabBarViewController.cs" />
-    <Compile Include="Views\MvxExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

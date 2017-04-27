@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using UIKit;
 using SidebarNavigation;
+using MvvmCross.iOS.Support.XamarinSidebar.Views;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
 {
     public static class ViewControllerExtensions
     {
-        public static void ShowMenuButton(this UIViewController viewController, MvxSidebarPanelController sidebarPanelController)
+        public static void ShowMenuButton(this UIViewController viewController, MvxSidebarViewController sidebarPanelController)
         {
             UIBarButtonItem barButtonItem;
 
@@ -14,7 +15,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
             viewController.NavigationItem.SetLeftBarButtonItem(null, true);
             viewController.NavigationItem.SetRightBarButtonItem(null, true);
 
-            if (sidebarPanelController.HasLeftMenu)
+            if(sidebarPanelController.HasLeftMenu)
             {
                 var mvxSidebarMenu = sidebarPanelController.LeftSidebarController.MenuAreaController as IMvxSidebarMenu;
                 sidebarPanelController.LeftSidebarController.MenuLocation = MenuLocations.Left;
@@ -23,7 +24,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
                 viewController.NavigationItem.SetLeftBarButtonItem(barButtonItem, true);
             }
 
-            if (sidebarPanelController.HasRightMenu)
+            if(sidebarPanelController.HasRightMenu)
             {
                 var mvxSidebarMenu = sidebarPanelController.RightSidebarController.MenuAreaController as IMvxSidebarMenu;
                 sidebarPanelController.RightSidebarController.MenuLocation = MenuLocations.Right;
@@ -38,7 +39,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
         {
             UIBarButtonItem barButtonItem;
 
-            if (mvxSidebarMenu != null)
+            if(mvxSidebarMenu != null)
             {
                 barButtonItem = new UIBarButtonItem(mvxSidebarMenu.MenuButtonImage
                     , UIBarButtonItemStyle.Plain

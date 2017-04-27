@@ -4,13 +4,15 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using RoutingExample.Core.ViewModels;
 using UIKit;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace RoutingExample.iOS
 {
     [MvxFromStoryboard("Main")]
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class MainViewController : MvxViewController<MainViewModel>
     {
-        public MainViewController (IntPtr handle) : base (handle)
+        public MainViewController(IntPtr handle) : base(handle)
         {
         }
 
