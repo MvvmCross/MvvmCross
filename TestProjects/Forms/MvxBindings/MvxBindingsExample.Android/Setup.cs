@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using MvvmCross.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Platform;
@@ -6,6 +7,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Presenter.Droid;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Forms.Presenter.Binding;
 
 namespace MvxBindingsExample.Droid
 {
@@ -33,5 +35,16 @@ namespace MvxBindingsExample.Droid
 
             return presenter;
         }
+        protected override void InitializeBindingBuilder()
+        {
+            MvxFormsBindingBuilder bindingBuilder = new MvxFormsBindingBuilder();
+            this.RegisterBindingBuilderCallbacks();
+            bindingBuilder.DoRegistration();
+        }
+
+/*        protected override MvxBindingBuilder CreateBindingBuilder()
+        {
+            return new MvxFormsBindingBuilder();
+        }*/
     }
 }
