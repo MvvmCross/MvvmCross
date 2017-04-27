@@ -19,17 +19,23 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		private LocationRequest _request;
 
 		private readonly MvxAndroidFusedLocationWatcher _owner;
+        private readonly Context _context;
 
 		public FusedLocationHandler (MvxAndroidFusedLocationWatcher owner, Context context)
 		{
 			_owner = owner;
-			EnsureGooglePlayServiceAvailable (context);
-			Initialize (context);
+            _context = context;
 		}
 
 		public void Start (MvxLocationOptions options)
 		{
-			_request = CreateLocationRequest (options);
+            if (_client == null)
+            {
+                EnsureGooglePlayServiceAvailable(_context);
+                Initialize(_context);
+            }
+            
+            _request = CreateLocationRequest (options);
 			_client.Connect ();
 		}
 
