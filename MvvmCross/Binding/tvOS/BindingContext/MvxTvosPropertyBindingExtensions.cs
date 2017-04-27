@@ -5,9 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.tvOS;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxTvosPropertyBindingExtensions
     {

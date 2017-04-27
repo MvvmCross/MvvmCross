@@ -6,8 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using AppKit;
+using MvvmCross.Binding.Mac;
 
-namespace MvvmCross.Binding.Mac
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxMacPropertyBindingExtensions
     {

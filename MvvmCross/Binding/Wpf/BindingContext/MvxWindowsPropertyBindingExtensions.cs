@@ -5,9 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Windows.UI.Xaml;
+using System.Windows;
 
-namespace MvvmCross.Binding.Uwp
+#if WINDOWS_COMMON
+using MvvmCross.BindingEx.WindowsCommon;
+#endif
+
+#if WINDOWS_WPF
+using MvvmCross.BindingEx.Wpf;
+#endif
+
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxWindowsPropertyBindingExtensions
     {
