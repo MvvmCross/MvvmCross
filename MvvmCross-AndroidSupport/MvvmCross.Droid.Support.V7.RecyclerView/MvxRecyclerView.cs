@@ -112,7 +112,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     var existingHeaderFooterAdapter = existing as IMvxHeaderFooterRecyclerViewAdapter;
                     var newHeaderFooterAdapter = value as IMvxHeaderFooterRecyclerViewAdapter;
 
-                    if (existingGroupableAdapter != null && newHeaderFooterAdapter != null)
+                    if (existingHeaderFooterAdapter != null && newHeaderFooterAdapter != null)
                     {
                         newHeaderFooterAdapter.FooterClickCommand = existingHeaderFooterAdapter.FooterClickCommand;
                         newHeaderFooterAdapter.HeaderClickCommand = existingHeaderFooterAdapter.HeaderClickCommand;
