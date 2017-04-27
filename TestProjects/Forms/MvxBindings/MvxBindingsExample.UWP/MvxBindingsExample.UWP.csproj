@@ -100,6 +100,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -155,6 +156,14 @@
     <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Binding\MvvmCross.Forms.Presenter.Binding.csproj">
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>MvvmCross.Forms.Presenter.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvxBindingsExample\MvxBindingsExample.csproj">
       <Project>{52d8241e-227b-44e5-8150-c6d8ffd41e59}</Project>
