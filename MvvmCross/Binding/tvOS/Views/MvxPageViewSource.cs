@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.tvOS.Views
 		protected MvxPageViewSource(IntPtr handle)
             : base(handle)
         {
-			Mvx.Warning("TableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+			Mvx.Warning("PageViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
 		}
 
 		protected override void Dispose(bool disposing)
