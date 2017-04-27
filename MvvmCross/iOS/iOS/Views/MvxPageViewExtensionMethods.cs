@@ -35,8 +35,7 @@ namespace MvvmCross.iOS.Views
 
         private static UIViewController CreateViewControllerImpl(this MvxPageViewSource self, Type viewModelType, IMvxBundle parameterBundle, int pageIndex)
         {
-            var by = new MvxRequestedBy(MvxRequestedByType.Other, $"PageView");
-            var request = new MvxViewModelRequest(viewModelType, parameterBundle, null, by);
+            var request = new MvxViewModelRequest(viewModelType, parameterBundle, null);
             var viewController = (self.PageView as IMvxIosView)?.CreateViewControllerFor(request) as UIViewController;
 
             if (pageIndex >= 0)
