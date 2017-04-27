@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<core:MvxContentPage x:TypeArguments="viewModels:MainViewModel"
+                     xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:core="clr-namespace:MvvmCross.Forms.Presenter.Core;assembly=MvvmCross.Forms.Presenter.Core"
+                     xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
+                     xmlns:binding="clr-namespace:MvvmCross.Forms.Presenter.Binding;assembly=MvvmCross.Forms.Presenter.Binding"
+                     x:Class="MvxBindingsExample.Pages.MainPage">
+
+	<Label binding:Bi.nd="Text BindableText"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+
+</core:MvxContentPage>
