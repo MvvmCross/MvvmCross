@@ -9,6 +9,7 @@ using System;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 
@@ -19,6 +20,7 @@ namespace MvvmCross.Forms.Presenter.Binding
         private readonly string _targetName;
         private readonly BindableProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
+        private readonly TypeConverter _typeConverter;
 
         public MvxBindablePropertyTargetBinding(object target, string targetName, BindableProperty targetBindableProperty, Type actualPropertyType)
             : base(target)
@@ -26,18 +28,19 @@ namespace MvvmCross.Forms.Presenter.Binding
             _targetDependencyProperty = targetBindableProperty;
             _actualPropertyType = actualPropertyType;
             _targetName = targetName;
+            _typeConverter = _actualPropertyType.TypeConverter();
         }
 
         public override void SubscribeToEvents()
         {
-            var frameworkElement = Target as Element;
-            if (frameworkElement == null)
+            var formsElement = Target as Element;
+            if (formsElement == null)
                 return;
 
             var listenerBinding = new Xamarin.Forms.Binding
             {
                 Path = _targetName,
-                Source = frameworkElement
+                Source = formsElement
             };
             var attachedProperty = BindableProperty.CreateAttached("ListenAttached" + _targetName + Guid.NewGuid()
                                                                                                         .ToString("N"),
@@ -47,6 +50,7 @@ namespace MvvmCross.Forms.Presenter.Binding
                                                                    BindingMode.OneWay,
                                                                    null,
                                                                    (s, o, n) => FireValueChanged(n));
+            formsElement.SetBinding(attachedProperty, listenerBinding);
         }
 
         public override Type TargetType => _actualPropertyType;
@@ -81,7 +85,18 @@ namespace MvvmCross.Forms.Presenter.Binding
 
         protected override object MakeSafeValue(object value)
         {
-            return _actualPropertyType.MakeSafeValue(value);
+            if (_actualPropertyType.IsInstanceOfType(value))
+                return value;
+
+            if (_typeConverter == null
+                || value == null)
+                // TODO - is this correct? Do we need to do more here? See #297
+                return _actualPropertyType.MakeSafeValue(value);
+
+            if (!_typeConverter.CanConvertFrom(value.GetType()))
+                return null; // TODO - is this correct? Do we need to do more here? See #297
+
+            return _typeConverter.ConvertFrom(value);
         }
     }
 }

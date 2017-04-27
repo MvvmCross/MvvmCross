@@ -42,8 +42,8 @@ namespace MvvmCross.Forms.Presenter.Binding
                 return false;
             }
 
-            var dependencyProperty = target.GetType().FindBindableProperty(targetName);
-            if (dependencyProperty == null)
+            var bindableProperty = target.GetType().FindBindableProperty(targetName);
+            if (bindableProperty == null)
             {
                 binding = null;
                 return false;
@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Presenter.Binding
             var actualProperty = target.GetType().FindActualProperty(targetName);
             var actualPropertyType = actualProperty?.PropertyType ?? typeof(object);
 
-            binding = new MvxBindablePropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
+            binding = new MvxBindablePropertyTargetBinding(target, targetName, bindableProperty, actualPropertyType);
             return true;
         }
     }
