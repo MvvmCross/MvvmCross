@@ -152,6 +152,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Binding\MvvmCross.Forms.Presenter.Binding.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>MvvmCross.Forms.Presenter.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvxBindingsExample\MvxBindingsExample.csproj">
       <Project>{52d8241e-227b-44e5-8150-c6d8ffd41e59}</Project>
       <Name>MvxBindingsExample</Name>

@@ -6,5 +6,10 @@
         {
             InitializeComponent();
         }
+
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+        }
     }
 }
