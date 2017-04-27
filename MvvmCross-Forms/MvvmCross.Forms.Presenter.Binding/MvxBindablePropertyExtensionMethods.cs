@@ -6,23 +6,41 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Linq;
 using System.Reflection;
+using MvvmCross.Platform;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Binding
 {
     public static class MvxBindablePropertyExtensionMethods
     {
+        public static TypeConverter TypeConverter(this Type type)
+        {
+            var typeConverter =
+                type.GetCustomAttributes(typeof(TypeConverterAttribute), true).FirstOrDefault() as
+                    TypeConverterAttribute;
+            if (typeConverter == null)
+                return null;
+
+            var converterType = Type.GetType(typeConverter.ConverterTypeName);
+            if (converterType == null)
+                return null;
+            var converter = Activator.CreateInstance(converterType) as TypeConverter;
+
+            return converter;
+        }
+
         public static PropertyInfo FindActualProperty(this Type type, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            var property = type.GetRuntimeProperty(name);
+            var property = type.GetProperty(name, BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
             return property;
         }
 
-        private static PropertyInfo FindBindablePropertyInfo(Type type, string dependencyPropertyName)
+        public static FieldInfo FindBindablePropertyInfo(this Type type, string dependencyPropertyName)
         {
             if (string.IsNullOrEmpty(dependencyPropertyName))
                 return null;
@@ -30,21 +48,14 @@ namespace MvvmCross.Forms.Presenter.Binding
             if (!EnsureIsBindablePropertyName(ref dependencyPropertyName))
                 return null;
 
-            var typeInfo = type.GetTypeInfo();
-            while (typeInfo != null)
+            var candidateType = type;
+            while (candidateType != null)
             {
-                var propertyInfo = typeInfo.GetDeclaredProperty(dependencyPropertyName);
-                if (propertyInfo != null)
-                {
-                    return propertyInfo;
-                }
+                var fieldInfo = candidateType.GetField(dependencyPropertyName, BindingFlags.Static | BindingFlags.Public);
+                if (fieldInfo != null)
+                    return fieldInfo;
 
-                if (typeInfo.BaseType == null)
-                {
-                    return null;
-                }
-
-                typeInfo = typeInfo.BaseType.GetTypeInfo();
+                candidateType = candidateType.GetTypeInfo().BaseType;
             }
 
             return null;

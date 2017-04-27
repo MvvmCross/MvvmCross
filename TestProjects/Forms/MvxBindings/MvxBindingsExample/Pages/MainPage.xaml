@@ -7,8 +7,24 @@
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Presenter.Binding;assembly=MvvmCross.Forms.Presenter.Binding"
                      x:Class="MvxBindingsExample.Pages.MainPage">
 
-	<Label mvx:Bi.nd="Text BindableText"
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
+    <StackLayout Margin="5">
+        <Label Text="Default (OneWay) Binding" />
+	    <Label mvx:Bi.nd="Text BindableText" />
+        <BoxView Margin="5"
+                 HeightRequest="4"
+                 Color="Black" />
+        <Label Text="OneWayToSource Binding" />
+        <Entry mvx:Bi.nd="Text BindableText, Mode=OneWayToSource" />
+        <BoxView Margin="5"
+                 HeightRequest="4"
+                 Color="Black" />
+        <Label Text="TwoWay Binding" />
+        <Entry mvx:Bi.nd="Text BindableText, Mode=TwoWay" />
+        <BoxView Margin="5"
+                 HeightRequest="4"
+                 Color="Black" />
+        <Label Text="OneTime Binding" />
+        <Label mvx:Bi.nd="Text BindableText, Mode=OneTime" />
+    </StackLayout>
+    
 </core:MvxContentPage>
