@@ -25,7 +25,6 @@ namespace MvxBindingsExample.ViewModels
         public override void Start()
         {
             base.Start();
-            
         }
     }
 }
