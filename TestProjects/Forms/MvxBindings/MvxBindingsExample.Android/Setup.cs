@@ -35,16 +35,18 @@ namespace MvxBindingsExample.Droid
 
             return presenter;
         }
+
         protected override void InitializeBindingBuilder()
         {
-            MvxFormsBindingBuilder bindingBuilder = new MvxFormsBindingBuilder();
+            MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
+
             this.RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
         }
 
-/*        protected override MvxBindingBuilder CreateBindingBuilder()
+        protected new MvxBindingBuilder CreateBindingBuilder()
         {
             return new MvxFormsBindingBuilder();
-        }*/
+        }
     }
 }
