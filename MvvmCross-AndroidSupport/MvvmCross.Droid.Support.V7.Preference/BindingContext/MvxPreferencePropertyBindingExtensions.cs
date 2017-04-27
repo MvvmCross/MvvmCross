@@ -5,7 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Droid.Support.V7.Preference
+using MvvmCross.Droid.Support.V7.Preference;
+
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxPreferencePropertyBindingExtensions
     {
