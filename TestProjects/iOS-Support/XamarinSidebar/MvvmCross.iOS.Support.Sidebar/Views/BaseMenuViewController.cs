@@ -3,13 +3,19 @@ using UIKit;
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
     using MvvmCross.Core.ViewModels;
-    using XamarinSidebar;
+    using MvvmCross.iOS.Support.XamarinSidebar.Views;
 
     public class BaseMenuViewController<TViewModel> : BaseViewController<TViewModel>, IMvxSidebarMenu where TViewModel : class, IMvxViewModel
     {
         public virtual UIImage MenuButtonImage => UIImage.FromBundle("threelines");
 
+        public virtual bool AnimateMenu => true;
+        public virtual float DarkOverlayAlpha => 0;
+        public virtual bool HasDarkOverlay => false;
         public virtual bool HasShadowing => true;
+        public virtual bool DisablePanGesture => false;
+        public virtual bool ReopenOnRotate => true;
+
         private int MaxMenuWidth = 300;
         private int MinSpaceRightOfTheMenu = 55;
 

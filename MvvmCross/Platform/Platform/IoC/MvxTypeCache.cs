@@ -5,52 +5,52 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
     public class MvxTypeCache<TType> : IMvxTypeCache<TType>
     {
-        public Dictionary<string, Type> LowerCaseFullNameCache { get; private set; }
-        public Dictionary<string, Type> FullNameCache { get; private set; }
-        public Dictionary<string, Type> NameCache { get; private set; }
-        public Dictionary<Assembly, bool> CachedAssemblies { get; private set; }
-
-        public MvxTypeCache()
-        {
-            this.LowerCaseFullNameCache = new Dictionary<string, Type>();
-            this.FullNameCache = new Dictionary<string, Type>();
-            this.NameCache = new Dictionary<string, Type>();
-            this.CachedAssemblies = new Dictionary<Assembly, bool>();
-        }
+        public Dictionary<string, Type> LowerCaseFullNameCache { get; } = new Dictionary<string, Type>();
+        public Dictionary<string, Type> FullNameCache { get; } = new Dictionary<string, Type>();
+        public Dictionary<string, Type> NameCache { get; } = new Dictionary<string, Type>();
+        public Dictionary<Assembly, bool> CachedAssemblies { get; } = new Dictionary<Assembly, bool>();
 
         public void AddAssembly(Assembly assembly)
         {
-            if (this.CachedAssemblies.ContainsKey(assembly))
+            try
+            {
+                if (CachedAssemblies.ContainsKey(assembly))
                 return;
 
-            var viewType = typeof(TType);
-            var query = from type in assembly.ExceptionSafeGetTypes()
-                        where viewType.IsAssignableFrom(type)
-                        select type;
+                var viewType = typeof(TType);
+                var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType)).Select(ti => ti.AsType());
 
-            foreach (var type in query)
-            {
-                if (!string.IsNullOrEmpty(type.FullName))
+                foreach (var type in query)
                 {
-                    this.FullNameCache[type.FullName] = type;
-                    this.LowerCaseFullNameCache[type.FullName.ToLowerInvariant()] = type;
+                    var fullName = type.FullName;
+                    if (!string.IsNullOrEmpty(fullName))
+                    {
+                        FullNameCache[fullName] = type;
+                        LowerCaseFullNameCache[fullName.ToLowerInvariant()] = type;
+                    }
+
+                    var name = type.Name;
+                    if (!string.IsNullOrEmpty(name))
+                        NameCache[name] = type;
                 }
-                if (!string.IsNullOrEmpty(type.Name))
-                {
-                    this.NameCache[type.Name] = type;
-                }
+
+                CachedAssemblies[assembly] = true;
             }
-
-            this.CachedAssemblies[assembly] = true;
+            catch (ReflectionTypeLoadException e)
+            {
+                Mvx.Warning("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                    assembly.FullName, e.ToLongString());
+            }
         }
     }
 }

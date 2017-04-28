@@ -6,26 +6,28 @@ using ObjCRuntime;
 using UIKit;
 using Foundation;
 using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace MvvmCross.TestProjects.CustomBinding.iOS
 {
     [Register("FirstView")]
+    [MvxRootPresentation]
     public class FirstView : MvxViewController
     {
         public override void ViewDidLoad()
         {
-            View = new UIView(){ BackgroundColor = UIColor.White};
+            View = new UIView() { BackgroundColor = UIColor.White };
             base.ViewDidLoad();
 
             // ios7 layout
-            if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
+            if(RespondsToSelector(new Selector("edgesForExtendedLayout")))
                 EdgesForExtendedLayout = UIRectEdge.None;
 
             var binaryEdit = new BinaryEdit(new RectangleF(10, 70, 300, 120));
             Add(binaryEdit);
             var textField = new UITextField(new RectangleF(10, 190, 300, 40));
             Add(textField);
-            
+
             var set = this.CreateBindingSet<FirstView, FirstViewModel>();
             set.Bind(binaryEdit).For("MyCount").To(vm => vm.Counter);
             set.Bind(textField).To(vm => vm.Counter);

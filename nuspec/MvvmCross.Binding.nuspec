@@ -10,7 +10,6 @@
 This package contains the 'Core Binding' libraries for MvvmCross
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf net net45 netcore uwp</tags>
-		<iconUrl>http://i.imgur.com/BvdAtgT.png</iconUrl>
 		<frameworkAssemblies>
 			<frameworkAssembly assemblyName="Mono.Android.Export" targetFramework="MonoAndroid" />
 		</frameworkAssemblies>

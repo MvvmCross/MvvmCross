@@ -24,7 +24,6 @@ namespace MvvmCross.Plugins.All
 
         private static readonly Type[] AllPluginTypes = {
                 typeof(MvvmCross.Plugins.Accelerometer.PluginLoader),
-                typeof(MvvmCross.Plugins.Bookmarks.PluginLoader),
                 typeof(MvvmCross.Plugins.Color.PluginLoader),
                 typeof(MvvmCross.Plugins.DownloadCache.PluginLoader),
                 typeof(MvvmCross.Plugins.Email.PluginLoader),
@@ -39,8 +38,6 @@ namespace MvvmCross.Plugins.All
                 typeof(MvvmCross.Plugins.PictureChooser.PluginLoader),
                 typeof(MvvmCross.Plugins.ResourceLoader.PluginLoader),
                 typeof(MvvmCross.Plugins.Share.PluginLoader),
-                typeof(MvvmCross.Plugins.SoundEffects.PluginLoader),
-                typeof(MvvmCross.Plugins.ThreadUtils.PluginLoader),
                 typeof(MvvmCross.Plugins.Visibility.PluginLoader),
                 typeof(MvvmCross.Plugins.WebBrowser.PluginLoader)
             };
