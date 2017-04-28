@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.Platform;
+﻿using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
