@@ -9,32 +9,10 @@
 This package contains Presenters for MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp formspresenters presenters</tags>
 		<dependencies>
-			<group targetFramework="MonoAndroid70">
-				<dependency id="MvvmCross.Core" version="[$version$]" />
-				<dependency id="Xamarin.Forms" version="2.3.3.193" />
-			</group>
+			<dependency id="MvvmCross.Forms" version="[$version$]" />
 		</dependencies>
 	</metadata>
-	<files>   
-		<!-- PCL -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\portable-net45+netcore45+wpa81+MonoAndroid10+Xamarin.iOS10" />
-
-		<!-- dotnet -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\dotnet" />
-
-		<!-- uap -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Presenter.Uwp.*" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Presenter.Uwp\Properties\MvvmCross.Forms.Presenter.Uwp.rd.xml" 
-			target="lib\uap10.0\MvvmCross.Forms.Presenter.Uwp\Properties" />
-
-		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\MonoAndroid70" />
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Forms.Presenter.Droid.*" target="lib\MonoAndroid70" />
-
-		<!-- touch -->
-		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.Presenter.Core.*" target="lib\Xamarin.iOS10" />
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Forms.Presenter.iOS.*" target="lib\Xamarin.iOS10" />
+	<files>
 	</files>
 </package>
 

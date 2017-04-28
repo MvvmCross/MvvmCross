@@ -128,9 +128,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.WindowsUWP\MvvmCross.Forms.Presenter.Uwp.csproj">
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Uwp\MvvmCross.Forms.Uwp.csproj">
       <Project>{8583f087-0543-4d27-8f11-f7d8dc1480e2}</Project>
-      <Name>MvvmCross.Forms.Presenter.Uwp</Name>
+      <Name>MvvmCross.Forms.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
