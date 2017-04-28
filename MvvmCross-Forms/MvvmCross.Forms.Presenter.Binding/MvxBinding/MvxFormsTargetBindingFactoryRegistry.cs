@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Presenter.Binding
             var actualProperty = target.GetType().FindActualProperty(targetName);
             var actualPropertyType = actualProperty?.PropertyType ?? typeof(object);
 
-            binding = new MvxBindablePropertyTargetBinding(target, targetName, bindableProperty, actualPropertyType);
+            binding = new MvxBindablePropertyTargetBinding(target, bindableProperty, actualPropertyType);
             return true;
         }
     }
