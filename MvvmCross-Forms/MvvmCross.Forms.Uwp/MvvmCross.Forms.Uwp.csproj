@@ -7,8 +7,8 @@
     <ProjectGuid>{8583F087-0543-4D27-8F11-F7D8DC1480E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmCross.Forms.Presenter.Uwp</RootNamespace>
-    <AssemblyName>MvvmCross.Forms.Presenter.Uwp</AssemblyName>
+    <RootNamespace>MvvmCross.Forms.Uwp</RootNamespace>
+    <AssemblyName>MvvmCross.Forms.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -42,8 +42,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxFormsWindowsUWPMasterDetailPagePresenter.cs" />
-    <Compile Include="MvxFormsWindowsUWPPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsWindowsUWPMasterDetailPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsWindowsUWPPagePresenter.cs" />
     <Compile Include="MvxPageRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\MvvmCross.Forms.Presenter.Uwp.rd.xml" />
@@ -66,9 +66,9 @@
       <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
       <Name>MvvmCross.Uwp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvvmCross.Forms.Presenter.Core\MvvmCross.Forms.Presenter.Core.csproj">
+    <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
-      <Name>MvvmCross.Forms.Presenter.Core</Name>
+      <Name>MvvmCross.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
