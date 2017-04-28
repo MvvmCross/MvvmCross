@@ -8,12 +8,12 @@
 namespace MvvmCross.Binding.iOS.Views
 {
     using System;
-
+    using System.Collections.Generic;
     using CoreGraphics;
 
     using MvvmCross.Binding.Attributes;
     using MvvmCross.Binding.BindingContext;
-
+    using MvvmCross.Binding.Bindings;
     using UIKit;
 
     public class MvxCollectionReusableView
@@ -23,20 +23,47 @@ namespace MvvmCross.Binding.iOS.Views
         public IMvxBindingContext BindingContext { get; set; }
 
         public MvxCollectionReusableView()
+            : this(string.Empty)
         {
-            this.CreateBindingContext();
+        }
+
+        public MvxCollectionReusableView(string bindingText)
+        {
+            this.CreateBindingContext(bindingText);
+        }
+
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions)
+        {
+            this.CreateBindingContext(bindingDescriptions);
+        }
+
+        public MvxCollectionReusableView(string bindingText, CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext(bindingText);
+        }
+
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext(bindingDescriptions);
         }
 
         public MvxCollectionReusableView(IntPtr handle)
-            : base(handle)
+            : this(string.Empty, handle)
         {
-            this.CreateBindingContext();
         }
 
-        public MvxCollectionReusableView(CGRect frame)
-            : base(frame)
+        public MvxCollectionReusableView(string bindingText, IntPtr handle)
+            : base(handle)
         {
-            this.CreateBindingContext();
+            this.CreateBindingContext(bindingText);
+        }
+
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext(bindingDescriptions);
         }
 
         protected override void Dispose(bool disposing)
