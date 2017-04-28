@@ -15,7 +15,8 @@ namespace MvvmCross.Platform.iOS.Platform
     {
         protected bool DoUrlOpen(NSUrl url)
         {
-            return UIApplication.SharedApplication.OpenUrl(url);
+            var sharedApp = UIApplication.SharedApplication;
+            return sharedApp.CanOpenUrl(url) && sharedApp.OpenUrl(url);
         }
     }
 }
