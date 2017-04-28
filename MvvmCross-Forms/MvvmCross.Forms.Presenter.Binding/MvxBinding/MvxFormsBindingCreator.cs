@@ -7,9 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform.WeakSubscription;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenter.Binding
@@ -70,38 +72,23 @@ namespace MvvmCross.Forms.Presenter.Binding
             };
 
             attachAction();
-            attachedObject.PropertyChanged += (o, args) =>
-                                              {
-                                                  if (args.PropertyName == nameof(Element.Parent))
-                                                  {
-                                                      if (attachedObject.Parent != null)
-                                                      {
-                                                          attachAction();
-                                                      }
-                                                      else
-                                                      {
-                                                          detachAction();
-                                                      }
-                                                  }
-                                                  ;
-                                              };
+            var subscription = attachedObject.WeakSubscribe((s, a) =>
+                                                            {
+                                                                if (a.PropertyName == nameof(Element.Parent))
+                                                                {
+                                                                    if (attachedObject.Parent != null)
+                                                                    {
+                                                                        attachAction();
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        detachAction();
+                                                                    }
+                                                                }
+                                                            });
+            attachedObject.SetValue(DataContextWatcherProperty, subscription);
 
             return newList;
-        }
-        
-        public static readonly BindableProperty BindingsListProperty = BindableProperty.CreateAttached("BindingsList",
-                                                                                                       typeof(IList<IMvxUpdateableBinding>),
-                                                                                                       typeof(BindableObject),
-                                                                                                       null);
-
-        public static IList<IMvxUpdateableBinding> GetBindingsList(BindableObject d)
-        {
-            return d.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
-        }
-
-        public static void SetBindingsList(BindableObject d, IList<IMvxUpdateableBinding> value)
-        {
-            d.SetValue(BindingsListProperty, value);
         }
 
         private static void DataContextChanged(object obj, EventArgs args)
@@ -116,6 +103,35 @@ namespace MvvmCross.Forms.Presenter.Binding
                     binding.DataContext = d.BindingContext;
                 }
             }
+        }
+
+        public static readonly BindableProperty BindingsListProperty = BindableProperty.CreateAttached("BindingsList",
+                                                                                                       typeof(IList<IMvxUpdateableBinding>),
+                                                                                                       typeof(BindableObject),
+                                                                                                       null);
+        public static readonly BindableProperty DataContextWatcherProperty = BindableProperty.CreateAttached("DataContextWatcher",
+                                                                                                       typeof(MvxNotifyPropertyChangedEventSubscription),
+                                                                                                       typeof(BindableObject),
+                                                                                                       null);
+
+        public static IList<IMvxUpdateableBinding> GetBindingsList(BindableObject d)
+        {
+            return d.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
+        }
+
+        public static void SetBindingsList(BindableObject d, IList<IMvxUpdateableBinding> value)
+        {
+            d.SetValue(BindingsListProperty, value);
+        }
+
+        public static MvxNotifyPropertyChangedEventSubscription GetDataContextWatcher(BindableObject d)
+        {
+            return d.GetValue(BindingsListProperty) as MvxNotifyPropertyChangedEventSubscription;
+        }
+
+        public static void SetDataContextWatcher(BindableObject d, MvxNotifyPropertyChangedEventSubscription value)
+        {
+            d.SetValue(BindingsListProperty, value);
         }
     }
 }
