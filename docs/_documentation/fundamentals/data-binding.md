@@ -4,24 +4,24 @@ title: Data binding
 category: Fundamentals
 order: 2
 ---
-DataBinding is the key technology that Mvvm relies on to link Views with their ViewModels.
+DataBinding is the key technology that MVVM relies on to link Views with their View-Models.
 
-DataBinding provides and maintains the automated two-way connection between View and ViewModel. A good understanding DataBinding is essential for every Mvvm developer.
+DataBinding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of Data binding is essential for every MVVM developer.
 
-Within MvvmCross, databinding was initially built to mirror the structure provided by Microsoft in their Xaml based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
+Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
 
 This article focuses first on the core 'Windows' databinding approach, but then later extends to some of the newer ideas.
 
-###Core Windows Databinding
+### Core Windows Databinding
 In this structure, for each binding:
 
 - C# properties are used in both View and ViewModel
 - A single View property is 'bound' - connected - to a ViewModel property
-- is specified with a Mode which gives a direction for data flow
+- is specified with a Mode which gives a direction for data flow (One-Way, Two-Way, etc.)
 - can optionally be specified with a ValueConverter - and this can optionally also be parameterised
 - can also optionally be specified with a FallbackValue for when binding fails.
 
-###C# properties and data-binding
+### C# properties and data-binding
 
 C# properties are used for data-binding on both the View and the ViewModel.
 
@@ -43,6 +43,8 @@ public string MyProperty
 }
 ```
 
+> Note: MvvmCross provides helper methods to assign and fire the `PropertyChanged` event, after checking whether value actually changed. Consider using `SetProperty()` for this, which is present on `MvxViewModel` and `MvxPropertyChanged`.
+
 This pattern uses a local private backing variable to store the current value, and relies on `RaisePropertyChanged` to signal changes in the value to any listening Views.
 
 In the View:
@@ -59,11 +61,11 @@ In the View:
      - custom C# methods have to be used to get and set the variable values
      - custom Java listeners or Objective-C delegates have to be used to detect when the UI View state changes (e.g. when the user enters text or taps on a button).
 
-For more info on the details on implementing custom bindings, see http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html
+For more info on the details on implementing custom bindings, see the [custom bindings blog post by Stuart Lodge](http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html)
 
 ### DataBound properties
 
-Using the View and ViewModel properties described above, it's common for a ViewModel C# property to be used to  model the value of a View property.
+Using the View and ViewModel properties described above, it's common for a ViewModel C# property to be used to model the value of a View property.
 
 For example:
 
@@ -135,7 +137,7 @@ There are 4 modes in which properties in the View can be bound to properties in 
 - This mode is not very commonly used, but can be useful for fields which are configurable but which don't tend to change after they have initially been set. 
 - In MvvmCross, we use One-Time binding when setting static text from language files - this is because it's common for the user to select a language, but once chosen, it's uncommon for the user to then change that language.
 
-###Value Conversion
+### Value Conversion
 
 A `ValueConverter` is a class which implements the `IValueConverter` interface.
 
@@ -171,7 +173,7 @@ public class LengthValueConverter
 
 ValueConverters can also be provided with a `parameter` - this can sometimes be useful to reuse a single value converter in different situations. For example, a `TrimValueConverter` might be able to take the characters to trim in its `parameter`.
 
-###Fallback Values
+### Fallback Values
 
 Sometimes the ViewModel source property for the ViewModel isn't available.
 
@@ -188,7 +190,7 @@ Notes:
 
 
 
-###A note about `DataContext`
+### A note about `DataContext`
 
 While we have used the terms `View` and `ViewModel` throughout this article, you will also see `DataContext` used in this article and in code.
 
@@ -297,11 +299,11 @@ These ideas and their current development status are discussed further later in 
 Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its databinding is driven by real users and the invention and ideas their real apps require.
 
 
-###JSON
+### JSON
 
 As discussed above, JSON binding is not supported within MvvmCross v3 or later.
 
-###Swiss
+### Swiss
 
 Swiss binding syntax allows a basic binding from a View $Target$ to a ViewModel property $SourcePath$ to be written using a syntax:
 
@@ -421,7 +423,7 @@ Bind the `Value` property to `Count` on the ViewModel, and ensure this binding i
 
 Bind the `Click` event to the `DayCommand` property on the ViewModel (which should implement `ICommand`). When invoked, ensure that Execute is passeda parameter value of "Thursday"
 
-###Fluent
+### Fluent
 
 The fluent syntax provides a C# way to create bindings.
 
@@ -487,7 +489,7 @@ In addition to the `Expression` based Fluent bindings, string based Fluent bindi
 **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
 
 
-###Tibet
+### Tibet
 
 Tibet binding includes several ideas which **extend** Swiss binding.
 
@@ -640,7 +642,7 @@ This advancement is, of course, not free - it does come with a small memory and 
 
 In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimised combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
 
-###Rio
+### Rio
 
 Within ViewModels, Mvvm in C# has always been centred around the `INotifyPropertyChanged` interface.
 
@@ -864,10 +866,9 @@ Once installed, the syntax within these `AttachedProperties` bindings is exactly
 
 
 
-###Beyond Rio
+### Beyond Rio
 The framework that enables the Rio and Tibet binding extensions is interface-based and is built upon the small `CrossCore` platform which underpins `MvvmCross`.
 
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
-

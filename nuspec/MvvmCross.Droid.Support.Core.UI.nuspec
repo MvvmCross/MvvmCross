@@ -12,11 +12,11 @@ This package contains Support Core UI support for MvvmCross.</description>
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
 			<dependency id="MvvmCross.Core" version="[$version$]" />
 			<dependency id="MvvmCross.Droid.Shared" version="[$version$]" />
-			<dependency id="Xamarin.Android.Support.Core.UI" version="25.1.1"/>
+			<dependency id="Xamarin.Android.Support.Core.UI" version="25.3.1"/>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
 	</files>
 </package>
 

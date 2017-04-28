@@ -19,12 +19,11 @@ Task("Clean").Does(() =>
 
 GitVersion versionInfo = null;
 Task("Version").Does(() => {
-	GitVersion(new GitVersionSettings {
+	versionInfo = GitVersion(new GitVersionSettings {
 		UpdateAssemblyInfo = true,
-		OutputType = GitVersionOutput.BuildServer
+		OutputType = GitVersionOutput.Json
 	});
 
-	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
 	Information("GitVersion -> {0}", versionInfo.Dump());
 });
 
@@ -78,6 +77,9 @@ Task("GitLink")
 	.IsDependentOn("Build")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
 	var projectsToIgnore = new string[] {
@@ -120,15 +122,20 @@ Task("GitLink")
 		"playground.ios"
 	};
 
-	GitLink(sln.GetDirectory(), 
+	GitLink("./", 
 		new GitLinkSettings {
 			RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
+			Configuration = "Release",
+			SolutionFileName = "MvvmCross_All.sln",
 			ArgumentCustomization = args => args.Append("-ignore " + string.Join(",", projectsToIgnore))
 		});
 });
 
 Task("Package")
 	.IsDependentOn("GitLink")
+	.WithCriteria(() => 
+		StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
+		IsMasterOrReleases())
 	.Does(() => 
 {
 	var nugetSettings = new NuGetPackSettings {
