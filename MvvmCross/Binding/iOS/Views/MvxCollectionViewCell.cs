@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.iOS.Views
     using System.Collections.Generic;
 
     using CoreGraphics;
-
+    using Foundation;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Bindings;
 
@@ -23,27 +23,19 @@ namespace MvvmCross.Binding.iOS.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+        public MvxCollectionViewCell()
+            : this(string.Empty)
+        {
+        }
+
         public MvxCollectionViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
         }
 
-        public MvxCollectionViewCell(IntPtr handle)
-            : base(handle)
+        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
-            this.CreateBindingContext();
-        }
-
-        public MvxCollectionViewCell(string bindingText, IntPtr handle)
-            : base(handle)
-        {
-            this.CreateBindingContext(bindingText);
-        }
-
-        public MvxCollectionViewCell(CGRect frame)
-            : base(frame)
-        {
-            this.CreateBindingContext();
+            this.CreateBindingContext(bindingDescriptions);
         }
 
         public MvxCollectionViewCell(string bindingText, CGRect frame)
@@ -58,22 +50,21 @@ namespace MvvmCross.Binding.iOS.Views
             this.CreateBindingContext(bindingDescriptions);
         }
 
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(IntPtr handle, string bindingText)
-            : this(bindingText, handle)
+        public MvxCollectionViewCell(IntPtr handle)
+            : this(string.Empty, handle)
         {
         }
 
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(CGRect frame, string bindingText)
-            : this(bindingText, frame)
+        public MvxCollectionViewCell(string bindingText, IntPtr handle)
+            : base(handle)
         {
+            this.CreateBindingContext(bindingText);
         }
 
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(CGRect frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
-            : this(bindingDescriptions, frame)
+        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
         {
+            this.CreateBindingContext(bindingDescriptions);
         }
 
         /// <summary>
@@ -91,7 +82,7 @@ namespace MvvmCross.Binding.iOS.Views
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if(disposing)
             {
                 this.BindingContext.ClearAllBindings();
             }
