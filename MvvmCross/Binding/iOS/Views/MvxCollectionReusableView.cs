@@ -7,52 +7,52 @@
 
 namespace MvvmCross.Binding.iOS.Views
 {
-	using System;
+    using System;
 
-	using CoreGraphics;
+    using CoreGraphics;
 
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.BindingContext;
+    using MvvmCross.Binding.Attributes;
+    using MvvmCross.Binding.BindingContext;
 
-	using UIKit;
+    using UIKit;
 
-	public class MvxCollectionReusableView
-		: UICollectionReusableView
-		  , IMvxBindable
-	{
-		public IMvxBindingContext BindingContext { get; set; }
+    public class MvxCollectionReusableView
+        : UICollectionReusableView
+          , IMvxBindable
+    {
+        public IMvxBindingContext BindingContext { get; set; }
 
-		public MvxCollectionReusableView()
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView()
+        {
+            this.CreateBindingContext();
+        }
 
-		public MvxCollectionReusableView(IntPtr handle)
-			: base(handle)
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView(IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext();
+        }
 
-		public MvxCollectionReusableView(CGRect frame)
-			: base(frame)
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView(CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext();
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				this.BindingContext.ClearAllBindings();
-			}
-			base.Dispose(disposing);
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                this.BindingContext.ClearAllBindings();
+            }
+            base.Dispose(disposing);
+        }
 
-		[MvxSetToNullAfterBinding]
-		public object DataContext
-		{
-			get { return this.BindingContext.DataContext; }
-			set { this.BindingContext.DataContext = value; }
-		}
-	}
+        [MvxSetToNullAfterBinding]
+        public object DataContext
+        {
+            get { return this.BindingContext.DataContext; }
+            set { this.BindingContext.DataContext = value; }
+        }
+    }
 }
