@@ -178,7 +178,7 @@
       <Name>MvvmCross.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvxBindingsExample\MvxBindingsExample.csproj">
-      <Project>{52d8241e-227b-44e5-8150-c6d8ffd41e59}</Project>
+      <Project>{b5cc92f3-42b2-48dd-96dd-3d883205d030}</Project>
       <Name>MvxBindingsExample</Name>
     </ProjectReference>
   </ItemGroup>
