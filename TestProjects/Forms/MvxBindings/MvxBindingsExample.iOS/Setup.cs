@@ -5,6 +5,10 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using UIKit;
 using Xamarin.Forms;
+using MvvmCross.Forms.Bindings;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.iOS.Presenters;
 
 namespace MvxBindingsExample.iOS
 {
