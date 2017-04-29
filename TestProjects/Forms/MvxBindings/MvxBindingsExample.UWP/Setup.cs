@@ -9,8 +9,8 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
-using MvvmCross.WindowsUWP.Platform;
-using MvvmCross.WindowsUWP.Views;
+using MvvmCross.Uwp.Platform;
+using MvvmCross.Uwp.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.IoC;
@@ -37,7 +37,7 @@ namespace MvxBindingsExample.UWP
             Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApp();
-            var presenter = new MvxFormsWindowsUWPPagePresenter(  rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpPagePresenter(  rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

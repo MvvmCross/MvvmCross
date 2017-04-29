@@ -1,14 +1,14 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Forms.Presenter.Core;
 using MvvmCross.Core.Views;
 using Xamarin.Forms;
 using Windows.ApplicationModel.Activation;
 using XamlControls = Windows.UI.Xaml.Controls;
-using MvvmCross.WindowsUWP.Views;
+using MvvmCross.Uwp.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.WindowsUWP.Platform;
-using MvvmCross.Forms.Presenter.WindowsUWP;
+using MvvmCross.Forms.Core;
+using MvvmCross.Uwp.Platform;
+using MvvmCross.Forms.Uwp.Presenters;
 
 namespace Example.UWP
 {
@@ -31,7 +31,7 @@ namespace Example.UWP
             Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApp();
-            var presenter = new MvxFormsWindowsUWPPagePresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpPagePresenter(rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;
