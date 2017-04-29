@@ -18,7 +18,7 @@ namespace MasterDetailExample.UWP
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsUWPMasterDetailPagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpMasterDetailPagePresenter;
 
             LoadApplication(presenter.MvxFormsApp);
         }
