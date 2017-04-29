@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
+namespace MvvmCross.Uwp.Views
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;

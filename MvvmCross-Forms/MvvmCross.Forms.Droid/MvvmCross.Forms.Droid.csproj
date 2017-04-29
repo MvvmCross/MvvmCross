@@ -110,8 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxFormsDroidMasterDetailPagePresenter.cs" />
-    <Compile Include="MvxFormsDroidPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsDroidMasterDetailPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsDroidPagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxPageRenderer.cs" />
   </ItemGroup>

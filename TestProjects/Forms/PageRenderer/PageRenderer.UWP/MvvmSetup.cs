@@ -4,16 +4,15 @@ using XamlControls = Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.WindowsUWP.Platform;
-using MvvmCross.WindowsUWP.Views;
+using MvvmCross.Uwp.Platform;
+using MvvmCross.Uwp.Views;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Presenter.Core;
-using MvvmCross.Forms.Presenter.WindowsUWP;
-
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Uwp.Presenters;
 using PageRendererExample.ViewModels;
 
-namespace PageRendererExample.UI.WindowsUWP
+namespace PageRendererExample.UI.Uwp
 {
     class MvvmSetup : MvxWindowsSetup
     {
@@ -35,7 +34,7 @@ namespace PageRendererExample.UI.WindowsUWP
 
             MvxFormsApp = new PageRendererExampleApp();
 
-            var presenter = new MvxFormsWindowsUWPPagePresenter(rootFrame, MvxFormsApp);
+            var presenter = new MvxFormsUwpPagePresenter(rootFrame, MvxFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             Mvx.LazyConstructAndRegisterSingleton<IImageHolder, ImageHolder>();
 
