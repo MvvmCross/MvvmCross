@@ -37,24 +37,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Presenters\IMvxContentPage.cs" />
+    <Compile Include="Core\IMvxContentPage.cs" />
     <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
-    <Compile Include="Presenters\IMvxMasterDetailViewModel.cs" />
-    <Compile Include="Presenters\MvxContentPage.cs" />
-    <Compile Include="Presenters\MvxFormsApp.cs" />
+    <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
+    <Compile Include="Core\MvxContentPage.cs" />
+    <Compile Include="Core\MvxFormsApp.cs" />
     <Compile Include="Presenters\MvxFormsMasterDetailPagePresenter.cs" />
     <Compile Include="Presenters\MvxFormsPageLoader.cs" />
     <Compile Include="Presenters\MvxFormsPagePresenter.cs" />
-    <Compile Include="Presenters\MvxMasterDetailViewModel.cs" />
+    <Compile Include="ViewModels\MvxMasterDetailViewModel.cs" />
     <Compile Include="Presenters\MvxPresenterHelpers.cs" />
     <Compile Include="Bindings\Bi.n.d.cs" />
     <Compile Include="Bindings\IMvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxBindablePropertyExtensionMethods.cs" />
     <Compile Include="Bindings\MvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsBindingBuilder.cs" />
-    <Compile Include="Bindings\MvxBinding\MvxFormsBindingCreator.cs" />
-    <Compile Include="Bindings\MvxBinding\MvxFormsTargetBindingFactoryRegistry.cs" />
-    <Compile Include="Bindings\MvxBinding\Target\MvxBindablePropertyTargetBinding.cs" />
+    <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
+    <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
+    <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

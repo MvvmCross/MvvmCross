@@ -7,10 +7,10 @@
 // Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Forms.Presenter.Core;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Presenters;
 
-namespace MvvmCross.Forms.Views.Droid
+namespace MvvmCross.Forms.Droid
 {
     public class MvxPageRenderer : Xamarin.Forms.Platform.Android.PageRenderer, IMvxBindingContextOwner
     {

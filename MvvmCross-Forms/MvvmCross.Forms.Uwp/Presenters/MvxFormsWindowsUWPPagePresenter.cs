@@ -7,11 +7,11 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 
+using MvvmCross.Forms.Presenters;
 using MvvmCross.WindowsUWP.Views;
-using MvvmCross.Forms.Presenter.Core;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.WindowsUWP
+namespace MvvmCross.Forms.Uwp.Presenters
 {
     public class MvxFormsWindowsUWPPagePresenter
         : MvxFormsPagePresenter

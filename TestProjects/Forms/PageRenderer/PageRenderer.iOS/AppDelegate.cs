@@ -8,8 +8,7 @@ using UIKit;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views.iOS;
-
+using MvvmCross.Forms.iOS;
 using PageRendererExample.UI.iOS;
 
 namespace pagerenderexample.iOS

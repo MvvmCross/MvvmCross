@@ -6,14 +6,14 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using MvvmCross.Platform;
+using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using System;
+using MvvmCross.Forms.Core;
+using MvvmCross.Platform;
 using Xamarin.Forms;
-using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenters
 {
     public abstract class MvxFormsPagePresenter
         : MvxViewPresenter

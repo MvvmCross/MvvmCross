@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     public interface IMvxBindingCreator
     {
