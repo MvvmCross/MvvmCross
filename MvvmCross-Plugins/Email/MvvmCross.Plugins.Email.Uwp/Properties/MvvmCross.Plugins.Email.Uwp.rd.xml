@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <!--
     This file contains Runtime Directives, specifications about types your application accesses
     through reflection and other dynamic code patterns. Runtime Directives are used to control the
@@ -27,7 +28,7 @@
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
   <Library Name="MvvmCross.Plugins.Email.Uwp">
 
-  	<!-- add directives for your library here -->
+    <!-- add directives for your library here -->
 
   </Library>
 </Directives>

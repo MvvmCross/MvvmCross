@@ -4,21 +4,17 @@ using Microsoft.CodeAnalysis;
 namespace MvvmCross.CodeAnalysis.Test
 {
     /// <summary>
-    /// Location where the diagnostic appears, as determined by path, line number, and column number.
+    ///     Location where the diagnostic appears, as determined by path, line number, and column number.
     /// </summary>
     public struct DiagnosticResultLocation
     {
         public DiagnosticResultLocation(string path, int line, int column)
         {
             if (line < -1)
-            {
                 throw new ArgumentOutOfRangeException(nameof(line), "line must be >= -1");
-            }
 
             if (column < -1)
-            {
                 throw new ArgumentOutOfRangeException(nameof(column), "column must be >= -1");
-            }
 
             Path = path;
             Line = line;
@@ -31,7 +27,7 @@ namespace MvvmCross.CodeAnalysis.Test
     }
 
     /// <summary>
-    /// Struct that stores information about a Diagnostic appearing in a source
+    ///     Struct that stores information about a Diagnostic appearing in a source
     /// </summary>
     public struct DiagnosticResult
     {
@@ -39,9 +35,9 @@ namespace MvvmCross.CodeAnalysis.Test
 
         public DiagnosticResultLocation[] Locations
         {
-            get { return _locations ?? (_locations = new DiagnosticResultLocation[] { }); }
+            get => _locations ?? (_locations = new DiagnosticResultLocation[] { });
 
-            set { _locations = value; }
+            set => _locations = value;
         }
 
         public DiagnosticSeverity Severity { get; set; }

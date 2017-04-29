@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.IO;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
-using System.IO;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
@@ -16,6 +16,11 @@ namespace MvvmCross.Plugins.JsonLocalization
     {
         private IMvxResourceLoader _resourceLoader;
 
+        public MvxContentJsonDictionaryTextProvider(bool maskErrors = true)
+            : base(maskErrors)
+        {
+        }
+
         protected IMvxResourceLoader ResourceLoader
         {
             get
@@ -23,11 +28,6 @@ namespace MvvmCross.Plugins.JsonLocalization
                 _resourceLoader = _resourceLoader ?? Mvx.Resolve<IMvxResourceLoader>();
                 return _resourceLoader;
             }
-        }
-
-        public MvxContentJsonDictionaryTextProvider(bool maskErrors = true)
-            : base(maskErrors)
-        {
         }
 
         public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)

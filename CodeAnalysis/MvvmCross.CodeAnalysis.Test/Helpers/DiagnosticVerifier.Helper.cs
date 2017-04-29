@@ -11,26 +11,57 @@ using Microsoft.CodeAnalysis.Text;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.iOS.Views;
+using MvvmCross.Platform;
 
 namespace MvvmCross.CodeAnalysis.Test
 {
     /// <summary>
-    /// Class for turning strings into documents and getting the diagnostics on them
-    /// All methods are static
+    ///     Class for turning strings into documents and getting the diagnostics on them
+    ///     All methods are static
     /// </summary>
     public abstract partial class DiagnosticVerifier
     {
-        private static readonly MetadataReference _corlibReference = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-        private static readonly MetadataReference _systemCoreReference = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
-        private static readonly MetadataReference _cSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
-        private static readonly MetadataReference _codeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
-        private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
-        private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Platform.Mvx).Assembly.Location);
-        private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
-        private static readonly MetadataReference _mvvmCrossIosReference = MetadataReference.CreateFromFile(typeof(MvxViewController).Assembly.Location);
-        private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
-        private static readonly MetadataReference _objectModelReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.ObjectModel"));
-        private static readonly MetadataReference _runtimeReference = MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.Runtime"));
+        private static readonly MetadataReference _corlibReference =
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
+
+        private static readonly MetadataReference _systemCoreReference =
+            MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
+
+        private static readonly MetadataReference _cSharpSymbolsReference =
+            MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
+
+        private static readonly MetadataReference _codeAnalysisReference =
+            MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
+
+        private static readonly MetadataReference _mvvmCrossCoreReference =
+            MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
+
+        private static readonly MetadataReference _mvvmCrossPlatformReference =
+            MetadataReference.CreateFromFile(typeof(Mvx).Assembly.Location);
+
+        private static readonly MetadataReference _mvvmCrossDroidReference =
+            MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
+
+        private static readonly MetadataReference _mvvmCrossIosReference =
+            MetadataReference.CreateFromFile(typeof(MvxViewController).Assembly.Location);
+
+        private static readonly MetadataReference _componentModelReference =
+            MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);
+
+        private static readonly MetadataReference _objectModelReference =
+            MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.ObjectModel"));
+
+        private static readonly MetadataReference _runtimeReference =
+            MetadataReference.CreateFromFile(GetCorrectObjectModelPath("System.Runtime"));
+
+        internal static string DefaultFilePathPrefix = "Test";
+        internal static string CSharpDefaultFileExt = "cs";
+        internal static string TestCoreProjectName = "CoreTestProject";
+        internal static string TestDroidProjectName = "DroidTestProject";
+        internal static string TestIosProjectName = "IosTestProject";
+        private static ProjectId _coreProjectId;
+        private static ProjectId _droidProjectId;
+        private static ProjectId _iosProjectId;
 
         private static string GetCorrectObjectModelPath(string path)
         {
@@ -46,19 +77,11 @@ namespace MvvmCross.CodeAnalysis.Test
             throw new ArgumentException("You don't have ObjectModel inside your GAC! Fix your environment.");
         }
 
-        internal static string DefaultFilePathPrefix = "Test";
-        internal static string CSharpDefaultFileExt = "cs";
-        internal static string TestCoreProjectName = "CoreTestProject";
-        internal static string TestDroidProjectName = "DroidTestProject";
-        internal static string TestIosProjectName = "IosTestProject";
-        private static ProjectId _coreProjectId;
-        private static ProjectId _droidProjectId;
-        private static ProjectId _iosProjectId;
-
         #region  Get Diagnostics
 
         /// <summary>
-        /// Given classes in the form of strings, their language, and an IDiagnosticAnlayzer to apply to it, return the diagnostics found in the string after converting it to a document.
+        ///     Given classes in the form of strings, their language, and an IDiagnosticAnlayzer to apply to it, return the
+        ///     diagnostics found in the string after converting it to a document.
         /// </summary>
         /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="analyzer">The analyzer to be run on the sources</param>
@@ -69,36 +92,34 @@ namespace MvvmCross.CodeAnalysis.Test
         }
 
         /// <summary>
-        /// Given an analyzer and a document to apply it to, run the analyzer and gather an array of diagnostics found in it.
-        /// The returned diagnostics are then ordered by location in the source document.
+        ///     Given an analyzer and a document to apply it to, run the analyzer and gather an array of diagnostics found in it.
+        ///     The returned diagnostics are then ordered by location in the source document.
         /// </summary>
         /// <param name="analyzer">The analyzer to run on the documents</param>
         /// <param name="documents">The Documents that the analyzer will be run on</param>
         /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-        protected static Diagnostic[] GetSortedDiagnosticsFromDocuments(DiagnosticAnalyzer analyzer, Document[] documents)
+        protected static Diagnostic[] GetSortedDiagnosticsFromDocuments(DiagnosticAnalyzer analyzer,
+            Document[] documents)
         {
             var projects = new HashSet<Project>();
             foreach (var document in documents)
-            {
                 projects.Add(document.Project);
-            }
 
             var diagnostics = new List<Diagnostic>();
             foreach (var project in projects)
             {
-                var compilationWithAnalyzers = project.GetCompilationAsync().Result.WithAnalyzers(ImmutableArray.Create(analyzer));
+                var compilationWithAnalyzers = project.GetCompilationAsync()
+                    .Result.WithAnalyzers(ImmutableArray.Create(analyzer));
                 var diags = compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result;
                 foreach (var diag in diags)
-                {
                     if (diag.Location == Location.None || diag.Location.IsInMetadata)
-                    {
                         diagnostics.Add(diag);
-                    }
                     else
-                    {
-                        diagnostics.AddRange(from document in documents select document.GetSyntaxTreeAsync().Result into tree where tree == diag.Location.SourceTree select diag);
-                    }
-                }
+                        diagnostics.AddRange(from document in documents
+                            select document.GetSyntaxTreeAsync().Result
+                            into tree
+                            where tree == diag.Location.SourceTree
+                            select diag);
             }
 
             var results = SortDiagnostics(diagnostics);
@@ -107,7 +128,7 @@ namespace MvvmCross.CodeAnalysis.Test
         }
 
         /// <summary>
-        /// Sort diagnostics by location in source document
+        ///     Sort diagnostics by location in source document
         /// </summary>
         /// <param name="diagnostics">The list of Diagnostics to be sorted</param>
         /// <returns>An IEnumerable containing the Diagnostics in order of Location</returns>
@@ -121,7 +142,8 @@ namespace MvvmCross.CodeAnalysis.Test
         #region Set up compilation and documents
 
         /// <summary>
-        /// Given an array of strings as sources and a language, turn them into a project and return the documents and spans of it.
+        ///     Given an array of strings as sources and a language, turn them into a project and return the documents and spans of
+        ///     it.
         /// </summary>
         /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <returns>A Tuple containing the Documents produced from the sources and their TextSpans if relevant</returns>
@@ -136,9 +158,7 @@ namespace MvvmCross.CodeAnalysis.Test
                 var projectDocuments = project.Documents.ToArray();
 
                 if (fileSources.Count(f => IsFromProject(f, projectId)) != projectDocuments.Length)
-                {
                     throw new SystemException("Amount of sources did not match amount of Documents created");
-                }
                 documents.AddRange(projectDocuments);
             }
 
@@ -158,7 +178,7 @@ namespace MvvmCross.CodeAnalysis.Test
         }
 
         /// <summary>
-        /// Create a Document from a string through creating a project that contains it.
+        ///     Create a Document from a string through creating a project that contains it.
         /// </summary>
         /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <param name="fileSource">The file the should be added last, aldo also to be returned</param>
@@ -169,7 +189,8 @@ namespace MvvmCross.CodeAnalysis.Test
             documents.Add(fileSource);
 
             return CreateSolution(documents.ToArray())
-                .GetProject(GetProjectId(fileSource)).Documents.Last();
+                .GetProject(GetProjectId(fileSource))
+                .Documents.Last();
         }
 
         private static ProjectId GetProjectId(MvxTestFileSource fileSource)
@@ -182,17 +203,17 @@ namespace MvvmCross.CodeAnalysis.Test
         }
 
         /// <summary>
-        /// Create a project using the inputted strings as sources.
+        ///     Create a project using the inputted strings as sources.
         /// </summary>
         /// <param name="fileSources">Classes in the form of MvxTestFileSources</param>
         /// <returns>A Solution created out of the Documents created from the source strings</returns>
         private static Solution CreateSolution(MvxTestFileSource[] fileSources)
         {
-            string fileNamePrefix = DefaultFilePathPrefix;
+            var fileNamePrefix = DefaultFilePathPrefix;
 
-            _coreProjectId = ProjectId.CreateNewId(debugName: TestCoreProjectName);
-            _droidProjectId = ProjectId.CreateNewId(debugName: TestDroidProjectName);
-            _iosProjectId = ProjectId.CreateNewId(debugName: TestIosProjectName);
+            _coreProjectId = ProjectId.CreateNewId(TestCoreProjectName);
+            _droidProjectId = ProjectId.CreateNewId(TestDroidProjectName);
+            _iosProjectId = ProjectId.CreateNewId(TestIosProjectName);
 
             var solution = new AdhocWorkspace()
                 .CurrentSolution
@@ -227,17 +248,18 @@ namespace MvvmCross.CodeAnalysis.Test
                 .AddMetadataReference(_iosProjectId, _objectModelReference)
                 .AddProjectReference(_iosProjectId, new ProjectReference(_coreProjectId));
 
-            int count = 0;
+            var count = 0;
             foreach (var fileSource in fileSources)
             {
                 var newFileName = fileNamePrefix + count + "." + CSharpDefaultFileExt;
-                var documentId = DocumentId.CreateNewId(GetProjectId(fileSource), debugName: newFileName);
+                var documentId = DocumentId.CreateNewId(GetProjectId(fileSource), newFileName);
                 solution = solution.AddDocument(documentId, newFileName, SourceText.From(fileSource.Source));
                 count++;
             }
 
             return solution;
         }
+
         #endregion
     }
 }

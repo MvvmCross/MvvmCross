@@ -5,47 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Linq;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxBundleTest : MvxIoCSupportingTest
     {
-        [Test]
-        public void Test_RoundTrip()
-        {
-            ClearAll();
-
-            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
-
-            var testObject = new BundleObject
-            {
-                TheBool1 = false,
-                TheBool2 = true,
-                TheGuid1 = Guid.NewGuid(),
-                TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
-                TheInt1 = 123,
-                TheInt2 = 456,
-                TheString1 = "Hello World",
-                TheString2 = null
-            };
-            var bundle = new MvxBundle();
-            bundle.Write(testObject);
-
-            var output = bundle.Read<BundleObject>();
-
-            Assert.AreEqual(testObject, output);
-        }
-
         public BundleObject TestFunction(string TheString1, string missing, int TheInt2, bool TheBool2, Guid TheGuid2)
         {
             return new BundleObject
@@ -79,7 +51,7 @@ namespace MvvmCross.Test.ViewModels
             var bundle = new MvxBundle();
             bundle.Write(testObject);
 
-            var method = this.GetType().GetMethod("TestFunction");
+            var method = GetType().GetMethod("TestFunction");
             var args = bundle.CreateArgumentList(method.GetParameters(), "ignored debug text");
             var output = method.Invoke(this, args.ToArray());
 
@@ -95,6 +67,32 @@ namespace MvvmCross.Test.ViewModels
                 TheString2 = null
             };
             Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void Test_RoundTrip()
+        {
+            ClearAll();
+
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
+
+            var testObject = new BundleObject
+            {
+                TheBool1 = false,
+                TheBool2 = true,
+                TheGuid1 = Guid.NewGuid(),
+                TheGuid2 = new Guid(123, 10, 444, 1, 2, 3, 4, 5, 6, 7, 8),
+                TheInt1 = 123,
+                TheInt2 = 456,
+                TheString1 = "Hello World",
+                TheString2 = null
+            };
+            var bundle = new MvxBundle();
+            bundle.Write(testObject);
+
+            var output = bundle.Read<BundleObject>();
+
+            Assert.AreEqual(testObject, output);
         }
     }
 }

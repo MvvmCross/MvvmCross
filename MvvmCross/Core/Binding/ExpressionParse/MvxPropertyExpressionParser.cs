@@ -19,13 +19,11 @@ namespace MvvmCross.Binding.ExpressionParse
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            if (propertyPath.Body is MethodCallExpression 
+            if (propertyPath.Body is MethodCallExpression
                 && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
-            {
-                return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
-            }
+                return ParseBindExtensionMethod(propertyPath, default(TObj));
 
-            return this.Parse((LambdaExpression)propertyPath);
+            return Parse((LambdaExpression) propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)
@@ -35,9 +33,7 @@ namespace MvvmCross.Binding.ExpressionParse
             var current = propertyPath.Body;
             while (current != null
                    && current.NodeType != ExpressionType.Parameter)
-            {
                 current = ParseTo(current, toReturn);
-            }
 
             return toReturn;
         }
@@ -46,19 +42,13 @@ namespace MvvmCross.Binding.ExpressionParse
         {
             // This happens when a value type gets boxed
             if (current.NodeType == ExpressionType.Convert || current.NodeType == ExpressionType.ConvertChecked)
-            {
                 return Unbox(current);
-            }
 
             if (current.NodeType == ExpressionType.MemberAccess)
-            {
                 return ParseProperty(current, toReturn);
-            }
 
             if (current is MethodCallExpression)
-            {
                 return ParseMethodCall(current, toReturn);
-            }
 
             throw new ArgumentException(
                 "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty'");
@@ -66,13 +56,11 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MethodCallExpression)current;
+            var me = (MethodCallExpression) current;
             if (me.Method.Name != "get_Item"
                 || me.Arguments.Count != 1)
-            {
                 throw new ArgumentException(
                     "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty' or 'x => x.SomeCollection[0].Property'");
-            }
             var argument = me.Arguments[0];
             argument = ConvertMemberAccessToConstant(argument);
             toReturn.PrependIndexed(argument.ToString());
@@ -125,7 +113,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MemberExpression)current;
+            var me = (MemberExpression) current;
             toReturn.PrependProperty(me.Member.Name);
             current = me.Expression;
             return current;
@@ -133,7 +121,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression Unbox(Expression current)
         {
-            var ue = (UnaryExpression)current;
+            var ue = (UnaryExpression) current;
             current = ue.Operand;
             return current;
         }

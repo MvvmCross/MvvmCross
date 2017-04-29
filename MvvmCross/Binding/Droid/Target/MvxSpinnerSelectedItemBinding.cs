@@ -16,8 +16,6 @@ namespace MvvmCross.Binding.Droid.Target
     public class MvxSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding
     {
-        protected MvxSpinner Spinner => (MvxSpinner)Target;
-
         private object _currentValue;
         private IDisposable _subscription;
 
@@ -25,6 +23,12 @@ namespace MvvmCross.Binding.Droid.Target
             : base(spinner)
         {
         }
+
+        protected MvxSpinner Spinner => (MvxSpinner) Target;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(object);
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
@@ -36,18 +40,12 @@ namespace MvvmCross.Binding.Droid.Target
 
             bool changed;
             if (newValue == null)
-            {
-                changed = (_currentValue != null);
-            }
+                changed = _currentValue != null;
             else
-            {
-                changed = !(newValue.Equals(_currentValue));
-            }
+                changed = !newValue.Equals(_currentValue);
 
             if (!changed)
-            {
                 return;
-            }
 
             _currentValue = newValue;
             FireValueChanged(newValue);
@@ -55,7 +53,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var spinner = (MvxSpinner)target;
+            var spinner = (MvxSpinner) target;
 
             if (value == null)
             {
@@ -76,8 +74,6 @@ namespace MvvmCross.Binding.Droid.Target
             }
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
             var spinner = Spinner;
@@ -88,8 +84,6 @@ namespace MvvmCross.Binding.Droid.Target
                 nameof(spinner.ItemSelected),
                 SpinnerItemSelected);
         }
-
-        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

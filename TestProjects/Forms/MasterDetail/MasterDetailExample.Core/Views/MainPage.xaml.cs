@@ -6,7 +6,7 @@ namespace MasterDetailExample.Core.Views
     {
         public MainPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
     }
 }

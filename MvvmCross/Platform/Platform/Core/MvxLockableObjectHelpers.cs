@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Threading;
-
     public static class MvxLockableObjectHelpers
     {
         public static void RunSyncWithLock(object lockObject, Action action)
@@ -23,12 +23,12 @@ namespace MvvmCross.Platform.Core
         public static void RunAsyncWithLock(object lockObject, Action action)
         {
             MvxAsyncDispatcher.BeginAsync(() =>
+            {
+                lock (lockObject)
                 {
-                    lock (lockObject)
-                    {
-                        action();
-                    }
-                });
+                    action();
+                }
+            });
         }
 
         public static void RunSyncOrAsyncWithLock(object lockObject, Action action, Action whenComplete = null)
@@ -49,14 +49,14 @@ namespace MvvmCross.Platform.Core
             else
             {
                 MvxAsyncDispatcher.BeginAsync(() =>
+                {
+                    lock (lockObject)
                     {
-                        lock (lockObject)
-                        {
-                            action();
-                        }
+                        action();
+                    }
 
-                        whenComplete?.Invoke();
-                    });
+                    whenComplete?.Invoke();
+                });
             }
         }
     }

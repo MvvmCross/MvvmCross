@@ -17,9 +17,9 @@ namespace MvvmCross.Plugins.Json
         : IMvxConfigurablePluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();
+        private MvxJsonConfiguration _configuration;
 
         private bool _loaded;
-        private MvxJsonConfiguration _configuration;
 
         public void EnsureLoaded()
         {
@@ -31,9 +31,7 @@ namespace MvvmCross.Plugins.Json
             var configuration = _configuration ?? MvxJsonConfiguration.Default;
 
             if (configuration.RegisterAsTextSerializer)
-            {
                 Mvx.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
-            }
         }
 
         public void Configure(IMvxPluginConfiguration configuration)
@@ -45,11 +43,11 @@ namespace MvvmCross.Plugins.Json
             }
 
             if (configuration != null && !(configuration is MvxJsonConfiguration))
-            {
-                throw new MvxException("You must configure the Json plugin with MvxJsonConfiguration - but supplied {0}", configuration.GetType().Name);
-            }
+                throw new MvxException(
+                    "You must configure the Json plugin with MvxJsonConfiguration - but supplied {0}",
+                    configuration.GetType().Name);
 
-            _configuration = (MvxJsonConfiguration)configuration;
+            _configuration = (MvxJsonConfiguration) configuration;
         }
     }
 }

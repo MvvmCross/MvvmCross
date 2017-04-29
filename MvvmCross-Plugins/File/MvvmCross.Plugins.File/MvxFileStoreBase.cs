@@ -22,6 +22,14 @@ namespace MvvmCross.Plugins.File
     {
         private const int BufferSize = 1024;
 
+        protected abstract void WriteFileCommon(string path, Action<Stream> streamAction);
+
+        protected abstract bool TryReadFileCommon(string path, Func<Stream, bool> streamAction);
+
+        protected abstract Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction);
+
+        protected abstract Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction);
+
         #region IMvxFileStore Members
 
         public abstract Stream OpenRead(string path);
@@ -50,35 +58,35 @@ namespace MvvmCross.Plugins.File
         public bool TryReadTextFile(string path, out string contents)
         {
             string result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            var toReturn = TryReadFileCommon(path, stream =>
+            {
+                using (var streamReader = new StreamReader(stream))
                 {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        result = streamReader.ReadToEnd();
-                    }
-                    return true;
-                });
+                    result = streamReader.ReadToEnd();
+                }
+                return true;
+            });
             contents = result;
             return toReturn;
         }
 
-        public bool TryReadBinaryFile(string path, out Byte[] contents)
+        public bool TryReadBinaryFile(string path, out byte[] contents)
         {
-            Byte[] result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            byte[] result = null;
+            var toReturn = TryReadFileCommon(path, stream =>
+            {
+                using (var binaryReader = new BinaryReader(stream))
                 {
-                    using (var binaryReader = new BinaryReader(stream))
-                    {
-                        var memoryBuffer = new byte[stream.Length];
-                        if (binaryReader.Read(memoryBuffer, 0,
-                                              memoryBuffer.Length) !=
-                            memoryBuffer.Length)
-                            return false; // TODO - do more here?
+                    var memoryBuffer = new byte[stream.Length];
+                    if (binaryReader.Read(memoryBuffer, 0,
+                            memoryBuffer.Length) !=
+                        memoryBuffer.Length)
+                        return false; // TODO - do more here?
 
-                        result = memoryBuffer;
-                        return true;
-                    }
-                });
+                    result = memoryBuffer;
+                    return true;
+                }
+            });
             contents = result;
             return toReturn;
         }
@@ -90,26 +98,26 @@ namespace MvvmCross.Plugins.File
 
         public void WriteFile(string path, string contents)
         {
-            WriteFileCommon(path, (stream) =>
+            WriteFileCommon(path, stream =>
+            {
+                using (var sw = new StreamWriter(stream))
                 {
-                    using (var sw = new StreamWriter(stream))
-                    {
-                        sw.Write(contents);
-                        sw.Flush();
-                    }
-                });
+                    sw.Write(contents);
+                    sw.Flush();
+                }
+            });
         }
 
-        public void WriteFile(string path, IEnumerable<Byte> contents)
+        public void WriteFile(string path, IEnumerable<byte> contents)
         {
-            WriteFileCommon(path, (stream) =>
+            WriteFileCommon(path, stream =>
+            {
+                using (var binaryWriter = new BinaryWriter(stream))
                 {
-                    using (var binaryWriter = new BinaryWriter(stream))
-                    {
-                        binaryWriter.Write(contents.ToArray());
-                        binaryWriter.Flush();
-                    }
-                });
+                    binaryWriter.Write(contents.ToArray());
+                    binaryWriter.Flush();
+                }
+            });
         }
 
         public void WriteFile(string path, Action<Stream> writeMethod)
@@ -121,7 +129,7 @@ namespace MvvmCross.Plugins.File
 
         public abstract string NativePath(string path);
 
-		public abstract bool TryCopy(string from, string to, bool overwrite);
+        public abstract bool TryCopy(string from, string to, bool overwrite);
 
         #endregion IMvxFileStore Members
 
@@ -129,15 +137,17 @@ namespace MvvmCross.Plugins.File
 
         public async Task<TryResult<string>> TryReadTextFileAsync(string path)
         {
-            string content = "";
-            bool operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
-            {
-                using (var reader = new StreamReader(stream))
+            var content = "";
+            var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
                 {
-                    content = await reader.ReadToEndAsync().ConfigureAwait(false);
-                    return true;
-                };
-            }).ConfigureAwait(false);
+                    using (var reader = new StreamReader(stream))
+                    {
+                        content = await reader.ReadToEndAsync().ConfigureAwait(false);
+                        return true;
+                    }
+                    ;
+                })
+                .ConfigureAwait(false);
             return TryResult.Create(operationSucceeded, content);
         }
 
@@ -145,39 +155,43 @@ namespace MvvmCross.Plugins.File
         {
             var contentStringBuilder = new StringBuilder();
             var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
-            {
-                using (var reader = new StreamReader(stream))
                 {
-                    var buffer = new char[BufferSize];
-
-                    while (reader.Peek() > 0)
+                    using (var reader = new StreamReader(stream))
                     {
-                        if (cancellationToken.IsCancellationRequested)
-                            return false;
+                        var buffer = new char[BufferSize];
 
-                        var charsRead = await reader.ReadAsync(buffer, 0, BufferSize);
+                        while (reader.Peek() > 0)
+                        {
+                            if (cancellationToken.IsCancellationRequested)
+                                return false;
 
-                        contentStringBuilder.Append(buffer, 0, charsRead);
+                            var charsRead = await reader.ReadAsync(buffer, 0, BufferSize);
+
+                            contentStringBuilder.Append(buffer, 0, charsRead);
+                        }
+                        return true;
                     }
-                    return true;
-                };
-            }).ConfigureAwait(false);
+                    ;
+                })
+                .ConfigureAwait(false);
 
-            return TryResult.Create(operationSucceeded, operationSucceeded ? contentStringBuilder.ToString() : string.Empty);
+            return TryResult.Create(operationSucceeded,
+                operationSucceeded ? contentStringBuilder.ToString() : string.Empty);
         }
 
         public async Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path)
         {
             byte[] content = null;
-            bool operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
-            {
-                using (var ms = new MemoryStream())
+            var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
                 {
-                    await stream.CopyToAsync(ms).ConfigureAwait(false);
-                    content = ms.ToArray();
-                    return true;
-                }
-            }).ConfigureAwait(false);
+                    using (var ms = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(ms).ConfigureAwait(false);
+                        content = ms.ToArray();
+                        return true;
+                    }
+                })
+                .ConfigureAwait(false);
             return TryResult.Create(operationSucceeded, content);
         }
 
@@ -185,87 +199,93 @@ namespace MvvmCross.Plugins.File
         {
             byte[] content = null;
             var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
-            {
-                using (var ms = new MemoryStream())
                 {
-                    await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
+                    using (var ms = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
 
-                    if (cancellationToken.IsCancellationRequested)
-                        return false;
+                        if (cancellationToken.IsCancellationRequested)
+                            return false;
 
-                    content = ms.ToArray();
-                    return true;
-                }
-            }).ConfigureAwait(false);
+                        content = ms.ToArray();
+                        return true;
+                    }
+                })
+                .ConfigureAwait(false);
             return TryResult.Create(operationSucceeded, content);
         }
 
         public async Task<bool> TryReadBinaryFileAsync(string path, Func<Stream, Task<bool>> readMethod)
         {
             return await TryReadFileCommonAsync(path,
-                async stream => await readMethod(stream).ConfigureAwait(false)).ConfigureAwait(false);
+                    async stream => await readMethod(stream).ConfigureAwait(false))
+                .ConfigureAwait(false);
         }
 
         public async Task<bool> TryReadBinaryFileAsync(string path,
             Func<Stream, CancellationToken, Task<bool>> readMethod, CancellationToken cancellationToken)
         {
             return await TryReadFileCommonAsync(
-                path, async stream => await readMethod(stream, cancellationToken).ConfigureAwait(false))
+                    path, async stream => await readMethod(stream, cancellationToken).ConfigureAwait(false))
                 .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, string contents)
         {
             await WriteFileCommonAsync(path, async stream =>
-            {
-                using (var writer = new StreamWriter(stream))
                 {
-                    await writer.WriteAsync(contents).ConfigureAwait(false);
-                }
-            }).ConfigureAwait(false);
+                    using (var writer = new StreamWriter(stream))
+                    {
+                        await writer.WriteAsync(contents).ConfigureAwait(false);
+                    }
+                })
+                .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, string contents, CancellationToken cancellationToken)
         {
             var contentsCharArray = contents.ToCharArray();
             await WriteFileCommonAsync(path, async stream =>
-            {
-                using (var writer = new StreamWriter(stream))
                 {
-                    var startIndex = 0;
-                    while (startIndex < contentsCharArray.Length)
+                    using (var writer = new StreamWriter(stream))
                     {
-                        if (cancellationToken.IsCancellationRequested)
-                            return;
+                        var startIndex = 0;
+                        while (startIndex < contentsCharArray.Length)
+                        {
+                            if (cancellationToken.IsCancellationRequested)
+                                return;
 
-                        var charsToRead = Math.Min(BufferSize, contentsCharArray.Length - startIndex);
-                        await writer.WriteAsync(contentsCharArray, 0, charsToRead).ConfigureAwait(false);
-                        startIndex += BufferSize;
+                            var charsToRead = Math.Min(BufferSize, contentsCharArray.Length - startIndex);
+                            await writer.WriteAsync(contentsCharArray, 0, charsToRead).ConfigureAwait(false);
+                            startIndex += BufferSize;
+                        }
                     }
-                }
-            }).ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, byte[] contents)
         {
             await WriteFileCommonAsync(path, async stream =>
-            {
-                using (MemoryStream ms = new MemoryStream(contents))
                 {
-                    await ms.CopyToAsync(stream).ConfigureAwait(false);
-                }
-            }).ConfigureAwait(false);
+                    using (var ms = new MemoryStream(contents))
+                    {
+                        await ms.CopyToAsync(stream).ConfigureAwait(false);
+                    }
+                })
+                .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, byte[] contents, CancellationToken cancellationToken)
         {
             await WriteFileCommonAsync(path, async stream =>
-            {
-                using (var ms = new MemoryStream(contents))
                 {
-                    await ms.CopyToAsync(stream, BufferSize, cancellationToken).ConfigureAwait(false);
-                }
-            }).ConfigureAwait(false);
+                    using (var ms = new MemoryStream(contents))
+                    {
+                        await ms.CopyToAsync(stream, BufferSize, cancellationToken).ConfigureAwait(false);
+                    }
+                })
+                .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, IEnumerable<byte> contents)
@@ -280,30 +300,19 @@ namespace MvvmCross.Plugins.File
 
         public async Task WriteFileAsync(string path, Func<Stream, Task> writeMethod)
         {
-            await WriteFileCommonAsync(path, async stream =>
-            {
-                await writeMethod(stream).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            await WriteFileCommonAsync(path, async stream => { await writeMethod(stream).ConfigureAwait(false); })
+                .ConfigureAwait(false);
         }
 
         public async Task WriteFileAsync(string path, Func<Stream, CancellationToken, Task> writeMethod,
             CancellationToken cancellationToken)
         {
-            await WriteFileCommonAsync(path, async stream =>
-            {
-                await writeMethod(stream, cancellationToken).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            await WriteFileCommonAsync(path,
+                    async stream => { await writeMethod(stream, cancellationToken).ConfigureAwait(false); })
+                .ConfigureAwait(false);
         }
 
         #endregion IMvxFileStore Async
-
-        protected abstract void WriteFileCommon(string path, Action<Stream> streamAction);
-
-        protected abstract bool TryReadFileCommon(string path, Func<Stream, bool> streamAction);
-
-        protected abstract Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction);
-
-        protected abstract Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction);
     }
 }
 

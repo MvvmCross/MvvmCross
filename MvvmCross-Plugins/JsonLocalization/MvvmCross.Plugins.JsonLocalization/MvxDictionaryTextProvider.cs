@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxDictionaryTextProvider : MvxTextProvider
+    public class MvxDictionaryTextProvider : MvxTextProvider
     {
         private readonly Dictionary<string, string> _entries = new Dictionary<string, string>();
         private readonly bool _maskErrors;

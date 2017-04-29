@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     /// <summary>
-    /// Custom binding for UIActivityIndicator hidden.
-    /// This binding will ensure the indicator animates when shown and stops when hidden
+    ///     Custom binding for UIActivityIndicator hidden.
+    ///     This binding will ensure the indicator animates when shown and stops when hidden
     /// </summary>
     public class MvxUIActivityIndicatorViewHiddenTargetBinding : MvxConvertingTargetBinding
     {
@@ -22,37 +22,29 @@ namespace MvvmCross.Binding.tvOS.Target
             : base(target)
         {
             if (target == null)
-            {
                 MvxBindingTrace.Trace(
-                                    MvxTraceLevel.Error,
-                                    "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
-            }
+                    MvxTraceLevel.Error,
+                    "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(bool);
+        public override Type TargetType => typeof(bool);
 
         protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UIActivityIndicatorView)target;
+            var view = (UIActivityIndicatorView) target;
             if (view == null)
-            {
                 return;
-            }
 
-            view.Hidden = (bool)value;
+            view.Hidden = (bool) value;
 
             if (view.Hidden)
-            {
                 view.StopAnimating();
-            }
             else
-            {
                 view.StartAnimating();
-            }
         }
     }
 }

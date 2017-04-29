@@ -5,28 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Threading;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Wpf.Views;
+
 namespace MvvmCross.Wpf.Platform
 {
-    using System.Windows.Threading;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using MvvmCross.Wpf.Views;
-
     public abstract class MvxWpfSetup
         : MvxSetup
     {
-        private readonly Dispatcher _uiThreadDispatcher;
         private readonly IMvxWpfViewPresenter _presenter;
+        private readonly Dispatcher _uiThreadDispatcher;
 
         protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
-            this._uiThreadDispatcher = uiThreadDispatcher;
-            this._presenter = presenter;
+            _uiThreadDispatcher = uiThreadDispatcher;
+            _presenter = presenter;
         }
 
         protected override IMvxTrace CreateDebugTrace()
@@ -36,7 +35,7 @@ namespace MvvmCross.Wpf.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var toReturn = this.CreateWpfViewsContainer();
+            var toReturn = CreateWpfViewsContainer();
             Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
             return toReturn;
         }
@@ -48,7 +47,7 @@ namespace MvvmCross.Wpf.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfViewDispatcher(this._uiThreadDispatcher, this._presenter);
+            return new MvxWpfViewDispatcher(_uiThreadDispatcher, _presenter);
         }
 
         protected override IMvxPluginManager CreatePluginManager()

@@ -6,7 +6,8 @@ using NUnit.Framework;
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerTests : DiagnosticVerifier<AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer>
+    public class AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerTests : DiagnosticVerifier<
+        AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer>
     {
         private const string Test1 = @"
 using System;
@@ -143,6 +144,64 @@ namespace AndroidApp.Core.ViewModels
 }";
 
         [Test]
+        public void
+            AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldNotShowAnyDiagnosticsIfAlreadyWithParameterAndInherited()
+        {
+            var expectedDiagnostic = new DiagnosticResult
+            {
+                Id = DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId,
+                Message =
+                    "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", 17, 13)
+                    }
+            };
+
+            VerifyCSharpDiagnostic(
+                new[]
+                {
+                    new MvxTestFileSource(Test3, MvxProjType.Core)
+                },
+                expectedDiagnostic);
+        }
+
+        [Test]
+        public void
+            AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldNotShowAnyDiagnosticsIfInheritedFromNonGeneric()
+        {
+            VerifyCSharpDiagnostic(
+                new[]
+                {
+                    new MvxTestFileSource(CorrectCode3, MvxProjType.Core)
+                });
+        }
+
+        [Test]
+        public void
+            AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowNotShowAnyDiagnosticsIfAlreadyWithParameter()
+        {
+            VerifyCSharpDiagnostic(
+                new[]
+                {
+                    new MvxTestFileSource(CorrectCode2, MvxProjType.Core)
+                });
+        }
+
+        [Test]
+        public void
+            AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowNotShowAnyDiagnosticsIfNonGenericViewModel()
+        {
+            VerifyCSharpDiagnostic(
+                new[]
+                {
+                    new MvxTestFileSource(CorrectCode1, MvxProjType.Core)
+                });
+        }
+
+        [Test]
         public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowOneDiagnostic()
         {
             var expectedDiagnostic = new DiagnosticResult
@@ -167,27 +226,8 @@ namespace AndroidApp.Core.ViewModels
         }
 
         [Test]
-        public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowNotShowAnyDiagnosticsIfNonGenericViewModel()
-        {
-            VerifyCSharpDiagnostic(
-                new[]
-                {
-                    new MvxTestFileSource(CorrectCode1, MvxProjType.Core)
-                });
-        }
-
-        [Test]
-        public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowNotShowAnyDiagnosticsIfAlreadyWithParameter()
-        {
-            VerifyCSharpDiagnostic(
-                new[]
-                {
-                    new MvxTestFileSource(CorrectCode2, MvxProjType.Core)
-                });
-        }
-
-        [Test]
-        public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowOneDiagnosticIfArgumentTypeIsMismatch()
+        public void
+            AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldShowOneDiagnosticIfArgumentTypeIsMismatch()
         {
             var expectedDiagnostic = new DiagnosticResult
             {
@@ -208,40 +248,6 @@ namespace AndroidApp.Core.ViewModels
                     new MvxTestFileSource(Test2, MvxProjType.Core)
                 },
                 expectedDiagnostic);
-        }
-
-        [Test]
-        public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldNotShowAnyDiagnosticsIfAlreadyWithParameterAndInherited()
-        {
-            var expectedDiagnostic = new DiagnosticResult
-            {
-                Id = DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId,
-                Message =
-                    "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument",
-                Severity = DiagnosticSeverity.Warning,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 17, 13)
-                    }
-            };
-
-            VerifyCSharpDiagnostic(
-                new[]
-                {
-                    new MvxTestFileSource(Test3, MvxProjType.Core)
-                },
-                expectedDiagnostic);
-        }
-
-        [Test]
-        public void AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzerShouldNotShowAnyDiagnosticsIfInheritedFromNonGeneric()
-        {
-            VerifyCSharpDiagnostic(
-                new[]
-                {
-                    new MvxTestFileSource(CorrectCode3, MvxProjType.Core)
-                });
         }
     }
 }

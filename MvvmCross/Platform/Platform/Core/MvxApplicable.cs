@@ -5,32 +5,32 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-
     public abstract class MvxApplicable
         : IMvxApplicable
     {
         private bool _finalizerSuppressed;
 
+        public virtual void Apply()
+        {
+            SuppressFinalizer();
+        }
+
         ~MvxApplicable()
         {
-            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", this.GetType().Name);
+            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()
         {
-            if (this._finalizerSuppressed)
+            if (_finalizerSuppressed)
                 return;
 
-            this._finalizerSuppressed = true;
+            _finalizerSuppressed = true;
             GC.SuppressFinalize(this);
-        }
-
-        public virtual void Apply()
-        {
-            this.SuppressFinalizer();
         }
     }
 }

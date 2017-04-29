@@ -31,26 +31,21 @@ namespace MvvmCross.Platform.Converters
         {
             try
             {
-                return Convert((TFrom)value, targetType, parameter, culture);
+                return Convert((TFrom) value, targetType, parameter, culture);
             }
             catch (Exception e)
             {
                 Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to Convert from {typeof (TFrom)} to {typeof (TTo)} with Exception: {e}");
+                    $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
-        }
-
-        protected virtual TTo Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                return ConvertBack((TTo)value, targetType, parameter, culture);
+                return ConvertBack((TTo) value, targetType, parameter, culture);
             }
             catch (Exception e)
             {
@@ -58,6 +53,11 @@ namespace MvvmCross.Platform.Converters
                     $"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
+        }
+
+        protected virtual TTo Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
 
         protected virtual TFrom ConvertBack(TTo value, Type targetType, object parameter, CultureInfo culture)
@@ -73,7 +73,7 @@ namespace MvvmCross.Platform.Converters
         {
             try
             {
-                return Convert((TFrom)value, targetType, parameter, culture);
+                return Convert((TFrom) value, targetType, parameter, culture);
             }
             catch (Exception e)
             {
@@ -81,11 +81,6 @@ namespace MvvmCross.Platform.Converters
                     $"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
-        }
-
-        protected virtual object Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -100,6 +95,11 @@ namespace MvvmCross.Platform.Converters
                     $"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
+        }
+
+        protected virtual object Convert(TFrom value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
 
         protected virtual TFrom TypedConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

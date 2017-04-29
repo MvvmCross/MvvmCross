@@ -29,11 +29,17 @@ namespace MvvmCross.FieldBinding
 
     public class NCString : NC<string>, INCString
     {
-        public NCString() : base() { }
+        public NCString()
+        {
+        }
 
-        public NCString(string value) : base(value) { }
+        public NCString(string value) : base(value)
+        {
+        }
 
-        public NCString(string value, Action<string> valueChanged) : base(value, valueChanged) { }
+        public NCString(string value, Action<string> valueChanged) : base(value, valueChanged)
+        {
+        }
 
         public NCString(int maxLength) : this()
         {
@@ -53,7 +59,7 @@ namespace MvvmCross.FieldBinding
             Changed += NCString_Changed;
         }
 
-        public int MaxLength { get; private set; }
+        public int MaxLength { get; }
 
         private void NCString_Changed(object sender, EventArgs e)
         {
@@ -64,7 +70,7 @@ namespace MvvmCross.FieldBinding
 
     public class NCList<TValue>
         : NotifyChangeList<TValue>
-        , INCList<TValue>
+            , INCList<TValue>
     {
         public NCList()
         {
@@ -83,7 +89,7 @@ namespace MvvmCross.FieldBinding
 
     public class NCDictionary<TKey, TValue>
         : NotifyChangeDictionary<TKey, TValue>
-        , INCDictionary<TKey, TValue>
+            , INCDictionary<TKey, TValue>
     {
         public NCDictionary()
         {

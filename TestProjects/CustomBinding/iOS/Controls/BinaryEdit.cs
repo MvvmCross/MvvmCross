@@ -10,7 +10,8 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
     [Register("BinaryEdit")]
     public class BinaryEdit : UIView
     {
-        private List<UISwitch> _boxes = new List<UISwitch>();
+        private readonly List<UISwitch> _boxes = new List<UISwitch>();
+        private bool _isUpdating;
 
         public BinaryEdit()
         {
@@ -23,22 +24,18 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             BackgroundColor = UIColor.LightGray;
 
             for (var i = 0; i < 4; i++)
             {
-                var box = new UISwitch(new RectangleF(10, 30*i, 300, 30));
+                var box = new UISwitch(new RectangleF(10, 30 * i, 300, 30));
                 AddSubview(box);
                 _boxes.Add(box);
-                box.ValueChanged += (sender, args) =>
-                {
-                    UpdateCount();
-                };
+                box.ValueChanged += (sender, args) => { UpdateCount(); };
             }
         }
-        private bool _isUpdating;
 
         private void UpdateCount()
         {

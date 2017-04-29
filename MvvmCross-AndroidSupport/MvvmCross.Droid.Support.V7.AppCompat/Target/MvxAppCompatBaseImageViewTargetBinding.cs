@@ -5,40 +5,38 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Graphics;
+using Android.Support.V7.Widget;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-
-    using Android.Graphics;
-    using Android.Support.V7.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected AppCompatImageView ImageView => (AppCompatImageView)this.Target;
-
         protected MvxAppCompatBaseImageViewTargetBinding(AppCompatImageView imageView)
             : base(imageView)
         {
         }
 
+        protected AppCompatImageView ImageView => (AppCompatImageView) Target;
+
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)
         {
-            var imageView = (AppCompatImageView)target;
+            var imageView = (AppCompatImageView) target;
 
             try
             {
                 Bitmap bitmap;
-                if (!this.GetBitmap(value, out bitmap))
+                if (!GetBitmap(value, out bitmap))
                     return;
-                this.SetImageBitmap(imageView, bitmap);
+                SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {

@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using MvvmCross.Platform.Platform;
-
     public interface IMvxValueCombinerRegistry
         : IMvxNamedInstanceRegistry<IMvxValueCombiner>
-          , IMvxValueCombinerLookup
+            , IMvxValueCombinerLookup
     {
     }
 }

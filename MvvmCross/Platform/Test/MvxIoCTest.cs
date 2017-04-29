@@ -5,24 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxIocTest
     {
-        public interface IA { IB B { get; } }
+        public interface IA
+        {
+            IB B { get; }
+        }
 
-        public interface IB { }
+        public interface IB
+        {
+        }
 
-        public interface IC { }
+        public interface IC
+        {
+        }
 
         public class A : IA
         {
@@ -53,9 +58,6 @@ namespace MvvmCross.Platform.Test
         public class C2 : IC
 
         {
-            public C2()
-            {
-            }
         }
 
         public class COdd : IC
@@ -73,11 +75,73 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
+        public void Non_generic_RegisterType_with_constructor_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => new C2());
+
+            var c1 = Mvx.Resolve<IC>();
+            var c2 = Mvx.Resolve<IC>();
+
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+
+            Assert.AreNotEqual(c1, c2);
+        }
+
+        [Test]
+        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => "Fail");
+
+            Assert.Throws<MvxIoCResolveException>(() =>
+            {
+                var c1 = Mvx.Resolve<IC>();
+            });
+        }
+
+        [Test]
+        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType(typeof(IC), () => 36);
+
+            Assert.Throws<MvxIoCResolveException>(() =>
+            {
+                var c1 = Mvx.Resolve<IC>();
+            });
+        }
+
+        [Test]
+        public void RegisterType_with_constructor_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            instance.RegisterType<IC>(() => new C2());
+
+            var c1 = Mvx.Resolve<IC>();
+            var c2 = Mvx.Resolve<IC>();
+
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+
+            Assert.AreNotEqual(c1, c2);
+        }
+
+        [Test]
         public void TryResolve_CircularButSafeDynamicWithOptionOff_ReturnsTrue()
         {
             COdd.FirstTime = true;
             MvxSingleton.ClearAllSingletons();
-            var options = new MvxIocOptions()
+            var options = new MvxIocOptions
             {
                 TryToDetectDynamicCircularReferences = false
             };
@@ -127,19 +191,26 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void TryResolve_NonCircularRegistration_ReturnsTrue()
+        public void TryResolve_Dynamic_ReturnsDifferentInstanceEachTime()
         {
             MvxSingleton.ClearAllSingletons();
             var instance = MvxSimpleIoCContainer.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IA, A>();
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
             Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.RegisterType<IA, A>();
 
-            IA a;
-            var result = Mvx.TryResolve(out a);
-            Assert.IsTrue(result);
-            Assert.IsNotNull(a);
+            var previous = new Dictionary<IA, bool>();
+
+            for (var i = 0; i < 100; i++)
+            {
+                IA a1;
+                var result = Mvx.TryResolve(out a1);
+                Assert.IsTrue(result);
+                Assert.IsFalse(previous.ContainsKey(a1));
+                Assert.AreEqual(i, previous.Count);
+                previous.Add(a1, true);
+            }
         }
 
         [Test]
@@ -157,13 +228,29 @@ namespace MvvmCross.Platform.Test
             Assert.IsTrue(result);
             Assert.IsNotNull(a0);
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
                 IA a1;
                 result = Mvx.TryResolve(out a1);
                 Assert.IsTrue(result);
                 Assert.AreSame(a0, a1);
             }
+        }
+
+        [Test]
+        public void TryResolve_NonCircularRegistration_ReturnsTrue()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxSimpleIoCContainer.Initialize();
+
+            Mvx.LazyConstructAndRegisterSingleton<IA, A>();
+            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
+
+            IA a;
+            var result = Mvx.TryResolve(out a);
+            Assert.IsTrue(result);
+            Assert.IsNotNull(a);
         }
 
         [Test]
@@ -181,35 +268,12 @@ namespace MvvmCross.Platform.Test
             Assert.IsTrue(result);
             Assert.IsNotNull(a0);
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
                 IA a1;
                 result = Mvx.TryResolve(out a1);
                 Assert.IsTrue(result);
                 Assert.AreSame(a0, a1);
-            }
-        }
-
-        [Test]
-        public void TryResolve_Dynamic_ReturnsDifferentInstanceEachTime()
-        {
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
-
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
-            Mvx.RegisterType<IA, A>();
-
-            var previous = new Dictionary<IA, bool>();
-
-            for (int i = 0; i < 100; i++)
-            {
-                IA a1;
-                var result = Mvx.TryResolve(out a1);
-                Assert.IsTrue(result);
-                Assert.IsFalse(previous.ContainsKey(a1));
-                Assert.AreEqual(i, previous.Count);
-                previous.Add(a1, true);
             }
         }
 
@@ -229,66 +293,6 @@ namespace MvvmCross.Platform.Test
             Assert.IsNotNull(a1);
             Assert.IsNotNull(a1.B);
             Assert.IsInstanceOf<B>(a1.B);
-        }
-
-        [Test]
-        public void RegisterType_with_constructor_creates_different_objects()
-        {
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
-
-            instance.RegisterType<IC>(() => new C2());
-
-            var c1 = Mvx.Resolve<IC>();
-            var c2 = Mvx.Resolve<IC>();
-
-            Assert.IsNotNull(c1);
-            Assert.IsNotNull(c2);
-
-            Assert.AreNotEqual(c1, c2);
-        }
-
-        [Test]
-        public void Non_generic_RegisterType_with_constructor_creates_different_objects()
-        {
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
-
-            instance.RegisterType(typeof(IC), () => new C2());
-
-            var c1 = Mvx.Resolve<IC>();
-            var c2 = Mvx.Resolve<IC>();
-
-            Assert.IsNotNull(c1);
-            Assert.IsNotNull(c2);
-
-            Assert.AreNotEqual(c1, c2);
-        }
-
-        [Test]
-        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
-        {
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
-
-            instance.RegisterType(typeof(IC), () => "Fail");
-
-            Assert.Throws<MvxIoCResolveException>(() => {
-                var c1 = Mvx.Resolve<IC>();
-            });
-        }
-
-        [Test]
-        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
-        {
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
-
-            instance.RegisterType(typeof(IC), () => 36);
-
-            Assert.Throws<MvxIoCResolveException>(() => {
-                var c1 = Mvx.Resolve<IC>();
-            });
         }
 
         // TODO - there are so many tests we could and should do here!

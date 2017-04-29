@@ -1,24 +1,26 @@
+using Cirrious.FluentLayouts.Touch;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using UIKit;
-
     [Register("CenterPanelView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
     public class CenterPanelView : BaseViewController<CenterPanelViewModel>
     {
         /// <summary>
-        /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
+        ///     Called after the controller’s <see cref="P:UIKit.UIViewController.View" /> is loaded into memory.
         /// </summary>
         /// <remarks>
-        /// <para>
-        /// This method is called after <c>this</c> <see cref="T:UIKit.UIViewController"/>'s <see cref="P:UIKit.UIViewController.View"/> and its entire view hierarchy have been loaded into memory. This method is called whether the <see cref="T:UIKit.UIView"/> was loaded from a .xib file or programmatically.
-        /// </para>
+        ///     <para>
+        ///         This method is called after <c>this</c> <see cref="T:UIKit.UIViewController" />'s
+        ///         <see cref="P:UIKit.UIViewController.View" /> and its entire view hierarchy have been loaded into memory. This
+        ///         method is called whether the <see cref="T:UIKit.UIView" /> was loaded from a .xib file or programmatically.
+        ///     </para>
         /// </remarks>
         public override void ViewDidLoad()
         {
@@ -54,23 +56,17 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             View.AddConstraints(
-
                 label.WithSameCenterX(View),
                 label.WithSameCenterY(View),
-
                 rightPanelInstructions.Below(label, 40),
                 rightPanelInstructions.AtLeftOf(View, 20),
                 rightPanelInstructions.Width().EqualTo(View.Frame.Width).Minus(40),
                 rightPanelInstructions.WithSameCenterX(View),
-
                 masterButton.Below(rightPanelInstructions, 10),
                 masterButton.WithSameCenterX(View),
-
                 keyboardHandlingButton.Below(masterButton, 10),
                 keyboardHandlingButton.WithSameCenterX(View)
-
-                );
-
+            );
         }
     }
 }

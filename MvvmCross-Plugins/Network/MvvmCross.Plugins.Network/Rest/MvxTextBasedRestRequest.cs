@@ -12,17 +12,17 @@ using System.Text;
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public abstract class MvxTextBasedRestRequest
+    public abstract class MvxTextBasedRestRequest
         : MvxRestRequest
     {
         protected MvxTextBasedRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
-                                          string tag = null)
+            string tag = null)
             : base(url, verb, accept, tag)
         {
         }
 
         protected MvxTextBasedRestRequest(Uri uri, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
-                                          string tag = null)
+            string tag = null)
             : base(uri, verb, accept, tag)
         {
         }

@@ -12,6 +12,12 @@ namespace MvvmCross.Plugins.Color.Test
 {
     public class MvxColorValueConverterTest : MvxIoCSupportingTest
     {
+        protected override void AdditionalSetup()
+        {
+            base.AdditionalSetup();
+            Ioc.RegisterSingleton<IMvxNativeColor>(new MockNative());
+        }
+
         public class WrappedColor
         {
             public WrappedColor(MvxColor color)
@@ -19,7 +25,7 @@ namespace MvvmCross.Plugins.Color.Test
                 Color = color;
             }
 
-            public MvxColor Color { get; private set; }
+            public MvxColor Color { get; }
         }
 
         public class MockNative : IMvxNativeColor
@@ -28,12 +34,6 @@ namespace MvvmCross.Plugins.Color.Test
             {
                 return new WrappedColor(mvxColor);
             }
-        }
-
-        protected override void AdditionalSetup()
-        {
-            base.AdditionalSetup();
-            Ioc.RegisterSingleton<IMvxNativeColor>(new MockNative());
         }
     }
 }

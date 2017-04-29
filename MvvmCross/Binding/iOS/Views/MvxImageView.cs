@@ -5,68 +5,63 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using CoreGraphics;
-
-    using Foundation;
-
-    using UIKit;
-
     [Register("MvxImageView")]
     public class MvxImageView
         : UIImageView
     {
         private MvxImageViewLoader _imageHelper;
 
-        public string ImageUrl
-        {
-            get { return this._imageHelper.ImageUrl; }
-            set { this._imageHelper.ImageUrl = value; }
-        }
-
-        public string DefaultImagePath
-        {
-            get { return this._imageHelper.DefaultImagePath; }
-            set { this._imageHelper.DefaultImagePath = value; }
-        }
-
-        public string ErrorImagePath
-        {
-            get { return this._imageHelper.ErrorImagePath; }
-            set { this._imageHelper.ErrorImagePath = value; }
-        }
-
         public MvxImageView(Action afterImageChangeAction = null)
         {
-            this.InitializeImageHelper(afterImageChangeAction);
+            InitializeImageHelper(afterImageChangeAction);
         }
 
         public MvxImageView(IntPtr handle)
             : base(handle)
         {
-            this.InitializeImageHelper();
+            InitializeImageHelper();
         }
 
         public MvxImageView(CGRect frame, Action afterImageChangeAction = null)
             : base(frame)
         {
-            this.InitializeImageHelper(afterImageChangeAction);
+            InitializeImageHelper(afterImageChangeAction);
+        }
+
+        public string ImageUrl
+        {
+            get => _imageHelper.ImageUrl;
+            set => _imageHelper.ImageUrl = value;
+        }
+
+        public string DefaultImagePath
+        {
+            get => _imageHelper.DefaultImagePath;
+            set => _imageHelper.DefaultImagePath = value;
+        }
+
+        public string ErrorImagePath
+        {
+            get => _imageHelper.ErrorImagePath;
+            set => _imageHelper.ErrorImagePath = value;
         }
 
         private void InitializeImageHelper(Action afterImageChangeAction = null)
         {
-            this._imageHelper = new MvxImageViewLoader(() => this, afterImageChangeAction);
+            _imageHelper = new MvxImageViewLoader(() => this, afterImageChangeAction);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this._imageHelper.Dispose();
-            }
+                _imageHelper.Dispose();
             base.Dispose(disposing);
         }
     }

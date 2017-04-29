@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MvvmCross.Core.Navigation
 {
@@ -18,11 +17,9 @@ namespace MvvmCross.Core.Navigation
         public T GetValueOrDefault<T>(string key, T defaultValue = default(T))
         {
             object item;
-            bool found = cache.TryGetValue(key, out item);
+            var found = cache.TryGetValue(key, out item);
             if (found)
-            {
-                return (T)item;
-            }
+                return (T) item;
             return defaultValue;
         }
 

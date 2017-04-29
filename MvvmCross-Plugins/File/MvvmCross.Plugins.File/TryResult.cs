@@ -3,7 +3,7 @@
     public static class TryResult
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="MvvmCross.Plugins.File.TryResult"/> class.
+        ///     Creates a new instance of the <see cref="MvvmCross.Plugins.File.TryResult" /> class.
         /// </summary>
         /// <param name="operationSucceeded">If set to <c>true</c> operation succeeded.</param>
         /// <param name="result">The result of the operation.</param>
@@ -14,24 +14,12 @@
     }
 
     /// <summary>
-    /// Result with a boolean indicating if the operation succeeded.
+    ///     Result with a boolean indicating if the operation succeeded.
     /// </summary>
     public class TryResult<TResult>
     {
         /// <summary>
-        /// Gets a value indicating whether the operation succeeded.
-        /// </summary>
-        /// <value><c>true</c> if operation succeeded; otherwise, <c>false</c>.</value>
-        public bool OperationSucceeded { get; private set; }
-
-        /// <summary>
-        /// Gets the result of the operation.
-        /// </summary>
-        /// <value>The result of the operation.</value>
-        public TResult Result { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MvvmCross.Plugins.File.TryResult"/> class.
+        ///     Initializes a new instance of the <see cref="MvvmCross.Plugins.File.TryResult" /> class.
         /// </summary>
         /// <param name="operationSucceeded">If set to <c>true</c> operation succeeded.</param>
         /// <param name="result">The result of the operation.</param>
@@ -40,5 +28,17 @@
             OperationSucceeded = operationSucceeded;
             Result = result;
         }
+
+        /// <summary>
+        ///     Gets a value indicating whether the operation succeeded.
+        /// </summary>
+        /// <value><c>true</c> if operation succeeded; otherwise, <c>false</c>.</value>
+        public bool OperationSucceeded { get; }
+
+        /// <summary>
+        ///     Gets the result of the operation.
+        /// </summary>
+        /// <value>The result of the operation.</value>
+        public TResult Result { get; }
     }
 }

@@ -1,25 +1,27 @@
+using Cirrious.FluentLayouts.Touch;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using CoreGraphics;
-    using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using UIKit;
-
     [Register("LeftPanelView")]
     [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.PushPanel, false)]
     public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>
     {
         /// <summary>
-        /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.
+        ///     Called after the controller’s <see cref="P:UIKit.UIViewController.View" /> is loaded into memory.
         /// </summary>
         /// <remarks>
-        /// <para>
-        /// This method is called after <c>this</c> <see cref="T:UIKit.UIViewController"/>'s <see cref="P:UIKit.UIViewController.View"/> and its entire view hierarchy have been loaded into memory. This method is called whether the <see cref="T:UIKit.UIView"/> was loaded from a .xib file or programmatically.
-        /// </para>
+        ///     <para>
+        ///         This method is called after <c>this</c> <see cref="T:UIKit.UIViewController" />'s
+        ///         <see cref="P:UIKit.UIViewController.View" /> and its entire view hierarchy have been loaded into memory. This
+        ///         method is called whether the <see cref="T:UIKit.UIView" /> was loaded from a .xib file or programmatically.
+        ///     </para>
         /// </remarks>
         public override void ViewDidLoad()
         {
@@ -62,7 +64,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 
             scrollView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            var constraints = scrollView.VerticalStackPanelConstraints(new Margins(20, 10, 20, 10, 5, 5), scrollView.Subviews);
+            var constraints =
+                scrollView.VerticalStackPanelConstraints(new Margins(20, 10, 20, 10, 5, 5), scrollView.Subviews);
             scrollView.AddConstraints(constraints);
         }
     }

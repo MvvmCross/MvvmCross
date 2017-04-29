@@ -5,31 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform;
-
     public class MvxBindingContext : IMvxBindingContext
     {
-        public class TargetAndBinding
-        {
-            public TargetAndBinding(object target, IMvxUpdateableBinding binding)
-            {
-                this.Target = target;
-                this.Binding = binding;
-            }
-
-            public object Target { get; private set; }
-            public IMvxUpdateableBinding Binding { get; }
-        }
-
         private readonly List<Action> _delayedActions = new List<Action>();
 
         private readonly List<TargetAndBinding> _directBindings = new List<TargetAndBinding>();
@@ -37,16 +23,18 @@ namespace MvvmCross.Binding.BindingContext
         private readonly List<KeyValuePair<object, IList<TargetAndBinding>>> _viewBindings =
             new List<KeyValuePair<object, IList<TargetAndBinding>>>();
 
+        private IMvxBinder _binder;
+
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object)null)
+            : this((object) null)
         {
         }
 
         public MvxBindingContext(object dataContext)
         {
-            this._dataContext = dataContext;
+            _dataContext = dataContext;
         }
 
         public MvxBindingContext(IDictionary<object, string> firstBindings)
@@ -64,187 +52,77 @@ namespace MvvmCross.Binding.BindingContext
             Init(null, firstBindings);
         }
 
-        public MvxBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        public MvxBindingContext(object dataContext,
+            IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             Init(dataContext, firstBindings);
         }
 
-        public MvxBindingContext Init(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        protected IMvxBinder Binder
         {
-            foreach (var kvp in firstBindings)
+            get
             {
-                this.AddDelayedAction(kvp);
+                _binder = _binder ?? Mvx.Resolve<IMvxBinder>();
+                return _binder;
             }
-            if (dataContext != null)
-                this.DataContext = dataContext;
-
-            return this;
         }
 
-        public MvxBindingContext Init(object dataContext, IDictionary<object, string> firstBindings)
+        public IMvxBindingContext Init(object dataContext, object firstBindingKey,
+            IEnumerable<MvxBindingDescription> firstBindingValue)
         {
-            foreach (var kvp in firstBindings)
-            {
-                this.AddDelayedAction(kvp);
-            }
+            AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
-                this.DataContext = dataContext;
-
-            return this;
-        }
-
-        public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
-        {
-            this.AddDelayedAction(firstBindingKey, firstBindingValue);
-            if (dataContext != null)
-                this.DataContext = dataContext;
+                DataContext = dataContext;
 
             return this;
         }
 
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue)
         {
-            this.AddDelayedAction(firstBindingKey, firstBindingValue);
+            AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
-                this.DataContext = dataContext;
+                DataContext = dataContext;
 
             return this;
         }
 
-        private void AddDelayedAction(object key, string value)
-        {
-            this._delayedActions.Add(() =>
-            {
-                var bindings = this.Binder.Bind(this.DataContext, key, value);
-                foreach (var b in bindings)
-                    this.RegisterBinding(key, b);
-            });
-        }
-
-        private void AddDelayedAction(object key, IEnumerable<MvxBindingDescription> value)
-        {
-            this._delayedActions.Add(() =>
-            {
-                var bindings = this.Binder.Bind(this.DataContext, key, value);
-                foreach (var b in bindings)
-                    this.RegisterBinding(key, b);
-            });
-        }
-
-        private void AddDelayedAction(KeyValuePair<object, string> kvp)
-        {
-            this._delayedActions.Add(() =>
-            {
-                var bindings = this.Binder.Bind(this.DataContext, kvp.Key, kvp.Value);
-                foreach (var b in bindings)
-                    this.RegisterBinding(kvp.Key, b);
-            });
-        }
-
-        private void AddDelayedAction(KeyValuePair<object, IEnumerable<MvxBindingDescription>> kvp)
-        {
-            this._delayedActions.Add(() =>
-            {
-                var bindings = this.Binder.Bind(this.DataContext, kvp.Key, kvp.Value);
-                foreach (var b in bindings)
-                    this.RegisterBinding(kvp.Key, b);
-            });
-        }
-
-        ~MvxBindingContext()
-        {
-            this.Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.ClearAllBindings();
-            }
-        }
-
-        private IMvxBinder _binder;
-
-        protected IMvxBinder Binder
-        {
-            get
-            {
-                this._binder = this._binder ?? Mvx.Resolve<IMvxBinder>();
-                return this._binder;
-            }
-        }
-
         public object DataContext
         {
-            get { return this._dataContext; }
+            get => _dataContext;
             set
             {
-                if (this._dataContext == value)
+                if (_dataContext == value)
                     return;
 
-                this._dataContext = value;
-                this.OnDataContextChange();
+                _dataContext = value;
+                OnDataContextChange();
                 DataContextChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
         public event EventHandler DataContextChanged;
 
-        protected virtual void OnDataContextChange()
-        {
-            // update existing bindings
-            foreach (var binding in this._viewBindings)
-            {
-                foreach (var bind in binding.Value)
-                {
-                    bind.Binding.DataContext = this._dataContext;
-                }
-            }
-
-            foreach (var binding in this._directBindings)
-            {
-                binding.Binding.DataContext = this._dataContext;
-            }
-
-            // add new bindings
-            if (this._delayedActions.Count == 0)
-            {
-                return;
-            }
-
-            foreach (var action in this._delayedActions)
-            {
-                action();
-            }
-            this._delayedActions.Clear();
-        }
-
         public virtual void DelayBind(Action action)
         {
-            this._delayedActions.Add(action);
+            _delayedActions.Add(action);
         }
 
         public virtual void RegisterBinding(object target, IMvxUpdateableBinding binding)
         {
-            this._directBindings.Add(new TargetAndBinding(target, binding));
+            _directBindings.Add(new TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey,
+            IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
-            this._viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
+            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey,
+                bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
         }
 
         public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            var list = new List<TargetAndBinding>() { new TargetAndBinding(target, binding) };
-            this._viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
+            var list = new List<TargetAndBinding> {new TargetAndBinding(target, binding)};
+            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
         }
 
         public virtual void ClearBindings(object clearKey)
@@ -252,51 +130,152 @@ namespace MvvmCross.Binding.BindingContext
             if (clearKey == null)
                 return;
 
-            for (var i = this._viewBindings.Count - 1; i >= 0; i--)
+            for (var i = _viewBindings.Count - 1; i >= 0; i--)
             {
-                var candidate = this._viewBindings[i];
+                var candidate = _viewBindings[i];
                 if (candidate.Key.Equals(clearKey))
                 {
                     foreach (var binding in candidate.Value)
-                    {
                         binding.Binding.Dispose();
-                    }
-                    this._viewBindings.RemoveAt(i);
+                    _viewBindings.RemoveAt(i);
                 }
             }
         }
 
         public virtual void ClearAllBindings()
         {
-            this.ClearAllViewBindings();
-            this.ClearAllDirectBindings();
-            this.ClearAllDelayedBindings();
+            ClearAllViewBindings();
+            ClearAllDirectBindings();
+            ClearAllDelayedBindings();
+        }
+
+        public MvxBindingContext Init(object dataContext,
+            IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        {
+            foreach (var kvp in firstBindings)
+                AddDelayedAction(kvp);
+            if (dataContext != null)
+                DataContext = dataContext;
+
+            return this;
+        }
+
+        public MvxBindingContext Init(object dataContext, IDictionary<object, string> firstBindings)
+        {
+            foreach (var kvp in firstBindings)
+                AddDelayedAction(kvp);
+            if (dataContext != null)
+                DataContext = dataContext;
+
+            return this;
+        }
+
+        private void AddDelayedAction(object key, string value)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, key, value);
+                foreach (var b in bindings)
+                    RegisterBinding(key, b);
+            });
+        }
+
+        private void AddDelayedAction(object key, IEnumerable<MvxBindingDescription> value)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, key, value);
+                foreach (var b in bindings)
+                    RegisterBinding(key, b);
+            });
+        }
+
+        private void AddDelayedAction(KeyValuePair<object, string> kvp)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+                foreach (var b in bindings)
+                    RegisterBinding(kvp.Key, b);
+            });
+        }
+
+        private void AddDelayedAction(KeyValuePair<object, IEnumerable<MvxBindingDescription>> kvp)
+        {
+            _delayedActions.Add(() =>
+            {
+                var bindings = Binder.Bind(DataContext, kvp.Key, kvp.Value);
+                foreach (var b in bindings)
+                    RegisterBinding(kvp.Key, b);
+            });
+        }
+
+        ~MvxBindingContext()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+                ClearAllBindings();
+        }
+
+        protected virtual void OnDataContextChange()
+        {
+            // update existing bindings
+            foreach (var binding in _viewBindings)
+            foreach (var bind in binding.Value)
+                bind.Binding.DataContext = _dataContext;
+
+            foreach (var binding in _directBindings)
+                binding.Binding.DataContext = _dataContext;
+
+            // add new bindings
+            if (_delayedActions.Count == 0)
+                return;
+
+            foreach (var action in _delayedActions)
+                action();
+            _delayedActions.Clear();
         }
 
         protected virtual void ClearAllDelayedBindings()
         {
-            this._delayedActions.Clear();
+            _delayedActions.Clear();
         }
 
         protected virtual void ClearAllDirectBindings()
         {
-            foreach (var binding in this._directBindings)
-            {
+            foreach (var binding in _directBindings)
                 binding.Binding.Dispose();
-            }
-            this._directBindings.Clear();
+            _directBindings.Clear();
         }
 
         protected virtual void ClearAllViewBindings()
         {
-            foreach (var kvp in this._viewBindings)
+            foreach (var kvp in _viewBindings)
+            foreach (var binding in kvp.Value)
+                binding.Binding.Dispose();
+            _viewBindings.Clear();
+        }
+
+        public class TargetAndBinding
+        {
+            public TargetAndBinding(object target, IMvxUpdateableBinding binding)
             {
-                foreach (var binding in kvp.Value)
-                {
-                    binding.Binding.Dispose();
-                }
+                Target = target;
+                Binding = binding;
             }
-            this._viewBindings.Clear();
+
+            public object Target { get; }
+            public IMvxUpdateableBinding Binding { get; }
         }
     }
 }

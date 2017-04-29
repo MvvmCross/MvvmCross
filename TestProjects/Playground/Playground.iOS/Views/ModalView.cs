@@ -8,7 +8,8 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxModalPresentation(ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen, ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve)]
+    [MvxModalPresentation(ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
+        ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve)]
     public partial class ModalView : MvxViewController<ModalViewModel>
     {
         public ModalView(IntPtr handle) : base(handle)

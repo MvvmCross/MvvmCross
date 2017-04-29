@@ -5,105 +5,96 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Bindings;
-
-    using UIKit;
-
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        private MvxImageViewLoader _imageLoader;
+        private bool _isSelected;
 
         public MvxStandardTableViewCell(IntPtr handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+            UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                        UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                        UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
+            UITableViewCellStyle cellStyle, NSString cellIdentifier,
+            UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
-        private void InitializeImageLoader()
-        {
-            this._imageLoader = new MvxImageViewLoader(() => this.ImageView, this.SetNeedsLayout);
-        }
-
-        public MvxImageViewLoader ImageLoader => this._imageLoader;
+        public MvxImageViewLoader ImageLoader { get; private set; }
 
         public string TitleText
         {
-            get { return this.TextLabel.Text; }
-            set { this.TextLabel.Text = value; }
+            get => TextLabel.Text;
+            set => TextLabel.Text = value;
         }
 
         public string DetailText
         {
-            get { return this.DetailTextLabel.Text; }
-            set { this.DetailTextLabel.Text = value; }
+            get => DetailTextLabel.Text;
+            set => DetailTextLabel.Text = value;
         }
 
         public string ImageUrl
         {
-            get { return this._imageLoader.ImageUrl; }
-            set { this._imageLoader.ImageUrl = value; }
+            get => ImageLoader.ImageUrl;
+            set => ImageLoader.ImageUrl = value;
         }
 
         public ICommand SelectedCommand { get; set; }
 
-        private bool _isSelected;
+        private void InitializeImageLoader()
+        {
+            ImageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
+        }
 
         public override void SetSelected(bool selected, bool animated)
         {
             base.SetSelected(selected, animated);
 
-            if (this._isSelected == selected)
+            if (_isSelected == selected)
                 return;
 
-            this._isSelected = selected;
-            if (this._isSelected)
-            {
-                this.SelectedCommand?.Execute(null);
-            }
+            _isSelected = selected;
+            if (_isSelected)
+                SelectedCommand?.Execute(null);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this._imageLoader.Dispose();
-            }
+                ImageLoader.Dispose();
             base.Dispose(disposing);
         }
     }

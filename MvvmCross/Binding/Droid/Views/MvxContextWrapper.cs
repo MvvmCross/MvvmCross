@@ -1,21 +1,15 @@
+using System;
+using Android.Content;
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using Object = Java.Lang.Object;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Views;
-
-    using MvvmCross.Binding.BindingContext;
-
     public class MvxContextWrapper : ContextWrapper
     {
-        private LayoutInflater _inflater;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
-
-        public static ContextWrapper Wrap(Context @base, IMvxBindingContextOwner bindingContextOwner)
-        {
-            return new MvxContextWrapper(@base, bindingContextOwner);
-        }
+        private LayoutInflater _inflater;
 
         protected MvxContextWrapper(Context context, IMvxBindingContextOwner bindingContextOwner)
             : base(context)
@@ -23,17 +17,20 @@ namespace MvvmCross.Binding.Droid.Views
             if (bindingContextOwner == null)
                 throw new InvalidOperationException("Wrapper can only be set on IMvxBindingContextOwner");
 
-            this._bindingContextOwner = bindingContextOwner;
+            _bindingContextOwner = bindingContextOwner;
         }
 
-        public override Java.Lang.Object GetSystemService(string name)
+        public static ContextWrapper Wrap(Context @base, IMvxBindingContextOwner bindingContextOwner)
+        {
+            return new MvxContextWrapper(@base, bindingContextOwner);
+        }
+
+        public override Object GetSystemService(string name)
         {
             if (name.Equals(LayoutInflaterService))
-            {
-                return this._inflater ??
-                       (this._inflater =
-                           new MvxLayoutInflater(LayoutInflater.From(this.BaseContext), this, null, false));
-            }
+                return _inflater ??
+                       (_inflater =
+                           new MvxLayoutInflater(LayoutInflater.From(BaseContext), this, null, false));
 
             return base.GetSystemService(name);
         }

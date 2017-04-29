@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.ExtensionMethods;
 using System;
+using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxLeafNotifyChangeFieldSourceBinding
+    public class MvxLeafNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
         public MvxLeafNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange)
@@ -20,9 +20,11 @@ namespace MvvmCross.Plugins.FieldBinding
         {
         }
 
+        public override Type SourceType => NotifyChange.ValueType;
+
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
         {
-            base.FireChanged();
+            FireChanged();
         }
 
         public override void SetValue(object value)
@@ -36,8 +38,6 @@ namespace MvvmCross.Plugins.FieldBinding
 
             NotifyChange.Value = safeValue;
         }
-
-        public override Type SourceType => NotifyChange.ValueType;
 
         public override object GetValue()
         {

@@ -1,13 +1,11 @@
-﻿namespace MvvmCross.Binding.iOS.Target
+﻿using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
+namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
     {
         private bool _subscribed;
@@ -17,26 +15,27 @@
         {
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged((int)view.SelectedSegment);
+            FireValueChanged((int) view.SelectedSegment);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                    "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             segmentedControl.ValueChanged += HandleValueChanged;
         }
 
@@ -46,7 +45,7 @@
             if (view == null)
                 return;
 
-            view.SelectedSegment = (nint)value;
+            view.SelectedSegment = (nint) value;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -55,10 +54,10 @@
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     view.ValueChanged -= HandleValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

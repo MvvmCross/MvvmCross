@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-
     [Obsolete("We prefer to use IoC directly using Mvx.Resolve<T>() now")]
     public static class MvxIoCExtensions
     {
@@ -29,14 +29,14 @@ namespace MvvmCross.Platform.IoC
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
-                                                               Func<TInterface> serviceConstructor)
+            Func<TInterface> serviceConstructor)
             where TInterface : class
         {
             Mvx.RegisterSingleton(serviceConstructor);
         }
 
         public static void RegisterServiceInstance<TInterface>(this IMvxProducer producer,
-                                                               TInterface service)
+            TInterface service)
             where TInterface : class
         {
             Mvx.RegisterSingleton(service);

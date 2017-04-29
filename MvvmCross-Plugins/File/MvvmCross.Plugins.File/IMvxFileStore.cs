@@ -15,17 +15,17 @@ namespace MvvmCross.Plugins.File
     {
         bool TryReadTextFile(string path, out string contents);
 
-        bool TryReadBinaryFile(string path, out Byte[] contents);
+        bool TryReadBinaryFile(string path, out byte[] contents);
 
         bool TryReadBinaryFile(string path, Func<Stream, bool> readMethod);
 
         void WriteFile(string path, string contents);
 
-        void WriteFile(string path, IEnumerable<Byte> contents);
+        void WriteFile(string path, IEnumerable<byte> contents);
 
         void WriteFile(string path, Action<Stream> writeMethod);
 
-		bool TryMove(string from, string to, bool overwrite);
+        bool TryMove(string from, string to, bool overwrite);
 
         bool TryCopy(string from, string to, bool overwrite);
 

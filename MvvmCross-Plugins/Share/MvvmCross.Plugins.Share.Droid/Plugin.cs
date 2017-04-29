@@ -12,7 +12,7 @@ namespace MvvmCross.Plugins.Share.Droid
 {
     [Preserve(AllMembers = true)]
     public class Plugin
-        : IMvxPlugin          
+        : IMvxPlugin
     {
         public void Load()
         {

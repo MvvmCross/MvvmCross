@@ -9,8 +9,8 @@
 
 using System.IO;
 using Android.Content;
-using MvvmCross.Platform.Droid;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
 
 #endregion
 

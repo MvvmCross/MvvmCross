@@ -21,9 +21,7 @@ namespace MvvmCross.Plugins.Messenger
         public void EnsureLoaded()
         {
             if (_loaded)
-            {
                 return;
-            }
 
             Mvx.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
             _loaded = true;

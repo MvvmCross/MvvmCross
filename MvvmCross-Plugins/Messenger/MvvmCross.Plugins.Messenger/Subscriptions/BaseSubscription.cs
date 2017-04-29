@@ -5,19 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Plugins.Messenger.ThreadRunners;
 using System;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
     public abstract class BaseSubscription
     {
-        public Guid Id { get; private set; }
-        public string Tag { get; private set; }
-        public abstract bool IsAlive { get; }
-
-        public abstract bool Invoke(object message);
-
         private readonly IMvxActionRunner _actionRunner;
 
         protected BaseSubscription(IMvxActionRunner actionRunner, string tag)
@@ -26,6 +20,12 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
             Id = Guid.NewGuid();
             Tag = tag;
         }
+
+        public Guid Id { get; }
+        public string Tag { get; }
+        public abstract bool IsAlive { get; }
+
+        public abstract bool Invoke(object message);
 
         protected void Call(Action action)
         {

@@ -5,26 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
-using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Shared.Fragments;
-using Android.App;
-using Android.Content;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {
     [Register("mvvmcross.droid.fullfragging.fragments.MvxDialogFragment")]
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment
-          , IMvxFragmentView
+            , IMvxFragmentView
     {
+        private object _dataContext;
+
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxDialogFragment()
         {
@@ -33,11 +34,9 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        private object _dataContext;
-
         public object DataContext
         {
-            get { return _dataContext; }
+            get => _dataContext;
             set
             {
                 _dataContext = value;
@@ -48,21 +47,21 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
         }
+
+        public string UniqueImmutableCacheTag => Tag;
 
         protected void EnsureBindingContextSet(Bundle b0)
         {
             this.EnsureBindingContextIsSet(b0);
         }
 
-        public string UniqueImmutableCacheTag => Tag;
-
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.Destroy ();
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnStart()
@@ -92,12 +91,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
     public abstract class MvxDialogFragment<TViewModel>
         : MvxDialogFragment
-          , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

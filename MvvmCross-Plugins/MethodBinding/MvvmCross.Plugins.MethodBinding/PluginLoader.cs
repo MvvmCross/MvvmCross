@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
-using MvvmCross.Binding.Bindings.Source.Construction;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
@@ -22,9 +22,7 @@ namespace MvvmCross.Plugins.MethodBinding
         public void EnsureLoaded()
         {
             if (_loaded)
-            {
                 return;
-            }
 
             Mvx.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
             _loaded = true;

@@ -7,7 +7,9 @@ using NUnit.Framework;
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerTests : CodeFixVerifier<MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzer, MvxMessengerSubscriptionDoesntStoreTokenInVariableCodeFix>
+    public class MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerTests : CodeFixVerifier<
+        MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzer,
+        MvxMessengerSubscriptionDoesntStoreTokenInVariableCodeFix>
     {
         private const string Test = @"using System;
 using System.Collections.Generic;
@@ -101,62 +103,6 @@ namespace AndroidApp.Core.ViewModels
         }
     }
 }";
-
-        [Test]
-        public void MvxMessengerSubscriptionDoesntStoreTokenInVariableDiagnostic()
-        {
-            var expectedDiagnostic = new DiagnosticResult
-            {
-                Id = DiagnosticIds.MvxMessengerSubscriptionDoesntStoreTokenInVariableId,
-                Message = "You need to store the token returned from 'messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage)'.",
-                Severity = DiagnosticSeverity.Warning,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 15, 13)
-                    }
-            };
-
-            var project = new[]
-            {
-                new MvxTestFileSource(Test, MvxProjType.Core),
-                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
-                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
-                new MvxTestFileSource(LocationMessage, MvxProjType.Core)
-            };
-
-            VerifyCSharpDiagnostic(project, expectedDiagnostic);
-        }
-
-        [Test]
-        public void MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerShouldFixTheCode()
-        {
-            var project = new[]
-            {
-                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
-                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
-                new MvxTestFileSource(LocationMessage, MvxProjType.Core),
-                new MvxTestFileSource(MvxSubscriptionToken, MvxProjType.Core)
-            };
-
-            VerifyCSharpFix(project, Test, MvxProjType.Core, Expected);
-        }
-
-        [Test]
-        public void MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerShouldFixTheCodeEvenWithoutProperUsingDirectives()
-        {
-            var project = new[]
-            {
-                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
-                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
-                new MvxTestFileSource(LocationMessage, MvxProjType.Core),
-                new MvxTestFileSource(MvxSubscriptionToken, MvxProjType.Core)
-            };
-
-            VerifyCSharpFix(project, TestWithNoUsing, MvxProjType.Core, ExpectedWithNoUsing);
-        }
-
-        #region Work around to missing IMvxMessengerReferences
 
 
         private const string MvxSubscriptionToken = @"
@@ -278,6 +224,62 @@ namespace MvvmCross.Plugins.Messenger
         public double Lng { get; private set; }
     }
 }";
+
+        [Test]
+        public void MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerShouldFixTheCode()
+        {
+            var project = new[]
+            {
+                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
+                new MvxTestFileSource(LocationMessage, MvxProjType.Core),
+                new MvxTestFileSource(MvxSubscriptionToken, MvxProjType.Core)
+            };
+
+            VerifyCSharpFix(project, Test, MvxProjType.Core, Expected);
+        }
+
+        [Test]
+        public void
+            MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzerShouldFixTheCodeEvenWithoutProperUsingDirectives()
+        {
+            var project = new[]
+            {
+                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
+                new MvxTestFileSource(LocationMessage, MvxProjType.Core),
+                new MvxTestFileSource(MvxSubscriptionToken, MvxProjType.Core)
+            };
+
+            VerifyCSharpFix(project, TestWithNoUsing, MvxProjType.Core, ExpectedWithNoUsing);
+        }
+
+        [Test]
+        public void MvxMessengerSubscriptionDoesntStoreTokenInVariableDiagnostic()
+        {
+            var expectedDiagnostic = new DiagnosticResult
+            {
+                Id = DiagnosticIds.MvxMessengerSubscriptionDoesntStoreTokenInVariableId,
+                Message =
+                    "You need to store the token returned from 'messenger.Subscribe<AndroidApp.Core.Messages.LocationMessage>(OnLocationMessage)'.",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", 15, 13)
+                    }
+            };
+
+            var project = new[]
+            {
+                new MvxTestFileSource(Test, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessenger, MvxProjType.Core),
+                new MvxTestFileSource(MvxMessage, MvxProjType.Core),
+                new MvxTestFileSource(LocationMessage, MvxProjType.Core)
+            };
+
+            VerifyCSharpDiagnostic(project, expectedDiagnostic);
+        }
     }
 
     #endregion

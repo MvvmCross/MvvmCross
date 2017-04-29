@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
 using System.Windows.Media;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color.Wpf
 {
@@ -20,8 +20,8 @@ namespace MvvmCross.Plugins.Color.Wpf
 
         public static System.Windows.Media.Color ToNativeColor(MvxColor mvxColor)
         {
-            return System.Windows.Media.Color.FromArgb((byte)mvxColor.A, (byte)mvxColor.R, (byte)mvxColor.G,
-                                                       (byte)mvxColor.B);
+            return System.Windows.Media.Color.FromArgb((byte) mvxColor.A, (byte) mvxColor.R, (byte) mvxColor.G,
+                (byte) mvxColor.B);
         }
     }
 }

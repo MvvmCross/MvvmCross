@@ -14,8 +14,6 @@ namespace MvvmCross.Binding.Droid.Target
     public class MvxAdapterViewSelectedItemPositionTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected AdapterView AdapterView => (AdapterView)Target;
-
         private IDisposable _subscription;
 
         public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
@@ -23,17 +21,21 @@ namespace MvvmCross.Binding.Droid.Target
         {
         }
 
+        protected AdapterView AdapterView => (AdapterView) Target;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(int);
+
         protected override void SetValueImpl(object target, object value)
         {
-            ((AdapterView)target).SetSelection((int)value);
+            ((AdapterView) target).SetSelection((int) value);
         }
 
         private void AdapterViewOnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
             FireValueChanged(itemSelectedEventArgs.Position);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -45,8 +47,6 @@ namespace MvvmCross.Binding.Droid.Target
             _subscription = adapterView.WeakSubscribe<AdapterView, AdapterView.ItemSelectedEventArgs>(
                 nameof(adapterView.ItemSelected), AdapterViewOnItemSelected);
         }
-
-        public override Type TargetType => typeof(Int32);
 
         protected override void Dispose(bool isDisposing)
         {

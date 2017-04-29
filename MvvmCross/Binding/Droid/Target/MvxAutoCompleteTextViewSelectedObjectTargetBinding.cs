@@ -7,10 +7,9 @@
 
 using System;
 using System.Reflection;
-
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -24,18 +23,16 @@ namespace MvvmCross.Binding.Droid.Target
         {
             var autoComplete = View;
             if (autoComplete == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - autoComplete is null in MvxAutoCompleteTextViewSelectedObjectTargetBinding");
-            }
+                    "Error - autoComplete is null in MvxAutoCompleteTextViewSelectedObjectTargetBinding");
         }
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         private void AutoCompleteOnSelectedObjectChanged(object sender, EventArgs eventArgs)
         {
             FireValueChanged(View.SelectedObject);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {

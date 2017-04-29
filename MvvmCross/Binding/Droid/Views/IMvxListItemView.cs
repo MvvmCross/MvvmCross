@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Views;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using Android.Views;
-    using MvvmCross.Platform.Core;
-
     public interface IMvxListItemView
         : IMvxDataConsumer
     {

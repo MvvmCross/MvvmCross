@@ -11,6 +11,6 @@ namespace MvvmCross.Platform.Platform
 {
     public interface IMvxJsonConverter : IMvxTextSerializer
     {
-		T DeserializeObject<T>(Stream stream);
+        T DeserializeObject<T>(Stream stream);
     }
 }

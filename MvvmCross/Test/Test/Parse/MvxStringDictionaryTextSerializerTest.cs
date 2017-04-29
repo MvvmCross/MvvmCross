@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.Parse.StringDictionary;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Parse
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Parse.StringDictionary;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxStringDictionaryTextSerializerTest
         : MvxIoCSupportingTest
@@ -27,12 +25,12 @@ namespace MvvmCross.Test.Parse
             ClearAll();
 
             var viewModelNameLookup = new MvxViewModelByNameLookup();
-            viewModelNameLookup.AddAll(this.GetType().Assembly);
+            viewModelNameLookup.AddAll(GetType().Assembly);
             Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
-            var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
+            var parameterBundle = new MvxBundle(new Dictionary<string, string> {{"On'e", "1'\\"}, {"Two", "2"}});
             var presentationBundle =
-                new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
+                new MvxBundle(new Dictionary<string, string> {{"Thre\"\'\\e", "3\"\'\\"}, {"Four", null}});
             var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle);
 
             var serializer = new MvxViewModelRequestCustomTextSerializer();

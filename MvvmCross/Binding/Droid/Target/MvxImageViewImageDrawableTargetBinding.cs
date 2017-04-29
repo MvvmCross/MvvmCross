@@ -17,7 +17,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (ImageView)target;
+            var view = (ImageView) target;
             var drawable = value as Drawable;
 
             view.SetImageDrawable(drawable);

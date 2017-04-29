@@ -5,22 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
-	public class MvxHttpFileDownloader
+    public class MvxHttpFileDownloader
         : MvxLockableObject
-        , IMvxHttpFileDownloader
+            , IMvxHttpFileDownloader
     {
+        private const int DefaultMaxConcurrentDownloads = 20;
+
         private readonly Dictionary<MvxFileDownloadRequest, bool> _currentRequests =
             new Dictionary<MvxFileDownloadRequest, bool>();
 
-        private const int DefaultMaxConcurrentDownloads = 20;
         private readonly int _maxConcurrentDownloads;
         private readonly Queue<MvxFileDownloadRequest> _queuedRequests = new Queue<MvxFileDownloadRequest>();
 
@@ -49,9 +50,7 @@ namespace MvvmCross.Plugins.DownloadCache
             {
                 _queuedRequests.Enqueue(request);
                 if (_currentRequests.Count < _maxConcurrentDownloads)
-                {
                     StartNextQueuedItem();
-                }
             });
         }
 
@@ -63,9 +62,7 @@ namespace MvvmCross.Plugins.DownloadCache
             {
                 _currentRequests.Remove(request);
                 if (_queuedRequests.Any())
-                {
                     StartNextQueuedItem();
-                }
             });
         }
 

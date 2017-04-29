@@ -9,11 +9,9 @@ using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
-
 #if WINDOWS_COMMON
 namespace MvvmCross.BindingEx.WindowsCommon
 #endif
-
 #if WINDOWS_WPF
 using System.ComponentModel;
 
@@ -32,7 +30,8 @@ namespace MvvmCross.BindingEx.Wpf
             _checked = true;
 
 #if WINDOWS_WPF
-            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+            if (!(bool) DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject))
+                .DefaultValue)
                 return;
 #endif
 #if WINDOWS_COMMON

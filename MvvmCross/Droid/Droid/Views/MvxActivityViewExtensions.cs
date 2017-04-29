@@ -5,22 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.OS;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.OS;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Droid.Platform;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxActivityViewExtensions
     {
         public static void AddEventListeners(this IMvxEventSourceActivity activity)
@@ -58,7 +56,7 @@ namespace MvvmCross.Droid.Views
                 return null;
 
             IMvxSavedStateConverter converter;
-            if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+            if (!Mvx.TryResolve(out converter))
             {
                 MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
                 return null;
@@ -70,7 +68,8 @@ namespace MvvmCross.Droid.Views
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
 #warning Should this be an exception here as we do not respond to the new intent message
-            Mvx.Warning("OnViewNewIntent called - but this is not fully handled within MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
+            Mvx.Warning(
+                "OnViewNewIntent called - but this is not fully handled within MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
             //throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
         }
 
@@ -107,7 +106,7 @@ namespace MvvmCross.Droid.Views
         }
 
         private static void OnLifetimeEvent(this IMvxAndroidView androidView,
-                                            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
             var activityTracker = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
@@ -131,10 +130,8 @@ namespace MvvmCross.Droid.Views
 
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
-            {
                 MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
-                               androidView.GetType().Name);
-            }
+                    androidView.GetType().Name);
 
             var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
@@ -145,10 +142,7 @@ namespace MvvmCross.Droid.Views
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
             if (androidView is IMvxAndroidSplashScreenActivity)
-            {
-                // splash screen views manage their own setup initialization
                 return;
-            }
 
             var activity = androidView.ToActivity();
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);

@@ -19,18 +19,23 @@ namespace MvvmCross.Forms.Bindings.Target
 {
     public class MvxBindablePropertyTargetBinding : MvxConvertingTargetBinding
     {
-        private readonly BindableProperty _targetBindableProperty;
         private readonly Type _actualPropertyType;
+        private readonly BindableProperty _targetBindableProperty;
         private readonly TypeConverter _typeConverter;
+
         private MvxNotifyPropertyChangedEventSubscription _propertyChangedSubscription;
 
-        public MvxBindablePropertyTargetBinding(object target, BindableProperty targetBindableProperty, Type actualPropertyType)
+        public MvxBindablePropertyTargetBinding(object target, BindableProperty targetBindableProperty,
+            Type actualPropertyType)
             : base(target)
         {
             _targetBindableProperty = targetBindableProperty;
             _actualPropertyType = actualPropertyType;
             _typeConverter = _actualPropertyType.TypeConverter();
         }
+
+        public override Type TargetType => _actualPropertyType;
+        public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -40,11 +45,6 @@ namespace MvvmCross.Forms.Bindings.Target
 
             _propertyChangedSubscription = formsElement.WeakSubscribe(OnElementPropertyChanged);
         }
-
-        public override Type TargetType => _actualPropertyType;
-
-        private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
-        public override MvxBindingMode DefaultMode => _defaultBindingMode;
 
         protected virtual object GetValueByReflection()
         {
@@ -64,7 +64,8 @@ namespace MvvmCross.Forms.Bindings.Target
             var frameworkElement = target as Element;
             if (frameworkElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 
@@ -92,9 +93,7 @@ namespace MvvmCross.Forms.Bindings.Target
             var formsElement = Target as Element;
 
             if (args.PropertyName == _targetBindableProperty.PropertyName)
-            {
                 FireValueChanged(formsElement.GetValue(_targetBindableProperty));
-            }
         }
     }
 }

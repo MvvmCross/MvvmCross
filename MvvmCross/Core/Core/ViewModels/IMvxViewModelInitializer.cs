@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading.Tasks;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Threading.Tasks;
-
     public interface IMvxViewModelInitializer<TInit> : IMvxViewModel
     {
         Task Init(string parameter);

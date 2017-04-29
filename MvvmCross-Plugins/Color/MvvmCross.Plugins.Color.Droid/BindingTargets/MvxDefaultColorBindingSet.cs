@@ -23,7 +23,7 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
             if (!Mvx.TryResolve(out registry))
             {
                 MvxTrace.Warning(
-                               "No binding registry available - so color bindings will not be used");
+                    "No binding registry available - so color bindings will not be used");
                 return;
             }
 

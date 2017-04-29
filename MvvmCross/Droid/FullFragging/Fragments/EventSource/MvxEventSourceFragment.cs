@@ -5,23 +5,32 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform.Core;
-using System;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     [Register("mvvmcross.droid.fullfragging.fragments.eventsource.MvxEventSourceFragment")]
     public class MvxEventSourceFragment
         : Fragment
-        , IMvxEventSourceFragment
+            , IMvxEventSourceFragment
     {
+        protected MvxEventSourceFragment()
+        {
+        }
+
+        protected MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
@@ -48,33 +57,21 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        protected MvxEventSourceFragment()
+        public override void OnAttach(Context context)
         {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                AttachCalled.Raise(this, context);
+
+            base.OnAttach(context);
         }
 
-        protected MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        { }
+        public override void OnAttach(Activity activity)
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+                AttachCalled.Raise(this, activity);
 
-		public override void OnAttach(Context context)
-		{
-			if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
-			{
-				AttachCalled.Raise(this, context);
-			}
-
-			base.OnAttach(context);
-		}
-
-		public override void OnAttach(Activity activity)
-		{
-			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
-			{
-				AttachCalled.Raise(this, activity);
-			}
-
-			base.OnAttach(activity);
-		}
+            base.OnAttach(activity);
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -134,9 +131,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 DisposeCalled.Raise(this);
-            }
             base.Dispose(disposing);
         }
 

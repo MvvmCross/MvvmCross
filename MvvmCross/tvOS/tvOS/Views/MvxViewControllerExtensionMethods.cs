@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxViewControllerExtensionMethods
     {
         public static void OnViewCreate(this IMvxTvosView iosView)
@@ -37,9 +37,7 @@ namespace MvvmCross.tvOS.Views
 
             var instanceRequest = iosView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
-            {
                 return instanceRequest.ViewModelInstance;
-            }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on tvOS currently */);

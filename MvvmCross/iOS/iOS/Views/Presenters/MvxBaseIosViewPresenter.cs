@@ -20,7 +20,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if(HandlePresentationChange(hint))
+            if (HandlePresentationChange(hint))
                 return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);

@@ -5,65 +5,58 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Parse
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxParser
     {
         protected string FullText { get; private set; }
         protected int CurrentIndex { get; private set; }
 
+        protected bool IsComplete => CurrentIndex >= FullText.Length;
+
+        protected char CurrentChar => FullText[CurrentIndex];
+
         protected virtual void Reset(string textToParse)
         {
-            this.FullText = textToParse;
-            this.CurrentIndex = 0;
+            FullText = textToParse;
+            CurrentIndex = 0;
         }
-
-        protected bool IsComplete => this.CurrentIndex >= this.FullText.Length;
-
-        protected char CurrentChar => this.FullText[this.CurrentIndex];
 
         protected string ReadQuotedString()
         {
-            bool nextCharEscaped = false;
-            char quoteDelimiterChar = this.CurrentChar;
+            var nextCharEscaped = false;
+            var quoteDelimiterChar = CurrentChar;
 
             if (quoteDelimiterChar != '\'' && quoteDelimiterChar != '\"')
-            {
                 throw new MvxException("Error parsing string indexer - unexpected quote character {0} in text {1}",
-                                       quoteDelimiterChar, this.FullText);
-            }
+                    quoteDelimiterChar, FullText);
 
-            this.MoveNext();
-            if (this.IsComplete)
-            {
-                throw new MvxException("Error parsing string indexer - unterminated in text {0}", this.FullText);
-            }
+            MoveNext();
+            if (IsComplete)
+                throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
 
             var textBuilder = new StringBuilder();
             while (true)
             {
-                if (this.IsComplete)
-                {
-                    throw new MvxException("Error parsing string indexer - unterminated in text {0}", this.FullText);
-                }
+                if (IsComplete)
+                    throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
 
                 if (nextCharEscaped)
                 {
-                    textBuilder.Append(this.ReadEscapedCharacter());
+                    textBuilder.Append(ReadEscapedCharacter());
                     nextCharEscaped = false;
                     continue;
                 }
 
-                var currentChar = this.CurrentChar;
-                this.MoveNext();
+                var currentChar = CurrentChar;
+                MoveNext();
 
                 if (currentChar == '\\')
                 {
@@ -72,9 +65,7 @@ namespace MvvmCross.Platform.Parse
                 }
 
                 if (currentChar == quoteDelimiterChar)
-                {
                     break;
-                }
 
                 textBuilder.Append(currentChar);
             }
@@ -86,24 +77,22 @@ namespace MvvmCross.Platform.Parse
         protected uint ReadUnsignedInteger()
         {
             var integerStringBuilder = new StringBuilder();
-            while (!this.IsComplete && char.IsDigit(this.CurrentChar))
+            while (!IsComplete && char.IsDigit(CurrentChar))
             {
-                integerStringBuilder.Append(this.CurrentChar);
-                this.MoveNext();
+                integerStringBuilder.Append(CurrentChar);
+                MoveNext();
             }
             uint index;
             var integerText = integerStringBuilder.ToString();
             if (!uint.TryParse(integerText, out index))
-            {
-                throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, this.FullText);
-            }
+                throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, FullText);
             return index;
         }
 
         protected char ReadEscapedCharacter()
         {
-            var currentChar = this.CurrentChar;
-            this.MoveNext();
+            var currentChar = CurrentChar;
+            MoveNext();
 
             // list here based on the very helpful
             // http://dotneteers.net/blogs/divedeeper/archive/2008/08/03/ParsingCSharpStrings.aspx
@@ -150,45 +139,46 @@ namespace MvvmCross.Platform.Parse
                         "We don't support string literals containing \\x - suggest using \\u escaped characters instead");
                 case 'u':
                     // Unicode hexa escape (exactly 4 digits)
-                    return this.ReadFourDigitUnicodeCharacter();
+                    return ReadFourDigitUnicodeCharacter();
 
                 case 'U':
                     // Unicode hexa escape (exactly 8 digits, first four must be 0000)
-                    var firstFourDigits = this.ReadNDigits(4);
+                    var firstFourDigits = ReadNDigits(4);
                     if (firstFourDigits != "0000")
-                        throw new MvxException("\\U unicode character does not start with 0000 in {1}", this.FullText);
-                    return this.ReadFourDigitUnicodeCharacter();
+                        throw new MvxException("\\U unicode character does not start with 0000 in {1}", FullText);
+                    return ReadFourDigitUnicodeCharacter();
 
                 default:
                     throw new MvxException("Sorry we don't currently support escaped characters like \\{0}",
-                                           currentChar);
+                        currentChar);
             }
         }
 
         private char ReadFourDigitUnicodeCharacter()
         {
-            var digits = this.ReadNDigits(4);
-            var number = UInt32.Parse(digits, NumberStyles.HexNumber);
-            if (number > UInt16.MaxValue)
-                throw new MvxException("\\u unicode character {0} out of range in {1}", number, this.FullText);
-            return (char)number;
+            var digits = ReadNDigits(4);
+            var number = uint.Parse(digits, NumberStyles.HexNumber);
+            if (number > ushort.MaxValue)
+                throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
+            return (char) number;
         }
 
         private string ReadNDigits(int count)
         {
             var toReturn = new StringBuilder(count);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                if (this.IsComplete)
-                    throw new MvxException("Error while reading {0} of {1} digits in {2}", i + 1, count, this.FullText);
+                if (IsComplete)
+                    throw new MvxException("Error while reading {0} of {1} digits in {2}", i + 1, count, FullText);
 
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 if (!char.IsDigit(currentChar))
-                    throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1, count,
-                                           this.FullText, currentChar);
+                    throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1,
+                        count,
+                        FullText, currentChar);
 
                 toReturn.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             return toReturn.ToString();
@@ -196,40 +186,34 @@ namespace MvvmCross.Platform.Parse
 
         protected void MoveNext(uint increment = 1)
         {
-            this.CurrentIndex += (int)increment;
+            CurrentIndex += (int) increment;
         }
 
         protected void SkipWhitespaceAndCharacters(params char[] toSkip)
         {
-            this.SkipWhitespaceAndCharacters((IEnumerable<char>)toSkip);
+            SkipWhitespaceAndCharacters((IEnumerable<char>) toSkip);
         }
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
         {
             var skipChars = toSkip.ToArray();
-            while (!this.IsComplete
-                   && IsWhiteSpaceOrCharacter(this.CurrentChar, skipChars))
-            {
-                this.MoveNext();
-            }
+            while (!IsComplete
+                   && IsWhiteSpaceOrCharacter(CurrentChar, skipChars))
+                MoveNext();
         }
 
         protected void SkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
         {
-            while (!this.IsComplete
-                   && IsWhiteSpaceOrCharacter(this.CurrentChar, toSkip))
-            {
-                this.MoveNext();
-            }
+            while (!IsComplete
+                   && IsWhiteSpaceOrCharacter(CurrentChar, toSkip))
+                MoveNext();
         }
 
         protected void SkipWhitespace()
         {
-            while (!this.IsComplete
-                   && char.IsWhiteSpace(this.CurrentChar))
-            {
-                this.MoveNext();
-            }
+            while (!IsComplete
+                   && char.IsWhiteSpace(CurrentChar))
+                MoveNext();
         }
 
         private static bool IsWhiteSpaceOrCharacter(char charToTest, Dictionary<char, bool> toSkip)
@@ -245,47 +229,39 @@ namespace MvvmCross.Platform.Parse
         protected object ReadValue()
         {
             object toReturn;
-            if (!this.TryReadValue(AllowNonQuotedText.Allow, out toReturn))
+            if (!TryReadValue(AllowNonQuotedText.Allow, out toReturn))
                 throw new MvxException("Unable to read value");
             return toReturn;
         }
 
-        protected enum AllowNonQuotedText
-        {
-            Allow,
-            DoNotAllow
-        }
-
         protected bool TryReadValue(AllowNonQuotedText allowNonQuotedText, out object value)
         {
-            this.SkipWhitespace();
+            SkipWhitespace();
 
-            if (this.IsComplete)
-            {
-                throw new MvxException("Unexpected termination while reading value in {0}", this.FullText);
-            }
+            if (IsComplete)
+                throw new MvxException("Unexpected termination while reading value in {0}", FullText);
 
-            var currentChar = this.CurrentChar;
+            var currentChar = CurrentChar;
             if (currentChar == '\'' || currentChar == '\"')
             {
-                value = this.ReadQuotedString();
+                value = ReadQuotedString();
                 return true;
             }
 
             if (char.IsDigit(currentChar) || currentChar == '-')
             {
-                value = this.ReadNumber();
+                value = ReadNumber();
                 return true;
             }
 
             bool booleanValue;
-            if (this.TryReadBoolean(out booleanValue))
+            if (TryReadBoolean(out booleanValue))
             {
                 value = booleanValue;
                 return true;
             }
 
-            if (this.TryReadNull())
+            if (TryReadNull())
             {
                 value = null;
                 return true;
@@ -293,7 +269,7 @@ namespace MvvmCross.Platform.Parse
 
             if (allowNonQuotedText == AllowNonQuotedText.Allow)
             {
-                value = this.ReadTextUntil(',', ';');
+                value = ReadTextUntil(',', ';');
                 return true;
             }
 
@@ -307,7 +283,7 @@ namespace MvvmCross.Platform.Parse
                 return false;
 
             if (peekString.Length != uppercaseKeyword.Length
-                && this.IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
+                && IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
                 return false;
 
             if (!peekString.StartsWith(uppercaseKeyword))
@@ -318,11 +294,11 @@ namespace MvvmCross.Platform.Parse
 
         protected bool TryReadNull()
         {
-            var peek = this.SafePeekString(5);
+            var peek = SafePeekString(5);
             peek = peek.ToUpperInvariant();
-            if (this.TestKeywordInPeekString("NULL", peek))
+            if (TestKeywordInPeekString("NULL", peek))
             {
-                this.MoveNext(4);
+                MoveNext(4);
                 return true;
             }
 
@@ -331,17 +307,17 @@ namespace MvvmCross.Platform.Parse
 
         protected bool TryReadBoolean(out bool booleanValue)
         {
-            var peek = this.SafePeekString(6);
+            var peek = SafePeekString(6);
             peek = peek.ToUpperInvariant();
-            if (this.TestKeywordInPeekString("TRUE", peek))
+            if (TestKeywordInPeekString("TRUE", peek))
             {
-                this.MoveNext(4);
+                MoveNext(4);
                 booleanValue = true;
                 return true;
             }
-            if (this.TestKeywordInPeekString("FALSE", peek))
+            if (TestKeywordInPeekString("FALSE", peek))
             {
-                this.MoveNext(5);
+                MoveNext(5);
                 booleanValue = false;
                 return true;
             }
@@ -352,34 +328,35 @@ namespace MvvmCross.Platform.Parse
 
         protected string SafePeekString(int length)
         {
-            var safeLength = Math.Min(length, this.FullText.Length - this.CurrentIndex);
+            var safeLength = Math.Min(length, FullText.Length - CurrentIndex);
             if (safeLength == 0)
                 return string.Empty;
-            return this.FullText.Substring(this.CurrentIndex, safeLength);
+            return FullText.Substring(CurrentIndex, safeLength);
         }
 
         protected ValueType ReadNumber()
         {
             var stringBuilder = new StringBuilder();
 
-            var firstChar = this.CurrentChar;
+            var firstChar = CurrentChar;
             if (firstChar == '-')
             {
                 stringBuilder.Append(firstChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             var decimalPeriodSeen = false;
 
-            while (!this.IsComplete)
+            while (!IsComplete)
             {
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 // note that we force users to use . as the decimal separator (no European commas allowed)
                 if (currentChar == '.')
                 {
                     if (decimalPeriodSeen)
-                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", this.FullText,
-                                               this.CurrentIndex);
+                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}",
+                            FullText,
+                            CurrentIndex);
                     decimalPeriodSeen = true;
                 }
                 else if (!char.IsDigit(currentChar))
@@ -388,16 +365,16 @@ namespace MvvmCross.Platform.Parse
                 }
 
                 stringBuilder.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             var numberText = stringBuilder.ToString();
-            return this.NumberFromText(numberText, decimalPeriodSeen);
+            return NumberFromText(numberText, decimalPeriodSeen);
         }
 
         protected ValueType NumberFromText(string numberText)
         {
-            return this.NumberFromText(numberText, numberText.Contains("."));
+            return NumberFromText(numberText, numberText.Contains("."));
         }
 
         protected ValueType NumberFromText(string numberText, bool decimalPeriodSeen)
@@ -406,37 +383,34 @@ namespace MvvmCross.Platform.Parse
             {
                 double doubleResult;
                 if (double.TryParse(numberText,
-                                    NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
-                                    CultureInfo.InvariantCulture,
-                                    out doubleResult))
+                    NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
+                    CultureInfo.InvariantCulture,
+                    out doubleResult))
                     return doubleResult;
 
-                throw new MvxException("Failed to parse double from {0} in {1}", numberText, this.FullText);
+                throw new MvxException("Failed to parse double from {0} in {1}", numberText, FullText);
             }
-            else
-            {
-                // note that we use Int64 because Json.Net doe...
-                Int64 intResult;
-                if (Int64.TryParse(numberText,
-                                   NumberStyles.AllowLeadingSign,
-                                   CultureInfo.InvariantCulture,
-                                   out intResult))
-                    return intResult;
+            // note that we use Int64 because Json.Net doe...
+            long intResult;
+            if (long.TryParse(numberText,
+                NumberStyles.AllowLeadingSign,
+                CultureInfo.InvariantCulture,
+                out intResult))
+                return intResult;
 
-                throw new MvxException("Failed to parse Int64 from {0} in {1}", numberText, this.FullText);
-            }
+            throw new MvxException("Failed to parse Int64 from {0} in {1}", numberText, FullText);
         }
 
         protected object ReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
         {
-            var name = this.ReadValidCSharpName();
+            var name = ReadValidCSharpName();
             try
             {
                 return Enum.Parse(enumerationType, name, ignoreCase);
             }
             catch (ArgumentException exception)
             {
-                throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, this.FullText);
+                throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, FullText);
             }
         }
 
@@ -444,16 +418,14 @@ namespace MvvmCross.Platform.Parse
         {
             var toReturn = new StringBuilder();
 
-            while (!this.IsComplete)
+            while (!IsComplete)
             {
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 if (terminatingCharacters.Contains(currentChar)
                     || char.IsWhiteSpace(currentChar))
-                {
                     break;
-                }
                 toReturn.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             return toReturn.ToString();
@@ -463,15 +435,13 @@ namespace MvvmCross.Platform.Parse
         {
             var toReturn = new StringBuilder();
 
-            while (!this.IsComplete)
+            while (!IsComplete)
             {
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 if (terminatingCharacters.Contains(currentChar))
-                {
                     break;
-                }
                 toReturn.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             return toReturn.ToString();
@@ -479,38 +449,40 @@ namespace MvvmCross.Platform.Parse
 
         protected string ReadValidCSharpName()
         {
-            this.SkipWhitespace();
-            var firstChar = this.CurrentChar;
-            if (!this.IsValidFirstCharacterOfCSharpName(firstChar))
-            {
+            SkipWhitespace();
+            var firstChar = CurrentChar;
+            if (!IsValidFirstCharacterOfCSharpName(firstChar))
                 throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}",
-                                       this.CurrentIndex, this.FullText, firstChar);
-            }
+                    CurrentIndex, FullText, firstChar);
             var toReturn = new StringBuilder();
             toReturn.Append(firstChar);
-            this.MoveNext();
-            while (!this.IsComplete)
+            MoveNext();
+            while (!IsComplete)
             {
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 if (!char.IsLetterOrDigit(currentChar)
                     && currentChar != '_')
-                {
                     break;
-                }
                 toReturn.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
             return toReturn.ToString();
         }
 
         protected bool IsValidFirstCharacterOfCSharpName(char firstChar)
         {
-            return char.IsLetter(firstChar) || (firstChar == '_');
+            return char.IsLetter(firstChar) || firstChar == '_';
         }
 
         protected bool IsValidMidCharacterOfCSharpName(char firstChar)
         {
-            return char.IsLetterOrDigit(firstChar) || (firstChar == '_');
+            return char.IsLetterOrDigit(firstChar) || firstChar == '_';
+        }
+
+        protected enum AllowNonQuotedText
+        {
+            Allow,
+            DoNotAllow
         }
     }
 }

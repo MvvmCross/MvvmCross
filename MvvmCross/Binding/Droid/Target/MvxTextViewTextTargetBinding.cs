@@ -9,18 +9,16 @@ using System;
 using Android.Text;
 using Android.Widget;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxTextViewTextTargetBinding
         : MvxAndroidTargetBinding
-        , IMvxEditableTextView
+            , IMvxEditableTextView
     {
         private readonly bool _isEditTextBinding;
-
-        protected TextView TextView => Target as TextView;
 
         private IDisposable _subscription;
 
@@ -36,7 +34,22 @@ namespace MvvmCross.Binding.Droid.Target
             _isEditTextBinding = target is EditText;
         }
 
+        protected TextView TextView => Target as TextView;
+
         public override Type TargetType => typeof(string);
+
+        public override MvxBindingMode DefaultMode => _isEditTextBinding
+            ? MvxBindingMode.TwoWay
+            : MvxBindingMode.OneWay;
+
+        public string CurrentText
+        {
+            get
+            {
+                var view = TextView;
+                return view?.Text;
+            }
+        }
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -48,10 +61,8 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object toSet)
         {
-            ((TextView)target).Text = (string)toSet;
+            ((TextView) target).Text = (string) toSet;
         }
-
-        public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
@@ -77,15 +88,6 @@ namespace MvvmCross.Binding.Droid.Target
                 _subscription = null;
             }
             base.Dispose(isDisposing);
-        }
-
-        public string CurrentText
-        {
-            get
-            {
-                var view = TextView;
-                return view?.Text;
-            }
         }
     }
 }

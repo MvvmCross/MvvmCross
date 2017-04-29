@@ -1,7 +1,3 @@
-using MvvmCross.Platform.Platform;
-using System;
-using System.Diagnostics;
-
 namespace Example.Droid
 {
     public class DebugTrace : IMvxTrace

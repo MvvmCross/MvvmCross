@@ -5,21 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-
     public interface IMvxSourceStep : IMvxBinding
     {
         Type TargetType { get; set; }
         Type SourceType { get; }
+
+        object DataContext { get; set; }
 
         void SetValue(object value);
 
         event EventHandler Changed;
 
         object GetValue();
-
-        object DataContext { get; set; }
     }
 }

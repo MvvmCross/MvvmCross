@@ -33,7 +33,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             var sourceRatio = sourceWidth / sourceHeight;
             var targetRatio = targetWidth / targetHeight;
 
-            var scaleWidth = (sourceRatio <= targetRatio);
+            var scaleWidth = sourceRatio <= targetRatio;
             scaleWidth = !scaleWidth;
 
             double scalingFactor;
@@ -53,7 +53,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
                 scaledHeight = targetHeight;
             }
 
-            var destRect = new CGRect(0, 0, (nfloat)scaledWidth, (nfloat)scaledHeight);
+            var destRect = new CGRect(0, 0, (nfloat) scaledWidth, (nfloat) scaledHeight);
 
             UIGraphics.BeginImageContextWithOptions(destRect.Size, false, 0);
             image.Draw(destRect);

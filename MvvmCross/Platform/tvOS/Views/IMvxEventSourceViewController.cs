@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;
 
         event EventHandler ViewDidLayoutSubviewsCalled;
-        
+
         event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
         event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;

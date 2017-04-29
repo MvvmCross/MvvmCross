@@ -36,7 +36,8 @@ namespace MvvmCross.Forms.Bindings
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            var property = type.GetProperty(name, BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
+            var property = type.GetProperty(name,
+                BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
             return property;
         }
 
@@ -51,7 +52,8 @@ namespace MvvmCross.Forms.Bindings
             var candidateType = type;
             while (candidateType != null)
             {
-                var fieldInfo = candidateType.GetField(dependencyPropertyName, BindingFlags.Static | BindingFlags.Public);
+                var fieldInfo = candidateType.GetField(dependencyPropertyName,
+                    BindingFlags.Static | BindingFlags.Public);
                 if (fieldInfo != null)
                     return fieldInfo;
 

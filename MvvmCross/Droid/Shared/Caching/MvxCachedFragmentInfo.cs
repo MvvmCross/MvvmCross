@@ -1,11 +1,12 @@
-using MvvmCross.Droid.Shared.Fragments;
 using System;
+using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
     public class MvxCachedFragmentInfo : IMvxCachedFragmentInfo
     {
-        public MvxCachedFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment, bool addToBackstack)
+        public MvxCachedFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment,
+            bool addToBackstack)
         {
             Tag = tag;
             FragmentType = fragmentType;

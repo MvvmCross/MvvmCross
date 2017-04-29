@@ -13,11 +13,7 @@ namespace MasterDetailExample.iOS
     {
         // class-level declarations
 
-        public override UIWindow Window
-        {
-            get;
-            set;
-        }
+        public override UIWindow Window { get; set; }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -66,5 +62,3 @@ namespace MasterDetailExample.iOS
         }
     }
 }
-
-

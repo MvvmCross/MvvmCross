@@ -5,19 +5,18 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
-    using Windows.UI.Xaml.Media;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using System.Collections.Generic;
     public class MvxWindowsMultiRegionViewPresenter
         : MvxWindowsViewPresenter
     {
@@ -26,7 +25,7 @@ namespace MvvmCross.Uwp.Views
         public MvxWindowsMultiRegionViewPresenter(IMvxWindowsFrame rootFrame)
             : base(rootFrame)
         {
-            this._rootFrame = rootFrame;
+            _rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -38,7 +37,7 @@ namespace MvvmCross.Uwp.Views
                 var converter = Mvx.Resolve<IMvxNavigationSerializer>();
                 var requestText = converter.Serializer.SerializeObject(request);
 
-                var containerView = FindChild<Frame>(this._rootFrame.UnderlyingControl, viewType.GetRegionName());
+                var containerView = FindChild<Frame>(_rootFrame.UnderlyingControl, viewType.GetRegionName());
 
                 if (containerView != null)
                 {
@@ -91,7 +90,7 @@ namespace MvvmCross.Uwp.Views
                 var child = VisualTreeHelper.GetChild(reference, index);
 
                 // If the child is not of the request child type child
-                T childType = child as T;
+                var childType = child as T;
                 if (childType == null)
                 {
                     // recursively drill down the tree
@@ -107,26 +106,22 @@ namespace MvvmCross.Uwp.Views
                     if (frameworkElement != null && frameworkElement.Name == childName)
                     {
                         // if the child's name is of the request name
-                        foundChild = (T)child;
+                        foundChild = (T) child;
                         break;
                     }
-                    else
-                    {
-                        // keep for searching inside this frame
-                        nextPhase.Add(child);
-                    }
+                    // keep for searching inside this frame
+                    nextPhase.Add(child);
                 }
                 else
                 {
                     // child element found.
-                    foundChild = (T)child;
+                    foundChild = (T) child;
                     break;
                 }
             }
 
             // if failed to find the child, search inside the frames we found
             if (foundChild == null)
-            {
                 foreach (var item in nextPhase)
                 {
                     // recursively drill down the tree
@@ -134,9 +129,7 @@ namespace MvvmCross.Uwp.Views
 
                     // If the child is found, break so we do not overwrite the found child. 
                     if (foundChild != null) break;
-
                 }
-            }
 
             return foundChild;
         }

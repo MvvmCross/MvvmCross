@@ -13,14 +13,14 @@ namespace MvvmCross.Droid.Shared.Fragments
 {
     public interface IMvxFragmentView
         : IMvxBindingContextOwner
-        , IMvxView
+            , IMvxView
     {
         string UniqueImmutableCacheTag { get; }
     }
 
     public interface IMvxFragmentView<TViewModel>
         : IMvxFragmentView
-        , IMvxView<TViewModel> where TViewModel : class
+            , IMvxView<TViewModel> where TViewModel : class
         , IMvxViewModel
     {
     }

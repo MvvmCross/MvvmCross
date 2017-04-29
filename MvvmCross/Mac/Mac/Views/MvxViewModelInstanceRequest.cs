@@ -5,25 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Mac.Views
 {
-    using global::MvvmCross.Core.ViewModels;
-
 #warning Move to shared PCL code
 
     public class MvxViewModelInstanceRequest : MvxViewModelRequest
     {
-        private readonly IMvxViewModel _viewModelInstance;
-
-        public IMvxViewModel ViewModelInstance
-        {
-            get { return this._viewModelInstance; }
-        }
-
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
             : base(viewModelInstance.GetType(), null, null)
         {
-            this._viewModelInstance = viewModelInstance;
+            ViewModelInstance = viewModelInstance;
         }
+
+        public IMvxViewModel ViewModelInstance { get; }
     }
 }

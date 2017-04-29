@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Controls;
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Wpf.Views
 {
@@ -16,20 +16,26 @@ namespace MvvmCross.Wpf.Views
     {
         private IMvxViewModel _viewModel;
 
+        public MvxWpfView()
+        {
+            Unloaded += MvxWpfView_Unloaded;
+            Loaded += MvxWpfView_Loaded;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get => _viewModel;
             set
             {
                 _viewModel = value;
                 DataContext = value;
             }
-        }
-
-        public MvxWpfView()
-        {
-            Unloaded += MvxWpfView_Unloaded;
-            Loaded += MvxWpfView_Loaded;
         }
 
         private void MvxWpfView_Unloaded(object sender, RoutedEventArgs e)
@@ -42,12 +48,6 @@ namespace MvvmCross.Wpf.Views
         {
             ViewModel?.Appearing();
             ViewModel?.Appeared();
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         ~MvxWpfView()
@@ -67,12 +67,12 @@ namespace MvvmCross.Wpf.Views
 
     public class MvxWpfView<TViewModel>
         : MvxWpfView
-          , IMvxWpfView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxWpfView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

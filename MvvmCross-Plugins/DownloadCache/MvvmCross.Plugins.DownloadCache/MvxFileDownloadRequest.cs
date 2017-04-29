@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
 using System.Net;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -19,8 +19,8 @@ namespace MvvmCross.Plugins.DownloadCache
             DownloadPath = downloadPath;
         }
 
-        public string DownloadPath { get; private set; }
-        public string Url { get; private set; }
+        public string DownloadPath { get; }
+        public string Url { get; }
 
         public event EventHandler<MvxFileDownloadedEventArgs> DownloadComplete;
 
@@ -31,7 +31,7 @@ namespace MvvmCross.Plugins.DownloadCache
             try
             {
                 var request = WebRequest.Create(new Uri(Url));
-                request.BeginGetResponse((result) => ProcessResponse(request, result), null);
+                request.BeginGetResponse(result => ProcessResponse(request, result), null);
             }
             //#if !NETFX_CORE
             //            catch (ThreadAbortException)
@@ -57,15 +57,13 @@ namespace MvvmCross.Plugins.DownloadCache
                     using (var s = resp.GetResponseStream())
                     {
                         fileService.WriteFile(tempFilePath,
-                                              fileStream =>
-                                                  {
-                                                      var buffer = new byte[4 * 1024];
-                                                      int count;
-                                                      while ((count = s.Read(buffer, 0, buffer.Length)) > 0)
-                                                      {
-                                                          fileStream.Write(buffer, 0, count);
-                                                      }
-                                                  });
+                            fileStream =>
+                            {
+                                var buffer = new byte[4 * 1024];
+                                int count;
+                                while ((count = s.Read(buffer, 0, buffer.Length)) > 0)
+                                    fileStream.Write(buffer, 0, count);
+                            });
                     }
                 }
                 fileService.TryMove(tempFilePath, DownloadPath, true);

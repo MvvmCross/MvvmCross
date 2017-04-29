@@ -4,45 +4,47 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.ExtensionMethods;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Binding.Droid.Views
 {
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {
+        private int _groupTemplateId;
+
         public MvxExpandableListAdapter(Context context)
             : base(context)
-        { }
-        
+        {
+        }
+
         public MvxExpandableListAdapter(Context context, IMvxAndroidBindingContext bindingContext)
             : base(context, bindingContext)
-        { }
+        {
+        }
 
         protected MvxExpandableListAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-        private int _groupTemplateId;
-
         public int GroupTemplateId
         {
-            get { return this._groupTemplateId; }
+            get => _groupTemplateId;
             set
             {
-                if (this._groupTemplateId == value)
+                if (_groupTemplateId == value)
                     return;
 
-                this._groupTemplateId = value;
+                _groupTemplateId = value;
                 // since the template has changed then let's force the list to redisplay by firing NotifyDataSetChanged()
-                if (this.ItemsSource != null)
-                    this.NotifyDataSetChanged();
+                if (ItemsSource != null)
+                    NotifyDataSetChanged();
             }
         }
 
-        public int GroupCount => this.Count;
+        public int GroupCount => Count;
 
         public virtual void OnGroupExpanded(int groupPosition)
         {
@@ -61,8 +63,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         public virtual View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
-            var item = this.GetRawGroup(groupPosition);
-			return this.GetBindableView(convertView, item, parent, this.GroupTemplateId);
+            var item = GetRawGroup(groupPosition);
+            return GetBindableView(convertView, item, parent, GroupTemplateId);
         }
 
         public virtual long GetGroupId(int groupPosition)
@@ -70,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Views
             return groupPosition;
         }
 
-        public virtual Java.Lang.Object GetGroup(int groupPosition)
+        public virtual Object GetGroup(int groupPosition)
         {
             return null;
         }
@@ -92,29 +94,21 @@ namespace MvvmCross.Binding.Droid.Views
         // bit 32-63: Lower 32 bits of the childId.
         public virtual long GetCombinedChildId(long groupId, long childId)
         {
-            return (long)(0x8000000000000000UL | (ulong)((groupId & 0x7FFFFFFF) << 32) | (ulong)(childId & 0xFFFFFFFF));
+            return (long) (0x8000000000000000UL | (ulong) ((groupId & 0x7FFFFFFF) << 32) |
+                           (ulong) (childId & 0xFFFFFFFF));
         }
 
-        public virtual object GetRawItem(int groupPosition, int position)
+        public virtual View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView,
+            ViewGroup parent)
         {
-            return ((IEnumerable)this.GetRawGroup(groupPosition)).ElementAt(position);
-        }
+            var item = GetRawItem(groupPosition, childPosition);
 
-        public virtual object GetRawGroup(int groupPosition)
-        {
-            return this.GetRawItem(groupPosition);
-        }
-
-        public virtual View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
-        {
-            var item = this.GetRawItem(groupPosition, childPosition);
-
-			return this.GetBindableView(convertView, item, parent, this.ItemTemplateId);
+            return GetBindableView(convertView, item, parent, ItemTemplateId);
         }
 
         public virtual int GetChildrenCount(int groupPosition)
         {
-            return ((IEnumerable)this.GetRawGroup(groupPosition)).Count();
+            return ((IEnumerable) GetRawGroup(groupPosition)).Count();
         }
 
         public virtual long GetChildId(int groupPosition, int childPosition)
@@ -122,18 +116,28 @@ namespace MvvmCross.Binding.Droid.Views
             return childPosition;
         }
 
-        public virtual Java.Lang.Object GetChild(int groupPosition, int childPosition)
+        public virtual Object GetChild(int groupPosition, int childPosition)
         {
             return null;
         }
 
+        public virtual object GetRawItem(int groupPosition, int position)
+        {
+            return ((IEnumerable) GetRawGroup(groupPosition)).ElementAt(position);
+        }
+
+        public virtual object GetRawGroup(int groupPosition)
+        {
+            return GetRawItem(groupPosition);
+        }
+
         public virtual Tuple<int, int> GetPositions(object childItem)
         {
-            int groupCount = this.Count;
+            var groupCount = Count;
 
-            for (int groupPosition = 0; groupPosition < groupCount; groupPosition++)
+            for (var groupPosition = 0; groupPosition < groupCount; groupPosition++)
             {
-                int childPosition = ((IEnumerable)this.GetRawGroup(groupPosition)).GetPosition(childItem);
+                var childPosition = ((IEnumerable) GetRawGroup(groupPosition)).GetPosition(childItem);
                 if (childPosition != -1)
                     return new Tuple<int, int>(groupPosition, childPosition);
 

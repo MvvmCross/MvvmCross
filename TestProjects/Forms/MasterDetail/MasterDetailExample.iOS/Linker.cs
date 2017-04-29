@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Windows.Input;
-using MvvmCross.iOS.Views;
 using Foundation;
+using MvvmCross.iOS.Views;
+using MvvmCross.Platform.IoC;
 using UIKit;
 
 namespace MasterDetailExample.iOS
@@ -15,13 +16,13 @@ namespace MasterDetailExample.iOS
         public void Include(UIButton uiButton)
         {
             uiButton.TouchUpInside += (s, e) =>
-                                      uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
+                uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
         }
 
         public void Include(UIBarButtonItem barButton)
         {
             barButton.Clicked += (s, e) =>
-                                 barButton.Title = barButton.Title + "";
+                barButton.Title = barButton.Title + "";
         }
 
         public void Include(UITextField textField)
@@ -39,7 +40,7 @@ namespace MasterDetailExample.iOS
         public void Include(UILabel label)
         {
             label.Text = label.Text + "";
-            label.AttributedText = new NSAttributedString(label.AttributedText.ToString() + "");
+            label.AttributedText = new NSAttributedString(label.AttributedText + "");
         }
 
         public void Include(UIImageView imageView)
@@ -89,23 +90,32 @@ namespace MasterDetailExample.iOS
 
         public void Include(INotifyCollectionChanged changed)
         {
-            changed.CollectionChanged += (s, e) => { var test = string.Format("{0}{1}{2}{3}{4}", e.Action, e.NewItems, e.NewStartingIndex, e.OldItems, e.OldStartingIndex); };
+            changed.CollectionChanged += (s, e) =>
+            {
+                var test = string.Format("{0}{1}{2}{3}{4}", e.Action, e.NewItems, e.NewStartingIndex, e.OldItems,
+                    e.OldStartingIndex);
+            };
         }
 
         public void Include(ICommand command)
         {
-            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
+            command.CanExecuteChanged += (s, e) =>
+            {
+                if (command.CanExecute(null)) command.Execute(null);
+            };
         }
 
-        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
+        public void Include(MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
+            injector = new MvxPropertyInjector();
         }
 
-        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        public void Include(INotifyPropertyChanged changed)
         {
-            changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
+            changed.PropertyChanged += (sender, e) =>
+            {
+                var test = e.PropertyName;
+            };
         }
     }
 }
-

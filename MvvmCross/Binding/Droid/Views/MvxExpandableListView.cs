@@ -1,31 +1,30 @@
+using System;
+using System.Collections;
+using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Windows.Input;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {
+        private ICommand _groupClick;
         private bool _groupClickOverloaded;
-        private bool _itemClickOverloaded;
-        private bool _itemLongClickOverloaded;
+        private ICommand _groupLongClick;
 
         private ICommand _itemClick;
+        private bool _itemClickOverloaded;
         private ICommand _itemLongClick;
-        private ICommand _groupClick;
-        private ICommand _groupLongClick;
+        private bool _itemLongClickOverloaded;
 
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context))
-        { }
+        {
+        }
 
         public MvxExpandableListView(Context context, IAttributeSet attrs, MvxExpandableListAdapter adapter)
             : base(context, attrs)
@@ -53,25 +52,25 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return ThisAdapter.ItemsSource; }
-            set { ThisAdapter.ItemsSource = value; }
+            get => ThisAdapter.ItemsSource;
+            set => ThisAdapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return ThisAdapter.ItemTemplateId; }
-            set { ThisAdapter.ItemTemplateId = value; }
+            get => ThisAdapter.ItemTemplateId;
+            set => ThisAdapter.ItemTemplateId = value;
         }
 
         public int GroupTemplateId
         {
-            get { return ThisAdapter.GroupTemplateId; }
-            set { ThisAdapter.GroupTemplateId = value; }
+            get => ThisAdapter.GroupTemplateId;
+            set => ThisAdapter.GroupTemplateId = value;
         }
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
+            get => _itemClick;
             set
             {
                 _itemClick = value;
@@ -81,7 +80,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get => _itemLongClick;
             set
             {
                 _itemLongClick = value;
@@ -91,7 +90,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand GroupClick
         {
-            get { return _groupClick; }
+            get => _groupClick;
             set
             {
                 _groupClick = value;
@@ -101,7 +100,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public ICommand GroupLongClick
         {
-            get { return _groupLongClick; }
+            get => _groupLongClick;
             set
             {
                 _groupLongClick = value;
@@ -134,7 +133,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         private void GroupOnClick(object sender, GroupClickEventArgs e)
         {
-           ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
+            ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
         }
 
         private void EnsureItemLongClickOverloaded()
@@ -148,18 +147,14 @@ namespace MvvmCross.Binding.Droid.Views
         private void ItemOnLongClick(object sender, ItemLongClickEventArgs e)
         {
             var type = GetPackedPositionType(e.Id);
-            long packedPos = ((ExpandableListView)e.Parent).GetExpandableListPosition(e.Position);
-            int groupPosition = GetPackedPositionGroup(packedPos);
-            int childPosition = GetPackedPositionChild(packedPos);
+            var packedPos = ((ExpandableListView) e.Parent).GetExpandableListPosition(e.Position);
+            var groupPosition = GetPackedPositionGroup(packedPos);
+            var childPosition = GetPackedPositionChild(packedPos);
 
             if (type == PackedPositionType.Child)
-            {
                 ExecuteCommandOnItem(ItemLongClick, groupPosition, childPosition);
-            }
             else if (type == PackedPositionType.Group)
-            {
                 ExecuteCommandOnGroup(GroupLongClick, groupPosition);
-            }
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command, int groupPosition, int position)

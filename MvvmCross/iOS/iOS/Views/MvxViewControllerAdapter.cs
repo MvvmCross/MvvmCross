@@ -5,17 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.iOS.Views;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.iOS.Views;
-
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxIosView IosView => base.ViewController as IMvxIosView;
-
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
@@ -23,15 +20,17 @@ namespace MvvmCross.iOS.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
         }
 
+        protected IMvxIosView IosView => ViewController as IMvxIosView;
+
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.IosView.OnViewCreate();
+            IosView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.IosView.OnViewDestroy();
+            IosView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

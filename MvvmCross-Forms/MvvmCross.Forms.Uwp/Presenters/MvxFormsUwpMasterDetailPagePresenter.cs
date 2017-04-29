@@ -6,9 +6,9 @@ namespace MvvmCross.Forms.Uwp.Presenters
 {
     public class MvxFormsUwpMasterDetailPagePresenter
         : MvxFormsMasterDetailPagePresenter
-        , IMvxWindowsViewPresenter
+            , IMvxWindowsViewPresenter
     {
-        private readonly IMvxWindowsFrame _rootFrame;        
+        private readonly IMvxWindowsFrame _rootFrame;
 
         public MvxFormsUwpMasterDetailPagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
             : base(mvxFormsApp)
@@ -18,7 +18,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         protected override void CustomPlatformInitialization(MasterDetailPage mainPage)
         {
-            _rootFrame.Navigate(mainPage.GetType(), _rootFrame);            
-        }      
+            _rootFrame.Navigate(mainPage.GetType(), _rootFrame);
+        }
     }
 }

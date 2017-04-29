@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using Android.Content;
+using Android.Util;
+using Android.Views;
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding.Droid.Binders
 {
-    using System.Collections.Generic;
-
-    using Android.Content;
-    using Android.Util;
-    using Android.Views;
-
-    using MvvmCross.Binding.Bindings;
-
     public interface IMvxLayoutInflaterHolderFactory : IMvxLayoutInflaterFactory
     {
         IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }

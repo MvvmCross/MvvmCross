@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views
 {
-    using System.Collections.Generic;
-
-    using global::MvvmCross.Core.Platform;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform;
-    using global::MvvmCross.Platform.Exceptions;
-    using global::MvvmCross.Platform.Platform;
-
     public static class MvxViewControllerExtensionMethods
     {
         public static void OnViewCreate(this IMvxMacView macView)
@@ -40,9 +39,7 @@ namespace MvvmCross.Mac.Views
 
             var instanceRequest = macView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
-            {
                 return instanceRequest.ViewModelInstance;
-            }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(macView.Request, null /* no saved state on iOS currently */);
@@ -52,16 +49,14 @@ namespace MvvmCross.Mac.Views
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view,
-                                                                            object parameterObject)
+            object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
             return
                 view.CreateViewControllerFor<TTargetViewModel>(parameterObject == null
-                                                                   ? null
-                                                                   : parameterObject.ToSimplePropertyDictionary());
+                    ? null
+                    : parameterObject.ToSimplePropertyDictionary());
         }
-
-#warning TODO - could this move down to IMvxView level?
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
             this IMvxMacView view,

@@ -5,25 +5,79 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Core;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.Dispatchers;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.Dispatchers;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxNotifyPropertyChangedTest : MvxIoCSupportingTest
     {
         public class TestInpc : MvxNotifyPropertyChanged
         {
             public string Foo { get; set; }
+        }
+
+        public class Interceptor : IMvxInpcInterceptor
+        {
+            public Func<IMvxNotifyPropertyChanged, PropertyChangedEventArgs, MvxInpcInterceptionResult> Handler;
+
+            public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
+            {
+                return Handler(sender, args);
+            }
+        }
+
+        [Test]
+        public void Test_Interceptor()
+        {
+            ClearAll();
+
+            var dispatcher = new CountingMockMainThreadDispatcher();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+
+            var interceptor = new Interceptor();
+            Ioc.RegisterSingleton<IMvxInpcInterceptor>(interceptor);
+
+            var notified = new List<string>();
+            var t = new TestInpc();
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
+            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
+
+            Assert.That(dispatcher.Count == 1);
+
+            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.DoNotRaisePropertyChanged;
+            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
+
+            Assert.That(dispatcher.Count == 1);
+
+            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
+            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
+
+            Assert.That(dispatcher.Count == 2);
+        }
+
+        [Test]
+        public void Test_RaisePropertyChangedDirect()
+        {
+            ClearAll();
+            var dispatcher = new InlineMockMainThreadDispatcher();
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+
+            var notified = new List<string>();
+            var t = new TestInpc();
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
+
+            Assert.That(notified.Count == 1);
+            Assert.That(notified[0] == "Foo");
         }
 
         [Test]
@@ -59,22 +113,6 @@ namespace MvvmCross.Test.ViewModels
         }
 
         [Test]
-        public void Test_RaisePropertyChangedDirect()
-        {
-            ClearAll();
-            var dispatcher = new InlineMockMainThreadDispatcher();
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
-
-            var notified = new List<string>();
-            var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
-            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
-
-            Assert.That(notified.Count == 1);
-            Assert.That(notified[0] == "Foo");
-        }
-
-        [Test]
         public void Test_TurnOffUIThread()
         {
             ClearAll();
@@ -97,46 +135,6 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreEqual(1, dispatcher.Count);
             Assert.That(notified.Count == 1);
             Assert.That(notified[0] == "Foo");
-        }
-
-        public class Interceptor : IMvxInpcInterceptor
-        {
-            public Func<IMvxNotifyPropertyChanged, PropertyChangedEventArgs, MvxInpcInterceptionResult> Handler;
-
-            public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
-            {
-                return this.Handler(sender, args);
-            }
-        }
-
-        [Test]
-        public void Test_Interceptor()
-        {
-            ClearAll();
-
-            var dispatcher = new CountingMockMainThreadDispatcher();
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
-
-            var interceptor = new Interceptor();
-            Ioc.RegisterSingleton<IMvxInpcInterceptor>(interceptor);
-
-            var notified = new List<string>();
-            var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
-            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
-            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
-
-            Assert.That(dispatcher.Count == 1);
-
-            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.DoNotRaisePropertyChanged;
-            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
-
-            Assert.That(dispatcher.Count == 1);
-
-            interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
-            t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
-
-            Assert.That(dispatcher.Count == 2);
         }
     }
 }

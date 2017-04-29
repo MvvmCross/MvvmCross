@@ -17,6 +17,6 @@ namespace MvvmCross.Plugins.Location.Droid
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidLocationWatcher());
-		}
+        }
     }
 }

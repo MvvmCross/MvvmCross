@@ -2,7 +2,7 @@
 
 namespace Eventhooks.Core.ViewModels
 {
-	public class SecondViewModel : MvxViewModel
-	{
-	}
+    public class SecondViewModel : MvxViewModel
+    {
+    }
 }

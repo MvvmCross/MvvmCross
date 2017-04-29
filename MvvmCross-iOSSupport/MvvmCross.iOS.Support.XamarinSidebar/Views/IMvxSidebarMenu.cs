@@ -14,4 +14,3 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         bool ReopenOnRotate { get; }
     }
 }
-

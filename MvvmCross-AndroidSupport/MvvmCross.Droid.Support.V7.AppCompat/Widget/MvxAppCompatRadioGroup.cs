@@ -24,6 +24,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
+        private static long _nextGeneratedViewId = 1;
+
+        private IMvxAdapterWithChangedEvent _adapter;
+
         public MvxAppCompatRadioGroup(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))
         {
@@ -48,41 +52,27 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
         }
 
-        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        [MvxSetToNullAfterBinding]
+        public IEnumerable ItemsSource
         {
-            this.UpdateDataSetFromChange(sender, eventArgs);
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
-        private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
+        public int ItemTemplateId
         {
-            //var li = (args.Child as MvxListItemView);
-            var radioButton = args.Child as AppCompatRadioButton;
-            
-            // radio buttons require an id so that they get un-checked correctly
-            if (radioButton?.Id == NoId)
-            {
-                radioButton.Id = GenerateViewId();
-            }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
-
-        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
-        {
-            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            boundChild?.ClearAllBindings();
-        }
-
-        private IMvxAdapterWithChangedEvent _adapter;
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get => _adapter;
             protected set
             {
                 var existing = _adapter;
                 if (existing == value)
-                {
                     return;
-                }
 
                 if (existing != null)
                 {
@@ -97,53 +87,50 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 _adapter = value;
 
                 if (_adapter != null)
-                {
                     _adapter.DataSetChanged += AdapterOnDataSetChanged;
-                }
                 else
-                {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
-                }
 
                 if (existing != null)
                     existing.ItemsSource = null;
             }
         }
 
-        [MvxSetToNullAfterBinding]
-        public IEnumerable ItemsSource
+        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        public int ItemTemplateId
+        private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            //var li = (args.Child as MvxListItemView);
+            var radioButton = args.Child as AppCompatRadioButton;
+
+            // radio buttons require an id so that they get un-checked correctly
+            if (radioButton?.Id == NoId)
+                radioButton.Id = GenerateViewId();
         }
 
-        private static long _nextGeneratedViewId = 1;
+        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
+        {
+            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
+            boundChild?.ClearAllBindings();
+        }
 
         private static int GenerateViewId()
         {
             for (;;)
             {
-                int result = (int)Interlocked.Read(ref _nextGeneratedViewId);
+                var result = (int) Interlocked.Read(ref _nextGeneratedViewId);
 
                 // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
-                int newValue = result + 1;
+                var newValue = result + 1;
                 if (newValue > 0x00FFFFFF)
-                {
-                    // Roll over to 1, not 0.
                     newValue = 1;
-                }
 
                 if (Interlocked.CompareExchange(ref _nextGeneratedViewId, newValue, result) == result)
-                {
                     return result;
-                }
             }
         }
 

@@ -11,7 +11,7 @@ using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUIStepperValueTargetBinding 
+    public class MvxUIStepperValueTargetBinding
         : MvxPropertyInfoTargetBinding<UIStepper>
     {
         private bool _subscribed;
@@ -21,13 +21,15 @@ namespace MvvmCross.Binding.iOS.Target
         {
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
         protected override void SetValueImpl(object target, object value)
         {
             var view = target as UIStepper;
             if (view == null)
                 return;
 
-            view.Value = (double)value;
+            view.Value = (double) value;
         }
 
         private void HandleValueChanged(object sender, EventArgs e)
@@ -36,8 +38,6 @@ namespace MvvmCross.Binding.iOS.Target
             if (view == null) return;
             FireValueChanged(view.Value);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {

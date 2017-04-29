@@ -13,7 +13,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     [Preserve(AllMembers = true)]
     public class Plugin
-        : IMvxPlugin          
+        : IMvxPlugin
     {
         public void Load()
         {

@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System.Collections;
-
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     public interface IMvxAdapter
         : ISpinnerAdapter
-        , IListAdapter
+            , IListAdapter
     {
         int SimpleViewLayoutId { get; set; }
 

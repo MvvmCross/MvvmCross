@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Bindings;
-
     public interface IMvxBinder
     {
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText);
@@ -18,10 +17,10 @@ namespace MvvmCross.Binding.Binders
         IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText);
 
         IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
-                                                IEnumerable<MvxBindingDescription> bindingDescriptions);
+            IEnumerable<MvxBindingDescription> bindingDescriptions);
 
         IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
-                                         string partialBindingDescription);
+            string partialBindingDescription);
 
         IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest);
     }

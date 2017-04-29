@@ -1,11 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Converters;
-
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
     {
@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.Combiners
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
             value = stepValues.Any(x => !x)
-                && stepValues.Any(x => x);
+                    && stepValues.Any(x => x);
             return true;
         }
     }
@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.Combiners
         : MvxValueCombiner
     {
         public override bool TryGetValue(
-            System.Collections.Generic.IEnumerable<Bindings.SourceSteps.IMvxSourceStep> steps, out object value)
+            IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var stepValues = new List<bool>();
             foreach (var step in steps)
@@ -69,7 +69,7 @@ namespace MvvmCross.Binding.Combiners
                     return true;
                 }
                 bool booleanValue;
-                if (!this.TryConvertToBool(objectValue, out booleanValue))
+                if (!TryConvertToBool(objectValue, out booleanValue))
                 {
                     value = MvxBindingConstant.UnsetValue;
                     return true;
@@ -77,7 +77,7 @@ namespace MvvmCross.Binding.Combiners
                 stepValues.Add(booleanValue);
             }
 
-            return this.TryCombine(stepValues, out value);
+            return TryCombine(stepValues, out value);
         }
 
         protected abstract bool TryCombine(List<bool> stepValues, out object value);

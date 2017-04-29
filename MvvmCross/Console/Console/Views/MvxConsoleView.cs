@@ -5,39 +5,35 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel
     {
-        public object DataContext { get; set; }
-
         public T ViewModel
         {
-            get { return (T)this.DataContext; }
-            set { this.DataContext = value; }
-        }
-
-        IMvxViewModel IMvxView.ViewModel
-        {
-            get { return (IMvxViewModel)this.DataContext; }
-            set { this.DataContext = (T)value; }
+            get => (T) DataContext;
+            set => DataContext = value;
         }
 
         public Type ViewModelType => typeof(T);
+        public object DataContext { get; set; }
 
-#warning Need to get the Console implementation level with the mobile implementations again - HackSetViewModel is a Hack
+        IMvxViewModel IMvxView.ViewModel
+        {
+            get => (IMvxViewModel) DataContext;
+            set => DataContext = (T) value;
+        }
 
         public void HackSetViewModel(object viewModel)
         {
-            this.ViewModel = (T)viewModel;
-            this.OnViewModelChanged();
+            ViewModel = (T) viewModel;
+            OnViewModelChanged();
         }
 
         public virtual bool HandleInput(string input)

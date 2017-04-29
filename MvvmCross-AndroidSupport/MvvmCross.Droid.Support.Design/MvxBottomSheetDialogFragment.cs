@@ -18,55 +18,56 @@ namespace MvvmCross.Droid.Support.Design
 {
     [Register("mvvmcross.droid.support.design.MvxBottomSheetDialogFragment")]
     public abstract class MvxBottomSheetDialogFragment
-		: MvxEventSourceBottomSheetDialogFragment
-		, IMvxFragmentView
-	{
-		protected MvxBottomSheetDialogFragment()
-		{
-			this.AddEventListeners();
-		}
+        : MvxEventSourceBottomSheetDialogFragment
+            , IMvxFragmentView
+    {
+        private object _dataContext;
 
-		protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-		{ }
+        protected MvxBottomSheetDialogFragment()
+        {
+            this.AddEventListeners();
+        }
 
-		public IMvxBindingContext BindingContext { get; set; }
+        protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
-		private object _dataContext;
+        public IMvxBindingContext BindingContext { get; set; }
 
-		public object DataContext
-		{
-			get { return _dataContext; }
-			set
-			{
-				_dataContext = value;
-				if (BindingContext != null)
-					BindingContext.DataContext = value;
-			}
-		}
+        public object DataContext
+        {
+            get => _dataContext;
+            set
+            {
+                _dataContext = value;
+                if (BindingContext != null)
+                    BindingContext.DataContext = value;
+            }
+        }
 
-		public virtual IMvxViewModel ViewModel
-		{
-			get { return DataContext as IMvxViewModel; }
-			set { DataContext = value; }
-		}
+        public virtual IMvxViewModel ViewModel
+        {
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
+        }
 
-		protected void EnsureBindingContextSet(Bundle b0)
-		{
-			this.EnsureBindingContextIsSet(b0);
-		}
+        public virtual string UniqueImmutableCacheTag => Tag;
 
-		public virtual string UniqueImmutableCacheTag => Tag;
-	}
+        protected void EnsureBindingContextSet(Bundle b0)
+        {
+            this.EnsureBindingContextIsSet(b0);
+        }
+    }
 
-	public abstract class MvxBottomSheetDialogFragment<TViewModel>
-		: MvxBottomSheetDialogFragment
-		, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
-	{
-		public new TViewModel ViewModel
-		{
-			get { return (TViewModel)base.ViewModel; }
-			set { base.ViewModel = value; }
-		}
-	}
+    public abstract class MvxBottomSheetDialogFragment<TViewModel>
+        : MvxBottomSheetDialogFragment
+            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public new TViewModel ViewModel
+        {
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
+        }
+    }
 }

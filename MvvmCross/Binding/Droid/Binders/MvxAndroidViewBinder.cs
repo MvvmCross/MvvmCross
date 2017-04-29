@@ -5,61 +5,56 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
+using Android.Content.Res;
+using Android.Util;
+using Android.Views;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Binders
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Android.Content;
-    using Android.Content.Res;
-    using Android.Util;
-    using Android.Views;
-
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
-        private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings = new List<KeyValuePair<object, IMvxUpdateableBinding>>();
-
         private readonly object _source;
 
-        public MvxAndroidViewBinder(object source)
-        {
-            this._source = source;
-        }
+        private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings =
+            new List<KeyValuePair<object, IMvxUpdateableBinding>>();
 
         private IMvxBinder _binder;
 
-        protected IMvxBinder Binder => this._binder ?? (this._binder = Mvx.Resolve<IMvxBinder>());
+        public MvxAndroidViewBinder(object source)
+        {
+            _source = source;
+        }
 
-        public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => this._viewBindings;
+        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxBinder>());
+
+        public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
-                                                                MvxAndroidBindingResource.Instance
-                                                                                         .BindingStylableGroupId))
+                    MvxAndroidBindingResource.Instance
+                        .BindingStylableGroupId))
             {
-                int numStyles = typedArray.IndexCount;
+                var numStyles = typedArray.IndexCount;
                 for (var i = 0; i < numStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
 
                     if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
-                    {
-                        this.ApplyBindingsFromAttribute(view, typedArray, attributeId);
-                    }
+                        ApplyBindingsFromAttribute(view, typedArray, attributeId);
                     else if (attributeId == MvxAndroidBindingResource.Instance.BindingLangId)
-                    {
-                        this.ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
-                    }
+                        ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
                 }
                 typedArray.Recycle();
             }
@@ -70,22 +65,21 @@ namespace MvvmCross.Binding.Droid.Binders
             try
             {
                 var bindingText = typedArray.GetString(attributeId);
-                var newBindings = this.Binder.Bind(this._source, view, bindingText);
-                this.StoreBindings(view, newBindings);
+                var newBindings = Binder.Bind(_source, view, bindingText);
+                StoreBindings(view, newBindings);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
-                                      exception.ToLongString());
+                    exception.ToLongString());
             }
         }
 
         private void StoreBindings(View view, IEnumerable<IMvxUpdateableBinding> newBindings)
         {
             if (newBindings != null)
-            {
-                this._viewBindings.AddRange(newBindings.Select(b => new KeyValuePair<object, IMvxUpdateableBinding>(view, b)));
-            }
+                _viewBindings.AddRange(
+                    newBindings.Select(b => new KeyValuePair<object, IMvxUpdateableBinding>(view, b)));
         }
 
         private void ApplyLanguageBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
@@ -93,13 +87,13 @@ namespace MvvmCross.Binding.Droid.Binders
             try
             {
                 var bindingText = typedArray.GetString(attributeId);
-                var newBindings = this.Binder.LanguageBind(this._source, view, bindingText);
-                this.StoreBindings(view, newBindings);
+                var newBindings = Binder.LanguageBind(_source, view, bindingText);
+                StoreBindings(view, newBindings);
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view language binding {0}",
-                                      exception.ToLongString());
+                    exception.ToLongString());
                 throw;
             }
         }

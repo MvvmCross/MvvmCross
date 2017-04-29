@@ -7,15 +7,15 @@
 
 using Android.App;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.FullFragging.Fragments;
-using MvvmCross.Platform;
+using MvvmCross.Droid.FullFragging.Views;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.FullFragging
 {
     public static class MvxFragmentExtensionMethods
     {
-        public static TFragment FindFragmentById<TFragment>(this Views.MvxActivity activity, int resourceId)
+        public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentById(resourceId);
@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.FullFragging
             return SafeCast<TFragment>(fragment);
         }
 
-        public static TFragment FindFragmentByTag<TFragment>(this Views.MvxActivity activity, string tag)
+        public static TFragment FindFragmentByTag<TFragment>(this MvxActivity activity, string tag)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(tag);
@@ -46,14 +46,15 @@ namespace MvvmCross.Droid.FullFragging
             if (!(fragment is TFragment))
             {
                 Mvx.Warning("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
-                            typeof(TFragment).FullName);
+                    typeof(TFragment).FullName);
                 return default(TFragment);
             }
 
-            return (TFragment)fragment;
+            return (TFragment) fragment;
         }
 
-        public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
+        public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request,
+            IMvxBundle savedState = null)
         {
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);

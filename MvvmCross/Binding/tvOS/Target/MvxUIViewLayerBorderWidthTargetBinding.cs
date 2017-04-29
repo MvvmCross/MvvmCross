@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using System;
-
-    using MvvmCross.Binding.Bindings.Target;
-
-    using UIKit;
-
     public class MvxUIViewLayerBorderWidthTargetBinding
         : MvxConvertingTargetBinding
     {
@@ -25,7 +23,7 @@ namespace MvvmCross.Binding.tvOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UIView)target;
+            var view = (UIView) target;
 
             if (view == null || value == null)
                 return;
@@ -33,7 +31,7 @@ namespace MvvmCross.Binding.tvOS.Target
             if (view.Layer == null)
                 return;
 
-            view.Layer.BorderWidth = (float)value;
+            view.Layer.BorderWidth = (float) value;
         }
     }
 }

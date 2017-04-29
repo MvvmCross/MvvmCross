@@ -5,43 +5,53 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-
     public class MvxBindingNameRegistry
         : IMvxBindingNameLookup
-          , IMvxBindingNameRegistry
+            , IMvxBindingNameRegistry
     {
         private readonly Dictionary<Type, string> _lookup = new Dictionary<Type, string>();
 
         public string DefaultFor(Type type)
         {
             string toReturn;
-            this.TryDefaultFor(type, out toReturn, true);
+            TryDefaultFor(type, out toReturn, true);
             return toReturn;
+        }
+
+        public void AddOrOverwrite(Type type, string name)
+        {
+            _lookup[type] = name;
+        }
+
+        public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
+        {
+            var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
+            _lookup[typeof(T)] = path.Print();
         }
 
         private bool TryDefaultFor(Type type, out string toReturn, bool includeInterfaces = true)
         {
-            if (type == typeof(Object))
+            if (type == typeof(object))
             {
                 toReturn = null;
                 return false;
             }
 
-            if (this._lookup.TryGetValue(type, out toReturn))
+            if (_lookup.TryGetValue(type, out toReturn))
                 return true;
 
             if (type.IsConstructedGenericType)
             {
                 var openType = type.GetGenericTypeDefinition();
-                if (openType != null && this._lookup.TryGetValue(openType, out toReturn))
+                if (openType != null && _lookup.TryGetValue(openType, out toReturn))
                     return true;
             }
 
@@ -52,24 +62,11 @@ namespace MvvmCross.Binding.BindingContext
             {
                 var interfaces = type.GetInterfaces();
                 foreach (var iface in interfaces)
-                {
-                    if (this.TryDefaultFor(iface, out toReturn, false))
+                    if (TryDefaultFor(iface, out toReturn, false))
                         return true;
-                }
             }
 
-            return this.TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
-        }
-
-        public void AddOrOverwrite(Type type, string name)
-        {
-            this._lookup[type] = name;
-        }
-
-        public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
-        {
-            var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
-            this._lookup[typeof(T)] = path.Print();
+            return TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
         }
     }
 }

@@ -1,11 +1,5 @@
-using Android.Content;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
-using MvvmCross.TestProjects.CustomBinding.Core;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
 using MvvmCross.TestProjects.CustomBinding.Droid.Bindings;
+using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
 
 namespace MvvmCross.TestProjects.CustomBinding.Droid
 {
@@ -29,7 +23,7 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid
         {
             registry.RegisterCustomBindingFactory<BinaryEdit>(
                 "MyCount",
-                (arg) => new BinaryEditTargetBinding(arg));
+                arg => new BinaryEditTargetBinding(arg));
 
             base.FillTargetFactories(registry);
         }

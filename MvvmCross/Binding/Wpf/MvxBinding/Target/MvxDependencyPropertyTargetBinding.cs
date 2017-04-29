@@ -10,14 +10,12 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
-
 #if WINDOWS_WPF
 using System.ComponentModel;
 using System.Windows;
@@ -28,14 +26,15 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
-        private readonly string _targetName;
-        private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
+        private readonly DependencyProperty _targetDependencyProperty;
+        private readonly string _targetName;
 #if WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
 #endif
 
-        public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
+        public MvxDependencyPropertyTargetBinding(object target, string targetName,
+            DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
         {
             _targetDependencyProperty = targetDependencyProperty;
@@ -49,10 +48,11 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
             // see some of my angst in http://stackoverflow.com/questions/16752242/how-does-xaml-create-the-string-to-bitmapimage-value-conversion-when-binding-to/16753488#16753488
             // Note: if we discover other issues here, then we should make a more flexible solution
             if (_actualPropertyType == typeof(ImageSource))
-            {
-                _defaultBindingMode = MvxBindingMode.OneWay;
-            }
+                DefaultMode = MvxBindingMode.OneWay;
         }
+
+        public override Type TargetType => _actualPropertyType;
+        public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -62,7 +62,7 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
 
 #if WINDOWS_WPF
             var listenerBinding = new System.Windows.Data.Binding(_targetName)
-            { Source = frameworkElement };
+                {Source = frameworkElement};
 #endif
 #if WINDOWS_COMMON
             var listenerBinding = new Windows.UI.Xaml.Data.Binding()
@@ -78,11 +78,6 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
                 , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
-
-        public override Type TargetType => _actualPropertyType;
-
-        private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
-        public override MvxBindingMode DefaultMode => _defaultBindingMode;
 
         protected virtual object GetValueByReflection()
         {
@@ -102,7 +97,8 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
             var frameworkElement = target as FrameworkElement;
             if (frameworkElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 

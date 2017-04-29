@@ -1,25 +1,24 @@
-﻿
-using UIKit;
-using Xamarin.Forms;
-
-using MvvmCross.iOS.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
+using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
 using PageRendererExample.ViewModels;
+using UIKit;
+using Xamarin.Forms;
 
 namespace PageRendererExample.UI.iOS
 {
     public class MvvmSetup : MvxIosSetup
     {
-        public MvxFormsApp MvxFormsApp { get; private set; }
-        public MvvmSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
+        public MvvmSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate,
+            window)
         {
         }
+
+        public MvxFormsApp MvxFormsApp { get; private set; }
 
         protected override IMvxApplication CreateApp()
         {
@@ -40,4 +39,3 @@ namespace PageRendererExample.UI.iOS
         }
     }
 }
-

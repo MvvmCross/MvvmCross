@@ -12,9 +12,9 @@ namespace MvvmCross.Core.ViewModels
     {
         public MvxClosePresentationHint(IMvxViewModel viewModelToClose)
         {
-            this.ViewModelToClose = viewModelToClose;
+            ViewModelToClose = viewModelToClose;
         }
 
-        public IMvxViewModel ViewModelToClose { get; private set; }
+        public IMvxViewModel ViewModelToClose { get; }
     }
 }

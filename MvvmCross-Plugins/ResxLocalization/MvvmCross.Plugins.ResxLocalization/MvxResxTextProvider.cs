@@ -12,7 +12,7 @@ using MvvmCross.Localization;
 namespace MvvmCross.Plugins.ResxLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxResxTextProvider :
+    public class MvxResxTextProvider :
         IMvxTextProvider
     {
         private readonly ResourceManager _resourceManager;
@@ -30,14 +30,10 @@ namespace MvvmCross.Plugins.ResxLocalization
             var resolvedKey = name;
 
             if (!string.IsNullOrEmpty(typeKey))
-            {
                 resolvedKey = $"{typeKey}.{resolvedKey}";
-            }
-        
+
             if (!string.IsNullOrEmpty(namespaceKey))
-            {
                 resolvedKey = $"{namespaceKey}.{resolvedKey}";
-            }
 
             return _resourceManager.GetString(resolvedKey, CurrentLanguage);
         }
@@ -47,9 +43,7 @@ namespace MvvmCross.Plugins.ResxLocalization
             var baseText = GetText(namespaceKey, typeKey, name);
 
             if (string.IsNullOrEmpty(baseText))
-            {
                 return baseText;
-            }
 
             return string.Format(baseText, formatArgs);
         }

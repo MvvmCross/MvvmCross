@@ -14,16 +14,15 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class
     {
-        private readonly WeakReference _targetReference;
-        private readonly WeakReference<TSource> _sourceReference;
-
         private readonly MethodInfo _eventHandlerMethodInfo;
-
-        private readonly EventInfo _sourceEventInfo;
 
         // we store a copy of our Delegate/EventHandler in order to prevent it being
         // garbage collected while the `client` still has ownership of this subscription
         private readonly Delegate _ourEventHandler;
+
+        private readonly EventInfo _sourceEventInfo;
+        private readonly WeakReference<TSource> _sourceReference;
+        private readonly WeakReference _targetReference;
 
         private bool _subscribed;
 
@@ -45,22 +44,28 @@ namespace MvvmCross.Platform.WeakSubscription
 
             if (sourceEventInfo == null)
                 throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+                    "missing source event info in MvxWeakEventSubscription");
 
-            this._eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
-            this._targetReference = new WeakReference(targetEventHandler.Target);
-            this._sourceReference = new WeakReference<TSource>(source);
-            this._sourceEventInfo = sourceEventInfo;
+            _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
+            _targetReference = new WeakReference(targetEventHandler.Target);
+            _sourceReference = new WeakReference<TSource>(source);
+            _sourceEventInfo = sourceEventInfo;
 
             // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
-            this._ourEventHandler = this.CreateEventHandler();
+            _ourEventHandler = CreateEventHandler();
 
-            this.AddEventHandler();
+            AddEventHandler();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual Delegate CreateEventHandler()
         {
-            return new EventHandler<TEventArgs>(this.OnSourceEvent);
+            return new EventHandler<TEventArgs>(OnSourceEvent);
         }
 
         protected virtual object GetTargetObject()
@@ -73,52 +78,40 @@ namespace MvvmCross.Platform.WeakSubscription
         {
             var target = GetTargetObject();
             if (target != null)
-            {
-                this._eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
-            }
+                _eventHandlerMethodInfo.Invoke(target, new[] {sender, e});
             else
-            {
-                this.RemoveEventHandler();
-            }
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+                RemoveEventHandler();
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this.RemoveEventHandler();
-            }
+                RemoveEventHandler();
         }
 
         private void RemoveEventHandler()
         {
-            if (!this._subscribed)
+            if (!_subscribed)
                 return;
 
             TSource source;
-            if (this._sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out source))
             {
-                this._sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { this._ourEventHandler });
-                this._subscribed = false;
+                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {_ourEventHandler});
+                _subscribed = false;
             }
         }
 
         private void AddEventHandler()
         {
-            if (this._subscribed)
+            if (_subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
             TSource source;
-            if (this._sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out source))
             {
-                this._sourceEventInfo.GetAddMethod().Invoke(source, new object[] { this._ourEventHandler });
-                this._subscribed = true;
+                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {_ourEventHandler});
+                _subscribed = true;
             }
         }
     }
@@ -126,16 +119,15 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxWeakEventSubscription<TSource> : IDisposable
         where TSource : class
     {
-        private readonly WeakReference _targetReference;
-        private readonly WeakReference<TSource> _sourceReference;
-
         private readonly MethodInfo _eventHandlerMethodInfo;
-
-        private readonly EventInfo _sourceEventInfo;
 
         // we store a copy of our Delegate/EventHandler in order to prevent it being
         // garbage collected while the `client` still has ownership of this subscription
         private readonly Delegate _ourEventHandler;
+
+        private readonly EventInfo _sourceEventInfo;
+        private readonly WeakReference<TSource> _sourceReference;
+        private readonly WeakReference _targetReference;
 
         private bool _subscribed;
 
@@ -157,17 +149,23 @@ namespace MvvmCross.Platform.WeakSubscription
 
             if (sourceEventInfo == null)
                 throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+                    "missing source event info in MvxWeakEventSubscription");
 
-            this._eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
-            this._targetReference = new WeakReference(targetEventHandler.Target);
-            this._sourceReference = new WeakReference<TSource>(source);
-            this._sourceEventInfo = sourceEventInfo;
+            _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
+            _targetReference = new WeakReference(targetEventHandler.Target);
+            _sourceReference = new WeakReference<TSource>(source);
+            _sourceEventInfo = sourceEventInfo;
 
             // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
-            this._ourEventHandler = this.CreateEventHandler();
+            _ourEventHandler = CreateEventHandler();
 
-            this.AddEventHandler();
+            AddEventHandler();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual object GetTargetObject()
@@ -177,7 +175,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
         protected virtual Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
 
         //This is the method that will handle the event of source.
@@ -185,52 +183,40 @@ namespace MvvmCross.Platform.WeakSubscription
         {
             var target = GetTargetObject();
             if (target != null)
-            {
-                this._eventHandlerMethodInfo.Invoke(target, new[] { sender, e });
-            }
+                _eventHandlerMethodInfo.Invoke(target, new[] {sender, e});
             else
-            {
-                this.RemoveEventHandler();
-            }
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+                RemoveEventHandler();
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this.RemoveEventHandler();
-            }
+                RemoveEventHandler();
         }
 
         private void RemoveEventHandler()
         {
-            if (!this._subscribed)
+            if (!_subscribed)
                 return;
 
             TSource source;
-            if (this._sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out source))
             {
-                this._sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { this._ourEventHandler });
-                this._subscribed = false;
+                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] {_ourEventHandler});
+                _subscribed = false;
             }
         }
 
         private void AddEventHandler()
         {
-            if (this._subscribed)
+            if (_subscribed)
                 throw new MvxException("Should not call _subscribed twice");
 
             TSource source;
-            if (this._sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out source))
             {
-                this._sourceEventInfo.GetAddMethod().Invoke(source, new object[] { this._ourEventHandler });
-                this._subscribed = true;
+                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] {_ourEventHandler});
+                _subscribed = true;
             }
         }
     }

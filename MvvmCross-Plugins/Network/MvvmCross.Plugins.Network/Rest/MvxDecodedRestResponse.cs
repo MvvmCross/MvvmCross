@@ -8,7 +8,7 @@
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxDecodedRestResponse<T>
+    public class MvxDecodedRestResponse<T>
         : MvxRestResponse
     {
         public T Result { get; set; }

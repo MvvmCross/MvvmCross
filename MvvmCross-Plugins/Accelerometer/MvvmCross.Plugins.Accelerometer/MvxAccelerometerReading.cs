@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.Accelerometer
 
         public MvxAccelerometerReading Clone()
         {
-            return new MvxAccelerometerReading { X = X, Y = Y, Z = Z };
+            return new MvxAccelerometerReading {X = X, Y = Y, Z = Z};
         }
     }
 }

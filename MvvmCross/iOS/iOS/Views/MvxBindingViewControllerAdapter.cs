@@ -5,38 +5,36 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
+using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.iOS.Views;
-
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxIosView IosView => this.ViewController as IMvxIosView;
-
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxIosView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
 
-            this.IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
+            IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
         }
+
+        protected IMvxIosView IosView => ViewController as IMvxIosView;
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (this.IosView == null)
+            if (IosView == null)
             {
                 MvxTrace.Warning("iosView is null for clearup of bindings in type {0}",
-                               this.IosView?.GetType().Name);
+                    IosView?.GetType().Name);
                 return;
             }
-            this.IosView.ClearAllBindings();
+            IosView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

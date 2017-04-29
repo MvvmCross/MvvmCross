@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Uwp.Platform;
 using System;
 using System.IO;
 using Windows.ApplicationModel;
+using MvvmCross.Platform.Uwp.Platform;
 
 namespace MvvmCross.Plugins.ResourceLoader.WindowsCommon
 {

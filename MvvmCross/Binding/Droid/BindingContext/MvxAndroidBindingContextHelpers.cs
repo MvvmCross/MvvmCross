@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Droid.BindingContext
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform;
-
     public static class MvxAndroidBindingContextHelpers
     {
         public static IMvxAndroidBindingContext Current()

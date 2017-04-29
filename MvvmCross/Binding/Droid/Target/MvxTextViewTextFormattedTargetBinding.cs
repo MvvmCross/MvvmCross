@@ -9,8 +9,8 @@ using System;
 using Android.Text;
 using Android.Widget;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -20,21 +20,35 @@ namespace MvvmCross.Binding.Droid.Target
         private readonly bool _isEditTextBinding;
         private IDisposable _subscription;
 
-        protected TextView TextView => Target as TextView;
-
         public MvxTextViewTextFormattedTargetBinding(TextView target)
             : base(target)
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                    "Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
                 return;
             }
 
             _isEditTextBinding = target is EditText;
         }
 
+        protected TextView TextView => Target as TextView;
+
         public override Type TargetType => typeof(ISpanned);
+
+        public override MvxBindingMode DefaultMode => _isEditTextBinding
+            ? MvxBindingMode.TwoWay
+            : MvxBindingMode.OneWay;
+
+        public string CurrentText
+        {
+            get
+            {
+                var view = TextView;
+                return view?.TextFormatted.ToString();
+            }
+        }
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -46,10 +60,8 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object toSet)
         {
-            ((TextView)target).TextFormatted = (ISpanned)toSet;
+            ((TextView) target).TextFormatted = (ISpanned) toSet;
         }
-
-        public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
@@ -75,15 +87,6 @@ namespace MvvmCross.Binding.Droid.Target
                 _subscription = null;
             }
             base.Dispose(isDisposing);
-        }
-
-        public string CurrentText
-        {
-            get
-            {
-                var view = TextView;
-                return view?.TextFormatted.ToString();
-            }
         }
     }
 }

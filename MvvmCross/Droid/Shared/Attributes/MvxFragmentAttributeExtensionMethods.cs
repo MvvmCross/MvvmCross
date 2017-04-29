@@ -37,10 +37,12 @@ namespace MvvmCross.Droid.Shared.Attributes
         {
             var mvxFragmentAttributes = fromFragmentType.GetMvxFragmentAttributes();
             var activityViewModelType = GetActivityViewModelType(fragmentActivityParentType);
-            var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
+            var mvxFragmentAttribute =
+                mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
 
             if (mvxFragmentAttribute == null)
-                throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityParentType}");
+                throw new InvalidOperationException(
+                    $"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityParentType}");
 
             return mvxFragmentAttribute;
         }
@@ -50,7 +52,8 @@ namespace MvvmCross.Droid.Shared.Attributes
             IMvxViewModelTypeFinder associatedTypeFinder;
             if (!Mvx.TryResolve(out associatedTypeFinder))
             {
-                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+                MvxTrace.Trace(
+                    "No view model type finder available - assuming we are looking for a splash screen - returning null");
                 return typeof(MvxNullViewModel);
             }
 

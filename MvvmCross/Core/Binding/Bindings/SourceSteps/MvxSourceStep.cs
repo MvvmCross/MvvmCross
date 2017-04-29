@@ -5,37 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-    using System.Globalization;
-
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxSourceStep
         : IMvxSourceStep
     {
-        private readonly MvxSourceStepDescription _description;
         private object _dataContext;
-
-        protected MvxSourceStepDescription Description => this._description;
 
         protected MvxSourceStep(MvxSourceStepDescription description)
         {
-            this._description = description;
+            Description = description;
         }
+
+        protected MvxSourceStepDescription Description { get; }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool isDisposing)
-        {
-            // nothing to do in the base class
         }
 
         public virtual Type TargetType { get; set; }
@@ -44,25 +37,20 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public object DataContext
         {
-            get { return this._dataContext; }
+            get => _dataContext;
             set
             {
-                if (this._dataContext == value)
+                if (_dataContext == value)
                     return;
 
-                this._dataContext = value;
-                this.OnDataContextChanged();
+                _dataContext = value;
+                OnDataContextChanged();
             }
-        }
-
-        protected virtual void OnDataContextChanged()
-        {
-            // nothing to do in the base class
         }
 
         public void SetValue(object value)
         {
-            var sourceValue = this.ApplyValueConverterTargetToSource(value);
+            var sourceValue = ApplyValueConverterTargetToSource(value);
 
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
@@ -70,34 +58,66 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.UnsetValue)
                 return;
 
-            this.SetSourceValue(sourceValue);
+            SetSourceValue(sourceValue);
+        }
+
+        public event EventHandler Changed
+        {
+            add
+            {
+                var alreadyHasListeners = _changed != null;
+                _changed += value;
+                if (!alreadyHasListeners)
+                    OnFirstChangeListenerAdded();
+            }
+            remove
+            {
+                _changed -= value;
+                if (_changed == null)
+                    OnLastChangeListenerRemoved();
+            }
+        }
+
+        public object GetValue()
+        {
+            var sourceValue = GetSourceValue();
+            var value = ConvertSourceToTarget(sourceValue);
+            return value;
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            // nothing to do in the base class
+        }
+
+        protected virtual void OnDataContextChanged()
+        {
+            // nothing to do in the base class
         }
 
         private object ApplyValueConverterTargetToSource(object value)
         {
-            if (this._description.Converter == null)
+            if (Description.Converter == null)
                 return value;
 
-            return this._description.Converter.ConvertBack(value,
-                                                      this.SourceType,
-                                                      this._description.ConverterParameter,
-                                                      CultureInfo.CurrentUICulture);
+            return Description.Converter.ConvertBack(value,
+                SourceType,
+                Description.ConverterParameter,
+                CultureInfo.CurrentUICulture);
         }
 
         private object ApplyValueConverterSourceToTarget(object value)
         {
-            if (this._description.Converter == null)
-            {
+            if (Description.Converter == null)
                 return value;
-            }
 
             try
             {
                 return
-                    this._description.Converter.Convert(value,
-                                                   this.TargetType,
-                                                   this._description.ConverterParameter,
-                                                   CultureInfo.CurrentUICulture);
+                    Description.Converter.Convert(value,
+                        TargetType,
+                        Description.ConverterParameter,
+                        CultureInfo.CurrentUICulture);
             }
             catch (Exception exception)
             {
@@ -106,7 +126,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Diagnostic,
                     "Problem seen during binding execution for {0} - problem {1}",
-                    this._description.ToString(),
+                    Description.ToString(),
                     exception.ToLongString());
             }
 
@@ -117,7 +137,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         protected virtual void SendSourcePropertyChanged()
         {
-            this._changed?.Invoke(this, EventArgs.Empty);
+            _changed?.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
@@ -126,39 +146,18 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 return value;
 
             if (value != MvxBindingConstant.UnsetValue)
-            {
-                value = this.ApplyValueConverterSourceToTarget(value);
-            }
+                value = ApplyValueConverterSourceToTarget(value);
 
             if (value != MvxBindingConstant.UnsetValue)
-            {
                 return value;
-            }
 
-            if (this._description.FallbackValue != null)
-                return this._description.FallbackValue;
+            if (Description.FallbackValue != null)
+                return Description.FallbackValue;
 
             return MvxBindingConstant.UnsetValue;
         }
 
         private event EventHandler _changed;
-
-        public event EventHandler Changed
-        {
-            add
-            {
-                var alreadyHasListeners = this._changed != null;
-                this._changed += value;
-                if (!alreadyHasListeners)
-                    this.OnFirstChangeListenerAdded();
-            }
-            remove
-            {
-                this._changed -= value;
-                if (this._changed == null)
-                    this.OnLastChangeListenerRemoved();
-            }
-        }
 
         protected virtual void OnLastChangeListenerRemoved()
         {
@@ -170,24 +169,17 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             // base class does nothing by default
         }
 
-        public object GetValue()
-        {
-            var sourceValue = this.GetSourceValue();
-            var value = this.ConvertSourceToTarget(sourceValue);
-            return value;
-        }
-
         protected abstract object GetSourceValue();
     }
 
     public abstract class MvxSourceStep<T> : MvxSourceStep
         where T : MvxSourceStepDescription
     {
-        protected new T Description => (T)base.Description;
-
         protected MvxSourceStep(T description)
             : base(description)
         {
         }
+
+        protected new T Description => (T) base.Description;
     }
 }

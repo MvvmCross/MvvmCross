@@ -1,10 +1,9 @@
-﻿using System;
-namespace MvvmCross.Core.Navigation
+﻿namespace MvvmCross.Core.Navigation
 {
     public interface IMvxNavigationCache
     {
         /// <summary>
-        /// Gets the current value or the default that you specify.
+        ///     Gets the current value or the default that you specify.
         /// </summary>
         /// <typeparam name="T">Vaue of t (bool, int, float, long, string)</typeparam>
         /// <param name="key">Key for settings</param>
@@ -13,7 +12,7 @@ namespace MvvmCross.Core.Navigation
         T GetValueOrDefault<T>(string key, T defaultValue = default(T));
 
         /// <summary>
-        /// Adds or updates the value 
+        ///     Adds or updates the value
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="value">Value to set</param>
@@ -21,18 +20,18 @@ namespace MvvmCross.Core.Navigation
         bool AddValue<T>(string key, T value);
 
         /// <summary>
-        /// Removes a desired key
+        ///     Removes a desired key
         /// </summary>
         /// <param name="key">Key</param>
         void Remove(string key);
 
         /// <summary>
-        /// Clear all keys
+        ///     Clear all keys
         /// </summary>
         void Clear();
 
         /// <summary>
-        /// Checks to see if the key has been added.
+        ///     Checks to see if the key has been added.
         /// </summary>
         /// <param name="key">Key to check</param>
         /// <returns>True if contains key, else false</returns>

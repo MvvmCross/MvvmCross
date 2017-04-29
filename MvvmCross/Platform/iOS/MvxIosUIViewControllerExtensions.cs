@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Platform.iOS
 {
-    using UIKit;
-
     public static class MvxIosUIViewControllerExtensions
     {
         public static bool IsVisible(this UIViewController controller)
@@ -21,13 +21,8 @@ namespace MvvmCross.Platform.iOS
 
             var uiNavigationParent = controller.ParentViewController as UINavigationController;
             if (uiNavigationParent == null)
-            {
                 return controller.View.Window != null;
-            }
-            else
-            {
-                return Equals(uiNavigationParent.VisibleViewController, controller);
-            }
+            return Equals(uiNavigationParent.VisibleViewController, controller);
         }
     }
 }

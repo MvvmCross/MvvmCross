@@ -1,15 +1,15 @@
+using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
-using System;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
     public interface IFragmentCacheConfiguration
     {
         /// <summary>
-        /// Enable OnFragmentPopped callback. This callback might represent a performance hit.
+        ///     Enable OnFragmentPopped callback. This callback might represent a performance hit.
         /// </summary>
         bool EnableOnFragmentPoppedCallback { get; set; }
 

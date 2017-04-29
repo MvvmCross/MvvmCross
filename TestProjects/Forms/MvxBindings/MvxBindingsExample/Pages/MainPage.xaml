@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <core:MvxContentPage x:TypeArguments="viewModels:MainViewModel"
                      xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,7 +10,7 @@
 
     <StackLayout Margin="5">
         <Label Text="Default (OneWay) Binding" />
-	    <Label mvx:Bi.nd="Text BindableText" />
+        <Label mvx:Bi.nd="Text BindableText" />
         <BoxView Margin="5"
                  HeightRequest="4"
                  Color="Black" />
@@ -26,5 +27,5 @@
         <Label Text="OneTime Binding" />
         <Label mvx:Bi.nd="Text BindableText, Mode=OneTime" />
     </StackLayout>
-    
+
 </core:MvxContentPage>

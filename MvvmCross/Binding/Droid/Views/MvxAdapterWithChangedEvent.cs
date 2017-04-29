@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Specialized;
+using Android.Content;
+using Android.Runtime;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections.Specialized;
-
-    using Android.Content;
-    using Android.Runtime;
-
     public class MvxAdapterWithChangedEvent
         : MvxAdapter
-        , IMvxAdapterWithChangedEvent
+            , IMvxAdapterWithChangedEvent
     {
         public MvxAdapterWithChangedEvent(Context context)
             : base(context)
@@ -31,7 +30,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public override void NotifyDataSetChanged()
         {
-            this.NotifyDataSetChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            NotifyDataSetChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public override void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)

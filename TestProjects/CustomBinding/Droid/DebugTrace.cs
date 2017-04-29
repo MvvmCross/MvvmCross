@@ -1,7 +1,3 @@
-using System;
-using System.Diagnostics;
-using MvvmCross.Platform.Platform;
-
 namespace MvvmCross.TestProjects.CustomBinding.Droid
 {
     public class DebugTrace : IMvxTrace

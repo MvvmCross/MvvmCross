@@ -4,6 +4,6 @@
     {
         Unknown,
         Denied,
-        Granted,
+        Granted
     }
 }

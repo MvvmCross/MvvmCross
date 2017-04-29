@@ -5,30 +5,32 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Android.Content;
 using Android.Net;
 using Android.OS;
 using Android.Text;
-using MvvmCross.Platform.Droid.Platform;
-using System.Collections.Generic;
-using System.Linq;
 using Java.IO;
-using System.IO;
+using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Droid.Views;
+using File = Java.IO.File;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
     [Preserve(AllMembers = true)]
     public class MvxComposeEmailTask
         : MvxAndroidTask
-        , IMvxComposeEmailTaskEx
+            , IMvxComposeEmailTaskEx
     {
-        private List<Java.IO.File> filesToDelete;
+        private List<File> filesToDelete;
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
+        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+            bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null: new[] { to };
-            var ccArray = cc == null ? null : new[] { cc };
+            var toArray = to == null ? null : new[] {to};
+            var ccArray = cc == null ? null : new[] {cc};
             ComposeEmail(
                 toArray,
                 ccArray,
@@ -48,13 +50,9 @@ namespace MvvmCross.Plugins.Email.Droid
             var emailIntent = new Intent(Intent.ActionSendMultiple);
 
             if (to != null)
-            {
                 emailIntent.PutExtra(Intent.ExtraEmail, to.ToArray());
-            }
             if (cc != null)
-            {
                 emailIntent.PutExtra(Intent.ExtraCc, cc.ToArray());
-            }
             emailIntent.PutExtra(Intent.ExtraSubject, subject ?? string.Empty);
 
             body = body ?? string.Empty;
@@ -74,11 +72,11 @@ namespace MvvmCross.Plugins.Email.Droid
             {
                 var uris = new List<IParcelable>();
 
-                DoOnActivity(activity => {
-                    filesToDelete = new List<Java.IO.File>();
+                DoOnActivity(activity =>
+                {
+                    filesToDelete = new List<File>();
 
                     foreach (var file in attachments)
-                    {
                         // fix for Gmail error
                         using (var memoryStream = new MemoryStream())
                         {
@@ -86,7 +84,7 @@ namespace MvvmCross.Plugins.Email.Droid
                             var extension = Path.GetExtension(file.FileName);
 
                             // save file in external cache (required so Gmail app can independently access it, otherwise Gmail won't take the attachment)
-                            var newFile = new Java.IO.File(activity.ExternalCacheDir, fileName + extension);
+                            var newFile = new File(activity.ExternalCacheDir, fileName + extension);
 
                             file.Content.CopyTo(memoryStream);
                             var bytes = memoryStream.ToArray();
@@ -101,7 +99,6 @@ namespace MvvmCross.Plugins.Email.Droid
 
                             filesToDelete.Add(newFile);
                         }
-                    }
                 });
 
                 if (uris.Any())
@@ -124,13 +121,9 @@ namespace MvvmCross.Plugins.Email.Droid
             base.ProcessMvxIntentResult(result);
 
             // on return, delete all attachments from external cache
-            foreach (Java.IO.File file in filesToDelete)
-            {
+            foreach (var file in filesToDelete)
                 if (file.Exists())
-                {
                     file.Delete();
-                }
-            }
             filesToDelete.Clear();
         }
     }

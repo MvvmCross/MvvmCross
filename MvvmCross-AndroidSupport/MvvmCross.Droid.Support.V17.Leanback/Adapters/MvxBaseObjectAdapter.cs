@@ -3,59 +3,19 @@ using System.Collections;
 using System.Collections.Specialized;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
-    public abstract class MvxBaseObjectAdapter : Android.Support.V17.Leanback.Widget.ObjectAdapter, IMvxObjectAdapter
+    public abstract class MvxBaseObjectAdapter : ObjectAdapter, IMvxObjectAdapter
     {
-        public event EventHandler DataSetChanged;
-
-        private IDisposable _subscription;
-
-        protected IMvxAndroidBindingContext BindingContext { get; }
-
         private IEnumerable _itemsSource;
 
-        public IEnumerable ItemsSource
-        {
-            get { return _itemsSource; }
-            set
-            {
-                if (ReferenceEquals(_itemsSource, value))
-                {
-                    return;
-                }
-
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
-
-                _itemsSource = value;
-
-                if (_itemsSource != null)
-                {
-                    if (!(value is ICollection))
-                    {
-                        MvxTrace.Warning("Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
-                    }
-                }
-
-                var newObservable = _itemsSource as INotifyCollectionChanged;
-                if (newObservable != null)
-                {
-                    _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
-                }
-
-                NotifyAndRaiseDataSetChanged();
-            }
-        }
+        private IDisposable _subscription;
 
         protected MvxBaseObjectAdapter() : this(MvxAndroidBindingContextHelpers.Current())
         {
@@ -75,18 +35,54 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) : this(presenterSelector, MvxAndroidBindingContextHelpers.Current())
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) : this(presenterSelector,
+            MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext) : base(presenterSelector)
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector,
+            IMvxAndroidBindingContext bindingContext) : base(presenterSelector)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference,
+            transfer)
         {
         }
+
+        protected IMvxAndroidBindingContext BindingContext { get; }
+
+        public IEnumerable ItemsSource
+        {
+            get => _itemsSource;
+            set
+            {
+                if (ReferenceEquals(_itemsSource, value))
+                    return;
+
+                if (_subscription != null)
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
+
+                _itemsSource = value;
+
+                if (_itemsSource != null)
+                    if (!(value is ICollection))
+                        MvxTrace.Warning(
+                            "Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
+
+                var newObservable = _itemsSource as INotifyCollectionChanged;
+                if (newObservable != null)
+                    _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+
+                NotifyAndRaiseDataSetChanged();
+            }
+        }
+
+        public event EventHandler DataSetChanged;
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {

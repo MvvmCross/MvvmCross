@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
@@ -35,15 +34,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
 
             var genericEnumerableArgumentType = GetEnumerableGenericArgumentType(baseItemsSource);
 
-            if (genericEnumerableArgumentType != typeof(MvxGroupedData) && GroupedDataConverter == null) // sorry, no grouping support!
+            if (genericEnumerableArgumentType != typeof(MvxGroupedData) &&
+                GroupedDataConverter == null) // sorry, no grouping support!
             {
                 foreach (var item in baseItemsSource)
                     yield return item;
                 yield break;
             }
 
-            IMvxGroupedDataConverter groupedDataConverter =
-                genericEnumerableArgumentType == typeof(MvxGroupedData) ? new MvxDefaultGroupedDataConverter() : GroupedDataConverter;
+            var groupedDataConverter =
+                genericEnumerableArgumentType == typeof(MvxGroupedData)
+                    ? new MvxDefaultGroupedDataConverter()
+                    : GroupedDataConverter;
             _groupedItemsConverter.Initialize(baseItemsSource, groupedDataConverter);
 
             foreach (var groupedItemRow in _groupedItemsConverter.Source)
@@ -57,7 +59,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
 
         public int ItemsCount => GetItemsSource().Count();
 
-        public object GetItemAt(int position) => GetItemsSource().ElementAt(position);
+        public object GetItemAt(int position)
+        {
+            return GetItemsSource().ElementAt(position);
+        }
 
         private bool IsGenericEnumerable(IEnumerable enumerable)
         {

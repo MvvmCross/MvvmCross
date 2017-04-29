@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
@@ -27,34 +25,34 @@ namespace MvvmCross.Test.Navigation
     public class RoutingServiceTests
         : MvxIoCSupportingTest
     {
+        [SetUp]
+        public void SetupTest()
+        {
+            // ReSharper disable once AssignNullToNotNullAttribute
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            Debug.Listeners.Clear();
+            Debug.Listeners.Add(new ConsoleTraceListener());
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new ConsoleTraceListener());
+
+            Setup();
+        }
+
         protected Mock<NavigationMockDispatcher> MockDispatcher;
         protected IMvxNavigationService RoutingService;
 
         [OneTimeSetUp]
         public static void SetupFixture()
         {
-            MvxNavigationService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
-        }
-
-        [SetUp]
-        public void SetupTest()
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            Environment.CurrentDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            Debug.Listeners.Clear();
-            Debug.Listeners.Add(new ConsoleTraceListener());
-            Trace.Listeners.Clear();
-            Trace.Listeners.Add(new ConsoleTraceListener()); 
-
-            Setup();
+            MvxNavigationService.LoadRoutes(new[] {typeof(RoutingServiceTests).Assembly});
         }
 
         protected override void AdditionalSetup()
         {
             base.AdditionalSetup();
 
-            MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
+            MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) {CallBase = true};
             Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher.Object);
             Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher.Object);
 
@@ -64,17 +62,6 @@ namespace MvvmCross.Test.Navigation
         protected void SetupRoutings()
         {
             RoutingService = new MvxNavigationService(MockDispatcher.Object);
-        }
-
-        [Test]
-        public async Task TestFailAsync()
-        {
-            var url = "mvx://fail/?id=" + Guid.NewGuid();
-
-            Assert.That(RoutingService.CanNavigate(url), Is.False);
-            await RoutingService.Navigate(url);
-
-            MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
 
         [Test]
@@ -89,17 +76,6 @@ namespace MvvmCross.Test.Navigation
 
 
         [Test]
-        public async Task TestRegexWithParametersAsync()
-        {
-            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
-
-            MockDispatcher.Verify(
-                x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelC))),
-                Times.Once);
-        }
-
-
-        [Test]
         public async Task TestFacadeAsync()
         {
             await RoutingService.Navigate("mvx://facade/?id=a");
@@ -109,5 +85,26 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
+        [Test]
+        public async Task TestFailAsync()
+        {
+            var url = "mvx://fail/?id=" + Guid.NewGuid();
+
+            Assert.That(RoutingService.CanNavigate(url), Is.False);
+            await RoutingService.Navigate(url);
+
+            MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
+        }
+
+
+        [Test]
+        public async Task TestRegexWithParametersAsync()
+        {
+            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+
+            MockDispatcher.Verify(
+                x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelC))),
+                Times.Once);
+        }
     }
 }

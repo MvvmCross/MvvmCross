@@ -9,8 +9,8 @@ namespace MvxBindingsExample.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
-                        
+            InitializeComponent();
+
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 

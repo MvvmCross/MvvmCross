@@ -9,15 +9,17 @@ namespace MvvmCross.Droid.Shared.Caching
     // That's a interface instead of abstract class to force client to reimplement all the methods.
 
     /// <summary>
-    /// You should implement this interface if you are using custom IMvxCachedFragmentInfo.
+    ///     You should implement this interface if you are using custom IMvxCachedFragmentInfo.
     /// </summary>
     public interface IMvxCachedFragmentInfoFactory
     {
-        IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true,
+        IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType,
+            bool cacheFragment = true,
             bool addToBackstack = false);
 
         SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize);
 
-        IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(SerializableMvxCachedFragmentInfo fromSerializableMvxCachedFragmentInfo);
+        IMvxCachedFragmentInfo ConvertSerializableFragmentInfo(
+            SerializableMvxCachedFragmentInfo fromSerializableMvxCachedFragmentInfo);
     }
 }

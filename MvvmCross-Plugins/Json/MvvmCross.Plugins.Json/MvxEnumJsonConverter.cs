@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Newtonsoft.Json;
 using System;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace MvvmCross.Plugins.Json
 {
     [Preserve(AllMembers = true)]
-	public class MvxEnumJsonConverter : JsonConverter
+    public class MvxEnumJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -24,13 +24,13 @@ namespace MvvmCross.Plugins.Json
         }
 
         public override void WriteJson(JsonWriter writer, object
-                                                              value, JsonSerializer serializer)
+            value, JsonSerializer serializer)
         {
             writer.WriteValue(value.ToString());
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-                                        JsonSerializer serializer)
+            JsonSerializer serializer)
         {
             var theString = reader.Value.ToString();
             return Enum.Parse(objectType, theString, false);

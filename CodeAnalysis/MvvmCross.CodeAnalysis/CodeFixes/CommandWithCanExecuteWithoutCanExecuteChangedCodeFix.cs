@@ -1,29 +1,32 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Editing;
-using MvvmCross.CodeAnalysis.Core;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Text;
+using MvvmCross.CodeAnalysis.Core;
 
 namespace MvvmCross.CodeAnalysis.CodeFixes
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(CommandWithCanExecuteWithoutCanExecuteChangedCodeFix)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(CommandWithCanExecuteWithoutCanExecuteChangedCodeFix))]
+    [Shared]
     public class CommandWithCanExecuteWithoutCanExecuteChangedCodeFix : CodeFixProvider
     {
+        public static readonly string MessageFormat = "Remove method invocation: {0}.";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId);
 
-        public sealed override FixAllProvider GetFixAllProvider() =>
-            WellKnownFixAllProviders.BatchFixer;
-
-        public static readonly string MessageFormat = "Remove method invocation: {0}.";
+        public sealed override FixAllProvider GetFixAllProvider()
+        {
+            return WellKnownFixAllProviders.BatchFixer;
+        }
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -47,7 +50,8 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             return diagnostic.Properties["canExecute"];
         }
 
-        private static async Task<Document> ApplyFix(Document document, TextSpan span, CancellationToken cancellationToken)
+        private static async Task<Document> ApplyFix(Document document, TextSpan span,
+            CancellationToken cancellationToken)
         {
             var root = await document
                 .GetSyntaxRootAsync(cancellationToken)

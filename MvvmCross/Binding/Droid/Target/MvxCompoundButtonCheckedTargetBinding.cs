@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Reflection;
 using Android.Widget;
 using MvvmCross.Platform.Platform;
-using System;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -31,10 +31,10 @@ namespace MvvmCross.Binding.Droid.Target
             if (compoundButton == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
+                    "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
                 return;
             }
-            
+
             _subscription = compoundButton.WeakSubscribe<CompoundButton, CompoundButton.CheckedChangeEventArgs>(
                 nameof(compoundButton.CheckedChange),
                 CompoundButtonOnCheckedChange);

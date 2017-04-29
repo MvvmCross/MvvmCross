@@ -16,8 +16,8 @@ namespace MvvmCross.Plugins.Visibility.WindowsCommon
         public object ToNative(MvxVisibility visibility)
         {
             return visibility == MvxVisibility.Visible
-                       ? Windows.UI.Xaml.Visibility.Visible
-                       : Windows.UI.Xaml.Visibility.Collapsed;
+                ? Windows.UI.Xaml.Visibility.Visible
+                : Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         #endregion Implementation of IMvxNativeVisibility

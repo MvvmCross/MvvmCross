@@ -15,9 +15,9 @@ using MvvmCross.Platform.Droid.Platform;
 namespace MvvmCross.Plugins.PhoneCall.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxPhoneCallTask
+    public class MvxPhoneCallTask
         : MvxAndroidTask
-          , IMvxPhoneCallTask
+            , IMvxPhoneCallTask
     {
         public void MakePhoneCall(string name, string number)
         {

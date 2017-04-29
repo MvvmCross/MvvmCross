@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using System.Reflection;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.ExtensionMethods
 {
-    using System;
-    using System.Globalization;
-    using System.Reflection;
-
-    using MvvmCross.Platform.IoC;
-
     public static class MvxCrossCoreExtensions
     {
         // core implementation of ConvertToBoolean
@@ -26,7 +25,7 @@ namespace MvvmCross.Platform.ExtensionMethods
                 return !string.IsNullOrEmpty(s);
 
             if (result is bool)
-                return (bool)result;
+                return (bool) result;
 
             var resultType = result.GetType();
             if (resultType.GetTypeInfo().IsValueType)
@@ -42,13 +41,10 @@ namespace MvvmCross.Platform.ExtensionMethods
         public static object MakeSafeValueCore(this Type propertyType, object value)
         {
             if (value == null)
-            {
                 return propertyType.CreateDefault();
-            }
 
             var safeValue = value;
             if (!propertyType.IsInstanceOfType(value))
-            {
                 if (propertyType == typeof(string))
                 {
                     safeValue = value.ToString();
@@ -61,13 +57,14 @@ namespace MvvmCross.Platform.ExtensionMethods
                 else if (propertyType.GetTypeInfo().IsValueType)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    safeValue = underlyingType == typeof(bool) ? value.ConvertToBooleanCore() : ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
+                    safeValue = underlyingType == typeof(bool)
+                        ? value.ConvertToBooleanCore()
+                        : ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
                 else
                 {
                     safeValue = ErrorMaskedConvert(value, propertyType, CultureInfo.CurrentUICulture);
                 }
-            }
             return safeValue;
         }
 

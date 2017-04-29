@@ -1,73 +1,72 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Foundation;
 using UIKit;
 
 namespace MvvmCross.iOS.Views
 {
-	/// <summary>
-	/// Mvx user interface refresh control.
-	/// http://motzcod.es/post/59125989518/mvxuirefreshcontrol-for-mvvmcross
-	/// </summary>
-	public class MvxUIRefreshControl : UIRefreshControl
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MvxUIRefreshControl"/> class.
-		/// </summary>
-		public MvxUIRefreshControl()
-		{
-			this.ValueChanged += (object sender, EventArgs e) =>
-			{
-				var command = RefreshCommand;
-				if (command == null)
-					return;
+    /// <summary>
+    ///     Mvx user interface refresh control.
+    ///     http://motzcod.es/post/59125989518/mvxuirefreshcontrol-for-mvvmcross
+    /// </summary>
+    public class MvxUIRefreshControl : UIRefreshControl
+    {
+        private bool _isRefreshing;
 
-				if (!command.CanExecute(null))
-					return;
+        private string _message;
 
-				command.Execute(null);
-			};
-		}
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MvxUIRefreshControl" /> class.
+        /// </summary>
+        public MvxUIRefreshControl()
+        {
+            ValueChanged += (sender, e) =>
+            {
+                var command = RefreshCommand;
+                if (command == null)
+                    return;
 
-		private string _message;
+                if (!command.CanExecute(null))
+                    return;
 
-		/// <summary>
-		/// Gets or sets the message to display
-		/// </summary>
-		/// <value>The message.</value>
-		public string Message
-		{
-			get { return _message; }
-			set
-			{
-				_message = value ?? string.Empty;
-				this.AttributedTitle = new NSAttributedString(_message);
-			}
-		}
+                command.Execute(null);
+            };
+        }
 
-		private bool _isRefreshing;
+        /// <summary>
+        ///     Gets or sets the message to display
+        /// </summary>
+        /// <value>The message.</value>
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value ?? string.Empty;
+                AttributedTitle = new NSAttributedString(_message);
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets a value indicating whether this instance is refreshing.
-		/// </summary>
-		/// <value><c>true</c> if this instance is refreshing; otherwise, <c>false</c>.</value>
-		public bool IsRefreshing
-		{
-			get { return _isRefreshing; }
-			set
-			{
-				_isRefreshing = value;
-				if (_isRefreshing)
-					BeginRefreshing();
-				else
-					EndRefreshing();
-			}
-		}
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is refreshing.
+        /// </summary>
+        /// <value><c>true</c> if this instance is refreshing; otherwise, <c>false</c>.</value>
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                if (_isRefreshing)
+                    BeginRefreshing();
+                else
+                    EndRefreshing();
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets the refresh command.
-		/// </summary>
-		/// <value>The refresh command.</value>
-		public ICommand RefreshCommand { get; set; }
-	}
+        /// <summary>
+        ///     Gets or sets the refresh command.
+        /// </summary>
+        /// <value>The refresh command.</value>
+        public ICommand RefreshCommand { get; set; }
+    }
 }

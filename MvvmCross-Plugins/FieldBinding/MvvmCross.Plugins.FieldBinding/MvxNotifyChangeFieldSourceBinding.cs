@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Reflection;
+using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
@@ -19,10 +19,7 @@ namespace MvvmCross.Plugins.FieldBinding
     {
         private static readonly EventInfo NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
 
-        private readonly INotifyChange _notifyChange;
-        private IDisposable _subscription;
-
-        protected INotifyChange NotifyChange => _notifyChange;
+        private readonly IDisposable _subscription;
 
         protected MvxNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange)
             : base(source)
@@ -31,18 +28,18 @@ namespace MvvmCross.Plugins.FieldBinding
                 throw new ArgumentNullException(nameof(source));
             if (notifyChange == null)
                 throw new ArgumentNullException(nameof(notifyChange));
-            _notifyChange = notifyChange;
-            _subscription = NotifyChangeEventInfo.WeakSubscribe(_notifyChange, NotifyChangeOnChanged);
+            NotifyChange = notifyChange;
+            _subscription = NotifyChangeEventInfo.WeakSubscribe(NotifyChange, NotifyChangeOnChanged);
         }
+
+        protected INotifyChange NotifyChange { get; }
 
         protected abstract void NotifyChangeOnChanged(object sender, EventArgs eventArgs);
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 _subscription.Dispose();
-            }
 
             base.Dispose(isDisposing);
         }

@@ -5,30 +5,30 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-    using System.Linq;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxWindowsExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWindowsView storeView, MvxViewModelRequest viewModelRequest, Func<IMvxBundle> bundleLoader)
+        public static void OnViewCreate(this IMvxWindowsView storeView, MvxViewModelRequest viewModelRequest,
+            Func<IMvxBundle> bundleLoader)
         {
             storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundleLoader()); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
-                                                   MvxViewModelRequest viewModelRequest,
-                                                   IMvxBundle bundle)
+            MvxViewModelRequest viewModelRequest,
+            IMvxBundle bundle)
         {
 #warning ClearingBackStack disabled for now
 //            if (viewModelRequest.ClearTop)
 //            {
 //#warning TODO - BackStack not cleared for WinRT
-                //phoneView.ClearBackStack();
+            //phoneView.ClearBackStack();
 //            }
 
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
@@ -67,7 +67,7 @@ namespace MvvmCross.Uwp.Views
             if (!attributes.Any())
                 throw new InvalidOperationException("The IMvxWindowsView has no region attribute.");
 
-            return ((MvxRegionAttribute)attributes.First()).Name;
+            return ((MvxRegionAttribute) attributes.First()).Name;
         }
     }
 }

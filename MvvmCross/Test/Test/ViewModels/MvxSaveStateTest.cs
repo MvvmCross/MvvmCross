@@ -5,21 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSaveStateTest : MvxIoCSupportingTest
     {
+        [Test]
+        public void Test_NullSaveState()
+        {
+            ClearAll();
+
+            var viewModel = new Test3ViewModel();
+
+            var bundle = viewModel.SaveStateBundle();
+            Assert.AreEqual(0, bundle.Data.Count);
+        }
+
         [Test]
         public void Test_SaveState()
         {
@@ -32,7 +41,7 @@ namespace MvvmCross.Test.ViewModels
                 AdditionalSaveStateFields = new Dictionary<string, string>
                 {
                     {"Life1", "John"},
-                    {"Life2", "Jane"},
+                    {"Life2", "Jane"}
                 },
                 SaveStateBundleObject = new BundleObject
                 {
@@ -53,17 +62,6 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreEqual(viewModel.SaveStateBundleObject, extracted);
             Assert.AreEqual("John", bundle.Data["Life1"]);
             Assert.AreEqual("Jane", bundle.Data["Life2"]);
-        }
-
-        [Test]
-        public void Test_NullSaveState()
-        {
-            ClearAll();
-
-            var viewModel = new Test3ViewModel();
-
-            var bundle = viewModel.SaveStateBundle();
-            Assert.AreEqual(0, bundle.Data.Count);
         }
     }
 }

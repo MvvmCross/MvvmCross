@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.IO;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.ResourceLoader
 {
     public abstract class MvxResourceObjectLoader<TResource>
         : MvxResourceProvider
-          , IMvxResourceObjectLoaderConfiguration<TResource>
-          , IMvxResourceObjectLoader<TResource>
-
+            , IMvxResourceObjectLoaderConfiguration<TResource>
+            , IMvxResourceObjectLoader<TResource>
         where TResource : IMvxResourceObject
     {
         private readonly Dictionary<string, string> _rootLocations = new Dictionary<string, string>();
@@ -42,12 +41,12 @@ namespace MvvmCross.Plugins.ResourceLoader
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
             var resourceLoader = Mvx.Resolve<IMvxResourceLoader>();
-            TResource resource = default(TResource);
-            resourceLoader.GetResourceStream(streamLocation, (stream) =>
-                {
-                    if (stream != null)
-                        resource = Load(stream);
-                });
+            var resource = default(TResource);
+            resourceLoader.GetResourceStream(streamLocation, stream =>
+            {
+                if (stream != null)
+                    resource = Load(stream);
+            });
             return resource;
         }
 
@@ -57,9 +56,7 @@ namespace MvvmCross.Plugins.ResourceLoader
         {
             string specificRootLocation;
             if (!_rootLocations.TryGetValue(MakeLookupKey(namespaceKey, typeKey), out specificRootLocation))
-            {
                 specificRootLocation = $"{_generalRootLocation}/{namespaceKey}/{typeKey}";
-            }
 
             var streamLocation = $"{specificRootLocation}/{entryKey}";
             return streamLocation;

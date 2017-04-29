@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.Location
 {
     public abstract class MvxLocationWatcher
         : IMvxLocationWatcher
     {
-        private Action<MvxGeoLocation> _locationCallback;
         private Action<MvxLocationError> _errorCallback;
-
-        public event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged = delegate { };
+        private Action<MvxGeoLocation> _locationCallback;
 
         private MvxLocationPermission _permission = MvxLocationPermission.Unknown;
 
@@ -32,6 +30,8 @@ namespace MvvmCross.Plugins.Location
                 }
             }
         }
+
+        public event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged = delegate { };
 
         public void Start(MvxLocationOptions options, Action<MvxGeoLocation> success, Action<MvxLocationError> error)
         {

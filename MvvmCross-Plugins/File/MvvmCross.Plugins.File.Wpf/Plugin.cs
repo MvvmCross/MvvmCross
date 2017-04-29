@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.IO;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
-using System;
-using System.IO;
 
 namespace MvvmCross.Plugins.File.Wpf
 {
@@ -30,10 +30,11 @@ namespace MvvmCross.Plugins.File.Wpf
             if (configuration == null)
                 return;
 
-            var wpfConfiguration = (WpfFileStoreConfiguration)configuration;
+            var wpfConfiguration = (WpfFileStoreConfiguration) configuration;
             if (!Directory.Exists(wpfConfiguration.RootFolder))
             {
-                var message = "File plugin configuration error : root folder '" + wpfConfiguration.RootFolder + "' does not exists.";
+                var message = "File plugin configuration error : root folder '" + wpfConfiguration.RootFolder +
+                              "' does not exists.";
                 MvxTrace.Error(message);
                 throw new DirectoryNotFoundException(message);
             }

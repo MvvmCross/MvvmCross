@@ -1,29 +1,32 @@
 ﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeFixes;
-using MvvmCross.CodeAnalysis.Core;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using MvvmCross.CodeAnalysis.Core;
 
 namespace MvvmCross.CodeAnalysis.CodeFixes
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix))]
+    [Shared]
     public class ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix : CodeFixProvider
     {
+        private static readonly string MessageFormat = "Add {0}.Apply()";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DiagnosticIds.ApplyMustBeCalledWhenUsingFluentBindingSetId);
 
-        public sealed override FixAllProvider GetFixAllProvider() =>
-            WellKnownFixAllProviders.BatchFixer;
-
-        private static readonly string MessageFormat = "Add {0}.Apply()";
+        public sealed override FixAllProvider GetFixAllProvider()
+        {
+            return WellKnownFixAllProviders.BatchFixer;
+        }
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -47,7 +50,8 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             return diagnostic.Properties["bindingSetIdentifier"];
         }
 
-        private static async Task<Document> ApplyFix(Document document, TextSpan span, CancellationToken cancellationToken)
+        private static async Task<Document> ApplyFix(Document document, TextSpan span,
+            CancellationToken cancellationToken)
         {
             var root = await document
                 .GetSyntaxRootAsync(cancellationToken)
@@ -62,8 +66,8 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             var bindingSetIdentifier = variableDeclarationSyntax.Identifier;
 
             var lastBindCall = parentBlock.DescendantNodes()
-                    .OfType<MemberAccessExpressionSyntax>()
-                    .LastOrDefault(n => IsInvocationOfBind(n, bindingSetIdentifier.ValueText));
+                .OfType<MemberAccessExpressionSyntax>()
+                .LastOrDefault(n => IsInvocationOfBind(n, bindingSetIdentifier.ValueText));
 
             if (lastBindCall != null)
             {
@@ -75,7 +79,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                             SyntaxFactory.IdentifierName("Apply"))));
 
                 root = root.InsertNodesAfter(lastBindCall.FirstAncestorOrSelf<ExpressionStatementSyntax>(),
-                    new List<SyntaxNode> { applyCallNode.WithLeadingTrivia(lastBindCall.GetLeadingTrivia()) });
+                    new List<SyntaxNode> {applyCallNode.WithLeadingTrivia(lastBindCall.GetLeadingTrivia())});
 
                 document = document.WithSyntaxRoot(root);
             }
@@ -83,7 +87,8 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             return document;
         }
 
-        private static bool IsInvocationOfBind(MemberAccessExpressionSyntax memberAccessSyntax, string bindingSetIdentifierString)
+        private static bool IsInvocationOfBind(MemberAccessExpressionSyntax memberAccessSyntax,
+            string bindingSetIdentifierString)
         {
             var identifierName = GetIdentifierRecursive(memberAccessSyntax);
 
@@ -95,9 +100,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
         private static IdentifierNameSyntax GetIdentifierRecursive(MemberAccessExpressionSyntax memberAccessSyntax)
         {
             while (memberAccessSyntax.Expression is MemberAccessExpressionSyntax)
-            {
-                memberAccessSyntax = (MemberAccessExpressionSyntax)memberAccessSyntax.Expression;
-            }
+                memberAccessSyntax = (MemberAccessExpressionSyntax) memberAccessSyntax.Expression;
             var identifierNameSyntax = memberAccessSyntax.Expression as IdentifierNameSyntax;
             return identifierNameSyntax;
         }

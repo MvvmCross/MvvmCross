@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
         public virtual void Inject(object target, IMvxPropertyInjectorOptions options = null)
@@ -26,15 +25,14 @@ namespace MvvmCross.Platform.IoC
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            var injectableProperties = this.FindInjectableProperties(target.GetType(), options);
+            var injectableProperties = FindInjectableProperties(target.GetType(), options);
 
             foreach (var injectableProperty in injectableProperties)
-            {
-                this.InjectProperty(target, injectableProperty, options);
-            }
+                InjectProperty(target, injectableProperty, options);
         }
 
-        protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty, IMvxPropertyInjectorOptions options)
+        protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty,
+            IMvxPropertyInjectorOptions options)
         {
             object propertyValue;
             if (Mvx.TryResolve(injectableProperty.PropertyType, out propertyValue))
@@ -45,19 +43,22 @@ namespace MvvmCross.Platform.IoC
                 }
                 catch (TargetInvocationException invocation)
                 {
-                    throw new MvxIoCResolveException(invocation, "Failed to inject into {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                    throw new MvxIoCResolveException(invocation, "Failed to inject into {0} on {1}",
+                        injectableProperty.Name, toReturn.GetType().Name);
                 }
             }
             else
             {
                 if (options.ThrowIfPropertyInjectionFails)
-                    throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
-                else
-                    Mvx.Warning("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                    throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}",
+                        injectableProperty.Name, toReturn.GetType().Name);
+                Mvx.Warning("IoC property injection skipped for {0} on {1}", injectableProperty.Name,
+                    toReturn.GetType().Name);
             }
         }
 
-        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type, IMvxPropertyInjectorOptions options)
+        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type,
+            IMvxPropertyInjectorOptions options)
         {
             var injectableProperties = type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
@@ -76,7 +77,8 @@ namespace MvvmCross.Platform.IoC
                     break;
 
                 case MvxPropertyInjection.None:
-                    Mvx.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    Mvx.Error(
+                        "Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
 

@@ -8,20 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
+using MessageUI;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using Foundation;
-using MessageUI;
 using UIKit;
 
 namespace MvvmCross.Plugins.Email.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxComposeEmailTask
+    public class MvxComposeEmailTask
         : MvxIosTask
-        , IMvxComposeEmailTaskEx
+            , IMvxComposeEmailTaskEx
     {
         private readonly IMvxIosModalHost _modalHost;
         private MFMailComposeViewController _mail;
@@ -34,8 +34,8 @@ namespace MvvmCross.Plugins.Email.iOS
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
             bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null : new[] { to };
-            var ccArray = cc == null ? null : new[] { cc };
+            var toArray = to == null ? null : new[] {to};
+            var ccArray = cc == null ? null : new[] {cc};
             ComposeEmail(
                 toArray,
                 ccArray,
@@ -59,14 +59,10 @@ namespace MvvmCross.Plugins.Email.iOS
             if (cc != null)
                 _mail.SetCcRecipients(cc.ToArray());
 
-            _mail.SetToRecipients(to?.ToArray() ?? new[] { string.Empty });
+            _mail.SetToRecipients(to?.ToArray() ?? new[] {string.Empty});
             if (attachments != null)
-            {
                 foreach (var a in attachments)
-                {
                     _mail.AddAttachmentData(NSData.FromStream(a.Content), a.ContentType, a.FileName);
-                }
-            }
             _mail.Finished += HandleMailFinished;
 
             _modalHost.PresentModalViewController(_mail, true);
@@ -80,9 +76,7 @@ namespace MvvmCross.Plugins.Email.iOS
         {
             var uiViewController = sender as UIViewController;
             if (uiViewController == null)
-            {
                 throw new ArgumentException("sender");
-            }
 
             uiViewController.DismissViewController(true, () => { });
             _modalHost.NativeModalViewControllerDisappearedOnItsOwn();

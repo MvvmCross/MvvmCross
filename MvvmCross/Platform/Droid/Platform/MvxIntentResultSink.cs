@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Droid.Views;
+
 namespace MvvmCross.Platform.Droid.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Droid.Views;
-
     public class MvxIntentResultSink : IMvxIntentResultSink, IMvxIntentResultSource
     {
         public void OnResult(MvxIntentResultEventArgs result)

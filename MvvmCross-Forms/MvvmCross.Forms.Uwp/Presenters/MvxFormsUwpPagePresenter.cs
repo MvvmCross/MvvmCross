@@ -15,7 +15,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
 {
     public class MvxFormsUwpPagePresenter
         : MvxFormsPagePresenter
-        , IMvxWindowsViewPresenter
+            , IMvxWindowsViewPresenter
     {
         private readonly IMvxWindowsFrame _rootFrame;
 

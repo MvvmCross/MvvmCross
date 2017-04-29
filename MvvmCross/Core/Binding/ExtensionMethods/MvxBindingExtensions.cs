@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using MvvmCross.Platform.ExtensionMethods;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Binding.ExtensionMethods
 {
-    using System;
-    using System.Globalization;
-
-    using MvvmCross.Platform.ExtensionMethods;
-    using MvvmCross.Platform.IoC;
-
     public static class MvxBindingExtensions
     {
-        public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(this IMvxEditableTextView mvxEditableTextView, object target, object value)
+        public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(
+            this IMvxEditableTextView mvxEditableTextView, object target, object value)
         {
             if (value == null)
                 return false;
@@ -56,16 +56,12 @@ namespace MvvmCross.Binding.ExtensionMethods
         public static object MakeSafeValue(this Type propertyType, object value)
         {
             if (value == null)
-            {
                 return propertyType.CreateDefault();
-            }
 
             var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
-                                                                                            propertyType);
+                propertyType);
             if (autoConverter != null)
-            {
                 return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);
-            }
 
             return propertyType.MakeSafeValueCore(value);
         }

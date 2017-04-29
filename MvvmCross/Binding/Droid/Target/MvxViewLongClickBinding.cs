@@ -18,13 +18,17 @@ namespace MvvmCross.Binding.Droid.Target
         private ICommand _command;
         private IDisposable _subscription;
 
-        protected View View => (View)Target;
-
         public MvxViewLongClickBinding(View view)
             : base(view)
         {
             _subscription = view.WeakSubscribe<View, View.LongClickEventArgs>(nameof(view.LongClick), ViewOnLongClick);
         }
+
+        protected View View => (View) Target;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+        public override Type TargetType => typeof(ICommand);
 
         private void ViewOnLongClick(object sender, View.LongClickEventArgs longClickEventArgs)
         {
@@ -41,10 +45,6 @@ namespace MvvmCross.Binding.Droid.Target
         {
             _command = value as ICommand;
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

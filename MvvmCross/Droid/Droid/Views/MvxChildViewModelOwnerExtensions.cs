@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using Android.Content;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System.Collections.Generic;
-
-    using Android.Content;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxChildViewModelOwnerExtensions
     {
         public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, object parameterObject)
@@ -24,7 +22,7 @@ namespace MvvmCross.Droid.Views
         }
 
         public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view,
-                                                               IDictionary<string, string> parameterValues = null)
+            IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
@@ -49,9 +47,7 @@ namespace MvvmCross.Droid.Views
         {
             var translator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
             foreach (var ownedSubViewModelIndex in view.OwnedSubViewModelIndicies)
-            {
                 translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);
-            }
             view.OwnedSubViewModelIndicies.Clear();
         }
     }

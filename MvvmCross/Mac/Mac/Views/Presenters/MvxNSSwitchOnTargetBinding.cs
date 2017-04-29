@@ -5,45 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using AppKit;
+using Foundation;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using ObjCRuntime;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using System.Reflection;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Binding;
-    using global::MvvmCross.Binding.Bindings.Target;
-    using global::MvvmCross.Platform.Platform;
-
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var checkBox = this.View;
+            var checkBox = View;
             if (checkBox == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
-            }
             else
-            {
-                checkBox.Action = new ObjCRuntime.Selector("checkBoxAction:");
-            }
+                checkBox.Action = new Selector("checkBoxAction:");
         }
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         [Export("checkBoxAction:")]
         private void checkBoxAction()
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
-            this.FireValueChanged(view.State == NSCellStateValue.On);
-        }
-
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
+            FireValueChanged(view.State == NSCellStateValue.On);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -51,7 +43,7 @@ namespace MvvmCross.Mac.Views.Presenters
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var view = this.View;
+                var view = View;
                 if (view != null)
                 {
                     //                    view.ValueChanged -= HandleValueChanged;

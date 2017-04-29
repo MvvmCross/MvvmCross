@@ -8,14 +8,14 @@
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
-	public abstract class MvxImage<T>
+    public abstract class MvxImage<T>
     {
         protected MvxImage(T rawImage)
         {
             RawImage = rawImage;
         }
 
-        public T RawImage { get; private set; }
+        public T RawImage { get; }
 
         public abstract int GetSizeInBytes();
     }

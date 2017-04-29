@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Test.Mocks.TestViewModels
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.ViewModels;
-
     public class Test3ViewModel : MvxViewModel
     {
         public BundleObject SaveStateBundleObject { get; set; }
@@ -18,18 +17,14 @@ namespace MvvmCross.Test.Mocks.TestViewModels
 
         public BundleObject SaveState()
         {
-            return this.SaveStateBundleObject;
+            return SaveStateBundleObject;
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
-            if (this.AdditionalSaveStateFields != null)
-            {
-                foreach (var kvp in this.AdditionalSaveStateFields)
-                {
+            if (AdditionalSaveStateFields != null)
+                foreach (var kvp in AdditionalSaveStateFields)
                     bundle.Data[kvp.Key] = kvp.Value;
-                }
-            }
             base.SaveStateToBundle(bundle);
         }
     }

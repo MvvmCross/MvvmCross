@@ -1,15 +1,13 @@
+using System;
+using AppKit;
+using MvvmCross.Core.Platform;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-
-    using AppKit;
-
-    using global::MvvmCross.Core.Platform;
-
     public class MvxApplicationDelegate : NSApplicationDelegate
-                                          , IMvxLifetime
+        , IMvxLifetime
     {
-#warning Removed this lifetime functionality....
+        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
         /*
         public override void WillEnterForeground (NSApplication application)
         {
@@ -34,11 +32,9 @@ namespace MvvmCross.Mac.Platform
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
-            var handler = this.LifetimeChanged;
+            var handler = LifetimeChanged;
             if (handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
         }
-
-        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 }

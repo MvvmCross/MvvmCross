@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.OS;
-using MvvmCross.Platform.Core;
 using System;
-using Fragment = Android.Support.V4.App.Fragment;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
-using MvvmCross.Droid.Shared;
 using Android.Content;
+using Android.OS;
+using Android.Support.V4.App;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
@@ -20,14 +19,12 @@ namespace MvvmCross.Droid.Support.V4.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Android.Support.V4.App.Fragment Fragment => _eventSource as Android.Support.V4.App.Fragment;
-
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
             if (eventSource == null)
                 throw new ArgumentException("eventSource should not be null", nameof(eventSource));
 
-            if (!(eventSource is Android.Support.V4.App.Fragment))
+            if (!(eventSource is Fragment))
                 throw new ArgumentException("eventSource should be a Fragment", nameof(eventSource));
 
             _eventSource = eventSource;
@@ -43,6 +40,8 @@ namespace MvvmCross.Droid.Support.V4.EventSource
             _eventSource.DetachCalled += HandleDetachCalled;
             _eventSource.SaveInstanceStateCalled += HandleSaveInstanceStateCalled;
         }
+
+        protected Fragment Fragment => _eventSource as Fragment;
 
         protected virtual void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> e)
         {
@@ -85,7 +84,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         }
 
         protected virtual void HandleCreateViewCalled(object sender,
-                                                      MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+            MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
         {
         }
     }

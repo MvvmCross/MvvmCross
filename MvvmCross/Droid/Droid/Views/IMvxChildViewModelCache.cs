@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxChildViewModelCache
     {
         int Cache(IMvxViewModel viewModel);

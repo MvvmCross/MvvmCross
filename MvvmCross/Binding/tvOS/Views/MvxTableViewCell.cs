@@ -5,26 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using CoreGraphics;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
-
-    using UIKit;
-
     public class MvxTableViewCell
         : UITableViewCell
-          , IMvxBindable
+            , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
-
         public MvxTableViewCell()
             : this(string.Empty)
         {
@@ -70,40 +64,40 @@ namespace MvvmCross.Binding.tvOS.Views
         }
 
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory =
-                                    UITableViewCellAccessory.None)
+            UITableViewCellAccessory tableViewCellAccessory =
+                UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
-            this.Accessory = tableViewCellAccessory;
+            Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingText);
         }
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
-                                UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory =
-                                    UITableViewCellAccessory.None)
+            UITableViewCellStyle cellStyle, NSString cellIdentifier,
+            UITableViewCellAccessory tableViewCellAccessory =
+                UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             // note that we allow the virtual Accessory property to be set here - but do not seal
             // it. Previous `sealed` code caused odd, unexplained behaviour in MonoTouch
             // - see https://github.com/MvvmCross/MvvmCross/issues/524
-            this.Accessory = tableViewCellAccessory;
+            Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingDescriptions);
+        }
+
+        public IMvxBindingContext BindingContext { get; set; }
+
+        public object DataContext
+        {
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this.BindingContext.ClearAllBindings();
-            }
+                BindingContext.ClearAllBindings();
             base.Dispose(disposing);
-        }
-
-        public object DataContext
-        {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
         }
     }
 }

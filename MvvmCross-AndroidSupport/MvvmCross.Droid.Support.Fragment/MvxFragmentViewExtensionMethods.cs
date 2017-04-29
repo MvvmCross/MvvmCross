@@ -6,17 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Support.V4.App;
-using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V4
 {
     public static class MvxFragmentExtensionMethods
     {
         public static TFragment FindFragmentById<TFragment>(this MvxFragmentActivity activity, int resourceId)
-            where TFragment : Android.Support.V4.App.Fragment
+            where TFragment : Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentById(resourceId);
             if (fragment == null)
@@ -29,7 +28,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public static TFragment FindFragmentByTag<TFragment>(this MvxFragmentActivity activity, string tag)
-            where TFragment : Android.Support.V4.App.Fragment
+            where TFragment : Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (fragment == null)
@@ -41,19 +40,20 @@ namespace MvvmCross.Droid.Support.V4
             return SafeCast<TFragment>(fragment);
         }
 
-        private static TFragment SafeCast<TFragment>(Android.Support.V4.App.Fragment fragment) where TFragment : Android.Support.V4.App.Fragment
+        private static TFragment SafeCast<TFragment>(Fragment fragment) where TFragment : Fragment
         {
             if (!(fragment is TFragment))
             {
                 Mvx.Warning("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
-                            typeof(TFragment).FullName);
+                    typeof(TFragment).FullName);
                 return default(TFragment);
             }
 
-            return (TFragment)fragment;
+            return (TFragment) fragment;
         }
 
-        public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
+        public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request,
+            IMvxBundle savedState = null)
         {
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);

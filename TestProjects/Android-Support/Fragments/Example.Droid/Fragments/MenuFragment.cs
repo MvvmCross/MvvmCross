@@ -1,14 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Support.V4;
-using Example.Core.ViewModels;
-using Example.Droid.Activities;
+﻿using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {
@@ -39,44 +29,45 @@ namespace Example.Droid.Fragments
             previousMenuItem?.SetChecked(false);
             previousMenuItem = item;
 
-            Navigate (item.ItemId);
+            Navigate(item.ItemId);
 
             return true;
         }
 
         private async Task Navigate(int itemId)
         {
-            ((MainActivity)Activity).DrawerLayout.CloseDrawers ();
-            await Task.Delay (TimeSpan.FromMilliseconds (250));
+            ((MainActivity) Activity).DrawerLayout.CloseDrawers();
+            await Task.Delay(TimeSpan.FromMilliseconds(250));
 
-            switch (itemId) {
-            case Resource.Id.nav_home:
-                ViewModel.ShowViewModelAndroid(typeof(HomeViewModel));
-                break;
-			case Resource.Id.nav_second_home:
-				ViewModel.ShowViewModelAndroid(typeof(SecondHostViewModel));
-				break;
-            case Resource.Id.nav_viewpager:
-                ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
-                break;
-            case Resource.Id.nav_viewpager_state:
-                ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerStateViewModel));
-                break;
-            case Resource.Id.nav_recyclerview:
-                ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
-                break;
-            case Resource.Id.nav_recyclerview_multiitem:
-                ViewModel.ShowViewModelAndroid(typeof (RecyclerViewMultiItemTemplateViewModel));
-                break;
-            case Resource.Id.nav_compose_message:
-                ViewModel.ShowViewModelAndroid(typeof(ComposeMessageViewModel));
-                break;
+            switch (itemId)
+            {
+                case Resource.Id.nav_home:
+                    ViewModel.ShowViewModelAndroid(typeof(HomeViewModel));
+                    break;
+                case Resource.Id.nav_second_home:
+                    ViewModel.ShowViewModelAndroid(typeof(SecondHostViewModel));
+                    break;
+                case Resource.Id.nav_viewpager:
+                    ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerViewModel));
+                    break;
+                case Resource.Id.nav_viewpager_state:
+                    ViewModel.ShowViewModelAndroid(typeof(ExampleViewPagerStateViewModel));
+                    break;
+                case Resource.Id.nav_recyclerview:
+                    ViewModel.ShowViewModelAndroid(typeof(ExampleRecyclerViewModel));
+                    break;
+                case Resource.Id.nav_recyclerview_multiitem:
+                    ViewModel.ShowViewModelAndroid(typeof(RecyclerViewMultiItemTemplateViewModel));
+                    break;
+                case Resource.Id.nav_compose_message:
+                    ViewModel.ShowViewModelAndroid(typeof(ComposeMessageViewModel));
+                    break;
                 case Resource.Id.nav_settings:
-                ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
-                break;
-            case Resource.Id.nav_helpfeedback:
-                ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
-                break;
+                    ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
+                    break;
+                case Resource.Id.nav_helpfeedback:
+                    ViewModel.ShowViewModelAndroid(typeof(SettingsViewModel));
+                    break;
             }
         }
     }

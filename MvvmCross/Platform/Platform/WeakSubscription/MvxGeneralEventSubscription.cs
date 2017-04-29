@@ -5,24 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Reflection;
-
     public class MvxGeneralEventSubscription
         : MvxWeakEventSubscription<object, EventArgs>
     {
         public MvxGeneralEventSubscription(object source,
-                                           EventInfo eventInfo,
-                                           EventHandler<EventArgs> eventHandler)
+            EventInfo eventInfo,
+            EventHandler<EventArgs> eventHandler)
             : base(source, eventInfo, eventHandler)
         {
         }
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
     }
 

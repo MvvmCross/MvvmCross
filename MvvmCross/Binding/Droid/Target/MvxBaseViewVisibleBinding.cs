@@ -13,12 +13,12 @@ namespace MvvmCross.Binding.Droid.Target
     public abstract class MvxBaseViewVisibleBinding
         : MvxAndroidTargetBinding
     {
-        protected View View => (View)Target;
-
         protected MvxBaseViewVisibleBinding(object target)
             : base(target)
         {
         }
+
+        protected View View => (View) Target;
 
         public override Type TargetType => typeof(bool);
     }

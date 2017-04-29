@@ -8,16 +8,19 @@
 using System;
 using System.IO;
 using Android.Content.Res;
-using MvvmCross.Platform.Droid;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
 
 namespace MvvmCross.Plugins.ResourceLoader.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxAndroidResourceLoader
-        : MvxResourceLoader          
+    public class MvxAndroidResourceLoader
+        : MvxResourceLoader
     {
         private AssetManager _assets;
+
+        private AssetManager Assets => _assets ??
+                                       (_assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
 
         #region Implementation of IMvxResourceLoader
 
@@ -30,7 +33,5 @@ namespace MvvmCross.Plugins.ResourceLoader.Droid
         }
 
         #endregion
-
-        private AssetManager Assets => _assets ?? (_assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
     }
 }

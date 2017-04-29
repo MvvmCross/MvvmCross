@@ -7,7 +7,8 @@ using NUnit.Framework;
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class ConsiderUsingGenericBaseViewAnalyzerTests : CodeFixVerifier<ConsiderUsingGenericBaseViewAnalyzer, ConsiderUsingGenericBaseViewCodeFix>
+    public class ConsiderUsingGenericBaseViewAnalyzerTests :
+        CodeFixVerifier<ConsiderUsingGenericBaseViewAnalyzer, ConsiderUsingGenericBaseViewCodeFix>
     {
         private const string ViewModel = @"
 using System;
@@ -64,6 +65,16 @@ namespace AndroidApp.Droid
 }";
 
         [Test]
+        public void ConsiderUsingGenericBaseViewAnalyzerShouldFixTheCode()
+        {
+            var solution = new[]
+            {
+                new MvxTestFileSource(ViewModel, MvxProjType.Core)
+            };
+            VerifyCSharpFix(solution, Test, MvxProjType.Droid, Expected);
+        }
+
+        [Test]
         public void ConsiderUsingGenericBaseViewAnalyzerShouldShowOneDiagnostic()
         {
             var expectedDiagnostic = new DiagnosticResult
@@ -85,16 +96,6 @@ namespace AndroidApp.Droid
                     new MvxTestFileSource(ViewModel, MvxProjType.Core)
                 },
                 expectedDiagnostic);
-        }
-
-        [Test]
-        public void ConsiderUsingGenericBaseViewAnalyzerShouldFixTheCode()
-        {
-            var solution = new[]
-            {
-                new MvxTestFileSource(ViewModel, MvxProjType.Core)
-            };
-            VerifyCSharpFix(solution, Test, MvxProjType.Droid, Expected);
         }
     }
 }

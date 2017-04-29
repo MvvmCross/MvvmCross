@@ -11,6 +11,6 @@ namespace MvvmCross.tvOS.Platform
     {
         Phone,
         Pad,
-        TallPhone,
+        TallPhone
     }
 }

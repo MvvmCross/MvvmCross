@@ -1,23 +1,27 @@
 ﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using MvvmCross.CodeAnalysis.Core;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using MvvmCross.CodeAnalysis.Core;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer : DiagnosticAnalyzer
     {
-        private static readonly LocalizableString Title = "Apply method must be called when using MvxFluentBindingDescriptionSet";
-        private static readonly LocalizableString MessageFormat = "Call {0}.Apply() method to apply your bindings";
         private const string Category = Categories.Usage;
 
+        private static readonly LocalizableString Title =
+            "Apply method must be called when using MvxFluentBindingDescriptionSet";
+
+        private static readonly LocalizableString MessageFormat = "Call {0}.Apply() method to apply your bindings";
+
         private static readonly DiagnosticDescriptor Rule =
-            new DiagnosticDescriptor(DiagnosticIds.ApplyMustBeCalledWhenUsingFluentBindingSetId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true);
+            new DiagnosticDescriptor(DiagnosticIds.ApplyMustBeCalledWhenUsingFluentBindingSetId, Title, MessageFormat,
+                Category, DiagnosticSeverity.Warning, true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(Rule);
@@ -46,15 +50,20 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
             var bindingSetIdentifier = variableDeclarationSyntax.Identifier.ValueText;
 
-            if (parentBlock?.DescendantNodes().OfType<MemberAccessExpressionSyntax>().Any(n => IsInvocationOfApply(n, bindingSetIdentifier)) == false)
+            if (parentBlock?.DescendantNodes()
+                    .OfType<MemberAccessExpressionSyntax>()
+                    .Any(n => IsInvocationOfApply(n, bindingSetIdentifier)) == false)
             {
-                var properties = new Dictionary<string, string> { { nameof(bindingSetIdentifier), bindingSetIdentifier } }.ToImmutableDictionary();
+                var properties = new Dictionary<string, string> {{nameof(bindingSetIdentifier), bindingSetIdentifier}}
+                    .ToImmutableDictionary();
 
-                context.ReportDiagnostic(Diagnostic.Create(Rule, variableDeclarationSyntax.Identifier.GetLocation(), properties, variableDeclarationSyntax.Identifier.ToFullString().Trim()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, variableDeclarationSyntax.Identifier.GetLocation(),
+                    properties, variableDeclarationSyntax.Identifier.ToFullString().Trim()));
             }
         }
 
-        private static bool IsInvocationOfApply(MemberAccessExpressionSyntax memberAccessSyntax, string bindingSetIdentifierString)
+        private static bool IsInvocationOfApply(MemberAccessExpressionSyntax memberAccessSyntax,
+            string bindingSetIdentifierString)
         {
             var identifierName = memberAccessSyntax.Expression as IdentifierNameSyntax;
 

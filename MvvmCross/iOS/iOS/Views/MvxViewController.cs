@@ -5,20 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.iOS.Views;
+using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.iOS.Views;
-    using UIKit;
-
     public class MvxViewController
         : MvxEventSourceViewController
-          , IMvxIosView
+            , IMvxIosView
     {
         public MvxViewController()
         {
@@ -39,53 +37,52 @@ namespace MvvmCross.iOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
         }
 
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
 
-		public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			ViewModel?.Appearing();
-		}
-
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-			ViewModel?.Appeared();
-		}
-
-		public override void ViewWillDisappear(bool animated)
-		{
-			base.ViewWillDisappear(animated);
-			ViewModel?.Disappearing();
-		}
-
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
-			ViewModel?.Disappeared();
-		}
-
-        public override void DidMoveToParentViewController (UIViewController parent)
+        public override void ViewWillAppear(bool animated)
         {
-            base.DidMoveToParentViewController (parent);
-            if (parent == null) {
-                ViewModel?.Destroy ();
-            }
+            base.ViewWillAppear(animated);
+            ViewModel?.Appearing();
         }
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            ViewModel?.Appeared();
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            ViewModel?.Disappearing();
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            ViewModel?.Disappeared();
+        }
+
+        public override void DidMoveToParentViewController(UIViewController parent)
+        {
+            base.DidMoveToParentViewController(parent);
+            if (parent == null) ViewModel?.Destroy();
+        }
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
         }
@@ -93,7 +90,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxViewController<TViewModel>
         : MvxViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {
@@ -111,8 +108,8 @@ namespace MvvmCross.iOS.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

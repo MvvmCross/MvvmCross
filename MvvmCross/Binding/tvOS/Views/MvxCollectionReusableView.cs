@@ -5,54 +5,49 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-	using System;
+    public class MvxCollectionReusableView
+        : UICollectionReusableView
+            , IMvxBindable
+    {
+        public MvxCollectionReusableView()
+        {
+            this.CreateBindingContext();
+        }
 
-	using CoreGraphics;
+        public MvxCollectionReusableView(IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext();
+        }
 
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.BindingContext;
+        public MvxCollectionReusableView(CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext();
+        }
 
-	using UIKit;
+        public IMvxBindingContext BindingContext { get; set; }
 
-	public class MvxCollectionReusableView
-		: UICollectionReusableView
-		  , IMvxBindable
-	{
-		public IMvxBindingContext BindingContext { get; set; }
+        [MvxSetToNullAfterBinding]
+        public object DataContext
+        {
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
+        }
 
-		public MvxCollectionReusableView()
-		{
-			this.CreateBindingContext();
-		}
-
-		public MvxCollectionReusableView(IntPtr handle)
-			: base(handle)
-		{
-			this.CreateBindingContext();
-		}
-
-		public MvxCollectionReusableView(CGRect frame)
-			: base(frame)
-		{
-			this.CreateBindingContext();
-		}
-
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				this.BindingContext.ClearAllBindings();
-			}
-			base.Dispose(disposing);
-		}
-
-		[MvxSetToNullAfterBinding]
-		public object DataContext
-		{
-			get { return this.BindingContext.DataContext; }
-			set { this.BindingContext.DataContext = value; }
-		}
-	}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                BindingContext.ClearAllBindings();
+            base.Dispose(disposing);
+        }
+    }
 }

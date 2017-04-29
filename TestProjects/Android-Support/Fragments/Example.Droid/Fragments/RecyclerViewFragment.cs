@@ -1,18 +1,4 @@
-﻿using System;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V7.Widget;
-using Android.Views;
-using Android.Widget;
-using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.RecyclerView;
-using Example.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
-
-namespace Example.Droid.Fragments
+﻿namespace Example.Droid.Fragments
 {
     [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.RecyclerViewFragment")]
@@ -32,7 +18,7 @@ namespace Example.Droid.Fragments
                 recyclerView.HasFixedSize = true;
                 var layoutManager = new LinearLayoutManager(Activity);
                 recyclerView.SetLayoutManager(layoutManager);
-                (recyclerView.Adapter as IMvxRecyclerAdapterBindableHolder).MvxViewHolderBound += (args) =>
+                (recyclerView.Adapter as IMvxRecyclerAdapterBindableHolder).MvxViewHolderBound += args =>
                 {
                     var item = args.Holder.ItemView;
                     // you can access bound holder item here.
@@ -40,11 +26,13 @@ namespace Example.Droid.Fragments
             }
 
             _itemSelectedToken = ViewModel.WeakSubscribe(() => ViewModel.SelectedItem,
-                (sender, args) => {
+                (sender, args) =>
+                {
                     if (ViewModel.SelectedItem != null)
                         Toast.MakeText(Activity,
-                            $"Selected: {ViewModel.SelectedItem.Title}",
-                            ToastLength.Short).Show();
+                                $"Selected: {ViewModel.SelectedItem.Title}",
+                                ToastLength.Short)
+                            .Show();
                 });
 
             var swipeToRefresh = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);

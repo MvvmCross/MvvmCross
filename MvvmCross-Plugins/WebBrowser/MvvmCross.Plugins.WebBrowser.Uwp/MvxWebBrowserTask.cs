@@ -8,6 +8,7 @@
 #region using
 
 using System;
+using Windows.System;
 
 #endregion using
 
@@ -20,7 +21,7 @@ namespace MvvmCross.Plugins.WebBrowser.WindowsCommon
         public void ShowWebPage(string url)
         {
             // note - this call deliberately not awaited - OK to continue with flow
-            Windows.System.Launcher.LaunchUriAsync(new Uri(url));
+            Launcher.LaunchUriAsync(new Uri(url));
         }
 
         #endregion IMvxWebBrowserTask Members

@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Plugins.Messenger.ThreadRunners;
 using System;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -15,18 +15,18 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
     {
         private readonly Action<TMessage> _action;
 
+        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action, string tag)
+            : base(actionRunner, tag)
+        {
+            _action = action;
+        }
+
         public override bool IsAlive => true;
 
         protected override bool TypedInvoke(TMessage message)
         {
             Call(() => _action?.Invoke(message));
             return true;
-        }
-
-        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action, string tag)
-            : base(actionRunner, tag)
-        {
-            _action = action;
         }
     }
 }

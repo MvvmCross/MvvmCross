@@ -1,29 +1,32 @@
+using System;
+using System.Collections.Generic;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.tvOS.Views;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.tvOS.Views;
-
-    using UIKit;
-
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTvosView
     {
-        private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
+        private readonly Dictionary<string, UIViewController> _pagedViewControllerCache;
 
-        public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
+        public MvxPageViewController(
+            UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll,
+            UIPageViewControllerNavigationOrientation orientation =
+                UIPageViewControllerNavigationOrientation.Horizontal,
+            UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation,
+            spine)
         {
             this.AdaptForBinding();
-            this._pagedViewControllerCache = new Dictionary<string, UIViewController>();
+            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
         }
 
         public MvxPageViewController(IntPtr handle) : base(handle)
         {
             this.AdaptForBinding();
-            this._pagedViewControllerCache = new Dictionary<string, UIViewController>();
+            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -31,89 +34,98 @@ namespace MvvmCross.tvOS.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (this.DataContext as IMvxViewModel); }
+            get => DataContext as IMvxViewModel;
             set
             {
-                this.DataContext = value;
+                DataContext = value;
                 //Verify ViewModel is IMvxPageViewModel
-                if ((this.DataContext != null) && (!(this.DataContext is IMvxPageViewModel)))
+                if (DataContext != null && !(DataContext is IMvxPageViewModel))
                     MvxTrace.Error("Error - MvxPageViewController must be given an instance of IMvxPageViewModel");
             }
         }
 
         public object DataContext
         {
-            get { return (this.BindingContext.DataContext); }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         protected virtual void InitializePaging()
         {
-            IMvxPageViewModel pageVM = this.ViewModel as IMvxPageViewModel;
+            var pageVM = ViewModel as IMvxPageViewModel;
             if (pageVM == null)
                 return;
-            IMvxPagedViewModel defaultVM = pageVM.GetDefaultViewModel();
-            UIViewController defaultVC = this.GetViewControllerForViewModel(defaultVM);
-            this.SetViewControllers(new UIViewController[] { defaultVC }, UIPageViewControllerNavigationDirection.Forward, true, null);
-            this.GetNextViewController = delegate (UIPageViewController pc, UIViewController rc)
+            var defaultVM = pageVM.GetDefaultViewModel();
+            var defaultVC = GetViewControllerForViewModel(defaultVM);
+            SetViewControllers(new[] {defaultVC}, UIPageViewControllerNavigationDirection.Forward, true, null);
+            GetNextViewController = delegate(UIPageViewController pc, UIViewController rc)
             {
-                IMvxTvosView rcTV = rc as IMvxTvosView;
+                var rcTV = rc as IMvxTvosView;
                 if (rcTV == null)
-                    return (null);
-                IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
+                    return null;
+                var currentVM = rcTV.ViewModel as IMvxPagedViewModel;
                 if (currentVM == null)
-                    return (null);
-                IMvxPagedViewModel nextVM = pageVM.GetNextViewModel(currentVM);
+                    return null;
+                var nextVM = pageVM.GetNextViewModel(currentVM);
                 if (nextVM == null)
-                    return (null);
-                UIViewController nextVC = this.GetViewControllerForViewModel(nextVM);
-                return (nextVC);
+                    return null;
+                var nextVC = GetViewControllerForViewModel(nextVM);
+                return nextVC;
             };
-            this.GetPreviousViewController = delegate (UIPageViewController pc, UIViewController rc)
+            GetPreviousViewController = delegate(UIPageViewController pc, UIViewController rc)
             {
-                IMvxTvosView rcTV = rc as IMvxTvosView;
+                var rcTV = rc as IMvxTvosView;
                 if (rcTV == null)
-                    return (null);
-                IMvxPagedViewModel currentVM = rcTV.ViewModel as IMvxPagedViewModel;
+                    return null;
+                var currentVM = rcTV.ViewModel as IMvxPagedViewModel;
                 if (currentVM == null)
-                    return (null);
-                IMvxPagedViewModel prevVM = pageVM.GetPreviousViewModel(currentVM);
+                    return null;
+                var prevVM = pageVM.GetPreviousViewModel(currentVM);
                 if (prevVM == null)
-                    return (null);
-                UIViewController prevVC = this.GetViewControllerForViewModel(prevVM);
-                return (prevVC);
+                    return null;
+                var prevVC = GetViewControllerForViewModel(prevVM);
+                return prevVC;
             };
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.InitializePaging();
+            InitializePaging();
         }
 
-        public virtual void NavigateToViewModel(IMvxPagedViewModel targetVM, UIPageViewControllerNavigationDirection direction, bool animated = true)
+        public virtual void NavigateToViewModel(IMvxPagedViewModel targetVM,
+            UIPageViewControllerNavigationDirection direction, bool animated = true)
         {
-            UIViewController targetVC = this.GetViewControllerForViewModel(targetVM);
-            this.SetViewControllers(new UIViewController[] { targetVC }, direction, animated, null);
+            var targetVC = GetViewControllerForViewModel(targetVM);
+            SetViewControllers(new[] {targetVC}, direction, animated, null);
         }
 
         public virtual UIViewController GetViewControllerForViewModel(IMvxPagedViewModel queryVM)
         {
             UIViewController retVal = null;
-            if (this._pagedViewControllerCache.ContainsKey(queryVM.PagedViewId))
-                retVal = this._pagedViewControllerCache[queryVM.PagedViewId];
+            if (_pagedViewControllerCache.ContainsKey(queryVM.PagedViewId))
+            {
+                retVal = _pagedViewControllerCache[queryVM.PagedViewId];
+            }
             else
             {
                 retVal = this.CreateViewControllerFor(queryVM) as UIViewController;
-                this._pagedViewControllerCache[queryVM.PagedViewId] = retVal;
+                _pagedViewControllerCache[queryVM.PagedViewId] = retVal;
             }
-            return (retVal);
+            return retVal;
         }
     }
 
-    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxPageViewModel
+    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxTvosView<TViewModel>
+        where TViewModel : class, IMvxPageViewModel
     {
-        public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
+        public MvxPageViewController(
+            UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll,
+            UIPageViewControllerNavigationOrientation orientation =
+                UIPageViewControllerNavigationOrientation.Horizontal,
+            UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation,
+            spine)
         {
         }
 
@@ -123,8 +135,8 @@ namespace MvvmCross.tvOS.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

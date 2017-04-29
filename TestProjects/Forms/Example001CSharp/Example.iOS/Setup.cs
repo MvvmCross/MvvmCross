@@ -1,10 +1,9 @@
-using MvvmCross.Platform.Platform;
-using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
 

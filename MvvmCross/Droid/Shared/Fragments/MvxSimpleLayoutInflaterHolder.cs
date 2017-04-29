@@ -17,6 +17,6 @@ namespace MvvmCross.Droid.Shared.Fragments
             LayoutInflater = layoutInflater;
         }
 
-        public LayoutInflater LayoutInflater { get; private set; }
+        public LayoutInflater LayoutInflater { get; }
     }
 }

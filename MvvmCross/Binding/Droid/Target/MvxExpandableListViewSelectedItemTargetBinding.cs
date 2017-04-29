@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Droid.Target
     //  2. SetValueImpl typically compares value with null and _currentValue, returing
     //     if null or equal respectively.  This class foregoes this so that if the bound value of
     //     SelectedItem is set to null we can "override" _currentValue.
-    public class MvxExpandableListViewSelectedItemTargetBinding 
+    public class MvxExpandableListViewSelectedItemTargetBinding
         : MvxAndroidTargetBinding
     {
         private object _currentValue;
@@ -20,18 +20,21 @@ namespace MvvmCross.Binding.Droid.Target
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
             : base(target)
-        { }
+        {
+        }
 
-        protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
+        protected MvxExpandableListView ListView => (MvxExpandableListView) Target;
 
         public override Type TargetType => typeof(object);
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void SetValueImpl(object target, object value)
         {
             //if (value == null || value == _currentValue)
             //    return;
 
-            var listView = (MvxExpandableListView)target;
+            var listView = (MvxExpandableListView) target;
 
             if (value == null)
             {
@@ -39,7 +42,7 @@ namespace MvvmCross.Binding.Droid.Target
                 listView.ClearChoices();
                 return;
             }
-            var positions = ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetPositions(value);
+            var positions = ((MvxExpandableListAdapter) listView.ExpandableListAdapter).GetPositions(value);
             if (positions == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
@@ -55,11 +58,9 @@ namespace MvvmCross.Binding.Droid.Target
             listView.SetItemChecked(pos, true);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
-            var listView = ((ExpandableListView)ListView);
+            var listView = (ExpandableListView) ListView;
             if (listView == null)
                 return;
 
@@ -71,9 +72,7 @@ namespace MvvmCross.Binding.Droid.Target
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 _subscription?.Dispose();
-            }
             base.Dispose(isDisposing);
         }
 
@@ -84,7 +83,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
 
             var newValue =
-                ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetRawItem(
+                ((MvxExpandableListAdapter) listView.ExpandableListAdapter).GetRawItem(
                     childClickEventArgs.GroupPosition, childClickEventArgs.ChildPosition);
 
             if (!newValue.Equals(_currentValue))

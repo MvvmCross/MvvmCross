@@ -15,7 +15,7 @@ namespace MvvmCross.Forms.iOS.Presenters
 {
     public class MvxFormsIosPagePresenter
         : MvxFormsPagePresenter
-        , IMvxIosViewPresenter
+            , IMvxIosViewPresenter
     {
         private readonly UIWindow _window;
 

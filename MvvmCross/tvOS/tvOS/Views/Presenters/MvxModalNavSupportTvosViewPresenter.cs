@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxModalNavSupportTvosViewPresenter : MvxTvosViewPresenter
     {
         private UIViewController _currentModalViewController;
@@ -27,15 +26,15 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (view is IMvxModalTvosView)
             {
-                if (this._currentModalViewController != null)
+                if (_currentModalViewController != null)
                     throw new MvxException("Only one modal view controller at a time supported");
 
-                var newNav = this.CreateModalNavigationController();
+                var newNav = CreateModalNavigationController();
                 newNav.PushViewController(view as UIViewController, false);
 
-                this._currentModalViewController = view as UIViewController;
+                _currentModalViewController = view as UIViewController;
 
-                this.PresentModalViewController(newNav, true);
+                PresentModalViewController(newNav, true);
                 return;
             }
 
@@ -50,26 +49,26 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            if (this._currentModalViewController != null)
+            if (_currentModalViewController != null)
             {
                 MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
                 return;
             }
 
             // clear our local reference to avoid back confusion
-            this._currentModalViewController = null;
+            _currentModalViewController = null;
         }
 
         public override void CloseModalViewController()
         {
-            if (this._currentModalViewController != null)
+            if (_currentModalViewController != null)
             {
-                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
+                var nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    this._currentModalViewController.DismissViewController(true, () => { });
-                this._currentModalViewController = null;
+                    _currentModalViewController.DismissViewController(true, () => { });
+                _currentModalViewController = null;
                 return;
             }
 
@@ -78,13 +77,13 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (this._currentModalViewController != null)
+            if (_currentModalViewController != null)
             {
-                var touchView = this._currentModalViewController as IMvxTvosView;
+                var touchView = _currentModalViewController as IMvxTvosView;
                 if (touchView == null)
                 {
                     MvxTrace.Error(
-                                   "Unable to close view - modal is showing but not an IMvxTvosView");
+                        "Unable to close view - modal is showing but not an IMvxTvosView");
                     return;
                 }
 
@@ -92,16 +91,16 @@ namespace MvvmCross.tvOS.Views.Presenters
                 if (viewModel != toClose)
                 {
                     MvxTrace.Error(
-                                   "Unable to close view - modal is showing but is not the requested viewmodel");
+                        "Unable to close view - modal is showing but is not the requested viewmodel");
                     return;
                 }
 
-                var nav = this._currentModalViewController.ParentViewController as UINavigationController;
+                var nav = _currentModalViewController.ParentViewController as UINavigationController;
                 if (nav != null)
                     nav.DismissViewController(true, () => { });
                 else
-                    this._currentModalViewController.DismissViewController(true, () => { });
-                this._currentModalViewController = null;
+                    _currentModalViewController.DismissViewController(true, () => { });
+                _currentModalViewController = null;
                 return;
             }
 

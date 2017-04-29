@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public interface IMvxConsoleView : IMvxView
     {
         void HackSetViewModel(object viewModel);
@@ -19,7 +19,7 @@ namespace MvvmCross.Console.Views
 
     public interface IMvxConsoleView<TViewModel>
         : IMvxConsoleView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }

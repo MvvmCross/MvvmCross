@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-
     public class MvxLifetimeEventArgs : EventArgs
     {
         public MvxLifetimeEventArgs(MvxLifetimeEvent lifetimeEvent)
         {
-            this.LifetimeEvent = lifetimeEvent;
+            LifetimeEvent = lifetimeEvent;
         }
 
-        public MvxLifetimeEvent LifetimeEvent { get; private set; }
+        public MvxLifetimeEvent LifetimeEvent { get; }
     }
 }

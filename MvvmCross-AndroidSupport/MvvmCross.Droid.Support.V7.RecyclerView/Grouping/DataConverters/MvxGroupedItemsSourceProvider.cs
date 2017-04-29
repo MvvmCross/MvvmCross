@@ -10,23 +10,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters
 {
     internal class MvxGroupedItemsSourceProvider
     {
-        private readonly ObservableCollection<object> _observableItemsSource = new ObservableCollection<object>();
         private readonly IList<IDisposable> _collectionChangedDisposables = new List<IDisposable>();
 
-        public ObservableCollection<object> Source => _observableItemsSource;
+        public ObservableCollection<object> Source { get; } = new ObservableCollection<object>();
 
         public void Initialize(IEnumerable groupedItems, IMvxGroupedDataConverter groupedDataConverter)
         {
-            _observableItemsSource.Clear();
+            Source.Clear();
             foreach (var disposables in _collectionChangedDisposables)
                 disposables.Dispose();
             _collectionChangedDisposables.Clear();
 
-            foreach (var mvxGroupable in groupedItems.Cast<object>().Select(groupedDataConverter.ConvertToMvxGroupedData))
+            foreach (var mvxGroupable in groupedItems.Cast<object>()
+                .Select(groupedDataConverter.ConvertToMvxGroupedData))
             {
-                _observableItemsSource.Add(mvxGroupable);
+                Source.Add(mvxGroupable);
                 foreach (var child in mvxGroupable.Items)
-                    _observableItemsSource.Add(child);
+                    Source.Add(child);
             }
 
             var observableGroups = groupedItems as INotifyCollectionChanged;
@@ -40,19 +40,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters
                             switch (args.Action)
                             {
                                 case NotifyCollectionChangedAction.Reset:
-                                    _observableItemsSource.Clear();
+                                    Source.Clear();
                                     break;
                                 case NotifyCollectionChangedAction.Add:
-                                    foreach (var item in Enumerable.Cast<object>(args.NewItems))
-                                        _observableItemsSource.Add(groupedDataConverter.ConvertToMvxGroupedData(item));
+                                    foreach (var item in args.NewItems.Cast<object>())
+                                        Source.Add(groupedDataConverter.ConvertToMvxGroupedData(item));
                                     break;
                                 case NotifyCollectionChangedAction.Remove:
-                                    foreach (var item in Enumerable.Cast<object>(args.OldItems))
+                                    foreach (var item in args.OldItems.Cast<object>())
                                     {
                                         var mvxGroupedData = groupedDataConverter.ConvertToMvxGroupedData(item);
-                                        _observableItemsSource.Remove(mvxGroupedData);
+                                        Source.Remove(mvxGroupedData);
                                         foreach (var childItem in mvxGroupedData.Items)
-                                            _observableItemsSource.Remove(childItem);
+                                            Source.Remove(childItem);
                                     }
                                     break;
                                 default:
@@ -62,6 +62,5 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters
                 _collectionChangedDisposables.Add(observableGroupsDisposeSubscription);
             }
         }
-
     }
 }

@@ -5,17 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Platform.UI;
-using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace MvvmCross.Plugins.Color.Droid
 {
     [Preserve(AllMembers = true)]
     public class Plugin
-        : IMvxPlugin          
+        : IMvxPlugin
     {
         public void Load()
         {

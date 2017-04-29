@@ -13,9 +13,13 @@ namespace MvvmCross.Plugins.Color.Droid.Binding
     public static class MvxAndroidColorPropertyBindingExtensions
     {
         public static string BindBackgroundColor(this View view)
-           => MvxAndroidColorPropertyBinding.View_BackgroundColor;
+        {
+            return MvxAndroidColorPropertyBinding.View_BackgroundColor;
+        }
 
         public static string BindTextColor(this TextView view)
-           => MvxAndroidColorPropertyBinding.TextView_TextColor;
+        {
+            return MvxAndroidColorPropertyBinding.TextView_TextColor;
+        }
     }
 }

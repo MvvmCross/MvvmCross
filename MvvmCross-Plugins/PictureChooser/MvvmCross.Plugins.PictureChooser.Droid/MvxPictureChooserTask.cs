@@ -11,77 +11,28 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Media;
 using Android.Provider;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
+using Path = System.IO.Path;
+using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxPictureChooserTask
+    public class MvxPictureChooserTask
         : MvxAndroidTask
-          , IMvxPictureChooserTask
-          
+            , IMvxPictureChooserTask
+
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
-
-        #region IMvxPictureChooserTask Members
-
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
-                                     Action assumeCancelled)
-        {
-            var intent = new Intent(Intent.ActionGetContent);
-            intent.SetType("image/*");
-            ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
-                                pictureAvailable, assumeCancelled);
-        }
-
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
-        {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
-        }
-
-        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                Action assumeCancelled)
-        {
-            var intent = new Intent(MediaStore.ActionImageCapture);
-
-            _cachedUriLocation = GetNewImageUri();
-            intent.PutExtra(MediaStore.ExtraOutput, _cachedUriLocation);
-            intent.PutExtra("outputFormat", Bitmap.CompressFormat.Jpeg.ToString());
-            intent.PutExtra("return-data", true);
-
-            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
-                                (stream, name) => pictureAvailable(stream), assumeCancelled);
-        }
-
-
-        public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
-        {
-            var task = new TaskCompletionSource<Stream>();
-            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
-            return task.Task;
-        }
-
-        public Task<Stream> TakePicture(int maxPixelDimension, int percentQuality)
-        {
-            var task = new TaskCompletionSource<Stream>();
-            TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
-            return task.Task;
-        }
-
-        public void ContinueFileOpenPicker(object args)
-        {
-        }
-
-        #endregion
 
         private Uri GetNewImageUri()
         {
@@ -92,17 +43,18 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             // Specify where to put the image
             return
                 Mvx.Resolve<IMvxAndroidGlobals>()
-                    .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
+                    .ApplicationContext.ContentResolver
+                    .Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
         public void ChoosePictureCommon(MvxIntentRequestCode pickId, Intent intent, int maxPixelDimension,
-                                        int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
+            int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             if (_currentRequestParameters != null)
                 throw new MvxException("Cannot request a second picture while the first request is still pending");
 
             _currentRequestParameters = new RequestParameters(maxPixelDimension, percentQuality, pictureAvailable,
-                                                              assumeCancelled);
+                assumeCancelled);
             StartActivityForResult((int) pickId, intent);
         }
 
@@ -123,7 +75,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 default:
                     // ignore this result - it's not for us
                     MvxTrace.Trace("Unexpected request received from MvxIntentResult - request was {0}",
-                                   result.RequestCode);
+                        result.RequestCode);
                     return;
             }
 
@@ -145,7 +97,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 if (result.ResultCode != Result.Ok)
                 {
                     MvxTrace.Trace("Non-OK result received from MvxIntentResult - {0} - request was {1}",
-                                   result.ResultCode, result.RequestCode);
+                        result.ResultCode, result.RequestCode);
                     return;
                 }
 
@@ -165,9 +117,8 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 MvxTrace.Trace("Loading InMemoryBitmap complete...");
                 responseSent = true;
                 MvxTrace.Trace("Sending pictureAvailable...");
-                _currentRequestParameters.PictureAvailable(memoryStream, System.IO.Path.GetFileNameWithoutExtension(uri.Path));
+                _currentRequestParameters.PictureAvailable(memoryStream, Path.GetFileNameWithoutExtension(uri.Path));
                 MvxTrace.Trace("pictureAvailable completed...");
-                return;
             }
             finally
             {
@@ -194,10 +145,10 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
+            var contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
-            var sampleSize = (int) Math.Ceiling((maxDimensionSize)/
-                                                ((double) _currentRequestParameters.MaxPixelDimension));
+            var sampleSize = (int) Math.Ceiling(maxDimensionSize /
+                                                (double) _currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1
@@ -238,9 +189,9 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             using (var inputStream = contentResolver.OpenInputStream(uri))
             {
                 var optionsJustBounds = new BitmapFactory.Options
-                    {
-                        InJustDecodeBounds = true
-                    };
+                {
+                    InJustDecodeBounds = true
+                };
                 var metadataResult = BitmapFactory.DecodeStream(inputStream, null, optionsJustBounds);
                 var maxDimensionSize = Math.Max(optionsJustBounds.OutWidth, optionsJustBounds.OutHeight);
                 return maxDimensionSize;
@@ -252,8 +203,8 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             if (bitmap == null)
                 return null;
 
-            var exif = new Android.Media.ExifInterface(GetRealPathFromUri(contentResolver, uri));
-            var rotation = exif.GetAttributeInt(Android.Media.ExifInterface.TagOrientation, (Int32)Android.Media.Orientation.Normal);
+            var exif = new ExifInterface(GetRealPathFromUri(contentResolver, uri));
+            var rotation = exif.GetAttributeInt(ExifInterface.TagOrientation, (int) Orientation.Normal);
             var rotationInDegrees = ExifToDegrees(rotation);
             if (rotationInDegrees == 0)
                 return bitmap;
@@ -265,9 +216,9 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             }
         }
 
-        private String GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
+        private string GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
         {
-            var proj = new String[] { MediaStore.Images.ImageColumns.Data };
+            var proj = new[] {MediaStore.Images.ImageColumns.Data};
             using (var cursor = contentResolver.Query(uri, proj, null, null, null))
             {
                 var columnIndex = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
@@ -276,15 +227,15 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             }
         }
 
-        private static Int32 ExifToDegrees(Int32 exifOrientation)
+        private static int ExifToDegrees(int exifOrientation)
         {
             switch (exifOrientation)
             {
-                case (Int32)Android.Media.Orientation.Rotate90:
+                case (int) Orientation.Rotate90:
                     return 90;
-                case (Int32)Android.Media.Orientation.Rotate180:
+                case (int) Orientation.Rotate180:
                     return 180;
-                case (Int32)Android.Media.Orientation.Rotate270:
+                case (int) Orientation.Rotate270:
                     return 270;
             }
 
@@ -296,7 +247,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         private class RequestParameters
         {
             public RequestParameters(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
-                                     Action assumeCancelled)
+                Action assumeCancelled)
             {
                 PercentQuality = percentQuality;
                 MaxPixelDimension = maxPixelDimension;
@@ -304,10 +255,64 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 PictureAvailable = pictureAvailable;
             }
 
-            public Action<Stream, string> PictureAvailable { get; private set; }
-            public Action AssumeCancelled { get; private set; }
-            public int MaxPixelDimension { get; private set; }
-            public int PercentQuality { get; private set; }
+            public Action<Stream, string> PictureAvailable { get; }
+            public Action AssumeCancelled { get; }
+            public int MaxPixelDimension { get; }
+            public int PercentQuality { get; }
+        }
+
+        #endregion
+
+        #region IMvxPictureChooserTask Members
+
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality,
+            Action<Stream, string> pictureAvailable,
+            Action assumeCancelled)
+        {
+            var intent = new Intent(Intent.ActionGetContent);
+            intent.SetType("image/*");
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromFile, intent, maxPixelDimension, percentQuality,
+                pictureAvailable, assumeCancelled);
+        }
+
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
+        {
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream),
+                assumeCancelled);
+        }
+
+        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
+        {
+            var intent = new Intent(MediaStore.ActionImageCapture);
+
+            _cachedUriLocation = GetNewImageUri();
+            intent.PutExtra(MediaStore.ExtraOutput, _cachedUriLocation);
+            intent.PutExtra("outputFormat", Bitmap.CompressFormat.Jpeg.ToString());
+            intent.PutExtra("return-data", true);
+
+            ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
+                (stream, name) => pictureAvailable(stream), assumeCancelled);
+        }
+
+
+        public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
+        public Task<Stream> TakePicture(int maxPixelDimension, int percentQuality)
+        {
+            var task = new TaskCompletionSource<Stream>();
+            TakePicture(maxPixelDimension, percentQuality, task.SetResult, () => task.SetResult(null));
+            return task.Task;
+        }
+
+        public void ContinueFileOpenPicker(object args)
+        {
         }
 
         #endregion

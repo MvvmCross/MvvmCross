@@ -53,7 +53,8 @@ namespace MvvmCross.iOS.Views
 
         public override UIInterfaceOrientation PreferredInterfaceOrientationForPresentation()
         {
-            return TopViewController?.PreferredInterfaceOrientationForPresentation() ?? base.PreferredInterfaceOrientationForPresentation();
+            return TopViewController?.PreferredInterfaceOrientationForPresentation() ??
+                   base.PreferredInterfaceOrientationForPresentation();
         }
 
         public override bool ShouldAutorotate()

@@ -22,40 +22,40 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
 
         public bool ReloadOnAllItemsSourceSets
         {
-            get { return _mvxRecyclerViewItemsSourceBridge.ReloadOnAllItemsSourceSets; }
-            set { _mvxRecyclerViewItemsSourceBridge.ReloadOnAllItemsSourceSets = value; }
+            get => _mvxRecyclerViewItemsSourceBridge.ReloadOnAllItemsSourceSets;
+            set => _mvxRecyclerViewItemsSourceBridge.ReloadOnAllItemsSourceSets = value;
         }
 
         public bool IsHeaderEnabled
         {
-            get { return _itemsSourceBridgeHeaderFooterDecorator.IsHeaderEnabled; }
-            set { _itemsSourceBridgeHeaderFooterDecorator.IsHeaderEnabled = value; }
+            get => _itemsSourceBridgeHeaderFooterDecorator.IsHeaderEnabled;
+            set => _itemsSourceBridgeHeaderFooterDecorator.IsHeaderEnabled = value;
         }
 
         public bool IsFooterEnabled
         {
-            get { return _itemsSourceBridgeHeaderFooterDecorator.IsFooterEnabled; }
-            set { _itemsSourceBridgeHeaderFooterDecorator.IsFooterEnabled = value; }
+            get => _itemsSourceBridgeHeaderFooterDecorator.IsFooterEnabled;
+            set => _itemsSourceBridgeHeaderFooterDecorator.IsFooterEnabled = value;
         }
 
         public IMvxRecyclerViewItemsSourceBridge ItemsSourceBridge => _itemsSourceBridgeHeaderFooterDecorator;
 
         public bool HidesHeaderIfEmpty
         {
-            get { return _itemsSourceBridgeHeaderFooterDecorator.HidesHeaderIfEmpty; }
-            set { _itemsSourceBridgeHeaderFooterDecorator.HidesHeaderIfEmpty = value; }
+            get => _itemsSourceBridgeHeaderFooterDecorator.HidesHeaderIfEmpty;
+            set => _itemsSourceBridgeHeaderFooterDecorator.HidesHeaderIfEmpty = value;
         }
 
         public bool HidesFooterIfEmpty
         {
-            get { return _itemsSourceBridgeHeaderFooterDecorator.HidesFooterIfEmpty; }
-            set { _itemsSourceBridgeHeaderFooterDecorator.HidesFooterIfEmpty = value; }
+            get => _itemsSourceBridgeHeaderFooterDecorator.HidesFooterIfEmpty;
+            set => _itemsSourceBridgeHeaderFooterDecorator.HidesFooterIfEmpty = value;
         }
 
         public IMvxGroupedDataConverter GroupedDataConverter
         {
-            get { return _itemsSourceBridgeGroupingDecorator.GroupedDataConverter; }
-            set { _itemsSourceBridgeGroupingDecorator.GroupedDataConverter = value; }
+            get => _itemsSourceBridgeGroupingDecorator.GroupedDataConverter;
+            set => _itemsSourceBridgeGroupingDecorator.GroupedDataConverter = value;
         }
 
         private void MvxRecyclerViewItemsSourceBridgeOnItemsSourceCollectionChanged(object sender,

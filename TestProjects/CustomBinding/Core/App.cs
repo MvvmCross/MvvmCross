@@ -1,8 +1,10 @@
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
+using MvvmCross.TestProjects.CustomBinding.Core.ViewModels;
 
 namespace MvvmCross.TestProjects.CustomBinding.Core
 {
-    public class App : MvvmCross.Core.ViewModels.MvxApplication
+    public class App : MvxApplication
     {
         public override void Initialize()
         {
@@ -11,7 +13,7 @@ namespace MvvmCross.TestProjects.CustomBinding.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.FirstViewModel>();
+            RegisterAppStart<FirstViewModel>();
         }
     }
 }

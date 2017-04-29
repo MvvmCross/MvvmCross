@@ -18,18 +18,29 @@ namespace MvvmCross.Forms.Bindings
     // ReSharper disable once InconsistentNaming
     public static class Bi
     {
+        // ReSharper disable once InconsistentNaming
+        public static readonly BindableProperty ndProperty = BindableProperty.CreateAttached("nd",
+            typeof(string),
+            typeof(Bi),
+            null,
+            BindingMode.OneWay,
+            null,
+            CallBackWhenndIsChanged);
+
+        private static IMvxBindingCreator _bindingCreator;
+
         static Bi()
         {
         }
 
-        // ReSharper disable once InconsistentNaming
-        public static readonly BindableProperty ndProperty = BindableProperty.CreateAttached("nd",
-                                                                                             typeof(string),
-                                                                                             typeof(Bi),
-                                                                                             null,
-                                                                                             BindingMode.OneWay,
-                                                                                             null,
-                                                                                             CallBackWhenndIsChanged);
+        private static IMvxBindingCreator BindingCreator
+        {
+            get
+            {
+                _bindingCreator = _bindingCreator ?? ResolveBindingCreator();
+                return _bindingCreator;
+            }
+        }
 
         public static string Getnd(BindableObject obj)
         {
@@ -41,24 +52,12 @@ namespace MvvmCross.Forms.Bindings
             obj.SetValue(ndProperty, value);
         }
 
-        private static IMvxBindingCreator _bindingCreator;
-
-        private static IMvxBindingCreator BindingCreator
-        {
-            get
-            {
-                _bindingCreator = _bindingCreator ?? ResolveBindingCreator();
-                return _bindingCreator;
-            }
-        }
-
         private static IMvxBindingCreator ResolveBindingCreator()
         {
             IMvxBindingCreator toReturn;
-            if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
-            {
-                throw new MvxException("Unable to resolve the binding creator - have you initialized Xamarin Forms Binding");
-            }
+            if (!Mvx.TryResolve(out toReturn))
+                throw new MvxException(
+                    "Unable to resolve the binding creator - have you initialized Xamarin Forms Binding");
 
             return toReturn;
         }

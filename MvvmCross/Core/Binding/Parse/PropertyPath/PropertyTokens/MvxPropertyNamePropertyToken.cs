@@ -11,14 +11,14 @@ namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
     {
         public MvxPropertyNamePropertyToken(string propertyText)
         {
-            this.PropertyName = propertyText;
+            PropertyName = propertyText;
         }
 
         public string PropertyName { get; }
 
         public override string ToString()
         {
-            return "Property:" + this.PropertyName;
+            return "Property:" + PropertyName;
         }
     }
 }

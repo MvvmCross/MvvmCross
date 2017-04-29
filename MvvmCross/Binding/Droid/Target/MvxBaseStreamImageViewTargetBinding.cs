@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.IO;
-
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -31,7 +30,7 @@ namespace MvvmCross.Binding.Droid.Target
                 return false;
             }
 
-            var options = new BitmapFactory.Options { InPurgeable = true };
+            var options = new BitmapFactory.Options {InPurgeable = true};
             bitmap = BitmapFactory.DecodeStream(assetStream, null, options);
             return true;
         }

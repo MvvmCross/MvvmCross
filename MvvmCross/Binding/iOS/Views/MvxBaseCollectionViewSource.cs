@@ -5,27 +5,21 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
         public static readonly NSString UnknownCellIdentifier = null;
 
-        private readonly NSString _cellIdentifier;
-        private readonly UICollectionView _collectionView;
-
-        protected virtual NSString DefaultCellIdentifier => this._cellIdentifier;
+        private object _selectedItem;
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView)
             : this(collectionView, UnknownCellIdentifier)
@@ -33,21 +27,36 @@ namespace MvvmCross.Binding.iOS.Views
         }
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
-                                              NSString cellIdentifier)
+            NSString cellIdentifier)
         {
-            this._collectionView = collectionView;
-            this._cellIdentifier = cellIdentifier;
+            CollectionView = collectionView;
+            DefaultCellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView => this._collectionView;
+        protected virtual NSString DefaultCellIdentifier { get; }
+
+        protected UICollectionView CollectionView { get; }
 
         public ICommand SelectionChangedCommand { get; set; }
+
+        public object SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                // note that we only expect this to be called from the control/Table
+                // we don't have any multi-select or any scroll into view functionality here
+                _selectedItem = value;
+                var handler = SelectedItemChanged;
+                handler?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         public virtual void ReloadData()
         {
             try
             {
-                this._collectionView.ReloadData();
+                CollectionView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -55,46 +64,32 @@ namespace MvvmCross.Binding.iOS.Views
             }
         }
 
-        protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
-                                                                  object item)
+        protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView,
+            NSIndexPath indexPath,
+            object item)
         {
-            return (UICollectionViewCell)collectionView.DequeueReusableCell(this.DefaultCellIdentifier, indexPath);
+            return (UICollectionViewCell) collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
         }
 
         protected abstract object GetItemAt(NSIndexPath indexPath);
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = this.GetItemAt(indexPath);
+            var item = GetItemAt(indexPath);
 
-            var command = this.SelectionChangedCommand;
+            var command = SelectionChangedCommand;
             if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
-            this.SelectedItem = item;
-        }
-
-        private object _selectedItem;
-
-        public object SelectedItem
-        {
-            get { return this._selectedItem; }
-            set
-            {
-                // note that we only expect this to be called from the control/Table
-                // we don't have any multi-select or any scroll into view functionality here
-                this._selectedItem = value;
-                var handler = this.SelectedItemChanged;
-                handler?.Invoke(this, EventArgs.Empty);
-            }
+            SelectedItem = item;
         }
 
         public event EventHandler SelectedItemChanged;
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = this.GetItemAt(indexPath);
-            var cell = this.GetOrCreateCellFor(collectionView, indexPath, item);
+            var item = GetItemAt(indexPath);
+            var cell = GetOrCreateCellFor(collectionView, indexPath, item);
 
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)
@@ -103,7 +98,8 @@ namespace MvvmCross.Binding.iOS.Views
             return cell;
         }
 
-        public override void CellDisplayingEnded(UICollectionView collectionView, UICollectionViewCell cell, NSIndexPath indexPath)
+        public override void CellDisplayingEnded(UICollectionView collectionView, UICollectionViewCell cell,
+            NSIndexPath indexPath)
         {
             //Don't bind to NULL to speed up cells in lists when fast scrolling
             //There should be almost no scenario in which this is required

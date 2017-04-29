@@ -6,28 +6,27 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Concurrent;
-using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Source.Chained;
+using MvvmCross.Binding.Bindings.Source.Leaf;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Source.Chained;
-    using MvvmCross.Binding.Bindings.Source.Leaf;
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     /// <summary>
-    /// Uses a global cache of calls in Reflection namespace
+    ///     Uses a global cache of calls in Reflection namespace
     /// </summary>
     public class MvxPropertySourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache = new ConcurrentDictionary<int, PropertyInfo>();
+        private static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache =
+            new ConcurrentDictionary<int, PropertyInfo>();
 
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
+            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {
@@ -35,38 +34,40 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            result = remainingTokens.Count == 0 ? this.CreateLeafBinding(source, currentToken) : this.CreateChainedBinding(source, currentToken, remainingTokens);
+            result = remainingTokens.Count == 0
+                ? CreateLeafBinding(source, currentToken)
+                : CreateChainedBinding(source, currentToken, remainingTokens);
             return result != null;
         }
 
         protected virtual MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
-                                                                       List<MvxPropertyToken> remainingTokens)
+            List<MvxPropertyToken> remainingTokens)
         {
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = this.FindPropertyInfo(source);
+                var itemPropertyInfo = FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
 
                 return new MvxIndexerChainedSourceBinding(source, itemPropertyInfo, indexPropertyToken,
-                                                          remainingTokens);
+                    remainingTokens);
             }
 
             var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
             if (propertyNameToken != null)
             {
-                var propertyInfo = this.FindPropertyInfo(source, propertyNameToken.PropertyName);
+                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
 
                 if (propertyInfo == null)
                     return null;
 
                 return new MvxSimpleChainedSourceBinding(source, propertyInfo,
-                                                         remainingTokens);
+                    remainingTokens);
             }
 
             throw new MvxException("Unexpected property chaining - seen token type {0}",
-                                   propertyToken.GetType().FullName);
+                propertyToken.GetType().FullName);
         }
 
         protected virtual IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
@@ -74,7 +75,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
             {
-                var itemPropertyInfo = this.FindPropertyInfo(source);
+                var itemPropertyInfo = FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
                 return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
@@ -83,18 +84,17 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
             if (propertyNameToken != null)
             {
-                var propertyInfo = this.FindPropertyInfo(source, propertyNameToken.PropertyName);
+                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
                 if (propertyInfo == null)
                     return null;
                 return new MvxSimpleLeafPropertyInfoSourceBinding(source, propertyInfo);
             }
 
             if (propertyToken is MvxEmptyPropertyToken)
-            {
                 return new MvxDirectToSourceBinding(source);
-            }
 
-            throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
+            throw new MvxException("Unexpected property source - seen token type {0}",
+                propertyToken.GetType().FullName);
         }
 
         protected PropertyInfo FindPropertyInfo(object source, string propertyName = "Item")
@@ -112,11 +112,8 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
 
             if (pi == null)
-            {
-                //Try base properties. 
-                //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
-                pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-            }
+                pi = sourceType.GetProperty(propertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
             PropertyInfoCache.TryAdd(key, pi);
             return pi;

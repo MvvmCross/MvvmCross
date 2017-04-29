@@ -12,32 +12,38 @@ using Android.Runtime;
 using Android.Support.V4.Widget;
 using Android.Util;
 
-namespace MvvmCross.Droid.Support.V4 
+namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
-    public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
-    {	 
-        protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) { }
-
-        public MvxSwipeRefreshLayout(Context context)
-            : this (context, null) { }
-
-        public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
-            : base (context, attributes) { }
-    
+    public class MvxSwipeRefreshLayout : SwipeRefreshLayout
+    {
         private ICommand _refreshCommand;
         private bool _refreshOverloaded;
 
+        protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
+        public MvxSwipeRefreshLayout(Context context)
+            : this(context, null)
+        {
+        }
+
+        public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
+            : base(context, attributes)
+        {
+        }
+
         public ICommand RefreshCommand
         {
-            get { return _refreshCommand; }
+            get => _refreshCommand;
             set
             {
                 _refreshCommand = value;
                 if (_refreshCommand != null)
                     EnsureRefreshCommandOverloaded();
-            }		
+            }
         }
 
         private void EnsureRefreshCommandOverloaded()
@@ -62,15 +68,13 @@ namespace MvvmCross.Droid.Support.V4
 
         private void OnRefresh(object sender, EventArgs args)
         {
-            this.ExecuteRefreshCommand(this.RefreshCommand);
+            ExecuteRefreshCommand(RefreshCommand);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                Refresh -= this.OnRefresh;
-            }
+                Refresh -= OnRefresh;
 
             base.Dispose(disposing);
         }

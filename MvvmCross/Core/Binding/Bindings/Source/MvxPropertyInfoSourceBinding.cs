@@ -5,63 +5,59 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Bindings.Source
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
-        private readonly PropertyInfo _propertyInfo;
-        private readonly string _propertyName;
         private IDisposable _subscription;
 
         protected MvxPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
             : base(source)
         {
-            this._propertyInfo = propertyInfo;
-            this._propertyName = propertyInfo.Name;
+            PropertyInfo = propertyInfo;
+            PropertyName = propertyInfo.Name;
 
-            if (this.Source == null)
+            if (Source == null)
             {
                 MvxBindingTrace.Trace(
                     // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
                     MvxTraceLevel.Diagnostic,
                     "Unable to bind to source as it's null"
-                    , this._propertyName);
+                    , PropertyName);
                 return;
             }
 
-            var sourceNotify = this.Source as INotifyPropertyChanged;
+            var sourceNotify = Source as INotifyPropertyChanged;
             if (sourceNotify != null)
-                this._subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
+                _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
-        protected string PropertyName => this._propertyName;
+        protected string PropertyName { get; }
 
         protected string PropertyNameForChangedEvent
         {
             get
             {
-                if (this.IsIndexedProperty)
-                    return this._propertyName + "[]";
-                else
-                    return this._propertyName;
+                if (IsIndexedProperty)
+                    return PropertyName + "[]";
+                return PropertyName;
             }
         }
 
-        protected PropertyInfo PropertyInfo => this._propertyInfo;
+        protected PropertyInfo PropertyInfo { get; }
 
         protected bool IsIndexedProperty
         {
             get
             {
-                var parameters = this._propertyInfo.GetIndexParameters();
+                var parameters = PropertyInfo.GetIndexParameters();
                 return parameters.Any();
             }
         }
@@ -69,13 +65,11 @@ namespace MvvmCross.Binding.Bindings.Source
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
-            }
         }
 
         // Note - this is public because we use it in weak referenced situations
@@ -84,8 +78,8 @@ namespace MvvmCross.Binding.Bindings.Source
             // we test for null or empty here - this means all properties have changed
             // - fix for https://github.com/slodge/MvvmCross/issues/280
             if (string.IsNullOrEmpty(e.PropertyName)
-                || e.PropertyName == this.PropertyNameForChangedEvent)
-                this.OnBoundPropertyChanged();
+                || e.PropertyName == PropertyNameForChangedEvent)
+                OnBoundPropertyChanged();
         }
 
         protected abstract void OnBoundPropertyChanged();

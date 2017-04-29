@@ -7,7 +7,8 @@ using NUnit.Framework;
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests : CodeFixVerifier<CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer, CommandWithCanExecuteWithoutCanExecuteChangedCodeFix>
+    public class CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerTests : CodeFixVerifier<
+        CommandWithCanExecuteWithoutCanExecuteChangedAnalyzer, CommandWithCanExecuteWithoutCanExecuteChangedCodeFix>
     {
         private const string Expected = @"
 using System;
@@ -231,38 +232,13 @@ namespace CoreApp
 }";
 
         [Test]
-        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldShowOneDiagnostic()
-        {
-            var expectedDiagnostic = new DiagnosticResult
-            {
-                Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
-                Message = "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
-                Severity = DiagnosticSeverity.Warning,
-                Locations =
-                    new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 21, 54)
-                    }
-            };
-
-            VerifyCSharpDiagnostic(TestWithProperty, MvxProjType.Core, expectedDiagnostic);
-        }
-
-        [TestCase(TestWithPropertyButCalling)]
-        [TestCase(TestWithPropertyButCallingWithElvis)]
-        [Test]
-        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldNotShowAnyDiagnostic(string testCase)
-        {
-            VerifyCSharpDiagnostic(testCase, MvxProjType.Core);
-        }
-
-        [Test]
         public void CommandWithCanExecuteWithCs6WithoutCanExecuteChangedAnalyzerShouldShowOneDiagnostic()
         {
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
-                Message = "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
+                Message =
+                    "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
@@ -275,12 +251,46 @@ namespace CoreApp
         }
 
         [Test]
+        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldFixTheCode()
+        {
+            VerifyCSharpFix(TestWithLazyLoading, MvxProjType.Core, Expected);
+        }
+
+        [TestCase(TestWithPropertyButCalling)]
+        [TestCase(TestWithPropertyButCallingWithElvis)]
+        [Test]
+        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldNotShowAnyDiagnostic(string testCase)
+        {
+            VerifyCSharpDiagnostic(testCase, MvxProjType.Core);
+        }
+
+        [Test]
+        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldShowOneDiagnostic()
+        {
+            var expectedDiagnostic = new DiagnosticResult
+            {
+                Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
+                Message =
+                    "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                    new[]
+                    {
+                        new DiagnosticResultLocation("Test0.cs", 21, 54)
+                    }
+            };
+
+            VerifyCSharpDiagnostic(TestWithProperty, MvxProjType.Core, expectedDiagnostic);
+        }
+
+        [Test]
         public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerWithLazyLoadingShouldShowOneDiagnostic()
         {
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.CommandWithCanExecuteWithoutCanExecuteChangedRuleId,
-                Message = "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
+                Message =
+                    "Remove 'CanDoSubmit' from the constructor or call 'SubmitCommand.RaiseCanExecuteChanged' from your code",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
@@ -290,12 +300,6 @@ namespace CoreApp
             };
 
             VerifyCSharpDiagnostic(TestWithLazyLoading, MvxProjType.Core, expectedDiagnostic);
-        }
-
-        [Test]
-        public void CommandWithCanExecuteWithoutCanExecuteChangedAnalyzerShouldFixTheCode()
-        {
-            VerifyCSharpFix(TestWithLazyLoading, MvxProjType.Core, Expected);
         }
     }
 }

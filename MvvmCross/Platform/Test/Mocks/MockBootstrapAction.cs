@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Test.Mocks
 {
-    using MvvmCross.Platform.Platform;
-
     public class MockBootstrapAction : IMvxBootstrapAction
     {
         public static int CallCount { get; set; }

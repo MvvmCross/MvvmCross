@@ -10,6 +10,6 @@ namespace MvvmCross.Plugins.Location
     public enum MvxLocationTrackingMode
     {
         Foreground, // Foreground only
-        Background, // Foreground and background
+        Background // Foreground and background
     }
 }

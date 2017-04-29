@@ -5,26 +5,32 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Binding;
-using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.Graphics;
+using MvvmCross.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Plugins.File;
+using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxAndroidLocalFileImageLoader
+    public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
     {
         private const string ResourcePrefix = "res:";
 
         private readonly IDictionary<CacheKey, WeakReference<Bitmap>> _memCache =
             new Dictionary<CacheKey, WeakReference<Bitmap>>();
+
+        private IMvxAndroidGlobals _androidGlobals;
+
+        protected IMvxAndroidGlobals AndroidGlobals => _androidGlobals ??
+                                                       (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
 
         public async Task<MvxImage<Bitmap>> Load(string localPath, bool shouldCache, int maxWidth, int maxHeight)
         {
@@ -41,7 +47,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             }
             else if (localPath.ToLower().StartsWith("android.resource"))
             {
-                var substrings = localPath.Split(new[] { "/" }, StringSplitOptions.None);
+                var substrings = localPath.Split(new[] {"/"}, StringSplitOptions.None);
                 var resourceId = int.Parse(substrings[substrings.Length - 1]);
                 bitmap = await LoadResourceBitmapAsync(resourceId).ConfigureAwait(false);
             }
@@ -51,16 +57,10 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             }
 
             if (shouldAddToCache)
-            {
                 AddToCache(localPath, maxWidth, maxHeight, bitmap);
-            }
 
-            return (MvxImage<Bitmap>)new MvxAndroidImage(bitmap);
+            return new MvxAndroidImage(bitmap);
         }
-
-        private IMvxAndroidGlobals _androidGlobals;
-
-        protected IMvxAndroidGlobals AndroidGlobals => _androidGlobals ?? (_androidGlobals = Mvx.Resolve<IMvxAndroidGlobals>());
 
         private async Task<Bitmap> LoadResourceBitmapAsync(string resourcePath)
         {
@@ -69,7 +69,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             if (id == 0)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value '{0}' was not a known drawable name", resourcePath);
+                    "Value '{0}' was not a known drawable name", resourcePath);
                 return null;
             }
             return await LoadResourceBitmapAsync(id).ConfigureAwait(false);
@@ -79,7 +79,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         {
             var resources = AndroidGlobals.ApplicationContext.Resources;
             return await BitmapFactory.DecodeResourceAsync(resources, resourceId,
-                new BitmapFactory.Options { InPurgeable = true }).ConfigureAwait(false);
+                    new BitmapFactory.Options {InPurgeable = true})
+                .ConfigureAwait(false);
         }
 
         private static async Task<Bitmap> LoadBitmapAsync(string localPath, int maxWidth, int maxHeight)
@@ -87,33 +88,35 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             // If the localPath is a content:// url, 
             // try to load with a FileDescriptor
             if (localPath.ToLower().StartsWith("content"))
-            {                
+            {
                 Bitmap bmp = null;
 
                 // There is no Async version of DecodeFileDescriptor that
                 // takes Options object. Wrapping with a Task Factory
                 // to maintain async nature of the method call
                 await Task.Run(() =>
-                {
-                    var globals = Mvx.Resolve<IMvxAndroidGlobals>();
-                    var uri = Android.Net.Uri.Parse(localPath);
-                    var parcelFileDescriptor = globals?.ApplicationContext?.ContentResolver.OpenFileDescriptor(uri, "r");
-                    var fileDescriptor = parcelFileDescriptor?.FileDescriptor;
+                    {
+                        var globals = Mvx.Resolve<IMvxAndroidGlobals>();
+                        var uri = Uri.Parse(localPath);
+                        var parcelFileDescriptor =
+                            globals?.ApplicationContext?.ContentResolver.OpenFileDescriptor(uri, "r");
+                        var fileDescriptor = parcelFileDescriptor?.FileDescriptor;
 
-                    var opts = new BitmapFactory.Options { InJustDecodeBounds = true };
-                    BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
+                        var opts = new BitmapFactory.Options {InJustDecodeBounds = true};
+                        BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
 
-                    // Calculate inSampleSize
-                    opts.InSampleSize = CalculateInSampleSize(opts, maxWidth, maxHeight);
-                    // see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
-                    opts.InPurgeable = true;
+                        // Calculate inSampleSize
+                        opts.InSampleSize = CalculateInSampleSize(opts, maxWidth, maxHeight);
+                        // see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
+                        opts.InPurgeable = true;
 
-                    // Decode bitmap with inSampleSize set
-                    opts.InJustDecodeBounds = false;
-                    bmp = BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
+                        // Decode bitmap with inSampleSize set
+                        opts.InJustDecodeBounds = false;
+                        bmp = BitmapFactory.DecodeFileDescriptor(fileDescriptor, null, opts);
 
-                    parcelFileDescriptor?.Close();
-                }).ConfigureAwait(false);
+                        parcelFileDescriptor?.Close();
+                    })
+                    .ConfigureAwait(false);
 
                 return bmp;
             }
@@ -121,7 +124,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             if (maxWidth > 0 || maxHeight > 0)
             {
                 // load thumbnail - see: http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
-                var options = new BitmapFactory.Options { InJustDecodeBounds = true };
+                var options = new BitmapFactory.Options {InJustDecodeBounds = true};
                 await BitmapFactory.DecodeFileAsync(localPath, options).ConfigureAwait(false);
 
                 // Calculate inSampleSize
@@ -142,7 +145,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
                 // the InPurgeable option is very important for Droid memory management.
                 // see http://slodge.blogspot.co.uk/2013/02/huge-android-memory-bug-and-bug-hunting.html
-                var options = new BitmapFactory.Options { InPurgeable = true };
+                var options = new BitmapFactory.Options {InPurgeable = true};
                 var image = await
                     BitmapFactory.DecodeByteArrayAsync(contents, 0, contents.Length, options)
                         .ConfigureAwait(false);
@@ -153,22 +156,20 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         private static int CalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
         {
             // Raw height and width of image
-            int height = options.OutHeight;
-            int width = options.OutWidth;
-            int inSampleSize = 1;
+            var height = options.OutHeight;
+            var width = options.OutWidth;
+            var inSampleSize = 1;
 
             if (height > reqHeight || width > reqWidth)
             {
-                int halfHeight = height / 2;
-                int halfWidth = width / 2;
+                var halfHeight = height / 2;
+                var halfWidth = width / 2;
 
                 // Calculate the largest inSampleSize value that is a power of 2 and keeps both
                 // height and width larger than the requested height and width.
-                while ((halfHeight / inSampleSize) > reqHeight
-                        && (halfWidth / inSampleSize) > reqWidth)
-                {
+                while (halfHeight / inSampleSize > reqHeight
+                       && halfWidth / inSampleSize > reqWidth)
                     inSampleSize *= 2;
-                }
             }
 
             return inSampleSize;
@@ -182,7 +183,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             if (_memCache.TryGetValue(key, out reference))
             {
                 Bitmap target;
-                if (reference.TryGetTarget(out target) && target != null && target.Handle != IntPtr.Zero && !target.IsRecycled)
+                if (reference.TryGetTarget(out target) && target != null && target.Handle != IntPtr.Zero &&
+                    !target.IsRecycled)
                 {
                     bitmap = target;
                     return true;
@@ -205,10 +207,6 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
         private class CacheKey
         {
-            private string LocalPath { get; set; }
-            private int MaxWidth { get; set; }
-            private int MaxHeight { get; set; }
-
             public CacheKey(string localPath, int maxWidth, int maxHeight)
             {
                 if (localPath == null) throw new ArgumentNullException(nameof(localPath));
@@ -216,6 +214,10 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                 MaxWidth = maxWidth;
                 MaxHeight = maxHeight;
             }
+
+            private string LocalPath { get; }
+            private int MaxWidth { get; }
+            private int MaxHeight { get; }
 
             public override int GetHashCode()
             {

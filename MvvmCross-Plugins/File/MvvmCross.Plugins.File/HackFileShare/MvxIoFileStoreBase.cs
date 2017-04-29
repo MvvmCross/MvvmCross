@@ -7,27 +7,75 @@
 
 // ReSharper disable all
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.File
 {
     public abstract class MvxIoFileStoreBase
         : MvxFileStoreBase
     {
+        protected abstract string FullPath(string path);
+
+        protected override void WriteFileCommon(string path, Action<Stream> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (System.IO.File.Exists(fullPath))
+                System.IO.File.Delete(fullPath);
+
+            using (var fileStream = System.IO.File.OpenWrite(fullPath))
+            {
+                streamAction?.Invoke(fileStream);
+            }
+        }
+
+        protected override bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (!System.IO.File.Exists(fullPath))
+                return false;
+
+            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                return streamAction(fileStream);
+            }
+        }
+
+        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (System.IO.File.Exists(fullPath))
+                System.IO.File.Delete(fullPath);
+
+            using (var fileStream = System.IO.File.OpenWrite(fullPath))
+            {
+                await streamAction(fileStream).ConfigureAwait(false);
+            }
+        }
+
+        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+        {
+            var fullPath = FullPath(path);
+            if (!System.IO.File.Exists(fullPath))
+                return false;
+
+            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                return await streamAction(fileStream).ConfigureAwait(false);
+            }
+        }
+
         #region IMvxFileStore Members
 
         public override Stream OpenRead(string path)
         {
             var fullPath = FullPath(path);
             if (!System.IO.File.Exists(fullPath))
-            {
                 return null;
-            }
 
             return System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
@@ -37,9 +85,7 @@ namespace MvvmCross.Plugins.File
             var fullPath = FullPath(path);
 
             if (!System.IO.File.Exists(fullPath))
-            {
                 return System.IO.File.Create(fullPath);
-            }
 
             return System.IO.File.OpenWrite(fullPath);
         }
@@ -94,20 +140,15 @@ namespace MvvmCross.Plugins.File
                 var fullFrom = FullPath(from);
                 var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                     return false;
-				}
+                }
 
                 if (System.IO.File.Exists(fullTo))
-                {
-					if (overwrite) {
-                        System.IO.File.Delete(fullTo);
-					}
-					else {
-                        return false;
-					}
-                }
+                    if (overwrite) System.IO.File.Delete(fullTo);
+                    else return false;
 
                 System.IO.File.Move(fullFrom, fullTo);
                 return true;
@@ -119,27 +160,28 @@ namespace MvvmCross.Plugins.File
             }
         }
 
-		public override bool TryCopy (string from, string to, bool overwrite)
-		{
-			try
-			{
-				var fullFrom = FullPath(from);
-				var fullTo = FullPath(to);
+        public override bool TryCopy(string from, string to, bool overwrite)
+        {
+            try
+            {
+                var fullFrom = FullPath(from);
+                var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
-					return false;
-				}
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                    return false;
+                }
 
-				System.IO.File.Copy(fullFrom, fullTo, overwrite);
-				return true;
-			}
-			catch (Exception exception)
-			{
-				MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
-				return false;
-			}
-		}
+                System.IO.File.Copy(fullFrom, fullTo, overwrite);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
 
         public override string NativePath(string path)
         {
@@ -147,65 +189,6 @@ namespace MvvmCross.Plugins.File
         }
 
         #endregion IMvxFileStore Members
-
-        protected abstract string FullPath(string path);
-
-        protected override void WriteFileCommon(string path, Action<Stream> streamAction)
-        {
-            var fullPath = FullPath(path);
-            if (System.IO.File.Exists(fullPath))
-            {
-                System.IO.File.Delete(fullPath);
-            }
-
-            using (var fileStream = System.IO.File.OpenWrite(fullPath))
-            {
-                streamAction?.Invoke(fileStream);
-            }
-        }
-
-        protected override bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
-        {
-            var fullPath = FullPath(path);
-            if (!System.IO.File.Exists(fullPath))
-            {
-                return false;
-            }
-
-            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                return streamAction(fileStream);
-            }
-        }
-
-        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
-        {
-            var fullPath = FullPath(path);
-            if (System.IO.File.Exists(fullPath))
-            {
-                System.IO.File.Delete(fullPath);
-            }
-
-            using (var fileStream = System.IO.File.OpenWrite(fullPath))
-            {
-                await streamAction(fileStream).ConfigureAwait(false);
-                return;
-            }
-        }
-
-        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
-        {
-            var fullPath = FullPath(path);
-            if (!System.IO.File.Exists(fullPath))
-            {
-                return false;
-            }
-
-            using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                return await streamAction(fileStream).ConfigureAwait(false);
-            }
-        }
     }
 }
 

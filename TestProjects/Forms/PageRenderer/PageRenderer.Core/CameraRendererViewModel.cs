@@ -1,19 +1,24 @@
 ﻿using System.Windows.Input;
-
 using MvvmCross.Core.ViewModels;
 
 namespace PageRendererExample.ViewModels
 {
     public class CameraRendererViewModel : MvxViewModel
     {
-        readonly IImageHolder _imageHolder;
+        private readonly IImageHolder _imageHolder;
 
-        MvxCommand _closeCommand;
-        public ICommand CloseCommand {
-            get {
-                if (_closeCommand == null) {
-                    _closeCommand = new MvxCommand(() => Close(this));
-                }
+        private MvxCommand _closeCommand;
+
+        public CameraRendererViewModel(IImageHolder imageHolder)
+        {
+            _imageHolder = imageHolder;
+        }
+
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (_closeCommand == null) _closeCommand = new MvxCommand(() => Close(this));
 
                 return _closeCommand;
             }
@@ -23,11 +28,5 @@ namespace PageRendererExample.ViewModels
         {
             _imageHolder.Update(imageBytes, mimeType);
         }
-
-        public CameraRendererViewModel(IImageHolder imageHolder)
-        {
-            _imageHolder = imageHolder;
-        }
     }
 }
-

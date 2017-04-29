@@ -16,9 +16,9 @@ namespace MvvmCross.Forms.Bindings
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {
         public void CreateBindings(object sender,
-                                   object oldValue,
-                                   object newValue,
-                                   Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions)
+            object oldValue,
+            object newValue,
+            Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions)
         {
             var attachedObject = sender as Element;
 
@@ -40,6 +40,6 @@ namespace MvvmCross.Forms.Bindings
         }
 
         protected abstract void ApplyBindings(Element attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions);
+            IEnumerable<MvxBindingDescription> bindingDescriptions);
     }
 }

@@ -7,13 +7,11 @@
 
 using System;
 using MvvmCross.Binding;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
 namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
-
 #if WINDOWS_WPF
 using System.Windows;
 
@@ -35,7 +33,7 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
         {
             if (value == null)
                 value = false;
-            var boolValue = (bool)value;
+            var boolValue = (bool) value;
             base.SetValue(boolValue ? Visibility.Visible : Visibility.Collapsed);
         }
     }

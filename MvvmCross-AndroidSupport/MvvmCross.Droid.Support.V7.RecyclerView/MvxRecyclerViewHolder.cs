@@ -18,131 +18,15 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
-    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
+    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder,
+        IMvxBindingContextOwner
     {
-        private readonly int _viewType;
         private readonly IMvxBindingContext _bindingContext;
+        private readonly int _viewType;
 
         private object _cachedDataContext;
         private ICommand _click, _longClick;
         private bool _clickOverloaded, _longClickOverloaded;
-
-        public IMvxBindingContext BindingContext
-        {
-            get { return _bindingContext; }
-            set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
-        }
-
-        public object DataContext
-        {
-            get { return _bindingContext.DataContext; }
-            set
-            {
-                _bindingContext.DataContext = value;
-
-                // This is just a precaution.  If we've set the DataContext to something
-                // then we don't need to have the old one still cached.
-                if (value != null)
-                    this._cachedDataContext = null;
-            }
-        }
-
-        public ICommand Click
-        {
-            get { return this._click; }
-            set
-            {
-                this._click = value;
-                if (this._click != null)
-                    this.EnsureClickOverloaded();
-            }
-        }
-
-        private void EnsureClickOverloaded()
-        {
-            if (this._clickOverloaded)
-                return;
-            this._clickOverloaded = true;
-            this.ItemView.Click += OnItemViewOnClick;
-        }
-
-        public ICommand LongClick
-        {
-            get { return this._longClick; }
-            set
-            {
-                this._longClick = value;
-                if (this._longClick != null)
-                    this.EnsureLongClickOverloaded();
-            }
-        }
-
-        private void EnsureLongClickOverloaded()
-        {
-            if (this._longClickOverloaded)
-                return;
-            this._longClickOverloaded = true;
-            this.ItemView.LongClick += OnItemViewOnLongClick;
-        }
-
-        public ICommand HeaderClickCommand { get; set; }
-    
-        public ICommand FooterClickCommand { get; set; }
-
-        public ICommand GroupHeaderClickCommand { get; set; }
-
-        protected virtual void ExecuteCommandOnItem(ICommand command)
-        {
-            if (command == null)
-                return;
-
-            var item = DataContext;
-            if (item == null)
-                return;
-
-            if (_viewType == MvxBaseTemplateSelector.HeaderViewTypeId)
-            {
-                if (item is MvxHeaderItemData)
-                {
-                    if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
-                        HeaderClickCommand.Execute(null);
-                }
-                return;
-            }
-
-            if (_viewType == MvxBaseTemplateSelector.FooterViewTypeId)
-            {
-                if (item is MvxFooterItemData)
-                {
-                    if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
-                        FooterClickCommand.Execute(null);
-                }
-                return;
-            }
-
-            if (item is MvxGroupedData)
-            {
-                var groupedData = item as MvxGroupedData;
-                if (GroupHeaderClickCommand != null && GroupHeaderClickCommand.CanExecute(groupedData.Key))
-                    GroupHeaderClickCommand.Execute(groupedData.Key);
-                return;
-            }
-                
-            if (!command.CanExecute(item))
-                return;
-
-            command.Execute(item);
-        }
-
-        private void OnItemViewOnClick(object sender, EventArgs args)
-        {
-            this.ExecuteCommandOnItem(this.Click);
-        }
-
-        private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
-        {
-            this.ExecuteCommandOnItem(this.LongClick);
-        }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
             : this(itemView, context, 0)
@@ -153,12 +37,60 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             : base(itemView)
         {
             _viewType = viewType;
-            this._bindingContext = context;
+            _bindingContext = context;
         }
 
         public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
             : base(handle, ownership)
         {
+        }
+
+        public ICommand Click
+        {
+            get => _click;
+            set
+            {
+                _click = value;
+                if (_click != null)
+                    EnsureClickOverloaded();
+            }
+        }
+
+        public ICommand LongClick
+        {
+            get => _longClick;
+            set
+            {
+                _longClick = value;
+                if (_longClick != null)
+                    EnsureLongClickOverloaded();
+            }
+        }
+
+        public ICommand HeaderClickCommand { get; set; }
+
+        public ICommand FooterClickCommand { get; set; }
+
+        public ICommand GroupHeaderClickCommand { get; set; }
+
+        public IMvxBindingContext BindingContext
+        {
+            get => _bindingContext;
+            set => throw new NotImplementedException("BindingContext is readonly in the list item");
+        }
+
+        public object DataContext
+        {
+            get => _bindingContext.DataContext;
+            set
+            {
+                _bindingContext.DataContext = value;
+
+                // This is just a precaution.  If we've set the DataContext to something
+                // then we don't need to have the old one still cached.
+                if (value != null)
+                    _cachedDataContext = null;
+            }
         }
 
         public virtual void OnAttachedToWindow()
@@ -179,6 +111,71 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             DataContext = null;
         }
 
+        private void EnsureClickOverloaded()
+        {
+            if (_clickOverloaded)
+                return;
+            _clickOverloaded = true;
+            ItemView.Click += OnItemViewOnClick;
+        }
+
+        private void EnsureLongClickOverloaded()
+        {
+            if (_longClickOverloaded)
+                return;
+            _longClickOverloaded = true;
+            ItemView.LongClick += OnItemViewOnLongClick;
+        }
+
+        protected virtual void ExecuteCommandOnItem(ICommand command)
+        {
+            if (command == null)
+                return;
+
+            var item = DataContext;
+            if (item == null)
+                return;
+
+            if (_viewType == MvxBaseTemplateSelector.HeaderViewTypeId)
+            {
+                if (item is MvxHeaderItemData)
+                    if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
+                        HeaderClickCommand.Execute(null);
+                return;
+            }
+
+            if (_viewType == MvxBaseTemplateSelector.FooterViewTypeId)
+            {
+                if (item is MvxFooterItemData)
+                    if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
+                        FooterClickCommand.Execute(null);
+                return;
+            }
+
+            if (item is MvxGroupedData)
+            {
+                var groupedData = item as MvxGroupedData;
+                if (GroupHeaderClickCommand != null && GroupHeaderClickCommand.CanExecute(groupedData.Key))
+                    GroupHeaderClickCommand.Execute(groupedData.Key);
+                return;
+            }
+
+            if (!command.CanExecute(item))
+                return;
+
+            command.Execute(item);
+        }
+
+        private void OnItemViewOnClick(object sender, EventArgs args)
+        {
+            ExecuteCommandOnItem(Click);
+        }
+
+        private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
+        {
+            ExecuteCommandOnItem(LongClick);
+        }
+
         protected override void Dispose(bool disposing)
         {
             // Clean up the binding context since nothing
@@ -191,8 +188,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 if (ItemView != null)
                 {
-                    ItemView.Click -= this.OnItemViewOnClick;
-                    ItemView.LongClick -= this.OnItemViewOnLongClick;
+                    ItemView.Click -= OnItemViewOnClick;
+                    ItemView.LongClick -= OnItemViewOnLongClick;
                 }
             }
 

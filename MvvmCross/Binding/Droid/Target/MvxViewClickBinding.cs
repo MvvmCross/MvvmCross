@@ -14,12 +14,10 @@ namespace MvvmCross.Binding.Droid.Target
 {
     public class MvxViewClickBinding : MvxAndroidTargetBinding
     {
-        private ICommand _command;
-        private IDisposable _clickSubscription;
-        private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
-
-        protected View View => (View)Target;
+        private IDisposable _canExecuteSubscription;
+        private IDisposable _clickSubscription;
+        private ICommand _command;
 
         public MvxViewClickBinding(View view)
             : base(view)
@@ -27,6 +25,12 @@ namespace MvvmCross.Binding.Droid.Target
             _canExecuteEventHandler = OnCanExecuteChanged;
             _clickSubscription = view.WeakSubscribe(nameof(view.Click), ViewOnClick);
         }
+
+        protected View View => (View) Target;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+        public override Type TargetType => typeof(ICommand);
 
         private void ViewOnClick(object sender, EventArgs args)
         {
@@ -46,9 +50,7 @@ namespace MvvmCross.Binding.Droid.Target
 
             _command = value as ICommand;
             if (_command != null)
-            {
                 _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
-            }
             RefreshEnabledState();
         }
 
@@ -60,9 +62,7 @@ namespace MvvmCross.Binding.Droid.Target
 
             var shouldBeEnabled = false;
             if (_command != null)
-            {
                 shouldBeEnabled = _command.CanExecute(null);
-            }
             view.Enabled = shouldBeEnabled;
         }
 
@@ -70,10 +70,6 @@ namespace MvvmCross.Binding.Droid.Target
         {
             RefreshEnabledState();
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

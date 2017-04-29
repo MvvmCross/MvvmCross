@@ -5,20 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using System;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUITextViewTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UITextView View => Target as UITextView;
-
         private bool _subscribed;
 
         public MvxUITextViewTextTargetBinding(UITextView target)
@@ -26,39 +22,41 @@ namespace MvvmCross.Binding.tvOS.Target
         {
         }
 
+        protected UITextView View => Target as UITextView;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(string);
+
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
             FireValueChanged(view.Text);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
-            var target = this.View;
+            var target = View;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
+                    "Error - UITextView is null in MvxUITextViewTextTargetBinding");
                 return;
             }
 
-            target.Changed += this.EditTextOnChanged;
-            this._subscribed = true;
+            target.Changed += EditTextOnChanged;
+            _subscribed = true;
         }
-
-        public override Type TargetType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UITextView)target;
+            var view = (UITextView) target;
             if (view == null)
                 return;
 
-            view.Text = (string)value;
+            view.Text = (string) value;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -66,11 +64,11 @@ namespace MvvmCross.Binding.tvOS.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = this.View;
-                if (editText != null && this._subscribed)
+                var editText = View;
+                if (editText != null && _subscribed)
                 {
-                    editText.Changed -= this.EditTextOnChanged;
-                    this._subscribed = false;
+                    editText.Changed -= EditTextOnChanged;
+                    _subscribed = false;
                 }
             }
         }

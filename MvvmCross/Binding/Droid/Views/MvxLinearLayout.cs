@@ -5,25 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-
     [Register("mvvmcross.binding.droid.views.MvxLinearLayout")]
     public class MvxLinearLayout
         : LinearLayout
-          , IMvxWithChangeAdapter
+            , IMvxWithChangeAdapter
     {
+        private IMvxAdapterWithChangedEvent _adapter;
+
         public MvxLinearLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))
         {
@@ -46,29 +46,27 @@ namespace MvvmCross.Binding.Droid.Views
         {
         }
 
-        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        [MvxSetToNullAfterBinding]
+        public IEnumerable ItemsSource
         {
-            this.UpdateDataSetFromChange(sender, eventArgs);
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
-        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
+        public int ItemTemplateId
         {
-            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
-            boundChild?.ClearAllBindings();
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
-
-        private IMvxAdapterWithChangedEvent _adapter;
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get => _adapter;
             protected set
             {
                 var existing = _adapter;
                 if (existing == value)
-                {
                     return;
-                }
 
                 if (existing != null)
                 {
@@ -83,31 +81,25 @@ namespace MvvmCross.Binding.Droid.Views
                 _adapter = value;
 
                 if (_adapter != null)
-                {
                     _adapter.DataSetChanged += AdapterOnDataSetChanged;
-                }
                 else
-                {
                     MvxBindingTrace.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
-                }
 
                 if (existing != null)
                     existing.ItemsSource = null;
             }
         }
 
-        [MvxSetToNullAfterBinding]
-        public IEnumerable ItemsSource
+        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        public int ItemTemplateId
+        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
+            boundChild?.ClearAllBindings();
         }
 
         protected override void Dispose(bool disposing)

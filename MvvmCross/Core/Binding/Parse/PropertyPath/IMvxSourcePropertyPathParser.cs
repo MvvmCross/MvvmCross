@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
 namespace MvvmCross.Binding.Parse.PropertyPath
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-
     public interface IMvxSourcePropertyPathParser
     {
         IList<MvxPropertyToken> Parse(string textToParse);

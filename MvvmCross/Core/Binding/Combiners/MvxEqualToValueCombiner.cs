@@ -1,6 +1,6 @@
 namespace MvvmCross.Binding.Combiners
 {
-    public class MvxEqualToValueCombiner 
+    public class MvxEqualToValueCombiner
         : MvxPairwiseValueCombiner
     {
         protected override bool CombineDecimalAndDecimal(decimal input1, decimal input2, out object value)
@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Combiners
 
         protected override bool CombineDecimalAndDouble(decimal input1, double input2, out object value)
         {
-            value = (double)input1 == input2;
+            value = (double) input1 == input2;
             return true;
         }
 
@@ -35,7 +35,7 @@ namespace MvvmCross.Binding.Combiners
 
         protected override bool CombineDoubleAndDecimal(double input1, decimal input2, out object value)
         {
-            value = input1 == (double)input2;
+            value = input1 == (double) input2;
             return true;
         }
 

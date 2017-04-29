@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using ObjCRuntime;
+using UIKit;
+
 namespace MvvmCross.tvOS.Platform
 {
-    using System;
-
-    using ObjCRuntime;
-
-    using UIKit;
-
-    [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
+    [Obsolete(
+        "In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
     public class MvxTvosPlatformProperties : IMvxTvosPlatformProperties
     {
         #region Implementation of IMvxTvosPlatformProperties
@@ -45,11 +44,9 @@ namespace MvvmCross.tvOS.Platform
             {
                 if (UIScreen.MainScreen.RespondsToSelector(new Selector("scale")))
                 {
-                    var scale = (int)Math.Round(UIScreen.MainScreen.Scale);
+                    var scale = (int) Math.Round(UIScreen.MainScreen.Scale);
                     if (scale == 2)
-                    {
                         return MvxTvosDisplayDensity.Retina;
-                    }
                 }
 
                 return MvxTvosDisplayDensity.Normal;

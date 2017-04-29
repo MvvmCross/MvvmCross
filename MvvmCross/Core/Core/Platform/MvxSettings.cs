@@ -9,11 +9,11 @@ namespace MvvmCross.Core.Platform
 {
     public class MvxSettings : IMvxSettings
     {
-        public bool AlwaysRaiseInpcOnUserInterfaceThread { get; set; }
-
         public MvxSettings()
         {
-            this.AlwaysRaiseInpcOnUserInterfaceThread = true;
+            AlwaysRaiseInpcOnUserInterfaceThread = true;
         }
+
+        public bool AlwaysRaiseInpcOnUserInterfaceThread { get; set; }
     }
 }

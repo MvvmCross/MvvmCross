@@ -1,12 +1,18 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Support.XamarinSidebar.Views;
-
-    public class BaseMenuViewController<TViewModel> : BaseViewController<TViewModel>, IMvxSidebarMenu where TViewModel : class, IMvxViewModel
+    public class BaseMenuViewController<TViewModel> : BaseViewController<TViewModel>, IMvxSidebarMenu
+        where TViewModel : class, IMvxViewModel
     {
+        private readonly int MaxMenuWidth = 300;
+        private readonly int MinSpaceRightOfTheMenu = 55;
+
+        private bool UserInterfaceIdiomIsPhone => UIDevice.CurrentDevice.UserInterfaceIdiom ==
+                                                  UIUserInterfaceIdiom.Phone;
+
         public virtual UIImage MenuButtonImage => UIImage.FromBundle("threelines");
 
         public virtual bool AnimateMenu => true;
@@ -16,16 +22,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
         public virtual bool DisablePanGesture => false;
         public virtual bool ReopenOnRotate => true;
 
-        private int MaxMenuWidth = 300;
-        private int MinSpaceRightOfTheMenu = 55;
-
-        public int MenuWidth => UserInterfaceIdiomIsPhone ?
-        int.Parse(UIScreen.MainScreen.Bounds.Width.ToString()) - MinSpaceRightOfTheMenu : MaxMenuWidth;
-
-        private bool UserInterfaceIdiomIsPhone
-        {
-            get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
-        }
-
+        public int MenuWidth => UserInterfaceIdiomIsPhone
+            ? int.Parse(UIScreen.MainScreen.Bounds.Width.ToString()) - MinSpaceRightOfTheMenu
+            : MaxMenuWidth;
     }
 }

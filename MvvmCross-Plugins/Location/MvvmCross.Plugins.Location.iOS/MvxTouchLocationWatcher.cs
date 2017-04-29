@@ -1,79 +1,33 @@
 ﻿using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.iOS;
-using MvvmCross.Platform.iOS.Platform;
 using CoreLocation;
 using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.iOS;
+using MvvmCross.Platform.iOS.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.iOS
 {
     [Preserve(AllMembers = true)]
-	public sealed class MvxIosLocationWatcher
+    public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {
-        private CLLocationManager _locationManager;
-
         private MvxIosMajorVersionChecker _ios8VersionChecker;
-
-        internal bool IsIOS8orHigher
-        {
-            get
-            {
-                if (_ios8VersionChecker == null)
-                {
-                    _ios8VersionChecker = new MvxIosMajorVersionChecker(8);
-                }
-                return _ios8VersionChecker.IsVersionOrHigher;
-            }
-        }
+        private CLLocationManager _locationManager;
 
         public MvxIosLocationWatcher()
         {
             EnsureStopped();
         }
 
-        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        internal bool IsIOS8orHigher
         {
-            lock (this)
+            get
             {
-                if (_locationManager != null)
-                    throw new MvxException("You cannot start the MvxLocation service more than once");
-
-                _locationManager = new CLLocationManager();
-                _locationManager.Delegate = new LocationDelegate(this);
-
-                _locationManager.DistanceFilter = options.MovementThresholdInM > 0 ? options.MovementThresholdInM : CLLocationDistance.FilterNone;
-                _locationManager.DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
-                if (options.TimeBetweenUpdates > TimeSpan.Zero)
-                {
-                    Mvx.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
-                }
-
-                if (options.TrackingMode == MvxLocationTrackingMode.Background)
-                {
-                    if (IsIOS8orHigher)
-                    {
-                        _locationManager.RequestAlwaysAuthorization();
-                    }
-                    else
-                    {
-                        Mvx.Warning("MvxLocationTrackingMode.Background is not supported for iOS before 8");
-                    }
-                }
-                else
-                {
-                    if (IsIOS8orHigher)
-                    {
-                        _locationManager.RequestWhenInUseAuthorization();
-                    }
-                }
-
-                if (CLLocationManager.HeadingAvailable)
-                    _locationManager.StartUpdatingHeading();
-
-                _locationManager.StartUpdatingLocation();
+                if (_ios8VersionChecker == null)
+                    _ios8VersionChecker = new MvxIosMajorVersionChecker(8);
+                return _ios8VersionChecker.IsVersionOrHigher;
             }
         }
 
@@ -93,6 +47,46 @@ namespace MvvmCross.Plugins.Location.iOS
                     heading = _locationManager.Heading;
 
                 return CreateLocation(iosLocation, heading);
+            }
+        }
+
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        {
+            lock (this)
+            {
+                if (_locationManager != null)
+                    throw new MvxException("You cannot start the MvxLocation service more than once");
+
+                _locationManager = new CLLocationManager();
+                _locationManager.Delegate = new LocationDelegate(this);
+
+                _locationManager.DistanceFilter = options.MovementThresholdInM > 0
+                    ? options.MovementThresholdInM
+                    : CLLocationDistance.FilterNone;
+                _locationManager.DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine
+                    ? CLLocation.AccuracyBest
+                    : CLLocation.AccuracyKilometer;
+                if (options.TimeBetweenUpdates > TimeSpan.Zero)
+                    Mvx.Warning(
+                        "TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
+
+                if (options.TrackingMode == MvxLocationTrackingMode.Background)
+                {
+                    if (IsIOS8orHigher)
+                        _locationManager.RequestAlwaysAuthorization();
+                    else
+                        Mvx.Warning("MvxLocationTrackingMode.Background is not supported for iOS before 8");
+                }
+                else
+                {
+                    if (IsIOS8orHigher)
+                        _locationManager.RequestWhenInUseAuthorization();
+                }
+
+                if (CLLocationManager.HeadingAvailable)
+                    _locationManager.StartUpdatingHeading();
+
+                _locationManager.StartUpdatingLocation();
             }
         }
 
@@ -128,7 +122,7 @@ namespace MvvmCross.Plugins.Location.iOS
 
         private static MvxGeoLocation CreateLocation(CLLocation location, CLHeading heading)
         {
-            var position = new MvxGeoLocation { Timestamp = location.Timestamp.ToDateTimeUtc() };
+            var position = new MvxGeoLocation {Timestamp = location.Timestamp.ToDateTimeUtc()};
             var coords = position.Coordinates;
 
             coords.Altitude = location.Altitude;
@@ -152,12 +146,12 @@ namespace MvvmCross.Plugins.Location.iOS
         {
             private readonly MvxIosLocationWatcher _owner;
 
+            private CLHeading _lastSeenHeading;
+
             public LocationDelegate(MvxIosLocationWatcher owner)
             {
                 _owner = owner;
             }
-
-            private CLHeading _lastSeenHeading;
 
             public override void UpdatedHeading(CLLocationManager manager, CLHeading newHeading)
             {
@@ -182,12 +176,12 @@ namespace MvvmCross.Plugins.Location.iOS
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error));
             }
 
             public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error, region));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error, region));
             }
 
             public override void AuthorizationChanged(CLLocationManager manager, CLAuthorizationStatus status)
@@ -213,21 +207,16 @@ namespace MvvmCross.Plugins.Location.iOS
                 }
             }
 
-            private MvxLocationErrorCode ToMvxLocationErrorCode (CLLocationManager manager, NSError error, CLRegion region = null)
+            private MvxLocationErrorCode ToMvxLocationErrorCode(CLLocationManager manager, NSError error,
+                CLRegion region = null)
             {
-                var errorType = (CLError)(int)error.Code;
+                var errorType = (CLError) (int) error.Code;
 
-                if (errorType == CLError.Denied) {
-                    return MvxLocationErrorCode.PermissionDenied;
-                }
+                if (errorType == CLError.Denied) return MvxLocationErrorCode.PermissionDenied;
 
-                if (errorType == CLError.Network) {
-                    return MvxLocationErrorCode.Network;
-                }
+                if (errorType == CLError.Network) return MvxLocationErrorCode.Network;
 
-                if (errorType == CLError.DeferredCanceled) {
-                    return MvxLocationErrorCode.Canceled;
-                }
+                if (errorType == CLError.DeferredCanceled) return MvxLocationErrorCode.Canceled;
 
                 return MvxLocationErrorCode.ServiceUnavailable;
             }

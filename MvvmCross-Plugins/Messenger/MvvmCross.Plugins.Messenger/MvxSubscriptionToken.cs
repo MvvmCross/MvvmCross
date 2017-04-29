@@ -10,10 +10,10 @@ using System;
 namespace MvvmCross.Plugins.Messenger
 {
     [Preserve(AllMembers = true)]
-	public sealed class MvxSubscriptionToken
+    public sealed class MvxSubscriptionToken
         : IDisposable
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 #pragma warning disable 414 // 414 is that this private field is only set, not used
         private readonly object[] _dependentObjects;
 #pragma warning restore 414
@@ -35,9 +35,7 @@ namespace MvvmCross.Plugins.Messenger
         private void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 _disposeMe();
-            }
         }
     }
 }

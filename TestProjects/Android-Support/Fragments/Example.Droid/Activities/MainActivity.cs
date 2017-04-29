@@ -1,13 +1,4 @@
-﻿using Android.App;
-using Android.Content.PM;
-using Android.OS;
-using Android.Support.V4.View;
-using Android.Support.V4.Widget;
-using Android.Views;
-using Android.Views.InputMethods;
-using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+﻿using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace Example.Droid.Activities
 {
@@ -16,10 +7,10 @@ namespace Example.Droid.Activities
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
         Name = "example.droid.activities.MainActivity"
-        )]
-	public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, INavigationActivity
+    )]
+    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, INavigationActivity
     {
-		public DrawerLayout DrawerLayout { get; set; }
+        public DrawerLayout DrawerLayout { get; set; }
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -95,14 +86,14 @@ namespace Example.Droid.Activities
                 base.OnBackPressed();
         }
 
-		public void HideSoftKeyboard()
-		{
-			if (CurrentFocus == null) return;
+        public void HideSoftKeyboard()
+        {
+            if (CurrentFocus == null) return;
 
-			InputMethodManager inputMethodManager = (InputMethodManager)GetSystemService(InputMethodService);
-			inputMethodManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, 0);
+            InputMethodManager inputMethodManager = (InputMethodManager) GetSystemService(InputMethodService);
+            inputMethodManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, 0);
 
-			CurrentFocus.ClearFocus();
-		}
+            CurrentFocus.ClearFocus();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace MvvmCross.Forms.iOS.Presenters
 {
     public class MvxFormsIosMasterDetailPagePresenter
         : MvxFormsMasterDetailPagePresenter
-        , IMvxIosViewPresenter
+            , IMvxIosViewPresenter
     {
         private readonly UIWindow _window;
 

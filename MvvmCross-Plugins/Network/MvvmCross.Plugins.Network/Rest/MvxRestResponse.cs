@@ -10,7 +10,7 @@ using System.Net;
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxRestResponse
+    public class MvxRestResponse
     {
         public string Tag { get; set; }
         public CookieCollection CookieCollection { get; set; }

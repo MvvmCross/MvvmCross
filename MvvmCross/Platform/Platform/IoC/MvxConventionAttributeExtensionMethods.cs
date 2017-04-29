@@ -5,25 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Reflection;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
     public static class MvxConventionAttributeExtensionMethods
     {
         /// <summary>
-        /// A type is conventional if and only it is:
-        /// - not marked with an unconventional attribute
-        /// - all marked conditional conventions return true
+        ///     A type is conventional if and only it is:
+        ///     - not marked with an unconventional attribute
+        ///     - all marked conditional conventions return true
         /// </summary>
         /// <param name="candidateType"></param>
         /// <returns></returns>
         public static bool IsConventional(this Type candidateType)
         {
             var unconventionalAttributes = candidateType.GetCustomAttributes(typeof(MvxUnconventionalAttribute),
-                                                                             true);
+                true);
             if (unconventionalAttributes.Length > 0)
                 return false;
 
@@ -45,16 +45,16 @@ namespace MvvmCross.Platform.IoC
         }
 
         /// <summary>
-        /// A propertyInfo is conventional if and only it is:
-        /// - not marked with an unconventional attribute
-        /// - all marked conditional conventions return true
+        ///     A propertyInfo is conventional if and only it is:
+        ///     - not marked with an unconventional attribute
+        ///     - all marked conditional conventions return true
         /// </summary>
         /// <param name="propertyInfo"></param>
         /// <returns></returns>
         public static bool IsConventional(this PropertyInfo propertyInfo)
         {
             var unconventionalAttributes = propertyInfo.GetCustomAttributes(typeof(MvxUnconventionalAttribute),
-                                                                             true);
+                true);
             if (unconventionalAttributes.Any())
                 return false;
 

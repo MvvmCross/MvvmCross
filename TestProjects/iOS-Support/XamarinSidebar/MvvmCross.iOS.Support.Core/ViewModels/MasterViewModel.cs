@@ -1,7 +1,7 @@
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 {
-    using MvvmCross.Core.ViewModels;
-
     public class MasterViewModel : BaseViewModel
     {
         public MasterViewModel()
@@ -9,13 +9,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
             ExampleValue = "Master View";
         }
 
-        public IMvxCommand ShowDetailCommand
-        {
-            get
-            {
-                return new MvxCommand(ShowDetailCommandExecuted);
-            }
-        }
+        public IMvxCommand ShowDetailCommand => new MvxCommand(ShowDetailCommandExecuted);
 
         private void ShowDetailCommandExecuted()
         {

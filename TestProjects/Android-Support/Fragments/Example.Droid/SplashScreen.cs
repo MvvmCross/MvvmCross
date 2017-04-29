@@ -1,7 +1,3 @@
-using Android.App;
-using Android.Content.PM;
-using MvvmCross.Droid.Views;
-
 namespace Example.Droid
 {
     [Activity(

@@ -5,22 +5,35 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxAutoValueConverters
         : IMvxAutoValueConverters
     {
+        private readonly Dictionary<Key, IMvxValueConverter> _lookup = new Dictionary<Key, IMvxValueConverter>();
+
+        public IMvxValueConverter Find(Type viewModelType, Type viewType)
+        {
+            IMvxValueConverter result;
+            _lookup.TryGetValue(new Key(viewModelType, viewType), out result);
+            return result;
+        }
+
+        public void Register(Type viewModelType, Type viewType, IMvxValueConverter converter)
+        {
+            _lookup[new Key(viewModelType, viewType)] = converter;
+        }
+
         public class Key
         {
             public Key(Type viewModel, Type view)
             {
-                this.ViewType = view;
-                this.ViewModelType = viewModel;
+                ViewType = view;
+                ViewModelType = viewModel;
             }
 
             public Type ViewModelType { get; }
@@ -32,28 +45,14 @@ namespace MvvmCross.Binding.Binders
                 if (rhs == null)
                     return false;
 
-                return this.ViewModelType == rhs.ViewModelType
-                       && this.ViewType == rhs.ViewType;
+                return ViewModelType == rhs.ViewModelType
+                       && ViewType == rhs.ViewType;
             }
 
             public override int GetHashCode()
             {
-                return this.ViewModelType.GetHashCode() + this.ViewType.GetHashCode();
+                return ViewModelType.GetHashCode() + ViewType.GetHashCode();
             }
-        }
-
-        private readonly Dictionary<Key, IMvxValueConverter> _lookup = new Dictionary<Key, IMvxValueConverter>();
-
-        public IMvxValueConverter Find(Type viewModelType, Type viewType)
-        {
-            IMvxValueConverter result;
-            this._lookup.TryGetValue(new Key(viewModelType, viewType), out result);
-            return result;
-        }
-
-        public void Register(Type viewModelType, Type viewType, IMvxValueConverter converter)
-        {
-            this._lookup[new Key(viewModelType, viewType)] = converter;
         }
     }
 }

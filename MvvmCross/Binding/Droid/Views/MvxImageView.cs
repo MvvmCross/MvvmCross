@@ -5,34 +5,50 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Graphics;
-    using Android.OS;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-
     [Register("mvvmcross.binding.droid.views.MvxImageView")]
     public class MvxImageView
         : ImageView
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
 
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
+            : base(context, attrs, defStyleAttr)
+        {
+            Init(context, attrs);
+        }
+
+        public MvxImageView(Context context, IAttributeSet attrs)
+            : this(context, attrs, 0)
+        {
+        }
+
+        public MvxImageView(Context context)
+            : this(context, null)
+        {
+        }
+
+        protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public string ImageUrl
         {
-            get
-            {
-                return ImageHelper?.ImageUrl;
-            }
+            get => ImageHelper?.ImageUrl;
             set
             {
                 if (ImageHelper == null)
@@ -43,14 +59,28 @@ namespace MvvmCross.Binding.Droid.Views
 
         public string DefaultImagePath
         {
-            get { return ImageHelper.DefaultImagePath; }
-            set { ImageHelper.DefaultImagePath = value; }
+            get => ImageHelper.DefaultImagePath;
+            set => ImageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get { return ImageHelper.ErrorImagePath; }
-            set { ImageHelper.ErrorImagePath = value; }
+            get => ImageHelper.ErrorImagePath;
+            set => ImageHelper.ErrorImagePath = value;
+        }
+
+        protected IMvxImageHelper<Bitmap> ImageHelper
+        {
+            get
+            {
+                if (_imageHelper == null)
+                    if (!Mvx.TryResolve(out _imageHelper))
+                        MvxTrace.Error(
+                            "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+                    else
+                        _imageHelper.ImageChanged += ImageHelperOnImageChanged;
+                return _imageHelper;
+            }
         }
 
         public override void SetMaxHeight(int maxHeight)
@@ -69,54 +99,14 @@ namespace MvvmCross.Binding.Droid.Views
             base.SetMaxWidth(maxWidth);
         }
 
-        protected IMvxImageHelper<Bitmap> ImageHelper
-        {
-            get
-            {
-                if (_imageHelper == null)
-                {
-                    if (!Mvx.TryResolve(out _imageHelper))
-                    {
-                        MvxTrace.Error(
-                            "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
-                    }
-                    else
-                    {
-                        _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-                    }
-                }
-                return _imageHelper;
-            }
-        }
-
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
-            : base(context, attrs, defStyleAttr)
-        {
-            Init(context, attrs);
-        }
-
-        public MvxImageView(Context context, IAttributeSet attrs)
-            : this(context, attrs, 0)
-        { }
-
-        public MvxImageView(Context context)
-            : this(context, null)
-        { }
-
-        protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        { }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 if (_imageHelper != null)
                 {
                     _imageHelper.ImageChanged -= ImageHelperOnImageChanged;
                     _imageHelper?.Dispose();
                 }
-            }
 
             base.Dispose(disposing);
         }
@@ -124,38 +114,33 @@ namespace MvvmCross.Binding.Droid.Views
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
             using (var h = new Handler(Looper.MainLooper))
-                h.Post(() =>
-                {
-                    SetImageBitmap(mvxValueEventArgs.Value);
-                });
+            {
+                h.Post(() => { SetImageBitmap(mvxValueEventArgs.Value); });
+            }
         }
 
         private void Init(Context context, IAttributeSet attrs)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
+            var typedArray = context.ObtainStyledAttributes(attrs,
+                MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
-            int numStyles = typedArray.IndexCount;
+            var numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)
             {
-                int attributeId = typedArray.GetIndex(i);
+                var attributeId = typedArray.GetIndex(i);
                 if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
-                {
                     ImageUrl = typedArray.GetString(attributeId);
-                }
             }
             typedArray.Recycle();
         }
 
-        public override void SetImageBitmap (Bitmap bm)
+        public override void SetImageBitmap(Bitmap bm)
         {
             if (Handle != IntPtr.Zero)
             {
                 if (bm != null && (bm.Handle == IntPtr.Zero || bm.IsRecycled))
-                {
-                    // Don't try to update disposed or recycled bitmap
                     return;
-                }
-                base.SetImageBitmap (bm);
+                base.SetImageBitmap(bm);
             }
         }
     }
