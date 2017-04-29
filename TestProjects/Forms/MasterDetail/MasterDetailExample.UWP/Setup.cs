@@ -6,8 +6,8 @@ using XamlControls = Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
-using MvvmCross.WindowsUWP.Platform;
-using MvvmCross.WindowsUWP.Views;
+using MvvmCross.Uwp.Platform;
+using MvvmCross.Uwp.Views;
 
 namespace MasterDetailExample.UWP
 {
@@ -30,7 +30,7 @@ namespace MasterDetailExample.UWP
             Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApp();
-            var presenter = new MvxFormsWindowsUWPMasterDetailPagePresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpMasterDetailPagePresenter(rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

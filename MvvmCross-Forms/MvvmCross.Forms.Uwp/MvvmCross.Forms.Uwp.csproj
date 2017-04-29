@@ -42,8 +42,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\MvxFormsWindowsUWPMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsWindowsUWPPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsUwpMasterDetailPagePresenter.cs" />
+    <Compile Include="Presenters\MvxFormsUwpPagePresenter.cs" />
     <Compile Include="MvxPageRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />

@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views.Suspension
+namespace MvvmCross.Uwp.Views.Suspension
 {
     using System;
     using System.Collections.Generic;
