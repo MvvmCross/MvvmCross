@@ -5,21 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.OS;
-using MvvmCross.Platform.Core;
 using System;
+using Android.App;
+using Android.Content;
+using Android.OS;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
-using Android.Content;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     public class MvxBaseFragmentAdapter
     {
         private readonly IMvxEventSourceFragment _eventSource;
-
-        protected Fragment Fragment => _eventSource as Fragment;
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {
@@ -42,6 +40,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
             _eventSource.DetachCalled += HandleDetachCalled;
             _eventSource.SaveInstanceStateCalled += HandleSaveInstanceStateCalled;
         }
+
+        protected Fragment Fragment => _eventSource as Fragment;
 
         protected virtual void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> e)
         {
@@ -84,7 +84,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         }
 
         protected virtual void HandleCreateViewCalled(object sender,
-                                                      MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+            MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
         {
         }
     }

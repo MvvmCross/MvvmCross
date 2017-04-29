@@ -12,76 +12,30 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
 using Android.Util;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {
     /// <remarks>
-    /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
+    ///     This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing
+    ///     improvements!
     /// </remarks>
     [Register("mvvmcross.droid.support.v17.leanback.widgets.MvxHorizontalGridView")]
-    public class MvxHorizontalGridView : Android.Support.V17.Leanback.Widget.HorizontalGridView
+    public class MvxHorizontalGridView : HorizontalGridView
     {
-        #region ctor
-
-        protected MvxHorizontalGridView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-        }
-
-        public MvxHorizontalGridView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
-        {
-        }
-
-        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter())
-        {
-        }
-
-		public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
-		{
-			// Note: Any calling derived class passing a null adapter is responsible for setting
-			// it's own itemTemplateId
-			if (adapter == null)
-				return;
-
-			var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-
-			adapter.ItemTemplateId = itemTemplateId;
-            Adapter = adapter;
-
-			var typedArray = context.ObtainStyledAttributes(attrs, Resource.Styleable.MvxHorizontalGridView);
-			try
-			{
-				FocusFirstChildOnLaidOut = typedArray.GetBoolean(Resource.Styleable.MvxHorizontalGridView_FocusFirstChildOnLaidOut, false);
-				if (FocusFirstChildOnLaidOut)
-				{
-					SetOnChildLaidOutListener(new MvxFocusFirstChildOnChildLaidOutListener());
-				}
-			}
-			finally
-			{
-				typedArray.Recycle();
-			}
-
-			// We need this listener to get information about the currently _selected_ item
-			// Overriding setter of base.SelectedPosition is not enough!
-			OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
-			SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
-		}
-
-        #endregion ctor
-		/// <summary>
-		/// If true, the child at position 0 will request focus.
-		/// </summary>
-		public bool FocusFirstChildOnLaidOut { get; private set; }
+        /// <summary>
+        ///     If true, the child at position 0 will request focus.
+        /// </summary>
+        public bool FocusFirstChildOnLaidOut { get; }
 
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get => GetAdapter() as IMvxRecyclerAdapter;
             set
             {
                 var existing = Adapter;
@@ -99,75 +53,123 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
                     value.ItemClick = existing.ItemClick;
                     value.ItemLongClick = existing.ItemLongClick;
 
-                    SwapAdapter((Adapter)value, false);
+                    SwapAdapter((Adapter) value, false);
                 }
                 else
                 {
-                    SetAdapter((Adapter)value);
+                    SetAdapter((Adapter) value);
                 }
             }
         }
 
-		protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
+        protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
 
-		public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
-		{
-			MvxTrace.Warning("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
-			base.SetOnChildViewHolderSelectedListener(listener);
-		}
-
-		public new void SetOnChildLaidOutListener(IOnChildLaidOutListener listener)
-		{
-			if (FocusFirstChildOnLaidOut && !(listener is MvxFocusFirstChildOnChildLaidOutListener))
-			{
-				MvxTrace.Warning("Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
-			}
-			base.SetOnChildLaidOutListener(listener);
-		}
-
-		[MvxSetToNullAfterBinding]
+        [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get => Adapter.ItemClick;
+            set => Adapter.ItemClick = value;
         }
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get => Adapter.ItemLongClick;
+            set => Adapter.ItemLongClick = value;
         }
 
-		public ICommand ItemSelection
-		{
-			get { return OnChildViewHolderSelectedListener?.ItemSelection; }
-			set { OnChildViewHolderSelectedListener.ItemSelection = value; }
-		}
+        public ICommand ItemSelection
+        {
+            get => OnChildViewHolderSelectedListener?.ItemSelection;
+            set => OnChildViewHolderSelectedListener.ItemSelection = value;
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				if (OnChildViewHolderSelectedListener != null)
-				{
-					OnChildViewHolderSelectedListener.Dispose();
-					OnChildViewHolderSelectedListener = null;
-				}
-			}
+        public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
+        {
+            MvxTrace.Warning(
+                "Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
+            base.SetOnChildViewHolderSelectedListener(listener);
+        }
 
-			base.Dispose(disposing);
-		}
+        public new void SetOnChildLaidOutListener(IOnChildLaidOutListener listener)
+        {
+            if (FocusFirstChildOnLaidOut && !(listener is MvxFocusFirstChildOnChildLaidOutListener))
+                MvxTrace.Warning("Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
+            base.SetOnChildLaidOutListener(listener);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                if (OnChildViewHolderSelectedListener != null)
+                {
+                    OnChildViewHolderSelectedListener.Dispose();
+                    OnChildViewHolderSelectedListener = null;
+                }
+
+            base.Dispose(disposing);
+        }
+
+        #region ctor
+
+        protected MvxHorizontalGridView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference,
+            transfer)
+        {
+        }
+
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs) : this(context, attrs, 0,
+            new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs,
+            defStyle, new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle,
+            IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
+        {
+            // Note: Any calling derived class passing a null adapter is responsible for setting
+            // it's own itemTemplateId
+            if (adapter == null)
+                return;
+
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
+
+            adapter.ItemTemplateId = itemTemplateId;
+            Adapter = adapter;
+
+            var typedArray = context.ObtainStyledAttributes(attrs, Resource.Styleable.MvxHorizontalGridView);
+            try
+            {
+                FocusFirstChildOnLaidOut =
+                    typedArray.GetBoolean(Resource.Styleable.MvxHorizontalGridView_FocusFirstChildOnLaidOut, false);
+                if (FocusFirstChildOnLaidOut)
+                    SetOnChildLaidOutListener(new MvxFocusFirstChildOnChildLaidOutListener());
+            }
+            finally
+            {
+                typedArray.Recycle();
+            }
+
+            // We need this listener to get information about the currently _selected_ item
+            // Overriding setter of base.SelectedPosition is not enough!
+            OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
+            SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
+        }
+
+        #endregion ctor
     }
 }

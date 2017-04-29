@@ -5,19 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.tvOS.Views;
-
     public class MvxViewController
         : MvxEventSourceViewController
-          , IMvxTvosView
+            , IMvxTvosView
     {
         public MvxViewController()
         {
@@ -38,14 +36,14 @@ namespace MvvmCross.tvOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -55,7 +53,7 @@ namespace MvvmCross.tvOS.Views
 
     public class MvxViewController<TViewModel>
         : MvxViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {
@@ -73,8 +71,8 @@ namespace MvvmCross.tvOS.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

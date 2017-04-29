@@ -15,27 +15,26 @@ namespace MvvmCross.Binding.iOS.Target
     public class MvxUIControlValueChangedTargetBinding
         : MvxConvertingTargetBinding
     {
-        private ICommand _command;
-        private EventHandler<EventArgs> _canExecuteEventHandler;
+        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
         private MvxCanExecuteChangedEventSubscription _canExecuteSubscription;
-
-        protected UIControl Control => Target as UIControl;
+        private ICommand _command;
 
         public MvxUIControlValueChangedTargetBinding(UIControl control)
             : base(control)
         {
             if (control == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
                     "Error - UIControl is null in MvxUIControlValueChangedTargetBinding");
-            }
             else
-            {
                 control.ValueChanged += OnValueChanged;
-            }
 
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
+
+        protected UIControl Control => Target as UIControl;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+        public override Type TargetType => typeof(ICommand);
 
         private void OnValueChanged(object sender, EventArgs e)
         {
@@ -44,9 +43,6 @@ namespace MvvmCross.Binding.iOS.Target
 
             _command?.Execute(null);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-        public override Type TargetType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {
@@ -57,9 +53,7 @@ namespace MvvmCross.Binding.iOS.Target
             }
             _command = value as ICommand;
             if (_command != null)
-            {
                 _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
-            }
             RefreshEnabledState();
         }
 
@@ -83,9 +77,7 @@ namespace MvvmCross.Binding.iOS.Target
             {
                 var view = Control;
                 if (view != null)
-                {
                     view.ValueChanged -= OnValueChanged;
-                }
                 if (_canExecuteSubscription != null)
                 {
                     _canExecuteSubscription.Dispose();

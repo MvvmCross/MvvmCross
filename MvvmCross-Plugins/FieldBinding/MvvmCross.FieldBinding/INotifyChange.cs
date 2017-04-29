@@ -12,10 +12,9 @@ namespace MvvmCross.FieldBinding
 {
     public interface INotifyChange
     {
-        event EventHandler Changed;
-
         object Value { get; set; }
         Type ValueType { get; }
+        event EventHandler Changed;
     }
 
     public interface INotifyChange<T> : INotifyChange

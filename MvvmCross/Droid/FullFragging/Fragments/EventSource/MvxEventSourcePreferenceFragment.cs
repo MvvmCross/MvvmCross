@@ -1,20 +1,29 @@
 using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
-using Android.Preferences;
-using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
-using Android.App;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
     [Register("mvvmcross.droid.fullfragging.fragments.eventsource.MvxEventSourcePreferenceFragment")]
     public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
-    , IMvxEventSourceFragment
+        , IMvxEventSourceFragment
     {
+        public MvxEventSourcePreferenceFragment()
+        {
+        }
+
+        public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
@@ -30,36 +39,21 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourcePreferenceFragment()
+        public override void OnAttach(Context context)
         {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+                AttachCalled.Raise(this, context);
 
+            base.OnAttach(context);
         }
 
-        public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
+        public override void OnAttach(Activity activity)
         {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+                AttachCalled.Raise(this, activity);
 
+            base.OnAttach(activity);
         }
-
-		public override void OnAttach(Context context)
-		{
-			if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
-			{
-				AttachCalled.Raise(this, context);
-			}
-
-			base.OnAttach(context);
-		}
-
-		public override void OnAttach(Activity activity)
-		{
-			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
-			{
-				AttachCalled.Raise(this, activity);
-			}
-
-			base.OnAttach(activity);
-		}
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -119,9 +113,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 DisposeCalled.Raise(this);
-            }
             base.Dispose(disposing);
         }
 

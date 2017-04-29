@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxAppResourceTypeFinder : IMvxAppResourceTypeFinder
     {
         public Type Find()

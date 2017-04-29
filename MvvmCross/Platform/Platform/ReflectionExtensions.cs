@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 namespace MvvmCross.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
     public static class ReflectionExtensions
     {
         public static IEnumerable<Type> GetTypes(this Assembly assembly)
@@ -37,7 +37,7 @@ namespace MvvmCross.Platform
         {
             var ctors = type.GetTypeInfo().DeclaredConstructors;
 
-            foreach(var ctor in ctors)
+            foreach (var ctor in ctors)
                 if (ctor.IsPublic)
                     yield return ctor;
         }
@@ -54,40 +54,32 @@ namespace MvvmCross.Platform
 
         public static MethodInfo GetAddMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
-            if (eventInfo.AddMethod == null || (!nonPublic && !eventInfo.AddMethod.IsPublic))
-            {
+            if (eventInfo.AddMethod == null || !nonPublic && !eventInfo.AddMethod.IsPublic)
                 return null;
-            }
 
             return eventInfo.AddMethod;
         }
 
         public static MethodInfo GetRemoveMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
-            if (eventInfo.RemoveMethod == null || (!nonPublic && !eventInfo.RemoveMethod.IsPublic))
-            {
+            if (eventInfo.RemoveMethod == null || !nonPublic && !eventInfo.RemoveMethod.IsPublic)
                 return null;
-            }
 
             return eventInfo.RemoveMethod;
         }
 
         public static MethodInfo GetGetMethod(this PropertyInfo property, bool nonPublic = false)
         {
-            if (property.GetMethod == null || (!nonPublic && !property.GetMethod.IsPublic))
-            {
+            if (property.GetMethod == null || !nonPublic && !property.GetMethod.IsPublic)
                 return null;
-            }
 
             return property.GetMethod;
         }
 
         public static MethodInfo GetSetMethod(this PropertyInfo property, bool nonPublic = false)
         {
-            if (property.SetMethod == null || (!nonPublic && !property.SetMethod.IsPublic))
-            {
+            if (property.SetMethod == null || !nonPublic && !property.SetMethod.IsPublic)
                 return null;
-            }
 
             return property.SetMethod;
         }
@@ -115,13 +107,9 @@ namespace MvvmCross.Platform
         {
             IEnumerable<PropertyInfo> properties;
             if ((flags & BindingFlags.FlattenHierarchy) == 0)
-            {
                 properties = type.GetTypeInfo().DeclaredProperties;
-            }
             else
-            {
                 properties = type.GetRuntimeProperties();
-            }
 
             foreach (var property in properties)
             {
@@ -129,19 +117,17 @@ namespace MvvmCross.Platform
                 var setMethod = property.SetMethod;
                 if (getMethod == null && setMethod == null) continue;
 
-                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || 
-                    getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic();
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public ||
+                                 getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic();
 
                 var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance ||
-                    !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic();
+                                   !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic();
 
-                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || 
-                    getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic();
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static ||
+                                 getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic();
 
                 if (publicTest && instanceTest && staticTest)
-                {
                     yield return property;
-                }
             }
         }
 
@@ -149,7 +135,7 @@ namespace MvvmCross.Platform
         {
             var properties = GetProperties(type, flags);
 
-            foreach(var property in properties)
+            foreach (var property in properties)
                 if (property.Name == name)
                     return property;
 
@@ -160,7 +146,7 @@ namespace MvvmCross.Platform
         {
             var properties = GetProperties(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
-            foreach(var property in properties)
+            foreach (var property in properties)
                 if (property.Name == name)
                     return property;
 
@@ -176,9 +162,7 @@ namespace MvvmCross.Platform
         {
             var methods = type.GetTypeInfo().DeclaredMethods;
             if ((flags & BindingFlags.FlattenHierarchy) == BindingFlags.FlattenHierarchy)
-            {
                 methods = type.GetRuntimeMethods();
-            }
 
             foreach (var method in methods)
             {
@@ -195,11 +179,9 @@ namespace MvvmCross.Platform
         {
             var methods = GetMethods(type, flags);
 
-            foreach(var method in methods)
-            {
+            foreach (var method in methods)
                 if (method.Name == name)
                     return method;
-            }
 
             return default(MethodInfo);
         }
@@ -208,10 +190,8 @@ namespace MvvmCross.Platform
         {
             var methods = GetMethods(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
             foreach (var method in methods)
-            {
                 if (method.Name == name)
                     return method;
-            }
 
             return default(MethodInfo);
         }
@@ -240,9 +220,7 @@ namespace MvvmCross.Platform
         {
             var fields = type.GetTypeInfo().DeclaredFields;
             if ((flags & BindingFlags.FlattenHierarchy) == BindingFlags.FlattenHierarchy)
-            {
                 fields = type.GetRuntimeFields();
-            }
 
             foreach (var field in fields)
             {
@@ -259,10 +237,8 @@ namespace MvvmCross.Platform
         {
             var fields = GetFields(type, flags);
             foreach (var field in fields)
-            {
                 if (field.Name == name)
                     return field;
-            }
 
             return default(FieldInfo);
         }
@@ -271,10 +247,8 @@ namespace MvvmCross.Platform
         {
             var fields = GetFields(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
             foreach (var field in fields)
-            {
                 if (field.Name == name)
                     return field;
-            }
 
             return default(FieldInfo);
         }

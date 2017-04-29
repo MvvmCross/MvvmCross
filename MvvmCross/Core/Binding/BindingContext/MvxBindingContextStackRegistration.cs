@@ -5,41 +5,39 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
     {
-        protected IMvxBindingContextStack<TBindingContext> Stack => Mvx.Resolve<IMvxBindingContextStack<TBindingContext>>();
-
         public MvxBindingContextStackRegistration(TBindingContext toRegister)
         {
-            this.Stack.Push(toRegister);
+            Stack.Push(toRegister);
+        }
+
+        protected IMvxBindingContextStack<TBindingContext> Stack => Mvx
+            .Resolve<IMvxBindingContextStack<TBindingContext>>();
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         ~MvxBindingContextStackRegistration()
         {
             MvxTrace.Error("You should always Dispose of MvxBindingContextStackRegistration");
-            this.Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose(false);
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this.Stack.Pop();
-            }
+                Stack.Pop();
         }
     }
 }

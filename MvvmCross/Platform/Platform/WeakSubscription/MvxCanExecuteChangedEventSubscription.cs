@@ -5,26 +5,26 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {
         private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
 
         public MvxCanExecuteChangedEventSubscription(ICommand source,
-                                                    EventHandler<EventArgs> eventHandler)
+            EventHandler<EventArgs> eventHandler)
             : base(source, CanExecuteChangedEventInfo, eventHandler)
         {
         }
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
     }
 }

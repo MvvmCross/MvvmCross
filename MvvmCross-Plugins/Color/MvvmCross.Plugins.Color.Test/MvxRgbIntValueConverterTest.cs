@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using NUnit.Framework;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MvvmCross.Plugins.Color.Test
 {
@@ -21,7 +21,7 @@ namespace MvvmCross.Plugins.Color.Test
                 var actual = converter.Convert(tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
                 var wrapped = actual as WrappedColor;
                 Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
+                Assert.AreEqual(results[i], (uint) wrapped.Color.ARGB);
             }
         }
 
@@ -30,24 +30,24 @@ namespace MvvmCross.Plugins.Color.Test
         {
             ClearAll();
 
-            var tests = new int[]
-                {
-                    0xffffff,
-                    0x000000,
-                    0x123456,
-                    0xA23BCD,
-                    0x02A040,
-                    (int)0x7B02A040
-                };
-            var results = new uint[]
-                {
-                    0xFFffffff,
-                    0xFF000000,
-                    0xFF123456,
-                    0xFFA23BCD,
-                    0xFF02A040,
-                    0xFF02A040
-                };
+            var tests = new[]
+            {
+                0xffffff,
+                0x000000,
+                0x123456,
+                0xA23BCD,
+                0x02A040,
+                0x7B02A040
+            };
+            var results = new[]
+            {
+                0xFFffffff,
+                0xFF000000,
+                0xFF123456,
+                0xFFA23BCD,
+                0xFF02A040,
+                0xFF02A040
+            };
 
             RunTests(tests, results);
         }

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Bindings.SourceSteps;
-
     public abstract class MvxValueCombiner
         : IMvxValueCombiner
     {
@@ -33,7 +32,7 @@ namespace MvvmCross.Binding.Combiners
         }
 
         public virtual IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps,
-                                                            Type overallTargetType)
+            Type overallTargetType)
         {
             // by default a combiner just demand objects from its sources
             return subSteps.Select(x => typeof(object));

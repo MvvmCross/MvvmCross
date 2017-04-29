@@ -24,17 +24,28 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
+        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle,
+            new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle,
+            IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
         {
             // Note: Any calling derived class passing a null adapter is responsible for setting
             // it's own ItemTemplateSelector
             if (adapter == null)
                 return;
 
-            var currentLayoutManager = base.GetLayoutManager();
+            var currentLayoutManager = GetLayoutManager();
 
             // Love you Android
             // https://code.google.com/p/android/issues/detail?id=77846#c10
@@ -45,7 +56,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (currentLayoutManager is LinearLayoutManager)
             {
                 var currentLinearLayoutManager = currentLayoutManager as LinearLayoutManager;
-                SetLayoutManager(new MvxGuardedLinearLayoutManager(context) { Orientation = currentLinearLayoutManager.Orientation });
+                SetLayoutManager(
+                    new MvxGuardedLinearLayoutManager(context) {Orientation = currentLinearLayoutManager.Orientation});
             }
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
@@ -64,25 +76,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 GroupedDataConverter = MvxRecyclerViewAttributeExtensions.BuildMvxGroupedDataConverter(context, attrs);
         }
 
-        public sealed override void SetLayoutManager(LayoutManager layout)
-        {
-            base.SetLayoutManager(layout);
-        }
-
-        protected override void OnDetachedFromWindow()
-        {
-            base.OnDetachedFromWindow();
-
-            // Remove all the views that are currently in play.
-            // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
-            // Eventually the GC will come along and clear out the binding contexts.
-            // Issue #1405
-            GetLayoutManager()?.RemoveAllViews();
-        }
-
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get => GetAdapter() as IMvxRecyclerAdapter;
             set
             {
                 var existing = Adapter;
@@ -120,28 +116,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                         newHeaderFooterAdapter.HidesHeaderIfEmpty = existingHeaderFooterAdapter.HidesHeaderIfEmpty;
                     }
 
-                    SwapAdapter((Adapter)value, false);
+                    SwapAdapter((Adapter) value, false);
                 }
                 else
                 {
-                    SetAdapter((Adapter)value);
+                    SetAdapter((Adapter) value);
                 }
 
                 if (existing != null)
-                {
                     existing.ItemsSource = null;
-                }
             }
         }
 
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set
-            {
-                Adapter.ItemsSource = value;
-            }
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
@@ -173,25 +164,25 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public int HeaderLayoutId
         {
-            get { return ItemTemplateSelector.HeaderLayoutId; }
-            set { ItemTemplateSelector.HeaderLayoutId = value; }
+            get => ItemTemplateSelector.HeaderLayoutId;
+            set => ItemTemplateSelector.HeaderLayoutId = value;
         }
 
         public int FooterLayoutId
         {
-            get { return ItemTemplateSelector.FooterLayoutId; }
-            set { ItemTemplateSelector.FooterLayoutId = value; }
+            get => ItemTemplateSelector.FooterLayoutId;
+            set => ItemTemplateSelector.FooterLayoutId = value;
         }
 
         public int GroupSectionLayoutId
         {
-            get { return ItemTemplateSelector.GroupSectionLayoutId; }
-            set { ItemTemplateSelector.GroupSectionLayoutId = value; }
+            get => ItemTemplateSelector.GroupSectionLayoutId;
+            set => ItemTemplateSelector.GroupSectionLayoutId = value;
         }
 
         public bool HidesHeaderIfEmpty
         {
-            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesHeaderIfEmpty ?? false; }
+            get => GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesHeaderIfEmpty ?? false;
             set
             {
                 var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
@@ -203,7 +194,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public bool HidesFooterIfEmpty
         {
-            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesFooterIfEmpty ?? false; }
+            get => GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HidesFooterIfEmpty ?? false;
             set
             {
                 var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
@@ -215,7 +206,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public MvxBaseTemplateSelector ItemTemplateSelector
         {
-            get { return Adapter.ItemTemplateSelector; }
+            get => Adapter.ItemTemplateSelector;
             set
             {
                 var oldTemplateSelector = Adapter.ItemTemplateSelector;
@@ -232,13 +223,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get => Adapter.ItemClick;
+            set => Adapter.ItemClick = value;
         }
 
         public ICommand HeaderClickCommand
         {
-            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HeaderClickCommand; }
+            get => GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.HeaderClickCommand;
             set
             {
                 var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
@@ -250,7 +241,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand FooterClickCommand
         {
-            get { return GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.FooterClickCommand; }
+            get => GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>()?.FooterClickCommand;
             set
             {
                 var headerFooterAdapter = GetCastedAdapter<IMvxHeaderFooterRecyclerViewAdapter>();
@@ -262,7 +253,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand GroupHeaderClickCommand
         {
-            get { return GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupHeaderClickCommand; }
+            get => GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupHeaderClickCommand;
             set
             {
                 var groupableAdapter = GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>();
@@ -274,7 +265,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public IMvxGroupedDataConverter GroupedDataConverter
         {
-            get { return GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupedDataConverter; }
+            get => GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>()?.GroupedDataConverter;
             set
             {
                 var groupableAdapter = GetCastedAdapter<IMvxGroupableRecyclerViewAdapter>();
@@ -286,8 +277,24 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get => Adapter.ItemLongClick;
+            set => Adapter.ItemLongClick = value;
+        }
+
+        public sealed override void SetLayoutManager(LayoutManager layout)
+        {
+            base.SetLayoutManager(layout);
+        }
+
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+
+            // Remove all the views that are currently in play.
+            // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
+            // Eventually the GC will come along and clear out the binding contexts.
+            // Issue #1405
+            GetLayoutManager()?.RemoveAllViews();
         }
 
         private T GetCastedAdapter<T>() where T : class, IMvxRecyclerAdapter

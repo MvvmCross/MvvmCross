@@ -13,9 +13,11 @@ namespace MvvmCross.FieldBinding
 {
     public class NotifyChange
         : MvxMainThreadDispatchingObject
-          , INotifyChange
+            , INotifyChange
     {
         private bool _shouldAlwaysRaiseChangedOnUserInterfaceThread;
+
+        private object _value;
 
         public NotifyChange()
         {
@@ -32,6 +34,20 @@ namespace MvvmCross.FieldBinding
             Changed += (s, e) => { valueChanged?.Invoke(Value); };
         }
 
+        public event EventHandler Changed;
+
+        public object Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                RaiseChanged();
+            }
+        }
+
+        public Type ValueType { get; protected set; }
+
         public bool ShouldAlwaysRaiseChangedOnUserInterfaceThread()
         {
             return _shouldAlwaysRaiseChangedOnUserInterfaceThread;
@@ -42,16 +58,14 @@ namespace MvvmCross.FieldBinding
             _shouldAlwaysRaiseChangedOnUserInterfaceThread = value;
         }
 
-        public event EventHandler Changed;
-
         public void RaiseChanged()
         {
             var raiseAction = new Action(() =>
-                {
-                    var handler = Changed;
+            {
+                var handler = Changed;
 
-                    handler?.Invoke(this, EventArgs.Empty);
-                });
+                handler?.Invoke(this, EventArgs.Empty);
+            });
 
             if (ShouldAlwaysRaiseChangedOnUserInterfaceThread())
             {
@@ -64,32 +78,12 @@ namespace MvvmCross.FieldBinding
                 raiseAction();
             }
         }
-
-        private object _value;
-
-        public object Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                RaiseChanged();
-            }
-        }
-
-        public Type ValueType { get; protected set; }
     }
 
     public class NotifyChange<T>
         : NotifyChange
-          , INotifyChange<T>
+            , INotifyChange<T>
     {
-        public new T Value
-        {
-            get { return (T)base.Value; }
-            set { base.Value = value; }
-        }
-
         public NotifyChange()
             : this(default(T))
         {
@@ -102,18 +96,23 @@ namespace MvvmCross.FieldBinding
         }
 
         public NotifyChange(T value, Action<T> valueChanged)
-            : base(value, obj => valueChanged?.Invoke((T)obj))
+            : base(value, obj => valueChanged?.Invoke((T) obj))
         {
             ValueType = typeof(T);
+        }
+
+        public new T Value
+        {
+            get => (T) base.Value;
+            set => base.Value = value;
         }
     }
 
     public class NotifyChangeList<TValue>
         : NotifyChange<IList<TValue>>
-        , INotifyChangeList<TValue>
+            , INotifyChangeList<TValue>
     {
         public NotifyChangeList()
-            : base()
         {
         }
 
@@ -132,17 +131,16 @@ namespace MvvmCross.FieldBinding
         // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
         public TValue this[int key]
         {
-            get { return Value[key]; }
-            set { Value[key] = value; }
+            get => Value[key];
+            set => Value[key] = value;
         }
     }
 
     public class NotifyChangeDictionary<TKey, TValue>
         : NotifyChange<IDictionary<TKey, TValue>>
-        , INotifyChangeDictionary<TKey, TValue>
+            , INotifyChangeDictionary<TKey, TValue>
     {
         public NotifyChangeDictionary()
-            : base()
         {
         }
 
@@ -161,8 +159,8 @@ namespace MvvmCross.FieldBinding
         // but the underlying binding will use the indexer on the collection, not on this NotifyChange object
         public TValue this[TKey key]
         {
-            get { return Value[key]; }
-            set { Value[key] = value; }
+            get => Value[key];
+            set => Value[key] = value;
         }
     }
 }

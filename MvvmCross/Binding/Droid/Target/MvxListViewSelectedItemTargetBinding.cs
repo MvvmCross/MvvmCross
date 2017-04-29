@@ -18,8 +18,6 @@ namespace MvvmCross.Binding.Droid.Target
     public class MvxListViewSelectedItemTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected MvxListView ListView => (MvxListView)Target;
-
         private object _currentValue;
         private IDisposable _subscription;
 
@@ -27,6 +25,12 @@ namespace MvvmCross.Binding.Droid.Target
             : base(view)
         {
         }
+
+        protected MvxListView ListView => (MvxListView) Target;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(object);
 
         private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
@@ -48,7 +52,7 @@ namespace MvvmCross.Binding.Droid.Target
             if (value == null || value == _currentValue)
                 return;
 
-            var listView = (MvxListView)target;
+            var listView = (MvxListView) target;
 
             var index = listView.Adapter.GetPosition(value);
             if (index < 0)
@@ -60,18 +64,16 @@ namespace MvvmCross.Binding.Droid.Target
             listView.SetSelection(index);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
-            var listView = ((ListView)ListView);
+            var listView = (ListView) ListView;
             if (listView == null)
                 return;
 
-            _subscription = listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
+            _subscription =
+                listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick),
+                    OnItemClick);
         }
-
-        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

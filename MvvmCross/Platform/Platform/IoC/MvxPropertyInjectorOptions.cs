@@ -9,22 +9,21 @@ namespace MvvmCross.Platform.IoC
 {
     public class MvxPropertyInjectorOptions : IMvxPropertyInjectorOptions
     {
+        private static IMvxPropertyInjectorOptions _mvxInjectProperties;
+
+        private static IMvxPropertyInjectorOptions _allProperties;
+
         public MvxPropertyInjectorOptions()
         {
-            this.InjectIntoProperties = MvxPropertyInjection.None;
-            this.ThrowIfPropertyInjectionFails = false;
+            InjectIntoProperties = MvxPropertyInjection.None;
+            ThrowIfPropertyInjectionFails = false;
         }
-
-        public MvxPropertyInjection InjectIntoProperties { get; set; }
-        public bool ThrowIfPropertyInjectionFails { get; set; }
-
-        private static IMvxPropertyInjectorOptions _mvxInjectProperties;
 
         public static IMvxPropertyInjectorOptions MvxInject
         {
             get
             {
-                _mvxInjectProperties = _mvxInjectProperties ?? new MvxPropertyInjectorOptions()
+                _mvxInjectProperties = _mvxInjectProperties ?? new MvxPropertyInjectorOptions
                 {
                     InjectIntoProperties = MvxPropertyInjection.MvxInjectInterfaceProperties,
                     ThrowIfPropertyInjectionFails = false
@@ -33,13 +32,11 @@ namespace MvvmCross.Platform.IoC
             }
         }
 
-        private static IMvxPropertyInjectorOptions _allProperties;
-
         public static IMvxPropertyInjectorOptions All
         {
             get
             {
-                _allProperties = _allProperties ?? new MvxPropertyInjectorOptions()
+                _allProperties = _allProperties ?? new MvxPropertyInjectorOptions
                 {
                     InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties,
                     ThrowIfPropertyInjectionFails = false
@@ -47,5 +44,8 @@ namespace MvvmCross.Platform.IoC
                 return _allProperties;
             }
         }
+
+        public MvxPropertyInjection InjectIntoProperties { get; set; }
+        public bool ThrowIfPropertyInjectionFails { get; set; }
     }
 }

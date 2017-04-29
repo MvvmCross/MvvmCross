@@ -5,40 +5,39 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
-                                   IMvxBundle parameterValues,
-                                   IMvxBundle savedState)
+            IMvxBundle parameterValues,
+            IMvxBundle savedState)
         {
-            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
 
         public virtual IMvxViewModel Load(Type viewModelType,
-                                    IMvxBundle parameterValues,
-                                    IMvxBundle savedState)
+            IMvxBundle parameterValues,
+            IMvxBundle savedState)
         {
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
             }
             catch (Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -57,11 +56,9 @@ namespace MvvmCross.Core.ViewModels
         {
             try
             {
-                this.CallCustomInitMethods(viewModel, parameterValues);
+                CallCustomInitMethods(viewModel, parameterValues);
                 if (savedState != null)
-                {
-                    this.CallReloadStateMethods(viewModel, savedState);
-                }
+                    CallReloadStateMethods(viewModel, savedState);
                 viewModel.Start();
             }
             catch (Exception exception)

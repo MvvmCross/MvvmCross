@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Reflection;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
-using System;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -17,27 +17,29 @@ namespace MvvmCross.Binding.Droid.Target
     public class MvxSeekBarProgressTargetBinding
         : MvxPropertyInfoTargetBinding<SeekBar>
     {
+        private IDisposable _subscription;
+
         public MvxSeekBarProgressTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
         }
 
-        private IDisposable _subscription;
-
         // this variable isn't used, but including this here prevents Mono from optimising the call out!
         private int JustForReflection
         {
-            get { return View.Progress; }
-            set { View.Progress = value; }
+            get => View.Progress;
+            set => View.Progress = value;
         }
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void SetValueImpl(object target, object value)
         {
-            var seekbar = (SeekBar)target;
+            var seekbar = (SeekBar) target;
             if (seekbar == null)
                 return;
 
-            seekbar.Progress = (int)value;
+            seekbar.Progress = (int) value;
         }
 
         private void SeekBarProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
@@ -46,14 +48,13 @@ namespace MvvmCross.Binding.Droid.Target
                 FireValueChanged(e.Progress);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
             var seekBar = View;
             if (seekBar == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                    "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
                 return;
             }
 

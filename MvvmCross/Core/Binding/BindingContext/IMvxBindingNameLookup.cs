@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-
     public interface IMvxBindingNameLookup
     {
         string DefaultFor(Type type);

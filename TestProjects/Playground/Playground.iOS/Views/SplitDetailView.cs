@@ -17,10 +17,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            btnClose.TouchUpInside += (sender, e) =>
-            {
-                this.DismissViewController(true, null);
-            };
+            btnClose.TouchUpInside += (sender, e) => { DismissViewController(true, null); };
         }
     }
 }

@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using Java.Lang;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
     // Special thanks for this file to Emi - https://github.com/eMi-/mvvmcross_datepicker_timepicker
     // Code used under Creative Commons with attribution
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
     [Register("mvvmcross.binding.droid.views.MvxTimePicker")]
     public class MvxTimePicker
         : TimePicker
-        , TimePicker.IOnTimeChangedListener
+            , TimePicker.IOnTimeChangedListener
     {
         private bool _initialized;
 
@@ -43,37 +43,33 @@ namespace MvvmCross.Binding.Droid.Views
         {
             get
             {
-                int currentHour = this.CurrentHour.IntValue();
-                int currentMinute = this.CurrentMinute.IntValue();
+                var currentHour = CurrentHour.IntValue();
+                var currentMinute = CurrentMinute.IntValue();
                 return new TimeSpan(currentHour, currentMinute, 0);
             }
             set
             {
-                var javaHour = new Java.Lang.Integer(value.Hours);
-                var javaMinutes = new Java.Lang.Integer(value.Minutes);
+                var javaHour = new Integer(value.Hours);
+                var javaMinutes = new Integer(value.Minutes);
 
-                if (!this._initialized)
+                if (!_initialized)
                 {
-                    this.SetOnTimeChangedListener(this);
-                    this._initialized = true;
+                    SetOnTimeChangedListener(this);
+                    _initialized = true;
                 }
 
-                if (this.CurrentHour != javaHour)
-                {
-                    this.CurrentHour = javaHour;
-                }
-                if (this.CurrentMinute != javaMinutes)
-                {
-                    this.CurrentMinute = javaMinutes;
-                }
+                if (CurrentHour != javaHour)
+                    CurrentHour = javaHour;
+                if (CurrentMinute != javaMinutes)
+                    CurrentMinute = javaMinutes;
             }
         }
-
-        public event EventHandler ValueChanged;
 
         public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
         {
             ValueChanged?.Invoke(this, null);
         }
+
+        public event EventHandler ValueChanged;
     }
 }

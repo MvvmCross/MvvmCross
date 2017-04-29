@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.Views
@@ -12,12 +11,13 @@ namespace MvvmCross.Droid.Views
 
         public MvxMultipleViewModelCache()
         {
-            _lazyCurrentViewModels = 
+            _lazyCurrentViewModels =
                 new Lazy<ConcurrentDictionary<CachedViewModelType, IMvxViewModel>>(
                     () => new ConcurrentDictionary<CachedViewModelType, IMvxViewModel>());
         }
 
-        private ConcurrentDictionary<CachedViewModelType, IMvxViewModel> CurrentViewModels => _lazyCurrentViewModels.Value;
+        private ConcurrentDictionary<CachedViewModelType, IMvxViewModel> CurrentViewModels => _lazyCurrentViewModels
+            .Value;
 
         public void Cache(IMvxViewModel toCache, string viewModelTag = "singleInstanceCache")
         {
@@ -43,25 +43,25 @@ namespace MvvmCross.Droid.Views
 
         public T GetAndClear<T>(string viewModelTag = "singleInstanceCache") where T : IMvxViewModel
         {
-            return (T)GetAndClear(typeof(T), viewModelTag);
+            return (T) GetAndClear(typeof(T), viewModelTag);
         }
 
         private class CachedViewModelType
         {
-            public Type ViewModelType { get; }
-            public string ViewModelTag { get; }
-
             public CachedViewModelType(Type viewModelType, string viewModelTag)
             {
                 ViewModelType = viewModelType;
                 ViewModelTag = viewModelTag ?? string.Empty;
             }
 
+            public Type ViewModelType { get; }
+            public string ViewModelTag { get; }
+
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    int hashCode = 17;
+                    var hashCode = 17;
                     hashCode = hashCode * 23 + ViewModelType.GetHashCode();
                     hashCode = hashCode * 23 + ViewModelTag.GetHashCode();
                     return hashCode;

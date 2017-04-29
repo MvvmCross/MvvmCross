@@ -8,13 +8,13 @@
 namespace MvvmCross.Plugins.Location
 {
     [Preserve(AllMembers = true)]
-	public class MvxLocationError
+    public class MvxLocationError
     {
         public MvxLocationError(MvxLocationErrorCode code)
         {
             Code = code;
         }
 
-        public MvxLocationErrorCode Code { get; private set; }
+        public MvxLocationErrorCode Code { get; }
     }
 }

@@ -1,12 +1,10 @@
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Platform
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Test.Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests : MvxIoCSupportingTest
     {
@@ -15,6 +13,17 @@ namespace MvvmCross.Test.Platform
         {
             ClearAll();
             Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
+        }
+
+        private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase
+        {
+            public string ChildProperty { get; set; }
+        }
+
+        private abstract class ObjectWithValidPropertiesInBaseClassBase
+        {
+            public string BasePropertyInternalSet { get; internal set; }
+            public string BasePropertyPublicSet { get; set; }
         }
 
         [Test]
@@ -33,17 +42,6 @@ namespace MvvmCross.Test.Platform
             Assert.AreEqual(value, deserialized.ChildProperty);
             Assert.AreEqual(value, deserialized.BasePropertyInternalSet);
             Assert.AreEqual(value, deserialized.BasePropertyPublicSet);
-        }
-
-        private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase
-        {
-            public string ChildProperty { get; set; }
-        }
-
-        private abstract class ObjectWithValidPropertiesInBaseClassBase
-        {
-            public string BasePropertyInternalSet { get; internal set; }
-            public string BasePropertyPublicSet { get; set; }
         }
     }
 }

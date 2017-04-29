@@ -13,7 +13,20 @@ namespace MvvmCross.iOS.Views.Presenters
     {
         protected readonly IUIApplicationDelegate _applicationDelegate;
         protected readonly UIWindow _window;
-        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+
+        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>
+            _attributeTypesToShowMethodDictionary;
+
+        public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
+        {
+            _applicationDelegate = applicationDelegate;
+            _window = window;
+
+            _attributeTypesToShowMethodDictionary =
+                new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+
+            RegisterAttributeTypes();
+        }
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -23,41 +36,37 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public IMvxSplitViewController SplitViewController { get; protected set; }
 
-        public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            _applicationDelegate = applicationDelegate;
-            _window = window;
-
-            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
-
-            RegisterAttributeTypes();
-        }
-
         protected virtual void RegisterAttributeTypes()
         {
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxRootPresentationAttribute),
-                (vc, attribute, request) => ShowRootViewController(vc, (MvxRootPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowRootViewController(vc, (MvxRootPresentationAttribute) attribute,
+                    request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxChildPresentationAttribute),
-                (vc, attribute, request) => ShowChildViewController(vc, (MvxChildPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowChildViewController(vc, (MvxChildPresentationAttribute) attribute,
+                    request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
-                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute) attribute,
+                    request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
-                (vc, attribute, request) => ShowModalViewController(vc, (MvxModalPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowModalViewController(vc, (MvxModalPresentationAttribute) attribute,
+                    request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxMasterSplitViewPresentationAttribute),
-                (vc, attribute, request) => ShowMasterSplitViewController(vc, (MvxMasterSplitViewPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowMasterSplitViewController(vc,
+                    (MvxMasterSplitViewPresentationAttribute) attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxDetailSplitViewPresentationAttribute),
-                (vc, attribute, request) => ShowDetailSplitViewController(vc, (MvxDetailSplitViewPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowDetailSplitViewController(vc,
+                    (MvxDetailSplitViewPresentationAttribute) attribute, request));
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -65,9 +74,7 @@ namespace MvvmCross.iOS.Views.Presenters
             base.ChangePresentation(hint);
 
             if (hint is MvxClosePresentationHint)
-            {
                 Close((hint as MvxClosePresentationHint).ViewModelToClose);
-            }
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -89,7 +96,8 @@ namespace MvvmCross.iOS.Views.Presenters
 
             Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
             if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
-                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
+                throw new KeyNotFoundException(
+                    $"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
             showAction.Invoke(viewController, attribute, request);
         }
@@ -149,10 +157,12 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxViewModelRequest request)
         {
             if (viewController is IMvxTabBarViewController)
-                throw new MvxException("A TabBarViewController cannot be presented as a child. Consider using Root instead");
+                throw new MvxException(
+                    "A TabBarViewController cannot be presented as a child. Consider using Root instead");
 
             if (viewController is IMvxSplitViewController)
-                throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
+                throw new MvxException(
+                    "A SplitViewController cannot be presented as a child. Consider using Root instead");
 
             if (ModalNavigationController != null)
             {
@@ -172,7 +182,8 @@ namespace MvvmCross.iOS.Views.Presenters
                 return;
             }
 
-            throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as child, but there is no current Root!");
+            throw new MvxException(
+                $"Trying to show View type: {viewController.GetType().Name} as child, but there is no current Root!");
         }
 
         protected virtual void ShowTabViewController(
@@ -224,7 +235,8 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxViewModelRequest request)
         {
             if (SplitViewController == null)
-                throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
+                throw new MvxException(
+                    "Trying to show a master page without a SplitViewController, this is not possible!");
 
             SplitViewController.ShowMasterView(viewController, attribute.WrapInNavigationController);
         }
@@ -235,14 +247,15 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxViewModelRequest request)
         {
             if (SplitViewController == null)
-                throw new MvxException("Trying to show a detail page without a SplitViewController, this is not possible!");
+                throw new MvxException(
+                    "Trying to show a detail page without a SplitViewController, this is not possible!");
 
             SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
+            ShowModalViewController(viewController, new MvxModalPresentationAttribute {Animated = animated}, null);
             return true;
         }
 
@@ -261,7 +274,8 @@ namespace MvvmCross.iOS.Views.Presenters
                 return;
 
             // if the current root is a NavigationController, close it in the stack
-            if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, toClose))
+            if (MasterNavigationController != null &&
+                TryCloseViewControllerInsideStack(MasterNavigationController, toClose))
                 return;
 
             MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
@@ -271,7 +285,6 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             // check if there is a modal stack presented
             if (ModalNavigationController != null)
-            {
                 if (TryCloseViewControllerInsideStack(ModalNavigationController, toClose))
                 {
                     // First() is the RootViewController of the stack. If it is being closed, then remove the nav stack
@@ -282,14 +295,14 @@ namespace MvvmCross.iOS.Views.Presenters
                     }
                     return true;
                 }
-            }
 
             // close any plain modal presented
             _window.RootViewController.PresentedViewController.DismissViewController(true, null);
             return true;
         }
 
-        protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController, IMvxViewModel toClose)
+        protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController,
+            IMvxViewModel toClose)
         {
             // check for top view controller
             var topView = navController.TopViewController.GetIMvxIosView();
@@ -370,19 +383,22 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
         {
-            var attributes = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
+            var attributes =
+                viewController.GetType()
+                    .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
+                    .FirstOrDefault() as MvxBasePresentationAttribute;
             if (attributes != null)
-            {
                 return attributes;
-            }
 
             if (MasterNavigationController == null)
             {
-                MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. Assuming Root presentation");
-                return new MvxRootPresentationAttribute() { WrapInNavigationController = true };
+                MvxTrace.Trace(
+                    $"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. Assuming Root presentation");
+                return new MvxRootPresentationAttribute {WrapInNavigationController = true};
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewController.GetType().Name}. Assuming animated Child presentation");
+            MvxTrace.Trace(
+                $"PresentationAttribute not found for {viewController.GetType().Name}. Assuming animated Child presentation");
             return new MvxChildPresentationAttribute();
         }
     }

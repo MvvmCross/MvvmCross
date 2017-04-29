@@ -9,59 +9,58 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using CoreGraphics;
+using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxImagePickerTask
+    public class MvxImagePickerTask
         : MvxIosTask
-          , IMvxPictureChooserTask
+            , IMvxPictureChooserTask
     {
-        private readonly UIImagePickerController _picker;
         private readonly IMvxIosModalHost _modalHost;
+        private readonly UIImagePickerController _picker;
+        private Action _assumeCancelled;
         private bool _currentlyActive;
         private int _maxPixelDimension;
         private int _percentQuality;
         private Action<Stream, string> _pictureAvailable;
-        private Action _assumeCancelled;
 
         public MvxImagePickerTask()
         {
             _modalHost = Mvx.Resolve<IMvxIosModalHost>();
-            _picker = new UIImagePickerController
-            {
-                //CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
-                //CameraDevice = UIImagePickerControllerCameraDevice.Front
-            };
+            _picker = new UIImagePickerController();
             _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
             _picker.FinishedPickingImage += Picker_FinishedPickingImage;
             _picker.Canceled += Picker_Canceled;
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
-                                     Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality,
+            Action<Stream, string> pictureAvailable,
+            Action assumeCancelled)
         {
             _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                             Action assumeCancelled)
+            Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream),
+                assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
-                                Action assumeCancelled)
+            Action assumeCancelled)
         {
             _picker.SourceType = UIImagePickerControllerSourceType.Camera;
-            ChoosePictureCommon(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureCommon(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream),
+                assumeCancelled);
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -83,7 +82,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         }
 
         private void ChoosePictureCommon(int maxPixelDimension, int percentQuality,
-                                         Action<Stream, string> pictureAvailable, Action assumeCancelled)
+            Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             SetCurrentlyActive();
             _maxPixelDimension = maxPixelDimension;
@@ -99,13 +98,11 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             ClearCurrentlyActive();
             if (image != null)
             {
-                if (_maxPixelDimension > 0 && (image.Size.Height > _maxPixelDimension || image.Size.Width > _maxPixelDimension))
-                {
-                    // resize the image
+                if (_maxPixelDimension > 0 && (image.Size.Height > _maxPixelDimension ||
+                                               image.Size.Width > _maxPixelDimension))
                     image = image.ImageToFitSize(new CGSize(_maxPixelDimension, _maxPixelDimension));
-                }
 
-                using (NSData data = image.AsJPEG(_percentQuality / 100f))
+                using (var data = image.AsJPEG(_percentQuality / 100f))
                 {
                     var byteArray = new byte[data.Length];
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
@@ -125,14 +122,14 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
-            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
+            var referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
             var image = e.EditedImage ?? e.OriginalImage;
             HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
-            NSUrl referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
+            var referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
             var image = e.Image;
             HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }

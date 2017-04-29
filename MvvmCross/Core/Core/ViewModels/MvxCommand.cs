@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.ExtensionMethods;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.ExtensionMethods;
-
     public interface IMvxCommandHelper
     {
         event EventHandler CanExecuteChanged;
@@ -42,21 +41,21 @@ namespace MvvmCross.Core.ViewModels
         {
             add
             {
-                lock (this._syncRoot)
+                lock (_syncRoot)
                 {
-                    this._eventHandlers.Add(new WeakReference(value));
+                    _eventHandlers.Add(new WeakReference(value));
                 }
             }
             remove
             {
-                lock (this._syncRoot)
+                lock (_syncRoot)
                 {
-                    foreach (var thing in this._eventHandlers)
+                    foreach (var thing in _eventHandlers)
                     {
                         var target = thing.Target;
-                        if (target != null && (EventHandler)target == value)
+                        if (target != null && (EventHandler) target == value)
                         {
-                            this._eventHandlers.Remove(thing);
+                            _eventHandlers.Remove(thing);
                             break;
                         }
                     }
@@ -64,42 +63,36 @@ namespace MvvmCross.Core.ViewModels
             }
         }
 
+        public void RaiseCanExecuteChanged(object sender)
+        {
+            var list = SafeCopyEventHandlerList();
+            foreach (var eventHandler in list)
+                eventHandler(sender, EventArgs.Empty);
+        }
+
         private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
-            lock (this._syncRoot)
+            lock (_syncRoot)
             {
                 var toReturn = new List<EventHandler>();
                 var deadEntries = new List<WeakReference>();
 
-                foreach (var thing in this._eventHandlers)
+                foreach (var thing in _eventHandlers)
                 {
                     if (!thing.IsAlive)
                     {
                         deadEntries.Add(thing);
                         continue;
                     }
-                    var eventHandler = (EventHandler)thing.Target;
+                    var eventHandler = (EventHandler) thing.Target;
                     if (eventHandler != null)
-                    {
                         toReturn.Add(eventHandler);
-                    }
                 }
 
                 foreach (var weakReference in deadEntries)
-                {
-                    this._eventHandlers.Remove(weakReference);
-                }
+                    _eventHandlers.Remove(weakReference);
 
                 return toReturn;
-            }
-        }
-
-        public void RaiseCanExecuteChanged(object sender)
-        {
-            var list = this.SafeCopyEventHandlerList();
-            foreach (var eventHandler in list)
-            {
-                eventHandler(sender, EventArgs.Empty);
             }
         }
     }
@@ -111,43 +104,34 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommandBase()
         {
-            if (!Mvx.TryResolve<IMvxCommandHelper>(out this._commandHelper))
-                this._commandHelper = new MvxWeakCommandHelper();
+            if (!Mvx.TryResolve(out _commandHelper))
+                _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
-            this.ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add
-            {
-                this._commandHelper.CanExecuteChanged += value;
-            }
-            remove
-            {
-                this._commandHelper.CanExecuteChanged -= value;
-            }
+            var alwaysOnUIThread = MvxSingletonCache.Instance == null ||
+                                   MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public bool ShouldAlwaysRaiseCECOnUserInterfaceThread { get; set; }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add => _commandHelper.CanExecuteChanged += value;
+            remove => _commandHelper.CanExecuteChanged -= value;
+        }
+
         public void RaiseCanExecuteChanged()
         {
-            if (this.ShouldAlwaysRaiseCECOnUserInterfaceThread)
-            {
-                this.InvokeOnMainThread(() => this._commandHelper.RaiseCanExecuteChanged(this));
-            }
+            if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
+                InvokeOnMainThread(() => _commandHelper.RaiseCanExecuteChanged(this));
             else
-            {
-                this._commandHelper.RaiseCanExecuteChanged(this);
-            }
+                _commandHelper.RaiseCanExecuteChanged(this);
         }
     }
 
     public class MvxCommand
         : MvxCommandBase
-        , IMvxCommand
+            , IMvxCommand
     {
         private readonly Func<bool> _canExecute;
         private readonly Action _execute;
@@ -159,37 +143,35 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommand(Action execute, Func<bool> canExecute)
         {
-            this._execute = execute;
-            this._canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute();
+            return _canExecute == null || _canExecute();
         }
 
         public bool CanExecute()
         {
-            return this.CanExecute(null);
+            return CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (this.CanExecute(parameter))
-            {
-                this._execute();
-            }
+            if (CanExecute(parameter))
+                _execute();
         }
 
         public void Execute()
         {
-            this.Execute(null);
+            Execute(null);
         }
     }
 
     public class MvxCommand<T>
         : MvxCommandBase
-        , IMvxCommand
+            , IMvxCommand
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;
@@ -201,31 +183,29 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
-            this._execute = execute;
-            this._canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
+            return _canExecute == null || _canExecute((T) typeof(T).MakeSafeValueCore(parameter));
         }
 
         public bool CanExecute()
         {
-            return this.CanExecute(null);
+            return CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (this.CanExecute(parameter))
-            {
-                this._execute((T)(typeof(T).MakeSafeValueCore(parameter)));
-            }
+            if (CanExecute(parameter))
+                _execute((T) typeof(T).MakeSafeValueCore(parameter));
         }
 
         public void Execute()
         {
-            this.Execute(null);
+            Execute(null);
         }
     }
 }

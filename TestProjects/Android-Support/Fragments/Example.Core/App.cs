@@ -1,8 +1,9 @@
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
 
 namespace Example.Core
 {
-    public class App : MvvmCross.Core.ViewModels.MvxApplication
+    public class App : MvxApplication
     {
         public override void Initialize()
         {

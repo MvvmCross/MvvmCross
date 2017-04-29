@@ -22,19 +22,17 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         public void Configure(IMvxPluginConfiguration configuration)
         {
             if (configuration != null && !(configuration is MvxDownloadCacheConfiguration))
-            {
-                throw new MvxException("You must use a MvxDownloadCacheConfiguration object for configuring the DownloadCache, but you supplied {0}", configuration.GetType().Name);
-            }
-            _configuration = (MvxDownloadCacheConfiguration)configuration;
+                throw new MvxException(
+                    "You must use a MvxDownloadCacheConfiguration object for configuring the DownloadCache, but you supplied {0}",
+                    configuration.GetType().Name);
+            _configuration = (MvxDownloadCacheConfiguration) configuration;
         }
-
-#warning One day I would like to decouple this implementation from the FileStore plugin
 
         public void Load()
         {
             Mvx.RegisterSingleton<IMvxHttpFileDownloader>(() => CreateHttpFileDownloader());
 
-            Mvx.RegisterSingleton<IMvxFileDownloadCache>(CreateFileDownloadCache);
+            Mvx.RegisterSingleton(CreateFileDownloadCache);
             Mvx.RegisterSingleton<IMvxImageCache<Bitmap>>(CreateCache);
             Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicImageHelper<Bitmap>>();
             Mvx.RegisterSingleton<IMvxLocalFileImageLoader<Bitmap>>(() => new MvxAndroidLocalFileImageLoader());
@@ -50,9 +48,9 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
         {
             var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
             var fileDownloadCache = new MvxFileDownloadCache(configuration.CacheName,
-                                                             configuration.CacheFolderPath,
-                                                             configuration.MaxFiles,
-                                                             configuration.MaxFileAge);
+                configuration.CacheFolderPath,
+                configuration.MaxFiles,
+                configuration.MaxFileAge);
 
             return fileDownloadCache;
         }
@@ -62,7 +60,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             var configuration = _configuration ?? MvxDownloadCacheConfiguration.Default;
 
             var fileDownloadCache = Mvx.Resolve<IMvxFileDownloadCache>();
-            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles, configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
+            var fileCache = new MvxImageCache<Bitmap>(fileDownloadCache, configuration.MaxInMemoryFiles,
+                configuration.MaxInMemoryBytes, configuration.DisposeOnRemoveFromCache);
             return fileCache;
         }
     }

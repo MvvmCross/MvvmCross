@@ -11,13 +11,11 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
 namespace MvvmCross.BindingEx.WindowsCommon
 #endif
-
 #if WINDOWS_WPF
 using System.Windows;
 
@@ -26,20 +24,31 @@ namespace MvvmCross.BindingEx.Wpf
 {
     // ReSharper disable InconsistentNaming
     public static class Bi
-    // ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
     {
+// ReSharper disable InconsistentNaming
+        public static readonly DependencyProperty ndProperty =
+            // ReSharper restore InconsistentNaming
+            DependencyProperty.RegisterAttached("nd",
+                typeof(string),
+                typeof(Bi),
+                new PropertyMetadata(null, CallBackWhenndIsChanged));
+
+        private static IMvxBindingCreator _bindingCreator;
+
         static Bi()
         {
             MvxDesignTimeChecker.Check();
         }
 
-        // ReSharper disable InconsistentNaming
-        public static readonly DependencyProperty ndProperty =
-            // ReSharper restore InconsistentNaming
-            DependencyProperty.RegisterAttached("nd",
-                                                typeof(string),
-                                                typeof(Bi),
-                                                new PropertyMetadata(null, CallBackWhenndIsChanged));
+        private static IMvxBindingCreator BindingCreator
+        {
+            get
+            {
+                _bindingCreator = _bindingCreator ?? ResolveBindingCreator();
+                return _bindingCreator;
+            }
+        }
 
         public static string Getnd(DependencyObject obj)
         {
@@ -53,24 +62,11 @@ namespace MvvmCross.BindingEx.Wpf
             obj.SetValue(ndProperty, value);
         }
 
-        private static IMvxBindingCreator _bindingCreator;
-
-        private static IMvxBindingCreator BindingCreator
-        {
-            get
-            {
-                _bindingCreator = _bindingCreator ?? ResolveBindingCreator();
-                return _bindingCreator;
-            }
-        }
-
         private static IMvxBindingCreator ResolveBindingCreator()
         {
             IMvxBindingCreator toReturn;
-            if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
-            {
+            if (!Mvx.TryResolve(out toReturn))
                 throw new MvxException("Unable to resolve the binding creator - have you initialized Windows Binding");
-            }
 
             return toReturn;
         }

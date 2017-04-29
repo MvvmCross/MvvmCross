@@ -7,7 +7,8 @@ using NUnit.Framework;
 namespace MvvmCross.CodeAnalysis.Test
 {
     [TestFixture]
-    public class ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerTests : CodeFixVerifier<ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer, ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix>
+    public class ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerTests : CodeFixVerifier<
+        ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer, ApplyMustBeCalledWhenUsingFluentBindingSetCodeFix>
     {
         private const string ViewModel = @"using System;
 using System.Collections.Generic;
@@ -134,6 +135,30 @@ namespace IOSApp.IOS.Views
 }";
 
         [Test]
+        public void ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerShouldFixTheCode()
+        {
+            var solution = new[]
+            {
+                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios),
+                new MvxTestFileSource(ViewModel, MvxProjType.Core)
+            };
+            VerifyCSharpFix(solution, Test, MvxProjType.Ios, Expected);
+        }
+
+        [Test]
+        public void ApplyMustBeCalledWhenUsingFluentBindingSetShoudShowNoDiagnosticIfApplyIsCalled()
+        {
+            var project = new[]
+            {
+                new MvxTestFileSource(Expected, MvxProjType.Ios),
+                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios),
+                new MvxTestFileSource(ViewModel, MvxProjType.Core)
+            };
+
+            VerifyCSharpDiagnostic(project);
+        }
+
+        [Test]
         public void ApplyMustBeCalledWhenUsingFluentBindingSetShoudShowOneDiagnosticIfApplyIsNotCalled()
         {
             var expectedDiagnostic = new DiagnosticResult
@@ -151,35 +176,11 @@ namespace IOSApp.IOS.Views
             var project = new[]
             {
                 new MvxTestFileSource(Test, MvxProjType.Ios),
-                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios), 
+                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios),
                 new MvxTestFileSource(ViewModel, MvxProjType.Core)
             };
 
             VerifyCSharpDiagnostic(project, expectedDiagnostic);
-        }
-
-        [Test]
-        public void ApplyMustBeCalledWhenUsingFluentBindingSetShoudShowNoDiagnosticIfApplyIsCalled()
-        {
-            var project = new[]
-            {
-                new MvxTestFileSource(Expected, MvxProjType.Ios),
-                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios),
-                new MvxTestFileSource(ViewModel, MvxProjType.Core)
-            };
-
-            VerifyCSharpDiagnostic(project);
-        }
-
-        [Test]
-        public void ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerShouldFixTheCode()
-        {
-            var solution = new[]
-            {
-                new MvxTestFileSource(GeneratedDesigner, MvxProjType.Ios),
-                new MvxTestFileSource(ViewModel, MvxProjType.Core)
-            };
-            VerifyCSharpFix(solution, Test, MvxProjType.Ios, Expected);
         }
     }
 }

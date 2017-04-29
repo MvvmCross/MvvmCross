@@ -1,7 +1,3 @@
-using Android.App;
-using Android.OS;
-using MvvmCross.Droid.Views;
-
 namespace MvvmCross.TestProjects.CustomBinding.Droid.Views
 {
     [Activity(Label = "View for FirstViewModel")]

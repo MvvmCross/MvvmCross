@@ -5,25 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.iOS.Views
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxCanCreateIosViewExtensionMethods
     {
         public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateIosView view,
-                                                                              object parameterObject)
+            object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
             return
                 view.CreateViewControllerFor<TTargetViewModel>(parameterObject?.ToSimplePropertyDictionary());
         }
-
-#warning TODO - could this move down to IMvxView level?
 
         public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(
             this IMvxCanCreateIosView view,

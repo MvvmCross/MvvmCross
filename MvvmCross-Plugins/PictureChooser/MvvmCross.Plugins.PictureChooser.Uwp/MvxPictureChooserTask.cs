@@ -21,19 +21,25 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
     [Preserve(AllMembers = true)]
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality,
+            Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, pictureAvailable,
+                assumeCancelled);
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            TakePictureCommon(StorageFileFromDisk, maxPixelDimension, percentQuality,
+                (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
-        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
         {
-            TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            TakePictureCommon(StorageFileFromCamera, maxPixelDimension, percentQuality,
+                (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
@@ -54,7 +60,7 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
         {
         }
 
-        private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, 
+        private void TakePictureCommon(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality,
             Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
@@ -65,7 +71,8 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
             });
         }
 
-        private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
+        private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality,
+            Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             var file = await storageFile();
             if (file == null)
@@ -98,15 +105,17 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
             return await filePicker.PickSingleFileAsync();
         }
 
-        private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
+        private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality,
+            IRandomAccessStream input)
         {
             var decoder = await BitmapDecoder.CreateAsync(input);
 
             int targetHeight;
             int targetWidth;
-            MvxPictureDimensionHelper.TargetWidthAndHeight(maxPixelDimension, (int)decoder.PixelWidth, (int)decoder.PixelHeight, out targetWidth, out targetHeight);
+            MvxPictureDimensionHelper.TargetWidthAndHeight(maxPixelDimension, (int) decoder.PixelWidth,
+                (int) decoder.PixelHeight, out targetWidth, out targetHeight);
 
-            var transform = new BitmapTransform() { ScaledHeight = (uint)targetHeight, ScaledWidth = (uint)targetWidth };
+            var transform = new BitmapTransform {ScaledHeight = (uint) targetHeight, ScaledWidth = (uint) targetWidth};
             var pixelData = await decoder.GetPixelDataAsync(
                 BitmapPixelFormat.Rgba8,
                 BitmapAlphaMode.Straight,
@@ -116,9 +125,11 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
 
             var destinationStream = new InMemoryRandomAccessStream();
             var bitmapPropertiesSet = new BitmapPropertySet();
-            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(((double)percentQuality) / 100.0, PropertyType.Single));
-            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream, bitmapPropertiesSet);
-            encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint)targetWidth, (uint)targetHeight, decoder.DpiX, decoder.DpiY, pixelData.DetachPixelData());
+            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(percentQuality / 100.0, PropertyType.Single));
+            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream,
+                bitmapPropertiesSet);
+            encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint) targetWidth,
+                (uint) targetHeight, decoder.DpiX, decoder.DpiY, pixelData.DetachPixelData());
             await encoder.FlushAsync();
             destinationStream.Seek(0L);
             return destinationStream;

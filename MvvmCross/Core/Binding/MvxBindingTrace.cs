@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Platform.Platform;
-
     public static class MvxBindingTrace
     {
-        public static MvxTraceLevel TraceBindingLevel = MvxTraceLevel.Warning;
-
         public const string Tag = "MvxBind";
+        public static MvxTraceLevel TraceBindingLevel = MvxTraceLevel.Warning;
 
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {

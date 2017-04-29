@@ -5,23 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-
-    using UIKit;
-
     public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {
-        protected UIView View => (UIView)Target;
-
         protected MvxBaseUIViewVisibleTargetBinding(UIView target)
             : base(target)
         {
         }
 
+        protected UIView View => (UIView) Target;
+
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(bool);
+        public override Type TargetType => typeof(bool);
     }
 }

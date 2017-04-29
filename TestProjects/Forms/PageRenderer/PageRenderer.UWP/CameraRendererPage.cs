@@ -1,11 +1,11 @@
-﻿
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
+using Windows.Foundation;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
@@ -16,13 +16,10 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using MvvmCross.Forms.Uwp;
-using Xamarin.Forms.Platform.UWP;
-
 using PageRendererExample.Pages;
 using PageRendererExample.ViewModels;
-
-
-
+using Xamarin.Forms.Platform.UWP;
+using Panel = Windows.UI.Xaml.Controls.Panel;
 
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Uwp.CameraRendererPage))]
 
@@ -30,47 +27,46 @@ namespace PageRendererExample.UI.Uwp
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>
     {
+        private Button _anyButton;
+        private AppBarButton _cancelButton;
+        private CaptureElement _captureElement;
+        private MediaCapture _mediaCapture;
 
-        Page _page;
-        MediaCapture _mediaCapture;
-        CaptureElement _captureElement;
-        AppBarButton _takePhotoButton;
-        AppBarButton _cancelButton;
-        Button _anyButton;
+        private Page _page;
+        private AppBarButton _takePhotoButton;
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Page> e)
         {
             base.OnElementChanged(e);
 
             if (e.OldElement != null || Element == null)
-            {
                 return;
-            }
 
             try
-            {               
+            {
                 SetupUserInterface();
                 BindViewModel();
                 SetupEventHandlers();
                 SetupLiveCameraStream();
 
-                var container = ContainerElement as Windows.UI.Xaml.Controls.Panel;
+                var container = ContainerElement as Panel;
                 container.Children.Add(_page);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(@"      ERROR: ", ex.Message);
+                Debug.WriteLine(@"      ERROR: ", ex.Message);
             }
         }
 
-        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size size)
+        protected override Size ArrangeOverride(Size size)
         {
             return size;
         }
 
-        void SetupUserInterface()
+        private void SetupUserInterface()
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                AppViewBackButtonVisibility.Collapsed;
             _takePhotoButton = new AppBarButton
             {
                 Icon = new SymbolIcon(Symbol.Camera)
@@ -93,19 +89,20 @@ namespace PageRendererExample.UI.Uwp
 
             _page = new Page();
             _page.BottomAppBar = commandBar;
-            _page.Content = stackPanel;            
+            _page.Content = stackPanel;
         }
 
-        void BindViewModel()
+        private void BindViewModel()
         {
-            var binding = new Binding {
+            var binding = new Binding
+            {
                 Path = new PropertyPath("CloseCommand"),
-                Source=ViewModel
+                Source = ViewModel
             };
             _cancelButton.SetBinding(ButtonBase.CommandProperty, binding);
         }
 
-        void SetupEventHandlers()
+        private void SetupEventHandlers()
         {
             var app = Application.Current;
             app.Suspending += OnAppSuspending;
@@ -116,20 +113,20 @@ namespace PageRendererExample.UI.Uwp
             _takePhotoButton.Click += CapturePhotoPressed;
         }
 
-        async void SetupLiveCameraStream()
+        private async void SetupLiveCameraStream()
         {
             var devices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            var frontCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null && c.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
-            var backCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null && c.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back);
+            var frontCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null &&
+                                                          c.EnclosureLocation.Panel ==
+                                                          Windows.Devices.Enumeration.Panel.Front);
+            var backCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null &&
+                                                         c.EnclosureLocation.Panel ==
+                                                         Windows.Devices.Enumeration.Panel.Back);
 
             DeviceInformation currentCamera = null;
-            if (backCamera != null) {
-                currentCamera = backCamera;
-            } else if (frontCamera != null) {
-                currentCamera = frontCamera;
-            } else if (devices.Count() > 0) {
-                currentCamera = devices.First();
-            }
+            if (backCamera != null) currentCamera = backCamera;
+            else if (frontCamera != null) currentCamera = frontCamera;
+            else if (devices.Count() > 0) currentCamera = devices.First();
 
             _mediaCapture = new MediaCapture();
             await _mediaCapture.InitializeAsync(new MediaCaptureInitializationSettings
@@ -144,7 +141,7 @@ namespace PageRendererExample.UI.Uwp
             await _mediaCapture.StartPreviewAsync();
         }
 
-        async void CapturePhotoPressed(object sender, RoutedEventArgs e)
+        private async void CapturePhotoPressed(object sender, RoutedEventArgs e)
         {
             var photoEncoding = ImageEncodingProperties.CreateJpeg();
             using (var imageStream = new InMemoryRandomAccessStream())
@@ -152,31 +149,31 @@ namespace PageRendererExample.UI.Uwp
                 await _mediaCapture.CapturePhotoToStreamAsync(photoEncoding, imageStream);
                 imageStream.Seek(0);
                 var imageBytes = new byte[imageStream.Size];
-                await imageStream.ReadAsync(imageBytes.AsBuffer(), (uint)imageStream.Size, InputStreamOptions.None);
+                await imageStream.ReadAsync(imageBytes.AsBuffer(), (uint) imageStream.Size, InputStreamOptions.None);
                 ViewModel.SetImage(imageBytes, "image/jpeg");
             }
 
             ViewModel.CloseCommand.Execute(this);
         }
 
-        async void OnAppSuspending(object sender, SuspendingEventArgs e)
+        private async void OnAppSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             await CleanUpCaptureResourcesAsync();
             deferral.Complete();
         }
 
-        void OnAppResuming(object sender, object e)
+        private void OnAppResuming(object sender, object e)
         {
             SetupLiveCameraStream();
         }
 
-        async void OnPageUnloaded(object sender, RoutedEventArgs e)
+        private async void OnPageUnloaded(object sender, RoutedEventArgs e)
         {
             await CleanUpCaptureResourcesAsync();
         }
 
-        async Task CleanUpCaptureResourcesAsync()
+        private async Task CleanUpCaptureResourcesAsync()
         {
             if (_captureElement != null)
             {
@@ -185,34 +182,28 @@ namespace PageRendererExample.UI.Uwp
             }
 
             if (_mediaCapture != null)
-            {
                 try
                 {
                     await _mediaCapture.StopPreviewAsync();
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(@"          Error: ", ex.Message);
+                    Debug.WriteLine(@"          Error: ", ex.Message);
                 }
-              
-            }
 
             if (_mediaCapture != null)
-            {
                 try
                 {
                     _mediaCapture.Dispose();
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(@"          Error: ", ex.Message);
+                    Debug.WriteLine(@"          Error: ", ex.Message);
                 }
                 finally
                 {
                     _mediaCapture = null;
                 }
-
-            }
         }
     }
 }

@@ -1,20 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
     public abstract class FragmentCacheConfiguration<TSerializableMvxCachedFragmentInfo> : IFragmentCacheConfiguration
     {
-        private Dictionary<string, IMvxCachedFragmentInfo> _lookup;
         private const string SavedFragmentCacheConfiguration = "__mvxSavedFragmentCacheConfiguration";
 
         private const string SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState =
             "__mvxSavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState";
+
+        private Dictionary<string, IMvxCachedFragmentInfo> _lookup;
 
         protected FragmentCacheConfiguration()
         {
@@ -24,7 +25,7 @@ namespace MvvmCross.Droid.Shared.Caching
         }
 
         /// <summary>
-        /// Enable OnFragmentPopped callback. This callback might represent a performance hit.
+        ///     Enable OnFragmentPopped callback. This callback might represent a performance hit.
         /// </summary>
         public bool EnableOnFragmentPoppedCallback { get; set; }
 
@@ -50,12 +51,14 @@ namespace MvvmCross.Droid.Shared.Caching
             return true;
         }
 
-        public bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType, bool addToBackStack = false)
+        public bool RegisterFragmentToCache(string tag, Type fragmentType, Type viewModelType,
+            bool addToBackStack = false)
         {
             if (_lookup.ContainsKey(tag))
                 return false;
 
-            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType, addToBackstack: addToBackStack);
+            var fragInfo = MvxCachedFragmentInfoFactory.CreateFragmentInfo(tag, fragmentType, viewModelType,
+                addToBackstack: addToBackStack);
             _lookup.Add(tag, fragInfo);
             return true;
         }
@@ -77,19 +80,24 @@ namespace MvvmCross.Droid.Shared.Caching
 
             // restore what fragments we have registered - and informations about registered fragments.
 
-            string jsonSerializedMvxCachedFragmentInfosToRestore = string.Empty;
+            var jsonSerializedMvxCachedFragmentInfosToRestore = string.Empty;
             if (Build.VERSION.SdkInt >= BuildVersionCodes.HoneycombMr1)
-                jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
+                jsonSerializedMvxCachedFragmentInfosToRestore =
+                    savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
             else
-                jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration);
-            
+                jsonSerializedMvxCachedFragmentInfosToRestore =
+                    savedInstanceState.GetString(SavedFragmentCacheConfiguration);
+
             // there are no registered fragments at this moment, skip restore
             if (string.IsNullOrEmpty(jsonSerializedMvxCachedFragmentInfosToRestore))
                 return;
 
-            var serializedMvxCachedFragmentInfos = serializer.DeserializeObject<Dictionary<string, TSerializableMvxCachedFragmentInfo>>(jsonSerializedMvxCachedFragmentInfosToRestore);
+            var serializedMvxCachedFragmentInfos =
+                serializer.DeserializeObject<Dictionary<string, TSerializableMvxCachedFragmentInfo>>(
+                    jsonSerializedMvxCachedFragmentInfosToRestore);
             _lookup = serializedMvxCachedFragmentInfos.ToDictionary(x => x.Key,
-                (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value as SerializableMvxCachedFragmentInfo));
+                keyValuePair => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(
+                    keyValuePair.Value as SerializableMvxCachedFragmentInfo));
         }
 
         public virtual void SaveFragmentCacheConfigurationState(Bundle outState, IMvxJsonConverter serializer)
@@ -98,15 +106,17 @@ namespace MvvmCross.Droid.Shared.Caching
                 return;
 
             var mvxCachedFragmentInfosToSave = CreateMvxCachedFragmentInfosToSave();
-            string serializedMvxCachedFragmentInfosToSave = serializer.SerializeObject(mvxCachedFragmentInfosToSave);
+            var serializedMvxCachedFragmentInfosToSave = serializer.SerializeObject(mvxCachedFragmentInfosToSave);
 
             outState.PutString(SavedFragmentCacheConfiguration, serializedMvxCachedFragmentInfosToSave);
-            outState.PutBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState, EnableOnFragmentPoppedCallback);
+            outState.PutBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState,
+                EnableOnFragmentPoppedCallback);
         }
 
         private Dictionary<string, SerializableMvxCachedFragmentInfo> CreateMvxCachedFragmentInfosToSave()
         {
-            return _lookup.ToDictionary(x => x.Key, (keyValuePair) => MvxCachedFragmentInfoFactory.GetSerializableFragmentInfo(keyValuePair.Value));
+            return _lookup.ToDictionary(x => x.Key,
+                keyValuePair => MvxCachedFragmentInfoFactory.GetSerializableFragmentInfo(keyValuePair.Value));
         }
     }
 }

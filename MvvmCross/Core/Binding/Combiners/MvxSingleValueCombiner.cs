@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Platform.Converters;
-
     public class MvxSingleValueCombiner : MvxValueCombiner
     {
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)

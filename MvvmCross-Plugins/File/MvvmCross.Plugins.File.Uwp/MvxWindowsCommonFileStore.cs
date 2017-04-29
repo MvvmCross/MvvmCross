@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Uwp.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Uwp.Platform;
 
 namespace MvvmCross.Plugins.File.WindowsCommon
 {
@@ -41,7 +41,9 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             {
                 StorageFile storageFile;
 
-                storageFile = Exists(path) ? StorageFileFromRelativePath(path) : CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
+                storageFile = Exists(path)
+                    ? StorageFileFromRelativePath(path)
+                    : CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
 
                 var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
                 return streamWithContentType.AsStream();
@@ -60,12 +62,8 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                 var fromFile = StorageFileFromRelativePath(from);
 
                 if (overwrite)
-                {
                     if (!SafeDeleteFile(to))
-                    {
                         return false;
-                    }
-                }
 
                 var fullToPath = ToFullPath(to);
                 var toDirectory = Path.GetDirectoryName(fullToPath);
@@ -81,7 +79,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
-        public override bool TryCopy(string @from, string to, bool overwrite)
+        public override bool TryCopy(string from, string to, bool overwrite)
         {
             try
             {
@@ -148,7 +146,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                 var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
                 return true;
             }
-            catch (System.UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
                 return false;
             }
@@ -177,15 +175,17 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             if (string.IsNullOrEmpty(folderPath))
                 return rootFolder;
-            var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath)).ConfigureAwait(false);
+            var currentFolder = await CreateFolderAsync(rootFolder, Path.GetDirectoryName(folderPath))
+                .ConfigureAwait(false);
 
             //folder name may be empty if original path was ended by a separator like My/Custom/Path/ instead of My/Custom/Path
             var folderName = Path.GetFileName(folderPath);
             if (string.IsNullOrEmpty(folderName))
                 return currentFolder;
-            else
-                return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
-
+            return await currentFolder
+                .CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists)
+                .AsTask()
+                .ConfigureAwait(false);
         }
 
         public override IEnumerable<string> GetFilesIn(string folderPath)
@@ -262,7 +262,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             {
                 var storageFile = await CreateStorageFileFromRelativePathAsync(path).ConfigureAwait(false);
                 using (var streamWithContentType =
-                        await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false))
+                    await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false))
                 {
                     using (var stream = streamWithContentType.AsStreamForWrite())
                     {
@@ -373,7 +373,9 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             var directory = Path.GetDirectoryName(fullPath);
             var fileName = Path.GetFileName(fullPath);
             var storageFolder = await StorageFolder.GetFolderFromPathAsync(directory).AsTask().ConfigureAwait(false);
-            var storageFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting).AsTask().ConfigureAwait(false);
+            var storageFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting)
+                .AsTask()
+                .ConfigureAwait(false);
             return storageFile;
         }
 
@@ -384,8 +386,8 @@ namespace MvvmCross.Plugins.File.WindowsCommon
 
         private static string ToFullPath(string path)
         {
-            var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-            return System.IO.Path.Combine(localFolderPath, path);
+            var localFolderPath = ApplicationData.Current.LocalFolder.Path;
+            return Path.Combine(localFolderPath, path);
         }
     }
 }

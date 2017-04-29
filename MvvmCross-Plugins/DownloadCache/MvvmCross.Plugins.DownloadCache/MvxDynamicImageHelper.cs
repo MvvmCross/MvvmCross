@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
-	public class MvxDynamicImageHelper<T>
+    public class MvxDynamicImageHelper<T>
         : IMvxImageHelper<T>
         where T : class
     {
@@ -31,9 +31,9 @@ namespace MvvmCross.Plugins.DownloadCache
 
         #endregion ImageState enum
 
-        private ImageState _currentImageState = ImageState.DefaultShown;
+        private CancellationTokenSource _cancellationSource;
 
-		private CancellationTokenSource _cancellationSource;
+        private ImageState _currentImageState = ImageState.DefaultShown;
 
         private string _defaultImagePath;
 
@@ -43,7 +43,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string DefaultImagePath
         {
-            get { return _defaultImagePath; }
+            get => _defaultImagePath;
             set
             {
                 if (_defaultImagePath == value)
@@ -58,7 +58,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ErrorImagePath
         {
-            get { return _errorImagePath; }
+            get => _errorImagePath;
             set
             {
                 if (_errorImagePath == value)
@@ -70,7 +70,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ImageUrl
         {
-            get { return _imageUrl; }
+            get => _imageUrl;
             set
             {
                 if (_imageUrl == value)
@@ -90,15 +90,15 @@ namespace MvvmCross.Plugins.DownloadCache
 
         #endregion IDisposable Members
 
-        ~MvxDynamicImageHelper()
-        {
-            Dispose(false);
-        }
-
         public event EventHandler<MvxValueEventArgs<T>> ImageChanged;
 
         public int MaxWidth { get; set; }
         public int MaxHeight { get; set; }
+
+        ~MvxDynamicImageHelper()
+        {
+            Dispose(false);
+        }
 
         private void FireImageChanged(T image)
         {
@@ -108,15 +108,15 @@ namespace MvvmCross.Plugins.DownloadCache
 
         private async Task RequestImageAsync(string imageSource)
         {
-			if (_cancellationSource != null) 
-			{
-				_cancellationSource.Cancel ();
-				_cancellationSource = null;
-			}
+            if (_cancellationSource != null)
+            {
+                _cancellationSource.Cancel();
+                _cancellationSource = null;
+            }
 
-			var cancelTokenSource = new CancellationTokenSource ();
-			var cancelToken = cancelTokenSource.Token;
-			_cancellationSource = cancelTokenSource;
+            var cancelTokenSource = new CancellationTokenSource();
+            var cancelToken = cancelTokenSource.Token;
+            _cancellationSource = cancelTokenSource;
 
             FireImageChanged(null);
 
@@ -136,9 +136,7 @@ namespace MvvmCross.Plugins.DownloadCache
                     var cache = Mvx.Resolve<IMvxImageCache<T>>();
                     var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
 
-					if (cancelToken.IsCancellationRequested) {
-						return;
-					}
+                    if (cancelToken.IsCancellationRequested) return;
 
                     if (image == null)
                         await ShowErrorImage().ConfigureAwait(false);
@@ -160,9 +158,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 {
                     var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
 
-					if (cancelToken.IsCancellationRequested) {
-						return;
-					}
+                    if (cancelToken.IsCancellationRequested) return;
 
                     if (image == null)
                         await ShowErrorImage().ConfigureAwait(false);

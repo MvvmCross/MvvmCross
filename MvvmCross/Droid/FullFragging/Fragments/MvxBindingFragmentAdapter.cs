@@ -10,30 +10,30 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
-        public IMvxFragmentView FragmentView => Fragment as IMvxFragmentView;
-
         public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxFragmentView))
                 throw new ArgumentException("eventSource must be an IMvxFragmentView");
         }
+
+        public IMvxFragmentView FragmentView => Fragment as IMvxFragmentView;
 
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
@@ -64,14 +64,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
                     {
                         IMvxNavigationSerializer serializer;
                         if (!Mvx.TryResolve(out serializer))
-                        {
                             MvxTrace.Warning(
                                 "Navigation Serializer not available, deserializing ViewModel Request will be hard");
-                        }
                         else
-                        {
                             request = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
-                        }
                     }
                 }
             }
@@ -92,7 +88,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         }
 
         protected override void HandleCreateViewCalled(object sender,
-                                               MvxValueEventArgs<MvxCreateViewParameters> args)
+            MvxValueEventArgs<MvxCreateViewParameters> args)
         {
             FragmentView.EnsureBindingContextIsSet(args.Value.Inflater);
         }
@@ -110,13 +106,9 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             {
                 IMvxSavedStateConverter converter;
                 if (!Mvx.TryResolve(out converter))
-                {
                     MvxTrace.Warning("Saved state converter not available - saving state will be hard");
-                }
                 else
-                {
                     converter.Write(bundleArgs.Value, mvxBundle);
-                }
             }
             var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);

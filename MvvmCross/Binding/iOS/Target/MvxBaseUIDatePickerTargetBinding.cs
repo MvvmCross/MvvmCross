@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public abstract class MvxBaseUIDatePickerTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
     {
         protected MvxBaseUIDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -22,27 +20,23 @@ namespace MvvmCross.Binding.iOS.Target
         {
             var datePicker = View;
             if (datePicker == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
-            }
+                    "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
             else
-            {
                 datePicker.ValueChanged += DatePickerOnValueChanged;
-            }
         }
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         private void DatePickerOnValueChanged(object sender, EventArgs eventArgs)
         {
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(this.GetValueFrom(view));
+            FireValueChanged(GetValueFrom(view));
         }
 
         protected abstract object GetValueFrom(UIDatePicker view);
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -51,9 +45,7 @@ namespace MvvmCross.Binding.iOS.Target
             {
                 var datePicker = View;
                 if (datePicker != null)
-                {
                     datePicker.ValueChanged -= DatePickerOnValueChanged;
-                }
             }
         }
     }

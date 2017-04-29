@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Core.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Core;
-
     public interface IMvxView
         : IMvxDataConsumer
     {

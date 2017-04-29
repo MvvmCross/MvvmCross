@@ -2,7 +2,7 @@
 
 namespace Example.ViewModels
 {
-    public class AboutViewModel 
+    public class AboutViewModel
         : MvxViewModel
     {
     }

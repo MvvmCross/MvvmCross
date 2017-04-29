@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxValueConverterRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueConverter>
-          , IMvxValueConverterRegistryFiller
+            , IMvxValueConverterRegistryFiller
     {
         public override string FindName(Type type)
         {

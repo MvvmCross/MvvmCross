@@ -1,19 +1,13 @@
-using Android.Content.Res;
-using Android.OS;
-using Android.Support.V7.Widget;
-using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Core.ViewModels;
 using Example.Droid.Activities;
-using MvvmCross.Droid.Support.V4;
 
 namespace Example.Droid.Fragments
 {
     public abstract class BaseStateFragment : MvxFragment
     {
-        private Toolbar _toolbar;
         private MvxActionBarDrawerToggle _drawerToggle;
+        private Toolbar _toolbar;
+
+        protected abstract int FragmentId { get; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -24,24 +18,22 @@ namespace Example.Droid.Fragments
             _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
             if (_toolbar != null)
             {
-                ((MainActivity)Activity).SetSupportActionBar(_toolbar);
-                ((MainActivity)Activity).SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+                ((MainActivity) Activity).SetSupportActionBar(_toolbar);
+                ((MainActivity) Activity).SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
                 _drawerToggle = new MvxActionBarDrawerToggle(
-                    Activity,                               // host Activity
-                    ((MainActivity)Activity).DrawerLayout,  // DrawerLayout object
-                    _toolbar,                               // nav drawer icon to replace 'Up' caret
-                    Resource.String.drawer_open,            // "open drawer" description
-                    Resource.String.drawer_close            // "close drawer" description
+                    Activity, // host Activity
+                    ((MainActivity) Activity).DrawerLayout, // DrawerLayout object
+                    _toolbar, // nav drawer icon to replace 'Up' caret
+                    Resource.String.drawer_open, // "open drawer" description
+                    Resource.String.drawer_close // "close drawer" description
                 );
 
-                ((MainActivity)Activity).DrawerLayout.AddDrawerListener(_drawerToggle);
+                ((MainActivity) Activity).DrawerLayout.AddDrawerListener(_drawerToggle);
             }
 
             return view;
         }
-
-        protected abstract int FragmentId { get; }
 
         public override void OnConfigurationChanged(Configuration newConfig)
         {
@@ -60,11 +52,10 @@ namespace Example.Droid.Fragments
 
     public abstract class BaseStateFragment<TViewModel> : BaseStateFragment where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }
-

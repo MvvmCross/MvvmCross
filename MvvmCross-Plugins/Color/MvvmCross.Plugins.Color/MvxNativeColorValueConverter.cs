@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
 using System.Globalization;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color
 {
     [Preserve(AllMembers = true)]
-	public class MvxNativeColorValueConverter : MvxColorValueConverter<MvxColor>
+    public class MvxNativeColorValueConverter : MvxColorValueConverter<MvxColor>
     {
         protected override MvxColor Convert(MvxColor value, object parameter, CultureInfo culture)
         {

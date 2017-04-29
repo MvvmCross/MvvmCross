@@ -2,14 +2,17 @@
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable RedundantAssignment
+
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.iOS.Views;
+using MvvmCross.Platform.IoC;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using System.Collections.Specialized;
-    using System.Windows.Input;
-    using MvvmCross.iOS.Views;
-    using Foundation;
-    using UIKit;
-
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
     [Preserve(AllMembers = true)]
@@ -18,13 +21,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
         public void Include(UIButton uiButton)
         {
             uiButton.TouchUpInside += (s, e) =>
-                                      uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
+                uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
         }
 
         public void Include(UIBarButtonItem barButton)
         {
             barButton.Clicked += (s, e) =>
-                                 barButton.Title = barButton.Title + "";
+                barButton.Title = barButton.Title + "";
         }
 
         public void Include(UITextField textField)
@@ -92,22 +95,31 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 
         public void Include(INotifyCollectionChanged changed)
         {
-            changed.CollectionChanged += (s, e) => { var test = $"{e.Action}{e.NewItems}{e.NewStartingIndex}{e.OldItems}{e.OldStartingIndex}"; };
+            changed.CollectionChanged += (s, e) =>
+            {
+                var test = $"{e.Action}{e.NewItems}{e.NewStartingIndex}{e.OldItems}{e.OldStartingIndex}";
+            };
         }
 
         public void Include(ICommand command)
         {
-            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
+            command.CanExecuteChanged += (s, e) =>
+            {
+                if (command.CanExecute(null)) command.Execute(null);
+            };
         }
 
-        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
+        public void Include(MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
+            injector = new MvxPropertyInjector();
         }
 
-        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        public void Include(INotifyPropertyChanged changed)
         {
-            changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
+            changed.PropertyChanged += (sender, e) =>
+            {
+                var test = e.PropertyName;
+            };
         }
     }
 }

@@ -13,21 +13,33 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public static class MvxAppCompatPropertyBindingExtensions
     {
         public static string BindPartialText(this MvxAppCompatAutoCompleteTextView mvxAppCompatAutoCompleteTextView)
-            => MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_PartialText;
+        {
+            return MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_PartialText;
+        }
 
         public static string BindSelectedObject(this MvxAppCompatAutoCompleteTextView mvxAppCompatAutoCompleteTextView)
-            => MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_SelectedObject;
+        {
+            return MvxAppCompatPropertyBinding.MvxAppCompatAutoCompleteTextView_SelectedObject;
+        }
 
         public static string BindSelectedItem(this MvxAppCompatSpinner mvxAppCompatSpinner)
-            => MvxAppCompatPropertyBinding.MvxAppCompatSpinner_SelectedItem;
+        {
+            return MvxAppCompatPropertyBinding.MvxAppCompatSpinner_SelectedItem;
+        }
 
         public static string BindSelectedItem(this MvxAppCompatRadioGroup mvxAppCompatRadioGroup)
-            => MvxAppCompatPropertyBinding.MvxAppCompatRadioGroup_SelectedItem;
+        {
+            return MvxAppCompatPropertyBinding.MvxAppCompatRadioGroup_SelectedItem;
+        }
 
         public static string BindQuery(this SearchView searchView)
-            => MvxAppCompatPropertyBinding.SearchView_Query;
+        {
+            return MvxAppCompatPropertyBinding.SearchView_Query;
+        }
 
         public static string BindSubtitle(this Toolbar toolbar)
-           => MvxAppCompatPropertyBinding.Toolbar_Subtitle;
+        {
+            return MvxAppCompatPropertyBinding.Toolbar_Subtitle;
+        }
     }
 }

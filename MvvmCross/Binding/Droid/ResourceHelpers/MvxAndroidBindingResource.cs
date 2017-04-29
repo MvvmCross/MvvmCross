@@ -5,27 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.ResourceHelpers
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidBindingResource
         : MvxSingleton<IMvxAndroidBindingResource>
-        , IMvxAndroidBindingResource
+            , IMvxAndroidBindingResource
     {
-        public static void Initialize()
-        {
-            if (Instance != null)
-                return;
-
-            var androidBindingResource = new MvxAndroidBindingResource();
-        }
-
         private MvxAndroidBindingResource()
         {
             var finder = Mvx.Resolve<IMvxAppResourceTypeFinder>();
@@ -33,68 +24,51 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             try
             {
                 var id = resourceType.GetNestedType("Id");
-                this.BindingTagUnique = (int)SafeGetFieldValue(id, "MvxBindingTagUnique");
+                BindingTagUnique = (int) SafeGetFieldValue(id, "MvxBindingTagUnique");
 
                 var styleable = resourceType.GetNestedType("Styleable");
 
-                this.ControlStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxControl", new int[0]);
-                this.TemplateId =
-                    (int)SafeGetFieldValue(styleable, "MvxControl_MvxTemplate");
+                ControlStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxControl", new int[0]);
+                TemplateId =
+                    (int) SafeGetFieldValue(styleable, "MvxControl_MvxTemplate");
 
-                this.BindingStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
-                this.BindingBindId =
-                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
-                this.BindingLangId =
-                    (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
+                BindingStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxBinding", new int[0]);
+                BindingBindId =
+                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
+                BindingLangId =
+                    (int) SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
 
-                this.ImageViewStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
-                this.SourceBindId =
+                ImageViewStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
+                SourceBindId =
                     (int)
                     SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
 
-                this.ListViewStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxListView");
-                this.ListItemTemplateId =
+                ListViewStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxListView");
+                ListItemTemplateId =
                     (int)
                     styleable
                         .GetField("MvxListView_MvxItemTemplate")
                         .GetValue(null);
-                this.DropDownListItemTemplateId =
+                DropDownListItemTemplateId =
                     (int)
                     styleable
                         .GetField("MvxListView_MvxDropDownItemTemplate")
                         .GetValue(null);
 
-                this.ExpandableListViewStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxExpandableListView", new int[0]);
-                this.GroupItemTemplateId =
-                    (int)SafeGetFieldValue(styleable, "MvxExpandableListView_MvxGroupItemTemplate");
+                ExpandableListViewStylableGroupId =
+                    (int[]) SafeGetFieldValue(styleable, "MvxExpandableListView", new int[0]);
+                GroupItemTemplateId =
+                    (int) SafeGetFieldValue(styleable, "MvxExpandableListView_MvxGroupItemTemplate");
             }
             catch (Exception exception)
             {
                 throw exception.MvxWrap(
                     "Error finding resource ids for MvxBinding - please make sure ResourcesToCopy are linked into the executable");
             }
-        }
-
-        private static object SafeGetFieldValue(Type styleable, string fieldName)
-        {
-            return SafeGetFieldValue(styleable, fieldName, 0);
-        }
-
-        private static object SafeGetFieldValue(Type styleable, string fieldName, object defaultValue)
-        {
-            var field = styleable.GetField(fieldName);
-            if (field == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Missing stylable field {0}", fieldName);
-                return defaultValue;
-            }
-
-            return field.GetValue(null);
         }
 
         public int BindingTagUnique { get; }
@@ -115,5 +89,30 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
 
         public int[] ExpandableListViewStylableGroupId { get; }
         public int GroupItemTemplateId { get; }
+
+        public static void Initialize()
+        {
+            if (Instance != null)
+                return;
+
+            var androidBindingResource = new MvxAndroidBindingResource();
+        }
+
+        private static object SafeGetFieldValue(Type styleable, string fieldName)
+        {
+            return SafeGetFieldValue(styleable, fieldName, 0);
+        }
+
+        private static object SafeGetFieldValue(Type styleable, string fieldName, object defaultValue)
+        {
+            var field = styleable.GetField(fieldName);
+            if (field == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Missing stylable field {0}", fieldName);
+                return defaultValue;
+            }
+
+            return field.GetValue(null);
+        }
     }
 }

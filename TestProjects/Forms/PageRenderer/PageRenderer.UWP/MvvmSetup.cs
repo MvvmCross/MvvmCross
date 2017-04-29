@@ -1,27 +1,27 @@
 ﻿using Windows.ApplicationModel.Activation;
-using XamlControls = Windows.UI.Xaml.Controls;
-
-using Xamarin.Forms;
-
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Uwp.Platform;
-using MvvmCross.Uwp.Views;
-using MvvmCross.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Uwp.Platform;
+using MvvmCross.Uwp.Views;
 using PageRendererExample.ViewModels;
+using Xamarin.Forms;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace PageRendererExample.UI.Uwp
 {
-    class MvvmSetup : MvxWindowsSetup
+    internal class MvvmSetup : MvxWindowsSetup
     {
         private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
-        public MvxFormsApp MvxFormsApp { get; private set; }
+
         public MvvmSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame)
         {
             _launchActivatedEventArgs = e;
         }
+
+        public MvxFormsApp MvxFormsApp { get; private set; }
 
         protected override IMvxApplication CreateApp()
         {

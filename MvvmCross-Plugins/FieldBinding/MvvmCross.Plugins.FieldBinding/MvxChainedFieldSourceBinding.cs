@@ -5,19 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Converters;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxChainedFieldSourceBinding
+    public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding
     {
         private readonly IList<MvxPropertyToken> _childTokens;
@@ -28,6 +28,19 @@ namespace MvvmCross.Plugins.FieldBinding
         {
             _childTokens = childTokens;
             UpdateChildBinding();
+        }
+
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
+
+        public override Type SourceType
+        {
+            get
+            {
+                if (_currentChildBinding == null)
+                    return typeof(object);
+
+                return _currentChildBinding.SourceType;
+            }
         }
 
         private void UpdateChildBinding()
@@ -42,7 +55,6 @@ namespace MvvmCross.Plugins.FieldBinding
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
-                return;
             }
             else
             {
@@ -50,8 +62,6 @@ namespace MvvmCross.Plugins.FieldBinding
                 _currentChildBinding.Changed += ChildSourceBindingChanged;
             }
         }
-
-        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
 
         private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
@@ -63,23 +73,10 @@ namespace MvvmCross.Plugins.FieldBinding
             _currentChildBinding?.SetValue(value);
         }
 
-        public override Type SourceType
-        {
-            get
-            {
-                if (_currentChildBinding == null)
-                    return typeof(object);
-
-                return _currentChildBinding.SourceType;
-            }
-        }
-
         public override object GetValue()
         {
             if (_currentChildBinding == null)
-            {
                 return MvxBindingConstant.UnsetValue;
-            }
             return _currentChildBinding.GetValue();
         }
     }

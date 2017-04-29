@@ -1,8 +1,6 @@
-﻿using System;
-using Eventhooks.Core.ViewModels;
+﻿using Eventhooks.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Eventhooks.iOS
@@ -22,7 +20,6 @@ namespace Eventhooks.iOS
             var bindingSet = this.CreateBindingSet<FirstView, FirstViewModel>();
             bindingSet.Bind(SecondViewButton).To(vm => vm.ShowSecondView);
             bindingSet.Apply();
-
         }
 
         public override void DidReceiveMemoryWarning()
@@ -32,4 +29,3 @@ namespace Eventhooks.iOS
         }
     }
 }
-

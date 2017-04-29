@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using Foundation;
 using Twitter;
 
 namespace MvvmCross.Plugins.Share.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxShareTask
+    public class MvxShareTask
         : MvxIosTask
-          , IMvxShareTask
+            , IMvxShareTask
 
     {
         private readonly IMvxIosModalHost _modalHost;

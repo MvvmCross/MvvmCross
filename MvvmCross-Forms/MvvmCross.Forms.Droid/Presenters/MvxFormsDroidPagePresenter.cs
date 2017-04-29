@@ -14,7 +14,7 @@ namespace MvvmCross.Forms.Droid.Presenters
 {
     public class MvxFormsDroidPagePresenter
         : MvxFormsPagePresenter
-        , IMvxAndroidViewPresenter
+            , IMvxAndroidViewPresenter
     {
         public MvxFormsDroidPagePresenter()
         {

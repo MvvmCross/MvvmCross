@@ -19,14 +19,14 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Plugins.Location.Droid
 {
     [Preserve(AllMembers = true)]
-	public sealed class MvxAndroidLocationWatcher
+    public sealed class MvxAndroidLocationWatcher
         : MvxLocationWatcher
-          , IMvxLocationReceiver
+            , IMvxLocationReceiver
     {
-        private Context _context;
-        private LocationManager _locationManager;
         private readonly MvxLocationListener _locationListener;
         private string _bestProvider;
+        private Context _context;
+        private LocationManager _locationManager;
 
         public MvxAndroidLocationWatcher()
         {
@@ -36,22 +36,37 @@ namespace MvvmCross.Plugins.Location.Droid
 
         private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_locationManager == null || _bestProvider == null)
+                    throw new MvxException("Location Manager not started");
+
+                var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
+                if (androidLocation == null)
+                    return null;
+
+                return CreateLocation(androidLocation);
+            }
+        }
+
         protected override void PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_locationManager != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
 
-            _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
+            _locationManager = (LocationManager) Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
                 MvxTrace.Warning("Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
-            var criteria = new Criteria()
-                {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
-                };
+            var criteria = new Criteria
+            {
+                Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
+            };
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
             {
@@ -61,14 +76,14 @@ namespace MvvmCross.Plugins.Location.Droid
             }
 
             _locationManager.RequestLocationUpdates(
-                _bestProvider, 
-                (long)options.TimeBetweenUpdates.TotalMilliseconds,
-                options.MovementThresholdInM, 
+                _bestProvider,
+                (long) options.TimeBetweenUpdates.TotalMilliseconds,
+                options.MovementThresholdInM,
                 _locationListener);
 
-			Permission = _locationManager.IsProviderEnabled (_bestProvider)
-				? MvxLocationPermission.Granted
-				: MvxLocationPermission.Denied;
+            Permission = _locationManager.IsProviderEnabled(_bestProvider)
+                ? MvxLocationPermission.Granted
+                : MvxLocationPermission.Denied;
         }
 
         protected override void PlatformSpecificStop()
@@ -86,9 +101,9 @@ namespace MvvmCross.Plugins.Location.Droid
             }
         }
 
-        private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
+        private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
         {
-            var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
+            var position = new MvxGeoLocation {Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc()};
             var coords = position.Coordinates;
 
             if (androidLocation.HasAltitude)
@@ -102,31 +117,14 @@ namespace MvvmCross.Plugins.Location.Droid
             if (androidLocation.HasSpeed)
                 coords.Speed = androidLocation.Speed;
             if (androidLocation.HasAccuracy)
-            {
                 coords.Accuracy = androidLocation.Accuracy;
-            }
 
             return position;
         }
 
-        public override MvxGeoLocation CurrentLocation 
-        { 
-            get
-            {
-                if (_locationManager == null || _bestProvider == null)
-                    throw new MvxException("Location Manager not started");
-
-                var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
-                if (androidLocation == null)
-                    return null;
-
-                return CreateLocation(androidLocation);
-            }
-        }
-
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(global::Android.Locations.Location androidLocation)
+        public void OnLocationChanged(Android.Locations.Location androidLocation)
         {
             if (androidLocation == null)
             {
@@ -161,13 +159,13 @@ namespace MvvmCross.Plugins.Location.Droid
 
         public void OnProviderDisabled(string provider)
         {
-			Permission = MvxLocationPermission.Denied;
+            Permission = MvxLocationPermission.Denied;
             SendError(MvxLocationErrorCode.ServiceUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-			Permission = MvxLocationPermission.Granted;
+            Permission = MvxLocationPermission.Granted;
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)

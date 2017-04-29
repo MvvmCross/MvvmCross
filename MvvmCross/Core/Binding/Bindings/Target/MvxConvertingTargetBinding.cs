@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System.Collections.Generic;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxConvertingTargetBinding : MvxTargetBinding
     {
         private bool _isUpdatingSource;
@@ -32,7 +32,8 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 
@@ -46,7 +47,6 @@ namespace MvvmCross.Binding.Bindings.Target
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
             if (_isUpdatingSource)
-            {
                 if (safeValue == null)
                 {
                     if (_updatingSourceWith == null)
@@ -57,7 +57,6 @@ namespace MvvmCross.Binding.Bindings.Target
                     if (safeValue.Equals(_updatingSourceWith))
                         return;
                 }
-            }
 
             try
             {
@@ -129,7 +128,8 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 
@@ -143,12 +143,8 @@ namespace MvvmCross.Binding.Bindings.Target
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
             if (_isUpdatingSource)
-            {
                 if (EqualityComparer<TValue>.Default.Equals(value, _updatingSourceWith))
-                {
                     return;
-                }
-            }
 
             try
             {
@@ -173,7 +169,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual TValue MakeSafeValue(TValue value)
         {
-            var safeValue = (TValue)TargetType.MakeSafeValue(value);
+            var safeValue = (TValue) TargetType.MakeSafeValue(value);
             return safeValue;
         }
 

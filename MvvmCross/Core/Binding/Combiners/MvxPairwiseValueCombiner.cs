@@ -5,19 +5,46 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-
     public abstract class MvxPairwiseValueCombiner
         : MvxValueCombiner
     {
+        private readonly Dictionary<TypeTuple, CombinerFunc<object, object>> _combinerActions;
+
+        protected MvxPairwiseValueCombiner()
+        {
+            _combinerActions = new Dictionary<TypeTuple, CombinerFunc<object, object>>();
+            AddSingle<object, object>(CombineObjectAndObject);
+            AddSingle<object, double>(CombineObjectAndDouble);
+            AddSingle<object, long>(CombineObjectAndLong);
+            AddSingle<object, decimal>(CombineObjectAndDecimal);
+            AddSingle<double, object>(CombineDoubleAndObject);
+            AddSingle<double, double>(CombineDoubleAndDouble);
+            AddSingle<double, long>(CombineDoubleAndLong);
+            AddSingle<double, decimal>(CombineDoubleAndDecimal);
+            AddSingle<long, object>(CombineLongAndObject);
+            AddSingle<long, double>(CombineLongAndDouble);
+            AddSingle<long, long>(CombineLongAndLong);
+            AddSingle<long, decimal>(CombineLongAndDecimal);
+            AddSingle<decimal, object>(CombineDecimalAndObject);
+            AddSingle<decimal, double>(CombineDecimalAndDouble);
+            AddSingle<decimal, long>(CombineDecimalAndLong);
+            AddSingle<decimal, decimal>(CombineDecimalAndDecimal);
+            AddSingle<object>(CombineObjectAndNull, CombineNullAndObject);
+            AddSingle<double>(CombineDoubleAndNull, CombineNullAndDouble);
+            AddSingle<long>(CombineLongAndNull, CombineNullAndLong);
+            AddSingle<decimal>(CombineDecimalAndNull, CombineNullAndDecimal);
+            AddSingle(CombineTwoNulls);
+        }
+
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
             Mvx.Trace("The Add Combiner does not support SetValue");
@@ -26,12 +53,6 @@ namespace MvvmCross.Binding.Combiners
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
         {
             return steps.First().SourceType;
-        }
-
-        private class ResultPair
-        {
-            public bool IsAvailable { get; set; }
-            public object Value { get; set; }
         }
 
         private static Type GetLookupTypeFor(object value)
@@ -47,101 +68,33 @@ namespace MvvmCross.Binding.Combiners
             return typeof(object);
         }
 
-        public class TypeTuple
-        {
-            public TypeTuple(Type type1, Type type2)
-            {
-                this.Type2 = type2;
-                this.Type1 = type1;
-            }
-
-            public Type Type1 { get; }
-            public Type Type2 { get; }
-
-            public override bool Equals(object obj)
-            {
-                var rhs = obj as TypeTuple;
-
-                if (rhs == null)
-                    return false;
-
-                return rhs.Type2 == this.Type2
-                       && rhs.Type1 == this.Type1;
-            }
-
-            public override int GetHashCode()
-            {
-                return (this.Type1?.GetHashCode() ?? 0) + (this.Type2?.GetHashCode() ?? 0);
-            }
-        }
-
-        private delegate bool CombinerFunc(out object value);
-
-        private delegate bool CombinerFunc<in T1>(T1 input1, out object value);
-
-        private delegate bool CombinerFunc<in T1, in T2>(T1 input1, T2 input2, out object value);
-
-        private readonly Dictionary<TypeTuple, CombinerFunc<object, object>> _combinerActions;
-
-        protected MvxPairwiseValueCombiner()
-        {
-            this._combinerActions = new Dictionary<TypeTuple, CombinerFunc<object, object>>();
-            this.AddSingle<object, object>(this.CombineObjectAndObject);
-            this.AddSingle<object, double>(this.CombineObjectAndDouble);
-            this.AddSingle<object, long>(this.CombineObjectAndLong);
-            this.AddSingle<object, decimal>(this.CombineObjectAndDecimal);
-            this.AddSingle<double, object>(this.CombineDoubleAndObject);
-            this.AddSingle<double, double>(this.CombineDoubleAndDouble);
-            this.AddSingle<double, long>(this.CombineDoubleAndLong);
-            this.AddSingle<double, decimal>(this.CombineDoubleAndDecimal);
-            this.AddSingle<long, object>(this.CombineLongAndObject);
-            this.AddSingle<long, double>(this.CombineLongAndDouble);
-            this.AddSingle<long, long>(this.CombineLongAndLong);
-            this.AddSingle<long, decimal>(this.CombineLongAndDecimal);
-            this.AddSingle<decimal, object>(this.CombineDecimalAndObject);
-            this.AddSingle<decimal, double>(this.CombineDecimalAndDouble);
-            this.AddSingle<decimal, long>(this.CombineDecimalAndLong);
-            this.AddSingle<decimal, decimal>(this.CombineDecimalAndDecimal);
-            this.AddSingle<object>(this.CombineObjectAndNull, this.CombineNullAndObject);
-            this.AddSingle<double>(this.CombineDoubleAndNull, this.CombineNullAndDouble);
-            this.AddSingle<long>(this.CombineLongAndNull, this.CombineNullAndLong);
-            this.AddSingle<decimal>(this.CombineDecimalAndNull, this.CombineNullAndDecimal);
-            this.AddSingle(this.CombineTwoNulls);
-        }
-
         private void AddSingle(CombinerFunc combinerAction)
         {
-            this._combinerActions[new TypeTuple(null, null)] = (object x, object y, out object v) => combinerAction(out v);
+            _combinerActions[new TypeTuple(null, null)] = (object x, object y, out object v) => combinerAction(out v);
         }
 
         private void AddSingle<T1>(CombinerFunc<T1> combinerAction, CombinerFunc<T1> switchedCombinerAction)
         {
-            this._combinerActions[new TypeTuple(typeof(T1), null)] =
-                (object x, object y, out object v) => combinerAction((T1)x, out v);
-            this._combinerActions[new TypeTuple(null, typeof(T1))] =
-                (object x, object y, out object v) => switchedCombinerAction((T1)y, out v);
+            _combinerActions[new TypeTuple(typeof(T1), null)] =
+                (object x, object y, out object v) => combinerAction((T1) x, out v);
+            _combinerActions[new TypeTuple(null, typeof(T1))] =
+                (object x, object y, out object v) => switchedCombinerAction((T1) y, out v);
         }
 
         private void AddSingle<T1, T2>(CombinerFunc<T1, T2> combinerAction)
         {
-            this._combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
-                (object x, object y, out object v) => combinerAction((T1)x, (T2)y, out v);
+            _combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
+                (object x, object y, out object v) => combinerAction((T1) x, (T2) y, out v);
         }
 
         protected virtual object ForceToSimpleValueTypes(object input)
         {
             if (input is int)
-            {
-                return (long)(int)input;
-            }
+                return (long) (int) input;
             if (input is short)
-            {
-                return (long)(short)input;
-            }
+                return (long) (short) input;
             if (input is float)
-            {
-                return (double)(float)input;
-            }
+                return (double) (float) input;
 
             return input;
         }
@@ -169,14 +122,14 @@ namespace MvvmCross.Binding.Combiners
                     return true;
                 }
 
-                first = this.ForceToSimpleValueTypes(first);
-                second = this.ForceToSimpleValueTypes(second);
+                first = ForceToSimpleValueTypes(first);
+                second = ForceToSimpleValueTypes(second);
 
                 var firstType = GetLookupTypeFor(first);
                 var secondType = GetLookupTypeFor(second);
 
                 CombinerFunc<object, object> combinerFunc;
-                if (!this._combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
+                if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
                     Mvx.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
                     value = MvxBindingConstant.UnsetValue;
@@ -248,5 +201,45 @@ namespace MvvmCross.Binding.Combiners
         protected abstract bool CombineNullAndDecimal(decimal input2, out object value);
 
         protected abstract bool CombineTwoNulls(out object value);
+
+        private class ResultPair
+        {
+            public bool IsAvailable { get; set; }
+            public object Value { get; set; }
+        }
+
+        public class TypeTuple
+        {
+            public TypeTuple(Type type1, Type type2)
+            {
+                Type2 = type2;
+                Type1 = type1;
+            }
+
+            public Type Type1 { get; }
+            public Type Type2 { get; }
+
+            public override bool Equals(object obj)
+            {
+                var rhs = obj as TypeTuple;
+
+                if (rhs == null)
+                    return false;
+
+                return rhs.Type2 == Type2
+                       && rhs.Type1 == Type1;
+            }
+
+            public override int GetHashCode()
+            {
+                return (Type1?.GetHashCode() ?? 0) + (Type2?.GetHashCode() ?? 0);
+            }
+        }
+
+        private delegate bool CombinerFunc(out object value);
+
+        private delegate bool CombinerFunc<in T1>(T1 input1, out object value);
+
+        private delegate bool CombinerFunc<in T1, in T2>(T1 input1, T2 input2, out object value);
     }
 }

@@ -5,31 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.tvOS.Platform;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.tvOS.Platform;
-
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFormFactorSpecificAttribute
         : MvxConditionalConventionalAttribute
     {
         public MvxFormFactorSpecificAttribute(MvxTvosFormFactor target)
         {
-            this.Target = target;
+            Target = target;
         }
 
-        public MvxTvosFormFactor Target { get; private set; }
+        public MvxTvosFormFactor Target { get; }
 
         public override bool IsConditionSatisfied
         {
             get
             {
                 var properties = Mvx.Resolve<IMvxTvosPlatformProperties>();
-                return (properties.FormFactor == this.Target);
+                return properties.FormFactor == Target;
             }
         }
     }

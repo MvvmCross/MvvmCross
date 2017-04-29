@@ -1,22 +1,22 @@
 ﻿namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     /// <summary>
-    /// Denotes the panel hint type
+    ///     Denotes the panel hint type
     /// </summary>
     public enum MvxPanelHintType
     {
         /// <summary>
-        /// Push panel
+        ///     Push panel
         /// </summary>
         PushPanel,
 
         /// <summary>
-        /// The reset root
+        ///     The reset root
         /// </summary>
         ResetRoot,
 
         /// <summary>
-        /// The pop to root
+        ///     The pop to root
         /// </summary>
         PopToRoot
     }

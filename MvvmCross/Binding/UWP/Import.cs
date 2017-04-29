@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
-
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
@@ -17,16 +16,16 @@ namespace MvvmCross.Binding.Uwp
 {
     public class Import
     {
+        private object _from;
+
         static Import()
         {
             MvxDesignTimeChecker.Check();
         }
 
-        private object _from;
-
         public object From
         {
-            get { return _from; }
+            get => _from;
             set
             {
                 if (_from == value)
@@ -34,9 +33,7 @@ namespace MvvmCross.Binding.Uwp
 
                 _from = value;
                 if (_from != null)
-                {
                     RegisterAssembly(_from.GetType().GetTypeInfo().Assembly);
-                }
             }
         }
 
@@ -50,15 +47,9 @@ namespace MvvmCross.Binding.Uwp
             else
             {
                 Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
+                    registry => { registry.AddOrOverwriteFrom(assembly); });
                 Mvx.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
+                    registry => { registry.AddOrOverwriteFrom(assembly); });
             }
         }
     }

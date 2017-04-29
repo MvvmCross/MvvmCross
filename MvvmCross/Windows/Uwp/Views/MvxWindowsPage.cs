@@ -7,10 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -20,9 +19,15 @@ namespace MvvmCross.Uwp.Views
 {
     public class MvxWindowsPage
         : Page
-        , IMvxWindowsView
-        , IDisposable
+            , IMvxWindowsView
+            , IDisposable
     {
+        private string _pageKey;
+
+        private IMvxSuspensionManager _suspensionManager;
+
+        private IMvxViewModel _viewModel;
+
         public MvxWindowsPage()
         {
             Loading += MvxWindowsPage_Loading;
@@ -30,34 +35,27 @@ namespace MvvmCross.Uwp.Views
             Unloaded += MvxWindowsPage_Unloaded;
         }
 
-        private void MvxWindowsPage_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
-        {
-            ViewModel?.Appearing();
-        }
-
-        private void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            ViewModel?.Appeared();
-        }
-
-        private void MvxWindowsPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            ViewModel?.Disappeared();
-        }
-
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            ViewModel?.Disappearing();
-            base.OnNavigatingFrom(e);
-        }
-
-        private IMvxViewModel _viewModel;
-
         public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
+
+        protected IMvxSuspensionManager SuspensionManager
+        {
+            get
+            {
+                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
+                return _suspensionManager;
+            }
+        }
+
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get => _viewModel;
             set
             {
                 if (_viewModel == value)
@@ -78,12 +76,33 @@ namespace MvvmCross.Uwp.Views
          */
         }
 
+        private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
+        {
+            ViewModel?.Appearing();
+        }
+
+        private void MvxWindowsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel?.Appeared();
+        }
+
+        private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel?.Disappeared();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            ViewModel?.Disappearing();
+            base.OnNavigatingFrom(e);
+        }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            var reqData = (string)e.Parameter;
+            var reqData = (string) e.Parameter;
             var converter = Mvx.Resolve<IMvxNavigationSerializer>();
             var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
 
@@ -96,21 +115,9 @@ namespace MvvmCross.Uwp.Views
 
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
-            
+
             if (e.NavigationMode == NavigationMode.Back)
                 this.OnViewDestroy();
-        }
-
-        private string _pageKey;
-
-        private IMvxSuspensionManager _suspensionManager;
-        protected IMvxSuspensionManager SuspensionManager
-        {
-            get
-            {
-                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
-                return _suspensionManager;
-            }
         }
 
         protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
@@ -118,7 +125,7 @@ namespace MvvmCross.Uwp.Views
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             _pageKey = "Page-" + Frame.BackStackDepth;
-             IMvxBundle bundle = null;
+            IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {
@@ -134,7 +141,7 @@ namespace MvvmCross.Uwp.Views
             }
             else
             {
-                var dictionary = (IDictionary<string, string>)frameState[_pageKey];
+                var dictionary = (IDictionary<string, string>) frameState[_pageKey];
                 bundle = new MvxBundle(dictionary);
             }
 
@@ -145,13 +152,6 @@ namespace MvvmCross.Uwp.Views
         {
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             frameState[_pageKey] = bundle.Data;
-        }
-
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         ~MvxWindowsPage()
@@ -172,12 +172,12 @@ namespace MvvmCross.Uwp.Views
 
     public class MvxWindowsPage<TViewModel>
         : MvxWindowsPage
-        , IMvxWindowsView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxWindowsView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

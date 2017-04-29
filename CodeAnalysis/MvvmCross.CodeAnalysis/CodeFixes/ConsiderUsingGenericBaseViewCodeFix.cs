@@ -1,28 +1,31 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Composition;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Editing;
+using Microsoft.CodeAnalysis.Formatting;
 using MvvmCross.CodeAnalysis.Analyzers;
 using MvvmCross.CodeAnalysis.Core;
-using System.Collections.Immutable;
-using System.Composition;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace MvvmCross.CodeAnalysis.CodeFixes
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConsiderUsingGenericBaseViewCodeFix)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConsiderUsingGenericBaseViewCodeFix))]
+    [Shared]
     public class ConsiderUsingGenericBaseViewCodeFix : CodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DiagnosticIds.UseGenericBaseClassRuleId);
 
-        public sealed override FixAllProvider GetFixAllProvider() =>
-            WellKnownFixAllProviders.BatchFixer;
+        public sealed override FixAllProvider GetFixAllProvider()
+        {
+            return WellKnownFixAllProviders.BatchFixer;
+        }
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -53,7 +56,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                             , derivingClass
                             , viewModelProperty
                             , cancelToken)
-                            , $"{derivingClass.Type}<{viewModelProperty.Type}>")
+                    , $"{derivingClass.Type}<{viewModelProperty.Type}>")
                 , diagnostic);
         }
 
@@ -64,17 +67,18 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
             , CancellationToken cancellationToken)
         {
             var genericClassDeclaration = SyntaxFactory.SimpleBaseType(
-                SyntaxFactory.GenericName(
-                    SyntaxFactory.Identifier(
-                            derivingClass.Type.ToString()
+                    SyntaxFactory.GenericName(
+                            SyntaxFactory.Identifier(
+                                derivingClass.Type.ToString()
+                            )
                         )
-                    )
-                    .WithTypeArgumentList(
-                        SyntaxFactory.TypeArgumentList(
-                            SyntaxFactory.SingletonSeparatedList(viewModelProperty.Type)
+                        .WithTypeArgumentList(
+                            SyntaxFactory.TypeArgumentList(
+                                SyntaxFactory.SingletonSeparatedList(viewModelProperty.Type)
+                            )
                         )
-                    )
-                ).WithAdditionalAnnotations(Formatter.Annotation);
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
             editor.RemoveNode(viewModelProperty);

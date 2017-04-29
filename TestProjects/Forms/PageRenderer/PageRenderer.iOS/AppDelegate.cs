@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
+﻿using Foundation;
 using MvvmCross.Forms.iOS;
 using PageRendererExample.UI.iOS;
+using UIKit;
 
 namespace pagerenderexample.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxFormsApplicationDelegate
+    public class AppDelegate : MvxFormsApplicationDelegate
     {
         private UIWindow _window;
 
@@ -32,4 +24,3 @@ namespace pagerenderexample.iOS
         }
     }
 }
-

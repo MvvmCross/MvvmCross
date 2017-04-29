@@ -1,13 +1,9 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-
-namespace Eventhooks.Droid
+﻿namespace Eventhooks.Droid
 {
     [Activity(Label = "Eventhooks", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
+        private int count = 1;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,4 +20,3 @@ namespace Eventhooks.Droid
         }
     }
 }
-

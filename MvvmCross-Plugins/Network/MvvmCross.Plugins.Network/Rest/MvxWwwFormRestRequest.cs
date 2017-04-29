@@ -13,9 +13,23 @@ using System.Text;
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxWwwFormRestRequest<T>
+    public class MvxWwwFormRestRequest<T>
         : MvxTextBasedRestRequest
     {
+        public MvxWwwFormRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
+            string tag = null)
+            : base(url, verb, accept, tag)
+        {
+            InitializeCommon();
+        }
+
+        public MvxWwwFormRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
+            string tag = null)
+            : base(url, verb, accept, tag)
+        {
+            InitializeCommon();
+        }
+
         public override bool NeedsRequestStream => Parameters != null && Parameters.Count > 0;
 
         public Dictionary<string, object> Parameters { get; set; }
@@ -33,20 +47,6 @@ namespace MvvmCross.Plugins.Network.Rest
                 text.Append(Uri.EscapeDataString(kvp.Value.ToString()));
             }
             WriteTextToStream(stream, text.ToString());
-        }
-
-        public MvxWwwFormRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
-                                     string tag = null)
-            : base(url, verb, accept, tag)
-        {
-            InitializeCommon();
-        }
-
-        public MvxWwwFormRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
-                                     string tag = null)
-            : base(url, verb, accept, tag)
-        {
-            InitializeCommon();
         }
 
         private void InitializeCommon()

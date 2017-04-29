@@ -5,41 +5,41 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxJsonRestRequest<T>
+    public class MvxJsonRestRequest<T>
         : MvxTextBasedRestRequest
         where T : class
     {
-        public override bool NeedsRequestStream => Body != null;
-
-        public override void ProcessRequestStream(Stream stream)
-        {
-            var json = JsonConverterProvider?.Invoke().SerializeObject(Body);
-            WriteTextToStream(stream, json);
-        }
-
-        public T Body { get; set; }
-        public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
-
         public MvxJsonRestRequest(string url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
-                                  string tag = null)
+            string tag = null)
             : base(url, verb, accept, tag)
         {
             InitializeCommon();
         }
 
         public MvxJsonRestRequest(Uri url, string verb = MvxVerbs.Post, string accept = MvxContentType.Json,
-                                  string tag = null)
+            string tag = null)
             : base(url, verb, accept, tag)
         {
             InitializeCommon();
+        }
+
+        public override bool NeedsRequestStream => Body != null;
+
+        public T Body { get; set; }
+        public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
+
+        public override void ProcessRequestStream(Stream stream)
+        {
+            var json = JsonConverterProvider?.Invoke().SerializeObject(Body);
+            WriteTextToStream(stream, json);
         }
 
         private void InitializeCommon()

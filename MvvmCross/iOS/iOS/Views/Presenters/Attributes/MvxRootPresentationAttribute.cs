@@ -1,5 +1,4 @@
-﻿using System;
-namespace MvvmCross.iOS.Views.Presenters.Attributes
+﻿namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
     public class MvxRootPresentationAttribute : MvxBasePresentationAttribute
     {

@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using System;
+using System.Collections.Generic;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System;
-using System.Collections.Generic;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxChainedNotifyChangeFieldSourceBinding
+    public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
         public static bool DisableWarnIndexedValueBindingWarning = false;
@@ -27,35 +27,13 @@ namespace MvvmCross.Plugins.FieldBinding
         private IMvxSourceBinding _currentChildBinding;
 
         public MvxChainedNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange,
-                                                        List<MvxPropertyToken> childTokens)
+            List<MvxPropertyToken> childTokens)
             : base(source, notifyChange)
         {
             _childTokens = childTokens;
             if (!DisableWarnIndexedValueBindingWarning)
                 WarnIfChildTokensSuspiciousOfIndexedValueBinding();
             UpdateChildBinding();
-        }
-
-        private void WarnIfChildTokensSuspiciousOfIndexedValueBinding()
-        {
-            if (_childTokens == null || _childTokens.Count < 2)
-                return;
-
-            var firstAsName = _childTokens[0] as MvxPropertyNamePropertyToken;
-            if (firstAsName == null || firstAsName.PropertyName != "Value")
-                return;
-
-            var secondAsIndexed = _childTokens[1] as MvxIndexerPropertyToken;
-            if (secondAsIndexed == null)
-                return;
-
-            MvxBindingTrace.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
-        }
-
-        protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
-        {
-            UpdateChildBinding();
-            FireChanged();
         }
 
         private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
@@ -71,6 +49,29 @@ namespace MvvmCross.Plugins.FieldBinding
             }
         }
 
+        private void WarnIfChildTokensSuspiciousOfIndexedValueBinding()
+        {
+            if (_childTokens == null || _childTokens.Count < 2)
+                return;
+
+            var firstAsName = _childTokens[0] as MvxPropertyNamePropertyToken;
+            if (firstAsName == null || firstAsName.PropertyName != "Value")
+                return;
+
+            var secondAsIndexed = _childTokens[1] as MvxIndexerPropertyToken;
+            if (secondAsIndexed == null)
+                return;
+
+            MvxBindingTrace.Warning(
+                "Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
+        }
+
+        protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
+        {
+            UpdateChildBinding();
+            FireChanged();
+        }
+
         protected void UpdateChildBinding()
         {
             if (_currentChildBinding != null)
@@ -81,15 +82,12 @@ namespace MvvmCross.Plugins.FieldBinding
             }
 
             if (NotifyChange == null)
-            {
                 return;
-            }
 
             var currentValue = NotifyChange.Value;
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
-                return;
             }
             else
             {
@@ -106,9 +104,7 @@ namespace MvvmCross.Plugins.FieldBinding
         public override object GetValue()
         {
             if (_currentChildBinding == null)
-            {
                 return MvxBindingConstant.UnsetValue;
-            }
 
             return _currentChildBinding.GetValue();
         }
@@ -118,7 +114,7 @@ namespace MvvmCross.Plugins.FieldBinding
             if (_currentChildBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - target property path missing");
+                    "SetValue ignored in binding - target property path missing");
                 return;
             }
 
@@ -128,13 +124,11 @@ namespace MvvmCross.Plugins.FieldBinding
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 if (_currentChildBinding != null)
                 {
                     _currentChildBinding.Dispose();
                     _currentChildBinding = null;
                 }
-            }
 
             base.Dispose(isDisposing);
         }

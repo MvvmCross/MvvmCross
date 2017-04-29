@@ -16,7 +16,7 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS
             : base(applicationDelegate, window)
         {
         }
-        
+
         public Setup(MvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
@@ -26,19 +26,19 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS
         {
             return new App();
         }
-        
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
         }
 
-		protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
-		{
-			registry.RegisterCustomBindingFactory<BinaryEdit>(
-				"MyCount", 
-				(arg) => new BinaryEditTargetBinding(arg));
-			
-			base.FillTargetFactories(registry);
-		}
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            registry.RegisterCustomBindingFactory<BinaryEdit>(
+                "MyCount",
+                arg => new BinaryEditTargetBinding(arg));
+
+            base.FillTargetFactories(registry);
+        }
     }
 }

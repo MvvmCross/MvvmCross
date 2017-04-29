@@ -1,6 +1,6 @@
 ﻿using System;
-using MvvmCross.Binding.iOS.Views;
 using Foundation;
+using MvvmCross.Binding.iOS.Views;
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 {
@@ -25,14 +25,14 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 
         public string Name
         {
-            get { return MainLabel.Text; }
-            set { MainLabel.Text = value; }
+            get => MainLabel.Text;
+            set => MainLabel.Text = value;
         }
 
         public string ImageUrl
         {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
+            get => _imageHelper.ImageUrl;
+            set => _imageHelper.ImageUrl = value;
         }
 
         public static float GetCellHeight()

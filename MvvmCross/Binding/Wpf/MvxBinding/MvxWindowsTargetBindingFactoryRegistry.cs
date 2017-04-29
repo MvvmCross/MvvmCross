@@ -9,13 +9,11 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform.Platform;
-
 #if WINDOWS_COMMON
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target;
 
 namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding
 #endif
-
 #if WINDOWS_WPF
 using MvvmCross.BindingEx.Wpf.MvxBinding.Target;
 
@@ -25,18 +23,16 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {
         protected override bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                                out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (TryCreatePropertyDependencyBasedBinding(target, targetName, out binding))
-            {
                 return true;
-            }
 
             return base.TryCreateReflectionBasedBinding(target, targetName, out binding);
         }
 
         private static bool TryCreatePropertyDependencyBasedBinding(object target, string targetName,
-                                                             out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (target == null)
             {
@@ -47,7 +43,7 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding
             if (string.IsNullOrEmpty(targetName))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
+                    "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }
@@ -62,7 +58,8 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding
             var actualProperty = target.GetType().FindActualProperty(targetName);
             var actualPropertyType = actualProperty?.PropertyType ?? typeof(object);
 
-            binding = new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
+            binding =
+                new MvxDependencyPropertyTargetBinding(target, targetName, dependencyProperty, actualPropertyType);
             return true;
         }
     }

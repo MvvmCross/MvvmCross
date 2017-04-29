@@ -6,10 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-
 using Android.Graphics;
 using Android.Widget;
-
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
@@ -18,18 +16,18 @@ namespace MvvmCross.Binding.Droid.Target
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected ImageView ImageView => (ImageView)Target;
-
         protected MvxBaseImageViewTargetBinding(ImageView imageView)
             : base(imageView)
         {
         }
 
+        protected ImageView ImageView => (ImageView) Target;
+
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)
         {
-            var imageView = (ImageView)target;
+            var imageView = (ImageView) target;
 
             try
             {

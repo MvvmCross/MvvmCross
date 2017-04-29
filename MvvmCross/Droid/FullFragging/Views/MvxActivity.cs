@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
-using System;
-using System.Collections.Generic;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
@@ -22,11 +22,14 @@ namespace MvvmCross.Droid.FullFragging.Views
     [Register("mvvmcross.droid.fullfragging.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
-        , IMvxAndroidView
+            , IMvxAndroidView
     {
+        private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
+
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxActivity()
         {
@@ -34,15 +37,32 @@ namespace MvvmCross.Droid.FullFragging.Views
             this.AddEventListeners();
         }
 
+        public List<Fragment> Fragments
+        {
+            get
+            {
+                var ret = new List<Fragment>();
+                foreach (var wref in _fragList)
+                {
+                    Fragment f;
+                    if (!wref.TryGetTarget(out f)) continue;
+                    if (f.IsVisible)
+                        ret.Add(f);
+                }
+
+                return ret;
+            }
+        }
+
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -52,7 +72,7 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         public IMvxBindingContext BindingContext { get; set; }
@@ -82,35 +102,16 @@ namespace MvvmCross.Droid.FullFragging.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-        private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
-
         public override void OnAttachFragment(Fragment fragment)
         {
             base.OnAttachFragment(fragment);
             _fragList.Add(new WeakReference<Fragment>(fragment));
         }
 
-        public List<Fragment> Fragments
+        protected override void OnDestroy()
         {
-            get
-            {
-                var ret = new List<Fragment>();
-                foreach (var wref in _fragList)
-                {
-                    Fragment f;
-                    if (!wref.TryGetTarget(out f)) continue;
-                    if (f.IsVisible)
-                        ret.Add(f);
-                }
-
-                return ret;
-            }
-        }
-
-        protected override void OnDestroy ()
-        {
-            base.OnDestroy ();
-            ViewModel?.Destroy ();
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnAttachedToWindow()
@@ -129,12 +130,12 @@ namespace MvvmCross.Droid.FullFragging.Views
 
     public abstract class MvxActivity<TViewModel>
         : MvxActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

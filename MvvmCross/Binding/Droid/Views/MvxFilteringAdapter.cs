@@ -5,31 +5,110 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Widget;
+using Java.Lang;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using Object = Java.Lang.Object;
+using String = Java.Lang.String;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Threading;
-
-    using Android.App;
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Widget;
-
-    using Java.Lang;
-
-    using MvvmCross.Platform.Droid;
-    using MvvmCross.Platform.Platform;
-
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
+        private readonly ManualResetEvent _dataChangedEvent = new ManualResetEvent(false);
+
+        private MvxReplaceableJavaContainer _javaContainer;
+
+        private string _partialText;
+
+        public MvxFilteringAdapter(Context context) : base(context)
+        {
+            ReturnSingleObjectFromGetItem = true;
+            Filter = new MyFilter(this);
+        }
+
+        protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
+        public string PartialText
+        {
+            get => _partialText;
+            private set
+            {
+                _partialText = value;
+                FireConstraintChanged();
+            }
+        }
+
+        public bool ReturnSingleObjectFromGetItem { get; set; }
+
+        #region Implementation of IFilterable
+
+        public Filter Filter { get; set; }
+
+        #endregion Implementation of IFilterable
+
+        private int SetConstraintAndWaitForDataChange(string newConstraint)
+        {
+            if (PartialText == newConstraint)
+                return Count;
+
+            MvxTrace.Trace("Wait starting for {0}", newConstraint);
+            _dataChangedEvent.Reset();
+            PartialText = newConstraint;
+            _dataChangedEvent.WaitOne();
+            MvxTrace.Trace("Wait finished with {1} items for {0}", newConstraint, Count);
+            return Count;
+        }
+
+        public event EventHandler PartialTextChanged;
+
+        private void FireConstraintChanged()
+        {
+            var activity = Context as Activity;
+
+            activity?.RunOnUiThread(() => { PartialTextChanged?.Invoke(this, EventArgs.Empty); });
+        }
+
+        public override void NotifyDataSetChanged()
+        {
+            _dataChangedEvent.Set();
+            base.NotifyDataSetChanged();
+        }
+
+        public override Object GetItem(int position)
+        {
+            // for autocomplete views we need to return something other than null here
+            // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
+            // - and see problem report in https://github.com/slodge/MvvmCross/issues/145
+            // - obviously this solution is not good for general Java code!
+            if (ReturnSingleObjectFromGetItem)
+            {
+                if (_javaContainer == null)
+                    _javaContainer = new MvxReplaceableJavaContainer();
+                _javaContainer.Object = GetRawItem(position);
+                return _javaContainer;
+            }
+
+            return base.GetItem(position);
+        }
+
         private class MyFilter : Filter
         {
             private readonly MvxFilteringAdapter _owner;
 
             public MyFilter(MvxFilteringAdapter owner)
             {
-                this._owner = owner;
+                _owner = owner;
             }
 
             #region Overrides of Filter
@@ -38,7 +117,7 @@ namespace MvvmCross.Binding.Droid.Views
             {
                 var stringConstraint = constraint == null ? string.Empty : constraint.ToString();
 
-                var count = this._owner.SetConstraintAndWaitForDataChange(stringConstraint);
+                var count = _owner.SetConstraintAndWaitForDataChange(stringConstraint);
 
                 return new FilterResults
                 {
@@ -49,106 +128,19 @@ namespace MvvmCross.Binding.Droid.Views
             protected override void PublishResults(ICharSequence constraint, FilterResults results)
             {
                 // force a refresh
-                this._owner.NotifyDataSetInvalidated();
+                _owner.NotifyDataSetInvalidated();
             }
 
-            public override ICharSequence ConvertResultToStringFormatted(Java.Lang.Object resultValue)
+            public override ICharSequence ConvertResultToStringFormatted(Object resultValue)
             {
                 var ourContainer = resultValue as MvxJavaContainer;
                 if (ourContainer == null)
-                {
                     return base.ConvertResultToStringFormatted(resultValue);
-                }
 
-                return new Java.Lang.String(ourContainer.Object.ToString());
+                return new String(ourContainer.Object.ToString());
             }
 
             #endregion Overrides of Filter
         }
-
-        private int SetConstraintAndWaitForDataChange(string newConstraint)
-        {
-            if (this.PartialText == newConstraint)
-            {
-                return this.Count;
-            }
-            
-            MvxTrace.Trace("Wait starting for {0}", newConstraint);
-            this._dataChangedEvent.Reset();
-            this.PartialText = newConstraint;
-            this._dataChangedEvent.WaitOne();
-            MvxTrace.Trace("Wait finished with {1} items for {0}", newConstraint, this.Count);
-            return this.Count;
-        }
-
-        private string _partialText;
-
-        public event EventHandler PartialTextChanged;
-
-        public string PartialText
-        {
-            get { return this._partialText; }
-            private set
-            {
-                this._partialText = value;
-                this.FireConstraintChanged();
-            }
-        }
-
-        private void FireConstraintChanged()
-        {
-            var activity = this.Context as Activity;
-
-            activity?.RunOnUiThread(() =>
-            {
-                PartialTextChanged?.Invoke(this, EventArgs.Empty);
-            });
-        }
-
-        private readonly ManualResetEvent _dataChangedEvent = new ManualResetEvent(false);
-
-        public override void NotifyDataSetChanged()
-        {
-            this._dataChangedEvent.Set();
-            base.NotifyDataSetChanged();
-        }
-
-        public MvxFilteringAdapter(Context context) : base(context)
-        {
-            this.ReturnSingleObjectFromGetItem = true;
-            this.Filter = new MyFilter(this);
-        }
-
-        protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-
-        public bool ReturnSingleObjectFromGetItem { get; set; }
-
-        private MvxReplaceableJavaContainer _javaContainer;
-
-        public override Java.Lang.Object GetItem(int position)
-        {
-            // for autocomplete views we need to return something other than null here
-            // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199
-            // - and see problem report in https://github.com/slodge/MvvmCross/issues/145
-            // - obviously this solution is not good for general Java code!
-            if (this.ReturnSingleObjectFromGetItem)
-            {
-                if (this._javaContainer == null)
-                    this._javaContainer = new MvxReplaceableJavaContainer();
-                this._javaContainer.Object = this.GetRawItem(position);
-                return this._javaContainer;
-            }
-
-            return base.GetItem(position);
-        }
-
-        #region Implementation of IFilterable
-
-        public Filter Filter { get; set; }
-
-        #endregion Implementation of IFilterable
     }
 }

@@ -5,22 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V7.Widget;
+using Android.Util;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
-    using System;
-
-    using Android.Content;
-    using Android.Graphics;
-    using Android.OS;
-    using Android.Runtime;
-    using Android.Support.V7.Widget;
-    using Android.Util;
-
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView")]
     public class MvxAppCompatImageView : AppCompatImageView
     {
@@ -29,16 +27,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         public MvxAppCompatImageView(Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
+            var typedArray = context.ObtainStyledAttributes(attrs,
+                MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
             var numStyles = typedArray.IndexCount;
             for (var i = 0; i < numStyles; ++i)
             {
                 var attributeId = typedArray.GetIndex(i);
                 if (attributeId == MvxAndroidBindingResource.Instance.SourceBindId)
-                {
                     ImageUrl = typedArray.GetString(attributeId);
-                }
             }
             typedArray.Recycle();
         }
@@ -55,42 +52,25 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public string ImageUrl
         {
-            get
-            {
-                return ImageHelper?.ImageUrl;
-            }
+            get => ImageHelper?.ImageUrl;
             set
             {
                 if (ImageHelper == null)
-                {
                     return;
-                }
                 ImageHelper.ImageUrl = value;
             }
         }
 
         public string DefaultImagePath
         {
-            get
-            {
-                return ImageHelper.DefaultImagePath;
-            }
-            set
-            {
-                ImageHelper.DefaultImagePath = value;
-            }
+            get => ImageHelper.DefaultImagePath;
+            set => ImageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get
-            {
-                return ImageHelper.ErrorImagePath;
-            }
-            set
-            {
-                ImageHelper.ErrorImagePath = value;
-            }
+            get => ImageHelper.ErrorImagePath;
+            set => ImageHelper.ErrorImagePath = value;
         }
 
         protected IMvxImageHelper<Bitmap> ImageHelper
@@ -98,16 +78,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             get
             {
                 if (_imageHelper == null)
-                {
                     if (!Mvx.TryResolve(out _imageHelper))
-                    {
-                        MvxTrace.Error("No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
-                    }
+                        MvxTrace.Error(
+                            "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
                     else
-                    {
                         _imageHelper.ImageChanged += ImageHelperOnImageChanged;
-                    }
-                }
                 return _imageHelper;
             }
         }
@@ -115,9 +90,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         public override void SetMaxHeight(int maxHeight)
         {
             if (ImageHelper != null)
-            {
                 ImageHelper.MaxHeight = maxHeight;
-            }
 
             base.SetMaxHeight(maxHeight);
         }
@@ -125,9 +98,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         public override void SetMaxWidth(int maxWidth)
         {
             if (ImageHelper != null)
-            {
                 ImageHelper.MaxWidth = maxWidth;
-            }
 
             base.SetMaxWidth(maxWidth);
         }
@@ -135,13 +106,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                if (this._imageHelper != null)
+                if (_imageHelper != null)
                 {
                     _imageHelper.ImageChanged -= ImageHelperOnImageChanged;
                     _imageHelper.Dispose();
                 }
-            }
 
             base.Dispose(disposing);
         }
@@ -149,7 +118,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<Bitmap> mvxValueEventArgs)
         {
             using (var h = new Handler(Looper.MainLooper))
+            {
                 h.Post(() => { SetImageBitmap(mvxValueEventArgs.Value); });
+            }
         }
     }
 }

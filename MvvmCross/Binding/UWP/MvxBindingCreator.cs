@@ -7,16 +7,16 @@
 
 using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
-using Windows.UI.Xaml;
 
 namespace MvvmCross.Binding.Uwp
 {
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {
         public void CreateBindings(object sender, DependencyPropertyChangedEventArgs args,
-                                   Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions)
+            Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions)
         {
             var attachedObject = sender as FrameworkElement;
             if (attachedObject == null)
@@ -37,6 +37,6 @@ namespace MvvmCross.Binding.Uwp
         }
 
         protected abstract void ApplyBindings(FrameworkElement attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions);
+            IEnumerable<MvxBindingDescription> bindingDescriptions);
     }
 }

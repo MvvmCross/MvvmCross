@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+
 namespace MvvmCross.Binding.Droid.BindingContext
 {
-    using Android.Views;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-
     public interface IMvxAndroidBindingContext
         : IMvxBindingContext
     {

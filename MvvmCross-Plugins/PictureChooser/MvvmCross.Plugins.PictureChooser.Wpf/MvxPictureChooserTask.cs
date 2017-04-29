@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-
 
 namespace MvvmCross.Plugins.PictureChooser.Wpf
 {
@@ -18,19 +18,21 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
             return task.Task;
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream),
+                assumeCancelled);
         }
 
-        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
+        public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality,
+            Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
             var filePicker = new OpenFileDialog();
             filePicker.Filter = "Image Files (*.jpg, *.jpeg)|*.jpg;*.jpeg";
             filePicker.Multiselect = false;
 
             if (filePicker.ShowDialog() == true)
-            {
                 try
                 {
                     var bm = new Bitmap(filePicker.FileName);
@@ -39,13 +41,15 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
                         int targetWidth;
                         int targetHeight;
 
-                        MvxPictureDimensionHelper.TargetWidthAndHeight(maxPixelDimension, bm.Width, bm.Height, out targetWidth, out targetHeight);
-                        var transformBM = new TransformedBitmap(ConvertBitmapInBitmapSource(bm), new ScaleTransform(targetWidth / (double)bm.Width, targetHeight / (double)bm.Height));
+                        MvxPictureDimensionHelper.TargetWidthAndHeight(maxPixelDimension, bm.Width, bm.Height,
+                            out targetWidth, out targetHeight);
+                        var transformBM = new TransformedBitmap(ConvertBitmapInBitmapSource(bm),
+                            new ScaleTransform(targetWidth / (double) bm.Width, targetHeight / (double) bm.Height));
 
-                        JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                        var encoder = new JpegBitmapEncoder();
                         encoder.QualityLevel = percentQuality;
 
-                        MemoryStream stream = new MemoryStream();
+                        var stream = new MemoryStream();
                         encoder.Frames.Add(BitmapFrame.Create(transformBM));
                         encoder.Save(stream);
 
@@ -58,11 +62,8 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
                 {
                     assumeCancelled();
                 }
-            }
             else
-            {
                 assumeCancelled();
-            }
         }
 
         public void ContinueFileOpenPicker(object args)
@@ -75,7 +76,8 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
             throw new NotImplementedException();
         }
 
-        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
+        public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
+            Action assumeCancelled)
         {
             throw new NotImplementedException();
         }
@@ -84,12 +86,12 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
 
             var bitmapSource = BitmapSource.Create(
-                 bitmapData.Width, bitmapData.Height, 96, 96, PixelFormats.Bgr24, null,
-                 bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
+                bitmapData.Width, bitmapData.Height, 96, 96, PixelFormats.Bgr24, null,
+                bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
 
             bitmap.UnlockBits(bitmapData);
             return bitmapSource;

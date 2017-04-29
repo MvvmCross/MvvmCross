@@ -5,20 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUITextFieldTextTargetBinding
         : MvxConvertingTargetBinding
-        , IMvxEditableTextView
+            , IMvxEditableTextView
     {
-        protected UITextField View => Target as UITextField;
-
         private bool _subscribed;
 
         public MvxUITextFieldTextTargetBinding(UITextField target)
@@ -26,31 +24,42 @@ namespace MvvmCross.Binding.iOS.Target
         {
         }
 
-        private void HandleEditTextValueChanged(object sender, System.EventArgs e)
+        protected UITextField View => Target as UITextField;
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(string);
+
+        public string CurrentText
         {
-            var view = this.View;
+            get
+            {
+                var view = View;
+                return view?.Text;
+            }
+        }
+
+        private void HandleEditTextValueChanged(object sender, EventArgs e)
+        {
+            var view = View;
             if (view == null)
                 return;
             FireValueChanged(view.Text);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
-            var target = this.View;
+            var target = View;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+                    "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
                 return;
             }
 
-            target.EditingChanged += this.HandleEditTextValueChanged;
-            this._subscribed = true;
+            target.EditingChanged += HandleEditTextValueChanged;
+            _subscribed = true;
         }
-
-        public override System.Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -59,11 +68,11 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UITextField)target;
+            var view = (UITextField) target;
             if (view == null)
                 return;
 
-            view.Text = (string)value;
+            view.Text = (string) value;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -71,21 +80,12 @@ namespace MvvmCross.Binding.iOS.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = this.View;
-                if (editText != null && this._subscribed)
+                var editText = View;
+                if (editText != null && _subscribed)
                 {
-                    editText.EditingChanged -= this.HandleEditTextValueChanged;
-                    this._subscribed = false;
+                    editText.EditingChanged -= HandleEditTextValueChanged;
+                    _subscribed = false;
                 }
-            }
-        }
-
-        public string CurrentText
-        {
-            get
-            {
-                var view = this.View;
-                return view?.Text;
             }
         }
     }

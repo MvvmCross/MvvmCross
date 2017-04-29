@@ -5,18 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Converters;
 using System;
+using System.Globalization;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
     [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {
-        protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return null;
@@ -24,7 +25,8 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
             var image = new BitmapImage();
             using (var randomAccessStream = new InMemoryRandomAccessStream())
             {
-#warning one day it would be nice to have a proper async value converter here... something like- http://stackoverflow.com/questions/15003827/async-implementation-of-ivalueconverter - but more built in
+#warning
+ one day it would be nice to have a proper async value converter here... something like- http://stackoverflow.com/questions/15003827/async-implementation-of-ivalueconverter - but more built in
                 var writeStream = randomAccessStream.AsStreamForWrite();
                 writeStream.Write(value, 0, value.Length);
                 writeStream.Flush();

@@ -5,35 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Android.Content;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Droid.Platform
 {
-    using System;
-    using System.Linq;
-    using System.Threading;
-
-    using Android.Content;
-
-    using MvvmCross.Droid.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using System.Threading.Tasks;
-
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>
     {
         private static readonly object LockObject = new object();
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
-        private MvxAndroidSetup _setup;
-        private bool _initialized;
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
+        private bool _initialized;
+        private MvxAndroidSetup _setup;
+
+        protected MvxAndroidSetupSingleton()
+        {
+        }
 
         public virtual void EnsureInitialized()
         {
             lock (LockObject)
             {
-                if (this._initialized)
+                if (_initialized)
                     return;
 
                 if (IsInitialisedTaskCompletionSource != null)
@@ -44,17 +46,15 @@ namespace MvvmCross.Droid.Platform
                 else
                 {
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-                    this._setup.Initialize();
-                    this._initialized = true;
+                    _setup.Initialize();
+                    _initialized = true;
 
-                    if (this._currentSplashScreen != null)
+                    if (_currentSplashScreen != null)
                     {
-                        Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
+                        Mvx.Warning(
+                            "Current splash screen not null during direct initialization - not sure this should ever happen!");
                         var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                        dispatcher.RequestMainThreadAction(() =>
-                        {
-                            this._currentSplashScreen?.InitializationComplete();
-                        });
+                        dispatcher.RequestMainThreadAction(() => { _currentSplashScreen?.InitializationComplete(); });
                     }
 
                     IsInitialisedTaskCompletionSource.SetResult(true);
@@ -66,7 +66,7 @@ namespace MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                this._currentSplashScreen = null;
+                _currentSplashScreen = null;
             }
         }
 
@@ -74,33 +74,30 @@ namespace MvvmCross.Droid.Platform
         {
             lock (LockObject)
             {
-                this._currentSplashScreen = splashScreen;
+                _currentSplashScreen = splashScreen;
                 if (_initialized)
                 {
-                    this._currentSplashScreen?.InitializationComplete();
+                    _currentSplashScreen?.InitializationComplete();
                     return;
                 }
 
                 if (IsInitialisedTaskCompletionSource != null)
                 {
-                    return;
                 }
                 else
                 {
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-                    this._setup.InitializePrimary();
+                    _setup.InitializePrimary();
                     ThreadPool.QueueUserWorkItem(ignored =>
                     {
-                        this._setup.InitializeSecondary();
+                        _setup.InitializeSecondary();
                         lock (LockObject)
                         {
                             IsInitialisedTaskCompletionSource.SetResult(true);
-                            this._initialized = true;
+                            _initialized = true;
                             var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                            dispatcher.RequestMainThreadAction(() =>
-                            {
-                                this._currentSplashScreen?.InitializationComplete();
-                            });
+                            dispatcher.RequestMainThreadAction(
+                                () => { _currentSplashScreen?.InitializationComplete(); });
                         }
                     });
                 }
@@ -123,21 +120,15 @@ namespace MvvmCross.Droid.Platform
             }
         }
 
-        protected MvxAndroidSetupSingleton()
-        {
-        }
-
         protected virtual void CreateSetup(Context applicationContext)
         {
-            var setupType = this.FindSetupType();
+            var setupType = FindSetupType();
             if (setupType == null)
-            {
                 throw new MvxException("Could not find a Setup class for application");
-            }
 
             try
             {
-                this._setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
+                _setup = (MvxAndroidSetup) Activator.CreateInstance(setupType, applicationContext);
             }
             catch (Exception exception)
             {
@@ -148,10 +139,10 @@ namespace MvvmCross.Droid.Platform
         protected virtual Type FindSetupType()
         {
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.ExceptionSafeGetTypes()
-                        where type.Name == "Setup"
-                        where typeof(MvxAndroidSetup).IsAssignableFrom(type)
-                        select type;
+                from type in assembly.ExceptionSafeGetTypes()
+                where type.Name == "Setup"
+                where typeof(MvxAndroidSetup).IsAssignableFrom(type)
+                select type;
 
             return query.FirstOrDefault();
         }
@@ -159,12 +150,10 @@ namespace MvvmCross.Droid.Platform
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 lock (LockObject)
                 {
-                    this._currentSplashScreen = null;
+                    _currentSplashScreen = null;
                 }
-            }
             base.Dispose(isDisposing);
         }
     }

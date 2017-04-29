@@ -22,20 +22,6 @@ namespace MvvmCross.Forms.Presenters
 
         private Application _mvxFormsApp;
 
-        public Application MvxFormsApp
-        {
-            get { return _mvxFormsApp; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentException("MvxFormsApp cannot be null");
-                }
-
-                _mvxFormsApp = value;
-            }
-        }
-
         protected MvxFormsPagePresenter()
         {
         }
@@ -43,6 +29,18 @@ namespace MvvmCross.Forms.Presenters
         protected MvxFormsPagePresenter(Application mvxFormsApp)
         {
             MvxFormsApp = mvxFormsApp;
+        }
+
+        public Application MvxFormsApp
+        {
+            get => _mvxFormsApp;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentException("MvxFormsApp cannot be null");
+
+                _mvxFormsApp = value;
+            }
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -54,19 +52,15 @@ namespace MvvmCross.Forms.Presenters
                 var mainPage = MvxFormsApp.MainPage as NavigationPage;
 
                 if (mainPage == null)
-                {
                     Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
-                }
                 else
-                {
                     mainPage.PopAsync();
-                }
             }
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-			if (TryShowPage(request))
+            if (TryShowPage(request))
                 return;
 
             Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
@@ -79,13 +73,15 @@ namespace MvvmCross.Forms.Presenters
         private void SetupForBinding(Page page, IMvxViewModel viewModel, MvxViewModelRequest request)
         {
             var mvxContentPage = page as IMvxContentPage;
-            if (mvxContentPage != null) {
+            if (mvxContentPage != null)
+            {
                 mvxContentPage.Request = request;
                 mvxContentPage.ViewModel = viewModel;
-            } else {
+            }
+            else
+            {
                 page.BindingContext = viewModel;
             }
-
         }
 
         private bool TryShowPage(MvxViewModelRequest request)
@@ -112,7 +108,9 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // check for modal presentation parameter
                     string modalParameter;
-                    if (request.PresentationValues != null && request.PresentationValues.TryGetValue(ModalPresentationParameter, out modalParameter) && bool.Parse(modalParameter))
+                    if (request.PresentationValues != null &&
+                        request.PresentationValues.TryGetValue(ModalPresentationParameter, out modalParameter) &&
+                        bool.Parse(modalParameter))
                         mainPage.Navigation.PushModalAsync(page);
                     else
                         // calling this sync blocks UI and never navigates hence code continues regardless here

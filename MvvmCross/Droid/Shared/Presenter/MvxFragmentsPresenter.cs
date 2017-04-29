@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
@@ -24,13 +24,14 @@ namespace MvvmCross.Droid.Shared.Presenter
         protected FragmentHostRegistrationSettings _fragmentHostRegistrationSettings;
         protected Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
 
-        protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
-
         public MvxFragmentsPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
-            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
+            _lazyNavigationSerializerFactory =
+                new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
             _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
         }
+
+        protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
 
         public sealed override void Show(MvxViewModelRequest request)
         {
@@ -69,15 +70,17 @@ namespace MvvmCross.Droid.Shared.Presenter
 
             if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
             {
-                Type newFragmentHostViewModelType =
+                var newFragmentHostViewModelType =
                     _fragmentHostRegistrationSettings.GetFragmentHostViewModelType(request.ViewModelType);
 
-                var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
+                var fragmentHostMvxViewModelRequest =
+                    MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
                 ShowActivity(fragmentHostMvxViewModelRequest, request);
                 return;
             }
 
-            var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociatedWithCurrentHost(request.ViewModelType);
+            var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings
+                .GetMvxFragmentAttributeAssociatedWithCurrentHost(request.ViewModelType);
             var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
             GetActualFragmentHost().Show(request, bundle, fragmentType, mvxFragmentAttributeAssociated);
         }
@@ -106,7 +109,8 @@ namespace MvvmCross.Droid.Shared.Presenter
             var fragmentHost = currentActivity as IMvxFragmentHost;
 
             if (fragmentHost == null)
-                throw new InvalidOperationException($"You are trying to close ViewModel associated with Fragment when currently top Activity ({currentActivity.GetType()} does not implement IMvxFragmentHost interface!");
+                throw new InvalidOperationException(
+                    $"You are trying to close ViewModel associated with Fragment when currently top Activity ({currentActivity.GetType()} does not implement IMvxFragmentHost interface!");
 
             return fragmentHost;
         }

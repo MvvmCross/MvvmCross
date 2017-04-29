@@ -5,20 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.ExtensionMethods;
 using System;
 using System.Reflection;
+using MvvmCross.Binding.ExtensionMethods;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxLeafFieldSourceBinding
+    public class MvxLeafFieldSourceBinding
         : MvxFieldSourceBinding
     {
         public MvxLeafFieldSourceBinding(object source, FieldInfo fieldInfo)
             : base(source, fieldInfo)
         {
         }
+
+        public override Type SourceType => FieldInfo.FieldType;
 
         public override void SetValue(object value)
         {
@@ -31,8 +33,6 @@ namespace MvvmCross.Plugins.FieldBinding
 
             FieldInfo.SetValue(Source, safeValue);
         }
-
-        public override Type SourceType => FieldInfo.FieldType;
 
         public override object GetValue()
         {

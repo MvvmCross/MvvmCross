@@ -30,12 +30,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter
         : Android.Support.V7.Widget.RecyclerView.Adapter
-        , IMvxRecyclerAdapter
-        , IMvxRecyclerAdapterBindableHolder
-        , IMvxGroupableRecyclerViewAdapter
-        , IMvxHeaderFooterRecyclerViewAdapter
+            , IMvxRecyclerAdapter
+            , IMvxRecyclerAdapterBindableHolder
+            , IMvxGroupableRecyclerViewAdapter
+            , IMvxHeaderFooterRecyclerViewAdapter
     {
         private readonly MvxRecyclerViewItemsSourceBridgeConfiguration _itemsSourceBridgeConfiguration;
+        private IMvxGroupedDataConverter _groupedDataConverter;
 
         private ICommand _itemClick,
             _itemLongClick,
@@ -44,7 +45,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             _groupHeaderClickCommand;
 
         private MvxBaseTemplateSelector _itemTemplateSelector;
-        private IMvxGroupedDataConverter _groupedDataConverter;
 
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current())
         {
@@ -66,17 +66,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public bool ReloadOnAllItemsSourceSets
         {
-            get { return _itemsSourceBridgeConfiguration.ReloadOnAllItemsSourceSets; }
-            set { _itemsSourceBridgeConfiguration.ReloadOnAllItemsSourceSets = value; }
+            get => _itemsSourceBridgeConfiguration.ReloadOnAllItemsSourceSets;
+            set => _itemsSourceBridgeConfiguration.ReloadOnAllItemsSourceSets = value;
         }
 
-        private IMvxRecyclerViewItemsSourceBridge ItemsSourceBridge => _itemsSourceBridgeConfiguration.ItemsSourceBridge;
+        private IMvxRecyclerViewItemsSourceBridge ItemsSourceBridge => _itemsSourceBridgeConfiguration
+            .ItemsSourceBridge;
 
         public override int ItemCount => ItemsSourceBridge.ItemsCount;
 
         public ICommand GroupHeaderClickCommand
         {
-            get { return _groupHeaderClickCommand; }
+            get => _groupHeaderClickCommand;
             set
             {
                 if (ReferenceEquals(_groupHeaderClickCommand, value))
@@ -92,13 +93,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public IMvxGroupedDataConverter GroupedDataConverter
         {
-            get { return _itemsSourceBridgeConfiguration.GroupedDataConverter; }
-            set { _itemsSourceBridgeConfiguration.GroupedDataConverter = value; }
+            get => _itemsSourceBridgeConfiguration.GroupedDataConverter;
+            set => _itemsSourceBridgeConfiguration.GroupedDataConverter = value;
         }
 
         public ICommand HeaderClickCommand
         {
-            get { return _itemHeaderClickCommand; }
+            get => _itemHeaderClickCommand;
             set
             {
                 if (ReferenceEquals(_itemHeaderClickCommand, value))
@@ -114,7 +115,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand FooterClickCommand
         {
-            get { return _footerClickCommand; }
+            get => _footerClickCommand;
             set
             {
                 if (ReferenceEquals(_footerClickCommand, value))
@@ -130,19 +131,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public bool HidesHeaderIfEmpty
         {
-            get { return _itemsSourceBridgeConfiguration.HidesHeaderIfEmpty; }
-            set { _itemsSourceBridgeConfiguration.HidesHeaderIfEmpty = value; }
+            get => _itemsSourceBridgeConfiguration.HidesHeaderIfEmpty;
+            set => _itemsSourceBridgeConfiguration.HidesHeaderIfEmpty = value;
         }
 
         public bool HidesFooterIfEmpty
         {
-            get { return _itemsSourceBridgeConfiguration.HidesFooterIfEmpty; }
-            set { _itemsSourceBridgeConfiguration.HidesFooterIfEmpty = value; }
+            get => _itemsSourceBridgeConfiguration.HidesFooterIfEmpty;
+            set => _itemsSourceBridgeConfiguration.HidesFooterIfEmpty = value;
         }
 
         public ICommand ItemClick
         {
-            get { return _itemClick; }
+            get => _itemClick;
             set
             {
                 if (ReferenceEquals(_itemClick, value))
@@ -158,7 +159,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get => _itemLongClick;
             set
             {
                 if (ReferenceEquals(_itemLongClick, value))
@@ -175,13 +176,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return ItemsSourceBridge.GetItemsSource(); }
-            set { ItemsSourceBridge.SetInternalItemsSource(value ?? Enumerable.Empty<object>()); }
+            get => ItemsSourceBridge.GetItemsSource();
+            set => ItemsSourceBridge.SetInternalItemsSource(value ?? Enumerable.Empty<object>());
         }
 
         public virtual MvxBaseTemplateSelector ItemTemplateSelector
         {
-            get { return _itemTemplateSelector; }
+            get => _itemTemplateSelector;
             set
             {
                 if (ReferenceEquals(_itemTemplateSelector, value))
@@ -196,15 +197,20 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public virtual object GetItem(int position) => ItemsSourceBridge.GetItemAt(position);
+        public virtual object GetItem(int position)
+        {
+            return ItemsSourceBridge.GetItemAt(position);
+        }
 
         public int ItemTemplateId { get; set; }
+
+        public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
 
         public override void OnViewAttachedToWindow(Object holder)
         {
             base.OnViewAttachedToWindow(holder);
 
-            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            var viewHolder = (IMvxRecyclerViewHolder) holder;
             viewHolder.OnAttachedToWindow();
         }
 
@@ -212,7 +218,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             base.OnViewDetachedFromWindow(holder);
 
-            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            var viewHolder = (IMvxRecyclerViewHolder) holder;
             viewHolder.OnDetachedFromWindow();
         }
 
@@ -220,7 +226,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             base.OnViewRecycled(holder);
 
-            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            var viewHolder = (IMvxRecyclerViewHolder) holder;
             viewHolder.OnViewRecycled();
         }
 
@@ -229,7 +235,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
-            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext, viewType)
+            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext),
+                itemBindingContext, viewType)
             {
                 Click = ItemClick,
                 LongClick = ItemLongClick,
@@ -257,7 +264,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
-            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            ((IMvxRecyclerViewHolder) holder).DataContext = dataContext;
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
 
@@ -302,8 +309,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     exception.ToLongString());
             }
         }
-
-        public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
 
         protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
         {

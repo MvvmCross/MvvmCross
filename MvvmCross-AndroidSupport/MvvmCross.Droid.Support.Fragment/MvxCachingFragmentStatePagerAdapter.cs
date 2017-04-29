@@ -4,29 +4,29 @@ using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using Java.Lang;
-using String = Java.Lang.String;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
+using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentStatePagerAdapter")]
     public class MvxCachingFragmentStatePagerAdapter
-		: MvxCachingFragmentPagerAdapter
+        : MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;
 
-		protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-                                                 IEnumerable<FragmentInfo> fragments)
+        public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
+            IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)
         {
             _context = context;
@@ -39,19 +39,21 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null)
+        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = Fragments.ElementAt(position);
-            var fragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+            var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
             if (mvxFragment == null)
                 return fragment;
 
-			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
+            if (mvxFragment.GetType()
+                    .IsFragmentCacheable(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) &&
+                fragmentSavedState != null)
                 return fragment;
 
             var viewModel = fragInfo.ViewModel ?? CreateViewModel(position);
@@ -92,13 +94,14 @@ namespace MvvmCross.Droid.Support.V4
 
         public class FragmentInfo
         {
-            public FragmentInfo(string title, Type fragmentType, Type viewModelType, object parameterValuesObject = null)
+            public FragmentInfo(string title, Type fragmentType, Type viewModelType,
+                object parameterValuesObject = null)
                 : this(title, null, fragmentType, viewModelType, parameterValuesObject)
             {
             }
 
             public FragmentInfo(string title, string tag, Type fragmentType, Type viewModelType,
-                                object parameterValuesObject = null)
+                object parameterValuesObject = null)
             {
                 Title = title;
                 Tag = tag ?? title;
@@ -106,18 +109,20 @@ namespace MvvmCross.Droid.Support.V4
                 ViewModelType = viewModelType;
                 ParameterValuesObject = parameterValuesObject;
             }
-            
-            public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {
-		ViewModel = viewModel;
-	    }
 
-	    public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {  
-		ViewModel = viewModel;
-	    }
+            public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel,
+                object parameterValuesObject = null)
+                : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
+            {
+                ViewModel = viewModel;
+            }
+
+            public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel,
+                object parameterValuesObject = null)
+                : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
+            {
+                ViewModel = viewModel;
+            }
 
             public Type FragmentType { get; }
 
@@ -128,7 +133,7 @@ namespace MvvmCross.Droid.Support.V4
             public string Title { get; }
 
             public Type ViewModelType { get; }
-            
+
             public IMvxViewModel ViewModel { get; }
         }
     }

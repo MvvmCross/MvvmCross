@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Plugins.Messenger.ThreadRunners;
 using System;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {
@@ -14,6 +14,12 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
         where TMessage : MvxMessage
     {
         private readonly WeakReference _weakReference;
+
+        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener, string tag)
+            : base(actionRunner, tag)
+        {
+            _weakReference = new WeakReference(listener);
+        }
 
         public override bool IsAlive => _weakReference.IsAlive;
 
@@ -26,17 +32,8 @@ namespace MvvmCross.Plugins.Messenger.Subscriptions
             if (action == null)
                 return false;
 
-            Call(() =>
-            {
-                action?.Invoke(message);
-            });
+            Call(() => { action?.Invoke(message); });
             return true;
-        }
-
-        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener, string tag)
-            : base(actionRunner, tag)
-        {
-            _weakReference = new WeakReference(listener);
         }
     }
 }

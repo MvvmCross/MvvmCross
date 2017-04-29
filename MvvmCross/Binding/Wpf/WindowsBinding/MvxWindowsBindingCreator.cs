@@ -12,7 +12,6 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-
 #if WINDOWS_COMMON
 using MvvmCross.Platform.WindowsCommon.Converters;
 
@@ -22,12 +21,10 @@ using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.BindingEx.WindowsCommon.WindowsBinding
 #endif
-
 #if WINDOWS_WPF
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-
 using MvvmCross.Platform.Wpf.Converters;
 
 namespace MvvmCross.BindingEx.Wpf.WindowsBinding
@@ -36,9 +33,9 @@ namespace MvvmCross.BindingEx.Wpf.WindowsBinding
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
         protected virtual void ApplyBinding(MvxBindingDescription bindingDescription, Type actualType,
-                                            FrameworkElement attachedObject)
+            FrameworkElement attachedObject)
         {
-            DependencyProperty dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
+            var dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
             if (dependencyProperty == null)
             {
                 Mvx.Warning("Dependency property not found for {0}", bindingDescription.TargetName);
@@ -47,14 +44,13 @@ namespace MvvmCross.BindingEx.Wpf.WindowsBinding
 
             var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
-            {
                 Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
-            }
 
             var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
             if (sourceStep == null)
             {
-                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this",
+                    bindingDescription.TargetName);
                 return;
             }
 
@@ -78,13 +74,11 @@ namespace MvvmCross.BindingEx.Wpf.WindowsBinding
         }
 
         protected override void ApplyBindings(FrameworkElement attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions)
+            IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             var actualType = attachedObject.GetType();
             foreach (var bindingDescription in bindingDescriptions)
-            {
                 ApplyBinding(bindingDescription, actualType, attachedObject);
-            }
         }
 
         protected static IValueConverter GetConverter(IMvxValueConverter converter)

@@ -7,24 +7,23 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Binding;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Uwp.Converters;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Binding.Uwp
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
         protected virtual void ApplyBinding(MvxBindingDescription bindingDescription, Type actualType,
-                                            FrameworkElement attachedObject)
+            FrameworkElement attachedObject)
         {
-            DependencyProperty dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
+            var dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
             if (dependencyProperty == null)
             {
                 Mvx.Warning("Dependency property not found for {0}", bindingDescription.TargetName);
@@ -33,14 +32,13 @@ namespace MvvmCross.Binding.Uwp
 
             var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
-            {
                 Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
-            }
 
             var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
             if (sourceStep == null)
             {
-                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this",
+                    bindingDescription.TargetName);
                 return;
             }
 
@@ -57,13 +55,11 @@ namespace MvvmCross.Binding.Uwp
         }
 
         protected override void ApplyBindings(FrameworkElement attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions)
+            IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             var actualType = attachedObject.GetType();
             foreach (var bindingDescription in bindingDescriptions)
-            {
                 ApplyBinding(bindingDescription, actualType, attachedObject);
-            }
         }
 
         protected static IValueConverter GetConverter(IMvxValueConverter converter)

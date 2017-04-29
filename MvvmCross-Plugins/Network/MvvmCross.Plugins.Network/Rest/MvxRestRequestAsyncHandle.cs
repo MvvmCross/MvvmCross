@@ -3,7 +3,7 @@ using System.Net;
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxRestRequestAsyncHandle: IMvxAbortable
+    public class MvxRestRequestAsyncHandle : IMvxAbortable
     {
         private readonly HttpWebRequest _webRequest;
 

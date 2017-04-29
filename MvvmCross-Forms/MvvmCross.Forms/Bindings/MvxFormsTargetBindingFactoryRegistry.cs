@@ -16,18 +16,16 @@ namespace MvvmCross.Forms.Bindings
     public class MvxFormsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {
         protected override bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                                out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (TryCreateBindablePropertyBasedBinding(target, targetName, out binding))
-            {
                 return true;
-            }
 
             return base.TryCreateReflectionBasedBinding(target, targetName, out binding);
         }
 
         private static bool TryCreateBindablePropertyBasedBinding(object target, string targetName,
-                                                             out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (target == null)
             {
@@ -38,7 +36,7 @@ namespace MvvmCross.Forms.Bindings
             if (string.IsNullOrEmpty(targetName))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxFormsTargetBindingFactoryRegistry");
+                    "Empty binding target passed to MvxFormsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

@@ -12,12 +12,12 @@ namespace MvvmCross.Forms.Presenters
 {
     public class MvxFormsPageLoader : IMvxFormsPageLoader
     {
-		private IMvxViewsContainer _viewFinder;
+        private IMvxViewsContainer _viewFinder;
 
         public Page LoadPage(MvxViewModelRequest request)
         {
-			var pageName = GetPageName(request);
-			var pageType = GetPageType(request);
+            var pageName = GetPageName(request);
+            var pageType = GetPageType(request);
 
             if (pageType == null)
             {
@@ -27,33 +27,32 @@ namespace MvvmCross.Forms.Presenters
 
             var page = Activator.CreateInstance(pageType) as Page;
             if (page == null)
-            {
                 Mvx.Error("Failed to create ContentPage {0}", pageName);
-            }
             return page;
         }
 
-		protected virtual string GetPageName(MvxViewModelRequest request)
+        protected virtual string GetPageName(MvxViewModelRequest request)
         {
             var viewModelName = request.ViewModelType.Name;
             return viewModelName.Replace("ViewModel", "Page");
         }
 
-		protected virtual Type GetPageType(MvxViewModelRequest request)
+        protected virtual Type GetPageType(MvxViewModelRequest request)
         {
-			if (_viewFinder == null)
-				_viewFinder = Mvx.Resolve<IMvxViewsContainer> ();
+            if (_viewFinder == null)
+                _viewFinder = Mvx.Resolve<IMvxViewsContainer>();
 
-			try
-			{
-				return _viewFinder.GetViewType (request.ViewModelType);
-			}
-			catch(KeyNotFoundException) 
-			{
-				var pageName = GetPageName(request);
-				return request.ViewModelType.GetTypeInfo().Assembly.CreatableTypes()
-					.FirstOrDefault(t => t.Name == pageName);
-			}
+            try
+            {
+                return _viewFinder.GetViewType(request.ViewModelType);
+            }
+            catch (KeyNotFoundException)
+            {
+                var pageName = GetPageName(request);
+                return request.ViewModelType.GetTypeInfo()
+                    .Assembly.CreatableTypes()
+                    .FirstOrDefault(t => t.Name == pageName);
+            }
         }
     }
 }

@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder
     {
@@ -24,10 +23,10 @@ namespace MvvmCross.Core.ViewModels
             var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
-                        from candidateViewType in assembly.ExceptionSafeGetTypes()
-                        let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
-                        where viewModelType != null
-                        select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
+                from candidateViewType in assembly.ExceptionSafeGetTypes()
+                let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
+                where viewModelType != null
+                select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
 
             try
             {
@@ -40,26 +39,23 @@ namespace MvvmCross.Core.ViewModels
         }
 
         private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
-                                                    ArgumentException exception)
+            ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)
-                                       .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
-                                       .Where(x => x.Count > 1)
-                                       .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
-                                       .ToArray();
+                .Select(x => new {x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList()})
+                .Where(x => x.Count > 1)
+                .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
+                .ToArray();
 
             if (overSizedCounts.Length == 0)
             {
                 // no idea what the error is - so throw the original
                 return exception.MvxWrap("Unknown problem in ViewModelViewLookup construction");
             }
-            else
-            {
-                var overSizedText = string.Join(";", overSizedCounts);
-                return exception.MvxWrap(
-                    "Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}",
-                    overSizedText);
-            }
+            var overSizedText = string.Join(";", overSizedCounts);
+            return exception.MvxWrap(
+                "Problem seen creating View-ViewModel lookup table - you have more than one View registered for the ViewModels: {0}",
+                overSizedText);
         }
     }
 }

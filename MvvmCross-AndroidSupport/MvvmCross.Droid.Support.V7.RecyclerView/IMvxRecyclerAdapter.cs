@@ -21,9 +21,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         ICommand ItemClick { get; set; }
         ICommand ItemLongClick { get; set; }
 
-        object GetItem(int position);
-
         int ItemTemplateId { get; set; }
 
+        object GetItem(int position);
     }
 }

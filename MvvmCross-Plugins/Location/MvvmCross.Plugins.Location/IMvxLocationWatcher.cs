@@ -5,23 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.Location
 {
     public interface IMvxLocationWatcher
     {
+        bool Started { get; }
+        MvxGeoLocation CurrentLocation { get; }
+        MvxGeoLocation LastSeenLocation { get; }
+
         void Start(
             MvxLocationOptions options,
             Action<MvxGeoLocation> success,
             Action<MvxLocationError> error);
 
         void Stop();
-
-        bool Started { get; }
-        MvxGeoLocation CurrentLocation { get; }
-        MvxGeoLocation LastSeenLocation { get; }
 
         event EventHandler<MvxValueEventArgs<MvxLocationPermission>> OnPermissionChanged;
     }

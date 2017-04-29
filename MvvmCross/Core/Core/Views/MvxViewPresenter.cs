@@ -5,32 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.ViewModels;
-
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
-        private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();
+        private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers =
+            new Dictionary<Type, Func<MvxPresentationHint, bool>>();
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            this._presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
-        }
-
-        protected bool HandlePresentationChange(MvxPresentationHint hint)
-        {
-            Func<MvxPresentationHint, bool> handler;
-
-            if (this._presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
-            {
-                if (handler(hint)) return true;
-            }
-
-            return false;
+            _presentationHintHandlers[typeof(THint)] = hint => action((THint) hint);
         }
 
         public abstract void Show(MvxViewModelRequest request);
@@ -38,5 +26,15 @@ namespace MvvmCross.Core.Views
         public abstract void ChangePresentation(MvxPresentationHint hint);
 
         public abstract void Close(IMvxViewModel toClose);
+
+        protected bool HandlePresentationChange(MvxPresentationHint hint)
+        {
+            Func<MvxPresentationHint, bool> handler;
+
+            if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
+                if (handler(hint)) return true;
+
+            return false;
+        }
     }
 }

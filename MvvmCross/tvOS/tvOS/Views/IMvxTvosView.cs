@@ -5,23 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public interface IMvxTvosView
         : IMvxView
-        , IMvxCanCreateTvosView
-        , IMvxBindingContextOwner
+            , IMvxCanCreateTvosView
+            , IMvxBindingContextOwner
     {
         MvxViewModelRequest Request { get; set; }
     }
 
     public interface IMvxTvosView<TViewModel>
         : IMvxTvosView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }

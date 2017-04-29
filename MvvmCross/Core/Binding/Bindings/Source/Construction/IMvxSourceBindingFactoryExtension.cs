@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-
     public interface IMvxSourceBindingFactoryExtension
     {
-        bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result);
+        bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens,
+            out IMvxSourceBinding result);
     }
 }

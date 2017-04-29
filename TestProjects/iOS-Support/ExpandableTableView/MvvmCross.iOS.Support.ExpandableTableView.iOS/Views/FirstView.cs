@@ -4,8 +4,8 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.Views;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 {
@@ -27,9 +27,9 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
             };
 
             this.AddBindings(new Dictionary<object, string>
-                {
-                    {source, "ItemsSource KittenGroups"}
-                });
+            {
+                {source, "ItemsSource KittenGroups"}
+            });
 
             TableView.Source = source;
             TableView.ReloadData();
@@ -47,15 +47,19 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
     {
         public ExpandableTableSource(UITableView tableView) : base(tableView)
         {
-            string nibName = "KittenCell";
-            _cellIdentifier = new NSString(nibName);
+            var nibName = "KittenCell";
+            CellIdentifier = new NSString(nibName);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, NSBundle.MainBundle), CellIdentifier);
 
 
-            string nibName2 = "HeaderCell";
-            _headerCellIdentifier = new NSString(nibName2);
+            var nibName2 = "HeaderCell";
+            HeaderCellIdentifier = new NSString(nibName2);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName2, NSBundle.MainBundle), HeaderCellIdentifier);
         }
+
+        protected virtual NSString CellIdentifier { get; }
+
+        protected virtual NSString HeaderCellIdentifier { get; }
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
@@ -72,7 +76,8 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
             return UITableViewCellEditingStyle.Delete;
         }
 
-        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle,
+            NSIndexPath indexPath)
         {
         }
 
@@ -86,24 +91,16 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
             return tableView.DequeueReusableCell(CellIdentifier);
         }
 
-        private readonly NSString _cellIdentifier;
-        protected virtual NSString CellIdentifier => _cellIdentifier;
-
-        private readonly NSString _headerCellIdentifier;
-        protected virtual NSString HeaderCellIdentifier => _headerCellIdentifier;
-
         protected override void OnSectionExpanded(IEnumerable<int> sectionIndexes)
         {
             var indexes = sectionIndexes;
             // you can handle on section expanded
-
         }
 
         protected override void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
         {
             var indexes = collapsedSectionIndexes;
             // you can handle on section collapsed
-
         }
     }
 }

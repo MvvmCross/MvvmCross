@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Java.Lang;
+
 namespace MvvmCross.Platform.Droid
 {
-    using Java.Lang;
-
     public class MvxJavaContainer : Object
     {
         protected MvxJavaContainer(object theObject)
         {
-            this.Object = theObject;
+            Object = theObject;
         }
 
-        public object Object { get; private set; }
+        public object Object { get; }
     }
 
     public class MvxJavaContainer<T> : MvxJavaContainer
@@ -26,6 +26,6 @@ namespace MvvmCross.Platform.Droid
         {
         }
 
-        public new T Object => (T)base.Object;
+        public new T Object => (T) base.Object;
     }
 }

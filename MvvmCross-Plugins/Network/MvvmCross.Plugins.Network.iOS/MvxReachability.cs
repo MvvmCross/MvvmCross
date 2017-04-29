@@ -14,10 +14,21 @@ using MvvmCross.Plugins.Network.Reachability;
 namespace MvvmCross.Plugins.Network.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxReachability
+    public class MvxReachability
         : IMvxReachability
     {
         private const string DefaultHostName = "www.google.com";
+
+        //
+        // Returns true if it is possible to reach the AdHoc WiFi network
+        // and optionally provides extra network reachability flags as the
+        // out parameter
+        //
+        private static NetworkReachability adHocWiFiNetworkReachability;
+
+        private static NetworkReachability defaultRouteReachability;
+
+        private static NetworkReachability remoteHostReachability;
 
         // Is the host reachable with the current network configuration
         public bool IsHostReachable(string host)
@@ -35,9 +46,7 @@ namespace MvvmCross.Plugins.Network.iOS
                 NetworkReachabilityFlags flags;
 
                 if (r.TryGetFlags(out flags))
-                {
                     return IsReachableWithoutRequiringConnection(flags);
-                }
             }
             return false;
         }
@@ -45,10 +54,10 @@ namespace MvvmCross.Plugins.Network.iOS
         public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags)
         {
             // Is it reachable with the current network configuration?
-            bool isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
+            var isReachable = (flags & NetworkReachabilityFlags.Reachable) != 0;
 
             // Do we need a connection to reach it?
-            bool noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0;
+            var noConnectionRequired = (flags & NetworkReachabilityFlags.ConnectionRequired) == 0;
 
             // Since the network stack will automatically try to get the WAN up,
             // probe that
@@ -71,18 +80,11 @@ namespace MvvmCross.Plugins.Network.iOS
             h?.Invoke(null, EventArgs.Empty);
         }
 
-        //
-        // Returns true if it is possible to reach the AdHoc WiFi network
-        // and optionally provides extra network reachability flags as the
-        // out parameter
-        //
-        private static NetworkReachability adHocWiFiNetworkReachability;
-
         public static bool IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags)
         {
             if (adHocWiFiNetworkReachability == null)
             {
-                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] { 169, 254, 0, 0 }));
+                adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] {169, 254, 0, 0}));
 #warning Need to look at SetNotification instead - ios6 change
                 adHocWiFiNetworkReachability.SetNotification(OnChange);
                 adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
@@ -93,8 +95,6 @@ namespace MvvmCross.Plugins.Network.iOS
 
             return IsReachableWithoutRequiringConnection(flags);
         }
-
-        private static NetworkReachability defaultRouteReachability;
 
         private static bool IsNetworkAvaialable(out NetworkReachabilityFlags flags)
         {
@@ -109,8 +109,6 @@ namespace MvvmCross.Plugins.Network.iOS
                 return false;
             return IsReachableWithoutRequiringConnection(flags);
         }
-
-        private static NetworkReachability remoteHostReachability;
 
         public static MvxReachabilityStatus RemoteHostStatus()
         {
@@ -130,7 +128,9 @@ namespace MvvmCross.Plugins.Network.iOS
                 remoteHostReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
             else
+            {
                 reachable = remoteHostReachability.TryGetFlags(out flags);
+            }
 
             if (!reachable)
                 return MvxReachabilityStatus.Not;
@@ -147,14 +147,16 @@ namespace MvvmCross.Plugins.Network.iOS
         public static MvxReachabilityStatus InternetConnectionStatus()
         {
             NetworkReachabilityFlags flags;
-            bool defaultNetworkAvailable = IsNetworkAvaialable(out flags);
+            var defaultNetworkAvailable = IsNetworkAvaialable(out flags);
             if (defaultNetworkAvailable)
             {
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
                     return MvxReachabilityStatus.Not;
             }
             else if ((flags & NetworkReachabilityFlags.IsWWAN) != 0)
+            {
                 return MvxReachabilityStatus.ViaCarrierDataNetwork;
+            }
             return MvxReachabilityStatus.ViaWiFiNetwork;
         }
 
@@ -162,10 +164,8 @@ namespace MvvmCross.Plugins.Network.iOS
         {
             NetworkReachabilityFlags flags;
             if (IsAdHocWiFiNetworkAvailable(out flags))
-            {
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
                     return MvxReachabilityStatus.ViaWiFiNetwork;
-            }
             return MvxReachabilityStatus.Not;
         }
     }

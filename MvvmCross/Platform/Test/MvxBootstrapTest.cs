@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Test.Mocks;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Test.Mocks;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxBootstrapTest
     {
@@ -20,7 +19,7 @@ namespace MvvmCross.Platform.Test
         {
             MockBootstrapAction.CallCount = 0;
             var runner = new MvxBootstrapRunner();
-            runner.Run(this.GetType().Assembly);
+            runner.Run(GetType().Assembly);
             Assert.AreEqual(1, MockBootstrapAction.CallCount);
         }
     }

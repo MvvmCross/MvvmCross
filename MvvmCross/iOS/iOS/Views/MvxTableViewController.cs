@@ -5,21 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.iOS.Views;
+using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.iOS.Views;
-
-    using UIKit;
-
     public class MvxTableViewController
         : MvxEventSourceTableViewController
-          , IMvxIosView
+            , IMvxIosView
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -41,39 +38,14 @@ namespace MvvmCross.iOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get
-            {
-                /*
-				Mvx.Trace ("I am in .ViewModel!");
-				if (BindingContext == null)
-					Mvx.Trace ("BindingContext is null!");
-				Mvx.Trace ("I am in .ViewModel 2!");
-				if (DataContext == null)
-					Mvx.Trace ("DataContext is null!");
-				Mvx.Trace ("I am in .ViewModel 3!");
-
-				var c = DataContext;
-				Mvx.Trace ("I am in .ViewModel 4!");
-				var d = c as IMvxViewModel;
-				Mvx.Trace ("I am in .ViewModel 5!");
-
-				var e = (IMvxViewModel)d;
-				Mvx.Trace ("I am in .ViewModel 6!");
-				if (d == null)
-					Mvx.Trace ("d was null!");
-
-				if (e == null)
-					Mvx.Trace ("e was null!");
-				*/
-                return this.DataContext as IMvxViewModel;
-            }
-            set { this.DataContext = value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -89,7 +61,7 @@ namespace MvvmCross.iOS.Views
 
     public class MvxTableViewController<TViewModel>
         : MvxTableViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -108,8 +80,8 @@ namespace MvvmCross.iOS.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

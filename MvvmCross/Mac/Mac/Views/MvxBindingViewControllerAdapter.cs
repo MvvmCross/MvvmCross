@@ -5,40 +5,35 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Platform.Platform;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxMacView MacView
-        {
-            get { return this.ViewController as IMvxMacView; }
-        }
-
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
         {
             if (!(eventSource is IMvxMacView))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxMacView");
 
-            this.MacView.BindingContext = new MvxBindingContext();
+            MacView.BindingContext = new MvxBindingContext();
         }
+
+        protected IMvxMacView MacView => ViewController as IMvxMacView;
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            if (this.MacView == null)
+            if (MacView == null)
             {
                 MvxTrace.Warning("MacView is null for clearup of bindings in type {0}",
-                               this.MacView.GetType().Name);
+                    MacView.GetType().Name);
                 return;
             }
-            this.MacView.ClearAllBindings();
+            MacView.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
+using MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxMethodSourceBinding
+    public class MvxMethodSourceBinding
         : MvxSourceBinding
-          , ICommand
+            , ICommand
     {
         private readonly MethodInfo _methodInfo;
 
@@ -30,17 +30,7 @@ namespace MvvmCross.Plugins.MethodBinding
             _methodInfo = methodInfo;
         }
 
-        public override void SetValue(object value)
-        {
-            // not possible
-        }
-
         public override Type SourceType => typeof(ICommand);
-
-        public override object GetValue()
-        {
-            return this;
-        }
 
         public bool CanExecute(object parameter)
         {
@@ -51,20 +41,26 @@ namespace MvvmCross.Plugins.MethodBinding
         {
             object[] parameters;
             if (_methodInfo.GetParameters().Any())
-            {
-                parameters = new object[]
-                    {
-                        parameter
-                    };
-            }
+                parameters = new[]
+                {
+                    parameter
+                };
             else
-            {
                 parameters = new object[0];
-            }
 
             _methodInfo.Invoke(Source, parameters);
         }
 
         public event EventHandler CanExecuteChanged;
+
+        public override void SetValue(object value)
+        {
+            // not possible
+        }
+
+        public override object GetValue()
+        {
+            return this;
+        }
     }
 }

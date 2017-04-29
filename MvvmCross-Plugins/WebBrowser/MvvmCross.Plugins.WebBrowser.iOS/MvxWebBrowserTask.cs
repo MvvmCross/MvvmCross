@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.iOS.Platform;
 using Foundation;
+using MvvmCross.Platform.iOS.Platform;
 
 namespace MvvmCross.Plugins.WebBrowser.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxWebBrowserTask : MvxIosTask, IMvxWebBrowserTask
+    public class MvxWebBrowserTask : MvxIosTask, IMvxWebBrowserTask
     {
         public void ShowWebPage(string url)
         {

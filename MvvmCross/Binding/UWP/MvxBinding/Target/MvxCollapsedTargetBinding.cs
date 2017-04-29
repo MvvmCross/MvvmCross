@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Uwp.Target
         {
             if (value == null)
                 value = false;
-            var boolValue = (bool)value;
+            var boolValue = (bool) value;
             base.SetValue(!boolValue);
         }
     }

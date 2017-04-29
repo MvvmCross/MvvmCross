@@ -1,7 +1,5 @@
-﻿using System;
-using Eventhooks.Core.ViewModels;
+﻿using Eventhooks.Core.ViewModels;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace Eventhooks.iOS
@@ -26,4 +24,3 @@ namespace Eventhooks.iOS
         }
     }
 }
-

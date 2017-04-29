@@ -6,20 +6,22 @@ using MvvmCross.Platform.WeakSubscription;
 namespace MvvmCross.Platform.Droid.WeakSubscription
 {
     /// <summary>
-    /// Weak subscription to an event where the target may be an IJavaObject
-    /// and could be collected by the Android runtime before being collected by the Mono GC.
+    ///     Weak subscription to an event where the target may be an IJavaObject
+    ///     and could be collected by the Android runtime before being collected by the Mono GC.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TEventArgs"></typeparam>
     public class MvxAndroidTargetEventSubscription<TSource, TEventArgs> : MvxWeakEventSubscription<TSource, TEventArgs>
         where TSource : class
     {
-        public MvxAndroidTargetEventSubscription(TSource source, string sourceEventName, EventHandler<TEventArgs> targetEventHandler)
+        public MvxAndroidTargetEventSubscription(TSource source, string sourceEventName,
+            EventHandler<TEventArgs> targetEventHandler)
             : base(source, sourceEventName, targetEventHandler)
         {
         }
 
-        public MvxAndroidTargetEventSubscription(TSource source, EventInfo sourceEventInfo, EventHandler<TEventArgs> targetEventHandler)
+        public MvxAndroidTargetEventSubscription(TSource source, EventInfo sourceEventInfo,
+            EventHandler<TEventArgs> targetEventHandler)
             : base(source, sourceEventInfo, targetEventHandler)
         {
         }
@@ -31,15 +33,13 @@ namespace MvvmCross.Platform.Droid.WeakSubscription
             var target = base.GetTargetObject();
             var javaObj = target as IJavaObject;
             if (javaObj != null && javaObj.Handle == IntPtr.Zero)
-            {
                 return null;
-            }
             return target;
         }
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler<TEventArgs>(this.OnSourceEvent);
+            return new EventHandler<TEventArgs>(OnSourceEvent);
         }
     }
 
@@ -62,15 +62,13 @@ namespace MvvmCross.Platform.Droid.WeakSubscription
             var target = base.GetTargetObject();
             var javaObj = target as IJavaObject;
             if (javaObj != null && javaObj.Handle == IntPtr.Zero)
-            {
                 return null;
-            }
             return target;
         }
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
     }
 }

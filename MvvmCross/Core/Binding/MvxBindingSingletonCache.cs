@@ -5,56 +5,47 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.ExpressionParse;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Combiners;
-    using MvvmCross.Binding.ExpressionParse;
-    using MvvmCross.Binding.Parse.Binding.Lang;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
 
     public class MvxBindingSingletonCache
         : MvxSingleton<IMvxBindingSingletonCache>
-          , IMvxBindingSingletonCache
+            , IMvxBindingSingletonCache
     {
-        public static IMvxBindingSingletonCache Initialize()
-        {
-            if (Instance != null)
-                throw new MvxException("You should only initialize MvxBindingSingletonCache once");
-
-            var instance = new MvxBindingSingletonCache();
-            return instance;
-        }
-
         private IMvxAutoValueConverters _autoValueConverters;
-        private IMvxBindingDescriptionParser _bindingDescriptionParser;
-        private IMvxSourceBindingFactory _sourceBindingFactory;
-        private IMvxTargetBindingFactory _targetBindingFactory;
-        private IMvxLanguageBindingParser _languageParser;
-        private IMvxPropertyExpressionParser _propertyExpressionParser;
-        private IMvxValueConverterLookup _valueConverterLookup;
-        private IMvxBindingNameLookup _defaultBindingName;
         private IMvxBinder _binder;
-        private IMvxSourceStepFactory _sourceStepFactory;
-        private IMvxValueCombinerLookup _valueCombinerLookup;
+        private IMvxBindingDescriptionParser _bindingDescriptionParser;
+        private IMvxBindingNameLookup _defaultBindingName;
+        private IMvxLanguageBindingParser _languageParser;
         private IMvxMainThreadDispatcher _mainThreadDispatcher;
+        private IMvxPropertyExpressionParser _propertyExpressionParser;
+        private IMvxSourceBindingFactory _sourceBindingFactory;
+        private IMvxSourceStepFactory _sourceStepFactory;
+        private IMvxTargetBindingFactory _targetBindingFactory;
+        private IMvxValueCombinerLookup _valueCombinerLookup;
+        private IMvxValueConverterLookup _valueConverterLookup;
 
 
         public IMvxAutoValueConverters AutoValueConverters
         {
             get
             {
-                this._autoValueConverters = this._autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
-                return this._autoValueConverters;
+                _autoValueConverters = _autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
+                return _autoValueConverters;
             }
         }
 
@@ -62,8 +53,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._bindingDescriptionParser = this._bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
-                return this._bindingDescriptionParser;
+                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                return _bindingDescriptionParser;
             }
         }
 
@@ -71,8 +62,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._languageParser = this._languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
-                return this._languageParser;
+                _languageParser = _languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                return _languageParser;
             }
         }
 
@@ -80,8 +71,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._propertyExpressionParser = this._propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
-                return this._propertyExpressionParser;
+                _propertyExpressionParser = _propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
+                return _propertyExpressionParser;
             }
         }
 
@@ -89,8 +80,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._valueConverterLookup = this._valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
-                return this._valueConverterLookup;
+                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                return _valueConverterLookup;
             }
         }
 
@@ -98,8 +89,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._valueCombinerLookup = this._valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
-                return this._valueCombinerLookup;
+                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
+                return _valueCombinerLookup;
             }
         }
 
@@ -107,8 +98,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._defaultBindingName = this._defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
-                return this._defaultBindingName;
+                _defaultBindingName = _defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
+                return _defaultBindingName;
             }
         }
 
@@ -116,8 +107,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._binder = this._binder ?? Mvx.Resolve<IMvxBinder>();
-                return this._binder;
+                _binder = _binder ?? Mvx.Resolve<IMvxBinder>();
+                return _binder;
             }
         }
 
@@ -125,8 +116,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._sourceBindingFactory = this._sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
-                return this._sourceBindingFactory;
+                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
+                return _sourceBindingFactory;
             }
         }
 
@@ -134,8 +125,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._targetBindingFactory = this._targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
-                return this._targetBindingFactory;
+                _targetBindingFactory = _targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
+                return _targetBindingFactory;
             }
         }
 
@@ -143,8 +134,8 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._sourceStepFactory = this._sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
-                return this._sourceStepFactory;
+                _sourceStepFactory = _sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
+                return _sourceStepFactory;
             }
         }
 
@@ -152,9 +143,18 @@ namespace MvvmCross.Binding
         {
             get
             {
-                this._mainThreadDispatcher = this._mainThreadDispatcher ?? Mvx.Resolve<IMvxMainThreadDispatcher>();
-                return this._mainThreadDispatcher;
+                _mainThreadDispatcher = _mainThreadDispatcher ?? Mvx.Resolve<IMvxMainThreadDispatcher>();
+                return _mainThreadDispatcher;
             }
+        }
+
+        public static IMvxBindingSingletonCache Initialize()
+        {
+            if (Instance != null)
+                throw new MvxException("You should only initialize MvxBindingSingletonCache once");
+
+            var instance = new MvxBindingSingletonCache();
+            return instance;
         }
     }
 }

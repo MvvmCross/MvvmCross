@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxAndroidViewModelLoader
     {
         IMvxViewModel Load(Intent intent, IMvxBundle savedState);

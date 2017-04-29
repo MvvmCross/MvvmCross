@@ -1,6 +1,3 @@
-using Example.Core.Model;
-using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
-
 namespace Example.Droid.Common.TemplateSelectors
 {
     public class MultiItemTemplateModelTemplateSelector : MvxTemplateSelector<MultiItemTemplateModel>
@@ -12,9 +9,9 @@ namespace Example.Droid.Common.TemplateSelectors
 
         protected override int GetItemLayoutId(int fromViewType)
         {
-            return fromViewType == 0 ?
-            Resource.Layout.listitem_recyclerviewmultiitem_titletemplate :
-            Resource.Layout.listitem_recyclerviewmultiitem_descriptiontemplate;
+            return fromViewType == 0
+                ? Resource.Layout.listitem_recyclerviewmultiitem_titletemplate
+                : Resource.Layout.listitem_recyclerviewmultiitem_descriptiontemplate;
         }
     }
 }

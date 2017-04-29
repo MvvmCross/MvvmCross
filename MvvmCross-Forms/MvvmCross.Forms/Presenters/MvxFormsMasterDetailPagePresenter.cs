@@ -9,27 +9,13 @@ using Xamarin.Forms;
 namespace MvvmCross.Forms.Presenters
 {
     /// <summary>
-    /// Presenter provinding MasterDetailPage functionality for the MainView in a MvxForms App.
+    ///     Presenter provinding MasterDetailPage functionality for the MainView in a MvxForms App.
     /// </summary>
 
     // Based on code used MvxFormsPagePresenter code
     public abstract class MvxFormsMasterDetailPagePresenter : MvxViewPresenter
     {
         private Application _mvxFormsApp;
-
-        public Application MvxFormsApp
-        {
-            get { return _mvxFormsApp; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentException("MvxFormsApp cannot be null");
-                }
-
-                _mvxFormsApp = value;
-            }
-        }
 
         protected MvxFormsMasterDetailPagePresenter()
         {
@@ -38,6 +24,18 @@ namespace MvvmCross.Forms.Presenters
         protected MvxFormsMasterDetailPagePresenter(Application mvxFormsApp)
         {
             MvxFormsApp = mvxFormsApp;
+        }
+
+        public Application MvxFormsApp
+        {
+            get => _mvxFormsApp;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentException("MvxFormsApp cannot be null");
+
+                _mvxFormsApp = value;
+            }
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -65,7 +63,7 @@ namespace MvvmCross.Forms.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-			if (TryShowPage(request))
+            if (TryShowPage(request))
                 return;
 
             Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
@@ -78,10 +76,13 @@ namespace MvvmCross.Forms.Presenters
         private void SetupForBinding(Page page, IMvxViewModel viewModel, MvxViewModelRequest request)
         {
             var mvxContentPage = page as IMvxContentPage;
-            if (mvxContentPage != null) {
+            if (mvxContentPage != null)
+            {
                 mvxContentPage.Request = request;
-                mvxContentPage.ViewModel = viewModel;                
-            } else {
+                mvxContentPage.ViewModel = viewModel;
+            }
+            else
+            {
                 page.BindingContext = viewModel;
             }
         }
@@ -92,10 +93,10 @@ namespace MvvmCross.Forms.Presenters
             if (page == null)
                 return false;
 
-            var viewModel = MvxPresenterHelpers.LoadViewModel(request);            
+            var viewModel = MvxPresenterHelpers.LoadViewModel(request);
 
             SetupForBinding(page, viewModel, request);
-            
+
             var mainPage = _mvxFormsApp.MainPage as MasterDetailPage;
 
             // Initialize the MasterDetailPage container            
@@ -109,15 +110,18 @@ namespace MvvmCross.Forms.Presenters
                 Page rootContentPage = null;
                 if (masterDetailViewModel.RootContentPageViewModelType != null)
                 {
-                    var rootContentRequest = new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null);
+                    var rootContentRequest =
+                        new MvxViewModelRequest(masterDetailViewModel.RootContentPageViewModelType, null, null);
 
                     var rootContentViewModel = MvxPresenterHelpers.LoadViewModel(rootContentRequest);
                     rootContentPage = MvxPresenterHelpers.CreatePage(rootContentRequest);
                     SetupForBinding(rootContentPage, rootContentViewModel, rootContentRequest);
                 }
                 else
+                {
                     rootContentPage = new ContentPage();
-                
+                }
+
                 var navPage = new NavigationPage(rootContentPage);
 
                 //Hook to Popped event to launch RootContentPageActivated if proceeds
@@ -130,8 +134,8 @@ namespace MvvmCross.Forms.Presenters
                 mainPage = new MasterDetailPage
                 {
                     Master = page,
-                    Detail = navPage 
-                };                
+                    Detail = navPage
+                };
 
                 _mvxFormsApp.MainPage = mainPage;
                 CustomPlatformInitialization(mainPage);
@@ -140,14 +144,13 @@ namespace MvvmCross.Forms.Presenters
             {
                 // Functionality for clearing the navigation stack before pushing to new Page (for example in a menu with multiple options)
                 if (request.PresentationValues != null)
-                {
-                    if (request.PresentationValues.ContainsKey("NavigationMode") && request.PresentationValues["NavigationMode"] == "ClearStack")
+                    if (request.PresentationValues.ContainsKey("NavigationMode") &&
+                        request.PresentationValues["NavigationMode"] == "ClearStack")
                     {
                         mainPage.Detail.Navigation.PopToRootAsync();
                         if (Device.Idiom == TargetIdiom.Phone)
                             mainPage.IsPresented = false;
                     }
-                }
 
                 try
                 {
@@ -168,7 +171,7 @@ namespace MvvmCross.Forms.Presenters
 
         private void RootContentPageActivated()
         {
-            var mainPage = Application.Current.MainPage as MasterDetailPage;            
+            var mainPage = Application.Current.MainPage as MasterDetailPage;
             (mainPage.Master.BindingContext as MvxMasterDetailViewModel)?.RootContentPageActivated();
         }
 

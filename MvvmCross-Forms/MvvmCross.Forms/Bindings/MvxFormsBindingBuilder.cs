@@ -13,10 +13,6 @@ namespace MvvmCross.Forms.Bindings
 {
     public class MvxFormsBindingBuilder : MvxBindingBuilder
     {
-        public MvxFormsBindingBuilder()
-        {
-        }
-
         public override void DoRegistration()
         {
             base.DoRegistration();

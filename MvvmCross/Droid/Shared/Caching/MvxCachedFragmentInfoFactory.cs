@@ -1,13 +1,14 @@
+using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
-using System;
 
 namespace MvvmCross.Droid.Shared.Caching
 {
     public class MvxCachedFragmentInfoFactory : IMvxCachedFragmentInfoFactory
     {
         /// <summary>
-        /// If you override this method make sure you override ConvertSerializableCachedFragmentInfo and GetObjectToSerializeFromCachedFragmentInfo
+        ///     If you override this method make sure you override ConvertSerializableCachedFragmentInfo and
+        ///     GetObjectToSerializeFromCachedFragmentInfo
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="fragmentType"></param>
@@ -15,20 +16,24 @@ namespace MvvmCross.Droid.Shared.Caching
         /// <param name="cacheFragment"></param>
         /// <param name="addToBackstack"></param>
         /// <returns></returns>
-        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType, bool cacheFragment = true, bool addToBackstack = false)
+        public virtual IMvxCachedFragmentInfo CreateFragmentInfo(string tag, Type fragmentType, Type viewModelType,
+            bool cacheFragment = true, bool addToBackstack = false)
         {
             if (!typeof(IMvxFragmentView).IsAssignableFrom(fragmentType))
-                throw new InvalidOperationException($"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
+                throw new InvalidOperationException(
+                    $"Registered fragment isn't an IMvxFragmentView. Received: {fragmentType}");
 
             if (!typeof(IMvxViewModel).IsAssignableFrom(viewModelType))
-                throw new InvalidOperationException($"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
+                throw new InvalidOperationException(
+                    $"Registered view model isn't an IMvxViewModel. Received: {viewModelType}");
 
             return new MvxCachedFragmentInfo(tag, fragmentType, viewModelType, cacheFragment, addToBackstack);
         }
 
-        public virtual SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(IMvxCachedFragmentInfo objectToSerialize)
+        public virtual SerializableMvxCachedFragmentInfo GetSerializableFragmentInfo(
+            IMvxCachedFragmentInfo objectToSerialize)
         {
-            return new SerializableMvxCachedFragmentInfo()
+            return new SerializableMvxCachedFragmentInfo
             {
                 Tag = objectToSerialize.Tag,
                 FragmentType = objectToSerialize.FragmentType,
@@ -43,10 +48,10 @@ namespace MvvmCross.Droid.Shared.Caching
             SerializableMvxCachedFragmentInfo fromSerializableMvxCachedFragmentInfo)
         {
             return new MvxCachedFragmentInfo(fromSerializableMvxCachedFragmentInfo.Tag,
-                           fromSerializableMvxCachedFragmentInfo.FragmentType,
-                           fromSerializableMvxCachedFragmentInfo.ViewModelType,
-                           fromSerializableMvxCachedFragmentInfo.CacheFragment,
-                           fromSerializableMvxCachedFragmentInfo.AddToBackStack)
+                fromSerializableMvxCachedFragmentInfo.FragmentType,
+                fromSerializableMvxCachedFragmentInfo.ViewModelType,
+                fromSerializableMvxCachedFragmentInfo.CacheFragment,
+                fromSerializableMvxCachedFragmentInfo.AddToBackStack)
             {
                 ContentId = fromSerializableMvxCachedFragmentInfo.ContentId
             };

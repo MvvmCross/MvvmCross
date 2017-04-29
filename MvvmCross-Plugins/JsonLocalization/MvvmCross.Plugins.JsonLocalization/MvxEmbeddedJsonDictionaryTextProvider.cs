@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
 using System;
 using System.IO;
 using System.Reflection;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxEmbeddedJsonDictionaryTextProvider
+    public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
         public MvxEmbeddedJsonDictionaryTextProvider(bool maskErrors = true)
@@ -35,7 +35,7 @@ namespace MvvmCross.Plugins.JsonLocalization
             try
             {
                 string text = null;
-                Stream stream = Assembly.Load(new AssemblyName(namespaceKey)).GetManifestResourceStream(path);
+                var stream = Assembly.Load(new AssemblyName(namespaceKey)).GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
 

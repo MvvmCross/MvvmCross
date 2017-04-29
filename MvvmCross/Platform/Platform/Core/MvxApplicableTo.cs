@@ -9,11 +9,11 @@ namespace MvvmCross.Platform.Core
 {
     public abstract class MvxApplicableTo<T>
         : MvxApplicable,
-          IMvxApplicableTo<T>
+            IMvxApplicableTo<T>
     {
         public virtual void ApplyTo(T what)
         {
-            this.SuppressFinalizer();
+            SuppressFinalizer();
         }
     }
 }

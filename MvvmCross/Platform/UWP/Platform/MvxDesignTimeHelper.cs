@@ -5,13 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Windows.ApplicationModel;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.Uwp.Platform
 {
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-
     public abstract class MvxDesignTimeHelper
     {
+        private static bool? _isInDesignTime;
+
         protected MvxDesignTimeHelper()
         {
             if (!IsInDesignTool)
@@ -24,14 +27,12 @@ namespace MvvmCross.Platform.Uwp.Platform
             }
         }
 
-        private static bool? _isInDesignTime;
-
         protected static bool IsInDesignTool
         {
             get
             {
                 if (!_isInDesignTime.HasValue)
-                    _isInDesignTime = Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+                    _isInDesignTime = DesignMode.DesignModeEnabled;
                 return _isInDesignTime.Value;
             }
         }

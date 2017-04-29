@@ -1,11 +1,3 @@
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
-using Example.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Support.V4;
-
 namespace Example.Droid.Fragments
 {
     [MvxFragment(typeof(MessagesViewModel), Resource.Id.content_frame, true)]

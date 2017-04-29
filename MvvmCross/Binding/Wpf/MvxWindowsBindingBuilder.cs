@@ -12,7 +12,6 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding;
@@ -21,7 +20,6 @@ using MvvmCross.BindingEx.WindowsCommon.WindowsBinding;
 
 namespace MvvmCross.BindingEx.WindowsCommon
 #endif
-
 #if WINDOWS_WPF
 using System.Windows;
 using MvvmCross.BindingEx.Wpf.MvxBinding;
@@ -111,12 +109,8 @@ namespace MvvmCross.BindingEx.Wpf
             base.FillValueConverters(registry);
 
             if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
-            {
                 foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
-                {
                     registry.Fill(assembly);
-                }
-            }
         }
 
         protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
@@ -124,12 +118,8 @@ namespace MvvmCross.BindingEx.Wpf
             base.FillValueCombiners(registry);
 
             if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
-            {
                 foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
-                {
                     registry.Fill(assembly);
-                }
-            }
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

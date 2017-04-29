@@ -23,9 +23,7 @@ namespace MvvmCross.Plugins.JsonLocalization
             if (string.IsNullOrEmpty(baseText))
                 return baseText;
             if (formatArgs.Length == 0)
-            {
                 return baseText;
-            }
             return string.Format(baseText, formatArgs);
         }
 

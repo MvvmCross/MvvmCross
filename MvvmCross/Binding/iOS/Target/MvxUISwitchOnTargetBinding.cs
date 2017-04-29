@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISwitchOnTargetBinding
         : MvxPropertyInfoTargetBinding<UISwitch>
     {
@@ -22,24 +21,20 @@ namespace MvvmCross.Binding.iOS.Target
         {
             var view = View;
             if (view == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
-            }
             else
-            {
                 view.ValueChanged += HandleValueChanged;
-            }
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
                 return;
             FireValueChanged(view.On);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -48,9 +43,7 @@ namespace MvvmCross.Binding.iOS.Target
             {
                 var view = View;
                 if (view != null)
-                {
                     view.ValueChanged -= HandleValueChanged;
-                }
             }
         }
     }

@@ -27,12 +27,12 @@ namespace MvvmCross.Binding.Droid.Target
             if (!(value is Bitmap))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value was not a valid Bitmap");
+                    "Value was not a valid Bitmap");
                 bitmap = null;
                 return false;
             }
 
-            bitmap = (Bitmap)value;
+            bitmap = (Bitmap) value;
             return true;
         }
     }

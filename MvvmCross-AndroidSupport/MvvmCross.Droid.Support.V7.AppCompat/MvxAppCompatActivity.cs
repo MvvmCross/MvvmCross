@@ -14,15 +14,15 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity
-        , IMvxAndroidView
+            , IMvxAndroidView
     {
         protected MvxAppCompatActivity()
         {
@@ -32,17 +32,18 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -55,11 +56,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             StartActivityForResult(intent, requestCode);
         }
 
+        public IMvxBindingContext BindingContext { get; set; }
+
         protected virtual void OnViewModelSet()
         {
         }
-
-        public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
@@ -87,22 +88,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
     public abstract class MvxAppCompatActivity<TViewModel>
         : MvxAppCompatActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
         {
-            
         }
 
         protected MvxAppCompatActivity()
         {
-            
         }
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

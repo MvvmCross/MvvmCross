@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -17,20 +21,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected abstract override IMvxApplication CreateApp();
-
         protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
         {
-            typeof(Android.Support.V7.Widget.Toolbar).Assembly,
-            typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
-            typeof(Android.Support.V4.Widget.NestedScrollView).Assembly,
-            typeof(Android.Support.V4.Widget.SlidingPaneLayout).Assembly,
-            typeof(Android.Support.V4.View.ViewPager).Assembly,
-            typeof(MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout).Assembly,
+            typeof(Toolbar).Assembly,
+            typeof(DrawerLayout).Assembly,
+            typeof(NestedScrollView).Assembly,
+            typeof(SlidingPaneLayout).Assembly,
+            typeof(ViewPager).Assembly,
+            typeof(MvxSwipeRefreshLayout).Assembly
         };
 
+        protected abstract override IMvxApplication CreateApp();
+
         /// <summary>
-        /// This is very important to override. The default view presenter does not know how to show fragments!
+        ///     This is very important to override. The default view presenter does not know how to show fragments!
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
@@ -51,4 +55,3 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 }
-

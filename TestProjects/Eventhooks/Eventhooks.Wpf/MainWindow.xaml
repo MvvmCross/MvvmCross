@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Eventhooks.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <Grid />
 </Window>

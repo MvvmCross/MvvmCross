@@ -1,59 +1,50 @@
 using System;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
 
 namespace MvvmCross.TestProjects.CustomBinding.iOS.Bindings
 {
-	public class BinaryEditTargetBinding
-		: MvxConvertingTargetBinding<BinaryEdit, int>
-	{
-		private BinaryEdit _target;
+    public class BinaryEditTargetBinding
+        : MvxConvertingTargetBinding<BinaryEdit, int>
+    {
+        private readonly BinaryEdit _target;
 
-		public BinaryEditTargetBinding(BinaryEdit target)
-			: base(target)
-		{
-			_target = target;
-		}
+        public BinaryEditTargetBinding(BinaryEdit target)
+            : base(target)
+        {
+            _target = target;
+        }
 
-		public override void SubscribeToEvents()
-		{
-			base.SubscribeToEvents();
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-			_target.MyCountChanged += Target_CountChanged;
-		}
+        public override void SubscribeToEvents()
+        {
+            base.SubscribeToEvents();
 
-		private void Target_CountChanged(object sender, EventArgs e)
-		{
-			if (_target == null) return;
+            _target.MyCountChanged += Target_CountChanged;
+        }
 
-			var count = _target.GetCount();
-			FireValueChanged(count);
-		}
+        private void Target_CountChanged(object sender, EventArgs e)
+        {
+            if (_target == null) return;
 
-		protected override void SetValueImpl(BinaryEdit target, int value)
-		{
-			_target.SetThat(value);
-		}
+            var count = _target.GetCount();
+            FireValueChanged(count);
+        }
 
-		public override MvvmCross.Binding.MvxBindingMode DefaultMode
-		{
-			get
-			{
-				return MvvmCross.Binding.MvxBindingMode.TwoWay;
-			}
-		}
+        protected override void SetValueImpl(BinaryEdit target, int value)
+        {
+            _target.SetThat(value);
+        }
 
-		protected override void Dispose(bool isDisposing)
-		{
-			if (isDisposing)
-			{
-				if (_target != null)
-				{
-					_target.MyCountChanged -= Target_CountChanged;
-				}
-			}
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+                if (_target != null)
+                    _target.MyCountChanged -= Target_CountChanged;
 
-			base.Dispose(isDisposing);
-		}
-	}
+            base.Dispose(isDisposing);
+        }
+    }
 }

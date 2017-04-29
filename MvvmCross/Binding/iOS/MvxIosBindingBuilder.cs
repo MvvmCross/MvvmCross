@@ -21,23 +21,23 @@ namespace MvvmCross.Binding.iOS
     public class MvxIosBindingBuilder
         : MvxBindingBuilder
     {
-        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly Action<IMvxAutoValueConverters> _fillAutoValueConvertersAction;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
+        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
+        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
 
         public MvxIosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
-                                    Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
-                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
+            Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
+            Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
+            Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            this._fillRegistryAction = fillRegistryAction;
-            this._fillValueConvertersAction = fillValueConvertersAction;
-            this._fillAutoValueConvertersAction = fillAutoValueConvertersAction;
-            this._fillBindingNamesAction = fillBindingNamesAction;
+            _fillRegistryAction = fillRegistryAction;
+            _fillValueConvertersAction = fillValueConvertersAction;
+            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
+            _fillBindingNamesAction = fillBindingNamesAction;
 
-            this._unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
+            _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -58,7 +58,7 @@ namespace MvvmCross.Binding.iOS
 
             registry.RegisterCustomBindingFactory<UIView>(
                 MvxIosPropertyBinding.UIView_Visible,
-                view =>   new MvxUIViewVisibleTargetBinding(view));
+                view => new MvxUIViewVisibleTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<UIActivityIndicatorView>(
                 MvxIosPropertyBinding.UIActivityIndicatorView_Hidden,
@@ -94,7 +94,8 @@ namespace MvvmCross.Binding.iOS
 
             registry.RegisterCustomBindingFactory<UIDatePicker>(
                 MvxIosPropertyBinding.UIDatePicker_Time,
-                view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty(nameof(UIDatePicker.Date)))));
+                view => new MvxUIDatePickerTimeTargetBinding(view,
+                    typeof(UIDatePicker).GetProperty(nameof(UIDatePicker.Date))));
 
             registry.RegisterCustomBindingFactory<UILabel>(
                 MvxIosPropertyBinding.UILabel_Text,
@@ -163,14 +164,14 @@ namespace MvvmCross.Binding.iOS
                                                           view => new MvxUIViewTapTargetBinding(view, 3, 3));
             */
 
-            this._fillRegistryAction?.Invoke(registry);
+            _fillRegistryAction?.Invoke(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
-            this._fillValueConvertersAction?.Invoke(registry);
+            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
@@ -179,9 +180,9 @@ namespace MvvmCross.Binding.iOS
 
             //register converter for xamarin unified types
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
-                autoValueConverters.Register(kvp.Key, kvp.Value, this._unifiedValueTypesConverter);
+                autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
 
-            this._fillAutoValueConvertersAction?.Invoke(autoValueConverters);
+            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -204,10 +205,12 @@ namespace MvvmCross.Binding.iOS
             registry.AddOrOverwrite(typeof(UIProgressView), nameof(UIProgressView.Progress));
             registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), nameof(IMvxImageHelper<UIImage>.ImageUrl));
             registry.AddOrOverwrite(typeof(MvxImageViewLoader), nameof(MvxImageViewLoader.ImageUrl));
-            registry.AddOrOverwrite(typeof(UISegmentedControl), MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
-            registry.AddOrOverwrite(typeof(UIActivityIndicatorView), MvxIosPropertyBinding.UIActivityIndicatorView_Hidden);
+            registry.AddOrOverwrite(typeof(UISegmentedControl),
+                MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
+            registry.AddOrOverwrite(typeof(UIActivityIndicatorView),
+                MvxIosPropertyBinding.UIActivityIndicatorView_Hidden);
 
-            this._fillBindingNamesAction?.Invoke(registry);
+            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

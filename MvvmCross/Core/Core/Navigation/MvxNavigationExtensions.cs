@@ -6,7 +6,7 @@ namespace MvvmCross.Core.Navigation
     public static class MvxNavigationExtensions
     {
         /// <summary>
-        /// Verifies if the provided Uri can be routed to a ViewModel request.
+        ///     Verifies if the provided Uri can be routed to a ViewModel request.
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
@@ -16,8 +16,8 @@ namespace MvvmCross.Core.Navigation
         }
 
         /// <summary>
-        /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
+        ///     Translates the provided Uri to a ViewModel request and dispatches it.
+        ///     The ViewModel will be dispatched with MvxRequestedBy.Bookmark
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>A task to await upon</returns>

@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Exceptions;
-
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -100,32 +99,21 @@ namespace MvvmCross.Platform.IoC
                 var lookup = except.ToDictionary(x => x, x => true);
                 return types.Where(x => !lookup.ContainsKey(x));
             }
-            else
-            {
-                return types.Where(x => !except.Contains(x));
-            }
-        }
-
-        public class ServiceTypeAndImplementationTypePair
-        {
-            public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
-            {
-                this.ImplementationType = implementationType;
-                this.ServiceTypes = serviceTypes;
-            }
-
-            public List<Type> ServiceTypes { get; private set; }
-            public Type ImplementationType { get; private set; }
+            return types.Where(x => !except.Contains(x));
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
         {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type> {t}, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types)
+        {
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types,
+            params Type[] interfaces)
         {
             // optimisation - if we have 3 or more interfaces, then use a dictionary
             if (interfaces.Length >= 3)
@@ -134,20 +122,18 @@ namespace MvvmCross.Platform.IoC
                 return
                     types.Select(
                         t =>
-                        new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
+                            new ServiceTypeAndImplementationTypePair(
+                                t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
             }
-            else
-            {
-                return
-                    types.Select(
-                        t =>
+            return
+                types.Select(
+                    t =>
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
-            }
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs, params Type[] toExclude)
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(
+            this IEnumerable<ServiceTypeAndImplementationTypePair> pairs, params Type[] toExclude)
         {
             foreach (var pair in pairs)
             {
@@ -170,9 +156,7 @@ namespace MvvmCross.Platform.IoC
 
                 var instance = Mvx.IocConstruct(pair.ImplementationType);
                 foreach (var serviceType in pair.ServiceTypes)
-                {
                     Mvx.RegisterSingleton(serviceType, instance);
-                }
             }
         }
 
@@ -187,39 +171,41 @@ namespace MvvmCross.Platform.IoC
                 var creator = new MvxLazySingletonCreator(typeToCreate);
                 var creationFunc = new Func<object>(() => creator.Instance);
                 foreach (var serviceType in pair.ServiceTypes)
-                {
                     Mvx.RegisterSingleton(serviceType, creationFunc);
-                }
             }
         }
 
         public static void RegisterAsDynamic(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
             foreach (var pair in pairs)
-            {
-                foreach (var serviceType in pair.ServiceTypes)
-                {
-                    Mvx.RegisterType(serviceType, pair.ImplementationType);
-                }
-            }
+            foreach (var serviceType in pair.ServiceTypes)
+                Mvx.RegisterType(serviceType, pair.ImplementationType);
         }
 
         public static object CreateDefault(this Type type)
         {
             if (type == null)
-            {
                 return null;
-            }
 
             if (!type.GetTypeInfo().IsValueType)
-            {
                 return null;
-            }
 
             if (Nullable.GetUnderlyingType(type) != null)
                 return null;
 
             return Activator.CreateInstance(type);
+        }
+
+        public class ServiceTypeAndImplementationTypePair
+        {
+            public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
+            {
+                ImplementationType = implementationType;
+                ServiceTypes = serviceTypes;
+            }
+
+            public List<Type> ServiceTypes { get; }
+            public Type ImplementationType { get; }
         }
     }
 }

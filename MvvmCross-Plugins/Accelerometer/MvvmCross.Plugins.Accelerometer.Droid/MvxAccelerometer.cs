@@ -10,18 +10,19 @@
 using System;
 using Android.Content;
 using Android.Hardware;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Plugins.Accelerometer.Droid
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer
-        : Java.Lang.Object
-          , ISensorEventListener
-          , IMvxAccelerometer
+        : Object
+            , ISensorEventListener
+            , IMvxAccelerometer
     {
         private Sensor _accelerometer;
         private SensorManager _sensorManager;
@@ -29,9 +30,7 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
         public void Start()
         {
             if (_accelerometer != null)
-            {
                 throw new MvxException("Accelerometer already started");
-            }
 
             var globals = Mvx.Resolve<IMvxAndroidGlobals>();
             _sensorManager = (SensorManager) globals.ApplicationContext.GetSystemService(Context.SensorService);
@@ -53,13 +52,17 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
         public void Stop()
         {
             if (_accelerometer == null)
-            {
                 throw new MvxException("Accelerometer not started");
-            }
             _sensorManager.UnregisterListener(this);
             _sensorManager = null;
             _accelerometer = null;
         }
+
+        public bool Started => _accelerometer != null;
+
+        public MvxAccelerometerReading LastReading { get; private set; }
+
+        public event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
 
         public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
         {
@@ -83,18 +86,12 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
         private static MvxAccelerometerReading ToReading(double x, double y, double z)
         {
             var reading = new MvxAccelerometerReading
-                {
-                    X = x,
-                    Y = y,
-                    Z = z
-                };
+            {
+                X = x,
+                Y = y,
+                Z = z
+            };
             return reading;
         }
-
-        public bool Started => _accelerometer != null;
-
-        public MvxAccelerometerReading LastReading { get; private set; }
-
-        public event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
     }
 }

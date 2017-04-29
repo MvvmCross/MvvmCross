@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace MvvmCross.Binding.Parse.PropertyPath
 {
     /// <summary>
-    /// Stateless parser with global caching of tokens
+    ///     Stateless parser with global caching of tokens
     /// </summary>
     public class MvxSourcePropertyPathParser : IMvxSourcePropertyPathParser
     {
-        private static readonly ConcurrentDictionary<int, IList<MvxPropertyToken>> ParseCache = 
+        private static readonly ConcurrentDictionary<int, IList<MvxPropertyToken>> ParseCache =
             new ConcurrentDictionary<int, IList<MvxPropertyToken>>();
 
         public IList<MvxPropertyToken> Parse(string textToParse)

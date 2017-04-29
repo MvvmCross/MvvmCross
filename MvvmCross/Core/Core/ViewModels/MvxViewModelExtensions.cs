@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-
     public static class MvxViewModelExtensions
     {
         public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle bundle)
@@ -24,9 +23,7 @@ namespace MvvmCross.Core.ViewModels
                 .ToList();
 
             foreach (var methodInfo in methods)
-            {
                 viewModel.CallBundleMethod(methodInfo, bundle);
-            }
         }
 
         public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle bundle)
@@ -36,7 +33,7 @@ namespace MvvmCross.Core.ViewModels
                 && parameters[0].ParameterType == typeof(IMvxBundle))
             {
                 // this method is the 'normal' interface method
-                methodInfo.Invoke(viewModel, new object[] { bundle });
+                methodInfo.Invoke(viewModel, new object[] {bundle});
                 return;
             }
 
@@ -45,13 +42,13 @@ namespace MvvmCross.Core.ViewModels
             {
                 // call method using typed object
                 var value = bundle.Read(parameters[0].ParameterType);
-                methodInfo.Invoke(viewModel, new[] { value });
+                methodInfo.Invoke(viewModel, new[] {value});
                 return;
             }
 
             // call method using named method arguments
             var invokeWith = bundle.CreateArgumentList(parameters, viewModel.GetType().Name)
-                                   .ToArray();
+                .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
         }
 
@@ -59,19 +56,17 @@ namespace MvvmCross.Core.ViewModels
         {
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
-                                   .GetMethods()
-                                   .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof(void))
-                                   .Where(m => !m.GetParameters().Any());
+                .GetMethods()
+                .Where(m => m.Name == "SaveState")
+                .Where(m => m.ReturnType != typeof(void))
+                .Where(m => !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {
                 // use methods like `public T SaveState()`
                 var stateObject = methodInfo.Invoke(viewModel, new object[0]);
                 if (stateObject != null)
-                {
                     toReturn.Write(stateObject);
-                }
             }
 
             // call the general `public void SaveState(bundle)` method too

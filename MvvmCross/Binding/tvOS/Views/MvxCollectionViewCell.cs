@@ -5,24 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using CoreGraphics;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
-
-    using UIKit;
-
     public class MvxCollectionViewCell
         : UICollectionViewCell
-          , IMvxBindable
+            , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
-
         public MvxCollectionViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
@@ -76,15 +71,24 @@ namespace MvvmCross.Binding.tvOS.Views
         {
         }
 
+        public IMvxBindingContext BindingContext { get; set; }
+
+        public object DataContext
+        {
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
+        }
+
         /// <summary>
-        /// Should fix choppy scrolling on ios8+ by preventing a layout pass when autolayout is already computed
-        /// 
-        /// tvOS 8 provides a new self-sizing API for CollectionView and CollectionViewCells. It lets cells determine their own height, based on the content that they're about to load.
-        /// preferredLayoutAttributesFittingAttributes: (on the cell)
-        /// shouldLayoutAttributesFittingAttributes: (on the layout)
-        /// invalidationContextForPreferredLayoutAttributes:withOriginalAttributes: (on the layout)
+        ///     Should fix choppy scrolling on ios8+ by preventing a layout pass when autolayout is already computed
+        ///     tvOS 8 provides a new self-sizing API for CollectionView and CollectionViewCells. It lets cells determine their own
+        ///     height, based on the content that they're about to load.
+        ///     preferredLayoutAttributesFittingAttributes: (on the cell)
+        ///     shouldLayoutAttributesFittingAttributes: (on the layout)
+        ///     invalidationContextForPreferredLayoutAttributes:withOriginalAttributes: (on the layout)
         /// </summary>
-        public override UICollectionViewLayoutAttributes PreferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes layoutAttributes)
+        public override UICollectionViewLayoutAttributes PreferredLayoutAttributesFittingAttributes(
+            UICollectionViewLayoutAttributes layoutAttributes)
         {
             return layoutAttributes;
         }
@@ -92,16 +96,8 @@ namespace MvvmCross.Binding.tvOS.Views
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                this.BindingContext.ClearAllBindings();
-            }
+                BindingContext.ClearAllBindings();
             base.Dispose(disposing);
-        }
-
-        public object DataContext
-        {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
         }
     }
 }

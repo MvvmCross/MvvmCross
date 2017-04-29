@@ -5,15 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.ComponentModel;
+using System.Windows;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.Wpf.Platform
 {
-    using System.ComponentModel;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-
     public abstract class MvxDesignTimeHelper
     {
+        private static bool? _isInDesignTime;
+
         protected MvxDesignTimeHelper()
         {
             if (!IsInDesignTime)
@@ -26,20 +28,16 @@ namespace MvvmCross.Platform.Wpf.Platform
             }
         }
 
-        private static bool? _isInDesignTime;
-
         protected static bool IsInDesignTime
         {
             get
             {
                 if (!_isInDesignTime.HasValue)
-                {
                     _isInDesignTime =
                         (bool)
                         DesignerProperties.IsInDesignModeProperty
-                                          .GetMetadata(typeof(System.Windows.DependencyObject))
-                                          .DefaultValue;
-                }
+                            .GetMetadata(typeof(DependencyObject))
+                            .DefaultValue;
 
                 return _isInDesignTime.Value;
             }

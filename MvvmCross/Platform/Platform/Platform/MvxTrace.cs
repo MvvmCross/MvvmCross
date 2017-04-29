@@ -5,18 +5,26 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
-          , IMvxTrace
+            , IMvxTrace
 
     {
+        private readonly IMvxTrace _realTrace;
+
+        public MvxTrace()
+        {
+            _realTrace = Mvx.Resolve<IMvxTrace>();
+            if (_realTrace == null)
+                throw new MvxException("No platform trace service available");
+        }
+
         #region public static Interface
 
         public static readonly DateTime WhenTraceStartedUtc = DateTime.UtcNow;
@@ -115,30 +123,21 @@ namespace MvvmCross.Platform.Platform
 
         #endregion public static Interface
 
-        private readonly IMvxTrace _realTrace;
-
-        public MvxTrace()
-        {
-            this._realTrace = Mvx.Resolve<IMvxTrace>();
-            if (this._realTrace == null)
-                throw new MvxException("No platform trace service available");
-        }
-
         #region IMvxTrace Members
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            this._realTrace.Trace(level, tag, message);
+            _realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message)
         {
-            this._realTrace.Trace(level, tag, message);
+            _realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            this._realTrace.Trace(level, tag, message, args);
+            _realTrace.Trace(level, tag, message, args);
         }
 
         #endregion IMvxTrace Members
@@ -154,10 +153,10 @@ namespace MvvmCross.Platform.Platform
         private static Func<string> PrependWithTime(Func<string> input)
         {
             return () =>
-                {
-                    var result = input();
-                    return PrependWithTime(result);
-                };
+            {
+                var result = input();
+                return PrependWithTime(result);
+            };
         }
 
         #endregion private helpers

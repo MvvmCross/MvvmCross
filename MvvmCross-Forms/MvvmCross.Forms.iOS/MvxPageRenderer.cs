@@ -9,28 +9,29 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.iOS
 {
-    public class MvxPageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer, IMvxBindingContextOwner
-    {            
-        public IMvxBindingContext BindingContext { get; set;}
+    public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
+    {
+        public IMvxBindingContext BindingContext { get; set; }
 
-        protected override void OnElementChanged(Xamarin.Forms.Platform.iOS.VisualElementChangedEventArgs e)
+        protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
 
-            MvxPresenterHelpers.AdaptForBinding(Element, this);           
+            MvxPresenterHelpers.AdaptForBinding(Element, this);
         }
     }
 
     public class MvxPageRenderer<TViewModel>
-        : MvxPageRenderer where TViewModel : class, IMvxViewModel {
-
-        public TViewModel ViewModel {
-            get { return BindingContext.DataContext as TViewModel; }
-            set { BindingContext.DataContext = value;}
+        : MvxPageRenderer where TViewModel : class, IMvxViewModel
+    {
+        public TViewModel ViewModel
+        {
+            get => BindingContext.DataContext as TViewModel;
+            set => BindingContext.DataContext = value;
         }
     }
 }
-

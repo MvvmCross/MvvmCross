@@ -13,6 +13,7 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+
 namespace MvvmCross.BindingEx.Wpf
 #endif
 {

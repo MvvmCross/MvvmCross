@@ -19,28 +19,30 @@ namespace MvvmCross.Plugins.All
     public class PluginLoader
         : IMvxPluginLoader
     {
-        private bool _loaded;
         public static readonly PluginLoader Instance = new PluginLoader();
 
-        private static readonly Type[] AllPluginTypes = {
-                typeof(MvvmCross.Plugins.Accelerometer.PluginLoader),
-                typeof(MvvmCross.Plugins.Color.PluginLoader),
-                typeof(MvvmCross.Plugins.DownloadCache.PluginLoader),
-                typeof(MvvmCross.Plugins.Email.PluginLoader),
-                typeof(MvvmCross.Plugins.File.PluginLoader),
-                typeof(MvvmCross.Plugins.Json.PluginLoader),
-                typeof(MvvmCross.Plugins.JsonLocalization.PluginLoader),
-                typeof(MvvmCross.Plugins.Location.PluginLoader),
-                typeof(MvvmCross.Plugins.Messenger.PluginLoader),
-                typeof(MvvmCross.Plugins.MethodBinding.PluginLoader),
-                typeof(MvvmCross.Plugins.Network.PluginLoader),
-                typeof(MvvmCross.Plugins.PhoneCall.PluginLoader),
-                typeof(MvvmCross.Plugins.PictureChooser.PluginLoader),
-                typeof(MvvmCross.Plugins.ResourceLoader.PluginLoader),
-                typeof(MvvmCross.Plugins.Share.PluginLoader),
-                typeof(MvvmCross.Plugins.Visibility.PluginLoader),
-                typeof(MvvmCross.Plugins.WebBrowser.PluginLoader)
-            };
+        private static readonly Type[] AllPluginTypes =
+        {
+            typeof(Accelerometer.PluginLoader),
+            typeof(Color.PluginLoader),
+            typeof(DownloadCache.PluginLoader),
+            typeof(Email.PluginLoader),
+            typeof(File.PluginLoader),
+            typeof(Json.PluginLoader),
+            typeof(JsonLocalization.PluginLoader),
+            typeof(Location.PluginLoader),
+            typeof(Messenger.PluginLoader),
+            typeof(MethodBinding.PluginLoader),
+            typeof(Network.PluginLoader),
+            typeof(PhoneCall.PluginLoader),
+            typeof(PictureChooser.PluginLoader),
+            typeof(ResourceLoader.PluginLoader),
+            typeof(Share.PluginLoader),
+            typeof(Visibility.PluginLoader),
+            typeof(WebBrowser.PluginLoader)
+        };
+
+        private bool _loaded;
 
         public void EnsureLoaded()
         {
@@ -56,16 +58,10 @@ namespace MvvmCross.Plugins.All
 
             var manager = Mvx.Resolve<IMvxPluginManager>();
             foreach (var type in AllPluginTypes)
-            {
                 if (OptionalLoadPlatformAdaption(manager, type))
-                {
                     loaded.Add(type);
-                }
                 else
-                {
                     failed.Add(type);
-                }
-            }
 
             MvxTrace.Trace("Plugins loaded: {0}", string.Join("\n", loaded.Select(x => x.FullName)));
             MvxTrace.Trace("Plugins failed: {0}", string.Join("\n", failed.Select(x => x.FullName)));

@@ -5,35 +5,32 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Parse.Binding
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Parse;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxBindingParser
         : MvxParser
-          , IMvxBindingParser
+            , IMvxBindingParser
     {
-        protected abstract MvxSerializableBindingDescription ParseBindingDescription();
-
         public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
         {
             try
             {
-                this.Reset(text);
-                requestedDescription = this.ParseBindingDescription();
+                Reset(text);
+                requestedDescription = ParseBindingDescription();
                 return true;
             }
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                    "Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -43,15 +40,15 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             try
             {
-                this.Reset(text);
+                Reset(text);
 
                 var toReturn = new MvxSerializableBindingSpecification();
-                while (!this.IsComplete)
+                while (!IsComplete)
                 {
-                    this.SkipWhitespaceAndDescriptionSeparators();
-                    var result = this.ParseTargetPropertyNameAndDescription();
+                    SkipWhitespaceAndDescriptionSeparators();
+                    var result = ParseTargetPropertyNameAndDescription();
                     toReturn[result.Key] = result.Value;
-                    this.SkipWhitespaceAndDescriptionSeparators();
+                    SkipWhitespaceAndDescriptionSeparators();
                 }
 
                 requestedBindings = toReturn;
@@ -60,55 +57,57 @@ namespace MvvmCross.Binding.Parse.Binding
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                    "Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }
         }
 
+        protected abstract MvxSerializableBindingDescription ParseBindingDescription();
+
         protected KeyValuePair<string, MvxSerializableBindingDescription> ParseTargetPropertyNameAndDescription()
         {
-            var targetPropertyName = this.ReadTargetPropertyName();
-            this.SkipWhitespace();
-            var description = this.ParseBindingDescription();
+            var targetPropertyName = ReadTargetPropertyName();
+            SkipWhitespace();
+            var description = ParseBindingDescription();
             return new KeyValuePair<string, MvxSerializableBindingDescription>(targetPropertyName, description);
         }
 
         protected void ParseEquals(string block)
         {
-            if (this.IsComplete)
+            if (IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
-                                       block,
-                                       this.FullText);
-            if (this.CurrentChar != '=')
+                    block,
+                    FullText);
+            if (CurrentChar != '=')
                 throw new MvxException("Must follow binding option {0} with an '=' in {1}",
-                                       block,
-                                       this.FullText);
+                    block,
+                    FullText);
 
-            this.MoveNext();
-            if (this.IsComplete)
+            MoveNext();
+            if (IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
-                                       block,
-                                       this.FullText);
+                    block,
+                    FullText);
         }
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)this.ReadEnumerationValue(typeof(MvxBindingMode));
+            return (MvxBindingMode) ReadEnumerationValue(typeof(MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)
         {
             var terminationLookup = terminationCharacters.ToDictionary(c => c, c => true);
-            this.SkipWhitespace();
+            SkipWhitespace();
             var toReturn = new StringBuilder();
 
-            while (!this.IsComplete)
+            while (!IsComplete)
             {
-                var currentChar = this.CurrentChar;
+                var currentChar = CurrentChar;
                 if (currentChar == '\'' || currentChar == '\"')
                 {
-                    var subText = this.ReadQuotedString();
+                    var subText = ReadQuotedString();
                     toReturn.Append(currentChar);
                     toReturn.Append(subText);
                     toReturn.Append(currentChar);
@@ -116,12 +115,10 @@ namespace MvvmCross.Binding.Parse.Binding
                 }
 
                 if (terminationLookup.ContainsKey(currentChar))
-                {
                     break;
-                }
 
                 toReturn.Append(currentChar);
-                this.MoveNext();
+                MoveNext();
             }
 
             return toReturn.ToString();
@@ -129,17 +126,17 @@ namespace MvvmCross.Binding.Parse.Binding
 
         protected string ReadTargetPropertyName()
         {
-            return this.ReadValidCSharpName();
+            return ReadValidCSharpName();
         }
 
         protected void SkipWhitespaceAndOptionSeparators()
         {
-            this.SkipWhitespaceAndCharacters(',');
+            SkipWhitespaceAndCharacters(',');
         }
 
         protected void SkipWhitespaceAndDescriptionSeparators()
         {
-            this.SkipWhitespaceAndCharacters(';');
+            SkipWhitespaceAndCharacters(';');
         }
     }
 }

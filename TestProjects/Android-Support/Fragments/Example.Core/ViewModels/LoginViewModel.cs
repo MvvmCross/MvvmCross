@@ -4,52 +4,40 @@ namespace Example.Core.ViewModels
 {
     public class LoginViewModel : MvxViewModel
     {
-        public LoginViewModel()
-        {
-            this.Username = "TestUser";
-            this.Password = "YouCantSeeMe";
-            this.IsLoading = false;
-        }
-
-        private string _username;
-
-        public string Username
-        {
-            get { return _username; }
-            set
-            {
-                SetProperty(ref _username, value);
-            }
-        }
+        private bool _isLoading;
 
         private string _password;
 
-        public string Password
+        private string _username;
+
+        public LoginViewModel()
         {
-            get { return _password; }
-            set
-            {
-                SetProperty(ref _password, value);
-            }
+            Username = "TestUser";
+            Password = "YouCantSeeMe";
+            IsLoading = false;
         }
 
-        private bool _isLoading = false;
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
+
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
 
         public bool IsLoading
         {
-            get { return _isLoading; }
-            set
-            {
-                SetProperty(ref _isLoading, value);
-            }
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
         }
 
         public virtual IMvxCommand LoginCommand
         {
-            get
-            {
-				return new MvxCommand(() => ShowViewModel<HomeViewModel>());
-            }
+            get { return new MvxCommand(() => ShowViewModel<HomeViewModel>()); }
         }
     }
 }

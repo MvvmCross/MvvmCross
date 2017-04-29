@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public interface IMvxModalTvosView
         : IMvxView
     {
@@ -17,7 +17,7 @@ namespace MvvmCross.tvOS.Views
 
     public interface IMvxModalTvosView<TViewModel>
         : IMvxModalTvosView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }

@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
@@ -16,13 +15,21 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+
 namespace MvvmCross.BindingEx.Wpf
 #endif
 {
     public class MvxWindowsAssemblyCache
         : MvxSingleton<IMvxWindowsAssemblyCache>
-          , IMvxWindowsAssemblyCache
+            , IMvxWindowsAssemblyCache
     {
+        public MvxWindowsAssemblyCache()
+        {
+            Assemblies = new List<Assembly>();
+        }
+
+        public IList<Assembly> Assemblies { get; }
+
         public static void EnsureInitialized()
         {
             if (Instance != null)
@@ -33,12 +40,5 @@ namespace MvvmCross.BindingEx.Wpf
             if (Instance != instance)
                 throw new MvxException("Error initialising MvxWindowsAssemblyCache");
         }
-
-        public MvxWindowsAssemblyCache()
-        {
-            Assemblies = new List<Assembly>();
-        }
-
-        public IList<Assembly> Assemblies { get; }
     }
 }

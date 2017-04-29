@@ -13,16 +13,16 @@ using System.Net;
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxRestRequest
+    public class MvxRestRequest
     {
         public MvxRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
-                              string tag = null)
+            string tag = null)
             : this(new Uri(url), verb, accept, tag)
         {
         }
 
         public MvxRestRequest(Uri uri, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,
-                              string tag = null)
+            string tag = null)
         {
             Uri = uri;
             Tag = tag;

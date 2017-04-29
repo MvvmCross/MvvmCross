@@ -13,7 +13,7 @@ namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
     {
         public static string GetSearchUrl(string whatFor)
         {
-            string address = $"https://www.googleapis.com/books/v1/volumes?q={Uri.EscapeDataString(whatFor)}";
+            var address = $"https://www.googleapis.com/books/v1/volumes?q={Uri.EscapeDataString(whatFor)}";
             return address;
         }
     }

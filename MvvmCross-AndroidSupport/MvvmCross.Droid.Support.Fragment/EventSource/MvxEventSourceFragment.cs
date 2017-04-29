@@ -5,22 +5,31 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Views;
-using MvvmCross.Platform.Core;
-using System;
-using Fragment = Android.Support.V4.App.Fragment;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
-using Android.Content;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public class MvxEventSourceFragment
-        : Android.Support.V4.App.Fragment
-        , IMvxEventSourceFragment
+        : Fragment
+            , IMvxEventSourceFragment
     {
+        public MvxEventSourceFragment()
+        {
+        }
+
+        public MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
@@ -47,16 +56,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourceFragment()
-        {
-        }
-
-        public MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-
-		public override void OnAttach(Context context)
+        public override void OnAttach(Context context)
         {
             AttachCalled.Raise(this, context);
             base.OnAttach(context);
@@ -120,9 +120,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 DisposeCalled.Raise(this);
-            }
             base.Dispose(disposing);
         }
 

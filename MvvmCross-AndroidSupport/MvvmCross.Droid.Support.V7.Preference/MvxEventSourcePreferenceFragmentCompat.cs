@@ -1,20 +1,27 @@
+using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Preferences;
 using Android.Views;
-using MvvmCross.Platform.Core;
-
-
-using System;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
-using Android.Content;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
     public abstract class MvxEventSourcePreferenceFragmentCompat : PreferenceFragmentCompat
-    , IMvxEventSourceFragment
+        , IMvxEventSourceFragment
     {
+        public MvxEventSourcePreferenceFragmentCompat()
+        {
+        }
+
+        public MvxEventSourcePreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
@@ -30,18 +37,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourcePreferenceFragmentCompat()
-        {
-
-        }
-
-        public MvxEventSourcePreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-
-        }
-
-		public override void OnAttach(Context context)
+        public override void OnAttach(Context context)
         {
             AttachCalled.Raise(this, context);
             base.OnAttach(context);
@@ -105,9 +101,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 DisposeCalled.Raise(this);
-            }
             base.Dispose(disposing);
         }
 

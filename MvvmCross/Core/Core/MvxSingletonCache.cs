@@ -5,18 +5,61 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Core
 {
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>
-          , IMvxSingletonCache
+            , IMvxSingletonCache
     {
+        private IMvxInpcInterceptor _inpcInterceptor;
+
+        private bool _inpcInterceptorResolveAttempted;
+
+        private IMvxStringToTypeParser _parser;
+
+        private IMvxSettings _settings;
+
+        private MvxSingletonCache()
+        {
+        }
+
+        public IMvxInpcInterceptor InpcInterceptor
+        {
+            get
+            {
+                if (_inpcInterceptorResolveAttempted)
+                    return _inpcInterceptor;
+
+                Mvx.TryResolve(out _inpcInterceptor);
+                _inpcInterceptorResolveAttempted = true;
+                return _inpcInterceptor;
+            }
+        }
+
+        public IMvxStringToTypeParser Parser
+        {
+            get
+            {
+                _parser = _parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
+                return _parser;
+            }
+        }
+
+        public IMvxSettings Settings
+        {
+            get
+            {
+                _settings = _settings ?? Mvx.Resolve<IMvxSettings>();
+                return _settings;
+            }
+        }
+
         public static MvxSingletonCache Initialize()
         {
             if (Instance != null)
@@ -24,48 +67,6 @@ namespace MvvmCross.Core
 
             var instance = new MvxSingletonCache();
             return instance;
-        }
-
-        private MvxSingletonCache()
-        {
-        }
-
-        private bool _inpcInterceptorResolveAttempted;
-        private IMvxInpcInterceptor _inpcInterceptor;
-
-        public IMvxInpcInterceptor InpcInterceptor
-        {
-            get
-            {
-                if (this._inpcInterceptorResolveAttempted)
-                    return this._inpcInterceptor;
-
-                Mvx.TryResolve<IMvxInpcInterceptor>(out this._inpcInterceptor);
-                this._inpcInterceptorResolveAttempted = true;
-                return this._inpcInterceptor;
-            }
-        }
-
-        private IMvxStringToTypeParser _parser;
-
-        public IMvxStringToTypeParser Parser
-        {
-            get
-            {
-                this._parser = this._parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
-                return this._parser;
-            }
-        }
-
-        private IMvxSettings _settings;
-
-        public IMvxSettings Settings
-        {
-            get
-            {
-                this._settings = this._settings ?? Mvx.Resolve<IMvxSettings>();
-                return this._settings;
-            }
         }
     }
 }

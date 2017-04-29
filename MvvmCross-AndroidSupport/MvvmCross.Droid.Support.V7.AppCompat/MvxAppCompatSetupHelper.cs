@@ -48,7 +48,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             registry.AddOrOverwrite(typeof(SearchView), MvxAppCompatPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(MvxAppCompatImageView), nameof(MvxAppCompatImageView.ImageUrl));
-
         }
     }
 }

@@ -17,8 +17,19 @@ namespace MvvmCross.Forms.Bindings
 {
     public class MvxFormsBindingCreator : MvxBindingCreator
     {
+        public static readonly BindableProperty BindingsListProperty = BindableProperty.CreateAttached("BindingsList",
+            typeof(IList<IMvxUpdateableBinding>),
+            typeof(BindableObject),
+            null);
+
+        public static readonly BindableProperty DataContextWatcherProperty = BindableProperty.CreateAttached(
+            "DataContextWatcher",
+            typeof(MvxNotifyPropertyChangedEventSubscription),
+            typeof(BindableObject),
+            null);
+
         protected override void ApplyBindings(Element attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions)
+            IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             var binder = MvxBindingSingletonCache.Instance.Binder;
             var bindingDescriptionList = bindingDescriptions.ToList();
@@ -28,16 +39,14 @@ namespace MvvmCross.Forms.Bindings
         }
 
         private void RegisterBindingsForUpdates(Element attachedObject,
-                                                IEnumerable<IMvxUpdateableBinding> bindings)
+            IEnumerable<IMvxUpdateableBinding> bindings)
         {
             if (bindings == null)
                 return;
 
             var bindingsList = GetOrCreateBindingsList(attachedObject);
             foreach (var binding in bindings)
-            {
                 bindingsList.Add(binding);
-            }
         }
 
         private IList<IMvxUpdateableBinding> GetOrCreateBindingsList(Element attachedObject)
@@ -51,7 +60,7 @@ namespace MvvmCross.Forms.Bindings
             var newList = new List<IMvxUpdateableBinding>();
             attachedObject.SetValue(BindingsListProperty, newList);
 
-            bool attached = false;
+            var attached = false;
             Action attachAction = () =>
             {
                 if (attached)
@@ -72,19 +81,13 @@ namespace MvvmCross.Forms.Bindings
 
             attachAction();
             var subscription = attachedObject.WeakSubscribe((s, a) =>
-                                                            {
-                                                                if (a.PropertyName == nameof(Element.Parent))
-                                                                {
-                                                                    if (attachedObject.Parent != null)
-                                                                    {
-                                                                        attachAction();
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        detachAction();
-                                                                    }
-                                                                }
-                                                            });
+            {
+                if (a.PropertyName == nameof(Element.Parent))
+                    if (attachedObject.Parent != null)
+                        attachAction();
+                    else
+                        detachAction();
+            });
             attachedObject.SetValue(DataContextWatcherProperty, subscription);
 
             return newList;
@@ -92,26 +95,13 @@ namespace MvvmCross.Forms.Bindings
 
         private static void DataContextChanged(object obj, EventArgs args)
         {
-            BindableObject d = obj as BindableObject;
-            IList<IMvxUpdateableBinding> bindings = d?.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
+            var d = obj as BindableObject;
+            var bindings = d?.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
 
             if (bindings != null)
-            {
                 foreach (var binding in bindings)
-                {
                     binding.DataContext = d.BindingContext;
-                }
-            }
         }
-
-        public static readonly BindableProperty BindingsListProperty = BindableProperty.CreateAttached("BindingsList",
-                                                                                                       typeof(IList<IMvxUpdateableBinding>),
-                                                                                                       typeof(BindableObject),
-                                                                                                       null);
-        public static readonly BindableProperty DataContextWatcherProperty = BindableProperty.CreateAttached("DataContextWatcher",
-                                                                                                       typeof(MvxNotifyPropertyChangedEventSubscription),
-                                                                                                       typeof(BindableObject),
-                                                                                                       null);
 
         public static IList<IMvxUpdateableBinding> GetBindingsList(BindableObject d)
         {

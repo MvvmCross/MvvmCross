@@ -5,22 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxMethodSourceBindingFactoryExtension
+    public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
+            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {
@@ -51,9 +52,7 @@ namespace MvvmCross.Plugins.MethodBinding
 
             var parameters = methodInfo.GetParameters();
             if (parameters.Count(p => !p.IsOptional) > 1)
-            {
                 MvxBindingTrace.Warning("Problem binding to Method {0} - too many non-optional parameters");
-            }
 
             result = new MvxMethodSourceBinding(source, methodInfo);
             return true;
@@ -62,7 +61,7 @@ namespace MvvmCross.Plugins.MethodBinding
         protected MethodInfo FindMethodInfo(object source, string name)
         {
             var methodInfo = source.GetType()
-                                         .GetMethod(name);
+                .GetMethod(name);
             return methodInfo;
         }
     }

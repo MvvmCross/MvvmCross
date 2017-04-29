@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Diagnostics;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-    using System.Diagnostics;
-
     public class MvxDebugOnlyTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
@@ -26,11 +26,11 @@ namespace MvvmCross.Platform.Platform
         {
             try
             {
-                Debug.WriteLine(string.Format(tag + ":" + level + ":" + message, args));
+                Debug.WriteLine(tag + ":" + level + ":" + message, args);
             }
             catch (FormatException)
             {
-                this.Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
+                Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
             }
         }
     }

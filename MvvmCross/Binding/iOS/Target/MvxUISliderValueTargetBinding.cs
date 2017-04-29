@@ -23,13 +23,15 @@ namespace MvvmCross.Binding.iOS.Target
         {
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
         protected override void SetValueImpl(object target, object value)
         {
             var view = target as UISlider;
             if (view == null)
                 return;
 
-            view.Value = (float)value;
+            view.Value = (float) value;
         }
 
         private void HandleSliderValueChanged(object sender, EventArgs e)
@@ -40,8 +42,6 @@ namespace MvvmCross.Binding.iOS.Target
             FireValueChanged(view.Value);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
         public override void SubscribeToEvents()
         {
             var slider = View;
@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             slider.ValueChanged += HandleSliderValueChanged;
         }
 
@@ -61,10 +61,10 @@ namespace MvvmCross.Binding.iOS.Target
             if (isDisposing)
             {
                 var slider = View;
-                if (slider != null && this._subscribed)
+                if (slider != null && _subscribed)
                 {
                     slider.ValueChanged -= HandleSliderValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Threading;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System;
-    using System.Windows.Threading;
-
-    using MvvmCross.Platform.Core;
-
     public class MvxWpfUIThreadDispatcher
         : MvxMainThreadDispatcher
     {
@@ -19,19 +18,15 @@ namespace MvvmCross.Wpf.Views
 
         public MvxWpfUIThreadDispatcher(Dispatcher dispatcher)
         {
-            this._dispatcher = dispatcher;
+            _dispatcher = dispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (this._dispatcher.CheckAccess())
-            {
+            if (_dispatcher.CheckAccess())
                 action();
-            }
             else
-            {
-                this._dispatcher.Invoke(() => ExceptionMaskedAction(action));
-            }
+                _dispatcher.Invoke(() => ExceptionMaskedAction(action));
 
             // TODO - why return bool at all?
             return true;

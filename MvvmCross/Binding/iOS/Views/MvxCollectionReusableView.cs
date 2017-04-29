@@ -5,23 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using CoreGraphics;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
-    using UIKit;
-
     public class MvxCollectionReusableView
         : UICollectionReusableView
-          , IMvxBindable
+            , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
-
         public MvxCollectionReusableView()
             : this(string.Empty)
         {
@@ -66,20 +63,20 @@ namespace MvvmCross.Binding.iOS.Views
             this.CreateBindingContext(bindingDescriptions);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                this.BindingContext.ClearAllBindings();
-            }
-            base.Dispose(disposing);
-        }
+        public IMvxBindingContext BindingContext { get; set; }
 
         [MvxSetToNullAfterBinding]
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                BindingContext.ClearAllBindings();
+            base.Dispose(disposing);
         }
     }
 }

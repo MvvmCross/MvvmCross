@@ -20,9 +20,7 @@ namespace MvvmCross.Plugins.JsonLocalization
         public void EnsureLoaded()
         {
             if (_loaded)
-            {
                 return;
-            }
 
             // nothing to register here - this isn't much of a plugin really!
 

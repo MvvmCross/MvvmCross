@@ -35,14 +35,10 @@ namespace MvvmCross.Binding.Uwp
             {
                 var propertyInfo = typeInfo.GetDeclaredProperty(dependencyPropertyName);
                 if (propertyInfo != null)
-                {
                     return propertyInfo;
-                }
 
                 if (typeInfo.BaseType == null)
-                {
                     return null;
-                }
 
                 typeInfo = typeInfo.BaseType.GetTypeInfo();
             }

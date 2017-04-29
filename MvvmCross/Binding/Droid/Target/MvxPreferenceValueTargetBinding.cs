@@ -5,14 +5,15 @@ using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxPreferenceValueTargetBinding 
+    public class MvxPreferenceValueTargetBinding
         : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
 
         public MvxPreferenceValueTargetBinding(Preference preference)
             : base(preference)
-        { }
+        {
+        }
 
         public Preference Preference => Target as Preference;
 

@@ -1,6 +1,3 @@
-using System;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
 using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
 
 namespace MvvmCross.TestProjects.CustomBinding.Droid.Bindings
@@ -10,6 +7,8 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid.Bindings
         public BinaryEditTargetBinding(BinaryEdit target) : base(target)
         {
         }
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -33,20 +32,13 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid.Bindings
             binaryEdit.SetThat(value);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
-
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
                 var target = Target;
                 if (target != null)
-                {
                     target.MyCountChanged -= TargetOnMyCountChanged;
-                }
             }
             base.Dispose(isDisposing);
         }

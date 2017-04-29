@@ -5,20 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public class MvxIosViewsContainer
         : MvxViewsContainer
-        , IMvxIosViewsContainer
+            , IMvxIosViewsContainer
     {
         public MvxViewModelRequest CurrentRequest { get; private set; }
 
@@ -26,19 +24,26 @@ namespace MvvmCross.iOS.Views
         {
             try
             {
-                this.CurrentRequest = request;
-                var viewType = this.GetViewType(request.ViewModelType);
+                CurrentRequest = request;
+                var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
-                var view = this.CreateViewOfType(viewType, request);
+                var view = CreateViewOfType(viewType, request);
                 view.Request = request;
                 return view;
             }
             finally
             {
-                this.CurrentRequest = null;
+                CurrentRequest = null;
             }
+        }
+
+        public virtual IMvxIosView CreateView(IMvxViewModel viewModel)
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+            var view = CreateView(request);
+            return view;
         }
 
         protected virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
@@ -51,24 +56,18 @@ namespace MvvmCross.iOS.Views
                 {
                     var storyboard = UIStoryboard.FromName(storyboardName, null);
                     var viewController = storyboard.InstantiateViewController(viewType.Name);
-                    return (IMvxIosView)viewController;
+                    return (IMvxIosView) viewController;
                 }
                 catch (Exception ex)
                 {
-                    throw new MvxException("Loading view of type {0} from storyboard {1} failed: {2}", viewType.Name, storyboardName, ex.Message);
+                    throw new MvxException("Loading view of type {0} from storyboard {1} failed: {2}", viewType.Name,
+                        storyboardName, ex.Message);
                 }
             }
 
             var view = Activator.CreateInstance(viewType) as IMvxIosView;
             if (view == null)
                 throw new MvxException("View not loaded for " + viewType);
-            return view;
-        }
-
-        public virtual IMvxIosView CreateView(IMvxViewModel viewModel)
-        {
-            var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = this.CreateView(request);
             return view;
         }
     }

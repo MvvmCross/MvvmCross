@@ -1,10 +1,12 @@
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 {
-    using MvvmCross.Core.ViewModels;
-
     public class LeftPanelViewModel : BaseViewModel
-    {      
+    {
         private MvxCommand _showExampleMenuItemCommand;
+
+        private MvxCommand _showMasterViewCommand;
 
         public MvxCommand ShowExampleMenuItemCommand
         {
@@ -15,13 +17,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
             }
         }
 
-        private void DoShowExampleMenuItem()
-        {
-            ShowViewModel<ExampleMenuItemViewModel>();
-        }
-
-        private MvxCommand _showMasterViewCommand;
-
         public MvxCommand ShowMasterViewCommand
         {
             get
@@ -29,6 +24,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
                 _showMasterViewCommand = _showMasterViewCommand ?? new MvxCommand(ShowMasterView);
                 return _showMasterViewCommand;
             }
+        }
+
+        private void DoShowExampleMenuItem()
+        {
+            ShowViewModel<ExampleMenuItemViewModel>();
         }
 
         private void ShowMasterView()

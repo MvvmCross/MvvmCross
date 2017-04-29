@@ -1,7 +1,7 @@
+using System;
+
 namespace MvvmCross.Platform
 {
-    using System;
-
     [Flags]
     public enum BindingFlags
     {

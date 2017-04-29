@@ -7,13 +7,11 @@
 
 using System;
 using System.Reflection;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
 namespace MvvmCross.BindingEx.WindowsCommon
 #endif
-
 #if WINDOWS_WPF
 using System.Windows;
 using System.ComponentModel;
@@ -30,7 +28,7 @@ namespace MvvmCross.BindingEx.Wpf
         {
             var typeConverter =
                 type.GetCustomAttributes(typeof(TypeConverterAttribute), true).FirstOrDefault() as
-                TypeConverterAttribute;
+                    TypeConverterAttribute;
             if (typeConverter == null)
                 return null;
 
@@ -47,7 +45,8 @@ namespace MvvmCross.BindingEx.Wpf
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            var property = type.GetProperty(name, BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
+            var property = type.GetProperty(name,
+                BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
             return property;
         }
 
@@ -62,7 +61,8 @@ namespace MvvmCross.BindingEx.Wpf
             var candidateType = type;
             while (candidateType != null)
             {
-                var fieldInfo = candidateType.GetField(dependencyPropertyName, BindingFlags.Static | BindingFlags.Public);
+                var fieldInfo = candidateType.GetField(dependencyPropertyName,
+                    BindingFlags.Static | BindingFlags.Public);
                 if (fieldInfo != null)
                     return fieldInfo;
 

@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
-using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
     public abstract class MvxJsonDictionaryTextProvider
         : MvxDictionaryTextProvider
-         , IMvxJsonDictionaryTextLoader
+            , IMvxJsonDictionaryTextLoader
     {
         protected MvxJsonDictionaryTextProvider(bool maskErrors)
             : base(maskErrors)
@@ -30,9 +30,7 @@ namespace MvvmCross.Plugins.JsonLocalization
         {
             var entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);
             foreach (var kvp in entries)
-            {
                 AddOrReplace(namespaceKey, typeKey, kvp.Key, kvp.Value);
-            }
         }
 
         #endregion IMvxJsonDictionaryTextLoader Members

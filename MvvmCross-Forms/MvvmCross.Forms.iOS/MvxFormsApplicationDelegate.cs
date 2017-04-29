@@ -7,6 +7,7 @@
 // Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
 
 using System;
+using Foundation;
 using MvvmCross.Core.Platform;
 using MvvmCross.iOS.Platform;
 using UIKit;
@@ -16,7 +17,13 @@ namespace MvvmCross.Forms.iOS
 {
     public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate, IMvxLifetime
     {
-        public override bool FinishedLaunching(UIApplication uiApplication, Foundation.NSDictionary launchOptions)
+        #region IMvxLifetime implementation
+
+        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+
+        #endregion IMvxLifetime implementation
+
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             return base.FinishedLaunching(uiApplication, launchOptions);
@@ -44,12 +51,5 @@ namespace MvvmCross.Forms.iOS
         {
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
-
-        #region IMvxLifetime implementation
-
-        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-
-        #endregion IMvxLifetime implementation
     }
 }
-

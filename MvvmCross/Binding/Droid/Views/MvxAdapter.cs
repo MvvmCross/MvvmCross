@@ -5,36 +5,33 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using Object = Java.Lang.Object;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Collections.Specialized;
-
-	using Android.Content;
-	using Android.Runtime;
-	using Android.Views;
-	using Android.Widget;
-
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.Droid.BindingContext;
-	using MvvmCross.Binding.ExtensionMethods;
-	using MvvmCross.Platform;
-	using MvvmCross.Platform.Exceptions;
-	using MvvmCross.Platform.Platform;
-	using MvvmCross.Platform.WeakSubscription;
-
-	using Object = Java.Lang.Object;
-
-	public class MvxAdapter
+    public class MvxAdapter
         : BaseAdapter
-        , IMvxAdapter
+            , IMvxAdapter
     {
-	    private int _itemTemplateId;
-        private int _dropDownItemTemplateId;
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        // Note2 - _currentParent is similarly a bit of a hack
+        //       - it is just here to avoid a breaking api change for now
+        //       - will seek to remove both the _currentSimpleId and _currentParent private fields in a major release soon
+        private ViewGroup _currentParent;
 
         // Note - _currentSimpleId is a bit of a hack
         //      - it's essentially a state flag identifying wheter we are currently inflating a dropdown or a normal view
@@ -42,10 +39,10 @@ namespace MvvmCross.Binding.Droid.Views
         //      - but that was too big a breaking change for this release (7th Oct 2013)
         private int _currentSimpleId;
 
-        // Note2 - _currentParent is similarly a bit of a hack
-        //       - it is just here to avoid a breaking api change for now
-        //       - will seek to remove both the _currentSimpleId and _currentParent private fields in a major release soon
-        private ViewGroup _currentParent;
+        private int _dropDownItemTemplateId;
+        private IEnumerable _itemsSource;
+        private int _itemTemplateId;
+        private IDisposable _subscription;
 
         public MvxAdapter(Context context)
             : this(context, MvxAndroidBindingContextHelpers.Current())
@@ -57,10 +54,8 @@ namespace MvvmCross.Binding.Droid.Views
             Context = context;
             BindingContext = bindingContext;
             if (BindingContext == null)
-            {
                 throw new MvxException(
                     "bindingContext is null during MvxAdapter creation - Adapter's should only be created when a specific binding context has been placed on the stack");
-            }
             SimpleViewLayoutId = Android.Resource.Layout.SimpleListItem1;
             SimpleDropDownViewLayoutId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
         }
@@ -74,22 +69,22 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected IMvxAndroidBindingContext BindingContext { get; }
 
-        public int SimpleViewLayoutId { get; set; }
-
         public int SimpleDropDownViewLayoutId { get; set; }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
+        public int SimpleViewLayoutId { get; set; }
+
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
-            set { SetItemsSource(value); }
+            get => _itemsSource;
+            set => SetItemsSource(value);
         }
 
         public virtual int ItemTemplateId
         {
-            get { return _itemTemplateId; }
+            get => _itemTemplateId;
             set
             {
                 if (_itemTemplateId == value)
@@ -104,7 +99,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public virtual int DropDownItemTemplateId
         {
-            get { return _dropDownItemTemplateId; }
+            get => _dropDownItemTemplateId;
             set
             {
                 if (_dropDownItemTemplateId == value)
@@ -118,61 +113,6 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         public override int Count => _itemsSource.Count();
-
-        protected virtual void SetItemsSource(IEnumerable value)
-        {
-            if (ReferenceEquals(_itemsSource, value)
-                && !ReloadOnAllItemsSourceSets)
-                return;
-
-            if (_subscription != null)
-            {
-                _subscription.Dispose();
-                _subscription = null;
-            }
-
-            _itemsSource = value;
-
-            if (_itemsSource != null && !(_itemsSource is IList))
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
-
-            var newObservable = _itemsSource as INotifyCollectionChanged;
-            if (newObservable != null)
-            {
-                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
-            }
-            NotifyDataSetChanged();
-        }
-
-        protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyDataSetChanged(e);
-        }
-
-        public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
-        {
-            RealNotifyDataSetChanged();
-        }
-
-        public override void NotifyDataSetChanged()
-        {
-            RealNotifyDataSetChanged();
-        }
-
-        protected virtual void RealNotifyDataSetChanged()
-        {
-            try
-            {
-                base.NotifyDataSetChanged();
-            }
-            catch (Exception exception)
-            {
-                Mvx.Warning(
-                    "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
-                    exception.ToLongString());
-            }
-        }
 
         public virtual int GetPosition(object item)
         {
@@ -215,6 +155,59 @@ namespace MvvmCross.Binding.Droid.Views
             return toReturn;
         }
 
+        protected virtual void SetItemsSource(IEnumerable value)
+        {
+            if (ReferenceEquals(_itemsSource, value)
+                && !ReloadOnAllItemsSourceSets)
+                return;
+
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
+
+            _itemsSource = value;
+
+            if (_itemsSource != null && !(_itemsSource is IList))
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                    "You are currently binding to IEnumerable - this can be inefficient, especially for large collections. Binding to IList is more efficient.");
+
+            var newObservable = _itemsSource as INotifyCollectionChanged;
+            if (newObservable != null)
+                _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
+            NotifyDataSetChanged();
+        }
+
+        protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyDataSetChanged(e);
+        }
+
+        public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
+        {
+            RealNotifyDataSetChanged();
+        }
+
+        public override void NotifyDataSetChanged()
+        {
+            RealNotifyDataSetChanged();
+        }
+
+        protected virtual void RealNotifyDataSetChanged()
+        {
+            try
+            {
+                base.NotifyDataSetChanged();
+            }
+            catch (Exception exception)
+            {
+                Mvx.Warning(
+                    "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
+                    exception.ToLongString());
+            }
+        }
+
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
             if (_itemsSource == null)
@@ -225,19 +218,15 @@ namespace MvvmCross.Binding.Droid.Views
 
             var source = GetRawItem(position);
 
-			return GetBindableView(convertView, source, parent, templateId);
+            return GetBindableView(convertView, source, parent, templateId);
         }
 
         protected virtual View GetSimpleView(View convertView, object dataContext)
         {
             if (convertView == null)
-            {
                 convertView = CreateSimpleView(dataContext);
-            }
             else
-            {
                 BindSimpleView(convertView, dataContext);
-            }
 
             return convertView;
         }
@@ -246,9 +235,7 @@ namespace MvvmCross.Binding.Droid.Views
         {
             var textView = convertView as TextView;
             if (textView != null)
-            {
                 textView.Text = (dataContext ?? string.Empty).ToString();
-            }
         }
 
         protected virtual View CreateSimpleView(object dataContext)
@@ -269,32 +256,25 @@ namespace MvvmCross.Binding.Droid.Views
         protected virtual View GetBindableView(View convertView, object dataContext, ViewGroup parent, int templateId)
         {
             if (templateId == 0)
-            {
-                // no template seen - so use a standard string view from Android and use ToString()
                 return GetSimpleView(convertView, dataContext);
-            }
 
             // we have a templateid so lets use bind and inflate on it :)
             var viewToUse = convertView?.Tag as IMvxListItemView;
             if (viewToUse != null)
-            {
                 if (viewToUse.TemplateId != templateId)
-                {
                     viewToUse = null;
-                }
-            }
 
             if (viewToUse == null)
             {
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
-                viewToUse.Content.Tag = viewToUse as Java.Lang.Object;
+                viewToUse.Content.Tag = viewToUse as Object;
             }
             else
             {
                 BindBindableView(dataContext, viewToUse);
             }
 
-            return viewToUse.Content;// as View;
+            return viewToUse.Content; // as View;
         }
 
         protected virtual void BindBindableView(object source, IMvxListItemView viewToUse)
@@ -308,31 +288,25 @@ namespace MvvmCross.Binding.Droid.Views
         }
     }
 
-	public class MvxAdapter<TItem> : MvxAdapter where TItem : class
-	{
-		public MvxAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
-		{
-		}
+    public class MvxAdapter<TItem> : MvxAdapter where TItem : class
+    {
+        public MvxAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
+        {
+        }
 
-		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
-		{
-		}
+        public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
+        {
+        }
 
-		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-		{
-		}
+        public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         [MvxSetToNullAfterBinding]
         public new IEnumerable<TItem> ItemsSource
-		{
-			get
-			{
-				return base.ItemsSource as IEnumerable<TItem>;
-			}
-			set
-			{
-				base.ItemsSource = value;
-			}
-		}
-	} 
+        {
+            get => base.ItemsSource as IEnumerable<TItem>;
+            set => base.ItemsSource = value;
+        }
+    }
 }

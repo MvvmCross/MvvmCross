@@ -2,13 +2,12 @@
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.Core
 {
-	public class KittenGroup : List<Kitten>
-	{
-		public string Title { get; set; }
+    public class KittenGroup : List<Kitten>
+    {
+        public KittenGroup(IEnumerable<Kitten> collection) : base(collection)
+        {
+        }
 
-		public KittenGroup(IEnumerable<Kitten> collection) : base(collection)
-		{
-
-		}
-	}
+        public string Title { get; set; }
+    }
 }

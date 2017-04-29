@@ -1,8 +1,3 @@
-using Android.App;
-using Android.Content.PM;
-using MvvmCross.Droid.Views;
-using Xamarin.Forms;
-
 namespace MasterDetailExample.Droid
 {
     [Activity(
@@ -15,12 +10,13 @@ namespace MasterDetailExample.Droid
     public class SplashScreen
         : MvxSplashScreenActivity
     {
+        private bool isInitializationComplete = false;
+
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
         }
 
-        private bool isInitializationComplete = false;
         public override void InitializationComplete()
         {
             if (!isInitializationComplete)
@@ -37,9 +33,7 @@ namespace MasterDetailExample.Droid
             Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
             {
                 if (!string.IsNullOrWhiteSpace(e.View.StyleId))
-                {
                     e.NativeView.ContentDescription = e.View.StyleId;
-                }
             };
 
             base.OnCreate(bundle);

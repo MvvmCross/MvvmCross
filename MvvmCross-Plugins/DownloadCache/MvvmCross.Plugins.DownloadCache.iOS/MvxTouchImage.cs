@@ -10,7 +10,7 @@ using UIKit;
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxIosImage
+    public class MvxIosImage
         : MvxImage<UIImage>
     {
         public MvxIosImage(UIImage rawImage)
@@ -27,7 +27,7 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
             if (cg == null)
                 return 0;
 
-            return (int)(cg.BytesPerRow * cg.Height);
+            return (int) (cg.BytesPerRow * cg.Height);
         }
     }
 }

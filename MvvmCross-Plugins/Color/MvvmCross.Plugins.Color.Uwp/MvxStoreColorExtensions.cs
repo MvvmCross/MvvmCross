@@ -13,10 +13,10 @@ namespace MvvmCross.Plugins.Color.WindowsCommon
     {
         public static Windows.UI.Color ToNativeColor(this MvxColor mvxColor)
         {
-            var color = Windows.UI.Color.FromArgb((byte)mvxColor.A,
-                                                  (byte)mvxColor.R,
-                                                  (byte)mvxColor.G,
-                                                  (byte)mvxColor.B);
+            var color = Windows.UI.Color.FromArgb((byte) mvxColor.A,
+                (byte) mvxColor.R,
+                (byte) mvxColor.G,
+                (byte) mvxColor.B);
             return color;
         }
     }

@@ -2,13 +2,9 @@
 
 namespace Example.Core.ViewModels
 {
-	public class SecondHostViewModel
+    public class SecondHostViewModel
         : MvxViewModel
     {
-		public SecondHostViewModel()
-        {
-        }
-
         public void ShowMenu()
         {
             ShowViewModel<HomeViewModel>();

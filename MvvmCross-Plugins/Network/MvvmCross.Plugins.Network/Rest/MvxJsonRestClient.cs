@@ -5,26 +5,32 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxJsonRestClient
+    public class MvxJsonRestClient
         : MvxRestClient
-          , IMvxJsonRestClient
+            , IMvxJsonRestClient
     {
+        public MvxJsonRestClient()
+        {
+            JsonConverterProvider = () => Mvx.Resolve<IMvxJsonConverter>();
+        }
+
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
-        public IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
+        public IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest,
+            Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
         {
-            return MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) =>
+            return MakeRequest(restRequest, streamResponse =>
             {
                 using (var textReader = new StreamReader(streamResponse.Stream))
                 {
@@ -42,7 +48,8 @@ namespace MvvmCross.Plugins.Network.Rest
             }, errorAction);
         }
 
-        public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<MvxDecodedRestResponse<T>> MakeRequestForAsync<T>(MvxRestRequest restRequest,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var decodedResponse = new MvxDecodedRestResponse<T>();
 
@@ -50,12 +57,9 @@ namespace MvvmCross.Plugins.Network.Rest
             {
                 var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
 
-                if(streamResponse.StatusCode == HttpStatusCode.BadRequest)
-                {
+                if (streamResponse.StatusCode == HttpStatusCode.BadRequest)
                     decodedResponse.StatusCode = HttpStatusCode.BadRequest;
-                }
                 else
-                {
                     using (var textReader = new StreamReader(streamResponse.Stream))
                     {
                         var text = textReader.ReadToEnd();
@@ -66,7 +70,6 @@ namespace MvvmCross.Plugins.Network.Rest
                         decodedResponse.StatusCode = streamResponse.StatusCode;
                         decodedResponse.Tag = streamResponse.Tag;
                     }
-                }
             }
             catch
             {
@@ -74,11 +77,6 @@ namespace MvvmCross.Plugins.Network.Rest
             }
 
             return decodedResponse;
-        }
-
-        public MvxJsonRestClient()
-        {
-            JsonConverterProvider = () => Mvx.Resolve<IMvxJsonConverter>();
         }
     }
 }

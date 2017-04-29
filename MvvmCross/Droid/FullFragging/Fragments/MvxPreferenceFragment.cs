@@ -10,6 +10,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments
     [Register("mvvmcross.droid.fullfragging.fragments.MvxPreferenceFragment")]
     public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
     {
+        private object _dataContext;
+
         protected MvxPreferenceFragment()
         {
             this.AddEventListeners();
@@ -17,15 +19,14 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        private object _dataContext;
-
         public object DataContext
         {
-            get { return _dataContext; }
+            get => _dataContext;
             set
             {
                 _dataContext = value;
@@ -36,7 +37,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -44,16 +45,16 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             }
         }
 
+        public string UniqueImmutableCacheTag => Tag;
+
         public virtual void OnViewModelSet()
         {
         }
 
-        public string UniqueImmutableCacheTag => Tag;
-
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.Destroy ();
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnStart()
@@ -83,21 +84,22 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
     public abstract class MvxPreferenceFragment<TViewModel>
         : MvxPreferenceFragment
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-
         protected MvxPreferenceFragment()
         {
-
         }
 
-        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference,
+            transfer)
+        {
+        }
 
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

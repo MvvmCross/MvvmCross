@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -7,6 +6,11 @@ namespace Playground.Core.ViewModels
     public class Tab1ViewModel : MvxViewModel
     {
         private ICommand _openChildCommand;
+
+        private ICommand _openModalCommand;
+
+        private ICommand _openNavModalCommand;
+
         public ICommand OpenChildCommand
         {
             get
@@ -15,7 +19,6 @@ namespace Playground.Core.ViewModels
             }
         }
 
-        private ICommand _openModalCommand;
         public ICommand OpenModalCommand
         {
             get
@@ -24,12 +27,12 @@ namespace Playground.Core.ViewModels
             }
         }
 
-        private ICommand _openNavModalCommand;
         public ICommand OpenNavModalCommand
         {
             get
             {
-                return _openNavModalCommand ?? (_openNavModalCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
+                return _openNavModalCommand ?? (_openNavModalCommand =
+                           new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
             }
         }
     }

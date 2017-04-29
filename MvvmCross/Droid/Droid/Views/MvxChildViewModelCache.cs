@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.ViewModels;
-
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
         private static int _unique = 1;
@@ -20,18 +19,18 @@ namespace MvvmCross.Droid.Views
         public int Cache(IMvxViewModel viewModel)
         {
             var index = _unique++;
-            this._viewModels[index] = viewModel;
+            _viewModels[index] = viewModel;
             return index;
         }
 
         public IMvxViewModel Get(int index)
         {
-            return this._viewModels[index];
+            return _viewModels[index];
         }
 
         public void Remove(int index)
         {
-            this._viewModels.Remove(index);
+            _viewModels.Remove(index);
         }
     }
 }

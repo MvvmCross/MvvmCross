@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq.Expressions;
+using System.Reflection;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Linq.Expressions;
-    using System.Reflection;
-
     public static class MvxPropertyNameExtensionMethods
     {
         private const string WrongExpressionMessage =
@@ -24,37 +24,25 @@ namespace MvvmCross.Platform.Core
             Expression<Func<T>> expression)
         {
             if (expression == null)
-            {
                 throw new ArgumentNullException(nameof(expression));
-            }
 
             var memberExpression = FindMemberExpression(expression);
 
             if (memberExpression == null)
-            {
                 throw new ArgumentException(WrongExpressionMessage, nameof(expression));
-            }
 
             var member = memberExpression.Member as PropertyInfo;
             if (member == null)
-            {
                 throw new ArgumentException(WrongExpressionMessage, nameof(expression));
-            }
 
             if (member.DeclaringType == null)
-            {
                 throw new ArgumentException(WrongExpressionMessage, nameof(expression));
-            }
 
             if (target != null && !member.DeclaringType.IsInstanceOfType(target))
-            {
                 throw new ArgumentException(WrongExpressionMessage, nameof(expression));
-            }
 
             if (member.GetGetMethod(true).IsStatic)
-            {
                 throw new ArgumentException(WrongExpressionMessage, nameof(expression));
-            }
 
             return member.Name;
         }

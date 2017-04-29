@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-
-    using MvvmCross.Platform.Converters;
-
     public interface IMvxAutoValueConverters
     {
         IMvxValueConverter Find(Type viewModelType, Type viewType);

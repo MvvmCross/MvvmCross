@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Uwp.Platform;
 using System;
 using Windows.Devices.Geolocation;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Uwp.Platform;
 
 namespace MvvmCross.Plugins.Location.WindowsCommon
 {
@@ -19,22 +19,6 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
         public MvxWCommonLocationWatcher()
         {
             EnsureStopped();
-        }
-
-        protected override void PlatformSpecificStart(MvxLocationOptions options)
-        {
-            if (_geolocator != null)
-                throw new MvxException("You cannot start the MvxLocation service more than once");
-
-            _geolocator = new Geolocator
-            {
-                DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? PositionAccuracy.High : PositionAccuracy.Default,
-                MovementThreshold = options.MovementThresholdInM,
-                ReportInterval = (uint)options.TimeBetweenUpdates.TotalMilliseconds
-            };
-
-            _geolocator.StatusChanged += OnStatusChanged;
-            _geolocator.PositionChanged += OnPositionChanged;
         }
 
         public override MvxGeoLocation CurrentLocation
@@ -51,6 +35,24 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
 
                 return CreateLocation(storeLocation.Coordinate);
             }
+        }
+
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        {
+            if (_geolocator != null)
+                throw new MvxException("You cannot start the MvxLocation service more than once");
+
+            _geolocator = new Geolocator
+            {
+                DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine
+                    ? PositionAccuracy.High
+                    : PositionAccuracy.Default,
+                MovementThreshold = options.MovementThresholdInM,
+                ReportInterval = (uint) options.TimeBetweenUpdates.TotalMilliseconds
+            };
+
+            _geolocator.StatusChanged += OnStatusChanged;
+            _geolocator.PositionChanged += OnPositionChanged;
         }
 
         protected override void PlatformSpecificStop()
@@ -105,7 +107,7 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
 
         private MvxGeoLocation CreateLocation(Geocoordinate coordinate)
         {
-            var position = new MvxGeoLocation { Timestamp = coordinate.Timestamp };
+            var position = new MvxGeoLocation {Timestamp = coordinate.Timestamp};
             var coords = position.Coordinates;
 
             // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94

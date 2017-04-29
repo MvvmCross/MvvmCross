@@ -3,6 +3,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
     public class MvxBaseSplitViewController : MvxEventSourceSplitViewController, IMvxIosView
@@ -26,14 +27,14 @@ namespace MvvmCross.iOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = value;
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -67,10 +68,8 @@ namespace MvvmCross.iOS.Views
         public override void DidMoveToParentViewController(UIViewController parent)
         {
             base.DidMoveToParentViewController(parent);
-            if(parent == null)
-            {
+            if (parent == null)
                 ViewModel?.Destroy();
-            }
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -99,8 +98,8 @@ namespace MvvmCross.iOS.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

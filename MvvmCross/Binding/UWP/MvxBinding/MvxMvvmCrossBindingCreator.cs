@@ -8,19 +8,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.Uwp
 {
-
-
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {
+        public static readonly DependencyProperty DataContextWatcherProperty = DependencyProperty.Register(
+            "DataContextWatcher",
+            typeof(object),
+            typeof(FrameworkElement),
+            new PropertyMetadata(null, DataContext_Changed));
+
+        public static readonly DependencyProperty BindingsListProperty = DependencyProperty.Register(
+            "BindingsList",
+            typeof(IList<IMvxUpdateableBinding>),
+            typeof(FrameworkElement),
+            new PropertyMetadata(null));
+
         protected override void ApplyBindings(FrameworkElement attachedObject,
-                                              IEnumerable<MvxBindingDescription> bindingDescriptions)
+            IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             var binder = MvxBindingSingletonCache.Instance.Binder;
             var bindingDescriptionList = bindingDescriptions.ToList();
@@ -29,16 +38,14 @@ namespace MvvmCross.Binding.Uwp
         }
 
         private void RegisterBindingsForUpdates(FrameworkElement attachedObject,
-                                                IEnumerable<IMvxUpdateableBinding> bindings)
+            IEnumerable<IMvxUpdateableBinding> bindings)
         {
             if (bindings == null)
                 return;
 
             var bindingsList = GetOrCreateBindingsList(attachedObject);
             foreach (var binding in bindings)
-            {
                 bindingsList.Add(binding);
-            }
         }
 
         private IList<IMvxUpdateableBinding> GetOrCreateBindingsList(FrameworkElement attachedObject)
@@ -54,7 +61,7 @@ namespace MvvmCross.Binding.Uwp
             // create a binding watcher for the list
             var binding = new Windows.UI.Xaml.Data.Binding();
 
-            bool attached = false;
+            var attached = false;
             Action attachAction = () =>
             {
                 if (attached)
@@ -72,23 +79,11 @@ namespace MvvmCross.Binding.Uwp
                 attached = false;
             };
             attachAction();
-            attachedObject.Loaded += (o, args) =>
-            {
-                attachAction();
-            };
-            attachedObject.Unloaded += (o, args) =>
-            {
-                detachAction();
-            };
+            attachedObject.Loaded += (o, args) => { attachAction(); };
+            attachedObject.Unloaded += (o, args) => { detachAction(); };
 
             return newList;
         }
-
-        public static readonly DependencyProperty DataContextWatcherProperty = DependencyProperty.Register(
-            "DataContextWatcher",
-            typeof(object),
-            typeof(FrameworkElement),
-            new PropertyMetadata(null, DataContext_Changed));
 
         public static object GetDataContextWatcher(DependencyObject d)
         {
@@ -99,12 +94,6 @@ namespace MvvmCross.Binding.Uwp
         {
             d.SetValue(DataContextWatcherProperty, value);
         }
-
-        public static readonly DependencyProperty BindingsListProperty = DependencyProperty.Register(
-            "BindingsList",
-            typeof(IList<IMvxUpdateableBinding>),
-            typeof(FrameworkElement),
-            new PropertyMetadata(null));
 
         public static IList<IMvxUpdateableBinding> GetBindingsList(DependencyObject d)
         {
@@ -125,9 +114,7 @@ namespace MvvmCross.Binding.Uwp
                 return;
 
             foreach (var binding in bindings)
-            {
                 binding.DataContext = e.NewValue;
-            }
         }
     }
 }

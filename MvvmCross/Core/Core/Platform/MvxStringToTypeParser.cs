@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser
-          , IMvxFillableStringToTypeParser
+            , IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
@@ -47,11 +46,10 @@ namespace MvvmCross.Core.Platform
                 catch (Exception)
                 {
                     MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
-                                   fieldOrParameterName,
-                                   input);
+                        fieldOrParameterName,
+                        input);
                 }
                 if (enumValue == null)
-                {
                     try
                     {
                         // we set enumValue to 0 here - just have to hope that's the default
@@ -60,9 +58,8 @@ namespace MvvmCross.Core.Platform
                     catch (Exception)
                     {
                         MvxTrace.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);
+                            fieldOrParameterName);
                     }
-                }
                 return enumValue;
             }
         }
@@ -77,18 +74,16 @@ namespace MvvmCross.Core.Platform
 
         public abstract class ValueParser : IParser
         {
-            protected abstract bool TryParse(string input, out object result);
-
             public object ReadValue(string input, string fieldOrParameterName)
             {
                 object result;
-                if (!this.TryParse(input, out result))
-                {
+                if (!TryParse(input, out result))
                     MvxTrace.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   this.GetType().Name, fieldOrParameterName, input);
-                }
+                        GetType().Name, fieldOrParameterName, input);
                 return result;
             }
+
+            protected abstract bool TryParse(string input, out object result);
         }
 
         public class BoolParser : ValueParser
@@ -204,8 +199,8 @@ namespace MvvmCross.Core.Platform
         }
 
 #else
-        // UNITY3D does not support Guid.TryParse
-        // See https://github.com/slodge/MvvmCross/issues/215
+// UNITY3D does not support Guid.TryParse
+// See https://github.com/slodge/MvvmCross/issues/215
         public class GuidParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
@@ -235,56 +230,52 @@ namespace MvvmCross.Core.Platform
             }
         }
 
-        public IDictionary<Type, IParser> TypeParsers { get; private set; }
-        public IList<IExtraParser> ExtraParsers { get; private set; }
+        public IDictionary<Type, IParser> TypeParsers { get; }
+        public IList<IExtraParser> ExtraParsers { get; }
 
         public MvxStringToTypeParser()
         {
-            this.TypeParsers = new Dictionary<Type, IParser>
-                {
-                    {typeof (string), new StringParser()},
-                    {typeof (short), new ShortParser()},
-                    {typeof (int), new IntParser()},
-                    {typeof (long), new LongParser()},
-                    {typeof (ushort), new UshortParser()},
-                    {typeof (uint), new UintParser()},
-                    {typeof (ulong), new UlongParser()},
-                    {typeof (double), new DoubleParser()},
-                    {typeof (float), new FloatParser()},
-                    {typeof (bool), new BoolParser()},
-                    {typeof (Guid), new GuidParser()},
-                    {typeof (DateTime), new DateTimeParser()},
-                };
-            this.ExtraParsers = new List<IExtraParser>
-                {
-                    new EnumParser()
-                };
+            TypeParsers = new Dictionary<Type, IParser>
+            {
+                {typeof(string), new StringParser()},
+                {typeof(short), new ShortParser()},
+                {typeof(int), new IntParser()},
+                {typeof(long), new LongParser()},
+                {typeof(ushort), new UshortParser()},
+                {typeof(uint), new UintParser()},
+                {typeof(ulong), new UlongParser()},
+                {typeof(double), new DoubleParser()},
+                {typeof(float), new FloatParser()},
+                {typeof(bool), new BoolParser()},
+                {typeof(Guid), new GuidParser()},
+                {typeof(DateTime), new DateTimeParser()}
+            };
+            ExtraParsers = new List<IExtraParser>
+            {
+                new EnumParser()
+            };
         }
 
         public bool TypeSupported(Type targetType)
         {
-            if (this.TypeParsers.ContainsKey(targetType))
+            if (TypeParsers.ContainsKey(targetType))
                 return true;
 
-            return this.ExtraParsers.Any(x => x.Parses(targetType));
+            return ExtraParsers.Any(x => x.Parses(targetType));
         }
 
         public object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
             IParser parser;
-            if (this.TypeParsers.TryGetValue(targetType, out parser))
-            {
+            if (TypeParsers.TryGetValue(targetType, out parser))
                 return parser.ReadValue(rawValue, fieldOrParameterName);
-            }
 
-            var extra = this.ExtraParsers.FirstOrDefault(x => x.Parses(targetType));
+            var extra = ExtraParsers.FirstOrDefault(x => x.Parses(targetType));
             if (extra != null)
-            {
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
-            }
 
             MvxTrace.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
-                           targetType.Name);
+                targetType.Name);
             return null;
         }
     }

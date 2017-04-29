@@ -10,17 +10,12 @@ using System;
 namespace MvvmCross.Plugins.Messenger
 {
     /// <summary>
-    /// Base class for messages that provides weak refrence storage of the sender
+    ///     Base class for messages that provides weak refrence storage of the sender
     /// </summary>
     public abstract class MvxMessage
     {
         /// <summary>
-        /// Gets the original sender of the message
-        /// </summary>
-        public object Sender { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the MvxMessage class.
+        ///     Initializes a new instance of the MvxMessage class.
         /// </summary>
         /// <param name="sender">Message sender (usually "this")</param>
         protected MvxMessage(object sender)
@@ -30,5 +25,10 @@ namespace MvvmCross.Plugins.Messenger
 
             Sender = sender;
         }
+
+        /// <summary>
+        ///     Gets the original sender of the message
+        /// </summary>
+        public object Sender { get; }
     }
 }

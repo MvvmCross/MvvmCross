@@ -9,20 +9,21 @@ namespace MvvmCross.Platform.iOS.Platform
 {
     public class MvxIosMajorVersionChecker
     {
-        public bool IsVersionOrHigher { get; private set; }
-
         public MvxIosMajorVersionChecker(int major, bool defaultValue = true)
         {
-            this.IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
+            IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
         }
+
+        public bool IsVersionOrHigher { get; }
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)
         {
             IMvxIosSystem touchSystem;
-            Mvx.TryResolve<IMvxIosSystem>(out touchSystem);
+            Mvx.TryResolve(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
+                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target,
+                    defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

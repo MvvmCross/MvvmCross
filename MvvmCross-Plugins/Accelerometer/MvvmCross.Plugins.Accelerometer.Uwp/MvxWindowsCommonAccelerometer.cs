@@ -8,66 +8,37 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 using System;
+using Windows.Devices.Sensors;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using Windows.Devices.Sensors;
 
 namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
 {
     public class MvxWindowsCommonAccelerometer : IMvxAccelerometer
     {
-        private bool _started;
         private Windows.Devices.Sensors.Accelerometer _accelerometer;
+        private bool _started;
 
         public void Start()
         {
             if (_started)
-            {
                 throw new MvxException("Accelerometer already started");
-            }
             _accelerometer = Windows.Devices.Sensors.Accelerometer.GetDefault();
             if (_accelerometer != null)
-            {
                 _accelerometer.ReadingChanged += AccelerometerOnReadingChanged;
-            }
             _started = true;
         }
 
         public void Stop()
         {
             if (!_started)
-            {
                 throw new MvxException("Accelerometer not started");
-            }
             if (_accelerometer != null)
             {
                 _accelerometer.ReadingChanged -= AccelerometerOnReadingChanged;
                 _accelerometer = null;
             }
             _started = false;
-        }
-
-        private void AccelerometerOnReadingChanged(Windows.Devices.Sensors.Accelerometer sender, AccelerometerReadingChangedEventArgs args)
-        {
-            var handler = ReadingAvailable;
-
-            if (handler == null)
-                return;
-
-            var reading = ToReading(args.Reading);
-
-            handler(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
-        }
-
-        private static MvxAccelerometerReading ToReading(AccelerometerReading sensorReading)
-        {
-            var reading = new MvxAccelerometerReading
-            {
-                X = sensorReading.AccelerationX,
-                Y = sensorReading.AccelerationY,
-                Z = sensorReading.AccelerationZ
-            };
-            return reading;
         }
 
         public bool Started => _accelerometer != null;
@@ -89,5 +60,29 @@ namespace MvvmCross.Plugins.Accelerometer.WindowsCommon
         }
 
         public event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
+
+        private void AccelerometerOnReadingChanged(Windows.Devices.Sensors.Accelerometer sender,
+            AccelerometerReadingChangedEventArgs args)
+        {
+            var handler = ReadingAvailable;
+
+            if (handler == null)
+                return;
+
+            var reading = ToReading(args.Reading);
+
+            handler(this, new MvxValueEventArgs<MvxAccelerometerReading>(reading));
+        }
+
+        private static MvxAccelerometerReading ToReading(AccelerometerReading sensorReading)
+        {
+            var reading = new MvxAccelerometerReading
+            {
+                X = sensorReading.AccelerationX,
+                Y = sensorReading.AccelerationY,
+                Z = sensorReading.AccelerationZ
+            };
+            return reading;
+        }
     }
 }

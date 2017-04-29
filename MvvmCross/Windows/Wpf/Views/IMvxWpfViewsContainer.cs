@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Wpf.Views
 {
-    using MvvmCross.Core.Views;
-
     public interface IMvxWpfViewsContainer
         : IMvxViewsContainer
-          , IMvxSimpleWpfViewLoader
+            , IMvxSimpleWpfViewLoader
     {
     }
 }

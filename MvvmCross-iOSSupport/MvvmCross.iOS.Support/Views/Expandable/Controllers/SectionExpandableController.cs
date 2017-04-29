@@ -3,20 +3,26 @@ using System.Linq;
 
 namespace MvvmCross.iOS.Support.Views.Expandable.Controllers
 {
-	internal abstract class SectionExpandableController
-	{
-		protected readonly HashSet<int> ExpandedIndexesSet = new HashSet<int>();
+    internal abstract class SectionExpandableController
+    {
+        protected readonly HashSet<int> ExpandedIndexesSet = new HashSet<int>();
 
-		/// <summary>
-		/// Toggles expandable state and returns what indexes had changed.
-		/// </summary>
-		/// <param name="atIndex"></param>
-		public abstract ToggleExpandStateResponse ToggleState(int atIndex);
+        public IEnumerable<int> ExpandedIndexes => ExpandedIndexesSet.ToList();
 
-		public bool IsExpanded(int atIndex) => ExpandedIndexesSet.Contains(atIndex);
+        /// <summary>
+        ///     Toggles expandable state and returns what indexes had changed.
+        /// </summary>
+        /// <param name="atIndex"></param>
+        public abstract ToggleExpandStateResponse ToggleState(int atIndex);
 
-		public void ResetState() => ExpandedIndexesSet.Clear();
+        public bool IsExpanded(int atIndex)
+        {
+            return ExpandedIndexesSet.Contains(atIndex);
+        }
 
-		public IEnumerable<int> ExpandedIndexes => ExpandedIndexesSet.ToList();
-	}
+        public void ResetState()
+        {
+            ExpandedIndexesSet.Clear();
+        }
+    }
 }

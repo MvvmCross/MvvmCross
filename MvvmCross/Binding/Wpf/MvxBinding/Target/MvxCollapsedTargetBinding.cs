@@ -5,11 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+
 #if WINDOWS_COMMON
 namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
+
 namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
 #endif
 {
@@ -24,7 +26,7 @@ namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
         {
             if (value == null)
                 value = false;
-            var boolValue = (bool)value;
+            var boolValue = (bool) value;
             base.SetValue(!boolValue);
         }
     }

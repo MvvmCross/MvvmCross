@@ -1,4 +1,3 @@
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.Animations;
 
@@ -19,7 +18,7 @@ namespace MvvmCross.Droid.Support.Design.Extensions
         public static View HideWithTranslateAnimation(this View view)
         {
             var marginLayoutParams = view.LayoutParameters as ViewGroup.MarginLayoutParams;
-            int margin = marginLayoutParams?.BottomMargin ?? 0;
+            var margin = marginLayoutParams?.BottomMargin ?? 0;
 
             view.Animate()
                 .TranslationY(view.Height + margin)

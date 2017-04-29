@@ -23,13 +23,6 @@ namespace MvvmCross.iOS.Views
             this.AdaptForBinding();
         }
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
-        }
-
         public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
         {
             viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
@@ -43,7 +36,7 @@ namespace MvvmCross.iOS.Views
 
             viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
 
-            if(newStack.Any())
+            if (newStack.Any())
                 newStack.RemoveAt(0);
 
             newStack.Insert(0, viewController);
@@ -53,13 +46,13 @@ namespace MvvmCross.iOS.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if(!ViewControllers.Any())
+            if (!ViewControllers.Any())
                 return false;
 
             var toClose = ViewControllers.ToList()
-                                         .Select(v => v.GetIMvxIosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
-            if(toClose != null)
+                .Select(v => v.GetIMvxIosView())
+                .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if (toClose != null)
             {
                 var newStack = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
                 ViewControllers = newStack.ToArray();
@@ -69,18 +62,19 @@ namespace MvvmCross.iOS.Views
 
             return false;
         }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
+        }
     }
 
     public class MvxSplitViewController<TViewModel> : MvxSplitViewController
         where TViewModel : IMvxViewModel
     {
-        public new TViewModel ViewModel
-        {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
-        public MvxSplitViewController() : base()
+        public MvxSplitViewController()
         {
         }
 
@@ -92,6 +86,12 @@ namespace MvvmCross.iOS.Views
         protected MvxSplitViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

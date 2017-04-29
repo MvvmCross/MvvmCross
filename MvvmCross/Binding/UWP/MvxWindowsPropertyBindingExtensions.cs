@@ -12,12 +12,18 @@ namespace MvvmCross.Binding.Uwp
     public static class MvxWindowsPropertyBindingExtensions
     {
         public static string BindVisible(this FrameworkElement frameworkElement)
-            => MvxWindowsPropertyBinding.FrameworkElement_Visible;
+        {
+            return MvxWindowsPropertyBinding.FrameworkElement_Visible;
+        }
 
         public static string BindCollapsed(this FrameworkElement frameworkElement)
-            => MvxWindowsPropertyBinding.FrameworkElement_Collapsed;
+        {
+            return MvxWindowsPropertyBinding.FrameworkElement_Collapsed;
+        }
 
         public static string BindHidden(this FrameworkElement frameworkElement)
-            => MvxWindowsPropertyBinding.FrameworkElement_Hidden;
+        {
+            return MvxWindowsPropertyBinding.FrameworkElement_Hidden;
+        }
     }
 }

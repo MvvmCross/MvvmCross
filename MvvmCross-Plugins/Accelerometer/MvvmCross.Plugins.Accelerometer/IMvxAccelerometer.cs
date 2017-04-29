@@ -7,19 +7,18 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
-using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.Accelerometer
 {
     public interface IMvxAccelerometer
     {
+        bool Started { get; }
+        MvxAccelerometerReading LastReading { get; }
         void Start();
 
         void Stop();
-
-        bool Started { get; }
-        MvxAccelerometerReading LastReading { get; }
 
         event EventHandler<MvxValueEventArgs<MvxAccelerometerReading>> ReadingAvailable;
     }

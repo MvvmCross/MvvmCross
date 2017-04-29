@@ -5,29 +5,28 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public class MvxInteraction : IMvxInteraction
     {
+        public event EventHandler Requested;
+
         public void Raise()
         {
-            this.Requested.Raise(this);
+            Requested.Raise(this);
         }
-
-        public event EventHandler Requested;
     }
 
     public class MvxInteraction<T> : IMvxInteraction<T>
     {
+        public event EventHandler<MvxValueEventArgs<T>> Requested;
+
         public void Raise(T request)
         {
-            this.Requested.Raise(this, request);
+            Requested.Raise(this, request);
         }
-
-        public event EventHandler<MvxValueEventArgs<T>> Requested;
     }
 }

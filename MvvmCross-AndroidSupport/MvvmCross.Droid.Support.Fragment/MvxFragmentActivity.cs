@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -29,17 +29,18 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -49,14 +50,14 @@ namespace MvvmCross.Droid.Support.V4
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
+
+        public IMvxBindingContext BindingContext { get; set; }
 
         protected virtual void OnViewModelSet()
         {
         }
-
-        public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
@@ -95,12 +96,12 @@ namespace MvvmCross.Droid.Support.V4
 
     public abstract class MvxFragmentActivity<TViewModel>
         : MvxFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel) base.ViewModel;
+            set => base.ViewModel = value;
         }
     }
 }

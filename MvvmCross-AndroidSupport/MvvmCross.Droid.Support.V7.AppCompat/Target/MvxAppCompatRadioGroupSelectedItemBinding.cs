@@ -7,6 +7,7 @@
 
 using System;
 using Android.Support.V7.Widget;
+using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
@@ -29,23 +30,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 RadioGroupCheckedChanged);
         }
 
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+        public override Type TargetType => typeof(object);
+
         private bool CheckValueChanged(object newValue)
         {
             bool changed;
             if (newValue == null)
-            {
                 changed = _currentValue != null;
-            }
             else
-            {
                 changed = !newValue.Equals(_currentValue);
-            }
             return changed;
         }
 
         private void RadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs args)
         {
-            var radioGroup = (MvxAppCompatRadioGroup)Target;
+            var radioGroup = (MvxAppCompatRadioGroup) Target;
             if (radioGroup == null)
                 return;
 
@@ -58,8 +59,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 newValue = radioGroup.Adapter.GetRawItem(index);
             }
 
-            bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            var changed = CheckValueChanged(newValue);
+            if (!changed) return;
 
             _currentValue = newValue;
             FireValueChanged(newValue);
@@ -67,23 +68,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         protected override void SetValueImpl(object target, object newValue)
         {
-            var radioGroup = (MvxAppCompatRadioGroup)target;
-            if (radioGroup == null) { return; }
+            var radioGroup = (MvxAppCompatRadioGroup) target;
+            if (radioGroup == null) return;
 
-            bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            var changed = CheckValueChanged(newValue);
+            if (!changed) return;
 
-            int checkid = Android.Views.View.NoId;
+            var checkid = View.NoId;
 
             // find the radio button associated with the new value
             if (newValue != null)
-            {
-                for (int i = 0; i < radioGroup.ChildCount; i++)
+                for (var i = 0; i < radioGroup.ChildCount; i++)
                 {
                     var li = radioGroup.GetChildAt(i);
                     var data = radioGroup.Adapter.GetRawItem(i);
                     if (li != null)
-                    {
                         if (newValue.Equals(data))
                         {
                             var radioButton = li as AppCompatRadioButton;
@@ -93,23 +92,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                                 break;
                             }
                         }
-                    }
                 }
-            }
 
-            if (checkid == Android.Views.View.NoId)
-            {
+            if (checkid == View.NoId)
                 radioGroup.ClearCheck();
-            }
             else
-            {
                 radioGroup.Check(checkid);
-            }
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override Type TargetType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

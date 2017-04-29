@@ -1,12 +1,8 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class SplitDetailNavViewModel : MvxViewModel
     {
-        public SplitDetailNavViewModel()
-        {
-        }
     }
 }

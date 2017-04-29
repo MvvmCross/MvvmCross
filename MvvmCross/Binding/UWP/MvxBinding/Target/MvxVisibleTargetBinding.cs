@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Binding;
 using Windows.UI.Xaml;
 
 namespace MvvmCross.Binding.Uwp.Target
@@ -26,7 +25,7 @@ namespace MvvmCross.Binding.Uwp.Target
         {
             if (value == null)
                 value = false;
-            var boolValue = (bool)value;
+            var boolValue = (bool) value;
             base.SetValue(boolValue ? Visibility.Visible : Visibility.Collapsed);
         }
     }

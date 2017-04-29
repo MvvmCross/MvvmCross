@@ -5,27 +5,25 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Windows.Input;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxGridView")]
     public class MvxGridView
         : GridView
     {
         private ICommand _itemClick;
-        private ICommand _itemLongClick;
 
         private bool _itemClickOverloaded;
+        private ICommand _itemLongClick;
         private bool _itemLongClickOverloaded;
 
         public MvxGridView(Context context, IAttributeSet attrs)
@@ -53,7 +51,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get => base.Adapter as IMvxAdapter;
             set
             {
                 var existing = Adapter;
@@ -76,24 +74,35 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
+            get => _itemClick;
             set
             {
                 _itemClick = value;
                 if (_itemClick != null)
                     EnsureItemClickOverloaded();
+            }
+        }
+
+        public new ICommand ItemLongClick
+        {
+            get => _itemLongClick;
+            set
+            {
+                _itemLongClick = value;
+                if (_itemLongClick != null)
+                    EnsureItemLongClickOverloaded();
             }
         }
 
@@ -109,17 +118,6 @@ namespace MvvmCross.Binding.Droid.Views
         private void ItemOnClick(object sender, ItemClickEventArgs e)
         {
             ExecuteCommandOnItem(ItemClick, e.Position);
-        }
-
-        public new ICommand ItemLongClick
-        {
-            get { return _itemLongClick; }
-            set
-            {
-                _itemLongClick = value;
-                if (_itemLongClick != null)
-                    EnsureItemLongClickOverloaded(); 
-            }
         }
 
         private void EnsureItemLongClickOverloaded()

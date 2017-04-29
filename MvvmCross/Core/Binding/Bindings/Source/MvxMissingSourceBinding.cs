@@ -5,24 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings.Source
 {
-    using System;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxMissingSourceBinding : MvxSourceBinding
     {
         public MvxMissingSourceBinding(object source) : base(source)
         {
         }
 
+        public override Type SourceType => typeof(object);
+
         public override void SetValue(object value)
         {
             // nothing we can do here - binding is missing
         }
-
-        public override Type SourceType => typeof(object);
 
         public override object GetValue()
         {

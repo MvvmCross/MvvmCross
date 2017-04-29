@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
         public static IDictionary<string, string> ToSimpleStringPropertyDictionary(
@@ -40,22 +39,21 @@ namespace MvvmCross.Core.Platform
 
             var propertyDictionary = toStore.ToSimplePropertyDictionary();
             foreach (var kvp in propertyDictionary)
-            {
                 data[kvp.Key] = kvp.Value;
-            }
         }
 
         public static T Read<T>(this IDictionary<string, string> data)
             where T : new()
         {
-            return (T)data.Read(typeof(T));
+            return (T) data.Read(typeof(T));
         }
 
         public static object Read(this IDictionary<string, string> data, Type type)
         {
             var t = Activator.CreateInstance(type);
             var propertyList =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite);
+                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                    .Where(p => p.CanWrite);
 
             foreach (var propertyInfo in propertyList)
             {
@@ -64,7 +62,7 @@ namespace MvvmCross.Core.Platform
                     continue;
 
                 var typedValue = MvxSingletonCache.Instance.Parser.ReadValue(textValue, propertyInfo.PropertyType,
-                                                                             propertyInfo.Name);
+                    propertyInfo.Name);
                 propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
@@ -72,8 +70,8 @@ namespace MvvmCross.Core.Platform
         }
 
         public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
-                                                             IEnumerable<ParameterInfo> requiredParameters,
-                                                             string debugText)
+            IEnumerable<ParameterInfo> requiredParameters,
+            string debugText)
         {
             var argumentList = new List<object>();
             foreach (var requiredParameter in requiredParameters)
@@ -84,16 +82,15 @@ namespace MvvmCross.Core.Platform
             return argumentList;
         }
 
-        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string debugText)
+        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter,
+            string debugText)
         {
             string parameterValue;
             if (data == null ||
                 !data.TryGetValue(requiredParameter.Name, out parameterValue))
             {
                 if (requiredParameter.IsOptional)
-                {
                     return Type.Missing;
-                }
 
                 MvxTrace.Trace(
                     "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
@@ -103,7 +100,7 @@ namespace MvvmCross.Core.Platform
             }
 
             var value = MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
-                                                                    requiredParameter.Name);
+                requiredParameter.Name);
             return value;
         }
 
@@ -113,34 +110,28 @@ namespace MvvmCross.Core.Platform
                 return new Dictionary<string, string>();
 
             if (input is IDictionary<string, string>)
-                return (IDictionary<string, string>)input;
+                return (IDictionary<string, string>) input;
 
             var propertyInfos = from property in input.GetType()
-                                                      .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                                     BindingFlags.FlattenHierarchy)
-                                where property.CanRead
-                                select new
-                                {
-                                    CanSerialize =
-                                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
-                                    Property = property
-                                };
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public |
+                                   BindingFlags.FlattenHierarchy)
+                where property.CanRead
+                select new
+                {
+                    CanSerialize =
+                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
+                    Property = property
+                };
 
             var dictionary = new Dictionary<string, string>();
             foreach (var propertyInfo in propertyInfos)
-            {
                 if (propertyInfo.CanSerialize)
-                {
                     dictionary[propertyInfo.Property.Name] = input.GetPropertyValueAsString(propertyInfo.Property);
-                }
                 else
-                {
                     Mvx.Trace(
                         "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);
-                }
-            }
             return dictionary;
         }
 

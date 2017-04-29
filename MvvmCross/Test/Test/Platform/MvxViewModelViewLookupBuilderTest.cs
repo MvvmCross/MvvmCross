@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test.Mocks.TestViews;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Platform
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-    using MvvmCross.Test.Mocks.TestViews;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxViewModelViewLookupBuilderTest : MvxIoCSupportingTest
     {
@@ -22,7 +21,7 @@ namespace MvvmCross.Test.Platform
         {
             ClearAll();
 
-            var assembly = this.GetType().Assembly;
+            var assembly = GetType().Assembly;
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(assembly);
             var nameMapping = new MvxPostfixAwareViewToViewModelNameMapping("View", "Oddness");
@@ -30,7 +29,7 @@ namespace MvvmCross.Test.Platform
             Ioc.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
 
             var builder = new MvxViewModelViewLookupBuilder();
-            var result = builder.Build(new[] { assembly });
+            var result = builder.Build(new[] {assembly});
 
             Assert.AreEqual(4, result.Count);
             Assert.AreEqual(typeof(Test1View), result[typeof(Test1ViewModel)]);

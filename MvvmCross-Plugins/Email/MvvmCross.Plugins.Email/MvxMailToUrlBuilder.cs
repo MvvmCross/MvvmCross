@@ -11,7 +11,7 @@ using System.Text;
 namespace MvvmCross.Plugins.Email
 {
     [Preserve(AllMembers = true)]
-	public class MvxMailToUrlBuilder
+    public class MvxMailToUrlBuilder
     {
         public string Build(string to, string cc, string subject, string body)
         {
@@ -30,9 +30,7 @@ namespace MvvmCross.Plugins.Email
         private static void AddParam(StringBuilder builder, string param, string value, ref string separator)
         {
             if (string.IsNullOrWhiteSpace(value))
-            {
                 return;
-            }
 
             builder.Append(separator);
             separator = "&";

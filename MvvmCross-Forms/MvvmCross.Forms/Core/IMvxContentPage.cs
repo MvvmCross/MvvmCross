@@ -10,8 +10,7 @@ namespace MvvmCross.Forms.Core
 
     public interface IMvxContentPage<TViewModel>
         : IMvxContentPage
-    , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+            , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }
-

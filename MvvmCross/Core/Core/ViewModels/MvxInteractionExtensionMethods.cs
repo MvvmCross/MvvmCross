@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.WeakSubscription;
-
     public static class MvxInteractionExtensionMethods
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)
@@ -21,13 +20,15 @@ namespace MvvmCross.Core.ViewModels
             return eventInfo.WeakSubscribe(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, EventHandler<MvxValueEventArgs<T>> action)
+        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction,
+            EventHandler<MvxValueEventArgs<T>> action)
         {
             var eventInfo = interaction.GetType().GetEvent("Requested");
-            return eventInfo.WeakSubscribe<T>(interaction, action);
+            return eventInfo.WeakSubscribe(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, Action<T> action)
+        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction,
+            Action<T> action)
         {
             EventHandler<MvxValueEventArgs<T>> wrappedAction = (sender, args) => action(args.Value);
             return interaction.WeakSubscribe(wrappedAction);

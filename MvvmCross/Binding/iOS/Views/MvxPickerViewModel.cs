@@ -5,88 +5,94 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Windows.Input;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Windows.Input;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
-    using UIKit;
-
     public class MvxPickerViewModel
         : UIPickerViewModel
     {
         private readonly UIPickerView _pickerView;
         private IEnumerable _itemsSource;
-        private IDisposable _subscription;
         private object _selectedItem;
-
-        public bool ReloadOnAllItemsSourceSets { get; set; }
+        private IDisposable _subscription;
 
         public MvxPickerViewModel(UIPickerView pickerView)
         {
-            this._pickerView = pickerView;
+            _pickerView = pickerView;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (this._subscription != null)
-                {
-                    this._subscription.Dispose();
-                    this._subscription = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
+        public bool ReloadOnAllItemsSourceSets { get; set; }
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
+            get => _itemsSource;
             set
             {
-                if (Object.ReferenceEquals(this._itemsSource, value)
-                    && !this.ReloadOnAllItemsSourceSets)
+                if (ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
 
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
 
-                this._itemsSource = value;
+                _itemsSource = value;
 
-                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
+                var collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+
+                Reload();
+                ShowSelectedItem();
+            }
+        }
+
+        public object SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                ShowSelectedItem();
+            }
+        }
+
+        public ICommand SelectedChangedCommand { get; set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                if (_subscription != null)
                 {
-                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
 
-                this.Reload();
-                this.ShowSelectedItem();
-            }
+            base.Dispose(disposing);
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             Mvx.Trace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
-            this.Reload();
+            Reload();
         }
 
         protected virtual void Reload()
         {
-            this._pickerView.ReloadComponent(0);
+            _pickerView.ReloadComponent(0);
         }
 
         public override nint GetComponentCount(UIPickerView picker)
@@ -96,12 +102,12 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
-            return this._itemsSource?.Count() ?? 0;
+            return _itemsSource?.Count() ?? 0;
         }
 
         public override string GetTitle(UIPickerView picker, nint row, nint component)
         {
-            return this._itemsSource == null ? "-" : this.RowTitle(row, this._itemsSource.ElementAt((int)row));
+            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int) row));
         }
 
         protected virtual string RowTitle(nint row, object item)
@@ -111,45 +117,33 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override void Selected(UIPickerView picker, nint row, nint component)
         {
-            if (this._itemsSource.Count() == 0)
+            if (_itemsSource.Count() == 0)
                 return;
 
-            this._selectedItem = this._itemsSource.ElementAt((int)row);
+            _selectedItem = _itemsSource.ElementAt((int) row);
 
-            var handler = this.SelectedItemChanged;
+            var handler = SelectedItemChanged;
             handler?.Invoke(this, EventArgs.Empty);
 
-            var command = this.SelectedChangedCommand;
+            var command = SelectedChangedCommand;
             if (command != null)
-                if (command.CanExecute(this._selectedItem))
-                    command.Execute(this._selectedItem);
-        }
-
-        public object SelectedItem
-        {
-            get { return this._selectedItem; }
-            set
-            {
-                this._selectedItem = value;
-                this.ShowSelectedItem();
-            }
+                if (command.CanExecute(_selectedItem))
+                    command.Execute(_selectedItem);
         }
 
         public event EventHandler SelectedItemChanged;
 
-        public ICommand SelectedChangedCommand { get; set; }
-
         protected virtual void ShowSelectedItem()
         {
-            if (this._itemsSource == null)
+            if (_itemsSource == null)
                 return;
 
-            var position = this._itemsSource.GetPosition(this._selectedItem);
+            var position = _itemsSource.GetPosition(_selectedItem);
             if (position < 0)
                 return;
 
-            var animated = !this._pickerView.Hidden;
-            this._pickerView.Select(position, 0, animated);
+            var animated = !_pickerView.Hidden;
+            _pickerView.Select(position, 0, animated);
         }
     }
 }

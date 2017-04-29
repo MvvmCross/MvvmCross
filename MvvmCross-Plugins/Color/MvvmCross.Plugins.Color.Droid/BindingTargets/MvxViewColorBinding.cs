@@ -13,18 +13,18 @@ using MvvmCross.Binding.Droid.Target;
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
     [Preserve(AllMembers = true)]
-	public abstract class MvxViewColorBinding
+    public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding
     {
-        protected View TextView => (View) base.Target;
-
         protected MvxViewColorBinding(View view)
             : base(view)
         {
         }
 
+        protected View TextView => (View) Target;
+
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof (Android.Graphics.Color);
+        public override Type TargetType => typeof(Android.Graphics.Color);
     }
 }

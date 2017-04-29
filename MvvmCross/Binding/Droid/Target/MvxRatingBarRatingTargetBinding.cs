@@ -11,17 +11,21 @@ using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {
-    public class MvxRatingBarRatingTargetBinding 
+    public class MvxRatingBarRatingTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected RatingBar RatingBar => (RatingBar)Target;
-
         private IDisposable _subscription;
 
         public MvxRatingBarRatingTargetBinding(RatingBar target)
             : base(target)
         {
         }
+
+        protected RatingBar RatingBar => (RatingBar) Target;
+
+        public override Type TargetType => typeof(float);
+
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         public override void SubscribeToEvents()
         {
@@ -43,13 +47,9 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var ratingBar = (RatingBar)target;
-            ratingBar.Rating = (float)value;
+            var ratingBar = (RatingBar) target;
+            ratingBar.Rating = (float) value;
         }
-
-        public override Type TargetType => typeof(float);
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {

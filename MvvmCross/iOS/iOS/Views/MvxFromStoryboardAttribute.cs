@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFromStoryboardAttribute : Attribute
     {
-        public string StoryboardName { get; set; }
-
         public MvxFromStoryboardAttribute(string storyboardName = null)
         {
-            this.StoryboardName = storyboardName;
+            StoryboardName = storyboardName;
         }
+
+        public string StoryboardName { get; set; }
     }
 }

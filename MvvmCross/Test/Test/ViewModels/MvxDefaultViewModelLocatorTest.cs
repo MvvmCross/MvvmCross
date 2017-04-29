@@ -5,21 +5,75 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxDefaultViewModelLocatorTest : MvxIoCSupportingTest
     {
+        [Test]
+        public void Test_FailingDependency()
+        {
+            ClearAll();
+
+            Ioc.RegisterSingleton<ITestThing>(() => new FailingMockTestThing());
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            Assert.That(
+                () =>
+                {
+                    var viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
+        }
+
+        [Test]
+        public void Test_FailingInitialisation()
+        {
+            ClearAll();
+
+            var testThing = new MockTestThing();
+            Ioc.RegisterSingleton<ITestThing>(testThing);
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            Assert.That(
+                () =>
+                {
+                    var viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem running viewModel lifecycle"));
+        }
+
+        [Test]
+        public void Test_MissingDependency()
+        {
+            ClearAll();
+
+            var bundle = new MvxBundle();
+
+            var toTest = new MvxDefaultViewModelLocator();
+
+            Assert.That(
+                () =>
+                {
+                    var viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+                },
+                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
+        }
+
         [Test]
         public void Test_NoReloadState()
         {
@@ -46,10 +100,10 @@ namespace MvvmCross.Test.ViewModels
 
             var toTest = new MvxDefaultViewModelLocator();
 
-            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null);
+            var viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null);
 
             Assert.IsNotNull(viewModel);
-            var typedViewModel = (Test1ViewModel)viewModel;
+            var typedViewModel = (Test1ViewModel) viewModel;
             Assert.AreSame(bundle, typedViewModel.BundleInit);
             Assert.IsNull(typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
@@ -103,10 +157,10 @@ namespace MvvmCross.Test.ViewModels
             reloadBundle.Write(reloadBundleObject);
 
             var toTest = new MvxDefaultViewModelLocator();
-            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle);
+            var viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle);
 
             Assert.IsNotNull(viewModel);
-            var typedViewModel = (Test1ViewModel)viewModel;
+            var typedViewModel = (Test1ViewModel) viewModel;
             Assert.AreSame(initBundle, typedViewModel.BundleInit);
             Assert.AreSame(reloadBundle, typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
@@ -119,59 +173,6 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreEqual(reloadBundleObject.TheGuid2, typedViewModel.TheReloadGuid2Set);
             Assert.AreEqual(reloadBundleObject.TheString1, typedViewModel.TheReloadString1Set);
             Assert.IsTrue(typedViewModel.StartCalled);
-        }
-
-        [Test]
-        public void Test_MissingDependency()
-        {
-            ClearAll();
-
-            var bundle = new MvxBundle();
-
-            var toTest = new MvxDefaultViewModelLocator();
-
-            Assert.That(
-                () => {
-                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-                },
-                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
-        }
-
-        [Test]
-        public void Test_FailingDependency()
-        {
-            ClearAll();
-
-            Ioc.RegisterSingleton<ITestThing>(() => new FailingMockTestThing());
-
-            var bundle = new MvxBundle();
-
-            var toTest = new MvxDefaultViewModelLocator();
-
-            Assert.That(
-                () => {
-                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-                },
-                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
-        }
-
-        [Test]
-        public void Test_FailingInitialisation()
-        {
-            ClearAll();
-
-            var testThing = new MockTestThing();
-            Ioc.RegisterSingleton<ITestThing>(testThing);
-
-            var bundle = new MvxBundle();
-
-            var toTest = new MvxDefaultViewModelLocator();
-
-            Assert.That(
-                () => {
-                    IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
-                },
-                Throws.TypeOf<MvxException>().With.Message.StartWith("Problem running viewModel lifecycle"));
         }
     }
 }

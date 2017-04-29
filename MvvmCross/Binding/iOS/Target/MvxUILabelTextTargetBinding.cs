@@ -5,39 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUILabelTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UILabel View => Target as UILabel;
-
         public MvxUILabelTextTargetBinding(UILabel target)
             : base(target)
         {
             if (target == null)
-            {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UILabel is null in MvxUILabelTextTargetBinding");
-            }
+                    "Error - UILabel is null in MvxUILabelTextTargetBinding");
         }
+
+        protected UILabel View => Target as UILabel;
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(string);
+        public override Type TargetType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UILabel)target;
+            var view = (UILabel) target;
             if (view == null)
                 return;
 
-            view.Text = (string)value;
+            view.Text = (string) value;
         }
     }
 }

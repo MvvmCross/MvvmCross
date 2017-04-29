@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-
     public class MvxLazySingletonCreator
     {
         private readonly object _lockObject = new object();
@@ -16,24 +16,24 @@ namespace MvvmCross.Platform.IoC
 
         private object _instance;
 
+        public MvxLazySingletonCreator(Type type)
+        {
+            _type = type;
+        }
+
         public object Instance
         {
             get
             {
-                if (this._instance != null)
-                    return this._instance;
+                if (_instance != null)
+                    return _instance;
 
-                lock (this._lockObject)
+                lock (_lockObject)
                 {
-                    this._instance = this._instance ?? Mvx.IocConstruct(this._type);
-                    return this._instance;
+                    _instance = _instance ?? Mvx.IocConstruct(_type);
+                    return _instance;
                 }
             }
-        }
-
-        public MvxLazySingletonCreator(Type type)
-        {
-            this._type = type;
         }
     }
 }

@@ -5,28 +5,39 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
 using System;
 using System.Device.Location;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.Location.Wpf
 {
     /// <summary>
-    /// Location Watcher Plugin for WPF developers.
+    ///     Location Watcher Plugin for WPF developers.
     /// </summary>
-    /// <remarks>Warning - this is not fully tested - see https://github.com/MvvmCross/MvvmCross/pull/632
+    /// <remarks>
+    ///     Warning - this is not fully tested - see https://github.com/MvvmCross/MvvmCross/pull/632
     /// </remarks>
-    /// <see cref="http://code.msdn.microsoft.com/windowsdesktop/Windows-7-Geolocation-API-25585fac"/>
-    /// <seealso cref="http://www.techsupportalert.com/content/how-enable-or-disable-location-sensing-windows-7-and-8.htm"/>
+    /// <see cref="http://code.msdn.microsoft.com/windowsdesktop/Windows-7-Geolocation-API-25585fac" />
+    /// <seealso cref="http://www.techsupportalert.com/content/how-enable-or-disable-location-sensing-windows-7-and-8.htm" />
     public sealed class MvxWpfLocationWatcher : MvxLocationWatcher
     {
         private GeoCoordinateWatcher _geolocator;
 
-        private MvxGeoLocation _lastKnownPosition = null;
+        private MvxGeoLocation _lastKnownPosition;
 
         public MvxWpfLocationWatcher()
         {
             EnsureStopped();
+        }
+
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_geolocator == null)
+                    throw new MvxException("Location Manager not started");
+                return _lastKnownPosition;
+            }
         }
 
         protected override void PlatformSpecificStart(MvxLocationOptions options)
@@ -39,25 +50,10 @@ namespace MvvmCross.Plugins.Location.Wpf
                 MovementThreshold = options.MovementThresholdInM
             };
 
-            _geolocator.TryStart(false, TimeSpan.FromMilliseconds((uint)options.TimeBetweenUpdates.TotalMilliseconds));
+            _geolocator.TryStart(false, TimeSpan.FromMilliseconds((uint) options.TimeBetweenUpdates.TotalMilliseconds));
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
-        }
-
-        public override MvxGeoLocation CurrentLocation
-        {
-            get
-            {
-                if (_geolocator == null)
-                {
-                    throw new MvxException("Location Manager not started");
-                }
-                else
-                {
-                    return _lastKnownPosition;
-                }
-            }
         }
 
         protected override void PlatformSpecificStop()
@@ -110,7 +106,7 @@ namespace MvvmCross.Plugins.Location.Wpf
 
         private MvxGeoLocation CreateLocation(GeoCoordinate coordinate)
         {
-            var position = new MvxGeoLocation { Timestamp = DateTime.Now };
+            var position = new MvxGeoLocation {Timestamp = DateTime.Now};
             var coords = position.Coordinates;
 
             // TODO - Not sure how to deal with zero values - as we can't distinguish between null and zero values...

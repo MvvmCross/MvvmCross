@@ -14,9 +14,9 @@ using UIKit;
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     [Preserve(AllMembers = true)]
-	public class MvxIosLocalFileImageLoader
+    public class MvxIosLocalFileImageLoader
         : MvxAllThreadDispatchingObject
-        , IMvxLocalFileImageLoader<UIImage>
+            , IMvxLocalFileImageLoader<UIImage>
     {
         private const string ResourcePrefix = "res:";
 
@@ -28,9 +28,11 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
             {
                 UIImage uiImage;
 
-                uiImage = localPath.StartsWith(ResourcePrefix) ? LoadResourceImage(localPath.Substring(ResourcePrefix.Length)) : LoadUiImage(localPath);
+                uiImage = localPath.StartsWith(ResourcePrefix)
+                    ? LoadResourceImage(localPath.Substring(ResourcePrefix.Length))
+                    : LoadUiImage(localPath);
 
-                var result = (MvxImage<UIImage>)new MvxIosImage(uiImage);
+                var result = (MvxImage<UIImage>) new MvxIosImage(uiImage);
 
                 tcs.TrySetResult(result);
             });

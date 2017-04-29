@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.ResourceLoader
 {
@@ -21,16 +21,16 @@ namespace MvvmCross.Plugins.ResourceLoader
             try
             {
                 string text = null;
-                GetResourceStream(resourcePath, (stream) =>
-                    {
-                        if (stream == null)
-                            return;
+                GetResourceStream(resourcePath, stream =>
+                {
+                    if (stream == null)
+                        return;
 
-                        using (var textReader = new StreamReader(stream))
-                        {
-                            text = textReader.ReadToEnd();
-                        }
-                    });
+                    using (var textReader = new StreamReader(stream))
+                    {
+                        text = textReader.ReadToEnd();
+                    }
+                });
                 return text;
             }
             //#if !NETFX_CORE

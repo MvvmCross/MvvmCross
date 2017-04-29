@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Core.ViewModels
 {
-
     public class MainViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _routingService;
+
+        private ICommand _showACommand;
+
+        private ICommand _showBCommand;
+
+        private ICommand _showRandomCommand;
 
         public MainViewModel(IMvxNavigationService routingService)
         {
             _routingService = routingService;
         }
-
-        private ICommand _showACommand;
 
         public ICommand ShowACommand
         {
@@ -33,8 +31,6 @@ namespace RoutingExample.Core.ViewModels
             }
         }
 
-        private ICommand _showBCommand;
-
         public ICommand ShowBCommand
         {
             get
@@ -45,8 +41,6 @@ namespace RoutingExample.Core.ViewModels
                 }));
             }
         }
-
-        private ICommand _showRandomCommand;
 
         public ICommand ShowRandomCommand
         {

@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Views;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    using System;
-
-    using Android.Views;
-
-    using MvvmCross.Platform.IoC;
-
     public class MvxJustNameViewTypeResolver : MvxReflectionViewTypeResolver
     {
         public MvxJustNameViewTypeResolver(IMvxTypeCache<View> typeCache) : base(typeCache)
@@ -26,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                 return null;
 
             Type toReturn;
-            this.TypeCache.NameCache.TryGetValue(tagName, out toReturn);
+            TypeCache.NameCache.TryGetValue(tagName, out toReturn);
             return toReturn;
         }
     }

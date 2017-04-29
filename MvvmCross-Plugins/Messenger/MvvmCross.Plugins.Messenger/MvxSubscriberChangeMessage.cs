@@ -10,16 +10,16 @@ using System;
 namespace MvvmCross.Plugins.Messenger
 {
     [Preserve(AllMembers = true)]
-	public class MvxSubscriberChangeMessage : MvxMessage
+    public class MvxSubscriberChangeMessage : MvxMessage
     {
-        public Type MessageType { get; private set; }
-        public int SubscriberCount { get; private set; }
-
         public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0)
             : base(sender)
         {
             SubscriberCount = countSubscribers;
             MessageType = messageType;
         }
+
+        public Type MessageType { get; }
+        public int SubscriberCount { get; }
     }
 }

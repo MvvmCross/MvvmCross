@@ -10,7 +10,8 @@ namespace MvvmCross.Droid.Shared.Fragments
 {
     public static class MvxSharedFragmentExtensions
     {
-        public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
+        public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView,
+            Type fragmentActivityParentType)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
 
@@ -19,11 +20,13 @@ namespace MvvmCross.Droid.Shared.Fragments
             if (viewModelType == null)
             {
                 if (!type.HasMvxFragmentAttribute())
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
+                    throw new InvalidOperationException(
+                        $"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
 
                 var cacheableFragmentAttribute = type.GetMvxFragmentAttribute(fragmentActivityParentType);
                 if (cacheableFragmentAttribute.ViewModelType == null)
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
+                    throw new InvalidOperationException(
+                        $"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
 
                 viewModelType = cacheableFragmentAttribute.ViewModelType;
             }
@@ -31,7 +34,8 @@ namespace MvvmCross.Droid.Shared.Fragments
             return viewModelType;
         }
 
-        public static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, Type fragmentParentActivityType,
+        public static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState,
+            Type fragmentParentActivityType,
             MvxViewModelRequest request = null)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragmentParentActivityType);
@@ -40,10 +44,8 @@ namespace MvvmCross.Droid.Shared.Fragments
 
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
-            {
                 MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
                     fragmentView.GetType().Name);
-            }
 
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
@@ -65,9 +67,7 @@ namespace MvvmCross.Droid.Shared.Fragments
                     viewModel.CallBundleMethods("Init", parameterValues);
                 }
                 if (savedState != null)
-                {
                     viewModel.CallBundleMethods("ReloadState", savedState);
-                }
                 viewModel.Start();
             }
             catch (Exception exception)

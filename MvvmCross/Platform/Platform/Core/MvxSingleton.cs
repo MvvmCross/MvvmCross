@@ -5,29 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxSingleton
         : IDisposable
     {
-        ~MvxSingleton()
-        {
-            this.Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected abstract void Dispose(bool isDisposing);
-
         private static readonly List<MvxSingleton> Singletons = new List<MvxSingleton>();
 
         protected MvxSingleton()
@@ -38,14 +24,25 @@ namespace MvvmCross.Platform.Core
             }
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~MvxSingleton()
+        {
+            Dispose(false);
+        }
+
+        protected abstract void Dispose(bool isDisposing);
+
         public static void ClearAllSingletons()
         {
             lock (Singletons)
             {
                 foreach (var s in Singletons)
-                {
                     s.Dispose();
-                }
 
                 Singletons.Clear();
             }
@@ -69,9 +66,7 @@ namespace MvvmCross.Platform.Core
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 Instance = null;
-            }
         }
     }
 }

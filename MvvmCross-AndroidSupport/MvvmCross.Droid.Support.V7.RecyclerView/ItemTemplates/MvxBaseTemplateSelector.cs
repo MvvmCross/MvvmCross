@@ -1,4 +1,3 @@
-using System;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
 using MvvmCross.Platform;
@@ -7,9 +6,21 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
 {
     public abstract class MvxBaseTemplateSelector
     {
-        public const int HeaderViewTypeId = Int32.MinValue;
-        public const int FooterViewTypeId = Int32.MinValue + 1;
-        public const int GroupSectionViewTypeId = Int32.MinValue + 2;
+        public const int HeaderViewTypeId = int.MinValue;
+        public const int FooterViewTypeId = int.MinValue + 1;
+        public const int GroupSectionViewTypeId = int.MinValue + 2;
+
+        public int HeaderLayoutId { get; set; } = 0;
+
+        public int FooterLayoutId { get; set; } = 0;
+
+        public int GroupSectionLayoutId { get; set; } = 0;
+
+        public bool HasHeaderLayoutId => HeaderLayoutId != 0;
+
+        public bool HasFooterLayoutId => FooterLayoutId != 0;
+
+        public bool HasGroupSectionLayoutId => GroupSectionLayoutId != 0;
 
         public int GetViewType(object forItemObject)
         {
@@ -38,7 +49,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
             if (fromViewType == GroupSectionViewTypeId)
             {
                 if (!HasGroupSectionLayoutId)
-                    Mvx.Error("You are binding to MvxGroupedData items, you have to set your Group Section layout! Use local:MvxGroupSectionLayoutId=@layout/sectionLayout on your MvxRecyclerView!");
+                    Mvx.Error(
+                        "You are binding to MvxGroupedData items, you have to set your Group Section layout! Use local:MvxGroupSectionLayoutId=@layout/sectionLayout on your MvxRecyclerView!");
 
                 return GroupSectionLayoutId;
             }
@@ -47,18 +59,5 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
         }
 
         protected abstract int GetItemLayoutId(int fromViewType);
-
-        public int HeaderLayoutId { get; set; } = 0;
-
-        public int FooterLayoutId { get; set; } = 0;
-
-        public int GroupSectionLayoutId { get; set; } = 0;
-
-        public bool HasHeaderLayoutId => HeaderLayoutId != 0;
-
-        public bool HasFooterLayoutId => FooterLayoutId != 0;
-
-        public bool HasGroupSectionLayoutId => GroupSectionLayoutId != 0;
-
     }
 }

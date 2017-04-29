@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxPluginManager
         : IMvxPluginManager
     {
@@ -20,19 +19,19 @@ namespace MvvmCross.Platform.Plugins
 
         public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
 
-        public MvxLoaderPluginRegistry Registry { get; private set; } = new MvxLoaderPluginRegistry ();
+        public MvxLoaderPluginRegistry Registry { get; } = new MvxLoaderPluginRegistry();
 
         public bool IsPluginLoaded<T>() where T : IMvxPluginLoader
         {
             lock (this)
             {
-                return this._loadedPlugins.ContainsKey(typeof(T));
+                return _loadedPlugins.ContainsKey(typeof(T));
             }
         }
 
         public void EnsurePluginLoaded<TType>()
         {
-            this.EnsurePluginLoaded(typeof(TType));
+            EnsurePluginLoaded(typeof(TType));
         }
 
         public virtual void EnsurePluginLoaded(Type type)
@@ -58,21 +57,7 @@ namespace MvvmCross.Platform.Plugins
                 return;
             }
 
-            this.EnsurePluginLoaded(pluginLoader);
-        }
-
-        protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
-        {
-            var configurable = pluginLoader as IMvxConfigurablePluginLoader;
-            if (configurable != null)
-            {
-                MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
-                var configuration = this.ConfigurationFor(pluginLoader.GetType());
-                configurable.Configure(configuration);
-            }
-
-            MvxTrace.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
-            pluginLoader.EnsureLoaded();
+            EnsurePluginLoaded(pluginLoader);
         }
 
         public void EnsurePlatformAdaptionLoaded<T>()
@@ -80,13 +65,11 @@ namespace MvvmCross.Platform.Plugins
         {
             lock (this)
             {
-                if (this.IsPluginLoaded<T>())
-                {
+                if (IsPluginLoaded<T>())
                     return;
-                }
 
                 var toLoad = typeof(T);
-                this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
+                _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
             }
         }
 
@@ -95,35 +78,48 @@ namespace MvvmCross.Platform.Plugins
         {
             lock (this)
             {
-                if (this.IsPluginLoaded<T>())
-                {
+                if (IsPluginLoaded<T>())
                     return true;
-                }
 
                 try
                 {
                     var toLoad = typeof(T);
-                    this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
+                    _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
                     return true;
                 }
                 // pokemon 'catch them all' exception handling allowed here in this Try method
                 catch (Exception exception)
                 {
-                    Mvx.Warning("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
+                    Mvx.Warning("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName,
+                        exception.ToLongString());
                     return false;
                 }
             }
+        }
+
+        protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
+        {
+            var configurable = pluginLoader as IMvxConfigurablePluginLoader;
+            if (configurable != null)
+            {
+                MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
+                var configuration = ConfigurationFor(pluginLoader.GetType());
+                configurable.Configure(configuration);
+            }
+
+            MvxTrace.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
+            pluginLoader.EnsureLoaded();
         }
 
         private IMvxPlugin ExceptionWrappedLoadPlugin(Type toLoad)
         {
             try
             {
-                var plugin = this.LoadPlugin(toLoad);
+                var plugin = LoadPlugin(toLoad);
                 var configurablePlugin = plugin as IMvxConfigurablePlugin;
                 if (configurablePlugin != null)
                 {
-                    var configuration = this.ConfigurationSource(configurablePlugin.GetType());
+                    var configuration = ConfigurationSource(configurablePlugin.GetType());
                     configurablePlugin.Configure(configuration);
                 }
                 plugin.Load();
@@ -139,22 +135,25 @@ namespace MvvmCross.Platform.Plugins
             }
         }
 
-        private IMvxPlugin LoadFromRegistry (Type toLoad)
+        private IMvxPlugin LoadFromRegistry(Type toLoad)
         {
-            var loader = Registry.FindLoader (toLoad);
-            return loader?.Invoke ();
+            var loader = Registry.FindLoader(toLoad);
+            return loader?.Invoke();
         }
 
-        private IMvxPlugin LoadPlugin (Type toLoad)
+        private IMvxPlugin LoadPlugin(Type toLoad)
         {
-            return this.LoadFromRegistry (toLoad) ?? this.FindPlugin(toLoad);
+            return LoadFromRegistry(toLoad) ?? FindPlugin(toLoad);
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => this.ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad)
+        {
+            return ConfigurationSource?.Invoke(toLoad);
+        }
 
         protected virtual IMvxPlugin FindPlugin(Type toLoad)
         {
-            throw new MvxException ("Could not find plugin loader for type {0}", toLoad.FullName);
+            throw new MvxException("Could not find plugin loader for type {0}", toLoad.FullName);
         }
     }
 }

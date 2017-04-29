@@ -5,16 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Specialized;
+using System.Reflection;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Collections.Specialized;
-    using System.Reflection;
-
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {
         private static readonly EventInfo EventInfo = typeof(INotifyCollectionChanged).GetEvent("CollectionChanged");
+
+        public MvxNotifyCollectionChangedEventSubscription(INotifyCollectionChanged source,
+            EventHandler<NotifyCollectionChangedEventArgs>
+                targetEventHandler)
+            : base(source, EventInfo, targetEventHandler)
+        {
+        }
 
         // This code ensures the CollectionChanged event is not stripped by Xamarin linker
         // see https://github.com/MvvmCross/MvvmCross/pull/453
@@ -23,16 +30,9 @@ namespace MvvmCross.Platform.WeakSubscription
             iNotifyCollectionChanged.CollectionChanged += (sender, e) => { };
         }
 
-        public MvxNotifyCollectionChangedEventSubscription(INotifyCollectionChanged source,
-                                                           EventHandler<NotifyCollectionChangedEventArgs>
-                                                               targetEventHandler)
-            : base(source, EventInfo, targetEventHandler)
-        {
-        }
-
         protected override Delegate CreateEventHandler()
         {
-            return new NotifyCollectionChangedEventHandler(this.OnSourceEvent);
+            return new NotifyCollectionChangedEventHandler(OnSourceEvent);
         }
     }
 }

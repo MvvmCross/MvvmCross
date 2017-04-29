@@ -5,39 +5,35 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Platform.Uwp.Converters
 {
-    using System;
-    using System.Globalization;
-
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Data;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxNativeValueConverter
         : IValueConverter
     {
-        private readonly IMvxValueConverter _wrapped;
-
-        protected IMvxValueConverter Wrapped => this._wrapped;
-
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
-            this._wrapped = wrapped;
+            Wrapped = wrapped;
         }
+
+        protected IMvxValueConverter Wrapped { get; }
 
         public virtual object Convert(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = this._wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = Wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = this._wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = Wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 
@@ -50,9 +46,7 @@ namespace MvvmCross.Platform.Uwp.Converters
             }
 
             if (toReturn == MvxBindingConstant.UnsetValue)
-            {
                 return DependencyProperty.UnsetValue;
-            }
 
             return toReturn;
         }
@@ -62,11 +56,11 @@ namespace MvvmCross.Platform.Uwp.Converters
         : MvxNativeValueConverter
         where T : IMvxValueConverter, new()
     {
-        protected new T Wrapped => (T)base.Wrapped;
-
         public MvxNativeValueConverter()
             : base(new T())
         {
         }
+
+        protected new T Wrapped => (T) base.Wrapped;
     }
 }

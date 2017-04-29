@@ -10,8 +10,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
 {
     internal class MvxRecyclerViewItemsSourceBridge : IMvxRecyclerViewItemsSourceBridge
     {
-        private MvxNotifyCollectionChangedEventSubscription _subscription;
         private IEnumerable _itemsSource = Enumerable.Empty<object>();
+        private MvxNotifyCollectionChangedEventSubscription _subscription;
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -32,22 +32,29 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemSources
             var newObservable = _itemsSource as INotifyCollectionChanged;
             if (newObservable != null)
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
-            
-            OnItemsSourceCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+            OnItemsSourceCollectionChanged(this,
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
 
         public IEnumerable GetItemsSource()
-            => _itemsSource;
+        {
+            return _itemsSource;
+        }
 
         public object GetItemAt(int position)
-            => _itemsSource.ElementAt(position);
+        {
+            return _itemsSource.ElementAt(position);
+        }
 
         public int ItemsCount => _itemsSource.Count();
 
         public event NotifyCollectionChangedEventHandler ItemsSourceCollectionChanged;
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-            => ItemsSourceCollectionChanged?.Invoke(sender, e);
+        {
+            ItemsSourceCollectionChanged?.Invoke(sender, e);
+        }
     }
 }

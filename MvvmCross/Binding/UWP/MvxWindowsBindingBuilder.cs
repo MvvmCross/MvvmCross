@@ -6,13 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Windows.UI.Xaml;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Uwp.Target;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
-using Windows.UI.Xaml;
 
 namespace MvvmCross.Binding.Uwp
 {
@@ -96,25 +97,17 @@ namespace MvvmCross.Binding.Uwp
             base.FillValueConverters(registry);
 
             if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
-            {
                 foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
-                {
                     registry.Fill(assembly);
-                }
-            }
         }
 
-        protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
+        protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
             base.FillValueCombiners(registry);
 
             if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
-            {
                 foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
-                {
                     registry.Fill(assembly);
-                }
-            }
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

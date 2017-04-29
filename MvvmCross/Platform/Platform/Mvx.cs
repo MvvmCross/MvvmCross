@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public static class Mvx
     {
         public static bool CanResolve<TService>() where TService : class
@@ -122,7 +121,7 @@ namespace MvvmCross.Platform
             where TInterface : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton<TInterface>(constructor);
+            ioc.RegisterSingleton(constructor);
         }
 
         public static void LazyConstructAndRegisterSingleton(Type type, Func<object> constructor)
@@ -161,7 +160,7 @@ namespace MvvmCross.Platform
         public static T IocConstruct<T>()
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return (T)ioc.IoCConstruct(typeof(T));
+            return (T) ioc.IoCConstruct(typeof(T));
         }
 
         public static object IocConstruct(Type t)
@@ -174,10 +173,10 @@ namespace MvvmCross.Platform
             where T : class
         {
             Action simpleAction = () =>
-                {
-                    var t = Mvx.Resolve<T>();
-                    action(t);
-                };
+            {
+                var t = Resolve<T>();
+                action(t);
+            };
             CallbackWhenRegistered<T>(simpleAction);
         }
 

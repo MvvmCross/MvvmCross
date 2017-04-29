@@ -5,24 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Source
 {
-    using System;
-
     public class MvxSourcePropertyBindingEventArgs : EventArgs
     {
-        private readonly object _value;
-
-        public MvxSourcePropertyBindingEventArgs(Object value)
+        public MvxSourcePropertyBindingEventArgs(object value)
         {
-            this._value = value;
+            Value = value;
         }
 
         public MvxSourcePropertyBindingEventArgs(IMvxSourceBinding propertySourceBinding)
         {
-            this._value = propertySourceBinding.GetValue();
+            Value = propertySourceBinding.GetValue();
         }
 
-        public object Value => this._value;
+        public object Value { get; }
     }
 }

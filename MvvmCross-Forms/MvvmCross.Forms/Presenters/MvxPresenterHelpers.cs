@@ -40,11 +40,11 @@ namespace MvvmCross.Forms.Presenters
         public static void AdaptForBinding(VisualElement element, IMvxBindingContextOwner contextOwner)
         {
             var mvxPage = element as IMvxContentPage;
-            if (mvxPage != null) {
+            if (mvxPage != null)
+            {
                 contextOwner.BindingContext = new MvxBindingContext();
                 contextOwner.BindingContext.DataContext = mvxPage.ViewModel;
             }
         }
-
     }
 }

@@ -6,25 +6,21 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Runtime;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Droid.Simple
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Views;
-    using MvvmCross.Platform.Exceptions;
-
     [Register("mvvmcross.droid.simple.MvxSimpleBindingActivity")]
     public class MvxSimpleBindingActivity
         : MvxActivity
     {
         public new IMvxViewModel ViewModel
         {
-            get { return base.ViewModel; }
-            set
-            {
-                throw new MvxException(
-                    "You've chosen to use simple binding.... so you need to just use DataContext, not ViewModel");
-            }
+            get => base.ViewModel;
+            set => throw new MvxException(
+                "You've chosen to use simple binding.... so you need to just use DataContext, not ViewModel");
         }
 
         protected sealed override void OnViewModelSet()

@@ -1,21 +1,20 @@
-using Android.App;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
     public class FragmentHostRegistrationSettings
     {
         private readonly IEnumerable<Assembly> _assembliesToLookup;
-        private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
         private readonly Dictionary<Type, IList<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
+        private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
         private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
 
         private bool isInitialized;
@@ -46,20 +45,22 @@ namespace MvvmCross.Droid.Shared.Presenter
                 foreach (var typeWithMvxFragmentAttribute in typesWithMvxFragmentAttribute)
                 {
                     if (!_fragmentTypeToMvxFragmentAttributeMap.ContainsKey(typeWithMvxFragmentAttribute))
-                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxFragmentAttribute>());
+                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute,
+                            new List<MvxFragmentAttribute>());
 
                     foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetMvxFragmentAttributes())
                         _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
                 }
 
                 _viewModelToFragmentTypeMap =
-                    typesWithMvxFragmentAttribute.ToDictionary(GetAssociatedViewModelType, fragmentType => fragmentType);
+                    typesWithMvxFragmentAttribute.ToDictionary(GetAssociatedViewModelType,
+                        fragmentType => fragmentType);
             }
         }
 
         private Type GetAssociatedViewModelType(Type fromFragmentType)
         {
-            Type viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
+            var viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
 
             return viewModelType ?? fromFragmentType.GetMvxFragmentAttributes().First().ViewModelType;
         }
@@ -89,8 +90,8 @@ namespace MvvmCross.Droid.Shared.Presenter
 
         private Type GetCurrentActivityViewModelType()
         {
-            Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
-            Type currentActivityType = currentActivity.GetType();
+            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var currentActivityType = currentActivity.GetType();
 
             var activityViewModelType = _viewModelTypeFinder.FindTypeOrNull(currentActivityType);
             return activityViewModelType;
@@ -122,23 +123,19 @@ namespace MvvmCross.Droid.Shared.Presenter
             InitializeIfNeeded();
 
             var currentActivityViewModelType = GetCurrentActivityViewModelType();
-            Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
             var fragmentAttributes = GetMvxFragmentAssociatedAttributes(fragmentViewModelType)
                 .Where(x => x.ParentActivityViewModelType == currentActivityViewModelType);
-            MvxFragmentAttribute attribute = fragmentAttributes.FirstOrDefault();
+            var attribute = fragmentAttributes.FirstOrDefault();
 
             if (fragmentAttributes.Count() > 1)
-            {
                 foreach (var item in fragmentAttributes)
-                {
                     if (currentActivity.FindViewById(item.FragmentContentId) != null)
                     {
                         attribute = item;
                         break;
                     }
-                }
-            }
 
             return attribute;
         }

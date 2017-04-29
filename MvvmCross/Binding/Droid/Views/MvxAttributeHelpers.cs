@@ -5,55 +5,54 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Content;
+using Android.Util;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using Android.Content;
-    using Android.Util;
-
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-
     public static class MvxAttributeHelpers
     {
         public static int ReadDropDownListItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                                   MvxAndroidBindingResource
-                                                                       .Instance
-                                                                       .ListViewStylableGroupId,
-                                                                   MvxAndroidBindingResource
-                                                                       .Instance
-                                                                       .DropDownListItemTemplateId);
+                MvxAndroidBindingResource
+                    .Instance
+                    .ListViewStylableGroupId,
+                MvxAndroidBindingResource
+                    .Instance
+                    .DropDownListItemTemplateId);
         }
 
         public static int ReadListItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ListViewStylableGroupId,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ListItemTemplateId);
+                MvxAndroidBindingResource.Instance
+                    .ListViewStylableGroupId,
+                MvxAndroidBindingResource.Instance
+                    .ListItemTemplateId);
         }
 
         public static int ReadTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                         MvxAndroidBindingResource.Instance
-                                                                                  .ControlStylableGroupId,
-                                                         MvxAndroidBindingResource.Instance
-                                                                                  .TemplateId);
+                MvxAndroidBindingResource.Instance
+                    .ControlStylableGroupId,
+                MvxAndroidBindingResource.Instance
+                    .TemplateId);
         }
 
         public static int ReadGroupItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ExpandableListViewStylableGroupId,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .GroupItemTemplateId);
+                MvxAndroidBindingResource.Instance
+                    .ExpandableListViewStylableGroupId,
+                MvxAndroidBindingResource.Instance
+                    .GroupItemTemplateId);
         }
 
         public static int ReadAttributeValue(Context context, IAttributeSet attrs, int[] groupId,
-                                             int requiredAttributeId)
+            int requiredAttributeId)
         {
             var typedArray = context.ObtainStyledAttributes(attrs, groupId);
 
@@ -64,9 +63,7 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     var attributeId = typedArray.GetIndex(i);
                     if (attributeId == requiredAttributeId)
-                    {
                         return typedArray.GetResourceId(attributeId, 0);
-                    }
                 }
                 return 0;
             }

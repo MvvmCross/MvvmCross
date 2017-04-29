@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using Foundation;
-
-    using UIKit;
-
     public class MvxUIDatePickerTimeTargetBinding : MvxBaseUIDatePickerTargetBinding
     {
         public MvxUIDatePickerTimeTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -21,21 +19,21 @@ namespace MvvmCross.Binding.iOS.Target
         {
         }
 
+        public override Type TargetType => typeof(TimeSpan);
+
         protected override object GetValueFrom(UIDatePicker view)
         {
             var components = NSCalendar.CurrentCalendar.Components(
                 NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second,
                 view.Date);
-            return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
+            return new TimeSpan((int) components.Hour, (int) components.Minute, (int) components.Second);
         }
-
-        public override Type TargetType => typeof(TimeSpan);
 
         protected override object MakeSafeValue(object value)
         {
             if (value == null)
                 value = TimeSpan.FromSeconds(0);
-            var time = (TimeSpan)value;
+            var time = (TimeSpan) value;
             var now = DateTime.Now;
             var date = new DateTime(
                 now.Year,
@@ -46,7 +44,7 @@ namespace MvvmCross.Binding.iOS.Target
                 time.Seconds,
                 DateTimeKind.Local);
 
-            NSDate nsDate = (NSDate)date;
+            var nsDate = (NSDate) date;
             return nsDate;
         }
     }

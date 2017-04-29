@@ -11,7 +11,7 @@ namespace Example.Pages
 
             // see https://forums.xamarin.com/discussion/45111/has-anybody-managed-to-get-a-toolbar-working-on-winrt-windows-using-xf
             if (Device.OS == TargetPlatform.Windows)
-                Padding = new Xamarin.Forms.Thickness(Padding.Left, this.Padding.Top, this.Padding.Right, 95);
+                Padding = new Thickness(Padding.Left, Padding.Top, Padding.Right, 95);
 
             ForceLayout();
 
@@ -55,7 +55,13 @@ namespace Example.Pages
             base.OnBindingContextChanged();
 
             // Fixed in next version of Xamarin.Forms. BindingContext is not properly set on ToolbarItem.
-            var aboutItem = new ToolbarItem { Text = "About", ClassId = "About", Order = ToolbarItemOrder.Primary, BindingContext = BindingContext };
+            var aboutItem = new ToolbarItem
+            {
+                Text = "About",
+                ClassId = "About",
+                Order = ToolbarItemOrder.Primary,
+                BindingContext = BindingContext
+            };
             aboutItem.SetBinding(MenuItem.CommandProperty, new Binding("ShowAboutPageCommand"));
 
 

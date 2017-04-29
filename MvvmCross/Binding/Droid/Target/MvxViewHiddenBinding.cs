@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((View)target).Visibility = value.ConvertToBoolean() ? ViewStates.Gone : ViewStates.Visible;
+            ((View) target).Visibility = value.ConvertToBoolean() ? ViewStates.Gone : ViewStates.Visible;
         }
     }
 }
