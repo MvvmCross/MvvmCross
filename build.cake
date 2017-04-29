@@ -119,6 +119,7 @@ Task("GitLink")
 		"MvvmCross.TestProjects.CustomBinding.iOS",
 		"MvvmCross.TestProjects.CustomBinding.Droid",
 		"playground",
+		"playground.core",
 		"playground.ios",
 		"MvxBindingsExample",
 		"MvxBindingsExample.Android",
