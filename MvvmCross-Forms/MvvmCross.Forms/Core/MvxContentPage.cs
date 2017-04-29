@@ -1,9 +1,7 @@
-﻿
+﻿using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Core
 {
     public class MvxContentPage : ContentPage, IMvxContentPage
     {

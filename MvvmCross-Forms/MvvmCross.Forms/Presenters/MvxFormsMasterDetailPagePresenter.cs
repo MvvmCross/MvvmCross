@@ -1,10 +1,12 @@
-﻿using MvvmCross.Platform;
+﻿using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using System;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.ViewModels;
+using MvvmCross.Platform;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenters
 {
     /// <summary>
     /// Presenter provinding MasterDetailPage functionality for the MainView in a MvxForms App.

@@ -1,14 +1,14 @@
-﻿using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
-using System;
-using Xamarin.Forms;
-using MvvmCross.Core.Views;
-using System.Reflection;
-using MvvmCross.Platform.IoC;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenters
 {
     public class MvxFormsPageLoader : IMvxFormsPageLoader
     {

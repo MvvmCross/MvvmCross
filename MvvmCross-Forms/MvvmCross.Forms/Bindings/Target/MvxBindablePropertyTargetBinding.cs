@@ -15,7 +15,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings.Target
 {
     public class MvxBindablePropertyTargetBinding : MvxConvertingTargetBinding
     {

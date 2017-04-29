@@ -13,7 +13,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     // ReSharper disable once InconsistentNaming
     public static class Bi

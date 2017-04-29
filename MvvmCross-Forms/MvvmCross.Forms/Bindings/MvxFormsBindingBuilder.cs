@@ -9,7 +9,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     public class MvxFormsBindingBuilder : MvxBindingBuilder
     {

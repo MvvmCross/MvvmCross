@@ -6,12 +6,12 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.iOS
+namespace MvvmCross.Forms.iOS.Presenters
 {
     public class MvxFormsIosPagePresenter
         : MvxFormsPagePresenter

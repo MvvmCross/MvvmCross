@@ -11,7 +11,7 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {

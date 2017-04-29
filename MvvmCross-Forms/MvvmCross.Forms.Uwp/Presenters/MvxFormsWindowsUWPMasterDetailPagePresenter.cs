@@ -1,9 +1,8 @@
-﻿using MvvmCross.WindowsUWP.Views;
-using MvvmCross.Forms.Presenter.Core;
+﻿using MvvmCross.Forms.Presenters;
+using MvvmCross.WindowsUWP.Views;
 using Xamarin.Forms;
-using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Forms.Presenter.WindowsUWP
+namespace MvvmCross.Forms.Uwp.Presenters
 {
     public class MvxFormsWindowsUWPMasterDetailPagePresenter
         : MvxFormsMasterDetailPagePresenter

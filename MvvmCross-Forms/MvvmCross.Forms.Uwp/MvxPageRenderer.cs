@@ -1,9 +1,8 @@
-﻿
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Forms.Presenter.Core;
+﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Presenters;
 
-namespace MvvmCross.Forms.Views.WindowsUWP
+namespace MvvmCross.Forms.Uwp
 {
     public class MvxPageRenderer : Xamarin.Forms.Platform.UWP.PageRenderer, IMvxBindingContextOwner
     {

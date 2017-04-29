@@ -1,8 +1,7 @@
-﻿
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Core
 {
     public interface IMvxContentPage : IMvxView
     {

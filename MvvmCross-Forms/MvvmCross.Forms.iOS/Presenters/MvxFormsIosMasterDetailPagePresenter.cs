@@ -1,9 +1,9 @@
-﻿using MvvmCross.Forms.Presenter.Core;
+﻿using MvvmCross.Forms.Presenters;
 using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.iOS
+namespace MvvmCross.Forms.iOS.Presenters
 {
     public class MvxFormsIosMasterDetailPagePresenter
         : MvxFormsMasterDetailPagePresenter
