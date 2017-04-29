@@ -5,10 +5,11 @@ using Xamarin.Forms;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Forms.Presenter.Core;
-using MvvmCross.Forms.Presenter.iOS;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.iOS;
+using MvvmCross.Forms.iOS.Presenters;
 using PageRendererExample.ViewModels;
 
 namespace PageRendererExample.UI.iOS

@@ -11,7 +11,7 @@ using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace MvvmCross.Plugins.PictureChooser.WindowsUWP
+namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
     [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>

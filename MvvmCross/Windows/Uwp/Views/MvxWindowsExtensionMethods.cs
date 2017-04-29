@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
+namespace MvvmCross.Uwp.Views
 {
     using System;
     using System.Linq;

@@ -4,8 +4,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using UIKit;
 using Xamarin.Forms;
-using MvvmCross.Forms.Presenter.iOS;
-using MvvmCross.Forms.Presenter.Core;
 
 namespace Example.iOS
 {

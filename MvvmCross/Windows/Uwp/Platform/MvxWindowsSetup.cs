@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Platform
+namespace MvvmCross.Uwp.Platform
 {
     using System.Collections.Generic;
 
@@ -17,8 +17,8 @@ namespace MvvmCross.WindowsUWP.Platform
     using MvvmCross.Platform;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
-    using MvvmCross.WindowsUWP.Views;
-    using MvvmCross.WindowsUWP.Views.Suspension;
+    using MvvmCross.Uwp.Views;
+    using MvvmCross.Uwp.Views.Suspension;
 
     public abstract class MvxWindowsSetup
         : MvxSetup
@@ -64,7 +64,7 @@ namespace MvvmCross.WindowsUWP.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxFilePluginManager(new List<string>() { ".WindowsUWP", ".WindowsCommon" });
+            return new MvxFilePluginManager(new List<string>() { ".Uwp", ".WindowsCommon" });
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
