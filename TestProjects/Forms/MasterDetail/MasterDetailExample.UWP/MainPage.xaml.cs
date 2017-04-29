@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Presenter.WindowsUWP;
+using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using Xamarin.Forms.Platform.UWP;
 

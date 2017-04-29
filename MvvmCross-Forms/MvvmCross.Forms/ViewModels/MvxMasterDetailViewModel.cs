@@ -1,7 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
 using System;
+using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.ViewModels
 {
     /// <summary>
     /// Base class for IMvxMasterDetailViewModel, extending from MvxViewModel

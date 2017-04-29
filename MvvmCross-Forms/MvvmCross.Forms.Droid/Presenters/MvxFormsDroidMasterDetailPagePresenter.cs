@@ -1,7 +1,8 @@
-﻿using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Presenter.Core;
+using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
 
-namespace MvvmCross.Forms.Presenter.Droid
+namespace MvvmCross.Forms.Droid.Presenters
 {
     public class MvxFormsDroidMasterDetailPagePresenter
         : MvxFormsMasterDetailPagePresenter

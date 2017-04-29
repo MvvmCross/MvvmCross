@@ -1,7 +1,7 @@
 using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Core
+namespace MvvmCross.Forms.Presenters
 {
     public interface IMvxFormsPageLoader
     {

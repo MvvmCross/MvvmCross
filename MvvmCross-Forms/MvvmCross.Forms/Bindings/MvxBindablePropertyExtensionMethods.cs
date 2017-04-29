@@ -11,7 +11,7 @@ using System.Reflection;
 using MvvmCross.Platform;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     public static class MvxBindablePropertyExtensionMethods
     {
