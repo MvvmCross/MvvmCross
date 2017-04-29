@@ -9,12 +9,10 @@ using Android.Widget;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-
-using MvvmCross.Forms.Views.Droid;
-
 using PageRendererExample.Pages;
 using PageRendererExample.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Forms.Droid;
 
 [assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 

@@ -7,12 +7,12 @@
 // Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
 
 using System;
-using MvvmCross.iOS.Platform;
 using MvvmCross.Core.Platform;
+using MvvmCross.iOS.Platform;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
 
-namespace MvvmCross.Forms.Views.iOS
+namespace MvvmCross.Forms.iOS
 {
     public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate, IMvxLifetime
     {

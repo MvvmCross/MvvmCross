@@ -7,14 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform.WeakSubscription;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Presenter.Binding
+namespace MvvmCross.Forms.Bindings
 {
     public class MvxFormsBindingCreator : MvxBindingCreator
     {

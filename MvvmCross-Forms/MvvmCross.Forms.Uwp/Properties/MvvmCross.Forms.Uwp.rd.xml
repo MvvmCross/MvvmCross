@@ -25,7 +25,7 @@
     http://go.microsoft.com/fwlink/?LinkID=391919
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="MvvmCross.Forms.Presenter.Uwp">
+  <Library Name="MvvmCross.Forms.Uwp">
 
   	<!-- add directives for your library here -->
 
