@@ -14,7 +14,6 @@ using MvvmCross.Uwp.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.IoC;
-using ExampleApp = MvxBindingsExample.App;
 
 namespace MvxBindingsExample.UWP
 {
