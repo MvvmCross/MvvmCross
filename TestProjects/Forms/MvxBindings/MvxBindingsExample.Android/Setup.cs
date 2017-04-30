@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
@@ -8,6 +9,7 @@ using MvvmCross.Forms.Presenter.Droid;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Presenter.Binding;
+using MvvmCross.Localization;
 
 namespace MvxBindingsExample.Droid
 {
@@ -34,6 +36,16 @@ namespace MvxBindingsExample.Droid
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;
+        }
+        
+        protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<System.Reflection.Assembly>(base.ValueConverterAssemblies);
+                toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+                return toReturn;
+            }
         }
 
         protected override void InitializeBindingBuilder()

@@ -1,7 +1,15 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "MvvmCross": "4.4.0",
+    "MvvmCross.Binding": "4.4.0",
+    "MvvmCross.Core": "4.4.0",
     "MvvmCross.Forms.Presenter": "4.4.0",
+    "MvvmCross.Platform": "4.4.0",
+    "MvvmCross.Plugin.File": "4.4.0",
+    "MvvmCross.Plugin.Json": "4.4.0",
+    "MvvmCross.Plugin.JsonLocalization": "4.4.0",
+    "MvvmCross.Plugin.ResourceLoader": "4.4.0",
     "Xamarin.Forms": "2.3.4.231"
   },
   "frameworks": {
