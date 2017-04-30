@@ -15,6 +15,7 @@ using System.Linq;
 using Java.IO;
 using System.IO;
 using MvvmCross.Platform.Droid.Views;
+using Java.Lang;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
@@ -62,7 +63,16 @@ namespace MvvmCross.Plugins.Email.Droid
             if (isHtml)
             {
                 emailIntent.SetType("text/html");
-                emailIntent.PutExtra(Intent.ExtraText, Html.FromHtml(body));
+
+                ICharSequence htmlBody;
+                if(Build.VERSION.SdkInt >= BuildVersionCodes.N)
+                    htmlBody = Html.FromHtml(body, FromHtmlOptions.ModeLegacy);
+                else
+#pragma warning disable CS0618 // Type or member is obsolete
+                    htmlBody = Html.FromHtml(body);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                emailIntent.PutExtra(Intent.ExtraText, htmlBody);
             }
             else
             {
