@@ -76,7 +76,7 @@
     <Compile Include="Adapters\MvxBaseObjectAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceHeadersSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceRowsSupportFragment.cs" />
-    <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackOverlaySupportFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceGuidedStepSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceSearchSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDetailsSupportFragment.cs" />
