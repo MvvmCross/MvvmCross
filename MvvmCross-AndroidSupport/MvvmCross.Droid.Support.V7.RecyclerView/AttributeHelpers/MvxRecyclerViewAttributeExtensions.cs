@@ -1,6 +1,5 @@
 using System;
 using Android.Content;
-using Android.Content.Res;
 using Android.Util;
 using MvvmCross.Binding.Droid.ResourceHelpers;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters;
@@ -15,17 +14,16 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
         {
             TryInitializeBindingResourcePaths();
 
-            TypedArray typedArray = null;
-
             string templateSelectorClassName = string.Empty;
             string groupedDataConverterClassName = string.Empty;
             int headerLayoutId = 0;
             int footerLayoutId = 0;
             int groupSectionLayoutId = 0;
 
+            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
+
             try
             {
-                typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
                 int numberOfStyles = typedArray.IndexCount;
 
                 for (int i = 0; i < numberOfStyles; ++i)
@@ -46,7 +44,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             }
             finally
             {
-                typedArray?.Recycle();
+                typedArray.Recycle();
             }
 
             if (string.IsNullOrEmpty(templateSelectorClassName))
@@ -78,19 +76,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 
             if (!typeof(MvxBaseTemplateSelector).IsAssignableFrom(type))
             {
-                string message = $"Sorry but type: {type} does not implement {nameof(MvxBaseTemplateSelector)} interface.";
+                var message = $"Sorry but type: {type} does not implement {nameof(MvxBaseTemplateSelector)} interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                string message = $"Sorry can not instatiate {nameof(MvxBaseTemplateSelector)} as provided type: {type} is abstract/interface.";
+                var message = $"Sorry can not instatiate {nameof(MvxBaseTemplateSelector)} as provided type: {type} is abstract/interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
-            var templateSelector = Activator.CreateInstance(type) as MvxBaseTemplateSelector;
+            var templateSelector = (MvxBaseTemplateSelector)Activator.CreateInstance(type);
             templateSelector.FooterLayoutId = templateSelectorAttributes.FooterLayoutId;
             templateSelector.HeaderLayoutId = templateSelectorAttributes.HeaderLayoutId;
             templateSelector.GroupSectionLayoutId = templateSelectorAttributes.GroupSectionLayoutId;
@@ -118,14 +116,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 
             if (!typeof(IMvxGroupedDataConverter).IsAssignableFrom(type))
             {
-                string message = $"Sorry but type: {type} does not implement {nameof(IMvxGroupedDataConverter)} interface.";
+                var message = $"Sorry but type: {type} does not implement {nameof(IMvxGroupedDataConverter)} interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                string message = $"Sorry can not instatiate {nameof(IMvxGroupedDataConverter)} as provided type: {type} is abstract/interface.";
+                var message = $"Sorry can not instatiate {nameof(IMvxGroupedDataConverter)} as provided type: {type} is abstract/interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
@@ -133,30 +131,24 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             return Activator.CreateInstance(type) as IMvxGroupedDataConverter;
         }
 
-        public static bool IsHidesHeaderIfEmptyEnabled(Context context, IAttributeSet attrs)
+        public static bool HidesHeaderIfEmpty(Context context, IAttributeSet attrs)
         {
             TryInitializeBindingResourcePaths();
 
-            TypedArray typedArray = null;
-            bool hidesHeaderIfEmpty = true;
+            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
 
             try
             {
-                typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
                 int numberOfStyles = typedArray.IndexCount;
 
                 for (int i = 0; i < numberOfStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
-
                     if (attributeId == MvxRecyclerViewHidesHeaderIfEmpty)
-                    {
-                        hidesHeaderIfEmpty = typedArray.GetBoolean(attributeId, true);
-                        break;
-                    }
+                        return typedArray.GetBoolean(attributeId, true);
                 }
 
-                return hidesHeaderIfEmpty;
+                return true;
             }
             finally
             {
@@ -165,30 +157,24 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
         }
 
 
-        public static bool IsHidesFooterIfEmptyEnabled(Context context, IAttributeSet attrs)
+        public static bool HidesFooterIfEmpty(Context context, IAttributeSet attrs)
         {
             TryInitializeBindingResourcePaths();
 
-            TypedArray typedArray = null;
-            bool hidesFooterIfEmpty = true;
+            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
 
             try
             {
-                typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
                 int numberOfStyles = typedArray.IndexCount;
 
                 for (int i = 0; i < numberOfStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
-
                     if (attributeId == MvxRecyclerViewHidesFooterIfEmpty)
-                    {
-                        hidesFooterIfEmpty = typedArray.GetBoolean(attributeId, true);
-                        break;
-                    }
+                        return typedArray.GetBoolean(attributeId, true);
                 }
 
-                return hidesFooterIfEmpty;
+                return true;
             }
             finally
             {
@@ -196,12 +182,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             }
         }
 
-        private static bool areBindingResourcesInitialized = false;
+        private static bool _areBindingResourcesInitialized = false;
+
         private static void TryInitializeBindingResourcePaths()
         {
-            if (areBindingResourcesInitialized)
+            if (_areBindingResourcesInitialized)
                 return;
-            areBindingResourcesInitialized = true;
+            _areBindingResourcesInitialized = true;
 
             var resourceTypeFinder = Mvx.Resolve<IMvxAppResourceTypeFinder>().Find();
             var styleableType = resourceTypeFinder.GetNestedType("Styleable");
@@ -232,6 +219,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 
         private static int MvxRecyclerViewHidesFooterIfEmpty { get; set; }
 
-        public static int MvxRecyclerViewGroupedDataConverter { get; set; }
+        private static int MvxRecyclerViewGroupedDataConverter { get; set; }
     }
 }

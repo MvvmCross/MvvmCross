@@ -77,7 +77,6 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
-    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\IMvxTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />

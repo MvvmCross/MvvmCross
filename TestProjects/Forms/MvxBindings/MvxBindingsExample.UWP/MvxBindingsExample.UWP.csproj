@@ -18,6 +18,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>MvxBindingsExample.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>019F3ABAF9E8529B1210A824949D5DE566CB24F4</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -162,20 +163,32 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Presenter.Binding\MvvmCross.Forms.Presenter.Binding.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>MvvmCross.Forms.Presenter.Binding</Name>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Uwp\MvvmCross.Forms.Uwp.csproj">
+      <Project>{8583f087-0543-4d27-8f11-f7d8dc1480e2}</Project>
+      <Name>MvvmCross.Forms.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
+      <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
+      <Name>MvvmCross.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj">
+      <Project>{C7E12CDD-6370-426A-8907-0ED6AF353F79}</Project>
+      <Name>MvvmCross.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvxBindingsExample\MvxBindingsExample.csproj">
-      <Project>{52d8241e-227b-44e5-8150-c6d8ffd41e59}</Project>
+      <Project>{b5cc92f3-42b2-48dd-96dd-3d883205d030}</Project>
       <Name>MvxBindingsExample</Name>
     </ProjectReference>
   </ItemGroup>

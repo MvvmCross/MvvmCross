@@ -67,6 +67,7 @@
     <Compile Include="MvxSingletonCache.cs" />
     <Compile Include="ViewModels\MvxInpcInterceptionResult.cs" />
     <Compile Include="Platform\MvxSettings.cs" />
+    <Compile Include="ViewModels\MvxViewModelInstanceRequest.cs" />
     <Compile Include="ViewModels\MvxViewToViewModelNameMapping.cs" />
     <Compile Include="Views\IMvxViewPresenter.cs" />
     <Compile Include="ViewModels\MvxClosePresentationHint.cs" />

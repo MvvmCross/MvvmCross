@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Presenter.WindowsUWP;
+using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 
 namespace MvxBindingsExample.UWP
@@ -14,7 +14,7 @@ namespace MvxBindingsExample.UWP
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsUWPPagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpPagePresenter;
 
             LoadApplication(presenter.MvxFormsApp);
         }

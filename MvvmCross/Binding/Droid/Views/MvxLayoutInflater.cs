@@ -310,7 +310,7 @@ namespace MvvmCross.Binding.Droid.Views
                     {
                         view = this.CreateView(name, null, attrs);
                     }
-                    catch (Java.Lang.ClassNotFoundException ignored) { }
+                    catch (Java.Lang.ClassNotFoundException) { }
                     finally
                     {
                         constructorArgsArr[0] = lastContext;

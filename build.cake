@@ -119,7 +119,12 @@ Task("GitLink")
 		"MvvmCross.TestProjects.CustomBinding.iOS",
 		"MvvmCross.TestProjects.CustomBinding.Droid",
 		"playground",
-		"playground.ios"
+		"playground.core",
+		"playground.ios",
+		"MvxBindingsExample",
+		"MvxBindingsExample.Android",
+		"MvxBindingsExample.iOS",
+		"MvxBindingsExample.UWP"
 	};
 
 	GitLink("./", 
@@ -166,14 +171,12 @@ Task("Package")
 		"MvvmCross.Droid.Support.Core.Utils.nuspec",
 		"MvvmCross.Droid.Support.Design.nuspec",
 		"MvvmCross.Droid.Support.Fragment.nuspec",
-		"MvvmCross.Droid.Support.V4.nuspec",
 		"MvvmCross.Droid.Support.V7.AppCompat.nuspec",
-		"MvvmCross.Droid.Support.V7.Fragging.nuspec",
 		"MvvmCross.Droid.Support.V7.Preference.nuspec",
 		"MvvmCross.Droid.Support.V7.RecyclerView.nuspec",
 		"MvvmCross.Droid.Support.V14.Preference.nuspec",
 		"MvvmCross.Droid.Support.V17.Leanback.nuspec",
-		"MvvmCross.Forms.Presenter.nuspec",
+		"MvvmCross.Forms.nuspec",
 		"MvvmCross.iOS.Support.nuspec",
 		"MvvmCross.iOS.Support.XamarinSidebar.nuspec",
 		"MvvmCross.Platform.nuspec",
