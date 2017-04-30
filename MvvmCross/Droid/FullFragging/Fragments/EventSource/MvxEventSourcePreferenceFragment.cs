@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -49,16 +49,6 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 			}
 
 			base.OnAttach(context);
-		}
-
-		public override void OnAttach(Activity activity)
-		{
-			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
-			{
-				AttachCalled.Raise(this, activity);
-			}
-
-			base.OnAttach(activity);
 		}
 
         public override void OnCreate(Bundle savedInstanceState)
