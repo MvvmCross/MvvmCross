@@ -108,7 +108,6 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
             var position = new MvxGeoLocation { Timestamp = coordinate.Timestamp };
             var coords = position.Coordinates;
 
-            // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94
             coords.Altitude = coordinate.Point.Position.Altitude;
             coords.Latitude = coordinate.Point.Position.Latitude;
             coords.Longitude = coordinate.Point.Position.Longitude;
