@@ -6,10 +6,9 @@ using MvvmCross.Plugins.JsonLocalization;
 
 namespace MvxBindingsExample.Services
 {
-    public class TextProviderBuilder
-        : MvxTextProviderBuilder
+    public class TextProviderBuilder : MvxTextProviderBuilder
     {
-        public TextProviderBuilder() : base("MvxBindingsExample", "Resources")
+        public TextProviderBuilder() : base("MvxBindingsExample", "Resources", new MvxEmbeddedJsonDictionaryTextProvider(false))
         {
         }
 
