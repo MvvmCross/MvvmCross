@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Bi.n.d.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
+    <Compile Include="La.n.g.cs" />
     <Compile Include="MvxBindingCreator.cs" />
     <Compile Include="MvxBinding\MvxFormsBindingCreator.cs" />
     <Compile Include="MvxBinding\MvxFormsTargetBindingFactoryRegistry.cs" />
