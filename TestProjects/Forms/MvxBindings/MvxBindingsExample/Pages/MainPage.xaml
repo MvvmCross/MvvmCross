@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <core:MvxContentPage x:TypeArguments="viewModels:MainViewModel"
                      xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:core="clr-namespace:MvvmCross.Forms.Presenter.Core;assembly=MvvmCross.Forms.Presenter.Core"
+                     xmlns:core="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
                      xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
-                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Presenter.Binding;assembly=MvvmCross.Forms.Presenter.Binding"
+                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
                      x:Class="MvxBindingsExample.Pages.MainPage">
 
     <ScrollView>

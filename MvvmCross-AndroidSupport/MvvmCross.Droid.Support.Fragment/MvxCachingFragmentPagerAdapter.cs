@@ -220,10 +220,6 @@ namespace MvvmCross.Droid.Support.V4
             _currentPrimaryItem = fragment;
         }
 
-        public override void StartUpdate(View container)
-        {
-        }
-
         protected virtual string GetTag(int position)
         {
             return null;

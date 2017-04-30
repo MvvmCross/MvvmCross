@@ -3,13 +3,14 @@ using MvvmCross.Binding;
 using MvvmCross.Platform.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Presenter.Binding;
+using MvvmCross.Localization;
 using MvvmCross.iOS.Platform;
 using UIKit;
 using Xamarin.Forms;
-using MvvmCross.Forms.Presenter.iOS;
-using MvvmCross.Forms.Presenter.Core;
-using MvvmCross.Localization;
+using MvvmCross.Forms.Bindings;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.iOS.Presenters;
 
 namespace MvxBindingsExample.iOS
 {
@@ -38,7 +39,7 @@ namespace MvxBindingsExample.iOS
 
             return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
         }
-        
+
         protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
         {
             get

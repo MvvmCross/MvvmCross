@@ -14,32 +14,20 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		: MvxLocationWatcher
 	{
 		private Context _context;
-		private Context Context
-		{
-			get { return _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals> ().ApplicationContext); }
-		}
+        private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
+        private FusedLocationHandler _locationHandler;
 
-		private FusedLocationHandler _locationHandler;
-
-		public MvxAndroidFusedLocationWatcher ()
+		protected override void PlatformSpecificStart(MvxLocationOptions options)
 		{
-		}
-
-		protected override void PlatformSpecificStart (MvxLocationOptions options)
-		{
-			if (_locationHandler == null) {
-				_locationHandler = new FusedLocationHandler (this, Context);
-			}
+			if (_locationHandler == null)
+				_locationHandler = new FusedLocationHandler(this, Context);
 
 			_locationHandler.Start (options);
 		}
 
-		protected override void PlatformSpecificStop ()
-		{
-			_locationHandler.Stop ();
-		}
+        protected override void PlatformSpecificStop() => _locationHandler.Stop();
 
-		public override MvxGeoLocation CurrentLocation 
+        public override MvxGeoLocation CurrentLocation 
 		{
 			get 
 			{
@@ -54,7 +42,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			}
 		}
 
-		internal void OnLocationUpdated (Android.Locations.Location androidLocation)
+		internal void OnLocationUpdated(Android.Locations.Location androidLocation)
 		{
 			if (androidLocation == null)
 			{
@@ -62,8 +50,8 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 				return;
 			}
 
-			if (androidLocation.Latitude == double.MaxValue
-				|| androidLocation.Longitude == double.MaxValue)
+			if (androidLocation.Latitude == double.MaxValue || 
+                androidLocation.Longitude == double.MaxValue)
 			{
 				MvxTrace.Trace("Android: Invalid location seen");
 				return;
@@ -87,35 +75,29 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			SendLocation (location);
 		}
 
-		internal void OnLocationError (MvxLocationErrorCode errorCode)
-		{
-			SendError (errorCode);
-		}
+        internal void OnLocationError(MvxLocationErrorCode errorCode) => SendError(errorCode);
 
-		internal void OnLocationAvailabilityChanged (bool isAvailable)
-		{
-			Permission = isAvailable ? MvxLocationPermission.Granted : MvxLocationPermission.Denied;
-		}
+        internal void OnLocationAvailabilityChanged(bool isAvailable) => 
+            Permission = isAvailable ?
+                MvxLocationPermission.Granted :
+                MvxLocationPermission.Denied;
 
-		private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
+        private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
 		{
 			var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
 			var coords = position.Coordinates;
 
-			if (androidLocation.HasAltitude)
-				coords.Altitude = androidLocation.Altitude;
+            coords.Latitude = androidLocation.Latitude;
+            coords.Longitude = androidLocation.Longitude;
 
+            if (androidLocation.HasAltitude)
+				coords.Altitude = androidLocation.Altitude;
 			if (androidLocation.HasBearing)
 				coords.Heading = androidLocation.Bearing;
-
-			coords.Latitude = androidLocation.Latitude;
-			coords.Longitude = androidLocation.Longitude;
 			if (androidLocation.HasSpeed)
 				coords.Speed = androidLocation.Speed;
 			if (androidLocation.HasAccuracy)
-			{
 				coords.Accuracy = androidLocation.Accuracy;
-			}
 
 			return position;
 		}

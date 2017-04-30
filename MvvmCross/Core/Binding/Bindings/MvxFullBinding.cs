@@ -251,7 +251,7 @@ namespace MvvmCross.Binding.Bindings
             get
             {
                 var mode = this._bindingDescription.Mode;
-                if (mode == MvxBindingMode.Default)
+                if (mode == MvxBindingMode.Default && this._targetBinding != null)
                     mode = this._targetBinding.DefaultMode;
                 return mode;
             }

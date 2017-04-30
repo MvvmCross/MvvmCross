@@ -19,37 +19,39 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		private LocationRequest _request;
 
 		private readonly MvxAndroidFusedLocationWatcher _owner;
+        private readonly Context _context;
 
 		public FusedLocationHandler (MvxAndroidFusedLocationWatcher owner, Context context)
 		{
 			_owner = owner;
-			EnsureGooglePlayServiceAvailable (context);
-			Initialize (context);
+            _context = context;
 		}
 
 		public void Start (MvxLocationOptions options)
 		{
-			_request = CreateLocationRequest (options);
+            if (_client == null)
+            {
+                EnsureGooglePlayServiceAvailable(_context);
+                Initialize(_context);
+            }
+            
+            _request = CreateLocationRequest (options);
 			_client.Connect ();
 		}
 
 		public void Stop ()
 		{
-			if (_client == null) {
+			if (_client == null)
 				return;
-			}
 
 			LocationServices.FusedLocationApi.RemoveLocationUpdates(_client, this);
-
-			_client.Disconnect ();
+			_client.Disconnect();
 		}
 
 		public Android.Locations.Location GetLastKnownLocation ()
 		{
 			if (_client.IsConnected)
-			{
 				return LocationServices.FusedLocationApi.GetLastLocation(_client);
-			}
 			return null;
 		}
 
@@ -59,9 +61,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 
 			var location = LocationServices.FusedLocationApi.GetLastLocation(_client);
 			if (location != null)
-			{
 				_owner.OnLocationUpdated (location);
-			}
 		}
 
 		public void OnConnectionSuspended (int cause)
@@ -76,10 +76,8 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			MvxTrace.Trace ("Plugin.Location.Fused.OnConnectionFailed: " + result);
 		}
 
-		public override void OnLocationResult (LocationResult result)
-		{
+		public override void OnLocationResult (LocationResult result) =>
 			_owner.OnLocationUpdated (result.LastLocation);
-		}
 
 		public override void OnLocationAvailability (LocationAvailability locationAvailability)
 		{
@@ -95,41 +93,39 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			{
 				var errorMessage = "GooglePlayService is not available";
 				if (availability.IsUserResolvableError (result))
-				{
 					errorMessage = availability.GetErrorString (result);
-				}
 				throw new MvxException (errorMessage);
 			}
 		}
 
 		private void Initialize (Context context)
 		{
-			_client = new GoogleApiClient.Builder (context)
-				.AddApi (LocationServices.API)
-				.AddConnectionCallbacks (this)
-				.AddOnConnectionFailedListener (this)
-				.Build ();
+			_client = new GoogleApiClient.Builder(context)
+				.AddApi(LocationServices.API)
+				.AddConnectionCallbacks(this)
+				.AddOnConnectionFailedListener(this)
+				.Build();
 		}
 
 		private static LocationRequest CreateLocationRequest (MvxLocationOptions options)
 		{
 			// NOTE options.TrackingMode is not supported
+			var request = LocationRequest.Create();
 
-			var request = LocationRequest.Create ();
-
-			switch (options.Accuracy) {
-			case MvxLocationAccuracy.Fine:
-				request.SetPriority (LocationRequest.PriorityHighAccuracy);
-				break;
-			case MvxLocationAccuracy.Coarse:
-				request.SetPriority (LocationRequest.PriorityBalancedPowerAccuracy);
-				break;
-			default:
-				throw new ArgumentOutOfRangeException ();
+			switch (options.Accuracy)
+            {
+			    case MvxLocationAccuracy.Fine:
+				    request.SetPriority(LocationRequest.PriorityHighAccuracy);
+				    break;
+			    case MvxLocationAccuracy.Coarse:
+				    request.SetPriority(LocationRequest.PriorityBalancedPowerAccuracy);
+				    break;
+			    default:
+				    throw new ArgumentOutOfRangeException();
 			}
 
-			request.SetInterval ((long)options.TimeBetweenUpdates.TotalMilliseconds);
-			request.SetSmallestDisplacement (options.MovementThresholdInM);
+			request.SetInterval((long)options.TimeBetweenUpdates.TotalMilliseconds);
+			request.SetSmallestDisplacement(options.MovementThresholdInM);
 
 			return request;
 		}
@@ -137,23 +133,18 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		private static MvxLocationErrorCode ToMvxLocationErrorCode (ConnectionResult connectionResult)
 		{
 			var errorCode = connectionResult.ErrorCode;
+            var mvxErrorCode = MvxLocationErrorCode.ServiceUnavailable;
 
-			if (errorCode == ConnectionResult.Timeout) {
-				return MvxLocationErrorCode.Timeout;
-			}
+            if (errorCode == ConnectionResult.Timeout)
+                mvxErrorCode = MvxLocationErrorCode.Timeout;
+            else if (errorCode == ConnectionResult.NetworkError)
+                mvxErrorCode = MvxLocationErrorCode.Network;
+            else if (errorCode == ConnectionResult.Canceled)
+                mvxErrorCode = MvxLocationErrorCode.Canceled;
 
-            if (errorCode == ConnectionResult.NetworkError) {
-                return MvxLocationErrorCode.Network;
-            }
-
-            if (errorCode == ConnectionResult.Canceled) {
-                return MvxLocationErrorCode.Canceled;
-            }
-
-			// TODO handle more error-codes?
-
-			return MvxLocationErrorCode.ServiceUnavailable;
-		}
+            // TODO handle more error-codes?
+            return mvxErrorCode;
+        }
 	}
 }
 
