@@ -45,7 +45,6 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-#warning Check this is Unity compatible :/
             var setMethod = this.TargetPropertyInfo.GetSetMethod();
             setMethod.Invoke(target, new object[] { value });
         }
