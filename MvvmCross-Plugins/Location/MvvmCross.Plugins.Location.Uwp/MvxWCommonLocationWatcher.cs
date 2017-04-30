@@ -109,9 +109,9 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
             var coords = position.Coordinates;
 
             // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94
-            coords.Altitude = coordinate.Altitude ?? 0.0;
-            coords.Latitude = coordinate.Latitude;
-            coords.Longitude = coordinate.Longitude;
+            coords.Altitude = coordinate.Point.Position.Altitude;
+            coords.Latitude = coordinate.Point.Position.Latitude;
+            coords.Longitude = coordinate.Point.Position.Longitude;
             coords.Speed = coordinate.Speed ?? 0.0;
             coords.Accuracy = coordinate.Accuracy;
             coords.AltitudeAccuracy = coordinate.AltitudeAccuracy ?? double.MaxValue;
