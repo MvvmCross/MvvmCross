@@ -1,4 +1,4 @@
-// MvxFragment.cs
+﻿// MvxFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -74,34 +74,34 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.Destroy ();
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel.Appearing();
+            ViewModel?.Appearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel.Appeared();
+            ViewModel?.Appeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel.Disappearing();
+            ViewModel?.Disappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel.Disappeared();
+            ViewModel?.Disappeared();
         }
     }
 
