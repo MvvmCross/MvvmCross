@@ -138,10 +138,6 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
-      <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
-      <Name>MvvmCross.Binding.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
