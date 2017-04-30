@@ -1,4 +1,4 @@
-﻿// MvxEventSourceFragment.cs
+// MvxEventSourceFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -64,6 +64,16 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 			}
 
 			base.OnAttach(context);
+		}
+
+		public override void OnAttach(Activity activity)
+		{
+			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+			{
+				AttachCalled.Raise(this, activity);
+			}
+
+			base.OnAttach(activity);
 		}
 
         public override void OnCreate(Bundle savedInstanceState)
