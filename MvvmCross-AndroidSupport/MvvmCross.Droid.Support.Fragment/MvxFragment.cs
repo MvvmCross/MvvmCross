@@ -1,4 +1,4 @@
-// MvxFragment.cs
+﻿// MvxFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -83,25 +83,25 @@ namespace MvvmCross.Droid.Support.V4
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel.Appearing();
+            ViewModel?.Appearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel.Appeared();
+            ViewModel?.Appeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel.Disappearing();
+            ViewModel?.Disappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel.Disappeared();
+            ViewModel?.Disappeared();
         }
     }
 

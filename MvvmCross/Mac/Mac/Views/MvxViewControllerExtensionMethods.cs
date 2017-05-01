@@ -26,11 +26,6 @@ namespace MvvmCross.Mac.Views
 
         private static IMvxViewModel LoadViewModel(this IMvxMacView macView)
         {
-#warning NullViewModel needed?
-            // how to do N
-            //if (typeof (TViewModel) == typeof (MvxNullViewModel))
-            //    return new MvxNullViewModel() as TViewModel;
-
             if (macView.Request == null)
             {
                 MvxTrace.Trace(

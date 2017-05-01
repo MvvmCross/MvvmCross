@@ -76,7 +76,7 @@
     <Compile Include="Adapters\MvxBaseObjectAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceHeadersSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceRowsSupportFragment.cs" />
-    <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackOverlaySupportFragment.cs" />
+    <Compile Include="Fragments\EventSource\MvxEventSourcePlaybackSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceGuidedStepSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceSearchSupportFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDetailsSupportFragment.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Fragments\MvxBrowseSupportFragment.cs" />
     <Compile Include="Fragments\MvxDetailsSupportFragment.cs" />
     <Compile Include="Fragments\MvxGuidedStepSupportFragment.cs" />
-    <Compile Include="Fragments\MvxPlaybackOverlaySupportFragment.cs" />
+    <Compile Include="Fragments\MvxPlaybackSupportFragment.cs" />
     <Compile Include="Fragments\MvxSearchSupportFragment.cs" />
     <Compile Include="Listeners\MvxFocusFirstChildOnChildLaidOutListener.cs" />
     <Compile Include="Listeners\MvxOnChildViewHolderSelectedListener.cs" />
