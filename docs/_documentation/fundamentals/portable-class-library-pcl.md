@@ -2,7 +2,7 @@
 layout: documentation
 title: Portable Class Library (PCL)
 category: Fundamentals
-order: 8
+order: 9
 ---
 **Why PCL and not Shared Project?**
 
@@ -29,4 +29,3 @@ With the exception of OnPlatform these static functions cannot be used directly 
 Shared Project though can be useful when writing platform level code that needs to be varied slightly depending on the target platform. For example if you need to create a file to hold a database or a secret each OS has a different file system location for that, and if you need to apply encryption while the device is code locked to protect a secret and exposure via Jailbreaking, again each OS is different. But all platforms can be coded in a shared project including "#ifdef" sections where the platforms differ. This makes the code more maintainable because you can then see all of your platforms at once.
 
 Again we should demonstrate this later.
-
