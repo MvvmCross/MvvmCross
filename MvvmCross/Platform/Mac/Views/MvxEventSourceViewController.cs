@@ -76,7 +76,7 @@ namespace MvvmCross.Platform.Mac.Views
         //            ViewDidAppearCalled.Raise(this, animated);
         //        }
         //
-        public virtual void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             this.ViewDidLoadCalled.Raise(this);
         }

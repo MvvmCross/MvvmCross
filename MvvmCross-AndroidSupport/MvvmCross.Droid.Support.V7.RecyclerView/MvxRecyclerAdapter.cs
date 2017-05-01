@@ -44,7 +44,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             _groupHeaderClickCommand;
 
         private MvxBaseTemplateSelector _itemTemplateSelector;
-        private IMvxGroupedDataConverter _groupedDataConverter;
 
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current())
         {
