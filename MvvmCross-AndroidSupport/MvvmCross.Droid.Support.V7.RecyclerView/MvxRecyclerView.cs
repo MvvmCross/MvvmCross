@@ -57,8 +57,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
 
-            HidesHeaderIfEmpty = MvxRecyclerViewAttributeExtensions.HidesHeaderIfEmpty(context, attrs);
-            HidesFooterIfEmpty = MvxRecyclerViewAttributeExtensions.HidesFooterIfEmpty(context, attrs);
+            HidesHeaderIfEmpty = MvxRecyclerViewAttributeExtensions.IsHidesHeaderIfEmptyEnabled(context, attrs);
+            HidesFooterIfEmpty = MvxRecyclerViewAttributeExtensions.IsHidesFooterIfEmptyEnabled(context, attrs);
 
             if (MvxRecyclerViewAttributeExtensions.IsGroupingSupported(context, attrs))
                 GroupedDataConverter = MvxRecyclerViewAttributeExtensions.BuildMvxGroupedDataConverter(context, attrs);
