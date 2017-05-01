@@ -51,5 +51,7 @@ namespace MvvmCross.Console.Views
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
+
+        public abstract void Close(IMvxViewModel toClose);
     }
 }
