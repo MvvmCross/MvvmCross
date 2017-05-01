@@ -1,4 +1,4 @@
-namespace MvvmCross.Binding.Droid.Binders
+﻿namespace MvvmCross.Binding.Droid.Binders
 {
     using Android.Content;
     using Android.OS;
@@ -91,7 +91,7 @@ namespace MvvmCross.Binding.Droid.Binders
                     _layoutInflaterFactory2Field = layoutInflaterClass.GetDeclaredField("mFactory2");
                     _layoutInflaterFactory2Field.Accessible = true;
                 }
-                catch (NoSuchFieldException e)
+                catch (NoSuchFieldException)
                 {
                     Mvx.Error(
                         "ForceSetFactory2 Could not find field 'mFactory2' on class {0}; inflation may have unexpected results.",
@@ -106,7 +106,7 @@ namespace MvvmCross.Binding.Droid.Binders
                 {
                     _layoutInflaterFactory2Field.Set(inflater, (Java.Lang.Object)factory);
                 }
-                catch (IllegalAccessException e)
+                catch (IllegalAccessException)
                 {
                     Mvx.Error("ForceSetFactory2 could not set the Factory2 on LayoutInflater {0} ; inflation may have unexpected results.", inflater);
                 }

@@ -1,4 +1,4 @@
-using Android.OS;
+﻿using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platform.Core;
@@ -12,8 +12,8 @@ using Android.Content;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {
-    public class MvxEventSourcePlaybackOverlaySupportFragment
-        : PlaybackOverlaySupportFragment
+    public class MvxEventSourcePlaybackSupportFragment
+        : PlaybackSupportFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
@@ -42,11 +42,11 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourcePlaybackOverlaySupportFragment()
+        public MvxEventSourcePlaybackSupportFragment()
         {
         }
 
-        public MvxEventSourcePlaybackOverlaySupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        public MvxEventSourcePlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }

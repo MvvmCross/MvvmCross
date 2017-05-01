@@ -151,7 +151,7 @@ namespace MvvmCross.Binding.Test.Binders
             }
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetUp()
         {
             SetInvariantCulture();
