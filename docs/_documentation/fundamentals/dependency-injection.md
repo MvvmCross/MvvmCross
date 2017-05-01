@@ -2,7 +2,7 @@
 layout: documentation
 title: Dependency injection
 category: Fundamentals
-order: 6
+order: 7
 ---
 ## Constructor Injection
 
@@ -20,11 +20,11 @@ public class Bar
 }
 ```
 
-Then you can create this object using: 
+Then you can create this object using:
 
         Mvx.IocConstruct<Bar>();
 
-What happens during this call is: 
+What happens during this call is:
 
 - MvvmCross:
   - uses Reflection to find the constructor of `Bar`
@@ -34,7 +34,7 @@ What happens during this call is:
 
 ### Constructor Injection and ViewModels
 
-This "Constructor Injection" mechanism is used internally within MvvmCross when creating ViewModels. 
+This "Constructor Injection" mechanism is used internally within MvvmCross when creating ViewModels.
 
 If you declare a ViewModel like:
 
@@ -89,9 +89,9 @@ Further, this process is **recursive** - so if any of these returned objects req
 
 ### What if... I want to mix Dynamic and Singleton types
 
-If you use constructor injection, then for each dependency you can only ever receive a single instance. In some cases this may not be what you want. 
+If you use constructor injection, then for each dependency you can only ever receive a single instance. In some cases this may not be what you want.
 
-Take the following code: 
+Take the following code:
 
 ```c#
 // Registered with Mvx.RegisterType<IBar, Bar>();
@@ -110,9 +110,9 @@ public class FooSingleton : IFooSingleton
 
     public FooSingleton(IBar bar)
     {
-        // This "bar" instance will be held forever, 
-        // no other instance will be created for the 
-        // lifetime of this singleton 
+        // This "bar" instance will be held forever,
+        // no other instance will be created for the
+        // lifetime of this singleton
         _bar = bar;
     }
 
@@ -167,4 +167,3 @@ Understanding object lifecycles in this type of situation - where some objects a
   [1]: http://www.martinfowler.com/articles/injection.html
   [2]: http://joelabrahamsson.com/inversion-of-control-an-introduction-with-examples-in-net/
   [3]: https://github.com/slodge/MvvmCross-Presentations/blob/master/MvxDay/InterfaceDrivenDevelopment.pptx
-
