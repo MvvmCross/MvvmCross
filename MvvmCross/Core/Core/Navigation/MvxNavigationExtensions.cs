@@ -29,5 +29,12 @@ namespace MvvmCross.Core.Navigation
         //Task Navigate<TParameter>(Uri path, TParameter param);
         //Task<TResult> Navigate<TResult>(Uri path);
         //Task<TResult> Navigate<TParameter, TResult>(Uri path, TParameter param);
+
+        public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
+        {
+            //TODO: Find viewmodel with this type in stack and close it
+            throw new NotImplementedException();
+            //return navigationService.Close();
+        }
     }
 }

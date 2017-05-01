@@ -16,7 +16,7 @@ This package contains Support Core UI support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Support.Core.UI.*" target="lib\MonoAndroid70" />
 	</files>
 </package>
 

@@ -20,7 +20,7 @@ This package contains Support v7 Preference support for MvvmCross.</description>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\bin\Release\MvvmCross.Droid.Support.V14.Preference.*" target="lib\MonoAndroid70" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Support.V14.Preference.*" target="lib\MonoAndroid70" />
 	</files>
 </package>
 

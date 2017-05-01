@@ -59,7 +59,7 @@ namespace MvvmCross.Droid.Views
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
             var activity = this.Activity;
 
