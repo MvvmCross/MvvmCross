@@ -26,7 +26,7 @@ Let's take a look now at the methods of that interface:
 - `Close(IMvxViewModel toClose)`: As you can imagine, this method is used to handle the close request of a ViewModel. It takes the ViewModel instance to be closed as parameter.
 
 
-**Showing ViewModels**
+##Showing ViewModels
 The key and most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
 There are several techniques to implement this method, but the preferred way by the MvvmCross default presenters is to use custom class attributes. These let the presenter know how a View wants to be presented on the UI. For instance, on iOS you would typically declare a ViewController like this:
 
@@ -43,7 +43,7 @@ namespace Playground.iOS.Views
 
 In this example the attribute is telling the Presenter that whenever a ViewModel request for `MyViewModel` arrives, it should display the View as a root and wrap it into a NavigationController (it initiates a navigation stack).
 
-**Requesting presentation changes**
+##Requesting presentation changes
 Although for most apps showing / closing ViewModels is enough, there is one more tool that MvvmCross offers, and it is extremely powerful: the ability to request a change to the UI layer.
 
 The best example we can give about this is the `Close` method itself. Once you call Close from a ViewModel or a MvxNavigatingObject, what MvvmCross internally do is to send a `MvxClosePresentationHint` to the ViewPresenter, which then calls `Close(IMvxViewModel toClose)`. You can see how this happen in the [iOS Presenter](https://github.com/MvvmCross/MvvmCross/blob/b4ca1f492b996c9a836f494b7873033336ea83de/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs#L67).
