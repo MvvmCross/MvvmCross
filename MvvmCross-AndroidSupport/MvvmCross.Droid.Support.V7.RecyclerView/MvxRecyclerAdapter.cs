@@ -229,7 +229,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
-            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext, viewType)
+            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext),
+                itemBindingContext)
             {
                 Click = ItemClick,
                 LongClick = ItemLongClick,

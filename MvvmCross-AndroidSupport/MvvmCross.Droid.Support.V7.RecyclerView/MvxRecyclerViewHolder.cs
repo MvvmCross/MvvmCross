@@ -1,4 +1,4 @@
-// MvxRecyclerViewHolder.cs
+﻿// MvxRecyclerViewHolder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,14 +13,12 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
-using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
-        private readonly int _viewType;
         private readonly IMvxBindingContext _bindingContext;
 
         private object _cachedDataContext;
@@ -100,23 +98,17 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (item == null)
                 return;
 
-            if (_viewType == MvxBaseTemplateSelector.HeaderViewTypeId)
+            if (item is MvxHeaderItemData)
             {
-                if (item is MvxHeaderItemData)
-                {
-                    if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
-                        HeaderClickCommand.Execute(null);
-                }
+                if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
+                    HeaderClickCommand.Execute(null);
                 return;
             }
 
-            if (_viewType == MvxBaseTemplateSelector.FooterViewTypeId)
+            if (item is MvxFooterItemData)
             {
-                if (item is MvxFooterItemData)
-                {
-                    if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
-                        FooterClickCommand.Execute(null);
-                }
+                if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
+                    FooterClickCommand.Execute(null);
                 return;
             }
 
@@ -145,14 +137,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
-            : this(itemView, context, 0)
-        {
-        }
-
-        public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context, int viewType = 0)
             : base(itemView)
         {
-            _viewType = viewType;
             this._bindingContext = context;
         }
 
