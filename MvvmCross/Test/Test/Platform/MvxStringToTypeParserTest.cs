@@ -17,7 +17,7 @@ namespace MvvmCross.Test.Platform
     [TestFixture]
     public class MvxStringToTypeParserTest : MvxIoCSupportingTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetUp()
         {
             SetInvariantCulture();
