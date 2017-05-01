@@ -1,4 +1,4 @@
-using Android.OS;
+﻿using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -9,31 +9,31 @@ using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
-    [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxPlaybackOverlaySupportFragment")]
-    public class MvxPlaybackOverlaySupportFragment
-        : MvxEventSourcePlaybackOverlaySupportFragment
-            , IMvxFragmentView
+    [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxPlaybackSupportFragment")]
+    public class MvxPlaybackSupportFragment
+        : MvxEventSourcePlaybackSupportFragment
+        , IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxSearchSupportFragment
         /// </summary>
         /// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
         /// <returns>Returns an instance of a MvxFragment</returns>
-        public static MvxPlaybackOverlaySupportFragment NewInstance(Bundle bundle)
+        public static MvxPlaybackSupportFragment NewInstance(Bundle bundle)
         {
             // Setting Arguments needs to happen before Fragment is attached
             // to Activity. Arguments are persisted when Fragment is recreated!
-            var fragment = new MvxPlaybackOverlaySupportFragment { Arguments = bundle };
+            var fragment = new MvxPlaybackSupportFragment { Arguments = bundle };
 
             return fragment;
         }
 
-        protected MvxPlaybackOverlaySupportFragment()
+        protected MvxPlaybackSupportFragment()
         {
             this.AddEventListeners();
         }
 
-        protected MvxPlaybackOverlaySupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxPlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {}
 
@@ -69,15 +69,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxPlaybackOverlaySupportFragment<TViewModel>
-: MvxPlaybackOverlaySupportFragment
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxPlaybackSupportFragment<TViewModel>
+        : MvxPlaybackSupportFragment
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-        protected MvxPlaybackOverlaySupportFragment()
+        protected MvxPlaybackSupportFragment()
         {
         }
 
-        protected MvxPlaybackOverlaySupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxPlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
