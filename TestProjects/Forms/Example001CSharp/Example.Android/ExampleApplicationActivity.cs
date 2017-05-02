@@ -7,11 +7,7 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Content.PM;
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
@@ -22,9 +18,8 @@ using MvvmCross.Forms.Droid.Presenters;
 
 namespace Example.Droid
 {
-    [Activity(Label = "MvxFormsApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
-    public class MvxFormsApplicationActivity
-        : FormsApplicationActivity
+    [Activity(Label = "ExampleApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
+    public class ExampleApplicationActivity : MvxFormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
