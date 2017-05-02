@@ -4,6 +4,7 @@ using Mvvmcross.Forms.Views;
 using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.iOS;
 using IosMvxImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
 
@@ -38,7 +39,7 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
 
             if (Control == null && args.NewElement != null)
             {
-                _NativeControl = new IosMvxImageView();
+                _NativeControl = new IosMvxImageView(OnSourceImageChanged);
                 _NativeControl.ContentMode = UIViewContentMode.ScaleAspectFit;
                 _NativeControl.ClipsToBounds = true;
 
@@ -69,6 +70,11 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
                     _NativeControl.ImageUrl = _SharedControl.ImageUri;
                 }
             }
+        }
+
+        private void OnSourceImageChanged()
+        {
+            (_SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -28,6 +28,7 @@
 
     <StackLayout Spacing="10" Orientation="Vertical">
         <views:MvxImageView HorizontalOptions="CenterAndExpand"
+                            Margin="20, 20, 20, 20"
                             HeightRequest="100"
                             DefaultImagePath="res:Fallback.png"
                             ErrorImagePath="res:Error.png"
