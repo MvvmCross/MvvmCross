@@ -1,9 +1,7 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
@@ -14,9 +12,8 @@ using MvvmCross.Forms.Droid.Presenters;
 
 namespace PageRendererExample.UI.Droid
 {
-    [Activity(Label = "MvxFormsApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
-    public class MvxFormsApplicationActivity
-        : FormsApplicationActivity
+    [Activity(Label = "PageRendererApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
+    public class PageRendererApplicationActivity : MvxFormsApplicationActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

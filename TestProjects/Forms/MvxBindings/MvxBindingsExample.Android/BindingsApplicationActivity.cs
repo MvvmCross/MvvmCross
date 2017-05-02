@@ -1,20 +1,18 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Forms.Presenter.Core;
-using MvvmCross.Forms.Presenter.Droid;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Droid;
+using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Platform;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 
-// TODO: Change namespace
-namespace Namespace
+namespace MvxBindingsExample.Droid
 {
-    [Activity(Label = "View for anyViewModel", ScreenOrientation=ScreenOrientation.Portrait)]
-    public class MvxFormsApplicationActivity
-        : FormsApplicationActivity
+    [Activity(Label = "BindingsApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
+    public class BindingsApplicationActivity : MvxFormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,3 +29,4 @@ namespace Namespace
         }
     }
 }
+
