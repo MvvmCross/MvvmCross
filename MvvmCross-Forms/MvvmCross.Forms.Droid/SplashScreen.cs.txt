@@ -25,7 +25,7 @@ namespace Namespace
 
         public override void InitializationComplete()
         {
-            StartActivity(typeof(MvxFormsApplicationActivity));
+            StartActivity(typeof(MyApplicationActivity));
         }
 
         protected override void OnCreate(Android.OS.Bundle bundle)
