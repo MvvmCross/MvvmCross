@@ -116,6 +116,7 @@
     <Compile Include="Presenters\MvxFormsDroidPagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxPageRenderer.cs" />
+    <Compile Include="Views\Renderers\MvxImageViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
