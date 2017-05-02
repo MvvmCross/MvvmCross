@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Mvvmcross.Forms.Views;
+using Xamarin.Forms;
 
 namespace Example.Pages
 {
@@ -29,6 +30,15 @@ namespace Example.Pages
                 Text = string.Empty,
                 FontSize = 24
             };
+            
+            var image = new MvxImageView
+                                {
+                                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                    HeightRequest = 100,
+                                    DefaultImagePath = "res:Fallback.png",
+                                    ErrorImagePath = "res:Error.png",
+                                    ImageUri = "https://www.mvvmcross.com/img/MvvmCross-logo.png",
+                                };
 
             Content = new StackLayout
             {
@@ -36,6 +46,7 @@ namespace Example.Pages
                 Orientation = StackOrientation.Vertical,
                 Children =
                 {
+                    image,
                     new Label
                     {
                         Text = "Enter your nickname in the box below",

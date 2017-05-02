@@ -114,8 +114,13 @@
     <Compile Include="Presenters\MvxFormsDroidPagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxPageRenderer.cs" />
+    <Compile Include="Views\Renderers\MvxImageViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
+      <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
+      <Name>MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
