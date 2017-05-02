@@ -33,6 +33,7 @@
             <Label Text="Lang Binding" />
             <Label mvx:La.ng="Text ThisIsLocalized" />
             <Label Text="{markup:MvxLang ThisIsLocalizedToo}" />
+            <Label Text="{markup:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
         </StackLayout>
     </ScrollView>
 </core:MvxContentPage>
