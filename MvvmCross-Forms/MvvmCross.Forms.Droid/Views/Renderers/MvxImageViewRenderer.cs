@@ -4,6 +4,7 @@ using Mvvmcross.Forms.Droid.Views;
 using Mvvmcross.Forms.Views;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 using DroidMvxImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
 
@@ -17,7 +18,7 @@ namespace Mvvmcross.Forms.Droid.Views
 
         protected override ImageView CreateNativeControl()
         {
-            _NativeControl = new DroidMvxImageView(Context);
+            _NativeControl = new DroidMvxImageView(Context, OnSourceImageChanged);
 
             return _NativeControl;
         }
@@ -85,6 +86,11 @@ namespace Mvvmcross.Forms.Droid.Views
                     }
                 }
             }
+        }
+
+        private void OnSourceImageChanged()
+        {
+            (_SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }
     }
 }
