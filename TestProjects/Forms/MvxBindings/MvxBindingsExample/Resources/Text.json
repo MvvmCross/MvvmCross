@@ -1,3 +1,4 @@
 ﻿{
     "ThisIsLocalized": "Localized text",
+    "ThisIsLocalizedToo": "I'm using MvxLang markup!"
 }
