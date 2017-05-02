@@ -34,11 +34,26 @@ namespace Example.Pages
             var image = new MvxImageView
                                 {
                                     HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                    Margin = new Thickness(20),
                                     HeightRequest = 100,
-                                    DefaultImagePath = "res:Fallback.png",
-                                    ErrorImagePath = "res:Error.png",
                                     ImageUri = "https://www.mvvmcross.com/img/MvvmCross-logo.png",
                                 };
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                {
+                    image.DefaultImagePath = "res:fallback";
+                    image.ErrorImagePath = "res:error";
+                    break;
+                }
+                case Device.iOS:
+                {
+                    image.DefaultImagePath = "res:Fallback.png";
+                    image.ErrorImagePath = "res:Error.png";
+                    break;
+                }
+            }
 
             Content = new StackLayout
             {

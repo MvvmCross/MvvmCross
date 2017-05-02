@@ -205,10 +205,10 @@
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Error.png" />
+    <AndroidResource Include="Resources\drawable\error.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Fallback.png" />
+    <AndroidResource Include="Resources\drawable\fallback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
