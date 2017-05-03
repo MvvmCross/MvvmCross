@@ -84,18 +84,18 @@ using MvvmCross.Platform.Ioc;
 
 namespace MyName.Core
 {
-public class App : MvvmCross.Core.ViewModels.MvxApplication
-{
-    public override void Initialize()
+    public class App : MvvmCross.Core.ViewModels.MvxApplication
     {
-        CreatableTypes()
-        .EndingWith("Service")
-        .AsInterfaces()
-        .RegisterAsLazySingleton();
+        public override void Initialize()
+        {
+            CreatableTypes()
+            .EndingWith("Service")
+            .AsInterfaces()
+            .RegisterAsLazySingleton();
 
-        RegisterAppStart<ViewModels.FirstViewModel>();
+            RegisterAppStart<ViewModels.FirstViewModel>();
+        }
     }
-}
 }
 ```
 
@@ -197,26 +197,26 @@ using MvvmCross.Core.ViewModels;
 
 namespace MyName.iOS
 {
-[Register ("AppDelegate")]
-public partial class AppDelegate : MvxApplicationDelegate
-{
-    UIWindow _window;
-
-    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+    [Register ("AppDelegate")]
+    public partial class AppDelegate : MvxApplicationDelegate
     {
-        _window = new UIWindow (UIScreen.MainScreen.Bounds);
+        UIWindow _window;
 
-        var setup = new Setup(this, _window);
-        setup.Initialize();
+        public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+        {
+            _window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-        var startup = Mvx.Resolve<IMvxAppStart>();
-        startup.Start();
+            var setup = new Setup(this, _window);
+            setup.Initialize();
 
-        _window.MakeKeyAndVisible ();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
 
-        return true;
+            _window.MakeKeyAndVisible ();
+
+            return true;
+        }
     }
-}
 }
 ```
   
@@ -231,20 +231,20 @@ using MvvmCross.Droid.Views;
 
 namespace MyName.Droid
 {
-[Activity(
-     Label = "CustomBinding.Droid"
-             , MainLauncher = true
-     , Icon = "@drawable/icon"
-     , Theme = "@style/Theme.Splash"
-     , NoHistory = true
-     , ScreenOrientation = ScreenOrientation.Portrait)]
-public class SplashScreen : MvxSplashScreenActivity
-{
-    public SplashScreen()
-    : base(Resource.Layout.SplashScreen)
+    [Activity(
+         Label = "CustomBinding.Droid"
+                 , MainLauncher = true
+         , Icon = "@drawable/icon"
+         , Theme = "@style/Theme.Splash"
+         , NoHistory = true
+         , ScreenOrientation = ScreenOrientation.Portrait)]
+    public class SplashScreen : MvxSplashScreenActivity
     {
+        public SplashScreen()
+        : base(Resource.Layout.SplashScreen)
+        {
+        }
     }
-}
 }
 ```
     
@@ -255,53 +255,53 @@ Importantly, please note that this class is marked with `MainLauncher = true` to
 On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via Nuget a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
 
 ```c#
-   using System;
-   using System.Windows;
-   using MvvmCross.Core;
-   using MvvmCross.Core.ViewModels;
-  using MvvmCross.Wpf.Views;
+using System;
+using System.Windows;
+using MvvmCross.Core;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Wpf.Views;
 
-  namespace MyName.Wpf
-  {
-      public partial class App : Application
-      {
-          private bool _setupComplete;
+namespace MyName.Wpf
+{
+    public partial class App : Application
+    {
+        private bool _setupComplete;
 
-          private void DoSetup()
-          {
-              LoadMvxAssemblyResources();
-			
-              var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
+        private void DoSetup()
+        {
+            LoadMvxAssemblyResources();
 
-              var setup = new Setup(Dispatcher, presenter);
-              setup.Initialize();
+            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
 
-              var start = Mvx.Resolve<IMvxAppStart>();
-              start.Start();
+            var setup = new Setup(Dispatcher, presenter);
+            setup.Initialize();
 
-              _setupComplete = true;
-          }
+            var start = Mvx.Resolve<IMvxAppStart>();
+            start.Start();
 
-          protected override void OnActivated(EventArgs e)
-          {
-              if (!_setupComplete)
-                  DoSetup();
+            _setupComplete = true;
+        }
 
-              base.OnActivated(e);
-          }
-		
-          private void LoadMvxAssemblyResources()
-          {
-              for (var i = 0;; i++)
-              {
-                  string key = "MvxAssemblyImport" + i;
-                  var data = TryFindResource(key);
-                  if (data == null)
-                      return;
-              }
-          }
-      }
-  }
+        protected override void OnActivated(EventArgs e)
+        {
+            if (!_setupComplete)
+                DoSetup();
+
+            base.OnActivated(e);
+        }
+
+        private void LoadMvxAssemblyResources()
+        {
+            for (var i = 0;; i++)
+            {
+                string key = "MvxAssemblyImport" + i;
+                var data = TryFindResource(key);
+                if (data == null)
+                    return;
+            }
+        }
+    }
+}
 ```
 
 A default FirstView should also exist.
@@ -344,17 +344,17 @@ using MvvmCross.Core.ViewModels;
 
 namespace MyName.Droid
 {
-public class Setup : MvxAndroidSetup
-{
-    public Setup(Context applicationContext) : base(applicationContext)
+    public class Setup : MvxAndroidSetup
     {
-    }
+        public Setup(Context applicationContext) : base(applicationContext)
+        {
+        }
 
-    protected override IMvxApplication CreateApp()
-    {
-        return new Core.App();
+        protected override IMvxApplication CreateApp()
+        {
+            return new Core.App();
+        }
     }
-}
 }
 ```
 
@@ -366,18 +366,18 @@ using MvvmCross.iOS.Platform;
 
 namespace MyName.iOS
 {
-public class Setup : MvxiOSSetup
-{
-    public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
-    : base(applicationDelegate, window)
+    public class Setup : MvxiOSSetup
     {
-    }
+        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        : base(applicationDelegate, window)
+        {
+        }
 
-    protected override IMvxApplication CreateApp ()
-    {
-        return new Core.App();
+        protected override IMvxApplication CreateApp ()
+        {
+            return new Core.App();
+        }
     }
-}
 }
 ```
     
@@ -392,23 +392,23 @@ using MvvmCross.Wpf.Views;
 
 namespace MyName.Wpf
 {
-public class Setup : MvxWpfSetup
-{
-    public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
-    : base(dispatcher, presenter)
+    public class Setup : MvxWpfSetup
     {
-    }
+        public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
+        : base(dispatcher, presenter)
+        {
+        }
 
-    protected override IMvxApplication CreateApp()
-    {
-        return new Core.App();
-    }
+        protected override IMvxApplication CreateApp()
+        {
+            return new Core.App();
+        }
 
-    protected override IMvxTrace CreateDebugTrace()
-    {
-        return new DebugTrace();
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
+        }
     }
-}
 }
 ```
     
@@ -421,17 +421,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace MyName.Store
 {
-public class Setup : MvxWindowsSetup
-{
-    public Setup(Frame rootFrame) : base(rootFrame)
+    public class Setup : MvxWindowsSetup
     {
-    }
+        public Setup(Frame rootFrame) : base(rootFrame)
+        {
+        }
 
-    protected override IMvxApplication CreateApp()
-    {
-        return new Core.App();
+        protected override IMvxApplication CreateApp()
+        {
+            return new Core.App();
+        }
     }
-}
 }
 ```
 
