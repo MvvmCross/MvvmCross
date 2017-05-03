@@ -149,7 +149,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyApplicationActivity.cs.txt" />
     <None Include="packages.config" />
     <None Include="SplashScreen.cs.txt" />
     <None Include="TODO.txt" />
