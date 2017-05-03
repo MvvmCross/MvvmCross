@@ -6,21 +6,21 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.iOS;
-using IosMvxImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
+using MvxIosImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
 namespace Mvvmcross.Forms.iOS.Views.Renderers
 {
     class MvxImageViewRenderer : ImageRenderer
     {
-        private IosMvxImageView _NativeControl { get; set; }
-        private MvxImageView _SharedControl => Element as MvxImageView;
+        private MvxIosImageView _nativeControl;
+        private MvxImageView SharedControl => Element as MvxImageView;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _NativeControl != null)
+            if (disposing && _nativeControl != null)
             {
-                _NativeControl.Image = null; // Prevent the base renderer from disposing of this image, DownloadCache takes care of it
+                _nativeControl.Image = null; // Prevent the base renderer from disposing of this image, DownloadCache takes care of it
             }
 
             base.Dispose(disposing);
@@ -30,20 +30,20 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
         {
             if (args.OldElement != null)
             {
-                if (_NativeControl != null)
+                if (_nativeControl != null)
                 {
-                    _NativeControl.Dispose();
-                    _NativeControl = null;
+                    _nativeControl.Dispose();
+                    _nativeControl = null;
                 }
             }
 
             if (Control == null && args.NewElement != null)
             {
-                _NativeControl = new IosMvxImageView(OnSourceImageChanged);
-                _NativeControl.ContentMode = UIViewContentMode.ScaleAspectFit;
-                _NativeControl.ClipsToBounds = true;
+                _nativeControl = new MvxIosImageView(OnSourceImageChanged);
+                _nativeControl.ContentMode = UIViewContentMode.ScaleAspectFit;
+                _nativeControl.ClipsToBounds = true;
 
-                SetNativeControl(_NativeControl);
+                SetNativeControl(_nativeControl);
             }
 
             if (Element.Source != null)
@@ -53,28 +53,28 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
 
             base.OnElementChanged(args);
 
-            if (_NativeControl != null)
+            if (_nativeControl != null)
             {
-                if (_NativeControl.ErrorImagePath != _SharedControl.ErrorImagePath)
+                if (_nativeControl.ErrorImagePath != SharedControl.ErrorImagePath)
                 {
-                    _NativeControl.ErrorImagePath = _SharedControl.ErrorImagePath;
+                    _nativeControl.ErrorImagePath = SharedControl.ErrorImagePath;
                 }
 
-                if (_NativeControl.DefaultImagePath != _SharedControl.DefaultImagePath)
+                if (_nativeControl.DefaultImagePath != SharedControl.DefaultImagePath)
                 {
-                    _NativeControl.DefaultImagePath = _SharedControl.DefaultImagePath;
+                    _nativeControl.DefaultImagePath = SharedControl.DefaultImagePath;
                 }
 
-                if (_NativeControl.ImageUrl != _SharedControl.ImageUri)
+                if (_nativeControl.ImageUrl != SharedControl.ImageUri)
                 {
-                    _NativeControl.ImageUrl = _SharedControl.ImageUri;
+                    _nativeControl.ImageUrl = SharedControl.ImageUri;
                 }
             }
         }
 
         private void OnSourceImageChanged()
         {
-            (_SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
+            (SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -87,7 +87,7 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
             {
                 base.OnElementPropertyChanged(sender, args);
 
-                if (_NativeControl != null)
+                if (_nativeControl != null)
                 {
                     if (args.PropertyName == nameof(MvxImageView.Source))
                     {
@@ -95,15 +95,15 @@ namespace Mvvmcross.Forms.iOS.Views.Renderers
                     }
                     if (args.PropertyName == nameof(MvxImageView.DefaultImagePath))
                     {
-                        _NativeControl.DefaultImagePath = _SharedControl.DefaultImagePath;
+                        _nativeControl.DefaultImagePath = SharedControl.DefaultImagePath;
                     }
                     else if (args.PropertyName == nameof(MvxImageView.ErrorImagePath))
                     {
-                        _NativeControl.ErrorImagePath = _SharedControl.ErrorImagePath;
+                        _nativeControl.ErrorImagePath = SharedControl.ErrorImagePath;
                     }
                     else if (args.PropertyName == nameof(MvxImageView.ImageUri))
                     {
-                        _NativeControl.ImageUrl = _SharedControl.ImageUri;
+                        _nativeControl.ImageUrl = SharedControl.ImageUri;
                     }
                 }
             }

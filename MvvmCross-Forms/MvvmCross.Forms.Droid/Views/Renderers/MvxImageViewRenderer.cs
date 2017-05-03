@@ -6,31 +6,31 @@ using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
-using DroidMvxImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
+using MvxDroidImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
 namespace Mvvmcross.Forms.Droid.Views
 {
     class MvxImageViewRenderer : ImageRenderer
     {
-        private DroidMvxImageView _NativeControl { get; set; }
-        private MvxImageView _SharedControl => Element as MvxImageView;
+        private MvxDroidImageView _nativeControl;
+        private MvxImageView SharedControl => Element as MvxImageView;
 
         protected override ImageView CreateNativeControl()
         {
-            _NativeControl = new DroidMvxImageView(Context, OnSourceImageChanged);
+            _nativeControl = new MvxDroidImageView(Context, OnSourceImageChanged);
 
-            return _NativeControl;
+            return _nativeControl;
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Image> args)
         {
             if (args.OldElement != null)
             {
-                if (_NativeControl != null)
+                if (_nativeControl != null)
                 {
-                    _NativeControl.Dispose();
-                    _NativeControl = null;
+                    _nativeControl.Dispose();
+                    _nativeControl = null;
                 }
             }
             
@@ -41,21 +41,21 @@ namespace Mvvmcross.Forms.Droid.Views
 
             base.OnElementChanged(args);
 
-            if (_NativeControl != null)
+            if (_nativeControl != null)
             {
-                if (_NativeControl.ErrorImagePath != _SharedControl.ErrorImagePath)
+                if (_nativeControl.ErrorImagePath != SharedControl.ErrorImagePath)
                 {
-                    _NativeControl.ErrorImagePath = _SharedControl.ErrorImagePath;
+                    _nativeControl.ErrorImagePath = SharedControl.ErrorImagePath;
                 }
 
-                if (_NativeControl.DefaultImagePath != _SharedControl.DefaultImagePath)
+                if (_nativeControl.DefaultImagePath != SharedControl.DefaultImagePath)
                 {
-                    _NativeControl.DefaultImagePath = _SharedControl.DefaultImagePath;
+                    _nativeControl.DefaultImagePath = SharedControl.DefaultImagePath;
                 }
 
-                if (_NativeControl.ImageUrl != _SharedControl.ImageUri)
+                if (_nativeControl.ImageUrl != SharedControl.ImageUri)
                 {
-                    _NativeControl.ImageUrl = _SharedControl.ImageUri;
+                    _nativeControl.ImageUrl = SharedControl.ImageUri;
                 }
             }
         }
@@ -70,19 +70,19 @@ namespace Mvvmcross.Forms.Droid.Views
             {
                 base.OnElementPropertyChanged(sender, args);
 
-                if (_NativeControl != null)
+                if (_nativeControl != null)
                 {
                     if (args.PropertyName == nameof(MvxImageView.DefaultImagePath))
                     {
-                        _NativeControl.DefaultImagePath = _SharedControl.DefaultImagePath;
+                        _nativeControl.DefaultImagePath = SharedControl.DefaultImagePath;
                     }
                     else if (args.PropertyName == nameof(MvxImageView.ErrorImagePath))
                     {
-                        _NativeControl.ErrorImagePath = _SharedControl.ErrorImagePath;
+                        _nativeControl.ErrorImagePath = SharedControl.ErrorImagePath;
                     }
                     else if (args.PropertyName == nameof(MvxImageView.ImageUri))
                     {
-                        _NativeControl.ImageUrl = _SharedControl.ImageUri;
+                        _nativeControl.ImageUrl = SharedControl.ImageUri;
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace Mvvmcross.Forms.Droid.Views
 
         private void OnSourceImageChanged()
         {
-            (_SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
+            (SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }
     }
 }

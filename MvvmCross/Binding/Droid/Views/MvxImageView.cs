@@ -90,18 +90,18 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, Action afterImageChangeAction = null)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, Action imageChanged = null)
             : base(context, attrs, defStyleAttr)
         {
-            Init(context, attrs, afterImageChangeAction);
+            Init(context, attrs, imageChanged);
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, Action afterImageChangeAction = null)
-            : this(context, attrs, 0, afterImageChangeAction)
+        public MvxImageView(Context context, IAttributeSet attrs, Action imageChanged = null)
+            : this(context, attrs, 0, imageChanged)
         { }
 
-        public MvxImageView(Context context, Action afterImageChangeAction = null)
-            : this(context, null, afterImageChangeAction)
+        public MvxImageView(Context context, Action imageChanged = null)
+            : this(context, null, imageChanged)
         { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -131,7 +131,7 @@ namespace MvvmCross.Binding.Droid.Views
                 });
         }
 
-        private void Init(Context context, IAttributeSet attrs, Action afterImageChangeAction)
+        private void Init(Context context, IAttributeSet attrs, Action imageChanged)
         {
             var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
@@ -146,7 +146,7 @@ namespace MvvmCross.Binding.Droid.Views
             }
             typedArray.Recycle();
 
-            _imageChangedCallback = afterImageChangeAction;
+            _imageChangedCallback = imageChanged;
         }
 
         public override void SetImageBitmap (Bitmap bm)
