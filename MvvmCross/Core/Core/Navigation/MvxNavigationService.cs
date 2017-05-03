@@ -36,9 +36,9 @@ namespace MvvmCross.Core.Navigation
         }
 
         public event BeforeNavigateEventHandler BeforeNavigate;
-        public event BeforeNavigateEventHandler AfterNavigate;
-        public event BeforeNavigateEventHandler BeforeClose;
-        public event BeforeNavigateEventHandler AfterClose;
+        public event AfterNavigateEventHandler AfterNavigate;
+        public event BeforeCloseEventHandler BeforeClose;
+        public event AfterCloseEventHandler AfterClose;
 
         public MvxNavigationService(IMvxViewDispatcher viewDispatcher)
         {
