@@ -20,7 +20,7 @@ public interface IMvxAccelerometer
 }
 ```
 
-This plugin is available on all of Android, iOS, WindowsPhone, WindowsStore and Wpf.
+This plugin is available on all of Android, iOS, Windows Uwp and Wpf.
 
 The Wpf implementation is an empty implementation - so it's not really supported there.
 

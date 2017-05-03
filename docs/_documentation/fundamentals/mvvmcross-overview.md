@@ -80,11 +80,11 @@ The specific jobs that your `App` should do during its `Initialize` are:
 A default `App` supplied via nuget, looks like:
 
 ```c#
-using Cirrious.CrossCore.IoC;
+using MvvmCross.Platform.Ioc;
 
 namespace MyName.Core
 {
-public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+public class App : MvvmCross.Core.ViewModels.MvxApplication
 {
     public override void Initialize()
     {
@@ -191,9 +191,9 @@ An initial replacement looks like:
 ```c#
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Touch.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Core.ViewModels;
 
 namespace MyName.Touch
 {
@@ -227,7 +227,7 @@ On Android, we don't normally have any `Application` to override. Instead of thi
 ```c#
 using Android.App;
 using Android.Content.PM;
-using Cirrious.MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views;
 
 namespace MyName.Droid
 {
@@ -274,7 +274,7 @@ private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args
     args.Cancel = true;
     RootFrame.Navigating -= RootFrameOnNavigating;
     RootFrame.Dispatcher.BeginInvoke(() => {
-        Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start();
+        Mvx.Resolve<IMvxAppStart>().Start();
     });
 }
 ```
@@ -283,11 +283,12 @@ private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args
 
 On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via Nuget a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
 
+```c#
    using System;
    using System.Windows;
-   using Cirrious.CrossCore;
-   using Cirrious.MvvmCross.ViewModels;
-  `using Cirrious.MvvmCross.Wpf.Views;`
+   using MvvmCross.Core;
+   using MvvmCross.Core.ViewModels;
+  using MvvmCross.Wpf.Views;
 
   namespace MyName.Wpf
   {
@@ -330,12 +331,13 @@ On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the Mvv
           }
       }
   }
+```
 
 A default FirstView should also exist.
 
-#### WindowsStore
+#### Uwp
 
-On WindowsStore, a new project will again contain a native `App.xaml.cs`
+On Uwp, a new project will again contain a native `App.xaml.cs`
 
 To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace the `if (rootFrame.Content == null)` block with:
 
@@ -343,7 +345,7 @@ To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace 
 var setup = new Setup(rootFrame);
 setup.Initialize();
 
-var start = Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>();
+var start = Mvx.Resolve<IMvxAppStart>();
 start.Start();
 ```
 
@@ -366,8 +368,8 @@ Beyond this, a larger list of Setup customisation options is discussed in https:
 
 ```c#
 using Android.Content;
-using Cirrious.MvvmCross.Droid.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Core.ViewModels;
 
 namespace MyName.Droid
 {
@@ -389,9 +391,9 @@ public class Setup : MvxAndroidSetup
 
 ```c#
 using MonoTouch.UIKit;
-using Cirrious.MvvmCross.Touch.Platform;
+using MvvmCross.iOS.Platform;
 
-namespace MyName.Touch
+namespace MyName.iOS
 {
 public class Setup : MvxTouchSetup
 {
@@ -400,30 +402,7 @@ public class Setup : MvxTouchSetup
     {
     }
 
-    protected override Cirrious.MvvmCross.ViewModels.IMvxApplication CreateApp ()
-    {
-        return new Core.App();
-    }
-}
-}
-```
-
-#### Minimal Setup - WindowsPhone
-
-```c#
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsPhone.Platform;
-using Microsoft.Phone.Controls;
-
-namespace MyName.Phone
-{
-public class Setup : MvxPhoneSetup
-{
-    public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
-    {
-    }
-
-    protected override IMvxApplication CreateApp()
+    protected override IMvxApplication CreateApp ()
     {
         return new Core.App();
     }
@@ -435,10 +414,10 @@ public class Setup : MvxPhoneSetup
 
 ```c#
 using System.Windows.Threading;
-using Cirrious.MvvmCross.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Wpf.Platform;
-using Cirrious.MvvmCross.Wpf.Views;
+using MvvmCross.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Wpf.Platform;
+using MvvmCross.Wpf.Views;
 
 namespace MyName.Wpf
 {
@@ -462,16 +441,16 @@ public class Setup : MvxWpfSetup
 }
 ```
     
-#### Setup - WindowsStore
+#### Setup - Uwp
 
 ```c#
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsStore.Platform;
+using MvvmCross.ViewModels;
+using MvvmCross.Uwp.Platform;
 using Windows.UI.Xaml.Controls;
 
 namespace MyName.Store
 {
-public class Setup : MvxStoreSetup
+public class Setup : MvxWindowsSetup
 {
     public Setup(Frame rootFrame) : base(rootFrame)
     {
@@ -493,7 +472,7 @@ Each View is normally databound to a single ViewModel for its entire lifetime.
 
 On each platform, Views in the Mvvm sense are typically implemented using data-bound versions of:
 
-- On Windows platforms a `UserControl` - for WindowsStore and WindowsPhone, this is very often specialised into a `Page`
+- On Windows platforms a `UserControl` - for Uwp is very often specialised into a `Page`
 - On Android, an `Activity` or `Fragment`
 - On iOS, a `UIViewController`
 
