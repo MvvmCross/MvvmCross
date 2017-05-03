@@ -118,7 +118,7 @@ The `object parameter` parameter is a general purpose field which you can use in
   
   Both of these would result in the Power ValueConverter being passed a parameter value of `long` 2.
   
-- you might choose to use a binding in Touch like:
+- you might choose to use a binding in iOS like:
 
         set.Bind(label).For(l => l.Text).To(vm => vm.FullName).WithConversion("AbbreviateIfLongerThan", 12L);
        
@@ -131,7 +131,7 @@ The `object parameter` parameter is a general purpose field which you can use in
 Note that the only types that are used when parameters are parsed from text binding descriptions are: `long`, `double`, `bool` or `string` (for more on the binding parsing engine, see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding))
     
 
-### Referencing Value Converters in Touch and Droid
+### Referencing Value Converters in iOS and Droid
 
 Data-Binding syntax including how to specify ValueConverters using Swiss, Fluent and Tibet binding is discussed in [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding). This covers all syntax including:
 
@@ -200,7 +200,7 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against indidivual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatability.
 
 
-### Preventing the ValueConverter Reflection Sweeps in Touch and Droid
+### Preventing the ValueConverter Reflection Sweeps in iOS and Droid
 
 The ValueConverter sweeps do use a small amount of Reflection and so can add a very small amount of lag to application start time. If you'd prefer to minimise this small startup lag in your application, then you can, of course, disable the sweeps and can use direct registration instead.
 
@@ -264,7 +264,7 @@ public class TheNativeTruthValueConverter
 
 In addition to 'traditional' Xaml bindings, MvvmCross also allows 'Tibet' binding within Windows - for more on this see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding).
 
-When Tibet binding is used, then Value Converters can be accessed by name - exactly as in Droid and Touch binding - without the above native Xaml wrapping.
+When Tibet binding is used, then Value Converters can be accessed by name - exactly as in Droid and iOS binding - without the above native Xaml wrapping.
 
 Further, if using 'Tibet' binding then an entire assembly's worth of value converters can be registered using the Reflection sweep technique and this can be specified at the Xaml level - meaning it can be used in both design and run-time.
 
@@ -319,7 +319,7 @@ To use these converters on each platform, use:
   
         local:MvxBind="Visibility Visibility(VMProperty)"
         
-- Touch:
+- iOS:
 
         set.Bind(field)
            .For("Visibility")
@@ -371,7 +371,7 @@ On each platform, the native color format output from these converters is:
 
 - Windows - a `SolidColorBrush` for the appropriate Windows flavor
 - Droid - an `Android.Graphics.Color`
-- Touch - an `MonoTouch.UIKit.UIColor`
+- iOS - an `UIKit.UIColor`
 
 On Droid, the Color plugin also includes a couple of custom bindings to assist with binding. These are:
 
@@ -384,7 +384,7 @@ To use Color on each platform - for example, with a ViewModel property `public M
   
         local:MvxBind="BackgroundColor NativeColor(CurrentColor)"
         
-- Touch:
+- iOS:
 
         set.Bind(field)
            .For(field => field.BackgroundColor)
