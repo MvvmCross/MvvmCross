@@ -828,9 +828,9 @@ In particular two `AttachedProperties` is supplied in the BindingEx package:
 - `mvx:Bi.nd` - for bindings
 - `mvx:La.ng` - for internationalisation extensions
 
-To add these properties to your Windows Phone, Store or WPF MvvmCross app:
+To add these properties to your Windows Uwp or WPF MvvmCross app:
 
-- include the BindingEx package
+- include the MvvmCross.Binding package
 - include an additional step in Setup which initialises the WindowsBinding framework
 
         protected override void InitializeLastChance()
@@ -843,17 +843,13 @@ To add these properties to your Windows Phone, Store or WPF MvvmCross app:
 
 - in your Xaml files include an xml attribute for `mvx` - this will be different according to the platform:
 
- - phone
- 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.WindowsPhone"
- 
- - store
+ - Uwp
  
        xmlns:mvx="using:mvx"
         
  - WPF
 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.Wpf"
+       xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:

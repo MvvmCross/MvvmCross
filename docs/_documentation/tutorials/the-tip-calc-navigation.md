@@ -55,7 +55,7 @@ To add a splashscreen:
 
 ```c#
 using Android.App;
-using Cirrious.MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views;
 
 namespace CalcApp.UI.Droid
 {
@@ -141,8 +141,8 @@ To see an example of this, let's set up a simple Android application.
 ```c#
 using System;
 using System.Windows.Input;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.ViewModels;
 
 namespace MyApp.Core
 {
@@ -303,6 +303,6 @@ public void Init(int index)
 
 **Note** that in order to use this technique on Windows platforms, you will need to add a `InternalsVisibleTo` line within the `AssemblyInfo.cs` file for the Core project.
 
-    `[assembly: InternalsVisibleTo("Cirrious.MvvmCross")]`
+    `[assembly: InternalsVisibleTo("MvvmCross")]`
 
-This is because anonymous classes within C# are `internal` by default - so Cirrious.MvvmCross can only use reflection on them if `InternalsVisibleTo` is specified.
+This is because anonymous classes within C# are `internal` by default - so MvvmCross can only use reflection on them if `InternalsVisibleTo` is specified.
