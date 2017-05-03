@@ -26,7 +26,7 @@ For a basic .Net 4.5 test setup for, for example, a ViewModel, you can:
 
 ## Test class declaration and setup
 
-Your test classes should inherit from [`MvxIoCSupportingTest`](https://github.com/slodge/MvvmCross/blob/v3/Cirrious/Test/Cirrious.MvvmCross.Test.Core/MvxIoCSupportingTest.cs)
+Your test classes should inherit from `MvxIoCSupportingTest`
 
 Each test method should then call the `Setup` method:
 

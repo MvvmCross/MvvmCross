@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxViewModel
         : MvxNavigatingObject
           , IMvxViewModel
@@ -87,6 +86,6 @@ namespace MvvmCross.Core.ViewModels
             await Init(deserialized);
         }
 
-        protected abstract Task Init(TInit parameter);
+        public abstract Task Init(TInit parameter);
     }
 }

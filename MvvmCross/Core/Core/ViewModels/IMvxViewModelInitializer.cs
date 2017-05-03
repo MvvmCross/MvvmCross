@@ -11,6 +11,6 @@ namespace MvvmCross.Core.ViewModels
 
     public interface IMvxViewModelInitializer<TInit> : IMvxViewModel
     {
-        Task Init(string parameter);
+        Task Init(TInit parameter);
     }
 }
