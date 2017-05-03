@@ -26,7 +26,7 @@ namespace MasterDetailExample.Droid
             if (!isInitializationComplete)
             {
                 isInitializationComplete = true;
-                StartActivity(typeof(MvxFormsApplicationActivity));
+                StartActivity(typeof(MasterDetailApplicationActivity));
             }
         }
 

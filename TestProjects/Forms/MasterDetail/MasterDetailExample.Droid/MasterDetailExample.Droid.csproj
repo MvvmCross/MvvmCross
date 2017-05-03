@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Linker.cs" />
-    <Compile Include="MvxFormsApplicationActivity.cs" />
+    <Compile Include="MasterDetailApplicationActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />

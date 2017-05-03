@@ -1,19 +1,19 @@
-using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms;
+﻿
+using Android.App;
 using Android.OS;
+using Android.Content.PM;
+using Xamarin.Forms;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Core.ViewModels;
-using Android.App;
-using Android.Content.PM;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
 
-namespace MasterDetailExample.Droid
+namespace Example.Droid
 {
-    [Activity(Label = "MvxFormsApplicationActivity", Icon="@android:color/transparent")]
-    public class MvxFormsApplicationActivity : FormsApplicationActivity
+    [Activity(Label = "ExampleApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
+    public class ExampleApplicationActivity : MvxFormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -23,10 +23,11 @@ namespace MasterDetailExample.Droid
             var mvxFormsApp = new MvxFormsApp();
             LoadApplication(mvxFormsApp);
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidMasterDetailPagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidPagePresenter;
             presenter.MvxFormsApp = mvxFormsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();
         }
     }
 }
+
