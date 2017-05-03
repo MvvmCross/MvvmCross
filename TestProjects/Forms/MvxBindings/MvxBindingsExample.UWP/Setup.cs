@@ -4,16 +4,13 @@ using Xamarin.Forms;
 using XamlControls = Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
 using ExampleApp = MvxBindingsExample.App;
 
 namespace MvxBindingsExample.UWP
@@ -30,6 +27,11 @@ namespace MvxBindingsExample.UWP
         protected override IMvxApplication CreateApp()
         {
             return new ExampleApp();
+        }
+
+        protected override IMvxTrace CreateDebugTrace()
+        {
+            return new DebugTrace();
         }
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)

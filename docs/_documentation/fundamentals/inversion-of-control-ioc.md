@@ -2,7 +2,7 @@
 layout: documentation
 title: Inversion of Control
 category: Fundamentals
-order: 7
+order: 8
 ---
 Two key ideas that are used in MvvmCross are:
 
@@ -48,10 +48,10 @@ If you did this, then any code can call:
 
 and every single call would return **the same instance** of Foo
 
-An alternative syntax for singleton registration - especially useful when the registered type requires constructor dependency injection - is: 
+An alternative syntax for singleton registration - especially useful when the registered type requires constructor dependency injection - is:
 
         // every time someone needs an IFoo they will get the same one
-        Mvx.ConstructAndRegisterSingleton<IFoo, Foo>(); 
+        Mvx.ConstructAndRegisterSingleton<IFoo, Foo>();
 
 ### Lazy Singleton Registration
 
@@ -67,10 +67,10 @@ In this case:
 - the first time any code calls `Mvx.Resolve<IFoo>()` then a new `Foo` will be created and returned
 - all subsequent calls will get the same instance that was created the first time
 
-An alternative syntax for lazy singleton registration - especially useful when the registered type requires constructor dependency injection - is: 
+An alternative syntax for lazy singleton registration - especially useful when the registered type requires constructor dependency injection - is:
 
         // every time someone needs an IFoo they will get the same one
-        Mvx.LazyConstructAndRegisterSingleton<IFoo, Foo>(); 
+        Mvx.LazyConstructAndRegisterSingleton<IFoo, Foo>();
 
 
 ### 'Dynamic' Registration
@@ -172,11 +172,11 @@ For example, if we add a class like:
             }
         }
 
-Then you can create this object using: 
+Then you can create this object using:
 
         Mvx.IocConstruct<Bar>();
 
-What happens during this call is: 
+What happens during this call is:
 
 - MvvmCross:
   - uses Reflection to find the constructor of `Bar`
@@ -186,7 +186,7 @@ What happens during this call is:
 
 ### Constructor Injection and ViewModels
 
-This "Constructor Injection" mechanism is used internally within MvvmCross when creating ViewModels. 
+This "Constructor Injection" mechanism is used internally within MvvmCross when creating ViewModels.
 
 If you declare a ViewModel like:
 
@@ -202,7 +202,7 @@ then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConve
 
 **This is important** because:
 
-1. It allows you to easily provide different `locationWatcher` classes on different platforms (on iPhone you can use a watcher that talk to `CoreLocation`, on WindowsPhone you can use a watcher that talks to `System.Device.Location`
+1. It allows you to easily provide different `locationWatcher` classes on different platforms (on iPhone you can use a watcher that talk to `CoreLocation`
 2. It allows you to easily provide mock implementations in your unit tests
 3. It allows you to override default implementations - if you don't like the `Json.Net` implementation for Json, you can use a `ServiceStack.Text` implementation instead.
 
@@ -311,7 +311,7 @@ If you want to see how these plugins can be used in your applications, then:
   - N=9 - Messenger http://slodge.blogspot.co.uk/2013/05/n9-getting-message-n1-days-of-mvvmcross.html
   - N=10 - SQLite http://slodge.blogspot.co.uk/2013/05/n10-sqlite-persistent-data-storage-n1.html
   - N=12 -> N=17 - the Collect-A-Bull app http://slodge.blogspot.co.uk/2013/05/n12-collect-bull-full-app-part-1-n1.html
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article 
+- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
 
 ####Plugin Authoring
 
@@ -326,19 +326,19 @@ The key steps are:
 
 2. Optionally create platform specific assemblies which:
    - is named the same as the main assembly but with a platform specific extension (.Droid, .WindowsPhone, etc(
-   - contains 
+   - contains
        - any platform specific interface implementations
        - a special `Plugin` class which MvvmCross will use to start this platform-specific extension
 
 3. Optionally provide extras like documentation and nuget packaging which will make the plugin easier to reuse.
 
-I'm not going to go into any more detail on writing plugins here. 
+I'm not going to go into any more detail on writing plugins here.
 
 If you'd like to see more about writing your own plugin, then:
 
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article 
+- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
 - there's a presentation on this at https://speakerdeck.com/cirrious/plugins-in-mvvmcross
-- there's a sample which creates a `Vibrate` plugin at https://github.com/slodge/MvvmCross-Tutorials/tree/master/GoodVibrations 
+- there's a sample which creates a `Vibrate` plugin at https://github.com/slodge/MvvmCross-Tutorials/tree/master/GoodVibrations
 
 
 ## What if...
@@ -391,10 +391,10 @@ If you override options as:
 
       protected override IMvxIoCOptions CreateIocOptions()
       {
-          return new MvxIocOptions() 
+          return new MvxIocOptions()
           {
                     PropertyInjectorOptions = MvxPropertyInjectorOptions.MvxInject
-          }; 
+          };
       }
 
 then this will enable injection into `public` writeable properties which are declared as interfaces and which have an `MvxInject` attribute - e.g. `Foo` below:
@@ -411,10 +411,10 @@ If you override options as:
 
       protected override IMvxIoCOptions CreateIocOptions()
       {
-          return new MvxIocOptions() 
+          return new MvxIocOptions()
           {
                     PropertyInjectorOptions = MvxPropertyInjectorOptions.All
-          }; 
+          };
       }
 
 then this will enable injection into `public` writeable properties which are declared as interfaces - e.g. `Bar` below:
@@ -432,7 +432,7 @@ To do this, you can use:
 
      var injector = new MvxPropertyInjector()
 
-or 
+or
 
      var injector = Mvx.Resolve<IMvxPropertyInjector>();
 
@@ -448,19 +448,19 @@ or:
 
 ### What happens if... A needs a B which needs an A which ... ?
 
-Circular references are a tricky problem in object construction - regardless of whether or not you use dependency injection. 
+Circular references are a tricky problem in object construction - regardless of whether or not you use dependency injection.
 
 For example:
 
         public interface IA { }
         public interface IB { }
         public class A : IA
-        { 
-           public A(IB b) { } 
+        {
+           public A(IB b) { }
         }
         public class B : IB
         {
-           public B(IA a) { } 
+           public B(IA a) { }
         }
 
 At runtime, by default MvvmCross's Ioc will throw an `MvxIoCResolveException` from `Resolve` or return `false` from `TryResolve` if it detects recursion has occurred.
@@ -487,9 +487,9 @@ If you need more advanced/complex functionality, then you may need to use a diff
 
 ### What if... I want to mix Dynamic and Singleton types
 
-If you use constructor injection, then for each dependency you can only ever receive a single instance. In some cases this may not be what you want. 
+If you use constructor injection, then for each dependency you can only ever receive a single instance. In some cases this may not be what you want.
 
-Take the following code: 
+Take the following code:
 
 ```c#
 // Registered with Mvx.RegisterType<IBar, Bar>();
@@ -566,4 +566,3 @@ Understanding object lifecycles in this type of situation - where some objects a
   [1]: http://www.martinfowler.com/articles/injection.html
   [2]: http://joelabrahamsson.com/inversion-of-control-an-introduction-with-examples-in-net/
   [3]: https://github.com/slodge/MvvmCross-Presentations/blob/master/MvxDay/InterfaceDrivenDevelopment.pptx
-

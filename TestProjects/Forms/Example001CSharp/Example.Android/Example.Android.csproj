@@ -33,7 +33,16 @@
     <ConsolePause>false</ConsolePause>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-    <Debugger>Xamarin</Debugger>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidHttpClientHandlerType>System.Net.Http.HttpClientHandler</AndroidHttpClientHandlerType>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -115,13 +124,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
-    <Compile Include="MvxFormsApplicationActivity.cs" />
+    <Compile Include="ExampleApplicationActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -138,9 +149,29 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\DownloadCache\MvvmCross.Plugins.DownloadCache.Droid\MvvmCross.Plugins.DownloadCache.Droid.csproj">
+      <Project>{81a58551-7d1c-4687-a5a5-c73eb5f15563}</Project>
+      <Name>MvvmCross.Plugins.DownloadCache.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\DownloadCache\MvvmCross.Plugins.DownloadCache\MvvmCross.Plugins.DownloadCache.csproj">
+      <Project>{60a80eb8-2056-4771-8600-03a8da417cfb}</Project>
+      <Name>MvvmCross.Plugins.DownloadCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\File\MvvmCross.Plugins.File.Droid\MvvmCross.Plugins.File.Droid.csproj">
+      <Project>{ee2d94c9-032e-4ebe-b3d5-6a585d03f188}</Project>
+      <Name>MvvmCross.Plugins.File.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\File\MvvmCross.Plugins.File\MvvmCross.Plugins.File.csproj">
+      <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
+      <Name>MvvmCross.Plugins.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
       <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
       <Name>MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
@@ -172,6 +203,12 @@
     <AndroidResource Include="Resources\layout\FirstView.axml" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\fallback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bindings\La.n.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\IMvxContentPage.cs" />
     <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
+    <Compile Include="Views\MvxImageView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

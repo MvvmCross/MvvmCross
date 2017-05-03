@@ -113,10 +113,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
-      <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
-      <Name>MvvmCross.Binding.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
@@ -155,7 +151,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="MvxFormsApplicationActivity.cs" />
+    <Compile Include="PageRendererApplicationActivity.cs" />
     <Compile Include="AutoFitTextureView.cs" />
     <Compile Include="CameraRendererPage.cs" />
   </ItemGroup>

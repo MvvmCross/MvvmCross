@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Linker.cs" />
-    <Compile Include="MvxFormsApplicationActivity.cs" />
+    <Compile Include="MasterDetailApplicationActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
@@ -159,10 +159,6 @@
     <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Droid\MvvmCross.Forms.Droid.csproj">
       <Project>{f823ee03-ac94-4124-ab5b-91b69fe7b85a}</Project>
       <Name>MvvmCross.Forms.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
-      <Project>{47fd89c3-19dc-4bd2-9b6d-fb8363be7eb9}</Project>
-      <Name>MvvmCross.Binding.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>

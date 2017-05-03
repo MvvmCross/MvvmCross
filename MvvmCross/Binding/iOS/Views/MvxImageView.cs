@@ -1,4 +1,4 @@
-// MvxImageView.cs
+﻿// MvxImageView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -39,9 +39,9 @@ namespace MvvmCross.Binding.iOS.Views
             set { this._imageHelper.ErrorImagePath = value; }
         }
 
-        public MvxImageView(Action afterImageChangeAction = null)
+        public MvxImageView(Action imageChanged = null)
         {
-            this.InitializeImageHelper(afterImageChangeAction);
+            this.InitializeImageHelper(imageChanged);
         }
 
         public MvxImageView(IntPtr handle)
@@ -50,15 +50,15 @@ namespace MvvmCross.Binding.iOS.Views
             this.InitializeImageHelper();
         }
 
-        public MvxImageView(CGRect frame, Action afterImageChangeAction = null)
+        public MvxImageView(CGRect frame, Action imageChanged = null)
             : base(frame)
         {
-            this.InitializeImageHelper(afterImageChangeAction);
+            this.InitializeImageHelper(imageChanged);
         }
 
-        private void InitializeImageHelper(Action afterImageChangeAction = null)
+        private void InitializeImageHelper(Action imageChanged = null)
         {
-            this._imageHelper = new MvxImageViewLoader(() => this, afterImageChangeAction);
+            this._imageHelper = new MvxImageViewLoader(() => this, imageChanged);
         }
 
         protected override void Dispose(bool disposing)
