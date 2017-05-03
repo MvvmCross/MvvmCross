@@ -202,7 +202,7 @@ then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConve
 
 **This is important** because:
 
-1. It allows you to easily provide different `locationWatcher` classes on different platforms (on iPhone you can use a watcher that talk to `CoreLocation`, on WindowsPhone you can use a watcher that talks to `System.Device.Location`
+1. It allows you to easily provide different `locationWatcher` classes on different platforms (on iPhone you can use a watcher that talk to `CoreLocation`
 2. It allows you to easily provide mock implementations in your unit tests
 3. It allows you to override default implementations - if you don't like the `Json.Net` implementation for Json, you can use a `ServiceStack.Text` implementation instead.
 
