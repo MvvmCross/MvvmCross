@@ -8,7 +8,7 @@ MvvmCross uses `ViewModel first navigation`. Meaning the we navigate from ViewMo
 
 # MvvmCross 5.x and higher navigation
 
-MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and give you the ability to implement your own version of the Navigation! Other main features are that it is fully async and type save.
+MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation! Other main features are that it is fully async and type safe.
 For more details see [#1634](https://github.com/MvvmCross/MvvmCross/issues/1634)
 
 The following Api is available to use:
@@ -16,27 +16,27 @@ The following Api is available to use:
 ```c#
 public interface IMvxNavigationService
 {
-	Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
-	Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
-	Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
-	Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
-	Task Navigate(string path);
-	Task Navigate<TParameter>(string path, TParameter param);
-	Task<TResult> Navigate<TResult>(string path);
-	Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
-	Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
-	Task<bool> CanNavigate(string path);
-	Task<bool> Close(IMvxViewModel viewModel);
+    Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+    Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
+    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
+    Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
+    Task Navigate(string path);
+    Task Navigate<TParameter>(string path, TParameter param);
+    Task<TResult> Navigate<TResult>(string path);
+    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
+    Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+    Task<bool> CanNavigate(string path);
+    Task<bool> Close(IMvxViewModel viewModel);
 }
 
 public static class MvxNavigationExtensions
 {
-	public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
-	public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
-	public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-	public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
-	public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-	Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
+    public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
+    public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
+    public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
+    public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
+    public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
+    Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
 }
 ```
 
@@ -47,24 +47,24 @@ In your ViewModel this could look like:
 ```c#
 public class MyViewModel : MvxViewModel
 {
-	private readonly IMvxNavigationService _navigationService;
-	public MyViewModel(IMvxNavigationService navigation)
-	{
-		_navigationService = navigationService;
-	}
-	
-	public async Task SomeMethod()
-	{
-		_navigationService.Navigate<NextViewModel, MyObject>(new MyObject());
-	}
+    private readonly IMvxNavigationService _navigationService;
+    public MyViewModel(IMvxNavigationService navigation)
+    {
+        _navigationService = navigationService;
+    }
+
+    public async Task SomeMethod()
+    {
+        _navigationService.Navigate<NextViewModel, MyObject>(new MyObject());
+    }
 }
 
 public class NextViewModel : MvxViewModel<MyObject>
 {
-	public async Task Init(MyObject parameter)
-	{
-		//Do something with parameter
-	}
+    public async Task Init(MyObject parameter)
+    {
+        //Do something with parameter
+    }
 }
 ```
 
@@ -73,31 +73,31 @@ When you want to return a result to the place where you navigated from you can d
 ```c#
 public class MyViewModel : MvxViewModel
 {
-	private readonly IMvxNavigationService _navigationService;
-	public MyViewModel(IMvxNavigationService navigation)
-	{
-		_navigationService = navigationService;
-	}
-	
-	public async Task SomeMethod()
-	{
-		var result = await _navigationService.Navigate<NextViewModel, MyObject, MyReturnObject>(new MyObject());
-		//Do something with the result MyReturnObject that you get back
-	}
+    private readonly IMvxNavigationService _navigationService;
+    public MyViewModel(IMvxNavigationService navigation)
+    {
+        _navigationService = navigationService;
+    }
+
+    public async Task SomeMethod()
+    {
+        var result = await _navigationService.Navigate<NextViewModel, MyObject, MyReturnObject>(new MyObject());
+        //Do something with the result MyReturnObject that you get back
+    }
 }
 
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
-	public async Task Init(MyObject parameter)
-	{
-		//Do something with parameter
-	}
-	
-	public async Task<MyReturnObject> Close()
-	{
-		await SomeMethod();
-		return new MyReturnObject();
-	}
+    public async Task Init(MyObject parameter)
+    {
+        //Do something with parameter
+    }
+
+    public async Task<MyReturnObject> Close()
+    {
+        await SomeMethod();
+        return new MyReturnObject();
+    }
 }
 ```
 
@@ -106,7 +106,7 @@ To check if you are able to navigate to a certain ViewModel you can use the `Can
 ```c#
 if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 {
-	//Do something
+    //Do something
 }
 ```
 
@@ -114,7 +114,7 @@ If you want to intercept ViewModel navigation changes you can hook into the even
 
 ```c#
 Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) => {
-	//Do something with e.ViewModelType or e.Url
+    //Do something with e.ViewModelType or e.Url
 };
 ```
 
