@@ -366,7 +366,7 @@ using MvvmCross.iOS.Platform;
 
 namespace MyName.iOS
 {
-    public class Setup : MvxiOSSetup
+    public class Setup : MvxIosSetup
     {
         public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
         : base(applicationDelegate, window)
