@@ -42,12 +42,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (currentLayoutManager == null)
                 SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
-            if (currentLayoutManager is LinearLayoutManager)
-            {
-                var currentLinearLayoutManager = currentLayoutManager as LinearLayoutManager;
-                SetLayoutManager(new MvxGuardedLinearLayoutManager(context) { Orientation = currentLinearLayoutManager.Orientation });
-            }
-
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
 

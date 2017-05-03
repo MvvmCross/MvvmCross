@@ -16,7 +16,7 @@ public interface IMvxPictureChooserTask
 }
 ```
 
-This is available on Android, iOS, WindowsPhone and WindowsStore. 
+This is available on Android, iOS and Windows Uwp. 
 
 This interface is designed for single use only - i.e. each time you require a picture you should request a new `IMvxPictureChooserTask` instance.
 

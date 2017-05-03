@@ -27,7 +27,7 @@ public interface IMvxFileStore
 }
 ```
 
-This plugin is implemented on all platforms - except WindowsStore where the `Folder` APIs are currently unimplemented.
+This plugin is implemented on all platforms - except Windows Uwp where the `Folder` APIs are currently unimplemented.
 
 By default, the plugin reads and writes files in paths relative to:
 
@@ -35,8 +35,7 @@ platform     | location
 -------------|---------
 Android      | `Context.FilesDir`
 iOS          | `Environment.SpecialFolder.MyDocuments`
-WindowsPhone | app-specific isolated storage
-WindowsStore | `Windows.Storage.ApplicationData.Current.LocalFolder.Path`
+Uwp | `Windows.Storage.ApplicationData.Current.LocalFolder.Path`
 WPF          | `Environment.SpecialFolder.ApplicationData`
 
 Note: while it works, the use of a synchronous API for File IO on WindowsStore applications is slightly 'naughty'. It's likely that an asynchronous version of the IMvxFileStore interface will be provided in the near future.
