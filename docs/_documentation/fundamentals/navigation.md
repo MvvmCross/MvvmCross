@@ -16,27 +16,27 @@ The following Api is available to use:
 ```c#
 public interface IMvxNavigationService
 {
-Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
-Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
-Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
-Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
-Task Navigate(string path);
-Task Navigate<TParameter>(string path, TParameter param);
-Task<TResult> Navigate<TResult>(string path);
-Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
-Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
-Task<bool> CanNavigate(string path);
-Task<bool> Close(IMvxViewModel viewModel);
+	Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
+	Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
+	Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
+	Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
+	Task Navigate(string path);
+	Task Navigate<TParameter>(string path, TParameter param);
+	Task<TResult> Navigate<TResult>(string path);
+	Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
+	Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+	Task<bool> CanNavigate(string path);
+	Task<bool> Close(IMvxViewModel viewModel);
 }
 
 public static class MvxNavigationExtensions
 {
-public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
-public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
-public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
-public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
+	public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
+	public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
+	public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
+	public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
+	public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
+	Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
 }
 ```
 
