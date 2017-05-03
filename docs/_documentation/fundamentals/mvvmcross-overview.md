@@ -189,13 +189,13 @@ On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplica
 An initial replacement looks like:
 
 ```c#
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using MvvmCross.Platform;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Core.ViewModels;
 
-namespace MyName.Touch
+namespace MyName.iOS
 {
 [Register ("AppDelegate")]
 public partial class AppDelegate : MvxApplicationDelegate
@@ -249,35 +249,6 @@ public class SplashScreen : MvxSplashScreenActivity
 ```
     
 Importantly, please note that this class is marked with `MainLauncher = true` to ensure that this is the first thing created when the native platform starts.
-
-#### WindowsPhone
-
-On WindowsPhone, a new project will contain a native `App.xaml.cs`
-
-To adapt this for MvvmCross, we simply:
-
-1. add a line to the constructor:
-
-            var setup = new Setup(RootFrame);
-            setup.Initialize();
-
-2. add a block to `Application_Launching` to force the native app to defer the start actions to `IMvxAppStart`
- 
-```c#
-private void Application_Launching(object sender, LaunchingEventArgs e)
-{
-    RootFrame.Navigating += RootFrameOnNavigating;
-}
-
-private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
-{
-    args.Cancel = true;
-    RootFrame.Navigating -= RootFrameOnNavigating;
-    RootFrame.Dispatcher.BeginInvoke(() => {
-        Mvx.Resolve<IMvxAppStart>().Start();
-    });
-}
-```
 
 #### Wpf
 
@@ -390,12 +361,12 @@ public class Setup : MvxAndroidSetup
 #### Minimal Setup - iOS
 
 ```c#
-using MonoTouch.UIKit;
+using UIKit;
 using MvvmCross.iOS.Platform;
 
 namespace MyName.iOS
 {
-public class Setup : MvxTouchSetup
+public class Setup : MvxiOSSetup
 {
     public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
     : base(applicationDelegate, window)

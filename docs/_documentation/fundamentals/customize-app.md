@@ -265,8 +265,6 @@ protected override Assembly[] GetViewModelAssemblies()
 }
 ```
 
-**Note**: for WindowsPhone only, if you load Views from any Assembly other than the main one, then you need to add a `MvxPhoneViewAttribute` to each of those Views in order to help MvvmCross work out the Xaml Url for the View. For example, if the `SpecialLoginView` is a Xaml page located in the `SubViews` folder of the `MyOrg.Satellite.ExtraViews` assembly then you will need to add the attribute: `[MvxPhoneView("/MyOrg.Satellite.ExtraView;component/SubViews/BlockedUsers.xaml")]`
-
 ## Overriding ViewModel Location/Construction
 
 By default, MvvmCross builds a new `ViewModel` every time one is requested and uses the `CIRS` sequence - Construction-Init-ReloadState-Start - to initialize that `ViewModel`.

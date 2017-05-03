@@ -225,7 +225,7 @@ Double click on the XAML file
 
 This will open the XAML editor within Visual Studio.
 
-Just as with the WindowsPhone and WindowsStore, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
+Just as with Windows Uwp, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
 Change the root node from:
 
