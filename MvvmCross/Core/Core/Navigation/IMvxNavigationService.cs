@@ -19,9 +19,9 @@ namespace MvvmCross.Core.Navigation
     public interface IMvxNavigationService
     {
         event BeforeNavigateEventHandler BeforeNavigate;
-        event BeforeNavigateEventHandler AfterNavigate;
-        event BeforeNavigateEventHandler BeforeClose;
-        event BeforeNavigateEventHandler AfterClose;
+        event AfterNavigateEventHandler AfterNavigate;
+        event BeforeCloseEventHandler BeforeClose;
+        event AfterCloseEventHandler AfterClose;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
