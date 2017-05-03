@@ -54,56 +54,50 @@ To add your own `MvxPresentationHint` you should follow these steps:
 
 1. Create a MvxPresentationHint subclass:
 
-```c#
-public class MyCustomHint : MvxPresentationHint
-{
-    public string ImportantInformation { get; set; }
+        public class MyCustomHint : MvxPresentationHint
+        {
+            public string ImportantInformation { get; set; }
+        
+            public MyCustomHint(string importantInformation)
+            {
+                ImportantInformation = importantInformation;
+            }
+        }
 
-    public MyCustomHint(string importantInformation)
-    {
-        ImportantInformation = importantInformation;
-    }
-}
-```
+2. Override the method `CreatePresenter()` in the Setup class and register your custom hint in it. For example, on iOS:
 
-2. Subclass the ViewPresenter that you are using in each platform. If you are not using a custom presenter already, you can take a look at the ViewPresenter that is created in the Setup class [(example: iOS)](https://github.com/MvvmCross/MvvmCross/blob/0bc56a0228c9a17b9a9660580d4e2fb905464b13/MvvmCross/iOS/iOS/Platform/MvxIosSetup.cs#L123)).
+        protected override IMvxIosViewPresenter CreatePresenter()
+        {
+            var presenter = base.CreatePresenter();
+            presenter.AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
+            return presenter;
+        }
 
-3. Override the `CreatePresenter` method in the Setup class and make it return your custom presenter.
+3. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
 
-4. In the constructor of your custom presenter, register your custom hint in the internal dictionary:
-```c#
-public MyCustomPresenter //some parameters here and a call to base constructor
-{
-    AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
-}
-```
+        private bool HandleMyCustomHint(MyCustomHint hint)
+        {
+            bool result;
+        
+            if(hint.ImportantInformation != null)
+            // your code
+        
+            return result;
+        }
 
-5. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
 
-```c#
-private bool HandleMyCustomHint(MyCustomHint hint)
-{
-    bool result;
+**Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
 
-    if(hint.ImportantInformation != null)
-    // your code
+4. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
 
-    return result;
-}
-```
-
-**Now repeat steps 2, 3, 4 and 5 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
-
-6. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
-
-```c#
-
-// your code
-
-ChangePresentation(new MyCustomHint("example"));
-
-// your code
-```
+        private void AMethod()
+        {
+            // your code
+        
+            ChangePresentation(new MyCustomHint("example"));
+        
+            // your code
+        }
 
 Ready!
 
