@@ -3,6 +3,7 @@ using MvvmCross.iOS.Views;
 
 namespace $rootnamespace$.Views
 {
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class MainView : MvxViewController
     {
         public MainView() : base("MainView", null)
