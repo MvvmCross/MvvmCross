@@ -54,7 +54,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
 		<file src="MacContent\AppDelegate.cs.txt.pp" target="content\Xamarin.Mac20\AppDelegate.cs.txt.pp" />
 		<file src="MacContent\DebugTrace.cs.pp" target="content\Xamarin.Mac20\DebugTrace.cs.pp" />
-		<file src="MacContent\FirstView.cs.pp" target="content\Xamarin.Mac20\Views\FirstView.cs.pp" />
-		<file src="MacContent\FirstViewController.cs.pp" target="content\Xamarin.Mac20\Views\FirstViewController.cs.pp" />
+		<file src="MacContent\MainView.cs.pp" target="content\Xamarin.Mac20\Views\MainView.cs.pp" />
+		<file src="MacContent\MainViewController.cs.pp" target="content\Xamarin.Mac20\Views\MainViewController.cs.pp" />
 	</files>
 </package>
