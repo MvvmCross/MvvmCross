@@ -16,7 +16,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 	</metadata>
 	<files>		
 		<!-- PCL - Content -->
-		<file src="CoreContent\FirstViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\FirstViewModel.cs.pp" />
+		<file src="CoreContent\MainViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MainViewModel.cs.pp" />
 		<file src="CoreContent\App.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.cs.pp" />
 
 		<!-- wpf - Content -->
