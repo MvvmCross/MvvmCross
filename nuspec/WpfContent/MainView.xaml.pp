@@ -1,5 +1,5 @@
 <views:MvxWpfView 
-             x:Class="$rootnamespace$.Views.FirstView"
+             x:Class="$rootnamespace$.Views.MainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,8 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-            <TextBox Text="{Binding Hello, Mode=TwoWay}" />
-            <TextBox Text="{Binding Hello, Mode=TwoWay}" />
+            <TextBox Text="{Binding Text, Mode=TwoWay}" />
+            <Button Content="Reset" Command="{Binding ResetTextCommand }" />
         </StackPanel>
     </Grid>
 </views:MvxWpfView>
