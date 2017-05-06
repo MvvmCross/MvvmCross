@@ -2,9 +2,9 @@ using Xamarin.Forms;
 
 namespace $rootnamespace$.Pages
 {
-    public class FirstPage : ContentPage
+    public class MainPage : ContentPage
     {
-        public FirstPage()
+        public MainPage()
         { 
             var content = new StackLayout
             {

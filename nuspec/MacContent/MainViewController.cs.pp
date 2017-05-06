@@ -9,26 +9,26 @@ using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$.Views
 {
-    [MvxViewFor(typeof(Core.ViewModels.FirstViewModel))]
-    public partial class FirstViewController : MvxViewController
+    [MvxViewFor(typeof(Core.ViewModels.MainViewModel))]
+    public partial class MainViewController : MvxViewController
     {
         #region Constructors
 
         // Called when created from unmanaged code
-        public FirstViewController(IntPtr handle) : base(handle)
+        public MainViewController(IntPtr handle) : base(handle)
         {
             Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public FirstViewController(NSCoder coder) : base(coder)
+        public MainViewController(NSCoder coder) : base(coder)
         {
             Initialize();
         }
 
         // Call to load from the XIB/NIB file
-        public FirstViewController() : base()
+        public MainViewController() : base()
         {
             Initialize();
         }
@@ -41,11 +41,11 @@ namespace $rootnamespace$.Views
         #endregion
 
         // strongly typed view accessor
-        public new FirstView View
+        public new MainView View
         {
             get
             {
-                return (FirstView)base.View;
+                return (MainView)base.View;
             }
         }
 
@@ -53,8 +53,8 @@ namespace $rootnamespace$.Views
         {
             base.ViewDidLoad ();
 
-            var set = this.CreateBindingSet<FirstViewController, Core.ViewModels.FirstViewModel>();
-            //set.Bind(textFirst).To(vm => vm.Hello);
+            var set = this.CreateBindingSet<MainViewController, Core.ViewModels.MainViewModel>();
+            //set.Bind(textMain).To(vm => vm.Hello);
             set.Apply();
         }
     }
