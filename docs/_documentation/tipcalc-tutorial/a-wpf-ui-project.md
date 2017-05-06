@@ -2,7 +2,7 @@
 layout: documentation
 title: A Wpf UI Project
 category: TipCalc Tutorial
-order: 9
+order: 8
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
