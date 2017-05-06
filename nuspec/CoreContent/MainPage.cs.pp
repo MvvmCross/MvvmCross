@@ -12,14 +12,15 @@ namespace $rootnamespace$.Pages
                 VerticalOptions = LayoutOptions.Center
             };
 
-            var label = new Label();
-            label.SetBinding(Label.TextProperty, "Hello");
-
             var entry = new Entry();
-            entry.SetBinding(Entry.TextProperty, "Hello");
+            entry.SetBinding(Entry.TextProperty, "Text");
 
-            content.Children.Add(label);
+            var button = new Button();
+            button.Text = "Reset";
+            button.SetBinding(Button.CommandProperty, "ResetTextCommand");
+
             content.Children.Add(entry);
+            content.Children.Add(button);
 
             Content = content;
         }
