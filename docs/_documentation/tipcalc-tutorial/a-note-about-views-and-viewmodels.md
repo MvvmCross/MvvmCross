@@ -2,7 +2,7 @@
 layout: documentation
 title: A note about Views and ViewModels
 category: TipCalc Tutorial
-order: 12
+order: 11
 ---
 This tutorial used MvvmCross's support for naming conventions to associate the View with the ViewModel.  With a view named `TipView`, MvvmCross can locate it's ViewModel as long as it's named `TipViewModel`.  The base classes we used for views (e.g. `MvxViewController`) have `MvxViewModel` properties named `ViewModel`.  
 
