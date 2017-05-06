@@ -29,8 +29,8 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 
 		<!-- droid - Content -->
 		<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
-		<file src="DroidContent\FirstView.axml" target="content\MonoAndroid\Resources\layout\FirstView.axml" />
-		<file src="DroidContent\FirstView.cs.pp" target="content\MonoAndroid\Views\FirstView.cs.pp" />
+		<file src="DroidContent\MainView.axml" target="content\MonoAndroid\Resources\layout\MainView.axml" />
+		<file src="DroidContent\MainView.cs.pp" target="content\MonoAndroid\Views\MainView.cs.pp" />
 		<file src="DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid\DebugTrace.cs.pp" />
 		<file src="DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
 		<file src="DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\layout\SplashScreen.axml" />
