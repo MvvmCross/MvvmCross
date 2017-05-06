@@ -2,9 +2,9 @@ using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$.Views
 {
-    public partial class FirstView : MvxWpfView
+    public partial class MainView : MvxWpfView
     {
-        public FirstView()
+        public MainView()
         {
             this.InitializeComponent();
         }
