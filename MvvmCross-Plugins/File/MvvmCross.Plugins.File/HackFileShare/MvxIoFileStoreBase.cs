@@ -21,6 +21,11 @@ namespace MvvmCross.Plugins.File
     {
         #region IMvxFileStore Members
 
+        protected MvxIoFileStoreBase(bool appendDefaultPath)
+            : base(appendDefaultPath)
+        {
+        }
+
         public override Stream OpenRead(string path)
         {
             var fullPath = FullPath(path);
@@ -94,19 +99,22 @@ namespace MvvmCross.Plugins.File
                 var fullFrom = FullPath(from);
                 var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                     return false;
-				}
+                }
 
                 if (System.IO.File.Exists(fullTo))
                 {
-					if (overwrite) {
+                    if (overwrite)
+                    {
                         System.IO.File.Delete(fullTo);
-					}
-					else {
+                    }
+                    else
+                    {
                         return false;
-					}
+                    }
                 }
 
                 System.IO.File.Move(fullFrom, fullTo);
@@ -119,27 +127,28 @@ namespace MvvmCross.Plugins.File
             }
         }
 
-		public override bool TryCopy (string from, string to, bool overwrite)
-		{
-			try
-			{
-				var fullFrom = FullPath(from);
-				var fullTo = FullPath(to);
+        public override bool TryCopy(string from, string to, bool overwrite)
+        {
+            try
+            {
+                var fullFrom = FullPath(from);
+                var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
-					return false;
-				}
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                    return false;
+                }
 
-				System.IO.File.Copy(fullFrom, fullTo, overwrite);
-				return true;
-			}
-			catch (Exception exception)
-			{
-				MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
-				return false;
-			}
-		}
+                System.IO.File.Copy(fullFrom, fullTo, overwrite);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
 
         public override string NativePath(string path)
         {
@@ -147,8 +156,6 @@ namespace MvvmCross.Plugins.File
         }
 
         #endregion IMvxFileStore Members
-
-        protected abstract string FullPath(string path);
 
         protected override void WriteFileCommon(string path, Action<Stream> streamAction)
         {
@@ -206,6 +213,15 @@ namespace MvvmCross.Plugins.File
                 return await streamAction(fileStream).ConfigureAwait(false);
             }
         }
+
+        private string FullPath(string path)
+        {
+            if (!AppendDefaultPath) return path;
+
+            return AppendPath(path);
+        }
+
+        protected abstract string AppendPath(string path);
     }
 }
 

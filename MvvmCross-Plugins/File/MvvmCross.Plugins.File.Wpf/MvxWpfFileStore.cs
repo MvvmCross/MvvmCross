@@ -13,12 +13,13 @@ namespace MvvmCross.Plugins.File.Wpf
     {
         private readonly string _rootFolder;
 
-        public MvxWpfFileStore(string rootFolder)
+        public MvxWpfFileStore(bool appendDefaultPath, string rootFolder)
+            : base(appendDefaultPath)
         {
             _rootFolder = rootFolder;
         }
 
-        protected override string FullPath(string path)
+        protected override string AppendPath(string path)
         {
             return Path.Combine(_rootFolder, path);
         }

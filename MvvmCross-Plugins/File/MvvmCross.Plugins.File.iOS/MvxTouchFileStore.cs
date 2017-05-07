@@ -13,9 +13,14 @@ namespace MvvmCross.Plugins.File.iOS
     [Preserve(AllMembers = true)]
     public class MvxIosFileStore : MvxIoFileStoreBase
     {
+        public MvxIosFileStore(bool appendDefaultPath)
+            : base(appendDefaultPath)
+        {
+        }
+
         public const string ResScheme = "res:";
 
-        protected override string FullPath(string path)
+        protected override string AppendPath(string path)
         {
             if (path.StartsWith(ResScheme))
                 return path.Substring(ResScheme.Length);
