@@ -1,11 +1,12 @@
 ---
 layout: documentation
 title: Tip Calculator - A recap
-category: Tutorials
+category: TipCalc Tutorial
+order: 9
 ---
 Over the course of these articles, we've covered the complete `Tip Calc` app on 5 platforms from one shared PCL code library using Mvvm.
 
-![Sketch](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Summary.png)
+![Summary](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 I hope this was simple and easy to follow...
 

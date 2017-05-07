@@ -1,13 +1,14 @@
 ---
 layout: documentation
 title: A Wpf UI Project
-category: Tutorials
+category: TipCalc Tutorial
+order: 8
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Sketch.png)
+![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -287,7 +288,7 @@ This will produce finished XAML like:
 
 In the designer, this will look like:
 
-![Designer](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Wpf_Designer.png)
+![TipCalc WPF Design](../../img/tutorials/tipcalc/TipCalc_Wpf_Designer.png)
 
 ## The Wpf UI is complete!
 
@@ -295,7 +296,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![Designer](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Wpf_Run.png)
+![TipCalc WPF Run](../../img/tutorials/tipcalc/TipCalc_Wpf_Run.png)
 
 ## Moving on...
 

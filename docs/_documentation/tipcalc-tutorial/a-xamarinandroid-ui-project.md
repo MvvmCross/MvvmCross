@@ -1,14 +1,14 @@
 ---
 layout: documentation
 title: A Xamarin.Android UI Project
-category: Tutorials
+category: TipCalc Tutorial
+order: 4
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant.
 
 We had a plan to produce a UI based on this concept:
 
-![TipCalc interface](https://mvvmcross.github.io/mvvmcross-docs/img/tipcalc.png)
-
+![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -306,7 +306,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![Android TipCalc](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android.png)
+![Android TipCalc](../../img/tutorials/tipcalc/TipCalc_Android.png)
 
 If you then want to make it 'more beautiful', then try adding a few attributes to some of your AXML - things like:
 
@@ -319,7 +319,7 @@ If you then want to make it 'more beautiful', then try adding a few attributes t
 
 Within a very short time, you should hopefully be able to create something 'styled'...
 
-![Android TipCalc Styled](https://mvvmcross.github.io/mvvmcross-docs/img/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png)
 
 ... but actually making it look 'nice' might take some design skills!
 

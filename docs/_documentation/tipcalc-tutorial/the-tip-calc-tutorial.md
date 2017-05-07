@@ -1,28 +1,14 @@
 ---
 layout: documentation
 title: The Tip Calc tutorial
-category: Tutorials
+category: TipCalc Tutorial
+order: 1
 ---
 In this first Model-View-ViewModel project, we'll create a simple single screen cross-platform application for calculating the tip at a restaurant.
 
 Here's a sketch of where we hope to end up:
 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/KMPC0rlvSmir1CfkkJKB_68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f4d76766d43726f73732f76332f76335475746f7269616c2f50696374757265732f54697043616c635f536b657463682e706e67",
-        "68747470733a2f2f7261772e6769746875622e636f6d2f736c6f6467652f4d76766d43726f73732f76332f76335475746f7269616c2f50696374757265732f54697043616c635f536b657463682e706e67",
-        "250",
-        "449",
-        "",
-        ""
-      ]
-    }
-  ]
-}
-```
+![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 The goals of this first application are all about **introducing**:
 

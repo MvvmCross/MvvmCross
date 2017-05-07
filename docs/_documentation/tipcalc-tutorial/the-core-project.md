@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: The Core Project
-category: Tutorials
+category: TipCalc Tutorial
+order: 2
 ---
 MvvmCross application's are normally structured with:
 

@@ -1,13 +1,14 @@
 ---
 layout: documentation
 title: A Xamarin.iOS UI Project
-category: Tutorials
+category: TipCalc Tutorial
+order: 5
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Sketch.png)
+![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -17,7 +18,7 @@ To satisfy this we built a 'Core' Portable Class Library project which contained
 
 We then added our first User Interface - for Xamarin.Android:
 
-![Android](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png)
 
 For our next project, let's shift to Xamarin.iOS.
 
@@ -193,7 +194,7 @@ Set the Maximum Value of the `Slider` to '100'.
 
 Using drag and drop, you should be able to quite quickly generate a design similar to:
 
-![mock](http://i.imgur.com/Oy6ObJE.png)
+![iOS design](../../img/tutorials/tipcalc/TipCalc_Touch_Design.png)
 
 ### Edit TipView.cs
 
@@ -284,7 +285,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![ios ui](http://i.imgur.com/Tq8e9Uv.png)
+![ios ui](../../img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
 This seems to work perfectly, although you may notice that if you tap on the `SubTotal` property and start entering text, then you cannot afterwards close the keyboard.
 
