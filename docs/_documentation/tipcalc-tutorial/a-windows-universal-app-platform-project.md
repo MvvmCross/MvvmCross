@@ -1,13 +1,14 @@
---
+---
 layout: documentation
-title: A Windows Store Project
-category: Tutorials
+title: A Windows Universal App Platform Project
+category: TipCalc Tutorial
+order: 6
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Sketch.png)
+![TipCalc](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -15,15 +16,17 @@ To satisfy this we built a 'Core' Portable Class Library project which contained
 * our ViewModel - `TipViewModel`
 * our `App` which contains the application wiring, including the start instructions.
 
-We then added User Interfaces for Xamarin.Android, Xamarin.iOS, Windows UWP and Windows 8.1 Univeral apps.
+We then added User Interfaces for Xamarin.Android and Xamarin.iOS
 
-While UWP is the recommended approach for Windows (and Windows Mobile) development, you can also target Windows using Windows 8.1 apps.  Feel free to skip this section if you don't need to work with Windows 8.1 apps.
+![Android](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png) ![iOS](../../img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
-To create a Windows 8.1 MvvmCross UI, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty', just as we did for the Core and other UI projects.
+For our next project, let's look at Windows, specifically Universal Windows Platform (UWP) Apps which run on Windows 10 and Windows 10 Mobile.
 
-## Create a new Windows 8.1 Project
+To create a Windows UWP MvvmCross UI, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty', just as we did for the Core and other UI projects.
 
-Add a new project to your solution - a 'Blank App (Windows 8.1)' application with name `TipCalc.UI.WindowsStore`
+## Create a new Windows UWP Project
+
+Add a new project to your solution - a 'Blank App (Universal Windows)' application with name `TipCalc.UI.UWP`
 
 Within this, you'll find the normal WindowsStore application constructs:
 
@@ -33,6 +36,7 @@ Within this, you'll find the normal WindowsStore application constructs:
 * the App.Xaml 'application' object
 * the MainPage.Xaml and MainPage.Xaml.cs files that define the default Page for this app
 * the 'Package.appxmanifest' configuration file
+* the 'project.json'
 * the debug private key for your development
 
 ## Delete MainPage.xaml
@@ -64,7 +68,7 @@ This class sits in the root namespace (folder) of our UI project and performs th
   * your `App` and its collection of `ViewModel`s
   * your UI project and its collection of `View`s
 
-Most of this functionality is provided for you automatically. Within your WindowsStore UI project all you have to supply is:
+Most of this functionality is provided for you automatically. Within your Windows UWP UI project all you have to supply is:
 
 - your `App` - your link to the business logic and `ViewModel` content.
 
@@ -73,9 +77,9 @@ For `TipCalc` here's all that is needed in Setup.cs:
 ```c#
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.WindowsCommon.Platform;
+using MvvmCross.WindowsUWP.Platform;
 
-namespace TipCalc.UI.WindowsStore
+namespace TipCalc.UI.UWP
 {
 public class Setup : MvxWindowsSetup
 {
@@ -93,7 +97,7 @@ public class Setup : MvxWindowsSetup
 
 ## Modify the App.xaml.cs to use Setup
 
-Your `App.xaml.cs` provides the WindowsStore 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
+Your `App.xaml.cs` provides the Windows UWP 'main application' object - an object which owns the User Interface and receives some callbacks from the operating system during some key events in your application's lifecycle.
 
 To modify this `App.xaml.cs` for MvvmCross, we need to:
 
@@ -122,17 +126,25 @@ After you've done this your code might look like:
 
 ```c#
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
-
-namespace TipCalc.UI.WindowsStore
+namespace TipCalc.UI.UWP
 {
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
@@ -145,6 +157,9 @@ sealed partial class App : Application
     /// </summary>
     public App()
     {
+        Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
+            Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
+            Microsoft.ApplicationInsights.WindowsCollectors.Session);
         this.InitializeComponent();
         this.Suspending += OnSuspending;
     }
@@ -172,8 +187,6 @@ sealed partial class App : Application
         {
             // Create a Frame to act as the navigation context and navigate to the first page
             rootFrame = new Frame();
-            // Set the default language
-            rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
             rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -188,6 +201,10 @@ sealed partial class App : Application
 
         if (rootFrame.Content == null)
         {
+            //// When the navigation stack isn't restored navigate to the first page,
+            //// configuring the new page by passing required information as a navigation
+            //// parameter
+            //rootFrame.Navigate(typeof(MainPage), e.Arguments);
             var setup = new Setup(rootFrame);
             setup.Initialize();
 
@@ -231,7 +248,7 @@ sealed partial class App : Application
 
 Create a Views folder
 
-Within this folder, add a new 'Basic Page' and call it `TipView.xaml`
+Within this folder, add a new 'Blank Page' and call it `TipView.xaml`
 
 You will be asked if you want to add the missing 'Common' files automatically in order to support this 'Basic Page' - answer **Yes**
 
@@ -244,155 +261,34 @@ The page will generate:
 
 Change:
 
-```c#
-public class TipView : Page
-```
+```public class TipView : Page```
 
-to:
+To:
 
-```c#
-public class TipView : MvxWindowsPage
-```
+```public class TipView : MvxWindowsPage```
 
 This requires the addition of:
 
-```c#
-using MvvmCross.WindowsCommon.Views;
-```
-
-### Persuade TipView to cooperate more reasonably with the `MvxStorePage` base class
-
-Either remove the `region`:
-
-```c#
-#region NavigationHelper registration
-
-protected override void OnNavigatedTo(NavigationEventArgs e)
-{
-    ...
-}
-
-protected override void OnNavigatedFrom(NavigationEventArgs e)
-{
-    ...
-}
-
-#endregion
-```
-
-Or change the `OnNavigatedTo` and `OnNavigatedFrom` methods so that they call their base class implementations:
-
-```c#
-base.OnNavigatedTo(e);
-```
-
-and 
-
-```c#
-base.OnNavigatedFrom(e);
-```
+```using MvvmCross.WindowsUWP.Views;```
 
 Altogether this looks like:
 
 ```c#
-using MvvmCross.WindowsCommon.Views;
-using TipCalc.UI.WindowsStore.Common;
-using Windows.UI.Xaml.Navigation;
+using MvvmCross.WindowsUWP.Views;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace TipCalc.UI.WindowsStore.Views
+namespace TipCalc.UI.UWP.Views
 {
 /// <summary>
-/// A basic page that provides characteristics common to most applications.
+/// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
 public sealed partial class TipView : MvxWindowsPage
 {
-
-    private NavigationHelper navigationHelper;
-    private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
-    /// <summary>
-    /// This can be changed to a strongly typed view model.
-    /// </summary>
-    public ObservableDictionary DefaultViewModel
-    {
-        get {
-            return this.defaultViewModel;
-        }
-    }
-
-    /// <summary>
-    /// NavigationHelper is used on each page to aid in navigation and
-    /// process lifetime management
-    /// </summary>
-    public NavigationHelper NavigationHelper
-    {
-        get {
-            return this.navigationHelper;
-        }
-    }
-
-
     public TipView()
     {
         this.InitializeComponent();
-        this.navigationHelper = new NavigationHelper(this);
-        this.navigationHelper.LoadState += navigationHelper_LoadState;
-        this.navigationHelper.SaveState += navigationHelper_SaveState;
     }
-
-    /// <summary>
-    /// Populates the page with content passed during navigation. Any saved state is also
-    /// provided when recreating a page from a prior session.
-    /// </summary>
-    /// <param name="sender">
-    /// The source of the event; typically <see cref="Common.NavigationHelper"/>
-    /// </param>
-    /// <param name="e">Event data that provides both the navigation parameter passed to
-    /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-    /// a dictionary of state preserved by this page during an earlier
-    /// session. The state will be null the first time a page is visited.</param>
-    private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-    {
-    }
-
-    /// <summary>
-    /// Preserves state associated with this page in case the application is suspended or the
-    /// page is discarded from the navigation cache.  Values must conform to the serialization
-    /// requirements of <see cref="Common.SuspensionManager.SessionState"/>.
-    /// </summary>
-    /// <param name="sender">The source of the event; typically <see cref="Common.NavigationHelper"/></param>
-    /// <param name="e">Event data that provides an empty dictionary to be populated with
-    /// serializable state.</param>
-    private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-    {
-    }
-
-    #region NavigationHelper registration
-
-    /// The methods provided in this section are simply used to allow
-    /// NavigationHelper to respond to the page's navigation methods.
-    ///
-    /// Page specific logic should be placed in event handlers for the
-    /// <see cref="Common.NavigationHelper.LoadState"/>
-    /// and <see cref="Common.NavigationHelper.SaveState"/>.
-    /// The navigation parameter is available in the LoadState method
-    /// in addition to page state preserved during an earlier session.
-
-    protected override void OnNavigatedTo(NavigationEventArgs e)
-    {
-        base.OnNavigatedTo(e);
-        navigationHelper.OnNavigatedTo(e);
-    }
-
-    protected override void OnNavigatedFrom(NavigationEventArgs e)
-    {
-        base.OnNavigatedTo(e);
-        navigationHelper.OnNavigatedFrom(e);
-    }
-
-    #endregion
 }
 }
 ```
@@ -403,11 +299,9 @@ Double click on the XAML file
 
 This will open the XAML editor within Visual Studio.
 
-Just as with the Universal Windows Apps and Windows Phone Silverlight, I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
+I won't go into much depth at all here about how to use the XAML or do the Windows data-binding. I'm assuming most readers are already coming from at least a little XAML background.
 
-To add the XAML user interface for our tip calculator, we will add a StackPanel to the end of the main Grid.
-
-This `StackPanel` will include **almost** exactly the same XAML as we added to the Windows Phone Silverlight example - only the `Style` attributes are removed:
+To add the XAML user interface for our tip calculator, we will add a StackPanel within the existing Grid.
 
 * a `StackPanel` container, into which we add:
   * some `TextBlock` static text
@@ -415,29 +309,34 @@ This `StackPanel` will include **almost** exactly the same XAML as we added to t
   * a bound `Slider` for the `Generosity`
   * a bound `TextBlock` for the `Tip`
 
-This will produce XAML like:
+The full page will look like:
 
 ```xml
-<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-    <StackPanel>
-        <TextBlock
-            Text="SubTotal" />
-        <TextBox 
-            Text="{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock
-            Text="Generosity" />
-        <Slider 
-            Value="{Binding Generosity,Mode=TwoWay}" 
-            SmallChange="1" 
-            LargeChange="10" 
-            Minimum="0" 
-            Maximum="100" />
-        <TextBlock
-            Text="Tip" />
-        <TextBlock 
-            Text="{Binding Tip}" />
-    </StackPanel>
-</Grid>
+<views:MvxWindowsPage
+    x:Class="TipCalc.UI.UWP.Views.TipView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TipCalc.UI.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="12,0,12,0">
+            <TextBlock Text="SubTotal" />
+            <TextBox Text="{Binding SubTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Generosity" />
+            <Slider Value="{Binding Generosity,Mode=TwoWay}" 
+                SmallChange="1" 
+                LargeChange="10" 
+                Minimum="0" 
+                Maximum="100" />
+            <TextBlock Text="Tip" />
+            <TextBlock Text="{Binding Tip}" />
+        </StackPanel>
+    </Grid>
+</views:MvxWindowsPage>
 ```
 
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`
@@ -446,19 +345,23 @@ This will produce XAML like:
 
 In the designer, this will look like:
 
-![Designer](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Store_Designer.png)
+![TipCalc UWP](../../img/tutorials/tipcalc/TipCalc_UWP_designer.png)
 
 ## The Store UI is complete!
 
-At this point you should be able to run your application.
+At this point you should be able to run your application either on the Local Machine or in a Mobile emulator.
 
-When it starts... you should see:
+When it starts... you should see this for the local machine:
 
-![Designer](https://raw.github.com/slodge/MvvmCross/v3/v3Tutorial/Pictures/TipCalc_Store_Emu.png)
+![TipCalc UWP](../../img/tutorials/tipcalc/TipCalc_UWP_landscape.png)
+
+and in the mobile emulator:
+
+![TipCalc UWP mobile](../../img/tutorials/tipcalc/TipCalc_UWP.png)
 
 ## Moving on...
 
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
-But there are other ways of building Windows apps...
+Let's move on to the next piece of Windows!
 
