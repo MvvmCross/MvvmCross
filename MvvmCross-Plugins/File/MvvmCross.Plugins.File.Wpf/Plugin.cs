@@ -10,34 +10,41 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 using System;
 using System.IO;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.File.Wpf
 {
     public class Plugin
         : IMvxConfigurablePlugin
     {
-        private string _rootFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        private WpfFileStoreConfiguration _configuration;
+        private WpfFileStoreConfiguration Configuration => _configuration ?? WpfFileStoreConfiguration.Default;
 
         public void Load()
         {
-            var fileStore = new MvxWpfFileStore(_rootFolder);
+            var fileStore = new MvxWpfFileStore(Configuration.AppendDefaultPath, Configuration.RootFolder);
             Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
             Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
 
         public void Configure(IMvxPluginConfiguration configuration)
         {
-            if (configuration == null)
-                return;
+            if (configuration == null) return;
 
-            var wpfConfiguration = (WpfFileStoreConfiguration)configuration;
+            var wpfConfiguration = configuration as WpfFileStoreConfiguration;
+            if (wpfConfiguration == null)
+            {
+                throw new MvxException("You must use a WpfFileStoreConfiguration object for configuring the File Plugin, but you supplied {0}", configuration.GetType().Name);
+            }
+
             if (!Directory.Exists(wpfConfiguration.RootFolder))
             {
                 var message = "File plugin configuration error : root folder '" + wpfConfiguration.RootFolder + "' does not exists.";
                 MvxTrace.Error(message);
                 throw new DirectoryNotFoundException(message);
             }
-            _rootFolder = wpfConfiguration.RootFolder;
+
+            _configuration = wpfConfiguration;
         }
     }
 }

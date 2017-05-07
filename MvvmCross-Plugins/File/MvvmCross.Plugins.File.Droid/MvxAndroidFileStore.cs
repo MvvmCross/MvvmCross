@@ -20,13 +20,16 @@ namespace MvvmCross.Plugins.File.Droid
     public class MvxAndroidFileStore
         : MvxIoFileStoreBase
     {
+        public MvxAndroidFileStore(bool appendDefaultPath)
+            : base(appendDefaultPath)
+        {
+        }
+
         private Context _context;
 
         private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
-        protected override string FullPath(string path)
-        {
-            return Path.Combine(Context.FilesDir.Path, path);
-        }
+        protected override string AppendPath(string path)
+            => Path.Combine(Context.FilesDir.Path, path);
     }
 }

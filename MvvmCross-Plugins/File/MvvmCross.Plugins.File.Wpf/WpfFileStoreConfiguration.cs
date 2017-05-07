@@ -1,9 +1,11 @@
-﻿using MvvmCross.Platform.Plugins;
+﻿using System;
 
 namespace MvvmCross.Plugins.File.Wpf
 {
-    public class WpfFileStoreConfiguration : IMvxPluginConfiguration
+    public class WpfFileStoreConfiguration : MvxFileConfiguration
     {
-        public string RootFolder { get; set; }
+        public static new WpfFileStoreConfiguration Default = new WpfFileStoreConfiguration();
+
+        public string RootFolder { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
     }
 }

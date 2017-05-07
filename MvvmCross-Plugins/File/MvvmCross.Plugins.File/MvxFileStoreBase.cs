@@ -20,6 +20,11 @@ namespace MvvmCross.Plugins.File
     public abstract class MvxFileStoreBase
         : IMvxFileStore, IMvxFileStoreAsync
     {
+        protected MvxFileStoreBase(bool appendDefaultPath)
+        {
+            AppendDefaultPath = appendDefaultPath;
+        }
+
         private const int BufferSize = 1024;
 
         #region IMvxFileStore Members
@@ -296,6 +301,8 @@ namespace MvvmCross.Plugins.File
         }
 
         #endregion IMvxFileStore Async
+
+        protected bool AppendDefaultPath { get; }
 
         protected abstract void WriteFileCommon(string path, Action<Stream> streamAction);
 
