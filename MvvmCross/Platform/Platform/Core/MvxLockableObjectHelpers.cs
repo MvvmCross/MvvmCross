@@ -9,6 +9,7 @@ namespace MvvmCross.Platform.Core
 {
     using System;
     using System.Threading;
+    using System.Threading.Tasks;
 
     public static class MvxLockableObjectHelpers
     {
@@ -22,7 +23,7 @@ namespace MvvmCross.Platform.Core
 
         public static void RunAsyncWithLock(object lockObject, Action action)
         {
-            MvxAsyncDispatcher.BeginAsync(() =>
+            Task.Run(() =>
                 {
                     lock (lockObject)
                     {
@@ -48,7 +49,7 @@ namespace MvvmCross.Platform.Core
             }
             else
             {
-                MvxAsyncDispatcher.BeginAsync(() =>
+                Task.Run(() =>
                     {
                         lock (lockObject)
                         {
