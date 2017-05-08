@@ -1,4 +1,4 @@
-﻿using Mvvmcross.Forms.Views;
+﻿using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 
 namespace Example.Pages
