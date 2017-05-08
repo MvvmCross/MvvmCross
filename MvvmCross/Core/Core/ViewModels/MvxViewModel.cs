@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -72,7 +73,7 @@ namespace MvvmCross.Core.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TInit> : MvxViewModel, IMvxViewModelInitializer<TInit>
+    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter> where TParameter : class
     {
         public async Task Init(string parameter)
         {
@@ -82,10 +83,16 @@ namespace MvvmCross.Core.ViewModels
                 throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
-            var deserialized = serializer.DeserializeObject<TInit>(parameter);
+            var deserialized = serializer.DeserializeObject<TParameter>(parameter);
             await Init(deserialized);
         }
 
-        public abstract Task Init(TInit parameter);
+        public abstract Task Init(TParameter parameter);
+    }
+
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    {
+        public abstract Task Init(TParameter parameter);
+        public abstract Task<TResult> Close();
     }
 }

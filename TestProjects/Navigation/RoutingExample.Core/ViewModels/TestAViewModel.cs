@@ -12,7 +12,7 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Core.ViewModels
 {
     public class TestAViewModel
-        : MvxViewModel
+        : MvxViewModel<User>
     {
 
         public TestAViewModel()
@@ -20,9 +20,10 @@ namespace RoutingExample.Core.ViewModels
             
         }
 
-        public void Init()
+        public override async Task Init(User parameter)
         {
-            
+            var test = parameter;
+            await Task.FromResult(true);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Core.ViewModels
 {
     public class TestBViewModel
-        : MvxViewModel
+        : MvxViewModel<User, User>
     {
 
         public TestBViewModel()
@@ -29,6 +29,19 @@ namespace RoutingExample.Core.ViewModels
         public void Init(string id)
         {
             _id = id;
+        }
+
+        public override async Task Init(User parameter)
+        {
+            var test = parameter;
+
+            //TODO: Call close from ViewModel
+            //await Close();
+        }
+
+        public override async Task<User> Close()
+        {
+            return new User("Return result", "Something");
         }
     }
 }
