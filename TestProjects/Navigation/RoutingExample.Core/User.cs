@@ -3,6 +3,10 @@ namespace RoutingExample.Core
 {
     public class User
     {
+        public User()
+        {
+        }
+
         public User(string firstName, string lastName)
         {
             FirstName = firstName;

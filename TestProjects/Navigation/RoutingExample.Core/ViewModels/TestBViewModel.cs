@@ -31,17 +31,11 @@ namespace RoutingExample.Core.ViewModels
             _id = id;
         }
 
+        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(() => Close(new User("Return result", "Something")));
+
         public override async Task Init(User parameter)
         {
             var test = parameter;
-
-            //TODO: Call close from ViewModel
-            //await Close();
-        }
-
-        public override async Task<User> Close()
-        {
-            return new User("Return result", "Something");
         }
     }
 }

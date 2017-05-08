@@ -90,9 +90,37 @@ namespace MvvmCross.Core.ViewModels
         public abstract Task Init(TParameter parameter);
     }
 
+	public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
+	{
+		TaskCompletionSource<TResult> _tcs;
+
+		public void SetClose(TaskCompletionSource<TResult> tcs)
+		{
+			_tcs = tcs;
+		}
+
+		public virtual async Task Close(TResult result)
+		{
+			_tcs.TrySetResult(result);
+            Close(this);
+		}
+	}
+
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
+        private TaskCompletionSource<TResult> _tcs;
+
+        public void SetClose(TaskCompletionSource<TResult> tcs)
+        {
+            _tcs = tcs;
+        }
+
         public abstract Task Init(TParameter parameter);
-        public abstract Task<TResult> Close();
+        public virtual async Task Close(TResult result)
+        {
+            //TODO: Why is _tcs null here
+            _tcs.TrySetResult(result);
+            Close(this);
+        }
     }
 }
