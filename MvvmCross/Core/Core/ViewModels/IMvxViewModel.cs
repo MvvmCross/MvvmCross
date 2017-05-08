@@ -39,7 +39,7 @@ namespace MvvmCross.Core.ViewModels
     public interface IMvxViewModelResult<TResult> : IMvxViewModel where TResult : class
     {
         void SetClose(TaskCompletionSource<TResult> tcs);
-        Task Close(TResult result);
+        Task<bool> Close(TResult result);
     }
 
     public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TParameter : class where TResult : class

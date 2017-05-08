@@ -99,10 +99,10 @@ namespace MvvmCross.Core.ViewModels
 			_tcs = tcs;
 		}
 
-		public virtual async Task Close(TResult result)
+		public virtual async Task<bool> Close(TResult result)
 		{
 			_tcs.TrySetResult(result);
-            Close(this);
+            return Close(this);
 		}
 	}
 
@@ -116,11 +116,11 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public abstract Task Init(TParameter parameter);
-        public virtual async Task Close(TResult result)
+        public virtual async Task<bool> Close(TResult result)
         {
             //TODO: Why is _tcs null here
             _tcs.TrySetResult(result);
-            Close(this);
+            return Close(this);
         }
     }
 }
