@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Android.Widget;
-using Mvvmcross.Forms.Droid.Views;
-using Mvvmcross.Forms.Views;
+using MvvmCross.Forms.Droid.Views;
+using MvvmCross.Forms.Views;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -9,7 +9,7 @@ using Xamarin.Forms.Platform.Android;
 using MvxDroidImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
-namespace Mvvmcross.Forms.Droid.Views
+namespace MvvmCross.Forms.Droid.Views
 {
     class MvxImageViewRenderer : ImageRenderer
     {
