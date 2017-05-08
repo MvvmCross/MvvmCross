@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Mvvmcross.Forms.Views
+namespace MvvmCross.Forms.Views
 {
     public class MvxImageView : Image
     {
