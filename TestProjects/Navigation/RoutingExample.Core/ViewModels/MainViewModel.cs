@@ -43,7 +43,11 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showBCommand ?? (_showBCommand = new MvxAsyncCommand(async () =>
                 {
-                    var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
+                    //TODO: Doesnt work
+                    //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
+
+                    //TODO: works
+                    var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
 
                     var test = result.FirstName;
                 }));

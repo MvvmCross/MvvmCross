@@ -268,7 +268,7 @@ namespace MvvmCross.Core.Navigation
             OnBeforeNavigate(this, args);
 
             var viewModel = await NavigateRoute(path) as IMvxViewModel<TParameter, TResult>;
-			var tcs = new TaskCompletionSource<TResult>();
+            var tcs = new TaskCompletionSource<TResult>();
 			viewModel.SetClose(tcs);
 
             await viewModel.Init(param);

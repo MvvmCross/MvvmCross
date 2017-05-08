@@ -108,7 +108,7 @@ namespace MvvmCross.Core.ViewModels
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
-        private TaskCompletionSource<TResult> _tcs;
+        private TaskCompletionSource<TResult> _tcs { get; set; }
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
