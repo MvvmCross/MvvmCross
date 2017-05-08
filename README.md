@@ -1,8 +1,9 @@
 ## MvvmCross
 
-![Build status](https://osteost.visualstudio.com/_apis/public/build/definitions/3472a0ca-2abe-44b8-9897-98bdf5ab78a5/3/badge)
+![Visual Studio Team services](https://img.shields.io/vso/build/osteost/3472a0ca-2abe-44b8-9897-98bdf5ab78a5/3.svg)
 [![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
 [![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 [![OpenCollective](https://opencollective.com/mvvmcross/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/mvvmcross/sponsors/badge.svg)](#sponsors)
