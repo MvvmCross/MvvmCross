@@ -21,7 +21,7 @@ namespace MvvmCross.Uwp.Views
     public class MvxWindowsMultiRegionViewPresenter
         : MvxWindowsViewPresenter
     {
-        private readonly IMvxWindowsFrame _rootFrame;
+        protected readonly IMvxWindowsFrame _rootFrame;
 
         public MvxWindowsMultiRegionViewPresenter(IMvxWindowsFrame rootFrame)
             : base(rootFrame)
@@ -70,14 +70,14 @@ namespace MvvmCross.Uwp.Views
             }
         }
 
-        private static Type GetViewType(MvxViewModelRequest request)
+        protected static Type GetViewType(MvxViewModelRequest request)
         {
             var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
             return viewFinder.GetViewType(request.ViewModelType);
         }
 
         // Implementation from: http://stackoverflow.com/a/1759923/80186
-        internal static T FindChild<T>(DependencyObject reference, string childName) where T : DependencyObject
+        protected internal static T FindChild<T>(DependencyObject reference, string childName) where T : DependencyObject
         {
             // Confirm parent and childName are valid.
             if (reference == null) return null;
