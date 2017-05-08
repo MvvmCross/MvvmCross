@@ -90,6 +90,7 @@ namespace MvvmCross.Core.ViewModels
         public abstract Task Init(TParameter parameter);
     }
 
+	//TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
 	public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
 	{
 		TaskCompletionSource<TResult> _tcs;
@@ -118,7 +119,6 @@ namespace MvvmCross.Core.ViewModels
         public abstract Task Init(TParameter parameter);
         public virtual async Task<bool> Close(TResult result)
         {
-            //TODO: Why is _tcs null here
             _tcs.TrySetResult(result);
             return Close(this);
         }

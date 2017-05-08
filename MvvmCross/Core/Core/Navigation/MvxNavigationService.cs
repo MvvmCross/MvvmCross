@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MvvmCross.Core.Navigation.EventArguments;
+using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -131,9 +132,11 @@ namespace MvvmCross.Core.Navigation
 
             var viewModelType = entry.Value;
             MvxViewModelRequest request = null;
+            IMvxViewModel viewModel;
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
+                viewModel = facade as IMvxViewModel;
 
                 try
                 {
@@ -154,15 +157,9 @@ namespace MvvmCross.Core.Navigation
             }
             else
             {
-                request = new MvxViewModelRequest(
-                    viewModelType,
-
-                    new MvxBundle(paramDict),
-                    null);
+                viewModel = Mvx.IocConstruct(viewModelType) as IMvxViewModel;
+                request = new MvxViewModelInstanceRequest(viewModel){ ParameterValues = new MvxBundle(paramDict).SafeGetData() };
             }
-
-            var viewModel = Mvx.IocConstruct(request.ViewModelType) as IMvxViewModel;
-            var instanceRequest = new MvxViewModelInstanceRequest(viewModel);
             _viewDispatcher.ShowViewModel(request);
 
             return viewModel;
