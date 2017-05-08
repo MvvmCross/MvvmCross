@@ -7,19 +7,19 @@ using MvvmCross.Binding.Mac.Views;
 
 namespace $rootnamespace$.Views
 {
-    public partial class FirstView : MvxView
+    public partial class MainView : MvxView
     {
         #region Constructors
 
         // Called when created from unmanaged code
-        public FirstView(IntPtr handle) : base(handle)
+        public MainView(IntPtr handle) : base(handle)
         {
             Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public FirstView(NSCoder coder) : base(coder)
+        public MainView(NSCoder coder) : base(coder)
         {
             Initialize();
         }
