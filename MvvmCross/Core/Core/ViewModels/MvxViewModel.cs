@@ -97,9 +97,9 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
-			if (tcs == null)
-				throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
-            
+            if (tcs == null)
+                throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
+
             _tcs = tcs;
         }
 
@@ -122,9 +122,9 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
-			if (tcs == null)
-				throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
-            
+            if (tcs == null)
+                throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
+
             _tcs = tcs;
         }
 
