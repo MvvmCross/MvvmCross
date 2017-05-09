@@ -105,6 +105,12 @@ namespace MvvmCross.Core.ViewModels
             _tcs.TrySetResult(result);
             return Task.FromResult(Close(this));
         }
+
+		public override void Disappeared()
+		{
+			_tcs?.TrySetCanceled();
+			base.Disappeared();
+		}
     }
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
@@ -121,6 +127,12 @@ namespace MvvmCross.Core.ViewModels
         {
             _tcs.TrySetResult(result);
             return Task.FromResult(Close(this));
+        }
+
+        public override void Disappeared()
+        {
+            _tcs?.TrySetCanceled();
+            base.Disappeared();
         }
     }
 }

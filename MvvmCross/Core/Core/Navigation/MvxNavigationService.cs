@@ -201,7 +201,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
 
-            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
+			var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var tcs = new TaskCompletionSource<TResult>();
@@ -212,7 +212,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-            return await tcs.Task;
+            try
+            {
+                return await tcs.Task;
+            }
+            catch (OperationCanceledException ex)
+            {
+                return default(TResult);
+            }
         }
 
         public async Task<TResult> Navigate<TViewModel, TResult>()
@@ -232,7 +239,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-            return await tcs.Task;
+			try
+			{
+				return await tcs.Task;
+			}
+			catch (OperationCanceledException ex)
+			{
+				return default(TResult);
+			}
         }
 
         public async Task Navigate<TParameter>(string path, TParameter param) where TParameter : class
@@ -258,7 +272,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-            return await tcs.Task;
+			try
+			{
+				return await tcs.Task;
+			}
+			catch (OperationCanceledException ex)
+			{
+				return default(TResult);
+			}
         }
 
         public async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class
@@ -275,7 +296,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-            return await tcs.Task;
+			try
+			{
+				return await tcs.Task;
+			}
+			catch (OperationCanceledException ex)
+			{
+				return default(TResult);
+			}
         }
 
         public async Task Navigate<TViewModel, TParameter>(TParameter param)

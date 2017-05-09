@@ -40,8 +40,21 @@ namespace MvvmCross.Droid.Views
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
-            var intent = requestTranslator.GetIntentFor(request);
+			IMvxAndroidViewModelRequestTranslator requestTranslator;
+			requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
+			Intent intent;
+
+            if(request is MvxViewModelInstanceRequest)
+            {
+                var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                intent = instanceRequest.Item1;
+            }
+            else
+            {
+				requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
+				intent = requestTranslator.GetIntentFor(request); 
+            }
+
             return intent;
         }
 
