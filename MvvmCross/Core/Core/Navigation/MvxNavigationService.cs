@@ -138,7 +138,7 @@ namespace MvvmCross.Core.Navigation
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
                 viewModel = (IMvxViewModel)facade;
-                
+
                 try
                 {
                     request = await facade.BuildViewModelRequest(path, paramDict);
@@ -201,7 +201,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
 
-			var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
+            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var tcs = new TaskCompletionSource<TResult>();
@@ -239,14 +239,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-			try
-			{
-				return await tcs.Task;
-			}
-			catch (OperationCanceledException ex)
-			{
-				return default(TResult);
-			}
+            try
+            {
+                return await tcs.Task;
+            }
+            catch (OperationCanceledException ex)
+            {
+                return default(TResult);
+            }
         }
 
         public async Task Navigate<TParameter>(string path, TParameter param) where TParameter : class
@@ -266,20 +266,20 @@ namespace MvvmCross.Core.Navigation
             OnBeforeNavigate(this, args);
 
             var viewModel = (IMvxViewModelResult<TResult>)await NavigateRoute(path);
-            
+
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
 
             OnAfterNavigate(this, args);
 
-			try
-			{
-				return await tcs.Task;
-			}
-			catch (OperationCanceledException ex)
-			{
-				return default(TResult);
-			}
+            try
+            {
+                return await tcs.Task;
+            }
+            catch (OperationCanceledException ex)
+            {
+                return default(TResult);
+            }
         }
 
         public async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class
@@ -296,14 +296,14 @@ namespace MvvmCross.Core.Navigation
 
             OnAfterNavigate(this, args);
 
-			try
-			{
-				return await tcs.Task;
-			}
-			catch (OperationCanceledException ex)
-			{
-				return default(TResult);
-			}
+            try
+            {
+                return await tcs.Task;
+            }
+            catch (OperationCanceledException ex)
+            {
+                return default(TResult);
+            }
         }
 
         public async Task Navigate<TViewModel, TParameter>(TParameter param)

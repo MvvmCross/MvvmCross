@@ -97,20 +97,23 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
+			if (tcs == null)
+				throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
+            
             _tcs = tcs;
         }
 
         public virtual Task<bool> Close(TResult result)
         {
-            _tcs.TrySetResult(result);
+            _tcs?.TrySetResult(result);
             return Task.FromResult(Close(this));
         }
 
-		public override void Disappeared()
-		{
-			_tcs?.TrySetCanceled();
-			base.Disappeared();
-		}
+        public override void Disappeared()
+        {
+            _tcs?.TrySetCanceled();
+            base.Disappeared();
+        }
     }
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
@@ -119,13 +122,16 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
+			if (tcs == null)
+				throw new ArgumentException("TaskCompletionSource should not be null", nameof(tcs));
+            
             _tcs = tcs;
         }
 
         public abstract Task Initialize(TParameter parameter);
         public virtual Task<bool> Close(TResult result)
         {
-            _tcs.TrySetResult(result);
+            _tcs?.TrySetResult(result);
             return Task.FromResult(Close(this));
         }
 

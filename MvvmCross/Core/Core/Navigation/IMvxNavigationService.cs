@@ -23,19 +23,18 @@ namespace MvvmCross.Core.Navigation
         event BeforeCloseEventHandler BeforeClose;
         event AfterCloseEventHandler AfterClose;
 
-
         Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
         Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
         Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
         Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
 
-		/// <summary>
-		/// Translates the provided Uri to a ViewModel request and dispatches it.
-		/// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
-		/// </summary>
-		/// <param name="path">URI to route</param>
-		/// <returns>A task to await upon</returns>
-		Task Navigate(string path);
+        /// <summary>
+        /// Translates the provided Uri to a ViewModel request and dispatches it.
+        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
+        /// </summary>
+        /// <param name="path">URI to route</param>
+        /// <returns>A task to await upon</returns>
+        Task Navigate(string path);
         Task Navigate<TParameter>(string path, TParameter param) where TParameter : class;
         Task<TResult> Navigate<TResult>(string path) where TResult : class;
         Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class;
