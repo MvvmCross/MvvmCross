@@ -21,21 +21,21 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-		public virtual void Appearing()
-		{
-		}
+        public virtual void Appearing()
+        {
+        }
 
-		public virtual void Appeared()
-		{
-		}
+        public virtual void Appeared()
+        {
+        }
 
-		public virtual void Disappearing()
-		{
-		}
+        public virtual void Disappearing()
+        {
+        }
 
-		public virtual void Disappeared()
-		{
-		}
+        public virtual void Disappeared()
+        {
+        }
 
         public void Init(IMvxBundle parameters)
         {
@@ -51,7 +51,7 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public virtual void Destroy ()
+        public virtual void Destroy()
         {
         }
 
@@ -90,26 +90,26 @@ namespace MvvmCross.Core.ViewModels
         public abstract Task Init(TParameter parameter);
     }
 
-	//TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
-	public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
-	{
-		TaskCompletionSource<TResult> _tcs;
+    //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
+    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
+    {
+        TaskCompletionSource<TResult> _tcs;
 
-		public void SetClose(TaskCompletionSource<TResult> tcs)
-		{
-			_tcs = tcs;
-		}
+        public void SetClose(TaskCompletionSource<TResult> tcs)
+        {
+            _tcs = tcs;
+        }
 
-		public virtual async Task<bool> Close(TResult result)
-		{
-			_tcs.TrySetResult(result);
-            return Close(this);
-		}
-	}
+        public virtual Task<bool> Close(TResult result)
+        {
+            _tcs.TrySetResult(result);
+            return Task.FromResult(Close(this));
+        }
+    }
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
-        private TaskCompletionSource<TResult> _tcs { get; set; }
+        TaskCompletionSource<TResult> _tcs;
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
@@ -117,10 +117,10 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public abstract Task Init(TParameter parameter);
-        public virtual async Task<bool> Close(TResult result)
+        public virtual Task<bool> Close(TResult result)
         {
             _tcs.TrySetResult(result);
-            return Close(this);
+            return Task.FromResult(Close(this));
         }
     }
 }
