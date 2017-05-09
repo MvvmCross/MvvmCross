@@ -14,12 +14,12 @@ namespace RoutingExample.iOS
         {
         }
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-			var set = this.CreateBindingSet<TestBViewController, TestBViewModel>();
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            var set = this.CreateBindingSet<TestBViewController, TestBViewModel>();
             set.Bind(CloseButton).To(vm => vm.CloseViewModelCommand);
-			set.Apply();
-		}
+            set.Apply();
+        }
     }
 }
