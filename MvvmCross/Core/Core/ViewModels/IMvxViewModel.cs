@@ -32,7 +32,7 @@ namespace MvvmCross.Core.ViewModels
 
     public interface IMvxViewModel<TParameter> : IMvxViewModel where TParameter : class
     {
-        Task Init(TParameter parameter);
+        Task Initialize(TParameter parameter);
     }
 
     //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains

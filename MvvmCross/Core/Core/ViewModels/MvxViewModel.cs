@@ -84,10 +84,10 @@ namespace MvvmCross.Core.ViewModels
             }
 
             var deserialized = serializer.DeserializeObject<TParameter>(parameter);
-            await Init(deserialized);
+            await Initialize(deserialized);
         }
 
-        public abstract Task Init(TParameter parameter);
+        public abstract Task Initialize(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
@@ -116,7 +116,7 @@ namespace MvvmCross.Core.ViewModels
             _tcs = tcs;
         }
 
-        public abstract Task Init(TParameter parameter);
+        public abstract Task Initialize(TParameter parameter);
         public virtual Task<bool> Close(TResult result)
         {
             _tcs.TrySetResult(result);

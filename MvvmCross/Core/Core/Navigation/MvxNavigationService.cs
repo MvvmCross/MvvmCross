@@ -137,9 +137,7 @@ namespace MvvmCross.Core.Navigation
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
-                viewModel = facade as IMvxViewModel;
-                if (viewModel == null)
-                    throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModel)}");
+                viewModel = (IMvxViewModel)facade;
                 
                 try
                 {
@@ -160,10 +158,7 @@ namespace MvvmCross.Core.Navigation
             }
             else
             {
-                viewModel = Mvx.IocConstruct(viewModelType) as IMvxViewModel;
-                if (viewModel == null)
-                    throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModel)}");
-                
+                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
                 request = new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
             }
             _viewDispatcher.ShowViewModel(request);
@@ -206,17 +201,14 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
 
-            var viewModel = Mvx.IocConstruct<TViewModel>() as IMvxViewModel<TParameter, TResult>;
-			if (viewModel == null)
-				throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModel<TParameter, TResult>)}");
-            
+            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
 
             _viewDispatcher.ShowViewModel(request);
-            await viewModel.Init(param);
+            await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
 
@@ -230,10 +222,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
 
-            var viewModel = Mvx.IocConstruct<TViewModel>() as IMvxViewModelResult<TResult>;
-			if (viewModel == null)
-				throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModelResult<TResult>)}");
-            
+            var viewModel = (IMvxViewModelResult<TResult>)Mvx.IocConstruct<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var tcs = new TaskCompletionSource<TResult>();
@@ -251,11 +240,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(path);
             OnBeforeNavigate(this, args);
 
-            var viewModel = await NavigateRoute(path) as IMvxViewModel<TParameter>;
-            if (viewModel == null)
-                throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModelResult<TParameter>)}");
-            
-            await viewModel.Init(param);
+            var viewModel = (IMvxViewModel<TParameter>)await NavigateRoute(path);
+            await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
         }
@@ -265,9 +251,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(path);
             OnBeforeNavigate(this, args);
 
-            var viewModel = await NavigateRoute(path) as IMvxViewModelResult<TResult>;
-            if (viewModel == null)
-                throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModelResult<TResult>)}");
+            var viewModel = (IMvxViewModelResult<TResult>)await NavigateRoute(path);
             
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
@@ -282,14 +266,12 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(path);
             OnBeforeNavigate(this, args);
 
-            var viewModel = await NavigateRoute(path) as IMvxViewModel<TParameter, TResult>;
-            if (viewModel == null)
-                throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModel<TParameter, TResult>)}");
-            
+            var viewModel = (IMvxViewModel<TParameter, TResult>)await NavigateRoute(path);
+
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
 
-            await viewModel.Init(param);
+            await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
 
@@ -303,13 +285,11 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
 
-            var viewModel = Mvx.IocConstruct<TViewModel>() as IMvxViewModel<TParameter>;
-            if (viewModel == null)
-                throw new MvxException($"The ViewModel '{viewModel}' doesn't implement {nameof(IMvxViewModel<TParameter>)}");
-            
+            var viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct<TViewModel>();
+
             var request = new MvxViewModelInstanceRequest(viewModel);
             _viewDispatcher.ShowViewModel(request);
-            await viewModel.Init(param);
+            await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
         }
