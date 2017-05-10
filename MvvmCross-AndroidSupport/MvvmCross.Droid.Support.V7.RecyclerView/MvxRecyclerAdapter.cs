@@ -167,9 +167,32 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override int ItemCount => _itemsSource.Count();
 
-        public virtual object GetItem(int position)
+        public virtual object GetItem(int viewPosition)
         {
-            return _itemsSource.ElementAt(position);
+            var itemsSourcePosition = GetItemsSourcePosition(viewPosition);
+
+            if (itemsSourcePosition >= 0 && itemsSourcePosition < _itemsSource.Count())
+            {
+                return _itemsSource.ElementAt(itemsSourcePosition);
+            }
+
+            return null;
+        }
+
+        protected virtual int GetViewPosition(object item)
+        {
+            var itemsSourcePosition = _itemsSource.GetPosition(item);
+            return GetViewPosition(itemsSourcePosition);
+        }
+
+        protected virtual int GetViewPosition(int itemsSourcePosition)
+        {
+            return itemsSourcePosition;
+        }
+
+        protected virtual int GetItemsSourcePosition(int viewPosition)
+        {
+            return viewPosition;
         }
 
         public int ItemTemplateId { get; set; }
@@ -213,7 +236,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
+                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), GetViewPosition(e.NewItems.Count));
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
@@ -221,14 +244,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                             var oldItem = e.OldItems[i];
                             var newItem = e.NewItems[i];
 
-                            NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
+                            NotifyItemMoved(GetViewPosition(oldItem), GetViewPosition(newItem));
                         }
                         break;
                     case NotifyCollectionChangedAction.Replace:
-                        NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
+                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), GetViewPosition(e.NewItems.Count));
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
+                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), GetViewPosition(e.OldItems.Count));
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         NotifyDataSetChanged();
