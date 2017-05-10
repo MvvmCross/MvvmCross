@@ -15,7 +15,7 @@ namespace MvvmCross.Plugins.DownloadCache.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxIosLocalFileImageLoader
-        : MvxAllThreadDispatchingObject
+        : MvxMainThreadDispatchingObject
         , IMvxLocalFileImageLoader<UIImage>
     {
         private const string ResourcePrefix = "res:";

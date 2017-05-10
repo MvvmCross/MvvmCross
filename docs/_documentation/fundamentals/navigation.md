@@ -17,15 +17,15 @@ The following Api is available to use:
 public interface IMvxNavigationService
 {
     Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
-    Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel;
-    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel;
-    Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModel;
+    Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
+    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
+    Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
     Task Navigate(string path);
-    Task Navigate<TParameter>(string path, TParameter param);
-    Task<TResult> Navigate<TResult>(string path);
-    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param);
-    Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+    Task Navigate<TParameter>(string path, TParameter param) where TParameter : class;
+    Task<TResult> Navigate<TResult>(string path) where TResult : class;
+    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class;
     Task<bool> CanNavigate(string path);
+    Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
     Task<bool> Close(IMvxViewModel viewModel);
 }
 
@@ -61,7 +61,7 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject>
 {
-    public async Task Init(MyObject parameter)
+    public async Task Initialize(MyObject parameter)
     {
         //Do something with parameter
     }
@@ -88,15 +88,14 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
-    public async Task Init(MyObject parameter)
+    public async Task Initialize(MyObject parameter)
     {
         //Do something with parameter
     }
-
-    public async Task<MyReturnObject> Close()
+    
+    public async Task SomeMethod()
     {
-        await SomeMethod();
-        return new MyReturnObject();
+        await Close(new MyObject());
     }
 }
 ```

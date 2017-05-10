@@ -13,7 +13,7 @@ using MvvmCross.Core.Navigation;
 
 namespace RoutingExample.Droid
 {
-    [Activity(Label = "Example", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Example", MainLauncher = true, Icon = "@mipmap/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "mvx",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "mvvmcross.com",

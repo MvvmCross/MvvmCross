@@ -13,12 +13,12 @@ namespace MvvmCross.CodeAnalysis.Analyzers
     public class AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer : DiagnosticAnalyzer
     {
         internal static readonly LocalizableString Title = "Consider passing a parameter to ShowViewModel<T> for the generic form of MvxViewModel<T>";
-        internal static readonly LocalizableString MessageFormat = "'{0}' inherits from generic 'MvxViewModel<TInit>' or implements 'IMvxViewModelInitializer<TInit>' and requires an argument of type {1}";
-        internal static readonly LocalizableString Description = "When calling 'ShowViewModel<TViewModel, TInit>()', if TViewModel inherits from the generic 'MvxViewModel<TInit>' or implements 'IMvxViewModelInitializer<TInit>', then the method call to ShowViewModel should be passing a TInit argument";
+        internal static readonly LocalizableString MessageFormat = "'{0}' inherits from generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TParameter>' and requires an argument of type {1}";
+        internal static readonly LocalizableString Description = "When calling 'ShowViewModel<TViewModel, TParameter>()', if TViewModel inherits from the generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TInit>', then the method call to ShowViewModel should be passing a TInit argument";
         internal const string Category = Categories.Usage;
 
         internal static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, "Required Matching Type");
-        private static readonly string MvxViewModelInitializerName = typeof(IMvxViewModelInitializer<>).Name;
+        private static readonly string MvxViewModelInitializerName = typeof(IMvxViewModel<>).Name;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(Rule);

@@ -1,29 +1,25 @@
 using System;
 using Android.Content;
+using Android.Content.Res;
 using Android.Util;
 using MvvmCross.Binding.Droid.ResourceHelpers;
-using MvvmCross.Droid.Support.V7.RecyclerView.Grouping.DataConverters;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 {
-    internal static class MvxRecyclerViewAttributeExtensions
+    public static class MvxRecyclerViewAttributeExtensions
     {
-        private static MvxRecyclerViewTemplateSelectorAttributes ReadRecyclerViewItemTemplateSelectorAttributes(Context context, IAttributeSet attrs)
+        private static string ReadRecyclerViewItemTemplateSelectorClassName(Context context, IAttributeSet attrs)
         {
             TryInitializeBindingResourcePaths();
 
-            string templateSelectorClassName = string.Empty;
-            string groupedDataConverterClassName = string.Empty;
-            int headerLayoutId = 0;
-            int footerLayoutId = 0;
-            int groupSectionLayoutId = 0;
+            TypedArray typedArray = null;
 
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
-
+            string className = string.Empty;
             try
             {
+                typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewItemTemplateSelectorGroupId);
                 int numberOfStyles = typedArray.IndexCount;
 
                 for (int i = 0; i < numberOfStyles; ++i)
@@ -31,194 +27,68 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
                     var attributeId = typedArray.GetIndex(i);
 
                     if (attributeId == MvxRecyclerViewItemTemplateSelector)
-                        templateSelectorClassName = typedArray.GetString(attributeId);
-                    if (attributeId == MvxRecyclerViewHeaderLayoutId)
-                        headerLayoutId = typedArray.GetResourceId(attributeId, 0);
-                    if (attributeId == MvxRecyclerViewFooterLayoutId)
-                        footerLayoutId = typedArray.GetResourceId(attributeId, 0);
-                    if (attributeId == MvxRecyclerViewGroupSectionLayoutId)
-                        groupSectionLayoutId = typedArray.GetResourceId(attributeId, 0);
-                    if (attributeId == MvxRecyclerViewGroupedDataConverter)
-                        groupedDataConverterClassName = typedArray.GetString(attributeId);
+                        className = typedArray.GetString(attributeId);
                 }
             }
             finally
             {
-                typedArray.Recycle();
+                typedArray?.Recycle();
             }
+            
+            if (string.IsNullOrEmpty(className))
+                return typeof (MvxDefaultTemplateSelector).FullName;
 
-            if (string.IsNullOrEmpty(templateSelectorClassName))
-                templateSelectorClassName = typeof(MvxDefaultTemplateSelector).FullName;
-
-            return new MvxRecyclerViewTemplateSelectorAttributes()
-            {
-                TemplateSelectorClassName = templateSelectorClassName,
-                FooterLayoutId = footerLayoutId,
-                HeaderLayoutId = headerLayoutId,
-                GroupSectionLayoutId = groupSectionLayoutId,
-                GroupedDataConverterClassName = groupedDataConverterClassName
-            };
+            return className;
         }
-
-        public static MvxBaseTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs)
+            
+        public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs)
         {
-            var templateSelectorAttributes = ReadRecyclerViewItemTemplateSelectorAttributes(context, attrs);
-            var type = Type.GetType(templateSelectorAttributes.TemplateSelectorClassName);
+            var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
+            var type = Type.GetType(templateSelectorClassName);
 
             if (type == null)
             {
-                var message = $"Sorry but type with class name: {templateSelectorAttributes} does not exist." +
+                var message = $"Sorry but type with class name: {templateSelectorClassName} does not exist." +
                              $"Make sure you have provided full Type name: namespace + class name, AssemblyName." +
                               $"Example (check Example.Droid sample!): Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
-
-            if (!typeof(MvxBaseTemplateSelector).IsAssignableFrom(type))
+         
+            if (!typeof (IMvxTemplateSelector).IsAssignableFrom(type))
             {
-                var message = $"Sorry but type: {type} does not implement {nameof(MvxBaseTemplateSelector)} interface.";
+                string message = $"Sorry but type: {type} does not implement {nameof(IMvxTemplateSelector)} interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                var message = $"Sorry can not instatiate {nameof(MvxBaseTemplateSelector)} as provided type: {type} is abstract/interface.";
+                string message = $"Sorry can not instatiate {nameof(IMvxTemplateSelector)} as provided type: {type} is abstract/interface.";
                 Mvx.Error(message);
                 throw new InvalidOperationException(message);
             }
 
-            var templateSelector = (MvxBaseTemplateSelector)Activator.CreateInstance(type);
-            templateSelector.FooterLayoutId = templateSelectorAttributes.FooterLayoutId;
-            templateSelector.HeaderLayoutId = templateSelectorAttributes.HeaderLayoutId;
-            templateSelector.GroupSectionLayoutId = templateSelectorAttributes.GroupSectionLayoutId;
-            return templateSelector;
-        }
-
-        public static bool IsGroupingSupported(Context context, IAttributeSet attrs)
-        {
-            return
-                !string.IsNullOrEmpty(ReadRecyclerViewItemTemplateSelectorAttributes(context, attrs).GroupedDataConverterClassName);
-        }
-
-        public static IMvxGroupedDataConverter BuildMvxGroupedDataConverter(Context context, IAttributeSet attrs)
-        {
-            var groupedDataConverterClassName = ReadRecyclerViewItemTemplateSelectorAttributes(context, attrs).GroupedDataConverterClassName;
-            var type = Type.GetType(groupedDataConverterClassName);
-
-            if (type == null)
-            {
-                var message = $"Sorry but type with class name: {groupedDataConverterClassName} does not exist." +
-                              $"Make sure you have provided full Type name: namespace + class name, AssemblyName.";
-                Mvx.Error(message);
-                throw new InvalidOperationException(message);
-            }
-
-            if (!typeof(IMvxGroupedDataConverter).IsAssignableFrom(type))
-            {
-                var message = $"Sorry but type: {type} does not implement {nameof(IMvxGroupedDataConverter)} interface.";
-                Mvx.Error(message);
-                throw new InvalidOperationException(message);
-            }
-
-            if (type.IsAbstract)
-            {
-                var message = $"Sorry can not instatiate {nameof(IMvxGroupedDataConverter)} as provided type: {type} is abstract/interface.";
-                Mvx.Error(message);
-                throw new InvalidOperationException(message);
-            }
-
-            return Activator.CreateInstance(type) as IMvxGroupedDataConverter;
-        }
-
-        public static bool HidesHeaderIfEmpty(Context context, IAttributeSet attrs)
-        {
-            TryInitializeBindingResourcePaths();
-
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
-
-            try
-            {
-                int numberOfStyles = typedArray.IndexCount;
-
-                for (int i = 0; i < numberOfStyles; ++i)
-                {
-                    var attributeId = typedArray.GetIndex(i);
-                    if (attributeId == MvxRecyclerViewHidesHeaderIfEmpty)
-                        return typedArray.GetBoolean(attributeId, true);
-                }
-
-                return true;
-            }
-            finally
-            {
-                typedArray.Recycle();
-            }
+            return Activator.CreateInstance(type) as IMvxTemplateSelector;
         }
 
 
-        public static bool HidesFooterIfEmpty(Context context, IAttributeSet attrs)
-        {
-            TryInitializeBindingResourcePaths();
-
-            var typedArray = context.ObtainStyledAttributes(attrs, MvxRecyclerViewGroupId);
-
-            try
-            {
-                int numberOfStyles = typedArray.IndexCount;
-
-                for (int i = 0; i < numberOfStyles; ++i)
-                {
-                    var attributeId = typedArray.GetIndex(i);
-                    if (attributeId == MvxRecyclerViewHidesFooterIfEmpty)
-                        return typedArray.GetBoolean(attributeId, true);
-                }
-
-                return true;
-            }
-            finally
-            {
-                typedArray.Recycle();
-            }
-        }
-
-        private static bool _areBindingResourcesInitialized = false;
-
+        private static bool areBindingResourcesInitialized = false;
         private static void TryInitializeBindingResourcePaths()
         {
-            if (_areBindingResourcesInitialized)
+            if (areBindingResourcesInitialized)
                 return;
-            _areBindingResourcesInitialized = true;
+            areBindingResourcesInitialized = true;
 
             var resourceTypeFinder = Mvx.Resolve<IMvxAppResourceTypeFinder>().Find();
             var styleableType = resourceTypeFinder.GetNestedType("Styleable");
 
-            MvxRecyclerViewGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);
-            MvxRecyclerViewItemTemplateSelector = (int)styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
-            MvxRecyclerViewHeaderLayoutId = (int)styleableType.GetField("MvxRecyclerView_MvxHeaderLayoutId").GetValue(null);
-            MvxRecyclerViewFooterLayoutId = (int)styleableType.GetField("MvxRecyclerView_MvxFooterLayoutId").GetValue(null);
-            MvxRecyclerViewGroupedDataConverter =
-                (int)styleableType.GetField("MvxRecyclerView_MvxGroupedDataConverter").GetValue(null);
-            MvxRecyclerViewGroupSectionLayoutId = (int)styleableType.GetField("MvxRecyclerView_MvxGroupSectionLayoutId").GetValue(null);
-            MvxRecyclerViewHidesHeaderIfEmpty =
-                (int)styleableType.GetField("MvxRecyclerView_MvxHidesHeaderIfEmpty").GetValue(null);
-            MvxRecyclerViewHidesFooterIfEmpty =
-                (int)styleableType.GetField("MvxRecyclerView_MvxHidesFooterIfEmpty").GetValue(null);
+            MvxRecyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);
+            MvxRecyclerViewItemTemplateSelector = (int) styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
         }
 
-        private static int[] MvxRecyclerViewGroupId { get; set; }
+        private static int[] MvxRecyclerViewItemTemplateSelectorGroupId { get; set; }
         private static int MvxRecyclerViewItemTemplateSelector { get; set; }
 
-        private static int MvxRecyclerViewHeaderLayoutId { get; set; }
-
-        private static int MvxRecyclerViewFooterLayoutId { get; set; }
-
-        private static int MvxRecyclerViewGroupSectionLayoutId { get; set; }
-
-        private static int MvxRecyclerViewHidesHeaderIfEmpty { get; set; }
-
-        private static int MvxRecyclerViewHidesFooterIfEmpty { get; set; }
-
-        private static int MvxRecyclerViewGroupedDataConverter { get; set; }
     }
 }
