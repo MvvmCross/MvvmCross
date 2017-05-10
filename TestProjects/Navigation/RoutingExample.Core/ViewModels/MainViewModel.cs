@@ -7,6 +7,7 @@ using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using RoutingExample.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace RoutingExample.Core.ViewModels
 {
@@ -20,7 +21,12 @@ namespace RoutingExample.Core.ViewModels
             _routingService = routingService;
         }
 
-        private IMvxCommand _showACommand;
+		public MainViewModel()
+		{
+			_routingService = Mvx.Resolve<IMvxNavigationService>();
+		}
+
+		private IMvxCommand _showACommand;
 
         public IMvxCommand ShowACommand
         {
@@ -45,7 +51,7 @@ namespace RoutingExample.Core.ViewModels
                 {
                     //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
                     var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
-                    var test = result?.FirstName;
+					this.LastResult = result?.FirstName;
                 }));
             }
         }
@@ -62,5 +68,19 @@ namespace RoutingExample.Core.ViewModels
                 }));
             }
         }
+
+		
+		private string _lastResult;
+		public string LastResult {
+			get {
+				return _lastResult;
+			}
+			set {
+				if (object.Equals(_lastResult, value))
+					return;
+				_lastResult = value;
+				this.RaisePropertyChanged(nameof(LastResult));
+			}
+		}
     }
 }

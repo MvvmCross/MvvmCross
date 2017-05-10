@@ -4,6 +4,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:minHeight="30dp"
+        android:textSize="30sp"
+        android:text="Last Result"
+        android:textColor="@android:color/white"
+        local:MvxBind="Text LastResult" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -15,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="mvx://test/b"
-        local:MvxBind="Click ShowBCommand;"/>
+        local:MvxBind="Click ShowBCommand;" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="mvx://test/random"
-        local:MvxBind="Click ShowRandomCommand;"/>
+        local:MvxBind="Click ShowRandomCommand;" />
 </LinearLayout>
