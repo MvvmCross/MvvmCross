@@ -26,7 +26,9 @@ namespace MvvmCross.Droid.Views
 
         public IMvxViewModel Get(int index)
         {
-            return this._viewModels[index];
+            IMvxViewModel viewModel;
+            _viewModels.TryGetValue(index, out viewModel);
+            return viewModel;
         }
 
         public void Remove(int index)
