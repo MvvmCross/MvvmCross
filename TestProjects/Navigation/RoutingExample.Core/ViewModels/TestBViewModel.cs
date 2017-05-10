@@ -11,12 +11,12 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Core.ViewModels
 {
     public class TestBViewModel
-        : MvxViewModel
+        : MvxViewModel<User, User>
     {
 
         public TestBViewModel()
         {
-            
+
         }
 
         private string _id;
@@ -29,6 +29,13 @@ namespace RoutingExample.Core.ViewModels
         public void Init(string id)
         {
             _id = id;
+        }
+
+        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(async () => await Close(new User("Return result", "Something")));
+
+        public override async Task Initialize(User parameter)
+        {
+            var test = parameter;
         }
     }
 }

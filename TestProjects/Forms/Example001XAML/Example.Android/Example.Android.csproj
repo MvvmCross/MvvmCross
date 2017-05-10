@@ -34,14 +34,8 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-    <BundleAssemblies>False</BundleAssemblies>
-    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <Debugger>.Net (Xamarin)</Debugger>
     <AndroidTlsProvider>btls</AndroidTlsProvider>
-    <AotAssemblies>False</AotAssemblies>
-    <EnableLLVM>False</EnableLLVM>
-    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
-    <EnableProguard>False</EnableProguard>
     <AndroidHttpClientHandlerType>System.Net.Http.HttpClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -190,7 +184,7 @@
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example\Example.csproj">
-      <Project>{fa676542-4fa2-44aa-b5eb-d7acef139592}</Project>
+      <Project>{2AB74840-32C8-4E07-923E-C9D6A09F81B2}</Project>
       <Name>Example</Name>
     </ProjectReference>
   </ItemGroup>

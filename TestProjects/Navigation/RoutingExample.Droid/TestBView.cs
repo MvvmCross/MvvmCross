@@ -11,7 +11,7 @@ using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [Activity(Label = "A", Icon = "@drawable/icon")]
+    [Activity(Label = "A", Icon = "@mipmap/icon")]
     public class TestBView : MvxActivity<TestBViewModel>
     {
 
