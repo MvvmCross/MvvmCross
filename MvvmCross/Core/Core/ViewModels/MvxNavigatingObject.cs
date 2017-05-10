@@ -41,9 +41,9 @@ namespace MvvmCross.Core.ViewModels
         /// Be aware that pasing big objects will block your UI, and should be handled async by yourself
         /// </summary>
         /// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
-        protected bool ShowViewModel<TViewModel, TInit>(TInit parameter,
+        protected bool ShowViewModel<TViewModel, TParameter>(TParameter parameter,
                                                  IMvxBundle presentationBundle = null)
-            where TViewModel : IMvxViewModelInitializer<TInit>
+            where TViewModel : IMvxViewModel<TParameter> where TParameter : class
         {
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
