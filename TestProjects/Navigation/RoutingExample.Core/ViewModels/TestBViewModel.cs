@@ -31,7 +31,7 @@ namespace RoutingExample.Core.ViewModels
             _id = id;
         }
 
-        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(async () => await Close(new User("Return result", "Something")));
+		public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(async () => await Close(new User("Hello " + DateTime.Now.Second, "Something")));
 
         public override async Task Initialize(User parameter)
         {
