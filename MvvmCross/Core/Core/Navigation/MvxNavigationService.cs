@@ -137,40 +137,42 @@ namespace MvvmCross.Core.Navigation
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
-                viewModel = (IMvxViewModel)facade;
 
                 try
                 {
-                    request = await facade.BuildViewModelRequest(path, paramDict);
+                    var facadeRequest = await facade.BuildViewModelRequest(path, paramDict);
+                    viewModel = (IMvxViewModel)Mvx.IocConstruct(facadeRequest.ViewModelType);
+
+                    if (facadeRequest == null)
+                    {
+                        Mvx.TaggedWarning("MvxNavigationService", "Facade did not return a valid MvxViewModelRequest.");
+                        return null;
+                    }
                 }
                 catch (Exception ex)
                 {
                     Mvx.TaggedError("MvxNavigationService",
                         "Exception thrown while processing URL: {0} with RoutingFacade: {1}, {2}",
-                        path, viewModelType, ex);
-                }
-
-                if (request == null)
-                {
-                    Mvx.TaggedWarning("MvxNavigationService", "Facade did not return a valid MvxViewModelRequest.");
+                                    path, viewModelType, ex);
                     return null;
                 }
             }
             else
             {
                 viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
-                request = new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
             }
+
+            request = new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
             _viewDispatcher.ShowViewModel(request);
 
             return viewModel;
         }
 
-        public async Task<bool> CanNavigate(string path)
+        public Task<bool> CanNavigate(string path)
         {
             KeyValuePair<Regex, Type> entry;
 
-            return TryGetRoute(path, out entry);
+            return Task.FromResult(TryGetRoute(path, out entry));
         }
 
         public Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
@@ -216,7 +218,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return await tcs.Task;
             }
-            catch (OperationCanceledException ex)
+            catch
             {
                 return default(TResult);
             }
@@ -243,7 +245,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return await tcs.Task;
             }
-            catch (OperationCanceledException ex)
+            catch
             {
                 return default(TResult);
             }
@@ -276,7 +278,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return await tcs.Task;
             }
-            catch (OperationCanceledException ex)
+            catch
             {
                 return default(TResult);
             }
@@ -300,7 +302,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return await tcs.Task;
             }
-            catch (OperationCanceledException ex)
+            catch
             {
                 return default(TResult);
             }

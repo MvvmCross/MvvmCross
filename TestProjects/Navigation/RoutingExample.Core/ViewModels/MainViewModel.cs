@@ -45,8 +45,7 @@ namespace RoutingExample.Core.ViewModels
                 {
                     //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
                     var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
-
-                    var test = result.FirstName;
+                    var test = result?.FirstName;
                 }));
             }
         }
