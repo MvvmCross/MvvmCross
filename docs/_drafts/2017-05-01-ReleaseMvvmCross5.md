@@ -63,6 +63,6 @@ https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5
 
 ## Open Collective
 
-As you all know MvvmCross is een Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
+As you all know MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
 
 https://opencollective.com/mvvmcross
