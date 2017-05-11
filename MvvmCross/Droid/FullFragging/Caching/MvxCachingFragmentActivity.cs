@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivity.cs
+﻿// MvxCachingFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -460,14 +460,14 @@ namespace MvvmCross.Droid.FullFragging.Caching
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel.Appearing();
+            ViewModel?.Appearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel.Disappearing(); // we don't have anywhere to get this info
-            ViewModel.Disappeared();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
         }
     }
 
