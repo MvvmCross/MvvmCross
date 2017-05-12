@@ -868,3 +868,82 @@ The framework that enables the Rio and Tibet binding extensions is interface-bas
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
+
+### Generic and typed bindings
+
+This change will add a generic "WithConversion" method. This will allow developers to strongly type the use of value converters, making refactoring a lot easier and more save. For example:
+
+```c#
+set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
+```
+
+Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
+
+Include an additional option than literal strings for MvvmCross defined custom bindings. The functionality to define a binding via its string name to remain as is, so no functionally is lost and fully backwards supported. Just expose the MvvmCross custom binding properties in a strongly typed manner. Will affect both MvvmCross platform custom bindings and plugins custom bindings.
+
+Extension methods can be used to return the custom binding name and additionally be used to restrict bindings against only allowed base types.
+
+MvvmCross changes
+
+Expose public extension methods. Note additional work will need to be done inside MvxPropertyExpressionParser to properly handle the extension methods (May need some help figuring out how best to do this).
+
+```c#
+namespace MvvmCross.Binding.iOS
+{
+    internal static class IOSPropertyBinding
+    {
+        public const string UILabelText = "Text";
+        public const string UIViewTap = "Tap";
+    }
+
+    public static class IOSPropertyBindingExtensions
+    {
+        public static string BindingUILabelText(this UILabel label)
+        {
+            return IOSPropertyBinding.UILabelText;
+        }
+
+        public static string BindingUIViewTap(this UIView view)
+        {
+            return IOSPropertyBinding.UIViewTap;
+        }
+    }
+
+    public class MvxIosBindingBuilder : MvxBindingBuilder
+    {
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            base.FillTargetFactories(registry);
+
+            registry.RegisterCustomBindingFactory<UILabel>(
+                IOSPropertyBinding.UILabelText,
+                view => new MvxUILabelTextTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<UIView>(
+                IOSPropertyBinding.UIViewTap,
+                view => new MvxUIViewTapTargetBinding(view));
+        }
+    }
+}
+```
+
+#### Developer Usage
+
+```c#
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.iOS;
+
+...
+
+var labelButton = new UILabel();
+
+var bindingSet = this.CreateBindingSet<HomeViewController, HomeViewModel>();
+bindingSet.Bind(labelButton).For(c => c.BindingUILabelText()).To(vm => vm.NextLabel);
+bindingSet.Bind(labelButton).For(c => c.BindingUIViewTap()).To(vm => vm.NextCommand);
+bindingSet.Apply();
+```
+
+#### Advantages
+
+Can include additional comments for developer to see via intellisense if needs be
+Checks whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
