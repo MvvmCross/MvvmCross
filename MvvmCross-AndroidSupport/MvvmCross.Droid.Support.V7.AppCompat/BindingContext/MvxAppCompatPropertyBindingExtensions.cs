@@ -6,9 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Support.V7.Widget;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxAppCompatPropertyBindingExtensions
     {

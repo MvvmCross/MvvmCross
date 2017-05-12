@@ -7,8 +7,9 @@
 
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Plugins.Color.Droid.Binding;
 
-namespace MvvmCross.Plugins.Color.Droid.Binding
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxAndroidColorPropertyBindingExtensions
     {

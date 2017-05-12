@@ -80,7 +80,7 @@
     <Compile Include="MvxAppCompatPropertyBinding.cs" />
     <Compile Include="MvxAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatActivityHelper.cs" />
-    <Compile Include="MvxAppCompatPropertyBindingExtensions.cs" />
+    <Compile Include="BindingContext\MvxAppCompatPropertyBindingExtensions.cs" />
     <Compile Include="MvxAppCompatSetupHelper.cs" />
     <Compile Include="EventSource\MvxEventSourceAppCompatActivity.cs" />
     <Compile Include="MvxAppCompatDialogFragment.cs" />

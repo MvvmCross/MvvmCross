@@ -5,9 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.iOS;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS
+namespace MvvmCross.Binding.BindingContext
 {
     public static class MvxIosPropertyBindingExtensions
     {

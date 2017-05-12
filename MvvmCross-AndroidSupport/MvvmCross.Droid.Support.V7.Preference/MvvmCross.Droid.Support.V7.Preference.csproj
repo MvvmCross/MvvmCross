@@ -83,7 +83,7 @@
     <Compile Include="MvxEventSourcePreferenceFragmentCompat.cs" />
     <Compile Include="MvxPreferenceFragmentCompat.cs" />
     <Compile Include="MvxPreferencePropertyBinding.cs" />
-    <Compile Include="MvxPreferencePropertyBindingExtensions.cs" />
+    <Compile Include="BindingContext\MvxPreferencePropertyBindingExtensions.cs" />
     <Compile Include="MvxPreferenceSetupHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target\MvxListPreferenceTargetBinding.cs" />
