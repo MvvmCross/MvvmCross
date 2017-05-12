@@ -236,7 +236,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), GetViewPosition(e.NewItems.Count));
+                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
@@ -248,10 +248,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                         }
                         break;
                     case NotifyCollectionChangedAction.Replace:
-                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), GetViewPosition(e.NewItems.Count));
+                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), GetViewPosition(e.OldItems.Count));
+                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         NotifyDataSetChanged();
