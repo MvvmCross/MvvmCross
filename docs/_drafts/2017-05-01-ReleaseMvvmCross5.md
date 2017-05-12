@@ -59,7 +59,7 @@ MvvmCross' powerful plugin framework has brought us many good things. However, o
 
 ## Changelog
 
-Below is a link to the complete changelog. More than 120 PR's made it in this release from ? developers. So a big hug to all these contributors!
+Below is a link to the complete changelog. More than 120 PR's made it in this release from over 30 developers. So a big hug to all these contributors!
 
 https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5.0.0
 
