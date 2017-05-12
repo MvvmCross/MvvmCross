@@ -44,89 +44,33 @@ Also if your app needs another kind of presentation mode, you can easily extend 
 
 The presenter uses a set of `PresentationAttributes` to define how a view will be displayed. The existing attributes are:
 
-##### MvxRootPresentationAttribute
-Used to set a view as _Root_. You should use this attribute over the view class that will be the root of your application (your app can have several root views, one at a time).
-The view root can be one of the following types:
-
-- To use stack navigation, your view can just be a `MvxViewController`, but it needs to set the attribute member `WrapInNavigationController` to true.
-- To use Tabs, your view needs to implement `IMvxTabBarViewController` or simply extend `MvxTabBarViewController`, which has all the needed behavior built in.
-- To use a SplitView, your view needs to implement `IMvxSplitViewController` or simply extend `MvxSplitViewController`, which has all the needed behavior built in.
-
-
-##### MvxChildPresentationAttribute
-Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack.
-The view class can decide if wants to be displayed animated or not through the attribute member `Animated` (the default value is `true`).
-
-
-##### MvxModalPresentationAttribute
-Used to display a view as _Modal_. You should use this attribute over a view class to present the view as a modal.
-There are several attribute members that the view class can customize:
-
-- WrapInNavigationController: If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`.
-- ModalPresentationStyle: Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`.
-- ModalTransitionStyle: Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`.
-- Animated: If set to true, the presentation will be animated. The default value is `true`.
-
-
-##### MvxTabPresentationAttribute
-This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxTabBarViewController`.
-By using it over a view class, the presenter will show the view as a _Tab_ inside the TabBarController.
-The presentation can be highly customized through this attribute members:
-
-- TabName: Defines the title of the tab that will be displayed below the tab icon. It has to be a magic string, but it can be for example a key to a localized string that you can grab overriding the method `SetTitleAndTabBarItem` in your TabBarController.
-- TabIconName: Defines the name of the resource that will be used as icon for the tab. It also has to be a magic string, but same as before, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController.
-- WrapInNavigationController: If set to `true`, the view will be wrapped in a `MvxNavigationController`, which will allow the tab to have its own navigation stack. **Important note**: When the current _Root_ is a TabBarController and there is no current modal navigation stack, child presentations will be tried to be displayed in the current selected _Tab_.
-- TabAccessibilityIdentifier: Corresponds to the UIViewController.View `AccessibilityIdentifier` property.
-
-##### MvxMasterSplitViewPresentationAttribute
-This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxSplitViewController`.
-By using it over a view class, the presenter will show the view as _Master_ of the split.
-
-There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`.
-
-
-##### MvxDetailSplitViewPresentationAttribute
-This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxSplitViewController`.
-By using it over a view class, the presenter will show the view as _Detail_ of the split.
-
-There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack.
-
+* MvxRootPresentationAttribute
+* MvxChildPresentationAttribute
+* MvxModalPresentationAttribute
+* MvxTabPresentationAttribute
+* MvxMasterSplitViewPresentationAttribute
+* MvxDetailSplitViewPresentationAttribute
 
 #### Views without attributes: Default values
 
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
 
-
-
-#### Extensibility
-The presenter is completely extensible! You can override any attribute and customize attribute members.
-
-You can also define new attributes to satisfy your needs. The steps to do so are:
-
-1. Add a new attribute that extends `MvxBasePresentationAttribute`
-2. Subclass MvxIosViewPresenter and make it the presenter of your application in Setup.cs (by overriding the method `CreatePresenter`).
-3. Override the method `RegisterAttributeTypes` and add a registry to the dictionary like this:
-
-```c#
-_attributeTypesToShowMethodDictionary.Add(
-    typeof(MyCustomModePresentationAttribute),
-    (vc, attribute, request) => ShowMyCustomModeViewController(vc, (MyCustomPresentationAttribute)attribute, request));
-```
-
-4. Implement a method that takes care of the presentation mode (in the example above, `ShowMyCustomModeViewController`).
-5. Use your attribute over a view class. Ready!
-
-
 #### Sample please!
 You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) iOS project to see this presenter in action.
 
 ### Improved navigation
 
-MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation! Other main features are that it is fully async and type safe.
-For more details see [#1634](https://github.com/MvvmCross/MvvmCross/issues/1634)
+MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation!
+
+The main features of the new navigation are:
+
+* Return a result to the ViewModel where you navigated from
+* Check if you are able to navigate to a certain ViewModel
+* Type safe
+* Fully async await
+* URL navigation with deeplinking to ViewModels
+* Events on navigate
 
 The following Api is available to use:
 
@@ -145,86 +89,11 @@ public interface IMvxNavigationService
     Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
     Task<bool> Close(IMvxViewModel viewModel);
 }
-
-public static class MvxNavigationExtensions
-{
-    public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
-    public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
-    public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-    public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
-    public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-    Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
-}
 ```
+
+For more details see [#1634](https://github.com/MvvmCross/MvvmCross/issues/1634)
 
 The Uri navigation will build the navigation stack if required. This will also enable deeplinking and building up the navigationstack for it. Every ViewModel added to the stack can split up into multiple paths of it's own backstack. This will enable all kinds of layout structures as Hamburger, Tab or Top navigation.
-
-In your ViewModel this could look like:
-
-```c#
-public class MyViewModel : MvxViewModel
-{
-    private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
-    {
-        _navigationService = navigationService;
-    }
-
-    public async Task SomeMethod()
-    {
-        _navigationService.Navigate<NextViewModel, MyObject>(new MyObject());
-    }
-}
-
-public class NextViewModel : MvxViewModel<MyObject>
-{
-    public async Task Initialize(MyObject parameter)
-    {
-        //Do something with parameter
-    }
-}
-```
-
-When you want to return a result to the place where you navigated from you can do:
-
-```c#
-public class MyViewModel : MvxViewModel
-{
-    private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
-    {
-        _navigationService = navigationService;
-    }
-
-    public async Task SomeMethod()
-    {
-        var result = await _navigationService.Navigate<NextViewModel, MyObject, MyReturnObject>(new MyObject());
-        //Do something with the result MyReturnObject that you get back
-    }
-}
-
-public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
-{
-    public async Task Initialize(MyObject parameter)
-    {
-        //Do something with parameter
-    }
-    
-    public async Task SomeMethod()
-    {
-        await Close(new MyObject());
-    }
-}
-```
-
-To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
-
-```c#
-if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
-{
-    //Do something
-}
-```
 
 If you want to intercept ViewModel navigation changes you can hook into the events of the NavigationService.
 
@@ -240,17 +109,16 @@ The events available are:
 * BeforeClose
 * AfterClose
 
+A full explanation can be found on the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
+
 ### Lifecycle / Event hooks
 
 Starting from MvvmCross 5.0 ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
 ```c#
     void Appearing();
-
     void Appeared();
-
     void Disappearing();
-
     void Disappeared();
 ```
 
@@ -258,17 +126,9 @@ The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call t
 
 It should be noted however that it is not 100% reliable but it should work for most of the apps. We don't know what you do in the lifecycle of your app and what could interfere with the called order of the viewmodel lifecycle events.
 
-#### Mapping view event to viewmodel events
-
-There has been a thread going on on the [Xamarin forums](https://forums.xamarin.com/discussion/comment/240043/) where the implementation is discussed of this functionality. MvvmCross has based its lifecycle support on this thread and those events. 
-
-|           | Appearing             | Appeared       | Disappearing         | Disappeared | 
-| iOS       | ViewWillAppear        | ViewDidAppear  | ViewWillDisappear    | ViewDidDisappear | 
-| Android   | OnAttachedToWindow    | OnGlobalLayout | OnPause              | OnDetachedToWindow | 
-| UWP       | Loading               | OnLoaded       | Unloaded             | OnUnloaded |    
-
-
 For more information on the implementation of this functionality please see [Github](https://github.com/MvvmCross/MvvmCross/pull/1601)
+
+Documentation for this is available on the [website](https://www.mvvmcross.com/documentation/fundamentals/viewmodel-lifecycle)
 
 ### Recyclerview features
 
@@ -288,58 +148,11 @@ Include an additional option than literal strings for MvvmCross defined custom b
 
 Extension methods can be used to return the custom binding name and additionally be used to restrict bindings against only allowed base types.
 
-MvvmCross changes
-
 Expose public extension methods. Note additional work will need to be done inside MvxPropertyExpressionParser to properly handle the extension methods (May need some help figuring out how best to do this).
-
-```c#
-namespace MvvmCross.Binding.iOS
-{
-    internal static class IOSPropertyBinding
-    {
-        public const string UILabelText = "Text";
-        public const string UIViewTap = "Tap";
-    }
-
-    public static class IOSPropertyBindingExtensions
-    {
-        public static string BindingUILabelText(this UILabel label)
-        {
-            return IOSPropertyBinding.UILabelText;
-        }
-
-        public static string BindingUIViewTap(this UIView view)
-        {
-            return IOSPropertyBinding.UIViewTap;
-        }
-    }
-
-    public class MvxIosBindingBuilder : MvxBindingBuilder
-    {
-        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
-        {
-            base.FillTargetFactories(registry);
-
-            registry.RegisterCustomBindingFactory<UILabel>(
-                IOSPropertyBinding.UILabelText,
-                view => new MvxUILabelTextTargetBinding(view));
-
-            registry.RegisterCustomBindingFactory<UIView>(
-                IOSPropertyBinding.UIViewTap,
-                view => new MvxUIViewTapTargetBinding(view));
-        }
-    }
-}
-```
 
 ##### Developer Usage
 
 ```c#
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.iOS;
-
-...
-
 var labelButton = new UILabel();
 
 var bindingSet = this.CreateBindingSet<HomeViewController, HomeViewModel>();
@@ -352,6 +165,8 @@ bindingSet.Apply();
 
 Can include additional comments for developer to see via intellisense if needs be
 Checks whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
+
+More information can be found in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
 ### Removal of WindowsPhone 8.x and Windows 8.x
 As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 is depreceated for a long time; removing formal support for this platform is the right thing to do.
