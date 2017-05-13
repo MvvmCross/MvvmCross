@@ -17,12 +17,14 @@ namespace MvvmCross.Plugins.File.Wpf
     public class Plugin
         : IMvxConfigurablePlugin
     {
-        private WpfFileStoreConfiguration _configuration;
-        private WpfFileStoreConfiguration Configuration => _configuration ?? WpfFileStoreConfiguration.Default;
+        private MvxFileConfiguration _configuration;
+        private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+        );
 
         public void Load()
         {
-            var fileStore = new MvxWpfFileStore(Configuration.AppendDefaultPath, Configuration.RootFolder);
+            var fileStore = new MvxIoFileStoreBase(Configuration.AppendDefaultPath, Configuration.BasePath);
             Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
             Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
@@ -31,20 +33,20 @@ namespace MvvmCross.Plugins.File.Wpf
         {
             if (configuration == null) return;
 
-            var wpfConfiguration = configuration as WpfFileStoreConfiguration;
-            if (wpfConfiguration == null)
+            var fileConfiguration = configuration as MvxFileConfiguration;
+            if (fileConfiguration == null)
             {
-                throw new MvxException("You must use a WpfFileStoreConfiguration object for configuring the File Plugin, but you supplied {0}", configuration.GetType().Name);
+                throw new MvxException("You must use a MvxFileConfiguration object for configuring the File Plugin, but you supplied {0}", configuration.GetType().Name);
             }
 
-            if (!Directory.Exists(wpfConfiguration.RootFolder))
+            if (!Directory.Exists(fileConfiguration.BasePath))
             {
-                var message = "File plugin configuration error : root folder '" + wpfConfiguration.RootFolder + "' does not exists.";
+                var message = "File plugin configuration error : root folder '" + fileConfiguration.BasePath + "' does not exists.";
                 MvxTrace.Error(message);
                 throw new DirectoryNotFoundException(message);
             }
 
-            _configuration = wpfConfiguration;
+            _configuration = fileConfiguration;
         }
     }
 }

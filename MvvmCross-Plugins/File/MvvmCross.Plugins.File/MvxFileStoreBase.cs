@@ -20,8 +20,9 @@ namespace MvvmCross.Plugins.File
     public abstract class MvxFileStoreBase
         : IMvxFileStore, IMvxFileStoreAsync
     {
-        protected MvxFileStoreBase(bool appendDefaultPath)
+        protected MvxFileStoreBase(bool appendDefaultPath, string basePath)
         {
+			BasePath = basePath;
             AppendDefaultPath = appendDefaultPath;
         }
 
@@ -301,6 +302,8 @@ namespace MvvmCross.Plugins.File
         }
 
         #endregion IMvxFileStore Async
+
+        protected string BasePath { get; }
 
         protected bool AppendDefaultPath { get; }
 
