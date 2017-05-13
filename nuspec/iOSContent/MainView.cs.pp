@@ -1,5 +1,6 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace $rootnamespace$.Views
 {
