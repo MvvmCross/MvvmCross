@@ -48,7 +48,6 @@
     <Compile Include="..\MvvmCross.Plugins.File\HackFileShare\MvxIoFileStoreBase.cs">
       <Link>MvxIoFileStoreBase.cs</Link>
     </Compile>
-    <Compile Include="MvxAndroidFileStore.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
