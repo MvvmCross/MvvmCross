@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Plugins;
@@ -16,7 +17,9 @@ namespace MvvmCross.Plugins.File.iOS
         : IMvxConfigurablePlugin
     {
         private MvxFileConfiguration _configuration;
-        private MvxFileConfiguration Configuration => _configuration ?? MvxFileConfiguration.Default;
+        private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        );
 
         public void Configure(IMvxPluginConfiguration configuration)
         {
@@ -33,7 +36,7 @@ namespace MvvmCross.Plugins.File.iOS
 
         public void Load()
         {
-            var fileStore = new MvxIosFileStore(Configuration.AppendDefaultPath);
+            var fileStore = new MvxIosFileStore(Configuration.AppendDefaultPath, Configuration.BasePath);
 
             Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
             Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);

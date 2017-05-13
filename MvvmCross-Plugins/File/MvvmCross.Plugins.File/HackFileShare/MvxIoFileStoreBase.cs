@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.File
 {
-    public abstract class MvxIoFileStoreBase
+    public class MvxIoFileStoreBase
         : MvxFileStoreBase
     {
         #region IMvxFileStore Members
 
-        protected MvxIoFileStoreBase(bool appendDefaultPath)
-            : base(appendDefaultPath)
+        public MvxIoFileStoreBase(bool appendDefaultPath, string basePath)
+            : base(appendDefaultPath, basePath)
         {
         }
 
@@ -221,7 +221,8 @@ namespace MvvmCross.Plugins.File
             return AppendPath(path);
         }
 
-        protected abstract string AppendPath(string path);
+        protected virtual string AppendPath(string path)
+            => Path.Combine(BasePath, path);
     }
 }
 

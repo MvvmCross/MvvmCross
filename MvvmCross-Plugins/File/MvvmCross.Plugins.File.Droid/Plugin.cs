@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Plugins;
 
@@ -16,7 +17,9 @@ namespace MvvmCross.Plugins.File.Droid
         : IMvxConfigurablePlugin
     {
         private MvxFileConfiguration _configuration;
-        private MvxFileConfiguration Configuration => _configuration ?? MvxFileConfiguration.Default;
+        private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(
+            Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.FilesDir.Path
+        );
         
         public void Configure(IMvxPluginConfiguration configuration)
         {
@@ -33,7 +36,7 @@ namespace MvvmCross.Plugins.File.Droid
 
         public void Load()
         {
-            var fileStore = new MvxAndroidFileStore(Configuration.AppendDefaultPath);
+            var fileStore = new MvxIoFileStoreBase(Configuration.AppendDefaultPath, Configuration.BasePath);
 
             Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
             Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
