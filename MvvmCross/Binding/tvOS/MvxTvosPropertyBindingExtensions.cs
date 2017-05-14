@@ -71,7 +71,7 @@ namespace MvvmCross.Binding.tvOS
         public static string BindTwoFingerTap(this UIView uiView)
             => MvxTvosPropertyBinding.UIView_TwoFingerTap;
 
-        public static string BindTextFocusk(this UIView uiView)
+        public static string BindTextFocus(this UIView uiView)
             => MvxTvosPropertyBinding.UITextField_TextFocus;
     }
 }
