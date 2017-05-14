@@ -441,7 +441,7 @@ where `$ViewProperty$` is the property on the view for binding.
 
 If `For` is not provided, then the default view property is used.
 
-#### Android
+**Android**
 
 Base Control | Default
 ---- | ---------
@@ -462,7 +462,7 @@ MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
 MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
 MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
 
-#### iOS
+**iOS**
 
 Base Control | Default
 ---- | ---------
@@ -484,7 +484,7 @@ MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
 MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
 MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
 
-#### Mac
+**Mac**
 
 Base Control | Default
 ---- | ---------
@@ -498,7 +498,7 @@ AppKit.NSImageView | Image
 AppKit.NSDatePicker | Date
 AppKit.NSSlider | IntValue
 
-#### tvOS
+**tvOS**
 
 Base Control | Default
 ---- | ---------
@@ -571,7 +571,7 @@ In addition to the `Expression` based Fluent bindings, `String` and `Extension M
 
  **Note:** `Extension Method` based Fluent bindings require MvvmCross 5+.
 
-#### Android - MvvmCross.Binding.Droid
+**Android - MvvmCross.Binding.Droid**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -605,7 +605,7 @@ MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
 
-#### Android - MvvmCross.Plugins.Color.Droid
+**Android - MvvmCross.Plugins.Color.Droid**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -613,7 +613,7 @@ Android.Widget.TextView | TextColor | BindTextColor()
 Android.Views.View | BackgroundColor | BindBackgroundColor()
 
 
-#### Android - MvvmCross.Droid.Support.V7.AppCompat
+**Android - MvvmCross.Droid.Support.V7.AppCompat**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -624,7 +624,7 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | S
 MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatSpinner | SelectedItem | BindSelectedItem()
 MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedItem | BindSelectedItem()
 
-#### Android - MvvmCross.Droid.Support.V7.Preference
+**Android - MvvmCross.Droid.Support.V7.Preference**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -633,7 +633,7 @@ Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
 Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
 
-#### iOS - MvvmCross.Binding.iOS
+**iOS - MvvmCross.Binding.iOS**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -664,7 +664,7 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-#### Mac - MvvmCross.Binding.Mac
+**Mac - MvvmCross.Binding.Mac**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -680,7 +680,7 @@ AppKit.NSButton | Visibility | BindVisibility()
 AppKit.NSButton | Title | BindTitle()
 AppKit.NSSearchField | Text | BindText()
 
-#### tvOS - MvvmCross.Binding.tvOS
+**tvOS - MvvmCross.Binding.tvOS**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -706,7 +706,7 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-#### UWP - MvvmCross.Binding.Uwp
+**UWP - MvvmCross.Binding.Uwp**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -714,7 +714,7 @@ Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
 Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
 Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
 
-#### WPF - MvvmCross.BindingEx.Wpf / MvvmCross.BindingEx.WindowsCommon
+**WPF - MvvmCross.BindingEx.Wpf / MvvmCross.BindingEx.WindowsCommon**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
