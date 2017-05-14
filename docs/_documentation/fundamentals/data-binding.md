@@ -439,7 +439,83 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used - e.g. for a `UILabel` the default is `Text`
+If `For` is not provided, then the default view property is used.
+
+#### Android
+
+Base Control | Default
+---- | ---------
+Android.Widget.Button| Click
+Android.Widget.CheckBox | Checked
+Android.Widget.TextView | Text
+Android.Widget.CompoundButton | Checked
+Android.Widget.SeekBar | Progress
+Android.Widget.SearchView | Query
+MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
+MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
+MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
+
+#### iOS
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIDatePicker | Date
+UIKit.UISlider | Value
+UIKit.UISwitch | On
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
+
+#### Mac
+
+Base Control | Default
+---- | ---------
+AppKit.NSButton | Activated
+AppKit.NSButtonCell | Activated
+AppKit.NSSegmentedControl | SelectedSegment
+AppKit.NSSearchField | Text
+AppKit.NSTextField | StringValue
+AppKit.NSTextView | StringValue
+AppKit.NSImageView | Image
+AppKit.NSDatePicker | Date
+AppKit.NSSlider | IntValue
+
+#### tvOS
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.tvOS.Views.MvxImageViewLoader | ImageUrl
 
     To(vm => vm.$ViewModelPath$)
 
