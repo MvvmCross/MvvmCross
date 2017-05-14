@@ -439,7 +439,83 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used - e.g. for a `UILabel` the default is `Text`
+If `For` is not provided, then the default view property is used.
+
+**Android**
+
+Base Control | Default
+---- | ---------
+Android.Widget.Button| Click
+Android.Widget.CheckBox | Checked
+Android.Widget.TextView | Text
+Android.Widget.CompoundButton | Checked
+Android.Widget.SeekBar | Progress
+Android.Widget.SearchView | Query
+MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
+MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
+MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
+
+**iOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIDatePicker | Date
+UIKit.UISlider | Value
+UIKit.UISwitch | On
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
+
+**Mac**
+
+Base Control | Default
+---- | ---------
+AppKit.NSButton | Activated
+AppKit.NSButtonCell | Activated
+AppKit.NSSegmentedControl | SelectedSegment
+AppKit.NSSearchField | Text
+AppKit.NSTextField | StringValue
+AppKit.NSTextView | StringValue
+AppKit.NSImageView | Image
+AppKit.NSDatePicker | Date
+AppKit.NSSlider | IntValue
+
+**tvOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.tvOS.Views.MvxImageViewLoader | ImageUrl
 
     To(vm => vm.$ViewModelPath$)
 
@@ -479,15 +555,172 @@ Using this syntax, an example binding set is:
         .FallbackValue(true);
      set.Apply();  
 
-In addition to the `Expression` based Fluent bindings, string based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set using:
+ **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+
+### MvvmCross Defined Custom bindings
+
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set via the use of custom bindings:
 
     set.Bind(okButton)
        .For("Title")
        .To(vm => vm.Caption);
            
+    set.Bind(okButton)
+        .For(c => c.BindText())
+        .To(vm => vm.Caption);
 
-**Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+ **Note:** `Extension Method` based Fluent bindings require MvvmCross 5+.
 
+**Android - MvvmCross.Binding.Droid**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Views.View | Visible | BindVisible()
+Android.Views.View | Hidden | BindHidden()
+Android.Views.View | Click | BindClick()
+Android.Views.View | LongClick | BindLongClick()
+Android.Widget.TextView | Text | BindText()
+Android.Widget.TextView | TextFormatted | BindTextFormatted()
+Android.Widget.TextView | Hint | BindHint()
+Android.Widget.CompoundButton | Checked | BindChecked()
+Android.Widget.SeekBar | Progress | BindProgress()
+Android.Widget.ImageView | Bitmap | BindBitmap()
+Android.Widget.ImageView | Drawable | BindDrawable()
+Android.Widget.ImageView | DrawableId | BindDrawableId()
+Android.Widget.ImageView | DrawableName | BindDrawableName()
+Android.Widget.ImageView | ResourceName | BindResourceName()
+Android.Widget.ImageView | AssetImagePath | BindAssetImagePath()
+Android.Widget.EditText | TextFocus | BindTextFocus()
+Android.Widget.SearchView | Query | BindQuery()
+Android.Widget.RatingBar | Rating | BindRating()
+Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Preferences.Preference | Value | BindValue()
+Android.Preferences.EditTextPreference | Text | BindText()
+Android.Preferences.ListPreference | Value | BindValue()
+Android.Preferences.TwoStatePreference | Checked | BindChecked()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Binding.Droid.Views.MvxSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - MvvmCross.Plugins.Color.Droid**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Widget.TextView | TextColor | BindTextColor()
+Android.Views.View | BackgroundColor | BindBackgroundColor()
+
+
+**Android - MvvmCross.Droid.Support.V7.AppCompat**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Widget.SearchView | Query | BindQuery()
+Android.Support.V7.Widget.Toolbar | Subtitle | BindSubtitle()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - MvvmCross.Droid.Support.V7.Preference**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Preferences.Preference | Value | BindValue()
+Android.Support.V7.Preferences.ListPreference | Value | BindValue()
+Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
+Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+
+**iOS - MvvmCross.Binding.iOS**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISlider | Value | BindValue()
+UIKit.UIStepper | Value | BindValue()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UIDatePicker | Date | BindDate()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UIDatePicker | Time | BindTime()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISwitch | On | BindOn()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**Mac - MvvmCross.Binding.Mac**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+AppKit.NSView | Visibility | BindVisibility()
+AppKit.NSView | Visible | BindVisible()
+AppKit.NSSlider | IntValue | BindIntValue()
+AppKit.NSSegmentedControl | SelectedSegment | BindSelectedSegment()
+AppKit.NSDatePicker | Time | BindTime()
+AppKit.NSDatePicker | Date | BindDate()
+AppKit.NSTextField | StringValue | BindStringValue()
+AppKit.NSTextView | StringValue | BindStringValue()
+AppKit.NSButton | Visibility | BindVisibility()
+AppKit.NSButton | Title | BindTitle()
+AppKit.NSSearchField | Text | BindText()
+
+**tvOS - MvvmCross.Binding.tvOS**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**UWP - MvvmCross.Binding.Uwp**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
+
+**WPF - MvvmCross.BindingEx.Wpf / MvvmCross.BindingEx.WindowsCommon**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
 
 ### Tibet
 
@@ -878,72 +1111,3 @@ set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
 ```
 
 Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
-
-Include an additional option than literal strings for MvvmCross defined custom bindings. The functionality to define a binding via its string name to remain as is, so no functionally is lost and fully backwards supported. Just expose the MvvmCross custom binding properties in a strongly typed manner. Will affect both MvvmCross platform custom bindings and plugins custom bindings.
-
-Extension methods can be used to return the custom binding name and additionally be used to restrict bindings against only allowed base types.
-
-MvvmCross changes
-
-Expose public extension methods. Note additional work will need to be done inside MvxPropertyExpressionParser to properly handle the extension methods (May need some help figuring out how best to do this).
-
-```c#
-namespace MvvmCross.Binding.iOS
-{
-    internal static class IOSPropertyBinding
-    {
-        public const string UILabelText = "Text";
-        public const string UIViewTap = "Tap";
-    }
-
-    public static class IOSPropertyBindingExtensions
-    {
-        public static string BindingUILabelText(this UILabel label)
-        {
-            return IOSPropertyBinding.UILabelText;
-        }
-
-        public static string BindingUIViewTap(this UIView view)
-        {
-            return IOSPropertyBinding.UIViewTap;
-        }
-    }
-
-    public class MvxIosBindingBuilder : MvxBindingBuilder
-    {
-        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
-        {
-            base.FillTargetFactories(registry);
-
-            registry.RegisterCustomBindingFactory<UILabel>(
-                IOSPropertyBinding.UILabelText,
-                view => new MvxUILabelTextTargetBinding(view));
-
-            registry.RegisterCustomBindingFactory<UIView>(
-                IOSPropertyBinding.UIViewTap,
-                view => new MvxUIViewTapTargetBinding(view));
-        }
-    }
-}
-```
-
-#### Developer Usage
-
-```c#
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.iOS;
-
-...
-
-var labelButton = new UILabel();
-
-var bindingSet = this.CreateBindingSet<HomeViewController, HomeViewModel>();
-bindingSet.Bind(labelButton).For(c => c.BindingUILabelText()).To(vm => vm.NextLabel);
-bindingSet.Bind(labelButton).For(c => c.BindingUIViewTap()).To(vm => vm.NextCommand);
-bindingSet.Apply();
-```
-
-#### Advantages
-
-Can include additional comments for developer to see via intellisense if needs be
-Checks whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.

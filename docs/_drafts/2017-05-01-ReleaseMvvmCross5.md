@@ -144,11 +144,7 @@ set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
 
 Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
 
-Include an additional option than literal strings for MvvmCross defined custom bindings. The functionality to define a binding via its string name to remain as is, so no functionally is lost and fully backwards supported. Just expose the MvvmCross custom binding properties in a strongly typed manner. Will affect both MvvmCross platform custom bindings and plugins custom bindings.
-
-Extension methods can be used to return the custom binding name and additionally be used to restrict bindings against only allowed base types.
-
-Expose public extension methods. Note additional work will need to be done inside MvxPropertyExpressionParser to properly handle the extension methods (May need some help figuring out how best to do this).
+MvvmCross 5 now supports an additional option than literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
 
 ##### Developer Usage
 
@@ -156,15 +152,10 @@ Expose public extension methods. Note additional work will need to be done insid
 var labelButton = new UILabel();
 
 var bindingSet = this.CreateBindingSet<HomeViewController, HomeViewModel>();
-bindingSet.Bind(labelButton).For(c => c.BindingUILabelText()).To(vm => vm.NextLabel);
-bindingSet.Bind(labelButton).For(c => c.BindingUIViewTap()).To(vm => vm.NextCommand);
+bindingSet.Bind(labelButton).For(c => c.BindText()).To(vm => vm.NextLabel);
+bindingSet.Bind(labelButton).For(c => c.BindTap()).To(vm => vm.NextCommand);
 bindingSet.Apply();
 ```
-
-##### Advantages
-
-Can include additional comments for developer to see via intellisense if needs be
-Checks whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
 
 More information can be found in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
