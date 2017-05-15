@@ -24,7 +24,7 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 //header height
-$header-height:60px;
+$header-height: 60px;
 
 // Width of the content area
 $content-width:    1200px;
@@ -80,7 +80,7 @@ h2,h3,h4,h5,h6 {
     .page-link {
         color: #37474f;
         line-height: $base-line-height;
-        font-size: 16px;
+        font-size: $base-font-size;
         font-weight: bold;
         text-transform: uppercase;
         margin-left: 30px;
@@ -95,65 +95,65 @@ h2,h3,h4,h5,h6 {
 
 //search box
 .search-box {
-  width: 300px;
-  vertical-align: middle;
-  white-space: nowrap;
-  position: relative;
-  margin-top: 5px;
-  margin-left: 35px;
-  float: right;
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    margin-top: 5px;
+    margin-left: 35px;
+    float: right;
 }
 
 .search-box input#search {
-  width: $searchbar-width;
-  height: 48px;
-  background: #FFF;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #262626;
-  padding-left: 35px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-transition: width .55s ease;
-  -moz-transition: width .55s ease;
-  -ms-transition: width .55s ease;
-  -o-transition: width .55s ease;
-  transition: width .55s ease;
-  border-radius: 3px;
-  border: 1px solid #ECEEF1;
+    width: $searchbar-width;
+    height: 48px;
+    background: #FFF;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #262626;
+    padding-left: 35px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-transition: width .55s ease;
+    -moz-transition: width .55s ease;
+    -ms-transition: width .55s ease;
+    -o-transition: width .55s ease;
+    transition: width .55s ease;
+    border-radius: 3px;
+    border: 1px solid #ECEEF1;
 }
 
 .search-box input#search::-webkit-input-placeholder {
-   color: #65737e;
+    color: #65737e;
 }
  
 .search-box input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
+    color: #65737e;  
 }
  
 .search-box input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
+    color: #65737e;  
 }
  
 .search-box input#search:-ms-input-placeholder {  
-   color: #65737e;  
+    color: #65737e;  
 }
 
 .search-box .icon {
-  position: absolute;
-  top: 50%;
-  margin-left: 13px;
-  margin-top: -28px;
-  z-index: 1;
-  color: #4f5b66;
+    position: absolute;
+    top: 50%;
+    margin-left: 13px;
+    margin-top: -28px;
+    z-index: 1;
+    color: #4f5b66;
 }
 
 .search-box input#search:focus, 
 .search-box input#search:active {
-  outline:none;
-  width: $searchbar-expanded-width;
+    outline:none;
+    width: $searchbar-expanded-width;
 }
 
 .search-box:hover input#search {
@@ -161,7 +161,7 @@ h2,h3,h4,h5,h6 {
 }
  
 .search-box:hover .icon {
-  color: #93a2ad;
+    color: #93a2ad;
 }
 
 
@@ -212,21 +212,21 @@ h2,h3,h4,h5,h6 {
 }
 
 .button {
-  color: $text-color;
-  padding: 5px 10px 5px 10px;
-  border: solid $grey-color 1px;
-  text-decoration: none;
-  font-size: $small-font-size;
+    color: $text-color;
+    padding: 5px 10px 5px 10px;
+    border: solid $grey-color 1px;
+    text-decoration: none;
+    font-size: $small-font-size;
 }
 
 .button:hover {
-  background: $grey-color-super-light;
-  text-decoration: none;
+    background: $grey-color-super-light;
+    text-decoration: none;
 }
 
 .button:active {
-  background: $grey-color-light;
-  text-decoration: none;
+    background: $grey-color-light;
+    text-decoration: none;
 }
 
 .buttons-unit {
@@ -235,8 +235,8 @@ h2,h3,h4,h5,h6 {
         background-color: $brand-color;
         border-radius: 4px;
         padding: 8px 16px;
-        font-size: 16px;
-        font-weight: 400;
+        font-size: $base-font-size;
+        font-weight: $base-font-weight;
         margin: 0 12px;
         display: inline-block;
         color: #fafafa;
@@ -254,8 +254,8 @@ h2,h3,h4,h5,h6 {
 }
 
 .landing-title {
-    font-weight: 400;
-    font-size: 30px;
+    font-weight: $base-font-weight;
+    font-size: $base-font-size * 1.875;
     text-shadow: 1px 0px #000000;
     margin:0px;
     color:#FFF;
@@ -263,7 +263,7 @@ h2,h3,h4,h5,h6 {
 }
 
 .landing-subtitle {
-    font-size: 24px;
+    font-size: $base-font-size * 1.5;
 }
 
 .documentation-menu {
@@ -283,7 +283,7 @@ h2,h3,h4,h5,h6 {
             padding:0 -15px 0 0;
 
             a {
-                font-size: 15px;
+                font-size: $base-font-size * 0.9375;
                 color: $grey-color;
                 font-family: 'Proxima Nova', 'Open Sans', sans-serif;
             }
@@ -343,14 +343,14 @@ a:visited {
             padding:60px 0;
 
             h2 {
-                font-size: 30px;
+                font-size: $base-font-size * 1.875;
                 color: #37474f;
                 font-weight: bold;
                 margin-bottom: 0px;
             }
 
             div {
-                font-size: 24px;
+                font-size: $base-font-size * 1.5;
                 color: #37474f;
                 line-height: 1.25;
             }
@@ -370,14 +370,14 @@ a:visited {
             padding:60px 0;
 
             h2 {
-                font-size: 30px;
+                font-size: $base-font-size * 1.875;
                 color: #37474f;
                 font-weight: bold;
                 margin-bottom: 0px;
             }
 
             div {
-                font-size: 24px;
+                font-size: $base-font-size * 1.5;
                 color: #37474f;
                 line-height: 1.25;
             }
@@ -482,7 +482,7 @@ table tr td :last-child {
     li {
         a {
             color: #FFF;
-            font-size: 15px;
+            font-size: $base-font-size * 0.9375;
         }
     }
 }
