@@ -386,13 +386,35 @@ a:visited {
     }
 }
 
-.company-col {
-    float: left;
-    width: 33%;
+.companyGallery {
 
-    img {
-        height: 60px;
-        padding: 10px;
+    .company-col {
+        margin-bottom: 20px;
+
+        img {
+            height: 60px;
+        }
+    }
+
+    @include media-query($on-palm) {
+        .company-col {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    // Minima's responsive design pattern is incomplete
+    @media screen and (min-width: ($on-palm + 1)) {
+        .company-col {
+            float: left;
+            width: 50%;
+        }
+    }
+
+    @media screen and (min-width: ($on-laptop + 1)) {
+        .company-col {
+            width: 33%;
+        }
     }
 }
 
