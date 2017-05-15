@@ -72,7 +72,7 @@ h2,h3,h4,h5,h6 {
 .site-header {
     background-color: #FFF;
     border-bottom: 2px solid #2FB681;
-    border-top:0px;
+    border-top: 0px;
     min-height: $header-height;
 }
 
@@ -152,7 +152,7 @@ h2,h3,h4,h5,h6 {
 
 .search-box input#search:focus, 
 .search-box input#search:active {
-    outline:none;
+    outline: none;
     width: $searchbar-expanded-width;
 }
 
@@ -257,8 +257,8 @@ h2,h3,h4,h5,h6 {
     font-weight: $base-font-weight;
     font-size: $base-font-size * 1.875;
     text-shadow: 1px 0px #000000;
-    margin:0px;
-    color:#FFF;
+    margin: 0px;
+    color: #FFF;
     font-weight: bold;
 }
 
@@ -267,9 +267,9 @@ h2,h3,h4,h5,h6 {
 }
 
 .documentation-menu {
-    float:left;
+    float: left;
     width: $documentation-menu-width;
-    height:calc(100vh - (#{$header-height} + 30px));
+    height: calc(100vh - (#{$header-height} + 30px));
     overflow-y: auto;
     padding: $content-padding;
 	-webkit-box-shadow: 1px 0 0 rgba(81,88,90,0.17);
@@ -280,7 +280,7 @@ h2,h3,h4,h5,h6 {
         overflow-y: auto;
 
         li {
-            padding:0 -15px 0 0;
+            padding: 0 -15px 0 0;
 
             a {
                 font-size: $base-font-size * 0.9375;
@@ -300,7 +300,7 @@ h2,h3,h4,h5,h6 {
 
 .active {
     background-color: #00ac65;
-    color:#FFF;
+    color: #FFF;
     border-radius: 2px;
     border: 2px solid #00ac65;
     width: 100%;
@@ -308,7 +308,7 @@ h2,h3,h4,h5,h6 {
 
 .documentation {
     float: left;
-    height:calc(100vh - (#{$header-height} + 30px));
+    height: calc(100vh - (#{$header-height} + 30px));
     overflow-y: auto;
     width: $documentation-width;
     padding: $content-padding;
@@ -327,7 +327,7 @@ a:visited {
 }
 
 .category {
-    padding:8px 0;
+    padding: 8px 0;
     text-transform: uppercase;
     font-weight: bold;
     cursor: default;
@@ -340,7 +340,7 @@ a:visited {
         text-align: center;
 
         .description-text {
-            padding:60px 0;
+            padding: 60px 0;
 
             h2 {
                 font-size: $base-font-size * 1.875;
@@ -367,7 +367,7 @@ a:visited {
         text-align: center;
 
         .company-text {
-            padding:60px 0;
+            padding: 60px 0;
 
             h2 {
                 font-size: $base-font-size * 1.875;
@@ -488,11 +488,11 @@ table tr td :last-child {
 }
 
 .site-footer {
-    background:#37474f;
-    color:#FFF;
+    background: #37474f;
+    color: #FFF;
 
     h2, h3, h4, h5, h6 {
-        color:#FFF;
+        color: #FFF;
     }
 }
 
@@ -537,7 +537,7 @@ table tr td :last-child {
 
 .documentation-header {
     display: block;
-    clear:both;
+    clear: both;
 }
 
 .documentation-title {
