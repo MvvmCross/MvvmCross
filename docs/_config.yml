@@ -26,11 +26,17 @@ git_repo: MvvmCross
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
 theme: minima
 gems:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-avatar
 exclude:
   - Gemfile
   - Gemfile.lock
