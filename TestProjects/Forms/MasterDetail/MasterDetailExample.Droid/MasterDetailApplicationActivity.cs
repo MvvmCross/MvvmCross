@@ -18,7 +18,7 @@ namespace MasterDetailExample.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-            var mvxFormsApp = new MvxFormsApp();
+            var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
 
             var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidMasterDetailPagePresenter;
