@@ -8,26 +8,27 @@ using Android.Widget;
 using Android.OS;
 using MvvmCross.Droid.Views;
 using RoutingExample.Core.ViewModels;
+using MvvmCross.Droid.Support.V4;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Droid.Shared.Attributes;
 
 namespace RoutingExample.Droid
 {
-    [Activity(Label = "A", Icon = "@mipmap/icon")]
-    public class TestBView : MvxActivity<TestBViewModel>
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    public class TestBView : MvxFragment<TestBViewModel>
     {
-
-        protected override void OnCreate(Bundle bundle)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
+            var view = this.BindingInflate(Resource.Layout.Test, null);
 
-            
-            SetContentView(Resource.Layout.Test);
-
-            var text = FindViewById<TextView>(Resource.Id.text);
+            var text = view.FindViewById<TextView>(Resource.Id.text);
             text.Text = "B";
 
-            var layout = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
+            var layout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             layout.SetBackgroundColor(Color.Green);
 
+            return view;
         }
     }
 }
