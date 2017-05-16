@@ -9,9 +9,7 @@ categories: mvvmcross
 We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
 
-Let's have a look at a couple of things:
-
-# Highlights
+Let's have a look at the highlights:
 
 ## Merge of repos
 For a long time we have been looking at merging the different repositories of the project.
