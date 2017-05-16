@@ -11,24 +11,36 @@ For the last 6 months we have been working on this release and we're really exci
 
 Let's have a look at a couple of things:
 
-## Highlights
+# Highlights
 
-### Merge of repos
+## Merge of repos
 For a long time we have been looking at merging the different repositories of the project.
 Besides a better overview one of the main advantages this brings is the ability to setup a proper CI process.
 This is hugely beneficial in the release process itself and makes (patch) releasing MvvmCross a breeze. 
 
-### New website with improved documentation
+## New website with improved documentation
 Over time we received a lot of feedback from developers that use MvvmCross on a day-2-day basis. Besides the usual
 hugs and kisses the most common remark we often got was: "sir, you need to improve the documention". And as you all know: writing documention is hard. And not always the most funny thing you can think of. So our first focus was enabling *you* to help out improving the documentation. With 5.0 the documentation has landed in the GIT repo, making it possible to submit documentation (changes) just as you do with code: create a pull request. We're already seeing the benefits of this: the amount of community driven documentation changes has increased tenfold. 
 
 Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps it uniformity.
 
-### New iOS presenter
+## Open Collective
+
+As you all know MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
+
+https://opencollective.com/mvvmcross
+
+## Improved support for Xamarin.Forms
+
+In MvvmCross 5.0 we added much improved support for Xamarin.Forms! We added MvvmCross specific Pages, App classes, and Setup for Forms to enable Bindings, Ioc, DI and much more! Make sure to use the new base classes to enable Forms support.
+
+Find all the details in the updated [documentation](https://www.mvvmcross.com/documentation/platform/xamarin-forms)!
+
+## New iOS presenter
 
 Starting with MvvmCross 5.0, there is a new default Presenter for Views, namely `MvxIosViewPresenter`.
 
-#### View Presenter Overview
+### View Presenter Overview
 
 The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns / strategies:
 
@@ -40,7 +52,7 @@ The default presenter that comes with MvvmCross offers out of the box support fo
 
 Also if your app needs another kind of presentation mode, you can easily extend it!
 
-#### Presentation Attributes
+### Presentation Attributes
 
 The presenter uses a set of `PresentationAttributes` to define how a view will be displayed. The existing attributes are:
 
@@ -51,15 +63,15 @@ The presenter uses a set of `PresentationAttributes` to define how a view will b
 * MvxMasterSplitViewPresentationAttribute
 * MvxDetailSplitViewPresentationAttribute
 
-#### Views without attributes: Default values
+### Views without attributes: Default values
 
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
 
-#### Sample please!
+### Sample please!
 You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) iOS project to see this presenter in action.
 
-### Improved navigation
+## Improved navigation
 
 MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation!
 
@@ -111,7 +123,7 @@ The events available are:
 
 A full explanation can be found on the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
 
-### Lifecycle / Event hooks
+## Lifecycle / Event hooks
 
 Starting from MvvmCross 5.0 ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
@@ -130,11 +142,7 @@ For more information on the implementation of this functionality please see [Git
 
 Documentation for this is available on the [website](https://www.mvvmcross.com/documentation/fundamentals/viewmodel-lifecycle)
 
-### Recyclerview features
-
-Something about the changes here.
-
-### Generic and typed bindings
+## Generic and typed bindings
 
 This change will add a generic "WithConversion" method. This will allow developers to strongly type the use of value converters, making refactoring a lot easier and more save. For example:
 
@@ -146,7 +154,7 @@ Add something about the Generic implementation of IMvxTargetBinding [#1610](http
 
 MvvmCross 5 now supports an additional option than literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
 
-##### Developer Usage
+#### Developer Usage
 
 ```c#
 var labelButton = new UILabel();
@@ -159,39 +167,45 @@ bindingSet.Apply();
 
 More information can be found in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
-### Removal of WindowsPhone 8.x and Windows 8.x
+## Removal of WindowsPhone 8.x and Windows 8.x
 As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 is depreceated for a long time; removing formal support for this platform is the right thing to do.
 
-### Removal of deprecated plugins
-MvvmCross' powerful plugin framework has brought us many good things. However, over time certain plugins have become obsolete or considered not useful anymore. With 5.0 we've decided to remove the following plugins:
+## Removal of deprecated plugins
+MvvmCross' powerful plugin framework has brought us many good things. However, over time certain plugins have become obsolete, not maintained any longer or considered not useful anymore. With 5.0 we've decided to remove the following plugins:
 
-* AutoView 
-* CrossUI
-* Dialog
-* SQLite plugin
-* Bookmarks
-* SoundEffects
-* ThreadUtils
-* JASidePanels
+#### AutoView
+No maintained for a long time.
+#### CrossUI
+No maintained for a long time.
+#### Dialog
+No maintained for a long time.
+#### SQLite plugin
+No actual functionality was in this plugin. To use this simpely include the [SQLite-PCL](https://www.nuget.org/packages/sqlite-net-pcl/) nuget.
+#### Bookmarks
+Only in use on Windows (Phone) 8
+#### SoundEffects
+Only in use on Windows (Phone) 8
+#### ThreadUtils
+Only in use on Windows (Phone) 8
+#### JASidePanels
+We had two different implementations of a Sidemenu on iOS in MvvmCross. The default one is now MvvmCross - XamarinSidebar. See the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter) for more details.
 
-### Other improvements
+## Other improvements
 
-* tvOS support
-* Test projects in main repo
-* Migrate Test.Core to PCL 
-* Sidebar fixes
+#### Improved starterpack
+The default files installed when you add the [MvvmCross StarterPack](https://www.nuget.org/packages/MvvmCross.StarterPack/) nuget are updated and improved to reflect all changes in 5.0 and offers a more real life situation base to start with.
+#### tvOS support
+tvOS support has been added and improved to enable even better cross-platform development.
+#### Test projects in main repo
+We've added a couple of test projects in the main repo so we can test and reproduce issue's very quickly.
+#### Migrate Test.Core to PCL
+The Test packages are now based on PCL instead of NET45 so you can target more platforms.
+#### Sidebar fixes
+The now default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
 
-## Open Collective
-
-As you all know MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
-
-https://opencollective.com/mvvmcross
-
-## Changelog
+# Changelog
 
 More than 120 PR's made it in this release from over 30 developers. So a big hug to all these contributors!
-
-# Change Log
 
 ## [5.0.0-beta.9](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.9) (2017-05-10)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.8...5.0.0-beta.9)
@@ -205,7 +219,7 @@ More than 120 PR's made it in this release from over 30 developers. So a big hug
 - Install System.Windows.Interactivity from nuget instead of requiring … [\#1792](https://github.com/MvvmCross/MvvmCross/pull/1792) ([kjeremy](https://github.com/kjeremy))
 - Null check viewmodels before visual events [\#1791](https://github.com/MvvmCross/MvvmCross/pull/1791) ([kjeremy](https://github.com/kjeremy))
 - Update 2017-05-01-ReleaseMvvmCross5.md [\#1790](https://github.com/MvvmCross/MvvmCross/pull/1790) ([spockfish](https://github.com/spockfish))
-- - Fix Android crash when app restart [\#1789](https://github.com/MvvmCross/MvvmCross/pull/1789) ([thongdoan](https://github.com/thongdoan))
+- Fix Android crash when app restart [\#1789](https://github.com/MvvmCross/MvvmCross/pull/1789) ([thongdoan](https://github.com/thongdoan))
 
 ## [5.0.0-beta.8](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.8) (2017-05-10)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.7...5.0.0-beta.8)
