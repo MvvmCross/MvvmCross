@@ -134,6 +134,13 @@ h2,h3,h4,h5,h6 {
         }
     }
 
+    @include media-query($on-palm) {
+        input#search {
+            width: $searchbar-expanded-width;
+            transition: none;
+        }
+    }
+
     .icon {
         position: relative;
         left: 30px;
