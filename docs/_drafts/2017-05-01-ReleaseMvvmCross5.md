@@ -207,8 +207,24 @@ The now default XamarinSidebar menu for MvvmCross iOS has been improved with a c
 
 More than 120 PR's made it in this release from over 30 developers. So a big hug to all these contributors!
 
-## [5.0.0-beta.9](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.9) (2017-05-10)
+## [5.0.0-beta.10](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.10) (2017-05-15)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.9...5.0.0-beta.10)
+
+**Merged pull requests:**
+
+- add "Get Started" button hover effect [\#1800](https://github.com/MvvmCross/MvvmCross/pull/1800) ([Garfield550](https://github.com/Garfield550))
+- Update release notes around extension method based binding [\#1799](https://github.com/MvvmCross/MvvmCross/pull/1799) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Fix some issues found in extension method based binding [\#1798](https://github.com/MvvmCross/MvvmCross/pull/1798) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Update release blog [\#1796](https://github.com/MvvmCross/MvvmCross/pull/1796) ([martijn00](https://github.com/martijn00))
+- Lost dependency gem 'jekyll-avatar' [\#1802](https://github.com/MvvmCross/MvvmCross/pull/1802) ([Garfield550](https://github.com/Garfield550))
+- Correct link to doc [\#1801](https://github.com/MvvmCross/MvvmCross/pull/1801) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
+
+## [5.0.0-beta.9](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.9) (2017-05-13)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.8...5.0.0-beta.9)
+
+**Closed issues:**
+
+- about .NET Standard Class Library [\#1787](https://github.com/MvvmCross/MvvmCross/issues/1787)
 
 **Merged pull requests:**
 
