@@ -30,29 +30,5 @@ namespace MvxBindingsExample.iOS
         {
             return new DebugTrace();
         }
-
-        protected override IMvxIosViewPresenter CreatePresenter()
-        {
-            Forms.Init();
-
-            var xamarinFormsApp = new MvxFormsApplication();
-
-            return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
-        }
-
-        protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
-        {
-            get
-            {
-                var toReturn = new List<System.Reflection.Assembly>(base.ValueConverterAssemblies);
-                toReturn.Add(typeof(MvxLanguageConverter).Assembly);
-                return toReturn;
-            }
-        }
-
-        protected override MvxBindingBuilder CreateBindingBuilder()
-        {
-            return new MvxFormsBindingBuilder();
-        }
     }
 }

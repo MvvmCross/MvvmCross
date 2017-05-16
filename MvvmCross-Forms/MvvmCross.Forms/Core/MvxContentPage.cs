@@ -17,6 +17,20 @@ namespace MvvmCross.Forms.Core
             set { DataContext = value; }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel?.Appearing();
+            ViewModel?.Appeared();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ViewModel?.Disappearing();
+            ViewModel?.Disappeared();
+        }
+
         public MvxViewModelRequest Request { get; set; }
     }
 
