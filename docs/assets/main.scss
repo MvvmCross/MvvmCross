@@ -135,6 +135,8 @@ h2,h3,h4,h5,h6 {
     }
 
     @include media-query($on-palm) {
+        padding-bottom: 5px;
+
         input#search {
             width: $searchbar-expanded-width;
             transition: none;
