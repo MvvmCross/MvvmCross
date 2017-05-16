@@ -25,7 +25,7 @@ namespace RoutingExample.Droid
             var text = FindViewById<TextView>(Resource.Id.text);
             text.Text = "B";
 
-            var layout = FindViewById<RelativeLayout>(Resource.Id.layout);
+            var layout = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             layout.SetBackgroundColor(Color.Green);
 
         }

@@ -20,6 +20,11 @@ namespace RoutingExample.Core.ViewModels
             
         }
 
+        public void Init()
+        {
+            
+        }
+
         public override async Task Initialize(User parameter)
         {
             var test = parameter;
