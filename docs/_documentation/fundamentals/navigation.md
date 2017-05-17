@@ -48,7 +48,7 @@ In your ViewModel this could look like:
 public class MyViewModel : MvxViewModel
 {
     private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
+    public MyViewModel(IMvxNavigationService navigationService)
     {
         _navigationService = navigationService;
     }
