@@ -16,7 +16,7 @@ namespace PageRendererExample.UI.iOS
 {
     public class MvvmSetup : MvxIosSetup
     {
-        public MvxFormsApp MvxFormsApp { get; private set; }
+        public MvxFormsApplication MvxFormsApp { get; private set; }
         public MvvmSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
         {
         }

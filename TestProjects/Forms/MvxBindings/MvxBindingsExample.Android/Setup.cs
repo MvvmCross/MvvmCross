@@ -14,7 +14,7 @@ using MvvmCross.Forms.Droid.Presenters;
 
 namespace MvxBindingsExample.Droid
 {
-    public class Setup : MvxAndroidSetup
+    public class Setup : MvxFormsAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)
@@ -29,37 +29,6 @@ namespace MvxBindingsExample.Droid
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
-        }
-
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            var presenter = new MvxFormsDroidPagePresenter();
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
-
-            return presenter;
-        }
-
-        protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
-        {
-            get
-            {
-                var toReturn = new List<System.Reflection.Assembly>(base.ValueConverterAssemblies);
-                toReturn.Add(typeof(MvxLanguageConverter).Assembly);
-                return toReturn;
-            }
-        }
-
-        protected override void InitializeBindingBuilder()
-        {
-            MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
-
-            this.RegisterBindingBuilderCallbacks();
-            bindingBuilder.DoRegistration();
-        }
-
-        protected new MvxBindingBuilder CreateBindingBuilder()
-        {
-            return new MvxFormsBindingBuilder();
         }
     }
 }

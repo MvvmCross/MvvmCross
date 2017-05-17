@@ -29,7 +29,7 @@ namespace MasterDetailExample.UWP
         {
             Forms.Init(_launchActivatedEventArgs);
 
-            var xamarinFormsApp = new MvxFormsApp();
+            var xamarinFormsApp = new MvxFormsApplication();
             var presenter = new MvxFormsUwpMasterDetailPagePresenter(rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
