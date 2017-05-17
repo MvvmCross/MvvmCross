@@ -8,6 +8,7 @@
 namespace MvvmCross.Droid.Views
 {
     using MvvmCross.Core.ViewModels;
+    using System;
 
     public interface IMvxChildViewModelCache
     {
@@ -15,6 +16,12 @@ namespace MvvmCross.Droid.Views
 
         IMvxViewModel Get(int index);
 
+        IMvxViewModel Get(Type viewModelType);
+
         void Remove(int index);
+
+        void Remove(Type viewModelType);
+
+        bool Exists(Type viewModelType);
     }
 }

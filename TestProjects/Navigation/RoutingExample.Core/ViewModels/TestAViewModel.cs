@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using RoutingExample.Core.ViewModels;
 
 [assembly: MvxNavigation(typeof(TestAViewModel), @"mvx://test/a")]
@@ -16,6 +17,14 @@ namespace RoutingExample.Core.ViewModels
     {
 
         public TestAViewModel()
+        {
+            
+        }
+
+        public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
+            async () => await Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {this.GetHashCode()}", "Something")));
+
+        public void Init()
         {
             
         }

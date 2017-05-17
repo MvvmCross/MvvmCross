@@ -31,7 +31,7 @@ namespace Example.iOS
         {
             Forms.Init();
 
-            var xamarinFormsApp = new MvxFormsApp();
+            var xamarinFormsApp = new MvxFormsApplication();
 
             return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
         }
