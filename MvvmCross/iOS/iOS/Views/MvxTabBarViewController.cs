@@ -112,7 +112,10 @@ namespace MvvmCross.iOS.Views
         {
             get
             {
-                var topViewController = (SelectedViewController as UINavigationController).TopViewController;
+                var topViewController = SelectedViewController is UINavigationController
+                                        ? ((UINavigationController)SelectedViewController).TopViewController
+                                        : SelectedViewController;
+
                 if(topViewController.PresentedViewController != null)
                 {
                     var presentedNavigationController = (topViewController.PresentedViewController as UINavigationController);
