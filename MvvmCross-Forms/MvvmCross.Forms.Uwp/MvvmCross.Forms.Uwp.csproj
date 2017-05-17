@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
     <None Include="TODO.txt" />
+    <Compile Include="MvxFormsWindowsSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
