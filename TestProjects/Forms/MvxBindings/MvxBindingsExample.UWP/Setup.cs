@@ -6,6 +6,7 @@ using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Uwp;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;

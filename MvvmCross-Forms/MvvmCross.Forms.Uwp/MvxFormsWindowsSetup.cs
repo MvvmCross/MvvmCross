@@ -27,7 +27,7 @@ namespace MvvmCross.Forms.Uwp
         {
             Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
 
-            var xamarinFormsApp = new MvxFormsApp();
+            var xamarinFormsApp = new MvxFormsApplication();
             var presenter = new MvxFormsUwpPagePresenter(rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
