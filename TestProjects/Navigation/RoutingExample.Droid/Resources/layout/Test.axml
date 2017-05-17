@@ -18,6 +18,12 @@
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/button1"
+        android:text="Open Main"
+        local:MvxBind="Click OpenViewModelMainCommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button1"
         android:text="Open A"
         local:MvxBind="Click OpenViewModelACommand"
         android:layout_width="match_parent"

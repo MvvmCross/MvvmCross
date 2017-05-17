@@ -14,7 +14,7 @@ using MvvmCross.Droid.Shared.Attributes;
 
 namespace RoutingExample.Droid
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxFragment(typeof(SecondHostViewModel), Resource.Id.content_frame, true)]
     public class TestBView : MvxFragment<TestBViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
