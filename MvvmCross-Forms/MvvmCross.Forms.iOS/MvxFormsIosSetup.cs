@@ -27,7 +27,7 @@ namespace MvvmCross.Forms.iOS
             return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
         }
 
-        protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
+        protected override IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
             {
