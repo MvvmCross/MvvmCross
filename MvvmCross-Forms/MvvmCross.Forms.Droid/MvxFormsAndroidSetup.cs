@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Core.Views;
@@ -26,12 +27,14 @@ namespace MvvmCross.Forms.Droid
             return presenter;
         }
 
-        protected override System.Collections.Generic.IEnumerable<System.Reflection.Assembly> ValueConverterAssemblies
+        protected override IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
             {
-                var toReturn = new List<System.Reflection.Assembly>(base.ValueConverterAssemblies);
-                toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+                var toReturn = new List<Assembly>(base.ValueConverterAssemblies)
+                {
+                    typeof(MvxLanguageConverter).Assembly
+                };
                 return toReturn;
             }
         }
@@ -40,13 +43,10 @@ namespace MvvmCross.Forms.Droid
         {
             MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
 
-            this.RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
         }
 
-        protected new MvxBindingBuilder CreateBindingBuilder()
-        {
-            return new MvxFormsBindingBuilder();
-        }
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
     }
 }

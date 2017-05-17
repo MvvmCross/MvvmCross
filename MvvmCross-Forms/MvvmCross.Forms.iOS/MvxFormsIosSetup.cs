@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
@@ -30,15 +31,14 @@ namespace MvvmCross.Forms.iOS
         {
             get
             {
-                var toReturn = new List<System.Reflection.Assembly>(base.ValueConverterAssemblies);
-                toReturn.Add(typeof(MvxLanguageConverter).Assembly);
+                var toReturn = new List<Assembly>(base.ValueConverterAssemblies)
+                {
+                    typeof(MvxLanguageConverter).Assembly
+                };
                 return toReturn;
             }
         }
 
-        protected override MvxBindingBuilder CreateBindingBuilder()
-        {
-            return new MvxFormsBindingBuilder();
-        }
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
     }
 }

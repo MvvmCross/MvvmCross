@@ -37,14 +37,12 @@ namespace MvvmCross.Forms.Uwp
         protected override void InitializeLastChance()
         {
             InitializeBindingBuilder();
-
             base.InitializeLastChance();
         }
 
         protected virtual void InitializeBindingBuilder()
         {
             MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
-
             bindingBuilder.DoRegistration();
         }
 
