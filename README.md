@@ -17,7 +17,7 @@ MvvmCross
 
 👀 Check out [mvvmcross.com](https://www.mvvmcross.com) to get started with MvvmCross 👀
 
-MvvmCross is a cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern on Xamarin and Windows (UWP & WPF). This allows for better code sharing by allowing you to share behavior and business logic between platforms.
+MvvmCross is a cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern on *Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF)*. This allows for better code sharing by allowing you to share behavior and business logic between platforms.
 
 Among the features MvvmCross provides are:
 
