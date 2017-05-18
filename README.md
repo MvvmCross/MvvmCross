@@ -1,5 +1,7 @@
 <h3 align="center">
-  <img src="docs/img/MvvmCross-logo.png" alt="MvvmCross Logo" />
+  <a href="https://www.mvvmcross.com/" target="_blank">
+    <img src="docs/img/MvvmCross-logo.png" alt="MvvmCross Logo" />
+  </a>
 </h3>
 
 MvvmCross
@@ -30,7 +32,7 @@ MvvmCross is extendable by you. We strive to let as much code be configurable an
 
 <hr />
 <h4 align="center">
-  Check out the new <a href="https://www.mvvmcross.com/">MvvmCross docs</a>
+  Check out the new <a href="https://www.mvvmcross.com/documentation">MvvmCross docs</a>
 </h4>
 <hr />
 
@@ -106,7 +108,7 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 ## Installation
 
-Grab the latest MvvmCross NuGet package and install in your solution.
+Grab the latest [MvvmCross NuGet](https://www.nuget.org/packages/MvvmCross/) package and install in your solution.
 
 > Install-Package MvvmCross
 
