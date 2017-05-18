@@ -36,9 +36,6 @@ namespace MvvmCross.iOS.Views
                 currentTabs = ViewControllers.ToList();
             }
 
-            if(viewController as UINavigationController != null)
-                (viewController as UINavigationController).NavigationBar.Translucent = false;
-
             currentTabs.Add(viewController);
 
             // update current Tabs
