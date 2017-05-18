@@ -135,13 +135,13 @@ We are happy to receive Pull Requests adding new features and solving bugs. As f
 
 Since Windows and UNIX-based systems differ in terms of line endings, it is a very good idea to configure git autocrlf settings.
 
-On *Windows* we recommend setting `autocrlf` to `true`.
+On *Windows* we recommend setting `core.autocrlf` to `true`.
 
 ```
 git config --global core.autocrlf true
 ```
 
-On *Mac* we recommend setting `autocrlf` to `input`.
+On *Mac* we recommend setting `core.autocrlf` to `input`.
 
 ```
 git config --global core.autocrlf input
