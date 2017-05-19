@@ -112,6 +112,8 @@ namespace MvvmCross.Core.ViewModels
             var closeResult = Close(this);
             if (closeResult)
                 _tcs?.TrySetResult(result);
+
+            _isClosing = false;
             return Task.FromResult(closeResult);
         }
 
