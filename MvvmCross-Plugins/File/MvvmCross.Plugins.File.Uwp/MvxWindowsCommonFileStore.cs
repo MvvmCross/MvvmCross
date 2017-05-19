@@ -20,11 +20,6 @@ namespace MvvmCross.Plugins.File.WindowsCommon
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsCommonFileStore : MvxFileStoreBase
     {
-        public MvxWindowsCommonFileStore(bool appendDefaultPath)
-            : base(appendDefaultPath)
-        {
-        }
-
         public override Stream OpenRead(string path)
         {
             try
@@ -72,7 +67,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                     }
                 }
 
-                var fullToPath = ToFullPath(to, AppendDefaultPath);
+                var fullToPath = ToFullPath(to);
                 var toDirectory = Path.GetDirectoryName(fullToPath);
                 var toFileName = Path.GetFileName(fullToPath);
                 var toStorageFolder = StorageFolder.GetFolderFromPathAsync(toDirectory).Await();
@@ -92,7 +87,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             {
                 var fromFile = StorageFileFromRelativePath(from);
 
-                var fullToPath = ToFullPath(to, AppendDefaultPath);
+                var fullToPath = ToFullPath(to);
                 var toDirectory = Path.GetDirectoryName(fullToPath);
                 var toFileName = Path.GetFileName(fullToPath);
 
@@ -195,21 +190,21 @@ namespace MvvmCross.Plugins.File.WindowsCommon
 
         public override IEnumerable<string> GetFilesIn(string folderPath)
         {
-            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath, AppendDefaultPath)).Await();
+            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
             var files = folder.GetFilesAsync().Await();
             return files.Select(x => x.Path);
         }
 
         public override IEnumerable<string> GetFoldersIn(string folderPath)
         {
-            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath, AppendDefaultPath)).Await();
+            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
             var files = folder.GetFoldersAsync().Await();
             return files.Select(x => x.Path);
         }
 
         public override void DeleteFile(string path)
         {
-            SafeDeleteFile(path, AppendDefaultPath);
+            SafeDeleteFile(path);
         }
 
         public override void DeleteFolder(string folderPath, bool recursive)
@@ -218,7 +213,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
             try
             {
-                var directory = ToFullPath(folderPath, AppendDefaultPath);
+                var directory = ToFullPath(folderPath);
                 var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
                 storageFolder.DeleteAsync().Await();
             }
@@ -237,11 +232,11 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
-            SafeDeleteFile(path, AppendDefaultPath);
+            SafeDeleteFile(path);
 
             try
             {
-                var storageFile = CreateStorageFileFromRelativePathAsync(path, AppendDefaultPath).GetAwaiter().GetResult();
+                var storageFile = CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
                 using (var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await())
                 {
                     using (var stream = streamWithContentType.AsStreamForWrite())
@@ -261,11 +256,11 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
-            await SafeDeleteFileAsync(path, AppendDefaultPath);
+            await SafeDeleteFileAsync(path);
 
             try
             {
-                var storageFile = await CreateStorageFileFromRelativePathAsync(path, AppendDefaultPath).ConfigureAwait(false);
+                var storageFile = await CreateStorageFileFromRelativePathAsync(path).ConfigureAwait(false);
                 using (var streamWithContentType =
                         await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false))
                 {
@@ -286,7 +281,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             try
             {
-                var storageFile = StorageFileFromRelativePath(path, AppendDefaultPath);
+                var storageFile = StorageFileFromRelativePath(path);
                 using (var streamWithContentType = storageFile.OpenReadAsync().Await())
                 {
                     using (var stream = streamWithContentType.AsStreamForRead())
@@ -306,7 +301,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
         {
             try
             {
-                var storageFile = await StorageFileFromRelativePathAsync(path, AppendDefaultPath).ConfigureAwait(false);
+                var storageFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
                 using (var streamWithContentType = await storageFile.OpenReadAsync().AsTask().ConfigureAwait(false))
                 {
                     using (var stream = streamWithContentType.AsStreamForRead())
@@ -322,14 +317,11 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
-        public override string NativePath(string path)
-            => ToFullPath(path, AppendDefaultPath);
-
-        private static bool SafeDeleteFile(string path, bool appendDefaultPath)
+        private static bool SafeDeleteFile(string path)
         {
             try
             {
-                var toFile = StorageFileFromRelativePath(path, appendDefaultPath);
+                var toFile = StorageFileFromRelativePath(path);
                 toFile.DeleteAsync().Await();
                 return true;
             }
@@ -343,11 +335,11 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
-        private static async Task<bool> SafeDeleteFileAsync(string path, bool appendDefaultPath)
+        private static async Task<bool> SafeDeleteFileAsync(string path)
         {
             try
             {
-                var toFile = await StorageFileFromRelativePathAsync(path, appendDefaultPath).ConfigureAwait(false);
+                var toFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
                 await toFile.DeleteAsync().AsTask().ConfigureAwait(false);
                 return true;
             }
@@ -361,23 +353,23 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             }
         }
 
-        private static StorageFile StorageFileFromRelativePath(string path, bool appendDefaultPath)
+        private static StorageFile StorageFileFromRelativePath(string path)
         {
-            var fullPath = ToFullPath(path, appendDefaultPath);
+            var fullPath = ToFullPath(path);
             var storageFile = StorageFile.GetFileFromPathAsync(fullPath).Await();
             return storageFile;
         }
 
-        private static async Task<StorageFile> StorageFileFromRelativePathAsync(string path, bool appendDefaultPath)
+        private static async Task<StorageFile> StorageFileFromRelativePathAsync(string path)
         {
-            var fullPath = ToFullPath(path, appendDefaultPath);
+            var fullPath = ToFullPath(path);
             var storageFile = await StorageFile.GetFileFromPathAsync(fullPath).AsTask().ConfigureAwait(false);
             return storageFile;
         }
 
-        private static async Task<StorageFile> CreateStorageFileFromRelativePathAsync(string path, bool appendDefaultPath)
+        private static async Task<StorageFile> CreateStorageFileFromRelativePathAsync(string path)
         {
-            var fullPath = ToFullPath(path, appendDefaultPath);
+            var fullPath = ToFullPath(path);
             var directory = Path.GetDirectoryName(fullPath);
             var fileName = Path.GetFileName(fullPath);
             var storageFolder = await StorageFolder.GetFolderFromPathAsync(directory).AsTask().ConfigureAwait(false);
@@ -385,10 +377,13 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             return storageFile;
         }
 
-        private static string ToFullPath(string path, bool appendDefaultPath)
+        public override string NativePath(string path)
         {
-            if (appendDefaultPath) return path;
+            return ToFullPath(path);
+        }
 
+        private static string ToFullPath(string path)
+        {
             var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             return System.IO.Path.Combine(localFolderPath, path);
         }
