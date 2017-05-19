@@ -18,7 +18,7 @@ namespace MvvmCross.Test.Stubs
 
             var viewModelType = currentParameters["vm"] == "a" ? typeof(ViewModelA) : typeof(ViewModelB);
 
-            return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null, null));
+            return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null));
         }
     }
 }

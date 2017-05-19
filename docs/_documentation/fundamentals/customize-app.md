@@ -114,9 +114,9 @@ However, **most applications actually override only very few of these methods**.
 
 If you do want to override some of the Setup, then the rest of this document describes some of the methods and properties that you may find useful.
 
-#Individual customisations
+# Individual customisations
 
-##Providing application specific initialisation
+## Providing application specific initialisation
 
 There are three key methods where application specific initialisation might be added
 
@@ -128,7 +128,7 @@ There are three key methods where application specific initialisation might be a
 
 In this section, we'll only introduce some of the possibilities for creating and registering objects during initialize and setup. For a more in-depth introduction to MvvmCross IoC, see [Service Location and Inversion of Control](https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control).
 
-###Registering cross-platform business objects in `App.Initialize`
+### Registering cross-platform business objects in `App.Initialize`
 
 It's very common for `App.Initialize` to include IoC registration. Indeed, the default nuget `App.cs` template includes
 
@@ -152,7 +152,7 @@ This logic says:
 
 Many other registration techniques are available - including registering objects from other assemblies, using instance-per-request registration and using individual rather than reflection-based registrations. For more on these, see [Service Location and Inversion of Control](https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control).
 
-###Registering platform-specific business objects in `Setup.InitializeFirstChance` and `Setup.InitializeLastChance`
+### Registering platform-specific business objects in `Setup.InitializeFirstChance` and `Setup.InitializeLastChance`
 
 These two placeholders provide key places for you to create and register services which are specific to your platform.
 
@@ -171,7 +171,7 @@ Alternatively, if you wanted to implement a `DialogService` which would be used 
 
 For many objects the choice of when to initialize - first or last - doesn't matter. For others, the key choice is whether the service needs to be available before or after the `App` is created and initialized.
 
-##Changing trace/debug output
+## Changing trace/debug output
 
 Each platform provides a virtual `CreateDebugTrace` methods which offers your application a chance to customise where `Mvx.Trace` messages are displayed.
 
@@ -218,7 +218,7 @@ protected override IMvxTrace CreateDebugTrace()
 }
 ```
 
-##Changing the IoC container that MvvmCross uses
+## Changing the IoC container that MvvmCross uses
 
 IoC is the first thing that MvvmCross setup starts.
 
@@ -232,7 +232,7 @@ To override MvvmCross' IoC, you can:
   - The only *unusual* methods in the MvvmCross IoC interface are the `CallbackWhenRegistered` hooks - these provide callbacks when new object types are registered and may require a little custom code in the `RegisterXXX` methods within your adapter.
 - finally, you can override `IMvxIoCProvider CreateIocProvider()` in your `Setup` class to return your IoC provider
 
-##Providing additional View and ViewModel Assemblies
+## Providing additional View and ViewModel Assemblies
 
 The default MvvmCross ViewModel Locator looks for:
 
@@ -265,9 +265,7 @@ protected override Assembly[] GetViewModelAssemblies()
 }
 ```
 
-**Note**: for WindowsPhone only, if you load Views from any Assembly other than the main one, then you need to add a `MvxPhoneViewAttribute` to each of those Views in order to help MvvmCross work out the Xaml Url for the View. For example, if the `SpecialLoginView` is a Xaml page located in the `SubViews` folder of the `MyOrg.Satellite.ExtraViews` assembly then you will need to add the attribute: `[MvxPhoneView("/MyOrg.Satellite.ExtraView;component/SubViews/BlockedUsers.xaml")]`
-
-##Overriding ViewModel Location/Construction
+## Overriding ViewModel Location/Construction
 
 By default, MvvmCross builds a new `ViewModel` every time one is requested and uses the `CIRS` sequence - Construction-Init-ReloadState-Start - to initialize that `ViewModel`.
 
@@ -309,7 +307,7 @@ protected override IMvxViewModelLocator CreateDefaultViewModelLocator()
 }
 ```
 
-##Custom IMvxAppStart
+## Custom IMvxAppStart
 
 When an MvvmCross application starts by default it shows the `View` associated with a single `ViewModel` type.
 
@@ -341,11 +339,11 @@ public class CustomAppStart
 
 This can then be registered in `App` using:
 
-	RegisterAppStart(new CustomAppStart());
+    RegisterAppStart(new CustomAppStart());
 
 **Note:** For situations where the app is launched using a `protocol` - e.g. from a Push notification or from an email link - then the `object hint` parameter start can be used to transfer a hint from the UI to the start object. Currently, it's up to you - the app developer - to write the UI side code to do this.
 
-##Custom Presenters
+## Custom Presenters
 
 For 'my first MvvmCross application' most people start with a 'full page' app in which each `ShowViewModel` causes a new `View` to be displayed, filling an entire screen at a time.
 
@@ -360,7 +358,7 @@ To provide these alternative UI possibilities, MvvmCross allows each app to prov
 
 For more on custom presenters, see several articles and videos linked from: http://slodge.blogspot.co.uk/2013/06/presenter-roundup.html
 
-##Providing ValueConverters
+## Providing ValueConverters
 
 For the platforms that use MvvmCross' databinding platform, then ValueConverters:
 
@@ -439,7 +437,7 @@ private void RegisterValueConverters()
 
 For more on creating ValueConverters, see the ValueConverter sample in: https://github.com/slodge/MvvmCross-Tutorials/tree/master/ValueConversion
 
-##Providing Custom Views (Android)
+## Providing Custom Views (Android)
 
 In Android, MvvmCross overrides the default Android xml inflation and instead provides its own mechanism.
 
@@ -506,7 +504,7 @@ protected override void FillBindingNames(IMvxBindingNameRegistry registry)
 }
 ```
 
-##Registering custom bindings
+## Registering custom bindings
 
 MvvmCross binding works by default against Android and iOS UI objects by trying to use Reflection on properties and events.
 

@@ -90,8 +90,6 @@ namespace MvvmCross.iOS.Platform
         protected override void InitializePlatformServices()
         {
             this.RegisterPlatformProperties();
-            // for now we continue to register the old style platform properties
-            this.RegisterOldStylePlatformProperties();
             this.RegisterPresenter();
             this.RegisterLifetime();
         }
@@ -104,12 +102,6 @@ namespace MvvmCross.iOS.Platform
         protected virtual MvxIosSystem CreateIosSystemProperties()
         {
             return new MvxIosSystem();
-        }
-
-        [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
-        protected virtual void RegisterOldStylePlatformProperties()
-        {
-            Mvx.RegisterSingleton<IMvxIosPlatformProperties>(new MvxIosPlatformProperties());
         }
 
         protected virtual void RegisterLifetime()

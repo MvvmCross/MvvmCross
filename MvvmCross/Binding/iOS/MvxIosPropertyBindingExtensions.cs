@@ -1,4 +1,4 @@
-// MvxIosPropertyBindingExtensions.cs
+﻿// MvxIosPropertyBindingExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -86,7 +86,7 @@ namespace MvvmCross.Binding.iOS
         public static string BindTwoFingerTap(this UIView uiView)
             => MvxIosPropertyBinding.UIView_TwoFingerTap;
 
-        public static string BindTextFocusk(this UIView uiView)
+        public static string BindTextFocus(this UIView uiView)
             => MvxIosPropertyBinding.UITextField_TextFocus;
     }
 }

@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-                android:id="@+id/layout"
-                >
-
-  <TextView android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text"
-            android:textSize="150sp"
-            />
-  
-  
-</RelativeLayout>
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout1">
+    <TextView
+        android:id="@+id/text"
+        android:textSize="150sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button1"
+        android:text="Close result"
+        local:MvxBind="Click CloseViewModelCommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button1"
+        android:text="Open Main"
+        local:MvxBind="Click OpenViewModelMainCommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button1"
+        android:text="Open A"
+        local:MvxBind="Click OpenViewModelACommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button1"
+        android:text="Open B"
+        local:MvxBind="Click OpenViewModelBCommand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

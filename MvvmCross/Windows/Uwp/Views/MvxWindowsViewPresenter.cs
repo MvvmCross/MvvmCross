@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
+namespace MvvmCross.Uwp.Views
 {
     using System;
 
@@ -57,7 +57,7 @@ namespace MvvmCross.WindowsUWP.Views
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
             var currentView = this._rootFrame.Content as IMvxView;
             if (currentView == null)

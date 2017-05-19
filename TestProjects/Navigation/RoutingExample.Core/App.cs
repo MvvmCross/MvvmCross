@@ -16,12 +16,5 @@ namespace RoutingExample.Core
 
             RegisterAppStart<MainViewModel>();
         }
-
-        //public override void LoadPlugins(IMvxPluginManager pluginManager)
-        //{
-        //    base.LoadPlugins(pluginManager);
-
-        //    pluginManager.EnsurePluginLoaded<PluginLoader>();
-        //}
     }
 }

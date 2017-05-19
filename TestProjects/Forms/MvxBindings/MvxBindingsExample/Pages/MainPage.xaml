@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core:MvxContentPage x:TypeArguments="viewModels:MainViewModel"
+                     xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:core="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+                     xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
+                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+                     x:Class="MvxBindingsExample.Pages.MainPage">
+
+    <ScrollView>
+        <StackLayout Margin="5">
+            <Label Text="Default (OneWay) Binding" />
+	        <Label mvx:Bi.nd="Text BindableText" />
+            <BoxView Margin="5"
+                     HeightRequest="4"
+                     Color="Black" />
+            <Label Text="OneWayToSource Binding" />
+            <Entry mvx:Bi.nd="Text BindableText, Mode=OneWayToSource" />
+            <BoxView Margin="5"
+                     HeightRequest="4"
+                     Color="Black" />
+            <Label Text="TwoWay Binding" />
+            <Entry mvx:Bi.nd="Text BindableText, Mode=TwoWay" />
+            <BoxView Margin="5"
+                     HeightRequest="4"
+                     Color="Black" />
+            <Label Text="OneTime Binding" />
+            <Label mvx:Bi.nd="Text BindableText, Mode=OneTime" />
+            <BoxView Margin="5"
+                     HeightRequest="4"
+                     Color="Black" />
+            <Label Text="Lang Binding" />
+            <Label mvx:La.ng="Text ThisIsLocalized" />
+        </StackLayout>
+    </ScrollView>
+</core:MvxContentPage>

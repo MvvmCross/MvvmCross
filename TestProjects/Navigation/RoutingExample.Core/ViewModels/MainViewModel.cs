@@ -20,35 +20,39 @@ namespace RoutingExample.Core.ViewModels
             _routingService = routingService;
         }
 
-        private ICommand _showACommand;
+        private IMvxCommand _showACommand;
 
-        public ICommand ShowACommand
+        public IMvxCommand ShowACommand
         {
             get
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate("mvx://test/a");
+                    await _routingService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
+
+                    //await _routingService.Navigate("mvx://test/a");
                 }));
             }
         }
 
-        private ICommand _showBCommand;
+        private IMvxCommand _showBCommand;
 
-        public ICommand ShowBCommand
+        public IMvxCommand ShowBCommand
         {
             get
             {
                 return _showBCommand ?? (_showBCommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+                    //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
+                    var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
+                    var test = result?.FirstName;
                 }));
             }
         }
 
-        private ICommand _showRandomCommand;
+        private IMvxCommand _showRandomCommand;
 
-        public ICommand ShowRandomCommand
+        public IMvxCommand ShowRandomCommand
         {
             get
             {

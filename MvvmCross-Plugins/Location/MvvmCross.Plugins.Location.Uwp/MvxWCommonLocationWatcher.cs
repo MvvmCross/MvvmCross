@@ -44,8 +44,8 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
                 if (_geolocator == null)
                     throw new MvxException("Location Manager not started");
 
-#warning This Await here feels very dangerous - would be better to add an async API for location
-                var storeLocation = _geolocator.GetGeopositionAsync().Await();
+#warning Add async API for GeoLocation.
+                var storeLocation = _geolocator.GetGeopositionAsync().AsTask().GetAwaiter().GetResult();
                 if (storeLocation == null)
                     return null;
 
@@ -108,10 +108,9 @@ namespace MvvmCross.Plugins.Location.WindowsCommon
             var position = new MvxGeoLocation { Timestamp = coordinate.Timestamp };
             var coords = position.Coordinates;
 
-            // TODO - allow nullables - https://github.com/slodge/MvvmCross/issues/94
-            coords.Altitude = coordinate.Altitude ?? 0.0;
-            coords.Latitude = coordinate.Latitude;
-            coords.Longitude = coordinate.Longitude;
+            coords.Altitude = coordinate.Point.Position.Altitude;
+            coords.Latitude = coordinate.Point.Position.Latitude;
+            coords.Longitude = coordinate.Point.Position.Longitude;
             coords.Speed = coordinate.Speed ?? 0.0;
             coords.Accuracy = coordinate.Accuracy;
             coords.AltitudeAccuracy = coordinate.AltitudeAccuracy ?? double.MaxValue;

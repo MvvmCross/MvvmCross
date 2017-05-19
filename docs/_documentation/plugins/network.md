@@ -14,7 +14,7 @@ public interface IMvxReachability
 
 **Note:** this interface is currently implemented on iOS only, although some contributors are working on other platforms (e.g. for Android see https://github.com/slodge/MvvmCross/issues/362)
 
-Since this original purpose, Network has now further been expanded to provide a simple Rest implementation - and this is available on Droid, Touch, WindowsPhone, WindowsStore and Wpf.
+Since this original purpose, Network has now further been expanded to provide a simple Rest implementation - and this is available on Droid, iOS, Windows Uwp and Wpf.
 
 The Rest client is mainly implemented using the `IMvxRestClient` and `IMvxJsonRestClient` interfaces
 

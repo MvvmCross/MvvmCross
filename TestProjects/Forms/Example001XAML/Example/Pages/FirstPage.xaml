@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="using:Xamarin.Forms"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              x:Class="Example.Pages.FirstPage"
              Title="First Page">
 
@@ -26,7 +28,24 @@
     
 
     <StackLayout Spacing="10" Orientation="Vertical">
-        <Label FontSize = "24" Text = "Enter your nickname in the box below" />
+        <views:MvxImageView HorizontalOptions="CenterAndExpand"
+                            Margin="20"
+                            HeightRequest="100"
+                            ImageUri="https://www.mvvmcross.com/img/MvvmCross-logo.png">
+            <views:MvxImageView.DefaultImagePath>
+                <OnPlatform x:TypeArguments="system:String">
+                    <On Platform="Android" Value="res:fallback" />
+                    <On Platform="iOS" Value="res:Fallback.png" />
+                </OnPlatform>
+            </views:MvxImageView.DefaultImagePath>
+            <views:MvxImageView.ErrorImagePath>
+                <OnPlatform x:TypeArguments="system:String">
+                    <On Platform="Android" Value="res:error" />
+                    <On Platform="iOS" Value="res:Error.png" />
+                </OnPlatform>
+            </views:MvxImageView.ErrorImagePath>
+        </views:MvxImageView>
+        <Label FontSize="24" Text="Enter your nickname in the box below" />
         <Entry Placeholder="Who are you?" TextColor="Red" Text="{Binding YourNickname}" />
         <Label FontSize="24" Text="{Binding Hello}" />
     </StackLayout>

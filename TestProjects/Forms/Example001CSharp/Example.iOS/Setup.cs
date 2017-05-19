@@ -1,11 +1,12 @@
 using MvvmCross.Platform.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.iOS;
+using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
 using UIKit;
 using Xamarin.Forms;
-using MvvmCross.Forms.Presenter.iOS;
-using MvvmCross.Forms.Presenter.Core;
 
 namespace Example.iOS
 {
@@ -30,7 +31,7 @@ namespace Example.iOS
         {
             Forms.Init();
 
-            var xamarinFormsApp = new MvxFormsApp();
+            var xamarinFormsApp = new MvxFormsApplication();
 
             return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
         }

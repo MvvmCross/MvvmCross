@@ -4,24 +4,24 @@ title: Data binding
 category: Fundamentals
 order: 2
 ---
-DataBinding is the key technology that Mvvm relies on to link Views with their ViewModels.
+DataBinding is the key technology that MVVM relies on to link Views with their View-Models.
 
-DataBinding provides and maintains the automated two-way connection between View and ViewModel. A good understanding DataBinding is essential for every Mvvm developer.
+DataBinding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of Data binding is essential for every MVVM developer.
 
-Within MvvmCross, databinding was initially built to mirror the structure provided by Microsoft in their Xaml based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
+Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
 
 This article focuses first on the core 'Windows' databinding approach, but then later extends to some of the newer ideas.
 
-###Core Windows Databinding
+### Core Windows Databinding
 In this structure, for each binding:
 
 - C# properties are used in both View and ViewModel
 - A single View property is 'bound' - connected - to a ViewModel property
-- is specified with a Mode which gives a direction for data flow
+- is specified with a Mode which gives a direction for data flow (One-Way, Two-Way, etc.)
 - can optionally be specified with a ValueConverter - and this can optionally also be parameterised
 - can also optionally be specified with a FallbackValue for when binding fails.
 
-###C# properties and data-binding
+### C# properties and data-binding
 
 C# properties are used for data-binding on both the View and the ViewModel.
 
@@ -43,6 +43,8 @@ public string MyProperty
 }
 ```
 
+> Note: MvvmCross provides helper methods to assign and fire the `PropertyChanged` event, after checking whether value actually changed. Consider using `SetProperty()` for this, which is present on `MvxViewModel` and `MvxPropertyChanged`.
+
 This pattern uses a local private backing variable to store the current value, and relies on `RaisePropertyChanged` to signal changes in the value to any listening Views.
 
 In the View:
@@ -59,11 +61,11 @@ In the View:
      - custom C# methods have to be used to get and set the variable values
      - custom Java listeners or Objective-C delegates have to be used to detect when the UI View state changes (e.g. when the user enters text or taps on a button).
 
-For more info on the details on implementing custom bindings, see http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html
+For more info on the details on implementing custom bindings, see the [custom bindings blog post by Stuart Lodge](http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html)
 
 ### DataBound properties
 
-Using the View and ViewModel properties described above, it's common for a ViewModel C# property to be used to  model the value of a View property.
+Using the View and ViewModel properties described above, it's common for a ViewModel C# property to be used to model the value of a View property.
 
 For example:
 
@@ -135,7 +137,7 @@ There are 4 modes in which properties in the View can be bound to properties in 
 - This mode is not very commonly used, but can be useful for fields which are configurable but which don't tend to change after they have initially been set. 
 - In MvvmCross, we use One-Time binding when setting static text from language files - this is because it's common for the user to select a language, but once chosen, it's uncommon for the user to then change that language.
 
-###Value Conversion
+### Value Conversion
 
 A `ValueConverter` is a class which implements the `IValueConverter` interface.
 
@@ -171,7 +173,7 @@ public class LengthValueConverter
 
 ValueConverters can also be provided with a `parameter` - this can sometimes be useful to reuse a single value converter in different situations. For example, a `TrimValueConverter` might be able to take the characters to trim in its `parameter`.
 
-###Fallback Values
+### Fallback Values
 
 Sometimes the ViewModel source property for the ViewModel isn't available.
 
@@ -188,7 +190,7 @@ Notes:
 
 
 
-###A note about `DataContext`
+### A note about `DataContext`
 
 While we have used the terms `View` and `ViewModel` throughout this article, you will also see `DataContext` used in this article and in code.
 
@@ -297,11 +299,11 @@ These ideas and their current development status are discussed further later in 
 Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its databinding is driven by real users and the invention and ideas their real apps require.
 
 
-###JSON
+### JSON
 
 As discussed above, JSON binding is not supported within MvvmCross v3 or later.
 
-###Swiss
+### Swiss
 
 Swiss binding syntax allows a basic binding from a View $Target$ to a ViewModel property $SourcePath$ to be written using a syntax:
 
@@ -421,7 +423,7 @@ Bind the `Value` property to `Count` on the ViewModel, and ensure this binding i
 
 Bind the `Click` event to the `DayCommand` property on the ViewModel (which should implement `ICommand`). When invoked, ensure that Execute is passeda parameter value of "Thursday"
 
-###Fluent
+### Fluent
 
 The fluent syntax provides a C# way to create bindings.
 
@@ -437,7 +439,83 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used - e.g. for a `UILabel` the default is `Text`
+If `For` is not provided, then the default view property is used.
+
+**Android**
+
+Base Control | Default
+---- | ---------
+Android.Widget.Button| Click
+Android.Widget.CheckBox | Checked
+Android.Widget.TextView | Text
+Android.Widget.CompoundButton | Checked
+Android.Widget.SeekBar | Progress
+Android.Widget.SearchView | Query
+MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
+MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
+MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
+
+**iOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIDatePicker | Date
+UIKit.UISlider | Value
+UIKit.UISwitch | On
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
+
+**Mac**
+
+Base Control | Default
+---- | ---------
+AppKit.NSButton | Activated
+AppKit.NSButtonCell | Activated
+AppKit.NSSegmentedControl | SelectedSegment
+AppKit.NSSearchField | Text
+AppKit.NSTextField | StringValue
+AppKit.NSTextView | StringValue
+AppKit.NSImageView | Image
+AppKit.NSDatePicker | Date
+AppKit.NSSlider | IntValue
+
+**tvOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.tvOS.Views.MvxImageViewLoader | ImageUrl
 
     To(vm => vm.$ViewModelPath$)
 
@@ -477,17 +555,174 @@ Using this syntax, an example binding set is:
         .FallbackValue(true);
      set.Apply();  
 
-In addition to the `Expression` based Fluent bindings, string based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set using:
+ **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+
+### MvvmCross Defined Custom bindings
+
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set via the use of custom bindings:
 
     set.Bind(okButton)
        .For("Title")
        .To(vm => vm.Caption);
            
+    set.Bind(okButton)
+        .For(c => c.BindText())
+        .To(vm => vm.Caption);
 
-**Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+ **Note:** `Extension Method` based Fluent bindings require MvvmCross 5+.
+
+**Android - MvvmCross.Binding.Droid**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Views.View | Visible | BindVisible()
+Android.Views.View | Hidden | BindHidden()
+Android.Views.View | Click | BindClick()
+Android.Views.View | LongClick | BindLongClick()
+Android.Widget.TextView | Text | BindText()
+Android.Widget.TextView | TextFormatted | BindTextFormatted()
+Android.Widget.TextView | Hint | BindHint()
+Android.Widget.CompoundButton | Checked | BindChecked()
+Android.Widget.SeekBar | Progress | BindProgress()
+Android.Widget.ImageView | Bitmap | BindBitmap()
+Android.Widget.ImageView | Drawable | BindDrawable()
+Android.Widget.ImageView | DrawableId | BindDrawableId()
+Android.Widget.ImageView | DrawableName | BindDrawableName()
+Android.Widget.ImageView | ResourceName | BindResourceName()
+Android.Widget.ImageView | AssetImagePath | BindAssetImagePath()
+Android.Widget.EditText | TextFocus | BindTextFocus()
+Android.Widget.SearchView | Query | BindQuery()
+Android.Widget.RatingBar | Rating | BindRating()
+Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Preferences.Preference | Value | BindValue()
+Android.Preferences.EditTextPreference | Text | BindText()
+Android.Preferences.ListPreference | Value | BindValue()
+Android.Preferences.TwoStatePreference | Checked | BindChecked()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Binding.Droid.Views.MvxSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - MvvmCross.Plugins.Color.Droid**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Widget.TextView | TextColor | BindTextColor()
+Android.Views.View | BackgroundColor | BindBackgroundColor()
 
 
-###Tibet
+**Android - MvvmCross.Droid.Support.V7.AppCompat**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Widget.SearchView | Query | BindQuery()
+Android.Support.V7.Widget.Toolbar | Subtitle | BindSubtitle()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - MvvmCross.Droid.Support.V7.Preference**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Preferences.Preference | Value | BindValue()
+Android.Support.V7.Preferences.ListPreference | Value | BindValue()
+Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
+Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+
+**iOS - MvvmCross.Binding.iOS**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISlider | Value | BindValue()
+UIKit.UIStepper | Value | BindValue()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UIDatePicker | Date | BindDate()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UIDatePicker | Time | BindTime()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISwitch | On | BindOn()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**Mac - MvvmCross.Binding.Mac**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+AppKit.NSView | Visibility | BindVisibility()
+AppKit.NSView | Visible | BindVisible()
+AppKit.NSSlider | IntValue | BindIntValue()
+AppKit.NSSegmentedControl | SelectedSegment | BindSelectedSegment()
+AppKit.NSDatePicker | Time | BindTime()
+AppKit.NSDatePicker | Date | BindDate()
+AppKit.NSTextField | StringValue | BindStringValue()
+AppKit.NSTextView | StringValue | BindStringValue()
+AppKit.NSButton | Visibility | BindVisibility()
+AppKit.NSButton | Title | BindTitle()
+AppKit.NSSearchField | Text | BindText()
+
+**tvOS - MvvmCross.Binding.tvOS**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**UWP - MvvmCross.Binding.Uwp**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
+
+**WPF - MvvmCross.BindingEx.Wpf / MvvmCross.BindingEx.WindowsCommon**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
+
+### Tibet
 
 Tibet binding includes several ideas which **extend** Swiss binding.
 
@@ -640,7 +875,7 @@ This advancement is, of course, not free - it does come with a small memory and 
 
 In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimised combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
 
-###Rio
+### Rio
 
 Within ViewModels, Mvvm in C# has always been centred around the `INotifyPropertyChanged` interface.
 
@@ -826,9 +1061,9 @@ In particular two `AttachedProperties` is supplied in the BindingEx package:
 - `mvx:Bi.nd` - for bindings
 - `mvx:La.ng` - for internationalisation extensions
 
-To add these properties to your Windows Phone, Store or WPF MvvmCross app:
+To add these properties to your Windows Uwp or WPF MvvmCross app:
 
-- include the BindingEx package
+- include the MvvmCross.Binding package
 - include an additional step in Setup which initialises the WindowsBinding framework
 
         protected override void InitializeLastChance()
@@ -841,17 +1076,13 @@ To add these properties to your Windows Phone, Store or WPF MvvmCross app:
 
 - in your Xaml files include an xml attribute for `mvx` - this will be different according to the platform:
 
- - phone
- 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.WindowsPhone"
- 
- - store
+ - Uwp
  
        xmlns:mvx="using:mvx"
         
  - WPF
 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.Wpf"
+       xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
@@ -864,10 +1095,19 @@ Once installed, the syntax within these `AttachedProperties` bindings is exactly
 
 
 
-###Beyond Rio
+### Beyond Rio
 The framework that enables the Rio and Tibet binding extensions is interface-based and is built upon the small `CrossCore` platform which underpins `MvvmCross`.
 
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
 
+### Generic and typed bindings
+
+This change will add a generic "WithConversion" method. This will allow developers to strongly type the use of value converters, making refactoring a lot easier and more save. For example:
+
+```c#
+set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
+```
+
+Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)

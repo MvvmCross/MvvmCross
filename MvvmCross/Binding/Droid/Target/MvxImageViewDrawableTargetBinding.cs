@@ -1,4 +1,4 @@
-// MvxImageViewDrawableTargetBinding.cs
+﻿// MvxImageViewDrawableTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -54,9 +54,11 @@ namespace MvvmCross.Binding.Droid.Target
 			if(Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
 				drawable = context?.Resources?.GetDrawable(id, context.Theme);
 			else
-				drawable = context?.Resources?.GetDrawable(id);
+#pragma warning disable CS0618 // Type or member is obsolete
+                drawable = context?.Resources?.GetDrawable(id);
+#pragma warning restore CS0618 // Type or member is obsolete
 
-			if(drawable != null)
+            if(drawable != null)
 				imageView.SetImageDrawable(drawable);
 		}
 	}

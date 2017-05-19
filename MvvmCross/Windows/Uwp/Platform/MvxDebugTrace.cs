@@ -5,7 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Platform
+namespace MvvmCross.Uwp.Platform
 {
     using System;
     using System.Diagnostics;
