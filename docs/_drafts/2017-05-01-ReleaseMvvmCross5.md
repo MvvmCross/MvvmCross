@@ -6,31 +6,33 @@ categories: mvvmcross
 ---
 
 # Announcing MvvmCross 5.0!
+
 We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
 
 Let's have a look at the highlights:
 
 ## Merge of repos
+
 For a long time we have been looking at merging the different repositories of the project.
 Besides a better overview one of the main advantages this brings is the ability to setup a proper CI process.
 This is hugely beneficial in the release process itself and makes (patch) releasing MvvmCross a breeze. 
 
 ## New website with improved documentation
-Over time we received a lot of feedback from developers that use MvvmCross on a day-2-day basis. Besides the usual
-hugs and kisses the most common remark we often got was: "sir, you need to improve the documention". And as you all know: writing documention is hard. And not always the most funny thing you can think of. So our first focus was enabling *you* to help out improving the documentation. With 5.0 the documentation has landed in the GIT repo, making it possible to submit documentation (changes) just as you do with code: create a pull request. We're already seeing the benefits of this: the amount of community driven documentation changes has increased tenfold. 
 
-Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps it uniformity.
+Over time we have received a lot of feedback from developers that use MvvmCross on a day-to-day basis. Besides the usual hugs and kisses, the most common remark we often got was: "sir, you need to improve the documentation". And as you all know: writing documentation is hard. And not always the most fun thing you can think of. So our first focus was enabling you to help out with improving the documentation. With 5.0, the documentation has landed in the GIT repo, making it possible to submit documentation (changes) just as you do with code: create a pull request. We're already seeing the benefits of this: the amount of community-driven documentation changes has increased tenfold.
+
+Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps its uniformity.
 
 ## Open Collective
 
-As you all know MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
+As you all know, MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs, which are always difficult to manage. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight into what we're actually doing with it. We really hope you'll join this Open Collective!
 
 https://opencollective.com/mvvmcross
 
 ## Improved support for Xamarin.Forms
 
-In MvvmCross 5.0 we added much improved support for Xamarin.Forms! We added MvvmCross specific Pages, App classes, and Setup for Forms to enable Bindings, Ioc, DI and much more! Make sure to use the new base classes to enable Forms support.
+In MvvmCross 5.0 we added much improved support for Xamarin.Forms! We added MvvmCross-specific Pages, App classes, and Setup for Forms to enable Bindings, Ioc, DI and much more! Make sure to use the new base classes to enable Forms support.
 
 Find all the details in the updated [documentation](https://www.mvvmcross.com/documentation/platform/xamarin-forms)!
 
@@ -40,7 +42,7 @@ Starting with MvvmCross 5.0, there is a new default Presenter for Views, namely 
 
 ### View Presenter Overview
 
-The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns / strategies:
+The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns/strategies:
 
 - Stack navigation
 - Tabs
@@ -48,7 +50,7 @@ The default presenter that comes with MvvmCross offers out of the box support fo
 - Modal
 - Modal navigation
 
-Also if your app needs another kind of presentation mode, you can easily extend it!
+If your app needs another kind of presentation mode, you can also easily extend it!
 
 ### Presentation Attributes
 
@@ -150,7 +152,7 @@ set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
 
 Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
 
-MvvmCross 5 now supports an additional option than literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
+MvvmCross 5 now supports an additional option besides literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
 
 #### Developer Usage
 
@@ -166,7 +168,7 @@ bindingSet.Apply();
 More information can be found in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
 ## Removal of WindowsPhone 8.x and Windows 8.x
-As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 is depreceated for a long time; removing formal support for this platform is the right thing to do.
+As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 has been deprecated for a long time; removing formal support for this platform is the right thing to do.
 
 ## Removal of deprecated plugins
 MvvmCross' powerful plugin framework has brought us many good things. However, over time certain plugins have become obsolete, not maintained any longer or considered not useful anymore. With 5.0 we've decided to remove the following plugins:
@@ -178,7 +180,7 @@ No maintained for a long time.
 #### Dialog
 No maintained for a long time.
 #### SQLite plugin
-No actual functionality was in this plugin. To use this simpely include the [SQLite-PCL](https://www.nuget.org/packages/sqlite-net-pcl/) nuget.
+No actual functionality was in this plugin. To use this, simpely include the [SQLite-PCL](https://www.nuget.org/packages/sqlite-net-pcl/) nuget.
 #### Bookmarks
 Only in use on Windows (Phone) 8
 #### SoundEffects
@@ -191,15 +193,15 @@ We had two different implementations of a Sidemenu on iOS in MvvmCross. The defa
 ## Other improvements
 
 #### Improved starterpack
-The default files installed when you add the [MvvmCross StarterPack](https://www.nuget.org/packages/MvvmCross.StarterPack/) nuget are updated and improved to reflect all changes in 5.0 and offers a more real life situation base to start with.
+The default files installed when you add the [MvvmCross StarterPack](https://www.nuget.org/packages/MvvmCross.StarterPack/) nuget are updated and improved to reflect all changes in 5.0 and offer a more real-life situation base to start with.
 #### tvOS support
 tvOS support has been added and improved to enable even better cross-platform development.
 #### Test projects in main repo
-We've added a couple of test projects in the main repo so we can test and reproduce issue's very quickly.
+We've added a couple of test projects in the main repo so we can test and reproduce issues very quickly.
 #### Migrate Test.Core to PCL
 The Test packages are now based on PCL instead of NET45 so you can target more platforms.
 #### Sidebar fixes
-The now default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
+The now-default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
 
 # Changelog
 
