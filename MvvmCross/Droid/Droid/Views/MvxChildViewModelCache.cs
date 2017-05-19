@@ -7,8 +7,9 @@
 
 namespace MvvmCross.Droid.Views
 {
+    using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using MvvmCross.Core.ViewModels;
 
     public class MvxChildViewModelCache : IMvxChildViewModelCache
@@ -24,14 +25,31 @@ namespace MvvmCross.Droid.Views
             return index;
         }
 
+        public bool Exists(Type viewModelType)
+        {
+            return _viewModels.Values.Any(x => x.GetType() == viewModelType);
+        }
+
         public IMvxViewModel Get(int index)
         {
-            return this._viewModels[index];
+            IMvxViewModel viewModel;
+            _viewModels.TryGetValue(index, out viewModel);
+            return viewModel;
+        }
+
+        public IMvxViewModel Get(Type viewModelType)
+        {
+            return _viewModels.Values.FirstOrDefault(x => x.GetType() == viewModelType);
         }
 
         public void Remove(int index)
         {
             this._viewModels.Remove(index);
+        }
+
+        public void Remove(Type viewModelType)
+        {
+            _viewModels.Remove(_viewModels.FirstOrDefault(x => x.Value.GetType() == viewModelType).Key);
         }
     }
 }

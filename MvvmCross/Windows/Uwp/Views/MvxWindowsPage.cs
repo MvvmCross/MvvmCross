@@ -14,9 +14,9 @@ using Windows.UI.Xaml.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
-using MvvmCross.WindowsUWP.Views.Suspension;
+using MvvmCross.Uwp.Views.Suspension;
 
-namespace MvvmCross.WindowsUWP.Views
+namespace MvvmCross.Uwp.Views
 {
     public class MvxWindowsPage
         : Page

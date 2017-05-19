@@ -1,4 +1,4 @@
-// MvxViewControllerExtensionMethods.cs
+﻿// MvxViewControllerExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -23,11 +23,6 @@ namespace MvvmCross.iOS.Views
 
         private static IMvxViewModel LoadViewModel(this IMvxIosView iosView)
         {
-#warning NullViewModel needed?
-            // how to do N
-            //if (typeof (TViewModel) == typeof (MvxNullViewModel))
-            //    return new MvxNullViewModel() as TViewModel;
-
             if (iosView.Request == null)
             {
                 MvxTrace.Trace(

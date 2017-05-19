@@ -70,11 +70,6 @@ namespace MvvmCross.Core.Parse.StringDictionary
             var toReturn = new MvxViewModelRequest();
             var viewModelTypeName = this.SafeGetValue(dictionary, "Type");
             toReturn.ViewModelType = this.DeserializeViewModelType(viewModelTypeName);
-            toReturn.RequestedBy = new MvxRequestedBy
-            {
-                Type = (MvxRequestedByType)int.Parse(this.SafeGetValue(dictionary, "By")),
-                AdditionalInfo = this.SafeGetValue(dictionary, "Info")
-            };
             toReturn.ParameterValues = stringDictionaryParser.Parse(this.SafeGetValue(dictionary, "Params"));
             toReturn.PresentationValues = stringDictionaryParser.Parse(this.SafeGetValue(dictionary, "Pres"));
             return toReturn;
@@ -92,9 +87,6 @@ namespace MvvmCross.Core.Parse.StringDictionary
 
             var dictionary = new Dictionary<string, string>();
             dictionary["Type"] = this.SerializeViewModelName(toSerialise.ViewModelType);
-            var requestedBy = toSerialise.RequestedBy ?? new MvxRequestedBy();
-            dictionary["By"] = ((int)requestedBy.Type).ToString();
-            dictionary["Info"] = requestedBy.AdditionalInfo;
             dictionary["Params"] = stringDictionaryWriter.Write(toSerialise.ParameterValues);
             dictionary["Pres"] = stringDictionaryWriter.Write(toSerialise.PresentationValues);
             return stringDictionaryWriter.Write(dictionary);

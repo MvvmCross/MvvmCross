@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.WindowsUWP.Views.Suspension
+﻿namespace MvvmCross.Uwp.Views.Suspension
 {
     using System;
 

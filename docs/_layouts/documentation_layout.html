@@ -11,11 +11,16 @@
         {{ content }}
     </main>
 
+   {% include google-analytics.html %}
+    
+    <script src="{{ "/js/anchor.min.js" | relative_url }}"></script>
+    <script>
+      anchors.options.icon = '#';
+      anchors.add('h2, h3, h4, h5, h6');
+    </script>
   </body>
 
-
 <style>
-html{overflow: hidden;}
+  html{overflow: hidden;}
 </style>
-
 </html>

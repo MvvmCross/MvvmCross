@@ -12,6 +12,7 @@ using Android.Widget;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Platform;
 using RoutingExample.Core;
 
@@ -28,12 +29,9 @@ namespace RoutingExample.Droid
             return new App();
         }
 
-        protected override MvvmCross.Core.Views.IMvxViewDispatcher CreateViewDispatcher()
+        protected override MvvmCross.Droid.Views.IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var dispatcher = base.CreateViewDispatcher();
-            Mvx.RegisterSingleton<IMvxNavigationService>(() => new MvxNavigationService(dispatcher));
-            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
-            return dispatcher;
+            return new MvxFragmentsPresenter(AndroidViewAssemblies);
         }
     }
 }

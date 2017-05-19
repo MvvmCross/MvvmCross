@@ -33,9 +33,7 @@ namespace MvvmCross.Test.Parse
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =
                 new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
-            var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle,
-                                                                  new MvxRequestedBy(
-                                                                      MvxRequestedByType.AutomatedService, "HelloWorld"));
+            var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle);
 
             var serializer = new MvxViewModelRequestCustomTextSerializer();
             var output = serializer.SerializeObject(request);
@@ -44,8 +42,6 @@ namespace MvvmCross.Test.Parse
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
             Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.AreEqual(MvxRequestedByType.AutomatedService, deserialized.RequestedBy.Type);
-            Assert.AreEqual("HelloWorld", deserialized.RequestedBy.AdditionalInfo);
             Assert.AreEqual(2, deserialized.PresentationValues.Count);
             Assert.AreEqual(2, deserialized.ParameterValues.Count);
             Assert.AreEqual("1'\\", deserialized.ParameterValues["On'e"]);
@@ -59,8 +55,7 @@ namespace MvvmCross.Test.Parse
         {
             var parameterBundle = new MvxBundle();
             var presentationBundle = new MvxBundle();
-            var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle,
-                                                                  null);
+            var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle);
 
             var serializer = new MvxViewModelRequestCustomTextSerializer();
             var output = serializer.SerializeObject(request);
@@ -69,8 +64,6 @@ namespace MvvmCross.Test.Parse
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
             Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.AreEqual(MvxRequestedByType.Unknown, deserialized.RequestedBy.Type);
-            Assert.AreEqual(null, deserialized.RequestedBy.AdditionalInfo);
             Assert.AreEqual(0, deserialized.PresentationValues.Count);
             Assert.AreEqual(0, deserialized.ParameterValues.Count);
         }

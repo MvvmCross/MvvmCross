@@ -40,13 +40,17 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Hints\MvxSidebarResetRootPresentationHint.cs" />
-    <Compile Include="Hints\MvxSidebarActivePanelPresentationHint.cs" />
     <Compile Include="MvxSidebarPresenter.cs" />
-    <Compile Include="MvxSidebarPanelController.cs" />
-    <Compile Include="Hints\MvxSidebarPopToRootPresentationHint.cs" />
-    <Compile Include="IMvxSidebarMenu.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
+    <Compile Include="Attributes\MvxSidebarPresentationAttribute.cs" />
+    <Compile Include="MvxPanelEnum.cs" />
+    <Compile Include="MvxPanelHintType.cs" />
+    <Compile Include="MvxSplitViewBehaviour.cs" />
+    <Compile Include="Views\IMvxSidebarMenu.cs" />
+    <Compile Include="Views\IMvxSidebarViewController.cs" />
+    <Compile Include="Views\MvxBaseSplitViewController.cs" />
+    <Compile Include="Views\MvxSidebarViewController.cs" />
+    <Compile Include="Views\MvxSplitViewControllerHost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -81,5 +85,9 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 </Project>

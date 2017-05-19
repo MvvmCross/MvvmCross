@@ -1,4 +1,4 @@
-﻿using MvvmCross.WindowsUWP.Views;
+﻿using MvvmCross.Uwp.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -40,9 +40,14 @@ namespace MvvmCross.Droid.Views
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
-            var intent = requestTranslator.GetIntentFor(request);
-            return intent;
+            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
+
+            if (request is MvxViewModelInstanceRequest)
+            {
+                var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                return instanceRequest.Item1;
+            }
+            return requestTranslator.GetIntentFor(request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -59,7 +64,7 @@ namespace MvvmCross.Droid.Views
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
             var activity = this.Activity;
 
