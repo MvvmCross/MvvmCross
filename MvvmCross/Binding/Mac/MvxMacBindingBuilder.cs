@@ -1,16 +1,16 @@
-// MvxMacBindingBuilder.cs
+﻿// MvxMacBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
 using AppKit;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Mac.Target;
 using MvvmCross.Platform.Converters;
+using System;
 
 namespace MvvmCross.Binding.Mac
 {
@@ -113,7 +113,6 @@ namespace MvvmCross.Binding.Mac
 
             registry.AddOrOverwrite(typeof(NSButton), nameof(NSButton.Activated));
             registry.AddOrOverwrite(typeof(NSButtonCell), nameof(NSButtonCell.Activated));
-            registry.AddOrOverwrite(typeof(NSSegmentedControl), nameof(NSSegmentedControl.Activated));
             registry.AddOrOverwrite(typeof(NSSearchField), MvxMacPropertyBinding.NSSearchField_Text);
             registry.AddOrOverwrite(typeof(NSTextField), MvxMacPropertyBinding.NSTextField_StringValue);
             registry.AddOrOverwrite(typeof(NSTextView), MvxMacPropertyBinding.NSTextView_StringValue);
