@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Core
 {
-    public class MvxFormsApp : Application
+    public class MvxFormsApplication : Application
     {
         public event EventHandler Start;
 
