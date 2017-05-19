@@ -34,11 +34,14 @@ namespace RoutingExample.Core.ViewModels
 
         private User _user;
 
-        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(async () => await Close(new User("Return result", "Something")));
+        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
+            () => Close(new User("Return result", "Something")));
+        public IMvxAsyncCommand OpenViewModelMainCommand => new MvxAsyncCommand(
+            () => Mvx.Resolve<IMvxNavigationService>().Navigate<MainViewModel>());
         public IMvxAsyncCommand OpenViewModelACommand => new MvxAsyncCommand(
-            async () => await Mvx.Resolve<IMvxNavigationService>().Navigate<TestAViewModel, User>(new User($"To A from {this.GetHashCode()}", "Something")));
+            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestAViewModel, User>(new User($"To A from {this.GetHashCode()}", "Something")));
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
-            async () => await Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {this.GetHashCode()}", "Something")));
+            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {this.GetHashCode()}", "Something")));
 
         public override async Task Initialize(User parameter)
         {

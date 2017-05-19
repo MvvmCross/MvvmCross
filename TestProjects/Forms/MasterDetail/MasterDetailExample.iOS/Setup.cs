@@ -26,7 +26,7 @@ namespace MasterDetailExample.iOS
         {
             Forms.Init();
 
-            var xamarinFormsApp = new MvxFormsApp();
+            var xamarinFormsApp = new MvxFormsApplication();
 
             return new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
         }

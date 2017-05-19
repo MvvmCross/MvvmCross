@@ -1,4 +1,4 @@
-// MvxViewModel.cs
+﻿// MvxViewModel.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -97,16 +97,15 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
-            if (tcs == null)
-                throw new ArgumentNullException(nameof(tcs));
-
-            _tcs = tcs;
+            _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
         }
 
         public virtual Task<bool> Close(TResult result)
         {
-            _tcs?.TrySetResult(result);
-            return Task.FromResult(Close(this));
+            var closeResult = Close(this);
+            if (closeResult)
+                _tcs?.TrySetResult(result);
+            return Task.FromResult(closeResult);
         }
 
         public override void Disappeared()
@@ -122,17 +121,17 @@ namespace MvvmCross.Core.ViewModels
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
-            if (tcs == null)
-                throw new ArgumentNullException(nameof(tcs));
-
-            _tcs = tcs;
+            _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
         }
 
         public abstract Task Initialize(TParameter parameter);
+
         public virtual Task<bool> Close(TResult result)
         {
-            _tcs?.TrySetResult(result);
-            return Task.FromResult(Close(this));
+            var closeResult = Close(this);
+            if (closeResult)
+                _tcs?.TrySetResult(result);
+            return Task.FromResult(closeResult);
         }
 
         public override void Disappeared()

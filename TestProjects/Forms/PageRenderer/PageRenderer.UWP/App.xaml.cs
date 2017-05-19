@@ -1,12 +1,13 @@
-﻿using PageRendererExample.Uwp;
-using System;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using PageRendererExample.UI.Uwp;
+using PageRendererExample.WindowsUWP;
 
-namespace PageRendererExample.UI.Uwp
+namespace PageRendererExample.UI.WindowsUWP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

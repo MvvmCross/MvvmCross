@@ -5,7 +5,7 @@ using MvvmCross.Forms.Core;
 
 namespace PageRendererExample
 {
-    public partial class PageRendererExampleApp : MvxFormsApp
+    public partial class PageRendererExampleApp : MvxFormsApplication
     {
         public PageRendererExampleApp()
         {
