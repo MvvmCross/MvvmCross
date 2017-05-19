@@ -32,6 +32,7 @@ namespace MvvmCross.Binding.Droid
         public const string RatingBar_Rating = "Rating";
         public const string View_LongClick = "LongClick";
         public const string MvxRadioGroup_SelectedItem = "SelectedItem";
+        public const string EditText_Editable = "Editable";
         public const string EditText_TextFocus = "TextFocus";
         public const string SearchView_Query = "Query";
         public const string Preference_Value = "Value";

@@ -48,7 +48,11 @@ namespace Example.Core.ViewModels
         {
             get
             {
-				return new MvxCommand(() => ShowViewModel<HomeViewModel>());
+				return new MvxCommand(() =>
+				{
+					IsLoading = !IsLoading; //Toggle for testing
+					ShowViewModel<HomeViewModel>();
+				});
             }
         }
     }
