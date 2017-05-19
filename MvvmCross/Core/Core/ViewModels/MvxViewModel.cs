@@ -109,12 +109,19 @@ namespace MvvmCross.Core.ViewModels
         public virtual Task<bool> Close(TResult result)
         {
             _isClosing = true;
-            var closeResult = Close(this);
-            if (closeResult)
-                _tcs?.TrySetResult(result);
 
-            _isClosing = false;
-            return Task.FromResult(closeResult);
+            try
+            {
+                var closeResult = Close(this);
+                if (closeResult)
+                    _tcs?.TrySetResult(result);
+
+                return Task.FromResult(closeResult);
+            }
+            finally
+            {
+                _isClosing = false;
+            }
         }
 
         public override void Destroy()
