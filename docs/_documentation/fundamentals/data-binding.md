@@ -559,7 +559,7 @@ Using this syntax, an example binding set is:
 
 ### MvvmCross Defined Custom bindings
 
-In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set via the use of custom bindings:
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. `String` and `Extension Method` based bindings are particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a `Title` property can still be set via the use of custom bindings:
 
     set.Bind(okButton)
        .For("Title")
@@ -569,7 +569,9 @@ In addition to the `Expression` based Fluent bindings, `String` and `Extension M
         .For(c => c.BindText())
         .To(vm => vm.Caption);
 
- **Note:** `Extension Method` based Fluent bindings require MvvmCross 5+.
+The following tables shows all the custom bindings offered by MvvmCross. 
+
+ **Note:** When using extension method based bindings you will have to include the relevant using namespace to access the extension methods and is only available in MvvmCross 5.
 
 **Android - `using MvvmCross.Binding.Droid`**
 
