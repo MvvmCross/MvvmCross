@@ -123,6 +123,10 @@ namespace MvvmCross.Plugins.File
 
 		public abstract bool TryCopy(string from, string to, bool overwrite);
 
+        public abstract long GetSize(string path);
+
+        public abstract DateTime GetLastWriteTimeUtc(string path);
+
         #endregion IMvxFileStore Members
 
         #region IMvxFileStore Async
