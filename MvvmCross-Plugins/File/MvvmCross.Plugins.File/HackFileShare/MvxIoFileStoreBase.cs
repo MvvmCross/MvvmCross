@@ -146,6 +146,16 @@ namespace MvvmCross.Plugins.File
             return FullPath(path);
         }
 
+        public override long GetSize(string path)
+        {
+            return (new System.IO.FileInfo(path)).Length;
+        }
+
+        public override DateTime GetLastWriteTimeUtc(string path)
+        {
+            return System.IO.File.GetLastWriteTimeUtc(path);
+        }
+
         #endregion IMvxFileStore Members
 
         protected abstract string FullPath(string path);
