@@ -439,7 +439,7 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used.
+If `For` is not provided, then the default view property is used. The following tables shows all the default bindings used against the platforms controls.
 
 **Android**
 
