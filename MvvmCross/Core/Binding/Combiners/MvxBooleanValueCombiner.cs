@@ -6,6 +6,17 @@ namespace MvvmCross.Binding.Combiners
     using MvvmCross.Binding.ExtensionMethods;
     using MvvmCross.Platform.Converters;
 
+	public class MvxInvertedValueCombiner
+			: MvxBooleanValueCombiner
+	{
+		protected override bool TryCombine(List<bool> stepValues, out object value)
+		{
+			value = stepValues.Any(x => !x)
+							  && true;
+			return true;
+		}
+	}
+
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
     {

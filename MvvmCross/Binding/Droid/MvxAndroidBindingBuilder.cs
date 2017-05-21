@@ -178,8 +178,12 @@ namespace MvvmCross.Binding.Droid
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
 
             registry.RegisterCustomBindingFactory(
-                MvxAndroidPropertyBinding.EditText_TextFocus, 
+                MvxAndroidPropertyBinding.EditText_TextFocus,
                 (EditText view) => new MvxTextViewFocusTargetBinding(view));
+
+			registry.RegisterCustomBindingFactory(
+                MvxAndroidPropertyBinding.EditText_Editable,
+                (EditText view) => new MvxEditTextEditableTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<SearchView>(
                 MvxAndroidPropertyBinding.SearchView_Query,
