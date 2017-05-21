@@ -28,7 +28,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 
         private static char[] OperatorCharacters()
         {
-            return new char[] { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%' };
+            return new char[] { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^' };
         }
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -171,6 +171,10 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 						moveFowards = 1;
 						break;
 
+					case '^':
+						combinerName = "XOr";
+						moveFowards = 1;
+						break;
                 }
             }
 
