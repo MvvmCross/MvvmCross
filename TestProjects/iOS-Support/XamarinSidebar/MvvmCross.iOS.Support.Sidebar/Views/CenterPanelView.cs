@@ -42,7 +42,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             var bindingSet = this.CreateBindingSet<CenterPanelView, CenterPanelViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
             bindingSet.Bind(rightPanelInstructions).To(vm => vm.RightPanelInstructions);
-            bindingSet.Bind(masterButton).To(vm => vm.ShowMasterCommand);
+			bindingSet.Bind(masterButton).For("TouchDown").To(vm => vm.ShowMasterCommand);
             bindingSet.Bind(keyboardHandlingButton).To(vm => vm.ShowKeyboardHandlingCommand);
             bindingSet.Apply();
 
