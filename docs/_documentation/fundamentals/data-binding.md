@@ -439,7 +439,7 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used. The following tables shows all the default bindings used against the platforms controls.
+If `For` is not provided, then the default view property is used. The following tables shows all the default bindings used for each platforms control type.
 
 **Android**
 
@@ -571,7 +571,7 @@ In addition to the `Expression` based Fluent bindings, `String` and `Extension M
 
 The following tables shows all the custom bindings offered by MvvmCross. 
 
- **Note:** When using extension method based bindings you will have to include the relevant using namespace to access the extension methods and is only available in MvvmCross 5.
+ **Note:** When using extension method based bindings you will have to include the relevant using namespace to access the extension methods. Additionally, extension method based bindings is only supported starting with MvvmCross 5.
 
 **Android - `using MvvmCross.Binding.Droid`**
 
