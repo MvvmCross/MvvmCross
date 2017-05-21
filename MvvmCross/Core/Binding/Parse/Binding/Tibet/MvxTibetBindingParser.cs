@@ -165,6 +165,12 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
                         combinerName = "Modulus";
                         moveFowards = 1;
                         break;
+
+					case '!':
+						combinerName = "Inverted";
+						moveFowards = 1;
+						break;
+
                 }
             }
 
