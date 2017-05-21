@@ -439,7 +439,7 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used. The following tables shows all the default bindings used for each platforms control type.
+If `For` is not provided, then the default view property is used. The following tables show all the default bindings used for each platforms control type.
 
 **Android**
 
@@ -559,7 +559,7 @@ Using this syntax, an example binding set is:
 
 ### MvvmCross Defined Custom bindings
 
-In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. `String` and `Extension Method` based bindings are particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a `Title` property can still be set via the use of custom bindings:
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. They are particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a `Title` property can still be set via the use of custom bindings:
 
     set.Bind(okButton)
        .For("Title")
