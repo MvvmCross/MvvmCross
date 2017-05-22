@@ -7,6 +7,7 @@
 
 using MvvmCross.Platform.UI;
 using System.Globalization;
+using MvvmCross.Platform.ExtensionMethods;
 
 namespace MvvmCross.Plugins.Visibility
 {
@@ -15,8 +16,21 @@ namespace MvvmCross.Plugins.Visibility
     {
         protected override MvxVisibility Convert(object value, object parameter, CultureInfo culture)
         {
-            var visibility = !IsATrueValue(value, parameter, true);
-            return visibility ? MvxVisibility.Visible : MvxVisibility.Collapsed;
+            bool hide = parameter.ConvertToBooleanCore();
+            switch (base.Convert(value, parameter, culture))
+            {
+                case (MvxVisibility.Visible):
+                    if (hide)
+                    {
+                        return MvxVisibility.Hidden;
+                    }
+                    else
+                    {
+                        return MvxVisibility.Collapsed;
+                    }
+                default:
+                    return MvxVisibility.Visible;
+            }
         }
     }
 }
