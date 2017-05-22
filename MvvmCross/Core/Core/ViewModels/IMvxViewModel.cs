@@ -28,6 +28,8 @@ namespace MvvmCross.Core.ViewModels
         void Destroy ();
 
         void SaveState(IMvxBundle state);
+
+        Task Initialize();
     }
 
     public interface IMvxViewModel<TParameter> : IMvxViewModel where TParameter : class

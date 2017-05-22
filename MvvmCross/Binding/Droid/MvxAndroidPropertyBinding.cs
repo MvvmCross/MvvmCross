@@ -1,4 +1,4 @@
-// MvxAndroidPropertyBinding.cs
+﻿// MvxAndroidPropertyBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,7 +12,6 @@ namespace MvvmCross.Binding.Droid
         public const string View_Click = "Click";
         public const string TextView_Text = "Text";
         public const string TextView_TextFormatted = "TextFormatted";
-        public const string TextView_Hint = "Hint";
         public const string MvxAutoCompleteTextView_PartialText = "PartialText";
         public const string MvxAutoCompleteTextView_SelectedObject = "SelectedObject";
         public const string CompoundButton_Checked = "Checked";

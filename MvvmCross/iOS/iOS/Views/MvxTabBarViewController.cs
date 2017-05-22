@@ -36,9 +36,6 @@ namespace MvvmCross.iOS.Views
                 currentTabs = ViewControllers.ToList();
             }
 
-            if(viewController as UINavigationController != null)
-                (viewController as UINavigationController).NavigationBar.Translucent = false;
-
             currentTabs.Add(viewController);
 
             // update current Tabs
@@ -68,6 +65,11 @@ namespace MvvmCross.iOS.Views
             navigationController.PushViewController(viewController, true);
 
             return true;
+        }
+
+        public virtual bool CanShowChildView(UIViewController viewController)
+        {
+            return SelectedViewController is UINavigationController;
         }
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)

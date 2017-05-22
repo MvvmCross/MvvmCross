@@ -88,7 +88,6 @@
     <Compile Include="Target\MvxImageViewImageDrawableTargetBinding.cs" />
     <Compile Include="Target\MvxListPreferenceTargetBinding.cs" />
     <Compile Include="Target\MvxAndroidPropertyInfoTargetBinding.cs" />
-    <Compile Include="Target\MvxTextViewHintTargetBinding.cs" />
     <Compile Include="Target\MvxEditTextPreferenceTextTargetBinding.cs" />
     <Compile Include="Target\MvxExpandableListViewSelectedItemTargetBinding.cs" />
     <Compile Include="Target\MvxPreferenceValueTargetBinding.cs" />

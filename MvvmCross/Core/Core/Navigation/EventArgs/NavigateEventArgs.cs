@@ -1,4 +1,6 @@
 ﻿using System;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Navigation.EventArguments
 {
     public class NavigateEventArgs : EventArgs
@@ -7,18 +9,11 @@ namespace MvvmCross.Core.Navigation.EventArguments
         {
         }
 
-        public NavigateEventArgs(Type viewModelType)
+        public NavigateEventArgs(IMvxViewModel viewModel)
         {
-            ViewModelType = viewModelType;
+            ViewModel = viewModel;
         }
 
-        public NavigateEventArgs(string url)
-        {
-        	Url = url;
-        }
-
-        public string Url { get; set; }
-        public Type ViewModelType { get; set; }
-
+        public IMvxViewModel ViewModel { get; set; }
     }
 }

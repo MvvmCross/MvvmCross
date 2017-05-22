@@ -50,5 +50,9 @@ namespace MvvmCross.Plugins.File
         Stream OpenRead(string path);
 
         Stream OpenWrite(string path);
+
+        long GetSize(string path);
+
+        DateTime GetLastWriteTimeUtc(string path);
     }
 }

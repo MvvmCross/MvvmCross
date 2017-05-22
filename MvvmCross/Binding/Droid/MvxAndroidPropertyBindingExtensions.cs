@@ -23,9 +23,6 @@ namespace MvvmCross.Binding.Droid
         public static string BindTextFormatted(this TextView textview)
             => MvxAndroidPropertyBinding.TextView_TextFormatted;
 
-        public static string BindHint(this TextView textview)
-            => MvxAndroidPropertyBinding.TextView_Hint;
-
         public static string BindPartialText(this MvxAutoCompleteTextView mvxAutoCompleteTextView)
             => MvxAndroidPropertyBinding.MvxAutoCompleteTextView_PartialText;
 

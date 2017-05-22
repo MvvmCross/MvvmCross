@@ -1,36 +1,43 @@
 ---
 layout: post
 title: MvvmCross 5.0 release!
-date:   2017-05-01 11:37:35 +0100
+date:   2017-05-22 11:37:35 +0100
 categories: mvvmcross
 ---
 
 # Announcing MvvmCross 5.0!
+
 We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
+
+- Make sure to check [Upgrade from 4 to MvvmCross 5](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-50?scroll=830) to see what you need to change in your code!
+- If you like MvvmCross and our work, make sure to **Star** us on [Github](https://github.com/MvvmCross/MvvmCross)!
 
 Let's have a look at the highlights:
 
 ## Merge of repos
+
 For a long time we have been looking at merging the different repositories of the project.
 Besides a better overview one of the main advantages this brings is the ability to setup a proper CI process.
 This is hugely beneficial in the release process itself and makes (patch) releasing MvvmCross a breeze. 
 
 ## New website with improved documentation
-Over time we received a lot of feedback from developers that use MvvmCross on a day-2-day basis. Besides the usual
-hugs and kisses the most common remark we often got was: "sir, you need to improve the documention". And as you all know: writing documention is hard. And not always the most funny thing you can think of. So our first focus was enabling *you* to help out improving the documentation. With 5.0 the documentation has landed in the GIT repo, making it possible to submit documentation (changes) just as you do with code: create a pull request. We're already seeing the benefits of this: the amount of community driven documentation changes has increased tenfold. 
 
-Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps it uniformity.
+Over time we have received a lot of feedback from developers that use MvvmCross on a day-to-day basis. Besides the usual hugs and kisses, the most common remark we often got was: "sir, you need to improve the documentation". And as you all know: writing documentation is hard. And not always the most fun thing you can think of. So our first focus was enabling you to help out with improving the documentation. With 5.0, the documentation has landed in the GIT repo, making it possible to submit documentation (changes) just as you do with code: create a pull request. We're already seeing the benefits of this: the amount of community-driven documentation changes has increased tenfold.
+
+Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps its uniformity.
+
+For more information and to start contributing to the website see the [Documentation style guide](https://www.mvvmcross.com/documentation/contribute/mvvmcross-docs-style-guide?scroll=1355)
 
 ## Open Collective
 
-As you all know MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs which is always difficult to arrange. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight to what we're actually doing with it. We really hope you're going to join this Open Collective!
+As you all know, MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs, which are always difficult to manage. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight into what we're actually doing with it. We really hope you'll join this Open Collective!
 
-https://opencollective.com/mvvmcross
+[OpenCollective website](https://opencollective.com/mvvmcross)
 
 ## Improved support for Xamarin.Forms
 
-In MvvmCross 5.0 we added much improved support for Xamarin.Forms! We added MvvmCross specific Pages, App classes, and Setup for Forms to enable Bindings, Ioc, DI and much more! Make sure to use the new base classes to enable Forms support.
+In MvvmCross 5.0 we added much improved support for Xamarin.Forms! We added MvvmCross-specific Pages, App classes, and Setup for Forms to enable Bindings, Ioc, DI and much more! Make sure to use the new base classes to enable Forms support.
 
 Find all the details in the updated [documentation](https://www.mvvmcross.com/documentation/platform/xamarin-forms)!
 
@@ -40,7 +47,7 @@ Starting with MvvmCross 5.0, there is a new default Presenter for Views, namely 
 
 ### View Presenter Overview
 
-The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns / strategies:
+The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns/strategies:
 
 - Stack navigation
 - Tabs
@@ -48,7 +55,7 @@ The default presenter that comes with MvvmCross offers out of the box support fo
 - Modal
 - Modal navigation
 
-Also if your app needs another kind of presentation mode, you can easily extend it!
+If your app needs another kind of presentation mode, you can also easily extend it!
 
 ### Presentation Attributes
 
@@ -119,6 +126,8 @@ The events available are:
 * BeforeClose
 * AfterClose
 
+The new navigation also allows to navigate directly to an instance of a viewmodel instead of to a type.
+
 A full explanation can be found on the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
 
 ## Lifecycle / Event hooks
@@ -150,7 +159,7 @@ set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
 
 Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
 
-MvvmCross 5 now supports an additional option than literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
+MvvmCross 5 now supports an additional option besides literal strings for MvvmCross defined custom bindings, via the use of binding extension methods. Binding with extension methods allows for compile time checking whether the binding is possible against the specified control base type, i.e. TouchUpInside binding works against UIControl inheritance and not a UIView.
 
 #### Developer Usage
 
@@ -166,7 +175,7 @@ bindingSet.Apply();
 More information can be found in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
 ## Removal of WindowsPhone 8.x and Windows 8.x
-As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 is depreceated for a long time; removing formal support for this platform is the right thing to do.
+As is usual with a major release it's time to say goodbye to old friends. Windows(Phone) 8 has been deprecated for a long time; removing formal support for this platform is the right thing to do.
 
 ## Removal of deprecated plugins
 MvvmCross' powerful plugin framework has brought us many good things. However, over time certain plugins have become obsolete, not maintained any longer or considered not useful anymore. With 5.0 we've decided to remove the following plugins:
@@ -178,7 +187,7 @@ No maintained for a long time.
 #### Dialog
 No maintained for a long time.
 #### SQLite plugin
-No actual functionality was in this plugin. To use this simpely include the [SQLite-PCL](https://www.nuget.org/packages/sqlite-net-pcl/) nuget.
+No actual functionality was in this plugin. To use this, simpely include the [SQLite-PCL](https://www.nuget.org/packages/sqlite-net-pcl/) nuget.
 #### Bookmarks
 Only in use on Windows (Phone) 8
 #### SoundEffects
@@ -191,19 +200,90 @@ We had two different implementations of a Sidemenu on iOS in MvvmCross. The defa
 ## Other improvements
 
 #### Improved starterpack
-The default files installed when you add the [MvvmCross StarterPack](https://www.nuget.org/packages/MvvmCross.StarterPack/) nuget are updated and improved to reflect all changes in 5.0 and offers a more real life situation base to start with.
+The default files installed when you add the [MvvmCross StarterPack](https://www.nuget.org/packages/MvvmCross.StarterPack/) nuget are updated and improved to reflect all changes in 5.0 and offer a more real-life situation base to start with.
 #### tvOS support
 tvOS support has been added and improved to enable even better cross-platform development.
 #### Test projects in main repo
-We've added a couple of test projects in the main repo so we can test and reproduce issue's very quickly.
+We've added a couple of test projects in the main repo so we can test and reproduce issues very quickly.
 #### Migrate Test.Core to PCL
 The Test packages are now based on PCL instead of NET45 so you can target more platforms.
 #### Sidebar fixes
-The now default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
+The now-default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
+
+# Roadmap towards MvvmCross 6.0
+
+Before MvvmCross 6.0 we want to release a couple of important fixes and new features. Among those are:
+- Even better Xamarin.Forms support
+- A new default presenter for Android
+- Better handling of Fragments
+
+For MvvmCross 6.0 the plan is to, in the first place support .NET Standard 2.0. At the same time we want to use that to refactor the plugins structure, make more use of async await, and `C#7`!
+
+For the full overview and discussion on the roadmap for 6.0 see [#1415](https://github.com/MvvmCross/MvvmCross/issues/1415)
 
 # Changelog
 
-More than 120 PR's made it in this release from over 30 developers. So a big hug to all these contributors!
+More than 150 PR's made it in this release from over 40 developers. So a big hug to all these contributors!
+
+## [5.0.0](https://github.com/MvvmCross/MvvmCross/tree/5.0.0) (2017-05-22)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.11...5.0.0)
+
+**Fixed bugs:**
+
+- MvxTableViewController does not call MvxViewModel.Appearing\(\) et. al [\#1813](https://github.com/MvvmCross/MvvmCross/issues/1813)
+
+**Closed issues:**
+
+- Close a view with no Presentation Attribute that was opened from a Tab [\#1834](https://github.com/MvvmCross/MvvmCross/issues/1834)
+- MvxViewModel completes its TCS in the wrong sequence [\#1821](https://github.com/MvvmCross/MvvmCross/issues/1821)
+- MvxTabBarViewController forces all navigation bars to be opaque [\#1819](https://github.com/MvvmCross/MvvmCross/issues/1819)
+- MvvmCross.Plugins.File MvxFileStore read using full path [\#1673](https://github.com/MvvmCross/MvvmCross/issues/1673)
+- MvxUIDatePickerDateTargetBinding should not set default date to DateTime.Now if MaximumDate \< Now [\#1618](https://github.com/MvvmCross/MvvmCross/issues/1618)
+
+**Merged pull requests:**
+
+- Add plugins to third-party [\#1844](https://github.com/MvvmCross/MvvmCross/pull/1844) ([willsb](https://github.com/willsb))
+- Makes sure binding respects the configured max date [\#1843](https://github.com/MvvmCross/MvvmCross/pull/1843) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Describe how to add a link to another page in the documentation [\#1842](https://github.com/MvvmCross/MvvmCross/pull/1842) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Added description on iOS View Presenter and tab bar control [\#1841](https://github.com/MvvmCross/MvvmCross/pull/1841) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Fix a couple of navigation issue's and add support for viewmodel instances [\#1840](https://github.com/MvvmCross/MvvmCross/pull/1840) ([martijn00](https://github.com/martijn00))
+- Added Visibility.Hidden [\#1839](https://github.com/MvvmCross/MvvmCross/pull/1839) ([tritter](https://github.com/tritter))
+- Update file.md \#1827 [\#1837](https://github.com/MvvmCross/MvvmCross/pull/1837) ([jz5](https://github.com/jz5))
+- Fix bug with Sidebar removing all nav controller buttons [\#1836](https://github.com/MvvmCross/MvvmCross/pull/1836) ([jamespettigrew](https://github.com/jamespettigrew))
+- iOS View Presenter: Default child presentation when using MvxTabBarController as Root [\#1835](https://github.com/MvvmCross/MvvmCross/pull/1835) ([nmilcoff](https://github.com/nmilcoff))
+- Docs - Updates for data binding [\#1832](https://github.com/MvvmCross/MvvmCross/pull/1832) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Docs - Added margin to bottom of tables [\#1831](https://github.com/MvvmCross/MvvmCross/pull/1831) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Android Binding - Removed redundant hint custom binding [\#1830](https://github.com/MvvmCross/MvvmCross/pull/1830) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Add support for all UIControlEvents [\#1829](https://github.com/MvvmCross/MvvmCross/pull/1829) ([tritter](https://github.com/tritter))
+- Added support for ! and ^ operators in Tibet parsing [\#1828](https://github.com/MvvmCross/MvvmCross/pull/1828) ([tritter](https://github.com/tritter))
+- Add GetSize and GetLastWriteTimeUtc \#1155 [\#1827](https://github.com/MvvmCross/MvvmCross/pull/1827) ([jz5](https://github.com/jz5))
+- Fix close result on Android and add initialise for non parameter views [\#1825](https://github.com/MvvmCross/MvvmCross/pull/1825) ([martijn00](https://github.com/martijn00))
+- Add sidebar menu open/close callbacks [\#1823](https://github.com/MvvmCross/MvvmCross/pull/1823) ([jamespettigrew](https://github.com/jamespettigrew))
+- Improved sequencing of MvxViewModel.Close\(\). Fixes \#1821. [\#1822](https://github.com/MvvmCross/MvvmCross/pull/1822) ([DanielStolt](https://github.com/DanielStolt))
+- Removed forced navigation bar opacity. Fixes \#1819. [\#1820](https://github.com/MvvmCross/MvvmCross/pull/1820) ([DanielStolt](https://github.com/DanielStolt))
+- Added missing calls to view model lifecycle methods. Fixes \#1813. [\#1816](https://github.com/MvvmCross/MvvmCross/pull/1816) ([DanielStolt](https://github.com/DanielStolt))
+- Prettify README [\#1815](https://github.com/MvvmCross/MvvmCross/pull/1815) ([Cheesebaron](https://github.com/Cheesebaron))
+- Allow user to provide full path in the file plugin [\#1778](https://github.com/MvvmCross/MvvmCross/pull/1778) ([willsb](https://github.com/willsb))
+
+## [5.0.0-beta.11](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.11) (2017-05-17)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.10...5.0.0-beta.11)
+
+**Fixed bugs:**
+
+- MvxTabBarViewController.VisibleUIViewController throws for tabs without a navigation controller [\#1812](https://github.com/MvvmCross/MvvmCross/issues/1812)
+
+**Merged pull requests:**
+
+- Fix MvxTabBarViewController.VisibleUIViewController [\#1814](https://github.com/MvvmCross/MvvmCross/pull/1814) ([nmilcoff](https://github.com/nmilcoff))
+- Update navigation.md [\#1811](https://github.com/MvvmCross/MvvmCross/pull/1811) ([willsam100](https://github.com/willsam100))
+- Fix name of presenter package [\#1810](https://github.com/MvvmCross/MvvmCross/pull/1810) ([jimbobbennett](https://github.com/jimbobbennett))
+- Forms improvements for base classes [\#1809](https://github.com/MvvmCross/MvvmCross/pull/1809) ([martijn00](https://github.com/martijn00))
+- Fix Android Fragment caching for new navigation [\#1808](https://github.com/MvvmCross/MvvmCross/pull/1808) ([martijn00](https://github.com/martijn00))
+- add search-box 5px bottom padding [\#1807](https://github.com/MvvmCross/MvvmCross/pull/1807) ([Garfield550](https://github.com/Garfield550))
+- Search field can be fully opened by default on mobile now [\#1804](https://github.com/MvvmCross/MvvmCross/pull/1804) ([Garfield550](https://github.com/Garfield550))
+- Update the release blog [\#1803](https://github.com/MvvmCross/MvvmCross/pull/1803) ([martijn00](https://github.com/martijn00))
+- Lost dependency gem 'jekyll-avatar' [\#1802](https://github.com/MvvmCross/MvvmCross/pull/1802) ([Garfield550](https://github.com/Garfield550))
+- Correct link to doc [\#1801](https://github.com/MvvmCross/MvvmCross/pull/1801) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
 
 ## [5.0.0-beta.10](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.10) (2017-05-15)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.9...5.0.0-beta.10)
@@ -214,8 +294,6 @@ More than 120 PR's made it in this release from over 30 developers. So a big hug
 - Update release notes around extension method based binding [\#1799](https://github.com/MvvmCross/MvvmCross/pull/1799) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Fix some issues found in extension method based binding [\#1798](https://github.com/MvvmCross/MvvmCross/pull/1798) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Update release blog [\#1796](https://github.com/MvvmCross/MvvmCross/pull/1796) ([martijn00](https://github.com/martijn00))
-- Lost dependency gem 'jekyll-avatar' [\#1802](https://github.com/MvvmCross/MvvmCross/pull/1802) ([Garfield550](https://github.com/Garfield550))
-- Correct link to doc [\#1801](https://github.com/MvvmCross/MvvmCross/pull/1801) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
 
 ## [5.0.0-beta.9](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.9) (2017-05-13)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.8...5.0.0-beta.9)

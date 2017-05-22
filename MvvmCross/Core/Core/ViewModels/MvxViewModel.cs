@@ -1,4 +1,4 @@
-// MvxViewModel.cs
+﻿// MvxViewModel.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -71,6 +71,11 @@ namespace MvvmCross.Core.ViewModels
         protected virtual void SaveStateToBundle(IMvxBundle bundle)
         {
         }
+
+        public virtual Task Initialize()
+        {
+            return Task.FromResult(true);
+        }
     }
 
     public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter> where TParameter : class
@@ -94,51 +99,41 @@ namespace MvvmCross.Core.ViewModels
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
         TaskCompletionSource<TResult> _tcs;
+        bool _isClosing;
 
         public void SetClose(TaskCompletionSource<TResult> tcs)
         {
-            if (tcs == null)
-                throw new ArgumentNullException(nameof(tcs));
-
-            _tcs = tcs;
+            _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
         }
 
         public virtual Task<bool> Close(TResult result)
         {
-            _tcs?.TrySetResult(result);
-            return Task.FromResult(Close(this));
+            _isClosing = true;
+
+            try
+            {
+                var closeResult = Close(this);
+                if (closeResult)
+                    _tcs?.TrySetResult(result);
+
+                return Task.FromResult(closeResult);
+            }
+            finally
+            {
+                _isClosing = false;
+            }
         }
 
-        public override void Disappeared()
+        public override void Destroy()
         {
-            _tcs?.TrySetCanceled();
-            base.Disappeared();
+            if (!_isClosing)
+                _tcs?.TrySetCanceled();
+            base.Destroy();
         }
     }
 
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModel, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
-        TaskCompletionSource<TResult> _tcs;
-
-        public void SetClose(TaskCompletionSource<TResult> tcs)
-        {
-            if (tcs == null)
-                throw new ArgumentNullException(nameof(tcs));
-
-            _tcs = tcs;
-        }
-
         public abstract Task Initialize(TParameter parameter);
-        public virtual Task<bool> Close(TResult result)
-        {
-            _tcs?.TrySetResult(result);
-            return Task.FromResult(Close(this));
-        }
-
-        public override void Disappeared()
-        {
-            _tcs?.TrySetCanceled();
-            base.Disappeared();
-        }
     }
 }

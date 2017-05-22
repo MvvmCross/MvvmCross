@@ -27,5 +27,20 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
         }
 
+        public virtual void MenuWillOpen()
+        {
+        }
+
+        public virtual void MenuDidOpen()
+        {
+        }
+
+        public virtual void MenuWillClose()
+        {
+        }
+
+        public virtual void MenuDidClose()
+        {
+        }
     }
 }

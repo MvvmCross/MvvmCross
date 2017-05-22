@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -111,17 +111,24 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        public async Task Navigate(string path)
+        public Task<bool> CanNavigate(string path)
         {
-            var args = new NavigateEventArgs(path);
-            OnBeforeNavigate(this, args);
+            KeyValuePair<Regex, Type> entry;
 
-            await NavigateRoute(path);
-
-            OnAfterNavigate(this, args);
+            return Task.FromResult(TryGetRoute(path, out entry));
         }
 
-        private async Task<IMvxViewModel> NavigateRoute(string path)
+        public Task<bool> Close(IMvxViewModel viewModel)
+        {
+            var args = new NavigateEventArgs();
+            OnBeforeClose(this, args);
+            var close = _viewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            OnAfterClose(this, args);
+
+            return Task.FromResult(close);
+        }
+
+        private async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path)
         {
             KeyValuePair<Regex, Type> entry;
 
@@ -132,7 +139,6 @@ namespace MvvmCross.Core.Navigation
             var paramDict = BuildParamDictionary(regex, match);
 
             var viewModelType = entry.Value;
-            MvxViewModelRequest request = null;
             IMvxViewModel viewModel;
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
@@ -162,101 +168,32 @@ namespace MvvmCross.Core.Navigation
                 viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
 
-            request = new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
-            _viewDispatcher.ShowViewModel(request);
-
-            return viewModel;
+            return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
         }
 
-        public Task<bool> CanNavigate(string path)
+        public async Task Navigate(string path)
         {
-            KeyValuePair<Regex, Type> entry;
+            var request = await NavigationRouteRequest(path);
+            var viewModel = request.ViewModelInstance;
 
-            return Task.FromResult(TryGetRoute(path, out entry));
-        }
-
-        public Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            var args = new NavigateEventArgs(typeof(TViewModel));
-            OnBeforeNavigate(this, args);
-            _viewDispatcher.ShowViewModel(new MvxViewModelRequest<TViewModel>());
-            OnAfterNavigate(this, args);
-
-            return Task.FromResult(true);
-        }
-
-        public Task<bool> Close(IMvxViewModel viewModel)
-        {
-            var args = new NavigateEventArgs();
-            OnBeforeClose(this, args);
-            var close = _viewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
-            OnAfterClose(this, args);
-
-            return Task.FromResult(close);
-        }
-
-        public async Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param)
-            where TViewModel : IMvxViewModel<TParameter, TResult>
-            where TParameter : class
-            where TResult : class
-        {
-            var args = new NavigateEventArgs(typeof(TViewModel));
+            var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
-
-            var tcs = new TaskCompletionSource<TResult>();
-            viewModel.SetClose(tcs);
-
             _viewDispatcher.ShowViewModel(request);
-            await viewModel.Initialize(param);
+            await viewModel.Initialize();
 
             OnAfterNavigate(this, args);
-
-            try
-            {
-                return await tcs.Task;
-            }
-            catch
-            {
-                return default(TResult);
-            }
-        }
-
-        public async Task<TResult> Navigate<TViewModel, TResult>()
-            where TViewModel : IMvxViewModelResult<TResult>
-            where TResult : class
-        {
-            var args = new NavigateEventArgs(typeof(TViewModel));
-            OnBeforeNavigate(this, args);
-
-            var viewModel = (IMvxViewModelResult<TResult>)Mvx.IocConstruct<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
-
-            var tcs = new TaskCompletionSource<TResult>();
-            viewModel.SetClose(tcs);
-
-            _viewDispatcher.ShowViewModel(request);
-
-            OnAfterNavigate(this, args);
-
-            try
-            {
-                return await tcs.Task;
-            }
-            catch
-            {
-                return default(TResult);
-            }
         }
 
         public async Task Navigate<TParameter>(string path, TParameter param) where TParameter : class
         {
-            var args = new NavigateEventArgs(path);
+            var request = await NavigationRouteRequest(path);
+            var viewModel = (IMvxViewModel<TParameter>)request.ViewModelInstance;
+
+            var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            var viewModel = (IMvxViewModel<TParameter>)await NavigateRoute(path);
+            _viewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
@@ -264,13 +201,17 @@ namespace MvvmCross.Core.Navigation
 
         public async Task<TResult> Navigate<TResult>(string path) where TResult : class
         {
-            var args = new NavigateEventArgs(path);
-            OnBeforeNavigate(this, args);
+            var request = await NavigationRouteRequest(path);
+            var viewModel = (IMvxViewModelResult<TResult>)request.ViewModelInstance;
 
-            var viewModel = (IMvxViewModelResult<TResult>)await NavigateRoute(path);
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
 
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
 
             OnAfterNavigate(this, args);
 
@@ -286,14 +227,16 @@ namespace MvvmCross.Core.Navigation
 
         public async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class
         {
-            var args = new NavigateEventArgs(path);
-            OnBeforeNavigate(this, args);
+            var request = await NavigationRouteRequest(path);
+            var viewModel = (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance;
 
-            var viewModel = (IMvxViewModel<TParameter, TResult>)await NavigateRoute(path);
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
 
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
 
+            _viewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
@@ -308,20 +251,169 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
+        public async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            var viewModel = Mvx.IocConstruct<TViewModel>();
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
+
+            OnAfterNavigate(this, args);
+        }
+
         public async Task Navigate<TViewModel, TParameter>(TParameter param)
             where TViewModel : IMvxViewModel<TParameter>
             where TParameter : class
         {
-            var args = new NavigateEventArgs(typeof(TViewModel));
+            var viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct<TViewModel>();
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            var viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct<TViewModel>();
-
-            var request = new MvxViewModelInstanceRequest(viewModel);
             _viewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
 
             OnAfterNavigate(this, args);
+        }
+
+        public async Task<TResult> Navigate<TViewModel, TResult>()
+            where TViewModel : IMvxViewModelResult<TResult>
+            where TResult : class
+        {
+            var viewModel = (IMvxViewModelResult<TResult>)Mvx.IocConstruct<TViewModel>();
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            var tcs = new TaskCompletionSource<TResult>();
+            viewModel.SetClose(tcs);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
+
+            OnAfterNavigate(this, args);
+
+            try
+            {
+                return await tcs.Task;
+            }
+            catch
+            {
+                return default(TResult);
+            }
+        }
+
+        public async Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param)
+            where TViewModel : IMvxViewModel<TParameter, TResult>
+            where TParameter : class
+            where TResult : class
+        {
+            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            var tcs = new TaskCompletionSource<TResult>();
+            viewModel.SetClose(tcs);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize(param);
+
+            OnAfterNavigate(this, args);
+
+            try
+            {
+                return await tcs.Task;
+            }
+            catch
+            {
+                return default(TResult);
+            }
+        }
+
+        public async Task Navigate(IMvxViewModel viewModel)
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
+
+            OnAfterNavigate(this, args);
+        }
+
+        public async Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize(param);
+
+            OnAfterNavigate(this, args);
+        }
+
+        public async Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            var tcs = new TaskCompletionSource<TResult>();
+            viewModel.SetClose(tcs);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
+
+            OnAfterNavigate(this, args);
+
+            try
+            {
+                return await tcs.Task;
+            }
+            catch
+            {
+                return default(TResult);
+            }
+        }
+
+        public async Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param)
+            where TParameter : class
+            where TResult : class
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            var args = new NavigateEventArgs(viewModel);
+            OnBeforeNavigate(this, args);
+
+            var tcs = new TaskCompletionSource<TResult>();
+            viewModel.SetClose(tcs);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize(param);
+
+            OnAfterNavigate(this, args);
+
+            try
+            {
+                return await tcs.Task;
+            }
+            catch
+            {
+                return default(TResult);
+            }
         }
 
         private void OnBeforeNavigate(object sender, NavigateEventArgs e)
