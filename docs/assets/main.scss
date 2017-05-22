@@ -61,6 +61,7 @@ h2,h3,h4,h5,h6 {
     color: $brand-color;
 }
 
+
 .page-content {
     padding-top: 1%;
     padding-bottom: 0;
@@ -93,6 +94,11 @@ h2,h3,h4,h5,h6 {
             color: $text-color;
         }
     }
+}
+
+//fix link
+.post-link, .anchorjs-link{
+    display: inline;
 }
 
 //search box
