@@ -1,4 +1,4 @@
---
+---
 layout: documentation
 title: Customize app
 category: Fundamentals
