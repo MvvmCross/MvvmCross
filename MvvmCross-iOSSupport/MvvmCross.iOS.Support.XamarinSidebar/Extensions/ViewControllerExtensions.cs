@@ -11,10 +11,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
         {
             UIBarButtonItem barButtonItem;
 
-            // Make there are currently no left or right buttons
-            viewController.NavigationItem.SetLeftBarButtonItem(null, true);
-            viewController.NavigationItem.SetRightBarButtonItem(null, true);
-
             if(sidebarPanelController.HasLeftMenu)
             {
                 var mvxSidebarMenu = sidebarPanelController.LeftSidebarController.MenuAreaController as IMvxSidebarMenu;
@@ -29,7 +25,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
                 var mvxSidebarMenu = sidebarPanelController.RightSidebarController.MenuAreaController as IMvxSidebarMenu;
                 sidebarPanelController.RightSidebarController.MenuLocation = MenuLocations.Right;
                 barButtonItem = CreateBarButtonItem(sidebarPanelController.RightSidebarController, mvxSidebarMenu);
-
 
                 viewController.NavigationItem.SetRightBarButtonItem(barButtonItem, true);
             }
