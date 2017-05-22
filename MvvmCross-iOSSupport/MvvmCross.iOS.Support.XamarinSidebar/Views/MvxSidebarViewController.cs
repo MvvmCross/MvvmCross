@@ -134,10 +134,19 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
                 sidebarController.HasShadowing = mvxSideMenuSettings.HasShadowing;
                 sidebarController.DisablePanGesture = mvxSideMenuSettings.DisablePanGesture;
                 sidebarController.ReopenOnRotate = mvxSideMenuSettings.ReopenOnRotate;
-                sidebarController.StateChangeHandler += (object sender, bool e) =>
+                sidebarController.StateChangeHandler += (object sender, bool isOpen) =>
                 {
                     sidebarController.MenuWidth = mvxSideMenuSettings.MenuWidth;
                     sidebarController.ViewWillAppear(mvxSideMenuSettings.AnimateMenu);
+
+                    if (isOpen)
+                    {
+                        mvxSideMenuSettings.MenuDidOpen();
+                    }
+                    else
+                    {
+                        mvxSideMenuSettings.MenuDidClose();
+                    }
                 };
             }
         }
@@ -175,11 +184,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         public void CloseMenu()
         {
-            if(LeftSidebarController != null && LeftSidebarController.IsOpen)
-                LeftSidebarController.CloseMenu();
-
-            if(RightSidebarController != null && RightSidebarController.IsOpen)
-                RightSidebarController.CloseMenu();
+            CloseMenu(LeftSidebarController);
+            CloseMenu(RightSidebarController);
         }
 
         public void Open(MvxPanelEnum panelEnum)
@@ -192,8 +198,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         protected virtual void OpenMenu(SidebarController sidebarController)
         {
-            if(sidebarController != null && !sidebarController.IsOpen)
+            if (sidebarController != null && !sidebarController.IsOpen)
+            {
+                var sidebarMenu = sidebarController.MenuAreaController as IMvxSidebarMenu;
+                sidebarMenu?.MenuWillOpen();
                 sidebarController.OpenMenu();
+            }
+        }
+
+        protected virtual void CloseMenu(SidebarController sidebarController)
+        {
+            if (sidebarController != null && sidebarController.IsOpen)
+            {
+                var sidebarMenu = sidebarController.MenuAreaController as IMvxSidebarMenu;
+                sidebarMenu?.MenuWillClose();
+                sidebarController.CloseMenu();
+            }
         }
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
