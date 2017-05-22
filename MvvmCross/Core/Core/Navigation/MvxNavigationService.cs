@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -116,7 +116,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(path);
             OnBeforeNavigate(this, args);
 
-            await NavigateRoute(path);
+            var viewModel = await NavigateRoute(path);
+            await viewModel.Initialize();
 
             OnAfterNavigate(this, args);
         }
@@ -175,14 +176,18 @@ namespace MvvmCross.Core.Navigation
             return Task.FromResult(TryGetRoute(path, out entry));
         }
 
-        public Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
+        public async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
         {
             var args = new NavigateEventArgs(typeof(TViewModel));
             OnBeforeNavigate(this, args);
-            _viewDispatcher.ShowViewModel(new MvxViewModelRequest<TViewModel>());
-            OnAfterNavigate(this, args);
 
-            return Task.FromResult(true);
+            var viewModel = Mvx.IocConstruct<TViewModel>();
+            var request = new MvxViewModelInstanceRequest(viewModel);
+
+            _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
+
+            OnAfterNavigate(this, args);
         }
 
         public Task<bool> Close(IMvxViewModel viewModel)
@@ -238,6 +243,7 @@ namespace MvvmCross.Core.Navigation
             viewModel.SetClose(tcs);
 
             _viewDispatcher.ShowViewModel(request);
+            await viewModel.Initialize();
 
             OnAfterNavigate(this, args);
 
@@ -271,6 +277,7 @@ namespace MvvmCross.Core.Navigation
 
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs);
+            await viewModel.Initialize();
 
             OnAfterNavigate(this, args);
 
@@ -316,8 +323,8 @@ namespace MvvmCross.Core.Navigation
             OnBeforeNavigate(this, args);
 
             var viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct<TViewModel>();
-
             var request = new MvxViewModelInstanceRequest(viewModel);
+
             _viewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
 
