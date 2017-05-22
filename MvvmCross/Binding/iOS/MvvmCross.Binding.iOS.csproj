@@ -49,8 +49,6 @@
     <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
-    <Compile Include="Target\MvxUIControlTouchUpInsideTargetBinding.cs" />
-    <Compile Include="Target\MvxUIControlValueChangedTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
     <Compile Include="Target\MvxUILabelTextTargetBinding.cs" />
@@ -93,6 +91,7 @@
     <Compile Include="Views\IMvxBindable.cs" />
     <Compile Include="Views\MvxView.cs" />
     <Compile Include="Target\MvxUISegmentedControlSelectedSegmentTargetBinding.cs" />
+    <Compile Include="Target\MvxUIControlTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\iOS\MvvmCross.Platform.iOS.csproj">
