@@ -57,9 +57,8 @@ collections:
   documentation:
     output: true
     permalink: /:collection/:path
-  post:
-    output: true
-    permalink: /blog/:title
+    
+permalink: pretty
 
 category_order:
   - 'Getting-started'
