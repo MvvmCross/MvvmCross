@@ -52,6 +52,8 @@ logo: /img/MvvmCross-avatar.png
 
 twitter:
   username: MvvmCross
+  
+permalink: /:title/
 
 collections:
   documentation:
