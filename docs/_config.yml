@@ -59,6 +59,8 @@ collections:
   documentation:
     output: true
     permalink: /:collection/:path
+    
+permalink: pretty
 
 category_order:
   - 'Getting-started'
