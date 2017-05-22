@@ -22,8 +22,9 @@ namespace MvvmCross.Plugins.File
         #region IMvxFileStore Members
 
         public MvxIoFileStoreBase(bool appendDefaultPath, string basePath)
-            : base(appendDefaultPath, basePath)
         {
+            BasePath = basePath;
+            AppendDefaultPath = appendDefaultPath;
         }
 
         public override Stream OpenRead(string path)
@@ -156,6 +157,10 @@ namespace MvvmCross.Plugins.File
         }
 
         #endregion IMvxFileStore Members
+
+        protected string BasePath { get; }
+
+        protected bool AppendDefaultPath { get; }
 
         protected override void WriteFileCommon(string path, Action<Stream> streamAction)
         {
