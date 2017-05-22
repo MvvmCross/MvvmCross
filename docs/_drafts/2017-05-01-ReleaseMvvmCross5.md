@@ -10,6 +10,8 @@ categories: mvvmcross
 We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
 
+Make sure to check [Upgrade from 4 to MvvmCross 5](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-50?scroll=830) to see what you need to change in your code!
+
 Let's have a look at the highlights:
 
 ## Merge of repos
@@ -220,7 +222,67 @@ For the full overview and discussion on the roadmap for 6.0 see [#1415](https://
 
 # Changelog
 
-More than 120 PR's made it in this release from over 30 developers. So a big hug to all these contributors!
+More than 150 PR's made it in this release from over 40 developers. So a big hug to all these contributors!
+
+## [5.0.0](https://github.com/MvvmCross/MvvmCross/tree/5.0.0) (2017-05-22)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.11...5.0.0)
+
+**Fixed bugs:**
+
+- MvxTableViewController does not call MvxViewModel.Appearing\(\) et. al [\#1813](https://github.com/MvvmCross/MvvmCross/issues/1813)
+
+**Closed issues:**
+
+- Close a view with no Presentation Attribute that was opened from a Tab [\#1834](https://github.com/MvvmCross/MvvmCross/issues/1834)
+- MvxViewModel completes its TCS in the wrong sequence [\#1821](https://github.com/MvvmCross/MvvmCross/issues/1821)
+- MvxTabBarViewController forces all navigation bars to be opaque [\#1819](https://github.com/MvvmCross/MvvmCross/issues/1819)
+- MvvmCross.Plugins.File MvxFileStore read using full path [\#1673](https://github.com/MvvmCross/MvvmCross/issues/1673)
+- MvxUIDatePickerDateTargetBinding should not set default date to DateTime.Now if MaximumDate \< Now [\#1618](https://github.com/MvvmCross/MvvmCross/issues/1618)
+
+**Merged pull requests:**
+
+- Add plugins to third-party [\#1844](https://github.com/MvvmCross/MvvmCross/pull/1844) ([willsb](https://github.com/willsb))
+- Makes sure binding respects the configured max date [\#1843](https://github.com/MvvmCross/MvvmCross/pull/1843) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Describe how to add a link to another page in the documentation [\#1842](https://github.com/MvvmCross/MvvmCross/pull/1842) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Added description on iOS View Presenter and tab bar control [\#1841](https://github.com/MvvmCross/MvvmCross/pull/1841) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Fix a couple of navigation issue's and add support for viewmodel instances [\#1840](https://github.com/MvvmCross/MvvmCross/pull/1840) ([martijn00](https://github.com/martijn00))
+- Added Visibility.Hidden [\#1839](https://github.com/MvvmCross/MvvmCross/pull/1839) ([tritter](https://github.com/tritter))
+- Update file.md \#1827 [\#1837](https://github.com/MvvmCross/MvvmCross/pull/1837) ([jz5](https://github.com/jz5))
+- Fix bug with Sidebar removing all nav controller buttons [\#1836](https://github.com/MvvmCross/MvvmCross/pull/1836) ([jamespettigrew](https://github.com/jamespettigrew))
+- iOS View Presenter: Default child presentation when using MvxTabBarController as Root [\#1835](https://github.com/MvvmCross/MvvmCross/pull/1835) ([nmilcoff](https://github.com/nmilcoff))
+- Docs - Updates for data binding [\#1832](https://github.com/MvvmCross/MvvmCross/pull/1832) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Docs - Added margin to bottom of tables [\#1831](https://github.com/MvvmCross/MvvmCross/pull/1831) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Android Binding - Removed redundant hint custom binding [\#1830](https://github.com/MvvmCross/MvvmCross/pull/1830) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Add support for all UIControlEvents [\#1829](https://github.com/MvvmCross/MvvmCross/pull/1829) ([tritter](https://github.com/tritter))
+- Added support for ! and ^ operators in Tibet parsing [\#1828](https://github.com/MvvmCross/MvvmCross/pull/1828) ([tritter](https://github.com/tritter))
+- Add GetSize and GetLastWriteTimeUtc \#1155 [\#1827](https://github.com/MvvmCross/MvvmCross/pull/1827) ([jz5](https://github.com/jz5))
+- Fix close result on Android and add initialise for non parameter views [\#1825](https://github.com/MvvmCross/MvvmCross/pull/1825) ([martijn00](https://github.com/martijn00))
+- Add sidebar menu open/close callbacks [\#1823](https://github.com/MvvmCross/MvvmCross/pull/1823) ([jamespettigrew](https://github.com/jamespettigrew))
+- Improved sequencing of MvxViewModel.Close\(\). Fixes \#1821. [\#1822](https://github.com/MvvmCross/MvvmCross/pull/1822) ([DanielStolt](https://github.com/DanielStolt))
+- Removed forced navigation bar opacity. Fixes \#1819. [\#1820](https://github.com/MvvmCross/MvvmCross/pull/1820) ([DanielStolt](https://github.com/DanielStolt))
+- Added missing calls to view model lifecycle methods. Fixes \#1813. [\#1816](https://github.com/MvvmCross/MvvmCross/pull/1816) ([DanielStolt](https://github.com/DanielStolt))
+- Prettify README [\#1815](https://github.com/MvvmCross/MvvmCross/pull/1815) ([Cheesebaron](https://github.com/Cheesebaron))
+- Allow user to provide full path in the file plugin [\#1778](https://github.com/MvvmCross/MvvmCross/pull/1778) ([willsb](https://github.com/willsb))
+
+## [5.0.0-beta.11](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.11) (2017-05-17)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.10...5.0.0-beta.11)
+
+**Fixed bugs:**
+
+- MvxTabBarViewController.VisibleUIViewController throws for tabs without a navigation controller [\#1812](https://github.com/MvvmCross/MvvmCross/issues/1812)
+
+**Merged pull requests:**
+
+- Fix MvxTabBarViewController.VisibleUIViewController [\#1814](https://github.com/MvvmCross/MvvmCross/pull/1814) ([nmilcoff](https://github.com/nmilcoff))
+- Update navigation.md [\#1811](https://github.com/MvvmCross/MvvmCross/pull/1811) ([willsam100](https://github.com/willsam100))
+- Fix name of presenter package [\#1810](https://github.com/MvvmCross/MvvmCross/pull/1810) ([jimbobbennett](https://github.com/jimbobbennett))
+- Forms improvements for base classes [\#1809](https://github.com/MvvmCross/MvvmCross/pull/1809) ([martijn00](https://github.com/martijn00))
+- Fix Android Fragment caching for new navigation [\#1808](https://github.com/MvvmCross/MvvmCross/pull/1808) ([martijn00](https://github.com/martijn00))
+- add search-box 5px bottom padding [\#1807](https://github.com/MvvmCross/MvvmCross/pull/1807) ([Garfield550](https://github.com/Garfield550))
+- Search field can be fully opened by default on mobile now [\#1804](https://github.com/MvvmCross/MvvmCross/pull/1804) ([Garfield550](https://github.com/Garfield550))
+- Update the release blog [\#1803](https://github.com/MvvmCross/MvvmCross/pull/1803) ([martijn00](https://github.com/martijn00))
+- Lost dependency gem 'jekyll-avatar' [\#1802](https://github.com/MvvmCross/MvvmCross/pull/1802) ([Garfield550](https://github.com/Garfield550))
+- Correct link to doc [\#1801](https://github.com/MvvmCross/MvvmCross/pull/1801) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
 
 ## [5.0.0-beta.10](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.10) (2017-05-15)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.9...5.0.0-beta.10)
@@ -231,8 +293,6 @@ More than 120 PR's made it in this release from over 30 developers. So a big hug
 - Update release notes around extension method based binding [\#1799](https://github.com/MvvmCross/MvvmCross/pull/1799) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Fix some issues found in extension method based binding [\#1798](https://github.com/MvvmCross/MvvmCross/pull/1798) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Update release blog [\#1796](https://github.com/MvvmCross/MvvmCross/pull/1796) ([martijn00](https://github.com/martijn00))
-- Lost dependency gem 'jekyll-avatar' [\#1802](https://github.com/MvvmCross/MvvmCross/pull/1802) ([Garfield550](https://github.com/Garfield550))
-- Correct link to doc [\#1801](https://github.com/MvvmCross/MvvmCross/pull/1801) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
 
 ## [5.0.0-beta.9](https://github.com/MvvmCross/MvvmCross/tree/5.0.0-beta.9) (2017-05-13)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0-beta.8...5.0.0-beta.9)
