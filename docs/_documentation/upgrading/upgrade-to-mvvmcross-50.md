@@ -14,6 +14,10 @@ old NuGet package                      | new NuGet package
 `MvvmCross.Droid.Support.V7.Fragging`  | `MvvmCross.Droid.Support.Fragment`
 `MvvmCross.Forms.Presenter`            | `MvvmCross.Forms`
 
+## Core
+
+To make sure your navigation stays up-to-date change all your `ShowViewModel<>()` calls to the new navigation explained in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation#mvvmcross-5x-and-higher-navigation)
+
 ## iOS
 
 ### iOS View Presenter and Tab bar control
@@ -32,6 +36,10 @@ Child                  | `MvxChildPresentationAttribute`
 Modal                  | `MvxModalPresentationAttribute`
 
 Detailed information regarding the new iOS View Presenter and the above attributes can be found in the [iOS View Presenter]({{"/documentation/platform/ios-view-presenter" | relative_url}}) section of the documentation.
+
+## Xamarin.Forms
+
+Update your code to use the new base classes, support for MvvmCross bindings and improved presenters. Information about this can be found in: [Xamarin.Forms](https://www.mvvmcross.com/documentation/platform/xamarin-forms?scroll=551)
 
 ## Changes to test
 
