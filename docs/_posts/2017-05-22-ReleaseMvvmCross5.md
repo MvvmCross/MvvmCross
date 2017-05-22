@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MvvmCross 5.0 release!
-date:   2017-05-01 11:37:35 +0100
+date:   2017-05-22 11:37:35 +0100
 categories: mvvmcross
 ---
 
@@ -11,6 +11,7 @@ We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
 
 Make sure to check [Upgrade from 4 to MvvmCross 5](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-50?scroll=830) to see what you need to change in your code!
+If you like MvvmCross and our work, make sure to **Star** us on [Github](https://github.com/MvvmCross/MvvmCross)!
 
 Let's have a look at the highlights:
 
