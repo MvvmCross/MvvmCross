@@ -95,6 +95,11 @@ h2,h3,h4,h5,h6 {
     }
 }
 
+//fix link
+.post-link, .anchorjs-link{
+    display: inline;
+}
+
 //search box
 .search-box {
     min-width: $searchbar-expanded-width + 20px;
