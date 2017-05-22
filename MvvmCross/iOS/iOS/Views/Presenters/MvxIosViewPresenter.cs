@@ -376,7 +376,10 @@ namespace MvvmCross.iOS.Views.Presenters
                 return attributes;
             }
 
-            if (MasterNavigationController == null)
+            if(MasterNavigationController == null
+                &&
+               (TabBarViewController == null || !TabBarViewController.CanShowChildView(viewController))
+              )
             {
                 MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute() { WrapInNavigationController = true };
