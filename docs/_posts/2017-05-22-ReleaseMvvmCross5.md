@@ -10,8 +10,8 @@ categories: mvvmcross
 We're happy to announce the immediate availability of MvvmCross 5.0!
 For the last 6 months we have been working on this release and we're really excited about it.
 
-Make sure to check [Upgrade from 4 to MvvmCross 5](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-50?scroll=830) to see what you need to change in your code!
-If you like MvvmCross and our work, make sure to **Star** us on [Github](https://github.com/MvvmCross/MvvmCross)!
+- Make sure to check [Upgrade from 4 to MvvmCross 5](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-50?scroll=830) to see what you need to change in your code!
+- If you like MvvmCross and our work, make sure to **Star** us on [Github](https://github.com/MvvmCross/MvvmCross)!
 
 Let's have a look at the highlights:
 
@@ -33,7 +33,7 @@ For more information and to start contributing to the website see the [Documenta
 
 As you all know, MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs, which are always difficult to manage. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight into what we're actually doing with it. We really hope you'll join this Open Collective!
 
-https://opencollective.com/mvvmcross
+[OpenCollective website](https://opencollective.com/mvvmcross)
 
 ## Improved support for Xamarin.Forms
 
