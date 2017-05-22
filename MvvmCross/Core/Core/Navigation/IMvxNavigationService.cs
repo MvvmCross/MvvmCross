@@ -25,12 +25,16 @@ namespace MvvmCross.Core.Navigation
 
         Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
         Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
         Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
+        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
+
+        Task Navigate(IMvxViewModel viewModel);
+        Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class;
+        Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class;
+        Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param) where TParameter : class where TResult : class;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>A task to await upon</returns>
@@ -45,7 +49,6 @@ namespace MvvmCross.Core.Navigation
         /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
         Task<bool> CanNavigate(string path);
-        //Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
 
         Task<bool> Close(IMvxViewModel viewModel);
     }
