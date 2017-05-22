@@ -116,7 +116,7 @@ If you want to intercept ViewModel navigation changes you can hook into the even
 
 ```c#
 Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) => {
-    //Do something with e.ViewModelType or e.Url
+    //Do something with e.ViewModel
 };
 ```
 
@@ -242,6 +242,8 @@ More than 150 PR's made it in this release from over 40 developers. So a big hug
 
 **Merged pull requests:**
 
+- Statically allocate operator characters [\#1846](https://github.com/MvvmCross/MvvmCross/pull/1846) ([kjeremy](https://github.com/kjeremy))
+- Pretty urls for blogposts and icon for deeplink [\#1845](https://github.com/MvvmCross/MvvmCross/pull/1845) ([MarcBruins](https://github.com/MarcBruins))
 - Add plugins to third-party [\#1844](https://github.com/MvvmCross/MvvmCross/pull/1844) ([willsb](https://github.com/willsb))
 - Makes sure binding respects the configured max date [\#1843](https://github.com/MvvmCross/MvvmCross/pull/1843) ([mvanbeusekom](https://github.com/mvanbeusekom))
 - Describe how to add a link to another page in the documentation [\#1842](https://github.com/MvvmCross/MvvmCross/pull/1842) ([mvanbeusekom](https://github.com/mvanbeusekom))
