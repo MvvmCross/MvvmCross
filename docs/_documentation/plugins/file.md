@@ -19,11 +19,12 @@ public interface IMvxFileStore
     bool FolderExists(string folderPath);
     string PathCombine(string items0, string items1);
     string NativePath(string path);
-
     void EnsureFolderExists(string folderPath);
     IEnumerable<string> GetFilesIn(string folderPath);
     void DeleteFile(string path);
     void DeleteFolder(string folderPath, bool recursive);
+    long GetSize(string path);
+    DateTime GetLastWriteTimeUtc(string path);
 }
 ```
 
