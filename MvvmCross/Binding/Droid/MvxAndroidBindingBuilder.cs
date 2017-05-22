@@ -1,4 +1,4 @@
-// MvxAndroidBindingBuilder.cs
+﻿// MvxAndroidBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -93,10 +93,6 @@ namespace MvvmCross.Binding.Droid
                 MvxAndroidPropertyBinding.TextView_TextFormatted,
                 textView => new MvxTextViewTextFormattedTargetBinding(textView));
 
-            registry.RegisterCustomBindingFactory<TextView>(
-                MvxAndroidPropertyBinding.TextView_Hint,
-                textView => new MvxTextViewHintTargetBinding(textView));
-
             registry.RegisterPropertyInfoBindingFactory(
                 (typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
                 typeof(MvxAutoCompleteTextView),
@@ -113,7 +109,7 @@ namespace MvvmCross.Binding.Droid
                 MvxAndroidPropertyBinding.CompoundButton_Checked);
 
             registry.RegisterPropertyInfoBindingFactory(
-                typeof(MvxSeekBarProgressTargetBinding), 
+                typeof(MvxSeekBarProgressTargetBinding),
                 typeof(SeekBar),
                 MvxAndroidPropertyBinding.SeekBar_Progress);
 
@@ -178,7 +174,7 @@ namespace MvvmCross.Binding.Droid
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
 
             registry.RegisterCustomBindingFactory(
-                MvxAndroidPropertyBinding.EditText_TextFocus, 
+                MvxAndroidPropertyBinding.EditText_TextFocus,
                 (EditText view) => new MvxTextViewFocusTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<SearchView>(
