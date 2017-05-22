@@ -11,6 +11,7 @@ namespace MvvmCross.Platform.UI
     public enum MvxVisibility : byte
     {
         Visible,
-        Collapsed
+        Collapsed,
+        Hidden
     }
 }
