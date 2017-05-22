@@ -14,6 +14,25 @@ old NuGet package                      | new NuGet package
 `MvvmCross.Droid.Support.V7.Fragging`  | `MvvmCross.Droid.Support.Fragment`
 `MvvmCross.Forms.Presenter`            | `MvvmCross.Forms`
 
+## iOS
+
+### iOS View Presenter and Tab bar control
+
+With version 5 of MvvmCross the iOS View Presenter received a major overhaul. This results in a few changes especially when using the tab bar control.
+
+* The `IMvxTabBarPresenter` (and its implementation `MvxTabsViewPresenter`) have been removed and are now fully integrated with the `MvxIosViewPresenter` class. When you are using the tab bar control, please replace the `MvxTabsViewPresenter` with the `MvxIosViewPresenter`;
+* Like in the previous versions you would still decorate your view controllers with the `MvxTabPresentationAttribute` attribute, however it has now moved to a new namespace. Namely from `MvvmCross.iOS.Support.Presenters` to `MvvmCross.iOS.Views.Presenters.Attributes`.
+* The `MvxTabPresentationAttribute` no longer accepts the `MvxTabPresentationMode` enum as a parameter. These options have now been replaced by their own attributes. See following table (all attributes are located in the `MvvmCross.iOS.Views.Presenters.Attributes` namespace):
+
+MxvTabPresentationMode | new Attribute
+---------------------- | -------------
+Root                   | `MvxRootPresentationAttribute`
+Tab                    | `MvxTabPresentationAttribute`
+Child                  | `MvxChildPresentationAttribute`
+Modal                  | `MvxModalPresentationAttribute`
+
+Detailed information regarding the new iOS View Presenter and the above attributes can be found in the [iOS View Presenter]({{"/documentation/platform/ios-view-presenter" | relative_url}}) section of the documentation.
+
 ## Changes to test
 
 The following things are recommended to test
