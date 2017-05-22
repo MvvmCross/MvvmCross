@@ -45,6 +45,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
                     , UIBarButtonItemStyle.Plain
                     , (sender, args) =>
                     {
+                        if (sidebarController.IsOpen)
+                        {
+                            mvxSidebarMenu.MenuWillClose();
+                        }
+                        else
+                        {
+                            mvxSidebarMenu.MenuWillOpen();
+                        }
                         sidebarController.MenuWidth = mvxSidebarMenu.MenuWidth;
                         sidebarController.ViewWillAppear(false);
                         sidebarController.ToggleMenu();

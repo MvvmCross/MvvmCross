@@ -12,7 +12,7 @@ old NuGet package                      | new NuGet package
 -------------------------------------- | -----------------
 `MvvmCross.Droid.Support.V4`           | `MvvmCross.Droid.Support.Core.UI, MvvmCross.Droid.Support.Core.Utils, MvvmCross.Droid.Support.Fragment`
 `MvvmCross.Droid.Support.V7.Fragging`  | `MvvmCross.Droid.Support.Fragment`
-`MvvmCross.Forms.Presenters`           | `MvvmCross.Forms`
+`MvvmCross.Forms.Presenter`            | `MvvmCross.Forms`
 
 ## Changes to test
 
