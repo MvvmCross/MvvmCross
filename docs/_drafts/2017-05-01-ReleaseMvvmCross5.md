@@ -24,6 +24,8 @@ Over time we have received a lot of feedback from developers that use MvvmCross 
 
 Over the coming months we'll introduce a 'documentation policy' to make sure the documentation keeps on improving over time and keeps its uniformity.
 
+For more information and to start contributing to the website see the [Documentation style guide](https://www.mvvmcross.com/documentation/contribute/mvvmcross-docs-style-guide?scroll=1355)
+
 ## Open Collective
 
 As you all know, MvvmCross is an Open Source project, so that means we're not making any money out of it. But sometimes we're facing actual costs, which are always difficult to manage. To improve on this situation we've created the MvvmCross Open Collective - a place where you can donate your money to the project but also have full insight into what we're actually doing with it. We really hope you'll join this Open Collective!
@@ -121,6 +123,8 @@ The events available are:
 * BeforeClose
 * AfterClose
 
+The new navigation also allows to navigate directly to an instance of a viewmodel instead of to a type.
+
 A full explanation can be found on the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
 
 ## Lifecycle / Event hooks
@@ -202,6 +206,17 @@ We've added a couple of test projects in the main repo so we can test and reprod
 The Test packages are now based on PCL instead of NET45 so you can target more platforms.
 #### Sidebar fixes
 The now-default XamarinSidebar menu for MvvmCross iOS has been improved with a couple of new features. Read more about this in the [documentation](https://www.mvvmcross.com/documentation/platform/ios-support-library?scroll=446#mvxsidebarpresenter).
+
+# Roadmap towards MvvmCross 6.0
+
+Before MvvmCross 6.0 we want to release a couple of important fixes and new features. Among those are:
+- Even better Xamarin.Forms support
+- A new default presenter for Android
+- Better handling of Fragments
+
+For MvvmCross 6.0 the plan is to, in the first place support .NET Standard 2.0. At the same time we want to use that to refactor the plugins structure, make more use of async await, and `C#7`!
+
+For the full overview and discussion on the roadmap for 6.0 see [#1415](https://github.com/MvvmCross/MvvmCross/issues/1415)
 
 # Changelog
 
