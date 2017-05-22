@@ -1,4 +1,4 @@
-﻿---
+---
 layout: documentation
 title: Data binding
 category: Fundamentals
