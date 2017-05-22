@@ -67,6 +67,11 @@ namespace MvvmCross.iOS.Views
             return true;
         }
 
+        public virtual bool CanShowChildView(UIViewController viewController)
+        {
+            return SelectedViewController is UINavigationController;
+        }
+
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
             var navController = SelectedViewController as UINavigationController;
