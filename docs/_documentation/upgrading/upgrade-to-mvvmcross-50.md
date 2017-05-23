@@ -18,6 +18,36 @@ old NuGet package                      | new NuGet package
 
 To make sure your navigation stays up-to-date change all your `ShowViewModel<>()` calls to the new navigation explained in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation#mvvmcross-5x-and-higher-navigation)
 
+Example before:
+
+```c#
+private IMvxCommand _navigateCommand;
+public IMvxCommand NavigateCommand
+{
+    get
+    {
+        _navigateCommand = _navigateCommand ?? new MvxCommand(() => ShowViewModel<TViewModel>());
+        return _navigateCommand;
+    }
+}
+```
+
+After:
+
+```c#
+private IMvxAsyncCommand _navigateCommand;
+public IMvxAsyncCommand NavigateCommand
+{
+    get
+    {
+        _navigateCommand = _navigateCommand ?? new MvxAsyncCommand(() => _navigationService.Navigate<TViewModel>());
+        return _navigateCommand;
+    }
+}
+```
+
+Also your `public void Init()` won't be called anymore. This is because this was done using reflection. With the new navigation a method called `public override async Task Initialize()` will be called. This method is typed and async.
+
 ## iOS
 
 ### iOS View Presenter and Tab bar control
