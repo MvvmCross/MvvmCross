@@ -16,28 +16,39 @@ The following Api is available to use:
 ```c#
 public interface IMvxNavigationService
 {
+    event BeforeNavigateEventHandler BeforeNavigate;
+    event AfterNavigateEventHandler AfterNavigate;
+    event BeforeCloseEventHandler BeforeClose;
+    event AfterCloseEventHandler AfterClose;
+
     Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
     Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
-    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
     Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
+    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
+
+    Task Navigate(IMvxViewModel viewModel);
+    Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class;
+    Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class;
+    Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param) where TParameter : class where TResult : class;
+
     Task Navigate(string path);
     Task Navigate<TParameter>(string path, TParameter param) where TParameter : class;
     Task<TResult> Navigate<TResult>(string path) where TResult : class;
     Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class;
     Task<bool> CanNavigate(string path);
-    Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
     Task<bool> Close(IMvxViewModel viewModel);
 }
+```
 
-public static class MvxNavigationExtensions
-{
-    public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
-    public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
-    public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-    public static Task<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
-    public static Task<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param)
-    Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
-}
+Some extension methods make it easier to use your already existing code:
+
+```c#
+public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
+public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
+public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param) where TParameter : class
+public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path) where TResult : class
+public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param) where TParameter : class where TResult : class
+public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
 ```
 
 The Uri navigation will build the navigation stack if required. This will also enable deeplinking and building up the navigationstack for it. Every ViewModel added to the stack can split up into multiple paths of it's own backstack. This will enable all kinds of layout structures as Hamburger, Tab or Top navigation.
@@ -122,6 +133,40 @@ The events available are:
 * AfterNavigate
 * BeforeClose
 * AfterClose
+
+## Upgrading from 4.x to 5.x
+
+To make sure your navigation stays up-to-date change all your `ShowViewModel<>()` calls to the new navigation methods.
+
+Example before:
+
+```c#
+private IMvxCommand _navigateCommand;
+public IMvxCommand NavigateCommand
+{
+    get
+    {
+        _navigateCommand = _navigateCommand ?? new MvxCommand(() => ShowViewModel<TViewModel>());
+        return _navigateCommand;
+    }
+}
+```
+
+After:
+
+```c#
+private IMvxAsyncCommand _navigateCommand;
+public IMvxAsyncCommand NavigateCommand
+{
+    get
+    {
+        _navigateCommand = _navigateCommand ?? new MvxAsyncCommand(() => _navigationService.Navigate<TViewModel>());
+        return _navigateCommand;
+    }
+}
+```
+
+Also your `public void Init()` won't be called anymore. This is because this was done using reflection. With the new navigation a method called `public override async Task Initialize()` will be called. This method is typed and async.
 
 # MvvmCross 4.x navigation
 
