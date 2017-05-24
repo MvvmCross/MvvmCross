@@ -19,13 +19,13 @@ On Android inherit from `MvxFormsApplicationActivity` or `MvxFormsAppCompatActiv
 
 Add the following piece of code to Setup.cs from Xamarin.Android project:
 ```c#
-	protected override IMvxAndroidViewPresenter CreateViewPresenter()
-    {
-        var presenter = new MvxFormsDroidPagePresenter();
-        Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
-
-        return presenter;
-    }
+protected override IMvxAndroidViewPresenter CreateViewPresenter()
+{
+    var presenter = new MvxFormsDroidPagePresenter();
+    Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+    
+    return presenter;
+}
 ```
 
 ## iOS
