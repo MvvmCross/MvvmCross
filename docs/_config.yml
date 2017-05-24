@@ -71,7 +71,7 @@ date_format: "%b %-d, %Y"
 # End
 
 # Site permalink settings
-permalink: /blog/:title 
+permalink: /:title/
 # End
 
 # Collections settings
