@@ -8,7 +8,7 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![TipCalc](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
+![TipCalc](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -18,7 +18,7 @@ To satisfy this we built a 'Core' Portable Class Library project which contained
 
 We then added User Interfaces for Xamarin.Android and Xamarin.iOS
 
-![Android](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png) ![iOS](../../img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
+![Android](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png) ![iOS](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
 For our next project, let's look at Windows, specifically Universal Windows Platform (UWP) Apps which run on Windows 10 and Windows 10 Mobile.
 
@@ -345,7 +345,7 @@ The full page will look like:
 
 In the designer, this will look like:
 
-![TipCalc UWP](../../img/tutorials/tipcalc/TipCalc_UWP_designer.png)
+![TipCalc UWP](../../assets/img/tutorials/tipcalc/TipCalc_UWP_designer.png)
 
 ## The Store UI is complete!
 
@@ -353,11 +353,11 @@ At this point you should be able to run your application either on the Local Mac
 
 When it starts... you should see this for the local machine:
 
-![TipCalc UWP](../../img/tutorials/tipcalc/TipCalc_UWP_landscape.png)
+![TipCalc UWP](../../assets/img/tutorials/tipcalc/TipCalc_UWP_landscape.png)
 
 and in the mobile emulator:
 
-![TipCalc UWP mobile](../../img/tutorials/tipcalc/TipCalc_UWP.png)
+![TipCalc UWP mobile](../../assets/img/tutorials/tipcalc/TipCalc_UWP.png)
 
 ## Moving on...
 
