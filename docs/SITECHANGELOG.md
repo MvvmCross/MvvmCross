@@ -30,8 +30,6 @@ All changes will be listed below.
 
 * Add scrolling to the top button.
 
-* Update permalink
-
 * Move some JavaScript files.
 
 * Add copyright information.
