@@ -16,9 +16,9 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
-    public class MvxNavigationService : MvxNotifyPropertyChanged, IMvxNavigationService
+    public class MvxNavigationService : IMvxNavigationService
     {
-        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)base.Dispatcher;
+        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
 
         private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
 
@@ -149,8 +149,54 @@ namespace MvvmCross.Core.Navigation
             {
                 viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
+            var parameterValues = new MvxBundle(paramDict);
+            RunViewModelLifecycle(viewModel, parameterValues);
 
-            return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = new MvxBundle(paramDict).SafeGetData() };
+            return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = parameterValues.SafeGetData() };
+        }
+
+        public virtual IMvxViewModel LoadViewModel<TViewModel>(IMvxBundle parameterValues = null, IMvxBundle savedState = null)
+        {
+            IMvxViewModel viewModel;
+            try
+            {
+                viewModel = (IMvxViewModel)Mvx.IocConstruct<TViewModel>();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem creating viewModel of type {0}", typeof(TViewModel).Name);
+            }
+
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+
+            return viewModel;
+        }
+
+        protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle parameterValues)
+        {
+            viewModel.CallBundleMethods("Init", parameterValues);
+        }
+
+        protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
+        {
+            viewModel.CallBundleMethods("ReloadState", savedState);
+        }
+
+        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues = null, IMvxBundle savedState = null)
+        {
+            try
+            {
+                this.CallCustomInitMethods(viewModel, parameterValues);
+                if (savedState != null)
+                {
+                    this.CallReloadStateMethods(viewModel, savedState);
+                }
+                viewModel.Start();
+            }
+            catch (Exception exception)
+            {
+                throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
+            }
         }
 
         public virtual Task<bool> CanNavigate(string path)
@@ -252,7 +298,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
         {
-            var viewModel = Mvx.IocConstruct<TViewModel>();
+            var viewModel = LoadViewModel<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -268,7 +314,7 @@ namespace MvvmCross.Core.Navigation
             where TViewModel : IMvxViewModel<TParameter>
             where TParameter : class
         {
-            var viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct<TViewModel>();
+            var viewModel = (IMvxViewModel<TParameter>)LoadViewModel<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -284,7 +330,7 @@ namespace MvvmCross.Core.Navigation
             where TViewModel : IMvxViewModelResult<TResult>
             where TResult : class
         {
-            var viewModel = (IMvxViewModelResult<TResult>)Mvx.IocConstruct<TViewModel>();
+            var viewModel = (IMvxViewModelResult<TResult>)LoadViewModel<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -313,7 +359,7 @@ namespace MvvmCross.Core.Navigation
             where TParameter : class
             where TResult : class
         {
-            var viewModel = (IMvxViewModel<TParameter, TResult>)Mvx.IocConstruct<TViewModel>();
+            var viewModel = (IMvxViewModel<TParameter, TResult>)LoadViewModel<TViewModel>();
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -339,6 +385,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task Navigate(IMvxViewModel viewModel)
         {
+            RunViewModelLifecycle(viewModel);
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -352,6 +399,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class
         {
+            RunViewModelLifecycle(viewModel);
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -365,6 +413,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class
         {
+            RunViewModelLifecycle(viewModel);
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);
@@ -392,6 +441,7 @@ namespace MvvmCross.Core.Navigation
             where TParameter : class
             where TResult : class
         {
+            RunViewModelLifecycle(viewModel);
             var request = new MvxViewModelInstanceRequest(viewModel);
 
             var args = new NavigateEventArgs(viewModel);

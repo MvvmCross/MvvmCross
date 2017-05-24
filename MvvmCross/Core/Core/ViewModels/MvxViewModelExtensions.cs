@@ -32,6 +32,10 @@ namespace MvvmCross.Core.ViewModels
         public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle bundle)
         {
             var parameters = methodInfo.GetParameters().ToArray();
+
+            if (bundle == null && parameters.Count() > 0)
+                return;
+            
             if (parameters.Count() == 1
                 && parameters[0].ParameterType == typeof(IMvxBundle))
             {
@@ -50,7 +54,7 @@ namespace MvvmCross.Core.ViewModels
             }
 
             // call method using named method arguments
-            var invokeWith = bundle.CreateArgumentList(parameters, viewModel.GetType().Name)
+            var invokeWith = bundle?.CreateArgumentList(parameters, viewModel.GetType().Name)
                                    .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
         }
