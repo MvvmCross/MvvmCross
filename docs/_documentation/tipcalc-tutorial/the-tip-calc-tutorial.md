@@ -8,7 +8,7 @@ In this first Model-View-ViewModel project, we'll create a simple single screen 
 
 Here's a sketch of where we hope to end up:
 
-![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 The goals of this first application are all about **introducing**:
 
