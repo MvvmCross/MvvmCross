@@ -8,7 +8,7 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -306,7 +306,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![Android TipCalc](../../img/tutorials/tipcalc/TipCalc_Android.png)
+![Android TipCalc](../../assets/img/tutorials/tipcalc/TipCalc_Android.png)
 
 If you then want to make it 'more beautiful', then try adding a few attributes to some of your AXML - things like:
 
@@ -319,7 +319,7 @@ If you then want to make it 'more beautiful', then try adding a few attributes t
 
 Within a very short time, you should hopefully be able to create something 'styled'...
 
-![Android TipCalc Styled](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png)
 
 ... but actually making it look 'nice' might take some design skills!
 

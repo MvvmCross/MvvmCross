@@ -1,0 +1,39 @@
+# MvvmCross site changelog
+
+## Mvxtheme 1.0 (2017-05-24)
+
+I am honored to announce that the Jekyll theme for MvvmCross has been officially completed today.
+
+Starting with this release, MvvmCross can completely abandon the dependency on the Minima theme.
+
+All changes will be listed below.
+
+* Theme engine no longer use Jekyll, now use "GitHub Pages Ruby Gem".
+
+* Add new plugin "jekyll-github-metadata".
+
+* Enable the compressed scss style to reduce the file size.
+
+* Move all static files to the `/assets` folder.
+
+* Classify image files.
+
+* Remove the minima theme.
+
+* Delete the `_data` folder and move the `menu` settings to `_config.yml`.
+
+* Rewrite all layouts.
+
+* Newly designed header and footer.
+
+* Using responsive design.
+
+* Add scrolling to the top button.
+
+* Move some JavaScript files.
+
+* Add copyright information.
+
+* Optimize the code font.
+
+* Use "richleland-pygments-css code" highlighting.
