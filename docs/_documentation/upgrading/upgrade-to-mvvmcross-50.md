@@ -71,6 +71,8 @@ Detailed information regarding the new iOS View Presenter and the above attribut
 
 Update your code to use the new base classes, support for MvvmCross bindings and improved presenters. Information about this can be found in: [Xamarin.Forms](https://www.mvvmcross.com/documentation/platform/xamarin-forms?scroll=551)
 
+> `MvxFormsApp` has changed to `MvxFormsApplication`
+
 ## Changes to test
 
 The following things are recommended to test
