@@ -124,7 +124,28 @@
     padding-right: $base-mobile-padding;
 
     > .navigation {
-      display: none;
+      > ul {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+
+      > ul > li {
+        padding-left: 0;
+      }
+
+      .avatar {
+        display: none;
+      }
+
+      .footer-blog {
+        display: none;
+      }
+
+      .footer-connect {
+        display: none;
+      }
     }
 
     > .copyright {
