@@ -32,7 +32,7 @@
         </form>
     </div>
     <div class="home-nav" role="navigation" aria-label="Site navigation">
-        <a href="{{ site.url }}" role="menuitem" aria-label="Home">Home</a>
+        <a href="{{ '/' | relative_url }}" role="menuitem" aria-label="Home">Home</a>
         {% for item in site.menu %}
         <a href="{{ item.url | relative_url }}" role="menuitem" aria-label="{{ item.title | escape }}">{{ item.title | escape }}</a>
         {% endfor %}
