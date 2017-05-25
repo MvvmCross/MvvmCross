@@ -8,7 +8,7 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -288,7 +288,7 @@ This will produce finished XAML like:
 
 In the designer, this will look like:
 
-![TipCalc WPF Design](../../img/tutorials/tipcalc/TipCalc_Wpf_Designer.png)
+![TipCalc WPF Design](../../assets/img/tutorials/tipcalc/TipCalc_Wpf_Designer.png)
 
 ## The Wpf UI is complete!
 
@@ -296,7 +296,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![TipCalc WPF Run](../../img/tutorials/tipcalc/TipCalc_Wpf_Run.png)
+![TipCalc WPF Run](../../assets/img/tutorials/tipcalc/TipCalc_Wpf_Run.png)
 
 ## Moving on...
 

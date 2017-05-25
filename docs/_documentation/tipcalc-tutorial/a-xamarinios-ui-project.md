@@ -8,7 +8,7 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
@@ -18,7 +18,7 @@ To satisfy this we built a 'Core' Portable Class Library project which contained
 
 We then added our first User Interface - for Xamarin.Android:
 
-![Android TipCalc Styled](../../img/tutorials/tipcalc/TipCalc_Android_Styled.png)
+![Android TipCalc Styled](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png)
 
 For our next project, let's shift to Xamarin.iOS.
 
@@ -194,7 +194,7 @@ Set the Maximum Value of the `Slider` to '100'.
 
 Using drag and drop, you should be able to quite quickly generate a design similar to:
 
-![iOS design](../../img/tutorials/tipcalc/TipCalc_Touch_Design.png)
+![iOS design](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Design.png)
 
 ### Edit TipView.cs
 
@@ -285,7 +285,7 @@ At this point you should be able to run your application.
 
 When it starts... you should see:
 
-![ios ui](../../img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
+![ios ui](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
 This seems to work perfectly, although you may notice that if you tap on the `SubTotal` property and start entering text, then you cannot afterwards close the keyboard.
 
