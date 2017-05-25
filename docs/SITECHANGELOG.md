@@ -20,6 +20,8 @@ Fixed bugs:
 
 * On Mobile: documentation menu like the normal menu items.
 
+* Fix logo link is relative url.
+
 ## Mvxtheme 1.0 (2017-05-24)
 
 I am honored to announce that the Jekyll theme for MvvmCross has been officially completed today.
