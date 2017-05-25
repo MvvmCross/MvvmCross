@@ -14,7 +14,7 @@
     flex-flow: row nowrap;
 
     .avatar {
-      background-image: url(/assets/img/logo/MvvmCross-avatar.png);
+      background-image: url($baseurl + "/assets/img/logo/MvvmCross-avatar.png");
       background-position: center center;
       background-repeat: no-repeat;
       background-size: $footer-avatar-size;
