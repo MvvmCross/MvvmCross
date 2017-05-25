@@ -188,27 +188,32 @@
     }
 
     > .doc-nav {
-      margin-left: 15px;
-      margin-right: 15px;
-
       p {
         text-transform: uppercase;
         font-weight: bold;
         margin-bottom: 0;
+        padding-left: 15px;
       }
 
       ul {
         list-style-type: none;
-        padding-left: 15px;
+        margin-top: 0;
+        padding: 0;
       }
 
       ul a {
-        color: lighten($text-color, 25%);
+        color: lighten($text-color, 20%);
         text-decoration: none;
+        display: inline-block;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 15px;
+        box-sizing: border-box;
+        width: 100%;
       }
 
       ul a:hover {
-        text-decoration: underline;
+        background-color: $gray-color;
       }
     }
   }
