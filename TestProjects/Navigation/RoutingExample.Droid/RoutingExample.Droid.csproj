@@ -90,6 +90,7 @@
     <Compile Include="TestAView.cs" />
     <Compile Include="TestBView.cs" />
     <Compile Include="SecondHostView.cs" />
+    <Compile Include="SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -111,6 +112,7 @@
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\layout\secondhost.axml" />
+    <AndroidResource Include="Resources\layout\SplashScreen.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

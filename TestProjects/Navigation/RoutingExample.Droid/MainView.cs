@@ -16,7 +16,6 @@ namespace RoutingExample.Droid
 {
     [Activity(
         Label = "Example", 
-        MainLauncher = true, 
         Theme = "@style/AppTheme",
         Icon = "@mipmap/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "mvx",
