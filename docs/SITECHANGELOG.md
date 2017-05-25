@@ -10,6 +10,16 @@ Fixed bugs:
 
 * Fix background-image url.
 
+* Update Gemfiles.
+
+* Fix some footer links to stay inside the page.
+
+* On mobile: Products and Organization lists on visible.
+
+* Homepage title is bold.
+
+* On Mobile: documentation menu like the normal menu items.
+
 ## Mvxtheme 1.0 (2017-05-24)
 
 I am honored to announce that the Jekyll theme for MvvmCross has been officially completed today.
