@@ -54,7 +54,7 @@ namespace MvvmCross.Core.ViewModels
                 return;
             }
 
-            // call method using named method arguments
+            // call method using named method arguments. If bundle is null, the null-check makes sure that Init still is called.
             var invokeWith = bundle?.CreateArgumentList(parameters, viewModel.GetType().Name)
                                    .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
