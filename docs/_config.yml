@@ -19,9 +19,6 @@ description: > # this means to ignore newlines until "baseurl:"
   with strong community support, filled to the brim with useful features.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.mvvmcross.com" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: MvvmCross
-github_username:  MvvmCross
-git_repo: MvvmCross
 
 # Build settings
 markdown: kramdown
@@ -31,34 +28,68 @@ kramdown:
   input: GFM
   hard_wrap: false
 
-theme: minima
+sass:
+  style: compressed
+
+# theme: minima
+# End
+
+# Gem settings
 gems:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-avatar
+  - jekyll-github-metadata
+
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
+  - SITECHANGELOG.md
+# End
 
-# jekyll-seo-tag config
+# Github metadata settings
+repository: MvvmCross/MvvmCross
+# End
+
+# jekyll-seo-tag settings
 social:
   name: MvvmCross
   links:
     - https://twitter.com/MvvmCross
     - https://github.com/MvvmCross
 
-logo: /img/MvvmCross-avatar.png
+logo: /assets/img/logo/MvvmCross-avatar.png
 
 twitter:
   username: MvvmCross
-  
-permalink: /:title/
+#End
 
+# Date format settings
+date_format: "%b %-d, %Y"
+# End
+
+# Site permalink settings
+permalink: /:title/
+# End
+
+# Collections settings
 collections:
   documentation:
     output: true
     permalink: /:collection/:path
+# End
+
+# Site menu settings
+menu:
+  - title: "Blog"
+    url: "/blog"
+  - title: "Documentation"
+    url: "/documentation"
+  - title: "Support"
+    url: "/support"
+# End
 
 category_order:
   - 'Getting-started'

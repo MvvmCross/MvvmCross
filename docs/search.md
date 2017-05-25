@@ -2,11 +2,9 @@
 layout: default
 ---
 {% assign docs_by_category = site.documentation | group_by: "category" | reverse %}
-
 <ul id="search-results">
-  <h2 class="searching-text">Searching.....</h2>
+    <h2 class="searching-text">Searching.....</h2>
 </ul>
-
 <script>
   window.store = {
     {% for category in docs_by_category %}
@@ -32,9 +30,7 @@ layout: default
     {% endfor %}
   };
 </script>
-<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
-<script src="{{ "/js/lunr.min.js" | relative_url }}"></script>
-<script src="{{ "/js/search.js" | relative_url }}"></script>
-
-
-    
+<script src="{{ '/assets/js/jquery-3.2.1.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/lunr.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+{% include deeplink.html %}
