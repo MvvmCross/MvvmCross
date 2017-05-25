@@ -22,8 +22,10 @@ namespace MvvmCross.Plugins.PhoneCall.Droid
         public void MakePhoneCall(string name, string number)
         {
             string phoneNumber;
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
                 phoneNumber = PhoneNumberUtils.FormatNumber(number, Locale.GetDefault(Locale.Category.Format).Country);
+            else if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                phoneNumber = PhoneNumberUtils.FormatNumber(number, Locale.Default.Country);
             else
 #pragma warning disable 618
                 phoneNumber = PhoneNumberUtils.FormatNumber(number);
