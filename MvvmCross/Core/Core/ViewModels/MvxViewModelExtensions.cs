@@ -33,6 +33,7 @@ namespace MvvmCross.Core.ViewModels
         {
             var parameters = methodInfo.GetParameters().ToArray();
 
+            //Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Count() > 0)
                 return;
             
