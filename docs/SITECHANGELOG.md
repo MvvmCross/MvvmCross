@@ -1,5 +1,15 @@
 # MvvmCross site changelog
 
+## Mvxtheme 1.1 (2017-05-25)
+
+Fixed bugs:
+
+* Fix images width.
+
+* Fix footer urls.
+
+* Fix background-image url.
+
 ## Mvxtheme 1.0 (2017-05-24)
 
 I am honored to announce that the Jekyll theme for MvvmCross has been officially completed today.
