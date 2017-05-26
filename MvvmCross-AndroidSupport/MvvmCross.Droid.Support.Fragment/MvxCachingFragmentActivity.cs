@@ -263,6 +263,14 @@ namespace MvvmCross.Droid.Support.V4
 			{
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.Clear();
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{

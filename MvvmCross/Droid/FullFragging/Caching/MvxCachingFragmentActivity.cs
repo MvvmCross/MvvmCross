@@ -219,6 +219,14 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			{
 				(fragInfo.CachedFragment as Fragment).Arguments.Clear();
 				(fragInfo.CachedFragment as Fragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{
