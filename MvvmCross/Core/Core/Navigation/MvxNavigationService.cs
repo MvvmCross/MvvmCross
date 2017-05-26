@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -229,7 +229,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task Navigate(string path, IMvxBundle presentationBundle = null)
         {
-            var request = await NavigationRouteRequest(path);
+            var request = await NavigationRouteRequest(path, presentationBundle);
             var viewModel = request.ViewModelInstance;
 
             var args = new NavigateEventArgs(viewModel);
@@ -243,7 +243,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
         {
-            var request = await NavigationRouteRequest(path);
+            var request = await NavigationRouteRequest(path, presentationBundle);
             var viewModel = (IMvxViewModel<TParameter>)request.ViewModelInstance;
 
             var args = new NavigateEventArgs(viewModel);
@@ -257,7 +257,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null) where TResult : class
         {
-            var request = await NavigationRouteRequest(path);
+            var request = await NavigationRouteRequest(path, presentationBundle);
             var viewModel = (IMvxViewModelResult<TResult>)request.ViewModelInstance;
 
             var args = new NavigateEventArgs(viewModel);
@@ -283,7 +283,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class where TResult : class
         {
-            var request = await NavigationRouteRequest(path);
+            var request = await NavigationRouteRequest(path, presentationBundle);
             var viewModel = (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance;
 
             var args = new NavigateEventArgs(viewModel);
