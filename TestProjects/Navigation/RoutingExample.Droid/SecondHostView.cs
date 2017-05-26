@@ -17,7 +17,6 @@ namespace RoutingExample.Droid
 {
     [Activity(
         Label = "Example", 
-        MainLauncher = true, 
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
         Icon = "@mipmap/icon")]

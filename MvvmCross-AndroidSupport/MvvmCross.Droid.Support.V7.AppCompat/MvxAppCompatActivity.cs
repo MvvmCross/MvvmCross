@@ -50,7 +50,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+		public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
             StartActivityForResult(intent, requestCode);
         }
@@ -63,8 +63,18 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-            var view = this.BindingInflate(layoutResId, null);
-            SetContentView(view);
+			var view = this.BindingInflate(layoutResId, null);
+
+			EventHandler onGlobalLayout = null;
+			onGlobalLayout = (sender, args) =>
+			{
+				view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
+				ViewModel?.Appeared();
+			};
+
+			view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+
+			SetContentView(view);
         }
 
         protected override void AttachBaseContext(Context @base)
@@ -77,6 +87,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
+
+		public override void OnAttachedToWindow()
+		{
+			base.OnAttachedToWindow();
+			ViewModel?.Appearing();
+		}
+
+		public override void OnDetachedFromWindow()
+		{
+			base.OnDetachedFromWindow();
+			ViewModel?.Disappearing(); // we don't have anywhere to get this info
+			ViewModel?.Disappeared();
+		}
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
