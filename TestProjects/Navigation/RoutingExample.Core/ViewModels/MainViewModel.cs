@@ -13,11 +13,22 @@ namespace RoutingExample.Core.ViewModels
 
     public class MainViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _routingService;
+        private readonly IMvxNavigationService _navigationService;
 
-        public MainViewModel(IMvxNavigationService routingService)
+        public MainViewModel(IMvxNavigationService navigationService)
         {
-            _routingService = routingService;
+            _navigationService = navigationService;
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+        }
+
+        public override async Task Initialize()
+        {
+            await _navigationService.Navigate<ViewModelA>();
         }
 
         private IMvxCommand _showACommand;
@@ -28,9 +39,9 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
+                    await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
 
-                    //await _routingService.Navigate("mvx://test/a");
+                    //await _navigationService.Navigate("mvx://test/a");
                 }));
             }
         }
@@ -43,8 +54,8 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showBCommand ?? (_showBCommand = new MvxAsyncCommand(async () =>
                 {
-                    //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
-                    var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
+                    //var result = await _navigationService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
+                    var result = await _navigationService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
                     var test = result?.FirstName;
                 }));
             }
@@ -58,7 +69,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showRandomCommand ?? (_showRandomCommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate("mvx://random");
+                    await _navigationService.Navigate("mvx://random");
                 }));
             }
         }

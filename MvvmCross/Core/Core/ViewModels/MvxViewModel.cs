@@ -118,6 +118,11 @@ namespace MvvmCross.Core.ViewModels
 
                 return Task.FromResult(closeResult);
             }
+            catch (Exception ex)
+            {
+                _tcs?.TrySetException(ex);
+                return Task.FromResult(false);
+            }
             finally
             {
                 _isClosing = false;

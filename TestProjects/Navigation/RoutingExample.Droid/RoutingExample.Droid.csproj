@@ -91,6 +91,9 @@
     <Compile Include="TestBView.cs" />
     <Compile Include="SecondHostView.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="FragmentA.cs" />
+    <Compile Include="FragmentB.cs" />
+    <Compile Include="FragmentC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -113,6 +116,9 @@
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\layout\secondhost.axml" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
+    <AndroidResource Include="Resources\layout\fragment_a.xml" />
+    <AndroidResource Include="Resources\layout\fragment_b.xml" />
+    <AndroidResource Include="Resources\layout\fragment_c.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
