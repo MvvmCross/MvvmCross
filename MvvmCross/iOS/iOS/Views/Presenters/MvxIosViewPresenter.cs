@@ -128,7 +128,7 @@ namespace MvvmCross.iOS.Views.Presenters
             // check if viewController is trying to initialize a navigation stack
             if (attribute.WrapInNavigationController)
             {
-                viewController = new MvxNavigationController(viewController);
+                viewController = CreateNavigationController(viewController);
                 MasterNavigationController = viewController as MvxNavigationController;
                 SetWindowRootViewController(viewController);
 
@@ -275,6 +275,11 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
         }
 
+        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
+        {
+            return new MvxNavigationController(viewController);
+        }
+
         protected virtual bool CloseModalViewController(IMvxViewModel toClose)
         {
             // check if there is a modal stack presented
@@ -384,7 +389,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 return attributes;
             }
 
-            if(MasterNavigationController == null
+            if (MasterNavigationController == null
                 &&
                (TabBarViewController == null || !TabBarViewController.CanShowChildView(viewController))
               )
