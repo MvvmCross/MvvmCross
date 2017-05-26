@@ -1,5 +1,15 @@
 # MvvmCross site changelog
 
+## Mvxtheme 1.2 (2017-05-26)
+
+New features:
+
+* Add 404 page.
+
+Fixed bugs:
+
+* Fix landing height.
+
 ## Mvxtheme 1.1 (2017-05-25)
 
 Fixed bugs:
@@ -21,6 +31,8 @@ Fixed bugs:
 * On Mobile: documentation menu like the normal menu items.
 
 * Fix logo link is relative url.
+
+* Fix section padding.
 
 ## Mvxtheme 1.0 (2017-05-24)
 
