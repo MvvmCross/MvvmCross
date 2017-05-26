@@ -201,7 +201,7 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 Show your support for MvvmCross and get a sticker!
 
 
-[<img src="docs/img/MvvmCross-avatar.png" alt="MvvmCross Laptop Sticker" width="200" />](https://goo.gl/forms/zkNTcMLanxvX4Dxv1)
+[<img src="docs/assets/img/logo/MvvmCross-avatar.png" alt="MvvmCross Laptop Sticker" width="200" />](https://goo.gl/forms/zkNTcMLanxvX4Dxv1)
 
 
 [so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
