@@ -1,6 +1,6 @@
 <h3 align="center">
   <a href="https://www.mvvmcross.com/" target="_blank">
-    <img src="docs/img/MvvmCross-logo.png" alt="MvvmCross Logo" />
+    <img src="docs/assets/img/logo/MvvmCross-logo.png" alt="MvvmCross Logo" />
   </a>
 </h3>
 
