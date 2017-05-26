@@ -62,9 +62,13 @@
   }
 
   > .backers {
-    .opencollective object,
     img {
       max-width: 100%;
+    }
+
+    .opencollective object {
+      max-width: 1140px;
+      height: 74px;
     }
   }
 
