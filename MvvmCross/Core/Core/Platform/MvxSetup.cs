@@ -76,8 +76,12 @@ namespace MvvmCross.Core.Platform
             this.InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
             var pluginManager = this.InitializePluginFramework();
+            MvxTrace.Trace("Setup: NavigationService");
+            this.InitializeNavigationService();
             MvxTrace.Trace("Setup: App start");
             this.InitializeApp(pluginManager);
+            MvxTrace.Trace("Setup: Load navigation routes");
+            this.LoadNavigationServiceRoutes();
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
             this.InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
@@ -261,15 +265,18 @@ namespace MvvmCross.Core.Platform
             var dispatcher = this.CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
-            InitializeNavigationService(dispatcher);
         }
 
-        protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewDispatcher dispatcher)
+        protected virtual IMvxNavigationService InitializeNavigationService()
         {
-            var navigationService = new MvxNavigationService(dispatcher);
+            var navigationService = new MvxNavigationService();
             Mvx.RegisterSingleton<IMvxNavigationService>(navigationService);
-            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
             return navigationService;
+        }
+
+        protected virtual void LoadNavigationServiceRoutes()
+        {
+            MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
         }
 
         protected virtual IEnumerable<Assembly> GetViewAssemblies()

@@ -42,6 +42,7 @@
     <Compile Include="ViewModels\TestAViewModel.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModels\SecondHostViewModel.cs" />
+    <Compile Include="AppStart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
