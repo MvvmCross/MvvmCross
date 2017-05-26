@@ -23,25 +23,25 @@ namespace MvvmCross.Core.Navigation
         event BeforeCloseEventHandler BeforeClose;
         event AfterCloseEventHandler AfterClose;
 
-        Task Navigate<TViewModel>() where TViewModel : IMvxViewModel;
-        Task Navigate<TViewModel, TParameter>(TParameter param) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
-        Task<TResult> Navigate<TViewModel, TResult>() where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
+        Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
+        Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
+        Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
+        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
 
-        Task Navigate(IMvxViewModel viewModel);
-        Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class;
-        Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class;
-        Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param) where TParameter : class where TResult : class;
+        Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
+        Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class;
+        Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null) where TResult : class;
+        Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class where TResult : class;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>A task to await upon</returns>
-        Task Navigate(string path);
-        Task Navigate<TParameter>(string path, TParameter param) where TParameter : class;
-        Task<TResult> Navigate<TResult>(string path) where TResult : class;
-        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class;
+        Task Navigate(string path, IMvxBundle presentationBundle = null);
+        Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class;
+        Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null) where TResult : class;
+        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class where TResult : class;
 
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.

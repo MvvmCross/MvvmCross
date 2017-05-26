@@ -121,7 +121,7 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path)
+        protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path, IMvxBundle presentationBundle = null)
         {
             KeyValuePair<Regex, Type> entry;
 
@@ -163,7 +163,7 @@ namespace MvvmCross.Core.Navigation
             var parameterValues = new MvxBundle(paramDict);
             RunViewModelLifecycle(viewModel, parameterValues);
 
-            return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = parameterValues.SafeGetData() };
+            return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = parameterValues.SafeGetData(), PresentationValues = presentationBundle?.SafeGetData() };
         }
 
         public virtual IMvxViewModel LoadViewModel<TViewModel>(IMvxBundle parameterValues = null, IMvxBundle savedState = null)
@@ -227,7 +227,7 @@ namespace MvvmCross.Core.Navigation
             return Task.FromResult(close);
         }
 
-        public virtual async Task Navigate(string path)
+        public virtual async Task Navigate(string path, IMvxBundle presentationBundle = null)
         {
             var request = await NavigationRouteRequest(path);
             var viewModel = request.ViewModelInstance;
@@ -241,7 +241,7 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task Navigate<TParameter>(string path, TParameter param) where TParameter : class
+        public virtual async Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
         {
             var request = await NavigationRouteRequest(path);
             var viewModel = (IMvxViewModel<TParameter>)request.ViewModelInstance;
@@ -255,7 +255,7 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task<TResult> Navigate<TResult>(string path) where TResult : class
+        public virtual async Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null) where TResult : class
         {
             var request = await NavigationRouteRequest(path);
             var viewModel = (IMvxViewModelResult<TResult>)request.ViewModelInstance;
@@ -281,7 +281,7 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        public virtual async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param) where TParameter : class where TResult : class
+        public virtual async Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class where TResult : class
         {
             var request = await NavigationRouteRequest(path);
             var viewModel = (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance;
@@ -307,10 +307,10 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        public virtual async Task Navigate<TViewModel>() where TViewModel : IMvxViewModel
+        public virtual async Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel
         {
             var viewModel = LoadViewModel<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -321,12 +321,12 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task Navigate<TViewModel, TParameter>(TParameter param)
+        public virtual async Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel<TParameter>
             where TParameter : class
         {
             var viewModel = (IMvxViewModel<TParameter>)LoadViewModel<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -337,12 +337,12 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task<TResult> Navigate<TViewModel, TResult>()
+        public virtual async Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModelResult<TResult>
             where TResult : class
         {
             var viewModel = (IMvxViewModelResult<TResult>)LoadViewModel<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -365,13 +365,13 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        public virtual async Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param)
+        public virtual async Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel<TParameter, TResult>
             where TParameter : class
             where TResult : class
         {
             var viewModel = (IMvxViewModel<TParameter, TResult>)LoadViewModel<TViewModel>();
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -394,10 +394,10 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        public virtual async Task Navigate(IMvxViewModel viewModel)
+        public virtual async Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null)
         {
             RunViewModelLifecycle(viewModel);
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -408,10 +408,10 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param) where TParameter : class
+        public virtual async Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
         {
             RunViewModelLifecycle(viewModel);
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -422,10 +422,10 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        public virtual async Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : class
+        public virtual async Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null) where TResult : class
         {
             RunViewModelLifecycle(viewModel);
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -448,12 +448,12 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        public virtual async Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param)
+        public virtual async Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null)
             where TParameter : class
             where TResult : class
         {
             RunViewModelLifecycle(viewModel);
-            var request = new MvxViewModelInstanceRequest(viewModel);
+            var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
 
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
