@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -18,7 +18,18 @@ namespace MvvmCross.Core.Navigation
 {
     public class MvxNavigationService : IMvxNavigationService
     {
-        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+        private IMvxViewDispatcher _viewDispatcher;
+        public IMvxViewDispatcher ViewDispatcher 
+        { 
+            get 
+            {
+                return _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+            } 
+            set 
+            { 
+                _viewDispatcher = value; 
+            } 
+        }
 
         private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
 
