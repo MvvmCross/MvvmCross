@@ -55,7 +55,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 
             var destRect = new CGRect(0, 0, (nfloat)scaledWidth, (nfloat)scaledHeight);
 
-            UIGraphics.BeginImageContextWithOptions(destRect.Size, false, 0);
+            UIGraphics.BeginImageContextWithOptions(destRect.Size, false, 1);
             image.Draw(destRect);
 
             var newImage = UIGraphics.GetImageFromCurrentImageContext();
