@@ -63,7 +63,9 @@ namespace MvvmCross.Test.Navigation
 
         protected void SetupRoutings()
         {
-            RoutingService = new MvxNavigationService(MockDispatcher.Object);
+            RoutingService = new MvxNavigationService(){
+                ViewDispatcher = MockDispatcher.Object
+            };
         }
 
         [Test]
