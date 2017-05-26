@@ -18,6 +18,7 @@ namespace Playground.Core.ViewModels
         {
             ShowViewModel<Tab1ViewModel>();
             ShowViewModel<Tab2ViewModel>();
+            ShowViewModel<Tab3ViewModel>();
         }
     }
 }
