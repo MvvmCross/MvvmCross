@@ -10,6 +10,8 @@ Fixed bugs:
 
 * Fix landing height.
 
+* Fix opencollective width on 2k and 4k resolution.
+
 ## Mvxtheme 1.1 (2017-05-25)
 
 Fixed bugs:
