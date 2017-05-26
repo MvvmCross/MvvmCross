@@ -23,8 +23,6 @@ This package contains MvvmCross to use with Xamarin.Forms</description>
 		<!-- uap -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\uap10.0" />
 		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Uwp.*" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Uwp\Properties\MvvmCross.Forms.Uwp.rd.xml" 
-			target="lib\uap10.0\MvvmCross.Forms.Uwp\Properties" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\MonoAndroid70" />
