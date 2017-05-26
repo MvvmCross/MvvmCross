@@ -183,13 +183,21 @@ namespace MvvmCross.iOS.Views.Presenters
             if (TabBarViewController == null)
                 throw new MvxException("Trying to show a tab without a TabBarViewController, this is not possible!");
 
+            string tabName = attribute.TabName;
+            string tabIconName = attribute.TabIconName;
+            if (viewController is IMvxTabBarItemViewController tabBarItem)
+            {
+                tabName = tabBarItem.TabName;
+                tabIconName = tabBarItem.TabIconName;
+            }
+
             if (attribute.WrapInNavigationController)
                 viewController = new MvxNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
                 viewController,
-                attribute.TabName,
-                attribute.TabIconName,
+                tabName,
+                tabIconName,
                 attribute.TabAccessibilityIdentifier);
         }
 
