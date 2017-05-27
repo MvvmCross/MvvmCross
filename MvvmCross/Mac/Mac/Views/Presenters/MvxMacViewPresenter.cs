@@ -4,58 +4,44 @@
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+using System.Linq;
 
+using AppKit;
+
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using System.Linq;
-
-    using AppKit;
-
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Platform;
-    using global::MvvmCross.Platform.Exceptions;
-
     public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
     {
-        private readonly NSApplicationDelegate _applicationDelegate;
+        private readonly INSApplicationDelegate _applicationDelegate;
         private readonly NSWindow _window;
 
-        protected virtual NSApplicationDelegate ApplicationDelegate
-        {
-            get
-            {
-                return this._applicationDelegate;
-            }
-        }
+        protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected virtual NSWindow Window
-        {
-            get
-            {
-                return this._window;
-            }
-        }
+        protected virtual NSWindow Window => _window;
 
         public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate, NSWindow window)
         {
-            this._applicationDelegate = applicationDelegate;
-            this._window = window;
+            _applicationDelegate = applicationDelegate;
+            _window = window;
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-            var view = this.CreateView(request);
+            var view = CreateView(request);
 
-            this.Show(view, request);
+            Show(view, request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if(hint is MvxClosePresentationHint)
+            if (hint is MvxClosePresentationHint)
             {
-                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -70,31 +56,31 @@ namespace MvvmCross.Mac.Views.Presenters
         protected virtual void Show(IMvxMacView view, MvxViewModelRequest request)
         {
             var viewController = view as NSViewController;
-            if(viewController == null)
+            if (viewController == null)
                 throw new MvxException("Passed in IMvxMacView is not a UIViewController");
 
-            this.Show(viewController, request);
+            Show(viewController, request);
         }
 
         protected virtual void Show(NSViewController viewController, MvxViewModelRequest request)
         {
-            while(this.Window.ContentView.Subviews.Any())
+            while (Window.ContentView.Subviews.Any())
             {
-                this.Window.ContentView.Subviews[0].RemoveFromSuperview();
+                Window.ContentView.Subviews[0].RemoveFromSuperview();
             }
 
-            if(!viewController.ViewLoaded)
+            if (!viewController.ViewLoaded)
                 viewController.LoadView();
 
-            this.Window.ContentView = viewController.View;
+            Window.ContentView = viewController.View;
 
-            this.AddLayoutConstraints(viewController, request);
+            AddLayoutConstraints(viewController, request);
         }
 
         protected virtual void AddLayoutConstraints(NSViewController viewController, MvxViewModelRequest request)
         {
             var child = viewController.View;
-            var container = this.Window.ContentView;
+            var container = Window.ContentView;
 
             // See http://blog.xamarin.com/autolayout-with-xamarin.mac/ for more on constraints
             // as well as https://gist.github.com/garuma/3de3bbeb954ad5679e87 (latter may be helpful as tools...)
