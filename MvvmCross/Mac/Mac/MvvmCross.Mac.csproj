@@ -78,6 +78,11 @@
     <Compile Include="Views\IMvxMacViewsContainer.cs" />
     <Compile Include="Views\MvxWindowController.cs" />
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxWindowPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxSheetPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxChildPresentationAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
@@ -104,5 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="Views\Presenters\Attributes\" />
   </ItemGroup>
 </Project>

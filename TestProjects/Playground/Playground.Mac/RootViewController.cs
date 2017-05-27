@@ -6,10 +6,12 @@ using Foundation;
 using AppKit;
 using Playground.Core.ViewModels;
 using MvvmCross.Mac.Views;
+using MvvmCross.Mac.Views.Presenters.Attributes;
 
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
+    [MvxChildPresentation]
     public partial class RootViewController : MvxViewController<RootViewModel>
     {
         public RootViewController() : base()
