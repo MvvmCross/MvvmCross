@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$.ViewModels
@@ -8,14 +9,11 @@ namespace $rootnamespace$.ViewModels
         {
         }
         
-        //TODO: For more information see: https://www.mvvmcross.com/documentation/fundamentals/navigation
-        public void Init()
-        {
-        }
-        
-        public override void Start()
+        public override Task Initialize()
         {
             //TODO: Add starting logic here
+		    
+            return base.Initialize();
         }
         
         public IMvxCommand ResetTextCommand => new MvxCommand(ResetText);
