@@ -27,11 +27,8 @@ namespace MvvmCross.Binding.Droid.Target
                 HandleQueryTextChanged);
         }
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            if (target is SearchView sv)
-                sv.SetQuery((string)value, true);
-        }
+        protected override void SetValueImpl(object target, object value) => 
+            ((SearchView)target).SetQuery((string)value, true);
 
         protected override void Dispose(bool isDisposing)
         {
