@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
@@ -385,7 +385,10 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (viewController is IMvxOverridePresentationAttribute vc)
             {
-                return vc.OverridePresentationAttribute();
+                var presentationAttribute = vc.OverridePresentationAttribute();
+
+                if (presentationAttribute != null)
+                    return presentationAttribute;
             }
 
             var attribute = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
