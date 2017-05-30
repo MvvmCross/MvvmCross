@@ -383,7 +383,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
         {
-            if(viewController is IMvxOverridePresentationAttribute vc)
+            if (viewController is IMvxOverridePresentationAttribute vc)
             {
                 return vc.OverridePresentationAttribute();
             }
