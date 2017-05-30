@@ -45,7 +45,7 @@ namespace Example.Droid.Fragments
 					Resource.String.drawer_open,            // "open drawer" description
 					Resource.String.drawer_close            // "close drawer" description
 				);
-				_drawerToggle.DrawerOpened += (object sender, ActionBarDrawerEventArgs e) => ((MainActivity)Activity).HideSoftKeyboard ();
+				_drawerToggle.DrawerOpened += (object sender, ActionBarDrawerEventArgs e) => (Activity as MainActivity)?.HideSoftKeyboard();
 				(ParentActivity as INavigationActivity).DrawerLayout.AddDrawerListener(_drawerToggle);
 			}
 

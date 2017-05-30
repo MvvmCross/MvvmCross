@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivity.cs
+﻿// MvxCachingFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -65,7 +65,7 @@ namespace MvvmCross.Droid.Support.V4
             onGlobalLayout = (sender, args) =>
             {
                 rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel.Appeared();
+                ViewModel?.Appeared();
             };
 
             rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
@@ -263,6 +263,14 @@ namespace MvvmCross.Droid.Support.V4
 			{
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.Clear();
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{
@@ -469,14 +477,14 @@ namespace MvvmCross.Droid.Support.V4
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel.Appearing();
+            ViewModel?.Appearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel.Disappearing(); // we don't have anywhere to get this info
-            ViewModel.Disappeared();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
         }
     }
 

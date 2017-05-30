@@ -114,7 +114,8 @@ namespace MvvmCross.Droid.Views
             {
                 {
                     mvxViewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
-                    return true;
+                    if(mvxViewModel != null)
+                        return true;
                 }
             }
             mvxViewModel = null;
@@ -144,7 +145,7 @@ namespace MvvmCross.Droid.Views
         {
             intent.AddFlags(ActivityFlags.NewTask);
 
-#warning we want to do things here... clear top, remove history item, etc
+            //todo we want to do things here... clear top, remove history item, etc
             //#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
             //            if (request.ClearTop)
             //                intent.AddFlags(ActivityFlags.ClearTop);

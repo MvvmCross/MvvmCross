@@ -10,15 +10,19 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using RoutingExample.Core.ViewModels;
 using MvvmCross.Core.Navigation;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace RoutingExample.Droid
 {
-    [Activity(Label = "Example", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(
+        Label = "Example", 
+        Theme = "@style/AppTheme",
+        Icon = "@mipmap/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "mvx",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "mvvmcross.com",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class MainView : MvxActivity<MainViewModel>
+    public class MainView : MvxCachingFragmentCompatActivity<MainViewModel>
     {
 
         protected override void OnCreate(Bundle bundle)

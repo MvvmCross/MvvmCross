@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Core
@@ -14,14 +15,12 @@ namespace RoutingExample.Core
         {
             base.Initialize();
 
-            RegisterAppStart<MainViewModel>();
+            // Construct custom application start object    
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
+            var appStart = Mvx.Resolve<IMvxAppStart>();
+
+            // register the appstart object
+            RegisterAppStart(appStart);
         }
-
-        //public override void LoadPlugins(IMvxPluginManager pluginManager)
-        //{
-        //    base.LoadPlugins(pluginManager);
-
-        //    pluginManager.EnsurePluginLoaded<PluginLoader>();
-        //}
     }
 }

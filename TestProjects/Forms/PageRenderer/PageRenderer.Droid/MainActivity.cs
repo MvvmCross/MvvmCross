@@ -15,7 +15,7 @@ namespace PageRendererExample.UI.Droid
             if (!isInitializationComplete)
             {
                 isInitializationComplete = true;
-                StartActivity(typeof(MvxFormsApplicationActivity));
+                StartActivity(typeof(PageRendererApplicationActivity));
             }
         }
 

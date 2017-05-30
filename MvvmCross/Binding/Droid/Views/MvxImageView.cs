@@ -1,4 +1,4 @@
-// MvxImageView.cs
+﻿// MvxImageView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -26,6 +26,7 @@ namespace MvvmCross.Binding.Droid.Views
         : ImageView
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
+        private Action _imageChangedCallback;
 
         public string ImageUrl
         {
@@ -89,18 +90,18 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, Action imageChanged = null)
             : base(context, attrs, defStyleAttr)
         {
-            Init(context, attrs);
+            Init(context, attrs, imageChanged);
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs)
-            : this(context, attrs, 0)
+        public MvxImageView(Context context, IAttributeSet attrs, Action imageChanged = null)
+            : this(context, attrs, 0, imageChanged)
         { }
 
-        public MvxImageView(Context context)
-            : this(context, null)
+        public MvxImageView(Context context, Action imageChanged = null)
+            : this(context, null, imageChanged)
         { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -130,7 +131,7 @@ namespace MvvmCross.Binding.Droid.Views
                 });
         }
 
-        private void Init(Context context, IAttributeSet attrs)
+        private void Init(Context context, IAttributeSet attrs, Action imageChanged)
         {
             var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
@@ -144,6 +145,8 @@ namespace MvvmCross.Binding.Droid.Views
                 }
             }
             typedArray.Recycle();
+
+            _imageChangedCallback = imageChanged;
         }
 
         public override void SetImageBitmap (Bitmap bm)
@@ -156,6 +159,11 @@ namespace MvvmCross.Binding.Droid.Views
                     return;
                 }
                 base.SetImageBitmap (bm);
+
+                MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() =>
+                                                                         {
+                                                                             _imageChangedCallback?.Invoke();
+                                                                         });
             }
         }
     }

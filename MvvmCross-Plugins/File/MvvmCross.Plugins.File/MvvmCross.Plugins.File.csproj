@@ -48,6 +48,7 @@
     <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
       <Link>Preserve.cs</Link>
     </Compile>
+    <Compile Include="MvxFileConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">

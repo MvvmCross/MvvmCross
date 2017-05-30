@@ -1,18 +1,18 @@
-// MvxViewModel.cs
+﻿// MvxViewModel.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using System;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxViewModel
         : MvxNavigatingObject
           , IMvxViewModel
@@ -21,21 +21,21 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-		public virtual void Appearing()
-		{
-		}
+        public virtual void Appearing()
+        {
+        }
 
-		public virtual void Appeared()
-		{
-		}
+        public virtual void Appeared()
+        {
+        }
 
-		public virtual void Disappearing()
-		{
-		}
+        public virtual void Disappearing()
+        {
+        }
 
-		public virtual void Disappeared()
-		{
-		}
+        public virtual void Disappeared()
+        {
+        }
 
         public void Init(IMvxBundle parameters)
         {
@@ -51,7 +51,7 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public virtual void Destroy ()
+        public virtual void Destroy()
         {
         }
 
@@ -71,9 +71,14 @@ namespace MvvmCross.Core.ViewModels
         protected virtual void SaveStateToBundle(IMvxBundle bundle)
         {
         }
+
+        public virtual Task Initialize()
+        {
+            return Task.FromResult(true);
+        }
     }
 
-    public abstract class MvxViewModel<TInit> : MvxViewModel, IMvxViewModelInitializer<TInit>
+    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter> where TParameter : class
     {
         public async Task Init(string parameter)
         {
@@ -83,10 +88,57 @@ namespace MvvmCross.Core.ViewModels
                 throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
-            var deserialized = serializer.DeserializeObject<TInit>(parameter);
-            await Init(deserialized);
+            var deserialized = serializer.DeserializeObject<TParameter>(parameter);
+            await Initialize(deserialized);
         }
 
-        protected abstract Task Init(TInit parameter);
+        public abstract Task Initialize(TParameter parameter);
+    }
+
+    //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
+    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
+    {
+        TaskCompletionSource<TResult> _tcs;
+        bool _isClosing;
+
+        public void SetClose(TaskCompletionSource<TResult> tcs)
+        {
+            _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
+        }
+
+        public virtual Task<bool> Close(TResult result)
+        {
+            _isClosing = true;
+
+            try
+            {
+                var closeResult = Close(this);
+                if (closeResult)
+                    _tcs?.TrySetResult(result);
+
+                return Task.FromResult(closeResult);
+            }
+            catch (Exception ex)
+            {
+                _tcs?.TrySetException(ex);
+                return Task.FromResult(false);
+            }
+            finally
+            {
+                _isClosing = false;
+            }
+        }
+
+        public override void Destroy()
+        {
+            if (!_isClosing)
+                _tcs?.TrySetCanceled();
+            base.Destroy();
+        }
+    }
+
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    {
+        public abstract Task Initialize(TParameter parameter);
     }
 }

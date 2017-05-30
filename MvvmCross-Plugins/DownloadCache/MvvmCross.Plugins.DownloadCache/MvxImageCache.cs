@@ -17,7 +17,7 @@ namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxImageCache<T>
-        : MvxAllThreadDispatchingObject
+        : MvxMainThreadDispatchingObject
         , IMvxImageCache<T>
     {
         private ImmutableDictionary<string, Entry> _entriesByHttpUrl = ImmutableDictionary.Create<string, Entry>();
@@ -86,7 +86,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         private void ReduceSizeIfNecessary()
         {
-            RunSyncOrAsyncWithLock(() =>
+            Task.Run(() =>
             {
                 var entries = _entriesByHttpUrl.Select (kvp => kvp.Value).ToList ();
 

@@ -1,4 +1,4 @@
-// MvxActivity.cs
+﻿// MvxActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -65,7 +65,7 @@ namespace MvvmCross.Droid.FullFragging.Views
             onGlobalLayout = (sender, args) =>
             {
                 view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel.Appeared();
+                ViewModel?.Appeared();
             };
 
             view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
@@ -107,23 +107,23 @@ namespace MvvmCross.Droid.FullFragging.Views
             }
         }
 
-        protected override void OnDestroy ()
+        protected override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.Destroy ();
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel.Appearing();
+            ViewModel?.Appearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel.Disappearing(); // we don't have anywhere to get this info
-            ViewModel.Disappeared();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
         }
     }
 

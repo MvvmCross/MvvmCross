@@ -387,5 +387,19 @@ namespace MvvmCross.Plugins.File.WindowsCommon
             var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             return System.IO.Path.Combine(localFolderPath, path);
         }
+
+        public override long GetSize(string path)
+        {
+            var storageFile = StorageFileFromRelativePath(path);
+            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            return (long)result.Size;
+        }
+
+        public override DateTime GetLastWriteTimeUtc(string path)
+        {
+            var storageFile = StorageFileFromRelativePath(path);
+            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            return result.DateModified.UtcDateTime;
+        }
     }
 }

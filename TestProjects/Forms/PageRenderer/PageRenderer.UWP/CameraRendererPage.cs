@@ -15,10 +15,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
-
+using MvvmCross.Forms.Uwp;
 using Xamarin.Forms.Platform.UWP;
-
-using MvvmCross.Forms.Views.WindowsUWP;
 
 using PageRendererExample.Pages;
 using PageRendererExample.ViewModels;
@@ -26,9 +24,9 @@ using PageRendererExample.ViewModels;
 
 
 
-[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.WindowsUWP.CameraRendererPage))]
+[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Uwp.CameraRendererPage))]
 
-namespace PageRendererExample.UI.WindowsUWP
+namespace PageRendererExample.UI.Uwp
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>
     {

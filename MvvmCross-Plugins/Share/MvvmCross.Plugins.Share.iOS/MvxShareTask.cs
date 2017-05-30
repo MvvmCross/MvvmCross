@@ -34,7 +34,7 @@ namespace MvvmCross.Plugins.Share.iOS
 
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(message);
-            _tweet.SetCompletionHandler(TWTweetComposeHandler);
+            _tweet.CompletionHandler = TWTweetComposeHandler;
             _modalHost.PresentModalViewController(_tweet, true);
         }
 
@@ -46,7 +46,7 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
-            _tweet.SetCompletionHandler(TWTweetComposeHandler);
+            _tweet.CompletionHandler = TWTweetComposeHandler;
             _modalHost.PresentModalViewController(_tweet, true);
         }
 

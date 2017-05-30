@@ -16,7 +16,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 
-namespace MvvmCross.Plugins.PictureChooser.WindowsUWP
+namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
     [Preserve(AllMembers = true)]
     public class MvxPictureChooserTask : IMvxPictureChooserTask

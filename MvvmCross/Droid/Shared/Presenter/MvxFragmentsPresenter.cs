@@ -67,6 +67,11 @@ namespace MvvmCross.Droid.Shared.Presenter
             var serializedRequest = Serializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
+            if (request is MvxViewModelInstanceRequest)
+            {
+                Mvx.Resolve<IMvxChildViewModelCache>().Cache(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+            }
+
             if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
             {
                 Type newFragmentHostViewModelType =

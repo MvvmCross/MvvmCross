@@ -13,14 +13,10 @@ namespace MvvmCross.Plugins.PhoneCall.iOS
     [Preserve(AllMembers = true)]
 	public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask
     {
-        #region IMvxPhoneCallTask Members
-
         public void MakePhoneCall(string name, string number)
         {            
             var url = new NSUrl("tel:" + System.Uri.EscapeUriString(number));
             DoUrlOpen(url);
         }
-
-        #endregion IMvxPhoneCallTask Members
     }
 }

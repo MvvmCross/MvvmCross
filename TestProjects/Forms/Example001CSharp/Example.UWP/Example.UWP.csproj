@@ -11,8 +11,8 @@
     <AssemblyName>Example.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -131,6 +131,34 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.Uwp\MvvmCross.Forms.Uwp.csproj">
+      <Project>{8583F087-0543-4D27-8F11-F7D8DC1480E2}</Project>
+      <Name>MvvmCross.Forms.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
+      <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
+      <Name>MvvmCross.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
+      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
+      <Name>MvvmCross.Binding.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
+      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
+      <Name>MvvmCross.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj">
+      <Project>{C7E12CDD-6370-426A-8907-0ED6AF353F79}</Project>
+      <Name>MvvmCross.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example\Example.csproj">
       <Project>{2ab74840-32c8-4e07-923e-c9d6a09f81b2}</Project>
       <Name>Example</Name>

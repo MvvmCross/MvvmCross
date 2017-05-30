@@ -1,5 +1,4 @@
-﻿
-using MvvmCross.Forms.Presenter.Core;
+﻿using MvvmCross.Forms.Core;
 using PageRendererExample.ViewModels;
 
 namespace PageRendererExample.Pages

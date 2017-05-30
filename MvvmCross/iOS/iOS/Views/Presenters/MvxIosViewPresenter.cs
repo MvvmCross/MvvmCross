@@ -128,7 +128,7 @@ namespace MvvmCross.iOS.Views.Presenters
             // check if viewController is trying to initialize a navigation stack
             if (attribute.WrapInNavigationController)
             {
-                viewController = new MvxNavigationController(viewController);
+                viewController = CreateNavigationController(viewController);
                 MasterNavigationController = viewController as MvxNavigationController;
                 SetWindowRootViewController(viewController);
 
@@ -183,13 +183,21 @@ namespace MvvmCross.iOS.Views.Presenters
             if (TabBarViewController == null)
                 throw new MvxException("Trying to show a tab without a TabBarViewController, this is not possible!");
 
+            string tabName = attribute.TabName;
+            string tabIconName = attribute.TabIconName;
+            if (viewController is IMvxTabBarItemViewController tabBarItem)
+            {
+                tabName = tabBarItem.TabName;
+                tabIconName = tabBarItem.TabIconName;
+            }
+
             if (attribute.WrapInNavigationController)
                 viewController = new MvxNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
                 viewController,
-                attribute.TabName,
-                attribute.TabIconName,
+                tabName,
+                tabIconName,
                 attribute.TabAccessibilityIdentifier);
         }
 
@@ -265,6 +273,11 @@ namespace MvvmCross.iOS.Views.Presenters
                 return;
 
             MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
+        }
+
+        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
+        {
+            return new MvxNavigationController(viewController);
         }
 
         protected virtual bool CloseModalViewController(IMvxViewModel toClose)
@@ -376,7 +389,10 @@ namespace MvvmCross.iOS.Views.Presenters
                 return attributes;
             }
 
-            if (MasterNavigationController == null)
+            if (MasterNavigationController == null
+                &&
+               (TabBarViewController == null || !TabBarViewController.CanShowChildView(viewController))
+              )
             {
                 MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute() { WrapInNavigationController = true };

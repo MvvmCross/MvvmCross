@@ -11,7 +11,7 @@ This package contains the iOS Support libraries for MvvmCross.</description>
 		<dependencies>
 			<group targetFramework="Xamarin.iOS">
 				<dependency id="MvvmCross.iOS.Support" version="[$version$]" />
-				<dependency id="SidebarNavigation" version="1.9.1" />
+				<dependency id="SidebarNavigation" version="1.9.3" />
 			</group>
 		</dependencies>
 	</metadata>

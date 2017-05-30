@@ -65,7 +65,6 @@
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Views\Presenters\IMvxIosViewPresenter.cs" />
     <Compile Include="Views\MvxViewController.cs" />
-    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\MvxBaseIosViewPresenter.cs" />
     <Compile Include="Platform\MvxIosSetup.cs" />
     <Compile Include="Views\MvxCollectionViewController.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="Views\IMvxSplitViewController.cs" />
     <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
     <Compile Include="Views\MvxSplitViewController.cs" />
+    <Compile Include="Views\IMvxTabBarItemViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
