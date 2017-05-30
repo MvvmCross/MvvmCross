@@ -77,7 +77,20 @@ There is an attribute member that can be used to customize the presentation:
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
 
+## Override a presentation attribute at runtime
+To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `OverridePresentationAttribute` function like this:
+```c#
+public MvxBasePresentationAttribute OverridePresentationAttribute()
+{
+    return new MvxModalPresentationAttribute
+    {
+        ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
+        ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+    };
+}
+```
 
+If you return `null` from the `OverridePresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
 
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.
