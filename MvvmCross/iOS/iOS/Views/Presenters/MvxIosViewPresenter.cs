@@ -383,10 +383,15 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
         {
-            var attributes = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attributes != null)
+            if(viewController is IMvxOverridePresentationAttribute vc)
             {
-                return attributes;
+                return vc.OverridePresentationAttribute();
+            }
+
+            var attribute = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
+            if (attribute != null)
+            {
+                return attribute;
             }
 
             if (MasterNavigationController == null
