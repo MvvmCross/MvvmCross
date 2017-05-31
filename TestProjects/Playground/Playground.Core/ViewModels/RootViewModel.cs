@@ -64,5 +64,14 @@ namespace Playground.Core.ViewModels
                 return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => ShowViewModel<SplitRootViewModel>()));
             }
         }
+
+        private ICommand _showOverrideAttributeCommand;
+        public ICommand ShowOverrideAttributeCommand
+        {
+            get
+            {
+                return _showOverrideAttributeCommand ?? (_showOverrideAttributeCommand = new MvxCommand(() => ShowViewModel<OverrideAttributeViewModel>()));
+            }
+        }
     }
 }

@@ -160,6 +160,10 @@
     <Compile Include="Views\Tab3View.designer.cs">
       <DependentUpon>Tab3View.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\OverrideAttributeView.cs" />
+    <Compile Include="Views\OverrideAttributeView.designer.cs">
+      <DependentUpon>OverrideAttributeView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
