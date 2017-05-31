@@ -14,7 +14,7 @@ namespace Playground.iOS.Views
         {
         }
 
-        public MvxBasePresentationAttribute OverridePresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute()
         {
             return new MvxModalPresentationAttribute
             {

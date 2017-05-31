@@ -385,7 +385,7 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (viewController is IMvxOverridePresentationAttribute vc)
             {
-                var presentationAttribute = vc.OverridePresentationAttribute();
+                var presentationAttribute = vc.PresentationAttribute();
 
                 if (presentationAttribute != null)
                     return presentationAttribute;

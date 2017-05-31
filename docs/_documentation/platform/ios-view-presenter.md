@@ -78,9 +78,9 @@ There is an attribute member that can be used to customize the presentation:
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
 
 ## Override a presentation attribute at runtime
-To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `OverridePresentationAttribute` function like this:
+To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:
 ```c#
-public MvxBasePresentationAttribute OverridePresentationAttribute()
+public MvxBasePresentationAttribute PresentationAttribute()
 {
     return new MvxModalPresentationAttribute
     {
@@ -90,7 +90,7 @@ public MvxBasePresentationAttribute OverridePresentationAttribute()
 }
 ```
 
-If you return `null` from the `OverridePresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
+If you return `null` from the `PresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
 
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.
