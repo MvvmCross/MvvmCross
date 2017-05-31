@@ -30,7 +30,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45" misplaced="YES">
-                                <rect key="frame" x="216" y="200" width="167" height="30"/>
+                                <rect key="frame" x="77" y="200" width="167" height="30"/>
                                 <state key="normal" title="Initiate Modal navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -47,6 +47,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="481">
+                                <rect key="frame" x="147" y="386" width="307" height="30"/>
+                                <state key="normal" title="Show modal (override presentation attribute)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -60,6 +66,8 @@
                             <constraint firstItem="32" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="391"/>
                             <constraint firstItem="33" firstAttribute="top" secondItem="32" secondAttribute="bottom" constant="35" id="392"/>
                             <constraint firstItem="33" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="393"/>
+                            <constraint id="482" firstItem="481" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="23"/>
+                            <constraint id="483" firstItem="481" firstAttribute="centerX" secondItem="7" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -68,6 +76,7 @@
                         <outlet property="btnNavModal" destination="45" id="name-outlet-45"/>
                         <outlet property="btnSplit" destination="229" id="name-outlet-229"/>
                         <outlet property="btnTabs" destination="142" id="name-outlet-142"/>
+                        <outlet property="btnOverrideAttribute" destination="481" id="name-outlet-481"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1972" y="-2"/>
+            <point key="canvasLocation" x="1930" y="-3"/>
         </scene>
         <!--Modal Nav View-->
         <scene sceneID="27">
@@ -198,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2627" y="-3"/>
+            <point key="canvasLocation" x="3148" y="-3"/>
         </scene>
         <!--Second Child View-->
         <scene sceneID="82">
@@ -240,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="85" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3274" y="-3"/>
+            <point key="canvasLocation" x="3756" y="-2"/>
         </scene>
         <!--Tabs Root View-->
         <scene sceneID="116">
@@ -600,6 +609,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="465" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2627" y="667"/>
+        </scene>
+        <scene sceneID="486">
+            <objects>
+                <viewController storyboardIdentifier="OverrideAttributeView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="487" customClass="OverrideAttributeView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="494"/>
+                        <viewControllerLayoutGuide type="bottom" id="498"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="492">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="489">
+                                <rect key="frame" x="281" y="196" width="39" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="491">
+                                <rect key="frame" x="221" y="120" width="158" height="30"/>
+                                <state key="normal" title="Initiate Tabs navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="491" firstAttribute="top" secondItem="494" secondAttribute="bottom" constant="100" id="493"/>
+                            <constraint firstItem="491" firstAttribute="centerX" secondItem="492" secondAttribute="centerX" id="495"/>
+                            <constraint firstItem="489" firstAttribute="centerX" secondItem="492" secondAttribute="centerX" id="496"/>
+                            <constraint firstItem="489" firstAttribute="top" secondItem="491" secondAttribute="bottom" constant="46" id="497"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="489" id="488"/>
+                        <outlet property="btnTabs" destination="491" id="490"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="499" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2540" y="-3"/>
         </scene>
     </scenes>
     <resources>

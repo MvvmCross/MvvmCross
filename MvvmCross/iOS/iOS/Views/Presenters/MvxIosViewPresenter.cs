@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
@@ -383,10 +383,18 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
         {
-            var attributes = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attributes != null)
+            if (viewController is IMvxOverridePresentationAttribute vc)
             {
-                return attributes;
+                var presentationAttribute = vc.PresentationAttribute();
+
+                if (presentationAttribute != null)
+                    return presentationAttribute;
+            }
+
+            var attribute = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
+            if (attribute != null)
+            {
+                return attribute;
             }
 
             if (MasterNavigationController == null
