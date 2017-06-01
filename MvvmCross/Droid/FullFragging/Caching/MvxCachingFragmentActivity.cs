@@ -22,6 +22,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCross.Droid.FullFragging.Caching
 {
@@ -347,20 +348,13 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			return mvxFragmentView.UniqueImmutableCacheTag;
 		}
 
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate(bundle);
 
-            var rootView = Window.DecorView.RootView;
+            _view = Window.DecorView.RootView;
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel.Appeared();
-            };
-
-            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             if (bundle == null) {
 				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
@@ -374,6 +368,13 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				mvxAndroidViewPresenter.Show (fragmentRequest);
 			}
 		}
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
+        }
 
 		/// <summary>
 		/// Close Fragment with a specific tag at a specific placeholder
