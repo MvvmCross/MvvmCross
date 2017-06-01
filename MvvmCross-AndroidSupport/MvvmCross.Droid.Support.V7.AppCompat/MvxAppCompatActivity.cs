@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         , IMvxAndroidView
         , ViewTreeObserver.IOnGlobalLayoutListener 
     {
-        private View _View;
+        private View _view;
 
         protected MvxAppCompatActivity()
         {
@@ -67,11 +67,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-			_View = this.BindingInflate(layoutResId, null);
+			_view = this.BindingInflate(layoutResId, null);
 
-			_View.ViewTreeObserver.AddOnGlobalLayoutListener(this);
+			_view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
-			SetContentView(_View);
+			SetContentView(_view);
         }
 
         protected override void AttachBaseContext(Context @base)
@@ -93,9 +93,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		public override void OnDetachedFromWindow()
 		{
-			base.OnDetachedFromWindow();
-			ViewModel?.Disappearing(); // we don't have anywhere to get this info
-			ViewModel?.Disappeared();
+            base.OnDetachedFromWindow();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
 		}
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
@@ -106,20 +106,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public void OnGlobalLayout()
         {
-            if (_View != null)
+            if (_view != null)
             {
-	            if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-	            {
+                if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
+                {
 #pragma warning disable CS0618 // Type or member is obsolete
-                    _View.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
+                    _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
 #pragma warning restore CS0618 // Type or member is obsolete
-	            }
-	            else
-	            {
-	                _View.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-	            }
-
-	            ViewModel?.Appeared();
+                }
+                else
+                {
+                    _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
+                }
+                ViewModel?.Appeared();
             }
         }
     }

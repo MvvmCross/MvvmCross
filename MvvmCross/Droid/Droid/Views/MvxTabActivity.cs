@@ -13,7 +13,8 @@ namespace MvvmCross.Droid.Views
     using System.Collections.Generic;
 
     using Android.Content;
-
+    using Android.OS;
+    using Android.Views;
     using MvvmCross.Binding.BindingContext;
     using MvvmCross.Binding.Droid.BindingContext;
     using MvvmCross.Binding.Droid.Views;
@@ -26,7 +27,10 @@ namespace MvvmCross.Droid.Views
         : MvxEventSourceTabActivity
           , IMvxAndroidView
           , IMvxChildViewModelOwner
+          , ViewTreeObserver.IOnGlobalLayoutListener
     {
+        private View _view;
+
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
         public List<int> OwnedSubViewModelIndicies => this._ownedSubViewModelIndicies;
@@ -66,18 +70,11 @@ namespace MvvmCross.Droid.Views
 
         public override void SetContentView(int layoutResId)
         {
-            var view = this.BindingInflate(layoutResId, null);
+            _view = this.BindingInflate(layoutResId, null);
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel?.Appeared();
-            };
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
-            view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
-
-            this.SetContentView(view);
+            this.SetContentView(_view);
         }
 
         protected override void AttachBaseContext(Context @base)
@@ -96,6 +93,24 @@ namespace MvvmCross.Droid.Views
             base.OnDetachedFromWindow();
             ViewModel?.Disappearing(); // we don't have anywhere to get this info
             ViewModel?.Disappeared();
+        }
+
+        public void OnGlobalLayout()
+        {
+            if (_view != null)
+            {
+                if (Build.VERSION.SdkInt<BuildVersionCodes.JellyBean)
+                {
+#pragma warning disable CS0618 // Type or member is obsolete
+                    _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+                else
+                {
+                    _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
+                }
+                ViewModel?.Appeared();
+            }
         }
     }
 
