@@ -272,7 +272,22 @@ bool IsRepository(string repoName)
 	}
 	else
 	{
-		return true;
+		try
+		{
+			var path = MakeAbsolute(sln).GetDirectory().FullPath;
+			using (var repo = new LibGit2Sharp.Repository(path))
+			{
+				var origin = repo.Network.Remotes.FirstOrDefault(
+					r => r.Name.ToLowerInvariant() == "origin");
+				return origin.Url.ToLowerInvariant() == 
+					"https://github.com/" + repoName.ToLowerInvariant();
+			}
+		}
+		catch(Exception ex)
+		{
+			Information("Failed to lookup repository: {0}", ex);
+			return false;
+		}
 	}
 }
 
