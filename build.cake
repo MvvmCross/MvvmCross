@@ -1,7 +1,8 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
 #tool nuget:?package=vswhere
-#addin "Cake.Incubator"
+#addin nuget:?package=Cake.Incubator
+#addin nuget:?package=Cake.Git
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -271,24 +272,43 @@ bool IsRepository(string repoName)
 	}
 	else
 	{
-		return true;
+		try
+		{
+			var path = MakeAbsolute(sln).GetDirectory().FullPath;
+			using (var repo = new LibGit2Sharp.Repository(path))
+			{
+				var origin = repo.Network.Remotes.FirstOrDefault(
+					r => r.Name.ToLowerInvariant() == "origin");
+				return origin.Url.ToLowerInvariant() == 
+					"https://github.com/" + repoName.ToLowerInvariant();
+			}
+		}
+		catch(Exception ex)
+		{
+			Information("Failed to lookup repository: {0}", ex);
+			return false;
+		}
 	}
 }
 
 bool IsTagged()
 {
-	var toReturn = false;
-	int commitsSinceTag = -1;
-	if (int.TryParse(versionInfo.CommitsSinceVersionSource, out commitsSinceTag))
+	var path = MakeAbsolute(sln).GetDirectory().FullPath;
+	using (var repo = new LibGit2Sharp.Repository(path))
 	{
-		// if tag is current commit this will be 0
-		if (commitsSinceTag == 0)
-			toReturn = true;
+		var head = repo.Head;
+		var headSha = head.Tip.Sha;
+		
+		var tag = repo.Tags.FirstOrDefault(t => t.Target.Sha == headSha);
+		if (tag == null)
+		{
+			Information("HEAD is not tagged");
+			return false;
+		}
+
+		Information("HEAD is tagged: {0}", tag.FriendlyName);
+		return true;
 	}
-
-	Information("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn);
-
-	return toReturn;
 }
 
 Tuple<string, string> GetNugetKeyAndSource()
