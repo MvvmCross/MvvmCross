@@ -45,7 +45,6 @@ namespace MvvmCross.Droid.Views
             if (request is MvxViewModelInstanceRequest)
             {
                 var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
-                requestTranslator.RemoveSubViewModelWithKey(instanceRequest.Item2);
                 return instanceRequest.Item1;
             }
             return requestTranslator.GetIntentFor(request);
