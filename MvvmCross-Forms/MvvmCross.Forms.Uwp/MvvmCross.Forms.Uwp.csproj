@@ -46,7 +46,7 @@
     <Compile Include="Presenters\MvxFormsUwpPagePresenter.cs" />
     <Compile Include="MvxPageRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
+    <EmbeddedResource Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
     <None Include="TODO.txt" />
     <Compile Include="MvxFormsWindowsSetup.cs" />
   </ItemGroup>
