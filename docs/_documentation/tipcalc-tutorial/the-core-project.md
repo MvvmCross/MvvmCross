@@ -71,10 +71,10 @@ Within this folder create a new Interface which will be used for calculating tip
 ```c#
 namespace TipCalc.Core.Services
 {
-public interface ICalculation
-{
-    double TipAmount(double subTotal, int generosity);
-}
+    public interface ICalculation
+    {
+        double TipAmount(double subTotal, int generosity);
+    }
 }
 ```
 
@@ -83,13 +83,13 @@ Within this folder create an implementation of this interface:
 ```c#
 namespace TipCalc.Core.Services
 {
-public class Calculation : ICalculation
-{
-    public double TipAmount(double subTotal, int generosity)
+    public class Calculation : ICalculation
     {
-        return subTotal * ((double)generosity)/100.0;
+        public double TipAmount(double subTotal, int generosity)
+        {
+            return subTotal * ((double)generosity)/100.0;
+        }
     }
-}
 }
 ```
 
@@ -119,72 +119,72 @@ using TipCalc.Core.Services;
 
 namespace TipCalc.Core.ViewModels
 {
-public class TipViewModel : MvxViewModel
-{
-    readonly ICalculation _calculation;
-
-    public TipViewModel(ICalculation calculation)
+    public class TipViewModel : MvxViewModel
     {
-        _calculation = calculation;
-    }
+        readonly ICalculation _calculation;
 
-    public override void Start()
-    {
-        _subTotal = 100;
-        _generosity = 10;
-        Recalculate();
-        base.Start();
-    }
-
-    double _subTotal;
-
-    public double SubTotal
-    {
-        get {
-            return _subTotal;
-        }
-        set
+        public TipViewModel(ICalculation calculation)
         {
-            _subTotal = value;
-            RaisePropertyChanged(() => SubTotal);
+            _calculation = calculation;
+        }
+
+        public override void Start()
+        {
+            _subTotal = 100;
+            _generosity = 10;
             Recalculate();
+            base.Start();
         }
-    }
 
-    int _generosity;
+        double _subTotal;
 
-    public int Generosity
-    {
-        get {
-            return _generosity;
-        }
-        set
+        public double SubTotal
         {
-            _generosity = value;
-            RaisePropertyChanged(() => Generosity);
-            Recalculate();
+            get {
+                return _subTotal;
+            }
+            set
+            {
+                _subTotal = value;
+                RaisePropertyChanged(() => SubTotal);
+                Recalculate();
+            }
         }
-    }
 
-    double _tip;
+        int _generosity;
 
-    public double Tip
-    {
-        get {
-            return _tip;
-        }
-        set
+        public int Generosity
         {
-            _tip = value;
-            RaisePropertyChanged(() => Tip);
+            get {
+                return _generosity;
+            }
+            set
+            {
+                _generosity = value;
+                RaisePropertyChanged(() => Generosity);
+                Recalculate();
+            }
+        }
+
+        double _tip;
+
+        public double Tip
+        {
+            get {
+                return _tip;
+            }
+            set
+            {
+                _tip = value;
+                RaisePropertyChanged(() => Tip);
+            }
+        }
+
+        void Recalculate()
+        {
+            Tip = _calculation.TipAmount(SubTotal, Generosity);
         }
     }
-
-    void Recalculate()
-    {
-        Tip = _calculation.TipAmount(SubTotal, Generosity);
-    }
-}
 }
 ```
 
@@ -321,19 +321,14 @@ using TipCalc.Core.ViewModels;
 
 namespace TipCalc.Core
 {
-public class App : MvxApplication
-{
-    public App()
+    public class App : MvxApplication
     {
-        Mvx.RegisterType<ICalculation, Calculation>();
-        Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
+        public App()
+        {
+            Mvx.RegisterType<ICalculation, Calculation>();
+            Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
+        }
     }
-}
-}
-"language": "csharp"
-"name": "App.cs"
-}
-]
 }
 ```
 
