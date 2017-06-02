@@ -128,16 +128,19 @@ namespace MvvmCross.Droid.FullFragging.Views
         {
             if (_view != null)
             {
-                if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
                 {
+                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
+                    {
 #pragma warning disable CS0618 // Type or member is obsolete
-                    _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
+                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
 #pragma warning restore CS0618 // Type or member is obsolete
+                    }
+                    else
+                    {
+                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
+                    }
                 }
-                else
-                {
-                    _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                }
+                _view = null;
                 ViewModel?.Appeared();
             }
         }
