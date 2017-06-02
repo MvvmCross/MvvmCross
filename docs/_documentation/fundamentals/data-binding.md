@@ -478,6 +478,7 @@ UIKit.UISlider | Value
 UIKit.UISwitch | On
 UIKit.UIProgressView | Progress
 UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIPageControl | CurrentPage
 UIKit.UIActivityIndicatorView | Hidden
 MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
 MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
@@ -654,6 +655,7 @@ UIKit.UIActivityIndicatorView | Hidden | BindHidden()
 UIKit.UISlider | Value | BindValue()
 UIKit.UIStepper | Value | BindValue()
 UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UIPageControl | CurrentPage | BindCurrentPage()
 UIKit.UIDatePicker | Date | BindDate()
 UIKit.UITextField | ShouldReturn | BindShouldReturn()
 UIKit.UIDatePicker | Time | BindTime()
