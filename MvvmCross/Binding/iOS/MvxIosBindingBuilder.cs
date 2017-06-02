@@ -1,4 +1,4 @@
-// MvxIosBindingBuilder.cs
+﻿// MvxIosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -121,6 +121,11 @@ namespace MvvmCross.Binding.iOS
                 typeof(MvxUIStepperValueTargetBinding),
                 typeof(UIStepper),
                 MvxIosPropertyBinding.UIStepper_Value);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIPageControlCurrentPageTargetBinding),
+                typeof(UIPageControl),
+                MvxIosPropertyBinding.UIPageControl_CurrentPage);
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUISegmentedControlSelectedSegmentTargetBinding),
