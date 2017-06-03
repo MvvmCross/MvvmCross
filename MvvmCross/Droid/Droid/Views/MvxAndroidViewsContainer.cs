@@ -114,8 +114,11 @@ namespace MvvmCross.Droid.Views
             {
                 {
                     mvxViewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
-                    if(mvxViewModel != null)
+                    if (mvxViewModel != null)
+                    {
+                        RemoveSubViewModelWithKey(embeddedViewModelKey);
                         return true;
+                    }
                 }
             }
             mvxViewModel = null;
