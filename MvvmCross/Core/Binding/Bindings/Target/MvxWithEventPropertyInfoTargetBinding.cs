@@ -1,4 +1,4 @@
-// MvxWithEventPropertyInfoTargetBinding.cs
+﻿// MvxWithEventPropertyInfoTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,6 +8,7 @@
 namespace MvvmCross.Binding.Bindings.Target
 {
     using System;
+    using System.ComponentModel;
     using System.Reflection;
 
     using MvvmCross.Platform;
@@ -43,6 +44,23 @@ namespace MvvmCross.Binding.Bindings.Target
             var value = this.TargetPropertyInfo.GetGetMethod().Invoke(target, null);
             this.FireValueChanged(value);
         }
+        
+        // Note - this is public because we use it in weak referenced situations
+        public void OnPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
+        {
+            var target = this.Target;
+            if (target == null)
+            {
+                MvxBindingTrace.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                return;
+            }
+
+            if (eventArgs.PropertyName == this.TargetPropertyInfo.Name)
+            {
+                var value = this.TargetPropertyInfo.GetGetMethod().Invoke(target, null);
+                this.FireValueChanged(value);
+            }
+        }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -53,13 +71,29 @@ namespace MvvmCross.Binding.Bindings.Target
                 return;
 
             var viewType = target.GetType();
-            var eventName = this.TargetPropertyInfo.Name + "Changed";
-            var eventInfo = viewType.GetEvent(eventName);
-            if (eventInfo == null)
+
+            // Try a specific [PropertyName]Changed event first.
+            var eventInfo = GetNamedPropertyChangedEvent(viewType, this.TargetPropertyInfo.Name);
+            if (eventInfo != null)
+                this._subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
+            else if (target is INotifyPropertyChanged notifyPropertyChangedTarget)
             {
-                // this will be a one way binding
-                return;
+                // If target implements INPC then try a generic PropertyChanged event next.
+                eventInfo = GetPropertyChangedEvent(viewType);
+                if (eventInfo != null)
+                    this._subscription = notifyPropertyChangedTarget.WeakSubscribe(OnPropertyChanged);
             }
+
+            // No suitable event found on target; this will be a one way binding.
+        }
+
+        private EventInfo GetNamedPropertyChangedEvent(Type viewType, string propertyName)
+        {
+            var eventName = propertyName + "Changed";
+            var eventInfo = viewType.GetEvent(eventName);
+
+            if (eventInfo == null)
+                return null;
 
             if (eventInfo.EventHandlerType != typeof(EventHandler))
             {
@@ -67,12 +101,34 @@ namespace MvvmCross.Binding.Bindings.Target
                                       "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
-                                      target.GetType().Name,
+                                      viewType.Name,
                                       eventInfo.EventHandlerType.Name);
-                return;
+                return null;
             }
 
-            this._subscription = eventInfo.WeakSubscribe(target, OnValueChanged);
+            return eventInfo;
+        }
+
+        private EventInfo GetPropertyChangedEvent(Type viewType)
+        {
+            var eventName = "PropertyChanged";
+            var eventInfo = viewType.GetEvent(eventName);
+
+            if (eventInfo == null)
+                return null;
+
+            if (eventInfo.EventHandlerType != typeof(PropertyChangedEventHandler))
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
+                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                                      viewType,
+                                      eventName,
+                                      viewType.Name,
+                                      eventInfo.EventHandlerType.Name);
+                return null;
+            }
+
+            return eventInfo;
         }
 
         protected override void Dispose(bool isDisposing)
