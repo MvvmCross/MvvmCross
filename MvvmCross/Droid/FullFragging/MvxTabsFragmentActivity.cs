@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Runtime;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.FullFragging
@@ -24,6 +25,7 @@ namespace MvvmCross.Droid.FullFragging
         : Views.MvxActivity
         , TabHost.IOnTabChangeListener
     {
+
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();
@@ -83,16 +85,9 @@ namespace MvvmCross.Droid.FullFragging
 
             SetContentView(_layoutId);
 
-            var rootView = Window.DecorView.RootView;
+            _view = Window.DecorView.RootView;
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel?.Appeared();
-            };
-
-            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             InitializeTabHost(savedInstanceState);
 
@@ -100,6 +95,13 @@ namespace MvvmCross.Droid.FullFragging
             {
                 _tabHost.SetCurrentTabByTag(savedInstanceState.GetString(SavedTabIndexStateKey));
             }
+        }
+
+        public override void SetContentView(int layoutResId)
+        {
+           var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
         }
 
         public override void OnAttachedToWindow()
@@ -226,5 +228,6 @@ namespace MvvmCross.Droid.FullFragging
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)
         {
         }
+
     }
 }

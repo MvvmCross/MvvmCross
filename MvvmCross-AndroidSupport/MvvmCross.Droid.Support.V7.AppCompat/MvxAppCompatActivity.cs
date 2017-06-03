@@ -16,6 +16,7 @@ using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
+using Android.OS;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -23,7 +24,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity
         , IMvxAndroidView
+        , ViewTreeObserver.IOnGlobalLayoutListener 
     {
+        private View _view;
+
         protected MvxAppCompatActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
@@ -63,18 +67,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-			var view = this.BindingInflate(layoutResId, null);
+			_view = this.BindingInflate(layoutResId, null);
 
-			EventHandler onGlobalLayout = null;
-			onGlobalLayout = (sender, args) =>
-			{
-				view.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-				ViewModel?.Appeared();
-			};
+			_view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
-			view.ViewTreeObserver.GlobalLayout += onGlobalLayout;
-
-			SetContentView(view);
+			SetContentView(_view);
         }
 
         protected override void AttachBaseContext(Context @base)
@@ -96,15 +93,37 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
 		public override void OnDetachedFromWindow()
 		{
-			base.OnDetachedFromWindow();
-			ViewModel?.Disappearing(); // we don't have anywhere to get this info
-			ViewModel?.Disappeared();
+            base.OnDetachedFromWindow();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
 		}
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
+        }
+
+        public void OnGlobalLayout()
+        {
+            if (_view != null)
+            {
+                if (_view.ViewTreeObserver.IsAlive)
+                {
+                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
+                    {
+#pragma warning disable CS0618 // Type or member is obsolete
+                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    }
+                    else
+                    {
+                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
+                    }
+                }
+                _view = null;
+                ViewModel?.Appeared();
+            }
         }
     }
 
