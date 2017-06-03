@@ -59,16 +59,9 @@ namespace MvvmCross.Droid.Support.V4
 
 			base.OnCreate(bundle);
 
-            var rootView = Window.DecorView.RootView;
+            _view = Window.DecorView.RootView;
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel?.Appeared();
-            };
-
-            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             if (bundle == null)
 				HandleIntent(Intent);
@@ -89,6 +82,13 @@ namespace MvvmCross.Droid.Support.V4
 				RestoreViewModelsFromBundle(serializer, bundle);
 			}
 		}
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
+        }
 
 		protected override void OnNewIntent(Intent intent)
 		{
@@ -263,6 +263,14 @@ namespace MvvmCross.Droid.Support.V4
 			{
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.Clear();
 				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{

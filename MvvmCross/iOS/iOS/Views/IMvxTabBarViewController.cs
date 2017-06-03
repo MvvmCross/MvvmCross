@@ -11,5 +11,7 @@ namespace MvvmCross.iOS.Views
         bool ShowChildView(UIViewController viewController);
 
         bool CloseChildViewModel(IMvxViewModel viewModel);
+
+        bool CanShowChildView(UIViewController viewController);
     }
 }

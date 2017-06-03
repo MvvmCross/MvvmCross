@@ -1,4 +1,4 @@
-// MvxIosBindingBuilder.cs
+﻿// MvxIosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -45,12 +45,56 @@ namespace MvvmCross.Binding.iOS
             base.FillTargetFactories(registry);
 
             registry.RegisterCustomBindingFactory<UIControl>(
-                MvxIosPropertyBinding.UIControl_TouchUpInside,
-                view => new MvxUIControlTouchUpInsideTargetBinding(view));
+                MvxIosPropertyBinding.UIControl_TouchDown,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDown));
 
-            registry.RegisterCustomBindingFactory<UIControl>(
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchDownRepeat,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDownRepeat));
+            
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchDragInside,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDragInside));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchUpInside,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchUpInside));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_ValueChanged,
-                view => new MvxUIControlValueChangedTargetBinding(view));
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_ValueChanged));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_PrimaryActionTriggered,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_PrimaryActionTriggered));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidBegin,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidBegin));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingChanged,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingChanged));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidEnd,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEnd));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidEndOnExit,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEndOnExit));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllTouchEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllTouchEvents));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllEditingEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEditingEvents));
+            
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEvents));
 
             registry.RegisterCustomBindingFactory<UIView>(
                 MvxIosPropertyBinding.UIView_Visibility,
@@ -77,6 +121,11 @@ namespace MvvmCross.Binding.iOS
                 typeof(MvxUIStepperValueTargetBinding),
                 typeof(UIStepper),
                 MvxIosPropertyBinding.UIStepper_Value);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIPageControlCurrentPageTargetBinding),
+                typeof(UIPageControl),
+                MvxIosPropertyBinding.UIPageControl_CurrentPage);
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUISegmentedControlSelectedSegmentTargetBinding),

@@ -18,6 +18,8 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
     {
         public static readonly object LiteralNull = new object();
 
+        private static readonly char[] _operatorCharacters = { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^' };
+
         private List<char> _terminatingCharacters;
 
         protected override IEnumerable<char> TerminatingCharacters()
@@ -26,10 +28,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
                    (this._terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters()).ToList());
         }
 
-        private static char[] OperatorCharacters()
-        {
-            return new char[] { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%' };
-        }
+        private static char[] OperatorCharacters() => _operatorCharacters;
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
@@ -165,6 +164,16 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
                         combinerName = "Modulus";
                         moveFowards = 1;
                         break;
+
+					case '!':
+						combinerName = "Inverted";
+						moveFowards = 1;
+						break;
+
+					case '^':
+						combinerName = "XOr";
+						moveFowards = 1;
+						break;
                 }
             }
 

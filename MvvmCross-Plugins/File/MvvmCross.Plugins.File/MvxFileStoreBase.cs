@@ -1,4 +1,4 @@
-﻿// MvxFileStoreBase.cs
+﻿﻿// MvxFileStoreBase.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -122,6 +122,10 @@ namespace MvvmCross.Plugins.File
         public abstract string NativePath(string path);
 
 		public abstract bool TryCopy(string from, string to, bool overwrite);
+
+        public abstract long GetSize(string path);
+
+        public abstract DateTime GetLastWriteTimeUtc(string path);
 
         #endregion IMvxFileStore Members
 

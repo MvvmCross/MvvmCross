@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+
+    <!-- General colors -->
+    <color name="colorPrimary">#85E76E</color>
+    <color name="colorPrimaryDark">#6CBD5C</color>
+    <color name="colorAccent">#C2EF66</color>
+
+    <!-- White to Black -->
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#EFF2F5</color>
+    <color name="med_gray">#C7D2DC</color>
+    <color name="gray">#5C7082</color>
+    <color name="dark_gray">#FF2B343D</color>
+    <color name="black">#0D131A</color>
+    <color name="text_gray">#5A6570</color>
+</resources>

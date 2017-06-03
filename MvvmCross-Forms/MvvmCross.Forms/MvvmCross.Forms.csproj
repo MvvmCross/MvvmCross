@@ -42,7 +42,7 @@
     <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
     <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
     <Compile Include="Core\MvxContentPage.cs" />
-    <Compile Include="Core\MvxFormsApp.cs" />
+    <Compile Include="Core\MvxFormsApplication.cs" />
     <Compile Include="Presenters\MvxFormsMasterDetailPagePresenter.cs" />
     <Compile Include="Presenters\MvxFormsPageLoader.cs" />
     <Compile Include="Presenters\MvxFormsPagePresenter.cs" />

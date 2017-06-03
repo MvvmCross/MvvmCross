@@ -1,8 +1,9 @@
---
+---
 layout: documentation
 title: App lifecycle
 category: Fundamentals
 ---
+
 #ViewModel Creation
 
 In MvvmCross v3 - Hot Tuna - the default ViewModel location and construction was overhauled in order to provide 3 new features:
