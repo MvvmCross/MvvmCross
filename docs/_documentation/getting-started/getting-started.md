@@ -41,7 +41,7 @@ You can also install the templates for Visual Studio and Xamarin Studio:
 Name | Author | Link
 ---- | --------- | -------
 XabluCross for MvvmCross | XabluCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=XabluCross.XabluCrossVSPackage)
-MvvmCross for Visual Studio | Jim Bennet | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) - [Xamarin Studio](http://addins.monodevelop.com/Project/Index/227)
+MvvmCross for Visual Studio | Jim Bennett | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) - [Visual Studio for Mac](http://addins.monodevelop.com/Project/Index/227)
 MvvmCross Plugin Template for Visual Studio | EShy | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
 Xamarin MvvmCross Dreams | Artmdev | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
 Xamarin Forms with MvvmCross Solution Template | Cristian Chereches | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
