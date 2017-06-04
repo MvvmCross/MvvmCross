@@ -24,7 +24,7 @@ The `File` plugin provides cross-platform access to a File Store API:
 
 This plugin is implemented on all platforms - except WindowsStore where the `Folder` APIs are currently unimplemented.
 
-By defautlt, the plugin reads and writes files in paths relative to:
+By default, the plugin reads and writes files in paths relative to:
 
 - Android - `Context.FilesDir`
 - iOS - `Environment.SpecialFolder.MyDocuments`

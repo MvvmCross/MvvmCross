@@ -57,7 +57,7 @@ Add a reference to your `TipCalc.Core` project - the project we created in the l
 
 Every MvvmCross UI project requires a `Setup` class.
 
-This class sits in the root namespace (folder) of our UI project and performs the initialisation of the MvvmCross framework and your application, including:
+This class sits in the root namespace (folder) of our UI project and performs the initialization of the MvvmCross framework and your application, including:
 
 - The Inversion of Control (IoC) system
 - The MvvmCross data-binding

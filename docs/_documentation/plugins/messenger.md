@@ -55,7 +55,7 @@ var message = new LocationMessage(
 _messenger.Publish(message);
 ```
 
-- define the classes which will subscribe to and receive these messages. Each of these classes must call one of the `Subscribe` methods on the `IMvxMessenger` and **must store the returned token**. For example part of a ViewModel receivin `LocationMessage`s might look like:
+- define the classes which will subscribe to and receive these messages. Each of these classes must call one of the `Subscribe` methods on the `IMvxMessenger` and **must store the returned token**. For example part of a ViewModel receiving `LocationMessage`s might look like:
 
 ```c#
 public class LocationViewModel
@@ -82,7 +82,7 @@ The three different options for subscribing for messages differ only in terms of
 
 - `Subscribe` - messages will be passed directly on the `Publish` thread. These subscriptions have the lowest processing overhead - messages will always be received synchronously whenever they are published. You should use this type of subscription if you already know which type of thread the Publish will be called on and if you have a good understanding on the resource and UI usage of your message handler.
 - `SubscribeOnMainThread` - any message published on a background thread will be marshalled to the main UI thread.  This type of subscription is ideal if your message handler needs to perform some resource-unintensive task which involves interacting with the UI.
-- `SubscribeOnThreadPoolThread` - messages will always be queued for thread pool processing. This always involves an asynchonous post - even if the message is published on an existing ThreadPool thread. This type of subscription is ideal if your message handler needs to perform some resource-intensive task as it won't block the UI, nor the message publisher.
+- `SubscribeOnThreadPoolThread` - messages will always be queued for thread pool processing. This always involves an asynchronous post - even if the message is published on an existing ThreadPool thread. This type of subscription is ideal if your message handler needs to perform some resource-intensive task as it won't block the UI, nor the message publisher.
 
 All subscription methods have two additional parameters:
 

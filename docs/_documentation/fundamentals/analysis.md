@@ -47,7 +47,7 @@ class FirstView : MvxActivity<FirstViewModel> {
 
 ## Test class declaration
 
-- If your code contains only a Diagnostic, your test classe should inherit from
+- If your code contains only a Diagnostic, your test class should inherit from
 [`DiagnosticVerifier`].
 There is also a generic version, [`DiagnosticVerifier<T>`], where T should be your analyzer([`DiagnosticAnalyzer`]). The generic version is preferred because it already associate the test class with the Analyzer being tested.
 
@@ -55,7 +55,7 @@ There is also a generic version, [`DiagnosticVerifier<T>`], where T should be yo
 
 - Your test methods should be quite simple. Provide test cases (strings containing full sample code) for the Analyzer and call method `VerifyCSharpDiagnostic`. This method receives your sample code and a `DiagnosticResult` instance, which should specify where and which analyzer should be triggered for this sample code, including the message, the DiagnosticId, severity and possible locations (column/line).
 
-- If your Analyzer also contains a code fix, your test classe should inherit from
+- If your Analyzer also contains a code fix, your test class should inherit from
 [`CodeFixVerifier`]. This class inherits from [`DiagnosticVerifier`], and adds a few methods related to testing code fixes. There is also a generic version for this, [`CodeFixVerifier<T, TU>`], where T should inherit from [`DiagnosticAnalyzer`] and TU should inherit from [`CodeFixProvider`].
 
 - To test your code fix, you should add another test case that calls method [`VerifyCSharpFix`], passing the original source sample and another string containing the final result of how the code should look after the code fix executes. Remember about line endings and blank spaces. Tabs (	) are not spaces.
