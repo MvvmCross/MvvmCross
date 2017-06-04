@@ -40,7 +40,7 @@ When an MvvmCross app starts on a native project, then:
 
 - the native Application will 'be created' first
 - within the construction of the native Application, a `Setup` will be created
- - the `Setup` will perform very basic tasks - e.g. initialisation of the IoC system (see https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
+ - the `Setup` will perform very basic tasks - e.g. initialization of the IoC system (see https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
  - then the `Setup` will call into the core project, construct an `App` and will call `Initialize` on it.
  - during the `Initialize` your App will typically: 
     - register your app-specific services with the IoC system
@@ -324,7 +324,7 @@ start.Start();
 
 The Setup class is the bootstrapper for the MvvmCross system.
 
-This bootstrapper goes through a lot of steps, and almost all of these are `virtual` allowing you to customise MvvmCross. 
+This bootstrapper goes through a lot of steps, and almost all of these are `virtual` allowing you to customize MvvmCross. 
 
 Some key ones you should be aware of are:
 
@@ -443,7 +443,7 @@ Each View is normally databound to a single ViewModel for its entire lifetime.
 
 On each platform, Views in the Mvvm sense are typically implemented using data-bound versions of:
 
-- On Windows platforms a `UserControl` - for Uwp is very often specialised into a `Page`
+- On Windows platforms a `UserControl` - for Uwp is very often specialized into a `Page`
 - On Android, an `Activity` or `Fragment`
 - On iOS, a `UIViewController`
 

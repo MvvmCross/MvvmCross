@@ -71,7 +71,7 @@ This needs to be added to both the WindowsCommon.Windows and WindowsCommon.Windo
 
 Just as we said during the construction of the other UI projects, *Every MvvmCross UI project requires a `Setup` class*
 
-This class sits in the root namespace (folder) of our UI project and performs the initialisation of the MvvmCross framework and your application, including:
+This class sits in the root namespace (folder) of our UI project and performs the initialization of the MvvmCross framework and your application, including:
 
   * the Inversion of Control (IoC) system
   * the MvvmCross data-binding

@@ -368,7 +368,7 @@ If you want to replace the MvvmCross implementation, then you'll need to:
 - write some kind of `Adapter` layer to provide their service location code as an `IMvxIoCProvider`
 - override `CreateIocProvider` in your `Setup` class to provide this alternative `IMvxIoCProvider` implementation.
 
-Alternatively, you may be able to organise a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
+Alternatively, you may be able to organize a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
 
 ### What if... I want to use Property Injection as an IoC mechanism?
 

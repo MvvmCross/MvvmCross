@@ -57,7 +57,7 @@ InitializeInpcInterception();
 InitializeLastChance();
 ```
 
-Most of these steps are `virtual` - so they allow customisation. Also most of these steps are implemented using virtual `Create` steps - which again should make customisation easier:
+Most of these steps are `virtual` - so they allow customization. Also most of these steps are implemented using virtual `Create` steps - which again should make customization easier:
            
 ```c#
 protected virtual void InitialiseFoo()
@@ -72,7 +72,7 @@ protected virtual IFoo CreateFoo()
 }
 ```
 
-Added to these base class steps, each platform adds a small number of platform specific steps - eg Android adds some additional methods and properties for initialisation of the Android UI and especially of the data-binding framework:
+Added to these base class steps, each platform adds a small number of platform specific steps - eg Android adds some additional methods and properties for initialization of the Android UI and especially of the data-binding framework:
 
 ```c#
 string ExecutableNamespace {
@@ -114,13 +114,13 @@ However, **most applications actually override only very few of these methods**.
 
 If you do want to override some of the Setup, then the rest of this document describes some of the methods and properties that you may find useful.
 
-# Individual customisations
+# Individual customizations
 
-## Providing application specific initialisation
+## Providing application specific initialization
 
-There are three key methods where application specific initialisation might be added
+There are three key methods where application specific initialization might be added
 
-1. `App.Initialize` - this is the place where all cross-platform app initialisation should occur. In general it is the **first choice** for all app-specific initialization. Only use the `Setup`-based methods if you need platform-specific code injected
+1. `App.Initialize` - this is the place where all cross-platform app initialization should occur. In general it is the **first choice** for all app-specific initialization. Only use the `Setup`-based methods if you need platform-specific code injected
 
 1. `Setup.InitializeFirstChance` - a "first blood" placeholder for any steps you want to take before any of the later steps happen
 
@@ -227,7 +227,7 @@ This is done within the method `InitializeIoC`
 To override MvvmCross' IoC, you can:
 
 - first find your alternative IoC implementation - e.g. something like AutoFac, Funq or TinyIoC
-- then create an `Adapter` which maps the implementation behind an `IMvxIoCProvider` interface and which inhertis from `MvxSingleton<IMvxIoCProvider>` in order to provide a `Singleton`  
+- then create an `Adapter` which maps the implementation behind an `IMvxIoCProvider` interface and which inherits from `MvxSingleton<IMvxIoCProvider>` in order to provide a `Singleton`  
   - the majority of the adaption should be relatively straight-forwards - see `MvxSimpleIoCContainer` for how the default IoC container is provided.
   - The only *unusual* methods in the MvvmCross IoC interface are the `CallbackWhenRegistered` hooks - these provide callbacks when new object types are registered and may require a little custom code in the `RegisterXXX` methods within your adapter.
 - finally, you can override `IMvxIoCProvider CreateIocProvider()` in your `Setup` class to return your IoC provider

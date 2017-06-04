@@ -156,7 +156,7 @@ Further, MvvmCross provides some supporting base classes to help with writing va
 - `MvxValueConverter<TFrom>`
 - `MvxValueConverter<TFrom, TTo>`
 
-As an example, a `LengthValueConverter` which is only used to help display the lenght of a string - with no `ConvertBack` use - might be implemented:
+As an example, a `LengthValueConverter` which is only used to help display the length of a string - with no `ConvertBack` use - might be implemented:
 
 ```c#
 public class LengthValueConverter
@@ -268,7 +268,7 @@ As the MvvmCross binding format evolved from its JSON origins through to Swiss a
 
 The future of MvvmCross continues to aim to include cosmetic improvements, but also aims to deliver functional enhancements as well.
 
-The current ideads for improvements and enhancements include:
+The current ideas for improvements and enhancements include:
 
 - Tibet binding
   - multi-binding
@@ -361,7 +361,7 @@ Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
   
   - the `ToString()` representation of an Enum value.
   
-  This is especially useful in, for example, the binding of `Visibililty` properties.
+  This is especially useful in, for example, the binding of `Visibility` properties.
 
 - If a specific Binding Mode is needed, then this can be added:
 
@@ -818,7 +818,7 @@ Notes:
 - some ValueCombiners are also available in `operator` form - e.g. `Add` can be used as `+` and `GreaterThan` can be used as `>`
 - combination is an interpretation, not a compilation step - especially because dynamic code generation is not supported on all MvvmCross platforms.
 - for direct comparison/combination of simple `string`, `long` and `double` values, this 'interpretation' should work well. Using combiners for more complicated combinations is less well defined.
-- currenly ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
+- currently ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
 
 **Important note:** The current interface of value combiners is currently a proposal and working prototype only. As we learn more about the real use, benefits and challenges of value combination we may revise the API, including making breaking changes to any value combiners produced by the community. In particular, it's possible we may make changes to the type safety of the APIs, and we may try to reduce the complexity of the APIs - as Value Combiners are currently quite 'open' in the source/target types they accept and this makes developing them quite complicated.
 
@@ -852,7 +852,7 @@ Ideas being considered in this area include:
 
 - access to `parent`, `global` and `named(name)` binding contexts
 - access to shared variables - e.g, shared numbers, strings and Colors which could provide more theming/styling options
-- access to i18n resources to make text localisation more straight-forward
+- access to i18n resources to make text localization more straight-forward
 
 It is likely that that prefix characters, such as `$`, `#` or `@`, might be used as simple markers to enable the identification of these 'macros'
 
@@ -884,9 +884,9 @@ For example, Length and Trim value converters could be applied with the Add valu
 
 Tibet binding provides developers with many options for more advanced bindings.
 
-This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the exceution of the bindings.
+This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the execution of the bindings.
 
-In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimised combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
+In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimized combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
 
 ### Rio
 
@@ -919,7 +919,7 @@ and this is further enhanced using `ICommand` properties for action callbacks - 
 
 This syntax is well understood by experienced Mvvm developers, but can also appear quite verbose when dealing with very small view models.
 
-Some developers have worked around this verbosity by using techniques such as post-compilation injectio of code - e.g. using the AOP Property plugin from Fody.
+Some developers have worked around this verbosity by using techniques such as post-compilation injection of code - e.g. using the AOP Property plugin from Fody.
 
 Rio binding offers developers a different approach - using the new FieldBinding and MethodBinding plugins.
 
@@ -946,7 +946,7 @@ To use FieldBinding, import the Field binding plugin into both your `core` and y
 
 **Notes:** 
 
-- In addition to the syntatic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
+- In addition to the syntactic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
 - `INotifyChanged` binding has no way to support the `INotifyPropertyChanged` feature 'all changed' which is achieved by signalling a property change with a null or empty property name.
 - `INotifyChanged` itself is a very simple interface - so you can easily implement your own classes to implement this if you require extensions.
 
@@ -1021,7 +1021,7 @@ is equivalent to a `INotifyPropertyChanged` ViewModel of:
            }
         } 
         
-     	private double _precent;
+     	private double _percent;
         public double Percent
         {
            get { return _percent; }
@@ -1061,7 +1061,7 @@ is equivalent to a `INotifyPropertyChanged` ViewModel of:
      
 **BindingEx - Tibet and Rio in Xaml**
 
-Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customisation.
+Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customization.
 
 Unfortunately, this means MvvmCross can't intercept the 'normal' Xaml binding syntax which might look like:
 
@@ -1072,12 +1072,12 @@ However, MvvmCross Swiss, Tibet and Rio binding can be enabled through `Attached
 In particular two `AttachedProperties` is supplied in the BindingEx package:
 
 - `mvx:Bi.nd` - for bindings
-- `mvx:La.ng` - for internationalisation extensions
+- `mvx:La.ng` - for internationalization extensions
 
 To add these properties to your Windows Uwp or WPF MvvmCross app:
 
 - include the MvvmCross.Binding package
-- include an additional step in Setup which initialises the WindowsBinding framework
+- include an additional step in Setup which initializes the WindowsBinding framework
 
         protected override void InitializeLastChance()
         {
