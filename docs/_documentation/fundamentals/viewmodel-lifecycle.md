@@ -57,9 +57,9 @@ These changes were breaking changes for existing v1 and vNext apps, but provide 
 The default ViewModelLocator builds new ViewModel instances using a 4-step process - CIRS:
 
 1. `Construction` - using IoC for Dependency Injection
-2. `Init()` - initialisation of navigation parameters
+2. `Init()` - initialization of navigation parameters
 3. `ReloadState()` - rehydration after tombstoning
-4. `Start()` - called when initialisation and rehydration are complete
+4. `Start()` - called when initialization and rehydration are complete
 
 
 ### 1 Construction

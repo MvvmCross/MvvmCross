@@ -36,7 +36,7 @@ stream => {
 
 **Note:** Using this interface well on Android is very difficult.
 
-The reason for this is because of Android's Activity lifecyle. The Android lifecycle means that the image that may be returned to a different View and ViewModel than the one that requested it. This is partly because camera apps generally use a lot of RAM (raw camera images are large files) - so while th camera app is capturing you image, then Android may look to free up additional RAM by killing your app's Activity.
+The reason for this is because of Android's Activity lifecycle. The Android lifecycle means that the image that may be returned to a different View and ViewModel than the one that requested it. This is partly because camera apps generally use a lot of RAM (raw camera images are large files) - so while th camera app is capturing you image, then Android may look to free up additional RAM by killing your app's Activity.
 
 If you want to use this `IMvxPictureChooserTask` effectively and reliably on Android then you really need to call this API via a service class, to use Messaging to pass the returned message back to a ViewModel and to implement 'tombstoning' support for that ViewModel.
 
