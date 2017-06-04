@@ -12,6 +12,7 @@ using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Platform.Core;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,9 @@ namespace MvvmCross.Droid.Support.V4
     public abstract class MvxTabsFragmentActivity
         : MvxFragmentActivity
           , TabHost.IOnTabChangeListener
+          , ViewTreeObserver.IOnGlobalLayoutListener
     {
+
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();
@@ -87,16 +90,9 @@ namespace MvvmCross.Droid.Support.V4
 
             SetContentView(_layoutId);
 
-            var rootView = Window.DecorView.RootView;
+            _view = Window.DecorView.RootView;
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel?.Appeared();
-            };
-
-            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             InitializeTabHost(savedInstanceState);
 
@@ -104,6 +100,13 @@ namespace MvvmCross.Droid.Support.V4
             {
                 _tabHost.SetCurrentTabByTag(savedInstanceState.GetString(SavedTabIndexStateKey));
             }
+        }
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)

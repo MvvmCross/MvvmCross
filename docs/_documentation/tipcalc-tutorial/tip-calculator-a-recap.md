@@ -22,7 +22,7 @@ Just to recap what we did:
  * created a platform specific project
  * added some `MvvmCross` PCL libraries
  * added some `MvvmCross` platform specific libraries
- * added a `Setup` class which would initialise everything
+ * added a `Setup` class which would initialize everything
  * modified the platform-specific Application to call `Setup`
  * created a `Views` folder
  * added a platform specific `View`

@@ -99,7 +99,7 @@ public class KeyboardHandlingView
 }
 ```
 
-In order to enable the keyboard handing features you need to first call the initialising method during view initialisation, such as:
+In order to enable the keyboard handing features you need to first call the initializing method during view initialization, such as:
 
 ```c#
 public override void ViewDidLoad()
@@ -121,7 +121,7 @@ public override void ViewDidLoad()
 }
 ```
 
-In addition to calling this initialisation method you also need to override the following method and ensure that it returns true:
+In addition to calling this initialization method you also need to override the following method and ensure that it returns true:
 
 ```c#
 public override bool HandlesKeyboardNotifications()

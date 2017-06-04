@@ -8,6 +8,6 @@ permalink: /documentation/
 
 This documentation is the place to find everything you need to know about MvvmCross! Use the menu on the left side to navigate to different topics and use the search in the top menu to find specific items.
 
-We encourage and are open to receiving improvements, fixes and new documentation! You are very welcome to make a Pull Request to our [documentation](https://github.com/MvvmCross/MvvmCross/tree/master/docs). Please read the [guidelines on writing documentation]({{ "/documentation/contribute/mvvmcross-docs-style-guide/mvvmcross-docs-style-guide.html" | relative_url }}) before contributing.
+We encourage and are open to receiving improvements, fixes and new documentation! You are very welcome to make a Pull Request to our [documentation](https://github.com/MvvmCross/MvvmCross/tree/master/docs). Please read the [guidelines on writing documentation](https://www.mvvmcross.com/documentation/contribute/mvvmcross-docs-style-guide) before contributing.
 
-If you can't find what you are looking for or documentation is missing, please do not hesitate to find us through the options on the [support]({{ "/support" | relative_url }}) page and request it.
+If you can't find what you are looking for or documentation is missing, please do not hesitate to find us through the options on the [support](https://www.mvvmcross.com/support) page and request it.

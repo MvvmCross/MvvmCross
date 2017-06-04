@@ -368,7 +368,7 @@ If you want to replace the MvvmCross implementation, then you'll need to:
 - write some kind of `Adapter` layer to provide their service location code as an `IMvxIoCProvider`
 - override `CreateIocProvider` in your `Setup` class to provide this alternative `IMvxIoCProvider` implementation.
 
-Alternatively, you may be able to organise a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
+Alternatively, you may be able to organize a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
 
 ### What if... I want to use Property Injection as an IoC mechanism?
 
@@ -465,7 +465,7 @@ For example:
 
 At runtime, by default MvvmCross's Ioc will throw an `MvxIoCResolveException` from `Resolve` or return `false` from `TryResolve` if it detects recursion has occurred.
 
-Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242](Stack Overflow) - other stackoverflow Q&As may also help.
+Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [Stack Overflow](http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242) - other stackoverflow Q&As may also help.
 
 However, if you feel the MvvmCross detection is wrong - if your app has some behaviour which means it can survive the recursive dependency - then you can turn this detection off if you want to using the options - e.g:
 
