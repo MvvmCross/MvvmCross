@@ -12,11 +12,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="Playground.Mac" id="1Xt-HY-uBw">
+                            <menuItem title="Playground" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Playground.Mac" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Playground" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About Playground.Mac" id="5kV-Vb-QxS">
+                                        <menuItem title="About Playground" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -30,7 +30,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide Playground.Mac" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide Playground" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -48,7 +48,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit Playground.Mac" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit Playground" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -507,19 +507,22 @@
                                                                 <menuItem title="Paragraph" enabled="NO" id="ZvO-Gk-QUH">
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                 </menuItem>
-                                                                <menuItem title="    Default" id="YGs-j5-SAR">
+                                                                <menuItem id="YGs-j5-SAR">
+                                                                    <string key="title">	Default</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeBaseWritingDirectionNatural:" target="Ady-hI-5gd" id="qtV-5e-UBP"/>
                                                                     </connections>
                                                                 </menuItem>
-                                                                <menuItem title="    Left to Right" id="Lbh-J2-qVU">
+                                                                <menuItem id="Lbh-J2-qVU">
+                                                                    <string key="title">	Left to Right</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeBaseWritingDirectionLeftToRight:" target="Ady-hI-5gd" id="S0X-9S-QSf"/>
                                                                     </connections>
                                                                 </menuItem>
-                                                                <menuItem title="    Right to Left" id="jFq-tB-4Kx">
+                                                                <menuItem id="jFq-tB-4Kx">
+                                                                    <string key="title">	Right to Left</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeBaseWritingDirectionRightToLeft:" target="Ady-hI-5gd" id="5fk-qB-AqJ"/>
@@ -529,19 +532,22 @@
                                                                 <menuItem title="Selection" enabled="NO" id="cqv-fj-IhA">
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                 </menuItem>
-                                                                <menuItem title="    Default" id="Nop-cj-93Q">
+                                                                <menuItem id="Nop-cj-93Q">
+                                                                    <string key="title">	Default</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeTextWritingDirectionNatural:" target="Ady-hI-5gd" id="lPI-Se-ZHp"/>
                                                                     </connections>
                                                                 </menuItem>
-                                                                <menuItem title="    Left to Right" id="BgM-ve-c93">
+                                                                <menuItem id="BgM-ve-c93">
+                                                                    <string key="title">	Left to Right</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeTextWritingDirectionLeftToRight:" target="Ady-hI-5gd" id="caW-Bv-w94"/>
                                                                     </connections>
                                                                 </menuItem>
-                                                                <menuItem title="    Right to Left" id="RB4-Sm-HuC">
+                                                                <menuItem id="RB4-Sm-HuC">
+                                                                    <string key="title">	Right to Left</string>
                                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                                     <connections>
                                                                         <action selector="makeTextWritingDirectionRightToLeft:" target="Ady-hI-5gd" id="EXD-6r-ZUu"/>
@@ -623,7 +629,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="Playground.Mac Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Playground Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -642,18 +648,86 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Root View-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="RootViewController" id="XfG-lQ-9wD" customClass="RootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootView" id="XfG-lQ-9wD" customClass="RootView" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button identifier="btnChild" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A7y-RT-j0l">
+                                <rect key="frame" x="199" y="211" width="82" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Child" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y7p-kR-fhH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pp2-5e-UKm">
+                                <rect key="frame" x="196" y="167" width="88" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Modal" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ohg-1D-Bzx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="A7y-RT-j0l" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="35" id="CSc-bR-V00"/>
+                            <constraint firstItem="Pp2-5e-UKm" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RAQ-Tc-6lp"/>
+                            <constraint firstItem="Pp2-5e-UKm" firstAttribute="top" secondItem="A7y-RT-j0l" secondAttribute="bottom" constant="22" id="XCv-1O-CuB"/>
+                            <constraint firstItem="A7y-RT-j0l" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="wo8-vj-7zG"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnChild" destination="A7y-RT-j0l" id="2pW-Li-iRf"/>
+                        <outlet property="btnModal" destination="Pp2-5e-UKm" id="aAo-zO-a8a"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--Child View-->
+        <scene sceneID="Z0v-PO-st2">
+            <objects>
+                <viewController storyboardIdentifier="ChildView" id="XJh-27-4Lv" customClass="ChildView" sceneMemberID="viewController">
+                    <view key="view" id="afr-C4-q2A">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="ugq-Dx-PnQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="582" y="655"/>
+        </scene>
+        <!--Modal View-->
+        <scene sceneID="ik4-UT-QLY">
+            <objects>
+                <viewController storyboardIdentifier="ModalView" id="DEe-hv-UVc" customClass="ModalView" sceneMemberID="viewController">
+                    <view key="view" id="Aog-BB-PLY">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PaN-q6-rvY">
+                                <rect key="frame" x="201" y="237" width="49" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Hz-nO-LI3">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PaN-q6-rvY" firstAttribute="centerX" secondItem="Aog-BB-PLY" secondAttribute="centerX" id="Qam-tn-E9k"/>
+                            <constraint firstItem="PaN-q6-rvY" firstAttribute="top" secondItem="Aog-BB-PLY" secondAttribute="top" constant="39" id="hUD-KK-MzM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="5Hz-nO-LI3" id="9UD-fV-5Dz"/>
+                    </connections>
+                </viewController>
+                <customObject id="rc2-zc-6u6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069" y="654"/>
         </scene>
     </scenes>
 </document>

@@ -17,7 +17,6 @@ namespace MvvmCross.Mac.Views
         }
 
         // Called when created directly from a XIB file
-        [Export("initWithCoder:")]
         public MvxViewController(NSCoder coder) : base(coder)
         {
             Initialize();
@@ -78,6 +77,10 @@ namespace MvvmCross.Mac.Views
 
         protected MvxViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
+        {
+        }
+
+        public MvxViewController(NSCoder coder) : base(coder)
         {
         }
 

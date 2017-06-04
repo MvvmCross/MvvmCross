@@ -24,7 +24,7 @@ namespace MvvmCross.Mac.Views.Presenters
         : MvxBaseMacViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
-        private NSWindow _window, _presentedModal, _presentedSheet;
+        private NSWindow _window, _presentedSheet;
         protected Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
@@ -122,17 +122,15 @@ namespace MvvmCross.Mac.Views.Presenters
             MvxChildPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // If NSApplication.MainWindow is null, then we are properbly starting the app, and should select the Window we got on creation time
-            var currentWindow = NSApplication.SharedApplication.MainWindow ?? Window;
-
             // Setting Title, if available
             if (!string.IsNullOrEmpty(viewController.Title))
             {
-                currentWindow.Title = viewController.Title;
+                Window.Title = viewController.Title;
             }
 
             // Setting current content view to window
-            currentWindow.ContentView = viewController.View;
+            Window.ContentView = viewController.View;
+            Window.ContentViewController = viewController;
         }
 
         protected virtual void ShowModalViewController(
@@ -140,24 +138,7 @@ namespace MvvmCross.Mac.Views.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            if (_presentedModal != null)
-            {
-                throw new MvxException("Only one modal at a time is allowed!");
-            }
-
-            // The Window we will present the Modal as
-            _presentedModal = new NSWindow(this.GetRectForWindowWithViewController(viewController, attribute), NSWindowStyle.Titled, NSBackingStore.Buffered, false, NSScreen.MainScreen);
-
-            // Setting Title if Window, if available
-            if (!string.IsNullOrEmpty(viewController.Title))
-            {
-                _presentedModal.Title = viewController.Title;
-            }
-
-            _presentedModal.ContentView = viewController.View;
-
-            // Present the new modal Window with NSApplication
-            NSApplication.SharedApplication.RunModalForWindow(_presentedModal);
+            _window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
         }
 
         protected virtual void ShowSheetViewController(
@@ -226,15 +207,17 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void Close(IMvxViewModel toClose)
         {
-            if (_presentedModal != null)
+            if (Window.ContentViewController.PresentedViewControllers.Any())
             {
-                // We should close the Modal
+                var modal = Window.ContentViewController.PresentedViewControllers
+                                  .Select(v => v as MvxViewController)
+                                  .FirstOrDefault(v => v.ViewModel == toClose);
 
-                NSApplication.SharedApplication.StopModal();
-
-                _presentedModal.Close();
-                _presentedModal = null;
-
+                if (modal != null)
+                {
+                    Window.ContentViewController.DismissViewController(modal);
+                    return;
+                }
             }
             else if (_presentedSheet != null)
             {

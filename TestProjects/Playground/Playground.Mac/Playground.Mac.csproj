@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DB27E09A-2088-4B31-9BFB-7EDB01BEE745}</ProjectGuid>
+    <ProjectGuid>{1B6539CF-6CE4-4421-93AD-68452B070BC3}</ProjectGuid>
     <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>Playground.Mac</RootNamespace>
-    <AssemblyName>Playground.Mac</AssemblyName>
+    <AssemblyName>Playground</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
@@ -28,7 +28,6 @@
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
     <HttpClientHandler></HttpClientHandler>
-    <TlsProvider></TlsProvider>
     <LinkMode></LinkMode>
     <XamMacArch></XamMacArch>
   </PropertyGroup>
@@ -47,7 +46,6 @@
     <UseRefCounting>true</UseRefCounting>
     <LinkMode>SdkOnly</LinkMode>
     <HttpClientHandler></HttpClientHandler>
-    <TlsProvider></TlsProvider>
     <XamMacArch></XamMacArch>
   </PropertyGroup>
   <ItemGroup>
@@ -78,32 +76,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
     <Compile Include="ViewController.cs" />
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="RootViewController.cs" />
-    <Compile Include="RootViewController.designer.cs">
-      <DependentUpon>RootViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="ChildView.cs" />
+    <Compile Include="ChildView.designer.cs">
+      <DependentUpon>ChildView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RootView.cs" />
+    <Compile Include="RootView.designer.cs">
+      <DependentUpon>RootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModalView.cs" />
+    <Compile Include="ModalView.designer.cs">
+      <DependentUpon>ModalView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
-      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
-      <Name>MvvmCross.Binding</Name>
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
+      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
+      <Name>MvvmCross.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Binding\Mac\MvvmCross.Binding.Mac.csproj">
       <Project>{F089E103-7F5D-4000-A4B0-B1D9F37594D9}</Project>
       <Name>MvvmCross.Binding.Mac</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross.Core</Name>
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
+      <Name>MvvmCross.Binding</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Mac\Mac\MvvmCross.Mac.csproj">
       <Project>{682DF427-C955-4815-BFB8-7AD8066DBB0C}</Project>

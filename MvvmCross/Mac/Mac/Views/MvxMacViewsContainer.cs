@@ -19,7 +19,7 @@ namespace MvvmCross.Mac.Views
             {
                 this.CurrentRequest = request;
                 var viewType = this.GetViewType(request.ViewModelType);
-                if(viewType == null)
+                if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
                 var view = this.CreateViewOfType(viewType, request);
@@ -35,7 +35,7 @@ namespace MvvmCross.Mac.Views
         protected virtual IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
-            if(storyboardAttribute != null)
+            if (storyboardAttribute != null)
             {
                 var storyboardName = storyboardAttribute.StoryboardName ?? viewType.Name;
                 try
@@ -44,14 +44,14 @@ namespace MvvmCross.Mac.Views
                     var viewController = storyboard.InstantiateControllerWithIdentifier(viewType.Name);
                     return (IMvxMacView)viewController;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new MvxException("Loading view of type {0} from storyboard {1} failed: {2}", viewType.Name, storyboardName, ex.Message);
                 }
             }
 
             var view = Activator.CreateInstance(viewType) as IMvxMacView;
-            if(view == null)
+            if (view == null)
                 throw new MvxException("View not loaded for " + viewType);
             return view;
         }
