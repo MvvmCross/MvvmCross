@@ -5,7 +5,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Mac
 {
-    [MvxWindowPresentation]
+    [MvxWindowPresentation(PositionX = 150)]
     public class TabsRootView : MvxTabViewController<TabsRootViewModel>
     {
         private bool _firstTime = true;

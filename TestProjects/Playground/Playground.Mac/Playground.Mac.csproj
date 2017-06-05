@@ -104,6 +104,7 @@
       <DependentUpon>Tab1View.cs</DependentUpon>
     </Compile>
     <Compile Include="Tab2View.cs" />
+    <Compile Include="Tab3View.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
