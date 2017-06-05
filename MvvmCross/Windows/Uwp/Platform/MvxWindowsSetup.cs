@@ -1,4 +1,4 @@
-// MvxStoreSetup.cs
+﻿// MvxStoreSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -19,6 +19,7 @@ namespace MvvmCross.Uwp.Platform
     using MvvmCross.Platform.Plugins;
     using MvvmCross.Uwp.Views;
     using MvvmCross.Uwp.Views.Suspension;
+    using MvvmCross.Platform.Exceptions;
 
     public abstract class MvxWindowsSetup
         : MvxSetup
@@ -69,7 +70,13 @@ namespace MvvmCross.Uwp.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            return this.CreateStoreViewsContainer();
+            var container = this.CreateStoreViewsContainer();
+            Mvx.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
+            Mvx.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
+            var viewsContainer = container as MvxViewsContainer;
+            if (viewsContainer == null)
+                throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
+            return container;
         }
 
         protected virtual IMvxStoreViewsContainer CreateStoreViewsContainer()
@@ -80,6 +87,13 @@ namespace MvvmCross.Uwp.Platform
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
             return this.CreateViewDispatcher(this._rootFrame);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
+
+            base.InitializeLastChance();
         }
 
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)

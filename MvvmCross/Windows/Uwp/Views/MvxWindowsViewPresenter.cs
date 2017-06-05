@@ -1,4 +1,4 @@
-// MvxStoreViewPresenter.cs
+﻿// MvxStoreViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -29,11 +29,18 @@ namespace MvvmCross.Uwp.Views
         {
             try
             {
-                var requestTranslator = Mvx.Resolve<IMvxViewsContainer>();
-                var viewType = requestTranslator.GetViewType(request.ViewModelType);
-
-                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-                var requestText = converter.Serializer.SerializeObject(request);
+                var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                string requestText = string.Empty;
+                if (request is MvxViewModelInstanceRequest)
+                {
+                    requestText = requestTranslator.GetRequestTextWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                }
+                else
+                {
+                    requestText = requestTranslator.GetRequestTextFor(request);
+                }
+                var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
                 this._rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
             }
