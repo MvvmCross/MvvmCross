@@ -11,6 +11,8 @@ namespace MvvmCross.Uwp.Views
 
     public interface IMvxStoreViewsContainer
         : IMvxViewsContainer
+            , IMvxWindowsViewModelLoader
+            , IMvxWindowsViewModelRequestTranslator
     {        
     }
 }
