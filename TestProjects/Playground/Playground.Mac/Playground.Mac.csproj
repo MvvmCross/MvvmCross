@@ -94,6 +94,14 @@
     <Compile Include="ModalView.designer.cs">
       <DependentUpon>ModalView.cs</DependentUpon>
     </Compile>
+    <Compile Include="SheetView.cs" />
+    <Compile Include="SheetView.designer.cs">
+      <DependentUpon>SheetView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowView.cs" />
+    <Compile Include="WindowView.designer.cs">
+      <DependentUpon>WindowView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

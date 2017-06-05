@@ -670,17 +670,37 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KoN-aA-DJE">
+                                <rect key="frame" x="197" y="122" width="86" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Sheet" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Si5-fQ-NyB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FRn-TF-Pqx">
+                                <rect key="frame" x="191" y="70" width="100" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Window" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vp8-Is-gGN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="A7y-RT-j0l" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="35" id="CSc-bR-V00"/>
+                            <constraint firstItem="KoN-aA-DJE" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="PQT-u2-Ass"/>
                             <constraint firstItem="Pp2-5e-UKm" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RAQ-Tc-6lp"/>
                             <constraint firstItem="Pp2-5e-UKm" firstAttribute="top" secondItem="A7y-RT-j0l" secondAttribute="bottom" constant="22" id="XCv-1O-CuB"/>
+                            <constraint firstItem="KoN-aA-DJE" firstAttribute="top" secondItem="Pp2-5e-UKm" secondAttribute="bottom" constant="23" id="mhw-Zs-7Yi"/>
+                            <constraint firstItem="FRn-TF-Pqx" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="qW5-hA-ZJf"/>
+                            <constraint firstItem="FRn-TF-Pqx" firstAttribute="top" secondItem="KoN-aA-DJE" secondAttribute="bottom" constant="30" id="rxI-CG-wuJ"/>
                             <constraint firstItem="A7y-RT-j0l" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="wo8-vj-7zG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnChild" destination="A7y-RT-j0l" id="2pW-Li-iRf"/>
                         <outlet property="btnModal" destination="Pp2-5e-UKm" id="aAo-zO-a8a"/>
+                        <outlet property="btnSheet" destination="Si5-fQ-NyB" id="SN3-Sa-y43"/>
+                        <outlet property="btnWindow" destination="FRn-TF-Pqx" id="sQa-Pe-2KW"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -728,6 +748,64 @@
                 <customObject id="rc2-zc-6u6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1069" y="654"/>
+        </scene>
+        <!--Sheet View-->
+        <scene sceneID="gYd-JH-RYY">
+            <objects>
+                <viewController storyboardIdentifier="SheetView" id="LCe-d9-5iK" customClass="SheetView" sceneMemberID="viewController">
+                    <view key="view" id="FtD-vF-sTN">
+                        <rect key="frame" x="0.0" y="0.0" width="351" height="153"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IAs-Fj-mjz">
+                                <rect key="frame" x="151" y="102" width="49" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ODC-74-gSj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="IAs-Fj-mjz" firstAttribute="top" secondItem="FtD-vF-sTN" secondAttribute="top" constant="27" id="X03-7K-C5t"/>
+                            <constraint firstItem="IAs-Fj-mjz" firstAttribute="centerX" secondItem="FtD-vF-sTN" secondAttribute="centerX" id="dd2-U2-fhJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="IAs-Fj-mjz" id="A8b-0C-Dju"/>
+                    </connections>
+                </viewController>
+                <customObject id="dLk-Mx-bQe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1604.5" y="604.5"/>
+        </scene>
+        <!--Window View-->
+        <scene sceneID="MSk-LR-Sca">
+            <objects>
+                <viewController storyboardIdentifier="WindowView" id="PzN-G3-3XB" customClass="WindowView" sceneMemberID="viewController">
+                    <view key="view" id="ClK-dt-tz9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgj-jA-EPB">
+                                <rect key="frame" x="201" y="239" width="49" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NjJ-xC-hcH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Xgj-jA-EPB" firstAttribute="centerX" secondItem="ClK-dt-tz9" secondAttribute="centerX" id="c5y-il-8mP"/>
+                            <constraint firstItem="Xgj-jA-EPB" firstAttribute="top" secondItem="ClK-dt-tz9" secondAttribute="top" constant="37" id="lZc-Ra-2Wm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="Xgj-jA-EPB" id="WzW-DS-n2d"/>
+                    </connections>
+                </viewController>
+                <customObject id="B6D-ze-eLx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2109" y="660"/>
         </scene>
     </scenes>
 </document>

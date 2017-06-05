@@ -12,7 +12,7 @@ using MvvmCross.Binding.BindingContext;
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
-    [MvxChildPresentation]
+    [MvxWindowPresentation]
     public partial class RootView : MvxViewController<RootViewModel>
     {
         public bool MyValue { get; set; } = true;
@@ -34,6 +34,8 @@ namespace Playground.Mac
             var set = this.CreateBindingSet<RootView, RootViewModel>();
             set.Bind(btnChild).To(vm => vm.ShowChildCommand);
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
+            set.Bind(btnSheet).To(vm => vm.ShowSheetCommand);
+            set.Bind(btnWindow).To(vm => vm.ShowWindowCommand);
             set.Apply();
         }
     }
