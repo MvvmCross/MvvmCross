@@ -1,4 +1,4 @@
-// MvxSetup.cs
+﻿// MvxSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -96,6 +96,8 @@ namespace MvvmCross.Core.Platform
             this.InitializeNavigationSerializer();
             MvxTrace.Trace("Setup: InpcInterception start");
             this.InitializeInpcInterception();
+            MvxTrace.Trace("Setup: InpcInterception start");
+            this.InitializeViewModelCache();
             MvxTrace.Trace("Setup: LastChance start");
             this.InitializeLastChance();
             MvxTrace.Trace("Setup: Secondary end");
@@ -115,6 +117,11 @@ namespace MvvmCross.Core.Platform
         protected virtual void InitializeInpcInterception()
         {
             // by default no Inpc calls are intercepted
+        }
+
+        protected virtual void InitializeViewModelCache()
+        {
+            Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
         }
 
         protected virtual void InitializeSettings()

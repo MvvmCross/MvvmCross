@@ -49,6 +49,8 @@
     <Compile Include="Views\IMvxStoreViewsContainer.cs" />
     <Compile Include="Views\IMvxWindowsFrame.cs" />
     <Compile Include="Views\IMvxWindowsView.cs" />
+    <Compile Include="Views\IMvxWindowsViewModelLoader.cs" />
+    <Compile Include="Views\IMvxWindowsViewModelRequestTranslator.cs" />
     <Compile Include="Views\IMvxWindowsViewPresenter.cs" />
     <Compile Include="Views\MvxRegionAttribute.cs" />
     <Compile Include="Views\MvxWindowsExtensionMethods.cs" />

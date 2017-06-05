@@ -84,10 +84,8 @@ namespace MvvmCross.Uwp.Views
             base.OnNavigatedTo(e);
 
             var reqData = (string)e.Parameter;
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
 
-            this.OnViewCreate(req, () => LoadStateBundle(e));
+            this.OnViewCreate(reqData, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
