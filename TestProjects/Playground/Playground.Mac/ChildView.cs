@@ -12,7 +12,7 @@ using MvvmCross.Binding.BindingContext;
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
-    [MvxChildPresentation]
+    [MvxContentPresentation]
     public partial class ChildView : MvxViewController<ChildViewModel>
     {
         public ChildView(IntPtr handle) : base(handle)

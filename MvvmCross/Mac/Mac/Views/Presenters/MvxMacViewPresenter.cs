@@ -45,8 +45,8 @@ namespace MvvmCross.Mac.Views.Presenters
                 (vc, attribute, request) => ShowWindowViewController(vc, (MvxWindowPresentationAttribute)attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
-                typeof(MvxChildPresentationAttribute),
-                (vc, attribute, request) => ShowChildViewController(vc, (MvxChildPresentationAttribute)attribute, request));
+                typeof(MvxContentPresentationAttribute),
+                (vc, attribute, request) => ShowChildViewController(vc, (MvxContentPresentationAttribute)attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
@@ -117,7 +117,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         protected virtual void ShowChildViewController(
             NSViewController viewController,
-            MvxChildPresentationAttribute attribute,
+            MvxContentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();

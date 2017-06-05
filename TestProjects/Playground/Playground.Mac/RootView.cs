@@ -45,7 +45,7 @@ namespace Playground.Mac
             if (!NSApplication.SharedApplication.Windows.Any())
                 return null;
 
-            return new MvxChildPresentationAttribute
+            return new MvxContentPresentationAttribute
             {
                 WindowIdentifier = "RootView"
             };
