@@ -47,7 +47,7 @@ namespace Playground.Mac
 
             return new MvxContentPresentationAttribute
             {
-                WindowIdentifier = "RootView"
+                WindowIdentifier = typeof(RootView).Name
             };
         }
     }

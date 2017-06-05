@@ -17,6 +17,7 @@ namespace Playground.Mac
     {
         public SheetView(IntPtr handle) : base(handle)
         {
+            Title = "Sheet view";
         }
 
         public override void ViewDidLoad()

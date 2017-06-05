@@ -17,6 +17,7 @@ namespace Playground.Mac
     {
         public WindowView(IntPtr handle) : base(handle)
         {
+            Title = "Window view";
         }
 
         public override void ViewDidLoad()

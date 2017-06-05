@@ -46,7 +46,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxContentPresentationAttribute),
-                (vc, attribute, request) => ShowChildViewController(vc, (MvxContentPresentationAttribute)attribute, request));
+                (vc, attribute, request) => ShowContentViewController(vc, (MvxContentPresentationAttribute)attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
@@ -115,7 +115,7 @@ namespace MvvmCross.Mac.Views.Presenters
             windowController.ShowWindow(null);
         }
 
-        protected virtual void ShowChildViewController(
+        protected virtual void ShowContentViewController(
             NSViewController viewController,
             MvxContentPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -125,7 +125,6 @@ namespace MvvmCross.Mac.Views.Presenters
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
 
-            // Setting current content view to window
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
         }
