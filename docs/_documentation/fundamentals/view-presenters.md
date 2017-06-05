@@ -54,50 +54,53 @@ To add your own `MvxPresentationHint` you should follow these steps:
 
 1. Create a MvxPresentationHint subclass:
 
-        public class MyCustomHint : MvxPresentationHint
+    ```c#
+    public class MyCustomHint : MvxPresentationHint
+    {
+        public string ImportantInformation { get; set; }
+
+        public MyCustomHint(string importantInformation)
         {
-            public string ImportantInformation { get; set; }
-        
-            public MyCustomHint(string importantInformation)
-            {
-                ImportantInformation = importantInformation;
-            }
+            ImportantInformation = importantInformation;
         }
+    }
+    ```
 
 2. Override the method `CreatePresenter()` in the Setup class and register your custom hint in it. For example, on iOS:
-
-        protected override IMvxIosViewPresenter CreatePresenter()
-        {
-            var presenter = base.CreatePresenter();
-            presenter.AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
-            return presenter;
-        }
+    ```c#
+    protected override IMvxIosViewPresenter CreatePresenter()
+    {
+        var presenter = base.CreatePresenter();
+        presenter.AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
+        return presenter;
+    }
+    ```
 
 3. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
+    ```c#
+    private bool HandleMyCustomHint(MyCustomHint hint)
+    {
+        bool result;
 
-        private bool HandleMyCustomHint(MyCustomHint hint)
-        {
-            bool result;
-        
-            if(hint.ImportantInformation != null)
-            // your code
-        
-            return result;
-        }
+        if(hint.ImportantInformation != null)
+        // your code
 
-
-**Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
+        return result;
+    }
+    ```
+    **Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
 
 4. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
+    ```c#
+    private void AMethod()
+    {
+        // your code
 
-        private void AMethod()
-        {
-            // your code
-        
-            ChangePresentation(new MyCustomHint("example"));
-        
-            // your code
-        }
+        ChangePresentation(new MyCustomHint("example"));
+
+        // your code
+    }
+    ```
 
 Ready!
 
