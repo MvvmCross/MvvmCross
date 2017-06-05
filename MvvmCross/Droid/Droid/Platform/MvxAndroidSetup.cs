@@ -1,4 +1,4 @@
-// MvxAndroidSetup.cs
+﻿// MvxAndroidSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -132,7 +132,6 @@ namespace MvvmCross.Droid.Platform
         {
             this.InitializeSavedStateConverter();
 
-            Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
             this.InitializeBindingBuilder();
             base.InitializeLastChance();
         }

@@ -7,6 +7,5 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <!--<TextBox TextWrapping="Wrap" Text="Second View" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>-->
-    <TextBox FontSize="24" Text="Second View" />
+    <TextBox TextWrapping="Wrap" Text="Second View" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
 </views:MvxWindowsPage>
