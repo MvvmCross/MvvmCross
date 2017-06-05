@@ -187,6 +187,14 @@ namespace MvvmCross.Mac.Views.Presenters
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(NSViewController viewController)
         {
+            if (viewController is IMvxOverridePresentationAttribute vc)
+            {
+                var presentationAttribute = vc.PresentationAttribute();
+
+                if (presentationAttribute != null)
+                    return presentationAttribute;
+            }
+
             var attributes = viewController.GetType().GetCustomAttribute<MvxBasePresentationAttribute>();
             if (attributes != null)
             {
