@@ -12,9 +12,15 @@ namespace Playground.Mac
 	[Register ("ChildView")]
 	partial class ChildView
 	{
+		[Outlet]
+		AppKit.NSButtonCell btnRoot { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnRoot != null) {
+				btnRoot.Dispose ();
+				btnRoot = null;
+			}
 		}
 	}
 }

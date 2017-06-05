@@ -8,12 +8,13 @@ using MvvmCross.Mac.Views;
 using MvvmCross.Mac.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using System.Linq;
 
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
     [MvxWindowPresentation]
-    public partial class RootView : MvxViewController<RootViewModel>
+    public partial class RootView : MvxViewController<RootViewModel>, IMvxOverridePresentationAttribute
     {
         public bool MyValue { get; set; } = true;
 
@@ -37,6 +38,17 @@ namespace Playground.Mac
             set.Bind(btnSheet).To(vm => vm.ShowSheetCommand);
             set.Bind(btnWindow).To(vm => vm.ShowWindowCommand);
             set.Apply();
+        }
+
+        public MvxBasePresentationAttribute PresentationAttribute()
+        {
+            if (!NSApplication.SharedApplication.Windows.Any())
+                return null;
+
+            return new MvxChildPresentationAttribute
+            {
+                WindowIdentifier = "RootView"
+            };
         }
     }
 }

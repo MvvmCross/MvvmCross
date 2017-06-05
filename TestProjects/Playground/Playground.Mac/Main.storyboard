@@ -714,7 +714,23 @@
                     <view key="view" id="afr-C4-q2A">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-AF-hal">
+                                <rect key="frame" x="186" y="240" width="79" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Root" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D4g-8l-1Jo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PE1-AF-hal" firstAttribute="top" secondItem="afr-C4-q2A" secondAttribute="top" constant="36" id="fUy-lV-K5q"/>
+                            <constraint firstItem="PE1-AF-hal" firstAttribute="centerX" secondItem="afr-C4-q2A" secondAttribute="centerX" id="gmf-YS-AtF"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnRoot" destination="D4g-8l-1Jo" id="Jmc-Is-eUc"/>
+                    </connections>
                 </viewController>
                 <customObject id="ugq-Dx-PnQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

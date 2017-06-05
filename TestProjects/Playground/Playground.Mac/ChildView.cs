@@ -7,6 +7,7 @@ using AppKit;
 using MvvmCross.Mac.Views;
 using Playground.Core.ViewModels;
 using MvvmCross.Mac.Views.Presenters.Attributes;
+using MvvmCross.Binding.BindingContext;
 
 namespace Playground.Mac
 {
@@ -17,6 +18,15 @@ namespace Playground.Mac
         public ChildView(IntPtr handle) : base(handle)
         {
             Title = "Child view";
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            var set = this.CreateBindingSet<ChildView, ChildViewModel>();
+            set.Bind(btnRoot).To(vm => vm.ShowRootCommand);
+            set.Apply();
         }
     }
 }
