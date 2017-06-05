@@ -28,8 +28,8 @@ namespace MvvmCross.Mac.Platform
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
-            var handler = this.LifetimeChanged;
-            if(handler != null)
+            var handler = LifetimeChanged;
+            if (handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
         }
 

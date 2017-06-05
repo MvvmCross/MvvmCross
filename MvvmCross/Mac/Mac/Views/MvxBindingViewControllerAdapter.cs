@@ -6,9 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Platform.Platform;
+
+using MvvmCross.Platform.Mac.Views;
 
 namespace MvvmCross.Mac.Views
 {
@@ -33,7 +35,7 @@ namespace MvvmCross.Mac.Views
             if (MacView == null)
             {
                 MvxTrace.Warning("MacView is null for clearup of bindings in type {0}",
-                               MacView.GetType().Name);
+                               this.MacView.GetType().Name);
                 return;
             }
             MacView.ClearAllBindings();

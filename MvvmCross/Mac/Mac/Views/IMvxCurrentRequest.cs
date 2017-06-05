@@ -4,6 +4,7 @@
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+using MvvmCross.Core.ViewModels;
 
 using MvvmCross.Core.ViewModels;
 
