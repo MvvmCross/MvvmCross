@@ -4,7 +4,7 @@ title: App lifecycle
 category: Fundamentals
 ---
 
-#ViewModel Creation
+# ViewModel Creation
 
 In MvvmCross v3 - Hot Tuna - the default ViewModel location and construction was overhauled in order to provide 3 new features:
 
@@ -24,7 +24,7 @@ The default ViewModelLocator in v3 builds new ViewModel instances using a 4-step
 4. `Start()` - called when initialization and rehydration are complete
 
 
-###1 Construction
+### 1. Construction
 
 In MvvmCross, you can navigate to a `ViewModel` using parameter like:
 
@@ -75,7 +75,7 @@ public class DetailViewModel : MvxViewModel
 ```
 
 
-###2. Init()
+### 2. Init()
 
 Now that the construction is used for Dependency Injection, the navigation parameters move to a new method - `Init()`
 
@@ -198,7 +198,7 @@ public class DetailViewModel : MvxViewModel
 }
 ```
 
-##3. ReloadState
+### 3. ReloadState
 
 If the `View`/`ViewModel` is recovering from a Tombstoned state, then `ReloadState` will be called with the data needed for rehydration.
 
@@ -238,7 +238,7 @@ public class DetailViewModel : MvxViewModel
 }
 ```
 
-###Aside: where does the SavedState come from?
+### Aside: where does the SavedState come from?
 
 One of the new ViewModel APIs available in Hot Tuna is a SaveState pattern.
 
@@ -296,7 +296,7 @@ public class DetailViewModel : MvxViewModel
 }
 ```
 
-##4. Start()
+### 4. Start()
 
 After all of `Construction`, `Init`, and `ReloadState` is complete, then the `Start()` method will be called.
 
@@ -398,11 +398,11 @@ public class DetailViewModel : MvxViewModel
 }
 ```
 
-##Overriding CIRS.
+## Overriding CIRS.
 
 If you don't like this `CIRS` (Construction-Init-ReloadState-Start) flow for building your ViewModels, then the good news is that you can easily override the `ViewModelLocator` within v3, just as you could within earlier MvvmCross versions. For more on this see LINK-TODO
 
-#ViewModel Deactivation, Activation and Destruction
+# ViewModel Deactivation, Activation and Destruction
 
 Monitoring other View/ViewModel lifecycle event across multiple platforms is fairly tricky, especially once developers start experimenting beyond the 'basic' presentation models and start using tabs, splitviews, popups, flyouts, etc
 
