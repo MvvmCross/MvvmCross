@@ -37,6 +37,7 @@ namespace Playground.Mac
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnSheet).To(vm => vm.ShowSheetCommand);
             set.Bind(btnWindow).To(vm => vm.ShowWindowCommand);
+            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Apply();
         }
 

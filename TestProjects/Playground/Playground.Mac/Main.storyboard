@@ -678,8 +678,15 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FRn-TF-Pqx">
-                                <rect key="frame" x="191" y="70" width="100" height="25"/>
+                                <rect key="frame" x="190" y="70" width="100" height="25"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Window" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vp8-Is-gGN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iQr-KL-QsX">
+                                <rect key="frame" x="200" y="29" width="80" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show Tabs" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tSM-km-uN4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -687,9 +694,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="A7y-RT-j0l" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="35" id="CSc-bR-V00"/>
+                            <constraint firstItem="iQr-KL-QsX" firstAttribute="top" secondItem="FRn-TF-Pqx" secondAttribute="bottom" constant="19" id="IYJ-n9-W4p"/>
                             <constraint firstItem="KoN-aA-DJE" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="PQT-u2-Ass"/>
                             <constraint firstItem="Pp2-5e-UKm" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RAQ-Tc-6lp"/>
                             <constraint firstItem="Pp2-5e-UKm" firstAttribute="top" secondItem="A7y-RT-j0l" secondAttribute="bottom" constant="22" id="XCv-1O-CuB"/>
+                            <constraint firstItem="iQr-KL-QsX" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="bZJ-Bv-GQN"/>
                             <constraint firstItem="KoN-aA-DJE" firstAttribute="top" secondItem="Pp2-5e-UKm" secondAttribute="bottom" constant="23" id="mhw-Zs-7Yi"/>
                             <constraint firstItem="FRn-TF-Pqx" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="qW5-hA-ZJf"/>
                             <constraint firstItem="FRn-TF-Pqx" firstAttribute="top" secondItem="KoN-aA-DJE" secondAttribute="bottom" constant="30" id="rxI-CG-wuJ"/>
@@ -700,6 +709,7 @@
                         <outlet property="btnChild" destination="A7y-RT-j0l" id="2pW-Li-iRf"/>
                         <outlet property="btnModal" destination="Pp2-5e-UKm" id="aAo-zO-a8a"/>
                         <outlet property="btnSheet" destination="Si5-fQ-NyB" id="SN3-Sa-y43"/>
+                        <outlet property="btnTabs" destination="iQr-KL-QsX" id="SkP-2Z-Rre"/>
                         <outlet property="btnWindow" destination="FRn-TF-Pqx" id="sQa-Pe-2KW"/>
                     </connections>
                 </viewController>
@@ -822,6 +832,45 @@
                 <customObject id="B6D-ze-eLx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2109" y="660"/>
+        </scene>
+        <!--Tab1 View-->
+        <scene sceneID="OI6-Kl-GFE">
+            <objects>
+                <viewController storyboardIdentifier="Tab1View" id="Lre-6U-wtC" customClass="Tab1View" sceneMemberID="viewController">
+                    <view key="view" id="meg-0P-GFV">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ic-19-5Df">
+                                <rect key="frame" x="207" y="239" width="36" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tab 1" id="nCp-Jv-1wh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RVn-Dz-MJJ">
+                                <rect key="frame" x="201" y="190" width="49" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fgb-JU-YUB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="RVn-Dz-MJJ" firstAttribute="top" secondItem="3Ic-19-5Df" secondAttribute="bottom" constant="25" id="3C6-6Z-Vf8"/>
+                            <constraint firstItem="RVn-Dz-MJJ" firstAttribute="centerX" secondItem="meg-0P-GFV" secondAttribute="centerX" id="iIQ-w4-mUd"/>
+                            <constraint firstItem="3Ic-19-5Df" firstAttribute="centerX" secondItem="meg-0P-GFV" secondAttribute="centerX" id="oiu-NR-oSt"/>
+                            <constraint firstItem="3Ic-19-5Df" firstAttribute="top" secondItem="meg-0P-GFV" secondAttribute="top" constant="44" id="w72-XP-4Kr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="RVn-Dz-MJJ" id="Nxg-06-Ybr"/>
+                    </connections>
+                </viewController>
+                <customObject id="7P2-Lq-BsB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2585" y="652"/>
         </scene>
     </scenes>
 </document>

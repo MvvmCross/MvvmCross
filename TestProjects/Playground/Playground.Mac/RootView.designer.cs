@@ -22,10 +22,18 @@ namespace Playground.Mac
 		AppKit.NSButtonCell btnSheet { get; set; }
 
 		[Outlet]
+		AppKit.NSButton btnTabs { get; set; }
+
+		[Outlet]
 		AppKit.NSButton btnWindow { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnTabs != null) {
+				btnTabs.Dispose ();
+				btnTabs = null;
+			}
+
 			if (btnChild != null) {
 				btnChild.Dispose ();
 				btnChild = null;
