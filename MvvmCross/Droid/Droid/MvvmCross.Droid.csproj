@@ -15,7 +15,8 @@
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -57,7 +58,6 @@
     <Compile Include="Views\MvxMultipleViewModelCache.cs" />
     <Compile Include="Views\MvxSingleViewModelCache.cs" />
     <Compile Include="Views\MvxTranslatedIntent.cs" />
-    <Compile Include="Views\IMvxChildViewModelCache.cs" />
     <Compile Include="Views\IMvxAndroidViewPresenter.cs" />
     <Compile Include="Platform\MvxAndroidSetupSingleton.cs" />
     <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
@@ -84,7 +84,6 @@
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivity.cs" />
-    <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
