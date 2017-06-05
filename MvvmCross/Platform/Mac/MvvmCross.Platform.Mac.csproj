@@ -57,6 +57,7 @@
     <Compile Include="Views\MvxEventSourceViewController.cs" />
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
     <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxEventSourceTabViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>

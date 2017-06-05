@@ -14,6 +14,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Mac.Views.Presenters.Attributes;
 using System.Reflection;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Mac.Views.Presenters
 {
@@ -55,6 +56,10 @@ namespace MvvmCross.Mac.Views.Presenters
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxSheetPresentationAttribute),
                 (vc, attribute, request) => ShowSheetViewController(vc, (MvxSheetPresentationAttribute)attribute, request));
+
+            _attributeTypesToShowMethodDictionary.Add(
+                typeof(MvxTabPresentationAttribute),
+                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -149,11 +154,27 @@ namespace MvvmCross.Mac.Views.Presenters
             window.ContentViewController.PresentViewControllerAsSheet(viewController);
         }
 
+        protected virtual void ShowTabViewController(
+            NSViewController viewController,
+            MvxTabPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+
+            var tabViewController = window.ContentViewController as IMvxTabViewController;
+            if (tabViewController == null)
+                throw new MvxException($"trying to display a tab but there is no TabViewController! View type: {viewController.GetType()}");
+
+            tabViewController.ShowTabView(viewController, attribute.TabTitle);
+        }
+
         public override void Close(IMvxViewModel toClose)
         {
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
                 var window = Windows[i];
+
+                // if toClose is a sheet or modal
                 if (window.ContentViewController.PresentedViewControllers.Any())
                 {
                     var modal = window.ContentViewController.PresentedViewControllers
@@ -166,15 +187,20 @@ namespace MvvmCross.Mac.Views.Presenters
                         return;
                     }
                 }
-                else
+                // if toClose is a tab
+                var tabViewController = window.ContentViewController as IMvxTabViewController;
+                if (tabViewController != null && tabViewController.CloseTabView(toClose))
                 {
-                    var controller = window.ContentViewController as MvxViewController;
-                    if (controller != null && controller.ViewModel == toClose)
-                    {
-                        window.Close();
-                        Windows.Remove(window);
-                        return;
-                    }
+                    return;
+                }
+
+                // toClose is a content
+                var controller = window.ContentViewController as MvxViewController;
+                if (controller != null && controller.ViewModel == toClose)
+                {
+                    window.Close();
+                    Windows.Remove(window);
+                    return;
                 }
             }
         }
