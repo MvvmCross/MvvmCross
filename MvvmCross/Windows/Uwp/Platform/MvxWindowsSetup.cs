@@ -89,13 +89,6 @@ namespace MvvmCross.Uwp.Platform
             return this.CreateViewDispatcher(this._rootFrame);
         }
 
-        protected override void InitializeLastChance()
-        {
-            Mvx.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
-
-            base.InitializeLastChance();
-        }
-
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
             return new MvxWindowsViewPresenter(rootFrame);

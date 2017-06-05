@@ -68,6 +68,7 @@
     <Compile Include="Platform\MvxSettings.cs" />
     <Compile Include="ViewModels\MvxViewModelInstanceRequest.cs" />
     <Compile Include="ViewModels\MvxViewToViewModelNameMapping.cs" />
+    <Compile Include="Views\IMvxChildViewModelCache.cs" />
     <Compile Include="Views\IMvxViewPresenter.cs" />
     <Compile Include="ViewModels\MvxClosePresentationHint.cs" />
     <Compile Include="ViewModels\MvxCommandAttribute.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
+    <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="ViewModels\IMvxApplication.cs" />
     <Compile Include="Platform\IMvxLifetime.cs" />
@@ -143,8 +145,5 @@
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Navigation\" />
-    <Folder Include="Navigation\EventArgs\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
