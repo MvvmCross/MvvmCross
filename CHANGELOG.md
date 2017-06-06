@@ -2,7 +2,52 @@
 
 ## [Unreleased](https://github.com/MvvmCross/MvvmCross/tree/HEAD)
 
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0...HEAD)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.1...HEAD)
+
+**Fixed bugs:**
+
+- android.support.v7.widget.SearchView Query binding not working [\#1882](https://github.com/MvvmCross/MvvmCross/issues/1882)
+- Error MvvmCross.Uwp.rd.xml does not exist when compiling 5.0.1 [\#1879](https://github.com/MvvmCross/MvvmCross/issues/1879)
+- Problem with Visibility plugin [\#1876](https://github.com/MvvmCross/MvvmCross/issues/1876)
+- Kevinf/1880 memory leak [\#1907](https://github.com/MvvmCross/MvvmCross/pull/1907) ([Bowman74](https://github.com/Bowman74))
+- Consolidate library output and embed rd.xml [\#1901](https://github.com/MvvmCross/MvvmCross/pull/1901) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Closed issues:**
+
+- Synchronous view model initialization [\#1902](https://github.com/MvvmCross/MvvmCross/issues/1902)
+- FloatingActionButton Click event binding not working [\#1896](https://github.com/MvvmCross/MvvmCross/issues/1896)
+- Appearing event called multiple times on Android platform [\#1894](https://github.com/MvvmCross/MvvmCross/issues/1894)
+- Documentation: ViewModel lifecycle doesn't explain how to deal with tombstoning [\#1892](https://github.com/MvvmCross/MvvmCross/issues/1892)
+- Add a way to change presentation attribute of ViewController at runtime [\#1887](https://github.com/MvvmCross/MvvmCross/issues/1887)
+- Documents: Plugins README are old [\#1886](https://github.com/MvvmCross/MvvmCross/issues/1886)
+- Navigation Bug introduced in 5.0.1: View.OnCreate reinstantiates existing target ViewModel  [\#1880](https://github.com/MvvmCross/MvvmCross/issues/1880)
+- Back button navigation with navigation drawer in android not directly go back [\#1875](https://github.com/MvvmCross/MvvmCross/issues/1875)
+- Rework 'tagged' logic in build script [\#1874](https://github.com/MvvmCross/MvvmCross/issues/1874)
+- PictureChooser.iOS scales incorrectly on high DPI devices [\#1759](https://github.com/MvvmCross/MvvmCross/issues/1759)
+
+**Merged pull requests:**
+
+- Fix header markdown in docs [\#1916](https://github.com/MvvmCross/MvvmCross/pull/1916) ([clottman](https://github.com/clottman))
+- Document: Fix dead link, Add C\# highlight [\#1914](https://github.com/MvvmCross/MvvmCross/pull/1914) ([jz5](https://github.com/jz5))
+- Documentation: fixed typos [\#1911](https://github.com/MvvmCross/MvvmCross/pull/1911) ([F1nZeR](https://github.com/F1nZeR))
+- Document: Fix links [\#1909](https://github.com/MvvmCross/MvvmCross/pull/1909) ([jz5](https://github.com/jz5))
+- Ported the "Tables and Cells in iOS" article [\#1908](https://github.com/MvvmCross/MvvmCross/pull/1908) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Removed invalid code in App.cs example [\#1906](https://github.com/MvvmCross/MvvmCross/pull/1906) ([fyndor](https://github.com/fyndor))
+- Correcting the spelling of my name :\) [\#1904](https://github.com/MvvmCross/MvvmCross/pull/1904) ([jimbobbennett](https://github.com/jimbobbennett))
+- Fix IsTagged and IsRepository logic in build script [\#1903](https://github.com/MvvmCross/MvvmCross/pull/1903) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fixes issues 1876 and 1880 [\#1900](https://github.com/MvvmCross/MvvmCross/pull/1900) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Adds support for INotifyPropertyChanged to MvxWithEventPropertyInfoTargetBinding [\#1899](https://github.com/MvvmCross/MvvmCross/pull/1899) ([DanielStolt](https://github.com/DanielStolt))
+- Adds target binding for UIPageControl on iOS [\#1898](https://github.com/MvvmCross/MvvmCross/pull/1898) ([DanielStolt](https://github.com/DanielStolt))
+- \#1894 Fixed problem where C\# version of event handlers do not unsubsc… [\#1897](https://github.com/MvvmCross/MvvmCross/pull/1897) ([Bowman74](https://github.com/Bowman74))
+- ViewModel-Lifecycle doc: Bring back info from Wiki [\#1895](https://github.com/MvvmCross/MvvmCross/pull/1895) ([nmilcoff](https://github.com/nmilcoff))
+- Delete plugins readme files \(\#1886\) [\#1890](https://github.com/MvvmCross/MvvmCross/pull/1890) ([jz5](https://github.com/jz5))
+- Implement option to override iOS presentation attribute [\#1888](https://github.com/MvvmCross/MvvmCross/pull/1888) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Add setvalueimpl for SearchView Query and change to TwoWay. [\#1883](https://github.com/MvvmCross/MvvmCross/pull/1883) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix opencollective height [\#1878](https://github.com/MvvmCross/MvvmCross/pull/1878) ([Garfield550](https://github.com/Garfield550))
+- Replaced `Init` and `Start` with `Initialize` method [\#1873](https://github.com/MvvmCross/MvvmCross/pull/1873) ([mvanbeusekom](https://github.com/mvanbeusekom))
+
+## [5.0.1](https://github.com/MvvmCross/MvvmCross/tree/5.0.1) (2017-05-26)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.0...5.0.1)
 
 **Fixed bugs:**
 
@@ -13,16 +58,17 @@
 **Closed issues:**
 
 - Documentation: Search result links are incorrect [\#1866](https://github.com/MvvmCross/MvvmCross/issues/1866)
-- `Start\(\)` not called in ViewModel in iOS [\#1862](https://github.com/MvvmCross/MvvmCross/issues/1862)
-- Presentation bundle parameter in new navigation service [\#1860](https://github.com/MvvmCross/MvvmCross/issues/1860)
 - MvxAppCompatActivity does not call view model's lifecycle methods [\#1857](https://github.com/MvvmCross/MvvmCross/issues/1857)
 - iOS Missing method CreateNavigationController inMvxIosViewPresenter [\#1856](https://github.com/MvvmCross/MvvmCross/issues/1856)
 - Create Pull Request template [\#1848](https://github.com/MvvmCross/MvvmCross/issues/1848)
-- PhoneCall Plugin targeting Android Marshmallow [\#1847](https://github.com/MvvmCross/MvvmCross/issues/1847)
 - Incorrect width with wrap\_content [\#1546](https://github.com/MvvmCross/MvvmCross/issues/1546)
 - File Plugin: GetSize\(\), GetListWriteTimeUtc\(\) [\#1155](https://github.com/MvvmCross/MvvmCross/issues/1155)
 - Add abstraction for path in File plug-in [\#393](https://github.com/MvvmCross/MvvmCross/issues/393)
 - Add LazyInitialize to Mvx static class [\#321](https://github.com/MvvmCross/MvvmCross/issues/321)
+- `Start\(\)` not called in ViewModel in iOS [\#1862](https://github.com/MvvmCross/MvvmCross/issues/1862)
+- Presentation bundle parameter in new navigation service [\#1860](https://github.com/MvvmCross/MvvmCross/issues/1860)
+- Make Code of Conduct more visible [\#1849](https://github.com/MvvmCross/MvvmCross/issues/1849)
+- PhoneCall Plugin targeting Android Marshmallow [\#1847](https://github.com/MvvmCross/MvvmCross/issues/1847)
 
 **Merged pull requests:**
 
