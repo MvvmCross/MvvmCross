@@ -1,4 +1,4 @@
-// MvxStoreExtensionMethods.cs
+﻿// MvxStoreExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,29 +12,27 @@ namespace MvvmCross.Uwp.Views
 
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform;
+    using System.Collections.Generic;
 
     public static class MvxWindowsExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWindowsView storeView, MvxViewModelRequest viewModelRequest, Func<IMvxBundle> bundleLoader)
+        public static void OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
         {
-            storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundleLoader()); });
+            storeView.OnViewCreate(() => { return storeView.LoadViewModel(requestText, bundleLoader()); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
-                                                   MvxViewModelRequest viewModelRequest,
+                                                   string requestText,
                                                    IMvxBundle bundle)
         {
 #warning ClearingBackStack disabled for now
-//            if (viewModelRequest.ClearTop)
-//            {
-//#warning TODO - BackStack not cleared for WinRT
-                //phoneView.ClearBackStack();
-//            }
-
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);
-
-            return viewModel;
+            //            if (viewModelRequest.ClearTop)
+            //            {
+            //#warning TODO - BackStack not cleared for WinRT
+            //phoneView.ClearBackStack();
+            //            }
+            var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+            return viewModelLoader.Load(requestText, bundle);
         }
 
         public static void OnViewCreate(this IMvxWindowsView storeView, Func<IMvxViewModel> viewModelLoader)
