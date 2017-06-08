@@ -1,4 +1,4 @@
-// MvxGeoLocation.cs
+﻿// MvxGeoLocation.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using System;
 
 namespace MvvmCross.Plugins.Location
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxGeoLocation
     {
         public MvxGeoLocation()

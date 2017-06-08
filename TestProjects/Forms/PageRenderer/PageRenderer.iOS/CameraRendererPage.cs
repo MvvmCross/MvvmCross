@@ -6,11 +6,10 @@ using CoreGraphics;
 
 using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
-using PageRendererExample.Pages;
-using PageRendererExample.ViewModels;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.iOS;
+using PageRendererExample;
 
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.iOS.CameraRendererPage))]
 

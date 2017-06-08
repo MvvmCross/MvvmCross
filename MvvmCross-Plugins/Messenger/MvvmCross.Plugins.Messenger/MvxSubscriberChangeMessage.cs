@@ -9,7 +9,7 @@ using System;
 
 namespace MvvmCross.Plugins.Messenger
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxSubscriberChangeMessage : MvxMessage
     {
         public Type MessageType { get; private set; }

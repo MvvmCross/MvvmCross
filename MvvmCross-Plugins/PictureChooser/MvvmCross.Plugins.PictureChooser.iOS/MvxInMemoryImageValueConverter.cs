@@ -1,4 +1,4 @@
-// MvxInMemoryImageValueConverter.cs
+﻿// MvxInMemoryImageValueConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,7 +13,7 @@ using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>
     {
         protected override UIImage Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)

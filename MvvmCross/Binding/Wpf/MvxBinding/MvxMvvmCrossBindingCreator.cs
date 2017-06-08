@@ -5,12 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -20,9 +14,8 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding
 
 #if WINDOWS_WPF
 using System.Windows;
-using System.Windows.Data;
 
-namespace MvvmCross.BindingEx.Wpf.MvxBinding
+namespace MvvmCross.Binding.Wpf.MvxBinding
 #endif
 {
 

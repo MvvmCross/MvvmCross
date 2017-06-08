@@ -1,10 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
@@ -18,16 +16,14 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using MvvmCross.Forms.Uwp;
+using PageRendererExample;
 using Xamarin.Forms.Platform.UWP;
-
-using PageRendererExample.Pages;
-using PageRendererExample.ViewModels;
 using Panel = Windows.UI.Xaml.Controls.Panel;
 
 
-[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Uwp.CameraRendererPage))]
+[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.WindowsUWP.CameraRendererPage))]
 
-namespace PageRendererExample.UI.Uwp
+namespace PageRendererExample.WindowsUWP
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>
     {

@@ -9,7 +9,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.ResxLocalization
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

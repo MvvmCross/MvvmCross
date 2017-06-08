@@ -10,7 +10,6 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
-using PageRendererExample.ViewModels;
 
 namespace PageRendererExample.UI.iOS
 {

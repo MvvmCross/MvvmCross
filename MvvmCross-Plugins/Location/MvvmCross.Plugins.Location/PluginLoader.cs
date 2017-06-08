@@ -10,7 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Location
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
 
-namespace MvvmCross.Plugins.Email.WindowsCommon
+namespace MvvmCross.Plugins.Email.Uwp
 {
     public class MvxComposeEmailTask
       : IMvxComposeEmailTaskEx

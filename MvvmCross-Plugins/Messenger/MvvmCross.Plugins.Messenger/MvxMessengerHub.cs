@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.Messenger
 	// Note - the original inspiration for this code was XPlatUtils from JonathonPeppers
 	// - https://github.com/jonathanpeppers/XPlatUtils
 	// - inspiration consumed, ripped apart and loved under Ms-PL
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxMessengerHub : IMvxMessenger
     {
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =

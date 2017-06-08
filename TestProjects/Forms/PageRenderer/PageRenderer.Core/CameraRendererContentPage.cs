@@ -1,7 +1,6 @@
 ﻿using MvvmCross.Forms.Core;
-using PageRendererExample.ViewModels;
 
-namespace PageRendererExample.Pages
+namespace PageRendererExample
 {
     public class CameraRendererContentPage : MvxContentPage<CameraRendererViewModel>
     {

@@ -5,11 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform.Platform;
-
 #if WINDOWS_COMMON
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target;
 
@@ -17,9 +12,8 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding
 #endif
 
 #if WINDOWS_WPF
-using MvvmCross.BindingEx.Wpf.MvxBinding.Target;
 
-namespace MvvmCross.BindingEx.Wpf.MvxBinding
+namespace MvvmCross.Binding.Wpf.MvxBinding
 #endif
 {
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry

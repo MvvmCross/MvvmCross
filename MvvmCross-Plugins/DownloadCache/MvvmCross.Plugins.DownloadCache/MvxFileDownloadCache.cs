@@ -1,4 +1,4 @@
-// MvxFileDownloadCache.cs
+﻿// MvxFileDownloadCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxFileDownloadCache
         : MvxLockableObject
         , IMvxFileDownloadCache

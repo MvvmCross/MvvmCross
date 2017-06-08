@@ -12,7 +12,7 @@ using Windows.System;
 
 #endregion using
 
-namespace MvvmCross.Plugins.WebBrowser.WindowsCommon
+namespace MvvmCross.Plugins.WebBrowser.Uwp
 {
     public class MvxWebBrowserTask : IMvxWebBrowserTask
     {

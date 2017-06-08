@@ -1,6 +1,6 @@
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.File;
-using MvvmCross.Plugins.File.WindowsCommon;
+using MvvmCross.Plugins.File.Uwp;
 
 namespace MvxBindingsExample.UWP.Bootstrap
 {

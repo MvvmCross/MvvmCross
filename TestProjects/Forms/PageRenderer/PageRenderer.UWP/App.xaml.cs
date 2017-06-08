@@ -5,10 +5,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using PageRendererExample.UI.Uwp;
-using PageRendererExample.WindowsUWP;
 
-namespace PageRendererExample.UI.WindowsUWP
+namespace PageRendererExample.WindowsUWP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

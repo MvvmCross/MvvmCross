@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Plugins.File.iOS
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class MvxIosFileStore : MvxIoFileStoreBase
     {
         public MvxIosFileStore(bool appendDefaultPath, string basePath)

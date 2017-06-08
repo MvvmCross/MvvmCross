@@ -5,12 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com\
 
-using System.Windows;
-using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
-
 #if WINDOWS_COMMON
 namespace MvvmCross.BindingEx.WindowsCommon
 #endif
@@ -18,7 +12,7 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #if WINDOWS_WPF
 using System.ComponentModel;
 
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public static class MvxDesignTimeChecker

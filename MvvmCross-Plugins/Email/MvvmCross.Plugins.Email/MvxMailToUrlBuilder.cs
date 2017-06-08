@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MvvmCross.Plugins.Email
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxMailToUrlBuilder
     {
         public string Build(string to, string cc, string subject, string body)

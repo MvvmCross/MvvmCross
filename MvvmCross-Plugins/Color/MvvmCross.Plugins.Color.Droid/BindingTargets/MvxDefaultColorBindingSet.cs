@@ -14,7 +14,7 @@ using MvvmCross.Plugins.Color.Droid.Binding;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet
     {
         public void RegisterBindings()

@@ -5,15 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Binders;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Combiners;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding;
@@ -25,11 +16,8 @@ namespace MvvmCross.BindingEx.WindowsCommon
 
 #if WINDOWS_WPF
 using System.Windows;
-using MvvmCross.BindingEx.Wpf.MvxBinding;
-using MvvmCross.BindingEx.Wpf.MvxBinding.Target;
-using MvvmCross.BindingEx.Wpf.WindowsBinding;
 
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
