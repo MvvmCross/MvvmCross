@@ -134,6 +134,10 @@ The events available are:
 * BeforeClose
 * AfterClose
 
+If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
+
+`IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
+
 ## Upgrading from 4.x to 5.x
 
 To make sure your navigation stays up-to-date change all your `ShowViewModel<>()` calls to the new navigation methods.
