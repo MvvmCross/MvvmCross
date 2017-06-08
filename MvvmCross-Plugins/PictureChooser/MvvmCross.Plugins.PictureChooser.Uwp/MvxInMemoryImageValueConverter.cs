@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {
         protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)
