@@ -33,7 +33,7 @@ namespace PageRendererExample.Pages
 
             _relativeLayout.Children.Add(
                 _showCameraButton,
-                Constraint.RelativeToParent(parent => 0.5 * parent.Width - 100.0),
+                Constraint.RelativeToParent(parent => (0.5 * parent.Width) - 100.0),
                 Constraint.RelativeToParent(parent => parent.Height - 44.0)
             );
         }
