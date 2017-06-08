@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-
-    using Core;
-    using Exceptions;
-
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
           , IMvxTrace

@@ -8,11 +8,11 @@
 using System;
 using Android.Content;
 using Android.Net;
+using Java.Net;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.Network.Reachability;
-using Java.Net;
 
 namespace MvvmCross.Plugins.Network.Droid
 {

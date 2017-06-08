@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {

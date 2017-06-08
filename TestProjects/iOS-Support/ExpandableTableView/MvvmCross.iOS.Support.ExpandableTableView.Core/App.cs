@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels;
 
 namespace MvvmCross.iOS.Support.ExpandableTableView.Core

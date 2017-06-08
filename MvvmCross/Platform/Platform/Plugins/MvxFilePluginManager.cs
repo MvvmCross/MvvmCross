@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using Exceptions;
-    using IoC;
-    using Platform;
-
     public class MvxFilePluginManager
         : MvxPluginManager
     {

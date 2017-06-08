@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Bindings.Source
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Reflection;
-
-    using Platform.Platform;
-    using Platform.WeakSubscription;
-
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
         private readonly PropertyInfo _propertyInfo;

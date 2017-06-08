@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+
 namespace MvvmCross.Platform.tvOS
 {
-    using System;
-
-    using Foundation;
-
     public static class MvxTvosDateTimeExtensionMethods
     {
         private static readonly DateTime ReferenceNSDateTime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);

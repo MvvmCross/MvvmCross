@@ -5,17 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Android.Content;
 using Android.Net;
 using Android.OS;
 using Android.Text;
-using MvvmCross.Platform.Droid.Platform;
-using System.Collections.Generic;
-using System.Linq;
 using Java.IO;
-using System.IO;
-using MvvmCross.Platform.Droid.Views;
 using Java.Lang;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Droid.Views;
 using File = Java.IO.File;
 
 namespace MvvmCross.Plugins.Email.Droid

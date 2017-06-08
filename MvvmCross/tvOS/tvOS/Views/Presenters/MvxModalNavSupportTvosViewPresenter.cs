@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxModalNavSupportTvosViewPresenter : MvxTvosViewPresenter
     {
         private UIViewController _currentModalViewController;

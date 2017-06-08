@@ -1,16 +1,14 @@
-﻿namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Binding.Parse.Binding.Swiss;
+using MvvmCross.Platform.Platform;
+using NUnit.Framework;
+
+namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-
-    using MvvmCross.Binding.Parse.Binding;
-    using MvvmCross.Binding.Parse.Binding.Swiss;
-    using Platform.Platform;
-
-    using NUnit.Framework;
-
     public class MvxBaseSwissBindingTest<TParser>
         : MvxBindingTest
         where TParser : MvxSwissBindingParser, new()

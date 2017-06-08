@@ -1,9 +1,8 @@
+using System;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

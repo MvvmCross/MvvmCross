@@ -7,8 +7,6 @@
 
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-
     public class MvxLoaderPluginBootstrapAction<TPlugin, TPlatformPlugin>
         : MvxPluginBootstrapAction<TPlugin>
         where TPlugin : IMvxPluginLoader

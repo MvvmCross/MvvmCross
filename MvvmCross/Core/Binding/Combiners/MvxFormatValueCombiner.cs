@@ -6,14 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Binding.Combiners
 {
-    using System.Linq;
-
-    using Bindings.SourceSteps;
-    using Platform.Converters;
-
     public class MvxFormatValueCombiner : MvxValueCombiner
     {
         public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)

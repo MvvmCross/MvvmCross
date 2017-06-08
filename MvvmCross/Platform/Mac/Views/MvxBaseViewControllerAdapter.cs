@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System;
+using AppKit;
+
 namespace MvvmCross.Platform.Mac.Views
 {
-    using AppKit;
-
-    using System;
-
     public class MvxBaseViewControllerAdapter
     {
         private readonly IMvxEventSourceViewController _eventSource;

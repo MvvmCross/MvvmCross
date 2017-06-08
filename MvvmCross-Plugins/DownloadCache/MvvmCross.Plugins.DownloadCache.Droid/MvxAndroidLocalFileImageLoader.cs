@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Binding;
-using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.Graphics;
+using MvvmCross.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Plugins.File;
 using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid

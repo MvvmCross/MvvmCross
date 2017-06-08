@@ -1,24 +1,22 @@
-// MvxPickerViewModel.cs
+﻿// MvxPickerViewModel.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Windows.Input;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Windows.Input;
-
-    using Attributes;
-    using ExtensionMethods;
-    using Platform;
-    using Platform.WeakSubscription;
-
-    using UIKit;
-
     public class MvxPickerViewModel
         : UIPickerViewModel
     {

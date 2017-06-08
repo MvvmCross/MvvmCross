@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-    using System.Reflection;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public class MvxTvosViewsContainer
         : MvxViewsContainer
         , IMvxTvosViewsContainer

@@ -5,6 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Wpf.MvxBinding.Target;
+using MvvmCross.Platform.Platform;
+
 #if WINDOWS_COMMON
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target;
 

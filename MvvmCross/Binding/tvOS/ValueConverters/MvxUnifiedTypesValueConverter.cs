@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Binding.tvOS.ValueConverters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Globalization;
-
-    using Platform.Converters;
-    using Platform.IoC;
-
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {

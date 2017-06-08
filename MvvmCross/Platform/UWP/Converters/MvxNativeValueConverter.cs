@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Platform.Uwp.Converters
 {
-    using System;
-    using System.Globalization;
-
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Data;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxNativeValueConverter
         : IValueConverter
     {

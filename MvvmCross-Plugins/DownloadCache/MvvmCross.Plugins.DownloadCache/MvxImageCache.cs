@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Immutable;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {

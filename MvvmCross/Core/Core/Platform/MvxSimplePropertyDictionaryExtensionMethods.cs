@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
         public static IDictionary<string, string> ToSimpleStringPropertyDictionary(

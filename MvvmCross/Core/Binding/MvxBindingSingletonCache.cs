@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.ExpressionParse;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding
 {
-    using Binders;
-    using BindingContext;
-    using Bindings.Source.Construction;
-    using Bindings.SourceSteps;
-    using Bindings.Target.Construction;
-    using Combiners;
-    using ExpressionParse;
-    using Parse.Binding.Lang;
-    using Platform;
-    using Platform.Core;
-    using Platform.Exceptions;
-
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using Android.OS;
 using Android.Content;
 using Android.Gms.Common;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
-using MvvmCross.Platform.Platform;
+using Android.OS;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {

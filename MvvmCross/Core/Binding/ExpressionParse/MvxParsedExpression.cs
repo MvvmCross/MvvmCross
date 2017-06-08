@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Text;
+
 namespace MvvmCross.Binding.ExpressionParse
 {
-    using System.Collections.Generic;
-    using System.Text;
-
     public class MvxParsedExpression : IMvxParsedExpression
     {
         public interface INode

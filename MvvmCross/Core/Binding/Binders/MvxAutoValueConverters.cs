@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Platform.Converters;
-
     public class MvxAutoValueConverters
         : IMvxAutoValueConverters
     {

@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxBaseConsoleContainer
         : MvxViewsContainer
           , IMvxConsoleNavigation

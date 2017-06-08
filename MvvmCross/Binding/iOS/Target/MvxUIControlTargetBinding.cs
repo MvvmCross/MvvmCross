@@ -1,20 +1,19 @@
-// MvxUIControlTargetBinding.cs
+﻿// MvxUIControlTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Windows.Input;
-
-    using Bindings.Target;
-    using Platform.Platform;
-    using Platform.WeakSubscription;
-    using UIKit;
-
     public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
     {
         private ICommand _command;

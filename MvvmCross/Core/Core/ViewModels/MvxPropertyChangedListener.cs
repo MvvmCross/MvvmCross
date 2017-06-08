@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.WeakSubscription;
-
     public class MvxPropertyChangedListener
         : IDisposable
     {

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+using MvvmCross.Core.Platform;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform.Droid.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using Android.App;
-
-    using Core.Platform;
-    using Platform;
-    using MvvmCross.Platform.Droid.Platform;
-
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible

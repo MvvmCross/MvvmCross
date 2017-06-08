@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.ValueConverters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using Binders;
-    using Bindings;
-    using ValueConverters;
-    using Platform;
-    using Platform.Converters;
-
     public class MvxFluentBindingDescription<TTarget, TSource>
         : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class

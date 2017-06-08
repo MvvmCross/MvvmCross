@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using System.Collections.Generic;
-
-    using Core;
-    using Exceptions;
-    using IoC;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxIocTest
     {

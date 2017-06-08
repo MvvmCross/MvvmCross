@@ -5,16 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Platform.Core;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using Core;
-
-    using UIKit;
-
     public class MvxEventSourceCollectionViewController
         : UICollectionViewController
           , IMvxEventSourceViewController

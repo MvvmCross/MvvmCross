@@ -6,15 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Windows.UI.Xaml;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-using Windows.UI.Xaml;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Uwp.MvxBinding;
 using MvvmCross.Binding.Uwp.MvxBinding.Target;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding.Uwp
 {

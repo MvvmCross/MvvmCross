@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Console.Platform;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using Platform;
-    using Core.Views;
-
     public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     {
         private readonly MvxConsoleSystemMessageHandler _systemMessageHandler = new MvxConsoleSystemMessageHandler();

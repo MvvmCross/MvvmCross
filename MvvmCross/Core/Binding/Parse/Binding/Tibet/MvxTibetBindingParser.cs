@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Parse.Binding.Swiss;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Parse.Binding.Tibet
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Swiss;
-    using Platform.Exceptions;
-
     public class MvxTibetBindingParser
         : MvxSwissBindingParser
     {

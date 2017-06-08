@@ -1,21 +1,19 @@
-// MvxDatePicker.cs
+﻿// MvxDatePicker.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Platform.Droid.Platform;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using Platform.Droid.Platform;
-
     [Register("mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker
         : DatePicker

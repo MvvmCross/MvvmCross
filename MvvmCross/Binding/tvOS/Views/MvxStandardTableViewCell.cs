@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using Bindings;
-
-    using UIKit;
-
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {

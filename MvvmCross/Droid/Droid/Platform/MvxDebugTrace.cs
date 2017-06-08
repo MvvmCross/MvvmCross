@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Diagnostics;
+using Android.Util;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Platform
 {
-    using System;
-    using System.Diagnostics;
-
-    using Android.Util;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

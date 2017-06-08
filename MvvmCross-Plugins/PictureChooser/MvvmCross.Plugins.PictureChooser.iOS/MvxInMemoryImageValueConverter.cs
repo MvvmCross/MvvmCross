@@ -7,8 +7,8 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Platform.Converters;
 using Foundation;
+using MvvmCross.Platform.Converters;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS

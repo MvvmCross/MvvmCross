@@ -1,11 +1,9 @@
+using System;
+using MvvmCross.Platform.Core;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Views
 {
-    using System;
-
-    using Core;
-
-    using UIKit;
-
     public class MvxEventSourcePageViewController : UIPageViewController, IMvxEventSourceViewController
     {
         public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation orientation, UIPageViewControllerSpineLocation spine) : base(style, orientation, spine)

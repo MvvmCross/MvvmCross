@@ -1,19 +1,17 @@
 ﻿﻿﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using MvvmCross.Core.Navigation.EventArguments;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+   using System.Collections.Generic;
+   using System.Linq;
+   using System.Reflection;
+   using System.Text.RegularExpressions;
+   using System.Threading;
+   using System.Threading.Tasks;
+   using MvvmCross.Core.Navigation.EventArguments;
+   using MvvmCross.Core.Platform;
+   using MvvmCross.Core.ViewModels;
+   using MvvmCross.Core.Views;
+   using MvvmCross.Platform;
+   using MvvmCross.Platform.Core;
+   using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Core.Navigation
 {

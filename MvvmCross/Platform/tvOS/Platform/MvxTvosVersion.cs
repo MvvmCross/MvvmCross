@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    using Exceptions;
-
     public class MvxTvosVersion
     {
         public MvxTvosVersion(int[] parts)

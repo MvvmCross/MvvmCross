@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.ExtensionMethods;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.ExtensionMethods;
-
     public interface IMvxCommandHelper
     {
         event EventHandler CanExecuteChanged;

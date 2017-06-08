@@ -1,15 +1,11 @@
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Mac.Views;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
-    using Binding.BindingContext;
-    using Core.ViewModels;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxViewController
         : MvxEventSourceViewController
             , IMvxMacView

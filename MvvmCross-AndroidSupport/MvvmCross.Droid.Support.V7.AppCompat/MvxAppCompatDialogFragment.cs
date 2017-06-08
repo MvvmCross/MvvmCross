@@ -1,18 +1,18 @@
-// MvxDialogFragment.cs
+﻿// MvxDialogFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

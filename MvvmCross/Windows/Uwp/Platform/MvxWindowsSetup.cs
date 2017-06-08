@@ -5,22 +5,20 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Uwp.Views;
+using MvvmCross.Uwp.Views.Suspension;
+
 namespace MvvmCross.Uwp.Platform
 {
-    using System.Collections.Generic;
-
-    using Windows.UI.Xaml.Controls;
-
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using Views;
-    using Views.Suspension;
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxWindowsSetup
         : MvxSetup
     {

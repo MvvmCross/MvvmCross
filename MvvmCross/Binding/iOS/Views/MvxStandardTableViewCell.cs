@@ -1,22 +1,19 @@
-// MvxStandardTableViewCell.cs
+﻿// MvxStandardTableViewCell.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using Bindings;
-
-    using UIKit;
-
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {

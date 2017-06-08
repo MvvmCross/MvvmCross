@@ -25,7 +25,6 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using Fragment = Android.Support.V4.App.Fragment;
 
 namespace MvvmCross.Droid.Support.V4
 {

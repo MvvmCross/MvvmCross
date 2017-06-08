@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Localization
 {
-    using System;
-
-    using Platform;
-    using Platform.Exceptions;
-
     public class MvxLanguageBinder
         : IMvxLanguageBinder
     {

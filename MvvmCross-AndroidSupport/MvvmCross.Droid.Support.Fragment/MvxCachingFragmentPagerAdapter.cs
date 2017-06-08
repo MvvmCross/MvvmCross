@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
@@ -6,8 +6,8 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
-using MvvmCross.Platform;
 using Java.Lang;
+using MvvmCross.Platform;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4

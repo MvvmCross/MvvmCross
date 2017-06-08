@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Combiners;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System.Collections.Generic;
-
-    using Combiners;
-
     public class MvxCombinerSourceStepDescription : MvxSourceStepDescription
     {
         public IMvxValueCombiner Combiner { get; set; }

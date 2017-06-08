@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-
     public class MvxStopWatch
         : IDisposable
     {

@@ -1,12 +1,10 @@
+using System;
+using System.ComponentModel;
+using Android.Runtime;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.ViewModels
 {
-    using System;
-    using System.ComponentModel;
-
-    using Android.Runtime;
-
-    using Core.ViewModels;
-
     /// <summary>
     ///     Just like <see cref="MvxPropertyChangedListener"/> but
     ///     won't call handlers if the target (being an activity, fragment,

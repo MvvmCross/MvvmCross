@@ -10,7 +10,6 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;

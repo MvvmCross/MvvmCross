@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-
     public class MvxCommandCollectionBuilder
         : IMvxCommandCollectionBuilder
     {

@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxNavigationSerializer
         : IMvxNavigationSerializer
     {

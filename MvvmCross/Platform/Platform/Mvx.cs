@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform
 {
-    using System;
-
-    using Core;
-    using Exceptions;
-    using IoC;
-    using Platform;
-
     public static class Mvx
     {
         public static bool CanResolve<TService>() where TService : class

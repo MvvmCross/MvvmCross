@@ -1,4 +1,4 @@
-// MvxUIButtonTitleTargetBinding.cs
+﻿// MvxUIButtonTitleTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,14 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    using Bindings.Target;
-    using Platform.Platform;
-
-    using UIKit;
-
     public class MvxUIButtonTitleTargetBinding : MvxConvertingTargetBinding
     {
         private readonly UIControlState _state;

@@ -6,19 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Concurrent;
-using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Source.Chained;
+using MvvmCross.Binding.Bindings.Source.Leaf;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Chained;
-    using Leaf;
-    using Parse.PropertyPath.PropertyTokens;
-    using Platform;
-    using Platform.Exceptions;
-
     /// <summary>
     /// Uses a global cache of calls in Reflection namespace
     /// </summary>

@@ -1,8 +1,8 @@
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.Core.ViewModels
 {

@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace MvvmCross.Binding.Bindings
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     public class MvxCompositeBinding : MvxBinding
     {
         private readonly List<IMvxBinding> _bindings;

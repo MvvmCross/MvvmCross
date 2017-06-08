@@ -1,8 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using Example.Core.ViewModels;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Example.Droid.Activities
 {

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Input;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views.Gestures
 {
-    using System.Windows.Input;
-
-    using UIKit;
-
     public abstract class MvxGestureRecognizerBehavior
     {
         public ICommand Command { get; set; }

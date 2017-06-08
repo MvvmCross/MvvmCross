@@ -11,6 +11,11 @@ namespace MvvmCross.BindingEx.WindowsCommon
 
 #if WINDOWS_WPF
 using System.ComponentModel;
+using System.Windows;
+using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Binding.Wpf
 #endif

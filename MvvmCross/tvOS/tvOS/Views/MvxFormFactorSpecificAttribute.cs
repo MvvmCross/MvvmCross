@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.tvOS.Platform;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using Platform;
-
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFormFactorSpecificAttribute
         : MvxConditionalConventionalAttribute

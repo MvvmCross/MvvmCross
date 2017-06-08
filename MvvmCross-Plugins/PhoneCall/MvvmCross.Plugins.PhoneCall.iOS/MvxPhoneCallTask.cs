@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform.iOS.Platform;
 using Foundation;
+using MvvmCross.Platform.iOS.Platform;
 
 namespace MvvmCross.Plugins.PhoneCall.iOS
 {

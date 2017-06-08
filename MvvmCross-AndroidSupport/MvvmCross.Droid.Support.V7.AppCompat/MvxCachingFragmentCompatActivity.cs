@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivityCompat.cs
+﻿// MvxCachingFragmentActivityCompat.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,18 +15,17 @@ using Android.Support.V4.App;
 using Android.Util;
 using Android.Views;
 using Java.Lang;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -481,7 +480,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
         : MvxCachingFragmentCompatActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxCachingFragmentCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
         {

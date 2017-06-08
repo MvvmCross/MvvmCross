@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using System;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Platform;
-
     public class MvxBaseMacViewPresenter
         : MvxViewPresenter, IMvxMacViewPresenter
     {

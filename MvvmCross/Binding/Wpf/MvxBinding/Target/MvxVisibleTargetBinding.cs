@@ -12,6 +12,7 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
 
 namespace MvvmCross.Binding.Wpf.MvxBinding.Target

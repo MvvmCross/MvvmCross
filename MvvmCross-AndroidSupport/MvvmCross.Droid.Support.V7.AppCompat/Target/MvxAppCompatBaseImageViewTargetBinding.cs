@@ -1,22 +1,20 @@
-// MvxAppCompatBaseImageViewTargetBinding.cs
+﻿// MvxAppCompatBaseImageViewTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Graphics;
+using Android.Support.V7.Widget;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-
-    using Android.Graphics;
-    using Android.Support.V7.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {

@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test.Mocks.TestViews;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Platform
 {
-    using MvvmCross.Core.ViewModels;
-    using Core;
-    using Mocks.TestViewModels;
-    using Mocks.TestViews;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxViewModelViewLookupBuilderTest : MvxIoCSupportingTest
     {

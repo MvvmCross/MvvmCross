@@ -1,13 +1,13 @@
+using Cirrious.FluentLayouts.Touch;
+using Foundation;
+using MvvmCross.iOS.Support.Views;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using Foundation;
-    using XamarinSidebar;
-    using XamarinSidebar.Attributes;
-    using Support.Views;
-    using UIKit;
-
     [Register("KeyboardHandlingView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.PushPanel, true)]
     public class KeyboardHandlingView : MvxBaseViewController<KeyboardHandlingViewModel>

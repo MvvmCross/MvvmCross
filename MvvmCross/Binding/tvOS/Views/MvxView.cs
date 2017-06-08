@@ -5,17 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-
-    using CoreGraphics;
-
-    using Attributes;
-    using BindingContext;
-
-    using UIKit;
-
     public class MvxView
         : UIView
           , IMvxBindable

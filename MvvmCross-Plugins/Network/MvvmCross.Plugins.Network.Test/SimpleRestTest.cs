@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Test.Core;
-using MvvmCross.Plugins.Network.Rest;
-using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using MvvmCross.Plugins.Json;
+using MvvmCross.Plugins.Network.Rest;
+using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
 
 namespace MvvmCross.Plugins.Network.Test
 {

@@ -1,4 +1,4 @@
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Droid.Views;

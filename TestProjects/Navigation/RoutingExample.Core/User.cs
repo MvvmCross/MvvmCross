@@ -1,5 +1,4 @@
-﻿using System;
-namespace RoutingExample.Core
+﻿namespace RoutingExample.Core
 {
     public class User
     {

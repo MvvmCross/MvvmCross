@@ -1,16 +1,14 @@
-﻿namespace MvvmCross.iOS.Views
+﻿using System;
+using System.Collections.Generic;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
+namespace MvvmCross.iOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Binding.BindingContext;
-    using Core.ViewModels;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.iOS.Views;
-
-    using UIKit;
-    using Foundation;
-
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {
         private Dictionary<string, UIViewController> _pagedViewControllerCache = null;

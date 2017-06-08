@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-
     public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup, IMvxViewModelByNameRegistry
     {
         private readonly Dictionary<string, Type> _availableViewModelsByName;

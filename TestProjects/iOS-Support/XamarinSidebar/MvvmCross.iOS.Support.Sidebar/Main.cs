@@ -1,7 +1,7 @@
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using UIKit;
-
     public class Application
 	{
 		// This is the main entry point of the application.

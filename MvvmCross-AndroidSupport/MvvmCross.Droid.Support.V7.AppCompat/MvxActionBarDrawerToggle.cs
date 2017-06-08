@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
+using Android.Runtime;
 using Android.Support.V4.Widget;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using System;
-using Android.Runtime;
-using Android.Support.V7.App;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using MvvmCross.Platform.Core;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-    using System.Threading;
-
-    using MvvmCross.Platform.Core;
-
-    using UIKit;
-
     public abstract class MvxTvosUIThreadDispatcher
         : MvxMainThreadDispatcher
     {

@@ -5,17 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using Java.Lang;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using MvvmCross.Platform;
 using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4

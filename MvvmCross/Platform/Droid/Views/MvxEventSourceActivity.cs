@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.Content;
-    using Android.OS;
-    using Android.Runtime;
-
-    using Core;
-
     [Register("mvvmcross.platform.droid.views.MvxEventSourceActivity")]
     public abstract class MvxEventSourceActivity
         : Activity, IMvxEventSourceActivity

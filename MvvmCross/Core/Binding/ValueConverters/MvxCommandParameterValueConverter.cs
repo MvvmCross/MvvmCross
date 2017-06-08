@@ -7,13 +7,11 @@
 
 using System;
 using System.Globalization;
+using System.Windows.Input;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Binding.ValueConverters
 {
-    using System.Windows.Input;
-
-    using Platform.Converters;
-
     public class MvxCommandParameterValueConverter
         : MvxValueConverter<ICommand, ICommand>
     {

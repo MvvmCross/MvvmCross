@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Console.Views
 {
-    using Core.ViewModels;
-    using MvvmCross.Platform;
-
     public class MvxConsoleSystemMessageHandler
     {
         public bool ExitFlag { get; set; }

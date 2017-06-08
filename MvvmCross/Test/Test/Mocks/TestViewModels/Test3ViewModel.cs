@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Test.Mocks.TestViewModels
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.ViewModels;
-
     public class Test3ViewModel : MvxViewModel
     {
         public BundleObject SaveStateBundleObject { get; set; }

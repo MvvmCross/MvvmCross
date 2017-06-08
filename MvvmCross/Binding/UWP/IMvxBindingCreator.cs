@@ -7,8 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Binding.Bindings;
 using Windows.UI.Xaml;
+using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.Uwp
 {

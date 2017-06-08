@@ -6,16 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System.Linq;
+using AppKit;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using System.Linq;
-
-    using AppKit;
-
-    using Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
     {

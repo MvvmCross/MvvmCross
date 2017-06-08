@@ -1,5 +1,4 @@
-﻿using System;
-using UIKit;
+﻿using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters.Attributes
 {

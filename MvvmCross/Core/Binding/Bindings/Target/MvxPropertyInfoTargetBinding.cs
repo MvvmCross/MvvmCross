@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.Reflection;
-
-    using Attributes;
-    using Platform;
-
     public class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
     {
         private readonly PropertyInfo _targetPropertyInfo;

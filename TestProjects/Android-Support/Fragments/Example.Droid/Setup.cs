@@ -1,20 +1,19 @@
-using Android.Content;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
+using Android.Content;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Example.Core;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Platform;
 
 namespace Example.Droid
 {

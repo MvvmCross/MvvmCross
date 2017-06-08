@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System;
-    using System.Windows;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxWpfViewsContainer
         : MvxViewsContainer
         , IMvxWpfViewsContainer

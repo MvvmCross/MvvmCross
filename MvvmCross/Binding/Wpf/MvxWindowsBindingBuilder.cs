@@ -15,7 +15,17 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Wpf.MvxBinding;
+using MvvmCross.Binding.Wpf.MvxBinding.Target;
+using MvvmCross.Binding.Wpf.WindowsBinding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding.Wpf
 #endif

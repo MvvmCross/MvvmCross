@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Globalization;
+using MvvmCross.Core;
+using MvvmCross.Core.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Test.Core
 {
-    using System.Globalization;
-    using System.Threading;
-
-    using MvvmCross.Core;
-    using MvvmCross.Core.Platform;
-    using Platform.Core;
-    using Platform.IoC;
-    using Platform.Platform;
-
     public class MvxIoCSupportingTest
     {
         private IMvxIoCProvider _ioc;

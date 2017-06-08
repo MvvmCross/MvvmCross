@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
-    using Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder
     {

@@ -3,6 +3,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
     public class MvxBaseSplitViewController : MvxEventSourceSplitViewController, IMvxIosView

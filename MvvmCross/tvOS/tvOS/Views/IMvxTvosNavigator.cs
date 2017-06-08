@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.tvOS.Views
 {
-    using Core.ViewModels;
-
     public interface IMvxTvosNavigator
     {
         void NavigateTo(MvxViewModelRequest request);

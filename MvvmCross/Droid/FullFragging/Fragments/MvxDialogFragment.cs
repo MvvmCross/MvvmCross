@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
-using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Shared.Fragments;
-using Android.App;
-using Android.Content;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {

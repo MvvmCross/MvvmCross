@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.ExtensionMethods;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using ExtensionMethods;
-
-    using UIKit;
-
     public class MvxUIViewVisibleTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {
         public MvxUIViewVisibleTargetBinding(UIView target)

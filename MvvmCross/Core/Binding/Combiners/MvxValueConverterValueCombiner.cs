@@ -1,15 +1,13 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Bindings.SourceSteps;
-    using Platform.Converters;
-    using Platform.IoC;
-
     [MvxUnconventional]
     public class MvxValueConverterValueCombiner : MvxValueCombiner
     {

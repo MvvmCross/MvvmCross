@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Newtonsoft.Json;
 using System;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace MvvmCross.Plugins.Json
 {

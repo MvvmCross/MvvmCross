@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using Binders;
-    using Bindings;
-    using Platform;
-
     public class MvxBindingContext : IMvxBindingContext
     {
         public class TargetAndBinding

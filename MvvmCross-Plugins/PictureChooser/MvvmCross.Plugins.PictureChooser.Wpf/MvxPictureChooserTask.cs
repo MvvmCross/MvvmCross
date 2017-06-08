@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
-
 namespace MvvmCross.Plugins.PictureChooser.Wpf
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask

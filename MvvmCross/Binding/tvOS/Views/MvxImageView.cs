@@ -5,16 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-
-    using CoreGraphics;
-
-    using Foundation;
-
-    using UIKit;
-
     [Register("MvxImageView")]
     public class MvxImageView
         : UIImageView

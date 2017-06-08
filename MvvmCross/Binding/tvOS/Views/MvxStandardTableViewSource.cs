@@ -5,20 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Foundation;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Foundation;
-
-    using Binders;
-    using Bindings;
-    using Bindings.SourceSteps;
-    using Platform;
-
-    using UIKit;
-
     public class MvxStandardTableViewSource : MvxTableViewSource
     {
         private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");

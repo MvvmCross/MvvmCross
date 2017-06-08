@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Reflection;
-
-    using Core;
-
     public class MvxValueEventSubscription<T>
         : MvxWeakEventSubscription<object, MvxValueEventArgs<T>>
     {

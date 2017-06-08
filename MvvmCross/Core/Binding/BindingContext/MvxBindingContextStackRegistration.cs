@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-
-    using Platform;
-    using Platform.Platform;
-
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
     {

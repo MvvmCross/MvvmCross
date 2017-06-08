@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using Platform.Converters;
-
     public class MvxValueConverterRegistry
         : MvxNamedInstanceRegistry<IMvxValueConverter>
           , IMvxValueConverterLookup

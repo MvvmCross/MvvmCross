@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using Navigation;
-    using ViewModels;
-    using Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-
     public abstract class MvxSetup
     {
         protected abstract IMvxTrace CreateDebugTrace();

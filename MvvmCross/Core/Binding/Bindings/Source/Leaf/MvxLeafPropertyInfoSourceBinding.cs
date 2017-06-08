@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
-    using System;
-    using System.Reflection;
-
-    using ExtensionMethods;
-    using Platform.Converters;
-    using Platform.Exceptions;
-    using Platform.Platform;
-
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
         protected MvxLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
-    using Platform;
-
     public class MvxEventInfoTargetBinding<T> : MvxTargetBinding
         where T : EventArgs
     {

@@ -5,36 +5,33 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Android.Content;
+using Android.Views;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Droid;
+using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Droid.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Android.Content;
-    using Android.Views;
-
-    using Binding;
-    using Binding.Binders;
-    using Binding.BindingContext;
-    using Binding.Bindings.Target.Construction;
-    using Binding.Droid;
-    using Binding.Droid.Binders.ViewTypeResolvers;
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Droid;
-    using MvvmCross.Platform.Droid.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-
     public abstract class MvxAndroidSetup
         : MvxSetup
           , IMvxAndroidGlobals

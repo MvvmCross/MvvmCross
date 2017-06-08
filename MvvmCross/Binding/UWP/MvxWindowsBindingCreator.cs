@@ -7,15 +7,14 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Binding;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Uwp.Converters;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Binding.Uwp
 {

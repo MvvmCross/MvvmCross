@@ -6,15 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System;
+using AppKit;
+using Foundation;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Mac.Views
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
-    using Core;
-
     public class MvxEventSourceViewController
         : NSViewController
           , IMvxEventSourceViewController

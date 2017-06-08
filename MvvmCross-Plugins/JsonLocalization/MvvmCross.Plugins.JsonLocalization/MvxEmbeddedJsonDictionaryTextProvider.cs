@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
 using System;
 using System.IO;
 using System.Reflection;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {

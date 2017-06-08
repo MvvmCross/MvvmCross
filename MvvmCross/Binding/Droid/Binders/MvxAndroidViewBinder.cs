@@ -1,27 +1,27 @@
-// MvxAndroidViewBinder.cs
+﻿// MvxAndroidViewBinder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
+using Android.Content.Res;
+using Android.Util;
+using Android.Views;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Binders
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Android.Content;
-    using Android.Content.Res;
-    using Android.Util;
-    using Android.Views;
-
-    using Binding.Binders;
-    using Bindings;
-    using ResourceHelpers;
-    using Platform;
-    using Platform.Exceptions;
-    using Platform.Platform;
+    
 
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {

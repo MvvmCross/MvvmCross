@@ -5,14 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Windows.UI.Core;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-
-    using Windows.UI.Core;
-
-    using MvvmCross.Platform.Core;
-
     public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;

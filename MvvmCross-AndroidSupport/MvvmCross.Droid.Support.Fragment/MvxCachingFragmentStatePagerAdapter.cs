@@ -1,16 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using Java.Lang;
-using String = Java.Lang.String;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
+using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {

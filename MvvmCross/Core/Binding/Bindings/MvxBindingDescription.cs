@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings
 {
-    using SourceSteps;
-    using Platform.Converters;
-
     public class MvxBindingDescription
     {
         public MvxBindingDescription()

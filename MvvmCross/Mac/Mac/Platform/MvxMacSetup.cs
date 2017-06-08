@@ -1,27 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using AppKit;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Mac;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Mac.Views;
+using MvvmCross.Mac.Views.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using AppKit;
-
-    using Binding;
-    using Binding.Binders;
-    using Binding.BindingContext;
-    using Binding.Bindings.Target.Construction;
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-
-    using Binding.Mac;
-    using Views;
-    using Views.Presenters;
-
     public abstract class MvxMacSetup
         : MvxSetup
     {

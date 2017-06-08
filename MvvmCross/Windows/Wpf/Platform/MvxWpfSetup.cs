@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Threading;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Wpf.Views;
+
 namespace MvvmCross.Wpf.Platform
 {
-    using System.Windows.Threading;
-
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using Views;
-
     public abstract class MvxWpfSetup
         : MvxSetup
     {

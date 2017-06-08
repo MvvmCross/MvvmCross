@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
          , IMvxAndroidViewsContainer

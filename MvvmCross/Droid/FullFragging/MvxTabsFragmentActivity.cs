@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Views;
-using Android.Widget;
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Views;
+using MvvmCross.Platform.Core;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.FullFragging

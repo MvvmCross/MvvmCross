@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Platform.Platform;
-
     public class MvxNamedInstanceRegistry<T>
         : IMvxNamedInstanceLookup<T>
           , IMvxNamedInstanceRegistry<T>

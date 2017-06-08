@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Java.Lang;
+
 namespace MvvmCross.Platform.Droid
 {
-    using Java.Lang;
-
     public class MvxJavaContainer : Object
     {
         protected MvxJavaContainer(object theObject)

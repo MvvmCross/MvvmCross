@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Platform;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Platform
 {
-    using System;
-
-    using MvvmCross.Core.Platform;
-    using Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxStringToTypeParserTest : MvxIoCSupportingTest
     {

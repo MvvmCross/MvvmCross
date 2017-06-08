@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Binding.BindingContext;
-    using Core.ViewModels;
-    using MvvmCross.Platform.tvOS.Views;
-
     public class MvxTabBarViewController
         : MvxEventSourceTabBarController
           , IMvxTvosView

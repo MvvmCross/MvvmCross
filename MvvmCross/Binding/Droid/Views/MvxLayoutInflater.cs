@@ -1,22 +1,21 @@
+﻿using System;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Java.Interop;
 using Java.Lang;
+using Java.Lang.Reflect;
+using MvvmCross.Binding.Droid.Binders;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Platform;
+using Boolean = Java.Lang.Boolean;
+using Exception = Java.Lang.Exception;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.OS;
-    using Android.Util;
-    using Android.Views;
-    using Android.Runtime;
-
-    using Java.Interop;
-    using Java.Lang.Reflect;
-
-    using Binders;
-    using BindingContext;
-    using Platform;
-
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
     /// Typically this is attached to MvxActivity and co via our MvxContextWrapper.
@@ -40,7 +39,7 @@ namespace MvvmCross.Binding.Droid.Views
     {
         public class MvxBindingVisitor
         {
-            private static readonly Java.Lang.Boolean TheTruth = Java.Lang.Boolean.True;
+            private static readonly Boolean TheTruth = Boolean.True;
 
             public IMvxLayoutInflaterHolderFactory Factory { get; set; }
 
@@ -267,7 +266,7 @@ namespace MvvmCross.Binding.Droid.Views
                     setPrivateFactoryMethod.Invoke(this,
                         new PrivateFactoryWrapper2((IFactory2)Context, this, _bindingVisitor));
                 }
-                catch (Java.Lang.Exception ex)
+                catch (Exception ex)
                 {
                     Mvx.Warning("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
                 }
@@ -300,8 +299,8 @@ namespace MvvmCross.Binding.Droid.Views
                         _constructorArgs.Accessible = true;
                     }
 
-                    Java.Lang.Object[] constructorArgsArr = (Java.Lang.Object[])_constructorArgs.Get(this);
-                    Java.Lang.Object lastContext = constructorArgsArr[0];
+                    Object[] constructorArgsArr = (Object[])_constructorArgs.Get(this);
+                    Object lastContext = constructorArgsArr[0];
 
                     // The LayoutInflater actually finds out the correct context to use. We just need to set
                     // it on the mConstructor for the internal method.
@@ -376,7 +375,7 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        private class PrivateFactoryWrapper2 : Java.Lang.Object, IFactory2
+        private class PrivateFactoryWrapper2 : Object, IFactory2
         {
             private static readonly string Tag = "PrivateFactoryWrapper2";
 

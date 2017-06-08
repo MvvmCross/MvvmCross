@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-    using System.Reflection;
-
-    using Exceptions;
-    using IoC;
-
     public class MvxBootstrapRunner
     {
         public virtual void Run(Assembly assembly)

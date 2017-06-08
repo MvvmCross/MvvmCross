@@ -1,12 +1,10 @@
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.Platform
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests : MvxIoCSupportingTest
     {

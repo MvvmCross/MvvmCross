@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS
 {
-    using System;
-
-    using UIKit;
-
     public static class MvxTvosColorExtensionMethods
     {
         public static UIColor ColorFromInt(this uint rgbValue)

@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using CoreGraphics;
-
-    using Attributes;
-    using BindingContext;
-    using Bindings;
-    using UIKit;
-
     public class MvxCollectionReusableView
         : UICollectionReusableView
           , IMvxBindable

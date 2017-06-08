@@ -5,18 +5,17 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 namespace MvvmCross.Uwp.Views.Suspension
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Threading.Tasks;
-
-    using Windows.Storage;
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
-
     /// <summary>
     /// MvxSuspensionManager captures global session state to simplify process lifetime management
     /// for an application.  Note that session state will be automatically cleared under a variety

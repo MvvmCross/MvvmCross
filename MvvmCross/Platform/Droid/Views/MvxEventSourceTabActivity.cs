@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Platform.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.Content;
-    using Android.OS;
-
-    using Core;
-
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.platform.droid.views.MvxEventSourceTabActivity")]
     public abstract class MvxEventSourceTabActivity

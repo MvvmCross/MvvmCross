@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Exceptions;
-
     public class MvxLoaderPluginRegistry
     {
         private readonly IDictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>> ();

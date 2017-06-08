@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using Exceptions;
-
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)

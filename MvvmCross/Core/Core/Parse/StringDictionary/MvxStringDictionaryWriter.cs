@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Text;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System.Collections.Generic;
-    using System.Text;
-
     public class MvxStringDictionaryWriter : IMvxStringDictionaryWriter
     {
         public string Write(IDictionary<string, string> dictionary)

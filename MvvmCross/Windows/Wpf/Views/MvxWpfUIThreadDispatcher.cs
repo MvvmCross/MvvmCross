@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Threading;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System;
-    using System.Windows.Threading;
-
-    using MvvmCross.Platform.Core;
-
     public class MvxWpfUIThreadDispatcher
         : MvxMainThreadDispatcher
     {

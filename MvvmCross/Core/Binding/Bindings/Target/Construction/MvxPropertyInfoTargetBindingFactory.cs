@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Platform;
-    using Platform.Platform;
-
     public class MvxPropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {

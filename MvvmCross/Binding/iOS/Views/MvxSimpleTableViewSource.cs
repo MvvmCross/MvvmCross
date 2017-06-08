@@ -1,21 +1,18 @@
-// MvxSimpleTableViewSource.cs
+﻿// MvxSimpleTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.iOS.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using Platform;
-    using Platform.iOS.Platform;
-
-    using UIKit;
-
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private readonly NSString _cellIdentifier;

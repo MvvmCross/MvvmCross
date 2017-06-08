@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Construction;
-    using Parse.PropertyPath.PropertyTokens;
-    using Platform.Converters;
-    using Platform.Platform;
-
     public abstract class MvxChainedSourceBinding
         : MvxPropertyInfoSourceBinding
     {

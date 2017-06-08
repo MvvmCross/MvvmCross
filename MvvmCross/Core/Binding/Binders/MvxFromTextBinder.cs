@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Bindings;
-
     public class MvxFromTextBinder
         : IMvxBinder
     {

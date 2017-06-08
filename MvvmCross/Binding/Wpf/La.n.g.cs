@@ -12,7 +12,13 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
+using System.Collections.Generic;
+
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding.Wpf
 #endif

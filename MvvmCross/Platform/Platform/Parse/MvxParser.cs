@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Parse
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-
-    using Exceptions;
-
     public abstract class MvxParser
     {
         protected string FullText { get; private set; }

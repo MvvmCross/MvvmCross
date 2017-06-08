@@ -1,23 +1,20 @@
-// MvxBaseTableViewSource.cs
+﻿// MvxBaseTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Windows.Input;
-
-    using Foundation;
-    using BindingContext;
-    using Platform;
-    using Platform.Core;
-    using Platform.Exceptions;
-
-    using UIKit;
-
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
         private readonly UITableView _tableView;

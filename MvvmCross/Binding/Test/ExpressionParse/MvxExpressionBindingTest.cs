@@ -1,29 +1,26 @@
-// MvxExpressionBindingTest.cs
+﻿// MvxExpressionBindingTest.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Moq;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.ExpressionParse;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Binding.Test.ExpressionParse
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-
-    using Moq;
-
-    using Binding.Binders;
-    using BindingContext;
-    using Binding.Bindings;
-    using Binding.Bindings.SourceSteps;
-    using Binding.ExpressionParse;
-    using Platform.Converters;
-    using MvvmCross.Test.Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxExpressionBindingTest : MvxIoCSupportingTest
     {

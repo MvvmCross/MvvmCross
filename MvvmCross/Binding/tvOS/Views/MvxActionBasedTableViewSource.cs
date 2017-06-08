@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Foundation;
-
-    using Bindings;
-    using Platform;
-
-    using UIKit;
-
     public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
         protected MvxActionBasedTableViewSource(UITableView tableView)

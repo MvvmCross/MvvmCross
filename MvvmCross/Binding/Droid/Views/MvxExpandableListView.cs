@@ -1,16 +1,14 @@
+﻿using System;
+using System.Collections;
+using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Windows.Input;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {

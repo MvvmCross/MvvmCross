@@ -1,7 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.ViewModels;
 
 namespace MasterDetailExample.Core.ViewModels
