@@ -110,9 +110,13 @@ namespace MvvmCross.Core.ViewModels
         private readonly IMvxCommandHelper _commandHelper;
 
         public MvxCommandBase()
+            : this(Mvx.CanResolve<IMvxCommandHelper>() ? Mvx.Resolve<IMvxCommandHelper>() : new MvxWeakCommandHelper())
         {
-            if (!Mvx.TryResolve<IMvxCommandHelper>(out this._commandHelper))
-                this._commandHelper = new MvxWeakCommandHelper();
+        }
+
+        public MvxCommandBase(IMvxCommandHelper commandHelper)
+        {
+            _commandHelper = commandHelper;
 
             var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             this.ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
@@ -163,6 +167,13 @@ namespace MvvmCross.Core.ViewModels
             this._canExecute = canExecute;
         }
 
+        internal MvxCommand(Action execute, Func<bool> canExecute, IMvxCommandHelper helper)
+            : base(helper)
+        {
+            this._execute = execute;
+            this._canExecute = canExecute;
+        }
+
         public bool CanExecute(object parameter)
         {
             return this._canExecute == null || this._canExecute();
@@ -205,6 +216,13 @@ namespace MvvmCross.Core.ViewModels
             this._canExecute = canExecute;
         }
 
+        internal MvxCommand(Action<T> execute, Func<T, bool> canExecute, IMvxCommandHelper helper)
+            : base(helper)
+        {
+            this._execute = execute;
+            this._canExecute = canExecute;
+        }
+
         public bool CanExecute(object parameter)
         {
             return this._canExecute == null || this._canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
@@ -226,6 +244,32 @@ namespace MvvmCross.Core.ViewModels
         public void Execute()
         {
             this.Execute(null);
+        }
+    }
+
+    public class MvxStrongCommand : MvxCommand
+    {
+        public MvxStrongCommand(Action execute)
+            : this(execute, null)
+        {
+        }
+
+        public MvxStrongCommand(Action execute, Func<bool> canExecute)
+            : base(execute, canExecute, new MvxStrongCommandHelper())
+        {
+        }
+    }
+
+    public class MvxStrongCommand<T> : MvxCommand<T>
+    {
+        public MvxStrongCommand(Action<T> execute)
+            : this(execute, null)
+        {
+        }
+
+        public MvxStrongCommand(Action<T> execute, Func<T, bool> canExecute)
+            : base(execute, canExecute, new MvxStrongCommandHelper())
+        {
         }
     }
 }
