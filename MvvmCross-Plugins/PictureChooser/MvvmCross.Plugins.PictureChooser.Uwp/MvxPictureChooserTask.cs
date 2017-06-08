@@ -18,7 +18,7 @@ using Windows.UI.Core;
 
 namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
