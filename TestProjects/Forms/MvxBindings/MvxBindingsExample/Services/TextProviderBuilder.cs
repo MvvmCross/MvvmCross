@@ -16,7 +16,7 @@ namespace MvxBindingsExample.Services
         {
             get
             {
-                var dictionary = this.GetType().GetTypeInfo()
+                var dictionary = GetType().GetTypeInfo()
                                      .Assembly
                                      .CreatableTypes()
                                      .Where(t => t.Name.EndsWith("ViewModel"))

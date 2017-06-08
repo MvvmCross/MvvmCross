@@ -1,4 +1,7 @@
-﻿namespace MvvmCross.Binding.Droid.Binders
+﻿using System;
+using Android.Runtime;
+
+namespace MvvmCross.Binding.Droid.Binders
 {
     using Android.Content;
     using Android.OS;
@@ -8,7 +11,7 @@
     using Java.Lang;
     using Java.Lang.Reflect;
 
-    using MvvmCross.Platform;
+    using Platform;
 
     public static class MvxLayoutInflaterCompat
     {
@@ -16,28 +19,28 @@
         private static Field _layoutInflaterFactory2Field;
         private static bool _checkedField;
 
-        internal class FactoryWrapper : Java.Lang.Object, LayoutInflater.IFactory
+        internal class FactoryWrapper : Object, LayoutInflater.IFactory
         {
             protected readonly IMvxLayoutInflaterFactory DelegateFactory;
 
-            public FactoryWrapper(System.IntPtr handle, Android.Runtime.JniHandleOwnership ownership)
+            public FactoryWrapper(IntPtr handle, JniHandleOwnership ownership)
                 : base(handle, ownership)
             {}
 
             public FactoryWrapper(IMvxLayoutInflaterFactory delegateFactory)
             {
-                this.DelegateFactory = delegateFactory;
+                DelegateFactory = delegateFactory;
             }
 
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {
-                return this.DelegateFactory.OnCreateView(null, name, context, attrs);
+                return DelegateFactory.OnCreateView(null, name, context, attrs);
             }
         }
 
         internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
-            public FactoryWrapper2(System.IntPtr handle, Android.Runtime.JniHandleOwnership ownership)
+            public FactoryWrapper2(IntPtr handle, JniHandleOwnership ownership)
                 : base(handle, ownership)
             {}
 
@@ -47,7 +50,7 @@
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
-                return this.DelegateFactory.OnCreateView(parent, name, context, attrs);
+                return DelegateFactory.OnCreateView(parent, name, context, attrs);
             }
         }
 
@@ -55,7 +58,7 @@
         {
             if (SdkInt >= 21)
             {
-                layoutInflater.Factory2 = (factory != null ? new FactoryWrapper2(factory) : null);
+                layoutInflater.Factory2 = factory != null ? new FactoryWrapper2(factory) : null;
             }
             else if (SdkInt >= 11)
             {
@@ -71,7 +74,7 @@
             }
             else
             {
-                layoutInflater.Factory = (factory != null ? new FactoryWrapper(factory) : null);
+                layoutInflater.Factory = factory != null ? new FactoryWrapper(factory) : null;
             }
         }
 
@@ -104,7 +107,7 @@
             {
                 try
                 {
-                    _layoutInflaterFactory2Field.Set(inflater, (Java.Lang.Object)factory);
+                    _layoutInflaterFactory2Field.Set(inflater, (Object)factory);
                 }
                 catch (IllegalAccessException)
                 {

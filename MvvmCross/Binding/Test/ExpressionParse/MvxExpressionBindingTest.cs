@@ -14,12 +14,12 @@ namespace MvvmCross.Binding.Test.ExpressionParse
 
     using Moq;
 
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.ExpressionParse;
-    using MvvmCross.Platform.Converters;
+    using Binding.Binders;
+    using BindingContext;
+    using Binding.Bindings;
+    using Binding.Bindings.SourceSteps;
+    using Binding.ExpressionParse;
+    using Platform.Converters;
     using MvvmCross.Test.Core;
 
     using NUnit.Framework;
@@ -109,7 +109,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -130,7 +130,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestUnderscoreDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -188,7 +188,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -217,7 +217,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -246,7 +246,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -267,7 +267,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[0].Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -288,7 +288,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -310,7 +310,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[index].Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         private static readonly int Zero = 0;
@@ -377,7 +377,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup[index].Value)
                     .Apply();
 
-            this.DoTest(test, expectedDesc);
+            DoTest(test, expectedDesc);
         }
 
         [Test]
@@ -398,14 +398,14 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            this.DoTest(test, mock => mock, expectedDesc);
+            DoTest(test, mock => mock, expectedDesc);
         }
 
         private void DoTest(
             Action<MockBindingContext> action,
             MvxBindingDescription expectedDescription)
         {
-            this.DoTest(action, (context) => context.Target, expectedDescription);
+            DoTest(action, (context) => context.Target, expectedDescription);
         }
 
         private void DoTest(

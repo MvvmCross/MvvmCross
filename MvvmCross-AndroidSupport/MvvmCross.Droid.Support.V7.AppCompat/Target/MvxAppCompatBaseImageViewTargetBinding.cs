@@ -36,9 +36,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             try
             {
                 Bitmap bitmap;
-                if (!this.GetBitmap(value, out bitmap))
+                if (!GetBitmap(value, out bitmap))
                     return;
-                this.SetImageBitmap(imageView, bitmap);
+                SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {

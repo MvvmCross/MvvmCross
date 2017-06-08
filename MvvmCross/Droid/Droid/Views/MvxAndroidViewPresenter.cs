@@ -10,8 +10,8 @@ namespace MvvmCross.Droid.Views
     using Android.App;
     using Android.Content;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Droid.Platform;
     using MvvmCross.Platform.Platform;
@@ -23,13 +23,13 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var intent = this.CreateIntentForRequest(request);
+            var intent = CreateIntentForRequest(request);
             Show(intent);
         }
 
         protected virtual void Show(Intent intent)
         {
-            var activity = this.Activity;
+            var activity = Activity;
             if (activity == null)
             {
                 MvxTrace.Warning("Cannot Resolve current top activity");
@@ -57,7 +57,7 @@ namespace MvvmCross.Droid.Views
             var presentationHint = hint as MvxClosePresentationHint;
             if (presentationHint != null)
             {
-                this.Close(presentationHint.ViewModelToClose);
+                Close(presentationHint.ViewModelToClose);
                 return;
             }
 
@@ -66,7 +66,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var activity = this.Activity;
+            var activity = Activity;
 
             var currentView = activity as IMvxView;
 

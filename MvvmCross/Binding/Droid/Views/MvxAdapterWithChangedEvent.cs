@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public override void NotifyDataSetChanged()
         {
-            this.NotifyDataSetChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            NotifyDataSetChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public override void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)

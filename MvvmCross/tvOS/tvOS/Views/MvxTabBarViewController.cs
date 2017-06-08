@@ -9,8 +9,8 @@ namespace MvvmCross.tvOS.Views
 {
     using System;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
+    using Binding.BindingContext;
+    using Core.ViewModels;
     using MvvmCross.Platform.tvOS.Views;
 
     public class MvxTabBarViewController
@@ -33,15 +33,15 @@ namespace MvvmCross.tvOS.Views
             get
             {
                 // special code needed in TabBar because View is initialized during construction
-                return this.BindingContext?.DataContext;
+                return BindingContext?.DataContext;
             }
-            set { this.BindingContext.DataContext = value; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IMvxViewModel; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

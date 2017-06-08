@@ -1,4 +1,5 @@
-﻿using MvvmCross.iOS.Views.Presenters;
+﻿using MasterDetailExample.Core;
+using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.iOS;
@@ -19,7 +20,7 @@ namespace MasterDetailExample.iOS
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         protected override IMvxIosViewPresenter CreatePresenter()

@@ -14,8 +14,8 @@ namespace MvvmCross.Binding.iOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
+    using BindingContext;
+    using Bindings;
 
     using UIKit;
 
@@ -74,7 +74,7 @@ namespace MvvmCross.Binding.iOS.Views
                                     UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
-            this.Accessory = tableViewCellAccessory;
+            Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingText);
         }
 
@@ -87,7 +87,7 @@ namespace MvvmCross.Binding.iOS.Views
             // note that we allow the virtual Accessory property to be set here - but do not seal
             // it. Previous `sealed` code caused odd, unexplained behaviour in MonoTouch
             // - see https://github.com/MvvmCross/MvvmCross/issues/524
-            this.Accessory = tableViewCellAccessory;
+            Accessory = tableViewCellAccessory;
             this.CreateBindingContext(bindingDescriptions);
         }
 
@@ -95,15 +95,15 @@ namespace MvvmCross.Binding.iOS.Views
         {
             if (disposing)
             {
-                this.BindingContext.ClearAllBindings();
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }

@@ -14,11 +14,11 @@ namespace MvvmCross.Platform.IoC
 
         public MvxIocOptions()
         {
-            this.TryToDetectSingletonCircularReferences = true;
-            this.TryToDetectDynamicCircularReferences = true;
-            this.CheckDisposeIfPropertyInjectionFails = true;
-            this.PropertyInjectorType = typeof(MvxPropertyInjector);
-            this.PropertyInjectorOptions = new MvxPropertyInjectorOptions();
+            TryToDetectSingletonCircularReferences = true;
+            TryToDetectDynamicCircularReferences = true;
+            CheckDisposeIfPropertyInjectionFails = true;
+            PropertyInjectorType = typeof(MvxPropertyInjector);
+            PropertyInjectorOptions = new MvxPropertyInjectorOptions();
         }
 
         public bool TryToDetectSingletonCircularReferences { get; set; }

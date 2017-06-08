@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.Droid.Platform
 {
-    using MvvmCross.Platform.Droid.Views;
+    using Views;
 
     public interface IMvxIntentResultSink
     {

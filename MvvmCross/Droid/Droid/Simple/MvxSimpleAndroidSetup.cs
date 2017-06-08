@@ -13,8 +13,8 @@ namespace MvvmCross.Droid.Simple
 
     using Android.Content;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Platform;
+    using Core.ViewModels;
+    using Platform;
 
     public abstract class MvxSimpleAndroidSetup : MvxAndroidSetup
     {
@@ -23,10 +23,10 @@ namespace MvvmCross.Droid.Simple
         protected MvxSimpleAndroidSetup(Context applicationContext, params Type[] converterTypes)
             : base(applicationContext)
         {
-            this._converterTypes = converterTypes;
+            _converterTypes = converterTypes;
         }
 
-        protected override IEnumerable<Type> ValueConverterHolders => this._converterTypes.ToList();
+        protected override IEnumerable<Type> ValueConverterHolders => _converterTypes.ToList();
 
         protected override void InitializeViewLookup()
         {

@@ -9,7 +9,7 @@ namespace MvvmCross.Droid.Platform
 {
     using Android.OS;
 
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxSavedStateConverter
     {

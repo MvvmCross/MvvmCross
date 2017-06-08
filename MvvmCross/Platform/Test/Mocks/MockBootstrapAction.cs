@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.Test.Mocks
 {
-    using MvvmCross.Platform.Platform;
+    using Platform;
 
     public class MockBootstrapAction : IMvxBootstrapAction
     {

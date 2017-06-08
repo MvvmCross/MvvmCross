@@ -12,7 +12,7 @@ namespace MvvmCross.Platform.IoC
     using System.Linq;
     using System.Reflection;
 
-    using MvvmCross.Platform.Exceptions;
+    using Exceptions;
 
     public static class MvxTypeExtensions
     {
@@ -110,8 +110,8 @@ namespace MvvmCross.Platform.IoC
         {
             public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
             {
-                this.ImplementationType = implementationType;
-                this.ServiceTypes = serviceTypes;
+                ImplementationType = implementationType;
+                ServiceTypes = serviceTypes;
             }
 
             public List<Type> ServiceTypes { get; private set; }

@@ -15,7 +15,7 @@ namespace MvvmCross.Core.ViewModels
     {
         public void Raise()
         {
-            this.Requested.Raise(this);
+            Requested.Raise(this);
         }
 
         public event EventHandler Requested;
@@ -25,7 +25,7 @@ namespace MvvmCross.Core.ViewModels
     {
         public void Raise(T request)
         {
-            this.Requested.Raise(this, request);
+            Requested.Raise(this, request);
         }
 
         public event EventHandler<MvxValueEventArgs<T>> Requested;

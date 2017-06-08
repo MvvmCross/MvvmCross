@@ -12,8 +12,8 @@ namespace MvvmCross.Binding.Droid.BindingContext
     using Android.Content;
     using Android.Views;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
+    using Binding.BindingContext;
+    using Views;
 
     public class MvxAndroidBindingContext
         : MvxBindingContext, IMvxAndroidBindingContext
@@ -24,24 +24,24 @@ namespace MvvmCross.Binding.Droid.BindingContext
         public MvxAndroidBindingContext(Context droidContext, IMvxLayoutInflaterHolder layoutInflaterHolder, object source = null)
             : base(source)
         {
-            this._droidContext = droidContext;
-            this._layoutInflaterHolder = layoutInflaterHolder;
+            _droidContext = droidContext;
+            _layoutInflaterHolder = layoutInflaterHolder;
         }
 
         public IMvxLayoutInflaterHolder LayoutInflaterHolder
         {
-            get { return this._layoutInflaterHolder; }
-            set { this._layoutInflaterHolder = value; }
+            get { return _layoutInflaterHolder; }
+            set { _layoutInflaterHolder = value; }
         }
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup)
         {
-            return this.BindingInflate(resourceId, viewGroup, true);
+            return BindingInflate(resourceId, viewGroup, true);
         }
 
         public virtual View BindingInflate(int resourceId, ViewGroup viewGroup, bool attachToRoot)
         {
-            var view = this.CommonInflate(
+            var view = CommonInflate(
                 resourceId,
                 viewGroup,
                 attachToRoot);
@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.Droid.BindingContext
         {
             using (new MvxBindingContextStackRegistration<IMvxAndroidBindingContext>(this))
             {
-                var layoutInflater = this._layoutInflaterHolder.LayoutInflater;
+                var layoutInflater = _layoutInflaterHolder.LayoutInflater;
                 {
                     // This is most likely a MvxLayoutInflater but it doesn't have to be.
                     // It handles setting the bindings and interacts with this instance of

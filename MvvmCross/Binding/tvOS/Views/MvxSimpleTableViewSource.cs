@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.tvOS.Views
 
     using Foundation;
 
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.tvOS.Platform;
+    using Platform;
+    using Platform.tvOS.Platform;
     using UIKit;
 
     public class MvxSimpleTableViewSource : MvxTableViewSource
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.tvOS.Views
         private readonly NSString _cellIdentifier;
         private readonly MvxTvosMajorVersionChecker _iosVersion6Checker = new MvxTvosMajorVersionChecker(6);
 
-        protected virtual NSString CellIdentifier => this._cellIdentifier;
+        protected virtual NSString CellIdentifier => _cellIdentifier;
 
         public MvxSimpleTableViewSource(IntPtr handle)
             : base(handle)
@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
-            this._cellIdentifier = new NSString(cellIdentifier);
+            _cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
         }
 
@@ -43,16 +43,16 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             // if no cellIdentifier supplied, then use the cell type name as cellId
             cellIdentifier = cellIdentifier ?? cellType.Name;
-            this._cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterClassForCellReuse(cellType, this._cellIdentifier);
+            _cellIdentifier = new NSString(cellIdentifier);
+            tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            if (this._iosVersion6Checker.IsVersionOrHigher)
-                return tableView.DequeueReusableCell(this.CellIdentifier, indexPath);
+            if (_iosVersion6Checker.IsVersionOrHigher)
+                return tableView.DequeueReusableCell(CellIdentifier, indexPath);
 
-            return tableView.DequeueReusableCell(this.CellIdentifier);
+            return tableView.DequeueReusableCell(CellIdentifier);
         }
     }
 }

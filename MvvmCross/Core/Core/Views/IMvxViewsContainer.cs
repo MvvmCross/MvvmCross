@@ -10,7 +10,7 @@ namespace MvvmCross.Core.Views
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Core.ViewModels;
+    using ViewModels;
 
     public interface IMvxViewsContainer : IMvxViewFinder
     {

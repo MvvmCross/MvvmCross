@@ -7,6 +7,7 @@
 
 using System;
 using Android.OS;
+using Android.Support.V4.App;
 using Android.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -43,7 +44,7 @@ namespace MvvmCross.Droid.Support.V4
                 return;
             }
 
-            Android.Support.V4.App.Fragment fragment = fragmentView.ToFragment();
+            Fragment fragment = fragmentView.ToFragment();
             if (fragmentView == null)
                 throw new InvalidOperationException($"Something really weird. ${nameof(fragmentView)} passed is not a Fragment!");
 
@@ -58,9 +59,9 @@ namespace MvvmCross.Droid.Support.V4
 
         }
 
-        private static Android.Support.V4.App.Fragment ToFragment(this IMvxFragmentView fragmentView)
+        private static Fragment ToFragment(this IMvxFragmentView fragmentView)
         {
-            return fragmentView as Android.Support.V4.App.Fragment;
+            return fragmentView as Fragment;
         }
 
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)
@@ -112,7 +113,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public static void RegisterFragmentViewToCacheIfNeeded(this IMvxFragmentView fragmentView, Type fragmentParentActivityType)
         {
-            Android.Support.V4.App.Fragment representedFragment = fragmentView.ToFragment();
+            Fragment representedFragment = fragmentView.ToFragment();
 
             if (representedFragment == null)
                 throw new InvalidOperationException($"Represented type: {fragmentView.GetType()} is not a Fragment!");

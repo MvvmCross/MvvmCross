@@ -9,18 +9,18 @@ namespace MvvmCross.Binding.Droid
 {
     using Android.Views;
 
-    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
+    using Binders.ViewTypeResolvers;
+    using Platform;
+    using Platform.IoC;
+    using Platform.Platform;
 
     public class MvxViewAssemblyBootstrapAction<TView>
         : IMvxBootstrapAction
     {
         public virtual void Run()
         {
-            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(this.RegisterViewTypes);
-            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(this.RegisterNamespace);
+            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(RegisterViewTypes);
+            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(RegisterNamespace);
         }
 
         protected virtual void RegisterViewTypes()

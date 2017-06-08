@@ -53,7 +53,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         protected virtual void OnViewModelSet()

@@ -136,7 +136,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         {
             if (disposing)
             {
-                if (this._imageHelper != null)
+                if (_imageHelper != null)
                 {
                     _imageHelper.ImageChanged -= ImageHelperOnImageChanged;
                     _imageHelper.Dispose();

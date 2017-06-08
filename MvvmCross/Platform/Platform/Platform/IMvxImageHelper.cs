@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.Platform
 {
     using System;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public interface IMvxImageHelper<T>
         : IDisposable

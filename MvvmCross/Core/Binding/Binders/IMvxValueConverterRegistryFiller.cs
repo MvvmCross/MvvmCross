@@ -10,8 +10,8 @@ namespace MvvmCross.Binding.Binders
     using System;
     using System.Reflection;
 
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
+    using Platform.Converters;
+    using Platform.Platform;
 
     public interface IMvxNamedInstanceRegistryFiller<out T>
     {

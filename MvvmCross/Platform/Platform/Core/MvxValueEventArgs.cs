@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.Core
     {
         public MvxValueEventArgs(T value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public T Value { get; private set; }

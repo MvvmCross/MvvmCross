@@ -2,7 +2,7 @@ namespace MvvmCross.Mac.Platform
 {
     using System;
 
-    using global::MvvmCross.Platform.Platform;
+    using MvvmCross.Platform.Platform;
 
     public class MvxDebugTrace : IMvxTrace
     {

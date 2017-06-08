@@ -11,7 +11,7 @@ using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
-    public abstract class MvxBaseObjectAdapter : Android.Support.V17.Leanback.Widget.ObjectAdapter, IMvxObjectAdapter
+    public abstract class MvxBaseObjectAdapter : ObjectAdapter, IMvxObjectAdapter
     {
         public event EventHandler DataSetChanged;
 

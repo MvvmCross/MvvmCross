@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override object GetValueFrom(UIDatePicker view)
         {
-            return (new DateTime(2001, 1, 1, 0, 0, 0)).AddSeconds(view.Date.SecondsSinceReferenceDate);
+            return new DateTime(2001, 1, 1, 0, 0, 0).AddSeconds(view.Date.SecondsSinceReferenceDate);
         }
 
         public static DateTime DefaultDate { get; set; } = DateTime.Now;

@@ -7,20 +7,20 @@
 
 namespace MvvmCross.Platform.Plugins
 {
-    using MvvmCross.Platform.Platform;
+    using Platform;
 
     public class MvxPluginBootstrapAction<TPlugin>
         : IMvxBootstrapAction
     {
         public virtual void Run()
         {
-            Mvx.CallbackWhenRegistered<IMvxPluginManager>(this.RunAction);
+            Mvx.CallbackWhenRegistered<IMvxPluginManager>(RunAction);
         }
 
         protected virtual void RunAction()
         {
             var manager = Mvx.Resolve<IMvxPluginManager>();
-            this.Load(manager);
+            Load(manager);
         }
 
         protected virtual void Load(IMvxPluginManager manager)

@@ -13,16 +13,16 @@ namespace MvvmCross.Binding.Bindings.Source
     {
         private readonly object _value;
 
-        public MvxSourcePropertyBindingEventArgs(Object value)
+        public MvxSourcePropertyBindingEventArgs(object value)
         {
-            this._value = value;
+            _value = value;
         }
 
         public MvxSourcePropertyBindingEventArgs(IMvxSourceBinding propertySourceBinding)
         {
-            this._value = propertySourceBinding.GetValue();
+            _value = propertySourceBinding.GetValue();
         }
 
-        public object Value => this._value;
+        public object Value => _value;
     }
 }

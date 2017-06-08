@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
             {
                 if (Preference != null)
                 {
-                    Preference.PreferenceChange -= this.HandlePreferenceChange;
+                    Preference.PreferenceChange -= HandlePreferenceChange;
                 }
             }
 

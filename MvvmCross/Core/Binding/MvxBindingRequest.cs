@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Binding.Bindings;
+    using Bindings;
 
     public class MvxBindingRequest
     {
@@ -17,9 +17,9 @@ namespace MvvmCross.Binding
 
         public MvxBindingRequest(object source, object target, MvxBindingDescription description)
         {
-            this.Target = target;
-            this.Source = source;
-            this.Description = description;
+            Target = target;
+            Source = source;
+            Description = description;
         }
 
         public object Target { get; set; }

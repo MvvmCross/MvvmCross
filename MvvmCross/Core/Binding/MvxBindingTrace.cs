@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     public static class MvxBindingTrace
     {

@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
-    using MvvmCross.Binding.Attributes;
+    using Attributes;
 
     [Register("mvvmcross.binding.droid.views.MvxSpinner")]
     public class MvxSpinner : Spinner
@@ -26,8 +26,8 @@ namespace MvvmCross.Binding.Droid.Views
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = global::Android.Resource.Layout.SimpleSpinnerItem,
-                    DropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem
+                    SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
+                    DropDownItemTemplateId = Android.Resource.Layout.SimpleSpinnerDropDownItem
                 })
         {
         }

@@ -5,7 +5,7 @@ namespace MvvmCross.Droid.ViewModels
 
     using Android.Runtime;
 
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     /// <summary>
     ///     Just like <see cref="MvxPropertyChangedListener"/> but
@@ -23,14 +23,14 @@ namespace MvvmCross.Droid.ViewModels
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            this._target = new WeakReference<IJavaObject>(target);
+            _target = new WeakReference<IJavaObject>(target);
         }
 
         public override void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             IJavaObject target;
 
-            if (!this._target.TryGetTarget(out target) || target.Handle == IntPtr.Zero)
+            if (!_target.TryGetTarget(out target) || target.Handle == IntPtr.Zero)
                 return;
 
             base.NotificationObjectOnPropertyChanged(sender, e);

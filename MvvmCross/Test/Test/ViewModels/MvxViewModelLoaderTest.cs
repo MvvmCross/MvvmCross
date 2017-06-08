@@ -14,8 +14,8 @@ namespace MvvmCross.Test.ViewModels
 
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
+    using Core;
+    using Mocks.TestViewModels;
 
     using NUnit.Framework;
 
@@ -47,7 +47,7 @@ namespace MvvmCross.Test.ViewModels
                 m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
                        .Returns(() => outViewModel);
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
@@ -72,7 +72,7 @@ namespace MvvmCross.Test.ViewModels
                 m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
                        .Throws<MvxException>();
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
@@ -92,7 +92,7 @@ namespace MvvmCross.Test.ViewModels
         {
             ClearAll();
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => null);
 

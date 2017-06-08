@@ -16,23 +16,23 @@ namespace MvvmCross.Binding.Bindings
 
         public MvxCompositeBinding(params IMvxBinding[] args)
         {
-            this._bindings = args.ToList();
+            _bindings = args.ToList();
         }
 
         public void Add(params IMvxBinding[] args)
         {
-            this._bindings.AddRange(args);
+            _bindings.AddRange(args);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                foreach (var mvxBinding in this._bindings)
+                foreach (var mvxBinding in _bindings)
                 {
                     mvxBinding.Dispose();
                 }
-                this._bindings.Clear();
+                _bindings.Clear();
             }
             base.Dispose(isDisposing);
         }

@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using Eventhooks.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
 
 namespace Eventhooks.Core
@@ -12,7 +13,7 @@ namespace Eventhooks.Core
 				.AsInterfaces()
 				.RegisterAsLazySingleton();
 
-			RegisterAppStart<ViewModels.FirstViewModel>();
+			RegisterAppStart<FirstViewModel>();
 		}
 	}
 }

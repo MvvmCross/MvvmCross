@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.Combiners
     using System.Collections.Generic;
     using System.Linq;
 
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Platform.Converters;
+    using Bindings.SourceSteps;
+    using Platform.Converters;
 
     public class MvxSingleValueCombiner : MvxValueCombiner
     {

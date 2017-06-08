@@ -12,9 +12,9 @@
 
 namespace MvvmCross.Mac.Views
 {
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
+    using Binding.BindingContext;
+    using Core.ViewModels;
+    using Core.Views;
 
     public interface IMvxMacView
         : IMvxView

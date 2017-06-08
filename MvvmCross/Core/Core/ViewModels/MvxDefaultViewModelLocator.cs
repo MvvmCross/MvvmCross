@@ -19,7 +19,7 @@ namespace MvvmCross.Core.ViewModels
                                    IMvxBundle parameterValues,
                                    IMvxBundle savedState)
         {
-            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -38,7 +38,7 @@ namespace MvvmCross.Core.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            this.RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
         }
@@ -57,10 +57,10 @@ namespace MvvmCross.Core.ViewModels
         {
             try
             {
-                this.CallCustomInitMethods(viewModel, parameterValues);
+                CallCustomInitMethods(viewModel, parameterValues);
                 if (savedState != null)
                 {
-                    this.CallReloadStateMethods(viewModel, savedState);
+                    CallReloadStateMethods(viewModel, savedState);
                 }
                 viewModel.Start();
             }

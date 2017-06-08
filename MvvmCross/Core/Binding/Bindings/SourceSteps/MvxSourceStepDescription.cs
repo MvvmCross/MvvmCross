@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using MvvmCross.Platform.Converters;
+    using Platform.Converters;
 
     public class MvxSourceStepDescription
     {

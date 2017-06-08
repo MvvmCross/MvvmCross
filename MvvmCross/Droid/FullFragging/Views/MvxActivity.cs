@@ -57,7 +57,7 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         public IMvxBindingContext BindingContext { get; set; }

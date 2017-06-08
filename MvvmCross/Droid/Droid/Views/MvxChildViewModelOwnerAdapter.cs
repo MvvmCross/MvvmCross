@@ -14,7 +14,7 @@ namespace MvvmCross.Droid.Views
 
     public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
-        protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner)base.Activity;
+        protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner)Activity;
 
         public MvxChildViewModelOwnerAdapter(IMvxEventSourceActivity eventSource)
             : base(eventSource)
@@ -28,13 +28,13 @@ namespace MvvmCross.Droid.Views
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            this.ChildOwner.ClearOwnedSubIndicies();
+            ChildOwner.ClearOwnedSubIndicies();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            this.ChildOwner.ClearOwnedSubIndicies();
+            ChildOwner.ClearOwnedSubIndicies();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

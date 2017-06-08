@@ -16,10 +16,10 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
+    using ResourceHelpers;
+    using Platform;
+    using Platform.Core;
+    using Platform.Platform;
 
     [Register("mvvmcross.binding.droid.views.MvxImageView")]
     public class MvxImageView

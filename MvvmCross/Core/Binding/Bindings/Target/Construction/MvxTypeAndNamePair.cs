@@ -17,8 +17,8 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         public MvxTypeAndNamePair(Type type, string name)
         {
-            this.Type = type;
-            this.Name = name;
+            Type = type;
+            Name = name;
         }
 
         public Type Type { get; set; }

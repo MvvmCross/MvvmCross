@@ -12,10 +12,10 @@ namespace MvvmCross.Droid.Views
     using Android.App;
     using Android.OS;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Droid.Platform;
+    using Binding.BindingContext;
+    using Core.ViewModels;
+    using Core.Views;
+    using Platform;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Droid.Views;
     using MvvmCross.Platform.Exceptions;

@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Droid.BindingContext
 {
-    using MvvmCross.Binding.BindingContext;
+    using Binding.BindingContext;
 
     public class MvxAndroidBindingContextStack
         : MvxBindingContextStack<IMvxAndroidBindingContext>

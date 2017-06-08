@@ -9,6 +9,7 @@ using System;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
@@ -119,7 +120,7 @@ namespace MvvmCross.BindingEx.Wpf
             }
         }
 
-        protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
+        protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
             base.FillValueCombiners(registry);
 

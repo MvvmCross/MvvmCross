@@ -9,9 +9,9 @@ namespace MvvmCross.Platform.Test
 {
     using System.Collections.Generic;
 
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
+    using Core;
+    using Exceptions;
+    using IoC;
 
     using NUnit.Framework;
 

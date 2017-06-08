@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.iOS.Platform
 
         public MvxIosMajorVersionChecker(int major, bool defaultValue = true)
         {
-            this.IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
+            IsVersionOrHigher = ReadIsIosVersionOrHigher(major, defaultValue);
         }
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)

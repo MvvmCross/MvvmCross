@@ -158,7 +158,7 @@ namespace MvvmCross.Plugins.File
 
         public override long GetSize(string path)
         {
-            return (new System.IO.FileInfo(path)).Length;
+            return new FileInfo(path).Length;
         }
 
         public override DateTime GetLastWriteTimeUtc(string path)

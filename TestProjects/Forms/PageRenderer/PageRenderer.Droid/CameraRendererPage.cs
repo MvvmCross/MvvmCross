@@ -13,6 +13,9 @@ using PageRendererExample.Pages;
 using PageRendererExample.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Droid;
+using Button = Android.Widget.Button;
+using Camera = Android.Hardware.Camera;
+using View = Android.Views.View;
 
 [assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 
@@ -23,19 +26,20 @@ namespace PageRendererExample.UI.Droid
         // The Camera API is officially deprecated and should be replaced with Camera2.
         // Camera2 is, however, not available until Android 5.1 and there are lots of reports
         // of devices reporting incorrect information.
-        Android.Hardware.Camera camera;
-        Android.Widget.Button takePhotoButton;
-        Android.Widget.Button toggleFlashButton;
-        Android.Widget.Button switchCameraButton;
-        Android.Widget.Button cancelButton;
-        Android.Views.View view;
+        private Camera camera;
 
-        Activity activity;
-        CameraFacing cameraType;
-        TextureView textureView;
-        SurfaceTexture surfaceTexture;
+        private Button takePhotoButton;
+        private Button toggleFlashButton;
+        private Button switchCameraButton;
+        private Button cancelButton;
+        private View view;
 
-        bool flashOn;
+        private Activity activity;
+        private CameraFacing cameraType;
+        private TextureView textureView;
+        private SurfaceTexture surfaceTexture;
+
+        private bool flashOn;
 
         protected override void OnElementChanged (ElementChangedEventArgs<Page> e)
         {
@@ -57,7 +61,7 @@ namespace PageRendererExample.UI.Droid
 
         }
 
-        void SetupUserInterface()
+        private void SetupUserInterface()
         {
             activity = Context as Activity;
             view = activity.LayoutInflater.Inflate(Resource.Layout.CameraLayout, this, false);
@@ -66,20 +70,20 @@ namespace PageRendererExample.UI.Droid
             textureView = view.FindViewById<TextureView>(Resource.Id.textureView);
             textureView.SurfaceTextureListener = this;
 
-            takePhotoButton = view.FindViewById<Android.Widget.Button>(Resource.Id.takePhotoButton);
-            switchCameraButton = view.FindViewById<Android.Widget.Button>(Resource.Id.switchCameraButton);
-            toggleFlashButton = view.FindViewById<Android.Widget.Button>(Resource.Id.toggleFlashButton);
-            cancelButton = view.FindViewById<Android.Widget.Button>(Resource.Id.cancelButton);
+            takePhotoButton = view.FindViewById<Button>(Resource.Id.takePhotoButton);
+            switchCameraButton = view.FindViewById<Button>(Resource.Id.switchCameraButton);
+            toggleFlashButton = view.FindViewById<Button>(Resource.Id.toggleFlashButton);
+            cancelButton = view.FindViewById<Button>(Resource.Id.cancelButton);
         }
 
-        void SetupEventHandlers()
+        private void SetupEventHandlers()
         {            
             takePhotoButton.Click += TakePhotoButtonTapped;
             switchCameraButton.Click += SwitchCameraButtonTapped;
             toggleFlashButton.Click += ToggleFlashButtonTapped;
         }
 
-        void BindViewModel()
+        private void BindViewModel()
         {
             var set = this.CreateBindingSet<CameraRendererPage, CameraRendererViewModel>();
             set.Bind(cancelButton).To(nameof(ViewModel.CloseCommand));
@@ -104,7 +108,7 @@ namespace PageRendererExample.UI.Droid
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = Android.Hardware.Camera.Open((int)cameraType);
+            camera = Camera.Open((int)cameraType);
             textureView.LayoutParameters = new FrameLayout.LayoutParams(width, height);
             surfaceTexture = surface;
 
@@ -124,7 +128,7 @@ namespace PageRendererExample.UI.Droid
             PrepareAndStartCamera();
         }
 
-        void PrepareAndStartCamera()
+        private void PrepareAndStartCamera()
         {
             camera.StopPreview();
 
@@ -140,7 +144,7 @@ namespace PageRendererExample.UI.Droid
             camera.StartPreview();
         }
 
-        void ToggleFlashButtonTapped(object sender, EventArgs e)
+        private void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
             flashOn = !flashOn;
             if (flashOn) {
@@ -150,9 +154,9 @@ namespace PageRendererExample.UI.Droid
 
                     camera.StopPreview();
                     camera.Release();
-                    camera = Android.Hardware.Camera.Open((int)cameraType);
+                    camera = Camera.Open((int)cameraType);
                     var parameters = camera.GetParameters();
-                    parameters.FlashMode = Android.Hardware.Camera.Parameters.FlashModeTorch;
+                    parameters.FlashMode = Camera.Parameters.FlashModeTorch;
                     camera.SetParameters(parameters);
                     camera.SetPreviewTexture(surfaceTexture);
                     PrepareAndStartCamera();
@@ -162,23 +166,23 @@ namespace PageRendererExample.UI.Droid
                 camera.StopPreview();
                 camera.Release();
 
-                camera = Android.Hardware.Camera.Open((int)cameraType);
+                camera = Camera.Open((int)cameraType);
                 var parameters = camera.GetParameters();
-                parameters.FlashMode = Android.Hardware.Camera.Parameters.FlashModeOff;
+                parameters.FlashMode = Camera.Parameters.FlashModeOff;
                 camera.SetParameters(parameters);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             }
         }
 
-        void SwitchCameraButtonTapped(object sender, EventArgs e)
+        private void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
             if (cameraType == CameraFacing.Front) {
                 cameraType = CameraFacing.Back;
 
                 camera.StopPreview();
                 camera.Release();
-                camera = Android.Hardware.Camera.Open((int)cameraType);
+                camera = Camera.Open((int)cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             } else {
@@ -186,13 +190,13 @@ namespace PageRendererExample.UI.Droid
 
                 camera.StopPreview();
                 camera.Release();
-                camera = Android.Hardware.Camera.Open((int)cameraType);
+                camera = Camera.Open((int)cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             }
         }
 
-        async void TakePhotoButtonTapped(object sender, EventArgs e)
+        private async void TakePhotoButtonTapped(object sender, EventArgs e)
         {
             camera.StopPreview();
 

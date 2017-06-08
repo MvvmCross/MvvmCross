@@ -25,7 +25,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showChildCommand ?? (_showChildCommand = new MvxCommand(() => this.ShowViewModel<ChildViewModel>()));
+                return _showChildCommand ?? (_showChildCommand = new MvxCommand(() => ShowViewModel<ChildViewModel>()));
             }
         }
 
@@ -34,7 +34,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showModalCommand ?? (_showModalCommand = new MvxCommand(() => this.ShowViewModel<ModalViewModel>()));
+                return _showModalCommand ?? (_showModalCommand = new MvxCommand(() => ShowViewModel<ModalViewModel>()));
             }
         }
 

@@ -10,8 +10,8 @@ namespace MvvmCross.Binding.BindingContext
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform.Core;
+    using Bindings;
+    using Platform.Core;
 
     public interface IMvxBindingContext
         : IMvxDataConsumer

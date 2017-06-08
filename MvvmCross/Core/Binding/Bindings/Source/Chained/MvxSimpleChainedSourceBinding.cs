@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using Parse.PropertyPath.PropertyTokens;
 
     public class MvxSimpleChainedSourceBinding
         : MvxChainedSourceBinding
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             IList<MvxPropertyToken> childTokens)
             : base(source, propertyInfo, childTokens)
         {
-            this.UpdateChildBinding();
+            UpdateChildBinding();
         }
 
         protected override object[] PropertyIndexParameters()

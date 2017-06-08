@@ -10,8 +10,8 @@ namespace MvvmCross.Console.Views
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform.Platform;
 
     public abstract class MvxBaseConsoleContainer
@@ -22,14 +22,14 @@ namespace MvvmCross.Console.Views
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            this._presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
+            _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
         protected bool HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, bool> handler;
 
-            if (this._presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
+            if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
                 if (handler(hint)) return true;
             }
@@ -47,7 +47,7 @@ namespace MvvmCross.Console.Views
 
         public virtual void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

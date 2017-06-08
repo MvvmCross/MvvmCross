@@ -15,7 +15,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
-    using MvvmCross.Binding.Attributes;
+    using Attributes;
 
     [Register("mvvmcross.binding.droid.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView

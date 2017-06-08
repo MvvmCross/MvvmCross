@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
@@ -40,7 +42,7 @@ namespace MvvmCross.Test.Navigation
         public void SetupTest()
         {
             // ReSharper disable once AssignNullToNotNullAttribute
-            Environment.CurrentDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             Debug.Listeners.Clear();
             Debug.Listeners.Add(new ConsoleTraceListener());

@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    using MvvmCross.Platform.Exceptions;
+    using Exceptions;
 
     public class MvxTvosVersion
     {
@@ -16,12 +16,12 @@ namespace MvvmCross.Platform.tvOS.Platform
             if (parts == null || parts.Length == 0)
                 throw new MvxException("Invalid parts in constructor for MvxTvosVersion");
 
-            this.Parts = parts;
-            this.Major = parts[0];
+            Parts = parts;
+            Major = parts[0];
 
             if (parts.Length > 1)
             {
-                this.Minor = parts[1];
+                Minor = parts[1];
             }
         }
 

@@ -19,18 +19,18 @@ namespace MvvmCross.Uwp.Views
 
         public MvxWindowsMainThreadDispatcher(CoreDispatcher uiDispatcher)
         {
-            this._uiDispatcher = uiDispatcher;
+            _uiDispatcher = uiDispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (this._uiDispatcher.HasThreadAccess)
+            if (_uiDispatcher.HasThreadAccess)
             {
                 action();
                 return true;
             }
 
-            this._uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
             return true;
         }
     }

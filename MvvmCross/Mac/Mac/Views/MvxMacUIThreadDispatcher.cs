@@ -12,7 +12,7 @@ namespace MvvmCross.Mac.Views
 
     using AppKit;
 
-    using global::MvvmCross.Platform.Core;
+    using MvvmCross.Platform.Core;
 
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadDispatcher
@@ -21,12 +21,12 @@ namespace MvvmCross.Mac.Views
 
         protected MvxMacUIThreadDispatcher()
         {
-            this._uiSynchronizationContext = SynchronizationContext.Current;
+            _uiSynchronizationContext = SynchronizationContext.Current;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (this._uiSynchronizationContext == SynchronizationContext.Current)
+            if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
                 NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));

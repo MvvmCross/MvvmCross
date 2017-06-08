@@ -18,14 +18,14 @@ namespace MvvmCross.Test.Mocks.TestViewModels
 
         public BundleObject SaveState()
         {
-            return this.SaveStateBundleObject;
+            return SaveStateBundleObject;
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
-            if (this.AdditionalSaveStateFields != null)
+            if (AdditionalSaveStateFields != null)
             {
-                foreach (var kvp in this.AdditionalSaveStateFields)
+                foreach (var kvp in AdditionalSaveStateFields)
                 {
                     bundle.Data[kvp.Key] = kvp.Value;
                 }

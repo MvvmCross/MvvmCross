@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.Droid
     {
         protected MvxJavaContainer(object theObject)
         {
-            this.Object = theObject;
+            Object = theObject;
         }
 
         public object Object { get; private set; }

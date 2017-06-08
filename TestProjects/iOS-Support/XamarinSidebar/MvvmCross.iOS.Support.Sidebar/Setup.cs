@@ -1,3 +1,5 @@
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
     using Platform;
@@ -21,7 +23,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
         /// <returns>The IMvxApplication <see langword="object"/></returns>
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         /// <summary>Creates the debug trace.</summary>

@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Platform.Test
 {
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
+    using Core;
+    using IoC;
 
     using NUnit.Framework;
 

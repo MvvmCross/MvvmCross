@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Binders
 {
     using System;
 
-    using MvvmCross.Platform.Converters;
+    using Platform.Converters;
 
     public interface IMvxAutoValueConverters
     {

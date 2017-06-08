@@ -17,7 +17,7 @@ namespace MvvmCross.Test.Mocks.TestViewModels
 
         public Test4ViewModel(ITestThing thing)
         {
-            this.Thing = thing;
+            Thing = thing;
         }
 
         public override void Start()

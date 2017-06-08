@@ -1,6 +1,6 @@
 ﻿namespace Eventhooks.iOS
 {
-	using Eventhooks.Core;
+	using Core;
 	using MvvmCross.Binding.Bindings.Target.Construction;
 	using MvvmCross.Core.ViewModels;
 	using MvvmCross.iOS.Platform;

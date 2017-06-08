@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Binders
 {
-    using MvvmCross.Platform.Converters;
+    using Platform.Converters;
 
     public class MvxValueConverterRegistry
         : MvxNamedInstanceRegistry<IMvxValueConverter>

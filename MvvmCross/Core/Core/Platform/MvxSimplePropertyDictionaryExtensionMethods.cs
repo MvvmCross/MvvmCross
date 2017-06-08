@@ -12,7 +12,7 @@ namespace MvvmCross.Core.Platform
     using System.Linq;
     using System.Reflection;
 
-    using MvvmCross.Core.ViewModels;
+    using ViewModels;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;

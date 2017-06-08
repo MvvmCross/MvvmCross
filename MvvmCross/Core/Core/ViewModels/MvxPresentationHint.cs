@@ -18,7 +18,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected MvxPresentationHint(MvxBundle body)
         {
-            this.Body = body;
+            Body = body;
         }
 
         protected MvxPresentationHint(IDictionary<string, string> hints)

@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Platform
 {
-    using MvvmCross.Core.Platform;
+    using Core.Platform;
 
     using UIKit;
 

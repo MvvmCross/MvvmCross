@@ -19,7 +19,7 @@ namespace MvvmCross.Plugins.Visibility
             bool hide = parameter.ConvertToBooleanCore();
             switch (base.Convert(value, parameter, culture))
             {
-                case (MvxVisibility.Visible):
+                case MvxVisibility.Visible:
                     if (hide)
                     {
                         return MvxVisibility.Hidden;

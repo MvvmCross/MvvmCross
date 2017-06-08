@@ -8,13 +8,13 @@ namespace PageRendererExample.ViewModels
     {
         public MvvmApp()
         {
-            this.CreatableTypes()
+            CreatableTypes()
                 .EndingWith("Page")
                 .InNamespace("PageRendererExample.Pages")
                 .AsTypes()
                 .RegisterAsDynamic();
 
-            this.RegisterAppStart<ViewModels.BootViewModel>();
+            RegisterAppStart<BootViewModel>();
         }
     }
 }

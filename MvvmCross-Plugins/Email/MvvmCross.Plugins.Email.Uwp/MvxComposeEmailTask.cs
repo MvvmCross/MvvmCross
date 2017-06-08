@@ -35,7 +35,7 @@ namespace MvvmCross.Plugins.Email.WindowsCommon
                 dialogTitle);
         }
 
-        public async void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null, string body = null, bool isHtml = false, IEnumerable<MvvmCross.Plugins.Email.EmailAttachment> attachments = null, string dialogTitle = null)
+        public async void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null, string body = null, bool isHtml = false, IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
         {
             //TODO: It is better to have this function as async Task so to avoid exception swallowing
             EmailMessage email = new EmailMessage();
@@ -68,7 +68,7 @@ namespace MvvmCross.Plugins.Email.WindowsCommon
         }
 
 
-        private static async Task<StorageFile> GetTextFile(MvvmCross.Plugins.Email.EmailAttachment attachement)
+        private static async Task<StorageFile> GetTextFile(EmailAttachment attachement)
         {
             var localFolder = ApplicationData.Current.LocalFolder;
             var file = await localFolder.CreateFileAsync(attachement.FileName, CreationCollisionOption.ReplaceExisting);

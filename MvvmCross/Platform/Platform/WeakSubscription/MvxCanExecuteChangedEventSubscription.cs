@@ -24,7 +24,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
     }
 }

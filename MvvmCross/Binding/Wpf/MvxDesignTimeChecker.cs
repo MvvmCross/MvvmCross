@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com\
 
+using System.Windows;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
@@ -32,7 +33,7 @@ namespace MvvmCross.BindingEx.Wpf
             _checked = true;
 
 #if WINDOWS_WPF
-            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(System.Windows.DependencyObject)).DefaultValue)
+            if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue)
                 return;
 #endif
 #if WINDOWS_COMMON

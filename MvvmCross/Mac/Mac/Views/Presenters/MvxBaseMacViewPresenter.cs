@@ -8,9 +8,9 @@
 namespace MvvmCross.Mac.Views.Presenters
 {
     using System;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform.Platform;
+    using Core.ViewModels;
+    using Core.Views;
+    using MvvmCross.Platform.Platform;
 
     public class MvxBaseMacViewPresenter
         : MvxViewPresenter, IMvxMacViewPresenter
@@ -21,7 +21,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

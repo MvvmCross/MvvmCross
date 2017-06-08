@@ -9,8 +9,8 @@ namespace MvvmCross.Binding.tvOS.Target
 {
     using System.Reflection;
 
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 

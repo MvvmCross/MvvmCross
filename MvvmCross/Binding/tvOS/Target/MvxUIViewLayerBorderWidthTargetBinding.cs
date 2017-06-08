@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.tvOS.Target
 {
     using System;
 
-    using MvvmCross.Binding.Bindings.Target;
+    using Bindings.Target;
 
     using UIKit;
 

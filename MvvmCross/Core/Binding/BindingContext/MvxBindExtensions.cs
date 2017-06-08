@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.BindingContext
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform.Converters;
+    using Bindings;
+    using Platform.Converters;
 
     public static class MvxBindExtensions
     {

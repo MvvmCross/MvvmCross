@@ -16,12 +16,12 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
         public MvxCompositeViewTypeResolver(params IMvxViewTypeResolver[] resolvers)
         {
-            this._resolvers = new List<IMvxViewTypeResolver>(resolvers);
+            _resolvers = new List<IMvxViewTypeResolver>(resolvers);
         }
 
         public Type Resolve(string tagName)
         {
-            foreach (var resolver in this._resolvers)
+            foreach (var resolver in _resolvers)
             {
                 var result = resolver.Resolve(tagName);
                 if (result != null)

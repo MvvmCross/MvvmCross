@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Console.Views
 {
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
     using MvvmCross.Platform;
 
     public class MvxConsoleSystemMessageHandler
@@ -23,13 +23,13 @@ namespace MvvmCross.Console.Views
             {
                 case "BACK":
                 case "B":
-                    if (this.ConsoleNavigation.CanGoBack())
-                        this.ConsoleNavigation.GoBack();
+                    if (ConsoleNavigation.CanGoBack())
+                        ConsoleNavigation.GoBack();
                     return true;
 
                 case "QUIT":
                 case "Q":
-                    this.ExitFlag = true;
+                    ExitFlag = true;
                     return true;
             }
 

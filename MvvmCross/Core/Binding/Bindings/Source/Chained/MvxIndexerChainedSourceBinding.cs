@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using Parse.PropertyPath.PropertyTokens;
 
     public class MvxIndexerChainedSourceBinding
         : MvxChainedSourceBinding
@@ -21,13 +21,13 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
                                                   IList<MvxPropertyToken> childTokens)
             : base(source, itemPropertyInfo, childTokens)
         {
-            this._indexerPropertyToken = indexerPropertyToken;
-            this.UpdateChildBinding();
+            _indexerPropertyToken = indexerPropertyToken;
+            UpdateChildBinding();
         }
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] { this._indexerPropertyToken.Key };
+            return new[] { _indexerPropertyToken.Key };
         }
     }
 }

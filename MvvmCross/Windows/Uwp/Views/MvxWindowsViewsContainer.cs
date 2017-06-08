@@ -8,8 +8,8 @@
 namespace MvvmCross.Uwp.Views
 {
     using System;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform;
     using System.Collections.Generic;
     using MvvmCross.Platform.Exceptions;

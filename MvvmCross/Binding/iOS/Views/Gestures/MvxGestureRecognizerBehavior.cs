@@ -17,7 +17,7 @@ namespace MvvmCross.Binding.iOS.Views.Gestures
 
         protected void FireCommand(object argument = null)
         {
-            var command = this.Command;
+            var command = Command;
             command?.Execute(null);
         }
 

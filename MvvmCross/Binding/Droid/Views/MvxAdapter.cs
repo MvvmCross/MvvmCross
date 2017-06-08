@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Java.Lang;
+
 namespace MvvmCross.Binding.Droid.Views
 {
 	using System;
@@ -17,15 +19,15 @@ namespace MvvmCross.Binding.Droid.Views
 	using Android.Views;
 	using Android.Widget;
 
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.Droid.BindingContext;
-	using MvvmCross.Binding.ExtensionMethods;
-	using MvvmCross.Platform;
-	using MvvmCross.Platform.Exceptions;
-	using MvvmCross.Platform.Platform;
-	using MvvmCross.Platform.WeakSubscription;
+	using Attributes;
+	using BindingContext;
+	using ExtensionMethods;
+	using Platform;
+	using Platform.Exceptions;
+	using Platform.Platform;
+	using Platform.WeakSubscription;
 
-	using Object = Java.Lang.Object;
+	using Object = Object;
 
 	public class MvxAdapter
         : BaseAdapter
@@ -287,7 +289,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (viewToUse == null)
             {
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
-                viewToUse.Content.Tag = viewToUse as Java.Lang.Object;
+                viewToUse.Content.Tag = viewToUse as Object;
             }
             else
             {

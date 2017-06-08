@@ -15,7 +15,7 @@ using PageRendererExample.ViewModels;
 
 namespace PageRendererExample.UI.Uwp
 {
-    class MvvmSetup : MvxFormsWindowsSetup
+    internal class MvvmSetup : MvxFormsWindowsSetup
     {
         private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
         public MvvmSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame, e)

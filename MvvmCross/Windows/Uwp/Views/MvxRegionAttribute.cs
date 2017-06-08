@@ -15,7 +15,7 @@ namespace MvvmCross.Uwp.Views
     {
         public MvxRegionAttribute(string regionName)
         {
-            this.Name = regionName;
+            Name = regionName;
         }
 
         public string Name { get; private set; }

@@ -19,7 +19,7 @@ namespace MvvmCross.Test.Mocks.Dispatchers
 
         public bool RequestMainThreadAction(Action action)
         {
-            this.Count++;
+            Count++;
             return true;
         }
     }

@@ -14,7 +14,7 @@ namespace MvvmCross.Test.ViewModels
     using System.Windows.Input;
 
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
+    using Core;
 
     using NUnit.Framework;
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Test.ViewModels
 
             public void MyCommand()
             {
-                this.CountMyCommandCalled++;
+                CountMyCommandCalled++;
             }
 
             public int CountCanExecuteMyCommandCalled { get; set; }
@@ -36,7 +36,7 @@ namespace MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    this.CountCanExecuteMyCommandCalled++;
+                    CountCanExecuteMyCommandCalled++;
                     return true;
                 }
             }
@@ -45,7 +45,7 @@ namespace MvvmCross.Test.ViewModels
 
             public void MyExCommand()
             {
-                this.CountMyExCommandCalled++;
+                CountMyExCommandCalled++;
             }
 
             public int CountCanExecuteMyExCommandCalled { get; set; }
@@ -54,7 +54,7 @@ namespace MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    this.CountCanExecuteMyExCommandCalled++;
+                    CountCanExecuteMyExCommandCalled++;
                     return true;
                 }
             }
@@ -63,14 +63,14 @@ namespace MvvmCross.Test.ViewModels
 
             public void NotACmd()
             {
-                this.CountNotACmdCalled++;
+                CountNotACmdCalled++;
             }
 
             public int CountAnIntReturningCalled { get; set; }
 
             public int AnIntReturningCommand()
             {
-                this.CountAnIntReturningCalled++;
+                CountAnIntReturningCalled++;
                 return 99;
             }
 
@@ -79,7 +79,7 @@ namespace MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr")]
             public void AttributedCommand(string ignored)
             {
-                this.CountAttributedCalled++;
+                CountAttributedCalled++;
             }
 
             public int CountAttributed2Called { get; set; }
@@ -87,7 +87,7 @@ namespace MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr2", "CanExecuteAttributed2")]
             public void AttributedWithProperty()
             {
-                this.CountAttributed2Called++;
+                CountAttributed2Called++;
             }
 
             public int CountCanExecuteAttributed2Called { get; set; }
@@ -96,7 +96,7 @@ namespace MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    this.CountCanExecuteAttributed2Called++;
+                    CountCanExecuteAttributed2Called++;
                     return true;
                 }
             }
@@ -118,7 +118,7 @@ namespace MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr", "CanExecuteAttributed")]
             public void AttributedCommand(string ignored)
             {
-                this.CountAttributedCalled++;
+                CountAttributedCalled++;
             }
 
             public int CountAttributed2Called { get; set; }
@@ -126,7 +126,7 @@ namespace MvvmCross.Test.ViewModels
             [MvxCommand("CalledByAttr2", "CanExecuteAttributed")]
             public void AttributedWithProperty()
             {
-                this.CountAttributed2Called++;
+                CountAttributed2Called++;
             }
 
             public int CountCanExecuteAttributedCalled { get; set; }
@@ -135,7 +135,7 @@ namespace MvvmCross.Test.ViewModels
             {
                 get
                 {
-                    this.CountCanExecuteAttributedCalled++;
+                    CountCanExecuteAttributedCalled++;
                     return true;
                 }
             }
@@ -159,13 +159,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             myCommand.Execute();
-            this.CheckCounts(testObject, countMyCalled: 1, countCanExecuteMyCalled: 1);
+            CheckCounts(testObject, 1, 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            this.CheckCounts(testObject, countMyCalled: 4, countCanExecuteMyCalled: 4);
+            CheckCounts(testObject, 4, 4);
         }
 
         [Test]
@@ -179,13 +179,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["My"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteMyCalled: 1);
+            CheckCounts(testObject, countCanExecuteMyCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteMyCalled: 4);
+            CheckCounts(testObject, countCanExecuteMyCalled: 4);
         }
 
         [Test]
@@ -199,13 +199,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             myCommand.Execute();
-            this.CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
+            CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            this.CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
+            CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
         }
 
         [Test]
@@ -219,13 +219,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["MyEx"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteMyExCalled: 1);
+            CheckCounts(testObject, countCanExecuteMyExCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteMyExCalled: 4);
+            CheckCounts(testObject, countCanExecuteMyExCalled: 4);
         }
 
         [Test]
@@ -239,13 +239,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["AnIntReturning"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             myCommand.Execute();
-            this.CheckCounts(testObject, countIntReturningCalled: 1);
+            CheckCounts(testObject, countIntReturningCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            this.CheckCounts(testObject, countIntReturningCalled: 4);
+            CheckCounts(testObject, countIntReturningCalled: 4);
         }
 
         [Test]
@@ -259,13 +259,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             myCommand.Execute();
-            this.CheckCounts(testObject, countAttributedCalled: 1);
+            CheckCounts(testObject, countAttributedCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            this.CheckCounts(testObject, countAttributedCalled: 4);
+            CheckCounts(testObject, countAttributedCalled: 4);
         }
 
         [Test]
@@ -279,13 +279,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             myCommand.Execute();
-            this.CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
+            CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            this.CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
+            CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
         }
 
         [Test]
@@ -299,13 +299,13 @@ namespace MvvmCross.Test.ViewModels
 
             var myCommand = collection["CalledByAttr2"];
             Assert.IsNotNull(myCommand);
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
+            CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            this.CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
+            CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
         }
 
         [Test]
@@ -340,7 +340,7 @@ namespace MvvmCross.Test.ViewModels
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 
-            this.CheckCounts(testObject);
+            CheckCounts(testObject);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed2");
             Assert.AreEqual(0, countMy);

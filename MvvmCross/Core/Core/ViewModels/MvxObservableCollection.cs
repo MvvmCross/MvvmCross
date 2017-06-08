@@ -60,7 +60,7 @@ namespace MvvmCross.Core.ViewModels
 
         public bool EventsAreSuppressed
         {
-            get { return this._suppressEvents > 0; }
+            get { return _suppressEvents > 0; }
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace MvvmCross.Core.ViewModels
 
             while (count > itemIndex)
             {
-                this.RemoveAt(--count);
+                RemoveAt(--count);
             }
         }
 

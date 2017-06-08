@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.tvOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.Bindings;
+    using Bindings;
 
     using UIKit;
 
@@ -25,26 +25,26 @@ namespace MvvmCross.Binding.tvOS.Views
         public MvxStandardTableViewCell(IntPtr handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -52,32 +52,32 @@ namespace MvvmCross.Binding.tvOS.Views
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            this.InitializeImageLoader();
+            InitializeImageLoader();
         }
 
         private void InitializeImageLoader()
         {
-            this._imageLoader = new MvxImageViewLoader(() => this.ImageView, this.SetNeedsLayout);
+            _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
         }
 
-        public MvxImageViewLoader ImageLoader => this._imageLoader;
+        public MvxImageViewLoader ImageLoader => _imageLoader;
 
         public string TitleText
         {
-            get { return this.TextLabel.Text; }
-            set { this.TextLabel.Text = value; }
+            get { return TextLabel.Text; }
+            set { TextLabel.Text = value; }
         }
 
         public string DetailText
         {
-            get { return this.DetailTextLabel.Text; }
-            set { this.DetailTextLabel.Text = value; }
+            get { return DetailTextLabel.Text; }
+            set { DetailTextLabel.Text = value; }
         }
 
         public string ImageUrl
         {
-            get { return this._imageLoader.ImageUrl; }
-            set { this._imageLoader.ImageUrl = value; }
+            get { return _imageLoader.ImageUrl; }
+            set { _imageLoader.ImageUrl = value; }
         }
 
         public ICommand SelectedCommand { get; set; }
@@ -88,13 +88,13 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             base.SetSelected(selected, animated);
 
-            if (this._isSelected == selected)
+            if (_isSelected == selected)
                 return;
 
-            this._isSelected = selected;
-            if (this._isSelected)
+            _isSelected = selected;
+            if (_isSelected)
             {
-                this.SelectedCommand?.Execute(null);
+                SelectedCommand?.Execute(null);
             }
         }
 
@@ -102,7 +102,7 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             if (disposing)
             {
-                this._imageLoader.Dispose();
+                _imageLoader.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -148,7 +148,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                 var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
                 return true;
             }
-            catch (System.UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
                 return false;
             }
@@ -384,8 +384,8 @@ namespace MvvmCross.Plugins.File.WindowsCommon
 
         private static string ToFullPath(string path)
         {
-            var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-            return System.IO.Path.Combine(localFolderPath, path);
+            var localFolderPath = ApplicationData.Current.LocalFolder.Path;
+            return Path.Combine(localFolderPath, path);
         }
 
         public override long GetSize(string path)

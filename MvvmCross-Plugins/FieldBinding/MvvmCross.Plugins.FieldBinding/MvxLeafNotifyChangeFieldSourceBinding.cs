@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.FieldBinding
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
         {
-            base.FireChanged();
+            FireChanged();
         }
 
         public override void SetValue(object value)

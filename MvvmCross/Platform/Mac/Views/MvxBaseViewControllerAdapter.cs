@@ -18,7 +18,7 @@ namespace MvvmCross.Platform.Mac.Views
 
         protected NSViewController ViewController
         {
-            get { return this._eventSource as NSViewController; }
+            get { return _eventSource as NSViewController; }
         }
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
@@ -29,9 +29,9 @@ namespace MvvmCross.Platform.Mac.Views
             if (!(eventSource is NSViewController))
                 throw new ArgumentException("eventSource - eventSource should be a NSViewController");
 
-            this._eventSource = eventSource;
-            this._eventSource.DisposeCalled += this.HandleDisposeCalled;
-            this._eventSource.ViewDidLoadCalled += this.HandleViewDidLoadCalled;
+            _eventSource = eventSource;
+            _eventSource.DisposeCalled += HandleDisposeCalled;
+            _eventSource.ViewDidLoadCalled += HandleViewDidLoadCalled;
         }
 
         public virtual void HandleViewDidLoadCalled(object sender, EventArgs e)

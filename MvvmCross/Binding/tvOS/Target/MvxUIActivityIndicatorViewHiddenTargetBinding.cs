@@ -5,10 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -31,7 +33,7 @@ namespace MvvmCross.Binding.tvOS.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(bool);
+        public override Type TargetType => typeof(bool);
 
         protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
 

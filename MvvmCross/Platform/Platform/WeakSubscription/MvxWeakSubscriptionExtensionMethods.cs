@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.WeakSubscription
     using System.Reflection;
     using System.Windows.Input;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public static class MvxWeakSubscriptionExtensionMethods
     {

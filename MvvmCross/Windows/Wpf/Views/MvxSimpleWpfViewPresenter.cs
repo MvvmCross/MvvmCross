@@ -19,12 +19,12 @@ namespace MvvmCross.Wpf.Views
 
         public MvxSimpleWpfViewPresenter(ContentControl contentControl)
         {
-            this._contentControl = contentControl;
+            _contentControl = contentControl;
         }
 
         public override void Present(FrameworkElement frameworkElement)
         {
-            this._contentControl.Content = frameworkElement;
+            _contentControl.Content = frameworkElement;
         }
 
         public override void Close(IMvxViewModel toClose)

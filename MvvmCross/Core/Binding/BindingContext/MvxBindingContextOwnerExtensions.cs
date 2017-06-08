@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.BindingContext
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Bindings;
+    using Bindings;
 
     public static partial class MvxBindingContextOwnerExtensions
     {

@@ -5,8 +5,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Core.ViewModels;
     using CoreGraphics;
     using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+    using XamarinSidebar;
+    using XamarinSidebar.Attributes;
     using UIKit;
 
     [Register("LeftPanelView")]

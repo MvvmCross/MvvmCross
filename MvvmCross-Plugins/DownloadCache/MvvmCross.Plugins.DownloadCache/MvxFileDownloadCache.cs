@@ -113,7 +113,7 @@ namespace MvvmCross.Plugins.DownloadCache
         private void QueueOutOfDateFilesForDelete()
         {
             var now = DateTime.UtcNow;
-            var toRemove = _entriesByHttpUrl.Values.Where(x => (now - x.WhenDownloadedUtc) > _maxFileAge).ToList();
+            var toRemove = _entriesByHttpUrl.Values.Where(x => now - x.WhenDownloadedUtc > _maxFileAge).ToList();
             foreach (var entry in toRemove)
             {
                 _entriesByHttpUrl.Remove(entry.HttpSource);
@@ -412,7 +412,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
             public new void Dispose()
             {
-                base.Cancel();
+                Cancel();
             }
         }
     }

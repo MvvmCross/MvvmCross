@@ -40,12 +40,12 @@ namespace MvvmCross.Core.ViewModels
 
         public void Init(IMvxBundle parameters)
         {
-            this.InitFromBundle(parameters);
+            InitFromBundle(parameters);
         }
 
         public void ReloadState(IMvxBundle state)
         {
-            this.ReloadFromBundle(state);
+            ReloadFromBundle(state);
         }
 
         public virtual void Start()
@@ -58,7 +58,7 @@ namespace MvvmCross.Core.ViewModels
 
         public void SaveState(IMvxBundle state)
         {
-            this.SaveStateToBundle(state);
+            SaveStateToBundle(state);
         }
 
         protected virtual void InitFromBundle(IMvxBundle parameters)
@@ -99,9 +99,9 @@ namespace MvvmCross.Core.ViewModels
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
-        TaskCompletionSource<TResult> _tcs;
-        CancellationToken _cancellationToken;
-        bool _isClosing;
+        private TaskCompletionSource<TResult> _tcs;
+        private CancellationToken _cancellationToken;
+        private bool _isClosing;
 
         public void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken)
         {

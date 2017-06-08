@@ -25,7 +25,7 @@ namespace Eventhooks.Uwp
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

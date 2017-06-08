@@ -9,8 +9,8 @@ namespace MvvmCross.Binding.BindingContext
 {
     using System;
 
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
+    using Platform;
+    using Platform.Platform;
 
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
@@ -19,18 +19,18 @@ namespace MvvmCross.Binding.BindingContext
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)
         {
-            this.Stack.Push(toRegister);
+            Stack.Push(toRegister);
         }
 
         ~MvxBindingContextStackRegistration()
         {
             MvxTrace.Error("You should always Dispose of MvxBindingContextStackRegistration");
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.BindingContext
         {
             if (disposing)
             {
-                this.Stack.Pop();
+                Stack.Pop();
             }
         }
     }

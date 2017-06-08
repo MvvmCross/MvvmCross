@@ -11,8 +11,8 @@ namespace MvvmCross.Droid.Views
 
     using Android.OS;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.BindingContext;
+    using Binding.BindingContext;
+    using Binding.Droid.BindingContext;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Droid.Views;
 
@@ -36,19 +36,19 @@ namespace MvvmCross.Droid.Views
         protected override void EventSourceOnCreateWillBeCalled(object sender,
                                                                 MvxValueEventArgs<Bundle> MvxValueEventArgs)
         {
-            this.BindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnCreateWillBeCalled(sender, MvxValueEventArgs);
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            this.BindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnDestroyCalled(sender, eventArgs);
         }
 
         protected override void EventSourceOnDisposeCalled(object sender, EventArgs eventArgs)
         {
-            this.BindingContext.ClearAllBindings();
+            BindingContext.ClearAllBindings();
             base.EventSourceOnDisposeCalled(sender, eventArgs);
         }
     }

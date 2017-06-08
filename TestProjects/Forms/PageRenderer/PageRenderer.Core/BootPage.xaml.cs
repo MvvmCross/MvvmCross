@@ -6,8 +6,8 @@ namespace PageRendererExample.Pages
 {
     public partial class BootPage : BootContentPage
     {
-        Button _showCameraButton;
-        Image _capturedImage;
+        private Button _showCameraButton;
+        private Image _capturedImage;
 
         public BootPage()
         {

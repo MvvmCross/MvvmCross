@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Binding.Bindings
 {
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
+    using Platform.Exceptions;
+    using Platform.Platform;
 
     public static class MvxBindingModeExtensionMethods
     {

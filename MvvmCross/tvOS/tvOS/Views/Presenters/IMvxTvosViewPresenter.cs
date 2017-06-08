@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
     using MvvmCross.Platform.tvOS.Views;
 
     public interface IMvxTvosViewPresenter

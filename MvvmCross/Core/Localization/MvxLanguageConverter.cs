@@ -10,7 +10,7 @@ namespace MvvmCross.Localization
     using System;
     using System.Globalization;
 
-    using MvvmCross.Platform.Converters;
+    using Platform.Converters;
 
     public class MvxLanguageConverter
         : MvxValueConverter

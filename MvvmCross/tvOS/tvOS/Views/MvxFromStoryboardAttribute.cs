@@ -16,7 +16,7 @@ namespace MvvmCross.tvOS.Views
 
         public MvxFromStoryboardAttribute(string storyboardName = null)
         {
-            this.StoryboardName = storyboardName;
+            StoryboardName = storyboardName;
         }
     }
 }

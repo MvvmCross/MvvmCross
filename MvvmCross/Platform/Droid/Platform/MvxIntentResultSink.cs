@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.Droid.Platform
 {
     using System;
 
-    using MvvmCross.Platform.Droid.Views;
+    using Views;
 
     public class MvxIntentResultSink : IMvxIntentResultSink, IMvxIntentResultSource
     {

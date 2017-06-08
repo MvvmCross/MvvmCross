@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.iOS.Views
 {
     using System;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {

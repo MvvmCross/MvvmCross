@@ -12,8 +12,8 @@ namespace MvvmCross.Binding.iOS.ValueConverters
     using System.Collections.ObjectModel;
     using System.Globalization;
 
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.IoC;
+    using Platform.Converters;
+    using Platform.IoC;
 
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter

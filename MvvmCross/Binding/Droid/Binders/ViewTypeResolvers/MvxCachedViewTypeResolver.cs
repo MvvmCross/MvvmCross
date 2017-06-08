@@ -17,17 +17,17 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
         public MvxCachedViewTypeResolver(IMvxViewTypeResolver resolver)
         {
-            this._resolver = resolver;
+            _resolver = resolver;
         }
 
         public Type Resolve(string tagName)
         {
             Type toReturn;
-            if (this._cache.TryGetValue(tagName, out toReturn))
+            if (_cache.TryGetValue(tagName, out toReturn))
                 return toReturn;
 
-            toReturn = this._resolver.Resolve(tagName);
-            this._cache[tagName] = toReturn;
+            toReturn = _resolver.Resolve(tagName);
+            _cache[tagName] = toReturn;
             return toReturn;
         }
     }

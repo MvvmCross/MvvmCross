@@ -5,7 +5,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Content;
     using Android.Views;
 
-    using MvvmCross.Binding.BindingContext;
+    using Binding.BindingContext;
 
     public class MvxContextWrapper : ContextWrapper
     {
@@ -23,16 +23,16 @@ namespace MvvmCross.Binding.Droid.Views
             if (bindingContextOwner == null)
                 throw new InvalidOperationException("Wrapper can only be set on IMvxBindingContextOwner");
 
-            this._bindingContextOwner = bindingContextOwner;
+            _bindingContextOwner = bindingContextOwner;
         }
 
         public override Java.Lang.Object GetSystemService(string name)
         {
             if (name.Equals(LayoutInflaterService))
             {
-                return this._inflater ??
-                       (this._inflater =
-                           new MvxLayoutInflater(LayoutInflater.From(this.BaseContext), this, null, false));
+                return _inflater ??
+                       (_inflater =
+                           new MvxLayoutInflater(LayoutInflater.From(BaseContext), this, null, false));
             }
 
             return base.GetSystemService(name);

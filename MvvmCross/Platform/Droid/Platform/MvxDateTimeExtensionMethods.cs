@@ -34,7 +34,7 @@ namespace MvvmCross.Platform.Droid.Platform
 
         public static long FromUtcToUnixTime(this DateTime dateTimeUtc)
         {
-            var timeSpan = (dateTimeUtc - UnixZeroUtc);
+            var timeSpan = dateTimeUtc - UnixZeroUtc;
             var timestamp = (long)timeSpan.TotalSeconds;
             return timestamp;
         }

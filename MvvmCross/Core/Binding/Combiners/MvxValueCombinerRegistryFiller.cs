@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Combiners
 {
     using System;
 
-    using MvvmCross.Binding.Binders;
+    using Binders;
 
     public class MvxValueCombinerRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>

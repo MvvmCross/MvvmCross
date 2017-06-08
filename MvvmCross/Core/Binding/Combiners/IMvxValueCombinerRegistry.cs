@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Combiners
 {
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     public interface IMvxValueCombinerRegistry
         : IMvxNamedInstanceRegistry<IMvxValueCombiner>

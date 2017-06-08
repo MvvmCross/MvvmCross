@@ -9,8 +9,8 @@ using Android.Runtime;
 
 namespace MvvmCross.Droid.Simple
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Views;
+    using Core.ViewModels;
+    using Views;
     using MvvmCross.Platform.Exceptions;
 
     [Register("mvvmcross.droid.simple.MvxSimpleBindingActivity")]

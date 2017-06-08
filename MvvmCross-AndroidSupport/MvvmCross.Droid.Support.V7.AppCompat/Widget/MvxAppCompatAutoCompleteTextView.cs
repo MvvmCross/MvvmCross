@@ -73,7 +73,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             get { return base.Adapter as MvxFilteringAdapter; }
             set
             {
-                var existing = this.Adapter;
+                var existing = Adapter;
                 if (existing == value)
                     return;
 

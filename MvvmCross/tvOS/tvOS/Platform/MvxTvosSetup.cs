@@ -11,22 +11,22 @@ namespace MvvmCross.tvOS.Platform
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.tvOS;
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Binding;
+    using Binding.Binders;
+    using Binding.BindingContext;
+    using Binding.Bindings.Target.Construction;
+    using Binding.tvOS;
+    using Core.Platform;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Converters;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform.Plugins;
     using MvvmCross.Platform.tvOS.Platform;
     using MvvmCross.Platform.tvOS.Views;
-    using MvvmCross.tvOS.Views;
-    using MvvmCross.tvOS.Views.Presenters;
+    using Views;
+    using Views.Presenters;
 
     using UIKit;
 
@@ -40,19 +40,19 @@ namespace MvvmCross.tvOS.Platform
 
         protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
-            this._window = window;
-            this._applicationDelegate = applicationDelegate;
+            _window = window;
+            _applicationDelegate = applicationDelegate;
         }
 
         protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
         {
-            this._presenter = presenter;
-            this._applicationDelegate = applicationDelegate;
+            _presenter = presenter;
+            _applicationDelegate = applicationDelegate;
         }
 
-        protected UIWindow Window => this._window;
+        protected UIWindow Window => _window;
 
-        protected IMvxApplicationDelegate ApplicationDelegate => this._applicationDelegate;
+        protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         protected override IMvxTrace CreateDebugTrace()
         {
@@ -66,8 +66,8 @@ namespace MvvmCross.tvOS.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = this.CreateTvosViewsContainer();
-            this.RegisterTvosViewCreator(container);
+            var container = CreateTvosViewsContainer();
+            RegisterTvosViewCreator(container);
             return container;
         }
 
@@ -84,21 +84,21 @@ namespace MvvmCross.tvOS.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxTvosViewDispatcher(this.Presenter);
+            return new MvxTvosViewDispatcher(Presenter);
         }
 
         protected override void InitializePlatformServices()
         {
-            this.RegisterPlatformProperties();
+            RegisterPlatformProperties();
             // for now we continue to register the old style platform properties
-            this.RegisterOldStylePlatformProperties();
-            this.RegisterPresenter();
-            this.RegisterLifetime();
+            RegisterOldStylePlatformProperties();
+            RegisterPresenter();
+            RegisterLifetime();
         }
 
         protected virtual void RegisterPlatformProperties()
         {
-            Mvx.RegisterSingleton<IMvxTvosSystem>(this.CreateTvosSystemProperties());
+            Mvx.RegisterSingleton<IMvxTvosSystem>(CreateTvosSystemProperties());
         }
 
         protected virtual MvxTvosSystem CreateTvosSystemProperties()
@@ -114,48 +114,48 @@ namespace MvvmCross.tvOS.Platform
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(this._applicationDelegate);
+            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected IMvxTvosViewPresenter Presenter
         {
             get
             {
-                this._presenter = this._presenter ?? this.CreatePresenter();
-                return this._presenter;
+                _presenter = _presenter ?? CreatePresenter();
+                return _presenter;
             }
         }
 
         protected virtual IMvxTvosViewPresenter CreatePresenter()
         {
-            return new MvxTvosViewPresenter(this._applicationDelegate, this._window);
+            return new MvxTvosViewPresenter(_applicationDelegate, _window);
         }
 
         protected virtual void RegisterPresenter()
         {
-            var presenter = this.Presenter;
+            var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
             Mvx.RegisterSingleton<IMvxTvosModalHost>(presenter);
         }
 
         protected override void InitializeLastChance()
         {
-            this.InitializeBindingBuilder();
+            InitializeBindingBuilder();
             base.InitializeLastChance();
         }
 
         protected virtual void InitializeBindingBuilder()
         {
-            this.RegisterBindingBuilderCallbacks();
-            var bindingBuilder = this.CreateBindingBuilder();
+            RegisterBindingBuilderCallbacks();
+            var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration();
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -170,8 +170,8 @@ namespace MvvmCross.tvOS.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.Fill(this.ValueConverterAssemblies);
-            registry.Fill(this.ValueConverterHolders);
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
         }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
@@ -181,8 +181,8 @@ namespace MvvmCross.tvOS.Platform
             get
             {
                 var toReturn = new List<Assembly>();
-                toReturn.AddRange(this.GetViewModelAssemblies());
-                toReturn.AddRange(this.GetViewAssemblies());
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
                 return toReturn;
             }
         }

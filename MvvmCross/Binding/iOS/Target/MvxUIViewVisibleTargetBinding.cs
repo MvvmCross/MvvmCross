@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.ExtensionMethods;
+    using ExtensionMethods;
 
     using UIKit;
 
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
 

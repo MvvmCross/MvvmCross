@@ -17,13 +17,13 @@ namespace Example.Droid.Fragments
 
 		public MvxCachingFragmentCompatActivity ParentActivity { 
 			get {
-				return ((MvxCachingFragmentCompatActivity)Activity);
+				return (MvxCachingFragmentCompatActivity)Activity;
 			}
 		}
 
         protected BaseFragment()
         {
-            this.RetainInstance = true;
+            RetainInstance = true;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

@@ -1,15 +1,17 @@
 ﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.UWP;
 
 namespace MvvmCross.Forms.Uwp
 {
-    public class MvxPageRenderer : Xamarin.Forms.Platform.UWP.PageRenderer, IMvxBindingContextOwner
+    public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        protected override void OnElementChanged(Xamarin.Forms.Platform.UWP.ElementChangedEventArgs<Xamarin.Forms.Page> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
         {
             base.OnElementChanged(e);
 

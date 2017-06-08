@@ -9,7 +9,7 @@ namespace MvvmCross.Droid.Views
 {
     using Android.OS;
 
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxSingleViewModelCache
     {

@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.tvOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.Views;
+    using Binding.Views;
 
     using UIKit;
 

@@ -12,9 +12,9 @@ namespace MvvmCross.Platform.Plugins
     using System.Linq;
     using System.Reflection;
 
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
+    using Exceptions;
+    using IoC;
+    using Platform;
 
     public class MvxFilePluginManager
         : MvxPluginManager
@@ -24,19 +24,19 @@ namespace MvvmCross.Platform.Plugins
 
         public MvxFilePluginManager(string platformDllPostfix, string assemblyExtension = "")
         {
-            this._platformDllPostfixes = new List<string>() { platformDllPostfix };
-            this._assemblyExtension = assemblyExtension;
+            _platformDllPostfixes = new List<string>() { platformDllPostfix };
+            _assemblyExtension = assemblyExtension;
         }
 
         public MvxFilePluginManager(List<string> platformDllPostfixes, string assemblyExtension = "")
         {
-            this._platformDllPostfixes = platformDllPostfixes;
-            this._assemblyExtension = assemblyExtension;
+            _platformDllPostfixes = platformDllPostfixes;
+            _assemblyExtension = assemblyExtension;
         }
 
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {
-            var assembly = this.LoadAssembly(toLoad);
+            var assembly = LoadAssembly(toLoad);
 
             //var pluginTypes = assembly.ExceptionSafeGetTypes().Select(x => x.FullName);
             //foreach (var type in pluginTypes)
@@ -56,9 +56,9 @@ namespace MvvmCross.Platform.Plugins
 
         protected virtual Assembly LoadAssembly(Type toLoad)
         {
-            foreach (var platformDllPostfix in this._platformDllPostfixes)
+            foreach (var platformDllPostfix in _platformDllPostfixes)
             {
-                var assemblyName = this.GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
+                var assemblyName = GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
                 MvxTrace.Trace("Loading plugin assembly: {0}", assemblyName);
 
                 try
@@ -78,7 +78,7 @@ namespace MvvmCross.Platform.Plugins
 
         protected virtual string GetPluginAssemblyNameFrom(Type toLoad, string platformDllPostfix)
         {
-            return $"{toLoad.Namespace}{platformDllPostfix}{this._assemblyExtension}";
+            return $"{toLoad.Namespace}{platformDllPostfix}{_assemblyExtension}";
         }
     }
 }

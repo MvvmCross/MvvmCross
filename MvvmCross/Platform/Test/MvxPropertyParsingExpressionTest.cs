@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.Test
 {
-    using MvvmCross.Platform.Core;
+    using Core;
 
     using NUnit.Framework;
 
@@ -20,7 +20,7 @@ namespace MvvmCross.Platform.Test
 
             public string GetFooExpression()
             {
-                return this.GetPropertyNameFromExpression(() => this.Foo);
+                return this.GetPropertyNameFromExpression(() => Foo);
             }
         }
 

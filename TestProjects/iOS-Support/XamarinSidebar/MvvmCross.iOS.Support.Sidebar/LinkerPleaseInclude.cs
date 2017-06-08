@@ -2,6 +2,10 @@
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable RedundantAssignment
+
+using System.ComponentModel;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
     using System.Collections.Specialized;
@@ -100,12 +104,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
+        public void Include(MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
+            injector = new MvxPropertyInjector();
         }
 
-        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        public void Include(INotifyPropertyChanged changed)
         {
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }

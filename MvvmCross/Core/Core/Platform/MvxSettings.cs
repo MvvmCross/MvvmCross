@@ -13,7 +13,7 @@ namespace MvvmCross.Core.Platform
 
         public MvxSettings()
         {
-            this.AlwaysRaiseInpcOnUserInterfaceThread = true;
+            AlwaysRaiseInpcOnUserInterfaceThread = true;
         }
     }
 }

@@ -198,10 +198,10 @@ namespace MvvmCross.Core.Navigation
         {
             try
             {
-                this.CallCustomInitMethods(viewModel, parameterValues);
+                CallCustomInitMethods(viewModel, parameterValues);
                 if (savedState != null)
                 {
-                    this.CallReloadStateMethods(viewModel, savedState);
+                    CallReloadStateMethods(viewModel, savedState);
                 }
                 viewModel.Start();
             }

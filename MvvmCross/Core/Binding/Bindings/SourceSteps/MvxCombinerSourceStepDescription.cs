@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Combiners;
+    using Combiners;
 
     public class MvxCombinerSourceStepDescription : MvxSourceStepDescription
     {
@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return this.Combiner == null ? "-null-" : this.Combiner.GetType().Name + " combiner-operation";
+            return Combiner == null ? "-null-" : Combiner.GetType().Name + " combiner-operation";
         }
     }
 }

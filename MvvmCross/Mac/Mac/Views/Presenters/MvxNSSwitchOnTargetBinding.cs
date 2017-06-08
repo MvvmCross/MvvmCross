@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using ObjCRuntime;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
     using System.Reflection;
@@ -12,33 +14,33 @@ namespace MvvmCross.Mac.Views.Presenters
     using AppKit;
     using Foundation;
 
-    using global::MvvmCross.Binding;
-    using global::MvvmCross.Binding.Bindings.Target;
-    using global::MvvmCross.Platform.Platform;
+    using Binding;
+    using Binding.Bindings.Target;
+    using MvvmCross.Platform.Platform;
 
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var checkBox = this.View;
+            var checkBox = View;
             if (checkBox == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
             {
-                checkBox.Action = new ObjCRuntime.Selector("checkBoxAction:");
+                checkBox.Action = new Selector("checkBoxAction:");
             }
         }
 
         [Export("checkBoxAction:")]
         private void checkBoxAction()
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
-            this.FireValueChanged(view.State == NSCellStateValue.On);
+            FireValueChanged(view.State == NSCellStateValue.On);
         }
 
         public override MvxBindingMode DefaultMode
@@ -51,7 +53,7 @@ namespace MvvmCross.Mac.Views.Presenters
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var view = this.View;
+                var view = View;
                 if (view != null)
                 {
                     //                    view.ValueChanged -= HandleValueChanged;

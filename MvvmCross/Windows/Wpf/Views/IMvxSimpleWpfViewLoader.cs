@@ -9,7 +9,7 @@ namespace MvvmCross.Wpf.Views
 {
     using System.Windows;
 
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxSimpleWpfViewLoader
     {

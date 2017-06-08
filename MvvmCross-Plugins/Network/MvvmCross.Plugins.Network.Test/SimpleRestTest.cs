@@ -12,6 +12,7 @@ using NUnit.Framework;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using MvvmCross.Plugins.Json;
 
 namespace MvvmCross.Plugins.Network.Test
 {
@@ -32,8 +33,8 @@ namespace MvvmCross.Plugins.Network.Test
             // not a real test yet....
             var url = BooksService.GetSearchUrl("MonoTouch");
 
-            var json = new MvvmCross.Plugins.Json.MvxJsonConverter();
-            var client = new MvvmCross.Plugins.Network.Rest.MvxJsonRestClient
+            var json = new MvxJsonConverter();
+            var client = new MvxJsonRestClient
             {
                 JsonConverterProvider = () => json
             };

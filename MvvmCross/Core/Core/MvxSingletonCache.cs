@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Core
 {
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
+    using Platform;
+    using ViewModels;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
     using MvvmCross.Platform.Exceptions;
@@ -37,12 +37,12 @@ namespace MvvmCross.Core
         {
             get
             {
-                if (this._inpcInterceptorResolveAttempted)
-                    return this._inpcInterceptor;
+                if (_inpcInterceptorResolveAttempted)
+                    return _inpcInterceptor;
 
-                Mvx.TryResolve<IMvxInpcInterceptor>(out this._inpcInterceptor);
-                this._inpcInterceptorResolveAttempted = true;
-                return this._inpcInterceptor;
+                Mvx.TryResolve<IMvxInpcInterceptor>(out _inpcInterceptor);
+                _inpcInterceptorResolveAttempted = true;
+                return _inpcInterceptor;
             }
         }
 
@@ -52,8 +52,8 @@ namespace MvvmCross.Core
         {
             get
             {
-                this._parser = this._parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
-                return this._parser;
+                _parser = _parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
+                return _parser;
             }
         }
 
@@ -63,8 +63,8 @@ namespace MvvmCross.Core
         {
             get
             {
-                this._settings = this._settings ?? Mvx.Resolve<IMvxSettings>();
-                return this._settings;
+                _settings = _settings ?? Mvx.Resolve<IMvxSettings>();
+                return _settings;
             }
         }
     }

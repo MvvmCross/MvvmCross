@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
     using Android.Views;
 
-    using MvvmCross.Platform.IoC;
+    using Platform.IoC;
 
     public class MvxJustNameViewTypeResolver : MvxReflectionViewTypeResolver
     {
@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                 return null;
 
             Type toReturn;
-            this.TypeCache.NameCache.TryGetValue(tagName, out toReturn);
+            TypeCache.NameCache.TryGetValue(tagName, out toReturn);
             return toReturn;
         }
     }

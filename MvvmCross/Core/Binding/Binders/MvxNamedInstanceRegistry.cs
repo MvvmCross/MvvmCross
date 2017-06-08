@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Binders
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     public class MvxNamedInstanceRegistry<T>
         : IMvxNamedInstanceLookup<T>
@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Binders
                 return null;
 
             T toReturn;
-            if (!this._converters.TryGetValue(converterName, out toReturn))
+            if (!_converters.TryGetValue(converterName, out toReturn))
             {
                 // no trace here - this is expected to fail sometimes - e.g. in the case where we look for first combiner, then converter
                 // MvxBindingTrace.Trace("Could not find named {0} for {1}", converterName,
@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.Binders
 
         public void AddOrOverwrite(string name, T converter)
         {
-            this._converters[name] = converter;
+            _converters[name] = converter;
         }
 
         public void AddOrOverwriteFrom(Assembly assembly)

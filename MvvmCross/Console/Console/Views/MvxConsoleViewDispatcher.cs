@@ -9,8 +9,8 @@ namespace MvvmCross.Console.Views
 {
     using System;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Core;
 
@@ -27,13 +27,13 @@ namespace MvvmCross.Console.Views
         public bool ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return this.RequestMainThreadAction(() => navigation.Show(request));
+            return RequestMainThreadAction(() => navigation.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return this.RequestMainThreadAction(() => navigation.ChangePresentation(hint));
+            return RequestMainThreadAction(() => navigation.ChangePresentation(hint));
         }
     }
 }

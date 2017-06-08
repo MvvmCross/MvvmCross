@@ -1,9 +1,11 @@
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Plugins.ResourceLoader;
+using MvvmCross.Plugins.ResourceLoader.WindowsCommon;
 
 namespace MvxBindingsExample.UWP.Bootstrap
 {
     public class ResourceLoaderPluginBootstrap
-        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.ResourceLoader.PluginLoader, MvvmCross.Plugins.ResourceLoader.WindowsCommon.Plugin>
+        : MvxLoaderPluginBootstrapAction<PluginLoader, Plugin>
     {
     }
 }

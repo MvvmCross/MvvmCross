@@ -11,7 +11,7 @@ using MvxIosImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
 namespace MvvmCross.Forms.iOS.Views.Renderers
 {
-    class MvxImageViewRenderer : ImageRenderer
+    internal class MvxImageViewRenderer : ImageRenderer
     {
         private MvxIosImageView _nativeControl;
         private MvxImageView SharedControl => Element as MvxImageView;

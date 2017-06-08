@@ -15,17 +15,17 @@ namespace MvvmCross.Platform.Core
 
         protected void RunSyncWithLock(Action action)
         {
-            MvxLockableObjectHelpers.RunSyncWithLock(this._lockObject, action);
+            MvxLockableObjectHelpers.RunSyncWithLock(_lockObject, action);
         }
 
         protected void RunAsyncWithLock(Action action)
         {
-            MvxLockableObjectHelpers.RunAsyncWithLock(this._lockObject, action);
+            MvxLockableObjectHelpers.RunAsyncWithLock(_lockObject, action);
         }
 
         protected void RunSyncOrAsyncWithLock(Action action, Action whenComplete = null)
         {
-            MvxLockableObjectHelpers.RunSyncOrAsyncWithLock(this._lockObject, action, whenComplete);
+            MvxLockableObjectHelpers.RunSyncOrAsyncWithLock(_lockObject, action, whenComplete);
         }
     }
 }

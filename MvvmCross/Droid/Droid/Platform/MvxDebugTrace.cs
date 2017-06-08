@@ -18,7 +18,7 @@ namespace MvvmCross.Droid.Platform
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            this.Trace(level, tag, message());
+            Trace(level, tag, message());
         }
 
         public void Trace(MvxTraceLevel level, string tag, string message)
@@ -36,8 +36,8 @@ namespace MvvmCross.Droid.Platform
             }
             catch (FormatException)
             {
-                this.Trace(MvxTraceLevel.Error, tag, "Exception during trace");
-                this.Trace(level, tag, message);
+                Trace(MvxTraceLevel.Error, tag, "Exception during trace");
+                Trace(level, tag, message);
             }
         }
     }

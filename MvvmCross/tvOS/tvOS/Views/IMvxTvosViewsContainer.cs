@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxTvosViewsContainer
         : IMvxViewsContainer

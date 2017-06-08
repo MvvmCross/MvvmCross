@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Wpf.Views
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxWpfViewPresenter
         : IMvxViewPresenter

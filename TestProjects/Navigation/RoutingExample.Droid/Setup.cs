@@ -13,6 +13,7 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using RoutingExample.Core;
 
@@ -29,7 +30,7 @@ namespace RoutingExample.Droid
             return new App();
         }
 
-        protected override MvvmCross.Droid.Views.IMvxAndroidViewPresenter CreateViewPresenter()
+        protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             return new MvxFragmentsPresenter(AndroidViewAssemblies);
         }

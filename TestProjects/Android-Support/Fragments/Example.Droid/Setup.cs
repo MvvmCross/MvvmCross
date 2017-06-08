@@ -4,11 +4,17 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
+using Example.Core;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace Example.Droid
 {
@@ -21,17 +27,17 @@ namespace Example.Droid
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
 		protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
 		{
-			typeof(Android.Support.Design.Widget.NavigationView).Assembly,
-			typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly,
-			typeof(Android.Support.V7.Widget.Toolbar).Assembly,
-			typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
-			typeof(Android.Support.V4.View.ViewPager).Assembly,
-			typeof(MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView).Assembly
+			typeof(NavigationView).Assembly,
+			typeof(FloatingActionButton).Assembly,
+			typeof(Toolbar).Assembly,
+			typeof(DrawerLayout).Assembly,
+			typeof(ViewPager).Assembly,
+			typeof(MvxRecyclerView).Assembly
 		};
 
 		/// <summary>

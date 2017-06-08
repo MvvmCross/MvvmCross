@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.Converters
 {
-    using MvvmCross.Platform.Platform;
+    using Platform;
 
     public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
     {

@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Droid.BindingContext
 {
     using Android.Views;
 
-    using MvvmCross.Binding.BindingContext;
+    using Binding.BindingContext;
 
     public static class MvxBindingContextOwnerExtensions
     {

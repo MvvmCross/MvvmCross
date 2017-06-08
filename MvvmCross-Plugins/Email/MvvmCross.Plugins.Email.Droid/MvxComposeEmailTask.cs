@@ -16,6 +16,7 @@ using Java.IO;
 using System.IO;
 using MvvmCross.Platform.Droid.Views;
 using Java.Lang;
+using File = Java.IO.File;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
@@ -24,7 +25,7 @@ namespace MvvmCross.Plugins.Email.Droid
         : MvxAndroidTask
         , IMvxComposeEmailTaskEx
     {
-        private List<Java.IO.File> filesToDelete;
+        private List<File> filesToDelete;
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
@@ -85,7 +86,7 @@ namespace MvvmCross.Plugins.Email.Droid
                 var uris = new List<IParcelable>();
 
                 DoOnActivity(activity => {
-                    filesToDelete = new List<Java.IO.File>();
+                    filesToDelete = new List<File>();
 
                     foreach (var file in attachments)
                     {
@@ -96,7 +97,7 @@ namespace MvvmCross.Plugins.Email.Droid
                             var extension = Path.GetExtension(file.FileName);
 
                             // save file in external cache (required so Gmail app can independently access it, otherwise Gmail won't take the attachment)
-                            var newFile = new Java.IO.File(activity.ExternalCacheDir, fileName + extension);
+                            var newFile = new File(activity.ExternalCacheDir, fileName + extension);
 
                             file.Content.CopyTo(memoryStream);
                             var bytes = memoryStream.ToArray();
@@ -134,7 +135,7 @@ namespace MvvmCross.Plugins.Email.Droid
             base.ProcessMvxIntentResult(result);
 
             // on return, delete all attachments from external cache
-            foreach (Java.IO.File file in filesToDelete)
+            foreach (File file in filesToDelete)
             {
                 if (file.Exists())
                 {

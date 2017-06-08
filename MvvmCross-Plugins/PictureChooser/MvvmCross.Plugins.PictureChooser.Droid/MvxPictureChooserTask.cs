@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Media;
 using Android.Provider;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
@@ -18,6 +19,8 @@ using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
+using Path = System.IO.Path;
+using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
@@ -45,7 +48,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
@@ -165,7 +168,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
                 MvxTrace.Trace("Loading InMemoryBitmap complete...");
                 responseSent = true;
                 MvxTrace.Trace("Sending pictureAvailable...");
-                _currentRequestParameters.PictureAvailable(memoryStream, System.IO.Path.GetFileNameWithoutExtension(uri.Path));
+                _currentRequestParameters.PictureAvailable(memoryStream, Path.GetFileNameWithoutExtension(uri.Path));
                 MvxTrace.Trace("pictureAvailable completed...");
                 return;
             }
@@ -196,8 +199,8 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         {
             ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
-            var sampleSize = (int) Math.Ceiling((maxDimensionSize)/
-                                                ((double) _currentRequestParameters.MaxPixelDimension));
+            var sampleSize = (int) Math.Ceiling(maxDimensionSize/
+                                                (double) _currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1
@@ -252,8 +255,8 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             if (bitmap == null)
                 return null;
 
-            var exif = new Android.Media.ExifInterface(GetRealPathFromUri(contentResolver, uri));
-            var rotation = exif.GetAttributeInt(Android.Media.ExifInterface.TagOrientation, (Int32)Android.Media.Orientation.Normal);
+            var exif = new ExifInterface(GetRealPathFromUri(contentResolver, uri));
+            var rotation = exif.GetAttributeInt(ExifInterface.TagOrientation, (int)Orientation.Normal);
             var rotationInDegrees = ExifToDegrees(rotation);
             if (rotationInDegrees == 0)
                 return bitmap;
@@ -265,9 +268,9 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             }
         }
 
-        private String GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
+        private string GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
         {
-            var proj = new String[] { MediaStore.Images.ImageColumns.Data };
+            var proj = new string[] { MediaStore.Images.ImageColumns.Data };
             using (var cursor = contentResolver.Query(uri, proj, null, null, null))
             {
                 var columnIndex = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
@@ -276,15 +279,15 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             }
         }
 
-        private static Int32 ExifToDegrees(Int32 exifOrientation)
+        private static int ExifToDegrees(int exifOrientation)
         {
             switch (exifOrientation)
             {
-                case (Int32)Android.Media.Orientation.Rotate90:
+                case (int)Orientation.Rotate90:
                     return 90;
-                case (Int32)Android.Media.Orientation.Rotate180:
+                case (int)Orientation.Rotate180:
                     return 180;
-                case (Int32)Android.Media.Orientation.Rotate270:
+                case (int)Orientation.Rotate270:
                     return 270;
             }
 

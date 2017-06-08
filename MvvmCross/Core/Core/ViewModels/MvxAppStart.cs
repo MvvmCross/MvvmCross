@@ -20,7 +20,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 MvxTrace.Trace("Hint ignored in default MvxAppStart");
             }
-            this.ShowViewModel<TViewModel>();
+            ShowViewModel<TViewModel>();
         }
     }
 }

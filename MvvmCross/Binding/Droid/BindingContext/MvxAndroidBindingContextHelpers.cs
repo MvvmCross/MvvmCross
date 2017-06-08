@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Binding.Droid.BindingContext
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform;
+    using Binding.BindingContext;
+    using Platform;
 
     public static class MvxAndroidBindingContextHelpers
     {

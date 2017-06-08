@@ -8,6 +8,7 @@
 using Android.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Fragments;
+using MvvmCross.Droid.FullFragging.Views;
 using MvvmCross.Platform;
 using MvvmCross.Droid.Shared.Fragments;
 
@@ -15,7 +16,7 @@ namespace MvvmCross.Droid.FullFragging
 {
     public static class MvxFragmentExtensionMethods
     {
-        public static TFragment FindFragmentById<TFragment>(this Views.MvxActivity activity, int resourceId)
+        public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentById(resourceId);
@@ -28,7 +29,7 @@ namespace MvvmCross.Droid.FullFragging
             return SafeCast<TFragment>(fragment);
         }
 
-        public static TFragment FindFragmentByTag<TFragment>(this Views.MvxActivity activity, string tag)
+        public static TFragment FindFragmentByTag<TFragment>(this MvxActivity activity, string tag)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(tag);

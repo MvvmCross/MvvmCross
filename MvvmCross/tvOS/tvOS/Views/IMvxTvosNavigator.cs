@@ -7,7 +7,7 @@
 
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxTvosNavigator
     {

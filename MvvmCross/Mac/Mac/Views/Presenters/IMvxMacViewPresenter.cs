@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using global::MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxMacViewPresenter
         : IMvxViewPresenter

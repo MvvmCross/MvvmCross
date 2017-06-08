@@ -7,6 +7,7 @@
 
 using MvvmCross.Platform.Converters;
 using System;
+using System.Globalization;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
@@ -16,7 +17,7 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
     [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {
-        protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return null;

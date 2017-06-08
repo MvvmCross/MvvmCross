@@ -9,7 +9,7 @@ namespace MvvmCross.Mac.Views
 {
     using System;
 
-    using global::MvvmCross.Core.Views;
+    using Core.Views;
 
     using MvvmCross.Platform.Mac.Views;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Mac.Views
     {
         protected IMvxMacView MacView
         {
-            get { return base.ViewController as IMvxMacView; }
+            get { return ViewController as IMvxMacView; }
         }
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
@@ -29,13 +29,13 @@ namespace MvvmCross.Mac.Views
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.MacView.OnViewCreate();
+            MacView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.MacView.OnViewDestroy();
+            MacView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

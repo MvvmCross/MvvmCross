@@ -12,8 +12,8 @@ namespace MvvmCross.Test.ViewModels
 
     using MvvmCross.Core.Platform;
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
+    using Core;
+    using Mocks.TestViewModels;
 
     using NUnit.Framework;
 
@@ -79,7 +79,7 @@ namespace MvvmCross.Test.ViewModels
             var bundle = new MvxBundle();
             bundle.Write(testObject);
 
-            var method = this.GetType().GetMethod("TestFunction");
+            var method = GetType().GetMethod("TestFunction");
             var args = bundle.CreateArgumentList(method.GetParameters(), "ignored debug text");
             var output = method.Invoke(this, args.ToArray());
 

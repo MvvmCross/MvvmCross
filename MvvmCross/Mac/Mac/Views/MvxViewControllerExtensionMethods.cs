@@ -9,12 +9,12 @@ namespace MvvmCross.Mac.Views
 {
     using System.Collections.Generic;
 
-    using global::MvvmCross.Core.Platform;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform;
-    using global::MvvmCross.Platform.Exceptions;
-    using global::MvvmCross.Platform.Platform;
+    using Core.Platform;
+    using Core.ViewModels;
+    using Core.Views;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
+    using MvvmCross.Platform.Platform;
 
     public static class MvxViewControllerExtensionMethods
     {

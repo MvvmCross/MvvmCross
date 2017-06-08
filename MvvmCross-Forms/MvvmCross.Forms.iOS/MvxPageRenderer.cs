@@ -9,14 +9,15 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.iOS
 {
-    public class MvxPageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer, IMvxBindingContextOwner
+    public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {            
         public IMvxBindingContext BindingContext { get; set;}
 
-        protected override void OnElementChanged(Xamarin.Forms.Platform.iOS.VisualElementChangedEventArgs e)
+        protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
 

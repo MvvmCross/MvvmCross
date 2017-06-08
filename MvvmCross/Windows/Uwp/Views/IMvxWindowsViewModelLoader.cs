@@ -8,7 +8,7 @@
 namespace MvvmCross.Uwp.Views
 {
     using System;
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxWindowsViewModelLoader
     {

@@ -11,6 +11,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using System;
 using Android.Runtime;
+using Android.Support.V7.App;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -46,7 +47,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     [Register("mvvmcross.droid.support.v7.appcompat.MvxActionBarDrawerToggle")]
-    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle
+    public sealed class MvxActionBarDrawerToggle : ActionBarDrawerToggle
     {
         public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
         {

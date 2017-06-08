@@ -1,9 +1,11 @@
 ﻿using System;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
+using Playground.Core.ViewModels;
 
 namespace Playground.Core
 {
-    public class App : MvvmCross.Core.ViewModels.MvxApplication
+    public class App : MvxApplication
     {
         public override void Initialize()
         {
@@ -12,7 +14,7 @@ namespace Playground.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.RootViewModel>();
+            RegisterAppStart<RootViewModel>();
         }
     }
 }

@@ -82,10 +82,10 @@ namespace MvvmCross.Core.Platform
             public object ReadValue(string input, string fieldOrParameterName)
             {
                 object result;
-                if (!this.TryParse(input, out result))
+                if (!TryParse(input, out result))
                 {
                     MvxTrace.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   this.GetType().Name, fieldOrParameterName, input);
+                                   GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
             }
@@ -240,7 +240,7 @@ namespace MvvmCross.Core.Platform
 
         public MvxStringToTypeParser()
         {
-            this.TypeParsers = new Dictionary<Type, IParser>
+            TypeParsers = new Dictionary<Type, IParser>
                 {
                     {typeof (string), new StringParser()},
                     {typeof (short), new ShortParser()},
@@ -255,7 +255,7 @@ namespace MvvmCross.Core.Platform
                     {typeof (Guid), new GuidParser()},
                     {typeof (DateTime), new DateTimeParser()},
                 };
-            this.ExtraParsers = new List<IExtraParser>
+            ExtraParsers = new List<IExtraParser>
                 {
                     new EnumParser()
                 };
@@ -263,21 +263,21 @@ namespace MvvmCross.Core.Platform
 
         public bool TypeSupported(Type targetType)
         {
-            if (this.TypeParsers.ContainsKey(targetType))
+            if (TypeParsers.ContainsKey(targetType))
                 return true;
 
-            return this.ExtraParsers.Any(x => x.Parses(targetType));
+            return ExtraParsers.Any(x => x.Parses(targetType));
         }
 
         public object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
             IParser parser;
-            if (this.TypeParsers.TryGetValue(targetType, out parser))
+            if (TypeParsers.TryGetValue(targetType, out parser))
             {
                 return parser.ReadValue(rawValue, fieldOrParameterName);
             }
 
-            var extra = this.ExtraParsers.FirstOrDefault(x => x.Parses(targetType));
+            var extra = ExtraParsers.FirstOrDefault(x => x.Parses(targetType));
             if (extra != null)
             {
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);

@@ -13,10 +13,10 @@ namespace MvvmCross.Binding.tvOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.WeakSubscription;
+    using Attributes;
+    using ExtensionMethods;
+    using Platform;
+    using Platform.WeakSubscription;
 
     using UIKit;
 
@@ -56,7 +56,7 @@ namespace MvvmCross.Binding.tvOS.Views
             get { return _itemsSource; }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
+                if (ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
                     return;
 

@@ -28,21 +28,21 @@ namespace MvvmCross.Binding.Droid
     {
         public override void DoRegistration()
         {
-            this.InitializeAppResourceTypeFinder();
-            this.InitializeBindingResources();
-            this.InitializeLayoutInflation();
+            InitializeAppResourceTypeFinder();
+            InitializeBindingResources();
+            InitializeLayoutInflation();
             base.DoRegistration();
         }
 
         protected virtual void InitializeLayoutInflation()
         {
-            var inflaterfactoryFactory = this.CreateLayoutInflaterFactoryFactory();
+            var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
             Mvx.RegisterSingleton(inflaterfactoryFactory);
 
-            var viewFactory = this.CreateAndroidViewFactory();
+            var viewFactory = CreateAndroidViewFactory();
             Mvx.RegisterSingleton(viewFactory);
 
-            var viewBinderFactory = this.CreateAndroidViewBinderFactory();
+            var viewBinderFactory = CreateAndroidViewBinderFactory();
             Mvx.RegisterSingleton(viewBinderFactory);
         }
 
@@ -68,7 +68,7 @@ namespace MvvmCross.Binding.Droid
 
         protected virtual void InitializeAppResourceTypeFinder()
         {
-            var resourceFinder = this.CreateAppResourceTypeFinder();
+            var resourceFinder = CreateAppResourceTypeFinder();
             Mvx.RegisterSingleton(resourceFinder);
         }
 
@@ -94,7 +94,7 @@ namespace MvvmCross.Binding.Droid
                 textView => new MvxTextViewTextFormattedTargetBinding(textView));
 
             registry.RegisterPropertyInfoBindingFactory(
-                (typeof(MvxAutoCompleteTextViewPartialTextTargetBinding)),
+                typeof(MvxAutoCompleteTextViewPartialTextTargetBinding),
                 typeof(MvxAutoCompleteTextView),
                 MvxAndroidPropertyBinding.MvxAutoCompleteTextView_PartialText);
 
@@ -225,13 +225,13 @@ namespace MvvmCross.Binding.Droid
         {
             base.RegisterPlatformSpecificComponents();
 
-            this.InitializeViewTypeResolver();
-            this.InitializeContextStack();
+            InitializeViewTypeResolver();
+            InitializeContextStack();
         }
 
         protected virtual void InitializeContextStack()
         {
-            var stack = this.CreateContextStack();
+            var stack = CreateContextStack();
             Mvx.RegisterSingleton(stack);
         }
 
@@ -242,7 +242,7 @@ namespace MvvmCross.Binding.Droid
 
         protected virtual void InitializeViewTypeResolver()
         {
-            var typeCache = this.CreateViewTypeCache();
+            var typeCache = CreateViewTypeCache();
             Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);

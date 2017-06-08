@@ -10,10 +10,10 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
     using System;
     using System.Reflection;
 
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
+    using ExtensionMethods;
+    using Platform.Converters;
+    using Platform.Exceptions;
+    using Platform.Platform;
 
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
@@ -22,21 +22,21 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType => this.PropertyInfo?.PropertyType;
+        public override Type SourceType => PropertyInfo?.PropertyType;
 
         protected override void OnBoundPropertyChanged()
         {
-            this.FireChanged();
+            FireChanged();
         }
 
         public override object GetValue()
         {
-            if (this.PropertyInfo == null)
+            if (PropertyInfo == null)
             {
                 return MvxBindingConstant.UnsetValue;
             }
 
-            if (!this.PropertyInfo.CanRead)
+            if (!PropertyInfo.CanRead)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetValue ignored in binding - target property is writeonly");
                 return MvxBindingConstant.UnsetValue;
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             try
             {
-                return this.PropertyInfo.GetValue(this.Source, this.PropertyIndexParameters());
+                return PropertyInfo.GetValue(Source, PropertyIndexParameters());
             }
             catch (TargetInvocationException)
             {
@@ -58,14 +58,14 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            if (this.PropertyInfo == null)
+            if (PropertyInfo == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - source property {0} is missing", this.PropertyName);
+                                      "SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
-            if (!this.PropertyInfo.CanWrite)
+            if (!PropertyInfo.CanWrite)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning, "SetValue ignored in binding - target property is readonly");
                 return;
@@ -73,14 +73,14 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             try
             {
-                var propertyType = this.PropertyInfo.PropertyType;
+                var propertyType = PropertyInfo.PropertyType;
                 var safeValue = propertyType.MakeSafeValue(value);
 
                 // if safeValue matches the existing value, then don't call set
-                if (this.EqualsCurrentValue(safeValue))
+                if (EqualsCurrentValue(safeValue))
                     return;
 
-                this.PropertyInfo.SetValue(this.Source, safeValue, this.PropertyIndexParameters());
+                PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());
             }
             catch (Exception exception)
             {

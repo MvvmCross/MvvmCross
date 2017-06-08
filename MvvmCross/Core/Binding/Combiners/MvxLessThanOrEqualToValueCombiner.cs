@@ -41,13 +41,13 @@ namespace MvvmCross.Binding.Combiners
 
         protected override bool CombineNullAndDouble(double input2, out object value)
         {
-            value = (0.0).CompareTo(input2) <= 0;
+            value = 0.0.CompareTo(input2) <= 0;
             return true;
         }
 
         protected override bool CombineNullAndLong(long input2, out object value)
         {
-            value = (0L).CompareTo(input2) <= 0;
+            value = 0L.CompareTo(input2) <= 0;
             return true;
         }
 

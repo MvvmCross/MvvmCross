@@ -8,9 +8,9 @@
 namespace MvvmCross.Test.Platform
 {
     using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-    using MvvmCross.Test.Mocks.TestViews;
+    using Core;
+    using Mocks.TestViewModels;
+    using Mocks.TestViews;
 
     using NUnit.Framework;
 
@@ -22,7 +22,7 @@ namespace MvvmCross.Test.Platform
         {
             ClearAll();
 
-            var assembly = this.GetType().Assembly;
+            var assembly = GetType().Assembly;
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(assembly);
             var nameMapping = new MvxPostfixAwareViewToViewModelNameMapping("View", "Oddness");

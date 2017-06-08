@@ -7,9 +7,9 @@
 
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Binding.BindingContext;
+    using Core.ViewModels;
+    using Core.Views;
 
     public interface IMvxIosView
         : IMvxView

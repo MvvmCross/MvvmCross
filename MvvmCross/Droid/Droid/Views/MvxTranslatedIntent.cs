@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public class MvxTranslatedIntent
     {
@@ -23,14 +23,14 @@ namespace MvvmCross.Droid.Views
 
         public MvxTranslatedIntent(MvxViewModelRequest viewModelRequest)
         {
-            this.ViewModelRequest = viewModelRequest;
-            this.Result = TranslationResult.Request;
+            ViewModelRequest = viewModelRequest;
+            Result = TranslationResult.Request;
         }
 
         public MvxTranslatedIntent(IMvxViewModel existingViewModel)
         {
-            this.ExistingViewModel = existingViewModel;
-            this.Result = TranslationResult.ExistingViewModel;
+            ExistingViewModel = existingViewModel;
+            Result = TranslationResult.ExistingViewModel;
         }
 
         public TranslationResult Result { get; private set; }

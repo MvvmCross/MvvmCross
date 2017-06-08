@@ -14,7 +14,7 @@ namespace Eventhooks.Uwp.Views
     {
         public FirstView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public FirstViewModel FirstViewModel

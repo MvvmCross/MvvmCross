@@ -11,7 +11,7 @@ namespace MvvmCross.Wpf.Commands
     {
         public MvxWithArgsEventToCommand()
         {
-            this.PassEventArgsToCommand = true;
+            PassEventArgsToCommand = true;
         }
     }
 }

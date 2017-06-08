@@ -5,10 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -29,7 +31,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(string);
+        public override Type TargetType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {
