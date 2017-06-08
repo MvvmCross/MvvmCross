@@ -14,20 +14,20 @@ namespace MvvmCross.Binding.tvOS.Views.Gestures
     {
         protected override void HandleGesture(UITapGestureRecognizer gesture)
         {
-            this.FireCommand();
+            FireCommand();
         }
 
         public MvxTapGestureRecognizerBehaviour(UIView target, uint numberOfTapsRequired = 1,
                                                 uint numberOfTouchesRequired = 1,
                                                 bool cancelsTouchesInView = true)
         {
-            var tap = new UITapGestureRecognizer(this.HandleGesture)
+            var tap = new UITapGestureRecognizer(HandleGesture)
             {
                 NumberOfTapsRequired = numberOfTapsRequired,
                 CancelsTouchesInView = cancelsTouchesInView
             };
 
-            this.AddGestureRecognizer(target, tap);
+            AddGestureRecognizer(target, tap);
         }
     }
 }

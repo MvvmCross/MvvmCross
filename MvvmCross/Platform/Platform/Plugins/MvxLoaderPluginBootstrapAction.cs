@@ -16,7 +16,7 @@ namespace MvvmCross.Platform.Plugins
     {
         protected override void Load(IMvxPluginManager manager)
         {
-            this.PreLoad(manager);
+            PreLoad(manager);
             base.Load(manager);
         }
 

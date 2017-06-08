@@ -83,7 +83,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             navigationController.ViewControllers = new[] { viewController };
 
             if(panel == MvxPanelEnum.Center)
-                viewController.ShowMenuButton((SideBarViewController as MvxSidebarViewController));
+                viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController);
 
             return true;
         }

@@ -10,8 +10,8 @@ namespace MvvmCross.Core.ViewModels
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.Views;
+    using Platform;
+    using Views;
     using MvvmCross.Platform.Platform;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
@@ -19,17 +19,17 @@ namespace MvvmCross.Core.ViewModels
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
-        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)base.Dispatcher;
+        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)Dispatcher;
 
         protected bool Close(IMvxViewModel viewModel)
         {
-            return this.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            return ChangePresentation(new MvxClosePresentationHint(viewModel));
         }
 
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Trace("Requesting presentation change");
-            var viewDispatcher = this.ViewDispatcher;
+            var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ChangePresentation(hint);
 
@@ -52,14 +52,14 @@ namespace MvvmCross.Core.ViewModels
             }
 
             var json = serializer.SerializeObject(parameter);
-            return this.ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } }, presentationBundle);
+            return ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } }, presentationBundle);
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject,
                                                  IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 parameterValuesObject.ToSimplePropertyDictionary(),
                 presentationBundle);
@@ -69,7 +69,7 @@ namespace MvvmCross.Core.ViewModels
                                                  IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
                 presentationBundle);
@@ -79,7 +79,7 @@ namespace MvvmCross.Core.ViewModels
                                                  IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 parameterBundle,
                 presentationBundle);
@@ -89,7 +89,7 @@ namespace MvvmCross.Core.ViewModels
                                      object parameterValuesObject,
                                      IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModel(viewModelType,
+            return ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
                                  presentationBundle);
         }
@@ -98,7 +98,7 @@ namespace MvvmCross.Core.ViewModels
                                      IDictionary<string, string> parameterValues,
                                      IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModel(viewModelType,
+            return ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValues),
                                  presentationBundle);
         }
@@ -107,13 +107,13 @@ namespace MvvmCross.Core.ViewModels
                                      IMvxBundle parameterBundle = null,
                                      IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle);
+            return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle);
         }
 
         private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle)
         {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
-            var viewDispatcher = this.ViewDispatcher;
+            var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(
                                                         viewModelType,

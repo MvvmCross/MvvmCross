@@ -11,7 +11,7 @@ namespace MvvmCross.tvOS.Views
 
     using MvvmCross.Platform;
     using MvvmCross.Platform.IoC;
-    using MvvmCross.tvOS.Platform;
+    using Platform;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFormFactorSpecificAttribute
@@ -19,7 +19,7 @@ namespace MvvmCross.tvOS.Views
     {
         public MvxFormFactorSpecificAttribute(MvxTvosFormFactor target)
         {
-            this.Target = target;
+            Target = target;
         }
 
         public MvxTvosFormFactor Target { get; private set; }
@@ -29,7 +29,7 @@ namespace MvvmCross.tvOS.Views
             get
             {
                 var properties = Mvx.Resolve<IMvxTvosPlatformProperties>();
-                return (properties.FormFactor == this.Target);
+                return properties.FormFactor == Target;
             }
         }
     }

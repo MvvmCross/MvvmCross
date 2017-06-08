@@ -19,18 +19,18 @@ namespace MvvmCross.Wpf.Views
 
         public MvxWpfUIThreadDispatcher(Dispatcher dispatcher)
         {
-            this._dispatcher = dispatcher;
+            _dispatcher = dispatcher;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (this._dispatcher.CheckAccess())
+            if (_dispatcher.CheckAccess())
             {
                 action();
             }
             else
             {
-                this._dispatcher.Invoke(() => ExceptionMaskedAction(action));
+                _dispatcher.Invoke(() => ExceptionMaskedAction(action));
             }
 
             // TODO - why return bool at all?

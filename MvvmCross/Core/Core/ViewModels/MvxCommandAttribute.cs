@@ -14,8 +14,8 @@ namespace MvvmCross.Core.ViewModels
     {
         public MvxCommandAttribute(string commandName, string canExecutePropertyName = null)
         {
-            this.CanExecutePropertyName = canExecutePropertyName;
-            this.CommandName = commandName;
+            CanExecutePropertyName = canExecutePropertyName;
+            CommandName = commandName;
         }
 
         public string CommandName { get; set; }

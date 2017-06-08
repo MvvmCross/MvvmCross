@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Uwp.Views
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxStoreViewsContainer
         : IMvxViewsContainer

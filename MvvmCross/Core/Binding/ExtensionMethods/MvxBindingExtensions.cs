@@ -10,8 +10,8 @@ namespace MvvmCross.Binding.ExtensionMethods
     using System;
     using System.Globalization;
 
-    using MvvmCross.Platform.ExtensionMethods;
-    using MvvmCross.Platform.IoC;
+    using Platform.ExtensionMethods;
+    using Platform.IoC;
 
     public static class MvxBindingExtensions
     {

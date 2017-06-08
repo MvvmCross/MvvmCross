@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform.Core;
+    using BindingContext;
+    using Platform.Core;
 
     public interface IMvxBindable
         : IMvxBindingContextOwner

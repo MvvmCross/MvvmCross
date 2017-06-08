@@ -6,9 +6,9 @@ namespace PageRendererExample.ViewModels
 {
     public class CameraRendererViewModel : MvxViewModel
     {
-        readonly IImageHolder _imageHolder;
+        private readonly IImageHolder _imageHolder;
 
-        MvxCommand _closeCommand;
+        private MvxCommand _closeCommand;
         public ICommand CloseCommand {
             get {
                 if (_closeCommand == null) {

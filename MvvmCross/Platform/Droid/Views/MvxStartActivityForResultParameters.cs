@@ -13,8 +13,8 @@ namespace MvvmCross.Platform.Droid.Views
     {
         public MvxStartActivityForResultParameters(Intent intent, int requestCode)
         {
-            this.RequestCode = requestCode;
-            this.Intent = intent;
+            RequestCode = requestCode;
+            Intent = intent;
         }
 
         public Intent Intent { get; private set; }

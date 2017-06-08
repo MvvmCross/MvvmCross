@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 {
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using Parse.PropertyPath.PropertyTokens;
 
     public interface IMvxSourceBindingFactory
     {

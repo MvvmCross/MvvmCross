@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.tvOS.Views
 
 	using CoreGraphics;
 
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.BindingContext;
+	using Attributes;
+	using BindingContext;
 
 	using UIKit;
 
@@ -43,7 +43,7 @@ namespace MvvmCross.Binding.tvOS.Views
 		{
 			if (disposing)
 			{
-				this.BindingContext.ClearAllBindings();
+				BindingContext.ClearAllBindings();
 			}
 			base.Dispose(disposing);
 		}
@@ -51,8 +51,8 @@ namespace MvvmCross.Binding.tvOS.Views
 		[MvxSetToNullAfterBinding]
 		public object DataContext
 		{
-			get { return this.BindingContext.DataContext; }
-			set { this.BindingContext.DataContext = value; }
+			get { return BindingContext.DataContext; }
+			set { BindingContext.DataContext = value; }
 		}
 	}
 }

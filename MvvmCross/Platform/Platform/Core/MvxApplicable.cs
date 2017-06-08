@@ -16,21 +16,21 @@ namespace MvvmCross.Platform.Core
 
         ~MvxApplicable()
         {
-            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", this.GetType().Name);
+            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()
         {
-            if (this._finalizerSuppressed)
+            if (_finalizerSuppressed)
                 return;
 
-            this._finalizerSuppressed = true;
+            _finalizerSuppressed = true;
             GC.SuppressFinalize(this);
         }
 
         public virtual void Apply()
         {
-            this.SuppressFinalizer();
+            SuppressFinalizer();
         }
     }
 }

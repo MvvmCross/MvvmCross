@@ -32,7 +32,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new NotifyCollectionChangedEventHandler(this.OnSourceEvent);
+            return new NotifyCollectionChangedEventHandler(OnSourceEvent);
         }
     }
 }

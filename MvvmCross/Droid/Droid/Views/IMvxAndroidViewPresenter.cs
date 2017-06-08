@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxAndroidViewPresenter
         : IMvxViewPresenter

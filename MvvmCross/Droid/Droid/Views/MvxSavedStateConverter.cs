@@ -12,8 +12,8 @@ namespace MvvmCross.Droid.Views
 
     using Android.OS;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Platform;
+    using Core.ViewModels;
+    using Platform;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Platform;
 

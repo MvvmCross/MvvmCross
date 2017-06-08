@@ -15,7 +15,7 @@ namespace MvvmCross.Platform.Core
 
         protected void InvokeOnMainThread(Action action)
         {
-            this.Dispatcher?.RequestMainThreadAction(action);
+            Dispatcher?.RequestMainThreadAction(action);
         }
     }
 }

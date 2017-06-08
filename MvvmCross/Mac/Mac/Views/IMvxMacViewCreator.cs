@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Mac.Views
 {
-    using global::MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     public interface IMvxMacViewCreator
     {

@@ -19,7 +19,7 @@ namespace RoutingExample.Core.RoutingFacades
         {
             // you can also use the values captured by the regex in currentPrameters
 
-            var viewModelType = (new Random().Next() % 2 == 0) ? typeof(TestAViewModel) : typeof(TestBViewModel);
+            var viewModelType = new Random().Next() % 2 == 0 ? typeof(TestAViewModel) : typeof(TestBViewModel);
 
             return Task.FromResult(new MvxViewModelRequest(viewModelType, null, null));
         }

@@ -24,7 +24,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
     [Register("mvvmcross.droid.support.v17.leanback.widgets.MvxHorizontalGridView")]
-    public class MvxHorizontalGridView : Android.Support.V17.Leanback.Widget.HorizontalGridView
+    public class MvxHorizontalGridView : HorizontalGridView
     {
         #region ctor
 
@@ -81,7 +81,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get { return GetAdapter() as IMvxRecyclerAdapter; }
             set
             {
                 var existing = Adapter;
@@ -140,14 +140,14 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get { return Adapter.ItemClick; }
+            set { Adapter.ItemClick = value; }
         }
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get { return Adapter.ItemLongClick; }
+            set { Adapter.ItemLongClick = value; }
         }
 
 		public ICommand ItemSelection

@@ -11,16 +11,16 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
     using Android.Views;
 
-    using MvvmCross.Platform.IoC;
+    using Platform.IoC;
 
     public abstract class MvxReflectionViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly IMvxTypeCache<View> _typeCache;
-        protected IMvxTypeCache<View> TypeCache => this._typeCache;
+        protected IMvxTypeCache<View> TypeCache => _typeCache;
 
         protected MvxReflectionViewTypeResolver(IMvxTypeCache<View> typeCache)
         {
-            this._typeCache = typeCache;
+            _typeCache = typeCache;
         }
 
         public abstract Type Resolve(string tagName);

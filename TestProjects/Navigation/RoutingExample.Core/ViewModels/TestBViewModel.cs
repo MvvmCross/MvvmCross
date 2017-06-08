@@ -29,7 +29,7 @@ namespace RoutingExample.Core.ViewModels
 
         public void Init()
         {
-            _user = new User($"Initial view {this.GetHashCode()}", "Test");
+            _user = new User($"Initial view {GetHashCode()}", "Test");
         }
 
         private User _user;
@@ -39,9 +39,9 @@ namespace RoutingExample.Core.ViewModels
         public IMvxAsyncCommand OpenViewModelMainCommand => new MvxAsyncCommand(
             () => Mvx.Resolve<IMvxNavigationService>().Navigate<MainViewModel>());
         public IMvxAsyncCommand OpenViewModelACommand => new MvxAsyncCommand(
-            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestAViewModel, User>(new User($"To A from {this.GetHashCode()}", "Something")));
+            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestAViewModel, User>(new User($"To A from {GetHashCode()}", "Something")));
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
-            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {this.GetHashCode()}", "Something")));
+            () =>  Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
 
         public override async Task Initialize(User parameter)
         {

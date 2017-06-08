@@ -13,7 +13,7 @@ namespace MvvmCross.Core.Platform
     {
         public MvxLifetimeEventArgs(MvxLifetimeEvent lifetimeEvent)
         {
-            this.LifetimeEvent = lifetimeEvent;
+            LifetimeEvent = lifetimeEvent;
         }
 
         public MvxLifetimeEvent LifetimeEvent { get; private set; }

@@ -3,8 +3,8 @@ namespace MvvmCross.Binding.tvOS.Target
     using System;
     using System.Reflection;
 
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.tvOS.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             segmentedControl.ValueChanged += HandleValueChanged;
         }
 
@@ -55,10 +55,10 @@ namespace MvvmCross.Binding.tvOS.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     view.ValueChanged -= HandleValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

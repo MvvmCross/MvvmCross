@@ -5,11 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using ExtensionMethods;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -26,9 +28,9 @@ namespace MvvmCross.Binding.tvOS.Target
         {
         }
 
-        private void HandleEditTextValueChanged(object sender, System.EventArgs e)
+        private void HandleEditTextValueChanged(object sender, EventArgs e)
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
             FireValueChanged(view.Text);
@@ -38,7 +40,7 @@ namespace MvvmCross.Binding.tvOS.Target
 
         public override void SubscribeToEvents()
         {
-            var target = this.View;
+            var target = View;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -46,11 +48,11 @@ namespace MvvmCross.Binding.tvOS.Target
                 return;
             }
 
-            target.EditingChanged += this.HandleEditTextValueChanged;
-            this._subscribed = true;
+            target.EditingChanged += HandleEditTextValueChanged;
+            _subscribed = true;
         }
 
-        public override System.Type TargetType => typeof(string);
+        public override Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {
@@ -71,11 +73,11 @@ namespace MvvmCross.Binding.tvOS.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = this.View;
-                if (editText != null && this._subscribed)
+                var editText = View;
+                if (editText != null && _subscribed)
                 {
-                    editText.EditingChanged -= this.HandleEditTextValueChanged;
-                    this._subscribed = false;
+                    editText.EditingChanged -= HandleEditTextValueChanged;
+                    _subscribed = false;
                 }
             }
         }
@@ -84,7 +86,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
             get
             {
-                var view = this.View;
+                var view = View;
                 return view?.Text;
             }
         }

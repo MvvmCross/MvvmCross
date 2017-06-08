@@ -9,8 +9,8 @@ namespace MvvmCross.Platform.Platform
 {
     using System;
 
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
+    using Core;
+    using Exceptions;
 
     public class MvxTrace
         : MvxSingleton<IMvxTrace>
@@ -119,8 +119,8 @@ namespace MvvmCross.Platform.Platform
 
         public MvxTrace()
         {
-            this._realTrace = Mvx.Resolve<IMvxTrace>();
-            if (this._realTrace == null)
+            _realTrace = Mvx.Resolve<IMvxTrace>();
+            if (_realTrace == null)
                 throw new MvxException("No platform trace service available");
         }
 
@@ -128,17 +128,17 @@ namespace MvvmCross.Platform.Platform
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, Func<string> message)
         {
-            this._realTrace.Trace(level, tag, message);
+            _realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message)
         {
-            this._realTrace.Trace(level, tag, message);
+            _realTrace.Trace(level, tag, message);
         }
 
         void IMvxTrace.Trace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
-            this._realTrace.Trace(level, tag, message, args);
+            _realTrace.Trace(level, tag, message, args);
         }
 
         #endregion IMvxTrace Members

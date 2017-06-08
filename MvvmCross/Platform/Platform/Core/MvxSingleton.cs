@@ -10,19 +10,19 @@ namespace MvvmCross.Platform.Core
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Platform.Exceptions;
+    using Exceptions;
 
     public abstract class MvxSingleton
         : IDisposable
     {
         ~MvxSingleton()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 

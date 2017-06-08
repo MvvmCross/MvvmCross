@@ -9,12 +9,12 @@ namespace MvvmCross.Mac.ExtensionMethods
 
         public static DateTime ToDateTimeUtc(this NSDate date)
         {
-            return (ReferenceNSDateTime).AddSeconds(date.SecondsSinceReferenceDate);
+            return ReferenceNSDateTime.AddSeconds(date.SecondsSinceReferenceDate);
         }
 
         public static NSDate ToNSDate(this DateTime date)
         {
-            return NSDate.FromTimeIntervalSinceReferenceDate((date - (ReferenceNSDateTime)).TotalSeconds);
+            return NSDate.FromTimeIntervalSinceReferenceDate((date - ReferenceNSDateTime).TotalSeconds);
         }        
     }
 }

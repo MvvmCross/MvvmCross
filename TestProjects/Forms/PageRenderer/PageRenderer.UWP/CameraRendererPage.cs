@@ -1,11 +1,13 @@
 ﻿
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Linq;
 using System.Threading.Tasks;
 
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
+using Windows.Foundation;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.Streams;
@@ -20,8 +22,7 @@ using Xamarin.Forms.Platform.UWP;
 
 using PageRendererExample.Pages;
 using PageRendererExample.ViewModels;
-
-
+using Panel = Windows.UI.Xaml.Controls.Panel;
 
 
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Uwp.CameraRendererPage))]
@@ -30,13 +31,12 @@ namespace PageRendererExample.UI.Uwp
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>
     {
-
-        Page _page;
-        MediaCapture _mediaCapture;
-        CaptureElement _captureElement;
-        AppBarButton _takePhotoButton;
-        AppBarButton _cancelButton;
-        Button _anyButton;
+        private Page _page;
+        private MediaCapture _mediaCapture;
+        private CaptureElement _captureElement;
+        private AppBarButton _takePhotoButton;
+        private AppBarButton _cancelButton;
+        private Button _anyButton;
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Page> e)
         {
@@ -54,21 +54,21 @@ namespace PageRendererExample.UI.Uwp
                 SetupEventHandlers();
                 SetupLiveCameraStream();
 
-                var container = ContainerElement as Windows.UI.Xaml.Controls.Panel;
+                var container = ContainerElement as Panel;
                 container.Children.Add(_page);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(@"      ERROR: ", ex.Message);
+                Debug.WriteLine(@"      ERROR: ", ex.Message);
             }
         }
 
-        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size size)
+        protected override Size ArrangeOverride(Size size)
         {
             return size;
         }
 
-        void SetupUserInterface()
+        private void SetupUserInterface()
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             _takePhotoButton = new AppBarButton
@@ -96,7 +96,7 @@ namespace PageRendererExample.UI.Uwp
             _page.Content = stackPanel;            
         }
 
-        void BindViewModel()
+        private void BindViewModel()
         {
             var binding = new Binding {
                 Path = new PropertyPath("CloseCommand"),
@@ -105,7 +105,7 @@ namespace PageRendererExample.UI.Uwp
             _cancelButton.SetBinding(ButtonBase.CommandProperty, binding);
         }
 
-        void SetupEventHandlers()
+        private void SetupEventHandlers()
         {
             var app = Application.Current;
             app.Suspending += OnAppSuspending;
@@ -116,7 +116,7 @@ namespace PageRendererExample.UI.Uwp
             _takePhotoButton.Click += CapturePhotoPressed;
         }
 
-        async void SetupLiveCameraStream()
+        private async void SetupLiveCameraStream()
         {
             var devices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
             var frontCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null && c.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
@@ -144,7 +144,7 @@ namespace PageRendererExample.UI.Uwp
             await _mediaCapture.StartPreviewAsync();
         }
 
-        async void CapturePhotoPressed(object sender, RoutedEventArgs e)
+        private async void CapturePhotoPressed(object sender, RoutedEventArgs e)
         {
             var photoEncoding = ImageEncodingProperties.CreateJpeg();
             using (var imageStream = new InMemoryRandomAccessStream())
@@ -159,24 +159,24 @@ namespace PageRendererExample.UI.Uwp
             ViewModel.CloseCommand.Execute(this);
         }
 
-        async void OnAppSuspending(object sender, SuspendingEventArgs e)
+        private async void OnAppSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             await CleanUpCaptureResourcesAsync();
             deferral.Complete();
         }
 
-        void OnAppResuming(object sender, object e)
+        private void OnAppResuming(object sender, object e)
         {
             SetupLiveCameraStream();
         }
 
-        async void OnPageUnloaded(object sender, RoutedEventArgs e)
+        private async void OnPageUnloaded(object sender, RoutedEventArgs e)
         {
             await CleanUpCaptureResourcesAsync();
         }
 
-        async Task CleanUpCaptureResourcesAsync()
+        private async Task CleanUpCaptureResourcesAsync()
         {
             if (_captureElement != null)
             {
@@ -192,7 +192,7 @@ namespace PageRendererExample.UI.Uwp
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(@"          Error: ", ex.Message);
+                    Debug.WriteLine(@"          Error: ", ex.Message);
                 }
               
             }
@@ -205,7 +205,7 @@ namespace PageRendererExample.UI.Uwp
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine(@"          Error: ", ex.Message);
+                    Debug.WriteLine(@"          Error: ", ex.Message);
                 }
                 finally
                 {

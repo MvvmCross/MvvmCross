@@ -5,8 +5,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Binding.BindingContext;
     using Core.ViewModels;
     using UIKit;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using MvvmCross.iOS.Support.XamarinSidebar;
+    using XamarinSidebar.Attributes;
+    using XamarinSidebar;
 
     [Register("ExampleMenuItemView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, false)]

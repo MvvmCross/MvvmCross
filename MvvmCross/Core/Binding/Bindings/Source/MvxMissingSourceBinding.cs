@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Bindings.Source
 {
     using System;
 
-    using MvvmCross.Platform.Converters;
+    using Platform.Converters;
 
     public class MvxMissingSourceBinding : MvxSourceBinding
     {

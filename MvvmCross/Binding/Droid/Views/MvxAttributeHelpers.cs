@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Content;
     using Android.Util;
 
-    using MvvmCross.Binding.Droid.ResourceHelpers;
+    using ResourceHelpers;
 
     public static class MvxAttributeHelpers
     {

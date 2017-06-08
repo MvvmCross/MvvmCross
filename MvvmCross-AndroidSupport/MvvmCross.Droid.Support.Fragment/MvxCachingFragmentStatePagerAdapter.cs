@@ -39,13 +39,13 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null)
+        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = Fragments.ElementAt(position);
-            var fragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+            var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
             if (mvxFragment == null)

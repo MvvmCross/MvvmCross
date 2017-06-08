@@ -13,8 +13,8 @@ namespace MvvmCross.Test.ViewModels
 
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Platform.Core;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.Dispatchers;
+    using Core;
+    using Mocks.Dispatchers;
 
     using NUnit.Framework;
 
@@ -105,7 +105,7 @@ namespace MvvmCross.Test.ViewModels
 
             public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
             {
-                return this.Handler(sender, args);
+                return Handler(sender, args);
             }
         }
 

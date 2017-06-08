@@ -2,6 +2,7 @@ using System;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
+using UIKit;
 
 namespace Playground.iOS.Views
 {
@@ -26,7 +27,7 @@ namespace Playground.iOS.Views
             }
         }
 
-        protected override void SetTitleAndTabBarItem(UIKit.UIViewController viewController, string title, string iconName)
+        protected override void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
         {
             // you can override this method to set title or iconName
             if(string.IsNullOrEmpty(title))

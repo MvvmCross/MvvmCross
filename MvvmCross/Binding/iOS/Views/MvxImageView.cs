@@ -23,49 +23,49 @@ namespace MvvmCross.Binding.iOS.Views
 
         public string ImageUrl
         {
-            get { return this._imageHelper.ImageUrl; }
-            set { this._imageHelper.ImageUrl = value; }
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
         }
 
         public string DefaultImagePath
         {
-            get { return this._imageHelper.DefaultImagePath; }
-            set { this._imageHelper.DefaultImagePath = value; }
+            get { return _imageHelper.DefaultImagePath; }
+            set { _imageHelper.DefaultImagePath = value; }
         }
 
         public string ErrorImagePath
         {
-            get { return this._imageHelper.ErrorImagePath; }
-            set { this._imageHelper.ErrorImagePath = value; }
+            get { return _imageHelper.ErrorImagePath; }
+            set { _imageHelper.ErrorImagePath = value; }
         }
 
         public MvxImageView(Action imageChanged = null)
         {
-            this.InitializeImageHelper(imageChanged);
+            InitializeImageHelper(imageChanged);
         }
 
         public MvxImageView(IntPtr handle)
             : base(handle)
         {
-            this.InitializeImageHelper();
+            InitializeImageHelper();
         }
 
         public MvxImageView(CGRect frame, Action imageChanged = null)
             : base(frame)
         {
-            this.InitializeImageHelper(imageChanged);
+            InitializeImageHelper(imageChanged);
         }
 
         private void InitializeImageHelper(Action imageChanged = null)
         {
-            this._imageHelper = new MvxImageViewLoader(() => this, imageChanged);
+            _imageHelper = new MvxImageViewLoader(() => this, imageChanged);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this._imageHelper.Dispose();
+                _imageHelper.Dispose();
             }
             base.Dispose(disposing);
         }

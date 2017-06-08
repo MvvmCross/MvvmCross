@@ -10,7 +10,7 @@ namespace MvvmCross.Core.Views
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Core.ViewModels;
+    using ViewModels;
 
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
@@ -18,14 +18,14 @@ namespace MvvmCross.Core.Views
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            this._presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
+            _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
         protected bool HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, bool> handler;
 
-            if (this._presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
+            if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
                 if (handler(hint)) return true;
             }

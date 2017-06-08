@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.BindingContext
     {
         public MvxInlineBindingTarget(IMvxBindingContextOwner bindingContextOwner)
         {
-            this.BindingContextOwner = bindingContextOwner;
+            BindingContextOwner = bindingContextOwner;
         }
 
         public IMvxBindingContextOwner BindingContextOwner { get; private set; }

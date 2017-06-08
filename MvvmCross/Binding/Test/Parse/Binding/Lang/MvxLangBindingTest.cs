@@ -22,9 +22,9 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
         [Test]
         public void TestAll()
         {
-            foreach (var testPair in this._toTest)
+            foreach (var testPair in _toTest)
             {
-                this.DoTest(testPair);
+                DoTest(testPair);
             }
         }
 

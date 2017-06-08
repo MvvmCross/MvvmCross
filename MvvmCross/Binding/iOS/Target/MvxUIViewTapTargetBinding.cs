@@ -10,8 +10,8 @@ namespace MvvmCross.Binding.iOS.Target
     using System;
     using System.Windows.Input;
 
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.iOS.Views.Gestures;
+    using Bindings.Target;
+    using Views.Gestures;
 
     using UIKit;
 
@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.iOS.Target
         public MvxUIViewTapTargetBinding(UIView target, uint numberOfTapsRequired = 1, uint numberOfTouchesRequired = 1, bool cancelsTouchesInView = true)
             : base(target)
         {
-            this._behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired, cancelsTouchesInView);
+            _behaviour = new MvxTapGestureRecognizerBehaviour(target, numberOfTapsRequired, numberOfTouchesRequired, cancelsTouchesInView);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            this._behaviour.Command = (ICommand)value;
+            _behaviour.Command = (ICommand)value;
         }
     }
 }

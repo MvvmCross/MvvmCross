@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.ExpressionParse
                 return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
             }
 
-            return this.Parse((LambdaExpression)propertyPath);
+            return Parse((LambdaExpression)propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)

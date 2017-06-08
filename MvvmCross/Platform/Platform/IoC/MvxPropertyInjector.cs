@@ -12,7 +12,7 @@ namespace MvvmCross.Platform.IoC
     using System.Linq;
     using System.Reflection;
 
-    using MvvmCross.Platform.Exceptions;
+    using Exceptions;
 
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
@@ -26,11 +26,11 @@ namespace MvvmCross.Platform.IoC
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            var injectableProperties = this.FindInjectableProperties(target.GetType(), options);
+            var injectableProperties = FindInjectableProperties(target.GetType(), options);
 
             foreach (var injectableProperty in injectableProperties)
             {
-                this.InjectProperty(target, injectableProperty, options);
+                InjectProperty(target, injectableProperty, options);
             }
         }
 

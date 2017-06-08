@@ -1,9 +1,9 @@
 ﻿namespace MvvmCross.iOS.Views
 {
     using Foundation;
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.Platform;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform.iOS.Views;
     using System;
     using System.Collections.Generic;

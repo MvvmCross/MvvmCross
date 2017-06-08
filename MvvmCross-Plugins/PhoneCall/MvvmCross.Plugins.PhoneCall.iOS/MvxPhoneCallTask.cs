@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Platform.iOS.Platform;
 using Foundation;
 
@@ -15,7 +16,7 @@ namespace MvvmCross.Plugins.PhoneCall.iOS
     {
         public void MakePhoneCall(string name, string number)
         {            
-            var url = new NSUrl("tel:" + System.Uri.EscapeUriString(number));
+            var url = new NSUrl("tel:" + Uri.EscapeUriString(number));
             DoUrlOpen(url);
         }
     }

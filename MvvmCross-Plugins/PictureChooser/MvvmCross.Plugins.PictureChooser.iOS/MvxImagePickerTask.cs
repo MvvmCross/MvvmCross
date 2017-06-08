@@ -54,7 +54,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,

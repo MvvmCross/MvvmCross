@@ -7,7 +7,7 @@
 
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Core.Views;
+    using Core.Views;
 
     public interface IMvxIosViewsContainer
         : IMvxViewsContainer

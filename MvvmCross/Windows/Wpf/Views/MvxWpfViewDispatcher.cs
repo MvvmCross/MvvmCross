@@ -9,8 +9,8 @@ namespace MvvmCross.Wpf.Views
 {
     using System.Windows.Threading;
 
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
 
     public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher
@@ -21,17 +21,17 @@ namespace MvvmCross.Wpf.Views
         public MvxWpfViewDispatcher(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
             : base(dispatcher)
         {
-            this._presenter = presenter;
+            _presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
         {
-            return this.RequestMainThreadAction(() => this._presenter.Show(request));
+            return RequestMainThreadAction(() => _presenter.Show(request));
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
         }
     }
 }

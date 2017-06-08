@@ -12,8 +12,8 @@ namespace MvvmCross.Platform.Droid.Platform
     using Android.App;
     using Android.Content;
 
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Droid.Views;
+    using Core;
+    using Views;
     using MvvmCross.Platform.Platform;
 
     public class MvxAndroidTask
@@ -21,12 +21,12 @@ namespace MvvmCross.Platform.Droid.Platform
     {
         protected void StartActivity(Intent intent)
         {
-            this.DoOnActivity(activity => activity.StartActivity(intent));
+            DoOnActivity(activity => activity.StartActivity(intent));
         }
 
         protected void StartActivityForResult(int requestCode, Intent intent)
         {
-            this.DoOnActivity(activity =>
+            DoOnActivity(activity =>
                 {
                     var androidView = activity as IMvxStartActivityForResult;
                     if (androidView == null)
@@ -35,7 +35,7 @@ namespace MvvmCross.Platform.Droid.Platform
                         return;
                     }
 
-                    Mvx.Resolve<IMvxIntentResultSource>().Result += this.OnMvxIntentResultReceived;
+                    Mvx.Resolve<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
                     androidView.MvxInternalStartActivityForResult(intent, requestCode);
                 });
         }
@@ -49,8 +49,8 @@ namespace MvvmCross.Platform.Droid.Platform
         {
             MvxTrace.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
             // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
-            Mvx.Resolve<IMvxIntentResultSource>().Result -= this.OnMvxIntentResultReceived;
-            this.ProcessMvxIntentResult(e);
+            Mvx.Resolve<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
+            ProcessMvxIntentResult(e);
         }
 
         protected void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
@@ -59,7 +59,7 @@ namespace MvvmCross.Platform.Droid.Platform
 
             if (ensureOnMainThread)
             {
-                this.InvokeOnMainThread(() => action(activity));
+                InvokeOnMainThread(() => action(activity));
             }
             else
             {

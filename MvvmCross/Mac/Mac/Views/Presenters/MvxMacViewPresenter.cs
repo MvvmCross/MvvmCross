@@ -12,9 +12,9 @@ namespace MvvmCross.Mac.Views.Presenters
 
     using AppKit;
 
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Platform;
-    using global::MvvmCross.Platform.Exceptions;
+    using Core.ViewModels;
+    using MvvmCross.Platform;
+    using MvvmCross.Platform.Exceptions;
 
     public class MvxMacViewPresenter
         : MvxBaseMacViewPresenter
@@ -26,7 +26,7 @@ namespace MvvmCross.Mac.Views.Presenters
         {
             get
             {
-                return this._applicationDelegate;
+                return _applicationDelegate;
             }
         }
 
@@ -34,28 +34,28 @@ namespace MvvmCross.Mac.Views.Presenters
         {
             get
             {
-                return this._window;
+                return _window;
             }
         }
 
         public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate, NSWindow window)
         {
-            this._applicationDelegate = applicationDelegate;
-            this._window = window;
+            _applicationDelegate = applicationDelegate;
+            _window = window;
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-            var view = this.CreateView(request);
+            var view = CreateView(request);
 
-            this.Show(view, request);
+            Show(view, request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             if (hint is MvxClosePresentationHint)
             {
-                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
@@ -73,25 +73,25 @@ namespace MvvmCross.Mac.Views.Presenters
             if (viewController == null)
                 throw new MvxException("Passed in IMvxMacView is not a UIViewController");
 
-            this.Show(viewController, request);
+            Show(viewController, request);
         }
 
         protected virtual void Show(NSViewController viewController, MvxViewModelRequest request)
         {
-            while (this.Window.ContentView.Subviews.Any())
+            while (Window.ContentView.Subviews.Any())
             {
-                this.Window.ContentView.Subviews[0].RemoveFromSuperview();
+                Window.ContentView.Subviews[0].RemoveFromSuperview();
             }
 
-            this.Window.ContentView.AddSubview(viewController.View);
+            Window.ContentView.AddSubview(viewController.View);
 
-            this.AddLayoutConstraints(viewController, request);
+            AddLayoutConstraints(viewController, request);
         }
 
         protected virtual void AddLayoutConstraints(NSViewController viewController, MvxViewModelRequest request)
         {
             var child = viewController.View;
-            var container = this.Window.ContentView;
+            var container = Window.ContentView;
 
             // See http://blog.xamarin.com/autolayout-with-xamarin.mac/ for more on constraints
             // as well as https://gist.github.com/garuma/3de3bbeb954ad5679e87 (latter may be helpful as tools...)

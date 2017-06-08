@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Binders
 {
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Bindings;
+    using Bindings;
 
     public interface IMvxBinder
     {

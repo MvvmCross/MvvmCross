@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Platform.iOS.Platform
 {
-    using MvvmCross.Platform.Exceptions;
+    using Exceptions;
 
     public class MvxIosVersion
     {
@@ -16,12 +16,12 @@ namespace MvvmCross.Platform.iOS.Platform
             if (parts == null || parts.Length == 0)
                 throw new MvxException("Invalid parts in constructor for MvxIosVersion");
 
-            this.Parts = parts;
-            this.Major = parts[0];
+            Parts = parts;
+            Major = parts[0];
 
             if (parts.Length > 1)
             {
-                this.Minor = parts[1];
+                Minor = parts[1];
             }
         }
 

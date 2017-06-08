@@ -83,9 +83,9 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public ICommand Command
         {
-            get { return (ICommand)this.GetValue(CommandProperty); }
+            get { return (ICommand)GetValue(CommandProperty); }
 
-            set { this.SetValue(CommandProperty, value); }
+            set { SetValue(CommandProperty, value); }
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public object CommandParameter
         {
-            get { return this.GetValue(CommandParameterProperty); }
+            get { return GetValue(CommandParameterProperty); }
 
-            set { this.SetValue(CommandParameterProperty, value); }
+            set { SetValue(CommandParameterProperty, value); }
         }
 
         /// <summary>
@@ -107,12 +107,12 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public object CommandParameterValue
         {
-            get { return this._commandParameterValue ?? this.CommandParameter; }
+            get { return _commandParameterValue ?? CommandParameter; }
 
             set
             {
-                this._commandParameterValue = value;
-                this.EnableDisableElement();
+                _commandParameterValue = value;
+                EnableDisableElement();
             }
         }
 
@@ -126,9 +126,9 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public bool MustToggleIsEnabled
         {
-            get { return (bool)this.GetValue(MustToggleIsEnabledProperty); }
+            get { return (bool)GetValue(MustToggleIsEnabledProperty); }
 
-            set { this.SetValue(MustToggleIsEnabledProperty, value); }
+            set { SetValue(MustToggleIsEnabledProperty, value); }
         }
 
         /// <summary>
@@ -143,13 +143,13 @@ namespace MvvmCross.Wpf.Commands
         {
             get
             {
-                return this._mustToggleValue ?? this.MustToggleIsEnabled;
+                return _mustToggleValue ?? MustToggleIsEnabled;
             }
 
             set
             {
-                this._mustToggleValue = value;
-                this.EnableDisableElement();
+                _mustToggleValue = value;
+                EnableDisableElement();
             }
         }
 
@@ -159,7 +159,7 @@ namespace MvvmCross.Wpf.Commands
         protected override void OnAttached()
         {
             base.OnAttached();
-            this.EnableDisableElement();
+            EnableDisableElement();
         }
 
 #if SILVERLIGHT
@@ -177,7 +177,7 @@ namespace MvvmCross.Wpf.Commands
         /// is attached.</returns>
         private FrameworkElement GetAssociatedObject()
         {
-            return this.AssociatedObject as FrameworkElement;
+            return AssociatedObject as FrameworkElement;
         }
 
 #endif
@@ -190,7 +190,7 @@ namespace MvvmCross.Wpf.Commands
         /// this trigger is invoked.</returns>
         private ICommand GetCommand()
         {
-            return this.Command;
+            return Command;
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public void Invoke()
         {
-            this.Invoke(null);
+            Invoke(null);
         }
 
         /// <summary>
@@ -218,18 +218,18 @@ namespace MvvmCross.Wpf.Commands
         /// <param name="parameter">The EventArgs of the fired event.</param>
         protected override void Invoke(object parameter)
         {
-            if (this.AssociatedElementIsDisabled())
+            if (AssociatedElementIsDisabled())
             {
                 return;
             }
 
-            var command = this.GetCommand();
-            var commandParameter = this.CommandParameterValue;
+            var command = GetCommand();
+            var commandParameter = CommandParameterValue;
 
             if (commandParameter == null
-                && this.PassEventArgsToCommand)
+                && PassEventArgsToCommand)
             {
-                commandParameter = this.MapCommandParameter(parameter);
+                commandParameter = MapCommandParameter(parameter);
             }
 
             if (command != null
@@ -270,34 +270,34 @@ namespace MvvmCross.Wpf.Commands
 
         private bool AssociatedElementIsDisabled()
         {
-            var element = this.GetAssociatedObject();
+            var element = GetAssociatedObject();
 
-            return this.AssociatedObject == null
-                   || (element != null
-                       && !element.IsEnabled);
+            return AssociatedObject == null
+                   || element != null
+                   && !element.IsEnabled;
         }
 
         private void EnableDisableElement()
         {
-            var element = this.GetAssociatedObject();
+            var element = GetAssociatedObject();
 
             if (element == null)
             {
                 return;
             }
 
-            var command = this.GetCommand();
+            var command = GetCommand();
 
-            if (this.MustToggleIsEnabledValue
+            if (MustToggleIsEnabledValue
                 && command != null)
             {
-                element.IsEnabled = command.CanExecute(this.CommandParameterValue);
+                element.IsEnabled = command.CanExecute(CommandParameterValue);
             }
         }
 
         private void OnCommandCanExecuteChanged(object sender, EventArgs e)
         {
-            this.EnableDisableElement();
+            EnableDisableElement();
         }
     }
 }

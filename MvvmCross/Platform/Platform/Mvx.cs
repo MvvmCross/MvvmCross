@@ -9,10 +9,10 @@ namespace MvvmCross.Platform
 {
     using System;
 
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
+    using Core;
+    using Exceptions;
+    using IoC;
+    using Platform;
 
     public static class Mvx
     {
@@ -175,7 +175,7 @@ namespace MvvmCross.Platform
         {
             Action simpleAction = () =>
                 {
-                    var t = Mvx.Resolve<T>();
+                    var t = Resolve<T>();
                     action(t);
                 };
             CallbackWhenRegistered<T>(simpleAction);

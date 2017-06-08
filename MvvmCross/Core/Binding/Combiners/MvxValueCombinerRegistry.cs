@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Combiners
 {
-    using MvvmCross.Binding.Binders;
+    using Binders;
 
     public class MvxValueCombinerRegistry
         : MvxNamedInstanceRegistry<IMvxValueCombiner>

@@ -14,12 +14,13 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Plugins.Accelerometer.Droid
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer
-        : Java.Lang.Object
+        : Object
           , ISensorEventListener
           , IMvxAccelerometer
     {

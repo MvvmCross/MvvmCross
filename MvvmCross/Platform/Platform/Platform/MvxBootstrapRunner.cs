@@ -10,8 +10,8 @@ namespace MvvmCross.Platform.Platform
     using System;
     using System.Reflection;
 
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
+    using Exceptions;
+    using IoC;
 
     public class MvxBootstrapRunner
     {
@@ -22,7 +22,7 @@ namespace MvvmCross.Platform.Platform
 
             foreach (var type in types)
             {
-                this.Run(type);
+                Run(type);
             }
         }
 

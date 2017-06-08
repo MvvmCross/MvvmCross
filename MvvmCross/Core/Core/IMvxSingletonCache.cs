@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Core
 {
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
+    using Platform;
+    using ViewModels;
 
     public interface IMvxSingletonCache
     {

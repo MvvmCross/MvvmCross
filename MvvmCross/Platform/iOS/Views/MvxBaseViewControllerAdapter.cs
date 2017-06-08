@@ -9,7 +9,7 @@ namespace MvvmCross.Platform.iOS.Views
 {
     using System;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     using UIKit;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Platform.iOS.Views
     {
         private readonly IMvxEventSourceViewController _eventSource;
 
-        protected UIViewController ViewController => this._eventSource as UIViewController;
+        protected UIViewController ViewController => _eventSource as UIViewController;
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {
@@ -27,14 +27,14 @@ namespace MvvmCross.Platform.iOS.Views
             if (!(eventSource is UIViewController))
                 throw new ArgumentException("eventSource - eventSource should be a UIViewController");
 
-            this._eventSource = eventSource;
-            this._eventSource.ViewDidAppearCalled += this.HandleViewDidAppearCalled;
-            this._eventSource.ViewDidDisappearCalled += this.HandleViewDidDisappearCalled;
-            this._eventSource.ViewWillAppearCalled += this.HandleViewWillAppearCalled;
-            this._eventSource.ViewWillDisappearCalled += this.HandleViewWillDisappearCalled;
-            this._eventSource.DisposeCalled += this.HandleDisposeCalled;
-            this._eventSource.ViewDidLoadCalled += this.HandleViewDidLoadCalled;
-            this._eventSource.ViewDidLayoutSubviewsCalled += this.HandleViewDidLayoutSubviewsCalled;
+            _eventSource = eventSource;
+            _eventSource.ViewDidAppearCalled += HandleViewDidAppearCalled;
+            _eventSource.ViewDidDisappearCalled += HandleViewDidDisappearCalled;
+            _eventSource.ViewWillAppearCalled += HandleViewWillAppearCalled;
+            _eventSource.ViewWillDisappearCalled += HandleViewWillDisappearCalled;
+            _eventSource.DisposeCalled += HandleDisposeCalled;
+            _eventSource.ViewDidLoadCalled += HandleViewDidLoadCalled;
+            _eventSource.ViewDidLayoutSubviewsCalled += HandleViewDidLayoutSubviewsCalled;
         }
 
         public virtual void HandleViewDidLoadCalled(object sender, EventArgs e)

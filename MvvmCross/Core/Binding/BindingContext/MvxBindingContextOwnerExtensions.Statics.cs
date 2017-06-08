@@ -7,9 +7,9 @@
 
 namespace MvvmCross.Binding.BindingContext
 {
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.ExpressionParse;
-    using MvvmCross.Binding.Parse.Binding.Lang;
+    using Binders;
+    using ExpressionParse;
+    using Parse.Binding.Lang;
 
     public static partial class MvxBindingContextOwnerExtensions
     {

@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+
 namespace MvvmCross.Droid.Views
 {
     using System;
@@ -16,10 +18,10 @@ namespace MvvmCross.Droid.Views
     {
         public bool RequestMainThreadAction(Action action)
         {
-            if (Android.App.Application.SynchronizationContext == SynchronizationContext.Current)
+            if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                Android.App.Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
+                Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
 
             return true;
         }

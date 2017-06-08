@@ -17,8 +17,8 @@ namespace MvvmCross.Binding.Droid.Views
     using Android.Util;
     using Android.Widget;
 
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
+    using Attributes;
+    using Binding.BindingContext;
 
     [Register("mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
@@ -125,7 +125,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         private static long _nextGeneratedViewId = 1;
 
-        private static new int GenerateViewId()
+        private new static int GenerateViewId()
         {
             for (;;)
             {

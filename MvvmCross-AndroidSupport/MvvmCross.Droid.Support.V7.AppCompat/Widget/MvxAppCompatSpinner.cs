@@ -29,7 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = global::Android.Resource.Layout.SimpleSpinnerItem,
+                    SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
                     DropDownItemTemplateId = Resource.Layout.support_simple_spinner_dropdown_item
                 })
         { }
@@ -99,12 +99,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         protected virtual void HandleSelected(int position)
         {
             var item = Adapter.GetRawItem(position);
-            if (this.HandleItemSelected == null
+            if (HandleItemSelected == null
                 || item == null
-                || !this.HandleItemSelected.CanExecute(item))
+                || !HandleItemSelected.CanExecute(item))
                 return;
 
-            this.HandleItemSelected.Execute(item);
+            HandleItemSelected.Execute(item);
         }
 
         protected override void Dispose(bool disposing)

@@ -19,12 +19,12 @@ namespace MvvmCross.Test.Mocks.Dispatchers
 
         public CallbackMockMainThreadDispatcher(Func<Action, bool> callback)
         {
-            this._callback = callback;
+            _callback = callback;
         }
 
         public virtual bool RequestMainThreadAction(Action action)
         {
-            return this._callback(action);
+            return _callback(action);
         }
     }
 }

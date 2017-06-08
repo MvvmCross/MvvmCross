@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.Mac.Views
     using AppKit;
     using Foundation;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public class MvxEventSourceViewController
         : NSViewController
@@ -21,25 +21,25 @@ namespace MvvmCross.Platform.Mac.Views
     {
         protected MvxEventSourceViewController()
         {
-            this.Initialize();
+            Initialize();
         }
 
         protected MvxEventSourceViewController(IntPtr handle)
             : base(handle)
         {
-            this.Initialize();
+            Initialize();
         }
 
         protected MvxEventSourceViewController(NSCoder coder)
             : base(coder)
         {
-            this.Initialize();
+            Initialize();
         }
 
         protected MvxEventSourceViewController(string nibName, NSBundle bundle)
             : base(nibName, bundle)
         {
-            this.Initialize();
+            Initialize();
         }
 
         private void Initialize()
@@ -49,7 +49,7 @@ namespace MvvmCross.Platform.Mac.Views
         public override void LoadView()
         {
             base.LoadView();
-            this.ViewDidLoad();
+            ViewDidLoad();
         }
 
         //        public override void ViewWillDisappear(bool animated)
@@ -78,14 +78,14 @@ namespace MvvmCross.Platform.Mac.Views
         //
         public override void ViewDidLoad()
         {
-            this.ViewDidLoadCalled.Raise(this);
+            ViewDidLoadCalled.Raise(this);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this.DisposeCalled.Raise(this);
+                DisposeCalled.Raise(this);
             }
             base.Dispose(disposing);
         }

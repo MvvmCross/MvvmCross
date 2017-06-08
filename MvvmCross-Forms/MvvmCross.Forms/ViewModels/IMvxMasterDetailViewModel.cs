@@ -8,7 +8,7 @@ namespace MvvmCross.Forms.ViewModels
     /// Also, it exposes a method to be  launched when this root page is activated due to navigation popping in Detail
     /// 
     /// </summary>
-    interface IMvxMasterDetailViewModel : IMvxViewModel
+    internal interface IMvxMasterDetailViewModel : IMvxViewModel
     {     
         void RootContentPageActivated();
 
@@ -19,7 +19,7 @@ namespace MvvmCross.Forms.ViewModels
     /// Generic version of IMvxViewModel interface    
     /// </summary>
     /// <typeparam name="TRootContentPageViewModel">ViewModel used for the first ContentPage used in Detail section of the MasterPage</typeparam>
-    interface IMvxMasterDetailViewModel<TRootContentPageViewModel> : IMvxMasterDetailViewModel
+    internal interface IMvxMasterDetailViewModel<TRootContentPageViewModel> : IMvxMasterDetailViewModel
         where TRootContentPageViewModel : IMvxViewModel
     {
         

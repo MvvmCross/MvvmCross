@@ -11,7 +11,7 @@ namespace MvvmCross.Platform.WeakSubscription
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription
@@ -30,7 +30,7 @@ namespace MvvmCross.Platform.WeakSubscription
                                                               EventHandler<PropertyChangedEventArgs> targetEventHandler)
             : base(source, targetEventHandler)
         {
-            this._propertyName = propertyName;
+            _propertyName = propertyName;
         }
 
         protected override Delegate CreateEventHandler()
@@ -38,9 +38,9 @@ namespace MvvmCross.Platform.WeakSubscription
             return new PropertyChangedEventHandler((sender, e) =>
                 {
                     if (string.IsNullOrEmpty(e.PropertyName)
-                        || e.PropertyName == this._propertyName)
+                        || e.PropertyName == _propertyName)
                     {
-                        this.OnSourceEvent(sender, e);
+                        OnSourceEvent(sender, e);
                     }
                 });
         }

@@ -5,12 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.iOS.Target
 {
     using System.Reflection;
 
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -31,7 +33,7 @@ namespace MvvmCross.Binding.iOS.Target
             }
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)

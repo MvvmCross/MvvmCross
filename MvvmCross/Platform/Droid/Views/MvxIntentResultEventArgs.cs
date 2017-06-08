@@ -17,9 +17,9 @@ namespace MvvmCross.Platform.Droid.Views
     {
         public MvxIntentResultEventArgs(int requestCode, Result resultCode, Intent data)
         {
-            this.Data = data;
-            this.ResultCode = resultCode;
-            this.RequestCode = requestCode;
+            Data = data;
+            ResultCode = resultCode;
+            RequestCode = requestCode;
         }
 
         public int RequestCode { get; private set; }

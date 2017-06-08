@@ -42,21 +42,21 @@ namespace MvvmCross.Core.ViewModels
         {
             add
             {
-                lock (this._syncRoot)
+                lock (_syncRoot)
                 {
-                    this._eventHandlers.Add(new WeakReference(value));
+                    _eventHandlers.Add(new WeakReference(value));
                 }
             }
             remove
             {
-                lock (this._syncRoot)
+                lock (_syncRoot)
                 {
-                    foreach (var thing in this._eventHandlers)
+                    foreach (var thing in _eventHandlers)
                     {
                         var target = thing.Target;
                         if (target != null && (EventHandler)target == value)
                         {
-                            this._eventHandlers.Remove(thing);
+                            _eventHandlers.Remove(thing);
                             break;
                         }
                     }
@@ -66,12 +66,12 @@ namespace MvvmCross.Core.ViewModels
 
         private IEnumerable<EventHandler> SafeCopyEventHandlerList()
         {
-            lock (this._syncRoot)
+            lock (_syncRoot)
             {
                 var toReturn = new List<EventHandler>();
                 var deadEntries = new List<WeakReference>();
 
-                foreach (var thing in this._eventHandlers)
+                foreach (var thing in _eventHandlers)
                 {
                     if (!thing.IsAlive)
                     {
@@ -87,7 +87,7 @@ namespace MvvmCross.Core.ViewModels
 
                 foreach (var weakReference in deadEntries)
                 {
-                    this._eventHandlers.Remove(weakReference);
+                    _eventHandlers.Remove(weakReference);
                 }
 
                 return toReturn;
@@ -96,7 +96,7 @@ namespace MvvmCross.Core.ViewModels
 
         public void RaiseCanExecuteChanged(object sender)
         {
-            var list = this.SafeCopyEventHandlerList();
+            var list = SafeCopyEventHandlerList();
             foreach (var eventHandler in list)
             {
                 eventHandler(sender, EventArgs.Empty);
@@ -111,22 +111,22 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommandBase()
         {
-            if (!Mvx.TryResolve<IMvxCommandHelper>(out this._commandHelper))
-                this._commandHelper = new MvxWeakCommandHelper();
+            if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
+                _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
-            this.ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
+            var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public event EventHandler CanExecuteChanged
         {
             add
             {
-                this._commandHelper.CanExecuteChanged += value;
+                _commandHelper.CanExecuteChanged += value;
             }
             remove
             {
-                this._commandHelper.CanExecuteChanged -= value;
+                _commandHelper.CanExecuteChanged -= value;
             }
         }
 
@@ -134,13 +134,13 @@ namespace MvvmCross.Core.ViewModels
 
         public void RaiseCanExecuteChanged()
         {
-            if (this.ShouldAlwaysRaiseCECOnUserInterfaceThread)
+            if (ShouldAlwaysRaiseCECOnUserInterfaceThread)
             {
-                this.InvokeOnMainThread(() => this._commandHelper.RaiseCanExecuteChanged(this));
+                InvokeOnMainThread(() => _commandHelper.RaiseCanExecuteChanged(this));
             }
             else
             {
-                this._commandHelper.RaiseCanExecuteChanged(this);
+                _commandHelper.RaiseCanExecuteChanged(this);
             }
         }
     }
@@ -159,31 +159,31 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommand(Action execute, Func<bool> canExecute)
         {
-            this._execute = execute;
-            this._canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute();
+            return _canExecute == null || _canExecute();
         }
 
         public bool CanExecute()
         {
-            return this.CanExecute(null);
+            return CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (this.CanExecute(parameter))
+            if (CanExecute(parameter))
             {
-                this._execute();
+                _execute();
             }
         }
 
         public void Execute()
         {
-            this.Execute(null);
+            Execute(null);
         }
     }
 
@@ -201,31 +201,31 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
         {
-            this._execute = execute;
-            this._canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute((T)(typeof(T).MakeSafeValueCore(parameter)));
+            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
         }
 
         public bool CanExecute()
         {
-            return this.CanExecute(null);
+            return CanExecute(null);
         }
 
         public void Execute(object parameter)
         {
-            if (this.CanExecute(parameter))
+            if (CanExecute(parameter))
             {
-                this._execute((T)(typeof(T).MakeSafeValueCore(parameter)));
+                _execute((T)typeof(T).MakeSafeValueCore(parameter));
             }
         }
 
         public void Execute()
         {
-            this.Execute(null);
+            Execute(null);
         }
     }
 }

@@ -7,9 +7,9 @@ namespace PageRendererExample.ViewModels
 {
     public class BootViewModel : MvxViewModel
     {
-        readonly IImageHolder _imageHolder;
+        private readonly IImageHolder _imageHolder;
 
-        MvxCommand _showCustomPageRenderer;
+        private MvxCommand _showCustomPageRenderer;
         public ICommand  ShowCustomPageRenderer {
             get {
                 if (_showCustomPageRenderer == null) {

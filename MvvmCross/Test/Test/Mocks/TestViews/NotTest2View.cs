@@ -9,7 +9,7 @@ namespace MvvmCross.Test.Mocks.TestViews
 {
     using MvvmCross.Core.ViewModels;
     using MvvmCross.Core.Views;
-    using MvvmCross.Test.Mocks.TestViewModels;
+    using TestViewModels;
 
     public class NotTest2View : IMvxView
     {

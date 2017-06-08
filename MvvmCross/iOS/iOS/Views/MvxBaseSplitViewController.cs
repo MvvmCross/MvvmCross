@@ -26,14 +26,14 @@ namespace MvvmCross.iOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IMvxViewModel; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

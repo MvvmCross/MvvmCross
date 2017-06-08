@@ -29,7 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = this.Spinner;
+            var spinner = Spinner;
             if (spinner == null)
                 return;
 
@@ -38,11 +38,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (this._currentValue != null);
+                changed = _currentValue != null;
             }
             else
             {
-                changed = !(newValue.Equals(this._currentValue));
+                changed = !newValue.Equals(_currentValue);
             }
 
             if (!changed)
@@ -50,7 +50,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 return;
             }
 
-            this._currentValue = newValue;
+            _currentValue = newValue;
             FireValueChanged(newValue);
         }
 
@@ -64,7 +64,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 return;
             }
 
-            if (!value.Equals(this._currentValue))
+            if (!value.Equals(_currentValue))
             {
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
@@ -72,7 +72,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                     MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
                     return;
                 }
-                this._currentValue = value;
+                _currentValue = value;
                 spinner.SetSelection(index);
             }
         }
@@ -81,7 +81,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         public override void SubscribeToEvents()
         {
-            var spinner = this.Spinner;
+            var spinner = Spinner;
             if (spinner == null)
                 return;
 

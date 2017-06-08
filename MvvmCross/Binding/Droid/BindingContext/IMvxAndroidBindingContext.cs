@@ -9,8 +9,8 @@ namespace MvvmCross.Binding.Droid.BindingContext
 {
     using Android.Views;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
+    using Binding.BindingContext;
+    using Views;
 
     public interface IMvxAndroidBindingContext
         : IMvxBindingContext

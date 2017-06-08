@@ -10,8 +10,8 @@ namespace MvvmCross.Platform.Core
     using System;
     using System.Reflection;
 
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
+    using Exceptions;
+    using Platform;
 
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
     {

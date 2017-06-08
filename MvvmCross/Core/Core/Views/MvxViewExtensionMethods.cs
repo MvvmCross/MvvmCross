@@ -9,7 +9,7 @@ namespace MvvmCross.Core.Views
 {
     using System;
 
-    using MvvmCross.Core.ViewModels;
+    using ViewModels;
     using MvvmCross.Platform;
     using MvvmCross.Platform.Exceptions;
     using MvvmCross.Platform.Platform;

@@ -17,9 +17,9 @@ namespace MvvmCross.Binding.BindingContext
         {
             get
             {
-                if (this.Count == 0)
+                if (Count == 0)
                     return default(TContext);
-                return this.Peek();
+                return Peek();
             }
         }
     }

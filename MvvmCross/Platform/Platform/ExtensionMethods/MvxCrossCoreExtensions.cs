@@ -11,7 +11,7 @@ namespace MvvmCross.Platform.ExtensionMethods
     using System.Globalization;
     using System.Reflection;
 
-    using MvvmCross.Platform.IoC;
+    using IoC;
 
     public static class MvxCrossCoreExtensions
     {

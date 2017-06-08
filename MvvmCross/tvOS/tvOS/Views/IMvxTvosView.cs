@@ -7,9 +7,9 @@
 
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Binding.BindingContext;
+    using Core.ViewModels;
+    using Core.Views;
 
     public interface IMvxTvosView
         : IMvxView

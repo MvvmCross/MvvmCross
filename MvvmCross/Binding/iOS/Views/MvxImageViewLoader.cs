@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.iOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.Views;
+    using Binding.Views;
 
     using UIKit;
 

@@ -7,8 +7,8 @@
 
 namespace MvvmCross.Uwp.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
 
     public interface IMvxWindowsView
         : IMvxView

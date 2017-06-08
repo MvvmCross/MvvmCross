@@ -12,7 +12,7 @@ namespace MvvmCross.Platform.Droid.Views
     using Android.Content;
     using Android.OS;
 
-    using MvvmCross.Platform.Core;
+    using Core;
 
     public interface IMvxEventSourceActivity : IMvxDisposeSource
     {

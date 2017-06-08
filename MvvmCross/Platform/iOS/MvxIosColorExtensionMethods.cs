@@ -34,7 +34,7 @@ namespace MvvmCross.Platform.iOS
         {
             nfloat red, green, blue, alpha;
             color.GetRGBA(out red, out green, out blue, out alpha);
-            var rgbaValue = (uint)(((long)alpha) << 24 | ((long)red) << 16 | ((long)green) << 8 | ((long)blue));
+            var rgbaValue = (uint)(((long)alpha << 24) | ((long)red << 16) | ((long)green << 8) | (long)blue);
             return rgbaValue;
         }
     }

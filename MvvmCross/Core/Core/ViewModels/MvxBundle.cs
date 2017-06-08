@@ -11,7 +11,7 @@ namespace MvvmCross.Core.ViewModels
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Core.Platform;
+    using Platform;
 
     public class MvxBundle
         : IMvxBundle
@@ -23,30 +23,30 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxBundle(IDictionary<string, string> data)
         {
-            this.Data = data ?? new Dictionary<string, string>();
+            Data = data ?? new Dictionary<string, string>();
         }
 
         public IDictionary<string, string> Data { get; private set; }
 
         public void Write(object toStore)
         {
-            this.Data.Write(toStore);
+            Data.Write(toStore);
         }
 
         public T Read<T>()
             where T : new()
         {
-            return this.Data.Read<T>();
+            return Data.Read<T>();
         }
 
         public object Read(Type type)
         {
-            return this.Data.Read(type);
+            return Data.Read(type);
         }
 
         public IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string debugText)
         {
-            return this.Data.CreateArgumentList(requiredParameters, debugText);
+            return Data.CreateArgumentList(requiredParameters, debugText);
         }
     }
 }

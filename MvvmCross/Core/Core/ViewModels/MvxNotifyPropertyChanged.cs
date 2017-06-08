@@ -26,51 +26,51 @@ namespace MvvmCross.Core.ViewModels
 
         public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
         {
-            return this._shouldAlwaysRaiseInpcOnUserInterfaceThread;
+            return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
         }
 
         public void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value)
         {
-            this._shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
+            _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
         }
 
         protected MvxNotifyPropertyChanged()
         {
-            var alwaysOnUIThread = (MvxSingletonCache.Instance == null) || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
-            this.ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
+            var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
-            this.RaisePropertyChanged(name);
+            RaisePropertyChanged(name);
         }
 
         public void RaisePropertyChanged([CallerMemberName] string whichProperty = "")
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
-            this.RaisePropertyChanged(changedArgs);
+            RaisePropertyChanged(changedArgs);
         }
 
         public virtual void RaiseAllPropertiesChanged()
         {
-            this.RaisePropertyChanged(AllPropertiesChanged);
+            RaisePropertyChanged(AllPropertiesChanged);
         }
 
         public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             // check for interception before broadcasting change
-            if (this.InterceptRaisePropertyChanged(changedArgs)
+            if (InterceptRaisePropertyChanged(changedArgs)
                 == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
 
-            if (this.ShouldAlwaysRaiseInpcOnUserInterfaceThread())
+            if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
-                if (this.PropertyChanged == null)
+                if (PropertyChanged == null)
                     return;
 
-                this.InvokeOnMainThread(() => PropertyChanged?.Invoke(this, changedArgs));
+                InvokeOnMainThread(() => PropertyChanged?.Invoke(this, changedArgs));
             }
             else
             {
@@ -86,7 +86,7 @@ namespace MvvmCross.Core.ViewModels
             }
 
             storage = value;
-            this.RaisePropertyChanged(propertyName);
+            RaisePropertyChanged(propertyName);
             return true;
         }
 

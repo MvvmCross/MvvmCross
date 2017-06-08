@@ -20,24 +20,24 @@ namespace MvvmCross.Platform.Uwp.Converters
     {
         private readonly IMvxValueConverter _wrapped;
 
-        protected IMvxValueConverter Wrapped => this._wrapped;
+        protected IMvxValueConverter Wrapped => _wrapped;
 
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
-            this._wrapped = wrapped;
+            _wrapped = wrapped;
         }
 
         public virtual object Convert(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = this._wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = _wrapped.Convert(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // note - Language ignored here!
-            var toReturn = this._wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
+            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, CultureInfo.CurrentUICulture);
             return MapIfSpecialValue(toReturn);
         }
 

@@ -8,7 +8,7 @@
 namespace MvvmCross.Binding.Droid.Views
 {
     using Android.Views;
-    using MvvmCross.Platform.Core;
+    using Platform.Core;
 
     public interface IMvxListItemView
         : IMvxDataConsumer

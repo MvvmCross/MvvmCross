@@ -14,9 +14,9 @@ namespace MvvmCross.Binding.Bindings.Target
     {
         public MvxTargetChangedEventArgs(object value)
         {
-            this.Value = value;
+            Value = value;
         }
 
-        public Object Value { get; private set; }
+        public object Value { get; private set; }
     }
 }

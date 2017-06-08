@@ -10,7 +10,7 @@ namespace MvvmCross.Test.Core
     using System;
     using System.Diagnostics;
 
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     public class TestTrace : IMvxTrace
     {

@@ -11,8 +11,8 @@ namespace MvvmCross.tvOS.Views
 
     using Foundation;
 
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
+    using Binding.BindingContext;
+    using Core.ViewModels;
     using MvvmCross.Platform.tvOS.Views;
 
     using UIKit;
@@ -41,8 +41,8 @@ namespace MvvmCross.tvOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
@@ -71,9 +71,9 @@ namespace MvvmCross.tvOS.Views
 				if (e == null)
 					Mvx.Trace ("e was null!");
 				*/
-                return this.DataContext as IMvxViewModel;
+                return DataContext as IMvxViewModel;
             }
-            set { this.DataContext = value; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

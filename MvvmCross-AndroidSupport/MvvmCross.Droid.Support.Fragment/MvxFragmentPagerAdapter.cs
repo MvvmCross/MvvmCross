@@ -10,6 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using Java.Lang;
 using Fragment = Android.Support.V4.App.Fragment;
+using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -51,12 +52,12 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new Java.Lang.String(Fragments.ElementAt(position).Title);
+            return new String(Fragments.ElementAt(position).Title);
         }
 
         public override void RestoreState(IParcelable state, ClassLoader loader)

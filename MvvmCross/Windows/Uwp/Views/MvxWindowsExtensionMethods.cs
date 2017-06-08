@@ -10,7 +10,7 @@ namespace MvvmCross.Uwp.Views
     using System;
     using System.Linq;
 
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
     using MvvmCross.Platform;
     using System.Collections.Generic;
 

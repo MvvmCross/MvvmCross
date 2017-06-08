@@ -8,8 +8,8 @@
 namespace MvvmCross.tvOS.Views.Presenters
 {
     using System;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform.Platform;
 
     using UIKit;
@@ -23,7 +23,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

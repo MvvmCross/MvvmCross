@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Binding.Parse.Binding.Lang
 {
-    using MvvmCross.Platform.Exceptions;
+    using Platform.Exceptions;
 
     public class MvxLanguageBindingParser
         : MvxBindingParser
@@ -21,17 +21,17 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
 
         public MvxLanguageBindingParser()
         {
-            this.DefaultConverterName = "Language";
-            this.DefaultTextSourceName = "TextSource";
-            this.DefaultBindingMode = MvxBindingMode.OneTime;
+            DefaultConverterName = "Language";
+            DefaultTextSourceName = "TextSource";
+            DefaultBindingMode = MvxBindingMode.OneTime;
         }
 
         protected void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
-            if (this.IsComplete)
+            if (IsComplete)
                 return;
 
-            var block = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
+            var block = ReadTextUntilNonQuotedOccurrenceOfAnyOf('=', ',', ';');
             block = block.Trim();
             if (string.IsNullOrEmpty(block))
             {
@@ -41,24 +41,24 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
             switch (block)
             {
                 case "Source":
-                    this.ParseEquals(block);
-                    var sourceName = this.ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    ParseEquals(block);
+                    var sourceName = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
                     description.Path = sourceName;
                     break;
 
                 case "Converter":
-                    this.ParseEquals(block);
-                    description.Converter = this.ReadValidCSharpName();
+                    ParseEquals(block);
+                    description.Converter = ReadValidCSharpName();
                     break;
 
                 case "Key":
-                    this.ParseEquals(block);
-                    description.ConverterParameter = this.ReadValue();
+                    ParseEquals(block);
+                    description.ConverterParameter = ReadValue();
                     break;
 
                 case "FallbackValue":
-                    this.ParseEquals(block);
-                    description.FallbackValue = this.ReadValue();
+                    ParseEquals(block);
+                    description.FallbackValue = ReadValue();
                     break;
 
                 default:
@@ -66,7 +66,7 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
                     {
                         throw new MvxException(
                             "Problem parsing Language Binding near '{0}', Key set to '{1}', position {2} in {3}",
-                            block, description.ConverterParameter, this.CurrentIndex, this.FullText);
+                            block, description.ConverterParameter, CurrentIndex, FullText);
                     }
 
                     block = UnquoteBlockIfNecessary(block);
@@ -84,8 +84,8 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
             if (block.Length < 2)
                 return block;
 
-            if ((block.StartsWith("\'") && block.EndsWith("\'"))
-                || (block.StartsWith("\"") && block.EndsWith("\"")))
+            if (block.StartsWith("\'") && block.EndsWith("\'")
+                || block.StartsWith("\"") && block.EndsWith("\""))
                 return block.Substring(1, block.Length - 2);
 
             return block;
@@ -95,25 +95,25 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
         {
             var description = new MvxSerializableBindingDescription
             {
-                Converter = this.DefaultConverterName,
-                Path = this.DefaultTextSourceName,
-                Mode = this.DefaultBindingMode
+                Converter = DefaultConverterName,
+                Path = DefaultTextSourceName,
+                Mode = DefaultBindingMode
             };
 
-            this.SkipWhitespace();
+            SkipWhitespace();
 
             while (true)
             {
-                this.ParseNextBindingDescriptionOptionInto(description);
+                ParseNextBindingDescriptionOptionInto(description);
 
-                this.SkipWhitespace();
-                if (this.IsComplete)
+                SkipWhitespace();
+                if (IsComplete)
                     return description;
 
-                switch (this.CurrentChar)
+                switch (CurrentChar)
                 {
                     case ',':
-                        this.MoveNext();
+                        MoveNext();
                         break;
 
                     case ';':
@@ -122,9 +122,9 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
                     default:
                         throw new MvxException(
                             "Unexpected character {0} at position {1} in {2} - expected string-end, ',' or ';'",
-                            this.CurrentChar,
-                            this.CurrentIndex,
-                            this.FullText);
+                            CurrentChar,
+                            CurrentIndex,
+                            FullText);
                 }
             }
         }

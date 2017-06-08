@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 
     using MvvmCross.Binding.Parse.Binding;
     using MvvmCross.Binding.Parse.Binding.Tibet;
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     using NUnit.Framework;
 
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -157,7 +157,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -186,7 +186,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -243,7 +243,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -303,7 +303,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -363,7 +363,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -411,7 +411,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                         }
                     };
                 MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-                this.PerformTest(text, expected);
+                PerformTest(text, expected);
             }
         }
 
@@ -430,7 +430,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -448,7 +448,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -473,31 +473,31 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
         public void TestFunctionalValueConverterWithNullInTheName()
         {
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("Null");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("null");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
+            TestFunctionalValueConverterWithKEYWORDInTheName("Null");
+            TestFunctionalValueConverterWithKEYWORDInTheName("null");
+            TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
         }
 
         [Test]
         public void TestFunctionalValueConverterWithTrueInTheName()
         {
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("True");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("true");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
+            TestFunctionalValueConverterWithKEYWORDInTheName("True");
+            TestFunctionalValueConverterWithKEYWORDInTheName("true");
+            TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
         }
 
         [Test]
         public void TestFunctionalValueConverterWithFalseInTheName()
         {
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("False");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("false");
-            this.TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
+            TestFunctionalValueConverterWithKEYWORDInTheName("False");
+            TestFunctionalValueConverterWithKEYWORDInTheName("false");
+            TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
         }
 
         public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
@@ -525,7 +525,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -554,7 +554,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
     }
 }

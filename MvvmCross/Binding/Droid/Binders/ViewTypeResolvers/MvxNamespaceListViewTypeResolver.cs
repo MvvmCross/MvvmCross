@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 
     using Android.Views;
 
-    using MvvmCross.Platform.IoC;
+    using Platform.IoC;
 
     public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxNamespaceListViewTypeResolver
     {
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
         public MvxNamespaceListViewTypeResolver(IMvxTypeCache<View> typeCache)
             : base(typeCache)
         {
-            this.Namespaces = new List<string>();
+            Namespaces = new List<string>();
         }
 
         public void Add(string namespaceName)
@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
             if (!namespaceName.EndsWith("."))
                 namespaceName += ".";
 
-            this.Namespaces.Add(namespaceName);
+            Namespaces.Add(namespaceName);
         }
 
         public override Type Resolve(string tagName)
@@ -40,11 +40,11 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                 return null;
 
             var lowerTagName = tagName.ToLower();
-            foreach (var ns in this.Namespaces)
+            foreach (var ns in Namespaces)
             {
                 var candidateName = ns + lowerTagName;
                 Type type;
-                if (this.TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out type))
+                if (TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out type))
                     return type;
             }
 

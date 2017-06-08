@@ -14,7 +14,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     using System.Reflection;
 
     using MvvmCross.Binding;
-    using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+    using Widget;
     using MvvmCross.Platform.Platform;
 
     public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding

@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
     using System.Reflection;
 
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+    using Parse.PropertyPath.PropertyTokens;
 
     public class MvxIndexerLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
@@ -18,12 +18,12 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         public MvxIndexerLeafPropertyInfoSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexToken)
             : base(source, itemPropertyInfo)
         {
-            this._key = indexToken.Key;
+            _key = indexToken.Key;
         }
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] { this._key };
+            return new[] { _key };
         }
     }
 }

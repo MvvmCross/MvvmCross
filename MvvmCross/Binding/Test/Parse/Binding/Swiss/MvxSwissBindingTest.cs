@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
     using MvvmCross.Binding.Parse.Binding;
     using MvvmCross.Binding.Parse.Binding.Swiss;
-    using MvvmCross.Platform.Platform;
+    using Platform.Platform;
 
     using NUnit.Framework;
 
@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                 }
             };
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
-            this.PerformTest(text, expected);
+            PerformTest(text, expected);
         }
     }
 }

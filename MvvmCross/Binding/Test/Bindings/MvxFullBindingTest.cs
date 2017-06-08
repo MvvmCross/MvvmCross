@@ -15,13 +15,13 @@ namespace MvvmCross.Binding.Test.Bindings
 
     using Moq;
 
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.Source;
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Platform.Converters;
+    using Binding.Bindings;
+    using Binding.Bindings.Source;
+    using Binding.Bindings.Source.Construction;
+    using Binding.Bindings.SourceSteps;
+    using Binding.Bindings.Target;
+    using Binding.Bindings.Target.Construction;
+    using Platform.Converters;
     using MvvmCross.Test.Core;
 
     using NUnit.Framework;
@@ -35,7 +35,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void Dispose()
             {
-                this.DisposeCalled++;
+                DisposeCalled++;
             }
 
             public Type SourceType { get; set; }
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                this.ValuesSet.Add(value);
+                ValuesSet.Add(value);
             }
 
             public void FireSourceChanged()
@@ -59,10 +59,10 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public object GetValue()
             {
-                if (!this.TryGetValueResult)
+                if (!TryGetValueResult)
                     return MvxBindingConstant.UnsetValue;
 
-                return this.TryGetValueValue;
+                return TryGetValueValue;
             }
         }
 
@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void Dispose()
             {
-                this.DisposeCalled++;
+                DisposeCalled++;
             }
 
             public Type TargetType { get; set; }
@@ -82,14 +82,14 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void SubscribeToEvents()
             {
-                this.SubscribeToEventsCalled++;
+                SubscribeToEventsCalled++;
             }
 
             public List<object> Values = new List<object>();
 
             public void SetValue(object value)
             {
-                this.Values.Add(value);
+                Values.Add(value);
             }
 
             public void FireValueChanged(MvxTargetChangedEventArgs args)
@@ -105,7 +105,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay, out mockSource, out mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
         }
@@ -115,7 +115,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, out mockSource, out mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
         }
@@ -184,7 +184,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneWay, out mockSource, out mockTarget);
 
             OneWayAssertions(binding, mockTarget, mockSource);
         }
@@ -194,7 +194,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, out mockSource, out mockTarget);
 
             OneWayAssertions(binding, mockTarget, mockSource);
         }
@@ -259,7 +259,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
         }
@@ -269,7 +269,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, out mockSource, out mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
         }
@@ -332,7 +332,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.OneTime, out mockSource, out mockTarget);
 
             OneTimeAssertions(binding, mockTarget, mockSource);
         }
@@ -342,7 +342,7 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             MockSourceBinding mockSource;
             MockTargetBinding mockTarget;
-            var binding = this.TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, out mockSource, out mockTarget);
 
             OneTimeAssertions(binding, mockTarget, mockSource);
         }
@@ -402,7 +402,7 @@ namespace MvvmCross.Binding.Test.Bindings
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode,
                                      out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
-            return this.TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
+            return TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
         }
 
         private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)

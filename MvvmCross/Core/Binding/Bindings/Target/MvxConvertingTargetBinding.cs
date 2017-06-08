@@ -8,8 +8,8 @@
 namespace MvvmCross.Binding.Bindings.Target
 {
     using System.Collections.Generic;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
+    using ExtensionMethods;
+    using Platform.Platform;
 
     public abstract class MvxConvertingTargetBinding : MvxTargetBinding
     {

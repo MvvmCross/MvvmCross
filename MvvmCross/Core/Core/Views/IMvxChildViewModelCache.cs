@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Core.Views
 {
-    using MvvmCross.Core.ViewModels;
+    using ViewModels;
     using System;
 
     public interface IMvxChildViewModelCache

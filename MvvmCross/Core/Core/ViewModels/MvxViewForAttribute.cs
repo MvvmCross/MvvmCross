@@ -16,7 +16,7 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxViewForAttribute(Type viewModel)
         {
-            this.ViewModel = viewModel;
+            ViewModel = viewModel;
         }
     }
 }

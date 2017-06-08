@@ -18,14 +18,14 @@ namespace MvvmCross.Platform.tvOS.Platform
 
         public MvxTvosSystem()
         {
-            this.BuildVersion();
+            BuildVersion();
         }
 
         private void BuildVersion()
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
             var parts = version.Split('.').Select(int.Parse).ToArray();
-            this.Version = new MvxTvosVersion(parts);
+            Version = new MvxTvosVersion(parts);
         }
     }
 }

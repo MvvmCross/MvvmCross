@@ -56,20 +56,20 @@ namespace MvvmCross.Uwp.Views.Suspension
             try
             {
                 // Save the navigation state for all registered frames
-                foreach (var weakFrameReference in this._registeredFrames)
+                foreach (var weakFrameReference in _registeredFrames)
                 {
                     IMvxWindowsFrame frame;
                     if (weakFrameReference.TryGetTarget(out frame))
                     {
-                        this.SaveFrameNavigationState(frame);
+                        SaveFrameNavigationState(frame);
                     }
                 }
 
                 // Serialize the session state synchronously to avoid asynchronous access to shared
                 // state
                 var sessionData = new MemoryStream();
-                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), this.KnownTypes);
-                serializer.WriteObject(sessionData, this.SessionState);
+                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), KnownTypes);
+                serializer.WriteObject(sessionData, SessionState);
 
                 // Get an output stream for the SessionState file and write the state asynchronously
                 var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SessionStateFilename, CreationCollisionOption.ReplaceExisting);
@@ -97,7 +97,7 @@ namespace MvvmCross.Uwp.Views.Suspension
         /// completes.</returns>
         public async Task RestoreAsync()
         {
-            this.SessionState = new Dictionary<string, object>();
+            SessionState = new Dictionary<string, object>();
 
             try
             {
@@ -106,18 +106,18 @@ namespace MvvmCross.Uwp.Views.Suspension
                 using (var inStream = await file.OpenSequentialReadAsync())
                 {
                     // Deserialize the Session State
-                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), this.KnownTypes);
-                    this.SessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
+                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), KnownTypes);
+                    SessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
                 }
 
                 // Restore any registered frames to their saved state
-                foreach (var weakFrameReference in this._registeredFrames)
+                foreach (var weakFrameReference in _registeredFrames)
                 {
                     IMvxWindowsFrame frame;
                     if (weakFrameReference.TryGetTarget(out frame))
                     {
-                        frame.ClearValue(this.MvxFrameSessionStateProperty);
-                        this.RestoreFrameNavigationState(frame);
+                        frame.ClearValue(MvxFrameSessionStateProperty);
+                        RestoreFrameNavigationState(frame);
                     }
                 }
             }
@@ -148,23 +148,23 @@ namespace MvvmCross.Uwp.Views.Suspension
         /// store navigation-related information.</param>
         public void RegisterFrame(IMvxWindowsFrame frame, string sessionStateKey)
         {
-            if (frame.GetValue(this.MvxFrameSessionStateKeyProperty) != null)
+            if (frame.GetValue(MvxFrameSessionStateKeyProperty) != null)
             {
                 throw new InvalidOperationException("Frames can only be registered to one session state key");
             }
 
-            if (frame.GetValue(this.MvxFrameSessionStateProperty) != null)
+            if (frame.GetValue(MvxFrameSessionStateProperty) != null)
             {
                 throw new InvalidOperationException("Frames must be either be registered before accessing frame session state, or not registered at all");
             }
 
             // Use a dependency property to associate the session key with a frame, and keep a list of frames whose
             // navigation state should be managed
-            frame.SetValue(this.MvxFrameSessionStateKeyProperty, sessionStateKey);
-            this._registeredFrames.Add(new WeakReference<IMvxWindowsFrame>(frame));
+            frame.SetValue(MvxFrameSessionStateKeyProperty, sessionStateKey);
+            _registeredFrames.Add(new WeakReference<IMvxWindowsFrame>(frame));
 
             // Check to see if navigation state can be restored
-            this.RestoreFrameNavigationState(frame);
+            RestoreFrameNavigationState(frame);
         }
 
         /// <summary>
@@ -178,8 +178,8 @@ namespace MvvmCross.Uwp.Views.Suspension
         {
             // Remove session state and remove the frame from the list of frames whose navigation
             // state will be saved (along with any weak references that are no longer reachable)
-            this.SessionState.Remove((string)frame.GetValue(this.MvxFrameSessionStateKeyProperty));
-            this._registeredFrames.RemoveAll((weakFrameReference) =>
+            SessionState.Remove((string)frame.GetValue(MvxFrameSessionStateKeyProperty));
+            _registeredFrames.RemoveAll((weakFrameReference) =>
             {
                 IMvxWindowsFrame testFrame;
                 return !weakFrameReference.TryGetTarget(out testFrame) || testFrame == frame;
@@ -201,33 +201,33 @@ namespace MvvmCross.Uwp.Views.Suspension
         /// <see cref="SessionState"/>.</returns>
         public Dictionary<string, object> SessionStateForFrame(IMvxWindowsFrame frame)
         {
-            var frameState = (Dictionary<string, object>)frame.GetValue(this.MvxFrameSessionStateProperty);
+            var frameState = (Dictionary<string, object>)frame.GetValue(MvxFrameSessionStateProperty);
 
             if (frameState == null)
             {
-                var frameSessionKey = (string)frame.GetValue(this.MvxFrameSessionStateKeyProperty);
+                var frameSessionKey = (string)frame.GetValue(MvxFrameSessionStateKeyProperty);
                 if (frameSessionKey != null)
                 {
                     // Registered frames reflect the corresponding session state
-                    if (!this.SessionState.ContainsKey(frameSessionKey))
+                    if (!SessionState.ContainsKey(frameSessionKey))
                     {
-                        this.SessionState[frameSessionKey] = new Dictionary<string, object>();
+                        SessionState[frameSessionKey] = new Dictionary<string, object>();
                     }
-                    frameState = (Dictionary<string, object>)this.SessionState[frameSessionKey];
+                    frameState = (Dictionary<string, object>)SessionState[frameSessionKey];
                 }
                 else
                 {
                     // Frames that aren't registered have transient state
                     frameState = new Dictionary<string, object>();
                 }
-                frame.SetValue(this.MvxFrameSessionStateProperty, frameState);
+                frame.SetValue(MvxFrameSessionStateProperty, frameState);
             }
             return frameState;
         }
 
         private void RestoreFrameNavigationState(IMvxWindowsFrame frame)
         {
-            var frameState = this.SessionStateForFrame(frame);
+            var frameState = SessionStateForFrame(frame);
             if (frameState.ContainsKey("Navigation"))
             {
                 frame.SetNavigationState((string)frameState["Navigation"]);
@@ -236,7 +236,7 @@ namespace MvvmCross.Uwp.Views.Suspension
 
         private void SaveFrameNavigationState(IMvxWindowsFrame frame)
         {
-            var frameState = this.SessionStateForFrame(frame);
+            var frameState = SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
         }
     }

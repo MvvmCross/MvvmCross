@@ -15,7 +15,7 @@ namespace MvvmCross.Core.ViewModels
     {
         public MvxNavigationSerializer(IMvxTextSerializer serializer)
         {
-            this.Serializer = serializer;
+            Serializer = serializer;
         }
 
         public IMvxTextSerializer Serializer { get; private set; }

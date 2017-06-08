@@ -17,10 +17,10 @@ namespace MvvmCross.Binding.Bindings.Source
 
         protected MvxSourceBinding(object source)
         {
-            this._source = source;
+            _source = source;
         }
 
-        protected object Source => this._source;
+        protected object Source => _source;
 
         public event EventHandler Changed;
 
@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.Bindings.Source
 
         protected bool EqualsCurrentValue(object testValue)
         {
-            var existing = this.GetValue();
+            var existing = GetValue();
 
             if (testValue == null)
             {

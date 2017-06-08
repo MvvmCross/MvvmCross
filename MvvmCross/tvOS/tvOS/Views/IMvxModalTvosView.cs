@@ -7,8 +7,8 @@
 
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Core.ViewModels;
+    using Core.Views;
 
     public interface IMvxModalTvosView
         : IMvxView

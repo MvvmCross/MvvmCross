@@ -9,14 +9,14 @@ using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Binding.Combiners;
-    using MvvmCross.Binding.ExpressionParse;
-    using MvvmCross.Binding.Parse.Binding.Lang;
+    using Binders;
+    using BindingContext;
+    using Bindings.Source.Construction;
+    using Bindings.SourceSteps;
+    using Bindings.Target.Construction;
+    using Combiners;
+    using ExpressionParse;
+    using Parse.Binding.Lang;
 
     public interface IMvxBindingSingletonCache
     {

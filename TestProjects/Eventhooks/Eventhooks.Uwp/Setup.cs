@@ -18,7 +18,7 @@ namespace Eventhooks.Uwp
 
         protected override IMvxApplication CreateApp()
         {
-            return new Eventhooks.Core.App();
+            return new Core.App();
         }
 
         protected override IMvxTrace CreateDebugTrace()

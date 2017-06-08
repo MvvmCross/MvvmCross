@@ -16,7 +16,7 @@ namespace MvvmCross.iOS.Views
 
         public MvxFromStoryboardAttribute(string storyboardName = null)
         {
-            this.StoryboardName = storyboardName;
+            StoryboardName = storyboardName;
         }
     }
 }

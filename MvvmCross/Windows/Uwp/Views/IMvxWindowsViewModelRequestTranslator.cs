@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Uwp.Views
 {
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
     using System;
 
     public interface IMvxWindowsViewModelRequestTranslator

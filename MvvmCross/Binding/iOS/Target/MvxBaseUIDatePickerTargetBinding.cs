@@ -10,8 +10,8 @@ namespace MvvmCross.Binding.iOS.Target
     using System;
     using System.Reflection;
 
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
+    using Bindings.Target;
+    using Platform.Platform;
 
     using UIKit;
 
@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.iOS.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged(this.GetValueFrom(view));
+            FireValueChanged(GetValueFrom(view));
         }
 
         protected abstract object GetValueFrom(UIDatePicker view);

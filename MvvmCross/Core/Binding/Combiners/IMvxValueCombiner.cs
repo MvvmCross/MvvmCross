@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Combiners
     using System;
     using System.Collections.Generic;
 
-    using MvvmCross.Binding.Bindings.SourceSteps;
+    using Bindings.SourceSteps;
 
     public interface IMvxValueCombiner
     {

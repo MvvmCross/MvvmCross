@@ -9,12 +9,12 @@ namespace MvvmCross.tvOS.Views
 {
     using System;
 
-    using MvvmCross.Core.Views;
+    using Core.Views;
     using MvvmCross.Platform.tvOS.Views;
 
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTvosView TvosView => base.ViewController as IMvxTvosView;
+        protected IMvxTvosView TvosView => ViewController as IMvxTvosView;
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
@@ -25,13 +25,13 @@ namespace MvvmCross.tvOS.Views
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.TvosView.OnViewCreate();
+            TvosView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.TvosView.OnViewDestroy();
+            TvosView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

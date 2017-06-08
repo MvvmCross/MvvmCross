@@ -11,7 +11,7 @@ using MvxDroidImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
 namespace MvvmCross.Forms.Droid.Views
 {
-    class MvxImageViewRenderer : ImageRenderer
+    internal class MvxImageViewRenderer : ImageRenderer
     {
         private MvxDroidImageView _nativeControl;
         private MvxImageView SharedControl => Element as MvxImageView;

@@ -103,8 +103,8 @@ namespace MvvmCross.iOS.Support.Views
             if (ItemsSource == null)
                 return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if ((ItemsSource.ElementAt((int)section)).Any() && _sectionExpandableController.IsExpanded((int)section))
-                return (ItemsSource.ElementAt((int)section)).Count();
+            if (ItemsSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
+                return ItemsSource.ElementAt((int)section).Count();
             return 0;
         }
 

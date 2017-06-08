@@ -90,7 +90,7 @@ namespace Example.Core.ViewModels
             var rand = new Random();
             Func<char> randChar = () => (char)rand.Next(65, 90);
             Func<int, string> randStr = null;
-            randStr = x => (x > 0) ? randStr(--x) + randChar() : "";
+            randStr = x => x > 0 ? randStr(--x) + randChar() : "";
 
             var newItemCount = rand.Next(3);
 

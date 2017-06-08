@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Core.Parse.StringDictionary;
+    using Parse.StringDictionary;
     using MvvmCross.Platform.Platform;
 
     public class MvxStringDictionaryNavigationSerializer

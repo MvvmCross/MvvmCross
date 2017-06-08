@@ -7,10 +7,10 @@
 
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+    using Binding.BindingContext;
+    using Binding.Droid.Views;
+    using Core.ViewModels;
+    using Core.Views;
     using MvvmCross.Platform.Droid.Views;
 
     public interface IMvxAndroidView

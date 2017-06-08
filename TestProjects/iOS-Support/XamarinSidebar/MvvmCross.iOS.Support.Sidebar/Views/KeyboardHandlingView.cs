@@ -3,8 +3,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
     using Cirrious.FluentLayouts.Touch;
     using Core.ViewModels;
     using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+    using XamarinSidebar;
+    using XamarinSidebar.Attributes;
     using Support.Views;
     using UIKit;
 

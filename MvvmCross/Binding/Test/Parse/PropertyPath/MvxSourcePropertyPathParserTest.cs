@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         {
             foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
-                var result = this.Tokenise(test);
+                var result = Tokenise(test);
                 Assert.AreEqual(1, result.Count);
                 Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
             }
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         [Test]
         public void TestTokeniser_OnWhitespace()
         {
-            var result = this.Tokenise(" \t\r \n ");
+            var result = Tokenise(" \t\r \n ");
             Assert.AreEqual(1, result.Count);
             Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
         }
@@ -40,11 +40,11 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         public void TestTokeniser_OnSimpleProperty()
         {
             var text = "Hello";
-            var result = this.Tokenise(text);
+            var result = Tokenise(text);
             Assert.AreEqual(1, result.Count);
             AssertIsSimplePropertyToken(result[0], text);
 
-            var result2 = this.Tokenise(this.AddWhitespace(text));
+            var result2 = Tokenise(AddWhitespace(text));
             Assert.AreEqual(1, result2.Count);
             AssertIsSimplePropertyToken(result2[0], text);
         }
@@ -55,14 +55,14 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
             var text = "Hello.World.Good.Morning.Foo.Bar";
             var split = text.Split('.');
 
-            var result = this.Tokenise(text);
+            var result = Tokenise(text);
             Assert.AreEqual(6, result.Count);
             for (var i = 0; i < split.Length; i++)
             {
                 AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
-            var result2 = this.Tokenise(this.AddWhitespace(text));
+            var result2 = Tokenise(AddWhitespace(text));
             Assert.AreEqual(6, result2.Count);
             for (var i = 0; i < split.Length; i++)
             {
@@ -78,11 +78,11 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
             {
                 var text = "[" + u + "]";
 
-                var result = this.Tokenise(text);
+                var result = Tokenise(text);
                 Assert.AreEqual(1, result.Count);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
 
-                var result2 = this.Tokenise(this.AddWhitespace(text));
+                var result2 = Tokenise(AddWhitespace(text));
                 Assert.AreEqual(1, result2.Count);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
             }
@@ -100,11 +100,11 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
                     var text = "[" + quoteChar + s + quoteChar + "]";
                     text = text.Replace("\\", "\\\\");
 
-                    var result = this.Tokenise(text);
+                    var result = Tokenise(text);
                     Assert.AreEqual(1, result.Count);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[0], s);
 
-                    var result2 = this.Tokenise(this.AddWhitespace(text));
+                    var result2 = Tokenise(AddWhitespace(text));
                     Assert.AreEqual(1, result2.Count);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result2[0], s);
                 }
@@ -117,14 +117,14 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
             var text = "Hello_World.Good.Mor_ning.Foo.Bar";
             var split = text.Split('.');
 
-            var result = this.Tokenise(text);
+            var result = Tokenise(text);
             Assert.AreEqual(5, result.Count);
             for (var i = 0; i < split.Length; i++)
             {
                 AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
-            var result2 = this.Tokenise(this.AddWhitespace(text));
+            var result2 = Tokenise(AddWhitespace(text));
             Assert.AreEqual(5, result2.Count);
             for (var i = 0; i < split.Length; i++)
             {
@@ -138,14 +138,14 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
             var text = "_Hello_World.Good._Mor_ning.Foo._Bar";
             var split = text.Split('.');
 
-            var result = this.Tokenise(text);
+            var result = Tokenise(text);
             Assert.AreEqual(5, result.Count);
             for (var i = 0; i < split.Length; i++)
             {
                 AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
-            var result2 = this.Tokenise(this.AddWhitespace(text));
+            var result2 = Tokenise(AddWhitespace(text));
             Assert.AreEqual(5, result2.Count);
             for (var i = 0; i < split.Length; i++)
             {
@@ -157,7 +157,7 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         public void TestTokeniser_SmokeTest()
         {
             var testString = "I [ 'Like - it hot -' ] .\tNew. York[1972]. In .Summer [\"\"]";
-            var result = this.Tokenise(testString);
+            var result = Tokenise(testString);
             Assert.AreEqual(8, result.Count);
             AssertIsSimplePropertyToken(result[0], "I");
             AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[1], "Like - it hot -");

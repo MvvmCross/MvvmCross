@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.Binders
     using System.Collections.Generic;
     using System.Reflection;
 
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
+    using Platform;
+    using Platform.Platform;
 
     public static class MvxRegistryFillerExtensions
     {

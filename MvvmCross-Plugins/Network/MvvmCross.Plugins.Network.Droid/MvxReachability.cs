@@ -27,7 +27,7 @@ namespace MvvmCross.Plugins.Network.Droid
         {
             get
             {
-                _connectivityManager = _connectivityManager ?? (ConnectivityManager)(Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService));
+                _connectivityManager = _connectivityManager ?? (ConnectivityManager)Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService);
                 return _connectivityManager;
             }
         }
@@ -40,7 +40,7 @@ namespace MvvmCross.Plugins.Network.Droid
                 {
                     var activeConnection = ConnectivityManager.ActiveNetworkInfo;
 
-                    return ((activeConnection != null) && activeConnection.IsConnected);
+                    return activeConnection != null && activeConnection.IsConnected;
                 }
                 catch (Exception e)
                 {

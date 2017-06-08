@@ -11,9 +11,9 @@ namespace MvvmCross.Binding.BindingContext
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Localization;
+    using Bindings;
+    using Bindings.SourceSteps;
+    using Localization;
 
     public static partial class MvxBindingContextOwnerExtensions
     {

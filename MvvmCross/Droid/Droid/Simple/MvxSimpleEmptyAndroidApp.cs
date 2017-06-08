@@ -9,7 +9,7 @@ using Android.Runtime;
 
 namespace MvvmCross.Droid.Simple
 {
-    using MvvmCross.Core.ViewModels;
+    using Core.ViewModels;
 
     [Register("mvvmcross.droid.simple.MvxSimpleEmptyAndroidApp")]
     public class MvxSimpleEmptyAndroidApp : MvxApplication

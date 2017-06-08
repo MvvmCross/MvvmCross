@@ -21,12 +21,12 @@ namespace MvvmCross.tvOS.Views
 
         protected MvxTvosUIThreadDispatcher()
         {
-            this._uiSynchronizationContext = SynchronizationContext.Current;
+            _uiSynchronizationContext = SynchronizationContext.Current;
         }
 
         public bool RequestMainThreadAction(Action action)
         {
-            if (this._uiSynchronizationContext == SynchronizationContext.Current)
+            if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));

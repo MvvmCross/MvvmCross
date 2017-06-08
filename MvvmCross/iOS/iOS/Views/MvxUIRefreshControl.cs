@@ -16,7 +16,7 @@ namespace MvvmCross.iOS.Views
 		/// </summary>
 		public MvxUIRefreshControl()
 		{
-			this.ValueChanged += (object sender, EventArgs e) =>
+			ValueChanged += (object sender, EventArgs e) =>
 			{
 				var command = RefreshCommand;
 				if (command == null)
@@ -41,7 +41,7 @@ namespace MvvmCross.iOS.Views
 			set
 			{
 				_message = value ?? string.Empty;
-				this.AttributedTitle = new NSAttributedString(_message);
+				AttributedTitle = new NSAttributedString(_message);
 			}
 		}
 

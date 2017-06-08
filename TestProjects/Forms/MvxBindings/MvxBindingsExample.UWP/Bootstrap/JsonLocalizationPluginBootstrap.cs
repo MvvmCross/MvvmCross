@@ -1,9 +1,10 @@
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Plugins.JsonLocalization;
 
 namespace MvxBindingsExample.UWP.Bootstrap
 {
     public class JsonLocalizationPluginBootstrap
-        : MvxPluginBootstrapAction<MvvmCross.Plugins.JsonLocalization.PluginLoader>
+        : MvxPluginBootstrapAction<PluginLoader>
     {
     }
 }
