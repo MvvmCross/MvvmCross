@@ -11,7 +11,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Console
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

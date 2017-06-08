@@ -11,7 +11,7 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.WebBrowser.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxAndroidTask, IMvxWebBrowserTask
     {
         public void ShowWebPage(string url)

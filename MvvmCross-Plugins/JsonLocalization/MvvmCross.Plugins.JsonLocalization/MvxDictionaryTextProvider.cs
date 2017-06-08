@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxDictionaryTextProvider : MvxTextProvider
     {
         private readonly Dictionary<string, string> _entries = new Dictionary<string, string>();

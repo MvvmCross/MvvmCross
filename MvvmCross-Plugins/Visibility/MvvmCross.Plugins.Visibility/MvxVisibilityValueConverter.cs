@@ -11,7 +11,7 @@ using MvvmCross.Platform.ExtensionMethods;
 
 namespace MvvmCross.Plugins.Visibility
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxVisibilityValueConverter : MvxBaseVisibilityValueConverter
     {
         protected override MvxVisibility Convert(object value, object parameter, CultureInfo culture)

@@ -13,7 +13,7 @@ using MvvmCross.Plugins.Color.Droid.BindingTargets;
 
 namespace MvvmCross.Plugins.Color.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin          
     {

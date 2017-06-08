@@ -25,7 +25,7 @@ using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxPictureChooserTask
         : MvxAndroidTask
           , IMvxPictureChooserTask

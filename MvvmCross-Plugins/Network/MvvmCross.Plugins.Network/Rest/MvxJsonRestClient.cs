@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxJsonRestClient
         : MvxRestClient
           , IMvxJsonRestClient

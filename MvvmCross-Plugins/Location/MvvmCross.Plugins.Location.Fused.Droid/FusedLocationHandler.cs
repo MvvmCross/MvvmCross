@@ -9,7 +9,7 @@ using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class FusedLocationHandler
 		: LocationCallback
 		, GoogleApiClient.IConnectionCallbacks

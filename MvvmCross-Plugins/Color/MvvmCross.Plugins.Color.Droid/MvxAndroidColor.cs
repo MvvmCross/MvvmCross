@@ -9,7 +9,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxAndroidColor : IMvxNativeColor
     {
         public object ToNative(MvxColor mvxColor)

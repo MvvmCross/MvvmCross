@@ -18,7 +18,7 @@ using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxAndroidLocalFileImageLoader
         : IMvxLocalFileImageLoader<Bitmap>
     {

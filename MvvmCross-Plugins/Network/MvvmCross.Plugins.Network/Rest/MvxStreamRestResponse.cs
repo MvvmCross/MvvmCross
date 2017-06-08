@@ -9,7 +9,7 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxStreamRestResponse
         : MvxRestResponse
     {

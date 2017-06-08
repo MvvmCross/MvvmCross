@@ -11,7 +11,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
 

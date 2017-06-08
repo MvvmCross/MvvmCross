@@ -14,7 +14,7 @@ using UIKit;
 
 namespace MvvmCross.Plugins.Accelerometer.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxAccelerometer
         : IMvxAccelerometer
     {

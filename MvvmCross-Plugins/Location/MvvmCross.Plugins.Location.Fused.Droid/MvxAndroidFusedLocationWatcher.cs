@@ -9,7 +9,7 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxAndroidFusedLocationWatcher
 		: MvxLocationWatcher
 	{

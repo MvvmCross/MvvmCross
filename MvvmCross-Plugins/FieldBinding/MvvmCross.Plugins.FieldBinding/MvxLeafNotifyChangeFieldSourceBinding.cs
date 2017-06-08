@@ -11,7 +11,7 @@ using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxLeafNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {

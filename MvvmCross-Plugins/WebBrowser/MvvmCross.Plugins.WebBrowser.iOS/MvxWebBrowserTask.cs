@@ -10,7 +10,7 @@ using Foundation;
 
 namespace MvvmCross.Plugins.WebBrowser.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxIosTask, IMvxWebBrowserTask
     {
         public void ShowWebPage(string url)

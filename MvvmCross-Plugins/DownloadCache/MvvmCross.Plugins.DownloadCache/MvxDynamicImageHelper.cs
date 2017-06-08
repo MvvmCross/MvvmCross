@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxDynamicImageHelper<T>
         : IMvxImageHelper<T>
         where T : class

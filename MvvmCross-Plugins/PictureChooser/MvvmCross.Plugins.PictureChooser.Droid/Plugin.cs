@@ -11,7 +11,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin          
     {

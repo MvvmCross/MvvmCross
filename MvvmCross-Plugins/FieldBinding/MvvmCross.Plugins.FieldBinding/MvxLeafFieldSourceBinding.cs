@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxLeafFieldSourceBinding
         : MvxFieldSourceBinding
     {

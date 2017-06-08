@@ -10,7 +10,7 @@ using Android.Support.V4.Graphics;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxAndroidImage
         : MvxImage<Bitmap>
     {

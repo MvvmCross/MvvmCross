@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxHttpFileDownloader
         : MvxLockableObject
         , IMvxHttpFileDownloader

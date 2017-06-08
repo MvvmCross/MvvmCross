@@ -12,7 +12,7 @@ using System.Net;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxRestRequest
     {
         public MvxRestRequest(string url, string verb = MvxVerbs.Get, string accept = MvxContentType.Json,

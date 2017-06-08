@@ -10,7 +10,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.WebBrowser.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
 

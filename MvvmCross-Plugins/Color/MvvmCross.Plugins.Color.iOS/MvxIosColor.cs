@@ -10,7 +10,7 @@ using UIKit;
 
 namespace MvvmCross.Plugins.Color.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxIosColor : IMvxNativeColor
     {
         public object ToNative(MvxColor mvxColor)
