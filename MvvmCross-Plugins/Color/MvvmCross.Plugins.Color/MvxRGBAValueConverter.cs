@@ -7,7 +7,7 @@
 
 namespace MvvmCross.Plugins.Color
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxRGBAValueConverter : MvxRGBValueConverter
     {
     }

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxColorExtensions.cs" />
-    <Compile Include="MvxTouchColor.cs" />
+    <Compile Include="MvxIosColor.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,9 +1,7 @@
 ﻿using System.Windows.Input;
-
 using MvvmCross.Core.ViewModels;
 
-
-namespace PageRendererExample.ViewModels
+namespace PageRendererExample
 {
     public class BootViewModel : MvxViewModel
     {

@@ -1,21 +1,18 @@
 ﻿using System;
 using System.IO;
-
 using Android.App;
 using Android.Graphics;
 using Android.Hardware;
 using Android.Views;
 using Android.Widget;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using PageRendererExample.Pages;
-using PageRendererExample.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Droid;
 using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
+using PageRendererExample;
 
 [assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 

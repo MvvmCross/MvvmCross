@@ -1,4 +1,4 @@
-// MvxStreamRestResponse.cs
+﻿// MvxStreamRestResponse.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,7 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxStreamRestResponse
         : MvxRestResponse
     {

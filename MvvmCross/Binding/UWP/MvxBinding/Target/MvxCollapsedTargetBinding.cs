@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.Binding.Uwp.Target
+namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding
     {

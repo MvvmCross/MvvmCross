@@ -1,19 +1,10 @@
 ﻿using Windows.ApplicationModel.Activation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Uwp;
+using MvvmCross.Platform;
 using XamlControls = Windows.UI.Xaml.Controls;
 
-using Xamarin.Forms;
-
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Uwp.Platform;
-using MvvmCross.Uwp.Views;
-using MvvmCross.Platform;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Uwp;
-using MvvmCross.Forms.Uwp.Presenters;
-using PageRendererExample.ViewModels;
-
-namespace PageRendererExample.UI.Uwp
+namespace PageRendererExample.WindowsUWP
 {
     internal class MvvmSetup : MvxFormsWindowsSetup
     {

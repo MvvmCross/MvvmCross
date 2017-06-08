@@ -1,8 +1,7 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
 
-namespace PageRendererExample.ViewModels
+namespace PageRendererExample
 {
     public class MvvmApp : MvxApplication
     {

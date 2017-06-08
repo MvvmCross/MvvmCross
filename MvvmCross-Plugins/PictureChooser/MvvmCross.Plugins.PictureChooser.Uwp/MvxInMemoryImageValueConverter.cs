@@ -1,4 +1,4 @@
-// MvxInMemoryImageValueConverter.cs
+﻿// MvxInMemoryImageValueConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace MvvmCross.Plugins.PictureChooser.Uwp
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>
     {
         protected override BitmapImage Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)

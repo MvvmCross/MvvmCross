@@ -126,7 +126,7 @@
     <Compile Include="Navigation\MvxNavigationAttribute.cs" />
     <Compile Include="Navigation\MvxNavigationService.cs" />
     <Compile Include="Navigation\MvxNavigationExtensions.cs" />
-    <Compile Include="Navigation\EventArgs\NavigateEventArgs.cs" />
+    <Compile Include="Navigation\EventArguments\NavigateEventArgs.cs" />
     <Compile Include="Navigation\IMvxNavigationCache.cs" />
     <Compile Include="Navigation\MvxNavigationCache.cs" />
   </ItemGroup>

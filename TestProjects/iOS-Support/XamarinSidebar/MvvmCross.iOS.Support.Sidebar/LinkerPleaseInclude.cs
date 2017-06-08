@@ -1,4 +1,4 @@
-// ReSharper disable RedundantToStringCall
+﻿// ReSharper disable RedundantToStringCall
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable RedundantAssignment

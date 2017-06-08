@@ -1,4 +1,4 @@
-// MvxAndroidImage.cs
+﻿// MvxAndroidImage.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using Android.Support.V4.Graphics;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxAndroidImage
         : MvxImage<Bitmap>
     {

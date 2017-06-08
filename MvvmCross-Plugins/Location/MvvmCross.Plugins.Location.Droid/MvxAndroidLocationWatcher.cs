@@ -18,7 +18,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Droid
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public sealed class MvxAndroidLocationWatcher
         : MvxLocationWatcher
           , IMvxLocationReceiver

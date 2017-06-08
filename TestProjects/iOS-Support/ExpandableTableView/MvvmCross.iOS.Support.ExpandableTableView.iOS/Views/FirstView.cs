@@ -4,10 +4,10 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.Views;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using UIKit;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
+namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
 {
     [MvxRootPresentation(WrapInNavigationController = true)]
     public class FirstView : MvxTableViewController

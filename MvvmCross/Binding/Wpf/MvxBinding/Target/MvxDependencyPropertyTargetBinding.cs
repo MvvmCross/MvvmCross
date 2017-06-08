@@ -5,12 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -20,10 +14,8 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 
 #if WINDOWS_WPF
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Media;
 
-namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
+namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 #endif
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding

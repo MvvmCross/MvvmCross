@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace MvvmCross.Plugins.Color
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class MvxRGBValueConverter : MvxColorValueConverter<string>
     {
         protected override MvxColor Convert(string value, object parameter, CultureInfo culture)

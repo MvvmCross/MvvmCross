@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color.WindowsCommon
+namespace MvvmCross.Plugins.Color.Uwp
 {
     public class Plugin
         : IMvxPlugin

@@ -5,9 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Reflection;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
@@ -16,10 +13,8 @@ namespace MvvmCross.BindingEx.WindowsCommon
 
 #if WINDOWS_WPF
 using System.Windows;
-using System.ComponentModel;
-using System.Linq;
 
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public static class MvxDependencyPropertyExtensionMethods

@@ -1,4 +1,4 @@
-// MvxComposeEmailTask.cs
+﻿// MvxComposeEmailTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -20,7 +20,7 @@ using File = Java.IO.File;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
     public class MvxComposeEmailTask
         : MvxAndroidTask
         , IMvxComposeEmailTaskEx

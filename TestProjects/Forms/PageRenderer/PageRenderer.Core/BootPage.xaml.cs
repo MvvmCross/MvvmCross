@@ -1,8 +1,7 @@
 ﻿using System.IO;
-
 using Xamarin.Forms;
 
-namespace PageRendererExample.Pages
+namespace PageRendererExample
 {
     public partial class BootPage : BootContentPage
     {

@@ -1,4 +1,4 @@
-// MvxFileStoreHelper.cs
+﻿// MvxFileStoreHelper.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,7 +11,7 @@ using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public static class MvxFileStoreHelper
     {
         public static IMvxFileStore SafeGetFileStore()

@@ -6,14 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Binding;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 
-namespace MvvmCross.Binding.Uwp.Target
+namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {

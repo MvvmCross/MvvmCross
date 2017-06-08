@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
@@ -16,7 +15,7 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public class MvxWindowsAssemblyCache

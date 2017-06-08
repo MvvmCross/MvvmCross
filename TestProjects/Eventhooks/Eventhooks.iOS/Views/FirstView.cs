@@ -1,11 +1,9 @@
-﻿using System;
-using Eventhooks.Core.ViewModels;
+﻿using Eventhooks.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 
-namespace Eventhooks.iOS
+namespace Eventhooks.iOS.Views
 {
     [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class FirstView : MvxViewController<FirstViewModel>

@@ -9,7 +9,7 @@ using System.IO;
 
 namespace MvvmCross.Plugins.Email
 {
-    [Preserve(AllMembers = true)]
+    [All.Preserve(AllMembers = true)]
 	public class EmailAttachment
     {
         public string ContentType { get; set; }
