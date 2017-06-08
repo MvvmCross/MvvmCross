@@ -62,8 +62,8 @@ namespace MvvmCross.Droid.Views
                 unchecked
                 {
                     int hashCode = 17;
-                    hashCode = hashCode * 23 + ViewModelType.GetHashCode();
-                    hashCode = hashCode * 23 + ViewModelTag.GetHashCode();
+                    hashCode = (hashCode * 23) + ViewModelType.GetHashCode();
+                    hashCode = (hashCode * 23) + ViewModelTag.GetHashCode();
                     return hashCode;
                 }
             }
