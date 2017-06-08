@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using Platform;
-    using Platform.Core;
-    using Platform.Exceptions;
-
-    using UIKit;
-
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
         public static readonly NSString UnknownCellIdentifier = null;

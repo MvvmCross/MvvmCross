@@ -1,6 +1,6 @@
-using MvvmCross.Platform.Platform;
 using System;
 using System.Diagnostics;
+using MvvmCross.Platform.Platform;
 
 namespace Example.Droid
 {

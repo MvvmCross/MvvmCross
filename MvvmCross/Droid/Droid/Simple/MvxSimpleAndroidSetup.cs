@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
+
 namespace MvvmCross.Droid.Simple
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Android.Content;
-
-    using Core.ViewModels;
-    using Platform;
-
     public abstract class MvxSimpleAndroidSetup : MvxAndroidSetup
     {
         private readonly IEnumerable<Type> _converterTypes;

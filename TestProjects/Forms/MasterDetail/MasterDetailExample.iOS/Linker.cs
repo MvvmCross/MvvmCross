@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Input;
-using MvvmCross.iOS.Views;
 using Foundation;
+using MvvmCross.iOS.Views;
 using MvvmCross.Platform.IoC;
 using UIKit;
 

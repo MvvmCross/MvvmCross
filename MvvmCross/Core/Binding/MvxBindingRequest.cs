@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding
 {
-    using Bindings;
-
     public class MvxBindingRequest
     {
         public MvxBindingRequest()

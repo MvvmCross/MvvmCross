@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using ViewModels;
-
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
         private static int _unique = 1;

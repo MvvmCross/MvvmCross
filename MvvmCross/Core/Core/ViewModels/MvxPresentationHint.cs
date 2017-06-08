@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Collections.Generic;
-
     public abstract class MvxPresentationHint
     {
         protected MvxPresentationHint()

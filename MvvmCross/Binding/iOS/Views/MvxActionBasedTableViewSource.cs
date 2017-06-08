@@ -1,22 +1,19 @@
-// MvxActionBasedTableViewSource.cs
+﻿// MvxActionBasedTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Foundation;
-
-    using Bindings;
-    using Platform;
-
-    using UIKit;
-
     public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
         protected MvxActionBasedTableViewSource(UITableView tableView)

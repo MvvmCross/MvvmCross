@@ -1,26 +1,24 @@
-// MvxAppCompatImageView.cs
+﻿// MvxAppCompatImageView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V7.Widget;
+using Android.Util;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
-    using System;
-
-    using Android.Content;
-    using Android.Graphics;
-    using Android.OS;
-    using Android.Runtime;
-    using Android.Support.V7.Widget;
-    using Android.Util;
-
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView")]
     public class MvxAppCompatImageView : AppCompatImageView
     {

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
-    using System;
-
-    using Platform.Platform;
-
     public class MvxDirectToSourceBinding : MvxSourceBinding
     {
         public MvxDirectToSourceBinding(object source)

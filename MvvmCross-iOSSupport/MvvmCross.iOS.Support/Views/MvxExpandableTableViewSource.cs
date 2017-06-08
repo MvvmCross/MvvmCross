@@ -1,19 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.iOS.Views;
 using MvvmCross.iOS.Support.Views.Expandable;
 using MvvmCross.iOS.Support.Views.Expandable.Controllers;
+using MvvmCross.Platform.Core;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.Views
 {
-    using Foundation;
-    using Binding.ExtensionMethods;
-    using Binding.iOS.Views;
-    using MvvmCross.Platform.Core;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.Linq;
-    using UIKit;
-    using CoreGraphics;
-
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)

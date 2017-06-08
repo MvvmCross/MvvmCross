@@ -5,31 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.tvOS;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+using MvvmCross.Platform.tvOS.Platform;
+using MvvmCross.Platform.tvOS.Views;
+using MvvmCross.tvOS.Views;
+using MvvmCross.tvOS.Views.Presenters;
+using UIKit;
+
 namespace MvvmCross.tvOS.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Binding;
-    using Binding.Binders;
-    using Binding.BindingContext;
-    using Binding.Bindings.Target.Construction;
-    using Binding.tvOS;
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using MvvmCross.Platform.tvOS.Platform;
-    using MvvmCross.Platform.tvOS.Views;
-    using Views;
-    using Views.Presenters;
-
-    using UIKit;
-
     public abstract class MvxTvosSetup
         : MvxSetup
     {

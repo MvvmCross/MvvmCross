@@ -5,15 +5,13 @@
 // </copyright>
 
 
+using System;
+using System.Threading;
+using AppKit;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-    using System.Threading;
-
-    using AppKit;
-
-    using MvvmCross.Platform.Core;
-
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadDispatcher
     {

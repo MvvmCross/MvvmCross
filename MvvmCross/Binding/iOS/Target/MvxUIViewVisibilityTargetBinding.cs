@@ -1,4 +1,4 @@
-// MvxUIViewVisibilityTargetBinding.cs
+﻿// MvxUIViewVisibilityTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,15 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.UI;
+using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    using Bindings.Target;
-    using Platform.Platform;
-    using Platform.UI;
-
-    using UIKit;
-
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {
         protected UIView View => (UIView)Target;

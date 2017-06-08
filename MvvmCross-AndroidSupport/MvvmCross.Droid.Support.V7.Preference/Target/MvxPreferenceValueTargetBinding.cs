@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Platform;
 

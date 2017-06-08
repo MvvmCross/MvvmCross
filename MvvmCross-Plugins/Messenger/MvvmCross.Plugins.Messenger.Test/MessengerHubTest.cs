@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MvvmCross.Plugins.Messenger.Test
 {

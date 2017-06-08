@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Parse.Binding
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using Platform.Exceptions;
-    using Platform.Parse;
-    using Platform.Platform;
-
     public abstract class MvxBindingParser
         : MvxParser
           , IMvxBindingParser

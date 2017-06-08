@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.Content;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Droid.Platform
 {
-    using System;
-
-    using Android.App;
-    using Android.Content;
-
-    using Core;
-    using Views;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidTask
         : MvxMainThreadDispatchingObject
     {

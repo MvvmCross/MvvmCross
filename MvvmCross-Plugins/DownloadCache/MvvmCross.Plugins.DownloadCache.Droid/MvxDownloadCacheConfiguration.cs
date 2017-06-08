@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Plugins;
 using System;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.iOS.Views
 {
-    using System.Collections.Generic;
-
-    using Core.Platform;
-    using Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxCanCreateIosViewExtensionMethods
     {
         public static IMvxIosView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateIosView view,

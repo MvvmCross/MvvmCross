@@ -1,12 +1,11 @@
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Exceptions;
-
     // TODO - move this into another file
     public interface IMvxMacViewsContainer
         : IMvxViewsContainer

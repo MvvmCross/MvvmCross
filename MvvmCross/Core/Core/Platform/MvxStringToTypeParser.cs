@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser
           , IMvxFillableStringToTypeParser

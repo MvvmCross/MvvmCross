@@ -5,31 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.iOS;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.iOS.Platform;
+using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+using UIKit;
+
 namespace MvvmCross.iOS.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Binding;
-    using Binding.Binders;
-    using Binding.BindingContext;
-    using Binding.Bindings.Target.Construction;
-    using Binding.iOS;
-    using Core.Platform;
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using MvvmCross.Platform.iOS.Platform;
-    using MvvmCross.Platform.iOS.Views;
-    using Views;
-    using Views.Presenters;
-
-    using UIKit;
-
     public abstract class MvxIosSetup
         : MvxSetup
     {

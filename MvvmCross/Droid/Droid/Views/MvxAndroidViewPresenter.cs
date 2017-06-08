@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using Android.App;
-    using Android.Content;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidViewPresenter
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {

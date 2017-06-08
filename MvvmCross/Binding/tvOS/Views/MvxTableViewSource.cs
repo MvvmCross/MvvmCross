@@ -5,21 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using Foundation;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-
-    using Foundation;
-
-    using Attributes;
-    using ExtensionMethods;
-    using Platform;
-    using Platform.WeakSubscription;
-
-    using UIKit;
-
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
         private IEnumerable _itemsSource;

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Specialized;
+using System.Reflection;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Collections.Specialized;
-    using System.Reflection;
-
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {

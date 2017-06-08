@@ -1,4 +1,4 @@
-// MvxFragmentExtensionMethods.cs
+﻿// MvxFragmentExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Support.V4.App;
-using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V4
 {

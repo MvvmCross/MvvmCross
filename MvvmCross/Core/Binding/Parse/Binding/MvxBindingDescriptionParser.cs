@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Binding.Parse.Binding.Tibet;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Parse.Binding
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Binders;
-    using Bindings;
-    using Bindings.SourceSteps;
-    using Combiners;
-    using Lang;
-    using Tibet;
-    using Platform;
-    using Platform.Converters;
-    using Platform.Platform;
-
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
     {

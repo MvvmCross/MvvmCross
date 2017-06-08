@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.tvOS.Views;
 
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Binding.BindingContext;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.tvOS.Views;
-
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxTvosView TvosView => ViewController as IMvxTvosView;

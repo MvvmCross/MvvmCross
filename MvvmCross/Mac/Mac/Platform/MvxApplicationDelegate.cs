@@ -1,11 +1,9 @@
+using System;
+using AppKit;
+using MvvmCross.Core.Platform;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-
-    using AppKit;
-
-    using Core.Platform;
-
     public class MvxApplicationDelegate : NSApplicationDelegate
                                           , IMvxLifetime
     {

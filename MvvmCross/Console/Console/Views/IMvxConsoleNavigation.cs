@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using Core.Views;
-
     public interface IMvxConsoleNavigation
         : IMvxViewPresenter
     {

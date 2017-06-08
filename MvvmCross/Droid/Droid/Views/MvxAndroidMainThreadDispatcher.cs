@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
 using Android.App;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Views
 {
-    using System;
-    using System.Threading;
-
-    using MvvmCross.Platform.Core;
-
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadDispatcher
     {
         public bool RequestMainThreadAction(Action action)

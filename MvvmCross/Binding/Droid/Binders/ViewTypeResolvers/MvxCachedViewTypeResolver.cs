@@ -1,15 +1,15 @@
-// MvxCachedViewTypeResolver.cs
+﻿// MvxCachedViewTypeResolver.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+
 namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    using System;
-    using System.Collections.Generic;
-
     public class MvxCachedViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly Dictionary<string, Type> _cache = new Dictionary<string, Type>();

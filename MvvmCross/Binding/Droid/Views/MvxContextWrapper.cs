@@ -1,12 +1,11 @@
+﻿using System;
+using Android.Content;
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using Object = Java.Lang.Object;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Views;
-
-    using Binding.BindingContext;
-
     public class MvxContextWrapper : ContextWrapper
     {
         private LayoutInflater _inflater;
@@ -26,7 +25,7 @@ namespace MvvmCross.Binding.Droid.Views
             _bindingContextOwner = bindingContextOwner;
         }
 
-        public override Java.Lang.Object GetSystemService(string name)
+        public override Object GetSystemService(string name)
         {
             if (name.Equals(LayoutInflaterService))
             {

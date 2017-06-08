@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Mac.Views;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using Core.Views;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxMacView MacView

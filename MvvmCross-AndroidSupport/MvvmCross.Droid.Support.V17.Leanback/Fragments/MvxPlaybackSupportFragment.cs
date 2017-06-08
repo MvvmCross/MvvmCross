@@ -1,10 +1,10 @@
-﻿using Android.OS;
+﻿using System;
+using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments

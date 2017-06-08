@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Exceptions;
-
     public abstract class MvxSingleton
         : IDisposable
     {

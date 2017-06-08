@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Views
 {
-    using System;
-
-    using Platform;
-    using Platform.Core;
-    using Platform.Platform;
-    using Platform.WeakSubscription;
-
     public abstract class MvxBaseImageViewLoader<TImage>
         : IDisposable
         where TImage : class

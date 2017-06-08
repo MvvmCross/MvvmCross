@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using AppKit;
+using Foundation;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
 using ObjCRuntime;
 
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using System.Reflection;
-
-    using AppKit;
-    using Foundation;
-
-    using Binding;
-    using Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)

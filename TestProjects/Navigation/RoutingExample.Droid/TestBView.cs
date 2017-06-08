@@ -1,16 +1,11 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.Graphics;
-using Android.Runtime;
+﻿using Android.Graphics;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using MvvmCross.Droid.Views;
-using RoutingExample.Core.ViewModels;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Support.V4;
+using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {

@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Exceptions;
-    using Platform;
-
     public class MvxPluginManager
         : IMvxPluginManager
     {

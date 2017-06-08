@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
 using System.Windows.Media;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color.Wpf
 {

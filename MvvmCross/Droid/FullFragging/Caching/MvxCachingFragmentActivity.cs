@@ -12,18 +12,18 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Java.Lang;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Binding.Droid.BindingContext;
 using MvxActivity = MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace MvvmCross.Droid.FullFragging.Caching

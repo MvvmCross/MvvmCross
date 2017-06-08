@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Windows.Controls;
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Wpf.Views
 {

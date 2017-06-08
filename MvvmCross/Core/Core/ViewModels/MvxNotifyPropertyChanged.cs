@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
-
-    using MvvmCross.Platform.Core;
-
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject
         , IMvxNotifyPropertyChanged

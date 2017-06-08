@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Windows.ApplicationModel;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Platform.Uwp.Platform
 {
-    using Core;
-    using IoC;
-
     public abstract class MvxDesignTimeHelper
     {
         protected MvxDesignTimeHelper()

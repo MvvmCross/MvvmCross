@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
-    using Platform;
-    using Platform.IoC;
-    using Platform.Platform;
-
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {

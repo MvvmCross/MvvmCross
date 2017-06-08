@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-
-    using Core.ViewModels;
-    using Core.Views;
-
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel

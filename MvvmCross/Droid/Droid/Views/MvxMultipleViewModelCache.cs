@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.Views

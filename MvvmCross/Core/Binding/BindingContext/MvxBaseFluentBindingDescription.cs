@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-
-    using Binders;
-    using Bindings;
-    using Bindings.SourceSteps;
-    using Combiners;
-    using Platform;
-    using Platform.Converters;
-    using Platform.Core;
-    using Platform.Exceptions;
-
     public class MvxBaseFluentBindingDescription<TTarget>
         : MvxApplicableTo<TTarget>
         where TTarget : class

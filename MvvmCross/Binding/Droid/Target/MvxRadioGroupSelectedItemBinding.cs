@@ -1,4 +1,4 @@
-// MvxRadioGroupSelectedItemBinding.cs
+﻿// MvxRadioGroupSelectedItemBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.WeakSubscription;
 

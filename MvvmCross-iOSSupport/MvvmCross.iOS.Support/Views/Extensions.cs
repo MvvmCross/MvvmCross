@@ -1,13 +1,13 @@
-﻿namespace MvvmCross.iOS.Support.Views
-{
-	using CoreGraphics;
-	using Foundation;
-	using System;
-	using System.Linq;
-	using UIKit;
-	using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
-	public static class ViewExtensions
+namespace MvvmCross.iOS.Support.Views
+{
+    public static class ViewExtensions
     {
         /// <summary>
         /// Find the first responder in the <paramref name="view"/>'s subview hierarchy

@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-
     public class MvxConsoleViewDispatcher
         : MvxMainThreadDispatcher
         , IMvxViewDispatcher

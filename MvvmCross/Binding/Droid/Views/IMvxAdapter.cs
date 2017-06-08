@@ -1,18 +1,16 @@
-// IMvxAdapter.cs
+﻿// IMvxAdapter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System.Collections;
-
-    using Android.Widget;
-
-    using Attributes;
-
     public interface IMvxAdapter
         : ISpinnerAdapter
         , IListAdapter

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views.Gestures
 {
-    using UIKit;
-
     public class MvxTapGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior<UITapGestureRecognizer>
     {

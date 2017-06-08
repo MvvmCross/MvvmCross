@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    using System.Linq;
-
-    using UIKit;
-
     public class MvxTvosSystem
         : IMvxTvosSystem
     {

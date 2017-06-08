@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
+using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Binding.BindingContext;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.iOS.Views;
-
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxIosView IosView => ViewController as IMvxIosView;

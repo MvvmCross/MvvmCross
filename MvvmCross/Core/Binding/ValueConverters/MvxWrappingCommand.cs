@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.ValueConverters
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
-    using Platform;
-    using Platform.WeakSubscription;
-
     public class MvxWrappingCommand
         : ICommand
     {

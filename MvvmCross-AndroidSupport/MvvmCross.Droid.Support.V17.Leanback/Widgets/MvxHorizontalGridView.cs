@@ -1,4 +1,4 @@
-// MvxHorizontalGridView.cs
+﻿// MvxHorizontalGridView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,11 +12,11 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
 using Android.Util;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {

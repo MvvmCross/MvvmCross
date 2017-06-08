@@ -1,25 +1,24 @@
-// MvxFilteringAdapter.cs
+﻿// MvxFilteringAdapter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Widget;
+using Java.Lang;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using Object = Java.Lang.Object;
+using String = Java.Lang.String;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Threading;
-
-    using Android.App;
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Widget;
-
-    using Java.Lang;
-
-    using Platform.Droid;
-    using Platform.Platform;
-
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
@@ -52,7 +51,7 @@ namespace MvvmCross.Binding.Droid.Views
                 _owner.NotifyDataSetInvalidated();
             }
 
-            public override ICharSequence ConvertResultToStringFormatted(Java.Lang.Object resultValue)
+            public override ICharSequence ConvertResultToStringFormatted(Object resultValue)
             {
                 var ourContainer = resultValue as MvxJavaContainer;
                 if (ourContainer == null)
@@ -60,7 +59,7 @@ namespace MvvmCross.Binding.Droid.Views
                     return base.ConvertResultToStringFormatted(resultValue);
                 }
 
-                return new Java.Lang.String(ourContainer.Object.ToString());
+                return new String(ourContainer.Object.ToString());
             }
 
             #endregion Overrides of Filter
@@ -128,7 +127,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         private MvxReplaceableJavaContainer _javaContainer;
 
-        public override Java.Lang.Object GetItem(int position)
+        public override Object GetItem(int position)
         {
             // for autocomplete views we need to return something other than null here
             // - see @JonPryor's answer in http://stackoverflow.com/questions/13842864/why-does-the-gref-go-too-high-when-i-put-a-mvxbindablespinner-in-a-mvxbindableli/13995199#comment19319057_13995199

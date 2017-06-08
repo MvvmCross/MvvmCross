@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Parse;
-
     public class MvxStringDictionaryParser
         : MvxParser, IMvxStringDictionaryParser
     {

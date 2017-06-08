@@ -1,4 +1,4 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,13 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System;
+using AppKit;
+using Foundation;
+
 namespace MvvmCross.Binding.Mac.Views
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
     [Register("MvxTableColumn")]
     public class MvxTableColumn : NSTableColumn
     {

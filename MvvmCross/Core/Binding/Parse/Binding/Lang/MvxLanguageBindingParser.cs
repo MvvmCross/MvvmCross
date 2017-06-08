@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Parse.Binding.Lang
 {
-    using Platform.Exceptions;
-
     public class MvxLanguageBindingParser
         : MvxBindingParser
           , IMvxLanguageBindingParser

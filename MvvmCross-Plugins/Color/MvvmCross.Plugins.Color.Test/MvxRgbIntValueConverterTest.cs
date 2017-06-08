@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using NUnit.Framework;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MvvmCross.Plugins.Color.Test
 {

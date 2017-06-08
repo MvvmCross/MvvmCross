@@ -6,14 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    using Bindings.Target;
-    using Platform.Platform;
-
-    using UIKit;
-
     /// <summary>
     /// Custom binding for UIActivityIndicator hidden.
     /// This binding will ensure the indicator animates when shown and stops when hidden

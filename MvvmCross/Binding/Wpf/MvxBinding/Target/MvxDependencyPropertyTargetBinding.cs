@@ -13,7 +13,13 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 #endif

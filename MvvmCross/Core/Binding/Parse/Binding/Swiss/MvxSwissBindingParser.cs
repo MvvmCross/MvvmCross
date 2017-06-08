@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Parse.Binding.Swiss
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Platform.Exceptions;
-
     public class MvxSwissBindingParser
         : MvxBindingParser
     {

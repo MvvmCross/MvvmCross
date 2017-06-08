@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Mac.Views
 {
-    using System;
-
-    using Core;
-
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;

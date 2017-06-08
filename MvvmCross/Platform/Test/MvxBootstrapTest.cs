@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Test.Mocks;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using Platform;
-    using Mocks;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxBootstrapTest
     {

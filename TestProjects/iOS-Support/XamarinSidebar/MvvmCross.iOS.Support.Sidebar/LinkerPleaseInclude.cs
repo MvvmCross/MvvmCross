@@ -3,17 +3,16 @@
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable RedundantAssignment
 
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.iOS.Views;
 using MvvmCross.Platform.IoC;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using System.Collections.Specialized;
-    using System.Windows.Input;
-    using MvvmCross.iOS.Views;
-    using Foundation;
-    using UIKit;
-
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
     [Preserve(AllMembers = true)]

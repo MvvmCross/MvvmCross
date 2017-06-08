@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.ComponentModel;
 using System.Windows;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Platform.Wpf.Platform
 {
-    using System.ComponentModel;
-
-    using Core;
-    using IoC;
-
     public abstract class MvxDesignTimeHelper
     {
         protected MvxDesignTimeHelper()

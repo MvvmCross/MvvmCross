@@ -1,4 +1,4 @@
-// MvxUISwitchOnTargetBinding.cs
+﻿// MvxUISwitchOnTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,17 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System;
+using System.Reflection;
+using AppKit;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Mac.Target
 {
-    using System.Reflection;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Platform.Platform;
-
-    using MvvmCross.Binding.Bindings.Target;
-
     public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
     {
         public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -33,7 +30,7 @@ namespace MvvmCross.Binding.Mac.Target
             }
         }
 
-        private void HandleCheckBoxAction(object sender, System.EventArgs e)
+        private void HandleCheckBoxAction(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)

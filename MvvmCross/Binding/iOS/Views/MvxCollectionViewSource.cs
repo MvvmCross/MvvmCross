@@ -1,25 +1,22 @@
-// MvxCollectionViewSource.cs
+﻿// MvxCollectionViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
+using Foundation;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Threading.Tasks;
-
-    using Foundation;
-
-    using Attributes;
-    using ExtensionMethods;
-    using Platform.WeakSubscription;
-
-    using UIKit;
-
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {
         private IEnumerable _itemsSource;

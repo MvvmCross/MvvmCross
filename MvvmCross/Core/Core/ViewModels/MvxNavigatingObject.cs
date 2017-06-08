@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Platform;
-    using Views;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {

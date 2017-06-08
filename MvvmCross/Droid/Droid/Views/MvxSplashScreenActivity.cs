@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    using Android.OS;
-    using Android.Views;
-
-    using Core.ViewModels;
-    using Platform;
-    using MvvmCross.Platform;
-
     [Register("mvvmcross.droid.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
         : MvxActivity

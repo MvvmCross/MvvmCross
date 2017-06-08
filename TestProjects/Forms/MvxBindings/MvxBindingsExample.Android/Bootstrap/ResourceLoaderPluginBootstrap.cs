@@ -1,4 +1,4 @@
-using MvvmCross.Platform.Plugins;
+﻿using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.ResourceLoader;
 
 namespace MvxBindingsExample.Droid.Bootstrap

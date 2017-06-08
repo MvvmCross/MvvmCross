@@ -1,13 +1,13 @@
-﻿using MvvmCross.Platform;
+﻿using Windows.ApplicationModel.Activation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using Xamarin.Forms;
-using XamlControls = Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Activation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
+using MvvmCross.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
+using Xamarin.Forms;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MasterDetailExample.UWP
 {

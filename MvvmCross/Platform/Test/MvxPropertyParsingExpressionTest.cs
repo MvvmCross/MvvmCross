@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxPropertyNameFromExpressionTests
     {

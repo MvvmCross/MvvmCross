@@ -5,20 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using CoreGraphics;
-
-    using Foundation;
-
-    using BindingContext;
-    using Bindings;
-
-    using UIKit;
-
     public class MvxTableViewCell
         : UITableViewCell
           , IMvxBindable

@@ -1,13 +1,11 @@
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Mac.Views.Presenters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using Core.ViewModels;
-    using Core.Views;
-    using MvvmCross.Platform.Platform;
-
-    using Presenters;
-
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher
         , IMvxViewDispatcher

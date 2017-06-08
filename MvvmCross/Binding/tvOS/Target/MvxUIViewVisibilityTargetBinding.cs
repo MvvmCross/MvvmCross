@@ -6,15 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.UI;
+using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using Bindings.Target;
-    using Platform.Platform;
-    using Platform.UI;
-
-    using UIKit;
-
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {
         protected UIView View => (UIView)Target;

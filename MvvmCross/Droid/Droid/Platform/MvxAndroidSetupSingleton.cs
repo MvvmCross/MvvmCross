@@ -5,21 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Android.Content;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Droid.Platform
 {
-    using System;
-    using System.Linq;
-    using System.Threading;
-
-    using Android.Content;
-
-    using Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using System.Threading.Tasks;
-
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>
     {

@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding
 {
-    using Bindings.Source.Construction;
-    using Bindings.SourceSteps;
-    using Bindings.Target.Construction;
-    using Platform;
-
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
         public override void DoRegistration()

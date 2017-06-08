@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Bindings.SourceSteps;
-    using Platform;
-    using Platform.Converters;
-
     public abstract class MvxPairwiseValueCombiner
         : MvxValueCombiner
     {

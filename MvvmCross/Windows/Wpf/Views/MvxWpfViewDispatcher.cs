@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Threading;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System.Windows.Threading;
-
-    using Core.ViewModels;
-    using Core.Views;
-
     public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher
           , IMvxViewDispatcher

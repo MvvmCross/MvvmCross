@@ -6,21 +6,19 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Droid.Views;
 
 namespace MvvmCross.Droid.Views
 {
-    using System.Collections.Generic;
-
-    using Android.Content;
-    using Android.OS;
-    using Android.Views;
-    using Binding.BindingContext;
-    using Binding.Droid.BindingContext;
-    using Binding.Droid.Views;
-    using Core.ViewModels;
-    using MvvmCross.Platform.Droid.Views;
-
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.droid.views.MvxTabActivity")]
     public abstract class MvxTabActivity

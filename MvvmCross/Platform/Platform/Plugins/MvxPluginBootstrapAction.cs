@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using Platform;
-
     public class MvxPluginBootstrapAction<TPlugin>
         : IMvxBootstrapAction
     {

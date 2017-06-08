@@ -11,13 +11,13 @@
 
 #endregion Credit - MvvmLight
 
+using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interactivity;
+
 namespace MvvmCross.Wpf.Commands
 {
-    using System;
-    using System.Windows;
-    using System.Windows.Input;
-    using System.Windows.Interactivity;
-
     public class MvxEventToCommand : TriggerAction<DependencyObject>
     {
         /// <summary>

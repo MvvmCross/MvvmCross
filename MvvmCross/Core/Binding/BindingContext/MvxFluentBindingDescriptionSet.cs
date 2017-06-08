@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System.Collections.Generic;
-
-    using Bindings;
-    using Platform.Core;
-
     public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
         : MvxApplicable
         where TOwningTarget : class, IMvxBindingContextOwner

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Mac.Views
 {
-    using Core.ViewModels;
-
     public interface IMvxMacViewCreator
     {
         IMvxMacView CreateView(MvxViewModelRequest request);

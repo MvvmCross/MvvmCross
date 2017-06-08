@@ -1,15 +1,15 @@
-// MvxCompositeViewTypeResolver.cs
+﻿// MvxCompositeViewTypeResolver.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+
 namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
-    using System;
-    using System.Collections.Generic;
-
     public class MvxCompositeViewTypeResolver : IMvxViewTypeResolver
     {
         private readonly List<IMvxViewTypeResolver> _resolvers;

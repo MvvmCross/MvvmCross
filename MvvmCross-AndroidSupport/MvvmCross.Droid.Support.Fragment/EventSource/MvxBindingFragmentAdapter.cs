@@ -1,24 +1,24 @@
-// MvxBindingFragmentAdapter.cs
+﻿// MvxBindingFragmentAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Support.V4.App;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using System;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared;
-using MvvmCross.Droid.Shared.Attributes;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {

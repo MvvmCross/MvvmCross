@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+using NUnit.Framework;
 
 namespace MvvmCross.Platform.Test
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Exceptions;
-    using Parse;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxParserTest
     {

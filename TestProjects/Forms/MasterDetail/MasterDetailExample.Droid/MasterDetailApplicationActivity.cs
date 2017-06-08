@@ -1,12 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using Android.App;
 using Android.OS;
-using MvvmCross.Platform;
-using MvvmCross.Core.Views;
 using MvvmCross.Core.ViewModels;
-using Android.App;
+using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Platform;
+using Xamarin.Forms;
 
 namespace MasterDetailExample.Droid
 {

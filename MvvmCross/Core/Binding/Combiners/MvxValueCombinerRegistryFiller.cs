@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Binders;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-
-    using Binders;
-
     public class MvxValueCombinerRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>
           , IMvxValueCombinerRegistryFiller

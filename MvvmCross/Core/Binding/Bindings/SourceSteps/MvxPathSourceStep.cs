@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Source;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-
-    using Source;
-    using Source.Construction;
-    using Platform.Converters;
-
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
         private IMvxSourceBinding _sourceBinding;

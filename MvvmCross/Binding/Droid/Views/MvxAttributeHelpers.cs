@@ -1,17 +1,16 @@
-// MvxAttributeHelpers.cs
+﻿// MvxAttributeHelpers.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Content;
+using Android.Util;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using Android.Content;
-    using Android.Util;
-
-    using ResourceHelpers;
-
     public static class MvxAttributeHelpers
     {
         public static int ReadDropDownListItemTemplateId(Context context, IAttributeSet attrs)

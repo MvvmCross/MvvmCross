@@ -1,8 +1,8 @@
+using System;
+using Foundation;
+
 namespace MvvmCross.Mac.ExtensionMethods
 {
-    using System;
-    using Foundation;
-
     public static class MvxMacDateTimeExtensionMethods
     {
         private static readonly DateTime ReferenceNSDateTime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);

@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using Binding.BindingContext;
-    using MvvmCross.Platform.Platform;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxMacView MacView

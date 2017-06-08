@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+using Android.Content;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using Android.App;
-    using Android.Content;
-
     public class MvxActivityResultParameters
     {
         public MvxActivityResultParameters(int requestCode, Result resultCode, Intent data)

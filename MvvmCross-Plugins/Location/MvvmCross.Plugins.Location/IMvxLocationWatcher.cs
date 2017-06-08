@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.Location
 {

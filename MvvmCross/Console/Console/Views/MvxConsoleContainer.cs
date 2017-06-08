@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
     {
@@ -77,7 +76,7 @@ namespace MvvmCross.Console.Views
             {
                 if (!CanGoBack())
                 {
-                    Console.WriteLine("Back not possible");
+                    System.Console.WriteLine("Back not possible");
                     return;
                 }
 

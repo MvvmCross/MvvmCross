@@ -1,9 +1,9 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Views;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Views;
-    using UIKit;
-
     public class BaseViewController<TViewModel> : MvxViewController<TViewModel> where TViewModel : class, IMvxViewModel
     {
         /// <summary>

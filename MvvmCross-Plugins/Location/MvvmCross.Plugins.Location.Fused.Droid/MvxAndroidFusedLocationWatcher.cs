@@ -2,10 +2,10 @@
 using System.Threading;
 using Android.Content;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {

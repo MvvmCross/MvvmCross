@@ -1,22 +1,23 @@
-// MvxListItemView.cs
+﻿// MvxListItemView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using Object = Java.Lang.Object;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Views;
-    using Binding.BindingContext;
-    using BindingContext;
-
     [Register("mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView 
-        : Java.Lang.Object
+        : Object
         , IMvxListItemView
         , IMvxBindingContextOwner
         , View.IOnAttachStateChangeListener

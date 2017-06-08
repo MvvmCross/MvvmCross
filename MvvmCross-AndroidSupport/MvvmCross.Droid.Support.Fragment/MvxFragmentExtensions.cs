@@ -1,4 +1,4 @@
-// MvxFragmentExtensions.cs
+﻿// MvxFragmentExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,17 +9,17 @@ using System;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
-using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Droid.Support.V4
 {

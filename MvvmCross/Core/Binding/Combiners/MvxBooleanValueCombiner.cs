@@ -1,14 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Binding.Combiners
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using ExtensionMethods;
-    using Platform.Converters;
-
-	public class MvxInvertedValueCombiner
+    public class MvxInvertedValueCombiner
 			: MvxBooleanValueCombiner
 	{
 		protected override bool TryCombine(List<bool> stepValues, out object value)

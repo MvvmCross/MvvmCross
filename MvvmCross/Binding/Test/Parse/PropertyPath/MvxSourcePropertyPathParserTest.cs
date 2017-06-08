@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Parse.PropertyPath;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using NUnit.Framework;
+
 namespace MvvmCross.Binding.Test.Parse.PropertyPath
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Parse.PropertyPath;
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSourcePropertyPathParserTest
     {

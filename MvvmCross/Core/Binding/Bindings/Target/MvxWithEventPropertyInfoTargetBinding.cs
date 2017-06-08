@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.ComponentModel;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.ComponentModel;
-    using System.Reflection;
-
-    using Platform;
-    using Platform.Platform;
-    using Platform.WeakSubscription;
-
     public class MvxWithEventPropertyInfoTargetBinding
         : MvxPropertyInfoTargetBinding
     {

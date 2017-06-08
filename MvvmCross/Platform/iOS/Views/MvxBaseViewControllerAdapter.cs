@@ -5,14 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using UIKit;
+
 namespace MvvmCross.Platform.iOS.Views
 {
-    using System;
-
-    using Core;
-
-    using UIKit;
-
     public class MvxBaseViewControllerAdapter
     {
         private readonly IMvxEventSourceViewController _eventSource;

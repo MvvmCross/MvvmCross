@@ -5,22 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Threading;
-using MvvmCross.Platform;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings
 {
-    using System;
-
-    using SourceSteps;
-    using Target;
-    using Target.Construction;
-    using Platform.Converters;
-    using Platform.Exceptions;
-    using Platform.IoC;
-    using Platform.Platform;
-
     public class MvxFullBinding
         : MvxBinding
           , IMvxUpdateableBinding

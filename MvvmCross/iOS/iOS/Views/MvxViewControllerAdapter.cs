@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.iOS.Views;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Core.Views;
-    using MvvmCross.Platform.iOS.Views;
-
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxIosView IosView => ViewController as IMvxIosView;

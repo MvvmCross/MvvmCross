@@ -1,13 +1,11 @@
-﻿namespace MvvmCross.Binding.iOS.Target
+﻿using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
+namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using Bindings.Target;
-    using Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
     {
         private bool _subscribed;

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-
     public class MvxLiteralSourceStep : MvxSourceStep<MvxLiteralSourceStepDescription>
     {
         public MvxLiteralSourceStep(MvxLiteralSourceStepDescription description)

@@ -1,20 +1,18 @@
-// MvxImageViewWrapper.cs
+﻿// MvxImageViewWrapper.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using Platform;
-    using Platform.Core;
-    using Platform.Platform;
-
-    using UIKit;
-
     public class MvxImageViewWrapper
         : IDisposable
     {

@@ -1,14 +1,12 @@
-﻿using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using MvvmCross.Platform.Core;
-using System;
-using Android.Support.V17.Leanback.App;
-
-
-using MvvmCross.Droid.Shared.Fragments.EventSource;
-using MvvmCross.Droid.Shared;
+﻿using System;
 using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V17.Leanback.App;
+using Android.Views;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {

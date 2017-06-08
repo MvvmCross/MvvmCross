@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using Parse.PropertyPath.PropertyTokens;
-
     public class MvxSimpleChainedSourceBinding
         : MvxChainedSourceBinding
     {

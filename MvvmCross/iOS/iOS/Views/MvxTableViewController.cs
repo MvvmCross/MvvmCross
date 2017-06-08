@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.iOS.Views;
+using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using Binding.BindingContext;
-    using Core.ViewModels;
-    using MvvmCross.Platform.iOS.Views;
-
-    using UIKit;
-
     public class MvxTableViewController
         : MvxEventSourceTableViewController
           , IMvxIosView

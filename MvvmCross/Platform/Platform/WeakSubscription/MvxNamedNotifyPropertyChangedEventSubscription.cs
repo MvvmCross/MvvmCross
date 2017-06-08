@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-
-    using Core;
-
     public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription
     {

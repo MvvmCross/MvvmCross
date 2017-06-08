@@ -1,19 +1,18 @@
-// MvxAndroidBindingResource.cs
+﻿// MvxAndroidBindingResource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.ResourceHelpers
-{
-    using System;
-
-    using Platform;
-    using Platform.Core;
-    using Platform.Exceptions;
-    using Platform.Platform;
-
+{ 
     public class MvxAndroidBindingResource
         : MvxSingleton<IMvxAndroidBindingResource>
         , IMvxAndroidBindingResource

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.iOS.Platform
 {
-    using Exceptions;
-
     public class MvxIosVersion
     {
         public MvxIosVersion(int[] parts)

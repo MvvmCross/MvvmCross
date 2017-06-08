@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Windows.Controls;
+
 namespace MvvmCross.Wpf.Commands
 {
-    using System.Windows.Controls;
-
     public class MvxSelectionChangedEventToCommand : MvxWithArgsEventToCommand
     {
         protected override object MapCommandParameter(object parameter)

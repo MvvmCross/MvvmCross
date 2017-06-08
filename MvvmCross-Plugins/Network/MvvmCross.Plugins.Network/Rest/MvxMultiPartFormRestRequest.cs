@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.Network.Rest
 {

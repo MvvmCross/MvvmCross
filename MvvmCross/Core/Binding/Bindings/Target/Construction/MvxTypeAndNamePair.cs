@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
-    using System;
-
     public class MvxTypeAndNamePair
     {
         public MvxTypeAndNamePair()

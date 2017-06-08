@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.ComponentModel;
+using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Core;
+using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
+using NUnit.Framework;
 
 namespace MvvmCross.Test.ViewModels
 {
-    using System.ComponentModel;
-    using System.Windows.Input;
-
-    using MvvmCross.Core.ViewModels;
-    using Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxCommandCollectionTest : MvxIoCSupportingTest
     {

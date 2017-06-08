@@ -1,11 +1,11 @@
 ﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views.Presenters.Attributes;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using UIKit;
+ using System.Collections.Generic;
+ using System.Linq;
+ using MvvmCross.Core.ViewModels;
+ using MvvmCross.iOS.Views.Presenters.Attributes;
+ using MvvmCross.Platform.Exceptions;
+ using MvvmCross.Platform.Platform;
+ using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters
 {

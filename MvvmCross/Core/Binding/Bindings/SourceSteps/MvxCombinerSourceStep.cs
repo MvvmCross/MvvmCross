@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Platform.Converters;
-    using Platform.Exceptions;
-
     public class MvxCombinerSourceStep : MvxSourceStep<MvxCombinerSourceStepDescription>
     {
         private readonly List<IMvxSourceStep> _subSteps;

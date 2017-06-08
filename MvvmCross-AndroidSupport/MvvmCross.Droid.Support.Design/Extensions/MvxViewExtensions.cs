@@ -1,4 +1,3 @@
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Views.Animations;
 

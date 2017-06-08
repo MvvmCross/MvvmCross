@@ -5,22 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
 using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Droid.Views;
 
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.OS;
-    using Android.Runtime;
-
-    using Binding.BindingContext;
-    using Binding.Droid.BindingContext;
-    using Binding.Droid.Views;
-    using Core.ViewModels;
-    using MvvmCross.Platform.Droid.Views;
-
     [Register("mvvmcross.droid.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity

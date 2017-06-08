@@ -1,15 +1,15 @@
+using Cirrious.FluentLayouts.Touch;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebar.Views;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using Foundation;
-    using XamarinSidebar;
-    using XamarinSidebar.Attributes;
-    using XamarinSidebar.Views;
-    using MvvmCross.Platform;
-    using UIKit;
-
     [Register("MasterView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true, MvxSplitViewBehaviour.Master)]
     public class MasterView : BaseViewController<MasterViewModel>

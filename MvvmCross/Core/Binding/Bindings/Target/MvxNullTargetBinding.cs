@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-
     public class MvxNullTargetBinding : MvxTargetBinding
     {
         public MvxNullTargetBinding()

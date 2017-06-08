@@ -9,11 +9,11 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using CoreGraphics;
+using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS

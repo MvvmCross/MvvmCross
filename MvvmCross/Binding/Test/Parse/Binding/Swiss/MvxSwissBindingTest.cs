@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Binding.Parse.Binding.Swiss;
+using MvvmCross.Platform.Platform;
+using NUnit.Framework;
+
 namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    using MvvmCross.Binding.Parse.Binding;
-    using MvvmCross.Binding.Parse.Binding.Swiss;
-    using Platform.Platform;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSwissBindingTest
         : MvxBaseSwissBindingTest<MvxSwissBindingParser>

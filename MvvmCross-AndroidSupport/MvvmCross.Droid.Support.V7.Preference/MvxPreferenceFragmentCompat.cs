@@ -1,8 +1,7 @@
+﻿using System;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4;
 
@@ -54,7 +53,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
     public abstract class MvxPreferenceFragmentCompat<TViewModel>
         : MvxPreferenceFragmentCompat
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
 
         protected MvxPreferenceFragmentCompat()

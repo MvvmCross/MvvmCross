@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using UIKit;
+
 namespace MvvmCross.Platform.iOS.Platform
 {
-    using System.Linq;
-
-    using UIKit;
-
     public class MvxIosSystem
         : IMvxIosSystem
     {

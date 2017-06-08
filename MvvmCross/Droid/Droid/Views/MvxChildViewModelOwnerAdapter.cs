@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using MvvmCross.Platform.Droid.Views;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxChildViewModelOwnerAdapter : MvxBaseActivityAdapter
     {
         protected IMvxChildViewModelOwner ChildOwner => (IMvxChildViewModelOwner)Activity;

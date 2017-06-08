@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Core.Views;
-    using MvvmCross.Platform.tvOS.Views;
-
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxTvosView TvosView => ViewController as IMvxTvosView;

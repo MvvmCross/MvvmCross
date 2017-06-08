@@ -5,11 +5,10 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using Java.Lang;
-using Fragment = Android.Support.V4.App.Fragment;
+using MvvmCross.Platform;
 using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4

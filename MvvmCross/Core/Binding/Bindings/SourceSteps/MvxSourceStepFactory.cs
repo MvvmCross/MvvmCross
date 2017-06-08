@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Platform.Exceptions;
-
     public class MvxSourceStepFactory : IMvxSourceStepFactoryRegistry
     {
         private readonly Dictionary<Type, IMvxSourceStepFactory> _subFactories =

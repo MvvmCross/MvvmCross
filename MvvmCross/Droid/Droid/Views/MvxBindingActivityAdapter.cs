@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.OS;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Droid.Views;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.OS;
-
-    using Binding.BindingContext;
-    using Binding.Droid.BindingContext;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Droid.Views;
-
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter
     {

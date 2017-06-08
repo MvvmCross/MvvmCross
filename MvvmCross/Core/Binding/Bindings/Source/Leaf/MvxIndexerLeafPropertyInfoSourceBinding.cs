@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
-    using System.Reflection;
-
-    using Parse.PropertyPath.PropertyTokens;
-
     public class MvxIndexerLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
         private readonly object _key;

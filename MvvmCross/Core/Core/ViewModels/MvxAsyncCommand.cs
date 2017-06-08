@@ -1,13 +1,12 @@
-﻿namespace MvvmCross.Core.ViewModels
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.ExtensionMethods;
+using MvvmCross.Platform.Platform;
+
+namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase
     {

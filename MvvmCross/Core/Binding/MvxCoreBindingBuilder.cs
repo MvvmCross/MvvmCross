@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.ExpressionParse;
+using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Binding.Parse.Binding.Tibet;
+using MvvmCross.Binding.Parse.PropertyPath;
+using MvvmCross.Binding.ValueConverters;
+using MvvmCross.Localization;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding
 {
-    using Binders;
-    using BindingContext;
-    using Combiners;
-    using ExpressionParse;
-    using Parse.Binding;
-    using Parse.Binding.Lang;
-    using Parse.Binding.Tibet;
-    using Parse.PropertyPath;
-    using ValueConverters;
-    using Localization;
-    using Platform;
-    using Platform.Converters;
-    using Platform.Platform;
-
     public class MvxCoreBindingBuilder
     {
         public virtual void DoRegistration()
