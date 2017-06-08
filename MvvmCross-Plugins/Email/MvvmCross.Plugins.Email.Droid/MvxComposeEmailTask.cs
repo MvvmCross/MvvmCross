@@ -20,7 +20,7 @@ using File = Java.IO.File;
 
 namespace MvvmCross.Plugins.Email.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxComposeEmailTask
         : MvxAndroidTask
         , IMvxComposeEmailTaskEx

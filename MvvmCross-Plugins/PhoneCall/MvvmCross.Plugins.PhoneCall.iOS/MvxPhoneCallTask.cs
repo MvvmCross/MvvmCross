@@ -11,7 +11,7 @@ using Foundation;
 
 namespace MvvmCross.Plugins.PhoneCall.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask
     {
         public void MakePhoneCall(string name, string number)

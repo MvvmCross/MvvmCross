@@ -13,7 +13,7 @@ using MvvmCross.Plugins.Network.Reachability;
 
 namespace MvvmCross.Plugins.Network.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxReachability
         : IMvxReachability
     {

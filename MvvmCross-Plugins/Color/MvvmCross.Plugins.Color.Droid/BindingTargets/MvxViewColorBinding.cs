@@ -12,7 +12,7 @@ using MvvmCross.Binding.Droid.Target;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding
     {

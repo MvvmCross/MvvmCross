@@ -12,7 +12,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.File.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxConfigurablePlugin
     {

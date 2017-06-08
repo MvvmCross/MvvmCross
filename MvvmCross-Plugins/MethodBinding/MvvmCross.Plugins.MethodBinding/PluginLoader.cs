@@ -11,7 +11,7 @@ using MvvmCross.Binding.Bindings.Source.Construction;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
     {

@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.Visibility
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
 

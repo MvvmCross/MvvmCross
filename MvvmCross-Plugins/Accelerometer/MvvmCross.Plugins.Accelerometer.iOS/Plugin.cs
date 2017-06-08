@@ -12,7 +12,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Accelerometer.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
     {

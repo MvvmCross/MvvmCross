@@ -15,7 +15,7 @@ using System.Collections.Immutable;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxImageCache<T>
         : MvxMainThreadDispatchingObject
         , IMvxImageCache<T>

@@ -11,7 +11,7 @@ using Java.Lang;
 
 namespace MvvmCross.Plugins.Location.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxLocationListener
         : Object
         , ILocationListener

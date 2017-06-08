@@ -9,7 +9,7 @@ using System.Net;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxRestResponse
     {
         public string Tag { get; set; }

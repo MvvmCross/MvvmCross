@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxFileDownloadCache
         : MvxLockableObject
         , IMvxFileDownloadCache

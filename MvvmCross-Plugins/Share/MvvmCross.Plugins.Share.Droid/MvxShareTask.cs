@@ -10,7 +10,7 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.Share.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxAndroidTask
           , IMvxShareTask

@@ -3,7 +3,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class Plugin
 		: IMvxPlugin
 	{

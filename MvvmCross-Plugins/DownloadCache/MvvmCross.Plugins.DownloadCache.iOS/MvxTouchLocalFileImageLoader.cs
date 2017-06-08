@@ -13,7 +13,7 @@ using UIKit;
 
 namespace MvvmCross.Plugins.DownloadCache.iOS
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxIosLocalFileImageLoader
         : MvxMainThreadDispatchingObject
         , IMvxLocalFileImageLoader<UIImage>

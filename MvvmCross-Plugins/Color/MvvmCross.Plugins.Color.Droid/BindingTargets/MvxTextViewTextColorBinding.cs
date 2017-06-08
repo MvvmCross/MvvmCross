@@ -9,7 +9,7 @@ using Android.Widget;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxTextViewTextColorBinding
         : MvxViewColorBinding
     {

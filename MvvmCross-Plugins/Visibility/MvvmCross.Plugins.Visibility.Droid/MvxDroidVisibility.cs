@@ -10,7 +10,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Droid
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxDroidVisibility : IMvxNativeVisibility
     {
         public object ToNative(MvxVisibility visibility)

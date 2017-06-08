@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
-    [All.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
 	public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
