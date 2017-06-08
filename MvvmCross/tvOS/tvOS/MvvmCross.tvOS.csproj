@@ -70,7 +70,6 @@
     <Compile Include="Views\MvxTvosUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxTvosViewDispatcher.cs" />
     <Compile Include="Views\MvxTvosViewsContainer.cs" />
-    <Compile Include="Views\MvxPageViewController.cs" />
     <Compile Include="Views\MvxTabBarViewController.cs" />
     <Compile Include="Views\MvxTableViewController.cs" />
     <Compile Include="Views\MvxViewController.cs" />
@@ -81,6 +80,8 @@
     <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxModalNavSupportTvosViewPresenter.cs" />
+    <Compile Include="Views\MvxPageViewController.cs" />
+    <Compile Include="Views\MvxPageViewExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">

@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Foundation;
     using MvvmCross.Platform.Core;
 
     using UIKit;
@@ -13,6 +14,11 @@
         }
 
         public MvxEventSourcePageViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        protected MvxEventSourcePageViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
         {
         }
 
