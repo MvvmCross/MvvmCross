@@ -47,10 +47,6 @@ namespace MvvmCross.Core.Platform
             MvxTrace.Trace("Setup: Primary start");
             this.InitializeIoC();
             this.State = MvxSetupState.InitializedPrimary;
-            if (this.State != MvxSetupState.InitializedPrimary)
-            {
-                throw new MvxException("Cannot start seconday - as state is currently {0}", this.State);
-            }
             this.State = MvxSetupState.InitializingSecondary;
             MvxTrace.Trace("Setup: FirstChance start");
             this.InitializeFirstChance();
