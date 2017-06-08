@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MvvmCross.Core.ViewModels
@@ -40,7 +41,7 @@ namespace MvvmCross.Core.ViewModels
     //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains
     public interface IMvxViewModelResult<TResult> : IMvxViewModel where TResult : class
     {
-        void SetClose(TaskCompletionSource<TResult> tcs);
+        void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken);
         Task<bool> Close(TResult result);
     }
 

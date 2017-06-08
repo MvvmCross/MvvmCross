@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -99,11 +100,16 @@ namespace MvvmCross.Core.ViewModels
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
         TaskCompletionSource<TResult> _tcs;
+        CancellationToken _cancellationToken;
         bool _isClosing;
 
-        public void SetClose(TaskCompletionSource<TResult> tcs)
+        public void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken)
         {
             _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
+            _cancellationToken = cancellationToken;
+            _cancellationToken.Register(() => {
+                Close(this);
+            });
         }
 
         public virtual Task<bool> Close(TResult result)
