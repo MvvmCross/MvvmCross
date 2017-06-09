@@ -139,14 +139,6 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
-      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
-      <Name>MvvmCross.Binding.Uwp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
-      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
-      <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>

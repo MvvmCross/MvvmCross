@@ -14,7 +14,7 @@ using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
 
-[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))
+[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 namespace PageRendererExample.UI.Droid
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
