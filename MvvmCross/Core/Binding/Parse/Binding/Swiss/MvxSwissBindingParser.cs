@@ -38,14 +38,14 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         private void ParseConverterParameter(string block, MvxSerializableBindingDescription description)
         {
             ParseEquals(block);
-            if(description.ConverterParameter != null)
+            if (description.ConverterParameter != null)
                 MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
             description.ConverterParameter = ReadValue();
         }
 
         private void ParseCommandParameter(string block, MvxSerializableBindingDescription description)
         {
-            if(!IsComplete &&
+            if (!IsComplete &&
                CurrentChar == '(')
             {
                 // following https://github.com/MvvmCross/MvvmCross/issues/704, if the next character is "(" then
@@ -55,7 +55,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             else
             {
                 ParseEquals(block);
-                if(!string.IsNullOrEmpty(description.Converter))
+                if (!string.IsNullOrEmpty(description.Converter))
                     MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
                 description.Converter = "CommandParameter";
                 description.ConverterParameter = ReadValue();
@@ -65,7 +65,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         private void ParseFallbackValue(string block, MvxSerializableBindingDescription description)
         {
             ParseEquals(block);
-            if(description.FallbackValue != null)
+            if (description.FallbackValue != null)
                 MvxBindingTrace.Warning("Overwriting existing FallbackValue");
             description.FallbackValue = ReadValue();
         }
