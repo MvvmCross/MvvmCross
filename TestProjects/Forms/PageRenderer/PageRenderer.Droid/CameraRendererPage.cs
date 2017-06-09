@@ -41,17 +41,20 @@ namespace PageRendererExample.UI.Droid
         {
             base.OnElementChanged (e);
 
-            if (e.OldElement != null || Element == null) {
+            if (e.OldElement != null || Element == null) 
+            {
                 return;
             }
 
-            try {
-
+            try 
+            {
                 SetupUserInterface();
                 BindViewModel();
                 SetupEventHandlers();
                 AddView(view);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 System.Diagnostics.Debug.WriteLine(@"          ERROR: ", ex.Message);
             }
 
@@ -129,11 +132,13 @@ namespace PageRendererExample.UI.Droid
             camera.StopPreview();
 
             var display = activity.WindowManager.DefaultDisplay;
-            if (display.Rotation == SurfaceOrientation.Rotation0) {
+            if (display.Rotation == SurfaceOrientation.Rotation0) 
+            {
                 camera.SetDisplayOrientation(90);
             }
 
-            if (display.Rotation == SurfaceOrientation.Rotation270) {
+            if (display.Rotation == SurfaceOrientation.Rotation270) 
+            {
                 camera.SetDisplayOrientation(180);
             }
 
@@ -143,8 +148,10 @@ namespace PageRendererExample.UI.Droid
         private void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
             flashOn = !flashOn;
-            if (flashOn) {
-                if (cameraType == CameraFacing.Back) {
+            if (flashOn)
+            {
+                if (cameraType == CameraFacing.Back)
+                {
                     toggleFlashButton.SetBackgroundResource(Resource.Drawable.FlashButton);
                     cameraType = CameraFacing.Back;
 
@@ -157,7 +164,9 @@ namespace PageRendererExample.UI.Droid
                     camera.SetPreviewTexture(surfaceTexture);
                     PrepareAndStartCamera();
                 }
-            } else {
+            } 
+            else 
+            {
                 toggleFlashButton.SetBackgroundResource(Resource.Drawable.NoFlashButton);
                 camera.StopPreview();
                 camera.Release();
@@ -173,7 +182,8 @@ namespace PageRendererExample.UI.Droid
 
         private void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
-            if (cameraType == CameraFacing.Front) {
+            if (cameraType == CameraFacing.Front) 
+            {
                 cameraType = CameraFacing.Back;
 
                 camera.StopPreview();
@@ -181,7 +191,9 @@ namespace PageRendererExample.UI.Droid
                 camera = Camera.Open((int)cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
-            } else {
+            } 
+            else 
+            {
                 cameraType = CameraFacing.Front;
 
                 camera.StopPreview();
@@ -198,8 +210,10 @@ namespace PageRendererExample.UI.Droid
 
             var image = textureView.Bitmap;
 
-            try {
-                using (var stream = new MemoryStream()) {
+            try 
+            {
+                using (var stream = new MemoryStream()) 
+                {
                     await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 50, stream);
                     image.Recycle();
 
@@ -207,7 +221,9 @@ namespace PageRendererExample.UI.Droid
                 }
 
                 ViewModel.CloseCommand.Execute(this);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 System.Diagnostics.Debug.WriteLine(@"              ", ex.Message);
             }
         }
