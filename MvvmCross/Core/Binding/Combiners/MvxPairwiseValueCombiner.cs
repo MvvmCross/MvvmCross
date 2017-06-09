@@ -116,30 +116,30 @@ namespace MvvmCross.Binding.Combiners
         private void AddSingle<T1>(CombinerFunc<T1> combinerAction, CombinerFunc<T1> switchedCombinerAction)
         {
             _combinerActions[new TypeTuple(typeof(T1), null)] =
-                (object x, object y, out object v) => combinerAction((T1)x, out v);
+                (object x, object y, out object v) => combinerAction((T1) x, out v);
             _combinerActions[new TypeTuple(null, typeof(T1))] =
-                (object x, object y, out object v) => switchedCombinerAction((T1)y, out v);
+                (object x, object y, out object v) => switchedCombinerAction((T1) y, out v);
         }
 
         private void AddSingle<T1, T2>(CombinerFunc<T1, T2> combinerAction)
         {
             _combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
-                (object x, object y, out object v) => combinerAction((T1)x, (T2)y, out v);
+                (object x, object y, out object v) => combinerAction((T1) x, (T2) y, out v);
         }
 
         protected virtual object ForceToSimpleValueTypes(object input)
         {
             if (input is int)
             {
-                return (long)(int)input;
+                return (long) (int) input;
             }
             if (input is short)
             {
-                return (long)(short)input;
+                return (long) (short) input;
             }
             if (input is float)
             {
-                return (double)(float)input;
+                return (double) (float) input;
             }
 
             return input;

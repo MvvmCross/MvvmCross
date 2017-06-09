@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - target is null in MvxWithEventPropertyInfoTargetBinding");
+                    "Error - target is null in MvxWithEventPropertyInfoTargetBinding");
                 return;
             }
         }
@@ -36,21 +36,23 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                MvxBindingTrace.Trace(
+                    "Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
             var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
             FireValueChanged(value);
         }
-        
+
         // Note - this is public because we use it in weak referenced situations
         public void OnPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
         {
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                MvxBindingTrace.Trace(
+                    "Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
@@ -97,11 +99,11 @@ namespace MvvmCross.Binding.Bindings.Target
             if (eventInfo.EventHandlerType != typeof(EventHandler))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
-                                      viewType,
-                                      eventName,
-                                      viewType.Name,
-                                      eventInfo.EventHandlerType.Name);
+                    "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                    viewType,
+                    eventName,
+                    viewType.Name,
+                    eventInfo.EventHandlerType.Name);
                 return null;
             }
 
@@ -119,11 +121,11 @@ namespace MvvmCross.Binding.Bindings.Target
             if (eventInfo.EventHandlerType != typeof(PropertyChangedEventHandler))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
-                                      viewType,
-                                      eventName,
-                                      viewType.Name,
-                                      eventInfo.EventHandlerType.Name);
+                    "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                    viewType,
+                    eventName,
+                    viewType.Name,
+                    eventInfo.EventHandlerType.Name);
                 return null;
             }
 

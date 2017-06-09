@@ -49,10 +49,10 @@ namespace MvvmCross.Core.ViewModels
         public void AddAll(Assembly assembly)
         {
             var viewModelTypes = from type in assembly.ExceptionSafeGetTypes()
-                                 where !type.GetTypeInfo().IsAbstract
-                                 where !type.GetTypeInfo().IsInterface
-                                 where typeof(IMvxViewModel).IsAssignableFrom(type)
-                                 select type;
+                where !type.GetTypeInfo().IsAbstract
+                where !type.GetTypeInfo().IsInterface
+                where typeof(IMvxViewModel).IsAssignableFrom(type)
+                select type;
 
             foreach (var viewModelType in viewModelTypes)
             {

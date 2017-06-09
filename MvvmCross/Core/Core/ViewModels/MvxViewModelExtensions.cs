@@ -35,12 +35,12 @@ namespace MvvmCross.Core.ViewModels
             //Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Count() > 0)
                 return;
-            
+
             if (parameters.Count() == 1
                 && parameters[0].ParameterType == typeof(IMvxBundle))
             {
                 // this method is the 'normal' interface method
-                methodInfo.Invoke(viewModel, new object[] { bundle });
+                methodInfo.Invoke(viewModel, new object[] {bundle});
                 return;
             }
 
@@ -49,13 +49,13 @@ namespace MvvmCross.Core.ViewModels
             {
                 // call method using typed object
                 var value = bundle.Read(parameters[0].ParameterType);
-                methodInfo.Invoke(viewModel, new[] { value });
+                methodInfo.Invoke(viewModel, new[] {value});
                 return;
             }
 
             // call method using named method arguments. If bundle is null, the null-check makes sure that Init still is called.
             var invokeWith = bundle?.CreateArgumentList(parameters, viewModel.GetType().Name)
-                                   .ToArray();
+                .ToArray();
             methodInfo.Invoke(viewModel, invokeWith);
         }
 
@@ -63,10 +63,10 @@ namespace MvvmCross.Core.ViewModels
         {
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
-                                   .GetMethods()
-                                   .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof(void))
-                                   .Where(m => !m.GetParameters().Any());
+                .GetMethods()
+                .Where(m => m.Name == "SaveState")
+                .Where(m => m.ReturnType != typeof(void))
+                .Where(m => !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {

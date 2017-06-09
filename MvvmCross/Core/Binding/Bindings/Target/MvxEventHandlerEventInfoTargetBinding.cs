@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.Target
             // EventHandler<T> event types will need to be handled by custom bindings
             _eventHandler = new EventHandler(HandleEvent);
 
-            addMethod.Invoke(target, new[] { _eventHandler });
+            addMethod.Invoke(target, new[] {_eventHandler});
         }
 
         public override Type TargetType => typeof(ICommand);
@@ -49,7 +49,7 @@ namespace MvvmCross.Binding.Bindings.Target
                 if (target != null)
                 {
                     var removeMethod = _targetEventInfo.GetRemoveMethod();
-                    removeMethod.Invoke(target, new[] { _eventHandler });
+                    removeMethod.Invoke(target, new[] {_eventHandler});
                 }
             }
 

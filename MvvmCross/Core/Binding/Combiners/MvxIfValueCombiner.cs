@@ -33,7 +33,8 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private bool TryEvaluateIf(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
+        private bool TryEvaluateIf(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep,
+            out object value)
         {
             var result = testStep.GetValue();
             if (result == MvxBindingConstant.DoNothing)

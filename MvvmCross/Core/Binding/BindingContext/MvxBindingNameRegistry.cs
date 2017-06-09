@@ -15,7 +15,7 @@ namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBindingNameRegistry
         : IMvxBindingNameLookup
-          , IMvxBindingNameRegistry
+            , IMvxBindingNameRegistry
     {
         private readonly Dictionary<Type, string> _lookup = new Dictionary<Type, string>();
 

@@ -66,7 +66,8 @@ namespace MvvmCross.Binding
                 Mvx.Trace("source binding factory extension host not provided - so no source extensions will be used");
         }
 
-        protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)
+        protected virtual void RegisterSourceBindingFactoryExtensions(
+            IMvxSourceBindingFactoryExtensionHost extensionHost)
         {
             extensionHost.Extensions.Add(new MvxPropertySourceBindingFactoryExtension());
         }

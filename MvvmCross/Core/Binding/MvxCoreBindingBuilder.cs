@@ -159,7 +159,7 @@ namespace MvvmCross.Binding
             registry.AddOrOverwrite("And", new MvxAndValueCombiner());
             registry.AddOrOverwrite("Or", new MvxOrValueCombiner());
             registry.AddOrOverwrite("XOr", new MvxXorValueCombiner());
-			registry.AddOrOverwrite("Inverted", new MvxInvertedValueCombiner());
+            registry.AddOrOverwrite("Inverted", new MvxInvertedValueCombiner());
 
             // Note: MvxValueConverterValueCombiner is not registered - it is unconventional
             //registry.AddOrOverwrite("ValueConverter", new MvxValueConverterValueCombiner());
@@ -170,7 +170,7 @@ namespace MvvmCross.Binding
             if (Mvx.CanResolve<IMvxBindingParser>())
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Binding Parser already registered - so skipping Default parser");
+                    "Binding Parser already registered - so skipping Default parser");
                 return;
             }
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Default Binding Parser");
@@ -187,7 +187,7 @@ namespace MvvmCross.Binding
             if (Mvx.CanResolve<IMvxLanguageBindingParser>())
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Binding Parser already registered - so skipping Language parser");
+                    "Binding Parser already registered - so skipping Language parser");
                 return;
             }
             MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Registering Language Binding Parser");

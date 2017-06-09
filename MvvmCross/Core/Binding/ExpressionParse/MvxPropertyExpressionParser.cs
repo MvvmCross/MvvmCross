@@ -19,13 +19,13 @@ namespace MvvmCross.Binding.ExpressionParse
     {
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            if (propertyPath.Body is MethodCallExpression 
+            if (propertyPath.Body is MethodCallExpression
                 && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
             {
                 return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
             }
 
-            return Parse((LambdaExpression)propertyPath);
+            return Parse((LambdaExpression) propertyPath);
         }
 
         public IMvxParsedExpression Parse(LambdaExpression propertyPath)
@@ -66,7 +66,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MethodCallExpression)current;
+            var me = (MethodCallExpression) current;
             if (me.Method.Name != "get_Item"
                 || me.Arguments.Count != 1)
             {
@@ -125,7 +125,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
         {
-            var me = (MemberExpression)current;
+            var me = (MemberExpression) current;
             toReturn.PrependProperty(me.Member.Name);
             current = me.Expression;
             return current;
@@ -133,7 +133,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         private static Expression Unbox(Expression current)
         {
-            var ue = (UnaryExpression)current;
+            var ue = (UnaryExpression) current;
             current = ue.Operand;
             return current;
         }

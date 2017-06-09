@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Combiners
 {
     public class MvxValueCombinerRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>
-          , IMvxValueCombinerRegistryFiller
+            , IMvxValueCombinerRegistryFiller
     {
         public override string FindName(Type type)
         {

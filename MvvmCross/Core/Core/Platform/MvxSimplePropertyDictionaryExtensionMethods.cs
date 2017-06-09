@@ -47,14 +47,15 @@ namespace MvvmCross.Core.Platform
         public static T Read<T>(this IDictionary<string, string> data)
             where T : new()
         {
-            return (T)data.Read(typeof(T));
+            return (T) data.Read(typeof(T));
         }
 
         public static object Read(this IDictionary<string, string> data, Type type)
         {
             var t = Activator.CreateInstance(type);
             var propertyList =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite);
+                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                    .Where(p => p.CanWrite);
 
             foreach (var propertyInfo in propertyList)
             {
@@ -63,7 +64,7 @@ namespace MvvmCross.Core.Platform
                     continue;
 
                 var typedValue = MvxSingletonCache.Instance.Parser.ReadValue(textValue, propertyInfo.PropertyType,
-                                                                             propertyInfo.Name);
+                    propertyInfo.Name);
                 propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
@@ -71,8 +72,8 @@ namespace MvvmCross.Core.Platform
         }
 
         public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
-                                                             IEnumerable<ParameterInfo> requiredParameters,
-                                                             string debugText)
+            IEnumerable<ParameterInfo> requiredParameters,
+            string debugText)
         {
             var argumentList = new List<object>();
             foreach (var requiredParameter in requiredParameters)
@@ -83,7 +84,8 @@ namespace MvvmCross.Core.Platform
             return argumentList;
         }
 
-        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string debugText)
+        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter,
+            string debugText)
         {
             string parameterValue;
             if (data == null ||
@@ -102,7 +104,7 @@ namespace MvvmCross.Core.Platform
             }
 
             var value = MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
-                                                                    requiredParameter.Name);
+                requiredParameter.Name);
             return value;
         }
 
@@ -112,18 +114,18 @@ namespace MvvmCross.Core.Platform
                 return new Dictionary<string, string>();
 
             if (input is IDictionary<string, string>)
-                return (IDictionary<string, string>)input;
+                return (IDictionary<string, string>) input;
 
             var propertyInfos = from property in input.GetType()
-                                                      .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                                     BindingFlags.FlattenHierarchy)
-                                where property.CanRead
-                                select new
-                                {
-                                    CanSerialize =
-                                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
-                                    Property = property
-                                };
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public |
+                                   BindingFlags.FlattenHierarchy)
+                where property.CanRead
+                select new
+                {
+                    CanSerialize =
+                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
+                    Property = property
+                };
 
             var dictionary = new Dictionary<string, string>();
             foreach (var propertyInfo in propertyInfos)

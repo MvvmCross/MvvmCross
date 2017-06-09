@@ -89,8 +89,8 @@ namespace MvvmCross.Binding.Parse.Binding
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Failed to parse binding specification starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                    "Failed to parse binding specification starting with {0}",
+                    text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
             }
 
@@ -98,7 +98,7 @@ namespace MvvmCross.Binding.Parse.Binding
                 return null;
 
             return from item in specification
-                   select SerializableBindingToBinding(item.Key, item.Value);
+                select SerializableBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
@@ -108,8 +108,8 @@ namespace MvvmCross.Binding.Parse.Binding
             if (!parser.TryParseBindingDescription(text, out description))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Failed to parse binding description starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                    "Failed to parse binding description starting with {0}",
+                    text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
             }
 
@@ -120,7 +120,7 @@ namespace MvvmCross.Binding.Parse.Binding
         }
 
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
-                                                                  MvxSerializableBindingDescription description)
+            MvxSerializableBindingDescription description)
         {
             return new MvxBindingDescription
             {
@@ -168,8 +168,8 @@ namespace MvvmCross.Binding.Parse.Binding
                     {
                         Combiner = combiner,
                         InnerSteps = description.Sources == null
-                            ? new List<MvxSourceStepDescription>() :
-                            description.Sources.Select(s => SourceStepDescriptionFrom(s)).ToList(),
+                            ? new List<MvxSourceStepDescription>()
+                            : description.Sources.Select(s => SourceStepDescriptionFrom(s)).ToList(),
                         Converter = FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue
@@ -194,7 +194,8 @@ namespace MvvmCross.Binding.Parse.Binding
                     }
                     else if (description.Sources.Count > 2)
                     {
-                        MvxBindingTrace.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        MvxBindingTrace.Error("Value Converter {0} supplied with too many parameters - {1}",
+                            description.Function, description.Sources.Count);
                         return new MvxLiteralSourceStepDescription()
                         {
                             Literal = null,
@@ -205,7 +206,8 @@ namespace MvvmCross.Binding.Parse.Binding
                         return new MvxCombinerSourceStepDescription()
                         {
                             Combiner = new MvxValueConverterValueCombiner(converter),
-                            InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source)).ToList(),
+                            InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source))
+                                .ToList(),
                             Converter = FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,
                             FallbackValue = description.FallbackValue

@@ -20,7 +20,7 @@ namespace MvvmCross.Core.Navigation
             bool found = cache.TryGetValue(key, out item);
             if (found)
             {
-                return (T)item;
+                return (T) item;
             }
             return defaultValue;
         }

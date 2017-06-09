@@ -34,7 +34,8 @@ namespace MvvmCross.Core.ViewModels
         }
 
         // Note - this is public because we use it in weak referenced situations
-        public virtual void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        public virtual void NotificationObjectOnPropertyChanged(object sender,
+            PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
@@ -93,7 +94,7 @@ namespace MvvmCross.Core.ViewModels
         //}
 
         public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> propertyExpression,
-                                                            PropertyChangedEventHandler handler)
+            PropertyChangedEventHandler handler)
         {
             var propertyName = _notificationObject.GetPropertyNameFromExpression(propertyExpression);
             return Listen(propertyName, handler);

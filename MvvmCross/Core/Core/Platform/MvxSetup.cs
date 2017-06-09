@@ -224,14 +224,14 @@ namespace MvvmCross.Core.Platform
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = CreatePluginManager();
-            AddPluginsLoaders (pluginManager.Registry);
+            AddPluginsLoaders(pluginManager.Registry);
             pluginManager.ConfigurationSource = GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
             LoadPlugins(pluginManager);
             return pluginManager;
         }
 
-        protected virtual void AddPluginsLoaders (MvxLoaderPluginRegistry registry)
+        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
         {
         }
 
@@ -289,14 +289,14 @@ namespace MvvmCross.Core.Platform
         protected virtual IEnumerable<Assembly> GetViewAssemblies()
         {
             var assembly = GetType().GetTypeInfo().Assembly;
-            return new[] { assembly };
+            return new[] {assembly};
         }
 
         protected virtual IEnumerable<Assembly> GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().GetTypeInfo().Assembly;
-            return new[] { assembly };
+            return new[] {assembly};
         }
 
         protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
@@ -407,7 +407,8 @@ namespace MvvmCross.Core.Platform
                 case MvxSetupState.InitializingPrimary:
                 case MvxSetupState.InitializedPrimary:
                 case MvxSetupState.InitializingSecondary:
-                    throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
+                    throw new MvxException(
+                        "The default EnsureInitialized method does not handle partial initialization");
                 case MvxSetupState.Initialized:
                     break;
 

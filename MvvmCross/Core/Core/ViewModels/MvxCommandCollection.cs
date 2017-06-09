@@ -17,7 +17,9 @@ namespace MvvmCross.Core.ViewModels
     {
         private readonly object _owner;
         private readonly Dictionary<string, IMvxCommand> _commandLookup = new Dictionary<string, IMvxCommand>();
-        private readonly Dictionary<string, List<IMvxCommand>> _canExecuteLookup = new Dictionary<string, List<IMvxCommand>>();
+
+        private readonly Dictionary<string, List<IMvxCommand>> _canExecuteLookup =
+            new Dictionary<string, List<IMvxCommand>>();
 
         public MvxCommandCollection(object owner)
         {

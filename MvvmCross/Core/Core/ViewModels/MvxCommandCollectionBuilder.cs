@@ -41,13 +41,13 @@ namespace MvvmCross.Core.ViewModels
         {
             var commandMethods =
                 from method in
-                    owner.GetType()
-                         .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                owner.GetType()
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 let parameterCount = method.GetParameters().Count()
                 where parameterCount <= 1
                 let commandName = GetCommandNameOrNull(method)
                 where !string.IsNullOrEmpty(commandName)
-                select new { Method = method, CommandName = commandName, HasParameter = parameterCount > 0 };
+                select new {Method = method, CommandName = commandName, HasParameter = parameterCount > 0};
 
             foreach (var item in commandMethods)
             {
@@ -56,14 +56,14 @@ namespace MvvmCross.Core.ViewModels
         }
 
         protected virtual void CreateCommand(object owner, MvxCommandCollection collection, MethodInfo commandMethod,
-                                             string commandName, bool hasParameter)
+            string commandName, bool hasParameter)
         {
             var canExecuteProperty = CanExecutePropertyInfo(owner.GetType(), commandMethod);
 
             var helper = hasParameter
-                             ? (IMvxCommandBuilder)
-                               new MvxParameterizedCommandBuilder(commandMethod, canExecuteProperty)
-                             : new MvxCommandBuilder(commandMethod, canExecuteProperty);
+                ? (IMvxCommandBuilder)
+                new MvxParameterizedCommandBuilder(commandMethod, canExecuteProperty)
+                : new MvxCommandBuilder(commandMethod, canExecuteProperty);
 
             var command = helper.ToCommand(owner);
             collection.Add(command, commandName, helper.CanExecutePropertyName);
@@ -74,7 +74,8 @@ namespace MvvmCross.Core.ViewModels
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
                 return null;
-            var canExecute = type.GetProperty(canExecuteName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            var canExecute = type.GetProperty(canExecuteName,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             if (canExecute == null)
                 return null;
             if (canExecute.PropertyType != typeof(bool))
@@ -122,7 +123,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected MvxCommandAttribute CommandAttribute(MethodInfo method)
         {
-            return (MvxCommandAttribute)method.GetCustomAttributes(typeof(MvxCommandAttribute), true).FirstOrDefault();
+            return (MvxCommandAttribute) method.GetCustomAttributes(typeof(MvxCommandAttribute), true).FirstOrDefault();
         }
 
         protected virtual string CanExecuteProperyName(MethodInfo method)
@@ -175,7 +176,7 @@ namespace MvvmCross.Core.ViewModels
                 var executeAction = new Action(() => ExecuteMethodInfo.Invoke(owner, new object[0]));
                 Func<bool> canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = () => (bool)CanExecutePropertyInfo.GetValue(owner, null);
+                    canExecuteFunc = () => (bool) CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand(executeAction, canExecuteFunc);
             }
@@ -190,10 +191,10 @@ namespace MvvmCross.Core.ViewModels
 
             public override IMvxCommand ToCommand(object owner)
             {
-                var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] { obj }));
+                var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] {obj}));
                 Func<object, bool> canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
-                    canExecuteFunc = (ignored) => (bool)CanExecutePropertyInfo.GetValue(owner, null);
+                    canExecuteFunc = (ignored) => (bool) CanExecutePropertyInfo.GetValue(owner, null);
 
                 return new MvxCommand<object>(executeAction, canExecuteFunc);
             }

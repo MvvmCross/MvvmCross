@@ -31,12 +31,12 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         }
 
         protected virtual bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                               out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (string.IsNullOrEmpty(targetName))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                    "Empty binding target passed to MvxTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }
@@ -73,7 +73,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         }
 
         protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName,
-                                                               out IMvxTargetBinding binding)
+            out IMvxTargetBinding binding)
         {
             if (target == null)
             {
@@ -104,7 +104,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         private static int GenerateKey(Type type, string name)
         {
-			return (type.GetHashCode () * 9) ^ name.GetHashCode ();
+            return (type.GetHashCode() * 9) ^ name.GetHashCode();
         }
 
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)

@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.Combiners
         }
 
         public virtual IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps,
-                                                            Type overallTargetType)
+            Type overallTargetType)
         {
             // by default a combiner just demand objects from its sources
             return subSteps.Select(x => typeof(object));

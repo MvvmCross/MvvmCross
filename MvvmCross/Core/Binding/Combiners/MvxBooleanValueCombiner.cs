@@ -7,15 +7,15 @@ using MvvmCross.Platform.Converters;
 namespace MvvmCross.Binding.Combiners
 {
     public class MvxInvertedValueCombiner
-			: MvxBooleanValueCombiner
-	{
-		protected override bool TryCombine(List<bool> stepValues, out object value)
-		{
-			value = stepValues.Any(x => !x)
-							  && true;
-			return true;
-		}
-	}
+        : MvxBooleanValueCombiner
+    {
+        protected override bool TryCombine(List<bool> stepValues, out object value)
+        {
+            value = stepValues.Any(x => !x)
+                    && true;
+            return true;
+        }
+    }
 
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Combiners
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
             value = stepValues.Any(x => !x)
-                && stepValues.Any(x => x);
+                    && stepValues.Any(x => x);
             return true;
         }
     }

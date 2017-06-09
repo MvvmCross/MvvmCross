@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.ValueConverters
         : MvxValueConverter<ICommand, ICommand>
     {
         protected override ICommand Convert(ICommand value, Type targetType, object parameter,
-                                            CultureInfo culture)
+            CultureInfo culture)
         {
             return new MvxWrappingCommand(value, parameter);
         }

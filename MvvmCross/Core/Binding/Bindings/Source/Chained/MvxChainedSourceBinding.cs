@@ -113,7 +113,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             if (_currentChildBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - target property path missing");
+                    "SetValue ignored in binding - target property path missing");
                 return;
             }
 

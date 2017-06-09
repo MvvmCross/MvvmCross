@@ -23,10 +23,10 @@ namespace MvvmCross.Core.ViewModels
             var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
-                        from candidateViewType in assembly.ExceptionSafeGetTypes()
-                        let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
-                        where viewModelType != null
-                        select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
+                from candidateViewType in assembly.ExceptionSafeGetTypes()
+                let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
+                where viewModelType != null
+                select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
 
             try
             {
@@ -39,13 +39,13 @@ namespace MvvmCross.Core.ViewModels
         }
 
         private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
-                                                    ArgumentException exception)
+            ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)
-                                       .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
-                                       .Where(x => x.Count > 1)
-                                       .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
-                                       .ToArray();
+                .Select(x => new {x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList()})
+                .Where(x => x.Count > 1)
+                .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
+                .ToArray();
 
             if (overSizedCounts.Length == 0)
             {

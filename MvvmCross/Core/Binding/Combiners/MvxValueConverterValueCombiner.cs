@@ -29,13 +29,14 @@ namespace MvvmCross.Binding.Combiners
                 return;
             }
             var converted = _valueConverter.ConvertBack(value, sourceStep.SourceType, parameter,
-                                                        CultureInfo.CurrentUICulture);
+                CultureInfo.CurrentUICulture);
             sourceStep.SetValue(converted);
         }
 
         private Type _targetType = typeof(object);
 
-        public override IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType)
+        public override IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps,
+            Type overallTargetType)
         {
             _targetType = overallTargetType;
             return base.SubStepTargetTypes(subSteps, overallTargetType);

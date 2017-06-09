@@ -21,7 +21,8 @@ namespace MvvmCross.Core.ViewModels
         private readonly IMvxViewModelByNameLookup _viewModelByNameLookup;
         private readonly IMvxNameMapping _viewToViewModelNameMapping;
 
-        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup, IMvxNameMapping viewToViewModelNameMapping)
+        public MvxViewModelViewTypeFinder(IMvxViewModelByNameLookup viewModelByNameLookup,
+            IMvxNameMapping viewToViewModelNameMapping)
         {
             _viewModelByNameLookup = viewModelByNameLookup;
             _viewToViewModelNameMapping = viewToViewModelNameMapping;
@@ -54,8 +55,8 @@ namespace MvvmCross.Core.ViewModels
         protected virtual Type LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
-                                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
-                                .FirstOrDefault() as MvxViewForAttribute;
+                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
+                .FirstOrDefault() as MvxViewForAttribute;
 
             return attribute?.ViewModel;
         }

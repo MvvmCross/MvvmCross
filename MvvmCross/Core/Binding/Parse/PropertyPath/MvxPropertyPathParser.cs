@@ -138,7 +138,7 @@ namespace MvvmCross.Binding.Parse.PropertyPath
 
         private void ParseIntegerIndexer()
         {
-            var index = (int)ReadUnsignedInteger();
+            var index = (int) ReadUnsignedInteger();
             CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
         }
 

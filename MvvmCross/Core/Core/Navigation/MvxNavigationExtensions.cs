@@ -27,24 +27,27 @@ namespace MvvmCross.Core.Navigation
             return navigationService.Navigate(path.ToString());
         }
 
-        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param) where TParameter : class
+        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path,
+            TParameter param) where TParameter : class
         {
             return navigationService.Navigate<TParameter>(path.ToString(), param);
         }
 
-        public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path) where TResult : class
+        public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path)
+            where TResult : class
         {
             return navigationService.Navigate<TResult>(path.ToString());
         }
 
-        public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param) where TParameter : class where TResult : class
+        public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path,
+            TParameter param) where TParameter : class where TResult : class
         {
             return navigationService.Navigate<TParameter, TResult>(path.ToString(), param);
         }
 
         public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
         {
-            return navigationService.Close((IMvxViewModel)Mvx.IocConstruct<TViewModel>());
+            return navigationService.Close((IMvxViewModel) Mvx.IocConstruct<TViewModel>());
         }
     }
 }

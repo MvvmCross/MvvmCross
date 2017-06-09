@@ -15,8 +15,8 @@ namespace MvvmCross.Core.ViewModels
         : IMvxViewModelLocator
     {
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
-                                   IMvxBundle parameterValues,
-                                   IMvxBundle savedState)
+            IMvxBundle parameterValues,
+            IMvxBundle savedState)
         {
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
@@ -24,13 +24,13 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual IMvxViewModel Load(Type viewModelType,
-                                    IMvxBundle parameterValues,
-                                    IMvxBundle savedState)
+            IMvxBundle parameterValues,
+            IMvxBundle savedState)
         {
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel) Mvx.IocConstruct(viewModelType);
             }
             catch (Exception exception)
             {

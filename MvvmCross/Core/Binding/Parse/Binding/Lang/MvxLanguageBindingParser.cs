@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
 {
     public class MvxLanguageBindingParser
         : MvxBindingParser
-          , IMvxLanguageBindingParser
+            , IMvxLanguageBindingParser
     {
         public MvxBindingMode DefaultBindingMode { get; set; }
 

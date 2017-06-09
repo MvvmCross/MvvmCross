@@ -26,7 +26,7 @@ namespace MvvmCross.Core.ViewModels
 
         void Start();
 
-        void Destroy ();
+        void Destroy();
 
         void SaveState(IMvxBundle state);
 
@@ -45,7 +45,8 @@ namespace MvvmCross.Core.ViewModels
         Task<bool> Close(TResult result);
     }
 
-    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TParameter : class where TResult : class
+    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
+        where TParameter : class where TResult : class
     {
     }
 }

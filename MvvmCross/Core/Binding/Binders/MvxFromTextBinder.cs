@@ -28,17 +28,18 @@ namespace MvvmCross.Binding.Binders
         }
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
-                                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
+            IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             if (bindingDescriptions == null)
                 return new IMvxUpdateableBinding[0];
 
             return
-                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
+                bindingDescriptions.Select(
+                    description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
-                                                string partialBindingDescription)
+            string partialBindingDescription)
         {
             var bindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(partialBindingDescription);

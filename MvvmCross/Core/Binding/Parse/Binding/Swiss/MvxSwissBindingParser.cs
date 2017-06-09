@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
     {
         protected virtual IEnumerable<char> TerminatingCharacters()
         {
-            return new[] { '=', ',', ';', '(', ')' };
+            return new[] {'=', ',', ';', '(', ')'};
         }
 
         protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
@@ -149,15 +149,15 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         }
 
         protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description,
-                                                        ParentIsLookingForComma parentIsLookingForComma =
-                                                            ParentIsLookingForComma.ParentIsLookingForComma)
+            ParentIsLookingForComma parentIsLookingForComma =
+                ParentIsLookingForComma.ParentIsLookingForComma)
         {
             SkipWhitespace();
             description.Function = "Single";
             description.Sources = new[]
-                {
-                    ParseBindingDescription(parentIsLookingForComma)
-                };
+            {
+                ParseBindingDescription(parentIsLookingForComma)
+            };
         }
 
         protected void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description)

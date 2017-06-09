@@ -17,7 +17,7 @@ namespace MvvmCross.Binding.Parse.Binding
 {
     public abstract class MvxBindingParser
         : MvxParser
-          , IMvxBindingParser
+            , IMvxBindingParser
     {
         protected abstract MvxSerializableBindingDescription ParseBindingDescription();
 
@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.Parse.Binding
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                    "Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -59,7 +59,7 @@ namespace MvvmCross.Binding.Parse.Binding
             catch (Exception exception)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                    "Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }
@@ -77,23 +77,23 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             if (IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
-                                       block,
-                                       FullText);
+                    block,
+                    FullText);
             if (CurrentChar != '=')
                 throw new MvxException("Must follow binding option {0} with an '=' in {1}",
-                                       block,
-                                       FullText);
+                    block,
+                    FullText);
 
             MoveNext();
             if (IsComplete)
                 throw new MvxException("Cannot terminate binding expression during option {0} in {1}",
-                                       block,
-                                       FullText);
+                    block,
+                    FullText);
         }
 
         protected MvxBindingMode ReadBindingMode()
         {
-            return (MvxBindingMode)ReadEnumerationValue(typeof(MvxBindingMode));
+            return (MvxBindingMode) ReadEnumerationValue(typeof(MvxBindingMode));
         }
 
         protected string ReadTextUntilNonQuotedOccurrenceOfAnyOf(params char[] terminationCharacters)

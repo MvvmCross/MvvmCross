@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Parse.PropertyPath
     /// </summary>
     public class MvxSourcePropertyPathParser : IMvxSourcePropertyPathParser
     {
-        private static readonly ConcurrentDictionary<int, IList<MvxPropertyToken>> ParseCache = 
+        private static readonly ConcurrentDictionary<int, IList<MvxPropertyToken>> ParseCache =
             new ConcurrentDictionary<int, IList<MvxPropertyToken>>();
 
         public IList<MvxPropertyToken> Parse(string textToParse)

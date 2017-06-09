@@ -116,7 +116,7 @@ namespace MvvmCross.Binding.BindingContext
         public static class SourceSpecHelpers
         {
             public static MvxSourceStepDescription WrapInsideSingleCombiner(MvxSourceStepDescription inputs,
-                                                                        MvxSourceStepDescription sourceStepDescription)
+                MvxSourceStepDescription sourceStepDescription)
             {
                 return new MvxCombinerSourceStepDescription()
                 {
@@ -125,9 +125,9 @@ namespace MvvmCross.Binding.BindingContext
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
                     InnerSteps = new List<MvxSourceStepDescription>()
-                            {
-                                sourceStepDescription
-                            }
+                    {
+                        sourceStepDescription
+                    }
                 };
             }
         }

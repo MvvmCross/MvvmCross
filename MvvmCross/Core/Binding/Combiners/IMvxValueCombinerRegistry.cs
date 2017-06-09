@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Combiners
 {
     public interface IMvxValueCombinerRegistry
         : IMvxNamedInstanceRegistry<IMvxValueCombiner>
-          , IMvxValueCombinerLookup
+            , IMvxValueCombinerLookup
     {
     }
 }

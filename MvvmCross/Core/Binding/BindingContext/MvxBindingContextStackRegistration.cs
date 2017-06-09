@@ -14,7 +14,8 @@ namespace MvvmCross.Binding.BindingContext
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
     {
-        protected IMvxBindingContextStack<TBindingContext> Stack => Mvx.Resolve<IMvxBindingContextStack<TBindingContext>>();
+        protected IMvxBindingContextStack<TBindingContext> Stack => Mvx
+            .Resolve<IMvxBindingContextStack<TBindingContext>>();
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)
         {

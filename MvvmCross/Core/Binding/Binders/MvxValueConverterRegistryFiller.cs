@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueConverter>
-          , IMvxValueConverterRegistryFiller
+            , IMvxValueConverterRegistryFiller
     {
         public override string FindName(Type type)
         {

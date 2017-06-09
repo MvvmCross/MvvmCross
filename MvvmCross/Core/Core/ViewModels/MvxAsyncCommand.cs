@@ -73,7 +73,7 @@ namespace MvvmCross.Core.ViewModels
         {
             Execute(null);
         }
-        
+
         protected async Task ExecuteAsync(object parameter, bool hideCanceledException)
         {
             if (CanExecuteImpl(parameter))
@@ -169,7 +169,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxAsyncCommand
         : MvxAsyncCommandBase
-        , IMvxAsyncCommand
+            , IMvxAsyncCommand
     {
         private readonly Func<CancellationToken, Task> _execute;
         private readonly Func<bool> _canExecute;
@@ -184,7 +184,8 @@ namespace MvvmCross.Core.ViewModels
             _canExecute = canExecute;
         }
 
-        public MvxAsyncCommand(Func<CancellationToken, Task> execute, Func<bool> canExecute = null, bool allowConcurrentExecutions = false)
+        public MvxAsyncCommand(Func<CancellationToken, Task> execute, Func<bool> canExecute = null,
+            bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
@@ -204,12 +205,14 @@ namespace MvvmCross.Core.ViewModels
             return _execute(CancelToken);
         }
 
-        public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
+        public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, Task> execute, Func<T, bool> canExecute = null,
+            bool allowConcurrentExecutions = false)
         {
             return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
         }
 
-        public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, CancellationToken, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
+        public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, CancellationToken, Task> execute,
+            Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
         {
             return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
         }
@@ -222,12 +225,13 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxAsyncCommand<T>
         : MvxAsyncCommandBase
-        , IMvxAsyncCommand
+            , IMvxAsyncCommand
     {
         private readonly Func<T, CancellationToken, Task> _execute;
         private readonly Func<T, bool> _canExecute;
 
-        public MvxAsyncCommand(Func<T, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
+        public MvxAsyncCommand(Func<T, Task> execute, Func<T, bool> canExecute = null,
+            bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
@@ -237,7 +241,8 @@ namespace MvvmCross.Core.ViewModels
             _canExecute = canExecute;
         }
 
-        public MvxAsyncCommand(Func<T, CancellationToken, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
+        public MvxAsyncCommand(Func<T, CancellationToken, Task> execute, Func<T, bool> canExecute = null,
+            bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
             if (execute == null)
@@ -249,12 +254,12 @@ namespace MvvmCross.Core.ViewModels
 
         protected override bool CanExecuteImpl(object parameter)
         {
-            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
+            return _canExecute == null || _canExecute((T) typeof(T).MakeSafeValueCore(parameter));
         }
 
         protected override Task ExecuteAsyncImpl(object parameter)
         {
-            return _execute((T)typeof(T).MakeSafeValueCore(parameter), CancelToken);
+            return _execute((T) typeof(T).MakeSafeValueCore(parameter), CancelToken);
         }
 
         public async Task ExecuteAsync(object parameter)

@@ -53,7 +53,7 @@ namespace MvvmCross.Core.ViewModels
                     foreach (var thing in _eventHandlers)
                     {
                         var target = thing.Target;
-                        if (target != null && (EventHandler)target == value)
+                        if (target != null && (EventHandler) target == value)
                         {
                             _eventHandlers.Remove(thing);
                             break;
@@ -77,7 +77,7 @@ namespace MvvmCross.Core.ViewModels
                         deadEntries.Add(thing);
                         continue;
                     }
-                    var eventHandler = (EventHandler)thing.Target;
+                    var eventHandler = (EventHandler) thing.Target;
                     if (eventHandler != null)
                     {
                         toReturn.Add(eventHandler);
@@ -113,20 +113,15 @@ namespace MvvmCross.Core.ViewModels
             if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = MvxSingletonCache.Instance == null ||
+                                   MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-                _commandHelper.CanExecuteChanged += value;
-            }
-            remove
-            {
-                _commandHelper.CanExecuteChanged -= value;
-            }
+            add { _commandHelper.CanExecuteChanged += value; }
+            remove { _commandHelper.CanExecuteChanged -= value; }
         }
 
         public bool ShouldAlwaysRaiseCECOnUserInterfaceThread { get; set; }
@@ -146,7 +141,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxCommand
         : MvxCommandBase
-        , IMvxCommand
+            , IMvxCommand
     {
         private readonly Func<bool> _canExecute;
         private readonly Action _execute;
@@ -188,7 +183,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxCommand<T>
         : MvxCommandBase
-        , IMvxCommand
+            , IMvxCommand
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;
@@ -206,7 +201,7 @@ namespace MvvmCross.Core.ViewModels
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
+            return _canExecute == null || _canExecute((T) typeof(T).MakeSafeValueCore(parameter));
         }
 
         public bool CanExecute()
@@ -218,7 +213,7 @@ namespace MvvmCross.Core.ViewModels
         {
             if (CanExecute(parameter))
             {
-                _execute((T)typeof(T).MakeSafeValueCore(parameter));
+                _execute((T) typeof(T).MakeSafeValueCore(parameter));
             }
         }
 

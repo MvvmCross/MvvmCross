@@ -16,8 +16,9 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
     {
         private readonly MvxIndexerPropertyToken _indexerPropertyToken;
 
-        public MvxIndexerChainedSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexerPropertyToken,
-                                                  IList<MvxPropertyToken> childTokens)
+        public MvxIndexerChainedSourceBinding(object source, PropertyInfo itemPropertyInfo,
+            MvxIndexerPropertyToken indexerPropertyToken,
+            IList<MvxPropertyToken> childTokens)
             : base(source, itemPropertyInfo, childTokens)
         {
             _indexerPropertyToken = indexerPropertyToken;
@@ -26,7 +27,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] { _indexerPropertyToken.Key };
+            return new[] {_indexerPropertyToken.Key};
         }
     }
 }

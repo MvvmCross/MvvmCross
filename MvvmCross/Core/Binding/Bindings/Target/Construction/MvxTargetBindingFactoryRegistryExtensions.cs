@@ -21,9 +21,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         }
 
         public static void RegisterPropertyInfoBindingFactory(this IMvxTargetBindingFactoryRegistry registry,
-                                                              Type bindingType, Type targetType, string targetName)
+            Type bindingType, Type targetType, string targetName)
         {
-            registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
+            registry.RegisterFactory(
+                new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }
     }
 }

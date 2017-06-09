@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Bindings
 {
     public class MvxFullBinding
         : MvxBinding
-          , IMvxUpdateableBinding
+            , IMvxUpdateableBinding
     {
         private IMvxSourceStepFactory SourceStepFactory => MvxBindingSingletonCache.Instance.SourceStepFactory;
 
@@ -91,14 +91,14 @@ namespace MvvmCross.Binding.Bindings
             if (NeedToObserveSourceChanges)
             {
                 _sourceBindingOnChanged = (sender, args) =>
-                    {
-                        //Capture the cancel token first
-                        var cancel = _cancelSource.Token;
-                        //GetValue can now be executed in a worker thread. Is it the responsibility of the caller to switch threads, or ours ?
-                        //As the source is the viewmodel, i suppose it is the responsibility of the caller.
-                        var value = _sourceStep.GetValue();
-                        UpdateTargetFromSource(value, cancel);
-                    };
+                {
+                    //Capture the cancel token first
+                    var cancel = _cancelSource.Token;
+                    //GetValue can now be executed in a worker thread. Is it the responsibility of the caller to switch threads, or ours ?
+                    //As the source is the viewmodel, i suppose it is the responsibility of the caller.
+                    var value = _sourceStep.GetValue();
+                    UpdateTargetFromSource(value, cancel);
+                };
                 _sourceStep.Changed += _sourceBindingOnChanged;
             }
 
@@ -149,7 +149,8 @@ namespace MvvmCross.Binding.Bindings
 
             if (_targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Failed to create target binding for {0}", _bindingDescription.ToString());
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Failed to create target binding for {0}",
+                    _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
 

@@ -29,6 +29,6 @@ namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
         {
         }
 
-        public new T Key => (T)base.Key;
+        public new T Key => (T) base.Key;
     }
 }

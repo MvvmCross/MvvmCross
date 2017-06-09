@@ -15,7 +15,7 @@ namespace MvvmCross.Core
 {
     public class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>
-          , IMvxSingletonCache
+            , IMvxSingletonCache
     {
         public static MvxSingletonCache Initialize()
         {

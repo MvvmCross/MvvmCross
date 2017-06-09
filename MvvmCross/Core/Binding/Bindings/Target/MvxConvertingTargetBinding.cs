@@ -32,7 +32,8 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 
@@ -129,7 +130,8 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set",
+                    GetType().Name);
                 return;
             }
 
@@ -173,7 +175,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual TValue MakeSafeValue(TValue value)
         {
-            var safeValue = (TValue)TargetType.MakeSafeValue(value);
+            var safeValue = (TValue) TargetType.MakeSafeValue(value);
             return safeValue;
         }
 

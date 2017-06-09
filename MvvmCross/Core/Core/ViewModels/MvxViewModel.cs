@@ -16,7 +16,7 @@ namespace MvvmCross.Core.ViewModels
 {
     public abstract class MvxViewModel
         : MvxNavigatingObject
-          , IMvxViewModel
+            , IMvxViewModel
     {
         protected MvxViewModel()
         {
@@ -86,7 +86,8 @@ namespace MvvmCross.Core.ViewModels
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
-                throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
+                throw new MvxIoCResolveException(
+                    "There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
             var deserialized = serializer.DeserializeObject<TParameter>(parameter);
@@ -107,9 +108,7 @@ namespace MvvmCross.Core.ViewModels
         {
             _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
             _cancellationToken = cancellationToken;
-            _cancellationToken.Register(() => {
-                Close(this);
-            });
+            _cancellationToken.Register(() => { Close(this); });
         }
 
         public virtual Task<bool> Close(TResult result)
@@ -143,7 +142,8 @@ namespace MvvmCross.Core.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>,
+        IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
         public abstract Task Initialize(TParameter parameter);
     }
