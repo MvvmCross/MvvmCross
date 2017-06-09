@@ -35,7 +35,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
+            var mvxFragmentsPresenter = new MvxAndroidViewPresenter(AndroidViewAssemblies);
             return mvxFragmentsPresenter;
         }
 

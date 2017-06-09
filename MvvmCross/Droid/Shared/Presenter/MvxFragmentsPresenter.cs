@@ -11,13 +11,13 @@ using System.Reflection;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Views;
+//using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
-    public class MvxFragmentsPresenter
+    /*public class MvxFragmentsPresenter
         : MvxAndroidViewPresenter
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -59,7 +59,7 @@ namespace MvvmCross.Droid.Shared.Presenter
                 intent.PutExtra(ViewModelRequestBundleKey, requestText);
             }
 
-            Show(intent);
+            ShowIntent(intent);
         }
 
         protected virtual void ShowFragment(MvxViewModelRequest request)
@@ -116,5 +116,5 @@ namespace MvvmCross.Droid.Shared.Presenter
 
             return fragmentHost;
         }
-    }
+    }*/
 }
