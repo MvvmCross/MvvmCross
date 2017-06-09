@@ -18,8 +18,7 @@ using View = Android.Views.View;
 namespace PageRendererExample.UI.Droid
 {
     public class CameraRendererPage 
-        : MvxPageRenderer<CameraRendererViewModel>
-        , TextureView.ISurfaceTextureListener
+        : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
     {
         // The Camera API is officially deprecated and should be replaced with Camera2.
         // Camera2 is, however, not available until Android 5.1 and there are lots of reports
