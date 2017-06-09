@@ -31,10 +31,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
                 return System.Windows.Media.PixelFormats.Indexed4;
             if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format8bppIndexed)
                 return System.Windows.Media.PixelFormats.Indexed8;
-
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format16bppArgb1555)
-            //    return System.Windows.Media.PixelFormats.Bgr101010;
-
+            
             if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format24bppRgb)
                 return System.Windows.Media.PixelFormats.Bgr24;
 
@@ -50,23 +47,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
 
             if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format64bppArgb)
                 return System.Windows.Media.PixelFormats.Prgba64;
-
-            // TODO :
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Alpha)
-            //    return System.Windows.Media.PixelFormats.;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Canonical)
-            //    return System.Windows.Media.PixelFormats.;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.DontCare)
-            //    return System.Windows.Media.PixelFormats.;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Extended)
-            //    return System.Windows.Media.PixelFormats.;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Gdi)
-            //    return System.Windows.Media.PixelFormats.Default;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Max)
-            //    return System.Windows.Media.PixelFormats.Default;
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.PAlpha)
-            //    return System.Windows.Media.PixelFormats.Default;
-
+            
             if (pixelFormat == System.Drawing.Imaging.PixelFormat.Undefined)
                 return System.Windows.Media.PixelFormats.Default;
 
@@ -96,10 +77,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
                 return System.Drawing.Imaging.PixelFormat.Format4bppIndexed;
             if (pixelFormat == System.Windows.Media.PixelFormats.Indexed8)
                 return System.Drawing.Imaging.PixelFormat.Format8bppIndexed;
-
-            //if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format16bppArgb1555)
-            //    return System.Windows.Media.PixelFormats.Bgr101010;
-
+            
             if (pixelFormat == System.Windows.Media.PixelFormats.Bgr24)
                 return System.Drawing.Imaging.PixelFormat.Format24bppRgb;
 
@@ -115,31 +93,11 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
 
             if (pixelFormat == System.Windows.Media.PixelFormats.Prgba64)
                 return System.Drawing.Imaging.PixelFormat.Format64bppArgb;
-
-            // TODO :
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Alpha;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Canonical;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.DontCare;
-            //    return System.Windows.Media.PixelFormats.;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Extended;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Gdi;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Max;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.PAlpha;
-            //if (pixelFormat == System.Windows.Media.PixelFormats.)
-            //    return System.Drawing.Imaging.PixelFormat.Undefined;
-
+            
             if (pixelFormat == System.Windows.Media.PixelFormats.Default)
                 return System.Drawing.Imaging.PixelFormat.Undefined;
 
             throw new NotSupportedException("Convertion not supported with " + pixelFormat.ToString());
         }
     }
-
 }
