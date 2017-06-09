@@ -30,7 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Xamarin-Sidebar-Unified">
@@ -61,10 +60,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\MvvmCross.iOS.Support\MvvmCross.iOS.Support.csproj">
-      <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
-      <Name>MvvmCross.iOS.Support</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
@@ -86,8 +81,5 @@
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

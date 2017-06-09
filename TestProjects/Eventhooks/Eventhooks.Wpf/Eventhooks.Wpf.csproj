@@ -35,13 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -92,32 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross\Binding\Wpf\MvvmCross.Binding.Wpf.csproj">
-      <Project>{11674474-0123-4d7d-9f01-ebaa8bd039bd}</Project>
-      <Name>MvvmCross.Binding.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
-      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
-      <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
-      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
-      <Name>MvvmCross.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
-      <Project>{3688d6fc-e7f4-485f-8b27-96c0a8c7eaed}</Project>
-      <Name>MvvmCross.Platform.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Windows\Wpf\MvvmCross.Wpf.csproj">
-      <Project>{3786ea13-a491-4917-9b49-fbe76ba87fab}</Project>
-      <Name>MvvmCross.Wpf</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
