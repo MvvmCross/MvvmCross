@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Mac;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Mac.Views;
-using MvvmCross.Mac.Views.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Binding.Mac;
+using MvvmCross.Mac.Views;
+using MvvmCross.Mac.Views.Presenters;
 
 namespace MvvmCross.Mac.Platform
 {
@@ -115,12 +116,12 @@ namespace MvvmCross.Mac.Platform
 
         protected virtual IMvxMacViewPresenter CreatePresenter()
         {
-            return new MvxMacViewPresenter(_applicationDelegate, _window);
+            return new MvxMacViewPresenter(_applicationDelegate);
         }
 
         protected virtual void RegisterPresenter()
         {
-            var presenter = Presenter;
+            var presenter = this.Presenter;
             Mvx.RegisterSingleton(presenter);
         }
 
@@ -139,9 +140,9 @@ namespace MvvmCross.Mac.Platform
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()

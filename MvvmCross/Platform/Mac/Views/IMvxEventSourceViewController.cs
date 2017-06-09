@@ -13,5 +13,15 @@ namespace MvvmCross.Platform.Mac.Views
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;
+
+        event EventHandler ViewDidLayoutCalled;
+
+        event EventHandler ViewWillAppearCalled;
+
+        event EventHandler ViewDidAppearCalled;
+
+        event EventHandler ViewDidDisappearCalled;
+
+        event EventHandler ViewWillDisappearCalled;
     }
 }

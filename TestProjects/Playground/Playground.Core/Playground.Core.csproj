@@ -44,6 +44,8 @@
     <Compile Include="ViewModels\SplitDetailNavViewModel.cs" />
     <Compile Include="ViewModels\Tab3ViewModel.cs" />
     <Compile Include="ViewModels\OverrideAttributeViewModel.cs" />
+    <Compile Include="ViewModels\SheetViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
