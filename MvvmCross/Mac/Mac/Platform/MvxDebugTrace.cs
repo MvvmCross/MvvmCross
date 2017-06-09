@@ -1,4 +1,5 @@
 using System;
+
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Mac.Platform

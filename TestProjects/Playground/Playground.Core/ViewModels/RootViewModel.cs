@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+using System;
+using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -24,7 +25,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showChildCommand ?? (_showChildCommand = new MvxCommand(() => ShowViewModel<ChildViewModel>()));
+                return _showChildCommand ?? (_showChildCommand = new MvxCommand(() => this.ShowViewModel<ChildViewModel>()));
             }
         }
 
@@ -33,7 +34,7 @@ namespace Playground.Core.ViewModels
         {
             get
             {
-                return _showModalCommand ?? (_showModalCommand = new MvxCommand(() => ShowViewModel<ModalViewModel>()));
+                return _showModalCommand ?? (_showModalCommand = new MvxCommand(() => this.ShowViewModel<ModalViewModel>()));
             }
         }
 
@@ -70,6 +71,24 @@ namespace Playground.Core.ViewModels
             get
             {
                 return _showOverrideAttributeCommand ?? (_showOverrideAttributeCommand = new MvxCommand(() => ShowViewModel<OverrideAttributeViewModel>()));
+            }
+        }
+
+        private ICommand _showSheetCommand;
+        public ICommand ShowSheetCommand
+        {
+            get
+            {
+                return _showSheetCommand ?? (_showSheetCommand = new MvxCommand(() => ShowViewModel<SheetViewModel>()));
+            }
+        }
+
+        private ICommand _showWindowCommand;
+        public ICommand ShowWindowCommand
+        {
+            get
+            {
+                return _showWindowCommand ?? (_showWindowCommand = new MvxCommand(() => ShowViewModel<WindowViewModel>()));
             }
         }
     }

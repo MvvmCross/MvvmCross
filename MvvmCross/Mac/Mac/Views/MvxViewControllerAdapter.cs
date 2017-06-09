@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Mac.Views;
 
@@ -15,7 +16,7 @@ namespace MvvmCross.Mac.Views
     {
         protected IMvxMacView MacView
         {
-            get { return ViewController as IMvxMacView; }
+            get { return base.ViewController as IMvxMacView; }
         }
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)

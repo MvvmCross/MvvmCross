@@ -10,7 +10,7 @@ using MvvmCross.Core.Views;
 namespace MvvmCross.Mac.Views.Presenters
 {
     public interface IMvxMacViewPresenter
-        : IMvxViewPresenter
+        : IMvxViewPresenter, IMvxCanCreateMacView
     {
     }
 }

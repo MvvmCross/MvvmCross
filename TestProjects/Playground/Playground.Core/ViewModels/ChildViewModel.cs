@@ -26,5 +26,14 @@ namespace Playground.Core.ViewModels
                 return _showSecondChildCommand ?? (_showSecondChildCommand = new MvxCommand(() => ShowViewModel<SecondChildViewModel>()));
             }
         }
+
+        private ICommand _showRootCommand;
+        public ICommand ShowRootCommand
+        {
+            get
+            {
+                return _showRootCommand ?? (_showRootCommand = new MvxCommand(() => ShowViewModel<RootViewModel>()));
+            }
+        }
     }
 }

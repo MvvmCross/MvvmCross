@@ -4,10 +4,11 @@
 // All other rights reserved.
 // </copyright>
 
-
 using System;
 using System.Threading;
+
 using AppKit;
+
 using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Mac.Views

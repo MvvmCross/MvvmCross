@@ -17,7 +17,6 @@ namespace MvvmCross.Mac.Views
         }
 
         // Called when created directly from a XIB file
-        [Export("initWithCoder:")]
         public MvxViewController(NSCoder coder) : base(coder)
         {
             Initialize();
@@ -61,5 +60,34 @@ namespace MvvmCross.Mac.Views
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
+    }
+
+    public class MvxViewController<TViewModel>
+        : MvxViewController
+          , IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public MvxViewController()
+        {
+        }
+
+        public MvxViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected MvxViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+        }
+
+        public MvxViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }

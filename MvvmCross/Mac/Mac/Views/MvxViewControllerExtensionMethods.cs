@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -68,7 +69,7 @@ namespace MvvmCross.Mac.Views
         }
 
         public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
-            this IMvxMacView view,
+            this IMvxCanCreateMacView view,
             MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
@@ -76,14 +77,14 @@ namespace MvvmCross.Mac.Views
         }
 
         public static IMvxMacView CreateViewControllerFor(
-            this IMvxMacView view,
+            this IMvxCanCreateMacView view,
             MvxViewModelRequest request)
         {
             return Mvx.Resolve<IMvxMacViewCreator>().CreateView(request);
         }
 
         public static IMvxMacView CreateViewControllerFor(
-            this IMvxMacView view,
+            this IMvxCanCreateMacView view,
             IMvxViewModel viewModel)
         {
             return Mvx.Resolve<IMvxMacViewCreator>().CreateView(viewModel);
