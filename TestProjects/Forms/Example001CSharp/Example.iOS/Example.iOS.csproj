@@ -116,7 +116,6 @@
     <Reference Include="System" />
     <Reference Include="System.ObjectModel" />
     <Reference Include="System.Runtime" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Xamarin.Forms.2.3.4.231\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
@@ -167,12 +166,6 @@
     <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\File\MvvmCross.Plugins.File\MvvmCross.Plugins.File.csproj">
       <Project>{19ee04d6-7ee0-4fe8-ab10-4623d93f165a}</Project>
       <Name>MvvmCross.Plugins.File</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj">
-      <Project>{913b13b5-7b2c-4dda-becb-dadc827ed895}</Project>
-      <Name>MvvmCross.Binding.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>

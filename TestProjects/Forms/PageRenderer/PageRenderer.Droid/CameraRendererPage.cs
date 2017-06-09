@@ -14,10 +14,11 @@ using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
 
-[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))
+[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 namespace PageRendererExample.UI.Droid
 {
-    public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
+    public class CameraRendererPage 
+        : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
     {
         // The Camera API is officially deprecated and should be replaced with Camera2.
         // Camera2 is, however, not available until Android 5.1 and there are lots of reports
@@ -41,20 +42,22 @@ namespace PageRendererExample.UI.Droid
         {
             base.OnElementChanged (e);
 
-            if (e.OldElement != null || Element == null) {
+            if (e.OldElement != null || Element == null) 
+            {
                 return;
             }
 
-            try {
-
+            try 
+            {
                 SetupUserInterface();
                 BindViewModel();
                 SetupEventHandlers();
                 AddView(view);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 System.Diagnostics.Debug.WriteLine(@"          ERROR: ", ex.Message);
             }
-
         }
 
         private void SetupUserInterface()
@@ -99,7 +102,6 @@ namespace PageRendererExample.UI.Droid
 
         public void OnSurfaceTextureUpdated (SurfaceTexture surface)
         {
-
         }
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
@@ -129,11 +131,13 @@ namespace PageRendererExample.UI.Droid
             camera.StopPreview();
 
             var display = activity.WindowManager.DefaultDisplay;
-            if (display.Rotation == SurfaceOrientation.Rotation0) {
+            if (display.Rotation == SurfaceOrientation.Rotation0) 
+            {
                 camera.SetDisplayOrientation(90);
             }
 
-            if (display.Rotation == SurfaceOrientation.Rotation270) {
+            if (display.Rotation == SurfaceOrientation.Rotation270) 
+            {
                 camera.SetDisplayOrientation(180);
             }
 
@@ -143,8 +147,10 @@ namespace PageRendererExample.UI.Droid
         private void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
             flashOn = !flashOn;
-            if (flashOn) {
-                if (cameraType == CameraFacing.Back) {
+            if (flashOn)
+            {
+                if (cameraType == CameraFacing.Back)
+                {
                     toggleFlashButton.SetBackgroundResource(Resource.Drawable.FlashButton);
                     cameraType = CameraFacing.Back;
 
@@ -157,7 +163,9 @@ namespace PageRendererExample.UI.Droid
                     camera.SetPreviewTexture(surfaceTexture);
                     PrepareAndStartCamera();
                 }
-            } else {
+            } 
+            else 
+            {
                 toggleFlashButton.SetBackgroundResource(Resource.Drawable.NoFlashButton);
                 camera.StopPreview();
                 camera.Release();
@@ -173,7 +181,8 @@ namespace PageRendererExample.UI.Droid
 
         private void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
-            if (cameraType == CameraFacing.Front) {
+            if (cameraType == CameraFacing.Front) 
+            {
                 cameraType = CameraFacing.Back;
 
                 camera.StopPreview();
@@ -181,7 +190,9 @@ namespace PageRendererExample.UI.Droid
                 camera = Camera.Open((int)cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
-            } else {
+            } 
+            else 
+            {
                 cameraType = CameraFacing.Front;
 
                 camera.StopPreview();
@@ -198,8 +209,10 @@ namespace PageRendererExample.UI.Droid
 
             var image = textureView.Bitmap;
 
-            try {
-                using (var stream = new MemoryStream()) {
+            try 
+            {
+                using (var stream = new MemoryStream()) 
+                {
                     await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 50, stream);
                     image.Recycle();
 
@@ -207,10 +220,11 @@ namespace PageRendererExample.UI.Droid
                 }
 
                 ViewModel.CloseCommand.Execute(this);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 System.Diagnostics.Debug.WriteLine(@"              ", ex.Message);
             }
         }
     }
 }
-    
