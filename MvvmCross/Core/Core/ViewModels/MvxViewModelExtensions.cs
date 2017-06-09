@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-
     public static class MvxViewModelExtensions
     {
         public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle bundle)

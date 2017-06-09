@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System;
-    using System.Windows;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxWpfViewPresenter
         : MvxViewPresenter, IMvxWpfViewPresenter
     {
@@ -25,7 +24,7 @@ namespace MvvmCross.Wpf.Views
             {
                 var loader = Mvx.Resolve<IMvxSimpleWpfViewLoader>();
                 var view = loader.CreateView(request);
-                this.Present(view);
+                Present(view);
             }
             catch (Exception exception)
             {
@@ -38,7 +37,7 @@ namespace MvvmCross.Wpf.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }

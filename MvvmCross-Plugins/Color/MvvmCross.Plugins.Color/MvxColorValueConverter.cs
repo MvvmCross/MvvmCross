@@ -5,10 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.UI;
-using System;
 
 namespace MvvmCross.Plugins.Color
 {
@@ -19,10 +20,10 @@ namespace MvvmCross.Plugins.Color
 
         private IMvxNativeColor NativeColor => _nativeColor ?? (_nativeColor = Mvx.Resolve<IMvxNativeColor>());
 
-        protected abstract MvxColor Convert(object value, object parameter, System.Globalization.CultureInfo culture);
+        protected abstract MvxColor Convert(object value, object parameter, CultureInfo culture);
 
         public sealed override object Convert(object value, Type targetType, object parameter,
-                                       System.Globalization.CultureInfo culture)
+                                       CultureInfo culture)
         {
             return NativeColor.ToNative(Convert(value, parameter, culture));
         }
@@ -31,11 +32,11 @@ namespace MvvmCross.Plugins.Color
     public abstract class MvxColorValueConverter<T>
         : MvxColorValueConverter
     {
-        protected sealed override MvxColor Convert(object value, object parameter, System.Globalization.CultureInfo culture)
+        protected sealed override MvxColor Convert(object value, object parameter, CultureInfo culture)
         {
             return Convert((T)value, parameter, culture);
         }
 
-        protected abstract MvxColor Convert(T value, object parameter, System.Globalization.CultureInfo culture);
+        protected abstract MvxColor Convert(T value, object parameter, CultureInfo culture);
     }
 }

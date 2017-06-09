@@ -1,14 +1,14 @@
 ﻿
 using Android.App;
-using Android.OS;
 using Android.Content.PM;
-using Xamarin.Forms;
-using MvvmCross.Platform;
-using MvvmCross.Core.Views;
+using Android.OS;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Platform;
+using Xamarin.Forms;
 
 namespace Example.Droid
 {

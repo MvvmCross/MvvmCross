@@ -1,9 +1,11 @@
 ﻿using MvvmCross.Platform.Plugins;
+using MvvmCross.Plugins.File;
+using MvvmCross.Plugins.File.Droid;
 
-namespace MvxBindingsExample.Droid.Bootstrap
+namespace Example.Droid.Bootstrap
 {
     public class FilePluginBootstrap
-        : MvxLoaderPluginBootstrapAction<MvvmCross.Plugins.File.PluginLoader, MvvmCross.Plugins.File.Droid.Plugin>
+        : MvxLoaderPluginBootstrapAction<PluginLoader, Plugin>
     {
     }
 }

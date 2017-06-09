@@ -1,11 +1,11 @@
 using Android.Content;
-using MvvmCross.Droid.Platform;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.TestProjects.CustomBinding.Core;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
 using MvvmCross.TestProjects.CustomBinding.Droid.Bindings;
+using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
 
 namespace MvvmCross.TestProjects.CustomBinding.Droid
 {

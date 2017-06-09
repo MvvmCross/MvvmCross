@@ -7,9 +7,9 @@
 //
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
+using System;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using System;
 
 namespace MvvmCross.Plugins.Accelerometer.Wpf
 {

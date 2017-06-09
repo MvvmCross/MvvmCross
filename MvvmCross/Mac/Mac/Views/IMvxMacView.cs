@@ -10,12 +10,12 @@
 #endregion Copyright
 
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Mac.Views
 {
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-
     public interface IMvxMacView
         : IMvxView
             , IMvxCanCreateMacView

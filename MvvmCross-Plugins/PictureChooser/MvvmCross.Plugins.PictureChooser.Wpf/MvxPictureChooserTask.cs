@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-
 
 namespace MvvmCross.Plugins.PictureChooser.Wpf
 {
@@ -20,7 +20,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable, Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
@@ -84,7 +84,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
+                ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
 
             var bitmapSource = BitmapSource.Create(

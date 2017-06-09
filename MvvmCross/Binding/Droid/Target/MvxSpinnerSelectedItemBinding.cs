@@ -37,11 +37,11 @@ namespace MvvmCross.Binding.Droid.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (_currentValue != null);
+                changed = _currentValue != null;
             }
             else
             {
-                changed = !(newValue.Equals(_currentValue));
+                changed = !newValue.Equals(_currentValue);
             }
 
             if (!changed)

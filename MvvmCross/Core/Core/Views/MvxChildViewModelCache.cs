@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using MvvmCross.Core.ViewModels;
-
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
         private static int _unique = 1;
@@ -21,7 +21,7 @@ namespace MvvmCross.Core.Views
         public int Cache(IMvxViewModel viewModel)
         {
             var index = _unique++;
-            this._viewModels[index] = viewModel;
+            _viewModels[index] = viewModel;
             return index;
         }
 
@@ -44,7 +44,7 @@ namespace MvvmCross.Core.Views
 
         public void Remove(int index)
         {
-            this._viewModels.Remove(index);
+            _viewModels.Remove(index);
         }
 
         public void Remove(Type viewModelType)

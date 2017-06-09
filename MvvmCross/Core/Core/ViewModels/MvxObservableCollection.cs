@@ -6,12 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using MvvmCross.Platform.Core;
+using System.ComponentModel;
 using System.Linq;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -60,7 +60,7 @@ namespace MvvmCross.Core.ViewModels
 
         public bool EventsAreSuppressed
         {
-            get { return this._suppressEvents > 0; }
+            get { return _suppressEvents > 0; }
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace MvvmCross.Core.ViewModels
 
             while (count > itemIndex)
             {
-                this.RemoveAt(--count);
+                RemoveAt(--count);
             }
         }
 

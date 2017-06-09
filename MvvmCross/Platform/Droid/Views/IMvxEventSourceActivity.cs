@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.OS;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.OS;
-
-    using MvvmCross.Platform.Core;
-
     public interface IMvxEventSourceActivity : IMvxDisposeSource
     {
         event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;

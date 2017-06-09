@@ -5,15 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Java.Lang;
+
 namespace MvvmCross.Platform.Droid
 {
-    public class MvxReplaceableJavaContainer : Java.Lang.Object
+    public class MvxReplaceableJavaContainer : Object
     {
         public object Object { get; set; }
 
         public override string ToString()
         {
-            return this.Object?.ToString() ?? string.Empty;
+            return Object?.ToString() ?? string.Empty;
         }
     }
 }

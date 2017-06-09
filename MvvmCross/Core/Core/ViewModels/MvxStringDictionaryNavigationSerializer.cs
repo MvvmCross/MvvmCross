@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Parse.StringDictionary;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Core.Parse.StringDictionary;
-    using MvvmCross.Platform.Platform;
-
     public class MvxStringDictionaryNavigationSerializer
         : IMvxNavigationSerializer
     {

@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.WeakSubscription;
-
     public class MvxPropertyChangedListener
         : IDisposable
     {
@@ -30,8 +29,8 @@ namespace MvvmCross.Core.ViewModels
             if (notificationObject == null)
                 throw new ArgumentNullException(nameof(notificationObject));
 
-            this._notificationObject = notificationObject;
-            this._token = this._notificationObject.WeakSubscribe(this.NotificationObjectOnPropertyChanged);
+            _notificationObject = notificationObject;
+            _token = _notificationObject.WeakSubscribe(NotificationObjectOnPropertyChanged);
         }
 
         // Note - this is public because we use it in weak referenced situations
@@ -43,11 +42,11 @@ namespace MvvmCross.Core.ViewModels
             if (string.IsNullOrEmpty(whichProperty))
             {
                 // if whichProperty is empty, then it means everything has changed
-                handlers = this._handlersLookup.Values.SelectMany(x => x).ToList();
+                handlers = _handlersLookup.Values.SelectMany(x => x).ToList();
             }
             else
             {
-                if (!this._handlersLookup.TryGetValue(whichProperty, out handlers))
+                if (!_handlersLookup.TryGetValue(whichProperty, out handlers))
                     return;
             }
 
@@ -59,12 +58,12 @@ namespace MvvmCross.Core.ViewModels
 
         ~MvxPropertyChangedListener()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -72,19 +71,19 @@ namespace MvvmCross.Core.ViewModels
         {
             if (isDisposing)
             {
-                this._token.Dispose();
-                this.Clear();
+                _token.Dispose();
+                Clear();
             }
         }
 
         public void Clear()
         {
-            this._handlersLookup.Clear();
+            _handlersLookup.Clear();
         }
 
         public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> property, Action handler)
         {
-            return this.Listen(property, (s, e) => handler());
+            return Listen(property, (s, e) => handler());
         }
 
         //TODO - is this method in or out? All depends on JIT compilation on MonoTouch
@@ -96,22 +95,22 @@ namespace MvvmCross.Core.ViewModels
         public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> propertyExpression,
                                                             PropertyChangedEventHandler handler)
         {
-            var propertyName = this._notificationObject.GetPropertyNameFromExpression(propertyExpression);
-            return this.Listen(propertyName, handler);
+            var propertyName = _notificationObject.GetPropertyNameFromExpression(propertyExpression);
+            return Listen(propertyName, handler);
         }
 
         public MvxPropertyChangedListener Listen(string propertyName, Action handler)
         {
-            return this.Listen(propertyName, (s, e) => handler());
+            return Listen(propertyName, (s, e) => handler());
         }
 
         public MvxPropertyChangedListener Listen(string propertyName, PropertyChangedEventHandler handler)
         {
             List<PropertyChangedEventHandler> handlers = null;
-            if (!this._handlersLookup.TryGetValue(propertyName, out handlers))
+            if (!_handlersLookup.TryGetValue(propertyName, out handlers))
             {
                 handlers = new List<PropertyChangedEventHandler>();
-                this._handlersLookup.Add(propertyName, handlers);
+                _handlersLookup.Add(propertyName, handlers);
             }
 
             handlers.Add(handler);

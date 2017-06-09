@@ -5,15 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using System.Collections.Generic;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxWindowsViewsContainer
         : MvxViewsContainer
         , IMvxStoreViewsContainer

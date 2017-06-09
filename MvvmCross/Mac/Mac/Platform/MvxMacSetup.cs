@@ -1,27 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using AppKit;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Mac;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Mac.Views;
+using MvvmCross.Mac.Views.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using AppKit;
-
-    using global::MvvmCross.Binding;
-    using global::MvvmCross.Binding.Binders;
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Binding.Bindings.Target.Construction;
-    using global::MvvmCross.Core.Platform;
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform;
-    using global::MvvmCross.Platform.Converters;
-    using global::MvvmCross.Platform.Platform;
-    using global::MvvmCross.Platform.Plugins;
-
-    using MvvmCross.Binding.Mac;
-    using MvvmCross.Mac.Views;
-    using MvvmCross.Mac.Views.Presenters;
-
     public abstract class MvxMacSetup
         : MvxSetup
     {
@@ -32,24 +29,24 @@ namespace MvvmCross.Mac.Platform
 
         protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, NSWindow window)
         {
-            this._window = window;
-            this._applicationDelegate = applicationDelegate;
+            _window = window;
+            _applicationDelegate = applicationDelegate;
         }
 
         protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
-            this._presenter = presenter;
-            this._applicationDelegate = applicationDelegate;
+            _presenter = presenter;
+            _applicationDelegate = applicationDelegate;
         }
 
         protected NSWindow Window
         {
-            get { return this._window; }
+            get { return _window; }
         }
 
         protected MvxApplicationDelegate ApplicationDelegate
         {
-            get { return this._applicationDelegate; }
+            get { return _applicationDelegate; }
         }
 
         protected override IMvxTrace CreateDebugTrace()
@@ -75,8 +72,8 @@ namespace MvvmCross.Mac.Platform
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = this.CreateMacViewsContainer();
-            this.RegisterMacViewCreator(container);
+            var container = CreateMacViewsContainer();
+            RegisterMacViewCreator(container);
             return container;
         }
 
@@ -93,58 +90,58 @@ namespace MvvmCross.Mac.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxMacViewDispatcher(this._presenter);
+            return new MvxMacViewDispatcher(_presenter);
         }
 
         protected override void InitializePlatformServices()
         {
-            this.RegisterPresenter();
-            this.RegisterLifetime();
+            RegisterPresenter();
+            RegisterLifetime();
         }
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(this._applicationDelegate);
+            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected IMvxMacViewPresenter Presenter
         {
             get
             {
-                this._presenter = this._presenter ?? this.CreatePresenter();
-                return this._presenter;
+                _presenter = _presenter ?? CreatePresenter();
+                return _presenter;
             }
         }
 
         protected virtual IMvxMacViewPresenter CreatePresenter()
         {
-            return new MvxMacViewPresenter(this._applicationDelegate, this._window);
+            return new MvxMacViewPresenter(_applicationDelegate, _window);
         }
 
         protected virtual void RegisterPresenter()
         {
-            var presenter = this.Presenter;
+            var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
         }
 
         protected override void InitializeLastChance()
         {
-            this.InitialiseBindingBuilder();
+            InitialiseBindingBuilder();
             base.InitializeLastChance();
         }
 
         protected virtual void InitialiseBindingBuilder()
         {
-            this.RegisterBindingBuilderCallbacks();
-            var bindingBuilder = this.CreateBindingBuilder();
+            RegisterBindingBuilderCallbacks();
+            var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration();
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -160,8 +157,8 @@ namespace MvvmCross.Mac.Platform
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            registry.Fill(this.ValueConverterAssemblies);
-            registry.Fill(this.ValueConverterHolders);
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
         }
 
         protected virtual List<Assembly> ValueConverterAssemblies
@@ -169,8 +166,8 @@ namespace MvvmCross.Mac.Platform
             get
             {
                 var toReturn = new List<Assembly>();
-                toReturn.AddRange(this.GetViewModelAssemblies());
-                toReturn.AddRange(this.GetViewAssemblies());
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
                 return toReturn;
             }
         }

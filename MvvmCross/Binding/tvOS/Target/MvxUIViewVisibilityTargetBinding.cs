@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.UI;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.UI;
-
-    using UIKit;
-
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {
         protected UIView View => (UIView)Target;
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.tvOS.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(MvxVisibility);
+        public override Type TargetType => typeof(MvxVisibility);
 
         protected override void SetValueImpl(object target, object value)
         {

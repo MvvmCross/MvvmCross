@@ -1,4 +1,4 @@
-// MvxAppCompatActivity.cs
+﻿// MvxAppCompatActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,6 +7,7 @@
 
 using System;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -14,9 +15,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
-using Android.OS;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

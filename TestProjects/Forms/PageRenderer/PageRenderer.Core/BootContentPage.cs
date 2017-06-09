@@ -1,7 +1,6 @@
 ﻿using MvvmCross.Forms.Core;
-using PageRendererExample.ViewModels;
 
-namespace PageRendererExample.Pages
+namespace PageRendererExample
 {
     /// <summary>
     /// This is so that there is a base class that can be referenced in the XAML file.

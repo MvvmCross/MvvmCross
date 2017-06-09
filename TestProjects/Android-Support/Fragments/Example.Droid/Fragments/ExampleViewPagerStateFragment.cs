@@ -5,8 +5,8 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Views;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Support.V4;
 
 namespace Example.Droid.Fragments
 {

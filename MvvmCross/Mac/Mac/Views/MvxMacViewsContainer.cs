@@ -1,12 +1,11 @@
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform.Exceptions;
-
     // TODO - move this into another file
     public interface IMvxMacViewsContainer
         : IMvxViewsContainer
@@ -24,8 +23,8 @@ namespace MvvmCross.Mac.Views
         {
             try
             {
-                this.CurrentRequest = request;
-                var viewType = this.GetViewType(request.ViewModelType);
+                CurrentRequest = request;
+                var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
@@ -37,14 +36,14 @@ namespace MvvmCross.Mac.Views
             }
             finally
             {
-                this.CurrentRequest = null;
+                CurrentRequest = null;
             }
         }
 
         public virtual IMvxMacView CreateView(IMvxViewModel viewModel)
         {
             var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = this.CreateView(request);
+            var view = CreateView(request);
             return view;
         }
     }

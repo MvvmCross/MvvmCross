@@ -1,4 +1,4 @@
-// MvxReachability.cs
+﻿// MvxReachability.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,11 +8,11 @@
 using System;
 using Android.Content;
 using Android.Net;
+using Java.Net;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.Network.Reachability;
-using Java.Net;
 
 namespace MvvmCross.Plugins.Network.Droid
 {
@@ -27,7 +27,7 @@ namespace MvvmCross.Plugins.Network.Droid
         {
             get
             {
-                _connectivityManager = _connectivityManager ?? (ConnectivityManager)(Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService));
+                _connectivityManager = _connectivityManager ?? (ConnectivityManager)Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService);
                 return _connectivityManager;
             }
         }
@@ -40,7 +40,7 @@ namespace MvvmCross.Plugins.Network.Droid
                 {
                     var activeConnection = ConnectivityManager.ActiveNetworkInfo;
 
-                    return ((activeConnection != null) && activeConnection.IsConnected);
+                    return activeConnection != null && activeConnection.IsConnected;
                 }
                 catch (Exception e)
                 {

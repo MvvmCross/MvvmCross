@@ -7,7 +7,7 @@
 
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Share.WindowsCommon
+namespace MvvmCross.Plugins.Share.Uwp
 {
     public class Plugin
         : IMvxPlugin

@@ -1,7 +1,7 @@
-﻿namespace MvvmCross.iOS.Support.XamarinSidebar.Views
-{
-    using UIKit;
+﻿using UIKit;
 
+namespace MvvmCross.iOS.Support.XamarinSidebar.Views
+{
     /// <summary>
     /// A derived UISplitViewController to make presentation of lots of
     /// data nicer in iPads and large screen devices.

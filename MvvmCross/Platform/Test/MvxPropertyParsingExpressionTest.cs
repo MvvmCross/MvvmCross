@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using MvvmCross.Platform.Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxPropertyNameFromExpressionTests
     {
@@ -20,7 +19,7 @@ namespace MvvmCross.Platform.Test
 
             public string GetFooExpression()
             {
-                return this.GetPropertyNameFromExpression(() => this.Foo);
+                return this.GetPropertyNameFromExpression(() => Foo);
             }
         }
 

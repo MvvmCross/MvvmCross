@@ -1,9 +1,8 @@
+using System;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxMultipleViewModelCache
     {
         void Cache(IMvxViewModel toCache, string viewModelTag = "singleInstanceCache");

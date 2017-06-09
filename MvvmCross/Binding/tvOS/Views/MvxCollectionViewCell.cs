@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using CoreGraphics;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Bindings;
-
-    using UIKit;
-
     public class MvxCollectionViewCell
         : UICollectionViewCell
           , IMvxBindable
@@ -93,15 +90,15 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             if (disposing)
             {
-                this.BindingContext.ClearAllBindings();
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }

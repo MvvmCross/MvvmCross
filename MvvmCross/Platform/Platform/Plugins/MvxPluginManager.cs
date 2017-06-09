@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxPluginManager
         : IMvxPluginManager
     {
@@ -26,13 +25,13 @@ namespace MvvmCross.Platform.Plugins
         {
             lock (this)
             {
-                return this._loadedPlugins.ContainsKey(typeof(T));
+                return _loadedPlugins.ContainsKey(typeof(T));
             }
         }
 
         public void EnsurePluginLoaded<TType>()
         {
-            this.EnsurePluginLoaded(typeof(TType));
+            EnsurePluginLoaded(typeof(TType));
         }
 
         public virtual void EnsurePluginLoaded(Type type)
@@ -58,7 +57,7 @@ namespace MvvmCross.Platform.Plugins
                 return;
             }
 
-            this.EnsurePluginLoaded(pluginLoader);
+            EnsurePluginLoaded(pluginLoader);
         }
 
         protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
@@ -67,7 +66,7 @@ namespace MvvmCross.Platform.Plugins
             if (configurable != null)
             {
                 MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
-                var configuration = this.ConfigurationFor(pluginLoader.GetType());
+                var configuration = ConfigurationFor(pluginLoader.GetType());
                 configurable.Configure(configuration);
             }
 
@@ -80,13 +79,13 @@ namespace MvvmCross.Platform.Plugins
         {
             lock (this)
             {
-                if (this.IsPluginLoaded<T>())
+                if (IsPluginLoaded<T>())
                 {
                     return;
                 }
 
                 var toLoad = typeof(T);
-                this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
+                _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
             }
         }
 
@@ -95,7 +94,7 @@ namespace MvvmCross.Platform.Plugins
         {
             lock (this)
             {
-                if (this.IsPluginLoaded<T>())
+                if (IsPluginLoaded<T>())
                 {
                     return true;
                 }
@@ -103,7 +102,7 @@ namespace MvvmCross.Platform.Plugins
                 try
                 {
                     var toLoad = typeof(T);
-                    this._loadedPlugins[toLoad] = this.ExceptionWrappedLoadPlugin(toLoad);
+                    _loadedPlugins[toLoad] = ExceptionWrappedLoadPlugin(toLoad);
                     return true;
                 }
                 // pokemon 'catch them all' exception handling allowed here in this Try method
@@ -119,11 +118,11 @@ namespace MvvmCross.Platform.Plugins
         {
             try
             {
-                var plugin = this.LoadPlugin(toLoad);
+                var plugin = LoadPlugin(toLoad);
                 var configurablePlugin = plugin as IMvxConfigurablePlugin;
                 if (configurablePlugin != null)
                 {
-                    var configuration = this.ConfigurationSource(configurablePlugin.GetType());
+                    var configuration = ConfigurationSource(configurablePlugin.GetType());
                     configurablePlugin.Configure(configuration);
                 }
                 plugin.Load();
@@ -147,10 +146,10 @@ namespace MvvmCross.Platform.Plugins
 
         private IMvxPlugin LoadPlugin (Type toLoad)
         {
-            return this.LoadFromRegistry (toLoad) ?? this.FindPlugin(toLoad);
+            return LoadFromRegistry (toLoad) ?? FindPlugin(toLoad);
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => this.ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
 
         protected virtual IMvxPlugin FindPlugin(Type toLoad)
         {

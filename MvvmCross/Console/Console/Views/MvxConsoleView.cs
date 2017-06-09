@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Console.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel
@@ -20,14 +19,14 @@ namespace MvvmCross.Console.Views
 
         public T ViewModel
         {
-            get { return (T)this.DataContext; }
-            set { this.DataContext = value; }
+            get { return (T)DataContext; }
+            set { DataContext = value; }
         }
 
         IMvxViewModel IMvxView.ViewModel
         {
-            get { return (IMvxViewModel)this.DataContext; }
-            set { this.DataContext = (T)value; }
+            get { return (IMvxViewModel)DataContext; }
+            set { DataContext = (T)value; }
         }
 
         public Type ViewModelType => typeof(T);
@@ -36,8 +35,8 @@ namespace MvvmCross.Console.Views
 
         public void HackSetViewModel(object viewModel)
         {
-            this.ViewModel = (T)viewModel;
-            this.OnViewModelChanged();
+            ViewModel = (T)viewModel;
+            OnViewModelChanged();
         }
 
         public virtual bool HandleInput(string input)

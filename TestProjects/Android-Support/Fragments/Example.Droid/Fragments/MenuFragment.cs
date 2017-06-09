@@ -4,11 +4,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
+using Example.Core.ViewModels;
+using Example.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
-using Example.Core.ViewModels;
-using Example.Droid.Activities;
 
 namespace Example.Droid.Fragments
 {

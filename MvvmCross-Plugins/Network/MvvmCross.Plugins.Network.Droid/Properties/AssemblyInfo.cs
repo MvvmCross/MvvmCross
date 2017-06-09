@@ -7,6 +7,7 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Android;
 using Android.App;
 
 // General Information about an assembly is controlled through the following 
@@ -39,4 +40,4 @@ using Android.App;
 
 // Add some common permissions, these can be removed if not needed
 
-[assembly: UsesPermission(Android.Manifest.Permission.Internet)]
+[assembly: UsesPermission(Manifest.Permission.Internet)]

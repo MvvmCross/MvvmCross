@@ -1,17 +1,17 @@
-// MvxJsonRestClient.cs
+﻿// MvxJsonRestClient.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Network.Rest
 {

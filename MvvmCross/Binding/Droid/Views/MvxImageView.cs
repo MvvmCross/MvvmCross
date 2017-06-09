@@ -5,22 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Graphics;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Graphics;
-    using Android.OS;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Droid.ResourceHelpers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-
     [Register("mvvmcross.binding.droid.views.MvxImageView")]
     public class MvxImageView
         : ImageView

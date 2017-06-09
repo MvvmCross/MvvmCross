@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxWindowsViewModelLoader
     {
         IMvxViewModel Load(string requestText, IMvxBundle savedState);

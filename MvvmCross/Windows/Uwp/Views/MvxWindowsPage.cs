@@ -7,10 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -30,17 +29,17 @@ namespace MvvmCross.Uwp.Views
             Unloaded += MvxWindowsPage_Unloaded;
         }
 
-        private void MvxWindowsPage_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
+        private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
         {
             ViewModel?.Appearing();
         }
 
-        private void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MvxWindowsPage_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.Appeared();
         }
 
-        private void MvxWindowsPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.Disappeared();
         }

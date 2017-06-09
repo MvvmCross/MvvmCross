@@ -83,7 +83,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
     public abstract class MvxPreferenceFragment<TViewModel>
         : MvxPreferenceFragment
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
 
         protected MvxPreferenceFragment()

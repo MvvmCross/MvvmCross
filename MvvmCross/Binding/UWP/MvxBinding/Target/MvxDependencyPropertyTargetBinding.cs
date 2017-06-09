@@ -6,14 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Binding;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 
-namespace MvvmCross.Binding.Uwp.Target
+namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
@@ -51,15 +50,15 @@ namespace MvvmCross.Binding.Uwp.Target
             };
 
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N")
-                , typeof(object)
-                , typeof(FrameworkElement)
-                , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
+                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"), 
+                typeof(object), 
+                typeof(FrameworkElement), 
+                new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
+
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
         public override Type TargetType => _actualPropertyType;
-
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode => _defaultBindingMode;
 

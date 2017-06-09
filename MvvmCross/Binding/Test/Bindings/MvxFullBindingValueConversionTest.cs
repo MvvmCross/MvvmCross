@@ -1,26 +1,22 @@
-﻿using MvvmCross.Platform.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Moq;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.Source;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
+using NUnit.Framework;
 
 namespace MvvmCross.Binding.Test.Bindings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-
-    using Moq;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.Source;
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Test.Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxFullBindingValueConversionTest : MvxIoCSupportingTest
     {
@@ -28,14 +24,14 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             public MockSourceBinding()
             {
-                this.SourceType = typeof(object);
+                SourceType = typeof(object);
             }
 
             public int DisposeCalled = 0;
 
             public void Dispose()
             {
-                this.DisposeCalled++;
+                DisposeCalled++;
             }
 
             public Type SourceType { get; set; }
@@ -44,7 +40,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                this.ValuesSet.Add(value);
+                ValuesSet.Add(value);
             }
 
             public void FireSourceChanged()
@@ -59,10 +55,10 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public object GetValue()
             {
-                if (!this.TryGetValueResult)
+                if (!TryGetValueResult)
                     return MvxBindingConstant.UnsetValue;
 
-                return this.TryGetValueValue;
+                return TryGetValueValue;
             }
         }
 
@@ -70,14 +66,14 @@ namespace MvvmCross.Binding.Test.Bindings
         {
             public MockTargetBinding()
             {
-                this.TargetType = typeof(object);
+                TargetType = typeof(object);
             }
 
             public int DisposeCalled = 0;
 
             public void Dispose()
             {
-                this.DisposeCalled++;
+                DisposeCalled++;
             }
 
             public void SubscribeToEvents()
@@ -90,7 +86,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public void SetValue(object value)
             {
-                this.Values.Add(value);
+                Values.Add(value);
             }
 
             public void FireValueChanged(MvxTargetChangedEventArgs args)
@@ -112,12 +108,12 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                this.ConversionsRequested.Add(value);
-                this.ConversionParameters.Add(parameter);
-                this.ConversionTypes.Add(targetType);
-                if (this.ThrowOnConversion)
+                ConversionsRequested.Add(value);
+                ConversionParameters.Add(parameter);
+                ConversionTypes.Add(targetType);
+                if (ThrowOnConversion)
                     throw new MvxException("Conversion throw requested");
-                return this.ConversionResult;
+                return ConversionResult;
             }
 
             public object ConversionBackResult;
@@ -128,12 +124,12 @@ namespace MvvmCross.Binding.Test.Bindings
 
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                this.ConversionsBackRequested.Add(value);
-                this.ConversionBackParameters.Add(parameter);
-                this.ConversionBackTypes.Add(targetType);
-                if (this.ThrowOnConversionBack)
+                ConversionsBackRequested.Add(value);
+                ConversionBackParameters.Add(parameter);
+                ConversionBackTypes.Add(targetType);
+                if (ThrowOnConversionBack)
                     throw new MvxException("Conversion throw requested");
-                return this.ConversionBackResult;
+                return ConversionBackResult;
             }
         }
 
@@ -147,7 +143,7 @@ namespace MvvmCross.Binding.Test.Bindings
                 ConversionResult = "Test ConversionResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
@@ -165,7 +161,7 @@ namespace MvvmCross.Binding.Test.Bindings
                 ConversionResult = "Test ConversionResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockTarget.Values.Count);
             Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
@@ -183,7 +179,7 @@ namespace MvvmCross.Binding.Test.Bindings
                 ConversionBackResult = "Test ConversionBackResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
@@ -204,7 +200,7 @@ namespace MvvmCross.Binding.Test.Bindings
                 ConversionBackResult = "Test ConversionBackResult",
             };
             var parameter = new { Ignored = 12 };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
@@ -225,7 +221,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var targetType = new { Foo = 23 }.GetType();
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, targetType, out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, targetType, out mockSource, out mockTarget);
 
             mockSource.TryGetValueValue = "new value";
             mockSource.FireSourceChanged();
@@ -244,7 +240,7 @@ namespace MvvmCross.Binding.Test.Bindings
             {
             };
             var parameter = new { Ignored = 12 };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
             var aType = new { Hello = 34 };
             mockSource.SourceType = aType.GetType();
@@ -265,7 +261,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var fallback = new { Fred = "Not Barney" };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -285,7 +281,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             var fallback = new { Fred = "Not Barney" };
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -314,7 +310,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -352,7 +348,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -390,7 +386,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -428,7 +424,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -476,7 +472,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -523,7 +519,7 @@ namespace MvvmCross.Binding.Test.Bindings
             };
             var parameter = new { Ignored = 12 };
             object fallback = null;
-            var binding = this.TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
+            var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
             Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
@@ -562,7 +558,7 @@ namespace MvvmCross.Binding.Test.Bindings
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter,
                                                Type targetType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
-            return this.TestSetupCommon(valueConverter, converterParameter, new { Value = 4 }, targetType, out mockSource, out mockTarget);
+            return TestSetupCommon(valueConverter, converterParameter, new { Value = 4 }, targetType, out mockSource, out mockTarget);
         }
 
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter, object fallbackValue,

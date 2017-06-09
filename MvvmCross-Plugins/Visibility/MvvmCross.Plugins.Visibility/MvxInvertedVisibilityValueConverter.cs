@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
 using System.Globalization;
 using MvvmCross.Platform.ExtensionMethods;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility
 {
@@ -19,7 +19,7 @@ namespace MvvmCross.Plugins.Visibility
             bool hide = parameter.ConvertToBooleanCore();
             switch (base.Convert(value, parameter, culture))
             {
-                case (MvxVisibility.Visible):
+                case MvxVisibility.Visible:
                     if (hide)
                     {
                         return MvxVisibility.Hidden;

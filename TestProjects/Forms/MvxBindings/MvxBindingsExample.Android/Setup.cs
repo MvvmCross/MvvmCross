@@ -1,16 +1,7 @@
-﻿using System.Collections.Generic;
-using Android.Content;
-using MvvmCross.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
+﻿using Android.Content;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Localization;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Platform.Platform;
 
 namespace MvxBindingsExample.Droid
 {

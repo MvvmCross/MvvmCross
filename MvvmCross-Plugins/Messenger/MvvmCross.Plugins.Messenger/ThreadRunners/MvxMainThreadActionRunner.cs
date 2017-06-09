@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
-using System;
 
 namespace MvvmCross.Plugins.Messenger.ThreadRunners
 {

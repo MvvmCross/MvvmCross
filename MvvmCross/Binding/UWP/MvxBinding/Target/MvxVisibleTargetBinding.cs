@@ -6,10 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Binding;
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp.Target
+namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {

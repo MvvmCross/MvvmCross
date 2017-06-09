@@ -1,8 +1,8 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
 {
-    using MvvmCross.Core.ViewModels;
-    using Platform.IoC;
-
     public class App : MvxApplication
     {
         /// <summary>The initialize.</summary>

@@ -47,7 +47,7 @@ namespace MvvmCross.iOS.Views
             viewController.Title = title;
 
             if(!string.IsNullOrEmpty(iconName))
-                viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), this._tabsCount);
+                viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), _tabsCount);
 
             _tabsCount++;
         }
@@ -118,7 +118,7 @@ namespace MvvmCross.iOS.Views
 
                 if(topViewController.PresentedViewController != null)
                 {
-                    var presentedNavigationController = (topViewController.PresentedViewController as UINavigationController);
+                    var presentedNavigationController = topViewController.PresentedViewController as UINavigationController;
                     if(presentedNavigationController != null)
                     {
                         return presentedNavigationController.TopViewController;

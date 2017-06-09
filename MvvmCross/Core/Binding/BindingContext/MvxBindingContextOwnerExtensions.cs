@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Bindings;
-
     public static partial class MvxBindingContextOwnerExtensions
     {
         public static void CreateBindingContext(this IMvxBindingContextOwner view)

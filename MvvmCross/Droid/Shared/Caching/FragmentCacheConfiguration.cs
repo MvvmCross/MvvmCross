@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MvvmCross.Droid.Shared.Caching
 {

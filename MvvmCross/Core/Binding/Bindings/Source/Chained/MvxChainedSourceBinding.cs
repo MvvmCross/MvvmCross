@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxChainedSourceBinding
         : MvxPropertyInfoSourceBinding
     {
@@ -28,18 +27,18 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             IList<MvxPropertyToken> childTokens)
             : base(source, propertyInfo)
         {
-            this._childTokens = childTokens;
+            _childTokens = childTokens;
         }
 
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                if (this._currentChildBinding != null)
+                if (_currentChildBinding != null)
                 {
-                    this._currentChildBinding.Changed -= this.ChildSourceBindingChanged;
-                    this._currentChildBinding.Dispose();
-                    this._currentChildBinding = null;
+                    _currentChildBinding.Changed -= ChildSourceBindingChanged;
+                    _currentChildBinding.Dispose();
+                    _currentChildBinding = null;
                 }
             }
 
@@ -52,28 +51,28 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         {
             get
             {
-                if (this._currentChildBinding == null)
+                if (_currentChildBinding == null)
                     return typeof(object);
 
-                return this._currentChildBinding.SourceType;
+                return _currentChildBinding.SourceType;
             }
         }
 
         protected void UpdateChildBinding()
         {
-            if (this._currentChildBinding != null)
+            if (_currentChildBinding != null)
             {
-                this._currentChildBinding.Changed -= this.ChildSourceBindingChanged;
-                this._currentChildBinding.Dispose();
-                this._currentChildBinding = null;
+                _currentChildBinding.Changed -= ChildSourceBindingChanged;
+                _currentChildBinding.Dispose();
+                _currentChildBinding = null;
             }
 
-            if (this.PropertyInfo == null)
+            if (PropertyInfo == null)
             {
                 return;
             }
 
-            var currentValue = this.PropertyInfo.GetValue(this.Source, this.PropertyIndexParameters());
+            var currentValue = PropertyInfo.GetValue(Source, PropertyIndexParameters());
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
@@ -81,8 +80,8 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             }
             else
             {
-                this._currentChildBinding = this.SourceBindingFactory.CreateBinding(currentValue, this._childTokens);
-                this._currentChildBinding.Changed += this.ChildSourceBindingChanged;
+                _currentChildBinding = SourceBindingFactory.CreateBinding(currentValue, _childTokens);
+                _currentChildBinding.Changed += ChildSourceBindingChanged;
             }
         }
 
@@ -90,35 +89,35 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
 
         private void ChildSourceBindingChanged(object sender, EventArgs e)
         {
-            this.FireChanged();
+            FireChanged();
         }
 
         protected override void OnBoundPropertyChanged()
         {
-            this.UpdateChildBinding();
-            this.FireChanged();
+            UpdateChildBinding();
+            FireChanged();
         }
 
         public override object GetValue()
         {
-            if (this._currentChildBinding == null)
+            if (_currentChildBinding == null)
             {
                 return MvxBindingConstant.UnsetValue;
             }
 
-            return this._currentChildBinding.GetValue();
+            return _currentChildBinding.GetValue();
         }
 
         public override void SetValue(object value)
         {
-            if (this._currentChildBinding == null)
+            if (_currentChildBinding == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,
                                       "SetValue ignored in binding - target property path missing");
                 return;
             }
 
-            this._currentChildBinding.SetValue(value);
+            _currentChildBinding.SetValue(value);
         }
     }
 }

@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform.Converters;
-
     public static class MvxBindExtensions
     {
         public static MvxInlineBindingTarget<TViewModel> CreateInlineBindingTarget<TViewModel>(

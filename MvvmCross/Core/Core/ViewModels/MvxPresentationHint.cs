@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Collections.Generic;
-
     public abstract class MvxPresentationHint
     {
         protected MvxPresentationHint()
@@ -18,7 +18,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected MvxPresentationHint(MvxBundle body)
         {
-            this.Body = body;
+            Body = body;
         }
 
         protected MvxPresentationHint(IDictionary<string, string> hints)

@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.IO;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.ResourceLoader
 {

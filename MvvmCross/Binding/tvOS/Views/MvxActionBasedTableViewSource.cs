@@ -5,31 +5,28 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Foundation;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform;
-
-    using UIKit;
-
     public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
-            this.Initialize();
+            Initialize();
         }
 
         public MvxActionBasedTableViewSource(IntPtr handle)
             : base(handle)
         {
             Mvx.Warning("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
-            this.Initialize();
+            Initialize();
         }
 
         public MvxActionBasedTableViewSource(UITableView tableView,
@@ -39,7 +36,7 @@ namespace MvvmCross.Binding.tvOS.Views
                                              UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
-            this.Initialize();
+            Initialize();
         }
 
         public MvxActionBasedTableViewSource(UITableView tableView,
@@ -49,13 +46,13 @@ namespace MvvmCross.Binding.tvOS.Views
                                              UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
-            this.Initialize();
+            Initialize();
         }
 
         private void Initialize()
         {
-            this.CellCreator = this.CreateDefaultBindableCell;
-            this.CellModifier = (ignored) => { };
+            CellCreator = CreateDefaultBindableCell;
+            CellModifier = (ignored) => { };
         }
 
         public Func<UITableView, NSIndexPath, object, MvxStandardTableViewCell> CellCreator { get; set; }
@@ -66,8 +63,8 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             get
             {
-                if (this.CellIdentifierOverride != null)
-                    return this.CellIdentifierOverride();
+                if (CellIdentifierOverride != null)
+                    return CellIdentifierOverride();
 
                 return base.CellIdentifier;
             }
@@ -75,12 +72,12 @@ namespace MvvmCross.Binding.tvOS.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            var reuse = tableView.DequeueReusableCell(this.CellIdentifier);
+            var reuse = tableView.DequeueReusableCell(CellIdentifier);
             if (reuse != null)
                 return reuse;
 
-            var cell = this.CellCreator(tableView, indexPath, item);
-            this.CellModifier?.Invoke(cell);
+            var cell = CellCreator(tableView, indexPath, item);
+            CellModifier?.Invoke(cell);
             return cell;
         }
     }

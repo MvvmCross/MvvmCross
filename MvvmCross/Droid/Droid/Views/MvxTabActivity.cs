@@ -6,21 +6,19 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Droid.Views;
 
 namespace MvvmCross.Droid.Views
 {
-    using System.Collections.Generic;
-
-    using Android.Content;
-    using Android.OS;
-    using Android.Views;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Droid.Views;
-
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.droid.views.MvxTabActivity")]
     public abstract class MvxTabActivity
@@ -33,33 +31,33 @@ namespace MvvmCross.Droid.Views
 
         private readonly List<int> _ownedSubViewModelIndicies = new List<int>();
 
-        public List<int> OwnedSubViewModelIndicies => this._ownedSubViewModelIndicies;
+        public List<int> OwnedSubViewModelIndicies => _ownedSubViewModelIndicies;
 
         protected MvxTabActivity()
         {
-            this.BindingContext = new MvxAndroidBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
+            get { return DataContext as IMvxViewModel; }
             set
             {
-                this.DataContext = value;
-                this.OnViewModelSet();
+                DataContext = value;
+                OnViewModelSet();
             }
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         protected virtual void OnViewModelSet()
@@ -74,7 +72,7 @@ namespace MvvmCross.Droid.Views
 
             _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
-            this.SetContentView(_view);
+            SetContentView(_view);
         }
 
         protected override void AttachBaseContext(Context @base)

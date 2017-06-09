@@ -1,31 +1,29 @@
-// MvxAdapter.cs
+﻿// MvxAdapter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using Object = Java.Lang.Object;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Collections.Specialized;
-
-	using Android.Content;
-	using Android.Runtime;
-	using Android.Views;
-	using Android.Widget;
-
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.Droid.BindingContext;
-	using MvvmCross.Binding.ExtensionMethods;
-	using MvvmCross.Platform;
-	using MvvmCross.Platform.Exceptions;
-	using MvvmCross.Platform.Platform;
-	using MvvmCross.Platform.WeakSubscription;
-
-	using Object = Java.Lang.Object;
 
 	public class MvxAdapter
         : BaseAdapter
@@ -287,7 +285,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (viewToUse == null)
             {
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
-                viewToUse.Content.Tag = viewToUse as Java.Lang.Object;
+                viewToUse.Content.Tag = viewToUse as Object;
             }
             else
             {

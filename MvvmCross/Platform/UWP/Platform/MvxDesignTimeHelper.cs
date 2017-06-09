@@ -5,11 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Windows.ApplicationModel;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.Uwp.Platform
 {
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-
     public abstract class MvxDesignTimeHelper
     {
         protected MvxDesignTimeHelper()
@@ -31,7 +32,7 @@ namespace MvvmCross.Platform.Uwp.Platform
             get
             {
                 if (!_isInDesignTime.HasValue)
-                    _isInDesignTime = Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+                    _isInDesignTime = DesignMode.DesignModeEnabled;
                 return _isInDesignTime.Value;
             }
         }

@@ -16,12 +16,12 @@ namespace MvvmCross.Platform.Converters
 
         private MvxBindingConstant(string debug)
         {
-            this._debug = debug;
+            _debug = debug;
         }
 
         public override string ToString()
         {
-            return "Binding:" + this._debug;
+            return "Binding:" + _debug;
         }
     }
 }

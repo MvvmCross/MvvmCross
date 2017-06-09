@@ -5,27 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-
     public abstract class MvxLockableObject
     {
         private readonly object _lockObject = new object();
 
         protected void RunSyncWithLock(Action action)
         {
-            MvxLockableObjectHelpers.RunSyncWithLock(this._lockObject, action);
+            MvxLockableObjectHelpers.RunSyncWithLock(_lockObject, action);
         }
 
         protected void RunAsyncWithLock(Action action)
         {
-            MvxLockableObjectHelpers.RunAsyncWithLock(this._lockObject, action);
+            MvxLockableObjectHelpers.RunAsyncWithLock(_lockObject, action);
         }
 
         protected void RunSyncOrAsyncWithLock(Action action, Action whenComplete = null)
         {
-            MvxLockableObjectHelpers.RunSyncOrAsyncWithLock(this._lockObject, action, whenComplete);
+            MvxLockableObjectHelpers.RunSyncOrAsyncWithLock(_lockObject, action, whenComplete);
         }
     }
 }

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Test.Mocks.TestViewModels;
+
 namespace MvvmCross.Test.Mocks.TestViews
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
     [MvxViewFor(typeof(Test3ViewModel))]
     public class NotTest3View : IMvxView
     {

@@ -32,15 +32,15 @@ namespace MvvmCross.iOS.Views
             get
             {
                 // special code needed in TabBar because View is initialized during construction
-                return this.BindingContext?.DataContext;
+                return BindingContext?.DataContext;
             }
-            set { this.BindingContext.DataContext = value; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IMvxViewModel; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

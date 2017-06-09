@@ -5,17 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public class MvxTvosViewsContainer
         : MvxViewsContainer
         , IMvxTvosViewsContainer
@@ -26,18 +24,18 @@ namespace MvvmCross.tvOS.Views
         {
             try
             {
-                this.CurrentRequest = request;
-                var viewType = this.GetViewType(request.ViewModelType);
+                CurrentRequest = request;
+                var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
-                var view = this.CreateViewOfType(viewType, request);
+                var view = CreateViewOfType(viewType, request);
                 view.Request = request;
                 return view;
             }
             finally
             {
-                this.CurrentRequest = null;
+                CurrentRequest = null;
             }
         }
 
@@ -68,7 +66,7 @@ namespace MvvmCross.tvOS.Views
         public virtual IMvxTvosView CreateView(IMvxViewModel viewModel)
         {
             var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = this.CreateView(request);
+            var view = CreateView(request);
             return view;
         }
     }

@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.iOS.Views;
+using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.iOS.Views;
-
-    using UIKit;
-
     public class MvxTableViewController
         : MvxEventSourceTableViewController
           , IMvxIosView
@@ -41,8 +38,8 @@ namespace MvvmCross.iOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
@@ -71,9 +68,9 @@ namespace MvvmCross.iOS.Views
 				if (e == null)
 					Mvx.Trace ("e was null!");
 				*/
-                return this.DataContext as IMvxViewModel;
+                return DataContext as IMvxViewModel;
             }
-            set { this.DataContext = value; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Combiners;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Combiners;
-
     public class MvxCombinerSourceStepDescription : MvxSourceStepDescription
     {
         public IMvxValueCombiner Combiner { get; set; }
@@ -18,7 +17,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return this.Combiner == null ? "-null-" : this.Combiner.GetType().Name + " combiner-operation";
+            return Combiner == null ? "-null-" : Combiner.GetType().Name + " combiner-operation";
         }
     }
 }

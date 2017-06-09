@@ -59,7 +59,7 @@ namespace MvvmCross.Binding.Droid.Target
 
         public override void SubscribeToEvents()
         {
-            var listView = ((ExpandableListView)ListView);
+            var listView = (ExpandableListView)ListView;
             if (listView == null)
                 return;
 

@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-
     public class MvxValueEventArgs<T>
         : EventArgs
     {
         public MvxValueEventArgs(T value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public T Value { get; private set; }
