@@ -106,7 +106,7 @@ public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
     
     public async Task SomeMethod()
     {
-        await Close(new MyObject());
+        await Close(new MyReturnObject());
     }
 }
 ```
@@ -124,7 +124,7 @@ If you want to intercept ViewModel navigation changes you can hook into the even
 
 ```c#
 Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) => {
-    //Do something with e.ViewModelType or e.Url
+    //Do something with e.ViewModel
 };
 ```
 
