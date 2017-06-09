@@ -4,7 +4,6 @@ namespace PageRendererExample
 {
     public class CameraRendererContentPage : MvxContentPage<CameraRendererViewModel>
     {
-
     }
 }
 

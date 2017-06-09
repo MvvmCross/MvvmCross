@@ -15,12 +15,11 @@ namespace Eventhooks.iOS.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            
             // Perform any additional setup after loading the view, typically from a nib.
-
             var bindingSet = this.CreateBindingSet<FirstView, FirstViewModel>();
             bindingSet.Bind(SecondViewButton).To(vm => vm.ShowSecondView);
             bindingSet.Apply();
-
         }
 
         public override void DidReceiveMemoryWarning()

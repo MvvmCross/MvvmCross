@@ -20,7 +20,7 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
             base.ViewDidLoad();
 
             // ios7 layout
-            if(RespondsToSelector(new Selector("edgesForExtendedLayout")))
+            if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
                 EdgesForExtendedLayout = UIRectEdge.None;
 
             var binaryEdit = new BinaryEdit(new RectangleF(10, 70, 300, 120));

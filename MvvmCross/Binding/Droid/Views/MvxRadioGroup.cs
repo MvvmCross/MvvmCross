@@ -123,7 +123,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         private static long _nextGeneratedViewId = 1;
 
-        private new static int GenerateViewId()
+        private static new int GenerateViewId()
         {
             for (;;)
             {

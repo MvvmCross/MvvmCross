@@ -50,15 +50,15 @@ namespace MvvmCross.Binding.Uwp.MvxBinding.Target
             };
 
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N")
-                , typeof(object)
-                , typeof(FrameworkElement)
-                , new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
+                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"), 
+                typeof(object), 
+                typeof(FrameworkElement), 
+                new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
+
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
         public override Type TargetType => _actualPropertyType;
-
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode => _defaultBindingMode;
 

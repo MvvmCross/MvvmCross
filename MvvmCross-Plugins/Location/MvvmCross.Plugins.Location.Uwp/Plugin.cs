@@ -12,7 +12,6 @@ namespace MvvmCross.Plugins.Location.Uwp
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

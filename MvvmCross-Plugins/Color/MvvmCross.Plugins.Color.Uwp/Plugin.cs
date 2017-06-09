@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.Color.Uwp
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {
