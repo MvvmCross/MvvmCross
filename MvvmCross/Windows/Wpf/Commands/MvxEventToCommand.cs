@@ -5,11 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#region Credit - MvvmLight
-
-// This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
-
-#endregion Credit - MvvmLight
 
 using System;
 using System.Windows;
@@ -18,6 +13,7 @@ using System.Windows.Interactivity;
 
 namespace MvvmCross.Wpf.Commands
 {
+    // This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
     public class MvxEventToCommand : TriggerAction<DependencyObject>
     {
         /// <summary>
@@ -162,13 +158,6 @@ namespace MvvmCross.Wpf.Commands
             EnableDisableElement();
         }
 
-#if SILVERLIGHT
-        private Control GetAssociatedObject()
-        {
-            return AssociatedObject as Control;
-        }
-#else
-
         /// <summary>
         /// This method is here for compatibility
         /// with the Silverlight version.
@@ -179,8 +168,6 @@ namespace MvvmCross.Wpf.Commands
         {
             return AssociatedObject as FrameworkElement;
         }
-
-#endif
 
         /// <summary>
         /// This method is here for compatibility

@@ -83,13 +83,6 @@ namespace MvvmCross.Droid.Support.V4
             return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
         }
 
-        //Do call restore state
-        //public override void RestoreState(IParcelable state, ClassLoader loader)
-        //{
-        //    //Don't call restore to prevent crash on rotation
-        //    //base.RestoreState (state, loader);
-        //}
-
         public class FragmentInfo
         {
             public FragmentInfo(string title, Type fragmentType, Type viewModelType, object parameterValuesObject = null)
@@ -108,16 +101,16 @@ namespace MvvmCross.Droid.Support.V4
             }
             
             public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {
-		ViewModel = viewModel;
-	    }
+		        : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
+	        {
+		        ViewModel = viewModel;
+	        }
 
-	    public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {  
-		ViewModel = viewModel;
-	    }
+	        public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
+		        : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
+	        {  
+		        ViewModel = viewModel;
+	        }
 
             public Type FragmentType { get; }
 
