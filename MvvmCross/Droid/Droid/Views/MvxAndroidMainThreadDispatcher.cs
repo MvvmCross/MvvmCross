@@ -19,7 +19,15 @@ namespace MvvmCross.Droid.Views
             if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
+            {
+                Application.SynchronizationContext.Post(ignored => 
+                {
+                    if (maskExceptions)
+                        ExceptionMaskedAction(action);
+                    else
+                        action();
+                }, null);
+            }
 
             return true;
         }
