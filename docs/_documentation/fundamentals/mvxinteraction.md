@@ -29,7 +29,7 @@ Lets start by defining our interaction object in our core project.
 
 ## Interaction class
 
-```C#
+```c#
 public class YesNoQuestion
 {
     public Action<bool> YesNoCallback { get; set; }
@@ -43,7 +43,7 @@ This seems pretty simple enough. We have a callback when the user presses yes or
 
 In our `ViewModel` we need to define a `MvxInteraction`
 
-```C#
+```c#
 private MvxInteraction<YesNoQuestion> _interaction =
     new MvxInteraction<YesNoQuestion>();
     
@@ -54,7 +54,7 @@ public IMvxInteraction<YesNoCancel> Interaction => _interaction;
 Now lets imagine we have a `MvxCommand` the user triggers to finish creating their profile. Here we want this interaction to happen,
 to ask if they are sure.
 
-```C#
+```c#
 private void DoFinishProfileCommand()
 {
     // 1. do cool stuff with profile data
@@ -84,7 +84,7 @@ Now that we can request an interaction from the ViewModel, we need to react to i
 here. To keep this example simple we subscribe directly to the `Requested` event. However, you may prefer to use `WeakSubscribe` or use Rx.Net's
 `Observable.FromEventPattern`.
 
-```C#
+```c#
 private IMvxInteraction<YesNoQuestion> _interaction;
 public IMvxInteraction<YesNoQuestion> Interaction
 {
@@ -102,7 +102,7 @@ public IMvxInteraction<YesNoQuestion> Interaction
 
 Now we just need to react to the interaction request when triggered by the event.
 
-```C#
+```c#
 private async void OnInteractionRequested(object sender, MvxValueEventArgs<YesNoQuestion> eventArgs)
 {
     var yesNoQuestion = eventArgs.Value;
@@ -119,7 +119,7 @@ which we will leverage here as well.
 
 As per usual, we just need to create a binding set and apply the binding.
 
-```C#
+```c#
 var set = this.CreateBindingSet<OurView, OurViewModel>();
 set.Bind(this).For(view => view.Interaction).To(viewModel => viewModel.Interaction).OneWay();
 set.Apply();
