@@ -14,10 +14,12 @@ using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
 
-[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
+[assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 namespace PageRendererExample.UI.Droid
 {
-    public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
+    public class CameraRendererPage 
+        : MvxPageRenderer<CameraRendererViewModel>
+        , TextureView.ISurfaceTextureListener
     {
         // The Camera API is officially deprecated and should be replaced with Camera2.
         // Camera2 is, however, not available until Android 5.1 and there are lots of reports
@@ -57,7 +59,6 @@ namespace PageRendererExample.UI.Droid
             {
                 System.Diagnostics.Debug.WriteLine(@"          ERROR: ", ex.Message);
             }
-
         }
 
         private void SetupUserInterface()
@@ -102,7 +103,6 @@ namespace PageRendererExample.UI.Droid
 
         public void OnSurfaceTextureUpdated (SurfaceTexture surface)
         {
-
         }
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
@@ -229,4 +229,3 @@ namespace PageRendererExample.UI.Droid
         }
     }
 }
-    
