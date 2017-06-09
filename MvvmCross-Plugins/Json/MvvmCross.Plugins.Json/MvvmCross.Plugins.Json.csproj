@@ -47,7 +47,9 @@
     <Compile Include="MvxJsonConverter.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Preserve.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

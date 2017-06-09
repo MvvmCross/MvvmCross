@@ -42,7 +42,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <EmbeddedResource Include="Properties\MvvmCross.Plugins.WebBrowser.Uwp.rd.xml" />
     <Compile Include="MvxWebBrowserTask.cs" />
     <Compile Include="Plugin.cs" />

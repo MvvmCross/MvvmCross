@@ -94,7 +94,9 @@
     <None Include="Info.plist">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Content Include="Entitlements.plist">
       <SubType>Designer</SubType>
     </Content>

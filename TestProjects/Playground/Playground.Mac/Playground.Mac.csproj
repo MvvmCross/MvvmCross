@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="Tab2View.cs" />
     <Compile Include="Tab3View.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

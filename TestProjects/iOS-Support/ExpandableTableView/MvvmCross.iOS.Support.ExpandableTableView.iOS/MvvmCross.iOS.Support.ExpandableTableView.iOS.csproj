@@ -118,6 +118,9 @@
     <Compile Include="Views\Cells\KittenCell.designer.cs">
       <DependentUpon>KittenCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Views\Cells\HeaderCell.cs" />
     <Compile Include="Views\Cells\HeaderCell.designer.cs">
       <DependentUpon>HeaderCell.cs</DependentUpon>

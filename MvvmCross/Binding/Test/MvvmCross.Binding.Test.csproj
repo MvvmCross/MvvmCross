@@ -45,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Binders\MvxSourceStepTests.cs" />
     <Compile Include="Bindings\MvxFullBindingConstructionTest.cs" />
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
@@ -57,7 +60,6 @@
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxTibetBindingTest.cs" />
     <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">

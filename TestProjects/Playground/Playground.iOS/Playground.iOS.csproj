@@ -160,6 +160,9 @@
     <Compile Include="Views\OverrideAttributeView.designer.cs">
       <DependentUpon>OverrideAttributeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">

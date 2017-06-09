@@ -32,7 +32,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvvmApp.cs" />
     <Compile Include="BootViewModel.cs" />
     <Compile Include="BootPage.xaml.cs">
