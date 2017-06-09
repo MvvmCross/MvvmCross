@@ -310,11 +310,11 @@ namespace MvvmCross.Droid.Support.V4
 
 			var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
 
-			var json = oldBundle.GetString(MvxFragmentsPresenter.ViewModelRequestBundleKey);
+			var json = oldBundle.GetString(MvxAndroidViewPresenter.ViewModelRequestBundleKey);
 			var oldRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
 			if (oldRequest == null) return FragmentReplaceMode.ReplaceFragment;
 
-			json = replacementBundle.GetString(MvxFragmentsPresenter.ViewModelRequestBundleKey);
+			json = replacementBundle.GetString(MvxAndroidViewPresenter.ViewModelRequestBundleKey);
 			var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
 			if (replacementRequest == null) return FragmentReplaceMode.ReplaceFragment;
 
