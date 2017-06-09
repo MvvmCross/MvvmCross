@@ -27,7 +27,7 @@ namespace MvvmCross.Mac.Views
             }
             finally
             {
-                this.CurrentRequest = null;
+                CurrentRequest = null;
             }
         }
 
