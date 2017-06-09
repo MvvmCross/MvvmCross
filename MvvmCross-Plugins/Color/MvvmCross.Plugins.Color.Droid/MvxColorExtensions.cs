@@ -13,7 +13,7 @@ namespace MvvmCross.Plugins.Color.Droid
     {
         private static readonly MvxAndroidColor _mvxNativeColor = new MvxAndroidColor();
 
-        public static global::Android.Graphics.Color ToAndroidColor(this MvxColor color)
+        public static Android.Graphics.Color ToAndroidColor(this MvxColor color)
         {
             return _mvxNativeColor.ToAndroidColor(color);
         }

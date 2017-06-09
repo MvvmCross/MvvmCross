@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -101,7 +101,7 @@ namespace MvvmCross.Binding.iOS.Views
                     int oldStartingIndex = args.OldStartingIndex;
                     var indexPaths = new NSIndexPath[args.OldItems.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
-                        indexPaths[index] = NSIndexPath.FromRowSection((oldStartingIndex + index), 0);
+                        indexPaths[index] = NSIndexPath.FromRowSection(oldStartingIndex + index, 0);
                     CollectionView.DeleteItems(indexPaths);
                 });
             }
@@ -112,7 +112,7 @@ namespace MvvmCross.Binding.iOS.Views
                     int newStartingIndex = args.NewStartingIndex;
                     var indexPaths = new NSIndexPath[args.NewItems.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
-                        indexPaths[index] = NSIndexPath.FromRowSection((newStartingIndex + index), 0);
+                        indexPaths[index] = NSIndexPath.FromRowSection(newStartingIndex + index, 0);
                     CollectionView.InsertItems(indexPaths);
                 });
             }

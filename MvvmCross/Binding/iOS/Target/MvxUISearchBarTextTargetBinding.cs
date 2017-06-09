@@ -1,19 +1,17 @@
-// MvxUISearchBarTextTargetBinding.cs
+﻿// MvxUISearchBarTextTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISearchBarTextTargetBinding : MvxPropertyInfoTargetBinding<UISearchBar>
     {
         public MvxUISearchBarTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

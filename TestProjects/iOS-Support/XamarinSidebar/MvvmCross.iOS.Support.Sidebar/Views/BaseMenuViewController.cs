@@ -1,10 +1,9 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.iOS.Support.XamarinSidebar.Views;
-
     public class BaseMenuViewController<TViewModel> : BaseViewController<TViewModel>, IMvxSidebarMenu where TViewModel : class, IMvxViewModel
     {
         public virtual UIImage MenuButtonImage => UIImage.FromBundle("threelines");

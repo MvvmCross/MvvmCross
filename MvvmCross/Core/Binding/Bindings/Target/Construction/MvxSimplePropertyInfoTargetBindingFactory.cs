@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
@@ -21,24 +20,24 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
         {
-            this._bindingType = bindingType;
-            this._innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, this.CreateTargetBinding);
+            _bindingType = bindingType;
+            _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);
         }
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => this._innerFactory.SupportedTypes;
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            return this._innerFactory.CreateBinding(target, targetName);
+            return _innerFactory.CreateBinding(target, targetName);
         }
 
         #endregion IMvxPluginTargetBindingFactory Members
 
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(this._bindingType, target, targetPropertyInfo);
+            var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {

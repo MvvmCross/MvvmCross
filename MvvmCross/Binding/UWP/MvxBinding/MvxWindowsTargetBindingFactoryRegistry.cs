@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Uwp.MvxBinding.Target;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Uwp.Target;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Binding.Uwp.MvxBinding
 {
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {

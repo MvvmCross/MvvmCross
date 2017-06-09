@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public static class Mvx
     {
         public static bool CanResolve<TService>() where TService : class
@@ -175,7 +174,7 @@ namespace MvvmCross.Platform
         {
             Action simpleAction = () =>
                 {
-                    var t = Mvx.Resolve<T>();
+                    var t = Resolve<T>();
                     action(t);
                 };
             CallbackWhenRegistered<T>(simpleAction);

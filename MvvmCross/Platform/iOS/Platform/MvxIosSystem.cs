@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using UIKit;
+
 namespace MvvmCross.Platform.iOS.Platform
 {
-    using System.Linq;
-
-    using UIKit;
-
     public class MvxIosSystem
         : IMvxIosSystem
     {
@@ -18,14 +17,14 @@ namespace MvvmCross.Platform.iOS.Platform
 
         public MvxIosSystem()
         {
-            this.BuildVersion();
+            BuildVersion();
         }
 
         private void BuildVersion()
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
             var parts = version.Split('.').Select(int.Parse).ToArray();
-            this.Version = new MvxIosVersion(parts);
+            Version = new MvxIosVersion(parts);
         }
     }
 }

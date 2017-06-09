@@ -1,10 +1,11 @@
 ﻿using System;
 using Android.Runtime;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V17.Leanback
 {
     [Register("mvvmcross.droid.support.v17.leanback.MvxObjectWrapper")]
-    public class MvxObjectWrapper : Java.Lang.Object
+    public class MvxObjectWrapper : Object
     {
         /// <summary>
         /// Strong Reference for special cases. Beware of memory leaks by reference cycles!

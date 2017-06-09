@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using Android.OS;
-
-    using MvvmCross.Core.ViewModels;
-
     public class MvxSingleViewModelCache
         : IMvxSingleViewModelCache
     {
@@ -22,27 +21,27 @@ namespace MvvmCross.Droid.Views
 
         public void Cache(IMvxViewModel toCache, Bundle bundle)
         {
-            this._currentViewModel = toCache;
-            this._counter++;
+            _currentViewModel = toCache;
+            _counter++;
 
-            if (this._currentViewModel == null)
+            if (_currentViewModel == null)
             {
                 return;
             }
 
-            bundle.PutInt(BundleCacheKey, this._counter);
+            bundle.PutInt(BundleCacheKey, _counter);
         }
 
         public IMvxViewModel GetAndClear(Bundle bundle)
         {
-            var storedViewModel = this._currentViewModel;
-            this._currentViewModel = null;
+            var storedViewModel = _currentViewModel;
+            _currentViewModel = null;
 
             if (bundle == null)
                 return null;
 
             var key = bundle.GetInt(BundleCacheKey);
-            var toReturn = (key == this._counter) ? storedViewModel : null;
+            var toReturn = key == _counter ? storedViewModel : null;
             return toReturn;
         }
     }

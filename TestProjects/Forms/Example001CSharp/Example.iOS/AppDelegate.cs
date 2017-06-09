@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-using MvvmCross.iOS.Platform;
+﻿using Foundation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
+using UIKit;
 
 namespace Example.iOS
 {
@@ -16,7 +12,7 @@ namespace Example.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxApplicationDelegate
     {
-        UIWindow _window;
+        private UIWindow _window;
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {

@@ -33,7 +33,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             var sourceRatio = sourceWidth / sourceHeight;
             var targetRatio = targetWidth / targetHeight;
 
-            var scaleWidth = (sourceRatio <= targetRatio);
+            var scaleWidth = sourceRatio <= targetRatio;
             scaleWidth = !scaleWidth;
 
             double scalingFactor;

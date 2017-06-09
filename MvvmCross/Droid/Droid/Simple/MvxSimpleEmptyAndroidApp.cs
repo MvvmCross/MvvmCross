@@ -6,11 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Runtime;
+using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Droid.Simple
 {
-    using MvvmCross.Core.ViewModels;
-
     [Register("mvvmcross.droid.simple.MvxSimpleEmptyAndroidApp")]
     public class MvxSimpleEmptyAndroidApp : MvxApplication
     {

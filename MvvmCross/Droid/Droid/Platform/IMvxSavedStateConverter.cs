@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Platform
 {
-    using Android.OS;
-
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxSavedStateConverter
     {
         IMvxBundle Read(Bundle bundle);

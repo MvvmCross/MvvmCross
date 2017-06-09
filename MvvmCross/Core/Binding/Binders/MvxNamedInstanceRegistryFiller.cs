@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {
@@ -22,11 +21,11 @@ namespace MvvmCross.Binding.Binders
         {
             if (type.GetTypeInfo().IsAbstract)
             {
-                this.FillFromStatic(registry, type);
+                FillFromStatic(registry, type);
             }
             else
             {
-                this.FillFromInstance(registry, type);
+                FillFromInstance(registry, type);
             }
         }
 
@@ -78,7 +77,7 @@ namespace MvvmCross.Binding.Binders
                         where type.GetTypeInfo().IsPublic
                         where !type.GetTypeInfo().IsAbstract
                         where typeof(T).IsAssignableFrom(type)
-                        let name = this.FindName(type)
+                        let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
                         where type.IsConventional()
                         select new { Name = name, Type = type };

@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.Core.Navigation;
+﻿using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using RoutingExample.Core.ViewModels;
 

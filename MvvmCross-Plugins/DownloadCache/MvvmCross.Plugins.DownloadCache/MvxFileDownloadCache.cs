@@ -1,19 +1,19 @@
-// MvxFileDownloadCache.cs
+﻿// MvxFileDownloadCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -113,7 +113,7 @@ namespace MvvmCross.Plugins.DownloadCache
         private void QueueOutOfDateFilesForDelete()
         {
             var now = DateTime.UtcNow;
-            var toRemove = _entriesByHttpUrl.Values.Where(x => (now - x.WhenDownloadedUtc) > _maxFileAge).ToList();
+            var toRemove = _entriesByHttpUrl.Values.Where(x => now - x.WhenDownloadedUtc > _maxFileAge).ToList();
             foreach (var entry in toRemove)
             {
                 _entriesByHttpUrl.Remove(entry.HttpSource);
@@ -412,7 +412,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
             public new void Dispose()
             {
-                base.Cancel();
+                Cancel();
             }
         }
     }

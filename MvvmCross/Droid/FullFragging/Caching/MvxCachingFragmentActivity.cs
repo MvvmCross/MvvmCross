@@ -11,23 +11,25 @@ using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using Java.Lang;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvxActivity = MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace MvvmCross.Droid.FullFragging.Caching
 {
     [Register("mvvmcross.droid.fullfragging.caching.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : Views.MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity : MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
 	{
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -249,7 +251,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
+			if (currentFragment != null && fragInfo.AddToBackStack || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
@@ -275,9 +277,9 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
 			if (replacementRequest == null) return FragmentReplaceMode.ReplaceFragment;
 
-			var areParametersEqual = ((oldRequest.ParameterValues == replacementRequest.ParameterValues) ||
-				(oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
-					!oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
+			var areParametersEqual = oldRequest.ParameterValues == replacementRequest.ParameterValues ||
+			                         oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
+			                         !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any();
 
 			if (currentFragment?.Tag != newFragment.Tag)
 			{
@@ -391,7 +393,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
 		protected virtual string FragmentJavaName(Type fragmentType)
 		{
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
 		public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)

@@ -1,7 +1,6 @@
-using System;
-using UIKit;
-using SidebarNavigation;
 using MvvmCross.iOS.Support.XamarinSidebar.Views;
+using SidebarNavigation;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
 {

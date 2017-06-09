@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Binding.Bindings;
-
     public class MvxBindingRequest
     {
         public MvxBindingRequest()
@@ -17,9 +17,9 @@ namespace MvvmCross.Binding
 
         public MvxBindingRequest(object source, object target, MvxBindingDescription description)
         {
-            this.Target = target;
-            this.Source = source;
-            this.Description = description;
+            Target = target;
+            Source = source;
+            Description = description;
         }
 
         public object Target { get; set; }

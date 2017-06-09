@@ -5,15 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-    using System.Linq;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using System.Collections.Generic;
-
     public static class MvxWindowsExtensionMethods
     {
         public static void OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)

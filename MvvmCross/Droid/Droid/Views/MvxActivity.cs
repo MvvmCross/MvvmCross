@@ -5,22 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
 using Android.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Droid.Views;
 
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.OS;
-    using Android.Runtime;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Droid.Views;
-
     [Register("mvvmcross.droid.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
@@ -35,29 +32,29 @@ namespace MvvmCross.Droid.Views
 
         protected MvxActivity()
         {
-            this.BindingContext = new MvxAndroidBindingContext(this, this);
+            BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
+            get { return DataContext as IMvxViewModel; }
             set
             {
-                this.DataContext = value;
-                this.OnViewModelSet();
+                DataContext = value;
+                OnViewModelSet();
             }
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         public IMvxBindingContext BindingContext { get; set; }

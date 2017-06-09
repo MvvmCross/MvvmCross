@@ -5,26 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Globalization;
+using MvvmCross.Core;
+using MvvmCross.Core.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Test.Core
 {
-    using System.Globalization;
-    using System.Threading;
-
-    using MvvmCross.Core;
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Platform;
-
     public class MvxIoCSupportingTest
     {
         private IMvxIoCProvider _ioc;
 
-        protected IMvxIoCProvider Ioc => this._ioc;
+        protected IMvxIoCProvider Ioc => _ioc;
 
         public void Setup()
         {
-            this.ClearAll();
+            ClearAll();
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
@@ -36,13 +34,13 @@ namespace MvvmCross.Test.Core
         {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
-            this._ioc = MvxSimpleIoCContainer.Initialize(this.CreateIocOptions());
-            this._ioc.RegisterSingleton(this._ioc);
-            this._ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
+            _ioc = MvxSimpleIoCContainer.Initialize(CreateIocOptions());
+            _ioc.RegisterSingleton(_ioc);
+            _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
-            this.InitializeMvxSettings();
+            InitializeMvxSettings();
             MvxTrace.Initialize();
-            this.AdditionalSetup();
+            AdditionalSetup();
         }
 
         private static void InitializeSingletonCache()
@@ -52,7 +50,7 @@ namespace MvvmCross.Test.Core
 
         protected virtual void InitializeMvxSettings()
         {
-            this._ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
+            _ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
         }
 
         protected virtual void AdditionalSetup()

@@ -5,24 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Views;
-using Android.Widget;
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.App;
+using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.FullFragging.Views;
+using MvvmCross.Platform.Core;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.FullFragging
 {
     [Register("mvvmcross.droid.fullfragging.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
-        : Views.MvxActivity
+        : MvxActivity
         , TabHost.IOnTabChangeListener
     {
 
@@ -60,7 +63,7 @@ namespace MvvmCross.Droid.FullFragging
         }
 
         private class TabFactory
-            : Java.Lang.Object
+            : Object
               , TabHost.ITabContentFactory
         {
             private readonly Context _context;
@@ -70,7 +73,7 @@ namespace MvvmCross.Droid.FullFragging
                 _context = context;
             }
 
-            public View CreateTabContent(String tag)
+            public View CreateTabContent(string tag)
             {
                 var v = new View(_context);
                 v.SetMinimumWidth(0);
@@ -141,7 +144,7 @@ namespace MvvmCross.Droid.FullFragging
         protected void AddTab<TFragment>(string tagAndSpecName, string tabName, Bundle args,
                                          IMvxViewModel viewModel)
         {
-            var tabSpec = this._tabHost.NewTabSpec(tagAndSpecName).SetIndicator(tabName);
+            var tabSpec = _tabHost.NewTabSpec(tagAndSpecName).SetIndicator(tabName);
             AddTab<TFragment>(args, viewModel, tabSpec);
         }
 
@@ -159,7 +162,7 @@ namespace MvvmCross.Droid.FullFragging
         {
             // Attach a Tab view factory to the spec
             tabSpec.SetContent(new TabFactory(activity));
-            String tag = tabSpec.Tag;
+            string tag = tabSpec.Tag;
 
             // Check to see if we already have a CachedFragment for this tab, probably
             // from a previously saved state.  If so, deactivate it, because our
@@ -178,10 +181,10 @@ namespace MvvmCross.Droid.FullFragging
 
         public virtual void OnTabChanged(string tag)
         {
-            var newTab = this._lookup[tag];
+            var newTab = _lookup[tag];
             if (_currentTab != newTab)
             {
-                var ft = this.FragmentManager.BeginTransaction();
+                var ft = FragmentManager.BeginTransaction();
                 OnTabFragmentChanging(tag, ft);
                 if (_currentTab?.CachedFragment != null)
                 {
@@ -206,7 +209,7 @@ namespace MvvmCross.Droid.FullFragging
 
                 _currentTab = newTab;
                 ft.Commit();
-                this.FragmentManager.ExecutePendingTransactions();
+                FragmentManager.ExecutePendingTransactions();
             }
         }
 
@@ -222,7 +225,7 @@ namespace MvvmCross.Droid.FullFragging
 
         protected virtual string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)

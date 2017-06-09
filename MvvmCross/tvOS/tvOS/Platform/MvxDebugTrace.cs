@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.tvOS.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

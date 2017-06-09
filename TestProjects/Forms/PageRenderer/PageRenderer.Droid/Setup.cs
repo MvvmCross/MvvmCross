@@ -8,7 +8,7 @@ using MvvmCross.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
-using PageRendererExample.ViewModels;
+using PageRendererExample;
 
 namespace PageRendererExample.UI.Droid
 {

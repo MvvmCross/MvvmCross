@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Platform.Core;
-
     public interface IMvxBindingContext
         : IMvxDataConsumer
     {

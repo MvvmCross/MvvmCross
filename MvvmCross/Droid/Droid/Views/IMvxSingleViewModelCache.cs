@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.Views
 {
-    using Android.OS;
-
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxSingleViewModelCache
     {
         void Cache(IMvxViewModel toCache, Bundle bundle);

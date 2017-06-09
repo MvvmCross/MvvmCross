@@ -15,9 +15,9 @@ namespace MvvmCross.Plugins.PictureChooser
         {
             var ratio = 1.0;
             if (currentWidth > currentHeight)
-                ratio = (maxPixelDimension) / ((double)currentWidth);
+                ratio = maxPixelDimension / (double)currentWidth;
             else
-                ratio = (maxPixelDimension) / ((double)currentHeight);
+                ratio = maxPixelDimension / (double)currentHeight;
 
             targetWidth = (int)Math.Round(ratio * currentWidth);
             targetHeight = (int)Math.Round(ratio * currentHeight);

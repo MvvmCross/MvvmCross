@@ -1,19 +1,17 @@
-// MvxUITextViewTextTargetBinding.cs
+﻿// MvxUITextViewTextTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUITextViewTextTargetBinding
         : MvxConvertingTargetBinding
     {
@@ -28,7 +26,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
             FireValueChanged(view.Text);
@@ -38,7 +36,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override void SubscribeToEvents()
         {
-            var target = this.View;
+            var target = View;
             if (target == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -55,8 +53,8 @@ namespace MvvmCross.Binding.iOS.Target
 				return;
 			}
 
-            textStorage.DidProcessEditing += this.EditTextOnChanged;
-            this._subscribed = true;
+            textStorage.DidProcessEditing += EditTextOnChanged;
+            _subscribed = true;
         }
 
         public override Type TargetType => typeof(string);
@@ -75,11 +73,11 @@ namespace MvvmCross.Binding.iOS.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = this.View;
-                if (editText != null && this._subscribed)
+                var editText = View;
+                if (editText != null && _subscribed)
                 {
-                    editText.Changed -= this.EditTextOnChanged;
-                    this._subscribed = false;
+                    editText.Changed -= EditTextOnChanged;
+                    _subscribed = false;
                 }
             }
         }

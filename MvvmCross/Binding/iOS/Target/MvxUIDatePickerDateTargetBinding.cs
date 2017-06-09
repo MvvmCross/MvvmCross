@@ -1,19 +1,17 @@
-// MvxUIDatePickerDateTargetBinding.cs
+﻿// MvxUIDatePickerDateTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using Foundation;
-
-    using UIKit;
-
     public class MvxUIDatePickerDateTargetBinding : MvxBaseUIDatePickerTargetBinding
     {
         public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -23,7 +21,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override object GetValueFrom(UIDatePicker view)
         {
-            return (new DateTime(2001, 1, 1, 0, 0, 0)).AddSeconds(view.Date.SecondsSinceReferenceDate);
+            return new DateTime(2001, 1, 1, 0, 0, 0).AddSeconds(view.Date.SecondsSinceReferenceDate);
         }
 
         public static DateTime DefaultDate { get; set; } = DateTime.Now;

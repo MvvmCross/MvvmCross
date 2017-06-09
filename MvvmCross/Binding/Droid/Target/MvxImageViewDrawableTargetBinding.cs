@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Droid.Target
 			if(intValue == 0)
 				imageView.SetImageDrawable(null);
 			else
-				this.SetImage(imageView, intValue);
+				SetImage(imageView, intValue);
 		}
 
 		protected virtual void SetImage(ImageView imageView, int id)

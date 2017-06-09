@@ -1,5 +1,4 @@
-﻿using System;
-namespace MvvmCross.Core.Navigation
+﻿namespace MvvmCross.Core.Navigation
 {
     public interface IMvxNavigationCache
     {

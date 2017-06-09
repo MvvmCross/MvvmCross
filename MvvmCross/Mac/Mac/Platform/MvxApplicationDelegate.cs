@@ -1,11 +1,9 @@
+using System;
+using AppKit;
+using MvvmCross.Core.Platform;
+
 namespace MvvmCross.Mac.Platform
 {
-    using System;
-
-    using AppKit;
-
-    using global::MvvmCross.Core.Platform;
-
     public class MvxApplicationDelegate : NSApplicationDelegate
                                           , IMvxLifetime
     {
@@ -34,7 +32,7 @@ namespace MvvmCross.Mac.Platform
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
-            var handler = this.LifetimeChanged;
+            var handler = LifetimeChanged;
             if (handler != null)
                 handler(this, new MvxLifetimeEventArgs(which));
         }

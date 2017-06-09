@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.Content;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.Content;
-
     public class MvxIntentResultEventArgs
         : EventArgs
     {
         public MvxIntentResultEventArgs(int requestCode, Result resultCode, Intent data)
         {
-            this.Data = data;
-            this.ResultCode = resultCode;
-            this.RequestCode = requestCode;
+            Data = data;
+            ResultCode = resultCode;
+            RequestCode = requestCode;
         }
 
         public int RequestCode { get; private set; }

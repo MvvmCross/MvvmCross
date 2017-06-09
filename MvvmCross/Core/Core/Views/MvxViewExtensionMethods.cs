@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxViewExtensionMethods
     {
         public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)

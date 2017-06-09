@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.Views
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
     public abstract class MvxBaseImageViewLoader<TImage>
         : IDisposable
         where TImage : class
@@ -24,62 +23,62 @@ namespace MvvmCross.Binding.Views
 
         protected MvxBaseImageViewLoader(Action<TImage> imageSetAction)
         {
-            this._imageSetAction = imageSetAction;
-            if (!Mvx.TryResolve(out this._imageHelper))
+            _imageSetAction = imageSetAction;
+            if (!Mvx.TryResolve(out _imageHelper))
             {
                 MvxBindingTrace.Error(
                     "Unable to resolve the image helper - have you referenced and called EnsureLoaded on the DownloadCache plugin?");
                 return;
             }
-            var eventInfo = this._imageHelper.GetType().GetEvent("ImageChanged");
-            this._subscription = eventInfo.WeakSubscribe<TImage>(this._imageHelper, ImageHelperOnImageChanged);
+            var eventInfo = _imageHelper.GetType().GetEvent("ImageChanged");
+            _subscription = eventInfo.WeakSubscribe<TImage>(_imageHelper, ImageHelperOnImageChanged);
         }
 
         ~MvxBaseImageViewLoader()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         // Note - this is public because we use it in weak referenced situations
         public virtual void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<TImage> mvxValueEventArgs)
         {
-            this._imageSetAction(mvxValueEventArgs.Value);
+            _imageSetAction(mvxValueEventArgs.Value);
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
             }
         }
 
         public string ImageUrl
         {
-            get { return this._imageHelper.ImageUrl; }
-            set { this._imageHelper.ImageUrl = value; }
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
         }
 
         public string DefaultImagePath
         {
-            get { return this._imageHelper.DefaultImagePath; }
-            set { this._imageHelper.DefaultImagePath = value; }
+            get { return _imageHelper.DefaultImagePath; }
+            set { _imageHelper.DefaultImagePath = value; }
         }
 
         public string ErrorImagePath
         {
-            get { return this._imageHelper.ErrorImagePath; }
-            set { this._imageHelper.ErrorImagePath = value; }
+            get { return _imageHelper.ErrorImagePath; }
+            set { _imageHelper.ErrorImagePath = value; }
         }
     }
 }

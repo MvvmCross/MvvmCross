@@ -23,7 +23,7 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             BackgroundColor = UIColor.LightGray;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
@@ -13,7 +9,7 @@ namespace MvxBindingsExample.iOS
     [Register("AppDelegate")]
     public class AppDelegate : MvxApplicationDelegate
     {
-        UIWindow _window;
+        private UIWindow _window;
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {

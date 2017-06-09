@@ -1,18 +1,17 @@
-// MvxViewGroupExtensions.cs
+﻿// MvxViewGroupExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Specialized;
+using Android.Views;
+using Android.Widget;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections.Specialized;
-
-    using Android.Views;
-    using Android.Widget;
-
     public static class MvxViewGroupExtensions
     {
         public static void UpdateDataSetFromChange<T>(this T viewGroup, object sender,

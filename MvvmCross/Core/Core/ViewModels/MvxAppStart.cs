@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using MvvmCross.Platform.Platform;
-
     public class MvxAppStart<TViewModel>
         : MvxNavigatingObject
           , IMvxAppStart
@@ -20,7 +20,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 MvxTrace.Trace("Hint ignored in default MvxAppStart");
             }
-            this.ShowViewModel<TViewModel>();
+            ShowViewModel<TViewModel>();
         }
     }
 }

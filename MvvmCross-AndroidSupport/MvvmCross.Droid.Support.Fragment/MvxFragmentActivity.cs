@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Support.V4.EventSource;
-using Android.Views;
-using Android.OS;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -53,7 +53,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         protected virtual void OnViewModelSet()

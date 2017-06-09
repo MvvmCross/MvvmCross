@@ -1,4 +1,4 @@
-// MvxUIButtonTitleTargetBinding.cs
+﻿// MvxUIButtonTitleTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,12 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 
+using System;
+using AppKit;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Mac.Target
 {
-    using AppKit;
-
-    using global::MvvmCross.Platform.Platform;
-
     public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
     {
         protected NSButton Button
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Mac.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        public override System.Type TargetType
+        public override Type TargetType
         {
             get { return typeof(string); }
         }

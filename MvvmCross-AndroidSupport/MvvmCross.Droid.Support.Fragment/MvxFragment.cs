@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4.EventSource;
 

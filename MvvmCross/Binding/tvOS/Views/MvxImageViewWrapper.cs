@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxImageViewWrapper
         : IDisposable
     {
@@ -23,43 +21,43 @@ namespace MvvmCross.Binding.tvOS.Views
 
         public string ImageUrl
         {
-            get { return this._imageHelper.ImageUrl; }
-            set { this._imageHelper.ImageUrl = value; }
+            get { return _imageHelper.ImageUrl; }
+            set { _imageHelper.ImageUrl = value; }
         }
 
         public string DefaultImagePath
         {
-            get { return this._imageHelper.DefaultImagePath; }
-            set { this._imageHelper.DefaultImagePath = value; }
+            get { return _imageHelper.DefaultImagePath; }
+            set { _imageHelper.DefaultImagePath = value; }
         }
 
         public string ErrorImagePath
         {
-            get { return this._imageHelper.ErrorImagePath; }
-            set { this._imageHelper.ErrorImagePath = value; }
+            get { return _imageHelper.ErrorImagePath; }
+            set { _imageHelper.ErrorImagePath = value; }
         }
 
         public MvxImageViewWrapper(Func<UIImageView> imageView)
         {
-            this._imageView = imageView;
-            this._imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
-            this._imageHelper.ImageChanged += this.ImageHelperOnImageChanged;
+            _imageView = imageView;
+            _imageHelper = Mvx.Resolve<IMvxImageHelper<UIImage>>();
+            _imageHelper.ImageChanged += ImageHelperOnImageChanged;
         }
 
         ~MvxImageViewWrapper()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<UIImage> mvxValueEventArgs)
         {
-            var imageView = this._imageView();
+            var imageView = _imageView();
             if (imageView != null && mvxValueEventArgs.Value != null)
                 imageView.Image = mvxValueEventArgs.Value;
         }
@@ -68,7 +66,7 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             if (disposing)
             {
-                this._imageHelper.Dispose();
+                _imageHelper.Dispose();
             }
         }
     }

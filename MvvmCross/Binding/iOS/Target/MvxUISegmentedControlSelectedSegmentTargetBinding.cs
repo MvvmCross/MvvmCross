@@ -1,13 +1,11 @@
-﻿namespace MvvmCross.Binding.iOS.Target
+﻿using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
+namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
     {
         private bool _subscribed;
@@ -17,7 +15,7 @@
         {
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -36,7 +34,7 @@
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             segmentedControl.ValueChanged += HandleValueChanged;
         }
 
@@ -55,10 +53,10 @@
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     view.ValueChanged -= HandleValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

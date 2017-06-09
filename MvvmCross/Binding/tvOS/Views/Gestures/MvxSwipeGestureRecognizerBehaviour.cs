@@ -5,27 +5,27 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views.Gestures
 {
-    using UIKit;
-
     public class MvxSwipeGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior<UISwipeGestureRecognizer>
     {
         protected override void HandleGesture(UISwipeGestureRecognizer gesture)
         {
-            this.FireCommand();
+            FireCommand();
         }
 
         public MvxSwipeGestureRecognizerBehaviour(UIView target, UISwipeGestureRecognizerDirection direction,
                                                 uint numberOfTouchesRequired = 1)
         {
-            var swipe = new UISwipeGestureRecognizer(this.HandleGesture)
+            var swipe = new UISwipeGestureRecognizer(HandleGesture)
             {
                 Direction = direction,
             };
 
-            this.AddGestureRecognizer(target, swipe);
+            AddGestureRecognizer(target, swipe);
         }
     }
 }

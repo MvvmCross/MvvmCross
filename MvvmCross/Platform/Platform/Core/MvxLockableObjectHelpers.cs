@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-
     public static class MvxLockableObjectHelpers
     {
         public static void RunSyncWithLock(object lockObject, Action action)

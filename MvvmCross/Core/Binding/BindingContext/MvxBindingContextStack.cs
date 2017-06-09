@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System.Collections.Generic;
-
     public class MvxBindingContextStack<TContext>
         : Stack<TContext>
           , IMvxBindingContextStack<TContext>
@@ -17,9 +17,9 @@ namespace MvvmCross.Binding.BindingContext
         {
             get
             {
-                if (this.Count == 0)
+                if (Count == 0)
                     return default(TContext);
-                return this.Peek();
+                return Peek();
             }
         }
     }

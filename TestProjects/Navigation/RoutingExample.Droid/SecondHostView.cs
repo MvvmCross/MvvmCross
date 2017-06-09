@@ -1,17 +1,12 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using RoutingExample.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using Android.Content.PM;
+using MvvmCross.Platform;
+using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {

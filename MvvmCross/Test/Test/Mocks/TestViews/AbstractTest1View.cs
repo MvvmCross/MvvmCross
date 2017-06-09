@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Test.Mocks.TestViews
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public abstract class AbstractTest1View : IMvxView
     {
         public object DataContext { get; set; }

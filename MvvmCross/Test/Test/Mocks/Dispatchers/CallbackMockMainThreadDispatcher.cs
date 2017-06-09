@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public class CallbackMockMainThreadDispatcher
         : MvxMainThreadDispatcher
           , IMvxMainThreadDispatcher
@@ -19,12 +18,12 @@ namespace MvvmCross.Test.Mocks.Dispatchers
 
         public CallbackMockMainThreadDispatcher(Func<Action, bool> callback)
         {
-            this._callback = callback;
+            _callback = callback;
         }
 
         public virtual bool RequestMainThreadAction(Action action)
         {
-            return this._callback(action);
+            return _callback(action);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Support.ExpandableTableView.Core;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform.Platform;
 using UIKit;
@@ -20,7 +21,7 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
 
 		protected override IMvxApplication CreateApp()
 		{
-			return new Core.App();
+			return new App();
 		}
 
 		protected override IMvxTrace CreateDebugTrace()

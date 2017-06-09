@@ -8,7 +8,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PhoneCall.WindowsStore
+namespace MvvmCross.Plugins.PhoneCall.Uwp
 {
     public class Plugin
         : IMvxPlugin

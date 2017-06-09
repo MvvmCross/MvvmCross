@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform.Core;
-
     public interface IMvxBindable
         : IMvxBindingContextOwner
           , IMvxDataConsumer

@@ -1,20 +1,17 @@
-// MvxImageViewLoader.cs
+﻿// MvxImageViewLoader.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.Views;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Views;
-
-    using UIKit;
-
     public class MvxImageViewLoader
         : MvxBaseImageViewLoader<UIImage>
     {

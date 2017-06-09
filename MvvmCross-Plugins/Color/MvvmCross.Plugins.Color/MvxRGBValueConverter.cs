@@ -5,9 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
-using System;
 using System.Globalization;
+using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Color
 {
@@ -41,9 +40,9 @@ namespace MvvmCross.Plugins.Color
 
         private MvxColor Parse3DigitColor(string value)
         {
-            var red = Int32.Parse(value.Substring(0, 1), NumberStyles.HexNumber);
-            var green = Int32.Parse(value.Substring(1, 1), NumberStyles.HexNumber);
-            var blue = Int32.Parse(value.Substring(2, 1), NumberStyles.HexNumber);
+            var red = int.Parse(value.Substring(0, 1), NumberStyles.HexNumber);
+            var green = int.Parse(value.Substring(1, 1), NumberStyles.HexNumber);
+            var blue = int.Parse(value.Substring(2, 1), NumberStyles.HexNumber);
             return new MvxColor(UpByte(red), UpByte(green), UpByte(blue));
         }
 
@@ -57,15 +56,15 @@ namespace MvvmCross.Plugins.Color
 
         private MvxColor Parse6DigitColor(string value)
         {
-            var rgb = Int32.Parse(value, NumberStyles.HexNumber);
+            var rgb = int.Parse(value, NumberStyles.HexNumber);
             return new MvxColor(rgb, 255);
         }
 
         protected virtual MvxColor Parse8DigitColor(string value)
         {
             // assume RGBA
-            var rgb = Int32.Parse(value.Substring(0, 6), NumberStyles.HexNumber);
-            var a = Int32.Parse(value.Substring(6, 2), NumberStyles.HexNumber);
+            var rgb = int.Parse(value.Substring(0, 6), NumberStyles.HexNumber);
+            var a = int.Parse(value.Substring(6, 2), NumberStyles.HexNumber);
             return new MvxColor(rgb, a);
         }
     }

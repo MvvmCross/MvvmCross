@@ -1,16 +1,13 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using Xamarin.Forms;
-using XamlControls = Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Activation;
+﻿using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
+using MvvmCross.Core.Views;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Uwp.Presenters;
+using MvvmCross.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Forms.Uwp
 {

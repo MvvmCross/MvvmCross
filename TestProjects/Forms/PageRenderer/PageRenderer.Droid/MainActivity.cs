@@ -1,6 +1,7 @@
 ﻿
 using Android.App;
 using Android.Content.PM;
+using Android.OS;
 using MvvmCross.Droid.Views;
 using Xamarin.Forms;
 
@@ -19,7 +20,7 @@ namespace PageRendererExample.UI.Droid
             }
         }
 
-        protected override void OnCreate(Android.OS.Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             Forms.Init(this, bundle);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]

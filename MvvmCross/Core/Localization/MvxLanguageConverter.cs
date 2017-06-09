@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Localization
 {
-    using System;
-    using System.Globalization;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxLanguageConverter
         : MvxValueConverter
     {

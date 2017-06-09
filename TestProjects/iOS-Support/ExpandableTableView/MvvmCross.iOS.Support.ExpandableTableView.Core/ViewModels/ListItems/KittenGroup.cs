@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.Core
+namespace MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels.ListItems
 {
 	public class KittenGroup : List<Kitten>
 	{
@@ -8,7 +8,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.Core
 
 		public KittenGroup(IEnumerable<Kitten> collection) : base(collection)
 		{
-
 		}
 	}
 }

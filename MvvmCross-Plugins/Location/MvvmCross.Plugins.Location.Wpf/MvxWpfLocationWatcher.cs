@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
 using System;
 using System.Device.Location;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.Location.Wpf
 {

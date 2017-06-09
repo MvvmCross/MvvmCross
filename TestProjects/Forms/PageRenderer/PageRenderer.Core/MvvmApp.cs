@@ -1,20 +1,19 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
 
-namespace PageRendererExample.ViewModels
+namespace PageRendererExample
 {
     public class MvvmApp : MvxApplication
     {
         public MvvmApp()
         {
-            this.CreatableTypes()
+            CreatableTypes()
                 .EndingWith("Page")
                 .InNamespace("PageRendererExample.Pages")
                 .AsTypes()
                 .RegisterAsDynamic();
 
-            this.RegisterAppStart<ViewModels.BootViewModel>();
+            RegisterAppStart<BootViewModel>();
         }
     }
 }

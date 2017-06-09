@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com\
 
+using Windows.ApplicationModel;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
@@ -23,7 +24,7 @@ namespace MvvmCross.Binding.Uwp
 
             _checked = true;
 
-            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            if (!DesignMode.DesignModeEnabled)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.iOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
         event EventHandler ViewDidLoadCalled;

@@ -1,19 +1,20 @@
-// MvxAndroidLocalFileImageLoader.cs
+﻿// MvxAndroidLocalFileImageLoader.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.Graphics;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Binding;
-using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.Graphics;
+using MvvmCross.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Plugins.File;
+using Uri = Android.Net.Uri;
 
 namespace MvvmCross.Plugins.DownloadCache.Droid
 {
@@ -96,7 +97,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
                 await Task.Run(() =>
                 {
                     var globals = Mvx.Resolve<IMvxAndroidGlobals>();
-                    var uri = Android.Net.Uri.Parse(localPath);
+                    var uri = Uri.Parse(localPath);
                     var parcelFileDescriptor = globals?.ApplicationContext?.ContentResolver.OpenFileDescriptor(uri, "r");
                     var fileDescriptor = parcelFileDescriptor?.FileDescriptor;
 
@@ -164,8 +165,8 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
 
                 // Calculate the largest inSampleSize value that is a power of 2 and keeps both
                 // height and width larger than the requested height and width.
-                while ((halfHeight / inSampleSize) > reqHeight
-                        && (halfWidth / inSampleSize) > reqWidth)
+                while (halfHeight / inSampleSize > reqHeight
+                        && halfWidth / inSampleSize > reqWidth)
                 {
                     inSampleSize *= 2;
                 }

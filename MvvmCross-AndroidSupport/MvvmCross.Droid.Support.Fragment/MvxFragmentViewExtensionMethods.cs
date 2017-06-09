@@ -1,4 +1,4 @@
-// MvxFragmentExtensionMethods.cs
+﻿// MvxFragmentExtensionMethods.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,17 +6,16 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Support.V4.App;
-using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V4
 {
     public static class MvxFragmentExtensionMethods
     {
         public static TFragment FindFragmentById<TFragment>(this MvxFragmentActivity activity, int resourceId)
-            where TFragment : Android.Support.V4.App.Fragment
+            where TFragment : Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentById(resourceId);
             if (fragment == null)
@@ -29,7 +28,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public static TFragment FindFragmentByTag<TFragment>(this MvxFragmentActivity activity, string tag)
-            where TFragment : Android.Support.V4.App.Fragment
+            where TFragment : Fragment
         {
             var fragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (fragment == null)
@@ -41,7 +40,7 @@ namespace MvvmCross.Droid.Support.V4
             return SafeCast<TFragment>(fragment);
         }
 
-        private static TFragment SafeCast<TFragment>(Android.Support.V4.App.Fragment fragment) where TFragment : Android.Support.V4.App.Fragment
+        private static TFragment SafeCast<TFragment>(Fragment fragment) where TFragment : Fragment
         {
             if (!(fragment is TFragment))
             {

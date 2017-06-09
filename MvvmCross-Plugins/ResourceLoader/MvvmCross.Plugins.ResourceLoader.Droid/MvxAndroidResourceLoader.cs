@@ -8,8 +8,8 @@
 using System;
 using System.IO;
 using Android.Content.Res;
-using MvvmCross.Platform.Droid;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
 
 namespace MvvmCross.Plugins.ResourceLoader.Droid
 {

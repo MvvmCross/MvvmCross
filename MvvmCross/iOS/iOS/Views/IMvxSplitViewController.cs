@@ -1,6 +1,6 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using UIKit;
+
 namespace MvvmCross.iOS.Views
 {
     public interface IMvxSplitViewController

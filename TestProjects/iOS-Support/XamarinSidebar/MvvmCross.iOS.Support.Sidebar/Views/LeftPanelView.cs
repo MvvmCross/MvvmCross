@@ -1,14 +1,14 @@
+using Cirrious.FluentLayouts.Touch;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using CoreGraphics;
-    using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using UIKit;
-
     [Register("LeftPanelView")]
     [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.PushPanel, false)]
     public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>

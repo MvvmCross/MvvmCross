@@ -5,11 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Uwp.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using System;
-
     public interface IMvxWindowsViewModelRequestTranslator
     {
         string GetRequestTextFor(MvxViewModelRequest request);

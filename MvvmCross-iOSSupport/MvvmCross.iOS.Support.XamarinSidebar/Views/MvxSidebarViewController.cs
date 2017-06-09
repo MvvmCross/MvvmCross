@@ -71,8 +71,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         protected virtual void AttachNavigationController()
         {
-            this.AddChildViewController(NavigationController);
-            this.View.AddSubview(NavigationController.View);
+            AddChildViewController(NavigationController);
+            View.AddSubview(NavigationController.View);
         }
 
         protected virtual UIViewController ResolveSideMenu(MvxPanelEnum location)
@@ -174,7 +174,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         public void ToggleStatusBarStatus()
         {
             UIView.Animate(0.25,
-                animation: () =>
+                () =>
                 {
                     StatusBarHidden = !StatusBarHidden;
                     SetNeedsStatusBarAppearanceUpdate();

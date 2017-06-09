@@ -1,19 +1,16 @@
-// MvxBaseUIDatePickerTargetBinding.cs
+﻿// MvxBaseUIDatePickerTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using AppKit;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Mac.Target
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Platform.Platform;
-
     public abstract class MvxBaseNSDatePickerTargetBinding : MvxMacTargetBinding
     {
         private bool _subscribed;

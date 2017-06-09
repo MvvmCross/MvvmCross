@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Support.ExpandableTableView.Core
+﻿namespace MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels.ListItems
 {
 	public class Kitten
 	{

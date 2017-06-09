@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.WeakSubscription;
-
     public static class MvxInteractionExtensionMethods
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)

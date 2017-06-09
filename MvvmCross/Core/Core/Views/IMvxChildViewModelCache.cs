@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using System;
-
     public interface IMvxChildViewModelCache
     {
         int Cache(IMvxViewModel viewModel);

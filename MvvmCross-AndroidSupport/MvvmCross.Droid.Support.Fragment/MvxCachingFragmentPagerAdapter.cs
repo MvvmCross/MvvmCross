@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
@@ -6,8 +6,8 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
-using MvvmCross.Platform;
 using Java.Lang;
+using MvvmCross.Platform;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4
@@ -17,12 +17,12 @@ namespace MvvmCross.Droid.Support.V4
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentPagerAdapter")]
     public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
-        private Android.Support.V4.App.Fragment _currentPrimaryItem;
+        private Fragment _currentPrimaryItem;
         private FragmentTransaction _curTransaction;
         private readonly FragmentManager _fragmentManager;
-        private readonly List<Android.Support.V4.App.Fragment> _fragments = new List<Android.Support.V4.App.Fragment>();
+        private readonly List<Fragment> _fragments = new List<Fragment>();
         private List<string> _savedFragmentTags = new List<string>();
-        private readonly List<Android.Support.V4.App.Fragment.SavedState> _savedState = new List<Android.Support.V4.App.Fragment.SavedState>();
+        private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
 		protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -34,17 +34,17 @@ namespace MvvmCross.Droid.Support.V4
             _fragmentManager = fragmentManager;
         }
 
-        public abstract Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null);
+        public abstract Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null);
 
         public override void DestroyItem(ViewGroup container, int position, Object objectValue)
         {
-            var fragment = (Android.Support.V4.App.Fragment)objectValue;
+            var fragment = (Fragment)objectValue;
 
             if (_curTransaction == null)
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            Mvx.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Android.Support.V4.App.Fragment) objectValue).View +
+            Mvx.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
                       " t=" + fragment.Tag);
 #endif
 
@@ -90,7 +90,7 @@ namespace MvvmCross.Droid.Support.V4
 
             var fragmentTag = GetTag(position);
 
-            Android.Support.V4.App.Fragment.SavedState fss = null;
+            Fragment.SavedState fss = null;
             if (_savedState.Count > position)
             {
                 var savedTag = _savedFragmentTags.ElementAtOrDefault(position);
@@ -119,7 +119,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override bool IsViewFromObject(View view, Object objectValue)
         {
-            return ((Android.Support.V4.App.Fragment)objectValue).View == view;
+            return ((Fragment)objectValue).View == view;
         }
 
         public override void RestoreState(IParcelable state, ClassLoader loader)
@@ -144,7 +144,7 @@ namespace MvvmCross.Droid.Support.V4
                 for (var i = 0; i < fss.Length; i++)
                 {
                     var parcelable = fss.ElementAt(i);
-                    var savedState = parcelable.JavaCast<Android.Support.V4.App.Fragment.SavedState>();
+                    var savedState = parcelable.JavaCast<Fragment.SavedState>();
                     _savedState.Add(savedState);
                 }
             }
@@ -203,7 +203,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override void SetPrimaryItem(ViewGroup container, int position, Object objectValue)
         {
-            var fragment = (Android.Support.V4.App.Fragment)objectValue;
+            var fragment = (Fragment)objectValue;
             if (fragment == _currentPrimaryItem)
                 return;
 

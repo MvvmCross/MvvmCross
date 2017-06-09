@@ -62,9 +62,9 @@ namespace MvvmCross.Plugins.File
             return toReturn;
         }
 
-        public bool TryReadBinaryFile(string path, out Byte[] contents)
+        public bool TryReadBinaryFile(string path, out byte[] contents)
         {
-            Byte[] result = null;
+            byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
                 {
                     using (var binaryReader = new BinaryReader(stream))
@@ -100,7 +100,7 @@ namespace MvvmCross.Plugins.File
                 });
         }
 
-        public void WriteFile(string path, IEnumerable<Byte> contents)
+        public void WriteFile(string path, IEnumerable<byte> contents)
         {
             WriteFileCommon(path, (stream) =>
                 {

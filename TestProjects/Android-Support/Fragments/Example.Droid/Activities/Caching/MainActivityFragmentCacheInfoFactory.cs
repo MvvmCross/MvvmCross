@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Example.Core.ViewModels;
-using Example.Droid.Fragments;
-
 namespace Example.Droid.Activities.Caching
 {
     /*internal class MainActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory

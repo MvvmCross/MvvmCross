@@ -1,14 +1,13 @@
 ﻿using System.Windows.Input;
-
 using MvvmCross.Core.ViewModels;
 
-namespace PageRendererExample.ViewModels
+namespace PageRendererExample
 {
     public class CameraRendererViewModel : MvxViewModel
     {
-        readonly IImageHolder _imageHolder;
+        private readonly IImageHolder _imageHolder;
 
-        MvxCommand _closeCommand;
+        private MvxCommand _closeCommand;
         public ICommand CloseCommand {
             get {
                 if (_closeCommand == null) {

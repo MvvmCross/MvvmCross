@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Reflection;
+using MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

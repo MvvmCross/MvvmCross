@@ -11,16 +11,17 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -40,7 +41,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
-            this._bindingContext = bindingContext;
+            _bindingContext = bindingContext;
         }
 
         public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
@@ -109,7 +110,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public override void OnViewAttachedToWindow(Java.Lang.Object holder)
+        public override void OnViewAttachedToWindow(Object holder)
         {
             base.OnViewAttachedToWindow(holder);
 
@@ -117,7 +118,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnAttachedToWindow();
         }
 
-        public override void OnViewDetachedFromWindow(Java.Lang.Object holder)
+        public override void OnViewDetachedFromWindow(Object holder)
         {
             base.OnViewDetachedFromWindow(holder);
 
@@ -125,7 +126,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnDetachedFromWindow();
         }
 
-        public override void OnViewRecycled(Java.Lang.Object holder)
+        public override void OnViewRecycled(Object holder)
         {
             base.OnViewRecycled(holder);
 

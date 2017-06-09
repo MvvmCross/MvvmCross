@@ -10,7 +10,7 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
-namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
+namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 #endif
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding

@@ -10,7 +10,6 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
@@ -32,7 +31,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (adapter == null)
                 return;
 
-            var currentLayoutManager = base.GetLayoutManager();
+            var currentLayoutManager = GetLayoutManager();
 
             // Love you Android
             // https://code.google.com/p/android/issues/detail?id=77846#c10
@@ -68,7 +67,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get { return GetAdapter() as IMvxRecyclerAdapter; }
             set
             {
                 var existing = Adapter;
@@ -143,14 +142,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get { return Adapter.ItemClick; }
+            set { Adapter.ItemClick = value; }
         }
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get { return Adapter.ItemLongClick; }
+            set { Adapter.ItemLongClick = value; }
         }
     }
 }

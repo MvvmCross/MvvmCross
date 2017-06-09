@@ -5,6 +5,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Util;
 using Android.Views;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
@@ -26,13 +27,13 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
 
         }
 
-        public override bool OnStartNestedScroll(CoordinatorLayout coordinatorLayout, Java.Lang.Object child, View directTargetChild, View target, int nestedScrollAxes)
+        public override bool OnStartNestedScroll(CoordinatorLayout coordinatorLayout, Object child, View directTargetChild, View target, int nestedScrollAxes)
         {
             return nestedScrollAxes == ViewCompat.ScrollAxisVertical ||
                    base.OnStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
         }
 
-        public override void OnNestedScroll(CoordinatorLayout coordinatorLayout, Java.Lang.Object child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed)
+        public override void OnNestedScroll(CoordinatorLayout coordinatorLayout, Object child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed)
         {
             base.OnNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 

@@ -1,4 +1,5 @@
 using System;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
 
@@ -35,11 +36,11 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Bindings
 			_target.SetThat(value);
 		}
 
-		public override MvvmCross.Binding.MvxBindingMode DefaultMode
+		public override MvxBindingMode DefaultMode
 		{
 			get
 			{
-				return MvvmCross.Binding.MvxBindingMode.TwoWay;
+				return MvxBindingMode.TwoWay;
 			}
 		}
 

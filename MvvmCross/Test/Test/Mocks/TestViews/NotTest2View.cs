@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Test.Mocks.TestViewModels;
+
 namespace MvvmCross.Test.Mocks.TestViews
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
     public class NotTest2View : IMvxView
     {
         public object DataContext { get; set; }

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System.Collections.Generic;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxConvertingTargetBinding : MvxTargetBinding
     {
         private bool _isUpdatingSource;

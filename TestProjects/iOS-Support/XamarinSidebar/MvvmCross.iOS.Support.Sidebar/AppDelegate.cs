@@ -1,11 +1,11 @@
+using Foundation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using Foundation;
-    using UIKit;
-    using MvvmCross.Platform;
-    using MvvmCross.Core.ViewModels;
-    using Platform;
-
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register ("AppDelegate")]

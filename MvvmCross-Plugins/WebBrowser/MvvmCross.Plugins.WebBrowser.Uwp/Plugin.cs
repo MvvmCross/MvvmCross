@@ -8,11 +8,10 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.WebBrowser.WindowsCommon
+namespace MvvmCross.Plugins.WebBrowser.Uwp
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

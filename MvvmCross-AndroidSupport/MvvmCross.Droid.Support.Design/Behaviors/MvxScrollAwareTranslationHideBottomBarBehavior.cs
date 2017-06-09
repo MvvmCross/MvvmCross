@@ -60,7 +60,7 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
                 isBottomBarVisible = true;
             }
 
-            if ((isBottomBarVisible && dyConsumed >= 0) || (!isBottomBarVisible && dyConsumed <= 0))
+            if (isBottomBarVisible && dyConsumed >= 0 || !isBottomBarVisible && dyConsumed <= 0)
                 scrolledDistance += dyConsumed;
         }
     }
