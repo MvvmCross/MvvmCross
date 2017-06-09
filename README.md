@@ -15,7 +15,7 @@ MvvmCross
 [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 [![OpenCollective](https://opencollective.com/mvvmcross/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/mvvmcross/sponsors/badge.svg)](#sponsors)
-[![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
+[![CodeFactor](https://www.codefactor.io/repository/github/mvvmcross/mvvmcross/badge)](https://www.codefactor.io/repository/github/mvvmcross/mvvmcross)
 
 👀 Check out [mvvmcross.com](https://www.mvvmcross.com) to get started with MvvmCross 👀
 
