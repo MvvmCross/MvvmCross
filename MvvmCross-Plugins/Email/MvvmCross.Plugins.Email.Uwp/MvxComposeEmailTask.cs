@@ -23,11 +23,11 @@ namespace MvvmCross.Plugins.Email.Uwp
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null : new[] { to };
-            var ccArray = cc == null ? null : new[] { cc };
+            var tos = to == null ? null : new[] { to };
+            var ccs = cc == null ? null : new[] { cc };
             ComposeEmail(
-                toArray,
-                ccArray,
+                tos,
+                ccs,
                 subject,
                 body,
                 isHtml,
@@ -41,32 +41,36 @@ namespace MvvmCross.Plugins.Email.Uwp
             EmailMessage email = new EmailMessage();
 
             if (to != null)
+            {
                 foreach (var item in to)
                 {
                     email.To.Add(new EmailRecipient(item));
                 }
+            }
 
             if (cc != null)
+            {
                 foreach (var item in cc)
                 {
                     email.CC.Add(new EmailRecipient(item));
                 }
+            }
 
             email.Subject = subject ?? "";
             email.Body = body ?? "";
 
             if (attachments != null)
+            {
                 foreach (var item in attachments)
                 {
-                    email.Attachments.Add(new Windows.ApplicationModel.Email.EmailAttachment(item.FileName, await GetTextFile(item))
-                    );
+                    email.Attachments.Add(
+                        new Windows.ApplicationModel.Email.EmailAttachment(
+                            item.FileName, await GetTextFile(item)));
                 }
-
-
+            }
+            
             await EmailManager.ShowComposeNewEmailAsync(email);
-
         }
-
 
         private static async Task<StorageFile> GetTextFile(EmailAttachment attachement)
         {

@@ -23,7 +23,8 @@ namespace MvvmCross.Binding.Droid.Binders
 
             public FactoryWrapper(IntPtr handle, JniHandleOwnership ownership)
                 : base(handle, ownership)
-            {}
+            {
+            }
 
             public FactoryWrapper(IMvxLayoutInflaterFactory delegateFactory)
             {
@@ -40,11 +41,13 @@ namespace MvvmCross.Binding.Droid.Binders
         {
             public FactoryWrapper2(IntPtr handle, JniHandleOwnership ownership)
                 : base(handle, ownership)
-            {}
+            {
+            }
 
             public FactoryWrapper2(IMvxLayoutInflaterFactory delegateFactory)
                 : base(delegateFactory)
-            { }
+            {
+            }
 
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {

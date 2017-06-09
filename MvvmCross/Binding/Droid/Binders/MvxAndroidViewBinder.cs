@@ -21,8 +21,6 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Binders
 {
-    
-
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
         private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings = new List<KeyValuePair<object, IMvxUpdateableBinding>>();

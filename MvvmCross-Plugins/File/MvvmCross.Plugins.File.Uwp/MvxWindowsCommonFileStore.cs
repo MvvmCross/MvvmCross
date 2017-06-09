@@ -185,7 +185,6 @@ namespace MvvmCross.Plugins.File.Uwp
                 return currentFolder;
             else
                 return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
-
         }
 
         public override IEnumerable<string> GetFilesIn(string folderPath)

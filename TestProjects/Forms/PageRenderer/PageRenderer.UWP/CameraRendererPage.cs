@@ -96,7 +96,7 @@ namespace PageRendererExample.WindowsUWP
         {
             var binding = new Binding {
                 Path = new PropertyPath("CloseCommand"),
-                Source=ViewModel
+                Source = ViewModel
             };
             _cancelButton.SetBinding(ButtonBase.CommandProperty, binding);
         }
@@ -119,11 +119,16 @@ namespace PageRendererExample.WindowsUWP
             var backCamera = devices.FirstOrDefault(c => c.EnclosureLocation != null && c.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back);
 
             DeviceInformation currentCamera = null;
-            if (backCamera != null) {
+            if (backCamera != null) 
+            {
                 currentCamera = backCamera;
-            } else if (frontCamera != null) {
+            } 
+            else if (frontCamera != null) 
+            {
                 currentCamera = frontCamera;
-            } else if (devices.Count() > 0) {
+            } 
+            else if (devices.Count() > 0) 
+            {
                 currentCamera = devices.First();
             }
 
@@ -207,7 +212,6 @@ namespace PageRendererExample.WindowsUWP
                 {
                     _mediaCapture = null;
                 }
-
             }
         }
     }

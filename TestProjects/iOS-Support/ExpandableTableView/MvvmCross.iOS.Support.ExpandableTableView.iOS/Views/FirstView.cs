@@ -27,9 +27,9 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
             };
 
             this.AddBindings(new Dictionary<object, string>
-                {
-                    {source, "ItemsSource KittenGroups"}
-                });
+            {
+                { source, "ItemsSource KittenGroups" }
+            });
 
             TableView.Source = source;
             TableView.ReloadData();
@@ -50,7 +50,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
             string nibName = "KittenCell";
             _cellIdentifier = new NSString(nibName);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, NSBundle.MainBundle), CellIdentifier);
-
 
             string nibName2 = "HeaderCell";
             _headerCellIdentifier = new NSString(nibName2);
@@ -96,7 +95,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
         {
             var indexes = sectionIndexes;
             // you can handle on section expanded
-
         }
 
         protected override void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)

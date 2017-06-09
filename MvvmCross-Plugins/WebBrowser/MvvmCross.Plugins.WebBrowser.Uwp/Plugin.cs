@@ -12,7 +12,6 @@ namespace MvvmCross.Plugins.WebBrowser.Uwp
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

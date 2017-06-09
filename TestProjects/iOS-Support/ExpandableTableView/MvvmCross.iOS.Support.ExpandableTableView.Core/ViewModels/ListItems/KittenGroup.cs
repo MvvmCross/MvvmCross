@@ -8,7 +8,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels.ListItems
 
 		public KittenGroup(IEnumerable<Kitten> collection) : base(collection)
 		{
-
 		}
 	}
 }

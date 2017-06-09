@@ -12,9 +12,11 @@ namespace PageRendererExample
         {
             InitializeComponent();
 
-            _capturedImage = new Image {
+            _capturedImage = new Image 
+            {
                 BackgroundColor = Color.White
             };
+
             _relativeLayout.Children.Add(
                 _capturedImage,
                 Constraint.RelativeToParent(parent => 0.10 * parent.Width),
@@ -23,9 +25,10 @@ namespace PageRendererExample
                 Constraint.RelativeToParent(parent => 0.80 * parent.Height)
             );
 
-            _showCameraButton = new Button {
-                HeightRequest=44,
-                WidthRequest=200,
+            _showCameraButton = new Button 
+            {
+                HeightRequest = 44,
+                WidthRequest = 200,
                 Text = "Show Camera",
                 StyleId = "ShowCustomPageRendererButton"
             };

@@ -9,13 +9,12 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Droid;
+using PageRendererExample;
 using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
-using PageRendererExample;
 
-[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
-
+[assembly:ExportRenderer (typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))
 namespace PageRendererExample.UI.Droid
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>, TextureView.ISurfaceTextureListener
