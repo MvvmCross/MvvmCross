@@ -116,7 +116,7 @@ namespace MvvmCross.Droid.Platform
 
         protected virtual IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxAndroidViewPresenter();
+            return new MvxAndroidViewPresenter(AndroidViewAssemblies);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()

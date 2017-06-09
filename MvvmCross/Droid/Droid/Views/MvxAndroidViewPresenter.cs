@@ -5,10 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Android.App;
 using Android.Content;
+using Android.OS;
+using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
@@ -19,14 +28,60 @@ namespace MvvmCross.Droid.Views
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {
         protected Activity Activity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
+
+        protected FragmentHostRegistrationSettings _fragmentHostRegistrationSettings;
+        protected Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
+
+        protected IMvxNavigationSerializer Serializer => _lazyNavigationSerializerFactory.Value;
+
+        private IFragmentCacheConfiguration _fragmentCacheConfiguration;
+        public IFragmentCacheConfiguration FragmentCacheConfiguration => _fragmentCacheConfiguration ?? (_fragmentCacheConfiguration = BuildFragmentCacheConfiguration());
+
+        public virtual IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
+        {
+            return new DefaultFragmentCacheConfiguration();
+        }
+
+        public MvxAndroidViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
+        {
+            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
+            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
+        }
 
         public override void Show(MvxViewModelRequest request)
         {
-            var intent = CreateIntentForRequest(request);
-            Show(intent);
+            if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType))
+                ShowFragment(request);
+            else
+                ShowActivity(request);
         }
 
-        protected virtual void Show(Intent intent)
+        protected virtual void ShowActivity(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest = null)
+        {
+            if (fragmentRequest == null)
+            {
+                var intent = CreateIntentForRequest(request);
+                ShowIntent(intent);
+            }
+            else
+                Show(request, fragmentRequest);
+        }
+
+        public void Show(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest)
+        {
+            var intent = CreateIntentForRequest(request);
+            if (fragmentRequest != null)
+            {
+                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+                var requestText = converter.Serializer.SerializeObject(fragmentRequest);
+                intent.PutExtra(ViewModelRequestBundleKey, requestText);
+            }
+
+            ShowIntent(intent);
+        }
+
+        protected virtual void ShowIntent(Intent intent)
         {
             var activity = Activity;
             if (activity == null)
@@ -35,6 +90,70 @@ namespace MvvmCross.Droid.Views
                 return;
             }
             activity.StartActivity(intent);
+        }
+
+        protected virtual string GetFragmentTag(MvxViewModelRequest request)
+        {
+            // THAT won't work properly if you have multiple instance of same fragment type in same FragmentHost.
+            // Override that in such cases
+            return request.ViewModelType.FullName;
+        }
+
+        protected virtual void ShowFragment(MvxViewModelRequest request)
+        {
+            var bundle = new Bundle();
+            var serializedRequest = Serializer.Serializer.SerializeObject(request);
+            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+            if (request is MvxViewModelInstanceRequest)
+            {
+                Mvx.Resolve<IMvxChildViewModelCache>().Cache(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+            }
+
+            if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
+            {
+                Type newFragmentHostViewModelType =
+                    _fragmentHostRegistrationSettings.GetFragmentHostViewModelType(request.ViewModelType);
+
+                var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
+                ShowActivity(fragmentHostMvxViewModelRequest, request);
+                return;
+            }
+
+            var mvxFragmentAttributeAssociated = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociatedWithCurrentHost(request.ViewModelType);
+            var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
+
+            var fragmentTag = GetFragmentTag(request);
+            FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, mvxFragmentAttributeAssociated.AddToBackStack);
+
+            var fragment = CreateFragment(fragmentType, bundle);
+
+            var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+            var viewModelType = request.ViewModelType;
+            if (childViewModelCache.Exists(viewModelType))
+            {
+                fragment.ViewModel = childViewModelCache.Get(viewModelType);
+                childViewModelCache.Remove(viewModelType);
+            }
+
+            ReplaceFragment(mvxFragmentAttributeAssociated, fragment, fragmentTag);
+        }
+
+        protected virtual void ReplaceFragment(MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
+        {
+            var ft = Activity.FragmentManager.BeginTransaction();
+            ft.Replace(mvxFragmentAttributeAssociated.FragmentContentId, fragment as Fragment, fragmentTag);
+        }
+
+        protected virtual IMvxFragmentView CreateFragment(Type fragType, Bundle bundle)
+        {
+            return Fragment.Instantiate(Activity, FragmentJavaName(fragType),
+                    bundle) as IMvxFragmentView;
+        }
+
+        protected virtual string FragmentJavaName(Type fragmentType)
+        {
+            return Class.FromType(fragmentType).Name;
         }
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
