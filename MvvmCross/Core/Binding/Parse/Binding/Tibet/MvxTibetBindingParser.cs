@@ -1,10 +1,11 @@
-// MvxTibetBindingParser.cs
+﻿// MvxTibetBindingParser.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Parse.Binding.Swiss;
@@ -17,17 +18,35 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
     {
         public static readonly object LiteralNull = new object();
 
-        private static readonly char[] _operatorCharacters = { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^' };
+        public static readonly char[] OperatorCharacters = { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^' };
 
-        private List<char> _terminatingCharacters;
-
-        protected override IEnumerable<char> TerminatingCharacters()
+        private static Dictionary<string, string> TwoCharacterOperatorCombinerNames => new Dictionary<string, string>
         {
-            return _terminatingCharacters ??
-                   (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters()).ToList());
-        }
+            { "!=", "NotEqualTo" },
+            { ">=", "GreaterThanOrEqualTo" },
+            { "<=", "LessThanOrEqualTo" },
+            { "==", "EqualTo" },
+            { "&&", "And" },
+            { "||", "Or" }
+        };
 
-        private static char[] OperatorCharacters() => _operatorCharacters;
+        private static Dictionary<char, string> SingleCharacterOperatorCombinerNames => new Dictionary<char, string>
+        {
+            { '>', "GreaterThan" },
+            { '<', "LessThan" },
+            { '+', "Add" },
+            { '-', "Subtract" },
+            { '*', "Multiply" },
+            { '/', "Divide" },
+            { '%', "Modulus" },
+            { '!', "Inverted" },
+            { '^', "XOr" }
+        };
+
+        private char[] _terminatingCharacters;
+
+        protected override IEnumerable<char> TerminatingCharacters() => 
+            _terminatingCharacters ?? (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters).ToArray());
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
@@ -83,106 +102,38 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             description.Sources = sources.ToArray();
         }
 
+        private Tuple<uint, string> ParseTwoCharacterOperator()
+        {
+            uint moveFowards = 0;
+            var twoCharacterOperatorString = SafePeekString(2);
+            var gotCombinerName = TwoCharacterOperatorCombinerNames.TryGetValue(twoCharacterOperatorString, out string combinerName);
+            if (gotCombinerName)
+                moveFowards = 2;
+
+            return Tuple.Create(moveFowards, combinerName);
+        }
+
         protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
         {
-            // get the operator Combiner
-            var twoCharacterOperatorString = SafePeekString(2);
+            // Parse the operator
+            var parsed = ParseTwoCharacterOperator();
+            var moveForwards = parsed.Item1;
+            var combinerName = parsed.Item2;
 
-            // TODO - I guess this should be done by dictionaries
-            string combinerName = null;
-            uint moveFowards = 0;
-            switch (twoCharacterOperatorString)
-            {
-                case "!=":
-                    combinerName = "NotEqualTo";
-                    moveFowards = 2;
-                    break;
-
-                case ">=":
-                    combinerName = "GreaterThanOrEqualTo";
-                    moveFowards = 2;
-                    break;
-
-                case "<=":
-                    combinerName = "LessThanOrEqualTo";
-                    moveFowards = 2;
-                    break;
-
-                case "==":
-                    combinerName = "EqualTo";
-                    moveFowards = 2;
-                    break;
-
-                case "&&":
-                    combinerName = "And";
-                    moveFowards = 2;
-                    break;
-
-                case "||":
-                    combinerName = "Or";
-                    moveFowards = 2;
-                    break;
-            }
-
-            // TODO - I guess this should be done by dictionaries
             if (combinerName == null)
             {
-                switch (CurrentChar)
-                {
-                    case '>':
-                        combinerName = "GreaterThan";
-                        moveFowards = 1;
-                        break;
-
-                    case '<':
-                        combinerName = "LessThan";
-                        moveFowards = 1;
-                        break;
-
-                    case '+':
-                        combinerName = "Add";
-                        moveFowards = 1;
-                        break;
-
-                    case '-':
-                        combinerName = "Subtract";
-                        moveFowards = 1;
-                        break;
-
-                    case '*':
-                        combinerName = "Multiply";
-                        moveFowards = 1;
-                        break;
-
-                    case '/':
-                        combinerName = "Divide";
-                        moveFowards = 1;
-                        break;
-
-                    case '%':
-                        combinerName = "Modulus";
-                        moveFowards = 1;
-                        break;
-
-					case '!':
-						combinerName = "Inverted";
-						moveFowards = 1;
-						break;
-
-					case '^':
-						combinerName = "XOr";
-						moveFowards = 1;
-						break;
-                }
+                var gotCombinerName = SingleCharacterOperatorCombinerNames.TryGetValue(CurrentChar, out combinerName);
+                if (gotCombinerName)
+                    moveForwards = 1;
             }
 
             if (combinerName == null)
                 throw new MvxException("Unexpected operator starting with {0}", CurrentChar);
 
-            MoveNext(moveFowards);
+            MoveNext(moveForwards);
 
             // now create the operator Combiner
-            var child = new MvxSerializableBindingDescription()
+            var child = new MvxSerializableBindingDescription
             {
                 Path = description.Path,
                 Literal = description.Literal,
@@ -201,19 +152,16 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             description.Mode = MvxBindingMode.Default;
             description.Literal = null;
             description.Function = combinerName;
-            description.Sources = new List<MvxSerializableBindingDescription>()
-                {
-                    child,
-                    ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
-                };
+            description.Sources = new List<MvxSerializableBindingDescription>
+            {
+                child,
+                ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
+            };
 
             return description;
         }
 
-        protected override bool DetectOperator()
-        {
-            return OperatorCharacters().Contains(CurrentChar);
-        }
+        protected override bool DetectOperator() => OperatorCharacters.Contains(CurrentChar);
 
         protected override void HandleEmptyBlock(MvxSerializableBindingDescription description)
         {

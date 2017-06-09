@@ -1,4 +1,4 @@
-// MvxSwissBindingParser.cs
+﻿// MvxSwissBindingParser.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -19,6 +19,67 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             return new[] { '=', ',', ';', '(', ')' };
         }
 
+        private void ParsePath(string block, MvxSerializableBindingDescription description)
+        {
+            ParseEquals(block);
+            ThrowExceptionIfPathAlreadyDefined(description);
+            description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+        }
+
+        private void ParseConverter(string block, MvxSerializableBindingDescription description)
+        {
+            ParseEquals(block);
+            var converter = ReadTargetPropertyName();
+            if (!string.IsNullOrEmpty(description.Converter))
+                MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
+            description.Converter = converter;
+        }
+
+        private void ParseConverterParameter(string block, MvxSerializableBindingDescription description)
+        {
+            ParseEquals(block);
+            if (description.ConverterParameter != null)
+                MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
+            description.ConverterParameter = ReadValue();
+        }
+
+        private void ParseCommandParameter(string block, MvxSerializableBindingDescription description)
+        {
+            if (!IsComplete &&
+               CurrentChar == '(')
+            {
+                // following https://github.com/MvvmCross/MvvmCross/issues/704, if the next character is "(" then
+                // we can treat CommandParameter as a normal non-keyword block
+                ParseNonKeywordBlockInto(description, block);
+            }
+            else
+            {
+                ParseEquals(block);
+                if (!string.IsNullOrEmpty(description.Converter))
+                    MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
+                description.Converter = "CommandParameter";
+                description.ConverterParameter = ReadValue();
+            }
+        }
+
+        private void ParseFallbackValue(string block, MvxSerializableBindingDescription description)
+        {
+            ParseEquals(block);
+            if (description.FallbackValue != null)
+                MvxBindingTrace.Warning("Overwriting existing FallbackValue");
+            description.FallbackValue = ReadValue();
+        }
+
+        private void ParseMode(string block, MvxSerializableBindingDescription description)
+        {
+            ParseEquals(block);
+            //if (description.Mode != MvxBindingMode.Default)
+            //{
+            //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
+            //}
+            description.Mode = ReadBindingMode();
+        }
+
         protected virtual void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)
         {
             if (IsComplete)
@@ -35,60 +96,23 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             switch (block)
             {
                 case "Path":
-                    ParseEquals(block);
-                    ThrowExceptionIfPathAlreadyDefined(description);
-                    description.Path = ReadTextUntilNonQuotedOccurrenceOfAnyOf(',', ';');
+                    ParsePath(block, description);
                     break;
-
                 case "Converter":
-                    ParseEquals(block);
-                    var converter = ReadTargetPropertyName();
-                    if (!string.IsNullOrEmpty(description.Converter))
-                        MvxBindingTrace.Warning("Overwriting existing Converter with {0}", converter);
-                    description.Converter = converter;
+                    ParseConverter(block, description);
                     break;
-
                 case "ConverterParameter":
-                    ParseEquals(block);
-                    if (description.ConverterParameter != null)
-                        MvxBindingTrace.Warning("Overwriting existing ConverterParameter");
-                    description.ConverterParameter = ReadValue();
+                    ParseConverterParameter(block, description);
                     break;
-
                 case "CommandParameter":
-                    if (!IsComplete &&
-                        CurrentChar == '(')
-                    {
-                        // following https://github.com/MvvmCross/MvvmCross/issues/704, if the next character is "(" then
-                        // we can treat CommandParameter as a normal non-keyword block
-                        ParseNonKeywordBlockInto(description, block);
-                    }
-                    else
-                    {
-                        ParseEquals(block);
-                        if (!string.IsNullOrEmpty(description.Converter))
-                            MvxBindingTrace.Warning("Overwriting existing Converter with CommandParameter");
-                        description.Converter = "CommandParameter";
-                        description.ConverterParameter = ReadValue();
-                    }
+                    ParseCommandParameter(block, description);
                     break;
-
                 case "FallbackValue":
-                    ParseEquals(block);
-                    if (description.FallbackValue != null)
-                        MvxBindingTrace.Warning("Overwriting existing FallbackValue");
-                    description.FallbackValue = ReadValue();
+                    ParseFallbackValue(block, description);
                     break;
-
                 case "Mode":
-                    ParseEquals(block);
-                    //if (description.Mode != MvxBindingMode.Default)
-                    //{
-                    //    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
-                    //}
-                    description.Mode = ReadBindingMode();
+                    ParseMode(block, description);
                     break;
-
                 default:
                     ParseNonKeywordBlockInto(description, block);
                     break;
@@ -149,8 +173,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         }
 
         protected void ParseChildBindingDescriptionInto(MvxSerializableBindingDescription description,
-                                                        ParentIsLookingForComma parentIsLookingForComma =
-                                                            ParentIsLookingForComma.ParentIsLookingForComma)
+            ParentIsLookingForComma parentIsLookingForComma = ParentIsLookingForComma.ParentIsLookingForComma)
         {
             SkipWhitespace();
             description.Function = "Single";
@@ -162,9 +185,9 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
 
         protected void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description)
         {
-            if (description.Path != null
-                && description.Literal != null
-                && description.Function != null)
+            if (description.Path != null && 
+                description.Literal != null && 
+                description.Function != null)
             {
                 throw new MvxException(
                     "Make sure you are using ';' to separate multiple bindings. You cannot specify Path/Literal/Combiner more than once - position {0} in {1}",
@@ -172,10 +195,8 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             }
         }
 
-        protected override MvxSerializableBindingDescription ParseBindingDescription()
-        {
-            return ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
-        }
+        protected override MvxSerializableBindingDescription ParseBindingDescription() => 
+            ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
 
         protected enum ParentIsLookingForComma
         {
@@ -230,9 +251,6 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             throw new MvxException("Operators not expected in base SwissBinding");
         }
 
-        protected virtual bool DetectOperator()
-        {
-            return false;
-        }
+        protected virtual bool DetectOperator() => false;
     }
 }
