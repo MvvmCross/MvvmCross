@@ -45,7 +45,7 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
 
                         var encoder = GetBitmapEncoder(filePicker.FileName, percentQuality);
                         if (encoder == null)
-                            throw new NotSupportedException("The file image is invalid, please select jpg, jpeg, gif, png ot tiff files.");
+                            throw new NotSupportedException("The image file is invalid. Please, select a jpg, jpeg, gif, png or tiff file.");
                         
                         MemoryStream stream = new MemoryStream();
                         encoder.Frames.Add(BitmapFrame.Create(transformBM));
@@ -75,22 +75,23 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
         /// <returns></returns>
         private BitmapEncoder GetBitmapEncoder(string fileName, int percentQuality)
         {
-            if (fileName.ToLower().EndsWith("jpg") || fileName.ToLower().EndsWith("jpeg"))
+            var lowerName = Path.GetExtension(fileName.ToLower());
+            if (lowerName.Equals(".jpg") || lowerName.Equals(".jpeg"))
             {
                 return new JpegBitmapEncoder()
                 {
                     QualityLevel = percentQuality
                 };
             }
-            else if (fileName.ToLower().EndsWith("png"))
+            else if (lowerName.Equals(".png"))
             {
                 return new PngBitmapEncoder();
             }
-            else if (fileName.ToLower().EndsWith("gif"))
+            else if (lowerName.Equals(".gif"))
             {
                 return new GifBitmapEncoder();
             }
-            else if (fileName.ToLower().EndsWith("tiff"))
+            else if (lowerName.Equals(".tiff"))
             {
                 return new TiffBitmapEncoder();
             }
