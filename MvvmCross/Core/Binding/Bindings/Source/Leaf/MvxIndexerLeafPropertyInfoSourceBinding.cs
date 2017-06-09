@@ -14,7 +14,8 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
     {
         private readonly object _key;
 
-        public MvxIndexerLeafPropertyInfoSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexToken)
+        public MvxIndexerLeafPropertyInfoSourceBinding(object source, PropertyInfo itemPropertyInfo,
+            MvxIndexerPropertyToken indexToken)
             : base(source, itemPropertyInfo)
         {
             _key = indexToken.Key;
@@ -22,7 +23,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         protected override object[] PropertyIndexParameters()
         {
-            return new[] { _key };
+            return new[] {_key};
         }
     }
 }

@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.ExtensionMethods
             }
 
             var enumerator = items.GetEnumerator();
-            for (var i = 0; ; i++)
+            for (var i = 0;; i++)
             {
                 if (!enumerator.MoveNext())
                 {

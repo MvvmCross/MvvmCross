@@ -16,9 +16,11 @@ namespace MvvmCross.Core.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject
-        , IMvxNotifyPropertyChanged
+            , IMvxNotifyPropertyChanged
     {
-        private static readonly PropertyChangedEventArgs AllPropertiesChanged = new PropertyChangedEventArgs(string.Empty);
+        private static readonly PropertyChangedEventArgs AllPropertiesChanged =
+            new PropertyChangedEventArgs(string.Empty);
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
@@ -35,7 +37,8 @@ namespace MvvmCross.Core.ViewModels
 
         protected MvxNotifyPropertyChanged()
         {
-            var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            var alwaysOnUIThread = MvxSingletonCache.Instance == null ||
+                                   MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 

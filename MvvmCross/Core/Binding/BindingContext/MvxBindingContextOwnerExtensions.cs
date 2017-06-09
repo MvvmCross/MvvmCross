@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public static void CreateBindingContext(this IMvxBindingContextOwner view,
-                                                IEnumerable<MvxBindingDescription> bindings)
+            IEnumerable<MvxBindingDescription> bindings)
         {
             view.BindingContext = Mvx.Resolve<IMvxBindingContext>().Init(null, view, bindings);
         }
@@ -45,7 +45,8 @@ namespace MvvmCross.Binding.BindingContext
             view.BindingContext.DelayBind(bindingAction);
         }
 
-        public static void AddBinding(this IMvxBindingContextOwner view, object target, IMvxUpdateableBinding binding, object clearKey = null)
+        public static void AddBinding(this IMvxBindingContextOwner view, object target, IMvxUpdateableBinding binding,
+            object clearKey = null)
         {
             if (clearKey == null)
             {
@@ -57,7 +58,8 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
-        public static void AddBindings(this IMvxBindingContextOwner view, object target, IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
+        public static void AddBindings(this IMvxBindingContextOwner view, object target,
+            IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
         {
             if (bindings == null)
                 return;
@@ -66,29 +68,30 @@ namespace MvvmCross.Binding.BindingContext
                 view.AddBinding(target, binding, clearKey);
         }
 
-        public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText, object clearKey = null)
+        public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText,
+            object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
             view.AddBindings(target, bindings, clearKey);
         }
 
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
-                                      MvxBindingDescription bindingDescription, object clearKey = null)
+            MvxBindingDescription bindingDescription, object clearKey = null)
         {
-            var descriptions = new[] { bindingDescription };
+            var descriptions = new[] {bindingDescription};
             view.AddBindings(target, descriptions, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
-                                       IEnumerable<MvxBindingDescription> bindingDescriptions, object clearKey = null)
+            IEnumerable<MvxBindingDescription> bindingDescriptions, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingDescriptions);
             view.AddBindings(target, bindings, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
-                                       IDictionary<object, string> bindingMap,
-                                       object clearKey = null)
+            IDictionary<object, string> bindingMap,
+            object clearKey = null)
         {
             if (bindingMap == null)
                 return;
@@ -100,8 +103,8 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view,
-                                       IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap,
-                                       object clearKey = null)
+            IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap,
+            object clearKey = null)
         {
             if (bindingMap == null)
                 return;

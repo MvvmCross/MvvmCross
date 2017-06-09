@@ -49,15 +49,15 @@ namespace MvvmCross.Binding.Bindings.Target
             _target = new WeakReference<TTarget>(target);
         }
 
-        protected TTarget Target 
-        { 
-            get 
+        protected TTarget Target
+        {
+            get
             {
                 TTarget target = null;
                 _target.TryGetTarget(out target);
 
                 return target;
-            } 
+            }
         }
 
         public virtual void SubscribeToEvents()
@@ -80,7 +80,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public void SetValue(object value)
         {
-            SetValue((TValue)value);
+            SetValue((TValue) value);
         }
     }
 }

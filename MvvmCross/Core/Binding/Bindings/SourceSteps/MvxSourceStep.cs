@@ -78,9 +78,9 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 return value;
 
             return _description.Converter.ConvertBack(value,
-                                                      SourceType,
-                                                      _description.ConverterParameter,
-                                                      CultureInfo.CurrentUICulture);
+                SourceType,
+                _description.ConverterParameter,
+                CultureInfo.CurrentUICulture);
         }
 
         private object ApplyValueConverterSourceToTarget(object value)
@@ -94,9 +94,9 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             {
                 return
                     _description.Converter.Convert(value,
-                                                   TargetType,
-                                                   _description.ConverterParameter,
-                                                   CultureInfo.CurrentUICulture);
+                        TargetType,
+                        _description.ConverterParameter,
+                        CultureInfo.CurrentUICulture);
             }
             catch (Exception exception)
             {
@@ -182,7 +182,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     public abstract class MvxSourceStep<T> : MvxSourceStep
         where T : MvxSourceStepDescription
     {
-        protected new T Description => (T)base.Description;
+        protected new T Description => (T) base.Description;
 
         protected MvxSourceStep(T description)
             : base(description)

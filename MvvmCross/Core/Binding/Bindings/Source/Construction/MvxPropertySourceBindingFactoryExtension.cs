@@ -22,9 +22,11 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     public class MvxPropertySourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        private static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache = new ConcurrentDictionary<int, PropertyInfo>();
+        private static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache =
+            new ConcurrentDictionary<int, PropertyInfo>();
 
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
+            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {
@@ -32,12 +34,14 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, currentToken) : CreateChainedBinding(source, currentToken, remainingTokens);
+            result = remainingTokens.Count == 0
+                ? CreateLeafBinding(source, currentToken)
+                : CreateChainedBinding(source, currentToken, remainingTokens);
             return result != null;
         }
 
         protected virtual MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
-                                                                       List<MvxPropertyToken> remainingTokens)
+            List<MvxPropertyToken> remainingTokens)
         {
             var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
             if (indexPropertyToken != null)
@@ -47,7 +51,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                     return null;
 
                 return new MvxIndexerChainedSourceBinding(source, itemPropertyInfo, indexPropertyToken,
-                                                          remainingTokens);
+                    remainingTokens);
             }
 
             var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
@@ -59,11 +63,11 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                     return null;
 
                 return new MvxSimpleChainedSourceBinding(source, propertyInfo,
-                                                         remainingTokens);
+                    remainingTokens);
             }
 
             throw new MvxException("Unexpected property chaining - seen token type {0}",
-                                   propertyToken.GetType().FullName);
+                propertyToken.GetType().FullName);
         }
 
         protected virtual IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
@@ -91,7 +95,8 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                 return new MvxDirectToSourceBinding(source);
             }
 
-            throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
+            throw new MvxException("Unexpected property source - seen token type {0}",
+                propertyToken.GetType().FullName);
         }
 
         protected PropertyInfo FindPropertyInfo(object source, string propertyName = "Item")
@@ -112,7 +117,8 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             {
                 //Try base properties. 
                 //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
-                pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                pi = sourceType.GetProperty(propertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             }
 
             PropertyInfoCache.TryAdd(key, pi);

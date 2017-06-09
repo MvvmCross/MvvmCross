@@ -17,13 +17,15 @@ namespace MvvmCross.Binding.BindingContext
     {
         event EventHandler DataContextChanged;
 
-        IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue);
+        IMvxBindingContext Init(object dataContext, object firstBindingKey,
+            IEnumerable<MvxBindingDescription> firstBindingValue);
 
         IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue);
 
         void RegisterBinding(object target, IMvxUpdateableBinding binding);
 
-        void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings);
+        void RegisterBindingsWithClearKey(object clearKey,
+            IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings);
 
         void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding);
 

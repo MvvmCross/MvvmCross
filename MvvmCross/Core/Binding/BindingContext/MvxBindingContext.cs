@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.BindingContext
         private object _dataContext;
 
         public MvxBindingContext()
-            : this((object)null)
+            : this((object) null)
         {
         }
 
@@ -62,12 +62,14 @@ namespace MvvmCross.Binding.BindingContext
             Init(null, firstBindings);
         }
 
-        public MvxBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        public MvxBindingContext(object dataContext,
+            IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             Init(dataContext, firstBindings);
         }
 
-        public MvxBindingContext Init(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
+        public MvxBindingContext Init(object dataContext,
+            IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             foreach (var kvp in firstBindings)
             {
@@ -91,7 +93,8 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
-        public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
+        public IMvxBindingContext Init(object dataContext, object firstBindingKey,
+            IEnumerable<MvxBindingDescription> firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
@@ -234,14 +237,16 @@ namespace MvvmCross.Binding.BindingContext
             _directBindings.Add(new TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey,
+            IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
-            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
+            _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey,
+                bindings.Select(b => new TargetAndBinding(b.Key, b.Value)).ToList()));
         }
 
         public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            var list = new List<TargetAndBinding>() { new TargetAndBinding(target, binding) };
+            var list = new List<TargetAndBinding>() {new TargetAndBinding(target, binding)};
             _viewBindings.Add(new KeyValuePair<object, IList<TargetAndBinding>>(clearKey, list));
         }
 

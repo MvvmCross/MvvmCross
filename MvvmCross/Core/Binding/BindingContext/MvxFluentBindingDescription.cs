@@ -82,21 +82,22 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
-                                                                            object converterParameter = null)
+            object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
-                                                                            object converterParameter = null)
+            object converterParameter = null)
         {
             SourceStepDescription.Converter = converter;
             SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
-        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(
+            object converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
             var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
@@ -143,11 +144,12 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
-                .ToList();
+                    .ToList();
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}",
+                    bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -232,14 +234,14 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
-                                                                   object converterParameter = null)
+            object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
-                                                                   object converterParameter)
+            object converterParameter)
         {
             SourceStepDescription.Converter = converter;
             SourceStepDescription.ConverterParameter = converterParameter;
@@ -293,11 +295,12 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
-                .ToList();
+                    .ToList();
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}",
+                    bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

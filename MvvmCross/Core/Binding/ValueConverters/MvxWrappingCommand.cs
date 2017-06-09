@@ -29,7 +29,8 @@ namespace MvvmCross.Binding.ValueConverters
 
             if (_wrapped != null)
             {
-                _canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
+                _canChangedEventSubscription =
+                    CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
             }
         }
 

@@ -14,7 +14,8 @@ namespace MvvmCross.Binding.ExtensionMethods
 {
     public static class MvxBindingExtensions
     {
-        public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(this IMvxEditableTextView mvxEditableTextView, object target, object value)
+        public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(
+            this IMvxEditableTextView mvxEditableTextView, object target, object value)
         {
             if (value == null)
                 return false;
@@ -60,7 +61,7 @@ namespace MvvmCross.Binding.ExtensionMethods
             }
 
             var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
-                                                                                            propertyType);
+                propertyType);
             if (autoConverter != null)
             {
                 return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);

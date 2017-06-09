@@ -40,7 +40,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             output.Append('\'');
             foreach (var c in input)
             {
-                switch ((int)c)
+                switch ((int) c)
                 {
                     case '\\':
                         output.Append("\\\\");

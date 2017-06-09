@@ -48,7 +48,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             if (!(key is string))
             {
                 throw new MvxException("Unexpected object in key for keyvalue pair {0} at position {1}",
-                                       key.GetType().Name, CurrentIndex);
+                    key.GetType().Name, CurrentIndex);
             }
 
             SkipWhitespace();
@@ -56,7 +56,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             if (CurrentChar != '=')
             {
                 throw new MvxException("Unexpected character in keyvalue pair {0} at position {1}", CurrentChar,
-                                       CurrentIndex);
+                    CurrentIndex);
             }
 
             MoveNext();
@@ -66,10 +66,10 @@ namespace MvvmCross.Core.Parse.StringDictionary
             if (value != null && !(value is string))
             {
                 throw new MvxException("Unexpected object in value for keyvalue pair {0} for key {1} at position {2}",
-                                       value.GetType().Name, key, CurrentIndex);
+                    value.GetType().Name, key, CurrentIndex);
             }
 
-            CurrentEntries[(string)key] = (string)value;
+            CurrentEntries[(string) key] = (string) value;
         }
     }
 }

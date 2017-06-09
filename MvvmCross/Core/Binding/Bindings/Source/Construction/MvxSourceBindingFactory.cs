@@ -17,16 +17,20 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 {
     public class MvxSourceBindingFactory
         : IMvxSourceBindingFactory
-        , IMvxSourceBindingFactoryExtensionHost
+            , IMvxSourceBindingFactoryExtensionHost
     {
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ?? (_propertyPathParser = Mvx.Resolve<IMvxSourcePropertyPathParser>());
+        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ??
+                                                                           (_propertyPathParser =
+                                                                               Mvx.Resolve<IMvxSourcePropertyPathParser
+                                                                               >());
 
-        private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
+        private readonly List<IMvxSourceBindingFactoryExtension> _extensions =
+            new List<IMvxSourceBindingFactoryExtension>();
 
         protected bool TryCreateBindingFromExtensions(object source, MvxPropertyToken propertyToken,
-                                            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             foreach (var extension in _extensions)
             {

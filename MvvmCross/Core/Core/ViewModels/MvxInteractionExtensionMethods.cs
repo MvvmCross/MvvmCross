@@ -20,13 +20,15 @@ namespace MvvmCross.Core.ViewModels
             return eventInfo.WeakSubscribe(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, EventHandler<MvxValueEventArgs<T>> action)
+        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction,
+            EventHandler<MvxValueEventArgs<T>> action)
         {
             var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo.WeakSubscribe<T>(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, Action<T> action)
+        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction,
+            Action<T> action)
         {
             EventHandler<MvxValueEventArgs<T>> wrappedAction = (sender, args) => action(args.Value);
             return interaction.WeakSubscribe(wrappedAction);

@@ -22,8 +22,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         {
             var sourceStepFactory = MvxBindingSingletonCache.Instance.SourceStepFactory;
             _subSteps = description.InnerSteps
-                                   .Select(d => sourceStepFactory.Create(d))
-                                   .ToList();
+                .Select(d => sourceStepFactory.Create(d))
+                .ToList();
         }
 
         protected override void Dispose(bool isDisposing)

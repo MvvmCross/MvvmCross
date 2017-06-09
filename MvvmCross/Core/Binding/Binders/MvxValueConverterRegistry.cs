@@ -11,8 +11,8 @@ namespace MvvmCross.Binding.Binders
 {
     public class MvxValueConverterRegistry
         : MvxNamedInstanceRegistry<IMvxValueConverter>
-          , IMvxValueConverterLookup
-          , IMvxValueConverterRegistry
+            , IMvxValueConverterLookup
+            , IMvxValueConverterRegistry
     {
     }
 }

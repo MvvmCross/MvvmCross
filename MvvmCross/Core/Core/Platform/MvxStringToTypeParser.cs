@@ -15,7 +15,7 @@ namespace MvvmCross.Core.Platform
 {
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser
-          , IMvxFillableStringToTypeParser
+            , IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
@@ -46,8 +46,8 @@ namespace MvvmCross.Core.Platform
                 catch (Exception)
                 {
                     MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
-                                   fieldOrParameterName,
-                                   input);
+                        fieldOrParameterName,
+                        input);
                 }
                 if (enumValue == null)
                 {
@@ -59,7 +59,7 @@ namespace MvvmCross.Core.Platform
                     catch (Exception)
                     {
                         MvxTrace.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);
+                            fieldOrParameterName);
                     }
                 }
                 return enumValue;
@@ -84,7 +84,7 @@ namespace MvvmCross.Core.Platform
                 if (!TryParse(input, out result))
                 {
                     MvxTrace.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   GetType().Name, fieldOrParameterName, input);
+                        GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
             }
@@ -202,9 +202,8 @@ namespace MvvmCross.Core.Platform
             }
         }
 
-#else
-        // UNITY3D does not support Guid.TryParse
-        // See https://github.com/slodge/MvvmCross/issues/215
+#else // UNITY3D does not support Guid.TryParse
+// See https://github.com/slodge/MvvmCross/issues/215
         public class GuidParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
@@ -240,24 +239,24 @@ namespace MvvmCross.Core.Platform
         public MvxStringToTypeParser()
         {
             TypeParsers = new Dictionary<Type, IParser>
-                {
-                    {typeof (string), new StringParser()},
-                    {typeof (short), new ShortParser()},
-                    {typeof (int), new IntParser()},
-                    {typeof (long), new LongParser()},
-                    {typeof (ushort), new UshortParser()},
-                    {typeof (uint), new UintParser()},
-                    {typeof (ulong), new UlongParser()},
-                    {typeof (double), new DoubleParser()},
-                    {typeof (float), new FloatParser()},
-                    {typeof (bool), new BoolParser()},
-                    {typeof (Guid), new GuidParser()},
-                    {typeof (DateTime), new DateTimeParser()},
-                };
+            {
+                {typeof(string), new StringParser()},
+                {typeof(short), new ShortParser()},
+                {typeof(int), new IntParser()},
+                {typeof(long), new LongParser()},
+                {typeof(ushort), new UshortParser()},
+                {typeof(uint), new UintParser()},
+                {typeof(ulong), new UlongParser()},
+                {typeof(double), new DoubleParser()},
+                {typeof(float), new FloatParser()},
+                {typeof(bool), new BoolParser()},
+                {typeof(Guid), new GuidParser()},
+                {typeof(DateTime), new DateTimeParser()},
+            };
             ExtraParsers = new List<IExtraParser>
-                {
-                    new EnumParser()
-                };
+            {
+                new EnumParser()
+            };
         }
 
         public bool TypeSupported(Type targetType)
@@ -283,7 +282,7 @@ namespace MvvmCross.Core.Platform
             }
 
             MvxTrace.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
-                           targetType.Name);
+                targetType.Name);
             return null;
         }
     }

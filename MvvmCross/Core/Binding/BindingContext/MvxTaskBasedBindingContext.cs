@@ -14,8 +14,13 @@ namespace MvvmCross.Binding.BindingContext
     public class MvxTaskBasedBindingContext : IMvxBindingContext
     {
         private readonly List<Action> _delayedActions = new List<Action>();
-        private readonly List<MvxBindingContext.TargetAndBinding> _directBindings = new List<MvxBindingContext.TargetAndBinding>();
-        private readonly List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> _viewBindings = new List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>>();
+
+        private readonly List<MvxBindingContext.TargetAndBinding> _directBindings =
+            new List<MvxBindingContext.TargetAndBinding>();
+
+        private readonly List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> _viewBindings =
+            new List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>>();
+
         private object _dataContext;
         private IMvxBinder _binder;
 
@@ -23,7 +28,8 @@ namespace MvvmCross.Binding.BindingContext
 
         public event EventHandler DataContextChanged;
 
-        public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
+        public IMvxBindingContext Init(object dataContext, object firstBindingKey,
+            IEnumerable<MvxBindingDescription> firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
@@ -124,8 +130,10 @@ namespace MvvmCross.Binding.BindingContext
             // once we are on the background thread we don't get an InvalidOperationException. 
             // Issue: #1398
             // View bindings need to be deep copied
-            var viewBindingsCopy = _viewBindings.Select(vb => new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key, vb.Value.ToList()))
-                                                     .ToList();
+            var viewBindingsCopy = _viewBindings
+                .Select(vb => new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key,
+                    vb.Value.ToList()))
+                .ToList();
 
             var directBindingsCopy = _directBindings.ToList();
 
@@ -147,7 +155,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (RunSynchronously)
                 setBindingsAction();
-            else 
+            else
                 Task.Run(setBindingsAction);
         }
 
@@ -161,14 +169,19 @@ namespace MvvmCross.Binding.BindingContext
             _directBindings.Add(new MvxBindingContext.TargetAndBinding(target, binding));
         }
 
-        public virtual void RegisterBindingsWithClearKey(object clearKey, IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
+        public virtual void RegisterBindingsWithClearKey(object clearKey,
+            IEnumerable<KeyValuePair<object, IMvxUpdateableBinding>> bindings)
         {
-            _viewBindings.Add(new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(clearKey, bindings.Select(b => new MvxBindingContext.TargetAndBinding(b.Key, b.Value)).ToList()));
+            _viewBindings.Add(new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(clearKey,
+                bindings.Select(b => new MvxBindingContext.TargetAndBinding(b.Key, b.Value)).ToList()));
         }
 
         public virtual void RegisterBindingWithClearKey(object clearKey, object target, IMvxUpdateableBinding binding)
         {
-            var list = new List<MvxBindingContext.TargetAndBinding> { new MvxBindingContext.TargetAndBinding(target, binding) };
+            var list = new List<MvxBindingContext.TargetAndBinding>
+            {
+                new MvxBindingContext.TargetAndBinding(target, binding)
+            };
             _viewBindings.Add(new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(clearKey, list));
         }
 

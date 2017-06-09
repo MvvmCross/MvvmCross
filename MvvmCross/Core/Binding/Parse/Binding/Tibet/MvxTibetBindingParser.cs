@@ -17,7 +17,8 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
     {
         public static readonly object LiteralNull = new object();
 
-        private static readonly char[] _operatorCharacters = { '>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^' };
+        private static readonly char[] _operatorCharacters =
+            {'>', '<', '+', '-', '*', '/', '|', '&', '!', '=', '%', '^'};
 
         private List<char> _terminatingCharacters;
 
@@ -76,14 +77,16 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
                         break;
 
                     default:
-                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}", CurrentChar, block);
+                        throw new MvxException("Unexpected character {0} while parsing () combiner contents for {1}",
+                            CurrentChar, block);
                 }
             }
 
             description.Sources = sources.ToArray();
         }
 
-        protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(MvxSerializableBindingDescription description)
+        protected override MvxSerializableBindingDescription ParseOperatorWithLeftHand(
+            MvxSerializableBindingDescription description)
         {
             // get the operator Combiner
             var twoCharacterOperatorString = SafePeekString(2);
@@ -164,15 +167,15 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
                         moveFowards = 1;
                         break;
 
-					case '!':
-						combinerName = "Inverted";
-						moveFowards = 1;
-						break;
+                    case '!':
+                        combinerName = "Inverted";
+                        moveFowards = 1;
+                        break;
 
-					case '^':
-						combinerName = "XOr";
-						moveFowards = 1;
-						break;
+                    case '^':
+                        combinerName = "XOr";
+                        moveFowards = 1;
+                        break;
                 }
             }
 
@@ -202,10 +205,10 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             description.Literal = null;
             description.Function = combinerName;
             description.Sources = new List<MvxSerializableBindingDescription>()
-                {
-                    child,
-                    ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
-                };
+            {
+                child,
+                ParseBindingDescription(ParentIsLookingForComma.ParentIsLookingForComma)
+            };
 
             return description;
         }

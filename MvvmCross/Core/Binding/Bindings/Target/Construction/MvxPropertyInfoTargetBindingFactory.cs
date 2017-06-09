@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         private readonly Type _targetType;
 
         public MvxPropertyInfoTargetBindingFactory(Type targetType, string targetName,
-                                                   Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
+            Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
         {
             _targetType = targetType;
             _targetName = targetName;
@@ -32,7 +32,8 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair { Name = _targetName, Type = _targetType } };
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[]
+            {new MvxTypeAndNamePair {Name = _targetName, Type = _targetType}};
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {

@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Bindings.Source
 {
     public abstract class MvxSourceBinding
         : MvxBinding
-          , IMvxSourceBinding
+            , IMvxSourceBinding
     {
         private readonly object _source;
 

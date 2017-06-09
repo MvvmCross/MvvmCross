@@ -23,8 +23,8 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public MvxViewModelRequest(Type viewModelType,
-                                   IMvxBundle parameterBundle,
-                                   IMvxBundle presentationBundle)
+            IMvxBundle parameterBundle,
+            IMvxBundle presentationBundle)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterBundle.SafeGetData();

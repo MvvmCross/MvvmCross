@@ -34,16 +34,16 @@ namespace MvvmCross.Binding.Binders
             var instance = Activator.CreateInstance(type);
 
             var pairs = from field in type.GetFields()
-                        where !field.IsStatic
-                        where field.IsPublic
-                        where typeof(T).IsAssignableFrom(field.FieldType)
-                        let converter = field.GetValue(instance) as T
-                        where converter != null
-                        select new
-                        {
-                            field.Name,
-                            Converter = converter
-                        };
+                where !field.IsStatic
+                where field.IsPublic
+                where typeof(T).IsAssignableFrom(field.FieldType)
+                let converter = field.GetValue(instance) as T
+                where converter != null
+                select new
+                {
+                    field.Name,
+                    Converter = converter
+                };
 
             foreach (var pair in pairs)
             {
@@ -54,16 +54,16 @@ namespace MvvmCross.Binding.Binders
         protected virtual void FillFromStatic(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
             var pairs = from field in type.GetFields()
-                        where field.IsStatic
-                        where field.IsPublic
-                        where typeof(T).IsAssignableFrom(field.FieldType)
-                        let converter = field.GetValue(null) as T
-                        where converter != null
-                        select new
-                        {
-                            field.Name,
-                            Converter = converter
-                        };
+                where field.IsStatic
+                where field.IsPublic
+                where typeof(T).IsAssignableFrom(field.FieldType)
+                let converter = field.GetValue(null) as T
+                where converter != null
+                select new
+                {
+                    field.Name,
+                    Converter = converter
+                };
 
             foreach (var pair in pairs)
             {
@@ -74,13 +74,13 @@ namespace MvvmCross.Binding.Binders
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
         {
             var pairs = from type in assembly.ExceptionSafeGetTypes()
-                        where type.GetTypeInfo().IsPublic
-                        where !type.GetTypeInfo().IsAbstract
-                        where typeof(T).IsAssignableFrom(type)
-                        let name = FindName(type)
-                        where !string.IsNullOrEmpty(name)
-                        where type.IsConventional()
-                        select new { Name = name, Type = type };
+                where type.GetTypeInfo().IsPublic
+                where !type.GetTypeInfo().IsAbstract
+                where typeof(T).IsAssignableFrom(type)
+                let name = FindName(type)
+                where !string.IsNullOrEmpty(name)
+                where type.IsConventional()
+                select new {Name = name, Type = type};
 
             foreach (var pair in pairs)
             {

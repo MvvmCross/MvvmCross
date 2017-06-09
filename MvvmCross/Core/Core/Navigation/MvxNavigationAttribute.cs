@@ -6,7 +6,7 @@ namespace MvvmCross.Core.Navigation
     public sealed class MvxNavigationAttribute : Attribute
     {
         public Type ViewModelOrFacade { get; private set; }
-        
+
         public string UriRegex { get; private set; }
 
         public MvxNavigationAttribute(Type viewModelOrFacade, string uriRegex)

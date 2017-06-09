@@ -1,6 +1,6 @@
 namespace MvvmCross.Binding.Combiners
 {
-    public class MvxLessThanValueCombiner 
+    public class MvxLessThanValueCombiner
         : MvxObjectAsStringPairwiseValueCombiner
     {
         protected override bool CombineDoubleAndDouble(double input1, double input2, out object value)
@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.Combiners
 
         protected override bool CombineLongAndDouble(long input1, double input2, out object value)
         {
-            value = ((double)input1).CompareTo(input2) < 0;
+            value = ((double) input1).CompareTo(input2) < 0;
             return true;
         }
 
@@ -113,19 +113,19 @@ namespace MvvmCross.Binding.Combiners
 
         protected override bool CombineDoubleAndDecimal(double input1, decimal input2, out object value)
         {
-            value = input1.CompareTo((double)input2) < 0;
+            value = input1.CompareTo((double) input2) < 0;
             return true;
         }
 
         protected override bool CombineLongAndDecimal(long input1, decimal input2, out object value)
         {
-            value = input1.CompareTo((long)input2) < 0;
+            value = input1.CompareTo((long) input2) < 0;
             return true;
         }
 
         protected override bool CombineDecimalAndDouble(decimal input1, double input2, out object value)
         {
-            value = ((double)input1).CompareTo(input2) < 0;
+            value = ((double) input1).CompareTo(input2) < 0;
             return true;
         }
 

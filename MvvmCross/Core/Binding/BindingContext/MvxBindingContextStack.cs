@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBindingContextStack<TContext>
         : Stack<TContext>
-          , IMvxBindingContextStack<TContext>
+            , IMvxBindingContextStack<TContext>
     {
         public TContext Current
         {

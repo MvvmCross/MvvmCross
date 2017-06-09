@@ -24,7 +24,7 @@ namespace MvvmCross.Binding
 
     public class MvxBindingSingletonCache
         : MvxSingleton<IMvxBindingSingletonCache>
-          , IMvxBindingSingletonCache
+            , IMvxBindingSingletonCache
     {
         public static IMvxBindingSingletonCache Initialize()
         {

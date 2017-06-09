@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Bindings.Target
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
 
             var addMethod = _targetEventInfo.GetAddMethod();
-            addMethod.Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
+            addMethod.Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
         }
 
         public override Type TargetType => typeof(ICommand);
@@ -43,7 +43,7 @@ namespace MvvmCross.Binding.Bindings.Target
                 var target = Target;
                 if (target != null)
                 {
-                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] { new EventHandler<T>(HandleEvent) });
+                    _targetEventInfo.GetRemoveMethod().Invoke(target, new object[] {new EventHandler<T>(HandleEvent)});
                 }
             }
 

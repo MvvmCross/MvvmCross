@@ -11,7 +11,7 @@ namespace MvvmCross.Core.ViewModels
 {
     public class MvxAppStart<TViewModel>
         : MvxNavigatingObject
-          , IMvxAppStart
+            , IMvxAppStart
         where TViewModel : IMvxViewModel
     {
         public void Start(object hint = null)

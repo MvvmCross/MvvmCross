@@ -13,11 +13,12 @@ namespace MvvmCross.Core.Views
 {
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
-        private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();
+        private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers =
+            new Dictionary<Type, Func<MvxPresentationHint, bool>>();
 
         public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
         {
-            _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
+            _presentationHintHandlers[typeof(THint)] = hint => action((THint) hint);
         }
 
         protected bool HandlePresentationChange(MvxPresentationHint hint)

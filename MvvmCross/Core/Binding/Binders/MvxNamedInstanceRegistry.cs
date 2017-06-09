@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Binders
 {
     public class MvxNamedInstanceRegistry<T>
         : IMvxNamedInstanceLookup<T>
-          , IMvxNamedInstanceRegistry<T>
+            , IMvxNamedInstanceRegistry<T>
         where T : class
     {
         private readonly Dictionary<string, T> _converters =

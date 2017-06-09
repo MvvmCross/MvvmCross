@@ -17,7 +17,7 @@ namespace MvvmCross.Core.ViewModels
 {
     public class MvxObservableCollection<T>
         : ObservableCollection<T>
-        , IList<T>
+            , IList<T>
     {
         protected struct SuppressEventsDisposable : IDisposable
         {
@@ -87,7 +87,7 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            using(SuppressEvents())
+            using (SuppressEvents())
             {
                 foreach (var item in items)
                 {
@@ -126,7 +126,7 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            using(SuppressEvents())
+            using (SuppressEvents())
             {
                 var lastIndex = firstIndex + oldSize - 1;
 
@@ -198,7 +198,7 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
-            using(SuppressEvents())
+            using (SuppressEvents())
             {
                 foreach (var item in items)
                 {
@@ -234,7 +234,7 @@ namespace MvvmCross.Core.ViewModels
                 removedItems.Add(this[i]);
             }
 
-            using(SuppressEvents())
+            using (SuppressEvents())
             {
                 for (var i = end; i >= start; i--)
                 {

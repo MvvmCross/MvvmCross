@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
             var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
-                                                                                   _bindingContextOwner);
+                _bindingContextOwner);
             _applicables.Add(toReturn);
             return toReturn;
         }
@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
-                                                                                     string bindingDescription)
+            string bindingDescription)
             where TChildTarget : class
         {
             var toReturn = Bind(childTarget);
@@ -49,8 +49,8 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
-                                                                                     MvxBindingDescription
-                                                                                         bindingDescription)
+            MvxBindingDescription
+                bindingDescription)
             where TChildTarget : class
         {
             var toReturn = Bind(childTarget);

@@ -26,18 +26,21 @@ namespace MvvmCross.Core.ViewModels
         }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
-        public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
+        public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request,
+            IMvxBundle savedState)
         {
             var viewModelLocator = FindViewModelLocator(request);
             return ReloadViewModel(viewModel, request, savedState, viewModelLocator);
         }
 
-        private IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState,
-                                    IMvxViewModelLocator viewModelLocator)
+        private IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request,
+            IMvxBundle savedState,
+            IMvxViewModelLocator viewModelLocator)
         {
             if (viewModelLocator == null)
             {
-                throw new MvxException("Received view model is null, view model reload failed. ", request.ViewModelType);
+                throw new MvxException("Received view model is null, view model reload failed. ",
+                    request.ViewModelType);
             }
 
             var parameterValues = new MvxBundle(request.ParameterValues);
@@ -67,7 +70,7 @@ namespace MvvmCross.Core.ViewModels
         }
 
         private IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState,
-                                            IMvxViewModelLocator viewModelLocator)
+            IMvxViewModelLocator viewModelLocator)
         {
             IMvxViewModel viewModel = null;
             var parameterValues = new MvxBundle(request.ParameterValues);
@@ -91,7 +94,7 @@ namespace MvvmCross.Core.ViewModels
             if (viewModelLocator == null)
             {
                 throw new MvxException("Sorry - somehow there's no viewmodel locator registered for {0}",
-                                       request.ViewModelType);
+                    request.ViewModelType);
             }
 
             return viewModelLocator;
