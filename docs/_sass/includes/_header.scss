@@ -240,8 +240,14 @@
     justify-content: space-between;
 
     > .navigation {
-      ul li {
-        margin-right: $navigation-margin * 2;
+        ul {
+          li {
+            margin-right: $navigation-margin * 2;
+          }
+          
+          li:last-child {
+            margin-right: 0;
+          }
       }
     }
   }
