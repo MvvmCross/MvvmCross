@@ -43,6 +43,7 @@ There are several attribute members that the view class can customize:
 - WrapInNavigationController: If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`.
 - ModalPresentationStyle: Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`.
 - ModalTransitionStyle: Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`.
+- PreferredContentSize : Corresponds to the `PreferredContentSize` property of UIViewController. Property works for iPad only.
 - Animated: If set to true, the presentation will be animated. The default value is `true`.
 
 
