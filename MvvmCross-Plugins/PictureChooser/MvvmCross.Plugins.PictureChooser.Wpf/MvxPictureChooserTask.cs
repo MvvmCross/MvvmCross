@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using Color = System.Windows.Media.Color;
 
 
 namespace MvvmCross.Plugins.PictureChooser.Wpf
@@ -121,11 +122,11 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
                 System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
             BitmapPalette palette = null;
-            System.Windows.Media.Color[] pal = null;
+            Color[] pal = null;
 
             if (bitmap.Palette != null && bitmap.Palette.Entries != null && bitmap.Palette.Entries.Length > 0)
             {
-                pal = bitmap.Palette.Entries.Select(e => System.Windows.Media.Color.FromArgb(e.A, e.R, e.G, e.B)).ToArray();
+                pal = bitmap.Palette.Entries.Select(e => Color.FromArgb(e.A, e.R, e.G, e.B)).ToArray();
                 palette = new BitmapPalette(pal);
             }
 
