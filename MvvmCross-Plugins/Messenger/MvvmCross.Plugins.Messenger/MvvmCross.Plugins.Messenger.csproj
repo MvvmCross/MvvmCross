@@ -43,7 +43,9 @@
     <Compile Include="MvxMessengerHub.cs" />
     <Compile Include="ThreadRunners\MvxSimpleActionRunner.cs" />
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Subscriptions\BaseSubscription.cs" />
     <Compile Include="Subscriptions\TypedSubscription.cs" />
     <Compile Include="Subscriptions\StrongSubscription.cs" />

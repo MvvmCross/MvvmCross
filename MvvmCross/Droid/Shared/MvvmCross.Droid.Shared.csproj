@@ -41,6 +41,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Attributes\MvxFragmentAttribute.cs" />
     <Compile Include="Attributes\MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="Caching\CachedFragmentManager.cs" />
@@ -62,7 +65,6 @@
     <Compile Include="Presenter\IMvxFragmentHost.cs" />
     <Compile Include="Presenter\MvxFragmentsPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

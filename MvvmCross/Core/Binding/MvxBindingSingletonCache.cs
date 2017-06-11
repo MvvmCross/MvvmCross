@@ -21,7 +21,6 @@ namespace MvvmCross.Binding
 {
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
-
     public class MvxBindingSingletonCache
         : MvxSingleton<IMvxBindingSingletonCache>
           , IMvxBindingSingletonCache

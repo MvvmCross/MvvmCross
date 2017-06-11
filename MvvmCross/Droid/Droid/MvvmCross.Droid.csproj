@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Services\MvxBroadcastReceiver.cs" />
     <Compile Include="Services\MvxIntentService.cs" />
     <Compile Include="ViewModels\MvxAndroidPropertyChangedListener.cs" />
@@ -84,7 +87,6 @@
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivity.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">

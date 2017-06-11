@@ -42,10 +42,12 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxDesignTimeHelper.cs" />
     <Compile Include="Platform\MvxPseudoAsyncExtensionMethods.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Platform.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>

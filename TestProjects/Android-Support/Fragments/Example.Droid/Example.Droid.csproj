@@ -104,7 +104,9 @@
     <Compile Include="Fragments\ExampleViewPagerStateFragment.cs" />
     <Compile Include="Fragments\RecyclerViewMultiItemTemplateFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />

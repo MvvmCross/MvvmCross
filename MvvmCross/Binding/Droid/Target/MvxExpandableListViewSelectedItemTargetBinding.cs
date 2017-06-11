@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.Platform;
@@ -28,9 +28,6 @@ namespace MvvmCross.Binding.Droid.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            //if (value == null || value == _currentValue)
-            //    return;
-
             var listView = (MvxExpandableListView)target;
 
             if (value == null)

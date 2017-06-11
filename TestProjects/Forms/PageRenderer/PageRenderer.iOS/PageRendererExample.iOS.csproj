@@ -143,6 +143,9 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="MvvmSetup.cs" />
     <Compile Include="CameraRendererPage.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

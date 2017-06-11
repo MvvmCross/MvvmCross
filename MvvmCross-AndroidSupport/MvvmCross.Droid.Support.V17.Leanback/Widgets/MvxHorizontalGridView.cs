@@ -91,7 +91,6 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
                 // Support lib doesn't seem to have anything similar to IListAdapter yet
                 // hence cast to Adapter.
-
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;

@@ -64,7 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="EventSource\MvxBindingFragmentAdapter.cs" />
     <Compile Include="EventSource\MvxEventSourceDialogFragment.cs" />

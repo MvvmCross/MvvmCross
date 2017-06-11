@@ -25,9 +25,9 @@ namespace MvvmCross.Binding.Mac
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
                                     Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            this._fillRegistryAction = fillRegistryAction;
-            this._fillValueConvertersAction = fillValueConvertersAction;
-            this._fillBindingNamesAction = fillBindingNamesAction;
+            _fillRegistryAction = fillRegistryAction;
+            _fillValueConvertersAction = fillValueConvertersAction;
+            _fillBindingNamesAction = fillBindingNamesAction;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -90,8 +90,7 @@ namespace MvvmCross.Binding.Mac
             registry.RegisterCustomBindingFactory<NSView>("DoubleTap", view => new MvxNSViewTapTargetBinding(view, 2, 1));
             registry.RegisterCustomBindingFactory<NSView>("TwoFingerTap", view => new MvxNSViewTapTargetBinding(view, 1, 2));
             */
-
-            this._fillRegistryAction?.Invoke(registry);
+            _fillRegistryAction?.Invoke(registry);
         }
 
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
@@ -104,7 +103,7 @@ namespace MvvmCross.Binding.Mac
         {
             base.FillValueConverters(registry);
 
-            this._fillValueConvertersAction?.Invoke(registry);
+            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -126,8 +125,7 @@ namespace MvvmCross.Binding.Mac
             //registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
             //registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
             //registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
-
-            this._fillBindingNamesAction?.Invoke(registry);
+            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

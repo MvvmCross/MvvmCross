@@ -101,7 +101,6 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         {
             // it is guarannted that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
             // it is safe to assume that Fragment has activity attached
-
             if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
                 return;
 

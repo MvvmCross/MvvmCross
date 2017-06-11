@@ -42,10 +42,12 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Presenters\MvxFormsUwpMasterDetailPagePresenter.cs" />
     <Compile Include="Presenters\MvxFormsUwpPagePresenter.cs" />
     <Compile Include="MvxPageRenderer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
     <None Include="TODO.txt" />
     <Compile Include="MvxFormsWindowsSetup.cs" />

@@ -77,7 +77,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 // Support lib doesn't seem to have anything similar to IListAdapter yet
                 // hence cast to Adapter.
-
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;

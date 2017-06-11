@@ -141,7 +141,9 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="BindingsApplicationActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
   </ItemGroup>

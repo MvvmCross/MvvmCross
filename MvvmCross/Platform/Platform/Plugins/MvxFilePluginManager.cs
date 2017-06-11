@@ -1,4 +1,4 @@
-// MvxFilePluginManager.cs
+﻿// MvxFilePluginManager.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -36,13 +36,6 @@ namespace MvvmCross.Platform.Plugins
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {
             var assembly = LoadAssembly(toLoad);
-
-            //var pluginTypes = assembly.ExceptionSafeGetTypes().Select(x => x.FullName);
-            //foreach (var type in pluginTypes)
-            //{
-            //    MvxTrace.Trace("-- Type {0}", type);
-            //}
-
             var pluginType = assembly.ExceptionSafeGetTypes().FirstOrDefault(x => typeof(IMvxPlugin).IsAssignableFrom(x));
             if (pluginType == null)
             {

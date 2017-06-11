@@ -109,6 +109,9 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">

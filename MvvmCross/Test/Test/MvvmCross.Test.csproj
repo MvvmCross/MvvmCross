@@ -67,7 +67,9 @@
     <Compile Include="Mocks\TestViewModels\AbstractTest1ViewModel.cs" />
     <Compile Include="Mocks\TestViewModels\Test1ViewModel.cs" />
     <Compile Include="Platform\MvxViewModelByNameLookupTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Mocks\TestViewModels\Test2ViewModel.cs" />
     <Compile Include="Mocks\TestViewModels\Test3ViewModel.cs" />
     <Compile Include="Mocks\TestViews\Test1View.cs" />

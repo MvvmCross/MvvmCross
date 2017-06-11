@@ -35,6 +35,9 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Analyzers\AddArgumentToShowViewModelWhenUsingGenericViewModelAnalyzer.cs" />
     <Compile Include="Analyzers\ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzer.cs" />
     <Compile Include="Analyzers\MvxMessengerSubscriptionDoesntStoreTokenInVariableAnalyzer.cs" />
@@ -47,7 +50,6 @@
     <Compile Include="Core\Categories.cs" />
     <Compile Include="Core\DiagnosticIds.cs" />
     <Compile Include="Extensions\ITypeSymbolExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

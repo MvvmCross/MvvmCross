@@ -28,7 +28,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MvxIoCSupportingTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="TestTrace.cs" />
   </ItemGroup>
   <ItemGroup>
