@@ -1,4 +1,5 @@
-﻿using UIKit;
+﻿using CoreGraphics;
+using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
@@ -9,6 +10,8 @@ namespace MvvmCross.iOS.Views.Presenters.Attributes
         public UIModalPresentationStyle ModalPresentationStyle { get; set; } = UIModalPresentationStyle.FullScreen;
 
         public UIModalTransitionStyle ModalTransitionStyle { get; set; } = UIModalTransitionStyle.CoverVertical;
+
+        public CGSize PreferredContentSize { get; set; }
 
         public bool Animated { get; set; } = true;
     }
