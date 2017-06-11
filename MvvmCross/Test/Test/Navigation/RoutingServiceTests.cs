@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
 using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
@@ -55,6 +56,7 @@ namespace MvvmCross.Test.Navigation
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
             Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher.Object);
             Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher.Object);
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             SetupRoutings();
         }
@@ -71,8 +73,13 @@ namespace MvvmCross.Test.Navigation
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
-            Assert.That(RoutingService.CanNavigate(url), Is.False);
-            await RoutingService.Navigate(url);
+            var canNavigate = await RoutingService.CanNavigate(url);
+            Assert.That(canNavigate, Is.False);
+
+            Assert.CatchAsync(async () =>
+            {
+                await RoutingService.Navigate(url);
+            });
 
             MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
