@@ -173,7 +173,6 @@ namespace MvvmCross.Test.Platform
             Assert.AreEqual(expected, parser.ReadValue(testData, typeof(Guid), "ignored"));
         }
 
-
         [Test]
         [TestCase("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
         [TestCase("None", StringSplitOptions.None)]
