@@ -1,11 +1,12 @@
-﻿﻿using System;
- using System.Collections.Generic;
- using System.Linq;
- using MvvmCross.Core.ViewModels;
- using MvvmCross.iOS.Views.Presenters.Attributes;
- using MvvmCross.Platform.Exceptions;
- using MvvmCross.Platform.Platform;
- using UIKit;
+﻿﻿﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Views.Presenters.Attributes;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters
 {
@@ -219,6 +220,8 @@ namespace MvvmCross.iOS.Views.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
+            if (attribute.PreferredContentSize != default(CGSize))
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             _window.RootViewController.PresentViewController(
                 viewController,
