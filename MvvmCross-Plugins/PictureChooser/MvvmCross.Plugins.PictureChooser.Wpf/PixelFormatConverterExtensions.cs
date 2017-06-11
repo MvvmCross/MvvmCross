@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Windows.Media;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
+using PixelFormats = System.Windows.Media.PixelFormats;
 
 namespace MvvmCross.Plugins.PictureChooser.Wpf
 {
@@ -10,46 +11,46 @@ namespace MvvmCross.Plugins.PictureChooser.Wpf
     internal static class PixelFormatConverterExtensions
     {
         /// <summary>
-        /// Convert from System.Drawing.Imaging.PixelFormat to System.Windows.Media.PixelFormat
+        /// Convert from PixelFormat to System.Windows.Media.PixelFormat
         /// </summary>
         /// <param name="pixelFormat"></param>
         /// <exception cref="NotSupportedException">Convertion is not available</exception>
         /// <returns></returns>
-        public static PixelFormat Convert(this System.Drawing.Imaging.PixelFormat pixelFormat)
+        public static System.Windows.Media.PixelFormat Convert(this PixelFormat pixelFormat)
         {
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format16bppGrayScale)
+            if (pixelFormat == PixelFormat.Format16bppGrayScale)
                 return PixelFormats.Gray16;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format16bppRgb555)
+            if (pixelFormat == PixelFormat.Format16bppRgb555)
                 return PixelFormats.Bgr555;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format16bppRgb565)
+            if (pixelFormat == PixelFormat.Format16bppRgb565)
                 return PixelFormats.Bgr565;
 
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Indexed)
+            if (pixelFormat == PixelFormat.Indexed)
                 return PixelFormats.Bgr101010;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format1bppIndexed)
+            if (pixelFormat == PixelFormat.Format1bppIndexed)
                 return PixelFormats.Indexed1;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format4bppIndexed)
+            if (pixelFormat == PixelFormat.Format4bppIndexed)
                 return PixelFormats.Indexed4;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format8bppIndexed)
+            if (pixelFormat == PixelFormat.Format8bppIndexed)
                 return PixelFormats.Indexed8;
             
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format24bppRgb)
+            if (pixelFormat == PixelFormat.Format24bppRgb)
                 return PixelFormats.Bgr24;
 
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+            if (pixelFormat == PixelFormat.Format32bppArgb)
                 return PixelFormats.Bgr32;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppPArgb)
+            if (pixelFormat == PixelFormat.Format32bppPArgb)
                 return PixelFormats.Pbgra32;
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppRgb)
+            if (pixelFormat == PixelFormat.Format32bppRgb)
                 return PixelFormats.Bgr32;
 
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format48bppRgb)
+            if (pixelFormat == PixelFormat.Format48bppRgb)
                 return PixelFormats.Rgb48;
 
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Format64bppArgb)
+            if (pixelFormat == PixelFormat.Format64bppArgb)
                 return PixelFormats.Prgba64;
             
-            if (pixelFormat == System.Drawing.Imaging.PixelFormat.Undefined)
+            if (pixelFormat == PixelFormat.Undefined)
                 return PixelFormats.Default;
 
             throw new NotSupportedException("Convertion not supported with " + pixelFormat.ToString());
