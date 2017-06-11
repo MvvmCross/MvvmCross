@@ -79,11 +79,18 @@ Task("Build")
 
 Task("UnitTest")
 	.IsDependentOn("Build")
-	.Does(() => 
+	.Does(() =>
 {
+	var testPaths = new List<string> {
+		new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll").FullPath,
+		new FilePath("./MvvmCross/Binding/Test/bin/Release/MvvmCross.Binding.Test.dll").FullPath,
+		new FilePath("./MvvmCross/Platform/Test/bin/Release/MvvmCross.Platform.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Color/MvvmCross.Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Messenger/MvvmCross.Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath
+	};
 
-	var testPath = new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll");
-	NUnit3(testPath.FullPath, new NUnit3Settings {
+	NUnit3(testPaths, new NUnit3Settings {
 		Timeout = 30000,
 		OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
 		Results = new FilePath(outputDir + "/NUnitTestResult.xml")
