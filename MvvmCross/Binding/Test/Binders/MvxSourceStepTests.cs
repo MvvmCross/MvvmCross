@@ -294,7 +294,7 @@ namespace MvvmCross.Binding.Test.Binders
             value = sourceStep.GetValue();
             Assert.AreEqual($"{doubleProperty}It was missing", value);
 
-            source.SubSource = new MySubSource {SubProperty1 = "Hello"};
+            source.SubSource = new MySubSource { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
             Assert.AreEqual($"{doubleProperty}Hello", changes[2]);
@@ -360,7 +360,7 @@ namespace MvvmCross.Binding.Test.Binders
             value = sourceStep.GetValue();
             Assert.AreEqual($"It was missing{doubleProperty}", value);
 
-            source.SubSource = new MySubSource {SubProperty1 = "Hello"};
+            source.SubSource = new MySubSource { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
             Assert.AreEqual($"Hello{doubleProperty}", changes[2]);
@@ -736,7 +736,7 @@ namespace MvvmCross.Binding.Test.Binders
 
             var source = new MySource
             {
-                SubSource = new MySubSource {SubProperty1 = "Test 42"}
+                SubSource = new MySubSource { SubProperty1 = "Test 42" }
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -760,7 +760,7 @@ namespace MvvmCross.Binding.Test.Binders
             Assert.AreEqual("Changed to 17", value);
 
             var oldSubSource = source.SubSource;
-            source.SubSource = new MySubSource {SubProperty1 = "New Sub object"};
+            source.SubSource = new MySubSource { SubProperty1 = "New Sub object" };
 
             Assert.AreEqual(2, changes.Count);
             Assert.AreEqual("New Sub object", changes[1]);
@@ -790,7 +790,7 @@ namespace MvvmCross.Binding.Test.Binders
 
             var source = new MySource
             {
-                SubSource = new MySubSource {SubProperty2 = "Hello World"}
+                SubSource = new MySubSource { SubProperty2 = "Hello World" }
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
