@@ -27,27 +27,27 @@ namespace MvvmCross.Binding.Test.Binders
     {
         public class BaseSource : INotifyPropertyChanged
         {
-            public int SubscriptionCount;
+            public int SubscriptionCount { get; private set; }
 
-            private event PropertyChangedEventHandler _PropertyChanged;
+            private event PropertyChangedEventHandler _propertyChanged;
 
             public event PropertyChangedEventHandler PropertyChanged
             {
                 add
                 {
-                    _PropertyChanged += value;
+                    _propertyChanged += value;
                     SubscriptionCount++;
                 }
                 remove
                 {
-                    _PropertyChanged -= value;
+                    _propertyChanged -= value;
                     SubscriptionCount--;
                 }
             }
 
             protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
             {
-                _PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                _propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -58,7 +58,11 @@ namespace MvvmCross.Binding.Test.Binders
             public string Property1
             {
                 get { return _property1; }
-                set { _property1 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _property1 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private string _property2;
@@ -66,7 +70,11 @@ namespace MvvmCross.Binding.Test.Binders
             public string Property2
             {
                 get { return _property2; }
-                set { _property2 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _property2 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private int _intProperty1;
@@ -74,7 +82,11 @@ namespace MvvmCross.Binding.Test.Binders
             public int IntProperty1
             {
                 get { return _intProperty1; }
-                set { _intProperty1 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _intProperty1 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private int _intProperty2;
@@ -82,7 +94,11 @@ namespace MvvmCross.Binding.Test.Binders
             public int IntProperty2
             {
                 get { return _intProperty2; }
-                set { _intProperty2 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _intProperty2 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private double _doubleProperty1;
@@ -90,7 +106,11 @@ namespace MvvmCross.Binding.Test.Binders
             public double DoubleProperty1
             {
                 get { return _doubleProperty1; }
-                set { _doubleProperty1 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _doubleProperty1 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private double _doubleProperty2;
@@ -98,7 +118,11 @@ namespace MvvmCross.Binding.Test.Binders
             public double DoubleProperty2
             {
                 get { return _doubleProperty2; }
-                set { _doubleProperty2 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _doubleProperty2 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private ObservableCollection<string> _collection = new ObservableCollection<string>();
@@ -106,7 +130,11 @@ namespace MvvmCross.Binding.Test.Binders
             public ObservableCollection<string> Collection
             {
                 get { return _collection; }
-                set { _collection = value; RaisePropertyChanged(); }
+                set
+                {
+                    _collection = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private MySubSource _subSource;
@@ -114,7 +142,11 @@ namespace MvvmCross.Binding.Test.Binders
             public MySubSource SubSource
             {
                 get { return _subSource; }
-                set { _subSource = value; RaisePropertyChanged(); }
+                set
+                {
+                    _subSource = value;
+                    RaisePropertyChanged();
+                }
             }
         }
 
@@ -125,7 +157,11 @@ namespace MvvmCross.Binding.Test.Binders
             public string SubProperty1
             {
                 get { return _property1; }
-                set { _property1 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _property1 = value;
+                    RaisePropertyChanged();
+                }
             }
 
             private string _property2;
@@ -133,7 +169,11 @@ namespace MvvmCross.Binding.Test.Binders
             public string SubProperty2
             {
                 get { return _property2; }
-                set { _property2 = value; RaisePropertyChanged(); }
+                set
+                {
+                    _property2 = value;
+                    RaisePropertyChanged();
+                }
             }
         }
 
