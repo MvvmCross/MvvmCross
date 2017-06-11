@@ -1,6 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
 #tool nuget:?package=vswhere
+#tool nuget:?package=NUnit.ConsoleRunner
 #addin nuget:?package=Cake.Incubator
 #addin nuget:?package=Cake.Git
 
@@ -16,6 +17,8 @@ Task("Clean").Does(() =>
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
 	CleanDirectories(outputDir.FullPath);
+
+	EnsureDirectoryExists(outputDir);
 });
 
 GitVersion versionInfo = null;
@@ -74,8 +77,21 @@ Task("Build")
 	MSBuild(sln, settings);
 });
 
-Task("GitLink")
+Task("UnitTest")
 	.IsDependentOn("Build")
+	.Does(() => 
+{
+
+	var testPath = new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll");
+	NUnit3(testPath.FullPath, new NUnit3Settings {
+		Timeout = 30000,
+		OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
+		Results = new FilePath(outputDir + "/NUnitTestResult.xml")
+	});
+});
+
+Task("GitLink")
+	.IsDependentOn("UnitTest")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
 	.WithCriteria(() => 
