@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Platform.Platform;
@@ -172,7 +173,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 float value;
-                var toReturn = float.TryParse(input, out value);
+                var toReturn = float.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -183,7 +184,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 double value;
-                var toReturn = double.TryParse(input, out value);
+                var toReturn = double.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -240,24 +241,25 @@ namespace MvvmCross.Core.Platform
         public MvxStringToTypeParser()
         {
             TypeParsers = new Dictionary<Type, IParser>
-                {
-                    {typeof (string), new StringParser()},
-                    {typeof (short), new ShortParser()},
-                    {typeof (int), new IntParser()},
-                    {typeof (long), new LongParser()},
-                    {typeof (ushort), new UshortParser()},
-                    {typeof (uint), new UintParser()},
-                    {typeof (ulong), new UlongParser()},
-                    {typeof (double), new DoubleParser()},
-                    {typeof (float), new FloatParser()},
-                    {typeof (bool), new BoolParser()},
-                    {typeof (Guid), new GuidParser()},
-                    {typeof (DateTime), new DateTimeParser()},
-                };
+            {
+                {typeof (string), new StringParser()},
+                {typeof (short), new ShortParser()},
+                {typeof (int), new IntParser()},
+                {typeof (long), new LongParser()},
+                {typeof (ushort), new UshortParser()},
+                {typeof (uint), new UintParser()},
+                {typeof (ulong), new UlongParser()},
+                {typeof (double), new DoubleParser()},
+                {typeof (float), new FloatParser()},
+                {typeof (bool), new BoolParser()},
+                {typeof (Guid), new GuidParser()},
+                {typeof (DateTime), new DateTimeParser()},
+            };
+
             ExtraParsers = new List<IExtraParser>
-                {
-                    new EnumParser()
-                };
+            {
+                new EnumParser()
+            };
         }
 
         public bool TypeSupported(Type targetType)
