@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Test.Mocks
             ConversionsRequested.Add(value);
             ConversionParameters.Add(parameter);
             ConversionTypes.Add(targetType);
-            if(ThrowOnConversion)
+            if (ThrowOnConversion)
                 throw new MvxException("Conversion throw requested");
             return ConversionResult;
         }
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Test.Mocks
             ConversionsBackRequested.Add(value);
             ConversionBackParameters.Add(parameter);
             ConversionBackTypes.Add(targetType);
-            if(ThrowOnConversionBack)
+            if (ThrowOnConversionBack)
                 throw new MvxException("Conversion throw requested");
             return ConversionBackResult;
         }
