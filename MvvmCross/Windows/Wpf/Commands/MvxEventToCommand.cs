@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 using System;
 using System.Windows;
 using System.Windows.Input;
