@@ -196,24 +196,29 @@ namespace MvvmCross.Binding.Test.Binders
             SetInvariantCulture();
         }
 
+        private IMvxSourceStep SetupSimpleBindingTest(BaseSource source, string sourceProperty)
+        {
+            var realSourceStepFactory = SetupSourceStepFactory();
+            var sourceStepDescription = new MvxPathSourceStepDescription
+            {
+                SourcePropertyPath = sourceProperty
+            };
+
+            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
+            sourceStep.DataContext = source;
+
+            return sourceStep;
+        }
+
         [Test]
         public void TestSimpleStringBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
-
-            var sourceStepDescription = new MvxPathSourceStepDescription()
-            {
-                SourcePropertyPath = "Property1"
-            };
-
-            var source = new MySource()
+            var source = new MySource
             {
                 Property1 = "Test 42"
             };
 
-            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
-
-            sourceStep.DataContext = source;
+            var sourceStep = SetupSimpleBindingTest(source, "Property1");
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
@@ -235,7 +240,7 @@ namespace MvvmCross.Binding.Test.Binders
                 SourcePropertyPath = "IntProperty1"
             };
 
-            var source = new MySource()
+            var source = new MySource
             {
                 IntProperty1 = 42
             };
@@ -260,21 +265,12 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleDoubleBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
-
-            var sourceStepDescription = new MvxPathSourceStepDescription()
-            {
-                SourcePropertyPath = "DoubleProperty1"
-            };
-
-            var source = new MySource()
+            var source = new MySource
             {
                 DoubleProperty1 = 42.21
             };
 
-            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
-
-            sourceStep.DataContext = source;
+            var sourceStep = SetupSimpleBindingTest(source, "DoubleProperty1");
 
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
@@ -291,7 +287,7 @@ namespace MvvmCross.Binding.Test.Binders
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
-            var sourceStepDescription = new MvxPathSourceStepDescription()
+            var sourceStepDescription = new MvxPathSourceStepDescription
             {
                 SourcePropertyPath = "Collection[0]",
                 FallbackValue = "Pah"
@@ -361,21 +357,12 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleChangePropagationBinding()
         {
-            var realSourceStepFactory = SetupSourceStepFactory();
-
-            var sourceStepDescription = new MvxPathSourceStepDescription()
-            {
-                SourcePropertyPath = "Property1"
-            };
-
-            var source = new MySource()
+            var source = new MySource
             {
                 Property1 = "Test 42"
             };
 
-            var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
-
-            sourceStep.DataContext = source;
+            var sourceStep = SetupSimpleBindingTest(source, "Property1");
 
             Assert.AreEqual(typeof(string), sourceStep.SourceType);
 
