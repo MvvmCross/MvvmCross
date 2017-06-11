@@ -35,8 +35,8 @@ namespace MvvmCross.Binding.Test.Mocks
 
         public event EventHandler Changed;
 
-        public bool TryGetValueResult;
-        public object TryGetValueValue;
+        public bool TryGetValueResult { get; set; }
+        public object TryGetValueValue { get; set; }
 
         public object GetValue()
         {
