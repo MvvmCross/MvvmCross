@@ -10,7 +10,6 @@ namespace MvvmCross.Platform.UI
     // The colors in this file are base on the list from:
     // https://github.com/mono/sysdrawing-coregraphics/blob/master/System.Drawing/KnownColors.cs
     // This list used here under Apache license - their copyright is:
-
     //
     // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
     //
