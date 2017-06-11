@@ -670,9 +670,11 @@ namespace MvvmCross.Binding.Test.Binders
                     }
             };
 
-            var source = new MySource()
+            var doubleProperty = 12.34;
+
+            var source = new MySource
             {
-                DoubleProperty1 = 12.34,
+                DoubleProperty1 = doubleProperty,
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -682,7 +684,7 @@ namespace MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
             object value = sourceStep.GetValue();
-            Assert.AreEqual("12.34It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) =>
@@ -690,29 +692,29 @@ namespace MvvmCross.Binding.Test.Binders
                 changes.Add(sourceStep.GetValue());
             };
 
-            source.DoubleProperty1 = 11.11;
+            source.DoubleProperty1 = doubleProperty = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual("11.11It was missing", changes[0]);
+            Assert.AreEqual($"{doubleProperty}It was missing", changes[0]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("11.11It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
-            source.DoubleProperty1 = 12.11;
+            source.DoubleProperty1 = doubleProperty = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual("12.11It was missing", changes[1]);
+            Assert.AreEqual($"{doubleProperty}It was missing", changes[1]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("12.11It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
             source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
-            Assert.AreEqual("12.11Hello", changes[2]);
+            Assert.AreEqual($"{doubleProperty}Hello", changes[2]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("12.11Hello", value);
+            Assert.AreEqual($"{doubleProperty}Hello", value);
         }
 
         [Test]
@@ -737,9 +739,11 @@ namespace MvvmCross.Binding.Test.Binders
                     }
             };
 
-            var source = new MySource()
+            var doubleProperty = 12.34;
+
+            var source = new MySource
             {
-                DoubleProperty1 = 12.34,
+                DoubleProperty1 = 12.34
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -749,7 +753,7 @@ namespace MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(object), sourceStep.SourceType);
 
             object value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing12.34", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) =>
@@ -757,29 +761,29 @@ namespace MvvmCross.Binding.Test.Binders
                 changes.Add(sourceStep.GetValue());
             };
 
-            source.DoubleProperty1 = 11.11;
+            source.DoubleProperty1 = doubleProperty = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual("It was missing11.11", changes[0]);
+            Assert.AreEqual($"It was missing{doubleProperty}", changes[0]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing11.11", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
-            source.DoubleProperty1 = 12.11;
+            source.DoubleProperty1 = doubleProperty = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual("It was missing12.11", changes[1]);
+            Assert.AreEqual($"It was missing{doubleProperty}", changes[1]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing12.11", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
             source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
-            Assert.AreEqual("Hello12.11", changes[2]);
+            Assert.AreEqual($"Hello{doubleProperty}", changes[2]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("Hello12.11", value);
+            Assert.AreEqual($"Hello{doubleProperty}", value);
         }
 
         private MvxSourceStepFactory SetupSourceStepFactory()
