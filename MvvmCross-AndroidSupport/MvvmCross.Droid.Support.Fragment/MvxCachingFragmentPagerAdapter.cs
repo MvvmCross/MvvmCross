@@ -77,7 +77,6 @@ namespace MvvmCross.Droid.Support.V4
             // to do.  This can happen when we are restoring the entire pager
             // from its saved state, where the fragment manager has already
             // taken care of restoring the fragments we previously had instantiated.
-
             if (_fragments.Count > position)
             {
                 var existingFragment = _fragments.ElementAtOrDefault(position);

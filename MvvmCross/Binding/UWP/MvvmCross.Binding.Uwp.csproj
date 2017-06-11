@@ -43,6 +43,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Bi.n.d.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
@@ -56,7 +59,6 @@
     <Compile Include="MvxWindowsBindingCreator.cs" />
     <Compile Include="MvxWindowsPropertyBinding.cs" />
     <Compile Include="MvxWindowsPropertyBindingExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Binding.UWP.rd.xml" />
     <Compile Include="MvxBinding\Target\MvxCollapsedTargetBinding.cs" />
     <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />

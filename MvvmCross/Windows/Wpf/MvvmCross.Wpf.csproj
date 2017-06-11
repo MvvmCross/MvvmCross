@@ -56,7 +56,9 @@
     <Compile Include="Views\MvxWpfUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxWpfView.cs" />
     <Compile Include="Views\MvxWpfViewPresenter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Views\MvxWpfViewsContainer.cs" />
     <Compile Include="Views\MvxWpfViewDispatcher.cs" />
   </ItemGroup>

@@ -38,6 +38,9 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="BindingFlags.cs" />
     <Compile Include="ExtensionMethods\MvxCrossCoreExtensions.cs" />
     <Compile Include="Converters\MvxBindingConstant.cs" />
@@ -113,7 +116,6 @@
     <Compile Include="Plugins\MvxPluginManager.cs" />
     <Compile Include="Plugins\MvxFilePluginManager.cs" />
     <Compile Include="Plugins\MvxLoaderPluginRegistry.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\IMvxImageHelper.cs" />
     <Compile Include="UI\IMvxNativeColor.cs" />
     <Compile Include="UI\MvxColor.cs" />

@@ -1,4 +1,4 @@
-// MvxColors.cs
+﻿// MvxColors.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,6 @@ namespace MvvmCross.Platform.UI
     // The colors in this file are base on the list from:
     // https://github.com/mono/sysdrawing-coregraphics/blob/master/System.Drawing/KnownColors.cs
     // This list used here under Apache license - their copyright is:
-
     //
     // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
     //
@@ -32,8 +31,6 @@ namespace MvvmCross.Platform.UI
     // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
     // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-    //
-
     public static class MvxColors
     {
         public static MvxColor Transparent = new MvxColor(0x00FFFFFF);

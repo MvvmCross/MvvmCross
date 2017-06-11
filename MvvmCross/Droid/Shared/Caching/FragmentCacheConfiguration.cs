@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
@@ -76,8 +76,7 @@ namespace MvvmCross.Droid.Shared.Caching
                 savedInstanceState.GetBoolean(SavedFragmentCacheConfigurationEnabledFragmentPoppedCallbackState, true);
 
             // restore what fragments we have registered - and informations about registered fragments.
-
-            string jsonSerializedMvxCachedFragmentInfosToRestore = string.Empty;
+            string jsonSerializedMvxCachedFragmentInfosToRestore;
             if (Build.VERSION.SdkInt >= BuildVersionCodes.HoneycombMr1)
                 jsonSerializedMvxCachedFragmentInfosToRestore = savedInstanceState.GetString(SavedFragmentCacheConfiguration, string.Empty);
             else
@@ -89,7 +88,7 @@ namespace MvvmCross.Droid.Shared.Caching
 
             var serializedMvxCachedFragmentInfos = serializer.DeserializeObject<Dictionary<string, TSerializableMvxCachedFragmentInfo>>(jsonSerializedMvxCachedFragmentInfosToRestore);
             _lookup = serializedMvxCachedFragmentInfos.ToDictionary(x => x.Key,
-                (keyValuePair) => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value as SerializableMvxCachedFragmentInfo));
+                keyValuePair => MvxCachedFragmentInfoFactory.ConvertSerializableFragmentInfo(keyValuePair.Value as SerializableMvxCachedFragmentInfo));
         }
 
         public virtual void SaveFragmentCacheConfigurationState(Bundle outState, IMvxJsonConverter serializer)
