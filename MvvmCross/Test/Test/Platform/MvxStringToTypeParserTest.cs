@@ -159,11 +159,11 @@ namespace MvvmCross.Test.Platform
         {
             new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}", Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") },
             new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") },
-            new object[] { "{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty}, // invalid
-            new object[] {Guid.Empty.ToString(), Guid.Empty},
-            new object[] {"", Guid.Empty},
-            new object[] {"garbage", Guid.Empty},
-            new object[] {null, Guid.Empty}
+            new object[] { "{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty }, // invalid
+            new object[] { Guid.Empty.ToString(), Guid.Empty },
+            new object[] { "", Guid.Empty },
+            new object[] { "garbage", Guid.Empty },
+            new object[] { null, Guid.Empty }
         };
 
         [Test, TestCaseSource(nameof(_guidCases))]
