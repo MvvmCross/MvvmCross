@@ -1,7 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using MasterDetailExample.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.IoC;
-using Xamarin.Forms;
-using MvvmCross.Platform;
 
 namespace MasterDetailExample.Core
 {
@@ -14,7 +13,7 @@ namespace MasterDetailExample.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.MainViewModel>();
+            RegisterAppStart<MainViewModel>();
         }
     }
 }

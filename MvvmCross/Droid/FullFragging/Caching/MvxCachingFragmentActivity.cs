@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivity.cs
+﻿// MvxCachingFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,24 +11,25 @@ using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
+using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.FullFragging.Fragments;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Shared.Presenter;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Caching;
+using MvxActivity = MvvmCross.Droid.FullFragging.Views.MvxActivity;
 
 namespace MvvmCross.Droid.FullFragging.Caching
 {
     [Register("mvvmcross.droid.fullfragging.caching.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : Views.MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity : MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
 	{
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -221,6 +222,14 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			{
 				(fragInfo.CachedFragment as Fragment).Arguments.Clear();
 				(fragInfo.CachedFragment as Fragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{
@@ -242,7 +251,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
+			if (currentFragment != null && fragInfo.AddToBackStack || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
@@ -268,9 +277,9 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
 			if (replacementRequest == null) return FragmentReplaceMode.ReplaceFragment;
 
-			var areParametersEqual = ((oldRequest.ParameterValues == replacementRequest.ParameterValues) ||
-				(oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
-					!oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
+			var areParametersEqual = oldRequest.ParameterValues == replacementRequest.ParameterValues ||
+			                         oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
+			                         !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any();
 
 			if (currentFragment?.Tag != newFragment.Tag)
 			{
@@ -341,11 +350,15 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			return mvxFragmentView.UniqueImmutableCacheTag;
 		}
 
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate(bundle);
 
-			if (bundle == null) {
+            _view = Window.DecorView.RootView;
+
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
+
+            if (bundle == null) {
 				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
 				if (fragmentRequestText == null)
 					return;
@@ -357,6 +370,13 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				mvxAndroidViewPresenter.Show (fragmentRequest);
 			}
 		}
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
+        }
 
 		/// <summary>
 		/// Close Fragment with a specific tag at a specific placeholder
@@ -373,7 +393,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
 		protected virtual string FragmentJavaName(Type fragmentType)
 		{
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
 		public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
@@ -447,7 +467,20 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			CloseFragment(frag.Tag, frag.ContentId);
 			return true;
 		}
-	}
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel?.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
+        }
+    }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
         : MvxCachingFragmentActivity

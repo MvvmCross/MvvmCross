@@ -1,16 +1,17 @@
-// MvxMultiPartFormRestRequest.cs
+﻿// MvxMultiPartFormRestRequest.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.File;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Plugins.File;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -146,7 +147,7 @@ namespace MvvmCross.Plugins.Network.Rest
         {
             UploadFields(stream);
             UploadStreams(stream);
-            byte[] trailer = System.Text.Encoding.UTF8.GetBytes("\r\n--" + Boundary + "--\r\n");
+            byte[] trailer = Encoding.UTF8.GetBytes("\r\n--" + Boundary + "--\r\n");
             stream.Write(trailer, 0, trailer.Length);
         }
 
@@ -155,7 +156,7 @@ namespace MvvmCross.Plugins.Network.Rest
             if (FieldsToSend == null || FieldsToSend.Count == 0)
                 return;
 
-            byte[] boundarybytes = System.Text.Encoding.UTF8.GetBytes("\r\n--" + Boundary + "\r\n");
+            byte[] boundarybytes = Encoding.UTF8.GetBytes("\r\n--" + Boundary + "\r\n");
 
             const string formDataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
             foreach (var kvp in FieldsToSend)
@@ -171,7 +172,7 @@ namespace MvvmCross.Plugins.Network.Rest
             if (StreamsToSend == null || StreamsToSend.Count == 0)
                 return;
 
-            byte[] boundarybytes = System.Text.Encoding.UTF8.GetBytes("\r\n--" + Boundary + "\r\n");
+            byte[] boundarybytes = Encoding.UTF8.GetBytes("\r\n--" + Boundary + "\r\n");
 
             const string fileHeaderTemplate =
                 "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
@@ -179,7 +180,7 @@ namespace MvvmCross.Plugins.Network.Rest
             {
                 stream.Write(boundarybytes, 0, boundarybytes.Length);
                 string header = string.Format(fileHeaderTemplate, toSend.FieldName, toSend.FileName, toSend.ContentType);
-                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                byte[] headerbytes = Encoding.UTF8.GetBytes(header);
                 stream.Write(headerbytes, 0, headerbytes.Length);
                 toSend.WriteTo(stream);
             }

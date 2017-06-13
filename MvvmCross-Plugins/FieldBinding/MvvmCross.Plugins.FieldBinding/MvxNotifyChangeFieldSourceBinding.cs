@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Reflection;
+using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

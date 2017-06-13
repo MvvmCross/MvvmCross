@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
-
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;

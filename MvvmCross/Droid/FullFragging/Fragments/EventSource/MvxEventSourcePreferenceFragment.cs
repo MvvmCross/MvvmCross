@@ -1,13 +1,13 @@
-using System;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
-using Android.Preferences;
-using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
-using Android.App;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -51,15 +51,19 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 			base.OnAttach(context);
 		}
 
-		public override void OnAttach(Activity activity)
-		{
+#pragma warning disable CS0672 // Member overrides obsolete member
+        public override void OnAttach(Activity activity)
+#pragma warning restore CS0672 // Member overrides obsolete member
+        {
 			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
 			{
 				AttachCalled.Raise(this, activity);
 			}
 
-			base.OnAttach(activity);
-		}
+#pragma warning disable CS0618 // Type or member is obsolete
+            base.OnAttach(activity);
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {

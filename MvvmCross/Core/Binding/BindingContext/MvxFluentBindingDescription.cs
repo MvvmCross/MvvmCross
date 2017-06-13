@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.ValueConverters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.ValueConverters;
-    using MvvmCross.Platform.Converters;
-
     public class MvxFluentBindingDescription<TTarget, TSource>
         : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class
@@ -26,78 +27,87 @@ namespace MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> For(string targetPropertyName)
         {
-            this.BindingDescription.TargetName = targetPropertyName;
+            BindingDescription.TargetName = targetPropertyName;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> For(Expression<Func<TTarget, object>> targetPropertyPath)
         {
             var targetPropertyName = TargetPropertyName(targetPropertyPath);
-            return this.For(targetPropertyName);
+            return For(targetPropertyName);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> TwoWay()
         {
-            return this.Mode(MvxBindingMode.TwoWay);
+            return Mode(MvxBindingMode.TwoWay);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> OneWay()
         {
-            return this.Mode(MvxBindingMode.OneWay);
+            return Mode(MvxBindingMode.OneWay);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> OneWayToSource()
         {
-            return this.Mode(MvxBindingMode.OneWayToSource);
+            return Mode(MvxBindingMode.OneWayToSource);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> OneTime()
         {
-            return this.Mode(MvxBindingMode.OneTime);
+            return Mode(MvxBindingMode.OneTime);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> Mode(MvxBindingMode mode)
         {
-            this.BindingDescription.Mode = mode;
+            BindingDescription.Mode = mode;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> To(string sourcePropertyPath)
         {
-            this.SetFreeTextPropertyPath(sourcePropertyPath);
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> To(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            this.SetKnownTextPropertyPath(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
         {
-            return this.WithConversion(new MvxCommandParameterValueConverter(), parameter);
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
                                                                             object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
-            return this.WithConversion(converter, converterParameter);
+            return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
                                                                             object converterParameter = null)
         {
-            this.SourceStepDescription.Converter = converter;
-            this.SourceStepDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
+            where TValueConverter : IMvxValueConverter
+        {
+            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var converterName = filler.FindName(typeof(TValueConverter));
+
+            return WithConversion(converterName, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
-            this.SourceStepDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
             return this;
         }
 
@@ -106,13 +116,13 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return this.Described(newBindingDescription);
+            return Described(newBindingDescription);
         }
 
         [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget, TSource> Described(MvxBindingDescription description)
         {
-            this.Overwrite(description ?? new MvxBindingDescription());
+            Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -120,12 +130,12 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return this.SourceDescribed(newBindingDescription);
+            return SourceDescribed(newBindingDescription);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> SourceDescribed(MvxBindingDescription description)
         {
-            this.SourceOverwrite(description ?? new MvxBindingDescription());
+            SourceOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -140,18 +150,18 @@ namespace MvvmCross.Binding.BindingContext
                 MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
-            return this.FullyDescribed(newBindingDescription.FirstOrDefault());
+            return FullyDescribed(newBindingDescription.FirstOrDefault());
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(MvxBindingDescription description)
         {
-            this.FullOverwrite(description ?? new MvxBindingDescription());
+            FullOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithClearBindingKey(object clearBindingKey)
         {
-            this.ClearBindingKey = clearBindingKey;
+            ClearBindingKey = clearBindingKey;
             return this;
         }
     }
@@ -167,78 +177,87 @@ namespace MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> For(string targetPropertyName)
         {
-            this.BindingDescription.TargetName = targetPropertyName;
+            BindingDescription.TargetName = targetPropertyName;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> For(Expression<Func<TTarget, object>> targetPropertyPath)
         {
             var targetPropertyName = TargetPropertyName(targetPropertyPath);
-            return this.For(targetPropertyName);
+            return For(targetPropertyName);
         }
 
         public MvxFluentBindingDescription<TTarget> TwoWay()
         {
-            return this.Mode(MvxBindingMode.TwoWay);
+            return Mode(MvxBindingMode.TwoWay);
         }
 
         public MvxFluentBindingDescription<TTarget> OneWay()
         {
-            return this.Mode(MvxBindingMode.OneWay);
+            return Mode(MvxBindingMode.OneWay);
         }
 
         public MvxFluentBindingDescription<TTarget> OneWayToSource()
         {
-            return this.Mode(MvxBindingMode.OneWayToSource);
+            return Mode(MvxBindingMode.OneWayToSource);
         }
 
         public MvxFluentBindingDescription<TTarget> OneTime()
         {
-            return this.Mode(MvxBindingMode.OneTime);
+            return Mode(MvxBindingMode.OneTime);
         }
 
         public MvxFluentBindingDescription<TTarget> Mode(MvxBindingMode mode)
         {
-            this.BindingDescription.Mode = mode;
+            BindingDescription.Mode = mode;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To(string sourcePropertyPath)
         {
-            this.SetFreeTextPropertyPath(sourcePropertyPath);
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To<TSource>(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            this.SetKnownTextPropertyPath(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> CommandParameter(object parameter)
         {
-            return this.WithConversion(new MvxCommandParameterValueConverter(), parameter);
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
                                                                    object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
-            return this.WithConversion(converter, converterParameter);
+            return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            this.SourceStepDescription.Converter = converter;
-            this.SourceStepDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
+            where TValueConverter : IMvxValueConverter
+        {
+            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var converterName = filler.FindName(typeof(TValueConverter));
+
+            return WithConversion(converterName, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
-            this.SourceStepDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
             return this;
         }
 
@@ -247,13 +266,13 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return this.Described(newBindingDescription);
+            return Described(newBindingDescription);
         }
 
         [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
         public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
         {
-            this.Overwrite(description ?? new MvxBindingDescription());
+            Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -261,12 +280,12 @@ namespace MvvmCross.Binding.BindingContext
         {
             var newBindingDescription =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return this.SourceDescribed(newBindingDescription);
+            return SourceDescribed(newBindingDescription);
         }
 
         public MvxFluentBindingDescription<TTarget> SourceDescribed(MvxBindingDescription description)
         {
-            this.SourceOverwrite(description ?? new MvxBindingDescription());
+            SourceOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -281,18 +300,18 @@ namespace MvvmCross.Binding.BindingContext
                 MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
-            return this.FullyDescribed(newBindingDescription.FirstOrDefault());
+            return FullyDescribed(newBindingDescription.FirstOrDefault());
         }
 
         public MvxFluentBindingDescription<TTarget> FullyDescribed(MvxBindingDescription description)
         {
-            this.FullOverwrite(description ?? new MvxBindingDescription());
+            FullOverwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> WithClearBindingKey(object clearBindingKey)
         {
-            this.ClearBindingKey = clearBindingKey;
+            ClearBindingKey = clearBindingKey;
             return this;
         }
     }

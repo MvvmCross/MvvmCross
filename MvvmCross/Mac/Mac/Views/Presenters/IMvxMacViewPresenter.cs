@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using global::MvvmCross.Core.Views;
-
     public interface IMvxMacViewPresenter
-        : IMvxViewPresenter
+        : IMvxViewPresenter, IMvxCanCreateMacView
     {
     }
 }

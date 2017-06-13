@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Parse.Binding;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Parse.Binding;
-
     public interface IMvxBindingDescriptionParser
     {
         IEnumerable<MvxBindingDescription> Parse(string text);

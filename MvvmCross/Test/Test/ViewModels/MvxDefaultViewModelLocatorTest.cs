@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxDefaultViewModelLocatorTest : MvxIoCSupportingTest
     {

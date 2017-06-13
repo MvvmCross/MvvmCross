@@ -1,14 +1,15 @@
+using Cirrious.FluentLayouts.Touch;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Cirrious.FluentLayouts.Touch;
-    using Foundation;
-    using Binding.BindingContext;
-    using Core.ViewModels;
-    using SidePanels;
-    using UIKit;
-
     [Register("ExampleMenuItemView")]
-    [MvxPanelPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, false)]
     public class ExampleMenuItemView : BaseViewController<ExampleMenuItemViewModel>
     {
         public override void ViewDidLoad()

@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.ComponentModel;
+using System.Windows;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Platform.Wpf.Platform
 {
-    using System.ComponentModel;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-
     public abstract class MvxDesignTimeHelper
     {
         protected MvxDesignTimeHelper()
@@ -37,7 +37,7 @@ namespace MvvmCross.Platform.Wpf.Platform
                     _isInDesignTime =
                         (bool)
                         DesignerProperties.IsInDesignModeProperty
-                                          .GetMetadata(typeof(System.Windows.DependencyObject))
+                                          .GetMetadata(typeof(DependencyObject))
                                           .DefaultValue;
                 }
 

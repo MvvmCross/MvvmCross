@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxBaseTvosViewPresenter
         : MvxViewPresenter, IMvxTvosViewPresenter
     {
@@ -22,7 +21,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
@@ -33,6 +32,10 @@ namespace MvvmCross.tvOS.Views.Presenters
         }
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+        }
+
+        public override void Close(IMvxViewModel toClose)
         {
         }
     }

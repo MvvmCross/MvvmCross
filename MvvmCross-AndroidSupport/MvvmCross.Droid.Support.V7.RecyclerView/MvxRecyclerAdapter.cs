@@ -1,4 +1,4 @@
-// MvxRecyclerAdapter.cs
+﻿// MvxRecyclerAdapter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,22 +11,23 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+using MvvmCross.Droid.Support.V7.RecyclerView.Model;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter 
-        : Android.Support.V7.Widget.RecyclerView.Adapter
-        , IMvxRecyclerAdapter
+        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter , IMvxRecyclerAdapterBindableHolder
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
@@ -40,7 +41,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
-            this._bindingContext = bindingContext;
+            _bindingContext = bindingContext;
         }
 
         public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
@@ -109,7 +110,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
         }
 
-        public override void OnViewAttachedToWindow(Java.Lang.Object holder)
+        public override void OnViewAttachedToWindow(Object holder)
         {
             base.OnViewAttachedToWindow(holder);
 
@@ -117,7 +118,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnAttachedToWindow();
         }
 
-        public override void OnViewDetachedFromWindow(Java.Lang.Object holder)
+        public override void OnViewDetachedFromWindow(Object holder)
         {
             base.OnViewDetachedFromWindow(holder);
 
@@ -125,7 +126,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnDetachedFromWindow();
         }
 
-        public override void OnViewRecycled(Java.Lang.Object holder)
+        public override void OnViewRecycled(Object holder)
         {
             base.OnViewRecycled(holder);
 
@@ -160,14 +161,39 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
-            ((IMvxRecyclerViewHolder)holder).DataContext = GetItem(position);
+            var dataContext = GetItem(position);
+            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
 
         public override int ItemCount => _itemsSource.Count();
 
-        public virtual object GetItem(int position)
+        public virtual object GetItem(int viewPosition)
         {
-            return _itemsSource.ElementAt(position);
+            var itemsSourcePosition = GetItemsSourcePosition(viewPosition);
+
+            if (itemsSourcePosition >= 0 && itemsSourcePosition < _itemsSource.Count())
+            {
+                return _itemsSource.ElementAt(itemsSourcePosition);
+            }
+
+            return null;
+        }
+
+        protected virtual int GetViewPosition(object item)
+        {
+            var itemsSourcePosition = _itemsSource.GetPosition(item);
+            return GetViewPosition(itemsSourcePosition);
+        }
+
+        protected virtual int GetViewPosition(int itemsSourcePosition)
+        {
+            return itemsSourcePosition;
+        }
+
+        protected virtual int GetItemsSourcePosition(int viewPosition)
+        {
+            return viewPosition;
         }
 
         public int ItemTemplateId { get; set; }
@@ -211,7 +237,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        NotifyItemRangeInserted(e.NewStartingIndex, e.NewItems.Count);
+                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
@@ -219,14 +245,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                             var oldItem = e.OldItems[i];
                             var newItem = e.NewItems[i];
 
-                            NotifyItemMoved(this.ItemsSource.GetPosition(oldItem), this.ItemsSource.GetPosition(newItem));
+                            NotifyItemMoved(GetViewPosition(oldItem), GetViewPosition(newItem));
                         }
                         break;
                     case NotifyCollectionChangedAction.Replace:
-                        NotifyItemRangeChanged(e.NewStartingIndex, e.NewItems.Count);
+                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        NotifyItemRangeRemoved(e.OldStartingIndex, e.OldItems.Count);
+                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         NotifyDataSetChanged();
@@ -239,6 +265,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
             }
+        }
+
+        public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
+
+        protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
+        {
+            MvxViewHolderBound?.Invoke(obj);
         }
     }
 }

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS
 {
-    using System;
-
-    using UIKit;
-
     public static class MvxTvosColorExtensionMethods
     {
         public static UIColor ColorFromInt(this uint rgbValue)
@@ -34,7 +33,7 @@ namespace MvvmCross.Platform.tvOS
         {
             nfloat red, green, blue, alpha;
             color.GetRGBA(out red, out green, out blue, out alpha);
-            var rgbaValue = (uint)(((long)alpha) << 24 | ((long)red) << 16 | ((long)green) << 8 | ((long)blue));
+            var rgbaValue = (uint)(((long)alpha << 24) | ((long)red << 16) | ((long)green << 8) | (long)blue);
             return rgbaValue;
         }
     }

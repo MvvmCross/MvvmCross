@@ -35,13 +35,16 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <EmbeddedResource Include="Properties\MvvmCross.Plugins.Color.Uwp.rd.xml" />
     <Compile Include="MvxColorDesignTimeHelper.cs" />
     <Compile Include="MvxStoreColor.cs" />
@@ -56,10 +59,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Platform\UWP\MvvmCross.Platform.Uwp.csproj">
       <Project>{ce025c02-196a-4bd7-9097-e4646f4033b7}</Project>
       <Name>MvvmCross.Platform.Uwp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvvmCross.Plugins.Color\MvvmCross.Plugins.Color.csproj">
-      <Project>{5c48d946-d083-4271-819e-dbfa2016853b}</Project>
-      <Name>MvvmCross.Plugins.Color</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

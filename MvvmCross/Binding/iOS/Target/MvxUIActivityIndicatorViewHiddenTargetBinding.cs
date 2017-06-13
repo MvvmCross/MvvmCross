@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     /// <summary>
     /// Custom binding for UIActivityIndicator hidden.
     /// This binding will ensure the indicator animates when shown and stops when hidden
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override System.Type TargetType => typeof(bool);
+        public override Type TargetType => typeof(bool);
 
         protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
 

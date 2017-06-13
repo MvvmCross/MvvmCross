@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System.Collections.Generic;
-
     public interface IMvxStringDictionaryParser
     {
         IDictionary<string, string> Parse(string textToParse);

@@ -48,6 +48,14 @@ namespace MvvmCross.Droid.Shared.Fragments
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
+            var viewModelCache = Mvx.Resolve<IMvxChildViewModelCache>();
+            if(viewModelCache.Exists(viewModelType))
+            {
+                var viewModelCached = viewModelCache.Get(viewModelType);
+                viewModelCache.Remove(viewModelType);
+                return viewModelCached;
+            }
+
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 

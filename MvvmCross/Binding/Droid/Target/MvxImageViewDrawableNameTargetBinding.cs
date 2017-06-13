@@ -35,8 +35,8 @@ namespace MvvmCross.Binding.Droid.Target
                 return;
             }
 
-            var resources = this.AndroidGlobals.ApplicationContext.Resources;
-            var id = resources.GetIdentifier((string)value, "drawable", this.AndroidGlobals.ApplicationContext.PackageName);
+            var resources = AndroidGlobals.ApplicationContext.Resources;
+            var id = resources.GetIdentifier((string)value, "drawable", AndroidGlobals.ApplicationContext.PackageName);
             if (id == 0)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Warning,

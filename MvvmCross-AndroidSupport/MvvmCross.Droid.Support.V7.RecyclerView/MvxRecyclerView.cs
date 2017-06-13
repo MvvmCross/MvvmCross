@@ -1,4 +1,4 @@
-// MvxRecyclerView.cs
+﻿// MvxRecyclerView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,6 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
@@ -32,8 +31,13 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (adapter == null)
                 return;
 
-            if (base.GetLayoutManager() == null)
-                SetLayoutManager(new LinearLayoutManager(context));
+            var currentLayoutManager = GetLayoutManager();
+
+            // Love you Android
+            // https://code.google.com/p/android/issues/detail?id=77846#c10
+            // Don't believe those bastards, it's not fixed - workaround hack hack hack
+            if (currentLayoutManager == null)
+                SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
@@ -58,12 +62,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
             // Eventually the GC will come along and clear out the binding contexts.
             // Issue #1405
-            this.GetLayoutManager()?.RemoveAllViews();
+            GetLayoutManager()?.RemoveAllViews();
         }
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get { return GetAdapter() as IMvxRecyclerAdapter; }
             set
             {
                 var existing = Adapter;
@@ -73,7 +77,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 // Support lib doesn't seem to have anything similar to IListAdapter yet
                 // hence cast to Adapter.
-
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;
@@ -138,14 +141,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get { return Adapter.ItemClick; }
+            set { Adapter.ItemClick = value; }
         }
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get { return Adapter.ItemLongClick; }
+            set { Adapter.ItemLongClick = value; }
         }
     }
 }

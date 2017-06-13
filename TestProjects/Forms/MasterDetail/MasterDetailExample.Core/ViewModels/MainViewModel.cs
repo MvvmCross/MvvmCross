@@ -1,8 +1,8 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Presenter.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.ViewModels;
 
 namespace MasterDetailExample.Core.ViewModels
 {
@@ -15,7 +15,7 @@ namespace MasterDetailExample.Core.ViewModels
 
     public class MainViewModel : MvxMasterDetailViewModel<RootContentViewModel>
     {
-        MenuItem _menuItem;
+        private MenuItem _menuItem;
         public MenuItem SelectedMenu {
             get { return _menuItem; }
             set {
@@ -23,11 +23,12 @@ namespace MasterDetailExample.Core.ViewModels
                     OnSelectedChangedCommand.Execute(value);
             } }
 
-        IEnumerable<MenuItem> _menu;
+        private IEnumerable<MenuItem> _menu;
         public IEnumerable<MenuItem> Menu { get { return _menu; } set { SetProperty(ref _menu, value); } }
 
-        MvxCommand<MenuItem> _onSelectedChangedCommand;
-        ICommand OnSelectedChangedCommand { get
+        private MvxCommand<MenuItem> _onSelectedChangedCommand;
+
+        private ICommand OnSelectedChangedCommand { get
             {
                 return _onSelectedChangedCommand ?? (_onSelectedChangedCommand = new MvxCommand<MenuItem>((item) =>
                 {

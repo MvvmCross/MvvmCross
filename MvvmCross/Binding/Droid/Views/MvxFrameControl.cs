@@ -1,25 +1,23 @@
-// MvxFrameControl.cs
+﻿// MvxFrameControl.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Views;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.BindingContext;
-    using MvvmCross.Platform;
-
     [Register("mvvmcross.binding.droid.views.MvxFrameControl")]
     public class MvxFrameControl
         : FrameLayout
@@ -36,20 +34,20 @@ namespace MvvmCross.Binding.Droid.Views
         public MvxFrameControl(int templateId, Context context, IAttributeSet attrs)
             : base(context, attrs)
         {
-            this._templateId = templateId;
+            _templateId = templateId;
 
             if (!(context is IMvxLayoutInflaterHolder))
             {
                 throw Mvx.Exception("The owning Context for a MvxFrameControl must implement LayoutInflater");
             }
 
-            this._bindingContext = new MvxAndroidBindingContext(context, (IMvxLayoutInflaterHolder)context);
+            _bindingContext = new MvxAndroidBindingContext(context, (IMvxLayoutInflaterHolder)context);
             this.DelayBind(() =>
                 {
-                    if (this.Content == null && this._templateId != 0)
+                    if (Content == null && _templateId != 0)
                     {
-                        Mvx.Trace("DataContext is {0}", this.DataContext?.ToString() ?? "Null");
-                        this.Content = this._bindingContext.BindingInflate(this._templateId, this);
+                        Mvx.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
+                        Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });
         }
@@ -59,11 +57,11 @@ namespace MvvmCross.Binding.Droid.Views
         {
         }
 
-        protected IMvxAndroidBindingContext AndroidBindingContext => this._bindingContext;
+        protected IMvxAndroidBindingContext AndroidBindingContext => _bindingContext;
 
         public IMvxBindingContext BindingContext
         {
-            get { return this._bindingContext; }
+            get { return _bindingContext; }
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
@@ -75,7 +73,7 @@ namespace MvvmCross.Binding.Droid.Views
             if (disposing)
             {
                 this.ClearAllBindings();
-                this._cachedDataContext = null;
+                _cachedDataContext = null;
             }
 
             base.Dispose(disposing);
@@ -84,20 +82,20 @@ namespace MvvmCross.Binding.Droid.Views
         protected override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            this._isAttachedToWindow = true;
-            if (this._cachedDataContext != null
-                && this.DataContext == null)
+            _isAttachedToWindow = true;
+            if (_cachedDataContext != null
+                && DataContext == null)
             {
-                this.DataContext = this._cachedDataContext;
+                DataContext = _cachedDataContext;
             }
         }
 
         protected override void OnDetachedFromWindow()
         {
-            this._cachedDataContext = this.DataContext;
-            this.DataContext = null;
+            _cachedDataContext = DataContext;
+            DataContext = null;
             base.OnDetachedFromWindow();
-            this._isAttachedToWindow = false;
+            _isAttachedToWindow = false;
         }
 
         private View _content;
@@ -117,19 +115,19 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public object DataContext
         {
-            get { return this._bindingContext.DataContext; }
+            get { return _bindingContext.DataContext; }
             set
             {
-                if (this._isAttachedToWindow)
+                if (_isAttachedToWindow)
                 {
-                    this._bindingContext.DataContext = value;
+                    _bindingContext.DataContext = value;
                 }
                 else
                 {
-                    this._cachedDataContext = value;
-                    if (this._bindingContext.DataContext != null)
+                    _cachedDataContext = value;
+                    if (_bindingContext.DataContext != null)
                     {
-                        this._bindingContext.DataContext = null;
+                        _bindingContext.DataContext = null;
                     }
                 }
             }

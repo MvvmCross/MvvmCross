@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels.ListItems;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.Core
+namespace MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels
 {
 	public class FirstViewModel : MvxViewModel
 	{

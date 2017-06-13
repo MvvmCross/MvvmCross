@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings.Source
 {
-    using System;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxMissingSourceBinding : MvxSourceBinding
     {
         public MvxMissingSourceBinding(object source) : base(source)

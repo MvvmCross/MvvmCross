@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Console.Views;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Plugins;
+
 namespace MvvmCross.Console.Platform
 {
-    using MvvmCross.Console.Views;
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform.Plugins;
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
@@ -40,7 +37,7 @@ namespace MvvmCross.Console.Platform
 
         protected override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = this.CreateConsoleContainer();
+            var container = CreateConsoleContainer();
             Mvx.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
@@ -57,7 +54,7 @@ namespace MvvmCross.Console.Platform
 
         protected override void InitializeLastChance()
         {
-            this.InitializeMessagePump();
+            InitializeMessagePump();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

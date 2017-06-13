@@ -5,54 +5,80 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-	using System;
+    public class MvxCollectionReusableView
+        : UICollectionReusableView
+          , IMvxBindable
+    {
+        public IMvxBindingContext BindingContext { get; set; }
 
-	using CoreGraphics;
+        public MvxCollectionReusableView()
+            : this(string.Empty)
+        {
+        }
 
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.BindingContext;
+        public MvxCollectionReusableView(string bindingText)
+        {
+            this.CreateBindingContext(bindingText);
+        }
 
-	using UIKit;
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions)
+        {
+            this.CreateBindingContext(bindingDescriptions);
+        }
 
-	public class MvxCollectionReusableView
-		: UICollectionReusableView
-		  , IMvxBindable
-	{
-		public IMvxBindingContext BindingContext { get; set; }
+        public MvxCollectionReusableView(string bindingText, CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext(bindingText);
+        }
 
-		public MvxCollectionReusableView()
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
+            : base(frame)
+        {
+            this.CreateBindingContext(bindingDescriptions);
+        }
 
-		public MvxCollectionReusableView(IntPtr handle)
-			: base(handle)
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView(IntPtr handle)
+            : this(string.Empty, handle)
+        {
+        }
 
-		public MvxCollectionReusableView(CGRect frame)
-			: base(frame)
-		{
-			this.CreateBindingContext();
-		}
+        public MvxCollectionReusableView(string bindingText, IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext(bindingText);
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				this.BindingContext.ClearAllBindings();
-			}
-			base.Dispose(disposing);
-		}
+        public MvxCollectionReusableView(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+            : base(handle)
+        {
+            this.CreateBindingContext(bindingDescriptions);
+        }
 
-		[MvxSetToNullAfterBinding]
-		public object DataContext
-		{
-			get { return this.BindingContext.DataContext; }
-			set { this.BindingContext.DataContext = value; }
-		}
-	}
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                BindingContext.ClearAllBindings();
+            }
+            base.Dispose(disposing);
+        }
+
+        [MvxSetToNullAfterBinding]
+        public object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
+    }
 }

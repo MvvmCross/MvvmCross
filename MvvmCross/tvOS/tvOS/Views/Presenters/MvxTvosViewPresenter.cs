@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxTvosViewPresenter
         : MvxBaseTvosViewPresenter
     {
@@ -25,14 +24,14 @@ namespace MvvmCross.tvOS.Views.Presenters
             get; protected set;
         }
 
-        protected virtual IUIApplicationDelegate ApplicationDelegate => this._applicationDelegate;
+        protected virtual IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected virtual UIWindow Window => this._window;
+        protected virtual UIWindow Window => _window;
 
         public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
-            this._applicationDelegate = applicationDelegate;
-            this._window = window;
+            _applicationDelegate = applicationDelegate;
+            _window = window;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -43,7 +42,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             //if (request.ClearTop)
             //    ClearBackStack();
 
-            this.Show(view);
+            Show(view);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -52,7 +51,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
             if (hint is MvxClosePresentationHint)
             {
-                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
         }
@@ -63,20 +62,20 @@ namespace MvvmCross.tvOS.Views.Presenters
             if (viewController == null)
                 throw new MvxException("Passed in IMvxTvosView is not a UIViewController");
 
-            if (this.MasterNavigationController == null)
-                this.ShowFirstView(viewController);
+            if (MasterNavigationController == null)
+                ShowFirstView(viewController);
             else
-                this.MasterNavigationController.PushViewController(viewController, true /*animated*/);
+                MasterNavigationController.PushViewController(viewController, true /*animated*/);
         }
 
         public virtual void CloseModalViewController()
         {
-            this.MasterNavigationController.PopViewController(true);
+            MasterNavigationController.PopViewController(true);
         }
 
-        public virtual void Close(IMvxViewModel toClose)
+        public override void Close(IMvxViewModel toClose)
         {
-            var topViewController = this.MasterNavigationController.TopViewController;
+            var topViewController = MasterNavigationController.TopViewController;
 
             if (topViewController == null)
             {
@@ -100,12 +99,12 @@ namespace MvvmCross.tvOS.Views.Presenters
                 return;
             }
 
-            this.MasterNavigationController.PopViewController(true);
+            MasterNavigationController.PopViewController(true);
         }
 
         public override bool PresentModalViewController(UIViewController viewController, bool animated)
         {
-            this.CurrentTopViewController.PresentViewController(viewController, animated, () => { });
+            CurrentTopViewController.PresentViewController(viewController, animated, () => { });
             return true;
         }
 
@@ -116,20 +115,20 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         protected virtual void ShowFirstView(UIViewController viewController)
         {
-            foreach (var view in this._window.Subviews)
+            foreach (var view in _window.Subviews)
                 view.RemoveFromSuperview();
 
-            this.MasterNavigationController = this.CreateNavigationController(viewController);
+            MasterNavigationController = CreateNavigationController(viewController);
 
-            this.OnMasterNavigationControllerCreated();
+            OnMasterNavigationControllerCreated();
 
-            this.SetWindowRootViewController(this.MasterNavigationController);
+            SetWindowRootViewController(MasterNavigationController);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
         {
-            this._window.AddSubview(controller.View);
-            this._window.RootViewController = controller;
+            _window.AddSubview(controller.View);
+            _window.RootViewController = controller;
         }
 
         protected virtual void OnMasterNavigationControllerCreated()
@@ -141,6 +140,6 @@ namespace MvvmCross.tvOS.Views.Presenters
             return new UINavigationController(viewController);
         }
 
-        protected virtual UIViewController CurrentTopViewController => this.MasterNavigationController.TopViewController;
+        protected virtual UIViewController CurrentTopViewController => MasterNavigationController.TopViewController;
     }
 }

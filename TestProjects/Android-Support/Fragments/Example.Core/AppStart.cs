@@ -1,5 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
-using Example.Core.ViewModels;
+﻿using Example.Core.ViewModels;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace Example.Core
 {
@@ -11,7 +13,8 @@ namespace Example.Core
         /// </summary>
         public void Start(object hint = null)
         {
-			ShowViewModel<LoginViewModel>();
+            Mvx.Resolve<IMvxNavigationService>().Navigate<LoginViewModel>();
+			//ShowViewModel<LoginViewModel>();
         }
     }
 }

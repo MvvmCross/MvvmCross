@@ -1,4 +1,4 @@
-// MvxReachability.cs
+﻿// MvxReachability.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -83,7 +83,6 @@ namespace MvvmCross.Plugins.Network.iOS
             if (adHocWiFiNetworkReachability == null)
             {
                 adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] { 169, 254, 0, 0 }));
-#warning Need to look at SetNotification instead - ios6 change
                 adHocWiFiNetworkReachability.SetNotification(OnChange);
                 adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
@@ -101,7 +100,6 @@ namespace MvvmCross.Plugins.Network.iOS
             if (defaultRouteReachability == null)
             {
                 defaultRouteReachability = new NetworkReachability(new IPAddress(0));
-#warning Need to look at SetNotification instead - ios6 change
                 defaultRouteReachability.SetNotification(OnChange);
                 defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }
@@ -124,8 +122,6 @@ namespace MvvmCross.Plugins.Network.iOS
                 // Need to probe before we queue, or we wont get any meaningful values
                 // this only happens when you create NetworkReachability from a hostname
                 reachable = remoteHostReachability.TryGetFlags(out flags);
-
-#warning Need to look at SetNotification instead - ios6 change
                 remoteHostReachability.SetNotification(OnChange);
                 remoteHostReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
             }

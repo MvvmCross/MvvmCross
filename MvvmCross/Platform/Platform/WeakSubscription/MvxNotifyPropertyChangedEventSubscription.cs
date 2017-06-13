@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.ComponentModel;
+using System.Reflection;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.ComponentModel;
-    using System.Reflection;
-
     public class MvxNotifyPropertyChangedEventSubscription
         : MvxWeakEventSubscription<INotifyPropertyChanged, PropertyChangedEventArgs>
     {
@@ -31,7 +31,7 @@ namespace MvvmCross.Platform.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new PropertyChangedEventHandler(this.OnSourceEvent);
+            return new PropertyChangedEventHandler(OnSourceEvent);
         }
     }
 }

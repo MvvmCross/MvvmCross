@@ -17,7 +17,7 @@ This package contains the 'DownloadCache' plugin for MvvmCross</description>
 				<dependency id="MvvmCross.Platform" version="[$version$]" />
 				<dependency id="MvvmCross.Binding" version="[$version$]" />
 				<dependency id="System.Collections.Immutable" version="1.2.0" />
-				<dependency id="Xamarin.Android.Support.Compat" version="25.1.0" />
+				<dependency id="Xamarin.Android.Support.Compat" version="25.1.1" />
 			</group>
 		</dependencies>
 	</metadata>

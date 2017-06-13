@@ -1,104 +1,179 @@
-## MvvmCross
+<h3 align="center">
+  <a href="https://www.mvvmcross.com/" target="_blank">
+    <img src="docs/assets/img/logo/MvvmCross-logo.png" alt="MvvmCross Logo" />
+  </a>
+</h3>
 
-[![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
-![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)
-![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)
-[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v2)
+MvvmCross
+==========
+[![Twitter: @MvvmCross](https://img.shields.io/badge/contact-@MvvmCross-blue.svg?style=flat)](https://twitter.com/MvvmCross)
+![license](https://img.shields.io/github/license/mvvmcross/mvvmcross.svg)
+![Visual Studio Team services](https://img.shields.io/vso/build/osteost/3472a0ca-2abe-44b8-9897-98bdf5ab78a5/3.svg)
+[![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
+[![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
+[![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
+[![OpenCollective](https://opencollective.com/mvvmcross/backers/badge.svg)](#backers) 
+[![OpenCollective](https://opencollective.com/mvvmcross/sponsors/badge.svg)](#sponsors)
+[![CodeFactor](https://www.codefactor.io/repository/github/mvvmcross/mvvmcross/badge)](https://www.codefactor.io/repository/github/mvvmcross/mvvmcross)
 
-[![StackExchange](https://img.shields.io/stackexchange/stackoverflow/t/mvvmcross.svg)](http://stackoverflow.com/questions/tagged/mvvmcross)
+👀 Check out [mvvmcross.com](https://www.mvvmcross.com) to get started with MvvmCross 👀
 
-MvvmCross is a cross-platform mvvm framework that enables developers to create cross platform apps.
+MvvmCross is a cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern on *Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF)*. This allows for better code sharing by allowing you to share behavior and business logic between platforms.
 
-## Documentation & blog
+Among the features MvvmCross provides are:
 
-* See our [official website](http://mvvmcross.com/docs) for an extensive set of documentation!
-* To stay up-to-date with the latest news go to the [MvvmCross blog](http://mvvmcross.com/blog)!
+- ViewModel to View bindings using own customizable binding engine, which allows you to create own binding definitions for own custom views
+- ViewModel to ViewModel navigation, helps you share behavior on how and when to navigate
+- Inversion of Control through Dependency Injection and Property Injection
+- Plugin framework, which lets you plug-in cool stuff like GPS Location, Localization, Sensors, Binding Extensions and a huge selection of 3rd party community plug-ins
 
-### Get started
+MvvmCross is extendable by you. We strive to let as much code be configurable and overridable, to let the developer decide how they want to use the framework. However, the framework is very usable without doing anything.
 
-A quick way to get started is to use the Visual Studio MvvmCross [Ninja Coder](https://github.com/asudbury/NinjaCoderForMvvmCross) Extension - download it from [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767)
+<hr />
+<h4 align="center">
+  Check out the new <a href="https://www.mvvmcross.com/documentation">MvvmCross docs</a>
+</h4>
+<hr />
 
-For manual project creation install the necessary packages from [Nuget](https://www.nuget.org/packages?q=mvvmcross)
+### Backers
 
-### Questions & support
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/mvvmcross#backer)]
+
+<a href="https://opencollective.com/mvvmcross/backer/0/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/1/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/2/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/3/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/4/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/5/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/6/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/7/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/8/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/9/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/10/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/11/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/12/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/13/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/14/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/15/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/16/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/17/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/18/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/19/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/20/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/21/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/22/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/23/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/24/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/25/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/26/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/27/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/28/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/backer/29/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/29/avatar.svg"></a>
+
+### Sponsors
+
+Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/mvvmcross#sponsor)]
+
+<a href="https://opencollective.com/mvvmcross/sponsor/0/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/1/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/2/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/3/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/4/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/5/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/6/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/7/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/8/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/9/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/10/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/11/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/12/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/13/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/14/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/15/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/16/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/17/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/18/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/19/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/19/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/20/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/20/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/21/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/21/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/22/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/22/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/23/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/23/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/24/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/24/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/25/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/25/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/26/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/26/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/27/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/27/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/28/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/28/avatar.svg"></a>
+<a href="https://opencollective.com/mvvmcross/sponsor/29/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/29/avatar.svg"></a>
+
+## Installation
+
+Grab the latest [MvvmCross NuGet](https://www.nuget.org/packages/MvvmCross/) package and install in your solution.
+
+> Install-Package MvvmCross
+
+Make sure that both the shared core project and your application projects include the NuGet. For more details please visit the [Getting Started documentation.](https://www.mvvmcross.com/documentation/getting-started/getting-started) which also provide easier ways, through Visual Studio and Xamarin Studio plugins to install and manage MvvmCross in your project.
+
+## Filing issues
+
+We strive to keep the GitHub issues list for bugs, features and other important project management tasks. If you have questions please see the [Questions & support section below](#questions--support).
+
+When filing issues, please use our [ISSUE_TEMPLATE](/.github/ISSUE_TEMPLATE.md). The best way to get your bug fixed is to be as detailed as you can be about the problem.
+Providing a minimal git repository with a project showing how to reproduce the problem is ideal. Here are a couple of questions you can answer before filing a bug.
+
+1. Did you try find your answer in the [documentation](https://www.mvvmcross.com)
+2. Did you inclide a snippet of the broken code in the issue?
+3. Can you reproduce the problem in a brand new project?
+4. What are the _*EXACT*_ steps to reproduce this problem?
+5. What platform(s) are you experiencing the problem on?
+
+Remember GitHub issues support [markdown](http://github.github.com/github-flavored-markdown/). When filing bugs please make sure you check the formatting of the issue before clicking submit.
+
+## Contributing code
+
+We are happy to receive Pull Requests adding new features and solving bugs. As for new features, please contact us before doing major work. To ensure you are not working on something that will be rejected due to not fitting into the roadmap or ideal of the framework.
+
+### Git setup
+
+Since Windows and UNIX-based systems differ in terms of line endings, it is a very good idea to configure git autocrlf settings.
+
+On *Windows* we recommend setting `core.autocrlf` to `true`.
+
+```
+git config --global core.autocrlf true
+```
+
+On *Mac* we recommend setting `core.autocrlf` to `input`.
+
+```
+git config --global core.autocrlf input
+```
+
+### Code style guidelines
+
+Please use 4 spaces for indentation.
+
+Otherwise default ReSharper C# code style applies.
+
+### Project Workflow
+
+Our workflow is loosely based on [Github Flow](http://scottchacon.com/2011/08/31/github-flow.html).
+We actively do development on the **develop** branch. This means that all pull requests by contributors need to be develop and requested against the deveop branch.
+The master branch contains tags reflecting what is currently on NuGet.org.
+
+### Submitting Pull Requests
+
+Make sure you can build the code. Familiarize yourself with the project workflow and our coding conventions. If you don't know what a pull request is
+read this https://help.github.com/articles/using-pull-requests.
+
+Before submitting a feature or substantial code contribution please discuss it with the team and ensure it follows the MvvmCross roadmap.
+Note that code submissions will be reviewed and tested. Only code that meets quality and design/roadmap appropriateness will be merged into the source. [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+
+## Questions & support
 
 * [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
 * [Xamarin forums](http://forums.xamarin.com)
 * [Slack](https://xamarinchat.herokuapp.com/) join the #mvvmcross channel after you are in
-
-### Documentation and Examples
-
-**The [MvvmCross-Samples](https://github.com/MvvmCross/MvvmCross-Samples) repo contains the latest samples. See the [MvvmCross Wiki](https://github.com/MvvmCross/MvvmCross/wiki) for additional articles and information.**
-
-**Samples and Videos:**
-
-* **[N Plus 1 Videos Of MvvmCross][n1videos]**
-* [MvvmCross Tutorials][mvxtuts]
-* [Evolve 2013 talk](http://xamarin.com/evolve/2013#session-dnoeeoarfj)
-* [NDC 2013 talk](http://slodge.blogspot.co.uk/2013/06/ndc2013-mobile-mvvm-and-xamarin-talks.html)
-* [Xaminar - 2012](http://slodge.blogspot.com/2012/12/mvvmcross-video-presentation-xaminar.html)
-* [MvvmCross and Azure - 2012](http://slodge.blogspot.co.uk/2012/11/azure-to-wpmonodroidmonotouch-video-of.html)
-
-
-**The Tip Calc tutorial:**
-
-* [A first app](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-first-app)
-* [The Core Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc---The-Core-Project)
-* [A Xamarin.Android UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.Android-UI-project)
-* [A Xamarin.iOS UI project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Xamarin.iOS-UI-project)
-* [A Universal Windows App UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Universal-Windows-App-UI-Project)
-* [A Windows Phone UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-A-Windows-Phone-UI-Project)
-* [A Windows Store UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calc-Windows-Store-Project)
-* [A Wpf UI Project](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator-A-Wpf-UI-Project)
-* [Tip Calculator -  A recap](https://github.com/MvvmCross/MvvmCross/wiki/Tip-Calculator---A-recap)
-
-**General articles:**
-
-* [The MvvmCross Manifesto](https://github.com/MvvmCross/MvvmCross/wiki/The-MvvmCross-Manifesto)
-* [High Level MvvmCross Objects](https://github.com/MvvmCross/MvvmCross/wiki/High-Level-MvvmCross-Objects)
-* [Databinding](https://github.com/MvvmCross/MvvmCross/wiki/Databinding)
-* [Value Converters](https://github.com/MvvmCross/MvvmCross/wiki/Value-Converters)
-* [View Model Lifecycle](https://github.com/MvvmCross/MvvmCross/wiki/View-Model-Lifecycle)
-* [ViewModel  to ViewModel navigation](https://github.com/MvvmCross/MvvmCross/wiki/ViewModel--to-ViewModel-navigation)
-* [Customizing App and Setup ](https://github.com/MvvmCross/MvvmCross/wiki/Customizing-using-App-and-Setup)
-* [Service Location and Inversion of Control](https://github.com/MvvmCross/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
-* [Assemblies](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-Assemblies)
-* [Plugins](https://github.com/MvvmCross/MvvmCross/wiki/MvvmCross-plugins)
-* [Testing](https://github.com/MvvmCross/MvvmCross/wiki/Testing)
-* [Dialog - very draft](https://github.com/MvvmCross/MvvmCross/wiki/CrossUI---MonoTouch.Dialog-and-MonoDroid.Dialog-with-MvvmCross)
-
-**iOS Articles:**
-
-* [Tables and Cells in iOS](https://github.com/MvvmCross/MvvmCross/wiki/Tables-and-Cells-in-iOS)
-* [Map Annotation Data-Binding](https://github.com/MvvmCross/MvvmCross/wiki/Map-Annotation-Data-Binding)
-
-**For more information please also see:**
-
-* the N+1 video series - [N Plus 1 Videos Of MvvmCross][n1videos]
-* [Stuart's blog][slogdeblog]
-* [Cheesebaron's blog][cheesebaron]
-* [DeapSquatter's blog][deapsquatter]
-* [Odenaxos's blog][odenaxos]
-* [Greg's blog][gshackles] 
-* [Kerry's blog][lothrop]
-* [Jammer's blog](http://www.jammer.biz/category/geek-bits/)
-* others? Get in touch if you think your blog should be here......
-
-
-### Contribute!
-
-Some of the best ways to contribute are to try things out, file bugs, and join conversations.
-
-* [Pull requests](https://github.com/MvvmCross/MvvmCross/pulls): [Open](https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Aopen+is%3Apr)/[Closed](https://github.com/MvvmCross/MvvmCross/pulls?q=is%3Apr+is%3Aclosed)
-* [Issues](https://github.com/MvvmCross/MvvmCross/issues): [Open](https://github.com/MvvmCross/MvvmCross/issues?q=is%3Aopen+is%3Aissue)/[Closed](https://github.com/MvvmCross/MvvmCross/issues?q=is%3Aissue+is%3Aclosed)
-
-If you would like to help make MvvmCross even better, then please do:
-
-* new code - including pull requests via GitHub - or you can fork the project and build your own extensions
-* new plugins - can be hosted in your own repositories
-* please do blog about your adventures with MvvmCross - we're currently light on documentation!
-* if you use the framework, then please let me know - we love to see what people are doing with it
-
 
 ### Licensing
 
@@ -120,29 +195,15 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 
 * Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
 * Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
-* Thanks to [Infragistics](http://www.infragistics.com/) for a control license for Nuclios and .Net
+
+### Laptop Stickers!
+
+Show your support for MvvmCross and get a sticker!
 
 
-[ninja]: http://i.imgur.com/eJ3ewEq.png "Ninja Plugin"
-[ninjavsgallery]: http://visualstudiogallery.msdn.microsoft.com/618b51f0-6de8-4f85-95ce-a50c658c7767 "Ninja Coder Visual Studio Gallery"
-[n1]: http://mvvmcross.wordpress.com "MvvmCross N+1 table of contents"
-[n1github]: https://github.com/MvvmCross/NPlus1DaysOfMvvmCross "MvvmCross N+1 on GitHub"
-[n1videos]: https://github.com/MvvmCross/MvvmCross/wiki/N-plus-1-Videos-Of-MvvmCross
-[mvxtuts]: https://github.com/MvvmCross/MvvmCross-Tutorials/ "MvvmCross Tutorials"
-[mvxwiki]: https://github.com/MvvmCross/MvvmCross/wiki "MvvmCross Wiki"
-[mvxnuget]: https://www.nuget.org/packages?q=mvvmcross "MvvmCross on NuGet"
-[mvxbin]: https://github.com/mvvmcross/MvvmCross-Binaries/ "MvvmCross Binaries"
-[cirrious]: http://www.cirrious.com
-[slogdeblog]: http://slodge.blogspot.co.uk/ "Stuart Lodge's blog"
-[jabbr]: http://jabbr.net/#/rooms/mvvmcross "MvvmCross on Jabbr.net"
-[cheesebaron]: http://blog.ostebaronen.dk/search/label/MvvmCross "Cheesebaron's blog"
-[deapsquatter]: http://deapsquatter.blogspot.co.uk/ "DeapSquatter's blog"
-[odenaxos]: http://www.e-naxos.com/Blog/?tag=/mvvmcross "Odenaxos's blog"
-[gshackles]: http://www.gregshackles.com/tag/mvvmcross/ "Greg Shackle's blog"
+[<img src="docs/assets/img/logo/MvvmCross-avatar.png" alt="MvvmCross Laptop Sticker" width="200" />](https://goo.gl/forms/zkNTcMLanxvX4Dxv1)
+
+
 [so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
 [xfmvx]: http://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
 [xf]: http://forums.xamarin.com "Xamarin Forums"
-[mvxtwitter]: https://twitter.com/MvvmCross "MvvmCross on Twitter"
-[mvxmail]: http://slodge.blogspot.co.uk/2013/06/my-standard-reply-to-mvvmcross-support.html "MvvmCross e-mail"
-[mvxv3]: http://slodge.blogspot.co.uk/2013/02/mvvmcross-v3.html "MvvmCross v3"
-[lothrop]: http://kerry.lothrop.de/tag/mvvmcross/ "Kerry Lothrop's blog"

@@ -5,22 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings
 {
-    using System;
-
     public abstract class MvxBinding : IMvxBinding
     {
         ~MvxBinding()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         #region IMvxBinding Members
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 

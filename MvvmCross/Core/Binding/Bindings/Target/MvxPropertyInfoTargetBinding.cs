@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Platform;
-
     public class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
     {
         private readonly PropertyInfo _targetPropertyInfo;
@@ -20,7 +19,7 @@ namespace MvvmCross.Binding.Bindings.Target
         public MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target)
         {
-            this._targetPropertyInfo = targetPropertyInfo;
+            _targetPropertyInfo = targetPropertyInfo;
         }
 
         protected override void Dispose(bool isDisposing)
@@ -29,24 +28,23 @@ namespace MvvmCross.Binding.Bindings.Target
             {
                 // if the target property should be set to NULL on dispose then we clear it here
                 // this is a fix for the possible memory leaks discussion started https://github.com/slodge/MvvmCross/issues/17#issuecomment-8527392
-                var setToNullAttribute = this.TargetPropertyInfo.GetCustomAttribute<MvxSetToNullAfterBindingAttribute>(true);
+                var setToNullAttribute = TargetPropertyInfo.GetCustomAttribute<MvxSetToNullAfterBindingAttribute>(true);
                 if (setToNullAttribute != null)
                 {
-                    this.SetValue(null);
+                    SetValue(null);
                 }
             }
 
             base.Dispose(isDisposing);
         }
 
-        public override Type TargetType => this.TargetPropertyInfo.PropertyType;
+        public override Type TargetType => TargetPropertyInfo.PropertyType;
 
-        protected PropertyInfo TargetPropertyInfo => this._targetPropertyInfo;
+        protected PropertyInfo TargetPropertyInfo => _targetPropertyInfo;
 
         protected override void SetValueImpl(object target, object value)
         {
-#warning Check this is Unity compatible :/
-            var setMethod = this.TargetPropertyInfo.GetSetMethod();
+            var setMethod = TargetPropertyInfo.GetSetMethod();
             setMethod.Invoke(target, new object[] { value });
         }
     }
@@ -59,6 +57,6 @@ namespace MvvmCross.Binding.Bindings.Target
         {
         }
 
-        protected T View => base.Target as T;
+        protected T View => Target as T;
     }
 }

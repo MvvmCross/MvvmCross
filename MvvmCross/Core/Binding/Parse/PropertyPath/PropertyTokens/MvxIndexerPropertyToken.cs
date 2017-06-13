@@ -11,14 +11,14 @@ namespace MvvmCross.Binding.Parse.PropertyPath.PropertyTokens
     {
         protected MvxIndexerPropertyToken(object key)
         {
-            this.Key = key;
+            Key = key;
         }
 
         public object Key { get; }
 
         public override string ToString()
         {
-            return "IndexedProperty:" + (this.Key == null ? "null" : this.Key.ToString());
+            return "IndexedProperty:" + (Key == null ? "null" : Key.ToString());
         }
     }
 

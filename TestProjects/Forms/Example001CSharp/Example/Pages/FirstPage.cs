@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MvvmCross.Forms.Views;
+using Xamarin.Forms;
 
 namespace Example.Pages
 {
@@ -10,8 +11,8 @@ namespace Example.Pages
             Padding = new Thickness(10);
 
             // see https://forums.xamarin.com/discussion/45111/has-anybody-managed-to-get-a-toolbar-working-on-winrt-windows-using-xf
-            if (Device.OS == TargetPlatform.Windows)
-                Padding = new Xamarin.Forms.Thickness(Padding.Left, this.Padding.Top, this.Padding.Right, 95);
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                Padding = new Thickness(Padding.Left, Padding.Top, Padding.Right, 95);
 
             ForceLayout();
 
@@ -29,6 +30,30 @@ namespace Example.Pages
                 Text = string.Empty,
                 FontSize = 24
             };
+            
+            var image = new MvxImageView
+                                {
+                                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                    Margin = new Thickness(20),
+                                    HeightRequest = 100,
+                                    ImageUri = "https://www.mvvmcross.com/img/MvvmCross-logo.png",
+                                };
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                {
+                    image.DefaultImagePath = "res:fallback";
+                    image.ErrorImagePath = "res:error";
+                    break;
+                }
+                case Device.iOS:
+                {
+                    image.DefaultImagePath = "res:Fallback.png";
+                    image.ErrorImagePath = "res:Error.png";
+                    break;
+                }
+            }
 
             Content = new StackLayout
             {
@@ -36,6 +61,7 @@ namespace Example.Pages
                 Orientation = StackOrientation.Vertical,
                 Children =
                 {
+                    image,
                     new Label
                     {
                         Text = "Enter your nickname in the box below",

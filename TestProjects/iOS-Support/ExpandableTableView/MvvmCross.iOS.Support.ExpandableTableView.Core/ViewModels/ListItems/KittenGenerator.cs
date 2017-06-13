@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.Core
+namespace MvvmCross.iOS.Support.ExpandableTableView.Core.ViewModels.ListItems
 {
 	public class KittenGenerator
 	{

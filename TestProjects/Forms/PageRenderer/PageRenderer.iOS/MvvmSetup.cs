@@ -5,17 +5,17 @@ using Xamarin.Forms;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Forms.Presenter.Core;
-using MvvmCross.Forms.Presenter.iOS;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
-using PageRendererExample.ViewModels;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.iOS;
+using MvvmCross.Forms.iOS.Presenters;
 
 namespace PageRendererExample.UI.iOS
 {
     public class MvvmSetup : MvxIosSetup
     {
-        public MvxFormsApp MvxFormsApp { get; private set; }
+        public MvxFormsApplication MvxFormsApp { get; private set; }
         public MvvmSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
         {
         }

@@ -1,15 +1,16 @@
+using Cirrious.FluentLayouts.Touch;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using CoreGraphics;
-    using Foundation;
-    using SidePanels;
-    using UIKit;
-
     [Register("LeftPanelView")]
-    [MvxPanelPresentation(MvxPanelEnum.Left, MvxPanelHintType.ActivePanel, false)]
+    [MvxSidebarPresentation(MvxPanelEnum.Left, MvxPanelHintType.PushPanel, false)]
     public class LeftPanelView : BaseMenuViewController<LeftPanelViewModel>
     {
         /// <summary>
@@ -28,12 +29,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             centerButton.SetTitle("Master View Menu Item", UIControlState.Normal);
             centerButton.BackgroundColor = UIColor.White;
             centerButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
-            
+
             var exampleButton = new UIButton(new CGRect(0, 100, 320, 40));
             exampleButton.SetTitle("Example Menu Item", UIControlState.Normal);
             exampleButton.BackgroundColor = UIColor.White;
             exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
-            
+
 
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);

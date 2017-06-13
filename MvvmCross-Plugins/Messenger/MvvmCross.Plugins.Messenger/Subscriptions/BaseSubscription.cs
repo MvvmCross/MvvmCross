@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Plugins.Messenger.ThreadRunners;
 using System;
+using MvvmCross.Plugins.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugins.Messenger.Subscriptions
 {

@@ -5,20 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Moq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Moq;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxViewModelLoaderTest : MvxIoCSupportingTest
     {
@@ -27,7 +24,7 @@ namespace MvvmCross.Test.ViewModels
         {
             ClearAll();
 
-            var request = new MvxViewModelRequest<MvxNullViewModel>(null, null, MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
@@ -47,21 +44,19 @@ namespace MvvmCross.Test.ViewModels
                 m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
                        .Returns(() => outViewModel);
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
-                                                                  MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
 
             Assert.AreSame(outViewModel, viewModel);
-            Assert.AreEqual(MvxRequestedBy.UserAction, viewModel.RequestedBy);
         }
 
         [Test]
@@ -74,15 +69,14 @@ namespace MvvmCross.Test.ViewModels
                 m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
                        .Throws<MvxException>();
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
-                                                                  MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
             Assert.Throws<MvxException>(() => {
@@ -95,15 +89,14 @@ namespace MvvmCross.Test.ViewModels
         {
             ClearAll();
 
-            var mockCollection = new Moq.Mock<IMvxViewModelLocatorCollection>();
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => null);
 
             Ioc.RegisterSingleton(mockCollection.Object);
 
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
-            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null,
-                                                                  MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader();
 

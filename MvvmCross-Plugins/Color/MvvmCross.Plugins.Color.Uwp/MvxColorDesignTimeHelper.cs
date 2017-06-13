@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 using MvvmCross.Platform.Uwp.Platform;
 
-namespace MvvmCross.Plugins.Color.WindowsCommon
+namespace MvvmCross.Plugins.Color.Uwp
 {
     public class MvxColorDesignTimeHelper
         : MvxDesignTimeHelper

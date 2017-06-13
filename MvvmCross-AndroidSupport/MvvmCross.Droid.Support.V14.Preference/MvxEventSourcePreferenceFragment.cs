@@ -1,14 +1,12 @@
 ﻿using System;
-using Android.Support.V14.Preferences;
-
-using MvvmCross.Platform.Core;
-using Android.OS;
-
-using Android.Runtime;
-using Android.Views;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
-using MvvmCross.Droid.Shared;
 using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V14.Preferences;
+using Android.Views;
+using MvvmCross.Droid.Shared;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {

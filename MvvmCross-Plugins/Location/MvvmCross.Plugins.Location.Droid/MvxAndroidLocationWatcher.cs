@@ -86,7 +86,7 @@ namespace MvvmCross.Plugins.Location.Droid
             }
         }
 
-        private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
+        private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
         {
             var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
             var coords = position.Coordinates;
@@ -126,7 +126,7 @@ namespace MvvmCross.Plugins.Location.Droid
 
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(global::Android.Locations.Location androidLocation)
+        public void OnLocationChanged(Android.Locations.Location androidLocation)
         {
             if (androidLocation == null)
             {

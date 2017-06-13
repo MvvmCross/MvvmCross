@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Core.Views;
-
     public interface IMvxAndroidViewPresenter
         : IMvxViewPresenter
     {

@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Mac.Views.Presenters
 {
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform.Platform;
-
     public class MvxBaseMacViewPresenter
         : MvxViewPresenter, IMvxMacViewPresenter
     {
@@ -20,12 +20,16 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (this.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+        }
+
+        public override void Close(IMvxViewModel toClose)
         {
         }
     }

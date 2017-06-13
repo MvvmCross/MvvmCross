@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.IoC;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.IoC;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxIocPropertyInjectionTest
     {

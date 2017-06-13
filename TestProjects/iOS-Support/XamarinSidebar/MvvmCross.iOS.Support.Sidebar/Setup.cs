@@ -1,12 +1,13 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using Platform;
-    using MvvmCross.Platform.Platform;
-    using UIKit;
-    using MvvmCross.Core.ViewModels;
-    using XamarinSidebar;
-    using MvvmCross.iOS.Views.Presenters;
-
     public class Setup : MvxIosSetup
     {
         /// <summary>Initializes a new instance of the <see cref="Setup"/> class.</summary>
@@ -21,7 +22,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
         /// <returns>The IMvxApplication <see langword="object"/></returns>
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         /// <summary>Creates the debug trace.</summary>

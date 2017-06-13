@@ -1,8 +1,8 @@
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.Core.ViewModels
 {
@@ -93,7 +93,7 @@ namespace Example.Core.ViewModels
             var rand = new Random();
             Func<char> randChar = () => (char)rand.Next(65, 90);
             Func<int, string> randStr = null;
-            randStr = x => (x > 0) ? randStr(--x) + randChar() : "";
+            randStr = x => x > 0 ? randStr(--x) + randChar() : "";
 
             var newItemCount = rand.Next(3);
 

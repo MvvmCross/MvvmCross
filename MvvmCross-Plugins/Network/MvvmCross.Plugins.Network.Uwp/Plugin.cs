@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.Network.Rest;
 
-namespace MvvmCross.Plugins.Network.WindowsCommon
+namespace MvvmCross.Plugins.Network.Uwp
 {
     public class Plugin
         : IMvxPlugin

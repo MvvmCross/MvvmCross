@@ -5,22 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.OS;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.OS;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Droid.Platform;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid.Views;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxActivityViewExtensions
     {
         public static void AddEventListeners(this IMvxEventSourceActivity activity)
@@ -69,7 +67,6 @@ namespace MvvmCross.Droid.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-#warning Should this be an exception here as we do not respond to the new intent message
             Mvx.Warning("OnViewNewIntent called - but this is not fully handled within MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
             //throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
         }

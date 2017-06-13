@@ -8,7 +8,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Email.WindowsCommon
+namespace MvvmCross.Plugins.Email.Uwp
 {
     public class Plugin
         : IMvxPlugin
@@ -16,7 +16,7 @@ namespace MvvmCross.Plugins.Email.WindowsCommon
         public void Load()
         {
             Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
-            // note that WindowsStore does not support IMvxComposeEmailTaskEx
+            Mvx.RegisterType<IMvxComposeEmailTaskEx, MvxComposeEmailTask>();
         }
     }
 }

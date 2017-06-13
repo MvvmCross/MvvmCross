@@ -5,27 +5,26 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Bindings;
-
     public class MvxFromTextBinder
         : IMvxBinder
     {
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
             var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingText);
-            return this.Bind(source, target, bindingDescriptions);
+            return Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
             var bindingDescriptions =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
-            return this.Bind(source, target, bindingDescriptions);
+            return Bind(source, target, bindingDescriptions);
         }
 
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
@@ -35,7 +34,7 @@ namespace MvvmCross.Binding.Binders
                 return new IMvxUpdateableBinding[0];
 
             return
-                bindingDescriptions.Select(description => this.BindSingle(new MvxBindingRequest(source, target, description)));
+                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
@@ -48,7 +47,7 @@ namespace MvvmCross.Binding.Binders
 
             bindingDescription.TargetName = targetPropertyName;
             var request = new MvxBindingRequest(source, target, bindingDescription);
-            return this.BindSingle(request);
+            return BindSingle(request);
         }
 
         public IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest)

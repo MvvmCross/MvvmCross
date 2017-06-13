@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace MvvmCross.Binding.Parse.PropertyPath

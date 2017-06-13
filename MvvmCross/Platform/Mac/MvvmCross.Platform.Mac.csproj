@@ -53,10 +53,13 @@
     <Reference Include="Xamarin.Mac" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Views\MvxEventSourceViewController.cs" />
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
     <Compile Include="Views\MvxBaseViewControllerAdapter.cs" />
+    <Compile Include="Views\MvxEventSourceTabViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>

@@ -1,14 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using Java.Lang;
+using MvvmCross.Platform;
+using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -25,7 +26,6 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
-		[Obsolete("MvxFragmentPagerAdapter is deprecated, please use MvxCachingFragmentPagerAdapter instead.")]
         public MvxFragmentPagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
             : base(fragmentManager)
@@ -34,15 +34,15 @@ namespace MvvmCross.Droid.Support.V4
             Fragments = fragments;
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position)
+        public override Fragment GetItem(int position)
         {
             var fragInfo = Fragments.ElementAt(position);
 
             if (fragInfo.CachedFragment == null)
             {
-                fragInfo.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+                fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
-                var request = new MvxViewModelRequest(fragInfo.ViewModelType, null, null, null);
+                var request = new MvxViewModelRequest(fragInfo.ViewModelType, null, null);
                 ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
             }
 
@@ -51,12 +51,12 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new Java.Lang.String(Fragments.ElementAt(position).Title);
+            return new String(Fragments.ElementAt(position).Title);
         }
 
         public override void RestoreState(IParcelable state, ClassLoader loader)
@@ -77,7 +77,7 @@ namespace MvvmCross.Droid.Support.V4
             public string Title { get; set; }
             public Type FragmentType { get; private set; }
             public Type ViewModelType { get; private set; }
-            public Android.Support.V4.App.Fragment CachedFragment { get; set; }
+            public Fragment CachedFragment { get; set; }
         }
     }
 }

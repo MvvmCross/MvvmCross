@@ -1,5 +1,6 @@
-﻿using MvvmCross.Core.Views;
-using MvvmCross.Forms.Presenter.WindowsUWP;
+﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using Xamarin.Forms.Platform.UWP;
 
@@ -14,12 +15,12 @@ namespace Example.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             
-            var start = Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+            var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsUWPPagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpPagePresenter;
             LoadApplication(presenter.MvxFormsApp);
         }
     }

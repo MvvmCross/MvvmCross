@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public interface IMvxTvosView
         : IMvxView
         , IMvxCanCreateTvosView

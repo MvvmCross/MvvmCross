@@ -1,35 +1,33 @@
-// MvxAndroidViewFactory.cs
+﻿// MvxAndroidViewFactory.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using Android.Content;
+using Android.Util;
+using Android.Views;
+using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Droid.Binders
 {
-    using System;
-    using System.Threading;
-
-    using Android.Content;
-    using Android.Util;
-    using Android.Views;
-
-    using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidViewFactory
         : IMvxAndroidViewFactory
     {
         private IMvxViewTypeResolver _viewTypeResolver;
 
-        protected IMvxViewTypeResolver ViewTypeResolver => this._viewTypeResolver ?? (this._viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>());
+        protected IMvxViewTypeResolver ViewTypeResolver => _viewTypeResolver ?? (_viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>());
 
         public virtual View CreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             // resolve the tag name to a type
-            var viewType = this.ViewTypeResolver.Resolve(name);
+            var viewType = ViewTypeResolver.Resolve(name);
 
             if (viewType == null)
             {

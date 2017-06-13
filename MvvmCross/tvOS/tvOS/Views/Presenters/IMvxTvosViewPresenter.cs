@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views.Presenters
 {
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.tvOS.Views;
-
     public interface IMvxTvosViewPresenter
         : IMvxViewPresenter
         , IMvxCanCreateTvosView

@@ -1,4 +1,4 @@
-// MvxRecyclerViewHolder.cs
+﻿// MvxRecyclerViewHolder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -39,46 +39,46 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 // This is just a precaution.  If we've set the DataContext to something
                 // then we don't need to have the old one still cached.
                 if (value != null)
-                    this._cachedDataContext = null;
+                    _cachedDataContext = null;
             }
         }
 
         public ICommand Click
         {
-            get { return this._click; }
+            get { return _click; }
             set
             {
-                this._click = value;
-                if (this._click != null)
-                    this.EnsureClickOverloaded();
+                _click = value;
+                if (_click != null)
+                    EnsureClickOverloaded();
             }
         }
 
         private void EnsureClickOverloaded()
         {
-            if (this._clickOverloaded)
+            if (_clickOverloaded)
                 return;
-            this._clickOverloaded = true;
-            this.ItemView.Click += OnItemViewOnClick;
+            _clickOverloaded = true;
+            ItemView.Click += OnItemViewOnClick;
         }
 
         public ICommand LongClick
         {
-            get { return this._longClick; }
+            get { return _longClick; }
             set
             {
-                this._longClick = value;
-                if (this._longClick != null)
-                    this.EnsureLongClickOverloaded();
+                _longClick = value;
+                if (_longClick != null)
+                    EnsureLongClickOverloaded();
             }
         }
 
         private void EnsureLongClickOverloaded()
         {
-            if (this._longClickOverloaded)
+            if (_longClickOverloaded)
                 return;
-            this._longClickOverloaded = true;
-            this.ItemView.LongClick += OnItemViewOnLongClick;
+            _longClickOverloaded = true;
+            ItemView.LongClick += OnItemViewOnLongClick;
         }
 
         protected virtual void ExecuteCommandOnItem(ICommand command)
@@ -98,18 +98,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         private void OnItemViewOnClick(object sender, EventArgs args)
         {
-            this.ExecuteCommandOnItem(this.Click);
+            ExecuteCommandOnItem(Click);
         }
 
         private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
         {
-            this.ExecuteCommandOnItem(this.LongClick);
+            ExecuteCommandOnItem(LongClick);
         }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
             : base(itemView)
         {
-            this._bindingContext = context;
+            _bindingContext = context;
+        }
+
+        public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
+            : base(handle, ownership)
+        {
         }
 
         public virtual void OnAttachedToWindow()
@@ -142,8 +147,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 if (ItemView != null)
                 {
-                    ItemView.Click -= this.OnItemViewOnClick;
-                    ItemView.LongClick -= this.OnItemViewOnLongClick;
+                    ItemView.Click -= OnItemViewOnClick;
+                    ItemView.LongClick -= OnItemViewOnLongClick;
                 }
             }
 

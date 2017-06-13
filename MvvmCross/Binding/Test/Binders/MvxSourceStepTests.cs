@@ -5,24 +5,23 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Parse.PropertyPath;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Test.Core;
+using NUnit.Framework;
+
 namespace MvvmCross.Binding.Test.Binders
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Combiners;
-    using MvvmCross.Binding.Parse.PropertyPath;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Test.Core;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSourceStepTests : MvxIoCSupportingTest
     {
@@ -36,13 +35,13 @@ namespace MvvmCross.Binding.Test.Binders
             {
                 add
                 {
-                    this._PropertyChanged += value;
-                    this.SubscriptionCount++;
+                    _PropertyChanged += value;
+                    SubscriptionCount++;
                 }
                 remove
                 {
-                    this._PropertyChanged -= value;
-                    this.SubscriptionCount--;
+                    _PropertyChanged -= value;
+                    SubscriptionCount--;
                 }
             }
 
@@ -58,64 +57,64 @@ namespace MvvmCross.Binding.Test.Binders
 
             public string Property1
             {
-                get { return this._property1; }
-                set { this._property1 = value; this.RaisePropertyChanged(); }
+                get { return _property1; }
+                set { _property1 = value; RaisePropertyChanged(); }
             }
 
             private string _property2;
 
             public string Property2
             {
-                get { return this._property2; }
-                set { this._property2 = value; this.RaisePropertyChanged(); }
+                get { return _property2; }
+                set { _property2 = value; RaisePropertyChanged(); }
             }
 
             private int _intProperty1;
 
             public int IntProperty1
             {
-                get { return this._intProperty1; }
-                set { this._intProperty1 = value; this.RaisePropertyChanged(); }
+                get { return _intProperty1; }
+                set { _intProperty1 = value; RaisePropertyChanged(); }
             }
 
             private int _intProperty2;
 
             public int IntProperty2
             {
-                get { return this._intProperty2; }
-                set { this._intProperty2 = value; this.RaisePropertyChanged(); }
+                get { return _intProperty2; }
+                set { _intProperty2 = value; RaisePropertyChanged(); }
             }
 
             private double _doubleProperty1;
 
             public double DoubleProperty1
             {
-                get { return this._doubleProperty1; }
-                set { this._doubleProperty1 = value; this.RaisePropertyChanged(); }
+                get { return _doubleProperty1; }
+                set { _doubleProperty1 = value; RaisePropertyChanged(); }
             }
 
             private double _doubleProperty2;
 
             public double DoubleProperty2
             {
-                get { return this._doubleProperty2; }
-                set { this._doubleProperty2 = value; this.RaisePropertyChanged(); }
+                get { return _doubleProperty2; }
+                set { _doubleProperty2 = value; RaisePropertyChanged(); }
             }
 
             private ObservableCollection<string> _collection = new ObservableCollection<string>();
 
             public ObservableCollection<string> Collection
             {
-                get { return this._collection; }
-                set { this._collection = value; this.RaisePropertyChanged(); }
+                get { return _collection; }
+                set { _collection = value; RaisePropertyChanged(); }
             }
 
             private MySubSource _subSource;
 
             public MySubSource SubSource
             {
-                get { return this._subSource; }
-                set { this._subSource = value; this.RaisePropertyChanged(); }
+                get { return _subSource; }
+                set { _subSource = value; RaisePropertyChanged(); }
             }
         }
 
@@ -125,33 +124,33 @@ namespace MvvmCross.Binding.Test.Binders
 
             public string SubProperty1
             {
-                get { return this._property1; }
-                set { this._property1 = value; this.RaisePropertyChanged(); }
+                get { return _property1; }
+                set { _property1 = value; RaisePropertyChanged(); }
             }
 
             private string _property2;
 
             public string SubProperty2
             {
-                get { return this._property2; }
-                set { this._property2 = value; this.RaisePropertyChanged(); }
+                get { return _property2; }
+                set { _property2 = value; RaisePropertyChanged(); }
             }
         }
 
         public class IntPlus1ValueConverter : MvxValueConverter<int, int>
         {
-            protected override int Convert(int value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            protected override int Convert(int value, Type targetType, object parameter, CultureInfo culture)
             {
                 return value + 1;
             }
 
-            protected override int ConvertBack(int value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            protected override int ConvertBack(int value, Type targetType, object parameter, CultureInfo culture)
             {
                 return value - 1;
             }
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetUp()
         {
             SetInvariantCulture();
@@ -160,7 +159,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleStringBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -189,7 +188,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleIntBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -221,7 +220,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleDoubleBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -250,7 +249,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleCollectionBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -282,7 +281,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleSubPropertyBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -322,7 +321,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleChangePropagationBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -385,7 +384,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestIndedexedChangePropagationBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -448,7 +447,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleSubObjectChangePropagationBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -505,7 +504,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestSimpleIntWithValueConversionBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxPathSourceStepDescription()
             {
@@ -543,7 +542,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestLiteralStringBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxLiteralSourceStepDescription()
             {
@@ -568,7 +567,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestLiteralDoubleBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxLiteralSourceStepDescription()
             {
@@ -593,7 +592,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestCombinerPropertiesPresentBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {
@@ -652,7 +651,7 @@ namespace MvvmCross.Binding.Test.Binders
         [Test]
         public void TestCombinerPropertiesMissingBinding()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {
@@ -671,9 +670,11 @@ namespace MvvmCross.Binding.Test.Binders
                     }
             };
 
-            var source = new MySource()
+            var doubleProperty = 12.34;
+
+            var source = new MySource
             {
-                DoubleProperty1 = 12.34,
+                DoubleProperty1 = doubleProperty,
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -683,7 +684,7 @@ namespace MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(double), sourceStep.SourceType);
 
             object value = sourceStep.GetValue();
-            Assert.AreEqual("12.34It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) =>
@@ -691,35 +692,35 @@ namespace MvvmCross.Binding.Test.Binders
                 changes.Add(sourceStep.GetValue());
             };
 
-            source.DoubleProperty1 = 11.11;
+            source.DoubleProperty1 = doubleProperty = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual("11.11It was missing", changes[0]);
+            Assert.AreEqual($"{doubleProperty}It was missing", changes[0]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("11.11It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
-            source.DoubleProperty1 = 12.11;
+            source.DoubleProperty1 = doubleProperty = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual("12.11It was missing", changes[1]);
+            Assert.AreEqual($"{doubleProperty}It was missing", changes[1]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("12.11It was missing", value);
+            Assert.AreEqual($"{doubleProperty}It was missing", value);
 
             source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
-            Assert.AreEqual("12.11Hello", changes[2]);
+            Assert.AreEqual($"{doubleProperty}Hello", changes[2]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("12.11Hello", value);
+            Assert.AreEqual($"{doubleProperty}Hello", value);
         }
 
         [Test]
         public void TestCombinerPropertiesMissingBinding_Part2()
         {
-            var realSourceStepFactory = this.SetupSourceStepFactory();
+            var realSourceStepFactory = SetupSourceStepFactory();
 
             var sourceStepDescription = new MvxCombinerSourceStepDescription()
             {
@@ -738,9 +739,11 @@ namespace MvvmCross.Binding.Test.Binders
                     }
             };
 
-            var source = new MySource()
+            var doubleProperty = 12.34;
+
+            var source = new MySource
             {
-                DoubleProperty1 = 12.34,
+                DoubleProperty1 = 12.34
             };
 
             var sourceStep = realSourceStepFactory.Create(sourceStepDescription);
@@ -750,7 +753,7 @@ namespace MvvmCross.Binding.Test.Binders
             Assert.AreEqual(typeof(object), sourceStep.SourceType);
 
             object value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing12.34", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) =>
@@ -758,29 +761,29 @@ namespace MvvmCross.Binding.Test.Binders
                 changes.Add(sourceStep.GetValue());
             };
 
-            source.DoubleProperty1 = 11.11;
+            source.DoubleProperty1 = doubleProperty = 11.11;
 
             Assert.AreEqual(1, changes.Count);
-            Assert.AreEqual("It was missing11.11", changes[0]);
+            Assert.AreEqual($"It was missing{doubleProperty}", changes[0]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing11.11", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
-            source.DoubleProperty1 = 12.11;
+            source.DoubleProperty1 = doubleProperty = 12.11;
 
             Assert.AreEqual(2, changes.Count);
-            Assert.AreEqual("It was missing12.11", changes[1]);
+            Assert.AreEqual($"It was missing{doubleProperty}", changes[1]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("It was missing12.11", value);
+            Assert.AreEqual($"It was missing{doubleProperty}", value);
 
             source.SubSource = new MySubSource() { SubProperty1 = "Hello" };
 
             Assert.AreEqual(3, changes.Count);
-            Assert.AreEqual("Hello12.11", changes[2]);
+            Assert.AreEqual($"Hello{doubleProperty}", changes[2]);
 
             value = sourceStep.GetValue();
-            Assert.AreEqual("Hello12.11", value);
+            Assert.AreEqual($"Hello{doubleProperty}", value);
         }
 
         private MvxSourceStepFactory SetupSourceStepFactory()

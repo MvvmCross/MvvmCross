@@ -34,11 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="Castle.Core">
       <HintPath>..\..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -50,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Binders\MvxSourceStepTests.cs" />
     <Compile Include="Bindings\MvxFullBindingConstructionTest.cs" />
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
@@ -62,7 +60,6 @@
     <Compile Include="Parse\Binding\Swiss\MvxSwissBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxTibetBindingTest.cs" />
     <Compile Include="Parse\PropertyPath\MvxSourcePropertyPathParserTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
@@ -73,12 +70,8 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Test\Test.Core\MvvmCross.Test.Core.csproj">
-      <Project>{8E788346-A72B-4939-9D95-A44AC5F46D9D}</Project>
+      <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Test\Test\MvvmCross.Test.csproj">

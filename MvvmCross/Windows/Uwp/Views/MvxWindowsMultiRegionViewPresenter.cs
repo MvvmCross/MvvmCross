@@ -5,28 +5,27 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
+using System;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
+namespace MvvmCross.Uwp.Views
 {
-    using System;
-
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
-    using Windows.UI.Xaml.Media;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using System.Collections.Generic;
     public class MvxWindowsMultiRegionViewPresenter
         : MvxWindowsViewPresenter
     {
-        private readonly IMvxWindowsFrame _rootFrame;
+        protected readonly IMvxWindowsFrame _rootFrame;
 
         public MvxWindowsMultiRegionViewPresenter(IMvxWindowsFrame rootFrame)
             : base(rootFrame)
         {
-            this._rootFrame = rootFrame;
+            _rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -38,7 +37,7 @@ namespace MvvmCross.WindowsUWP.Views
                 var converter = Mvx.Resolve<IMvxNavigationSerializer>();
                 var requestText = converter.Serializer.SerializeObject(request);
 
-                var containerView = FindChild<Frame>(this._rootFrame.UnderlyingControl, viewType.GetRegionName());
+                var containerView = FindChild<Frame>(_rootFrame.UnderlyingControl, viewType.GetRegionName());
 
                 if (containerView != null)
                 {
@@ -70,14 +69,14 @@ namespace MvvmCross.WindowsUWP.Views
             }
         }
 
-        private static Type GetViewType(MvxViewModelRequest request)
+        protected static Type GetViewType(MvxViewModelRequest request)
         {
             var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
             return viewFinder.GetViewType(request.ViewModelType);
         }
 
         // Implementation from: http://stackoverflow.com/a/1759923/80186
-        internal static T FindChild<T>(DependencyObject reference, string childName) where T : DependencyObject
+        protected internal static T FindChild<T>(DependencyObject reference, string childName) where T : DependencyObject
         {
             // Confirm parent and childName are valid.
             if (reference == null) return null;

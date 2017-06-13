@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -49,11 +49,41 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         }
 
         public string UniqueImmutableCacheTag => Tag;
+
+        public override void OnDestroy ()
+        {
+            base.OnDestroy ();
+            ViewModel?.Destroy ();
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.Appearing();
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.Appeared();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.Disappearing();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.Disappeared();
+        }
     }
 
     public abstract class MvxPreferenceFragment<TViewModel>
         : MvxPreferenceFragment
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
 
         protected MvxPreferenceFragment()

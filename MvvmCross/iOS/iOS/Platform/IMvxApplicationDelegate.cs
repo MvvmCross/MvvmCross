@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Platform;
+using UIKit;
+
 namespace MvvmCross.iOS.Platform
 {
-    using MvvmCross.Core.Platform;
-
-    using UIKit;
-
     public interface IMvxApplicationDelegate : IUIApplicationDelegate, IMvxLifetime
     {
     }

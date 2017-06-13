@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using Android.Content;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System.Collections.Generic;
-
-    using Android.Content;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxChildViewModelOwnerExtensions
     {
         public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, object parameterObject)
@@ -28,8 +26,7 @@ namespace MvvmCross.Droid.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
-            var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null,
-                                                                        MvxRequestedBy.UserAction);
+            var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null);
             return view.CreateIntentFor(request);
         }
 

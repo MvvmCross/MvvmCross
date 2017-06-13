@@ -20,9 +20,9 @@ namespace MvvmCross.Droid.Shared.Attributes
         }
 
         /// <summary>
-		/// That shall be used only if you are using non generic fragments.
-		/// </summary>
-		public Type ViewModelType { get; set; }
+        /// That shall be used only if you are using non generic fragments.
+        /// </summary>
+        public Type ViewModelType { get; set; }
 
         /// <summary>
         /// Indicates if the fragment can be cached. True by default.
@@ -40,7 +40,7 @@ namespace MvvmCross.Droid.Shared.Attributes
         public int FragmentContentId { get; private set; }
 
         /// <summary>
-        /// Indicates if the fragment can be cached. True by default.
+        /// Indicates if the fragment can be cached. False by default.
         /// </summary>
         public bool AddToBackStack { get; set; } = false;
     }

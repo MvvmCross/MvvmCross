@@ -6,9 +6,9 @@ namespace Example.Core.ViewModels
     {
         public LoginViewModel()
         {
-            this.Username = "TestUser";
-            this.Password = "YouCantSeeMe";
-            this.IsLoading = false;
+            Username = "TestUser";
+            Password = "YouCantSeeMe";
+            IsLoading = false;
         }
 
         private string _username;
@@ -48,7 +48,11 @@ namespace Example.Core.ViewModels
         {
             get
             {
-				return new MvxCommand(() => ShowViewModel<HomeViewModel>());
+				return new MvxCommand(() =>
+				{
+					IsLoading = !IsLoading; //Toggle for testing
+					ShowViewModel<HomeViewModel>();
+				});
             }
         }
     }

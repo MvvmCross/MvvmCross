@@ -1,5 +1,5 @@
-using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.ViewModels
 {

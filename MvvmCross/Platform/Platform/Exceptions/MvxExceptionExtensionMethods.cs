@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Exceptions
 {
-    using System;
-
     public static class MvxExceptionExtensionMethods
     {
         public static string ToLongString(this Exception exception)

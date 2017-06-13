@@ -14,10 +14,6 @@ This package contains the 'Core' libraries for MvvmCross
 			<group>
 				<dependency id="MvvmCross.Platform" version="[$version$]" />
 			</group>
-			<group targetFramework=".NETFramework4.5">
-				<dependency id="MvvmCross.Platform" version="[$version$]" />
-				<dependency id="Expression.Blend.Sdk3" version="1.0.1340.1" />
-			</group>
 		</dependencies>
 	</metadata>
 	<files>		
@@ -36,18 +32,18 @@ This package contains the 'Core' libraries for MvvmCross
 
 		<!-- uap -->
 		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp.*" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Uwp\Properties\MvvmCross.WindowsUWP.rd.xml" target="lib\uap10.0\MvvmCross.Uwp\Properties" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\uap10.0" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\uap10.0" />
 		
 		<!-- droid -->
-		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.*"
-			exclude="..\bin\Release\Mvx\Droid\MvvmCross.Droid.Full*" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.dll" target="lib\MonoAndroid" />
+		<file src="..\bin\Release\Mvx\Droid\MvvmCross.Droid.pdb" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\MonoAndroid" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\MonoAndroid" />
 
 		<!-- iOS -->
-		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.*" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.dll" target="lib\Xamarin.iOS10" />
+		<file src="..\bin\Release\Mvx\iOS\MvvmCross.iOS.pdb" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.dll" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Core.pdb" target="lib\Xamarin.iOS10" />
         

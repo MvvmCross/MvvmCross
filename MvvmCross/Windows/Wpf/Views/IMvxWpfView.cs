@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Wpf.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-
     public interface IMvxWpfView
         : IMvxView
     {

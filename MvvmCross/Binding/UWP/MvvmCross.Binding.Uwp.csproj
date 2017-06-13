@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>false</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,12 +36,16 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Bi.n.d.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="IMvxBindingCreator.cs" />
@@ -52,7 +57,8 @@
     <Compile Include="MvxWindowsAssemblyCache.cs" />
     <Compile Include="MvxWindowsBindingBuilder.cs" />
     <Compile Include="MvxWindowsBindingCreator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MvxWindowsPropertyBinding.cs" />
+    <Compile Include="MvxWindowsPropertyBindingExtensions.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Binding.UWP.rd.xml" />
     <Compile Include="MvxBinding\Target\MvxCollapsedTargetBinding.cs" />
     <Compile Include="MvxBinding\Target\MvxDependencyPropertyTargetBinding.cs" />

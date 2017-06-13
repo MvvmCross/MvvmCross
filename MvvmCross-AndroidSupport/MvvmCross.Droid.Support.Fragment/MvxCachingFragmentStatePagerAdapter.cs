@@ -1,16 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
-using MvvmCross.Platform;
+using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using Java.Lang;
-using String = Java.Lang.String;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
+using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -39,13 +39,13 @@ namespace MvvmCross.Droid.Support.V4
 
         protected static string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
-        public override Android.Support.V4.App.Fragment GetItem(int position, Android.Support.V4.App.Fragment.SavedState fragmentSavedState = null)
+        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = Fragments.ElementAt(position);
-            var fragment = Android.Support.V4.App.Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+            var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
             if (mvxFragment == null)
@@ -78,17 +78,10 @@ namespace MvvmCross.Droid.Support.V4
             if (fragInfo.ParameterValuesObject != null)
                 mvxBundle = new MvxBundle(fragInfo.ParameterValuesObject.ToSimplePropertyDictionary());
 
-            var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null, null);
+            var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
 
             return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
         }
-
-        //Do call restore state
-        //public override void RestoreState(IParcelable state, ClassLoader loader)
-        //{
-        //    //Don't call restore to prevent crash on rotation
-        //    //base.RestoreState (state, loader);
-        //}
 
         public class FragmentInfo
         {
@@ -108,16 +101,16 @@ namespace MvvmCross.Droid.Support.V4
             }
             
             public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {
-		ViewModel = viewModel;
-	    }
+		        : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
+	        {
+		        ViewModel = viewModel;
+	        }
 
-	    public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		: this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
-	    {  
-		ViewModel = viewModel;
-	    }
+	        public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
+		        : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
+	        {  
+		        ViewModel = viewModel;
+	        }
 
             public Type FragmentType { get; }
 

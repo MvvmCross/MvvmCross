@@ -1,15 +1,17 @@
-// MvxActivity.cs
+﻿// MvxActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.App;
-using Android.Content;
-using Android.Runtime;
 using System;
 using System.Collections.Generic;
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.Droid.Views;
@@ -23,7 +25,10 @@ namespace MvvmCross.Droid.FullFragging.Views
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
+        , ViewTreeObserver.IOnGlobalLayoutListener
     {
+        protected View _view;
+
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {}
@@ -52,15 +57,18 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            base.StartActivityForResult(intent, requestCode);
+            StartActivityForResult(intent, requestCode);
         }
 
         public IMvxBindingContext BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
-            var view = this.BindingInflate(layoutResId, null);
-            SetContentView(view);
+            _view = this.BindingInflate(layoutResId, null);
+
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
+
+            SetContentView(_view);
         }
 
         protected virtual void OnViewModelSet()
@@ -94,6 +102,46 @@ namespace MvvmCross.Droid.FullFragging.Views
                 }
 
                 return ret;
+            }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.Destroy();
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel?.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
+        }
+
+        public void OnGlobalLayout()
+        {
+            if (_view != null)
+            {
+                {
+                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
+                    {
+#pragma warning disable CS0618 // Type or member is obsolete
+                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    }
+                    else
+                    {
+                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
+                    }
+                }
+                _view = null;
+                ViewModel?.Appeared();
             }
         }
     }

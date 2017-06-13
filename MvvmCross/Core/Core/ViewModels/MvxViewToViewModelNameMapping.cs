@@ -14,12 +14,12 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxViewToViewModelNameMapping()
         {
-            this.ViewModelPostfix = "ViewModel";
+            ViewModelPostfix = "ViewModel";
         }
 
         public virtual string Map(string inputName)
         {
-            return inputName + this.ViewModelPostfix;
+            return inputName + ViewModelPostfix;
         }
     }
 }

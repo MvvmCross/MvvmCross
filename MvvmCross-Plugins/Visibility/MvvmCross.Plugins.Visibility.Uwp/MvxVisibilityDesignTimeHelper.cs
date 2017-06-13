@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 using MvvmCross.Platform.Uwp.Platform;
 
-namespace MvvmCross.Plugins.Visibility.WindowsCommon
+namespace MvvmCross.Plugins.Visibility.Uwp
 {
     public class MvxVisibilityDesignTimeHelper
         : MvxDesignTimeHelper

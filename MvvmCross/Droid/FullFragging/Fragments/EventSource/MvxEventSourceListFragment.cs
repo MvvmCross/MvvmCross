@@ -1,19 +1,19 @@
-// MvxEventSourceListFragment.cs
+﻿// MvxEventSourceListFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform.Core;
-using System;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -66,15 +66,19 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 			base.OnAttach(context);
 		}
 
-		public override void OnAttach(Activity activity)
-		{
+#pragma warning disable CS0672 // Member overrides obsolete member
+        public override void OnAttach(Activity activity)
+#pragma warning restore CS0672 // Member overrides obsolete member
+        {
 			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
 			{
 				AttachCalled.Raise(this, activity);
 			}
 
-			base.OnAttach(activity);
-		}
+#pragma warning disable CS0618 // Type or member is obsolete
+            base.OnAttach(activity);
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {

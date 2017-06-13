@@ -5,16 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Content;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using Android.Content;
-
     public class MvxStartActivityForResultParameters
     {
         public MvxStartActivityForResultParameters(Intent intent, int requestCode)
         {
-            this.RequestCode = requestCode;
-            this.Intent = intent;
+            RequestCode = requestCode;
+            Intent = intent;
         }
 
         public Intent Intent { get; private set; }

@@ -1,8 +1,8 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
 {
-    using MvvmCross.Core.ViewModels;
-    using ViewModels;
-
     public class AppStart : MvxNavigatingObject, IMvxAppStart
     {
         /// <summary>
@@ -11,8 +11,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            ShowViewModel<LeftPanelViewModel>();
-            ShowViewModel<RightPanelViewModel>();
             ShowViewModel<CenterPanelViewModel>();
         }
     }

@@ -1,18 +1,19 @@
-// MvxFragmentsPresenter.cs
+﻿// MvxFragmentsPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Android.OS;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Shared.Presenter
 {
@@ -66,6 +67,11 @@ namespace MvvmCross.Droid.Shared.Presenter
             var bundle = new Bundle();
             var serializedRequest = Serializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+            if (request is MvxViewModelInstanceRequest)
+            {
+                Mvx.Resolve<IMvxChildViewModelCache>().Cache(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+            }
 
             if (!_fragmentHostRegistrationSettings.IsActualHostValid(request.ViewModelType))
             {

@@ -8,11 +8,10 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Location.WindowsCommon
+namespace MvvmCross.Plugins.Location.Uwp
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

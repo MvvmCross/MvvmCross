@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Plugins;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.IoC;
-    using MvvmCross.Platform.Plugins;
-
     public abstract class MvxApplication
         : IMvxApplication
     {
@@ -24,8 +23,8 @@ namespace MvvmCross.Core.ViewModels
         {
             get
             {
-                this._defaultLocator = this._defaultLocator ?? this.CreateDefaultViewModelLocator();
-                return this._defaultLocator;
+                _defaultLocator = _defaultLocator ?? CreateDefaultViewModelLocator();
+                return _defaultLocator;
             }
         }
 
@@ -46,7 +45,7 @@ namespace MvvmCross.Core.ViewModels
 
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
-            return this.DefaultLocator;
+            return DefaultLocator;
         }
 
         protected void RegisterAppStart<TViewModel>()
@@ -62,7 +61,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected IEnumerable<Type> CreatableTypes()
         {
-            return this.CreatableTypes(this.GetType().GetTypeInfo().Assembly);
+            return CreatableTypes(GetType().GetTypeInfo().Assembly);
         }
 
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)

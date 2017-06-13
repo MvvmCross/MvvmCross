@@ -16,7 +16,7 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 	public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding
     {
-        protected View TextView => (View) base.Target;
+        protected View TextView => (View) Target;
 
         protected MvxViewColorBinding(View view)
             : base(view)

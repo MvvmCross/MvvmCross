@@ -5,16 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-
     public interface IMvxNamedInstanceRegistryFiller<out T>
     {
+        string FindName(Type type);
+
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
 
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly);

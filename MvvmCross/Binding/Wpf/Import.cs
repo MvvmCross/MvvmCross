@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
-
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
@@ -18,7 +17,7 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public class Import

@@ -1,18 +1,15 @@
 ﻿using System;
-
+using System.Diagnostics;
 using AVFoundation;
 using UIKit;
 using CoreGraphics;
 
 using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
-
-using MvvmCross.Forms.Views.iOS;
-
-using PageRendererExample.Pages;
-using PageRendererExample.ViewModels;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Forms.iOS;
+using PageRendererExample;
 
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.iOS.CameraRendererPage))]
 
@@ -20,15 +17,15 @@ namespace PageRendererExample.UI.iOS
 {
     public class CameraRendererPage : MvxPageRenderer<CameraRendererViewModel>
     {
-        AVCaptureSession _captureSession;
-        AVCaptureDeviceInput _captureDeviceInput;
-        AVCaptureStillImageOutput _stillImageOutput;
-        AVCaptureVideoPreviewLayer _videoPreviewLayer;
-        UIView _liveCameraStream;
-        UIButton _takePhotoButton;
-        UIButton _toggleCameraButton;
-        UIButton _toggleFlashButton;
-        UIButton _cancelButton;
+        private AVCaptureSession _captureSession;
+        private AVCaptureDeviceInput _captureDeviceInput;
+        private AVCaptureStillImageOutput _stillImageOutput;
+        private AVCaptureVideoPreviewLayer _videoPreviewLayer;
+        private UIView _liveCameraStream;
+        private UIButton _takePhotoButton;
+        private UIButton _toggleCameraButton;
+        private UIButton _toggleFlashButton;
+        private UIButton _cancelButton;
 
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
@@ -45,11 +42,11 @@ namespace PageRendererExample.UI.iOS
                 SetupLiveCameraStream();
                 AuthorizeCameraUse();
             } catch (Exception ex) {
-                System.Diagnostics.Debug.WriteLine(@"          ERROR: ", ex.Message);
+                Debug.WriteLine(@"          ERROR: ", ex.Message);
             }
         }
 
-        void SetupUserInterface()
+        private void SetupUserInterface()
         {
             _liveCameraStream = new UIView {
                 TranslatesAutoresizingMaskIntoConstraints = false
@@ -127,14 +124,14 @@ namespace PageRendererExample.UI.iOS
             View.SetNeedsUpdateConstraints();
         }
 
-        void BindViewModel()
+        private void BindViewModel()
         {
             var set = this.CreateBindingSet<CameraRendererPage, CameraRendererViewModel>();
             set.Bind(_cancelButton).To(nameof(ViewModel.CloseCommand));
             set.Apply();
         }
 
-        void SetupEventHandlers()
+        private void SetupEventHandlers()
         {
             _takePhotoButton.TouchUpInside += CapturePhoto;
 
@@ -143,7 +140,7 @@ namespace PageRendererExample.UI.iOS
             _toggleFlashButton.TouchUpInside += ToggleFlash;
         }
 
-        async void CapturePhoto(object sender, EventArgs e)
+        private async void CapturePhoto(object sender, EventArgs e)
         {
             var videoConnection = _stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
             var sampleBuffer = await _stillImageOutput.CaptureStillImageTaskAsync(videoConnection);
@@ -154,7 +151,7 @@ namespace PageRendererExample.UI.iOS
             ViewModel.CloseCommand.Execute(this);
         }
 
-        void ToggleFrontBackCamera(object sender, EventArgs e)
+        private void ToggleFrontBackCamera(object sender, EventArgs e)
         {
             var devicePosition = _captureDeviceInput.Device.Position;
             if (devicePosition == AVCaptureDevicePosition.Front) {
@@ -173,7 +170,7 @@ namespace PageRendererExample.UI.iOS
             _captureSession.CommitConfiguration();
         }
 
-        void ToggleFlash(object sender, EventArgs e)
+        private void ToggleFlash(object sender, EventArgs e)
         {
             var device = _captureDeviceInput.Device;
 
@@ -193,7 +190,7 @@ namespace PageRendererExample.UI.iOS
             }
         }
 
-        AVCaptureDevice GetCameraForOrientation(AVCaptureDevicePosition orientation)
+        private AVCaptureDevice GetCameraForOrientation(AVCaptureDevicePosition orientation)
         {
             var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
 
@@ -237,14 +234,14 @@ namespace PageRendererExample.UI.iOS
             }
         }
 
-        void ObservedBoundsChange(NSObservedChange observedChange)
+        private void ObservedBoundsChange(NSObservedChange observedChange)
         {
             _videoPreviewLayer.Frame = _liveCameraStream.Bounds;
             _videoPreviewLayer.Bounds = _liveCameraStream.Bounds;
             _videoPreviewLayer.SetNeedsDisplay();
         }
 
-        void SetupLiveCameraStream()
+        private void SetupLiveCameraStream()
         {
             _captureSession = new AVCaptureSession();
 
@@ -272,7 +269,7 @@ namespace PageRendererExample.UI.iOS
             _captureSession.StartRunning();
         }
 
-        void ConfigureCameraForDevice(AVCaptureDevice device)
+        private void ConfigureCameraForDevice(AVCaptureDevice device)
         {
             NSError error = null;
             if (device.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus)) {
@@ -290,7 +287,7 @@ namespace PageRendererExample.UI.iOS
             }
         }
 
-        async void AuthorizeCameraUse()
+        private async void AuthorizeCameraUse()
         {
             var authorizationStatus = AVCaptureDevice.GetAuthorizationStatus(AVMediaType.Video);
             if (authorizationStatus != AVAuthorizationStatus.Authorized) {

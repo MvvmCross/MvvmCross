@@ -1,18 +1,18 @@
-// MvxViewControllerExtensionMethods.cs
+﻿// MvxViewControllerExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxViewControllerExtensionMethods
     {
         public static void OnViewCreate(this IMvxTvosView iosView)
@@ -23,11 +23,6 @@ namespace MvvmCross.tvOS.Views
 
         private static IMvxViewModel LoadViewModel(this IMvxTvosView iosView)
         {
-#warning NullViewModel needed?
-            // how to do N
-            //if (typeof (TViewModel) == typeof (MvxNullViewModel))
-            //    return new MvxNullViewModel() as TViewModel;
-
             if (iosView.Request == null)
             {
                 MvxTrace.Trace(

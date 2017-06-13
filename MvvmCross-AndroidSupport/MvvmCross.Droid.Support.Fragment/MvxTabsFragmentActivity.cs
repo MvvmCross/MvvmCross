@@ -1,21 +1,25 @@
-// MvxTabsFragmentActivity.cs
+﻿// MvxTabsFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Platform.Core;
+using Java.Lang;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using MvvmCross.Platform.Core;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -23,7 +27,9 @@ namespace MvvmCross.Droid.Support.V4
     public abstract class MvxTabsFragmentActivity
         : MvxFragmentActivity
           , TabHost.IOnTabChangeListener
+          , ViewTreeObserver.IOnGlobalLayoutListener
     {
+
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();
@@ -50,7 +56,7 @@ namespace MvvmCross.Droid.Support.V4
             public Bundle Bundle { get; private set; }
             public IMvxViewModel ViewModel { get; private set; }
 
-            public Android.Support.V4.App.Fragment CachedFragment { get; set; }
+            public Fragment CachedFragment { get; set; }
 
             public TabInfo(string tag, Type fragmentType, Bundle bundle, IMvxViewModel viewModel)
             {
@@ -62,7 +68,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         private class TabFactory
-            : Java.Lang.Object
+            : Object
               , TabHost.ITabContentFactory
         {
             private readonly Context _context;
@@ -72,7 +78,7 @@ namespace MvvmCross.Droid.Support.V4
                 _context = context;
             }
 
-            public View CreateTabContent(String tag)
+            public View CreateTabContent(string tag)
             {
                 var v = new View(_context);
                 v.SetMinimumWidth(0);
@@ -86,12 +92,24 @@ namespace MvvmCross.Droid.Support.V4
             base.OnCreate(savedInstanceState);
 
             SetContentView(_layoutId);
+
+            _view = Window.DecorView.RootView;
+
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
+
             InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)
             {
                 _tabHost.SetCurrentTabByTag(savedInstanceState.GetString(SavedTabIndexStateKey));
             }
+        }
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
@@ -102,7 +120,7 @@ namespace MvvmCross.Droid.Support.V4
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
+            _tabHost = (TabHost)FindViewById(Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);
@@ -118,7 +136,7 @@ namespace MvvmCross.Droid.Support.V4
         protected void AddTab<TFragment>(string tagAndSpecName, string tabName, Bundle args,
                                          IMvxViewModel viewModel)
         {
-            var tabSpec = this._tabHost.NewTabSpec(tagAndSpecName).SetIndicator(tabName);
+            var tabSpec = _tabHost.NewTabSpec(tagAndSpecName).SetIndicator(tabName);
             AddTab<TFragment>(args, viewModel, tabSpec);
         }
 
@@ -136,7 +154,7 @@ namespace MvvmCross.Droid.Support.V4
         {
             // Attach a Tab view factory to the spec
             tabSpec.SetContent(new TabFactory(activity));
-            String tag = tabSpec.Tag;
+            string tag = tabSpec.Tag;
 
             // Check to see if we already have a CachedFragment for this tab, probably
             // from a previously saved state.  If so, deactivate it, because our
@@ -155,10 +173,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual void OnTabChanged(string tag)
         {
-            var newTab = this._lookup[tag];
+            var newTab = _lookup[tag];
             if (_currentTab != newTab)
             {
-                var ft = this.SupportFragmentManager.BeginTransaction();
+                var ft = SupportFragmentManager.BeginTransaction();
                 OnTabFragmentChanging(tag, ft);
                 if (_currentTab?.CachedFragment != null)
                 {
@@ -168,7 +186,7 @@ namespace MvvmCross.Droid.Support.V4
                 {
                     if (newTab.CachedFragment == null)
                     {
-                        newTab.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(this,
+                        newTab.CachedFragment = Fragment.Instantiate(this,
                                                                      FragmentJavaName(newTab.FragmentType),
                                                                      newTab.Bundle);
                         FixupDataContext(newTab);
@@ -183,7 +201,7 @@ namespace MvvmCross.Droid.Support.V4
 
                 _currentTab = newTab;
                 ft.Commit();
-                this.SupportFragmentManager.ExecutePendingTransactions();
+                SupportFragmentManager.ExecutePendingTransactions();
             }
         }
 
@@ -199,11 +217,24 @@ namespace MvvmCross.Droid.Support.V4
 
         protected virtual string FragmentJavaName(Type fragmentType)
         {
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)
         {
+        }
+
+        public override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+            ViewModel?.Appearing();
+        }
+
+        public override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+            ViewModel?.Disappearing(); // we don't have anywhere to get this info
+            ViewModel?.Disappeared();
         }
     }
 }

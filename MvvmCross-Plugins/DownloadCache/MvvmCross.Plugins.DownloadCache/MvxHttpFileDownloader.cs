@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {

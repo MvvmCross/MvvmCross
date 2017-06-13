@@ -27,8 +27,8 @@ namespace Example.Pages
                     }
                 }
             };
-            if (Device.OS == TargetPlatform.Windows)
-                Padding = new Xamarin.Forms.Thickness(this.Padding.Left, this.Padding.Top, this.Padding.Right, 95);
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                Padding = new Thickness(Padding.Left, Padding.Top, Padding.Right, 95);
         }
     }
 }

@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxViewModelRequestCustomTextSerializer
         : IMvxTextSerializer
     {
@@ -24,23 +23,23 @@ namespace MvvmCross.Core.Parse.StringDictionary
         {
             get
             {
-                this._byNameLookup = this._byNameLookup ?? Mvx.Resolve<IMvxViewModelByNameLookup>();
-                return this._byNameLookup;
+                _byNameLookup = _byNameLookup ?? Mvx.Resolve<IMvxViewModelByNameLookup>();
+                return _byNameLookup;
             }
         }
 
         public T DeserializeObject<T>(string inputText)
         {
-            return (T)this.DeserializeObject(typeof(T), inputText);
+            return (T)DeserializeObject(typeof(T), inputText);
         }
 
         public string SerializeObject(object toSerialise)
         {
             if (toSerialise is MvxViewModelRequest)
-                return this.Serialize((MvxViewModelRequest)toSerialise);
+                return Serialize((MvxViewModelRequest)toSerialise);
 
             if (toSerialise is IDictionary<string, string>)
-                return this.Serialize((IDictionary<string, string>)toSerialise);
+                return Serialize((IDictionary<string, string>)toSerialise);
 
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
@@ -48,10 +47,10 @@ namespace MvvmCross.Core.Parse.StringDictionary
         public object DeserializeObject(Type type, string inputText)
         {
             if (type == typeof(MvxViewModelRequest))
-                return this.DeserializeViewModelRequest(inputText);
+                return DeserializeViewModelRequest(inputText);
 
             if (typeof(IDictionary<string, string>).IsAssignableFrom(type))
-                return this.DeserializeStringDictionary(inputText);
+                return DeserializeStringDictionary(inputText);
 
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
@@ -68,15 +67,10 @@ namespace MvvmCross.Core.Parse.StringDictionary
             var stringDictionaryParser = new MvxStringDictionaryParser();
             var dictionary = stringDictionaryParser.Parse(inputText);
             var toReturn = new MvxViewModelRequest();
-            var viewModelTypeName = this.SafeGetValue(dictionary, "Type");
-            toReturn.ViewModelType = this.DeserializeViewModelType(viewModelTypeName);
-            toReturn.RequestedBy = new MvxRequestedBy
-            {
-                Type = (MvxRequestedByType)int.Parse(this.SafeGetValue(dictionary, "By")),
-                AdditionalInfo = this.SafeGetValue(dictionary, "Info")
-            };
-            toReturn.ParameterValues = stringDictionaryParser.Parse(this.SafeGetValue(dictionary, "Params"));
-            toReturn.PresentationValues = stringDictionaryParser.Parse(this.SafeGetValue(dictionary, "Pres"));
+            var viewModelTypeName = SafeGetValue(dictionary, "Type");
+            toReturn.ViewModelType = DeserializeViewModelType(viewModelTypeName);
+            toReturn.ParameterValues = stringDictionaryParser.Parse(SafeGetValue(dictionary, "Params"));
+            toReturn.PresentationValues = stringDictionaryParser.Parse(SafeGetValue(dictionary, "Pres"));
             return toReturn;
         }
 
@@ -91,10 +85,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             var stringDictionaryWriter = new MvxStringDictionaryWriter();
 
             var dictionary = new Dictionary<string, string>();
-            dictionary["Type"] = this.SerializeViewModelName(toSerialise.ViewModelType);
-            var requestedBy = toSerialise.RequestedBy ?? new MvxRequestedBy();
-            dictionary["By"] = ((int)requestedBy.Type).ToString();
-            dictionary["Info"] = requestedBy.AdditionalInfo;
+            dictionary["Type"] = SerializeViewModelName(toSerialise.ViewModelType);
             dictionary["Params"] = stringDictionaryWriter.Write(toSerialise.ParameterValues);
             dictionary["Pres"] = stringDictionaryWriter.Write(toSerialise.PresentationValues);
             return stringDictionaryWriter.Write(dictionary);
@@ -108,7 +99,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
         protected virtual Type DeserializeViewModelType(string viewModelTypeName)
         {
             Type toReturn;
-            if (!this.ByNameLookup.TryLookupByFullName(viewModelTypeName, out toReturn))
+            if (!ByNameLookup.TryLookupByFullName(viewModelTypeName, out toReturn))
                 throw new MvxException("Failed to find viewmodel for {0} - is the ViewModel in the same Assembly as App.cs? If not, you can add it by overriding GetViewModelAssemblies() in setup", viewModelTypeName);
             return toReturn;
         }

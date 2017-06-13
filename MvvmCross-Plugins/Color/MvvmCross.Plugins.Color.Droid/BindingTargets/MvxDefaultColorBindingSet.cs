@@ -7,9 +7,10 @@
 
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Plugins.Color.Droid.Binding;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {
@@ -26,11 +27,13 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
                 return;
             }
 
-            registry.RegisterFactory(new MvxCustomBindingFactory<View>("BackgroundColor",
-                                                                       view => new MvxViewBackgroundColorBinding(view)));
-            registry.RegisterFactory(new MvxCustomBindingFactory<TextView>("TextColor",
-                                                                           textView =>
-                                                                           new MvxTextViewTextColorBinding(textView)));
+            registry.RegisterFactory(new MvxCustomBindingFactory<View>(
+                MvxAndroidColorPropertyBinding.View_BackgroundColor,
+                view => new MvxViewBackgroundColorBinding(view)));
+
+            registry.RegisterFactory(new MvxCustomBindingFactory<TextView>(
+                MvxAndroidColorPropertyBinding.TextView_TextColor,
+                textView => new MvxTextViewTextColorBinding(textView)));
         }
     }
 }

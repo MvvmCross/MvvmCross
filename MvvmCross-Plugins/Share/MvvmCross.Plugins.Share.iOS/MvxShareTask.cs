@@ -1,14 +1,14 @@
-// MvxShareTask.cs
+﻿// MvxShareTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using Foundation;
 using Twitter;
 
 namespace MvvmCross.Plugins.Share.iOS
@@ -34,7 +34,7 @@ namespace MvvmCross.Plugins.Share.iOS
 
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(message);
-            _tweet.SetCompletionHandler(TWTweetComposeHandler);
+            _tweet.CompletionHandler = TWTweetComposeHandler;
             _modalHost.PresentModalViewController(_tweet, true);
         }
 
@@ -46,7 +46,7 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
-            _tweet.SetCompletionHandler(TWTweetComposeHandler);
+            _tweet.CompletionHandler = TWTweetComposeHandler;
             _modalHost.PresentModalViewController(_tweet, true);
         }
 

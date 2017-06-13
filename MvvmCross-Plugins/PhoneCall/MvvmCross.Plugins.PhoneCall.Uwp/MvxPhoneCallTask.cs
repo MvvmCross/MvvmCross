@@ -8,7 +8,7 @@
 using System;
 using Windows.System;
 
-namespace MvvmCross.Plugins.PhoneCall.WindowsStore
+namespace MvvmCross.Plugins.PhoneCall.Uwp
 {
     public class MvxPhoneCallTask : IMvxPhoneCallTask
     {

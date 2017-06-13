@@ -5,29 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views.Gestures
 {
-    using UIKit;
-
     public class MvxTapGestureRecognizerBehaviour
         : MvxGestureRecognizerBehavior<UITapGestureRecognizer>
     {
         protected override void HandleGesture(UITapGestureRecognizer gesture)
         {
-            this.FireCommand();
+            FireCommand();
         }
 
         public MvxTapGestureRecognizerBehaviour(UIView target, uint numberOfTapsRequired = 1,
                                                 uint numberOfTouchesRequired = 1,
                                                 bool cancelsTouchesInView = true)
         {
-            var tap = new UITapGestureRecognizer(this.HandleGesture)
+            var tap = new UITapGestureRecognizer(HandleGesture)
             {
                 NumberOfTapsRequired = numberOfTapsRequired,
                 CancelsTouchesInView = cancelsTouchesInView
             };
 
-            this.AddGestureRecognizer(target, tap);
+            AddGestureRecognizer(target, tap);
         }
     }
 }

@@ -4,7 +4,6 @@ To help us fix your issue, please provide the information in the below template.
 >
 > Please only file bugs verified on latest version of MvvmCross and _stable_ Xamarin tools
 
-
 ### Steps to reproduce
 
 1.
@@ -22,6 +21,10 @@ Tell us what happens instead
 
 ### Configuration
 
-**Version:** 4.x
+**Version:** 5.x
 
-**Platform:** iOS/Android/WPF/Windows Store/Windows Phone Store/Windows UWP
+**Platform:** 
+- [ ] iOS
+- [ ] Android
+- [ ] WPF
+- [ ] UWP

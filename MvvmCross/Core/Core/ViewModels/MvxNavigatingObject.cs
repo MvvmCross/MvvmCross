@@ -5,29 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.Platform;
     public abstract class MvxNavigatingObject
         : MvxNotifyPropertyChanged
     {
-        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)base.Dispatcher;
+        protected IMvxViewDispatcher ViewDispatcher => (IMvxViewDispatcher)Dispatcher;
 
         protected bool Close(IMvxViewModel viewModel)
         {
-            return this.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            return ChangePresentation(new MvxClosePresentationHint(viewModel));
         }
 
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Trace("Requesting presentation change");
-            var viewDispatcher = this.ViewDispatcher;
+            var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ChangePresentation(hint);
 
@@ -39,100 +40,84 @@ namespace MvvmCross.Core.ViewModels
         /// Be aware that pasing big objects will block your UI, and should be handled async by yourself
         /// </summary>
         /// <param name="parameter">The generic object you want to pass onto the next ViewModel</param>
-        protected bool ShowViewModel<TViewModel, TInit>(TInit parameter,
-                                                 IMvxBundle presentationBundle = null,
-                                                 MvxRequestedBy requestedBy = null) 
-            where TViewModel : IMvxViewModelInitializer<TInit>
+        protected bool ShowViewModel<TViewModel, TParameter>(TParameter parameter,
+                                                 IMvxBundle presentationBundle = null)
+            where TViewModel : IMvxViewModel<TParameter> where TParameter : class
         {
             IMvxJsonConverter serializer;
             if (!Mvx.TryResolve(out serializer))
             {
-                Mvx.Trace(
-                    "Could not resolve IMvxJsonConverter, it is going to be hard to initialize with custom object");
-                return false;
+                throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
             }
 
             var json = serializer.SerializeObject(parameter);
-            return this.ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } }, presentationBundle, requestedBy);
+            return ShowViewModel<TViewModel>(new Dictionary<string, string> { { "parameter", json } }, presentationBundle);
         }
 
         protected bool ShowViewModel<TViewModel>(object parameterValuesObject,
-                                                 IMvxBundle presentationBundle = null,
-                                                 MvxRequestedBy requestedBy = null)
+                                                 IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 parameterValuesObject.ToSimplePropertyDictionary(),
-                presentationBundle,
-                requestedBy);
+                presentationBundle);
         }
 
         protected bool ShowViewModel<TViewModel>(IDictionary<string, string> parameterValues,
-                                                 IMvxBundle presentationBundle = null,
-                                                 MvxRequestedBy requestedBy = null)
+                                                 IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 new MvxBundle(parameterValues.ToSimplePropertyDictionary()),
-                presentationBundle,
-                requestedBy);
+                presentationBundle);
         }
 
         protected bool ShowViewModel<TViewModel>(IMvxBundle parameterBundle = null,
-                                                 IMvxBundle presentationBundle = null,
-                                                 MvxRequestedBy requestedBy = null)
+                                                 IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel
         {
-            return this.ShowViewModel(
+            return ShowViewModel(
                 typeof(TViewModel),
                 parameterBundle,
-                presentationBundle,
-                requestedBy);
+                presentationBundle);
         }
 
         protected bool ShowViewModel(Type viewModelType,
                                      object parameterValuesObject,
-                                     IMvxBundle presentationBundle = null,
-                                     MvxRequestedBy requestedBy = null)
+                                     IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModel(viewModelType,
+            return ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValuesObject.ToSimplePropertyDictionary()),
-                                 presentationBundle,
-                                 requestedBy);
+                                 presentationBundle);
         }
 
         protected bool ShowViewModel(Type viewModelType,
                                      IDictionary<string, string> parameterValues,
-                                     IMvxBundle presentationBundle = null,
-                                     MvxRequestedBy requestedBy = null)
+                                     IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModel(viewModelType,
+            return ShowViewModel(viewModelType,
                                  new MvxBundle(parameterValues),
-                                 presentationBundle,
-                                 requestedBy);
+                                 presentationBundle);
         }
 
         protected bool ShowViewModel(Type viewModelType,
                                      IMvxBundle parameterBundle = null,
-                                     IMvxBundle presentationBundle = null,
-                                     MvxRequestedBy requestedBy = null)
+                                     IMvxBundle presentationBundle = null)
         {
-            return this.ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle, requestedBy);
+            return ShowViewModelImpl(viewModelType, parameterBundle, presentationBundle);
         }
 
-        private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle,
-                                       MvxRequestedBy requestedBy)
+        private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle)
         {
             MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
-            var viewDispatcher = this.ViewDispatcher;
+            var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(
                                                         viewModelType,
                                                         parameterBundle,
-                                                        presentationBundle,
-                                                        requestedBy));
+                                                        presentationBundle));
 
             return false;
         }

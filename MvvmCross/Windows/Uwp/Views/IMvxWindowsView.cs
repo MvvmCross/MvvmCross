@@ -5,11 +5,11 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
-{
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 
+namespace MvvmCross.Uwp.Views
+{
     public interface IMvxWindowsView
         : IMvxView
     {

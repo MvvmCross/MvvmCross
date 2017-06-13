@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.UI;
-using System;
-using System.Globalization;
 
 namespace MvvmCross.Plugins.Visibility
 {
@@ -42,50 +42,6 @@ namespace MvvmCross.Plugins.Visibility
         public sealed override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return base.ConvertBack(value, targetType, parameter, culture);
-        }
-
-        protected virtual bool IsATrueValue(object value, object parameter, bool defaultValue)
-        {
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (value is bool)
-            {
-                return (bool)value;
-            }
-
-            if (value is int)
-            {
-                if (parameter == null)
-                {
-                    return (int)value > 0;
-                }
-                else
-                {
-                    return (int)value > int.Parse(parameter.ToString());
-                }
-            }
-
-            if (value is double)
-            {
-                return (double)value > 0;
-            }
-
-            if (value is string)
-            {
-                return !string.IsNullOrWhiteSpace(value as string);
-            }
-
-            // 19/Mar/2013 - decided *not* to test IEnumerable - if user's need this then they will have to provide overrides
-            //if (value is IEnumerable)
-            //{
-            //    var enumerable = value as IEnumerable;
-            //    return enumerable.GetEnumerator().MoveNext();
-            //}
-
-            return defaultValue;
         }
     }
 }

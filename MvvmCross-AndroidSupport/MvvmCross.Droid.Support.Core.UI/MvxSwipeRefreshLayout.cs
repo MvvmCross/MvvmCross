@@ -62,14 +62,14 @@ namespace MvvmCross.Droid.Support.V4
 
         private void OnRefresh(object sender, EventArgs args)
         {
-            this.ExecuteRefreshCommand(this.RefreshCommand);
+            ExecuteRefreshCommand(RefreshCommand);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                Refresh -= this.OnRefresh;
+                Refresh -= OnRefresh;
             }
 
             base.Dispose(disposing);

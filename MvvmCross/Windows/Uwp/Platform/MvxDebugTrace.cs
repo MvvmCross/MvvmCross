@@ -5,13 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Platform
+using System;
+using System.Diagnostics;
+using MvvmCross.Platform.Platform;
+
+namespace MvvmCross.Uwp.Platform
 {
-    using System;
-    using System.Diagnostics;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxDebugTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

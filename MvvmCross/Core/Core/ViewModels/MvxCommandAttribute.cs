@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
     [AttributeUsage(AttributeTargets.Method)]
     public class MvxCommandAttribute : Attribute
     {
         public MvxCommandAttribute(string commandName, string canExecutePropertyName = null)
         {
-            this.CanExecutePropertyName = canExecutePropertyName;
-            this.CommandName = commandName;
+            CanExecutePropertyName = canExecutePropertyName;
+            CommandName = commandName;
         }
 
         public string CommandName { get; set; }

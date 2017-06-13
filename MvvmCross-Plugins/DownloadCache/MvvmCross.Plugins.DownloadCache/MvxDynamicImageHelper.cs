@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {

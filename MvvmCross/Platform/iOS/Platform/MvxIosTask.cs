@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Platform.iOS.Platform
 {
-    using Foundation;
-
-    using UIKit;
-
     public class MvxIosTask
     {
         protected bool DoUrlOpen(NSUrl url)
         {
-            return UIApplication.SharedApplication.OpenUrl(url);
+            var sharedApp = UIApplication.SharedApplication;
+            return sharedApp.CanOpenUrl(url) && sharedApp.OpenUrl(url);
         }
     }
 }

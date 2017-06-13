@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
+using MvvmCross.Forms.iOS;
 using UIKit;
 
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views.iOS;
-
-using PageRendererExample.UI.iOS;
-
-namespace pagerenderexample.iOS
+namespace PageRendererExample.UI.iOS
 {
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxFormsApplicationDelegate

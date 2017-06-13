@@ -5,11 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-
-using MvvmCross.Binding.Bindings;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
@@ -17,9 +12,12 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System;
+using System.Collections.Generic;
 using System.Windows;
+using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public interface IMvxBindingCreator

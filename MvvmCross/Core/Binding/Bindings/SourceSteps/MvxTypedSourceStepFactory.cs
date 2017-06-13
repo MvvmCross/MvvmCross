@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     {
         public IMvxSourceStep Create(MvxSourceStepDescription description)
         {
-            return this.TypedCreate((T)description);
+            return TypedCreate((T)description);
         }
 
         protected abstract IMvxSourceStep TypedCreate(T description);

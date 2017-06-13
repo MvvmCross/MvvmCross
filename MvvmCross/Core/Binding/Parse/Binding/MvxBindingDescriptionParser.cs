@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Binding.Parse.Binding.Tibet;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Parse.Binding
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Combiners;
-    using MvvmCross.Binding.Parse.Binding.Lang;
-    using MvvmCross.Binding.Parse.Binding.Tibet;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Platform;
-
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
     {
@@ -30,8 +29,8 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                this._bindingParser = this._bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
-                return this._bindingParser;
+                _bindingParser = _bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
+                return _bindingParser;
             }
         }
 
@@ -41,8 +40,8 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                this._languageBindingParser = this._languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
-                return this._languageBindingParser;
+                _languageBindingParser = _languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                return _languageBindingParser;
             }
         }
 
@@ -50,8 +49,8 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                this._valueConverterLookup = this._valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
-                return this._valueConverterLookup;
+                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                return _valueConverterLookup;
             }
         }
 
@@ -60,7 +59,7 @@ namespace MvvmCross.Binding.Parse.Binding
             if (converterName == null)
                 return null;
 
-            var toReturn = this.ValueConverterLookup.Find(converterName);
+            var toReturn = ValueConverterLookup.Find(converterName);
             if (toReturn == null)
                 MvxBindingTrace.Trace("Could not find named converter for {0}", converterName);
 
@@ -74,14 +73,14 @@ namespace MvvmCross.Binding.Parse.Binding
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
         {
-            var parser = this.BindingParser;
-            return this.Parse(text, parser);
+            var parser = BindingParser;
+            return Parse(text, parser);
         }
 
         public IEnumerable<MvxBindingDescription> LanguageParse(string text)
         {
-            var parser = this.LanguageBindingParser;
-            return this.Parse(text, parser);
+            var parser = LanguageBindingParser;
+            return Parse(text, parser);
         }
 
         public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
@@ -99,13 +98,13 @@ namespace MvvmCross.Binding.Parse.Binding
                 return null;
 
             return from item in specification
-                   select this.SerializableBindingToBinding(item.Key, item.Value);
+                   select SerializableBindingToBinding(item.Key, item.Value);
         }
 
         public MvxBindingDescription ParseSingle(string text)
         {
             MvxSerializableBindingDescription description;
-            var parser = this.BindingParser;
+            var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -117,7 +116,7 @@ namespace MvvmCross.Binding.Parse.Binding
             if (description == null)
                 return null;
 
-            return this.SerializableBindingToBinding(null, description);
+            return SerializableBindingToBinding(null, description);
         }
 
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
@@ -126,7 +125,7 @@ namespace MvvmCross.Binding.Parse.Binding
             return new MvxBindingDescription
             {
                 TargetName = targetName,
-                Source = this.SourceStepDescriptionFrom(description),
+                Source = SourceStepDescriptionFrom(description),
                 Mode = description.Mode,
             };
         }
@@ -138,7 +137,7 @@ namespace MvvmCross.Binding.Parse.Binding
                 return new MvxPathSourceStepDescription()
                 {
                     SourcePropertyPath = description.Path,
-                    Converter = this.FindConverter(description.Converter),
+                    Converter = FindConverter(description.Converter),
                     ConverterParameter = description.ConverterParameter,
                     FallbackValue = description.FallbackValue
                 };
@@ -153,7 +152,7 @@ namespace MvvmCross.Binding.Parse.Binding
                 return new MvxLiteralSourceStepDescription()
                 {
                     Literal = literal,
-                    Converter = this.FindConverter(description.Converter),
+                    Converter = FindConverter(description.Converter),
                     ConverterParameter = description.ConverterParameter,
                     FallbackValue = description.FallbackValue
                 };
@@ -162,7 +161,7 @@ namespace MvvmCross.Binding.Parse.Binding
             if (description.Function != null)
             {
                 // first look for a combiner with the name
-                var combiner = this.FindCombiner(description.Function);
+                var combiner = FindCombiner(description.Function);
                 if (combiner != null)
                 {
                     return new MvxCombinerSourceStepDescription()
@@ -170,8 +169,8 @@ namespace MvvmCross.Binding.Parse.Binding
                         Combiner = combiner,
                         InnerSteps = description.Sources == null
                             ? new List<MvxSourceStepDescription>() :
-                            description.Sources.Select(s => this.SourceStepDescriptionFrom(s)).ToList(),
-                        Converter = this.FindConverter(description.Converter),
+                            description.Sources.Select(s => SourceStepDescriptionFrom(s)).ToList(),
+                        Converter = FindConverter(description.Converter),
                         ConverterParameter = description.ConverterParameter,
                         FallbackValue = description.FallbackValue
                     };
@@ -179,7 +178,7 @@ namespace MvvmCross.Binding.Parse.Binding
                 else
                 {
                     // no combiner, then drop back to looking for a converter
-                    var converter = this.FindConverter(description.Function);
+                    var converter = FindConverter(description.Function);
                     if (converter == null)
                     {
                         MvxBindingTrace.Error("Failed to find combiner or converter for {0}", description.Function);
@@ -206,8 +205,8 @@ namespace MvvmCross.Binding.Parse.Binding
                         return new MvxCombinerSourceStepDescription()
                         {
                             Combiner = new MvxValueConverterValueCombiner(converter),
-                            InnerSteps = description.Sources.Select(source => this.SourceStepDescriptionFrom(source)).ToList(),
-                            Converter = this.FindConverter(description.Converter),
+                            InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source)).ToList(),
+                            Converter = FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,
                             FallbackValue = description.FallbackValue
                         };
@@ -219,7 +218,7 @@ namespace MvvmCross.Binding.Parse.Binding
             return new MvxPathSourceStepDescription()
             {
                 SourcePropertyPath = null,
-                Converter = this.FindConverter(description.Converter),
+                Converter = FindConverter(description.Converter),
                 ConverterParameter = description.ConverterParameter,
                 FallbackValue = description.FallbackValue
             };

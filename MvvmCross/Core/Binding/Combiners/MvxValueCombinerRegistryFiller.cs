@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Binders;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System;
-
-    using MvvmCross.Binding.Binders;
-
     public class MvxValueCombinerRegistryFiller
         : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>
           , IMvxValueCombinerRegistryFiller
     {
-        protected override string FindName(Type type)
+        public override string FindName(Type type)
         {
             var name = base.FindName(type);
             name = RemoveTail(name, "ValueCombiner");

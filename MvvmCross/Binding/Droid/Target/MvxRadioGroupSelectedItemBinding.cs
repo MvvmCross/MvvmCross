@@ -1,4 +1,4 @@
-// MvxRadioGroupSelectedItemBinding.cs
+﻿// MvxRadioGroupSelectedItemBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,8 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Views;
 using Android.Widget;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -32,11 +32,11 @@ namespace MvvmCross.Binding.Droid.Target
             bool changed;
             if (newValue == null)
             {
-                changed = (_currentValue != null);
+                changed = _currentValue != null;
             }
             else
             {
-                changed = !(newValue.Equals(_currentValue));
+                changed = !newValue.Equals(_currentValue);
             }
             return changed;
         }
@@ -71,7 +71,7 @@ namespace MvvmCross.Binding.Droid.Target
             bool changed = CheckValueChanged(newValue);
             if (!changed) { return; }
 
-            int checkid = Android.Views.View.NoId;
+            int checkid = View.NoId;
 
             // find the radio button associated with the new value
             if (newValue != null)
@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Droid.Target
                 }
             }
 
-            if (checkid == Android.Views.View.NoId)
+            if (checkid == View.NoId)
             {
                 radioGroup.ClearCheck();
             }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -18,39 +18,40 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <MtouchLink></MtouchLink>
-    <MtouchHttpClientHandler></MtouchHttpClientHandler>
-    <MtouchTlsProvider></MtouchTlsProvider>
+    <MtouchLink>
+    </MtouchLink>
+    <MtouchHttpClientHandler>
+    </MtouchHttpClientHandler>
+    <MtouchTlsProvider>
+    </MtouchTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\bin\Release\Mvx\tvOS\</OutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <MtouchLink></MtouchLink>
-    <MtouchHttpClientHandler></MtouchHttpClientHandler>
-    <MtouchTlsProvider></MtouchTlsProvider>
+    <MtouchLink>
+    </MtouchLink>
+    <MtouchHttpClientHandler>
+    </MtouchHttpClientHandler>
+    <MtouchTlsProvider>
+    </MtouchTlsProvider>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.TVOS" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Platform\" />
-    <Folder Include="Properties\" />
-    <Folder Include="Views\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Platform\IMvxApplicationDelegate.cs" />
     <Compile Include="Platform\IMvxTvosPlatformProperties.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
-    <Compile Include="Views\MvxViewModelInstanceRequest.cs" />
     <Compile Include="Views\Presenters\IMvxTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />

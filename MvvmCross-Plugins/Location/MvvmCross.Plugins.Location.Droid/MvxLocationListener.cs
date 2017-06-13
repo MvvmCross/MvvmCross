@@ -1,4 +1,4 @@
-// MvxLocationListener.cs
+﻿// MvxLocationListener.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,12 +7,13 @@
 
 using Android.Locations;
 using Android.OS;
+using Java.Lang;
 
 namespace MvvmCross.Plugins.Location.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxLocationListener
-        : Java.Lang.Object
+        : Object
         , ILocationListener
     {
         private readonly IMvxLocationReceiver _owner;
@@ -24,7 +25,7 @@ namespace MvvmCross.Plugins.Location.Droid
 
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(global::Android.Locations.Location location)
+        public void OnLocationChanged(Android.Locations.Location location)
         {
             _owner.OnLocationChanged(location);
         }

@@ -1,20 +1,19 @@
-// MvxStoreViewPresenter.cs
+﻿// MvxStoreViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-namespace MvvmCross.WindowsUWP.Views
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
+namespace MvvmCross.Uwp.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public class MvxWindowsViewPresenter
         : MvxViewPresenter, IMvxWindowsViewPresenter
     {
@@ -22,20 +21,27 @@ namespace MvvmCross.WindowsUWP.Views
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            this._rootFrame = rootFrame;
+            _rootFrame = rootFrame;
         }
 
         public override void Show(MvxViewModelRequest request)
         {
             try
             {
-                var requestTranslator = Mvx.Resolve<IMvxViewsContainer>();
-                var viewType = requestTranslator.GetViewType(request.ViewModelType);
+                var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                string requestText = string.Empty;
+                if (request is MvxViewModelInstanceRequest)
+                {
+                    requestText = requestTranslator.GetRequestTextWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                }
+                else
+                {
+                    requestText = requestTranslator.GetRequestTextFor(request);
+                }
+                var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
-                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-                var requestText = converter.Serializer.SerializeObject(request);
-
-                this._rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
+                _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
             }
             catch (Exception exception)
             {
@@ -46,20 +52,20 @@ namespace MvvmCross.WindowsUWP.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (base.HandlePresentationChange(hint)) return;
+            if (HandlePresentationChange(hint)) return;
 
             if (hint is MvxClosePresentationHint)
             {
-                this.Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
                 return;
             }
 
             MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
-        public virtual void Close(IMvxViewModel viewModel)
+        public override void Close(IMvxViewModel viewModel)
         {
-            var currentView = this._rootFrame.Content as IMvxView;
+            var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
@@ -72,13 +78,13 @@ namespace MvvmCross.WindowsUWP.Views
                 return;
             }
 
-            if (!this._rootFrame.CanGoBack)
+            if (!_rootFrame.CanGoBack)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
                 return;
             }
 
-            this._rootFrame.GoBack();
+            _rootFrame.GoBack();
         }
     }
 }

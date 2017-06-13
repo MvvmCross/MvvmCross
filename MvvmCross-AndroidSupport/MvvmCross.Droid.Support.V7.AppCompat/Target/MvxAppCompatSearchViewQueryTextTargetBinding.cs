@@ -1,14 +1,11 @@
-using MvvmCross.Platform.WeakSubscription;
+﻿using System;
+using Android.Support.V7.Widget;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.Droid.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-
-    using Android.Support.V7.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
-
     public class MvxAppCompatSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
@@ -20,9 +17,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         public override Type TargetType => typeof(string);
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        protected SearchView SearchView => (SearchView)this.Target;
+        protected SearchView SearchView => (SearchView)Target;
 
         public override void SubscribeToEvents()
         {
@@ -31,9 +28,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 HandleQueryTextChanged);
         }
 
-        protected override void SetValueImpl(object target, object value)
-        {
-        }
+        protected override void SetValueImpl(object target, object value) =>
+            ((SearchView)target).SetQuery((string)value, true);
 
         protected override void Dispose(bool isDisposing)
         {
@@ -48,7 +44,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void HandleQueryTextChanged(object sender, SearchView.QueryTextChangeEventArgs e)
         {
-            var target = this.Target as SearchView;
+            var target = Target as SearchView;
 
             if (target == null)
             {
@@ -56,7 +52,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
 
             var value = target.Query;
-            this.FireValueChanged(value);
+            FireValueChanged(value);
         }
     }
 }

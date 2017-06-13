@@ -5,17 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using System.Windows.Input;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.ValueConverters
 {
-    using System.Windows.Input;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxCommandParameterValueConverter
         : MvxValueConverter<ICommand, ICommand>
     {
-        protected override ICommand Convert(ICommand value, System.Type targetType, object parameter,
-                                            System.Globalization.CultureInfo culture)
+        protected override ICommand Convert(ICommand value, Type targetType, object parameter,
+                                            CultureInfo culture)
         {
             return new MvxWrappingCommand(value, parameter);
         }

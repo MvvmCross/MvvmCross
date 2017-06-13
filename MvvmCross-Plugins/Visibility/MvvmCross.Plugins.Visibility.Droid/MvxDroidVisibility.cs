@@ -1,4 +1,4 @@
-// MvxDroidVisibility.cs
+﻿// MvxDroidVisibility.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,11 +11,19 @@ using MvvmCross.Platform.UI;
 namespace MvvmCross.Plugins.Visibility.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxDroidVisibility : IMvxNativeVisibility
+    public class MvxDroidVisibility : IMvxNativeVisibility
     {
         public object ToNative(MvxVisibility visibility)
         {
-            return visibility == MvxVisibility.Visible ? ViewStates.Visible : ViewStates.Gone;
+            switch (visibility)
+            {
+                case MvxVisibility.Collapsed:
+                    return ViewStates.Gone;
+                case MvxVisibility.Hidden:
+                    return ViewStates.Invisible;
+                default:
+                    return ViewStates.Visible;
+            }
         }
     }
 }

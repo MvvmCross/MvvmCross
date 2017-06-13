@@ -11,12 +11,12 @@
     <AssemblyName>MvvmCross.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <MandroidI18n />
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Services\MvxBroadcastReceiver.cs" />
     <Compile Include="Services\MvxIntentService.cs" />
     <Compile Include="ViewModels\MvxAndroidPropertyChangedListener.cs" />
@@ -58,7 +61,6 @@
     <Compile Include="Views\MvxMultipleViewModelCache.cs" />
     <Compile Include="Views\MvxSingleViewModelCache.cs" />
     <Compile Include="Views\MvxTranslatedIntent.cs" />
-    <Compile Include="Views\IMvxChildViewModelCache.cs" />
     <Compile Include="Views\IMvxAndroidViewPresenter.cs" />
     <Compile Include="Platform\MvxAndroidSetupSingleton.cs" />
     <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
@@ -85,8 +87,6 @@
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivity.cs" />
-    <Compile Include="Views\MvxChildViewModelCache.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">

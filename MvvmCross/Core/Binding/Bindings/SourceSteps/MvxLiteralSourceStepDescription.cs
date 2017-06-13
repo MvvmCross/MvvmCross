@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return this.Literal == null ? "-null-" : this.Literal.ToString();
+            return Literal == null ? "-null-" : Literal.ToString();
         }
     }
 }

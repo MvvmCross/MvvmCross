@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MvvmCross.iOS.Support.Views.Expandable.Controllers
 {
-	class AccordionSectionExpandableController : SectionExpandableController
+    internal class AccordionSectionExpandableController : SectionExpandableController
 	{
 		public override ToggleExpandStateResponse ToggleState(int atIndex)
 		{
