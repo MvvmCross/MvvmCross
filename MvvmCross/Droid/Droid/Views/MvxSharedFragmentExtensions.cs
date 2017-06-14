@@ -1,12 +1,12 @@
 ﻿using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Droid.Shared.Fragments
+namespace MvvmCross.Droid.Views
 {
     public static class MvxSharedFragmentExtensions
     {

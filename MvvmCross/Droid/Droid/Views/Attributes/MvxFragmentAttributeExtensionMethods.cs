@@ -12,7 +12,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Droid.Shared.Attributes
+namespace MvvmCross.Droid.Views.Attributes
 {
     public static class MvxFragmentAttributeExtensionMethods
     {

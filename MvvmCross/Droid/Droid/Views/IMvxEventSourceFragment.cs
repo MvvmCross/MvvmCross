@@ -10,7 +10,7 @@ using Android.Content;
 using Android.OS;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Shared.Fragments.EventSource
+namespace MvvmCross.Droid.Views
 {
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {

@@ -4,7 +4,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Droid.Shared.Caching
+namespace MvvmCross.Droid.Views.Caching
 {
     public interface IFragmentCacheConfiguration
     {
