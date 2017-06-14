@@ -1,6 +1,7 @@
 ﻿using Eventhooks.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Uwp.Views;
+using Windows.UI.Core;
 
 namespace Eventhooks.Uwp.Views
 {
@@ -10,6 +11,8 @@ namespace Eventhooks.Uwp.Views
         public FirstView()
         {
             InitializeComponent();
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         public FirstViewModel FirstViewModel
