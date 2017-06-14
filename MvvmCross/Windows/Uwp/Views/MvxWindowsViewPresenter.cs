@@ -28,16 +28,7 @@ namespace MvvmCross.Uwp.Views
         {
             try
             {
-                var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
-                string requestText = string.Empty;
-                if (request is MvxViewModelInstanceRequest)
-                {
-                    requestText = requestTranslator.GetRequestTextWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
-                }
-                else
-                {
-                    requestText = requestTranslator.GetRequestTextFor(request);
-                }
+                var requestText = GetRequestText(request);
                 var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
@@ -48,6 +39,22 @@ namespace MvvmCross.Uwp.Views
                 MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                                exception.ToLongString());
             }
+        }
+
+        protected string GetRequestText(MvxViewModelRequest request)
+        {
+            var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+            string requestText = string.Empty;
+            if (request is MvxViewModelInstanceRequest)
+            {
+                requestText = requestTranslator.GetRequestTextWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+            }
+            else
+            {
+                requestText = requestTranslator.GetRequestTextFor(request);
+            }
+
+            return requestText;
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
