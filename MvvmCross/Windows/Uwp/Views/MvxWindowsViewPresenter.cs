@@ -41,7 +41,7 @@ namespace MvvmCross.Uwp.Views
             }
         }
 
-        protected string GetRequestText(MvxViewModelRequest request)
+        protected virtual string GetRequestText(MvxViewModelRequest request)
         {
             var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
             string requestText = string.Empty;
