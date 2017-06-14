@@ -12,7 +12,7 @@ namespace Eventhooks.Uwp
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    internal sealed partial class App : Application
+    public sealed partial class App : Application
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -55,11 +55,6 @@ namespace Eventhooks.Uwp
             {
                 if (rootFrame.Content == null)
                 {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    //rootFrame.Navigate(typeof(MainPage), e.Arguments);
-
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 
