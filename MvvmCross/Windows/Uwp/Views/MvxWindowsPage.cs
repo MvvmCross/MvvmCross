@@ -77,25 +77,48 @@ namespace MvvmCross.Uwp.Views
          */
         }
 
+        private string _reqData = string.Empty;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            var reqData = (string)e.Parameter;
+            if (_reqData != string.Empty)
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+                ViewModel = viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
+            }
+            _reqData = (string)e.Parameter;
 
-            this.OnViewCreate(reqData, () => LoadStateBundle(e));
+            this.OnViewCreate(_reqData, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
-            
+
+            var translator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+
             if (e.NavigationMode == NavigationMode.Back)
-                this.OnViewDestroy();
+            {
+                var key = translator.RequestTextGetKey(_reqData);
+                this.OnViewDestroy(key);
+            }
+            else
+            {
+                var backstack = Frame.BackStack;
+                var currentEntry = backstack[backstack.Count - 1];
+                var key = translator.RequestTextGetKey(currentEntry.Parameter.ToString());
+                if (key == 0)
+                {
+                    var newParamter = translator.GetRequestTextWithKeyFor(ViewModel);
+                    var entry = new PageStackEntry(currentEntry.SourcePageType, newParamter, currentEntry.NavigationTransitionInfo);
+                    backstack.Remove(currentEntry);
+                    backstack.Add(entry);
+                }
+            }
         }
 
         private string _pageKey;
