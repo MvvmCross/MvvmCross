@@ -13,7 +13,6 @@ This package contains the 'Test Helpers' for MvvmCross
 		<dependencies>
 			<dependency id="MvvmCross.Core" version="[$version$]" />
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
-			<dependency id="NUnit" version="3.6.0" />
 		</dependencies>
 	</metadata>
 	<files>
