@@ -2,7 +2,7 @@ using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 
-namespace MvvmCross.Droid.Shared.Caching
+namespace MvvmCross.Droid.Views.Caching
 {
     public class MvxCachedFragmentInfoFactory : IMvxCachedFragmentInfoFactory
     {

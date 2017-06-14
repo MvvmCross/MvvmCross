@@ -10,7 +10,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Droid.Shared.Fragments
+namespace MvvmCross.Droid.Views
 {
     public interface IMvxFragmentView
         : IMvxBindingContextOwner

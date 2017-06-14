@@ -8,9 +8,9 @@
 using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 
-namespace MvvmCross.Droid.Shared.Presenter
+namespace MvvmCross.Droid.Views
 {
     public interface IMvxFragmentHost
     {

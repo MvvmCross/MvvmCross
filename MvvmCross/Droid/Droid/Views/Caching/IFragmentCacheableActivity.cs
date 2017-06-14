@@ -1,4 +1,4 @@
-namespace MvvmCross.Droid.Shared.Caching
+namespace MvvmCross.Droid.Views.Caching
 {
     public interface IFragmentCacheableActivity
     {

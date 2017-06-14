@@ -1,6 +1,6 @@
 using System;
 
-namespace MvvmCross.Droid.Shared.Caching
+namespace MvvmCross.Droid.Views.Caching
 {
     public class SerializableMvxCachedFragmentInfo
     {
