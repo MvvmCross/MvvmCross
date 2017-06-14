@@ -5,6 +5,7 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -31,7 +32,6 @@ namespace MvvmCross.Uwp.Views
             {
                 var key = int.Parse(viewModelKey);
                 var viewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(key);
-                RemoveSubViewModelWithKey(key);
                 return viewModel;
             }
 
@@ -39,7 +39,7 @@ namespace MvvmCross.Uwp.Views
             return loaderService.LoadViewModel(request, savedState);
         }
 
-        #region Implementation of IMvxAndroidViewModelRequestTranslator
+        #region Implementation of IMvxWindowsViewModelRequestTranslator
         public string GetRequestTextFor(MvxViewModelRequest request)
         {
             var returnData = new Dictionary<string, string>();
@@ -69,6 +69,22 @@ namespace MvvmCross.Uwp.Views
         public void RemoveSubViewModelWithKey(int key)
         {
             Mvx.Resolve<IMvxChildViewModelCache>().Remove(key);
+        }
+
+        public int RequestTextGetKey(string requestText)
+        {
+            var returnValue = 0;
+            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var dictionary = converter.Serializer.DeserializeObject<Dictionary<string, string>>(requestText);
+
+            dictionary.TryGetValue(ExtrasKey, out string serializedRequest);
+            var request = converter.Serializer.DeserializeObject<MvxViewModelRequest>(serializedRequest);
+
+            if (dictionary.TryGetValue(SubViewModelKey, out string viewModelKey))
+            {
+                returnValue = int.Parse(viewModelKey);
+            }
+            return returnValue;
         }
         #endregion Implementation of IMvxWindowsViewModelRequestTranslator
     }

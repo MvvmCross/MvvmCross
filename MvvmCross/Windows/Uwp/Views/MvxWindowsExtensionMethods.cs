@@ -42,9 +42,13 @@ namespace MvvmCross.Uwp.Views
             storeView.ViewModel = viewModel;
         }
 
-        public static void OnViewDestroy(this IMvxWindowsView storeView)
+        public static void OnViewDestroy(this IMvxWindowsView storeView, int key)
         {
-            // nothing to do currently
+            if (key > 0)
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                viewModelLoader.RemoveSubViewModelWithKey(key);
+            }
         }
 
         public static bool HasRegionAttribute(this Type view)

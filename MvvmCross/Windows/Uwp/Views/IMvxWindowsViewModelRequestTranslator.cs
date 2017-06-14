@@ -17,5 +17,7 @@ namespace MvvmCross.Uwp.Views
         string GetRequestTextWithKeyFor(IMvxViewModel existingViewModelToUse);
 
         void RemoveSubViewModelWithKey(int key);
+
+        int RequestTextGetKey(string requestText);
     }
 }
