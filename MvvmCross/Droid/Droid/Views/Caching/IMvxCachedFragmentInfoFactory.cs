@@ -1,6 +1,6 @@
 using System;
 
-namespace MvvmCross.Droid.Shared.Caching
+namespace MvvmCross.Droid.Views.Caching
 {
     // ok so now first quick note from @thefex
     // Why does this interface exists and what it is for?

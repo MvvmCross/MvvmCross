@@ -14,10 +14,8 @@ using Android.OS;
 using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Views.Attributes;
+using MvvmCross.Droid.Views.Caching;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
@@ -43,18 +41,65 @@ namespace MvvmCross.Droid.Views
             return new DefaultFragmentCacheConfiguration();
         }
 
+        protected Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+
+        protected virtual void RegisterAttributeTypes()
+        {
+            _attributeTypesToShowMethodDictionary.Add(
+               typeof(MvxFragmentAttribute),
+               (attribute, request) => ShowFragment((MvxFragmentAttribute)attribute, request));
+
+            _attributeTypesToShowMethodDictionary.Add(
+               typeof(MvxDialogAttribute),
+               (attribute, request) => ShowDialogFragment((MvxDialogAttribute)attribute, request));
+        }
+
         public MvxAndroidViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
         {
             _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
             _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
+
+            RegisterAttributeTypes();
+        }
+
+        protected virtual void ShowFragment(
+            MvxFragmentAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            //TODO: Check if Activity host is already on screen
+            //TODO: Check if Activity base extends FragmentActivity
+            //TODO: Load Activity if not shown yet
+            //TODO: Check if FragmentContentId can be found on Activity
+            //TODO: Show fragment on Activity
+        }
+
+        protected virtual void ShowDialogFragment(
+            MvxDialogAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            //TODO: Check if class implements IDialogInterface
+            //TODO: Check if class is a Fragment
+            //TODO: Show as Dialog or DialogFragment
         }
 
         public override void Show(MvxViewModelRequest request)
         {
+            var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
+
+            var attribute = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociatedWithCurrentHost(request.ViewModelType);
+
+            Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
+            if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
+                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
+
+            showAction.Invoke(attribute, request);
+
+
+            /*
             if (_fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType))
                 ShowFragment(request);
             else
-                ShowActivity(request);
+                ShowActivity(request);*/
         }
 
         protected virtual void ShowActivity(MvxViewModelRequest request, MvxViewModelRequest fragmentRequest = null)
@@ -184,6 +229,8 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
+            //TODO: Check if viewModel is Fragment, Dialog or Activity
+
             var activity = Activity;
 
             var currentView = activity as IMvxView;

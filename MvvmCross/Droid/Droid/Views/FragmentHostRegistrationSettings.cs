@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using Android.App;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Droid.Shared.Presenter
+namespace MvvmCross.Droid.Views
 {
     public class FragmentHostRegistrationSettings
     {
