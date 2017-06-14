@@ -34,8 +34,7 @@ namespace MvvmCross.Uwp.Views
 
             if (viewType.HasRegionAttribute())
             {
-                var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-                var requestText = converter.Serializer.SerializeObject(request);
+                var requestText = GetRequestText(request);
 
                 var containerView = FindChild<Frame>(_rootFrame.UnderlyingControl, viewType.GetRegionName());
 
