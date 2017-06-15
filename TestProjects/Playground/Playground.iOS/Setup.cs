@@ -31,7 +31,11 @@ namespace Playground.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
+#if FLEXIBLE_PRESENTER
+            return new MvxIosFlexibleViewPresenter(ApplicationDelegate, Window);
+#else
             return new MvxIosViewPresenter(ApplicationDelegate, Window);
+#endif
         }
     }
 }

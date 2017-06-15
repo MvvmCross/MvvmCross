@@ -45,10 +45,14 @@ namespace Playground.iOS.Views
 
         private void BtnCloseStack_TouchUpInside(object sender, EventArgs e)
         {
+#if FLEXIBLE_PRESENTER
+            var presenter = Mvx.GetSingleton<IMvxIosModalHost>() as MvxBaseIosViewPresenter;
+            presenter.NativeModalViewControllerDisappearedOnItsOwn();
+#else
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
             var presenter = Mvx.GetSingleton<IMvxIosModalHost>() as MvxIosViewPresenter;
 
-            if(appDelegate.Window.RootViewController.PresentedViewController != null)
+            if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
                 presenter.NativeModalViewControllerDisappearedOnItsOwn();
@@ -57,6 +61,7 @@ namespace Playground.iOS.Views
             {
                 presenter.MasterNavigationController.PopToRootViewController(true);
             }
+#endif
         }
     }
 }
